@@ -1,6 +1,6 @@
 # Data structure and architecture specification
 
-Version 0.1 — discussion checkpoint, 2026-09-10. **Specification only; no persistence implementation or deployment delivered.**
+Version 0.3 — discussion checkpoint, 2026-09-10. **Specification only; no persistence implementation or deployment delivered.**
 
 This is the primary checkpoint for the app's data model and storage lifecycle. It brings together the [character wizard](character-wizard-spec.md), [monster catalog](monster-catalog-spec.md), and [engine architecture](engine-architecture.md). The [storage analysis](data-storage-analysis.md) retains the supporting research, alternatives, corpus measurements, and illustrative scaling estimates.
 
@@ -11,6 +11,9 @@ Confirmed requirements below describe user intent. Proposed contracts describe h
 ## 1. Confirmed requirements and decision status
 
 - Distinguish shared game data from user-created data. Steel Compendium is the source of truth for official rules content; characters, campaigns, sessions, homebrew, and saved encounters belong to application users/campaigns under their respective permissions.
+- Group reusable content into packs/sets using the same system for official content, future MCDM content that becomes available for inclusion, community-authored content, and personal homebrew. Campaign creation must allow enabling/disabling content sources. Portability is a design requirement; the exact interchange format and first-release tooling remain proposed below.
+- Disabling a pack stops future selections while preserving existing characters' use of and advancement within content they already have. Existing loaded encounters and history remain intact.
+- Version the rules engine so authored content can identify the engine it was built for and tested with. Engine releases are distinct from content releases and file-format versions.
 - Convex is the chosen application backend. Shared play needs realtime updates during a session.
 - Every action within an encounter must be undoable. Restoration changes actual affected state using recorded values, without rerunning the engine or dice.
 - Preserve every session's game log for campaign review. After a session ends, its detailed log can be compressed and relevant data delivered to persistent records and statistics.
@@ -29,10 +32,11 @@ The [accounts and access specification](accounts-and-access-spec.md) adds friend
 
 | Concept | Responsibility and lifetime |
 | --- | --- |
-| Content edition | Immutable interpretation of pinned official sources, identified by source and transformation versions. Shared by app features. |
+| Content pack | Portable grouping of reusable definitions with stable identity, authorship/provenance, and separate application ownership/access policy. Common to official, community, and personal homebrew content. |
+| Content edition / pack release | Proposed immutable version of a pack, identifying its definitions, dependencies, and source/transformation versions. The earlier official-content edition model becomes a release of an official pack. |
 | Content definition | A rule, monster, ability, item, or progression definition with portable identity, revision, readable text, structured fields, and explicit unsupported/unresolved information. |
 | User creation | User-owned character, homebrew, or encounter template, with editable working data and retained revisions where needed. |
-| Campaign | Persistent membership, roles, characters' attachments, and campaign context spanning sessions. |
+| Campaign | Persistent membership, roles, characters' attachments, enabled content sources, and campaign context spanning sessions. |
 | Table | Campaign play space connecting participants and shared operations. It can host successive sessions; allowed concurrent tables/sessions remain open. |
 | Session | A period of shared play, its chronology, participants, start/end boundaries, and archival status. Closing it does not inherently reset character resources or end an encounter. |
 | Encounter template | Reusable authored preparation and versioned monster selections. It has no ongoing combat state. |
@@ -67,13 +71,49 @@ An encounter journal is a logical collection owned by the encounter. It need not
 
 Keep upstream Compendium files pinned and unmodified. Build app-ready definitions from its Markdown and existing JSON, retaining complete readable text and source context alongside extracted data. Forge Steel's pinned progression/choice structure remains supporting input for the wizard, with scoped mappings and local transformations outside both dependencies.
 
-Produce a portable content package with an edition manifest, lightweight catalog summaries, full definitions, and required source/dependency records. The manifest identifies the source commits and package/importer/parser versions. A source-qualified identity plus revision identifies a definition; names and filenames are display/location information.
+Produce portable content packs with release manifests, lightweight catalog summaries, full definitions, and required source/dependency records. Manifests identify source commits where applicable and format/importer/parser versions. A pack-qualified identity plus revision identifies a definition; names and filenames are display/location information. See the proposed common pack contract below.
 
 Propose an initial Convex mirror for indexed library reads and authoritative application lookups. Load summary fields for browsing and full definitions when opened or needed. Keep the package portable so public immutable content can later move to cacheable static delivery without changing the engine or saved-character contracts.
 
-Updates create new editions. Publish a complete staged edition before changing the active-library reference. Retain content versions needed by saved builds, templates, loaded encounters, and archives. A newer parser or source revision does not reinterpret recorded history automatically.
+Updates create new pack releases. Publish a complete staged release before changing that pack's default-library reference. A library default does not change a campaign's selected release. Retain content versions needed by saved builds, templates, loaded encounters, and archives. A newer parser or source revision does not reinterpret recorded history automatically.
 
-Homebrew uses its own identity namespace, ownership/access fields, authored source, and immutable revisions. It should reach the same normalized definition/parser boundary as official content. Unsupported mechanics remain readable and manually resolvable; successful storage or parsing alone does not establish complete automation.
+Homebrew belongs to packs through the same definition/parser boundary as official content, retaining authored source and immutable revisions. Unsupported mechanics remain readable and manually resolvable; successful storage or parsing alone does not establish complete automation.
+
+### 3.1 Common pack contract — proposed
+
+A pack can contain several supported kinds of reusable content: character options, monsters, items, abilities, and supporting rules. It is not inherently one content type or one sourcebook. Characters, campaign membership, live resources, and game logs retain their existing records; grouping reusable definitions does not turn a pack into a campaign backup.
+
+Proposed minimum manifest: stable pack ID, display name, author/publisher attribution, release version, format version, engine authoring/testing metadata, source and license/attribution records, and dependencies on specific pack releases. Definitions have stable IDs within their pack and retained revisions. Local database IDs and account IDs are not portable content identities. Two packs can both contain a monster named “Goblin Archer” without collision; editing a copy into one's own homebrew creates a new identity with a reference to its origin. No implicit replacement by matching name or pack load order.
+
+Use editable drafts and immutable releases for every authoring source. A personal pack can remain private; creating a usable release does not mean publishing it publicly. A default “My Homebrew” pack could keep one-off authoring simple while allowing named packs for sharing. The exact default and authoring UX are proposals.
+
+Propose versioned JSON import/export with a manifest, definitions, readable authored text, and any distributable supporting assets, packaged as an archive when needed. Retain exact dependency references and report missing dependencies; bundle them only where permitted. Import validates identity, format, references, and supported declarative structures before making a release selectable. Reimporting the same release is idempotent; conflicting data under the same identity/version must not overwrite it. Pack data cannot install executable code or confer ownership, permissions, or verified publisher status. Parser support and format compatibility are separate from content availability.
+
+### 3.2 Campaign source selection — proposed behavior
+
+Campaign creation includes a content-source selector. Propose preselecting the supported core packs and letting the creator add available official, community, or private homebrew packs. A campaign stores exact selected releases and a source-selection revision. Newly available packs and updates are offered for deliberate adoption; they do not automatically join existing campaigns. The physical record layout remains open.
+
+Campaign character choices, advancement, item selection, and encounter preparation use that selection through shared operations. Authoritative admission, build activation, and encounter loading also check it; filtering a UI alone is insufficient. An unattached character or reusable encounter can retain other sources, with incompatibilities shown when entering a campaign. Director review does not implicitly enable a disallowed pack. Pending submissions are rechecked if the campaign selection changes.
+
+Resolve required dependencies explicitly. Propose one release per pack in the campaign's active selection, with exact compatible dependencies; reject unresolved, cyclic, or conflicting requirements before activation. Explain required sources in the selector, and prevent disabling a dependency while a selected pack requires it. This does not prevent retaining older releases for existing builds and history.
+
+**Confirmed disable direction:** disabling a pack stops future selections while existing characters keep using and advancing within content they already have. Preserve accepted builds, owned item instances, loaded encounters, and historical records.
+
+Proposed enforcement: retain the exact content releases and dependencies needed for those builds, including their further progression options. This exception does not enable the whole pack for unrelated new choices, new characters, or new encounter loads. Show affected uses before changing the selection. Do not erase choices, recalculate them against another release, or rewrite snapshots. Deliberately adopting an update must likewise preserve loaded encounters and follow existing build-review rules where builds change.
+
+### 3.3 Access and remaining decisions
+
+Campaign selection determines allowed content; it does not grant authorship or publication rights. A public campaign listing must not expose private packs. Pack ownership, campaign reading, copying/editing, and export rights remain separate under the [access specification](accounts-and-access-spec.md). Propose sharing the selected private release with the campaign while leaving other releases and drafts private; withdrawal and retained-use rights still need a product decision. Attribution metadata does not establish permission to redistribute content or artwork.
+
+Open decisions: who can change sources after creation (campaign owner, active Director, or both); the precise boundary of retained progression options; which core packs are required; private-pack sharing and withdrawal behavior; and whether complete pack import/export and authoring tools ship in v1 or follow the foundational pack model. A public marketplace, automatic updates, pack override ordering, and third-party executable plugins are not established requirements.
+
+Acceptance examples for implementation: round-trip a homebrew pack without losing identities/text/references; keep same-named definitions from different packs distinct; reject missing dependencies and conflicting reimports; show different available choices in campaigns with different enabled packs; reject stale/disallowed selections through headless operations; preserve existing state/history after source changes; and enforce private-pack access independently of campaign discovery.
+
+### 3.4 Engine compatibility metadata
+
+Authored content can declare the versioned engine it was built for and tested with. The [engine release contract](engine-architecture.md#engine-releases-and-content-compatibility) proposes exact `builtWith` and `testedWith` versions plus an optional intended `compatibleWith` range on each pack release. Preserve these declarations through export/import; unknown metadata remains unknown. An author's compatibility claim does not establish tested or fully automated support.
+
+Runtime compatibility is checked separately from campaign source permission. Retained content still needs compatible engine support; disabling its pack does not solve or change engine compatibility. Recording engine versions does not require hosting every historical runtime. Runtime selection, upgrade policy, and warning versus blocking on a mismatch remain open.
 
 ## 4. User records and current state
 
@@ -104,7 +144,7 @@ The complete inventory/live-resource reconciliation and campaign transfer polici
 
 ## 5. Encounter actions and undo
 
-Each logical action needs a stable command ID, actor, relevant entities, source/build versions, expected state revision, and session/encounter association. Preserve the requested intent, modifier invocations, committed effects, and displayed explanation distinctly.
+Each logical action needs a stable command ID, actor, relevant entities, source/build versions, the exact engine release and relevant parser versions, expected state revision, and session/encounter association. Preserve the requested intent, modifier invocations, committed effects, and displayed explanation distinctly.
 
 Proposed action sequence:
 
@@ -143,7 +183,7 @@ Proposed archive contents:
 | Part | Required information |
 | --- | --- |
 | Manifest | Archive/schema version, campaign/table/session IDs, encounter segment IDs, sequence ranges, chunk locations, and completion metadata. |
-| Source context | Exact content/build versions and retained definitions required to interpret the archived record; embedded copies or durable retained references. |
+| Source context | Exact content/build, engine, and relevant parser versions and retained definitions required to interpret the archived record; embedded copies or durable retained references. |
 | Starting/checkpoint state | Recorded state at the segment's start, including relevant participants, monsters, resources, and pending work. |
 | Ordered journal | Commands, modifier inputs/outputs, dice/choices, manual resolutions, dispositions, and before/after state changes. |
 | Ending state | State at the sealed boundary, including incomplete encounter/resolution context. |

@@ -151,6 +151,8 @@ Approving a build must update the build and its derived contribution against cur
 
 ## 8. Content and Forge Steel compatibility
 
+Reusable definitions belong to content packs, with campaign-selectable sources. The [pack contract](data-architecture-spec.md#32-campaign-source-selection--proposed-behavior) proposes applying the campaign's selected releases to wizard choices and rechecking them at admission/build activation. Imported or unattached characters retain their content references; destination incompatibilities must be visible. Disabling a pack preserves existing characters' use of and advancement within content they already have; the proposed enforcement retains required releases and progression dependencies without opening unrelated new choices. Engine compatibility metadata follows the [engine release contract](engine-architecture.md#engine-releases-and-content-compatibility).
+
 Use Forge Steel's progression/choice structure as an input while keeping our own UI and character model. Official displayed rules and ability content should come from the pinned Steel Compendium. Store explicit source references and local transformations outside both unmodified dependencies.
 
 Investigated pins:

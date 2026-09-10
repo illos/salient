@@ -60,6 +60,7 @@ Still to decide: who can roll back, the exact boundary of one action when reacti
 - A user can ban another user from requesting membership in any campaign they own. Effects on existing memberships and broader social blocking remain open.
 - The owner is initially active Director; other members are initially players. The owner can appoint a player as the sole active Director for the current session, if one is active, or until revoked.
 - Each participant, including the Director, can have multiple characters in that campaign.
+- Campaign creation allows enabling/disabling content sources. Reusable content is grouped into packs/sets, common to official content, future available MCDM additions, community-authored content, and personal homebrew. See [content packs and campaign selection](data-architecture-spec.md#31-common-pack-contract--proposed) for proposed portability/versioning contracts and unsettled behavior after creation.
 
 Ownership, acting as Director, and having characters are distinct concepts. Character access through campaign attachment is defined below; character build choices remain with the owning user. Director appointments and character control grants are recorded in the [accounts and access specification](accounts-and-access-spec.md). Other editing permissions and campaign ownership transfer remain to be defined. The number of tables and concurrent sessions per campaign remains open; the [data architecture checkpoint](data-architecture-spec.md) proposes records for successive sessions and encounter segments.
 
