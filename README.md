@@ -1,0 +1,42 @@
+# Draw Steel companion
+
+A mobile-optimized Draw Steel application built around a reusable rules engine, with accounts, characters, campaigns, encounters, and persistent session resources.
+
+The engine is intended to understand the complete rules, including spatial mechanics. Clients supply available facts and consume structured outcomes. The initial client can present movement as instructions for the table; future map clients can enact those outcomes digitally.
+
+## Project documents
+
+- [Accounts and access specification](docs/accounts-and-access-spec.md): regular accounts, friendship and blocking, separate admin sign-in, Convex Auth/Better Auth investigation, campaign membership, Director delegation, character privacy, and session-scoped sharing.
+- [3D dice roller adaptation specification](docs/dice-roller-spec.md): optional draggable 3D presentation of shared code/CLI dice results, upstream extraction plan, and result-matching acceptance criteria.
+- [Data structure and architecture specification](docs/data-architecture-spec.md): current checkpoint for shared content, user data, encounter undo, realtime sessions, compressed archives, and statistics; proposals and open decisions identified.
+- [App data storage analysis](docs/data-storage-analysis.md): supporting research, alternatives, and scaling estimates for the data architecture.
+- [Monster catalog specification](docs/monster-catalog-spec.md) and [source audit](docs/research/monster-import-audit.md): proposed import, storage, encounter snapshots, and measured source-format limitations; research only.
+- [Character wizard specification](docs/character-wizard-spec.md): creation, level-up, editing, revision history, campaign approval, shared operations, and acceptance criteria.
+- [Character wizard foundation](docs/character-wizard.md): supporting discussion notes, Forge Steel progression research, and Compendium examples.
+- [Forge Steel dependency](docs/forge-steel.md): pinned source, inventory command, and update procedure.
+- [Forge Steel character files](docs/forge-steel-interchange.md): import requirement, desired export compatibility, file structure, and round-trip constraints.
+- [Run the combat experiment](docs/playtest.md): CLI commands, supplied dice, manual completion, and saved history.
+- [First milestone](docs/milestone-1.md) and [review results](docs/milestone-1-review.md): scope, demonstrated behavior, fixes, and remaining limits.
+- [Prepared hero and foes](docs/hero-fixture.md): source-grounded character choices and supported mechanics.
+- [Combat feasibility research](docs/research/README.md): monster and hero samples, content-storage options, and a proposed first CLI experiment.
+- [App features](docs/product-features.md): first-pass product scope centered on the table, with suggestions and open decisions identified.
+- [Steel Compendium dependency](docs/steel-compendium.md): local corpus, pinned revision, and how to review and adopt updates.
+- [Compendium navigation](docs/compendium-navigation.md): quick rules lookups, cross-references, and sourcebook fallbacks for agents.
+- [Project instructions](agent.MD)
+- [Engine architecture](docs/engine-architecture.md): confirmed intent, proposed contracts, and unresolved decisions.
+- [Rules language](docs/rules-language.md): stat-block parsing, reusable mechanics, homebrew, and the first proof of feasibility.
+- [Development process](docs/development-process.md): how to build and verify the engine incrementally.
+
+Status: the first headless combat experiment is implemented and reviewed. It runs selected Fury/Goblin abilities, records real state changes and manual work, and restores saved history without rerunning rules or dice. This is a bounded prototype, not complete Draw Steel automation.
+
+With Node 24.12+ and the pinned Compendium checked out:
+
+```sh
+npm ci
+npm run check
+npm run demo
+```
+
+The experiment uses TypeScript and local JSON run artifacts, with no runtime packages. The online application will use Convex; its UI, accounts, and multiplayer are future work. The engine's long-term language and runtime remain open.
+
+Project-authored application code is licensed under [GNU GPL v3.0](LICENSE) (`GPL-3.0-only`). Vendored software, Draw Steel game content, and artwork retain their respective terms; see [third-party notices](THIRD_PARTY_NOTICES.md).
