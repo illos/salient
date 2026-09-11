@@ -1,5 +1,10 @@
 # Engine architecture
 
+**Milestone scope:** the [v0.01 checkpoint](pre-alpha-design-gaps.md) selects a connected prototype with
+partial ability parsing and a visible game log. The reusable engine intent below remains the architectural
+destination. Minimum automation, manual sequencing and combat timing still await the dedicated discussion;
+the existing bounded experiment does not settle those contracts.
+
 ## Confirmed product intent
 
 Recorded from the user's clarification on 2026-09-10.
@@ -38,6 +43,14 @@ and items. Generic parser/content portability remains architectural intent for f
 authoring requirement. See the [release content scope](reference-library-spec.md).
 
 ## Proposed boundaries
+
+The confirmed [rules adaptation principles](rules-adaptation-principles.md) govern these boundaries.
+Evaluate game-rule compliance faithfully and return visible warnings for conflicts; the application must
+support deliberate player/Director departures and recorded manual adjustments. A compliance warning is not
+an authorization failure. Missing facts or unsupported mechanics remain unresolved until supplied or
+adjudicated, rather than producing invented automatic effects. Expose complete source text and the actual
+resolution steps alongside accepted changes. The visible log is a view of recorded operations, not a required
+executor of state changes.
 
 1. **Rules content:** versioned definitions, source references, and executable representations of supported
    mechanics.
@@ -299,6 +312,11 @@ Use Convex for persistent application state and shared client updates. Keep game
 standalone engine boundary invoked by the application service. Whether that integration is in-process or
 across a service boundary depends on the engine technology evaluation.
 
+The [v1 tech stack](v1-tech-stack-spec.md) records the recommended React frontend, selected Better Auth,
+Cloudflare/Convex Cloud hosting, and future home-server/LAN portability. Authoritative calculations should run
+server-side while browser interactions remain responsive. Keep the engine runnable on a home server as well
+as the hosted deployment; choosing frontend TypeScript does not settle its language/runtime.
+
 Convex provides reactive queries and serializable database transactions. These are a useful foundation for
 shared encounters; the application still needs command deduplication, permission checks, and explicit handling
 of stale player intent. See [Convex realtime documentation](https://docs.convex.dev/realtime) and
@@ -322,8 +340,8 @@ notes and prototype behavior do not settle those product/engine contracts.
 - Initial rules edition, sourcebooks, and first verified content subset.
 - Initial supported grammar, handling of official wording variants, and the authoring experience for
   unsupported homebrew.
-- Engine language, runtime, and delivery mechanism; frontend stack, hosting, and distribution model. Convex is
-  selected for the app backend.
+- Engine language, runtime, and delivery mechanism. Frontend recommendations, confirmed hosting providers,
+  and the remaining SSR/deployment choices are tracked in the [v1 tech stack](v1-tech-stack-spec.md).
 - Engine release/compatibility policy, handling of untested or mismatched content during automated play,
   upgrade timing, and whether campaigns can select retained engine versions.
 

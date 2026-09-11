@@ -10,29 +10,52 @@ text.
 - Make reasonable implementation decisions within the user's authorized scope. Ask only when missing
   information materially affects the work.
 - Distinguish confirmed requirements from proposals and assumptions.
-- During specification exploration, ask the next questions in groups of six, in plain text; this supersedes
-  the earlier three-question and one-question preferences.
+- Current specification exploration follows the user's latest request: work through one manageable topic at
+  a time, asking one focused plain-text question at a time within it. This supersedes the earlier groups-of-six
+  preference. Track answers in [the pre-alpha clarification queue](docs/pre-alpha-design-gaps.md).
+- The discussion has resumed with a rules-review workflow accepted for trial and confirmed rules-adaptation
+  philosophy. Read [the principles](docs/rules-adaptation-principles.md) and
+  [the development process](docs/development-process.md). The user selected a dedicated rules/combat thread
+  to work with them and a separate thread to read the specs, build and review the ordinary web app. Follow
+  [the build handoff](docs/web-app-build-handoff.md); independent app work can proceed while combat contracts
+  are designed. General warn-without-blocking policy is settled. Do not start another thread merely by
+  recording this handoff or invent unresolved combat behavior to finish an app screen.
+- Rules-research recommendations and the user's rulings remain separate records. Rulings apply only to their
+  original cases, with no automatic precedent. Explicit case-specific product choices may depart from the
+  design guidelines for taste; do not count those choices as researcher errors or generalize them. See
+  [the skill design](docs/rules-skills-design.md#confirmed-isolated-decisions-no-automatic-precedent).
 
 ## Current specification checkpoint
 
-Read [the v1 checkpoint](docs/v1-spec-checkpoint.md) before resuming product exploration. It consolidates
-confirmed decisions and the genuine remaining work. The original gap review is historical. Do not ask settled
-questions again. Documentation cleanup does not authorize implementation or convert proposals into
-requirements.
+Read [the pre-alpha clarification queue](docs/pre-alpha-design-gaps.md) and
+[the v1 checkpoint](docs/v1-spec-checkpoint.md) before resuming product exploration. The immediate target is a
+v0.01 pre-alpha architectural foundation; complete subsystem coverage is not automatically a milestone gate.
+The first journey is campaign creation/invitation, session start, one foe and a level-one hero loaded, and
+basic combat action economy with a visible game log. Character entry uses a minimal level-one devil Fury
+wizard covering all applicable creation steps, with one supported option/set per step acceptable. The
+pre-alpha checkpoint consolidates accepted inclusions/deferrals; the V1 checkpoint records the fuller product.
+The original gap review is historical. Do not ask settled questions again. Documentation cleanup does not
+authorize implementation or convert proposals into requirements.
+
+For v0.01, focus on desktop; all current UI is temporary and proves concepts/workflows. Finished visual polish
+and mobile/tablet layouts are not prototype gates. Preserve shared behavior behind the replaceable UI and the
+table-performance priority; the broader mobile-optimized product goal below remains for later.
 
 ## Product intent
 
-Build a mobile-optimized, online-first **web-only** Draw Steel companion that works independently of a digital
-battle map. There are no native-app plans. Convex is the chosen app backend; the engine's long-term language
-and runtime remain independent decisions. The UI is being developed in another thread; do not claim that work
-is implemented in this checkout without evidence.
+Build a mobile-optimized, online-first **web-only** Draw Steel companion for phones, tablets, and desktop that
+works independently of a digital battle map. There are no native-app plans. Convex is the chosen app backend;
+the engine's long-term language and runtime remain independent decisions. The UI is being developed in another
+thread; do not claim that work is implemented in this checkout without evidence.
 
-The [v1 checkpoint](docs/v1-spec-checkpoint.md) is the current release-scope index. Primary specifications
-retain detailed authority: [table](docs/table-spec.md), [access](docs/accounts-and-access-spec.md),
+The [pre-alpha checkpoint](docs/pre-alpha-design-gaps.md) controls immediate milestone scope; the
+[v1 checkpoint](docs/v1-spec-checkpoint.md) indexes the fuller product. Requirements below for deferred features
+remain future design, not prototype gates. Primary specifications retain detailed authority:
+[table](docs/table-spec.md), [access](docs/accounts-and-access-spec.md),
 [characters](docs/character-wizard-spec.md), [inventory](docs/inventory-spec.md),
-[catalog](docs/monster-catalog-spec.md), [references](docs/reference-library-spec.md), and
-[data](docs/data-architecture-spec.md). Keep those documents current rather than accumulating duplicate
-decisions here. The original [gap review](docs/v1-spec-review.md) is historical.
+[catalog](docs/monster-catalog-spec.md), [references](docs/reference-library-spec.md),
+[data](docs/data-architecture-spec.md), and [tech stack](docs/v1-tech-stack-spec.md). Keep those documents current
+rather than accumulating duplicate decisions here. The original [gap review](docs/v1-spec-review.md) is historical.
 
 ### V1 scope
 
@@ -148,6 +171,14 @@ Forced combat recovery remains unresolved, not grounds to defer access invalidat
 
 ### Engine and history intent
 
+Follow [rules adaptation principles](docs/rules-adaptation-principles.md): automate faithfully, show the
+source and actual work, and trust the table. Game-rule conflicts warn players and Directors without blocking
+eligible play or requiring routine Director preapproval. The Director has final game-adjudication authority;
+mechanical inputs and effects support recorded manual adjustments. Missing facts/unsupported mechanics are
+explicit uncertainty, never invented automatic outcomes. Every used action exposes its complete verbatim
+source text through the shared game log; full monster stat blocks remain Director-only. Account permissions,
+private data and session lifecycle retain their separate policies. Manual play is supported from v0.01.
+
 Keep a client-independent deterministic rules engine with full spatial-rules understanding as its intended
 capability. The mobile web app is one client; future map clients and possibly physical-map observation can
 consume the same structured outcomes. A potential Minecraft-like game motivates portability, not a current
@@ -181,6 +212,11 @@ evidence; they do not prove semantics. Prefer meaningful examples and executable
 
 ## Development approach
 
+- During pre-alpha foundation work, development data is disposable and the priority is the latest live,
+  playable app. Reset/reseed may replace migrations across breaking development updates. Separate branch
+  development comes once there is a working app to protect. Follow
+  [the development policy](docs/development-process.md#confirmed-pre-alpha-development-policy); normal runtime
+  persistence and deliberate vendored-source updates remain in force.
 - Use [the dice roller specification](docs/dice-roller-spec.md) for optional 3D presentation of accepted
   shared/CLI results. Visual physics never determines gameplay values; the animation technique remains
   proposed.
@@ -193,9 +229,13 @@ evidence; they do not prove semantics. Prefer meaningful examples and executable
   distinct from content releases; compatibility ranges and runtime retention are not settled.
 
 - Use [the accounts and access specification](docs/accounts-and-access-spec.md) for the detailed access
-  contract. Convex Auth is provisional; Better Auth is an accepted alternative. Preserve the distinction
+  contract. **Better Auth is selected** through its Convex integration; the prior Convex Auth preference is
+  superseded. Email integration and future LAN recovery remain deferred decisions. Preserve the distinction
   between confirmed requirements, proposed implementation contracts and unresolved policy. Specification work
   is not backend/deployment authorization.
+- Use [the v1 tech stack](docs/v1-tech-stack-spec.md) for recommended frontend libraries, table realtime and
+  sustained-session performance, optional SSR, and Cloudflare/Convex hosting with future LAN portability.
+  Retain its distinction between confirmed choices and recommended defaults; the engine runtime stays open.
 - Use [the character wizard specification](docs/character-wizard-spec.md) as the primary implementation
   reference for creation, advancement, full edits, progression history, campaign review, and interchange. It
   distinguishes confirmed requirements, proposed implementation contracts, and remaining decisions. Keep it
@@ -211,8 +251,8 @@ evidence; they do not prove semantics. Prefer meaningful examples and executable
 - Project-authored application code is GPLv3 (`GPL-3.0-only`); see `LICENSE` and `THIRD_PARTY_NOTICES.md` for
   the distinction from upstream software, game content, and artwork.
 - Forge Steel is a pinned Git submodule at `vendor/forge-steel`. Keep it unmodified and do not advance its pin
-  automatically. The character wizard is the current app workstream; use its progression/choice structure as a
-  reference while keeping Steel Compendium as the intended rules-content source. Our UI and character model
+  automatically. For the character workstream, use its progression/choice structure as a reference while
+  keeping Steel Compendium as the intended rules-content source. Our UI and character model
   remain independent design decisions. See [wizard foundation](docs/character-wizard.md) and
   [dependency guide](docs/forge-steel.md).
 - Preserve the ability to import Forge Steel hero data files when designing our character model; exporting

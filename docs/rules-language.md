@@ -48,9 +48,13 @@ Unusual official mechanics may need an explicit extension implemented once and r
 
 ## First proof of feasibility
 
-Build a small runnable importer and interpreter before the complete app or a large parser framework. Choose a handful of related stat blocks, their referenced core mechanics, and deliberately unsupported examples. The exact subset is still to be selected.
+The first bounded proof is implemented; see [Milestone 1](milestone-1.md), its
+[review](milestone-1-review.md), and the [two-round playtest](playtest-1.md). It exercises selected Fury/Goblin
+content, shared grammar, explicit unsupported cases, manual completion and recorded-state restoration. It does
+not establish whole-book coverage. The criteria below describe that first proof and remain useful for later
+expansion; the original subset-selection task is complete.
 
-Demonstrate that:
+Proof criteria:
 
 - A real supported ability resolves correctly with explicit dice, targets, and state.
 - A new homebrew variant using that grammar works without a name-specific implementation branch.

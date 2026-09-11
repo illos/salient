@@ -2,6 +2,12 @@
 
 ## Requirement and investigation scope
 
+**Pre-alpha clarification, 2026-09-11:** import and export implementation are both deferred beyond v0.01.
+Compatibility remains a present design requirement: use this research when defining the character model and
+shared wizard operations so later adapters do not require tearing down the wizard. The
+[character specification](character-wizard-spec.md#1-product-outcome-and-scope) owns that boundary. The
+conversion and round-trip examples below are later implementation work, not prototype completion gates.
+
 Confirmed: preserve the ability to import Forge Steel character data files while designing our own character model. Compatible export is desired. Neither requirement means adopting Forge Steel's storage model. The user accepted the direction of an adapter that translates supported data and retains unmapped data. Detailed schemas and conversion behavior below remain proposals, not implemented behavior. See [character model direction](character-wizard.md#character-model-direction) for how decisions, authored content, inventory, and changing sheet values fit together.
 
 Investigated source: Forge Steel commit `5a846aadb623a9855a023e9403bb887a956c341f`, package version `14.197.0`. Findings apply to that pin. No `.ds-hero` or `.drawsteel-hero` samples are tracked in that upstream tree, and no user-exported sample was supplied for this investigation. This is analysis of the actual serializer, import path, models, and update logic, not a successful live application round trip. An accepted filename extension does not establish support for every historical file shape.
@@ -85,4 +91,6 @@ Also export a hero built entirely in our wizard and load it in the supported For
 
 Our character model also requires [progression rollback](character-wizard.md#progression-history-and-rollback). A Forge Steel hero snapshot does not supply a chronological record of previous decisions. Its embedded level definitions must not be presented as proof of the player's actual earlier builds. Preserve the imported snapshot as an initial history point; reconstructing earlier levels, where possible, is a separate operation whose inferred or missing choices must be explicit. Export the active build even when the adapter retains later progression records internally.
 
-Next implementation work should prove these boundaries alongside the first wizard model. This investigation does not yet supply a converter, a version support guarantee, or a live round-trip result.
+Use these findings to review the first wizard model's compatibility boundary now. Prove conversion and
+round trips when interchange implementation returns to scope. This investigation does not supply a
+converter, a version support guarantee, or a live round-trip result.

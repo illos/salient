@@ -6,6 +6,19 @@ This records confirmed inventory direction separately from proposed loot flows a
 Related specifications: [table](table-spec.md), [characters](character-wizard-spec.md),
 [access](accounts-and-access-spec.md), and [data](data-architecture-spec.md).
 
+## Pre-alpha scope
+
+**Confirmed, 2026-09-11: defer the entire inventory system beyond v0.01.** Character and party inventory
+tracking, item instances, equipment management, stash contents/visibility, claims, loot distribution,
+transfers and inventory history are not required for the first prototype. Starting-equipment inventory
+creation is also outside that slice; a working inventory step must not gate completion of the minimal wizard.
+The requirements below remain the fuller product design. Preserve the conceptual separation between a build
+and future item ownership/state, without implementing unused inventory machinery for the prototype.
+
+This defers inventory, not sourced character-build choices such as the selected kit and its derived baseline.
+Item-use automation and inventory-related combat interactions can wait with this subsystem. Combat mechanics
+otherwise remain for their separately deferred discussion. See [the clarification queue](pre-alpha-design-gaps.md).
+
 ## Confirmed v1 direction
 
 - Support both individual character inventory lists and a shared party inventory. Both live at campaign level

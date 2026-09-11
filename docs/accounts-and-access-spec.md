@@ -1,6 +1,6 @@
 # Accounts, roles, ownership, and sharing
 
-Version: 0.5 — consolidated specification checkpoint, 2026-09-11.
+Version: 0.6 — Better Auth selected, 2026-09-11.
 
 **Status:** the accounts, roles, ownership, sharing, and friendship discussion is captured for future
 implementation. **Confirmed requirements** record product decisions. **Proposals** make those requirements
@@ -10,14 +10,37 @@ proposed defaults. Authentication and these access workflows are not implemented
 This is the primary specification for account and social relationships and application access. The
 [feature inventory](product-features.md) summarizes it; the
 [character wizard specification](character-wizard-spec.md) retains authority over build and review behavior;
-the [data architecture](data-architecture-spec.md) retains authority over storage and gameplay history. Follow
+the [data architecture](data-architecture-spec.md) retains authority over storage and gameplay history. The
+[v1 tech stack](v1-tech-stack-spec.md) records technology rationale and hosting portability. Follow
 the specific confirmed requirements here when older supporting notes use broader terms such as “full-sheet
 access.”
 
 ## 1. Current implementation and scope
 
-Convex is the chosen application backend. This checkout currently has no Convex package, backend schema,
-account system, or multiplayer authorization implementation. [package.json](../package.json) contains only
+The [v0.01 scope checkpoint](pre-alpha-design-gaps.md) controls immediate delivery. The requirements in
+later sections describe the fuller product; apply these confirmed prototype qualifications first.
+
+| Area | Included in v0.01 | Deferred beyond v0.01 |
+| --- | --- | --- |
+| Accounts | Basic sign-up, sign-in and sign-out | Profile editing, password recovery and account deletion |
+| Campaign access | Campaign creation, invitations and membership through the established flow | Separate friends system, including discovery, requests and friendship management |
+| Director | Campaign creator serves as Director | Appointing another Director, including standing delegation and session-only appointments |
+| Character control | Players control their own admitted characters; Director can act for table characters | Player-to-player character-control sharing |
+| Communication | Visible game log under existing gameplay-history access rules | Campaign text chat |
+
+Authentication and authorization remain required for exposed operations. Friendship is not an admission
+prerequisite. Keep campaign ownership, Director role, character ownership and permission to act distinct so
+future delegation and grants fit the design. Director table authority does not permit selecting another
+player's build choices; existing review, session, roster and gameplay restrictions still apply.
+
+Blocking, campaign deletion and other membership/departure exceptions have existing fuller-product policies
+below, but their prototype depth is not independently settled by these deferrals. Chat messages and recorded
+game activity remain separate concepts. Do not infer removal of privacy or access boundaries from reduced
+feature scope.
+
+Convex is the chosen application backend and Better Auth is the chosen authentication library. This checkout
+currently has no Convex package, backend schema, account system, or multiplayer authorization implementation.
+[package.json](../package.json) contains only
 development dependencies; [the local history implementation](../src/history.ts) persists combat runs to files.
 The engine's `actorId` identifies a game entity, not an authenticated user. Engine validation of ability
 ownership is not user authorization.
@@ -36,10 +59,10 @@ lifetimes; the [character wizard spec](character-wizard-spec.md) controls builds
   scope; see the [v1 checkpoint](v1-spec-checkpoint.md).
 - V1 has no administration-dashboard functionality. Earlier separate-admin sign-in and powers are future
   design work, not v1 requirements.
-- Prefer Convex's auth system unless investigation identifies a good reason to choose otherwise. Convex
-  remains the data system regardless of the authentication choice.
-- The user explicitly accepts Better Auth as an alternative if Convex Auth does not meet the requirements; the
-  final library choice remains open.
+- **Better Auth is selected for v1**, using its Convex integration. This supersedes the earlier provisional
+  Convex Auth preference and the treatment of Better Auth as an alternative. Convex remains the data system.
+- Email-provider integration and the future LAN deployment's recovery/delivery arrangement are deferred
+  decisions. Password reset remains the only v1 email flow; its feature requirement is unchanged.
 
 ### Friends and blocking
 
@@ -143,7 +166,9 @@ make its recipient a Director.
 Confirmed direction: **anything a player can do at the table, the Director can also do.** All player table
 operations must have a Director equivalent, including choosing Take turn and acting on behalf of characters.
 This applies in free play and encounters, and is the default for other table activities. Director authority
-remains scoped to the campaign they direct and subject to applicable session/pause/rules constraints.
+remains scoped to the campaign they direct and subject to applicable session/pause constraints. Game-rule
+conflicts warn without blocking eligible play under the adaptation principles; account/data permissions
+remain distinct from rules compliance.
 
 Character progression is explicitly a separate track. An active Director's own character admission and full
 edits are logged and require no approval step. Other characters retain Director review. This exemption does
@@ -154,34 +179,30 @@ the earlier scope question; the owner-only rows below remain current requirement
 
 ## 3. Authentication investigation
 
-Official documentation checked on 2026-09-10. No package version is installed here; verify APIs against a
-pinned version during implementation.
+**Decision, 2026-09-11:** use Better Auth through `@convex-dev/better-auth`. The library comparison is complete;
+implementation verification remains. No auth package is installed here. The
+[v1 tech stack](v1-tech-stack-spec.md#7-authentication-and-email) records the selected integration and the
+requirement to preserve a future self-hosted LAN deployment.
 
-| Candidate | Evidence and fit | Decision at this checkpoint |
-| --- | --- | --- |
-| Convex Auth (`@convex-dev/auth`) | Runs authentication in Convex. Documents passwords, email verification/recovery, email links/codes, and OAuth; remains beta. Client-side React and React Native are supported; Next.js server integration is experimental. [Overview](https://docs.convex.dev/auth/convex-auth) | Provisional choice for regular accounts, consistent with the user's preference. |
-| Convex Auth for stronger admin sign-in | Its FAQ explicitly says built-in MFA, passkeys, hardware keys, and SSO are not supported. [FAQ](https://www.convex.dev/auth) | Do not assume ordinary password login satisfies the separate admin requirements. Determine those requirements before choosing the admin implementation. |
-| Better Auth with the Convex integration | The integration lists Two Factor among its supported plugins. It is a distinct auth library integrated with Convex, not another name for Convex Auth. [Integration support](https://labs.convex.dev/better-auth/supported-plugins) | User-accepted alternative if stronger sign-in or account-management work makes Convex Auth a poor fit; no final selection or installation yet. |
+Better Auth documents email/password authentication and credential-management operations, including password
+changes with optional revocation of other sessions. Its Convex integration provides explicit React/Vite SPA
+and TanStack Start setup guides. These support the chosen direction without requiring an additional cloud
+identity provider. Configure and test the actual account flows rather than assuming provider defaults match
+this spec. [Account management](https://better-auth.com/docs/concepts/users-accounts),
+[React integration](https://labs.convex.dev/better-auth/framework-guides/react),
+[TanStack Start integration](https://labs.convex.dev/better-auth/framework-guides/tanstack-start).
 
-Convex Auth's documented Password flows cover signup, signin, reset, reset verification, and email
-verification. They do not list dedicated change-email or authenticated change-password flows. This is an
-integration gap to investigate, not proof those features are impossible. Editing a profile email alone must
-not be mistaken for changing the login credential.
-[Password API](https://labs.convex.dev/auth/api_reference/providers/Password)
+The earlier Convex Auth research informed this choice; it is not a remaining selection gate. Admin-dashboard
+authentication remains outside v1. Provider support for verification emails, OAuth, or MFA does not add those
+features to release scope. In particular, password reset is the only v1 email flow; the credential-change
+mechanism must respect that boundary. Editing a profile email alone is not changing the login credential.
 
-Better Auth explicitly documents verified email changes and password changes using the current password, with
-an option to revoke other sessions. These are reasons to compare implementation effort if the Convex Auth
-account-settings spike needs substantial custom credential logic.
-[Account management](https://better-auth.com/docs/concepts/users-accounts)
-
-**Proposed decision process:** evaluate signup, signin, forgotten-password recovery, authenticated credential
-changes, and session revocation against the regular-account requirements. Admin-dashboard authentication is
-outside v1. The confirmed v1 email scope is password reset only; provider support for
-verification/notification emails is research evidence, not a requirement to ship them. Convex Auth is the
-starting preference; Better Auth on Convex is an accepted alternative for the account system if it meets the
-combined requirements more cleanly. A separate admin provider remains an option, not a requirement. Verify the
-selected library with a pinned-version implementation spike before committing to it. Do not write custom MFA
-or password cryptography to preserve a tentative library choice. This spike is future implementation work.
+**Implementation verification:** pin compatible Better Auth/Convex integration versions and exercise signup,
+signin, sign-out, forgotten-password recovery, authenticated credential changes, session revocation, and
+account deletion. Verify configured origins/session behavior for the selected frontend and future local
+deployment. The email delivery provider/API and local recovery arrangement are deferred work; no earlier
+Resend suggestion selects a provider. Use provider-supported credential handling rather than custom password
+cryptography. Authentication verification does not replace the application authorization cases below.
 
 ### Proposed regular-account behavior
 
@@ -201,8 +222,9 @@ or password cryptography to preserve a tentative library choice. This spike is f
   chat in retained campaigns keep their username attribution. A deleted active Director is replaced by the
   campaign owner in retained campaigns. Account export and affected combat-participation handling remain open.
 - Apply provider-supported credential protection and request limits; keep credentials and verification codes
-  out of gameplay logs and public records. Email delivery still needs configuration; storing auth in Convex
-  does not itself deliver mail. [Password setup](https://labs.convex.dev/auth/config/passwords)
+  out of gameplay logs and public records. Email delivery still needs provider selection/configuration;
+  storing auth in Convex does not itself deliver mail.
+  [Better Auth password recovery](https://better-auth.com/docs/authentication/email-password)
 
 ### Proposed admin boundary — future work, outside v1
 
@@ -320,6 +342,9 @@ removal handling still needs definition; ordinary combat locks must be reconcile
 
 ## 6. Exactly one active Director
 
+For v0.01, the campaign creator is the Director and delegation is deferred, as recorded in section 1.
+The following delegation model describes the fuller product.
+
 **Proposed representation:** a campaign has a standing Director, initially its owner, and at most one
 current-session override. There is one effective Director, calculated server-side:
 
@@ -393,6 +418,11 @@ access through continuing campaign membership; losing campaign membership remove
 
 ### Table rolls and content disclosure
 
+Confirmed refinement: every used action exposes its complete verbatim source ability/action text through
+the shared game log, including monster actions and actions the parser cannot resolve. The table can compare
+that text with the actual resolution. This grants neither full live monster-stat-block access nor unrelated
+private sheet fields. See [rules adaptation principles](rules-adaptation-principles.md).
+
 Rolls are public to the permitted table audience by default. Planned tower rolls expose the result only to the
 active Director, not to the submitting player or observers. Authorize the result independently of the right to
 request the roll; do not include hidden results in the submitter's response. Later reveal and historical
@@ -439,7 +469,7 @@ option is not yet required.
 | View owner-private notes | Yes | Only for own character | Only for own character | No | No |
 | Choose build/level-up options | Yes, under wizard rules | Only for own character | Only for own character | No | No |
 | Approve campaign admission/full edits | If active Director, own changes are logged without approval | Only if active Director, for others' characters | Approves others; own admission/full edits are logged without approval | No | No |
-| Run this character in combat | Yes, if admitted and otherwise eligible | Not granted by ownership of campaign alone | Yes, for any character at the table, without an owner share; session/pause/rules constraints apply | Yes, within legal game operations | No |
+| Run this character in combat | Yes, if admitted and otherwise eligible | Not granted by ownership of campaign alone | Yes, for any character at the table, without an owner share; session/pause constraints apply and game-rule conflicts warn | Yes, within authorized operations, including deliberate rules departures | No |
 | Grant/revoke access to this character | Yes | Only for own character | Only for own character | No | No |
 | Delete, duplicate, export, or detach the character | Outside combat, own detachment needs no Director approval; duplication uses active build. Export is not required in v1. | May detach attached characters or kick a player; does not acquire ownership or character deletion/duplication rights | Director role alone grants no confirmed detachment authority over others | Not granted | Not granted |
 
@@ -695,8 +725,9 @@ settled roster, sharing, blocking, privacy, discovery, or notification decisions
   block, and account deletion.
 - Define any private fields beyond owner-private notes and restricted personal inventories, and any historical
   disclosure for tower rolls/Director secrets. Current members' default access to session history is settled.
-- Complete regular-account credential-change/reset and session-revocation behavior against the selected
-  provider. Password reset is the only v1 email flow; no admin-dashboard implementation is required.
+- Complete regular-account credential-change/reset and session-revocation behavior using the selected Better
+  Auth integration. Email delivery and future LAN recovery arrangements remain deferred decisions. Password
+  reset is the only v1 email flow; no admin-dashboard implementation is required.
 - Resolve campaign-deletion character-state settlement: no keep/reset prompt is confirmed; retaining current
   recorded values before detachment resets remains a proposed default.
 - Define remaining invitation/block races, re-request cooldown, and former-member campaign-history access.
@@ -707,7 +738,8 @@ settled roster, sharing, blocking, privacy, discovery, or notification decisions
 Admin suspension workflows, homebrew publication rights, and friends-only statistics visibility belong to
 future scope.
 
-Resolve these through product discussion, then refine operation contracts before schema/UI implementation.
-Include the friend-request, friendship, and blocking foundation early alongside regular accounts and private
-character ownership. Membership, delegation, sharing, and any later friends-only visibility follow once their
-dependent policies are settled.
+Resolve the decisions needed by exposed features before implementing their dependent operations. For
+v0.01, prioritize basic accounts, campaign invitations/membership, private character ownership, creator as
+Director and authorized table access. Friends, delegation, character-control grants, chat and expanded
+account management follow their explicit deferrals in section 1. Blocking scope and lifecycle exceptions
+remain separate decisions; do not make every fuller-product access feature an initial prerequisite.

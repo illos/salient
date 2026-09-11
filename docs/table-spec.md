@@ -1,6 +1,6 @@
 # Campaign sessions and the table
 
-Version 0.49 — consolidated specification checkpoint, 2026-09-11. Specification only; no implementation.
+Version 0.51 — rules adaptation philosophy, 2026-09-11. Specification only; no implementation.
 
 This is the primary checkpoint for session participation, the table's role-dependent surfaces, and the core
 play loop. **Confirmed** behavior comes from the user's table walkthrough. **Proposed** contracts and **open**
@@ -9,7 +9,35 @@ verified Draw Steel rules rather than treating the sketch as a rules variant.
 
 Related specifications: [access](accounts-and-access-spec.md), [characters](character-wizard-spec.md),
 [data/history](data-architecture-spec.md), [monster catalog](monster-catalog-spec.md),
-[dice](dice-roller-spec.md), and [engine](engine-architecture.md).
+[dice](dice-roller-spec.md), [engine](engine-architecture.md), and [v1 tech stack](v1-tech-stack-spec.md).
+
+**Immediate milestone:** the [v0.01 checkpoint](pre-alpha-design-gaps.md) controls feature delivery. Use a
+temporary desktop UI with a visible game log, a minimal hero and direct catalog-to-foes-roster loading.
+Campaign chat, saved encounter templates and inventory/loot are deferred. The creator serves as Director;
+player-to-player character-control sharing and Director delegation are deferred. Relevant table text remains
+readable under existing visibility rules. Broader surfaces and acceptance examples below describe V1, not
+automatic prototype gates. Combat mechanics remain deferred for their dedicated discussion.
+
+## Sustained use and realtime requirements
+
+Confirmed pre-alpha clarification: the table is the live gameplay surface within this application. The user's
+video-game analogy distinguishes the gameplay viewport from menus, character creation and other setup
+screens. It does not request a standalone table project or embedding in other applications, nor introduce a
+digital-map requirement. Give table performance and interaction quality particular attention from the first
+prototype. Any special technical treatment should follow its actual workload; this distinction alone does
+not select a different stack, runtime or deployment. The standalone rules-engine intent remains separate.
+
+Confirmed technology-discussion clarification: the app serves phones, tablets, and desktop. The table is its
+primary realtime multiplayer surface and the place users remain for two-to-six-hour sessions. The core
+workload is campaign chat, reading effective character sheets, choosing abilities, Director monster and
+encounter management, and inventory/loot. Full character building and full reference browsing are mostly
+separate individual workflows, although the table includes Director search/add and relevant rules reading.
+
+The table must stay responsive without routine performance-driven hard refreshes that hold up the group.
+Users should promptly see consistent accepted actions; presentation on a slow device must not hold up others.
+The [tech spec](v1-tech-stack-spec.md#9-verification-and-acceptance) proposes bounded client resources,
+subscription lifetimes, independent animation, and a six-hour multi-client acceptance exercise. This does not
+change visibility, permissions, session persistence, or the deferred action-resolution contracts below.
 
 ## Terminology: encounters and structured table states
 
@@ -34,6 +62,22 @@ monster selections, the party-strength calculator setup, and rewards-stash prepa
 encounter types is outside v1.
 
 ## Discussion boundary: action economy deferred
+
+Latest clarification: [rules adaptation principles](rules-adaptation-principles.md) now settle the general
+enforcement policy. Trust table participants: warn about game-rule conflicts without blocking an otherwise
+authorized player or Director operation, and make departures visible to the Director. Allow recorded manual
+adjustment of mechanical inputs and effects. Every used action provides its complete verbatim source text
+through the shared log, together with actual resolution steps and unresolved work. Exact controls, action
+budgets, timing, interruption, manual completion and undo dependencies remain for the dedicated discussion.
+
+Pre-alpha clarification, 2026-09-11: the user now requires the physical interaction steps of basic combat
+action economy in the first connected v0.01 journey, without complete ability parsing. Follow the
+[clarification queue](pre-alpha-design-gaps.md#confirmed-first-acceptance-journey) for the walkthrough and
+component scope. The detailed timing, warning presentation and interruption decisions remain unanswered; this
+milestone requirement does not approve a particular resolution design or authorize implementation.
+
+The earlier pre-alpha walkthrough deferred combat mechanics for a dedicated, in-depth conversation.
+Warn-without-blocking is now confirmed; automatic tracking depth and manual interaction still need design.
 
 The user explicitly deferred detailed action economy to its own separate, substantial workstream. This
 includes action budgets and substitutions, triggered-action opportunities/prompts, timing and interruption
@@ -234,8 +278,8 @@ consistently across table operations in free play, encounters, and other table a
 players may choose **Take turn** for an eligible character, and the Director may do so on their behalf.
 
 The relevant authority is the active Director in that campaign, not site administrator access. Existing
-session/pause/rules constraints still govern whether an operation is currently available. The doctrine does
-not itself specify a rules-override mechanism.
+session/pause constraints still govern whether an operation is currently available. Game-rule conflicts are
+warnings under the adaptation principles; detailed override controls remain to be designed.
 
 Scope confirmed: character progression is a separate track. The table doctrine does not grant another user's
 build choices or level-up selections to the Director. Existing character ownership, progression, and review
@@ -258,9 +302,9 @@ Confirmed:
 - The character keeps its identity, current state, and turn progress; changing who submits its actions does
   not create another turn or replenish actions/resources.
 
-This authority concerns playing the character. Existing pause, session, action-timing, and rules constraints
-still apply; “at any time” establishes Director control availability rather than an exception to those
-constraints. Build choices remain with the character owner, and campaign ownership alone does not grant this
+This authority concerns playing the character. Existing pause and session constraints still apply;
+game-rule and action-timing conflicts follow the warn-without-blocking principle. Build choices remain with
+the character owner, and campaign ownership alone does not grant this
 Director authority. Private-field policy is unchanged.
 
 Proposed operation behavior: record both the authenticated acting user and the character they acted for.
@@ -284,6 +328,12 @@ layout or frontend framework.
 
 For v1, the game log is the main centerpiece. A later UI may choose not to expose it as a main surface;
 durable recording remains required. Keep the shared operations independent of the visual log and panes.
+
+**Confirmed v0.01 scope:** defer campaign text chat and focus on a visible game log. The prototype must
+show recorded gameplay activity at the table; background recording alone does not meet this requirement.
+The presentation may be temporary, consistent with the desktop concept-proving UI scope. This decision
+does not settle the deferred combat timing, action grouping or undo contracts. The chat requirements below
+remain for the fuller product, with chat and gameplay records kept distinct.
 
 Chat and sheet access are also available through the campaign/character experience outside the live table.
 Chat therefore cannot depend on an active session record. For v1, **campaign chat and the game log are
@@ -834,9 +884,9 @@ requested app loop while applying those verified mechanics.
 - The encounter builder derives difficulty from the selected monsters and party using verified rules. Changing
   either selection refreshes the guidance; unsupported or missing inputs remain visible rather than producing
   a guessed difficulty. Concrete numerical acceptance cases await rules research.
-- Between sessions, the Director can prepare saved encounters in the encounter builder, but cannot add/remove
-  live roster monsters or load saved encounters into the roster. A later running session can load the saved
-  preparation using the replace/append flow.
+- Between sessions, the Director can prepare saved encounters, add/remove live roster monsters, and load saved
+  encounters using the replace/append flow. Loading also adds prepared rewards once under the stash contract;
+  it neither starts gameplay nor reopens closed session history.
 - Closing a session preserves the campaign foes roster and the state resulting from any encounter keep/reset
   choice. Starting the next session exposes those same retained instances and values without reloading a
   template or continuing the closed encounter.

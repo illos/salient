@@ -2,7 +2,12 @@
 
 Research and recommendation, 2026-09-10. **Proposed architecture for discussion; no schema, importer, or deployment implemented.** Convex is already the chosen application backend. This analysis recommends how to use it alongside portable content files, and identifies decisions that remain open.
 
-The later [data structure and architecture specification](data-architecture-spec.md) is the current discussion checkpoint. It frames encounter undo, realtime sessions, and compression after session closure; it supersedes the optional age-based archival timing below. This analysis remains supporting research. Reopening a closed session for live undo is explicitly unresolved in the checkpoint; earlier broad rollback language must not be read as settling that policy.
+The later [data structure and architecture specification](data-architecture-spec.md) controls the current data
+and history contracts. It frames encounter undo, realtime sessions, and compression after session closure;
+it supersedes the optional age-based archival timing below. This analysis remains supporting research.
+Closed sessions are permanently read-only under the current product contract. Earlier proposals below for
+cross-session live restoration or archive activation are historical, not current implementation requirements.
+See also the [pre-alpha clarification queue](pre-alpha-design-gaps.md) for the immediate milestone scope.
 
 **Recommendation:** keep Steel Compendium as the versioned source for official content; compile a portable, structured content package; serve searchable definitions through Convex initially; store user creations and authoritative play state as structured Convex documents; preserve history as ordered records of actual state changes with checkpoints; derive statistics from that history. Use file storage for original imports, media, package downloads, and eventually compressed historical payloads. A second operational database is unnecessary for the described scope.
 

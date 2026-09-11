@@ -9,9 +9,14 @@ build activation, including while paused. Encounter changes immediately update i
 examples of editing during play are subject to this newer lock; see the
 [table contract](table-spec.md#character-sheet-lock-during-encounters).
 
+For immediate delivery, follow the [pre-alpha checkpoint](pre-alpha-design-gaps.md) and the
+[wizard scope](character-wizard-spec.md#1-product-outcome-and-scope): minimal level-one creation/editing and
+saved revisions, with leveling, build-history navigation UI, inventory and interchange implementation deferred.
+The supporting progression and import research below informs the model without expanding prototype scope.
+
 ## Confirmed direction
 
-The character wizard is the current app workstream alongside the headless playtests. The application will be
+The character wizard is one app workstream alongside the headless playtests. The application will be
 GPLv3. Bring in Forge Steel and use its class progression and choice definitions heavily as a reference.
 Prefer Steel Compendium as the single source for the actual rules content. Reusing Forge Steel's UI or
 character storage model is not a requirement.

@@ -32,6 +32,55 @@ remain with the owner under this specification, with Director review where alrea
 
 ## 1. Product outcome and scope
 
+### v0.01 scope
+
+**Confirmed v0.01 slice, 2026-09-11:** the first hero is created through a minimal working wizard, with
+devil ancestry, Fury class and level one. The user goes through the full character-creation sequence,
+including ancestry, class, career, background and the other applicable sourced steps. Each step may expose
+only one supported option or valid selection set. Limited option breadth must not replace the creation flow
+with a prepared-character load. Record the actual selections and derive the resulting character through the
+shared character operations, then use it in the campaign/table journey. Preserve valid choice counts, budgets
+and dependencies even when only one complete path is supported. Exact remaining fixture choices can be
+established from the existing source-grounded example; this clarification does not select them individually.
+See [the pre-alpha journey](pre-alpha-design-gaps.md#confirmed-first-acceptance-journey). Broader creation,
+advancement and interchange requirements below remain the fuller product destination; their complete delivery
+is not automatically a v0.01 gate. Selecting wizard entry does not cancel the eventual import requirement.
+
+**Confirmed editing scope:** v0.01 includes reopening a saved character in the same minimal wizard and
+editing it outside combat. Restore its actual selections into the editor and use the same decision/validation
+system as creation; one supported option/set per step remains acceptable. Saving an edit retains the
+character's identity. Existing campaign review, effective-build isolation and combat edit locks apply;
+authored details retain their established separate review policy. Save character-build revisions in v0.01;
+the interface for browsing and restoring earlier builds is deferred.
+
+**Confirmed advancement scope:** leveling up is deferred beyond v0.01. The prototype supports creation and
+editing at level one. Retain the shared decision/evaluation model and saved build revisions as the foundation
+for future progression; higher-level choices and a working level-up flow are not prototype gates. The fuller
+advancement requirements below remain for later work.
+
+**Confirmed interchange scope:** neither Forge Steel import nor export needs implementation in v0.01.
+Compatibility must inform the basic character/wizard design now so those adapters can be added without
+rebuilding the wizard. The minimum architecture must represent actual selections and their owning branches,
+content references, authored details, derived baseline and live state independently of screen layout. Use
+the existing interchange research to check these boundaries; retaining compatibility intent does not claim
+a working converter or a tested file-version range.
+
+Proposed engineering contract: the wizard and a future import adapter feed the same character model and
+validation operations; export reads that model through its own adapter. Preserve scoped identity/mapping
+information as definitions are translated. Allow original payloads and unknown imported fields to be retained
+separately when import is implemented, without putting Forge Steel's whole object graph into ordinary wizard
+state. A source snapshot must not be mistaken for chronological progression history. No import/export UI,
+file processing, empty compatibility storage or round-trip implementation is required for this prototype.
+
+**Confirmed inventory scope:** the entire inventory system is deferred beyond v0.01. The minimal wizard does
+not need item instances, starting-equipment inventory creation or equipment-management controls. This qualifies
+the earlier full-creation-sequence requirement for inventory work only. Keep the applicable sourced build
+choices, including kit selection and its baseline contributions, in the character decision system. The broader
+inventory requirements below apply when that subsystem is implemented; no placeholder inventory workflow is
+required to finish the first character.
+
+### Fuller product scope
+
 A user can build a character through a guided decision system, advance it through a narrower level-up flow,
 edit its complete build, and restore earlier progression points. The character carries independently authored
 details and inventory, plus a sheet derived from its build and changing play state. The later
@@ -187,6 +236,11 @@ including XP after campaign transfer, remains to be specified against the rules 
 review does not mean unrestricted advancement.
 
 ## 5. Progression history
+
+**Confirmed v0.01 scope:** record saved character-build revisions and preserve them through save/reload.
+Browsing and restoring earlier builds through a history interface is deferred beyond the prototype. This
+decision covers saved builds, not every in-progress wizard interaction, and does not settle combat history.
+The fuller restoration requirements below remain the design destination.
 
 Confirmed example: restore a level-7 wood elf Shadow to the build they had at level 3. Restore its choices,
 including ones later replaced, automatic grants, and build-derived stats/abilities. Retain present inventory.
@@ -357,6 +411,9 @@ startup/build, and must not silently rewrite recorded history.
 
 ### Required import
 
+Required for the fuller product; implementation is explicitly deferred beyond v0.01. The architecture above
+must accommodate it from the first character model.
+
 Accept the researched `.ds-hero` and `.drawsteel-hero` JSON formats within an explicitly tested support range.
 Validate structure before creating a character; an incomplete valid draft differs from malformed input.
 Translate selections and relevant state while retaining the original payload and unmapped data separately.
@@ -373,6 +430,8 @@ revision. If an earlier level is requested, reconstruct only what the available 
 missing choices; do not claim a guessed build is the player's recorded past.
 
 ### Desired export
+
+Implementation is explicitly deferred beyond v0.01; preserve the adapter path alongside future import.
 
 Export the explicitly selected character revision into a compatible hero graph. Proposed default: the
 effective build for an attached character and the current saved build for an unattached one; exporting a draft
@@ -420,6 +479,11 @@ Source/engine changes must not cause history navigation to rerun rules or dice.
 
 ## 10. Mobile interaction requirements
 
+These are fuller-product presentation requirements. V0.01 uses temporary desktop UI under the
+[technology scope](v1-tech-stack-spec.md#1-decision-status-and-product-constraints); phone layouts and visual
+polish are deferred. Correct draft/review/effective-state feedback and usable controls still apply to the
+prototype's exposed flows.
+
 Proposed presentation requirements: a resumable wizard with an overview of decisions grouped by foundation and
 level, visible outstanding choices, and access to the full relevant rule text. The level-up view presents only
 the transition's choices. Changing a parent decision explains which choices became invalid and how the
@@ -436,9 +500,14 @@ terminology as prerequisites for using it. Exact screen order and visual design 
 
 ## 11. Acceptance scenarios
 
-These describe expected outcomes, not tests already passing. Establish numeric mechanics from pinned rules
-independently of the evaluator. Verify actual stored/read-back state through shared operations and exercise
-the same flow at phone dimensions.
+These describe fuller-product outcomes, not tests already passing or automatic v0.01 gates. For the
+prototype, demonstrate the supported level-one creation/edit/review path on desktop, saved selections and
+build revisions through reload, correct permissions/locks, and the resulting effective table character.
+Keep unsupported choices and unresolved mechanics explicit. Build-history navigation UI, advancement, inventory,
+grants and actual interchange follow their separate deferrals.
+
+Establish numeric mechanics from pinned rules independently of the evaluator. Verify actual stored/read-back
+state through shared operations. Exercise phone dimensions when mobile delivery returns to scope.
 
 | Scenario | Required result |
 | --- | --- |
@@ -478,21 +547,23 @@ shipping the dependent behavior; no silent default is authorized merely by listi
 
 ## 13. Proposed delivery sequence
 
-1. **Choice/history foundation:** define shared character contracts and implement one complete level-1 Fury
-   flow using the [prepared fixture](hero-fixture.md) as one example, alongside a second legal build. Include
-   incomplete drafts, dependencies, independent inventory/details, and a real decision-history round trip.
-   Keep the model capable of all levels.
-2. **Advancement and restoration:** add sourced higher-level progressions and verify the scoped level-up
-   operation. Expand Shadow coverage to demonstrate the level-7-to-3 requirement; add Conduit to exercise
-   domain choices rather than assuming every class uses subclasses.
-3. **Campaign integration:** wire owned characters, one-campaign attachment, exact-revision review, effective
-   build isolation, detachment/reset, and duplication into shared persisted operations and the mobile flow.
-   Resolve the dependent open decisions above.
-4. **Interchange and broader coverage:** integrate Forge Steel import alongside the first models, then broaden
-   classes/levels. Preserve the data needed for later compatible export; implementing export is not a v1
-   acceptance requirement. The importer must not be postponed until the model is too rigid to preserve
-   necessary data. Generate coverage reports from working behavior, not a manually asserted checklist.
+The confirmed v0.01 scope in section 1 takes precedence over the earlier broader delivery proposal.
 
-Each slice includes usable client behavior and headless verification of the same operations. The Fury starting
-slice and delivery order are recommendations; the full product requirements above are not reduced to that
-example.
+1. **Prototype choice/revision foundation:** implement the complete minimal level-one devil Fury creation
+   path using sourced choices, real selections, dependencies, derived values and authored details. Save
+   revisions and reopen the same character for editing. One supported option/set per step is sufficient;
+   a second build, inventory and historical restoration UI are not prerequisites.
+2. **Prototype campaign integration:** connect the wizard to owned characters, one-campaign attachment,
+   exact-revision review, effective-build isolation and the table through shared persisted operations and
+   temporary desktop UI. Resolve live-resource reconciliation before applying affected edits to played
+   characters. Use interchange research to review the model boundary without implementing converters.
+3. **Later progression and history UI:** add sourced higher-level choices, scoped level-up and historical
+   browsing/restoration. Use the level-7-to-3 Shadow example and differing class structures to verify the
+   broader model when those features return to scope.
+4. **Later interchange and broader coverage:** implement Forge Steel import and expand core classes/levels.
+   Preserve the adapter path for desired export, which is not a V1 delivery requirement. Conversion claims
+   follow real files and semantic round trips, not merely compatible-looking structures.
+
+Each delivered slice includes usable client behavior and headless verification of the same operations.
+Inventory and additional lifecycle workflows follow their owning scope decisions. This ordering is an
+engineering proposal, not implementation authorization or a reduction of the fuller product requirements.

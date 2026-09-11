@@ -1,0 +1,8 @@
+[submodule "vendor/steel-compendium"]
+	path = vendor/steel-compendium
+	url = https://github.com/SteelCompendium/data-unified.git
+	branch = main
+[submodule "vendor/forge-steel"]
+	path = vendor/forge-steel
+	url = https://github.com/andyaiken/forgesteel.git
+	branch = main

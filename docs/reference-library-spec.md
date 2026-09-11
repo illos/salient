@@ -6,6 +6,16 @@ Related specifications: [monster catalog](monster-catalog-spec.md),
 [character wizard](character-wizard-spec.md), [inventory](inventory-spec.md), and
 [content/data architecture](data-architecture-spec.md).
 
+## Confirmed pre-alpha scope
+
+For v0.01, standalone rules search/reference browsing is deferred. The user explicitly identified it as a
+separate feature that can be developed independently. Heroes, foes and abilities used in the prototype still
+show their relevant reference text at the table. Reading that text does not depend on implementing rules
+search or automating every described mechanic. The required catalog-to-foes-roster loading path remains in
+scope. This feature boundary does not require a separate application or deployment.
+
+The broader library coverage below remains the fuller-product destination.
+
 ## Confirmed library coverage
 
 - **Rules:** v1 provides a searchable reference for all core rules. Reference availability is not restricted

@@ -1,6 +1,18 @@
 # Data structure and architecture specification
 
-Version 0.12 — consolidated specification checkpoint, 2026-09-11. Specification only; no implementation.
+Version 0.13 — technology and sustained table workload alignment, 2026-09-11. Specification only; no implementation.
+
+**Pre-alpha upgrade policy:** development data is disposable, and the latest live, playable application takes
+priority over preserving old prototype records through breaking updates. Reset/reseed is an acceptable
+development path; migration compatibility is not a v0.01 completion gate. This qualifies cross-version data
+retention during development, while normal saved-state, reconnect and history behavior within a running
+version still apply. See [development policy](development-process.md#confirmed-pre-alpha-development-policy).
+
+**Milestone scope:** apply the [v0.01 feature checkpoint](pre-alpha-design-gaps.md) before implementing the
+broader data model below. Saved character-build revisions and visible gameplay history are included;
+inventory, chat, character grants, Director delegation and interchange implementation are deferred. Preserve
+their conceptual boundaries without requiring unused records or full future workflows now. Detailed
+combat-history and resource-reconciliation contracts remain open.
 
 This is the primary checkpoint for the app's data model and storage lifecycle. It brings together the
 [character wizard](character-wizard-spec.md), [monster catalog](monster-catalog-spec.md), and
@@ -414,8 +426,10 @@ from campaign review visibility; leaving invalidates the review without deleting
 Withdrawal and approval must check the same submission state so a withdrawn revision cannot be activated by a
 stale request.
 
-Confirmed delivery scope: the app is web-only, optimized for mobile, with no plans for native apps. V1 has no
-character/campaign statistics dashboards, reference bookmarks, private direct messages, or admin-dashboard
+Confirmed delivery scope: the app is web-only for phones, tablets, and desktop, with no plans for native apps.
+The [v1 tech stack](v1-tech-stack-spec.md) records selected Better Auth, Cloudflare/Convex hosting, future LAN
+portability, and sustained table performance. V1 has no character/campaign statistics dashboards, reference
+bookmarks, private direct messages, or admin-dashboard
 functionality. Campaign chat is the only v1 messaging surface. Statistics are deferred at the presentation
 layer: retain relevant structured gameplay data so later analysis does not require reconstructing missing
 facts. Forge Steel export is not required for v1, but the character data model must preserve the information
@@ -641,6 +655,13 @@ During shared play, subscribe to relevant current state and a bounded recent fee
 detailed payloads on demand. After closure, history can load from an archive without maintaining subscriptions
 to its full contents. This scopes the shared-play workload; it does not prohibit normal responsive character
 editing or campaign updates between sessions.
+
+The table is the primary two-to-six-hour realtime workload. Bound retained browser data as well as mounted
+rows, and release unused detail subscriptions/caches as views change. UI cleanup never deletes persistent
+foes, accepted actions, inventories, or claims. See the
+[table resource lifetimes](v1-tech-stack-spec.md#5-browser-state-and-table-resource-lifetimes) and
+[sustained-session acceptance](v1-tech-stack-spec.md#9-verification-and-acceptance). Mostly single-user screens
+still need timely permission/review updates; this clarification does not authorize stale access.
 
 Partition event access and sequence allocation by table/encounter scope, retaining a total session chronology
 for interleaved actions. Index the actual reads needed for sessions, encounters, characters, and membership.

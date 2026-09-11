@@ -17,6 +17,13 @@ longer proposed.
 
 ## Confirmed requirements and proposed first scope
 
+**Confirmed v0.01 scope:** saved encounter templates are deferred beyond the pre-alpha. Its required loading
+path is adding at least one catalog stat block directly to the live foes roster. Template authoring,
+duplication and loading remain fuller-product requirements below, not prerequisites for this prototype.
+Starting and running combat with the roster remains in the pre-alpha journey. The entire inventory/loot
+system is also deferred; direct roster loading must not depend on templates, reward creation or standalone
+rules search. See [the clarification queue](pre-alpha-design-gaps.md#confirmed-first-acceptance-journey).
+
 Existing requirements: a public Foes library; encounters containing monsters; a Director foes roster retaining
 live monsters for free play and encounters; saved encounters loaded as independent roster instances with
 replace/append choices; persistent play state and reversible history; complete readable ability text alongside
@@ -77,7 +84,9 @@ choose a final UI layout.
    replace/append loading. Unsupported mechanics remain readable and manually resolvable. Loading and gameplay
    changes are recorded state transitions.
 
-At the table, only the Director can inspect loaded monster stat blocks. Each monster has a Director show/hide
+At the table, only the Director can inspect complete loaded monster stat blocks. Every used ability's full
+verbatim source text is available to the table through its game-log entry, including unsupported abilities;
+see [rules adaptation principles](rules-adaptation-principles.md). Each monster has a Director show/hide
 toggle. Hidden controls only the player-facing roster entry; it does not make a monster inactive or stop the
 Director from using it against players under normal gameplay rules. Visible monsters use the campaign-selected
 Numerical, Bar, or Winded health presentation under the

@@ -1,11 +1,27 @@
 # V1 specification checkpoint
 
-Consolidated 2026-09-11 after the product walkthrough and consistency pass. This is a documentation checkpoint,
-not an implementation milestone or approval of proposed technical defaults.
+Consolidated 2026-09-11 after the product walkthrough, technology discussion, and consistency pass. This is a
+documentation checkpoint, not an implementation milestone or approval of proposed technical defaults.
+
+## Immediate milestone: v0.01
+
+The current target is a desktop pre-alpha with temporary UI and a durable architectural foundation. The
+[pre-alpha scope checkpoint](pre-alpha-design-gaps.md) consolidates the accepted journey, per-feature
+inclusions/deferrals, component boundaries and remaining gaps. Read it before applying the fuller V1 scope
+below; those complete feature lists are not automatic prototype gates.
+
+The connected journey is campaign creation/invitation, session start, a catalog foe and a level-one devil
+Fury created through the minimal wizard, and basic combat with a visible game log. Complete ability parsing
+is not required. Existing authority/privacy and session rules apply to exposed features. Development data
+is disposable across breaking updates under the [development policy](development-process.md#confirmed-pre-alpha-development-policy).
+
+**Discussion checkpoint, 2026-09-11:** the user requested editorial cleanup and a stop here. Combat mechanics
+remain deferred for a dedicated conversation. There is no pending question or implementation authorization.
 
 ## Readiness
 
-The main product boundaries are now defined well enough to organize v1 implementation into workstreams.
+The main product boundaries are defined well enough to organize workstreams. Prototype scope and remaining
+contracts are tracked in the pre-alpha checkpoint; the sections below describe the fuller V1 destination.
 The app is not yet fully specified for end-to-end play: respite rules, detailed combat resolution, state
 reconciliation, and several lifecycle operations still need work. Do not treat readable core-content coverage
 as complete automation, or the existing headless experiment as a finished application.
@@ -17,7 +33,7 @@ for current decisions; the original review's unresolved scope questions are not 
 
 | Area | Included in v1 | Deferred or excluded |
 | --- | --- | --- |
-| Delivery | Online-first web app optimized for mobile; headless/shared game operations | No native-app plans; full offline operation is not required |
+| Delivery | Online-first web app for phones, tablets, and desktop; headless/shared game operations; sustained table performance | No native-app plans; full offline operation is not required; preserve future LAN hosting without promising its packaging in v1 |
 | Rules content | Core rulebooks; every core class through levels 1–10; searchable Rules, Foes, and Items references | All official supplements, including Summoner/Beastheart and associated mechanics; homebrew monsters/options/items |
 | Play | Free play, combat, dedicated respite; readable rules and recorded manual resolution where automation is incomplete | Dedicated montage/negotiation flows, downtime projects, nested structured activities |
 | Characters | Creation, advancement, full edits, progression history, sharing, detachment/duplication, Forge Steel import | Forge Steel export implementation; preserve the model/adapter data needed to add it without a rewrite |
@@ -36,6 +52,9 @@ General engine/parser/pack architecture can support future content without expos
 
 | Topic | Authoritative checkpoint |
 | --- | --- |
+| Faithful automation, warnings, table adjudication, source disclosure and manual play | [Rules adaptation principles](rules-adaptation-principles.md) |
+| Source research and independent rules-review workflow accepted for trial | [Development process](development-process.md) |
+| Technology recommendations, table performance, rendering and deployment portability | [V1 tech stack](v1-tech-stack-spec.md) |
 | Session, table, foes roster, combat lifecycle, visibility and undo | [Table](table-spec.md) |
 | Accounts, roles, discovery, grants, privacy, blocking and deletion | [Accounts and access](accounts-and-access-spec.md) |
 | Build choices, revisions, admission, progression and interchange | [Character wizard](character-wizard-spec.md) |
@@ -46,6 +65,20 @@ General engine/parser/pack architecture can support future content without expos
 | Standalone rules engine and optional visual dice | [Engine architecture](engine-architecture.md), [dice roller](dice-roller-spec.md) |
 
 ## Settled boundaries to preserve
+
+### Technology and delivery
+
+Convex is the backend and **Better Auth is the selected authentication library** through its Convex
+integration. The hosted plan uses Cloudflare for the frontend/assets/object storage and Convex Cloud for the
+backend. Preserve a future home-server/LAN deployment with local essential assets and services; this does not
+require independent offline clients or automatic cloud/LAN synchronization.
+
+The table is the primary realtime multiplayer and two-to-six-hour sustained-use surface: chat, rendered
+character sheets, abilities, Director foes/encounter operations, inventory, and loot. It must not require
+routine hard refreshes to recover from performance degradation. Other screens need ordinary responsive
+behavior and correct access updates. React/Vite/TanStack Router and the supporting libraries remain the
+recommended baseline in the tech spec; SSR remains a separate open delivery choice, not a long-session fix.
+Email-provider integration and future local recovery arrangements are deferred; password reset stays in v1.
 
 ### Sessions, roles and rosters
 
@@ -150,12 +183,15 @@ campaigns, characters and saved encounters, even during active combat in another
 5. **Coverage and interchange:** audit actual core source coverage, implement all core class choices through
    level 10, verify encounter difficulty/EV inputs and item mechanics, and demonstrate supported Forge Steel
    imports with unresolved data preserved without enabling excluded content.
-6. **Application operations and delivery:** select auth using regular-account/reset/settings requirements;
-   design shared operations and mobile web flows; clarify remaining historical/tower disclosure and
-   outside-session stash eligibility. Preserve confirmed observer restrictions and private notes.
+6. **Application operations and delivery:** implement the selected Better Auth integration against regular
+   account/reset/settings requirements; settle email integration later, retaining password-reset scope.
+   Follow the tech spec for frontend recommendations, rendering, long-session performance, and hosting
+   portability. Design shared operations and responsive web flows; clarify remaining historical/tower
+   disclosure and outside-session stash eligibility. Preserve confirmed observer restrictions and private notes.
 7. **Integration acceptance:** connect account creation, code-based admission, character review, template
    loading, free play/combat/respite, loot, session closure and the next session through the same authorized
-   headless operations used by the UI. Check multiplayer access/retry behavior during implementation.
+   headless operations used by the UI. Check multiplayer access/retry behavior and sustained table performance
+   during implementation.
 
 Detailed technical contracts remain proposals where labeled. No implementation, deployment or new rules
 research is claimed by this checkpoint.
