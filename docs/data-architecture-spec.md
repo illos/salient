@@ -1,34 +1,213 @@
 # Data structure and architecture specification
 
-Version 0.3 — discussion checkpoint, 2026-09-10. **Specification only; no persistence implementation or deployment delivered.**
+Version 0.12 — consolidated specification checkpoint, 2026-09-11. Specification only; no implementation.
 
-This is the primary checkpoint for the app's data model and storage lifecycle. It brings together the [character wizard](character-wizard-spec.md), [monster catalog](monster-catalog-spec.md), and [engine architecture](engine-architecture.md). The [storage analysis](data-storage-analysis.md) retains the supporting research, alternatives, corpus measurements, and illustrative scaling estimates.
+This is the primary checkpoint for the app's data model and storage lifecycle. It brings together the
+[character wizard](character-wizard-spec.md), [monster catalog](monster-catalog-spec.md), and
+[engine architecture](engine-architecture.md). The [storage analysis](data-storage-analysis.md) retains the
+supporting research, alternatives, corpus measurements, and illustrative scaling estimates.
 
-**Current direction:** an encounter owns its action-by-action undo journal; the open session is the live shared-play context; after session closure, detailed history can be compressed and retained while ordinary records hold current state, summaries, statistics, and archive references.
+**Current direction:** an encounter owns its action-by-action undo journal; the open session is the live
+shared-play context; after session closure, detailed history can be compressed and retained while ordinary
+records hold current state, summaries, statistics, and archive references.
 
-Confirmed requirements below describe user intent. Proposed contracts describe how to implement it. Open decisions remain unresolved; this checkpoint does not authorize silently choosing defaults for them.
+Confirmed requirements below describe user intent. Proposed contracts describe how to implement it. Open
+decisions remain unresolved; this checkpoint does not authorize silently choosing defaults for them.
 
 ## 1. Confirmed requirements and decision status
 
-- Distinguish shared game data from user-created data. Steel Compendium is the source of truth for official rules content; characters, campaigns, sessions, homebrew, and saved encounters belong to application users/campaigns under their respective permissions.
-- Group reusable content into packs/sets using the same system for official content, future MCDM content that becomes available for inclusion, community-authored content, and personal homebrew. Campaign creation must allow enabling/disabling content sources. Portability is a design requirement; the exact interchange format and first-release tooling remain proposed below.
-- Disabling a pack stops future selections while preserving existing characters' use of and advancement within content they already have. Existing loaded encounters and history remain intact.
-- Version the rules engine so authored content can identify the engine it was built for and tested with. Engine releases are distinct from content releases and file-format versions.
+Confirmed v1 mode scope: combat, free play, and a dedicated respite flow are included; respite is core
+gameplay. Dedicated montage-test and negotiation flows, and downtime-project tracking, are excluded from v1.
+Earlier descriptions of montage/negotiation as distinct structured states describe future design, not required
+v1 modes. Their core reference text remains in scope. Research respite rules before designing its detailed
+lifecycle; downtime-project integration is not a v1 prerequisite.
+
+Confirmed v1 chat policy: authors cannot edit or delete their sent campaign-chat messages. This does not alter
+campaign deletion, which removes its chat, or account deletion, which preserves username attribution in other
+retained campaigns. No separate Director moderation power is established by this decision.
+
+- Distinguish shared game data from user-created data. Steel Compendium is the source of truth for official
+  rules content; characters, campaigns, sessions, homebrew, and saved encounters belong to application
+  users/campaigns under their respective permissions.
+- Group reusable content into packs/sets using the same system for official content, future MCDM content that
+  becomes available for inclusion, community-authored content, and personal homebrew. Campaign creation must
+  allow enabling/disabling content sources. Portability is a design requirement; the exact interchange format
+  and first-release tooling remain proposed below.
+- Disabling a pack stops future selections while preserving existing characters' use of and advancement within
+  content they already have. Existing loaded encounters and history remain intact.
+- **Confirmed v1 scope: core rulebooks only.** Character creation and advancement support every core class
+  through levels 1–10. All official supplemental content, if present in the source corpus, is outside v1,
+  including Summoner, Beastheart, and their associated mechanics. Homebrew monsters, character options, and
+  items are also excluded. Creating characters from core options and saving encounters/rewards assembled from
+  core content remain in scope; these are user-created records, not homebrew rules content. Preserve the
+  general pack/content model for future use without enabling excluded sources in v1.
+- V1 reference libraries include searchable core rules, eligible official retainers/companions/summons, and
+  in-scope official items regardless of current automation coverage. Summoner and Beastheart are official MCDM
+  supplemental classes, not core; their classes and associated mechanics are excluded from v1. Track official
+  provenance, core status, release inclusion, and automation support separately under the
+  [reference-library scope](reference-library-spec.md).
+- Version the rules engine so authored content can identify the engine it was built for and tested with.
+  Engine releases are distinct from content releases and file-format versions.
 - Convex is the chosen application backend. Shared play needs realtime updates during a session.
-- Every action within an encounter must be undoable. Restoration changes actual affected state using recorded values, without rerunning the engine or dice.
-- Preserve every session's game log for campaign review. After a session ends, its detailed log can be compressed and relevant data delivered to persistent records and statistics.
-- Keep character progression history independent of encounter undo. Restoring a build retains present inventory and follows the wizard's campaign review requirements.
-- Saved encounter templates and loaded encounters remain independent. Editing a template, official definition, or homebrew revision cannot silently change an existing load.
-- Retain structured gameplay information linked to characters, campaigns, and sessions for future statistics and app usage analysis. Specific metrics and the speculative analysis engine remain to be defined.
-- The engine and shared application operations remain usable without the visual UI; the engine's contracts remain independent of storage vendors.
+- The campaign is the day-to-day hub and contains sessions; each session contains its table. Only one session
+  per campaign may be active. The Director starts/pauses/ends sessions and manages their selected players. A
+  paused session freezes the table; a closed session becomes historical. Lifecycle is independent of presence:
+  Director disconnection or zero connected clients never automatically pause or close a running session. See
+  the [table specification](table-spec.md).
+- Encounter start locks the party roster until normal ending or voiding. Voiding skips normal ending
+  awards/consequences and lets the Director keep current character/monster state or restore pre-encounter
+  state; see the [table contract](table-spec.md#voiding-an-encounter). Preserve the starting gameplay state
+  before encounter-start effects.
+- Combat, montage tests, negotiations, and respite are distinct structured table states with their own loops.
+  The user clarified that “encounter” is broader in the rules; existing encounter-run/journal/void contracts
+  here describe combat and must not automatically be extended to other types. Future montage tests have
+  Director start/end controls; dedicated montage/negotiation flows are excluded from v1; the user
+  provisionally chose one active structured state at a time, with nested activities a possible later
+  extension. Detailed transitions and persistence contracts remain open.
+- Respite is a dedicated table mode with its own gameplay loop, started and ended by the Director. Its
+  mechanics, possible downtime relationship, and detailed lifecycle need research/design; do not automatically
+  reuse combat-specific state or cleanup contracts.
+- Every action within an encounter must be undoable. Restoration changes actual affected state using recorded
+  values, without rerunning the engine or dice.
+- Preserve every session's game log for campaign review. All current campaign members can read all past
+  session logs by default, including sessions they did not attend. Separate Director-only history views will
+  be added if specific information requires them; no attendance-based history partition is required. After a
+  session ends, its detailed log can be compressed and relevant data delivered to persistent records and
+  statistics.
+- V1 includes character and shared party inventories at campaign level, equipped/unequipped mechanics, and
+  transfers between party and character inventories. Inventory management is classified as character data
+  rather than gameplay actions; authorized party/character transfers work between sessions. Inventory
+  management also works while paused unless the character is combat-locked. Personal inventory reads are
+  restricted to its owner and the active Director. Players may discard items from their own or shared party
+  inventory but cannot return them to the Director's stash. The Director can directly edit character
+  inventories subject to the existing combat character-edit lock; these edits do not grant progression
+  choices. V1 excludes direct character-to-character transfers and free-text custom items. Players cannot
+  manually create new items in their inventories; starting equipment is supplied by character creation and
+  later loot enters through approved Director-stash allocations, while existing party transfers remain
+  supported. Persist those data changes independently of active-session gameplay without modifying a closed
+  session's history. Transfers, discards, and edits require an inventory-change history the Director can
+  review, undo, and redo. Players can read their own character inventory history, and all current campaign
+  members can read party inventory history. Players cannot undo personal or party inventory changes; owners
+  retain personal inventory-history access after their character leaves the campaign, while dependent-change
+  reconciliation remains open; history reads must not reveal unrelated private character inventories or reopen
+  closed sessions. Provisionally, each campaign has one persistent Director-managed stash for claimable loot,
+  including rewards from successive encounters, with the whole stash hidden until the Director shares it. The
+  Director can add/remove stash contents at any time; this is separate from provisional claims and final
+  inventory deposits. Finalization must validate allocations against the current stash, including any Director
+  removals. The Director can reveal the stash at any time; visibility permits inspection and provisional item
+  claims both inside and outside wrap-up. An accepted stash claim reserves the item, making it unavailable for
+  a second claim; the Director can still reassign the provisional allocation, and players may withdraw their
+  own unapproved claims to release reservations. Director approval of the final allocation is required before
+  deposits occur in either context. Richer sharing mechanisms are deferred. Standalone saved stashes are
+  excluded from v1; saved encounters include rewards-stash preparation, with a rewards-stash step in normal
+  cleanup. During the encounter wrap-up screen, player claims are provisional allocations; the Director may
+  change them. Items are only deposited into party/character inventories after Director approval; finishing
+  wrap-up performs that approval during an encounter, and the same finalization is available independently
+  outside wrap-up. Proposed persistence keeps allocations separate from item locations and commits validated
+  deposits with wrap-up completion without duplication. Cleanup can finish while rewards remain unclaimed; the
+  wrap-up view uses persistent stash storage, so unclaimed contents remain in that same live stash afterward
+  instead of being discarded, moved to a replacement container, or automatically transferred. Saved reward
+  preparation remains separate from the common live stash. Loading the saved encounter adds its reward items
+  to that live stash immediately; encounter start/wrap-up must not add them again. Proposed load consistency
+  commits monster loading and reward addition together and preserves prior stash contents; detailed void/reset
+  treatment still needs refinement; no per-encounter persistent stash collection is required. See the
+  [inventory checkpoint](inventory-spec.md) for proposed item/location/transfer contracts and open
+  detachment/lifecycle questions.
+- Keep character progression history independent of encounter undo. Restoring a build retains present
+  inventory and follows the wizard's campaign review requirements.
+- The Director's foes roster retains live monster stat blocks/state until removed, supporting free play and
+  selection into encounters. Catalog additions and saved-encounter loads create independent instances; a
+  nonempty roster requires a replace/append choice. Each foe has a show/hide toggle. A separate toggle beside
+  Add sets initial visibility for newly added monsters without changing existing entries; new campaigns
+  default it to hidden, its value persists per campaign, and saved-encounter loads use the current value as
+  well. The foes roster does not lock during combat: the Director can add/remove participating monsters
+  without ending or voiding the encounter. The roster belongs to the campaign and persists across session
+  closure with the resulting keep/reset state; later sessions reuse its retained instances. The encounter
+  builder supports reusable preparation; live foes-roster additions/removals and saved-encounter loads are
+  allowed at any time, including between sessions, while paused, and during combat. History/void-reset
+  treatment of mid-encounter additions/removals remains open.
+- The v1 encounter builder calculates difficulty for a planning party made from hypothetical character stubs
+  with individually adjustable levels and/or party stubs imported from campaigns the user owns or actively
+  directs. Imported stubs can be removed individually, their levels edited, and their levels reset to the
+  source character's current actual level without changing source characters or live campaign rosters.
+  Proposed source references and authorized reads support that reset. The saved encounter persists the party
+  strength calculator's last configuration, including hypothetical/imported stubs, individual removals, and
+  adjusted levels. Reopening restores this configuration without automatically refreshing imported levels;
+  explicit reset reads the current actual level. Loading the encounter does not add planning stubs to the
+  session roster. Treat that guidance as derived from monster/party inputs and verified rules; required inputs
+  and formulas need research. A current-EV comparison in the Director's foes roster is proposed. Its confirmed
+  scope includes all undefeated roster monsters regardless of visibility or active-combat membership. Defeated
+  monsters stop contributing immediately while remaining on the roster until normal cleanup. This
+  current-state display does not rewrite historical encounter difficulty or define rewards. Exact party inputs
+  still need definition.
+- V1 saved encounters retain the monster selection, including quantities, the last party strength calculator
+  setup, and a rewards stash; no other authored supporting content is required. Saved templates are private to
+  their creator in v1, with sharing deferred; independent loaded roster instances retain their table
+  permissions. Retain the definition references and rule data needed to instantiate those selections.
+- Saved encounter templates and loaded encounters remain independent. Editing a template, official definition,
+  or homebrew revision cannot silently change an existing load.
+- Normal encounter cleanup removes defeated foes from the campaign roster while preserving history; during
+  combat they remain marked as defeated unless the Director removes them. Survivors remain on the roster.
+  Voiding skips that normal cleanup and follows keep/reset.
+- Future feature: a campaign Slain table records what the party killed, how each died, and who killed it.
+  Preserve supporting history after roster removal; attribution and undo/void treatment are later design work.
+- Character/campaign statistics dashboards are outside v1, but the data collection model must retain relevant
+  structured gameplay information linked to characters, campaigns, and sessions for later statistics and app
+  usage analysis. Specific metrics and the speculative analysis engine remain to be defined; omitting the
+  dashboard must not mean discarding underlying facts.
+- The engine and shared application operations remain usable without the visual UI; the engine's contracts
+  remain independent of storage vendors.
 
-The proposed implementation uses portable JSON content packages, structured Convex records during play, and compressed JSON archives after closure. JSON is the recommended format, not a previously established user requirement; XML was raised as an alternative. Exact schemas, compression codec, chunk sizes, and physical table names are not settled.
+The proposed implementation uses portable JSON content packages, structured Convex records during play, and
+compressed JSON archives after closure. JSON is the recommended format, not a previously established user
+requirement; XML was raised as an alternative. Exact schemas, compression codec, chunk sizes, and physical
+table names are not settled.
 
-Earlier documents described rollback to a point in any session. The latest discussion establishes encounter undo and session closure as the important boundaries, but **whether a closed session can be reopened for live undo is unanswered**. Preserve sufficient history rather than discarding it while that policy is open. Do not interpret compression as either granting permission to reactivate old state or making all archived encounters permanently review-only.
+Earlier documents described rollback to a point in any session. Confirmed v1 direction: **closed sessions are
+permanently read-only**. They cannot be reopened for gameplay or live undo/redo, and further play requires a
+new session. Retain detailed history for review and analysis; archival is a storage change, not a way to
+reactivate closed state.
 
-The [accounts and access specification](accounts-and-access-spec.md) adds friendship/request/blocking controls, campaign request/ban rules, one active Director, and session/until-revoked character grants. Friendship initially grants no additional content access. Its proposed session-expiry and privacy boundaries must be carried into closure, subscriptions, archives, and authorization. Gameplay undo must not restore friendships, friend requests, memberships, or access grants, or remove personal blocks. Concurrent sessions remain an open decision; the access spec proposes one open session per campaign initially.
+The [accounts and access specification](accounts-and-access-spec.md) adds friendship/request/blocking
+controls, campaign admission/removal derived from user blocks, one active Director, and session/until-revoked
+character grants. Friendship initially grants no additional content access. Its proposed session-expiry and
+privacy boundaries must be carried into closure, subscriptions, archives, and authorization. Gameplay undo
+must not restore friendships, friend requests, memberships, or access grants, or remove personal blocks. One
+active session per campaign is now confirmed. Pause remains distinct from closure and must not accidentally
+expire session-scoped roles or grants under the proposed lifecycle.
 
 ## 2. Ownership and lifetime boundaries
+
+V1 has one user-to-user Block control and no separate campaign-ban feature or independently managed ban.
+Blocking removes the target from every campaign owned by the blocker and prevents new membership
+requests/admission to those campaigns, including future campaigns. It also revokes character shares between
+the two users in both directions. Unblocking lifts the campaign restriction caused by that block. Unblocking
+does not restore removed memberships or revoked character shares; those require fresh admission approval or
+owner-issued sharing. If the blocker owns a campaign whose active Director is the blocked user, active
+Director control immediately returns to the campaign owner. In a campaign owned by someone else where both
+users remain members, blocking does not hide either user's campaign-chat messages: chat access follows
+campaign membership. Remaining active-combat removal handling and invitation behavior still need definition.
+
+V1 has no campaign archiving or campaign ownership transfer. The campaign owner can delete a campaign;
+deletion is the only campaign end-of-life operation in v1. Deletion automatically detaches attached characters
+under the existing detachment rules: retain current level, build, authored details, inventory, and personal
+history, while clearing campaign values including XP and Victories. It permanently removes campaign chat,
+session logs, the foes roster, party inventory, and the Director's stash. The owner does not have to close a
+running or paused session before deleting the campaign. Campaign deletion does not offer the combat keep/reset
+choice. Proposed default: preserve the character's current recorded state before applying the confirmed
+detachment resets, without restoring the encounter-start checkpoint or running encounter rewards. Saved
+encounters are user content, not campaign content, and survive campaign deletion. Deleting a user account also
+deletes every campaign that account owns, using the campaign deletion policy; other users retain their
+detached characters. Account deletion also deletes that user's characters and saved encounters. In other
+users' retained campaigns, their past actions and chat remain attributed to their username, not a generic
+deleted-user label. Account deletion is allowed even while their character is in another campaign's active
+combat; combat locks must not prevent deletion. Historical attribution does not preserve a usable account or
+live character. If a deleted account was the active Director of another user's retained campaign, that
+campaign's owner automatically becomes the active Director. This changes the play role, not campaign
+ownership. Handling affected combat participation still needs an operational contract. The deletion flow must
+terminate live campaign activity and release its character locks without requiring a separate prior
+session-close operation. This does not remove the existing closed-session history and storage-compression
+requirements for retained campaigns.
 
 | Concept | Responsibility and lifetime |
 | --- | --- |
@@ -37,27 +216,35 @@ The [accounts and access specification](accounts-and-access-spec.md) adds friend
 | Content definition | A rule, monster, ability, item, or progression definition with portable identity, revision, readable text, structured fields, and explicit unsupported/unresolved information. |
 | User creation | User-owned character, homebrew, or encounter template, with editable working data and retained revisions where needed. |
 | Campaign | Persistent membership, roles, characters' attachments, enabled content sources, and campaign context spanning sessions. |
-| Table | Campaign play space connecting participants and shared operations. It can host successive sessions; allowed concurrent tables/sessions remain open. |
-| Session | A period of shared play, its chronology, participants, start/end boundaries, and archival status. Closing it does not inherently reset character resources or end an encounter. |
+| Session | A distinct period of campaign play, containing its table, selected participants, chronology, running/paused state, and archival status. Only one active session per campaign. Closing voids any active encounter with an explicit keep/reset state choice. Pause preserves it without a duration limit. |
+| Table | The realtime play surface inside a session, with role-dependent controls, a roster/presence view, dice, and the v1 game log. Free-play and encounter modes share operations and state. |
 | Encounter template | Reusable authored preparation and versioned monster selections. It has no ongoing combat state. |
-| Encounter run | A particular loaded encounter with independent definition snapshots, participants/instances, current state, and an ordered undo journal. |
-| Encounter segment | Proposed relationship joining an encounter run to the portion played in one session, with event boundaries and archive references. |
+| Foes roster | Director-managed live monster instances, independent definition copies, current values, and per-foe visibility; supports free play and successive encounters until entries are removed. Belongs to the campaign and persists across session closure with the resulting keep/reset state; later sessions use the same retained instances. |
+| Encounter run | A particular combat in one session, referencing selected heroes and existing roster monsters, with recorded starting state, encounter-scoped values, and an ordered undo journal. Starting combat does not recreate roster monsters. |
 | Game event | Recorded intent/resolution/state transition attributed to a session and, when applicable, an encounter run. |
 | Archive | Immutable compressed detailed history for a sealed event range, with retained content/state dependencies and a database manifest. |
 | Summary/statistic | Small derived record for navigation or analysis; it is rebuildable from preserved facts and does not replace them. |
 
-Propose that a session may contain several encounter runs and non-encounter activity. An encounter run may span sessions: session A can end mid-fight and session B can resume the same run. A segment records that relationship without copying the entire encounter into a new independent run or losing chronology.
+A session may contain successive encounters and non-encounter activity. Each encounter run belongs to one
+session: closing that session voids any active encounter using the same keep-current/restore-starting-state
+choice as explicit voiding. It cannot resume in a later session. Pausing retains the session and encounter
+indefinitely. This supersedes the prior cross-session encounter-segment proposal; archive chunking can still
+use bounded event ranges without implying live continuation.
 
 ```mermaid
 flowchart TD
-    C[Campaign] --> T[Table]
-    T --> S[Sessions]
-    P[Saved encounter template] -->|Independent load| E[Encounter run]
+    C[Campaign] --> S[Sessions]
+    S --> T[Session table]
+    P[Saved encounter template] -->|Independent load: replace or append| F[Foes roster]
+    C -->|Persistent roster| F
+    D[Monster catalog] -->|Add independent instance| F
+    T -->|Director pane| F
+    F -->|Select existing instances| E[Encounter run]
     T --> E
-    S --> X[Encounter segments]
-    E --> X
-    S --> N[Non-encounter events and chat]
-    X --> J[Ordered encounter actions]
+    S --> N[Non-encounter events and session-associated chat]
+    C --> H[Chat available between sessions]
+    H -. Optional session association .-> N
+    E --> J[Ordered encounter actions]
     J --> L[Authoritative current state]
     J --> A[Compressed history and manifests]
     N --> A
@@ -65,178 +252,460 @@ flowchart TD
     J --> M[Rebuildable statistics]
 ```
 
-An encounter journal is a logical collection owned by the encounter. It need not be one physical file while play is active. Proposed storage uses individual event records with bounded payloads, then packages sealed ranges as files. This avoids repeatedly rewriting an ever-growing session or encounter blob.
+An encounter journal is a logical collection owned by the encounter. It need not be one physical file while
+play is active. Proposed storage uses individual event records with bounded payloads, then packages sealed
+ranges as files. This avoids repeatedly rewriting an ever-growing session or encounter blob.
+
+Proposed deletion/history contract: retain historical actor identifiers and username text with the surviving
+campaign records so their attribution does not depend on a live account/profile lookup. Existing historical
+state remains distinct from deleted live characters. Revoke live access on deletion; retaining attribution
+must not preserve authentication or character-control grants. Username-retention details for later name
+reuse/renaming remain unspecified.
 
 ## 3. Shared game content
 
-Keep upstream Compendium files pinned and unmodified. Build app-ready definitions from its Markdown and existing JSON, retaining complete readable text and source context alongside extracted data. Forge Steel's pinned progression/choice structure remains supporting input for the wizard, with scoped mappings and local transformations outside both dependencies.
+Keep upstream Compendium files pinned and unmodified. Build app-ready definitions from its Markdown and
+existing JSON, retaining complete readable text and source context alongside extracted data. Forge Steel's
+pinned progression/choice structure remains supporting input for the wizard, with scoped mappings and local
+transformations outside both dependencies.
 
-Produce portable content packs with release manifests, lightweight catalog summaries, full definitions, and required source/dependency records. Manifests identify source commits where applicable and format/importer/parser versions. A pack-qualified identity plus revision identifies a definition; names and filenames are display/location information. See the proposed common pack contract below.
+Produce portable content packs with release manifests, lightweight catalog summaries, full definitions, and
+required source/dependency records. Manifests identify source commits where applicable and
+format/importer/parser versions. A pack-qualified identity plus revision identifies a definition; names and
+filenames are display/location information. See the proposed common pack contract below.
 
-Propose an initial Convex mirror for indexed library reads and authoritative application lookups. Load summary fields for browsing and full definitions when opened or needed. Keep the package portable so public immutable content can later move to cacheable static delivery without changing the engine or saved-character contracts.
+Propose an initial Convex mirror for indexed library reads and authoritative application lookups. Load summary
+fields for browsing and full definitions when opened or needed. Keep the package portable so public immutable
+content can later move to cacheable static delivery without changing the engine or saved-character contracts.
 
-Updates create new pack releases. Publish a complete staged release before changing that pack's default-library reference. A library default does not change a campaign's selected release. Retain content versions needed by saved builds, templates, loaded encounters, and archives. A newer parser or source revision does not reinterpret recorded history automatically.
+Updates create new pack releases. Publish a complete staged release before changing that pack's
+default-library reference. A library default does not change a campaign's selected release. Retain content
+versions needed by saved builds, templates, loaded encounters, and archives. A newer parser or source revision
+does not reinterpret recorded history automatically.
 
-Homebrew belongs to packs through the same definition/parser boundary as official content, retaining authored source and immutable revisions. Unsupported mechanics remain readable and manually resolvable; successful storage or parsing alone does not establish complete automation.
+Homebrew belongs to packs through the same definition/parser boundary as official content, retaining authored
+source and immutable revisions. Unsupported mechanics remain readable and manually resolvable; successful
+storage or parsing alone does not establish complete automation.
 
 ### 3.1 Common pack contract — proposed
 
-A pack can contain several supported kinds of reusable content: character options, monsters, items, abilities, and supporting rules. It is not inherently one content type or one sourcebook. Characters, campaign membership, live resources, and game logs retain their existing records; grouping reusable definitions does not turn a pack into a campaign backup.
+A pack can contain several supported kinds of reusable content: character options, monsters, items, abilities,
+and supporting rules. It is not inherently one content type or one sourcebook. Characters, campaign
+membership, live resources, and game logs retain their existing records; grouping reusable definitions does
+not turn a pack into a campaign backup.
 
-Proposed minimum manifest: stable pack ID, display name, author/publisher attribution, release version, format version, engine authoring/testing metadata, source and license/attribution records, and dependencies on specific pack releases. Definitions have stable IDs within their pack and retained revisions. Local database IDs and account IDs are not portable content identities. Two packs can both contain a monster named “Goblin Archer” without collision; editing a copy into one's own homebrew creates a new identity with a reference to its origin. No implicit replacement by matching name or pack load order.
+Proposed minimum manifest: stable pack ID, display name, author/publisher attribution, release version, format
+version, engine authoring/testing metadata, source and license/attribution records, and dependencies on
+specific pack releases. Definitions have stable IDs within their pack and retained revisions. Local database
+IDs and account IDs are not portable content identities. Two packs can both contain a monster named “Goblin
+Archer” without collision; editing a copy into one's own homebrew creates a new identity with a reference to
+its origin. No implicit replacement by matching name or pack load order.
 
-Use editable drafts and immutable releases for every authoring source. A personal pack can remain private; creating a usable release does not mean publishing it publicly. A default “My Homebrew” pack could keep one-off authoring simple while allowing named packs for sharing. The exact default and authoring UX are proposals.
+Use editable drafts and immutable releases for every authoring source. A personal pack can remain private;
+creating a usable release does not mean publishing it publicly. A default “My Homebrew” pack could keep
+one-off authoring simple while allowing named packs for sharing. The exact default and authoring UX are
+proposals.
 
-Propose versioned JSON import/export with a manifest, definitions, readable authored text, and any distributable supporting assets, packaged as an archive when needed. Retain exact dependency references and report missing dependencies; bundle them only where permitted. Import validates identity, format, references, and supported declarative structures before making a release selectable. Reimporting the same release is idempotent; conflicting data under the same identity/version must not overwrite it. Pack data cannot install executable code or confer ownership, permissions, or verified publisher status. Parser support and format compatibility are separate from content availability.
+Propose versioned JSON import/export with a manifest, definitions, readable authored text, and any
+distributable supporting assets, packaged as an archive when needed. Retain exact dependency references and
+report missing dependencies; bundle them only where permitted. Import validates identity, format, references,
+and supported declarative structures before making a release selectable. Reimporting the same release is
+idempotent; conflicting data under the same identity/version must not overwrite it. Pack data cannot install
+executable code or confer ownership, permissions, or verified publisher status. Parser support and format
+compatibility are separate from content availability.
 
 ### 3.2 Campaign source selection — proposed behavior
 
-Campaign creation includes a content-source selector. Propose preselecting the supported core packs and letting the creator add available official, community, or private homebrew packs. A campaign stores exact selected releases and a source-selection revision. Newly available packs and updates are offered for deliberate adoption; they do not automatically join existing campaigns. The physical record layout remains open.
+Campaign creation includes a content-source selector. For v1, only supported core-rulebook sources are
+eligible; propose preselecting those core packs. Adding official supplemental, community, or private homebrew
+sources belongs to later releases. The general pack architecture does not enable excluded content in v1. A
+campaign stores exact selected releases and a source-selection revision. Newly available packs and updates are
+offered for deliberate adoption; they do not automatically join existing campaigns. The physical record layout
+remains open.
 
-Campaign character choices, advancement, item selection, and encounter preparation use that selection through shared operations. Authoritative admission, build activation, and encounter loading also check it; filtering a UI alone is insufficient. An unattached character or reusable encounter can retain other sources, with incompatibilities shown when entering a campaign. Director review does not implicitly enable a disallowed pack. Pending submissions are rechecked if the campaign selection changes.
+Campaign character choices, advancement, item selection, and encounter preparation use that selection through
+shared operations. Authoritative admission, build activation, and encounter loading also check it; filtering a
+UI alone is insufficient. An unattached character or reusable encounter can retain other sources, with
+incompatibilities shown when entering a campaign. Director review does not implicitly enable a disallowed
+pack. Pending submissions are rechecked if the campaign selection changes.
 
-Resolve required dependencies explicitly. Propose one release per pack in the campaign's active selection, with exact compatible dependencies; reject unresolved, cyclic, or conflicting requirements before activation. Explain required sources in the selector, and prevent disabling a dependency while a selected pack requires it. This does not prevent retaining older releases for existing builds and history.
+Resolve required dependencies explicitly. Propose one release per pack in the campaign's active selection,
+with exact compatible dependencies; reject unresolved, cyclic, or conflicting requirements before activation.
+Explain required sources in the selector, and prevent disabling a dependency while a selected pack requires
+it. This does not prevent retaining older releases for existing builds and history.
 
-**Confirmed disable direction:** disabling a pack stops future selections while existing characters keep using and advancing within content they already have. Preserve accepted builds, owned item instances, loaded encounters, and historical records.
+**Confirmed disable direction:** disabling a pack stops future selections while existing characters keep using
+and advancing within content they already have. Preserve accepted builds, owned item instances, loaded
+encounters, and historical records.
 
-Proposed enforcement: retain the exact content releases and dependencies needed for those builds, including their further progression options. This exception does not enable the whole pack for unrelated new choices, new characters, or new encounter loads. Show affected uses before changing the selection. Do not erase choices, recalculate them against another release, or rewrite snapshots. Deliberately adopting an update must likewise preserve loaded encounters and follow existing build-review rules where builds change.
+Proposed enforcement: retain the exact content releases and dependencies needed for those builds, including
+their further progression options. This exception does not enable the whole pack for unrelated new choices,
+new characters, or new encounter loads. Show affected uses before changing the selection. Do not erase
+choices, recalculate them against another release, or rewrite snapshots. Deliberately adopting an update must
+likewise preserve loaded encounters and follow existing build-review rules where builds change.
 
 ### 3.3 Access and remaining decisions
 
-Campaign selection determines allowed content; it does not grant authorship or publication rights. A public campaign listing must not expose private packs. Pack ownership, campaign reading, copying/editing, and export rights remain separate under the [access specification](accounts-and-access-spec.md). Propose sharing the selected private release with the campaign while leaving other releases and drafts private; withdrawal and retained-use rights still need a product decision. Attribution metadata does not establish permission to redistribute content or artwork.
+Campaign selection determines allowed content; it does not grant authorship or publication rights. A public
+campaign listing must not expose private packs. Pack ownership, campaign reading, copying/editing, and export
+rights remain separate under the [access specification](accounts-and-access-spec.md). Propose sharing the
+selected private release with the campaign while leaving other releases and drafts private; withdrawal and
+retained-use rights still need a product decision. Attribution metadata does not establish permission to
+redistribute content or artwork.
 
-Open decisions: who can change sources after creation (campaign owner, active Director, or both); the precise boundary of retained progression options; which core packs are required; private-pack sharing and withdrawal behavior; and whether complete pack import/export and authoring tools ship in v1 or follow the foundational pack model. A public marketplace, automatic updates, pack override ordering, and third-party executable plugins are not established requirements.
+Open decisions: who can change sources after creation (campaign owner, active Director, or both); the precise
+boundary of retained progression options; which core packs are required; private-pack sharing and withdrawal
+behavior; and whether complete pack import/export and authoring tools ship in v1 or follow the foundational
+pack model. A public marketplace, automatic updates, pack override ordering, and third-party executable
+plugins are not established requirements.
 
-Acceptance examples for implementation: round-trip a homebrew pack without losing identities/text/references; keep same-named definitions from different packs distinct; reject missing dependencies and conflicting reimports; show different available choices in campaigns with different enabled packs; reject stale/disallowed selections through headless operations; preserve existing state/history after source changes; and enforce private-pack access independently of campaign discovery.
+Future pack-authoring acceptance examples (outside v1): round-trip a homebrew pack without losing
+identities/text/references; keep same-named definitions from different packs distinct; reject missing
+dependencies and conflicting reimports; show different available choices in campaigns with different enabled
+packs; reject stale/disallowed selections through headless operations; preserve existing state/history after
+source changes; and enforce private-pack access independently of campaign discovery.
 
 ### 3.4 Engine compatibility metadata
 
-Authored content can declare the versioned engine it was built for and tested with. The [engine release contract](engine-architecture.md#engine-releases-and-content-compatibility) proposes exact `builtWith` and `testedWith` versions plus an optional intended `compatibleWith` range on each pack release. Preserve these declarations through export/import; unknown metadata remains unknown. An author's compatibility claim does not establish tested or fully automated support.
+Authored content can declare the versioned engine it was built for and tested with. The
+[engine release contract](engine-architecture.md#engine-releases-and-content-compatibility) proposes exact
+`builtWith` and `testedWith` versions plus an optional intended `compatibleWith` range on each pack release.
+Preserve these declarations through export/import; unknown metadata remains unknown. An author's compatibility
+claim does not establish tested or fully automated support.
 
-Runtime compatibility is checked separately from campaign source permission. Retained content still needs compatible engine support; disabling its pack does not solve or change engine compatibility. Recording engine versions does not require hosting every historical runtime. Runtime selection, upgrade policy, and warning versus blocking on a mismatch remain open.
+Runtime compatibility is checked separately from campaign source permission. Retained content still needs
+compatible engine support; disabling its pack does not solve or change engine compatibility. Recording engine
+versions does not require hosting every historical runtime. Runtime selection, upgrade policy, and warning
+versus blocking on a mismatch remain open.
+
+Confirmed roster-management timing: whenever no combat encounter is active, the Director can change session
+players and selected characters, including while paused. The Director can change the campaign foes roster at
+any time, regardless of encounter or pause state, including additions/removals and saved-encounter loads. This
+supersedes earlier open-session/between-session restrictions on foes-roster management; the encounter builder
+remains the reusable preparation tool. Monster gameplay actions still follow the running-session rules, and
+closed session history remains read-only.
+
+V1 users can duplicate their own saved encounters as independent templates, including monster selection,
+party-strength calculator setup, and prepared rewards. Duplication does not load live foes or grant loot. The
+public campaign directory is deferred beyond v1; campaigns are unlisted by default and v1 discovery uses
+campaign share codes/URLs. Opting into a public listing belongs to the later directory feature.
 
 ## 4. User records and current state
+
+Hiding the Director's stash cancels all outstanding provisional claims and releases their reservations without
+transferring items. The Director cannot approve claims while the stash is hidden. Revealing it again requires
+fresh claims; previously approved deposits remain completed. V1 excludes item stacks: each inventory/stash
+item is represented individually, with no stack splitting, merging, or partial-quantity claims. Multiple
+copies of an item may exist as separate instances; monster quantities in saved encounters are unaffected.
+Proposed consistency: hiding the stash and canceling provisional allocations commit together; approval
+rechecks visibility and claim status so a stale request cannot finalize canceled claims.
+
+Confirmed character management outside combat: owners may edit names, appearance, biography, and notes without
+Director review, and may detach their own characters without Director approval. Notes retain owner-only
+visibility. Pending full edits survive departure as a private draft; detachment does not activate that draft.
+Duplication copies the currently active build, excluding pending edits, while retaining the established
+independent inventory/history and cleared campaign-value rules. Owners may withdraw a submitted review before
+the Director decides. Both the character owner and campaign owner may detach a character. The campaign owner
+can kick a player or remove individual attached characters; removing a character alone does not remove its
+owner's campaign membership. Director status alone does not grant this campaign-management power. Removed
+characters remain owned by their creators and follow the established detachment policy. Existing combat locks
+and separate campaign/account deletion rules remain in force. Proposed storage keeps draft ownership separate
+from campaign review visibility; leaving invalidates the review without deleting or activating the draft.
+Withdrawal and approval must check the same submission state so a withdrawn revision cannot be activated by a
+stale request.
+
+Confirmed delivery scope: the app is web-only, optimized for mobile, with no plans for native apps. V1 has no
+character/campaign statistics dashboards, reference bookmarks, private direct messages, or admin-dashboard
+functionality. Campaign chat is the only v1 messaging surface. Statistics are deferred at the presentation
+layer: retain relevant structured gameplay data so later analysis does not require reconstructing missing
+facts. Forge Steel export is not required for v1, but the character data model must preserve the information
+and adapter boundaries needed to add it without rewriting the system; import remains required.
+
+V1 user discovery for friendship uses a personal share code and URL, analogous to campaign share codes/URLs;
+username search is not included. Friend requests, campaign join requests, and character review requests
+surface in the relevant UI areas. There is no notification system in v1. All notifications, including email
+and push event alerts, are deferred beyond v1. Password reset is the only email flow to design for v1. Both
+personal and campaign share codes/URLs can be regenerated by their owner at any time, invalidating the old
+code/link without invalidating already-pending requests. Proposed: link/code lookup resolves a request target
+without treating the code as authentication or a private-content grant. Relevant request/review records supply
+the UI directly; do not introduce a separate notification feed or delivery pipeline under this scope.
+
+Confirmed: campaign-chat reads follow membership and do not filter out messages based on user-to-user blocks
+when both users remain members. Block-driven membership removal from blocker-owned campaigns still removes the
+former member's campaign access. Unblocking does not restore memberships or grants. Proposed operation
+consistency records Director reassignment with removal when an owner blocks their active Director; stale
+delegated commands must fail after the change.
+
+An active Director's own character admission and full edits are logged and require no approval step. Other
+characters retain Director review. This exemption does not bypass build validation, campaign source limits, or
+combat character-edit locks. Record these changes in character progression/admission history, independently of
+whether a play session is running. Character-control sharing is limited to current members of the character's
+campaign and includes progression-history viewing. Multiple eligible recipients can hold grants
+simultaneously; this grants no additional build-edit authority. Character notes remain owner-private, and the
+separate personal-inventory visibility restriction still applies. Viewing progression history does not grant
+build editing or restoration authority.
 
 Proposed logical records:
 
 | Record group | Key responsibilities |
 | --- | --- |
 | Accounts/social relationships | Stable user identities, friend requests, mutual friendships, and directed personal blocks under the access spec's proposed contracts. Friendship alone grants no content access. |
-| Campaigns/memberships | Owner, active Director, participants, admission requests, and owner-wide bans. Ownership and Director authority remain distinct. |
+| Campaigns/memberships | Owner, active Director, participants, and admission requests. Admission/removal derives from user-to-user blocks; no separate campaign-ban feature in v1. Ownership and Director authority remain distinct. |
 | Access grants | Director appointments and character viewing/combat grants, with current-session or until-revoked scope; expiry and relationship invalidation follow the access spec's proposals. |
 | Character identities/attachments | Stable character ID and owner; at most one campaign attachment/reservation; attachment identity and campaign values. |
 | Character drafts/build revisions/reviews | Owner choices, automatic grants, recorded derived baseline, source context, effective build, exact submitted/base revisions, and approval status. |
-| Character details/inventory | Independently authored details and item instances/quantities/state. Separate from progression snapshots; proposed owner-private notes also require a separate access boundary. |
-| Character play state | Current resources, conditions, adjustments, and an authoritative active-play binding where needed. |
-| Encounter templates/revisions | Versioned selections, preparation choices, authored supporting data, and access scope. |
-| Loaded content/instances | Immutable per-load definition copies; distinct monster instances; squad relationships and pooled resources; shared encounter resources. |
+| Character details/inventory | Independently authored details and individual item instances/state; item stacks are outside v1. Separate from progression snapshots; confirmed owner-private character notes require a separate access boundary, including exclusion from Director reads. |
+| Character play state | One authoritative live state shared by main-sheet and table views. Encounter operations update it immediately; an active encounter binding locks out character edits. |
+| Encounter starting-state record | Immutable pre-encounter gameplay values and source character/build identity for history and void/reset, not an independent live character copy. |
+| Encounter templates/revisions | Monster selections/counts, last party strength calculator configuration (stubs and adjusted levels), rewards-stash preparation, and access scope; version-qualified references are proposed. No other authored supporting content is required for v1. |
+| Foes roster/content/instances | Immutable per-load definition copies; distinct live monster instances with visibility; squad relationships and pooled resources. Survive encounter ending and session closure until removed from the campaign roster. Encounter membership references these instances. |
+| Encounter resources | Shared encounter-scoped resources and turn state, distinct from roster lifetime. |
 | Session/encounter control | Lifecycle status, selected recorded state, last committed sequence, pending operations, and expected revisions. |
 | Events/payloads/checkpoints | Detailed inputs and outcomes, recorded state changes, initial/checkpoint state, and ordering. |
 | Archive manifests/summaries | Storage references, sealed ranges, completion status, participants, and derived totals. |
 
-Keep one authoritative owner for each changing value. A sheet and table can present the same hero's Stamina, but must not maintain separately writable copies. A loaded monster has independent play state. Squad Stamina and shared Malice have their own appropriate scopes rather than duplicated pools.
+The campaign stores the Director-controlled monster health-display mode: Numerical, Bar, or Winded. New
+campaigns default to Bar. Player/observer table projections first omit hidden foes from roster reads and then
+omit loaded monster stat blocks, exposing exact current health, a remaining proportion, or winded status
+respectively. Director reads retain full state. Hidden roster monsters remain usable for gameplay, including
+attacks against players; roster visibility must not become an action-eligibility gate or an in-game
+concealment condition. Provisionally, hidden foes' names remain visible in game-log entries without revealing
+their roster entries or full stat blocks. Setting changes are presentation configuration, permitted at any
+time, and must not mutate health or trigger rules. Historical projection behavior remains open; see the
+[table specification](table-spec.md#monster-visibility-and-health-display).
 
-Current state is persisted as actions are accepted. Session closure is not a deferred save of the character sheet: a crash before closure must not lose accepted damage, resource spending, or inventory changes. Closing a session packages history and completes derived work; it must not apply those effects a second time.
+Party audience projections expose Stamina and Recoveries, not full peer sheets absent separate permission.
+Roll records distinguish audience from submitter: ordinary rolls are public to the table audience; planned
+tower results are Director-only even when another user submits the roll. Store the full result for authorized
+use, but keep it out of unauthorized command responses, subscriptions, and log/archive projections. Later
+historical disclosure remains open. Proposed content sharing requires its own disclosure record/contract and
+must not silently become a character-control grant.
 
-Build approval changes the effective build against current inventory/live state. It never replaces them with an old draft snapshot. Record historical resolved build baselines; progression restoration does not rerun grants. Preserve original Forge Steel imports and unmapped compatibility data separately from routine sheet records, with files for large opaque payloads.
+The user replaced the independent encounter-character snapshot model with a sheet lock: while a character is
+in an encounter, sheet editing is blocked and accepted encounter changes immediately update the main sheet.
+Maintain one authoritative live character state for both views. Capture pre-encounter values for restoration
+only; do not create a second editable sheet or defer a merge until encounter end. Loaded monsters live in the
+foes roster with state independent of saved encounter templates. Free-play and encounter operations update
+those same instances; encounter-start checkpoints record existing values for void-reset. Removed/replaced
+roster entries must remain resolvable by retained historical records under the proposed archive contract;
+squad Stamina and shared Malice retain their proper shared scopes.
 
-The complete inventory/live-resource reconciliation and campaign transfer policies remain governed by the wizard's open decisions.
+Character and encounter state are persisted together with accepted action history: a crash before closure must
+not lose accepted damage, resource spending, or inventory changes. These changes already affect the main
+sheet; ending/closure must not apply them a second time. Void-and-keep retains them, and void-and-reset
+restores recorded starting gameplay values. Archival remains separate from accepting/saving gameplay state.
+
+Build activation and character editing are blocked while the character is in an encounter, including during
+pause. Once unlocked, build approval changes the effective build against current inventory/live state and
+never replaces them with an old draft snapshot. Record historical resolved build baselines; progression
+restoration does not rerun grants. Preserve original Forge Steel imports and unmapped compatibility data
+separately from routine sheet records, with files for large opaque payloads.
+
+The [inventory specification](inventory-spec.md) now records campaign-level individual/party inventories and
+the proposed Director's stash. Reconcile those scopes with the wizard's prior inventory-retention requirements
+on detachment/duplication; campaign deletion preserves personal inventory/history and removes party inventory
+and the Director's stash. Campaign deletion offers no combat keep/reset choice; retaining current recorded
+state before detachment resets is proposed. Other live-resource reconciliation remains open. Campaign
+ownership transfer is excluded from v1.
 
 ## 5. Encounter actions and undo
 
-Each logical action needs a stable command ID, actor, relevant entities, source/build versions, the exact engine release and relevant parser versions, expected state revision, and session/encounter association. Preserve the requested intent, modifier invocations, committed effects, and displayed explanation distinctly.
+Each logical action needs a stable command ID, actor, relevant entities, source/build versions, the exact
+engine release and relevant parser versions, expected state revision, and session/encounter association.
+Preserve the requested intent, modifier invocations, committed effects, and displayed explanation distinctly.
 
 Proposed action sequence:
 
-1. Authorize the caller, check the expected state and command ID, and durably record the relevant inputs before invoking a modifier.
-2. Resolve against those inputs. Record choices, dice outputs, engine outputs, and manual adjudications; retain partial/failed/pending dispositions.
-3. Recheck authoritative state and permissions, then atomically commit the actual state changes and their journal record. Reject a stale result instead of applying it to newer state.
-4. Update the live clients from committed state. Derive statistics from accepted records independently of the response shown to the initiating client.
+1. Authorize the caller, check the expected state and command ID, and durably record the relevant inputs
+   before invoking a modifier.
+2. Resolve against those inputs. Record choices, dice outputs, engine outputs, and manual adjudications;
+   retain partial/failed/pending dispositions.
+3. Recheck authoritative state and permissions, then atomically commit the actual state changes and their
+   journal record. Reject a stale result instead of applying it to newer state.
+4. Update the live clients from committed state. Derive statistics from accepted records independently of the
+   response shown to the initiating client.
 
-A retry must not apply an action twice or silently reroll accepted dice. Reusing a command ID with different inputs is an error. External computations can require retries, but their accepted gameplay effects commit once. Resumed manual/automated steps reference the same action and explicitly identify completed and outstanding effects.
+A retry must not apply an action twice or silently reroll accepted dice. Reusing a command ID with different
+inputs is an error. External computations can require retries, but their accepted gameplay effects commit
+once. Resumed manual/automated steps reference the same action and explicitly identify completed and
+outstanding effects.
 
-For undo, retain the prior and resulting values of every affected field or small record, including field absence, removed conditions, created/deleted entities, resources, pending effects, and turn/encounter progress. Preserve an initial state and periodic checkpoints. Record replacement values, not merely instructions to subtract an amount later.
+For undo, retain the prior and resulting values of every affected field or small record, including field
+absence, removed conditions, created/deleted entities, resources, pending effects, and turn/encounter
+progress. Preserve an initial state and periodic checkpoints. Record replacement values, not merely
+instructions to subtract an amount later.
 
-Backward/forward navigation applies those recorded values and restores actual authoritative state, including character sheets. It does not call modifiers. Read-only inspection of old history must not change the shared live state. Undo must respect dependent changes; an encounter boundary does not permit selectively reverting an earlier action while retaining incompatible later effects on the same character.
+Backward/forward navigation applies those recorded values and restores actual authoritative state, including
+character sheets. It does not call modifiers. Read-only inspection of old history must not change the shared
+live state. Undo must respect dependent changes; an encounter boundary does not permit selectively reverting
+an earlier action while retaining incompatible later effects on the same character.
 
-Retain later records when navigating backward. The grouping of reactions/manual steps into one undoable action, and continuation after undo, remain product decisions. Character progression history remains a separate operation with its narrower restoration scope.
+Confirmed permission direction: players can undo their own actions back to the beginning of their turn; the
+Director can undo and redo those actions. **Enable user undo** is a confirmed campaign setting, enabled by
+default; disabling it preserves Director undo/redo. Management and change-timing details remain open. Player
+redo, Director rewind limits, free-play scope, and post-turn handling are not yet specified. Retain enough
+turn/action/user attribution to enforce the eventual boundary without making the undo tree an implementation
+assumption. See the [table checkpoint](table-spec.md#undo-permissions-and-proposed-campaign-control).
 
-Non-encounter gameplay and chat still belong to the session's chronology. The former also needs durable state-change records; the exact undo scope outside encounters and chat's behavior during navigation are open. No fake combat encounter is required just to preserve these records.
+Retain later records when navigating backward. The grouping of reactions/manual steps into one undoable
+action, and continuation after undo, remain product decisions. Character progression history remains a
+separate operation with its narrower restoration scope.
+
+Non-encounter gameplay belongs to the running session's chronology and needs durable state-change records.
+Sheet viewing and chat remain available while paused and outside sessions; gameplay actions are blocked in
+those contexts. Character-data inventory management is a separate category; party/character transfers are
+confirmed available between sessions. Chat therefore needs storage and access independent of an active
+session. Confirmed for v1: campaign chat and the game log are separate entities. UI composition is deferred; a
+later view may combine chat with a curated game-log feed while preserving those separate records and
+lifetimes. Campaign-level party chat is available to members, including observers who are not selected session
+players. Such members can observe the permitted table view but cannot submit session gameplay commands.
+Propose messages with optional session association for the live feed and historical ranges; no session is
+required to send a message, and later messages must not append to a sealed session archive. Channel layout and
+historical presentation remain open. The exact undo scope outside encounters and chat's behavior during
+navigation are also open. No fake combat encounter or session is required to preserve chat.
+
+Voiding is now a separate encounter termination with an explicit keep/restore choice, not ordinary
+history-cursor navigation. The proposed contract retains the journal and void disposition, atomically closes
+pending work and releases the roster lock, and restores recorded starting gameplay values only when requested.
+It never runs normal ending rewards/cleanup effects, restores revoked access, or rewrites the saved encounter
+template. General undo of a void and statistics treatment remain open; see the
+[table specification](table-spec.md#voiding-an-encounter).
 
 ## 6. Session closure and compression
 
-Propose separate lifecycle fields for the session (`open`, `closing`, `closed`) and its archive work (`pending`, `writing`, `ready`, `failed`). These are implementation labels, not required UI language. A closed session can have a pending archive while its original database records remain readable.
+Propose separate lifecycle fields for the session (`open`, `closing`, `closed`), running/paused status within
+an open session, and its archive work (`pending`, `writing`, `ready`, `failed`). These are implementation
+labels, not required UI language. Pause preserves the session and its underlying activity; sheet viewing/chat
+remain available, gameplay changes are blocked, and in-flight commit handling remains open in the table spec.
+A closed session can have a pending archive while its original database records remain readable.
 
 Closing should:
 
-1. Verify the caller's authority and seal a specific session event boundary so no later command can commit into the range being archived. Resolve or explicitly carry forward pending operations; do not silently discard them.
-2. Record the boundary's consistent ending state/checkpoint and participants. If an encounter continues, preserve its current state and pending-resolution context for resumption.
-3. Package the sealed detailed history as compressed JSON, in bounded chunks where needed. Include encounter segments, non-encounter events, and chat under their respective visibility rules.
-4. Verify readable archive contents, event ordering/ranges, and retained state/content references. Publish the manifest only after the package is complete.
-5. Build/update session and character/campaign summaries and statistics from the sealed records. Retried processing must not duplicate totals or reapply game effects.
-6. Remove redundant active event payloads only after durable archival is verified and outstanding work no longer depends on those copies. Readers support both storage locations during the transition.
+1. Verify the Director's authority. If an encounter is active, obtain the explicit keep/reset choice and
+   commit its void outcome with closure; canceling the dialog leaves both unchanged. Skip normal
+   encounter-ending rewards/consequences. Record pending work as canceled/superseded without applying it. Seal
+   the final boundary so stale commands cannot commit after closure; do not carry an encounter into another
+   session.
+2. Record the consistent ending state/checkpoint after the selected void result, participants, and encounter
+   disposition. Keep/restore is applied once, before archival, not by an archive worker.
+3. Package the sealed gameplay history as compressed JSON, in bounded chunks where needed. Include encounter
+   runs and non-encounter game events. Campaign chat remains separately stored; an archive may reference an
+   authorized time range without owning or sealing the campaign conversation.
+4. Verify readable archive contents, event ordering/ranges, and retained state/content references. Publish the
+   manifest only after the package is complete.
+5. Build/update session and character/campaign summaries and statistics from the sealed records. Retried
+   processing must not duplicate totals or reapply game effects.
+6. Remove redundant active event payloads only after durable archival is verified and outstanding work no
+   longer depends on those copies. Readers support both storage locations during the transition.
 
-Archival failure must leave the original data available and the work retryable. This follows session closure; the earlier analysis's optional 90-day archival threshold is not the lifecycle proposed at this checkpoint. Cleanup timing can still be tuned for recovery or reopening needs.
+Archival failure must leave the original data available and the work retryable. This follows session closure;
+the earlier analysis's optional 90-day archival threshold is not the lifecycle proposed at this checkpoint.
+Cleanup timing can still be tuned for storage recovery and reliable history delivery.
 
 Proposed archive contents:
 
 | Part | Required information |
 | --- | --- |
-| Manifest | Archive/schema version, campaign/table/session IDs, encounter segment IDs, sequence ranges, chunk locations, and completion metadata. |
+| Manifest | Archive/schema version, campaign/table/session IDs, encounter run IDs, sequence ranges, chunk locations, and completion metadata. |
 | Source context | Exact content/build, engine, and relevant parser versions and retained definitions required to interpret the archived record; embedded copies or durable retained references. |
-| Starting/checkpoint state | Recorded state at the segment's start, including relevant participants, monsters, resources, and pending work. |
+| Starting/checkpoint state | Recorded state at the archived range's start, including relevant participants, monsters, resources, and pending work. |
 | Ordered journal | Commands, modifier inputs/outputs, dice/choices, manual resolutions, dispositions, and before/after state changes. |
-| Ending state | State at the sealed boundary, including incomplete encounter/resolution context. |
+| Ending state | State at the sealed boundary after normal completion or the selected void outcome, including dispositions of canceled pending work. |
 | Presentation data | Readable log messages and separately authorized chat/hidden information. |
 
-Lossless compression preserves the detailed record. The simplified post-session database holds current values, session/encounter summaries, statistics, and archive manifests. Summaries alone are insufficient for historical inspection, future metric definitions, or possible restoration.
+Lossless compression preserves the detailed record. The simplified post-session database holds current values,
+session/encounter summaries, statistics, and archive manifests. Summaries alone are insufficient for
+historical inspection, future metric definitions, or possible restoration.
 
-A continuing encounter can acquire another segment in the next session. Its ending/starting states must align without rerunning the archived actions or awarding resources twice. Whether undo can cross the previous session boundary depends on the unresolved reopening policy.
+No encounter remains live after session closure. Later play creates a new encounter; kept character/monster
+values do not turn it into a continuation of the voided run. Resuming a paused session uses its still-current
+encounter state without invoking archival or an old action. Closed history cannot be restored into live play
+in v1.
 
-Private archives must retain campaign/history access controls; possession of an archive identifier is not sufficient authorization. Historic access does not grant authority to change a detached character or a character now attached elsewhere. Backup/recovery remains necessary separately from gameplay undo and archival.
+Private archives must retain campaign/history access controls; possession of an archive identifier is not
+sufficient authorization. Historic access does not grant authority to change a detached character or a
+character now attached elsewhere. Backup/recovery remains necessary separately from gameplay undo and
+archival.
 
 ## 7. Realtime and analytics boundaries
 
-During shared play, subscribe to relevant current state and a bounded recent feed. Read older events and detailed payloads on demand. After closure, history can load from an archive without maintaining subscriptions to its full contents. This scopes the shared-play workload; it does not prohibit normal responsive character editing or campaign updates between sessions.
+Confirmed: statistics dashboards are deferred beyond v1; preserving the relevant data is a v1 design
+requirement. Proposed capture uses the existing game records: actor/target and source identities, event
+order/time, actions and rolls, before/after state, outcomes, and undo/redo/void disposition. Keep detailed
+records alongside any summaries so future metric definitions can be computed from retained facts. This does
+not authorize extra personal tracking or override private-note boundaries or confirmed account/campaign
+deletion. The summary/statistics machinery below is proposed delivery sequencing; dashboard deferral does not
+require shipping an analytics service now.
 
-Partition event access and sequence allocation by table/encounter scope, retaining a total session chronology for interleaved actions. Index the actual reads needed for sessions, encounters, characters, and membership. Avoid entire-campaign reads or one global state/statistics document updated for every action. Precise indexes and payload bounds are implementation work.
+During shared play, subscribe to relevant current state and a bounded recent feed. Read older events and
+detailed payloads on demand. After closure, history can load from an archive without maintaining subscriptions
+to its full contents. This scopes the shared-play workload; it does not prohibit normal responsive character
+editing or campaign updates between sessions.
 
-Record structured facts linked to event, action, session, encounter, character/attachment, actor/target, and content revision. Desired dashboards may count entering winded, established monster defeats, and accepted ability uses. Define credit and counting rules before claiming those metrics are correct. A multi-target ability, a network retry, and resumed effect batches must not automatically become multiple ability uses.
+Partition event access and sequence allocation by table/encounter scope, retaining a total session chronology
+for interleaved actions. Index the actual reads needed for sessions, encounters, characters, and membership.
+Avoid entire-campaign reads or one global state/statistics document updated for every action. Precise indexes
+and payload bounds are implementation work.
 
-Keep actual app activity distinct from accepted game history: attempts and rewound actions may matter for app usage but should not necessarily count toward character accomplishments. Summaries need a metric version and processed position/history generation. Corrections or later reactivation invalidate affected summaries for adjustment/rebuild. Preserve structured evidence so future analysis is not limited to today's counters.
+Record structured facts linked to event, action, session, encounter, character/attachment, actor/target, and
+content revision. Desired dashboards may count entering winded, established monster defeats, and accepted
+ability uses. Define credit and counting rules before claiming those metrics are correct. A multi-target
+ability, a network retry, and resumed effect batches must not automatically become multiple ability uses.
 
-Propose Convex summaries initially, with asynchronous updates/finalization at session close. A separate analytical store is optional future work, not a prerequisite for this design. Do not route routine play through an analytical service. Character/campaign current values, personal statistics, and app-wide aggregates have different authority and access scopes.
+Keep actual app activity distinct from accepted game history: attempts and rewound actions may matter for app
+usage but should not necessarily count toward character accomplishments. Summaries need a metric version and
+processed position/history generation. Authorized changes to open-session history invalidate affected
+summaries for adjustment/rebuild; closed-session history remains read-only in v1. Preserve structured evidence
+so future analysis is not limited to today's counters.
+
+Propose Convex summaries initially, with asynchronous updates/finalization at session close. A separate
+analytical store is optional future work, not a prerequisite for this design. Do not route routine play
+through an analytical service. Character/campaign current values, personal statistics, and app-wide aggregates
+have different authority and access scopes.
 
 ## 8. Acceptance scenarios for later implementation
 
-These are required/proposed outcomes to verify when the dependent feature is implemented, not tests already passing.
+These are required/proposed outcomes to verify when the dependent feature is implemented, not tests already
+passing.
 
 | Scenario | Expected result |
 | --- | --- |
 | Shared encounter action | All authorized live clients read the same committed state; retrying the command does not duplicate its effect. |
 | Undo/redo | Recorded before/after state restores all affected values and entity changes without engine/dice calls. |
 | Manual completion | Resolved and outstanding effects remain distinguishable; resumption does not repeat completed effects. |
-| Disconnect before session closure | Previously accepted character and encounter changes remain persisted. |
-| Independent encounter loads | Two loads of a template have independent state; template/catalog updates change neither load. |
-| Session closure | A fixed complete range becomes readable compressed history; current values remain intact and summaries are not double-counted. |
+| Disconnect before session closure | Previously accepted character and encounter changes remain persisted. The session remains running regardless of Director or all-client disconnection; reconnection does not restart or change its lifecycle. |
+| Void encounter | Keep preserves current character/monster values; restore recovers pre-start gameplay state without modifiers. Both skip ending awards/effects, retain the void record, and prevent late action commits. |
+| Independent roster loads | Two loads of a template have independent instances/state; template/catalog updates change neither. Append preserves existing values; replacement follows the explicit choice. Selecting a roster monster for combat retains its current state. |
+| Session closure | An active encounter is voided with an explicit keep/reset choice; archive the resulting state and sealed history. Skip normal ending awards and do not double-count/reapply changes. |
 | Archive failure/retry | Original detailed records remain available; retry publishes one coherent archive manifest before redundant data is removed. |
-| Encounter spans sessions | Next session resumes retained state with a new segment; prior actions remain inspectable without replay. |
-| Non-encounter activity | Chat and noncombat changes remain present in session history without a fabricated encounter. |
-| Character full edit during play | Pending build remains isolated; approval uses the exact reviewed revision and preserves intervening inventory/resources. |
+| Indefinitely paused encounter | Pause preserves the same encounter for later resumption, without a time limit. Closing instead voids it; a later session cannot resume that run. |
+| Non-encounter activity | Noncombat gameplay is recorded without a fabricated combat encounter. Campaign chat retains its own records and lifetime, with optional session association. |
+| Character edit lock | Active encounter binding blocks edits/level-ups/build activation, including stale editor saves. Encounter actions update the main sheet immediately; pause retains the lock and normal ending/voiding releases it. |
 | Historical permissions | History inspection cannot overwrite a character in another campaign or expose unauthorized hidden data. |
-| Statistics | Multi-target actions/retries count according to defined metric policy; rewound results are treated consistently. |
+| Future statistics data | Retained facts distinguish actions, targets, retries, undo/redo, and voids so later metrics can be derived. Dashboard delivery and final metric definitions are outside v1. |
 
 ## 9. Open decisions at this checkpoint
 
-- Can a closed session be reopened for live encounter undo, or is archived history review-only? What authority and reconciliation would reopening require?
-- Can undo cross sessions within a continuing encounter, or cross encounter boundaries within a session? How are dependent character changes handled?
-- Who can undo, and how do reactions, interrupted actions, and manual completion define one undo step?
+- Can live undo cross encounter boundaries within an open session, and how are dependent character changes
+  handled? Closed-session boundaries cannot be crossed by live undo in v1.
+- Player undo to the beginning of their turn and Director undo/redo are confirmed. Enable user undo is
+  confirmed and defaults on. Define setting-management/change timing, post-turn/free-play scope, Director
+  limits, and how reactions/interrupted actions/manual completion define one undo step.
 - What happens to retained later history when new play begins from an earlier point?
-- How does chat behave during undo, and who can inspect historical hidden information or records after leaving a campaign?
-- How should pending resolutions be completed or suspended when closing a session?
-- How many sessions/encounters may be active at once, and how is a character protected from competing active-table writes?
-- How are current resources reconciled when a build or campaign attachment changes? The wizard's existing unresolved policies still apply.
+- How does chat behave during undo, and which specific historical information needs a Director-only view, and
+  what remains readable after leaving a campaign? Current members can read all past session logs by default
+  regardless of attendance.
+- How are in-flight results and pending resolutions sealed consistently with the encounter void and chosen
+  state at session closure? No pending encounter continues into the next session.
+- One active session per campaign is confirmed. How do participant/character selection changes, multiple
+  controllers, and pause interact with authoritative play-state writes? The table provisionally permits only
+  one active structured state; nested activities are a possible later extension. Active encounters at closure
+  follow the confirmed void/state-choice flow.
+- How are current resources reconciled when a build or campaign attachment changes? The wizard's existing
+  unresolved policies still apply.
 - What are the precise metric definitions, attribution rules, and scope of the speculative analysis engine?
-- What JSON archive schema, compression codec, chunk/checkpoint intervals, and recovery/cleanup policy best fit measured workloads?
+- What JSON archive schema, compression codec, chunk/checkpoint intervals, and recovery/cleanup policy best
+  fit measured workloads?
 
-This checkpoint settles the conceptual lifecycle to carry forward. It does not settle the unanswered reopening question or commit the project to a particular database schema, engine runtime, or archive implementation.
+This checkpoint settles the conceptual lifecycle to carry forward. It confirms permanently read-only closed
+sessions for v1 without committing to a particular database schema, engine runtime, or archive implementation.

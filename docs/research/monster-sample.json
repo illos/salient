@@ -1,0 +1,228 @@
+{
+  "pin": "fb83a789da8f0327a389c277a0c790b1648d5810",
+  "seed": "draw-steel-parser-feasibility-2026-09-10",
+  "eligible_count": 409,
+  "method": "Sorted **/statblock/*.md paths under en/unified/md/monster; official mcdm.monsters.v1 SCC, integer level, organization in Minion/Horde/Platoon/Elite/Leader/Solo. Group = first path component beneath monster/. Python random.Random(seed). For bands low=1..3, mid=4..6, high=7..11, visit organizations in above order; select one per nonempty cell, excluding prior selections and preferring previously unselected groups where available. Then select extra unused entries from goblin, human, undead groups in that order, same fresh-group preference. Candidate order always original sorted path order. Empty cells do not consume RNG. Exploratory stratification with diversity preference, not a representative probability sample.",
+  "sample": [
+    {
+      "name": "Angulotl Cleaver",
+      "path": "vendor/steel-compendium/en/unified/md/monster/angulotl/statblock/angulotl-cleaver.md",
+      "scc": "mcdm.monsters.v1/monster.angulotl.statblock/angulotl-cleaver",
+      "level": "1",
+      "organization": "Minion",
+      "role": "Ambusher",
+      "group": "angulotl",
+      "band": "low",
+      "stratum": "low/Minion"
+    },
+    {
+      "name": "War Dog Eviscerite",
+      "path": "vendor/steel-compendium/en/unified/md/monster/war-dog/1st-echelon/statblock/war-dog-eviscerite.md",
+      "scc": "mcdm.monsters.v1/monster.war-dog.1st-echelon.statblock/war-dog-eviscerite",
+      "level": "1",
+      "organization": "Horde",
+      "role": "Harrier",
+      "group": "war-dog",
+      "band": "low",
+      "stratum": "low/Horde"
+    },
+    {
+      "name": "High Elf Palinode",
+      "path": "vendor/steel-compendium/en/unified/md/monster/elf-high/statblock/high-elf-palinode.md",
+      "scc": "mcdm.monsters.v1/monster.elf-high.statblock/high-elf-palinode",
+      "level": "1",
+      "organization": "Platoon",
+      "role": "Support",
+      "group": "elf-high",
+      "band": "low",
+      "stratum": "low/Platoon"
+    },
+    {
+      "name": "Predator B",
+      "path": "vendor/steel-compendium/en/unified/md/monster/animal/statblock/predator-b.md",
+      "scc": "mcdm.monsters.v1/monster.animal.statblock/predator-b",
+      "level": "3",
+      "organization": "Elite",
+      "role": "Brute",
+      "group": "animal",
+      "band": "low",
+      "stratum": "low/Elite"
+    },
+    {
+      "name": "Wode Elf Warleader",
+      "path": "vendor/steel-compendium/en/unified/md/monster/elf-wode/statblock/wode-elf-warleader.md",
+      "scc": "mcdm.monsters.v1/monster.elf-wode.statblock/wode-elf-warleader",
+      "level": "3",
+      "organization": "Leader",
+      "role": null,
+      "group": "elf-wode",
+      "band": "low",
+      "stratum": "low/Leader"
+    },
+    {
+      "name": "Thorn Dragon",
+      "path": "vendor/steel-compendium/en/unified/md/monster/dragon/statblock/thorn-dragon.md",
+      "scc": "mcdm.monsters.v1/monster.dragon.statblock/thorn-dragon",
+      "level": "2",
+      "organization": "Solo",
+      "role": null,
+      "group": "dragon",
+      "band": "low",
+      "stratum": "low/Solo"
+    },
+    {
+      "name": "Shadow Elf Sniper",
+      "path": "vendor/steel-compendium/en/unified/md/monster/elf-shadow/statblock/shadow-elf-sniper.md",
+      "scc": "mcdm.monsters.v1/monster.elf-shadow.statblock/shadow-elf-sniper",
+      "level": "4",
+      "organization": "Minion",
+      "role": "Artillery",
+      "group": "elf-shadow",
+      "band": "mid",
+      "stratum": "mid/Minion"
+    },
+    {
+      "name": "Flesh Mournling",
+      "path": "vendor/steel-compendium/en/unified/md/monster/undead/2nd-echelon/statblock/flesh-mournling.md",
+      "scc": "mcdm.monsters.v1/monster.undead.2nd-echelon.statblock/flesh-mournling",
+      "level": "4",
+      "organization": "Horde",
+      "role": "Defender",
+      "group": "undead",
+      "band": "mid",
+      "stratum": "mid/Horde"
+    },
+    {
+      "name": "Hobgoblin Hell Trooper",
+      "path": "vendor/steel-compendium/en/unified/md/monster/hobgoblin/statblock/hobgoblin-hell-trooper.md",
+      "scc": "mcdm.monsters.v1/monster.hobgoblin.statblock/hobgoblin-hell-trooper",
+      "level": "4",
+      "organization": "Platoon",
+      "role": "Brute",
+      "group": "hobgoblin",
+      "band": "mid",
+      "stratum": "mid/Platoon"
+    },
+    {
+      "name": "Troll Butcher",
+      "path": "vendor/steel-compendium/en/unified/md/monster/troll/statblock/troll-butcher.md",
+      "scc": "mcdm.monsters.v1/monster.troll.statblock/troll-butcher",
+      "level": "5",
+      "organization": "Elite",
+      "role": "Hexer",
+      "group": "troll",
+      "band": "mid",
+      "stratum": "mid/Elite"
+    },
+    {
+      "name": "Voiceless Talker Evolutionist",
+      "path": "vendor/steel-compendium/en/unified/md/monster/voiceless-talker/statblock/voiceless-talker-evolutionist.md",
+      "scc": "mcdm.monsters.v1/monster.voiceless-talker.statblock/voiceless-talker-evolutionist",
+      "level": "6",
+      "organization": "Leader",
+      "role": null,
+      "group": "voiceless-talker",
+      "band": "mid",
+      "stratum": "mid/Leader"
+    },
+    {
+      "name": "Olothec",
+      "path": "vendor/steel-compendium/en/unified/md/monster/olothec/statblock/olothec.md",
+      "scc": "mcdm.monsters.v1/monster.olothec.statblock/olothec",
+      "level": "6",
+      "organization": "Solo",
+      "role": null,
+      "group": "olothec",
+      "band": "mid",
+      "stratum": "mid/Solo"
+    },
+    {
+      "name": "Hill Giant Mosstooth",
+      "path": "vendor/steel-compendium/en/unified/md/monster/giant/statblock/hill-giant-mosstooth.md",
+      "scc": "mcdm.monsters.v1/monster.giant.statblock/hill-giant-mosstooth",
+      "level": "7",
+      "organization": "Minion",
+      "role": "Brute",
+      "group": "giant",
+      "band": "high",
+      "stratum": "high/Minion"
+    },
+    {
+      "name": "Blight Phage",
+      "path": "vendor/steel-compendium/en/unified/md/monster/demon/3rd-echelon/statblock/blight-phage.md",
+      "scc": "mcdm.monsters.v1/monster.demon.3rd-echelon.statblock/blight-phage",
+      "level": "7",
+      "organization": "Horde",
+      "role": "Controller",
+      "group": "demon",
+      "band": "high",
+      "stratum": "high/Horde"
+    },
+    {
+      "name": "Rival Talent",
+      "path": "vendor/steel-compendium/en/unified/md/monster/rival/3rd-echelon/statblock/rival-talent.md",
+      "scc": "mcdm.monsters.v1/monster.rival.3rd-echelon.statblock/rival-talent",
+      "level": "8",
+      "organization": "Elite",
+      "role": "Hexer",
+      "group": "rival",
+      "band": "high",
+      "stratum": "high/Elite"
+    },
+    {
+      "name": "Soulraker Hivequeen",
+      "path": "vendor/steel-compendium/en/unified/md/monster/demon/3rd-echelon/statblock/soulraker-hivequeen.md",
+      "scc": "mcdm.monsters.v1/monster.demon.3rd-echelon.statblock/soulraker-hivequeen",
+      "level": "9",
+      "organization": "Leader",
+      "role": null,
+      "group": "demon",
+      "band": "high",
+      "stratum": "high/Leader"
+    },
+    {
+      "name": "Kingfissure Worm",
+      "path": "vendor/steel-compendium/en/unified/md/monster/kingfissure-worm/statblock/kingfissure-worm.md",
+      "scc": "mcdm.monsters.v1/monster.kingfissure-worm.statblock/kingfissure-worm",
+      "level": "7",
+      "organization": "Solo",
+      "role": null,
+      "group": "kingfissure-worm",
+      "band": "high",
+      "stratum": "high/Solo"
+    },
+    {
+      "name": "Goblin Spinecleaver",
+      "path": "vendor/steel-compendium/en/unified/md/monster/goblin/statblock/goblin-spinecleaver.md",
+      "scc": "mcdm.monsters.v1/monster.goblin.statblock/goblin-spinecleaver",
+      "level": "1",
+      "organization": "Minion",
+      "role": "Brute",
+      "group": "goblin",
+      "band": "low",
+      "stratum": "group/goblin"
+    },
+    {
+      "name": "Human Guard",
+      "path": "vendor/steel-compendium/en/unified/md/monster/human/statblock/human-guard.md",
+      "scc": "mcdm.monsters.v1/monster.human.statblock/human-guard",
+      "level": "1",
+      "organization": "Minion",
+      "role": "Brute",
+      "group": "human",
+      "band": "low",
+      "stratum": "group/human"
+    },
+    {
+      "name": "Wraith",
+      "path": "vendor/steel-compendium/en/unified/md/monster/undead/2nd-echelon/statblock/wraith.md",
+      "scc": "mcdm.monsters.v1/monster.undead.2nd-echelon.statblock/wraith",
+      "level": "4",
+      "organization": "Horde",
+      "role": "Hexer",
+      "group": "undead",
+      "band": "mid",
+      "stratum": "group/undead"
+    }
+  ]
+}

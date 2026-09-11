@@ -1,0 +1,411 @@
+{
+  "dependency_revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+  "selection_method": "Deliberate coverage selection: six core Heroes classes, one combat ability at actual grant levels 1, 3, and 6 per class; maximize differing mechanics. Not random, not a prevalence estimate, not an implemented parser test.",
+  "samples": [
+    {
+      "name": "Brutal Slam",
+      "class": "fury",
+      "grant_level": 1,
+      "base_heroic_resource_cost": null,
+      "other_or_optional_cost": null,
+      "source_path": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-1/brutal-slam.md",
+      "scc": "mcdm.heroes.v1/feature.ability.fury.level-1/brutal-slam",
+      "grant_feature_path": "vendor/steel-compendium/en/unified/md/feature/fury/level-1/fury-abilities.md",
+      "grant_feature_scc": "mcdm.heroes.v1/feature.fury.level-1/fury-abilities",
+      "clean_book_evidence": {
+        "git_path": "en/books/heroes/clean/Draw Steel Heroes.md",
+        "ability_heading_line": 9054,
+        "enclosing_headings": [
+          "Classes",
+          "Fury",
+          "1st-Level Features",
+          "Fury Abilities",
+          "Signature Ability"
+        ]
+      },
+      "coverage_reason": "Signature; damage + push"
+    },
+    {
+      "name": "Face the Storm!",
+      "class": "fury",
+      "grant_level": 3,
+      "base_heroic_resource_cost": "7 Ferocity",
+      "other_or_optional_cost": null,
+      "source_path": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-3/face-the-storm.md",
+      "scc": "mcdm.heroes.v1/feature.ability.fury.level-3/face-the-storm",
+      "grant_feature_path": "vendor/steel-compendium/en/unified/md/feature/fury/level-3/7-ferocity-ability.md",
+      "grant_feature_scc": "mcdm.heroes.v1/feature.fury.level-3/7-ferocity-ability",
+      "clean_book_evidence": {
+        "git_path": "en/books/heroes/clean/Draw Steel Heroes.md",
+        "ability_heading_line": 9432,
+        "enclosing_headings": [
+          "Classes",
+          "Fury",
+          "3rd-Level Features",
+          "7-Ferocity Ability"
+        ]
+      },
+      "coverage_reason": "Encounter buff; later taunts/damage"
+    },
+    {
+      "name": "Force of Storms",
+      "class": "fury",
+      "grant_level": 6,
+      "base_heroic_resource_cost": "9 Ferocity",
+      "other_or_optional_cost": null,
+      "source_path": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-6/force-of-storms.md",
+      "scc": "mcdm.heroes.v1/feature.ability.fury.level-6/force-of-storms",
+      "grant_feature_path": "vendor/steel-compendium/en/unified/md/feature/fury/level-6/6th-level-aspect-ability.md",
+      "grant_feature_scc": "mcdm.heroes.v1/feature.fury.level-6/6th-level-aspect-ability",
+      "clean_book_evidence": {
+        "git_path": "en/books/heroes/clean/Draw Steel Heroes.md",
+        "ability_heading_line": 9636,
+        "enclosing_headings": [
+          "Classes",
+          "Fury",
+          "6th-Level Features",
+          "6th-Level Aspect Ability",
+          "6th-Level Berserker Abilities"
+        ]
+      },
+      "coverage_reason": "Berserker; push then select nearby creatures"
+    },
+    {
+      "name": "My Life for Yours",
+      "class": "censor",
+      "grant_level": 1,
+      "base_heroic_resource_cost": null,
+      "other_or_optional_cost": "1 Wrath; base effect spends 1 Recovery",
+      "source_path": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-1/my-life-for-yours.md",
+      "scc": "mcdm.heroes.v1/feature.ability.censor.level-1/my-life-for-yours",
+      "grant_feature_path": "vendor/steel-compendium/en/unified/md/feature/censor/level-1/my-life-for-yours.md",
+      "grant_feature_scc": "mcdm.heroes.v1/feature.censor.level-1/my-life-for-yours",
+      "clean_book_evidence": {
+        "git_path": "en/books/heroes/clean/Draw Steel Heroes.md",
+        "ability_heading_line": 4616,
+        "enclosing_headings": [
+          "Classes",
+          "Censor",
+          "1st-Level Features",
+          "My Life for Yours"
+        ]
+      },
+      "coverage_reason": "Trigger; spend own Recovery to heal target; optional cleanse"
+    },
+    {
+      "name": "Edict of Stillness",
+      "class": "censor",
+      "grant_level": 3,
+      "base_heroic_resource_cost": "7 Wrath",
+      "other_or_optional_cost": null,
+      "source_path": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-3/edict-of-stillness.md",
+      "scc": "mcdm.heroes.v1/feature.ability.censor.level-3/edict-of-stillness",
+      "grant_feature_path": "vendor/steel-compendium/en/unified/md/feature/censor/level-3/7-wrath-ability.md",
+      "grant_feature_scc": "mcdm.heroes.v1/feature.censor.level-3/7-wrath-ability",
+      "clean_book_evidence": {
+        "git_path": "en/books/heroes/clean/Draw Steel Heroes.md",
+        "ability_heading_line": 5123,
+        "enclosing_headings": [
+          "Classes",
+          "Censor",
+          "3rd-Level Features",
+          "7-Wrath Ability"
+        ]
+      },
+      "coverage_reason": "Aura exit trigger; judged/willing movement bonus"
+    },
+    {
+      "name": "Intercede",
+      "class": "censor",
+      "grant_level": 6,
+      "base_heroic_resource_cost": "9 Wrath",
+      "other_or_optional_cost": null,
+      "source_path": "vendor/steel-compendium/en/unified/md/feature/ability/censor/level-6/intercede.md",
+      "scc": "mcdm.heroes.v1/feature.ability.censor.level-6/intercede",
+      "grant_feature_path": "vendor/steel-compendium/en/unified/md/feature/censor/level-6/6th-level-order-ability.md",
+      "grant_feature_scc": "mcdm.heroes.v1/feature.censor.level-6/6th-level-order-ability",
+      "clean_book_evidence": {
+        "git_path": "en/books/heroes/clean/Draw Steel Heroes.md",
+        "ability_heading_line": 5423,
+        "enclosing_headings": [
+          "Classes",
+          "Censor",
+          "6th-Level Features",
+          "6th-Level Order Ability",
+          "6th-Level Paragon Abilities"
+        ]
+      },
+      "coverage_reason": "Paragon; free trigger redirects incoming strike"
+    },
+    {
+      "name": "Hurl Element",
+      "class": "elementalist",
+      "grant_level": 1,
+      "base_heroic_resource_cost": null,
+      "other_or_optional_cost": null,
+      "source_path": "vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-1/hurl-element.md",
+      "scc": "mcdm.heroes.v1/feature.ability.elementalist.level-1/hurl-element",
+      "grant_feature_path": "vendor/steel-compendium/en/unified/md/feature/elementalist/level-1/hurl-element.md",
+      "grant_feature_scc": "mcdm.heroes.v1/feature.elementalist.level-1/hurl-element",
+      "clean_book_evidence": {
+        "git_path": "en/books/heroes/clean/Draw Steel Heroes.md",
+        "ability_heading_line": 7537,
+        "enclosing_headings": [
+          "Classes",
+          "Elementalist",
+          "1st-Level Features",
+          "Hurl Element"
+        ]
+      },
+      "coverage_reason": "Granted ability; choose damage type; also ranged free strike"
+    },
+    {
+      "name": "Wall of Fire",
+      "class": "elementalist",
+      "grant_level": 3,
+      "base_heroic_resource_cost": "7 Essence",
+      "other_or_optional_cost": null,
+      "source_path": "vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-3/wall-of-fire.md",
+      "scc": "mcdm.heroes.v1/feature.ability.elementalist.level-3/wall-of-fire",
+      "grant_feature_path": "vendor/steel-compendium/en/unified/md/feature/elementalist/level-3/7-essence-ability.md",
+      "grant_feature_scc": "mcdm.heroes.v1/feature.elementalist.level-3/7-essence-ability",
+      "clean_book_evidence": {
+        "git_path": "en/books/heroes/clean/Draw Steel Heroes.md",
+        "ability_heading_line": 8284,
+        "enclosing_headings": [
+          "Classes",
+          "Elementalist",
+          "3rd-Level Features",
+          "7-Essence Ability"
+        ]
+      },
+      "coverage_reason": "Persistent wall; entry/turn damage"
+    },
+    {
+      "name": "Magma Titan",
+      "class": "elementalist",
+      "grant_level": 6,
+      "base_heroic_resource_cost": "9 Essence",
+      "other_or_optional_cost": null,
+      "source_path": "vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-6/magma-titan.md",
+      "scc": "mcdm.heroes.v1/feature.ability.elementalist.level-6/magma-titan",
+      "grant_feature_path": "vendor/steel-compendium/en/unified/md/feature/elementalist/level-6/new-9-essence-ability.md",
+      "grant_feature_scc": "mcdm.heroes.v1/feature.elementalist.level-6/new-9-essence-ability",
+      "clean_book_evidence": {
+        "git_path": "en/books/heroes/clean/Draw Steel Heroes.md",
+        "ability_heading_line": 8491,
+        "enclosing_headings": [
+          "Classes",
+          "Elementalist",
+          "6th-Level Features",
+          "New 9-Essence Ability"
+        ]
+      },
+      "coverage_reason": "Persistent transformation; multiple stat/rule changes"
+    },
+    {
+      "name": "Parry",
+      "class": "tactician",
+      "grant_level": 1,
+      "base_heroic_resource_cost": null,
+      "other_or_optional_cost": "1 Focus",
+      "source_path": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-1/parry.md",
+      "scc": "mcdm.heroes.v1/feature.ability.tactician.level-1/parry",
+      "grant_feature_path": "vendor/steel-compendium/en/unified/md/feature/tactician/level-1/doctrine-triggered-action.md",
+      "grant_feature_scc": "mcdm.heroes.v1/feature.tactician.level-1/doctrine-triggered-action",
+      "clean_book_evidence": {
+        "git_path": "en/books/heroes/clean/Draw Steel Heroes.md",
+        "ability_heading_line": 12774,
+        "enclosing_headings": [
+          "Classes",
+          "Tactician",
+          "1st-Level Features",
+          "Doctrine Triggered Action",
+          "Doctrine Triggered Actions Table"
+        ]
+      },
+      "coverage_reason": "Vanguard; triggered shift and damage/potency reduction"
+    },
+    {
+      "name": "Rout",
+      "class": "tactician",
+      "grant_level": 3,
+      "base_heroic_resource_cost": "7 Focus",
+      "other_or_optional_cost": null,
+      "source_path": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-3/rout.md",
+      "scc": "mcdm.heroes.v1/feature.ability.tactician.level-3/rout",
+      "grant_feature_path": "vendor/steel-compendium/en/unified/md/feature/tactician/level-3/7-focus-ability.md",
+      "grant_feature_scc": "mcdm.heroes.v1/feature.tactician.level-3/7-focus-ability",
+      "clean_book_evidence": {
+        "git_path": "en/books/heroes/clean/Draw Steel Heroes.md",
+        "ability_heading_line": 13140,
+        "enclosing_headings": [
+          "Classes",
+          "Tactician",
+          "3rd-Level Features",
+          "7-Focus Ability"
+        ]
+      },
+      "coverage_reason": "Mark-based subsequent fear trigger"
+    },
+    {
+      "name": "Battle Plan",
+      "class": "tactician",
+      "grant_level": 6,
+      "base_heroic_resource_cost": "9 Focus",
+      "other_or_optional_cost": null,
+      "source_path": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-6/battle-plan.md",
+      "scc": "mcdm.heroes.v1/feature.ability.tactician.level-6/battle-plan",
+      "grant_feature_path": "vendor/steel-compendium/en/unified/md/feature/tactician/level-6/6th-level-doctrine-ability.md",
+      "grant_feature_scc": "mcdm.heroes.v1/feature.tactician.level-6/6th-level-doctrine-ability",
+      "clean_book_evidence": {
+        "git_path": "en/books/heroes/clean/Draw Steel Heroes.md",
+        "ability_heading_line": 13326,
+        "enclosing_headings": [
+          "Classes",
+          "Tactician",
+          "6th-Level Features",
+          "6th-Level Doctrine Ability",
+          "6th-Level Mastermind Abilities"
+        ]
+      },
+      "coverage_reason": "Mastermind; marks, information reveal, paid later benefits"
+    },
+    {
+      "name": "Entropic Bolt",
+      "class": "talent",
+      "grant_level": 1,
+      "base_heroic_resource_cost": null,
+      "other_or_optional_cost": null,
+      "source_path": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-1/entropic-bolt.md",
+      "scc": "mcdm.heroes.v1/feature.ability.talent.level-1/entropic-bolt",
+      "grant_feature_path": "vendor/steel-compendium/en/unified/md/feature/talent/level-1/talent-abilities.md",
+      "grant_feature_scc": "mcdm.heroes.v1/feature.talent.level-1/talent-abilities",
+      "clean_book_evidence": {
+        "git_path": "en/books/heroes/clean/Draw Steel Heroes.md",
+        "ability_heading_line": 13939,
+        "enclosing_headings": [
+          "Classes",
+          "Talent",
+          "1st-Level Features",
+          "Talent Abilities",
+          "Signature Abilities"
+        ]
+      },
+      "coverage_reason": "Signature; potency, target counter, strained resource gain"
+    },
+    {
+      "name": "Fling Through Time",
+      "class": "talent",
+      "grant_level": 3,
+      "base_heroic_resource_cost": "7 Clarity",
+      "other_or_optional_cost": null,
+      "source_path": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-3/fling-through-time.md",
+      "scc": "mcdm.heroes.v1/feature.ability.talent.level-3/fling-through-time",
+      "grant_feature_path": "vendor/steel-compendium/en/unified/md/feature/talent/level-3/7-clarity-ability.md",
+      "grant_feature_scc": "mcdm.heroes.v1/feature.talent.level-3/7-clarity-ability",
+      "clean_book_evidence": {
+        "git_path": "en/books/heroes/clean/Draw Steel Heroes.md",
+        "ability_heading_line": 14357,
+        "enclosing_headings": [
+          "Classes",
+          "Talent",
+          "3rd-Level Features",
+          "7-Clarity Ability"
+        ]
+      },
+      "coverage_reason": "Remove/return target; strained dice damage and aging"
+    },
+    {
+      "name": "Stasis Field",
+      "class": "talent",
+      "grant_level": 6,
+      "base_heroic_resource_cost": "9 Clarity",
+      "other_or_optional_cost": null,
+      "source_path": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-6/stasis-field.md",
+      "scc": "mcdm.heroes.v1/feature.ability.talent.level-6/stasis-field",
+      "grant_feature_path": "vendor/steel-compendium/en/unified/md/feature/talent/level-6/6th-level-tradition-ability.md",
+      "grant_feature_scc": "mcdm.heroes.v1/feature.talent.level-6/6th-level-tradition-ability",
+      "clean_book_evidence": {
+        "git_path": "en/books/heroes/clean/Draw Steel Heroes.md",
+        "ability_heading_line": 14635,
+        "enclosing_headings": [
+          "Classes",
+          "Talent",
+          "6th-Level Features",
+          "6th-Level Tradition Ability",
+          "6th-Level Chronopathy Abilities"
+        ]
+      },
+      "coverage_reason": "Chronopathy; area/roll target distinction; death exceptions"
+    },
+    {
+      "name": "Power Chord",
+      "class": "troubadour",
+      "grant_level": 1,
+      "base_heroic_resource_cost": null,
+      "other_or_optional_cost": null,
+      "source_path": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/power-chord.md",
+      "scc": "mcdm.heroes.v1/feature.ability.troubadour.level-1/power-chord",
+      "grant_feature_path": "vendor/steel-compendium/en/unified/md/feature/troubadour/level-1/1st-level-class-act-features.md",
+      "grant_feature_scc": "mcdm.heroes.v1/feature.troubadour.level-1/1st-level-class-act-features",
+      "clean_book_evidence": {
+        "git_path": "en/books/heroes/clean/Draw Steel Heroes.md",
+        "ability_heading_line": 15257,
+        "enclosing_headings": [
+          "Classes",
+          "Troubadour",
+          "1st-Level Features",
+          "1st-Level Class Act Features",
+          "Power Chord"
+        ]
+      },
+      "coverage_reason": "Virtuoso; area push without damage"
+    },
+    {
+      "name": "Extensive Rewrites",
+      "class": "troubadour",
+      "grant_level": 3,
+      "base_heroic_resource_cost": "7 Drama",
+      "other_or_optional_cost": null,
+      "source_path": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-3/extensive-rewrites.md",
+      "scc": "mcdm.heroes.v1/feature.ability.troubadour.level-3/extensive-rewrites",
+      "grant_feature_path": "vendor/steel-compendium/en/unified/md/feature/troubadour/level-3/7-drama-ability.md",
+      "grant_feature_scc": "mcdm.heroes.v1/feature.troubadour.level-3/7-drama-ability",
+      "clean_book_evidence": {
+        "git_path": "en/books/heroes/clean/Draw Steel Heroes.md",
+        "ability_heading_line": 15747,
+        "enclosing_headings": [
+          "Classes",
+          "Troubadour",
+          "3rd-Level Features",
+          "7-Drama Ability"
+        ]
+      },
+      "coverage_reason": "Slide or position swap; potency modifies stability"
+    },
+    {
+      "name": "Blood on the Stage",
+      "class": "troubadour",
+      "grant_level": 6,
+      "base_heroic_resource_cost": "9 Drama",
+      "other_or_optional_cost": null,
+      "source_path": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-6/blood-on-the-stage.md",
+      "scc": "mcdm.heroes.v1/feature.ability.troubadour.level-6/blood-on-the-stage",
+      "grant_feature_path": "vendor/steel-compendium/en/unified/md/feature/troubadour/level-6/6th-level-class-act-ability.md",
+      "grant_feature_scc": "mcdm.heroes.v1/feature.troubadour.level-6/6th-level-class-act-ability",
+      "clean_book_evidence": {
+        "git_path": "en/books/heroes/clean/Draw Steel Heroes.md",
+        "ability_heading_line": 16031,
+        "enclosing_headings": [
+          "Classes",
+          "Troubadour",
+          "6th-Level Features",
+          "6th-Level Class Act Ability",
+          "6th-Level Duelist Abilities"
+        ]
+      },
+      "coverage_reason": "Duelist; damage + condition with alternate durations"
+    }
+  ]
+}
