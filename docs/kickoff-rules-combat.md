@@ -1,5 +1,14 @@
 # Kickoff prompt: rules process and combat
 
+## Revised starting order — 2026-09-11
+
+The user has moved FreePlay and combat encounter specification ahead of the tooling pilot and implementation
+slice. First establish their baseline table behavior together, using bounded pinned-source research and one
+focused product question at a time. Update the owning table spec as decisions settle. The tooling and
+implementation assignments below remain later work; their original starting order is superseded.
+See [current rules status](workstream-rules-status.md). Research can proceed with the available corpus and
+fresh workers; this priority change does not claim that packaged skills or a CI review gate are installed.
+
 You are the lead for the rules-process and combat workstream of this Draw Steel companion. Work with me
 step by step on the decisions that need my judgment. Use subagents for bounded source research,
 implementation, and independent review. You own integration and accuracy; delegation does not transfer
@@ -129,6 +138,7 @@ Keep me informed with concise updates while working. At each handoff identify wh
 verified, still manual, or awaiting input. Never mark the full combat journey complete merely because the
 skills exist or one action works.
 
-Start now by inspecting the current state, proposing a short first slice for the tooling pilot, and doing
-the independent preparation. If a material decision is needed, ask the first focused question while
-continuing work that does not depend on its answer.
+Start with the current [rules checkpoint](workstream-rules-status.md) and the
+[remaining FreePlay/combat contracts](table-spec.md#8-continue-exploring), following the revised order above.
+Research and establish the baseline with the user before selecting the tooling pilot or implementation
+slice. If a material decision is needed, ask one focused question while continuing independent preparation.

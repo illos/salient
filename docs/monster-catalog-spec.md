@@ -41,6 +41,11 @@ remain an initial import milestone, but that count alone no longer defines compl
 Audit the included core/source-qualified categories separately from the broad corpus and its supplemental
 entries. Public reference availability need not wait for full automation.
 
+Confirmed 2026-09-11 combat-scope clarification: playable retainers and friendly monsters are deferred
+beyond V1. Initiative groups preserve their future integration path, but their player-control, attachment
+and special-mechanics workflows are not V1 implementation gates. The readable reference breadth above is
+separate from this gameplay deferral. See [initiative groups](table-spec.md#initiative-groups-confirmed-app-model).
+
 V1 now includes encounter difficulty calculation for a selected party in the encounter builder. The planning
 party supports hypothetical character stubs with adjustable individual levels and party-stub imports from
 campaigns the user owns or actively directs. Imported stubs can be deleted individually and their levels

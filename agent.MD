@@ -37,6 +37,13 @@ pre-alpha checkpoint consolidates accepted inclusions/deferrals; the V1 checkpoi
 The original gap review is historical. Do not ask settled questions again. Documentation cleanup does not
 authorize implementation or convert proposals into requirements.
 
+The rules/combat baseline precedes the tooling pilot or implementation slice. Its current design is
+checkpointed on 2026-09-12; no immediate design question is pending.
+Use [table decisions and remaining contracts](docs/table-spec.md#8-continue-exploring) and
+[rules status](docs/workstream-rules-status.md). Initiative groups cover both sides; playable retainers and
+friendly monsters are deferred beyond V1, with an extension path preserved. Readable core references remain
+separate from playable support.
+
 For v0.01, focus on desktop; all current UI is temporary and proves concepts/workflows. Finished visual polish
 and mobile/tablet layouts are not prototype gates. Preserve shared behavior behind the replaceable UI and the
 table-performance priority; the broader mobile-optimized product goal below remains for later.
@@ -189,6 +196,20 @@ Both engine and app game operations must work headlessly. CLI and UI use the sam
 run actions, inspect persisted changes and replay history. Verify rule interpretation and actual state
 application separately. The table UI will iterate substantially and must not gate the headless workflow.
 
+The user confirmed the [registered-action and action-card contract](docs/table-spec.md#confirmed-action-and-log-contract)
+as table policy. Every table UI button has a registered action accessible in the command palette. Buttons,
+slash commands, game-log controls and action cards use the same shared operations with headless access.
+All table activity receives discrete ordered log entries; user-initiated operations carry actual user attribution
+separately from acting-character identity. Mid-operation input/adjudication and cross-user action requests
+at the table surface as user-aware action cards. Preserve existing privacy audiences and lifecycle boundaries.
+The user explicitly scoped this pattern to the table, not the rest of the app. Table UI must follow this contract,
+without inventing unresolved mechanics or implying that the registry/cards are already implemented.
+Use the [formal command design](docs/table-command-spec.md) and its rules/grammar research for integration.
+Guided cards can collect complex options from a short command; table-state actions are also registered.
+The human syntax baseline is accepted: optional `@Character`, `/family verb`, and named arguments, with
+quoted names and target lists. Detailed operation/API schemas remain proposed; research coverage does not
+expand prototype scope.
+
 Partial automation is an intended playable mode: show full ability text and distinguish applied, manually
 resolved and unresolved effects. Record manual corrections, preserve dependencies and prevent double
 application when automation resumes. Dice generation is pseudorandom and shared; optional visual physics
@@ -201,8 +222,8 @@ remains readable, never a route to reopen gameplay. Campaign chat has its own li
 
 Players can undo their actions back to turn start; Director undo/redo remains available. **Enable user undo**
 defaults on and governs gameplay, not inventory. Detailed action economy, triggered actions, timing,
-manual-resolution sequencing, undo dependencies and continuation after rollback are explicitly deferred to a
-separate substantial workstream. Do not settle them through incidental UI or storage choices.
+manual-resolution sequencing, undo dependencies and continuation after rollback remain unresolved in the
+active rules/combat workstream. Do not settle them through incidental UI or storage choices.
 
 Build toward parsing supported Draw Steel stat-block language into a reusable rules interpreter; arbitrary
 natural-language comprehension is not implied. General homebrew/pack/parser capability is future architecture,

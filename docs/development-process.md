@@ -4,6 +4,10 @@ Status: rules-review workflow accepted for trial on 2026-09-11; implementation t
 Other proposed procedures remain labeled below. Product philosophy is recorded in
 [rules adaptation principles](rules-adaptation-principles.md).
 
+Current order: the user has prioritized [baseline FreePlay/combat specification](table-spec.md) before the
+tooling pilot and implementation slice. Bounded source research can proceed now; the accepted review trial
+remains later tooling work, not an installed or enforced gate.
+
 ## Rules-review workflow accepted for trial
 
 The [skills design](rules-skills-design.md) develops the proposed researcher contract and reviewer handoff.
@@ -110,9 +114,24 @@ Track content availability separately from behavior support. A readable ability 
 
 ## Headless development workflow
 
-Confirmed direction: agents should be able to exercise both the rules engine and the app's game operations without a visual UI. A CLI-like interface is an intended way to load heroes and monsters, run battles, and inspect results. The exact command syntax and technology remain open.
+Confirmed direction: agents should be able to exercise both the rules engine and the app's game operations without a visual UI. A CLI-like interface is an intended way to load heroes and monsters, run battles, and inspect results. The table human syntax baseline is accepted in the linked command specification; CLI packaging and implementation technology remain open.
 
 Use the same application operations that a visual client invokes. Keep rules resolution and state changes out of UI components. A scenario can therefore test a pure engine calculation or run through the application to verify stored results.
+
+Confirmed table action contract: every table UI button has a registered action accessible in the command palette.
+Buttons, slash commands, game-log controls and action cards use the same operations. Additional input,
+adjudication and cross-user action requests surface as action cards and must also be inspectable and
+answerable headlessly. All table activity receives discrete ordered log entries, with attribution for user
+invocations. Follow the [owning contract](table-spec.md#confirmed-action-and-log-contract), including its
+privacy boundaries. This requirement is scoped to the table, not other app screens. Table UI must not introduce a
+button-only execution path. Verify representative end-to-end action/card sequences through shared
+operations and inspect actual persisted state and history; exact coverage follows the delivered slice.
+
+Use the [formal table command design](table-command-spec.md) and its rules/grammar research as the
+integration reference. Short commands can open guided action cards; preparation must be distinguishable
+from executing an action, and later-stage input must remain collectable headlessly. Table-state operations
+such as entering combat use the same registry and open their existing workflows. The accepted syntax baseline's
+conformance fixtures validate syntax only, not game semantics or app integration.
 
 A useful scenario record contains the relevant source content and revision, initial state, actions, choices and dice inputs, engine outputs, and the resulting state. Keep this compact and replayable; no separate proof or certification system is required.
 

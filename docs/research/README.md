@@ -1,8 +1,16 @@
 # Combat feasibility research
 
+Current table-command research: [command-family and argument inventory](table-command-rules-inventory.md),
+[targeting and continuation cases](table-command-targeting-cases.md), and
+[grammar comparison and accepted syntax baseline](table-command-grammar.md), with
+[syntax conformance cases](table-command-syntax-cases.json). The
+[formal table command specification](../table-command-spec.md) separates confirmed product requirements
+from these source-derived recommendations. These later studies supersede the initial sample's coverage
+for command design, without claiming complete ability automation.
+
 Later research: [monster import audit](monster-import-audit.md) inventories all 527 stat-block files and examines field/feature extraction. The accompanying [monster catalog specification](../monster-catalog-spec.md) proposes storage and import contracts. That work is research/specification only, not a delivered catalog importer.
 
-Initial investigation, 2026-09-10, against Compendium revision `fb83a789da8f0327a389c277a0c790b1648d5810`. Three parallel agent studies examined monster language, hero language, and reusable content storage. This is source analysis: no parser, engine, character, or battle simulation has been implemented, and no execution success rate is established.
+Initial investigation, 2026-09-10, against Compendium revision `fb83a789da8f0327a389c277a0c790b1648d5810`. Three parallel agent studies examined monster language, hero language, and reusable content storage. These reports are source analysis and did not implement a parser, engine, character or battle simulation. This is a historical research record, not the current implementation status; see [rules workstream status](../workstream-rules-status.md) and the [engine architecture](../engine-architecture.md).
 
 ## Findings and evidence
 
@@ -31,6 +39,10 @@ Shared candidates include target selection, numeric expressions, damage, movemen
 These are requirements exposed by sample mechanics, not a settled engine language, storage schema, or proof that the architecture already executes them correctly.
 
 ## Suggested first executable experiment
+
+Historical recommendation from 2026-09-10, retained to explain the initial research direction. Current
+scope and work order come from the [pre-alpha checkpoint](../pre-alpha-design-gaps.md); this list does not
+reopen accepted character-wizard scope or prescribe the next implementation task.
 
 Start with a small, explicitly scoped set of combat operations. Use a source-grounded level-1 devil Fury fixture without building a character wizard; document the chosen kit, ancestry traits, class resources, and passives that affect those operations. Deferred character creation does not remove the need for correct combat values.
 

@@ -1,29 +1,58 @@
 # v0.01 pre-alpha: scope checkpoint and design gaps
 
-Checkpointed 2026-09-11 after the scope discussion and editorial consistency review. Specification only;
+Checkpointed 2026-09-12 after the combat/FreePlay and command/action-card discussion. Specification only;
 this is not an implementation milestone or approval of proposed technical contracts.
 
 ## Checkpoint and resumption
 
-The user resumed discussion after the documentation checkpoint to establish a rules-review workflow and
-general adaptation philosophy. The workflow is accepted for trial in the
-[development process](development-process.md); confirmed product ground rules live in
-[rules adaptation principles](rules-adaptation-principles.md). Game-rule conflicts warn without blocking;
-faithful automation, complete source text, visible resolution, and manual play are required. Detailed combat
-sequencing remains for a separate discussion. Skill design is now active; see
-[the researcher design](rules-skills-design.md). Confirmed: the researcher recommends its interpretation and
-the user's rulings are tracked against those recommendations, potentially informing less review later.
-Confirmed: rulings remain isolated to their original cases, with no standing precedent or automatic reuse.
-The user may make a taste-based exception to the design guidelines even when the researcher's recommendation
-is sound; record that separately from research error. No question is pending. The user selected two
-workstreams: a dedicated thread works through rules tooling/combat with the user, while a separate app
-thread reads the specs, builds and reviews the ordinary web application. See the
-[build handoff](web-app-build-handoff.md). Combat-dependent behavior awaits its agreed contracts; independent
-app work can proceed. No reduced-review policy is selected, and this checkpoint itself performs no build.
+**Current checkpoint, 2026-09-12:** establish baseline FreePlay and combat behavior before the tooling
+pilot or implementation slice. The user requested a saved checkpoint after accepting human command syntax.
+No immediate design question is pending. Earlier combat deferrals in the historical answer trail are not
+current instructions. On resumption, ask one focused plain-text question when product judgment is needed.
 
-When the user resumes design work, use the scope table and remaining gaps below. Ask one focused plain-text
-question at a time, without reopening settled decisions. Research ordinary rules and resolve engineering
-choices within the authorized task; do not turn them into a user questionnaire.
+| Confirmed area | Current baseline / owning detail |
+| --- | --- |
+| Opening | Explicit Director start; two roster lists, individual surprise/exclusion, group setup, shared initiative roll when needed, winner's side choice and announcement. Any participating player may submit the players' choice; the Director may always choose. [Encounter workflow](table-spec.md#5-encounter-workflow). |
+| Combat view | Director pane left, log middle, heroes pane right. Player sheet plus party Stamina/Recoveries; Director sees foes controls and a vertical party-resource overview including Heroic Resources. Portrait-row format is provisional. [Role layout](table-spec.md#confirmed-combat-layout). |
+| FreePlay view | Same role-specific three-pane table, with sheets, rosters and log available and no active initiative or turn tracking. [FreePlay baseline](table-spec.md#freeplay-baseline-and-combat-transition). |
+| Groups | Director creates monster groups; every hero automatically gets their own group. Only the Director may change hero grouping in V1, including combining heroes during setup. Multiple heroes per player are supported. Squads remain minion-specific. [Group model](table-spec.md#initiative-groups-confirmed-app-model). |
+| Scope refinement | Playable retainers and friendly monsters are deferred beyond **V1**. Groups preserve a later integration path; an attached retainer will default to its mentor's group. Readable core references remain separate from playable support. |
+| Adaptation | Source-faithful automation, full used-action text, recorded manual play, warnings without rule-based blocking, and Director adjudication. [Principles](rules-adaptation-principles.md). |
+
+The [table command specification](table-command-spec.md) owns the confirmed interaction foundation:
+registered table actions shared by UI, palette, slash text and headless callers; discrete ordered log
+entries with attribution; user-aware action cards for input, adjudication and cross-user requests.
+The mandate is table-only. Short commands can open guided cards, and table-state commands use the same
+registry. Initiative setup, roll, side choice and announcement live in a staged game-log action card.
+Cards contain neither parsing nor engine logic. The interaction surface must be extensible for programs
+and services; adventure-module handlers remain a future possibility, not current scope.
+
+The accepted syntax is optional `@Character`, `/family verb` and named arguments, with quoted names and
+lists such as `targets=[@Goblin5,@Goblin6]`. The [grammar report](research/table-command-grammar.md)
+documents the formal baseline. Detailed per-operation/API schemas remain proposals. The broad research
+inventory does not bring every command family into v0.01.
+
+Both players and the Director may initiate tests. Director inline corrections reinterpret results, update
+live state once and append adjudication; edge/bane roll changes remain distinct from direct damage edits.
+Inline Undo is required. Trigger controls appear on their originating entry with an event-based window
+through the triggering creature's turn; reconciling earlier source timing and applied effects remains open.
+No separate persistent-card inbox has been accepted.
+
+**Remaining contracts:** open-test response counts, group/member turns, FreePlay operations, setup
+commit/cancel timing, action/trigger/manual resolution, resources/conditions, dependent corrections/undo
+and encounter completion. The [table checklist](table-spec.md#8-continue-exploring) and
+[command open decisions](table-command-spec.md#decisions-still-open) own the concrete cases. A requested
+test and an ability/response/correction sequence are recommended next walkthroughs when work resumes.
+
+The [rules status](workstream-rules-status.md) records current ownership, evidence and recommendations versus
+user decisions. Researcher/reviewer tooling remains later work under the [accepted trial](development-process.md)
+and [skill design](rules-skills-design.md); available source research is not an installed CI gate. Individual
+rulings stay scoped to their original cases, and taste-based departures are not research errors. No reduced
+review policy has been selected.
+
+The separate app thread may continue independent implementation under the [build handoff](web-app-build-handoff.md).
+It consumes settled mechanical contracts as they become available. Do not infer that the baseline discussion
+or this cleanup authorizes unresolved combat behavior.
 
 ## Confirmed direction
 
@@ -141,7 +170,8 @@ separate packages is an engineering choice.
 ## Remaining gaps by discussion chunk
 
 This is a checkpoint of the original 13 chunks, not an active questionnaire. Confirmed scope is consolidated
-above. Combat-dependent portions of chunks 6–10 remain parked. A missing contract blocks its dependent
+above. Combat-dependent portions of chunks 6–10 are now active under the table's baseline discussion.
+A missing contract blocks its dependent
 behavior, not every other component; do not infer prototype scope from a fuller-product example.
 
 | Chunk | Status and remaining information | Next useful artifact when work resumes |
@@ -151,10 +181,10 @@ behavior, not every other component; do not infer prototype scope from a fuller-
 | 3. Versions and prototype data | **Policy answered; engineering remains:** disposable development data with distinct engine/parser/content/schema identities. | Version metadata and a bounded reset/reseed path; normal persistence remains correct within a running version. Old prototype compatibility is not a gate. |
 | 4. Content and catalog slice | **Scope answered; research/engineering remains:** one or more sourced foes, readable table text, no saved templates or standalone rules search. | Representative content, catalog-to-live-instance loading, source fidelity and explicit unsupported diagnostics. Public Items browsing has no independent prototype scope decision. |
 | 5. Character slice | **Scope answered; research/engineering remains:** minimal level-one wizard, editing, saved revisions and compatibility-aware model. | Legal fixture choices/dependencies, derived values, saved selections reopening, and effective-build review behavior through shared operations. Live-resource reconciliation remains in chunk 10. |
-| 6. Parser and engine slice | **Combat discussion parked:** minimum automated mechanics and spatial facts supplied by the first client. **Engineering:** compiler/engine boundary. | Supported, partial and unsupported action examples with required inputs, outcomes and diagnostics; source research should identify reusable constructions. |
-| 7. Manual play and pending work | **Combat discussion parked:** who supplies missing facts/effects, sequencing, cancellation, resumption and concurrent work. | One mixed automatic/manual action identifying costs/dice already accepted, pending effects and prevention of double application. |
-| 8. Table and combat slice | **Combat discussion parked:** turn controls, reactions, action budgets and transition into combat. | A short encounter walkthrough, including interruption and pause/reconnect, preserving existing session, roster and Director authority. |
-| 9. Undo and continuation | **Combat discussion parked:** action grouping, player/Director boundaries, dependencies and new play after undo. | Rewind/change-course examples and resulting state. Saved build revisions are already included; build-history UI and all inventory history are deferred. |
+| 6. Parser and engine slice | **Active, unresolved:** minimum automated mechanics and spatial facts supplied by the first client. **Engineering:** compiler/engine boundary. | Supported, partial and unsupported action examples with required inputs, outcomes and diagnostics; source research should identify reusable constructions. |
+| 7. Manual play and pending work | **Active, unresolved:** who supplies missing facts/effects, sequencing, cancellation, resumption and concurrent work. | One mixed automatic/manual action identifying costs/dice already accepted, pending effects and prevention of double application. |
+| 8. Table and combat slice | **Opening/layout/group defaults answered; turn behavior open:** formal Director start, surprise, shared roll and choice, role-specific three-pane view, groups on both sides. | A group/member-turn walkthrough, then action resolution and pause/reconnect; use the owning table checklist. |
+| 9. Undo and continuation | **Active, unresolved:** action grouping, player/Director boundaries, dependencies and new play after undo. | Rewind/change-course examples and resulting state. Saved build revisions are already included; build-history UI and all inventory history are deferred. |
 | 10. Resources and respite | **Open:** live-state reconciliation after build edits; turn/combat resource lifecycles; respite scope and rules. Detachment/duplication matter if exposed; advancement-specific questions belong to deferred leveling. | Resource-lifecycle examples and dependent scope decisions, with combat timing reserved for its dedicated discussion. |
 | 11. Items and loot | **Deferred:** entire inventory system. | Resume item-authority, mechanics, claims and history work when this subsystem returns to scope; no prototype inventory workflow is needed. |
 | 12. Access and lifecycle exceptions | **Core scope answered:** basic accounts, campaign invitations/membership, creator as Director, owner/Director control. **Open:** user blocking, campaign deletion and departure scope, former-member history, exact sign-in/session contracts. | Transitions and authorization for exposed operations. Settings/recovery/account deletion, friends, character-control sharing, delegation and chat are deferred; combat recovery remains parked. |
@@ -192,6 +222,7 @@ rules implementation by itself.
 | D6 | Proposed component boundaries and technical defaults can look like accepted decisions once copied into several documents. | Keep the map and technical contracts proposed. Owning specs retain detailed behavior; this page indexes scope. |
 | D7 | Delivery/verification guidance still demanded early advancement, friends, chat, inventory and mobile UI. | Aligned immediate sequences and desktop checks with the accepted slice; retained fuller acceptance examples for later delivery. |
 | D8 | The queue still had an unanswered combat-transition prompt and stale open-scope language for answered topics. | Recorded the user-requested checkpoint, removed the pending prompt and kept combat explicitly deferred. |
+| D9 | After combat discussion resumed, historical deferral language, repeated decision summaries and a hard-sounding Take turn eligibility clause obscured current intent. | Consolidated current decisions and gaps, marked discussion active, preserved warned rule departures, and kept group timing and deferred ally support distinct from accepted grouping. |
 
 ## Discussion record
 

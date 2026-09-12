@@ -2,8 +2,11 @@
 
 **Milestone scope:** the [v0.01 checkpoint](pre-alpha-design-gaps.md) selects a connected prototype with
 partial ability parsing and a visible game log. The reusable engine intent below remains the architectural
-destination. Minimum automation, manual sequencing and combat timing still await the dedicated discussion;
-the existing bounded experiment does not settle those contracts.
+destination. Minimum automation, manual sequencing and combat timing remain open in the active
+[FreePlay/combat discussion](table-spec.md#8-continue-exploring); the existing bounded experiment does not
+settle those contracts. Initiative groups organize both sides while preserving controller/creature identity
+and applicable individual timing. Retainers and friendly monsters are future extensions beyond V1, not
+implementation prerequisites for that grouping foundation.
 
 ## Confirmed product intent
 
@@ -72,6 +75,50 @@ can use Convex. See [headless development](development-process.md#headless-devel
 
 The engine defines spatial semantics and evaluates supplied spatial state. Map adapters supply geometry and
 observations and render results; they should not each reimplement Draw Steel rules.
+
+## Command registry and palette
+
+The [table command specification](table-command-spec.md) owns the detailed interaction design and links
+its source-backed command inventory, targeting research and grammar. The [table log contract](table-spec.md#confirmed-action-and-log-contract)
+owns scope and presentation. The human syntax baseline was accepted on 2026-09-12; detailed schemas,
+storage and operation boundaries remain proposed. No implementation is claimed by these specifications.
+
+Every table UI button has a registered action discoverable in the command palette. Buttons, slash text,
+log controls, action cards and headless callers use the same shared operations. All table activity creates
+discrete ordered log entries; user-initiated actions carry authenticated issuer attribution separately
+from acting-character identity. This mandate applies inside the table, not other app screens.
+
+The registry routes operations to the appropriate app service or client handler; not every operation is
+a rules-engine calculation. Slash parsing is an input adapter. **Action cards contain neither parsing nor
+engine logic**: they present interaction state and collect structured input for shared handlers. Required
+mid-operation input/adjudication and cross-user requests use cards. Agents must be able to inspect and
+answer the same interactions without rendering them. Short commands can open guided cards; table-state
+commands enter their existing workflows, including the staged initiative setup card.
+
+The optional `@Character` prefix identifies the actor; `/family verb` identifies the operation; named
+arguments identify targets and options. Authenticated user identity is external to executable text.
+The composer supplies the active individual character as an editable default. `@self` resolves to the
+selected actor, not the issuer. Ambiguous names need disambiguation before stable instance binding.
+Discovery and execution retain existing authority, privacy and lifecycle boundaries, including Director
+acting authority and warned departures from game rules.
+
+Contextual triggered-action controls stay on their originating entry. The accepted app closing event is
+the triggering creature's turn end, without a clock timer. Source-specific earlier timing and late-response
+reconciliation still need contracts. Director result corrections reinterpret the resolution and replace
+applied effects once, preserving accepted dice/history and appending adjudication. Undo/redo restores
+recorded state without rerunning rules or dice. Detailed dependencies remain open.
+
+The game-log/table interaction surface must expose an extensible API-like boundary for other programs and
+services to contribute activity and interactions. Recommended integration uses structured submissions,
+provenance, audience and applied-versus-reported state through shared operations. Rendering a line is not
+itself effect application. Exact transport and schemas remain open. Future adventure modules may supply
+custom handlers through this boundary; runtime, hosting, authoring and packaging are future design, with
+no expansion of current core-only scope. See the [extension note](table-command-spec.md#future-adventure-module-extension).
+
+Recommended implementation verification should compare button, palette and headless execution, exercise
+request/response without rendering a card, and inspect applied state and ordered attributed history.
+Retries and authority changes require checks independently of source-rule semantics. These are future
+acceptance checks, not evidence of passing app tests in this documentation checkpoint.
 
 ## Standalone engine and portability
 
@@ -326,10 +373,10 @@ Online-first operation does not eliminate transient disconnects. Clients should 
 commands from committed results and recover without duplicating effects. Full offline play and reconciliation
 of independently edited offline encounters are outside the initial requirements.
 
-The user has explicitly deferred detailed action-economy exploration to a separate workstream. The
-[table checkpoint](table-spec.md#discussion-boundary-action-economy-deferred) preserves the accepted encounter
-loop while leaving reaction prompting, action budgets, timing, and detailed resolution open. Existing source
-notes and prototype behavior do not settle those product/engine contracts.
+The active [table baseline discussion](table-spec.md#8-continue-exploring) has established opening, layout
+and initiative-group decisions. Reaction prompting, action budgets, group/member timing and detailed
+resolution remain open. Existing source notes and prototype behavior do not settle those product/engine
+contracts.
 
 ## Open decisions
 

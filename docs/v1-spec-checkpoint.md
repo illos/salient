@@ -15,8 +15,20 @@ Fury created through the minimal wizard, and basic combat with a visible game lo
 is not required. Existing authority/privacy and session rules apply to exposed features. Development data
 is disposable across breaking updates under the [development policy](development-process.md#confirmed-pre-alpha-development-policy).
 
-**Discussion checkpoint, 2026-09-11:** the user requested editorial cleanup and a stop here. Combat mechanics
-remain deferred for a dedicated conversation. There is no pending question or implementation authorization.
+**Latest discussion checkpoint, 2026-09-12:** the user has resumed the dedicated rules conversation and
+prioritized baseline FreePlay and combat encounter specifications before the tooling pilot or implementation
+slice. This supersedes the earlier editorial stop and combat-discussion deferral. Follow the
+[pre-alpha queue](pre-alpha-design-gaps.md) and [rules status](workstream-rules-status.md) for current work;
+unresolved mechanical behavior is not authorized for implementation.
+
+Confirmed table foundation: every table UI button has a registered command-palette action, shared with
+slash commands, log controls, action cards and headless callers. All table activity has discrete ordered
+log entries with user attribution. Intermediate input/adjudication and cross-user requests use user-aware
+**action cards**. The user explicitly scoped this to the table, not the rest of the app. See the
+[owning contract](table-spec.md#confirmed-action-and-log-contract); unresolved mechanics remain open.
+The [formal command design](table-command-spec.md) includes rules/argument research, targeting cases and
+the accepted human syntax baseline. Guided action-card entry and table-state commands are confirmed.
+Detailed schemas remain proposals; the user requested a saved checkpoint, with no immediate question pending.
 
 ## Readiness
 
@@ -35,7 +47,7 @@ for current decisions; the original review's unresolved scope questions are not 
 | --- | --- | --- |
 | Delivery | Online-first web app for phones, tablets, and desktop; headless/shared game operations; sustained table performance | No native-app plans; full offline operation is not required; preserve future LAN hosting without promising its packaging in v1 |
 | Rules content | Core rulebooks; every core class through levels 1–10; searchable Rules, Foes, and Items references | All official supplements, including Summoner/Beastheart and associated mechanics; homebrew monsters/options/items |
-| Play | Free play, combat, dedicated respite; readable rules and recorded manual resolution where automation is incomplete | Dedicated montage/negotiation flows, downtime projects, nested structured activities |
+| Play | Free play, combat, dedicated respite; initiative groups on both sides and multiple heroes per player; readable rules and recorded manual resolution where automation is incomplete | Playable retainers and friendly monsters; dedicated montage/negotiation flows, downtime projects, nested structured activities |
 | Characters | Creation, advancement, full edits, progression history, sharing, detachment/duplication, Forge Steel import | Forge Steel export implementation; preserve the model/adapter data needed to add it without a rewrite |
 | Encounters | Private user-owned templates, duplication, monsters/counts, remembered party-strength calculator, prepared rewards | Template sharing and other authored encounter content |
 | Inventory | Individual item instances, equipped/unequipped state, character/party inventories, persistent Director stash and approved claims | Item stacks, direct character-to-character transfers, player-created/free-text items, standalone saved stashes |
@@ -48,6 +60,12 @@ Public reference coverage remains broad within core sources, even for excluded d
 The core source audit must distinguish eligible retainers/companions/summons from supplemental entries.
 General engine/parser/pack architecture can support future content without exposing it as a v1 feature.
 
+Confirmed initiative refinement: automatically create one group per hero; only the Director may change hero
+grouping in V1. The Director creates monster groups and may combine heroes during setup. Retainer/friendly-monster
+play is deferred beyond V1, while groups
+preserve a way to add those actors later. The future attached-retainer default is their mentor's group.
+This implementation deferral does not remove eligible core entries from the public reference coverage.
+
 ## Primary specifications
 
 | Topic | Authoritative checkpoint |
@@ -56,6 +74,7 @@ General engine/parser/pack architecture can support future content without expos
 | Source research and independent rules-review workflow accepted for trial | [Development process](development-process.md) |
 | Technology recommendations, table performance, rendering and deployment portability | [V1 tech stack](v1-tech-stack-spec.md) |
 | Session, table, foes roster, combat lifecycle, visibility and undo | [Table](table-spec.md) |
+| Table commands, action cards, accepted human syntax and headless interaction | [Commands and action cards](table-command-spec.md) |
 | Accounts, roles, discovery, grants, privacy, blocking and deletion | [Accounts and access](accounts-and-access-spec.md) |
 | Build choices, revisions, admission, progression and interchange | [Character wizard](character-wizard-spec.md) |
 | Inventory, stash, claims and inventory history | [Inventory](inventory-spec.md) |
@@ -104,7 +123,7 @@ They do not authorize gameplay while paused or changing a closed session's recor
 
 Players can take turns with eligible owned/shared characters. The Director can perform any player table
 operation on their behalf. Character progression remains a separate owner-controlled track. Detailed
-concurrent action, triggered-action and undo dependencies remain deferred to the resolution workstream.
+concurrent action, triggered-action and undo dependencies remain open in the active resolution workstream.
 
 ### Characters, sharing and visibility
 
@@ -170,7 +189,7 @@ campaigns, characters and saved encounters, even during active combat in another
 
 1. **Respite and resource lifecycle:** research the pinned core rules, then define start/completion/interruption,
    reset/retention, rewards/advancement and required user choices. No downtime-project UI is required.
-2. **Combat resolution and undo:** the explicitly deferred action-economy workstream must define legal
+2. **Combat resolution and undo:** the active action-economy workstream must define source-expected
    operations, triggered actions, sequencing, partial/manual resolution, history dependencies and continuation
    after undo. Do not infer permanent behavior from the bounded experiment.
 3. **State reconciliation:** settle live resources after build edits, progression restoration, detachment and
@@ -193,5 +212,5 @@ campaigns, characters and saved encounters, even during active combat in another
    headless operations used by the UI. Check multiplayer access/retry behavior and sustained table performance
    during implementation.
 
-Detailed technical contracts remain proposals where labeled. No implementation, deployment or new rules
-research is claimed by this checkpoint.
+Detailed technical contracts remain proposals where labeled. Source-backed opening and group findings are
+recorded in the table spec; this checkpoint is not an implementation, deployment or completion report.

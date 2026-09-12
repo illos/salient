@@ -30,6 +30,30 @@ and verify library APIs against installed versions/current official documentatio
 
 ## Work that can proceed independently
 
+### Confirmed integration contract: registered actions and action cards
+
+The user has now made the [action/log contract](table-spec.md#confirmed-action-and-log-contract) mandatory
+inside the table. Every table UI button must have a registered action accessible through the command palette;
+buttons, slash commands, log controls and action cards call the same shared operations. All table activity has
+discrete ordered log entries with user attribution. Mid-operation input/adjudication and requests from
+one user to another use user-aware inline action cards, also executable through headless operations.
+Use the [architecture boundary](engine-architecture.md#command-registry-and-palette). Human syntax is now accepted;
+detailed schemas remain proposed, and settled access/privacy and release scope remain. The user explicitly scoped this pattern to
+the table, not account, campaign-management or other screens outside the table.
+
+This handoff requires integration and review of existing table button paths as well as new table UI. It does not claim
+the existing app has a complete registry or action-card system. Rules timing, dependent corrections and
+multi-response completion still need mechanical contracts; rendering a card must not decide them.
+
+Detailed design and research now live in [table commands and action cards](table-command-spec.md).
+It includes the source-backed operation-family/argument inventory and the accepted human syntax baseline.
+Short slash commands can launch guided cards; a caller need not type a large complete invocation.
+Table-state actions, including starting encounter setup, are included. Initiative steps now live in a
+staged game-log action card. Recommended guided preparation does not roll/spend/apply merely by opening its card. Review existing table controls
+against the shared registry requirement without treating the research catalog as new prototype scope.
+
+### Independent app work
+
 - App/workspace setup, routing, layouts, navigation and shared UI controls, following the stack spec and
   the temporary desktop presentation scope.
 - Sign-up, sign-in, sign-out, authenticated routes and server-side access checks.

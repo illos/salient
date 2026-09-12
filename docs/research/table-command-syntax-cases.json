@@ -1,0 +1,429 @@
+[
+  {
+    "id": "example-01",
+    "valid": true,
+    "input": "@Thorn /ability use ability=\"Brutal Slam\" targets=[@Goblin5]",
+    "expected": {
+      "actor": {
+        "name": "Thorn"
+      },
+      "path": [
+        "ability",
+        "use"
+      ],
+      "arguments": {
+        "ability": "Brutal Slam",
+        "targets": [
+          {
+            "name": "Goblin5"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": "example-02",
+    "valid": true,
+    "input": "@Elwin /ability use ability=\"Healing Grace\" targets=[@self]"
+  },
+  {
+    "id": "example-03",
+    "valid": true,
+    "input": "@Elwin /ability use ability=\"Healing Grace\" targets=[@Thorn]"
+  },
+  {
+    "id": "example-04",
+    "valid": true,
+    "input": "@Lyra /ability use ability=\"Artful Flourish\" targets=[@Goblin5,@\"Iron Door\"]"
+  },
+  {
+    "id": "example-05",
+    "valid": true,
+    "input": "@Thorn /ability use ability=\"Lines of Force\" trigger=@{event:e12} choices={\"extra-distance\":true}"
+  },
+  {
+    "id": "example-06",
+    "valid": true,
+    "input": "@Lyra /ability use ability=\"Artful Flourish\" targets=[@Goblin5,@Goblin6] modifiers=[{\"target\":@Goblin5,\"edges\":1}]"
+  },
+  {
+    "id": "example-07",
+    "valid": true,
+    "input": "@Thorn /test roll characteristic=might skill=climb edges=1"
+  },
+  {
+    "id": "example-08",
+    "valid": true,
+    "input": "/test request characteristic=might actors=[@Thorn] difficulty=medium"
+  },
+  {
+    "id": "example-09",
+    "valid": true,
+    "input": "/test request characteristic=intuition"
+  },
+  {
+    "id": "example-10",
+    "valid": true,
+    "input": "@Thorn /save roll effect=@{effect:bleeding7}"
+  },
+  {
+    "id": "example-11",
+    "valid": true,
+    "input": "/card respond card=@{interaction:c17} answer={\"targets\":[@Goblin6]}"
+  },
+  {
+    "id": "example-12",
+    "valid": true,
+    "input": "@Thorn /card respond card=@{interaction:c18} answer={\"roll\":true}"
+  },
+  {
+    "id": "example-13",
+    "valid": true,
+    "input": "@Thorn /card pass card=@{interaction:c19}"
+  },
+  {
+    "id": "example-14",
+    "valid": true,
+    "input": "@Elwin /ability use ability=\"Muse of Fire\" area=@{area:a4}"
+  },
+  {
+    "id": "example-15",
+    "valid": true,
+    "input": "/card respond card=@{interaction:c20} answer={\"path\":[[0,0,0],[1,0,0],[2,0,0]]}"
+  },
+  {
+    "id": "example-16",
+    "valid": true,
+    "input": "/card respond card=@{interaction:c21} answer={\"allocations\":[{\"target\":@Goblin5,\"purpose\":damage,\"count\":2}]}"
+  },
+  {
+    "id": "example-17",
+    "valid": true,
+    "input": "@Thorn /object use object=@{object:ballista1} action=fire targets=[@Goblin5]"
+  },
+  {
+    "id": "example-18",
+    "valid": true,
+    "input": "/encounter start type=combat"
+  },
+  {
+    "id": "example-19",
+    "valid": true,
+    "input": "/action correct event=@{event:e24} effect=@{effect:damage8} value=10 reason=\"Director adjudication\""
+  },
+  {
+    "id": "example-20",
+    "valid": true,
+    "input": "/history undo event=@{event:e25}"
+  },
+  {
+    "id": "example-21",
+    "valid": true,
+    "input": "/history redo event=@{event:e26}"
+  },
+  {
+    "id": "guided",
+    "valid": true,
+    "input": "/ability use"
+  },
+  {
+    "id": "quoted-name",
+    "valid": true,
+    "input": "@\"Élwin the Kind\" /test roll characteristic=presence"
+  },
+  {
+    "id": "spaces",
+    "valid": true,
+    "input": " \t@Thorn /test roll characteristic = might\t skill=climb "
+  },
+  {
+    "id": "signed",
+    "valid": true,
+    "input": "@Thorn /resource adjust resource=clarity amount=-3"
+  },
+  {
+    "id": "nested",
+    "valid": true,
+    "input": "/card respond card=@{interaction:c1} answer={\"values\":[true,false,null,[],{},-1.5,2e3,truex,@true]}"
+  },
+  {
+    "id": "scc",
+    "valid": true,
+    "input": "@{creature:hero-thorn} /ability use ability=@{ability:mcdm.heroes.v1/feature.ability.fury.level-1/brutal-slam}"
+  },
+  {
+    "id": "surrogate-pair",
+    "valid": true,
+    "input": "/table note text=\"\\uD83D\\uDE00\""
+  },
+  {
+    "id": "escaped-string",
+    "valid": true,
+    "input": "/table note text=\"A \\\"quote\\\", a \\\\ slash, and a\\nline\""
+  },
+  {
+    "id": "literal-self",
+    "valid": true,
+    "input": "@\"self\" /test roll characteristic=might"
+  },
+  {
+    "id": "self-needs-binding",
+    "valid": true,
+    "input": "@self /ability use",
+    "note": "Syntactically valid reference; actor binding must reject circular self. This fixture checks syntax/shape only."
+  },
+  {
+    "id": "empty",
+    "valid": false,
+    "input": ""
+  },
+  {
+    "id": "backslash",
+    "valid": false,
+    "input": "@Thorn \\ability use"
+  },
+  {
+    "id": "attribution",
+    "valid": false,
+    "input": "Jon@Thorn: /ability use"
+  },
+  {
+    "id": "no-actor-space",
+    "valid": false,
+    "input": "@Thorn/ability use"
+  },
+  {
+    "id": "trailing-comma",
+    "valid": false,
+    "input": "/ability use targets=[@Goblin5,]"
+  },
+  {
+    "id": "trailing-object",
+    "valid": false,
+    "input": "/card respond answer={\"x\":1,}"
+  },
+  {
+    "id": "duplicate-arg",
+    "valid": false,
+    "input": "/test roll edges=1 edges=2"
+  },
+  {
+    "id": "duplicate-record",
+    "valid": false,
+    "input": "/card respond answer={\"edges\":1,\"edges\":2}"
+  },
+  {
+    "id": "duplicate-decoded-record",
+    "valid": false,
+    "input": "/card respond answer={\"edges\":1,\"\\u0065dges\":2}"
+  },
+  {
+    "id": "lone-surrogate",
+    "valid": false,
+    "input": "/table note text=\"\\uD800\""
+  },
+  {
+    "id": "leading-zero",
+    "valid": false,
+    "input": "/test roll edges=01"
+  },
+  {
+    "id": "incomplete-exponent",
+    "valid": false,
+    "input": "/test roll edges=1e"
+  },
+  {
+    "id": "unquoted-dice",
+    "valid": false,
+    "input": "/dice roll dice=2d10"
+  },
+  {
+    "id": "empty-id",
+    "valid": false,
+    "input": "/save roll effect=@{effect:}"
+  },
+  {
+    "id": "missing-kind-colon",
+    "valid": false,
+    "input": "/save roll effect=@{effect}"
+  },
+  {
+    "id": "path-after-arg",
+    "valid": false,
+    "input": "/test roll edges=1 extra"
+  },
+  {
+    "id": "positional",
+    "valid": false,
+    "input": "/ability use \"Brutal Slam\""
+  },
+  {
+    "id": "pipeline",
+    "valid": false,
+    "input": "/test roll | /save roll"
+  },
+  {
+    "id": "multiple",
+    "valid": false,
+    "input": "/test roll; /save roll"
+  },
+  {
+    "id": "two-actors",
+    "valid": false,
+    "input": "@Thorn @Elwin /test roll"
+  },
+  {
+    "id": "single-quotes",
+    "valid": false,
+    "input": "/table note text='hello'"
+  },
+  {
+    "id": "unquoted-space",
+    "valid": false,
+    "input": "/ability use ability=Brutal Slam"
+  },
+  {
+    "id": "uppercase-path",
+    "valid": false,
+    "input": "/Test roll"
+  },
+  {
+    "id": "uppercase-key",
+    "valid": false,
+    "input": "/test roll Edges=1"
+  },
+  {
+    "id": "literal-newline",
+    "valid": false,
+    "input": "/table note text=\"a\nb\""
+  },
+  {
+    "id": "missing-value",
+    "valid": false,
+    "input": "/test roll edges="
+  },
+  {
+    "id": "unclosed-list",
+    "valid": false,
+    "input": "/ability use targets=[@Goblin5"
+  },
+  {
+    "id": "positive-overflow",
+    "valid": false,
+    "input": "/test roll edges=1e309"
+  },
+  {
+    "id": "negative-overflow",
+    "valid": false,
+    "input": "/test roll edges=-1e309"
+  },
+  {
+    "id": "typed-ref",
+    "valid": true,
+    "input": "/card respond answer=@Thorn",
+    "expected": {
+      "actor": null,
+      "path": [
+        "card",
+        "respond"
+      ],
+      "arguments": {
+        "answer": {
+          "name": "Thorn"
+        }
+      }
+    }
+  },
+  {
+    "id": "typed-record",
+    "valid": true,
+    "input": "/card respond answer={\"name\":\"Thorn\"}",
+    "expected": {
+      "actor": null,
+      "path": [
+        "card",
+        "respond"
+      ],
+      "arguments": {
+        "answer": {
+          "record": {
+            "name": "Thorn"
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "typed-symbol",
+    "valid": true,
+    "input": "/card respond answer=damage",
+    "expected": {
+      "actor": null,
+      "path": [
+        "card",
+        "respond"
+      ],
+      "arguments": {
+        "answer": {
+          "symbol": "damage"
+        }
+      }
+    }
+  },
+  {
+    "id": "typed-record-symbol",
+    "valid": true,
+    "input": "/card respond answer={\"symbol\":\"damage\"}",
+    "expected": {
+      "actor": null,
+      "path": [
+        "card",
+        "respond"
+      ],
+      "arguments": {
+        "answer": {
+          "record": {
+            "symbol": "damage"
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "typed-stable-ref",
+    "valid": true,
+    "input": "/card respond answer=@{effect:e7}",
+    "expected": {
+      "actor": null,
+      "path": [
+        "card",
+        "respond"
+      ],
+      "arguments": {
+        "answer": {
+          "refKind": "effect",
+          "id": "e7"
+        }
+      }
+    }
+  },
+  {
+    "id": "typed-self",
+    "valid": true,
+    "input": "/card respond answer=[@self]",
+    "expected": {
+      "actor": null,
+      "path": [
+        "card",
+        "respond"
+      ],
+      "arguments": {
+        "answer": [
+          {
+            "selector": "self"
+          }
+        ]
+      }
+    }
+  }
+]
