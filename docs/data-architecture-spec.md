@@ -528,6 +528,17 @@ Each logical action needs a stable command ID, actor, relevant entities, source/
 engine release and relevant parser versions, expected state revision, and session/encounter association.
 Preserve the requested intent, modifier invocations, committed effects, and displayed explanation distinctly.
 
+The confirmed operation model distinguishes un-fired per-user selection from active effect membership,
+current individual turn from current group activation, and each creature's spent turn from group completion.
+Persistent card projections may update while original event records remain immutable. Keep signed resource
+representation: legal negative Talent clarity differs from an unaffordable use, which shared execution
+must block. Fixed costs debit automatically at execution; optional pre-resolution choices remain inputs.
+
+Director OK commits encounter setup, takes the precombat restoration snapshot and applies combat locks
+before initiative/start effects. Draft cancellation preserves independently accepted roster mutations.
+Requests and opportunities retain their specific closing events; do not expire everything merely because
+it is scrolled out of view. See [table operations](table-command-spec.md).
+
 Proposed action sequence:
 
 1. Authorize the caller, check the expected state and command ID, and durably record the relevant inputs
@@ -554,15 +565,24 @@ character sheets. It does not call modifiers. Read-only inspection of old histor
 live state. Undo must respect dependent changes; an encounter boundary does not permit selectively reverting
 an earlier action while retaining incompatible later effects on the same character.
 
-Confirmed permission direction: players can undo their own actions back to the beginning of their turn; the
-Director can undo and redo those actions. **Enable user undo** is a confirmed campaign setting, enabled by
-default; disabling it preserves Director undo/redo. Management and change-timing details remain open. Player
-redo, Director rewind limits, free-play scope, and post-turn handling are not yet specified. Retain enough
-turn/action/user attribution to enforce the eventual boundary without making the undo tree an implementation
-assumption. See the [table checkpoint](table-spec.md#undo-permissions-and-proposed-campaign-control).
+Confirmed history policy, updated 2026-09-13: players undo their own actions back to combat turn start
+or the beginning of the current FreePlay stretch, and can redo their own undone actions. Enable user undo
+defaults on; disabling it preserves Director undo/redo. The Director can rewind throughout the current
+encounter without a step limit. Once the next individual turn starts, editing any prior-turn event
+requires sequential rewind first, including Director edits. The End-turn undo gap remains open until
+that next turn. Cross-encounter rewind and setting-management timing remain open.
+
+Corrections and undo append new entries without rewriting original records; state and later interpretation
+follow the effective current branch. Undoing an adjudication restores the prior result independently of
+undoing the source ability. Manual damage overrides survive modifier edits until explicitly cleared.
+New gameplay after undo clears redo availability while preserving abandoned history. Turn/round outcomes
+retain stable stamps: re-ending the same boundary reuses resolved results without fresh dice or duplicate
+grants. Restore applicable prior effects, resolve genuinely new due effects and leave removed effects
+removed. Refunded optional hero-token spending can be chosen again; explicit redo restores the recorded
+spend. See the [table history contract](table-spec.md#undo-permissions-and-proposed-campaign-control).
 
 Retain later records when navigating backward. The grouping of reactions/manual steps into one undoable
-action, and continuation after undo, remain product decisions. Character progression history remains a
+action and remaining same-turn dependency cases still need contracts. Character progression history remains a
 separate operation with its narrower restoration scope.
 
 Non-encounter gameplay belongs to the running session's chronology and needs durable state-change records.
@@ -575,8 +595,8 @@ lifetimes. Campaign-level party chat is available to members, including observer
 players. Such members can observe the permitted table view but cannot submit session gameplay commands.
 Propose messages with optional session association for the live feed and historical ranges; no session is
 required to send a message, and later messages must not append to a sealed session archive. Channel layout and
-historical presentation remain open. The exact undo scope outside encounters and chat's behavior during
-navigation are also open. No fake combat encounter or session is required to preserve chat.
+historical presentation remain open. FreePlay player undo covers its current stretch; chat/history presentation during navigation remains
+open, without changing chat records or treating chat as a new gameplay branch. No fake combat encounter or session is required to preserve chat.
 
 Voiding is now a separate encounter termination with an explicit keep/restore choice, not ordinary
 history-cursor navigation. The proposed contract retains the journal and void disposition, atomically closes
@@ -709,10 +729,11 @@ passing.
 
 - Can live undo cross encounter boundaries within an open session, and how are dependent character changes
   handled? Closed-session boundaries cannot be crossed by live undo in v1.
-- Player undo to the beginning of their turn and Director undo/redo are confirmed. Enable user undo is
-  confirmed and defaults on. Define setting-management/change timing, post-turn/free-play scope, Director
-  limits, and how reactions/interrupted actions/manual completion define one undo step.
-- What happens to retained later history when new play begins from an earlier point?
+- Define undo-setting management/change timing and how reactions, interrupted actions and manual
+  completion form a dependent undo step. Turn/FreePlay player scope, Director encounter rewind, recorded
+  redo and mandatory rewind before prior-turn edits are confirmed.
+- Define the concrete storage/projection for appended corrections/reversals, abandoned branches and
+  retained boundary stamps. New gameplay already clears redo availability without deleting history.
 - How does chat behave during undo, and which specific historical information needs a Director-only view, and
   what remains readable after leaving a campaign? Current members can read all past session logs by default
   regardless of attendance.

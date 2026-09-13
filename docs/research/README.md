@@ -3,10 +3,23 @@
 Current table-command research: [command-family and argument inventory](table-command-rules-inventory.md),
 [targeting and continuation cases](table-command-targeting-cases.md), and
 [grammar comparison and accepted syntax baseline](table-command-grammar.md), with
-[syntax conformance cases](table-command-syntax-cases.json). The
+[syntax conformance cases](table-command-syntax-cases.json) and the 2026-09-13
+[gameplay command reference](../table-command-catalog.md). The
 [formal table command specification](../table-command-spec.md) separates confirmed product requirements
 from these source-derived recommendations. These later studies supersede the initial sample's coverage
 for command design, without claiming complete ability automation.
+
+Turn/round timing research: [ordering synthesis](turn-boundary-ordering.md), with independent
+[general-rule evidence](turn-boundary-ordering-general.md) and [13 concrete core cases](turn-boundary-ordering-cases.md).
+The pinned local Compendium supplies scoped ordering rules and Director adjudication authority; no blanket
+order for independent boundary effects was located. The subsequent initial app default is enqueue order
+with save-ends rolls last; the synthesis distinguishes that decision from the source evidence.
+
+Focused follow-up: [Essence of Tides same-turn save](essence-of-tides-save-timing.md) recommended including
+the newly imposed slowed effect in that turn's save phase; this is now an accepted case ruling. The general rule and matching core abilities
+support the interpretation, but no explicit same-boundary ruling was found. Exposure and save-ends duration
+are separate: leaving the stream does not itself remove the applied condition. The user later explicitly
+established pre-save-phase inclusion as a standing policy; the report retains the source ambiguity.
 
 Later research: [monster import audit](monster-import-audit.md) inventories all 527 stat-block files and examines field/feature extraction. The accompanying [monster catalog specification](../monster-catalog-spec.md) proposes storage and import contracts. That work is research/specification only, not a delivered catalog importer.
 

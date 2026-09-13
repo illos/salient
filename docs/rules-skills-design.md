@@ -60,7 +60,9 @@ The proposed `SKILL.md` should contain this small core, plus links to existing p
 6. Return the required facts/choices, resulting effects and dependencies, and representative expected
    outcomes. Preserve distinctions such as optional versus mandatory, eligibility versus choice, and
    supplied table facts versus facts the engine could determine. Source-defined restrictions become
-   compliance findings under the app's warn-without-blocking policy, not an instruction to prohibit play.
+   compliance findings under the app's warn-without-blocking policy, subject to its explicit exceptions.
+   In particular, the user confirmed blocking unaffordable ability execution on 2026-09-13; preserve source-
+   legal payment rules. See [the affordability exception](rules-adaptation-principles.md#confirmed-exception-resource-affordability).
 7. Identify exactly what remains unresolved. Separate contradictory/ambiguous source text, missing source
    evidence, missing scenario facts, and product decisions. Missing scenario facts can yield conditional
    answers; they need not become human rules questions. Unsupported automation is an implementation status,
@@ -69,8 +71,9 @@ The proposed `SKILL.md` should contain this small core, plus links to existing p
    Do not manufacture missing evidence or facts to produce a recommendation.
 
 Research is read-only except for a requested research artifact. It does not write implementation, change
-source data, approve a PR, or introduce a campaign house rule. External discussion and other tools may be
-research leads when relevant, but cannot silently replace the pinned corpus as the project's rule authority.
+source data, approve a PR, or introduce a campaign house rule. Never search online for Draw Steel rules,
+ambiguities or other Draw Steel content, including external discussion as a lead. The pinned local
+Compendium is the only permitted research source; this restriction applies to delegated workers too.
 If the corpus cannot establish the answer, report what was checked and what evidence is missing.
 
 ## Research brief

@@ -1,6 +1,6 @@
 # V1 specification checkpoint
 
-Consolidated 2026-09-11 after the product walkthrough, technology discussion, and consistency pass. This is a
+Consolidated through 2026-09-13 after the product, technology and gameplay design discussions. This is a
 documentation checkpoint, not an implementation milestone or approval of proposed technical defaults.
 
 ## Immediate milestone: v0.01
@@ -15,20 +15,16 @@ Fury created through the minimal wizard, and basic combat with a visible game lo
 is not required. Existing authority/privacy and session rules apply to exposed features. Development data
 is disposable across breaking updates under the [development policy](development-process.md#confirmed-pre-alpha-development-policy).
 
-**Latest discussion checkpoint, 2026-09-12:** the user has resumed the dedicated rules conversation and
-prioritized baseline FreePlay and combat encounter specifications before the tooling pilot or implementation
-slice. This supersedes the earlier editorial stop and combat-discussion deferral. Follow the
-[pre-alpha queue](pre-alpha-design-gaps.md) and [rules status](workstream-rules-status.md) for current work;
-unresolved mechanical behavior is not authorized for implementation.
+**Latest discussion checkpoint, 2026-09-13:** the gameplay baseline has been saved and reviewed, ahead
+of the tooling pilot and implementation slice. See the [pre-alpha decision index](pre-alpha-design-gaps.md)
+and [rules status](workstream-rules-status.md) for the effective contracts and remaining work. No immediate
+design answer is pending; unresolved mechanics are not authorized for implementation.
 
-Confirmed table foundation: every table UI button has a registered command-palette action, shared with
-slash commands, log controls, action cards and headless callers. All table activity has discrete ordered
-log entries with user attribution. Intermediate input/adjudication and cross-user requests use user-aware
-**action cards**. The user explicitly scoped this to the table, not the rest of the app. See the
-[owning contract](table-spec.md#confirmed-action-and-log-contract); unresolved mechanics remain open.
-The [formal command design](table-command-spec.md) includes rules/argument research, targeting cases and
-the accepted human syntax baseline. Guided action-card entry and table-state commands are confirmed.
-Detailed schemas remain proposals; the user requested a saved checkpoint, with no immediate question pending.
+All table controls use registered UI/palette/slash/headless operations and ordered attributed log entries.
+Action cards collect intermediate choices and cross-user responses, including persistent area controls.
+The [command design](table-command-spec.md), [formal grammar](research/table-command-grammar.md) and
+[draft command reference](table-command-catalog.md) distinguish accepted behavior from proposed schema
+names. The chronological [decision record](gameplay-decision-record.md) preserves superseded alternatives.
 
 ## Readiness
 
@@ -125,6 +121,20 @@ Players can take turns with eligible owned/shared characters. The Director can p
 operation on their behalf. Character progression remains a separate owner-controlled track. Detailed
 concurrent action, triggered-action and undo dependencies remain open in the active resolution workstream.
 
+Encounter setup is draft until the Director confirms with OK. At OK, capture the precombat gameplay
+baseline, commit the encounter and apply party-roster/character-edit locks before initiative. Canceling
+before OK discards draft choices, preserving independent roster changes; abandoning afterward uses the
+existing Void keep/reset choice, including during initiative. Detailed start-effect ordering remains open.
+
+Any active player may roll the shared initiative roll; Director access remains and observers cannot roll.
+A newly added mid-combat monster defaults to a new group at the bottom of initiative, adjustable by the
+Director. The Director may regroup during combat; spent turns/actions remain attached to each creature,
+so already-acted members stay grayed out when their destination group activates. Newcomers have a turn
+available in the current round. An unspent member joining a finished group does not reactivate it, while
+moving the currently acting creature leaves its ongoing individual turn uninterrupted. The original
+group continues afterward; unspent arrivals may act during a still-active group's activation. A group
+with no remaining turns finishes automatically after any current turn and required effects complete.
+
 ### Characters, sharing and visibility
 
 - Admission/full edits require Director review for other owners' characters. The active Director's own
@@ -148,6 +158,20 @@ concurrent action, triggered-action and undo dependencies remain open in the act
 - Rolls are public by default. Planned tower results are Director-only, including hidden from the roller.
   The tower interface and historical disclosure remain unresolved.
 
+Requested tests offer one-volunteer or one-roll-per-character response modes. Open combat requests
+expire at the end of the current round without a routine Director close step. The campaign setting
+**Show test difficulty** defaults off; the Director and engine retain difficulty access, while ordinary
+test results publicly show the base roll, modifiers, total and success/failure even with difficulty hidden.
+Per-test difficulty reveal/overrides are deferred for now; the campaign setting is the current control.
+FreePlay requests expire when
+combat starts or the session ends. FreePlay commands default to the viewed character sheet, with an
+explicit `@Character` override within the user's control permissions.
+
+Confirmed 2026-09-13: applicable fixed ability costs are deducted automatically on execution; optional
+pre-resolution enhancements use a choice card unless already supplied. Insufficient resources block
+ability execution for players and Director invocations, as an explicit exception to ordinary rule
+warnings. Evaluate source-legal payment, including waivers and permitted negative resources.
+
 ### Loot and history
 
 Saved encounter rewards enter the common Director stash when the template is loaded. Starting combat or
@@ -160,7 +184,15 @@ Unclaimed items remain in the same persistent stash. Previously completed deposi
 
 Players may withdraw unapproved claims. Players cannot undo inventory changes; the Director can review, undo
 and redo them. This is distinct from the campaign's default-on **Enable user undo** setting for gameplay:
-players can undo their own actions to the start of their turn; Director undo/redo remains available.
+players can undo their own actions to the start of their combat turn, or the beginning of the current
+FreePlay stretch, and redo their own undone actions. Existing control/session/dependency policies apply;
+Director undo/redo remains available.
+
+Corrections and undo append new entries without rewriting originals. Future interpretation/undo follows
+the current branch's effective result. Manual damage overrides survive modifier edits until cleared;
+undoing an adjudication restores the prior result while retaining the original ability use. Once the next
+individual turn begins, everyone must rewind through intervening history before modifying a prior-turn
+event. Director encounter rewind remains available; same-turn dependencies still need detailed contracts.
 
 Retain structured source/actor/target identities, order, inputs, dice, outcomes, before/after state and
 undo/redo/void disposition for later statistics. This requirement does not override deletion or privacy.

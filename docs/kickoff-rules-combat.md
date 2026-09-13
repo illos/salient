@@ -3,8 +3,8 @@
 ## Revised starting order — 2026-09-11
 
 The user has moved FreePlay and combat encounter specification ahead of the tooling pilot and implementation
-slice. First establish their baseline table behavior together, using bounded pinned-source research and one
-focused product question at a time. Update the owning table spec as decisions settle. The tooling and
+slice. First establish their baseline table behavior together, using bounded pinned-source research and
+plain-text design questions in groups of three (latest preference, 2026-09-12). Update the owning table spec as decisions settle. The tooling and
 implementation assignments below remain later work; their original starting order is superseded.
 See [current rules status](workstream-rules-status.md). Research can proceed with the available corpus and
 fresh workers; this priority change does not claim that packaged skills or a CI review gate are installed.
@@ -59,7 +59,8 @@ The engine remains client-independent; avoid choosing its permanent runtime inci
 
 ## Principles you must carry into every task
 
-- Read the pinned Steel Compendium for mechanical claims. Follow applicable general rules, source context,
+- Never search online for Draw Steel rules or content. The pinned local Steel Compendium is the only
+  permitted source, including for delegated agents. Read it for mechanical claims. Follow applicable general rules, source context,
   actor/target traits, conditions and exceptions. Similar wording, another RPG, model memory, current code,
   and another agent's summary are not source authority.
 - Distinguish source text, source interpretation, researcher recommendation and the user's product choice.
@@ -68,12 +69,16 @@ The engine remains client-independent; avoid choosing its permanent runtime inci
 - Automation must faithfully implement its sourced or explicitly adjudicated behavior, with departures
   identified honestly. The table can deliberately depart from game rules. Normally warn without blocking
   eligible play and make the conflict visible to the Director. Manual play and correction are first-class
-  behavior, even when little is automated. Application permissions and session lifecycle are separate.
+  behavior, even when little is automated. Confirmed exceptions: unaffordable ability execution blocks,
+  and prior-turn edits require rewind once the next individual turn starts, including Director edits.
+  Source-legal payment waivers/negative ranges remain valid. Application permissions and session lifecycle
+  are separate.
 - The full verbatim text of a used action must be available through its shared log entry. Show actual
   calculations, accepted changes and unresolved work. Never report an unapplied effect as completed.
   Preserve manual decisions and prevent double application when automation continues.
 - My explicit case-specific decisions can override the design guidelines for taste. Keep them isolated to
-  their original cases: no standing precedent, automatic reuse elsewhere or inferred general preferences.
+  their original cases: no inferred standing precedent, automatic reuse elsewhere or broader preferences.
+  Honor the stated scope when I explicitly declare a standing policy.
   Honor them while completing that case without asking again. Record the initial recommendation and my
   subsequent ruling separately; a taste-based departure is not a research error. Do not reduce review
   automatically based on agreement statistics.
@@ -102,7 +107,7 @@ actual disagreement; do not cycle agents indefinitely seeking a favorable verdic
 
 ## When to ask me, and when to continue
 
-Ask one focused question at a time in plain text. Never use a question widget. Before asking, research
+Batch material design questions in groups of three in plain text. Never use a question widget. Before asking, research
 ordinary rules, inspect existing decisions, and state your recommendation with the concrete consequence.
 Ask when a real source ambiguity changes behavior, my taste determines the adaptation, specs conflict on
 an unsettled product decision, or required external access/authorization cannot be established.
@@ -141,4 +146,4 @@ skills exist or one action works.
 Start with the current [rules checkpoint](workstream-rules-status.md) and the
 [remaining FreePlay/combat contracts](table-spec.md#8-continue-exploring), following the revised order above.
 Research and establish the baseline with the user before selecting the tooling pilot or implementation
-slice. If a material decision is needed, ask one focused question while continuing independent preparation.
+slice. Ask material design questions in groups of three while continuing independent preparation.

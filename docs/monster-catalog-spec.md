@@ -85,7 +85,10 @@ choose a final UI layout.
    Survivors retain state after combat and across session closure. Voiding uses keep/reset without this normal
    cleanup. A later session uses the same retained instances after any required keep/reset choice. No
    additional roster-clutter mechanism is required. The Director can add/remove monsters during active combat,
-   including participating foes; no encounter roster lock blocks these operations or saved-encounter
+   including participating foes. A new monster added mid-combat automatically joins in a new initiative
+   group at the bottom, with a current-round turn available; the Director can change placement/group.
+   Group changes preserve individual spent-turn state and follow the [regrouping contract](table-spec.md#mid-combat-additions-and-regrouping).
+   No encounter roster lock blocks these operations or saved-encounter
    replace/append loading. Unsupported mechanics remain readable and manually resolvable. Loading and gameplay
    changes are recorded state transitions.
 

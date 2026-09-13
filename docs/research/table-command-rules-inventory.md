@@ -227,7 +227,7 @@ Recommendations from the inventory:
 | Optional use/spend/branch after event or roll | Choice card when not already supplied | Conduit domain effect, lower tier, surge target allocation, tier-two Grab risk, hero-token failed-save conversion, maintain persistent magic. |
 | Supported triggered opportunity | Contextual response on originating entry, under current table contract | Parry, Lines of Force, opportunity attack; identify event and actual timing. |
 | Several independent responders/results | Linked requests and aggregate continuation | Group/opposed tests, multiple granted actions, several optional heals. Open request scope alone does not determine one volunteer versus all responders. |
-| Rules conflict with a coherent deliberately accepted action | Warning and recorded departure; no routine approval card requirement | Extra action, over-range action with acknowledged facts. Warn-without-blocking remains distinct from authority enforcement. |
+| Rules conflict with a coherent deliberately accepted action | Warning and recorded departure; no routine approval card requirement | Extra action, over-range action with acknowledged facts. Ordinary warnings remain distinct from authority enforcement; the subsequent affordability and historical-edit blocks are explicit product exceptions. |
 | Unknown/unsupported interpretation | Adjudication/manual-resolution card | Geometry not supplied, parsed damage but unsupported secondary clause, narrative consequence. Block only dependent automatic work from pretending certainty; preserve what already happened. |
 | Automatic periodic effect needing no choice | Log resolution; card only if new input/response required | Expiry, fixed income, a known recurring damage event. A visible prompt for every automatic update is not required by the contract. |
 
@@ -266,7 +266,12 @@ Do not infer from this table that any request universally pauses all play, that 
 
 **Source-specific cautions retained:** ability “always useful” versus Grab's printed no-effect tier; group collective-consequence strict majority; opportunity attack free-trigger classification versus critical-hit shorthand; chapter `rewards.md` unified source collision. None justifies silently overriding the more specific text.
 
-**Known product decisions still needed:** detailed binding and per-operation schemas; whether an open requested roll accepts one or many responders; required-fact/adjudicator controls; group/member handoffs for combined heroes; when costs/dice/effects commit around choices; consequences of using the requested turn-window after a source's earlier trigger phase; concurrent independent actions; cancellation, undo and dependent-effect reconciliation; harmful FreePlay declaration before Director starts combat; detailed respite and ally-support delivery. These are not missing ordinary rule definitions.
+**Product checkpoint update, 2026-09-13:** the original inventory informed decisions now recorded in
+[the table spec](../table-spec.md) and [command reference draft](../table-command-catalog.md): open-request
+response modes/lifetimes, ordinary group/turn flow, fixed costs and affordability, persistent areas,
+appended history and mandatory rewind before prior-turn changes. This research report is not a competing
+current decision queue. Remaining source-specific response timing, conditional spending, same-turn
+dependencies, fictional-time mechanics and respite are tracked in the owning specs.
 
 **Research limits:** class coverage is a broad survey with representative rules, not certification that every ability is parsed or that every clause has an agreed interpretation. Specific interactions between two complex effects, simultaneous end-turn ordering and any unclear extraction need a bounded follow-up when selected for implementation. Some rules intentionally leave observation, physical feasibility, narrative consequences and terrain reset to the Director; missing table facts cannot be resolved by a deeper parser. Supplemental rules were not admitted as evidence for core behavior.
 

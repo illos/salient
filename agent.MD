@@ -10,15 +10,16 @@ text.
 - Make reasonable implementation decisions within the user's authorized scope. Ask only when missing
   information materially affects the work.
 - Distinguish confirmed requirements from proposals and assumptions.
-- Current specification exploration follows the user's latest request: work through one manageable topic at
-  a time, asking one focused plain-text question at a time within it. This supersedes the earlier groups-of-six
-  preference. Track answers in [the pre-alpha clarification queue](docs/pre-alpha-design-gaps.md).
+- Current specification exploration follows the user's latest request: batch design questions in groups of
+  three, using plain text and a recommendation for each. This supersedes the earlier one-question-at-a-time
+  and groups-of-six preferences. Track answers in [the pre-alpha clarification queue](docs/pre-alpha-design-gaps.md).
 - The discussion has resumed with a rules-review workflow accepted for trial and confirmed rules-adaptation
   philosophy. Read [the principles](docs/rules-adaptation-principles.md) and
   [the development process](docs/development-process.md). The user selected a dedicated rules/combat thread
   to work with them and a separate thread to read the specs, build and review the ordinary web app. Follow
   [the build handoff](docs/web-app-build-handoff.md); independent app work can proceed while combat contracts
-  are designed. General warn-without-blocking policy is settled. Do not start another thread merely by
+  are designed. General warn-without-blocking policy is settled, with the confirmed insufficient-resource
+  exception: unaffordable abilities cannot execute. Do not start another thread merely by
   recording this handoff or invent unresolved combat behavior to finish an app screen.
 - Rules-research recommendations and the user's rulings remain separate records. Rulings apply only to their
   original cases, with no automatic precedent. Explicit case-specific product choices may depart from the
@@ -38,7 +39,10 @@ The original gap review is historical. Do not ask settled questions again. Docum
 authorize implementation or convert proposals into requirements.
 
 The rules/combat baseline precedes the tooling pilot or implementation slice. Its current design is
-checkpointed on 2026-09-12; no immediate design question is pending.
+checkpointed on 2026-09-13. Opening commitment, group transfers/handoffs, mapless targeting and persistent
+area cards, requested tests, resource affordability, clock defaults and history boundaries are confirmed.
+Remaining source-specific response sequencing and same-turn dependencies are next; do not reopen settled
+questions from the chronological decision record.
 Use [table decisions and remaining contracts](docs/table-spec.md#8-continue-exploring) and
 [rules status](docs/workstream-rules-status.md). Initiative groups cover both sides; playable retainers and
 friendly monsters are deferred beyond V1, with an extension path preserved. Readable core references remain
@@ -180,7 +184,12 @@ Forced combat recovery remains unresolved, not grounds to defer access invalidat
 
 Follow [rules adaptation principles](docs/rules-adaptation-principles.md): automate faithfully, show the
 source and actual work, and trust the table. Game-rule conflicts warn players and Directors without blocking
-eligible play or requiring routine Director preapproval. The Director has final game-adjudication authority;
+eligible play or requiring routine Director preapproval, except that an ability whose resource cost cannot
+be paid must be blocked (confirmed 2026-09-13). Check source-legal affordability, including waivers and
+permitted negative resources, in shared execution for players and Director invocations. Fixed applicable
+costs are deducted automatically on execution; optional pre-resolution spending uses a choice card unless
+already supplied. See [ability costs](docs/table-spec.md#ability-costs-and-optional-spending).
+The Director has final game-adjudication authority;
 mechanical inputs and effects support recorded manual adjustments. Missing facts/unsupported mechanics are
 explicit uncertainty, never invented automatic outcomes. Every used action exposes its complete verbatim
 source text through the shared game log; full monster stat blocks remain Director-only. Account permissions,
@@ -215,15 +224,28 @@ resolved and unresolved effects. Record manual corrections, preserve dependencie
 application when automation resumes. Dice generation is pseudorandom and shared; optional visual physics
 presents accepted results, never decides them.
 
-The game log records initial values, modifier inputs/outputs and resulting state changes. Undo/redo restores
-recorded state without rerunning rules/dice. All current campaign members can read past session logs
+The game log records initial values, modifier inputs/outputs and resulting state changes. Corrections and
+undo append new entries without rewriting the original; future interpretation/undo uses the effective
+result on the current history branch. Once the next individual turn starts, modifying any prior-turn event
+requires undoing through intervening history first, including Director edits (confirmed 2026-09-13).
+Director adjudication cannot bypass that boundary. Current-event continuations remain distinct from
+historical edits. Undo/redo restores recorded state without rerunning rules/dice. All current campaign members can read past session logs
 regardless of attendance; private notes/live tower policies remain separate. Compressed closed-session history
 remains readable, never a route to reopen gameplay. Campaign chat has its own lifetime.
 
-Players can undo their actions back to turn start; Director undo/redo remains available. **Enable user undo**
-defaults on and governs gameplay, not inventory. Detailed action economy, triggered actions, timing,
-manual-resolution sequencing, undo dependencies and continuation after rollback remain unresolved in the
-active rules/combat workstream. Do not settle them through incidental UI or storage choices.
+Standing clock policy explicitly confirmed by the user: at a boundary, resolve due work in enqueue order
+with save-ends rolls last. Include all applicable save-ends effects applied before the final save phase
+begins, unless their source specifies otherwise. This is an explicit standing app policy, not an inferred
+precedent from a case ruling; preserve source timing and special save replacements. See
+[the game-clock contract](docs/table-spec.md#game-clock-and-scheduled-rules-work).
+
+Players can undo their own actions back to combat turn start or the beginning of the current FreePlay
+stretch, under existing control/session/dependency policies, and redo their own undone actions. Director
+undo/redo remains available throughout the current encounter. **Enable user undo** defaults on and governs
+gameplay, not inventory. New gameplay after undo clears redo availability while retaining abandoned history
+and boundary stamps. Source-specific triggered timing, conditional spending, manual-resolution sequencing
+and remaining same-turn dependencies still need contracts. Do not settle them through incidental UI or
+storage choices.
 
 Build toward parsing supported Draw Steel stat-block language into a reusable rules interpreter; arbitrary
 natural-language comprehension is not implied. General homebrew/pack/parser capability is future architecture,
@@ -300,6 +322,7 @@ evidence; they do not prove semantics. Prefer meaningful examples and executable
   work can build on them.
 - Verify Draw Steel mechanics against identified, versioned sources rather than inferring them from D&D or
   memory.
+- Never search online for Draw Steel rules answers, rules ambiguities, or any other Draw Steel content. The pinned local Compendium at `vendor/steel-compendium` is the only permitted research source; if it does not resolve a question, report the uncertainty rather than consulting external sources. This restriction also applies to delegated research agents.
 - Track permissions and attribution separately for game content, third-party application code, and artwork.
 - Treat community data as an input requiring validation; do not equate successful import with complete or
   correct rules support.

@@ -23,7 +23,9 @@ Confirmed: keep user rulings isolated to their original cases, with no standing 
 reuse in later cases. A deliberate product preference can override a design guideline for that case without
 making a sound rules interpretation incorrect. Track source interpretation, researcher recommendation, and
 user-selected behavior separately; do not count taste-based departures as research errors or infer broader
-preferences from them.
+preferences from them. Explicitly declared standing policies are different: the save-phase rule,
+resource-affordability block and prior-turn history lock have the scope the user expressly established.
+See [current principles](rules-adaptation-principles.md) and [gameplay decisions](gameplay-decision-record.md).
 
 Use two roles for bounded mechanical changes: a Rules Researcher establishes source-backed behavior before
 implementation, and a Rules Reviewer independently examines the resulting code against the pinned corpus

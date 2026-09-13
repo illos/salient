@@ -6,6 +6,13 @@ The engine should read official stat blocks and homebrew using supported Draw St
 
 The project is a hobby, with limited human development time. Earlier attempts invented mechanics, imported assumptions from another game, or became consumed by approval queues and elaborate provenance checks. This attempt must demonstrate correct behavior without requiring the user to certify every rule or maintain a parallel bureaucracy.
 
+This document concerns **source rules language**, not the player's slash-command grammar. Use
+[table commands](table-command-spec.md) and [the command grammar](research/table-command-grammar.md)
+for user/agent invocation. Both feed shared execution; cards contain neither parser nor engine logic.
+All Draw Steel research uses the pinned local Compendium exclusively. The broader parser/homebrew
+intent below is future architecture, not a change to core-only V1 content scope. Supported execution
+also follows the current affordability and history boundaries in [the principles](rules-adaptation-principles.md).
+
 ## Proposed implementation model
 
 1. **Read the document structure.** Use the existing structured corpus where possible to identify statistics, traits, abilities, costs, targets, and result tiers. A future text-input adapter can produce the same structure.
@@ -20,7 +27,7 @@ The common rules still need implementation. A parser cannot learn the meaning of
 
 ## Examined example
 
-The [Goblin Spinecleaver source](https://github.com/SteelCompendium/data-unified/blob/fb83a789da8f0327a389c277a0c790b1648d5810/en/unified/json/monster/goblin/statblock/goblin-spinecleaver.json) contains structured ability fields and prose result tiers. Its middle Axe tier specifies four damage and push three. It also has a movement-related trait, minion-specific targeting, and a captain-related modifier.
+The [Goblin Spinecleaver source](../vendor/steel-compendium/en/unified/json/monster/goblin/statblock/goblin-spinecleaver.json) contains structured ability fields and prose result tiers. Its middle Axe tier specifies four damage and push three. It also has a movement-related trait, minion-specific targeting, and a captain-related modifier.
 
 An illustrative parse of that result tier is:
 
@@ -32,7 +39,7 @@ sequence
 
 This is a fragment of an executable definition, not a resolved outcome or a complete implementation of Axe. Target binding, minion mechanics, modifiers, forced-movement rules, sequencing, and available spatial facts still determine execution. Their definitions must come from the relevant rules sections.
 
-The [Goblin Malice source](https://github.com/SteelCompendium/data-unified/blob/fb83a789da8f0327a389c277a0c790b1648d5810/en/unified/json/monster/goblin/goblin-malice.json) illustrates other construction types: a timed speed bonus for a selected group, damage based on an adjacency count, and a terrain effect with conditional outcomes. These are candidates for later grammar and runtime scenarios, not verified supported features.
+The [Goblin Malice source](../vendor/steel-compendium/en/unified/json/monster/goblin/goblin-malice.json) illustrates other construction types: a timed speed bonus for a selected group, damage based on an adjacency count, and a terrain effect with conditional outcomes. These are candidates for later grammar and runtime scenarios, not verified supported features.
 
 These two records were inspected at revision `fb83a789da8f0327a389c277a0c790b1648d5810`. This is a reproducible sample, not an audit of corpus coverage or confirmation of the latest official errata.
 

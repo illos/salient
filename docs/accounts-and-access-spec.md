@@ -167,8 +167,10 @@ Confirmed direction: **anything a player can do at the table, the Director can a
 operations must have a Director equivalent, including choosing Take turn and acting on behalf of characters.
 This applies in free play and encounters, and is the default for other table activities. Director authority
 remains scoped to the campaign they direct and subject to applicable session/pause constraints. Game-rule
-conflicts warn without blocking eligible play under the adaptation principles; account/data permissions
-remain distinct from rules compliance.
+conflicts ordinarily warn under the adaptation principles. Two confirmed limits also apply to Director
+invocations: unaffordable abilities cannot execute, and prior-turn events cannot be directly modified
+after the next individual turn starts without rewinding first. Source-legal payment exceptions remain
+valid. Account/data permissions remain distinct from rules compliance and historical-edit policy.
 
 Character progression is explicitly a separate track. An active Director's own character admission and full
 edits are logged and require no approval step. Other characters retain Director review. This exemption does

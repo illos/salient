@@ -167,7 +167,12 @@ That final activation must also reach the actual character sheets. For table-bou
 
 Keep three concepts separate: the recorded sequence of what was attempted/committed, the state currently selected for play, and a user's read-only history view. Browsing yesterday's fight must not rewind everyone else's live table. Navigation itself remains auditable without overwriting the original events.
 
-Later recorded states must survive navigation. Continuing play from the past needs a product decision about alternate continuations. Parent references and generation identifiers preserve that option without committing to a branching UI. Until that decision is made, the experiment's behavior—return to the recorded head before submitting new gameplay—is a defensible temporary restriction, not the final promised policy.
+Confirmed gameplay update, 2026-09-13: later records survive navigation, but new gameplay after undo
+clears ordinary redo availability and continues the effective branch. No branch-browser UI is established.
+Corrections and undo append new records, never rewrite originals; turn/round resolution stamps remain
+available for exact reuse. Prior-turn direct editing is blocked after the next individual turn starts,
+including for the Director, until intervening history is rewound. The experiment's former return-to-head
+restriction is not the current product contract. See [table history](table-spec.md#undo-permissions-and-proposed-campaign-control).
 
 **A cross-campaign boundary needs an explicit rule.** If a character has left campaign A for B, campaign A can still reconstruct its historical sheet from retained campaign snapshots. It must not overwrite the currently owned character in B or restore old permissions. Historical inspection can always use an isolated view; making that past state live requires a current attachment/authority check and a defined reconciliation or independent-copy policy. Likewise, one character must not have competing writers from two active tables in the same campaign. Recommend one active play binding per character until a broader policy is designed.
 
@@ -265,7 +270,7 @@ The two existing specs are compatible with this recommendation. The monster spec
 The decisions most valuable to settle before dependent implementation are:
 
 1. Accept the package-plus-Convex model and immutable content/build revisions, with one source of authority for each live value.
-2. Define live rollback versus personal history inspection, continuation from an earlier point, and the boundary of an action with reactions/manual completion.
+2. Specify the storage/projection for the confirmed live rollback, read-only inspection and new-play branching policies; define remaining dependent undo units involving reactions/manual completion.
 3. Define current-resource reconciliation when a build changes, including progression restoration and campaign transfer.
 4. Define who can activate past state and what happens when historical characters have detached or moved campaigns; adopt an initial single active table binding or specify an alternative.
 5. Define accepted-history versus activity metrics, defeat attribution, historical visibility, and access after leaving a campaign.

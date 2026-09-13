@@ -154,13 +154,14 @@ encounter voids it, with the same keep/reset character-and-monster-state choice 
 preserves it without a duration limit. An encounter cannot span closed sessions; non-encounter activity
 retains its own history.
 
-Confirmed: players can undo their own actions back to the beginning of their turn; the Director can undo and
-redo those actions. Enable user undo is a confirmed campaign setting, enabled by default. Disabling it
-preserves Director undo/redo; management and change-timing details remain open. Still to decide: detailed
-rewind scope, the exact boundary of one action when reactions or choices intervene, how chat behaves during
-rollback, continuation after undo, and whether live undo can cross encounter boundaries within an open
-session. Closed sessions cannot be reactivated in v1. These decisions should not be assumed from the
-requirement to restore game state.
+Confirmed: players undo their own actions back to combat turn start or the current FreePlay stretch,
+and redo their own undone actions. The Director can rewind throughout the current encounter. Enable user
+undo defaults on; disabling it preserves Director undo/redo. Corrections and undo append new entries.
+Once the next individual turn starts, older-turn changes require intervening history to be undone first,
+even for the Director. New gameplay clears redo availability while retaining historical records and
+boundary results. Setting management/change timing, same-turn dependent actions, chat presentation and
+cross-encounter rewind remain open. Closed sessions cannot be reactivated. See
+[the table history contract](table-spec.md#undo-permissions-and-proposed-campaign-control).
 
 The table role doctrine is that anything a player can do at the table, the Director can also do. Players
 choose **Take turn** for eligible characters, and the Director has the same control on their behalf. Character

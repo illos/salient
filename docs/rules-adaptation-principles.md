@@ -9,7 +9,9 @@ choose an exception for taste even when an agent's recommendation correctly foll
 guidelines. Record the exception and its scope; do not treat it as a research mistake, alter the source
 explanation to justify it, or generalize it into a new guideline. User rulings remain isolated to their
 original cases for now; they do not become standing precedent for later cases. In the absence of an explicit
-exception, follow the guidelines rather than inventing exceptions on the user's behalf.
+exception, follow the guidelines rather than inventing exceptions on the user's behalf. When the user
+explicitly declares a standing policy, honor its stated scope: the clock's pre-save-phase inclusion,
+resource-affordability block and prior-turn historical-edit lock are such declarations.
 
 ## The table decides; the app explains
 
@@ -22,11 +24,26 @@ administrative repair. A live-play adjustment is distinct from editing a charact
 Trust admitted participants by default. Players may knowingly depart from game rules when acting through
 their available table operations. Explain the conflict to the acting player and make it visible to the
 Director; do not block solely because the action conflicts with a game rule or require routine Director
-preapproval of each departure. Director adjudication remains available afterward. Warnings should inform
+preapproval of each departure, except for explicitly confirmed exceptions below. Director adjudication
+remains available afterward. Warnings should inform
 play without turning repeated actions into an approval queue; exact presentation remains open.
 
 For example, an action beyond the source-defined allowance should remain possible with a visible warning.
 This example establishes application policy, not the number or kinds of actions Draw Steel permits.
+
+### Confirmed exception: resource affordability
+
+On 2026-09-13 the user explicitly required blocking an ability when its resource cost cannot be paid.
+This supersedes warning-only behavior for that case. The shared execution operation checks affordability
+and refuses the unaffordable activation for both players and Director invocations; no warning-through
+path silently waives the cost or creates an unauthorized negative balance. Existing attributed Director
+resource adjustments remain available as separate operations.
+
+Use the source's actual payment rules, reductions, waivers and permitted negative ranges. In particular,
+legal Talent clarity spending into strain is not a rule-breaking insufficient-resource use. This decision
+does not turn spent-action graying or other rule conflicts into blocking gates. See
+[ability costs](table-spec.md#ability-costs-and-optional-spending) for confirmed deduction/choice behavior
+and pinned source examples.
 
 ## Faithful automation and deliberate departures are different
 
@@ -67,7 +84,8 @@ it, and record the resulting damage, conditions, movement, or other adjustments 
 Players can record their own eligible sheet adjustments; the Director can adjudicate and correct play.
 Manual resolution must remain usable without pretending the parser understood the ability.
 
-Distinguish a known rule conflict from an unknown result. A known conflict produces a warning. Missing
+Distinguish a known rule conflict from an unknown result. A known conflict ordinarily produces a warning;
+the confirmed resource-affordability exception blocks unaffordable ability execution. Missing
 facts, unsupported mechanics, and unresolved interpretations must be identified honestly; the app cannot
 claim a faithful automatic outcome it cannot determine. Support supplying the facts or recording a manual
 resolution. Automation dependent on an unresolved effect must wait for that resolution; independent work
@@ -76,9 +94,20 @@ can proceed where its correctness is established. Detailed sequencing remains fo
 Record what was actually completed so subsequent automation does not apply it twice or overwrite a manual
 decision. Corrections and their resulting state changes belong in the same durable history as automation.
 
+### Confirmed correction history boundary
+
+Confirmed 2026-09-13: corrections and undo append new entries; they never rewrite the original log entry.
+Future interpretation and undo follow the effective result on the current history branch. Once the next
+individual turn starts, modifying anything from a prior turn requires undoing through the intervening
+history first. This applies to everyone, including the Director; manual adjudication is not a bypass.
+The Director retains their established encounter rewind authority. See
+[correction history](table-spec.md#director-edits-to-inline-results) for the confirmed granularity and
+manual-override behavior. Current due effects/valid continuations are not edits of their old source entry.
+
 ## Distinguish game rules from application boundaries
 
-Warn-without-blocking governs game-rule compliance. Existing identity, campaign/character access, private
+Warn-without-blocking governs game-rule compliance subject to the confirmed affordability exception.
+Existing identity, campaign/character access, private
 data, session pause/closure, and ownership policies retain their separate meaning. Campaign admission does
 not grant control of every character or access to private notes. Combat build locks do not prohibit live
 resource/effect adjustments. Review ambiguous boundaries explicitly rather than disguising game-rule

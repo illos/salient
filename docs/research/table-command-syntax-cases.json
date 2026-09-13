@@ -425,5 +425,222 @@
         ]
       }
     }
+  },
+  {
+    "id": "gameplay-01",
+    "valid": true,
+    "input": "/test roll"
+  },
+  {
+    "id": "gameplay-02",
+    "valid": true,
+    "input": "/test request"
+  },
+  {
+    "id": "gameplay-03",
+    "valid": true,
+    "input": "/encounter start"
+  },
+  {
+    "id": "actor-selection-shape",
+    "valid": true,
+    "input": "@Thorn /actor select",
+    "expected": {
+      "actor": {
+        "name": "Thorn"
+      },
+      "path": [
+        "actor",
+        "select"
+      ],
+      "arguments": {}
+    }
+  },
+  {
+    "id": "gameplay-05",
+    "valid": true,
+    "input": "/target toggle target=@Goblin5"
+  },
+  {
+    "id": "gameplay-06",
+    "valid": true,
+    "input": "/selection cancel"
+  },
+  {
+    "id": "gameplay-07",
+    "valid": true,
+    "input": "@Thorn /turn take"
+  },
+  {
+    "id": "gameplay-08",
+    "valid": true,
+    "input": "@Thorn /turn end"
+  },
+  {
+    "id": "gameplay-09",
+    "valid": true,
+    "input": "/group create side=foes members=[@Goblin5,@Goblin6]"
+  },
+  {
+    "id": "move-group-shape",
+    "valid": true,
+    "input": "/group move members=[@Goblin5] group=@{group:blue}",
+    "expected": {
+      "actor": null,
+      "path": [
+        "group",
+        "move"
+      ],
+      "arguments": {
+        "members": [
+          {
+            "name": "Goblin5"
+          }
+        ],
+        "group": {
+          "refKind": "group",
+          "id": "blue"
+        }
+      }
+    }
+  },
+  {
+    "id": "gameplay-11",
+    "valid": true,
+    "input": "/foe add source=@{monster:core-goblin-warrior}"
+  },
+  {
+    "id": "gameplay-12",
+    "valid": true,
+    "input": "@Thorn /test roll characteristic=might skill=climb"
+  },
+  {
+    "id": "gameplay-13",
+    "valid": true,
+    "input": "/test request characteristic=might actors=[@Thorn]"
+  },
+  {
+    "id": "gameplay-14",
+    "valid": true,
+    "input": "/test request characteristic=intuition response-mode=one-volunteer"
+  },
+  {
+    "id": "mode-shape",
+    "valid": true,
+    "input": "/test request characteristic=intuition response-mode=each-character",
+    "expected": {
+      "actor": null,
+      "path": [
+        "test",
+        "request"
+      ],
+      "arguments": {
+        "characteristic": {
+          "symbol": "intuition"
+        },
+        "response-mode": {
+          "symbol": "each-character"
+        }
+      }
+    }
+  },
+  {
+    "id": "gameplay-16",
+    "valid": true,
+    "input": "@Thorn /save roll effect=@{effect:e7}"
+  },
+  {
+    "id": "gameplay-17",
+    "valid": true,
+    "input": "/effect targets effect=@{effect:e17} targets=[@Goblin5,@Goblin6]"
+  },
+  {
+    "id": "gameplay-18",
+    "valid": true,
+    "input": "/effect resolve effect=@{effect:e17}"
+  },
+  {
+    "id": "gameplay-19",
+    "valid": true,
+    "input": "/card respond card=@{interaction:c17} answer={\"targets\":[@Goblin5],\"confirm\":true}"
+  },
+  {
+    "id": "effect-empty-confirm-shape",
+    "valid": true,
+    "input": "/card respond card=@{interaction:c17} answer={\"targets\":[],\"confirm\":true}",
+    "expected": {
+      "actor": null,
+      "path": [
+        "card",
+        "respond"
+      ],
+      "arguments": {
+        "card": {
+          "refKind": "interaction",
+          "id": "c17"
+        },
+        "answer": {
+          "record": {
+            "targets": [],
+            "confirm": true
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "gameplay-21",
+    "valid": true,
+    "input": "/card respond card=@{interaction:setup1} answer={\"confirm\":true}"
+  },
+  {
+    "id": "gameplay-22",
+    "valid": true,
+    "input": "/card respond card=@{interaction:initiative1} answer={\"roll\":true}"
+  },
+  {
+    "id": "gameplay-23",
+    "valid": true,
+    "input": "/card respond card=@{interaction:side1} answer={\"side\":heroes}"
+  },
+  {
+    "id": "gameplay-24",
+    "valid": true,
+    "input": "/encounter void state=keep"
+  },
+  {
+    "id": "gameplay-25",
+    "valid": true,
+    "input": "/encounter void state=restore"
+  },
+  {
+    "id": "gameplay-26",
+    "valid": true,
+    "input": "/history undo event=@{event:correction25}"
+  },
+  {
+    "id": "gameplay-27",
+    "valid": true,
+    "input": "/history redo event=@{event:undo26}"
+  },
+  {
+    "id": "mode-duplicate",
+    "valid": false,
+    "input": "/test request response-mode=one-volunteer response-mode=each-character"
+  },
+  {
+    "id": "effect-targets-missing-value",
+    "valid": false,
+    "input": "/effect targets effect=@{effect:e17} targets="
+  },
+  {
+    "id": "effect-confirm-duplicate",
+    "valid": false,
+    "input": "/card respond card=@{interaction:c17} answer={\"confirm\":true,\"confirm\":false}"
+  },
+  {
+    "id": "group-old-punctuation",
+    "valid": false,
+    "input": "/group:move@Goblin5@blue"
   }
 ]

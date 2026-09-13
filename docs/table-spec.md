@@ -1,6 +1,6 @@
 # Campaign sessions and the table
 
-Version 0.54 — Combat/FreePlay baseline and accepted command syntax checkpoint, 2026-09-12. Specification; not an implementation report.
+Version 0.55 — Gameplay, commands and history checkpoint, 2026-09-13. Specification; not an implementation report.
 
 This is the primary checkpoint for session participation, the table's role-dependent surfaces, and the core
 play loop. **Confirmed** behavior comes from the user's table walkthrough. **Proposed** contracts and **open**
@@ -70,7 +70,8 @@ the pinned sources before asking for product decisions. The [remaining-contracts
 identifies what the recorded opening, layout and group decisions do not yet settle.
 
 The [rules adaptation principles](rules-adaptation-principles.md) govern every operation: game-rule conflicts
-warn without blocking otherwise authorized play; the Director can adjudicate; manual changes are recorded.
+normally warn without blocking otherwise authorized play; the confirmed insufficient-resource exception
+blocks an unaffordable ability. The Director can adjudicate; manual changes are recorded.
 Missing facts and unsupported effects remain explicit unresolved work. Every used action exposes complete
 verbatim source text and actual resolution through the shared log. Account permissions, private data,
 session lifecycle and coherent state remain separate boundaries.
@@ -329,7 +330,8 @@ Confirmed 2026-09-11: **Director pane left, game log middle, heroes pane right**
 
 The player party roster's horizontal portrait row is a **provisional presentation preference**. The required
 sheet prominence and party-resource overview are confirmed. Portrait interactions, switching among several
-controlled heroes, group/turn indicators and ordering the Director's player/hero list remain open.
+controlled heroes, exact group/turn indicator design and ordering the Director's player/hero list remain open.
+The player-sheet turn affordances below are confirmed; their visual styling remains provisional.
 
 Existing privacy policies apply: the player overview does not grant peer full-sheet access or include peer
 Heroic Resources, and hidden foes stay absent from player roster views. Group presentation must preserve
@@ -339,6 +341,77 @@ remaining combat contracts. Further pane detail can be added later.
 This is a replaceable desktop baseline, not a mobile or visual-polish requirement. Initiative setup retains
 its separate two-list layout. The user also accepted this three-pane baseline for FreePlay, with no active
 initiative or turn tracking; see the FreePlay section below.
+
+### Roster targeting controls
+
+Confirmed during the 2026-09-12 discussion. Each displayed participant in either roster has a dedicated
+target button, provisionally a reticle. Target selection is separate from acting-character selection.
+Users can select targets before or after an ability. Roster privacy and control permissions still apply;
+a reticle grants neither control nor private-sheet access.
+
+| Target shape | Selection and firing |
+| --- | --- |
+| Ordinary single target | Default radio-like behavior: selecting another creature replaces the previous one. An already-selected target plus an ability fires; selecting a target for a pending ability fires. No extra Use confirmation. |
+| Self only | Selecting the ability supplies the acting character as self and fires. This does not default a self-or-ally ability or self-centered area to self-only. |
+| Multiple targets with a known allowance | Checkbox behavior; a second click removes a selected creature. The log prompts Target up to X with a fire button usable before X. Reaching X auto-fires. One accepted execution if the button/automatic paths race. |
+| Area determined on the external map | Checkbox selection with Select affected creatures and an explicit fire button. No count-based auto-fire; the app cannot know the number affected. Selection supplies membership, not coordinates, distance or line of effect. |
+
+These are target-completion rules, not permission to omit required choices or costs. Optional pre-resolution
+spending and other required input use cards; unaffordable execution is blocked under
+[ability costs](#ability-costs-and-optional-spending). Source target counts/kinds and shared-roll or staged
+rules remain meaningful; ordinary targeting rule conflicts still warn without blocking. An up-to-X prompt
+does not redefine every source ability as optionally targeting fewer creatures.
+
+Each authenticated user owns an independent selection, even when the Director and a player act for the
+same character. Others can see it with indicators distinct from their own; exact styling is deferred.
+Hidden creatures cannot be disclosed through another user's indicator.
+
+| Event | Selection behavior |
+| --- | --- |
+| A gameplay action fires | Clear that user's targets and pending ability, for single and multi-target actions alike. This supersedes the earlier sticky-single-target proposal. |
+| End turn | Clear targeting. |
+| Actual target death | Deselect that target; do not treat zero Stamina as universal death. |
+| Acting-character switch | Clear that user's pending ability and targets. |
+| Click the same ability while it still awaits targets | Cancel the un-fired selection and clear targets, without confirmation. Invalidate its pending targeting interaction. |
+| Undo | Restore gameplay state but leave that user's pending ability and targets cleared. |
+
+Clearing one user's draft leaves others' drafts independent. It never deletes recorded targets, resolution
+stamps or a fired action's required continuations. Selection/cancel controls are registered operations;
+preparatory controls are not themselves gameplay firing that immediately clears the selection they set.
+An action that cannot execute has not fired. Single-target manual deselection and specialized object,
+allocation or staged target flows remain open where not specified above.
+
+### Persistent area-effect cards
+
+An ongoing area effect registers its end condition with the game clock. Its card stays fixed at the bottom
+of the game log until the effect ends, with new entries above it. Multiple area cards stack for now; compact
+or expandable formatting was recommended but is not required. On expiry the card stops being fixed and
+remains in history. Ending an area does not remove separately applied conditions with their own duration.
+
+The effect owner and Director receive affected-creature controls on the card:
+
+1. Checkbox edits immediately update the recorded affected-creature list; there is no Apply button.
+2. Each subsequent firing re-prompts for confirmation, with the previous selection checked. The table
+   adjusts affected creatures from the external map, then confirms. Stored membership never silently
+   substitutes for confirmation of this firing.
+3. Dependent clock work, including potentially affected saves, waits for confirmation and the area's
+   consequences. Preserve source timing and the FIFO/save-last policy.
+4. Resolve now uses the same operation and confirmation flow for triggers the app cannot observe between
+   clock events. It does not create a new use of the originating ability or invent a movement observation.
+
+Membership edits and firing confirmation are distinct operations. The engine owns source-specific
+consequences; a checkbox edit does not repeatedly fire all effects. Active-effect membership is distinct
+from un-fired per-user targeting and survives ordinary clear-on-fire behavior.
+
+Pinned cards are live projections of immutable records, not reordered historical events. Creation,
+updates, confirmations and resulting effects retain discrete ordered entries and actual attribution.
+Cards contain neither engine logic nor parsing; every control has the same registered headless operation.
+Exact effect-owner mapping and source-specific changes/unobserved trigger resolution remain open.
+
+Ordinary cards receive no Needs your input indicator, reminder inbox or automatic resurfacing. Users
+must notice them when offered. Persistent areas are the explicitly accepted exception. Being buried
+alone neither expires a valid response nor extends an expired window. A live card may show current
+controls while preserving the original entries and the [historical edit boundary](#director-edits-to-inline-results).
 
 ### Game log and chat scope
 
@@ -721,7 +794,8 @@ Pinned source context, not a completed FreePlay implementation contract:
   wording needs case-specific adjudication; every damage entry is not an established automatic transition.
 
 Remaining FreePlay contracts include requesting/resolving tests, supplying facts and targets, spending
-Recoveries, tracking ability reuse and elapsed fictional time, and corrections/undo without a turn boundary.
+Recoveries, tracking ability reuse and elapsed fictional time, and dependent corrections/undo. Player undo
+scope is confirmed through the beginning of the current FreePlay stretch; detailed dependency cases remain.
 Research ordinary rule expectations before asking for decisions about their table interaction.
 
 Confirmed test initiation, 2026-09-11: [How to Make a Test](../vendor/steel-compendium/en/unified/md/rule/test/test.md)
@@ -749,15 +823,48 @@ ambiguous names need disambiguation. Target selection supplies neither unknown r
 Multiple-target syntax is accepted; detailed geometry, allocation and target-change interactions remain open.
 
 The composer automatically populates `@Thorn` during Thorn's individual initiative turn. The selector
-remains editable for reactions or Director actions; it grants no additional control permissions. Defaults
-outside an identified individual turn, including FreePlay and combined hero groups, remain open.
+remains editable for reactions or Director actions; it grants no additional control permissions.
+Confirmed FreePlay default, 2026-09-12: use the character whose sheet the user is viewing, with an explicit
+`@Character` available to select another character they control. Viewing a sheet alone does not grant
+control. Headless callers supply the equivalent actor context or explicit reference rather than depending
+on a rendered sheet. Defaults between individual turns in combined groups remain open.
 
 A requested test creates an inline action card rather than rolling immediately. For Thorn, the card
 provides a Roll control to the eligible controller while preserving Director acting authority. It can
 include the agreed skill's +2. A recommended detail is to label and retain the selected skill, not merely
 the numeric bonus. The request and response share headless operations and retain actual requester/roller
-attribution. Table agreement about a skill does not create an in-app approval gate. Difficulty visibility,
-request editing/cancellation and open-request response counts remain unresolved.
+attribution. Table agreement about a skill does not create an in-app approval gate.
+
+Confirmed requested-test options, 2026-09-12: support two selectable response modes: **one volunteer**
+(one accepted character response) and **one roll per character** (separate responses from eligible
+characters). A single user controlling multiple heroes can respond separately for those heroes in the
+latter mode. These modes are distinct from source-defined group-test outcome aggregation. The request's
+mode belongs to the shared operation, not only its card presentation; exact argument names remain open.
+
+Confirmed open-request lifetime, 2026-09-12: no routine Director close step. Leave the request available
+for eligible remaining responses even as newer entries bury it, and expire it at the end of the current
+combat round. A fulfilled one-volunteer request cannot accept additional volunteers, and per-character
+response limits still apply. Expiry disables further ordinary responses while retaining the request and
+accepted results in history. This is an app interaction policy, not a universal source timing rule for
+all tests or triggered actions. Confirmed FreePlay lifetime, 2026-09-12: open requests remain usable
+until combat starts or the session ends, subject to their response limits. Do not invent FreePlay rounds
+or a wall-clock timeout. No reminder or resurfacing is introduced. Combat starts when the Director
+confirms setup with OK, as specified below; merely opening or canceling the draft does not expire these
+FreePlay requests.
+
+Confirmed campaign setting, 2026-09-12: **Show test difficulty** defaults off. With it off, requested-test
+difficulty is hidden from players and remains available to the Director and engine. Turning it on shows
+the difficulty. The label states the setting's positive behavior; final UI wording is provisional. This
+setting does not hide the ordinary public dice roll or supply an unspecified difficulty.
+
+Confirmed test-result display, 2026-09-12: publicly display the full roll calculation: base roll, applied
+modifiers, resulting total and success/failure outcome. The user rejected keeping the calculated outcome
+Director-only until revealed. Hidden difficulty does not suppress these workings or the outcome label;
+the difficulty itself remains governed by Show test difficulty. Do not invent an outcome when required
+inputs are missing, or automatically invent the test's narrative consequences from its result.
+Per-test difficulty reveal/overrides are deferred for now, as requested by the user; the campaign setting
+is the current visibility control. Effects of setting changes on existing/history entries and request
+editing/cancellation remain to be specified.
 
 ### Inline interaction cards in the game log
 
@@ -769,8 +876,8 @@ This establishes the interaction surface, not a complete trigger detector or rul
 Confirmed request scope: `actors=[@Thorn]` on the Director's test request scopes the roll to Thorn;
 Thorn's eligible controller can respond for Thorn. Omitting the `actors` argument makes the request
 active for everyone eligible to participate. Existing Director authority to act for characters remains,
-and the standing observer prohibition is not silently widened by this example. Open response scope does
-not itself settle whether the request accepts one volunteer or separate rolls from multiple characters.
+and the standing observer prohibition is not silently widened by this example. The requester separately
+chooses one-volunteer or one-roll-per-character response mode as confirmed above.
 
 Recommended continuation model: retain an identified pending interaction linked to its originating action;
 record responses and show the resulting resolution in the log. Headless callers inspect and answer that
@@ -810,9 +917,13 @@ unaccepted generic timeout or require a response from every player to end a turn
 ### Director edits to inline results
 
 Confirmed placement: an Undo button accompanies inline results, under existing player/Director undo
-permissions. Recommended granularity from the discussion, not yet independently confirmed: undoing an
-adjudication restores the prior result; undoing the original action reverses its applied effects. Preserve
-history and recorded-result redo. Detailed dependency handling remains open.
+permissions. Confirmed 2026-09-13: undoing an adjudication restores the prior effective result while
+leaving the original ability use intact; undoing the original action is a distinct operation that reverses
+its applied effects. Both correction and undo append new entries. The original log entry is never
+rewritten, and subsequent undo and interpretation use the effective result established by the new entry
+on the current history branch. Preserve original inputs/results and the links between action, correction
+and reversal. This is not a last-write-wins shortcut across abandoned branches or unrelated effects.
+Detailed dependencies within the permitted history window remain open.
 
 Confirmed user requirement: the Director can modify results inline in the game log. In the user's
 hypothetical example, Thorn's ability deals 14 damage to Boblin; the Director can click and edit the
@@ -827,17 +938,39 @@ tier, rather than directly adding/subtracting damage. One gives +2/-2 to the rol
 shifts the tier. Apply the source cancellation rules as well. A recalculated tier may change damage and
 other effects. The user's suggested +2/-2 controls express edge/bane intent, not unlimited additive damage.
 
-Recommended presentation and correction contract, pending detailed design:
+Confirmed historical-edit boundary, 2026-09-13: **once the next individual turn starts, no user may
+retroactively modify anything that happened in a previous turn without undoing back to that point.**
+This is a blanket combat-history rule, including Director corrections, roll inputs/results and applied
+effects, not merely the insufficient-resource example. A new member's turn in the same initiative group
+also crosses the boundary. Enforce it in shared operations, not only disabled inline controls.
+
+To correct an older turn, rewind through the intervening gameplay history to that turn and the point
+being changed. Do not preserve later live actions while selectively patching an older result, or offer
+a reconciliation card as a bypass for this boundary. Director rewind remains available throughout the
+current encounter under the existing scope; other users retain their own undo limits. The just-ended-turn
+gap before the next turn starts remains within the existing correction/End-turn-undo window. Closed
+sessions remain read-only. Corrections after rewind append new entries and follow the existing rule that
+new gameplay clears the available redo path while retaining abandoned history and stamped outcomes.
+
+An ongoing effect firing at its next due event or a new response to a still-valid request is current
+activity, not a retroactive edit of the earlier creation entry. Preserve those established continuation
+windows. Unknown same-turn dependency reconciliation and FreePlay correction details are not resolved
+by imposing an artificial FreePlay turn boundary.
+
+Presentation and correction contract (confirmed where noted; remaining UI details are proposals):
 
 - Show editable roll inputs separately from editable resolved damage. Label controls Add edge/Add bane
   with the actual applicable adjustment; do not imply every additional edge means another +2.
 - Changing roll modifiers re-evaluates the outcome using the accepted dice, without rerolling. Directly
   editing damage records a manual effect override rather than reverse-engineering a different dice roll.
-  Interaction between an existing manual override and later modifier edits remains open.
+  Confirmed 2026-09-13: an explicit manual damage override remains effective through later modifier
+  changes until the Director clears it. A modifier correction appends its new interpretation while
+  preserving the still-effective override and its provenance; no historical entry is overwritten.
 - Replace the prior applied effects coherently; do not apply the corrected full damage a second time or
   overwrite a sheet with an obsolete snapshot. Preserve original and revised values, inputs, affected
   targets and the actual adjudicating user in linked history. Submit through the same headless operation.
-- Later dependent actions, reactions, defeat transitions and pending cards can be affected. Exact
+- Within the permitted correction window, dependent actions, reactions, defeat transitions and pending
+  cards can be affected. Earlier-turn changes require the rewind described above. Exact same-turn
   invalidation/reconciliation and correction ordering still need a concrete walkthrough; do not silently
   replay later choices or reroll dice. A new correction can invoke the engine; undo/redo still restores
   recorded states without re-executing rules or dice.
@@ -926,12 +1059,33 @@ retain discrete ordered log records even when presented as one continuing card.
    The Director also organizes initiative groups on either side, including combining heroes; the default
    remains one hero per group.
 3. The Director clicks **OK**. On the path that requires a roll, everyone at the table sees a shared
-   **Roll initiative** phase of the action card, and anyone can click **Roll**. A separately nominated roller is not required
+   **Roll initiative** phase of the action card, and any active player can click **Roll**, with Director
+   access retained. Observers cannot roll. A separately nominated roller is not required
    for this encounter-opening interaction. This user-selected interaction is distinct from the source's
    Director-or-chosen-player wording; it does not establish permissions for other roll types.
 4. After the roll, the winner chooses **Heroes first / Foes first**: 6+ awards the choice to the players,
    and 1–5 awards it to the Director. The user confirmed this choice step before the announcement.
 5. The table receives the announcement of which side goes first and enters the combat encounter view.
+
+Confirmed setup commitment, 2026-09-12: **OK on the setup card is the dividing point between draft
+preparation and an actual combat encounter.**
+
+- Before OK, participant inclusion/exclusion, surprise and initiative-group choices are draft encounter
+  configuration. Canceling discards these choices without starting combat. Separately accepted changes
+  to the persistent foes roster, such as adding a monster, remain actual roster changes and are not undone
+  by canceling the encounter draft.
+- On OK, commit the encounter configuration, capture the current precombat gameplay state for restoration,
+  and apply the existing party-roster and character-edit locks. Capture the baseline before combat-start
+  gameplay effects change it. Then proceed to initiative roll/starting-side choice, or the already-agreed
+  surprise-determined path. Combat is active during these opening phases even before the combat view is
+  displayed or the first individual turn begins. FreePlay requests expire at this commitment.
+- After OK, abandoning the encounter uses the existing **Void: keep current state / restore starting
+  state** choice, including before initiative is finished or any turn is taken. Void skips normal ending
+  rewards/cleanup and releases the combat locks. There is no ordinary draft Cancel path after commitment.
+
+The shared registered operation must record this transition and snapshot once; retries must not replace
+the original baseline or restart the opening. This confirms the user-visible commitment boundary, not all
+source-specific combat-start effect ordering, draft reconciliation or storage implementation details.
 
 Confirmed Director-doctrine clarification: the Director can choose the starting side even when the roll
 awards the choice to the players. Keep the choice control available to the Director on either result;
@@ -944,14 +1098,15 @@ with Director access retained. The roller's identity does not determine
 which side wins the choice. Concurrent submissions must not create conflicting accepted starting sides;
 later correction is separate from duplicate delivery.
 
-The user's "anyone can click roll" establishes an open shared-roll interaction. Whether this specifically
-includes observers remains to be reconciled with the existing observer prohibition on session rolls; do
-not silently broaden observer access through this description. All may see the public roll. Also retain
-the established hidden-foe and private-stat-block policies when projecting the shared action card.
+Confirmed initiative-roll audience, 2026-09-12: the precise wording is **any active player can click
+Roll**. Observers cannot roll; the Director retains their existing table-action authority. This resolves
+the earlier "anyone" ambiguity without creating an observer exception. All eligible viewers may see the
+public roll. Retain hidden-foe and private-stat-block policies when projecting the shared action card.
 
 Engineering requirement for the eventual shared operation: concurrent clicks produce one accepted opening
-roll, shared by everyone. Exact lock/snapshot timing within setup and handling roster changes while setup
-is open remain to be defined. No initiative operation or new automatic result is implemented here.
+roll, shared by everyone. Lock/snapshot timing is now confirmed at OK as above; handling roster changes
+while the draft is open remains to be defined. No initiative operation or new automatic result is
+implemented here.
 
 ### Initiative groups: confirmed app model
 
@@ -969,8 +1124,8 @@ future extension; it is not a V1 acceptance requirement. Readable core-reference
   heroes remain separate actors and separate default groups. Multiple-character control was already
   required; this supplies its missing initiative organization.
 - Only the Director can change hero grouping in V1, including combining multiple heroes into one group
-  during initiative setup. Players do not create or edit initiative groups. This preserves the automatic
-  one-hero-per-group default and does not settle regrouping during active combat.
+  during initiative setup and while combat is running. Players do not create or edit initiative groups.
+  This preserves the automatic one-hero-per-group default.
 - For the later retainer feature, an attached retainer belongs to their hero's initiative group by default.
   Preserve the ability to distinguish the mentor relationship from arbitrary group membership.
 - In V1, the Director creates enemy initiative groups and adds monsters to them.
@@ -986,6 +1141,53 @@ established ability to act for player-controlled creatures. Assigning a group al
 to another user's character. After V1, how a player receives control and usable stat-block access for an
 allied NPC will need a concrete contract; enemy-stat-block privacy is not a reason to make authorized ally play
 impossible, and ally control does not disclose unrelated enemy data.
+
+#### Mid-combat additions and regrouping
+
+Confirmed 2026-09-12: adding a new monster during combat automatically includes it in that encounter,
+in a new initiative group at the bottom of the initiative list. It does not default to an outside-combat
+reserve. The Director can change its placement and group. This specifies the default insertion, not a
+new fixed initiative sequence replacing the established side/group choice and alternation rules.
+Confirmed 2026-09-12: the newcomer has an unused turn available in the current round, with Director
+adjustment available. It need not wait until the next round merely because it joined mid-round.
+
+The Director can move creatures between initiative groups during combat. **Whether a creature has used
+its turn is state of that individual entity, not of its group.** Moving it does not reset its spent turn
+or action allowances. If the destination group activates, a member that already acted remains grayed
+out as an already-acted participant; grouping alone grants no additional ordinary turn. Under the standing
+warn-without-blocking policy, graying communicates status rather than an additional permission lock.
+Source-specific extra turns and deliberate adjudication remain distinct from regrouping.
+
+Addition and regrouping use registered, attributed, ordered game operations accessible through the UI,
+command palette and headless interface. Preserve creature identity, effects and history when changing
+group membership; do not recreate the creature to move it.
+
+Confirmed finished-group behavior, 2026-09-12: moving a creature with an unused turn into a group that
+has already finished does **not** make that group eligible to activate again in the current round.
+Preserve the group's completed activation separately from each member's spent-turn state. Do not mark
+the transferred creature as having acted merely to represent its group's completion, and do not reset
+the group's completion because the new member is unspent. The standing warned Director-adjudication
+path remains separate from automatic eligibility.
+
+Confirmed current-actor transfer, 2026-09-12: moving the currently acting creature into another group
+does not interrupt, end or restart its individual turn. Preserve its current turn identity, spent actions,
+effects and clock boundaries; the move does not fire an extra turn-start/end event.
+
+Confirmed regrouping handoff, 2026-09-12:
+
+- If the current actor moves from active group Red to Blue, its individual turn continues. When it ends,
+  Red remains the active group and continues with its remaining members. Changing membership does not
+  transfer the active group to Blue.
+- A creature with an unused turn that joins a still-active group may act during that group's current
+  activation. This differs from joining a group that has already finished, which does not reopen it.
+- If regrouping leaves the active group with no remaining members able to take an ordinary turn, it
+  completes automatically and passes control under the existing side/exhaustion rules once any current
+  individual turn and required effects finish. Do not prematurely end a transferred actor's ongoing turn
+  or bypass pending required input. No separate group-completion confirmation is needed.
+
+Keep current actor/turn, current group activation, creature membership and individual spent-turn state
+separate so these operations preserve their different lifetimes. Empty-group presentation, source-specific
+extra turns, removal of the current actor and dependent rollback remain open.
 
 #### Source expectations and timing distinctions
 
@@ -1008,7 +1210,8 @@ Verified against core Heroes/Monsters at Compendium revision
   finishes, ordinary play passes to the other side if it has remaining turns. If that side is exhausted,
   the remaining side finishes its turns under Combat Round's rule. This normal monster sequence was
   independently re-researched at the user's request; how the app starts/ends each turn still needs its
-  interaction contract, and applying this timing to combined hero groups remains a separate app decision.
+  interaction contract. The user separately accepted successive complete turns for combined hero groups
+  as an app decision; the players choose their member order among themselves.
 - [Retainers, Retainers in Combat](../vendor/steel-compendium/en/unified/md/chapter/retainers.md#retainers-in-combat)
   gives a retainer their own actions but makes the mentor's turn start/end also the retainer's start/end.
   The player may still control the retainer if the mentor cannot act. This differs from the separate turn
@@ -1040,9 +1243,13 @@ group composition should consider EV and specific creature rules, not just headc
 Confirmed setup interaction: expose Director-only group organization on both sides before OK, retaining
 individual surprise and participation controls. Hero groups are created automatically; their membership
 can only be changed by the Director in V1. Unattached friendly NPC grouping is later work with that
-deferred feature. Specific extra-turn rules,
-regrouping/reinforcements during combat, within-group interruptions and
-undo still need contracts. A single group-level "acted" flag is not a complete turn model.
+deferred feature. New monsters default to a new group at the bottom during combat, and Director
+regrouping preserves each entity's spent-turn state. Newcomers have a current-round turn available;
+adding an unspent member does not reopen a finished group, and moving the current actor preserves its
+ongoing turn. The original group continues after a transferred actor finishes; unspent arrivals may join
+its still-active activation, and no remaining turns causes automatic completion after required work.
+Specific extra-turn rules, other within-group interruptions and dependent undo still need contracts.
+A single group-level "acted" flag is not a complete turn model.
 
 ### Overall encounter sequence
 
@@ -1058,8 +1265,8 @@ Confirmed product sequence, subject to the rules notes below:
    choices or exceptions.
 3. **Choose who acts:** the ordinary path lets a player choose **Take turn** for a character they control
    on the acting side, and lets the Director do so on their behalf or choose an enemy group. Initiative-group
-   membership must be respected; how a hero's Take turn activates its group and selects subsequent members
-   remains open. Evaluate source eligibility separately from the deliberate warned-departure path.
+   membership is respected: Take turn starts that hero and their group; after the hero finishes, another
+   member uses Take turn. Completing all member turns ends the group and advances play under the side rules. Evaluate source eligibility separately from the deliberate warned-departure path.
 4. **Take the turn:** track the actor's actions and source-defined allowances, with warned departures and
    manual adjustment available under the adaptation principles. They may choose to end the turn
    without spending every available action. Ending a turn still needs to process required end-turn effects and
@@ -1147,9 +1354,25 @@ The same operation is available to the Director on behalf of that character. Acc
 coherent-state requirements still apply; a departure is not permission to fabricate concurrent active turns.
 
 With initiative groups, the existing character-level Take turn control is only part of the interaction.
-The group activation, ordering of its member turns, handoff between different controllers and group-ending
-step need a concrete contract. Successive ordinary hero turns within a group are a recommendation for
-discussion, not yet an accepted timing rule. Do not infer shared start/end boundaries from group membership.
+Confirmed on 2026-09-12: heroes in a combined initiative group take successive complete individual turns;
+the players choose their order among themselves. Each hero retains individual start/end boundaries and
+action allowances. Group membership alone does not permit interleaving ordinary turns. Director authority,
+triggered actions and warned deliberate departures remain available.
+
+Confirmed ordinary hero-group flow:
+
+- When the heroes' side is up, a player chooses **Take turn** for an eligible hero they control. This starts
+  that hero's individual turn and activates their initiative group, without a separate group-start step.
+- After that hero finishes, another remaining hero in the active group takes their turn through the same
+  control. The players choose member order; no fixed ordering or automatic next-hero selection is required.
+- Once all members finish, the group completes and play passes to the other side if it has remaining turns.
+  The existing exhausted-side and round-boundary rules still apply. No separate group-end click is needed
+  for this ordinary flow.
+- The Director can perform these operations on behalf of any hero. Choosing member order does not grant
+  players control of another player's character.
+
+End-turn effects and pending inputs must still be resolved under their eventual timing contract before a
+turn is considered finished. This flow does not settle interruption, removal, extra-turn or undo recovery.
 
 Proposed concurrency behavior: the first valid claim accepted against the current state starts the turn. A
 competing stale claim receives the updated state and does not replace the active actor or consume another
@@ -1157,11 +1380,255 @@ turn. Repeating the accepted command does not restart the turn. Use the same aut
 player UI, Director UI, and headless clients. No voting or fixed player ordering is established by this
 control.
 
+### Player-sheet actions and explicit End turn
+
+Confirmed 2026-09-12: the detailed character sheet in the player's pane is the primary v0.01 surface for
+choosing actions. During the character's turn, it indicates the remaining action options/allowances.
+Main-action entries gray out when that allowance is spent; maneuver entries likewise reflect their spent
+allowance. Exact indicator styling remains open. This is not a sequential interface that filters and leads
+players through all available actions; that richer flow is a possible future feature, outside v0.01.
+
+The player explicitly chooses **End turn**, including when ending early with unused actions. Spending all
+ordinary allowances does not itself automatically end the turn. End turn is also a registered palette/slash
+and headless operation, attributed and recorded in the game log. Proposed spelling: `@Thorn /turn end`.
+Individual hero-turn boundaries and the previously accepted group handoff remain the baseline; the user's
+reference to finishing their characters does not establish a new command ending every controlled hero's
+turn at once. Required end-turn effects and pending-input handling still need a resolution contract.
+
+Confirmed clarification: grayed actions remain clickable and executable. Gray means the app believes the
+ordinary allowance is spent; it is advisory, not an inactive control or a requirement to unlock an override.
+Players can take another action with a rule warning where applicable; Director authority remains intact.
+Source-defined substitutions and extra actions inform rule assessment: spending an available main action
+for a second maneuver is a legal substitution, not automatically a rule violation. Exact allowance display
+and action-substitution selection remain to be designed; spent-action graying itself remains advisory.
+The separately confirmed resource-affordability check below can block an ability that cannot be paid for.
+
+The earlier recommendation that every selected attack first open a preparation card was not accepted as
+the ordinary v0.01 flow. Action cards still handle required additional input, cross-user requests and
+mid-resolution choices, and short commands may launch guided input. This correction does not settle the
+every target-input or later-stage resource-commit boundary for an individual ability. Fixed activation
+costs and pre-resolution optional spending are now covered below.
+
+### Ability costs and optional spending
+
+Confirmed 2026-09-13: when an ability is ready to execute, automatically deduct its applicable fixed
+resource cost and show the deduction in the game log. Merely selecting an ability or opening a preparation
+card does not pay its cost. Determine the actual cost using the source, selected configuration and supplied
+facts, including applicable reductions or waivers; do not blindly debit the printed number in every mode.
+The shared operation must check affordability against current state and apply the accepted cost once.
+A retry or concurrent use cannot charge twice or spend a pool value that has already been consumed.
+
+For optional enhancements that must be chosen before resolution, an action card offers the base ability
+and the enhancements. Collect the user's choice before resolving the ability unless the command already
+supplied it. Optional spending is never automatically selected. Changes to targets or effects follow the
+chosen enhancement through the same headless operation. Later-stage or conditional spending still follows
+its source timing; this decision does not demand choices before they become relevant or payable.
+
+**Confirmed exception to warn-without-blocking, 2026-09-13:** if the required resource cost cannot be
+paid under the applicable rules, the ability cannot execute. Do not allow an ordinary insufficient-pool
+use to proceed with a warning, waive the cost, or manufacture a negative balance. For example, an
+ordinary cost of 3 with only 2 available is blocked. Explain the missing resource; the failed activation
+does not roll, consume the activation cost/action allowance, or apply the ability's effects. The ability
+has not fired, so clear-on-fire does not discard the user's pending selection merely for this failure.
+
+This check applies to player and Director invocations through UI, cards, slash commands and headless
+access. Existing Director authority to make attributed resource adjustments remains; it does not create
+an implicit bypass for an unaffordable ability. Other rule conflicts retain their established warning
+policy. The exception is resource affordability for ability execution, not a new blanket prohibition on
+extra actions, targeting departures or every rule mismatch.
+
+Affordability means source-legal payment, not a universal nonnegative-number constraint. At the pinned
+Compendium revision, [Clarity and Strain](../vendor/steel-compendium/en/unified/md/feature/talent/level-1/clarity-and-strain.md)
+permits Talent spending down to minus (1 + Reason), with its stated strain effects; that legal spending
+remains supported, and exceeding its allowed limit fails affordability. Likewise,
+[Ferocity Outside of Combat](../vendor/steel-compendium/en/unified/md/feature/fury/level-1/ferocity.md)
+allows specified uses without paying ferocity, subject to its separate reuse rules. A legal waiver is
+not insufficient payment. These are sourced distinctions, not exceptions invented by the app.
+[Heroic Abilities](../vendor/steel-compendium/en/unified/md/rule/general/heroic-ability.md) distinguishes
+required activation costs from optional enhancements. Unknown costs/facts remain unresolved; do not
+invent either affordable or unaffordable status. Exact conditional-cost commitment, partial resolution
+and cancellation after already-accepted work remain open.
+
+### Move-action rules check
+
+Checked the pinned core Heroes turn/movement rules and searched core-source move-action references at
+Compendium revision `fb83a789da8f0327a389c277a0c790b1648d5810`:
+
+- [Advance](../vendor/steel-compendium/en/unified/md/feature/common/move-actions/advance.md) grants movement
+  up to speed; movement can be split around the maneuver and main action.
+- [Disengage](../vendor/steel-compendium/en/unified/md/feature/common/move-actions/disengage.md) grants a
+  shift of 1 square, modified by applicable features. Longer shifts can likewise be split.
+- [Ride](../vendor/steel-compendium/en/unified/md/feature/common/move-actions/ride.md) moves a mount and
+  rider, or has the mount Disengage under its specific rules.
+- [Stand Up](../vendor/steel-compendium/en/unified/md/feature/common/maneuvers/stand-up.md) is a maneuver,
+  not a move action.
+- [Taking a Turn](../vendor/steel-compendium/en/unified/md/rule/combat/turn.md) permits spending the main
+  action for a maneuver or move action. Thus spending the ordinary maneuver does not necessarily remove
+  the option of taking another maneuver. This is a source requirement, not a new UI approval question.
+
+No general-purpose nonmovement move action was found in this bounded check. The standard move actions
+all concern movement; this is not a proof about every content exception. Taking a move action and consuming
+all its granted movement are distinct. These findings do not add mounted combat or retainers to the prototype.
+
+Confirmed initial V1 boundary, including v0.01: ordinary movement on the board is handled outside the
+app and is not recorded.
+Do not require logging Advance/Disengage merely to track board movement, marking a generic move action
+used, or recording distances, remaining movement or split movement segments. The research question was
+whether some move actions have nonmovement effects that need app execution; a supported such action
+would still be recorded and resolve its relevant effects. This is not a request to create one.
+
+Confirmed usability refinement: start light, without dedicated **I moved** or **Convert to maneuver**
+buttons. These are possible later usability additions if the initial interaction proves unintuitive, not
+current V1 requirements or permanently prohibited controls. Main-action substitution remains a source rule;
+this decision omits a dedicated conversion button without choosing automatic cost-selection behavior.
+If these table buttons are added later, they must use registered commands and the shared log/headless path.
+
+This scopes the all-table-activity log contract: actions/effects executed in the app are recorded; physical
+movement outside it does not become a required app operation. Unrecorded movement is unknown, not proof
+that a creature stayed still or retained its move action. Mechanics that depend on it may require a supplied
+fact or manual resolution, under the existing uncertainty policy. The shared engine's future spatial
+capabilities remain separate from this client's movement tracking.
+
+### Game clock and scheduled rules work
+
+Confirmed 2026-09-12: the table has an event-based game clock. Individual turns and rounds are the initial
+timing units; preserve extension to other game events without requiring additional clocks in V1. This is
+not elapsed wall time: waiting, animation, disconnect or session pause does not advance combat timing.
+Turn boundaries belong to individual creatures, including members of initiative groups.
+
+When an action applies an effect or consumes a limited use, register the relevant timing clause with it.
+At the matching clock event, evaluate the registered work: expire an effect, reset a usage allowance,
+apply a recurring effect, or perform a due saving throw. Use distinct start/end boundaries so that
+start of a turn, end of a turn, start of a round and end of a round do not collapse into a generic tick.
+A once-per-round allowance resets at its appropriate round boundary, not on every creature's turn.
+
+Recommended representation: each registration retains its source action/effect instance, affected creature,
+reference creature or round, exact timing clause and required operation. For example, an effect on Goblin 5
+lasting until the start of Thorn's next turn is anchored to Thorn, not Goblin 5. Bind relative references
+when the effect is applied; do not reinterpret "your" from whichever user later clicks End turn.
+Keep recurring save work until the effect ends, and retire obsolete registrations when their effect is
+removed. Exact data structures and dispatch implementation remain proposals.
+
+**Automatic save-ends resolution is confirmed:** when the affected creature's end-of-turn event makes a
+save due, roll automatically, apply the outcome and announce it in the game log; no routine Roll prompt
+is required. The [saving-throw rule](../vendor/steel-compendium/en/unified/md/rule/general/saving-throw.md)
+is d10, success on 6 or higher, at the end of each affected creature's turn. Failure leaves the effect in
+place for another save when due. This is not a characteristic/skill power roll. Resolve each applicable
+effect independently, preserving the distinction between an effect instance and the conditions it causes.
+
+Source-specific exceptions remain relevant. For example,
+[Swarm of Spirits](../vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-3/swarm-of-spirits.md)
+can grant +1 to saves, and a hero can spend a
+[hero token](../vendor/steel-compendium/en/unified/md/rule/resource/hero-token.md) after a failed save to
+succeed instead, subject to that resource's use limits. Automatic rolling does not authorize automatic
+optional spending. Such choices use the existing action-card contract.
+
+Confirmed failed-save follow-up: the automatic result applies immediately, and End turn does not wait for
+an acknowledgement or token decision. On failure, keep the effect active and expose **Spend hero token**
+on that result's game-log entry to eligible controllers, including the Director acting on the hero's behalf.
+The button stays actionable until a different combat participant starts their individual turn. This includes
+another creature within the same initiative group, even if controlled by the same user: the boundary is
+creature-turn progression, not a change of user, side or group. No wall-clock timeout applies, and unrelated
+log entries do not bury away the opportunity. Existing pause/closure/access policies still govern execution.
+
+If used while the opportunity is open, spend the token under the source resource/use rules, change that
+save's outcome to success and end its effect. Preserve the rolled failure and append the attributed token
+use and resulting state changes; do not reroll. An accepted use consumes this opportunity. If another
+participant starts first, the contextual button becomes inactive. A racing spend/start must be ordered
+against shared state so the expired button cannot apply stale work or spend twice. Director manual
+adjudication remains available under the historical-edit boundary: after the next turn starts, editing
+that prior result requires rewind. Opportunity closure is not a bypass for that boundary.
+The response remains tied to the original save and its turn for source use-limit assessment.
+
+This timing is the user's app decision for this failed-save follow-up, not a universal extension of every
+trigger window. Undo/re-ending behavior is specified in the history contract below. Same-creature extra
+turns and other optional-choice timing remain open.
+Likewise, a monster's optional
+[End Effect](../vendor/steel-compendium/en/unified/md/rule/monster/end-effect.md) tradeoff is not an
+automatic instruction to spend Stamina.
+
+Automatic clock work uses shared headless operations and produces discrete ordered log entries showing
+its cause, dice/modifiers and state changes. The initiating End turn retains actual user attribution;
+consequent automation is identifiable as system work linked to that event/source. Rendering the log/card
+never drives the clock. Retries cannot reroll a due save or apply scheduled work twice. Undo/redo must
+restore the recorded timing registrations and outcomes consistently with restored state, without new dice;
+the detailed dependent-rollback contract remains open.
+
+Research checkpoint: two independent local-Compendium investigations found no general ordering rule for
+independent effects sharing a turn/round boundary. Explicit rules cover presented order within one ability
+and player-then-Director ordering of same-trigger triggered actions; neither supplies a universal clock
+queue. [Game of Exceptions](../vendor/steel-compendium/en/unified/md/chapter/the-basics.md#game-of-exceptions)
+gives specific rules priority and the Director final adjudication authority. Concrete unresolved cases
+include the Human Bandit Chief's End Effect versus its normal save, wet's fall consequence versus its
+save, and a new save-ends effect imposed at turn end. See the
+[ordering synthesis and supporting reports](research/turn-boundary-ordering.md).
+
+Confirmed initial app policy, 2026-09-12: for work due at the same clock boundary, resolve events in the
+order they were placed into the queue, with due **save-ends rolls last**. Preserve the established enqueue
+order rather than deriving it from UI rendering or response arrival. This is the selected default for the
+source gap, not a claim that the Compendium prescribes FIFO or save-last ordering. Specific source
+sequences and the separate same-trigger ordering rule still apply within their scopes.
+
+The earlier recommendation for a mandatory Director ordering card at every unresolved collision was not
+selected. Ordinary queued work follows this default; actual choices and required input still use action
+cards. Director adjudication remains available. Save-last does not authorize automatic optional spending,
+remove source save replacements, or close the accepted post-save hero-token opportunity.
+
+Confirmed case ruling, 2026-09-12: for Essence of Tides' **Convocation of Waves**, apply slowed to a
+qualifying enemy ending its turn in the stream, then include that new effect in the same turn's final
+save phase. A successful save removes that effect; failure leaves it active, with the accepted hero-token
+follow-up. Do not reapply the stream merely because its target remains there after the save; this resolves
+one exposure at that turn boundary. The user accepted the recommendation after the dedicated
+[research pass](research/essence-of-tides-save-timing.md).
+
+The general "each turn" save rule and analogous core abilities support the interpretation, but no explicit
+same-boundary answer was located. Record it as an accepted case ruling, not a claim of explicit source
+certainty. The user subsequently established the standing save-phase policy below; that explicit decision
+supersedes the earlier case-only scope for save eligibility. Convocation tests ending position, not a
+whole turn spent in the stream; once applied, its slowed effect persists until saved against or otherwise
+removed, even after leaving. Map facts remain table-supplied.
+
+**Standing save-phase policy, explicitly confirmed 2026-09-12:** every applicable save-ends effect applied
+before the boundary's final save phase begins is included in that phase, unless its source specifies
+otherwise. Determine eligibility from the state after preceding queued work has resolved, not a stale
+list captured before that work. This includes effects newly imposed during end-turn processing. Respect
+which creature's turn makes the save due; it does not grant every creature a save on every turn or round
+boundary. Source-specific save replacements and ending rules still apply. This is an explicit general app
+policy, not an inferred precedent or a claim that the Compendium states it verbatim.
+
+Open resolution details: work created during the save phase or a later response, newly registered non-save
+work during a boundary, exact commitment and continuation when a choice appears, correction after later
+events, and manual resolution of unknown timing clauses. Queue-order recording and restoration must be deterministic;
+its concrete storage schema remains an engineering proposal. The clock does not invent missing source semantics or replace non-clock triggers
+such as taking damage. The existing warn-without-blocking and Director-adjudication doctrine remains.
+
 ### Undo permissions and proposed campaign control
 
-Confirmed: players can undo their own actions, back as far as the beginning of their turn. The Director can
-undo those actions and redo them as well. This complements the Director table-capability doctrine; Director
-redo is explicitly established. Player redo has not been specified.
+Confirmed: in combat, players can undo their own actions back as far as the beginning of their turn,
+and can redo their own undone actions. The Director can undo and redo as well, under the Director
+table-capability doctrine. Player redo was confirmed on 2026-09-12.
+
+Confirmed FreePlay undo scope, 2026-09-12: players can undo their own actions back to the beginning of
+the current stretch of FreePlay. This replaces the individual-turn boundary where there are no turns;
+it does not authorize undo across an earlier combat or session boundary. The existing Enable user undo
+setting, character-control/session permissions and dependency handling apply. Use the same registered
+history operations and restore recorded state without rerolling or recalculating. This scope decision
+does not independently settle unresolved cross-user dependencies or authorize undo of unrelated users'
+actions. FreePlay undo leaves the invoking user's pending ability and targeting cleared as already agreed.
+
+Redo restores the recorded action and its consequences exactly, including its resource expenditures,
+without rerolling or recalculating. It uses the same registered UI/palette/headless history operation and
+preserves original attribution while recording who invoked redo. This is distinct from newly ending a
+reopened turn and choosing whether to spend a refunded hero token again: explicitly redoing the token
+expenditure restores that recorded expenditure. Existing control/session boundaries and player history
+scope remain.
+
+Confirmed 2026-09-12: taking a new gameplay action after undo clears the available redo path. Continue
+from the new action; the abandoned actions remain readable in retained history, not eligible for ordinary
+Redo along that discarded path. Clearing redo does not delete stamped end-turn or round-boundary results:
+those remain available for the accepted same-boundary reuse, including original failed saves. Read-only
+inspection and chat do not constitute a new gameplay action for this purpose. This establishes the ordinary
+branching behavior, not a new history browser or an ability to reactivate arbitrary discarded branches.
 
 Confirmed campaign setting: **Enable user undo**, enabled by default for new campaigns (confirmed 2026-09-11).
 Disabling it blocks ordinary player undo while retaining Director undo/redo. Setting-management authority and
@@ -1169,16 +1636,84 @@ when changes may apply remain open.
 
 The game log/state machine restores recorded state, rather than rerunning rules or dice. Undo/redo must change
 actual affected sheet/monster/resource state, not just visible dialogue. Preserve the recorded inputs,
-outputs, and later history for redo under the eventual continuation policy. The existing pause/session gates
+outputs, and later history under the confirmed redo/branching policy. The existing pause/session gates
 and audience restrictions still apply unless a specific exception is established.
 
-This checkpoint settles the basic permission direction, not the undo tree. Detailed grouping/dependencies, new
-play after undo, treatment of triggered actions on another actor's turn, whether a just-ended turn can still
-be undone, shared-controller attribution, and Director rewind limits remain for later
-history/action-resolution design. The player boundary does not grant selective removal of an earlier action
-while leaving incompatible dependent effects in place. Free-play undo needs a separate scope because it has no
-turn boundary. The prior local prototype's refusal to submit new actions from past history remains an
-experiment choice.
+Confirmed 2026-09-12: a player may undo their own **End turn** and reopen that individual turn provided
+no next individual turn has started. The window closes when the next turn begins, including another
+member's turn within the same initiative group. Existing Enable user undo, character-control, session and
+Director authority policies still apply. End turn and its undo use the shared registered/headless history
+operations. The dependent Director-adjudication case below is explicitly allowed; this does not grant
+arbitrary undo of unrelated users' actions or reopening closed sessions. Ordinary undo/redo itself does
+not rerun dice.
+
+Confirmed same-end reuse, 2026-09-12: stamp the resolved turn end so undoing it and ending that same turn
+again reuses its original results. Do not reroll the same saving throws or recalculate already resolved
+end-turn work simply because undo reopened the turn. Preserve the stamped resolution in retained history
+when undo restores the earlier live state; a fresh command submission is not a fresh turn-end identity.
+Restore/reapply the recorded changes once, with visible history, rather than adding duplicate effects.
+Concrete identity/storage representation remains an engineering choice.
+
+Confirmed effect reconciliation, 2026-09-12: if additional actions occur after reopening the turn, reuse
+the stamped results for previously processed effects that are still present. Resolve newly added effects
+when due, including a first save for a new applicable save-ends effect, and retain those new results with
+the same turn end. Effects removed during the reopened turn stay removed; replay must not resurrect them.
+The earlier results remain in history even when no longer applicable. Reuse is tied to the particular
+effect and turn end, not just a condition name shared by unrelated effects. Do not restore an obsolete
+whole-sheet snapshot over the intervening actions.
+
+Confirmed failed-save token undo, 2026-09-12: when a player undoes their own End turn after spending a
+hero token on its failed-save result, also undo that dependent expenditure and success override. Refund
+the token to its pool and restore the associated use bookkeeping and effect state as part of restoring
+the pre-end state. Retain the original failed save in the turn-end stamp; undo does not replace it with a
+new roll or permanently stamp the optional token-funded success as the automatic outcome.
+
+When the same turn ends again and that failed save still applies, reuse the failure and offer the token
+button again. The player may spend the refunded token again or choose to keep it. Do not automatically
+repeat the prior optional expenditure. The opportunity retains its accepted closing event and source
+resource/use rules. Preserve the expenditure, undo and any later new expenditure in attributed history;
+refunds and repeated responses must not duplicate tokens or charges.
+
+Confirmed automatic round-boundary undo, 2026-09-12: if the last individual turn's End turn advances the
+round, undoing that End turn also reverses the automatic round-boundary changes it caused, provided the
+next individual turn has not started. Restore the prior round/turn/group bookkeeping, usage allowances,
+resource values and affected effects from their recorded changes. A round increment alone does not close
+the accepted End turn undo window.
+
+Retain the resolved round-boundary work and any dice/results with the corresponding history stamp.
+Crossing the same boundary again reuses those results, without fresh rolls, duplicate grants or resets
+applied on top of already-restored values. Reconcile applicable state through the same retained-history
+and changed-effect principles rather than overwriting unrelated state. Each automatic change needs its
+cause and reversible state recorded; undo operates on those records rather than guessing inverse rules.
+The user accepted this behavior on the basis of sound undoable log design; correctness still requires
+implementation and verification, not an assumption that all dependency cases are already solved.
+
+Confirmed initial policy, 2026-09-12: a player may still undo their End turn if the Director has since
+adjudicated one of that end's results and no next turn has started. Undo also reverses the dependent
+adjudication; do not require a separate Director rewind or approval merely because that intervening change
+was authored by the Director. Preserve both the original adjudication and its reversal in attributed
+history. The user prefers permitting this now and revisiting restrictions only if it becomes a problem.
+
+This resolves the stated dependent-adjudication case, not arbitrary deletion of another user's unrelated
+activity or undo across a subsequent turn. Other cross-user dependency shapes and ambiguous source-specific
+reapplication/replacement cases still need contracts when encountered. The accepted new/removed-effect
+behavior does not authorize changing an existing stamped roll or silently rerolling.
+
+Confirmed Director rewind range, 2026-09-12: the Director can repeatedly undo gameplay back to any earlier
+point in the current encounter, including previous turns and rounds, with no arbitrary action-count or
+step limit. A later turn having started closes the player's End turn undo window and direct editing of
+prior-turn events for everyone. It does not close the Director's rewind capability; that rewind is the
+required route for correcting an older turn. Restore the dependent gameplay state coherently from retained history; existing
+recorded-result reuse, redo and branch behavior remain. This answers the current-encounter question;
+closed-session immutability and access/privacy policies still apply. Rewind across separate encounters or
+session lifecycle transitions has not been specified by this decision.
+
+The confirmed history contracts now include appended corrections/reversals, new-play branching, stamped
+turn/round reuse, FreePlay undo scope and mandatory rewind before prior-turn edits. Remaining work includes
+same-turn dependency reconciliation, triggered actions on another actor's turn, shared-controller cases
+and rewind across encounter/lifecycle transitions. Player undo does not grant selective removal of an
+earlier action while leaving incompatible dependent effects in place. The prior local prototype's refusal
+to submit new actions from past history remains an experiment choice.
 
 ## 6. Initial rules check
 
@@ -1190,7 +1725,7 @@ focused check of the walkthrough, not a complete encounter rules audit or a clai
 | Opening order | [Combat Round](../vendor/steel-compendium/en/unified/md/rule/combat/combat-round.md) includes surprise. When both sides have unsurprised creatures, the Director or their chosen player rolls one d10: 6+ gives the players the choice of starting side; otherwise the Director chooses. The die does not directly force heroes/monsters to start. Specific content can modify this procedure. |
 | Turn budget | [Taking a Turn](../vendor/steel-compendium/en/unified/md/rule/combat/turn.md) provides a main action, maneuver, and move action. Movement can be split around the others; a main action can become a move action or maneuver. The user clarified that “bonus action” meant triggered action; it is not an additional standard turn slot. |
 | Free and triggered actions | [Free Maneuvers](../vendor/steel-compendium/en/unified/md/rule/combat/free-maneuver.md) and [Triggered Actions](../vendor/steel-compendium/en/unified/md/rule/combat/triggered-action.md) have distinct timing/limits. Triggered actions can occur on someone else's turn when their trigger occurs. |
-| Alternation and groups | Combat Round allows the remaining side to finish its unspent turns when the other side is exhausted. Ordinary enemy group members take successive creature/squad turns before passing sides. See [initiative groups](#initiative-groups-confirmed-app-model) for verified construction guidance, squad/retainer distinctions and the confirmed app extension to both sides. Detailed sequencing remains open. |
+| Alternation and groups | Combat Round allows the remaining side to finish its unspent turns when the other side is exhausted. Ordinary enemy group members take successive creature/squad turns before passing sides. See [initiative groups](#initiative-groups-confirmed-app-model) for verified construction guidance, squad/retainer distinctions and the confirmed app extension to both sides. Ordinary sequencing and regrouping are confirmed above; special turns and interruption cases remain open. |
 | Next round | Combat Round confirms the side that acted first in the initial round starts subsequent rounds. |
 | Victories | [Victories](../vendor/steel-compendium/en/unified/md/rule/resource/victories.md) ties combat awards to survival and achievement of party objectives, with Director discretion for difficulty. A slain-enemy counter alone cannot decide awards. |
 | Free-play boundary | Combat Round says harm intent or a damaging/negative environmental threat can start combat before the harmful action occurs. Free-play abilities and traps therefore need a rules-aware transition into encounter play; lack of a manually loaded encounter cannot bypass combat resource costs. |
@@ -1238,7 +1773,8 @@ requested app loop while applying those verified mechanics.
   participant cannot. The active Director can act for any table character without a share, including while the
   owner is connected. Neither route changes the roster, resets the turn, bypasses pause/rules, or grants build
   editing. Commands identify the actual acting user and controlled character.
-- Starting an encounter locks party players/characters. Attempts to add/remove them through either UI or
+- Director OK in encounter setup locks party players/characters before initiative. Merely opening the
+  draft does not apply that lock. Attempts to add/remove them through either UI or
   headless operations fail until the encounter ends or is voided. Pausing does not unlock the roster. Later
   session removal does not implicitly expel someone from the campaign.
 - Void-and-keep retains current character/monster values and skips all normal ending awards/effects.
@@ -1323,60 +1859,63 @@ requested app loop while applying those verified mechanics.
 - Accepted encounter damage/resource changes appear immediately on the main sheet and survive reload.
   Undo/reset restores that same state; keep-state voiding does not reapply changes. No encounter-end
   copy/merge is required.
-- Player undo restores their recorded actions as far back as their turn start, without crossing that
-  permission boundary. Director undo/redo restores recorded effects without rules/dice calls. New campaigns
+- Player undo restores their recorded actions as far back as their turn start or current FreePlay stretch,
+  without crossing that permission boundary; player redo restores their recorded undone actions. Director
+  undo/redo can traverse the current encounter and restores recorded effects without rules/dice calls. New campaigns
   enable user undo by default; disabling the setting blocks player undo through shared operations while
   retaining Director controls. Detailed dependency cases await the deferred history/resolution design.
+- Corrections and undo append attributed entries; original history remains intact. Undoing a correction
+  restores its prior effective result without undoing the source ability. A manual damage override survives
+  later modifier edits until explicitly cleared.
+- Starting the next individual turn blocks direct changes to previous-turn events for every caller,
+  including the Director. Rewind intervening history before editing; a still-valid continuation performs
+  current work without rewriting its originating event.
+- An unaffordable ability fails before dice, costs, action allowances or effects change through UI or
+  headless execution. Legal payment waivers and permitted negative resources still work. A blocked attempt
+  has not fired and therefore retains its pending selection.
 - Table redesign or disabling the visual log/dice tray does not remove recorded history or shared operation
   access.
 
 ## 8. Continue exploring
 
-Review checkpoint, 2026-09-12: the opening flow, three-pane role layout, group defaults, Director
-authority and command/action-card foundation are recorded. Human command syntax is accepted. The full FreePlay/combat baseline is not complete. The following gaps concern
-playable behavior, not a demand for more visual polish or whole-book automation.
+Checkpoint **2026-09-13**: opening commitment, group/turn flow, mapless targeting, persistent-area cards,
+requested tests, resource affordability, clock defaults and the principal history boundaries are recorded.
+The full FreePlay/combat baseline is not complete. Remaining work concerns playable behavior, not visual
+polish or every rulebook ability as a prototype gate. Ask material product questions in groups of three.
 
 ### Next baseline contracts
 
-| Topic | Missing behavior / useful concrete example | Work needed |
-| --- | --- | --- |
-| Group and creature turns | Two heroes with different controllers share a group: who starts it, which creature acts first, how the next member takes over, and what ends the group? Track actor-specific start/end effects and action allowances. Switching among a player's controlled heroes must be usable. | Product interaction and sourced timing. Successive ordinary hero turns are a recommendation, not yet confirmed. |
-| FreePlay | Use an ability or request a test, supply targets/facts, record damage/healing/Recoveries and manual changes, track outside-combat reuse and fictional time, and handle a harmful declaration before Director-started combat. Define action interactions and undo scope; the shared three-pane layout is confirmed. | Rules research plus product workflow; existing permissions and manual-play philosophy are settled. |
-| Opening completion | Define when setup commits participants/groups/surprise, captures pre-start values, locks character editing and applies combat-start effects. Distinguish canceling setup from voiding an encounter; preserve accepted roll/choice through pause or reconnect. | Concrete engineering lifecycle proposal; surface only user-visible tradeoffs needing a decision. “OK” alone does not establish every ordering detail. |
-| Action resolution | Select an action and targets, supply spatial facts, accept costs/dice, apply supported effects, offer triggered actions and record manual/pending work. Establish which independent work may proceed and how completion avoids double application. | Sourced worked example and product decisions, especially interruption/continuation. Contextual trigger cards are accepted; exact detection, commitment and response-order contracts remain open. |
-| Resources, conditions and round boundaries | Define encounter/round/turn grants and resets for the chosen hero/foe, surprise application/expiry, ongoing effects, saves and defeat handling. Source ordinary rules; retain per-creature timing inside groups. | Bounded research and shared-state contract. Surprise does not skip the creature's ordinary turn. |
-| Correction and changing combat | A second controller acts, an earlier result is corrected/undone, or the Director adds/removes a foe from the active group. Preserve spent actions, dependent effects and retained history. Define group/side handoff after interruption and possible regrouping. | Product decisions plus engineering. Foe management and Director authority are already allowed; do not reopen them. |
-| Encounter end and return to FreePlay | Record Director completion, applicable Victories and end effects, resolve/cancel outstanding work, clean defeated foes and retain survivor/current hero state. Exercise keep/reset void and session closure separately. | Source research and ordering contract; normal ending, void choice and closed-session immutability are already settled. Inventory/loot is excluded from v0.01. |
-
-The user accepted FreePlay's shared layout and both player/Director test initiation. The common command model, palette, action cards and headless execution are checkpointed, including
-accepted human syntax. Detailed action interactions remain next work on resumption.
-Group/member-turn controls and a sourced Fury action remain subsequent walkthroughs; ordinary monster-group
-timing is source-resolved, while applying that timing to combined hero groups remains an app decision.
+| Topic | Still unresolved |
+| --- | --- |
+| Concrete action/response sequence | Source-specific earlier trigger windows, optional responses after already-applied effects, conditional costs and partial/manual completion. Work a sourced Fury action through targets, choices, effects and a response. |
+| Same-turn dependencies | Corrections that invalidate later work within the same permitted turn window; response/undo grouping and controller races. Prior-turn edits already require rewind. |
+| Remaining group cases | Removal of the current actor, special extra turns, empty-group presentation, round completion with unspent arrivals in finished groups, and dependency recovery. Ordinary additions, transfers and automatic handoff are settled. |
+| Setup changes and first-round effects | Reconcile persistent roster changes while setup is draft, then order source-specific startup effects. OK/snapshot/locks, cancel/void and observer roll exclusion are settled. Initial monster-group defaults and template persistence are not prescribed. |
+| FreePlay mechanics | Outside-combat resource/reuse rules, Recoveries, fictional time and a harmful declaration before Director-started combat. Actor defaults, request expiry and player undo scope are settled. |
+| Area details and complex targets | Exact effect-owner control mapping, source-specific membership/entry effects, objects, allocations and staged targets. Card persistence, membership controls, re-prompting and dependent waits are settled. |
+| Tests and visibility | Difficulty-setting changes affecting existing/history entries, request editing/cancellation/reassignment, response-mode default and source-defined group aggregation. No per-test difficulty reveal for now. |
+| Encounter completion | Source-driven rewards/objectives/end-effect ordering, pending-work disposition and roster cleanup. Normal completion and Void keep/reset are distinct; closed sessions remain read-only. |
 
 ### Smaller opening and visibility questions
 
-- The shared Roll control is open to participants; whether the user's “anyone” explicitly includes observers
-  remains an unresolved exception question. Until settled, do not silently override the existing observer
-  prohibition on session actions.
-- Starting enemy group membership is not prescribed: manual construction is confirmed, but singleton
-  defaults, suggested balanced groups and persistence between encounters are not. No exact group-count or
-  EV limit should become a hard gate.
-- Both sides entirely surprised or an empty side require explicit adjudication rather than an invented
-  ordinary initiative result. Group membership does not replace individual surprise.
-- Group/active-turn presentation must respect hidden foes. Show/hide does not disable their gameplay, and
-  their names already remain visible when used in game-log entries; broader group disclosure is not implied.
+- Active players and Director may roll shared initiative; observers cannot. All supported table views retain
+  their privacy rules. Hidden foe group/turn presentation cannot expose full stat blocks or other private data.
+- Both sides entirely surprised or an empty side require explicit adjudication; no invented initiative default.
+- Initial monster grouping is Director-managed. Automatic suggestions and saved-template group persistence
+  remain unspecified. The confirmed new-singleton default applies to mid-combat additions.
+- Turn-end optional opportunities and the next-turn historical-edit boundary are distinct. Same-creature
+  extra-turn timing still needs source-specific treatment; no silent extension of old-result editing is implied.
 
 ### Follow-ups when their scope is selected
 
-- **Minions:** distinct squad construction, shared Stamina, captain relationships and action sequencing are
-  needed when minions enter the playable slice. An ordinary non-minion foe does not depend on this work.
-- **Fuller V1:** special extra turns, respite lifecycle, saved-template initiative-group persistence, inventory
-  wrap-up, forced-access-change recovery and richer sharing need their relevant contracts. Their presence in
-  this spec does not turn all of them into prototype gates. Standalone void while paused remains open.
-- **After V1:** retainers and friendly-monster control/attachment and timing; dedicated montage/negotiation
-  flows, downtime projects and nested activities. Keep the accepted extension boundaries.
+- **Minions:** squad membership, shared Stamina, captains and casualty/action sequencing. Initiative groups
+  must remain separate; an ordinary non-minion fixture does not require minion automation.
+- **Fuller V1:** respite lifecycle, special turns, inventory wrap-up, source/build reconciliation, forced
+  access-change recovery and richer sharing. Standalone Void while paused and cross-encounter rewind remain open.
+- **After V1:** playable retainers/friendly monsters and their attachment/control, dedicated montage and
+  negotiation modes, downtime projects, nested activities and custom/adventure modules.
 
-Engineering verification remains separate from product decisions: duplicate commands and concurrent clicks
-must not reroll or apply effects twice; authorized headless and UI clients must read the same persisted
-outcome. Tests and independent rules review follow once a bounded behavior is implemented. Neither this
-cleanup nor a source citation certifies the existing experiment as the completed combat system.
+Engineering work includes shared idempotent operations, current-state checks, authority/privacy enforcement,
+headless persistence/replay and tests for the selected slice. Neither this checkpoint nor the grammar
+recognizer certifies an implemented gameplay engine. Keep source findings, app decisions and proposed
+schemas distinct; [the decision record](gameplay-decision-record.md) preserves the discussion trail.

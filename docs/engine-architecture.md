@@ -2,7 +2,8 @@
 
 **Milestone scope:** the [v0.01 checkpoint](pre-alpha-design-gaps.md) selects a connected prototype with
 partial ability parsing and a visible game log. The reusable engine intent below remains the architectural
-destination. Minimum automation, manual sequencing and combat timing remain open in the active
+destination. Selected timing, cost and history policies are confirmed; minimum automation and remaining
+manual/response sequencing are open in the active
 [FreePlay/combat discussion](table-spec.md#8-continue-exploring); the existing bounded experiment does not
 settle those contracts. Initiative groups organize both sides while preserving controller/creature identity
 and applicable individual timing. Retainers and friendly monsters are future extensions beyond V1, not
@@ -50,7 +51,13 @@ authoring requirement. See the [release content scope](reference-library-spec.md
 The confirmed [rules adaptation principles](rules-adaptation-principles.md) govern these boundaries.
 Evaluate game-rule compliance faithfully and return visible warnings for conflicts; the application must
 support deliberate player/Director departures and recorded manual adjustments. A compliance warning is not
-an authorization failure. Missing facts or unsupported mechanics remain unresolved until supplied or
+an authorization failure. Confirmed 2026-09-13 exception: ability resource unaffordability blocks execution,
+including Director invocations, through the shared operation. Evaluate actual source-legal payment,
+including cost reductions, waivers and permitted negative ranges; a blanket zero floor is incorrect.
+Automatically deduct applicable fixed costs when execution is ready, once across retries/concurrency;
+collect pre-resolution optional enhancements through shared input requests unless already supplied.
+Keep insufficient resources distinct from ordinary warnings, missing facts and authorization failures.
+See [ability costs](table-spec.md#ability-costs-and-optional-spending). Missing facts or unsupported mechanics remain unresolved until supplied or
 adjudicated, rather than producing invented automatic effects. Expose complete source text and the actual
 resolution steps alongside accepted changes. The visible log is a view of recorded operations, not a required
 executor of state changes.
@@ -102,11 +109,46 @@ selected actor, not the issuer. Ambiguous names need disambiguation before stabl
 Discovery and execution retain existing authority, privacy and lifecycle boundaries, including Director
 acting authority and warned departures from game rules.
 
+Confirmed history refinement, 2026-09-13: corrections and undo append new entries without rewriting the
+original. Subsequent interpretation and undo use the effective result on the current branch, retaining
+links to prior results. A manual damage override survives later modifier corrections until explicitly
+cleared. Undoing an adjudication restores the prior effective result, independently of undoing its source
+ability. Once the next individual turn starts, any modification to prior-turn gameplay requires sequential
+rewind through intervening history first, including Director edits; do not implement selective retroactive
+patching or a reconciliation-card bypass. New current-event continuations remain distinct from editing
+old events. See [correction boundaries](table-spec.md#director-edits-to-inline-results).
+
 Contextual triggered-action controls stay on their originating entry. The accepted app closing event is
 the triggering creature's turn end, without a clock timer. Source-specific earlier timing and late-response
 reconciliation still need contracts. Director result corrections reinterpret the resolution and replace
 applied effects once, preserving accepted dice/history and appending adjudication. Undo/redo restores
 recorded state without rerunning rules or dice. Detailed dependencies remain open.
+
+The [game-clock contract](table-spec.md#game-clock-and-scheduled-rules-work) is confirmed: individual turn
+and round boundaries dispatch timing work registered when effects apply or limited uses are consumed.
+Distinguish start/end events and reference the correct creature/round. Expiry, usage reset, recurring
+work and due save-ends rolls use the same headless operations and ordered log. Due saves roll automatically;
+optional spending still requires a choice. Clock work is driven by game events, not wall time or UI rendering.
+Failed-save hero-token responses do not delay turn completion; their result-line opportunity closes when
+a different participant begins an individual turn. Order response/start commands against shared state.
+The initial app default processes work due at one boundary in enqueue order, holding save-ends rolls until
+last; preserve applicable explicit source sequences. Standing policy includes applicable save-ends effects
+applied before the final save phase begins, using the state after preceding work. Exact dispatcher/storage
+schemas, work created during/after that phase and other pending-choice handoffs remain open.
+
+Resolved turn ends retain a stable stamp and their recorded outcomes across undo. Ending the same turn
+again reuses those results without rerolling or recalculating resolved work; the live-state rollback does
+not erase that retained resolution. After further actions, reuse prior results for still-present effects,
+resolve newly added effects when due and retain their results, and leave removed effects removed.
+Reconcile by effect identity without overwriting intervening state. Undo also reverses the player's own
+dependent failed-save token spend and success override; retain the failed roll and reoffer the optional
+spend when that same end resolves again. Never automatically repeat the spend. If End turn advanced the
+round, undo also restores its automatic boundary changes while the next turn has not started. Retain the
+round-boundary stamp and results for reuse, without fresh rolls or duplicate resets/grants. An intervening
+Director adjudication of that end-turn result is also reversible by the player's End turn undo; record
+that reversal without a Director-approval gate. Other cross-user responses and source-specific replacement
+cases remain open. Exact stamp/schema design is an
+implementation choice.
 
 The game-log/table interaction surface must expose an extensible API-like boundary for other programs and
 services to contribute activity and interactions. Recommended integration uses structured submissions,
@@ -294,8 +336,9 @@ fits one atomic calculation or that every action requires a confirmation screen.
 - Keep application permissions and authoritative commits outside the pure calculation layer. An engine result
   alone does not grant permission to alter another participant's state.
 - Action-by-action encounter undo is required. Historical detail remains preserved across sessions; live
-  rollback across a closed-session boundary is unavailable in v1. Correction records, permissions, and
-  continuation within an open session remain to be specified.
+  rollback across a closed-session boundary is unavailable in v1. Appended correction records, player
+  turn/FreePlay scope, Director encounter rewind and new-play branching are confirmed; remaining
+  same-turn dependencies and cross-encounter continuation still need contracts.
 
 ## History and state restoration
 
@@ -340,9 +383,10 @@ discarded during forward execution. The checkpoint's proposed state records must
 concrete storage and recovery implementation remains undecided.
 
 The requirement is sequential rollback to a prior point. It does not establish selective deletion of an
-arbitrary earlier action while retaining dependent later results. Action boundaries, chat behavior, access to
-historical information, and whether continued play retains an alternate timeline remain product decisions. Do
-not implement a branching-history system by assumption.
+arbitrary earlier action while retaining dependent later results. New gameplay after undo clears redo
+availability but retains abandoned records and boundary stamps. This is not a history-branch browser.
+Remaining action/dependency boundaries, chat presentation and private-history projections still require
+contracts; prior-turn direct editing already requires rewind.
 
 ## Future adapters
 

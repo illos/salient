@@ -61,6 +61,18 @@ These reports cite the pinned core rules; the table below states design implicat
 | An action may create other actions | Parent/child references; no need to embed executable commands inside string arguments. |
 | Corrections must replace already-applied effects | Event/effect references and explicit correction operations, distinct from reroll and undo. |
 
+## Gameplay refinement, 2026-09-13
+
+The syntax baseline remains unchanged. [The command reference draft](../table-command-catalog.md) applies
+it consistently to turn/group controls, per-user selection, test response modes, persistent-area membership
+and confirmation, setup commitment, resource choices and appended correction/undo. Additional names and
+schemas remain proposed; their gameplay boundaries are confirmed in the owning specs.
+
+Cards are live projections of immutable entries. Parsing happens before binding/schema validation;
+affordability and historical-edit locks are shared execution checks. Selecting a target is a preparatory
+registered operation, not a gameplay firing that immediately clears its own selection. These distinctions
+prevent syntax rules, UI presentation or a client's route from deciding game behavior.
+
 ## Established designs and their useful parts
 
 There is no single standardized “slash-command grammar” that fits this application. The slash is a UI
@@ -167,9 +179,10 @@ number        = JSON-NUMBER ;
 `JSON-STRING` and `JSON-NUMBER` import the lexical definitions from RFC 8259 sections 6–7 [5], rather than
 inventing another quoting system. The tab notation above denotes an actual tab, not a backslash followed
 by `t`. Reject invalid Unicode scalar sequences, nonfinite/unrepresentable numbers and structurally invalid
-types. Source-rule limits are separate: a spend above a rules allowance or distance above a source range
-produces the established warning/manual path, not a syntax rejection. Signed resource values such as
-negative clarity must be representable. Strings can contain escaped line breaks; they cannot contain
+types. Source-rule limits are separate from parsing. An unaffordable ability is syntactically representable
+but blocked by the shared execution check (confirmed 2026-09-13); an ordinary range conflict retains the
+warning/manual path. Signed source-legal resources such as negative clarity must remain representable.
+A prior-turn correction is likewise parsed normally but requires rewind before execution. Strings can contain escaped line breaks; they cannot contain
 literal control characters.
 
 Disambiguation and semantic rules complete the grammar:
@@ -215,7 +228,7 @@ accepted baseline; the broader catalog remains design input.
 | Local roll modifiers | `@Lyra /ability use ability="Artful Flourish" targets=[@Goblin5,@Goblin6] modifiers=[{"target":@Goblin5,"edges":1}]` | Modifier provenance and scope remain attached to one target of a shared roll. |
 | Ordinary test | `@Thorn /test roll characteristic=might skill=climb edges=1` | One skill bonus and edge category; no arbitrary extra skill stacking. |
 | Requested test | `/test request characteristic=might actors=[@Thorn] difficulty=medium` | No creature actor for the Director request; authenticated requester and requested actor differ. |
-| Open requested test | `/test request characteristic=intuition` | Opens participant scope; completion policy is still an unresolved product decision. |
+| Open requested test | `/test request characteristic=intuition` | Opens participant scope. Choose one-volunteer or one-roll-per-character mode through explicit context/card input; no default has been selected. |
 | Save an effect | `@Thorn /save roll effect=@{effect:bleeding7}` | References the actual save-ends effect instance; does not request a characteristic test. |
 | Answer a target choice | `/card respond card=@{interaction:c17} answer={"targets":[@Goblin6]}` | Response schema and authority come from the identified pending interaction. |
 | Respond for one hero in an open card | `@Thorn /card respond card=@{interaction:c18} answer={"roll":true}` | Explicit responding actor; the card validates scope and whether that actor has already answered. |
@@ -286,6 +299,8 @@ Keep parse errors, binding errors, missing gameplay input and rule warnings dist
 | `/save roll characteristic=might` | Unknown/inapplicable field under the save schema, distinct from a game-rule departure. |
 | A target fails the source's range rule | Known rule warning and existing manual-adjudication route, not a parser error. |
 | Unknown range | Missing fact; do not fabricate a faithful automatic result. |
+| Ability cost cannot legally be paid | Execution blocked by affordability; not a syntax error or warning-through case. |
+| Correction targets a previous turn after the next turn started | Execution blocked until intervening history is rewound, even for the Director. |
 | Hidden or unauthorized entity ID | Enforce access without revealing private entity details. |
 | `Jon@Thorn: /ability use ...` pasted as command | Display attribution is not executable grammar; a Copy command action should export the canonical executable form. |
 
@@ -301,15 +316,20 @@ actual state application require separate implementation tests.
 
 ### Conformance evidence
 
-The [conformance set](table-command-syntax-cases.json) contains 66 syntax/shape cases, including all binding
-examples above, malformed input, numeric overflow, Unicode escapes, duplicate decoded keys and references
-versus similarly shaped record literals. Seven cases also assert an explicit parsed structure. All 66
-pass the [bounded research recognizer](table-command-syntax-check.py), retained for reproducibility.
-Run `python3 docs/research/table-command-syntax-check.py` from the repository root. This is bounded grammar validation, not a
-production parser, a formal ambiguity proof or an engine test. The fixture labeled `self-needs-binding`
-is deliberately syntactically valid and requires rejection at actor binding; syntax acceptance does not
-imply that an operation is valid or authorized. Typed machine lowering and live-state application remain
-implementation work.
+The [conformance set](table-command-syntax-cases.json) contains 97 syntax/shape cases, including the
+original 66 and the new [gameplay command reference](../table-command-catalog.md) forms. It exercises
+malformed input, numeric overflow, Unicode escapes, duplicate decoded keys and references versus records;
+11 cases assert explicit parsed trees. Run the [bounded recognizer](table-command-syntax-check.py):
+
+```text
+python3 docs/research/table-command-syntax-check.py
+```
+
+This validates syntax and selected parse shapes, not production binding, authorization, affordability,
+history windows, operation availability or engine behavior. For example, the `self-needs-binding` fixture
+is syntactically valid but requires actor-binding rejection. Similarly, well-formed commands can be refused
+for insufficient resources or a previous-turn edit without rewind. Those execution checks require separate
+implementation tests; no such implementation is claimed by this checkpoint.
 
 ## Sources
 
