@@ -10,6 +10,8 @@ export default defineConfig({
         test: {
           name: 'app',
           include: ['tests/app/**/*.test.ts'],
+          // convex-test suites that drive whole encounters take 10-25 s per file under load.
+          testTimeout: 60_000,
           server: { deps: { inline: ['convex-test'] } },
         },
       },
