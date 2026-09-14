@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-only
 import { defineTable } from 'convex/server';
 import { v } from 'convex/values';
+import { conditionsValidator } from './characterTables';
 
 export const foeTables = {
   foes: defineTable({
@@ -10,7 +11,12 @@ export const foeTables = {
     // Immutable copy of the source and baseline, separate from instance play state.
     sourceSnapshot: v.string(),
     maxStamina: v.number(),
-    live: v.object({ stamina: v.number(), temporaryStamina: v.number() }),
+    /** Conditions absent means every toggle off (loaded state, R03 InitialFoeLiveState). */
+    live: v.object({
+      stamina: v.number(),
+      temporaryStamina: v.number(),
+      conditions: v.optional(conditionsValidator),
+    }),
   })
     .index('by_campaign', ['campaignId'])
     .index('by_campaign_visible', ['campaignId', 'visible']),

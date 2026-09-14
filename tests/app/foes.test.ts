@@ -70,7 +70,14 @@ describe('persistent campaign foes', () => {
       commandId: 'add-second-foe',
     });
     expect(first).not.toBe(second);
-    expect((await player.client.query(api.foes.list, { campaignId })).rows).toEqual([]);
+    // Foe hiding is deferred (A03, Q-REC-1): every loaded foe is listed for peers regardless of the
+    // stored flag; the peer rows still carry no source data or exact Stamina.
+    expect(
+      (await player.client.query(api.foes.list, { campaignId })).rows.map(row => Object.keys(row)),
+    ).toEqual([
+      ['healthFraction', 'id', 'name'],
+      ['healthFraction', 'id', 'name'],
+    ]);
     const loaded = await director.client.query(api.foes.detail, { campaignId, foeId: first });
     const snapshot = JSON.parse(loaded.sourceSnapshot);
     // Source: vendor/steel-compendium/en/unified/md/monster/goblin/statblock/goblin-warrior.md
@@ -93,7 +100,10 @@ describe('persistent campaign foes', () => {
     expect(await player.client.query(api.foes.list, { campaignId })).toEqual({
       director: false,
       addVisible: null,
-      rows: [{ id: first, name: 'Goblin Warrior', healthFraction: 0.2 }],
+      rows: [
+        { id: first, name: 'Goblin Warrior', healthFraction: 0.2 },
+        { id: second, name: 'Goblin Warrior', healthFraction: 1 },
+      ],
     });
     expect(await t.run(async ctx => (await ctx.db.get(second))?.live.stamina)).toBe(15);
     expect(
@@ -181,9 +191,10 @@ describe('persistent campaign foes', () => {
       definitionId: catalog.definitionId,
       commandId: 'visible-foe',
     });
+    // Every loaded foe is listed for peers (hiding deferred, Q-REC-1); the flag is still stored.
     expect(
       (await player.client.query(api.foes.list, { campaignId })).rows.map(foe => foe.id),
-    ).toEqual([visible]);
+    ).toContain(visible);
     await director.client.mutation(api.foes.setDefaultVisible, {
       campaignId,
       visible: false,
@@ -246,10 +257,24 @@ describe('persistent campaign foes', () => {
       action: 'pause',
       commandId: 'pause-session',
     });
+    // A03: the roster is locked while the session is paused.
+    await expect(
+      director.client.mutation(api.foes.add, {
+        campaignId,
+        definitionId: catalog.definitionId,
+        commandId: 'paused-session',
+      }),
+    ).rejects.toThrow('paused');
+    await director.client.mutation(api.sessions.transition, {
+      sessionId,
+      expectedRevision: 1,
+      action: 'resume',
+      commandId: 'resume-session',
+    });
     const paused = await director.client.mutation(api.foes.add, {
       campaignId,
       definitionId: catalog.definitionId,
-      commandId: 'paused-session',
+      commandId: 'resumed-session',
     });
     const encounterId = await t.run(async ctx => {
       const id = await ctx.db.insert('encounters', {
@@ -277,7 +302,7 @@ describe('persistent campaign foes', () => {
     await t.run(ctx => ctx.db.patch(encounterId, { status: 'voided', archivedAt: Date.now() }));
     await director.client.mutation(api.sessions.transition, {
       sessionId,
-      expectedRevision: 1,
+      expectedRevision: 2,
       action: 'close',
       commandId: 'close-session',
     });

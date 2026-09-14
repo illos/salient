@@ -29,6 +29,8 @@ import { requireMember, type ReadCtx } from './access';
 import { command } from './commands';
 import { rollDice } from './dice';
 import { appendEvent } from './events';
+import type { JournalScope } from './journal';
+import { tableOperations } from './tableOperations';
 import { respondToInteraction } from './interactions';
 
 export type Role = 'director' | 'player' | 'observer';
@@ -73,6 +75,8 @@ export type Outcome =
       description: string;
       dice?: DieResult[];
       data?: unknown;
+      /** Journaled state writes for this event, run after the event row exists (A03). */
+      commit?: (ctx: MutationCtx, scope: JournalScope) => Promise<void>;
       /** Open a pending interaction bound to the labeled actor; the continuation resumes this operation. */
       interaction?: {
         requiredInputs: RequiredInput[];
@@ -426,7 +430,12 @@ const cardRespond: OperationDefinition = {
   },
 };
 
-export const operations: OperationDefinition[] = [sessionNote, tableRoll, cardRespond];
+export const operations: OperationDefinition[] = [
+  sessionNote,
+  tableRoll,
+  cardRespond,
+  ...tableOperations,
+];
 
 export function findOperation(id: string): OperationDefinition | undefined {
   return operations.find(operation => operation.id === id);
@@ -465,7 +474,15 @@ export async function run(
     context.session?.revision !== envelope.expectedRevision
   )
     throw new ConvexError('Session changed. Refresh and try again.');
-  const problems = checkArguments(operation, envelope.arguments);
+  // Bare words (`difficulty=medium`) arrive as symbols from the parser; operations see plain strings.
+  // The recorded envelope keeps the arguments exactly as submitted.
+  const args = Object.fromEntries(
+    Object.entries(envelope.arguments).map(([key, value]) => [
+      key,
+      value && typeof value === 'object' && 'symbol' in value ? value.symbol : value,
+    ]),
+  );
+  const problems = checkArguments(operation, args);
   if (problems.length) throw new ConvexError(problems.join(' '));
   let actor: BoundActor | null = null;
   if (envelope.actor) {
@@ -479,7 +496,7 @@ export async function run(
     context,
     envelope: recorded,
     actor,
-    args: envelope.arguments,
+    args,
     respondsTo,
   });
   if ('delegated' in outcome) return outcome.delegated;
@@ -501,6 +518,7 @@ export async function run(
         : {}),
     },
   });
+  if (outcome.commit) await outcome.commit(ctx, { campaignId: context.campaign._id, eventId });
   let interactionId: Id<'interactions'> | null = null;
   if (outcome.interaction) {
     interactionId = await ctx.db.insert('interactions', {

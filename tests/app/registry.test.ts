@@ -295,7 +295,11 @@ describe('the shared command path', () => {
   test('acceptance 6: commands.list returns every registered operation with its argument schema and availability', async () => {
     const t = backend();
     const { director, player, observer, campaignId } = await table(t);
-    const forDirector = await director.client.query(api.commands.list, { campaignId });
+    // A03 appends its operations after A01's three; this check covers the A01 entries.
+    const forDirector = (await director.client.query(api.commands.list, { campaignId })).slice(
+      0,
+      3,
+    );
     expect(forDirector.map(o => o.id)).toEqual(['session.note', 'table.roll', 'card.respond']);
     expect(forDirector.map(o => [o.family, o.verb, o.syntax])).toEqual([
       ['session', 'note', '/session note text=…'],
@@ -323,13 +327,16 @@ describe('the shared command path', () => {
       ['answer', 'object', true],
     ]);
     expect(forDirector.map(o => o.available)).toEqual([true, true, true]);
-    const forPlayer = await player.client.query(api.commands.list, { campaignId });
+    const forPlayer = (await player.client.query(api.commands.list, { campaignId })).slice(0, 3);
     expect(forPlayer.map(o => [o.available, o.unavailableReason])).toEqual([
       [false, '/session note is for the Director; you are a player here.'],
       [true, null],
       [true, null],
     ]);
-    const forObserver = await observer.client.query(api.commands.list, { campaignId });
+    const forObserver = (await observer.client.query(api.commands.list, { campaignId })).slice(
+      0,
+      3,
+    );
     expect(forObserver.map(o => o.available)).toEqual([false, false, true]);
   });
 });

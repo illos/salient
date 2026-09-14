@@ -19,6 +19,15 @@ export default defineSchema({
     shareCode: v.string(),
     activeSessionId: v.union(v.id('sessions'), v.null()),
     eventSequence: v.number(),
+    /** A03 display settings; absent means the specified defaults (Show Malice off, Bar). */
+    settings: v.optional(
+      v.object({
+        showMalice: v.boolean(),
+        healthDisplay: v.union(v.literal('bar'), v.literal('numerical'), v.literal('winded')),
+      }),
+    ),
+    /** The shared Malice pool; absent means no pool has been recorded yet (read as 0). */
+    malice: v.optional(v.number()),
   }).index('by_shareCode', ['shareCode']),
   memberships: defineTable({ campaignId: v.id('campaigns'), userId: v.id('users') })
     .index('by_campaign_user', ['campaignId', 'userId'])

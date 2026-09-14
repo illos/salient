@@ -32,7 +32,9 @@ import type * as lib_interactions from "../lib/interactions.js";
 import type * as lib_journal from "../lib/journal.js";
 import type * as lib_registry from "../lib/registry.js";
 import type * as lib_sha256 from "../lib/sha256.js";
+import type * as lib_tableOperations from "../lib/tableOperations.js";
 import type * as sessions from "../sessions.js";
+import type * as table from "../table.js";
 
 import type {
   ApiFromModules,
@@ -65,7 +67,9 @@ declare const fullApi: ApiFromModules<{
   "lib/journal": typeof lib_journal;
   "lib/registry": typeof lib_registry;
   "lib/sha256": typeof lib_sha256;
+  "lib/tableOperations": typeof lib_tableOperations;
   sessions: typeof sessions;
+  table: typeof table;
 }>;
 
 /**

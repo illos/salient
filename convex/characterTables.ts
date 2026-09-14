@@ -15,6 +15,45 @@ export const selectionValidator = v.object({
   // Validated as bounded, finite JSON at the application boundary.
   value: v.any(),
 });
+/** The nine core condition toggles (shared/contracts/liveState.ts ConditionToggles, R05 order). */
+export const conditionsValidator = v.object({
+  bleeding: v.boolean(),
+  dazed: v.boolean(),
+  frightened: v.boolean(),
+  grabbed: v.boolean(),
+  prone: v.boolean(),
+  restrained: v.boolean(),
+  slowed: v.boolean(),
+  taunted: v.boolean(),
+  weakened: v.boolean(),
+});
+/**
+ * A hero's live play values (shared/contracts/liveState.ts HeroLiveState) as stored before A02.
+ * No evaluated baseline exists in this checkout, so the values R03 takes from the baseline
+ * (Stamina, Recoveries, the heroic resource, the maxima) are `null` until the Director supplies
+ * them; nothing here is defaulted to a number the source does not give. Implementation note in
+ * docs/build/A03-table-shell-freeplay.md.
+ */
+export const heroLiveValidator = v.object({
+  stamina: v.union(v.number(), v.null()),
+  temporaryStamina: v.number(),
+  recoveries: v.union(v.number(), v.null()),
+  heroicResource: v.object({
+    name: v.union(v.string(), v.null()),
+    current: v.union(v.number(), v.null()),
+  }),
+  surges: v.number(),
+  victories: v.number(),
+  xp: v.number(),
+  conditions: conditionsValidator,
+  /** Provisional until A02 supplies DerivedBaseline.staminaMaximum / recoveriesMaximum. */
+  staminaMaximum: v.union(v.number(), v.null()),
+  recoveriesMaximum: v.union(v.number(), v.null()),
+  origin: v.object({
+    kind: v.literal('first-table-use-without-baseline'),
+    initializedAt: v.number(),
+  }),
+});
 export const characterTables = {
   characters: defineTable({
     ownerId: v.id('users'),
@@ -24,7 +63,8 @@ export const characterTables = {
     effectiveRevisionId: v.union(v.id('characterRevisions'), v.null()),
     // No evaluator exists yet: drafts cannot supply an effective baseline or initialize play.
     derivedBaseline: v.null(),
-    liveState: v.null(),
+    /** Null until first table use (A03); see heroLiveValidator for the pre-A02 shape. */
+    liveState: v.union(v.null(), heroLiveValidator),
     campaignId: v.union(v.id('campaigns'), v.null()),
     combatLocked: v.boolean(),
   })

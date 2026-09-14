@@ -39,6 +39,14 @@ async function settings(ctx: ReadCtx, campaignId: Id<'campaigns'>) {
     .withIndex('by_campaign', q => q.eq('campaignId', campaignId))
     .unique();
 }
+/** Roster lock while paused (docs/table-spec.md#4-session-status-and-play-mode): no add or remove. */
+async function requireNotPaused(ctx: ReadCtx, campaign: Doc<'campaigns'>) {
+  const session = campaign.activeSessionId ? await ctx.db.get(campaign.activeSessionId) : null;
+  if (session?.status === 'paused')
+    throw new ConvexError(
+      'The session is paused; the foes roster waits until the Director resumes it.',
+    );
+}
 async function scopedFoe(ctx: ReadCtx, campaignId: Id<'campaigns'>, foeId: Id<'foes'>) {
   const foe = await ctx.db.get(foeId);
   if (!foe || foe.campaignId !== campaignId) throw new ConvexError('Foe unavailable.');
@@ -64,17 +72,13 @@ export const list = query({
     const user = await requireUser(ctx);
     const campaign = await requireMember(ctx, args.campaignId, user._id);
     const director = campaign.ownerId === user._id;
-    const rows = director
-      ? await ctx.db
-          .query('foes')
-          .withIndex('by_campaign', q => q.eq('campaignId', args.campaignId))
-          .take(100)
-      : await ctx.db
-          .query('foes')
-          .withIndex('by_campaign_visible', q =>
-            q.eq('campaignId', args.campaignId).eq('visible', true),
-          )
-          .take(100);
+    // Foe hiding is deferred (docs/table-spec.md#monster-visibility-and-health-display, Q-REC-1):
+    // every loaded foe is listed for every role regardless of the stored flag. `setVisible` and
+    // `setDefaultVisible` below stay in code, dormant: no UI control and not in the registry.
+    const rows = await ctx.db
+      .query('foes')
+      .withIndex('by_campaign', q => q.eq('campaignId', args.campaignId))
+      .take(100);
     return {
       director,
       addVisible: director ? ((await settings(ctx, args.campaignId))?.addVisible ?? false) : null,
@@ -116,9 +120,10 @@ export const add = mutation({
   returns: v.id('foes'),
   handler: async (ctx, args) => {
     const user = await requireUser(ctx);
-    await requireDirector(ctx, args.campaignId, user._id);
+    const campaign = await requireDirector(ctx, args.campaignId, user._id);
     const receipt = await command(ctx, user._id, args.commandId, 'foes.add', args);
     if (receipt.previous) return receipt.previous.result as Id<'foes'>;
+    await requireNotPaused(ctx, campaign);
     if (args.definitionId !== GOBLIN_WARRIOR_ID)
       throw new ConvexError('This foe definition is not available in the prototype.');
     const entry = await requireContent(ctx, GOBLIN_WARRIOR_ID);
@@ -155,9 +160,10 @@ export const remove = mutation({
   returns: v.null(),
   handler: async (ctx, args) => {
     const user = await requireUser(ctx);
-    await requireDirector(ctx, args.campaignId, user._id);
+    const campaign = await requireDirector(ctx, args.campaignId, user._id);
     const receipt = await command(ctx, user._id, args.commandId, 'foes.remove', args);
     if (receipt.previous) return null;
+    await requireNotPaused(ctx, campaign);
     const foe = await scopedFoe(ctx, args.campaignId, args.foeId);
     await ctx.db.delete(foe._id);
     await appendEvent(ctx, {

@@ -4,7 +4,7 @@ import { mutation, query } from './_generated/server';
 import type { Doc, Id } from './_generated/dataModel';
 import { requireUser, type ReadCtx } from './lib/access';
 import { command } from './lib/commands';
-import { authoredValidator, selectionValidator } from './characterTables';
+import { authoredValidator, heroLiveValidator, selectionValidator } from './characterTables';
 import { isJsonValue, type CharacterAuthored } from '../shared/characterDraft';
 import { combatActive } from './lib/encounters';
 
@@ -47,7 +47,7 @@ const detail = v.object({
   combatLocked: v.boolean(),
   effectiveRevisionId: v.union(v.id('characterRevisions'), v.null()),
   derivedBaseline: v.null(),
-  liveState: v.null(),
+  liveState: v.union(v.null(), heroLiveValidator),
 });
 export const listMine = query({
   args: {},
