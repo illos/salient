@@ -2776,6 +2776,16 @@ not bypass player seams, pause/closure restrictions or the Director's rewind lim
 recorded response exactly; undo itself does not automatically use the reopened response. This settles
 triggered-action prompt restoration, not every required-input card's recovery behavior.
 
+Implementation note (A06, 2026-09-14): `convex/lib/history.ts` implements this section. The
+undo unit is S02's scoped command unit; the effective branch and redo path are replayed from the
+session's ordered events (`walkHistory`); `history.undo` (player window: own character, nearest seam,
+turn start or FreePlay stretch start as the outer limit), `history.rewind` (Director, one unit per
+call, never past the OK event or an archived encounter) and `history.redo` (recorded path in forward
+order, cleared by new gameplay) restore recorded journal values without running rules or dice; the
+undo/redo entry carries its own change record and the original keeps its dice and text with
+disposition `undone`/`redone`. Enable user undo is `/campaign user-undo`. Interpretations and the
+A05 correction-window contract are in `docs/build/A06-history-undo-corrections.md`.
+
 Confirmed campaign setting: **Enable user undo**, enabled by default for new campaigns (confirmed 2026-09-11).
 Disabling it blocks ordinary player undo while retaining Director undo/redo. Setting-management authority and
 when changes may apply remain open.

@@ -627,3 +627,37 @@ are the shared lifecycle decisions; the remaining entries are bounded content/sc
 - **Recommendation:** A. It matches the ruling and keeps the v0.01 UI honest.
 - **Blocked until answered:** nothing; A is applied in A03 unless the user objects.
 - **Answer:** No, do not remove. The code stays dormant: no UI control, not in the registry, every foe visible in v0.01. (User answered "no" to a remove-or-keep question; read as "do not remove". Correct here if intended otherwise.)
+
+### Q-A-600: May a player undo their own Take turn?
+
+- **Status:** open
+- **Raised by:** A06, 2026-09-14
+- **Where:** `docs/table-spec.md#undo-permissions-and-proposed-campaign-control` (turn start as the
+  outer limit; undoing End turn is settled), `docs/table-spec.md#taking-a-turn`.
+- **Conflict or gap:** The spec makes turn start the outer limit of the player window and settles
+  undoing End turn, but does not say whether the player's own Take turn (which starts that turn and
+  dispatches its turn-start work) is inside or outside the window.
+- **Options:** A: Take turn is the limit itself; only the Director rewinds it. B: the player may undo
+  their own Take turn when nothing intervened, reopening the choice of who acts.
+- **Recommendation:** A, applied provisionally. "Turn start" reads most naturally as the boundary,
+  and the Director already rewinds it sequentially.
+- **Blocked until answered:** nothing; A applied provisionally in `playerWindow`.
+- **Answer:**
+
+### Q-A-601: Does Enable user undo also remove the acting player's post-roll correction window?
+
+- **Status:** open
+- **Raised by:** A06, 2026-09-14
+- **Where:** `docs/table-spec.md#undo-permissions-and-proposed-campaign-control` ("disabling it blocks
+  ordinary player undo") and `docs/table-spec.md#director-edits-to-inline-results` ("the acting player
+  may add edges/banes ... in the same window as their gameplay undo").
+- **Conflict or gap:** The correction window is defined as the undo window, but the setting is
+  described as removing undo only. With the setting off, the player has no undo window; whether they
+  keep the correction window is not stated.
+- **Options:** A: the setting removes undo and redo only; corrections keep the seam/turn-start
+  window. B: the setting also removes player corrections (Director-only corrections).
+- **Recommendation:** A, applied provisionally; the setting's text names undo, and corrections are
+  appended adjudications the Director can still rewind.
+- **Blocked until answered:** nothing; A applied provisionally (`correctionWindow` does not read
+  the setting).
+- **Answer:**
