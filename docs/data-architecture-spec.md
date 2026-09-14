@@ -585,6 +585,13 @@ gameplay operation added. Types are in `shared/contracts/history.ts`; tables in
 - **Snapshots.** `snapshots` (encounter, `kind` `encounter-start` | `checkpoint`, `eventId`, `state`,
   `createdAt`) holds the recorded starting state for void/reset; the operation taking it (A04) owns
   the shape of `state`.
+- **Dice.** `dice.roll` is an `internalMutation`; registered operations call `rollDice`
+  (`convex/lib/dice.ts`) in-process and record the accepted faces on their event. The generator is a
+  per-campaign hash DRBG: a 32-byte seed from `crypto.getRandomValues` stored in `diceStates`, value
+  n = SHA-256(seed || n), rejection sampling for uniform faces. Accepted rolls are stored in `rolls`
+  keyed by (campaign, `commandId`): a retry with the same id and dice returns the same faces; the
+  same id with different dice is rejected. Clients never supply faces. Audience is recorded as
+  `public`; the tower audience is outside v0.01.
 
 Each logical action needs a stable command ID, actor, relevant entities, source/build versions, the exact
 engine release and relevant parser versions, expected state revision, and session/encounter association.
