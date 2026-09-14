@@ -736,6 +736,8 @@ causes and before/after values. Director pool edits remain separate Manual adjus
 visibility and the Void keep/reset contract remain intact. See
 [the sourced lifecycle and example](fury-goblin-automation.md#malice-lifecycle).
 
+**Implementation note, 2026-09-14 (R05):** the automated lifecycle steps are typed as `ScheduledWorkKind` `malice` items and `MaliceChange` records in `shared/contracts/clock.ts`; the growth rule is quoted and the placement of the combat-start grant (at OK, after the baseline snapshot) and the round-one gain (at round start) is recorded in [conditions and clock](conditions-and-clock.md#3-malice-common-lifecycle). Hero-count and fractional-average handling are Q-R-50 and Q-R-51 with provisional defaults.
+
 ### Monster visibility and health display
 
 **Foe hiding deferred, 2026-09-14:** all loaded foes are visible in player/observer rosters;
@@ -1352,6 +1354,8 @@ The simple toggles record condition state; they do not certify every condition's
 reopen unique feature automation. Existing manual per-target edge/bane entry stays in force.
 See [the current walkthrough](v001-basic-play-walkthrough.md#condition-tracking--current-v001-scope).
 
+**Implementation note, 2026-09-14 (R05):** the toggle list is the nine conditions in the Compendium condition index, with verbatim effect text in `shared/content/core-conditions.json` (verified by `tests/core-conditions.test.ts`). No condition entry defines a save-ends default; duration comes only from the imposing effect. Source paths, readable text and condition-specific endings are in [conditions and clock](conditions-and-clock.md#1-core-conditions).
+
 #### v0.01 edge and bane inputs
 
 Confirmed 2026-09-14: the acting player or Director supplies the applicable edge and bane counts
@@ -1694,6 +1698,8 @@ still apply. A granted entry references its actor's existing state, preserves th
 actual duration, and does not refresh already-used turns. Showing it does not itself start the turn.
 Interrupted individual turns resume as confirmed below. Regrouping moves only the selected entry.
 Other source sequences retain their actual timing rules.
+
+**Implementation note, 2026-09-14 (R05):** the round boundary used with these groups is stated in [conditions and clock](conditions-and-clock.md#22-boundaries-the-app-dispatches): a round ends when no unspent turn entry remains among current participants, quoting the source's "Once all creatures on both sides of a battle have acted"; Slain or removed creatures do not hold a round open (interpretation), and a creature added mid-round is Q-R-52.
 
 #### Minion squads and captain state
 
@@ -2267,6 +2273,8 @@ not a new turn or a way to reopen expired opportunities. Preserve the interrupte
 This confirms resumption behavior; resolve the triggering action and interruption at their actual
 source stages rather than using resumption as permission to reorder unresolved effects.
 
+**Implementation note, 2026-09-14 (R05):** Take turn dispatches the `turn-start` boundary for that one turn entry (`shared/contracts/clock.ts`, `BoundaryEvent` with `TurnRef`). The source text for turns, the exhausted-side sequence and Director groups is quoted in [conditions and clock](conditions-and-clock.md#21-definitions-from-the-source); the two-round worked example there lists the events an ordinary Take turn / End turn sequence produces.
+
 ### v0.01 critical hits and additional main actions
 
 Automation confirmed 2026-09-14: recognize and log qualifying critical hits and track their
@@ -2326,6 +2334,8 @@ the ordinary v0.01 flow. Action cards still handle required additional input, cr
 mid-resolution choices, and short commands may launch guided input. This correction does not settle the
 every target-input or later-stage resource-commit boundary for an individual ability. Fixed activation
 costs and pre-resolution optional spending are now covered below.
+
+**Implementation note, 2026-09-14 (R05):** End turn dispatches the `turn-end` boundary of the ending turn as defined in [conditions and clock](conditions-and-clock.md#22-boundaries-the-app-dispatches); with no automatic save producer in v0.01, its save phase is empty and any manual save for a toggled condition is rolled through the dice controls outside the clock.
 
 ### Ability costs and optional spending
 
@@ -2593,6 +2603,8 @@ work during a boundary, exact commitment and continuation when a choice appears,
 events, and manual resolution of unknown timing clauses. Queue-order recording and restoration must be deterministic;
 its concrete storage schema remains an engineering proposal. The clock does not invent missing source semantics or replace non-clock triggers
 such as taking damage. The existing warn-without-blocking and Director-adjudication doctrine remains.
+
+**Implementation note, 2026-09-14 (R05):** the boundary kinds, timing clauses, registration and dispatch types for this section are in `shared/contracts/clock.ts` (types only); the sourced definitions of turn, round, end of turn and the standing ordering policy applied to those types are in [conditions and clock](conditions-and-clock.md#2-clock-contract). In v0.01 nothing registers a `saving-throw` work item (Q-TS-1), so the save phase is empty; the only registrations are the Malice lifecycle steps and, if A04 registers it, surprise expiry at the end of round 1. Open source gaps recorded as Q-R-50 to Q-R-52 in `rules-questions-for-user.md`.
 
 ### Undo permissions and proposed campaign control
 

@@ -11,6 +11,7 @@
   },
   "include": [
     "src/**/*.ts",
+    "shared/contracts/*.ts",
     "tests/*.test.ts",
     "scripts/inspect-character-sources.ts",
     "scripts/check-commit.ts",

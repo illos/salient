@@ -226,6 +226,73 @@ are the shared lifecycle decisions; the remaining entries are bounded content/sc
 - **Blocked until answered:** this optional workflow; higher-level build evaluation can proceed.
 - **Answer:**
 
+### Q-R-50: Which heroes count as "in the battle" for the Malice round-start gain in v0.01?
+
+- **Status:** open
+- **Raised by:** R05, 2026-09-14
+- **Where:** `docs/conditions-and-clock.md` section 3.3; `docs/table-spec.md#malice-visibility`;
+  `docs/fury-goblin-automation.md#malice-lifecycle`. Compendium read:
+  `vendor/steel-compendium/en/unified/md/rule/monster/malice.md` (Earning Malice),
+  `vendor/steel-compendium/en/unified/md/rule/health/dying.md`.
+- **Conflict or gap:** The source gains "Malice equal to the number of heroes in the battle, plus the
+  combat round number" and says "If a hero dies, they stop generating Malice." Hero death is not
+  automated in v0.01, and the source is silent on heroes who flee, are removed from the encounter by the
+  Director, or are dying but not dead. The same passage also says "As long as none of the heroes is
+  taken out of the fight, you gain 8 Malice" in its example, and "taken out of the fight" is not
+  defined. The count changes the pool every round.
+- **Options:** A: count every hero participant committed in the encounter at each round start; the
+  Director uses Manual adjustment when a hero has died or left. B: count only hero participants whose
+  current turn entry exists in the round (a removed hero stops counting; a dying hero still counts).
+  C: add a Director per-hero "generates Malice" flag to the encounter.
+- **Recommendation:** B. It follows the source's "in the battle" wording and the existing removal
+  operation without a new flag, and a dying hero still counts because the source names death, not
+  dying. A is the provisional default until answered because it needs no A04 roster dependency.
+- **Blocked until answered:** nothing; default A applied provisionally and logged with the hero count.
+- **Answer:**
+
+### Q-R-51: How is a fractional average of Victories handled for the combat-start Malice grant?
+
+- **Status:** open
+- **Raised by:** R05, 2026-09-14
+- **Where:** `docs/conditions-and-clock.md` section 3.3; `docs/fury-goblin-automation.md#malice-lifecycle`
+  (already listed as remaining bounded work). Compendium read:
+  `vendor/steel-compendium/en/unified/md/rule/monster/malice.md` (Earning Malice),
+  `vendor/steel-compendium/en/unified/md/rule/general/always-round-down.md`.
+- **Conflict or gap:** "At the start of combat, you gain Malice equal to the average number of
+  Victories per hero." The example uses equal Victories. Always Round Down says "Whenever you divide an
+  odd number in half and it results in a decimal, round the result down", which addresses halving, not
+  averaging over three or more heroes (for example Victories 1, 1, 2 give 4/3).
+- **Options:** A: round the average down (extend the halving rule's direction to any division).
+  B: round to the nearest whole number. C: keep the exact fraction in the pool.
+- **Recommendation:** A, labeled an interpretation: it is the only rounding direction the source states
+  anywhere, and Malice is spent in whole numbers. Log the unrounded average with the grant.
+- **Blocked until answered:** nothing; the v0.01 journey has one hero, so no fraction arises. Default A
+  applied provisionally.
+- **Answer:**
+
+### Q-R-52: Does a creature added to combat mid-round take a turn in the current round?
+
+- **Status:** open
+- **Raised by:** R05, 2026-09-14
+- **Where:** `docs/conditions-and-clock.md` section 2.2; `docs/table-spec.md#game-clock-and-scheduled-rules-work`;
+  `docs/table-spec.md#initiative-groups-confirmed-app-model`. Compendium read:
+  `vendor/steel-compendium/en/unified/md/rule/combat/combat-round.md` (Creatures Take Turns, End of
+  Round), `vendor/steel-compendium/en/unified/md/chapter/monster-basics.md` (Reinforcements paragraphs
+  under Escort and Hold Them Off).
+- **Conflict or gap:** The round ends "Once all creatures on both sides of a battle have acted." The
+  Director can add foes during running combat. The source's reinforcement examples add creatures "At
+  the start of each combat round" or "At the end of each combat round", but state no rule for a creature
+  added in the middle of a round. Whether it acts this round decides when `round-end` fires and when the
+  next Malice gain occurs.
+- **Options:** A: the added creature gets an unspent turn entry in the current round and may act before
+  the round ends. B: the added creature's first turn entry belongs to the next round; the current round
+  can end without it. C: the Director chooses per addition through the add operation.
+- **Recommendation:** A. It keeps "each creature in the battle takes a turn" true for the round in which
+  the creature joins and needs no extra control; the Director can regroup or remove the entry.
+- **Blocked until answered:** nothing; default A applied provisionally. Slain or removed creatures do
+  not hold a round open under the interpretation recorded in the contract.
+- **Answer:**
+
 ## Resolved questions
 
 ### Q-TS-1: Are any save-ends rolls automatic in v0.01?

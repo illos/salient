@@ -89,4 +89,56 @@ None. Pinned Compendium only.
 
 ## Work log
 
-_Empty._
+**Plan, 2026-09-14 (rules researcher, branch `slice/R05`).** Read `CLAUDE.md`, `agent.MD`,
+`docs/build/README.md`, this document, `docs/compendium-navigation.md`, every cited spec section, Q-TS-1,
+and every Compendium file in the research list (all exist at pin `fb83a789da8f0327a389c277a0c790b1648d5810`).
+Files to add: `docs/conditions-and-clock.md`, `shared/content/core-conditions.json` (generated from the
+source files so the text is byte-exact), `shared/contracts/clock.ts` (types only, added to
+`tsconfig.json` include), `tests/core-conditions.test.ts` (acceptance check 1 under the existing
+`node --test` runner). Files to edit: dated implementation notes in the six cited `docs/table-spec.md`
+sections and `docs/table-command-spec.md#clock-driven-operations`; new questions `Q-R-50` to `Q-R-52` in
+`docs/rules-questions-for-user.md` (numbered from 50 to avoid colliding with R04). No dependencies, no
+fixtures, no application code. Existing rulings (standing clock policy, once per actual turn, Q-TS-1) are
+applied, not re-decided.
+
+**Closing entry, 2026-09-14 (rules researcher).** Delivered `docs/conditions-and-clock.md`,
+`shared/content/core-conditions.json`, `shared/contracts/clock.ts`, `tests/core-conditions.test.ts`,
+seven dated implementation notes (`docs/table-spec.md`: Malice visibility, v0.01 manual condition
+tracking, initiative groups, Taking a turn, Player-sheet actions and explicit End turn, Game clock;
+`docs/table-command-spec.md`: Clock-driven operations), and questions Q-R-50 to Q-R-52. Nothing under
+`vendor/` changed; submodule pins unchanged (`fb83a789…`, `5a846aad…`). `STATUS.md` left for the lead.
+
+Acceptance checks:
+
+1. *Every JSON entry has an existing source file and verbatim text.* `node --test tests/core-conditions.test.ts`:
+   11 tests, 11 pass, 0 fail (index lists exactly nine; revision recorded; per condition: file exists,
+   name/scc/type match the frontmatter, `text` is found in the body and equals the trimmed body, no
+   "(save ends)" clause in any entry). The JSON was generated from the source files, not typed.
+2. *Ordering rule quotes the standing policy and the source's end-of-turn definition.*
+   `docs/conditions-and-clock.md` section 2.3 quotes the standing clock policy from `agent.MD` and the
+   once-per-actual-turn ruling; section 2.1 quotes `rule/general/saving-throw.md` ("at the end of each of
+   their turns") and `rule/combat/end-of-turn.md`.
+3. *Malice growth rule quotes the source.* Section 3.1 quotes `rule/monster/malice.md` Earning Malice in
+   full, plus the spending and visibility sentences.
+4. *Worked example derivable by hand.* Section 5: 18 events, pool 0 → 0 → 2 → 5, save phases empty; the
+   derivation paragraph shows each number from sections 2 and 3 and matches the fixture arithmetic in
+   `docs/fury-goblin-automation.md#malice-lifecycle`.
+5. *One sentence, no automatic save producer, citing Q-TS-1 of 2026-09-14.* Section 2.4, bold sentence.
+6. *Reviewer confirms all citations.* Pending rules review.
+
+Verification run (pnpm's pre-run dependency check aborts in this worktree because `node_modules` is a
+symlink and there is no TTY, so the commands the `check` scripts wrap were run directly):
+`npx tsc --noEmit` (clean, `shared/contracts/*.ts` now in the include list);
+`node --test tests/*.test.ts` (39 pass, 0 fail); `npx tsc -p tsconfig.web.json && npx vitest run`
+(6 files, 26 pass); `npx vite build` (built). Every `Spec:` anchor and every implementation-note link
+was checked to resolve to a heading in the current checkout.
+
+Source gaps recorded, provisional defaults stated in the contract: Q-R-50 (which heroes count for the
+round gain without hero-death automation), Q-R-51 (fractional average Victories), Q-R-52 (creature added
+mid-round). Interpretations, labeled in the document: round ends when no unspent entry remains among
+current participants; turn-end work precedes round-end which precedes the next round-start; combat-start
+grant fires at OK after the baseline snapshot and the round-one gain at the starting-side announcement.
+Proposal for A04: register surprise expiry at the end of round 1 from the setup card's Surprised flags.
+
+What remains: independent review, rules review of the citations, lead merge, and the A04 implementation
+of dispatch against `shared/contracts/clock.ts`.

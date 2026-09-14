@@ -664,6 +664,8 @@ one firing for the shared squad/captain turn, regardless of participant count. R
 own personal effects/saves as applicable. A separate captain-only turn supplies a new boundary;
 selecting a different shared participant or resuming an interrupted turn does not.
 
+**Implementation note, 2026-09-14 (R05):** dispatch types for this section (`BoundaryEvent`, `ScheduledWorkRegistration`, `DispatchPlan`, `DispatchResult`) are in `shared/contracts/clock.ts`; the sourced contract and the two-round event list are in [conditions and clock](conditions-and-clock.md#23-order-of-due-work-at-a-boundary). Per Q-TS-1, no due save-ends roll exists in v0.01; the automatic save path described above stays dormant with no producer.
+
 ### Results and pending interactions
 
 Confirmed usability direction: a slash command may simply open a guided action card, rather than requiring
