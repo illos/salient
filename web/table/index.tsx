@@ -24,6 +24,7 @@ import { ErrorNotice, Eyebrow, Loading, SectionHeading, useCommand } from '../ui
 import { CombatSetupCard, CommandButton, type Encounter } from './setup-card';
 import { InitiativePanel, TurnControls } from './initiative';
 import { HistoryControls, undoCommand } from './history-controls';
+import { AbilityCard, AbilityPanel, TargetControls, manualClausesOf } from './targeting';
 
 type Roster = FunctionReturnType<typeof api.table.roster>;
 type Foe = Roster['foes'][number];
@@ -206,11 +207,13 @@ function FoeRow({
   foe,
   director,
   running,
+  mayTarget,
 }: {
   campaignId: Id<'campaigns'>;
   foe: Foe;
   director: boolean;
   running: boolean;
+  mayTarget: boolean;
 }) {
   const remove = useMutation(api.commands.invoke);
   const deletion = useCommand();
@@ -224,6 +227,20 @@ function FoeRow({
         <FoeHealth foe={foe} />
       </div>
       <ConditionBadges conditions={foe.conditions} />
+      {/* A05: the reticle and per-target edge/bane inputs belong to the viewer's draft. */}
+      <TargetControls
+        campaignId={campaignId}
+        target={{ kind: 'foe', id: foe.id, name: foe.name }}
+        running={running}
+        mayTarget={mayTarget}
+      />
+      {director && running && (
+        <AbilityPanel
+          campaignId={campaignId}
+          actor={{ kind: 'foe', id: foe.id, name: foe.name }}
+          running={running}
+        />
+      )}
       {director && (
         <div className="flex flex-wrap items-center gap-2">
           {running && (
@@ -305,6 +322,7 @@ function DirectorPane({
               foe={foe}
               director={director}
               running={running}
+              mayTarget={roster.role !== 'observer'}
             />
           ))}
         </ul>
@@ -409,6 +427,7 @@ function HeroRow({
   running,
   encounter,
   viewed,
+  mayTarget,
   onTurnTaken,
 }: {
   campaignId: Id<'campaigns'>;
@@ -417,6 +436,7 @@ function HeroRow({
   running: boolean;
   encounter: Encounter | null;
   viewed: boolean;
+  mayTarget: boolean;
   onTurnTaken: (actor: { kind: 'character' | 'foe'; id: string }) => void;
 }) {
   const actor = actorRef('character', hero.id);
@@ -483,6 +503,19 @@ function HeroRow({
         </p>
       )}
       {full && <ConditionBadges conditions={full.conditions} />}
+      <TargetControls
+        campaignId={campaignId}
+        target={{ kind: 'character', id: hero.id, name: hero.name }}
+        running={running}
+        mayTarget={mayTarget}
+      />
+      {canAct && (
+        <AbilityPanel
+          campaignId={campaignId}
+          actor={{ kind: 'character', id: hero.id, name: hero.name }}
+          running={running}
+        />
+      )}
       {canAct && (
         <div className="flex flex-wrap items-center gap-2">
           <QuickAction
@@ -551,6 +584,7 @@ function HeroesPane({
               running={running}
               encounter={encounter}
               viewed={hero.id === viewedHeroId}
+              mayTarget={roster.role !== 'observer'}
               onTurnTaken={onTurnTaken}
             />
           ))}
@@ -600,14 +634,21 @@ function boundActorName(payload: unknown): string | null {
   return envelope?.boundActor?.name ?? null;
 }
 
+const CARD_KINDS = new Set(['ability.use']);
+
 function GameLog({
   campaignId,
   sessionId,
+  director,
+  running,
 }: {
   campaignId: Id<'campaigns'>;
   sessionId?: Id<'sessions'>;
+  director: boolean;
+  running: boolean;
 }) {
   const [before, setBefore] = useState<number | undefined>();
+  const results = useQuery(api.abilities.results, { campaignId });
   const result = useQuery(api.events.list, {
     campaignId,
     ...(sessionId ? { sessionId } : {}),
@@ -666,6 +707,16 @@ function GameLog({
                     {actor ? ` as ${actor}` : ''} · {new Date(event.createdAt).toLocaleString()}
                   </small>
                   <EventSource payload={event.payload} />
+                  {CARD_KINDS.has(event.kind) && (
+                    <AbilityCard
+                      campaignId={campaignId}
+                      eventId={event.id}
+                      result={results?.find(r => r.eventId === event.id)}
+                      director={director}
+                      running={running}
+                      manualClauses={manualClausesOf(event.payload)}
+                    />
+                  )}
                 </div>
               </li>
             );
@@ -760,7 +811,12 @@ export function TablePage({ campaignId }: { campaignId: Id<'campaigns'> }) {
             <CardContent className="flex flex-col gap-3">
               <h2>Game log</h2>
               {running && <HistoryControls campaignId={campaignId} />}
-              <GameLog campaignId={campaignId} sessionId={roster.session?.id} />
+              <GameLog
+                campaignId={campaignId}
+                sessionId={roster.session?.id}
+                director={roster.role === 'director'}
+                running={running}
+              />
             </CardContent>
           </Card>
         </div>
