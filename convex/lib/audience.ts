@@ -106,6 +106,58 @@ export function projectEvent(event: Doc<'events'>, campaign: Doc<'campaigns'>, d
       };
     description = description.replace(/ — .*$/, ' applied.');
   }
+  if (
+    (event.kind === 'ability.use' || event.kind === 'ability.correction') &&
+    data &&
+    settings.healthDisplay !== 'numerical'
+  ) {
+    // A05: damage arithmetic and winded/Slain stay public; a foe's resulting Stamina values follow
+    // the health-display setting (docs/table-spec.md#monster-visibility-and-health-display).
+    const strip = (application: unknown) => {
+      const app = record(application);
+      if (!app) return application;
+      const {
+        staminaBefore,
+        staminaAfter,
+        temporaryStaminaBefore,
+        temporaryStaminaAfter,
+        ...rest
+      } = app;
+      void staminaBefore;
+      void staminaAfter;
+      void temporaryStaminaBefore;
+      void temporaryStaminaAfter;
+      return rest;
+    };
+    const foeIds = new Set<string>();
+    for (const item of Array.isArray(data.damage) ? data.damage : []) {
+      const row = record(item);
+      const target = record(row?.target);
+      if (target?.kind === 'foe') foeIds.add(String(target.id));
+    }
+    const target = record(data.target);
+    if (target?.kind === 'foe') foeIds.add(String(target.id));
+    if (Array.isArray(data.damage))
+      data.damage = data.damage.map(item => {
+        const row = record(item);
+        const t = record(row?.target);
+        return row && t?.kind === 'foe' ? { ...row, application: strip(row.application) } : item;
+      });
+    const result = record(data.result);
+    if (result && Array.isArray(result.damageApplications))
+      data.result = {
+        ...result,
+        damageApplications: result.damageApplications.map(item => {
+          const row = record(item);
+          return row && foeIds.has(String(row.targetId)) ? strip(row) : item;
+        }),
+      };
+    const correction = record(data.correction);
+    if (correction && target?.kind === 'foe') {
+      data.correction = { ...correction, damageAfter: strip(correction.damageAfter) };
+      description = description.replace(/; [^;]* Stamina -?\d+ → -?\d+[^.]*\./, '.');
+    }
+  }
   if (event.kind === 'manual.adjustment' && data) {
     const creature = record(data.creature);
     const hiddenMalice = data.field === 'malice' && !settings.showMalice;

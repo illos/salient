@@ -1,5 +1,6 @@
 import { defineSchema, defineTable } from 'convex/server';
 import { v } from 'convex/values';
+import { abilityTables } from './abilityTables';
 import { characterTables } from './characterTables';
 import { contentTables } from './contentTables';
 import { foeTables } from './foeTables';
@@ -14,6 +15,7 @@ export default defineSchema({
   ...encounterTables,
   ...initiativeTables,
   ...historyTables,
+  ...abilityTables,
   users: defineTable({ authId: v.string(), displayName: v.string() }).index('by_authId', [
     'authId',
   ]),
