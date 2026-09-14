@@ -114,6 +114,9 @@ merging; with `--merge`, `Reviewed-By:` with a `pass` verdict is required on eve
 code (a path outside `docs/` that is not `*.md`). `Spec:` anchors resolve against the staged tree in
 the hook and against each commit's own tree for `--rev`/`--range`. CI runs the checker over the pushed
 range. `SKIP_SIMPLE_GIT_HOOKS=1` bypasses the hook for an emergency; do not use it for slice commits.
+The checker also enforces two conventions the example above shows but the prose did not state: the
+summary is lower case and does not end with a period, and every non-`docs`/`chore` type needs
+`Verified:` even when only documentation paths are touched.
 
 Spec documents are updated in the same commit as the code they describe when the update is an
 implementation note. Product-decision changes to a spec are separate `docs` commits that cite the
