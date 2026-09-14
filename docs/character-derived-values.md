@@ -50,8 +50,11 @@ Reason, Intuition, Presence = the three values of the chosen array (class.fury.c
 ```
 
 Validity: the assignment must use exactly the multiset of the chosen array, one value per
-characteristic (`assignment-mismatch` otherwise). Assignment order is **Open, Q-R-101** (provisional:
-any order; raised by R01). Every value is within −5..+5 by construction.
+characteristic (`assignment-mismatch` otherwise). Assignment in any order is **confirmed, Q-R-101,
+2026-09-14**. New-build assignable slots remain unset until assigned, rather than being coerced to
+zero or filled from the example. UI drag-and-drop and headless named assignments feed the same
+shared build operation and evaluator; neither can alter the class-fixed values in this assignment
+step. Every value is within −5..+5 by construction. Q-R-101 no longer warrants an uncertainty label.
 
 **Ancestry and culture adjustments.** The source defines none for this hero: none of the nine devil
 trait entries (`en/unified/md/feature/trait/devil/*.md`) changes a characteristic score, and the
@@ -395,7 +398,7 @@ Input: R01 `selectionSets["hero-fixture"]`.
 | Value | Result | Hand computation and provenance |
 | --- | --- | --- |
 | Might / Agility | 2 / 2 | `class.fury.fixed-characteristics`: "You start with a Might of 2 and an Agility of 2" |
-| Reason / Intuition / Presence | 0 / 1 / 0 | array "1, 0, 0" (`class.fury.characteristic-array`) assigned Intuition 1, Reason 0, Presence 0 (`class.fury.array-assignment`, Q-R-101 provisional) |
+| Reason / Intuition / Presence | 0 / 1 / 0 | array "1, 0, 0" (`class.fury.characteristic-array`) assigned Intuition 1, Reason 0, Presence 0 (`class.fury.array-assignment`, Q-R-101 confirmed) |
 | Stamina maximum | 30 | 21 ("Starting Stamina at 1st Level: 21") + 9 ("Stamina Bonus: +9 per echelon" × echelon 1) |
 | Recoveries | 10 | "Recoveries: 10" |
 | Recovery value | 10 | floor(30 / 3) |
@@ -417,7 +420,8 @@ Input: R01 `selectionSets["hero-fixture"]`.
 | Abilities (7) | Brutal Slam (signature); Out of the Way! (3 ferocity); Thunder Roar (5 ferocity); Lines of Force (aspect triggered); Pain for Pain (kit signature, bonuses included); Melee Weapon Free Strike; Ranged Weapon Free Strike | |
 
 Status: **complete**. Diagnostics: `career.soldier.languages` → one `warning` (`duplicate-language`,
-Q-R-100). Uncertainties carried: Q-R-100, Q-R-101, Q-CHAR-12.
+Q-R-100). Original snapshot uncertainties were Q-R-100, Q-R-101 and Q-CHAR-12. Q-R-100/101 are now resolved;
+update their fixture/label artifacts through A02 as noted above.
 
 **Fixture check (acceptance check 2).** `docs/hero-fixture.md` states Stamina 30, Recoveries 10,
 recovery value floor(30/3) = 10, speed 6 (Beast Legs), stability 2 (Mountain), size 1M, Might 2,
@@ -472,7 +476,7 @@ resolved by assumption here; provisional defaults are labeled on the output.
 | Id | Where it applies | Status |
 | --- | --- | --- |
 | Q-R-100 | `career.soldier.languages` duplicate Caelian (4.1) | resolved 2026-09-14; automatic known-language grant, no paid Caelian slot; fixture update remains |
-| Q-R-101 | `class.fury.array-assignment` order (1.1) | open; raised by R01; provisional: any order |
+| Q-R-101 | `class.fury.array-assignment` order (1.1) | resolved 2026-09-14; any order with shared UI/headless assignment |
 | Q-R-102 | language pool (1.15) | open; raised by R01 |
 | Q-R-103 | kit eligibility by aspect (`kit.choice`) | open; raised by R01 |
 | Q-CHAR-10 | unspent ancestry points (`budget-unspent`) | open; the three examples spend all 3 points or over-spend, so none depends on it |

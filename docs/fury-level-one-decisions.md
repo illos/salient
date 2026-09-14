@@ -160,7 +160,7 @@ per career in the entries and Q-CHAR-9 covers project points.
 | `class.level` | automatic | none | `chapter/making-a-hero.md`: "Each option you can choose for your hero at 1st level includes a parenthetical selection labeled "Quick Build."" | — | Level 1 (v0.01 creates at level one only). |
 | `class.fury.fixed-characteristics` | automatic | none | `class/fury.md`, *Basics*: "You start with a Might of 2 and an Agility of 2" | — | Might 2, Agility 2. |
 | `class.fury.characteristic-array` | choice | single | `class/fury.md`: "you can choose one of the following arrays for your other characteristic scores:" | 2, −1, −1 / 1, 1, −1 / **1, 0, 0** | — |
-| `class.fury.array-assignment` | choice | assignment to Reason, Intuition, Presence | same sentence ("for your other characteristic scores") | Supported: **Intuition 1, Reason 0, Presence 0** (the fixture) | Depends on the array. Whether any order is allowed: **Q-R-101** (provisional: any order). |
+| `class.fury.array-assignment` | choice | assignment to Reason, Intuition, Presence | same sentence ("for your other characteristic scores") | Supported: **Intuition 1, Reason 0, Presence 0** (the fixture) | Depends on the array. **Q-R-101 confirmed:** assign in any order; new-build slots start blank and fixed class values are locked. |
 | `class.fury.baseline` | automatic | none | `class/fury.md`: "Starting Stamina at 1st Level: 21"; "Recoveries: 10"; potencies "Weak Potency: Might − 2; Average Potency: Might − 1; Strong Potency: Might" | — | Values recorded as references; R02 derives them. |
 | `class.fury.skill.nature` | automatic | none | `class/fury.md`: "You gain the Nature skill" | — | Grants **Nature**. Collision with a culture/career Nature: Q-CHAR-11. |
 | `class.fury.skills` | choice | multi, count **2** | `class/fury.md`: "Then choose any two skills from the exploration or intrigue skill groups." | exploration (10) + intrigue (12). Supported: **Jump, Climb** | Interpretation: "any two" from the union of both groups (both may come from one group); the source uses "One skill from ... and one skill from ..." when it means one per group (Soldier). Q-CHAR-11. |
@@ -169,6 +169,15 @@ per career in the entries and Q-CHAR-9 covers project points.
 | `class.fury.signature-ability` | choice | single | `feature/fury/level-1/fury-abilities.md`: "Choose one signature ability from the following options." | **Brutal Slam**, Hit and Run, Impaled!, To the Death! (`feature/ability/fury/level-1/<name>.md`) | Pool membership from the clean Heroes headings under *Signature Ability* (the unified feature entry omits the list); these four entries have no `cost:` field. |
 | `class.fury.ability-3` | choice | single | same file: "Choose one heroic ability from the following options, each of which costs 3 ferocity to use." | Back!, **Out of the Way!**, Tide of Death, Your Entrails Are Your Extrails! (each `cost: 3 Ferocity`) | — |
 | `class.fury.ability-5` | choice | single | same file: "Choose one heroic ability from the following options, each of which costs 5 ferocity to use." | Blood for Blood!, Make Peace With Your God!, **Thunder Roar**, To the Uttermost End (each `cost: 5 Ferocity`) | — |
+
+**User decision, 2026-09-14 (Q-R-101):** show all characteristics, with class-fixed values filled
+and uneditable. New-build assignable slots start blank. The player places the selected array's
+numbers into those slots by drag-and-drop, in any order. Fury displays Might 2 and Agility 2 as
+fixed; Reason, Intuition and Presence receive the three selected values. Keep the assignment
+explicit in `class.fury.array-assignment`; the fixture below does not prefill a new wizard.
+The same assignment is available headlessly by named characteristic through the shared build
+operation, with identical validation and persisted choices. See
+[the wizard contract](character-wizard-spec.md#3-decision-system).
 
 ## Step 6: Kit
 
@@ -217,7 +226,8 @@ Non-mechanical. Presented as an optional free-text field so the step exists; no 
    case as "One skill from the exploration skill group and one skill from the intrigue group"
    (`career/soldier.md`).
 2. `kit.choice` split by aspect (Q-R-103). Alternative considered: any of the 25 kits for any aspect.
-3. `class.fury.array-assignment` any order (Q-R-101). Alternative: printed order.
+3. `class.fury.array-assignment` any order is now user-confirmed (Q-R-101, 2026-09-14);
+   the earlier alternative was printed order.
 4. `culture.language` / `career.soldier.languages` pool = the two extant tables (Q-R-102). Alternative:
    include dead languages.
 5. Ability pools for signature/3/5 taken from the clean Heroes headings, cross-checked with the entries'
@@ -235,7 +245,7 @@ None is resolved by assumption; provisional defaults are labeled there.
 | Id | Decision(s) | Summary |
 | --- | --- | --- |
 | Q-R-100 | `career.soldier.languages`, `culture.language` | Resolved 2026-09-14: show Caelian as automatically known common tongue; it is not selectable for or counted against a language slot. |
-| Q-R-101 | `class.fury.array-assignment` | Whether the chosen array's values may be assigned to Reason/Intuition/Presence in any order. Raised by R01. |
+| Q-R-101 | `class.fury.array-assignment` | Resolved 2026-09-14: any order, fixed scores locked, remaining slots initially blank; UI drag-and-drop and equivalent headless assignment. |
 | Q-R-102 | `culture.language`, `career.soldier.languages` | Which language tables are selectable at creation (dead languages, Vaslorian regional table). Raised by R01. |
 | Q-R-103 | `kit.choice` | Kit eligibility by aspect; stormwight kits restricted to Stormwight. Raised by R01. |
 | Q-CHAR-1 | `step.complication` | Answered 2026-09-14: not presented in v0.01. |
@@ -274,7 +284,7 @@ Hand-validated against the tables above; the same three sets are in the JSON and
 | `career.soldier.inciting-incident` | Sole Survivor | in Soldier table |
 | `class.choice` | Fury | supported |
 | `class.fury.characteristic-array` | 1, 0, 0 | in list |
-| `class.fury.array-assignment` | Intuition 1, Reason 0, Presence 0 | uses exactly the array's values (order per Q-R-101 provisional) |
+| `class.fury.array-assignment` | Intuition 1, Reason 0, Presence 0 | uses exactly the array's values (order per Q-R-101 confirmed) |
 | `class.fury.skills` | Jump, Climb | count 2, both exploration |
 | `class.fury.aspect` | Berserker | grants Lift, Kit, Primordial Strength, Lines of Force |
 | `class.fury.signature-ability` / `ability-3` / `ability-5` | Brutal Slam / Out of the Way! / Thunder Roar | one from each pool |
@@ -293,7 +303,7 @@ Devil; Silver Tongue skill Lie; purchased traits Barbed Tail + Glowing Eyes + He
 "Seven Cities trade house": Anjali, Urban / Eavesdrop (intrigue), Bureaucratic / Persuade (interpersonal),
 Academic / History (lore); Soldier: Ride (exploration), Search (intrigue), languages Zaliac + one slot left
 open (deferrable per *I Speak Their Language*), perk Danger Sense, incident Vow of Sacrifice; Fury: array
-2, −1, −1 assigned Reason 2, Intuition −1, Presence −1 (Q-R-101 provisional), class skills Alertness + Climb,
+2, −1, −1 assigned Reason 2, Intuition −1, Presence −1 (Q-R-101 confirmed), class skills Alertness + Climb,
 aspect Reaver (grants Hide, Kit, Primordial Cunning, Unearthly Reflexes), abilities To the Death! / Back! /
 Blood for Blood!; kit Panther; name Tessiar. No duplicate skills (Lie, Eavesdrop, Persuade, History, Ride,
 Search, Nature, Alertness, Climb, Hide). Every required choice present; budget exactly spent; no warnings:

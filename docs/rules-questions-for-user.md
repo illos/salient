@@ -234,26 +234,6 @@ are the shared lifecycle decisions; the remaining entries are bounded content/sc
 - **Blocked until answered:** this optional workflow; higher-level build evaluation can proceed.
 - **Answer:**
 
-### Q-R-101: May the Fury's chosen characteristic array be assigned to Reason, Intuition and Presence in any order?
-
-- **Status:** open
-- **Raised by:** R01, 2026-09-14
-- **Where:** `docs/fury-level-one-decisions.md#step-5-class`; Compendium read:
-  `vendor/steel-compendium/en/unified/md/class/fury.md` (**Basics**: "you can choose one of the following arrays
-  for your other characteristic scores: 2, −1, −1 / 1, 1, −1 / 1, 0, 0"),
-  `vendor/steel-compendium/en/unified/md/rule/character/characteristic.md`.
-- **Conflict or gap:** The class fixes Might 2 and Agility 2 and offers three arrays "for your other
-  characteristic scores" without saying whether the three values map to Reason, Intuition and Presence in
-  the printed order or in any order the player chooses. `docs/hero-fixture.md` assigns 1, 0, 0 as Intuition 1,
-  Reason 0, Presence 0, which is not the printed order.
-- **Options:** A: any assignment of the three values to the three remaining characteristics. B: the values map
-  to Reason, Intuition, Presence in the printed order.
-- **Recommendation:** A. The wording "choose one of the following arrays" names a set of values, not an ordered
-  mapping, and the classes chapter gives no ordering rule. This is an interpretation; the fixture depends on it.
-- **Blocked until answered:** nothing; A is applied provisionally and the assignment is a separate recorded
-  decision (`class.fury.array-assignment`) so B can be enforced later without restructuring.
-- **Answer:**
-
 ### Q-R-102: Which language lists are selectable for culture and career language choices?
 
 - **Status:** open
@@ -361,6 +341,30 @@ No user approval is implied by this classification.
 - **Answer:**
 
 ## Resolved questions
+
+### Q-R-101: May the Fury's chosen characteristic array be assigned to Reason, Intuition and Presence in any order?
+
+- **Status:** resolved 2026-09-14; [recorded decision](character-wizard-spec.md#3-decision-system)
+- **Raised by:** R01, 2026-09-14
+- **Where:** `docs/fury-level-one-decisions.md#step-5-class`; Compendium read:
+  `vendor/steel-compendium/en/unified/md/class/fury.md` (**Basics**: "you can choose one of the following arrays
+  for your other characteristic scores: 2, −1, −1 / 1, 1, −1 / 1, 0, 0"),
+  `vendor/steel-compendium/en/unified/md/rule/character/characteristic.md`.
+- **Conflict or gap:** The class fixes Might 2 and Agility 2 and offers three arrays "for your other
+  characteristic scores" without saying whether the three values map to Reason, Intuition and Presence in
+  the printed order or in any order the player chooses. `docs/hero-fixture.md` assigns 1, 0, 0 as Intuition 1,
+  Reason 0, Presence 0, which is not the printed order.
+- **Options:** A: any assignment of the three values to the three remaining characteristics. B: the values map
+  to Reason, Intuition, Presence in the printed order.
+- **Recommendation:** A. The wording "choose one of the following arrays" names a set of values, not an ordered
+  mapping, and the classes chapter gives no ordering rule. This is an interpretation; the fixture depends on it.
+- **Blocked until answered:** answered; A02 must implement the confirmed UI and equivalent
+  headless assignment using the shared build operation.
+- **Answer:** Display every characteristic. Fill and lock the values automatically assigned by
+  class selection; leave the others blank by default. The player drags the available three or four
+  numbers into those slots, allowing any assignment of the selected array. All these UI interactions
+  also need headless operations: accept named-characteristic assignments with the same validation
+  and persistence, without requiring drag gestures. Saved assignments remain explicit build choices.
 
 ### Q-R-100: May a chosen career or culture language duplicate the automatic Caelian grant?
 

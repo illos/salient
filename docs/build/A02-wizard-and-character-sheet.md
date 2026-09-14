@@ -229,3 +229,18 @@ together under [the owning contract](../character-wizard-spec.md#3-decision-syst
 choice flow or an explicit source-supported deferred slot; do not silently pick a replacement or
 count Caelian twice. The existing complete-with-warning fixture result is superseded. This records
 the decision, not a completed fixture/evaluator/UI repair.
+
+### User decision follow-up: Q-R-101 and headless assignment
+
+Display all characteristics; class-assigned scores are filled and locked, and a new build's other
+slots are blank. Offer the chosen source array's assignable numbers as drag-and-drop values, one
+use per value, with any ordering across assignable characteristics. Do not prefill the fixture's
+assignment. Saved builds reopen with their recorded choices. See
+[the owning decision system](../character-wizard-spec.md#3-decision-system).
+
+The user explicitly reaffirmed headless equivalents for all such UI interactions. Use one shared
+assignment operation for named-characteristic input and drag-and-drop, preserving fixed scores and
+validating the chosen array. Verify both paths persist identical assignments and produce the same
+baseline, including repeated array values, a partial assignment, reassignment, and refused attempts
+to change fixed values or use values outside the chosen array. Remove resolved Q-R-101 uncertainty
+labels in the build artifacts. This handoff records requirements, not completed implementation.

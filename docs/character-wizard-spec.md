@@ -81,7 +81,7 @@ and the verbatim-source check `tests/fury-decisions.test.ts`. It lists all ten *
 order with stable decision ids, selection shapes, full option pools (the v0.01 supported subset is an explicit
 marking), counts and budgets with their source sentences, dependencies and automatic grants, plus three worked
 selection sets. The complication step is recorded but not presented (Q-CHAR-1). Source silences it found are
-Q-R-101 to Q-R-103 remain open in `rules-questions-for-user.md`; Q-R-100 is now confirmed below.
+Q-R-102 and Q-R-103 remain open in `rules-questions-for-user.md`; Q-R-100 and Q-R-101 are confirmed below.
 This closes readiness-audit gap G1 as a contract; A02 renders it and R02 derives values from it. Rules review
 is pending.
 
@@ -201,6 +201,21 @@ reconciliation policy; this is an open decision, not an implicit reset.
 
 ### Confirmed behavior
 
+- Confirmed 2026-09-14 (Q-R-101): display all five characteristics. Values automatically assigned
+  by the selected class are filled in and uneditable in this assignment step. The remaining slots
+  start blank for a new build. After choosing a source-permitted array, the player drags its three
+  or four assignable values into the remaining slots, in any order. The class and chosen array
+  determine the actual count and values; Fury has fixed Might 2 / Agility 2 and three assignable
+  values. Repeated values are separate available numbers, each used once. An empty slot is unset,
+  not an implicit zero. Existing saved assignments reopen as recorded; the example fixture is not
+  automatic input for a new hero.
+- Headless equivalence reaffirmed with Q-R-101: every wizard interaction that changes choices must
+  have a headless operation with the same validation, persistence and derived results. Characteristic
+  assignment accepts named characteristics and values; it must not require simulating a drag gesture.
+  UI and headless callers use the same shared build operation, which preserves class-fixed values,
+  checks the selected array's values/counts and records the assignment. Reassignment uses that same
+  path. This extends the existing headless requirement to these wizard interactions without making
+  drag-and-drop an independent implementation of character rules.
 - Confirmed 2026-09-14 (Q-R-100): show **Caelian** as an automatically known language with a short
   description, such as “The common tongue, known by all heroes.” It is informational, not a language
   the user spends a choice on. Keep it visible but unavailable as a culture/career language selection;
@@ -260,7 +275,7 @@ Input is the R01 decision ids and selection shapes; output is `complete | incomp
 diagnostics keyed by decision id, and a derived baseline in which every value carries the decision id,
 selected value and source sentence that supplied it. Status precedence (`invalid` > `unsupported` >
 `incomplete`) is a labeled engineering choice within this vocabulary; warnings never change the status. The
-baseline is distinct from live values (R03). Open questions it labels are Q-R-101 to Q-R-103 and
+baseline is distinct from live values (R03). Open questions it labels are Q-R-102, Q-R-103 and
 Q-CHAR-10 to Q-CHAR-12; no new question was needed. A02 implements the evaluator against these types.
 
 ## 4. Wizard flows
