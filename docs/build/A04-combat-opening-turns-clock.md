@@ -118,3 +118,70 @@ spread into `convex/schema.ts`), `convex/encounterTables.ts` (optional phase/rou
 `tests/app/combat.test.ts`. Dependencies: A03, S02, A01 and R05 are real; no fixture. A02 has not
 landed, so heroes remain the existing `characters` rows and Victories come from `liveState.victories`
 (0 when no live record exists, the R03 initial value).
+
+### Implementation notes (2026-09-15)
+
+- **Draft model.** The setup card is an `interactions` row of kind `combat-setup` plus a draft
+  `encounters` row; the draft stores departures from the defaults and is resolved against the live
+  rosters on every read, which is how roster updates flow into it without resetting choices. Draft
+  edits are attributed `combat.setup` events. OK is the card's answer (continuation `combat.commit`);
+  `/combat commit` also works directly and resolves the card itself. `card.close` on this card is
+  refused in favor of `/combat cancel`, which deletes the draft row and closes the card.
+- **Opening paths.** Roll when both sides have an unsurprised selected creature; other side first
+  when exactly one side is entirely surprised; Director adjudication (phase `choice`, players refused)
+  when both sides are surprised or a side has no participants. The d10 entitlement is 6+ players,
+  else Director (rule/combat/combat-round.md); the Director may choose on either result.
+- **Turn model.** `initiativeGroups` (side, order, `completedRound`), `turnEntries` (actor,
+  `spentRound`, surprised, source ordinary|granted), `turns` (one row per actual turn with its start
+  and end events). "Spent this round" and "finished this round" are comparisons against
+  `encounter.round`, so a new round needs no reset writes. `activeSide` is the side expected next
+  under the alternation and exhausted-side rules; acting against it is a recorded warning.
+- **Clock.** `clockRegistrations` rows with `enqueueSeq`; dispatch logs a boundary event and one
+  event per firing under the causing user's command id. The save phase is computed after the
+  ordinary phase from the live queue (standing save-phase policy) and has no producer in v0.01: a
+  `saving-throw` item is logged as unsupported, not rolled. Malice values: combat-start grant floors
+  the average and logs the unrounded value (Q-R-51 A); round gain uses the hero count recorded at OK
+  (Q-R-50 A). Surprise expiry is registered at OK when anyone is surprised.
+- **Hooks in A03 code.** `foe.add` / `foe.remove` call `onFoeAdded` / `onFoeRemoved`; the registry
+  gained an optional interaction `kind`; `projectEvent` hides `clock.malice` pool values unless Show
+  Malice is on; `characters.save` calls `requireCharacterEditable` (only participants are locked).
+- **Engineering choices recorded here, not asked:** empty non-active groups are deleted (the spec
+  leaves empty-group presentation open); a session closed while a setup draft is open leaves the
+  draft row on the closed session (a new session starts with no encounter); `combat.cancel` is
+  `session: 'active'` so a paused draft can be discarded. Q-A-400 asks whether the finished-group
+  refusal should be a warning.
+- **Generated API.** `convex/_generated/api.d.ts` extended by hand for the new modules (no local
+  deployment in this checkout to run `convex codegen`).
+- **UI.** `web/table/setup-card.tsx` and `web/table/initiative.tsx`; `web/table/index.tsx` mounts
+  them, adds Start combat to the Director pane, Take turn / End turn to hero rows and switches only
+  the invoking user's hero pane (local state) after a successful Take turn.
+
+### Verification (2026-09-15)
+
+- `pnpm check`: clean at each commit (lint, engine, app 224 tests including
+  `tests/app/combat.test.ts` 10 tests, links, vendor, content, build).
+- `tests/app/combat.test.ts` reads persisted rows back for: draft per Director with player/observer
+  edits refused, roster addition/removal reflected in the effective draft, Cancel leaving no
+  encounter/snapshot/lock and the setup card closed; OK through the card (snapshot contents, locks on
+  the participant only, party-roster lock, one group per creature, the four registrations in enqueue
+  order, `combat-start` grant 0 with inputs, idempotent OK retry); observer roll refused, player roll
+  logged with dice and entitlement, second roll refused, choice authority per entitlement, round 1
+  gain 1 + 1 = 2; surprise-determined path with no roll and expiry at the end of round 1;
+  adjudication path; walkthrough steps 1, 2 and 7 with the full ordered clock log for two rounds
+  (gains 2 and 3, pool 0 → 2 → 5) and the player-side Malice projection; regrouping (unspent into
+  active acts, spent stays spent, finished does not reopen, round advances with an unacted arrival,
+  no turn invented); mid-combat add (bottom group, turn this round) and removal of the acting foe
+  (turn-end fired, round ends, idempotent retry); pause blocks turn, roster and regroup operations
+  and resume restores the same active turn; dispatch order with three registered items and a dormant
+  save (fires last, unsupported, no roll row, no condition change); registry discovery.
+- Browser test `tests/browser/combat.spec.ts`: **written, not run** (no `.env.local` / local
+  deployment in this worktree). Acceptance 7 is therefore not verified in a browser; the pane switch
+  is local state set only on the invoking user's successful Take turn.
+- Acceptance 8 (rules reviewer): pending.
+
+### Unfinished (2026-09-15)
+
+- Browser run of `tests/browser/combat.spec.ts` (two player contexts) and a visual pass.
+- Granted (extra) turn entries: the data model carries `source: 'granted'`, but no operation creates
+  one (not in this slice's scope list).
+- Independent review and rules review not requested (the user audits separately).

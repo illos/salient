@@ -494,6 +494,31 @@ are the shared lifecycle decisions; the remaining entries are bounded content/sc
   `Q-R-3` on the record.
 - **Answer:**
 
+### Q-A-400: Should Take turn from a finished initiative group be a warned departure instead of a refusal?
+
+- **Status:** open
+- **Raised by:** A04, 2026-09-15
+- **Where:** `docs/table-spec.md#mid-combat-additions-and-regrouping` ("moving a creature with an
+  unused turn into a group that has already finished does not make that group eligible to activate
+  again ... The standing warned Director-adjudication path remains separate from automatic
+  eligibility"), `docs/table-spec.md#taking-a-turn` ("rule eligibility is not an application permission
+  gate"), `docs/table-spec.md#player-sheet-actions-and-explicit-end-turn` (graying is advisory).
+  Compendium read: `vendor/steel-compendium/en/unified/md/rule/combat/combat-round.md` (Enemies Act In
+  Groups; a creature who has acted cannot act again until a new round).
+- **Conflict or gap:** the group contract makes a finished group ineligible and names Director
+  adjudication as a separate path; the general doctrine makes rule eligibility a warning, not a gate.
+  A04 refuses `/turn take` for an entry whose group finished this round (and for an entry already
+  spent this round, and while another group is active), with the message pointing at `/group move`
+  into a new group as the adjudication path. It warns, without blocking, only for acting out of side
+  order and for a Slain foe.
+- **Options:** A: keep the refusal; the Director regroups to act (current). B: allow it with a
+  recorded rule warning, leaving the group's completion untouched. C: allow it for the Director only,
+  with a warning.
+- **Recommendation:** A. It keeps one active group and one active turn as coherent-state requirements
+  the spec lists separately from rule eligibility, and the regroup path is one operation away.
+- **Blocked until answered:** nothing; A applied.
+- **Answer:**
+
 ## Resolved questions
 
 ### Q-R-200: Is a foe's Slain label recomputed from current Stamina after a Director edit above zero?

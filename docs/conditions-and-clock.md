@@ -297,6 +297,11 @@ The only registrations that can exist in v0.01 are:
 
 Manual condition toggles register nothing ("Do not infer timers from toggles.", `agent.MD`).
 
+**Implementation note, 2026-09-15 (A04):** A04 registers the surprise expiry (`round`/`round-end`/`round: 1`,
+work `operation: combat.surprise-expiry`) at OK when any selected creature is surprised; it clears the
+Surprised flag on every turn entry and logs the names. The three Malice steps are registered at OK in the
+order of the table in 3.2. Nothing registers a save.
+
 ## 3. Malice common lifecycle
 
 ### 3.1 Source

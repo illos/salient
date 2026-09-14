@@ -1566,6 +1566,12 @@ Build/resource reconciliation after a permitted build change outside an encounte
 concern. There is no longer an open question about the timing of encounter-to-main-sheet writeback: accepted
 changes reach the main sheet immediately.
 
+**Implementation note, 2026-09-15 (A04):** the check is `requireCharacterEditable` in
+`convex/lib/encounters.ts`: locked when `combatLocked` was set at OK or when the character has a turn entry in
+the campaign's committed encounter. `characters.save` calls it; A02's draft, level-up, restoration and
+activation operations call the same helper. Characters not in the encounter are not locked. A07 clears
+`combatLocked` at closeout or Void.
+
 ### Respite mode
 
 Confirmed: respite is its own dedicated table mode, with a self-contained gameplay loop that the Director
@@ -1691,6 +1697,21 @@ Engineering requirement for the eventual shared operation: concurrent clicks pro
 roll, shared by everyone. Lock/snapshot timing is now confirmed at OK as above; roster changes while the
 draft is open follow the confirmed draft roster updates (2026-09-13) above. No initiative operation or new automatic result is
 implemented here.
+
+**Implementation note, 2026-09-15 (A04):** `/combat start` opens a `combat-setup` interaction and a draft
+`encounters` row (status `draft`); the draft stores only the Director's departures from the defaults
+(excluded keys, surprised keys, group keys), so `encounters.current` resolves it against the live rosters
+at read time and additions/removals need no reconciliation write. `/combat setup creature=@X
+included=|surprised=|group=` edits it, `/combat cancel` deletes it (the generic card close is refused),
+and OK is the card's answer: `interactions.respond` runs `combat.commit`, which takes the
+`encounter-start` snapshot (participating heroes' live records, every foe, the Malice pool), sets
+`combatLocked` on participating heroes, creates one group per creature (combined by group key), registers
+the Malice lifecycle and surprise expiry, dispatches `combat-start`, then chooses the path: `roll` when both
+sides have an unsurprised creature; `surprise-determined` (other side first, round 1 starts at once) when
+exactly one side is entirely surprised; `adjudication` (phase `choice`, Director only) when both sides are
+surprised or a side is empty. `/combat roll` (Director or any active player) records the d10 and the
+entitlement (6+: players); `/combat first side=heroes|foes` records the chooser and starts round 1. Operations:
+`convex/lib/combatOperations.ts`; read: `convex/encounters.ts`.
 
 ### Initiative groups: confirmed app model
 
@@ -1953,6 +1974,18 @@ is removed during their shared turn. Exact shared-turn handoff on removal remain
 adjustments without reopening their casualty rules; preserve surviving participation rather than inventing a whole-squad End turn.
 Roster removal is blocked while the session is paused. Resume before removing the monster; no deferred
 removal or resulting turn/clock processing is queued during the pause.
+
+**Implementation note, 2026-09-15 (A04):** `foe.add` during a committed encounter creates a new bottom
+group with one unspent entry (Q-R-52 provisional default A); `foe.remove` of the acting foe dispatches its
+`turn-end` first, then removes its entries. `/group move entry=<id> group=<id>|new` moves one entry with its
+`spentRound`; group completion is `completedRound === encounter.round`, so a finished destination stays
+finished and every group is unspent again when the round changes without a reset write. A group left with
+no entries is removed unless it is the active group, which completes when the current turn ends (the
+empty-group presentation question is otherwise unchanged). `/turn take` is refused for an entry already
+spent this round, for an entry whose group finished this round, and while another group is active
+(Q-A-400 asks whether the second should be a warning); acting out of side order is recorded as a warning.
+Round advance happens in `settle` (`convex/lib/initiative.ts`) when no turn is active and every group is
+finished, at most one round per operation, and only when some entry can act in the new round.
 
 #### Source expectations and timing distinctions
 
@@ -2645,6 +2678,19 @@ its concrete storage schema remains an engineering proposal. The clock does not 
 such as taking damage. The existing warn-without-blocking and Director-adjudication doctrine remains.
 
 **Implementation note, 2026-09-14 (R05):** the boundary kinds, timing clauses, registration and dispatch types for this section are in `shared/contracts/clock.ts` (types only); the sourced definitions of turn, round, end of turn and the standing ordering policy applied to those types are in [conditions and clock](conditions-and-clock.md#2-clock-contract). In v0.01 nothing registers a `saving-throw` work item (Q-TS-1), so the save phase is empty; the only registrations are the Malice lifecycle steps and, if A04 registers it, surprise expiry at the end of round 1. Open source gaps recorded as Q-R-50 to Q-R-52 in `rules-questions-for-user.md`.
+
+**Implementation note, 2026-09-15 (A04):** `convex/lib/clock.ts` stores registrations in
+`clockRegistrations` with a per-encounter `enqueueSeq` and dispatches each boundary inside the causing
+operation's mutation: one `clock.boundary` event (origin `clock`, cause = the user event, same command id)
+carrying the plan, then one event per firing in enqueue order, then the save phase computed from the queue
+after the ordinary phase. Handlers exist for `malice` steps and for `operation` work by id
+(`combat.surprise-expiry` at `round-end` of round 1); a `saving-throw` item or an unknown operation is logged
+as `clock.unsupported` and never rolled (Q-TS-1). One-shot clauses retire after firing; recurring ones stay.
+Boundaries dispatched by A04: `combat-start` at OK, `round-start` at the starting-side announcement and after
+each `round-end`, `turn-start` at Take turn, `turn-end` at End turn or acting-foe removal; `combat-end` is
+registered for A07. Malice: `round-start-gain` counts `heroParticipantIds` recorded at OK (Q-R-50 A);
+`combat-start-grant` floors a fractional average (Q-R-51 A) and logs the unrounded value; `clock.malice`
+events hide pool values from players and observers while Show Malice is off.
 
 ### Undo permissions and proposed campaign control
 
