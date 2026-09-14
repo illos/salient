@@ -287,7 +287,7 @@ contribution beside the total (`docs/character-sheet-spec.md`).
 | Group | Rule (source sentence) | R01 decision ids | v0.01 handling |
 | --- | --- | --- | --- |
 | Skills | Silver Tongue: "You have one skill of your choice from the interpersonal skill group" (`feature/trait/devil/silver-tongue.md`); culture: "You can select one skill from each aspect's list of options." (clean Heroes, *Culture Benefits*); Soldier: "One skill from the exploration skill group and one skill from the intrigue group" (`career/soldier.md`); class: "You gain the Nature skill" and "Then choose any two skills from the exploration or intrigue skill groups." (`class/fury.md`); aspect: "You have the Lift skill." (`feature/fury/level-1/primordial-aspect.md`) | `ancestry.devil.silver-tongue-skill`, `culture.environment.skill`, `culture.organization.skill`, `culture.upbringing.skill`, `career.soldier.skill.exploration`, `career.soldier.skill.intrigue`, `class.fury.skill.nature`, `class.fury.skills`, `class.fury.aspect` | Listed with group; each skill grants the +2 test bonus in R04 section 5 when used. Duplicates: **Open, Q-CHAR-11** (`duplicate-skill` warning). |
-| Languages | "All player characters know Caelian!" (clean Heroes, *Caelian Empire*); "You know the language of your culture, in addition to knowing Caelian." (*Culture Benefits*); "Languages: Two languages" (`career/soldier.md`) | `culture.caelian`, `culture.language`, `career.soldier.languages` | Listed. A pick duplicating a granted language: **Open, Q-R-100** (provisional: kept, `duplicate-language` warning, `duplicateOf` set). A `null` slot is a deferred choice (R01) and is not a diagnostic. Pool: Q-R-102. |
+| Languages | "All player characters know Caelian!" (clean Heroes, *Caelian Empire*); "You know the language of your culture, in addition to knowing Caelian." (*Culture Benefits*); "Languages: Two languages" (`career/soldier.md`) | `culture.caelian`, `culture.language`, `career.soldier.languages` | Listed. **Confirmed Q-R-100:** Caelian is automatically known and consumes no selectable language slot; the old paid-Caelian duplicate warning is superseded. A `null` slot is a deferred choice (R01) and is not a diagnostic. Pool: Q-R-102. |
 | Ancestry traits | "Each ancestry has one or more signature traits, which your hero gets for free if they take that ancestry." (`chapter/ancestries.md`); "You have 3 ancestry points to spend on the following traits." (`feature/trait/devil/devil-traits.md`) | `ancestry.devil.signature-trait`, `ancestry.devil.purchased-traits` | Listed with cost; numeric effects (Beast Legs speed, Impressive Horns saves) feed 1.6 and 1.12; other trait text is manual. Over budget is `invalid` (the source's own example, section 3.3). Unspent points: **Open, Q-CHAR-10** (`budget-unspent` warning until answered). |
 | Class features | Advancement table row "1st": "Primordial Aspect, Ferocity, Growing Ferocity, Aspect Features, Aspect Triggered Action, Mighty Leaps, Fury Abilities" (`class/fury.md`) | `class.fury.features` | Ferocity, Growing Ferocity, Mighty Leaps listed with source text; execution manual (`docs/fury-goblin-automation.md`). |
 | Aspect features | "Your primordial aspect grants you two features, as shown on the 1st-Level Aspect Features table." (`feature/fury/level-1/1st-level-aspect-features.md`): Berserker = Kit, Primordial Strength; "Your primordial aspect grants you a triggered action, as shown on the Aspect Triggered Actions table." (`aspect-triggered-action.md`): Berserker = Lines of Force | `class.fury.aspect` | Kit feature makes `kit.choice` required; Primordial Strength manual; Lines of Force listed as an ability. |
@@ -381,6 +381,13 @@ Computed by hand from the sentences in section 1; the same three examples are in
 `shared/content/character-evaluation-examples.json` in the contract shape, and
 `tests/character-derived-values.test.ts` checks their quotes and numbers against the source files.
 
+**Q-R-100 update, 2026-09-14:** the worked examples below preserve their original fixture snapshot.
+Their duplicate paid-Caelian entry, warning and complete-status claim are superseded by the
+[confirmed wizard contract](character-wizard-spec.md#3-decision-system). Caelian is shown once as
+already known and does not satisfy or consume a culture/career selection. Update the fixture,
+JSON mirror and evaluator expectations together through A02; no automatic replacement selection
+is implied by the ruling. The arithmetic unrelated to language choices is unchanged.
+
 ### 4.1 Complete: the hero fixture (`docs/hero-fixture.md`, Grug; R01 Set A)
 
 Input: R01 `selectionSets["hero-fixture"]`.
@@ -464,7 +471,7 @@ resolved by assumption here; provisional defaults are labeled on the output.
 
 | Id | Where it applies | Status |
 | --- | --- | --- |
-| Q-R-100 | `career.soldier.languages` duplicate Caelian (4.1) | open; raised by R01; provisional: kept with a warning |
+| Q-R-100 | `career.soldier.languages` duplicate Caelian (4.1) | resolved 2026-09-14; automatic known-language grant, no paid Caelian slot; fixture update remains |
 | Q-R-101 | `class.fury.array-assignment` order (1.1) | open; raised by R01; provisional: any order |
 | Q-R-102 | language pool (1.15) | open; raised by R01 |
 | Q-R-103 | kit eligibility by aspect (`kit.choice`) | open; raised by R01 |

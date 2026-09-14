@@ -10,6 +10,12 @@ Source revision: `fb83a789da8f0327a389c277a0c790b1648d5810`. All links below poi
 
 ## Grug: level-one devil Berserker Fury
 
+**Language decision update, 2026-09-14 (Q-R-100):** the original Soldier choices below include
+Caelian, but Caelian is now confirmed as automatically known and must not consume a language slot.
+Keep its visible common-tongue explanation. The extra-language selection needs correction in the
+wizard/fixture work; this historical row is not evidence of two valid Soldier language choices.
+See [the current wizard contract](character-wizard-spec.md#3-decision-system).
+
 | Choice | Value and source |
 | --- | --- |
 | Ancestry | [Devil](../vendor/steel-compendium/en/unified/md/ancestry/devil.md). Size 1M; the combat projection also retains its numeric footprint 1. |

@@ -81,7 +81,7 @@ and the verbatim-source check `tests/fury-decisions.test.ts`. It lists all ten *
 order with stable decision ids, selection shapes, full option pools (the v0.01 supported subset is an explicit
 marking), counts and budgets with their source sentences, dependencies and automatic grants, plus three worked
 selection sets. The complication step is recorded but not presented (Q-CHAR-1). Source silences it found are
-Q-R-100 to Q-R-103 in `rules-questions-for-user.md`; provisional defaults are labeled there and in the document.
+Q-R-101 to Q-R-103 remain open in `rules-questions-for-user.md`; Q-R-100 is now confirmed below.
 This closes readiness-audit gap G1 as a contract; A02 renders it and R02 derives values from it. Rules review
 is pending.
 
@@ -201,6 +201,12 @@ reconciliation policy; this is an open decision, not an implicit reset.
 
 ### Confirmed behavior
 
+- Confirmed 2026-09-14 (Q-R-100): show **Caelian** as an automatically known language with a short
+  description, such as “The common tongue, known by all heroes.” It is informational, not a language
+  the user spends a choice on. Keep it visible but unavailable as a culture/career language selection;
+  the automatic grant consumes none of those slots. Record it once as an automatic grant. Existing
+  fixture selections that spend a slot on Caelian need correction through the normal choice flow;
+  do not count the old duplicate as a fulfilled slot or silently invent a replacement choice.
 - Foundational choices include ancestry, culture, career, and class, followed by the class-dependent kit and
   the source's optional complication step, using the step names of
   [Making a Hero](../vendor/steel-compendium/en/unified/md/chapter/making-a-hero.md#step-by-step-hero-making).
@@ -254,7 +260,7 @@ Input is the R01 decision ids and selection shapes; output is `complete | incomp
 diagnostics keyed by decision id, and a derived baseline in which every value carries the decision id,
 selected value and source sentence that supplied it. Status precedence (`invalid` > `unsupported` >
 `incomplete`) is a labeled engineering choice within this vocabulary; warnings never change the status. The
-baseline is distinct from live values (R03). Open questions it labels are Q-R-100 to Q-R-103 and
+baseline is distinct from live values (R03). Open questions it labels are Q-R-101 to Q-R-103 and
 Q-CHAR-10 to Q-CHAR-12; no new question was needed. A02 implements the evaluator against these types.
 
 ## 4. Wizard flows

@@ -234,28 +234,6 @@ are the shared lifecycle decisions; the remaining entries are bounded content/sc
 - **Blocked until answered:** this optional workflow; higher-level build evaluation can proceed.
 - **Answer:**
 
-### Q-R-100: May a chosen career or culture language duplicate the automatic Caelian grant?
-
-- **Status:** open
-- **Raised by:** R01, 2026-09-14
-- **Where:** `docs/fury-level-one-decisions.md#step-4-career`; Compendium read:
-  `vendor/steel-compendium/en/books/heroes/clean/Draw Steel Heroes.md` (**Culture Benefits**: "You know the
-  language of your culture, in addition to knowing Caelian."; **Caelian Empire**: "All player characters know
-  Caelian!"), `vendor/steel-compendium/en/unified/md/career/soldier.md` ("Languages: Two languages"),
-  `vendor/steel-compendium/en/unified/md/chapter/making-a-hero.md` (**I Speak Their Language**).
-- **Conflict or gap:** `docs/hero-fixture.md` spends one Soldier language slot on Caelian, which every player
-  character already knows. The source never says a chosen language must be one the hero does not know, and never
-  says what happens if it is. The wizard must decide whether the fixture set is complete, invalid, or has an
-  open slot.
-- **Options:** A: accept the duplicate with a visible warning; the slot is spent. B: reject the duplicate as
-  invalid; the player must choose another language or leave the slot open. C: silently convert the duplicate
-  into an open (deferred) slot.
-- **Recommendation:** A. Nothing in the source forbids it, the app's standing policy is warn-without-blocking,
-  and the existing fixture stays legal. C hides a choice; B adds a rule the source does not state.
-- **Blocked until answered:** nothing; A is applied provisionally (R01 records the fixture as complete with one
-  warning).
-- **Answer:**
-
 ### Q-R-101: May the Fury's chosen characteristic array be assigned to Reason, Intuition and Presence in any order?
 
 - **Status:** open
@@ -383,6 +361,31 @@ No user approval is implied by this classification.
 - **Answer:**
 
 ## Resolved questions
+
+### Q-R-100: May a chosen career or culture language duplicate the automatic Caelian grant?
+
+- **Status:** resolved 2026-09-14; [recorded decision](character-wizard-spec.md#3-decision-system)
+- **Raised by:** R01, 2026-09-14
+- **Where:** `docs/fury-level-one-decisions.md#step-4-career`; Compendium read:
+  `vendor/steel-compendium/en/books/heroes/clean/Draw Steel Heroes.md` (**Culture Benefits**: "You know the
+  language of your culture, in addition to knowing Caelian."; **Caelian Empire**: "All player characters know
+  Caelian!"), `vendor/steel-compendium/en/unified/md/career/soldier.md` ("Languages: Two languages"),
+  `vendor/steel-compendium/en/unified/md/chapter/making-a-hero.md` (**I Speak Their Language**).
+- **Conflict or gap:** `docs/hero-fixture.md` spends one Soldier language slot on Caelian, which every player
+  character already knows. The source never says a chosen language must be one the hero does not know, and never
+  says what happens if it is. The wizard must decide whether the fixture set is complete, invalid, or has an
+  open slot.
+- **Options:** A: accept the duplicate with a visible warning; the slot is spent. B: reject the duplicate as
+  invalid; the player must choose another language or leave the slot open. C: silently convert the duplicate
+  into an open (deferred) slot.
+- **Recommendation:** A. Nothing in the source forbids it, the app's standing policy is warn-without-blocking,
+  and the existing fixture stays legal. C hides a choice; B adds a rule the source does not state.
+- **Blocked until answered:** answered; A02/R01/R02 must correct the paid-Caelian fixture and
+  its evaluator expectations, and present the automatic language grant separately.
+- **Answer:** Caelian should still be shown with a short description explaining that it is the
+  common tongue, but it is automatically known and not a language to spend choices on. It consumes
+  no culture/career language slot. This supersedes accepting the duplicate as a spent slot; the user
+  did not select a replacement language for the existing fixture.
 
 ### Q-A-601: Does Enable user undo also remove the acting player's post-roll correction window?
 

@@ -129,6 +129,13 @@ Skill group pools (`skill/group/<group>.md`): crafting 10, exploration 10, inter
 lore 12 (57 total, matching `_index/skill.md`). The *Archetypical Cultures Table* and *Typical Ancestry
 Cultures Table* are presets of these aspects, not additional options.
 
+**User decision, 2026-09-14 (Q-R-100):** Caelian stays visible with a short common-tongue
+explanation, but is automatically known and cannot consume a culture or career language slot.
+The source language catalog may still contain it; the choice UI marks it already known and not
+selectable as an additional grant. See [the wizard contract](character-wizard-spec.md#3-decision-system).
+The provisional fixture choice of Caelian as a Soldier language below is superseded and needs
+correction in the R01/R02 artifacts and A02 integration; it is not a completed extra-language choice.
+
 ## Step 4: Career
 
 | Decision | Kind | Shape | Source and quote | Options (supported in v0.01 in bold) | Depends on / grants |
@@ -136,7 +143,7 @@ Cultures Table* are presets of these aspects, not additional options.
 | `career.choice` | choice | single | `chapter/making-a-hero.md`: "Choose your hero's career, which describes what you did for a living before you became a hero." | Agent, Aristocrat, Artisan, Beggar, Criminal, Disciple, Explorer, Farmer, Gladiator, Laborer, Mage's Apprentice, Performer, Politician, Sage, Sailor, **Soldier**, Warden, Watch Officer (`career/<name>.md`, 18 per `_index/career.md`) | Each career defines its own skills, languages, perk type, Renown, wealth, project points and six inciting incidents. Sub-decisions are defined below for Soldier only; V08 expands the others from the same entries. |
 | `career.soldier.skill.exploration` | choice | single | `career/soldier.md`: "One skill from the exploration skill group and one skill from the intrigue group" | exploration (10): Climb, Drive, **Endurance**, Gymnastics, Heal, Jump, Lift, Navigate, Ride, Swim | Available when career = Soldier. Q-CHAR-11. |
 | `career.soldier.skill.intrigue` | choice | single | same sentence | intrigue (12): **Alertness**, Conceal Object, Disguise, Eavesdrop, Escape Artist, Hide, Pick Lock, Pick Pocket, Sabotage, Search, Sneak, Track | Q-CHAR-11. |
-| `career.soldier.languages` | choice | multi, count **2**, deferrable | `career/soldier.md`: "Languages: Two languages". Pool: `chapter/background.md`, *Languages*: "Some careers allow you to learn extra languages, chosen from those available in Languages in Orden above." Deferral: `chapter/making-a-hero.md`, *I Speak Their Language*: "You can choose to leave some of the languages you know open until you discover what might be a good choice for the campaign you're playing in." | Same extant language pool as `culture.language`. Supported: **Caelian, Vaslorian** (the fixture's pick; see Q-R-100) | Q-R-100 (duplicate of the automatic Caelian), Q-R-102 (pool), Q-CHAR-5 (filling a deferred slot later). |
+| `career.soldier.languages` | choice | multi, count **2**, deferrable | `career/soldier.md`: "Languages: Two languages". Pool: `chapter/background.md`, *Languages*: "Some careers allow you to learn extra languages, chosen from those available in Languages in Orden above." Deferral: `chapter/making-a-hero.md`, *I Speak Their Language*: "You can choose to leave some of the languages you know open until you discover what might be a good choice for the campaign you're playing in." | Same extant language pool as `culture.language`. Original fixture: **Caelian, Vaslorian**; the Caelian slot is superseded by Q-R-100 and needs correction | Q-R-100 (duplicate of the automatic Caelian), Q-R-102 (pool), Q-CHAR-5 (filling a deferred slot later). |
 | `career.soldier.renown` | automatic | none | `career/soldier.md`: "Renown: +1". Base: `rule/resource/renown.md`: "At the start of character creation, your Renown is 0." | — | Grants Renown +1 (so Renown 1). |
 | `career.soldier.perk` | choice | single | `career/soldier.md`: "Perk: One exploration perk". Type rule: `en/books/heroes/md/chapter/perks.md`: "Whenever a feature allows you to gain a perk, that feature tells you which type of perk to choose." | Exploration perks (clean Heroes, *Exploration Perks* headings; entries `perk/<name>.md`): Brawny, Camouflage Hunter, Danger Sense, Friend Catapult, I've Got You!, Monster Whisperer, Put Your Back Into It!, Team Leader, **Teamwork**, Wood Wise | Perk types are not in the unified perk entries (see corrections). |
 | `career.soldier.inciting-incident` | choice | single (d6 rollable) | `career/soldier.md` table *Inciting Incident*. Rule: `chapter/background.md`: "You can roll for or choose an inciting incident from the table that accompanies each career." | Dishonorable Discharge, Out of Retirement, Peace Through Healing, **Sole Survivor**, Stolen Valor, Vow of Sacrifice | A unique incident authored with the Director is source-permitted ("come up with a unique inciting incident of your own") and deliberately not supported in v0.01. |
@@ -227,7 +234,7 @@ None is resolved by assumption; provisional defaults are labeled there.
 
 | Id | Decision(s) | Summary |
 | --- | --- | --- |
-| Q-R-100 | `career.soldier.languages`, `culture.language` | Choosing Caelian, which "All player characters know", as a language slot: complete-with-warning, invalid, or open slot. Raised by R01. |
+| Q-R-100 | `career.soldier.languages`, `culture.language` | Resolved 2026-09-14: show Caelian as automatically known common tongue; it is not selectable for or counted against a language slot. |
 | Q-R-101 | `class.fury.array-assignment` | Whether the chosen array's values may be assigned to Reason/Intuition/Presence in any order. Raised by R01. |
 | Q-R-102 | `culture.language`, `career.soldier.languages` | Which language tables are selectable at creation (dead languages, Vaslorian regional table). Raised by R01. |
 | Q-R-103 | `kit.choice` | Kit eligibility by aspect; stormwight kits restricted to Stormwight. Raised by R01. |
@@ -238,6 +245,12 @@ None is resolved by assumption; provisional defaults are labeled there.
 | Q-CHAR-11 | every skill decision | Duplicate-skill replacement rules (existing, open). The three worked sets below avoid duplicates so they do not depend on it. |
 
 ## Worked selection sets
+
+**Historical fixture status:** the examples and their JSON/test mirrors below predate the Q-R-100
+answer. Set A's paid Caelian selection and complete-with-warning result are no longer valid as
+current acceptance evidence. A02 must replace that selection through the normal choice flow (or an
+explicit source-supported deferral), preserving the automatic Caelian grant and the full extra-language
+entitlement. No replacement language has been chosen by this ruling.
 
 Hand-validated against the tables above; the same three sets are in the JSON and checked by
 `tests/fury-decisions.test.ts`.

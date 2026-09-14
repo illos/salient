@@ -219,3 +219,13 @@ the real path. Dependencies R01, R02, R03, S01, A01, A03 and A04 are real; no fi
 - No detach or duplicate operation (out of scope); no restore of pending-review UI beyond the
   campaign page queue and the character page badges.
 - Independent review and rules review not requested (deferred to the user's audit thread).
+
+### User decision follow-up: Q-R-100
+
+Show Caelian as automatically known, with a short common-tongue explanation; it stays visible but
+cannot be selected as an extra language or consume a culture/career slot. Update the original paid
+Caelian fixture selection, the R01/R02 JSON mirrors, evaluator expectations and wizard presentation
+together under [the owning contract](../character-wizard-spec.md#3-decision-system). Use the normal
+choice flow or an explicit source-supported deferred slot; do not silently pick a replacement or
+count Caelian twice. The existing complete-with-warning fixture result is superseded. This records
+the decision, not a completed fixture/evaluator/UI repair.
