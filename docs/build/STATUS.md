@@ -36,8 +36,8 @@ A08 design tokens (independent) ────────────────
 | A02 | [Minimal wizard, admission review and character sheet](A02-wizard-and-character-sheet.md) | A | R01, R02, R03, S01, A01 | required | In progress | app/A02-impl | 2026-09-14 | |
 | A03 | [Table shell and FreePlay basics](A03-table-shell-freeplay.md) | A | A01, S01 | required | Committed (audit fixes independently reviewed; bounded rules/source review and three-context browser passed; Q-A-200 open) | app/A03-impl | 2026-09-14 | ae9d45a, dc9fbc8, 1dce91b, 7b86b8a |
 | A04 | [Combat opening, turns and clock](A04-combat-opening-turns-clock.md) | A | A03, R05 | required | Committed — AUDIT NEEDED: rules claims in combatCommit/combatRoll/nextSide/fireMalice vs R05 and Compendium; clock dispatchBoundary/settle ordering; requireCharacterEditable lock semantics; clock.malice audience; not exercised: browser spec (check 7), live CLI, combat-end registrations, granted entries, empty-side adjudication; Q-A-400 open. See A04 work log "Audit needed". | app/A04-impl | 2026-09-14 | de64428, a5cf2fc, 0f4af9e |
-| A05 | [Attacks, damage, costs and common actions](A05-attacks-damage-costs.md) | A | A04, R04 | required | Not started | | | |
-| A06 | [History: undo, redo and corrections](A06-history-undo-corrections.md) | A | A04 (A05 for correction cards) | required | Not started | | | |
+| A05 | [Attacks, damage, costs and common actions](A05-attacks-damage-costs.md) | A | A04, R04 | required | In progress | app/A05-impl | 2026-09-14 | |
+| A06 | [History: undo, redo and corrections](A06-history-undo-corrections.md) | A | A04 (A05 for correction cards) | required | In progress | app/A06-impl | 2026-09-14 | |
 | A07 | [Closeout and Void](A07-closeout-and-void.md) | A | A05, A06 | required | Not started | | | |
 | A08 | [Design tokens and theme migration](A08-design-tokens-theme.md) | A | None | not required | Committed (audit passed; mockup comparison and post-rebase browser checks complete) | app/A08-impl | 2026-09-14 | 283bb09, 8c273ff, 7b86b8a |
 | A09 | [v0.01 acceptance walkthrough](A09-v001-acceptance.md) | A | A02, A05, A06, A07 | required | Not started | | | |
