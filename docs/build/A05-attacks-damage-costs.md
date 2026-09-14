@@ -111,7 +111,63 @@ None known.
 
 ## Work log
 
-_Empty._
+### Plan (2026-09-14, implementer)
+
+Files: `shared/resolve/index.ts` (pure R04 engine), `tests/resolve.test.ts` (section 10 verbatim),
+`convex/abilityTables.ts` (targetingDrafts, heroRollFacts, actionUses, actionOpportunities,
+abilityResults), `convex/lib/resolve.ts` (content metadata, facts, journaled damage writes),
+`convex/lib/abilityOperations.ts` (registered operations), `convex/abilities.ts` and
+`convex/targets.ts` (reads), `convex/lib/audience.ts` (foe Stamina projection for attack events),
+`web/table/targeting.tsx` and `web/table/index.tsx`, `tests/app/abilities.test.ts`. Dependencies:
+A04, R04, S01, S02 real; A06's `assertCorrectionAllowed` real after the rebase; A02 absent, so hero
+roll facts come from a Director-supplied `/hero facts` record (the Q-A-200 route).
+
+### Implementation notes (2026-09-14)
+
+- **Engine.** `shared/resolve/index.ts` implements R04 sections 1 to 9 as pure functions;
+  `convex/lib/tableOperations.ts` now imports its edge/bane, tier, test-outcome and recovery-value
+  arithmetic from it. Every section 10 example is a test with the contract's numbers.
+- **Operations.** `/ability select`, `/target toggle`, `/target modifier`, `/selection cancel`,
+  `/ability fire` keep a per-user draft and fire `/ability use` under the same command id (single
+  fires on its target, self on selection, multi at the full count or on Fire, area on Fire only).
+  `/ability use` takes `targets=[...]` with `edges=`/`banes=` as one number per target (target-only
+  counts), `characteristic=` as the pre-fire override. Affordability is decided before any dice; a
+  blocked activation is recorded as an `ability.blocked` event (R04 10.11 says "Record") with no
+  roll, no debit, no action use and the draft kept. Unknown cost text or action type records the
+  ability as manual with no roll. Catch Breath, Defend, Aid Attack and the creature Free Strike are
+  common actions of the same operation. Critical hits create an `actionOpportunities` row; the
+  allowance tracker (advisory, warnings only) consumes it on the next main action.
+- **Facts.** Heroes have no evaluated baseline (A02 pending): `/hero facts` records characteristics,
+  kit bonuses, the kit signature name, granted ability ids and the heroic resource name as supplied
+  facts; `/adjust` still sets the maxima and pools. Foe immunity/weakness cells other than `-` are
+  not read: damage is then left unapplied with the reason recorded (none in v0.01 content).
+- **Corrections.** `/ability correct` recomputes one target with the same dice through
+  `correctTarget`, reconciles the applied pools, journals the effective record on `abilityResults`
+  and appends `correction.ability` with the original as cause; authority is A06's
+  `assertCorrectionAllowed`. `/ability resolved` records a Resolved at table disposition once.
+- **Audience.** `projectEvent` and `abilities.results` remove a foe's resulting Stamina numbers for
+  players and observers unless the numerical display is on; damage arithmetic stays public.
+
+### Verification (2026-09-14)
+
+- `pnpm check`: exit 0 after rebasing onto main (engine 67 tests incl. `tests/resolve.test.ts` 16;
+  app and scripts 251 tests incl. `tests/app/abilities.test.ts` 12).
+- Acceptance 1 to 9 exercised at the shared-operation level with the campaign's own dice stream
+  positioned to the example faces (see the test header). Check 10 (rules reviewer): pending.
+- Browser test: **not written, not run** (no local deployment in this worktree).
+
+### Left undone / audit needed (2026-09-14)
+
+- No browser spec; the UI in `web/table/targeting.tsx` compiles and lints but was never opened.
+- `ability.blocked` is a recorded event, not a thrown error: confirm this matches the intended
+  card behavior and A06's seam rules (it has no journal rows).
+- Removal of a post-roll bane through the operation after a prior correction is refused by A06's
+  rewind-first rule; only the pure engine covers the restore case (10.10 second half).
+- Foe abilities with a printed cost the app cannot read, multi-target abilities with an unknown
+  target text, and hero abilities outside the `/hero facts` list are not offered.
+- Rules review of the arithmetic wiring in `convex/lib/abilityOperations.ts` (cost pool
+  selection, waiver outside combat, allowance warnings) against R04 and the Compendium.
+
 
 ### User decision follow-up: Q-R-1 and Q-R-2
 
