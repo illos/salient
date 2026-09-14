@@ -17,7 +17,8 @@
  *
  * Arithmetic comes only from the R04 contract, docs/roll-and-damage-resolution.md: sections 1.4
  * (edges and banes), 1.5 (total and tier), 1.6 (natural 19/20), 5 (direct tests) and 7 (Catch Breath
- * and Recovery spending). Nothing else here computes a game value.
+ * and Recovery spending), through the pure engine in shared/resolve/index.ts (A05). Nothing else
+ * here computes a game value.
  */
 import { ConvexError, v } from 'convex/values';
 import type { Doc, Id } from '../_generated/dataModel';
@@ -25,12 +26,11 @@ import type { MutationCtx } from '../_generated/server';
 import type { BoundActor } from '../../shared/commands/envelope';
 import type {
   Characteristic,
-  EdgeBaneResolution,
   TestDifficulty,
-  TestOutcome,
   TestRollResult,
   Tier,
 } from '../../shared/contracts/rollResolution';
+import { recoveryValueOf, resolveEdgeBane, testOutcome, tierOf } from '../../shared/resolve/index';
 import type { ConditionId, ConditionToggles } from '../../shared/contracts/liveState';
 import { rollDice } from './dice';
 import { requireContent } from '../content';
@@ -118,43 +118,10 @@ function integer(value: unknown, name: string, min?: number): number {
 const RUNNING_SESSION: OperationDefinition['session'] = 'running';
 
 // ---------------------------------------------------------------------------------------------
-// R04 arithmetic (docs/roll-and-damage-resolution.md). Each function cites its section.
+// R04 arithmetic comes from the shared engine module (A05, shared/resolve/index.ts); the names are
+// re-exported so earlier callers keep working.
 
-/** Section 1.4: counts above two add nothing; net decides a ±2 modifier or a one-tier shift. */
-export function resolveEdgeBane(edges: number, banes: number): EdgeBaneResolution {
-  const effectiveEdges = Math.min(edges, 2) as 0 | 1 | 2;
-  const effectiveBanes = Math.min(banes, 2) as 0 | 1 | 2;
-  const net = (effectiveEdges - effectiveBanes) as -2 | -1 | 0 | 1 | 2;
-  const modifier = net === 1 ? 2 : net === -1 ? -2 : 0;
-  const tierShift = net === 2 ? 1 : net === -2 ? -1 : 0;
-  return { edges, banes, effectiveEdges, effectiveBanes, net, modifier, tierShift };
-}
-
-/** Section 1.5: 11 or lower is tier 1, 12 to 16 tier 2, 17 or higher tier 3; then the shift, clamped. */
-export function tierOf(total: number, tierShift: -1 | 0 | 1): Tier {
-  const baseTier: Tier = total <= 11 ? 1 : total <= 16 ? 2 : 3;
-  return Math.max(1, Math.min(3, baseTier + tierShift)) as Tier;
-}
-
-/** Section 5, Test Difficulty Outcomes table; natural 19 or 20 is a reward at any difficulty. */
-export function testOutcome(
-  tier: Tier,
-  criticalSuccess: boolean,
-  difficulty: TestDifficulty,
-): TestOutcome {
-  if (criticalSuccess) return 'Success with a reward';
-  const table: Record<TestDifficulty, [TestOutcome, TestOutcome, TestOutcome]> = {
-    easy: ['Success with a consequence', 'Success', 'Success with a reward'],
-    medium: ['Failure', 'Success with a consequence', 'Success'],
-    hard: ['Failure with a consequence', 'Failure', 'Success'],
-  };
-  return table[difficulty][tier - 1];
-}
-
-/** Section 7: `recoveryValue = floor(maxStamina / 3)`. */
-export function recoveryValueOf(maxStamina: number): number {
-  return Math.floor(maxStamina / 3);
-}
+export { resolveEdgeBane, tierOf, testOutcome, recoveryValueOf };
 
 const CHARACTERISTICS: Characteristic[] = ['M', 'A', 'R', 'I', 'P'];
 const DIFFICULTIES: TestDifficulty[] = ['easy', 'medium', 'hard'];
