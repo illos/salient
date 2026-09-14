@@ -106,4 +106,72 @@ None known.
 
 ## Work log
 
-_Empty._
+### Plan (2026-09-14, implementer)
+
+Files: `convex/lib/tableOperations.ts` (operations), `convex/table.ts` (roster query with audience
+rules), `convex/lib/registry.ts` (post-event `commit` hook for journaled writes; bare-word arguments
+lowered to strings), `convex/schema.ts`, `convex/characterTables.ts`, `convex/foeTables.ts` (live-state
+fields and campaign settings), `convex/foes.ts` (every loaded foe listed; paused roster lock),
+`web/table/index.tsx` (three panes), `web/foes.tsx` (hide controls removed), `tests/app/table.test.ts`.
+Dependencies: A01 registry and S02 journal/dice are real; R04 and R05 are real (no fixtures needed);
+A02 has not landed, so heroes are the existing `characters` rows and live state is initialized on
+first table use (see the implementation note below).
+
+### Implementation notes (2026-09-14)
+
+- **Hero live state before A02.** `characters.liveState` is now `null | heroLive`. First table use
+  writes the R03 literal initial values (temporary Stamina 0, surges 0, Victories 0, XP 0, every
+  toggle off) and `null` for every baseline-supplied value (Stamina, Recoveries, heroic resource
+  name and current, Stamina maximum, Recoveries maximum), with
+  `origin: { kind: 'first-table-use-without-baseline' }`. `/adjust stamina-maximum` and
+  `/adjust recoveries-maximum` exist only while `derivedBaseline` is null and are labeled provisional
+  in the palette. `/test roll` requires `value=<score>` and records `characteristicValueSource:
+  "supplied"`. Question Q-A-200 records the route for the user; no number was defaulted.
+- **Command syntax.** The parser reads bare words as symbols; the runner now lowers top-level
+  symbols to strings before validation, so `/condition on name=prone`, `/campaign malice-visible
+  state=on`, `/campaign health-display mode=winded` and `/test roll difficulty=medium` work from
+  the console and the CLI. The spelling `/campaign malice-visible state=on|off` (an argument) stands
+  in for the slice's `on|off` path word; `/condition on|off` uses the verb as specified.
+- **Foe visibility (Q-REC-1).** `foes.list` and `table.roster` list every loaded foe for every role;
+  `foes.setVisible` / `setDefaultVisible` remain in `convex/foes.ts`, unregistered, with no UI control.
+- **Foe conditions.** `foes.live.conditions` is optional; absent means every toggle off. The first
+  toggle journals the all-off record and then the toggle, so both rows sit under one event.
+- **Session gating.** Gameplay operations are `session: 'running'`; the display settings
+  (`campaign.malice-visible`, `campaign.health-display`) are `session: 'none'` per the spec's "at any
+  time" wording. `foes.add` / `foes.remove` refuse while paused. Closed sessions are read-only through
+  `appendEvent`.
+- **Heroes pane audience.** The roster returns every hero's live values to every member (the spec's
+  party-sheet visibility for players and observers was not narrowed here); the Director's edits and a
+  player's own controls are gated by role and ownership on the server.
+- **Generated API.** `convex/_generated/api.d.ts` was extended by hand for the two new modules (no
+  local deployment in this checkout to run `convex codegen`).
+
+### Verification (2026-09-14)
+
+- `pnpm check`: clean after each commit (lint, engine 51 tests, app+scripts 193 tests, links, vendor,
+  content, build).
+- `tests/app/table.test.ts` (6 tests): acceptance 1 (observer rejected for every operation; player
+  rejected for Director operations; no registered foe-visibility operation), 2 (player toggles prone
+  on Thorn: `actorName` Player, `boundActor` Thorn, `data.before/after`, journal rows
+  `liveState` then `liveState.conditions.prone` false→true; off: true→false; another owner's hero
+  rejected with "do not control"), 3 (Malice absent from the player payload with Show Malice off,
+  present when on, absent again when off; Director always sees it), 4 (R04 10.9: max 30, recovery
+  value 10; 22→30 healed 8 `capApplied` Q-R-3, Recoveries 10→9, both rows under one event;
+  19→29; 30→30 with 0 healed and the Recovery spent; 0 Recoveries blocked; retry spends once),
+  5 (paused: `/test roll` and `foes.add` refused; resumed: test roll recorded with the R04 total,
+  tier and medium outcome derived in the test from the recorded dice; no outcome without difficulty;
+  double bane recorded as a tier shift), 6 and 7 (bar → fraction only, numerical → number only,
+  winded → flag only in the player payload, Director full state; Slain at 0; a foe stored
+  `visible: false` appears for the player).
+- Browser test (three contexts see a Director `/adjust`): **not run**; not verified.
+- Acceptance 8 (rules reviewer): pending.
+
+### Unfinished (2026-09-14)
+
+- Browser test for the three-context log update.
+- No implementation note was added to `docs/table-spec.md`; the notes above live only here.
+- The heroes pane is a resource list with prompted edits, not a sheet; the character sheet spec's
+  hosting is not implemented.
+- "Show test difficulty" campaign setting (`docs/table-command-spec.md#direct-test-rolls`) is not
+  implemented; recorded difficulty is shown to everyone in the log description.
+- Independent review and rules review not requested (deferred to the user's audit thread).

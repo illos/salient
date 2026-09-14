@@ -423,6 +423,28 @@ are the shared lifecycle decisions; the remaining entries are bounded content/sc
 - **Blocked until answered:** nothing in v0.01 (the journey admits one hero once). Re-attachment is V1.
 - **Answer:**
 
+### Q-A-200: How should a hero's Stamina maximum, Recoveries and characteristics reach the table before A02?
+
+- **Status:** open
+- **Raised by:** A03, 2026-09-14
+- **Where:** `docs/table-spec.md#v001-catch-breath`, `docs/table-spec.md#persistent-values-and-manual-adjustment-entries`,
+  `docs/table-command-spec.md#direct-test-rolls`, `shared/contracts/liveState.ts` (`HeroAdjustableField`),
+  `docs/live-state-initialization.md` section 2.1.
+- **Conflict or gap:** R03 takes a hero's initial Stamina, Recoveries, heroic resource and the maxima from
+  the evaluated baseline, and lists only current values as Director-adjustable. No evaluator exists in
+  this checkout (`derivedBaseline` is null for every character), so `/hero recover` has no recovery
+  value and `/test roll` has no characteristic score to add. A03 records `null` for every
+  baseline-supplied value on first table use, lets the Director set `stamina-maximum` and
+  `recoveries-maximum` through `/adjust` only while the hero has no evaluated build, and requires
+  `/test roll` to carry `value=<score>`, recorded as a supplied fact. Nothing is defaulted to a number.
+- **Options:** A: keep the provisional route until A02 supplies the baseline, then remove the two
+  provisional fields. B: refuse `/hero recover` and `/test roll` for heroes entirely until A02.
+  C: keep the provisional maxima as a permanent Director override alongside the baseline.
+- **Recommendation:** A. It keeps the FreePlay operations testable end to end without inventing values,
+  and the two provisional verbs refuse to run once a baseline exists.
+- **Blocked until answered:** nothing; A applied provisionally and labeled in the slice work log.
+- **Answer:**
+
 ## Resolved questions
 
 ### Q-TS-1: Are any save-ends rolls automatic in v0.01?
