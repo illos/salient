@@ -1762,7 +1762,7 @@ actual duration, and does not refresh already-used turns. Showing it does not it
 Interrupted individual turns resume as confirmed below. Regrouping moves only the selected entry.
 Other source sequences retain their actual timing rules.
 
-**Implementation note, 2026-09-14 (R05):** the round boundary used with these groups is stated in [conditions and clock](conditions-and-clock.md#22-boundaries-the-app-dispatches): a round ends when no unspent turn entry remains among current participants, quoting the source's "Once all creatures on both sides of a battle have acted"; Slain or removed creatures do not hold a round open (interpretation), and a creature added mid-round is Q-R-52.
+**Implementation note, 2026-09-14 (R05):** the round boundary used with these groups is stated in [conditions and clock](conditions-and-clock.md#22-boundaries-the-app-dispatches): a round ends when no unspent turn entry remains among current participants, quoting the source's "Once all creatures on both sides of a battle have acted"; Slain or removed creatures do not hold a round open (interpretation), and a creature added mid-round receives an unused turn in that round (Q-R-52, confirmed below).
 
 #### Minion squads and captain state
 
@@ -1897,6 +1897,11 @@ reserve. The Director can change its placement and group. This specifies the def
 new fixed initiative sequence replacing the established side/group choice and alternation rules.
 Confirmed 2026-09-12: the newcomer has an unused turn available in the current round, with Director
 adjustment available. It need not wait until the next round merely because it joined mid-round.
+Reaffirmed 2026-09-14 (Q-R-52). The requested [independent rules lookup](research/mid-round-reinforcements.md)
+found this consistent with the ordinary turn rules and found explicit same-round precedent for on-turn
+summons, but no general rule specifically addressing ordinary mid-round reinforcements. Preserve
+source-specific timing, including immediate-after-summoner timing for summons when supported. The
+question queue's provisional label was stale; this remains a confirmed app decision.
 
 The Director can move selected turn entries between initiative groups during combat. **Spent-turn
 state belongs to that entry, separately from group completion and the linked creature’s shared state.**
@@ -1987,7 +1992,7 @@ Roster removal is blocked while the session is paused. Resume before removing th
 removal or resulting turn/clock processing is queued during the pause.
 
 **Implementation note, 2026-09-15 (A04):** `foe.add` during a committed encounter creates a new bottom
-group with one unspent entry (Q-R-52 provisional default A); `foe.remove` of the acting foe dispatches its
+group with one unspent entry (Q-R-52 confirmed choice A); `foe.remove` of the acting foe dispatches its
 `turn-end` first, then removes its entries. `/group move entry=<id> group=<id>|new` moves one entry with its
 `spentRound`; group completion is `completedRound === encounter.round`, so a finished destination stays
 finished and every group is unspent again when the round changes without a reset write. A group left with
@@ -2688,7 +2693,7 @@ events, and manual resolution of unknown timing clauses. Queue-order recording a
 its concrete storage schema remains an engineering proposal. The clock does not invent missing source semantics or replace non-clock triggers
 such as taking damage. The existing warn-without-blocking and Director-adjudication doctrine remains.
 
-**Implementation note, 2026-09-14 (R05):** the boundary kinds, timing clauses, registration and dispatch types for this section are in `shared/contracts/clock.ts` (types only); the sourced definitions of turn, round, end of turn and the standing ordering policy applied to those types are in [conditions and clock](conditions-and-clock.md#2-clock-contract). In v0.01 nothing registers a `saving-throw` work item (Q-TS-1), so the save phase is empty; the only registrations are the Malice lifecycle steps and, if A04 registers it, surprise expiry at the end of round 1. Q-R-50 and Q-R-51 are now resolved; Q-R-52 remains open in `rules-questions-for-user.md`.
+**Implementation note, 2026-09-14 (R05):** the boundary kinds, timing clauses, registration and dispatch types for this section are in `shared/contracts/clock.ts` (types only); the sourced definitions of turn, round, end of turn and the standing ordering policy applied to those types are in [conditions and clock](conditions-and-clock.md#2-clock-contract). In v0.01 nothing registers a `saving-throw` work item (Q-TS-1), so the save phase is empty; the only registrations are the Malice lifecycle steps and, if A04 registers it, surprise expiry at the end of round 1. Q-R-50, Q-R-51 and Q-R-52 are now resolved in `rules-questions-for-user.md`.
 
 **Implementation note, 2026-09-15 (A04):** `convex/lib/clock.ts` stores registrations in
 `clockRegistrations` with a per-encounter `enqueueSeq` and dispatches each boundary inside the causing

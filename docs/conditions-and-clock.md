@@ -228,10 +228,13 @@ battle have acted". The app reads this as: the round ends when the encounter has
 left among its current participants. A creature that is Slain or removed from the encounter is no longer
 "in the battle" and does not hold the round open (grounded in "creatures on both sides of a battle";
 the alternative, waiting for a removed creature's turn, has no source support and would stall play). A
-creature added to the encounter during a round is **Open, Q-R-52**: the source is silent on whether it
-acts in the current round. Provisional default: the added creature receives an unspent turn entry in the
-current round (it can act, the Director may regroup it), so the round does not end until that entry is
-spent or the Director removes it.
+creature added to the encounter during a round receives an unspent turn entry in the current round,
+so the round does not end until that entry is spent or the Director removes it. **Confirmed app
+choice, Q-R-52:** already recorded in the table spec on 2026-09-12 and reaffirmed by the user on
+2026-09-14. Existing side/group scheduling and source-specific timing still apply. The
+[independent source check](research/mid-round-reinforcements.md) found this consistent with the
+ordinary turn rules, but no explicit general mid-round reinforcement rule. Summons have their own
+explicit immediate-after-summoner timing. The earlier provisional label is superseded.
 
 **Sequence at a round change (interpretation):** the last turn's `turn-end` work, including its save
 phase, completes before `round-end` fires; `round-start` of the next round follows immediately; the
@@ -439,7 +442,7 @@ unspent entry of each round has ended. These match the fixture arithmetic alread
 Variant (interpretation from 2.2): if Thorn's strike at step 7 slays the Goblin, the Goblin's turn entry
 is removed as no longer in the battle, so `round-end` for round 1 fires immediately after step 8 and
 round 2's `round-start` still grants 1 + 2 = 3. If instead the Director adds a second foe during round 1,
-Q-R-52 applies and the provisional default gives it an unspent entry in round 1.
+the confirmed Q-R-52 behavior gives it an unspent entry in round 1.
 
 Normal end after round 2: closeout (`docs/table-spec.md#formal-encounter-closeout`) resolves required
 work, the Director grants Victories, and `combat-end` fires Malice `encounter-end-loss`: pool 5 → 0. No

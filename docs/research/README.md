@@ -1,5 +1,10 @@
 # Combat feasibility research
 
+Mid-round arrivals: [reinforcement and first-turn timing](mid-round-reinforcements.md) distinguishes
+ordinary turn rules, explicit summon sequencing and encounter-specific arrival schedules. Q-R-52
+reaffirms the existing same-round app decision; no general source rule requiring next-round delay
+was found.
+
 V1 respite research: [respite rules and design questions](respite-rules.md) examines the ordinary
 rest/advancement loop, activities, resource and effect boundaries, source-specific exceptions and
 between-session play. The [145-file core-source inventory](respite-source-inventory.csv) supports

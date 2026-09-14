@@ -226,28 +226,6 @@ are the shared lifecycle decisions; the remaining entries are bounded content/sc
 - **Blocked until answered:** this optional workflow; higher-level build evaluation can proceed.
 - **Answer:**
 
-### Q-R-52: Does a creature added to combat mid-round take a turn in the current round?
-
-- **Status:** open
-- **Raised by:** R05, 2026-09-14
-- **Where:** `docs/conditions-and-clock.md` section 2.2; `docs/table-spec.md#game-clock-and-scheduled-rules-work`;
-  `docs/table-spec.md#initiative-groups-confirmed-app-model`. Compendium read:
-  `vendor/steel-compendium/en/unified/md/rule/combat/combat-round.md` (Creatures Take Turns, End of
-  Round), `vendor/steel-compendium/en/unified/md/chapter/monster-basics.md` (Reinforcements paragraphs
-  under Escort and Hold Them Off).
-- **Conflict or gap:** The round ends "Once all creatures on both sides of a battle have acted." The
-  Director can add foes during running combat. The source's reinforcement examples add creatures "At
-  the start of each combat round" or "At the end of each combat round", but state no rule for a creature
-  added in the middle of a round. Whether it acts this round decides when `round-end` fires and when the
-  next Malice gain occurs.
-- **Options:** A: the added creature gets an unspent turn entry in the current round and may act before
-  the round ends. B: the added creature's first turn entry belongs to the next round; the current round
-  can end without it. C: the Director chooses per addition through the add operation.
-- **Recommendation:** A. It keeps "each creature in the battle takes a turn" true for the round in which
-  the creature joins and needs no extra control; the Director can regroup or remove the entry.
-- **Blocked until answered:** nothing; default A applied provisionally. Slain or removed creatures do
-  not hold a round open under the interpretation recorded in the contract.
-
 ### Q-R-100: May a chosen career or culture language duplicate the automatic Caelian grant?
 
 - **Status:** open
@@ -476,6 +454,34 @@ are the shared lifecycle decisions; the remaining entries are bounded content/sc
 - **Answer:**
 
 ## Resolved questions
+
+### Q-R-52: Does a creature added to combat mid-round take a turn in the current round?
+
+- **Status:** resolved 2026-09-14; [confirmed app decision](table-spec.md#mid-combat-additions-and-regrouping)
+- **Raised by:** R05, 2026-09-14
+- **Where:** `docs/conditions-and-clock.md` section 2.2; `docs/table-spec.md#game-clock-and-scheduled-rules-work`;
+  `docs/table-spec.md#initiative-groups-confirmed-app-model`. Compendium read:
+  `vendor/steel-compendium/en/unified/md/rule/combat/combat-round.md` (Creatures Take Turns, End of
+  Round), `vendor/steel-compendium/en/unified/md/chapter/monster-basics.md` (Reinforcements paragraphs
+  under Escort and Hold Them Off).
+- **Conflict or gap:** The round ends "Once all creatures on both sides of a battle have acted." The
+  Director can add foes during running combat. The source's reinforcement examples add creatures "At
+  the start of each combat round" or "At the end of each combat round", but state no rule for a creature
+  added in the middle of a round. Whether it acts this round decides when `round-end` fires and when the
+  next Malice gain occurs.
+- **Options:** A: the added creature gets an unspent turn entry in the current round and may act before
+  the round ends. B: the added creature's first turn entry belongs to the next round; the current round
+  can end without it. C: the Director chooses per addition through the add operation.
+- **Recommendation:** A. It keeps "each creature in the battle takes a turn" true for the round in which
+  the creature joins and needs no extra control; the Director can regroup or remove the entry.
+- **Blocked until answered:** nothing; option A is confirmed. Slain or removed creatures do not hold
+  a round open under the interpretation recorded in the contract.
+- **Answer:** Yes; the user requested an independent pinned-source check. The check found same-round
+  participation consistent with general turn rules and explicit immediate-after timing for summons,
+  but no general rule specifically addressing ordinary mid-round reinforcements. See the
+  [research brief](research/mid-round-reinforcements.md). The table spec already recorded option A as
+  confirmed on 2026-09-12; this answer reaffirms it and corrects the stale provisional status. Preserve
+  source-specific timing.
 
 ### Q-R-51: How is a fractional average of Victories handled for the combat-start Malice grant?
 
