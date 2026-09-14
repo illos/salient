@@ -24,7 +24,7 @@ A08 design tokens (independent) ────────────────
 
 | Id | Slice | Family | Depends on | Rules review | Status | Team | Updated | Commits |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| S00 | [Process tooling, CI, lint, commit checker](S00-process-tooling.md) | S | None | not required | Committed | lead/S00-impl | 2026-09-14 | d5b2765, d67e5bd, c9114b6, 2b3f6db, 5b864dc |
+| S00 | [Process tooling, CI, lint, commit checker](S00-process-tooling.md) | S | None | not required | Committed | lead/S00-impl | 2026-09-14 | d5b2765, d67e5bd, c9114b6, 2b3f6db, 5b864dc, 1e0bb50 |
 | S01 | [Content pipeline from the pinned Compendium](S01-content-pipeline.md) | S | None | required | In progress | lead/S01-impl | 2026-09-14 | |
 | S02 | [Data contracts: encounter, events, journal, dice](S02-data-contracts.md) | S | None | not required | In progress | lead/S02-impl | 2026-09-14 | |
 | R01 | [Level-one devil Fury decision table](R01-fury-decision-table.md) | R | S01 (soft) | required | Committed | rules/R01-research | 2026-09-14 | 2fe311b |
