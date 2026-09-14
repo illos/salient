@@ -1,5 +1,8 @@
 # Combat feasibility research
 
+Natural-roll precedence: [natural 19/20 and double bane](natural-roll-precedence.md) records the
+independent source support for Q-R-1, distinguishing tier precedence, test rewards and critical hits.
+
 Mid-round arrivals: [reinforcement and first-turn timing](mid-round-reinforcements.md) distinguishes
 ordinary turn rules, explicit summon sequencing and encounter-specific arrival schedules. Q-R-52
 reaffirms the existing same-round app decision; no general source rule requiring next-round delay

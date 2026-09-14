@@ -112,3 +112,11 @@ None known.
 ## Work log
 
 _Empty._
+
+### User decision follow-up: Q-R-1 and Q-R-2
+
+Q-R-1 is confirmed after dedicated source research: natural 19/20 stays tier 3 under ordinary edges
+and banes, including double bane. Q-R-2 now defaults the damage characteristic to the highest current
+value permitted by the damage expression, independently of the roll choice. Preserve source-authorized
+alternatives. Apply these [R04 contracts](../roll-and-damage-resolution.md) and remove their obsolete
+uncertainty labels. This handoff records decisions; implementation and verification remain build work.

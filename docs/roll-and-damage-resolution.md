@@ -107,15 +107,16 @@ tier       = clamp(baseTier + tierShift, 1, 3)      // then section 1.6 override
 > modifiers, and on certain types of power rolls, this is a critical hit (see Critical Hit in
 > Classes)." — `SC/rule/dice/natural-roll.md`
 
-Contract: if `naturalRoll >= 19` then `tier = 3` regardless of `total` and of a single bane's −2.
+Contract: if `naturalRoll >= 19` then `tier = 3` regardless of `total` and ordinary edges or banes,
+including a double bane's tier decrease.
 
-**Q-R-1 (double bane and a natural 19 or 20).** The source says "regardless of any modifiers". A
-double bane is described in `SC/rule/dice/power-roll.md` as a way "to modify a roll with an edge or a
-bane", but it works by decreasing the tier rather than by a numeric modifier, and no sentence
-states which wins. Interpretation applied meanwhile: the natural 19/20 tier 3 stands (a double bane
-is a modification of the roll, and the sentence says *any* modifiers). The app records `tier = 3`,
-`naturalNineteenOrTwenty = true`, and labels the outcome `uncertainty: "Q-R-1"` whenever a double
-bane was in force on that target. See `docs/rules-questions-for-user.md#q-r-1-does-a-natural-19-or-20-stay-tier-3-under-a-double-bane`.
+**User decision, 2026-09-14 (Q-R-1):** natural 19/20 overrides ordinary edges and banes. A dedicated
+[source check](research/natural-roll-precedence.md) supports this: Natural Roll says “regardless of
+any modifiers” and Power Rolls describes edges/banes as modifying a roll. No sentence names the
+exact double-bane conflict; the combined reading is now confirmed by the user. Record `tier = 3`
+and `naturalNineteenOrTwenty = true`; this resolved case no longer warrants a Q-R-1 uncertainty
+label. Tests separately grant success with a reward on natural 19/20. Preserve the distinct
+critical-hit requirements and rules for voluntary downgrades or forced automatic tiers.
 
 ### 1.7 One roll, per-target outcome
 
@@ -224,13 +225,14 @@ Contract: a tier's damage clause `N + X` yields `N + characteristicValue(X)`; a 
 Any clause that is not a flat number, `N + <single letter>`, or `N + M or A` is unsupported: the
 verbatim clause is recorded as unresolved (`unresolvedClauses`) and no damage is applied for it.
 
-**Q-R-2 (which characteristic feeds "M or A damage").** The source lets the hero "pick" the damage
-characteristic and does not say it must be the roll characteristic. The table decision
-(`docs/table-spec.md#v001-roll-characteristic-default`) says the roll default "does not infer
-separate damage choices". Applied meanwhile: the app uses the roll characteristic for the damage
-letter and records it as `damageCharacteristic`; a different choice is a manual result labeled
-`uncertainty: "Q-R-2"`. For the v0.01 hero (Might 2, Agility 2) the two readings give the same
-number. See `docs/rules-questions-for-user.md#q-r-2-for-n--m-or-a-damage-must-the-damage-characteristic-be-the-roll-characteristic`.
+**User decision, 2026-09-14 (Q-R-2):** default to the highest current characteristic permitted by
+the damage expression, independently of the roll selection. This matches the highest-permitted
+roll default already confirmed in the table spec. A single-letter expression still uses that letter.
+For Might 2 and Agility 1, `N + M or A` defaults to Might 2 even if the user chose Agility for the
+roll. Preserve the source-authorized choice of another permitted characteristic; this is a default,
+not a mandatory choice. Record `damageCharacteristic` and its actual value. Ties use printed order,
+as for the roll default. A permitted choice is no longer labeled Q-R-2 uncertainty. This supersedes
+the provisional rule tying damage to the roll characteristic.
 
 ### 4.2 Kit damage bonus
 
@@ -316,7 +318,7 @@ Test Difficulty Outcomes table (`SC/rule/test/test-difficulty.md`):
 
 Contract: `total = naturalRoll + characteristicValue + skillBonus(+2 if agreed) + otherBonuses +
 edgeBaneModifier`; `tier` as in 1.5 with the double edge/bane shift; `naturalRoll >= 19` gives
-tier 3 and `criticalSuccess = true` (Q-R-1 applies to the double-bane case here too). The outcome
+tier 3 and `criticalSuccess = true` (confirmed Q-R-1; double bane does not reduce the natural result). The outcome
 label is produced only when `difficulty` is supplied; otherwise `outcome` is absent and the Director
 interprets (`docs/table-command-spec.md#direct-test-rolls`). Opposed rolls
 (`SC/rule/dice/opposed-power-roll.md`) are out of scope; a record without difficulty covers them.
@@ -525,7 +527,7 @@ Fixture numbers (`docs/hero-fixture.md`; `SC/monster/goblin/statblock/goblin-war
 Melee Weapon Free Strike tiers: "≤11: 2 + M or A damage / 12-16: 5 + M or A damage / 17+: 7 + M or A
 damage" (`SC/feature/ability/common/melee-weapon-free-strike.md`); keywords Charge, Melee, Strike,
 Weapon; Main action. Grug's default characteristic: Might and Agility tie at 2; Might is first in
-the printed order, so Might is selected (1.8). Under Q-R-2, damage uses Might.
+the printed order, so Might is selected (1.8). Under the confirmed Q-R-2 default, damage also uses Might.
 
 ### 10.1 Single-target free strike, tier 1
 
@@ -626,8 +628,7 @@ tier 2 / 7 damage / Stamina 8 as a further linked correction.
 
 Tier-3 case: natural 15, total 17 → tier 3, damage 13, Goblin 15 → 2 (winded). Add one bane → 15 →
 tier 2, damage 7 → Stamina 8, winded cleared (8 > 7). Add a second bane → double bane → total 17,
-base tier 3, shift −1 → tier 2, damage 7 (same as one bane). Natural 19 with two banes → Q-R-1
-provisional tier 3, labeled.
+base tier 3, shift −1 → tier 2, damage 7 (same as one bane). Natural 19 with two banes → confirmed tier 3 (Q-R-1), with no uncertainty label.
 
 ### 10.11 Blocked unaffordable ability
 
@@ -674,8 +675,6 @@ Grug with 3 temporary Stamina: absorbed 1 → temporary 2, Stamina unchanged.
 
 | Case | Provisional behavior | Label |
 | --- | --- | --- |
-| Natural 19/20 under a double bane | tier 3 | `Q-R-1` |
-| "M or A" damage characteristic | roll characteristic | `Q-R-2` |
 | Regained Stamina above maximum | capped at maximum | `Q-R-3` |
 | Foe Stamina below 0 | arithmetic value recorded, `slain` flag | interpretation, 6.4 |
 | Negative rolled damage (negative characteristic) | arithmetic value recorded, no damage or healing applied, manual | `negative-rolled-damage`, 4.3; unreachable with v0.01 content |

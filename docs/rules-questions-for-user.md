@@ -359,52 +359,6 @@ are the shared lifecycle decisions; the remaining entries are bounded content/sc
 - **Blocked until answered:** nothing; A applied provisionally and labeled in the slice work log.
 - **Answer:**
 
-### Q-R-1: Does a natural 19 or 20 stay tier 3 under a double bane?
-
-- **Status:** open
-- **Raised by:** R04, 2026-09-14
-- **Where:** `docs/roll-and-damage-resolution.md#16-natural-19-and-20`; read
-  `vendor/steel-compendium/en/unified/md/rule/dice/natural-roll.md`,
-  `vendor/steel-compendium/en/unified/md/rule/dice/bane.md`,
-  `vendor/steel-compendium/en/unified/md/rule/dice/power-roll.md`,
-  `vendor/steel-compendium/en/unified/md/rule/test/test-difficulty.md`.
-- **Conflict or gap:** Natural Roll says a natural 19 or 20 "is always a tier 3 result regardless of
-  any modifiers". Bane says a double bane does not subtract from the roll but "the outcome of the roll
-  automatically decreases one tier". No sentence says whether a tier decrease counts as a modifier.
-  This changes the applied tier (3 versus 2) and the test outcome (reward versus plain success).
-- **Options:** A: natural 19/20 stays tier 3 (double bane is a way to "modify a roll" per Power Rolls,
-  so "any modifiers" covers it) / B: apply the double-bane decrease after the natural override, giving
-  tier 2 / C: Director decides per case.
-- **Recommendation:** A. Power Rolls describes edges and banes as modifying a roll, the natural-roll
-  sentence is unconditional, and the test table lists "Natural 19 or 20" as its own row above all
-  difficulties. The critical-hit extra action is unaffected either way.
-- **Blocked until answered:** nothing; option A applied provisionally, outcome labeled `Q-R-1` whenever
-  a double bane was in force with a natural 19 or 20.
-- **Answer:**
-
-### Q-R-2: For "N + M or A damage", must the damage characteristic be the roll characteristic?
-
-- **Status:** open
-- **Raised by:** R04, 2026-09-14
-- **Where:** `docs/roll-and-damage-resolution.md#41-damage-expressions`,
-  `docs/table-spec.md#v001-roll-characteristic-default`; read
-  `vendor/steel-compendium/en/unified/md/rule/dice/ability-roll.md`,
-  `vendor/steel-compendium/en/unified/md/feature/ability/common/melee-weapon-free-strike.md`,
-  `vendor/steel-compendium/en/unified/md/kit/mountain.md`.
-- **Conflict or gap:** Ability Roll says free strikes "allow you to pick which characteristic score
-  you add to their damage" and does not tie that pick to the power-roll characteristic. The 2026-09-14
-  ruling on the roll default says it "does not infer separate damage choices". With Might and Agility
-  unequal the two readings give different damage. The v0.01 hero has Might 2 and Agility 2, so no
-  example is affected yet.
-- **Options:** A: use the roll characteristic for damage, recorded; a different pick is a manual
-  result / B: offer a separate damage-characteristic choice defaulting to the highest permitted / C:
-  always use the highest permitted for damage regardless of the roll.
-- **Recommendation:** A for v0.01 (fewest inputs, matches the existing ruling's wording); B is the
-  literal reading if the user wants the pick exposed.
-- **Blocked until answered:** nothing; option A applied provisionally, labeled `Q-R-2` on the damage
-  breakdown.
-- **Answer:**
-
 ### Q-R-3: Is regained Stamina capped at the Stamina maximum?
 
 - **Status:** open
@@ -454,6 +408,57 @@ are the shared lifecycle decisions; the remaining entries are bounded content/sc
 - **Answer:**
 
 ## Resolved questions
+
+### Q-R-1: Does a natural 19 or 20 stay tier 3 under a double bane?
+
+- **Status:** resolved 2026-09-14; [recorded decision](roll-and-damage-resolution.md#16-natural-19-and-20)
+- **Raised by:** R04, 2026-09-14
+- **Where:** `docs/roll-and-damage-resolution.md#16-natural-19-and-20`; read
+  `vendor/steel-compendium/en/unified/md/rule/dice/natural-roll.md`,
+  `vendor/steel-compendium/en/unified/md/rule/dice/bane.md`,
+  `vendor/steel-compendium/en/unified/md/rule/dice/power-roll.md`,
+  `vendor/steel-compendium/en/unified/md/rule/test/test-difficulty.md`.
+- **Conflict or gap:** Natural Roll says a natural 19 or 20 "is always a tier 3 result regardless of
+  any modifiers". Bane says a double bane does not subtract from the roll but "the outcome of the roll
+  automatically decreases one tier". No sentence says whether a tier decrease counts as a modifier.
+  The question concerns tier 3 versus tier 2. Follow-up research found that natural 19/20 tests
+  separately guarantee success with a reward, so that reward does not depend on this tier dispute.
+- **Options:** A: natural 19/20 stays tier 3 (double bane is a way to "modify a roll" per Power Rolls,
+  so "any modifiers" covers it) / B: apply the double-bane decrease after the natural override, giving
+  tier 2 / C: Director decides per case.
+- **Recommendation:** A. Power Rolls describes edges and banes as modifying a roll, the natural-roll
+  sentence is unconditional, and the test table lists "Natural 19 or 20" as its own row above all
+  difficulties. The critical-hit extra action is unaffected either way.
+- **Blocked until answered:** answered; the build must apply the confirmed contract and remove
+  obsolete uncertainty labels. Implementation verification remains with the build thread.
+- **Answer:** Yes. Natural 19/20 overrides ordinary edges and banes, including double bane. The user
+  requested independent source confirmation; the [subagent research](research/natural-roll-precedence.md)
+  supports the interpretation. Do not generalize to unrelated automatic-tier or voluntary-downgrade rules.
+
+### Q-R-2: For "N + M or A damage", must the damage characteristic be the roll characteristic?
+
+- **Status:** resolved 2026-09-14; [recorded decision](roll-and-damage-resolution.md#41-damage-expressions)
+- **Raised by:** R04, 2026-09-14
+- **Where:** `docs/roll-and-damage-resolution.md#41-damage-expressions`,
+  `docs/table-spec.md#v001-roll-characteristic-default`; read
+  `vendor/steel-compendium/en/unified/md/rule/dice/ability-roll.md`,
+  `vendor/steel-compendium/en/unified/md/feature/ability/common/melee-weapon-free-strike.md`,
+  `vendor/steel-compendium/en/unified/md/kit/mountain.md`.
+- **Conflict or gap:** Ability Roll says free strikes "allow you to pick which characteristic score
+  you add to their damage" and does not tie that pick to the power-roll characteristic. The 2026-09-14
+  ruling on the roll default says it "does not infer separate damage choices". With Might and Agility
+  unequal the two readings give different damage. The v0.01 hero has Might 2 and Agility 2, so no
+  example is affected yet.
+- **Options:** A: use the roll characteristic for damage, recorded; a different pick is a manual
+  result / B: offer a separate damage-characteristic choice defaulting to the highest permitted / C:
+  always use the highest permitted for damage regardless of the roll.
+- **Recommendation:** A for v0.01 (fewest inputs, matches the existing ruling's wording); B is the
+  literal reading if the user wants the pick exposed.
+- **Blocked until answered:** answered; the build must apply the confirmed contract and remove
+  obsolete uncertainty labels. Implementation verification remains with the build thread.
+- **Answer:** Use the higher permitted characteristic by default, as already chosen for rolls. For damage,
+  choose the highest current value allowed by the damage expression independently of the roll choice;
+  retain source-authorized alternatives. This is a default, not option C's mandatory highest value.
 
 ### Q-R-52: Does a creature added to combat mid-round take a turn in the current round?
 

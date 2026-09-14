@@ -1434,13 +1434,18 @@ choose another permitted characteristic before firing. Display the choice and re
 selected characteristic and actual value with the roll. A single permitted characteristic uses
 that characteristic; never expand the source's permitted set to obtain a higher number.
 
-This selects a roll input, not a persistent sheet edit. It does not infer separate damage choices
-or authorize unique feature interpretation. Preserve the settled target/fire behavior.
+This selects a roll input, not a persistent sheet edit or authorization for unique feature
+interpretation. Preserve the settled target/fire behavior.
 
-*Implementation note, 2026-09-14 (R04):* selection and recording are specified in
-[the R04 contract](roll-and-damage-resolution.md), section 1.8 (ties resolve to the printed order). Whether the "M or A"
-damage letter must follow the roll characteristic is open as [Q-R-2](rules-questions-for-user.md#q-r-2-for-n--m-or-a-damage-must-the-damage-characteristic-be-the-roll-characteristic); the contract uses the roll
-characteristic meanwhile and labels the record.
+Confirmed 2026-09-14 (Q-R-2): use the same highest-permitted default for damage-characteristic
+choices, evaluated independently from the selected roll characteristic. For Might 2 and Agility 1,
+`N + M or A` defaults to Might 2 even if the roll uses Agility. Preserve the source's permitted choices
+and record the selected damage characteristic/value; the highest value is a default, not a mandatory
+choice. A single-letter damage expression always uses its specified characteristic.
+
+*Contract note, 2026-09-14 (R04):* selection and recording are specified in
+[the R04 contract](roll-and-damage-resolution.md), sections 1.8 and 4.1; ties resolve to printed order.
+The former provisional Q-R-2 rule tying damage to the roll characteristic is superseded.
 
 ### Director edits to inline results
 
@@ -2378,7 +2383,7 @@ this example does not establish that only on-turn actions qualify. The inclusion
 *Implementation note, 2026-09-14 (R04):* recognition (`naturalRoll >= 19`, ability roll, main action;
 never a maneuver or a test), the one-roll/one-opportunity reading for multi-target attacks and the
 natural 19/20 tier-3 override are in [the R04 contract](roll-and-damage-resolution.md), sections 1.6 and 2. The double-bane
-interaction is open as [Q-R-1](rules-questions-for-user.md#q-r-1-does-a-natural-19-or-20-stay-tier-3-under-a-double-bane). Opportunity lifetime, chaining and off-turn use remain unsettled here.
+interaction is confirmed as [Q-R-1](rules-questions-for-user.md#q-r-1-does-a-natural-19-or-20-stay-tier-3-under-a-double-bane): natural 19/20 remains tier 3 under ordinary edges/banes, including double bane. See the [source check](research/natural-roll-precedence.md). Opportunity lifetime, chaining and off-turn use remain unsettled here.
 
 ### Player-sheet actions and explicit End turn
 
