@@ -1,0 +1,1898 @@
+{
+  "schemaVersion": "r01.1",
+  "title": "Level-one devil Fury creation decisions",
+  "document": "docs/fury-level-one-decisions.md",
+  "compendiumRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+  "sourceRoot": "vendor/steel-compendium",
+  "hero": {
+    "ancestry": "Devil",
+    "class": "Fury",
+    "level": 1
+  },
+  "textNormalization": "Before verbatim comparison, Markdown links [label](target) collapse to label, <br> becomes a space, * emphasis markers are removed, and whitespace runs collapse to one space.",
+  "pools": {
+    "pool.skills.crafting": {
+      "source": "en/unified/md/skill/group/crafting.md",
+      "values": [
+        "Alchemy",
+        "Architecture",
+        "Blacksmithing",
+        "Carpentry",
+        "Cooking",
+        "Fletching",
+        "Forgery",
+        "Jewelry",
+        "Mechanics",
+        "Tailoring"
+      ]
+    },
+    "pool.skills.exploration": {
+      "source": "en/unified/md/skill/group/exploration.md",
+      "values": [
+        "Climb",
+        "Drive",
+        "Endurance",
+        "Gymnastics",
+        "Heal",
+        "Jump",
+        "Lift",
+        "Navigate",
+        "Ride",
+        "Swim"
+      ]
+    },
+    "pool.skills.interpersonal": {
+      "source": "en/unified/md/skill/group/interpersonal.md",
+      "values": [
+        "Brag",
+        "Empathize",
+        "Flirt",
+        "Gamble",
+        "Handle Animals",
+        "Interrogate",
+        "Intimidate",
+        "Lead",
+        "Lie",
+        "Music",
+        "Perform",
+        "Persuade",
+        "Read Person"
+      ]
+    },
+    "pool.skills.intrigue": {
+      "source": "en/unified/md/skill/group/intrigue.md",
+      "values": [
+        "Alertness",
+        "Conceal Object",
+        "Disguise",
+        "Eavesdrop",
+        "Escape Artist",
+        "Hide",
+        "Pick Lock",
+        "Pick Pocket",
+        "Sabotage",
+        "Search",
+        "Sneak",
+        "Track"
+      ]
+    },
+    "pool.skills.lore": {
+      "source": "en/unified/md/skill/group/lore.md",
+      "values": [
+        "Criminal Underworld",
+        "Culture",
+        "History",
+        "Magic",
+        "Monsters",
+        "Nature",
+        "Psionics",
+        "Religion",
+        "Rumors",
+        "Society",
+        "Strategy",
+        "Timescape"
+      ]
+    },
+    "pool.languages.by-ancestry": {
+      "source": "en/books/heroes/clean/Draw Steel Heroes.md",
+      "sourceSection": "Languages by Ancestry Table",
+      "values": [
+        "Anjali",
+        "Axiomatic",
+        "Caelian",
+        "Filliaric",
+        "The First Language",
+        "Hyrallic",
+        "Illyvric",
+        "Kalliak",
+        "Kethaic",
+        "Khelt",
+        "Khoursirian",
+        "High Kuric",
+        "Low Kuric",
+        "Mindspeech",
+        "Proto-Ctholl",
+        "Szetch",
+        "Tholl",
+        "Urollialic",
+        "Variac",
+        "Vastariax",
+        "Vhoric",
+        "Voll",
+        "Yllyric",
+        "Za'hariax",
+        "Zaliac"
+      ]
+    },
+    "pool.languages.vaslorian-human": {
+      "source": "en/books/heroes/clean/Draw Steel Heroes.md",
+      "sourceSection": "Vaslorian Human Languages Table",
+      "values": [
+        "Uvalic",
+        "Higaran",
+        "Oaxuatl",
+        "Khemharic",
+        "Khoursirian",
+        "Phaedran",
+        "Riojan",
+        "Vaniric",
+        "Vaslorian"
+      ]
+    },
+    "pool.languages.dead": {
+      "source": "en/books/heroes/clean/Draw Steel Heroes.md",
+      "sourceSection": "Dead Languages Table",
+      "selectable": "unresolved (Q-R-102)",
+      "values": [
+        "Ananjali",
+        "High Rhyvian",
+        "Khamish",
+        "Kheltivari",
+        "Low Rhyvian",
+        "Old Variac",
+        "Phorialtic",
+        "Rallarian",
+        "Ullorvic"
+      ]
+    },
+    "pool.perks.exploration": {
+      "source": "en/books/heroes/clean/Draw Steel Heroes.md",
+      "sourceSection": "Exploration Perks",
+      "values": [
+        "Brawny",
+        "Camouflage Hunter",
+        "Danger Sense",
+        "Friend Catapult",
+        "I've Got You!",
+        "Monster Whisperer",
+        "Put Your Back Into It!",
+        "Team Leader",
+        "Teamwork",
+        "Wood Wise"
+      ]
+    },
+    "pool.kits.standard": {
+      "source": "en/unified/md/_index/kit.md",
+      "values": [
+        "Arcane Archer",
+        "Battlemind",
+        "Cloak and Dagger",
+        "Dual Wielder",
+        "Guisarmier",
+        "Martial Artist",
+        "Mountain",
+        "Panther",
+        "Pugilist",
+        "Raider",
+        "Ranger",
+        "Rapid-Fire",
+        "Retiarius",
+        "Shining Armor",
+        "Sniper",
+        "Spellsword",
+        "Stick and Robe",
+        "Swashbuckler",
+        "Sword and Board",
+        "Warrior Priest",
+        "Whirlwind"
+      ]
+    },
+    "pool.kits.stormwight": {
+      "source": "en/unified/md/_index/kit.md",
+      "values": ["Boren", "Corven", "Raden", "Vuken"]
+    }
+  },
+  "steps": [
+    {
+      "id": "step.think",
+      "sourceStep": "1. Think",
+      "source": "en/unified/md/chapter/making-a-hero.md",
+      "optional": false,
+      "presentedInV001": true,
+      "note": "Reflection prompts only; no selection and no grant.",
+      "decisions": [
+        {
+          "id": "think.prompts",
+          "kind": "none",
+          "shape": {
+            "type": "none"
+          },
+          "source": "en/unified/md/chapter/making-a-hero.md",
+          "quote": "The first thing you should do is think about the kind of hero you want to make."
+        }
+      ]
+    },
+    {
+      "id": "step.ancestry",
+      "sourceStep": "2. Ancestry",
+      "source": "en/unified/md/chapter/making-a-hero.md",
+      "optional": false,
+      "presentedInV001": true,
+      "decisions": [
+        {
+          "id": "ancestry.choice",
+          "kind": "choice",
+          "shape": {
+            "type": "single",
+            "count": 1
+          },
+          "source": "en/unified/md/chapter/making-a-hero.md",
+          "quote": "Choose your hero's humanoid ancestry from among the range of ancestries available in the game",
+          "options": [
+            {
+              "id": "ancestry.devil",
+              "value": "Devil",
+              "source": "en/unified/md/ancestry/devil.md",
+              "supportedInV001": true
+            },
+            {
+              "id": "ancestry.dragon-knight",
+              "value": "Dragon Knight",
+              "source": "en/unified/md/ancestry/dragon-knight.md",
+              "supportedInV001": false
+            },
+            {
+              "id": "ancestry.dwarf",
+              "value": "Dwarf",
+              "source": "en/unified/md/ancestry/dwarf.md",
+              "supportedInV001": false
+            },
+            {
+              "id": "ancestry.wode-elf",
+              "value": "Wode Elf",
+              "source": "en/unified/md/ancestry/wode-elf.md",
+              "supportedInV001": false
+            },
+            {
+              "id": "ancestry.high-elf",
+              "value": "High Elf",
+              "source": "en/unified/md/ancestry/high-elf.md",
+              "supportedInV001": false
+            },
+            {
+              "id": "ancestry.hakaan",
+              "value": "Hakaan",
+              "source": "en/unified/md/ancestry/hakaan.md",
+              "supportedInV001": false
+            },
+            {
+              "id": "ancestry.human",
+              "value": "Human",
+              "source": "en/unified/md/ancestry/human.md",
+              "supportedInV001": false
+            },
+            {
+              "id": "ancestry.memonek",
+              "value": "Memonek",
+              "source": "en/unified/md/ancestry/memonek.md",
+              "supportedInV001": false
+            },
+            {
+              "id": "ancestry.orc",
+              "value": "Orc",
+              "source": "en/unified/md/ancestry/orc.md",
+              "supportedInV001": false
+            },
+            {
+              "id": "ancestry.polder",
+              "value": "Polder",
+              "source": "en/unified/md/ancestry/polder.md",
+              "supportedInV001": false
+            },
+            {
+              "id": "ancestry.revenant",
+              "value": "Revenant",
+              "source": "en/unified/md/ancestry/revenant.md",
+              "supportedInV001": false
+            },
+            {
+              "id": "ancestry.time-raider",
+              "value": "Time Raider",
+              "source": "en/unified/md/ancestry/time-raider.md",
+              "supportedInV001": false
+            }
+          ]
+        },
+        {
+          "id": "ancestry.devil.base-statistics",
+          "kind": "automatic",
+          "availableWhen": {
+            "decision": "ancestry.choice",
+            "value": "Devil"
+          },
+          "shape": {
+            "type": "none"
+          },
+          "source": "en/books/heroes/clean/Draw Steel Heroes.md",
+          "quote": "Unless otherwise noted, a character of any of these ancestries is size 1M and has speed 5 and stability 0.",
+          "grants": [
+            {
+              "kind": "statistic",
+              "value": "size 1M, speed 5, stability 0 (derived in R02)"
+            }
+          ],
+          "note": "Absent from en/unified/md/chapter/ancestries.md; present only in the clean Heroes text."
+        },
+        {
+          "id": "ancestry.devil.signature-trait",
+          "kind": "automatic",
+          "availableWhen": {
+            "decision": "ancestry.choice",
+            "value": "Devil"
+          },
+          "shape": {
+            "type": "none"
+          },
+          "source": "en/unified/md/chapter/ancestries.md",
+          "quote": "Each ancestry has one or more signature traits, which your hero gets for free if they take that ancestry.",
+          "grants": [
+            {
+              "kind": "trait",
+              "value": "Silver Tongue",
+              "source": "en/unified/md/feature/trait/devil/silver-tongue.md"
+            }
+          ]
+        },
+        {
+          "id": "ancestry.devil.silver-tongue-skill",
+          "kind": "choice",
+          "dependsOn": ["ancestry.devil.signature-trait"],
+          "shape": {
+            "type": "single",
+            "count": 1
+          },
+          "source": "en/unified/md/feature/trait/devil/silver-tongue.md",
+          "quote": "You have one skill of your choice from the interpersonal skill group",
+          "optionsFrom": "pool.skills.interpersonal",
+          "supportedInV001": ["Persuade"],
+          "questions": ["Q-CHAR-11"]
+        },
+        {
+          "id": "ancestry.devil.purchased-traits",
+          "kind": "choice",
+          "availableWhen": {
+            "decision": "ancestry.choice",
+            "value": "Devil"
+          },
+          "shape": {
+            "type": "points",
+            "budget": 3,
+            "costField": "cost"
+          },
+          "source": "en/unified/md/feature/trait/devil/devil-traits.md",
+          "quote": "You have 3 ancestry points to spend on the following traits.",
+          "budgetRule": {
+            "source": "en/unified/md/chapter/ancestries.md",
+            "quote": "But they couldn't select both Impressive Horns and Wings, since their combined cost of 4 exceeds the ancestry points budget for the devil."
+          },
+          "options": [
+            {
+              "id": "trait.devil.barbed-tail",
+              "value": "Barbed Tail",
+              "cost": 1,
+              "source": "en/unified/md/feature/trait/devil/barbed-tail.md",
+              "costQuote": "cost: 1 Point",
+              "supportedInV001": false
+            },
+            {
+              "id": "trait.devil.beast-legs",
+              "value": "Beast Legs",
+              "cost": 1,
+              "source": "en/unified/md/feature/trait/devil/beast-legs.md",
+              "costQuote": "cost: 1 Point",
+              "supportedInV001": true
+            },
+            {
+              "id": "trait.devil.glowing-eyes",
+              "value": "Glowing Eyes",
+              "cost": 1,
+              "source": "en/unified/md/feature/trait/devil/glowing-eyes.md",
+              "costQuote": "cost: 1 Point",
+              "supportedInV001": false
+            },
+            {
+              "id": "trait.devil.hellsight",
+              "value": "Hellsight",
+              "cost": 1,
+              "source": "en/unified/md/feature/trait/devil/hellsight.md",
+              "costQuote": "cost: 1 Point",
+              "supportedInV001": false
+            },
+            {
+              "id": "trait.devil.impressive-horns",
+              "value": "Impressive Horns",
+              "cost": 2,
+              "source": "en/unified/md/feature/trait/devil/impressive-horns.md",
+              "costQuote": "cost: 2 Points",
+              "supportedInV001": true
+            },
+            {
+              "id": "trait.devil.prehensile-tail",
+              "value": "Prehensile Tail",
+              "cost": 2,
+              "source": "en/unified/md/feature/trait/devil/prehensile-tail.md",
+              "costQuote": "cost: 2 Points",
+              "supportedInV001": false
+            },
+            {
+              "id": "trait.devil.wings",
+              "value": "Wings",
+              "cost": 2,
+              "source": "en/unified/md/feature/trait/devil/wings.md",
+              "costQuote": "cost: 2 Points",
+              "supportedInV001": false
+            }
+          ],
+          "supportedSetInV001": ["Beast Legs", "Impressive Horns"],
+          "questions": ["Q-CHAR-10"]
+        }
+      ]
+    },
+    {
+      "id": "step.culture",
+      "sourceStep": "3. Culture",
+      "source": "en/unified/md/chapter/making-a-hero.md",
+      "optional": false,
+      "presentedInV001": true,
+      "note": "A culture is assembled from four aspects: language, environment, organization, upbringing. The culture's name and description are authored text.",
+      "decisions": [
+        {
+          "id": "culture.name",
+          "kind": "authored",
+          "shape": {
+            "type": "text"
+          },
+          "source": "en/unified/md/chapter/making-a-hero.md",
+          "quote": "Choose or create your hero's culture.",
+          "note": "Non-mechanical. Q-CHAR-6 covers assembled cultures."
+        },
+        {
+          "id": "culture.caelian",
+          "kind": "automatic",
+          "shape": {
+            "type": "none"
+          },
+          "source": "en/books/heroes/clean/Draw Steel Heroes.md",
+          "quote": "All player characters know Caelian!",
+          "grants": [
+            {
+              "kind": "language",
+              "value": "Caelian"
+            }
+          ]
+        },
+        {
+          "id": "culture.language",
+          "kind": "choice",
+          "shape": {
+            "type": "single",
+            "count": 1
+          },
+          "source": "en/books/heroes/clean/Draw Steel Heroes.md",
+          "quote": "You know the language of your culture, in addition to knowing Caelian.",
+          "optionsFrom": ["pool.languages.by-ancestry", "pool.languages.vaslorian-human"],
+          "supportedInV001": ["Anjali"],
+          "questions": ["Q-R-100", "Q-R-102", "Q-CHAR-6"]
+        },
+        {
+          "id": "culture.environment",
+          "kind": "choice",
+          "shape": {
+            "type": "single",
+            "count": 1
+          },
+          "source": "en/books/heroes/clean/Draw Steel Heroes.md",
+          "quote": "When you build a culture, select its environment aspect from the following options: nomadic, rural, secluded, urban, or wilderness.",
+          "options": [
+            {
+              "id": "culture.environment.nomadic",
+              "value": "Nomadic",
+              "source": "en/unified/md/culture/nomadic.md",
+              "supportedInV001": false
+            },
+            {
+              "id": "culture.environment.rural",
+              "value": "Rural",
+              "source": "en/unified/md/culture/rural.md",
+              "supportedInV001": false
+            },
+            {
+              "id": "culture.environment.secluded",
+              "value": "Secluded",
+              "source": "en/unified/md/culture/secluded.md",
+              "supportedInV001": false
+            },
+            {
+              "id": "culture.environment.urban",
+              "value": "Urban",
+              "source": "en/unified/md/culture/urban.md",
+              "supportedInV001": false
+            },
+            {
+              "id": "culture.environment.wilderness",
+              "value": "Wilderness",
+              "source": "en/unified/md/culture/wilderness.md",
+              "supportedInV001": true
+            }
+          ]
+        },
+        {
+          "id": "culture.environment.skill",
+          "kind": "choice",
+          "dependsOn": ["culture.environment"],
+          "shape": {
+            "type": "single",
+            "count": 1
+          },
+          "source": "en/books/heroes/clean/Draw Steel Heroes.md",
+          "quote": "You can select one skill from each aspect's list of options.",
+          "optionsByParent": {
+            "Nomadic": {
+              "source": "en/unified/md/culture/nomadic.md",
+              "quote": "One skill from the exploration or interpersonal skill groups.",
+              "optionsFrom": ["pool.skills.exploration", "pool.skills.interpersonal"]
+            },
+            "Rural": {
+              "source": "en/unified/md/culture/rural.md",
+              "quote": "One skill from the crafting or lore skill groups.",
+              "optionsFrom": ["pool.skills.crafting", "pool.skills.lore"]
+            },
+            "Secluded": {
+              "source": "en/unified/md/culture/secluded.md",
+              "quote": "One skill from the interpersonal or lore skill groups.",
+              "optionsFrom": ["pool.skills.interpersonal", "pool.skills.lore"]
+            },
+            "Urban": {
+              "source": "en/unified/md/culture/urban.md",
+              "quote": "One skill from the interpersonal or intrigue skill groups.",
+              "optionsFrom": ["pool.skills.interpersonal", "pool.skills.intrigue"]
+            },
+            "Wilderness": {
+              "source": "en/unified/md/culture/wilderness.md",
+              "quote": "One skill from the crafting or exploration skill groups.",
+              "optionsFrom": ["pool.skills.crafting", "pool.skills.exploration"]
+            }
+          },
+          "supportedInV001": ["Swim"],
+          "questions": ["Q-CHAR-11"]
+        },
+        {
+          "id": "culture.organization",
+          "kind": "choice",
+          "shape": {
+            "type": "single",
+            "count": 1
+          },
+          "source": "en/books/heroes/clean/Draw Steel Heroes.md",
+          "quote": "When you build a culture, select its organization aspect from the following options: bureaucratic or communal.",
+          "options": [
+            {
+              "id": "culture.organization.bureaucratic",
+              "value": "Bureaucratic",
+              "source": "en/unified/md/culture/bureaucratic.md",
+              "supportedInV001": false
+            },
+            {
+              "id": "culture.organization.communal",
+              "value": "Communal",
+              "source": "en/unified/md/culture/communal.md",
+              "supportedInV001": true
+            }
+          ]
+        },
+        {
+          "id": "culture.organization.skill",
+          "kind": "choice",
+          "dependsOn": ["culture.organization"],
+          "shape": {
+            "type": "single",
+            "count": 1
+          },
+          "source": "en/books/heroes/clean/Draw Steel Heroes.md",
+          "quote": "You can select one skill from each aspect's list of options.",
+          "optionsByParent": {
+            "Bureaucratic": {
+              "source": "en/unified/md/culture/bureaucratic.md",
+              "quote": "One skill from the interpersonal or intrigue skill groups.",
+              "optionsFrom": ["pool.skills.interpersonal", "pool.skills.intrigue"]
+            },
+            "Communal": {
+              "source": "en/unified/md/culture/communal.md",
+              "quote": "One skill from the crafting or exploration skill groups.",
+              "optionsFrom": ["pool.skills.crafting", "pool.skills.exploration"]
+            }
+          },
+          "supportedInV001": ["Blacksmithing"],
+          "questions": ["Q-CHAR-11"]
+        },
+        {
+          "id": "culture.upbringing",
+          "kind": "choice",
+          "shape": {
+            "type": "single",
+            "count": 1
+          },
+          "source": "en/books/heroes/clean/Draw Steel Heroes.md",
+          "quote": "Pick your upbringing aspect from the following list: academic, creative, labor, lawless, martial, or noble.",
+          "options": [
+            {
+              "id": "culture.upbringing.academic",
+              "value": "Academic",
+              "source": "en/unified/md/culture/academic.md",
+              "supportedInV001": false
+            },
+            {
+              "id": "culture.upbringing.creative",
+              "value": "Creative",
+              "source": "en/unified/md/culture/creative.md",
+              "supportedInV001": false
+            },
+            {
+              "id": "culture.upbringing.labor",
+              "value": "Labor",
+              "source": "en/unified/md/culture/labor.md",
+              "supportedInV001": false
+            },
+            {
+              "id": "culture.upbringing.lawless",
+              "value": "Lawless",
+              "source": "en/unified/md/culture/lawless.md",
+              "supportedInV001": false
+            },
+            {
+              "id": "culture.upbringing.martial",
+              "value": "Martial",
+              "source": "en/unified/md/culture/martial.md",
+              "supportedInV001": true
+            },
+            {
+              "id": "culture.upbringing.noble",
+              "value": "Noble",
+              "source": "en/unified/md/culture/noble.md",
+              "supportedInV001": false
+            }
+          ]
+        },
+        {
+          "id": "culture.upbringing.skill",
+          "kind": "choice",
+          "dependsOn": ["culture.upbringing"],
+          "shape": {
+            "type": "single",
+            "count": 1
+          },
+          "source": "en/books/heroes/clean/Draw Steel Heroes.md",
+          "quote": "You can select one skill from each aspect's list of options.",
+          "optionsByParent": {
+            "Academic": {
+              "source": "en/unified/md/culture/academic.md",
+              "quote": "One skill from the lore skill group.",
+              "optionsFrom": ["pool.skills.lore"]
+            },
+            "Creative": {
+              "source": "en/unified/md/culture/creative.md",
+              "quote": "The Music or Perform skill (from the interpersonal skill group), or one skill from the crafting group.",
+              "values": ["Music", "Perform"],
+              "optionsFrom": ["pool.skills.crafting"]
+            },
+            "Labor": {
+              "source": "en/unified/md/culture/labor.md",
+              "quote": "The Blacksmithing skill (from the crafting skill group), the Handle Animals skill (from the interpersonal group), or a skill from the exploration group.",
+              "values": ["Blacksmithing", "Handle Animals"],
+              "optionsFrom": ["pool.skills.exploration"]
+            },
+            "Lawless": {
+              "source": "en/unified/md/culture/lawless.md",
+              "quote": "One skill from the intrigue skill group.",
+              "optionsFrom": ["pool.skills.intrigue"]
+            },
+            "Martial": {
+              "source": "en/unified/md/culture/martial.md",
+              "quote": "One of the following: Blacksmithing or Fletching from the crafting skill group; Climb, Endurance, or Ride from the exploration group; Intimidate from the interpersonal group; Alertness or Track from the intrigue group; or Monsters or Strategy from the lore skill group",
+              "values": [
+                "Blacksmithing",
+                "Fletching",
+                "Climb",
+                "Endurance",
+                "Ride",
+                "Intimidate",
+                "Alertness",
+                "Track",
+                "Monsters",
+                "Strategy"
+              ]
+            },
+            "Noble": {
+              "source": "en/unified/md/culture/noble.md",
+              "quote": "One skill from the interpersonal skill group.",
+              "optionsFrom": ["pool.skills.interpersonal"]
+            }
+          },
+          "supportedInV001": ["Intimidate"],
+          "questions": ["Q-CHAR-11"]
+        },
+        {
+          "id": "culture.edge",
+          "kind": "automatic",
+          "shape": {
+            "type": "none"
+          },
+          "source": "en/books/heroes/clean/Draw Steel Heroes.md",
+          "quote": "You gain an edge on tests made to recall lore about your culture, and on tests made to influence and interact with people of your culture.",
+          "grants": [
+            {
+              "kind": "feature",
+              "value": "edge on culture lore and culture interaction tests (manual in v0.01)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "step.career",
+      "sourceStep": "4. Career",
+      "source": "en/unified/md/chapter/making-a-hero.md",
+      "optional": false,
+      "presentedInV001": true,
+      "decisions": [
+        {
+          "id": "career.choice",
+          "kind": "choice",
+          "shape": {
+            "type": "single",
+            "count": 1
+          },
+          "source": "en/unified/md/chapter/making-a-hero.md",
+          "quote": "Choose your hero's career, which describes what you did for a living before you became a hero.",
+          "options": [
+            {
+              "id": "career.agent",
+              "value": "Agent",
+              "source": "en/unified/md/career/agent.md",
+              "supportedInV001": false
+            },
+            {
+              "id": "career.aristocrat",
+              "value": "Aristocrat",
+              "source": "en/unified/md/career/aristocrat.md",
+              "supportedInV001": false
+            },
+            {
+              "id": "career.artisan",
+              "value": "Artisan",
+              "source": "en/unified/md/career/artisan.md",
+              "supportedInV001": false
+            },
+            {
+              "id": "career.beggar",
+              "value": "Beggar",
+              "source": "en/unified/md/career/beggar.md",
+              "supportedInV001": false
+            },
+            {
+              "id": "career.criminal",
+              "value": "Criminal",
+              "source": "en/unified/md/career/criminal.md",
+              "supportedInV001": false
+            },
+            {
+              "id": "career.disciple",
+              "value": "Disciple",
+              "source": "en/unified/md/career/disciple.md",
+              "supportedInV001": false
+            },
+            {
+              "id": "career.explorer",
+              "value": "Explorer",
+              "source": "en/unified/md/career/explorer.md",
+              "supportedInV001": false
+            },
+            {
+              "id": "career.farmer",
+              "value": "Farmer",
+              "source": "en/unified/md/career/farmer.md",
+              "supportedInV001": false
+            },
+            {
+              "id": "career.gladiator",
+              "value": "Gladiator",
+              "source": "en/unified/md/career/gladiator.md",
+              "supportedInV001": false
+            },
+            {
+              "id": "career.laborer",
+              "value": "Laborer",
+              "source": "en/unified/md/career/laborer.md",
+              "supportedInV001": false
+            },
+            {
+              "id": "career.mages-apprentice",
+              "value": "Mage's Apprentice",
+              "source": "en/unified/md/career/mages-apprentice.md",
+              "supportedInV001": false
+            },
+            {
+              "id": "career.performer",
+              "value": "Performer",
+              "source": "en/unified/md/career/performer.md",
+              "supportedInV001": false
+            },
+            {
+              "id": "career.politician",
+              "value": "Politician",
+              "source": "en/unified/md/career/politician.md",
+              "supportedInV001": false
+            },
+            {
+              "id": "career.sage",
+              "value": "Sage",
+              "source": "en/unified/md/career/sage.md",
+              "supportedInV001": false
+            },
+            {
+              "id": "career.sailor",
+              "value": "Sailor",
+              "source": "en/unified/md/career/sailor.md",
+              "supportedInV001": false
+            },
+            {
+              "id": "career.soldier",
+              "value": "Soldier",
+              "source": "en/unified/md/career/soldier.md",
+              "supportedInV001": true
+            },
+            {
+              "id": "career.warden",
+              "value": "Warden",
+              "source": "en/unified/md/career/warden.md",
+              "supportedInV001": false
+            },
+            {
+              "id": "career.watch-officer",
+              "value": "Watch Officer",
+              "source": "en/unified/md/career/watch-officer.md",
+              "supportedInV001": false
+            }
+          ],
+          "note": "Sub-decisions below are defined for Soldier only (the v0.01 supported career). Every other career defines its own skills, languages, perk type, Renown, wealth and project-point grants and inciting-incident table in its entry; V08 expands them."
+        },
+        {
+          "id": "career.soldier.skill.exploration",
+          "kind": "choice",
+          "availableWhen": {
+            "decision": "career.choice",
+            "value": "Soldier"
+          },
+          "shape": {
+            "type": "single",
+            "count": 1
+          },
+          "source": "en/unified/md/career/soldier.md",
+          "quote": "One skill from the exploration skill group and one skill from the intrigue group",
+          "optionsFrom": "pool.skills.exploration",
+          "supportedInV001": ["Endurance"],
+          "questions": ["Q-CHAR-11"]
+        },
+        {
+          "id": "career.soldier.skill.intrigue",
+          "kind": "choice",
+          "availableWhen": {
+            "decision": "career.choice",
+            "value": "Soldier"
+          },
+          "shape": {
+            "type": "single",
+            "count": 1
+          },
+          "source": "en/unified/md/career/soldier.md",
+          "quote": "One skill from the exploration skill group and one skill from the intrigue group",
+          "optionsFrom": "pool.skills.intrigue",
+          "supportedInV001": ["Alertness"],
+          "questions": ["Q-CHAR-11"]
+        },
+        {
+          "id": "career.soldier.languages",
+          "kind": "choice",
+          "availableWhen": {
+            "decision": "career.choice",
+            "value": "Soldier"
+          },
+          "shape": {
+            "type": "multi",
+            "count": 2,
+            "deferrable": true
+          },
+          "source": "en/unified/md/career/soldier.md",
+          "quote": "Languages: Two languages",
+          "deferralRule": {
+            "source": "en/unified/md/chapter/making-a-hero.md",
+            "quote": "You can choose to leave some of the languages you know open until you discover what might be a good choice for the campaign you're playing in."
+          },
+          "poolRule": {
+            "source": "en/unified/md/chapter/background.md",
+            "quote": "Some careers allow you to learn extra languages, chosen from those available in Languages in Orden above."
+          },
+          "optionsFrom": ["pool.languages.by-ancestry", "pool.languages.vaslorian-human"],
+          "supportedInV001": ["Caelian", "Vaslorian"],
+          "questions": ["Q-R-100", "Q-R-102", "Q-CHAR-5"]
+        },
+        {
+          "id": "career.soldier.renown",
+          "kind": "automatic",
+          "availableWhen": {
+            "decision": "career.choice",
+            "value": "Soldier"
+          },
+          "shape": {
+            "type": "none"
+          },
+          "source": "en/unified/md/career/soldier.md",
+          "quote": "Renown: +1",
+          "baseRule": {
+            "source": "en/unified/md/rule/resource/renown.md",
+            "quote": "At the start of character creation, your Renown is 0."
+          },
+          "grants": [
+            {
+              "kind": "resource",
+              "value": "Renown +1"
+            }
+          ]
+        },
+        {
+          "id": "career.soldier.perk",
+          "kind": "choice",
+          "availableWhen": {
+            "decision": "career.choice",
+            "value": "Soldier"
+          },
+          "shape": {
+            "type": "single",
+            "count": 1
+          },
+          "source": "en/unified/md/career/soldier.md",
+          "quote": "Perk: One exploration perk",
+          "typeRule": {
+            "source": "en/books/heroes/md/chapter/perks.md",
+            "quote": "Whenever a feature allows you to gain a perk, that feature tells you which type of perk to choose."
+          },
+          "optionsFrom": "pool.perks.exploration",
+          "optionSources": {
+            "Brawny": "en/unified/md/perk/brawny.md",
+            "Camouflage Hunter": "en/unified/md/perk/camouflage-hunter.md",
+            "Danger Sense": "en/unified/md/perk/danger-sense.md",
+            "Friend Catapult": "en/unified/md/perk/friend-catapult.md",
+            "I've Got You!": "en/unified/md/perk/ive-got-you.md",
+            "Monster Whisperer": "en/unified/md/perk/monster-whisperer.md",
+            "Put Your Back Into It!": "en/unified/md/perk/put-your-back-into-it.md",
+            "Team Leader": "en/unified/md/perk/team-leader.md",
+            "Teamwork": "en/unified/md/perk/teamwork.md",
+            "Wood Wise": "en/unified/md/perk/wood-wise.md"
+          },
+          "supportedInV001": ["Teamwork"]
+        },
+        {
+          "id": "career.soldier.inciting-incident",
+          "kind": "choice",
+          "availableWhen": {
+            "decision": "career.choice",
+            "value": "Soldier"
+          },
+          "shape": {
+            "type": "single",
+            "count": 1,
+            "rollable": "d6",
+            "customAllowed": true
+          },
+          "source": "en/unified/md/career/soldier.md",
+          "quote": "Inciting Incident",
+          "choiceRule": {
+            "source": "en/unified/md/chapter/background.md",
+            "quote": "You can roll for or choose an inciting incident from the table that accompanies each career."
+          },
+          "options": [
+            {
+              "id": "career.soldier.incident.dishonorable-discharge",
+              "value": "Dishonorable Discharge",
+              "supportedInV001": false
+            },
+            {
+              "id": "career.soldier.incident.out-of-retirement",
+              "value": "Out of Retirement",
+              "supportedInV001": false
+            },
+            {
+              "id": "career.soldier.incident.peace-through-healing",
+              "value": "Peace Through Healing",
+              "supportedInV001": false
+            },
+            {
+              "id": "career.soldier.incident.sole-survivor",
+              "value": "Sole Survivor",
+              "supportedInV001": true
+            },
+            {
+              "id": "career.soldier.incident.stolen-valor",
+              "value": "Stolen Valor",
+              "supportedInV001": false
+            },
+            {
+              "id": "career.soldier.incident.vow-of-sacrifice",
+              "value": "Vow of Sacrifice",
+              "supportedInV001": false
+            }
+          ],
+          "note": "A unique incident authored with the Director is source-permitted (background.md: \"come up with a unique inciting incident of your own\") and is deliberately not supported in v0.01."
+        },
+        {
+          "id": "career.what-was-taken",
+          "kind": "authored",
+          "shape": {
+            "type": "text"
+          },
+          "source": "en/unified/md/chapter/background.md",
+          "quote": "Record what was taken from you on your character sheet, and let your Director know.",
+          "note": "Non-mechanical."
+        }
+      ]
+    },
+    {
+      "id": "step.class",
+      "sourceStep": "5. Class",
+      "source": "en/unified/md/chapter/making-a-hero.md",
+      "optional": false,
+      "presentedInV001": true,
+      "decisions": [
+        {
+          "id": "class.choice",
+          "kind": "choice",
+          "shape": {
+            "type": "single",
+            "count": 1
+          },
+          "source": "en/unified/md/chapter/making-a-hero.md",
+          "quote": "You can be a censor, conduit, elementalist, fury, null, shadow, tactician, talent, or troubadour.",
+          "options": [
+            {
+              "id": "class.censor",
+              "value": "Censor",
+              "source": "en/unified/md/class/censor.md",
+              "supportedInV001": false
+            },
+            {
+              "id": "class.conduit",
+              "value": "Conduit",
+              "source": "en/unified/md/class/conduit.md",
+              "supportedInV001": false
+            },
+            {
+              "id": "class.elementalist",
+              "value": "Elementalist",
+              "source": "en/unified/md/class/elementalist.md",
+              "supportedInV001": false
+            },
+            {
+              "id": "class.fury",
+              "value": "Fury",
+              "source": "en/unified/md/class/fury.md",
+              "supportedInV001": true
+            },
+            {
+              "id": "class.null",
+              "value": "Null",
+              "source": "en/unified/md/class/null.md",
+              "supportedInV001": false
+            },
+            {
+              "id": "class.shadow",
+              "value": "Shadow",
+              "source": "en/unified/md/class/shadow.md",
+              "supportedInV001": false
+            },
+            {
+              "id": "class.tactician",
+              "value": "Tactician",
+              "source": "en/unified/md/class/tactician.md",
+              "supportedInV001": false
+            },
+            {
+              "id": "class.talent",
+              "value": "Talent",
+              "source": "en/unified/md/class/talent.md",
+              "supportedInV001": false
+            },
+            {
+              "id": "class.troubadour",
+              "value": "Troubadour",
+              "source": "en/unified/md/class/troubadour.md",
+              "supportedInV001": false
+            }
+          ]
+        },
+        {
+          "id": "class.level",
+          "kind": "automatic",
+          "shape": {
+            "type": "none"
+          },
+          "source": "en/unified/md/chapter/making-a-hero.md",
+          "quote": "Each option you can choose for your hero at 1st level includes a parenthetical selection labeled \"Quick Build.\"",
+          "grants": [
+            {
+              "kind": "level",
+              "value": "1"
+            }
+          ],
+          "note": "v0.01 creates at level one only (docs/character-wizard-spec.md#v001-scope)."
+        },
+        {
+          "id": "class.fury.fixed-characteristics",
+          "kind": "automatic",
+          "availableWhen": {
+            "decision": "class.choice",
+            "value": "Fury"
+          },
+          "shape": {
+            "type": "none"
+          },
+          "source": "en/unified/md/class/fury.md",
+          "quote": "You start with a Might of 2 and an Agility of 2",
+          "grants": [
+            {
+              "kind": "characteristic",
+              "value": "Might 2"
+            },
+            {
+              "kind": "characteristic",
+              "value": "Agility 2"
+            }
+          ]
+        },
+        {
+          "id": "class.fury.characteristic-array",
+          "kind": "choice",
+          "availableWhen": {
+            "decision": "class.choice",
+            "value": "Fury"
+          },
+          "shape": {
+            "type": "single",
+            "count": 1
+          },
+          "source": "en/unified/md/class/fury.md",
+          "quote": "you can choose one of the following arrays for your other characteristic scores:",
+          "options": [
+            {
+              "id": "class.fury.array.2-m1-m1",
+              "value": "2, −1, −1",
+              "supportedInV001": false
+            },
+            {
+              "id": "class.fury.array.1-1-m1",
+              "value": "1, 1, −1",
+              "supportedInV001": false
+            },
+            {
+              "id": "class.fury.array.1-0-0",
+              "value": "1, 0, 0",
+              "supportedInV001": true
+            }
+          ]
+        },
+        {
+          "id": "class.fury.array-assignment",
+          "kind": "choice",
+          "dependsOn": ["class.fury.characteristic-array"],
+          "shape": {
+            "type": "assignment",
+            "targets": ["Reason", "Intuition", "Presence"]
+          },
+          "source": "en/unified/md/class/fury.md",
+          "quote": "for your other characteristic scores",
+          "supportedInV001": ["Intuition 1, Reason 0, Presence 0"],
+          "questions": ["Q-R-101"],
+          "note": "The source does not state whether the array values may be assigned to Reason, Intuition and Presence in any order."
+        },
+        {
+          "id": "class.fury.baseline",
+          "kind": "automatic",
+          "availableWhen": {
+            "decision": "class.choice",
+            "value": "Fury"
+          },
+          "shape": {
+            "type": "none"
+          },
+          "source": "en/unified/md/class/fury.md",
+          "quote": "Starting Stamina at 1st Level: 21",
+          "grants": [
+            {
+              "kind": "statistic",
+              "value": "Starting Stamina at 1st Level: 21",
+              "note": "derived in R02"
+            },
+            {
+              "kind": "statistic",
+              "value": "Recoveries: 10",
+              "note": "derived in R02"
+            },
+            {
+              "kind": "potency",
+              "value": "Weak Potency: Might − 2; Average Potency: Might − 1; Strong Potency: Might",
+              "note": "R02/R04"
+            }
+          ]
+        },
+        {
+          "id": "class.fury.skill.nature",
+          "kind": "automatic",
+          "availableWhen": {
+            "decision": "class.choice",
+            "value": "Fury"
+          },
+          "shape": {
+            "type": "none"
+          },
+          "source": "en/unified/md/class/fury.md",
+          "quote": "You gain the Nature skill",
+          "grants": [
+            {
+              "kind": "skill",
+              "value": "Nature"
+            }
+          ],
+          "questions": ["Q-CHAR-11"]
+        },
+        {
+          "id": "class.fury.skills",
+          "kind": "choice",
+          "availableWhen": {
+            "decision": "class.choice",
+            "value": "Fury"
+          },
+          "shape": {
+            "type": "multi",
+            "count": 2
+          },
+          "source": "en/unified/md/class/fury.md",
+          "quote": "Then choose any two skills from the exploration or intrigue skill groups.",
+          "optionsFrom": ["pool.skills.exploration", "pool.skills.intrigue"],
+          "supportedInV001": ["Jump", "Climb"],
+          "questions": ["Q-CHAR-11"]
+        },
+        {
+          "id": "class.fury.features",
+          "kind": "automatic",
+          "availableWhen": {
+            "decision": "class.choice",
+            "value": "Fury"
+          },
+          "shape": {
+            "type": "none"
+          },
+          "source": "en/unified/md/class/fury.md",
+          "quote": "Primordial Aspect, Ferocity, Growing Ferocity, Aspect Features, Aspect Triggered Action, Mighty Leaps, Fury Abilities",
+          "grants": [
+            {
+              "kind": "feature",
+              "value": "Ferocity",
+              "source": "en/unified/md/feature/fury/level-1/ferocity.md"
+            },
+            {
+              "kind": "feature",
+              "value": "Growing Ferocity",
+              "source": "en/unified/md/feature/fury/level-1/growing-ferocity.md"
+            },
+            {
+              "kind": "feature",
+              "value": "Mighty Leaps",
+              "source": "en/unified/md/feature/fury/level-1/mighty-leaps.md"
+            }
+          ]
+        },
+        {
+          "id": "class.fury.aspect",
+          "kind": "choice",
+          "availableWhen": {
+            "decision": "class.choice",
+            "value": "Fury"
+          },
+          "shape": {
+            "type": "single",
+            "count": 1
+          },
+          "source": "en/unified/md/feature/fury/level-1/primordial-aspect.md",
+          "quote": "You choose a primordial aspect from the following options, each of which grants you a skill.",
+          "options": [
+            {
+              "id": "class.fury.aspect.berserker",
+              "value": "Berserker",
+              "supportedInV001": true,
+              "grants": [
+                {
+                  "kind": "skill",
+                  "value": "Lift",
+                  "source": "en/unified/md/feature/fury/level-1/primordial-aspect.md",
+                  "quote": "You have the Lift skill."
+                },
+                {
+                  "kind": "feature",
+                  "value": "Kit",
+                  "source": "en/unified/md/feature/fury/level-1/1st-level-aspect-features.md"
+                },
+                {
+                  "kind": "feature",
+                  "value": "Primordial Strength",
+                  "source": "en/unified/md/feature/fury/level-1/primordial-strength.md"
+                },
+                {
+                  "kind": "ability",
+                  "value": "Lines of Force",
+                  "source": "en/unified/md/feature/ability/fury/level-1/lines-of-force.md"
+                }
+              ]
+            },
+            {
+              "id": "class.fury.aspect.reaver",
+              "value": "Reaver",
+              "supportedInV001": false,
+              "grants": [
+                {
+                  "kind": "skill",
+                  "value": "Hide",
+                  "source": "en/unified/md/feature/fury/level-1/primordial-aspect.md",
+                  "quote": "You have the Hide skill."
+                },
+                {
+                  "kind": "feature",
+                  "value": "Kit",
+                  "source": "en/unified/md/feature/fury/level-1/1st-level-aspect-features.md"
+                },
+                {
+                  "kind": "feature",
+                  "value": "Primordial Cunning",
+                  "source": "en/unified/md/feature/fury/level-1/primordial-cunning.md"
+                },
+                {
+                  "kind": "ability",
+                  "value": "Unearthly Reflexes",
+                  "source": "en/unified/md/feature/ability/fury/level-1/unearthly-reflexes.md"
+                }
+              ]
+            },
+            {
+              "id": "class.fury.aspect.stormwight",
+              "value": "Stormwight",
+              "supportedInV001": false,
+              "grants": [
+                {
+                  "kind": "skill",
+                  "value": "Track",
+                  "source": "en/unified/md/feature/fury/level-1/primordial-aspect.md",
+                  "quote": "You have the Track skill."
+                },
+                {
+                  "kind": "feature",
+                  "value": "Beast Shape",
+                  "source": "en/unified/md/feature/fury/level-1/beast-shape.md"
+                },
+                {
+                  "kind": "feature",
+                  "value": "Relentless Hunter",
+                  "source": "en/unified/md/feature/fury/level-1/relentless-hunter.md"
+                },
+                {
+                  "kind": "ability",
+                  "value": "Furious Change",
+                  "source": "en/unified/md/feature/ability/fury/level-1/furious-change.md"
+                }
+              ]
+            }
+          ],
+          "featureRule": {
+            "source": "en/unified/md/feature/fury/level-1/1st-level-aspect-features.md",
+            "quote": "Your primordial aspect grants you two features, as shown on the 1st-Level Aspect Features table."
+          },
+          "triggeredRule": {
+            "source": "en/unified/md/feature/fury/level-1/aspect-triggered-action.md",
+            "quote": "Your primordial aspect grants you a triggered action, as shown on the Aspect Triggered Actions table."
+          },
+          "questions": ["Q-CHAR-11"]
+        },
+        {
+          "id": "class.fury.signature-ability",
+          "kind": "choice",
+          "availableWhen": {
+            "decision": "class.choice",
+            "value": "Fury"
+          },
+          "shape": {
+            "type": "single",
+            "count": 1
+          },
+          "source": "en/unified/md/feature/fury/level-1/fury-abilities.md",
+          "quote": "Choose one signature ability from the following options.",
+          "poolSource": {
+            "source": "en/books/heroes/clean/Draw Steel Heroes.md",
+            "note": "The unified feature entry omits the option list; membership is taken from the ability headings under Signature Ability in the clean Heroes text and the ability entries' missing cost field."
+          },
+          "options": [
+            {
+              "id": "ability.fury.brutal-slam",
+              "value": "Brutal Slam",
+              "source": "en/unified/md/feature/ability/fury/level-1/brutal-slam.md",
+              "supportedInV001": true
+            },
+            {
+              "id": "ability.fury.hit-and-run",
+              "value": "Hit and Run",
+              "source": "en/unified/md/feature/ability/fury/level-1/hit-and-run.md",
+              "supportedInV001": false
+            },
+            {
+              "id": "ability.fury.impaled",
+              "value": "Impaled!",
+              "source": "en/unified/md/feature/ability/fury/level-1/impaled.md",
+              "supportedInV001": false
+            },
+            {
+              "id": "ability.fury.to-the-death",
+              "value": "To the Death!",
+              "source": "en/unified/md/feature/ability/fury/level-1/to-the-death.md",
+              "supportedInV001": false
+            }
+          ]
+        },
+        {
+          "id": "class.fury.ability-3",
+          "kind": "choice",
+          "availableWhen": {
+            "decision": "class.choice",
+            "value": "Fury"
+          },
+          "shape": {
+            "type": "single",
+            "count": 1
+          },
+          "source": "en/unified/md/feature/fury/level-1/fury-abilities.md",
+          "quote": "Choose one heroic ability from the following options, each of which costs 3 ferocity to use.",
+          "options": [
+            {
+              "id": "ability.fury.back",
+              "value": "Back!",
+              "source": "en/unified/md/feature/ability/fury/level-1/back.md",
+              "costQuote": "cost: 3 Ferocity",
+              "supportedInV001": false
+            },
+            {
+              "id": "ability.fury.out-of-the-way",
+              "value": "Out of the Way!",
+              "source": "en/unified/md/feature/ability/fury/level-1/out-of-the-way.md",
+              "costQuote": "cost: 3 Ferocity",
+              "supportedInV001": true
+            },
+            {
+              "id": "ability.fury.tide-of-death",
+              "value": "Tide of Death",
+              "source": "en/unified/md/feature/ability/fury/level-1/tide-of-death.md",
+              "costQuote": "cost: 3 Ferocity",
+              "supportedInV001": false
+            },
+            {
+              "id": "ability.fury.your-entrails-are-your-extrails",
+              "value": "Your Entrails Are Your Extrails!",
+              "source": "en/unified/md/feature/ability/fury/level-1/your-entrails-are-your-extrails.md",
+              "costQuote": "cost: 3 Ferocity",
+              "supportedInV001": false
+            }
+          ]
+        },
+        {
+          "id": "class.fury.ability-5",
+          "kind": "choice",
+          "availableWhen": {
+            "decision": "class.choice",
+            "value": "Fury"
+          },
+          "shape": {
+            "type": "single",
+            "count": 1
+          },
+          "source": "en/unified/md/feature/fury/level-1/fury-abilities.md",
+          "quote": "Choose one heroic ability from the following options, each of which costs 5 ferocity to use.",
+          "options": [
+            {
+              "id": "ability.fury.blood-for-blood",
+              "value": "Blood for Blood!",
+              "source": "en/unified/md/feature/ability/fury/level-1/blood-for-blood.md",
+              "costQuote": "cost: 5 Ferocity",
+              "supportedInV001": false
+            },
+            {
+              "id": "ability.fury.make-peace-with-your-god",
+              "value": "Make Peace With Your God!",
+              "source": "en/unified/md/feature/ability/fury/level-1/make-peace-with-your-god.md",
+              "costQuote": "cost: 5 Ferocity",
+              "supportedInV001": false
+            },
+            {
+              "id": "ability.fury.thunder-roar",
+              "value": "Thunder Roar",
+              "source": "en/unified/md/feature/ability/fury/level-1/thunder-roar.md",
+              "costQuote": "cost: 5 Ferocity",
+              "supportedInV001": true
+            },
+            {
+              "id": "ability.fury.to-the-uttermost-end",
+              "value": "To the Uttermost End",
+              "source": "en/unified/md/feature/ability/fury/level-1/to-the-uttermost-end.md",
+              "costQuote": "cost: 5 Ferocity",
+              "supportedInV001": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "step.kit",
+      "sourceStep": "6. Kit",
+      "source": "en/unified/md/chapter/making-a-hero.md",
+      "optional": false,
+      "presentedInV001": true,
+      "decisions": [
+        {
+          "id": "kit.choice",
+          "kind": "choice",
+          "dependsOn": ["class.fury.aspect"],
+          "shape": {
+            "type": "single",
+            "count": 1
+          },
+          "source": "en/unified/md/feature/fury/level-1/kit.md",
+          "quote": "You can use and gain the benefits of a kit.",
+          "stepRule": {
+            "source": "en/unified/md/chapter/making-a-hero.md",
+            "quote": "Your class might grant your hero a kit that helps define your approach to martial combat."
+          },
+          "optionsByParent": {
+            "Berserker": {
+              "source": "en/unified/md/feature/fury/level-1/kit.md",
+              "optionsFrom": ["pool.kits.standard"]
+            },
+            "Reaver": {
+              "source": "en/unified/md/feature/fury/level-1/kit.md",
+              "optionsFrom": ["pool.kits.standard"]
+            },
+            "Stormwight": {
+              "source": "en/unified/md/feature/fury/level-1/beast-shape.md",
+              "quote": "You can use and gain the benefits of a stormwight kit",
+              "optionsFrom": ["pool.kits.stormwight"]
+            }
+          },
+          "optionSources": {
+            "Arcane Archer": "en/unified/md/kit/arcane-archer.md",
+            "Battlemind": "en/unified/md/kit/battlemind.md",
+            "Cloak and Dagger": "en/unified/md/kit/cloak-and-dagger.md",
+            "Dual Wielder": "en/unified/md/kit/dual-wielder.md",
+            "Guisarmier": "en/unified/md/kit/guisarmier.md",
+            "Martial Artist": "en/unified/md/kit/martial-artist.md",
+            "Mountain": "en/unified/md/kit/mountain.md",
+            "Panther": "en/unified/md/kit/panther.md",
+            "Pugilist": "en/unified/md/kit/pugilist.md",
+            "Raider": "en/unified/md/kit/raider.md",
+            "Ranger": "en/unified/md/kit/ranger.md",
+            "Rapid-Fire": "en/unified/md/kit/rapid-fire.md",
+            "Retiarius": "en/unified/md/kit/retiarius.md",
+            "Shining Armor": "en/unified/md/kit/shining-armor.md",
+            "Sniper": "en/unified/md/kit/sniper.md",
+            "Spellsword": "en/unified/md/kit/spellsword.md",
+            "Stick and Robe": "en/unified/md/kit/stick-and-robe.md",
+            "Swashbuckler": "en/unified/md/kit/swashbuckler.md",
+            "Sword and Board": "en/unified/md/kit/sword-and-board.md",
+            "Warrior Priest": "en/unified/md/kit/warrior-priest.md",
+            "Whirlwind": "en/unified/md/kit/whirlwind.md",
+            "Boren": "en/unified/md/kit/boren.md",
+            "Corven": "en/unified/md/kit/corven.md",
+            "Raden": "en/unified/md/kit/raden.md",
+            "Vuken": "en/unified/md/kit/vuken.md"
+          },
+          "supportedInV001": ["Mountain"],
+          "questions": ["Q-R-103"]
+        },
+        {
+          "id": "kit.mountain.contributions",
+          "kind": "automatic",
+          "availableWhen": {
+            "decision": "kit.choice",
+            "value": "Mountain"
+          },
+          "shape": {
+            "type": "none"
+          },
+          "source": "en/unified/md/kit/mountain.md",
+          "quote": "You wear heavy armor and wield a heavy weapon.",
+          "grants": [
+            {
+              "kind": "kit-bonus",
+              "value": "Stamina Bonus: +9 per echelon",
+              "note": "R02"
+            },
+            {
+              "kind": "kit-bonus",
+              "value": "Stability Bonus: +2",
+              "note": "R02"
+            },
+            {
+              "kind": "kit-bonus",
+              "value": "Melee Damage Bonus: +0/+0/+4",
+              "note": "R02/R04"
+            },
+            {
+              "kind": "ability",
+              "value": "Pain for Pain"
+            }
+          ],
+          "note": "References for R02; every kit entry carries its own bonuses and signature ability in the same shape."
+        }
+      ]
+    },
+    {
+      "id": "step.free-strikes",
+      "sourceStep": "7. Add Free Strikes",
+      "source": "en/unified/md/chapter/making-a-hero.md",
+      "optional": false,
+      "presentedInV001": true,
+      "decisions": [
+        {
+          "id": "free-strikes.grant",
+          "kind": "automatic",
+          "shape": {
+            "type": "none"
+          },
+          "source": "en/unified/md/chapter/making-a-hero.md",
+          "quote": "Every hero has a melee weapon free strike and a ranged weapon free strike.",
+          "grants": [
+            {
+              "kind": "ability",
+              "value": "Melee Weapon Free Strike",
+              "source": "en/unified/md/feature/ability/common/melee-weapon-free-strike.md"
+            },
+            {
+              "kind": "ability",
+              "value": "Ranged Weapon Free Strike",
+              "source": "en/unified/md/feature/ability/common/ranged-weapon-free-strike.md"
+            }
+          ],
+          "note": "The narrative description of what the free strikes are is authored text; kit modifiers are R02."
+        }
+      ]
+    },
+    {
+      "id": "step.complication",
+      "sourceStep": "8. Complication",
+      "source": "en/unified/md/chapter/making-a-hero.md",
+      "optional": true,
+      "presentedInV001": false,
+      "optionalQuote": "complications aren't necessary for making a great hero",
+      "decisions": [
+        {
+          "id": "complication.choice",
+          "kind": "choice",
+          "shape": {
+            "type": "single",
+            "count": 1,
+            "rollable": "d100",
+            "noneAllowed": true
+          },
+          "source": "en/unified/md/chapter/complications.md",
+          "quote": "You can choose your character's complication from any of the available options below.",
+          "poolReference": "en/unified/md/_index/complication.md",
+          "poolQuote": "Total: 100",
+          "note": "Not presented in v0.01 (Q-CHAR-1 answered 2026-09-14: no). The pool is recorded by reference only; individual complications are not listed here."
+        }
+      ]
+    },
+    {
+      "id": "step.details",
+      "sourceStep": "9. Determine Details",
+      "source": "en/unified/md/chapter/making-a-hero.md",
+      "optional": false,
+      "presentedInV001": true,
+      "decisions": [
+        {
+          "id": "details.name",
+          "kind": "authored",
+          "shape": {
+            "type": "text"
+          },
+          "source": "en/unified/md/chapter/making-a-hero.md",
+          "quote": "What's their name?",
+          "note": "Non-mechanical."
+        },
+        {
+          "id": "details.appearance",
+          "kind": "authored",
+          "shape": {
+            "type": "text"
+          },
+          "source": "en/unified/md/chapter/making-a-hero.md",
+          "quote": "What do they look like?",
+          "note": "Non-mechanical."
+        },
+        {
+          "id": "details.backstory-and-personality",
+          "kind": "authored",
+          "shape": {
+            "type": "text"
+          },
+          "source": "en/unified/md/chapter/making-a-hero.md",
+          "quote": "it's time to determine the additional details of their backstory, appearance, and personality.",
+          "note": "Non-mechanical; maps to the app's biography/notes fields."
+        }
+      ]
+    },
+    {
+      "id": "step.connections",
+      "sourceStep": "10. Make Connections",
+      "source": "en/unified/md/chapter/making-a-hero.md",
+      "optional": true,
+      "presentedInV001": true,
+      "optionalQuote": "If you like, you can use the following prompts to make those connections, or to come up with prompts of your own",
+      "decisions": [
+        {
+          "id": "connections.notes",
+          "kind": "authored",
+          "shape": {
+            "type": "text"
+          },
+          "source": "en/unified/md/chapter/making-a-hero.md",
+          "quote": "Ask the Director if all the heroes start the campaign knowing each other.",
+          "note": "Non-mechanical; optional free text. Presented as an optional authored field."
+        }
+      ]
+    }
+  ],
+  "selectionSets": {
+    "hero-fixture": {
+      "description": "docs/hero-fixture.md (Grug), one legal path; expected status complete with one open warning (Q-R-100).",
+      "selections": {
+        "ancestry.choice": "Devil",
+        "ancestry.devil.silver-tongue-skill": "Persuade",
+        "ancestry.devil.purchased-traits": ["Beast Legs", "Impressive Horns"],
+        "culture.name": "wilderness mercenary commune",
+        "culture.language": "Anjali",
+        "culture.environment": "Wilderness",
+        "culture.environment.skill": "Swim",
+        "culture.organization": "Communal",
+        "culture.organization.skill": "Blacksmithing",
+        "culture.upbringing": "Martial",
+        "culture.upbringing.skill": "Intimidate",
+        "career.choice": "Soldier",
+        "career.soldier.skill.exploration": "Endurance",
+        "career.soldier.skill.intrigue": "Alertness",
+        "career.soldier.languages": ["Caelian", "Vaslorian"],
+        "career.soldier.perk": "Teamwork",
+        "career.soldier.inciting-incident": "Sole Survivor",
+        "class.choice": "Fury",
+        "class.fury.characteristic-array": "1, 0, 0",
+        "class.fury.array-assignment": {
+          "Intuition": 1,
+          "Reason": 0,
+          "Presence": 0
+        },
+        "class.fury.skills": ["Jump", "Climb"],
+        "class.fury.aspect": "Berserker",
+        "class.fury.signature-ability": "Brutal Slam",
+        "class.fury.ability-3": "Out of the Way!",
+        "class.fury.ability-5": "Thunder Roar",
+        "kit.choice": "Mountain",
+        "details.name": "Grug"
+      }
+    },
+    "second-legal-path": {
+      "description": "Quick-build-leaning alternative; expected status complete (array assignment subject to Q-R-101).",
+      "selections": {
+        "ancestry.choice": "Devil",
+        "ancestry.devil.silver-tongue-skill": "Lie",
+        "ancestry.devil.purchased-traits": ["Barbed Tail", "Glowing Eyes", "Hellsight"],
+        "culture.name": "Seven Cities trade house",
+        "culture.language": "Anjali",
+        "culture.environment": "Urban",
+        "culture.environment.skill": "Eavesdrop",
+        "culture.organization": "Bureaucratic",
+        "culture.organization.skill": "Persuade",
+        "culture.upbringing": "Academic",
+        "culture.upbringing.skill": "History",
+        "career.choice": "Soldier",
+        "career.soldier.skill.exploration": "Ride",
+        "career.soldier.skill.intrigue": "Search",
+        "career.soldier.languages": ["Zaliac", null],
+        "career.soldier.perk": "Danger Sense",
+        "career.soldier.inciting-incident": "Vow of Sacrifice",
+        "class.choice": "Fury",
+        "class.fury.characteristic-array": "2, −1, −1",
+        "class.fury.array-assignment": {
+          "Reason": 2,
+          "Intuition": -1,
+          "Presence": -1
+        },
+        "class.fury.skills": ["Alertness", "Climb"],
+        "class.fury.aspect": "Reaver",
+        "class.fury.signature-ability": "To the Death!",
+        "class.fury.ability-3": "Back!",
+        "class.fury.ability-5": "Blood for Blood!",
+        "kit.choice": "Panther",
+        "details.name": "Tessiar"
+      }
+    },
+    "invalid-over-budget-and-incomplete": {
+      "description": "Expected status invalid: purchased traits cost 4 of a 3-point budget; 5-Ferocity ability missing; culture upbringing skill missing.",
+      "selections": {
+        "ancestry.choice": "Devil",
+        "ancestry.devil.silver-tongue-skill": "Persuade",
+        "ancestry.devil.purchased-traits": ["Impressive Horns", "Wings"],
+        "culture.language": "Anjali",
+        "culture.environment": "Wilderness",
+        "culture.environment.skill": "Swim",
+        "culture.organization": "Communal",
+        "culture.organization.skill": "Blacksmithing",
+        "culture.upbringing": "Martial",
+        "career.choice": "Soldier",
+        "career.soldier.skill.exploration": "Endurance",
+        "career.soldier.skill.intrigue": "Alertness",
+        "career.soldier.languages": ["Vaslorian", "Zaliac"],
+        "career.soldier.perk": "Teamwork",
+        "career.soldier.inciting-incident": "Sole Survivor",
+        "class.choice": "Fury",
+        "class.fury.characteristic-array": "1, 0, 0",
+        "class.fury.array-assignment": {
+          "Intuition": 1,
+          "Reason": 0,
+          "Presence": 0
+        },
+        "class.fury.skills": ["Jump", "Climb"],
+        "class.fury.aspect": "Berserker",
+        "class.fury.signature-ability": "Brutal Slam",
+        "class.fury.ability-3": "Out of the Way!",
+        "kit.choice": "Mountain",
+        "details.name": "Grug"
+      },
+      "expectedDiagnostics": [
+        "ancestry.devil.purchased-traits: cost 4 exceeds budget 3",
+        "class.fury.ability-5: required choice missing",
+        "culture.upbringing.skill: required choice missing"
+      ]
+    }
+  },
+  "questions": [
+    "Q-R-100",
+    "Q-R-101",
+    "Q-R-102",
+    "Q-R-103",
+    "Q-CHAR-1",
+    "Q-CHAR-5",
+    "Q-CHAR-6",
+    "Q-CHAR-10",
+    "Q-CHAR-11"
+  ]
+}

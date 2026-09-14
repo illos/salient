@@ -75,6 +75,16 @@ See [the pre-alpha journey](pre-alpha-design-gaps.md#confirmed-first-acceptance-
 advancement and interchange requirements below remain the fuller product destination; their complete delivery
 is not automatically a v0.01 gate. Selecting wizard entry does not cancel the eventual import requirement.
 
+**Implementation note, 2026-09-14 (R01):** the sourced decision definition for this slice is delivered as
+`docs/fury-level-one-decisions.md` with its machine-readable mirror `shared/content/fury-level-one-decisions.json`
+and the verbatim-source check `tests/fury-decisions.test.ts`. It lists all ten *Making a Hero* steps in source
+order with stable decision ids, selection shapes, full option pools (the v0.01 supported subset is an explicit
+marking), counts and budgets with their source sentences, dependencies and automatic grants, plus three worked
+selection sets. The complication step is recorded but not presented (Q-CHAR-1). Source silences it found are
+Q-R-100 to Q-R-103 in `rules-questions-for-user.md`; provisional defaults are labeled there and in the document.
+This closes readiness-audit gap G1 as a contract; A02 renders it and R02 derives values from it. Rules review
+is pending.
+
 **Confirmed editing scope:** v0.01 includes reopening a saved character in the same minimal wizard and
 editing it outside combat. Restore its actual selections into the editor and use the same decision/validation
 system as creation; one supported option/set per step remains acceptable. Saving an edit retains the

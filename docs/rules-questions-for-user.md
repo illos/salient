@@ -291,6 +291,95 @@ are the shared lifecycle decisions; the remaining entries are bounded content/sc
   the creature joins and needs no extra control; the Director can regroup or remove the entry.
 - **Blocked until answered:** nothing; default A applied provisionally. Slain or removed creatures do
   not hold a round open under the interpretation recorded in the contract.
+
+### Q-R-100: May a chosen career or culture language duplicate the automatic Caelian grant?
+
+- **Status:** open
+- **Raised by:** R01, 2026-09-14
+- **Where:** `docs/fury-level-one-decisions.md#step-4-career`; Compendium read:
+  `vendor/steel-compendium/en/books/heroes/clean/Draw Steel Heroes.md` (**Culture Benefits**: "You know the
+  language of your culture, in addition to knowing Caelian."; **Caelian Empire**: "All player characters know
+  Caelian!"), `vendor/steel-compendium/en/unified/md/career/soldier.md` ("Languages: Two languages"),
+  `vendor/steel-compendium/en/unified/md/chapter/making-a-hero.md` (**I Speak Their Language**).
+- **Conflict or gap:** `docs/hero-fixture.md` spends one Soldier language slot on Caelian, which every player
+  character already knows. The source never says a chosen language must be one the hero does not know, and never
+  says what happens if it is. The wizard must decide whether the fixture set is complete, invalid, or has an
+  open slot.
+- **Options:** A: accept the duplicate with a visible warning; the slot is spent. B: reject the duplicate as
+  invalid; the player must choose another language or leave the slot open. C: silently convert the duplicate
+  into an open (deferred) slot.
+- **Recommendation:** A. Nothing in the source forbids it, the app's standing policy is warn-without-blocking,
+  and the existing fixture stays legal. C hides a choice; B adds a rule the source does not state.
+- **Blocked until answered:** nothing; A is applied provisionally (R01 records the fixture as complete with one
+  warning).
+- **Answer:**
+
+### Q-R-101: May the Fury's chosen characteristic array be assigned to Reason, Intuition and Presence in any order?
+
+- **Status:** open
+- **Raised by:** R01, 2026-09-14
+- **Where:** `docs/fury-level-one-decisions.md#step-5-class`; Compendium read:
+  `vendor/steel-compendium/en/unified/md/class/fury.md` (**Basics**: "you can choose one of the following arrays
+  for your other characteristic scores: 2, −1, −1 / 1, 1, −1 / 1, 0, 0"),
+  `vendor/steel-compendium/en/unified/md/rule/character/characteristic.md`.
+- **Conflict or gap:** The class fixes Might 2 and Agility 2 and offers three arrays "for your other
+  characteristic scores" without saying whether the three values map to Reason, Intuition and Presence in
+  the printed order or in any order the player chooses. `docs/hero-fixture.md` assigns 1, 0, 0 as Intuition 1,
+  Reason 0, Presence 0, which is not the printed order.
+- **Options:** A: any assignment of the three values to the three remaining characteristics. B: the values map
+  to Reason, Intuition, Presence in the printed order.
+- **Recommendation:** A. The wording "choose one of the following arrays" names a set of values, not an ordered
+  mapping, and the classes chapter gives no ordering rule. This is an interpretation; the fixture depends on it.
+- **Blocked until answered:** nothing; A is applied provisionally and the assignment is a separate recorded
+  decision (`class.fury.array-assignment`) so B can be enforced later without restructuring.
+- **Answer:**
+
+### Q-R-102: Which language lists are selectable for culture and career language choices?
+
+- **Status:** open
+- **Raised by:** R01, 2026-09-14
+- **Where:** `docs/fury-level-one-decisions.md#step-3-culture`; Compendium read:
+  `vendor/steel-compendium/en/books/heroes/clean/Draw Steel Heroes.md` (**Languages in Orden**, **Languages by
+  Ancestry Table**, **Vaslorian Human Languages Table**, **Dead Languages Table**),
+  `vendor/steel-compendium/en/unified/md/chapter/background.md` (**Languages**: "chosen from those available in
+  Languages in Orden above").
+- **Conflict or gap:** Career languages are "chosen from those available in Languages in Orden", a section that
+  contains three tables: 25 extant languages by ancestry, 9 Vaslorian human regional languages, and 9 dead
+  languages "that no modern culture uses". Whether a starting hero may know a dead language, and whether the
+  regional human languages are in scope, is not stated. The unified `chapter/background.md` omits the whole
+  section, so this also fixes which file the wizard cites.
+- **Options:** A: the two extant tables (34 names; Khoursirian appears in both) are selectable; dead languages
+  are not selectable at creation. B: all three tables. C: extant tables plus dead languages with a Director
+  flag.
+- **Recommendation:** A. The dead-language text describes them as reconstructed by sages and learned through
+  research projects, which reads as acquired later, not at creation; but that is an inference, so it is
+  recorded here rather than applied silently.
+- **Blocked until answered:** nothing; A is applied provisionally (dead languages are listed in the JSON as a
+  pool marked unresolved and are not offered).
+- **Answer:**
+
+### Q-R-103: Which kits may a level-one Fury choose, by aspect?
+
+- **Status:** open
+- **Raised by:** R01, 2026-09-14
+- **Where:** `docs/fury-level-one-decisions.md#step-6-kit`; Compendium read:
+  `vendor/steel-compendium/en/unified/md/chapter/kits.md` (intro: "Censors, furies, shadows, tacticians, and
+  troubadours can tap into these and many more archetypal concepts using kits."; **Kits A to Z**),
+  `vendor/steel-compendium/en/unified/md/feature/fury/level-1/kit.md` ("You can use and gain the benefits of a
+  kit."), `feature/fury/level-1/1st-level-aspect-features.md`, `feature/fury/level-1/beast-shape.md` ("You can
+  use and gain the benefits of a stormwight kit"), `feature/fury/stormwight-kits/kit-features.md`,
+  `vendor/steel-compendium/en/unified/md/_index/kit.md` (25 kits; Boren, Corven, Raden, Vuken are stormwight
+  kits).
+- **Conflict or gap:** No kit entry states a class restriction. The Kit feature (Berserker, Reaver) says "a kit"
+  with no list; Beast Shape (Stormwight) says "a stormwight kit". Whether the 21 non-stormwight kits are all
+  eligible for a Berserker/Reaver, and whether a stormwight kit is excluded for them, is an interpretation of
+  "a kit" versus "a stormwight kit".
+- **Options:** A: Berserker/Reaver choose from the 21 non-stormwight kits; Stormwight chooses from the 4
+  stormwight kits only. B: Berserker/Reaver may also take a stormwight kit. C: some non-stormwight kits are
+  excluded for the Fury.
+- **Recommendation:** A. The stormwight kits describe themselves as "this stormwight kit" and are granted by
+  Beast Shape; nothing in the source excludes any other kit from a kit-using class. Labeled interpretation.
+- **Blocked until answered:** nothing; A is applied provisionally (only Mountain is supported in v0.01 anyway).
 - **Answer:**
 
 ## Resolved questions

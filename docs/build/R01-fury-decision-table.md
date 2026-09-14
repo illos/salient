@@ -104,4 +104,74 @@ as `Q-R-n`.
 
 ## Work log
 
-_Empty._
+### 2026-09-14 — plan (rules researcher, branch `slice/R01`)
+
+- Read: `CLAUDE.md`, `agent.MD`, `docs/build/README.md`, this slice, `docs/compendium-navigation.md`, the
+  cited spec sections (`character-wizard-spec.md#v001-scope`, `#3-decision-system`,
+  `v0.01-readiness-audit.md#g1-...`, `pre-alpha-design-gaps.md#confirmed-first-acceptance-journey`,
+  `hero-fixture.md`, `rules-adaptation-principles.md`), and the Compendium files listed under *Rules research*
+  plus the entries they reference (all 13 cultures, 18 careers, 25 kits, 9 devil trait files, Fury level-1
+  features and 15 level-1 ability entries, skill groups, perk entries, free-strike entries, Renown rule,
+  ancestries chapter, complications chapter and index, and the clean Heroes text for the sections the unified
+  chapters omit).
+- S01 has not landed: read the Markdown directly and record every path.
+- Files to touch: `docs/fury-level-one-decisions.md` (new), `shared/content/fury-level-one-decisions.json`
+  (new), `tests/fury-decisions.test.ts` (new, `node --test` style), implementation notes in
+  `docs/character-wizard-spec.md#v001-scope` and `docs/v0.01-readiness-audit.md` (G1), new `Q-R-100`+ rows in
+  `docs/rules-questions-for-user.md`, this work log. No `vendor/` changes; no `STATUS.md` edit (lead updates it).
+- Spec discrepancies noted: none. The slice's "Read first" list has path corrections (unified Background and
+  Perks chapters lack the sentences that establish culture benefits, language pools and perk types; they are
+  cited from `en/books/heroes/clean/Draw Steel Heroes.md`).
+
+### 2026-09-14 — closing entry
+
+Delivered: the decision table document, the JSON mirror, the verification test, spec/audit implementation
+notes, four new user questions (Q-R-100 duplicate Caelian language pick; Q-R-101 characteristic array
+assignment order; Q-R-102 selectable language tables; Q-R-103 kit eligibility by aspect).
+
+Acceptance checks and evidence:
+
+1. Steps in source order with existing paths: `tests/fury-decisions.test.ts` "check 1" compares the JSON
+   `sourceStep` list to the ten `#### N. ...` headings of `chapter/making-a-hero.md` and checks every cited
+   path exists and the pinned revision matches `git rev-parse HEAD` of the submodule. Passed.
+2. Option values verbatim in cited sources: "checks 2-3" verifies every pool value, option value, grant name,
+   `optionSources` entry and per-parent value against its cited file after link/`<br>`/emphasis normalization
+   (stated in the document's schema note). Passed.
+3. Counts and budgets quote their source sentence: the same test verifies every decision `quote`, rule-object
+   quote, `costQuote` and the numeric `cost` against the `N Point(s)` text. Passed. The document repeats the
+   sentences per row.
+4. Hero-fixture set complete, invalid set rejected: "check 4" validates the three selection sets with a small
+   validator whose expected outcomes are the source budgets/counts (Set A: no diagnostics, one Q-R-100 warning;
+   Set B: none; Set C: exactly the three stated diagnostics). Hand validation is in the document's *Worked
+   selection sets*. Passed.
+5. Ambiguities listed with ids: document section *Ambiguities and questions*; the mirror test asserts each
+   `Q-` id in the JSON appears in the document and in `docs/rules-questions-for-user.md`. Passed.
+6. Independent rules review: pending (not self-attested).
+
+Command and output:
+
+```
+$ node --test tests/fury-decisions.test.ts
+✔ R01 check 1: every source step appears in source order with an existing path
+✔ R01 checks 2-3: every option value, grant and quoted count/budget sentence is verbatim in its cited source
+✔ R01 check 4: the hero-fixture set is complete, the second path is complete, the invalid set is rejected
+✔ R01: the document mirrors every decision id and question
+ℹ tests 4  ℹ pass 4  ℹ fail 0
+$ tsc --noEmit   (exit 0)
+```
+
+What remains: the user's answers to Q-R-100..103 (provisional defaults labeled); R02 consumes the grant
+references; A02 renders the table.
+
+2026-09-14 — review fixes and rebase. Independent and rules review: pass. Non-blocking fixes applied: the
+*Source path corrections* row for `chapter/ancestries.md` corrected (it contains *Ancestry Traits* verbatim;
+only *Starting Size and Speed* is missing) and the `ancestry.devil.signature-trait` and `budgetRule` citations
+re-pointed to the unified chapter after confirming the text is identical; the JSON `textNormalization`
+field now states the `*` emphasis stripping; `connections.notes` added to the interpretations list.
+Rebased onto `main` after S00/R04/R05 (one conflict, both sides' new questions kept in
+`docs/rules-questions-for-user.md`; `tsconfig.json` on main already includes `shared/contracts/*.ts` and
+`tests/*.test.ts`). Test ported to Vitest (`import { test } from 'vitest'`), typed without `any` for the S00
+lint, Prettier applied. `pnpm check` passed: lint; engine 7 files / 43 tests; app + scripts 8 files / 42 tests;
+check-links; check-vendor; foes:source; build. `node scripts/check-commit.ts --range main..HEAD` rejects
+`Rules-Review: required (pending)` (it accepts only `not required` or `<label> (<verdict>, date)`); the
+trailer is kept as instructed for the lead to set at merge.
