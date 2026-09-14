@@ -24,14 +24,14 @@ A08 design tokens (independent) ────────────────
 
 | Id | Slice | Family | Depends on | Rules review | Status | Team | Updated | Commits |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| S00 | [Process tooling, CI, lint, commit checker](S00-process-tooling.md) | S | None | not required | Not started | | | |
+| S00 | [Process tooling, CI, lint, commit checker](S00-process-tooling.md) | S | None | not required | In progress | lead/S00-impl | 2026-09-14 | |
 | S01 | [Content pipeline from the pinned Compendium](S01-content-pipeline.md) | S | None | required | Not started | | | |
 | S02 | [Data contracts: encounter, events, journal, dice](S02-data-contracts.md) | S | None | not required | Not started | | | |
-| R01 | [Level-one devil Fury decision table](R01-fury-decision-table.md) | R | S01 (soft) | required | Not started | | | |
-| R02 | [Derived values and evaluator contract](R02-derived-values-evaluator.md) | R | R01 | required | Not started | | | |
+| R01 | [Level-one devil Fury decision table](R01-fury-decision-table.md) | R | S01 (soft) | required | In progress | rules/R01-research | 2026-09-14 | |
+| R02 | [Derived values and evaluator contract](R02-derived-values-evaluator.md) | R | R01 | required | In progress | rules/R01-research | 2026-09-14 | |
 | R03 | [Live-state initialization and engine projection](R03-live-state-initialization.md) | R | R02 | required | Not required | | | |
-| R04 | [Roll and damage resolution contract](R04-roll-and-damage-resolution.md) | R | None | required | Not started | | | |
-| R05 | [Conditions, clock and Malice common lifecycle](R05-conditions-clock-malice.md) | R | None | required | Not started | | | |
+| R04 | [Roll and damage resolution contract](R04-roll-and-damage-resolution.md) | R | None | required | In progress | rules/R04-research | 2026-09-14 | |
+| R05 | [Conditions, clock and Malice common lifecycle](R05-conditions-clock-malice.md) | R | None | required | In progress | rules/R05-research | 2026-09-14 | |
 | A01 | [Shared operations, command registry and engine integration](A01-shared-operations-engine.md) | A | S02, S00 (soft) | not required | Not started | | | |
 | A02 | [Minimal wizard, admission review and character sheet](A02-wizard-and-character-sheet.md) | A | R01, R02, R03, S01, A01 | required | Not started | | | |
 | A03 | [Table shell and FreePlay basics](A03-table-shell-freeplay.md) | A | A01, S01 | required | Not started | | | |
