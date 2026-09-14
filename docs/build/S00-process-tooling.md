@@ -134,3 +134,113 @@ Dependencies: none real, none stubbed.
 Commits planned: (1) `feat(S00)` tooling, (2) `chore(S00)` formatter run over `web/`, `convex/`,
 `shared/`, `scripts/`, `src/`, `tests/`, and (3) `docs(S00)` only if `check-links` finds genuinely
 broken links.
+
+### 2026-09-14 — Verification and closing entry (implementer: Claude Fable 5.1)
+
+Commits on `slice/S00`, in order:
+
+- `39c769c` `feat(S00): add lint, commit checker, link and vendor guards, CI`
+- `7160cbd` `chore(S00): reformat code with Prettier at print width 100`
+- `18fed3c` `fix(S00): read the type column when parsing vendor submodule pins` — found while running
+  acceptance check 3: `check-vendor.ts` read `git ls-tree` columns one position early, so the
+  per-submodule checks were dead code and only the superproject status caught the change. Fixed and
+  re-verified with a stray file and with the submodule detached one commit back, then restored with
+  `git submodule update` (no `--remote`).
+- the `docs(S00)` commit carrying this entry.
+
+Decisions taken within the slice (routine engineering, not product behavior):
+
+- `Reviewed-By:` is optional in the hook and required with `--merge`, because the hook runs before an
+  independent review can exist. Documented as an implementation note under
+  `docs/build/README.md#commit-format`.
+- The commit checker is not part of `pnpm check`; it runs in the `commit-msg` hook and as a CI step
+  over the pushed range, so `pnpm check` passes on a clean checkout of any commit regardless of its
+  history (acceptance check 3 would otherwise fail on `main`'s pre-S00 commits).
+- `@convex-dev/explicit-table-ids` is off: `convex/` uses the one-argument `db.get`/`db.patch` form
+  in 37 places; migrating it is code work for a slice that owns `convex/`. `preserve-caught-error`
+  (new in ESLint 10) is off, and `@typescript-eslint/no-explicit-any` is off for `src/` only, so the
+  historical engine is not edited for lint. Three minimal lint fixes were made in the feat commit
+  and listed in its message.
+- `simple-git-hooks` installs the hook into the shared `.git/hooks` directory (worktrees share hooks),
+  so the hook also fires in the main checkout. Its command is
+  `[ ! -f scripts/check-commit.ts ] || node scripts/check-commit.ts "$1"`, so a checkout without the
+  checker (main before S00 merges) still commits. The package's own postinstall is denied in
+  `pnpm-workspace.yaml`; `pnpm prepare` runs it explicitly.
+- `prettier --check` joined `pnpm lint` in the reformat commit rather than the feat commit, so each
+  commit passes `pnpm check` on its own.
+- Node 24 runs the `.ts` scripts directly; no build step was added for tooling.
+
+Acceptance checks:
+
+1. **Verified.** With the tooling staged, `git commit -F` a `feat(S00)` message with no `Spec:` line.
+   Hook output, commit not created:
+   ```
+   .../COMMIT_EDITMSG: commit message rejected (see docs/build/README.md#commit-format):
+     - "feat" commits need at least one "Spec: <path>#<anchor>" trailer naming the owning spec section.
+   exit=1
+   ```
+2. **Verified.** Same with `Spec: docs/build/README.md#commit-formats`:
+   ```
+   .../COMMIT_EDITMSG: commit message rejected (see docs/build/README.md#commit-format):
+     - Spec: no heading resolves to #commit-formats in docs/build/README.md.
+   exit=1
+   ```
+   Unit tests in `tests/scripts/check-commit.test.ts` also cover a missing `Spec:` file, a bad slice
+   id, scope/`Slice:` mismatch, `Verified:`/`Reviewed-By:` rules with and without `--merge`,
+   `Rules-Review:` values, vendor paths and git comment stripping (16 tests in the `scripts` project).
+3. **Verified.** `pnpm check` passes on the clean checkout at every commit (outputs below). With an
+   untracked `README.md` written into `vendor/steel-compendium`, `pnpm check` stopped at
+   `check-vendor` with exit 1:
+   ```
+   $ node scripts/check-vendor.ts
+   vendor/steel-compendium: working tree differs from the pin:
+   ?? README.md
+   vendor/ pin changed in this checkout:
+   M vendor/steel-compendium
+   ```
+   (The first two lines appear after the fix commit; before it only the last two lines printed.)
+   With the submodule detached at `HEAD~1`: `vendor/steel-compendium: checked out at 34f55d920844 but
+   pinned at fb83a789da8f.` The file was removed and the pin restored; `check-vendor` then passed.
+4. **Verified.** `pnpm check-links` → `Checked 112 Markdown files: no broken relative links or
+   anchors.` The extractor was confirmed against real content (215 links in six sample files, 212
+   relative) and against a fixture tree with deliberate breaks in
+   `tests/scripts/check-links.test.ts`. No `docs(S00)` link-fix commit was needed.
+5. **Not verified locally.** GitHub Actions cannot run here (no `act`, nothing pushed). The workflow
+   parses, and its steps (`pnpm install --frozen-lockfile`, `pnpm check`,
+   `node scripts/check-commit.ts --range main..HEAD`) were run locally with the outputs recorded here;
+   `--range main..HEAD` reported every S00 commit `ok`. The lead should confirm the green run after
+   pushing the branch.
+6. **Verified.** `pnpm check` before the reformat (at `39c769c`) and after (working tree of
+   `7160cbd`), condensed:
+   ```
+   # before (feat commit)
+   $ eslint .
+   $ tsc --noEmit && vitest run --project engine
+    Test Files  5 passed (5)   Tests  28 passed (28)
+   $ tsc -p tsconfig.web.json && vitest run --project app --project scripts
+    Test Files  8 passed (8)   Tests  42 passed (42)
+   Checked 112 Markdown files: no broken relative links or anchors.
+   vendor/ matches the pinned submodule commits (2 submodules).
+   Goblin Warrior snapshot matches the clean pinned Compendium.
+   ✓ built in 2.24s        exit=0
+   # after (reformat)
+   $ eslint . && prettier --check .
+   All matched files use Prettier code style!
+   $ tsc --noEmit && vitest run --project engine
+    Test Files  5 passed (5)   Tests  28 passed (28)
+   $ tsc -p tsconfig.web.json && vitest run --project app --project scripts
+    Test Files  8 passed (8)   Tests  42 passed (42)
+   Checked 112 Markdown files: no broken relative links or anchors.
+   vendor/ matches the pinned submodule commits (2 submodules).
+   Goblin Warrior snapshot matches the clean pinned Compendium.
+   ✓ built in 1.76s        exit=0
+   ```
+   For reference, the pre-S00 baseline on the unmodified checkout ran `node --test` with
+   `tests 28 / pass 28 / fail 0` and Vitest app `6 files / 26 tests`; the same 28 engine test names
+   pass under Vitest, and the app count is unchanged (the 42 includes the 16 new `scripts` tests).
+
+What works: lint, format check, one Vitest runner for engine/app/scripts, link and vendor guards, the
+commit checker in the hook and CI, and `pnpm check` covering all of it. What remains: CI green run
+(needs a push), `Reviewed-By:` trailers (added by the lead after independent review; the lead's
+pre-merge command is `node scripts/check-commit.ts --merge --range main..slice/S00`), and the
+`STATUS.md` row (lead-owned).
