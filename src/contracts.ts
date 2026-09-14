@@ -1,6 +1,10 @@
 /** Shared, JSON-serializable prototype boundary. No UI, Convex, filesystem, or RNG. */
 export type Characteristic = 'M' | 'A' | 'R' | 'I' | 'P';
-export interface SourceRef { path: string; revision: string; id: string }
+export interface SourceRef {
+  path: string;
+  revision: string;
+  id: string;
+}
 export interface AbilitySource {
   id: string;
   name: string;
@@ -17,11 +21,20 @@ export interface AbilitySource {
   roll?: string;
   tiers?: [string, string, string];
 }
-export interface Expression { constant: number; characteristic?: Characteristic }
+export interface Expression {
+  constant: number;
+  characteristic?: Characteristic;
+}
 export type EffectDefinition =
   | { kind: 'damage'; amount: Expression; damageType?: string }
   | { kind: 'push'; distance: number }
-  | { kind: 'condition'; condition: string; characteristic: Characteristic; threshold: number; duration: string };
+  | {
+      kind: 'condition';
+      condition: string;
+      characteristic: Characteristic;
+      threshold: number;
+      duration: string;
+    };
 export interface ParsedAbility {
   source: AbilitySource;
   roll?: Expression;
@@ -29,7 +42,11 @@ export interface ParsedAbility {
   tiers: [EffectDefinition[], EffectDefinition[], EffectDefinition[]];
   diagnostics: string[];
 }
-export interface Condition { name: string; sourceId: string; duration: string }
+export interface Condition {
+  name: string;
+  sourceId: string;
+  duration: string;
+}
 export interface Entity {
   id: string;
   name: string;
@@ -95,13 +112,16 @@ export interface AbilityCommand {
     edges?: number;
     banes?: number;
     /** Record selected movement; omission leaves a table instruction pending. */
-    movement?: Record<string, {
-      distance: number;
-      stabilityReduction: number;
-      collision: boolean;
-      /** Table confirms route legality and that external terrain/fall/trigger effects are handled. */
-      effectsConfirmed?: boolean;
-    }>;
+    movement?: Record<
+      string,
+      {
+        distance: number;
+        stabilityReduction: number;
+        collision: boolean;
+        /** Table confirms route legality and that external terrain/fall/trigger effects are handled. */
+        effectsConfirmed?: boolean;
+      }
+    >;
     casualtyOrder?: string[];
     /** Number participating in a minion squad attack; requires squad validation. */
     squadAttackers?: string[];

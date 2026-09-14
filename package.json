@@ -24,7 +24,7 @@
     "foes:source": "node scripts/build-foe-source.ts --check",
     "setup:local": "node scripts/setup-local.ts",
     "prepare": "simple-git-hooks",
-    "lint": "eslint .",
+    "lint": "eslint . && prettier --check .",
     "format": "prettier --write .",
     "check-links": "node scripts/check-links.ts",
     "check-vendor": "node scripts/check-vendor.ts",

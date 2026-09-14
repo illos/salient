@@ -8,5 +8,7 @@ export class CommandIdentities {
     if (this.pending?.key !== key) this.pending = { key, id: this.makeId() };
     return this.pending.id;
   }
-  acknowledged(key: string) { if (this.pending?.key === key) this.pending = undefined; }
+  acknowledged(key: string) {
+    if (this.pending?.key === key) this.pending = undefined;
+  }
 }

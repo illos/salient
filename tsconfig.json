@@ -9,5 +9,13 @@
     "verbatimModuleSyntax": true,
     "skipLibCheck": true
   },
-  "include": ["src/**/*.ts", "tests/*.test.ts", "scripts/inspect-character-sources.ts", "scripts/check-commit.ts", "scripts/check-links.ts", "scripts/check-vendor.ts", "scripts/lib/**/*.ts"]
+  "include": [
+    "src/**/*.ts",
+    "tests/*.test.ts",
+    "scripts/inspect-character-sources.ts",
+    "scripts/check-commit.ts",
+    "scripts/check-links.ts",
+    "scripts/check-vendor.ts",
+    "scripts/lib/**/*.ts"
+  ]
 }

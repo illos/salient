@@ -5,12 +5,18 @@ test('a lost reply retries the same command while a changed intent gets a new id
   let sequence = 0;
   const ids = new CommandIdentities(() => `command-${++sequence}`);
   const pause = JSON.stringify(['session.transition', { id: 's1', revision: 0, action: 'pause' }]);
-  const resume = JSON.stringify(['session.transition', { id: 's1', revision: 1, action: 'resume' }]);
+  const resume = JSON.stringify([
+    'session.transition',
+    { id: 's1', revision: 1, action: 'resume' },
+  ]);
   const committed = new Set<string>();
   let writes = 0;
   const attempt = (key: string, loseReply: boolean) => {
     const id = ids.forPayload(key);
-    if (!committed.has(id)) { committed.add(id); writes++; }
+    if (!committed.has(id)) {
+      committed.add(id);
+      writes++;
+    }
     if (loseReply) throw new Error('Reply lost after commit');
     ids.acknowledged(key);
     return id;

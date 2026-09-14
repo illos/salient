@@ -26,7 +26,8 @@ export function headingAnchors(markdown: string): Set<string> {
     const fenceMatch = /^\s{0,3}(`{3,}|~{3,})/.exec(line);
     if (fenceMatch) {
       if (!fence) fence = fenceMatch[1];
-      else if (fenceMatch[1][0] === fence[0] && fenceMatch[1].length >= fence.length) fence = undefined;
+      else if (fenceMatch[1][0] === fence[0] && fenceMatch[1].length >= fence.length)
+        fence = undefined;
       continue;
     }
     if (fence) continue;
@@ -59,7 +60,8 @@ export function extractLinks(markdown: string): MarkdownLink[] {
     const fenceMatch = /^\s{0,3}(`{3,}|~{3,})/.exec(rawLine);
     if (fenceMatch) {
       if (!fence) fence = fenceMatch[1];
-      else if (fenceMatch[1][0] === fence[0] && fenceMatch[1].length >= fence.length) fence = undefined;
+      else if (fenceMatch[1][0] === fence[0] && fenceMatch[1].length >= fence.length)
+        fence = undefined;
       return;
     }
     if (fence) return;
@@ -68,7 +70,9 @@ export function extractLinks(markdown: string): MarkdownLink[] {
       const cleaned = target.trim().replace(/^<(.*)>$/, '$1');
       if (cleaned) links.push({ line: index + 1, target: cleaned });
     };
-    for (const match of line.matchAll(/!?\[[^\]]*\]\(([^()\s]*(?:\([^()\s]*\)[^()\s]*)*)(?:\s+"[^"]*")?\)/g)) {
+    for (const match of line.matchAll(
+      /!?\[[^\]]*\]\(([^()\s]*(?:\([^()\s]*\)[^()\s]*)*)(?:\s+"[^"]*")?\)/g,
+    )) {
       push(match[1]);
     }
     const definition = /^\s{0,3}\[([^\]^][^\]]*)\]:\s+(\S+)/.exec(line);

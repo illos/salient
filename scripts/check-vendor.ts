@@ -7,7 +7,8 @@ import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
-const git = (args: string[], cwd = root) => execFileSync('git', args, { cwd, encoding: 'utf8' }).trim();
+const git = (args: string[], cwd = root) =>
+  execFileSync('git', args, { cwd, encoding: 'utf8' }).trim();
 
 const failures: string[] = [];
 const pinned = git(['ls-tree', 'HEAD', 'vendor/']).split('\n').filter(Boolean);
@@ -22,7 +23,10 @@ for (const entry of pinned) {
     failures.push(`${path}: submodule is not checked out (run git submodule update --init).`);
     continue;
   }
-  if (head !== commit) failures.push(`${path}: checked out at ${head.slice(0, 12)} but pinned at ${commit.slice(0, 12)}.`);
+  if (head !== commit)
+    failures.push(
+      `${path}: checked out at ${head.slice(0, 12)} but pinned at ${commit.slice(0, 12)}.`,
+    );
   const status = git(['status', '--porcelain', '--untracked-files=all'], `${root}${path}`);
   if (status) failures.push(`${path}: working tree differs from the pin:\n${status}`);
 }

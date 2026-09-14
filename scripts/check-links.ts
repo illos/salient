@@ -65,7 +65,12 @@ export async function checkFile(path: string, repoRoot = root): Promise<BrokenLi
       continue;
     }
     if (!(await anchorsOf(resolved)).has(anchor)) {
-      broken.push({ file, line, target, reason: `no heading #${anchor} in ${relative(repoRoot, resolved)}` });
+      broken.push({
+        file,
+        line,
+        target,
+        reason: `no heading #${anchor} in ${relative(repoRoot, resolved)}`,
+      });
     }
   }
   return broken;
@@ -83,7 +88,8 @@ export async function checkAll(repoRoot = root): Promise<{ files: number; broken
 
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const { files, broken } = await checkAll();
-  for (const entry of broken) console.error(`${entry.file}:${entry.line} ${entry.target} — ${entry.reason}`);
+  for (const entry of broken)
+    console.error(`${entry.file}:${entry.line} ${entry.target} — ${entry.reason}`);
   if (broken.length) {
     console.error(`${broken.length} broken link(s) in ${files} Markdown files.`);
     process.exit(1);

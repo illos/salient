@@ -7,10 +7,18 @@ export default defineConfig(({ mode }) => {
   return {
     plugins: [react(), tailwindcss()],
     server: {
-      port: 5180, strictPort: true,
+      port: 5180,
+      strictPort: true,
       proxy: {
-        '/convex-api': { target: env.VITE_CONVEX_URL || 'http://127.0.0.1:3210', ws: true, rewrite: p => p.replace(/^\/convex-api/, '') },
-        '/api/auth': { target: env.VITE_CONVEX_SITE_URL || 'http://127.0.0.1:3211', changeOrigin: true },
+        '/convex-api': {
+          target: env.VITE_CONVEX_URL || 'http://127.0.0.1:3210',
+          ws: true,
+          rewrite: p => p.replace(/^\/convex-api/, ''),
+        },
+        '/api/auth': {
+          target: env.VITE_CONVEX_SITE_URL || 'http://127.0.0.1:3211',
+          changeOrigin: true,
+        },
       },
     },
   };

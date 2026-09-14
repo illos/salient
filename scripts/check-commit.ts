@@ -16,7 +16,16 @@ import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { headingAnchors } from './lib/markdown.ts';
 
-export const TYPES = ['feat', 'fix', 'refactor', 'test', 'docs', 'chore', 'content', 'rules'] as const;
+export const TYPES = [
+  'feat',
+  'fix',
+  'refactor',
+  'test',
+  'docs',
+  'chore',
+  'content',
+  'rules',
+] as const;
 const SPEC_REQUIRED = new Set(['feat', 'fix', 'rules', 'content']);
 const TRAILERS = ['Slice', 'Spec', 'Verified', 'Reviewed-By', 'Rules-Review', 'Co-Authored-By'];
 const VERDICT = /^\S.*\((pass|changes required|decision required), \d{4}-\d{2}-\d{2}\)$/;
@@ -69,13 +78,19 @@ export function validateMessage(raw: string, context: CommitContext): string[] {
   } else {
     [, type, headerSlice] = header;
     const summary = header[3];
-    if (!(TYPES as readonly string[]).includes(type)) failures.push(`Unknown type "${type}"; use one of ${TYPES.join(', ')}.`);
+    if (!(TYPES as readonly string[]).includes(type))
+      failures.push(`Unknown type "${type}"; use one of ${TYPES.join(', ')}.`);
     if (!summary.trim()) failures.push('Summary after the type is empty.');
-    if (summary.length >= 72) failures.push(`Summary is ${summary.length} characters; keep it under 72.`);
+    if (summary.length >= 72)
+      failures.push(`Summary is ${summary.length} characters; keep it under 72.`);
     if (/[.]$/.test(summary)) failures.push('Summary must not end with a period.');
-    if (summary && summary[0] !== summary[0].toLowerCase()) failures.push('Summary starts with a capital letter; write it in lower case, imperative mood.');
+    if (summary && summary[0] !== summary[0].toLowerCase())
+      failures.push(
+        'Summary starts with a capital letter; write it in lower case, imperative mood.',
+      );
   }
-  if (rest.length && rest[0] !== '') failures.push('Leave a blank line between the subject and the body.');
+  if (rest.length && rest[0] !== '')
+    failures.push('Leave a blank line between the subject and the body.');
 
   const trailers = new Map<string, string[]>();
   for (const line of rest) {
@@ -86,51 +101,81 @@ export function validateMessage(raw: string, context: CommitContext): string[] {
   }
   const one = (key: string): string | undefined => {
     const values = trailers.get(key);
-    if (values && values.length > 1 && key !== 'Spec' && key !== 'Co-Authored-By') failures.push(`${key}: appears ${values.length} times; use one line.`);
+    if (values && values.length > 1 && key !== 'Spec' && key !== 'Co-Authored-By')
+      failures.push(`${key}: appears ${values.length} times; use one line.`);
     return values?.[0];
   };
 
   const slice = one('Slice');
-  if (slice === undefined) failures.push('Missing "Slice:" trailer (a slice id from docs/build/STATUS.md, or "none").');
-  else if (slice !== 'none' && !context.sliceIds.has(slice)) failures.push(`Slice: "${slice}" is not an id in docs/build/STATUS.md (or "none").`);
-  if (headerSlice !== undefined && slice !== undefined && headerSlice !== slice) failures.push(`Subject scope "(${headerSlice})" does not match "Slice: ${slice}".`);
+  if (slice === undefined)
+    failures.push('Missing "Slice:" trailer (a slice id from docs/build/STATUS.md, or "none").');
+  else if (slice !== 'none' && !context.sliceIds.has(slice))
+    failures.push(`Slice: "${slice}" is not an id in docs/build/STATUS.md (or "none").`);
+  if (headerSlice !== undefined && slice !== undefined && headerSlice !== slice)
+    failures.push(`Subject scope "(${headerSlice})" does not match "Slice: ${slice}".`);
 
   const specs = trailers.get('Spec') ?? [];
-  if (type && SPEC_REQUIRED.has(type) && !specs.length) failures.push(`"${type}" commits need at least one "Spec: <path>#<anchor>" trailer naming the owning spec section.`);
+  if (type && SPEC_REQUIRED.has(type) && !specs.length)
+    failures.push(
+      `"${type}" commits need at least one "Spec: <path>#<anchor>" trailer naming the owning spec section.`,
+    );
   for (const spec of specs) {
     const parts = /^([^#\s]+)#(\S+)$/.exec(spec);
     if (!parts) {
-      failures.push(`Spec: "${spec}" must be a repo-relative path plus a heading anchor, like docs/table-spec.md#heading.`);
+      failures.push(
+        `Spec: "${spec}" must be a repo-relative path plus a heading anchor, like docs/table-spec.md#heading.`,
+      );
       continue;
     }
     const [, path, anchor] = parts;
     const content = context.readFile(path);
-    if (content === undefined) failures.push(`Spec: file "${path}" does not exist in the tree being committed.`);
-    else if (!headingAnchors(content).has(anchor)) failures.push(`Spec: no heading resolves to #${anchor} in ${path}.`);
+    if (content === undefined)
+      failures.push(`Spec: file "${path}" does not exist in the tree being committed.`);
+    else if (!headingAnchors(content).has(anchor))
+      failures.push(`Spec: no heading resolves to #${anchor} in ${path}.`);
   }
 
-  const codeCommit = context.touched.some(isCodePath) || (type !== undefined && type !== 'docs' && type !== 'chore');
+  const codeCommit =
+    context.touched.some(isCodePath) || (type !== undefined && type !== 'docs' && type !== 'chore');
   const verified = one('Verified');
-  if (codeCommit && !verified) failures.push('Missing "Verified:" trailer listing the commands and scenarios actually run (required for commits that touch code).');
+  if (codeCommit && !verified)
+    failures.push(
+      'Missing "Verified:" trailer listing the commands and scenarios actually run (required for commits that touch code).',
+    );
   else if (verified !== undefined && !verified) failures.push('"Verified:" is empty.');
 
   const reviewed = one('Reviewed-By');
-  if (reviewed !== undefined && !VERDICT.test(reviewed)) failures.push('"Reviewed-By:" must read "<reviewer label> (<verdict>, YYYY-MM-DD)".');
+  if (reviewed !== undefined && !VERDICT.test(reviewed))
+    failures.push('"Reviewed-By:" must read "<reviewer label> (<verdict>, YYYY-MM-DD)".');
   if (context.merge && codeCommit) {
-    if (reviewed === undefined) failures.push('Missing "Reviewed-By:" trailer; code commits need an independent review before merging to main.');
-    else if (!/\(pass, /.test(reviewed)) failures.push('"Reviewed-By:" verdict must be "pass" before merging to main.');
+    if (reviewed === undefined)
+      failures.push(
+        'Missing "Reviewed-By:" trailer; code commits need an independent review before merging to main.',
+      );
+    else if (!/\(pass, /.test(reviewed))
+      failures.push('"Reviewed-By:" verdict must be "pass" before merging to main.');
   }
 
   const rules = one('Rules-Review');
-  if (rules === undefined) failures.push('Missing "Rules-Review:" trailer ("not required" is an explicit value, not an omission).');
-  else if (rules !== 'not required' && !VERDICT.test(rules)) failures.push('"Rules-Review:" must be "not required" or "<reviewer label> (<verdict>, YYYY-MM-DD)".');
+  if (rules === undefined)
+    failures.push(
+      'Missing "Rules-Review:" trailer ("not required" is an explicit value, not an omission).',
+    );
+  else if (rules !== 'not required' && !VERDICT.test(rules))
+    failures.push(
+      '"Rules-Review:" must be "not required" or "<reviewer label> (<verdict>, YYYY-MM-DD)".',
+    );
 
   const vendor = context.touched.filter(path => path.startsWith('vendor/'));
-  if (vendor.length) failures.push(`Commit modifies vendor/ (${vendor.join(', ')}); pinned submodules are never changed in slice commits.`);
+  if (vendor.length)
+    failures.push(
+      `Commit modifies vendor/ (${vendor.join(', ')}); pinned submodules are never changed in slice commits.`,
+    );
   return failures;
 }
 
-const git = (args: string[]) => execFileSync('git', args, { cwd: root, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] });
+const git = (args: string[]) =>
+  execFileSync('git', args, { cwd: root, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] });
 function treeReader(prefix: string): (path: string) => string | undefined {
   return path => {
     try {
@@ -142,7 +187,8 @@ function treeReader(prefix: string): (path: string) => string | undefined {
 }
 function stagedContext(merge: boolean): CommitContext {
   const readFile = treeReader(':');
-  const status = readFile('docs/build/STATUS.md') ?? readFileSync(resolve(root, 'docs/build/STATUS.md'), 'utf8');
+  const status =
+    readFile('docs/build/STATUS.md') ?? readFileSync(resolve(root, 'docs/build/STATUS.md'), 'utf8');
   const sliceIds = sliceIdsFrom(status);
   const touched = git(['diff', '--cached', '--name-only']).split('\n').filter(Boolean);
   return { sliceIds, readFile, touched, merge };
@@ -150,7 +196,9 @@ function stagedContext(merge: boolean): CommitContext {
 function revisionContext(rev: string, merge: boolean): CommitContext {
   const readFile = treeReader(`${rev}:`);
   const status = readFile('docs/build/STATUS.md') ?? '';
-  const touched = git(['diff-tree', '--no-commit-id', '--name-only', '-r', '--root', rev]).split('\n').filter(Boolean);
+  const touched = git(['diff-tree', '--no-commit-id', '--name-only', '-r', '--root', rev])
+    .split('\n')
+    .filter(Boolean);
   return { sliceIds: sliceIdsFrom(status), readFile, touched, merge };
 }
 
@@ -178,13 +226,17 @@ if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.ur
     if (!commits.length) console.log(`No commits in ${range}.`);
     for (const commit of commits) {
       const message = git(['log', '-1', '--format=%B', commit]);
-      ok = report(commit.slice(0, 12), validateMessage(message, revisionContext(commit, merge))) && ok;
+      ok =
+        report(commit.slice(0, 12), validateMessage(message, revisionContext(commit, merge))) && ok;
     }
   } else if (revIndex !== -1) {
     const rev = args[revIndex + 1];
     if (!rev) throw new Error('--rev needs a commit.');
     const commit = git(['rev-parse', rev]).trim();
-    ok = report(commit.slice(0, 12), validateMessage(git(['log', '-1', '--format=%B', commit]), revisionContext(commit, merge)));
+    ok = report(
+      commit.slice(0, 12),
+      validateMessage(git(['log', '-1', '--format=%B', commit]), revisionContext(commit, merge)),
+    );
   } else {
     const file = positional.find(arg => arg !== '-');
     const message = file ? readFileSync(file, 'utf8') : readFileSync(0, 'utf8');

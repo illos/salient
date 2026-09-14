@@ -29,7 +29,10 @@ test('CLI persists a real demo, exposes source and applied changes, and restores
     await runCli(['back', path]);
     assert.ok(currentState(await readRun(path)).pending.length > 0);
     // A fresh process reads this artifact without loading source content.
-    const read = spawnSync(process.execPath, [join(process.cwd(), 'src/cli.ts'), 'state', path], { cwd: dir, encoding: 'utf8' });
+    const read = spawnSync(process.execPath, [join(process.cwd(), 'src/cli.ts'), 'state', path], {
+      cwd: dir,
+      encoding: 'utf8',
+    });
     assert.equal(read.status, 0, read.stderr);
     assert.ok(JSON.parse(read.stdout).state.pending.length > 0);
     await runCli(['forward', path]);
@@ -39,12 +42,25 @@ test('CLI persists a real demo, exposes source and applied changes, and restores
     await assert.rejects(runCli(['demo', path]), /already exists/);
     assert.equal(await readFile(path, 'utf8'), before);
     const cmd = join(dir, 'correction.json');
-    await writeFile(cmd, JSON.stringify({ kind: 'manual', id: 'correct-stamina', reason: 'Table correction example; preserve the already used first-damage trigger', changes: [{ kind: 'stamina', entityId: 'fury', value: 25 }, { kind: 'fury-triggers', entityId: 'fury', firstDamageRound: 1, windedTriggered: false }] }));
+    await writeFile(
+      cmd,
+      JSON.stringify({
+        kind: 'manual',
+        id: 'correct-stamina',
+        reason: 'Table correction example; preserve the already used first-damage trigger',
+        changes: [
+          { kind: 'stamina', entityId: 'fury', value: 25 },
+          { kind: 'fury-triggers', entityId: 'fury', firstDamageRound: 1, windedTriggered: false },
+        ],
+      }),
+    );
     await runCli(['submit', path, cmd]);
     assert.equal(currentState(await readRun(path)).entities.fury!.stamina, 25);
     await runCli(['back', path]);
     assert.equal(currentState(await readRun(path)).entities.fury!.stamina, 26);
     await runCli(['forward', path]);
     assert.equal(currentState(await readRun(path)).entities.fury!.stamina, 25);
-  } finally { await rm(dir, { recursive: true, force: true }); }
+  } finally {
+    await rm(dir, { recursive: true, force: true });
+  }
 });
