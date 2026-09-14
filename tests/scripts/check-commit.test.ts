@@ -87,6 +87,13 @@ describe('check-commit', () => {
       )[0],
     ).toMatch(/Rules-Review/);
   });
+  test('Rules-Review: required (pending) is accepted only outside merge mode', () => {
+    const pending = good.replace('Rules-Review: not required', 'Rules-Review: required (pending)');
+    expect(validateMessage(pending, context())).toEqual([]);
+    expect(validateMessage(pending, context({ merge: true }))).toEqual([
+      '"Rules-Review: required (pending)" must be replaced by the rules reviewer\'s verdict before merging to main.',
+    ]);
+  });
   test('Slice: none is accepted with a matching scope', () => {
     const message = good.replace('feat(A05)', 'docs(none)').replace('Slice: A05', 'Slice: none');
     expect(validateMessage(message, context({ touched: ['docs/x.md'] }))).toEqual([]);

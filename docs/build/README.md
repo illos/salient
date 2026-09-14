@@ -114,6 +114,8 @@ merging; with `--merge`, `Reviewed-By:` with a `pass` verdict is required on eve
 code (a path outside `docs/` that is not `*.md`). `Spec:` anchors resolve against the staged tree in
 the hook and against each commit's own tree for `--rev`/`--range`. CI runs the checker over the pushed
 range. `SKIP_SIMPLE_GIT_HOOKS=1` bypasses the hook for an emergency; do not use it for slice commits.
+A slice that requires a rules review commits with `Rules-Review: required (pending)` until the
+reviewer's verdict exists; the checker accepts that value without `--merge` and rejects it with it.
 The checker also enforces two conventions the example above shows but the prose did not state: the
 summary is lower case and does not end with a period, and every non-`docs`/`chore` type needs
 `Verified:` even when only documentation paths are touched.

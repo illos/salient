@@ -8,6 +8,8 @@
  *
  * Without --merge, `Reviewed-By:` is optional: the hook runs before an independent review can exist.
  * With --merge (the lead's pre-merge check), `Reviewed-By:` is required for code commits.
+ * `Rules-Review: required (pending)` is accepted without --merge (the slice awaits its rules review)
+ * and rejected with it.
  * Spec anchors resolve against the staged tree for the hook, or the commit's own tree for --rev/--range.
  */
 import { execFileSync } from 'node:child_process';
@@ -161,9 +163,14 @@ export function validateMessage(raw: string, context: CommitContext): string[] {
     failures.push(
       'Missing "Rules-Review:" trailer ("not required" is an explicit value, not an omission).',
     );
-  else if (rules !== 'not required' && !VERDICT.test(rules))
+  else if (rules === 'required (pending)') {
+    if (context.merge)
+      failures.push(
+        '"Rules-Review: required (pending)" must be replaced by the rules reviewer\'s verdict before merging to main.',
+      );
+  } else if (rules !== 'not required' && !VERDICT.test(rules))
     failures.push(
-      '"Rules-Review:" must be "not required" or "<reviewer label> (<verdict>, YYYY-MM-DD)".',
+      '"Rules-Review:" must be "not required", "required (pending)" or "<reviewer label> (<verdict>, YYYY-MM-DD)".',
     );
 
   const vendor = context.touched.filter(path => path.startsWith('vendor/'));
