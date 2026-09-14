@@ -25,7 +25,7 @@ A08 design tokens (independent) ────────────────
 | Id | Slice | Family | Depends on | Rules review | Status | Team | Updated | Commits |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | S00 | [Process tooling, CI, lint, commit checker](S00-process-tooling.md) | S | None | not required | Committed | lead/S00-impl | 2026-09-14 | d5b2765, d67e5bd, c9114b6, 2b3f6db, 5b864dc, 1e0bb50 |
-| S01 | [Content pipeline from the pinned Compendium](S01-content-pipeline.md) | S | None | required | In progress | lead/S01-impl | 2026-09-14 | |
+| S01 | [Content pipeline from the pinned Compendium](S01-content-pipeline.md) | S | None | required | Committed (review deferred to user audit thread) | lead/S01-impl | 2026-09-14 | 2023d41, 79a6d86, a73ac74, 7844def |
 | S02 | [Data contracts: encounter, events, journal, dice](S02-data-contracts.md) | S | None | not required | Committed (review deferred to user audit thread) | lead/S02-impl | 2026-09-14 | bfd7485, 97a555b, 00958e3, e106a7d |
 | R01 | [Level-one devil Fury decision table](R01-fury-decision-table.md) | R | S01 (soft) | required | Committed | rules/R01-research | 2026-09-14 | 2fe311b |
 | R02 | [Derived values and evaluator contract](R02-derived-values-evaluator.md) | R | R01 | required | Committed (review deferred to user audit thread) | rules/R02-research | 2026-09-14 | be11576 |
@@ -39,7 +39,7 @@ A08 design tokens (independent) ────────────────
 | A05 | [Attacks, damage, costs and common actions](A05-attacks-damage-costs.md) | A | A04, R04 | required | Not started | | | |
 | A06 | [History: undo, redo and corrections](A06-history-undo-corrections.md) | A | A04 (A05 for correction cards) | required | Not started | | | |
 | A07 | [Closeout and Void](A07-closeout-and-void.md) | A | A05, A06 | required | Not started | | | |
-| A08 | [Design tokens and theme migration](A08-design-tokens-theme.md) | A | None | not required | In progress | app/A08-impl | 2026-09-14 | |
+| A08 | [Design tokens and theme migration](A08-design-tokens-theme.md) | A | None | not required | Committed (review deferred to user audit thread; browser tests ran pre-rebase only) | app/A08-impl | 2026-09-14 | 283bb09, 8c273ff |
 | A09 | [v0.01 acceptance walkthrough](A09-v001-acceptance.md) | A | A02, A05, A06, A07 | required | Not started | | | |
 
 ## V1 slices (start after A09 is Committed)
