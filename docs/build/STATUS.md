@@ -39,7 +39,7 @@ A08 design tokens (independent) ────────────────
 | A05 | [Attacks, damage, costs and common actions](A05-attacks-damage-costs.md) | A | A04, R04 | required | Not started | | | |
 | A06 | [History: undo, redo and corrections](A06-history-undo-corrections.md) | A | A04 (A05 for correction cards) | required | Not started | | | |
 | A07 | [Closeout and Void](A07-closeout-and-void.md) | A | A05, A06 | required | Not started | | | |
-| A08 | [Design tokens and theme migration](A08-design-tokens-theme.md) | A | None | not required | Not started | | | |
+| A08 | [Design tokens and theme migration](A08-design-tokens-theme.md) | A | None | not required | In progress | app/A08-impl | 2026-09-14 | |
 | A09 | [v0.01 acceptance walkthrough](A09-v001-acceptance.md) | A | A02, A05, A06, A07 | required | Not started | | | |
 
 ## V1 slices (start after A09 is Committed)
