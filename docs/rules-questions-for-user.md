@@ -347,22 +347,6 @@ are the shared lifecycle decisions; the remaining entries are bounded content/sc
 - **Blocked until answered:** nothing in v0.01 (the journey admits one hero once). Re-attachment is V1.
 - **Answer:**
 
-### Q-A-600: May a player undo their own Take turn?
-
-- **Status:** open
-- **Raised by:** A06, 2026-09-14
-- **Where:** `docs/table-spec.md#undo-permissions-and-proposed-campaign-control` (turn start as the
-  outer limit; undoing End turn is settled), `docs/table-spec.md#taking-a-turn`.
-- **Conflict or gap:** The spec makes turn start the outer limit of the player window and settles
-  undoing End turn, but does not say whether the player's own Take turn (which starts that turn and
-  dispatches its turn-start work) is inside or outside the window.
-- **Options:** A: Take turn is the limit itself; only the Director rewinds it. B: the player may undo
-  their own Take turn when nothing intervened, reopening the choice of who acts.
-- **Recommendation:** A, applied provisionally. "Turn start" reads most naturally as the boundary,
-  and the Director already rewinds it sequentially.
-- **Blocked until answered:** nothing; A applied provisionally in `playerWindow`.
-- **Answer:**
-
 ### Q-A-601: Does Enable user undo also remove the acting player's post-roll correction window?
 
 - **Status:** open
@@ -415,6 +399,24 @@ No user approval is implied by this classification.
   [the audit](build/audits/2026-09-14-question-queue-dedup.md).
 
 ## Resolved questions
+
+### Q-A-600: May a player undo their own Take turn?
+
+- **Status:** resolved 2026-09-14; [recorded decision](table-spec.md#undo-permissions-and-proposed-campaign-control)
+- **Raised by:** A06, 2026-09-14
+- **Where:** `docs/table-spec.md#undo-permissions-and-proposed-campaign-control` (turn start as the
+  outer limit; undoing End turn is settled), `docs/table-spec.md#taking-a-turn`.
+- **Conflict or gap:** The spec makes turn start the outer limit of the player window and settles
+  undoing End turn, but does not say whether the player's own Take turn (which starts that turn and
+  dispatches its turn-start work) is inside or outside the window.
+- **Options:** A: Take turn is the limit itself; only the Director rewinds it. B: the player may undo
+  their own Take turn when nothing intervened, reopening the choice of who acts.
+- **Recommendation:** A, applied provisionally. "Turn start" reads most naturally as the boundary,
+  and the Director already rewinds it sequentially.
+- **Blocked until answered:** answered; option A is confirmed. Implementation verification remains
+  with A06.
+- **Answer:** Director only. A player may not undo their own Take turn, even before any other
+  action. The Director uses the existing sequential rewind path and its encounter/session limits.
 
 ### Q-R-3: Is regained Stamina capped at the Stamina maximum?
 

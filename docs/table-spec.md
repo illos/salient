@@ -2742,6 +2742,12 @@ is superseded by the current sequential model. The Director must unwind the corr
 the earlier action. Ordinary corrections to older events likewise require full sequential rewind
 once later gameplay has committed. Valid source-specific responses retain their separate semantics.
 
+Confirmed 2026-09-14 (Q-A-600): only the Director may undo **Take turn**, using sequential rewind
+within the existing encounter/session limits. A player cannot undo their own Take turn even if they
+clicked it by mistake and nothing else has happened. The initiating turn-start operation is outside
+the player undo window. Director rewind restores the recorded turn-start state and its linked
+consequences without rerunning rules or dice; it cannot skip intervening gameplay.
+
 The existing turn-start and FreePlay-stretch limits still provide outer boundaries. A player cannot skip
 an intervening action, selectively remove an earlier grant, or pull another character's accepted response
 into a player-initiated undo cascade. Director rewind proceeds sequentially through the intervening actions,

@@ -155,8 +155,11 @@ journaling the target's temporary Stamina and Stamina. A05 replaces it with the 
 
 ### Interpretations recorded here, not rules
 
-1. The player's own **Take turn** is not undoable by the player (turn start is the outer limit of the
-   window; the spec settles undoing End turn, not Take turn). The Director rewinds it. Q-A-600.
+1. **Now confirmed by the user, 2026-09-14 (Q-A-600):** the player's own **Take turn** is not
+   player-undoable, even if nothing else has happened. Only the Director rewinds it through the
+   existing sequential history path. See the [owning contract](../table-spec.md#undo-permissions-and-proposed-campaign-control).
+   Verify the initiating Take turn and its linked turn-start consequences remain outside the player
+   window; this decision does not certify the implementation.
 2. A **Director adjustment or correction on the player's hero** is the Director's entry, closes the
    player window and is not player-undoable; other operations the Director issues *for* a hero
    (`@Thorn /hero recover`) are that character's actions and are player-undoable.
