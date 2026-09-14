@@ -300,6 +300,14 @@ required source/dependency records. Manifests identify source commits where appl
 format/importer/parser versions. A pack-qualified identity plus revision identifies a definition; names and
 filenames are display/location information. See the proposed common pack contract below.
 
+Implementation note (S01, 2026-09-14): the first instance of this direction is the generated snapshot in
+`shared/content/compendium/` (`scripts/build-content.ts`, schema in `shared/content/README.md`): a manifest
+with the Compendium revision, generator version, generation date, included entries, recorded exclusions and
+gaps, plus one entry per source file with verbatim text and unrenamed frontmatter fields. It is not yet a pack
+with a pack id, format version or dependency records; those remain proposed below. `convex/contentTables.ts`
+and `convex/content.ts` are the initial Convex mirror, reseeded wholesale under the pre-alpha disposable-data
+policy.
+
 Propose an initial Convex mirror for indexed library reads and authoritative application lookups. Load summary
 fields for browsing and full definitions when opened or needed. Keep the package portable so public immutable
 content can later move to cacheable static delivery without changing the engine or saved-character contracts.

@@ -503,7 +503,8 @@ Use Convex for persistent application state and shared client updates. Keep game
 standalone engine boundary invoked by the application service. Whether that integration is in-process or
 across a service boundary remains an integration decision within the selected TypeScript approach.
 Checkout state, 2026-09-14: the Convex backend (`convex/`) and web client (`web/`) do not import the `src/`
-engine; only `scripts/build-foe-source.ts` imports `src/content.ts` for the reviewed foe source projection.
+engine. The retained `src/content.ts` experiment loader is no longer imported by any script: S01 replaced the
+foe source projection with the generated content snapshot (`scripts/build-content.ts`, `shared/content/`).
 The engine is not yet integrated with the application service.
 
 The [v1 tech stack](v1-tech-stack-spec.md) records the recommended React frontend, selected Better Auth,

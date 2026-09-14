@@ -13,7 +13,7 @@ Baseline: `5efb7c7` (clean checkout); TypeScript check and all 28 existing Node 
 ## Current ownership and working slice
 
 - Lead now owns the integrated app: root package/lock/config, `convex/`, `web/`, `shared/`, new app scripts/tests and this status file. Backend and character/foe workers returned their slices; independent review fixes are integrated.
-- Existing `src/`, the original Node tests and both vendored pins remain unchanged. `scripts/build-foe-source.ts` copies only the reviewed Goblin Warrior source projection at the existing pin.
+- Existing `src/`, the original Node tests and both vendored pins remain unchanged. S01 replaced `scripts/build-foe-source.ts` with `scripts/build-content.ts`, which generates the v0.01 content snapshot (`shared/content/compendium/`) at the existing pin.
 - The rules thread owns its status, kickoff and mechanical specification changes. Its concurrent edits are preserved and are not app implementation.
 
 Working user journeys:

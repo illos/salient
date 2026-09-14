@@ -3,7 +3,7 @@ import { describe, expect, test } from 'vitest';
 import { convexTest } from 'convex-test';
 import betterAuthTest from '@convex-dev/better-auth/test';
 import schema from '../../convex/schema';
-import { api, components } from '../../convex/_generated/api';
+import { api, components, internal } from '../../convex/_generated/api';
 
 const modules = import.meta.glob('../../convex/**/*.ts');
 async function setup() {
@@ -47,6 +47,11 @@ async function setup() {
     name: 'Foe test',
   });
   await t.run(ctx => ctx.db.insert('memberships', { campaignId, userId: player.userId }));
+  // The catalog reads the content snapshot; a fresh deployment has none until it is reseeded.
+  await expect(director.client.query(api.foes.catalog, { campaignId })).rejects.toThrow(
+    'content:seed',
+  );
+  await t.mutation(internal.content.reseed, {});
   const catalog = await director.client.query(api.foes.catalog, { campaignId });
   return { t, director, player, outsider, campaignId, catalog };
 }
@@ -68,16 +73,16 @@ describe('persistent campaign foes', () => {
     expect((await player.client.query(api.foes.list, { campaignId })).rows).toEqual([]);
     const loaded = await director.client.query(api.foes.detail, { campaignId, foeId: first });
     const snapshot = JSON.parse(loaded.sourceSnapshot);
-    expect(snapshot.source).toMatchObject({
+    // Source: vendor/steel-compendium/en/unified/md/monster/goblin/statblock/goblin-warrior.md
+    // (frontmatter `stamina: "15"`) and its JSON twin's features array.
+    expect(snapshot).toMatchObject({
       id: 'mcdm.monsters.v1/monster.goblin.statblock/goblin-warrior',
+      name: 'Goblin Warrior',
       revision: 'fb83a789da8f0327a389c277a0c790b1648d5810',
+      structured: { stamina: '15' },
     });
-    expect(snapshot.baseline.maxStamina).toBe(15);
-    expect(snapshot.abilities.map((ability: { name: string }) => ability.name)).toEqual([
-      'Spear Charge',
-      'Bury the Point',
-    ]);
-    expect(snapshot.text).toContain('Crafty');
+    expect(snapshot.text).toContain('> ⭐️ **Crafty**');
+    expect(await t.run(async ctx => (await ctx.db.get(first))?.maxStamina)).toBe(15);
     await t.run(ctx => ctx.db.patch(first, { live: { stamina: 3, temporaryStamina: 0 } }));
     await director.client.mutation(api.foes.setVisible, {
       campaignId,

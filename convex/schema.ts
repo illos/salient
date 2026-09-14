@@ -1,11 +1,13 @@
 import { defineSchema, defineTable } from 'convex/server';
 import { v } from 'convex/values';
 import { characterTables } from './characterTables';
+import { contentTables } from './contentTables';
 import { foeTables } from './foeTables';
 import { dieResult, encounterTables, eventDisposition, eventOrigin } from './encounterTables';
 
 export default defineSchema({
   ...characterTables,
+  ...contentTables,
   ...foeTables,
   ...encounterTables,
   users: defineTable({ authId: v.string(), displayName: v.string() }).index('by_authId', [

@@ -1,13 +1,38 @@
 // SPDX-License-Identifier: GPL-3.0-only
 import { ConvexError, v } from 'convex/values';
 import { mutation, query } from './_generated/server';
-import type { Id } from './_generated/dataModel';
+import type { Doc, Id } from './_generated/dataModel';
 import { requireDirector, requireMember, requireUser, type ReadCtx } from './lib/access';
 import { command } from './lib/commands';
 import { appendEvent } from './lib/events';
-import warrior from '../shared/goblin-warrior.json';
+import { requireContent } from './content';
 
-const sourceSnapshot = JSON.stringify(warrior);
+// The only foe definition available in v0.01: the Goblin Warrior entry of the content snapshot.
+export const GOBLIN_WARRIOR_ID = 'mcdm.monsters.v1/monster.goblin.statblock/goblin-warrior';
+
+/** Immutable copy of the source entry stored with each instance, separate from its play state. */
+function snapshotOf(entry: Doc<'content'>): string {
+  return JSON.stringify({
+    id: entry.contentId,
+    name: entry.name,
+    sourcePath: entry.sourcePath,
+    revision: entry.revision,
+    text: entry.text,
+    structured: entry.structured,
+  });
+}
+/**
+ * The printed Stamina of a stat block (frontmatter `stamina`, a string such as "15"). Only a plain
+ * whole number is accepted; anything else stays unresolved rather than becoming a default.
+ */
+function printedStamina(entry: Doc<'content'>): number {
+  const printed: unknown = (entry.structured as Record<string, unknown> | null)?.stamina;
+  if (typeof printed !== 'string' || !/^\d+$/.test(printed))
+    throw new ConvexError(
+      `${entry.name}: printed Stamina "${String(printed)}" is not a whole number.`,
+    );
+  return Number(printed);
+}
 async function settings(ctx: ReadCtx, campaignId: Id<'campaigns'>) {
   return ctx.db
     .query('foeSettings')
@@ -72,7 +97,8 @@ export const catalog = query({
   handler: async (ctx, args) => {
     const user = await requireUser(ctx);
     await requireDirector(ctx, args.campaignId, user._id);
-    return { definitionId: warrior.source.id, name: warrior.name, sourceSnapshot };
+    const entry = await requireContent(ctx, GOBLIN_WARRIOR_ID);
+    return { definitionId: entry.contentId, name: entry.name, sourceSnapshot: snapshotOf(entry) };
   },
 });
 export const detail = query({
@@ -93,8 +119,10 @@ export const add = mutation({
     await requireDirector(ctx, args.campaignId, user._id);
     const receipt = await command(ctx, user._id, args.commandId, 'foes.add', args);
     if (receipt.previous) return receipt.previous.result as Id<'foes'>;
-    if (args.definitionId !== warrior.source.id)
+    if (args.definitionId !== GOBLIN_WARRIOR_ID)
       throw new ConvexError('This foe definition is not available in the prototype.');
+    const entry = await requireContent(ctx, GOBLIN_WARRIOR_ID);
+    const maxStamina = printedStamina(entry);
     const existing = await ctx.db
       .query('foes')
       .withIndex('by_campaign', q => q.eq('campaignId', args.campaignId))
@@ -104,14 +132,11 @@ export const add = mutation({
     const visible = (await settings(ctx, args.campaignId))?.addVisible ?? false;
     const foeId = await ctx.db.insert('foes', {
       campaignId: args.campaignId,
-      name: warrior.name,
+      name: entry.name,
       visible,
-      sourceSnapshot,
-      maxStamina: warrior.baseline.maxStamina,
-      live: {
-        stamina: warrior.initialLive.stamina,
-        temporaryStamina: warrior.initialLive.temporaryStamina,
-      },
+      sourceSnapshot: snapshotOf(entry),
+      maxStamina,
+      live: { stamina: maxStamina, temporaryStamina: 0 },
     });
     await appendEvent(ctx, {
       campaignId: args.campaignId,
@@ -119,7 +144,7 @@ export const add = mutation({
       actor: user,
       commandId: args.commandId,
       kind: 'foe-added',
-      description: `${warrior.name} added to the foes roster.`,
+      description: `${entry.name} added to the foes roster.`,
     });
     await receipt.save(foeId);
     return foeId;

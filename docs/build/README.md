@@ -155,7 +155,9 @@ deployment. Development data remains disposable; reset and reseed rather than mi
 (ESLint, then Prettier `--check`), `pnpm check:engine` (engine typecheck and Vitest `engine` project),
 `pnpm check:app` (app typecheck and Vitest `app` and `scripts` projects), `pnpm check-links`
 (relative links and anchors in `docs/`, `README.md`, `CLAUDE.md`, `agent.MD`), `pnpm check-vendor`
-(every `vendor/` submodule at its pinned commit and unmodified), `pnpm foes:source` and `pnpm build`.
+(every `vendor/` submodule at its pinned commit and unmodified), `pnpm content:check` (S01: the generated
+content snapshot regenerates byte-for-byte from the clean pin; it replaced `pnpm foes:source`) and
+`pnpm build`.
 Browser tests (`pnpm test:browser`) are required for slices that change UI flows and need both dev
 servers running. Every `A` slice adds tests at the shared-operation level (convex-test) before UI
 tests. The commit checker runs in the `commit-msg` hook and in CI (`.github/workflows/check.yml`),

@@ -1,0 +1,135 @@
+// SPDX-License-Identifier: GPL-3.0-only
+import { describe, expect, test } from 'vitest';
+import { convexTest } from 'convex-test';
+import betterAuthTest from '@convex-dev/better-auth/test';
+import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import schema from '../../convex/schema';
+import { api, components, internal } from '../../convex/_generated/api';
+
+// Expected values come from the pinned source files and the checked-in manifest, not from the
+// queries under test (docs/build/README.md#review-standard).
+
+const modules = import.meta.glob('../../convex/**/*.ts');
+const root = fileURLToPath(new URL('../../', import.meta.url));
+const GOBLIN_WARRIOR = 'mcdm.monsters.v1/monster.goblin.statblock/goblin-warrior';
+const warriorSource = readFileSync(
+  `${root}vendor/steel-compendium/en/unified/md/monster/goblin/statblock/goblin-warrior.md`,
+  'utf8',
+);
+const manifest = JSON.parse(
+  readFileSync(`${root}shared/content/compendium/manifest.json`, 'utf8'),
+) as { compendium: { revision: string }; entryCount: number; contentHash: string };
+
+async function setup() {
+  const t = convexTest(schema, modules);
+  betterAuthTest.register(t);
+  const now = Date.now();
+  const auth = await t.mutation(components.betterAuth.adapter.create, {
+    input: {
+      model: 'user',
+      data: {
+        name: 'reader',
+        email: 'reader@example.test',
+        emailVerified: false,
+        createdAt: now,
+        updatedAt: now,
+      },
+    },
+  });
+  const session = await t.mutation(components.betterAuth.adapter.create, {
+    input: {
+      model: 'session',
+      data: {
+        userId: auth._id,
+        token: 'reader-token',
+        expiresAt: now + 3600000,
+        createdAt: now,
+        updatedAt: now,
+      },
+    },
+  });
+  const reader = t.withIdentity({ subject: auth._id, sessionId: session._id });
+  await reader.mutation(api.auth.ensureProfile, {});
+  return { t, reader };
+}
+describe('shared content snapshot', () => {
+  test('reseed loads every manifest entry; queries return the Goblin Warrior source verbatim', async () => {
+    const { t, reader } = await setup();
+    expect(await reader.query(api.content.status, {})).toBeNull();
+    expect(await reader.query(api.content.get, { id: GOBLIN_WARRIOR })).toBeNull();
+    const result = await t.mutation(internal.content.reseed, {});
+    expect(result).toEqual({
+      revision: manifest.compendium.revision,
+      entryCount: manifest.entryCount,
+    });
+    // Read the persisted rows back rather than trusting the mutation's return value.
+    const rows = await t.run(ctx => ctx.db.query('content').take(5000));
+    expect(rows).toHaveLength(manifest.entryCount);
+    expect(new Set(rows.map(row => row.contentId)).size).toBe(manifest.entryCount);
+    const status = await reader.query(api.content.status, {});
+    expect(status).toMatchObject({
+      revision: 'fb83a789da8f0327a389c277a0c790b1648d5810',
+      contentHash: manifest.contentHash,
+      entryCount: manifest.entryCount,
+    });
+    const warrior = await reader.query(api.content.get, { id: GOBLIN_WARRIOR });
+    expect(warrior).toMatchObject({
+      id: GOBLIN_WARRIOR,
+      kind: 'statblock',
+      name: 'Goblin Warrior',
+      sourcePath:
+        'vendor/steel-compendium/en/unified/md/monster/goblin/statblock/goblin-warrior.md',
+      revision: manifest.compendium.revision,
+    });
+    expect(warrior!.text).toBe(warriorSource);
+    // Printed values from the source frontmatter (goblin-warrior.md lines 2-21), unrenamed.
+    expect(warrior!.structured).toMatchObject({ stamina: '15', size: '1S', might: -2, level: 1 });
+  });
+
+  test('list returns the nine condition entries by kind, without their text', async () => {
+    const { t, reader } = await setup();
+    await t.mutation(internal.content.reseed, {});
+    const conditions = await reader.query(api.content.list, { kind: 'condition' });
+    // vendor/steel-compendium/en/unified/md/_index/condition.md: "Total: 9".
+    expect(conditions.map(row => row.name)).toEqual([
+      'Bleeding',
+      'Dazed',
+      'Frightened',
+      'Grabbed',
+      'Prone',
+      'Restrained',
+      'Slowed',
+      'Taunted',
+      'Weakened',
+    ]);
+    expect(conditions[0]).not.toHaveProperty('text');
+    expect(await reader.query(api.content.list, { kind: 'no-such-kind' })).toEqual([]);
+  });
+
+  test('reseed replaces rows instead of accumulating them, and reads require sign-in', async () => {
+    const { t, reader } = await setup();
+    await t.mutation(internal.content.reseed, {});
+    await t.run(ctx =>
+      ctx.db.insert('content', {
+        contentId: 'stale/entry',
+        kind: 'rule',
+        name: 'Stale',
+        sourcePath: 'nowhere',
+        selection: 'none',
+        revision: 'old',
+        text: '',
+        structured: {},
+      }),
+    );
+    await t.mutation(internal.content.reseed, {});
+    const rows = await t.run(ctx => ctx.db.query('content').take(5000));
+    expect(rows).toHaveLength(manifest.entryCount);
+    expect(rows.some(row => row.contentId === 'stale/entry')).toBe(false);
+    expect(await t.run(ctx => ctx.db.query('contentManifest').take(10))).toHaveLength(1);
+    await expect(t.query(api.content.get, { id: GOBLIN_WARRIOR })).rejects.toThrow('Sign in');
+    await expect(t.query(api.content.list, { kind: 'condition' })).rejects.toThrow('Sign in');
+    await expect(t.query(api.content.status, {})).rejects.toThrow('Sign in');
+    expect(await reader.query(api.content.get, { id: 'missing/id' })).toBeNull();
+  });
+});

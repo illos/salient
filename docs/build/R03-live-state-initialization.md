@@ -52,7 +52,7 @@ gap G3. Saving a draft must never reset play state; that boundary is part of thi
 
 ## Inputs and dependencies
 
-R02 committed. `shared/goblin-warrior.json` for the foe example.
+R02 committed. The Goblin Warrior entry of the S01 content snapshot (`shared/content/compendium/statblock.json`, id `mcdm.monsters.v1/monster.goblin.statblock/goblin-warrior`) for the foe example.
 
 ## Deliverables
 
@@ -67,7 +67,7 @@ R02 committed. `shared/goblin-warrior.json` for the foe example.
 1. Every initial value cites its source sentence or the ruling that sets it.
 2. The hero-fixture projection lists every ability the R02 baseline grants, with verbatim source text
    attached, and no ability the source does not grant.
-3. The Goblin Warrior projection matches `shared/goblin-warrior.json` values exactly.
+3. The Goblin Warrior projection matches the printed values of the S01 content entry (`structured` and `features` in `shared/content/compendium/statblock.json`) exactly.
 4. The contract states in one sentence what happens to live values on draft save and on re-evaluation.
 5. Types compile; no logic.
 6. Reviewer confirms the source citations.

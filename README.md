@@ -49,7 +49,9 @@ No Cloudflare or Convex Cloud deployment has been performed.
 
 ```sh
 pnpm check          # Existing engine + application typechecks and behavior tests, then web build
-pnpm foes:source    # Verify generated foe snapshot against the unchanged pinned corpus
+pnpm content:check  # Verify the generated content snapshot against the unchanged pinned corpus
+pnpm content:build  # Regenerate shared/content/compendium after a reviewed pin change
+pnpm content:seed   # Load the snapshot into the local development deployment (disposable data)
 pnpm exec playwright install chromium
 pnpm test:browser   # Requires both development servers above; creates disposable test accounts/data
 ```
@@ -57,7 +59,8 @@ pnpm test:browser   # Requires both development servers above; creates disposabl
 The browser scenario uses separate Director/player/observer contexts, real sign-up/sign-in/out, invitations,
 reactive foe visibility, session lifecycle, network interruption/reload, private draft readback and headless
 application calls. See [app status](docs/workstream-app-status.md) for evidence and remaining contracts.
-The source snapshot generator is `scripts/build-foe-source.ts`; builds never advance a submodule pin.
+The content snapshot generator is `scripts/build-content.ts` (see `shared/content/README.md`); builds never
+advance a submodule pin. A fresh local deployment has no content rows until `pnpm content:seed` runs.
 
 ## Headless application operations
 

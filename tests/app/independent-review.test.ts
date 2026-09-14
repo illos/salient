@@ -3,7 +3,7 @@ import { test, expect } from 'vitest';
 import { convexTest } from 'convex-test';
 import betterAuthTest from '@convex-dev/better-auth/test';
 import schema from '../../convex/schema';
-import { api, components } from '../../convex/_generated/api';
+import { api, components, internal } from '../../convex/_generated/api';
 const modules = import.meta.glob('../../convex/**/*.ts');
 async function setup() {
   const t = convexTest(schema, modules);
@@ -128,11 +128,12 @@ test('independent: simultaneous same-command submissions persist exactly once', 
 });
 test('independent: cyclic visibility intent after a lost reply applies the new command', async () => {
   const { CommandIdentities } = await import('../../web/command-identities');
-  const { owner } = await setup();
+  const { t, owner } = await setup();
   const campaignId = await owner.client.mutation(api.campaigns.create, {
     name: 'Campaign',
     commandId: 'review-toggle-campaign',
   });
+  await t.mutation(internal.content.reseed, {});
   const catalog = await owner.client.query(api.foes.catalog, { campaignId });
   const foeId = await owner.client.mutation(api.foes.add, {
     campaignId,

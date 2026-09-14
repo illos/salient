@@ -16,10 +16,11 @@ Draw Steel is an MCDM Productions, LLC game. The Steel Compendium corpus and the
 
 The Compendium dependency is documented in [docs/steel-compendium.md](docs/steel-compendium.md). Content and artwork distribution terms must be established for the material actually shipped; no artwork has been selected for the wizard.
 
-The local prototype's `shared/goblin-warrior.json` is a generated snapshot of the Goblin Warrior definition
-at Compendium revision `fb83a789da8f0327a389c277a0c790b1648d5810`, including original rule text.
-It retains game-content provenance and is not GPL application code. The snapshot is served only through
-authorized Director operations; it is not included in the browser bundle. No new artwork is included.
+The generated snapshot in `shared/content/compendium/` (see `shared/content/README.md`) copies the v0.01
+selection of Compendium entries at revision `fb83a789da8f0327a389c277a0c790b1648d5810`, including original
+rule text. It retains game-content provenance and is not GPL application code; each entry records its source
+path and identity. The snapshot is bundled into the Convex backend and served only through authenticated
+application operations; it is not included in the browser bundle. No new artwork is included.
 
 ## Tooling
 

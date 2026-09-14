@@ -8,7 +8,11 @@ Local path: [`vendor/steel-compendium`](../vendor/steel-compendium).
 
 This is a **Git submodule**. The parent repository records an exact dependency commit; `.gitmodules` records its URL and upstream branch. Tracking `main` does not automatically update installed content.
 
-Initial revision: `fb83a789da8f0327a389c277a0c790b1648d5810`, upstream tag `v4.20260908021459`, dated 2026-09-08. This note records the initial version; Git's submodule pointer is authoritative after updates. Verified 2026-09-14: `git submodule status` still reports this revision and tag, and `src/content.ts` and `scripts/build-foe-source.ts` pin the same SHA.
+Initial revision: `fb83a789da8f0327a389c277a0c790b1648d5810`, upstream tag `v4.20260908021459`, dated 2026-09-08. This note records the initial version; Git's submodule pointer is authoritative after updates. Verified 2026-09-14: `git submodule status` still reports this revision and tag, and `src/content.ts` pins the same SHA.
+
+## Generated content snapshot
+
+Implementation note (S01, 2026-09-14): the application does not read the submodule at runtime. `pnpm content:build` (`scripts/build-content.ts`) copies the v0.01 selection into `shared/content/compendium/` with a manifest whose `compendium.revision` is read from the submodule checkout and must equal the superproject's pin; the generator refuses a different or dirty checkout. `pnpm content:check`, part of `pnpm check`, regenerates in memory and fails on any difference, so a hand edit of a generated file or an unreviewed pin change is caught. The layout and field meanings are in [shared/content/README.md](../shared/content/README.md). After adopting a reviewed update (below), run `pnpm content:build`, review the diff of `shared/content/compendium/`, and reseed development deployments with `pnpm content:seed`.
 
 Historical note: when the dependency was added the project had no Git repository, so one was initialized locally with no remote or commits. `.gitmodules` and the dependency pointer have since been committed.
 

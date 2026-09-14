@@ -12,6 +12,8 @@ import type * as auth from "../auth.js";
 import type * as campaigns from "../campaigns.js";
 import type * as characterTables from "../characterTables.js";
 import type * as characters from "../characters.js";
+import type * as content from "../content.js";
+import type * as contentTables from "../contentTables.js";
 import type * as dice from "../dice.js";
 import type * as encounterTables from "../encounterTables.js";
 import type * as events from "../events.js";
@@ -38,6 +40,8 @@ declare const fullApi: ApiFromModules<{
   campaigns: typeof campaigns;
   characterTables: typeof characterTables;
   characters: typeof characters;
+  content: typeof content;
+  contentTables: typeof contentTables;
   dice: typeof dice;
   encounterTables: typeof encounterTables;
   events: typeof events;

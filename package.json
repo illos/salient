@@ -23,6 +23,7 @@
     "app": "node scripts/app.ts",
     "content:build": "node scripts/build-content.ts",
     "content:check": "node scripts/build-content.ts --check",
+    "content:seed": "node scripts/seed-content.ts",
     "setup:local": "node scripts/setup-local.ts",
     "prepare": "simple-git-hooks",
     "lint": "eslint . && prettier --check .",
