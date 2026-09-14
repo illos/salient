@@ -14,10 +14,12 @@ const url =
 const root = createRoot(document.getElementById('root')!);
 if (!url) {
   root.render(
-    <main className="auth-page">
+    <main className="flex min-h-screen flex-col items-center justify-center gap-3 bg-card p-16 text-center">
       <h1>Salient</h1>
       <p>Connect a development backend to open your table.</p>
-      <p>Follow the local setup in README.md, then restart the web server.</p>
+      <p className="text-muted-foreground">
+        Follow the local setup in README.md, then restart the web server.
+      </p>
     </main>,
   );
 } else {

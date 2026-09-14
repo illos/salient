@@ -1,4 +1,6 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import { useRef, useState } from 'react';
+import { cn } from 'cn';
 import { CommandIdentities } from './command-identities';
 
 export function errorMessage(error: unknown): string {
@@ -41,15 +43,95 @@ export function useCommand() {
 
 export function ErrorNotice({ error }: { error: string | null }) {
   return error ? (
-    <p className="error" role="alert">
+    <p
+      className="rounded-md border border-destructive/40 bg-destructive/10 px-3 py-2 text-sm whitespace-pre-wrap text-destructive [overflow-wrap:anywhere]"
+      role="alert"
+    >
       {error}
     </p>
   ) : null;
 }
 export function Loading({ children = 'Loading…' }: { children?: React.ReactNode }) {
   return (
-    <p className="muted" role="status">
+    <p className="text-sm text-muted-foreground" role="status">
       {children}
     </p>
+  );
+}
+
+/** A quiet informational notice on the surface tone. */
+export function Notice({
+  children,
+  role,
+  className,
+}: {
+  children: React.ReactNode;
+  role?: string;
+  className?: string;
+}) {
+  return (
+    <div
+      className={cn('border-l-2 border-rule-strong bg-muted px-3 py-2 text-sm', className)}
+      role={role}
+    >
+      {children}
+    </div>
+  );
+}
+
+/** Compact uppercase metadata line above a heading. */
+export function Eyebrow({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return <p className={cn('eyebrow mb-1', className)}>{children}</p>;
+}
+
+/** A section heading with the mockups' hard rule beneath it and an optional trailing slot. */
+export function SectionHeading({
+  children,
+  aside,
+  className,
+  as: Heading = 'h2',
+}: {
+  children: React.ReactNode;
+  aside?: React.ReactNode;
+  className?: string;
+  as?: 'h2' | 'h3';
+}) {
+  return (
+    <div
+      className={cn(
+        'rule-strong mb-4 flex flex-wrap items-end justify-between gap-x-4 gap-y-1 pb-2',
+        className,
+      )}
+    >
+      <Heading>{children}</Heading>
+      {aside !== undefined && <span className="eyebrow mb-0">{aside}</span>}
+    </div>
+  );
+}
+
+/** A vertical form field: uppercase label above a control, hint below. */
+export function Field({
+  label,
+  hint,
+  children,
+  className,
+}: {
+  label: React.ReactNode;
+  hint?: React.ReactNode;
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return (
+    <label className={cn('flex flex-col gap-1.5', className)}>
+      <span className="caps text-muted-foreground">{label}</span>
+      {children}
+      {hint && <span className="text-sm text-muted-foreground">{hint}</span>}
+    </label>
   );
 }

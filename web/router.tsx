@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-3.0-only
 import { useEffect, useState } from 'react';
 import {
   createRootRoute,
@@ -15,7 +16,12 @@ import type { Id } from '../convex/_generated/dataModel';
 import { authClient } from './auth-client';
 import { CampaignPage, CampaignsPage, JoinPage } from './campaigns';
 import { CharacterPage, CharactersPage } from './characters';
-import { ErrorNotice, Loading, errorMessage } from './ui';
+import { Button } from './components/ui/button';
+import { Card, CardContent } from './components/ui/card';
+import { Input } from './components/ui/input';
+import { ToggleGroup, ToggleGroupItem } from './components/ui/toggle-group';
+import { THEMES, useTheme, type Theme } from './theme';
+import { ErrorNotice, Eyebrow, Field, Loading, errorMessage } from './ui';
 
 function ConnectionStatus() {
   const convex = useConvex();
@@ -25,9 +31,78 @@ function ConnectionStatus() {
     [convex],
   );
   return (
-    <span className={online ? 'connection' : 'connection offline'} role="status">
+    <span
+      className={online ? 'caps text-success' : 'caps text-warning'}
+      role="status"
+      aria-live="polite"
+    >
       {online ? '● Connected' : '○ Reconnecting — changes may be pending'}
     </span>
+  );
+}
+
+const THEME_LABELS: Record<Theme, string> = { light: 'Light', dark: 'Dark', system: 'System' };
+
+/** Light / dark / system appearance switch; the preference is stored locally (see web/theme.ts). */
+export function ThemeSwitch() {
+  const { theme, setTheme } = useTheme();
+  return (
+    <ToggleGroup
+      aria-label="Appearance"
+      value={[theme]}
+      onValueChange={value => {
+        const next = value[0];
+        if (typeof next === 'string' && THEMES.includes(next as Theme)) setTheme(next as Theme);
+      }}
+      spacing={0}
+      className="rounded-md border border-rule-strong"
+    >
+      {THEMES.map(option => (
+        <ToggleGroupItem
+          key={option}
+          value={option}
+          aria-label={THEME_LABELS[option]}
+          className="caps h-7 rounded-none px-2.5 text-muted-foreground hover:text-foreground data-pressed:bg-secondary data-pressed:text-secondary-foreground"
+        >
+          {THEME_LABELS[option]}
+        </ToggleGroupItem>
+      ))}
+    </ToggleGroup>
+  );
+}
+
+function Wordmark() {
+  return (
+    <Link to="/" className="text-2xl font-bold tracking-tight hover:no-underline">
+      Salient
+    </Link>
+  );
+}
+
+function TopNav({ displayName }: { displayName: string }) {
+  const navItem =
+    'caps flex h-14 items-center border-b-2 border-transparent px-1 text-muted-foreground transition-colors duration-(--motion-fast) hover:text-foreground hover:no-underline data-[status=active]:border-primary data-[status=active]:text-foreground';
+  return (
+    <header className="rule-strong sticky top-0 z-40 bg-background">
+      <div className="mx-auto flex max-w-[1460px] items-center gap-6 px-9">
+        <Wordmark />
+        <span aria-hidden className="h-6 w-px bg-rule-strong" />
+        <nav aria-label="Primary" className="flex items-center gap-5">
+          <Link to="/" activeOptions={{ exact: true }} className={navItem}>
+            Campaigns
+          </Link>
+          <Link to="/characters" className={navItem}>
+            Characters
+          </Link>
+        </nav>
+        <div className="ml-auto flex items-center gap-4">
+          <ConnectionStatus />
+          <ThemeSwitch />
+          <span className="text-sm">{displayName}</span>
+          <SignOut />
+        </div>
+      </div>
+    </header>
   );
 }
 
@@ -40,54 +115,43 @@ function ProfileGate() {
   }, [viewer, ensure]);
   if (!viewer)
     return (
-      <main className="auth-page">
+      <CenteredPage>
         <Loading>Opening your workspace…</Loading>
         <ErrorNotice error={error} />
-        {error && <button onClick={() => window.location.reload()}>Retry</button>}
-      </main>
+        {error && <Button onClick={() => window.location.reload()}>Retry</Button>}
+      </CenteredPage>
     );
   return (
-    <div className="app" key={viewer.userId}>
-      <aside className="sidebar">
-        <Link className="brand" to="/">
-          S
-          <span>
-            Salient<small>DRAW STEEL COMPANION</small>
-          </span>
-        </Link>
-        <p className="eyebrow">Your workspace</p>
-        <nav>
-          <Link to="/" activeOptions={{ exact: true }}>
-            Campaigns
-          </Link>
-          <Link to="/characters">Characters</Link>
-        </nav>
-        <div className="sidebar-bottom">
-          <span className="badge">v0.01 · pre-alpha</span>
-          <p>{viewer.displayName}</p>
-          <SignOut />
-        </div>
-      </aside>
-      <div className="workspace">
-        <header className="topbar">
-          <span>A place for your next adventure</span>
-          <ConnectionStatus />
-        </header>
-        <main className="content">
-          <Outlet />
-        </main>
-      </div>
+    <div className="flex min-h-screen flex-col" key={viewer.userId}>
+      <TopNav displayName={viewer.displayName} />
+      <main className="mx-auto w-full max-w-[1460px] flex-1 px-9 pt-8 pb-16">
+        <Outlet />
+      </main>
+      <footer className="mx-auto w-full max-w-[1460px] px-9 pb-6">
+        <span className="eyebrow">v0.01 · pre-alpha</span>
+      </footer>
     </div>
   );
 }
+
+/** Full-height centred page used outside the signed-in shell. */
+function CenteredPage({ children }: { children: React.ReactNode }) {
+  return (
+    <main className="flex min-h-screen flex-col items-center justify-center gap-4 bg-card p-16">
+      {children}
+    </main>
+  );
+}
+
 function SignOut() {
   const navigate = useNavigate();
   const [error, setError] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
   return (
     <>
-      <button
-        className="secondary"
+      <Button
+        variant="outline"
+        size="sm"
         disabled={pending}
         onClick={async () => {
           setPending(true);
@@ -103,7 +167,7 @@ function SignOut() {
         }}
       >
         Sign out
-      </button>
+      </Button>
       <ErrorNotice error={error} />
     </>
   );
@@ -114,15 +178,15 @@ function Shell() {
   if (path === '/login') return <Outlet />;
   if (path.startsWith('/join/') && !isAuthenticated)
     return (
-      <main className="auth-page">
+      <CenteredPage>
         <Outlet />
-      </main>
+      </CenteredPage>
     );
   if (isLoading)
     return (
-      <main className="auth-page">
+      <CenteredPage>
         <Loading>Checking your session…</Loading>
-      </main>
+      </CenteredPage>
     );
   if (!isAuthenticated) return <Navigate to="/login" search={{ next: path }} replace />;
   return <ProfileGate />;
@@ -135,98 +199,120 @@ function Login() {
   const [error, setError] = useState<string | null>(null);
   if (isAuthenticated) return <Navigate to={next as '/'} replace />;
   return (
-    <main className="auth-page">
-      <div className="auth-intro">
-        <span className="eyebrow">DRAW STEEL · YOUR TABLE, TOGETHER</span>
-        <h1>
-          Every great story
-          <br />
-          starts at the table.
-        </h1>
-        <p>Bring your campaign, your characters and your next session together.</p>
-        <span className="badge">Salient · desktop pre-alpha</span>
-      </div>
-      <section className="panel auth-card">
-        <h2>{register ? 'Create your account' : 'Welcome back'}</h2>
-        <p className="muted">
-          {register ? 'A new seat at the table.' : 'Sign in to your campaigns.'}
-        </p>
-        <form
-          className="stack"
-          onSubmit={async event => {
-            event.preventDefault();
-            if (pending) return;
-            setPending(true);
-            setError(null);
-            const data = new FormData(event.currentTarget);
-            try {
-              const credentials = {
-                email: String(data.get('email')),
-                password: String(data.get('password')),
-              };
-              const result = register
-                ? await authClient.signUp.email({
-                    ...credentials,
-                    name: String(data.get('name')).trim(),
-                  })
-                : await authClient.signIn.email(credentials);
-              if (result.error)
-                throw new Error(result.error.message || 'Unable to sign in. Please try again.');
-            } catch (e) {
-              setError(errorMessage(e));
-            } finally {
-              setPending(false);
-            }
-          }}
-        >
-          {register && (
-            <label className="field">
-              Display name
-              <input name="name" autoComplete="nickname" required maxLength={80} />
-            </label>
-          )}
-          <label className="field">
-            Email
-            <input type="email" name="email" autoComplete="email" required />
-          </label>
-          <label className="field">
-            Password
-            <input
-              type="password"
-              name="password"
-              autoComplete={register ? 'new-password' : 'current-password'}
-              minLength={8}
-              maxLength={128}
-              required
-            />
-          </label>
-          <ErrorNotice error={error} />
-          <button disabled={pending || isLoading}>
-            {pending ? 'Please wait…' : register ? 'Create account' : 'Sign in'}
-          </button>
-        </form>
-        <button
-          className="text-button"
-          disabled={pending}
-          onClick={() => {
-            setRegister(!register);
-            setError(null);
-          }}
-        >
-          {register ? 'Already have an account? Sign in' : 'New here? Create an account'}
-        </button>
+    <main className="grid min-h-screen grid-cols-2">
+      <section className="flex flex-col justify-between border-r border-rule-strong bg-card p-12">
+        <div className="flex items-center justify-between">
+          <span className="text-2xl font-bold tracking-tight">Salient</span>
+          <ThemeSwitch />
+        </div>
+        <div className="max-w-xl">
+          <h1 className="text-4xl font-bold tracking-tighter">
+            Every great story
+            <br />
+            starts at the table.
+          </h1>
+          <p className="mt-6 max-w-sm text-lg text-muted-foreground">
+            Bring your campaign, your characters and your next session together.
+          </p>
+        </div>
+        <div className="flex items-center justify-between">
+          <span className="eyebrow mb-0">Pre-alpha</span>
+          <span className="eyebrow mb-0">Desktop first</span>
+        </div>
+      </section>
+      <section className="flex items-center justify-center bg-background p-12">
+        <div className="w-full max-w-md">
+          <Eyebrow>{register ? 'A new seat at the table' : 'Return to your tables'}</Eyebrow>
+          <h2 className="rule-strong pb-3 text-2xl">
+            {register ? 'Create your account' : 'Welcome back'}
+          </h2>
+          <form
+            className="mt-6 flex flex-col gap-4"
+            onSubmit={async event => {
+              event.preventDefault();
+              if (pending) return;
+              setPending(true);
+              setError(null);
+              const data = new FormData(event.currentTarget);
+              try {
+                const credentials = {
+                  email: String(data.get('email')),
+                  password: String(data.get('password')),
+                };
+                const result = register
+                  ? await authClient.signUp.email({
+                      ...credentials,
+                      name: String(data.get('name')).trim(),
+                    })
+                  : await authClient.signIn.email(credentials);
+                if (result.error)
+                  throw new Error(result.error.message || 'Unable to sign in. Please try again.');
+              } catch (e) {
+                setError(errorMessage(e));
+              } finally {
+                setPending(false);
+              }
+            }}
+          >
+            {register && (
+              <Field label="Display name">
+                <Input name="name" autoComplete="nickname" required maxLength={80} />
+              </Field>
+            )}
+            <Field label="Email">
+              <Input type="email" name="email" autoComplete="email" required />
+            </Field>
+            <Field label="Password">
+              <Input
+                type="password"
+                name="password"
+                autoComplete={register ? 'new-password' : 'current-password'}
+                minLength={8}
+                maxLength={128}
+                required
+              />
+            </Field>
+            <ErrorNotice error={error} />
+            <Button type="submit" size="lg" className="w-full" disabled={pending || isLoading}>
+              {pending ? 'Please wait…' : register ? 'Create account' : 'Sign in'}
+            </Button>
+            <Button
+              type="button"
+              variant="outline"
+              size="lg"
+              className="w-full"
+              disabled={pending}
+              onClick={() => {
+                setRegister(!register);
+                setError(null);
+              }}
+            >
+              {register ? 'Already have an account? Sign in' : 'New here? Create an account'}
+            </Button>
+          </form>
+        </div>
       </section>
     </main>
+  );
+}
+
+function ProblemCard({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <Card className="mx-auto mt-10 max-w-xl">
+      <CardContent className="flex flex-col gap-3">
+        <h1>{title}</h1>
+        {children}
+      </CardContent>
+    </Card>
   );
 }
 
 const rootRoute = createRootRoute({
   component: Shell,
   notFoundComponent: () => (
-    <section className="panel">
-      <h1>Page not found</h1>
+    <ProblemCard title="Page not found">
       <Link to="/">Back to campaigns</Link>
-    </section>
+    </ProblemCard>
   ),
 });
 const loginRoute = createRoute({
@@ -281,11 +367,13 @@ export const router = createRouter({
     characterRoute,
   ]),
   defaultErrorComponent: ({ error, reset }) => (
-    <section className="panel">
-      <h1>This page is unavailable</h1>
+    <ProblemCard title="This page is unavailable">
       <ErrorNotice error={errorMessage(error)} />
-      <button onClick={reset}>Retry</button> <a href="/">Back to campaigns</a>
-    </section>
+      <div className="flex items-center gap-3">
+        <Button onClick={reset}>Retry</Button>
+        <a href="/">Back to campaigns</a>
+      </div>
+    </ProblemCard>
   ),
 });
 declare module '@tanstack/react-router' {

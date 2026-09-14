@@ -84,4 +84,103 @@ None.
 
 ## Work log
 
-_Empty._
+### 2026-09-14 — Plan (implementer: Claude Fable 5.1, worktree `slice/A08`)
+
+Spec sections read in this checkout: `docs/design-mockups/v1/README.md` (all sections, all eight
+PNGs viewed), `docs/v1-tech-stack-spec.md#2-recommended-stack`,
+`docs/v1-tech-stack-spec.md#5-browser-state-and-table-resource-lifetimes`,
+`docs/v1-tech-stack-spec.md#6-visual-quality-and-sustained-performance`,
+`docs/character-sheet-spec.md#layout-and-content`, `docs/table-spec.md#confirmed-combat-layout`,
+`agent.MD` ("For v0.01, focus on desktop; all current UI is temporary"). No discrepancy between the
+slice summary and the cited sections. The mockup README's "Visual tokens" subsection confirms that
+exact values are a build deliverable, so the hex values below are measured or chosen here.
+
+Plan:
+
+- Measure the mockup PNGs with a headless Chromium canvas (no online lookup): foundation, surface,
+  rule, muted text and accent colours in light and dark; record measured vs chosen in
+  `docs/design-tokens.md`.
+- Run the shadcn CLI (`shadcn@4.21.0`, Base UI variant, `nova` preset) against `web/style.css` with
+  the `@/*` → `web/*` import alias (tsconfig + Vite). Probe in a scratch project confirmed it accepts
+  the pinned React 19.3.0 / Vite 8.3.0 / Tailwind 4.3.3. Pin every added dependency exactly; replace
+  the preset's Geist font with `@fontsource-variable/schibsted-grotesk` (OFL-1.1).
+- Rewrite the generated CSS variables to the token set (light `:root`, dark `.dark`, system by
+  `matchMedia`), keep the shadcn variable names so the components stay on the registry contract, add
+  the project's type, rule, motion and focus tokens, and a reduced-motion block.
+- `web/theme.ts`: `useTheme()` with `localStorage` key `salient.theme` (light | dark | system),
+  system listener, and an inline pre-paint script in `index.html` so a reload does not flash.
+  Account preference storage waits for V10.
+- Migrate `web/router.tsx` (top nav: wordmark, Campaigns, Characters, connection status, theme
+  switch, user name, Sign out; sidebar removed), `web/campaigns.tsx`, `web/characters.tsx`,
+  `web/foes.tsx`, `web/ui.tsx` to the components and tokens without changing labels, roles or
+  behavior the browser journey depends on. Apply Q-HAND-1: remove "Draw Steel" product phrases from
+  the login eyebrow, the page title and the old sidebar wordmark.
+- Browser tests: keep `tests/browser/journey.spec.ts`; add `tests/browser/theme.spec.ts` for
+  acceptance checks 2 and 3 and to capture the six screenshots under `.playtest/a08/`.
+- Verification: `pnpm check`, `pnpm test:browser`, grep for raw hex in `web/**`.
+
+Environment: the worktree had no `.env.local`; copied from the main checkout. It points at the
+running local backend on 127.0.0.1:3212/3213 (pid 2801309, deployment `anonymous-agent`, state in
+`/srv/presidium/projects/salient/code/.convex/local/default`). The 3210/3211 backend belongs to
+another project and is not touched. Motion (the library) is not added in this slice: the migrated
+screens have no panel or roster transitions, so CSS transitions with the reduced-motion block cover
+section 6; A03 can add Motion when the table needs it.
+
+### 2026-09-14 — Verification and closing entry (implementer: Claude Fable 5.1, worktree `slice/A08`)
+
+Environment: the worktree's `.env.local` (copied from the main checkout) points at the running local
+backend on 127.0.0.1:3212/3213 (pid 2801309, orphaned `convex-local-backend`, deployment
+`anonymous-agent`, state in `/srv/presidium/projects/salient/code/.convex/local/default`). The
+3210/3211 backend (pid 2032007) serves another project and was not touched. `pnpm dev:backend`
+refused to attach ("A local backend is still running on port 3212"), so functions were pushed with
+`pnpm exec convex dev --once --url http://127.0.0.1:3212 --admin-key <from config.json>`; that
+command removed `CONVEX_DEPLOYMENT` from the worktree's ignored `.env.local`. Vite ran as
+`pnpm dev` with its log at `.playtest/a08/vite.log`; it was stopped afterwards. No seed scripts
+were run; the browser tests create their own accounts and campaigns.
+
+Commands and output:
+
+- `pnpm check`: lint (ESLint + Prettier) clean; engine 28 tests; app + scripts 42 tests; check-links
+  "Checked 115 Markdown files: no broken relative links or anchors."; check-vendor "matches the
+  pinned submodule commits (2 submodules)"; foes:source "snapshot matches"; `vite build` ✓ 525
+  modules (index CSS 67.87 kB, JS 496.68 kB, two Schibsted Grotesk woff2 files).
+- `pnpm test:browser`: 4 passed (32.4s) — `journey.spec.ts` (23.5s) and the three tests in
+  `theme.spec.ts` (theme switch/persistence 1.8s, reduced motion 0.7s, screenshots 5.9s).
+- `grep -rnE "#[0-9a-fA-F]{3,8}\b" web --include=*.tsx --include=*.ts | grep -v web/style.css`:
+  no matches. `grep -rni "draw steel" web index.html`: no matches.
+- shadcn compatibility probe: `shadcn@4.21.0 init --template vite --base base --preset nova`
+  against React 19.3.0 / Vite 8.3.0 / Tailwind 4.3.3 completed in a scratch project and in the
+  worktree; the CLI first wrote to a literal `@/` directory because the root `tsconfig.json` had no
+  alias, so `paths: {"@/*": ["./web/*"]}` was added to both tsconfigs and a Vite alias before
+  re-running.
+
+Acceptance checks:
+
+1. **verified** — grep above returns nothing; every colour in components is a token utility.
+2. **verified** — `theme.spec.ts` "light, dark and system preference switch without reload and
+   persist across reload": Dark click → `html.dark` and `localStorage.salient.theme = dark` with no
+   navigation; reload keeps it and the Dark toggle is `aria-pressed=true`; Light ignores an emulated
+   dark system scheme across reload; System follows `emulateMedia` colour-scheme changes live and
+   across reload.
+3. **verified** — "prefers-reduced-motion disables transitions": the Sign in button's computed
+   `transition-duration` is `0.12s` under `no-preference` and `0s` under `reduce`; `--motion-base`
+   resolves to `0s`.
+4. **verified by the implementer, reviewer comparison pending** — screenshots at
+   `.playtest/a08/login-light.png`, `login-dark.png`, `campaign-home-light.png`,
+   `campaign-home-dark.png`, `characters-light.png`, `characters-dark.png` (1440×960 viewport, full
+   page). Top nav with wordmark, uppercase items and a hard rule; split login with the brick-red
+   primary action; hard rules under page and section headings; uppercase metadata (eyebrows, badges,
+   button labels, counts).
+5. **verified** — the migrated screens carry no Library nav item, no Call for test / Give hero
+   token / Respite / Session reminders controls, no combat-table elements, no Draw Steel phrase.
+   Membership tags remain Director / Player / Observer derived from session selection, as the
+   campaign page did before this slice (see `docs/design-tokens.md#migration-notes`).
+6. **verified** — `pnpm check` and `journey.spec.ts` pass unchanged; the journey file was not
+   edited. One presentation adjustment was needed to keep it unchanged: the session-player and
+   foe-visibility checkboxes stay native inputs because Playwright's `getByLabel` resolves the Base
+   UI checkbox to two elements (its `role=checkbox` span and its hidden input).
+
+Deviations and leftovers: Motion (the library) is not installed (no transitions to own yet; see the
+plan). `dialog`, `tabs`, `table`, `tooltip`, `select`, `separator`, `toggle` and `checkbox` are
+installed but unused by the migrated screens. Independent review is deferred to the user's audit
+thread per the lead's process change; commits carry no `Reviewed-By:`.
