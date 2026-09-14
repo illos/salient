@@ -14,7 +14,8 @@ const failures: string[] = [];
 const pinned = git(['ls-tree', 'HEAD', 'vendor/']).split('\n').filter(Boolean);
 if (!pinned.length) failures.push('No submodules are pinned under vendor/.');
 for (const entry of pinned) {
-  const [, kind, commit, path] = /^(\d+) (\w+) ([0-9a-f]+)\t(.+)$/.exec(entry) ?? [];
+  // ls-tree columns: mode, type, object, path.
+  const [, , kind, commit, path] = /^(\d+) (\w+) ([0-9a-f]+)\t(.+)$/.exec(entry) ?? [];
   if (kind !== 'commit') continue;
   let head: string;
   try {
