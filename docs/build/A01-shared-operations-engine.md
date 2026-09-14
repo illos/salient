@@ -218,3 +218,12 @@ What remains: browser verification of the console and palette against a local ba
 `pnpm app command` run; the interaction state machine beyond one answer per card (completion
 policies, cross-user request cards, card rendering beyond the labeled log entry); undo (A06);
 operations with game meaning (A03 onward).
+
+### 2026-09-14 — audit repairs verified (coordinator)
+
+Stable actor/session binding, registered card closure and foe Add/Remove now pass fresh independent review. Palette/console, live CLI command/response and retries pass against the local deployment with persisted reads. The broader interaction state machine and A06 remain unfinished.
+
+Repair commit: `7b86b8a`. Final `pnpm check`: 265 tests plus lint/types/content/vendor/build;
+`pnpm test:browser`: all 5 pass. See the [verification record](audits/2026-09-14-fix-verification.md)
+for independent verdicts, local deployment/visual evidence and remaining scope. This follow-up
+supersedes the earlier verification omissions for these exercised paths. Hosted CI still needs a push.

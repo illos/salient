@@ -186,3 +186,12 @@ Acceptance checks:
    whole-document delete, ordered by event then ordinal; persisted foe state matches. Verified.
 6. Independent review deferred to the user's audit thread (lead's process change, 2026-09-14).
    Not verified here; the implementer does not self-attest.
+
+### 2026-09-14 — audit repairs verified (coordinator)
+
+Nested replacement deletions are recorded and command history/dice use authenticated issuer scope. Fresh independent review passes with persisted deletion, sequence and retry evidence. The original audit exercised the real local reset path. No gameplay mechanic was added.
+
+Repair commit: `7b86b8a`. Final `pnpm check`: 265 tests plus lint/types/content/vendor/build;
+`pnpm test:browser`: all 5 pass. See the [verification record](audits/2026-09-14-fix-verification.md)
+for independent verdicts, local deployment/visual evidence and remaining scope. This follow-up
+supersedes the earlier verification omissions for these exercised paths. Hosted CI still needs a push.

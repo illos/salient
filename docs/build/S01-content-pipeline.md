@@ -201,3 +201,12 @@ Not done / deviations:
   was needed: the slice asked for extraction only and every gap is recorded rather than resolved.
 - Content queries require a signed-in user. The reference library's public/Director audience split is
   V13's decision; nothing here narrows it.
+
+### 2026-09-14 — audit repairs verified (coordinator)
+
+Full features and JSON provenance survive reseed and loaded snapshots; generation metadata is reproducible. Fresh independent content/extraction review passes, including all 403 entries. The real local seed and codegen now pass.
+
+Repair commit: `7b86b8a`. Final `pnpm check`: 265 tests plus lint/types/content/vendor/build;
+`pnpm test:browser`: all 5 pass. See the [verification record](audits/2026-09-14-fix-verification.md)
+for independent verdicts, local deployment/visual evidence and remaining scope. This follow-up
+supersedes the earlier verification omissions for these exercised paths. Hosted CI still needs a push.

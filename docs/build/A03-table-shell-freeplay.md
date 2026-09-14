@@ -175,3 +175,12 @@ first table use (see the implementation note below).
 - "Show test difficulty" campaign setting (`docs/table-command-spec.md#direct-test-rolls`) is not
   implemented; recorded difficulty is shown to everyone in the log description.
 - Independent review and rules review not requested (deferred to the user's audit thread).
+
+### 2026-09-14 — audit repairs verified (coordinator)
+
+Server audiences now cover roster and history; Show test difficulty is registered; peer live values and observer-owned controls respect role policy; Recovery exposes complete pinned sources. Fresh independent implementation and bounded rules review pass. The three-context browser walkthrough and light/dark visual inspection pass. Q-A-200 and the provisional hero fixture remain explicit.
+
+Repair commit: `7b86b8a`. Final `pnpm check`: 265 tests plus lint/types/content/vendor/build;
+`pnpm test:browser`: all 5 pass. See the [verification record](audits/2026-09-14-fix-verification.md)
+for independent verdicts, local deployment/visual evidence and remaining scope. This follow-up
+supersedes the earlier verification omissions for these exercised paths. Hosted CI still needs a push.

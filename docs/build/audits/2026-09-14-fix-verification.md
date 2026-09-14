@@ -6,6 +6,8 @@ Compendium `fb83a789da8f0327a389c277a0c790b1648d5810`. No rules ruling or vendor
 This record follows the [original audit](2026-09-14-coordinated-audit.md) of base
 `8e9e315dcee3642bbc0d4b2422421dc1aedfb26e`.
 
+Repair commit: `7b86b8a`. The following documentation commit records this receipt in the slice tracker.
+
 ## Repairs and independent review
 
 | Area | Result | Independent evidence |
