@@ -125,7 +125,10 @@ Keep original Forge Steel files in file storage with mapping/diagnostic metadata
 
 Use one authoritative owner for each changing value. For example, a hero's persistent resources can live in a character play-state record referenced by the table; the table must not hold a second independently writable copy of the same Stamina. Table-specific state can live separately. The precise field partition depends on the unresolved transfer policies, but dual authority is avoidable now.
 
-Loaded monsters intentionally have independent state. Copy each distinct definition once per load and let repeated instances reference that immutable copy. Pooled minion Stamina belongs to the squad; shared Malice belongs to the encounter. Existing library content and homebrew edits cannot change a loaded definition.
+Loaded monsters intentionally have independent state. Copy each distinct definition once per load and let repeated instances reference that immutable copy. Pooled minion Stamina belongs to the squad; shared Malice belongs to the encounter. Living minion
+identities remain distinct from the pool after captain adjustments; no personal current-Stamina records
+or unconditional pool-derived survivor count. The game clock owns scheduled turn/round work, linked to
+source effects and journaled with their state; objects do not maintain a second schedule. Existing library content and homebrew edits cannot change a loaded definition.
 
 ## Realtime reads and authoritative actions
 
@@ -169,16 +172,22 @@ Keep three concepts separate: the recorded sequence of what was attempted/commit
 
 Confirmed gameplay update, 2026-09-13: later records survive navigation, but new gameplay after undo
 clears ordinary redo availability and continues the effective branch. No branch-browser UI is established.
-Corrections and undo append new records, never rewrite originals; turn/round resolution stamps remain
-available for exact reuse. Prior-turn direct editing is blocked after the next individual turn starts,
-including for the Director, until intervening history is rewound. The experiment's former return-to-head
+Corrections and undo append new records, never rewrite originals. Exact Redo restores recorded dice
+and consequences; new executions after undo use current conditions and fresh dice, without a separate
+turn/round-result cache. Older-event correction after later gameplay requires sequential rewind of the
+entire intervening chain, even within the same turn and for the Director. The experiment's former return-to-head
 restriction is not the current product contract. See [table history](table-spec.md#undo-permissions-and-proposed-campaign-control).
+
+Confirmed encounter finalization: Finish cleanup, or Void after applying keep/reset, makes the encounter a historical archive even while
+the session stays open. Retained detail supports reads, not gameplay reopening, archived-event edits or
+undo across that boundary. Current-state adjustments are new events. This logical boundary does not
+depend on compression or storage migration completing.
 
 **A cross-campaign boundary needs an explicit rule.** If a character has left campaign A for B, campaign A can still reconstruct its historical sheet from retained campaign snapshots. It must not overwrite the currently owned character in B or restore old permissions. Historical inspection can always use an isolated view; making that past state live requires a current attachment/authority check and a defined reconciliation or independent-copy policy. Likewise, one character must not have competing writers from two active tables in the same campaign. Recommend one active play binding per character until a broader policy is designed.
 
 Table rollback concerns gameplay state and the build effective at that time; it is not rollback of account ownership, campaign membership, or review authorization. Preserve all build revisions and separately record effective-build activations so the two histories can be linked without erasing either.
 
-Store chat as distinct records with shared chronology references so the UI can interleave it with actions. Raw restoration payloads may contain hidden monster information or private sheet fields; authorize those separately from the player-visible feed. The chat rewind and historical disclosure policies remain open.
+Store chat as distinct records with shared chronology references so the UI can interleave it with actions. Raw restoration payloads may contain hidden monster information or private sheet fields; authorize those separately from the player-visible feed. Chat is not rewound through gameplay history; historical secret-disclosure policy remains open.
 
 ## Statistics and the future analysis engine
 

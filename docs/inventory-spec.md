@@ -176,10 +176,13 @@ foes roster does not establish permission to replace the campaign stash. Keep so
 later history and void handling.
 
 Voiding continues to skip normal encounter-ending rewards and cleanup, including this rewards-stash step.
-Treatment of any loot already exposed or claimed before voiding remains part of the pending state-restoration
-design. Saved reward loot is already in the stash before encounter start; do not treat it as an unperformed
-end-of-encounter grant. Its treatment under void/reset still needs explicit reconciliation with the
-starting-state boundary. The same provisional-claim/Director-finalization flow is confirmed outside wrap-up
+Confirmed 2026-09-13: Restore starting state returns the Director panel's gameplay state, including
+loot/stash state, to its combat-start snapshot. Remove reward items added by mid-combat template loads;
+restore the pre-start contents. Rewards loaded before combat belong to the baseline and remain. Keep
+current state retains the present stash and its later additions. Reconcile related claims and item
+locations through shared recorded operations: removed items cannot retain live claims, and restoration
+must not duplicate items across locations. Preserve item/load attribution and history; do not rerun
+reward grants. This is the general panel reset rule, not a separate reward-specific rollback mechanism. The same provisional-claim/Director-finalization flow is confirmed outside wrap-up
 whenever the stash is visible; its exact UI remains open.
 
 ## Inventory history
@@ -307,7 +310,8 @@ These are examples for later implementation, not completed tests.
 1. Rewards stashes in saved encounters and normal cleanup are in v1; standalone saved stashes are excluded.
    Wrap-up claims are provisional and Director completion deposits the final allocation. A claimed item is
    unavailable for another claim. Hiding cancels claims and prevents approval; item stacks are excluded.
-   Refine void/reset handling for rewards added at template load.
+   Void restore returns Director-panel loot state to the combat-start snapshot; Keep retains current
+   contents. Verify claim/location reconciliation and duplicate prevention against that confirmed scope.
 2. Inventory is character data, and party/character transfers work between sessions. Pause allows inventory
    management when the character is not combat-locked. Peer inventory inspection is Director-only, and a
    visible stash permits provisional claims with Director approval inside or outside wrap-up; refine remaining

@@ -10,9 +10,9 @@ text.
 - Make reasonable implementation decisions within the user's authorized scope. Ask only when missing
   information materially affects the work.
 - Distinguish confirmed requirements from proposals and assumptions.
-- Current specification exploration follows the user's latest request: batch design questions in groups of
-  three, using plain text and a recommendation for each. This supersedes the earlier one-question-at-a-time
-  and groups-of-six preferences. Track answers in [the pre-alpha clarification queue](docs/pre-alpha-design-gaps.md).
+- Current specification exploration follows the user's latest request: walk through review questions one
+  at a time, using plain text and a recommendation for each. This supersedes the earlier batching
+  preferences. Track answers in [the pre-alpha clarification queue](docs/pre-alpha-design-gaps.md).
 - The discussion has resumed with a rules-review workflow accepted for trial and confirmed rules-adaptation
   philosophy. Read [the principles](docs/rules-adaptation-principles.md) and
   [the development process](docs/development-process.md). The user selected a dedicated rules/combat thread
@@ -38,11 +38,20 @@ pre-alpha checkpoint consolidates accepted inclusions/deferrals; the V1 checkpoi
 The original gap review is historical. Do not ask settled questions again. Documentation cleanup does not
 authorize implementation or convert proposals into requirements.
 
-The rules/combat baseline precedes the tooling pilot or implementation slice. Its current design is
-checkpointed on 2026-09-13. Opening commitment, group transfers/handoffs, mapless targeting and persistent
-area cards, requested tests, resource affordability, clock defaults and history boundaries are confirmed.
-Remaining source-specific response sequencing and same-turn dependencies are next; do not reopen settled
-questions from the chronological decision record.
+Current priority, 2026-09-14: **game basics first**. Establish and test common table operations before
+class/stat-block-specific execution. Unique resource grants/thresholds, traits, triggers and ability
+effects are manually resolved from source text in v0.01; the earlier automatic turn-start Ferocity
+requirement is superseded. Stop the feature-by-feature Fury/Goblin automation questionnaire. Keep
+the confirmed G4 shared systems, common Malice lifecycle, persistent numeric editing/manual-adjustment
+log entries, Stamina/winded, ordinary-foe Slain status and history. The minimal wizard and sourced
+build/initial-state contracts remain separate requirements. Next is a common-operation acceptance
+walkthrough through shared UI/headless paths, with actual persisted state and history. See
+[the current runtime scope](docs/pre-alpha-design-gaps.md#game-basics-first--current-runtime-scope).
+Foe hiding is deferred beyond v0.01: all loaded foes are visible, with no hide/reveal or Add visibility
+controls. Full stat blocks remain Director-only; health display and Malice visibility remain separate.
+The fuller V1 hidden-foe design below is future scope; audit F2 is closed for the prototype.
+Later parser/engine feature work builds on that foundation; do not reopen settled scope or silently
+automate deferred mechanics to finish a screen.
 Use [table decisions and remaining contracts](docs/table-spec.md#8-continue-exploring) and
 [rules status](docs/workstream-rules-status.md). Initiative groups cover both sides; playable retainers and
 friendly monsters are deferred beyond V1, with an extension path preserved. Readable core references remain
@@ -81,8 +90,9 @@ rather than accumulating duplicate decisions here. The original [gap review](doc
 - Character creation, advancement, full edits, progression history, sharing, detachment/duplication and Forge
   Steel import are included. Export is not required in v1; preserve the information and adapter boundary
   needed to add it without rewriting the system.
-- Private saved encounters support duplication, monsters/counts, a remembered party-strength calculator and
-  prepared reward items. No other authored encounter content or template sharing is required in v1.
+- Private saved encounters support duplication, monsters/counts, prepared initiative groups, minion squads
+  and captain assignments, a remembered party-strength calculator and prepared reward items. Reopening,
+  duplication and loading preserve that preparation; loaded instances and relationships are independent. No other authored encounter content or template sharing is required in v1.
 - Character/party inventories and a provisional single persistent Director stash are included. No item stacks,
   free-text/custom items, player item creation, direct character-to-character transfers or standalone saved
   stashes. Starting equipment belongs to character creation; later loot uses approved stash allocations.
@@ -98,15 +108,20 @@ Connection loss never changes session lifecycle. The Director starts/pauses/ends
 members to play; selected players choose one or more owned/shared characters. Campaign members can observe and
 chat, but observers cannot perform session actions or claim stash items.
 
-Party-roster changes are allowed whenever no combat is active, including while paused. **The Director can
-change the foes roster at any time**, including between sessions, while paused and during combat;
-saved-encounter loading follows that policy. Do not reintroduce the superseded open-session or pause
-restrictions. Gameplay actions still require a running session. Closed sessions remain permanently read-only.
+When the session is paused, both rosters are locked: no session-player/character changes, foe additions or
+removals, regrouping, or saved-encounter loads until resume. This supersedes the earlier paused-edit permission.
+Outside a pause, party changes require no active combat; the Director can manage foes between sessions and
+during running combat. Gameplay actions still require a running session. Closed sessions remain permanently
+read-only.
 
 Combat locks the party roster and ordinary character edits, including drafts, progression and build
 activation. Encounter operations immediately update the main sheet; the precombat snapshot is for
 history/void-reset, not a second editable sheet. Void offers keep-current or restore-starting-state and skips
-ordinary rewards/cleanup. Closing a session with active combat invokes that void choice; pause preserves
+ordinary rewards/cleanup. Restore starting state returns the Director panel's gameplay state to its
+combat-start snapshot, including foes, relationships and loot/stash state. Remove later additions and
+restore original state; reconcile item locations/claims without duplicates. Keep retains current state. The Director may Void while paused using that keep/reset choice; the session
+stays paused and its roster lock remains, while ordinary gameplay stays blocked. Closing a session with
+active combat invokes that void choice; pause itself preserves
 combat indefinitely. Campaign deletion has its separate no-prompt policy.
 
 Anything a player can do at the table, the Director can also do, including Take turn and acting for a
@@ -127,6 +142,29 @@ Winded against the source (the pinned rule includes exactly half maximum Stamina
 all undefeated foes, hidden or outside combat; defeated entries stop contributing immediately. Normal cleanup
 removes defeated foes; void skips that cleanup. Verify difficulty/EV formulas and roster-reset dependencies
 rather than inventing them.
+
+Show Malice is a campaign setting, off by default, controlled by the active Director. The Director
+always sees the current shared pool; enabling the setting shows it to players/observers. Enforce the
+audience through shared reads. This does not hide used-action source text or change resource mechanics.
+
+The user refines initiative groups to contain actor-linked turn entries, usually one per actor.
+Multiple entries share one live creature's state; each actual turn keeps distinct boundaries. Ordinary
+one-turn group rules remain intact. Granted full-turn entries default to the bottom of the initiative
+roster, each in its own new group, unless source timing requires an immediate/directly following turn.
+This adds turn entries, not creatures, and does not impose a fixed initiative order. Dragging/regrouping
+moves only the selected turn entry, leaving other entries for that actor where they are. This follows
+directly from the selected model; it is not a separate unresolved product decision. The earlier repeated
+mixed-group activation proposal is superseded.
+
+Current creature checkpoint: [minion contracts](docs/table-spec.md#minion-squads-and-captain-state)
+select one squad entry, default four, plus/minus count 1–8, captain additional to eight, and proportional
+EV from the printed quantity. No manual live split/merge. Minion identities, current pool and shared-turn
+participation are distinct: captain-bonus loss causes no casualties, replacement bonus gain revives no
+one, and later non-area pool exhaustion defeats remaining ordinary members subject to source exceptions.
+Area damage cannot kill outside its area. Personal extra captain turns do not refresh the squad.
+The clock owns scheduled turn effects and dispatches global work once per actual turn, not per shared
+participant; personal effects/saves remain individual. Remaining numeric and source cases are listed in
+[the table queue](docs/table-spec.md#8-continue-exploring), not grounds to reopen those rulings.
 
 ### Characters, privacy and inventory
 
@@ -190,7 +228,10 @@ permitted negative resources, in shared execution for players and Director invoc
 costs are deducted automatically on execution; optional pre-resolution spending uses a choice card unless
 already supplied. See [ability costs](docs/table-spec.md#ability-costs-and-optional-spending).
 The Director has final game-adjudication authority;
-mechanical inputs and effects support recorded manual adjustments. Missing facts/unsupported mechanics are
+mechanical inputs and effects support recorded manual adjustments. The standalone damage/collision/fall
+tool is deliberately out of scope, not a missing feature. Director fine-tuning uses eligible result
+corrections and direct live-stat adjustments on monster stat blocks and character sheets through shared
+recorded operations. Preserve the existing history/session and character-build boundaries. Missing facts/unsupported mechanics are
 explicit uncertainty, never invented automatic outcomes. Every used action exposes its complete verbatim
 source text through the shared game log; full monster stat blocks remain Director-only. Account permissions,
 private data and session lifecycle retain their separate policies. Manual play is supported from v0.01.
@@ -220,14 +261,67 @@ quoted names and target lists. Detailed operation/API schemas remain proposed; r
 expand prototype scope.
 
 Partial automation is an intended playable mode: show full ability text and distinguish applied, manually
-resolved and unresolved effects. Record manual corrections, preserve dependencies and prevent double
+resolved and unresolved effects. The Director can mark a specific unsupported effect Resolved at table
+on its source log card, recording manual resolution without duplicate application. Dependent automation
+still requires actual resulting state/facts; this is not a routine completion click for supported actions. Record manual corrections, preserve dependencies and prevent double
 application when automation resumes. Dice generation is pseudorandom and shared; optional visual physics
 presents accepted results, never decides them.
 
+Each character follows the same gameplay mechanics regardless of shared or separate player control.
+Multi-character control adds UI navigation/labeling concerns, not special resource, response or dependency
+rules. Existing control permissions and user attribution remain. Do not frame unresolved dependency policy
+as a special case of one user controlling several characters.
+
+Character sheet/player pane follows the viewed character. Game-log action cards can belong to another
+controlled character and must clearly label who acts before interaction. They use that bound actor
+without requiring a sheet switch. Other switch prompts/automatic sheet changes remain open; do not infer
+a passive turn-start switch. Explicit successful Take turn switches the invoking user's player pane to
+the chosen character; existing actor-switch draft clearing applies. Explicit command actors and bound
+responses retain their identity.
+
+Formal Director test-request UI/commands and their response modes/lifecycle are removed from scope for
+now. This is a deliberate scope choice, not a missing spec gap; do not add the workflow without a new
+user decision. The Director asks verbally; players roll tests directly. Specific actions can still supply linked
+test steps. Show recorded workings/total and calculate outcomes only when difficulty or source outcome
+context is known; otherwise the Director interprets. See [tests](docs/table-spec.md#freeplay-baseline-and-combat-transition).
+
+Standing prompt policy confirmed 2026-09-13: still-valid combat action-card response opportunities stay active
+through the gap after End turn and close at the start of the next individual turn. This supersedes
+triggering-turn-end closure and combat-test round-end expiry, and includes prompts created at turn end.
+Persistent effects retain their own lifetimes; required unresolved work still blocks dependent progression.
+FreePlay has no artificial individual-turn boundary; source-specific cards keep applicable lifetimes. See [prompt windows](docs/table-spec.md#inline-interaction-cards-in-the-game-log).
+
+Confirmed FreePlay carryover: earlier actions do not consume the new encounter's action economy.
+Damage/resource state carries forward under source-defined combat-start rules; do not replay the action,
+import it as a first turn or automatically refund its costs. See
+[the combat transition](docs/table-spec.md#freeplay-baseline-and-combat-transition).
+
+Confirmed encounter closeout: provide formal Director closeout UI. Explicit End combat closes unused
+optional combat responses and ends structured turn play. Do not synthesize a final turn/group/round
+boundary or its saves/resource grants. Already-caused required resolution completes before rewards/cleanup;
+combat-ending effects retain their rules. Closeout lists each character's applicable action/effect options
+so players can take stock and choose what to resolve through labeled log cards. Optional effects are not
+automatically cleared. Director Finish cleanup closes unused optional cleanup choices after required
+resolution completes, without per-player ready confirmations or executing unchosen options. Existing
+wrap-up then returns to FreePlay. The Director grants the Victory amount and recipients during closeout;
+the editable initial value 1 (allowing 0) is not an automatic award. Record confirmed grants once.
+Finish cleanup, or Void after applying keep/reset, archives the encounter: gameplay undo cannot reopen it or cross that completed boundary,
+and archived events cannot be edited. Current-state adjustments remain new recorded actions.
+See [closeout](docs/table-spec.md#formal-encounter-closeout).
+
+Confirmed early closure: committing an unrelated new ability passes that character's earlier unused
+optional triggered-action opportunity; preparation/refused activation does not. Preserve response chains,
+new opportunities, explicit continuations and responses to unrelated events. When Thorn takes another
+action or spends the resources granted by a hit, that hit's response window also closes for an ally's
+Parry. This is existing precedent; prompt ownership does not exempt the response. Next-turn start is the outer
+deadline. Precise causal resource-grant timing is an explicit player-value priority: all spending, feature,
+usage-limit and history logic must respect when each grant becomes available, including during retrospective
+responses. See [resource bookkeeping](docs/table-spec.md#ability-costs-and-optional-spending).
+
 The game log records initial values, modifier inputs/outputs and resulting state changes. Corrections and
 undo append new entries without rewriting the original; future interpretation/undo uses the effective
-result on the current history branch. Once the next individual turn starts, modifying any prior-turn event
-requires undoing through intervening history first, including Director edits (confirmed 2026-09-13).
+result on the current history branch. Once later gameplay has committed, modifying an older event requires sequentially undoing the entire
+intervening chain first, even within the same turn and including Director edits (confirmed 2026-09-13).
 Director adjudication cannot bypass that boundary. Current-event continuations remain distinct from
 historical edits. Undo/redo restores recorded state without rerunning rules/dice. All current campaign members can read past session logs
 regardless of attendance; private notes/live tower policies remain separate. Compressed closed-session history
@@ -239,11 +333,16 @@ begins, unless their source specifies otherwise. This is an explicit standing ap
 precedent from a case ruling; preserve source timing and special save replacements. See
 [the game-clock contract](docs/table-spec.md#game-clock-and-scheduled-rules-work).
 
-Players can undo their own actions back to combat turn start or the beginning of the current FreePlay
-stretch, under existing control/session/dependency policies, and redo their own undone actions. Director
-undo/redo remains available throughout the current encounter. **Enable user undo** defaults on and governs
+Players sequentially undo their character's uninterrupted latest actions only to the nearest seam,
+with combat turn start/FreePlay-stretch start as outer limits. Another character's committed action closes
+the window even when characters share a controller. Automatic consequences remain linked to their cause.
+Director rewind sequentially crosses seams within the current encounter; no selective player cascade
+across another character's response. Redo restores the available recorded path. Committed Director corrections also close the player window, superseding the prior
+End turn undo exception. Undo a same-character optional token action before its originating End turn. **Enable user undo** defaults on and governs
 gameplay, not inventory. New gameplay after undo clears redo availability while retaining abandoned history
-and boundary stamps. Source-specific triggered timing, conditional spending, manual-resolution sequencing
+and their recorded outcomes. Exact Redo restores recorded dice; new execution resolves current conditions
+with fresh dice, including turn/round work. No separate result-reuse cache is required; the Director can
+adjudicate reroll abuse using existing correction controls and history boundaries. Source-specific triggered timing, conditional spending, manual-resolution sequencing
 and remaining same-turn dependencies still need contracts. Do not settle them through incidental UI or
 storage choices.
 

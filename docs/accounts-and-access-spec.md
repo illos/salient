@@ -398,7 +398,7 @@ Any current campaign member may observe the active table without selection as a 
 campaign-level party chat. Observers cannot interact with the session or invoke its gameplay commands.
 Character ownership/sharing alone does not bypass player selection; the active Director retains their separate
 authority. Observation does not alter the encounter's locked party roster. Becoming a player requires Director
-selection when no encounter is active.
+selection when no encounter is active and the session is not paused.
 
 Observer reads expose only the permitted table audience view. This permission does not grant private sheets,
 owner notes, or Director-only information. Players and observers cannot inspect monster stat blocks at the
@@ -409,10 +409,16 @@ Director, including attacking players without first showing their roster entry; 
 gameplay activity or grant in-game concealment. For now, a hidden foe's name is not concealed in game-log
 entries; that does not reveal its roster entry or full stat block. The Director manages catalog additions,
 removals, and saved-encounter replace/append loads through the foes roster. The Director may manage the foes
-roster at any time, including adding/removing participating monsters or loading templates during combat,
-pauses, or between sessions. Executing monster gameplay actions retains the separate running-session
+roster between sessions and during running combat, including adding/removing participating monsters or
+loading templates. Pausing locks both rosters until resume, including session-player/character changes,
+foe additions/removals, regrouping and saved-encounter loads. Executing monster gameplay actions retains the separate running-session
 requirement. The active Director can change that campaign setting at any time and retains full monster access.
-Public glossary access is unaffected. Full peer sheets are not visible by default; party Stamina/Recoveries
+Show Malice is a campaign setting, off by default, managed by the active Director. The current shared
+Malice pool is always Director-visible and shown to players/observers only while enabled; enforce this
+in shared audience reads, not just the widget. It does not alter Malice mechanics or full action-source
+disclosure. Director Void is an explicit lifecycle exception while paused: the existing keep/reset operation may
+end the encounter without resuming, and the session pause/roster lock remains. Ordinary gameplay and
+roster editing are still blocked. Public glossary access is unaffected. Full peer sheets are not visible by default; party Stamina/Recoveries
 are shared. Ordinary rolls are public and planned tower results are Director-only. Historical disclosure and
 proposed explicit content sharing still need definition. Proposed queries should distinguish campaign-member
 reads/chat from selected-player gameplay permissions. Losing session-player status can leave observation/chat
@@ -482,10 +488,12 @@ start/pause/end and roster controls, and awards applicable encounter Victories t
 Director can also void an encounter without normal ending benefits/consequences, choosing current or
 pre-encounter character/monster state. The active Director can take gameplay actions on behalf of any
 character at the table without an owner-issued share, whether or not its owner is connected. This retains
-session/pause/turn constraints and does not delegate build choices. Players may undo their own actions back to
-their turn start; the Director can undo and redo those actions. Enable user undo is a confirmed campaign
-setting, enabled by default. Disabling it blocks player undo while preserving Director undo/redo. Detailed
-undo scope/dependencies, correction behavior, and XP/reward validation still need definition. Effects from
+session/pause/turn constraints and does not delegate build choices. Players sequentially undo their
+character's uninterrupted latest actions only to the nearest seam, with turn/FreePlay start as outer
+bounds. Another character's action or committed Director correction closes the window, even when
+characters share a controller. Director sequential undo/redo crosses seams within the current encounter. Enable user undo is a confirmed campaign
+setting, enabled by default. Disabling it blocks player undo while preserving Director undo/redo. The table spec owns
+remaining undo-unit/concurrency, correction and XP/reward details; the sequential undo seam is settled. Effects from
 another actor may still legitimately change a hero through authorized game resolution.
 
 Proposed grant fields: character, attachment, recipient membership, grantor, scope (`session` or

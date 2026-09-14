@@ -2,3 +2,9 @@ node_modules/
 .playtest/
 coverage/
 *.tsbuildinfo
+.env*
+!.env.example
+.convex/
+dist/
+test-results/
+playwright-report/

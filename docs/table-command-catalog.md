@@ -3,7 +3,7 @@
 Checkpoint **2026-09-13**. The command language and gameplay behaviors below are confirmed; additional
 operation spellings and field schemas are a consistent **proposed reference**, not a frozen production
 API or implemented registry. The common accepted spellings are `/ability use`, `/test roll`,
-`/test request` and `/encounter start`. The [command spec](table-command-spec.md) owns execution;
+and `/encounter start`. The [command spec](table-command-spec.md) owns execution;
 [the grammar](research/table-command-grammar.md) owns parsing. No new punctuation language is needed.
 
 ## Command form and value types
@@ -19,9 +19,16 @@ References use `@Name`, `@"Display Name"`, or `@{kind:id}`. `@self` resolves to 
 fields, never to the authenticated user. Booleans, numbers, null, lists and records are distinct values.
 No shell expansion, arbitrary arithmetic, pipes, scripts or multi-command separators are supported.
 
-The authenticated issuer is supplied outside command text. In FreePlay the UI defaults the actor to the
-viewed controlled sheet; in combat it defaults to the active individual character. Headless calls supply
-explicit actor context. Viewing a sheet, supplying an ID or typing `@Director` never grants authority.
+The authenticated issuer is supplied outside command text. The sheet and player pane use the viewed
+character. Game-log cards can act for another controlled character, clearly labeled before interaction;
+they use that bound actor without requiring a sheet switch. Other switch prompts/automatic sheet changes
+remain open. Headless calls supply explicit actor context; explicit actor
+prefixes retain their meaning. Viewing a sheet or supplying an ID never grants authority.
+
+When the session is paused, shared operations reject changes to either roster, including player/character
+selection for session membership, foe additions/removals, regrouping and saved-encounter loads. Resume
+restores otherwise-permitted edits; combat still locks the party roster. Foes management between sessions
+remains available. This membership lock does not prevent viewing sheets or switching the viewed sheet.
 
 ## Selection, turns and groups
 
@@ -30,15 +37,17 @@ explicit actor context. Viewing a sheet, supplying an ID or typing `@Director` n
 | `@Thorn /actor select` | Change this user's acting character; clear their pending ability/targets. |
 | `/target toggle target=@Goblin5` | Select a target or toggle checkbox membership in multi-select mode. Ordinary single selection transfers. If this completes an otherwise-ready ability, invoke its shared execution once. |
 | `/selection cancel` | Cancel this user's un-fired selection and clear targets; invalidate its pending interaction. |
-| `@Thorn /turn take` | Begin an eligible individual turn and its group under current side/group rules. Director equivalent remains. |
+| `@Thorn /turn take` | Begin an eligible individual turn and its group under current side/group rules. Successful explicit Take turn switches the invoking user's player pane to Thorn. Director equivalent remains. |
 | `@Thorn /turn end` | End the individual turn, including early; process required clock work before handoff. |
 | `/group create side=foes members=[@Goblin5,@Goblin6]` | Director creates a group; no merging of creature state or minion-squad semantics. |
-| `/group move members=[@Goblin5] group=@{group:blue}` | Director changes membership, preserving spent turns, active-turn identity and original active-group context. |
+| `/group move turns=[@{turn:goblin5-1}] group=@{group:blue}` | Director moves selected turn entries, preserving their spent state, linked creature identity and interrupted/active-group context. Other entries for the same creature stay put. Squad membership does not change. |
 | `/foe add source=@{monster:core-goblin-warrior}` | Illustrative bound catalog source. Mid-combat addition defaults to a new group at the bottom with a current-round turn available. Outside combat this is roster management. |
 
 The catalog's source IDs and choice labels are illustrative, not claims about actual stored IDs. Group
-completion and individual spent-turn state remain separate. An unspent arrival joins a still-active
+completion and spent state of each turn entry remain separate; shared squad entries additionally retain member participation. An unspent arrival joins a still-active
 group but does not reopen a finished group. No remaining turns causes handoff after current/required work.
+When all groups finish, advance the round even if an unacted arrival remains in a finished group;
+it waits for its group's next activation, without a fabricated turn or acted status.
 
 ## Abilities and requests
 
@@ -48,21 +57,22 @@ group but does not reopen a finished group. No remaining turns causes handoff af
 | `@Elwin /ability use ability="Healing Grace" targets=[@self]` | Self reference supplied explicitly; a source self-or-ally ability is not automatically self-only. |
 | `@Thorn /ability use ability="Lines of Force" trigger=@{event:e12} choices={"extra-distance":true}` | Proposed choice/trigger fields; costs and timing come from the source. Missing required facts use cards. |
 | `@Thorn /test roll characteristic=might skill=climb` | Accepted direct-test form. Retain skill identity, modifiers, dice, total and resolved outcome. |
-| `/test request characteristic=might actors=[@Thorn]` | Accepted scoped-request form. Scope and actual responding actor are separate. |
-| `/test request characteristic=intuition response-mode=one-volunteer` | Proposed explicit mode; one accepted eligible character response. |
-| `/test request characteristic=intuition response-mode=each-character` | Proposed explicit mode; one response per eligible character, including multiple heroes controlled by one user. |
 | `@Thorn /card respond card=@{interaction:c18} answer={"roll":true}` | Proposed generic response; the identified step determines scope, response count, available fields and expiry. |
 | `@Thorn /save roll effect=@{effect:e7}` | Proposed manual save invocation for a specific effect. Ordinary due save-ends rolls are automatic clock work, not a required user command. |
 
-Omitting `actors` opens eligible participant scope; `actors=[]` is an explicit empty selection and does
-not mean everyone. Omitting `response-mode` does not establish a default: the choice must come from
-known context or guided input until a default is specified. Modes do not invent group-test aggregation.
-Open combat requests expire at current-round end; FreePlay requests expire at combat commitment or session
-end. Responses to a valid older request are current activity, not edits of previous rolls.
+**Deliberate scope decision:** generic Director test requests are intentionally omitted for now, not
+an unanswered specification gap. Do not reintroduce the UI, command or request lifecycle as missing work
+without a new user decision. Verbal requests and direct character rolls are the selected flow; tests
+required by specific actions may still use those actions' cards.
 
-The campaign's Show test difficulty setting defaults off. Public results still include base roll,
-modifiers, total and success/failure. Per-test difficulty reveal is deferred. Source context/difficulty
-must exist to determine an outcome; a missing value is not permission to invent one.
+Ordinary tests need no formal request. The Director asks verbally, and a player invokes `/test roll`
+from their character. Generic Request test UI/commands, response modes and request lifecycles are removed
+from scope for now. Source-specific actions can still supply their own linked test steps.
+
+The campaign's Show test difficulty setting defaults off and applies to known difficulty values in all
+displayed test entries, including history. Show dice, modifiers and total; show a calculated outcome when
+the app knows the difficulty or source outcome table. Otherwise leave interpretation to the Director.
+Per-test difficulty reveal remains deferred. Do not invent missing difficulty or narrative consequences.
 
 ## Persistent effects and continuations
 
@@ -95,10 +105,13 @@ retries are not extra activations. Ordinary cards do not acquire persistent pinn
 | `/history redo event=@{event:undo26}` | Restore recorded results/spending without dice or rule reruns, within available history. |
 
 A correction's new entry supplies the effective current result, without rewriting the old entry. Undoing
-an adjudication does not undo its source ability. Once the next individual turn starts, previous-turn
-edits are blocked until intervening history is rewound. Director range remains the current encounter;
-player range is their turn/current FreePlay stretch. New gameplay clears redo availability while keeping
-abandoned history. Boundary stamps persist so rewind/re-ending cannot manufacture new save rolls/grants.
+an adjudication does not undo its source ability. Once later gameplay has committed, edits to an older
+event are blocked until the entire intervening chain is rewound, including within the same turn. Director range remains the current encounter;
+player range is the uninterrupted latest actions of their character up to the nearest action seam,
+with turn/FreePlay-start outer bounds. A committed Director correction creates a seam too. New gameplay clears redo availability while keeping
+abandoned history. Explicit Redo restores recorded dice and consequences. New executions resolve current conditions
+with fresh dice, including turn/round work, without a separate result cache. Director correction controls
+handle reroll abuse under the established history boundaries.
 
 ## Shared execution contract
 
@@ -110,7 +123,8 @@ Before committing, check current authority, lifecycle, history window and source
 Unaffordable ability execution is a hard block, not a parser error or warning-through path. Legal payment
 waivers and negative ranges remain representable. Fixed applicable costs debit once at execution;
 optional pre-resolution spending must be chosen. Later conditional costs preserve their source timing.
-An older-turn edit similarly fails the history-window check even if the command is syntactically valid.
+An older-event edit after later gameplay similarly fails the history-window check until sequential
+rewind, even within the same turn and even if the command is syntactically valid.
 
 Log accepted operations and their consequences discretely, with user/source attribution, ordered identity,
 original inputs and before/after state. Active card projections may change; historical records do not.

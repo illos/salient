@@ -121,8 +121,11 @@ retained campaigns. No separate Director moderation power is established by this
   instead of being discarded, moved to a replacement container, or automatically transferred. Saved reward
   preparation remains separate from the common live stash. Loading the saved encounter adds its reward items
   to that live stash immediately; encounter start/wrap-up must not add them again. Proposed load consistency
-  commits monster loading and reward addition together and preserves prior stash contents; detailed void/reset
-  treatment still needs refinement; no per-encounter persistent stash collection is required. See the
+  commits monster loading and reward addition together and preserves prior stash contents. Confirmed Void
+  restore returns Director-panel foes/loot state to its combat-start snapshot, removing post-start reward
+  additions and restoring pre-start contents. Keep retains current state. Record enough item/load/location
+  provenance to reconcile claims and transfers without duplication; no per-encounter persistent stash
+  collection is required. See the
   [inventory checkpoint](inventory-spec.md) for proposed item/location/transfer contracts and open
   detachment/lifecycle questions.
 - Keep character progression history independent of encounter undo. Restoring a build retains present
@@ -132,11 +135,12 @@ retained campaigns. No separate Director moderation power is established by this
   nonempty roster requires a replace/append choice. Each foe has a show/hide toggle. A separate toggle beside
   Add sets initial visibility for newly added monsters without changing existing entries; new campaigns
   default it to hidden, its value persists per campaign, and saved-encounter loads use the current value as
-  well. The foes roster does not lock during combat: the Director can add/remove participating monsters
+  well. The foes roster does not lock during running combat: the Director can add/remove participating monsters
   without ending or voiding the encounter. The roster belongs to the campaign and persists across session
   closure with the resulting keep/reset state; later sessions reuse its retained instances. The encounter
   builder supports reusable preparation; live foes-roster additions/removals and saved-encounter loads are
-  allowed at any time, including between sessions, while paused, and during combat. History/void-reset
+  allowed between sessions and during running combat; pausing locks both rosters, including regrouping
+  and saved-encounter loads. History/void-reset
   treatment of mid-encounter additions/removals remains open.
 - The v1 encounter builder calculates difficulty for a planning party made from hypothetical character stubs
   with individually adjustable levels and/or party stubs imported from campaigns the user owns or actively
@@ -153,7 +157,9 @@ retained campaigns. No separate Director moderation power is established by this
   current-state display does not rewrite historical encounter difficulty or define rewards. Exact party inputs
   still need definition.
 - V1 saved encounters retain the monster selection, including quantities, the last party strength calculator
-  setup, and a rewards stash; no other authored supporting content is required. Saved templates are private to
+  setup, a rewards stash, and prepared monster initiative groups, minion squads and captain assignments;
+  no other authored supporting content is required. Reopening and duplication preserve the preparation;
+  loading maps it to independent live instances and relationships within that load. Saved templates are private to
   their creator in v1, with sharing deferred; independent loaded roster instances retain their table
   permissions. Retain the definition references and rule data needed to instantiate those selections.
 - Saved encounter templates and loaded encounters remain independent. Editing a template, official definition,
@@ -239,7 +245,8 @@ requirements for retained campaigns.
 
 A session may contain successive encounters and non-encounter activity. Each encounter run belongs to one
 session: closing that session voids any active encounter using the same keep-current/restore-starting-state
-choice as explicit voiding. It cannot resume in a later session. Pausing retains the session and encounter
+choice as explicit voiding. It cannot resume in a later session. The Director may explicitly Void while paused using the existing keep/reset choice, leaving the
+session paused and its roster lock intact. Ordinary gameplay remains blocked. Pausing itself retains the session and encounter
 indefinitely. This supersedes the prior cross-session encounter-segment proposal; archive chunking can still
 use bounded event ranges without implying live continuation.
 
@@ -390,12 +397,11 @@ compatible engine support; disabling its pack does not solve or change engine co
 versions does not require hosting every historical runtime. Runtime selection, upgrade policy, and warning
 versus blocking on a mismatch remain open.
 
-Confirmed roster-management timing: whenever no combat encounter is active, the Director can change session
-players and selected characters, including while paused. The Director can change the campaign foes roster at
-any time, regardless of encounter or pause state, including additions/removals and saved-encounter loads. This
-supersedes earlier open-session/between-session restrictions on foes-roster management; the encounter builder
-remains the reusable preparation tool. Monster gameplay actions still follow the running-session rules, and
-closed session history remains read-only.
+Confirmed roster-management timing: when the session is paused, both rosters are locked until resume,
+including session-player/character changes, foe additions/removals, regrouping and saved-encounter loads.
+This supersedes the earlier paused-edit permission. Outside a pause, party changes require no active combat;
+the Director can manage foes between sessions and during running combat. The encounter builder remains the
+reusable preparation tool. Monster gameplay actions require a running session; closed history stays read-only.
 
 V1 users can duplicate their own saved encounters as independent templates, including monster selection,
 party-strength calculator setup, and prepared rewards. Duplication does not load live foes or grant loot. The
@@ -470,8 +476,8 @@ Proposed logical records:
 | Character drafts/build revisions/reviews | Owner choices, automatic grants, recorded derived baseline, source context, effective build, exact submitted/base revisions, and approval status. |
 | Character details/inventory | Independently authored details and individual item instances/state; item stacks are outside v1. Separate from progression snapshots; confirmed owner-private character notes require a separate access boundary, including exclusion from Director reads. |
 | Character play state | One authoritative live state shared by main-sheet and table views. Encounter operations update it immediately; an active encounter binding locks out character edits. |
-| Encounter starting-state record | Immutable pre-encounter gameplay values and source character/build identity for history and void/reset, not an independent live character copy. |
-| Encounter templates/revisions | Monster selections/counts, last party strength calculator configuration (stubs and adjusted levels), rewards-stash preparation, and access scope; version-qualified references are proposed. No other authored supporting content is required for v1. |
+| Encounter starting-state record | Immutable pre-encounter gameplay values and Director-panel snapshot, including foes-roster membership/stable identities, group/squad/captain relationships, loot/stash contents and allocation/item-location relationships, and source character/build identity for history and void/reset. Restore removes post-start foe additions and restores removed original instances from recorded state; not an independent live character copy. |
+| Encounter templates/revisions | Monster selections/counts, prepared initiative groups, minion squad membership and captain assignments, last party strength calculator configuration (stubs and adjusted levels), rewards-stash preparation, and access scope; version-qualified references are proposed. No other authored supporting content is required for v1. |
 | Foes roster/content/instances | Immutable per-load definition copies; distinct live monster instances with visibility; squad relationships and pooled resources. Survive encounter ending and session closure until removed from the campaign roster. Encounter membership references these instances. |
 | Encounter resources | Shared encounter-scoped resources and turn state, distinct from roster lifetime. |
 | Session/encounter control | Lifecycle status, selected recorded state, last committed sequence, pending operations, and expected revisions. |
@@ -524,15 +530,40 @@ ownership transfer is excluded from v1.
 
 ## 5. Encounter actions and undo
 
+Confirmed minion state constraint, 2026-09-13: living squad member identities and current pooled
+Stamina are distinct state. Losing a captain’s Stamina bonus reduces total squad Stamina without
+casualties, even if the pool is below the surviving members’ combined stat-block values. Do not derive
+living count unconditionally from pool/Stamina, normalize the pool to that count, or create per-member
+current-Stamina tracks. Record the stat adjustment distinctly from damage and preserve it in history.
+Confirmed: later non-area damage exhausting the pool defeats all surviving ordinary members, even
+when stat adjustment previously left the pool below their combined values. Preserve casualty identities
+and source exceptions; do not extend this to area damage’s affected-member restriction. Non-exhausting
+damage thresholds and other membership transitions retain their separate contracts. Confirmed bonus
+gain: a replacement captain’s Stamina bonus adds to the pool for surviving members only; no revival,
+new member identity, damage reset or action refresh results from the adjustment.
+
+
 Each logical action needs a stable command ID, actor, relevant entities, source/build versions, the exact
 engine release and relevant parser versions, expected state revision, and session/encounter association.
 Preserve the requested intent, modifier invocations, committed effects, and displayed explanation distinctly.
 
 The confirmed operation model distinguishes un-fired per-user selection from active effect membership,
-current individual turn from current group activation, and each creature's spent turn from group completion.
+turn entries and actual turn occurrences from group activation, and spent entry/participant allowances
+from group completion. Multiple entries can reference one creature without duplicating its live state.
+A squad subgroup has shared turn participation, individual member identities/effects and an optional
+captain with separate Stamina/actions. Ordinary regrouping moves the selected entry; squad membership
+is a different relationship. Preserve interrupted turn context and spending across immediate turns.
 Persistent card projections may update while original event records remain immutable. Keep signed resource
 representation: legal negative Talent clarity differs from an unaffordable use, which shared execution
 must block. Fixed costs debit automatically at execution; optional pre-resolution choices remain inputs.
+
+Confirmed persistent-value/log boundary, 2026-09-13: Stamina, Recoveries, Heroic Resources, Malice
+and Victories are authoritative persistent values with their own rules and lifecycle. Director edits
+on sheets, stat blocks or resource displays update current state and append an attributed **Manual
+adjustment** event with field and before/after values. Roll-local edges/banes and result inputs remain
+separate action artifacts. The persistent game log exposes editable inputs only through case-specific
+interactive cards; their submissions append records rather than rewriting history. See
+[the owning table contract](table-spec.md#persistent-values-and-manual-adjustment-entries).
 
 Director OK commits encounter setup, takes the precombat restoration snapshot and applies combat locks
 before initiative/start effects. Draft cancellation preserves independently accepted roster mutations.
@@ -565,24 +596,31 @@ character sheets. It does not call modifiers. Read-only inspection of old histor
 live state. Undo must respect dependent changes; an encounter boundary does not permit selectively reverting
 an earlier action while retaining incompatible later effects on the same character.
 
-Confirmed history policy, updated 2026-09-13: players undo their own actions back to combat turn start
-or the beginning of the current FreePlay stretch, and can redo their own undone actions. Enable user undo
-defaults on; disabling it preserves Director undo/redo. The Director can rewind throughout the current
-encounter without a step limit. Once the next individual turn starts, editing any prior-turn event
-requires sequential rewind first, including Director edits. The End-turn undo gap remains open until
-that next turn. Cross-encounter rewind and setting-management timing remain open.
+Confirmed history policy, updated 2026-09-13: player undo follows the uninterrupted latest actions of
+one character to the nearest seam, with turn/FreePlay start as outer bounds. Another character's action
+or a committed Director correction closes that window. Automatic consequences stay linked to their
+cause. Shared controller identity does not remove character seams. Director rewind is sequential across
+seams within the current encounter; restore recorded redo forward, with no new dice or rule execution.
+Enable user undo defaults on; disabling it preserves Director undo/redo. Any older-event correction after later gameplay requires
+sequential rewind first, even within the same turn and including for the Director. End turn undo is available only while neither an
+intervening action seam nor next-turn start has closed the player window. Finish cleanup, or Void
+after applying keep/reset, makes the encounter a readable historical archive: gameplay undo cannot reopen it or cross the completed boundary,
+and ordinary corrections cannot edit its events. New current-state adjustments are separate records.
+Archive status takes effect on finalization, independently of compression/storage layout. Setting-management
+timing remains open. See [history](table-spec.md#undo-permissions-and-proposed-campaign-control).
 
 Corrections and undo append new entries without rewriting original records; state and later interpretation
 follow the effective current branch. Undoing an adjudication restores the prior result independently of
 undoing the source ability. Manual damage overrides survive modifier edits until explicitly cleared.
-New gameplay after undo clears redo availability while preserving abandoned history. Turn/round outcomes
-retain stable stamps: re-ending the same boundary reuses resolved results without fresh dice or duplicate
-grants. Restore applicable prior effects, resolve genuinely new due effects and leave removed effects
-removed. Refunded optional hero-token spending can be chosen again; explicit redo restores the recorded
-spend. See the [table history contract](table-spec.md#undo-permissions-and-proposed-campaign-control).
+New gameplay after undo clears redo availability while preserving abandoned history. Explicit Redo
+restores recorded actions, dice and consequences. New executions resolve current conditions with fresh
+dice, including turn/round work; no separate boundary-result cache or changed-effect reuse is required.
+Refunded optional hero-token spending can be chosen if a new result qualifies; explicit redo restores
+the recorded spend. Accepted-command retries retain accepted outcomes and do not duplicate changes. See the [table history contract](table-spec.md#undo-permissions-and-proposed-campaign-control).
 
-Retain later records when navigating backward. The grouping of reactions/manual steps into one undoable
-action and remaining same-turn dependency cases still need contracts. Character progression history remains a
+Retain later records when navigating backward. Automatic consequences belong to their originating
+action; another character's accepted response is a separate action seam and cannot be absorbed into a
+player undo unit. Remaining internal event grouping, manual-resolution and correction cases need contracts. Character progression history remains a
 separate operation with its narrower restoration scope.
 
 Non-encounter gameplay belongs to the running session's chronology and needs durable state-change records.
@@ -600,7 +638,8 @@ open, without changing chat records or treating chat as a new gameplay branch. N
 
 Voiding is now a separate encounter termination with an explicit keep/restore choice, not ordinary
 history-cursor navigation. The proposed contract retains the journal and void disposition, atomically closes
-pending work and releases the roster lock, and restores recorded starting gameplay values only when requested.
+pending work and releases the combat-imposed roster lock, retaining any applicable session pause lock,
+and restores recorded starting gameplay values only when requested.
 It never runs normal ending rewards/cleanup effects, restores revoked access, or rewrites the saved encounter
 template. General undo of a void and statistics treatment remain open; see the
 [table specification](table-spec.md#voiding-an-encounter).
@@ -649,7 +688,8 @@ Proposed archive contents:
 
 Lossless compression preserves the detailed record. The simplified post-session database holds current values,
 session/encounter summaries, statistics, and archive manifests. Summaries alone are insufficient for
-historical inspection, future metric definitions, or possible restoration.
+historical inspection and future metric definitions. Retained detail does not authorize restoring a
+completed encounter into live play.
 
 No encounter remains live after session closure. Later play creates a new encounter; kept character/monster
 values do not turn it into a continuation of the voided run. Resuming a paused session uses its still-current
@@ -715,7 +755,7 @@ passing.
 | Undo/redo | Recorded before/after state restores all affected values and entity changes without engine/dice calls. |
 | Manual completion | Resolved and outstanding effects remain distinguishable; resumption does not repeat completed effects. |
 | Disconnect before session closure | Previously accepted character and encounter changes remain persisted. The session remains running regardless of Director or all-client disconnection; reconnection does not restart or change its lifecycle. |
-| Void encounter | Keep preserves current character/monster values; restore recovers pre-start gameplay state without modifiers. Both skip ending awards/effects, retain the void record, and prevent late action commits. |
+| Void encounter | Keep preserves current foes membership/relationships and character/monster values; restore recovers pre-start roster membership/relationships and gameplay state without modifiers, removing later foes and restoring removed originals. Both skip ending awards/effects, retain the void record, and prevent late action commits. |
 | Independent roster loads | Two loads of a template have independent instances/state; template/catalog updates change neither. Append preserves existing values; replacement follows the explicit choice. Selecting a roster monster for combat retains its current state. |
 | Session closure | An active encounter is voided with an explicit keep/reset choice; archive the resulting state and sealed history. Skip normal ending awards and do not double-count/reapply changes. |
 | Archive failure/retry | Original detailed records remain available; retry publishes one coherent archive manifest before redundant data is removed. |
@@ -727,13 +767,11 @@ passing.
 
 ## 9. Open decisions at this checkpoint
 
-- Can live undo cross encounter boundaries within an open session, and how are dependent character changes
-  handled? Closed-session boundaries cannot be crossed by live undo in v1.
 - Define undo-setting management/change timing and how reactions, interrupted actions and manual
   completion form a dependent undo step. Turn/FreePlay player scope, Director encounter rewind, recorded
-  redo and mandatory rewind before prior-turn edits are confirmed.
+  redo and mandatory rewind before older-event edits after later gameplay are confirmed.
 - Define the concrete storage/projection for appended corrections/reversals, abandoned branches and
-  retained boundary stamps. New gameplay already clears redo availability without deleting history.
+  recorded action outcomes for undo/redo. No separate boundary-roll cache is required. New gameplay already clears redo availability without deleting history.
 - How does chat behave during undo, and which specific historical information needs a Director-only view, and
   what remains readable after leaving a campaign? Current members can read all past session logs by default
   regardless of attendance.

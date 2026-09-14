@@ -1,5 +1,5 @@
 {
-  "name": "draw-steel-headless-playtest",
+  "name": "salient",
   "private": true,
   "license": "GPL-3.0-only",
   "version": "0.1.0",
@@ -8,14 +8,42 @@
     "node": ">=24.12.0"
   },
   "scripts": {
-    "check": "tsc --noEmit && node --test tests/*.test.ts",
+    "check": "pnpm check:engine && pnpm check:app && pnpm build",
     "test": "node --test tests/*.test.ts",
     "play": "node src/cli.ts",
     "demo": "node src/cli.ts demo",
-    "character:sources": "node scripts/inspect-character-sources.ts"
+    "character:sources": "node scripts/inspect-character-sources.ts",
+    "dev": "vite --host 0.0.0.0",
+    "dev:backend": "convex dev",
+    "build": "tsc -p tsconfig.web.json && vite build",
+    "check:engine": "tsc --noEmit && node --test tests/*.test.ts",
+    "check:app": "tsc -p tsconfig.web.json && vitest run",
+    "test:app": "vitest run",
+    "test:browser": "playwright test",
+    "app": "node scripts/app.ts",
+    "foes:source": "node scripts/build-foe-source.ts --check",
+    "setup:local": "node scripts/setup-local.ts"
   },
   "devDependencies": {
+    "@playwright/test": "1.63.0",
+    "@tailwindcss/vite": "4.3.3",
     "@types/node": "24.13.4",
-    "typescript": "5.9.3"
-  }
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@vitejs/plugin-react": "6.1.1",
+    "convex-test": "0.0.57",
+    "tailwindcss": "4.3.3",
+    "typescript": "5.9.3",
+    "vite": "8.3.0",
+    "vitest": "4.1.11"
+  },
+  "dependencies": {
+    "@convex-dev/better-auth": "0.12.5",
+    "@tanstack/react-router": "1.170.34",
+    "better-auth": "1.6.15",
+    "convex": "1.45.0",
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
+  },
+  "packageManager": "pnpm@11.5.3"
 }

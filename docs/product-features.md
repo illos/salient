@@ -61,11 +61,12 @@ Stated capabilities:
 - Spatial outcomes usable as prose instructions without requiring an integrated digital map.
 
 A running session without an active structured activity is in free play: participants can use abilities and
-spend resources subject to core rules, and the Director can call for tests, activate traps, and use other
+spend resources subject to core rules, and the Director can verbally call for tests that players roll directly, activate traps, and use other
 applicable tools. Starting an encounter introduces rules-governed turn order and encounter resource/reward
 lifecycles; completing its outcome and cleanup returns to free play. The Director can also void an encounter,
 skipping its normal ending awards/effects and choosing to keep current character/monster state or restore
-their pre-encounter state. Ending or voiding releases the party roster lock. A session can be paused to freeze
+their pre-encounter state. Ending or voiding releases the combat party-roster lock; the pause lock still
+applies while the session is paused. A session can be paused to freeze
 the table. It remains running until explicitly paused or closed, regardless of who is connected, including
 when the Director or everyone disconnects. Respite is a dedicated table mode with its own self-contained
 gameplay loop, started and ended by the Director. Its mechanics and possible connection to downtime require
@@ -154,11 +155,13 @@ encounter voids it, with the same keep/reset character-and-monster-state choice 
 preserves it without a duration limit. An encounter cannot span closed sessions; non-encounter activity
 retains its own history.
 
-Confirmed: players undo their own actions back to combat turn start or the current FreePlay stretch,
-and redo their own undone actions. The Director can rewind throughout the current encounter. Enable user
+Confirmed: players sequentially undo their character's uninterrupted latest actions to the nearest seam,
+with turn/FreePlay start as outer bounds. Another character's action or a committed Director correction
+closes the window, regardless of shared controller. Automatic consequences remain linked to their cause.
+Redo restores the available recorded path. Director sequential rewind crosses seams within the current encounter. Enable user
 undo defaults on; disabling it preserves Director undo/redo. Corrections and undo append new entries.
-Once the next individual turn starts, older-turn changes require intervening history to be undone first,
-even for the Director. New gameplay clears redo availability while retaining historical records and
+Once later gameplay has committed, correcting an older event requires the whole intervening chain
+to be undone first, even within the same turn and even for the Director. New gameplay clears redo availability while retaining historical records and
 boundary results. Setting management/change timing, same-turn dependent actions, chat presentation and
 cross-encounter rewind remain open. Closed sessions cannot be reactivated. See
 [the table history contract](table-spec.md#undo-permissions-and-proposed-campaign-control).
@@ -389,7 +392,8 @@ attribution and undo/void treatment remain to be designed; this is not a v1 deli
 ### Saved encounters
 
 V1 users can duplicate their own saved encounters as independent templates, including monster selection,
-party-strength calculator setup, and prepared rewards. Duplication does not load live foes or grant loot. The
+prepared initiative groups, minion squads/captain assignments, party-strength calculator setup, and
+prepared rewards. Duplication does not load live foes or grant loot. The
 public campaign directory is deferred beyond v1; campaigns are unlisted by default and v1 discovery uses
 campaign share codes/URLs. Opting into a public listing belongs to the later directory feature.
 
@@ -398,10 +402,12 @@ both individual catalog additions and monsters loaded from saved encounters use 
 the default does not change existing foes' individual visibility.
 
 The encounter builder supports reusable preparation and duplication of owned saved encounters. The Director
-can manage the live foes roster at any time, including additions/removals and saved-encounter loads between
-sessions, while paused, or during combat. For v1, a saved encounter retains a reusable monster selection,
-including quantities, its **party strength calculator** setup (working title), and a **rewards stash**. No
-other authored supporting content is required. The v1 builder also calculates encounter difficulty for a
+can manage the live foes roster between sessions and during running combat. When the session is paused,
+both rosters are locked until resume: no session-player/character changes, foe additions/removals,
+regrouping or saved-encounter loads. For v1, a saved encounter retains a reusable monster selection,
+including quantities, prepared initiative groups, minion squads and captain assignments, its **party
+strength calculator** setup (working title), and a **rewards stash**. Reopening and loading preserve
+completed preparation. No other authored supporting content is required. The v1 builder also calculates encounter difficulty for a
 planning party: add hypothetical character stubs with adjustable levels, or import party stubs from any
 campaign the user owns or actively directs. Imported stubs can be deleted individually and their levels
 edited, with a reset back to the source character's current actual level. These changes do not affect the
@@ -413,8 +419,16 @@ included regardless of visibility or current combat membership. Defeated monster
 immediately, before their entries are removed at normal cleanup. Saved encounters are private to their creator
 for v1; sharing is deferred.
 
+Minions are added as one squad entry, initially four, with plus/minus selecting 1–8; another squad
+requires another entry. An optional captain is additional to that count. Prepared entries remain
+independent on load; no manual live split/merge or damaged-squad refill is introduced. Derive minion EV
+from count × printed EV ÷ printed quantity, preserving fractions, with captain EV counted separately.
+Repeated turn entries for one creature do not multiply its EV. Live minion EV uses surviving membership,
+not the pool’s Stamina or the saved template count. See [the minion contract](table-spec.md#minion-squads-and-captain-state).
+
 Loading a saved encounter populates the Director's **foes roster** with independent monster instances and the
-rule data needed to run them. If the roster is nonempty, a dialog offers **replace** or **append**. Changes
+rule data needed to run them, restoring the prepared groups and squad/captain relationships within that
+load. If the roster is nonempty, a dialog offers **replace** or **append**. Changes
 during play do not change the saved version, and later template edits do not change existing instances.
 Loading it again creates fresh instances; loading alone does not start combat.
 

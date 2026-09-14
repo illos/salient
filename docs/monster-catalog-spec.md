@@ -17,6 +17,13 @@ longer proposed.
 
 ## Confirmed requirements and proposed first scope
 
+**v0.01 foe visibility, confirmed 2026-09-14:** defer hiding and its hide/reveal/Add visibility
+controls. All loaded foes are visible in audience rosters, with participating foes visible in
+shared setup and initiative. Full stat blocks remain Director-only; health display and Malice
+visibility keep their separate policies. Fuller V1 hidden-foe designs below are future scope.
+See [the owning contract](table-spec.md#monster-visibility-and-health-display). This records scope,
+not an implementation change.
+
 **Confirmed v0.01 scope:** saved encounter templates are deferred beyond the pre-alpha. Its required loading
 path is adding at least one catalog stat block directly to the live foes roster. Template authoring,
 duplication and loading remain fuller-product requirements below, not prerequisites for this prototype.
@@ -68,11 +75,13 @@ choose a final UI layout.
    minion squads, separately from the original definition. Missing required values remain visible.
 4. Show calculated encounter difficulty for the selected party using verified rules, then save the reusable
    encounter. For v1, it retains the monster selection, including quantities, the party strength calculator's
-   last setup (hypothetical/imported stubs and adjusted levels), and a rewards stash; the proposed storage
-   retains the selected definition revisions. No other authored supporting content is required; standalone
+   last setup (hypothetical/imported stubs and adjusted levels), a rewards stash, and prepared initiative
+   groups, minion squads and captain assignments. Reopening, duplication and loading preserve this
+   preparation. The proposed storage retains the selected definition revisions. No other authored supporting content is required; standalone
    saved stashes are excluded from v1. The encounter builder supports reusable preparation, including
    duplication of owned templates. Foes-roster additions/removals and saved-encounter loads are available at
-   any time, including between sessions and during pauses/combat.
+   between sessions and during running combat. Pausing locks both live rosters until resume, including
+   additions/removals, regrouping and saved-encounter loads.
 5. From the top of the Director's foes roster, search/add individual stat blocks or load a saved encounter. A
    toggle beside Add determines whether newly added monsters start visible or hidden; individual roster
    visibility remains adjustable. Loading into a nonempty roster requires a replace/append dialog; an empty
@@ -87,10 +96,40 @@ choose a final UI layout.
    additional roster-clutter mechanism is required. The Director can add/remove monsters during active combat,
    including participating foes. A new monster added mid-combat automatically joins in a new initiative
    group at the bottom, with a current-round turn available; the Director can change placement/group.
-   Group changes preserve individual spent-turn state and follow the [regrouping contract](table-spec.md#mid-combat-additions-and-regrouping).
+   Group changes move selected turn entries, preserving their spent state and shared creature identity, and follow the [regrouping contract](table-spec.md#mid-combat-additions-and-regrouping).
    No encounter roster lock blocks these operations or saved-encounter
    replace/append loading. Unsupported mechanics remain readable and manually resolvable. Loading and gameplay
    changes are recorded state transitions.
+
+Confirmed minion-add UI, 2026-09-13: adding a minion stat block creates one squad entry, defaulting
+to four members. Plus/minus controls select any whole count from 1 to 8, not only four or eight. The
+optional captain does not count toward that maximum. Add another entry for another independent squad;
+do not merge it into an existing same-name squad. Saved preparation preserves each entry’s count and
+relationships. No manual split/merge or damaged-squad refill is implied by the add control. Each minion
+still retains an identity and target reticle inside the shared squad turn.
+
+Confirmed minion EV calculation, 2026-09-13: derive EV proportionally from the given source numbers:
+`selected minion count × printed EV ÷ printed creature quantity`. Preserve the original EV and quantity;
+for EV 3 per four minions, six minions contribute EV 4.5. Do not round the count up to a purchase pack
+or round away fractional EV. Sum the derived values across entries; splitting the same total count
+between prepared squads does not change its combined EV. A captain contributes its own creature EV
+separately. This is the selected calculator policy for the 1–8 count control; the printed four-minion
+purchase wording remains preserved as source text.
+
+Confirmed saved preparation, 2026-09-13: predesigning an encounter includes arranging monster
+initiative groups, establishing minion squads and assigning their captains. Persist those choices in
+the saved encounter; reopening, duplicating and loading preserve the prepared arrangement. Loading
+creates independent live monsters, groups and squad/captain relationships within that load, rather
+than requiring the Director to repeat completed setup. New ordinary monsters default to individual
+initiative groups unless deliberately regrouped. Initiative groups and minion squads remain separate
+mechanisms. Existing live-roster editing and mid-combat group/turn rules still apply; loading prepared
+groups does not grant extra turns. The squad count control is selected above; other preparation
+details and source-specific minion exceptions remain open. This confirms reusable monster preparation, not arbitrary additional authored encounter content.
+
+The Director can directly adjust live gameplay stats in loaded monster stat blocks as recorded table
+adjudication, alongside eligible game-log result corrections. Reusable source definitions remain
+independent. The standalone damage/collision/fall tool is deliberately omitted; see
+[fine-tuning](table-spec.md#director-fine-tuning-and-deliberate-damage-tool-omission).
 
 At the table, only the Director can inspect complete loaded monster stat blocks. Every used ability's full
 verbatim source text is available to the table through its game-log entry, including unsupported abilities;
@@ -150,7 +189,7 @@ Names below describe responsibilities, not committed table names or wire-format 
 | Source document | Source-qualified SCC, source path, original JSON and full Markdown. Retains unprojected fields and text. Supporting group, Malice, and general rules can use the same record shape. |
 | Monster definition | Identity, classification, structured baseline stat fields, revision-scoped embedded features, source references, unresolved data, and extraction diagnostics. Contains no damage or current encounter resources. |
 | Library search row | Name, identity/revision, sourcebook, category, level where known, organization, role, group/keywords, and a search projection. References the full definition. |
-| Saved encounter | User ownership, selected monster definitions/counts, the last party strength calculator setup, including hypothetical/imported stubs and planning levels, and encounter rewards-stash preparation; version-qualified references are proposed. No other authored supporting content is required for v1; see the [rewards-stash contract](inventory-spec.md#v1-encounter-rewards-stashes). Required monster preparation and squad/captain choices remain part of the loading/rules design, not a confirmed additional saved-content requirement. Saved encounters are private to their creator in v1; sharing is deferred. Independent loaded roster instances follow table permissions. |
+| Saved encounter | User ownership, selected monster definitions/counts, prepared initiative groups, minion squad membership and captain assignments, the last party strength calculator setup, including hypothetical/imported stubs and planning levels, and encounter rewards-stash preparation; version-qualified references are proposed. No other authored supporting content is required for v1; see the [rewards-stash contract](inventory-spec.md#v1-encounter-rewards-stashes). Prepared grouping and squad/captain relationships are confirmed saved content; loading restores them onto independent live instances. The default-four, 1–8 count control and shared squad/captain turn are selected; other preparation details and specific source exceptions remain open. Saved encounters are private to their creator in v1; sharing is deferred. Independent loaded roster instances follow table permissions. |
 | Loaded roster content | Independent copy of selected definitions, overrides, and relevant supporting rules when added to the foes roster. Repeated creature instances may share one immutable definition copy within a load. |
 | Monster play instance | Foes-roster membership, instance identity, definition snapshot reference, resolved baseline, current values, conditions, relationships, and show/hide state. Lives outside encounter membership and persists until removed from the roster. |
 | Squad play state | Member identities, pooled current/maximum Stamina, relevant baseline contributions, captain relationship, and squad-specific state. Captain health remains separate. |
@@ -168,6 +207,11 @@ Retain source and derived content together without confusing them. A correction 
 dependency, identifies the affected field and source, and records why the value changes. Avoid per-rule
 approval machinery or hash-based proof systems.
 
+For EV totals, count a creature once even when it has several turn entries, and count a captain
+separately from its squad. Saved templates use prepared minion counts; the current undefeated-roster
+total uses surviving identities. Neither pool damage nor captain Stamina adjustments alone change that
+count. Live casualties do not rewrite the template or historical encounter difficulty.
+
 ### Baseline stats and unresolved values
 
 For every interpreted field, retain its original text and whether it is a known constant, a supported
@@ -178,7 +222,7 @@ establishes it. Do not coerce missing values to zero or serialize `NaN` as if it
 | --- | --- |
 | Fixed numbers | Level, speed, stability, free-strike damage, Stamina, five characteristics; preserve source text alongside normalized values. |
 | Size | Exact category such as `1S`, numeric size where meaningful, and explicit alternatives/ranges where present. A selected size belongs to encounter preparation/instance data. |
-| Encounter value | Original text, numeric EV when supplied, and the number of creatures that EV describes. `3 for four minions` is not EV 3 per creature. Difficulty calculation is required for the v1 builder; final arithmetic and party inputs need rules research. |
+| Encounter value | Original text, numeric EV when supplied, and the number of creatures that EV describes. `3 for four minions` is not EV 3 per creature. Confirmed minion arithmetic: selected count × printed EV ÷ printed creature quantity, retaining fractional EV. Other difficulty arithmetic and party inputs retain their own research requirements. |
 | Movement | Base speed plus named movement modes and any source qualifications. |
 | Immunities/weaknesses | Ordered entries with type, amount/expression where resolved, and full original text. Shared-value inference is not a default. |
 | Conditional stats | Captain benefits, contextual bonuses, and other modifiers stay separate from the unmodified baseline. |
@@ -260,10 +304,23 @@ selection, add catalog monsters to the foes roster, load a saved encounter with 
 preparation choices, and select existing roster instances for combat. CLI and UI should call the same
 operations. Catalog reads do not execute rules.
 
+Confirmed Void restoration: Restore starting state recovers the combat-start foes roster and recorded
+state/relationships, removing post-start additions and restoring removed original instances. Keep current
+state preserves the current roster. Use recorded identities and snapshots, not a new catalog/template
+load. Live changes and their reversal remain in history; saved preparation is not mutated. See
+[Void](table-spec.md#voiding-an-encounter).
+
 Minion loading must establish squad membership and pooled Stamina. Per-member Stamina is baseline/reference
 data, not an independent pool to damage in addition to the squad. Captain attachment supplies conditional
 benefits without adding captain health to the squad. Missing squad choices or unresolved dependent stats must
 be surfaced during preparation rather than guessed.
+
+Confirmed minion casualty input: when overflow kills require missing spatial assignments, the original
+action's inline game-log card prompts the acting user to identify the additional minions. The Director
+can also respond. Derive the count from damage/squad state and collect only missing identities under
+the source casualty rules. Link the response and resulting casualties to the original action without
+applying its damage a second time. This uses the existing area/spatial-input pattern; see
+[the table contract](table-spec.md#inline-interaction-cards-in-the-game-log).
 
 An ability can be identified and readable while still requiring manual resolution. Parser acceptance alone
 must never label an entire monster supported: traits, immunity, captain effects, external rules, timing, and
@@ -279,6 +336,7 @@ These are proposed checks, not completed tests. The source audit supplies the ob
 | --- | --- |
 | Goblin Warrior | Library identifies level 1 Horde Harrier, Stamina 15, speed 6, size `1S`, both Spear Charge and Bury the Point, and complete Crafty text. Search can find it without a campaign. |
 | Goblin Spinecleaver | Preserve EV `3 for four minions`, individual Stamina 5, and captain benefit. A deliberately prepared four-member squad starts with one pool of 20; damaging it does not subtract a second independent health pool. |
+| Minion overflow input | Given known damage and squad state but unknown nearest additional casualties, the source action card asks for the missing minion assignments. The response records casualty identities and completes dependent effects without another attack roll or a second squad damage deduction. |
 | Thorn Dragon | Preserve Solo traits, all three villain-action ordinals, Virulent Breath as a target Might test, group/domain context, and complete special text. No inference that nearby dragon Malice all applies. |
 | Troll Butcher | Display `Acid 5, fire`; the missing fire value remains unresolved and cannot silently alter automatic damage. |
 | Iron Reaver — supplemental research, outside v1 | Report JSON stability `0` versus Markdown `R`; no trusted numeric zero is emitted for play. Preserve repeated Stamina notation and source text. |

@@ -1,110 +1,137 @@
 # Rules/combat workstream status
 
-Checkpoint: **2026-09-13**. Gameplay design has been consolidated for handoff. This is a documentation
-and research checkpoint, not an implemented command system or complete playable combat engine.
-The baseline still precedes the rules-tooling pilot and implementation slice. No immediate user answer
-is pending. Resume material design questions in groups of three, in plain text.
+Checkpoint: **2026-09-14 — game basics first**. This is specification work, not an implementation
+report. G4's [combat checklist](pre-alpha-design-gaps.md#v001-combat-acceptance-checklist) remains,
+with the [new runtime boundary](pre-alpha-design-gaps.md#game-basics-first--current-runtime-scope):
+defer class/stat-block-specific execution and stop reviewing those features one by one for v0.01.
+The previous turn-start Ferocity inclusion is superseded; all unique class-resource logic is manual.
+
+Common Malice lifecycle, Stamina/winded, ordinary-foe Slain status, clock/saves, shared action/dice/state
+operations, fixed costs from known inputs, manual adjustments, persistent log, undo/redo and closeout
+remain required. The Director edits persistent numeric values on their own displays; each edit appends
+a Manual adjustment entry. The log exposes editable inputs only through case-specific interactive
+cards. Hero-dying automation and the other G4 deferrals remain.
+
+**Active:** [the draft basic-play walkthrough](v001-basic-play-walkthrough.md). Foe hiding is deferred
+beyond v0.01: all loaded foes are visible, without hide/reveal or Add visibility controls; full stat
+blocks remain Director-only. F2 is closed by this scope choice, including hidden initiative questions.
+Confirmed: player/Director-supplied edge and bane counts feed automatic shared-roll arithmetic
+and recorded inputs/results; discovery of every modifier source is not required. Next-attack
+controls are also confirmed: start at zero, set before target-completion firing, record with the
+accepted attack and reset afterward. Placement remains flexible for playtesting. The characteristic
+default is confirmed: automatically select the highest permitted current value with a pre-fire
+choice available. Target-specific edge/bane counts for multi-target attacks are confirmed, with
+inputs and outcomes recorded by target. Next pending case is [attack-wide and target-specific
+input composition](v001-basic-play-walkthrough.md#next-review-case-attack-wide-and-target-specific-counts).
+Complete and verify the common-operation contracts, including actual persisted
+state, log records, manual resolution, retries and history. G1–G3 remain hero creation/evaluation/
+initialization dependencies. Preserve experimental parser/engine research for later feature work.
+Resume only material product questions, one at a time; ordinary source definitions are research work.
 
 ## Where to read
 
 | Document | Responsibility |
 | --- | --- |
-| [Table specification](table-spec.md) | Authoritative gameplay, table roles, lifecycle, clock, targeting and history policy. |
-| [Commands and action cards](table-command-spec.md) | Shared registered operations, grammar boundary, inputs, continuations and execution checks. |
-| [Command reference draft](table-command-catalog.md) | Consistent proposed spellings and argument shapes for the confirmed interactions; no production API claim. |
-| [Pre-alpha checkpoint](pre-alpha-design-gaps.md) | Selected v0.01 scope and decision index; fuller research does not expand the milestone. |
-| [App build handoff](web-app-build-handoff.md) | Contracts the separate app thread can integrate; no direct contact is claimed. |
-| [Decision record](gameplay-decision-record.md) | Original recommendations and user replies, including superseded alternatives. |
+| [Table specification](table-spec.md) | Authoritative gameplay, lifecycle, targeting, timing and history. |
+| [Minion contracts](table-spec.md#minion-squads-and-captain-state) | Entry/count/EV, shared participation, pooled Stamina and captain behavior. |
+| [Commands and action cards](table-command-spec.md) | Shared UI/palette/slash/headless operations and continuations. |
+| [Command reference](table-command-catalog.md) | Proposed spellings; no implemented API claim. |
+| [Pre-alpha checkpoint](pre-alpha-design-gaps.md) and [V1 checkpoint](v1-spec-checkpoint.md) | Immediate versus fuller-product scope. |
+| [App build handoff](web-app-build-handoff.md) | Integration contracts for the separate app thread. |
+| [Decision record](gameplay-decision-record.md) | Chronological recommendations, answers and superseded alternatives. |
 
 ## Effective gameplay baseline
 
-- **Opening:** the staged action card is draft until Director OK. OK commits configuration, captures the
-  restoration baseline and applies combat locks before initiative. Cancel before OK discards draft
-  choices; afterward, use Void keep/reset. Active players and Director may roll; observers cannot.
-  The winning side chooses who starts, and the Director may choose on either result.
-- **Turns/groups:** successive complete individual turns, explicit Take turn/End turn and player-chosen
-  order within combined hero groups. New monsters join this round in a new group at the bottom.
-  Director regrouping preserves individual spent turns and separate group completion. Unspent arrivals
-  can join active groups but cannot reopen finished groups. Moving the current actor preserves its turn
-  and the original group's activation; empty remaining work hands off after required effects finish.
-- **Sheet/movement:** detailed sheet with remaining-action indicators; spent-action graying is advisory.
-  Ordinary board movement is not recorded. Initial V1 omits I moved/Convert to maneuver buttons.
-- **Targeting:** per-user visible selections, actor/target kept distinct. Ordinary single-target actions
-  fire when actor/ability/target inputs are ready; self-only supplies self. Multi-select uses checkboxes,
-  explicit fire below the maximum and auto-fire at the maximum. Area selection requires explicit fire.
-  Firing clears targeting/ability selection; actor switch, cancellation and undo clear drafts. End turn
-  and actual target death clear targeting. Additional required choices still use cards.
-- **Persistent areas:** register end conditions; cards stack at the log bottom while active. Owner and
-  Director update affected creatures immediately, then confirm each firing with the previous selection
-  prefilled. Dependent clock work waits. Resolve now handles unobserved triggers. Ordinary missed cards
-  have no reminder inbox or resurfacing.
-- **Tests/FreePlay:** one-volunteer and one-roll-per-character requests; combat requests expire at round
-  end, FreePlay requests at combat OK or session end. FreePlay actor defaults to the viewed sheet.
-  Show test difficulty defaults off at campaign level; base roll, modifiers, total and success/failure
-  remain public. Per-test difficulty reveal is deferred.
-- **Costs:** applicable fixed costs debit automatically when execution is ready; optional pre-resolution
-  enhancements use cards unless supplied. Unaffordable abilities are blocked for all callers. Source
-  payment waivers and legal negative ranges remain valid; this is not blanket zero-floor validation.
-- **Clock:** individual turn/round start/end, enqueue order with save-ends last, specific source ordering
-  preserved. Include applicable effects applied before the final save phase. Automatic saves retain
-  failed-save hero-token opportunities until another participant starts an individual turn.
-- **History:** corrections/undo append entries and preserve originals. Future interpretation uses the
-  effective branch. Manual damage overrides survive modifier edits until cleared. Previous turns lock
-  against direct changes once the next individual turn starts; rewind intervening history first, even
-  for Director edits. Players undo within their turn/current FreePlay stretch and redo recorded results;
-  Director rewind reaches any point in the current encounter. New gameplay clears redo availability,
-  retaining abandoned history. End-turn/round stamps prevent rerolls or duplicate grants after undo.
-
-The [table spec](table-spec.md) retains exact scope, timing, privacy and source exceptions. Playable
-retainers/friendly monsters remain beyond V1; initiative groups are not minion squads. All table controls
-use shared registered operations with headless access and attributed, ordered log entries.
+- **Opening and rosters:** draft until Director OK; then snapshot and combat locks before initiative.
+  Active players/Director may roll; observers cannot. Ordinary monsters initially have independent groups.
+  Both rosters are locked while paused. FreePlay damage/resources carry forward under source startup
+  rules, but earlier actions never consume the new combat economy or replay themselves.
+- **Turn entries:** entries link to creatures; spent entries, live creature state and group completion
+  remain distinct. Drag only the selected entry. Additions receive a current-round turn in a new bottom
+  group. Unspent arrivals can join active groups, never reopen finished ones; genuine round completion
+  does not fabricate unacted turns. Source-required immediate turns preserve/resume interrupted contexts
+  without refreshing spending or duplicating boundaries. Extra main actions are not full turns.
+- **Minion addition and EV:** one squad entry defaults to four, with plus/minus selecting 1–8. Another
+  squad is another entry; no manual live split/merge or refill through the add control. Captain is
+  additional to eight. EV = count × printed EV ÷ printed quantity, retaining fractions; six at EV 3 per
+  four cost 4.5. Captain EV is separate; repeated turns do not multiply it. Prepared counts and living
+  membership are distinct, and pool Stamina is not a count of creatures.
+- **Squad actions:** members/captain retain individual targets and effects. Use one coordinated squad
+  roll with up to three participants per target; captain actions have their own costs, rolls and Stamina.
+  Personal extra captain turns do not refresh the squad. The subgroup shares a turn, not serial member turns.
+- **Squad Stamina:** track current pool and surviving identities separately, with no personal current
+  Stamina. Bonus loss reduces the pool without casualties; replacement bonus gain adds only for survivors,
+  without revival. Later non-area damage exhausting the pool defeats remaining ordinary members, subject
+  to explicit exceptions. Area damage remains capped at affected minions’ combined applicable Stamina and
+  cannot kill outside the area. Derive known casualties and collect only missing identities, once.
+- **Clock:** abilities register turn/round effects; the clock owns scheduling and shared-operation dispatch.
+  Global work runs once per actual turn, including one shared squad/captain turn. Personal effects/saves
+  remain per creature. Separate captain turns supply new boundaries; selection/resumption does not.
+  Due work uses enqueue order and save-ends last, preserving source exceptions and applicable effects
+  applied before the final save phase. No wall-time advancement or synthetic closeout tick.
+- **Actions, costs and partial automation:** all table controls use registered shared operations and ordered,
+  attributed log entries. Show full used-action text and actual results. Fixed costs debit automatically;
+  optional spending remains a choice; unaffordable execution blocks while legal negative ranges remain
+  valid. Other game-rule warnings are advisory. Unsupported effects can be marked Resolved at table;
+  dependent automation still requires real facts. Standalone damage tools are deliberately excluded.
+- **Targeting and navigation:** ordinary single/self inputs can auto-fire; multi-target cards preserve all
+  required choices. Persistent areas confirm each firing with prior membership prefilled; dependent work
+  waits. Resolve now handles unobserved triggers. Sheets follow the viewed character; log cards bind their
+  labeled actor. Explicit successful Take turn switches only the invoking user’s pane. Ordinary board
+  movement is not recorded, and no I moved/Convert to maneuver buttons are selected.
+- **Responses:** apply the triggering outcome, then append a valid response’s effective revisions.
+  Still-valid prompts survive End turn until next actual turn start or End combat. An affected character’s
+  new action or spending of the hit’s grant closes that hit’s window for all responders, including allied
+  Parry; preserve explicit response chains and unrelated events. Undo can restore a valid opportunity,
+  but never creates duplicate entitlement or bypasses seams/authority.
+- **History:** players sequentially undo uninterrupted own-character actions to the nearest seam and
+  turn/FreePlay outer bound. Another character’s action or Director correction closes that window,
+  regardless of shared controller. Director rewind is sequential across seams in the current encounter.
+  Older edits require undoing all intervening gameplay. Exact Redo restores recorded dice/state; a new
+  execution rolls afresh. Clock registrations, participation and identities restore with their causes.
+- **Closeout:** End combat ends structured turns and closes old optional responses; required caused work
+  completes before source ending effects/rewards. Each character receives applicable optional cleanup
+  choices. Director confirms Victories (editable initial 1, including 0), then Finish cleanup closes
+  unused choices and archives. Void keep/reset skips ordinary cleanup; reset restores the entire
+  precombat Director gameplay snapshot, including foes/relationships and loot. Void while paused keeps
+  the pause lock. Neither terminal path can be reopened by gameplay undo.
+- **Scope and visibility:** generic Request test UI is deliberately excluded; verbal requests and direct
+  rolls remain, with source-specific test steps. Known difficulty follows the campaign visibility setting
+  even in history. Show Malice defaults off; full monster stat blocks stay Director-only while used-action
+  text remains in the log. Terrain research does not add saved terrain. Playable retainers/friendly
+  monsters remain beyond V1; broader references and source coverage are not prototype gates.
 
 ## Research and evidence
 
-Draw Steel research is restricted to the pinned local Compendium:
-`fb83a789da8f0327a389c277a0c790b1648d5810`. Forge Steel remains at
-`5a846aadb623a9855a023e9403bb887a956c341f`. Neither vendor was modified.
-
-- [Command inventory](research/table-command-rules-inventory.md) and
-  [targeting cases](research/table-command-targeting-cases.md): representative core coverage across
-  nine classes and general rules; not every ability or full automation.
-- [Grammar report](research/table-command-grammar.md): accepted syntax, formal EBNF, quoted/stable
-  references and a bounded syntax recognizer. Earlier external grammar references are historical
-  architectural research; no external Draw Steel source is authorized.
-- [Boundary-order synthesis](research/turn-boundary-ordering.md),
-  [general-rules report](research/turn-boundary-ordering-general.md), and
-  [concrete cases](research/turn-boundary-ordering-cases.md): prior delegated local-source investigations
-  found no universal ordering for independent boundary effects. The user selected FIFO/save-last.
-- [Essence of Tides investigation](research/essence-of-tides-save-timing.md): prior deep dive recommended
-  an immediate first save with moderate confidence; the user later expressly made pre-save-phase
-  inclusion a standing app policy. Source ambiguity and product policy remain separate.
-
-The previous checkpoint had independent design audits and 66 syntax cases. This checkpoint's cleanup
-uses two lead-agent review passes: decision/source consistency, then grammar/navigation and affected older
-specs. It does not claim a new independent agent review or app verification. Final check counts are
-recorded in the checkpoint audit below after validation.
+Research uses only pinned local Steel Compendium
+`fb83a789da8f0327a389c277a0c790b1648d5810`. The earlier independent
+[minion](research/minion-spec-review.md), [boss/captain](research/boss-and-captain-turn-review.md), and
+[35-entry terrain](research/dynamic-terrain-action-economy.md) reviews inform the later user rulings.
+The [lifecycle report](research/minion-lifecycle.md) and
+[116-entry inventory](research/minion-statblock-inventory.csv) retain source evidence and exceptions.
+The [research index](research/README.md) also links command/targeting, trigger, test and clock studies.
+Their historical recommendations are not automatically current product policy.
 
 ## Remaining decisions and next work
 
-Use [the remaining-contract checklist](table-spec.md#8-continue-exploring). Prioritize a sourced ability
-walkthrough with optional spending, a triggered response, and correction inside the permitted turn window.
-Key gaps are source-specific early trigger timing, conditional cost commitment, same-turn dependencies,
-current-actor removal and special extra turns, initial setup roster changes, end-of-encounter ordering,
-FreePlay fictional-time/resource reuse and respite. Difficulty-setting changes affecting old entries and
-certain private-history projections also remain open. Do not reopen settled defaults from historical rows.
+Prioritize the common-operation walkthrough under [re-scoped G5](v0.01-readiness-audit.md#g5-automation-level-for-the-furygoblin-exchange)
+and the remaining G1–G3 hero contracts. Do not resume the class/stat-block feature questionnaire;
+those runtime automations are deferred. Research shared rules, define inputs/outcomes and verify
+persisted behavior without inventing feature effects or re-asking settled product choices.
 
-Exact operation schemas, engine runtime, production parser, persistence implementation and installed
-review tooling remain separate work. The app thread owns its dirty frontend/backend/config files;
-this checkpoint touches specifications and bounded research artifacts only.
+Use [the table queue](table-spec.md#8-continue-exploring) for fuller-product follow-up. Deferred
+creature numeric cases include non-exhausting damage after bonus adjustment, the pool floor,
+and area exhaustion with unaffected survivors. Other cases include mixed squad-roll modifiers,
+source-driven membership changes and multi-recipient turn grants, and exact shared-turn removal handoff.
+Terrain object saves/protective-object destruction, conditional costs, source-specific response/ending
+sequences, FreePlay fictional-time reuse and respite remain bounded work in their respective scope.
 
-## Checkpoint audit
+Exact schemas, dispatcher/parser implementation, required-input recovery and concurrency verification
+remain engineering work. The current audit is documentation-only; it does not certify application behavior.
 
-- Completed two lead-agent cleanup passes covering decision/source consistency, command grammar,
-  document organization and affected earlier specifications. Updated table/command, access, data/storage,
-  engine, catalog, product, rules-language, process and handoff guidance; retained unresolved cases explicitly.
-- The bounded syntax recognizer passes **97/97 cases**, including 11 expected parse trees. This validates
-  syntax examples, not command semantics or an implemented engine.
-- Local documentation validation passes across **50 Markdown files and 973 file/anchor links**.
-- `git diff --check` passes. Both vendor revisions remain pinned and their working trees are clean.
-- The checkpoint contains documentation, project instructions and research fixtures. App implementation
-  changes remain outside this commit; no app tests or deployment were required for this documentation sweep.
+## Earlier checkpoint audit (historical)
+
+Earlier passes validated 90 and later 97 syntax fixtures; those counts describe their respective
+snapshots. Current link/whitespace results and this audit’s scope are recorded in
+[the consistency report](spec-consistency-review.md#validation). No previous engine test or independent
+review is claimed to have rerun merely because the documentation checkpoint was refreshed.

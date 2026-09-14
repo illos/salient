@@ -4,9 +4,13 @@ Status: rules-review workflow accepted for trial on 2026-09-11; implementation t
 Other proposed procedures remain labeled below. Product philosophy is recorded in
 [rules adaptation principles](rules-adaptation-principles.md).
 
-Current order: the user has prioritized [baseline FreePlay/combat specification](table-spec.md) before the
-tooling pilot and implementation slice. Bounded source research can proceed now; the accepted review trial
-remains later tooling work, not an installed or enforced gate.
+Current order, revised 2026-09-14: establish [shared game basics](pre-alpha-design-gaps.md#game-basics-first--current-runtime-scope)
+as a playable, testable foundation before class/stat-block-specific execution and sustained parser/engine
+feature work. Define and verify a common-operation walkthrough with source-backed inputs, actual state,
+manual resolution and history. Defer unique feature automation together instead of continuing the
+feature-by-feature scope questionnaire. The minimal wizard/evaluator/initial-state contracts remain
+separate work. Bounded source research can proceed; the accepted review trial remains later tooling
+work, not an installed or enforced gate.
 
 ## Rules-review workflow accepted for trial
 

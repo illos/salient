@@ -1,5 +1,33 @@
 # Combat feasibility research
 
+Minion lifecycle: [the full lifecycle report](minion-lifecycle.md) covers preparation, squad/captain
+relationships, shared turns, coordinated attacks, pooled casualties, area modifiers, reinforcements,
+transformations, troll exceptions and closeout. The [116-entry core inventory](minion-statblock-inventory.csv)
+records source-qualified stat-block metadata. The [current audit](../spec-consistency-review.md#latest-rulings-checkpoint)
+separates source evidence from selected squad/count/EV, captain-bonus and shared-clock behavior. Remaining
+pool arithmetic and explicit source exceptions are bounded in the [table queue](../table-spec.md#8-continue-exploring).
+
+Test-flow review: [tests and request UI](tests-and-request-ui.md) examines ordinary tasks, reactive tests,
+group tasks and a trap action. It recommends verbal calls plus direct character rolls, with source-specific
+action-card steps retained. The user accepted removing generic request UI for now as a deliberate scope
+choice, not a missing gap.
+
+Trigger timing follow-up: [trigger opportunities and intervening actions](trigger-opportunity-intervening-actions.md)
+separates source-local Lines of Force timing from the app's apply-then-revise convention, checks resource
+availability and explicit continuations, and evaluates the actor-specific early-close rule subsequently
+accepted as app policy. No blanket card-closure or later-ability undo rule is established.
+
+Forced-movement follow-up: [movement outcomes and dependent rules](forced-movement-dependencies.md)
+examines core resource triggers, terrain conditions, further attacks, Recovery opportunities and death
+effects, alongside collision/falling damage. It distinguishes source-required facts from proposed mapless
+controls and the then-proposed independent Director damage tool; the user has since deliberately
+excluded that tool in favor of result corrections and direct live-stat adjustments. It does not require
+universal movement confirmation.
+
+Boss-flow follow-up: [boss turns and extra actions](boss-turns-and-extra-actions.md) distinguishes
+full Solo Turns, Ajax's three-turn exception, Malice-granted main actions, villain actions and triggered
+capacity. It identifies group-scheduling implications before the proposed turn counter is confirmed.
+
 Current table-command research: [command-family and argument inventory](table-command-rules-inventory.md),
 [targeting and continuation cases](table-command-targeting-cases.md), and
 [grammar comparison and accepted syntax baseline](table-command-grammar.md), with

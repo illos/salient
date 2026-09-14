@@ -14,7 +14,6 @@ No parser or command system is claimed implemented.
 @Thorn /ability use ability="Brutal Slam" targets=[@Goblin5]
 @Elwin /ability use ability="Healing Grace" targets=[@self]
 @Thorn /test roll characteristic=might skill=climb
-/test request characteristic=might actors=[@Thorn]
 ```
 
 The acting-character prefix preserves the table's established actor-selection model. The command path
@@ -57,14 +56,14 @@ These reports cite the pinned core rules; the table below states design implicat
 | A roll can grant choices that did not exist at declaration | A command starts or advances a workflow; it need not encode the whole workflow in one line. |
 | Several resource options can coexist | Named option records, not an unexplained sum such as `+3`. |
 | Effects have independent instances, durations and saves | Effect references rather than a bare condition name for removal/save/correction. |
-| Requested tests and multiple triggered actions have different response policies | Interaction IDs and explicit completion semantics in schemas; omission cannot silently select a policy. |
+| Source-specific granted actions and multiple triggered actions have different response policies | Interaction IDs and explicit completion semantics in schemas; omission cannot silently select a policy. |
 | An action may create other actions | Parent/child references; no need to embed executable commands inside string arguments. |
 | Corrections must replace already-applied effects | Event/effect references and explicit correction operations, distinct from reroll and undo. |
 
 ## Gameplay refinement, 2026-09-13
 
 The syntax baseline remains unchanged. [The command reference draft](../table-command-catalog.md) applies
-it consistently to turn/group controls, per-user selection, test response modes, persistent-area membership
+it consistently to turn/group controls, per-user selection, direct test rolls, persistent-area membership
 and confirmation, setup commitment, resource choices and appended correction/undo. Additional names and
 schemas remain proposed; their gameplay boundaries are confirmed in the owning specs.
 
@@ -108,7 +107,7 @@ unambiguously to the same canonical command; aliases should not become a second 
 
 ## Surface rules
 
-1. Start an operation with `/family verb`, such as `/ability use`, `/test request`, `/save roll` or
+1. Start an operation with `/family verb`, such as `/ability use`, `/test roll`, `/save roll` or
    `/effect end`. Command paths may grow through registered segments, but keep common paths short.
 2. The optional leading `@Thorn` selects the actor. Do not also accept a competing `actor=` field in the
    same human syntax. Structured API callers use an explicit actor field.
@@ -227,8 +226,6 @@ accepted baseline; the broader catalog remains design input.
 | Ability resource option | `@Thorn /ability use ability="Lines of Force" trigger=@{event:e12} choices={"extra-distance":true}` | Option identity expresses what is purchased; source determines its cost. Full targets/destination can follow on a card. |
 | Local roll modifiers | `@Lyra /ability use ability="Artful Flourish" targets=[@Goblin5,@Goblin6] modifiers=[{"target":@Goblin5,"edges":1}]` | Modifier provenance and scope remain attached to one target of a shared roll. |
 | Ordinary test | `@Thorn /test roll characteristic=might skill=climb edges=1` | One skill bonus and edge category; no arbitrary extra skill stacking. |
-| Requested test | `/test request characteristic=might actors=[@Thorn] difficulty=medium` | No creature actor for the Director request; authenticated requester and requested actor differ. |
-| Open requested test | `/test request characteristic=intuition` | Opens participant scope. Choose one-volunteer or one-roll-per-character mode through explicit context/card input; no default has been selected. |
 | Save an effect | `@Thorn /save roll effect=@{effect:bleeding7}` | References the actual save-ends effect instance; does not request a characteristic test. |
 | Answer a target choice | `/card respond card=@{interaction:c17} answer={"targets":[@Goblin6]}` | Response schema and authority come from the identified pending interaction. |
 | Respond for one hero in an open card | `@Thorn /card respond card=@{interaction:c18} answer={"roll":true}` | Explicit responding actor; the card validates scope and whether that actor has already answered. |
@@ -316,10 +313,10 @@ actual state application require separate implementation tests.
 
 ### Conformance evidence
 
-The [conformance set](table-command-syntax-cases.json) contains 97 syntax/shape cases, including the
-original 66 and the new [gameplay command reference](../table-command-catalog.md) forms. It exercises
+The [conformance set](table-command-syntax-cases.json) contains 90 syntax/shape cases after removal of seven obsolete generic
+test-request examples. The remaining [gameplay command reference](../table-command-catalog.md) forms exercise
 malformed input, numeric overflow, Unicode escapes, duplicate decoded keys and references versus records;
-11 cases assert explicit parsed trees. Run the [bounded recognizer](table-command-syntax-check.py):
+10 cases assert explicit parsed trees. Run the [bounded recognizer](table-command-syntax-check.py):
 
 ```text
 python3 docs/research/table-command-syntax-check.py
@@ -343,3 +340,7 @@ runtime/version choice. Rules evidence is separately pinned in the linked local 
 5. T. Bray, editor; IETF. [RFC 8259: The JavaScript Object Notation Data Interchange Format](https://www.rfc-editor.org/rfc/rfc8259), December 2017, sections 4–7.
 6. JSON Schema. [Understanding JSON Schema: Objects](https://json-schema.org/understanding-json-schema/reference/object).
 7. D. Crocker and P. Overell; IETF. [RFC 5234: Augmented BNF for Syntax Specifications](https://www.rfc-editor.org/rfc/rfc5234), January 2008.
+
+Scope update, 2026-09-13: generic Director test requests are deliberately removed for now. Ordinary
+tests use verbal calls and direct `/test roll`; source-specific action-card test steps remain. This
+is not a missing operation or lifecycle to add without a new user decision.

@@ -15,10 +15,20 @@ Fury created through the minimal wizard, and basic combat with a visible game lo
 is not required. Existing authority/privacy and session rules apply to exposed features. Development data
 is disposable across breaking updates under the [development policy](development-process.md#confirmed-pre-alpha-development-policy).
 
-**Latest discussion checkpoint, 2026-09-13:** the gameplay baseline has been saved and reviewed, ahead
-of the tooling pilot and implementation slice. See the [pre-alpha decision index](pre-alpha-design-gaps.md)
-and [rules status](workstream-rules-status.md) for the effective contracts and remaining work. No immediate
-design answer is pending; unresolved mechanics are not authorized for implementation.
+**Latest discussion checkpoint, 2026-09-14:** v0.01 prioritizes common game basics as the foundation
+for later parser/engine development. Class/stat-block-specific runtime execution is deferred,
+superseding the earlier automatic turn-start Ferocity requirement. Preserve readable features,
+recorded manual resolution and the separately required minimal wizard/derived baseline. G4's common
+systems, Malice and Slain status remain. See [the current scope](pre-alpha-design-gaps.md#game-basics-first--current-runtime-scope)
+and [rules status](workstream-rules-status.md). Next is a common-operation acceptance walkthrough;
+unresolved mechanics are not authorized for implementation by this specification update.
+
+**v0.01 foe visibility, confirmed 2026-09-14:** defer hiding and its hide/reveal/Add visibility
+controls. All loaded foes are visible in audience rosters, with participating foes visible in
+shared setup and initiative. Full stat blocks remain Director-only; health display and Malice
+visibility keep their separate policies. Fuller V1 hidden-foe designs below are future scope.
+See [the owning contract](table-spec.md#monster-visibility-and-health-display). This records scope,
+not an implementation change.
 
 All table controls use registered UI/palette/slash/headless operations and ordered attributed log entries.
 Action cards collect intermediate choices and cross-user responses, including persistent area controls.
@@ -45,7 +55,7 @@ for current decisions; the original review's unresolved scope questions are not 
 | Rules content | Core rulebooks; every core class through levels 1–10; searchable Rules, Foes, and Items references | All official supplements, including Summoner/Beastheart and associated mechanics; homebrew monsters/options/items |
 | Play | Free play, combat, dedicated respite; initiative groups on both sides and multiple heroes per player; readable rules and recorded manual resolution where automation is incomplete | Playable retainers and friendly monsters; dedicated montage/negotiation flows, downtime projects, nested structured activities |
 | Characters | Creation, advancement, full edits, progression history, sharing, detachment/duplication, Forge Steel import | Forge Steel export implementation; preserve the model/adapter data needed to add it without a rewrite |
-| Encounters | Private user-owned templates, duplication, monsters/counts, remembered party-strength calculator, prepared rewards | Template sharing and other authored encounter content |
+| Encounters | Private user-owned templates, duplication, monsters/counts, prepared initiative groups and minion squads/captains, remembered party-strength calculator, prepared rewards | Template sharing and other authored encounter content |
 | Inventory | Individual item instances, equipped/unequipped state, character/party inventories, persistent Director stash and approved claims | Item stacks, direct character-to-character transfers, player-created/free-text items, standalone saved stashes |
 | Accounts/social | Account settings, friendship, user blocking, regenerable personal/campaign share codes and URLs | Username search, public campaign directory, app admin-dashboard functionality |
 | Messaging | Campaign chat; requests appear in the relevant UI; password-reset email | All notifications, private direct messages, author editing/deletion of sent chat messages |
@@ -107,15 +117,16 @@ Director's account also returns control to the owner in a retained campaign.
 
 | Operation | Confirmed boundary |
 | --- | --- |
-| Director changes session players/selected characters | Whenever no combat encounter is active, including while paused |
-| Director adds/removes foes or loads saved encounters | Any time: between sessions, while paused, or during combat |
+| Director changes session players/selected characters | When no combat encounter is active and the session is not paused |
+| Director adds/removes foes or loads saved encounters | Between sessions and during running combat; paused sessions lock both rosters, including regrouping |
 | Gameplay actions and resource spending | Running session and applicable core rules; pause blocks gameplay |
 | Ordinary character/build edits | Locked during combat, including while paused |
 | Character-data inventory management | Available between sessions/while paused, subject to combat character locks and item permissions |
 | Campaign observer | May read the permitted table and campaign chat; cannot perform session actions or claim stash items |
 
 The roster-management rules supersede older restrictions requiring a running/open session to manage foes.
-They do not authorize gameplay while paused or changing a closed session's records.
+The latest pause lock supersedes the earlier permission to edit rosters while paused. These rules do not
+authorize gameplay while paused or changing a closed session's records.
 
 Players can take turns with eligible owned/shared characters. The Director can perform any player table
 operation on their behalf. Character progression remains a separate owner-controlled track. Detailed
@@ -127,13 +138,34 @@ before OK discards draft choices, preserving independent roster changes; abandon
 existing Void keep/reset choice, including during initiative. Detailed start-effect ordering remains open.
 
 Any active player may roll the shared initiative roll; Director access remains and observers cannot roll.
+Initial setup gives each ordinary monster its own initiative group, like heroes; minion squads are
+a separate mechanism. Draft roster changes preserve remaining creatures' setup choices.
 A newly added mid-combat monster defaults to a new group at the bottom of initiative, adjustable by the
-Director. The Director may regroup during combat; spent turns/actions remain attached to each creature,
-so already-acted members stay grayed out when their destination group activates. Newcomers have a turn
+Director. The Director may regroup selected turn entries during combat. Each entry retains its spent
+state; entries for one creature share its live state. Squad turns additionally retain each member’s
+participation and the captain’s separate action allowance. Spent entries stay grayed out in their
+destination group; one creature-wide acted flag cannot represent multiple turns. Newcomers have a turn
 available in the current round. An unspent member joining a finished group does not reactivate it, while
 moving the currently acting creature leaves its ongoing individual turn uninterrupted. The original
 group continues afterward; unspent arrivals may act during a still-active group's activation. A group
 with no remaining turns finishes automatically after any current turn and required effects complete.
+
+Minion addition is one squad per entry, default four, with plus/minus selecting any count 1–8;
+optional captain is additional to eight. A new squad needs a new entry. Manual live splitting/merging
+and refill through the add count are excluded; source-driven changes retain their own rules. Compute EV
+proportionally from printed EV/quantity, preserving fractions. Saved counts are independent of live
+casualties. Keep each minion’s identity, the squad pool and shared participation separate.
+
+The captain uses normal actions on the shared turn; personal extra turns do not refresh the squad.
+Global turn work fires once per actual turn, including one firing for a shared squad/captain turn.
+Personal effects/saves still resolve for each affected creature. The game clock owns scheduled work;
+abilities register effects with it rather than maintaining separate schedules.
+
+Captain-bonus loss reduces squad Stamina without casualties; gain adds the bonus for surviving members
+without revival. Later non-area damage exhausting the pool defeats the remaining ordinary squad,
+subject to explicit exceptions. The area-only casualty rule remains intact. See
+[the current minion contract](table-spec.md#minion-squads-and-captain-state) and
+[the remaining cases](table-spec.md#8-continue-exploring).
 
 ### Characters, sharing and visibility
 
@@ -155,17 +187,19 @@ with no remaining turns finishes automatically after any current turn and requir
 - Monster-health display defaults to Bar; Numerical and Winded are alternatives. The Add visibility toggle
   defaults to hidden, persists per campaign, and also applies to template loads. Hidden foes remain active
   and may act; their names are not concealed in the game log under the current direction.
+- Show Malice is a campaign setting, off by default, controlled by the active Director. The Director
+  always sees the current shared pool; players/observers see it when enabled. Full used-action source
+  disclosure and resource mechanics retain their existing rules.
 - Rolls are public by default. Planned tower results are Director-only, including hidden from the roller.
   The tower interface and historical disclosure remain unresolved.
 
-Requested tests offer one-volunteer or one-roll-per-character response modes. Open combat requests
-expire at the end of the current round without a routine Director close step. The campaign setting
-**Show test difficulty** defaults off; the Director and engine retain difficulty access, while ordinary
-test results publicly show the base roll, modifiers, total and success/failure even with difficulty hidden.
-Per-test difficulty reveal/overrides are deferred for now; the campaign setting is the current control.
-FreePlay requests expire when
-combat starts or the session ends. FreePlay commands default to the viewed character sheet, with an
-explicit `@Character` override within the user's control permissions.
+Formal Director test-request UI and its response modes/lifecycle are removed from scope for now.
+The Director asks verbally; players roll directly from their character sheets, and the Director retains
+acting authority. Record dice, modifiers and total. Calculate the outcome when difficulty or a source
+outcome table is known; otherwise the Director interprets it. Source-specific test steps remain available
+within their originating actions. Show test difficulty defaults off and governs known difficulty values
+in all displayed entries, including history; per-test reveal remains deferred. Sheet/player pane uses the viewed character; log cards can act for another controlled character, with
+a clear actor label before interaction and no required sheet switch. Explicit successful Take turn switches the invoking user's player pane to that character; other switching behavior remains open. Explicit `@Character` commands retain control permissions.
 
 Confirmed 2026-09-13: applicable fixed ability costs are deducted automatically on execution; optional
 pre-resolution enhancements use a choice card unless already supplied. Insufficient resources block
@@ -184,14 +218,19 @@ Unclaimed items remain in the same persistent stash. Previously completed deposi
 
 Players may withdraw unapproved claims. Players cannot undo inventory changes; the Director can review, undo
 and redo them. This is distinct from the campaign's default-on **Enable user undo** setting for gameplay:
-players can undo their own actions to the start of their combat turn, or the beginning of the current
-FreePlay stretch, and redo their own undone actions. Existing control/session/dependency policies apply;
-Director undo/redo remains available.
+players sequentially undo their character's uninterrupted latest actions up to the nearest seam, with
+turn/FreePlay start as outer limits. Another character's action closes that window regardless of shared
+controller. Director sequential rewind crosses character/turn seams within the current encounter; redo
+restores the recorded path. Existing control/session policies apply. Committed Director corrections also create seams; the prior exception is superseded.
+
+Finish cleanup, or Void after applying keep/reset, closes the encounter as a historical archive. Gameplay undo cannot reopen it or cross
+that boundary, including for the Director within the same session. Archived events remain read-only;
+new current-state adjustments do not rewrite them.
 
 Corrections and undo append new entries without rewriting originals. Future interpretation/undo follows
 the current branch's effective result. Manual damage overrides survive modifier edits until cleared;
-undoing an adjudication restores the prior result while retaining the original ability use. Once the next
-individual turn begins, everyone must rewind through intervening history before modifying a prior-turn
+undoing an adjudication restores the prior result while retaining the original ability use. Once later gameplay
+has committed, everyone must rewind through the intervening chain before modifying an older
 event. Director encounter rewind remains available; same-turn dependencies still need detailed contracts.
 
 Retain structured source/actor/target identities, order, inputs, dice, outcomes, before/after state and
@@ -225,8 +264,9 @@ campaigns, characters and saved encounters, even during active combat in another
    operations, triggered actions, sequencing, partial/manual resolution, history dependencies and continuation
    after undo. Do not infer permanent behavior from the bounded experiment.
 3. **State reconciliation:** settle live resources after build edits, progression restoration, detachment and
-   duplication; void/reset after mid-combat roster changes or template rewards; and wrap-up deposits versus
-   character-lock release. Campaign-deletion retention of current recorded state before detachment resets
+   duplication; and wrap-up deposits versus
+   character-lock release. Void restore returns Director-panel foes/loot state to the combat-start
+   snapshot; item/claim reconciliation must implement that confirmed scope. Campaign-deletion retention of current recorded state before detachment resets
    is still a proposal, not a confirmed default.
 4. **Forced access changes:** implement loss of authorization promptly and define combat recovery when a
    participant is kicked, blocked, revoked or deleted. This is distinct from ordinary party-roster editing.

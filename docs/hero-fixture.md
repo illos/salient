@@ -1,5 +1,9 @@
 # Milestone 1 prepared hero and foes
 
+For integrated v0.01 automation, use [the current boundary](fury-goblin-automation.md). The 2026-09-14
+game-basics-first revision defers class/stat-block-specific execution, including turn-start Ferocity.
+Coverage described below belongs to the earlier experiment, not the integrated milestone requirement.
+
 This is a documented level-one character choice set with a small combat-state projection, not a character wizard or a fully automated sheet. `loadScenario()` reads selected abilities from the pinned Compendium JSON and complete Markdown. Default paths are relative to the module, so loading works outside the project working directory. Nothing modifies or updates the dependency.
 
 Source revision: `fb83a789da8f0327a389c277a0c790b1648d5810`. All links below point into that local dependency. The adapters check the checkout HEAD against this pin; a different `corpusRoot` is an alternate location for the same revision, not an automatic content-version migration. Local uncommitted corpus edits are not certified by that revision check; keep the dependency clean. Generic monster adapters mark unrepresented stat-block fields (such as immunities) as unsupported traits so they cannot silently enter automated combat.

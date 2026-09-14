@@ -1,0 +1,23 @@
+import { v, ConvexError } from "convex/values";
+import { query } from "./_generated/server";
+import { requireUser, requireMember } from "./lib/access";
+
+export const list = query({
+  args: { campaignId: v.id("campaigns"), sessionId: v.optional(v.id("sessions")), before: v.optional(v.number()) },
+  returns: v.object({ events: v.array(v.object({ id: v.id("events"), sequence: v.number(), sessionId: v.union(v.id("sessions"), v.null()), actorName: v.string(), kind: v.string(), description: v.string(), createdAt: v.number() })), nextBefore: v.union(v.number(), v.null()) }),
+  handler: async (ctx, args) => {
+    const user = await requireUser(ctx);
+    await requireMember(ctx, args.campaignId, user._id);
+    if (args.before !== undefined && (!Number.isSafeInteger(args.before) || args.before < 1)) throw new ConvexError("Invalid history cursor.");
+    if (args.sessionId) {
+      const session = await ctx.db.get(args.sessionId);
+      if (!session || session.campaignId !== args.campaignId) throw new ConvexError("Session unavailable.");
+    }
+    const before = args.before ?? Number.MAX_SAFE_INTEGER;
+    const rows = args.sessionId
+      ? await ctx.db.query("events").withIndex("by_session_sequence", q => q.eq("sessionId", args.sessionId!).lt("sequence", before)).order("desc").take(51)
+      : await ctx.db.query("events").withIndex("by_campaign_sequence", q => q.eq("campaignId", args.campaignId).lt("sequence", before)).order("desc").take(51);
+    const page = rows.slice(0, 50);
+    return { events: page.map(e => ({ id: e._id, sequence: e.sequence, sessionId: e.sessionId, actorName: e.actorName, kind: e.kind, description: e.description, createdAt: e.createdAt })), nextBefore: rows.length > 50 ? page[49]!.sequence : null };
+  },
+});

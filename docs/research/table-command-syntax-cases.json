@@ -52,16 +52,6 @@
     "input": "@Thorn /test roll characteristic=might skill=climb edges=1"
   },
   {
-    "id": "example-08",
-    "valid": true,
-    "input": "/test request characteristic=might actors=[@Thorn] difficulty=medium"
-  },
-  {
-    "id": "example-09",
-    "valid": true,
-    "input": "/test request characteristic=intuition"
-  },
-  {
     "id": "example-10",
     "valid": true,
     "input": "@Thorn /save roll effect=@{effect:bleeding7}"
@@ -432,11 +422,6 @@
     "input": "/test roll"
   },
   {
-    "id": "gameplay-02",
-    "valid": true,
-    "input": "/test request"
-  },
-  {
     "id": "gameplay-03",
     "valid": true,
     "input": "/encounter start"
@@ -513,36 +498,6 @@
     "id": "gameplay-12",
     "valid": true,
     "input": "@Thorn /test roll characteristic=might skill=climb"
-  },
-  {
-    "id": "gameplay-13",
-    "valid": true,
-    "input": "/test request characteristic=might actors=[@Thorn]"
-  },
-  {
-    "id": "gameplay-14",
-    "valid": true,
-    "input": "/test request characteristic=intuition response-mode=one-volunteer"
-  },
-  {
-    "id": "mode-shape",
-    "valid": true,
-    "input": "/test request characteristic=intuition response-mode=each-character",
-    "expected": {
-      "actor": null,
-      "path": [
-        "test",
-        "request"
-      ],
-      "arguments": {
-        "characteristic": {
-          "symbol": "intuition"
-        },
-        "response-mode": {
-          "symbol": "each-character"
-        }
-      }
-    }
   },
   {
     "id": "gameplay-16",
@@ -622,11 +577,6 @@
     "id": "gameplay-27",
     "valid": true,
     "input": "/history redo event=@{event:undo26}"
-  },
-  {
-    "id": "mode-duplicate",
-    "valid": false,
-    "input": "/test request response-mode=one-volunteer response-mode=each-character"
   },
   {
     "id": "effect-targets-missing-value",

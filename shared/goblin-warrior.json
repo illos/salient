@@ -1,0 +1,177 @@
+{
+  "source": {
+    "id": "mcdm.monsters.v1/monster.goblin.statblock/goblin-warrior",
+    "path": "en/unified/md/monster/goblin/statblock/goblin-warrior.md",
+    "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+  },
+  "name": "Goblin Warrior",
+  "text": "---\nagility: 2\nev: \"3\"\nfree_strike: 1\nintuition: 0\nkeywords:\n    - Goblin\n    - Humanoid\nlevel: 1\nmight: -2\nmovement: Climb\nname: Goblin Warrior\norganization: Horde\npresence: -1\nreason: 0\nrole: Harrier\nscc: mcdm.monsters.v1/monster.goblin.statblock/goblin-warrior\nsize: 1S\nspeed: 6\nstability: 0\nstamina: \"15\"\ntype: statblock\n---\n\n| Goblin, Humanoid  |           -           |      Level 1      |     Horde Harrier     |         EV 3         |\n|:-----------------:|:---------------------:|:-----------------:|:---------------------:|:--------------------:|\n|  **1S**<br>Size   |    **6**<br>Speed     | **15**<br>Stamina |  **0**<br>Stability   | **1**<br>Free Strike |\n| **-**<br>Immunity | **Climb**<br>Movement |         -         | **-**<br>With Captain |  **-**<br>Weakness   |\n|  **-2**<br>Might  |   **+2**<br>Agility   |  **0**<br>Reason  |  **0**<br>Intuition   |  **-1**<br>Presence  |\n\n> 🗡 **Spear Charge (Signature Ability)**\n>\n> | **Charge, Melee, Strike, Weapon** |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n> |-----------------------------------|------------------------------:|\n> | **📏 Melee 1**                    | **🎯 One creature or object** |\n>\n> **Power Roll + 2:**\n>\n> - **≤11:** 3 damage\n> - **12-16:** 4 damage\n> - **17+:** 5 damage\n\n> 🗡 **Bury the Point (2 [Malice](scc.v1:mcdm.monsters.v1/rule.monster/malice))**\n>\n> | **Melee, Strike, Weapon** |     **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n> |---------------------------|--------------------:|\n> | **📏 Melee 1**            | **🎯 One creature** |\n>\n> **Power Roll + 2:**\n>\n> - **≤11:** 5 damage; M < 0 [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) (save ends)\n> - **12-16:** 6 damage; M < 1 [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) (save ends)\n> - **17+:** 7 damage; M < 2 [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) (save ends)\n\n> ⭐️ **Crafty**\n>\n> The warrior doesn't provoke [opportunity attacks](scc.v1:mcdm.heroes.v1/rule.combat/opportunity-attack) by moving.\n",
+  "definition": {
+    "agility": 2,
+    "ev": "3",
+    "features": [
+      {
+        "ability_type": "Signature Ability",
+        "distance": "Melee 1",
+        "effects": [
+          {
+            "roll": "Power Roll + 2",
+            "tier1": "3 damage",
+            "tier2": "4 damage",
+            "tier3": "5 damage"
+          }
+        ],
+        "feature_type": "ability",
+        "icon": "🗡",
+        "keywords": [
+          "Charge",
+          "Melee",
+          "Strike",
+          "Weapon"
+        ],
+        "name": "Spear Charge",
+        "target": "One creature or object",
+        "type": "feature",
+        "usage": "Main action"
+      },
+      {
+        "cost": "2 Malice",
+        "distance": "Melee 1",
+        "effects": [
+          {
+            "roll": "Power Roll + 2",
+            "tier1": "5 damage; M < 0 [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) (save ends)",
+            "tier2": "6 damage; M < 1 [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) (save ends)",
+            "tier3": "7 damage; M < 2 [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) (save ends)"
+          }
+        ],
+        "feature_type": "ability",
+        "icon": "🗡",
+        "keywords": [
+          "Melee",
+          "Strike",
+          "Weapon"
+        ],
+        "name": "Bury the Point",
+        "target": "One creature",
+        "type": "feature",
+        "usage": "Main action"
+      },
+      {
+        "effects": [
+          {
+            "effect": "The warrior doesn't provoke [opportunity attacks](scc.v1:mcdm.heroes.v1/rule.combat/opportunity-attack) by moving."
+          }
+        ],
+        "feature_type": "trait",
+        "icon": "⭐️",
+        "name": "Crafty",
+        "type": "feature"
+      }
+    ],
+    "free_strike": 1,
+    "intuition": 0,
+    "keywords": [
+      "Goblin",
+      "Humanoid"
+    ],
+    "level": 1,
+    "metadata": {
+      "scc": "mcdm.monsters.v1/monster.goblin.statblock/goblin-warrior",
+      "source": "mcdm.monsters.v1"
+    },
+    "might": -2,
+    "movement": "Climb",
+    "name": "Goblin Warrior",
+    "organization": "Horde",
+    "presence": -1,
+    "reason": 0,
+    "role": "Harrier",
+    "size": "1S",
+    "speed": 6,
+    "stability": 0,
+    "stamina": "15",
+    "type": "statblock"
+  },
+  "baseline": {
+    "level": 1,
+    "maxStamina": 15,
+    "characteristics": {
+      "M": -2,
+      "A": 2,
+      "R": 0,
+      "I": 0,
+      "P": -1
+    },
+    "size": 1,
+    "sizeCategory": "1S",
+    "stability": 0,
+    "traits": [
+      "source-trait:crafty"
+    ],
+    "meleeDamageBonus": [
+      0,
+      0,
+      0
+    ],
+    "freeStrikeDamage": 1
+  },
+  "initialLive": {
+    "stamina": 15,
+    "temporaryStamina": 0,
+    "resources": {},
+    "conditions": []
+  },
+  "abilities": [
+    {
+      "id": "goblin-warrior:spear-charge",
+      "name": "Spear Charge",
+      "source": {
+        "path": "en/unified/md/monster/goblin/statblock/goblin-warrior.md",
+        "id": "mcdm.monsters.v1/monster.goblin.statblock/goblin-warrior",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "text": "> 🗡 **Spear Charge (Signature Ability)**\n>\n> | **Charge, Melee, Strike, Weapon** |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n> |-----------------------------------|------------------------------:|\n> | **📏 Melee 1**                    | **🎯 One creature or object** |\n>\n> **Power Roll + 2:**\n>\n> - **≤11:** 3 damage\n> - **12-16:** 4 damage\n> - **17+:** 5 damage",
+      "usage": "Main action",
+      "distance": "Melee 1",
+      "target": "One creature or object",
+      "keywords": [
+        "Charge",
+        "Melee",
+        "Strike",
+        "Weapon"
+      ],
+      "roll": "Power Roll + 2",
+      "tiers": [
+        "3 damage",
+        "4 damage",
+        "5 damage"
+      ]
+    },
+    {
+      "id": "goblin-warrior:bury-the-point",
+      "name": "Bury the Point",
+      "source": {
+        "path": "en/unified/md/monster/goblin/statblock/goblin-warrior.md",
+        "id": "mcdm.monsters.v1/monster.goblin.statblock/goblin-warrior",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "text": "> 🗡 **Bury the Point (2 [Malice](scc.v1:mcdm.monsters.v1/rule.monster/malice))**\n>\n> | **Melee, Strike, Weapon** |     **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n> |---------------------------|--------------------:|\n> | **📏 Melee 1**            | **🎯 One creature** |\n>\n> **Power Roll + 2:**\n>\n> - **≤11:** 5 damage; M < 0 [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) (save ends)\n> - **12-16:** 6 damage; M < 1 [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) (save ends)\n> - **17+:** 7 damage; M < 2 [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) (save ends)",
+      "usage": "Main action",
+      "distance": "Melee 1",
+      "target": "One creature",
+      "keywords": [
+        "Melee",
+        "Strike",
+        "Weapon"
+      ],
+      "cost": "2 Malice",
+      "roll": "Power Roll + 2",
+      "tiers": [
+        "5 damage; M < 0 [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) (save ends)",
+        "6 damage; M < 1 [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) (save ends)",
+        "7 damage; M < 2 [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) (save ends)"
+      ]
+    }
+  ]
+}

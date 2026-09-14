@@ -9,8 +9,61 @@ future map clients can enact those outcomes digitally.
 
 The current milestone is **v0.01: a desktop pre-alpha with temporary UI**, proving the connected
 campaign-to-combat journey. See the [scope checkpoint](docs/pre-alpha-design-gaps.md) for included and deferred
-features. Design discussion has resumed with rules adaptation principles and a rules-review workflow accepted
-for trial; detailed combat sequencing remains deferred. The broader mobile-optimized product remains the destination.
+features. The app implements accounts, campaigns, noncombat sessions, character drafts and direct foe loading.
+The dedicated rules discussion is defining FreePlay/combat behavior; the complete character wizard and
+combat journey remain integration dependencies. The broader mobile-optimized product remains the destination.
+
+## Run the development app
+
+Use Node 24.12+ and pnpm 11.5.3. Keep the pinned submodules checked out with
+`git submodule update --init --recursive` (without `--remote`).
+
+```sh
+pnpm install --frozen-lockfile
+CONVEX_AGENT_MODE=anonymous pnpm exec convex init
+pnpm dev:backend
+```
+
+Leave the backend running. In another terminal:
+
+```sh
+pnpm setup:local
+pnpm dev
+```
+
+Open [Salient locally](http://127.0.0.1:5180). Create an account; there are no default credentials.
+Create a campaign, share its invitation URL with another browser/user, approve their request, select session
+players and start/pause/resume/end the session. Characters currently save authored drafts and private notes;
+build choices, evaluation, admission and combat controls await the rules contracts. The Director can load
+Goblin Warriors, inspect their complete source and control roster visibility. Foes survive session closure.
+
+The local Convex deployment stores real data in ignored `.convex/`; keep `pnpm dev:backend` running.
+Its assigned ports and endpoint URLs live in ignored `.env.local`. `setup:local` refuses cloud targets,
+preserves an existing auth secret and configures loopback origins only. Vite proxies the backend/auth paths
+for local development. Other frontend origins require deliberate auth-origin configuration. For hosted
+builds, configure the real `VITE_CONVEX_URL` / `VITE_CONVEX_SITE_URL` and disable `VITE_LOCAL_PROXY`.
+No Cloudflare or Convex Cloud deployment has been performed.
+
+```sh
+pnpm check          # Existing engine + application typechecks and behavior tests, then web build
+pnpm foes:source    # Verify generated foe snapshot against the unchanged pinned corpus
+pnpm exec playwright install chromium
+pnpm test:browser   # Requires both development servers above; creates disposable test accounts/data
+```
+
+The browser scenario uses separate Director/player/observer contexts, real sign-up/sign-in/out, invitations,
+reactive foe visibility, session lifecycle, network interruption/reload, private draft readback and headless
+application calls. See [app status](docs/workstream-app-status.md) for evidence and remaining contracts.
+The source snapshot generator is `scripts/build-foe-source.ts`; builds never advance a submodule pin.
+
+## Headless application operations
+
+`pnpm app query campaigns:list '{}'` calls the same authorized operations as the browser. Set
+`SALIENT_EMAIL` and `SALIENT_PASSWORD` in the calling process environment, or supply a short-lived
+`SALIENT_AUTH_TOKEN`. The password flow creates and revokes its own temporary session. The CLI never prints
+credentials or tokens. Mutation calls accept the same JSON arguments and stable `commandId` used by the UI;
+reuse the ID and unchanged arguments when retrying a command. For example, `sessions:get` takes a
+`sessionId`, and `events:list` takes a `campaignId`. Actual payloads and generated types live in `convex/`.
 
 ## Project documents
 
@@ -24,6 +77,8 @@ for trial; detailed combat sequencing remains deferred. The broader mobile-optim
 
 - [Pre-alpha scope checkpoint and design gaps](docs/pre-alpha-design-gaps.md): current v0.01 acceptance
   journey, feature scope, proposed component boundaries, remaining gaps and discussion record.
+- [v0.01 readiness audit](docs/v0.01-readiness-audit.md): which halves of the pre-alpha journey are buildable
+  from the specs, the blocking gaps with the artifact that closes each, and findings for agents to resolve.
 - [V1 specification checkpoint](docs/v1-spec-checkpoint.md): agreed release scope, settled boundaries, primary
   specs, and remaining work for the fuller product as of 2026-09-11.
 - [V1 tech stack](docs/v1-tech-stack-spec.md): recommended libraries and rationale, selected Better Auth,
@@ -83,14 +138,16 @@ dice. This is a bounded prototype, not complete Draw Steel automation.
 With Node 24.12+ and the pinned Compendium checked out:
 
 ```sh
-npm ci
-npm run check
-npm run demo
+pnpm install --frozen-lockfile
+pnpm check:engine
+pnpm demo
 ```
 
-The experiment uses TypeScript and local JSON run artifacts, with no runtime packages. The online application
-will use Convex and Better Auth; its UI, accounts, and multiplayer are future work. The engine's long-term
-language and runtime remain open.
+The experiment uses TypeScript and local JSON run artifacts. Its operations and tests remain unchanged.
+The web application uses Convex and Better Auth; its development integration follows the
+[official React/Better Auth guide](https://labs.convex.dev/better-auth/framework-guides/react) and
+[local Convex development](https://docs.convex.dev/cli/local-deployments).
+The engine's long-term language and runtime remain open.
 
 Project-authored application code is licensed under [GNU GPL v3.0](LICENSE) (`GPL-3.0-only`). Vendored
 software, Draw Steel game content, and artwork retain their respective terms; see

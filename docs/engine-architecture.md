@@ -1,11 +1,17 @@
 # Engine architecture
 
-**Milestone scope:** the [v0.01 checkpoint](pre-alpha-design-gaps.md) selects a connected prototype with
-partial ability parsing and a visible game log. The reusable engine intent below remains the architectural
-destination. Selected timing, cost and history policies are confirmed; minimum automation and remaining
-manual/response sequencing are open in the active
-[FreePlay/combat discussion](table-spec.md#8-continue-exploring); the existing bounded experiment does not
-settle those contracts. Initiative groups organize both sides while preserving controller/creature identity
+**Milestone scope, revised 2026-09-14:** the [v0.01 checkpoint](pre-alpha-design-gaps.md#game-basics-first--current-runtime-scope)
+prioritizes shared game basics as the playable/testable foundation for later parser and engine development.
+Class/stat-block-specific resource logic, traits, triggers and ability effects are manually resolved;
+automatic turn-start Ferocity is deferred despite its earlier inclusion. Keep known-input common
+operations, source visibility, explicit manual/unsupported results and persistent state/history correct.
+No whole-ability parsing or unique-feature execution is a v0.01 gate. Preserve existing experimental
+code and portable engine boundaries; this is not a request to delete or rewrite them.
+
+The reusable engine intent below remains the architectural destination. Selected timing, cost and history
+policies remain; shared mechanic formulas and manual-operation integration still need source-backed
+contracts. The existing bounded experiment does not establish integrated correctness.
+Initiative groups organize both sides while preserving controller/creature identity
 and applicable individual timing. Retainers and friendly monsters are future extensions beyond V1, not
 implementation prerequisites for that grouping foundation.
 
@@ -113,42 +119,113 @@ Confirmed history refinement, 2026-09-13: corrections and undo append new entrie
 original. Subsequent interpretation and undo use the effective result on the current branch, retaining
 links to prior results. A manual damage override survives later modifier corrections until explicitly
 cleared. Undoing an adjudication restores the prior effective result, independently of undoing its source
-ability. Once the next individual turn starts, any modification to prior-turn gameplay requires sequential
-rewind through intervening history first, including Director edits; do not implement selective retroactive
+ability. Any ordinary correction to an older event after later gameplay has committed requires sequential
+rewind through the intervening chain first, even within the same turn and including Director edits; do not implement selective retroactive
 patching or a reconciliation-card bypass. New current-event continuations remain distinct from editing
 old events. See [correction boundaries](table-spec.md#director-edits-to-inline-results).
 
-Contextual triggered-action controls stay on their originating entry. The accepted app closing event is
-the triggering creature's turn end, without a clock timer. Source-specific earlier timing and late-response
-reconciliation still need contracts. Director result corrections reinterpret the resolution and replace
+Contextual triggered-action controls stay on their originating entry. All combat response prompts remain
+active through End turn and close at the next individual turn start, including prompts created at turn
+end. This standing policy has no clock timer; required unresolved work still blocks dependent progression.
+For the confirmed Lines of Force case, apply
+the triggering outcome, offer the detected response, then append the invoked response's modification of
+the effective forced-movement outcome; no preliminary use/pass wait is required. This response also
+reverses now-inapplicable dependent collision damage and resolves the redirected consequences, preserving
+unaffected outcomes and appending the reversals. Newly required facts use minimal purpose-specific card
+inputs with equivalent headless access. Further dependencies involving later player choices or spent
+resource grants, and other source-specific timing, still need contracts. Director result corrections reinterpret
+the resolution and replace
 applied effects once, preserving accepted dice/history and appending adjudication. Undo/redo restores
 recorded state without rerunning rules or dice. Detailed dependencies remain open.
+
+Represent ordinary actor-linked turn entries separately from actual turn occurrences and group
+activation. Minion squads and their captains share turn timing with individual participants' conditions,
+effects and allowances; the captain has separate Stamina/actions. Personal extra captain turns belong
+only to the captain and do not refresh squad participation, whether recurring or effect-granted.
+Attachment and its benefits remain independent of which captain entry is acting. Shared timing must not be simulated by serial member turns;
+global “every turn” effects fire once per shared turn, not per participant. Each participant still
+resolves its own personal effects/saves; successive turns in an ordinary group remain distinct. Preserve
+interrupted contexts; resumption does not generate another start/end boundary.
 
 The [game-clock contract](table-spec.md#game-clock-and-scheduled-rules-work) is confirmed: individual turn
 and round boundaries dispatch timing work registered when effects apply or limited uses are consumed.
 Distinguish start/end events and reference the correct creature/round. Expiry, usage reset, recurring
 work and due save-ends rolls use the same headless operations and ordered log. Due saves roll automatically;
 optional spending still requires a choice. Clock work is driven by game events, not wall time or UI rendering.
+Confirmed clock ownership, 2026-09-13: source abilities register turn/round-based work with the game
+clock, which is the sole owner of its scheduling and dispatch. Sources retain behavior and live state,
+not independent copies of timing progression. Due work invokes the existing shared ability/effect
+resolution flow, including input dependencies and causal follow-ups. Mill-wheel activation resolves its
+immediate movement and registers later turn-start firings; ending the rolling effect retires that
+registration. Sequential history restores registrations and source state without an extra firing.
+Global turn work fires once for a shared squad/captain turn and once again for a separate captain-only
+turn. Exact schemas and other source-specific ordering remain open.
+
 Failed-save hero-token responses do not delay turn completion; their result-line opportunity closes when
-a different participant begins an individual turn. Order response/start commands against shared state.
+the next individual turn begins. Order response/start commands against shared state.
 The initial app default processes work due at one boundary in enqueue order, holding save-ends rolls until
 last; preserve applicable explicit source sequences. Standing policy includes applicable save-ends effects
 applied before the final save phase begins, using the state after preceding work. Exact dispatcher/storage
 schemas, work created during/after that phase and other pending-choice handoffs remain open.
 
-Resolved turn ends retain a stable stamp and their recorded outcomes across undo. Ending the same turn
-again reuses those results without rerolling or recalculating resolved work; the live-state rollback does
-not erase that retained resolution. After further actions, reuse prior results for still-present effects,
-resolve newly added effects when due and retain their results, and leave removed effects removed.
-Reconcile by effect identity without overwriting intervening state. Undo also reverses the player's own
-dependent failed-save token spend and success override; retain the failed roll and reoffer the optional
-spend when that same end resolves again. Never automatically repeat the spend. If End turn advanced the
-round, undo also restores its automatic boundary changes while the next turn has not started. Retain the
-round-boundary stamp and results for reuse, without fresh rolls or duplicate resets/grants. An intervening
-Director adjudication of that end-turn result is also reversible by the player's End turn undo; record
-that reversal without a Director-approval gate. Other cross-user responses and source-specific replacement
-cases remain open. Exact stamp/schema design is an
-implementation choice.
+Confirmed sequential undo seams, 2026-09-13: the game log is one ordered event history. A player can
+undo their own character's uninterrupted latest actions, in reverse order, only as far as the nearest
+seam. A committed action by another character closes the earlier character's undo window, even within
+the same turn and even if both characters share a controller. A response/accepted follow-up is an action
+for this purpose. Merely affecting another character is not another character taking an action.
+Automatic consequences stay linked to the action that caused them; they do not constitute another
+participant acting. Reads, chat and sheet navigation do not create gameplay undo seams.
+
+A committed Director correction is also an intervening gameplay action and closes the player's
+undo window. The older exception allowing player End turn undo to reverse that Director correction
+is superseded by the current sequential model. The Director must unwind the correction before reaching
+the earlier action. Ordinary corrections to older events likewise require full sequential rewind
+once later gameplay has committed. Valid source-specific responses retain their separate semantics.
+
+The existing turn-start and FreePlay-stretch limits still provide outer boundaries. A player cannot skip
+an intervening action, selectively remove an earlier grant, or pull another character's accepted response
+into a player-initiated undo cascade. Director rewind proceeds sequentially through the intervening actions,
+including across character/turn seams, within the existing current-encounter limit. Shared UI/headless
+operations enforce the same order and authority; stale inline Undo controls cannot bypass a seam.
+
+Example: Elwin grants Thorn an opportunity to spend a Recovery; Thorn accepts. Thorn's follow-up closes
+Elwin's undo window. To remove Elwin's originating action, the Director first undoes Thorn's response
+(reversing its healing and refunding its Recovery spend), then undoes Elwin's action. The result is the
+same if Amy controls Zik as the recipient. No new permission to rewind closed sessions, separate
+encounters or inventory history is created.
+
+Redo restores recorded actions in forward order along the available redo path under existing authority
+and seam limits. It does not reroll or re-execute rules. New gameplay still clears redo availability while
+preserving abandoned history and its recorded results. New execution uses current conditions and fresh
+dice. Internal event granularity does not permit
+selective reversal around a later accepted action.
+
+Confirmed triggered-opportunity restoration, 2026-09-13: when authorized sequential undo restores
+the point before a triggered action was used, restore its prompt if the trigger/opportunity is still
+valid in the restored state. Reverse the response's recorded costs and effects, including its usage
+bookkeeping, without rerolling the original triggering action. Preserve the original use and reversal
+in history; restore the opportunity rather than creating a duplicate response entitlement.
+
+Revalidate the prompt against current authority, restored game timing and source conditions. Undo does
+not bypass player seams, pause/closure restrictions or the Director's rewind limit. Redo restores the
+recorded response exactly; undo itself does not automatically use the reopened response. This settles
+triggered-action prompt restoration, not every required-input card's recovery behavior.
+
+Undo restores recorded changes. Explicit Redo restores the recorded action, dice and consequences
+exactly. Executing an ability or End turn anew after undo resolves from current conditions with fresh
+dice, including applicable end-turn and round-boundary work. Do not maintain a separate result cache
+or compare changed effects to reuse abandoned dice. The Director can adjudicate reroll abuse through
+existing correction controls; historical correction boundaries still apply.
+
+Sequentially undo the character's optional failed-save token spend before undoing End turn. Undoing
+only the spend leaves that failed save in effect; undoing End turn restores pre-end state. New End turn
+execution rolls normally and offers optional spending when the new result qualifies. Exact Redo
+restores the recorded End turn and, separately, the recorded spend. If End turn advanced the round,
+its undo reverses those automatic changes too. Record causal changes and apply each execution once;
+retries retain accepted outcomes without duplicate grants/resets. Another character's action or a
+committed Director correction closes the player undo window, requiring sequential Director rewind
+across the seam. Stable event/command identity for retries is distinct from reusing an old roll in a
+new execution.
 
 The game-log/table interaction surface must expose an extensible API-like boundary for other programs and
 services to contribute activity and interactions. Recommended integration uses structured submissions,
@@ -317,6 +394,11 @@ fits one atomic calculation or that every action requires a confirmation screen.
 
 ## Determinism and shared state
 
+- Confirmed resource-bookkeeping priority: retain each resource grant/spend/reversal's causal event and
+  resolution stage, amount, before/after values and relevant usage history. Affordability and dependent
+  rules must respect source-stage availability, including in apply-then-revise responses; the latest
+  displayed balance alone does not prove a downstream grant was available earlier. Preserve independently
+  justified grants and source-defined retained threshold benefits through correction and undo.
 - Random results must become explicit recorded inputs. Physical dice and a digital dice service can both
   supply them. The [3D dice roller specification](dice-roller-spec.md) records the confirmed presentation
   boundary: generation and validation stay in shared code/CLI operations; the optional draggable 3D tray
@@ -337,8 +419,10 @@ fits one atomic calculation or that every action requires a confirmation screen.
   alone does not grant permission to alter another participant's state.
 - Action-by-action encounter undo is required. Historical detail remains preserved across sessions; live
   rollback across a closed-session boundary is unavailable in v1. Appended correction records, player
-  turn/FreePlay scope, Director encounter rewind and new-play branching are confirmed; remaining
-  same-turn dependencies and cross-encounter continuation still need contracts.
+  uninterrupted-action seams and turn/FreePlay outer bounds, sequential Director encounter rewind and new-play branching are confirmed; remaining
+  same-turn dependencies still need contracts. Finish cleanup, or Void after applying keep/reset, archives the encounter; no gameplay undo
+  can reopen it or cross that boundary. Archived events remain read-only; new current-state adjustments
+  do not change them.
 
 ## History and state restoration
 
@@ -384,9 +468,10 @@ concrete storage and recovery implementation remains undecided.
 
 The requirement is sequential rollback to a prior point. It does not establish selective deletion of an
 arbitrary earlier action while retaining dependent later results. New gameplay after undo clears redo
-availability but retains abandoned records and boundary stamps. This is not a history-branch browser.
+availability but retains abandoned records and their recorded outcomes. New execution resolves with fresh dice;
+there is no separate reuse cache. This is not a history-branch browser.
 Remaining action/dependency boundaries, chat presentation and private-history projections still require
-contracts; prior-turn direct editing already requires rewind.
+contracts; ordinary correction of any older event after later gameplay already requires rewind.
 
 ## Future adapters
 
