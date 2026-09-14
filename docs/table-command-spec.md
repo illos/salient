@@ -545,6 +545,13 @@ punctuation or grammar productions.
 | Expected revision | State or interaction revision used to detect stale submissions; exact concurrency policy remains to be specified. |
 | Authenticated issuer | Supplied by authentication outside client-controlled command arguments. |
 
+Implementation note (A01, 2026-09-14): the envelope as implemented is `shared/commands/envelope.ts`
+(`schemaVersion`, `commandId`, `campaignId`, `operation` = `family.verb`, optional `actor` reference,
+`arguments` in parsed shape, optional `expectedRevision` of the active session). The authenticated
+issuer and the bound actor are added server-side and recorded in the event payload. Once-only
+commitment is per issuer and command id over the canonical envelope; the same id with different
+content is refused. `commands.submit` (slash text) and `commands.invoke` (structured) share one runner.
+
 Dice generation belongs to shared operations. Explicit dice remain useful in deterministic engine fixtures,
 but headless access does not grant an agent permission to choose live dice. Engine/content revisions and
 mechanical source context must be retained with the accepted resolution; clients cannot silently select an
@@ -707,6 +714,13 @@ Recommended pending-interaction fields are: stable interaction ID; originating a
 inputs; eligible responder/actor scope; completion policy; current revision; status; and the game event or
 phase that makes the response valid. The schema must distinguish unanswered, answered, declined, canceled,
 expired and invalidated states where needed. These names are proposed, not an accepted complete state machine.
+
+Implementation note (A01, 2026-09-14): pending interactions are rows of the `interactions` table
+(status `awaiting-input | resolved | closed`, kind `guided-input`, the labeled bound actor, required
+inputs, the continuation envelope, a revision and the opening/resolving event ids). The requester or
+the Director may answer or close; one answer resolves the card and runs the continuation under the
+responder's command id, with the opening event as its cause. Other kinds, cross-user request cards
+and completion policies beyond one answer remain open.
 
 Responses refer to a specific interaction and opportunity. Transport deduplication uses the authenticated
 issuer, table and request ID with identical payload. Separately, the completion policy defines response
