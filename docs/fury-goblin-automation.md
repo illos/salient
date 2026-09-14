@@ -23,6 +23,7 @@ not an implementation change.
 
 | Mechanic | v0.01 automation decision | Contract/evidence |
 | --- | --- | --- |
+| Critical-hit recognition and immediate extra main action | **Automatic — confirmed, 2026-09-14** | [Shared action-tracking contract](table-spec.md#v001-critical-hits-and-additional-main-actions); use remains optional, detailed timing/source exceptions still need contracts |
 | Turn-start Ferocity | **Automation deferred, 2026-09-14** | Earlier automatic requirement superseded; source and future example retained below |
 | Victories | **Use source-earned awards; no artificial test inflation — confirmed** | [Victories and numeric adjustments](#victories-and-numeric-adjustments); existing Director-confirmed closeout remains |
 | Other Ferocity grants, thresholds and encounter-end loss | **Automation deferred** | Class-specific lifecycle/trigger logic is manually resolved; no further v0.01 feature questionnaire |

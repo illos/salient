@@ -1,5 +1,11 @@
 # Combat feasibility research
 
+V1 respite research: [respite rules and design questions](respite-rules.md) examines the ordinary
+rest/advancement loop, activities, resource and effect boundaries, source-specific exceptions and
+between-session play. The [145-file core-source inventory](respite-source-inventory.csv) supports
+discovery, not an automation-coverage claim. Recommendations remain unanswered product choices;
+the [V1 roadmap](../v1-roadmap.md) tracks this discussion alongside the separate v0.01 build.
+
 Minion lifecycle: [the full lifecycle report](minion-lifecycle.md) covers preparation, squad/captain
 relationships, shared turns, coordinated attacks, pooled casualties, area modifiers, reinforcements,
 transformations, troll exceptions and closeout. The [116-entry core inventory](minion-statblock-inventory.csv)

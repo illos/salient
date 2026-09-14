@@ -455,7 +455,7 @@ operations remain available where the table needs to supply or correct the effec
 | Table/session lifecycle | Start, pause, resume, close under current authority | Session, participants, active-encounter disposition; resume must not repeat start grants. |
 | Encounter lifecycle | Start setup, configure/confirm opening, initiative roll, choose side, normal end, void | Participants, surprise, group assignments, setup revision, accepted roll/choice, ending type and keep/reset choice. |
 | Turn and round progression | Choose group/member, Take turn, end turn/group, round transition, explicit extra turns | Actor/group, current event/phase, source entitlement, actual boundary; not just a universal has-acted flag. |
-| Roster/group/squad state | Add/remove foes, visibility, initiative membership, minion squad/captain relationships | Live-instance IDs and distinct roster/group/squad identities; individual participation and shared-pool relationships. |
+| Roster/group/squad state | Add/remove foes, visibility (hide/reveal and the Add visibility setting are fuller V1, deferred from v0.01), initiative membership, minion squad/captain relationships | Live-instance IDs and distinct roster/group/squad identities; individual participation and shared-pool relationships. |
 | Ordinary tests | Direct roll, narrative outcome and changed-circumstance retry; generic Director requests deliberately excluded | Acting character, task, characteristic, optional skill, difficulty when known, modifiers, prior attempt. |
 | Coordinated tests | Assistance, group and opposed tests | Helper/beneficiary, differing skill, participant set, comparison pairs or aggregation rule; multiple roll identities. |
 | Source-defined tests | Reactive tests, printed outcomes and source exceptions | Source test definition, roller(s), permitted modifiers, hidden context where authorized; not every test uses the standard difficulty table. |
@@ -466,7 +466,7 @@ operations remain available where the table needs to supply or correct the effec
 | Movement and placement | Advance/shift, charge path, force move, teleport, climb/ride, stability and collisions | Source/moved entity, route/origin/destination, movement mode, optional distance/stability, ordered targets, related terrain. |
 | Effects and conditions | Apply/end/maintain effects, relationships, duration/expiry and recurring effects | Effect instance, source, recipient, duration anchor, payload, affected event and manual/automatic disposition. |
 | Damage and healing | Damage, unpreventable Stamina loss, healing, Recoveries, temporary Stamina, knockout/revival | Source and recipient, damage type, resource payer, amount/branch, mitigation context, state thresholds; these are not one interchangeable number edit. |
-| Resources and usage | Heroic/epic resources, surges, hero tokens, marks/judgment, performance/form, outside-combat reuse | Pool owner, source/benefit, target allocations, option identity, event limits, signed values and fictional time. |
+| Resources and usage | Heroic/epic resources, surges, hero tokens (counter and spending deferred beyond v0.01), marks/judgment, performance/form, outside-combat reuse | Pool owner, source/benefit, target allocations, option identity, event limits, signed values and fictional time. |
 | Granted and reactive actions | Opportunity attacks, critical extra actions, ally grants, nested abilities, replacement targets | Trigger/parent action, recipient/chooser, available source action, timing and accepted ordering. |
 | Director/monster mechanics | Malice, villain actions, special turns, summoning, coordinated minion attacks | Shared Director pool, monster/source, turn/round limit, participant-to-target allocation, generated instance and casualty choices. |
 | Items and environment | Item use/consume, operate/reload/spot/fire, detect/disable, linked mechanisms and terrain | Operator, item/object/area instance, charges/state, selected operation, target, skill/facts, resulting links. Inventory gameplay follows release scope. |
@@ -604,7 +604,7 @@ including fresh dice. Do not retain a separate cache or same-end identity to reu
 New execution after undo clears redo availability while preserving ordinary history. The Director can
 adjudicate reroll abuse through existing correction controls and history boundaries.
 
-Sequentially unwinding the same character's optional hero-token spend and then End turn refunds
+Fuller V1 (hero tokens are deferred beyond v0.01): sequentially unwinding the same character's optional hero-token spend and then End turn refunds
 the token, reverses its success override and restores pre-end state. Undoing only the token spend
 leaves the original failed save in effect. Ending anew rolls normally and offers a new token choice
 if the result qualifies; explicit Redo restores the recorded End turn and, separately, the recorded
@@ -641,7 +641,8 @@ their specific source timing. Required unresolved dependencies remain separate f
 The [game clock](table-spec.md#game-clock-and-scheduled-rules-work) dispatches registered turn/round timing
 work through shared headless operations. Due save-ends rolls fire automatically and log their outcomes;
 ordinary saves do not need a Roll action card. After a failed automatic save, the result line offers a
-hero-token spend without delaying turn completion. That opportunity closes when the next
+hero-token spend without delaying turn completion (fuller V1; the hero-token counter and this follow-up
+are deferred beyond v0.01). That opportunity closes when the next
 individual turn starts, including within the same group; accepted token use updates the save/effect and
 logs the change without rerolling. Its headless response shares the same lifetime and source use limits.
 Expiry/reset and roll entries retain source/event linkage; actual user attribution belongs to user-initiated
@@ -789,7 +790,7 @@ acting creature in the current state; do not replace it with permanent player-si
 
 Typed selectors such as self are conveniences that resolve to explicit values for a submitted command.
 Autocomplete must disambiguate duplicate names and respect visibility. Discovery must not expose hidden
-foes, private abilities, full monster stat blocks or tower results. Unknown range, line of effect or other
+foes (fuller V1; all loaded foes are visible in v0.01), private abilities, full monster stat blocks or tower results. Unknown range, line of effect or other
 spatial facts remain unknown until provided by a map adapter or manual adjudication.
 
 Input needs extend beyond selecting multiple creatures: allocation of amounts across targets, exclusions,

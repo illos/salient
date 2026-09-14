@@ -1,10 +1,10 @@
 # Rules/combat workstream status
 
-Checkpoint: **2026-09-14 — game basics first**. This is specification work, not an implementation
-report. G4's [combat checklist](pre-alpha-design-gaps.md#v001-combat-acceptance-checklist) remains,
-with the [new runtime boundary](pre-alpha-design-gaps.md#game-basics-first--current-runtime-scope):
-defer class/stat-block-specific execution and stop reviewing those features one by one for v0.01.
-The previous turn-start Ferocity inclusion is superseded; all unique class-resource logic is manual.
+Checkpoint: **2026-09-14 — v0.01 scope review complete; build follow-up as needed**. The user
+is satisfied with the shared-basics scope. No further open-ended feature questionnaire is queued.
+The building agent can ask concrete material questions during implementation; routine source
+research and engineering proceed from the existing contracts. This is not an implementation or
+verification report. See [the handoff](web-app-build-handoff.md#v001-scope-review-complete--build-handoff).
 
 Common Malice lifecycle, Stamina/winded, ordinary-foe Slain status, clock/saves, shared action/dice/state
 operations, fixed costs from known inputs, manual adjustments, persistent log, undo/redo and closeout
@@ -12,7 +12,7 @@ remain required. The Director edits persistent numeric values on their own displ
 a Manual adjustment entry. The log exposes editable inputs only through case-specific interactive
 cards. Hero-dying automation and the other G4 deferrals remain.
 
-**Active:** [the draft basic-play walkthrough](v001-basic-play-walkthrough.md). Foe hiding is deferred
+**Build/verification artifact:** [the draft basic-play walkthrough](v001-basic-play-walkthrough.md). Foe hiding is deferred
 beyond v0.01: all loaded foes are visible, without hide/reveal or Add visibility controls; full stat
 blocks remain Director-only. F2 is closed by this scope choice, including hidden initiative questions.
 Confirmed: player/Director-supplied edge and bane counts feed automatic shared-roll arithmetic
@@ -24,10 +24,43 @@ choice available. Target-specific edge/bane counts for multi-target attacks are 
 inputs and outcomes recorded by target. Input composition is settled: enter each target's
 complete counts directly, with no attack-wide field or inherited stacking layer. See
 [the target-only clarification](v001-basic-play-walkthrough.md#next-review-case-attack-wide-and-target-specific-counts).
+Critical-hit recognition/logging and the immediate additional-main-action opportunity are also
+confirmed for the shared foundation. Finish the qualifying attack before offering the extra action;
+its use remains optional. Exact timing/chaining/source-exception contracts still need follow-up.
 Complete and verify the common-operation contracts, including actual persisted
 state, log records, manual resolution, retries and history. G1–G3 remain hero creation/evaluation/
 initialization dependencies. Preserve experimental parser/engine research for later feature work.
 Resume only material product questions, one at a time; ordinary source definitions are research work.
+The broad review is complete; ask concrete build-time questions only as needed. The user
+rejected changing multi-target firing: retain auto-fire and include per-target post-roll edge/bane
+additions through existing same-dice correction/history rules. This narrowly supersedes the earlier
+modifier-editor deferral; direct damage editing remains deferred. Acting-player authority is now
+confirmed for their own attacks within their undo window, ending at the next actor's turn start;
+earlier seams and sequential rewind still apply. Director authority remains. Removing incorrect
+edge/bane counts is also confirmed under those same limits, with unchanged dice and logged corrections.
+Condition scope simplified, 2026-09-14: one on/off toggle per condition, with persisted/logged
+changes. Players manage their own controlled heroes; the Director manages all heroes/foes.
+Source entry, duration menus, expandable applications and source-specific removal are superseded
+for v0.01; Clear all stays deferred. Ability-driven condition timing follows parser support.
+Manual save handling is confirmed for these toggles: use ordinary dice controls, then manually
+toggle off the condition when appropriate. Automatic scheduling/removal waits for ability support;
+the broader shared clock remains included. Catch Breath automation is confirmed: one actual
+Recovery spent, Stamina restored using recovery value, with action tracking and linked history.
+Out-of-combat Recovery spending is also confirmed through the same control, one actual Recovery
+per use with logged healing and no combat maneuver cost. Temporary Stamina is confirmed as a
+separate Director-editable value, consumed before ordinary Stamina by supported damage and not
+refilled by ordinary healing. Unique grants remain manual. Defend and Aid Attack are confirmed as
+usable actions with allowance tracking and full source text; their benefits remain manual.
+Surge tracking is confirmed as a persisted Director-editable hero counter with logged adjustments;
+gains, spending and effects remain manual. Hero tokens, including the shared counter, are deferred
+beyond v0.01. The user reaffirms shared basics only in this pass, with no class- or monster-specific
+feature work. Automatic main-action substitution is deferred; nonblocking controls already let a
+player use another maneuver. Normal combat-end clearing of surges and temporary Stamina is
+confirmed, with logged changes, manual exception handling and separate Void semantics.
+G6's language decision is strengthened: TypeScript is the standing choice for v0.01 and beyond
+unless a concrete reason to change emerges. No routine later language comparison is required;
+runtime placement and detailed integration remain open. The user accepts [the consolidated scope](pre-alpha-design-gaps.md#v001-combat-acceptance-checklist); follow-up questions should arise from concrete build work.
+The walkthrough is still unrun; remaining source/integration contracts are not certified by scope decisions.
 
 ## Where to read
 

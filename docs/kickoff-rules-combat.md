@@ -20,7 +20,7 @@ behavior that thread can integrate. Work toward the connected v0.01 journey, not
 
 ## Read first and establish current state
 
-Read `AGENTS.md`, `agent.MD`, `docs/pre-alpha-design-gaps.md`, `docs/v1-spec-checkpoint.md`,
+Read `AGENTS.md`, `agent.MD`, `CLAUDE.md`, `docs/build/README.md`, `docs/pre-alpha-design-gaps.md`, `docs/v1-spec-checkpoint.md`,
 `docs/rules-adaptation-principles.md`, `docs/development-process.md`, `docs/rules-skills-design.md`,
 `docs/compendium-navigation.md`, and `docs/web-app-build-handoff.md`.
 
@@ -31,7 +31,8 @@ precedence over older notes. Do not reopen settled questions merely because a hi
 them unresolved.
 
 Inspect current files, Git changes, and any workstream checkpoints before editing. There is an existing
-headless experiment; determine what it actually supports and retain useful behavior/tests. Its shortcuts,
+headless experiment in `src/` and a working pre-alpha web app (`web/`, `convex/`, `shared/`; see
+`docs/workstream-app-status.md`); determine what each actually supports and retain useful behavior/tests. The experiment's shortcuts,
 historical acceptance criteria and current rejection behavior do not settle newer product decisions.
 Keep both vendored submodules unmodified and their pins unchanged unless I explicitly request an update.
 
@@ -126,7 +127,7 @@ working locally where possible. A specification discussion does not authorize th
 
 Maintain a short checkpoint at `docs/workstream-rules-status.md`: current slice, owned files, implemented
 versus proposed contracts, source/review evidence, my decisions, pending questions and next action. Check
-`docs/workstream-app-status.md` if it exists. These are coordination notes, not additional rule registries.
+`docs/workstream-app-status.md`. These are coordination notes, not additional rule registries.
 Use shared files for cross-thread handoffs when direct communication is unavailable; do not claim to have
 contacted the other thread merely by writing a note. Surface urgent blocked handoffs to me.
 

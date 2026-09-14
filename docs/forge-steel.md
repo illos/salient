@@ -25,7 +25,7 @@ Useful source locations:
 Generate a source inventory with:
 
 ```sh
-npm run --silent character:sources > /tmp/character-sources.json
+pnpm run --silent character:sources > /tmp/character-sources.json
 ```
 
 This reads TypeScript syntax without executing Forge Steel. It reports both installed revisions, class-to-Compendium SCC references, subclass files, and feature factory call counts by level, including nested branches. It is an inspection tool, not a rules importer: it does not resolve factory defaults, determine active branches, map individual options, or count required wizard prompts. Unsupported source shapes fail visibly. A successful inventory does not prove rules correctness.
@@ -47,4 +47,4 @@ git -C vendor/forge-steel fetch origin
 git -C vendor/forge-steel diff HEAD origin/main -- src/data/classes src/models/feature.ts src/logic/factory-feature-logic.ts
 ```
 
-Before adopting an exact reviewed commit, check `git -C vendor/forge-steel status --short`, then use `git -C vendor/forge-steel checkout --detach REVIEWED_COMMIT_SHA`. Regenerate the inventory and run relevant wizard checks before staging the pointer with `git add vendor/forge-steel`. Review referenced domains/kits and sourcebook changes as needed. Do not update either dependency during startup or build. The initial submodule registration is staged, consistent with the existing Compendium setup; no project commit has been created.
+Before adopting an exact reviewed commit, check `git -C vendor/forge-steel status --short`, then use `git -C vendor/forge-steel checkout --detach REVIEWED_COMMIT_SHA`. Regenerate the inventory and run relevant wizard checks before staging the pointer with `git add vendor/forge-steel`. Review referenced domains/kits and sourcebook changes as needed. Do not update either dependency during startup or build. The submodule registration was committed in `5efb7c7`, consistent with the existing Compendium setup.

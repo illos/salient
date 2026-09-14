@@ -1,6 +1,9 @@
 # Data structure and architecture specification
 
-Version 0.13 — technology and sustained table workload alignment, 2026-09-11. Specification only; no implementation.
+Version 0.13 — technology and sustained table workload alignment, 2026-09-11. Specification; the pre-alpha
+checkout now has a partial Convex schema (`convex/schema.ts`: users, campaigns, memberships, join requests,
+sessions, events, commands, character and foe tables). Where this document describes the current checkout it
+says so; everything else remains proposal or confirmed intent, not implementation.
 
 **Pre-alpha upgrade policy:** development data is disposable, and the latest live, playable application takes
 priority over preserving old prototype records through breaking updates. Reset/reseed is an acceptable
@@ -79,8 +82,12 @@ retained campaigns. No separate Director moderation power is established by this
 - Respite is a dedicated table mode with its own gameplay loop, started and ended by the Director. Its
   mechanics, possible downtime relationship, and detailed lifecycle need research/design; do not automatically
   reuse combat-specific state or cleanup contracts.
-- Every action within an encounter must be undoable. Restoration changes actual affected state using recorded
-  values, without rerunning the engine or dice.
+- Every action within an encounter must be undoable within the confirmed limits: players undo their own
+  character's uninterrupted latest actions to the nearest seam; the Director rewinds sequentially within the
+  current encounter; no gameplay undo crosses Finish cleanup or Void archival. See
+  [undo permissions](table-spec.md#undo-permissions-and-proposed-campaign-control) and
+  [formal encounter closeout](table-spec.md#formal-encounter-closeout). Restoration changes actual affected
+  state using recorded values, without rerunning the engine or dice.
 - Preserve every session's game log for campaign review. All current campaign members can read all past
   session logs by default, including sessions they did not attend. Separate Director-only history views will
   be added if specific information requires them; no attendance-based history partition is required. After a
@@ -542,6 +549,12 @@ damage thresholds and other membership transitions retain their separate contrac
 gain: a replacement captain’s Stamina bonus adds to the pool for surviving members only; no revival,
 new member identity, damage reset or action refresh results from the adjustment.
 
+Current checkout, 2026-09-14: `convex/schema.ts` has no encounter-run record; `sessions` carries a
+`combatActive` boolean, `events` requires a user `actorId`/`actorName` with a `kind` and `description` but no
+before/after change payload, and `commands` records `commandId`/`fingerprint`/`result` for idempotent retries.
+The contracts below are proposals that this schema does not yet implement; the
+[readiness audit G7](v0.01-readiness-audit.md#g7-dice-generation-and-event-storage) records the required
+replacements (encounter record, per-field change records, events without a user actor).
 
 Each logical action needs a stable command ID, actor, relevant entities, source/build versions, the exact
 engine release and relevant parser versions, expected state revision, and session/encounter association.
@@ -648,7 +661,8 @@ template. General undo of a void and statistics treatment remain open; see the
 
 Propose separate lifecycle fields for the session (`open`, `closing`, `closed`), running/paused status within
 an open session, and its archive work (`pending`, `writing`, `ready`, `failed`). These are implementation
-labels, not required UI language. Pause preserves the session and its underlying activity; sheet viewing/chat
+labels, not required UI language. The current checkout stores one `status` of `running`/`paused`/`closed`
+with `closedAt`, and has no archive fields; closed sessions are already read-only server-side. Pause preserves the session and its underlying activity; sheet viewing/chat
 remain available, gameplay changes are blocked, and in-flight commit handling remains open in the table spec.
 A closed session can have a pending archive while its original database records remain readable.
 

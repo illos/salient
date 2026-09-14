@@ -4,7 +4,7 @@ For integrated v0.01 automation, use [the current boundary](fury-goblin-automati
 game-basics-first revision defers class/stat-block-specific execution, including turn-start Ferocity.
 Coverage described below belongs to the earlier experiment, not the integrated milestone requirement.
 
-This is a documented level-one character choice set with a small combat-state projection, not a character wizard or a fully automated sheet. `loadScenario()` reads selected abilities from the pinned Compendium JSON and complete Markdown. Default paths are relative to the module, so loading works outside the project working directory. Nothing modifies or updates the dependency.
+This is a documented level-one character choice set with a small combat-state projection, not a character wizard or a fully automated sheet. It is not the integrated app's character record: the integrated checkout stores authored details and unevaluated selection revisions only (see the [wizard spec's implementation status](character-wizard-spec.md)). The headless experiment's `loadScenario()` (`src/content.ts`) reads selected abilities from the pinned Compendium JSON and complete Markdown. Default paths are relative to the module, so loading works outside the project working directory. Nothing modifies or updates the dependency.
 
 Source revision: `fb83a789da8f0327a389c277a0c790b1648d5810`. All links below point into that local dependency. The adapters check the checkout HEAD against this pin; a different `corpusRoot` is an alternate location for the same revision, not an automatic content-version migration. Local uncommitted corpus edits are not certified by that revision check; keep the dependency clean. Generic monster adapters mark unrepresented stat-block fields (such as immunities) as unsupported traits so they cannot silently enter automated combat.
 
@@ -26,7 +26,7 @@ Source revision: `fb83a789da8f0327a389c277a0c790b1648d5810`. All links below poi
 
 Default ancestry statistics (size 1M, speed 5, stability 0) are in the book-specific clean Heroes text at line 1501 of this pin: `git -C vendor/steel-compendium show "HEAD:en/books/heroes/clean/Draw Steel Heroes.md"`. Beast Legs replaces speed with 6; Mountain adds stability 2. This sentence is absent from the extracted unified ancestry chapter.
 
-Background, languages, skill choices, speed, and recovery value are documented here; the small `Entity` interface deliberately stores only fields exercised by this combat experiment. Their absence from that interface does not imply the character lacks them. Inventory, common actions, and other full-sheet fields are deferred.
+Culture, career, languages, skill choices, speed, and recovery value are documented here (the creation steps follow [Making a Hero](../vendor/steel-compendium/en/unified/md/chapter/making-a-hero.md#step-by-step-hero-making); "Background" is the Compendium chapter containing Culture and Careers); the experiment's small `Entity` interface (`src/contracts.ts`) deliberately stores only fields exercised by this combat experiment. Their absence from that interface does not imply the character lacks them. Inventory, common actions, and other full-sheet fields are deferred.
 
 The [Fury ability choices](../vendor/steel-compendium/en/unified/md/feature/fury/level-1/fury-abilities.md) are Brutal Slam (signature), Out of the Way! (3 Ferocity), and Thunder Roar (5 Ferocity). The aspect adds Lines of Force; Mountain adds Pain for Pain. The loaded ability list contains all five, including those currently requiring manual resolution.
 

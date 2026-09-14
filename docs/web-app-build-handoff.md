@@ -2,8 +2,44 @@
 
 The user selected two workstreams: a dedicated thread works through rules tooling and combat behavior with
 the user, while a separate app thread reads the specifications, builds the ordinary web application, and
-reviews its work autonomously. This handoff records that division; it does not claim either thread has
-started or that the application is implemented.
+reviews its work autonomously. This handoff records that division. Both threads have since started:
+a working pre-alpha web app exists in this checkout (see [app status](workstream-app-status.md)) and
+the rules thread's progress is in [rules status](workstream-rules-status.md). Neither is the complete
+v0.01 journey.
+
+## v0.01 scope review complete — build handoff
+
+Confirmed 2026-09-14: the user is satisfied with the reviewed shared-basics scope and is comfortable
+with the building agent asking questions as concrete gaps arise. The final scope pass found no
+additional broad product decision needed before build work proceeds. Use
+[the consolidated scope](pre-alpha-design-gaps.md#v001-combat-acceptance-checklist),
+[the table contracts](table-spec.md) and [the acceptance walkthrough](v001-basic-play-walkthrough.md).
+TypeScript is the standing engine choice unless a concrete reason to change emerges. Keep class/
+monster-specific feature work and the accepted subsystem deferrals outside v0.01.
+The build is organized into slices: [docs/build/README.md](build/README.md) is the build-slice plan
+and process; read it before starting any slice.
+
+Remaining build work, not completed by this review:
+
+- **G1–G3:** establish sourced minimal-hero decisions, derived values, live-state initialization and
+  engine projection. Never fabricate a working wizard or reset live resources when saving a draft.
+  These baseline contracts do not authorize unique runtime feature execution.
+- **G5:** make shared operations concrete, including supported formulas, manual fallbacks, modifier
+  correction/history boundaries, critical-action timing and cleanup exceptions. Use the pinned
+  Compendium and established product rulings; distinguish supported behavior from manual handling.
+- **G6–G7:** package readable content/known inputs and integrate authoritative dice, persistence,
+  permissions, retries, reconnect and sequential undo/redo through shared operations.
+- **Acceptance:** run the connected walkthrough with actual persisted state and logs across player,
+  Director and observer access, including closeout and Void. Respect required mechanical review;
+  a scope approval is not implementation or verification evidence.
+
+Proceed with routine source research and engineering decisions within the authorized build. Ask a
+single plain-text question with a recommendation only when a specific unresolved product behavior
+or source ambiguity materially affects the work. Record decisions in their owning specs. Do not
+reopen a broad questionnaire or ask the user to supply routine technical contracts. This handoff
+records readiness for build work; it does not claim deployment or a completed test run.
+
+## Workstream references
 
 Ready-to-paste assignments: [web app kickoff](kickoff-web-app.md) and
 [rules/combat kickoff](kickoff-rules-combat.md). Each includes delegation, review, escalation and
@@ -12,6 +48,13 @@ cross-thread coordination instructions. Writing these prompts does not launch th
 Latest specification cleanup: [consistency review](spec-consistency-review.md). Treat the current table
 history contract as authoritative over older snippets: committed Director corrections create undo seams;
 there is no player End turn exception across them. Deliberately omitted test-request UI remains excluded.
+
+**Character-sheet guidance, 2026-09-14:** implement the first-pass
+[v0.01 sheet spec](character-sheet-spec.md), guided by the user-supplied paper sheet. It defines the
+content inventory, compact live-stat header, grouped actions, expandable references and standalone/table
+relationship. The user authorized reasonable initial presentation choices and iteration after use;
+pixel-perfect design is not a gate. Preserve the existing minimal wizard, shared operations and gameplay
+deferrals. This is specification guidance, not evidence that the sheet has been implemented.
 
 **Readiness-audit G4 resolved, 2026-09-13:** follow the consolidated
 [combat acceptance checklist](pre-alpha-design-gaps.md#v001-combat-acceptance-checklist) for required
@@ -39,9 +82,84 @@ target-only: enter complete counts directly for each target, including single-ta
 The attack-wide-plus-target stacking proposal was rejected; do not add a global count or inherited
 modifier layer. See [the contract](table-spec.md#v001-edge-and-bane-inputs).
 
+**Post-roll modifier additions confirmed, 2026-09-14:** retain target-completion auto-fire and
+include per-target Add edge/Add bane controls after firing. This is a narrow exception to the
+inline modifier-editor deferral; direct damage editing remains deferred. Use accepted dice,
+reconcile supported effects and append a linked correction under the existing sequential-rewind
+boundary. Acting players may make these additions to their own eligible attacks within the same
+window as gameplay undo, ending at the next actor's turn start. Earlier seams and sequential rewind
+still apply; enforce at commit time. Removing incorrect edge/bane counts is also included under
+the same limits, including counts supplied before rolling. Keep counts nonnegative, reuse the dice
+and record the correction. Director correction authority remains. See
+[the correction contract](table-spec.md#director-edits-to-inline-results).
+
 **Roll characteristic default confirmed, 2026-09-14:** automatically select the highest permitted
 current roll characteristic when the source offers a choice, with a pre-fire override available.
 Record the selected characteristic/value. See [the contract](table-spec.md#v001-roll-characteristic-default).
+
+**Critical-hit automation confirmed, 2026-09-14:** recognize/log qualifying critical hits, resolve
+the current attack and expose the immediate additional main action through shared action tracking.
+Use is optional; no automatic action execution or generic banked action. Preserve recorded history
+and retry safety. Detailed timing/chaining/source-exception contracts remain to be completed; see
+[the owning contract](table-spec.md#v001-critical-hits-and-additional-main-actions).
+
+**Condition controls simplified, 2026-09-14:** provide one on/off toggle per core condition.
+Players control their own heroes; Director controls all heroes/foes. Persist state and log each
+change. This supersedes manual source entry, duration menus, expandable applications and
+source-specific removal for v0.01. Clear all remains deferred. Ability-based condition timing
+follows parser support. For save-ends, use ordinary dice controls and manually toggle off the
+condition when appropriate, logging both operations. Automatic save scheduling/removal for toggles
+is deferred until ability support; the broader clock stays in scope. See
+[the owning contract](table-spec.md#v001-manual-condition-tracking).
+
+**G6 language decision strengthened, 2026-09-14:** TypeScript is the standing engine language
+for v0.01 and beyond unless a concrete reason to change emerges. No routine language comparison
+is required after the prototype. Preserve
+shared UI/headless behavior and portable boundaries. Packaging, execution placement and integration
+still require engineering work; no deployment or blanket approval of G6's technical suggestions
+is implied. See [the owning decision](engine-architecture.md#standalone-engine-and-portability).
+
+**Hero tokens deferred, 2026-09-14:** skip the shared counter and its associated UI/automation
+for v0.01; the failed-save spending follow-up remains deferred. The user also reaffirms that this
+pass covers shared game basics, with no class- or monster-specific feature work. Preserve existing
+readable source/manual-play and baseline contracts without adding unique feature requirements.
+
+**Common combat-end resource cleanup confirmed, 2026-09-14:** automatically clear remaining
+surges and temporary Stamina at normal combat end, recording the changes once. Specific source
+exceptions remain manually adjudicated; exact exception handling still needs an integration
+contract. Void skips normal cleanup and uses its existing keep/reset semantics. This does not
+clear ordinary Stamina, condition toggles or unrelated resources. See [closeout](table-spec.md#formal-encounter-closeout).
+
+**Main-action substitution deferred, 2026-09-14:** omit automatic slot substitution and dedicated
+substitution controls for v0.01. Keep actual action-use records and advisory allowance tracking;
+players can use another maneuver under the existing nonblocking policy. Resource affordability
+and the separately confirmed critical-hit opportunity remain in force. See
+[the action contract](table-spec.md#player-sheet-actions-and-explicit-end-turn).
+
+**Surge counter confirmed, 2026-09-14:** include a persisted Director-editable hero-sheet value
+with attributed Manual adjustment records. Gains, spending and their effects remain manual;
+no surge-spending card or automatic granting-feature interpretation is required. Preserve shared
+permissions/history and actual source-based adjustments. See [the contract](table-spec.md#v001-surge-tracking).
+
+**Defend and Aid Attack confirmed, 2026-09-14:** expose both common actions with actor/target
+records, source action-allowance tracking and full source text in the log. Apply their benefits
+manually through the existing per-target edge/bane controls and ordinary roll inputs; no automatic
+beneficiary detection or modifier consumption/expiry is required. See
+[the contract](table-spec.md#v001-defend-and-aid-attack).
+
+**Temporary Stamina confirmed, 2026-09-14:** include a separate Director-editable persisted value
+with logged adjustments. Supported damage consumes it first; ordinary healing does not refill it.
+Keep it separate from maximum Stamina, recovery value and winded. Unique granting abilities remain
+manual; preserve shared history/retries and source grant/closeout rules. See
+[the contract](table-spec.md#v001-temporary-stamina).
+
+**Catch Breath confirmed, 2026-09-14:** automate the ordinary hero maneuver, spending one actual
+Recovery and restoring Stamina using actual recovery value. Record action use and both state
+changes together; preserve affordability, retries and undo/redo. Source verification of detailed
+healing bounds/eligibility is still required; the hero-dying automation/warning deferral remains.
+Out-of-combat spending is also confirmed through the same control: one actual Recovery per use,
+with linked healing/logging and no combat maneuver cost. Retain running-session permissions and
+actual resource checks; no respite or replenishment is implied. See [the contract](table-spec.md#v001-catch-breath).
 
 **Current runtime scope, 2026-09-14: game basics first.** Follow
 [the owning checkpoint](pre-alpha-design-gaps.md#game-basics-first--current-runtime-scope).
@@ -75,17 +193,20 @@ engineering choices and carry working flows through persistence and verification
 an unresolved product decision materially affects the work. Keep progressing on independent work while a
 rules or combat question is being resolved in the dedicated thread.
 
-Start with [project instructions](../agent.MD), the [v0.01 scope](pre-alpha-design-gaps.md),
+Start with [project instructions](../agent.MD) and [`CLAUDE.md`](../CLAUDE.md), the [v0.01 scope](pre-alpha-design-gaps.md),
 [tech stack](v1-tech-stack-spec.md), [accounts/access](accounts-and-access-spec.md),
 [table](table-spec.md), [character wizard](character-wizard-spec.md), and
 [data architecture](data-architecture-spec.md). The [V1 index](v1-spec-checkpoint.md) locates fuller-product
 requirements; it does not expand the prototype. Reconcile the relevant specs into an implementation plan;
 do not reinterpret this assignment as a request to redesign settled requirements.
 
-Inspect the current checkout and any existing UI work before scaffolding or replacing it. The known local
-baseline is a bounded headless TypeScript experiment, not a working web app; verify current reality rather
-than relying on that historical description. Use the relevant Convex/auth skills for backend implementation
-and verify library APIs against installed versions/current official documentation.
+Inspect the current checkout and any existing UI work before scaffolding or replacing it. The checkout
+now contains a working pre-alpha web app (React/Vite/TanStack Router, Better Auth, local Convex) with
+accounts, campaigns, noncombat sessions, character drafts and foe loading, alongside the original
+bounded headless TypeScript experiment; [app status](workstream-app-status.md) records the verified
+journeys and evidence. Verify current reality rather than relying on either description. Use the relevant
+Convex/auth skills for backend implementation and verify library APIs against installed versions/current
+official documentation.
 
 ## Work that can proceed independently
 

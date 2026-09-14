@@ -3,7 +3,19 @@
 Consolidated through 2026-09-13 after the product, technology and gameplay design discussions. This is a
 documentation checkpoint, not an implementation milestone or approval of proposed technical defaults.
 
+The [V1 roadmap](v1-roadmap.md) records the working order for continued specification alongside the
+v0.01 build, beginning with respite and advancement.
+
 ## Immediate milestone: v0.01
+
+Scope review concluded 2026-09-14: the user is satisfied with the shared-basics prototype scope.
+Continue through the [build handoff](web-app-build-handoff.md#v001-scope-review-complete--build-handoff),
+asking concrete questions only as build work exposes them. This does not declare all fuller V1
+specification work complete or certify the prototype implementation.
+
+Engine language confirmed 2026-09-14: use TypeScript for v0.01 and beyond unless a concrete reason
+to change emerges. No routine later language comparison is required; packaging, runtime placement
+and integration are still outstanding. See [the engine decision](engine-architecture.md#standalone-engine-and-portability).
 
 The current target is a desktop pre-alpha with temporary UI and a durable architectural foundation. The
 [pre-alpha scope checkpoint](pre-alpha-design-gaps.md) consolidates the accepted journey, per-feature
@@ -42,7 +54,8 @@ The main product boundaries are defined well enough to organize workstreams. Pro
 contracts are tracked in the pre-alpha checkpoint; the sections below describe the fuller V1 destination.
 The app is not yet fully specified for end-to-end play: respite rules, detailed combat resolution, state
 reconciliation, and several lifecycle operations still need work. Do not treat readable core-content coverage
-as complete automation, or the existing headless experiment as a finished application.
+as complete automation, or the existing pre-alpha web app and headless experiment
+([app status](workstream-app-status.md)) as a finished application.
 
 The [original gap review](v1-spec-review.md) is historical. Use this checkpoint and the linked primary specs
 for current decisions; the original review's unresolved scope questions are not an instruction to ask them again.
@@ -83,6 +96,7 @@ This implementation deferral does not remove eligible core entries from the publ
 | Table commands, action cards, accepted human syntax and headless interaction | [Commands and action cards](table-command-spec.md) |
 | Accounts, roles, discovery, grants, privacy, blocking and deletion | [Accounts and access](accounts-and-access-spec.md) |
 | Build choices, revisions, admission, progression and interchange | [Character wizard](character-wizard-spec.md) |
+| Initial v0.01 sheet content, hierarchy and desktop interactions | [Character sheet](character-sheet-spec.md) — temporary presentation; fuller V1 refinements remain later work |
 | Inventory, stash, claims and inventory history | [Inventory](inventory-spec.md) |
 | Core/supplemental source scope and readable coverage | [Reference libraries](reference-library-spec.md) |
 | Catalog ingestion, independent monster instances and encounter preparation | [Monster catalog](monster-catalog-spec.md) |
@@ -184,9 +198,10 @@ subject to explicit exceptions. The area-only casualty rule remains intact. See
   until-revoked grants can persist between sessions.
 - Peers see Stamina and Recoveries by default. Table monster stat blocks are Director-only. Public reference
   access does not disclose private live table data.
-- Monster-health display defaults to Bar; Numerical and Winded are alternatives. The Add visibility toggle
-  defaults to hidden, persists per campaign, and also applies to template loads. Hidden foes remain active
-  and may act; their names are not concealed in the game log under the current direction.
+- Monster-health display defaults to Bar; Numerical and Winded are alternatives. Fuller V1 only, deferred
+  from v0.01: the Add visibility toggle defaults to hidden, persists per campaign, and also applies to
+  template loads. Hidden foes remain active and may act; their names are not concealed in the game log
+  under the current direction.
 - Show Malice is a campaign setting, off by default, controlled by the active Director. The Director
   always sees the current shared pool; players/observers see it when enabled. Full used-action source
   disclosure and resource mechanics retain their existing rules.
@@ -283,6 +298,10 @@ campaigns, characters and saved encounters, even during active combat in another
    loading, free play/combat/respite, loot, session closure and the next session through the same authorized
    headless operations used by the UI. Check multiplayer access/retry behavior and sustained table performance
    during implementation.
+8. **Design tokens and component library:** the [V1 mockups](design-mockups/v1/README.md) fix only the
+   visual language (typography, achromatic foundation, brick-red accent, rules, uppercase metadata). Exact
+   colour values, spacing scale, component set and breakpoints are undefined and are a build-slice
+   deliverable; the mockups' recorded departures from the specifications must not be implemented.
 
 Detailed technical contracts remain proposals where labeled. Source-backed opening and group findings are
 recorded in the table spec; this checkpoint is not an implementation, deployment or completion report.

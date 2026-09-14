@@ -1,5 +1,7 @@
 # Milestone 1: headless combat experiment
 
+**Historical (2026-09-10 experiment).** The headless experiment is retained under `src/` and `tests/*.test.ts` and still runs (`pnpm check:engine`, `pnpm demo`), but it is not the current application: the pre-alpha web app under `convex/` and `web/` is the active workstream; see [app status](workstream-app-status.md) and the [README](../README.md).
+
 Status: implemented and cross-reviewed on 2026-09-10. All eight acceptance items below have evidence in the [review report](milestone-1-review.md); type checking and 28 behavior tests pass. This is an isolated local experiment, not the deployed Convex app or a claim of complete Draw Steel support.
 
 ## Outcome

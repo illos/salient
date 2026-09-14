@@ -1,6 +1,6 @@
 # Campaign sessions and the table
 
-Version 0.59 — Foe hiding deferred from v0.01, 2026-09-14. Specification; not an implementation report.
+Version 0.60 — Consistency audit (v0.01 vs V1 labels, stale open items), 2026-09-14. Specification; not an implementation report.
 
 This is the primary checkpoint for session participation, the table's role-dependent surfaces, and the core
 play loop. **Confirmed** behavior comes from the user's table walkthrough. **Proposed** contracts and **open**
@@ -22,13 +22,14 @@ for implementation. Playable retainers and friendly monsters are deferred beyond
 
 **Combat scope confirmed, 2026-09-13:** [the G4 acceptance checklist](pre-alpha-design-gaps.md#v001-combat-acceptance-checklist)
 is complete. Require the full opening and ordinary hero/foe turn flow; settled roster targeting;
-fixed costs/affordability; supported damage and manual adjustments; the clock/automatic saves;
+fixed costs/affordability; supported damage and manual adjustments; the clock and supported scheduled
+work (saves for simple condition toggles are manual under the 2026-09-14 refinement below);
 sequential undo/redo; formal closeout; Void keep/reset including while paused; and basic public direct
 test rolls with dice/modifiers/total interpreted by the Director. Complete used-action source text
 and actual recorded work remain required in the log.
 
 Minion/captain/pooled-Stamina mechanics, boss extra-turn mechanics, dynamic terrain objects,
-persistent area cards, inline attack-result editing, optional enhancement cards, failed-save
+persistent area cards, broader inline attack-result editing (except the later per-target edge/bane additions), optional enhancement cards, failed-save
 hero-token follow-up, automatic response reconciliation, dedicated respite/out-of-combat fictional
 time and more elaborate automated test workflows are deferred beyond v0.01. Preserve the basic
 noncombat table, state continuity and existing authority/privacy/history boundaries. Detailed future
@@ -106,9 +107,10 @@ inputs or the recorded manual-resolution path. Every used action exposes complet
 verbatim source text and actual resolution through the shared log. Account permissions, private data,
 session lifecycle and coherent state remain separate boundaries.
 
-Basic action economy belongs in the connected v0.01 journey, with partial automation allowed. Detailed
-budgets, interruptions, manual completion and undo/continuation remain open. In particular, no automatic
-pause-to-prompt policy for triggered actions has been accepted. Documenting a proposal does not authorize
+Basic action economy belongs in the connected v0.01 journey, with partial automation allowed. Later dated
+rulings in section 5 settle sequential undo/redo, Resolved-at-table manual completion, the standing prompt
+window and interrupted-turn resumption; source-specific budgets and continuation details remain open. No
+automatic pause-to-prompt policy for triggered actions has been accepted (Lines of Force uses apply-then-revise). Documenting a proposal does not authorize
 implementing it. The existing headless experiment is evidence, not the final combat contract.
 
 ## 1. Campaign → session → table
@@ -345,7 +347,7 @@ framework; the confirmed combat layout that follows gives the current desktop ba
 | Surface | Confirmed contents |
 | --- | --- |
 | Shared table | Party roster, online presence, dice roller, engine-driven activity, and game log. Existing text chat remains part of the table intent. |
-| Director pane | Foes roster with catalog search/add, saved-encounter replace/append loading, a default-visibility toggle beside Add, and per-monster show/hide controls. Controls to run actions, including on behalf of any table character, make test and other rolls, load encounters, activate appropriate content such as traps, and search content. |
+| Director pane | Foes roster with catalog search/add. V1, deferred beyond v0.01: saved-encounter replace/append loading, a default-visibility toggle beside Add, and per-monster show/hide controls (all loaded foes are visible in v0.01). Controls to run actions, including on behalf of any table character, make test and other rolls, activate appropriate content such as traps, and search content. |
 | Director character tab | Access to the active character sheets of session players, subject to the existing private-field policy. Viewing does not grant build-choice authority. |
 | Session settings | Director controls to pause/end the session and add/remove session players when no encounter is active and the session is not paused. Combat locks the party roster; pausing locks both rosters. Resume is the proposed counterpart of pause. |
 | Player pane | The participant's selected character sheet(s) and actions available in the current context. The presentation for switching among several characters remains open. |
@@ -356,7 +358,7 @@ Confirmed 2026-09-11: **Director pane left, game log middle, heroes pane right**
 
 | Viewer | Left: Director pane | Middle | Right: heroes pane |
 | --- | --- | --- | --- |
-| Player | Revealed foes with the Director-configured health display. This is sufficient for the current baseline. | Shared game log. | The player's own character sheet dominates, with a compact party roster showing remaining Stamina and Recoveries. |
+| Player | Revealed foes with the Director-configured health display (in v0.01 every loaded foe is revealed; hiding is V1). This is sufficient for the current baseline. | Shared game log. | The player's own character sheet dominates, with a compact party roster showing remaining Stamina and Recoveries. |
 | Director | Foes roster and controls to add/remove monsters, including during running combat. Roster edits are blocked while paused. | Shared game log. | Vertical list of players and their heroes' current Stamina, Recoveries and Heroic Resources. |
 
 The player party roster's horizontal portrait row is a **provisional presentation preference**. The required
@@ -365,8 +367,8 @@ controlled heroes, exact group/turn indicator design and ordering the Director's
 The player-sheet turn affordances below are confirmed; their visual styling remains provisional.
 
 Existing privacy policies apply: the player overview does not grant peer full-sheet access or include peer
-Heroic Resources, and hidden foes stay absent from player roster views. Group presentation must preserve
-that audience boundary. Adding/removing foes remains available; their initiative effects require the
+Heroic Resources, and hidden foes stay absent from player roster views (V1 hiding, deferred beyond v0.01).
+Group presentation must preserve that audience boundary. Adding/removing foes remains available; their initiative effects require the
 remaining combat contracts. Further pane detail can be added later.
 
 This is a replaceable desktop baseline, not a mobile or visual-polish requirement. Initiative setup retains
@@ -379,7 +381,6 @@ Confirmed during the 2026-09-12 discussion. Each displayed participant in either
 target button, provisionally a reticle. Target selection is separate from acting-character selection.
 Users can select targets before or after an ability. Roster privacy and control permissions still apply;
 a reticle grants neither control nor private-sheet access.
-
 
 Minion targeting refinement, 2026-09-13: provide a target reticle for every individual minion and
 for its attached captain. The squad/initiative-group container is not itself the creature target.
@@ -403,7 +404,7 @@ does not redefine every source ability as optionally targeting fewer creatures.
 
 Each authenticated user owns an independent selection, even when the Director and a player act for the
 same character. Others can see it with indicators distinct from their own; exact styling is deferred.
-Hidden creatures cannot be disclosed through another user's indicator.
+Hidden creatures (V1 hiding, deferred beyond v0.01) cannot be disclosed through another user's indicator.
 
 | Event | Selection behavior |
 | --- | --- |
@@ -544,7 +545,8 @@ progression/edit lock does not apply to monsters. Saved-encounter replace/append
 merely because combat is active. Pausing blocks roster changes, including saved-encounter loads;
 executing monster gameplay actions still requires a running session.
 
-Confirmed v1 scope: a saved encounter retains the monster selection, including quantities, the last setup of
+Confirmed v1 scope (saved encounters are deferred beyond v0.01; v0.01 uses direct catalog-to-roster
+loading): a saved encounter retains the monster selection, including quantities, the last setup of
 its **party strength calculator** (working title), a **rewards stash**, and prepared monster initiative
 groups, minion squads and captain assignments. This extends the earlier monster-selection-only scope;
 no other authored supporting content is required for v1. Saved encounters are
@@ -553,7 +555,7 @@ independent live roster instances governed by table access, without granting acc
 Definition references and rules needed to instantiate selected monsters remain necessary; this scope does not
 remove their stat blocks or mechanics.
 
-Confirmed saved preparation, 2026-09-13: predesigning an encounter includes arranging monster
+Confirmed saved preparation, 2026-09-13 (V1, deferred beyond v0.01): predesigning an encounter includes arranging monster
 initiative groups, establishing minion squads and assigning their captains. Persist those choices in
 the saved encounter; reopening, duplicating and loading preserve the prepared arrangement. Loading
 creates independent live monsters, groups and squad/captain relationships within that load, rather
@@ -594,8 +596,8 @@ roster does not turn planning stubs into actual session participants. Required n
 await rules research.
 
 The user proposed showing **current encounter value (EV) against the current party** in the Director's foes
-roster. Confirmed comparison scope: include all undefeated monsters on the roster, including hidden ones and
-those not selected into the current combat. Do not filter the total by player visibility or active-combat
+roster. Confirmed comparison scope: include all undefeated monsters on the roster, including hidden ones (V1)
+and those not selected into the current combat. Do not filter the total by player visibility or active-combat
 membership. Defeated monsters stop contributing to current roster EV immediately, even while their entries
 remain until normal encounter cleanup. This is the current-roster display policy; it does not retroactively
 change recorded encounter difficulty or establish reward calculations. Exact party inputs still need
@@ -613,8 +615,8 @@ retainers, companions, and summons under the [source scope](reference-library-sp
 readable creature has complete automation. Monster selections use supported core-rulebook content; creating or
 copying monsters for homebrew customization is deferred.
 
-The top of the roster provides controls to search the database and add stat blocks, or load a saved encounter.
-Loading a saved encounter also adds its prepared reward items to the campaign's persistent Director's stash at
+The top of the roster provides controls to search the database and add stat blocks, or (V1, deferred beyond
+v0.01) load a saved encounter. Loading a saved encounter also adds its prepared reward items to the campaign's persistent Director's stash at
 that time; encounter start/wrap-up do not add them again. Loading a saved encounter into an empty roster
 populates it. If the roster is nonempty, show an action card with **Replace current roster** and **Append to current
 roster** choices. Replacement removes the current roster entries in favor of the loaded selection; append
@@ -641,6 +643,7 @@ lifetime, how they died, and who killed them. This is a later feature, not a v1 
 Retained history should support it; roster removal alone does not establish that a creature was killed. Kill
 attribution, undo/void treatment, and its presentation remain for that feature's design.
 
+V1 design, deferred beyond v0.01 (all v0.01 foes are visible; see [visibility](#monster-visibility-and-health-display)).
 Confirmed: a **default-visibility toggle beside the roster's Add button** lets the Director choose whether
 newly added monsters start visible or hidden. This sets the initial visibility of additions; changing it does
 not change monsters already on the roster. Each monster retains its individual visibility control. New
@@ -648,7 +651,7 @@ campaigns default the foes-roster Add visibility toggle to hidden. Its value is 
 individual catalog additions and monsters loaded from saved encounters use that current value. Changing the
 default does not change existing foes' individual visibility.
 
-Each roster monster has a Director-controlled **show/hide toggle**. Showing a monster makes it visible to
+Each roster monster has a Director-controlled **show/hide toggle** (V1, deferred beyond v0.01). Showing a monster makes it visible to
 players, with its health presented according to the campaign's monster-health setting. It does not expose its
 full stat block. Hiding a monster removes it from the player-facing roster view without removing the monster
 from the Director's roster. Confirmed clarification: **hidden means absent from the players' roster view, not
@@ -660,13 +663,14 @@ does not enroll it in combat or start a turn.
 Proposed consistency details: give each added creature a distinct instance identity; preserve existing
 identities and state on append. Canceling the replace/append card changes nothing, and validate the load
 before committing replacement. Preserve historical references after removal. Apply the show/hide boundary to
-observers as well as players through authorized audience projections. Provisional user decision: a hidden
+observers as well as players through authorized audience projections. Provisional user decision (V1 hiding): a hidden
 foe's name is not concealed in game-log entries when it acts. Its roster entry remains hidden; a named log
 entry does not reveal its full stat block or automatically toggle roster visibility. Visibility alone does not
 establish a secret-roll mode; the public/tower result-audience rules remain separate.
 
-Open: the history/void-reset treatment of monsters added or removed after encounter start. Director
-additions/removals during combat are confirmed. Their detailed turn, pending-action, squad, and summon
+Void-reset treatment of monsters added or removed after encounter start is settled by the 2026-09-13
+[Void roster restoration](#voiding-an-encounter) ruling; Director additions/removals during combat and
+mid-combat insertion/regrouping are confirmed. Their detailed pending-action, squad, and summon
 interactions remain open in the active rules/resolution workstream; friendly-monster play is post-V1 work.
 
 ### Party sheets and resource visibility
@@ -1184,7 +1188,6 @@ casualties. Other source-specific calculation details remain subject to their ow
 and the absence of area overflow are settled. See
 [the research and interpretation record](research/minion-lifecycle.md#7-area-damage-immunity-and-weakness).
 
-
 The [minion rules](../vendor/steel-compendium/en/unified/md/chapter/monster-basics.md#dropping-multiple-minions)
 provide the casualty constraints, including nearest additional minions for non-area overflow. Supplied
 spatial facts fill the mapless client's knowledge gap; the prompt does not invent positions or replace
@@ -1231,13 +1234,132 @@ exist only in interactive cards designed for their specific cases. Submitting su
 case's shared operation and appends the appropriate record; it does not overwrite original history.
 History controls such as Undo/Redo retain their own registered-operation semantics.
 
+#### v0.01 hero tokens — deferred
+
+Confirmed 2026-09-14: defer the shared hero-token counter and associated pool controls/automation
+beyond v0.01. The previously deferred failed-save token follow-up remains deferred. Fuller V1
+hero-token references elsewhere in this specification remain future scope. This does not remove
+accepted surge, Recovery, Malice or other shared resource controls.
+
+#### v0.01 surge tracking
+
+Confirmed 2026-09-14: include a persisted surge counter on the hero sheet, editable by the
+Director through the existing numeric Manual adjustment operation. Record the actual user, hero,
+previous value and new value. Gains, spending and their damage/potency effects are resolved
+manually for v0.01; no surge-spending card or automatic granting-feature interpretation is required.
+Preserve actual recorded resources, shared UI/headless operations, session/control boundaries,
+retry safety and sequential history. Do not manufacture grants or silently apply extra damage.
+
+The [Surges rule](../vendor/steel-compendium/en/unified/md/rule/resource/surge.md), pinned revision
+`fb83a789da8f0327a389c277a0c790b1648d5810`, remains the basis for actual gains/spends and clearing
+remaining surges at combat end. A direct field edit is an attributed manual adjustment; this counter
+inclusion does not certify automatic spending or unique resource logic. The later common combat-end
+cleanup decision below includes automatic clearing of remaining surges. Unsupported extra
+damage uses the established manual Stamina adjustment route rather than an added damage editor.
+
+#### v0.01 Defend and Aid Attack
+
+Confirmed 2026-09-14: include Defend and Aid Attack as usable common actions. Record their use,
+acting creature/user and applicable target; track the source-defined action allowance and show
+complete source text in the game log. Defend uses a main action; Aid Attack uses a maneuver.
+Use registered UI/headless operations, existing targeting, allowance warnings, session/control
+permissions, retry safety and history. The app does not infer spatial eligibility from roster order.
+
+Resolve the benefits manually through the agreed per-target edge/bane controls and ordinary roll
+inputs. Do not automatically detect beneficiaries or consume/expire their modifiers. Preserve all
+source qualifications and timing in the readable text; recording the action does not certify
+its effect automation. No extra condition, attack-wide modifier layer or hidden timer is required.
+
+Sources: [Defend](../vendor/steel-compendium/en/unified/md/feature/common/main-actions/defend.md)
+and [Aid Attack](../vendor/steel-compendium/en/unified/md/feature/common/maneuvers/aid-attack.md),
+pinned revision `fb83a789da8f0327a389c277a0c790b1648d5810`. This scope does not change already-
+included common attacks, Catch Breath or other supported clock behavior.
+
+#### v0.01 temporary Stamina
+
+Confirmed 2026-09-14: include a separate Director-editable temporary Stamina value on heroes and
+foes, persisted with the existing attributed Manual adjustment records. Supported damage consumes
+available temporary Stamina first, then applies the remainder to ordinary Stamina. For example,
+10 temporary Stamina absorbs 10 of 16 damage; the remaining 6 reduces ordinary Stamina. Log both
+state changes with their cause; retries and undo/redo must preserve the complete result coherently.
+
+Ordinary healing, including Catch Breath, does not refill temporary Stamina. Keep it separate from
+maximum Stamina, recovery value and winded calculations. It does not itself remove dying/dead
+states or revive a Slain foe. Existing hero-dying automation remains deferred. Ability-specific
+grants are manually resolved; no automatic interpretation of granting features is required.
+
+Source: [Temporary Stamina](../vendor/steel-compendium/en/unified/md/rule/health/temporary-stamina.md),
+pinned revision `fb83a789da8f0327a389c277a0c790b1648d5810`. A sourced grant keeps the greater of
+the current temporary amount and the new grant, whereas a Director setting the field is an
+explicit manual adjustment. The source normally ends temporary Stamina at encounter end unless
+otherwise indicated. Grant/closeout integration must respect known exceptions and the separate
+Void keep/reset contract; this input/damage decision does not invent those detailed interfaces.
+The later common resource cleanup decision includes automatic normal combat-end clearing;
+source-specific exceptions remain manually adjudicated.
+
+#### v0.01 Catch Breath
+
+Confirmed 2026-09-14: automate the ordinary hero Catch Breath maneuver. On accepted use,
+spend one actual Recovery, restore Stamina using the hero's actual recovery value and record the
+maneuver and both state changes together. Use the shared operation across UI/headless callers,
+with source text, actual acting-user attribution, action tracking and authoritative persisted
+Recovery/Stamina values. Retries cannot spend or heal twice; undo/redo restores the recorded use
+and its linked state changes under the existing history boundaries.
+
+The operation requires a Recovery to spend and follows the existing affordability contract;
+never supply artificial resources. The source baseline recovery value is one-third of maximum
+Stamina, rounded down. Use actual supported recorded values and source rules; detailed healing
+bounds, eligibility and exceptions require verification before implementation. Director manual
+numeric adjustments remain available as separate logged events.
+
+Source: pinned Steel Compendium `fb83a789da8f0327a389c277a0c790b1648d5810`,
+[Catch Breath](../vendor/steel-compendium/en/unified/md/feature/common/maneuvers/catch-breath.md)
+and [Recoveries](../vendor/steel-compendium/en/unified/md/rule/health/recoveries.md).
+Keep the earlier hero-dying automation/warning deferral and manual adjudication. This does not
+certify class-specific healing, NPC recovery rules or the deferred respite flow.
+
+Out-of-combat Recovery spending confirmed 2026-09-14: heroes may use the same basic healing
+control during FreePlay, one actual Recovery per use, restoring Stamina using actual recovery
+value. Do not consume a combat maneuver allowance outside combat. Record the spend and healing
+together and preserve affordability, retries, source eligibility and history. Repeat uses are
+available while the hero has Recoveries remaining. Existing running-session/control permissions
+and Director acting authority apply. This does not start a respite or replenish Recoveries.
+
+#### v0.01 manual condition tracking
+
+**Current scope confirmed, 2026-09-14: simple condition toggles.** Provide one on/off toggle for
+each core condition on a creature. Players can change their own controlled heroes' conditions;
+the Director can change conditions on all heroes and foes. Persist each condition's on/off state
+and append an attributed change to the game log. Use existing shared UI/headless operations,
+session/control permissions, audience boundaries, retry safety and sequential undo/redo.
+
+Toggling is a new live-state change, not an edit of a previous attack. Record the actual user,
+creature, condition and before/after state. This does not require a source name, an originating
+ability selection, a duration selector, expandable application records or a remove-source workflow.
+Each condition is independently toggled; Clear all remains deferred.
+
+This supersedes the earlier v0.01 source/duration/application UI decisions. Keep those discussions
+as historical/future material, not prototype gates. Ability-driven condition application and expiry
+can follow when the parser understands the applying ability. A manual toggle supplies no duration,
+so it cannot schedule expiry or imply a save-ends rule. Do not fabricate timing from the condition
+name or silently clear toggles at turn/encounter end. The broader game clock remains in scope;
+save handling for these toggles is now confirmed as manual: roll through ordinary dice controls
+and toggle off the condition when appropriate. Log the roll and toggle as separate operations.
+Automatic save scheduling/removal for toggles waits for ability support. This narrows the earlier
+automatic-save requirement for these manual conditions without removing other supported clock work.
+
+The simple toggles record condition state; they do not certify every condition's consequences or
+reopen unique feature automation. Existing manual per-target edge/bane entry stays in force.
+See [the current walkthrough](v001-basic-play-walkthrough.md#condition-tracking--current-v001-scope).
+
 #### v0.01 edge and bane inputs
 
 Confirmed 2026-09-14: the acting player or Director supplies the applicable edge and bane counts
 for an ordinary attack before its roll resolves. The shared roll operation applies their
 rules-defined effect and records the supplied inputs and outcome. v0.01 does not require automatic
 discovery of every situational, class or stat-block reason for these modifiers. They remain
-roll-local inputs; this does not bring deferred post-roll attack-result editors into scope.
+roll-local inputs. The later post-roll edge/bane addition exception is recorded below; broader
+attack-result editing remains deferred.
 
 Control behavior confirmed 2026-09-14: provide next-attack edge and bane inputs, initially zero,
 bound to the invoking user, acting character and individual target. Set them before completing
@@ -1281,8 +1403,42 @@ or authorize unique feature interpretation. Preserve the settled target/fire beh
 ### Director edits to inline results
 
 Scope clarification, 2026-09-13: the controls described here belong to case-specific interactive
-cards. They are not generic editing of arbitrary log fields. These attack-result editors remain
-deferred beyond v0.01; editing persistent sheet/stat-block/resource values remains included.
+cards. They are not generic editing of arbitrary log fields. Broader attack-result editors remain
+deferred beyond v0.01, subject to the 2026-09-14 edge/bane addition exception below; editing
+persistent sheet/stat-block/resource values remains included.
+
+**v0.01 exception confirmed, 2026-09-14:** keep existing target-completion firing, including
+full-count multi-target auto-fire, and allow edges/banes to be added afterward for each individual
+target through the attack's interactive card. The proposed explicit Roll step was rejected.
+Post-roll additions update that target's recorded attack inputs; they do not populate next-attack
+drafts or introduce an attack-wide modifier field. Pre-roll inputs remain available.
+
+Use the established correction contract below: retain the accepted dice, re-evaluate the target's
+outcome and reconcile supported applied effects without dealing the full damage a second time.
+Append an attributed linked correction with before/after inputs and outcomes; preserve the original
+log entry. The existing historical-edit boundary still requires sequential rewind of later gameplay
+before correcting an older attack. Pause, archive, retry and undo/redo rules remain in force.
+Deferred unique effects still require manual resolution rather than newly implied automation.
+
+This exception includes post-roll Add edge/Add bane controls, not direct damage editing or every
+possible result editor. Acting-player authority confirmed 2026-09-14: the acting player may add
+edges/banes to their own eligible attack in the same window as their gameplay undo, with the next
+actor's turn start as the outer cutoff. Existing Director correction authority remains available.
+
+Apply the existing undo/history limits to this permission: another character's committed action
+or a Director correction can close the player's window earlier. Correcting an older attack still
+requires sequentially undoing intervening gameplay; being before the next turn does not permit
+editing through it. End turn alone is not the next actor's turn start, but reaching an earlier
+attack still follows the existing history order. Check eligibility in the shared operation when
+the modifier correction commits, including for stale cards. Preserve attribution, original dice and linked
+correction history. This grants no authority over another character's attack or other result fields.
+See [the walkthrough](v001-basic-play-walkthrough.md#next-review-case-post-roll-addition-authority).
+
+Removal confirmed 2026-09-14: the same target-specific card also allows reducing edge/bane
+counts, including counts supplied before the roll. Use the same acting-player/Director authority,
+undo window, earlier seams and sequential-rewind rules as additions. Counts cannot be negative.
+Keep the original dice, re-evaluate supported outcomes and append the linked correction. This
+extends the narrow modifier exception to additions and removals, not direct damage editing.
 
 Confirmed placement: an Undo button accompanies inline results, under existing player/Director undo
 permissions. Confirmed 2026-09-13: undoing an adjudication restores the prior effective result while
@@ -1380,11 +1536,27 @@ changes reach the main sheet immediately.
 Confirmed: respite is its own dedicated table mode, with a self-contained gameplay loop that the Director
 starts and ends. It has mechanics to support rather than being only a pause or a descriptive log entry.
 
+**Respite participant selection, confirmed 2026-09-14:** the Director selects participating heroes,
+with the current party selected by default and individual heroes removable from that selection.
+This supersedes the earlier whole-party-only decision, which the user explicitly reconsidered.
+Record who participates and calculate each hero's sourced activities, recovery and effects separately.
+An unselected hero receives no ordinary respite benefits or personal respite-boundary advancement merely
+because the rest of the party rests; source-specific effects on other creatures retain their own rules.
+The relationship to closed sessions and later party changes remains to be designed. This is fuller
+V1 scope, not an addition to v0.01.
+
 Further rules research is required before defining the loop's steps, effects, or player controls. Respite may
 connect to the downtime system; that relationship is explicitly unresolved. This checkpoint does not import
 combat initiative, roster/sheet locks, void/reset behavior, or reward procedures into respite. Its
 interruption and session-closure behavior require separate design informed by that research. The provisional
 single-structured-state policy applies; nested respite is not required in the present design.
+
+Initial source deep dive, 2026-09-14: [respite rules and V1 questions](research/respite-rules.md)
+covers the ordinary lifecycle, advancement, activity allowances, cross-hero benefits, exceptions and
+between-session play, with a [core-source inventory](research/respite-source-inventory.csv).
+It supplies research and proposals; the current participant-selection decision is recorded above.
+Session boundaries, scoped build changes, completion/level-up ordering, interruption and history remain open. Downtime-project
+tracking and respite itself remain outside v0.01; the existing V1 downtime-project exclusion is unchanged.
 
 ## 5. Encounter workflow
 
@@ -1481,8 +1653,8 @@ the earlier "anyone" ambiguity without creating an observer exception. All eligi
 public roll. Retain hidden-foe and private-stat-block policies when projecting the shared action card.
 
 Engineering requirement for the eventual shared operation: concurrent clicks produce one accepted opening
-roll, shared by everyone. Lock/snapshot timing is now confirmed at OK as above; handling roster changes
-while the draft is open remains to be defined. No initiative operation or new automatic result is
+roll, shared by everyone. Lock/snapshot timing is now confirmed at OK as above; roster changes while the
+draft is open follow the confirmed draft roster updates (2026-09-13) above. No initiative operation or new automatic result is
 implemented here.
 
 ### Initiative groups: confirmed app model
@@ -1765,8 +1937,8 @@ Verified against core Heroes/Monsters at Compendium revision
   alternating order; the explicit Heroes procedure establishes successive member turns. After the group
   finishes, ordinary play passes to the other side if it has remaining turns. If that side is exhausted,
   the remaining side finishes its turns under Combat Round's rule. This normal monster sequence was
-  independently re-researched at the user's request; how the app starts/ends each turn still needs its
-  interaction contract. The user separately accepted successive complete turns for combined hero groups
+  independently re-researched at the user's request; the app's Take turn/End turn interaction is
+  confirmed in [Taking a turn](#taking-a-turn). The user separately accepted successive complete turns for combined hero groups
   as an app decision; the players choose their member order among themselves.
 - [Retainers, Retainers in Combat](../vendor/steel-compendium/en/unified/md/chapter/retainers.md#retainers-in-combat)
   gives a retainer their own actions but makes the mentor's turn start/end also the retainer's start/end.
@@ -1812,8 +1984,8 @@ A single group-level "acted" flag is not a complete turn model.
 Confirmed product sequence, subject to the rules notes below:
 
 1. **Prepare participants:** the Director selects heroes and existing monsters from the foes roster, retaining
-   their current values. Saved encounter loads create independent roster instances under the catalog/data
-   specs. Preparation and loading do not by themselves establish that initiative has begun. Starting the
+   their current values. Saved encounter loads (V1, deferred beyond v0.01) create independent roster instances
+   under the catalog/data specs. Preparation and loading do not by themselves establish that initiative has begun. Starting the
    encounter locks the party roster and participating character sheets against editing; capture the starting
    gameplay state before encounter-start mechanics so a later void can restore it. Encounter actions update
    the main sheets immediately.
@@ -1850,8 +2022,9 @@ and retry-safe so returning to free play cannot award the same Victories twice.
 
 Manual resolution remains an intended playable path. Show full source text, applied effects, and outstanding
 work. Turn enforcement cannot simply prohibit every off-turn operation: legal triggered actions need a route
-to interrupt or respond. The exact interaction and ownership of pending decisions belong to the deferred
-action-economy workstream; they are not implemented or settled by this checkpoint.
+to interrupt or respond. The standing prompt window, early-close rule and sequential undo contracts
+(2026-09-13) settle the general interaction; source-specific ownership and ordering of pending decisions
+remain open. This checkpoint is a specification, not an implementation claim.
 
 ### Formal encounter closeout
 
@@ -1880,6 +2053,20 @@ UI/headless operations. Void retains its separate keep/reset procedure.
 The formal closeout UI is confirmed; exact presentation and source-specific end-effect/reward ordering
 remain to be designed. Responses newly required or offered by closeout effects need their own applicable
 resolution steps; the cutoff does not preempt work created by the ending procedure itself.
+
+Common resource cleanup confirmed for v0.01, 2026-09-14: automatically clear remaining surges
+and temporary Stamina at normal combat end through the established closeout flow. Record actual
+before/after values and the automatic cause once; retries cannot repeat the cleanup or create
+new changes. Source-specific exceptions remain manually adjudicated; do not silently claim a
+known exception was resolved by the default. Exact exception handling remains an integration
+contract. Preserve the recorded state/history up to the existing final archive boundary.
+
+This common cleanup does not automate class/monster-specific grants or spending. Ordinary
+Stamina, condition toggles and unrelated retained resources are not cleared by this operation.
+Void skips it and preserves its existing keep-current/reset-to-start semantics. Source:
+[Surges](../vendor/steel-compendium/en/unified/md/rule/resource/surge.md) and
+[Temporary Stamina](../vendor/steel-compendium/en/unified/md/rule/health/temporary-stamina.md),
+pinned revision `fb83a789da8f0327a389c277a0c790b1648d5810`.
 
 Source check for closeout, 2026-09-13: [Classes — Ending Effects](../vendor/steel-compendium/en/unified/md/chapter/classes.md#ending-effects)
 says combat-imposed effects/conditions on heroes can end when the encounter ends if the hero wants,
@@ -2080,7 +2267,31 @@ not a new turn or a way to reopen expired opportunities. Preserve the interrupte
 This confirms resumption behavior; resolve the triggering action and interruption at their actual
 source stages rather than using resumption as permission to reorder unresolved effects.
 
+### v0.01 critical hits and additional main actions
+
+Automation confirmed 2026-09-14: recognize and log qualifying critical hits and track their
+immediate additional-main-action opportunity. In the representative ordinary main-action attack,
+a natural 19 or 20 (the dice total before modifiers) produces a tier 3 result and a critical hit.
+A modified total of 19 or 20 alone is insufficient. Resolve the current attack, then make the
+immediate extra main action available. The acting player or Director chooses whether and how to
+use it; do not execute an action automatically or turn the opportunity into a generic banked action.
+The action display and allowance assessment must account for this recorded opportunity.
+
+Use shared operations and attributed persistent history. Retries cannot duplicate the grant;
+undo/redo restores its recorded state without rerolling. Source recognition of critical hits
+remains separate from deferred class/stat-block-specific triggers caused by a critical hit.
+
+Source: pinned Steel Compendium `fb83a789da8f0327a389c277a0c790b1648d5810`,
+[Natural Roll](../vendor/steel-compendium/en/unified/md/rule/dice/natural-roll.md) and
+[Critical Hit](../vendor/steel-compendium/en/unified/md/rule/combat/critical-hit.md). Exact opportunity
+lifetime, chaining, off-turn use and source exceptions need bounded contracts before implementation;
+this example does not establish that only on-turn actions qualify. The inclusion decision is settled.
+
 ### Player-sheet actions and explicit End turn
+
+Use the [v0.01 character sheet spec](character-sheet-spec.md) for the initial field inventory,
+layout and action/resource controls. It adapts the user-supplied paper sheet for temporary desktop
+use; the gameplay, permissions and history contracts here remain authoritative.
 
 Confirmed 2026-09-12: the detailed character sheet in the player's pane is the primary v0.01 surface for
 choosing actions. During the character's turn, it indicates the remaining action options/allowances.
@@ -2093,14 +2304,21 @@ ordinary allowances does not itself automatically end the turn. End turn is also
 and headless operation, attributed and recorded in the game log. Proposed spelling: `@Thorn /turn end`.
 Individual hero-turn boundaries and the previously accepted group handoff remain the baseline; the user's
 reference to finishing their characters does not establish a new command ending every controlled hero's
-turn at once. Required end-turn effects and pending-input handling still need a resolution contract.
+turn at once. Required end-turn effects and pending-input handling follow the confirmed
+[clock contract](#game-clock-and-scheduled-rules-work) and timing split.
 
 Confirmed clarification: grayed actions remain clickable and executable. Gray means the app believes the
 ordinary allowance is spent; it is advisory, not an inactive control or a requirement to unlock an override.
 Players can take another action with a rule warning where applicable; Director authority remains intact.
 Source-defined substitutions and extra actions inform rule assessment: spending an available main action
 for a second maneuver is a legal substitution, not automatically a rule violation. Exact allowance display
-and action-substitution selection remain to be designed; spent-action graying itself remains advisory.
+and fuller-product action-substitution selection remain to be designed; spent-action graying itself remains advisory.
+
+v0.01 deferral confirmed 2026-09-14: do not add automatic main-action substitution or a dedicated
+slot-selection workflow for a second maneuver. The player can execute it through the existing
+nonblocking action controls. Record actual use and keep allowance indications advisory; spent
+maneuver state is not an execution block. This does not invalidate the source's legal substitution,
+remove actual resource affordability checks or defer the confirmed critical-hit opportunity.
 The separately confirmed resource-affordability check below can block an ability that cannot be paid for.
 
 The earlier recommendation that every selected attack first open a preparation card was not accepted as
@@ -2269,7 +2487,18 @@ when the effect is applied; do not reinterpret "your" from whichever user later 
 Keep recurring save work until the effect ends, and retire obsolete registrations when their effect is
 removed. Exact data structures and dispatch implementation remain proposals.
 
-**Automatic save-ends resolution is confirmed:** when the affected creature's end-of-turn event makes a
+**v0.01 refinement, 2026-09-14:** simple condition toggles use manually invoked saves through
+ordinary dice controls and manual toggle removal. They do not supply timing metadata, so their
+automatic save scheduling/removal is deferred until ability support. The automatic path below
+applies when a supported effect actually supplies its save timing; do not infer it from a toggle.
+
+**Resolved 2026-09-14 (Q-TS-1): no save-ends roll is automatic in v0.01.** Every v0.01 save is rolled
+through ordinary dice controls and the condition is toggled off manually. The automatic resolution below
+is fuller-V1 clock behavior that becomes active only when a source-backed supported operation supplies
+save timing; the v0.01 clock may keep a registration hook, but nothing registers a save. See
+[the questions record](rules-questions-for-user.md#q-ts-1-are-any-save-ends-rolls-automatic-in-v001).
+
+**Automatic save-ends resolution for supported timed effects is confirmed:** when the affected creature's end-of-turn event makes a
 save due, roll automatically, apply the outcome and announce it in the game log; no routine Roll prompt
 is required. The [saving-throw rule](../vendor/steel-compendium/en/unified/md/rule/general/saving-throw.md)
 is d10, success on 6 or higher, at the end of each affected creature's turn. Failure leaves the effect in
@@ -2283,7 +2512,8 @@ can grant +1 to saves, and a hero can spend a
 succeed instead, subject to that resource's use limits. Automatic rolling does not authorize automatic
 optional spending. Such choices use the existing action-card contract.
 
-Confirmed failed-save follow-up: the automatic result applies immediately, and End turn does not wait for
+Confirmed failed-save follow-up (V1; the hero-token follow-up is deferred beyond v0.01, see
+[hero tokens](#v001-hero-tokens--deferred)): the automatic result applies immediately, and End turn does not wait for
 an acknowledgement or token decision. On failure, keep the effect active and expose **Spend hero token**
 on that result's game-log entry to eligible controllers, including the Director acting on the hero's behalf.
 The button stays actionable while valid until next-turn start or explicit End combat, under the
@@ -2542,14 +2772,12 @@ requested app loop while applying those verified mechanics.
   session-player/character changes, foe additions/removals, regrouping and saved-encounter loads. Resume
   restores otherwise-permitted edits; combat still blocks ordinary party changes. A refused removal
   neither advances the turn nor queues removal or boundary effects for resume.
-- During running combat or between sessions, the Director can add/remove foes and load a saved encounter.
-  This does not run monster gameplay actions or rewrite closed history.
-- A new campaign adds foes hidden by default; changing the campaign Add toggle affects later catalog additions
-  and template loads, not existing foes.
+- During running combat or between sessions, the Director can add/remove foes and (V1) load a saved
+  encounter. This does not run monster gameplay actions or rewrite closed history.
+- V1, deferred beyond v0.01: a new campaign adds foes hidden by default; changing the campaign Add toggle
+  affects later catalog additions and template loads, not existing foes. In v0.01 every added foe is visible.
 - Respite is an included mode; montage/negotiation mode controls and downtime-project tracking are absent from
   v1.
-
-
 - After session closure, attempts to resume it, submit gameplay, or apply live undo/redo to its history are
   refused, including for the Director. Reading retained history leaves current campaign state unchanged;
   further play starts a new session.
@@ -2617,25 +2845,27 @@ requested app loop while applying those verified mechanics.
 - The encounter builder derives difficulty from the selected monsters and party using verified rules. Changing
   either selection refreshes the guidance; unsupported or missing inputs remain visible rather than producing
   a guessed difficulty. Concrete numerical acceptance cases await rules research.
-- Between sessions, the Director can prepare saved encounters, add/remove live roster monsters, and load saved
-  encounters using the replace/append flow. Loading also adds prepared rewards once under the stash contract;
+- Between sessions, the Director can add/remove live roster monsters and, in V1 (deferred beyond v0.01),
+  prepare saved encounters and load them using the replace/append flow. Loading also adds prepared rewards once under the stash contract;
   it neither starts gameplay nor reopens closed session history.
 - Closing a session preserves the campaign foes roster and the state resulting from any encounter keep/reset
   choice. Starting the next session exposes those same retained instances and values without reloading a
   template or continuing the closed encounter.
 - During a running encounter, the Director can add monsters and remove participating monsters without ending
   or voiding it. The encounter does not impose a foes-roster lock; party player/character locks remain
-  enforced. Detailed turn and restoration cases await the deferred resolution/history design.
-- Loading a saved encounter into a nonempty foes roster requires replace or append; append preserves current
+  enforced. Mid-combat insertion, regrouping and Void roster restoration are confirmed above; squad and
+  summon cases remain open.
+- V1, deferred beyond v0.01: loading a saved encounter into a nonempty foes roster requires replace or append; append preserves current
   instances, replacement uses fresh instances, and cancel leaves the roster unchanged. Editing the template
   changes neither load.
-- A hidden roster monster can perform an otherwise legal Director-submitted action against a player without
+- V1, deferred beyond v0.01 (the four hiding examples through Revealing below): a hidden roster monster can
+  perform an otherwise legal Director-submitted action against a player without
   first becoming visible in the roster. Toggling roster visibility does not enable/disable its actions or
   apply in-game concealment.
 - For now, a hidden foe's action can show its name in the game log while its roster entry stays hidden. The
   log entry does not expose its full stat block or automatically reveal the roster entry.
-- The roster EV comparison includes all undefeated visible/hidden monsters and monsters outside the current
-  combat; changing visibility alone does not change its total. Defeat immediately removes a monster's
+- The roster EV comparison includes all undefeated monsters, visible or (V1) hidden, and monsters outside the
+  current combat; changing visibility alone does not change its total. Defeat immediately removes a monster's
   contribution without removing its roster entry. If recorded-state restoration makes it undefeated again, its
   contribution returns; the saved template and recorded encounter facts remain unchanged.
 - Adding a monster with the Add visibility toggle set to hidden creates a hidden roster entry; setting it to
@@ -2688,7 +2918,7 @@ requested app loop while applying those verified mechanics.
   other-character/Director-action seam or turn/FreePlay outer boundary; player redo restores their recorded undone actions. Director
   undo/redo can traverse the current encounter and restores recorded effects without rules/dice calls. New campaigns
   enable user undo by default; disabling the setting blocks player undo through shared operations while
-  retaining Director controls. Detailed dependency cases await the deferred history/resolution design.
+  retaining Director controls. Source-specific response reconciliation and undo-unit details remain open.
 - Corrections and undo append attributed entries; original history remains intact. Undoing a correction
   restores its prior effective result without undoing the source ability. A manual damage override survives
   later modifier edits until explicitly cleared.

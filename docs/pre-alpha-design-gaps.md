@@ -5,6 +5,24 @@ not an implementation milestone or approval of proposed technical interfaces.
 
 ## Checkpoint and resumption
 
+**Scope review concluded, 2026-09-14:** the user is satisfied with the current v0.01 shared-basics
+scope. No additional broad product decision was identified as necessary before build work proceeds.
+The building agent can ask concrete questions when implementation exposes a material gap; do not
+continue an open-ended feature questionnaire. Preserve accepted deferrals and the TypeScript choice.
+
+Remaining work is not waived: complete the sourced hero baseline/initialization contracts (G1–G3),
+shared-mechanic and manual-operation details (G5), packaging/integration (G6), and dice/persistence/
+history implementation and verification (G7). Resolve source and engineering questions from evidence;
+ask the user only for material product choices or source ambiguities needing adjudication. See
+[the build handoff](web-app-build-handoff.md#v001-scope-review-complete--build-handoff).
+This is scope readiness, not a claim that the app or walkthrough is implemented or verified.
+
+**Character-sheet direction, 2026-09-14:** the user supplied the game's paper sheet and authorized
+a reasonable v0.01 spec using its content/hierarchy as guidance, without needing to perfect the first
+version. Follow the [character-sheet spec](character-sheet-spec.md) for initial desktop sections,
+fields and interactions. Routine layout refinements can follow playtesting; preserve existing rules,
+authority and subsystem deferrals rather than importing every paper field as a prototype feature.
+
 Current priority: establish the shared game basics as a playable, testable foundation before class-
 and stat-block-specific automation. Follow [the current runtime scope](#game-basics-first--current-runtime-scope)
 and the G4 checklist below. The older chronological discussions retain fuller-product designs;
@@ -71,6 +89,72 @@ Target-only clarification confirmed, 2026-09-14: enter complete edge/bane counts
 each target, including single-target attacks. The user rejects the attack-wide-plus-target
 stacking proposal. No attack-wide modifier field or inherited counts; retain zero defaults,
 per-target source arithmetic/logging and reset after the accepted attack. Placement stays flexible.
+Critical-hit automation confirmed, 2026-09-14: recognize/log a natural 19 or 20 on the qualifying
+main-action ability roll, apply its tier 3 outcome and make the immediate additional main action
+available after resolution. The player chooses whether/how to use it; do not execute it automatically
+or bank it as a generic action. Preserve recorded history and once-only grants. See
+[the walkthrough](v001-basic-play-walkthrough.md#next-review-case-critical-hit-action-tracking).
+Supported damage and Stamina updates remain settled. Exact critical opportunity lifetime,
+chaining and off-turn/source-exception contracts still need bounded follow-up.
+
+Review cadence reaffirmed, 2026-09-14: keep asking the next material question after recording each
+answer until the user is satisfied with the V1 specification. Preserve the distinct v0.01 scope.
+(Concluded later the same day: the scope-review conclusion at the top of this document applies.)
+Firing/post-roll clarification confirmed, 2026-09-14: retain existing automatic firing, including
+full-count multi-target firing, and include per-target Add edge/Add bane controls afterward. This
+is a narrow exception to the earlier inline modifier-editor deferral. Follow the existing same-dice,
+append-only correction and sequential-rewind contracts; direct damage editing remains deferred.
+Acting-player authority confirmed, 2026-09-14: players can add edges/banes to their own eligible
+attack within the same window as gameplay undo, ending at the next actor's turn start. Existing
+earlier undo seams and sequential rewind still apply; Director correction authority remains.
+Modifier removal confirmed, 2026-09-14: players and Director may also reduce incorrect per-target
+edge/bane counts through that card under the same authority/history limits. Keep the dice and
+append the correction; counts cannot be negative. Direct damage editing stays deferred.
+**Condition scope simplified, 2026-09-14:** one on/off toggle per core condition. Players manage
+their own controlled heroes; the Director manages all heroes/foes. Persist and log changes under
+existing authority/history rules. Manual source entry, duration choices, expandable application
+records and source-specific removal are superseded for v0.01. Clear all stays deferred.
+Ability-driven application/expiry follows parser support; a toggle implies no duration or save rule.
+See [the owning contract](table-spec.md#v001-manual-condition-tracking).
+Manual save handling confirmed, 2026-09-14: for these toggles, use ordinary dice controls for
+the save and manually switch the condition off when appropriate. Automatic save scheduling/removal
+for toggles waits for ability support. This narrows the earlier automatic-save requirement for
+manually tracked conditions; the shared clock and other supported scheduled work stay included.
+Catch Breath confirmed, 2026-09-14: automate the ordinary hero maneuver, spending one actual
+Recovery and restoring Stamina using actual recovery value, with linked action/state records,
+affordability, retry safety and history. Preserve the hero-dying automation deferral and manual
+adjudication. See [the owning contract](table-spec.md#v001-catch-breath).
+Out-of-combat Recovery spending confirmed, 2026-09-14: the same basic healing control spends
+one actual Recovery per use in FreePlay, with linked healing/logging and no combat maneuver cost.
+Keep running-session permissions and actual resource/eligibility checks; respite stays deferred.
+Temporary Stamina confirmed, 2026-09-14: a separate Director-editable value with logged changes;
+supported damage consumes it before ordinary Stamina, while ordinary healing does not refill it.
+Keep it separate from maximum Stamina, recovery value and winded. Ability grants remain manually
+resolved. See [the owning contract](table-spec.md#v001-temporary-stamina).
+Defend and Aid Attack confirmed, 2026-09-14: usable common actions with actor/target records,
+source action-allowance tracking and full rules text in the log. Their modifiers are manually
+resolved through the existing per-target inputs; no automatic benefit/timing interpretation.
+See [the owning contract](table-spec.md#v001-defend-and-aid-attack).
+Surge tracking confirmed, 2026-09-14: include a persisted Director-editable counter on the hero
+sheet with attributed numeric adjustments. Gains, spending and their effects remain manual;
+no surge-spending card is required. See [the owning contract](table-spec.md#v001-surge-tracking).
+Hero tokens deferred, 2026-09-14: skip the shared counter and its associated UI/automation in
+v0.01; the previously deferred failed-save spending follow-up stays deferred. Other accepted
+resource controls remain included. The user reaffirms no class- or monster-specific feature work
+in this pass; continue shared game basics, not another feature-by-feature content review.
+Automatic main-action substitution deferred, 2026-09-14: keep existing nonblocking action use;
+a player can use a second maneuver without a new substitution workflow. Record actual uses and
+retain advisory allowance tracking and real resource-affordability checks.
+Common resource cleanup confirmed, 2026-09-14: clear remaining surges and temporary Stamina
+automatically at normal combat end, logging actual changes once. Specific exceptions remain
+manual; Void keeps its separate keep/reset behavior. See [closeout](table-spec.md#formal-encounter-closeout).
+G6 language decision strengthened, 2026-09-14: TypeScript is the standing engine choice for
+v0.01 and beyond unless a concrete reason to change emerges. No routine later language comparison
+is required; packaging, execution placement and integration still need engineering work. See
+[the owning decision](engine-architecture.md#standalone-engine-and-portability).
+The user accepts the consolidated v0.01 scope as sufficient to proceed with build work and
+concrete follow-up questions as needed. The walkthrough remains a draft acceptance artifact,
+not a completed implementation or test.
 
 Review answer, 2026-09-13: Lines of Force uses the existing contextual response flow. Apply the triggering
 action's outcome, surface its detected triggered-action opportunity, then modify that effective outcome
@@ -89,7 +173,7 @@ illustrative. Same-turn dependencies and other response consequences remain open
 | Persistent areas | Stack fixed-bottom cards; owner/Director update membership and confirm each firing with prior selection prefilled. Dependent work waits; Resolve now handles unobserved triggers. No ordinary reminder inbox. [Areas](table-spec.md#persistent-area-effect-cards). |
 | Tests | Deliberately no generic Request test UI/command or lifecycle. Verbal calls and direct character rolls; source-specific test steps retained. Public workings/total, calculated outcome when context is known, otherwise Director interpretation. Known difficulty hidden by default; current setting also applies to history. [Tests](table-spec.md#freeplay-baseline-and-combat-transition). |
 | Costs | Fixed applicable costs debit automatically; optional pre-resolution choices use cards unless supplied. Unaffordable ability execution blocks, honoring source waivers/legal negative ranges. [Costs](table-spec.md#ability-costs-and-optional-spending). |
-| Clock | Individual turn/round events, FIFO due work and save-ends last; include applicable effects applied before the final save phase. Automatic saves and event-limited hero-token response. [Clock](table-spec.md#game-clock-and-scheduled-rules-work). |
+| Clock | Individual turn/round events, FIFO due work and save-ends last; include applicable effects applied before the final save phase. Automatic saves and event-limited hero-token response (fuller-product baseline; in v0.01 automatic saves apply only to effects with supported source-backed timing, toggled conditions use manual saves and the hero-token response is deferred, per the checklist below). [Clock](table-spec.md#game-clock-and-scheduled-rules-work). |
 | Corrections | Original entries never rewritten; corrections/undo append. Manual damage overrides survive modifier changes. Older-event edits after later gameplay require the entire intervening chain to be rewound, even within the same turn and including Director edits. [Corrections](table-spec.md#director-edits-to-inline-results). |
 | Undo/redo | Sequential player undo of uninterrupted own-character actions up to the nearest seam; another character's action closes the window. Turn/FreePlay outer bounds remain. Director sequential rewind crosses seams within the current encounter. Exact Redo preserves recorded dice; new execution uses current conditions and fresh dice, without a separate reuse cache. Committed Director corrections also create seams; the older exception is superseded. [History](table-spec.md#undo-permissions-and-proposed-campaign-control). |
 | Scope | v0.01 remains a desktop slice with temporary UI. Playable retainers/friendly monsters are beyond V1; source references and extension boundaries remain. [V1 scope](v1-spec-checkpoint.md). |
@@ -287,8 +371,8 @@ work. Already-caused required resolution and combat-ending effects/rewards/clean
 closeout flow. This does not decide every ongoing effect's outside-combat lifetime.
 See [closeout](table-spec.md#formal-encounter-closeout).
 
-Combat-flow review continues one question at a time until the practical combat flow is fully specified,
-as requested 2026-09-13. Resolve material behavior through source checks and user decisions; do not
+Combat-flow review continued one question at a time, as requested 2026-09-13, until the 2026-09-14
+scope-review conclusion above. Resolve material behavior through source checks and user decisions; do not
 turn exhaustive ability coverage or visual polish into flow-completeness requirements.
 
 Review answer, 2026-09-13: encounter-end cleanup presents each player's applicable action/effect
@@ -405,7 +489,8 @@ history, source-stage resource bookkeeping, response chains and unrelated events
 See [the source example and correction](research/ally-response-after-resource-spend.md).
 
 
-Current focus, 2026-09-13: full minion lifecycle research requested before further design questions.
+Focus at 2026-09-13 (completed; minion squads are deferred beyond v0.01): full minion lifecycle research
+was requested before further design questions.
 [Context report](research/minion-lifecycle.md) covers squad preparation, captains, shared turns,
 attacks, damage/casualties, reinforcements, transformations and encounter closeout, with source limitations
 separated from existing app decisions. No new rule or UI choice is implied by loading this context.
@@ -465,8 +550,12 @@ Basic sign-up/sign-in supports the participating users.
 The user corrected the fixture to **devil ancestry, Fury class, level one**. The
 [prepared hero](hero-fixture.md) can supply a sourced example for the remaining choices; its other choices
 were not individually mandated. The wizard must cover every applicable creation step, including ancestry,
-class, career, background and other sourced choices, with one supported option or valid selection set per
-step acceptable. Preserve real selections, valid counts/dependencies and derived values. Loading a prepared
+culture, career, class, kit and the other sourced steps, using the step names and order of
+[Making a Hero](../vendor/steel-compendium/en/unified/md/chapter/making-a-hero.md#step-by-step-hero-making)
+(ancestry, culture, career, class, kit, free strikes, complication, details, connections; "Background" is
+the Compendium chapter containing Culture and Careers, not a step), with one supported option or valid
+selection set per step acceptable. The optional complication step is not presented in v0.01 (Q-CHAR-1
+answered 2026-09-14: no). Preserve real selections, valid counts/dependencies and derived values. Loading a prepared
 hero behind a mock wizard does not meet the requirement. Starting-equipment inventory creation is excluded
 by the inventory deferral; applicable build choices such as kit selection remain included.
 
@@ -487,12 +576,13 @@ G1–G3 still own the wizard, evaluation and new-hero state contracts.
 | Area | Required in v0.01 | Deferred beyond v0.01 |
 | --- | --- | --- |
 | Opening and turns | Full staged opening; ordinary heroes/foes; individual initial groups, Director regrouping, Take turn/End turn and settled action tracking | Minion squads/captains/pooled Stamina, boss extra-turn mechanics, dynamic terrain objects |
-| Targeting | Settled self, single-target and multi-target roster controls | Persistent area-effect cards |
-| Costs | Automatic applicable fixed-cost deduction, affordability block and logged spending | Optional enhancement cards |
-| Damage and responses | Supported damage, Stamina/winded updates, source text and recorded manual adjustments/resolution; Director editing of persistent sheet/stat-block/resource numbers | Inline attack-result editing and automatic reconciliation of responses revising applied outcomes |
-| Clock | Turn/round timing and automatic save-ends rolls with applied/logged results | Failed-save hero-token follow-up |
+| Targeting and roll inputs | Existing self/single/multi-target firing; all foes visible; highest permitted roll characteristic selected automatically; target-only edge/bane counts with zero defaults and post-roll add/remove corrections in the accepted window | Foe hiding; persistent area-effect cards; attack-wide modifier stacking |
+| Costs and common actions | Automatic applicable fixed-cost deduction, affordability block and logged spending; Catch Breath and FreePlay Recovery spending; Defend/Aid Attack with recorded use and manual benefits; critical-hit recognition and extra main-action opportunity | Optional enhancement cards; automatic main-action substitution |
+| Damage and responses | Supported damage, Stamina/winded updates, source text and recorded manual adjustments/resolution; Director editing of persistent sheet/stat-block/resource numbers; per-target post-roll edge/bane additions/removals (2026-09-14 exception) | Broader inline attack-result editing, including direct damage editing, and automatic reconciliation of source-specific responses revising applied outcomes |
+| Conditions and extra counters | Logged condition toggles (players on own heroes, Director on all); surge counter with manual gains/spends; separate temporary Stamina consumed before ordinary Stamina | Source/duration condition forms; automatic ability-driven condition timing; Clear all; hero-token counter and spending UI |
+| Clock | Turn/round timing and supported scheduled work. No save-ends roll is automatic in v0.01 (Q-TS-1 answered 2026-09-14): all saves use ordinary dice controls and manual condition removal | Automatic end-of-turn save-ends resolution (V1, when source-backed operations supply timing); automatic save scheduling/removal for toggles; failed-save hero-token follow-up |
 | History | Full settled sequential player undo, Director encounter rewind and exact recorded Redo | Separate inventory/build-history interfaces remain under their existing deferrals |
-| Closing and noncombat | Formal closeout/cleanup/Victory awards/archive; Void keep/reset including while paused; basic noncombat table | Inventory/loot, dedicated respite and out-of-combat fictional-time systems |
+| Closing and noncombat | Formal closeout/source-earned Victory awards/archive; common Malice lifecycle and normal combat-end surge/temporary Stamina clearing; Void keep/reset including while paused; basic noncombat table | Inventory/loot, dedicated respite and out-of-combat fictional-time systems |
 | Tests and log | Basic public direct test rolls showing dice/modifiers/total; complete verbatim used-action text and actual recorded work | More elaborate automated test workflows |
 | Runtime specialization | Known sourced inputs consumed by shared operations; readable class/stat-block features and recorded manual resolution | Automatic class-specific resource logic and individual ability/trait/trigger execution, including turn-start Ferocity |
 
@@ -565,14 +655,24 @@ on character sheets and foe stat blocks. Retain logged manual Stamina adjustment
 existing authorized shared operations. These are live-state changes under existing session,
 privacy and history boundaries, not edits to the character build.
 
-**Deferred beyond v0.01:** inline editing of an attack's individual roll modifiers or damage in its
-log entry. The fuller [result-correction contract](table-spec.md#director-edits-to-inline-results)
+**Later exception, 2026-09-14:** per-target post-roll Add edge/Add bane controls are included,
+using the existing correction/history contract. Keep target-completion auto-fire. This supersedes
+the modifier-editor deferral only for these additions.
+
+**Deferred beyond v0.01:** broader inline attack-result editing, including direct damage editing. The fuller [result-correction contract](table-spec.md#director-edits-to-inline-results)
 remains future work. Manual Stamina adjustments are new recorded operations; they do not rewrite the
 attack or bypass historical-edit restrictions. Later G5 decisions defer hero-dying automation and
 require ordinary foes to show Slain at zero Stamina. Damage-modifying response reconciliation is deferred
 under the response scope below; F3 remains future work.
 
 ### Clock and saves — confirmed for v0.01
+
+**Current scope refinement, 2026-09-14:** simple condition toggles use manual save rolls through
+ordinary dice controls and manual removal. Automatic save scheduling/removal for those toggles
+is deferred until ability support provides timing. This supersedes the earlier blanket automatic-
+save acceptance for manually tracked conditions; turn/round clock work and other supported
+scheduled operations remain included. The earlier source/clock contract below remains applicable
+when an actual supported effect supplies its timing.
 
 Review answer, 2026-09-13: include turn/round timing and automatic end-of-turn save-ends rolls,
 with results applied to live state and recorded in the game log. Follow
@@ -793,9 +893,9 @@ behavior, not every other component; do not infer prototype scope from a fuller-
 | 3. Versions and prototype data | **Policy answered; engineering remains:** disposable development data with distinct engine/parser/content/schema identities. | Version metadata and a bounded reset/reseed path; normal persistence remains correct within a running version. Old prototype compatibility is not a gate. |
 | 4. Content and catalog slice | **Scope answered; research/engineering remains:** one or more sourced foes, readable table text, no saved templates or standalone rules search. | Representative content, catalog-to-live-instance loading, source fidelity and explicit unsupported diagnostics. Public Items browsing has no independent prototype scope decision. |
 | 5. Character slice | **Scope answered; research/engineering remains:** minimal level-one wizard, editing, saved revisions and compatibility-aware model. | Legal fixture choices/dependencies, derived values, saved selections reopening, and effective-build review behavior through shared operations. Live-resource reconciliation remains in chunk 10. |
-| 6. Parser and engine slice | **Active, unresolved:** minimum automated mechanics and spatial facts supplied by the first client. **Engineering:** compiler/engine boundary. | Supported, partial and unsupported action examples with required inputs, outcomes and diagnostics; source research should identify reusable constructions. |
+| 6. Parser and engine slice | **Scope answered 2026-09-14 (game basics first); engineering remains:** shared mechanics are automated, class/stat-block-specific execution is deferred; spatial facts are supplied by the first client. **Engineering:** compiler/engine boundary and common-operation input contracts. | Supported, partial and unsupported action examples with required inputs, outcomes and diagnostics; source research should identify reusable constructions. |
 | 7. Manual play and pending work | **Active, unresolved:** who supplies missing facts/effects, sequencing, cancellation, resumption and concurrent work. | One mixed automatic/manual action identifying costs/dice already accepted, pending effects and prevention of double application. |
-| 8. Table and combat slice | **Baseline decisions recorded:** opening commitment, groups/transfers, sheet controls, targeting, persistent cards and ordinary clock flow. Source-specific action/response sequencing remains open. | A sourced action/response walkthrough and remaining cases in the owning table checklist. |
+| 8. Table and combat slice | **Baseline decisions recorded:** opening commitment, groups/transfers, sheet controls, targeting, persistent cards (deferred beyond v0.01) and ordinary clock flow. Source-specific action/response sequencing remains open. | A sourced action/response walkthrough and remaining cases in the owning table checklist. |
 | 9. Undo and continuation | **Core policy answered; details remain:** sequential player undo up to nearest action seam and turn/FreePlay outer bound, Director sequential encounter rewind, recorded redo, appended reversals and new-play branching. | Same-turn dependency and undo-unit examples; preserve recorded boundary outcomes. Saved build revisions are already included; build-history UI and all inventory history are deferred. |
 | 10. Resources and respite | **Costs/affordability answered; source lifecycles remain:** fixed costs debit at execution, optional pre-resolution spending uses cards and unaffordable abilities are blocked. Conditional costs, build/live-state reconciliation, FreePlay reuse and respite still need contracts. | Source-specific resource-lifecycle examples; advancement-specific questions remain deferred with leveling. |
 | 11. Items and loot | **Deferred:** entire inventory system. | Resume item-authority, mechanics, claims and history work when this subsystem returns to scope; no prototype inventory workflow is needed. |
@@ -807,8 +907,8 @@ and [remaining table contracts](table-spec.md#8-continue-exploring). Entry count
 non-area exhaustion, personal extra turns and shared-clock counting are settled. Manual live split/merge
 is excluded. The next numeric cases are partial damage after stat adjustment, a pool floor, and area
 exhaustion while outside-area members survive. No interpretation is selected merely by this checkpoint;
-continue one question at a time. Source-specific squad exceptions and terrain scope remain separate
-from the ordinary-monster prototype.
+these cases resume with minion squads, which are deferred beyond v0.01. Source-specific squad exceptions
+and terrain scope remain separate from the ordinary-monster prototype.
 
 ## Research and engineering work to keep off the user questionnaire
 

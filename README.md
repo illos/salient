@@ -67,6 +67,11 @@ reuse the ID and unchanged arguments when retrying a command. For example, `sess
 
 ## Project documents
 
+- [Build plan and process](docs/build/README.md): slice-based build, review and commit process, with
+  [status tracking](docs/build/STATUS.md) and one document per slice. Agents start here after
+  [`CLAUDE.md`](CLAUDE.md).
+- [Questions for the user](docs/rules-questions-for-user.md): the only channel from build threads to the
+  user for rules and product decisions; resolved in a standalone thread.
 - [Web app build thread handoff](docs/web-app-build-handoff.md): independent app implementation and review,
   coordinated with the dedicated rules/combat thread and scoped to v0.01.
 - Ready-to-paste kickoff prompts: [web app](docs/kickoff-web-app.md) and
@@ -81,6 +86,8 @@ reuse the ID and unchanged arguments when retrying a command. For example, `sess
   from the specs, the blocking gaps with the artifact that closes each, and findings for agents to resolve.
 - [V1 specification checkpoint](docs/v1-spec-checkpoint.md): agreed release scope, settled boundaries, primary
   specs, and remaining work for the fuller product as of 2026-09-11.
+- [V1 roadmap](docs/v1-roadmap.md): specification order from respite and advancement through stable V1,
+  alongside the current v0.01 build.
 - [V1 tech stack](docs/v1-tech-stack-spec.md): recommended libraries and rationale, selected Better Auth,
   table realtime/performance, SSR tradeoffs, Cloudflare/Convex hosting, and future LAN portability.
 - [Inventory and loot](docs/inventory-spec.md): character/party inventories, Director stash, claims, approval,
@@ -106,6 +113,8 @@ reuse the ID and unchanged arguments when retrying a command. For example, `sess
   measured source-format limitations; research only.
 - [Character wizard specification](docs/character-wizard-spec.md): creation, level-up, editing, revision
   history, campaign approval, shared operations, and acceptance criteria.
+- [v0.01 character sheet](docs/character-sheet-spec.md): paper-guided field inventory, desktop layout,
+  action/resource controls and standalone/table integration.
 - [Character wizard foundation](docs/character-wizard.md): supporting discussion notes, Forge Steel
   progression research, and Compendium examples.
 - [Forge Steel dependency](docs/forge-steel.md): pinned source, inventory command, and update procedure.

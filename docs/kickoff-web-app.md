@@ -12,7 +12,8 @@ the product or a request to build every fuller-V1 feature.
 
 ## Read first and establish current state
 
-Read `AGENTS.md`, `agent.MD`, `docs/web-app-build-handoff.md`, `docs/pre-alpha-design-gaps.md`,
+Read `AGENTS.md`, `agent.MD`, `CLAUDE.md`, `docs/build/README.md` and your assigned slice under
+`docs/build/`, `docs/web-app-build-handoff.md`, `docs/pre-alpha-design-gaps.md`,
 `docs/v1-spec-checkpoint.md`, `docs/v1-tech-stack-spec.md`, `docs/development-process.md`, and
 `docs/rules-adaptation-principles.md`.
 
@@ -23,9 +24,11 @@ Latest user decisions and the v0.01 checkpoint control scope; do not treat histo
 proposed defaults as settled requirements.
 
 Inspect Git status, current code, tests, installed dependencies, existing UI work and any workstream notes.
-Preserve work from other threads. Establish an appropriate test baseline and investigate failures before
-attributing them to your changes. Retain the useful headless experiment and its tests. Do not blindly
-replace an existing frontend or migrate tooling that another thread is actively editing.
+A working pre-alpha web app already exists (`web/`, `convex/`, `shared/`; see
+`docs/workstream-app-status.md` for verified journeys, run instructions and evidence) alongside the original
+headless experiment in `src/`. Preserve work from other threads. Establish an appropriate test baseline and
+investigate failures before attributing them to your changes. Retain the useful headless experiment and its
+tests. Do not blindly replace the existing frontend or migrate tooling that another thread is actively editing.
 
 Use the confirmed Convex backend and Better Auth integration. The tech spec recommends React/TypeScript,
 Vite, TanStack Router, Tailwind and pnpm; use those defaults where they fit current reality. Choose compatible
@@ -131,7 +134,7 @@ explain the exact instruction or automated rejection if one requires a pause.
 
 Maintain a short checkpoint at `docs/workstream-app-status.md`: current slice, owned files, working flows,
 verification evidence, integration contracts, unresolved dependencies and next action. Read
-`docs/workstream-rules-status.md` if it exists. Keep common contracts in the existing owning code/specs;
+`docs/workstream-rules-status.md`. Keep common contracts in the existing owning code/specs;
 avoid competing copies. A shared-file note is a handoff artifact, not proof the other thread received it.
 
 Coordinate overlapping files and shared contract/config changes before editing; preserve the other thread's
@@ -156,5 +159,5 @@ Do not claim a deploy occurred if only a build passed. Distinguish completion of
 assignment from completion of the full campaign-to-combat v0.01 journey.
 
 Start now: inspect the current implementation and specs, establish the baseline, make a short ordered plan
-and begin the first independent app slice. Continue through implementation, review and integration without
+and begin your assigned build slice from `docs/build/`. Continue through implementation, review and integration without
 waiting for approval of ordinary engineering decisions.

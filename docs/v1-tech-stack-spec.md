@@ -1,6 +1,7 @@
 # V1 technology stack and deployment specification
 
-Version 0.1 — 2026-09-11. Specification and recommendations; no application implementation or deployment.
+Version 0.1 — 2026-09-11. Specification and recommendations. Written before the pre-alpha app was scaffolded;
+section 2 records the current checkout state, and no deployment beyond the local development backend exists.
 
 This document consolidates the technology discussion, including the later clarifications about long table
 sessions, multiplayer responsiveness, Cloudflare hosting, and a possible home-server/LAN edition. It records
@@ -50,7 +51,9 @@ systems. This scope change does not remove the established priority on table per
 
 **Recommended baseline** below means an implementation recommendation with supporting reasoning. Only
 explicitly confirmed entries are settled user choices. SSR, engine technology, and exact package versions
-remain open where identified. This specification does not authorize scaffolding, installing, or deploying.
+remain open where identified; the engine language is confirmed TypeScript (section 4). The pre-alpha scaffold
+was separately authorized on 2026-09-11 (see [app status](workstream-app-status.md)); this specification does
+not itself authorize deployment.
 
 ## 2. Recommended stack
 
@@ -72,10 +75,12 @@ remain open where identified. This specification does not authorize scaffolding,
 | New app tests | Vitest, convex-test, and Playwright | **Recommended.** Function/authorization tests and multi-user browser scenarios. Retain existing Node engine tests unless migration has a concrete benefit. |
 | Email | Hosted delivery provider, behind a small integration boundary | **Deferred.** Resend was an earlier suggestion, not a selected dependency. Provider-specific setup and local recovery are later work. |
 
-The checkout currently contains a TypeScript headless experiment with Node tests, a Node `>=24.12.0`
-requirement, and an npm lockfile. The table above is not an installed-package inventory. A future pnpm
-transition should replace the package-manager workflow coherently rather than maintain competing lockfiles.
-Pin compatible versions during implementation, especially React/Three Fiber and Better Auth/the Convex
+The checkout (2026-09-14) uses pnpm (`pnpm-lock.yaml`, `pnpm-workspace.yaml`, `packageManager` pinned in
+`package.json`) with a Node `>=24.12.0` requirement, and retains the TypeScript headless experiment and its
+Node tests. Installed: React, Vite, TanStack Router, Tailwind, Convex, Better Auth via
+`@convex-dev/better-auth`, Vitest, convex-test and Playwright. Not installed: shadcn/ui, Motion, React Hook
+Form, Zod and the Three.js/React Three Fiber dice stack; those rows remain recommendations. The table above is
+not an installed-package inventory. Pin compatible versions during implementation, especially React/Three Fiber and Better Auth/the Convex
 integration; do not copy the old Owlbear manifest or upgrade vendored sources automatically.
 
 **Why pnpm rather than Bun:** the user's familiar package manager already supplies the required workspace
@@ -147,10 +152,11 @@ flowchart TD
     D -->|Convex queries: permitted projections| B
 ```
 
-The engine can be invoked in-process or through a service depending on its later technology decision. The
-diagram does not require an external engine service or a browser dependency on engine internals. Preserve
-the engine's deterministic inputs, portable contracts, and independent tests. Continue developing the
-TypeScript experiment without treating frontend TypeScript as the reason to lock the final engine language.
+TypeScript is the standing engine-language choice, confirmed 2026-09-14, unless a concrete reason
+to change emerges. In-process invocation versus a service remains an integration decision; the
+diagram does not require an external engine service or a browser dependency on engine internals.
+Preserve deterministic inputs, portable contracts and independent tests. No routine later language
+comparison is required; see [the engine decision](engine-architecture.md#standalone-engine-and-portability).
 
 Recommended operation behavior, subject to the detailed data/resolution contracts:
 
@@ -359,12 +365,14 @@ Sources: [convex-test](https://docs.convex.dev/testing/convex-test),
 - Confirm the recommended frontend/UI/form libraries against the existing UI work and pin compatible versions.
 - Decide whether initial delivery benefits enough from SSR/prerendering to adopt TanStack Start; do not
   reopen this solely because a long-running table needs memory cleanup.
-- Evaluate the engine language/runtime and its server integration using the separate engine criteria.
+- Establish runtime placement and server integration for the TypeScript engine. Revisit its language
+  only if a concrete reason emerges, using the separate engine criteria.
 - Implement and verify Better Auth account flows; settle email delivery and local recovery later.
 - Select the concrete Cloudflare storage/upload arrangement and local storage adapter, and define future LAN
   packaging/migration when that edition becomes an implementation task.
 - Establish measured table payload/cache/resource budgets and prove the optional dice technique.
 
-No frontend, auth, multiplayer, storage migration, hosting configuration, or package-manager change is claimed
-by this specification. Detailed action economy, resource reconciliation, and other remaining product work
+This specification claims no implementation itself; the current checkout (pnpm, React/Vite frontend, Better
+Auth, local Convex backend) is recorded in section 2 and [app status](workstream-app-status.md). No storage
+migration or hosting configuration exists, and no deployment is authorized. Detailed action economy, resource reconciliation, and other remaining product work
 continue under the primary specifications.

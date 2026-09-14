@@ -1,30 +1,32 @@
 # Run the headless combat experiment
 
-Requires Node 24.12 or later. From the project root:
+This runs the retained 2026-09-10 headless CLI experiment, not the pre-alpha web app; see the [README](../README.md) for the app. Commands were updated to pnpm on 2026-09-14 (`pnpm check` also builds the web app, so use `pnpm check:engine` here).
+
+Requires Node 24.12 or later and pnpm 11.5.3. From the project root:
 
 ```sh
-npm install
-npm run check
-npm run demo
+pnpm install --frozen-lockfile
+pnpm check:engine
+pnpm demo
 ```
 
 The demo prints its unique `.playtest/demo-….json` artifact path, full source abilities, each request and modifier result, pending table work, and state before/after history navigation. These local files are experiment records, not the planned application database. No Convex deployment is involved.
 
-For an easy-to-type filename, use `npm run play -- demo .playtest/example.json`. Existing files are refused unless you explicitly append `--force`. The demo starts with a manually supplied turn Ferocity gain, uses Goblin Warrior's Spear Charge, uses Fury's Brutal Slam, and records table completion of its movement. It then reopens the saved file and restores the previous/following recorded states. Its fixed rolls are supplied inputs, not generated randomness.
+For an easy-to-type filename, use `pnpm play demo .playtest/example.json`. Existing files are refused unless you explicitly append `--force`. The demo starts with a manually supplied turn Ferocity gain, uses Goblin Warrior's Spear Charge, uses Fury's Brutal Slam, and records table completion of its movement. It then reopens the saved file and restores the previous/following recorded states. Its fixed rolls are supplied inputs, not generated randomness.
 
 ```sh
-npm run play -- state .playtest/example.json
-npm run play -- abilities .playtest/example.json
-npm run play -- ability .playtest/example.json fury:brutal-slam
-npm run play -- log .playtest/example.json
-npm run play -- back .playtest/example.json
-npm run play -- forward .playtest/example.json
+pnpm play state .playtest/example.json
+pnpm play abilities .playtest/example.json
+pnpm play ability .playtest/example.json fury:brutal-slam
+pnpm play log .playtest/example.json
+pnpm play back .playtest/example.json
+pnpm play forward .playtest/example.json
 ```
 
 State, log, ability inspection, reopening, and backward/forward navigation read recorded data; they never invoke the parser, engine, or dice roller. `parse` is a separate, explicit analysis with the **current** parser:
 
 ```sh
-npm run play -- parse .playtest/example.json fury:brutal-slam
+pnpm play parse .playtest/example.json fury:brutal-slam
 ```
 
 Read parser diagnostics and scenario notes. Recognizing an ability's tier expressions does not establish support for all its surrounding traits or game procedures. An action's output distinguishes applied effects from unresolved work; `manual-required` is deliberately not a claim of complete resolution.
@@ -34,10 +36,10 @@ Read parser diagnostics and scenario notes. Recognizing an ability's tier expres
 Start a new scenario, optionally including the Spinecleaver squad:
 
 ```sh
-npm run play -- init .playtest/custom.json --squad
+pnpm play init .playtest/custom.json --squad
 ```
 
-Save this JSON as `.playtest/strike.json`, then run `npm run play -- submit .playtest/custom.json .playtest/strike.json`:
+Save this JSON as `.playtest/strike.json`, then run `pnpm play submit .playtest/custom.json .playtest/strike.json`:
 
 ```json
 {
@@ -85,7 +87,7 @@ The CLI writes the request and its before-state durably **before** invoking a mo
 Writers use a per-file `.lock`. Following a crash, inspect the lock's process ID and confirm the process is no longer running before deleting the stale lock. Do not remove a live writer's lock. To close an unfinished request without reexecuting it:
 
 ```sh
-npm run play -- abandon .playtest/custom.json strike-001 "Confirmed the process exited; no result was committed."
+pnpm play abandon .playtest/custom.json strike-001 "Confirmed the process exited; no result was committed."
 ```
 
 The history module exposes `createRun`, `submitCommand`, `currentState`, `navigate`, `readRun`, `writeRun`, `withRunFile`, and `abandonRequest`. `submitCommand` accepts an injectable evaluator and persistence hook, allowing tests to count evaluations and prove navigation does not invoke one. File updates must hold `withRunFile`; the CLI does so. This prototype uses complete before/after snapshots for clarity, without committing the future application to that storage strategy.

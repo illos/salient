@@ -1,11 +1,12 @@
 # Accounts, roles, ownership, and sharing
 
-Version: 0.6 — Better Auth selected, 2026-09-11.
+Version: 0.7 — implementation-status text corrected, 2026-09-14 (0.6: Better Auth selected, 2026-09-11).
 
 **Status:** the accounts, roles, ownership, sharing, and friendship discussion is captured for future
 implementation. **Confirmed requirements** record product decisions. **Proposals** make those requirements
 concrete for review. **Open decisions** remain unsettled; checkpointing this document does not approve its
-proposed defaults. Authentication and these access workflows are not implemented by this work.
+proposed defaults. Section 1 records which of these workflows the checkout implements; the fuller access
+workflows remain unimplemented.
 
 This is the primary specification for account and social relationships and application access. The
 [feature inventory](product-features.md) summarizes it; the
@@ -38,12 +39,22 @@ below, but their prototype depth is not independently settled by these deferrals
 game activity remain separate concepts. Do not infer removal of privacy or access boundaries from reduced
 feature scope.
 
-Convex is the chosen application backend and Better Auth is the chosen authentication library. This checkout
-currently has no Convex package, backend schema, account system, or multiplayer authorization implementation.
-[package.json](../package.json) contains only
-development dependencies; [the local history implementation](../src/history.ts) persists combat runs to files.
-The engine's `actorId` identifies a game entity, not an authenticated user. Engine validation of ability
-ownership is not user authorization.
+Convex is the application backend and Better Auth the authentication library; both are installed and running
+in this checkout (verified 2026-09-14 against [package.json](../package.json), [convex/schema.ts](../convex/schema.ts),
+[convex/auth.ts](../convex/auth.ts), [convex/campaigns.ts](../convex/campaigns.ts) and
+[convex/sessions.ts](../convex/sessions.ts)). Implemented: email/password sign-up, sign-in and sign-out through
+`@convex-dev/better-auth`, with an application `users` profile mapped to the auth identity; campaign creation;
+share-code join requests with owner approve/decline and requester withdraw; owner-only share-code regeneration;
+member listing; Director (campaign owner) session start/pause/resume/close and session-player selection;
+idempotent `commandId` retries; an attributed campaign event log; private character drafts; and Director-only
+foe loading. Tables: `users`, `campaigns`, `memberships`, `joinRequests`, `sessions`, `events`, `commands`,
+plus the character and foe tables. Not implemented: profile editing, password reset/recovery, account deletion,
+member kick/leave, friends, blocking, Director delegation or session-only appointments, character grants,
+campaign chat, and campaign deletion. `requireDirector` in `convex/lib/access.ts` currently resolves to the
+campaign owner; keep that seam for future delegation. The engine's `actorId` identifies a game entity, not an
+authenticated user, and [the local history implementation](../src/history.ts) is the retained headless
+experiment, not the application store. Engine validation of ability ownership is not user authorization. See
+[app status](workstream-app-status.md) for evidence.
 
 This spec covers regular accounts, friendship and blocking, the separate administration boundary, campaign
 discovery and membership, Director delegation, character ownership and delegated play, and implications for
@@ -181,8 +192,9 @@ the earlier scope question; the owner-only rows below remain current requirement
 
 ## 3. Authentication investigation
 
-**Decision, 2026-09-11:** use Better Auth through `@convex-dev/better-auth`. The library comparison is complete;
-implementation verification remains. No auth package is installed here. The
+**Decision, 2026-09-11:** use Better Auth through `@convex-dev/better-auth`. The library comparison is complete.
+The checkout installs `better-auth` 1.6.15 and `@convex-dev/better-auth` 0.12.5 ([package.json](../package.json))
+and exercises email/password sign-up, sign-in and sign-out; the remaining verification items below are open. The
 [v1 tech stack](v1-tech-stack-spec.md#7-authentication-and-email) records the selected integration and the
 requirement to preserve a future self-hosted LAN deployment.
 
@@ -644,8 +656,9 @@ character control grants to homebrew or encounter authoring.
 ## 9. Proposed Convex authorization and data contracts
 
 Authenticate at every private server entry point, then load current application ownership, memberships, user
-blocks, grants, and lifecycle state. Convex provides identity in server functions; application authorization
-still needs implementation. [Auth in functions](https://docs.convex.dev/auth/functions-auth)
+blocks, grants, and lifecycle state. Convex provides identity in server functions. The v0.01 checks (signed-in profile, campaign
+membership, owner-as-Director) exist in `convex/lib/access.ts`; grant, block and delegation authorization still
+need implementation. [Auth in functions](https://docs.convex.dev/auth/functions-auth)
 
 Keep the rules engine independent of Convex and authentication. Online UI and headless clients submit to the
 same authorized application operations; the application resolves which game entities that user may control

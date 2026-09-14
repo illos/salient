@@ -185,6 +185,9 @@ central.
 
 ## Implementation evidence and limits
 
+This section describes the 2026-09-10 checkout. A working pre-alpha web app now exists; see
+[app status](workstream-app-status.md) for current evidence.
+
 `npm run check` passed during this review: TypeScript checking and all 28 behavior tests. The code
 demonstrates selected sourced abilities, some squad/resource behavior, manual changes, file persistence,
 command deduplication, and exact recorded-state navigation.

@@ -1,6 +1,8 @@
 # Milestone 1 results
 
-Implemented and cross-reviewed on 2026-09-10. `npm run check` passes TypeScript checking and 28 behavior tests; `npm run demo` successfully creates and reopens a local run. The Compendium remains unmodified at `fb83a789da8f0327a389c277a0c790b1648d5810`.
+**Historical results, 2026-09-10.** Commands then used npm; the checkout now uses pnpm (`pnpm check:engine`, `pnpm demo`). The limits below describe that date; see [app status](workstream-app-status.md) for the current application.
+
+Implemented and cross-reviewed on 2026-09-10. `npm run check` passed TypeScript checking and 28 behavior tests; `npm run demo` successfully creates and reopens a local run. The Compendium remains unmodified at `fb83a789da8f0327a389c277a0c790b1648d5810`.
 
 ## What the experiment establishes
 
@@ -40,7 +42,7 @@ No unresolved blocker remains for the declared slice. This was an internal imple
 
 ## Deliberate limits
 
-The table supplies action eligibility, turn timing, geometry, and fixed dice. There is no random dice service, scheduler, complete character sheet, UI, account system, or Convex deployment yet. The runtime engine itself has no filesystem, database, or UI dependency; content loading and run-file storage are separate modules.
+The table supplies action eligibility, turn timing, geometry, and fixed dice. There is no random dice service, scheduler, complete character sheet, UI, account system, or Convex deployment yet. (As of 2026-09-14 the web app provides accounts and a local Convex backend; the remaining limits still hold for the engine.) The runtime engine itself has no filesystem, database, or UI dependency; content loading and run-file storage are separate modules.
 
 Active conditions, edges/banes, critical hits, unknown passives, collisions, several Fury features, and area damage against minion squads require manual resolution. Coordinated squad attacks currently support one target and at most three participating minions. Condition application is supported in the selected potency grammar; ongoing condition rules and saves are not automated.
 

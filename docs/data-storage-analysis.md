@@ -1,6 +1,8 @@
 # App data storage analysis
 
-Research and recommendation, 2026-09-10. **Proposed architecture for discussion; no schema, importer, or deployment implemented.** Convex is already the chosen application backend. This analysis recommends how to use it alongside portable content files, and identifies decisions that remain open.
+Research and recommendation, 2026-09-10. **Proposed architecture for discussion.** Written before the pre-alpha app: the checkout now has a partial
+Convex schema and a local development deployment (see [app status](workstream-app-status.md)), but no content
+importer, history payload/checkpoint records, or archive pipeline. Convex is already the chosen application backend. This analysis recommends how to use it alongside portable content files, and identifies decisions that remain open.
 
 The later [data structure and architecture specification](data-architecture-spec.md) controls the current data
 and history contracts. It frames encounter undo, realtime sessions, and compression after session closure;
@@ -25,7 +27,7 @@ Read together, the [monster catalog specification](monster-catalog-spec.md), [ch
 - Every session's game log should remain available to the campaign. The present request adds cross-session usage analysis and possible character/campaign statistics such as winded occurrences, monster defeats, and ability uses.
 - The standalone engine receives supplied data; its contracts must remain independent of Convex IDs, accounts, and UI.
 
-The repository currently has a local TypeScript combat experiment and file-based history, with no installed Convex package or application schema. Platform capabilities below were checked against current official documentation; they are not measurements of this app in production.
+At the time of this analysis the repository had only a local TypeScript combat experiment and file-based history. As of 2026-09-14 it also has the Convex package, a partial application schema (`convex/schema.ts`) and a web client; the `src/` engine is not imported by `convex/` or `web/`. Platform capabilities below were checked against current official documentation; they are not measurements of this app in production.
 
 I measured the checked-out unified corpus at Compendium commit `fb83a789da8f0327a389c277a0c790b1648d5810` by counting files and summing their byte lengths:
 

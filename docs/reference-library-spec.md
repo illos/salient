@@ -2,6 +2,11 @@
 
 Version 0.3 — consolidated specification checkpoint, 2026-09-11. Specification only; no implementation.
 
+**Checkout status, 2026-09-14:** no reference library exists. The only readable Compendium text in the app is the
+Director-only Goblin Warrior source snapshot served by [convex/foes.ts](../convex/foes.ts) (`detail`), taken from
+Compendium revision `fb83a789da8f0327a389c277a0c790b1648d5810`. Hero ability text at the table awaits the
+character evaluator.
+
 Related specifications: [monster catalog](monster-catalog-spec.md),
 [character wizard](character-wizard-spec.md), [inventory](inventory-spec.md), and
 [content/data architecture](data-architecture-spec.md).

@@ -8,9 +8,9 @@ Local path: [`vendor/steel-compendium`](../vendor/steel-compendium).
 
 This is a **Git submodule**. The parent repository records an exact dependency commit; `.gitmodules` records its URL and upstream branch. Tracking `main` does not automatically update installed content.
 
-Initial revision: `fb83a789da8f0327a389c277a0c790b1648d5810`, upstream tag `v4.20260908021459`, dated 2026-09-08. This note records the initial version; Git's submodule pointer is authoritative after updates.
+Initial revision: `fb83a789da8f0327a389c277a0c790b1648d5810`, upstream tag `v4.20260908021459`, dated 2026-09-08. This note records the initial version; Git's submodule pointer is authoritative after updates. Verified 2026-09-14: `git submodule status` still reports this revision and tag, and `src/content.ts` and `scripts/build-foe-source.ts` pin the same SHA.
 
-The project did not previously have a Git repository, so one was initialized locally. No project remote or project commit was created. `.gitmodules` and the dependency pointer are staged; include them with the working documents in the first project commit.
+Historical note: when the dependency was added the project had no Git repository, so one was initialized locally with no remote or commits. `.gitmodules` and the dependency pointer have since been committed.
 
 ## Local files and disk space
 

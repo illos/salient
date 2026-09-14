@@ -7,7 +7,18 @@ labeled.
 **Immediate milestone:** the [v0.01 scope checkpoint](pre-alpha-design-gaps.md) controls prototype delivery.
 It targets desktop with temporary UI and explicitly defers several features listed below, including chat,
 inventory, rules search, leveling and interchange implementation. This inventory describes the fuller V1
-product; its feature lists are not prototype gates. The discussion is checkpointed with combat still deferred.
+product; its feature lists are not prototype gates.
+
+**Note, 2026-09-14:** this is a first-pass inventory. Where it differs from the [V1 checkpoint release
+scope](v1-spec-checkpoint.md#release-scope), its [settled boundaries](v1-spec-checkpoint.md#settled-boundaries-to-preserve)
+or the [pre-alpha scope by feature](pre-alpha-design-gaps.md#confirmed-v001-scope-by-feature), those documents
+are authoritative. In particular: combat is no longer wholly deferred, since v0.01 follows the
+[game-basics-first runtime scope](pre-alpha-design-gaps.md#game-basics-first--current-runtime-scope); the formal
+Director test-request UI is removed from scope (the Director asks verbally and players roll from their sheets);
+Show Malice is a campaign setting, off by default, with the pool always Director-visible; hero tokens and the
+failed-save token follow-up are deferred for v0.01; foe hiding and the Add visibility toggle are deferred for
+v0.01; observers are campaign members not selected as session players, not a separate role; and all
+notifications remain deferred beyond V1.
 
 Confirmed delivery scope: the app is web-only, optimized for mobile, with no plans for native apps. V1 has no
 character/campaign statistics dashboards, reference bookmarks, private direct messages, or admin-dashboard
@@ -512,4 +523,6 @@ These are suggestions, not accepted requirements:
 The user requested a checkpoint after the pre-alpha scope discussion. No question is pending. Use the
 [scope and remaining gaps](pre-alpha-design-gaps.md) when the user resumes exploration. Detailed combat
 mechanics remain deferred for a separate conversation; the established campaign/session hierarchy, roster
-permissions and high-level encounter loop remain in place.
+permissions and high-level encounter loop remain in place. (Historical as of 2026-09-11: that separate
+rules/combat conversation has since started; see [rules status](workstream-rules-status.md) and the
+[basic-play walkthrough](v001-basic-play-walkthrough.md).)

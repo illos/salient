@@ -32,7 +32,9 @@ Recorded from the user's clarification on 2026-09-10.
 - A possible later integration observes a physical map through machine vision.
 - The app is online-first; full offline operation is not an initial requirement.
 - Convex is the chosen app backend for responsive shared state whether participants are together or remote.
-- The engine's technology is independent of the app stack and remains undecided.
+- The engine's technology is independent of the app stack. It was undecided when this intent was recorded;
+  TypeScript was confirmed as the standing engine language on 2026-09-14, see
+  [standalone engine and portability](#standalone-engine-and-portability).
 - The engine has standalone value and should support reuse by other applications and games. A Minecraft-like
   game using Draw Steel heroes and monsters is a future aspiration motivating that flexibility, not a current
   implementation task.
@@ -42,7 +44,9 @@ Recorded from the user's clarification on 2026-09-10.
 - The session contains its table, which uses a rolling history of activity as its v1 centerpiece. Future UI
   may change log visibility while retaining the record. The [table specification](table-spec.md) defines the
   campaign hub, single active session, Director-selected participants, pause, and free-play/encounter loop.
-  Encounter actions must support undo through both visual and headless interfaces. The latest
+  Encounter actions must support undo through both visual and headless interfaces, within the confirmed
+  [seam/rewind limits](table-spec.md#undo-permissions-and-proposed-campaign-control) and
+  [archive boundary](table-spec.md#formal-encounter-closeout). The latest
   [data architecture checkpoint](data-architecture-spec.md) places realtime shared play inside sessions and
   permits compression after closure. Confirmed v1 direction: closed sessions are permanently read-only.
   Further play requires a new session; live undo cannot reopen or cross back into a closed session.
@@ -241,6 +245,13 @@ acceptance checks, not evidence of passing app tests in this documentation check
 
 ## Standalone engine and portability
 
+**Standing language choice confirmed, 2026-09-14:** use TypeScript for the engine, for v0.01
+and beyond, unless a concrete reason to change emerges. This supersedes the earlier prototype-
+only choice and planned later language comparison. No routine comparative evaluation is required.
+Preserve shared UI/headless behavior and portable engine boundaries. Content packaging, execution
+placement and integration remain engineering work; this decision does not approve every suggested
+hosting arrangement, authorize deployment or require class/monster-specific feature execution.
+
 The following are proposed design requirements supporting the user's reuse objective:
 
 - Use engine-owned entity identifiers and state contracts. Keep Convex document IDs and application account
@@ -258,10 +269,10 @@ The following are proposed design requirements supporting the user's reuse objec
 - Target faithful Draw Steel behavior first. Reuse across clients does not require implementing an
   arbitrary-game rules framework now.
 
-Before choosing the engine language, run the same representative scenarios through candidate approaches and
-assess correctness, portability, developer tooling, Convex integration, deployment complexity, and measured
-response times. Include both computation and any network round trips in latency measurements. Do not choose a
-language solely to match the app, or solely because a future game might need it.
+Revisit TypeScript only when a concrete limitation or requirement provides a reason. If one emerges,
+compare relevant representative scenarios for correctness, portability, tooling, integration,
+deployment complexity and measured response time, including any network round trips. These are
+criteria for evaluating a justified change, not a standing language-selection workstream.
 
 ## Engine releases and content compatibility
 
@@ -417,7 +428,11 @@ fits one atomic calculation or that every action requires a confirmation screen.
   [attachment requirements](product-features.md#character-ownership-and-campaign-attachment).
 - Keep application permissions and authoritative commits outside the pure calculation layer. An engine result
   alone does not grant permission to alter another participant's state.
-- Action-by-action encounter undo is required. Historical detail remains preserved across sessions; live
+- Action-by-action encounter undo is required within the confirmed limits: players undo their own
+  character's uninterrupted latest actions to the nearest seam; the Director rewinds sequentially within the
+  current encounter; nothing crosses Finish cleanup or Void archival. See
+  [undo permissions](table-spec.md#undo-permissions-and-proposed-campaign-control) and
+  [formal encounter closeout](table-spec.md#formal-encounter-closeout). Historical detail remains preserved across sessions; live
   rollback across a closed-session boundary is unavailable in v1. Appended correction records, player
   uninterrupted-action seams and turn/FreePlay outer bounds, sequential Director encounter rewind and new-play branching are confirmed; remaining
   same-turn dependencies still need contracts. Finish cleanup, or Void after applying keep/reset, archives the encounter; no gameplay undo
@@ -486,12 +501,16 @@ recorded state need reconciliation before dependent rules resolve.
 
 Use Convex for persistent application state and shared client updates. Keep game calculations behind a
 standalone engine boundary invoked by the application service. Whether that integration is in-process or
-across a service boundary depends on the engine technology evaluation.
+across a service boundary remains an integration decision within the selected TypeScript approach.
+Checkout state, 2026-09-14: the Convex backend (`convex/`) and web client (`web/`) do not import the `src/`
+engine; only `scripts/build-foe-source.ts` imports `src/content.ts` for the reviewed foe source projection.
+The engine is not yet integrated with the application service.
 
 The [v1 tech stack](v1-tech-stack-spec.md) records the recommended React frontend, selected Better Auth,
 Cloudflare/Convex Cloud hosting, and future home-server/LAN portability. Authoritative calculations should run
 server-side while browser interactions remain responsive. Keep the engine runnable on a home server as well
-as the hosted deployment; choosing frontend TypeScript does not settle its language/runtime.
+as the hosted deployment. TypeScript is explicitly selected for the engine; its execution placement
+and delivery mechanism remain separate decisions.
 
 Convex provides reactive queries and serializable database transactions. These are a useful foundation for
 shared encounters; the application still needs command deduplication, permission checks, and explicit handling
@@ -516,7 +535,8 @@ contracts.
 - Initial rules edition, sourcebooks, and first verified content subset.
 - Initial supported grammar, handling of official wording variants, and the authoring experience for
   unsupported homebrew.
-- Engine language, runtime, and delivery mechanism. Frontend recommendations, confirmed hosting providers,
+- Engine runtime placement and delivery mechanism; TypeScript is selected unless evidence justifies a change.
+  Frontend recommendations, confirmed hosting providers,
   and the remaining SSR/deployment choices are tracked in the [v1 tech stack](v1-tech-stack-spec.md).
 - Engine release/compatibility policy, handling of untested or mismatched content during automated play,
   upgrade timing, and whether campaigns can select retained engine versions.

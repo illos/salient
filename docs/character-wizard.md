@@ -48,7 +48,7 @@ character operations, independent of screen order.
 
 | Part | Responsibility |
 | --- | --- |
-| Decisions and grants | Record class, ancestry, background, characteristics, selected abilities, and other choices against versioned definitions. Distinguish a player selection from an automatic grant. Definitions describe prerequisites, counts or budgets, and dependent choices. |
+| Decisions and grants | Record ancestry, culture, career, class, kit, characteristics, selected abilities, and other choices against versioned definitions (step names per [Making a Hero](../vendor/steel-compendium/en/unified/md/chapter/making-a-hero.md#step-by-step-hero-making); "Background" is the Compendium chapter holding Culture and Careers). Distinguish a player selection from an automatic grant. Definitions describe prerequisites, counts or budgets, and dependent choices. |
 | Authored details | Store name, appearance, backstory, descriptions, flavor, and notes independently of the build. Authored flavor can attach to an ability or item without changing its canonical rules reference. Mechanical customizations are explicit, separate inputs. |
 | Inventory | Track the character's item instances and their quantities/state. Ownership alone need not imply an active mechanical benefit; applicable item rules determine effects. Starting items can originate in creation, while acquisition, use, and loss continue during play. |
 | Sheet and play state | Derive base characteristics, maximum Stamina/Recoveries, abilities, and other supported values from decisions and applicable item effects. Track changing resources, conditions, and temporary effects alongside those derived values. |
@@ -97,7 +97,7 @@ Confirmed: there are different scopes of choice over the same character decision
 
 | Flow | Available choices | Campaign review |
 | --- | --- | --- |
-| Main creation wizard | Foundational choices such as ancestry, background, career, and class, plus access to all levels and their applicable options. | The Director reviews and approves a character newly added to or created for a campaign before it becomes effective there, including imported or duplicated characters. |
+| Main creation wizard | Foundational choices such as ancestry, culture, career, and class, plus access to all levels and their applicable options. | The Director reviews and approves a character newly added to or created for a campaign before it becomes effective there, including imported or duplicated characters. |
 | Level-up wizard | Only choices available to this character for the level transition, including choices/grants that transition unlocks. Existing foundational choices stay in place. | Level-ups are not Director-review gated. Rules/eligibility validation still applies. |
 | Full character edit | Reopen the main wizard outside an active encounter, including foundational choices and all levels/options. | For an attached character, the Director approves the proposed edit before it takes effect in the campaign. |
 
@@ -294,14 +294,17 @@ definitions are under [`en/unified/json`](../vendor/steel-compendium/en/unified/
 
 ## Proposed first implementation slice
 
-Build one complete level-1 Fury creation path, including ancestry, background, characteristics, aspect, kit,
-abilities, any resulting choices, and review, before expanding all class branches. Our prepared
+Build one complete level-1 Fury creation path, including ancestry, culture, career, characteristics, aspect,
+kit, abilities, any resulting choices, and review, before expanding all class branches. Our prepared
 [hero fixture](hero-fixture.md) is a useful example, but it must not become the only legal build. Verify
 choices against the referenced rules and reproduce its derived values through creation operations.
 
 Expose the draft, available choices, selection validation, and derived sheet through shared application
 operations. The mobile wizard should render these operations. Convex remains the chosen backend for saved
-characters; its schema and the wizard UI have not been designed or implemented in this foundation work.
+characters. As of 2026-09-14 the checkout stores authored details and immutable saved selection revisions
+(`convex/characterTables.ts`, `convex/characters.ts`) behind a temporary desktop page; decision
+definitions, the evaluator, derived baseline and the decision wizard itself are not implemented (see the
+[specification's implementation status](character-wizard-spec.md)).
 
 Acceptance for that slice: complete a legal hero, reject invalid/out-of-pool selections, handle an aspect
 change without leaving incompatible kit/ability choices active, show Compendium rules content, save/reload the

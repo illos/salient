@@ -10,9 +10,15 @@ text.
 - Make reasonable implementation decisions within the user's authorized scope. Ask only when missing
   information materially affects the work.
 - Distinguish confirmed requirements from proposals and assumptions.
-- Current specification exploration follows the user's latest request: walk through review questions one
-  at a time, using plain text and a recommendation for each. This supersedes the earlier batching
-  preferences. Track answers in [the pre-alpha clarification queue](docs/pre-alpha-design-gaps.md).
+- v0.01 scope review concluded, 2026-09-14: the user is satisfied with the current shared-basics
+  scope and wants the building agent to ask concrete questions as they arise during implementation.
+  This supersedes the earlier instruction to keep a continuous specification questionnaire flowing.
+  Use [the pre-alpha checkpoint](docs/pre-alpha-design-gaps.md) and [build handoff](docs/web-app-build-handoff.md).
+  Make routine engineering decisions and research ordinary rules in the pinned source. Ask only when
+  a concrete unresolved behavior materially affects the build, one plain-text question with a
+  recommendation. Record the answer in the owning spec. Do not reopen settled scope or broaden into
+  class/monster-specific feature work. This completes scope review, not implementation, verification
+  or all fuller V1 design.
 - The discussion has resumed with a rules-review workflow accepted for trial and confirmed rules-adaptation
   philosophy. Read [the principles](docs/rules-adaptation-principles.md) and
   [the development process](docs/development-process.md). The user selected a dedicated rules/combat thread
@@ -50,6 +56,19 @@ walkthrough through shared UI/headless paths, with actual persisted state and hi
 Foe hiding is deferred beyond v0.01: all loaded foes are visible, with no hide/reveal or Add visibility
 controls. Full stat blocks remain Director-only; health display and Malice visibility remain separate.
 The fuller V1 hidden-foe design below is future scope; audit F2 is closed for the prototype.
+Condition tracking in v0.01 is one logged on/off toggle per condition: players on their own
+controlled heroes, Director on all heroes/foes. Earlier manual source/duration/application UI
+is superseded; ability-based expiry follows parser support. Saves for these toggles use ordinary
+dice controls and manual removal; automatic save scheduling/removal waits for ability support.
+The shared clock remains included. Do not infer timers from toggles.
+Hero tokens, including the shared counter, are deferred beyond v0.01. The user reaffirmed that
+this review must stay on shared basics, with no class- or monster-specific feature work yet.
+Do not interpret acceptance of a generic counter as authorization to design or implement its
+class/monster-specific granting features.
+TypeScript is the standing engine-language choice, reaffirmed 2026-09-14, for v0.01 and beyond.
+Keep it unless a concrete reason to change emerges; no routine post-prototype language comparison
+is required. Packaging, runtime placement and integration still need engineering work; this
+language decision is not deployment authorization.
 Later parser/engine feature work builds on that foundation; do not reopen settled scope or silently
 automate deferred mechanics to finish a screen.
 Use [table decisions and remaining contracts](docs/table-spec.md#8-continue-exploring) and
@@ -65,7 +84,7 @@ table-performance priority; the broader mobile-optimized product goal below rema
 
 Build a mobile-optimized, online-first **web-only** Draw Steel companion for phones, tablets, and desktop that
 works independently of a digital battle map. There are no native-app plans. Convex is the chosen app backend;
-the engine's long-term language and runtime remain independent decisions. The UI is being developed in another
+the engine uses TypeScript unless a concrete reason to change emerges; runtime placement remains a separate decision. The UI is being developed in another
 thread; do not claim that work is implemented in this checkout without evidence.
 
 The [pre-alpha checkpoint](docs/pre-alpha-design-gaps.md) controls immediate milestone scope; the
@@ -354,6 +373,11 @@ evidence; they do not prove semantics. Prefer meaningful examples and executable
 
 ## Development approach
 
+- `CLAUDE.md` restates the standing rules from this file for Claude sessions; keep the two consistent.
+  Build work is organized as slices under [`docs/build/`](docs/build/README.md) with a single status
+  tracker; commits reference owning spec sections with `Spec:` trailers. Rules or product questions
+  that need the user go to [`docs/rules-questions-for-user.md`](docs/rules-questions-for-user.md), not
+  to a build thread.
 - During pre-alpha foundation work, development data is disposable and the priority is the latest live,
   playable app. Reset/reseed may replace migrations across breaking development updates. Separate branch
   development comes once there is a working app to protect. Follow

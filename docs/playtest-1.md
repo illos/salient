@@ -1,6 +1,6 @@
 # Two-round exploratory playtest
 
-Ran an agent-directed CLI simulation on 2026-09-10 with the prepared Fury and Goblin Warrior. Dice and clear-ground positioning were supplied deliberately. This was not a human playtest or a balanced encounter assessment. No runtime code or shared interfaces were changed.
+**Historical (2026-09-10).** Ran an agent-directed CLI simulation on 2026-09-10 with the prepared Fury and Goblin Warrior. Dice and clear-ground positioning were supplied deliberately. This was not a human playtest or a balanced encounter assessment. No runtime code or shared interfaces were changed.
 
 The local saved record and submitted command files are in `.playtest/two-rounds-ub2z47t5/`; `summary.json` contains the observed steps and `run.json` contains full source definitions, requests, outputs, and snapshots. These ignored local artifacts are not part of Git.
 
@@ -29,4 +29,4 @@ Reopening in separate CLI processes, stepping back before manual completion, the
 
 The next proposed shared-engine increment is explicit turn context and the Berserker first-push surge trigger. It would address an observed interruption while giving the UI meaningful start-turn and resolve-action operations. This is a proposal, not an implemented contract change.
 
-The UI thread can use `src/contracts.ts` for shared types and `src/parser.ts` / `src/engine.ts` for pure logic. `src/content.ts` and `src/history.ts` currently use Node filesystem APIs; they belong behind a backend adapter, not in a browser bundle. The CLI's small evaluator composes these operations, but its file storage is a prototype adapter. Coordinate extraction of a common application entry point and any type changes across threads.
+(Written before the web app existed; the app workstream has since started under `convex/` and `web/`.) The UI thread can use `src/contracts.ts` for shared types and `src/parser.ts` / `src/engine.ts` for pure logic. `src/content.ts` and `src/history.ts` currently use Node filesystem APIs; they belong behind a backend adapter, not in a browser bundle. The CLI's small evaluator composes these operations, but its file storage is a prototype adapter. Coordinate extraction of a common application entry point and any type changes across threads.

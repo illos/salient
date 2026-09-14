@@ -1,6 +1,8 @@
 # Character wizard specification
 
-Version 0.6 — consolidated specification checkpoint, 2026-09-11. Specification only; no implementation.
+Version 0.7 — consolidated specification checkpoint, 2026-09-14 (terminology and implementation-status
+corrections to the 2026-09-11 checkpoint). Specification; the implementation status below is not approval
+of any interface.
 
 This is the consolidated specification for character creation, advancement, editing, progression history,
 campaign admission, and Forge Steel interchange. **Confirmed requirements** reflect the product decisions made
@@ -10,8 +12,31 @@ resolution before its dependent feature ships.
 
 This document is the primary entry point for implementing the wizard. [Foundation notes](character-wizard.md)
 retain the source investigation and examples; [interchange research](forge-steel-interchange.md) supplies
-file-format evidence. Neither the wizard nor its campaign workflows are implemented yet. The existing code
-provides a bounded headless combat experiment and a static character-source inventory.
+file-format evidence.
+
+**V1 wizard specification work, 2026-09-14:** the user assigned this thread the fuller V1 wizard,
+alongside separate v0.01 build and broader V1 specification threads. The
+[core-content and decision contracts](v1-character-wizard-contracts.md) now detail all ancestry budgets,
+culture pools, career grants, core class baselines and progression patterns, nested choices, kit
+composition, and representative acceptance cases. The reproducible
+[coverage matrix](research/v1-wizard-coverage-matrix.md) enumerates every core ancestry and all nine
+classes through ten levels, plus their supporting option catalogs. Source-backed research, proposed
+application behavior, remaining decisions and implemented coverage remain distinct. This work does not
+mark the v0.01 R01–R03 contracts or the V1 implementation complete.
+
+**Implementation status in this checkout, 2026-09-14:** owned characters with authored details (name,
+appearance, biography, owner-private notes), save/reopen with stale-edit protection, combat edit locks and
+immutable saved selection revisions exist (`convex/characters.ts`, `convex/characterTables.ts`,
+`shared/characterDraft.ts`, temporary desktop page `web/characters.tsx`). No decision evaluator exists:
+every saved revision carries status `awaiting-rules-evaluation`, and `derivedBaseline` and `liveState` are
+stored as `null`. Decision definitions, validation, the derived baseline, live-state initialization,
+campaign admission/review, effective-build activation, level-up, progression restoration and interchange
+are not implemented. The older `src/` code remains a bounded headless combat experiment and a static
+character-source inventory, not the wizard. See [app status](workstream-app-status.md).
+
+The [v0.01 character sheet spec](character-sheet-spec.md) supplies the first-pass desktop display,
+field inventory and table interactions, guided by the user-supplied paper sheet. This wizard specification
+continues to own the build, draft, review and derived/live-state contracts.
 
 The [data architecture checkpoint](data-architecture-spec.md) proposes the shared storage model and
 encounter/session archive lifecycle. Character progression restoration remains independent of encounter undo;
@@ -36,7 +61,11 @@ remain with the owner under this specification, with Director review where alrea
 
 **Confirmed v0.01 slice, 2026-09-11:** the first hero is created through a minimal working wizard, with
 devil ancestry, Fury class and level one. The user goes through the full character-creation sequence,
-including ancestry, class, career, background and the other applicable sourced steps. Each step may expose
+including ancestry, culture, career, class, kit and the other applicable sourced steps, using the step names
+and order of [Making a Hero](../vendor/steel-compendium/en/unified/md/chapter/making-a-hero.md#step-by-step-hero-making)
+(ancestry, culture, career, class, kit, free strikes, complication, details, connections; in the pinned
+Compendium, [Background](../vendor/steel-compendium/en/unified/md/chapter/background.md) is the chapter
+containing Culture and Careers, not a step). Each step may expose
 only one supported option or valid selection set. Limited option breadth must not replace the creation flow
 with a prepared-character load. Record the actual selections and derive the resulting character through the
 shared character operations, then use it in the campaign/table journey. Preserve valid choice counts, budgets
@@ -162,9 +191,16 @@ reconciliation policy; this is an open decision, not an implicit reset.
 
 ### Confirmed behavior
 
-- Foundational choices include ancestry, background, career, and class. These are normally made once but may
-  be revisited through full editing. Exact background substeps follow the content, rather than inventing
-  additional independent selections.
+- Foundational choices include ancestry, culture, career, and class, followed by the class-dependent kit and
+  the source's optional complication step, using the step names of
+  [Making a Hero](../vendor/steel-compendium/en/unified/md/chapter/making-a-hero.md#step-by-step-hero-making).
+  In the pinned Compendium, "Background" is the chapter containing Culture and Careers, not a creation step.
+  These are normally made once but may be revisited through full editing. Exact culture and career substeps
+  (environment/organization/upbringing/language; skills, languages, perk, inciting incident) follow the
+  content, rather than inventing additional independent selections. Resolved 2026-09-14 (Q-CHAR-1): the
+  v0.01 wizard does not present the optional complication step; heroes are created without a complication.
+  Complications return with fuller creation coverage (V08). See
+  [the questions record](rules-questions-for-user.md#q-char-1-must-the-v001-wizard-present-the-optional-complication-step).
 - The main wizard provides access to all levels and their applicable options; it is not limited to level 1 or
   the currently unlocked level-up prompts.
 - Available options and resulting grants depend on previous choices and progression. The model must handle
@@ -534,6 +570,12 @@ Director does not certify parser correctness or turn unsupported automation into
 
 These do not prevent implementing draft/choice evaluation and history foundations. Resolve each before
 shipping the dependent behavior; no silent default is authorized merely by listing it here.
+
+The V1 research pass supplies concrete recommendations and source evidence in
+[Q-CHAR-2 through Q-CHAR-13](rules-questions-for-user.md#open-questions). They cover the existing
+resource/XP/history questions and newly exposed choice-timing, career-point, nested-trait and
+starting-treasure cases. See [the contracts](v1-character-wizard-contracts.md#11-remaining-work-and-review-handoff)
+for work that can proceed independently. These recommendations are not user rulings.
 
 | Decision | What it affects |
 | --- | --- |

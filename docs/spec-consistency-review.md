@@ -8,6 +8,18 @@ The [table specification](table-spec.md) owns gameplay behavior; [commands](tabl
 shared execution. Supporting specs, instructions, checkpoints and the app handoff now follow those
 contracts. The [decision record](gameplay-decision-record.md) retains superseded historical choices.
 
+## 2026-09-14 final audit
+
+Documentation-only correction pass across the specifications; corrections in progress, see each file's diff.
+No new rulings; no implementation, commit or deployment claimed.
+
+- Table spec: `docs/table-spec.md`.
+- Engine, data and tech-stack specs: `docs/engine-architecture.md`, `docs/data-architecture-spec.md`, `docs/v1-tech-stack-spec.md`.
+- Wizard and pre-alpha scope: `docs/character-wizard-spec.md`, `docs/pre-alpha-design-gaps.md`.
+- Accounts and product specs: `docs/accounts-and-access-spec.md`, `docs/product-features.md`.
+- Decision record and status files: `docs/gameplay-decision-record.md` (superseded-row markers), `docs/workstream-rules-status.md`, `docs/workstream-app-status.md`, `docs/v0.01-readiness-audit.md`, `docs/v001-basic-play-walkthrough.md`.
+- Handoff and checkpoint: `docs/web-app-build-handoff.md`, `docs/v1-spec-checkpoint.md`.
+
 ## Latest rulings checkpoint
 
 The requested full specification sweep is complete. It checked all project specification/checkpoint

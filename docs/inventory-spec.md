@@ -1,6 +1,7 @@
 # Campaign inventory and loot
 
-Version 0.19 — consolidated specification checkpoint, 2026-09-11. Specification only; no implementation.
+Version 0.19 — consolidated specification checkpoint, 2026-09-11. Specification only; no implementation
+(still true 2026-09-14: `convex/` has no inventory tables or operations).
 
 This records confirmed inventory direction separately from proposed loot flows and unresolved mechanics.
 Related specifications: [table](table-spec.md), [characters](character-wizard-spec.md),
@@ -247,7 +248,6 @@ under its existing v1 scope.
   fresh claims and does not undo prior completed deposits.
 - Identical items remain separate instances; v1 exposes no stack, split, merge, or partial-quantity claim
   operation.
-
 
 - Between sessions, an authorized player can transfer items between their character inventory and party
   inventory without starting or reopening a session. This edits character/inventory data and does not
