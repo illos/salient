@@ -10,6 +10,7 @@ import { Card, CardContent } from './components/ui/card';
 import { Input } from './components/ui/input';
 import { ErrorNotice, Eyebrow, Field, Loading, Notice, SectionHeading, useCommand } from './ui';
 import { FoesPanel } from './foes';
+import { CommandConsole } from './command-input';
 
 export function CampaignsPage() {
   const campaigns = useQuery(api.campaigns.list);
@@ -305,6 +306,7 @@ export function CampaignPage({ campaignId }: { campaignId: Id<'campaigns'> }) {
               </div>
             </CardContent>
           </Card>
+          <CommandConsole campaignId={campaignId} sessionRevision={active?.revision} />
           <section>
             <SectionHeading
               aside={
@@ -704,6 +706,11 @@ function GameLog({
               />
               <div className="flex-1">
                 <strong>{event.description}</strong>
+                {event.dice && (
+                  <small className="mt-0.5 block text-xs text-muted-foreground">
+                    Dice: {event.dice.map(die => `d${die.sides}=${die.value}`).join(' ')}
+                  </small>
+                )}
                 <small className="mt-0.5 block text-xs text-muted-foreground">
                   {event.actorName ?? (event.origin === 'clock' ? 'Game clock' : 'Engine')} ·{' '}
                   {new Date(event.createdAt).toLocaleString()}

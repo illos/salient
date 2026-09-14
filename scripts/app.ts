@@ -9,11 +9,57 @@ try {
 } catch {
   /* Explicit environment also works. */
 }
-const [kind, functionName, json = '{}'] = process.argv.slice(2);
-if ((kind !== 'query' && kind !== 'mutation') || !functionName) {
-  console.error(
-    'Usage: pnpm app <query|mutation> <module:function> [JSON arguments]\nAuthenticate with SALIENT_EMAIL and SALIENT_PASSWORD, or SALIENT_AUTH_TOKEN. Mutations use the same commandId and authorization contract as the browser.',
-  );
+const usage =
+  'Usage: pnpm app <query|mutation> <module:function> [JSON arguments]\n' +
+  '       pnpm app command "<slash text>" [--campaign <id>] [--command-id <id>]\n' +
+  "       pnpm app respond <interactionId> '<JSON answer>' [--command-id <id>]\n" +
+  'Authenticate with SALIENT_EMAIL and SALIENT_PASSWORD, or SALIENT_AUTH_TOKEN. The campaign comes\n' +
+  'from --campaign or SALIENT_CAMPAIGN_ID. Every call uses the same commandId and authorization\n' +
+  'contract as the browser; pass --command-id to retry an earlier command exactly.';
+const argv = process.argv.slice(2);
+function option(name: string): string | undefined {
+  const index = argv.indexOf(name);
+  if (index === -1) return undefined;
+  const [, value] = argv.splice(index, 2);
+  return value;
+}
+const campaignOption = option('--campaign') ?? process.env.SALIENT_CAMPAIGN_ID;
+const commandIdOption = option('--command-id') ?? process.env.SALIENT_COMMAND_ID;
+let kind: 'query' | 'mutation';
+let functionName: string;
+let args: unknown;
+const [verb, first, second] = argv;
+if (verb === 'command') {
+  // The slash text is one shell argument; the host shell's quoting is independent of the grammar.
+  if (!first || !campaignOption) {
+    console.error(usage);
+    process.exit(1);
+  }
+  kind = 'mutation';
+  functionName = 'commands:submit';
+  args = {
+    campaignId: campaignOption,
+    text: first,
+    commandId: commandIdOption ?? crypto.randomUUID(),
+  };
+} else if (verb === 'respond') {
+  if (!first || !second) {
+    console.error(usage);
+    process.exit(1);
+  }
+  kind = 'mutation';
+  functionName = 'interactions:respond';
+  args = {
+    interactionId: first,
+    answer: JSON.parse(second),
+    commandId: commandIdOption ?? crypto.randomUUID(),
+  };
+} else if ((verb === 'query' || verb === 'mutation') && first) {
+  kind = verb;
+  functionName = first;
+  args = JSON.parse(second ?? '{}');
+} else {
+  console.error(usage);
   process.exit(1);
 }
 let auth: ReturnType<typeof createAuthClient> | undefined;
@@ -63,7 +109,6 @@ try {
   }
   client.setAuth(token);
   const ref = makeFunctionReference<typeof kind>(functionName);
-  const args = JSON.parse(json);
   const result =
     kind === 'query'
       ? await client.query(ref as ReturnType<typeof makeFunctionReference<'query'>>, args)
