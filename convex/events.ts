@@ -1,7 +1,7 @@
 import { v, ConvexError } from 'convex/values';
 import { query } from './_generated/server';
 import { requireUser, requireMember } from './lib/access';
-import { eventDisposition, eventOrigin } from './encounterTables';
+import { dieResult, eventDisposition, eventOrigin } from './encounterTables';
 
 export const list = query({
   args: {
@@ -23,6 +23,8 @@ export const list = query({
         disposition: eventDisposition,
         kind: v.string(),
         description: v.string(),
+        dice: v.optional(v.array(dieResult)),
+        payload: v.optional(v.any()),
         createdAt: v.number(),
       }),
     ),
@@ -68,6 +70,8 @@ export const list = query({
         disposition: e.disposition,
         kind: e.kind,
         description: e.description,
+        ...(e.dice ? { dice: e.dice } : {}),
+        ...(e.payload === undefined ? {} : { payload: e.payload }),
         createdAt: e.createdAt,
       })),
       nextBefore: rows.length > 50 ? page[49]!.sequence : null,

@@ -71,6 +71,28 @@ export default defineSchema({
     .index('by_session_sequence', ['sessionId', 'sequence'])
     .index('by_encounter_sequence', ['encounterId', 'sequence'])
     .index('by_campaign_command', ['campaignId', 'commandId']),
+  // Pending interactions (action cards) as data; written by lib/registry.ts and lib/interactions.ts.
+  interactions: defineTable({
+    campaignId: v.id('campaigns'),
+    sessionId: v.union(v.id('sessions'), v.null()),
+    status: v.union(v.literal('awaiting-input'), v.literal('resolved'), v.literal('closed')),
+    /** `guided-input` in A01; later slices add mid-operation and cross-user kinds. */
+    kind: v.string(),
+    operation: v.string(),
+    /** The character the card acts for, shown before anyone interacts; null for Director-only cards. */
+    actorLabel: v.union(v.string(), v.null()),
+    boundActor: v.any(),
+    requesterId: v.id('users'),
+    requiredInputs: v.any(),
+    /** The envelope (without command id) that resumes the operation once answered. */
+    continuation: v.any(),
+    revision: v.number(),
+    openedEventId: v.id('events'),
+    resolvedEventId: v.union(v.id('events'), v.null()),
+    answer: v.any(),
+    createdAt: v.number(),
+    resolvedAt: v.union(v.number(), v.null()),
+  }).index('by_campaign_status', ['campaignId', 'status']),
   commands: defineTable({
     userId: v.id('users'),
     commandId: v.string(),

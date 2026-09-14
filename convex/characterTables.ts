@@ -27,7 +27,9 @@ export const characterTables = {
     liveState: v.null(),
     campaignId: v.union(v.id('campaigns'), v.null()),
     combatLocked: v.boolean(),
-  }).index('by_owner', ['ownerId']),
+  })
+    .index('by_owner', ['ownerId'])
+    .index('by_campaign', ['campaignId']),
   characterRevisions: defineTable({
     characterId: v.id('characters'),
     revision: v.number(),

@@ -507,6 +507,17 @@ engine. The retained `src/content.ts` experiment loader is no longer imported by
 foe source projection with the generated content snapshot (`scripts/build-content.ts`, `shared/content/`).
 The engine is not yet integrated with the application service.
 
+Implementation note (A01, 2026-09-14): the integration is **in-process**. `convex/lib/engine.ts`
+imports `src/engine.ts` directly and exposes `evaluate(request)`, a pure synchronous call that takes
+an entity projection plus a command (and the parsed ability when one is used) and returns the engine's
+structured `Resolution`. It runs inside the Convex mutation that commits the accepted outcome, so
+authorization, dice (S02's shared operation, called before the engine) and the ordered event write
+are one transaction. No separate engine service, HTTP hop or browser dependency on engine internals
+exists; the same module still runs in Node and the browser. `convex/lib/registry.ts` is the routing
+layer: registered operations call the adapter when they need rules evaluation, and the ones delivered
+by A01 (`session.note`, `table.roll`, `card.respond`) do not. Revisit placement only if a concrete
+limit appears (bundle size, execution time, or a non-TypeScript client that must host the engine).
+
 The [v1 tech stack](v1-tech-stack-spec.md) records the recommended React frontend, selected Better Auth,
 Cloudflare/Convex Cloud hosting, and future home-server/LAN portability. Authoritative calculations should run
 server-side while browser interactions remain responsive. Keep the engine runnable on a home server as well
