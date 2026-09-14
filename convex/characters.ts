@@ -17,7 +17,9 @@ import { requireUser, type ReadCtx } from './lib/access';
 import { command } from './lib/commands';
 import { invoke } from './lib/registry';
 import { findContent } from './content';
-import { manifest } from '../shared/content/compendium/index';
+// The manifest alone (ids and paths): importing the snapshot barrel would load every entry's text
+// into this module and its cold start counts against the mutation time limit.
+import manifest from '../shared/content/compendium/manifest.json';
 import {
   authoredValidator,
   heroLiveValidator,

@@ -196,21 +196,26 @@ the real path. Dependencies R01, R02, R03, S01, A01, A03 and A04 are real; no fi
   from `commands.list` and the four `character.*` operations are present.
 - Acceptance 8 (rules review): pending.
 - Browser walkthrough: run against an isolated local deployment (`.convex/local` in this worktree,
-  Vite on port 5181) after fixing a pre-existing deploy blocker found on `main`: pushing the
-  functions failed with `Failed to analyze commands.js: ... is not iterable (registry.ts)` because
+  Vite on port 5181, `tests/browser` through a config pointing at that port) after fixing a
+  pre-existing deploy blocker found on `main`: pushing the functions failed with
+  `Failed to analyze commands.js: ... is not iterable (registry.ts)` because
   `convex/lib/combatOperations.ts` imports `bindActor` from the registry, which imports it back;
-  `bindActor` now lives in `convex/lib/actors.ts` (registry re-exports it). With that fix:
-  `journey.spec.ts` (updated for the wizard entry) and `table-audit.spec.ts` (admitted heroes,
-  timeout raised to 360 s) **pass**; `wizard.spec.ts` (new) walked every presented step with the
-  supported options, showed Stamina maximum pending before the kit and 30 after, saved, submitted,
-  and the Director approved from the campaign page (all observed passing live); its final owner /
-  Director / peer sheet assertions were **not verified** (the run stopped on a locator that matched a
-  `<select>` option; corrected but not rerun). `combat.spec.ts` (A04, now seeding through admission)
-  was **not run**.
+  `bindActor` now lives in `convex/lib/actors.ts` (the registry re-exports it). A second fix found
+  live: `convex/characters.ts` imported the content barrel (every entry's text) for its path map,
+  and the cold module load pushed a submit past the 1 s mutation limit; it imports `manifest.json`
+  only. With both: `journey.spec.ts` (updated for the wizard entry), `table-audit.spec.ts`
+  (admitted heroes; timeout raised to 360 s), `combat.spec.ts` (A04, heroes admitted through the
+  CLI) and the new `wizard.spec.ts` **pass**. The wizard spec walks every presented step with the
+  supported options (unsupported ones disabled and labeled), reads an option's source text, sees
+  Stamina maximum pending before the kit and 30 after, saves and closes, submits, the Director views
+  the proposed sheet without the note and approves from the campaign page, and the sheet reads
+  30 / 30 and 10 / 10 with the note for the owner, without the note for the Director, and Stamina
+  and Recoveries only for a peer.
 
 ### Unfinished (2026-09-15)
 
-- Rerun `wizard.spec.ts` to its end and run `combat.spec.ts` against a deployment with the cycle fix.
+- `pnpm test:browser` as configured (port 5180) was not run; the specs ran through an equivalent
+  config against this worktree's isolated deployment.
 - No detach or duplicate operation (out of scope); no restore of pending-review UI beyond the
   campaign page queue and the character page badges.
 - Independent review and rules review not requested (deferred to the user's audit thread).

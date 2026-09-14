@@ -131,7 +131,8 @@ test('wizard, admission review and the three sheet audiences', async ({ browser 
     await expect(player!.locator('span', { hasText: 'Effective build' }).first()).toBeVisible();
     await expect(player!.getByText('30 / 30').first()).toBeVisible();
     await expect(player!.getByText('10 / 10').first()).toBeVisible();
-    await expect(player!.getByText('Grug fears the sea.').first()).toBeVisible();
+    // Private notes sit in the collapsed Character details section: present for the owner only.
+    await expect(player!.getByText('Grug fears the sea.').first()).toBeAttached();
     await expect(player!.getByText('Brutal Slam').first()).toBeVisible();
     await expect(
       player!.getByRole('button', { name: 'Catch Breath (pending A05)' }),
