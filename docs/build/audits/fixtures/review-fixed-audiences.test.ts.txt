@@ -1,0 +1,51 @@
+import { expect, test } from 'vitest';
+import { api, internal } from '../../convex/_generated/api';
+import { backend, table } from './fixtures/table';
+import { GOBLIN_WARRIOR_ID } from '../../convex/lib/foeSource';
+
+test('review: hidden difficulty does not collide with literal skill text', async () => {
+  const t = backend();
+  const { player, observer, campaignId } = await table(t);
+  const result = await player.client.mutation(api.commands.submit, {
+    campaignId, commandId: 'review-skill-collision',
+    text: '@Thorn /test roll characteristic=M value=2 skill="Lore; hard: winter" difficulty=hard',
+  });
+  const event = (await observer.client.query(api.events.list, { campaignId })).events.find(e => e.id === result.eventId)!;
+  expect(event.description).toContain('(Lore; hard: winter)');
+  expect(event.description).not.toMatch(/; hard: (?:success|failure)/i);
+});
+
+test('review: closed session cursor retains projection, source endpoints deny peers, registered foes work between sessions', async () => {
+  const t = backend();
+  const { director, player, observer, campaignId, sessionId, thornId } = await table(t);
+  await t.mutation(internal.content.reseed, {});
+  const foeId = await director.client.mutation(api.foes.add, {
+    campaignId, definitionId: GOBLIN_WARRIOR_ID, commandId: 'review-add-foe',
+  });
+  const hidden = await director.client.mutation(api.commands.submit, {
+    campaignId, commandId: 'review-negative-health', text: `@{foe:${foeId}} /adjust stamina value=-11`,
+  });
+  const testResult = await director.client.mutation(api.commands.submit, {
+    campaignId, commandId: 'review-recorded-test', text: '@Thorn /test roll characteristic=M value=2 difficulty=medium',
+  });
+  await director.client.mutation(api.sessions.transition, {
+    sessionId: sessionId!, expectedRevision: 0, action: 'close', commandId: 'review-close-session',
+  });
+  for (const client of [player.client, observer.client]) {
+    await expect(client.query(api.foes.catalog, { campaignId })).rejects.toThrow();
+    await expect(client.query(api.foes.detail, { campaignId, foeId })).rejects.toThrow();
+    if (client === observer.client) await expect(client.query(api.characters.get, { characterId: thornId })).rejects.toThrow();
+    const rows = (await client.query(api.events.list, { campaignId, sessionId: sessionId!, before: testResult.sequence + 1 })).events;
+    expect(rows.find(e => e.id === hidden.eventId)!.description).not.toContain('-11');
+    expect(rows.find(e => e.id === testResult.eventId)!.payload.data.result).not.toHaveProperty('difficulty');
+  }
+  await director.client.mutation(api.commands.submit, {
+    campaignId, commandId: 'review-show-old-test', text: '/campaign test-difficulty-visible state=on',
+  });
+  const rows = (await observer.client.query(api.events.list, { campaignId, sessionId: sessionId! })).events;
+  expect(rows.find(e => e.id === testResult.eventId)!.payload.data.result.difficulty).toBe('medium');
+  await director.client.mutation(api.commands.submit, {
+    campaignId, commandId: 'review-remove-between', text: `@{foe:${foeId}} /foe remove`,
+  });
+  expect(await t.run(ctx => ctx.db.get(foeId))).toBeNull();
+});

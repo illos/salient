@@ -12,6 +12,7 @@ import { ConvexError } from 'convex/values';
 import type { Doc, Id } from '../_generated/dataModel';
 import type { MutationCtx } from '../_generated/server';
 import type { AcceptedRoll, DieResult, DieSpec } from '../../shared/contracts/history';
+import { commandKey } from './commands';
 import { fromHex, sha256, toHex } from './sha256';
 
 /** Bounds on one request. Any larger request is not a table roll. */
@@ -82,7 +83,7 @@ function toAccepted(roll: Doc<'rolls'>): AcceptedRoll {
 }
 
 /**
- * Rolls on the server for one command. The same `commandId` with the same dice returns the accepted
+ * Rolls on the server for one authenticated issuer and command ID. The same identity and dice return the accepted
  * roll again; the same id with different dice is an error (dice-roller-spec section 4). The caller
  * records the result on its event (`appendEvent` `dice`); this function does not write history.
  */
@@ -91,6 +92,7 @@ export async function rollDice(
   campaignId: Id<'campaigns'>,
   commandId: string,
   dice: DieSpec[],
+  issuerId: Id<'users'> | null,
 ): Promise<AcceptedRoll> {
   if (!/^[A-Za-z0-9_-]{8,128}$/.test(commandId))
     throw new ConvexError(
@@ -101,8 +103,8 @@ export async function rollDice(
   const fingerprint = JSON.stringify(dice.map(die => [die.id, die.sides]));
   const previous = await ctx.db
     .query('rolls')
-    .withIndex('by_campaign_command', q =>
-      q.eq('campaignId', campaignId).eq('commandId', commandId),
+    .withIndex('by_campaign_command_key', q =>
+      q.eq('campaignId', campaignId).eq('commandKey', commandKey(issuerId, commandId)),
     )
     .unique();
   if (previous) {
@@ -116,6 +118,7 @@ export async function rollDice(
   const id = await ctx.db.insert('rolls', {
     campaignId,
     commandId,
+    commandKey: commandKey(issuerId, commandId),
     fingerprint,
     dice: generated.dice,
     audience: 'public',

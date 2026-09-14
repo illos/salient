@@ -2,6 +2,11 @@ import { ConvexError } from 'convex/values';
 import type { Id } from '../_generated/dataModel';
 import type { MutationCtx } from '../_generated/server';
 
+/** Stable internal identity: null is reserved for server-originated work, never a client issuer. */
+export function commandKey(issuerId: Id<'users'> | null, commandId: string): string {
+  return JSON.stringify([issuerId, commandId]);
+}
+
 function canonical(value: unknown): unknown {
   if (Array.isArray(value)) return value.map(canonical);
   if (value && typeof value === 'object')

@@ -71,8 +71,8 @@ describe('sha256', () => {
 describe('shared dice operation', () => {
   test('same commandId returns the identical accepted roll; a new id draws new values', async () => {
     const { t, campaignId } = await setup();
-    const first = await t.run(ctx => rollDice(ctx, campaignId, 'roll-command-1', powerRoll));
-    const retry = await t.run(ctx => rollDice(ctx, campaignId, 'roll-command-1', powerRoll));
+    const first = await t.run(ctx => rollDice(ctx, campaignId, 'roll-command-1', powerRoll, null));
+    const retry = await t.run(ctx => rollDice(ctx, campaignId, 'roll-command-1', powerRoll, null));
     expect(retry).toEqual(first);
     expect(first.source).toBe('generated');
     expect(first.audience).toBe('public');
@@ -94,7 +94,7 @@ describe('shared dice operation', () => {
     expect(rolls[0]!.counterStart).toBe(0);
     // A new command id advances the stream: it is a new accepted roll with its own id and values
     // drawn from a later counter (the faces themselves may coincide by chance).
-    const next = await t.run(ctx => rollDice(ctx, campaignId, 'roll-command-2', powerRoll));
+    const next = await t.run(ctx => rollDice(ctx, campaignId, 'roll-command-2', powerRoll, null));
     expect(next.rollId).not.toBe(first.rollId);
     const after = await t.run(ctx =>
       ctx.db
@@ -117,9 +117,9 @@ describe('shared dice operation', () => {
 
   test('reusing a commandId with different dice is rejected and rolls nothing', async () => {
     const { t, campaignId } = await setup();
-    await t.run(ctx => rollDice(ctx, campaignId, 'roll-command-1', powerRoll));
+    await t.run(ctx => rollDice(ctx, campaignId, 'roll-command-1', powerRoll, null));
     await expect(
-      t.run(ctx => rollDice(ctx, campaignId, 'roll-command-1', [{ id: 'd6', sides: 6 }])),
+      t.run(ctx => rollDice(ctx, campaignId, 'roll-command-1', [{ id: 'd6', sides: 6 }], null)),
     ).rejects.toThrow('different roll');
     const rolls = await t.run(ctx =>
       ctx.db
@@ -146,10 +146,10 @@ describe('shared dice operation', () => {
       ],
     ];
     for (const [dice, message] of cases)
-      await expect(t.run(ctx => rollDice(ctx, campaignId, 'roll-command-1', dice))).rejects.toThrow(
-        message,
-      );
-    await expect(t.run(ctx => rollDice(ctx, campaignId, 'short', powerRoll))).rejects.toThrow(
+      await expect(
+        t.run(ctx => rollDice(ctx, campaignId, 'roll-command-1', dice, null)),
+      ).rejects.toThrow(message);
+    await expect(t.run(ctx => rollDice(ctx, campaignId, 'short', powerRoll, null))).rejects.toThrow(
       'command ID',
     );
     expect(await t.run(ctx => ctx.db.query('rolls').take(1))).toEqual([]);
@@ -172,6 +172,7 @@ describe('shared dice operation', () => {
       campaignId,
       commandId: 'internal-roll-1',
       dice: powerRoll,
+      issuerId: null,
     });
     // The public API exposes no dice module; convex-test itself does not enforce the internal
     // boundary, which is a platform property of internalMutation.
@@ -183,6 +184,7 @@ describe('shared dice operation', () => {
         campaignId,
         commandId: 'internal-roll-1',
         dice: powerRoll,
+        issuerId: null,
       }),
     ).toEqual(accepted);
   });

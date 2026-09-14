@@ -445,6 +445,75 @@ are the shared lifecycle decisions; the remaining entries are bounded content/sc
 - **Blocked until answered:** nothing; A applied provisionally and labeled in the slice work log.
 - **Answer:**
 
+### Q-R-1: Does a natural 19 or 20 stay tier 3 under a double bane?
+
+- **Status:** open
+- **Raised by:** R04, 2026-09-14
+- **Where:** `docs/roll-and-damage-resolution.md#16-natural-19-and-20`; read
+  `vendor/steel-compendium/en/unified/md/rule/dice/natural-roll.md`,
+  `vendor/steel-compendium/en/unified/md/rule/dice/bane.md`,
+  `vendor/steel-compendium/en/unified/md/rule/dice/power-roll.md`,
+  `vendor/steel-compendium/en/unified/md/rule/test/test-difficulty.md`.
+- **Conflict or gap:** Natural Roll says a natural 19 or 20 "is always a tier 3 result regardless of
+  any modifiers". Bane says a double bane does not subtract from the roll but "the outcome of the roll
+  automatically decreases one tier". No sentence says whether a tier decrease counts as a modifier.
+  This changes the applied tier (3 versus 2) and the test outcome (reward versus plain success).
+- **Options:** A: natural 19/20 stays tier 3 (double bane is a way to "modify a roll" per Power Rolls,
+  so "any modifiers" covers it) / B: apply the double-bane decrease after the natural override, giving
+  tier 2 / C: Director decides per case.
+- **Recommendation:** A. Power Rolls describes edges and banes as modifying a roll, the natural-roll
+  sentence is unconditional, and the test table lists "Natural 19 or 20" as its own row above all
+  difficulties. The critical-hit extra action is unaffected either way.
+- **Blocked until answered:** nothing; option A applied provisionally, outcome labeled `Q-R-1` whenever
+  a double bane was in force with a natural 19 or 20.
+- **Answer:**
+
+### Q-R-2: For "N + M or A damage", must the damage characteristic be the roll characteristic?
+
+- **Status:** open
+- **Raised by:** R04, 2026-09-14
+- **Where:** `docs/roll-and-damage-resolution.md#41-damage-expressions`,
+  `docs/table-spec.md#v001-roll-characteristic-default`; read
+  `vendor/steel-compendium/en/unified/md/rule/dice/ability-roll.md`,
+  `vendor/steel-compendium/en/unified/md/feature/ability/common/melee-weapon-free-strike.md`,
+  `vendor/steel-compendium/en/unified/md/kit/mountain.md`.
+- **Conflict or gap:** Ability Roll says free strikes "allow you to pick which characteristic score
+  you add to their damage" and does not tie that pick to the power-roll characteristic. The 2026-09-14
+  ruling on the roll default says it "does not infer separate damage choices". With Might and Agility
+  unequal the two readings give different damage. The v0.01 hero has Might 2 and Agility 2, so no
+  example is affected yet.
+- **Options:** A: use the roll characteristic for damage, recorded; a different pick is a manual
+  result / B: offer a separate damage-characteristic choice defaulting to the highest permitted / C:
+  always use the highest permitted for damage regardless of the roll.
+- **Recommendation:** A for v0.01 (fewest inputs, matches the existing ruling's wording); B is the
+  literal reading if the user wants the pick exposed.
+- **Blocked until answered:** nothing; option A applied provisionally, labeled `Q-R-2` on the damage
+  breakdown.
+- **Answer:**
+
+### Q-R-3: Is regained Stamina capped at the Stamina maximum?
+
+- **Status:** open
+- **Raised by:** R04, 2026-09-14
+- **Where:** `docs/roll-and-damage-resolution.md#7-catch-breath-and-recovery-spending`,
+  `docs/table-spec.md#v001-catch-breath`; read
+  `vendor/steel-compendium/en/unified/md/feature/common/maneuvers/catch-breath.md`,
+  `vendor/steel-compendium/en/unified/md/rule/health/recoveries.md`,
+  `vendor/steel-compendium/en/unified/md/rule/health/stamina.md`,
+  `vendor/steel-compendium/en/unified/md/rule/health/temporary-stamina.md`,
+  `vendor/steel-compendium/en/unified/md/chapter/the-basics.md` (Recoveries).
+- **Conflict or gap:** No sentence at the pin says Stamina cannot exceed its maximum. Stamina says
+  "Some effects can also reduce your Stamina maximum, limiting the amount of Stamina you can regain",
+  which implies the maximum bounds regain but does not state the cap. The table spec asked for this
+  bound to be verified before implementation.
+- **Options:** A: cap ordinary Stamina at the maximum; excess healing is lost, Recovery still spent /
+  B: no cap (Stamina may exceed maximum) / C: cap, and refuse Catch Breath at full Stamina.
+- **Recommendation:** A. It is the only reading under which "Stamina maximum" is a maximum, and
+  temporary Stamina exists as the separate uncapped pool. C adds a block the source does not state.
+- **Blocked until answered:** nothing; option A applied provisionally with `capApplied` and label
+  `Q-R-3` on the record.
+- **Answer:**
+
 ## Resolved questions
 
 ### Q-TS-1: Are any save-ends rolls automatic in v0.01?
@@ -518,72 +587,3 @@ are the shared lifecycle decisions; the remaining entries are bounded content/sc
 - **Recommendation:** A. It matches the ruling and keeps the v0.01 UI honest.
 - **Blocked until answered:** nothing; A is applied in A03 unless the user objects.
 - **Answer:** No, do not remove. The code stays dormant: no UI control, not in the registry, every foe visible in v0.01. (User answered "no" to a remove-or-keep question; read as "do not remove". Correct here if intended otherwise.)
-
-### Q-R-1: Does a natural 19 or 20 stay tier 3 under a double bane?
-
-- **Status:** open
-- **Raised by:** R04, 2026-09-14
-- **Where:** `docs/roll-and-damage-resolution.md#16-natural-19-and-20`; read
-  `vendor/steel-compendium/en/unified/md/rule/dice/natural-roll.md`,
-  `vendor/steel-compendium/en/unified/md/rule/dice/bane.md`,
-  `vendor/steel-compendium/en/unified/md/rule/dice/power-roll.md`,
-  `vendor/steel-compendium/en/unified/md/rule/test/test-difficulty.md`.
-- **Conflict or gap:** Natural Roll says a natural 19 or 20 "is always a tier 3 result regardless of
-  any modifiers". Bane says a double bane does not subtract from the roll but "the outcome of the roll
-  automatically decreases one tier". No sentence says whether a tier decrease counts as a modifier.
-  This changes the applied tier (3 versus 2) and the test outcome (reward versus plain success).
-- **Options:** A: natural 19/20 stays tier 3 (double bane is a way to "modify a roll" per Power Rolls,
-  so "any modifiers" covers it) / B: apply the double-bane decrease after the natural override, giving
-  tier 2 / C: Director decides per case.
-- **Recommendation:** A. Power Rolls describes edges and banes as modifying a roll, the natural-roll
-  sentence is unconditional, and the test table lists "Natural 19 or 20" as its own row above all
-  difficulties. The critical-hit extra action is unaffected either way.
-- **Blocked until answered:** nothing; option A applied provisionally, outcome labeled `Q-R-1` whenever
-  a double bane was in force with a natural 19 or 20.
-- **Answer:**
-
-### Q-R-2: For "N + M or A damage", must the damage characteristic be the roll characteristic?
-
-- **Status:** open
-- **Raised by:** R04, 2026-09-14
-- **Where:** `docs/roll-and-damage-resolution.md#41-damage-expressions`,
-  `docs/table-spec.md#v001-roll-characteristic-default`; read
-  `vendor/steel-compendium/en/unified/md/rule/dice/ability-roll.md`,
-  `vendor/steel-compendium/en/unified/md/feature/ability/common/melee-weapon-free-strike.md`,
-  `vendor/steel-compendium/en/unified/md/kit/mountain.md`.
-- **Conflict or gap:** Ability Roll says free strikes "allow you to pick which characteristic score
-  you add to their damage" and does not tie that pick to the power-roll characteristic. The 2026-09-14
-  ruling on the roll default says it "does not infer separate damage choices". With Might and Agility
-  unequal the two readings give different damage. The v0.01 hero has Might 2 and Agility 2, so no
-  example is affected yet.
-- **Options:** A: use the roll characteristic for damage, recorded; a different pick is a manual
-  result / B: offer a separate damage-characteristic choice defaulting to the highest permitted / C:
-  always use the highest permitted for damage regardless of the roll.
-- **Recommendation:** A for v0.01 (fewest inputs, matches the existing ruling's wording); B is the
-  literal reading if the user wants the pick exposed.
-- **Blocked until answered:** nothing; option A applied provisionally, labeled `Q-R-2` on the damage
-  breakdown.
-- **Answer:**
-
-### Q-R-3: Is regained Stamina capped at the Stamina maximum?
-
-- **Status:** open
-- **Raised by:** R04, 2026-09-14
-- **Where:** `docs/roll-and-damage-resolution.md#7-catch-breath-and-recovery-spending`,
-  `docs/table-spec.md#v001-catch-breath`; read
-  `vendor/steel-compendium/en/unified/md/feature/common/maneuvers/catch-breath.md`,
-  `vendor/steel-compendium/en/unified/md/rule/health/recoveries.md`,
-  `vendor/steel-compendium/en/unified/md/rule/health/stamina.md`,
-  `vendor/steel-compendium/en/unified/md/rule/health/temporary-stamina.md`,
-  `vendor/steel-compendium/en/unified/md/chapter/the-basics.md` (Recoveries).
-- **Conflict or gap:** No sentence at the pin says Stamina cannot exceed its maximum. Stamina says
-  "Some effects can also reduce your Stamina maximum, limiting the amount of Stamina you can regain",
-  which implies the maximum bounds regain but does not state the cap. The table spec asked for this
-  bound to be verified before implementation.
-- **Options:** A: cap ordinary Stamina at the maximum; excess healing is lost, Recovery still spent /
-  B: no cap (Stamina may exceed maximum) / C: cap, and refuse Catch Breath at full Stamina.
-- **Recommendation:** A. It is the only reading under which "Stamina maximum" is a maximum, and
-  temporary Stamina exists as the separate uncapped pool. C adds a block the source does not state.
-- **Blocked until answered:** nothing; option A applied provisionally with `capApplied` and label
-  `Q-R-3` on the record.
-- **Answer:**

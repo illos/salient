@@ -223,8 +223,8 @@ Consequences for the application:
 ## 4. `HeroEntity` projection
 
 `shared/contracts/entities.ts`. The projection is built at read time from the effective build's
-baseline and the hero's live record. Field names follow `src/contracts.ts` where the meaning is the
-same (section 6 has the mapping). Ids in the worked example are placeholders (`grug`,
+baseline, the hero's live record, and authored character metadata (including the name). Field names
+follow `src/contracts.ts` where the meaning is the same (section 6 has the mapping). Ids in the worked example are placeholders (`grug`,
 `example-character`, ...); the persistence layer owns real ids (`docs/engine-architecture.md#proposed-boundaries`).
 
 ### 4.1 Identity and baseline values
@@ -233,7 +233,8 @@ same (section 6 has the mapping). Ids in the worked example are placeholders (`g
 | --- | --- | --- |
 | `entityId` | engine-owned `CreatureId` (`shared/contracts/clock.ts`) | the clock and history key |
 | `characterId`, `campaignId`, `buildRevisionId` | persistence | which build the baseline came from |
-| `name`, `level`, `ancestry`, `class`, `subclass` | baseline | `level` is `1` in v0.01 |
+| `name` | authored character metadata, supplied separately to the projection adapter | neither `DerivedBaseline` nor `HeroLiveState` carries a name |
+| `level`, `ancestry`, `class`, `subclass` | baseline | `level` is `1` in v0.01 |
 | `characteristics` | `baseline.characteristics[*].value` | current scores; no v0.01 effect changes them |
 | `maxima` | `staminaMaximum`, `recoveriesMaximum`, `recoveryValue`, `windedValue`, `speed`, `stability`, `size` (numeric 1 plus `sizeCategory`), `disengage`, `potencyCharacteristic`, `potency`, `savingThrowThreshold` | plain numbers copied from the `DerivedValue`s |
 | `kit` | `baseline.kit` values | the R04 shape (`ActorRollFacts.kitMeleeDamageBonus` reads `meleeDamageBonus`) |

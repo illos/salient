@@ -64,7 +64,12 @@ export const list = query({
         }),
       ),
       roles: v.array(v.union(v.literal('director'), v.literal('player'), v.literal('observer'))),
-      session: v.union(v.literal('none'), v.literal('active'), v.literal('running')),
+      session: v.union(
+        v.literal('none'),
+        v.literal('active'),
+        v.literal('running'),
+        v.literal('unpaused'),
+      ),
       actor: v.union(v.literal('none'), v.literal('optional'), v.literal('required')),
       available: v.boolean(),
       unavailableReason: v.union(v.string(), v.null()),

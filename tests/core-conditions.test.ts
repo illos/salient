@@ -1,6 +1,7 @@
+import { readPinnedSource } from './helpers/pinned-source.ts';
 import { test } from 'vitest';
 import assert from 'node:assert/strict';
-import { existsSync, readFileSync } from 'node:fs';
+import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 
@@ -52,10 +53,7 @@ test('the JSON lists exactly the nine conditions in the Compendium condition ind
     file.conditions.map(c => c.id),
     expectedIds,
   );
-  const index = readFileSync(
-    join(root, 'vendor/steel-compendium/en/unified/md/_index/condition.md'),
-    'utf8',
-  );
+  const index = readPinnedSource(root, 'vendor/steel-compendium/en/unified/md/_index/condition.md');
   assert.match(index, /^Total: 9$/m);
   for (const c of file.conditions)
     assert.ok(index.includes(`(../condition/${c.id}.md)`), `index links ${c.id}`);
@@ -68,8 +66,7 @@ test('the JSON records the pinned Compendium revision', () => {
 for (const condition of file.conditions) {
   test(`${condition.id}: cited source exists and its effect text matches verbatim`, () => {
     const path = join(root, condition.sourcePath);
-    assert.ok(existsSync(path), `source file exists: ${condition.sourcePath}`);
-    const { frontmatter, body } = splitFrontmatter(readFileSync(path, 'utf8'));
+    const { frontmatter, body } = splitFrontmatter(readPinnedSource(root, path));
     assert.ok(
       frontmatter.includes(`name: ${condition.name}`),
       'name matches the source frontmatter',

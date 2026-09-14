@@ -1,0 +1,69 @@
+import { expect, test } from 'vitest';
+import { api, internal } from '../../convex/_generated/api';
+import { appendEvent } from '../../convex/lib/events';
+import { commandJournal, diffFields } from '../../convex/lib/journal';
+import { GOBLIN_WARRIOR_ID } from '../../convex/lib/foeSource';
+import { backend, table, storedEvents } from './fixtures/table';
+
+test('independent probe: deep deletion, arrays and object boundaries preserve complete changes', () => {
+  expect(diffFields({ live: { nested: { keep: 2, remove: 3 }, list: [1, 2] }, other: 7 }, { live: { nested: {}, list: [] } })).toEqual([
+    { path: 'live.nested.keep', before: { present: true, value: 2 }, after: { present: false } },
+    { path: 'live.nested.remove', before: { present: true, value: 3 }, after: { present: false } },
+    { path: 'live.list', before: { present: true, value: [1, 2] }, after: { present: true, value: [] } },
+  ]);
+  expect(diffFields({ live: { child: {} } }, { live: {} })).toEqual([
+    { path: 'live.child', before: { present: true, value: {} }, after: { present: false } },
+  ]);
+});
+
+test('independent probe: historical name continuations use their binding and detached actors refuse', async () => {
+  const t = backend();
+  const { player, campaignId, thornId } = await table(t);
+  const opened = await player.client.mutation(api.commands.submit, { campaignId, text: '@Thorn /table roll', commandId: 'probe-open-legacy' });
+  await t.run(async ctx => {
+    const card = (await ctx.db.get(opened.interactionId!))!;
+    await ctx.db.patch(card._id, { continuation: { ...card.continuation, actor: { name: 'Thorn' } } });
+    const actor = (await ctx.db.get(thornId))!;
+    await ctx.db.patch(thornId, { authored: { ...actor.authored, name: 'New Name' } });
+  });
+  const result = await player.client.mutation(api.interactions.respond, { interactionId: opened.interactionId!, answer: { dice: 'd6' }, commandId: 'probe-answer-legacy' });
+  expect((await t.run(ctx => ctx.db.get(result.eventId)))!.payload.envelope.boundActor.id).toBe(thornId);
+  const next = await player.client.mutation(api.commands.submit, { campaignId, text: `@{character:${thornId}} /table roll`, commandId: 'probe-open-detach' });
+  await t.run(ctx => ctx.db.patch(thornId, { campaignId: null }));
+  const before = await storedEvents(t, campaignId);
+  await expect(player.client.mutation(api.interactions.respond, { interactionId: next.interactionId!, answer: { dice: 'd6' }, commandId: 'probe-answer-detach' })).rejects.toThrow('not at this table');
+  expect(await storedEvents(t, campaignId)).toEqual(before);
+  expect((await t.run(ctx => ctx.db.get(next.interactionId!)))!.status).toBe('awaiting-input');
+});
+
+test('independent probe: system scope cannot merge with user scope and invalid cause fails', async () => {
+  const t = backend();
+  const { director, campaignId } = await table(t);
+  const commandId = 'probe-system-scope';
+  const user = await director.client.mutation(api.commands.submit, { campaignId, text: '/table roll dice="d6"', commandId });
+  const system = await t.run(ctx => appendEvent(ctx, { campaignId, commandId, origin: 'clock', kind: 'probe', description: 'Independent system work' }));
+  expect((await t.run(ctx => commandJournal(ctx, campaignId, commandId, null))).events.map(e => e._id)).toEqual([system]);
+  expect((await t.run(ctx => commandJournal(ctx, campaignId, commandId, director.profile.userId))).events.map(e => e._id)).toEqual([user.eventId]);
+  const before = await storedEvents(t, campaignId);
+  await expect(t.run(ctx => appendEvent(ctx, { campaignId, commandId: 'probe-wrong-cause-id', origin: 'engine', causeEventId: user.eventId, kind: 'probe', description: 'Wrong command' }))).rejects.toThrow('retain their cause command ID');
+  expect(await storedEvents(t, campaignId)).toEqual(before);
+});
+
+test('independent probe: before and between sessions, foe wrappers preserve full deletion snapshot and scoped journal', async () => {
+  const t = backend();
+  const { director, campaignId } = await table(t, { session: false });
+  await t.mutation(internal.content.reseed, {});
+  const foeId = await director.client.mutation(api.foes.add, { campaignId, definitionId: GOBLIN_WARRIOR_ID, commandId: 'probe-foe-add' });
+  const original = (await t.run(ctx => ctx.db.get(foeId)))!;
+  const { _id, _creationTime, ...value } = original;
+  void _id; void _creationTime;
+  await director.client.mutation(api.foes.remove, { campaignId, foeId, commandId: 'probe-foe-remove' });
+  const deletion = await t.run(ctx => commandJournal(ctx, campaignId, 'probe-foe-remove', director.profile.userId));
+  expect(deletion.events[0]!.sessionId).toBeNull();
+  expect(deletion.changes).toHaveLength(1);
+  expect(deletion.changes[0]!.before).toEqual({ present: true, value });
+  expect(deletion.changes[0]!.after).toEqual({ present: false });
+  const retry = await director.client.mutation(api.commands.invoke, { campaignId, operation: 'foe.remove', actor: { refKind: 'foe', id: foeId }, arguments: {}, commandId: 'probe-foe-remove' });
+  expect(retry.eventId).toBe(deletion.events[0]!._id);
+  expect(await t.run(ctx => ctx.db.get(foeId))).toBeNull();
+});

@@ -209,7 +209,7 @@ function FoeRow({
   director: boolean;
   running: boolean;
 }) {
-  const remove = useMutation(api.foes.remove);
+  const remove = useMutation(api.commands.invoke);
   const deletion = useCommand();
   const [open, setOpen] = useState(false);
   const actor = actorRef('foe', foe.id);
@@ -249,7 +249,14 @@ function FoeRow({
             disabled={deletion.pending}
             onClick={() =>
               void deletion.run(
-                commandId => remove({ campaignId, foeId: foe.id, commandId }),
+                commandId =>
+                  remove({
+                    campaignId,
+                    operation: 'foe.remove',
+                    actor: { refKind: 'foe', id: foe.id },
+                    arguments: {},
+                    commandId,
+                  }),
                 JSON.stringify(['foes.remove', campaignId, foe.id]),
               )
             }
@@ -268,7 +275,7 @@ function DirectorPane({ campaignId, roster }: { campaignId: Id<'campaigns'>; ros
   const director = roster.role === 'director';
   const running = roster.session?.status === 'running';
   const catalog = useQuery(api.foes.catalog, director ? { campaignId } : 'skip');
-  const add = useMutation(api.foes.add);
+  const add = useMutation(api.commands.invoke);
   const addition = useCommand();
   return (
     <Card>
@@ -299,7 +306,13 @@ function DirectorPane({ campaignId, roster }: { campaignId: Id<'campaigns'>; ros
               disabled={addition.pending || !running}
               onClick={() =>
                 void addition.run(
-                  commandId => add({ campaignId, definitionId: catalog.definitionId, commandId }),
+                  commandId =>
+                    add({
+                      campaignId,
+                      operation: 'foe.add',
+                      arguments: { definition: catalog.definitionId },
+                      commandId,
+                    }),
                   JSON.stringify(['foes.add', campaignId, catalog.definitionId]),
                 )
               }
@@ -337,7 +350,14 @@ function DirectorPane({ campaignId, roster }: { campaignId: Id<'campaigns'>; ros
         </div>
         {director && roster.settings && (
           <div className="rule-soft border-t pt-4">
-            <SectionHeading className="mb-2">Monster health display</SectionHeading>
+            <QuickAction
+              campaignId={campaignId}
+              text={`/campaign test-difficulty-visible state=${roster.settings.showTestDifficulty ? 'off' : 'on'}`}
+              label={
+                roster.settings.showTestDifficulty ? 'Hide test difficulty' : 'Show test difficulty'
+              }
+            />
+            <SectionHeading className="mb-2 mt-4">Monster health display</SectionHeading>
             <div className="flex flex-wrap gap-2">
               {(['bar', 'numerical', 'winded'] as const).map(mode => (
                 <QuickAction
@@ -373,20 +393,21 @@ function HeroRow({
 }) {
   const actor = actorRef('character', hero.id);
   const live = hero.live;
+  const full = live && 'conditions' in live ? live : null;
   const canAct = hero.controlled && running;
   const fields: [string, string, number | null][] = [
     ['stamina', 'Stamina', live?.stamina ?? null],
-    ['stamina-maximum', 'Stamina maximum', live?.staminaMaximum ?? null],
-    ['temporary-stamina', 'Temporary Stamina', live?.temporaryStamina ?? null],
+    ['stamina-maximum', 'Stamina maximum', full?.staminaMaximum ?? null],
+    ['temporary-stamina', 'Temporary Stamina', full?.temporaryStamina ?? null],
     ['recoveries', 'Recoveries', live?.recoveries ?? null],
-    ['recoveries-maximum', 'Recoveries maximum', live?.recoveriesMaximum ?? null],
+    ['recoveries-maximum', 'Recoveries maximum', full?.recoveriesMaximum ?? null],
     [
       'heroic-resource',
-      live?.heroicResource.name ?? 'Heroic Resource',
-      live?.heroicResource.current ?? null,
+      full?.heroicResource.name ?? 'Heroic Resource',
+      full?.heroicResource.current ?? null,
     ],
-    ['surges', 'Surges', live?.surges ?? null],
-    ['victories', 'Victories', live?.victories ?? null],
+    ['surges', 'Surges', full?.surges ?? null],
+    ['victories', 'Victories', full?.victories ?? null],
   ];
   return (
     <li className="rule-soft flex flex-col gap-2 py-3">
@@ -396,30 +417,32 @@ function HeroRow({
       </div>
       {live ? (
         <dl className="grid grid-cols-[auto_1fr_auto] gap-x-3 gap-y-0.5 text-sm">
-          {fields.map(([field, label, current]) => (
-            <div key={field} className="contents">
-              <dt className="text-muted-foreground">{label}</dt>
-              <dd className="m-0">{value(current)}</dd>
-              <dd className="m-0">
-                {director && running && (
-                  <AdjustAction
-                    campaignId={campaignId}
-                    actor={actor}
-                    field={field}
-                    label={`${hero.name} ${label}`}
-                    current={current}
-                  />
-                )}
-              </dd>
-            </div>
-          ))}
+          {fields
+            .filter(([field]) => full || field === 'stamina' || field === 'recoveries')
+            .map(([field, label, current]) => (
+              <div key={field} className="contents">
+                <dt className="text-muted-foreground">{label}</dt>
+                <dd className="m-0">{value(current)}</dd>
+                <dd className="m-0">
+                  {director && running && (
+                    <AdjustAction
+                      campaignId={campaignId}
+                      actor={actor}
+                      field={field}
+                      label={`${hero.name} ${label}`}
+                      current={current}
+                    />
+                  )}
+                </dd>
+              </div>
+            ))}
         </dl>
       ) : (
         <p className="text-sm text-muted-foreground">
           No live values recorded yet; the first table action records them.
         </p>
       )}
-      {live && <ConditionBadges conditions={live.conditions} />}
+      {full && <ConditionBadges conditions={full.conditions} />}
       {canAct && (
         <div className="flex flex-wrap items-center gap-2">
           <QuickAction
@@ -430,12 +453,12 @@ function HeroRow({
           <ConditionControls
             campaignId={campaignId}
             actor={actor}
-            conditions={live?.conditions ?? {}}
+            conditions={full?.conditions ?? {}}
           />
         </div>
       )}
       {canAct && (
-        <p className="text-xs text-muted-foreground">
+        <p className="text-xs text-muted-foreground [overflow-wrap:anywhere]">
           Test: <code>{`${actor} /test roll characteristic=M value=2 difficulty=medium`}</code>
         </p>
       )}
@@ -480,20 +503,36 @@ function HeroesPane({ campaignId, roster }: { campaignId: Id<'campaigns'>; roste
 }
 
 /** Verbatim source text carried by an event (a used action) or the Catch Breath reference. */
+type EventSourceRecord = {
+  id?: string;
+  text?: string;
+  note?: string;
+  revision?: string;
+  sourcePath?: string;
+  supporting?: EventSourceRecord[];
+};
 function EventSource({ payload }: { payload: unknown }) {
-  const data = (payload as { data?: { source?: { id?: string; text?: string; note?: string } } })
-    ?.data;
-  if (!data?.source) return null;
+  const source = (payload as { data?: { source?: EventSourceRecord } })?.data?.source;
+  if (!source) return null;
   return (
     <details className="mt-1 text-xs">
       <summary className="cursor-pointer text-muted-foreground">Source</summary>
-      <p className="mt-1 text-muted-foreground">{data.source.id}</p>
-      {data.source.text && (
-        <pre className="mt-1 border-l-2 border-rule-strong pl-3 font-sans whitespace-pre-wrap">
-          {data.source.text}
-        </pre>
-      )}
-      {data.source.note && <p className="mt-1 text-muted-foreground">{data.source.note}</p>}
+      {[source, ...(source.supporting ?? [])].map((entry, index) => (
+        <div key={entry.id ?? index}>
+          <p className="mt-1 text-muted-foreground">{entry.id}</p>
+          {entry.text && (
+            <pre className="mt-1 border-l-2 border-rule-strong pl-3 font-sans whitespace-pre-wrap">
+              {entry.text}
+            </pre>
+          )}
+          {entry.sourcePath && (
+            <p className="mt-1 text-muted-foreground">
+              {entry.sourcePath} · {entry.revision}
+            </p>
+          )}
+        </div>
+      ))}
+      {source.note && <p className="mt-1 text-muted-foreground">{source.note}</p>}
     </details>
   );
 }

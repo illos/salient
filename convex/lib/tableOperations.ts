@@ -33,6 +33,7 @@ import type {
 } from '../../shared/contracts/rollResolution';
 import type { ConditionId, ConditionToggles } from '../../shared/contracts/liveState';
 import { rollDice } from './dice';
+import { requireContent } from '../content';
 import { journalPatch, type JournalScope } from './journal';
 import type { OperationDefinition, Outcome, TableContext } from './registry';
 
@@ -209,10 +210,16 @@ const testRoll: OperationDefinition = {
         `${actor!.name} has no evaluated build that supplies ${characteristic}; add value=<score> and it is recorded as a supplied fact.`,
       );
     const characteristicValue = integer(args.value, 'value');
-    const accepted = await rollDice(ctx, context.campaign._id, envelope.commandId, [
-      { id: 'd10a', sides: 10 },
-      { id: 'd10b', sides: 10 },
-    ]);
+    const accepted = await rollDice(
+      ctx,
+      context.campaign._id,
+      envelope.commandId,
+      [
+        { id: 'd10a', sides: 10 },
+        { id: 'd10b', sides: 10 },
+      ],
+      context.user._id,
+    );
     const [a, b] = accepted.dice;
     const dice = { d10a: a!.value as TestRollResult['dice']['d10a'], d10b: b!.value as never };
     // Section 1.2: the natural roll is the dice alone.
@@ -318,13 +325,26 @@ const heroRecover: OperationDefinition = {
       temporaryStaminaUnchanged: live.temporaryStamina,
       warnings,
     };
+    const source = await requireContent(
+      ctx,
+      'mcdm.heroes.v1/feature.common.maneuvers/catch-breath',
+    );
+    const recoverySource = await requireContent(ctx, 'mcdm.heroes.v1/rule.health/recoveries');
+    const sourceRecord = (entry: Doc<'content'>) => ({
+      id: entry.contentId,
+      name: entry.name,
+      text: entry.text,
+      sourcePath: entry.sourcePath,
+      revision: entry.revision,
+    });
     return {
       kind: 'hero.recover',
       description: `${character.authored.name} spent a Recovery (${result.recoveriesBefore} → ${result.recoveriesAfter}) and regained ${healed} Stamina (${result.staminaBefore} → ${staminaAfter}${capApplied ? ', capped at the maximum' : ''}).${warnings.length ? ` ${warnings.join(' ')}` : ''}`,
       data: {
         result,
         source: {
-          id: 'mcdm.heroes.v1/feature.common.maneuvers/catch-breath',
+          ...sourceRecord(source),
+          supporting: [sourceRecord(recoverySource)],
           note: 'FreePlay use: no maneuver allowance is consumed (docs/table-spec.md#v001-catch-breath).',
         },
       },
@@ -562,11 +582,8 @@ function adjustOperation(field: AdjustableField): OperationDefinition {
 // ---------------------------------------------------------------------------------------------
 // Campaign display settings.
 
-export const DEFAULT_SETTINGS = { showMalice: false, healthDisplay: 'bar' as const };
-
-function settingsOf(campaign: Doc<'campaigns'>) {
-  return campaign.settings ?? DEFAULT_SETTINGS;
-}
+export { DEFAULT_SETTINGS } from './audience';
+import { settingsOf } from './audience';
 
 const maliceVisible: OperationDefinition = {
   id: 'campaign.malice-visible',
@@ -589,6 +606,38 @@ const maliceVisible: OperationDefinition = {
       kind: 'campaign.setting',
       description: `Show Malice turned ${state}.`,
       data: { setting: 'showMalice', before: before.showMalice, after: settings.showMalice },
+      commit: async (mctx, scope) => {
+        await journalPatch(mctx, scope, 'campaigns', context.campaign._id, { settings });
+      },
+    };
+  },
+};
+
+const testDifficultyVisible: OperationDefinition = {
+  id: 'campaign.test-difficulty-visible',
+  family: 'campaign',
+  verb: 'test-difficulty-visible',
+  title: 'Show test difficulty',
+  description:
+    'Show or hide recorded test difficulty for players and observers, including historical tests. Public dice, workings and outcomes remain visible.',
+  args: { state: v.string() },
+  argDescriptions: { state: 'on or off.' },
+  roles: ['director'],
+  session: 'none',
+  actor: 'none',
+  execute: async (_ctx, { context, args }) => {
+    const state = String(args.state).toLowerCase();
+    if (state !== 'on' && state !== 'off') throw new ConvexError('"state" must be on or off.');
+    const before = settingsOf(context.campaign);
+    const settings = { ...before, showTestDifficulty: state === 'on' };
+    return {
+      kind: 'campaign.setting',
+      description: `Show test difficulty turned ${state}.`,
+      data: {
+        setting: 'showTestDifficulty',
+        before: before.showTestDifficulty,
+        after: settings.showTestDifficulty,
+      },
       commit: async (mctx, scope) => {
         await journalPatch(mctx, scope, 'campaigns', context.campaign._id, { settings });
       },
@@ -634,5 +683,6 @@ export const tableOperations: OperationDefinition[] = [
   conditionOff,
   ...ADJUSTABLE.map(adjustOperation),
   maliceVisible,
+  testDifficultyVisible,
   healthDisplay,
 ];

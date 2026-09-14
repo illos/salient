@@ -1,6 +1,7 @@
+import { readPinnedSource } from './helpers/pinned-source.ts';
 import { test } from 'vitest';
 import assert from 'node:assert/strict';
-import { existsSync, readFileSync } from 'node:fs';
+import { readFileSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { join } from 'node:path';
 import type {
@@ -45,22 +46,21 @@ function source(rel: string): string {
   let cached = fileCache.get(rel);
   if (cached === undefined) {
     const abs = join(sourceRoot, rel);
-    assert.ok(existsSync(abs), `cited source path missing: ${rel}`);
-    cached = normalize(readFileSync(abs, 'utf8'));
+    cached = normalize(readPinnedSource(root, abs));
     fileCache.set(rel, cached);
   }
   return cached;
 }
 
 function frontmatterNumber(rel: string, key: string): number {
-  const raw = readFileSync(join(sourceRoot, rel), 'utf8');
+  const raw = readPinnedSource(root, join(sourceRoot, rel));
   const match = new RegExp(`^${key}: (\\d+)$`, 'm').exec(raw);
   assert.ok(match, `${rel} has no numeric frontmatter ${key}`);
   return Number(match[1]);
 }
 
 function frontmatterText(rel: string, key: string): string {
-  const raw = readFileSync(join(sourceRoot, rel), 'utf8');
+  const raw = readPinnedSource(root, join(sourceRoot, rel));
   const match = new RegExp(`^${key}: "?([^"\\n]+)"?$`, 'm').exec(raw);
   assert.ok(match, `${rel} has no frontmatter ${key}`);
   return normalize(match[1]!);

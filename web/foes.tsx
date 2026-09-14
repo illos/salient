@@ -144,7 +144,17 @@ export function FoesPanel({
             ) : (
               <div className="rule-soft flex flex-col gap-2 py-3" key={foe.id}>
                 <strong className="text-sm">{foe.name}</strong>
-                <progress aria-label={`${foe.name} Stamina`} value={foe.healthFraction} max={1} />
+                {foe.health.mode === 'bar' ? (
+                  <progress
+                    aria-label={`${foe.name} Stamina`}
+                    value={foe.health.fraction}
+                    max={1}
+                  />
+                ) : foe.health.mode === 'numerical' ? (
+                  <span>{foe.health.stamina} Stamina</span>
+                ) : foe.health.mode === 'winded' ? (
+                  <span>{foe.health.winded ? 'Winded' : 'Not winded'}</span>
+                ) : null}
               </div>
             ),
           )}

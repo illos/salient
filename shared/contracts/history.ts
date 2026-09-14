@@ -13,8 +13,10 @@ export type { EncounterId, LogEntryId };
 export type CampaignId = string;
 export type SessionId = string;
 export type UserId = string;
-/** The caller-generated command identity; also the undo unit (see `CommandUnit`). */
+/** The caller-generated request ID; authenticated issuer scoping supplies the undo identity. */
 export type CommandId = string;
+/** Server-derived authenticated issuer plus command ID; never supplied by a client. */
+export type CommandKey = string;
 export type SnapshotId = string;
 export type RollId = string;
 
@@ -52,8 +54,9 @@ export interface HistoryEvent {
   /** Required when `origin` is `user`; optional otherwise. */
   actorId?: UserId;
   actorName?: string;
-  /** The undo unit this event belongs to. Automatic consequences reuse their cause's command id. */
+  /** Public request ID; automatic consequences retain their cause's ID and scoped key. */
   commandId: CommandId;
+  commandKey?: CommandKey;
   /** For automatic consequences: the event that caused this one. */
   causeEventId: LogEntryId | null;
   disposition: EventDisposition;
@@ -75,6 +78,7 @@ export interface ChangeRecord {
   campaignId: CampaignId;
   eventId: LogEntryId;
   commandId: CommandId;
+  commandKey?: CommandKey;
   ordinal: number;
   entityTable: string;
   entityId: string;
@@ -86,11 +90,12 @@ export interface ChangeRecord {
 
 /**
  * The undo unit: one user-initiated command and every automatic consequence recorded under the same
- * `commandId`. Its journal is every `ChangeRecord` with that command id ordered by (event sequence,
- * ordinal); undo reverses the whole list from last to first, redo replays it from first to last.
+ * authenticated `commandKey`. Its journal is every `ChangeRecord` with that scoped key ordered by
+ * (event sequence, ordinal); undo reverses the whole list from last to first, redo replays it from first to last.
  */
 export interface CommandUnit {
   commandId: CommandId;
+  commandKey: CommandKey;
   events: HistoryEvent[];
   changes: ChangeRecord[];
 }
@@ -122,6 +127,8 @@ export interface DieResult extends DieSpec {
 /** Roll request accepted by the shared dice operation (dice-roller-spec section 4). */
 export interface DiceRollRequest {
   campaignId: CampaignId;
+  /** Supplied only by authenticated server code; null denotes independent system work. */
+  issuerId: UserId | null;
   /** Retrying with the same id and the same dice returns the same accepted roll. */
   commandId: CommandId;
   dice: DieSpec[];

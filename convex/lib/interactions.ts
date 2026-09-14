@@ -14,7 +14,7 @@ import { ConvexError } from 'convex/values';
 import type { Doc, Id } from '../_generated/dataModel';
 import type { MutationCtx } from '../_generated/server';
 import type { BoundActor, CommandEnvelope } from '../../shared/commands/envelope';
-import type { OperationResult, RespondsTo, TableContext } from './registry';
+import type { OperationResult, Outcome, RespondsTo, TableContext } from './registry';
 
 export type Runner = (
   ctx: MutationCtx,
@@ -25,7 +25,12 @@ export type Runner = (
 
 /** The requester or the Director may answer or close a card. Visibility never grants permission. */
 export function mayAnswer(interaction: Doc<'interactions'>, context: TableContext): boolean {
-  return context.role === 'director' || interaction.requesterId === context.user._id;
+  return (
+    (context.role === 'director' || interaction.requesterId === context.user._id) &&
+    interaction.status === 'awaiting-input' &&
+    interaction.sessionId === (context.session?._id ?? null) &&
+    context.session?.status !== 'closed'
+  );
 }
 
 export async function scopedInteraction(
@@ -37,6 +42,17 @@ export async function scopedInteraction(
   if (!interaction || interaction.campaignId !== context.campaign._id)
     throw new ConvexError('Interaction unavailable.');
   return interaction;
+}
+
+/** A historical card is inspectable, but neither answer nor closure can move it to another session. */
+function requireOwningSession(interaction: Doc<'interactions'>, context: TableContext): void {
+  if (
+    interaction.sessionId !== (context.session?._id ?? null) ||
+    context.session?.status === 'closed'
+  )
+    throw new ConvexError(
+      'This card’s owning session is no longer active. Closed sessions are read-only.',
+    );
 }
 
 export async function respondToInteraction(
@@ -53,6 +69,7 @@ export async function respondToInteraction(
 ): Promise<OperationResult> {
   const { context } = input;
   const interaction = await scopedInteraction(ctx, context, input.interactionId);
+  requireOwningSession(interaction, context);
   if (interaction.status !== 'awaiting-input')
     throw new ConvexError(`This card is already ${interaction.status}.`);
   if (input.expectedRevision !== undefined && interaction.revision !== input.expectedRevision)
@@ -60,9 +77,9 @@ export async function respondToInteraction(
   if (!mayAnswer(interaction, context))
     throw new ConvexError('Only the person who opened this card or the Director can answer it.');
   const bound = interaction.boundActor as BoundActor | null;
-  if (input.actor && bound && input.actor.id !== bound.id)
+  if (input.actor && (!bound || input.actor.id !== bound.id || input.actor.kind !== bound.kind))
     throw new ConvexError(
-      `This card is bound to ${bound.name}; it does not act for ${input.actor.name}.`,
+      `This card is bound to ${bound?.name ?? 'no character'}; it does not act for ${input.actor.name}.`,
     );
   if (typeof input.answer !== 'object' || input.answer === null || Array.isArray(input.answer))
     throw new ConvexError('The answer must be an object of the card’s inputs.');
@@ -75,9 +92,9 @@ export async function respondToInteraction(
   const envelope: CommandEnvelope = {
     ...continuation,
     commandId: input.commandId,
-    actor:
-      continuation.actor ??
-      (input.actor ? { refKind: input.actor.kind, id: input.actor.id } : null),
+    // Stable identity is authoritative, including the absence of an actor. The runner rechecks
+    // current table membership and control of that same entity, even after a rename.
+    actor: bound ? { refKind: bound.kind, id: bound.id } : null,
     arguments: { ...continuation.arguments, ...(answer as CommandEnvelope['arguments']) },
   };
   const result = await input.run(ctx, context, envelope, {
@@ -95,23 +112,32 @@ export async function respondToInteraction(
   return result;
 }
 
-/** Closes a card without answering it. No continuation runs; nothing is applied. */
+/** Validate closure now; the runner records an attributed event before committing the status. */
 export async function closeInteraction(
   ctx: MutationCtx,
   context: TableContext,
   interactionId: Id<'interactions'>,
   expectedRevision?: number,
-): Promise<void> {
+): Promise<Outcome> {
   const interaction = await scopedInteraction(ctx, context, interactionId);
+  requireOwningSession(interaction, context);
   if (interaction.status !== 'awaiting-input')
     throw new ConvexError(`This card is already ${interaction.status}.`);
   if (expectedRevision !== undefined && interaction.revision !== expectedRevision)
     throw new ConvexError('This card changed. Refresh and try again.');
   if (!mayAnswer(interaction, context))
     throw new ConvexError('Only the person who opened this card or the Director can close it.');
-  await ctx.db.patch(interaction._id, {
-    status: 'closed',
-    revision: interaction.revision + 1,
-    resolvedAt: Date.now(),
-  });
+  return {
+    kind: 'interaction.closed',
+    description: `${interaction.actorLabel ?? 'Table roll'} — card closed without an answer.`,
+    causeEventId: interaction.openedEventId,
+    data: { interactionId: interaction._id, status: 'closed' },
+    commit: async ctx => {
+      await ctx.db.patch(interaction._id, {
+        status: 'closed',
+        revision: interaction.revision + 1,
+        resolvedAt: Date.now(),
+      });
+    },
+  };
 }

@@ -4,7 +4,7 @@
 // journal rows, Recovery arithmetic against R04 example 10.9, and foe visibility (Q-REC-1). Every
 // assertion reads persisted rows or a query back; mutation results only locate rows.
 import { describe, expect, test } from 'vitest';
-import { api } from '../../convex/_generated/api';
+import { api, internal } from '../../convex/_generated/api';
 import type { Id } from '../../convex/_generated/dataModel';
 import { backend, storedEvents, table, type Backend } from './fixtures/table';
 
@@ -186,6 +186,7 @@ describe('A03 table operations', () => {
   test('acceptance 4: /hero recover against R04 example 10.9 (recovery value 10, cap at 30)', async () => {
     const t = backend();
     const { player, campaignId, thornId } = await table(t);
+    await t.mutation(internal.content.reseed, {});
     // Maximum 30 and Recoveries 10 supplied through the Director's provisional adjustments would be
     // the app route; the fixture writes them directly to keep the arithmetic case isolated.
     const live = {
@@ -400,7 +401,11 @@ describe('A03 table operations', () => {
       temporaryStamina: 0,
       winded: true,
     });
-    expect(forDirector.settings).toEqual({ showMalice: false, healthDisplay: 'winded' });
+    expect(forDirector.settings).toEqual({
+      showMalice: false,
+      showTestDifficulty: false,
+      healthDisplay: 'winded',
+    });
     expect(payload.settings).toBeNull();
     // Slain marker at zero, and the Manual adjustment entry with before/after.
     const zero = await director.client.mutation(api.commands.invoke, {

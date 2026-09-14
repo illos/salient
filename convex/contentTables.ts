@@ -11,12 +11,14 @@ export const contentTables = {
     kind: v.string(),
     name: v.string(),
     sourcePath: v.string(),
+    jsonPath: v.optional(v.string()),
     selection: v.string(),
     revision: v.string(),
     // The complete source file, byte-exact.
     text: v.string(),
     // Frontmatter fields copied verbatim from the source; keys and values are the source's own.
     structured: v.any(),
+    features: v.optional(v.array(v.any())),
   })
     .index('by_contentId', ['contentId'])
     .index('by_kind', ['kind']),

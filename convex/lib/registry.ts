@@ -31,10 +31,11 @@ import { rollDice } from './dice';
 import { appendEvent } from './events';
 import type { JournalScope } from './journal';
 import { tableOperations } from './tableOperations';
-import { respondToInteraction } from './interactions';
+import { foeOperations } from './foeOperations';
+import { closeInteraction, respondToInteraction } from './interactions';
 
 export type Role = 'director' | 'player' | 'observer';
-export type SessionRequirement = 'none' | 'active' | 'running';
+export type SessionRequirement = 'none' | 'active' | 'running' | 'unpaused';
 export type ActorUsage = 'none' | 'optional' | 'required';
 
 /** Who is calling, at which table, in which session, as whom. Evaluated again on every execution. */
@@ -73,6 +74,7 @@ export type Outcome =
   | {
       kind: string;
       description: string;
+      causeEventId?: Id<'events'>;
       dice?: DieResult[];
       data?: unknown;
       /** Journaled state writes for this event, run after the event row exists (A03). */
@@ -239,9 +241,12 @@ export function unavailableReason(
   const spelling = `/${operation.family} ${operation.verb}`;
   if (!operation.roles.includes(context.role))
     return `${spelling} is for ${operation.roles.map(role => roleLabel[role]).join(' or ')}; you are ${roleLabel[context.role]} here.`;
-  if (operation.session !== 'none' && !context.session)
+  if ((operation.session === 'active' || operation.session === 'running') && !context.session)
     return `${spelling} needs an active session; the Director starts one first.`;
-  if (operation.session === 'running' && context.session?.status === 'paused')
+  if (
+    (operation.session === 'running' || operation.session === 'unpaused') &&
+    context.session?.status === 'paused'
+  )
     return `The session is paused; ${spelling} waits until the Director resumes it.`;
   return null;
 }
@@ -373,7 +378,7 @@ const tableRoll: OperationDefinition = {
             schemaVersion: 1,
             campaignId: envelope.campaignId,
             operation: tableRoll.id,
-            actor: envelope.actor,
+            actor: actor ? { refKind: actor.kind, id: actor.id } : null,
             arguments: envelope.arguments,
           },
         },
@@ -385,6 +390,7 @@ const tableRoll: OperationDefinition = {
       context.campaign._id,
       envelope.commandId,
       diceFrom(expression),
+      context.user._id,
     );
     const faces = accepted.dice.map(die => die.value).join(', ');
     return {
@@ -406,10 +412,12 @@ const cardRespond: OperationDefinition = {
   args: {
     card: v.object({ refKind: v.literal('interaction'), id: v.string() }),
     answer: v.object({ record: v.any() }),
+    revision: v.optional(v.number()),
   },
   argDescriptions: {
     card: 'The interaction, as @{interaction:id}.',
     answer: 'A record of the card’s inputs, for example {"dice":"2d10"}.',
+    revision: 'Expected card revision, when supplied.',
   },
   roles: ['director', 'player', 'observer'],
   session: 'none',
@@ -424,9 +432,35 @@ const cardRespond: OperationDefinition = {
       answer: plain(invocation.args.answer as ParsedValue),
       commandId: invocation.envelope.commandId,
       actor: invocation.actor,
+      expectedRevision: invocation.args.revision as number | undefined,
       run,
     });
     return { delegated: result };
+  },
+};
+
+const cardClose: OperationDefinition = {
+  id: 'card.close',
+  family: 'card',
+  verb: 'close',
+  title: 'Close a card',
+  description: 'Close a pending interaction without answering it; records who closed it.',
+  args: {
+    card: v.object({ refKind: v.literal('interaction'), id: v.string() }),
+    revision: v.optional(v.number()),
+  },
+  argDescriptions: {
+    card: 'The interaction, as @{interaction:id}.',
+    revision: 'Expected card revision, when supplied.',
+  },
+  roles: ['director', 'player', 'observer'],
+  session: 'none',
+  actor: 'none',
+  execute: async (ctx, { context, args }) => {
+    const card = args.card as { id: string };
+    const id = ctx.db.normalizeId('interactions', card.id);
+    if (!id) throw new ConvexError('That interaction id is not valid.');
+    return closeInteraction(ctx, context, id, args.revision as number | undefined);
   },
 };
 
@@ -434,7 +468,9 @@ export const operations: OperationDefinition[] = [
   sessionNote,
   tableRoll,
   cardRespond,
+  cardClose,
   ...tableOperations,
+  ...foeOperations,
 ];
 
 export function findOperation(id: string): OperationDefinition | undefined {
@@ -506,7 +542,7 @@ export async function run(
     origin: 'user',
     actor: context.user,
     commandId: envelope.commandId,
-    causeEventId: respondsTo?.openedEventId ?? null,
+    causeEventId: respondsTo?.openedEventId ?? outcome.causeEventId ?? null,
     kind: outcome.kind,
     description: outcome.description,
     ...(outcome.dice ? { dice: outcome.dice } : {}),

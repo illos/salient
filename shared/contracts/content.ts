@@ -88,7 +88,7 @@ export interface ContentManifest {
     submodulePath: string;
   };
   generator: { script: string; version: string };
-  /** Calendar date (YYYY-MM-DD) of the last generation whose content differed from the previous one. */
+  /** Reproducible UTC date (YYYY-MM-DD) of the pinned Compendium commit, not the build execution date. */
   generatedAt: string;
   /** SHA-256 over everything in the snapshot except `generatedAt`; changes whenever any entry changes. */
   contentHash: string;

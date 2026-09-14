@@ -8,14 +8,9 @@ import { ConvexError, v } from 'convex/values';
 import { mutation, query } from './_generated/server';
 import type { Doc } from './_generated/dataModel';
 import { requireUser } from './lib/access';
-import { command } from './lib/commands';
-import {
-  closeInteraction,
-  mayAnswer,
-  respondToInteraction,
-  scopedInteraction,
-} from './lib/interactions';
-import { run, tableContext, type TableContext } from './lib/registry';
+import { mayAnswer } from './lib/interactions';
+import { invoke, tableContext, type TableContext } from './lib/registry';
+import type { CommandEnvelope } from '../shared/commands/envelope';
 
 const status = v.union(v.literal('awaiting-input'), v.literal('resolved'), v.literal('closed'));
 const projection = v.object({
@@ -117,24 +112,20 @@ export const respond = mutation({
     const user = await requireUser(ctx);
     const interaction = await ctx.db.get(args.interactionId);
     if (!interaction) throw new ConvexError('Interaction unavailable.');
-    const context = await tableContext(ctx, user, interaction.campaignId);
-    await scopedInteraction(ctx, context, args.interactionId);
-    const receipt = await command(ctx, user._id, args.commandId, 'interactions.respond', {
-      interactionId: args.interactionId,
-      answer: args.answer,
-    });
-    if (receipt.previous) return JSON.parse(receipt.previous.result!);
-    const outcome = await respondToInteraction(ctx, {
-      context,
-      interactionId: args.interactionId,
-      answer: args.answer,
+    if (typeof args.answer !== 'object' || args.answer === null || Array.isArray(args.answer))
+      throw new ConvexError('The answer must be an object of the card’s inputs.');
+    return invoke(ctx, user, {
+      schemaVersion: 1,
+      campaignId: interaction.campaignId,
       commandId: args.commandId,
+      operation: 'card.respond',
       actor: null,
-      expectedRevision: args.expectedRevision,
-      run,
+      arguments: {
+        card: { refKind: 'interaction', id: args.interactionId },
+        answer: { record: args.answer } as CommandEnvelope['arguments'][string],
+        ...(args.expectedRevision === undefined ? {} : { revision: args.expectedRevision }),
+      },
     });
-    await receipt.save(JSON.stringify(outcome));
-    return outcome;
   },
 });
 
@@ -149,13 +140,17 @@ export const close = mutation({
     const user = await requireUser(ctx);
     const interaction = await ctx.db.get(args.interactionId);
     if (!interaction) throw new ConvexError('Interaction unavailable.');
-    const context = await tableContext(ctx, user, interaction.campaignId);
-    const receipt = await command(ctx, user._id, args.commandId, 'interactions.close', {
-      interactionId: args.interactionId,
+    await invoke(ctx, user, {
+      schemaVersion: 1,
+      campaignId: interaction.campaignId,
+      commandId: args.commandId,
+      operation: 'card.close',
+      actor: null,
+      arguments: {
+        card: { refKind: 'interaction', id: args.interactionId },
+        ...(args.expectedRevision === undefined ? {} : { revision: args.expectedRevision }),
+      },
     });
-    if (receipt.previous) return null;
-    await closeInteraction(ctx, context, args.interactionId, args.expectedRevision);
-    await receipt.save(null);
     return null;
   },
 });

@@ -105,9 +105,7 @@ test('reference screenshots: login, campaign home and character list in light an
   await expect(page.getByRole('heading', { name: `Blackcastle ${stamp}` })).toBeVisible();
   await expect(page.getByRole('status').filter({ hasText: 'Connected' })).toBeVisible();
   await page.getByRole('button', { name: 'Add foe' }).click();
-  await expect(
-    page.getByText('Visible to players').or(page.getByText('Hidden from players')),
-  ).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Inspect source', exact: true })).toBeVisible();
   await settled(page);
   await page.screenshot({ path: `${SHOTS}/campaign-home-light.png`, fullPage: true });
   await appearance(page).getByRole('button', { name: 'Dark' }).click();

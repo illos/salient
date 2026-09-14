@@ -13,10 +13,12 @@ const entryValidator = v.object({
   kind: v.string(),
   name: v.string(),
   sourcePath: v.string(),
+  jsonPath: v.optional(v.string()),
   selection: v.string(),
   revision: v.string(),
   text: v.string(),
   structured: v.any(),
+  features: v.optional(v.array(v.any())),
 });
 const summaryValidator = v.object({
   id: v.string(),
@@ -36,6 +38,8 @@ function project(row: Doc<'content'>) {
     revision: row.revision,
     text: row.text,
     structured: row.structured,
+    ...(row.jsonPath !== undefined ? { jsonPath: row.jsonPath } : {}),
+    ...(row.features !== undefined ? { features: row.features } : {}),
   };
 }
 
@@ -133,6 +137,8 @@ export const reseed = internalMutation({
         revision,
         text: entry.text,
         structured: entry.structured,
+        jsonPath: entry.jsonPath,
+        ...(entry.features !== undefined ? { features: entry.features } : {}),
       });
     await ctx.db.insert('contentManifest', {
       revision,

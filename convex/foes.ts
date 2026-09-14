@@ -1,58 +1,18 @@
 // SPDX-License-Identifier: GPL-3.0-only
 import { ConvexError, v } from 'convex/values';
 import { mutation, query } from './_generated/server';
-import type { Doc, Id } from './_generated/dataModel';
-import { requireDirector, requireMember, requireUser, type ReadCtx } from './lib/access';
+import { requireDirector, requireMember, requireUser } from './lib/access';
 import { command } from './lib/commands';
 import { appendEvent } from './lib/events';
 import { requireContent } from './content';
+import { projectFoeHealth, foeHealthValidator, settingsOf } from './lib/audience';
 
-// The only foe definition available in v0.01: the Goblin Warrior entry of the content snapshot.
-export const GOBLIN_WARRIOR_ID = 'mcdm.monsters.v1/monster.goblin.statblock/goblin-warrior';
+import { GOBLIN_WARRIOR_ID, settings, scopedFoe, snapshotOf } from './lib/foeSource';
+import { invoke } from './lib/registry';
 
-/** Immutable copy of the source entry stored with each instance, separate from its play state. */
-function snapshotOf(entry: Doc<'content'>): string {
-  return JSON.stringify({
-    id: entry.contentId,
-    name: entry.name,
-    sourcePath: entry.sourcePath,
-    revision: entry.revision,
-    text: entry.text,
-    structured: entry.structured,
-  });
-}
-/**
- * The printed Stamina of a stat block (frontmatter `stamina`, a string such as "15"). Only a plain
- * whole number is accepted; anything else stays unresolved rather than becoming a default.
- */
-function printedStamina(entry: Doc<'content'>): number {
-  const printed: unknown = (entry.structured as Record<string, unknown> | null)?.stamina;
-  if (typeof printed !== 'string' || !/^\d+$/.test(printed))
-    throw new ConvexError(
-      `${entry.name}: printed Stamina "${String(printed)}" is not a whole number.`,
-    );
-  return Number(printed);
-}
-async function settings(ctx: ReadCtx, campaignId: Id<'campaigns'>) {
-  return ctx.db
-    .query('foeSettings')
-    .withIndex('by_campaign', q => q.eq('campaignId', campaignId))
-    .unique();
-}
-/** Roster lock while paused (docs/table-spec.md#4-session-status-and-play-mode): no add or remove. */
-async function requireNotPaused(ctx: ReadCtx, campaign: Doc<'campaigns'>) {
-  const session = campaign.activeSessionId ? await ctx.db.get(campaign.activeSessionId) : null;
-  if (session?.status === 'paused')
-    throw new ConvexError(
-      'The session is paused; the foes roster waits until the Director resumes it.',
-    );
-}
-async function scopedFoe(ctx: ReadCtx, campaignId: Id<'campaigns'>, foeId: Id<'foes'>) {
-  const foe = await ctx.db.get(foeId);
-  if (!foe || foe.campaignId !== campaignId) throw new ConvexError('Foe unavailable.');
-  return foe;
-}
-const peerRow = v.object({ id: v.id('foes'), name: v.string(), healthFraction: v.number() });
+export { GOBLIN_WARRIOR_ID } from './lib/foeSource';
+
+const peerRow = v.object({ id: v.id('foes'), name: v.string(), health: foeHealthValidator });
 const directorRow = v.object({
   id: v.id('foes'),
   name: v.string(),
@@ -86,10 +46,17 @@ export const list = query({
         const base = {
           id: foe._id,
           name: foe.name,
-          healthFraction: Math.max(0, Math.min(1, foe.live.stamina / foe.maxStamina)),
+          health: projectFoeHealth(foe, director, settingsOf(campaign).healthDisplay),
         };
         return director
-          ? { ...base, visible: foe.visible, stamina: foe.live.stamina, maxStamina: foe.maxStamina }
+          ? {
+              id: foe._id,
+              name: foe.name,
+              healthFraction: Math.max(0, Math.min(1, foe.live.stamina / foe.maxStamina)),
+              visible: foe.visible,
+              stamina: foe.live.stamina,
+              maxStamina: foe.maxStamina,
+            }
           : base;
       }),
     };
@@ -121,37 +88,23 @@ export const add = mutation({
   handler: async (ctx, args) => {
     const user = await requireUser(ctx);
     const campaign = await requireDirector(ctx, args.campaignId, user._id);
-    const receipt = await command(ctx, user._id, args.commandId, 'foes.add', args);
-    if (receipt.previous) return receipt.previous.result as Id<'foes'>;
-    await requireNotPaused(ctx, campaign);
-    if (args.definitionId !== GOBLIN_WARRIOR_ID)
-      throw new ConvexError('This foe definition is not available in the prototype.');
-    const entry = await requireContent(ctx, GOBLIN_WARRIOR_ID);
-    const maxStamina = printedStamina(entry);
-    const existing = await ctx.db
-      .query('foes')
-      .withIndex('by_campaign', q => q.eq('campaignId', args.campaignId))
-      .take(100);
-    if (existing.length >= 100)
-      throw new ConvexError('Prototype roster limit of 100 foes reached.');
-    const visible = (await settings(ctx, args.campaignId))?.addVisible ?? false;
-    const foeId = await ctx.db.insert('foes', {
-      campaignId: args.campaignId,
-      name: entry.name,
-      visible,
-      sourceSnapshot: snapshotOf(entry),
-      maxStamina,
-      live: { stamina: maxStamina, temporaryStamina: 0 },
-    });
-    await appendEvent(ctx, {
-      campaignId: args.campaignId,
-      origin: 'user',
-      actor: user,
+    void campaign;
+    const result = await invoke(ctx, user, {
+      schemaVersion: 1,
       commandId: args.commandId,
-      kind: 'foe-added',
-      description: `${entry.name} added to the foes roster.`,
+      campaignId: args.campaignId,
+      operation: 'foe.add',
+      actor: null,
+      arguments: { definition: args.definitionId },
     });
-    await receipt.save(foeId);
+    // The registry journals the insert; reading its immutable row also works on retries after removal.
+    const creation = await ctx.db
+      .query('changes')
+      .withIndex('by_event', q => q.eq('eventId', result.eventId))
+      .first();
+    const foeId =
+      creation?.entityTable === 'foes' ? ctx.db.normalizeId('foes', creation.entityId) : null;
+    if (!foeId) throw new ConvexError('Foe creation did not record its instance.');
     return foeId;
   },
 });
@@ -161,20 +114,15 @@ export const remove = mutation({
   handler: async (ctx, args) => {
     const user = await requireUser(ctx);
     const campaign = await requireDirector(ctx, args.campaignId, user._id);
-    const receipt = await command(ctx, user._id, args.commandId, 'foes.remove', args);
-    if (receipt.previous) return null;
-    await requireNotPaused(ctx, campaign);
-    const foe = await scopedFoe(ctx, args.campaignId, args.foeId);
-    await ctx.db.delete(foe._id);
-    await appendEvent(ctx, {
-      campaignId: args.campaignId,
-      origin: 'user',
-      actor: user,
+    void campaign;
+    await invoke(ctx, user, {
+      schemaVersion: 1,
       commandId: args.commandId,
-      kind: 'foe-removed',
-      description: `${foe.name} removed from the foes roster.`,
+      campaignId: args.campaignId,
+      operation: 'foe.remove',
+      actor: { refKind: 'foe', id: args.foeId },
+      arguments: {},
     });
-    await receipt.save(null);
     return null;
   },
 });

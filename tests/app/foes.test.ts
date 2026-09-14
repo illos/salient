@@ -57,7 +57,7 @@ async function setup() {
 }
 
 describe('persistent campaign foes', () => {
-  test('Director loads independent sourced foes; hidden entries and source data never enter peer roster payloads', async () => {
+  test('Director loads independent sourced foes; peers see every foe through the selected health projection', async () => {
     const { t, director, player, campaignId, catalog } = await setup();
     const first = await director.client.mutation(api.foes.add, {
       campaignId,
@@ -75,8 +75,8 @@ describe('persistent campaign foes', () => {
     expect(
       (await player.client.query(api.foes.list, { campaignId })).rows.map(row => Object.keys(row)),
     ).toEqual([
-      ['healthFraction', 'id', 'name'],
-      ['healthFraction', 'id', 'name'],
+      ['health', 'id', 'name'],
+      ['health', 'id', 'name'],
     ]);
     const loaded = await director.client.query(api.foes.detail, { campaignId, foeId: first });
     const snapshot = JSON.parse(loaded.sourceSnapshot);
@@ -101,8 +101,8 @@ describe('persistent campaign foes', () => {
       director: false,
       addVisible: null,
       rows: [
-        { id: first, name: 'Goblin Warrior', healthFraction: 0.2 },
-        { id: second, name: 'Goblin Warrior', healthFraction: 1 },
+        { id: first, name: 'Goblin Warrior', health: { mode: 'bar', fraction: 0.2 } },
+        { id: second, name: 'Goblin Warrior', health: { mode: 'bar', fraction: 1 } },
       ],
     });
     expect(await t.run(async ctx => (await ctx.db.get(second))?.live.stamina)).toBe(15);
@@ -162,7 +162,7 @@ describe('persistent campaign foes', () => {
         foeId,
         commandId: 'foreign-remove',
       }),
-    ).rejects.toThrow('Foe unavailable');
+    ).rejects.toThrow('That actor is not at this table');
     await expect(
       director.client.mutation(api.foes.setVisible, {
         campaignId: otherCampaign,
@@ -336,6 +336,11 @@ describe('persistent campaign foes', () => {
           .take(30)
       ).filter(event => event.kind.startsWith('foe-')),
     );
-    expect(foeEvents.every(event => event.sessionId === null)).toBe(true);
+    expect(foeEvents.find(event => event.commandId === 'before-session')?.sessionId).toBeNull();
+    expect(foeEvents.find(event => event.commandId === 'after-session')?.sessionId).toBeNull();
+    expect(foeEvents.find(event => event.commandId === 'resumed-session')?.sessionId).toBe(
+      sessionId,
+    );
+    expect(foeEvents.find(event => event.commandId === 'combat-remove')?.sessionId).toBe(sessionId);
   });
 });

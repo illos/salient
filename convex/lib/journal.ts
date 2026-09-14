@@ -6,6 +6,7 @@
 import { ConvexError } from 'convex/values';
 import type { DataModel, Doc, Id, TableNames } from '../_generated/dataModel';
 import type { MutationCtx } from '../_generated/server';
+import { commandKey } from './commands';
 import type { JournalValue } from '../../shared/contracts/history';
 
 /** Which event a set of changes belongs to. The event carries the command id (the undo unit). */
@@ -48,7 +49,11 @@ export function diffFields(
     const before = current[key];
     const after = patch[key];
     if (isPlainObject(before) && isPlainObject(after)) {
-      out.push(...diffFields(before, after, path));
+      // Convex patches replace a nested object in full: omitted nested keys are deletions.
+      const replacement = Object.fromEntries(
+        [...new Set([...Object.keys(before), ...Object.keys(after)])].map(key => [key, after[key]]),
+      );
+      out.push(...diffFields(before, replacement, path));
       continue;
     }
     if (equal(before, after)) continue;
@@ -97,6 +102,7 @@ export async function journalPatch<T extends TableNames>(
       campaignId: scope.campaignId,
       eventId: scope.eventId,
       commandId: event.commandId,
+      commandKey: event.commandKey,
       ordinal: ordinal++,
       entityTable: table,
       entityId: id,
@@ -120,6 +126,7 @@ export async function journalInsert<T extends TableNames>(
     campaignId: scope.campaignId,
     eventId: scope.eventId,
     commandId: event.commandId,
+    commandKey: event.commandKey,
     ordinal: await nextOrdinal(ctx, scope.eventId),
     entityTable: table,
     entityId: id,
@@ -150,6 +157,7 @@ export async function journalDelete<T extends TableNames>(
     campaignId: scope.campaignId,
     eventId: scope.eventId,
     commandId: event.commandId,
+    commandKey: event.commandKey,
     ordinal: await nextOrdinal(ctx, scope.eventId),
     entityTable: table,
     entityId: id,
@@ -160,16 +168,17 @@ export async function journalDelete<T extends TableNames>(
   await ctx.db.delete(id);
 }
 
-/** The journal of one undo unit in application order: (event sequence, ordinal). */
+/** The journal of one authenticated issuer’s undo unit in application order: (event sequence, ordinal). */
 export async function commandJournal(
   ctx: { db: MutationCtx['db'] },
   campaignId: Id<'campaigns'>,
   commandId: string,
+  issuerId: Id<'users'> | null,
 ) {
   const events = await ctx.db
     .query('events')
-    .withIndex('by_campaign_command', q =>
-      q.eq('campaignId', campaignId).eq('commandId', commandId),
+    .withIndex('by_campaign_command_key', q =>
+      q.eq('campaignId', campaignId).eq('commandKey', commandKey(issuerId, commandId)),
     )
     .take(1000);
   events.sort((a, b) => a.sequence - b.sequence);

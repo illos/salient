@@ -1,6 +1,7 @@
+import { readPinnedSource } from './helpers/pinned-source.ts';
 import { test } from 'vitest';
 import assert from 'node:assert/strict';
-import { readFileSync, existsSync } from 'node:fs';
+import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { execFileSync } from 'node:child_process';
 
@@ -111,8 +112,7 @@ function source(rel: string): string {
   let cached = fileCache.get(rel);
   if (cached === undefined) {
     const abs = join(sourceRoot, rel);
-    assert.ok(existsSync(abs), `cited source path missing: ${rel}`);
-    cached = normalize(readFileSync(abs, 'utf8'));
+    cached = normalize(readPinnedSource(root, abs));
     fileCache.set(rel, cached);
   }
   return cached;
@@ -266,7 +266,7 @@ function validate(selections: Record<string, Selection>): {
 test('R01 check 1: every source step appears in source order with an existing path', () => {
   const chapter = 'en/unified/md/chapter/making-a-hero.md';
   const headings = [
-    ...readFileSync(join(sourceRoot, chapter), 'utf8').matchAll(/^#### (\d+\. .+)$/gm),
+    ...readPinnedSource(root, join(sourceRoot, chapter)).matchAll(/^#### (\d+\. .+)$/gm),
   ].map(m => m[1]!.trim());
   assert.deepEqual(
     data.steps.map(s => s.sourceStep),

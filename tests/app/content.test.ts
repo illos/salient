@@ -1,3 +1,4 @@
+import { readPinnedSource } from '../helpers/pinned-source';
 // SPDX-License-Identifier: GPL-3.0-only
 import { describe, expect, test } from 'vitest';
 import { convexTest } from 'convex-test';
@@ -13,10 +14,13 @@ import { api, components, internal } from '../../convex/_generated/api';
 const modules = import.meta.glob('../../convex/**/*.ts');
 const root = fileURLToPath(new URL('../../', import.meta.url));
 const GOBLIN_WARRIOR = 'mcdm.monsters.v1/monster.goblin.statblock/goblin-warrior';
-const warriorSource = readFileSync(
-  `${root}vendor/steel-compendium/en/unified/md/monster/goblin/statblock/goblin-warrior.md`,
-  'utf8',
+const warriorSource = readPinnedSource(
+  root,
+  'vendor/steel-compendium/en/unified/md/monster/goblin/statblock/goblin-warrior.md',
 );
+const warriorJsonPath =
+  'vendor/steel-compendium/en/unified/json/monster/goblin/statblock/goblin-warrior.json';
+const warriorTwin = JSON.parse(readPinnedSource(root, warriorJsonPath));
 const manifest = JSON.parse(
   readFileSync(`${root}shared/content/compendium/manifest.json`, 'utf8'),
 ) as { compendium: { revision: string }; entryCount: number; contentHash: string };
@@ -83,6 +87,21 @@ describe('shared content snapshot', () => {
       revision: manifest.compendium.revision,
     });
     expect(warrior!.text).toBe(warriorSource);
+    expect(warrior!.jsonPath).toBe(warriorJsonPath);
+    expect(warrior!.features).toEqual(warriorTwin.features);
+    expect(warrior!.features!.map(feature => feature.name)).toEqual([
+      'Spear Charge',
+      'Bury the Point',
+      'Crafty',
+    ]);
+    const persisted = rows.find(row => row.contentId === GOBLIN_WARRIOR)!;
+    expect(persisted.jsonPath).toBe(warriorJsonPath);
+    expect(persisted.features).toEqual(warriorTwin.features);
+    const condition = rows.find(row => row.kind === 'condition')!;
+    expect(condition).not.toHaveProperty('features');
+    expect(await reader.query(api.content.get, { id: condition.contentId })).not.toHaveProperty(
+      'features',
+    );
     // Printed values from the source frontmatter (goblin-warrior.md lines 2-21), unrenamed.
     expect(warrior!.structured).toMatchObject({ stamina: '15', size: '1S', might: -2, level: 1 });
   });

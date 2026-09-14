@@ -33,7 +33,7 @@ import type {
 } from '../shared/contracts/content.ts';
 import { parseFrontmatter, splitFrontmatter, type FrontmatterValue } from './lib/frontmatter.ts';
 
-export const GENERATOR_VERSION = '1.0.0';
+export const GENERATOR_VERSION = '1.0.1';
 export const SCHEMA_VERSION = 's01.1';
 export const SUBMODULE_PATH = 'vendor/steel-compendium';
 export const OUTPUT_DIR = 'shared/content/compendium';
@@ -276,15 +276,8 @@ function canonical(value: unknown): string {
   return `${JSON.stringify(value, null, 2)}\n`;
 }
 
-/**
- * Builds the snapshot in memory. `previous` is the committed manifest, used only to keep
- * `generatedAt` stable while the content hash is unchanged.
- */
-export function buildSnapshot(
-  root = repoRoot,
-  previous: ContentManifest | null = null,
-  today = new Date().toISOString().slice(0, 10),
-): Snapshot {
+/** Builds independently of generated output; metadata is derived from the pinned source commit. */
+export function buildSnapshot(root = repoRoot): Snapshot {
   const compendium = inspectCompendium(root);
   const markdownRoot = join(root, SUBMODULE_PATH, MARKDOWN_ROOT);
   const entries: ContentEntry[] = [];
@@ -363,12 +356,8 @@ export function buildSnapshot(
     files: [...files.entries()],
   };
   const contentHash = `sha256:${createHash('sha256').update(JSON.stringify(hashInput)).digest('hex')}`;
-  const generatedAt =
-    previous &&
-    previous.contentHash === contentHash &&
-    /^\d{4}-\d{2}-\d{2}$/.test(previous.generatedAt)
-      ? previous.generatedAt
-      : today;
+  // This reproducible UTC source date is not the wall-clock execution date.
+  const generatedAt = new Date(compendium.committedAt).toISOString().slice(0, 10);
   const manifest: ContentManifest = {
     schemaVersion: SCHEMA_VERSION,
     compendium: { ...compendium, submodulePath: SUBMODULE_PATH },
@@ -415,16 +404,6 @@ function renderIndex(kinds: string[]): string {
   return lines.join('\n');
 }
 
-export function readCommittedManifest(root = repoRoot): ContentManifest | null {
-  const path = join(root, OUTPUT_DIR, 'manifest.json');
-  if (!existsSync(path)) return null;
-  try {
-    return JSON.parse(readFileSync(path, 'utf8')) as ContentManifest;
-  } catch {
-    return null;
-  }
-}
-
 /** Differences between the generated files and the checked-in directory (names only). */
 export function compareSnapshot(snapshot: Snapshot, root = repoRoot): string[] {
   const directory = join(root, OUTPUT_DIR);
@@ -449,7 +428,7 @@ export function writeSnapshot(snapshot: Snapshot, root = repoRoot): void {
 }
 
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
-  const snapshot = buildSnapshot(repoRoot, readCommittedManifest());
+  const snapshot = buildSnapshot(repoRoot);
   const label = `${snapshot.manifest.entryCount} entries, ${snapshot.manifest.excluded.length} excluded, revision ${snapshot.manifest.compendium.revision.slice(0, 12)}`;
   if (process.argv.includes('--check')) {
     const problems = compareSnapshot(snapshot);

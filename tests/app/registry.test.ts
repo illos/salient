@@ -304,7 +304,7 @@ describe('the shared command path', () => {
     expect(forDirector.map(o => [o.family, o.verb, o.syntax])).toEqual([
       ['session', 'note', '/session note text=…'],
       ['table', 'roll', '[@Actor] /table roll [dice=…]'],
-      ['card', 'respond', '[@Actor] /card respond card=… answer=…'],
+      ['card', 'respond', '[@Actor] /card respond card=… answer=… [revision=…]'],
     ]);
     expect(forDirector[0]!.arguments).toEqual([
       {
@@ -325,6 +325,7 @@ describe('the shared command path', () => {
     expect(forDirector[2]!.arguments.map(a => [a.name, a.type, a.required])).toEqual([
       ['card', 'object', true],
       ['answer', 'object', true],
+      ['revision', 'number', false],
     ]);
     expect(forDirector.map(o => o.available)).toEqual([true, true, true]);
     const forPlayer = (await player.client.query(api.commands.list, { campaignId })).slice(0, 3);

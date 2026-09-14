@@ -1,6 +1,7 @@
+import { readPinnedSource } from './helpers/pinned-source.ts';
 import { test } from 'vitest';
 import assert from 'node:assert/strict';
-import { existsSync, readFileSync } from 'node:fs';
+import { readFileSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { join } from 'node:path';
 import { parseFrontmatter, splitFrontmatter } from '../scripts/lib/frontmatter.ts';
@@ -29,7 +30,7 @@ function example<T>(name: string): T {
   assert.ok(found, `document has no ${name} example`);
   return found as T;
 }
-const vendor = (rel: string) => readFileSync(join(root, rel), 'utf8');
+const vendor = (rel: string) => readPinnedSource(root, rel);
 const snapshot = <K extends string>(kind: K) =>
   JSON.parse(
     readFileSync(join(root, `shared/content/compendium/${kind}.json`), 'utf8'),
@@ -146,7 +147,7 @@ test('R03 check 2: the hero projection lists exactly the R02-granted abilities w
     const grant = baseline.abilities[i];
     assert.equal(a.kind, grant.kind);
     assert.equal(a.metadata.kitBonusesIncluded, grant.kitBonusesIncluded);
-    assert.ok(existsSync(join(root, a.source.path)), `${a.source.path} exists`);
+    assert.ok(vendor(a.source.path), `${a.source.path} exists in the pinned source`);
     assert.equal(a.source.revision, revision);
     const raw = vendor(a.source.path);
     assert.equal(a.text, raw, `${a.name}: text is the complete pinned file`);

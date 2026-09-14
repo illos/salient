@@ -5,6 +5,7 @@
 import { ConvexError } from 'convex/values';
 import type { Doc, Id } from '../_generated/dataModel';
 import type { MutationCtx } from '../_generated/server';
+import { commandKey } from './commands';
 import type { DieResult, EventDisposition, EventOrigin } from '../../shared/contracts/history';
 
 export interface EventInput {
@@ -48,10 +49,17 @@ export async function appendEvent(ctx: MutationCtx, input: EventInput): Promise<
       throw new ConvexError('Encounter unavailable.');
     if (encounter.archivedAt !== null) throw new ConvexError('Archived encounters are read-only.');
   }
+  let key = commandKey(input.origin === 'user' ? input.actor!._id : null, input.commandId);
   if (input.causeEventId) {
     const cause = await ctx.db.get(input.causeEventId);
     if (!cause || cause.campaignId !== input.campaignId)
       throw new ConvexError('Cause event unavailable.');
+    if (input.origin !== 'user') {
+      if (input.commandId !== cause.commandId)
+        throw new ConvexError('Automatic consequences must retain their cause command ID.');
+      if (!cause.commandKey) throw new ConvexError('The cause predates scoped command history.');
+      key = cause.commandKey;
+    }
   }
   const sequence = campaign.eventSequence + 1;
   await ctx.db.patch(input.campaignId, { eventSequence: sequence });
@@ -63,6 +71,7 @@ export async function appendEvent(ctx: MutationCtx, input: EventInput): Promise<
     origin: input.origin,
     ...(input.actor ? { actorId: input.actor._id, actorName: input.actor.displayName } : {}),
     commandId: input.commandId,
+    commandKey: key,
     causeEventId: input.causeEventId ?? null,
     disposition: input.disposition ?? 'applied',
     kind: input.kind,

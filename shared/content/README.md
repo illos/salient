@@ -63,7 +63,7 @@ strips the Markdown links itself; the snapshot keeps them.
 | `compendium.revision` | Submodule commit the snapshot was generated from. Equals `git submodule status` for `vendor/steel-compendium`; the generator refuses any other or a dirty checkout. |
 | `compendium.tag`, `compendium.committedAt` | Upstream tag and commit date of that revision. |
 | `generator` | Script and version that produced the files. Bump the version when the output shape or selection rules change. |
-| `generatedAt` | Date of the last generation whose content differed. Reused from the committed manifest while `contentHash` is unchanged, so `content:check` does not fail merely because a day passed. |
+| `generatedAt` | Reproducible UTC calendar date of the pinned Compendium commit (`committedAt`), not the build execution date. Computed independently of generated files, so date edits are detected and checks do not change as time passes. |
 | `contentHash` | SHA-256 over everything except `generatedAt`. |
 | `selections` | The v0.01 entry list: what was asked for, which source paths were read, and the source statement that grounds the inclusion when it is not simply "the slice names this path". |
 | `entries` | One row per included entry (`id`, `kind`, `name`, `sourcePath`, `selection`, `file`). |
@@ -75,6 +75,8 @@ strips the Markdown links itself; the snapshot keeps them.
 `convex/contentTables.ts` defines `content` (one row per entry, indexed by `contentId` and `kind`)
 and `contentManifest` (one row). `convex/content.ts` exposes `get`, `list` and `status` queries to
 signed-in users, and the internal `reseed` mutation that replaces every row from the bundled
-snapshot. `pnpm content:seed` runs it against the local development deployment only; development
+snapshot, including JSON provenance and optional structured stat-block features. Existing rows may
+omit these fields until reseeded. `pnpm content:seed` runs it against the local development deployment
+only; development
 data is disposable, so a changed snapshot is reseeded, never migrated. `convex/foes.ts` reads the
 Goblin Warrior through this table; a fresh deployment reports "not loaded" until it is seeded.

@@ -1,7 +1,9 @@
 // SPDX-License-Identifier: GPL-3.0-only
 import { describe, expect, test } from 'vitest';
 import { execFileSync } from 'node:child_process';
-import { existsSync, readFileSync } from 'node:fs';
+import { mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { readPinnedSource } from '../helpers/pinned-source';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
@@ -9,7 +11,7 @@ import {
   compareSnapshot,
   INCLUDED_SOURCEBOOKS,
   OUTPUT_DIR,
-  readCommittedManifest,
+  writeSnapshot,
 } from '../../scripts/build-content';
 import { parseFrontmatter, splitFrontmatter } from '../../scripts/lib/frontmatter';
 import type { ContentEntry, ContentManifest } from '../../shared/contracts/content';
@@ -43,9 +45,9 @@ describe('frontmatter parser', () => {
   // vendor/steel-compendium/en/unified/md/monster/goblin/statblock/goblin-warrior.md, lines 2-21.
   test('reads the Goblin Warrior frontmatter line by line', () => {
     const { frontmatter } = splitFrontmatter(
-      readFileSync(
+      readPinnedSource(
+        root,
         join(vendor, 'en/unified/md/monster/goblin/statblock/goblin-warrior.md'),
-        'utf8',
       ),
     );
     expect(parseFrontmatter(frontmatter)).toEqual({
@@ -110,14 +112,36 @@ describe('frontmatter parser', () => {
 
 describe('committed snapshot', () => {
   test('regenerates byte-for-byte from the clean pinned Compendium (pnpm content:check)', () => {
-    const snapshot = buildSnapshot(root, readCommittedManifest(root));
+    const snapshot = buildSnapshot(root);
     expect(compareSnapshot(snapshot, root)).toEqual([]);
   });
   test('detects a hand edit to a generated file', () => {
-    const snapshot = buildSnapshot(root, readCommittedManifest(root));
+    const snapshot = buildSnapshot(root);
     snapshot.files.set('condition.json', `${snapshot.files.get('condition.json')}\n`);
     expect(compareSnapshot(snapshot, root)).toEqual(['condition.json: differs.']);
   });
+  test.each(['9999-99-99', '2020-01-01'])(
+    'detects a hand-edited generation date %s independently',
+    date => {
+      const temporaryRoot = mkdtempSync(join(tmpdir(), 'salient-content-'));
+      try {
+        const snapshot = buildSnapshot(root);
+        writeSnapshot(snapshot, temporaryRoot);
+        const edited = { ...snapshot.manifest, generatedAt: date };
+        writeFileSync(
+          join(temporaryRoot, OUTPUT_DIR, 'manifest.json'),
+          `${JSON.stringify(edited, null, 2)}\n`,
+        );
+        const regenerated = buildSnapshot(root);
+        expect(regenerated.manifest.generatedAt).toBe(
+          new Date(snapshot.manifest.compendium.committedAt).toISOString().slice(0, 10),
+        );
+        expect(compareSnapshot(regenerated, temporaryRoot)).toEqual(['manifest.json: differs.']);
+      } finally {
+        rmSync(temporaryRoot, { recursive: true, force: true });
+      }
+    },
+  );
   test('manifest revision equals the submodule commit and the superproject pin', () => {
     const head = execFileSync('git', ['-C', vendor, 'rev-parse', 'HEAD'], {
       encoding: 'utf8',
@@ -143,7 +167,7 @@ describe('committed snapshot', () => {
     expect(excludedPaths).toContain('chapter/rewards.md');
     for (const row of manifest.excluded) {
       expect(row.scc && INCLUDED_SOURCEBOOKS.has(row.scc.split('/')[0])).toBe(false);
-      expect(existsSync(join(vendor, 'en/unified/md', row.path))).toBe(true);
+      expect(readPinnedSource(root, join(vendor, 'en/unified/md', row.path))).toBeTruthy();
     }
     expect(manifest.gaps.map(gap => gap.topic)).toContain('languages');
   });
@@ -187,7 +211,7 @@ describe('verbatim text and traceable fields', () => {
     '%s is the byte-exact source file %s',
     (id, sourcePath) => {
       const found = entry(id);
-      const raw = readFileSync(join(root, sourcePath), 'utf8');
+      const raw = readPinnedSource(root, sourcePath);
       expect(found.text).toBe(raw);
       const { frontmatter } = splitFrontmatter(raw);
       expect(frontmatter).toMatch(/^name:/m);
@@ -198,7 +222,7 @@ describe('verbatim text and traceable fields', () => {
         expect(frontmatter, `${id} states ${key}`).toMatch(new RegExp(`^${key}:`, 'm'));
         expect(frontmatterStates(frontmatter, value), `${id}.${key} value`).toBe(true);
       }
-      expect(JSON.parse(readFileSync(join(root, found.jsonPath), 'utf8')).name).toBe(found.name);
+      expect(JSON.parse(readPinnedSource(root, found.jsonPath)).name).toBe(found.name);
     },
   );
 
@@ -224,7 +248,7 @@ describe('verbatim text and traceable fields', () => {
       stability: 0,
       stamina: '15',
     });
-    const twin = JSON.parse(readFileSync(join(root, warrior.jsonPath), 'utf8'));
+    const twin = JSON.parse(readPinnedSource(root, warrior.jsonPath));
     expect(warrior.features).toEqual(twin.features);
     expect(warrior.features!.map(feature => (feature as { name: string }).name)).toEqual([
       'Spear Charge',
@@ -267,7 +291,7 @@ describe('verbatim text and traceable fields', () => {
     expect(abilities).toHaveLength(15);
     for (const row of abilities) {
       const found = entry(row.id);
-      const { frontmatter } = splitFrontmatter(readFileSync(join(root, row.sourcePath), 'utf8'));
+      const { frontmatter } = splitFrontmatter(readPinnedSource(root, row.sourcePath));
       for (const key of Object.keys(found.structured))
         expect(frontmatter, `${row.id} states ${key}`).toMatch(new RegExp(`^${key}:`, 'm'));
       expect(found.features).toBeUndefined();

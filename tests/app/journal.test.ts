@@ -228,6 +228,11 @@ describe('change journal', () => {
         after: { present: true, value: 9 },
       },
       {
+        path: 'live.temporaryStamina',
+        before: { present: true, value: 0 },
+        after: { present: false },
+      },
+      {
         path: 'tags',
         before: { present: true, value: ['x'] },
         after: { present: true, value: ['x', 'y'] },
@@ -286,7 +291,7 @@ describe('change journal', () => {
     expect(foe.visible).toBe(true);
     expect(await t.run(ctx => ctx.db.get(created.settingsId))).toBeNull();
     // The journal read back through the shared reader.
-    const journal = await t.run(ctx => commandJournal(ctx, campaignId, commandId));
+    const journal = await t.run(ctx => commandJournal(ctx, campaignId, commandId, user._id));
     expect(journal.events.map(e => [e._id, e.origin])).toEqual([
       [created.eventId, 'user'],
       [created.consequence, 'engine'],
@@ -350,9 +355,9 @@ describe('change journal', () => {
       }),
     );
     expect(none).toBe(0);
-    expect((await t.run(ctx => commandJournal(ctx, campaignId, commandId))).changes).toHaveLength(
-      4,
-    );
+    expect(
+      (await t.run(ctx => commandJournal(ctx, campaignId, commandId, user._id))).changes,
+    ).toHaveLength(4);
     // Journal writes are scoped to their event's campaign.
     const other = await client.mutation(api.campaigns.create, {
       name: 'Other',

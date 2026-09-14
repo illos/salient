@@ -8,10 +8,10 @@
   },
   "generator": {
     "script": "scripts/build-content.ts",
-    "version": "1.0.0"
+    "version": "1.0.1"
   },
-  "generatedAt": "2026-09-14",
-  "contentHash": "sha256:5789ec229151fd74f16958af528505706a3168b4bb2cbf17ac93004d4a972ac2",
+  "generatedAt": "2026-09-08",
+  "contentHash": "sha256:746e8b51d64f379113c8757785f7cd68c287ce814e32476ef5d6dbb7ddfc0cb5",
   "entryCount": 403,
   "selections": [
     {

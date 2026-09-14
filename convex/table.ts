@@ -16,42 +16,14 @@ import { query } from './_generated/server';
 import type { Doc } from './_generated/dataModel';
 import { requireUser } from './lib/access';
 import { tableContext } from './lib/registry';
-import { DEFAULT_SETTINGS, noConditions } from './lib/tableOperations';
+import { conditionsValidator, heroLiveValidator } from './characterTables';
+import { noConditions } from './lib/tableOperations';
+import { foeHealthValidator, projectFoeHealth, settingsOf } from './lib/audience';
 
 export { tableOperations } from './lib/tableOperations';
 
-/** floor(max / 2); winded at or below it (R04 6.3, liveState.ts HealthLabels). */
-function windedValue(maxStamina: number): number {
-  return Math.floor(maxStamina / 2);
-}
-
-export type FoeHealth =
-  | {
-      mode: 'director';
-      stamina: number;
-      maxStamina: number;
-      temporaryStamina: number;
-      winded: boolean;
-    }
-  | { mode: 'numerical'; stamina: number }
-  | { mode: 'bar'; fraction: number }
-  | { mode: 'winded'; winded: boolean };
-
 function projectFoe(foe: Doc<'foes'>, director: boolean, mode: 'bar' | 'numerical' | 'winded') {
-  const winded = foe.live.stamina <= windedValue(foe.maxStamina);
-  const health: FoeHealth = director
-    ? {
-        mode: 'director',
-        stamina: foe.live.stamina,
-        maxStamina: foe.maxStamina,
-        temporaryStamina: foe.live.temporaryStamina,
-        winded,
-      }
-    : mode === 'numerical'
-      ? { mode, stamina: foe.live.stamina }
-      : mode === 'bar'
-        ? { mode, fraction: Math.max(0, Math.min(1, foe.live.stamina / foe.maxStamina)) }
-        : { mode, winded };
+  const health = projectFoeHealth(foe, director, mode);
   return {
     id: foe._id,
     name: foe.name,
@@ -64,11 +36,59 @@ function projectFoe(foe: Doc<'foes'>, director: boolean, mode: 'bar' | 'numerica
 
 export const roster = query({
   args: { campaignId: v.id('campaigns') },
+  returns: v.object({
+    role: v.union(v.literal('director'), v.literal('player'), v.literal('observer')),
+    viewerId: v.id('users'),
+    session: v.union(
+      v.null(),
+      v.object({
+        id: v.id('sessions'),
+        status: v.union(v.literal('running'), v.literal('paused'), v.literal('closed')),
+        revision: v.number(),
+      }),
+    ),
+    malice: v.union(v.number(), v.null()),
+    settings: v.union(
+      v.null(),
+      v.object({
+        showMalice: v.boolean(),
+        showTestDifficulty: v.boolean(),
+        healthDisplay: v.union(v.literal('bar'), v.literal('numerical'), v.literal('winded')),
+      }),
+    ),
+    healthDisplay: v.union(v.literal('bar'), v.literal('numerical'), v.literal('winded')),
+    foes: v.array(
+      v.object({
+        id: v.id('foes'),
+        name: v.string(),
+        slain: v.boolean(),
+        conditions: conditionsValidator,
+        health: foeHealthValidator,
+      }),
+    ),
+    heroes: v.array(
+      v.object({
+        id: v.id('characters'),
+        name: v.string(),
+        ownerId: v.id('users'),
+        ownerName: v.string(),
+        controlled: v.boolean(),
+        live: v.union(
+          v.null(),
+          heroLiveValidator,
+          v.object({
+            stamina: v.union(v.number(), v.null()),
+            recoveries: v.union(v.number(), v.null()),
+          }),
+        ),
+      }),
+    ),
+  }),
   handler: async (ctx, args) => {
     const user = await requireUser(ctx);
     const context = await tableContext(ctx, user, args.campaignId);
     const director = context.role === 'director';
-    const settings = context.campaign.settings ?? DEFAULT_SETTINGS;
+    const settings = settingsOf(context.campaign);
     const foes = await ctx.db
       .query('foes')
       .withIndex('by_campaign', q => q.eq('campaignId', args.campaignId))
@@ -83,8 +103,12 @@ export const roster = query({
         name: character.authored.name,
         ownerId: character.ownerId,
         ownerName: (await ctx.db.get(character.ownerId))?.displayName ?? 'Unknown',
-        controlled: director || character.ownerId === user._id,
-        live: character.liveState,
+        controlled: director || (context.role === 'player' && character.ownerId === user._id),
+        live: !character.liveState
+          ? null
+          : director || character.ownerId === user._id
+            ? character.liveState
+            : { stamina: character.liveState.stamina, recoveries: character.liveState.recoveries },
       })),
     );
     return {

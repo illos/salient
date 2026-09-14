@@ -108,6 +108,7 @@ describe('interactions', () => {
         interactionId: opened.interactionId!,
         answer: { dice: '2d10' },
         commandId: 'answer-guided-roll',
+        expectedRevision: 0,
       }),
     ).toEqual(answered);
     expect(await t.run(ctx => ctx.db.query('rolls').take(10))).toHaveLength(1);

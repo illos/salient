@@ -23,6 +23,7 @@ export default defineSchema({
     settings: v.optional(
       v.object({
         showMalice: v.boolean(),
+        showTestDifficulty: v.optional(v.boolean()),
         healthDisplay: v.union(v.literal('bar'), v.literal('numerical'), v.literal('winded')),
       }),
     ),
@@ -68,6 +69,7 @@ export default defineSchema({
     actorName: v.optional(v.string()),
     /** The undo unit; automatic consequences reuse the id of the user command that caused them. */
     commandId: v.string(),
+    commandKey: v.optional(v.string()),
     causeEventId: v.union(v.id('events'), v.null()),
     disposition: eventDisposition,
     kind: v.string(),
@@ -79,7 +81,8 @@ export default defineSchema({
     .index('by_campaign_sequence', ['campaignId', 'sequence'])
     .index('by_session_sequence', ['sessionId', 'sequence'])
     .index('by_encounter_sequence', ['encounterId', 'sequence'])
-    .index('by_campaign_command', ['campaignId', 'commandId']),
+    .index('by_campaign_command', ['campaignId', 'commandId'])
+    .index('by_campaign_command_key', ['campaignId', 'commandKey']),
   // Pending interactions (action cards) as data; written by lib/registry.ts and lib/interactions.ts.
   interactions: defineTable({
     campaignId: v.id('campaigns'),

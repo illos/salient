@@ -25,6 +25,11 @@ The full repository history downloaded successfully. Checking out every generate
 
 All other tracked files remain available in the local Git object database. For example, use `git -C vendor/steel-compendium ls-tree HEAD:en/books` to inspect the book layout and `git show HEAD:PATH` inside the dependency to read an unchecked-out file. No network request is needed for those tracked files.
 
+Source-evidence tests use `tests/helpers/pinned-source.ts` to read Git blobs at the exact
+superproject pin (including the clean Heroes book and book chapters). They do not require those
+files to be materialized and never fetch or expand sparse checkout. Generated-content builds still
+use the clean checked-out `en/unified/md/` and `en/unified/json/` directories listed above.
+
 Sparse checkout is a local setting and is not propagated by the parent repository. If disk space permits, `git -C vendor/steel-compendium sparse-checkout disable` restores every format. The current working files occupy approximately 34 MB, plus approximately 22 MB of Git data.
 
 Keep upstream files unmodified. Store project notes, transformations, and explicit local corrections outside the dependency. The upstream site labels its data as a work in progress; repository inclusion alone does not establish accuracy or permissions for every item.

@@ -9,7 +9,12 @@ import { dieResult, dieSpec } from './encounterTables';
 import { rollDice } from './lib/dice';
 
 export const roll = internalMutation({
-  args: { campaignId: v.id('campaigns'), commandId: v.string(), dice: v.array(dieSpec) },
+  args: {
+    campaignId: v.id('campaigns'),
+    commandId: v.string(),
+    dice: v.array(dieSpec),
+    issuerId: v.union(v.id('users'), v.null()),
+  },
   returns: v.object({
     rollId: v.id('rolls'),
     commandId: v.string(),
@@ -18,7 +23,7 @@ export const roll = internalMutation({
     audience: v.literal('public'),
   }),
   handler: async (ctx, args) => {
-    const accepted = await rollDice(ctx, args.campaignId, args.commandId, args.dice);
+    const accepted = await rollDice(ctx, args.campaignId, args.commandId, args.dice, args.issuerId);
     return { ...accepted, rollId: accepted.rollId as never };
   },
 });

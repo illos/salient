@@ -52,20 +52,20 @@ test('accounts, invitation approval, session lifecycle, private draft persistenc
   await expect(player.getByRole('heading', { name: `Blackcastle ${stamp}` })).toBeVisible();
   await expect(player.getByRole('button', { name: 'Start session' })).toHaveCount(0);
   await director.getByRole('button', { name: 'Add foe' }).click();
-  await expect(player.getByText('No foes are visible.', { exact: true })).toBeVisible();
-  await expect(player.getByRole('progressbar')).toHaveCount(0);
-  await director.getByRole('button', { name: 'Show', exact: true }).click();
   await expect(player.getByRole('progressbar', { name: 'Goblin Warrior Stamina' })).toHaveCount(1);
   await expect(observer.getByRole('progressbar', { name: 'Goblin Warrior Stamina' })).toHaveCount(
     1,
   );
   await expect(player.getByRole('button', { name: 'Inspect source' })).toHaveCount(0);
   await expect(player.locator('pre')).toHaveCount(0);
-  await director.getByLabel('Show newly added foes to players').check();
+  await expect(director.getByRole('button', { name: 'Show', exact: true })).toHaveCount(0);
+  await expect(director.getByLabel('Show newly added foes to players')).toHaveCount(0);
   await director.getByRole('button', { name: 'Add foe' }).click();
   await expect(player.getByRole('progressbar')).toHaveCount(2);
   await director.reload();
-  await expect(director.getByLabel('Show newly added foes to players')).toBeChecked();
+  await expect(director.getByRole('button', { name: 'Inspect source', exact: true })).toHaveCount(
+    2,
+  );
   // The headless CLI authenticates normally and calls the same persisted operations.
   const campaignId = campaignUrl.split('/').at(-1)!;
   const cliEnv = {
@@ -85,11 +85,10 @@ test('accounts, invitation approval, session lifecycle, private draft persistenc
     [
       'scripts/app.ts',
       'mutation',
-      'foes:setVisible',
+      'foes:remove',
       JSON.stringify({
         campaignId,
         foeId: headlessFoes.rows[0].id,
-        visible: false,
         commandId: crypto.randomUUID(),
       }),
     ],

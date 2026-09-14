@@ -61,6 +61,7 @@ export const encounterTables = {
     eventId: v.id('events'),
     /** The undo unit: the user command whose event (or automatic consequence) made this change. */
     commandId: v.string(),
+    commandKey: v.optional(v.string()),
     /** Order of this change within its event; the journal for a command is (event sequence, ordinal). */
     ordinal: v.number(),
     entityTable: v.string(),
@@ -72,6 +73,7 @@ export const encounterTables = {
   })
     .index('by_event', ['eventId', 'ordinal'])
     .index('by_campaign_command', ['campaignId', 'commandId'])
+    .index('by_campaign_command_key', ['campaignId', 'commandKey'])
     .index('by_entity', ['entityTable', 'entityId']),
   /** Per-campaign generator state: a secret seed and the number of values drawn so far. */
   diceStates: defineTable({
@@ -83,11 +85,14 @@ export const encounterTables = {
   rolls: defineTable({
     campaignId: v.id('campaigns'),
     commandId: v.string(),
+    commandKey: v.optional(v.string()),
     fingerprint: v.string(),
     dice: v.array(dieResult),
     /** Public is the confirmed default; the tower audience is outside v0.01. */
     audience: v.literal('public'),
     counterStart: v.number(),
     createdAt: v.number(),
-  }).index('by_campaign_command', ['campaignId', 'commandId']),
+  })
+    .index('by_campaign_command', ['campaignId', 'commandId'])
+    .index('by_campaign_command_key', ['campaignId', 'commandKey']),
 };
