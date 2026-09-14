@@ -27,8 +27,15 @@ function fixture() {
     const fs = require('node:fs');
     const args = process.argv.slice(2);
     fs.appendFileSync('calls.jsonl', JSON.stringify(args) + '\\n');
-    if (args[0] !== 'env' || !['get', 'set'].includes(args[1])) process.exit(80);
     if (args.at(-2) !== '--env-file' || args.at(-1) !== '.env.local') process.exit(81);
+    if (args[0] === 'data' && args.length === 3) { console.log('events\\nsessions\\nusers'); process.exit(0); }
+    if (args[0] === 'import') {
+      if (args[1] !== '--table' || args[3] !== '--replace' || args[4] !== '--yes') process.exit(82);
+      if (fs.readFileSync(args[5], 'utf8') !== '') process.exit(83);
+      if (process.env.REVIEW_FAIL_RESET === args[2]) { console.error('Simulated import failure'); process.exit(13); }
+      process.exit(0);
+    }
+    if (args[0] !== 'env' || !['get', 'set'].includes(args[1])) process.exit(80);
     if (args[1] === 'get') {
       if (process.env.REVIEW_FAIL_LOOKUP === 'true') { console.error('Simulated read failure'); process.exit(12); }
       console.log('existing-test-secret');
@@ -47,8 +54,8 @@ function fixture() {
   return {
     cwd,
     env,
-    run: (overrides: NodeJS.ProcessEnv = {}) =>
-      spawnSync(process.execPath, [script], {
+    run: (overrides: NodeJS.ProcessEnv = {}, args: string[] = []) =>
+      spawnSync(process.execPath, [script, ...args], {
         cwd,
         env: { ...env, ...overrides },
         encoding: 'utf8',
@@ -109,4 +116,33 @@ test('existing secret is preserved and every settings operation selects the vali
   expect(readFileSync(join(setup.cwd, '.env.local'), 'utf8')).toBe(
     localEnv.replace('VITE_LOCAL_PROXY=false', 'VITE_LOCAL_PROXY=true'),
   );
+});
+
+test('--reset-data empties every deployed table through the validated local file before finishing setup', async () => {
+  const setup = fixture();
+  const result = setup.run({}, ['--reset-data']);
+  expect(result.status, result.stderr).toBe(0);
+  const tables = ['events', 'sessions', 'users'];
+  const calls = setup.calls();
+  expect(calls.slice(0, 2)).toEqual([
+    ['env', 'get', 'BETTER_AUTH_SECRET', '--env-file', '.env.local'],
+    ['data', '--env-file', '.env.local'],
+  ]);
+  expect(calls.slice(2, 2 + tables.length).map(call => call.slice(0, 5))).toEqual(
+    tables.map(table => ['import', '--table', table, '--replace', '--yes']),
+  );
+  expect(calls.slice(2 + tables.length).map(call => call.slice(0, 3))).toEqual([
+    ['env', 'set', 'SITE_URL'],
+    ['env', 'set', 'ADDITIONAL_TRUSTED_ORIGINS'],
+  ]);
+  expect(result.stdout).toContain(`Reset ${tables.length} tables`);
+});
+
+test('a failed table reset stops before any settings write and leaves the local file intact', () => {
+  const setup = fixture();
+  const result = setup.run({ REVIEW_FAIL_RESET: 'events' }, ['--reset-data']);
+  expect(result.status).not.toBe(0);
+  expect(result.stderr).toContain('Could not reset table events');
+  expect(setup.calls().some(call => call[0] === 'env' && call[1] === 'set')).toBe(false);
+  expect(readFileSync(join(setup.cwd, '.env.local'), 'utf8')).toBe(localEnv);
 });

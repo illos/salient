@@ -592,6 +592,8 @@ gameplay operation added. Types are in `shared/contracts/history.ts`; tables in
   keyed by (campaign, `commandId`): a retry with the same id and dice returns the same faces; the
   same id with different dice is rejected. Clients never supply faces. Audience is recorded as
   `public`; the tower audience is outside v0.01.
+- **Reset policy.** Development data is disposable: `pnpm setup:local --reset-data` empties every table
+  of the local deployment instead of migrating.
 
 Each logical action needs a stable command ID, actor, relevant entities, source/build versions, the exact
 engine release and relevant parser versions, expected state revision, and session/encounter association.

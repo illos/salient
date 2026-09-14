@@ -39,7 +39,10 @@ Goblin Warriors, inspect their complete source and control roster visibility. Fo
 
 The local Convex deployment stores real data in ignored `.convex/`; keep `pnpm dev:backend` running.
 Its assigned ports and endpoint URLs live in ignored `.env.local`. `setup:local` refuses cloud targets,
-preserves an existing auth secret and configures loopback origins only. Vite proxies the backend/auth paths
+preserves an existing auth secret and configures loopback origins only. Development data is disposable:
+after a breaking schema change, run `pnpm setup:local --reset-data` while the old schema is still
+deployed to empty every table of the local deployment, then let `pnpm dev:backend` push the new schema
+and reseed through the app. There are no migrations. Vite proxies the backend/auth paths
 for local development. Other frontend origins require deliberate auth-origin configuration. For hosted
 builds, configure the real `VITE_CONVEX_URL` / `VITE_CONVEX_SITE_URL` and disable `VITE_LOCAL_PROXY`.
 No Cloudflare or Convex Cloud deployment has been performed.
