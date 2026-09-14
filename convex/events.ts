@@ -1,6 +1,7 @@
 import { v, ConvexError } from 'convex/values';
 import { query } from './_generated/server';
 import { requireUser, requireMember } from './lib/access';
+import { eventDisposition, eventOrigin } from './encounterTables';
 
 export const list = query({
   args: {
@@ -14,7 +15,12 @@ export const list = query({
         id: v.id('events'),
         sequence: v.number(),
         sessionId: v.union(v.id('sessions'), v.null()),
-        actorName: v.string(),
+        encounterId: v.union(v.id('encounters'), v.null()),
+        origin: eventOrigin,
+        actorName: v.union(v.string(), v.null()),
+        commandId: v.string(),
+        causeEventId: v.union(v.id('events'), v.null()),
+        disposition: eventDisposition,
         kind: v.string(),
         description: v.string(),
         createdAt: v.number(),
@@ -54,7 +60,12 @@ export const list = query({
         id: e._id,
         sequence: e.sequence,
         sessionId: e.sessionId,
-        actorName: e.actorName,
+        encounterId: e.encounterId,
+        origin: e.origin,
+        actorName: e.actorName ?? null,
+        commandId: e.commandId,
+        causeEventId: e.causeEventId,
+        disposition: e.disposition,
         kind: e.kind,
         description: e.description,
         createdAt: e.createdAt,

@@ -2,9 +2,11 @@ import { v, ConvexError } from 'convex/values';
 import { mutation, query } from './_generated/server';
 import type { MutationCtx } from './_generated/server';
 import type { Doc, Id } from './_generated/dataModel';
-import { requireUser, requireMember, requireDirector } from './lib/access';
+import { requireUser, requireMember, requireDirector, type ReadCtx } from './lib/access';
 import { command } from './lib/commands';
 import { appendEvent } from './lib/events';
+import { combatActive, currentEncounter } from './lib/encounters';
+import { encounterStatus } from './encounterTables';
 
 const sessionValue = v.object({
   id: v.id('sessions'),
@@ -12,18 +14,20 @@ const sessionValue = v.object({
   status: v.union(v.literal('running'), v.literal('paused'), v.literal('closed')),
   revision: v.number(),
   selectedPlayerIds: v.array(v.id('users')),
-  combatActive: v.boolean(),
+  /** The current encounter run, if any. Combat locks apply while its status is `committed`. */
+  encounter: v.union(v.object({ id: v.id('encounters'), status: encounterStatus }), v.null()),
   startedAt: v.number(),
   closedAt: v.union(v.number(), v.null()),
 });
-function project(s: Doc<'sessions'>) {
+async function project(ctx: ReadCtx, s: Doc<'sessions'>) {
+  const encounter = await currentEncounter(ctx, s);
   return {
     id: s._id,
     campaignId: s.campaignId,
     status: s.status,
     revision: s.revision,
     selectedPlayerIds: s.selectedPlayerIds,
-    combatActive: s.combatActive,
+    encounter: encounter ? { id: encounter._id, status: encounter.status } : null,
     startedAt: s.startedAt,
     closedAt: s.closedAt,
   };
@@ -45,13 +49,15 @@ export const list = query({
   handler: async (ctx, { campaignId }) => {
     const user = await requireUser(ctx);
     await requireMember(ctx, campaignId, user._id);
-    return (
-      await ctx.db
-        .query('sessions')
-        .withIndex('by_campaign', q => q.eq('campaignId', campaignId))
-        .order('desc')
-        .take(50)
-    ).map(project);
+    return Promise.all(
+      (
+        await ctx.db
+          .query('sessions')
+          .withIndex('by_campaign', q => q.eq('campaignId', campaignId))
+          .order('desc')
+          .take(50)
+      ).map(s => project(ctx, s)),
+    );
   },
 });
 export const get = query({
@@ -62,7 +68,7 @@ export const get = query({
     const session = await ctx.db.get(sessionId);
     if (!session) throw new ConvexError('Session unavailable.');
     await requireMember(ctx, session.campaignId, user._id);
-    return project(session);
+    return project(ctx, session);
   },
 });
 export const start = mutation({
@@ -85,12 +91,20 @@ export const start = mutation({
       status: 'running',
       revision: 0,
       selectedPlayerIds: args.selectedPlayerIds,
-      combatActive: false,
+      encounterId: null,
       startedAt: Date.now(),
       closedAt: null,
     });
     await ctx.db.patch(campaign._id, { activeSessionId: id });
-    await appendEvent(ctx, campaign._id, user, 'session.started', 'Started a session.', id);
+    await appendEvent(ctx, {
+      campaignId: campaign._id,
+      sessionId: id,
+      origin: 'user',
+      actor: user,
+      commandId: args.commandId,
+      kind: 'session.started',
+      description: 'Started a session.',
+    });
     await receipt.save(id);
     return id;
   },
@@ -117,21 +131,22 @@ export const transition = mutation({
       throw new ConvexError('Only a running session can pause.');
     if (args.action === 'resume' && session.status !== 'paused')
       throw new ConvexError('Only a paused session can resume.');
-    if (args.action === 'close' && session.combatActive)
+    if (args.action === 'close' && (await combatActive(ctx, session)))
       throw new ConvexError(
         "Combat closure requires the rules workstream's void keep/reset operation.",
       );
     const status =
       args.action === 'pause' ? 'paused' : args.action === 'resume' ? 'running' : 'closed';
     // Append closure before setting closed: the event helper never permits later history writes.
-    await appendEvent(
-      ctx,
-      campaign._id,
-      user,
-      `session.${status}`,
-      `${args.action === 'pause' ? 'Paused' : args.action === 'resume' ? 'Resumed' : 'Closed'} the session.`,
-      session._id,
-    );
+    await appendEvent(ctx, {
+      campaignId: campaign._id,
+      sessionId: session._id,
+      origin: 'user',
+      actor: user,
+      commandId: args.commandId,
+      kind: `session.${status}`,
+      description: `${args.action === 'pause' ? 'Paused' : args.action === 'resume' ? 'Resumed' : 'Closed'} the session.`,
+    });
     await ctx.db.patch(session._id, {
       status,
       revision: session.revision + 1,
@@ -160,7 +175,7 @@ export const setPlayers = mutation({
     checkRevision(session, args.expectedRevision);
     if (campaign.activeSessionId !== session._id)
       throw new ConvexError('Session is no longer active.');
-    if (session.combatActive)
+    if (await combatActive(ctx, session))
       throw new ConvexError('Combat locks the party roster. End or void combat first.');
     await validatePlayers(ctx, campaign._id, args.selectedPlayerIds);
     await ctx.db.patch(session._id, {
@@ -170,14 +185,15 @@ export const setPlayers = mutation({
     const names = await Promise.all(
       args.selectedPlayerIds.map(async id => (await ctx.db.get(id))?.displayName ?? 'Player'),
     );
-    await appendEvent(
-      ctx,
-      campaign._id,
-      user,
-      'session.players',
-      `Selected players: ${names.join(', ') || 'none'}.`,
-      session._id,
-    );
+    await appendEvent(ctx, {
+      campaignId: campaign._id,
+      sessionId: session._id,
+      origin: 'user',
+      actor: user,
+      commandId: args.commandId,
+      kind: 'session.players',
+      description: `Selected players: ${names.join(', ') || 'none'}.`,
+    });
     await receipt.save(null);
     return null;
   },

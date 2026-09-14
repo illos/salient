@@ -12,13 +12,16 @@ import type * as auth from "../auth.js";
 import type * as campaigns from "../campaigns.js";
 import type * as characterTables from "../characterTables.js";
 import type * as characters from "../characters.js";
+import type * as encounterTables from "../encounterTables.js";
 import type * as events from "../events.js";
 import type * as foeTables from "../foeTables.js";
 import type * as foes from "../foes.js";
 import type * as http from "../http.js";
 import type * as lib_access from "../lib/access.js";
 import type * as lib_commands from "../lib/commands.js";
+import type * as lib_encounters from "../lib/encounters.js";
 import type * as lib_events from "../lib/events.js";
+import type * as lib_journal from "../lib/journal.js";
 import type * as sessions from "../sessions.js";
 
 import type {
@@ -32,13 +35,16 @@ declare const fullApi: ApiFromModules<{
   campaigns: typeof campaigns;
   characterTables: typeof characterTables;
   characters: typeof characters;
+  encounterTables: typeof encounterTables;
   events: typeof events;
   foeTables: typeof foeTables;
   foes: typeof foes;
   http: typeof http;
   "lib/access": typeof lib_access;
   "lib/commands": typeof lib_commands;
+  "lib/encounters": typeof lib_encounters;
   "lib/events": typeof lib_events;
+  "lib/journal": typeof lib_journal;
   sessions: typeof sessions;
 }>;
 

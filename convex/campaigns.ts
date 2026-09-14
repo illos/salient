@@ -62,7 +62,14 @@ export const create = mutation({
       eventSequence: 0,
     });
     await ctx.db.insert('memberships', { campaignId: id, userId: user._id });
-    await appendEvent(ctx, id, user, 'campaign.created', `Created ${name}.`);
+    await appendEvent(ctx, {
+      campaignId: id,
+      origin: 'user',
+      actor: user,
+      commandId: args.commandId,
+      kind: 'campaign.created',
+      description: `Created ${name}.`,
+    });
     await receipt.save(id);
     return id;
   },
@@ -202,13 +209,14 @@ export const approveRequest = mutation({
         campaignId: request.campaignId,
         userId: request.userId,
       });
-      await appendEvent(
-        ctx,
-        request.campaignId,
-        user,
-        'membership.approved',
-        `Admitted ${(await ctx.db.get(request.userId))?.displayName ?? 'player'}.`,
-      );
+      await appendEvent(ctx, {
+        campaignId: request.campaignId,
+        origin: 'user',
+        actor: user,
+        commandId: args.commandId,
+        kind: 'membership.approved',
+        description: `Admitted ${(await ctx.db.get(request.userId))?.displayName ?? 'player'}.`,
+      });
     }
     await ctx.db.patch(args.requestId, { status: 'approved' });
     await receipt.save(null);

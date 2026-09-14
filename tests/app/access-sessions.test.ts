@@ -3,6 +3,7 @@ import { convexTest } from 'convex-test';
 import betterAuthTest from '@convex-dev/better-auth/test';
 import schema from '../../convex/schema';
 import { api, components } from '../../convex/_generated/api';
+import type { Id } from '../../convex/_generated/dataModel';
 
 const modules = import.meta.glob('../../convex/**/*.ts');
 function backend() {
@@ -60,6 +61,25 @@ async function campaign(t: ReturnType<typeof backend>) {
     commandId: 'approve-player',
   });
   return { owner, player, outsider, campaignId };
+}
+/** Development fixture: a committed encounter run on the session, the record that replaced combatActive. */
+async function commitEncounter(
+  t: ReturnType<typeof backend>,
+  campaignId: Id<'campaigns'>,
+  sessionId: Id<'sessions'>,
+) {
+  return t.run(async ctx => {
+    const encounterId = await ctx.db.insert('encounters', {
+      campaignId,
+      sessionId,
+      status: 'committed',
+      precombatSnapshotId: null,
+      createdAt: Date.now(),
+      archivedAt: null,
+    });
+    await ctx.db.patch(sessionId, { encounterId });
+    return encounterId;
+  });
 }
 
 describe('authenticated campaign and session operations', () => {
@@ -247,7 +267,7 @@ describe('authenticated campaign and session operations', () => {
       selectedPlayerIds: [player.profile.userId],
       commandId: 'combat-start-fixture',
     });
-    await t.run(async ctx => ctx.db.patch(sessionId, { combatActive: true }));
+    const encounterId = await commitEncounter(t, campaignId, sessionId);
     await owner.client.mutation(api.sessions.transition, {
       sessionId,
       expectedRevision: 0,
@@ -270,7 +290,27 @@ describe('authenticated campaign and session operations', () => {
         commandId: 'combat-close',
       }),
     ).rejects.toThrow('void keep/reset');
-    expect((await owner.client.query(api.sessions.get, { sessionId })).combatActive).toBe(true);
+    expect((await owner.client.query(api.sessions.get, { sessionId })).encounter).toEqual({
+      id: encounterId,
+      status: 'committed',
+    });
+    // A draft (uncommitted setup) or an archived run does not lock the roster or block closure.
+    for (const status of ['draft', 'closed-out', 'voided'] as const) {
+      await t.run(ctx =>
+        ctx.db.patch(encounterId, {
+          status,
+          archivedAt: status === 'draft' ? null : Date.now(),
+        }),
+      );
+      const session = await owner.client.query(api.sessions.get, { sessionId });
+      expect(session.encounter).toEqual(status === 'draft' ? { id: encounterId, status } : null);
+      await owner.client.mutation(api.sessions.setPlayers, {
+        sessionId,
+        expectedRevision: session.revision,
+        selectedPlayerIds: [],
+        commandId: `unlocked-change-${status}`,
+      });
+    }
   });
   test('withdrawn and declined requests cannot later be approved; a new request has a new identity', async () => {
     const t = backend();
@@ -321,9 +361,14 @@ describe('authenticated campaign and session operations', () => {
         await ctx.db.insert('events', {
           campaignId,
           sessionId: null,
+          encounterId: null,
           sequence,
+          origin: 'user',
           actorId: owner.profile.userId,
           actorName: 'Director',
+          commandId: `fixture-${sequence}`,
+          causeEventId: null,
+          disposition: 'applied',
           kind: 'fixture',
           description: `Event ${sequence}`,
           createdAt: sequence,

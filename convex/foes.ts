@@ -113,13 +113,14 @@ export const add = mutation({
         temporaryStamina: warrior.initialLive.temporaryStamina,
       },
     });
-    await appendEvent(
-      ctx,
-      args.campaignId,
-      user,
-      'foe-added',
-      `${warrior.name} added to the foes roster.`,
-    );
+    await appendEvent(ctx, {
+      campaignId: args.campaignId,
+      origin: 'user',
+      actor: user,
+      commandId: args.commandId,
+      kind: 'foe-added',
+      description: `${warrior.name} added to the foes roster.`,
+    });
     await receipt.save(foeId);
     return foeId;
   },
@@ -134,13 +135,14 @@ export const remove = mutation({
     if (receipt.previous) return null;
     const foe = await scopedFoe(ctx, args.campaignId, args.foeId);
     await ctx.db.delete(foe._id);
-    await appendEvent(
-      ctx,
-      args.campaignId,
-      user,
-      'foe-removed',
-      `${foe.name} removed from the foes roster.`,
-    );
+    await appendEvent(ctx, {
+      campaignId: args.campaignId,
+      origin: 'user',
+      actor: user,
+      commandId: args.commandId,
+      kind: 'foe-removed',
+      description: `${foe.name} removed from the foes roster.`,
+    });
     await receipt.save(null);
     return null;
   },
@@ -160,13 +162,14 @@ export const setVisible = mutation({
     if (receipt.previous) return null;
     const foe = await scopedFoe(ctx, args.campaignId, args.foeId);
     await ctx.db.patch(foe._id, { visible: args.visible });
-    await appendEvent(
-      ctx,
-      args.campaignId,
-      user,
-      'foe-visibility',
-      `${foe.name} ${args.visible ? 'shown on' : 'hidden from'} the player roster.`,
-    );
+    await appendEvent(ctx, {
+      campaignId: args.campaignId,
+      origin: 'user',
+      actor: user,
+      commandId: args.commandId,
+      kind: 'foe-visibility',
+      description: `${foe.name} ${args.visible ? 'shown on' : 'hidden from'} the player roster.`,
+    });
     await receipt.save(null);
     return null;
   },

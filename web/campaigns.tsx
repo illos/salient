@@ -313,7 +313,10 @@ type Session = {
   status: 'running' | 'paused' | 'closed';
   revision: number;
   selectedPlayerIds: Id<'users'>[];
-  combatActive: boolean;
+  encounter: {
+    id: Id<'encounters'>;
+    status: 'draft' | 'committed' | 'closed-out' | 'voided';
+  } | null;
   startedAt: number;
   closedAt: number | null;
 };
@@ -429,7 +432,7 @@ function SessionControls({
         </button>
         <button
           className="secondary"
-          disabled={command.pending || session.combatActive}
+          disabled={command.pending || session.encounter?.status === 'committed'}
           onClick={() =>
             void command.run(
               commandId =>
@@ -471,11 +474,11 @@ function EditPlayers({ session, members }: { session: Session; members: Member[]
         members={members}
         selected={selected}
         setSelected={setSelected}
-        disabled={command.pending || session.combatActive}
+        disabled={command.pending || session.encounter?.status === 'committed'}
       />
       <button
         className="secondary"
-        disabled={command.pending || session.combatActive}
+        disabled={command.pending || session.encounter?.status === 'committed'}
         onClick={() =>
           void command.run(
             commandId =>
@@ -612,7 +615,8 @@ function GameLog({
               <div>
                 <strong>{event.description}</strong>
                 <small>
-                  {event.actorName} · {new Date(event.createdAt).toLocaleString()}
+                  {event.actorName ?? (event.origin === 'clock' ? 'Game clock' : 'Engine')} ·{' '}
+                  {new Date(event.createdAt).toLocaleString()}
                 </small>
               </div>
             </li>

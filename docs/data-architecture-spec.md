@@ -549,12 +549,42 @@ damage thresholds and other membership transitions retain their separate contrac
 gain: a replacement captain’s Stamina bonus adds to the pool for surviving members only; no revival,
 new member identity, damage reset or action refresh results from the adjustment.
 
-Current checkout, 2026-09-14: `convex/schema.ts` has no encounter-run record; `sessions` carries a
-`combatActive` boolean, `events` requires a user `actorId`/`actorName` with a `kind` and `description` but no
-before/after change payload, and `commands` records `commandId`/`fingerprint`/`result` for idempotent retries.
-The contracts below are proposals that this schema does not yet implement; the
-[readiness audit G7](v0.01-readiness-audit.md#g7-dice-generation-and-event-storage) records the required
-replacements (encounter record, per-field change records, events without a user actor).
+Current checkout before S02, 2026-09-14: `convex/schema.ts` had no encounter-run record; `sessions` carried a
+`combatActive` boolean, `events` required a user `actorId`/`actorName` with a `kind` and `description` but no
+before/after change payload, and `commands` recorded `commandId`/`fingerprint`/`result` for idempotent retries.
+The [readiness audit G7](v0.01-readiness-audit.md#g7-dice-generation-and-event-storage) recorded the required
+replacements; the implementation note below records what S02 stored.
+
+Implementation note (S02, 2026-09-14): storage contracts for the proposals in this section, with no
+gameplay operation added. Types are in `shared/contracts/history.ts`; tables in
+`convex/encounterTables.ts` and `convex/schema.ts`.
+
+- **Encounter record.** `encounters` (campaign, session, `status` `draft` | `committed` | `closed-out` |
+  `voided`, `precombatSnapshotId`, `createdAt`, `archivedAt`) replaces `sessions.combatActive`;
+  `sessions.encounterId` points at the current run. Combat locks (party roster, character edits,
+  session closure) apply while the status is `committed` (`convex/lib/encounters.ts`); a draft locks
+  nothing, matching "Director OK commits encounter setup ... and applies combat locks". `closed-out`
+  and `voided` set `archivedAt`; `appendEvent` refuses new events in an archived encounter.
+- **Events.** `events` gains `origin` (`user` | `engine` | `clock`), `actorId`/`actorName` optional and
+  required only for `origin: user` (enforced in `convex/lib/events.ts`), `encounterId`, `commandId`,
+  `causeEventId` for automatic consequences, `disposition` (`applied` | `undone` | `redone` |
+  `corrected` | `archived`, default `applied`), optional `dice` and `payload`. The per-campaign
+  `sequence` is allocated from `campaigns.eventSequence` inside the writing mutation; concurrent
+  appends conflict on that document and one re-runs, so sequences are distinct and consecutive.
+- **Undo unit.** One user-initiated command and all of its automatic consequences share the
+  command's `commandId` on their events. The journal of a unit is every `changes` row of those events
+  ordered by (event `sequence`, `ordinal`); undo reverses the whole list from last to first and redo
+  replays it from first to last, restoring recorded values without calling modifiers
+  (`commandJournal` in `convex/lib/journal.ts`). Another character's accepted response is a separate
+  command, so it is a separate unit and a seam (A06 computes seams; S02 only stores the unit).
+- **Change journal.** `changes` rows: event, command, `ordinal`, `entityTable`, `entityId`, dotted
+  field `path` (`""` for whole-document create or delete), `before`, `after`. Values are
+  `{ present: false }` or `{ present: true, value }`, so field absence and deleted documents restore
+  exactly. `journalPatch`/`journalInsert`/`journalDelete` apply the write and record leaf-level
+  changes; unchanged fields produce no row. Arrays are recorded as one value.
+- **Snapshots.** `snapshots` (encounter, `kind` `encounter-start` | `checkpoint`, `eventId`, `state`,
+  `createdAt`) holds the recorded starting state for void/reset; the operation taking it (A04) owns
+  the shape of `state`.
 
 Each logical action needs a stable command ID, actor, relevant entities, source/build versions, the exact
 engine release and relevant parser versions, expected state revision, and session/encounter association.
@@ -662,7 +692,11 @@ template. General undo of a void and statistics treatment remain open; see the
 Propose separate lifecycle fields for the session (`open`, `closing`, `closed`), running/paused status within
 an open session, and its archive work (`pending`, `writing`, `ready`, `failed`). These are implementation
 labels, not required UI language. The current checkout stores one `status` of `running`/`paused`/`closed`
-with `closedAt`, and has no archive fields; closed sessions are already read-only server-side. Pause preserves the session and its underlying activity; sheet viewing/chat
+with `closedAt`, and has no archive fields; closed sessions are already read-only server-side.
+Implementation note (S02, 2026-09-14): the encounter archive boundary is stored as
+`encounters.status` (`closed-out` | `voided`) plus `encounters.archivedAt`, and the events of an archived
+run carry `disposition: archived` when A07 finalizes; `appendEvent` refuses writes into an archived
+encounter or a closed session. Session archive work fields and compression remain proposed. Pause preserves the session and its underlying activity; sheet viewing/chat
 remain available, gameplay changes are blocked, and in-flight commit handling remains open in the table spec.
 A closed session can have a pending archive while its original database records remain readable.
 

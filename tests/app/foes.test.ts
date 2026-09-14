@@ -246,7 +246,18 @@ describe('persistent campaign foes', () => {
       definitionId: catalog.definitionId,
       commandId: 'paused-session',
     });
-    await t.run(ctx => ctx.db.patch(sessionId, { combatActive: true }));
+    const encounterId = await t.run(async ctx => {
+      const id = await ctx.db.insert('encounters', {
+        campaignId,
+        sessionId,
+        status: 'committed',
+        precombatSnapshotId: null,
+        createdAt: Date.now(),
+        archivedAt: null,
+      });
+      await ctx.db.patch(sessionId, { encounterId: id });
+      return id;
+    });
     await director.client.mutation(api.foes.setVisible, {
       campaignId,
       foeId: paused,
@@ -258,7 +269,7 @@ describe('persistent campaign foes', () => {
       foeId: before,
       commandId: 'combat-remove',
     });
-    await t.run(ctx => ctx.db.patch(sessionId, { combatActive: false }));
+    await t.run(ctx => ctx.db.patch(encounterId, { status: 'voided', archivedAt: Date.now() }));
     await director.client.mutation(api.sessions.transition, {
       sessionId,
       expectedRevision: 1,

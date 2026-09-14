@@ -6,6 +6,7 @@ import { requireUser, type ReadCtx } from './lib/access';
 import { command } from './lib/commands';
 import { authoredValidator, selectionValidator } from './characterTables';
 import { isJsonValue, type CharacterAuthored } from '../shared/characterDraft';
+import { combatActive } from './lib/encounters';
 
 async function owned(ctx: ReadCtx, id: Id<'characters'>, userId: Id<'users'>) {
   const character = await ctx.db.get(id);
@@ -17,7 +18,8 @@ async function requireEditable(ctx: ReadCtx, character: Doc<'characters'>) {
   if (character.campaignId) {
     const campaign = await ctx.db.get(character.campaignId);
     const session = campaign?.activeSessionId ? await ctx.db.get(campaign.activeSessionId) : null;
-    if (session?.combatActive) throw new ConvexError('Character editing is locked during combat.');
+    if (session && (await combatActive(ctx, session)))
+      throw new ConvexError('Character editing is locked during combat.');
   }
 }
 function authored(input: CharacterAuthored): CharacterAuthored {
