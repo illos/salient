@@ -92,17 +92,10 @@ async function prepareHero(
     `@Thorn /hero facts might=2 agility=2 reason=0 intuition=1 presence=0 melee="+0/+0/+4" kit="Mountain" signature="Pain for Pain" resource="Ferocity" abilities=["${BRUTAL_SLAM}","${THUNDER_ROAR}"]`,
     cid('facts'),
   );
-  await submit(director.client, campaignId, '@Thorn /adjust stamina-maximum value=30', cid('adj'));
   await submit(
     director.client,
     campaignId,
     `@Thorn /adjust stamina value=${options.stamina ?? 30}`,
-    cid('adj'),
-  );
-  await submit(
-    director.client,
-    campaignId,
-    '@Thorn /adjust recoveries-maximum value=10',
     cid('adj'),
   );
   await submit(director.client, campaignId, '@Thorn /adjust recoveries value=10', cid('adj'));

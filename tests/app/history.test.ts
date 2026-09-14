@@ -14,7 +14,7 @@ import {
   walkHistory,
   type EventLike,
 } from '../../convex/lib/history';
-import { account, admit, backend, storedEvents, type Backend } from './fixtures/table';
+import { account, admit, admitHero, backend, storedEvents, type Backend } from './fixtures/table';
 import { FIXTURE_STRIKE_ID, registerFixtureStrike } from './fixtures/costedAbility';
 
 registerFixtureStrike();
@@ -38,27 +38,15 @@ async function historyTable(t: Backend) {
     commandId: 'create-campaign',
   });
   for (const member of [player, second, observer]) await admit(t, director, member, campaignId);
+  // A02: heroes are admitted through the real path (evaluated build, R03 live values) before the
+  // session starts, so the admission entries sit outside the session's rewindable history.
+  const thornId = await admitHero(t, player, director, campaignId, 'Thorn');
+  const zikId = await admitHero(t, second, director, campaignId, 'Zik');
   const sessionId = await director.client.mutation(api.sessions.start, {
     campaignId,
     selectedPlayerIds: [player.profile.userId, second.profile.userId],
     commandId: 'start-session',
   });
-  const hero = (ownerId: Id<'users'>, name: string) =>
-    t.run(ctx =>
-      ctx.db.insert('characters', {
-        ownerId,
-        authored: { name, appearance: '', biography: '', notes: '' },
-        revision: 1,
-        draftRevisionId: null,
-        effectiveRevisionId: null,
-        derivedBaseline: null,
-        liveState: null,
-        campaignId,
-        combatLocked: false,
-      }),
-    );
-  const thornId = await hero(player.profile.userId, 'Thorn');
-  const zikId = await hero(second.profile.userId, 'Zik');
   const goblinId = await t.run(ctx =>
     ctx.db.insert('foes', {
       campaignId,
@@ -69,14 +57,12 @@ async function historyTable(t: Backend) {
       live: { stamina: 15, temporaryStamina: 3 },
     }),
   );
-  // Director-supplied values while no evaluated build exists (Q-A-200); these are adjustments
-  // that precede every action under test.
+  // Director adjustments that precede every action under test (the maximum 30 comes from the build).
   for (const [id, name] of [
     [thornId, 'Thorn'],
     [zikId, 'Zik'],
   ] as const) {
     void id;
-    await submit(director.client, campaignId, `@${name} /adjust stamina-maximum value=30`);
     await submit(director.client, campaignId, `@${name} /adjust stamina value=20`);
     await submit(director.client, campaignId, `@${name} /adjust recoveries value=5`);
     await submit(director.client, campaignId, `@${name} /adjust heroic-resource value=3`);
@@ -343,9 +329,14 @@ describe('FreePlay undo, redo and seams', () => {
       await submit(director.client, campaignId, '/history rewind');
       rewinds += 1;
     }
-    expect(rewinds).toBe(8);
-    // The first adjustment created the live record; rewinding it restores the absence.
-    expect((await hero(t, thornId))!.liveState).toBeNull();
+    // Three setup adjustments per hero (the maximum comes from the admitted build, not an adjustment).
+    expect(rewinds).toBe(6);
+    // Rewinding the setup adjustments restores the first-admission values (R03 2.1), not an absence.
+    expect((await hero(t, thornId))!.liveState).toMatchObject({
+      stamina: 30,
+      recoveries: 10,
+      heroicResource: { name: 'ferocity', current: 0 },
+    });
     // Observers have no history controls.
     await expect(submit(f.observer.client, campaignId, '/history redo')).rejects.toThrow(
       'observer',
