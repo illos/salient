@@ -1,10 +1,18 @@
-# V1 design mockups
+# Final V1 design mockups
 
-These images record visual direction for the V1 desktop combat table. They are design mockups, not screenshots of implemented functionality, acceptance criteria, or final layout specifications. Confirmed product behavior remains defined by the owning specification documents.
+These mockups are the final V1 reference for **visual style and theme only**. Their labels, values, controls, screen content, and depicted behavior are approximate and are not product requirements or acceptance criteria. The written design specifications are the authoritative guide for product content, behavior, workflows, permissions, and supported features. If a mockup conflicts with a written specification, follow the written specification.
 
-## Desktop combat table
+The images are design references, not screenshots of implemented functionality and not a claim that every depicted element is in scope.
 
-- [Dark theme](table-combat-dark.png)
-- [Light theme](table-combat-light.png)
+## Reference screens
 
-Both variants explore the same three-column table layout: foe roster and encounter resources, shared combat timeline and action log, and hero roster with a selected character sheet. They also explore light/dark presentation, active-turn emphasis, pending action input, and persistent-effect visibility.
+- [Login](login.png)
+- [Account and preferences](account.png)
+- [Campaign home](campaign-home.png)
+- [Running session: Director free-play view](session-free-play-director.png)
+- [Character wizard: class step](character-wizard-class.png)
+- [Standalone character sheet](character-sheet.png)
+- [Combat table: light theme](combat-table-light.png)
+- [Combat table: dark theme](combat-table-dark.png)
+
+Together, these screens establish the intended V1 visual language: an achromatic white/grey or dark foundation, muted brick-red accents, strong rules and borders, compact uppercase metadata, and Schibsted Grotesk typography. They illustrate a consistent desktop treatment across account, campaign, character, session, and combat surfaces without overriding the written design.
