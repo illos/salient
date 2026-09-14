@@ -347,29 +347,6 @@ are the shared lifecycle decisions; the remaining entries are bounded content/sc
 - **Blocked until answered:** nothing in v0.01 (the journey admits one hero once). Re-attachment is V1.
 - **Answer:**
 
-### Q-R-3: Is regained Stamina capped at the Stamina maximum?
-
-- **Status:** open
-- **Raised by:** R04, 2026-09-14
-- **Where:** `docs/roll-and-damage-resolution.md#7-catch-breath-and-recovery-spending`,
-  `docs/table-spec.md#v001-catch-breath`; read
-  `vendor/steel-compendium/en/unified/md/feature/common/maneuvers/catch-breath.md`,
-  `vendor/steel-compendium/en/unified/md/rule/health/recoveries.md`,
-  `vendor/steel-compendium/en/unified/md/rule/health/stamina.md`,
-  `vendor/steel-compendium/en/unified/md/rule/health/temporary-stamina.md`,
-  `vendor/steel-compendium/en/unified/md/chapter/the-basics.md` (Recoveries).
-- **Conflict or gap:** No sentence at the pin says Stamina cannot exceed its maximum. Stamina says
-  "Some effects can also reduce your Stamina maximum, limiting the amount of Stamina you can regain",
-  which implies the maximum bounds regain but does not state the cap. The table spec asked for this
-  bound to be verified before implementation.
-- **Options:** A: cap ordinary Stamina at the maximum; excess healing is lost, Recovery still spent /
-  B: no cap (Stamina may exceed maximum) / C: cap, and refuse Catch Breath at full Stamina.
-- **Recommendation:** A. It is the only reading under which "Stamina maximum" is a maximum, and
-  temporary Stamina exists as the separate uncapped pool. C adds a block the source does not state.
-- **Blocked until answered:** nothing; option A applied provisionally with `capApplied` and label
-  `Q-R-3` on the record.
-- **Answer:**
-
 ### Q-A-600: May a player undo their own Take turn?
 
 - **Status:** open
@@ -438,6 +415,31 @@ No user approval is implied by this classification.
   [the audit](build/audits/2026-09-14-question-queue-dedup.md).
 
 ## Resolved questions
+
+### Q-R-3: Is regained Stamina capped at the Stamina maximum?
+
+- **Status:** resolved 2026-09-14; [recorded decision](roll-and-damage-resolution.md#7-catch-breath-and-recovery-spending)
+- **Raised by:** R04, 2026-09-14
+- **Where:** `docs/roll-and-damage-resolution.md#7-catch-breath-and-recovery-spending`,
+  `docs/table-spec.md#v001-catch-breath`; read
+  `vendor/steel-compendium/en/unified/md/feature/common/maneuvers/catch-breath.md`,
+  `vendor/steel-compendium/en/unified/md/rule/health/recoveries.md`,
+  `vendor/steel-compendium/en/unified/md/rule/health/stamina.md`,
+  `vendor/steel-compendium/en/unified/md/rule/health/temporary-stamina.md`,
+  `vendor/steel-compendium/en/unified/md/chapter/the-basics.md` (Recoveries).
+- **Conflict or gap:** No sentence at the pin says Stamina cannot exceed its maximum. Stamina says
+  "Some effects can also reduce your Stamina maximum, limiting the amount of Stamina you can regain",
+  which implies the maximum bounds regain but does not state the cap. The table spec asked for this
+  bound to be verified before implementation.
+- **Options:** A: cap ordinary Stamina at the maximum; excess healing is lost, Recovery still spent /
+  B: no cap (Stamina may exceed maximum) / C: cap, and refuse Catch Breath at full Stamina.
+- **Recommendation:** A. It is the only reading under which "Stamina maximum" is a maximum, and
+  temporary Stamina exists as the separate uncapped pool. C adds a block the source does not state.
+- **Blocked until answered:** answered; retain cap application metadata and remove the obsolete
+  Q-R-3 uncertainty label through the owning build work.
+- **Answer:** Yes. Ordinary healing stops at maximum Stamina; excess healing is lost and the
+  Recovery remains spent. The confirmed example is 24/30 Stamina with recovery value 10: finish
+  at 30, restore 6 and lose the extra 4 healing.
 
 ### Q-A-400: Should Take turn from a finished initiative group be a warned departure instead of a refusal?
 

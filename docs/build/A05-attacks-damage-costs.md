@@ -176,3 +176,11 @@ and banes, including double bane. Q-R-2 now defaults the damage characteristic t
 value permitted by the damage expression, independently of the roll choice. Preserve source-authorized
 alternatives. Apply these [R04 contracts](../roll-and-damage-resolution.md) and remove their obsolete
 uncertainty labels. This handoff records decisions; implementation and verification remain build work.
+
+### User decision follow-up: Q-R-3
+
+The user confirmed the [ordinary healing cap](../roll-and-damage-resolution.md#7-catch-breath-and-recovery-spending):
+excess healing is lost and the Recovery remains spent. Keep cap metadata and the actual healed
+amount, but remove the resolved Q-R-3 uncertainty label. The confirmed example is 24/30 Stamina
+plus a recovery value of 10: one Recovery spent, 6 healed, ending at 30. This records the decision;
+implementation verification remains build work.

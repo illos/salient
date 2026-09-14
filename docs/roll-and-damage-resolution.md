@@ -450,7 +450,7 @@ Contract:
 ```
 recoveryValue   = floor(maxStamina / 3)
 cost            = 1 Recovery; affordable iff recoveries >= 1 (a creature without a Recovery pool cannot pay)
-stamina'        = min(maxStamina, stamina + recoveryValue)     // cap: Q-R-3
+stamina'        = min(maxStamina, stamina + recoveryValue)     // cap confirmed: Q-R-3
 healed          = stamina' − stamina
 temporaryStamina unchanged
 ```
@@ -460,11 +460,12 @@ per use with no maneuver allowance (`docs/table-spec.md#v001-catch-breath`). A d
 combat receives a warning, not a block (dying is not automated in v0.01 and the prohibition is not an
 affordability rule). Using it at full Stamina spends the Recovery and heals 0 with a warning.
 
-**Q-R-3 (cap at Stamina maximum).** No sentence at this pin says regained Stamina cannot exceed the
-maximum. Interpretation applied meanwhile: cap at `maxStamina`, grounded in "limiting the amount of
-Stamina you can regain" (the maximum bounds regain) and in "Stamina maximum" being the reference for
-recovery and winded values. The record carries `capApplied: true` when the cap bit, labeled
-`uncertainty: "Q-R-3"`. See `docs/rules-questions-for-user.md#q-r-3-is-regained-stamina-capped-at-the-stamina-maximum`.
+**User decision, 2026-09-14 (Q-R-3):** ordinary regained Stamina is capped at `maxStamina`.
+Excess healing is lost and the Recovery remains spent. For current Stamina 24, maximum 30 and
+recovery value 10, spend one Recovery, restore 6 Stamina and finish at 30; the remaining 4 healing
+is lost. Keep `capApplied: true` when the cap limits healing, but no longer label this resolved
+case `uncertainty: "Q-R-3"`. This confirms the prior interpretation; it does not claim the pinned
+source explicitly states that sentence or add class-specific healing automation.
 
 ## 8. Saving throws for manually toggled conditions
 
@@ -675,7 +676,6 @@ Grug with 3 temporary Stamina: absorbed 1 → temporary 2, Stamina unchanged.
 
 | Case | Provisional behavior | Label |
 | --- | --- | --- |
-| Regained Stamina above maximum | capped at maximum | `Q-R-3` |
 | Foe Stamina below 0 | arithmetic value recorded, `slain` flag | interpretation, 6.4 |
 | Negative rolled damage (negative characteristic) | arithmetic value recorded, no damage or healing applied, manual | `negative-rolled-damage`, 4.3; unreachable with v0.01 content |
 | Unsupported tier clause | verbatim, unresolved, manual | `unresolvedClauses` |

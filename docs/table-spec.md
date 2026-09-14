@@ -1334,8 +1334,8 @@ and its linked state changes under the existing history boundaries.
 
 The operation requires a Recovery to spend and follows the existing affordability contract;
 never supply artificial resources. The source baseline recovery value is one-third of maximum
-Stamina, rounded down. Use actual supported recorded values and source rules; detailed healing
-bounds, eligibility and exceptions require verification before implementation. Director manual
+Stamina, rounded down. Use actual supported recorded values and source rules. The ordinary healing cap is confirmed
+below; source-specific eligibility and exceptions still require verification before implementation. Director manual
 numeric adjustments remain available as separate logged events.
 
 Source: pinned Steel Compendium `fb83a789da8f0327a389c277a0c790b1648d5810`,
@@ -1353,8 +1353,13 @@ and Director acting authority apply. This does not start a respite or replenish 
 
 *Implementation note, 2026-09-14 (R04):* bounds verified against the pin in [the R04 contract](roll-and-damage-resolution.md),
 section 7: recovery value `floor(maxStamina / 3)`, one Recovery, foes have no Recovery pool (blocked as
-unaffordable), dying is a warning only, temporary Stamina untouched. No source sentence states the
-Stamina-maximum cap; it is applied provisionally under [Q-R-3](rules-questions-for-user.md#q-r-3-is-regained-stamina-capped-at-the-stamina-maximum). Examples in 10.9.
+unaffordable), dying is a warning only, temporary Stamina untouched. The cap was initially a
+provisional interpretation; the user confirmed it in Q-R-3 below. Examples in 10.9.
+
+Confirmed 2026-09-14 (Q-R-3): ordinary healing stops at maximum Stamina. Excess healing is lost,
+and the Recovery is still spent. For 24/30 Stamina and recovery value 10, spend one Recovery and
+finish at 30 Stamina, restoring 6 and losing the remaining 4 healing. Record the actual spend,
+healing and cap application together.
 
 #### v0.01 manual condition tracking
 

@@ -45,7 +45,7 @@ A08 design tokens (independent) ────────────────
 ## Audit follow-up
 
 The [question-queue audit](audits/2026-09-14-question-queue-dedup.md) reviewed all 32 entries through
-Q-A-601: 20 remain open, 11 are answered/resolved, and Q-A-200 is engineering follow-up. Q-A-400's
+Q-A-601. At audit close, 20 were open, 11 answered/resolved, and Q-A-200 was engineering follow-up. Q-A-400's
 policy is already settled; the A04 implementation repair remains outstanding.
 
 The [2026-09-14 coordinated audit](audits/2026-09-14-coordinated-audit.md) records independent
