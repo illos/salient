@@ -24,7 +24,7 @@ A08 design tokens (independent) ────────────────
 
 | Id | Slice | Family | Depends on | Rules review | Status | Team | Updated | Commits |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| S00 | [Process tooling, CI, lint, commit checker](S00-process-tooling.md) | S | None | not required | Committed | lead/S00-impl | 2026-09-14 | d5b2765, d67e5bd, c9114b6, 2b3f6db, 5b864dc, 1e0bb50 |
+| S00 | [Process tooling, CI, lint, commit checker](S00-process-tooling.md) | S | None | not required | Committed (GitHub CI passed; historical format boundary repaired) | lead/S00-impl | 2026-09-14 | d5b2765, d67e5bd, c9114b6, 2b3f6db, 5b864dc, 1e0bb50, 3d3bcb6 |
 | S01 | [Content pipeline from the pinned Compendium](S01-content-pipeline.md) | S | None | required | Committed (audit fixes independently reviewed; extraction and live reseed passed) | lead/S01-impl | 2026-09-14 | 2023d41, 79a6d86, a73ac74, 7844def, 7b86b8a |
 | S02 | [Data contracts: encounter, events, journal, dice](S02-data-contracts.md) | S | None | not required | Committed (history/identity fixes independently reviewed; persisted-state and real reset checks passed) | lead/S02-impl | 2026-09-14 | bfd7485, 97a555b, 00958e3, e106a7d, 7b86b8a |
 | R01 | [Level-one devil Fury decision table](R01-fury-decision-table.md) | R | S01 (soft) | required | Committed | rules/R01-research | 2026-09-14 | 2fe311b |
@@ -49,7 +49,8 @@ verdicts, reproduced defects, local/backend/browser evidence and the ordered rep
 The [fix verification](audits/2026-09-14-fix-verification.md) closes the S01/S02/A01/A03 repair findings
 with fresh independent implementation/rules reviews and complete local checks. These bounded approvals
 do not settle the open rules questions or certify the unfinished v0.01 slices.
-S00 GitHub Actions remains unexercised; local checks do not establish a GitHub run.
+S00 GitHub Actions passed on `3d3bcb6`: [hosted run](https://github.com/illos/salient/actions/runs/34905450764).
+See the [CI review and run record](audits/2026-09-14-ci-history-review.md) for the first-run failure and repair.
 
 ## V1 slices (start after A09 is Committed)
 

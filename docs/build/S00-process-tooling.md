@@ -244,3 +244,12 @@ commit checker in the hook and CI, and `pnpm check` covering all of it. What rem
 (needs a push), `Reviewed-By:` trailers (added by the lead after independent review; the lead's
 pre-merge command is `node scripts/check-commit.ts --merge --range main..slice/S00`), and the
 `STATUS.md` row (lead-owned).
+
+### 2026-09-14 — hosted CI exercised and repaired (audit coordinator)
+
+The first GitHub run passed the full app check but rejected two pre-contract mockup commit messages.
+Repair `3d3bcb6` restricts historical range enforcement to the fixed adoption boundary while retaining
+strict new-commit, hook and explicit-revision checks. Independent review and 14 focused checker tests
+pass; the complete hosted workflow now passes (266 tests plus lint/types/content/vendor/build and
+commit checks). See the [CI record](audits/2026-09-14-ci-history-review.md) for both hosted runs and
+review evidence. No deployment or browser behavior changed in this tooling repair.

@@ -78,7 +78,13 @@ Local evidence is ignored rather than published with synthetic account data:
   `recovery-source.png`.
 - `.playtest/a08/{login,campaign-home,characters}-{light,dark}.png`.
 
-## Remaining boundaries
+## Subsequent GitHub verification
+
+The [CI follow-up](2026-09-14-ci-history-review.md) closes the remote-run limitation below.
+After the first run exposed a pre-contract commit-message issue, reviewed tooling repair `3d3bcb6`
+passed the full [hosted workflow](https://github.com/illos/salient/actions/runs/34905450764).
+
+## Remaining boundaries at the original local handoff
 
 S00 GitHub Actions still needs a remote run. No additional tool is needed for local checks,
 browser inspection or GitHub access; a push would publish the existing unpushed build to the public
