@@ -190,6 +190,11 @@ ordinary-foe defeat transition and use **Slain** as its visible status in v0.01.
 zero triggers it; an overkill result must not miss the transition because its recorded value is negative.
 This does not apply the hero-dying rules to foes or change the separate hero-dying deferral.
 
+**User decision, 2026-09-14 (Q-R-200):** Slain is derived from current Stamina. If the Director
+raises an ordinary foe's Stamina above zero through Manual adjustment, Slain automatically clears
+and the foe can fight again under the existing action-economy rules. Record the adjustment and its
+resulting status through the existing history operations.
+
 Preserve the existing roster contract: Slain foes remain present under their existing visibility
 setting until normal cleanup or Director removal and stop contributing to undefeated-roster EV.
 Do not auto-end combat, grant a Victory, or reveal a hidden foe merely because its Stamina reaches

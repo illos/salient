@@ -176,9 +176,9 @@ Never stored, never toggled; recomputed from live values and maxima whenever an 
   hero dying automation deferred, `docs/fury-goblin-automation.md#hero-dying`). Fixture: both false.
 - Ordinary foe: `slain = stamina <= 0` (R04 6.4; ruling "0 stamina make the foe show as slain",
   `docs/fury-goblin-automation.md#ordinary-foes-at-zero-stamina`). Goblin Warrior at 15: false.
-  **Open, Q-R-200:** whether the label is recomputed from Stamina after a later Director edit above
-  zero, or recorded until cleanup. Provisional default: recomputed (the projection derives it), which
-  is R04's derivation and the existing engine's behavior (`src/engine.ts`, `syncHealth`).
+  **User decision, 2026-09-14 (Q-R-200):** recompute the label from current Stamina. A Director
+  Manual adjustment above zero automatically clears Slain, allowing the foe to fight again. No
+  separate status-clear operation is required. Preserve existing action-economy and history rules.
 
 ### 2.4 Values that are not live in v0.01
 
@@ -1005,9 +1005,7 @@ projection.
       "text": "> ⭐️ **Crafty**\n>\n> The warrior doesn't provoke [opportunity attacks](scc.v1:mcdm.heroes.v1/rule.combat/opportunity-attack) by moving."
     }
   ],
-  "uncertainties": [
-    "Q-R-200"
-  ]
+  "uncertainties": []
 }
 ```
 
@@ -1046,7 +1044,7 @@ ability was the file body in the experiment and is the complete file here (S01 c
 | Id | Where | Status |
 | --- | --- | --- |
 | Q-CHAR-2 | section 3, `UnreconciledMaximumChange` | open; cited, no default applied |
-| Q-R-200 | section 2.3, foe `slain` label after a Director edit above zero | open; raised by R03; provisional: derived from current Stamina |
+| Q-R-200 | section 2.3, foe `slain` label after a Director edit above zero | resolved 2026-09-14; user confirmed that raising Stamina above zero automatically clears Slain |
 | Q-R-201 | section 3, live values on re-admission after detachment | open; raised by R03; provisional: none needed in v0.01, recommendation recorded |
 | Q-CHAR-3 | section 2.1.7, XP of a transferred higher-level hero | open; cited |
 | Q-R-100, Q-R-101, Q-CHAR-12 | carried from the R02 baseline on `uncertainties` | open; R01/V1 research |

@@ -382,26 +382,6 @@ are the shared lifecycle decisions; the remaining entries are bounded content/sc
 - **Blocked until answered:** nothing; A is applied provisionally (only Mountain is supported in v0.01 anyway).
 - **Answer:**
 
-### Q-R-200: Is a foe's Slain label recomputed from current Stamina after a Director edit above zero?
-
-- **Status:** open
-- **Raised by:** R03, 2026-09-14
-- **Where:** `docs/live-state-initialization.md` section 2.3; `docs/fury-goblin-automation.md#ordinary-foes-at-zero-stamina`;
-  Compendium read: `vendor/steel-compendium/en/unified/md/rule/health/stamina.md` ("In most circumstances,
-  Director-controlled creatures die or are destroyed when their Stamina drops to 0."; *Knocking Creatures Out*),
-  `vendor/steel-compendium/en/unified/md/chapter/monster-basics.md`.
-- **Conflict or gap:** The ruling makes zero Stamina show a foe as Slain and keeps it in the roster until cleanup.
-  The source says nothing about a creature's Stamina being set above zero afterwards; the only app path is a
-  Director Manual adjustment (a correction). R04 derives `slain` from the post-damage Stamina and the existing
-  engine recomputes it from Stamina; a recorded status would instead persist until cleanup or a Director clear.
-- **Options:** A: `slain` is derived: `stamina <= 0`, so an edit above zero clears the label. B: `slain` is a
-  recorded status set at zero and cleared only by cleanup, Void or an explicit Director operation.
-- **Recommendation:** A. It matches R04 6.4 and `src/engine.ts`, needs no new operation, and a Director who
-  corrects a foe's Stamina to a positive value evidently intends it to fight on; unconscious foes are a manual
-  adjudication either way.
-- **Blocked until answered:** nothing; A is applied provisionally (the projection derives the label).
-- **Answer:**
-
 ### Q-R-201: What happens to a hero's live values on re-admission after detachment?
 
 - **Status:** open
@@ -515,6 +495,27 @@ are the shared lifecycle decisions; the remaining entries are bounded content/sc
 - **Answer:**
 
 ## Resolved questions
+
+### Q-R-200: Is a foe's Slain label recomputed from current Stamina after a Director edit above zero?
+
+- **Status:** resolved 2026-09-14; [recorded decision](live-state-initialization.md#23-labels-derived-at-read-time)
+- **Raised by:** R03, 2026-09-14
+- **Where:** `docs/live-state-initialization.md` section 2.3; `docs/fury-goblin-automation.md#ordinary-foes-at-zero-stamina`;
+  Compendium read: `vendor/steel-compendium/en/unified/md/rule/health/stamina.md` ("In most circumstances,
+  Director-controlled creatures die or are destroyed when their Stamina drops to 0."; *Knocking Creatures Out*),
+  `vendor/steel-compendium/en/unified/md/chapter/monster-basics.md`.
+- **Conflict or gap:** The ruling makes zero Stamina show a foe as Slain and keeps it in the roster until cleanup.
+  The source says nothing about a creature's Stamina being set above zero afterwards; the only app path is a
+  Director Manual adjustment (a correction). R04 derives `slain` from the post-damage Stamina and the existing
+  engine recomputes it from Stamina; a recorded status would instead persist until cleanup or a Director clear.
+- **Options:** A: `slain` is derived: `stamina <= 0`, so an edit above zero clears the label. B: `slain` is a
+  recorded status set at zero and cleared only by cleanup, Void or an explicit Director operation.
+- **Recommendation:** A. It matches R04 6.4 and `src/engine.ts`, needs no new operation, and a Director who
+  corrects a foe's Stamina to a positive value evidently intends it to fight on; unconscious foes are a manual
+  adjudication either way.
+- **Blocked until answered:** nothing; option A is now confirmed.
+- **Answer:** Yes. Raising a slain foe's Stamina above zero automatically clears Slain, allowing it
+  to fight again.
 
 ### Q-TS-1: Are any save-ends rolls automatic in v0.01?
 
