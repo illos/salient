@@ -49,7 +49,7 @@ export async function loadHeroAbility(path: string, id: string, corpusRoot = def
 /** Generic source adapter. Full boxed text is retained, including unprojected lists. */
 export async function loadMonster(path: string, entityId: string, prefix: string, corpusRoot = defaultRoot): Promise<{ entity: Entity; abilities: AbilitySource[] }> {
   const { data, text } = await record(path, corpusRoot);
-  const starts = [...text.matchAll(/^> [^\s*|>\-]+ \*\*[^*\n]+\*\*[ \t]*$/gm)];
+  const starts = [...text.matchAll(/^> [^\s*|>-]+ \*\*[^*\n]+\*\*[ \t]*$/gm)];
   const abilities: AbilitySource[] = [];
   for (const feature of data.features.filter((entry: RecordData) => entry.feature_type === 'ability')) {
     const index = starts.findIndex(match => {

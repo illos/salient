@@ -1,2 +1,19 @@
 import { defineConfig } from 'vitest/config';
-export default defineConfig({ test: { include: ['tests/app/**/*.test.ts'], server: { deps: { inline: ['convex-test'] } } } });
+
+// One runner for every suite. The engine project keeps the former `node --test` files unchanged apart
+// from their imports; the app project holds the convex-test suites; scripts covers the process tooling.
+export default defineConfig({
+  test: {
+    projects: [
+      { test: { name: 'engine', include: ['tests/*.test.ts'], environment: 'node' } },
+      {
+        test: {
+          name: 'app',
+          include: ['tests/app/**/*.test.ts'],
+          server: { deps: { inline: ['convex-test'] } },
+        },
+      },
+      { test: { name: 'scripts', include: ['tests/scripts/**/*.test.ts'], environment: 'node' } },
+    ],
+  },
+});

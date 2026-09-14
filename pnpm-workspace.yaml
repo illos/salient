@@ -3,3 +3,5 @@ packages:
 
 allowBuilds:
   esbuild: true
+  # Hooks are installed explicitly by the prepare script; the postinstall is not needed.
+  simple-git-hooks: false

@@ -40,7 +40,7 @@ test('independent: stolen request identity cannot withdraw or review another app
  await expect(t.query(api.characters.get,{characterId:await owner.client.mutation(api.characters.create,{commandId:'review-char',authored:{name:'Hero',appearance:'',biography:'',notes:'secret'}})})).rejects.toThrow('Sign in');
 });
 test('independent: simultaneous same-command submissions persist exactly once', async () => {
- const {t, owner} = await setup();
+ const {owner} = await setup();
  const args = { name:'Campaign', commandId:'review-concurrent-create' };
  const ids = await Promise.all([owner.client.mutation(api.campaigns.create,args),owner.client.mutation(api.campaigns.create,args)]);
  expect(ids[0]).toBe(ids[1]);

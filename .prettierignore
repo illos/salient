@@ -1,0 +1,8 @@
+node_modules/
+dist/
+vendor/
+convex/_generated/
+pnpm-lock.yaml
+docs/
+*.md
+shared/goblin-warrior.json

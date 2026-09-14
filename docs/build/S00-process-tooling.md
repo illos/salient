@@ -87,4 +87,50 @@ None.
 
 ## Work log
 
-_Empty._
+### 2026-09-14 — Plan (implementer: Claude Fable 5.1, worktree `slice/S00`)
+
+Spec sections read in this checkout: `docs/build/README.md#commit-format`,
+`docs/build/README.md#verification-baseline`, `docs/development-process.md#keep-the-process-small`,
+`docs/development-process.md#rules-review-workflow-accepted-for-trial`,
+`docs/v1-tech-stack-spec.md#9-verification-and-acceptance`. No discrepancy between the slice summary
+and the cited sections.
+
+Environment note: the worktree's `node_modules` symlink to the main checkout could not be used (pnpm's
+pre-run dependency check tried to purge it, and `pnpm add` would have written into the other checkout).
+Replaced it with a real `pnpm install --frozen-lockfile` from the store before starting.
+
+Files to add:
+
+- `scripts/check-commit.ts` — commit message validator (file path or stdin). Optional `--merge` flag
+  makes `Reviewed-By:` required; without it `Reviewed-By:` is optional because the `commit-msg` hook runs
+  before an independent review can exist (see the implementation note added to
+  `docs/build/README.md#commit-format`).
+- `scripts/check-links.ts` — relative link and anchor validator over `docs/**/*.md`, `README.md`,
+  `CLAUDE.md`, `agent.MD`; shares the GitHub slug function with the commit checker via
+  `scripts/lib/markdown.ts`.
+- `scripts/check-vendor.ts` — fails when a submodule under `vendor/` is not at its pinned commit or
+  has working-tree changes.
+- `eslint.config.js`, `.prettierrc.json`, `.prettierignore`, `.github/workflows/check.yml`.
+- `tests/scripts/check-commit.test.ts`, `tests/scripts/check-links.test.ts` — Vitest coverage for the
+  validators, with expected outcomes taken from the format rules in `docs/build/README.md`.
+
+Files to change:
+
+- `package.json` — pinned devDependencies (`eslint`, `@eslint/js`, `typescript-eslint`,
+  `eslint-plugin-react-hooks`, `@convex-dev/eslint-plugin` if it installs cleanly, `prettier`,
+  `simple-git-hooks`, `globals`), `prepare` script, `simple-git-hooks` config, `check` extended to
+  `lint`, `check:engine`, `check:app`, `check-links`, `check-vendor`, `foes:source`, `build`; `test`
+  and `check:engine` moved from `node --test` to Vitest.
+- `vitest.config.ts` — projects for `tests/*.test.ts` (engine, Node environment), `tests/app/**`
+  (convex-test) and `tests/scripts/**`.
+- `tests/*.test.ts` — `node:test`/`node:assert` imports replaced by Vitest's `test` plus
+  `node:assert/strict` (assertions unchanged, so expected values are untouched).
+- `tsconfig.json` / `tsconfig.web.json` — include the new scripts and tests for typechecking.
+- `docs/build/README.md` — implementation note under *Commit format* and the exact `pnpm check`
+  command list under *Verification baseline*.
+
+Dependencies: none real, none stubbed.
+
+Commits planned: (1) `feat(S00)` tooling, (2) `chore(S00)` formatter run over `web/`, `convex/`,
+`shared/`, `scripts/`, `src/`, `tests/`, and (3) `docs(S00)` only if `check-links` finds genuinely
+broken links.

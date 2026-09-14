@@ -43,6 +43,8 @@ try {
   if (auth) {
     try {
       const result = await auth.signOut();
+      // The throw is caught by the catch below; it never escapes the finally block.
+      // eslint-disable-next-line no-unsafe-finally
       if (result.error) throw new Error('Temporary CLI session could not be revoked.');
     } catch { console.error('Temporary CLI session cleanup failed; sign out that session before reusing this environment.'); process.exitCode = 1; }
   }

@@ -106,6 +106,15 @@ Rules:
 - A commit must not add a rule, formula, threshold or resource grant that the `Spec:` sections do not
   state or that the pinned Compendium does not support. The rules reviewer checks this.
 
+Implementation note (S00, 2026-09-14): `scripts/check-commit.ts` enforces the rules above. The
+`commit-msg` hook (installed by `pnpm prepare` through simple-git-hooks) runs it on every commit
+without `--merge`: `Reviewed-By:` is then optional, because the hook runs before an independent review
+can exist. The lead runs `node scripts/check-commit.ts --merge --range main..slice/<id>` before
+merging; with `--merge`, `Reviewed-By:` with a `pass` verdict is required on every commit that touches
+code (a path outside `docs/` that is not `*.md`). `Spec:` anchors resolve against the staged tree in
+the hook and against each commit's own tree for `--rev`/`--range`. CI runs the checker over the pushed
+range. `SKIP_SIMPLE_GIT_HOOKS=1` bypasses the hook for an emergency; do not use it for slice commits.
+
 Spec documents are updated in the same commit as the code they describe when the update is an
 implementation note. Product-decision changes to a spec are separate `docs` commits that cite the
 user-questions entry they resolve.
@@ -137,10 +146,16 @@ deployment. Development data remains disposable; reset and reseed rather than mi
 
 ## Verification baseline
 
-`pnpm check` must pass before any review request: engine typecheck and tests, app typecheck and tests,
-production build. Browser tests (`pnpm test:browser`) are required for slices that change UI flows and
-need both dev servers running. Every `A` slice adds tests at the shared-operation level (convex-test)
-before UI tests. S00 adds lint and the commit checker to `pnpm check`.
+`pnpm check` must pass before any review request. Since S00 it runs, in order: `pnpm lint`
+(ESLint, then Prettier `--check`), `pnpm check:engine` (engine typecheck and Vitest `engine` project),
+`pnpm check:app` (app typecheck and Vitest `app` and `scripts` projects), `pnpm check-links`
+(relative links and anchors in `docs/`, `README.md`, `CLAUDE.md`, `agent.MD`), `pnpm check-vendor`
+(every `vendor/` submodule at its pinned commit and unmodified), `pnpm foes:source` and `pnpm build`.
+Browser tests (`pnpm test:browser`) are required for slices that change UI flows and need both dev
+servers running. Every `A` slice adds tests at the shared-operation level (convex-test) before UI
+tests. The commit checker runs in the `commit-msg` hook and in CI (`.github/workflows/check.yml`),
+not inside `pnpm check`, so a clean checkout of any commit passes `pnpm check` regardless of its
+history. `pnpm format` applies Prettier (print width 100).
 
 ## Questions for the user
 
