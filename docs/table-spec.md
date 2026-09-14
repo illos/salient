@@ -1245,6 +1245,11 @@ For example, changing a hero's current Stamina from 12 to 17 on its sheet persis
 “Manual adjustment — Stamina 12 → 17” with the Director and hero identified. It does not change
 the earlier attack's recorded damage or present the adjustment as a new sourced healing ability.
 
+*Implementation note, 2026-09-15 (A02):* the provisional `stamina-maximum` and `recoveries-maximum`
+adjustment verbs A03 added while no evaluated build existed (Q-A-200) are removed; the maxima come
+from the effective build's baseline, and `/adjust` covers current Stamina, temporary Stamina,
+Recoveries, heroic resource, surges, Victories and Malice.
+
 Edges, banes and other roll-local inputs/results belong to their action's log artifacts and are
 accounted for separately. They are not the persistent sheet/resource fields described above.
 The game log is a persistent history, not a collection of freely editable fields: its editable inputs

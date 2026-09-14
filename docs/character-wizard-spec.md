@@ -240,6 +240,12 @@ Each derived value or ability should identify the choice, grant, item, or effect
 official text through Compendium SCC references. Unknown requirements must stay visible rather than being
 interpreted as satisfied, false, or harmless.
 
+**Implementation note, 2026-09-15 (A02):** `shared/evaluate/character.ts` implements the R02
+contract; `characters.evaluate` runs it as a shared read and every saved revision persists its
+`EvaluationResult` and `derivedBaseline`. The wizard (`web/wizard/`) renders every presented R01 step
+in source order with the full pool visible and unsupported options labeled and disabled; a changed
+parent prunes the selections it invalidates.
+
 **Implementation note, 2026-09-14 (R02):** the evaluator contract for this section is delivered as
 `shared/contracts/characterEvaluation.ts` (types only) with its sourced formulas, provenance rule, status
 rules and three hand-computed examples in `docs/character-derived-values.md`, mirrored in
@@ -426,6 +432,16 @@ flowchart LR
     R -->|Decline or withdraw| A
     A -->|Valid scoped level-up| N
 ```
+
+**Implementation note, 2026-09-15 (A02):** submit, withdraw, approve and decline are the registered
+operations `character.submit|withdraw|approve|decline` (`convex/lib/characterOperations.ts`), wrapped
+by `characters.submit|withdraw|approve|decline` for the character page and the headless CLI. A
+submission is a `characterReviews` row naming the exact revision; `characters.campaignId` and
+`effectiveRevisionId` change only on activation (approval, or the owning active Director's logged
+submission). A save after submission marks the review `stale` so a later approval cannot activate
+unseen edits. First activation initializes live state per R03; later activations leave it untouched
+and record unreconciled maximum changes labeled Q-CHAR-2. Withdraw and decline are not blocked by the
+combat lock (they change no effective build); submit, save and approve are.
 
 Initial admission uses the draft/review/activation path without an existing effective build, with the
 confirmed owning-Director exemption. Approval references belong to the campaign attachment; copying a

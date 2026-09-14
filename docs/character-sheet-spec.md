@@ -148,6 +148,18 @@ operation identity. Shared updates and reload restore actual values, active cond
 Reading, expanding sections or changing the viewed hero does not create gameplay log entries.
 Keep the long game log separately bounded; the sheet must not load full history to display a stat.
 
+## Implementation note (A02, 2026-09-15)
+
+`characters.sheet` is the one read behind the standalone page (`web/characters.tsx`) and the table's
+heroes pane (`web/character-sheet/`, mounted in `web/table/index.tsx` beside A04's turn controls).
+It returns an owner payload (with notes), a Director payload (no notes; a `proposed` view for a
+pending submission) or a peer payload (name, Stamina and Recoveries with their maxima); notes never
+leave the owner payload. Ability grouping uses the entry's printed `action_type`; the kit's signature
+ability, carried by the kit entry with no ability frontmatter, is listed under "other" with its text.
+Director numeric edits submit `/adjust <field>`; condition toggles submit `/condition on|off`; the
+Catch Breath control is disabled and labeled pending A05 while the FreePlay `/hero recover` control
+remains. Turn state reads "pending A04" until the pane's turn controls are joined to the sheet.
+
 ## First-pass acceptance
 
 These are implementation checks, not a claim that the feature is built. Use the minimal wizard

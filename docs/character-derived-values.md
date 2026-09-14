@@ -367,6 +367,14 @@ list with `null` for a deferred slot; assignment map).
    when `kit.choice` is Mountain).
 6. The complication step is not presented (Q-CHAR-1, ruling); its absence is never a diagnostic.
 
+**Implementation note, 2026-09-15 (A02):** `shared/evaluate/character.ts` implements this contract and
+`tests/character-evaluator.test.ts` checks the three examples below as whole results. Choices the
+contract leaves to engineering, labeled: a legal but unsupported option (`unsupported-option`) keeps
+the grants the definitions state for it in the partial (a Panther kit lists no kit numbers rather than
+invented ones); a value chosen twice in one `multi` or `points` decision is `count-mismatch`; a `null`
+slot in a non-deferrable `multi` is `required-choice-missing`; a mismatched definitions version or
+revision is reported under the key `definitions`.
+
 ## 4. Worked examples
 
 Computed by hand from the sentences in section 1; the same three examples are in

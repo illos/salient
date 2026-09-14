@@ -102,8 +102,6 @@ implemented as written, stop and raise `Q-A-n`; do not adjust the formula.
 
 ## Work log
 
-_Empty._
-
 ### Question audit follow-up: Q-A-200
 
 The temporary A03 baseline bridge is [engineering follow-up](../rules-questions-for-user.md#q-a-200-how-should-a-heros-stamina-maximum-recoveries-and-characteristics-reach-the-table-before-a02),
@@ -111,3 +109,99 @@ not a new user decision. Deliver the evaluated baseline and sourced first-admiss
 required here, then retire the provisional maximum-entry fields and supplied-score dependency for
 evaluated heroes. Verify the shared table operations use the recorded baseline. This does not
 establish permanent maximum overrides or claim the integration is already complete.
+
+### Plan (2026-09-15, implementer)
+
+Files: `shared/evaluate/{character,sources,definitions,draft,structure}.ts` (the R02 evaluator and
+its presentation helpers), `convex/lib/characterBuild.ts` (evaluation entry, first-admission live
+values, activation, combat lock), `convex/lib/characterOperations.ts` (registered
+`character.submit|withdraw|approve|decline`), `convex/characters.ts` (evaluate, sheet and review
+reads, admission wrappers), `convex/characterTables.ts` (revision evaluation fields, R03 live shape,
+`characterReviews`, `unreconciled`), `convex/lib/tableOperations.ts` (baseline-fed
+`/hero recover`, `/test roll`, `/adjust`), `web/wizard/`, `web/character-sheet/`,
+`web/characters.tsx`, mounts in `web/table/index.tsx` and `web/campaigns.tsx`. Tests:
+`tests/character-evaluator.test.ts`, `tests/app/characters.test.ts`, `tests/app/admission.test.ts`;
+the app fixture (`tests/app/fixtures/table.ts`) and the browser hero fixture admit their hero through
+the real path. Dependencies R01, R02, R03, S01, A01, A03 and A04 are real; no fixture stands in.
+
+### Implementation notes (2026-09-15)
+
+- **Evaluator.** `evaluateCharacter(input, definitions)` reproduces the three R02 examples
+  byte-for-byte (`tests/character-evaluator.test.ts` compares whole results, including every
+  provenance entry). Engineering choices within the R02 vocabulary, labeled here: a legal option
+  R01 marks unsupported yields `unsupported-option` and its grants still appear in the partial (the
+  option is legal; only the application does not offer it), so a Panther kit shows no kit numbers
+  rather than invented ones; the same value twice in one `multi` or `points` decision is
+  `count-mismatch` (invalid); a `null` slot in a non-deferrable `multi` is `required-choice-missing`
+  (incomplete); a mismatched definitions version or revision is `definition-mismatch` under the key
+  `definitions`. Steps with `presentedInV001: false` (the complication step, Q-CHAR-1) are skipped
+  entirely: never a diagnostic, never a grant.
+- **Admission model.** `characters.campaignId` is set only by activation (approval or the owning
+  Director's logged submission); a pending submission is a `characterReviews` row and reserves the
+  attachment (a second submission anywhere is refused until withdrawn or decided). Pending heroes are
+  not in the roster and cannot act. A save after submission marks the review `stale`; approval of a
+  stale submission is refused and the owner resubmits. Withdraw and decline are not blocked by the
+  combat lock because they change no effective build; submit, save and approve are (A04's
+  `requireCharacterEditable`).
+- **Live state.** `liveState` is the R03 shape with `origin.kind = 'first-admission'`; the A03
+  provisional shape and the `stamina-maximum` / `recoveries-maximum` verbs are removed (Q-A-200,
+  option A as recommended). `/hero recover` reads the maximum and recovery value from the effective
+  baseline, `/test roll` reads the characteristic from it (`value=` is refused when it disagrees, and
+  still accepted as a supplied fact only for a hero without a baseline, which admission never
+  produces). A later activation compares `staminaMaximum`, `recoveriesMaximum` and the heroic
+  resource name and records `UnreconciledMaximumChange` entries (Q-CHAR-2) on the character; the
+  sheet shows them. No v0.01 supported path changes a maximum, so this branch is exercised only for
+  the "same build, new revision" case in tests.
+- **Sheet audiences.** `characters.sheet` returns three shapes: owner (with notes), Director of the
+  attached campaign or of a campaign with a pending submission (no notes; the `proposed` view shows
+  the submitted revision), and peer members of the attached campaign (name, Stamina and Recoveries
+  with their maxima). Anyone else is refused. Ability metadata is the entry's frontmatter only; the
+  kit's signature ability (carried by the kit entry, which prints no ability frontmatter) groups as
+  "other" with its text readable. The Catch Breath button renders disabled with the "pending A05"
+  label; the existing FreePlay `/hero recover` control stays beside it.
+- **Table pane.** The sheet is mounted inside A04's hero rows below the turn controls (one open sheet,
+  a text selector for the others), so A04's markup and turn-taking behavior are unchanged.
+- **Browser fixtures.** `tests/browser/local-fixtures.ts` now admits heroes through the CLI
+  (`characters:create/save/submit/approve`) instead of importing rows; `table-audit.spec.ts` and
+  `combat.spec.ts` were updated accordingly but not run (below).
+
+### Verification (2026-09-15)
+
+- `pnpm check`: clean after each commit (lint, engine 57 tests, app and scripts 232 tests, links,
+  vendor, content, build).
+- Acceptance 1: `tests/app/characters.test.ts` saves the hero-fixture choices and reads the revision
+  row back: status `complete`, `derivedBaseline` equal to the R02 complete example
+  (`shared/content/character-evaluation-examples.json`), `characters.evaluate` returns the same.
+- Acceptance 2: same file; no kit gives `incomplete` with `kit.choice: required-choice-missing`,
+  Impressive Horns + Wings gives `invalid`; both equal the R02 examples and persist on the revision.
+- Acceptance 3: `tests/app/admission.test.ts`: a player's submission leaves `effectiveRevisionId`,
+  `liveState` and `campaignId` null and the hero out of the roster; players and observers cannot
+  approve; withdrawal, decline, stale-after-edit and the combat lock are read back from the review
+  and character rows; approval sets the exact revision, the R02 baseline and the R03 first-admission
+  values (30 / 0 / 10 / ferocity 0 / 0 / 0 / 0 / nine toggles off); the Director's own submission
+  is effective at once with a `logged` review and an event that says so; a retried command id
+  admits once.
+- Acceptance 4: the same file adjusts Stamina to 12, toggles prone, saves an incomplete draft and a
+  complete one, has the complete one approved as a full edit, and reads `liveState` back unchanged
+  after each step; the owner's effective sheet still shows Stamina 12 while the draft preview is
+  labeled `draft`.
+- Acceptance 5: owner payload carries the note; Director payload has no `notes` key and no note
+  text anywhere in its JSON; the observer's payload is exactly name, owner, Stamina and Recoveries
+  (with maxima); an outsider is refused; a pending unattached hero is invisible to peers.
+- Acceptance 6: the seven R02 abilities, in order, each with `content.text` byte-equal to the pinned
+  vendor file; nine features with entries likewise; the culture edge has none (clean Heroes text).
+- Acceptance 7: `/adjust victories value=1` yields `manual.adjustment`, description
+  "Manual adjustment — Thorn Victories 0 → 1.", `data.before/after` 0/1, the journal row
+  `liveState.victories` 0 → 1, persisted 1; a player is refused; the provisional verbs are absent
+  from `commands.list` and the four `character.*` operations are present.
+- Acceptance 8 (rules review): pending.
+- Browser walkthrough (wizard, submit, approve, three-audience sheet): **not run**. This worktree has
+  no local deployment and the shared one serves other slices; the updated browser specs are
+  unverified.
+
+### Unfinished (2026-09-15)
+
+- Browser test of the wizard journey and the updated `table-audit.spec.ts` / `combat.spec.ts`.
+- No detach or duplicate operation (out of scope); no restore of pending-review UI beyond the
+  campaign page queue and the character page badges.
+- Independent review and rules review not requested (deferred to the user's audit thread).

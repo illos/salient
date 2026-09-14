@@ -397,6 +397,9 @@ No user approval is implied by this classification.
   supplies real baselines, then retire it. This reclassification does not authorize permanent
   maximum overrides or turn a shipped default into user approval. See
   [the audit](build/audits/2026-09-14-question-queue-dedup.md).
+  Follow-up (A02, 2026-09-15): the evaluated baseline now supplies the maxima and characteristics;
+  the two provisional verbs are removed and `/test roll` reads the score from the build.
+- **Answer:**
 
 ## Resolved questions
 
