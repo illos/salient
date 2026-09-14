@@ -47,7 +47,8 @@ archive boundary that nothing crosses.
 - Correction entries from A05's post-roll card use the same window check: acting player until the next
   actor's turn start and no intervening seam; Director always, subject to the full-rewind rule for older
   events once later gameplay has committed.
-- Campaign setting "Enable user undo" default on; off removes player undo, not Director rewind, and never
+- Campaign setting "Enable user undo" default on; off removes player undo/redo and post-roll edge/bane
+  corrections (Q-A-601), preserves Director history/correction authority, and never
   affects inventory (none exists yet).
 - Log presentation: undone entries stay visible and marked; the effective branch is what rules use.
 - Headless parity; tests are the main deliverable.
@@ -79,7 +80,8 @@ library function A05 calls).
 3. Director rewinds both in order; a rewind attempt past the encounter start is rejected.
 4. Redo after undo restores the same dice values and outcome; after a new attack, redo is unavailable.
 5. Turn start blocks undo of the previous turn's action for the player; Director rewind still works.
-6. With "Enable user undo" off, player undo is rejected, Director rewind unaffected.
+6. With "Enable user undo" off, player undo/redo and post-roll edge/bane corrections are rejected;
+   Director rewind/redo and corrections remain available under their existing limits (Q-A-601).
 7. Post-roll bane addition by the acting player succeeds before the next actor's turn starts and is
    rejected after.
 8. Rules reviewer confirms that no restoration invoked the engine or the dice operation (assert by
@@ -163,8 +165,9 @@ journaling the target's temporary Stamina and Stamina. A05 replaces it with the 
 2. A **Director adjustment or correction on the player's hero** is the Director's entry, closes the
    player window and is not player-undoable; other operations the Director issues *for* a hero
    (`@Thorn /hero recover`) are that character's actions and are player-undoable.
-3. **Enable user undo** governs undo and redo, not the acting player's post-roll correction window
-   ("off removes player undo only"). Q-A-601.
+3. **Superseded by user decision, 2026-09-14 (Q-A-601):** Enable user undo also gates the acting
+   player's post-roll edge/bane corrections. Off leaves those corrections Director-only. The
+   implementation initially omitted this check; A06/A05 must apply and verify the updated contract.
 4. In **FreePlay**, Director rewind reaches back to the FreePlay stretch start (session start or the
    last archived encounter), the same floor players have, since the spec bounds rewind by the
    archive and session closure rather than by a FreePlay-specific limit.
@@ -237,5 +240,14 @@ with journal rows so `/history undo` of the adjudication restores the prior effe
   are the only edit to original events); the alias mechanism for re-created documents.
 - Floors: OK event via the precombat snapshot; FreePlay floor from archived encounters' events
   (depends on `run` stamping `encounterId`); what A07 must add to `ENCOUNTER_LIFECYCLE_KINDS`.
-- `correctionWindow` contract for A05 and the setting not gating it (Q-A-601).
+- `correctionWindow` contract for A05: repair and verify the missing setting gate for acting-player
+  corrections under confirmed Q-A-601; preserve Director corrections and existing history limits.
 - Not journaled state (interaction rows, drafts) left unchanged by undo.
+
+### User decision follow-up: Q-A-601
+
+The user confirmed that disabling Enable user undo also disables acting-player post-roll edge/bane
+corrections. Update the shared correction permission check consumed by A05 and its card projection;
+previously opened cards must not bypass the current setting. Verify both player refusal when off
+and ordinary window-limited access when on, with Director authority retained. The original
+implementation/verification notes above describe the earlier ungated behavior, not proof of this fix.

@@ -1482,6 +1482,12 @@ possible result editor. Acting-player authority confirmed 2026-09-14: the acting
 edges/banes to their own eligible attack in the same window as their gameplay undo, with the next
 actor's turn start as the outer cutoff. Existing Director correction authority remains available.
 
+Confirmed 2026-09-14 (Q-A-601): **Enable user undo** also controls acting-player post-roll
+edge/bane corrections. When it is off, players cannot add or remove edges/banes on their recorded
+rolls; those corrections remain available to the Director under existing history/session limits.
+When it is on, the existing correction window and authority rules apply. Check the setting in the
+shared correction operation, including submissions from previously opened cards.
+
 Apply the existing undo/history limits to this permission: another character's committed action
 or a Director correction can close the player's window earlier. Correcting an older attack still
 requires sequentially undoing intervening gameplay; being before the next turn does not permit
@@ -2811,8 +2817,9 @@ disposition `undone`/`redone`. Enable user undo is `/campaign user-undo`. Interp
 A05 correction-window contract are in `docs/build/A06-history-undo-corrections.md`.
 
 Confirmed campaign setting: **Enable user undo**, enabled by default for new campaigns (confirmed 2026-09-11).
-Disabling it blocks ordinary player undo while retaining Director undo/redo. Setting-management authority and
-when changes may apply remain open.
+Disabling it blocks ordinary player undo and redo and, confirmed 2026-09-14 (Q-A-601), acting-player
+post-roll edge/bane corrections. Director undo/redo and corrections remain available under their
+existing limits. Setting-management authority and when changes may apply remain open.
 
 The game log/state machine restores recorded state, rather than rerunning rules or dice. Undo/redo must change
 actual affected sheet/monster/resource state, not just visible dialogue. Preserve the recorded inputs,

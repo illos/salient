@@ -347,25 +347,6 @@ are the shared lifecycle decisions; the remaining entries are bounded content/sc
 - **Blocked until answered:** nothing in v0.01 (the journey admits one hero once). Re-attachment is V1.
 - **Answer:**
 
-### Q-A-601: Does Enable user undo also remove the acting player's post-roll correction window?
-
-- **Status:** open
-- **Raised by:** A06, 2026-09-14
-- **Where:** `docs/table-spec.md#undo-permissions-and-proposed-campaign-control` ("disabling it blocks
-  ordinary player undo") and `docs/table-spec.md#director-edits-to-inline-results` ("the acting player
-  may add edges/banes ... in the same window as their gameplay undo").
-- **Conflict or gap:** The correction time window uses the same seams and next-turn limit as undo,
-  while the setting explicitly disables ordinary player undo. Whether that setting also disables
-  the separate modifier-correction permission is not explicitly settled. Disabling permission to
-  undo does not itself erase the timing boundaries used by other operations.
-- **Options:** A: the setting removes undo and redo only; corrections keep the seam/turn-start
-  window. B: the setting also removes player corrections (Director-only corrections).
-- **Recommendation:** A, applied provisionally; the setting's text names undo, and corrections are
-  appended adjudications the Director can still rewind.
-- **Blocked until answered:** nothing; A applied provisionally (`correctionWindow` does not read
-  the setting).
-- **Answer:**
-
 ## Engineering follow-ups
 
 These entries retain integration context without asking the user for routine engineering decisions.
@@ -402,6 +383,27 @@ No user approval is implied by this classification.
 - **Answer:**
 
 ## Resolved questions
+
+### Q-A-601: Does Enable user undo also remove the acting player's post-roll correction window?
+
+- **Status:** resolved 2026-09-14; [recorded decision](table-spec.md#director-edits-to-inline-results)
+- **Raised by:** A06, 2026-09-14
+- **Where:** `docs/table-spec.md#undo-permissions-and-proposed-campaign-control` ("disabling it blocks
+  ordinary player undo") and `docs/table-spec.md#director-edits-to-inline-results` ("the acting player
+  may add edges/banes ... in the same window as their gameplay undo").
+- **Conflict or gap:** The correction time window uses the same seams and next-turn limit as undo,
+  while the setting explicitly disables ordinary player undo. Whether that setting also disables
+  the separate modifier-correction permission is not explicitly settled. Disabling permission to
+  undo does not itself erase the timing boundaries used by other operations.
+- **Options:** A: the setting removes undo and redo only; corrections keep the seam/turn-start
+  window. B: the setting also removes player corrections (Director-only corrections).
+- **Recommendation:** A, applied provisionally; the setting's text names undo, and corrections are
+  appended adjudications the Director can still rewind.
+- **Blocked until answered:** answered; A06/A05 must gate acting-player corrections on the
+  campaign setting and verify the change.
+- **Answer:** Yes: disabling Enable user undo also disables acting-player post-roll edge/bane
+  corrections (option B). Director corrections remain available under their existing limits. This
+  supersedes the recommendation and provisional implementation that left player corrections enabled.
 
 ### Q-A-600: May a player undo their own Take turn?
 
