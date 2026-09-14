@@ -240,6 +240,17 @@ Each derived value or ability should identify the choice, grant, item, or effect
 official text through Compendium SCC references. Unknown requirements must stay visible rather than being
 interpreted as satisfied, false, or harmless.
 
+**Implementation note, 2026-09-14 (R02):** the evaluator contract for this section is delivered as
+`shared/contracts/characterEvaluation.ts` (types only) with its sourced formulas, provenance rule, status
+rules and three hand-computed examples in `docs/character-derived-values.md`, mirrored in
+`shared/content/character-evaluation-examples.json` and checked by `tests/character-derived-values.test.ts`.
+Input is the R01 decision ids and selection shapes; output is `complete | incomplete | invalid | unsupported`,
+diagnostics keyed by decision id, and a derived baseline in which every value carries the decision id,
+selected value and source sentence that supplied it. Status precedence (`invalid` > `unsupported` >
+`incomplete`) is a labeled engineering choice within this vocabulary; warnings never change the status. The
+baseline is distinct from live values (R03). Open questions it labels are Q-R-100 to Q-R-103 and
+Q-CHAR-10 to Q-CHAR-12; no new question was needed. A02 implements the evaluator against these types.
+
 ## 4. Wizard flows
 
 **Confirmed Director-owned character path:** An active Director's own character admission and full edits are

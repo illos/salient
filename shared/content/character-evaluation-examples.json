@@ -1,0 +1,3450 @@
+{
+  "schemaVersion": "r02.1",
+  "title": "Worked evaluator examples for the level-one devil Fury",
+  "document": "docs/character-derived-values.md",
+  "contract": "shared/contracts/characterEvaluation.ts",
+  "definitions": "shared/content/fury-level-one-decisions.json",
+  "compendiumRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+  "sourceRoot": "vendor/steel-compendium",
+  "textNormalization": "Before verbatim comparison, Markdown links [label](target) collapse to label, <br> becomes a space, * emphasis markers are removed, and whitespace runs collapse to one space.",
+  "examples": {
+    "complete": {
+      "input": {
+        "definitionsSchemaVersion": "r01.1",
+        "compendiumRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+        "level": 1,
+        "selections": {
+          "ancestry.choice": "Devil",
+          "ancestry.devil.silver-tongue-skill": "Persuade",
+          "ancestry.devil.purchased-traits": ["Beast Legs", "Impressive Horns"],
+          "culture.name": "wilderness mercenary commune",
+          "culture.language": "Anjali",
+          "culture.environment": "Wilderness",
+          "culture.environment.skill": "Swim",
+          "culture.organization": "Communal",
+          "culture.organization.skill": "Blacksmithing",
+          "culture.upbringing": "Martial",
+          "culture.upbringing.skill": "Intimidate",
+          "career.choice": "Soldier",
+          "career.soldier.skill.exploration": "Endurance",
+          "career.soldier.skill.intrigue": "Alertness",
+          "career.soldier.languages": ["Caelian", "Vaslorian"],
+          "career.soldier.perk": "Teamwork",
+          "career.soldier.inciting-incident": "Sole Survivor",
+          "class.choice": "Fury",
+          "class.fury.characteristic-array": "1, 0, 0",
+          "class.fury.array-assignment": {
+            "Intuition": 1,
+            "Reason": 0,
+            "Presence": 0
+          },
+          "class.fury.skills": ["Jump", "Climb"],
+          "class.fury.aspect": "Berserker",
+          "class.fury.signature-ability": "Brutal Slam",
+          "class.fury.ability-3": "Out of the Way!",
+          "class.fury.ability-5": "Thunder Roar",
+          "kit.choice": "Mountain",
+          "details.name": "Grug"
+        }
+      },
+      "expected": {
+        "status": "complete",
+        "diagnostics": {
+          "career.soldier.languages": [
+            {
+              "decisionId": "career.soldier.languages",
+              "severity": "warning",
+              "code": "duplicate-language",
+              "message": "Caelian duplicates the automatic grant from culture.caelian; kept under the Q-R-100 provisional default",
+              "source": {
+                "path": "en/books/heroes/clean/Draw Steel Heroes.md",
+                "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                "quote": "All player characters know Caelian!",
+                "heading": "Caelian Empire"
+              },
+              "uncertainty": "Q-R-100"
+            }
+          ]
+        },
+        "baseline": {
+          "level": {
+            "value": 1,
+            "provenance": [
+              {
+                "decisionId": "class.level",
+                "source": {
+                  "path": "en/unified/md/chapter/making-a-hero.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Each option you can choose for your hero at 1st level includes a parenthetical selection labeled \"Quick Build.\"",
+                  "heading": "Step-by-Step Hero Making"
+                },
+                "operation": "set",
+                "amount": 1
+              }
+            ]
+          },
+          "ancestry": {
+            "value": "Devil",
+            "provenance": [
+              {
+                "decisionId": "ancestry.choice",
+                "selection": "Devil",
+                "source": {
+                  "path": "en/unified/md/chapter/making-a-hero.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Choose your hero's humanoid ancestry from among the range of ancestries available in the game",
+                  "heading": "2. Ancestry"
+                }
+              }
+            ]
+          },
+          "class": {
+            "value": "Fury",
+            "provenance": [
+              {
+                "decisionId": "class.choice",
+                "selection": "Fury",
+                "source": {
+                  "path": "en/unified/md/chapter/making-a-hero.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "You can be a censor, conduit, elementalist, fury, null, shadow, tactician, talent, or troubadour.",
+                  "heading": "5. Class"
+                }
+              }
+            ]
+          },
+          "subclass": {
+            "value": "Berserker",
+            "provenance": [
+              {
+                "decisionId": "class.fury.aspect",
+                "selection": "Berserker",
+                "source": {
+                  "path": "en/unified/md/feature/fury/level-1/primordial-aspect.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Your primordial aspect is your subclass"
+                }
+              }
+            ]
+          },
+          "career": {
+            "value": "Soldier",
+            "provenance": [
+              {
+                "decisionId": "career.choice",
+                "selection": "Soldier",
+                "source": {
+                  "path": "en/unified/md/chapter/making-a-hero.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Choose your hero's career, which describes what you did for a living before you became a hero.",
+                  "heading": "4. Career"
+                }
+              }
+            ]
+          },
+          "characteristics": {
+            "M": {
+              "value": 2,
+              "provenance": [
+                {
+                  "decisionId": "class.fury.fixed-characteristics",
+                  "source": {
+                    "path": "en/unified/md/class/fury.md",
+                    "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                    "quote": "You start with a Might of 2 and an Agility of 2",
+                    "heading": "Basics"
+                  },
+                  "operation": "set",
+                  "amount": 2
+                }
+              ]
+            },
+            "A": {
+              "value": 2,
+              "provenance": [
+                {
+                  "decisionId": "class.fury.fixed-characteristics",
+                  "source": {
+                    "path": "en/unified/md/class/fury.md",
+                    "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                    "quote": "You start with a Might of 2 and an Agility of 2",
+                    "heading": "Basics"
+                  },
+                  "operation": "set",
+                  "amount": 2
+                }
+              ]
+            },
+            "R": {
+              "value": 0,
+              "provenance": [
+                {
+                  "decisionId": "class.fury.characteristic-array",
+                  "selection": "1, 0, 0",
+                  "source": {
+                    "path": "en/unified/md/class/fury.md",
+                    "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                    "quote": "you can choose one of the following arrays for your other characteristic scores:",
+                    "heading": "Basics"
+                  }
+                },
+                {
+                  "decisionId": "class.fury.array-assignment",
+                  "selection": "Reason 0",
+                  "source": {
+                    "path": "en/unified/md/class/fury.md",
+                    "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                    "quote": "you can choose one of the following arrays for your other characteristic scores:",
+                    "heading": "Basics"
+                  },
+                  "operation": "set",
+                  "amount": 0,
+                  "uncertainty": "Q-R-101"
+                }
+              ]
+            },
+            "I": {
+              "value": 1,
+              "provenance": [
+                {
+                  "decisionId": "class.fury.characteristic-array",
+                  "selection": "1, 0, 0",
+                  "source": {
+                    "path": "en/unified/md/class/fury.md",
+                    "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                    "quote": "you can choose one of the following arrays for your other characteristic scores:",
+                    "heading": "Basics"
+                  }
+                },
+                {
+                  "decisionId": "class.fury.array-assignment",
+                  "selection": "Intuition 1",
+                  "source": {
+                    "path": "en/unified/md/class/fury.md",
+                    "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                    "quote": "you can choose one of the following arrays for your other characteristic scores:",
+                    "heading": "Basics"
+                  },
+                  "operation": "set",
+                  "amount": 1,
+                  "uncertainty": "Q-R-101"
+                }
+              ]
+            },
+            "P": {
+              "value": 0,
+              "provenance": [
+                {
+                  "decisionId": "class.fury.characteristic-array",
+                  "selection": "1, 0, 0",
+                  "source": {
+                    "path": "en/unified/md/class/fury.md",
+                    "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                    "quote": "you can choose one of the following arrays for your other characteristic scores:",
+                    "heading": "Basics"
+                  }
+                },
+                {
+                  "decisionId": "class.fury.array-assignment",
+                  "selection": "Presence 0",
+                  "source": {
+                    "path": "en/unified/md/class/fury.md",
+                    "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                    "quote": "you can choose one of the following arrays for your other characteristic scores:",
+                    "heading": "Basics"
+                  },
+                  "operation": "set",
+                  "amount": 0,
+                  "uncertainty": "Q-R-101"
+                }
+              ]
+            }
+          },
+          "staminaMaximum": {
+            "value": 30,
+            "provenance": [
+              {
+                "decisionId": "class.fury.baseline",
+                "source": {
+                  "path": "en/unified/md/class/fury.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Starting Stamina at 1st Level: 21",
+                  "heading": "Basics"
+                },
+                "operation": "base",
+                "amount": 21
+              },
+              {
+                "decisionId": "kit.mountain.contributions",
+                "source": {
+                  "path": "en/unified/md/kit/mountain.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Stamina Bonus: +9 per echelon",
+                  "heading": "Kit Bonuses"
+                },
+                "operation": "add",
+                "amount": 9,
+                "note": "1st echelon at level 1 (rule/general/echelon.md); rule: chapter/kits.md, Stamina Bonus"
+              }
+            ]
+          },
+          "recoveriesMaximum": {
+            "value": 10,
+            "provenance": [
+              {
+                "decisionId": "class.fury.baseline",
+                "source": {
+                  "path": "en/unified/md/class/fury.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Recoveries: 10",
+                  "heading": "Basics"
+                },
+                "operation": "set",
+                "amount": 10,
+                "note": "rule: rule/health/recoveries.md, \"determined by their class\""
+              }
+            ]
+          },
+          "recoveryValue": {
+            "value": 10,
+            "provenance": [
+              {
+                "decisionId": "class.fury.baseline",
+                "source": {
+                  "path": "en/unified/md/rule/health/recoveries.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "A hero also has a recovery value that equals one-third of their Stamina maximum, rounded down."
+                },
+                "operation": "floor-divide",
+                "amount": 3,
+                "note": "floor(30 / 3)"
+              }
+            ]
+          },
+          "windedValue": {
+            "value": 15,
+            "provenance": [
+              {
+                "decisionId": "class.fury.baseline",
+                "source": {
+                  "path": "en/unified/md/rule/health/winded.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Your winded value equals half your Stamina maximum."
+                },
+                "operation": "floor-divide",
+                "amount": 2,
+                "note": "floor(30 / 2); R04 section 6.3"
+              }
+            ]
+          },
+          "speed": {
+            "value": 6,
+            "provenance": [
+              {
+                "decisionId": "ancestry.devil.base-statistics",
+                "source": {
+                  "path": "en/unified/md/rule/character/speed.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Unless otherwise noted, a character of any of these ancestries is size 1M and has speed 5 and stability 0.",
+                  "heading": "Starting Size and Speed"
+                },
+                "operation": "base",
+                "amount": 5
+              },
+              {
+                "decisionId": "ancestry.devil.purchased-traits",
+                "selection": "Beast Legs",
+                "source": {
+                  "path": "en/unified/md/feature/trait/devil/beast-legs.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "You have speed 6."
+                },
+                "operation": "set",
+                "amount": 6
+              },
+              {
+                "decisionId": "kit.mountain.contributions",
+                "source": {
+                  "path": "en/unified/md/chapter/kits.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "| Mountain | Heavy | Heavy | +9 | - | +2 | +0/+0/+4 | - | - | - | - |",
+                  "heading": "Kits Table"
+                },
+                "operation": "add",
+                "amount": 0,
+                "note": "Kits table speed column \"-\"; rule: chapter/kits.md, Speed Bonus"
+              }
+            ]
+          },
+          "stability": {
+            "value": 2,
+            "provenance": [
+              {
+                "decisionId": "ancestry.devil.base-statistics",
+                "source": {
+                  "path": "en/unified/md/rule/character/speed.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Unless otherwise noted, a character of any of these ancestries is size 1M and has speed 5 and stability 0.",
+                  "heading": "Starting Size and Speed"
+                },
+                "operation": "base",
+                "amount": 0
+              },
+              {
+                "decisionId": "kit.mountain.contributions",
+                "source": {
+                  "path": "en/unified/md/kit/mountain.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Stability Bonus: +2",
+                  "heading": "Kit Bonuses"
+                },
+                "operation": "add",
+                "amount": 2,
+                "note": "rule: chapter/kits.md, Stability Bonus"
+              }
+            ]
+          },
+          "size": {
+            "value": "1M",
+            "provenance": [
+              {
+                "decisionId": "ancestry.devil.base-statistics",
+                "source": {
+                  "path": "en/unified/md/rule/character/speed.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Unless otherwise noted, a character of any of these ancestries is size 1M and has speed 5 and stability 0.",
+                  "heading": "Starting Size and Speed"
+                },
+                "operation": "set"
+              }
+            ]
+          },
+          "disengage": {
+            "value": 1,
+            "provenance": [
+              {
+                "decisionId": "free-strikes.grant",
+                "source": {
+                  "path": "en/unified/md/feature/common/move-actions/disengage.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "When a creature takes the Disengage move action, they can shift 1 square."
+                },
+                "operation": "base",
+                "amount": 1,
+                "note": "common move action, not a creation decision; attached to the automatic step"
+              },
+              {
+                "decisionId": "kit.mountain.contributions",
+                "source": {
+                  "path": "en/unified/md/chapter/kits.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "| Mountain | Heavy | Heavy | +9 | - | +2 | +0/+0/+4 | - | - | - | - |",
+                  "heading": "Kits Table"
+                },
+                "operation": "add",
+                "amount": 0,
+                "note": "Kits table Disengage column \"-\"; rule: chapter/kits.md, Disengage Bonus"
+              }
+            ]
+          },
+          "potencyCharacteristic": {
+            "value": "M",
+            "provenance": [
+              {
+                "decisionId": "class.fury.baseline",
+                "source": {
+                  "path": "en/unified/md/class/fury.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Strong Potency: Might",
+                  "heading": "Basics"
+                },
+                "uncertainty": "Q-CHAR-12",
+                "note": "class-named characteristic; general rule names the highest (rule/character/potency.md), equal for every level-one Fury (Q-CHAR-12)"
+              }
+            ]
+          },
+          "potency": {
+            "weak": {
+              "value": 0,
+              "provenance": [
+                {
+                  "decisionId": "class.fury.baseline",
+                  "source": {
+                    "path": "en/unified/md/class/fury.md",
+                    "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                    "quote": "Weak Potency: Might − 2",
+                    "heading": "Basics"
+                  },
+                  "operation": "set",
+                  "amount": 0,
+                  "note": "Might 2 − 2"
+                }
+              ]
+            },
+            "average": {
+              "value": 1,
+              "provenance": [
+                {
+                  "decisionId": "class.fury.baseline",
+                  "source": {
+                    "path": "en/unified/md/class/fury.md",
+                    "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                    "quote": "Average Potency: Might − 1",
+                    "heading": "Basics"
+                  },
+                  "operation": "set",
+                  "amount": 1,
+                  "note": "Might 2 − 1"
+                }
+              ]
+            },
+            "strong": {
+              "value": 2,
+              "provenance": [
+                {
+                  "decisionId": "class.fury.baseline",
+                  "source": {
+                    "path": "en/unified/md/class/fury.md",
+                    "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                    "quote": "Strong Potency: Might",
+                    "heading": "Basics"
+                  },
+                  "operation": "set",
+                  "amount": 2,
+                  "note": "Might 2"
+                }
+              ]
+            }
+          },
+          "heroicResource": {
+            "name": {
+              "value": "ferocity",
+              "provenance": [
+                {
+                  "decisionId": "class.fury.features",
+                  "source": {
+                    "path": "en/unified/md/feature/fury/level-1/ferocity.md",
+                    "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                    "quote": "fueling a Heroic Resource called ferocity"
+                  }
+                }
+              ]
+            },
+            "startingValue": {
+              "value": 0,
+              "provenance": [
+                {
+                  "decisionId": "class.fury.features",
+                  "source": {
+                    "path": "en/unified/md/feature/fury/level-1/ferocity.md",
+                    "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                    "quote": "Though you can't gain ferocity outside of combat",
+                    "heading": "Ferocity Outside of Combat"
+                  },
+                  "operation": "set",
+                  "amount": 0,
+                  "note": "Interpretation: a newly created hero has not been in combat and cannot have gained ferocity; see also \"You lose any remaining ferocity at the end of the encounter.\" R03 owns live initialization."
+                }
+              ]
+            }
+          },
+          "savingThrowThreshold": {
+            "value": 5,
+            "provenance": [
+              {
+                "decisionId": "free-strikes.grant",
+                "source": {
+                  "path": "en/unified/md/rule/general/saving-throw.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "On a 6 or higher, the effect ends."
+                },
+                "operation": "base",
+                "amount": 6,
+                "note": "general rule, not a creation decision; attached to the automatic step"
+              },
+              {
+                "decisionId": "ancestry.devil.purchased-traits",
+                "selection": "Impressive Horns",
+                "source": {
+                  "path": "en/unified/md/feature/trait/devil/impressive-horns.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Whenever you make a saving throw, you succeed on a roll of 5 or higher."
+                },
+                "operation": "set",
+                "amount": 5
+              }
+            ]
+          },
+          "renown": {
+            "value": 1,
+            "provenance": [
+              {
+                "decisionId": "career.soldier.renown",
+                "source": {
+                  "path": "en/unified/md/rule/resource/renown.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "At the start of character creation, your Renown is 0."
+                },
+                "operation": "base",
+                "amount": 0
+              },
+              {
+                "decisionId": "career.soldier.renown",
+                "source": {
+                  "path": "en/unified/md/career/soldier.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Renown: +1"
+                },
+                "operation": "add",
+                "amount": 1
+              }
+            ]
+          },
+          "wealth": {
+            "value": 1,
+            "provenance": [
+              {
+                "decisionId": "career.choice",
+                "selection": "Soldier",
+                "source": {
+                  "path": "en/unified/md/rule/resource/wealth.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Some careers increase your starting Wealth score (from a base score of 1)."
+                },
+                "operation": "base",
+                "amount": 1,
+                "note": "Soldier lists no wealth benefit"
+              }
+            ]
+          },
+          "kit": {
+            "name": {
+              "value": "Mountain",
+              "provenance": [
+                {
+                  "decisionId": "kit.choice",
+                  "selection": "Mountain",
+                  "source": {
+                    "path": "en/unified/md/kit/mountain.md",
+                    "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                    "quote": "name: Mountain"
+                  }
+                }
+              ]
+            },
+            "equipmentText": {
+              "value": "You wear heavy armor and wield a heavy weapon.",
+              "provenance": [
+                {
+                  "decisionId": "kit.mountain.contributions",
+                  "source": {
+                    "path": "en/unified/md/kit/mountain.md",
+                    "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                    "quote": "You wear heavy armor and wield a heavy weapon.",
+                    "heading": "Equipment"
+                  }
+                }
+              ]
+            },
+            "staminaBonusPerEchelon": {
+              "value": 9,
+              "provenance": [
+                {
+                  "decisionId": "kit.mountain.contributions",
+                  "source": {
+                    "path": "en/unified/md/kit/mountain.md",
+                    "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                    "quote": "Stamina Bonus: +9 per echelon",
+                    "heading": "Kit Bonuses"
+                  },
+                  "operation": "set",
+                  "amount": 9
+                }
+              ]
+            },
+            "echelon": {
+              "value": 1,
+              "provenance": [
+                {
+                  "decisionId": "class.level",
+                  "source": {
+                    "path": "en/unified/md/rule/general/echelon.md",
+                    "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                    "quote": "1st Echelon (1st to 3rd Level)"
+                  },
+                  "operation": "set",
+                  "amount": 1
+                }
+              ]
+            },
+            "staminaBonusApplied": {
+              "value": 9,
+              "provenance": [
+                {
+                  "decisionId": "kit.mountain.contributions",
+                  "source": {
+                    "path": "en/unified/md/chapter/kits.md",
+                    "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                    "quote": "Your kit's Stamina bonus is added to your Stamina maximum and scales with your echelon.",
+                    "heading": "Stamina Bonus"
+                  },
+                  "operation": "set",
+                  "amount": 9,
+                  "note": "9 at the 1st echelon"
+                }
+              ]
+            },
+            "speedBonus": {
+              "value": 0,
+              "provenance": [
+                {
+                  "decisionId": "kit.mountain.contributions",
+                  "source": {
+                    "path": "en/unified/md/chapter/kits.md",
+                    "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                    "quote": "| Mountain | Heavy | Heavy | +9 | - | +2 | +0/+0/+4 | - | - | - | - |",
+                    "heading": "Kits Table"
+                  },
+                  "operation": "set",
+                  "amount": 0
+                }
+              ]
+            },
+            "stabilityBonus": {
+              "value": 2,
+              "provenance": [
+                {
+                  "decisionId": "kit.mountain.contributions",
+                  "source": {
+                    "path": "en/unified/md/kit/mountain.md",
+                    "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                    "quote": "Stability Bonus: +2",
+                    "heading": "Kit Bonuses"
+                  },
+                  "operation": "set",
+                  "amount": 2
+                }
+              ]
+            },
+            "meleeDamageBonus": {
+              "value": [0, 0, 4],
+              "provenance": [
+                {
+                  "decisionId": "kit.mountain.contributions",
+                  "source": {
+                    "path": "en/unified/md/kit/mountain.md",
+                    "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                    "quote": "Melee Damage Bonus: +0/+0/+4",
+                    "heading": "Kit Bonuses"
+                  },
+                  "note": "applied per R04 section 4.2"
+                }
+              ]
+            },
+            "rangedDamageBonus": {
+              "value": [0, 0, 0],
+              "provenance": [
+                {
+                  "decisionId": "kit.mountain.contributions",
+                  "source": {
+                    "path": "en/unified/md/chapter/kits.md",
+                    "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                    "quote": "| Mountain | Heavy | Heavy | +9 | - | +2 | +0/+0/+4 | - | - | - | - |",
+                    "heading": "Kits Table"
+                  },
+                  "note": "Kits table Ranged Damage column \"-\""
+                }
+              ]
+            },
+            "meleeDistanceBonus": {
+              "value": 0,
+              "provenance": [
+                {
+                  "decisionId": "kit.mountain.contributions",
+                  "source": {
+                    "path": "en/unified/md/chapter/kits.md",
+                    "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                    "quote": "| Mountain | Heavy | Heavy | +9 | - | +2 | +0/+0/+4 | - | - | - | - |",
+                    "heading": "Kits Table"
+                  },
+                  "operation": "set",
+                  "amount": 0
+                }
+              ]
+            },
+            "rangedDistanceBonus": {
+              "value": 0,
+              "provenance": [
+                {
+                  "decisionId": "kit.mountain.contributions",
+                  "source": {
+                    "path": "en/unified/md/chapter/kits.md",
+                    "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                    "quote": "| Mountain | Heavy | Heavy | +9 | - | +2 | +0/+0/+4 | - | - | - | - |",
+                    "heading": "Kits Table"
+                  },
+                  "operation": "set",
+                  "amount": 0
+                }
+              ]
+            },
+            "disengageBonus": {
+              "value": 0,
+              "provenance": [
+                {
+                  "decisionId": "kit.mountain.contributions",
+                  "source": {
+                    "path": "en/unified/md/chapter/kits.md",
+                    "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                    "quote": "| Mountain | Heavy | Heavy | +9 | - | +2 | +0/+0/+4 | - | - | - | - |",
+                    "heading": "Kits Table"
+                  },
+                  "operation": "set",
+                  "amount": 0
+                }
+              ]
+            }
+          },
+          "skills": [
+            {
+              "name": "Persuade",
+              "group": "interpersonal",
+              "provenance": {
+                "decisionId": "ancestry.devil.silver-tongue-skill",
+                "selection": "Persuade",
+                "source": {
+                  "path": "en/unified/md/feature/trait/devil/silver-tongue.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "You have one skill of your choice from the interpersonal skill group"
+                }
+              }
+            },
+            {
+              "name": "Swim",
+              "group": "exploration",
+              "provenance": {
+                "decisionId": "culture.environment.skill",
+                "selection": "Swim",
+                "source": {
+                  "path": "en/books/heroes/clean/Draw Steel Heroes.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "You can select one skill from each aspect's list of options.",
+                  "heading": "Culture Benefits"
+                }
+              }
+            },
+            {
+              "name": "Blacksmithing",
+              "group": "crafting",
+              "provenance": {
+                "decisionId": "culture.organization.skill",
+                "selection": "Blacksmithing",
+                "source": {
+                  "path": "en/books/heroes/clean/Draw Steel Heroes.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "You can select one skill from each aspect's list of options.",
+                  "heading": "Culture Benefits"
+                }
+              }
+            },
+            {
+              "name": "Intimidate",
+              "group": "interpersonal",
+              "provenance": {
+                "decisionId": "culture.upbringing.skill",
+                "selection": "Intimidate",
+                "source": {
+                  "path": "en/books/heroes/clean/Draw Steel Heroes.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "You can select one skill from each aspect's list of options.",
+                  "heading": "Culture Benefits"
+                }
+              }
+            },
+            {
+              "name": "Endurance",
+              "group": "exploration",
+              "provenance": {
+                "decisionId": "career.soldier.skill.exploration",
+                "selection": "Endurance",
+                "source": {
+                  "path": "en/unified/md/career/soldier.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "One skill from the exploration skill group and one skill from the intrigue group"
+                }
+              }
+            },
+            {
+              "name": "Alertness",
+              "group": "intrigue",
+              "provenance": {
+                "decisionId": "career.soldier.skill.intrigue",
+                "selection": "Alertness",
+                "source": {
+                  "path": "en/unified/md/career/soldier.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "One skill from the exploration skill group and one skill from the intrigue group"
+                }
+              }
+            },
+            {
+              "name": "Nature",
+              "group": "lore",
+              "provenance": {
+                "decisionId": "class.fury.skill.nature",
+                "source": {
+                  "path": "en/unified/md/class/fury.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "You gain the Nature skill",
+                  "heading": "Basics"
+                }
+              }
+            },
+            {
+              "name": "Jump",
+              "group": "exploration",
+              "provenance": {
+                "decisionId": "class.fury.skills",
+                "selection": "Jump",
+                "source": {
+                  "path": "en/unified/md/class/fury.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Then choose any two skills from the exploration or intrigue skill groups.",
+                  "heading": "Basics"
+                }
+              }
+            },
+            {
+              "name": "Climb",
+              "group": "exploration",
+              "provenance": {
+                "decisionId": "class.fury.skills",
+                "selection": "Climb",
+                "source": {
+                  "path": "en/unified/md/class/fury.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Then choose any two skills from the exploration or intrigue skill groups.",
+                  "heading": "Basics"
+                }
+              }
+            },
+            {
+              "name": "Lift",
+              "group": "exploration",
+              "provenance": {
+                "decisionId": "class.fury.aspect",
+                "selection": "Berserker",
+                "source": {
+                  "path": "en/unified/md/feature/fury/level-1/primordial-aspect.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "You have the Lift skill."
+                }
+              }
+            }
+          ],
+          "languages": [
+            {
+              "name": "Caelian",
+              "provenance": {
+                "decisionId": "culture.caelian",
+                "source": {
+                  "path": "en/books/heroes/clean/Draw Steel Heroes.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "All player characters know Caelian!",
+                  "heading": "Caelian Empire"
+                }
+              }
+            },
+            {
+              "name": "Anjali",
+              "provenance": {
+                "decisionId": "culture.language",
+                "selection": "Anjali",
+                "source": {
+                  "path": "en/books/heroes/clean/Draw Steel Heroes.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "You know the language of your culture, in addition to knowing Caelian.",
+                  "heading": "Culture Benefits"
+                }
+              }
+            },
+            {
+              "name": "Caelian",
+              "provenance": {
+                "decisionId": "career.soldier.languages",
+                "selection": "Caelian",
+                "source": {
+                  "path": "en/unified/md/career/soldier.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Languages: Two languages"
+                },
+                "uncertainty": "Q-R-100"
+              },
+              "duplicateOf": "culture.caelian"
+            },
+            {
+              "name": "Vaslorian",
+              "provenance": {
+                "decisionId": "career.soldier.languages",
+                "selection": "Vaslorian",
+                "source": {
+                  "path": "en/unified/md/career/soldier.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Languages: Two languages"
+                }
+              }
+            }
+          ],
+          "traits": [
+            {
+              "name": "Silver Tongue",
+              "kind": "ancestry-signature-trait",
+              "sourcePath": "en/unified/md/feature/trait/devil/silver-tongue.md",
+              "provenance": {
+                "decisionId": "ancestry.devil.signature-trait",
+                "source": {
+                  "path": "en/unified/md/chapter/ancestries.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Each ancestry has one or more signature traits, which your hero gets for free if they take that ancestry.",
+                  "heading": "Ancestry Traits"
+                }
+              }
+            },
+            {
+              "name": "Beast Legs",
+              "kind": "ancestry-purchased-trait",
+              "sourcePath": "en/unified/md/feature/trait/devil/beast-legs.md",
+              "cost": 1,
+              "provenance": {
+                "decisionId": "ancestry.devil.purchased-traits",
+                "selection": "Beast Legs",
+                "source": {
+                  "path": "en/unified/md/feature/trait/devil/devil-traits.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "You have 3 ancestry points to spend on the following traits."
+                }
+              },
+              "affects": ["speed"]
+            },
+            {
+              "name": "Impressive Horns",
+              "kind": "ancestry-purchased-trait",
+              "sourcePath": "en/unified/md/feature/trait/devil/impressive-horns.md",
+              "cost": 2,
+              "provenance": {
+                "decisionId": "ancestry.devil.purchased-traits",
+                "selection": "Impressive Horns",
+                "source": {
+                  "path": "en/unified/md/feature/trait/devil/devil-traits.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "You have 3 ancestry points to spend on the following traits."
+                }
+              },
+              "affects": ["savingThrowThreshold"]
+            }
+          ],
+          "features": [
+            {
+              "name": "Culture edge",
+              "kind": "culture-benefit",
+              "sourcePath": "en/books/heroes/clean/Draw Steel Heroes.md",
+              "provenance": {
+                "decisionId": "culture.edge",
+                "source": {
+                  "path": "en/books/heroes/clean/Draw Steel Heroes.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "You gain an edge on tests made to recall lore about your culture, and on tests made to influence and interact with people of your culture.",
+                  "heading": "Culture Benefits"
+                }
+              }
+            },
+            {
+              "name": "Ferocity",
+              "kind": "class-feature",
+              "sourcePath": "en/unified/md/feature/fury/level-1/ferocity.md",
+              "provenance": {
+                "decisionId": "class.fury.features",
+                "source": {
+                  "path": "en/unified/md/class/fury.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Primordial Aspect, Ferocity, Growing Ferocity, Aspect Features, Aspect Triggered Action, Mighty Leaps, Fury Abilities",
+                  "heading": "Fury Advancement Table"
+                }
+              },
+              "affects": ["heroicResource"]
+            },
+            {
+              "name": "Growing Ferocity",
+              "kind": "class-feature",
+              "sourcePath": "en/unified/md/feature/fury/level-1/growing-ferocity.md",
+              "provenance": {
+                "decisionId": "class.fury.features",
+                "source": {
+                  "path": "en/unified/md/class/fury.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Primordial Aspect, Ferocity, Growing Ferocity, Aspect Features, Aspect Triggered Action, Mighty Leaps, Fury Abilities",
+                  "heading": "Fury Advancement Table"
+                }
+              }
+            },
+            {
+              "name": "Mighty Leaps",
+              "kind": "class-feature",
+              "sourcePath": "en/unified/md/feature/fury/level-1/mighty-leaps.md",
+              "provenance": {
+                "decisionId": "class.fury.features",
+                "source": {
+                  "path": "en/unified/md/class/fury.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Primordial Aspect, Ferocity, Growing Ferocity, Aspect Features, Aspect Triggered Action, Mighty Leaps, Fury Abilities",
+                  "heading": "Fury Advancement Table"
+                }
+              }
+            },
+            {
+              "name": "Kit",
+              "kind": "aspect-feature",
+              "sourcePath": "en/unified/md/feature/fury/level-1/kit.md",
+              "provenance": {
+                "decisionId": "class.fury.aspect",
+                "selection": "Berserker",
+                "source": {
+                  "path": "en/unified/md/feature/fury/level-1/1st-level-aspect-features.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Your primordial aspect grants you two features, as shown on the 1st-Level Aspect Features table."
+                }
+              },
+              "affects": ["kit"]
+            },
+            {
+              "name": "Primordial Strength",
+              "kind": "aspect-feature",
+              "sourcePath": "en/unified/md/feature/fury/level-1/primordial-strength.md",
+              "provenance": {
+                "decisionId": "class.fury.aspect",
+                "selection": "Berserker",
+                "source": {
+                  "path": "en/unified/md/feature/fury/level-1/1st-level-aspect-features.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Your primordial aspect grants you two features, as shown on the 1st-Level Aspect Features table."
+                }
+              }
+            }
+          ],
+          "perks": [
+            {
+              "name": "Teamwork",
+              "kind": "perk",
+              "sourcePath": "en/unified/md/perk/teamwork.md",
+              "provenance": {
+                "decisionId": "career.soldier.perk",
+                "selection": "Teamwork",
+                "source": {
+                  "path": "en/unified/md/career/soldier.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Perk: One exploration perk"
+                }
+              }
+            }
+          ],
+          "abilities": [
+            {
+              "name": "Brutal Slam",
+              "kind": "signature",
+              "sourcePath": "en/unified/md/feature/ability/fury/level-1/brutal-slam.md",
+              "kitBonusesIncluded": false,
+              "provenance": {
+                "decisionId": "class.fury.signature-ability",
+                "selection": "Brutal Slam",
+                "source": {
+                  "path": "en/unified/md/feature/fury/level-1/fury-abilities.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Choose one signature ability from the following options.",
+                  "heading": "Signature Ability"
+                }
+              }
+            },
+            {
+              "name": "Out of the Way!",
+              "kind": "heroic",
+              "sourcePath": "en/unified/md/feature/ability/fury/level-1/out-of-the-way.md",
+              "cost": {
+                "resource": "ferocity",
+                "amount": 3
+              },
+              "kitBonusesIncluded": false,
+              "provenance": {
+                "decisionId": "class.fury.ability-3",
+                "selection": "Out of the Way!",
+                "source": {
+                  "path": "en/unified/md/feature/fury/level-1/fury-abilities.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Choose one heroic ability from the following options, each of which costs 3 ferocity to use.",
+                  "heading": "3-Ferocity Ability"
+                }
+              }
+            },
+            {
+              "name": "Thunder Roar",
+              "kind": "heroic",
+              "sourcePath": "en/unified/md/feature/ability/fury/level-1/thunder-roar.md",
+              "cost": {
+                "resource": "ferocity",
+                "amount": 5
+              },
+              "kitBonusesIncluded": false,
+              "provenance": {
+                "decisionId": "class.fury.ability-5",
+                "selection": "Thunder Roar",
+                "source": {
+                  "path": "en/unified/md/feature/fury/level-1/fury-abilities.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Choose one heroic ability from the following options, each of which costs 5 ferocity to use.",
+                  "heading": "5-Ferocity Ability"
+                }
+              }
+            },
+            {
+              "name": "Lines of Force",
+              "kind": "aspect-triggered",
+              "sourcePath": "en/unified/md/feature/ability/fury/level-1/lines-of-force.md",
+              "kitBonusesIncluded": false,
+              "provenance": {
+                "decisionId": "class.fury.aspect",
+                "selection": "Berserker",
+                "source": {
+                  "path": "en/unified/md/feature/fury/level-1/aspect-triggered-action.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Your primordial aspect grants you a triggered action, as shown on the Aspect Triggered Actions table."
+                }
+              }
+            },
+            {
+              "name": "Pain for Pain",
+              "kind": "kit-signature",
+              "sourcePath": "en/unified/md/kit/mountain.md",
+              "kitBonusesIncluded": true,
+              "provenance": {
+                "decisionId": "kit.mountain.contributions",
+                "source": {
+                  "path": "en/unified/md/chapter/kits.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Each kit grants a signature ability, whose distance and damage already includes the kit's bonuses.",
+                  "heading": "Kit Signature Ability"
+                }
+              }
+            },
+            {
+              "name": "Melee Weapon Free Strike",
+              "kind": "free-strike",
+              "sourcePath": "en/unified/md/feature/ability/common/melee-weapon-free-strike.md",
+              "kitBonusesIncluded": false,
+              "provenance": {
+                "decisionId": "free-strikes.grant",
+                "source": {
+                  "path": "en/unified/md/chapter/making-a-hero.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Every hero has a melee weapon free strike and a ranged weapon free strike.",
+                  "heading": "7. Add Free Strikes"
+                }
+              }
+            },
+            {
+              "name": "Ranged Weapon Free Strike",
+              "kind": "free-strike",
+              "sourcePath": "en/unified/md/feature/ability/common/ranged-weapon-free-strike.md",
+              "kitBonusesIncluded": false,
+              "provenance": {
+                "decisionId": "free-strikes.grant",
+                "source": {
+                  "path": "en/unified/md/chapter/making-a-hero.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Every hero has a melee weapon free strike and a ranged weapon free strike.",
+                  "heading": "7. Add Free Strikes"
+                }
+              }
+            }
+          ],
+          "uncertainties": ["Q-R-100", "Q-R-101", "Q-CHAR-12"]
+        },
+        "evaluatedAgainst": {
+          "definitionsSchemaVersion": "r01.1",
+          "compendiumRevision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+        }
+      }
+    },
+    "incomplete": {
+      "input": {
+        "definitionsSchemaVersion": "r01.1",
+        "compendiumRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+        "level": 1,
+        "selections": {
+          "ancestry.choice": "Devil",
+          "ancestry.devil.silver-tongue-skill": "Persuade",
+          "ancestry.devil.purchased-traits": ["Beast Legs", "Impressive Horns"],
+          "culture.name": "wilderness mercenary commune",
+          "culture.language": "Anjali",
+          "culture.environment": "Wilderness",
+          "culture.environment.skill": "Swim",
+          "culture.organization": "Communal",
+          "culture.organization.skill": "Blacksmithing",
+          "culture.upbringing": "Martial",
+          "culture.upbringing.skill": "Intimidate",
+          "career.choice": "Soldier",
+          "career.soldier.skill.exploration": "Endurance",
+          "career.soldier.skill.intrigue": "Alertness",
+          "career.soldier.languages": ["Caelian", "Vaslorian"],
+          "career.soldier.perk": "Teamwork",
+          "career.soldier.inciting-incident": "Sole Survivor",
+          "class.choice": "Fury",
+          "class.fury.characteristic-array": "1, 0, 0",
+          "class.fury.array-assignment": {
+            "Intuition": 1,
+            "Reason": 0,
+            "Presence": 0
+          },
+          "class.fury.skills": ["Jump", "Climb"],
+          "class.fury.aspect": "Berserker",
+          "class.fury.signature-ability": "Brutal Slam",
+          "class.fury.ability-3": "Out of the Way!",
+          "class.fury.ability-5": "Thunder Roar",
+          "details.name": "Grug"
+        }
+      },
+      "expected": {
+        "status": "incomplete",
+        "diagnostics": {
+          "kit.choice": [
+            {
+              "decisionId": "kit.choice",
+              "severity": "incomplete",
+              "code": "required-choice-missing",
+              "message": "Required choice missing: the Berserker aspect grants the Kit feature, so a kit must be chosen before Stamina, stability, disengage and kit damage bonuses can be derived",
+              "source": {
+                "path": "en/unified/md/feature/fury/level-1/kit.md",
+                "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                "quote": "You can use and gain the benefits of a kit."
+              }
+            }
+          ],
+          "career.soldier.languages": [
+            {
+              "decisionId": "career.soldier.languages",
+              "severity": "warning",
+              "code": "duplicate-language",
+              "message": "Caelian duplicates the automatic grant from culture.caelian; kept under the Q-R-100 provisional default",
+              "source": {
+                "path": "en/books/heroes/clean/Draw Steel Heroes.md",
+                "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                "quote": "All player characters know Caelian!",
+                "heading": "Caelian Empire"
+              },
+              "uncertainty": "Q-R-100"
+            }
+          ]
+        },
+        "baseline": null,
+        "partial": {
+          "level": {
+            "value": 1,
+            "provenance": [
+              {
+                "decisionId": "class.level",
+                "source": {
+                  "path": "en/unified/md/chapter/making-a-hero.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Each option you can choose for your hero at 1st level includes a parenthetical selection labeled \"Quick Build.\"",
+                  "heading": "Step-by-Step Hero Making"
+                },
+                "operation": "set",
+                "amount": 1
+              }
+            ]
+          },
+          "ancestry": {
+            "value": "Devil",
+            "provenance": [
+              {
+                "decisionId": "ancestry.choice",
+                "selection": "Devil",
+                "source": {
+                  "path": "en/unified/md/chapter/making-a-hero.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Choose your hero's humanoid ancestry from among the range of ancestries available in the game",
+                  "heading": "2. Ancestry"
+                }
+              }
+            ]
+          },
+          "class": {
+            "value": "Fury",
+            "provenance": [
+              {
+                "decisionId": "class.choice",
+                "selection": "Fury",
+                "source": {
+                  "path": "en/unified/md/chapter/making-a-hero.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "You can be a censor, conduit, elementalist, fury, null, shadow, tactician, talent, or troubadour.",
+                  "heading": "5. Class"
+                }
+              }
+            ]
+          },
+          "subclass": {
+            "value": "Berserker",
+            "provenance": [
+              {
+                "decisionId": "class.fury.aspect",
+                "selection": "Berserker",
+                "source": {
+                  "path": "en/unified/md/feature/fury/level-1/primordial-aspect.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Your primordial aspect is your subclass"
+                }
+              }
+            ]
+          },
+          "career": {
+            "value": "Soldier",
+            "provenance": [
+              {
+                "decisionId": "career.choice",
+                "selection": "Soldier",
+                "source": {
+                  "path": "en/unified/md/chapter/making-a-hero.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Choose your hero's career, which describes what you did for a living before you became a hero.",
+                  "heading": "4. Career"
+                }
+              }
+            ]
+          },
+          "characteristics": {
+            "M": {
+              "value": 2,
+              "provenance": [
+                {
+                  "decisionId": "class.fury.fixed-characteristics",
+                  "source": {
+                    "path": "en/unified/md/class/fury.md",
+                    "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                    "quote": "You start with a Might of 2 and an Agility of 2",
+                    "heading": "Basics"
+                  },
+                  "operation": "set",
+                  "amount": 2
+                }
+              ]
+            },
+            "A": {
+              "value": 2,
+              "provenance": [
+                {
+                  "decisionId": "class.fury.fixed-characteristics",
+                  "source": {
+                    "path": "en/unified/md/class/fury.md",
+                    "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                    "quote": "You start with a Might of 2 and an Agility of 2",
+                    "heading": "Basics"
+                  },
+                  "operation": "set",
+                  "amount": 2
+                }
+              ]
+            },
+            "R": {
+              "value": 0,
+              "provenance": [
+                {
+                  "decisionId": "class.fury.characteristic-array",
+                  "selection": "1, 0, 0",
+                  "source": {
+                    "path": "en/unified/md/class/fury.md",
+                    "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                    "quote": "you can choose one of the following arrays for your other characteristic scores:",
+                    "heading": "Basics"
+                  }
+                },
+                {
+                  "decisionId": "class.fury.array-assignment",
+                  "selection": "Reason 0",
+                  "source": {
+                    "path": "en/unified/md/class/fury.md",
+                    "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                    "quote": "you can choose one of the following arrays for your other characteristic scores:",
+                    "heading": "Basics"
+                  },
+                  "operation": "set",
+                  "amount": 0,
+                  "uncertainty": "Q-R-101"
+                }
+              ]
+            },
+            "I": {
+              "value": 1,
+              "provenance": [
+                {
+                  "decisionId": "class.fury.characteristic-array",
+                  "selection": "1, 0, 0",
+                  "source": {
+                    "path": "en/unified/md/class/fury.md",
+                    "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                    "quote": "you can choose one of the following arrays for your other characteristic scores:",
+                    "heading": "Basics"
+                  }
+                },
+                {
+                  "decisionId": "class.fury.array-assignment",
+                  "selection": "Intuition 1",
+                  "source": {
+                    "path": "en/unified/md/class/fury.md",
+                    "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                    "quote": "you can choose one of the following arrays for your other characteristic scores:",
+                    "heading": "Basics"
+                  },
+                  "operation": "set",
+                  "amount": 1,
+                  "uncertainty": "Q-R-101"
+                }
+              ]
+            },
+            "P": {
+              "value": 0,
+              "provenance": [
+                {
+                  "decisionId": "class.fury.characteristic-array",
+                  "selection": "1, 0, 0",
+                  "source": {
+                    "path": "en/unified/md/class/fury.md",
+                    "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                    "quote": "you can choose one of the following arrays for your other characteristic scores:",
+                    "heading": "Basics"
+                  }
+                },
+                {
+                  "decisionId": "class.fury.array-assignment",
+                  "selection": "Presence 0",
+                  "source": {
+                    "path": "en/unified/md/class/fury.md",
+                    "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                    "quote": "you can choose one of the following arrays for your other characteristic scores:",
+                    "heading": "Basics"
+                  },
+                  "operation": "set",
+                  "amount": 0,
+                  "uncertainty": "Q-R-101"
+                }
+              ]
+            }
+          },
+          "recoveriesMaximum": {
+            "value": 10,
+            "provenance": [
+              {
+                "decisionId": "class.fury.baseline",
+                "source": {
+                  "path": "en/unified/md/class/fury.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Recoveries: 10",
+                  "heading": "Basics"
+                },
+                "operation": "set",
+                "amount": 10,
+                "note": "rule: rule/health/recoveries.md, \"determined by their class\""
+              }
+            ]
+          },
+          "speed": {
+            "value": 6,
+            "provenance": [
+              {
+                "decisionId": "ancestry.devil.base-statistics",
+                "source": {
+                  "path": "en/unified/md/rule/character/speed.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Unless otherwise noted, a character of any of these ancestries is size 1M and has speed 5 and stability 0.",
+                  "heading": "Starting Size and Speed"
+                },
+                "operation": "base",
+                "amount": 5
+              },
+              {
+                "decisionId": "ancestry.devil.purchased-traits",
+                "selection": "Beast Legs",
+                "source": {
+                  "path": "en/unified/md/feature/trait/devil/beast-legs.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "You have speed 6."
+                },
+                "operation": "set",
+                "amount": 6
+              }
+            ]
+          },
+          "size": {
+            "value": "1M",
+            "provenance": [
+              {
+                "decisionId": "ancestry.devil.base-statistics",
+                "source": {
+                  "path": "en/unified/md/rule/character/speed.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Unless otherwise noted, a character of any of these ancestries is size 1M and has speed 5 and stability 0.",
+                  "heading": "Starting Size and Speed"
+                },
+                "operation": "set"
+              }
+            ]
+          },
+          "potencyCharacteristic": {
+            "value": "M",
+            "provenance": [
+              {
+                "decisionId": "class.fury.baseline",
+                "source": {
+                  "path": "en/unified/md/class/fury.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Strong Potency: Might",
+                  "heading": "Basics"
+                },
+                "uncertainty": "Q-CHAR-12",
+                "note": "class-named characteristic; general rule names the highest (rule/character/potency.md), equal for every level-one Fury (Q-CHAR-12)"
+              }
+            ]
+          },
+          "potency": {
+            "weak": {
+              "value": 0,
+              "provenance": [
+                {
+                  "decisionId": "class.fury.baseline",
+                  "source": {
+                    "path": "en/unified/md/class/fury.md",
+                    "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                    "quote": "Weak Potency: Might − 2",
+                    "heading": "Basics"
+                  },
+                  "operation": "set",
+                  "amount": 0,
+                  "note": "Might 2 − 2"
+                }
+              ]
+            },
+            "average": {
+              "value": 1,
+              "provenance": [
+                {
+                  "decisionId": "class.fury.baseline",
+                  "source": {
+                    "path": "en/unified/md/class/fury.md",
+                    "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                    "quote": "Average Potency: Might − 1",
+                    "heading": "Basics"
+                  },
+                  "operation": "set",
+                  "amount": 1,
+                  "note": "Might 2 − 1"
+                }
+              ]
+            },
+            "strong": {
+              "value": 2,
+              "provenance": [
+                {
+                  "decisionId": "class.fury.baseline",
+                  "source": {
+                    "path": "en/unified/md/class/fury.md",
+                    "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                    "quote": "Strong Potency: Might",
+                    "heading": "Basics"
+                  },
+                  "operation": "set",
+                  "amount": 2,
+                  "note": "Might 2"
+                }
+              ]
+            }
+          },
+          "heroicResource": {
+            "name": {
+              "value": "ferocity",
+              "provenance": [
+                {
+                  "decisionId": "class.fury.features",
+                  "source": {
+                    "path": "en/unified/md/feature/fury/level-1/ferocity.md",
+                    "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                    "quote": "fueling a Heroic Resource called ferocity"
+                  }
+                }
+              ]
+            },
+            "startingValue": {
+              "value": 0,
+              "provenance": [
+                {
+                  "decisionId": "class.fury.features",
+                  "source": {
+                    "path": "en/unified/md/feature/fury/level-1/ferocity.md",
+                    "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                    "quote": "Though you can't gain ferocity outside of combat",
+                    "heading": "Ferocity Outside of Combat"
+                  },
+                  "operation": "set",
+                  "amount": 0,
+                  "note": "Interpretation: a newly created hero has not been in combat and cannot have gained ferocity; see also \"You lose any remaining ferocity at the end of the encounter.\" R03 owns live initialization."
+                }
+              ]
+            }
+          },
+          "savingThrowThreshold": {
+            "value": 5,
+            "provenance": [
+              {
+                "decisionId": "free-strikes.grant",
+                "source": {
+                  "path": "en/unified/md/rule/general/saving-throw.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "On a 6 or higher, the effect ends."
+                },
+                "operation": "base",
+                "amount": 6,
+                "note": "general rule, not a creation decision; attached to the automatic step"
+              },
+              {
+                "decisionId": "ancestry.devil.purchased-traits",
+                "selection": "Impressive Horns",
+                "source": {
+                  "path": "en/unified/md/feature/trait/devil/impressive-horns.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Whenever you make a saving throw, you succeed on a roll of 5 or higher."
+                },
+                "operation": "set",
+                "amount": 5
+              }
+            ]
+          },
+          "renown": {
+            "value": 1,
+            "provenance": [
+              {
+                "decisionId": "career.soldier.renown",
+                "source": {
+                  "path": "en/unified/md/rule/resource/renown.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "At the start of character creation, your Renown is 0."
+                },
+                "operation": "base",
+                "amount": 0
+              },
+              {
+                "decisionId": "career.soldier.renown",
+                "source": {
+                  "path": "en/unified/md/career/soldier.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Renown: +1"
+                },
+                "operation": "add",
+                "amount": 1
+              }
+            ]
+          },
+          "wealth": {
+            "value": 1,
+            "provenance": [
+              {
+                "decisionId": "career.choice",
+                "selection": "Soldier",
+                "source": {
+                  "path": "en/unified/md/rule/resource/wealth.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Some careers increase your starting Wealth score (from a base score of 1)."
+                },
+                "operation": "base",
+                "amount": 1,
+                "note": "Soldier lists no wealth benefit"
+              }
+            ]
+          },
+          "skills": [
+            {
+              "name": "Persuade",
+              "group": "interpersonal",
+              "provenance": {
+                "decisionId": "ancestry.devil.silver-tongue-skill",
+                "selection": "Persuade",
+                "source": {
+                  "path": "en/unified/md/feature/trait/devil/silver-tongue.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "You have one skill of your choice from the interpersonal skill group"
+                }
+              }
+            },
+            {
+              "name": "Swim",
+              "group": "exploration",
+              "provenance": {
+                "decisionId": "culture.environment.skill",
+                "selection": "Swim",
+                "source": {
+                  "path": "en/books/heroes/clean/Draw Steel Heroes.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "You can select one skill from each aspect's list of options.",
+                  "heading": "Culture Benefits"
+                }
+              }
+            },
+            {
+              "name": "Blacksmithing",
+              "group": "crafting",
+              "provenance": {
+                "decisionId": "culture.organization.skill",
+                "selection": "Blacksmithing",
+                "source": {
+                  "path": "en/books/heroes/clean/Draw Steel Heroes.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "You can select one skill from each aspect's list of options.",
+                  "heading": "Culture Benefits"
+                }
+              }
+            },
+            {
+              "name": "Intimidate",
+              "group": "interpersonal",
+              "provenance": {
+                "decisionId": "culture.upbringing.skill",
+                "selection": "Intimidate",
+                "source": {
+                  "path": "en/books/heroes/clean/Draw Steel Heroes.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "You can select one skill from each aspect's list of options.",
+                  "heading": "Culture Benefits"
+                }
+              }
+            },
+            {
+              "name": "Endurance",
+              "group": "exploration",
+              "provenance": {
+                "decisionId": "career.soldier.skill.exploration",
+                "selection": "Endurance",
+                "source": {
+                  "path": "en/unified/md/career/soldier.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "One skill from the exploration skill group and one skill from the intrigue group"
+                }
+              }
+            },
+            {
+              "name": "Alertness",
+              "group": "intrigue",
+              "provenance": {
+                "decisionId": "career.soldier.skill.intrigue",
+                "selection": "Alertness",
+                "source": {
+                  "path": "en/unified/md/career/soldier.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "One skill from the exploration skill group and one skill from the intrigue group"
+                }
+              }
+            },
+            {
+              "name": "Nature",
+              "group": "lore",
+              "provenance": {
+                "decisionId": "class.fury.skill.nature",
+                "source": {
+                  "path": "en/unified/md/class/fury.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "You gain the Nature skill",
+                  "heading": "Basics"
+                }
+              }
+            },
+            {
+              "name": "Jump",
+              "group": "exploration",
+              "provenance": {
+                "decisionId": "class.fury.skills",
+                "selection": "Jump",
+                "source": {
+                  "path": "en/unified/md/class/fury.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Then choose any two skills from the exploration or intrigue skill groups.",
+                  "heading": "Basics"
+                }
+              }
+            },
+            {
+              "name": "Climb",
+              "group": "exploration",
+              "provenance": {
+                "decisionId": "class.fury.skills",
+                "selection": "Climb",
+                "source": {
+                  "path": "en/unified/md/class/fury.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Then choose any two skills from the exploration or intrigue skill groups.",
+                  "heading": "Basics"
+                }
+              }
+            },
+            {
+              "name": "Lift",
+              "group": "exploration",
+              "provenance": {
+                "decisionId": "class.fury.aspect",
+                "selection": "Berserker",
+                "source": {
+                  "path": "en/unified/md/feature/fury/level-1/primordial-aspect.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "You have the Lift skill."
+                }
+              }
+            }
+          ],
+          "languages": [
+            {
+              "name": "Caelian",
+              "provenance": {
+                "decisionId": "culture.caelian",
+                "source": {
+                  "path": "en/books/heroes/clean/Draw Steel Heroes.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "All player characters know Caelian!",
+                  "heading": "Caelian Empire"
+                }
+              }
+            },
+            {
+              "name": "Anjali",
+              "provenance": {
+                "decisionId": "culture.language",
+                "selection": "Anjali",
+                "source": {
+                  "path": "en/books/heroes/clean/Draw Steel Heroes.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "You know the language of your culture, in addition to knowing Caelian.",
+                  "heading": "Culture Benefits"
+                }
+              }
+            },
+            {
+              "name": "Caelian",
+              "provenance": {
+                "decisionId": "career.soldier.languages",
+                "selection": "Caelian",
+                "source": {
+                  "path": "en/unified/md/career/soldier.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Languages: Two languages"
+                },
+                "uncertainty": "Q-R-100"
+              },
+              "duplicateOf": "culture.caelian"
+            },
+            {
+              "name": "Vaslorian",
+              "provenance": {
+                "decisionId": "career.soldier.languages",
+                "selection": "Vaslorian",
+                "source": {
+                  "path": "en/unified/md/career/soldier.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Languages: Two languages"
+                }
+              }
+            }
+          ],
+          "traits": [
+            {
+              "name": "Silver Tongue",
+              "kind": "ancestry-signature-trait",
+              "sourcePath": "en/unified/md/feature/trait/devil/silver-tongue.md",
+              "provenance": {
+                "decisionId": "ancestry.devil.signature-trait",
+                "source": {
+                  "path": "en/unified/md/chapter/ancestries.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Each ancestry has one or more signature traits, which your hero gets for free if they take that ancestry.",
+                  "heading": "Ancestry Traits"
+                }
+              }
+            },
+            {
+              "name": "Beast Legs",
+              "kind": "ancestry-purchased-trait",
+              "sourcePath": "en/unified/md/feature/trait/devil/beast-legs.md",
+              "cost": 1,
+              "provenance": {
+                "decisionId": "ancestry.devil.purchased-traits",
+                "selection": "Beast Legs",
+                "source": {
+                  "path": "en/unified/md/feature/trait/devil/devil-traits.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "You have 3 ancestry points to spend on the following traits."
+                }
+              },
+              "affects": ["speed"]
+            },
+            {
+              "name": "Impressive Horns",
+              "kind": "ancestry-purchased-trait",
+              "sourcePath": "en/unified/md/feature/trait/devil/impressive-horns.md",
+              "cost": 2,
+              "provenance": {
+                "decisionId": "ancestry.devil.purchased-traits",
+                "selection": "Impressive Horns",
+                "source": {
+                  "path": "en/unified/md/feature/trait/devil/devil-traits.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "You have 3 ancestry points to spend on the following traits."
+                }
+              },
+              "affects": ["savingThrowThreshold"]
+            }
+          ],
+          "features": [
+            {
+              "name": "Culture edge",
+              "kind": "culture-benefit",
+              "sourcePath": "en/books/heroes/clean/Draw Steel Heroes.md",
+              "provenance": {
+                "decisionId": "culture.edge",
+                "source": {
+                  "path": "en/books/heroes/clean/Draw Steel Heroes.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "You gain an edge on tests made to recall lore about your culture, and on tests made to influence and interact with people of your culture.",
+                  "heading": "Culture Benefits"
+                }
+              }
+            },
+            {
+              "name": "Ferocity",
+              "kind": "class-feature",
+              "sourcePath": "en/unified/md/feature/fury/level-1/ferocity.md",
+              "provenance": {
+                "decisionId": "class.fury.features",
+                "source": {
+                  "path": "en/unified/md/class/fury.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Primordial Aspect, Ferocity, Growing Ferocity, Aspect Features, Aspect Triggered Action, Mighty Leaps, Fury Abilities",
+                  "heading": "Fury Advancement Table"
+                }
+              },
+              "affects": ["heroicResource"]
+            },
+            {
+              "name": "Growing Ferocity",
+              "kind": "class-feature",
+              "sourcePath": "en/unified/md/feature/fury/level-1/growing-ferocity.md",
+              "provenance": {
+                "decisionId": "class.fury.features",
+                "source": {
+                  "path": "en/unified/md/class/fury.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Primordial Aspect, Ferocity, Growing Ferocity, Aspect Features, Aspect Triggered Action, Mighty Leaps, Fury Abilities",
+                  "heading": "Fury Advancement Table"
+                }
+              }
+            },
+            {
+              "name": "Mighty Leaps",
+              "kind": "class-feature",
+              "sourcePath": "en/unified/md/feature/fury/level-1/mighty-leaps.md",
+              "provenance": {
+                "decisionId": "class.fury.features",
+                "source": {
+                  "path": "en/unified/md/class/fury.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Primordial Aspect, Ferocity, Growing Ferocity, Aspect Features, Aspect Triggered Action, Mighty Leaps, Fury Abilities",
+                  "heading": "Fury Advancement Table"
+                }
+              }
+            },
+            {
+              "name": "Kit",
+              "kind": "aspect-feature",
+              "sourcePath": "en/unified/md/feature/fury/level-1/kit.md",
+              "provenance": {
+                "decisionId": "class.fury.aspect",
+                "selection": "Berserker",
+                "source": {
+                  "path": "en/unified/md/feature/fury/level-1/1st-level-aspect-features.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Your primordial aspect grants you two features, as shown on the 1st-Level Aspect Features table."
+                }
+              },
+              "affects": ["kit"]
+            },
+            {
+              "name": "Primordial Strength",
+              "kind": "aspect-feature",
+              "sourcePath": "en/unified/md/feature/fury/level-1/primordial-strength.md",
+              "provenance": {
+                "decisionId": "class.fury.aspect",
+                "selection": "Berserker",
+                "source": {
+                  "path": "en/unified/md/feature/fury/level-1/1st-level-aspect-features.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Your primordial aspect grants you two features, as shown on the 1st-Level Aspect Features table."
+                }
+              }
+            }
+          ],
+          "perks": [
+            {
+              "name": "Teamwork",
+              "kind": "perk",
+              "sourcePath": "en/unified/md/perk/teamwork.md",
+              "provenance": {
+                "decisionId": "career.soldier.perk",
+                "selection": "Teamwork",
+                "source": {
+                  "path": "en/unified/md/career/soldier.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Perk: One exploration perk"
+                }
+              }
+            }
+          ],
+          "abilities": [
+            {
+              "name": "Brutal Slam",
+              "kind": "signature",
+              "sourcePath": "en/unified/md/feature/ability/fury/level-1/brutal-slam.md",
+              "kitBonusesIncluded": false,
+              "provenance": {
+                "decisionId": "class.fury.signature-ability",
+                "selection": "Brutal Slam",
+                "source": {
+                  "path": "en/unified/md/feature/fury/level-1/fury-abilities.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Choose one signature ability from the following options.",
+                  "heading": "Signature Ability"
+                }
+              }
+            },
+            {
+              "name": "Out of the Way!",
+              "kind": "heroic",
+              "sourcePath": "en/unified/md/feature/ability/fury/level-1/out-of-the-way.md",
+              "cost": {
+                "resource": "ferocity",
+                "amount": 3
+              },
+              "kitBonusesIncluded": false,
+              "provenance": {
+                "decisionId": "class.fury.ability-3",
+                "selection": "Out of the Way!",
+                "source": {
+                  "path": "en/unified/md/feature/fury/level-1/fury-abilities.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Choose one heroic ability from the following options, each of which costs 3 ferocity to use.",
+                  "heading": "3-Ferocity Ability"
+                }
+              }
+            },
+            {
+              "name": "Thunder Roar",
+              "kind": "heroic",
+              "sourcePath": "en/unified/md/feature/ability/fury/level-1/thunder-roar.md",
+              "cost": {
+                "resource": "ferocity",
+                "amount": 5
+              },
+              "kitBonusesIncluded": false,
+              "provenance": {
+                "decisionId": "class.fury.ability-5",
+                "selection": "Thunder Roar",
+                "source": {
+                  "path": "en/unified/md/feature/fury/level-1/fury-abilities.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Choose one heroic ability from the following options, each of which costs 5 ferocity to use.",
+                  "heading": "5-Ferocity Ability"
+                }
+              }
+            },
+            {
+              "name": "Lines of Force",
+              "kind": "aspect-triggered",
+              "sourcePath": "en/unified/md/feature/ability/fury/level-1/lines-of-force.md",
+              "kitBonusesIncluded": false,
+              "provenance": {
+                "decisionId": "class.fury.aspect",
+                "selection": "Berserker",
+                "source": {
+                  "path": "en/unified/md/feature/fury/level-1/aspect-triggered-action.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Your primordial aspect grants you a triggered action, as shown on the Aspect Triggered Actions table."
+                }
+              }
+            },
+            {
+              "name": "Melee Weapon Free Strike",
+              "kind": "free-strike",
+              "sourcePath": "en/unified/md/feature/ability/common/melee-weapon-free-strike.md",
+              "kitBonusesIncluded": false,
+              "provenance": {
+                "decisionId": "free-strikes.grant",
+                "source": {
+                  "path": "en/unified/md/chapter/making-a-hero.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Every hero has a melee weapon free strike and a ranged weapon free strike.",
+                  "heading": "7. Add Free Strikes"
+                }
+              }
+            },
+            {
+              "name": "Ranged Weapon Free Strike",
+              "kind": "free-strike",
+              "sourcePath": "en/unified/md/feature/ability/common/ranged-weapon-free-strike.md",
+              "kitBonusesIncluded": false,
+              "provenance": {
+                "decisionId": "free-strikes.grant",
+                "source": {
+                  "path": "en/unified/md/chapter/making-a-hero.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Every hero has a melee weapon free strike and a ranged weapon free strike.",
+                  "heading": "7. Add Free Strikes"
+                }
+              }
+            }
+          ],
+          "uncertainties": ["Q-R-100", "Q-R-101", "Q-CHAR-12"]
+        },
+        "evaluatedAgainst": {
+          "definitionsSchemaVersion": "r01.1",
+          "compendiumRevision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+        }
+      }
+    },
+    "invalid": {
+      "input": {
+        "definitionsSchemaVersion": "r01.1",
+        "compendiumRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+        "level": 1,
+        "selections": {
+          "ancestry.choice": "Devil",
+          "ancestry.devil.silver-tongue-skill": "Persuade",
+          "ancestry.devil.purchased-traits": ["Impressive Horns", "Wings"],
+          "culture.name": "wilderness mercenary commune",
+          "culture.language": "Anjali",
+          "culture.environment": "Wilderness",
+          "culture.environment.skill": "Swim",
+          "culture.organization": "Communal",
+          "culture.organization.skill": "Blacksmithing",
+          "culture.upbringing": "Martial",
+          "culture.upbringing.skill": "Intimidate",
+          "career.choice": "Soldier",
+          "career.soldier.skill.exploration": "Endurance",
+          "career.soldier.skill.intrigue": "Alertness",
+          "career.soldier.languages": ["Caelian", "Vaslorian"],
+          "career.soldier.perk": "Teamwork",
+          "career.soldier.inciting-incident": "Sole Survivor",
+          "class.choice": "Fury",
+          "class.fury.characteristic-array": "1, 0, 0",
+          "class.fury.array-assignment": {
+            "Intuition": 1,
+            "Reason": 0,
+            "Presence": 0
+          },
+          "class.fury.skills": ["Jump", "Climb"],
+          "class.fury.aspect": "Berserker",
+          "class.fury.signature-ability": "Brutal Slam",
+          "class.fury.ability-3": "Out of the Way!",
+          "class.fury.ability-5": "Thunder Roar",
+          "kit.choice": "Mountain",
+          "details.name": "Grug"
+        }
+      },
+      "expected": {
+        "status": "invalid",
+        "diagnostics": {
+          "ancestry.devil.purchased-traits": [
+            {
+              "decisionId": "ancestry.devil.purchased-traits",
+              "severity": "invalid",
+              "code": "budget-exceeded",
+              "message": "Impressive Horns (2) + Wings (2) = 4 exceeds the 3 ancestry points budget; no purchased trait is granted until the selection is legal",
+              "source": {
+                "path": "en/unified/md/chapter/ancestries.md",
+                "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                "quote": "But they couldn't select both Impressive Horns and Wings, since their combined cost of 4 exceeds the ancestry points budget for the devil.",
+                "heading": "Ancestry Traits"
+              }
+            }
+          ],
+          "career.soldier.languages": [
+            {
+              "decisionId": "career.soldier.languages",
+              "severity": "warning",
+              "code": "duplicate-language",
+              "message": "Caelian duplicates the automatic grant from culture.caelian; kept under the Q-R-100 provisional default",
+              "source": {
+                "path": "en/books/heroes/clean/Draw Steel Heroes.md",
+                "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                "quote": "All player characters know Caelian!",
+                "heading": "Caelian Empire"
+              },
+              "uncertainty": "Q-R-100"
+            }
+          ]
+        },
+        "baseline": null,
+        "partial": {
+          "level": {
+            "value": 1,
+            "provenance": [
+              {
+                "decisionId": "class.level",
+                "source": {
+                  "path": "en/unified/md/chapter/making-a-hero.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Each option you can choose for your hero at 1st level includes a parenthetical selection labeled \"Quick Build.\"",
+                  "heading": "Step-by-Step Hero Making"
+                },
+                "operation": "set",
+                "amount": 1
+              }
+            ]
+          },
+          "ancestry": {
+            "value": "Devil",
+            "provenance": [
+              {
+                "decisionId": "ancestry.choice",
+                "selection": "Devil",
+                "source": {
+                  "path": "en/unified/md/chapter/making-a-hero.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Choose your hero's humanoid ancestry from among the range of ancestries available in the game",
+                  "heading": "2. Ancestry"
+                }
+              }
+            ]
+          },
+          "class": {
+            "value": "Fury",
+            "provenance": [
+              {
+                "decisionId": "class.choice",
+                "selection": "Fury",
+                "source": {
+                  "path": "en/unified/md/chapter/making-a-hero.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "You can be a censor, conduit, elementalist, fury, null, shadow, tactician, talent, or troubadour.",
+                  "heading": "5. Class"
+                }
+              }
+            ]
+          },
+          "subclass": {
+            "value": "Berserker",
+            "provenance": [
+              {
+                "decisionId": "class.fury.aspect",
+                "selection": "Berserker",
+                "source": {
+                  "path": "en/unified/md/feature/fury/level-1/primordial-aspect.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Your primordial aspect is your subclass"
+                }
+              }
+            ]
+          },
+          "career": {
+            "value": "Soldier",
+            "provenance": [
+              {
+                "decisionId": "career.choice",
+                "selection": "Soldier",
+                "source": {
+                  "path": "en/unified/md/chapter/making-a-hero.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Choose your hero's career, which describes what you did for a living before you became a hero.",
+                  "heading": "4. Career"
+                }
+              }
+            ]
+          },
+          "characteristics": {
+            "M": {
+              "value": 2,
+              "provenance": [
+                {
+                  "decisionId": "class.fury.fixed-characteristics",
+                  "source": {
+                    "path": "en/unified/md/class/fury.md",
+                    "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                    "quote": "You start with a Might of 2 and an Agility of 2",
+                    "heading": "Basics"
+                  },
+                  "operation": "set",
+                  "amount": 2
+                }
+              ]
+            },
+            "A": {
+              "value": 2,
+              "provenance": [
+                {
+                  "decisionId": "class.fury.fixed-characteristics",
+                  "source": {
+                    "path": "en/unified/md/class/fury.md",
+                    "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                    "quote": "You start with a Might of 2 and an Agility of 2",
+                    "heading": "Basics"
+                  },
+                  "operation": "set",
+                  "amount": 2
+                }
+              ]
+            },
+            "R": {
+              "value": 0,
+              "provenance": [
+                {
+                  "decisionId": "class.fury.characteristic-array",
+                  "selection": "1, 0, 0",
+                  "source": {
+                    "path": "en/unified/md/class/fury.md",
+                    "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                    "quote": "you can choose one of the following arrays for your other characteristic scores:",
+                    "heading": "Basics"
+                  }
+                },
+                {
+                  "decisionId": "class.fury.array-assignment",
+                  "selection": "Reason 0",
+                  "source": {
+                    "path": "en/unified/md/class/fury.md",
+                    "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                    "quote": "you can choose one of the following arrays for your other characteristic scores:",
+                    "heading": "Basics"
+                  },
+                  "operation": "set",
+                  "amount": 0,
+                  "uncertainty": "Q-R-101"
+                }
+              ]
+            },
+            "I": {
+              "value": 1,
+              "provenance": [
+                {
+                  "decisionId": "class.fury.characteristic-array",
+                  "selection": "1, 0, 0",
+                  "source": {
+                    "path": "en/unified/md/class/fury.md",
+                    "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                    "quote": "you can choose one of the following arrays for your other characteristic scores:",
+                    "heading": "Basics"
+                  }
+                },
+                {
+                  "decisionId": "class.fury.array-assignment",
+                  "selection": "Intuition 1",
+                  "source": {
+                    "path": "en/unified/md/class/fury.md",
+                    "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                    "quote": "you can choose one of the following arrays for your other characteristic scores:",
+                    "heading": "Basics"
+                  },
+                  "operation": "set",
+                  "amount": 1,
+                  "uncertainty": "Q-R-101"
+                }
+              ]
+            },
+            "P": {
+              "value": 0,
+              "provenance": [
+                {
+                  "decisionId": "class.fury.characteristic-array",
+                  "selection": "1, 0, 0",
+                  "source": {
+                    "path": "en/unified/md/class/fury.md",
+                    "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                    "quote": "you can choose one of the following arrays for your other characteristic scores:",
+                    "heading": "Basics"
+                  }
+                },
+                {
+                  "decisionId": "class.fury.array-assignment",
+                  "selection": "Presence 0",
+                  "source": {
+                    "path": "en/unified/md/class/fury.md",
+                    "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                    "quote": "you can choose one of the following arrays for your other characteristic scores:",
+                    "heading": "Basics"
+                  },
+                  "operation": "set",
+                  "amount": 0,
+                  "uncertainty": "Q-R-101"
+                }
+              ]
+            }
+          },
+          "staminaMaximum": {
+            "value": 30,
+            "provenance": [
+              {
+                "decisionId": "class.fury.baseline",
+                "source": {
+                  "path": "en/unified/md/class/fury.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Starting Stamina at 1st Level: 21",
+                  "heading": "Basics"
+                },
+                "operation": "base",
+                "amount": 21
+              },
+              {
+                "decisionId": "kit.mountain.contributions",
+                "source": {
+                  "path": "en/unified/md/kit/mountain.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Stamina Bonus: +9 per echelon",
+                  "heading": "Kit Bonuses"
+                },
+                "operation": "add",
+                "amount": 9,
+                "note": "1st echelon at level 1 (rule/general/echelon.md); rule: chapter/kits.md, Stamina Bonus"
+              }
+            ]
+          },
+          "recoveriesMaximum": {
+            "value": 10,
+            "provenance": [
+              {
+                "decisionId": "class.fury.baseline",
+                "source": {
+                  "path": "en/unified/md/class/fury.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Recoveries: 10",
+                  "heading": "Basics"
+                },
+                "operation": "set",
+                "amount": 10,
+                "note": "rule: rule/health/recoveries.md, \"determined by their class\""
+              }
+            ]
+          },
+          "recoveryValue": {
+            "value": 10,
+            "provenance": [
+              {
+                "decisionId": "class.fury.baseline",
+                "source": {
+                  "path": "en/unified/md/rule/health/recoveries.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "A hero also has a recovery value that equals one-third of their Stamina maximum, rounded down."
+                },
+                "operation": "floor-divide",
+                "amount": 3,
+                "note": "floor(30 / 3)"
+              }
+            ]
+          },
+          "windedValue": {
+            "value": 15,
+            "provenance": [
+              {
+                "decisionId": "class.fury.baseline",
+                "source": {
+                  "path": "en/unified/md/rule/health/winded.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Your winded value equals half your Stamina maximum."
+                },
+                "operation": "floor-divide",
+                "amount": 2,
+                "note": "floor(30 / 2); R04 section 6.3"
+              }
+            ]
+          },
+          "stability": {
+            "value": 2,
+            "provenance": [
+              {
+                "decisionId": "ancestry.devil.base-statistics",
+                "source": {
+                  "path": "en/unified/md/rule/character/speed.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Unless otherwise noted, a character of any of these ancestries is size 1M and has speed 5 and stability 0.",
+                  "heading": "Starting Size and Speed"
+                },
+                "operation": "base",
+                "amount": 0
+              },
+              {
+                "decisionId": "kit.mountain.contributions",
+                "source": {
+                  "path": "en/unified/md/kit/mountain.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Stability Bonus: +2",
+                  "heading": "Kit Bonuses"
+                },
+                "operation": "add",
+                "amount": 2,
+                "note": "rule: chapter/kits.md, Stability Bonus"
+              }
+            ]
+          },
+          "size": {
+            "value": "1M",
+            "provenance": [
+              {
+                "decisionId": "ancestry.devil.base-statistics",
+                "source": {
+                  "path": "en/unified/md/rule/character/speed.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Unless otherwise noted, a character of any of these ancestries is size 1M and has speed 5 and stability 0.",
+                  "heading": "Starting Size and Speed"
+                },
+                "operation": "set"
+              }
+            ]
+          },
+          "disengage": {
+            "value": 1,
+            "provenance": [
+              {
+                "decisionId": "free-strikes.grant",
+                "source": {
+                  "path": "en/unified/md/feature/common/move-actions/disengage.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "When a creature takes the Disengage move action, they can shift 1 square."
+                },
+                "operation": "base",
+                "amount": 1,
+                "note": "common move action, not a creation decision; attached to the automatic step"
+              },
+              {
+                "decisionId": "kit.mountain.contributions",
+                "source": {
+                  "path": "en/unified/md/chapter/kits.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "| Mountain | Heavy | Heavy | +9 | - | +2 | +0/+0/+4 | - | - | - | - |",
+                  "heading": "Kits Table"
+                },
+                "operation": "add",
+                "amount": 0,
+                "note": "Kits table Disengage column \"-\"; rule: chapter/kits.md, Disengage Bonus"
+              }
+            ]
+          },
+          "potencyCharacteristic": {
+            "value": "M",
+            "provenance": [
+              {
+                "decisionId": "class.fury.baseline",
+                "source": {
+                  "path": "en/unified/md/class/fury.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Strong Potency: Might",
+                  "heading": "Basics"
+                },
+                "uncertainty": "Q-CHAR-12",
+                "note": "class-named characteristic; general rule names the highest (rule/character/potency.md), equal for every level-one Fury (Q-CHAR-12)"
+              }
+            ]
+          },
+          "potency": {
+            "weak": {
+              "value": 0,
+              "provenance": [
+                {
+                  "decisionId": "class.fury.baseline",
+                  "source": {
+                    "path": "en/unified/md/class/fury.md",
+                    "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                    "quote": "Weak Potency: Might − 2",
+                    "heading": "Basics"
+                  },
+                  "operation": "set",
+                  "amount": 0,
+                  "note": "Might 2 − 2"
+                }
+              ]
+            },
+            "average": {
+              "value": 1,
+              "provenance": [
+                {
+                  "decisionId": "class.fury.baseline",
+                  "source": {
+                    "path": "en/unified/md/class/fury.md",
+                    "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                    "quote": "Average Potency: Might − 1",
+                    "heading": "Basics"
+                  },
+                  "operation": "set",
+                  "amount": 1,
+                  "note": "Might 2 − 1"
+                }
+              ]
+            },
+            "strong": {
+              "value": 2,
+              "provenance": [
+                {
+                  "decisionId": "class.fury.baseline",
+                  "source": {
+                    "path": "en/unified/md/class/fury.md",
+                    "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                    "quote": "Strong Potency: Might",
+                    "heading": "Basics"
+                  },
+                  "operation": "set",
+                  "amount": 2,
+                  "note": "Might 2"
+                }
+              ]
+            }
+          },
+          "heroicResource": {
+            "name": {
+              "value": "ferocity",
+              "provenance": [
+                {
+                  "decisionId": "class.fury.features",
+                  "source": {
+                    "path": "en/unified/md/feature/fury/level-1/ferocity.md",
+                    "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                    "quote": "fueling a Heroic Resource called ferocity"
+                  }
+                }
+              ]
+            },
+            "startingValue": {
+              "value": 0,
+              "provenance": [
+                {
+                  "decisionId": "class.fury.features",
+                  "source": {
+                    "path": "en/unified/md/feature/fury/level-1/ferocity.md",
+                    "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                    "quote": "Though you can't gain ferocity outside of combat",
+                    "heading": "Ferocity Outside of Combat"
+                  },
+                  "operation": "set",
+                  "amount": 0,
+                  "note": "Interpretation: a newly created hero has not been in combat and cannot have gained ferocity; see also \"You lose any remaining ferocity at the end of the encounter.\" R03 owns live initialization."
+                }
+              ]
+            }
+          },
+          "renown": {
+            "value": 1,
+            "provenance": [
+              {
+                "decisionId": "career.soldier.renown",
+                "source": {
+                  "path": "en/unified/md/rule/resource/renown.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "At the start of character creation, your Renown is 0."
+                },
+                "operation": "base",
+                "amount": 0
+              },
+              {
+                "decisionId": "career.soldier.renown",
+                "source": {
+                  "path": "en/unified/md/career/soldier.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Renown: +1"
+                },
+                "operation": "add",
+                "amount": 1
+              }
+            ]
+          },
+          "wealth": {
+            "value": 1,
+            "provenance": [
+              {
+                "decisionId": "career.choice",
+                "selection": "Soldier",
+                "source": {
+                  "path": "en/unified/md/rule/resource/wealth.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Some careers increase your starting Wealth score (from a base score of 1)."
+                },
+                "operation": "base",
+                "amount": 1,
+                "note": "Soldier lists no wealth benefit"
+              }
+            ]
+          },
+          "kit": {
+            "name": {
+              "value": "Mountain",
+              "provenance": [
+                {
+                  "decisionId": "kit.choice",
+                  "selection": "Mountain",
+                  "source": {
+                    "path": "en/unified/md/kit/mountain.md",
+                    "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                    "quote": "name: Mountain"
+                  }
+                }
+              ]
+            },
+            "equipmentText": {
+              "value": "You wear heavy armor and wield a heavy weapon.",
+              "provenance": [
+                {
+                  "decisionId": "kit.mountain.contributions",
+                  "source": {
+                    "path": "en/unified/md/kit/mountain.md",
+                    "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                    "quote": "You wear heavy armor and wield a heavy weapon.",
+                    "heading": "Equipment"
+                  }
+                }
+              ]
+            },
+            "staminaBonusPerEchelon": {
+              "value": 9,
+              "provenance": [
+                {
+                  "decisionId": "kit.mountain.contributions",
+                  "source": {
+                    "path": "en/unified/md/kit/mountain.md",
+                    "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                    "quote": "Stamina Bonus: +9 per echelon",
+                    "heading": "Kit Bonuses"
+                  },
+                  "operation": "set",
+                  "amount": 9
+                }
+              ]
+            },
+            "echelon": {
+              "value": 1,
+              "provenance": [
+                {
+                  "decisionId": "class.level",
+                  "source": {
+                    "path": "en/unified/md/rule/general/echelon.md",
+                    "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                    "quote": "1st Echelon (1st to 3rd Level)"
+                  },
+                  "operation": "set",
+                  "amount": 1
+                }
+              ]
+            },
+            "staminaBonusApplied": {
+              "value": 9,
+              "provenance": [
+                {
+                  "decisionId": "kit.mountain.contributions",
+                  "source": {
+                    "path": "en/unified/md/chapter/kits.md",
+                    "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                    "quote": "Your kit's Stamina bonus is added to your Stamina maximum and scales with your echelon.",
+                    "heading": "Stamina Bonus"
+                  },
+                  "operation": "set",
+                  "amount": 9,
+                  "note": "9 at the 1st echelon"
+                }
+              ]
+            },
+            "speedBonus": {
+              "value": 0,
+              "provenance": [
+                {
+                  "decisionId": "kit.mountain.contributions",
+                  "source": {
+                    "path": "en/unified/md/chapter/kits.md",
+                    "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                    "quote": "| Mountain | Heavy | Heavy | +9 | - | +2 | +0/+0/+4 | - | - | - | - |",
+                    "heading": "Kits Table"
+                  },
+                  "operation": "set",
+                  "amount": 0
+                }
+              ]
+            },
+            "stabilityBonus": {
+              "value": 2,
+              "provenance": [
+                {
+                  "decisionId": "kit.mountain.contributions",
+                  "source": {
+                    "path": "en/unified/md/kit/mountain.md",
+                    "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                    "quote": "Stability Bonus: +2",
+                    "heading": "Kit Bonuses"
+                  },
+                  "operation": "set",
+                  "amount": 2
+                }
+              ]
+            },
+            "meleeDamageBonus": {
+              "value": [0, 0, 4],
+              "provenance": [
+                {
+                  "decisionId": "kit.mountain.contributions",
+                  "source": {
+                    "path": "en/unified/md/kit/mountain.md",
+                    "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                    "quote": "Melee Damage Bonus: +0/+0/+4",
+                    "heading": "Kit Bonuses"
+                  },
+                  "note": "applied per R04 section 4.2"
+                }
+              ]
+            },
+            "rangedDamageBonus": {
+              "value": [0, 0, 0],
+              "provenance": [
+                {
+                  "decisionId": "kit.mountain.contributions",
+                  "source": {
+                    "path": "en/unified/md/chapter/kits.md",
+                    "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                    "quote": "| Mountain | Heavy | Heavy | +9 | - | +2 | +0/+0/+4 | - | - | - | - |",
+                    "heading": "Kits Table"
+                  },
+                  "note": "Kits table Ranged Damage column \"-\""
+                }
+              ]
+            },
+            "meleeDistanceBonus": {
+              "value": 0,
+              "provenance": [
+                {
+                  "decisionId": "kit.mountain.contributions",
+                  "source": {
+                    "path": "en/unified/md/chapter/kits.md",
+                    "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                    "quote": "| Mountain | Heavy | Heavy | +9 | - | +2 | +0/+0/+4 | - | - | - | - |",
+                    "heading": "Kits Table"
+                  },
+                  "operation": "set",
+                  "amount": 0
+                }
+              ]
+            },
+            "rangedDistanceBonus": {
+              "value": 0,
+              "provenance": [
+                {
+                  "decisionId": "kit.mountain.contributions",
+                  "source": {
+                    "path": "en/unified/md/chapter/kits.md",
+                    "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                    "quote": "| Mountain | Heavy | Heavy | +9 | - | +2 | +0/+0/+4 | - | - | - | - |",
+                    "heading": "Kits Table"
+                  },
+                  "operation": "set",
+                  "amount": 0
+                }
+              ]
+            },
+            "disengageBonus": {
+              "value": 0,
+              "provenance": [
+                {
+                  "decisionId": "kit.mountain.contributions",
+                  "source": {
+                    "path": "en/unified/md/chapter/kits.md",
+                    "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                    "quote": "| Mountain | Heavy | Heavy | +9 | - | +2 | +0/+0/+4 | - | - | - | - |",
+                    "heading": "Kits Table"
+                  },
+                  "operation": "set",
+                  "amount": 0
+                }
+              ]
+            }
+          },
+          "skills": [
+            {
+              "name": "Persuade",
+              "group": "interpersonal",
+              "provenance": {
+                "decisionId": "ancestry.devil.silver-tongue-skill",
+                "selection": "Persuade",
+                "source": {
+                  "path": "en/unified/md/feature/trait/devil/silver-tongue.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "You have one skill of your choice from the interpersonal skill group"
+                }
+              }
+            },
+            {
+              "name": "Swim",
+              "group": "exploration",
+              "provenance": {
+                "decisionId": "culture.environment.skill",
+                "selection": "Swim",
+                "source": {
+                  "path": "en/books/heroes/clean/Draw Steel Heroes.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "You can select one skill from each aspect's list of options.",
+                  "heading": "Culture Benefits"
+                }
+              }
+            },
+            {
+              "name": "Blacksmithing",
+              "group": "crafting",
+              "provenance": {
+                "decisionId": "culture.organization.skill",
+                "selection": "Blacksmithing",
+                "source": {
+                  "path": "en/books/heroes/clean/Draw Steel Heroes.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "You can select one skill from each aspect's list of options.",
+                  "heading": "Culture Benefits"
+                }
+              }
+            },
+            {
+              "name": "Intimidate",
+              "group": "interpersonal",
+              "provenance": {
+                "decisionId": "culture.upbringing.skill",
+                "selection": "Intimidate",
+                "source": {
+                  "path": "en/books/heroes/clean/Draw Steel Heroes.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "You can select one skill from each aspect's list of options.",
+                  "heading": "Culture Benefits"
+                }
+              }
+            },
+            {
+              "name": "Endurance",
+              "group": "exploration",
+              "provenance": {
+                "decisionId": "career.soldier.skill.exploration",
+                "selection": "Endurance",
+                "source": {
+                  "path": "en/unified/md/career/soldier.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "One skill from the exploration skill group and one skill from the intrigue group"
+                }
+              }
+            },
+            {
+              "name": "Alertness",
+              "group": "intrigue",
+              "provenance": {
+                "decisionId": "career.soldier.skill.intrigue",
+                "selection": "Alertness",
+                "source": {
+                  "path": "en/unified/md/career/soldier.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "One skill from the exploration skill group and one skill from the intrigue group"
+                }
+              }
+            },
+            {
+              "name": "Nature",
+              "group": "lore",
+              "provenance": {
+                "decisionId": "class.fury.skill.nature",
+                "source": {
+                  "path": "en/unified/md/class/fury.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "You gain the Nature skill",
+                  "heading": "Basics"
+                }
+              }
+            },
+            {
+              "name": "Jump",
+              "group": "exploration",
+              "provenance": {
+                "decisionId": "class.fury.skills",
+                "selection": "Jump",
+                "source": {
+                  "path": "en/unified/md/class/fury.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Then choose any two skills from the exploration or intrigue skill groups.",
+                  "heading": "Basics"
+                }
+              }
+            },
+            {
+              "name": "Climb",
+              "group": "exploration",
+              "provenance": {
+                "decisionId": "class.fury.skills",
+                "selection": "Climb",
+                "source": {
+                  "path": "en/unified/md/class/fury.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Then choose any two skills from the exploration or intrigue skill groups.",
+                  "heading": "Basics"
+                }
+              }
+            },
+            {
+              "name": "Lift",
+              "group": "exploration",
+              "provenance": {
+                "decisionId": "class.fury.aspect",
+                "selection": "Berserker",
+                "source": {
+                  "path": "en/unified/md/feature/fury/level-1/primordial-aspect.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "You have the Lift skill."
+                }
+              }
+            }
+          ],
+          "languages": [
+            {
+              "name": "Caelian",
+              "provenance": {
+                "decisionId": "culture.caelian",
+                "source": {
+                  "path": "en/books/heroes/clean/Draw Steel Heroes.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "All player characters know Caelian!",
+                  "heading": "Caelian Empire"
+                }
+              }
+            },
+            {
+              "name": "Anjali",
+              "provenance": {
+                "decisionId": "culture.language",
+                "selection": "Anjali",
+                "source": {
+                  "path": "en/books/heroes/clean/Draw Steel Heroes.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "You know the language of your culture, in addition to knowing Caelian.",
+                  "heading": "Culture Benefits"
+                }
+              }
+            },
+            {
+              "name": "Caelian",
+              "provenance": {
+                "decisionId": "career.soldier.languages",
+                "selection": "Caelian",
+                "source": {
+                  "path": "en/unified/md/career/soldier.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Languages: Two languages"
+                },
+                "uncertainty": "Q-R-100"
+              },
+              "duplicateOf": "culture.caelian"
+            },
+            {
+              "name": "Vaslorian",
+              "provenance": {
+                "decisionId": "career.soldier.languages",
+                "selection": "Vaslorian",
+                "source": {
+                  "path": "en/unified/md/career/soldier.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Languages: Two languages"
+                }
+              }
+            }
+          ],
+          "features": [
+            {
+              "name": "Culture edge",
+              "kind": "culture-benefit",
+              "sourcePath": "en/books/heroes/clean/Draw Steel Heroes.md",
+              "provenance": {
+                "decisionId": "culture.edge",
+                "source": {
+                  "path": "en/books/heroes/clean/Draw Steel Heroes.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "You gain an edge on tests made to recall lore about your culture, and on tests made to influence and interact with people of your culture.",
+                  "heading": "Culture Benefits"
+                }
+              }
+            },
+            {
+              "name": "Ferocity",
+              "kind": "class-feature",
+              "sourcePath": "en/unified/md/feature/fury/level-1/ferocity.md",
+              "provenance": {
+                "decisionId": "class.fury.features",
+                "source": {
+                  "path": "en/unified/md/class/fury.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Primordial Aspect, Ferocity, Growing Ferocity, Aspect Features, Aspect Triggered Action, Mighty Leaps, Fury Abilities",
+                  "heading": "Fury Advancement Table"
+                }
+              },
+              "affects": ["heroicResource"]
+            },
+            {
+              "name": "Growing Ferocity",
+              "kind": "class-feature",
+              "sourcePath": "en/unified/md/feature/fury/level-1/growing-ferocity.md",
+              "provenance": {
+                "decisionId": "class.fury.features",
+                "source": {
+                  "path": "en/unified/md/class/fury.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Primordial Aspect, Ferocity, Growing Ferocity, Aspect Features, Aspect Triggered Action, Mighty Leaps, Fury Abilities",
+                  "heading": "Fury Advancement Table"
+                }
+              }
+            },
+            {
+              "name": "Mighty Leaps",
+              "kind": "class-feature",
+              "sourcePath": "en/unified/md/feature/fury/level-1/mighty-leaps.md",
+              "provenance": {
+                "decisionId": "class.fury.features",
+                "source": {
+                  "path": "en/unified/md/class/fury.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Primordial Aspect, Ferocity, Growing Ferocity, Aspect Features, Aspect Triggered Action, Mighty Leaps, Fury Abilities",
+                  "heading": "Fury Advancement Table"
+                }
+              }
+            },
+            {
+              "name": "Kit",
+              "kind": "aspect-feature",
+              "sourcePath": "en/unified/md/feature/fury/level-1/kit.md",
+              "provenance": {
+                "decisionId": "class.fury.aspect",
+                "selection": "Berserker",
+                "source": {
+                  "path": "en/unified/md/feature/fury/level-1/1st-level-aspect-features.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Your primordial aspect grants you two features, as shown on the 1st-Level Aspect Features table."
+                }
+              },
+              "affects": ["kit"]
+            },
+            {
+              "name": "Primordial Strength",
+              "kind": "aspect-feature",
+              "sourcePath": "en/unified/md/feature/fury/level-1/primordial-strength.md",
+              "provenance": {
+                "decisionId": "class.fury.aspect",
+                "selection": "Berserker",
+                "source": {
+                  "path": "en/unified/md/feature/fury/level-1/1st-level-aspect-features.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Your primordial aspect grants you two features, as shown on the 1st-Level Aspect Features table."
+                }
+              }
+            }
+          ],
+          "perks": [
+            {
+              "name": "Teamwork",
+              "kind": "perk",
+              "sourcePath": "en/unified/md/perk/teamwork.md",
+              "provenance": {
+                "decisionId": "career.soldier.perk",
+                "selection": "Teamwork",
+                "source": {
+                  "path": "en/unified/md/career/soldier.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Perk: One exploration perk"
+                }
+              }
+            }
+          ],
+          "abilities": [
+            {
+              "name": "Brutal Slam",
+              "kind": "signature",
+              "sourcePath": "en/unified/md/feature/ability/fury/level-1/brutal-slam.md",
+              "kitBonusesIncluded": false,
+              "provenance": {
+                "decisionId": "class.fury.signature-ability",
+                "selection": "Brutal Slam",
+                "source": {
+                  "path": "en/unified/md/feature/fury/level-1/fury-abilities.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Choose one signature ability from the following options.",
+                  "heading": "Signature Ability"
+                }
+              }
+            },
+            {
+              "name": "Out of the Way!",
+              "kind": "heroic",
+              "sourcePath": "en/unified/md/feature/ability/fury/level-1/out-of-the-way.md",
+              "cost": {
+                "resource": "ferocity",
+                "amount": 3
+              },
+              "kitBonusesIncluded": false,
+              "provenance": {
+                "decisionId": "class.fury.ability-3",
+                "selection": "Out of the Way!",
+                "source": {
+                  "path": "en/unified/md/feature/fury/level-1/fury-abilities.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Choose one heroic ability from the following options, each of which costs 3 ferocity to use.",
+                  "heading": "3-Ferocity Ability"
+                }
+              }
+            },
+            {
+              "name": "Thunder Roar",
+              "kind": "heroic",
+              "sourcePath": "en/unified/md/feature/ability/fury/level-1/thunder-roar.md",
+              "cost": {
+                "resource": "ferocity",
+                "amount": 5
+              },
+              "kitBonusesIncluded": false,
+              "provenance": {
+                "decisionId": "class.fury.ability-5",
+                "selection": "Thunder Roar",
+                "source": {
+                  "path": "en/unified/md/feature/fury/level-1/fury-abilities.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Choose one heroic ability from the following options, each of which costs 5 ferocity to use.",
+                  "heading": "5-Ferocity Ability"
+                }
+              }
+            },
+            {
+              "name": "Lines of Force",
+              "kind": "aspect-triggered",
+              "sourcePath": "en/unified/md/feature/ability/fury/level-1/lines-of-force.md",
+              "kitBonusesIncluded": false,
+              "provenance": {
+                "decisionId": "class.fury.aspect",
+                "selection": "Berserker",
+                "source": {
+                  "path": "en/unified/md/feature/fury/level-1/aspect-triggered-action.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Your primordial aspect grants you a triggered action, as shown on the Aspect Triggered Actions table."
+                }
+              }
+            },
+            {
+              "name": "Pain for Pain",
+              "kind": "kit-signature",
+              "sourcePath": "en/unified/md/kit/mountain.md",
+              "kitBonusesIncluded": true,
+              "provenance": {
+                "decisionId": "kit.mountain.contributions",
+                "source": {
+                  "path": "en/unified/md/chapter/kits.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Each kit grants a signature ability, whose distance and damage already includes the kit's bonuses.",
+                  "heading": "Kit Signature Ability"
+                }
+              }
+            },
+            {
+              "name": "Melee Weapon Free Strike",
+              "kind": "free-strike",
+              "sourcePath": "en/unified/md/feature/ability/common/melee-weapon-free-strike.md",
+              "kitBonusesIncluded": false,
+              "provenance": {
+                "decisionId": "free-strikes.grant",
+                "source": {
+                  "path": "en/unified/md/chapter/making-a-hero.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Every hero has a melee weapon free strike and a ranged weapon free strike.",
+                  "heading": "7. Add Free Strikes"
+                }
+              }
+            },
+            {
+              "name": "Ranged Weapon Free Strike",
+              "kind": "free-strike",
+              "sourcePath": "en/unified/md/feature/ability/common/ranged-weapon-free-strike.md",
+              "kitBonusesIncluded": false,
+              "provenance": {
+                "decisionId": "free-strikes.grant",
+                "source": {
+                  "path": "en/unified/md/chapter/making-a-hero.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Every hero has a melee weapon free strike and a ranged weapon free strike.",
+                  "heading": "7. Add Free Strikes"
+                }
+              }
+            }
+          ],
+          "speed": {
+            "value": 5,
+            "provenance": [
+              {
+                "decisionId": "ancestry.devil.base-statistics",
+                "source": {
+                  "path": "en/unified/md/rule/character/speed.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Unless otherwise noted, a character of any of these ancestries is size 1M and has speed 5 and stability 0.",
+                  "heading": "Starting Size and Speed"
+                },
+                "operation": "base",
+                "amount": 5
+              },
+              {
+                "decisionId": "kit.mountain.contributions",
+                "source": {
+                  "path": "en/unified/md/chapter/kits.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "| Mountain | Heavy | Heavy | +9 | - | +2 | +0/+0/+4 | - | - | - | - |",
+                  "heading": "Kits Table"
+                },
+                "operation": "add",
+                "amount": 0,
+                "note": "Kits table speed column \"-\"; rule: chapter/kits.md, Speed Bonus"
+              }
+            ]
+          },
+          "savingThrowThreshold": {
+            "value": 6,
+            "provenance": [
+              {
+                "decisionId": "free-strikes.grant",
+                "source": {
+                  "path": "en/unified/md/rule/general/saving-throw.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "On a 6 or higher, the effect ends."
+                },
+                "operation": "base",
+                "amount": 6,
+                "note": "general rule, not a creation decision; attached to the automatic step"
+              }
+            ]
+          },
+          "traits": [
+            {
+              "name": "Silver Tongue",
+              "kind": "ancestry-signature-trait",
+              "sourcePath": "en/unified/md/feature/trait/devil/silver-tongue.md",
+              "provenance": {
+                "decisionId": "ancestry.devil.signature-trait",
+                "source": {
+                  "path": "en/unified/md/chapter/ancestries.md",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "quote": "Each ancestry has one or more signature traits, which your hero gets for free if they take that ancestry.",
+                  "heading": "Ancestry Traits"
+                }
+              }
+            }
+          ],
+          "uncertainties": ["Q-R-100", "Q-R-101", "Q-CHAR-12"]
+        },
+        "evaluatedAgainst": {
+          "definitionsSchemaVersion": "r01.1",
+          "compendiumRevision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+        }
+      }
+    }
+  }
+}
