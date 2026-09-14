@@ -20,6 +20,7 @@ import { actorRef } from './initiativeTables';
 import { abilitiesFor, type AbilityDefinition } from './lib/resolve';
 import { allowanceFor, loadActorRecords } from './lib/abilityOperations';
 import { settingsOf } from './lib/audience';
+import { correctionWindow } from './lib/history';
 
 export { abilityOperations } from './lib/abilityOperations';
 
@@ -222,6 +223,9 @@ export const results = query({
       .withIndex('by_campaign', q => q.eq('campaignId', args.campaignId))
       .order('desc')
       .take(100);
+    const windows = new Map<string, boolean>();
+    for (const row of rows)
+      windows.set(row._id, (await correctionWindow(ctx, row.eventId, user)).allowed);
     return rows.map(row => ({
       id: row._id,
       eventId: row.eventId,
@@ -241,8 +245,7 @@ export const results = query({
       })),
       manualDispositions: row.manualDispositions,
       correctionEventIds: row.correctionEventIds,
-      // TODO(A06): the acting player's window check from convex/lib/history.ts.
-      mayCorrect: director && context.session?.status === 'running',
+      mayCorrect: windows.get(row._id) ?? false,
     }));
   },
 });

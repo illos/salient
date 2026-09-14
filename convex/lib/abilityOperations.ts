@@ -44,6 +44,7 @@ import {
 } from '../../shared/resolve/index';
 import type { ReadCtx } from './access';
 import { committedEncounter } from './encounters';
+import { assertCorrectionAllowed } from './history';
 import { journalInsert, journalPatch, type JournalScope } from './journal';
 import { rollDice } from './dice';
 import {
@@ -1087,25 +1088,6 @@ const abilityUse: OperationDefinition = {
 // ---------------------------------------------------------------------------------------------
 // /ability correct — post-roll edge/bane correction (R04 section 3).
 
-/**
- * Who may correct a resolved result now. Director always (docs/table-spec.md#director-edits-to-inline-results).
- * TODO(A06): replace with the window check from convex/lib/history.ts so the acting player may
- * correct their own eligible attack within their undo window (next actor's turn start as the outer
- * cutoff, no intervening seam) and so older events require the sequential rewind first.
- */
-export function correctionAllowed(
-  _ctx: ReadCtx,
-  _event: Doc<'events'>,
-  context: TableContext,
-): { allowed: true } | { allowed: false; reason: string } {
-  if (context.role === 'director') return { allowed: true };
-  return {
-    allowed: false,
-    reason:
-      'Only the Director can correct a result in this build; the acting player’s correction window arrives with the history slice (A06).',
-  };
-}
-
 async function resultByEvent(ctx: ReadCtx, context: TableContext, key: string) {
   const eventId = ctx.db.normalizeId('events', key);
   const event = eventId ? await ctx.db.get(eventId) : null;
@@ -1143,8 +1125,9 @@ const abilityCorrect: OperationDefinition = {
   actor: 'none',
   execute: async (ctx, { context, args }) => {
     const { event, result } = await resultByEvent(ctx, context, String(args.event));
-    const permission = correctionAllowed(ctx, event, context);
-    if (!permission.allowed) throw new ConvexError(permission.reason);
+    // A06 window check: latest unit on the branch; acting player within their undo window; Director
+    // always subject to the sequential-rewind rule for older events.
+    await assertCorrectionAllowed(ctx, event._id, context.user);
     const edges = integer(args.edges, 'edges', 0);
     const banes = integer(args.banes, 'banes', 0);
     const targetRecord = await bindTarget(ctx, context, args.target as Reference, result.actor);
@@ -1187,7 +1170,7 @@ const abilityCorrect: OperationDefinition = {
           ? `; ${name} Stamina ${facts.facts.stamina} → ${facts.facts.stamina + correction.staminaReconciliationDelta}`
           : '';
     return {
-      kind: 'ability.correction',
+      kind: 'correction.ability',
       description: `Correction by ${context.user.displayName}: ${result.actor.name}'s ${result.abilityName} against ${name}, edges ${entry.edges} → ${edges}, banes ${entry.banes} → ${banes} (same dice ${result.dice.d10a} + ${result.dice.d10b}): tier ${correction.before.tier} → ${correction.after.tier}, damage ${correction.before.damage?.rolledDamage ?? 'none'} → ${correction.after.damage?.rolledDamage ?? 'none'}, reconciliation ${correction.staminaReconciliationDelta >= 0 ? '+' : ''}${correction.staminaReconciliationDelta} Stamina${stamina}.`,
       causeEventId: event._id,
       data: {

@@ -107,7 +107,7 @@ export function projectEvent(event: Doc<'events'>, campaign: Doc<'campaigns'>, d
     description = description.replace(/ — .*$/, ' applied.');
   }
   if (
-    (event.kind === 'ability.use' || event.kind === 'ability.correction') &&
+    (event.kind === 'ability.use' || event.kind === 'correction.ability') &&
     data &&
     settings.healthDisplay !== 'numerical'
   ) {

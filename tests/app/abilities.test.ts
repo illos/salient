@@ -843,9 +843,9 @@ describe('A05 attacks, damage, costs and common actions', () => {
     expect((await eventById(t, campaignId, used.eventId)).description).toBe(event.description);
   });
 
-  test('acceptance 9: 10.10 post-roll Add bane changes tier and damage with the same dice as a linked correction; removal restores; the original event is unchanged; player refused for now', async () => {
+  test('acceptance 9: 10.10 post-roll Add bane changes tier and damage with the same dice as a linked correction; the original event is unchanged; a further correction needs the rewind first', async () => {
     const t = backend();
-    const { director, player, campaignId, goblin } = await battle(t);
+    const { director, player, observer, campaignId, goblin } = await battle(t);
     await atDice(t, campaignId, [8, 2]);
     const used = await submit(
       player.client,
@@ -859,23 +859,23 @@ describe('A05 attacks, damage, costs and common actions', () => {
     ).toMatchObject({ total: 12, tier: 2 });
     expect((await foeRow(t, goblin)).live.stamina).toBe(8);
     const rollsBefore = (await rolls(t)).length;
-    // TODO(A06): the acting player's window; Director-only meanwhile.
+    // A06 window: the acting player may correct their own latest attack; an observer may not.
     await expect(
       submit(
-        player.client,
+        observer.client,
         campaignId,
         `/ability correct event="${used.eventId}" target=@{foe:${goblin}} edges=0 banes=1`,
-        cid('p'),
+        cid('o'),
       ),
-    ).rejects.toThrow('Only the Director');
+    ).rejects.toThrow();
     const corrected = await submit(
-      director.client,
+      player.client,
       campaignId,
       `/ability correct event="${used.eventId}" target=@{foe:${goblin}} edges=0 banes=1`,
       cid('correct'),
     );
     const correction = await eventById(t, campaignId, corrected.eventId);
-    expect(correction.kind).toBe('ability.correction');
+    expect(correction.kind).toBe('correction.ability');
     expect(correction.causeEventId).toBe(used.eventId);
     expect(correction.dice).toBeUndefined();
     expect((await rolls(t)).length).toBe(rollsBefore);
@@ -899,36 +899,21 @@ describe('A05 attacks, damage, costs and common actions', () => {
     expect((await foeRow(t, goblin)).live.stamina).toBe(11);
     // The original event is unchanged; the effective record carries the correction.
     expect(await eventById(t, campaignId, used.eventId)).toEqual(original);
-    let results = await director.client.query(api.abilities.results, { campaignId });
+    const results = await director.client.query(api.abilities.results, { campaignId });
     expect(results[0]!.targets[0]).toMatchObject({ edges: 0, banes: 1 });
     expect(results[0]!.correctionEventIds).toEqual([corrected.eventId]);
-    // Removing the bane again restores tier 2 / 7 damage / Stamina 8 as a further linked correction.
-    const restored = await submit(
-      director.client,
-      campaignId,
-      `/ability correct event="${used.eventId}" target=@{foe:${goblin}} edges=0 banes=0`,
-      cid('restore'),
-    );
-    const restoredPayload = data<{
-      correction: {
-        after: { tier: number; damage: { rolledDamage: number } };
-        staminaReconciliationDelta: number;
-      };
-    }>(await eventById(t, campaignId, restored.eventId)).correction;
-    expect(restoredPayload.after.tier).toBe(2);
-    expect(restoredPayload.after.damage.rolledDamage).toBe(7);
-    expect(restoredPayload.staminaReconciliationDelta).toBe(-3);
-    expect((await foeRow(t, goblin)).live.stamina).toBe(8);
-    results = await director.client.query(api.abilities.results, { campaignId });
-    expect(results[0]!.correctionEventIds).toEqual([corrected.eventId, restored.eventId]);
+    // The correction is its own unit (kind correction.*): a further correction of the older attack
+    // needs the sequential rewind first (A06 window), for the Director as well. Removal of the bane
+    // restoring tier 2 / 7 damage / Stamina 8 is verified in tests/resolve.test.ts (10.10).
     await expect(
       submit(
         director.client,
         campaignId,
         `/ability correct event="${used.eventId}" target=@{foe:${goblin}} edges=0 banes=0`,
-        cid('same'),
+        cid('restore'),
       ),
-    ).rejects.toThrow('already has');
+    ).rejects.toThrow('rewind');
+    expect((await foeRow(t, goblin)).live.stamina).toBe(11);
     // Player view: the foe's Stamina numbers are hidden under the default bar display; the arithmetic is not.
     const forPlayer = await player.client.query(api.events.list, { campaignId });
     const seen = forPlayer.events.find(e => e.id === corrected.eventId)!;
