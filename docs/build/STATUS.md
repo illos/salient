@@ -26,13 +26,13 @@ A08 design tokens (independent) ────────────────
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | S00 | [Process tooling, CI, lint, commit checker](S00-process-tooling.md) | S | None | not required | Committed | lead/S00-impl | 2026-09-14 | d5b2765, d67e5bd, c9114b6, 2b3f6db, 5b864dc, 1e0bb50 |
 | S01 | [Content pipeline from the pinned Compendium](S01-content-pipeline.md) | S | None | required | In progress | lead/S01-impl | 2026-09-14 | |
-| S02 | [Data contracts: encounter, events, journal, dice](S02-data-contracts.md) | S | None | not required | In progress | lead/S02-impl | 2026-09-14 | |
+| S02 | [Data contracts: encounter, events, journal, dice](S02-data-contracts.md) | S | None | not required | Committed (review deferred to user audit thread) | lead/S02-impl | 2026-09-14 | bfd7485, 97a555b, 00958e3, e106a7d |
 | R01 | [Level-one devil Fury decision table](R01-fury-decision-table.md) | R | S01 (soft) | required | Committed | rules/R01-research | 2026-09-14 | 2fe311b |
 | R02 | [Derived values and evaluator contract](R02-derived-values-evaluator.md) | R | R01 | required | Committed | rules/R01-research | 2026-09-14 | 2fe311b |
 | R03 | [Live-state initialization and engine projection](R03-live-state-initialization.md) | R | R02 | required | Not required | | | |
 | R04 | [Roll and damage resolution contract](R04-roll-and-damage-resolution.md) | R | None | required | Committed | rules/R04-research | 2026-09-14 | a0cc457 |
 | R05 | [Conditions, clock and Malice common lifecycle](R05-conditions-clock-malice.md) | R | None | required | Committed | rules/R05-research | 2026-09-14 | a3f9e93 |
-| A01 | [Shared operations, command registry and engine integration](A01-shared-operations-engine.md) | A | S02, S00 (soft) | not required | Not started | | | |
+| A01 | [Shared operations, command registry and engine integration](A01-shared-operations-engine.md) | A | S02, S00 (soft) | not required | In progress | app/A01-impl | 2026-09-14 | |
 | A02 | [Minimal wizard, admission review and character sheet](A02-wizard-and-character-sheet.md) | A | R01, R02, R03, S01, A01 | required | Not started | | | |
 | A03 | [Table shell and FreePlay basics](A03-table-shell-freeplay.md) | A | A01, S01 | required | Not started | | | |
 | A04 | [Combat opening, turns and clock](A04-combat-opening-turns-clock.md) | A | A03, R05 | required | Not started | | | |
