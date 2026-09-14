@@ -6,7 +6,7 @@ import { requireUser, type ReadCtx } from './lib/access';
 import { command } from './lib/commands';
 import { authoredValidator, heroLiveValidator, selectionValidator } from './characterTables';
 import { isJsonValue, type CharacterAuthored } from '../shared/characterDraft';
-import { combatActive } from './lib/encounters';
+import { requireCharacterEditable } from './lib/encounters';
 
 async function owned(ctx: ReadCtx, id: Id<'characters'>, userId: Id<'users'>) {
   const character = await ctx.db.get(id);
@@ -14,13 +14,8 @@ async function owned(ctx: ReadCtx, id: Id<'characters'>, userId: Id<'users'>) {
   return character;
 }
 async function requireEditable(ctx: ReadCtx, character: Doc<'characters'>) {
-  if (character.combatLocked) throw new ConvexError('Character editing is locked during combat.');
-  if (character.campaignId) {
-    const campaign = await ctx.db.get(character.campaignId);
-    const session = campaign?.activeSessionId ? await ctx.db.get(campaign.activeSessionId) : null;
-    if (session && (await combatActive(ctx, session)))
-      throw new ConvexError('Character editing is locked during combat.');
-  }
+  // A04: the lock is per participating character (docs/table-spec.md#character-sheet-lock-during-encounters).
+  await requireCharacterEditable(ctx, character);
 }
 function authored(input: CharacterAuthored): CharacterAuthored {
   const name = input.name.trim();

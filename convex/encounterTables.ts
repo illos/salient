@@ -43,6 +43,57 @@ export const encounterTables = {
     createdAt: v.number(),
     /** Set once by Finish cleanup or Void; the encounter is a read-only archive from then on. */
     archivedAt: v.union(v.number(), v.null()),
+    // ---- A04 opening, rounds and turns (docs/table-spec.md#5-encounter-workflow). Optional so rows
+    // written before A04 remain valid; absent reads as the pre-A04 committed state with no phase.
+    /** `setup` while a draft; after OK: `roll` (shared d10 due), `choice` (starting side due), `turns`. */
+    phase: v.optional(
+      v.union(v.literal('setup'), v.literal('roll'), v.literal('choice'), v.literal('turns')),
+    ),
+    /**
+     * Draft setup choices keyed by `character:<id>` / `foe:<id>`; absent creatures follow the live
+     * rosters (included, unsurprised, own group). Only the Director edits; discarded by Cancel.
+     */
+    draft: v.optional(
+      v.object({
+        excluded: v.array(v.string()),
+        surprised: v.array(v.string()),
+        /** Creature key → group key; creatures sharing a key share a group. Absent means own group. */
+        groupOf: v.record(v.string(), v.string()),
+      }),
+    ),
+    /** 1-based current round; 0 until the starting side is announced. */
+    round: v.optional(v.number()),
+    startingSide: v.optional(v.union(v.literal('heroes'), v.literal('director'), v.null())),
+    /** The side expected to act next under the alternation and exhausted-side rules. */
+    activeSide: v.optional(v.union(v.literal('heroes'), v.literal('director'), v.null())),
+    activeGroupId: v.optional(v.union(v.id('initiativeGroups'), v.null())),
+    activeTurnId: v.optional(v.union(v.id('turns'), v.null())),
+    /** Hero participants committed at OK; the Malice hero count (Q-R-50 provisional default A). */
+    heroParticipantIds: v.optional(v.array(v.id('characters'))),
+    /** How the starting side was or will be determined (rule/combat/combat-round.md). */
+    opening: v.optional(
+      v.object({
+        path: v.union(
+          v.literal('roll'),
+          v.literal('surprise-determined'),
+          v.literal('adjudication'),
+        ),
+        /** Which sides had every selected creature surprised at OK. */
+        surprisedSides: v.array(v.union(v.literal('heroes'), v.literal('director'))),
+        roll: v.union(
+          v.null(),
+          v.object({
+            value: v.number(),
+            /** 6+ the players choose, otherwise the Director (source wording). */
+            entitlement: v.union(v.literal('players'), v.literal('director')),
+            rolledBy: v.id('users'),
+          }),
+        ),
+        chosenBy: v.union(v.id('users'), v.null()),
+      }),
+    ),
+    /** Monotonic enqueue counter for clock registrations. */
+    registrationSeq: v.optional(v.number()),
   })
     .index('by_campaign', ['campaignId'])
     .index('by_session', ['sessionId']),

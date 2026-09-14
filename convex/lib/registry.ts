@@ -32,6 +32,7 @@ import { appendEvent } from './events';
 import type { JournalScope } from './journal';
 import { tableOperations } from './tableOperations';
 import { foeOperations } from './foeOperations';
+import { combatOperations } from './combatOperations';
 import { closeInteraction, respondToInteraction } from './interactions';
 
 export type Role = 'director' | 'player' | 'observer';
@@ -81,6 +82,8 @@ export type Outcome =
       commit?: (ctx: MutationCtx, scope: JournalScope) => Promise<void>;
       /** Open a pending interaction bound to the labeled actor; the continuation resumes this operation. */
       interaction?: {
+        /** Card kind; `guided-input` (A01) unless the operation opens a staged card (A04 `combat-setup`). */
+        kind?: string;
         requiredInputs: RequiredInput[];
         continuation: Omit<CommandEnvelope, 'commandId'>;
       };
@@ -471,6 +474,7 @@ export const operations: OperationDefinition[] = [
   cardClose,
   ...tableOperations,
   ...foeOperations,
+  ...combatOperations,
 ];
 
 export function findOperation(id: string): OperationDefinition | undefined {
@@ -561,7 +565,7 @@ export async function run(
       campaignId: context.campaign._id,
       sessionId: context.session?._id ?? null,
       status: 'awaiting-input',
-      kind: 'guided-input',
+      kind: outcome.interaction.kind ?? 'guided-input',
       operation: operation.id,
       actorLabel: actor?.name ?? null,
       boundActor: actor,

@@ -94,6 +94,16 @@ export function projectEvent(event: Doc<'events'>, campaign: Doc<'campaigns'>, d
     }
     if (args) delete args.difficulty;
   }
+  if (event.kind === 'clock.malice' && !settings.showMalice && data) {
+    // A04 automatic Malice changes: the cause and step stay public; the pool values do not.
+    const change = record(data.change);
+    if (change)
+      data.change = {
+        step: change.step,
+        ...(change.round === undefined ? {} : { round: change.round }),
+      };
+    description = description.replace(/ — .*$/, ' applied.');
+  }
   if (event.kind === 'manual.adjustment' && data) {
     const creature = record(data.creature);
     const hiddenMalice = data.field === 'malice' && !settings.showMalice;

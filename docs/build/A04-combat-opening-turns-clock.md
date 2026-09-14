@@ -102,4 +102,19 @@ R05 owns it. Reviewer paths: `rule/combat/combat-round.md`, `turn.md`, `end-of-t
 
 ## Work log
 
-_Empty._
+### Plan (2026-09-15, implementer)
+
+Files: `convex/initiativeTables.ts` (initiative groups, turn entries, turns, clock registrations;
+spread into `convex/schema.ts`), `convex/encounterTables.ts` (optional phase/round/opening fields on
+`encounters`), `convex/lib/clock.ts` (registration and dispatch against `shared/contracts/clock.ts`),
+`convex/lib/initiative.ts` (groups, entries, turn sequencing, foe add/remove hooks),
+`convex/lib/combatOperations.ts` (registered `/combat start|setup|cancel|commit|roll|first`,
+`/turn take|end`, `/group move`), `convex/encounters.ts` (the `current` read for every role),
+`convex/lib/encounters.ts` (`requireCharacterEditable`, the lock helper A02 calls),
+`convex/characters.ts` (calls the helper), `convex/lib/foeOperations.ts` (mid-combat hooks),
+`convex/lib/audience.ts` (Malice clock events follow Show Malice), `convex/lib/interactions.ts`
+(a combat-setup card is discarded through `/combat cancel`), `web/table/setup-card.tsx`,
+`web/table/initiative.tsx`, `web/table/index.tsx` (mounts the two; viewed hero follows Take turn),
+`tests/app/combat.test.ts`. Dependencies: A03, S02, A01 and R05 are real; no fixture. A02 has not
+landed, so heroes remain the existing `characters` rows and Victories come from `liveState.victories`
+(0 when no live record exists, the R03 initial value).

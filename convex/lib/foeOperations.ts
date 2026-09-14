@@ -5,6 +5,7 @@ import { ConvexError, v } from 'convex/values';
 import type { OperationDefinition } from './registry';
 import { requireContent } from '../content';
 import { journalDelete, journalInsert } from './journal';
+import { onFoeAdded, onFoeRemoved } from './initiative';
 import {
   GOBLIN_WARRIOR_ID,
   printedStamina,
@@ -44,7 +45,7 @@ const add: OperationDefinition = {
       description: `${entry.name} added to the foes roster.`,
       data: { definitionId: entry.contentId },
       commit: async (writer, scope) => {
-        await journalInsert(writer, scope, 'foes', {
+        const foeId = await journalInsert(writer, scope, 'foes', {
           campaignId: context.campaign._id,
           name: entry.name,
           visible,
@@ -52,6 +53,9 @@ const add: OperationDefinition = {
           maxStamina,
           live: { stamina: maxStamina, temporaryStamina: 0 },
         });
+        // A04: during committed combat the newcomer joins in a new bottom group with a turn this round
+        // (docs/table-spec.md#mid-combat-additions-and-regrouping).
+        await onFoeAdded(writer, scope, context.campaign, { id: foeId, name: entry.name });
       },
     };
   },
@@ -78,7 +82,12 @@ const remove: OperationDefinition = {
       kind: 'foe-removed',
       description: `${foe.name} removed from the foes roster.`,
       data: { foeId: foe._id },
-      commit: (writer, scope) => journalDelete(writer, scope, 'foes', foe._id),
+      commit: async (writer, scope) => {
+        // A04: an acting monster's turn finishes first; its entries leave initiative
+        // (docs/table-spec.md#mid-combat-additions-and-regrouping, confirmed current-monster removal).
+        await onFoeRemoved(writer, scope, context.campaign, foe._id);
+        await journalDelete(writer, scope, 'foes', foe._id);
+      },
     };
   },
 };

@@ -127,6 +127,9 @@ export async function closeInteraction(
     throw new ConvexError('This card changed. Refresh and try again.');
   if (!mayAnswer(interaction, context))
     throw new ConvexError('Only the person who opened this card or the Director can close it.');
+  // A04: the staged setup card owns a draft encounter; /combat cancel discards both together.
+  if (interaction.kind === 'combat-setup')
+    throw new ConvexError('Use /combat cancel to discard the combat setup card.');
   return {
     kind: 'interaction.closed',
     description: `${interaction.actorLabel ?? 'Table roll'} — card closed without an answer.`,

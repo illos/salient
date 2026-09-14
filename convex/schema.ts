@@ -4,12 +4,14 @@ import { characterTables } from './characterTables';
 import { contentTables } from './contentTables';
 import { foeTables } from './foeTables';
 import { dieResult, encounterTables, eventDisposition, eventOrigin } from './encounterTables';
+import { initiativeTables } from './initiativeTables';
 
 export default defineSchema({
   ...characterTables,
   ...contentTables,
   ...foeTables,
   ...encounterTables,
+  ...initiativeTables,
   users: defineTable({ authId: v.string(), displayName: v.string() }).index('by_authId', [
     'authId',
   ]),

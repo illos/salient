@@ -1,0 +1,371 @@
+// SPDX-License-Identifier: GPL-3.0-only
+/**
+ * The game clock: registration of scheduled rules work and its dispatch at the six boundary kinds
+ * of shared/contracts/clock.ts. No wall time; a boundary occurs only when a registered operation
+ * (OK, Take turn, End turn, actor removal) dispatches it inside its own mutation.
+ *
+ * Owning specifications: docs/table-spec.md#game-clock-and-scheduled-rules-work (the clock owns
+ * turn/round scheduling; distinct boundaries; enqueue order with save-ends rolls last; one firing per
+ * actual turn; each firing is its own ordered log entry linked to the causing user operation),
+ * docs/table-command-spec.md#clock-driven-operations, docs/conditions-and-clock.md#2-clock-contract
+ * (sections 2.2 boundaries, 2.3 order of due work, 2.4 producers) and #3-malice-common-lifecycle.
+ *
+ * Q-TS-1 (answered 2026-09-14): no save-ends roll is automatic in v0.01. The save phase exists here as
+ * the registration hook the contract describes; nothing registers a `saving-throw` item, and if one
+ * ever appears without a V1 producer it is recorded as unsupported, never rolled.
+ */
+import { ConvexError } from 'convex/values';
+import type { Doc, Id } from '../_generated/dataModel';
+import type { MutationCtx } from '../_generated/server';
+import type {
+  BoundaryEvent,
+  DispatchPlan,
+  DispatchRecord,
+  DispatchResult,
+  MaliceChange,
+  ScheduledWorkKind,
+  TimingClause,
+  WorkSource,
+} from '../../shared/contracts/clock';
+import { appendEvent } from './events';
+import { journalInsert, journalPatch, type JournalScope } from './journal';
+
+export type Registration = Doc<'clockRegistrations'>;
+
+export interface RegistrationInput {
+  timing: TimingClause;
+  work: ScheduledWorkKind;
+  source: WorkSource;
+  affectedIds?: string[];
+}
+
+/** Places work into the encounter's queue at the next enqueue position (dispatch order). */
+export async function registerWork(
+  ctx: MutationCtx,
+  scope: JournalScope,
+  encounterId: Id<'encounters'>,
+  input: RegistrationInput,
+): Promise<Id<'clockRegistrations'>> {
+  const encounter = await ctx.db.get(encounterId);
+  if (!encounter) throw new ConvexError('Encounter unavailable.');
+  const enqueueSeq = (encounter.registrationSeq ?? 0) + 1;
+  await journalPatch(ctx, scope, 'encounters', encounterId, { registrationSeq: enqueueSeq });
+  return journalInsert(ctx, scope, 'clockRegistrations', {
+    campaignId: encounter.campaignId,
+    encounterId,
+    enqueueSeq,
+    timing: input.timing,
+    work: input.work,
+    source: input.source,
+    ...(input.affectedIds ? { affectedIds: input.affectedIds } : {}),
+    status: 'active',
+  });
+}
+
+/** Retires a registration whose effect ended (its work is no longer due at any boundary). */
+export async function retireWork(
+  ctx: MutationCtx,
+  scope: JournalScope,
+  registrationId: Id<'clockRegistrations'>,
+): Promise<void> {
+  await journalPatch(ctx, scope, 'clockRegistrations', registrationId, { status: 'retired' });
+}
+
+/**
+ * Whether a timing clause matches a boundary event. Relative clauses were bound at registration
+ * (creature ids), so nothing here reinterprets "your" from the invoking user.
+ */
+export function isDue(timing: TimingClause, event: BoundaryEvent): boolean {
+  switch (timing.scope) {
+    case 'every-turn':
+      return event.kind === timing.boundary && event.turn !== undefined;
+    case 'creature-turn':
+      return event.kind === timing.boundary && event.turn?.creatureId === timing.creatureId;
+    case 'end-of-next-turn':
+      // rule/combat/end-of-turn.md: the end of the affected creature's current turn if imposed during
+      // it, else the end of its next turn. Either way the first `turn-end` of that creature after
+      // registration is the one; the clause is retired once fired.
+      return event.kind === 'turn-end' && event.turn?.creatureId === timing.creatureId;
+    case 'round':
+      return (
+        event.kind === timing.boundary &&
+        (timing.round === undefined || timing.round === event.round)
+      );
+    case 'combat':
+      return event.kind === timing.boundary;
+  }
+}
+
+/** One-shot clauses retire after firing; recurring ones stay until their effect ends. */
+export function isOneShot(timing: TimingClause): boolean {
+  switch (timing.scope) {
+    case 'every-turn':
+      return false;
+    case 'creature-turn':
+      return timing.occurrence === 'next';
+    case 'end-of-next-turn':
+      return true;
+    case 'round':
+      return timing.round !== undefined;
+    case 'combat':
+      return true;
+  }
+}
+
+// ---------------------------------------------------------------------------------------------
+// Handlers. The source supplies behavior; the clock owns when it is due.
+
+export interface FiringContext {
+  scope: JournalScope;
+  encounter: Doc<'encounters'>;
+  event: BoundaryEvent;
+  registration: Registration;
+  /** The boundary's own log entry; each firing links to it as its cause. */
+  boundaryEventId: Id<'events'>;
+  commandId: string;
+}
+
+export type WorkHandler = (
+  ctx: MutationCtx,
+  firing: FiringContext,
+) => Promise<{ kind: string; description: string; payload?: unknown }>;
+
+/** Handlers for `{ kind: 'operation', operationId }` work, keyed by operation id. A05 adds its own. */
+export const operationHandlers = new Map<string, WorkHandler>();
+
+/** Malice growth rule, quoted from vendor/steel-compendium/en/unified/md/rule/monster/malice.md. */
+const MALICE_SOURCE = 'vendor/steel-compendium/en/unified/md/rule/monster/malice.md';
+
+/** Hero participants committed at OK (Q-R-50 provisional default A: every committed hero counts). */
+async function heroParticipants(ctx: MutationCtx, encounter: Doc<'encounters'>) {
+  const ids = encounter.heroParticipantIds ?? [];
+  const heroes: Doc<'characters'>[] = [];
+  for (const id of ids) {
+    const hero = await ctx.db.get(id);
+    if (hero) heroes.push(hero);
+  }
+  return heroes;
+}
+
+async function fireMalice(
+  ctx: MutationCtx,
+  firing: FiringContext,
+  step: MaliceChange['step'],
+): Promise<{ kind: string; description: string; payload: unknown }> {
+  const campaign = await ctx.db.get(firing.encounter.campaignId);
+  if (!campaign) throw new ConvexError('Campaign unavailable.');
+  const before = campaign.malice ?? 0;
+  const heroes = await heroParticipants(ctx, firing.encounter);
+  const heroCount = heroes.length;
+  let change: MaliceChange;
+  let description: string;
+  const notes: string[] = [];
+  if (step === 'combat-start-grant') {
+    // "At the start of combat, you gain Malice equal to the average number of Victories per hero."
+    // Victories are read, never changed; a hero with no live record has the R03 initial 0.
+    const victoriesTotal = heroes.reduce((sum, hero) => sum + (hero.liveState?.victories ?? 0), 0);
+    const averageVictories = heroCount ? victoriesTotal / heroCount : 0;
+    // Q-R-51 provisional default A: round a fractional average down; log the unrounded value.
+    const delta = heroCount ? Math.floor(averageVictories) : 0;
+    const rounding: MaliceChange['inputs']['rounding'] =
+      delta === averageVictories ? 'none' : 'down';
+    if (!heroCount)
+      notes.push(
+        'No hero participants: the average Victories per hero is undefined; 0 applied and recorded.',
+      );
+    if (rounding === 'down') notes.push('Fractional average rounded down (Q-R-51 provisional).');
+    change = {
+      step,
+      inputs: { heroCount, victoriesTotal, averageVictories, rounding },
+      before,
+      delta,
+      after: before + delta,
+    };
+    description = `Malice: combat-start grant — average Victories ${averageVictories}${rounding === 'down' ? ` (rounded down to ${delta})` : ''} across ${heroCount} hero${heroCount === 1 ? '' : 'es'}; pool ${before} → ${change.after}.`;
+  } else if (step === 'round-start-gain') {
+    // "at the start of each combat round, you gain Malice equal to the number of heroes in the
+    // battle, plus the combat round number."
+    const delta = heroCount + firing.event.round;
+    change = {
+      step,
+      round: firing.event.round,
+      inputs: { heroCount },
+      before,
+      delta,
+      after: before + delta,
+    };
+    notes.push('Hero count is every hero committed at OK (Q-R-50 provisional default A).');
+    description = `Malice: round ${firing.event.round} gain — ${heroCount} hero${heroCount === 1 ? '' : 'es'} + round ${firing.event.round} = ${delta}; pool ${before} → ${change.after}.`;
+  } else {
+    // "At the end of an encounter, any unused Malice is lost."
+    change = { step, inputs: {}, before, delta: -before, after: 0 };
+    description = `Malice: encounter-end loss — pool ${before} → 0.`;
+  }
+  await journalPatch(ctx, firing.scope, 'campaigns', campaign._id, { malice: change.after });
+  return {
+    kind: 'clock.malice',
+    description,
+    payload: { change, notes, sourcePath: MALICE_SOURCE },
+  };
+}
+
+async function fire(
+  ctx: MutationCtx,
+  firing: FiringContext,
+): Promise<{ kind: string; description: string; payload?: unknown; unsupported?: string }> {
+  const work = firing.registration.work as ScheduledWorkKind;
+  switch (work.kind) {
+    case 'malice':
+      return fireMalice(ctx, firing, work.step);
+    case 'operation': {
+      const handler = operationHandlers.get(work.operationId);
+      if (!handler)
+        return {
+          kind: 'clock.unsupported',
+          description: `${firing.registration.source.label}: due, but no handler is registered for ${work.operationId}; resolve manually.`,
+          unsupported: `no handler for ${work.operationId}`,
+        };
+      return handler(ctx, firing);
+    }
+    case 'saving-throw':
+      // Q-TS-1: no automatic save in v0.01. The hook exists; nothing may roll here.
+      return {
+        kind: 'clock.unsupported',
+        description: `${firing.registration.source.label}: a save is due, but automatic saves are not active in v0.01 (Q-TS-1); roll it through the dice controls and toggle the condition manually.`,
+        unsupported: 'automatic saving throws are not active in v0.01 (Q-TS-1)',
+      };
+    default:
+      return {
+        kind: 'clock.unsupported',
+        description: `${firing.registration.source.label}: due, but ${work.kind} work has no v0.01 handler; resolve manually.`,
+        unsupported: `${work.kind} work has no v0.01 handler`,
+      };
+  }
+}
+
+// ---------------------------------------------------------------------------------------------
+// Dispatch.
+
+function describeBoundary(event: BoundaryEvent, actorName?: string): string {
+  switch (event.kind) {
+    case 'combat-start':
+      return 'Combat starts.';
+    case 'combat-end':
+      return 'Combat ends.';
+    case 'round-start':
+      return `Round ${event.round} begins.`;
+    case 'round-end':
+      return `Round ${event.round} ends.`;
+    case 'turn-start':
+      return `${actorName ?? 'The actor'}'s turn begins (round ${event.round}).`;
+    case 'turn-end':
+      return `${actorName ?? 'The actor'}'s turn ends (round ${event.round}).`;
+  }
+}
+
+async function activeRegistrations(ctx: MutationCtx, encounterId: Id<'encounters'>) {
+  const rows = await ctx.db
+    .query('clockRegistrations')
+    .withIndex('by_encounter', q => q.eq('encounterId', encounterId))
+    .take(1000);
+  return rows.filter(row => row.status === 'active');
+}
+
+/**
+ * Dispatches one boundary: logs the boundary with its plan, fires the ordinary phase in enqueue
+ * order, then determines the save phase from the state after that work (standing save-phase
+ * policy) and fires it in enqueue order, retiring one-shot registrations. Called inside the
+ * mutation of the user operation that caused the boundary; its once-only receipt makes a retry
+ * return the recorded result rather than refiring.
+ */
+export async function dispatchBoundary(
+  ctx: MutationCtx,
+  scope: JournalScope,
+  encounterId: Id<'encounters'>,
+  input: { kind: BoundaryEvent['kind']; round: number; turn?: BoundaryEvent['turn'] },
+  actorName?: string,
+): Promise<DispatchResult> {
+  const encounter = await ctx.db.get(encounterId);
+  if (!encounter) throw new ConvexError('Encounter unavailable.');
+  const cause = await ctx.db.get(scope.eventId);
+  if (!cause) throw new ConvexError('Cause event unavailable.');
+  const event: BoundaryEvent = {
+    encounterId,
+    kind: input.kind,
+    round: input.round,
+    ...(input.turn ? { turn: input.turn } : {}),
+    causeLogEntryId: scope.eventId,
+  };
+  const due = (await activeRegistrations(ctx, encounterId)).filter(row =>
+    isDue(row.timing as TimingClause, event),
+  );
+  const plan: DispatchPlan = {
+    event,
+    ordinary: due
+      .filter(row => (row.work as ScheduledWorkKind).kind !== 'saving-throw')
+      .map(row => row._id),
+    saves: due
+      .filter(row => (row.work as ScheduledWorkKind).kind === 'saving-throw')
+      .map(row => row._id),
+  };
+  const boundaryEventId = await appendEvent(ctx, {
+    campaignId: encounter.campaignId,
+    sessionId: encounter.sessionId,
+    encounterId,
+    origin: 'clock',
+    commandId: cause.commandId,
+    causeEventId: scope.eventId,
+    kind: 'clock.boundary',
+    description: describeBoundary(event, actorName),
+    payload: { event, plan: { ordinary: plan.ordinary, saves: plan.saves } },
+  });
+  const records: DispatchRecord[] = [];
+  const fireOne = async (registration: Registration, phase: DispatchRecord['phase']) => {
+    const current = await ctx.db.get(encounterId);
+    const result = await fire(ctx, {
+      scope,
+      encounter: current!,
+      event,
+      registration,
+      boundaryEventId,
+      commandId: cause.commandId,
+    });
+    const logEntryId = await appendEvent(ctx, {
+      campaignId: encounter.campaignId,
+      sessionId: encounter.sessionId,
+      encounterId,
+      origin: 'clock',
+      commandId: cause.commandId,
+      causeEventId: boundaryEventId,
+      kind: result.kind,
+      description: result.description,
+      payload: {
+        registrationId: registration._id,
+        enqueueSeq: registration.enqueueSeq,
+        phase,
+        source: registration.source,
+        work: registration.work,
+        ...(result.payload === undefined ? {} : { data: result.payload }),
+      },
+    });
+    records.push({
+      registrationId: registration._id,
+      phase,
+      logEntryId,
+      outcome: result.unsupported
+        ? { status: 'unsupported', reason: result.unsupported }
+        : { status: 'applied' },
+    });
+    if (isOneShot(registration.timing as TimingClause))
+      await retireWork(ctx, scope, registration._id);
+  };
+  for (const registration of due.filter(row => plan.ordinary.includes(row._id)))
+    await fireOne(registration, 'ordinary');
+  // Save eligibility comes from the state after the ordinary phase (standing policy, 2026-09-12):
+  // re-read the queue so a save registered by earlier queued work at this boundary is included.
+  const saves = (await activeRegistrations(ctx, encounterId))
+    .filter(row => (row.work as ScheduledWorkKind).kind === 'saving-throw')
+    .filter(row => isDue(row.timing as TimingClause, event));
+  for (const registration of saves) await fireOne(registration, 'saves');
+  return { event, records };
+}
