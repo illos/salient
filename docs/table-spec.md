@@ -736,7 +736,13 @@ causes and before/after values. Director pool edits remain separate Manual adjus
 visibility and the Void keep/reset contract remain intact. See
 [the sourced lifecycle and example](fury-goblin-automation.md#malice-lifecycle).
 
-**Implementation note, 2026-09-14 (R05):** the automated lifecycle steps are typed as `ScheduledWorkKind` `malice` items and `MaliceChange` records in `shared/contracts/clock.ts`; the growth rule is quoted and the placement of the combat-start grant (at OK, after the baseline snapshot) and the round-one gain (at round start) is recorded in [conditions and clock](conditions-and-clock.md#3-malice-common-lifecycle). Hero-count and fractional-average handling are Q-R-50 and Q-R-51 with provisional defaults.
+**Implementation note, 2026-09-14 (R05):** the automated lifecycle steps are typed as `ScheduledWorkKind` `malice` items and `MaliceChange` records in `shared/contracts/clock.ts`; the growth rule is quoted and the placement of the combat-start grant (at OK, after the baseline snapshot) and the round-one gain (at round start) is recorded in [conditions and clock](conditions-and-clock.md#3-malice-common-lifecycle). Hero-count handling is confirmed by Q-R-50 below; fractional-average handling remains provisional under Q-R-51.
+
+**User decision, 2026-09-14 (Q-R-50):** round-start Malice counts heroes still in combat, once per
+hero. A hero removed from combat stops contributing to future round-start gains; a dying hero who
+remains in combat still counts. Use the remaining combat turn entries to determine participation,
+not the original setup list. This supersedes the provisional Q-R-50 A behavior described in the A04
+implementation note; implementation and verification of the updated count remain with A04.
 
 ### Monster visibility and health display
 
@@ -2677,7 +2683,7 @@ events, and manual resolution of unknown timing clauses. Queue-order recording a
 its concrete storage schema remains an engineering proposal. The clock does not invent missing source semantics or replace non-clock triggers
 such as taking damage. The existing warn-without-blocking and Director-adjudication doctrine remains.
 
-**Implementation note, 2026-09-14 (R05):** the boundary kinds, timing clauses, registration and dispatch types for this section are in `shared/contracts/clock.ts` (types only); the sourced definitions of turn, round, end of turn and the standing ordering policy applied to those types are in [conditions and clock](conditions-and-clock.md#2-clock-contract). In v0.01 nothing registers a `saving-throw` work item (Q-TS-1), so the save phase is empty; the only registrations are the Malice lifecycle steps and, if A04 registers it, surprise expiry at the end of round 1. Open source gaps recorded as Q-R-50 to Q-R-52 in `rules-questions-for-user.md`.
+**Implementation note, 2026-09-14 (R05):** the boundary kinds, timing clauses, registration and dispatch types for this section are in `shared/contracts/clock.ts` (types only); the sourced definitions of turn, round, end of turn and the standing ordering policy applied to those types are in [conditions and clock](conditions-and-clock.md#2-clock-contract). In v0.01 nothing registers a `saving-throw` work item (Q-TS-1), so the save phase is empty; the only registrations are the Malice lifecycle steps and, if A04 registers it, surprise expiry at the end of round 1. Q-R-50 is now resolved; Q-R-51 and Q-R-52 remain open in `rules-questions-for-user.md`.
 
 **Implementation note, 2026-09-15 (A04):** `convex/lib/clock.ts` stores registrations in
 `clockRegistrations` with a per-encounter `enqueueSeq` and dispatches each boundary inside the causing

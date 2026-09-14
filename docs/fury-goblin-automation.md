@@ -125,6 +125,11 @@ gains and normal encounter-end loss. The user accepted this for v0.01 on 2026-09
 | Each actual round start, including round one | Add the number of heroes generating Malice in the battle plus that round's number. A dead hero stops generating Malice; zero Stamina alone does not establish hero death. |
 | Normal encounter end | Lose unused Malice. Do not synthesize another round or grant to finish combat. Void retains its separate keep/reset contract and skips ordinary ending effects. |
 
+**User decision, 2026-09-14 (Q-R-50):** removing a hero from combat stops that hero contributing
+Malice at subsequent round starts. Count each hero still participating once, using the remaining
+combat turn entries; a dying hero who remains in combat still counts. Earlier grants are unchanged.
+See [the hero-count contract](conditions-and-clock.md#33-manual-parts-in-v001).
+
 The shared clock/lifecycle operations update the persistent shared Malice pool and log the cause,
 source, contributing values and before/after balance once. Combat-start and first-round grants are
 distinct causes. Round gains add to the current pool; they do not recompute a nominal total that
@@ -145,8 +150,7 @@ alive, round two adds 1 + 2 = 3. A normal encounter end clears the remaining 3. 
 resource arithmetic without changing the hero's Victories or claiming full ability-effect automation.
 
 **Remaining bounded work:** pin the startup grant's placement within the source-specific opening
-sequence; verify fractional average-Victories handling and non-death participation edge cases before
-automating those cases. The located [Always Round Down](../vendor/steel-compendium/en/unified/md/rule/general/always-round-down.md)
+sequence; verify fractional average-Victories handling before automating fractional cases. The located [Always Round Down](../vendor/steel-compendium/en/unified/md/rule/general/always-round-down.md)
 text explicitly discusses halving, so it alone does not settle an arbitrary average. The one-hero
 fixture has no fractional average. Implementation and persisted-state verification remain owed.
 

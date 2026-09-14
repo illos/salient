@@ -185,3 +185,11 @@ landed, so heroes remain the existing `characters` rows and Victories come from 
 - Granted (extra) turn entries: the data model carries `source: 'granted'`, but no operation creates
   one (not in this slice's scope list).
 - Independent review and rules review not requested (the user audits separately).
+
+### User decision follow-up: Q-R-50
+
+The user confirmed that removing a hero from combat stops their contribution to future round-start
+Malice gains; dying heroes still in combat count. Replace the provisional setup-time hero count
+(Q-R-50 A) with the current participating heroes, counted once per hero from remaining combat turn
+entries. See [the owning contract](../conditions-and-clock.md#33-manual-parts-in-v001).
+This is a specification handoff; implementation and persisted-state verification remain outstanding.

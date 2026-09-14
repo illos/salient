@@ -226,30 +226,6 @@ are the shared lifecycle decisions; the remaining entries are bounded content/sc
 - **Blocked until answered:** this optional workflow; higher-level build evaluation can proceed.
 - **Answer:**
 
-### Q-R-50: Which heroes count as "in the battle" for the Malice round-start gain in v0.01?
-
-- **Status:** open
-- **Raised by:** R05, 2026-09-14
-- **Where:** `docs/conditions-and-clock.md` section 3.3; `docs/table-spec.md#malice-visibility`;
-  `docs/fury-goblin-automation.md#malice-lifecycle`. Compendium read:
-  `vendor/steel-compendium/en/unified/md/rule/monster/malice.md` (Earning Malice),
-  `vendor/steel-compendium/en/unified/md/rule/health/dying.md`.
-- **Conflict or gap:** The source gains "Malice equal to the number of heroes in the battle, plus the
-  combat round number" and says "If a hero dies, they stop generating Malice." Hero death is not
-  automated in v0.01, and the source is silent on heroes who flee, are removed from the encounter by the
-  Director, or are dying but not dead. The same passage also says "As long as none of the heroes is
-  taken out of the fight, you gain 8 Malice" in its example, and "taken out of the fight" is not
-  defined. The count changes the pool every round.
-- **Options:** A: count every hero participant committed in the encounter at each round start; the
-  Director uses Manual adjustment when a hero has died or left. B: count only hero participants whose
-  current turn entry exists in the round (a removed hero stops counting; a dying hero still counts).
-  C: add a Director per-hero "generates Malice" flag to the encounter.
-- **Recommendation:** B. It follows the source's "in the battle" wording and the existing removal
-  operation without a new flag, and a dying hero still counts because the source names death, not
-  dying. A is the provisional default until answered because it needs no A04 roster dependency.
-- **Blocked until answered:** nothing; default A applied provisionally and logged with the hero count.
-- **Answer:**
-
 ### Q-R-51: How is a fractional average of Victories handled for the combat-start Malice grant?
 
 - **Status:** open
@@ -520,6 +496,32 @@ are the shared lifecycle decisions; the remaining entries are bounded content/sc
 - **Answer:**
 
 ## Resolved questions
+
+### Q-R-50: Which heroes count as "in the battle" for the Malice round-start gain in v0.01?
+
+- **Status:** resolved 2026-09-14; [recorded decision](conditions-and-clock.md#33-manual-parts-in-v001)
+- **Raised by:** R05, 2026-09-14
+- **Where:** `docs/conditions-and-clock.md` section 3.3; `docs/table-spec.md#malice-visibility`;
+  `docs/fury-goblin-automation.md#malice-lifecycle`. Compendium read:
+  `vendor/steel-compendium/en/unified/md/rule/monster/malice.md` (Earning Malice),
+  `vendor/steel-compendium/en/unified/md/rule/health/dying.md`.
+- **Conflict or gap:** The source gains "Malice equal to the number of heroes in the battle, plus the
+  combat round number" and says "If a hero dies, they stop generating Malice." Hero death is not
+  automated in v0.01, and the source is silent on heroes who flee, are removed from the encounter by the
+  Director, or are dying but not dead. The same passage also says "As long as none of the heroes is
+  taken out of the fight, you gain 8 Malice" in its example, and "taken out of the fight" is not
+  defined. The count changes the pool every round.
+- **Options:** A: count every hero participant committed in the encounter at each round start; the
+  Director uses Manual adjustment when a hero has died or left. B: count only hero participants whose
+  current turn entry exists in the round (a removed hero stops counting; a dying hero still counts).
+  C: add a Director per-hero "generates Malice" flag to the encounter.
+- **Recommendation:** B. It follows the source's "in the battle" wording and the existing removal
+  operation without a new flag, and a dying hero still counts because the source names death, not
+  dying. A was the provisional default before the user selected B.
+- **Blocked until answered:** answered; A04 must replace the provisional setup count with current
+  combat participation and verify the change.
+- **Answer:** Yes. Removing a hero from combat also stops them contributing to Malice. A dying
+  hero who remains in combat still counts. Apply this to subsequent round-start gains.
 
 ### Q-R-200: Is a foe's Slain label recomputed from current Stamina after a Director edit above zero?
 

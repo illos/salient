@@ -355,10 +355,13 @@ delay the source's "start of combat" grant past the point where Void could reset
   ability's Malice cost is printed in the stat block and supplied by the operation (the ability-cost
   contract), otherwise through Manual adjustment. Basic Malice features are Director choices at a
   monster's turn start; the app never applies them.
-- **Hero count. Open, Q-R-50:** the source stops Malice for a hero who dies; hero death is not
-  automated in v0.01 and the source is silent on heroes who flee or are removed. Provisional default:
-  count every hero participant committed in the encounter at each round start; the Director corrects
-  with Manual adjustment when a hero has died or left.
+- **Hero count. User decision, 2026-09-14 (Q-R-50):** at each round start, count the heroes still
+  participating in combat, represented by their remaining combat turn entries. Removing a hero from
+  combat stops their contribution to subsequent round-start gains; a dying hero who remains in combat
+  still counts. Count each hero once, regardless of how many turn entries they have or whether they
+  have acted. This supersedes the provisional count fixed at encounter setup. Hero death remains
+  manually adjudicated in v0.01; zero Stamina alone does not establish death. Log the actual hero count
+  used with the grant; removal does not retroactively change earlier grants.
 - **Fractional average. Open, Q-R-51:** the Always Round Down rule speaks of halving
   (`vendor/steel-compendium/en/unified/md/rule/general/always-round-down.md`: "Whenever you divide an odd
   number in half and it results in a decimal, round the result down"), not of averaging. Provisional
