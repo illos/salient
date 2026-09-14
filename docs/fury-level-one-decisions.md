@@ -43,8 +43,9 @@ arithmetic) are R02; live state is R03; inventory is deferred.
 - Top level: `compendiumRevision`, `sourceRoot`, `hero`, `textNormalization`, `pools`, `steps`,
   `selectionSets`, `questions`.
 - `pools.<id>`: `{ source, values[] }`, a named list of option values reused by several decisions (skill
-  groups, language tables, exploration perks, kit lists). `pool.languages.dead` carries
-  `selectable: "unresolved (Q-R-102)"` and is not offered.
+  groups, language tables, exploration perks, kit lists). `pool.languages.dead` originally carried
+  `selectable: "unresolved (Q-R-102)"` and was not offered. Q-R-102 is now confirmed: dead languages
+  are excluded from v0.01 creation. Update the JSON label through A02; the catalog can retain the text.
 - `steps[]`: `{ id, sourceStep, source, optional, presentedInV001, optionalQuote?, note?, decisions[] }`.
   `sourceStep` is the exact heading text of the source step.
 - `decisions[]`: `{ id, kind, shape, source, quote, dependsOn?, availableWhen?, options?, optionsFrom?,
@@ -116,7 +117,7 @@ text (see *Source path corrections* below).
 | --- | --- | --- | --- | --- | --- |
 | `culture.name` | authored | text | `chapter/making-a-hero.md`: "Choose or create your hero's culture." | free text | Non-mechanical. Assembled cultures: Q-CHAR-6. |
 | `culture.caelian` | automatic | none | clean Heroes, *Caelian Empire*: "All player characters know Caelian!" | — | Grants language **Caelian**. |
-| `culture.language` | choice | single | clean Heroes, *Culture Benefits*: "You know the language of your culture, in addition to knowing Caelian." | Extant languages: *Languages by Ancestry Table* (25: **Anjali**, Axiomatic, Caelian, Filliaric, The First Language, Hyrallic, Illyvric, Kalliak, Kethaic, Khelt, Khoursirian, High Kuric, Low Kuric, Mindspeech, Proto-Ctholl, Szetch, Tholl, Urollialic, Variac, Vastariax, Vhoric, Voll, Yllyric, Za'hariax, Zaliac) and *Vaslorian Human Languages Table* (9: Uvalic, Higaran, Oaxuatl, Khemharic, Khoursirian, Phaedran, Riojan, Vaniric, Vaslorian). Dead languages (9) listed in the JSON as unresolved and not offered. | Pool boundary: Q-R-102. Duplicating Caelian: Q-R-100. Campaign-specific languages: Q-CHAR-6. The *Typical Ancestry Cultures Table* suggests Anjali for a devil; it is a suggestion, not a restriction. |
+| `culture.language` | choice | single | clean Heroes, *Culture Benefits*: "You know the language of your culture, in addition to knowing Caelian." | Extant languages: *Languages by Ancestry Table* (25: **Anjali**, Axiomatic, Caelian, Filliaric, The First Language, Hyrallic, Illyvric, Kalliak, Kethaic, Khelt, Khoursirian, High Kuric, Low Kuric, Mindspeech, Proto-Ctholl, Szetch, Tholl, Urollialic, Variac, Vastariax, Vhoric, Voll, Yllyric, Za'hariax, Zaliac) and *Vaslorian Human Languages Table* (9: Uvalic, Higaran, Oaxuatl, Khemharic, Khoursirian, Phaedran, Riojan, Vaniric, Vaslorian). Dead languages (9) are excluded from v0.01 creation by confirmed Q-R-102; the old unresolved JSON label needs updating. | Pool boundary: Q-R-102. Duplicating Caelian: Q-R-100. Campaign-specific languages: Q-CHAR-6. The *Typical Ancestry Cultures Table* suggests Anjali for a devil; it is a suggestion, not a restriction. |
 | `culture.environment` | choice | single | clean Heroes, *Environment*: "When you build a culture, select its environment aspect from the following options: nomadic, rural, secluded, urban, or wilderness." | Nomadic, Rural, Secluded, Urban, **Wilderness** (`culture/<name>.md`) | — |
 | `culture.environment.skill` | choice | single | clean Heroes, *Culture Benefits*: "You can select one skill from each aspect's list of options." Per aspect: Nomadic "One skill from the exploration or interpersonal skill groups."; Rural "One skill from the crafting or lore skill groups."; Secluded "One skill from the interpersonal or lore skill groups."; Urban "One skill from the interpersonal or intrigue skill groups."; Wilderness "One skill from the crafting or exploration skill groups." | Pool depends on the chosen environment. Wilderness: crafting (10) + exploration (10). Supported: **Swim** | Depends on `culture.environment`. Q-CHAR-11. |
 | `culture.organization` | choice | single | clean Heroes, *Organization*: "When you build a culture, select its organization aspect from the following options: bureaucratic or communal." | Bureaucratic, **Communal** | — |
@@ -135,6 +136,11 @@ The source language catalog may still contain it; the choice UI marks it already
 selectable as an additional grant. See [the wizard contract](character-wizard-spec.md#3-decision-system).
 The provisional fixture choice of Caelian as a Soldier language below is superseded and needs
 correction in the R01/R02 artifacts and A02 integration; it is not a completed extra-language choice.
+
+**User decision, 2026-09-14 (Q-R-102):** use only the two printed spoken-language tables for
+v0.01 culture/career choices, including regional human languages. Exclude the dead-language table.
+Deduplicate shared names and apply Q-R-100's automatic Caelian grant separately. The UI and headless
+selection paths must use the same allowed pool; later language acquisition remains separate.
 
 ## Step 4: Career
 
@@ -228,8 +234,8 @@ Non-mechanical. Presented as an optional free-text field so the step exists; no 
 2. `kit.choice` split by aspect (Q-R-103). Alternative considered: any of the 25 kits for any aspect.
 3. `class.fury.array-assignment` any order is now user-confirmed (Q-R-101, 2026-09-14);
    the earlier alternative was printed order.
-4. `culture.language` / `career.soldier.languages` pool = the two extant tables (Q-R-102). Alternative:
-   include dead languages.
+4. `culture.language` / `career.soldier.languages` uses the two spoken-language tables: now
+   confirmed for v0.01 by Q-R-102, 2026-09-14. The earlier alternative was to include dead languages.
 5. Ability pools for signature/3/5 taken from the clean Heroes headings, cross-checked with the entries'
    `cost:` fields; the unified `fury-abilities.md` says "from the following options" but carries no list.
 6. `connections.notes`: the optional *Make Connections* step is presented as one optional free-text field so
@@ -246,7 +252,7 @@ None is resolved by assumption; provisional defaults are labeled there.
 | --- | --- | --- |
 | Q-R-100 | `career.soldier.languages`, `culture.language` | Resolved 2026-09-14: show Caelian as automatically known common tongue; it is not selectable for or counted against a language slot. |
 | Q-R-101 | `class.fury.array-assignment` | Resolved 2026-09-14: any order, fixed scores locked, remaining slots initially blank; UI drag-and-drop and equivalent headless assignment. |
-| Q-R-102 | `culture.language`, `career.soldier.languages` | Which language tables are selectable at creation (dead languages, Vaslorian regional table). Raised by R01. |
+| Q-R-102 | `culture.language`, `career.soldier.languages` | Resolved 2026-09-14: spoken languages only for v0.01, including printed regional languages; dead languages excluded. |
 | Q-R-103 | `kit.choice` | Kit eligibility by aspect; stormwight kits restricted to Stormwight. Raised by R01. |
 | Q-CHAR-1 | `step.complication` | Answered 2026-09-14: not presented in v0.01. |
 | Q-CHAR-5 | `career.soldier.languages`, `kit.choice` | Filling a deferred language slot / changing kit later without full-edit review (existing, open). |

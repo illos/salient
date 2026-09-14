@@ -234,30 +234,6 @@ are the shared lifecycle decisions; the remaining entries are bounded content/sc
 - **Blocked until answered:** this optional workflow; higher-level build evaluation can proceed.
 - **Answer:**
 
-### Q-R-102: Which language lists are selectable for culture and career language choices?
-
-- **Status:** open
-- **Raised by:** R01, 2026-09-14
-- **Where:** `docs/fury-level-one-decisions.md#step-3-culture`; Compendium read:
-  `vendor/steel-compendium/en/books/heroes/clean/Draw Steel Heroes.md` (**Languages in Orden**, **Languages by
-  Ancestry Table**, **Vaslorian Human Languages Table**, **Dead Languages Table**),
-  `vendor/steel-compendium/en/unified/md/chapter/background.md` (**Languages**: "chosen from those available in
-  Languages in Orden above").
-- **Conflict or gap:** Career languages are "chosen from those available in Languages in Orden", a section that
-  contains three tables: 25 extant languages by ancestry, 9 Vaslorian human regional languages, and 9 dead
-  languages "that no modern culture uses". Whether a starting hero may know a dead language, and whether the
-  regional human languages are in scope, is not stated. The unified `chapter/background.md` omits the whole
-  section, so this also fixes which file the wizard cites.
-- **Options:** A: the two extant tables (34 entries, 33 unique names; Khoursirian appears in both) are selectable; dead languages
-  are not selectable at creation. B: all three tables. C: extant tables plus dead languages with a Director
-  flag.
-- **Recommendation:** A. The dead-language text describes them as reconstructed by sages and learned through
-  research projects, which reads as acquired later, not at creation; but that is an inference, so it is
-  recorded here rather than applied silently.
-- **Blocked until answered:** nothing; A is applied provisionally (dead languages are listed in the JSON as a
-  pool marked unresolved and are not offered).
-- **Answer:**
-
 ### Q-R-103: Which kits may a level-one Fury choose, by aspect?
 
 - **Status:** open
@@ -341,6 +317,32 @@ No user approval is implied by this classification.
 - **Answer:**
 
 ## Resolved questions
+
+### Q-R-102: Which language lists are selectable for culture and career language choices?
+
+- **Status:** resolved 2026-09-14; [recorded decision](character-wizard-spec.md#3-decision-system)
+- **Raised by:** R01, 2026-09-14
+- **Where:** `docs/fury-level-one-decisions.md#step-3-culture`; Compendium read:
+  `vendor/steel-compendium/en/books/heroes/clean/Draw Steel Heroes.md` (**Languages in Orden**, **Languages by
+  Ancestry Table**, **Vaslorian Human Languages Table**, **Dead Languages Table**),
+  `vendor/steel-compendium/en/unified/md/chapter/background.md` (**Languages**: "chosen from those available in
+  Languages in Orden above").
+- **Conflict or gap:** Career languages are "chosen from those available in Languages in Orden", a section that
+  contains three tables: 25 extant languages by ancestry, 9 Vaslorian human regional languages, and 9 dead
+  languages "that no modern culture uses". Whether a starting hero may know a dead language, and whether the
+  regional human languages are in scope, is not stated. The unified `chapter/background.md` omits the whole
+  section, so this also fixes which file the wizard cites.
+- **Options:** A: the two extant tables (34 entries, 33 unique names; Khoursirian appears in both) are selectable; dead languages
+  are not selectable at creation. B: all three tables. C: extant tables plus dead languages with a Director
+  flag.
+- **Recommendation:** A. The dead-language text describes them as reconstructed by sages and learned through
+  research projects, which reads as acquired later, not at creation; but that is an inference, so it is
+  recorded here rather than applied silently.
+- **Blocked until answered:** answered; A02 must use the confirmed pool in UI/headless choices
+  and replace the obsolete unresolved label in the content artifact.
+- **Answer:** Spoken languages only. For v0.01 creation, use the two printed spoken-language
+  tables, including regional languages; exclude dead languages. Caelian remains automatically known
+  and not selectable as an extra-language choice under Q-R-100.
 
 ### Q-R-101: May the Fury's chosen characteristic array be assigned to Reason, Intuition and Presence in any order?
 

@@ -81,7 +81,7 @@ and the verbatim-source check `tests/fury-decisions.test.ts`. It lists all ten *
 order with stable decision ids, selection shapes, full option pools (the v0.01 supported subset is an explicit
 marking), counts and budgets with their source sentences, dependencies and automatic grants, plus three worked
 selection sets. The complication step is recorded but not presented (Q-CHAR-1). Source silences it found are
-Q-R-102 and Q-R-103 remain open in `rules-questions-for-user.md`; Q-R-100 and Q-R-101 are confirmed below.
+Q-R-103 remains open in `rules-questions-for-user.md`; Q-R-100 to Q-R-102 are confirmed below.
 This closes readiness-audit gap G1 as a contract; A02 renders it and R02 derives values from it. Rules review
 is pending.
 
@@ -201,6 +201,12 @@ reconciliation policy; this is an open decision, not an implicit reset.
 
 ### Confirmed behavior
 
+- Confirmed 2026-09-14 (Q-R-102): the v0.01 culture/career language choices use spoken languages
+  only: the printed Languages by Ancestry and Vaslorian Human Languages tables. Dead languages
+  are not selectable at creation. Deduplicate names shared by those tables. Caelian remains visible
+  as the automatically known common tongue and consumes no choice (Q-R-100). UI and headless
+  selection use the same pool and validation. This does not decide later language acquisition or
+  the separate V1 custom-language question.
 - Confirmed 2026-09-14 (Q-R-101): display all five characteristics. Values automatically assigned
   by the selected class are filled in and uneditable in this assignment step. The remaining slots
   start blank for a new build. After choosing a source-permitted array, the player drags its three
@@ -275,7 +281,7 @@ Input is the R01 decision ids and selection shapes; output is `complete | incomp
 diagnostics keyed by decision id, and a derived baseline in which every value carries the decision id,
 selected value and source sentence that supplied it. Status precedence (`invalid` > `unsupported` >
 `incomplete`) is a labeled engineering choice within this vocabulary; warnings never change the status. The
-baseline is distinct from live values (R03). Open questions it labels are Q-R-102, Q-R-103 and
+baseline is distinct from live values (R03). Open questions it labels are Q-R-103 and
 Q-CHAR-10 to Q-CHAR-12; no new question was needed. A02 implements the evaluator against these types.
 
 ## 4. Wizard flows

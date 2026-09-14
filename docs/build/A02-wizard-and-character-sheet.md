@@ -244,3 +244,12 @@ validating the chosen array. Verify both paths persist identical assignments and
 baseline, including repeated array values, a partial assignment, reassignment, and refused attempts
 to change fixed values or use values outside the chosen array. Remove resolved Q-R-101 uncertainty
 labels in the build artifacts. This handoff records requirements, not completed implementation.
+
+### User decision follow-up: Q-R-102
+
+The v0.01 creation language pool contains only spoken languages from the printed ancestry and
+Vaslorian regional tables, with shared names deduplicated. Dead languages are excluded; Caelian
+remains visible as automatically known, without consuming a selection. Use the same allowed pool
+for UI and headless input. Update the obsolete Q-R-102 unresolved label in the R01 content artifact
+and verify the pool against [the wizard contract](../character-wizard-spec.md#3-decision-system).
+Later acquisition and V1 custom-language policy are separate from this answer.
