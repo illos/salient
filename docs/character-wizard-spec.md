@@ -601,6 +601,7 @@ for work that can proceed independently. These recommendations are not user ruli
 | Decision | What it affects |
 | --- | --- |
 | Current Stamina/damage, spent resources, and conditions when baseline maxima or resource types change | Applying rollback, class edits, and some level-ups to a played character. |
+| **Implementation note, 2026-09-14 (R03):** readiness-audit gap G3 is delivered as a contract: `live-state-initialization.md` (first-admission values with source sentences, the draft-save/re-evaluation rule, `HeroEntity`/`FoeEntity` projections with worked examples), `shared/contracts/liveState.ts`, `shared/contracts/entities.ts`, `tests/live-state-initialization.test.ts`. The reconciliation decision in the row above is **Q-CHAR-2**; R03 applies no default and surfaces an `UnreconciledMaximumChange` labeled with that id. Re-admission after detachment is **Q-R-201**. Rules review pending. | Activation of changed builds on played heroes waits for Q-CHAR-2. |
 | Full list of campaign values and advancement eligibility after XP clears while level remains | Reset enumeration and the campaign level-up trigger. XP/Victories clearing itself is settled. |
 | New choices after rollback and treatment of retained future builds | Continued editing beyond history navigation. |
 | Non-campaign live-state transfer on detachment/duplication | Active build retention and private-draft preservation on detachment are confirmed; duplication excludes pending edits. Damage/resource reconciliation still needs definition. |
