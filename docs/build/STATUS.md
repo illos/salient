@@ -28,8 +28,8 @@ A08 design tokens (independent) ────────────────
 | S01 | [Content pipeline from the pinned Compendium](S01-content-pipeline.md) | S | None | required | In progress | lead/S01-impl | 2026-09-14 | |
 | S02 | [Data contracts: encounter, events, journal, dice](S02-data-contracts.md) | S | None | not required | Committed (review deferred to user audit thread) | lead/S02-impl | 2026-09-14 | bfd7485, 97a555b, 00958e3, e106a7d |
 | R01 | [Level-one devil Fury decision table](R01-fury-decision-table.md) | R | S01 (soft) | required | Committed | rules/R01-research | 2026-09-14 | 2fe311b |
-| R02 | [Derived values and evaluator contract](R02-derived-values-evaluator.md) | R | R01 | required | Committed | rules/R01-research | 2026-09-14 | 2fe311b |
-| R03 | [Live-state initialization and engine projection](R03-live-state-initialization.md) | R | R02 | required | Not required | | | |
+| R02 | [Derived values and evaluator contract](R02-derived-values-evaluator.md) | R | R01 | required | Committed (review deferred to user audit thread) | rules/R02-research | 2026-09-14 | be11576 |
+| R03 | [Live-state initialization and engine projection](R03-live-state-initialization.md) | R | R02 | required | In progress | rules/R03-research | 2026-09-14 | |
 | R04 | [Roll and damage resolution contract](R04-roll-and-damage-resolution.md) | R | None | required | Committed | rules/R04-research | 2026-09-14 | a0cc457 |
 | R05 | [Conditions, clock and Malice common lifecycle](R05-conditions-clock-malice.md) | R | None | required | Committed | rules/R05-research | 2026-09-14 | a3f9e93 |
 | A01 | [Shared operations, command registry and engine integration](A01-shared-operations-engine.md) | A | S02, S00 (soft) | not required | In progress | app/A01-impl | 2026-09-14 | |
