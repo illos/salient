@@ -23,6 +23,7 @@ import { CommandConsole } from '../command-input';
 import { ErrorNotice, Eyebrow, Loading, SectionHeading, useCommand } from '../ui';
 import { CombatSetupCard, CommandButton, type Encounter } from './setup-card';
 import { InitiativePanel, TurnControls } from './initiative';
+import { HistoryControls, undoCommand } from './history-controls';
 
 type Roster = FunctionReturnType<typeof api.table.roster>;
 type Foe = Roster['foes'][number];
@@ -612,7 +613,10 @@ function GameLog({
     ...(sessionId ? { sessionId } : {}),
     ...(before === undefined ? {} : { before }),
   });
+  // A06: which entry the viewer's Undo/Rewind would act on; the operation checks again when run.
+  const history = useQuery(api.history.status, { campaignId });
   if (!result) return <Loading>Loading the log…</Loading>;
+  const undoTarget = history?.undo.available ? history.undo.target?.eventId : undefined;
   return (
     <>
       {result.events.length === 0 ? (
@@ -621,13 +625,37 @@ function GameLog({
         <ol className="m-0 list-none p-0">
           {result.events.map(event => {
             const actor = boundActorName(event.payload);
+            const undone = event.disposition === 'undone';
             return (
-              <li key={event.id} className="rule-soft flex items-start gap-4 py-3 text-sm">
+              <li
+                key={event.id}
+                className={`rule-soft flex items-start gap-4 py-3 text-sm ${undone ? 'text-muted-foreground' : ''}`}
+                data-disposition={event.disposition}
+              >
                 <span className="w-10 shrink-0 text-xs text-muted-foreground">
                   #{event.sequence}
                 </span>
                 <div className="flex-1">
-                  <strong>{event.description}</strong>
+                  <strong className={undone ? 'line-through' : ''}>{event.description}</strong>
+                  {event.disposition !== 'applied' && (
+                    <Badge variant="outline" className="ml-2 align-middle">
+                      {event.disposition === 'undone'
+                        ? 'Undone'
+                        : event.disposition === 'redone'
+                          ? 'Redone'
+                          : event.disposition}
+                    </Badge>
+                  )}
+                  {history && event.id === undoTarget && (
+                    <span className="ml-2 inline-flex align-middle">
+                      <CommandButton
+                        campaignId={campaignId}
+                        text={undoCommand(history.role, event.id)}
+                        label={history.role === 'director' ? 'Rewind' : 'Undo'}
+                        variant="ghost"
+                      />
+                    </span>
+                  )}
                   {event.dice && (
                     <small className="mt-0.5 block text-xs text-muted-foreground">
                       Dice: {event.dice.map(die => `d${die.sides}=${die.value}`).join(' ')}
@@ -731,6 +759,7 @@ export function TablePage({ campaignId }: { campaignId: Id<'campaigns'> }) {
           <Card>
             <CardContent className="flex flex-col gap-3">
               <h2>Game log</h2>
+              {running && <HistoryControls campaignId={campaignId} />}
               <GameLog campaignId={campaignId} sessionId={roster.session?.id} />
             </CardContent>
           </Card>
