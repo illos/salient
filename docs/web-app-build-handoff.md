@@ -34,8 +34,10 @@ discovery of every modifier source is not required. Next-attack controls start a
 inputs before target-completion firing, record them with the accepted attack and reset afterward.
 Placement is flexible for playtesting; the proposed game-log card is not mandatory. Preserve the
 existing fire behavior. Multi-target attacks must support different counts per target, recorded
-with their respective outcomes and cleared after the accepted attack. Composition of attack-wide
-and target-specific inputs remains under review. See [the contract](table-spec.md#v001-edge-and-bane-inputs).
+with their respective outcomes and cleared after the accepted attack. All edge/bane inputs are
+target-only: enter complete counts directly for each target, including single-target attacks.
+The attack-wide-plus-target stacking proposal was rejected; do not add a global count or inherited
+modifier layer. See [the contract](table-spec.md#v001-edge-and-bane-inputs).
 
 **Roll characteristic default confirmed, 2026-09-14:** automatically select the highest permitted
 current roll characteristic when the source offers a choice, with a pre-fire override available.

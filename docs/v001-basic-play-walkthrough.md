@@ -99,7 +99,7 @@ needs bounded verification before implementation.
 ### Next review case: pre-roll controls
 
 **Confirmed mechanics, 2026-09-14; placement flexible:** provide next-attack inputs,
-bound to the invoking user and acting character. Edge and bane counts start at zero and can be
+bound to the invoking user, acting character and individual target. Edge and bane counts start at zero and can be
 set before completing the ability/target selection. The accepted attack consumes those inputs,
 records them with its result and clears the draft counts for the next attack. This preserves the
 settled target-completion fire behavior without an extra confirmation on every attack.
@@ -107,8 +107,8 @@ settled target-completion fire behavior without an extra confirmation on every a
 The counts are a draft for one attack, not a persistent character buff or freely editable history.
 The user expects to experiment with placement: the proposed compact game-log card is not a fixed
 layout requirement. Wherever placed, preserve the confirmed mechanics and existing log-card policy.
-Per-target modifier support is confirmed below; its input composition and other required-input
-cases still need concrete contracts where the common walkthrough needs them.
+Per-target modifier support and target-only input composition are confirmed below. Other
+required-input cases still need concrete contracts where the common walkthrough needs them.
 
 ### Next review case: characteristic choice
 
@@ -128,18 +128,21 @@ still supplies applicability; this does not require automated detection of the r
 
 The user accepts per-target variation in the milestone. Record each target's supplied counts and
 resolved outcome; these inputs retain the confirmed one-attack lifetime. Placement remains flexible.
-This inclusion does not change full-count auto-fire or settle common versus per-target input
-combination. Source-defined shared dice mechanics require verification, not a new product ruling.
-Do not implement one global count as though it covers every target case.
+Full-count auto-fire remains unchanged. The later clarification below makes all modifier inputs
+target-only, with no attack-wide layer. Source-defined shared dice mechanics require verification,
+not a new product ruling.
 
 ### Next review case: attack-wide and target-specific counts
 
-**Proposal, not yet accepted, 2026-09-14:** enter modifiers that apply to the whole attack once;
-allow additional edge/bane counts for individual targets. For each target, combine the supplied
-attack-wide and target-specific counts, then apply the source's edge/bane arithmetic. Do not
-combine already-resolved bonuses or tier shifts. Record the contributions and effective inputs
-with that target's outcome, and clear both drafts after the accepted attack.
+**Resolved, 2026-09-14 — target-only inputs.** The user rejects the proposed attack-wide counts
+plus target-specific additions. Enter each target's complete edge and bane counts directly.
+There is no attack-wide count, inherited value or stacking layer between input scopes.
 
-Example input only: one edge for the whole attack plus one additional edge against foe A gives
-A two supplied edges and foe B one. This describes input composition, not automatic discovery of
-those edges. Exact placement stays flexible and existing target-completion firing still applies.
+For example, enter two edges for Goblin A and one edge for Goblin B directly. If a circumstance
+affects both, account for it in each target's supplied counts. This same model applies to a
+single-target attack. The app applies the source arithmetic separately to each target's counts
+and records the corresponding inputs and outcome. Counts start at zero and reset after the
+accepted attack; placement remains flexible. Existing target-completion firing is unchanged.
+
+This rejects input stacking across attack/target scopes; it does not change the source rules for
+multiple edges/banes applying to one target. Continue the walkthrough with these inputs settled.

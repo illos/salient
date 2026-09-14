@@ -1240,7 +1240,8 @@ discovery of every situational, class or stat-block reason for these modifiers. 
 roll-local inputs; this does not bring deferred post-roll attack-result editors into scope.
 
 Control behavior confirmed 2026-09-14: provide next-attack edge and bane inputs, initially zero,
-bound to the invoking user and acting character. Set them before completing ability/target selection.
+bound to the invoking user, acting character and individual target. Set them before completing
+ability/target selection.
 The accepted attack consumes the draft counts, records them with its outcome and resets the controls
 to zero for the next attack. These are one-attack inputs, not persistent character modifiers.
 Preserve target-completion firing without adding an extra confirmation to every attack.
@@ -1255,10 +1256,16 @@ bane counts for each target. Record those inputs with the respective target outc
 the drafts after the accepted attack, under the same one-attack lifetime. The table supplies
 applicability; automatic detection of modifier sources remains outside the requirement.
 
-Composition of attack-wide and target-specific inputs is still under review in
-[the walkthrough](v001-basic-play-walkthrough.md#next-review-case-attack-wide-and-target-specific-counts).
-This inclusion does not itself change the settled full-count auto-fire behavior or require a new
-roll per target. Follow the source's roll-sharing rules when establishing the mechanic contract.
+Target-only inputs confirmed 2026-09-14: each target has its own complete edge and bane counts,
+including for a single-target attack. There is no attack-wide count, inherited modifier or
+attack-wide-plus-target stacking layer. A circumstance affecting multiple targets is represented
+in each affected target's supplied counts. Apply the source's edge/bane arithmetic separately to
+each target's counts and record its outcome. Start each target's inputs at zero and clear them
+after the accepted attack; preserve flexible placement and the confirmed one-attack lifetime.
+
+This does not change full-count auto-fire or require a new roll per target. Follow the source's
+roll-sharing rules when establishing the mechanic contract. See
+[the clarification](v001-basic-play-walkthrough.md#next-review-case-attack-wide-and-target-specific-counts).
 
 #### v0.01 roll characteristic default
 

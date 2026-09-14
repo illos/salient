@@ -67,8 +67,10 @@ roll characteristic when the action offers a choice; allow a pre-fire override a
 selected characteristic/value. This does not broaden the source's permitted choices.
 Per-target modifiers confirmed, 2026-09-14: multi-target attacks allow different edge/bane counts
 for each target, recorded with the respective outcomes and cleared after the accepted attack.
-Next pending case: enter attack-wide counts once and add target-specific counts before applying
-the source arithmetic separately for each target. This input-composition proposal is not yet accepted.
+Target-only clarification confirmed, 2026-09-14: enter complete edge/bane counts separately for
+each target, including single-target attacks. The user rejects the attack-wide-plus-target
+stacking proposal. No attack-wide modifier field or inherited counts; retain zero defaults,
+per-target source arithmetic/logging and reset after the accepted attack. Placement stays flexible.
 
 Review answer, 2026-09-13: Lines of Force uses the existing contextual response flow. Apply the triggering
 action's outcome, surface its detected triggered-action opportunity, then modify that effective outcome

@@ -21,8 +21,9 @@ controls are also confirmed: start at zero, set before target-completion firing,
 accepted attack and reset afterward. Placement remains flexible for playtesting. The characteristic
 default is confirmed: automatically select the highest permitted current value with a pre-fire
 choice available. Target-specific edge/bane counts for multi-target attacks are confirmed, with
-inputs and outcomes recorded by target. Next pending case is [attack-wide and target-specific
-input composition](v001-basic-play-walkthrough.md#next-review-case-attack-wide-and-target-specific-counts).
+inputs and outcomes recorded by target. Input composition is settled: enter each target's
+complete counts directly, with no attack-wide field or inherited stacking layer. See
+[the target-only clarification](v001-basic-play-walkthrough.md#next-review-case-attack-wide-and-target-specific-counts).
 Complete and verify the common-operation contracts, including actual persisted
 state, log records, manual resolution, retries and history. G1–G3 remain hero creation/evaluation/
 initialization dependencies. Preserve experimental parser/engine research for later feature work.
