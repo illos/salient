@@ -4,9 +4,15 @@ import { mutation, query } from './_generated/server';
 import type { Doc, Id } from './_generated/dataModel';
 import { requireUser, type ReadCtx } from './lib/access';
 import { command } from './lib/commands';
-import { authoredValidator, heroLiveValidator, selectionValidator } from './characterTables';
+import {
+  authoredValidator,
+  heroLiveValidator,
+  revisionStatusValidator,
+  selectionValidator,
+} from './characterTables';
 import { isJsonValue, type CharacterAuthored } from '../shared/characterDraft';
 import { requireCharacterEditable } from './lib/encounters';
+import { evaluateSelections } from './lib/characterBuild';
 
 async function owned(ctx: ReadCtx, id: Id<'characters'>, userId: Id<'users'>) {
   const character = await ctx.db.get(id);
@@ -31,18 +37,33 @@ const summary = v.object({
   id: v.id('characters'),
   name: v.string(),
   revision: v.number(),
-  status: v.literal('awaiting-rules-evaluation'),
+  status: revisionStatusValidator,
 });
 const detail = v.object({
   id: v.id('characters'),
   authored: authoredValidator,
   revision: v.number(),
   selections: v.array(selectionValidator),
-  status: v.literal('awaiting-rules-evaluation'),
+  status: revisionStatusValidator,
+  /** The R02 EvaluationResult of the draft revision (shared/contracts/characterEvaluation.ts). */
+  evaluation: v.union(v.any(), v.null()),
   combatLocked: v.boolean(),
   effectiveRevisionId: v.union(v.id('characterRevisions'), v.null()),
   derivedBaseline: v.null(),
   liveState: v.union(v.null(), heroLiveValidator),
+});
+
+/**
+ * The shared evaluation operation (docs/character-wizard-spec.md#9-shared-operations-and-reliability):
+ * the wizard's live "hero so far", headless callers and `save` all use it. Pure: nothing is written.
+ */
+export const evaluate = query({
+  args: { selections: v.array(selectionValidator) },
+  returns: v.any(),
+  handler: async (ctx, args) => {
+    await requireUser(ctx);
+    return evaluateSelections(args.selections);
+  },
 });
 export const listMine = query({
   args: {},
@@ -54,12 +75,19 @@ export const listMine = query({
       .withIndex('by_owner', q => q.eq('ownerId', user._id))
       .order('desc')
       .take(100);
-    return characters.map(character => ({
-      id: character._id,
-      name: character.authored.name,
-      revision: character.revision,
-      status: 'awaiting-rules-evaluation' as const,
-    }));
+    return Promise.all(
+      characters.map(async character => {
+        const draft = character.draftRevisionId
+          ? await ctx.db.get(character.draftRevisionId)
+          : null;
+        return {
+          id: character._id,
+          name: character.authored.name,
+          revision: character.revision,
+          status: draft?.status ?? ('awaiting-rules-evaluation' as const),
+        };
+      }),
+    );
   },
 });
 export const get = query({
@@ -74,7 +102,8 @@ export const get = query({
       authored: character.authored,
       revision: character.revision,
       selections: draft?.selections ?? [],
-      status: 'awaiting-rules-evaluation' as const,
+      status: draft?.status ?? ('awaiting-rules-evaluation' as const),
+      evaluation: draft?.evaluation ?? null,
       combatLocked: character.combatLocked,
       effectiveRevisionId: character.effectiveRevisionId,
       derivedBaseline: character.derivedBaseline,
@@ -106,12 +135,15 @@ export const create = mutation({
       campaignId: null,
       combatLocked: false,
     });
+    const evaluation = evaluateSelections([]);
     const revisionId = await ctx.db.insert('characterRevisions', {
       characterId: id,
       revision: 1,
       parentRevisionId: null,
       selections: [],
-      status: 'awaiting-rules-evaluation',
+      status: evaluation.status,
+      evaluation,
+      derivedBaseline: evaluation.baseline,
     });
     await ctx.db.patch(id, { draftRevisionId: revisionId });
     await receipt.save(id);
@@ -166,12 +198,16 @@ export const save = mutation({
     )
       throw new ConvexError('A decision can only be saved once within its owning branch.');
     const revision = character.revision + 1;
+    // Draft saves evaluate the build and never touch live values (R03 section 3).
+    const evaluation = evaluateSelections(selections);
     const revisionId = await ctx.db.insert('characterRevisions', {
       characterId: character._id,
       revision,
       parentRevisionId: character.draftRevisionId,
       selections,
-      status: 'awaiting-rules-evaluation',
+      status: evaluation.status,
+      evaluation,
+      derivedBaseline: evaluation.baseline,
     });
     await ctx.db.patch(character._id, { authored: fields, revision, draftRevisionId: revisionId });
     await receipt.save(String(revision));

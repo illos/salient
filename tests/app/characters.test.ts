@@ -4,7 +4,30 @@ import { convexTest } from 'convex-test';
 import betterAuthTest from '@convex-dev/better-auth/test';
 import schema from '../../convex/schema';
 import { api, components } from '../../convex/_generated/api';
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
 import { emptyAuthored, type DraftSelection } from '../../shared/characterDraft';
+import type {
+  DerivedBaseline,
+  EvaluationInput,
+  EvaluationResult,
+} from '../../shared/contracts/characterEvaluation';
+import type { DecisionDefinitions } from '../../shared/evaluate/definitions';
+import { draftSelectionsFrom } from '../../shared/evaluate/draft';
+
+// R02 worked examples: the expected baseline and diagnostics come from the hand-computed examples
+// file (checked against the pinned source by tests/character-derived-values.test.ts), never from
+// running the evaluator.
+const examples = JSON.parse(
+  readFileSync(join(process.cwd(), 'shared/content/character-evaluation-examples.json'), 'utf8'),
+) as {
+  examples: Record<string, { input: EvaluationInput; expected: EvaluationResult }>;
+};
+const definitions = JSON.parse(
+  readFileSync(join(process.cwd(), 'shared/content/fury-level-one-decisions.json'), 'utf8'),
+) as DecisionDefinitions;
+const fixtureSelections = () =>
+  draftSelectionsFrom(examples.examples.complete!.input.selections, definitions);
 
 const modules = import.meta.glob('../../convex/**/*.ts');
 async function setup() {
@@ -66,14 +89,14 @@ describe('owned character drafts', () => {
     const saved = await alice.client.query(api.characters.get, { characterId });
     expect(saved.authored).toEqual(details);
     expect(saved).toMatchObject({
-      status: 'awaiting-rules-evaluation',
+      status: 'incomplete',
       selections: [],
       derivedBaseline: null,
       liveState: null,
       effectiveRevisionId: null,
     });
     expect(await alice.client.query(api.characters.listMine, {})).toEqual([
-      { id: characterId, name: 'Aster', revision: 1, status: 'awaiting-rules-evaluation' },
+      { id: characterId, name: 'Aster', revision: 1, status: 'incomplete' },
     ]);
     expect(await bob.client.query(api.characters.listMine, {})).toEqual([]);
     await expect(bob.client.query(api.characters.get, { characterId })).rejects.toThrow(
@@ -170,6 +193,78 @@ describe('owned character drafts', () => {
           ).length,
       ),
     ).toBe(2);
+  });
+
+  test('acceptance 1: the hero-fixture choices evaluate to the R02 complete baseline, read back from the revision', async () => {
+    const { t, alice } = await setup();
+    const characterId = await alice.client.mutation(api.characters.create, {
+      commandId: 'create-grug',
+      authored: { ...details, name: 'Grug' },
+    });
+    const selections = fixtureSelections();
+    await alice.client.mutation(api.characters.save, {
+      characterId,
+      commandId: 'save-fixture',
+      expectedRevision: 1,
+      authored: { ...details, name: 'Grug' },
+      selections,
+    });
+    const saved = await alice.client.query(api.characters.get, { characterId });
+    expect(saved.status).toBe('complete');
+    const revision = await t.run(async ctx =>
+      ctx.db
+        .query('characterRevisions')
+        .withIndex('by_character_and_revision', q =>
+          q.eq('characterId', characterId).eq('revision', 2),
+        )
+        .unique(),
+    );
+    expect(revision!.status).toBe('complete');
+    expect(revision!.derivedBaseline).toEqual(examples.examples.complete!.expected.baseline);
+    expect(revision!.evaluation).toEqual(examples.examples.complete!.expected);
+    const baseline = revision!.derivedBaseline as DerivedBaseline;
+    expect([
+      baseline.staminaMaximum.value,
+      baseline.recoveriesMaximum.value,
+      baseline.speed.value,
+    ]).toEqual([30, 10, 6]);
+    // The draft save wrote no live values and no effective build (R03 section 3).
+    expect(saved.liveState).toBeNull();
+    expect(saved.effectiveRevisionId).toBeNull();
+    // The shared evaluate operation returns the same result without writing anything.
+    expect(await alice.client.query(api.characters.evaluate, { selections })).toEqual(
+      examples.examples.complete!.expected,
+    );
+  });
+
+  test('acceptance 2: no kit is incomplete naming kit.choice; over-budget traits is invalid', async () => {
+    const { alice } = await setup();
+    const incomplete = await alice.client.query(api.characters.evaluate, {
+      selections: draftSelectionsFrom(examples.examples.incomplete!.input.selections, definitions),
+    });
+    expect(incomplete).toEqual(examples.examples.incomplete!.expected);
+    expect(incomplete.status).toBe('incomplete');
+    expect(incomplete.diagnostics['kit.choice'][0].code).toBe('required-choice-missing');
+    const invalid = await alice.client.query(api.characters.evaluate, {
+      selections: draftSelectionsFrom(examples.examples.invalid!.input.selections, definitions),
+    });
+    expect(invalid).toEqual(examples.examples.invalid!.expected);
+    expect(invalid.status).toBe('invalid');
+    // Persisted the same way: the revision carries the status and no baseline.
+    const characterId = await alice.client.mutation(api.characters.create, {
+      commandId: 'create-bad',
+      authored: details,
+    });
+    await alice.client.mutation(api.characters.save, {
+      characterId,
+      commandId: 'save-bad',
+      expectedRevision: 1,
+      authored: details,
+      selections: draftSelectionsFrom(examples.examples.invalid!.input.selections, definitions),
+    });
+    const saved = await alice.client.query(api.characters.get, { characterId });
+    expect(saved.status).toBe('invalid');
+    expect(saved.evaluation.baseline).toBeNull();
   });
 
   test('combat locks reject both authored and selection changes', async () => {

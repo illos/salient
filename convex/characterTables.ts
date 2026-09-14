@@ -54,6 +54,22 @@ export const heroLiveValidator = v.object({
     initializedAt: v.number(),
   }),
 });
+/** R02 evaluation statuses (shared/contracts/characterEvaluation.ts EvaluationStatus). */
+export const evaluationStatusValidator = v.union(
+  v.literal('complete'),
+  v.literal('incomplete'),
+  v.literal('invalid'),
+  v.literal('unsupported'),
+);
+/**
+ * Status of a saved revision: the R02 evaluation status once `characters.evaluate` has run on it.
+ * `awaiting-rules-evaluation` is the pre-A02 value kept for rows saved before the evaluator existed;
+ * development data is disposable, so such rows are reset rather than migrated.
+ */
+export const revisionStatusValidator = v.union(
+  v.literal('awaiting-rules-evaluation'),
+  evaluationStatusValidator,
+);
 export const characterTables = {
   characters: defineTable({
     ownerId: v.id('users'),
@@ -75,6 +91,14 @@ export const characterTables = {
     revision: v.number(),
     parentRevisionId: v.union(v.id('characterRevisions'), v.null()),
     selections: v.array(selectionValidator),
-    status: v.literal('awaiting-rules-evaluation'),
+    status: revisionStatusValidator,
+    /**
+     * The R02 `EvaluationResult` for these selections (shared/contracts/characterEvaluation.ts):
+     * status, diagnostics keyed by decision id, the baseline or the partial "hero so far", and the
+     * definitions/revision evaluated against. Written by the shared evaluator only.
+     */
+    evaluation: v.optional(v.any()),
+    /** `evaluation.baseline`: the R02 `DerivedBaseline` when the status is complete, else null. */
+    derivedBaseline: v.optional(v.union(v.any(), v.null())),
   }).index('by_character_and_revision', ['characterId', 'revision']),
 };
