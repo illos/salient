@@ -5,7 +5,7 @@ import { describe, expect, test } from 'vitest';
 import { convexTest, type TestConvex } from 'convex-test';
 import betterAuthTest from '@convex-dev/better-auth/test';
 import schema from '../../convex/schema';
-import { api, components } from '../../convex/_generated/api';
+import { api, components, internal } from '../../convex/_generated/api';
 import type { Doc, Id } from '../../convex/_generated/dataModel';
 import { appendEvent } from '../../convex/lib/events';
 import {
@@ -238,6 +238,8 @@ describe('change journal', () => {
 
   test('the journal for a sample command lists before/after for every changed field, read back', async () => {
     const { t, client, campaignId, user } = await setup();
+    // The catalog reads the content snapshot (S01); a fresh test deployment has none until reseeded.
+    await t.mutation(internal.content.reseed, {});
     const catalog = await client.query(api.foes.catalog, { campaignId });
     const foeId = await client.mutation(api.foes.add, {
       campaignId,
