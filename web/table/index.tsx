@@ -21,6 +21,8 @@ import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
 import { CommandConsole } from '../command-input';
 import { ErrorNotice, Eyebrow, Loading, SectionHeading, useCommand } from '../ui';
+import { CombatSetupCard, CommandButton, type Encounter } from './setup-card';
+import { InitiativePanel, TurnControls } from './initiative';
 
 type Roster = FunctionReturnType<typeof api.table.roster>;
 type Foe = Roster['foes'][number];
@@ -271,7 +273,15 @@ function FoeRow({
   );
 }
 
-function DirectorPane({ campaignId, roster }: { campaignId: Id<'campaigns'>; roster: Roster }) {
+function DirectorPane({
+  campaignId,
+  roster,
+  encounter,
+}: {
+  campaignId: Id<'campaigns'>;
+  roster: Roster;
+  encounter: Encounter | null;
+}) {
   const director = roster.role === 'director';
   const running = roster.session?.status === 'running';
   const catalog = useQuery(api.foes.catalog, director ? { campaignId } : 'skip');
@@ -322,6 +332,17 @@ function DirectorPane({ campaignId, roster }: { campaignId: Id<'campaigns'>; ros
           </div>
         )}
         <ErrorNotice error={addition.error} />
+        {director && running && !encounter && (
+          <div className="rule-soft border-t pt-4">
+            {/* A04: opens the staged setup card; nothing is committed until OK. */}
+            <CommandButton
+              campaignId={campaignId}
+              text="/combat start"
+              label="Start combat"
+              variant="default"
+            />
+          </div>
+        )}
         <div className="rule-soft border-t pt-4">
           <SectionHeading className="mb-2">Malice</SectionHeading>
           {roster.malice === null ? (
@@ -385,11 +406,17 @@ function HeroRow({
   hero,
   director,
   running,
+  encounter,
+  viewed,
+  onTurnTaken,
 }: {
   campaignId: Id<'campaigns'>;
   hero: Hero;
   director: boolean;
   running: boolean;
+  encounter: Encounter | null;
+  viewed: boolean;
+  onTurnTaken: (actor: { kind: 'character' | 'foe'; id: string }) => void;
 }) {
   const actor = actorRef('character', hero.id);
   const live = hero.live;
@@ -410,10 +437,22 @@ function HeroRow({
     ['victories', 'Victories', full?.victories ?? null],
   ];
   return (
-    <li className="rule-soft flex flex-col gap-2 py-3">
+    <li
+      className={`rule-soft flex flex-col gap-2 py-3 ${viewed ? 'border-l-2 border-primary pl-2' : ''}`}
+      aria-current={viewed ? 'true' : undefined}
+    >
       <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
         <strong>{hero.name}</strong>
         <span className="caps text-muted-foreground">{hero.ownerName}</span>
+        {encounter && (
+          <TurnControls
+            campaignId={campaignId}
+            encounter={encounter}
+            actor={{ kind: 'character', id: hero.id, name: hero.name }}
+            running={running}
+            onTurnTaken={onTurnTaken}
+          />
+        )}
       </div>
       {live ? (
         <dl className="grid grid-cols-[auto_1fr_auto] gap-x-3 gap-y-0.5 text-sm">
@@ -466,12 +505,27 @@ function HeroRow({
   );
 }
 
-function HeroesPane({ campaignId, roster }: { campaignId: Id<'campaigns'>; roster: Roster }) {
+function HeroesPane({
+  campaignId,
+  roster,
+  encounter,
+  viewedHeroId,
+  onTurnTaken,
+}: {
+  campaignId: Id<'campaigns'>;
+  roster: Roster;
+  encounter: Encounter | null;
+  viewedHeroId: Id<'characters'> | null;
+  onTurnTaken: (actor: { kind: 'character' | 'foe'; id: string }) => void;
+}) {
   const director = roster.role === 'director';
   const running = roster.session?.status === 'running';
   const mine = roster.heroes.filter(h => h.ownerId === roster.viewerId);
   const others = roster.heroes.filter(h => h.ownerId !== roster.viewerId);
-  const ordered = [...mine, ...others];
+  // The viewed hero (the one whose turn this user last took) leads the pane.
+  const ordered = [...mine, ...others].sort((a, b) =>
+    a.id === viewedHeroId ? -1 : b.id === viewedHeroId ? 1 : 0,
+  );
   return (
     <Card>
       <CardContent className="flex flex-col gap-4">
@@ -494,6 +548,9 @@ function HeroesPane({ campaignId, roster }: { campaignId: Id<'campaigns'>; roste
               hero={hero}
               director={director}
               running={running}
+              encounter={encounter}
+              viewed={hero.id === viewedHeroId}
+              onTurnTaken={onTurnTaken}
             />
           ))}
         </ul>
@@ -606,8 +663,23 @@ function GameLog({
 export function TablePage({ campaignId }: { campaignId: Id<'campaigns'> }) {
   const roster = useQuery(api.table.roster, { campaignId });
   const campaign = useQuery(api.campaigns.get, { campaignId });
-  if (!roster || !campaign) return <Loading>Opening the table…</Loading>;
+  const encounter = useQuery(api.encounters.current, { campaignId });
+  // Explicit Take turn switches only this user's pane to the chosen hero (local state, never shared).
+  const [viewedHeroId, setViewedHeroId] = useState<Id<'characters'> | null>(null);
+  if (!roster || !campaign || encounter === undefined) return <Loading>Opening the table…</Loading>;
   const status = roster.session?.status ?? 'none';
+  const running = status === 'running';
+  const combat =
+    encounter?.status === 'committed'
+      ? encounter.phase === 'turns'
+        ? `Combat · round ${encounter.round}`
+        : 'Combat · opening'
+      : encounter?.status === 'draft'
+        ? 'FreePlay · combat setup open'
+        : 'FreePlay';
+  const onTurnTaken = (actor: { kind: 'character' | 'foe'; id: string }) => {
+    if (actor.kind === 'character') setViewedHeroId(actor.id as Id<'characters'>);
+  };
   return (
     <>
       <Link
@@ -623,7 +695,7 @@ export function TablePage({ campaignId }: { campaignId: Id<'campaigns'> }) {
           <h1>{campaign.name}</h1>
           <p className="mt-1 text-muted-foreground">
             {status === 'running'
-              ? 'Session running · FreePlay'
+              ? `Session running · ${combat}`
               : status === 'paused'
                 ? 'Session paused · gameplay waits for the Director'
                 : 'No active session · read-only'}
@@ -641,8 +713,18 @@ export function TablePage({ campaignId }: { campaignId: Id<'campaigns'> }) {
         </Badge>
       </div>
       <div className="grid grid-cols-[340px_minmax(0,1fr)_340px] items-start gap-6">
-        <DirectorPane campaignId={campaignId} roster={roster} />
+        <DirectorPane campaignId={campaignId} roster={roster} encounter={encounter} />
         <div className="flex flex-col gap-6">
+          {encounter && <CombatSetupCard campaignId={campaignId} encounter={encounter} />}
+          {encounter && (
+            <InitiativePanel
+              campaignId={campaignId}
+              encounter={encounter}
+              director={roster.role === 'director'}
+              running={running}
+              onTurnTaken={onTurnTaken}
+            />
+          )}
           {roster.role !== 'observer' && (
             <CommandConsole campaignId={campaignId} sessionRevision={roster.session?.revision} />
           )}
@@ -653,7 +735,13 @@ export function TablePage({ campaignId }: { campaignId: Id<'campaigns'> }) {
             </CardContent>
           </Card>
         </div>
-        <HeroesPane campaignId={campaignId} roster={roster} />
+        <HeroesPane
+          campaignId={campaignId}
+          roster={roster}
+          encounter={encounter}
+          viewedHeroId={viewedHeroId}
+          onTurnTaken={onTurnTaken}
+        />
       </div>
     </>
   );
