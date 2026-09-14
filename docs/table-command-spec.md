@@ -195,6 +195,11 @@ and governs recorded difficulty values in all displayed entries, including histo
 calculated outcomes or alter recorded results. Per-test visibility overrides remain deferred.
 See [test initiation](table-spec.md#freeplay-baseline-and-combat-transition).
 
+*Implementation note, 2026-09-14 (R04):* the recorded fields (dice, natural roll, characteristic and
+value, skill bonus, other bonuses, edge/bane resolution, total, tier, critical success, optional
+difficulty and outcome) are typed in `shared/contracts/rollResolution.ts` (`TestRollRequest`,
+`TestRollResult`) per [the R04 contract](roll-and-damage-resolution.md), section 5.
+
 ### Starting combat through an action card
 
 Confirmed FreePlay carryover, 2026-09-13: actions resolved before combat do not consume the new

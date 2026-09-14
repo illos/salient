@@ -111,4 +111,87 @@ None known at slice creation.
 
 ## Work log
 
-_Empty._
+### Plan, 2026-09-14 (rules researcher, worktree `slice/R04`)
+
+- Sources: only the pinned Compendium at `vendor/steel-compendium` revision
+  `fb83a789da8f0327a389c277a0c790b1648d5810`. Every path listed under *Rules research* exists at this
+  pin; no path correction was needed. Additional files read because the listed ones reference them:
+  `chapter/classes.md` (Roll Against Multiple Creatures), `chapter/kits.md` (Damage Bonuses, Kit
+  Signature Ability), `kit/mountain.md`, `rule/test/test.md`, `rule/test/test-difficulty.md`,
+  `rule/combat/turn.md`, `rule/combat/opportunity-attack.md`, `rule/combat/signature-ability.md`,
+  `rule/general/heroic-ability.md`, `rule/general/ability.md`, `rule/resource/heroic-resource.md`,
+  `rule/character/potency.md`, `rule/monster/malice.md`, `feature/common/main-actions/free-strike.md`,
+  `feature/ability/common/melee-weapon-free-strike.md`, `feature/ability/common/ranged-weapon-free-strike.md`,
+  `feature/common/maneuvers/catch-breath.md`, `feature/fury/level-1/{ferocity,fury-abilities,kit}.md`,
+  `feature/ability/fury/level-1/{brutal-slam,hit-and-run,impaled,to-the-death,thunder-roar,blood-for-blood}.md`,
+  `monster/goblin/statblock/goblin-warrior.md`, `chapter/the-basics.md` (Recoveries),
+  `chapter/monster-basics.md` (shared-rules pointer).
+- Files to touch: `docs/roll-and-damage-resolution.md` (new contract), `shared/contracts/rollResolution.ts`
+  (new, types only), `tsconfig.json` (include the contract so `tsc --noEmit` covers it),
+  `docs/rules-questions-for-user.md` (Q-R entries), dated implementation notes in the cited
+  `docs/table-spec.md` sections plus `docs/table-command-spec.md#direct-test-rolls` and
+  `docs/v001-basic-play-walkthrough.md#source-references-for-the-representative-common-action`, and
+  this work log. No `STATUS.md` edit (lead owns it). No `vendor/` changes.
+- Tests: none (R slice, no application code). Verification is `tsc --noEmit` for the types and hand
+  arithmetic in the document.
+- Dependencies: none real, none stubbed. The worked examples use the documented v0.01 hero fixture
+  (`docs/hero-fixture.md`: Might 2, Agility 2, maximum Stamina 30, Mountain kit) and the Goblin
+  Warrior stat block (Stamina 15) as concrete numbers; the contract itself is creature-generic.
+- Existing rulings honored without re-deciding: target-only edge/bane counts, auto-fire retained,
+  post-roll add/remove within the undo window with the same dice, highest permitted characteristic
+  default, critical extra action offered never executed, affordability block, other warnings never block.
+
+
+### Closing entry, 2026-09-14 (rules researcher)
+
+Delivered: `docs/roll-and-damage-resolution.md` (contract, 12 sections, 14 worked-example groups),
+`shared/contracts/rollResolution.ts` (types only), `tsconfig.json` include for the contract, Q-R-1 to
+Q-R-3 in `docs/rules-questions-for-user.md`, dated implementation notes in the nine cited
+`docs/table-spec.md` sections plus `docs/table-command-spec.md#direct-test-rolls` and
+`docs/v001-basic-play-walkthrough.md#source-references-for-the-representative-common-action`.
+
+Compendium files read (all at `fb83a789da8f0327a389c277a0c790b1648d5810`): listed in the contract's
+section 12; every path in *Rules research* above exists, no correction needed.
+
+Acceptance checks:
+
+1. *Every arithmetic rule quotes its source sentence with path.* Verified by reading: sections 1.1
+   to 1.10, 2, 4.1 to 4.5, 5, 6.1 to 6.4, 7, 8 and 9 each open with block quotes carrying
+   `SC/...` paths; the reviewer can `grep -F` each quoted sentence in the named file (link markup
+   removed).
+2. *Every worked example computed by hand.* Section 10 shows the addition for every row (dice sum,
+   characteristic, bonus, modifier, tier, damage, Stamina). No code produced them. A throwaway
+   arithmetic cross-check script (not committed) reproduced all table values from the stated rules,
+   catching no discrepancies; the document values remain the source of truth.
+3. *Each silence is a `Q-R-n` with meanwhile behavior.* Q-R-1 (natural 19/20 under double bane,
+   provisional tier 3), Q-R-2 ("M or A" damage characteristic, provisional roll characteristic),
+   Q-R-3 (regain cap, provisional cap at maximum); section 11 tabulates each with its label and the
+   two labeled interpretations (foe Stamina below 0; one crit per multi-target roll).
+4. *Types compile and match the examples.* `npx tsc --noEmit` exit 0 with
+   `shared/contracts/rollResolution.ts` in the file list (`--listFilesOnly | grep -c rollResolution`
+   = 1); `npx tsc -p tsconfig.web.json` exit 0 (`shared` already included there). Every field named
+   in the examples (`naturalRoll`, `edgeBane.net`, `tierShift`, `criticalHit`,
+   `additionalMainActionOffered`, `absorbedByTemporaryStamina`, `staminaDelta`, `windedValue`,
+   `slain`, `capApplied`, `staminaReconciliationDelta`, `outcome`, `blocked` response) exists in the
+   types.
+5. *Winded threshold matches the source exactly.* Section 6.3 quotes `SC/rule/health/winded.md`:
+   "Your winded value equals half your Stamina maximum. When your Stamina is equal to or less than
+   your winded value, you are winded." and applies `floor` from `always-round-down.md` for odd maxima.
+
+Verification commands: `npx tsc --noEmit` (exit 0); `node --test tests/*.test.ts` (28 pass, 0 fail);
+`npx tsc -p tsconfig.web.json` (exit 0). `pnpm check:engine` itself aborted before running anything
+(`ERR_PNPM_ABORTED_REMOVE_MODULES_DIR_NO_TTY`, pnpm wanting to purge the worktree's symlinked
+`node_modules`); its two underlying commands were run directly as above.
+
+What remains: rules review (required); user answers to Q-R-1..3 (nothing blocked; provisional
+behavior labeled); A05 implements the contract. `STATUS.md` left for the lead.
+
+*Review fixes, 2026-09-14:* independent and rules review passed (non-blocking findings). Applied:
+Brutal Slam worked example 10.13 (5/8/15 with Might 2 and Mountain +0/+0/+4, hand computed,
+matching `docs/hero-fixture.md`) and the section 2 cross-reference; Knocking Creatures Out note in
+6.4 (manual result, Slain unchanged); blocked-response prose aligned to `AbilityRollBlocked`
+(`kind: "blocked"`); `negative-rolled-damage` label added to section 11 and `UncertaintyId`
+(unreachable with v0.01 content); Q-R links use full heading slugs in the contract, table-spec and
+walkthrough notes (each verified to resolve); 10.9 Recovery wording. Re-verified: `npx tsc --noEmit`
+exit 0, `node --test tests/*.test.ts` 28 pass, `npx tsc -p tsconfig.web.json` exit 0. Folded into
+the original commit by amend.

@@ -990,6 +990,11 @@ turning it off hides those values in the player view. This changes presentation,
 difficulties or outcomes, and does not rewrite closed-session history. Director access remains unchanged.
 Formal test-request UI and its lifecycle are out of scope for now.
 
+*Implementation note, 2026-09-14 (R04):* direct test arithmetic (2d10, characteristic, agreed skill
++2, other bonuses, edges/banes, natural 19/20 critical success) and the difficulty outcome table are
+in [the R04 contract](roll-and-damage-resolution.md), section 5, with examples in 10.12. Outcomes are computed only when a
+difficulty is supplied.
+
 ### Inline interaction cards in the game log
 
 Confirmed minimum-input direction, 2026-09-13: an action or dependent effect asks for only the missing
@@ -1277,6 +1282,10 @@ and [Aid Attack](../vendor/steel-compendium/en/unified/md/feature/common/maneuve
 pinned revision `fb83a789da8f0327a389c277a0c790b1648d5810`. This scope does not change already-
 included common attacks, Catch Breath or other supported clock behavior.
 
+*Implementation note, 2026-09-14 (R04):* their benefits enter the roll only as supplied per-target
+edge/bane counts; [the R04 contract](roll-and-damage-resolution.md) sections 1.4 and 1.7 define how those counts resolve.
+No automatic benefit detection is added.
+
 #### v0.01 temporary Stamina
 
 Confirmed 2026-09-14: include a separate Director-editable temporary Stamina value on heroes and
@@ -1298,6 +1307,10 @@ otherwise indicated. Grant/closeout integration must respect known exceptions an
 Void keep/reset contract; this input/damage decision does not invent those detailed interfaces.
 The later common resource cleanup decision includes automatic normal combat-end clearing;
 source-specific exceptions remain manually adjudicated.
+
+*Implementation note, 2026-09-14 (R04):* the application order (weakness, immunity, temporary Stamina,
+Stamina) and the winded/slain/dying labels are in [the R04 contract](roll-and-damage-resolution.md), section 6, with examples in
+10.7 and 10.8. Temporary Stamina is excluded from the winded and recovery values.
 
 #### v0.01 Catch Breath
 
@@ -1326,6 +1339,11 @@ value. Do not consume a combat maneuver allowance outside combat. Record the spe
 together and preserve affordability, retries, source eligibility and history. Repeat uses are
 available while the hero has Recoveries remaining. Existing running-session/control permissions
 and Director acting authority apply. This does not start a respite or replenish Recoveries.
+
+*Implementation note, 2026-09-14 (R04):* bounds verified against the pin in [the R04 contract](roll-and-damage-resolution.md),
+section 7: recovery value `floor(maxStamina / 3)`, one Recovery, foes have no Recovery pool (blocked as
+unaffordable), dying is a warning only, temporary Stamina untouched. No source sentence states the
+Stamina-maximum cap; it is applied provisionally under [Q-R-3](rules-questions-for-user.md#q-r-3-is-regained-stamina-capped-at-the-stamina-maximum). Examples in 10.9.
 
 #### v0.01 manual condition tracking
 
@@ -1393,6 +1411,10 @@ This does not change full-count auto-fire or require a new roll per target. Foll
 roll-sharing rules when establishing the mechanic contract. See
 [the clarification](v001-basic-play-walkthrough.md#next-review-case-attack-wide-and-target-specific-counts).
 
+*Implementation note, 2026-09-14 (R04):* the edge/bane arithmetic, the cancellation cases and the
+one-roll/per-target tier rule are sourced in [the R04 contract](roll-and-damage-resolution.md), sections 1.4 to 1.7, with a
+combination table in section 10.5. Counts above two per side add nothing.
+
 #### v0.01 roll characteristic default
 
 Confirmed 2026-09-14: when an action permits a choice of roll characteristic, automatically select
@@ -1403,6 +1425,11 @@ that characteristic; never expand the source's permitted set to obtain a higher 
 
 This selects a roll input, not a persistent sheet edit. It does not infer separate damage choices
 or authorize unique feature interpretation. Preserve the settled target/fire behavior.
+
+*Implementation note, 2026-09-14 (R04):* selection and recording are specified in
+[the R04 contract](roll-and-damage-resolution.md), section 1.8 (ties resolve to the printed order). Whether the "M or A"
+damage letter must follow the roll characteristic is open as [Q-R-2](rules-questions-for-user.md#q-r-2-for-n--m-or-a-damage-must-the-damage-characteristic-be-the-roll-characteristic); the contract uses the roll
+characteristic meanwhile and labels the record.
 
 ### Director edits to inline results
 
@@ -1502,6 +1529,10 @@ Presentation and correction contract (confirmed where noted; remaining UI detail
   earlier result. Source-specific response reconciliation and pending-card restoration still need
   concrete walkthroughs; do not silently replay later choices or reroll dice. A new correction can invoke the engine; undo/redo still restores
   recorded states without re-executing rules or dice.
+
+*Implementation note, 2026-09-14 (R04):* post-roll add/remove recomputes only the corrected target
+with the same dice, leaves `naturalRoll` and the critical flag unchanged, and records the Stamina
+reconciliation delta; see [the R04 contract](roll-and-damage-resolution.md), sections 3 and 10.10.
 
 ### Character sheet lock during encounters
 
@@ -2295,6 +2326,11 @@ Source: pinned Steel Compendium `fb83a789da8f0327a389c277a0c790b1648d5810`,
 lifetime, chaining, off-turn use and source exceptions need bounded contracts before implementation;
 this example does not establish that only on-turn actions qualify. The inclusion decision is settled.
 
+*Implementation note, 2026-09-14 (R04):* recognition (`naturalRoll >= 19`, ability roll, main action;
+never a maneuver or a test), the one-roll/one-opportunity reading for multi-target attacks and the
+natural 19/20 tier-3 override are in [the R04 contract](roll-and-damage-resolution.md), sections 1.6 and 2. The double-bane
+interaction is open as [Q-R-1](rules-questions-for-user.md#q-r-1-does-a-natural-19-or-20-stay-tier-3-under-a-double-bane). Opportunity lifetime, chaining and off-turn use remain unsettled here.
+
 ### Player-sheet actions and explicit End turn
 
 Use the [v0.01 character sheet spec](character-sheet-spec.md) for the initial field inventory,
@@ -2391,6 +2427,10 @@ not insufficient payment. These are sourced distinctions, not exceptions invente
 required activation costs from optional enhancements. Unknown costs/facts remain unresolved; do not
 invent either affordable or unaffordable status. Exact conditional-cost commitment, partial resolution
 and cancellation after already-accepted work remain open.
+
+*Implementation note, 2026-09-14 (R04):* the affordability formula (fixed cost, source waiver, legal
+floor) and the Fury outside-combat waiver/reuse-warning split are in [the R04 contract](roll-and-damage-resolution.md),
+section 9, with the blocked example in 10.11. Ferocity and Malice have no negative range at the pin.
 
 ### Move-action rules check
 

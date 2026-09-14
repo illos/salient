@@ -59,6 +59,11 @@ Pinned Steel Compendium revision `fb83a789da8f0327a389c277a0c790b1648d5810`:
 The action is a proposed representative for the shared operation; this document does not certify
 full free-strike support, stat-block exceptions or all common actions.
 
+*Implementation note, 2026-09-14 (R04):* the bounded verification of modifier, critical and
+damage/application cases for this action is [the R04 contract](roll-and-damage-resolution.md); its section 10 works the
+Melee Weapon Free Strike at each tier, a critical, a post-roll bane correction and the damage order
+with the fixture numbers. Open source questions are [Q-R-1](rules-questions-for-user.md#q-r-1-does-a-natural-19-or-20-stay-tier-3-under-a-double-bane) to [Q-R-3](rules-questions-for-user.md#q-r-3-is-regained-stamina-capped-at-the-stamina-maximum).
+
 ## Foe visibility — confirmed for v0.01
 
 **Foe hiding deferred, 2026-09-14:** all loaded foes are visible in player/observer rosters;
