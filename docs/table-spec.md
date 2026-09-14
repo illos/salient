@@ -2004,9 +2004,17 @@ finished and every group is unspent again when the round changes without a reset
 no entries is removed unless it is the active group, which completes when the current turn ends (the
 empty-group presentation question is otherwise unchanged). `/turn take` is refused for an entry already
 spent this round, for an entry whose group finished this round, and while another group is active
-(Q-A-400 asks whether the second should be a warning); acting out of side order is recorded as a warning.
+(Q-A-400 was raised about the second refusal); acting out of side order is recorded as a warning.
 Round advance happens in `settle` (`convex/lib/initiative.ts`) when no turn is active and every group is
 finished, at most one round per operation, and only when some entry can act in the new round.
+
+**Documentation audit, 2026-09-14 (Q-A-400):** the existing [Take turn policy](#taking-a-turn)
+and [regrouping contract](#mid-combat-additions-and-regrouping) already distinguish automatic rule
+eligibility from warned deliberate departures. The implementation note above describes a repair
+needed in A04, not an unanswered policy choice. Preserve completed groups and spent-entry history;
+do not force regrouping merely to bypass a rule-eligibility refusal. Access/session restrictions and
+coherent sequencing still apply, including no competing ordinary active turns. Implementation and
+verification of the warned path remain with A04.
 
 #### Source expectations and timing distinctions
 

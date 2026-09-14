@@ -193,3 +193,13 @@ Malice gains; dying heroes still in combat count. Replace the provisional setup-
 (Q-R-50 A) with the current participating heroes, counted once per hero from remaining combat turn
 entries. See [the owning contract](../conditions-and-clock.md#33-manual-parts-in-v001).
 This is a specification handoff; implementation and persisted-state verification remain outstanding.
+
+### Question audit follow-up: Q-A-400
+
+The [queue audit](audits/2026-09-14-question-queue-dedup.md) resolves the question under existing
+policy; it does not certify the current refusal behavior. Implement warned deliberate turn-rule
+departures through the shared operation without requiring regrouping merely to bypass eligibility.
+Preserve completed-group and spent-entry history, access/session checks, and coherent sequencing;
+never create competing ordinary active turns. Treat active-group representation as engineering work
+under those constraints. Verify refused unauthorized/incoherent requests separately from accepted,
+logged rule departures. No new user approval is required for that repair.

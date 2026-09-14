@@ -13,6 +13,9 @@ Rules for entries:
   `ACC` accounts/product, `REC` decision record and status docs, `HAND` handoff/commands/mockups,
   `R` rules-contract slices, `A` application slices, `V` V1 slices.
 - One row per question. Do not merge questions, and do not reopen a resolved row; add a new one.
+- Before adding or asking a question, check the owning spec, resolved entries and decision record.
+  Cite the remaining undecided behavior explicitly; do not ask the user to reconfirm a settled policy.
+  Track temporary engineering dependencies separately from questions that require a user ruling.
 - Answering here does not change a spec. The spec change is a separate `docs` commit citing the id.
 
 ## Template
@@ -48,6 +51,8 @@ are the shared lifecycle decisions; the remaining entries are bounded content/sc
   counters. Preview the result and explicitly reconcile removed/replaced resources or values outside
   their new legal ranges. Apply atomically. Source-defined respite restoration remains separate.
   This is an application proposal, not a universal rulebook formula.
+- **Related question:** Q-R-201 concerns retaining values across campaign transfer. This question
+  concerns reconciling a changed build; both apply only when transfer also changes the baseline.
 - **Blocked until answered:** affected activation on played characters; drafts/new-character evaluation
   can proceed. Coordinate the same boundary with respite and inventory.
 - **Answer:**
@@ -109,12 +114,15 @@ are the shared lifecycle decisions; the remaining entries are bounded content/sc
 - **Where:** `docs/character-wizard-spec.md#fuller-product-scope`; sources
   `vendor/steel-compendium/en/unified/md/chapter/background.md`, Heroes clean **Languages in Orden**,
   and `vendor/steel-compendium/en/unified/md/feature/conduit/level-1/deity-and-domains.md`.
-- **Conflict or gap:** The source permits assembled cultures, campaign languages and, with Director
-  permission, a custom deity with four domains. V1 excludes homebrew mechanical options. Culture
-  names/backstory are ordinary authorship; new language identities/portfolios need a boundary.
+- **Conflict or gap:** Core-only mechanical scope and authored culture names/backstory are already
+  settled. The remaining question is whether source-authorized campaign language identities and
+  custom deity domain portfolios are selectable mechanics within that scope. This does not reopen
+  permission to write ordinary cultural or religious flavor.
 - **Recommendation:** Permit cultures assembled from core aspects and authored religious details.
   Use printed core languages and deity/saint portfolios for selectable V1 mechanics; preserve an
   extension path. This does not propose a custom-pack authoring workflow.
+- **Related questions:** Q-R-102 asks which printed language tables are selectable; Q-R-100 asks
+  whether a duplicate language consumes a slot. Neither decides custom language identities.
 - **Blocked until answered:** custom selectable languages/portfolios only; printed core options can proceed.
 - **Answer:**
 
@@ -282,7 +290,7 @@ are the shared lifecycle decisions; the remaining entries are bounded content/sc
   languages "that no modern culture uses". Whether a starting hero may know a dead language, and whether the
   regional human languages are in scope, is not stated. The unified `chapter/background.md` omits the whole
   section, so this also fixes which file the wizard cites.
-- **Options:** A: the two extant tables (34 names; Khoursirian appears in both) are selectable; dead languages
+- **Options:** A: the two extant tables (34 entries, 33 unique names; Khoursirian appears in both) are selectable; dead languages
   are not selectable at creation. B: all three tables. C: extant tables plus dead languages with a Director
   flag.
 - **Recommendation:** A. The dead-language text describes them as reconstructed by sages and learned through
@@ -334,29 +342,9 @@ are the shared lifecycle decisions; the remaining entries are bounded content/sc
   and XP per the ruling. C: keep the prior record and let the Director reconcile with Manual adjustments before play.
 - **Recommendation:** B, since it is the narrowest reading of the ruling; A is simplest to build and is what the
   v0.01 code path would do if re-attachment were reachable.
+- **Related question:** Q-CHAR-2 governs changed-build reconciliation. This question asks which
+  existing values transfer even when the baseline stays unchanged.
 - **Blocked until answered:** nothing in v0.01 (the journey admits one hero once). Re-attachment is V1.
-- **Answer:**
-
-### Q-A-200: How should a hero's Stamina maximum, Recoveries and characteristics reach the table before A02?
-
-- **Status:** open
-- **Raised by:** A03, 2026-09-14
-- **Where:** `docs/table-spec.md#v001-catch-breath`, `docs/table-spec.md#persistent-values-and-manual-adjustment-entries`,
-  `docs/table-command-spec.md#direct-test-rolls`, `shared/contracts/liveState.ts` (`HeroAdjustableField`),
-  `docs/live-state-initialization.md` section 2.1.
-- **Conflict or gap:** R03 takes a hero's initial Stamina, Recoveries, heroic resource and the maxima from
-  the evaluated baseline, and lists only current values as Director-adjustable. No evaluator exists in
-  this checkout (`derivedBaseline` is null for every character), so `/hero recover` has no recovery
-  value and `/test roll` has no characteristic score to add. A03 records `null` for every
-  baseline-supplied value on first table use, lets the Director set `stamina-maximum` and
-  `recoveries-maximum` through `/adjust` only while the hero has no evaluated build, and requires
-  `/test roll` to carry `value=<score>`, recorded as a supplied fact. Nothing is defaulted to a number.
-- **Options:** A: keep the provisional route until A02 supplies the baseline, then remove the two
-  provisional fields. B: refuse `/hero recover` and `/test roll` for heroes entirely until A02.
-  C: keep the provisional maxima as a permanent Director override alongside the baseline.
-- **Recommendation:** A. It keeps the FreePlay operations testable end to end without inventing values,
-  and the two provisional verbs refuse to run once a baseline exists.
-- **Blocked until answered:** nothing; A applied provisionally and labeled in the slice work log.
 - **Answer:**
 
 ### Q-R-3: Is regained Stamina capped at the Stamina maximum?
@@ -382,9 +370,78 @@ are the shared lifecycle decisions; the remaining entries are bounded content/sc
   `Q-R-3` on the record.
 - **Answer:**
 
-### Q-A-400: Should Take turn from a finished initiative group be a warned departure instead of a refusal?
+### Q-A-600: May a player undo their own Take turn?
 
 - **Status:** open
+- **Raised by:** A06, 2026-09-14
+- **Where:** `docs/table-spec.md#undo-permissions-and-proposed-campaign-control` (turn start as the
+  outer limit; undoing End turn is settled), `docs/table-spec.md#taking-a-turn`.
+- **Conflict or gap:** The spec makes turn start the outer limit of the player window and settles
+  undoing End turn, but does not say whether the player's own Take turn (which starts that turn and
+  dispatches its turn-start work) is inside or outside the window.
+- **Options:** A: Take turn is the limit itself; only the Director rewinds it. B: the player may undo
+  their own Take turn when nothing intervened, reopening the choice of who acts.
+- **Recommendation:** A, applied provisionally. "Turn start" reads most naturally as the boundary,
+  and the Director already rewinds it sequentially.
+- **Blocked until answered:** nothing; A applied provisionally in `playerWindow`.
+- **Answer:**
+
+### Q-A-601: Does Enable user undo also remove the acting player's post-roll correction window?
+
+- **Status:** open
+- **Raised by:** A06, 2026-09-14
+- **Where:** `docs/table-spec.md#undo-permissions-and-proposed-campaign-control` ("disabling it blocks
+  ordinary player undo") and `docs/table-spec.md#director-edits-to-inline-results` ("the acting player
+  may add edges/banes ... in the same window as their gameplay undo").
+- **Conflict or gap:** The correction time window uses the same seams and next-turn limit as undo,
+  while the setting explicitly disables ordinary player undo. Whether that setting also disables
+  the separate modifier-correction permission is not explicitly settled. Disabling permission to
+  undo does not itself erase the timing boundaries used by other operations.
+- **Options:** A: the setting removes undo and redo only; corrections keep the seam/turn-start
+  window. B: the setting also removes player corrections (Director-only corrections).
+- **Recommendation:** A, applied provisionally; the setting's text names undo, and corrections are
+  appended adjudications the Director can still rewind.
+- **Blocked until answered:** nothing; A applied provisionally (`correctionWindow` does not read
+  the setting).
+- **Answer:**
+
+## Engineering follow-ups
+
+These entries retain integration context without asking the user for routine engineering decisions.
+No user approval is implied by this classification.
+
+### Q-A-200: How should a hero's Stamina maximum, Recoveries and characteristics reach the table before A02?
+
+- **Status:** engineering follow-up, 2026-09-14; no user answer recorded
+- **Raised by:** A03, 2026-09-14
+- **Where:** `docs/table-spec.md#v001-catch-breath`, `docs/table-spec.md#persistent-values-and-manual-adjustment-entries`,
+  `docs/table-command-spec.md#direct-test-rolls`, `shared/contracts/liveState.ts` (`HeroAdjustableField`),
+  `docs/live-state-initialization.md` section 2.1.
+- **Conflict or gap:** R03 takes a hero's initial Stamina, Recoveries, heroic resource and the maxima from
+  the evaluated baseline, and lists only current values as Director-adjustable. No evaluator exists in
+  this checkout (`derivedBaseline` is null for every character), so `/hero recover` has no recovery
+  value and `/test roll` has no characteristic score to add. A03 records `null` for every
+  baseline-supplied value on first table use, lets the Director set `stamina-maximum` and
+  `recoveries-maximum` through `/adjust` only while the hero has no evaluated build, and requires
+  `/test roll` to carry `value=<score>`, recorded as a supplied fact. Nothing is defaulted to a number.
+- **Options:** A: keep the provisional route until A02 supplies the baseline, then remove the two
+  provisional fields. B: refuse `/hero recover` and `/test roll` for heroes entirely until A02.
+  C: keep the provisional maxima as a permanent Director override alongside the baseline.
+- **Recommendation:** A. It keeps the FreePlay operations testable end to end without inventing values,
+  and the two provisional verbs refuse to run once a baseline exists.
+- **Blocked until answered:** nothing; A applied provisionally and labeled in the slice work log.
+- **Audit disposition:** this is a live temporary A03/A02 integration dependency, not an
+  already-answered duplicate. Evaluated values and first-admission initialization are already
+  required by R03/A02. Retain the provisional bridge as explicit engineering context until A02
+  supplies real baselines, then retire it. This reclassification does not authorize permanent
+  maximum overrides or turn a shipped default into user approval. See
+  [the audit](build/audits/2026-09-14-question-queue-dedup.md).
+
+## Resolved questions
+
+### Q-A-400: Should Take turn from a finished initiative group be a warned departure instead of a refusal?
+
+- **Status:** resolved 2026-09-14 under [existing turn policy](table-spec.md#taking-a-turn); implementation follow-up remains
 - **Raised by:** A04, 2026-09-15
 - **Where:** `docs/table-spec.md#mid-combat-additions-and-regrouping` ("moving a creature with an
   unused turn into a group that has already finished does not make that group eligible to activate
@@ -404,10 +461,14 @@ are the shared lifecycle decisions; the remaining entries are bounded content/sc
   with a warning.
 - **Recommendation:** A. It keeps one active group and one active turn as coherent-state requirements
   the spec lists separately from rule eligibility, and the regroup path is one operation away.
-- **Blocked until answered:** nothing; A applied.
-- **Answer:**
-
-## Resolved questions
+- **Blocked until answered:** no new ruling needed; A04 must reconcile the implementation with the
+  existing policy and verify the repair.
+- **Resolution from existing decisions:** finished-group automatic eligibility and spent-entry
+  history remain intact. Deliberate rule departures use recorded warnings, not a new permission gate
+  or required regroup workaround. Access/session boundaries and coherent sequencing still apply:
+  this does not allow competing ordinary active turns, reset group completion, or erase spent state.
+  The question bundled those separate concerns; option B is not blanket approval to ignore them.
+  See [the evidence review](build/audits/2026-09-14-question-queue-dedup.md).
 
 ### Q-R-1: Does a natural 19 or 20 stay tier 3 under a double bane?
 
@@ -627,37 +688,3 @@ are the shared lifecycle decisions; the remaining entries are bounded content/sc
 - **Recommendation:** A. It matches the ruling and keeps the v0.01 UI honest.
 - **Blocked until answered:** nothing; A is applied in A03 unless the user objects.
 - **Answer:** No, do not remove. The code stays dormant: no UI control, not in the registry, every foe visible in v0.01. (User answered "no" to a remove-or-keep question; read as "do not remove". Correct here if intended otherwise.)
-
-### Q-A-600: May a player undo their own Take turn?
-
-- **Status:** open
-- **Raised by:** A06, 2026-09-14
-- **Where:** `docs/table-spec.md#undo-permissions-and-proposed-campaign-control` (turn start as the
-  outer limit; undoing End turn is settled), `docs/table-spec.md#taking-a-turn`.
-- **Conflict or gap:** The spec makes turn start the outer limit of the player window and settles
-  undoing End turn, but does not say whether the player's own Take turn (which starts that turn and
-  dispatches its turn-start work) is inside or outside the window.
-- **Options:** A: Take turn is the limit itself; only the Director rewinds it. B: the player may undo
-  their own Take turn when nothing intervened, reopening the choice of who acts.
-- **Recommendation:** A, applied provisionally. "Turn start" reads most naturally as the boundary,
-  and the Director already rewinds it sequentially.
-- **Blocked until answered:** nothing; A applied provisionally in `playerWindow`.
-- **Answer:**
-
-### Q-A-601: Does Enable user undo also remove the acting player's post-roll correction window?
-
-- **Status:** open
-- **Raised by:** A06, 2026-09-14
-- **Where:** `docs/table-spec.md#undo-permissions-and-proposed-campaign-control` ("disabling it blocks
-  ordinary player undo") and `docs/table-spec.md#director-edits-to-inline-results` ("the acting player
-  may add edges/banes ... in the same window as their gameplay undo").
-- **Conflict or gap:** The correction window is defined as the undo window, but the setting is
-  described as removing undo only. With the setting off, the player has no undo window; whether they
-  keep the correction window is not stated.
-- **Options:** A: the setting removes undo and redo only; corrections keep the seam/turn-start
-  window. B: the setting also removes player corrections (Director-only corrections).
-- **Recommendation:** A, applied provisionally; the setting's text names undo, and corrections are
-  appended adjudications the Director can still rewind.
-- **Blocked until answered:** nothing; A applied provisionally (`correctionWindow` does not read
-  the setting).
-- **Answer:**

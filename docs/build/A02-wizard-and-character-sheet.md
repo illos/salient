@@ -103,3 +103,11 @@ implemented as written, stop and raise `Q-A-n`; do not adjust the formula.
 ## Work log
 
 _Empty._
+
+### Question audit follow-up: Q-A-200
+
+The temporary A03 baseline bridge is [engineering follow-up](../rules-questions-for-user.md#q-a-200-how-should-a-heros-stamina-maximum-recoveries-and-characteristics-reach-the-table-before-a02),
+not a new user decision. Deliver the evaluated baseline and sourced first-admission values already
+required here, then retire the provisional maximum-entry fields and supplied-score dependency for
+evaluated heroes. Verify the shared table operations use the recorded baseline. This does not
+establish permanent maximum overrides or claim the integration is already complete.
