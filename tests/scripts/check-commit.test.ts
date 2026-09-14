@@ -1,6 +1,10 @@
 // SPDX-License-Identifier: GPL-3.0-only
 // Expected outcomes follow the rules written in docs/build/README.md#commit-format.
 import { describe, expect, test } from 'vitest';
+import { execFileSync, spawnSync } from 'node:child_process';
+import { copyFileSync, mkdirSync, mkdtempSync, rmSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 import {
   isCodePath,
   sliceIdsFrom,
@@ -43,6 +47,59 @@ const without = (prefix: string) =>
     .join('\n');
 
 describe('check-commit', () => {
+  test('range checks exempt only fixed pre-contract history; explicit and future checks remain strict', () => {
+    const scratch = mkdtempSync(join(tmpdir(), 'salient-commit-history-'));
+    const adoption = 'd74ecf9d42e8e3d4f9cfc7743133785f41ad1524';
+    const legacy = '517ffc4555551f24dc8d4b4a8a2fbacdac0ab4ff';
+    const source = execFileSync('git', ['rev-parse', '--show-toplevel'], {
+      encoding: 'utf8',
+    }).trim();
+    const git = (...args: string[]) =>
+      execFileSync('git', args, { cwd: scratch, encoding: 'utf8' }).trim();
+    try {
+      // Borrow immutable objects in a disposable repository; never change this checkout's refs/index.
+      execFileSync('git', ['clone', '--shared', '--no-checkout', '--quiet', source, scratch]);
+      mkdirSync(join(scratch, 'scripts/lib'), { recursive: true });
+      for (const file of ['check-commit.ts', 'lib/markdown.ts'])
+        copyFileSync(
+          new URL(`../../scripts/${file}`, import.meta.url),
+          join(scratch, 'scripts', file),
+        );
+      const check = (...args: string[]) =>
+        spawnSync(process.execPath, ['scripts/check-commit.ts', ...args], {
+          cwd: scratch,
+          encoding: 'utf8',
+        });
+      const historic = check('--range', `${legacy}~2..${adoption}`);
+      expect(historic.status, historic.stderr).toBe(0);
+      expect(historic.stdout).toContain(`${adoption.slice(0, 12)}: commit message ok.`);
+      expect(historic.stdout).not.toContain(`${legacy.slice(0, 12)}: commit message ok.`);
+      expect(check('--rev', legacy).status).toBe(1);
+
+      git('read-tree', adoption);
+      git('update-index', '--force-remove', 'docs/build/README.md');
+      const tree = git('write-tree');
+      const malformed = git(
+        '-c',
+        'user.name=Test',
+        '-c',
+        'user.email=test@example.invalid',
+        'commit-tree',
+        tree,
+        '-p',
+        adoption,
+        '-m',
+        'Future malformed message',
+      );
+      const future = check('--range', `${adoption}..${malformed}`);
+      expect(future.status).toBe(1);
+      expect(future.stderr).toContain(`${malformed.slice(0, 12)}: commit message rejected`);
+      expect(future.stderr).toContain('Missing "Slice:"');
+    } finally {
+      rmSync(scratch, { recursive: true, force: true });
+    }
+  });
+
   test('accepts the README example shape, including an em-dash anchor', () => {
     expect(validateMessage(good, context())).toEqual([]);
   });

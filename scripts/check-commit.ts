@@ -10,6 +10,8 @@
  * With --merge (the lead's pre-merge check), `Reviewed-By:` is required for code commits.
  * `Rules-Review: required (pending)` is accepted without --merge (the slice awaits its rules review)
  * and rejected with it.
+ * Range checks exclude the fixed history before the commit-format contract was adopted.
+ * Explicit --rev and staged-message checks remain strict.
  * Spec anchors resolve against the staged tree for the hook, or the commit's own tree for --rev/--range.
  */
 import { execFileSync } from 'node:child_process';
@@ -33,6 +35,9 @@ const TRAILERS = ['Slice', 'Spec', 'Verified', 'Reviewed-By', 'Rules-Review', 'C
 const VERDICT = /^\S.*\((pass|changes required|decision required), \d{4}-\d{2}-\d{2}\)$/;
 
 const root = fileURLToPath(new URL('../', import.meta.url));
+// Parent of d74ecf9, which introduced docs/build/README.md and the commit-format contract.
+// Exclude only this immutable ancestor set, never commits that merely remove the contract file.
+const PRE_FORMAT_HISTORY = '517ffc4555551f24dc8d4b4a8a2fbacdac0ab4ff';
 
 /** The repository state a message is validated against. */
 export interface CommitContext {
@@ -229,8 +234,11 @@ if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.ur
   if (rangeIndex !== -1) {
     const range = args[rangeIndex + 1];
     if (!range) throw new Error('--range needs <a>..<b>.');
-    const commits = git(['rev-list', range]).split('\n').filter(Boolean);
-    if (!commits.length) console.log(`No commits in ${range}.`);
+    const commits = git(['rev-list', range, `^${PRE_FORMAT_HISTORY}`])
+      .split('\n')
+      .filter(Boolean);
+    console.log(`Checking ${range}; excluding history through pre-format ${PRE_FORMAT_HISTORY}.`);
+    if (!commits.length) console.log(`No post-adoption commits in ${range}.`);
     for (const commit of commits) {
       const message = git(['log', '-1', '--format=%B', commit]);
       ok =

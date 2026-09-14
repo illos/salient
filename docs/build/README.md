@@ -120,6 +120,12 @@ The checker also enforces two conventions the example above shows but the prose 
 summary is lower case and does not end with a period, and every non-`docs`/`chore` type needs
 `Verified:` even when only documentation paths are touched.
 
+CI history boundary (2026-09-14): `--range` excludes commit
+`517ffc4555551f24dc8d4b4a8a2fbacdac0ab4ff` and its ancestors, which predate adoption of this
+contract in `d74ecf9`. This preserves the old mockup commits during the first push without rewriting
+history. Adoption and every later/nonhistorical commit remain checked, including commits that remove
+this document. Hooks and explicit `--rev` checks stay strict; missing boundary history is an error.
+
 Spec documents are updated in the same commit as the code they describe when the update is an
 implementation note. Product-decision changes to a spec are separate `docs` commits that cite the
 user-questions entry they resolve.
