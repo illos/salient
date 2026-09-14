@@ -34,7 +34,7 @@ A08 design tokens (independent) ────────────────
 | R05 | [Conditions, clock and Malice common lifecycle](R05-conditions-clock-malice.md) | R | None | required | Committed | rules/R05-research | 2026-09-14 | a3f9e93 |
 | A01 | [Shared operations, command registry and engine integration](A01-shared-operations-engine.md) | A | S02, S00 (soft) | not required | Committed (review deferred to user audit thread; browser/live-CLI paths not exercised) | app/A01-impl | 2026-09-14 | fdb3e7d, 7849251, ebeac11, 7bcf86d |
 | A02 | [Minimal wizard, admission review and character sheet](A02-wizard-and-character-sheet.md) | A | R01, R02, R03, S01, A01 | required | Not started | | | |
-| A03 | [Table shell and FreePlay basics](A03-table-shell-freeplay.md) | A | A01, S01 | required | In progress | app/A03-impl | 2026-09-14 | |
+| A03 | [Table shell and FreePlay basics](A03-table-shell-freeplay.md) | A | A01, S01 | required | Committed (review deferred to user audit thread; browser test not run; heroes pane provisional pending A02, see Q-A-200) | app/A03-impl | 2026-09-14 | ae9d45a, dc9fbc8, 1dce91b |
 | A04 | [Combat opening, turns and clock](A04-combat-opening-turns-clock.md) | A | A03, R05 | required | Not started | | | |
 | A05 | [Attacks, damage, costs and common actions](A05-attacks-damage-costs.md) | A | A04, R04 | required | Not started | | | |
 | A06 | [History: undo, redo and corrections](A06-history-undo-corrections.md) | A | A04 (A05 for correction cards) | required | Not started | | | |
