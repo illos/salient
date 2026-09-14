@@ -33,6 +33,8 @@ import type { JournalScope } from './journal';
 import { tableOperations } from './tableOperations';
 import { foeOperations } from './foeOperations';
 import { combatOperations } from './combatOperations';
+import { historyOperations } from './history';
+import { currentEncounter } from './encounters';
 import { closeInteraction, respondToInteraction } from './interactions';
 
 export type Role = 'director' | 'player' | 'observer';
@@ -475,6 +477,7 @@ export const operations: OperationDefinition[] = [
   ...tableOperations,
   ...foeOperations,
   ...combatOperations,
+  ...historyOperations,
 ];
 
 export function findOperation(id: string): OperationDefinition | undefined {
@@ -540,9 +543,12 @@ export async function run(
     respondsTo,
   });
   if ('delegated' in outcome) return outcome.delegated;
+  // A06: user events carry the session's current (unarchived) encounter so history can place them.
+  const encounter = context.session ? await currentEncounter(ctx, context.session) : null;
   const eventId = await appendEvent(ctx, {
     campaignId: context.campaign._id,
     sessionId: context.session?._id ?? null,
+    encounterId: encounter?._id ?? null,
     origin: 'user',
     actor: context.user,
     commandId: envelope.commandId,

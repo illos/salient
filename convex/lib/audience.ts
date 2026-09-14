@@ -9,6 +9,8 @@ export const DEFAULT_SETTINGS = {
   showMalice: false,
   showTestDifficulty: false,
   healthDisplay: 'bar' as const,
+  /** A06: player undo is on for new campaigns (confirmed 2026-09-11); off keeps Director rewind/redo. */
+  enableUserUndo: true,
 };
 export const settingsOf = (campaign: Doc<'campaigns'>) => ({
   ...DEFAULT_SETTINGS,

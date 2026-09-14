@@ -3,6 +3,7 @@ import { v } from 'convex/values';
 import { characterTables } from './characterTables';
 import { contentTables } from './contentTables';
 import { foeTables } from './foeTables';
+import { historyTables } from './historyTables';
 import { dieResult, encounterTables, eventDisposition, eventOrigin } from './encounterTables';
 import { initiativeTables } from './initiativeTables';
 
@@ -12,6 +13,7 @@ export default defineSchema({
   ...foeTables,
   ...encounterTables,
   ...initiativeTables,
+  ...historyTables,
   users: defineTable({ authId: v.string(), displayName: v.string() }).index('by_authId', [
     'authId',
   ]),
@@ -27,6 +29,8 @@ export default defineSchema({
         showMalice: v.boolean(),
         showTestDifficulty: v.optional(v.boolean()),
         healthDisplay: v.union(v.literal('bar'), v.literal('numerical'), v.literal('winded')),
+        /** A06 "Enable user undo" (docs/table-spec.md#undo-permissions-and-proposed-campaign-control); absent means on. */
+        enableUserUndo: v.optional(v.boolean()),
       }),
     ),
     /** The shared Malice pool; absent means no pool has been recorded yet (read as 0). */

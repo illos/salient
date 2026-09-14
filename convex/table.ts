@@ -54,6 +54,7 @@ export const roster = query({
         showMalice: v.boolean(),
         showTestDifficulty: v.boolean(),
         healthDisplay: v.union(v.literal('bar'), v.literal('numerical'), v.literal('winded')),
+        enableUserUndo: v.boolean(),
       }),
     ),
     healthDisplay: v.union(v.literal('bar'), v.literal('numerical'), v.literal('winded')),

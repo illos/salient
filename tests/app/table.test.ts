@@ -405,6 +405,7 @@ describe('A03 table operations', () => {
       showMalice: false,
       showTestDifficulty: false,
       healthDisplay: 'winded',
+      enableUserUndo: true,
     });
     expect(payload.settings).toBeNull();
     // Slain marker at zero, and the Manual adjustment entry with before/after.
