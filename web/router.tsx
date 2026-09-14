@@ -16,6 +16,7 @@ import type { Id } from '../convex/_generated/dataModel';
 import { authClient } from './auth-client';
 import { CampaignPage, CampaignsPage, JoinPage } from './campaigns';
 import { CharacterPage, CharactersPage } from './characters';
+import { TablePage } from './table';
 import { Button } from './components/ui/button';
 import { Card, CardContent } from './components/ui/card';
 import { Input } from './components/ui/input';
@@ -340,6 +341,11 @@ const campaignRoute = createRoute({
     <CampaignPage campaignId={campaignRoute.useParams().campaignId as Id<'campaigns'>} />
   ),
 });
+const tableRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/campaigns/$campaignId/table',
+  component: () => <TablePage campaignId={tableRoute.useParams().campaignId as Id<'campaigns'>} />,
+});
 const joinRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/join/$shareCode',
@@ -362,6 +368,7 @@ export const router = createRouter({
     loginRoute,
     homeRoute,
     campaignRoute,
+    tableRoute,
     joinRoute,
     charactersRoute,
     characterRoute,

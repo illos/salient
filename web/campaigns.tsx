@@ -285,6 +285,15 @@ export function CampaignPage({ campaignId }: { campaignId: Id<'campaigns'> }) {
                 <h2>The table</h2>
                 <span className="eyebrow mb-0">{active?.status ?? 'No active session'}</span>
               </div>
+              {active && (
+                <Link
+                  to="/campaigns/$campaignId/table"
+                  params={{ campaignId }}
+                  className="text-sm font-bold"
+                >
+                  Open the table →
+                </Link>
+              )}
               {active ? (
                 <SessionControls session={active} director={director} members={campaign.members} />
               ) : director ? (

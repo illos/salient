@@ -36,9 +36,8 @@ function DirectorFoe({
   campaignId: Id<'campaigns'>;
   foe: { id: Id<'foes'>; name: string; visible: boolean; stamina: number; maxStamina: number };
 }) {
-  const setVisible = useMutation(api.foes.setVisible);
+  // Foe hiding is deferred (Q-REC-1): foes.setVisible stays in code, dormant, with no control here.
   const remove = useMutation(api.foes.remove);
-  const visibility = useCommand();
   const deletion = useCommand();
   const [showSource, setShowSource] = useState(false);
   return (
@@ -48,26 +47,8 @@ function DirectorFoe({
         <span className="text-sm">
           {foe.stamina} / {foe.maxStamina} Stamina
         </span>
-        <span className="caps w-full text-muted-foreground">
-          {foe.visible ? 'Visible to players' : 'Hidden from players'}
-        </span>
       </div>
       <div className="flex flex-wrap items-center gap-2">
-        <Button
-          variant="outline"
-          size="sm"
-          type="button"
-          disabled={visibility.pending || deletion.pending}
-          onClick={() =>
-            void visibility.run(
-              commandId =>
-                setVisible({ campaignId, foeId: foe.id, visible: !foe.visible, commandId }),
-              JSON.stringify(['foes.setVisible', campaignId, foe.id, !foe.visible]),
-            )
-          }
-        >
-          {foe.visible ? 'Hide' : 'Show'}
-        </Button>
         <Button
           variant="outline"
           size="sm"
@@ -80,7 +61,7 @@ function DirectorFoe({
           variant="outline"
           size="sm"
           type="button"
-          disabled={visibility.pending || deletion.pending}
+          disabled={deletion.pending}
           onClick={() =>
             void deletion.run(
               commandId => remove({ campaignId, foeId: foe.id, commandId }),
@@ -91,46 +72,18 @@ function DirectorFoe({
           Remove
         </Button>
       </div>
-      <ErrorNotice error={visibility.error} />
       <ErrorNotice error={deletion.error} />
       {showSource && <FoeSource campaignId={campaignId} foeId={foe.id} />}
     </div>
   );
 }
-function AddFoe({ campaignId, addVisible }: { campaignId: Id<'campaigns'>; addVisible: boolean }) {
+function AddFoe({ campaignId }: { campaignId: Id<'campaigns'> }) {
+  // foes.setDefaultVisible stays in code, dormant (Q-REC-1): every loaded foe is shown to all roles.
   const source = useQuery(api.foes.catalog, { campaignId });
   const add = useMutation(api.foes.add);
-  const setDefaultVisible = useMutation(api.foes.setDefaultVisible);
   const addition = useCommand();
-  const defaults = useCommand();
-  const [pendingVisibility, setPendingVisibility] = useState<boolean | null>(null);
-  async function changeDefault(visible: boolean) {
-    // Reflect this control's pending choice immediately; roster data remains server-owned.
-    setPendingVisibility(visible);
-    try {
-      await defaults.run(
-        commandId => setDefaultVisible({ campaignId, visible, commandId }),
-        JSON.stringify(['foes.setDefaultVisible', campaignId, visible]),
-      );
-    } finally {
-      setPendingVisibility(null);
-    }
-  }
   return (
     <div className="flex flex-col gap-3">
-      <label className="flex items-center gap-2 text-sm">
-        <input
-          type="checkbox"
-          className="size-4 accent-secondary"
-          checked={pendingVisibility ?? addVisible}
-          disabled={pendingVisibility !== null || defaults.pending || addition.pending}
-          onChange={event => void changeDefault(event.target.checked)}
-        />
-        Show newly added foes to players
-      </label>
-      <p className="text-sm text-muted-foreground">
-        This campaign remembers the setting. Each foe’s visibility can also be changed individually.
-      </p>
       {source ? (
         <>
           <div className="flex items-center justify-between gap-3 border border-rule-strong bg-card px-3 py-2">
@@ -138,7 +91,7 @@ function AddFoe({ campaignId, addVisible }: { campaignId: Id<'campaigns'>; addVi
             <Button
               type="button"
               size="sm"
-              disabled={addition.pending || defaults.pending}
+              disabled={addition.pending}
               onClick={() =>
                 void addition.run(
                   commandId => add({ campaignId, definitionId: source.definitionId, commandId }),
@@ -157,7 +110,6 @@ function AddFoe({ campaignId, addVisible }: { campaignId: Id<'campaigns'>; addVi
         </p>
       )}
       <ErrorNotice error={addition.error} />
-      <ErrorNotice error={defaults.error} />
     </div>
   );
 }
@@ -180,12 +132,10 @@ export function FoesPanel({
         </p>
       ) : (
         <>
-          {director && roster.director && (
-            <AddFoe campaignId={campaignId} addVisible={roster.addVisible ?? false} />
-          )}
+          {director && roster.director && <AddFoe campaignId={campaignId} />}
           {roster.rows.length === 0 && (
             <p className="text-sm text-muted-foreground">
-              {roster.director ? 'No foes loaded yet.' : 'No foes are visible.'}
+              {roster.director ? 'No foes loaded yet.' : 'No foes are loaded.'}
             </p>
           )}
           {roster.rows.map(foe =>
