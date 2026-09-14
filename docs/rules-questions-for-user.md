@@ -226,26 +226,6 @@ are the shared lifecycle decisions; the remaining entries are bounded content/sc
 - **Blocked until answered:** this optional workflow; higher-level build evaluation can proceed.
 - **Answer:**
 
-### Q-R-51: How is a fractional average of Victories handled for the combat-start Malice grant?
-
-- **Status:** open
-- **Raised by:** R05, 2026-09-14
-- **Where:** `docs/conditions-and-clock.md` section 3.3; `docs/fury-goblin-automation.md#malice-lifecycle`
-  (already listed as remaining bounded work). Compendium read:
-  `vendor/steel-compendium/en/unified/md/rule/monster/malice.md` (Earning Malice),
-  `vendor/steel-compendium/en/unified/md/rule/general/always-round-down.md`.
-- **Conflict or gap:** "At the start of combat, you gain Malice equal to the average number of
-  Victories per hero." The example uses equal Victories. Always Round Down says "Whenever you divide an
-  odd number in half and it results in a decimal, round the result down", which addresses halving, not
-  averaging over three or more heroes (for example Victories 1, 1, 2 give 4/3).
-- **Options:** A: round the average down (extend the halving rule's direction to any division).
-  B: round to the nearest whole number. C: keep the exact fraction in the pool.
-- **Recommendation:** A, labeled an interpretation: it is the only rounding direction the source states
-  anywhere, and Malice is spent in whole numbers. Log the unrounded average with the grant.
-- **Blocked until answered:** nothing; the v0.01 journey has one hero, so no fraction arises. Default A
-  applied provisionally.
-- **Answer:**
-
 ### Q-R-52: Does a creature added to combat mid-round take a turn in the current round?
 
 - **Status:** open
@@ -496,6 +476,27 @@ are the shared lifecycle decisions; the remaining entries are bounded content/sc
 - **Answer:**
 
 ## Resolved questions
+
+### Q-R-51: How is a fractional average of Victories handled for the combat-start Malice grant?
+
+- **Status:** resolved 2026-09-14; [recorded decision](conditions-and-clock.md#33-manual-parts-in-v001)
+- **Raised by:** R05, 2026-09-14
+- **Where:** `docs/conditions-and-clock.md` section 3.3; `docs/fury-goblin-automation.md#malice-lifecycle`
+  (already listed as remaining bounded work). Compendium read:
+  `vendor/steel-compendium/en/unified/md/rule/monster/malice.md` (Earning Malice),
+  `vendor/steel-compendium/en/unified/md/rule/general/always-round-down.md`.
+- **Conflict or gap:** "At the start of combat, you gain Malice equal to the average number of
+  Victories per hero." The example uses equal Victories. Always Round Down says "Whenever you divide an
+  odd number in half and it results in a decimal, round the result down", which addresses halving, not
+  averaging over three or more heroes (for example Victories 1, 1, 2 give 4/3).
+- **Options:** A: round the average down (extend the halving rule's direction to any division).
+  B: round to the nearest whole number. C: keep the exact fraction in the pool.
+- **Recommendation:** A, labeled an interpretation: it is the only rounding direction the source states
+  anywhere, and Malice is spent in whole numbers. Log the unrounded average with the grant.
+- **Blocked until answered:** nothing; option A is now confirmed.
+- **Answer:** Yes. Round fractional starting Malice down. The user also confirmed carrying the
+  convention of rounding down unless otherwise specified; see the
+  [standing rounding convention](rules-adaptation-principles.md#confirmed-rounding-convention).
 
 ### Q-R-50: Which heroes count as "in the battle" for the Malice round-start gain in v0.01?
 

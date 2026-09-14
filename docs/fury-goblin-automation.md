@@ -149,10 +149,15 @@ its 2-Malice debit leaves 0 under the required cost operation. With the hero sti
 alive, round two adds 1 + 2 = 3. A normal encounter end clears the remaining 3. This demonstrates
 resource arithmetic without changing the hero's Victories or claiming full ability-effect automation.
 
-**Remaining bounded work:** pin the startup grant's placement within the source-specific opening
-sequence; verify fractional average-Victories handling before automating fractional cases. The located [Always Round Down](../vendor/steel-compendium/en/unified/md/rule/general/always-round-down.md)
-text explicitly discusses halving, so it alone does not settle an arbitrary average. The one-hero
-fixture has no fractional average. Implementation and persisted-state verification remain owed.
+**User decision, 2026-09-14 (Q-R-51):** round fractional average Victories down for the combat-start
+Malice grant, following the confirmed convention of rounding down unless a source specifies otherwise.
+For Victories 1, 1 and 2, record the unrounded average 4/3 and grant 1 Malice. See
+[the contract](conditions-and-clock.md#33-manual-parts-in-v001) and
+[the rounding convention](rules-adaptation-principles.md#confirmed-rounding-convention).
+
+Startup placement is recorded in [the common lifecycle contract](conditions-and-clock.md#32-what-common-lifecycle-covers-ruling).
+Implementation and persisted-state verification remain build work; the one-hero example above does
+not exercise a fractional average.
 
 ## Hero dying
 

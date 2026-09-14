@@ -362,11 +362,13 @@ delay the source's "start of combat" grant past the point where Void could reset
   have acted. This supersedes the provisional count fixed at encounter setup. Hero death remains
   manually adjudicated in v0.01; zero Stamina alone does not establish death. Log the actual hero count
   used with the grant; removal does not retroactively change earlier grants.
-- **Fractional average. Open, Q-R-51:** the Always Round Down rule speaks of halving
-  (`vendor/steel-compendium/en/unified/md/rule/general/always-round-down.md`: "Whenever you divide an odd
-  number in half and it results in a decimal, round the result down"), not of averaging. Provisional
-  default: round the average down and log the unrounded value. The v0.01 journey has one hero, so no
-  fraction arises.
+- **Fractional average. User decision, 2026-09-14 (Q-R-51):** round the combat-start average
+  Victories down to a whole number and log the unrounded average alongside the grant. For heroes with
+  1, 1 and 2 Victories, the average is 4/3 and the grant is 1 Malice. The user confirmed the
+  [round-down convention](rules-adaptation-principles.md#confirmed-rounding-convention) unless a
+  source specifies otherwise. The pinned Always Round Down passage explicitly covers halving;
+  applying that convention to this average is now a confirmed user ruling, replacing the provisional
+  interpretation.
 - **Victories** are read, never changed, by the lifecycle (`docs/fury-goblin-automation.md#malice-lifecycle`).
 
 ## 4. Surprise and the starting side

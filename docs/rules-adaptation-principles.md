@@ -74,6 +74,15 @@ and recorded state. Do not alter formulas, add artificial resource grants or sil
 to make a demonstration work. If needed, the Director explicitly adjusts numbers inside the encounter
 through recorded operations. Keep those manual adjustments distinguishable from source-earned resources.
 
+### Confirmed rounding convention
+
+Confirmed 2026-09-14 while answering Q-R-51: when a game calculation requires rounding, round down
+unless its source specifies otherwise. The user explicitly adopted this as the app's convention,
+including fractional average Victories for starting Malice. Preserve source-specific exceptions.
+The pinned [Always Round Down](../vendor/steel-compendium/en/unified/md/rule/general/always-round-down.md)
+passage explicitly discusses halving; applying the convention to other calculations is the user's
+confirmed direction, rather than a broader verbatim claim about that passage.
+
 ## Show the source and the work
 
 Every action's game-log entry must make its complete, verbatim source ability/action text available to
