@@ -158,13 +158,14 @@ describe('A04 combat opening, turns and clock', () => {
       (await current(observer.client, campaignId))!.participants.map(p => p.controlled),
     ).toEqual([false, false]);
     // Before OK nothing is locked: the party roster and the character can still change.
+    const thornRevision = (await t.run(ctx => ctx.db.get(thornId)))!.revision;
     await player.client.mutation(api.characters.save, {
       commandId: cid('save'),
       characterId: thornId,
-      expectedRevision: 1,
+      expectedRevision: thornRevision,
       authored: { name: 'Thorn', appearance: 'scarred', biography: '', notes: '' },
     });
-    expect((await t.run(ctx => ctx.db.get(thornId)))!.revision).toBe(2);
+    expect((await t.run(ctx => ctx.db.get(thornId)))!.revision).toBe(thornRevision + 1);
     // The generic card close is refused; Cancel is the discard path.
     await expect(
       director.client.mutation(api.interactions.close, {
@@ -972,9 +973,10 @@ describe('A04 combat opening, turns and clock', () => {
     expect(saveFiring.description).toContain('Q-TS-1');
     expect((saveFiring.payload as { phase: string }).phase).toBe('saves');
     expect((await t.run(ctx => ctx.db.query('rolls').take(10))).length).toBe(rollsBefore);
+    // The unsupported save changed no toggle: the admitted hero's conditions stay all off (A02).
     expect(
-      (await t.run(ctx => ctx.db.get(fixture.thornId)))!.liveState?.conditions ?? null,
-    ).toBeNull();
+      Object.values((await t.run(ctx => ctx.db.get(fixture.thornId)))!.liveState!.conditions),
+    ).toEqual(Array(9).fill(false));
     // Round 2 start: Malice (enqueueSeq 2) first, then third, first, second (enqueue order 4, 5, 6).
     await submit(director.client, campaignId, `@{foe:${goblin}} /turn take`, cid('take'));
     await submit(director.client, campaignId, '/turn end', cid('end'));

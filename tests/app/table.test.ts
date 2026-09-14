@@ -124,9 +124,9 @@ describe('A03 table operations', () => {
       after: true,
     });
     const rows = await changesFor(t, on.eventId);
-    // First table use initializes the live record (one row, whole liveState), then the toggle.
-    expect(rows.map(r => r.path)).toEqual(['liveState', 'liveState.conditions.prone']);
-    expect(rows[1]).toMatchObject({
+    // Admission initialized the live record (A02); the toggle journals only the changed leaf.
+    expect(rows.map(r => r.path)).toEqual(['liveState.conditions.prone']);
+    expect(rows[0]).toMatchObject({
       entityTable: 'characters',
       entityId: thornId,
       before: { present: true, value: false },
@@ -134,7 +134,8 @@ describe('A03 table operations', () => {
     });
     const stored = await t.run(ctx => ctx.db.get(thornId));
     expect(stored!.liveState!.conditions.prone).toBe(true);
-    expect(stored!.liveState!.stamina).toBeNull();
+    // R03 2.1.1: first admission sets current Stamina to the baseline maximum (30 for the fixture).
+    expect(stored!.liveState!.stamina).toBe(30);
     const off = await submit(
       player.client,
       campaignId,
@@ -187,31 +188,10 @@ describe('A03 table operations', () => {
     const t = backend();
     const { player, campaignId, thornId } = await table(t);
     await t.mutation(internal.content.reseed, {});
-    // Maximum 30 and Recoveries 10 supplied through the Director's provisional adjustments would be
-    // the app route; the fixture writes them directly to keep the arithmetic case isolated.
-    const live = {
-      stamina: 22,
-      temporaryStamina: 5,
-      recoveries: 10,
-      heroicResource: { name: null, current: null },
-      surges: 0,
-      victories: 0,
-      xp: 0,
-      conditions: {
-        bleeding: false,
-        dazed: false,
-        frightened: false,
-        grabbed: false,
-        prone: false,
-        restrained: false,
-        slowed: false,
-        taunted: false,
-        weakened: false,
-      },
-      staminaMaximum: 30,
-      recoveriesMaximum: 10,
-      origin: { kind: 'first-table-use-without-baseline' as const, initializedAt: 1 },
-    };
+    // Maximum 30 and Recoveries 10 come from the admitted fixture build (R02 4.1); the current
+    // values are written directly to keep the arithmetic case isolated.
+    const admitted = (await t.run(ctx => ctx.db.get(thornId)))!.liveState!;
+    const live = { ...admitted, stamina: 22, temporaryStamina: 5, recoveries: 10 };
     await t.run(ctx => ctx.db.patch(thornId, { liveState: live }));
     // 10.9: Stamina 22 + 10 = 32 > 30 → 30, healed 8, capApplied (Q-R-3); Recoveries 10 → 9.
     const capped = await submit(
@@ -275,12 +255,7 @@ describe('A03 table operations', () => {
       commandId: 'pause-000001',
     });
     await expect(
-      submit(
-        player.client,
-        campaignId,
-        '@Thorn /test roll characteristic=A value=1',
-        'test-p-0001',
-      ),
+      submit(player.client, campaignId, '@Thorn /test roll characteristic=A', 'test-p-0001'),
     ).rejects.toThrow('paused');
     await expect(
       director.client.mutation(api.foes.add, {
@@ -298,14 +273,15 @@ describe('A03 table operations', () => {
     const roll = await submit(
       player.client,
       campaignId,
-      '@Thorn /test roll characteristic=A value=1 skill="Climb" edges=1 difficulty=medium',
+      '@Thorn /test roll characteristic=A skill="Climb" edges=1 difficulty=medium',
       'test-r-0001',
     );
     const event = (await storedEvents(t, campaignId)).find(e => e._id === roll.eventId)!;
     const [a, b] = event.dice!;
     const natural = a!.value + b!.value;
     // R04 section 5: total = natural + characteristic + skill (+2) + edge (+2); tier per 1.5/1.6.
-    const total = natural + 1 + 2 + 2;
+    // The fixture's Agility is 2 (R02 4.1, "You start with a Might of 2 and an Agility of 2").
+    const total = natural + 2 + 2 + 2;
     const expectedTier = natural >= 19 ? 3 : total <= 11 ? 1 : total <= 16 ? 2 : 3;
     const expectedOutcome =
       natural >= 19
@@ -315,7 +291,7 @@ describe('A03 table operations', () => {
     expect(result).toMatchObject({
       naturalRoll: natural,
       characteristic: 'A',
-      characteristicValue: 1,
+      characteristicValue: 2,
       skillBonus: 2,
       total,
       tier: expectedTier,
@@ -328,7 +304,7 @@ describe('A03 table operations', () => {
     const open = await submit(
       player.client,
       campaignId,
-      '@Thorn /test roll characteristic=M value=2 banes=2',
+      '@Thorn /test roll characteristic=M banes=2',
       'test-r-0002',
     );
     const openEvent = (await storedEvents(t, campaignId)).find(e => e._id === open.eventId)!;
@@ -337,9 +313,19 @@ describe('A03 table operations', () => {
     expect(openResult.outcome).toBeUndefined();
     expect(openResult.edgeBane).toMatchObject({ net: -2, modifier: 0, tierShift: -1 });
     expect(openEvent.description).toContain('the Director interprets');
+    // The score comes from the evaluated build: a supplied value that disagrees is refused.
+    expect(
+      (event.payload as { data: { characteristicValueSource: string } }).data
+        .characteristicValueSource,
+    ).toBe('baseline');
     await expect(
-      submit(player.client, campaignId, '@Thorn /test roll characteristic=M', 'test-r-0003'),
-    ).rejects.toThrow('value=');
+      submit(
+        player.client,
+        campaignId,
+        '@Thorn /test roll characteristic=M value=1',
+        'test-r-0003',
+      ),
+    ).rejects.toThrow('omit value=');
   });
 
   test('acceptance 6 and 7: health display changes the player payload; every loaded foe appears', async () => {

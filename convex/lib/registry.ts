@@ -36,6 +36,7 @@ import { combatOperations } from './combatOperations';
 import { historyOperations } from './history';
 import { currentEncounter } from './encounters';
 import { abilityOperations } from './abilityOperations';
+import { characterOperations } from './characterOperations';
 import { closeInteraction, respondToInteraction } from './interactions';
 
 export type Role = 'director' | 'player' | 'observer';
@@ -480,6 +481,7 @@ export const operations: OperationDefinition[] = [
   ...combatOperations,
   ...historyOperations,
   ...abilityOperations,
+  ...characterOperations,
 ];
 
 export function findOperation(id: string): OperationDefinition | undefined {

@@ -13,7 +13,7 @@ import { rollDice } from '../../../convex/lib/dice';
 import { appendEvent } from '../../../convex/lib/events';
 import { journalPatch } from '../../../convex/lib/journal';
 import { operations, type OperationDefinition } from '../../../convex/lib/registry';
-import { initialHeroLive } from '../../../convex/lib/tableOperations';
+import { requireHeroLive } from '../../../convex/lib/characterBuild';
 
 export const FIXTURE_STRIKE_ID = 'fixture.strike';
 
@@ -42,7 +42,7 @@ const fixtureStrike: OperationDefinition = {
     const hero = await ctx.db.get(actor!.id as Id<'characters'>);
     if (!hero || hero.campaignId !== context.campaign._id)
       throw new ConvexError('That hero is not at this table.');
-    const live = hero.liveState ?? initialHeroLive(Date.now());
+    const live = requireHeroLive(hero);
     const cost = Number(args.cost);
     const damage = Number(args.damage);
     const resource = live.heroicResource.current ?? 0;

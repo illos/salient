@@ -445,10 +445,8 @@ function HeroRow({
   const canAct = hero.controlled && running;
   const fields: [string, string, number | null][] = [
     ['stamina', 'Stamina', live?.stamina ?? null],
-    ['stamina-maximum', 'Stamina maximum', full?.staminaMaximum ?? null],
     ['temporary-stamina', 'Temporary Stamina', full?.temporaryStamina ?? null],
     ['recoveries', 'Recoveries', live?.recoveries ?? null],
-    ['recoveries-maximum', 'Recoveries maximum', full?.recoveriesMaximum ?? null],
     [
       'heroic-resource',
       full?.heroicResource.name ?? 'Heroic Resource',

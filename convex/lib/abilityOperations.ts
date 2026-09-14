@@ -62,7 +62,7 @@ import {
   type TargetRecord,
 } from './resolve';
 import { requireContent } from '../content';
-import { initialHeroLive, type HeroLive } from './tableOperations';
+import { baselineOf, requireHeroLive, type HeroLive } from './characterBuild';
 import {
   bindActor,
   run,
@@ -635,7 +635,7 @@ async function debit(
     return;
   }
   const character = (await ctx.db.get(records.character!._id))!;
-  const live: HeroLive = character.liveState ?? initialHeroLive(Date.now());
+  const live: HeroLive = requireHeroLive(character);
   await journalPatch(ctx, scope, 'characters', character._id, {
     liveState: { ...live, heroicResource: { ...live.heroicResource, current: after } },
   });
@@ -774,25 +774,20 @@ const abilityUse: OperationDefinition = {
     // ---- Catch Breath (R04 section 7): a maneuver in combat, the same operation in FreePlay.
     if (ability.kind === 'catch-breath') {
       const live = records.character?.liveState;
-      if (records.actor.kind === 'character') {
-        if (
-          !live ||
-          live.staminaMaximum === null ||
-          live.stamina === null ||
-          live.recoveries === null
-        )
-          throw new ConvexError(
-            `${actor!.name} has no recorded Stamina maximum, Stamina or Recoveries yet; no evaluated build exists (A02). The Director sets them with /adjust stamina-maximum, /adjust stamina and /adjust recoveries.`,
-          );
-      }
+      // A02: the Stamina maximum comes from the effective build's baseline (R02 1.3).
+      const baseline = records.character ? baselineOf(records.character.derivedBaseline) : null;
+      if (records.actor.kind === 'character' && (!live || !baseline))
+        throw new ConvexError(
+          `${actor!.name} has no evaluated build or live record; admission to the campaign supplies them.`,
+        );
       const response = resolveCatchBreath({
         actorId: actor!.id,
         inCombat: allowance.inCombat,
         stamina: live?.stamina ?? records.foe!.live.stamina,
-        maxStamina: live?.staminaMaximum ?? records.foe!.maxStamina,
+        maxStamina: baseline?.staminaMaximum.value ?? records.foe!.maxStamina,
         temporaryStamina: live?.temporaryStamina ?? records.foe!.live.temporaryStamina,
-        ...(records.actor.kind === 'character' ? { recoveries: live!.recoveries! } : {}),
-        ...(live && live.stamina !== null && live.stamina <= 0 ? { dying: true } : {}),
+        ...(records.actor.kind === 'character' ? { recoveries: live!.recoveries } : {}),
+        ...(live && live.stamina <= 0 ? { dying: true } : {}),
       });
       const supporting = [await supportingSource(ctx, RECOVERIES_RULE_ID)];
       if (response.kind === 'blocked')
@@ -824,7 +819,7 @@ const abilityUse: OperationDefinition = {
         },
         commit: async (mctx, scope) => {
           const character = (await mctx.db.get(records.character!._id))!;
-          const current = character.liveState ?? initialHeroLive(Date.now());
+          const current = requireHeroLive(character);
           await journalPatch(mctx, scope, 'characters', character._id, {
             liveState: {
               ...current,
@@ -1389,7 +1384,7 @@ const heroFactsOperation: OperationDefinition = {
         else await journalInsert(mctx, scope, 'heroRollFacts', next);
         if (resource !== undefined) {
           const character = (await mctx.db.get(records.character!._id))!;
-          const live: HeroLive = character.liveState ?? initialHeroLive(Date.now());
+          const live: HeroLive = requireHeroLive(character);
           await journalPatch(mctx, scope, 'characters', character._id, {
             liveState: { ...live, heroicResource: { ...live.heroicResource, name: resource } },
           });

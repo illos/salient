@@ -31,7 +31,7 @@ import type {
 import { parseTierText, plainText } from '../../shared/resolve/index';
 import { findContent, requireContent } from '../content';
 import { journalPatch, type JournalScope } from './journal';
-import { initialHeroLive, type HeroLive } from './tableOperations';
+import { baselineOf, requireHeroLive, type HeroLive } from './characterBuild';
 
 export const MELEE_FREE_STRIKE_ID =
   'mcdm.heroes.v1/feature.ability.common/melee-weapon-free-strike';
@@ -528,16 +528,18 @@ export function damageTargetFacts(
     };
   }
   const live = record.character?.liveState;
-  if (!record.character || !live || live.stamina === null || live.staminaMaximum === null)
+  // A02: the maximum comes from the effective build's baseline; live values exist from admission.
+  const baseline = record.character ? baselineOf(record.character.derivedBaseline) : null;
+  if (!record.character || !live || !baseline)
     return {
-      missing: `${record.actor.name} has no recorded Stamina or Stamina maximum; the Director sets them with /adjust stamina-maximum and /adjust stamina before damage can apply.`,
+      missing: `${record.actor.name} has no evaluated build or live record; admission to the campaign supplies them before damage can apply.`,
     };
   return {
     facts: {
       targetId: record.character._id,
       kind: 'hero',
       stamina: live.stamina,
-      maxStamina: live.staminaMaximum,
+      maxStamina: baseline.staminaMaximum.value,
       temporaryStamina: live.temporaryStamina,
     },
   };
@@ -562,7 +564,7 @@ export async function writeDamage(
     return;
   }
   const character = (await ctx.db.get(target.character!._id))!;
-  const live: HeroLive = character.liveState ?? initialHeroLive(Date.now());
+  const live: HeroLive = requireHeroLive(character);
   await journalPatch(ctx, scope, 'characters', character._id, {
     liveState: {
       ...live,

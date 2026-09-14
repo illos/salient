@@ -28,32 +28,57 @@ export const conditionsValidator = v.object({
   weakened: v.boolean(),
 });
 /**
- * A hero's live play values (shared/contracts/liveState.ts HeroLiveState) as stored before A02.
- * No evaluated baseline exists in this checkout, so the values R03 takes from the baseline
- * (Stamina, Recoveries, the heroic resource, the maxima) are `null` until the Director supplies
- * them; nothing here is defaulted to a number the source does not give. Implementation note in
- * docs/build/A03-table-shell-freeplay.md.
+ * A hero's live play values (shared/contracts/liveState.ts HeroLiveState plus LiveStateOrigin).
+ * Written once by first admission from the effective build's baseline (R03 section 2.1) and then
+ * only by registered table operations; maxima live in `characters.derivedBaseline`, never here.
  */
 export const heroLiveValidator = v.object({
-  stamina: v.union(v.number(), v.null()),
+  stamina: v.number(),
   temporaryStamina: v.number(),
-  recoveries: v.union(v.number(), v.null()),
-  heroicResource: v.object({
-    name: v.union(v.string(), v.null()),
-    current: v.union(v.number(), v.null()),
-  }),
+  recoveries: v.number(),
+  heroicResource: v.object({ name: v.string(), current: v.number() }),
   surges: v.number(),
   victories: v.number(),
   xp: v.number(),
   conditions: conditionsValidator,
-  /** Provisional until A02 supplies DerivedBaseline.staminaMaximum / recoveriesMaximum. */
-  staminaMaximum: v.union(v.number(), v.null()),
-  recoveriesMaximum: v.union(v.number(), v.null()),
   origin: v.object({
-    kind: v.literal('first-table-use-without-baseline'),
+    kind: v.literal('first-admission'),
+    buildRevisionId: v.id('characterRevisions'),
+    evaluatedAgainst: v.object({
+      definitionsSchemaVersion: v.literal('r01.1'),
+      compendiumRevision: v.string(),
+    }),
     initializedAt: v.number(),
   }),
 });
+/** R03 `UnreconciledMaximumChange`: surfaced, never applied (Q-CHAR-2). */
+export const unreconciledValidator = v.object({
+  field: v.union(
+    v.literal('staminaMaximum'),
+    v.literal('recoveriesMaximum'),
+    v.literal('heroicResource'),
+  ),
+  before: v.union(v.number(), v.string()),
+  after: v.union(v.number(), v.string()),
+  currentValue: v.number(),
+  question: v.literal('Q-CHAR-2'),
+  revisionId: v.id('characterRevisions'),
+});
+export const reviewKindValidator = v.union(v.literal('admission'), v.literal('full-edit'));
+/**
+ * Lifecycle of one submitted revision (docs/character-wizard-spec.md#7-revision-and-review-lifecycle):
+ * `pending` awaits the Director; `logged` is the owning active Director's own submission, applied
+ * without approval; `stale` is a pending submission whose owner saved a newer revision, so a later
+ * approval cannot activate unseen edits.
+ */
+export const reviewStatusValidator = v.union(
+  v.literal('pending'),
+  v.literal('approved'),
+  v.literal('declined'),
+  v.literal('withdrawn'),
+  v.literal('logged'),
+  v.literal('stale'),
+);
 /** R02 evaluation statuses (shared/contracts/characterEvaluation.ts EvaluationStatus). */
 export const evaluationStatusValidator = v.union(
   v.literal('complete'),
@@ -77,12 +102,15 @@ export const characterTables = {
     revision: v.number(),
     draftRevisionId: v.union(v.id('characterRevisions'), v.null()),
     effectiveRevisionId: v.union(v.id('characterRevisions'), v.null()),
-    // No evaluator exists yet: drafts cannot supply an effective baseline or initialize play.
-    derivedBaseline: v.null(),
-    /** Null until first table use (A03); see heroLiveValidator for the pre-A02 shape. */
+    /** The R02 DerivedBaseline of the effective revision; null until first admission. */
+    derivedBaseline: v.union(v.null(), v.any()),
+    /** Null until first admission initializes it (R03 section 2.1); untouched by later activations. */
     liveState: v.union(v.null(), heroLiveValidator),
+    /** The campaign the character is attached to: set by admission, one at a time. */
     campaignId: v.union(v.id('campaigns'), v.null()),
     combatLocked: v.boolean(),
+    /** Maximum or resource changes a later activation surfaced for the user's decision (Q-CHAR-2). */
+    unreconciled: v.optional(v.array(unreconciledValidator)),
   })
     .index('by_owner', ['ownerId'])
     .index('by_campaign', ['campaignId']),
@@ -101,4 +129,19 @@ export const characterTables = {
     /** `evaluation.baseline`: the R02 `DerivedBaseline` when the status is complete, else null. */
     derivedBaseline: v.optional(v.union(v.any(), v.null())),
   }).index('by_character_and_revision', ['characterId', 'revision']),
+  characterReviews: defineTable({
+    characterId: v.id('characters'),
+    campaignId: v.id('campaigns'),
+    ownerId: v.id('users'),
+    /** The exact immutable revision submitted; approval activates this one and no other. */
+    revisionId: v.id('characterRevisions'),
+    revision: v.number(),
+    kind: reviewKindValidator,
+    status: reviewStatusValidator,
+    submittedAt: v.number(),
+    decidedAt: v.union(v.number(), v.null()),
+    decidedById: v.union(v.id('users'), v.null()),
+  })
+    .index('by_character', ['characterId'])
+    .index('by_campaign_status', ['campaignId', 'status']),
 };

@@ -96,7 +96,16 @@ describe('owned character drafts', () => {
       effectiveRevisionId: null,
     });
     expect(await alice.client.query(api.characters.listMine, {})).toEqual([
-      { id: characterId, name: 'Aster', revision: 1, status: 'incomplete' },
+      {
+        id: characterId,
+        name: 'Aster',
+        revision: 1,
+        status: 'incomplete',
+        campaignId: null,
+        campaignName: null,
+        attached: false,
+        review: null,
+      },
     ]);
     expect(await bob.client.query(api.characters.listMine, {})).toEqual([]);
     await expect(bob.client.query(api.characters.get, { characterId })).rejects.toThrow(

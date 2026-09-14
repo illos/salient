@@ -3,7 +3,6 @@
 import { readFileSync } from 'node:fs';
 import { describe, expect, test } from 'vitest';
 import { api, internal } from '../../convex/_generated/api';
-import { initialHeroLive } from '../../convex/lib/tableOperations';
 import { account, backend, storedEvents, table } from './fixtures/table';
 
 describe('table audience boundaries', () => {
@@ -193,7 +192,7 @@ describe('table audience boundaries', () => {
     const t = backend();
     const { director, player, observer, campaignId, thornId } = await table(t);
     const live = {
-      ...initialHeroLive(1),
+      ...(await t.run(ctx => ctx.db.get(thornId)))!.liveState!,
       stamina: 22,
       recoveries: 8,
       heroicResource: { name: 'Ferocity', current: 7 },
@@ -240,7 +239,7 @@ describe('table audience boundaries', () => {
     const t = backend();
     const { director, observer, campaignId, thornId } = await table(t);
     const live = {
-      ...initialHeroLive(1),
+      ...(await t.run(ctx => ctx.db.get(thornId)))!.liveState!,
       stamina: 22,
       heroicResource: { name: 'Ferocity', current: 7 },
     };
@@ -276,9 +275,9 @@ describe('table audience boundaries', () => {
     const t = backend();
     const { player, observer, campaignId, thornId } = await table(t);
     await t.mutation(internal.content.reseed, {});
-    await t.run(ctx =>
+    await t.run(async ctx =>
       ctx.db.patch(thornId, {
-        liveState: { ...initialHeroLive(1), stamina: 22, staminaMaximum: 30, recoveries: 10 },
+        liveState: { ...(await ctx.db.get(thornId))!.liveState!, stamina: 22, recoveries: 10 },
       }),
     );
     const used = await player.client.mutation(api.commands.submit, {

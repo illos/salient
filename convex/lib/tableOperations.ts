@@ -31,54 +31,25 @@ import type {
   Tier,
 } from '../../shared/contracts/rollResolution';
 import { recoveryValueOf, resolveEdgeBane, testOutcome, tierOf } from '../../shared/resolve/index';
-import type { ConditionId, ConditionToggles } from '../../shared/contracts/liveState';
+import type { ConditionId } from '../../shared/contracts/liveState';
 import { rollDice } from './dice';
 import { requireContent } from '../content';
-import { journalPatch, type JournalScope } from './journal';
+import { journalPatch } from './journal';
 import type { OperationDefinition, Outcome, TableContext } from './registry';
 
 // ---------------------------------------------------------------------------------------------
 // Live-state shapes and helpers.
 
-/** The nine toggles in R05 order (shared/content/core-conditions.json, liveState.ts ConditionId). */
-export const CONDITION_IDS: ConditionId[] = [
-  'bleeding',
-  'dazed',
-  'frightened',
-  'grabbed',
-  'prone',
-  'restrained',
-  'slowed',
-  'taunted',
-  'weakened',
-];
-
-export function noConditions(): ConditionToggles {
-  return Object.fromEntries(CONDITION_IDS.map(id => [id, false])) as ConditionToggles;
-}
-
-export type HeroLive = NonNullable<Doc<'characters'>['liveState']>;
-
-/**
- * First table use without an evaluated baseline (A02 has not landed): the literal R03 initial values
- * (temporary Stamina 0, surges 0, Victories 0, XP 0, every toggle off) and `null` for everything R03
- * takes from the baseline. Recorded as an implementation note in the A03 slice document.
- */
-export function initialHeroLive(now: number): HeroLive {
-  return {
-    stamina: null,
-    temporaryStamina: 0,
-    recoveries: null,
-    heroicResource: { name: null, current: null },
-    surges: 0,
-    victories: 0,
-    xp: 0,
-    conditions: noConditions(),
-    staminaMaximum: null,
-    recoveriesMaximum: null,
-    origin: { kind: 'first-table-use-without-baseline', initializedAt: now },
-  };
-}
+export { CONDITION_IDS, noConditions } from './characterBuild';
+import {
+  baselineOf,
+  CONDITION_IDS,
+  noConditions,
+  requireBaseline,
+  requireHeroLive,
+  type HeroLive,
+} from './characterBuild';
+export type { HeroLive } from './characterBuild';
 
 async function loadCharacter(ctx: MutationCtx, context: TableContext, actor: BoundActor) {
   if (actor.kind !== 'character')
@@ -94,18 +65,6 @@ async function loadFoe(ctx: MutationCtx, context: TableContext, actor: BoundActo
   if (!foe || foe.campaignId !== context.campaign._id)
     throw new ConvexError('That foe is not at this table.');
   return foe;
-}
-
-/** Journals the first-use live record when the hero has none, then returns the current record. */
-async function ensureHeroLive(
-  ctx: MutationCtx,
-  scope: JournalScope,
-  character: Doc<'characters'>,
-): Promise<HeroLive> {
-  if (character.liveState) return character.liveState;
-  const live = initialHeroLive(Date.now());
-  await journalPatch(ctx, scope, 'characters', character._id, { liveState: live });
-  return live;
 }
 
 function integer(value: unknown, name: string, min?: number): number {
@@ -147,7 +106,7 @@ const testRoll: OperationDefinition = {
   argDescriptions: {
     characteristic: 'M, A, R, I or P.',
     value:
-      'The characteristic score, supplied by the table while the hero has no evaluated build (recorded as a supplied fact).',
+      'The characteristic score as a supplied fact, accepted only for a hero without an evaluated build; an admitted hero uses its baseline.',
     skill: 'The skill the Director agreed applies; grants the +2 bonus.',
     edges: 'Number of edges (default 0).',
     banes: 'Number of banes (default 0).',
@@ -171,12 +130,30 @@ const testRoll: OperationDefinition = {
     const skill = args.skill === undefined ? undefined : String(args.skill).trim();
     if (skill !== undefined && (!skill || skill.length > 80))
       throw new ConvexError('"skill" needs 1–80 characters.');
-    // No evaluated baseline exists in this checkout (A02 pending), so the score is a supplied fact.
-    if (args.value === undefined)
-      throw new ConvexError(
-        `${actor!.name} has no evaluated build that supplies ${characteristic}; add value=<score> and it is recorded as a supplied fact.`,
-      );
-    const characteristicValue = integer(args.value, 'value');
+    // R02: an admitted hero's characteristic comes from its effective baseline. A hero without an
+    // evaluated build (not reachable through admission) may still supply the score as a fact.
+    const character = await loadCharacter(ctx, context, actor!);
+    const baseline = baselineOf(character.derivedBaseline);
+    let characteristicValue: number;
+    let characteristicValueSource: 'baseline' | 'supplied';
+    if (baseline) {
+      if (
+        args.value !== undefined &&
+        integer(args.value, 'value') !== baseline.characteristics[characteristic].value
+      )
+        throw new ConvexError(
+          `${actor!.name}'s ${characteristic} is ${baseline.characteristics[characteristic].value} in the evaluated build; omit value= (the Director adjusts the build through review, not the roll).`,
+        );
+      characteristicValue = baseline.characteristics[characteristic].value;
+      characteristicValueSource = 'baseline';
+    } else {
+      if (args.value === undefined)
+        throw new ConvexError(
+          `${actor!.name} has no evaluated build that supplies ${characteristic}; add value=<score> and it is recorded as a supplied fact.`,
+        );
+      characteristicValue = integer(args.value, 'value');
+      characteristicValueSource = 'supplied';
+    }
     const accepted = await rollDice(
       ctx,
       context.campaign._id,
@@ -238,7 +215,7 @@ const testRoll: OperationDefinition = {
       data: {
         result,
         rollId: accepted.rollId,
-        characteristicValueSource: 'supplied' as const,
+        characteristicValueSource,
         ...(skill ? { skill } : {}),
       },
     };
@@ -262,19 +239,21 @@ const heroRecover: OperationDefinition = {
   actor: 'required',
   execute: async (ctx, { context, actor }) => {
     const character = await loadCharacter(ctx, context, actor!);
-    const live = character.liveState ?? initialHeroLive(Date.now());
-    if (live.staminaMaximum === null || live.stamina === null || live.recoveries === null)
-      throw new ConvexError(
-        `${character.authored.name} has no recorded Stamina maximum, Stamina or Recoveries yet; no evaluated build exists (A02). The Director sets them with /adjust stamina-maximum, /adjust stamina and /adjust recoveries.`,
-      );
+    const live = requireHeroLive(character);
+    const baseline = requireBaseline(character);
     // Section 7: cost is one Recovery; affordable iff recoveries >= 1.
     if (live.recoveries < 1)
       throw new ConvexError(`${character.authored.name} has no Recoveries left to spend.`);
-    const recoveryValue = recoveryValueOf(live.staminaMaximum);
+    // R02 1.3/1.4: the maximum and the recovery value come from the effective baseline; R04
+    // section 7 states the same floor(max / 3), which recoveryValueOf keeps for the record.
+    const staminaMaximum = baseline.staminaMaximum.value;
+    const recoveryValue = baseline.recoveryValue.value;
+    if (recoveryValue !== recoveryValueOf(staminaMaximum))
+      throw new ConvexError('The baseline recovery value disagrees with R04 section 7; refusing.');
     // Section 7: stamina' = min(maxStamina, stamina + recoveryValue) (cap: Q-R-3); temporary unchanged.
-    const staminaAfter = Math.min(live.staminaMaximum, live.stamina + recoveryValue);
+    const staminaAfter = Math.min(staminaMaximum, live.stamina + recoveryValue);
     const healed = staminaAfter - live.stamina;
-    const capApplied = live.stamina + recoveryValue > live.staminaMaximum;
+    const capApplied = live.stamina + recoveryValue > staminaMaximum;
     const warnings: string[] = [];
     if (healed === 0)
       warnings.push('Already at the Stamina maximum: the Recovery is spent and 0 healed.');
@@ -316,9 +295,8 @@ const heroRecover: OperationDefinition = {
         },
       },
       commit: async (mctx, scope) => {
-        const current = await ensureHeroLive(mctx, scope, character);
         await journalPatch(mctx, scope, 'characters', character._id, {
-          liveState: { ...current, stamina: staminaAfter, recoveries: result.recoveriesAfter },
+          liveState: { ...live, stamina: staminaAfter, recoveries: result.recoveriesAfter },
         });
       },
     };
@@ -347,7 +325,8 @@ function conditionOperation(on: boolean): OperationDefinition {
       const kind = on ? 'condition.on' : 'condition.off';
       if (actor!.kind === 'character') {
         const character = await loadCharacter(ctx, context, actor!);
-        const before = character.liveState?.conditions[name] ?? false;
+        const live = requireHeroLive(character);
+        const before = live.conditions[name];
         if (before === on)
           throw new ConvexError(
             `${character.authored.name} is already ${on ? '' : 'not '}${name}.`,
@@ -362,7 +341,6 @@ function conditionOperation(on: boolean): OperationDefinition {
             after: on,
           },
           commit: async (mctx, scope) => {
-            const live = await ensureHeroLive(mctx, scope, character);
             await journalPatch(mctx, scope, 'characters', character._id, {
               liveState: { ...live, conditions: { ...live.conditions, [name]: on } },
             });
@@ -404,8 +382,6 @@ interface AdjustableField {
   scope: 'hero' | 'creature' | 'campaign';
   /** Stamina may be negative for a hero (R03: no clamp); other counters cannot go below zero. */
   min?: number;
-  /** Set only while no evaluated baseline exists (A02); see the slice implementation note. */
-  provisional?: boolean;
 }
 
 const ADJUSTABLE: AdjustableField[] = [
@@ -415,18 +391,12 @@ const ADJUSTABLE: AdjustableField[] = [
   { verb: 'heroic-resource', label: 'Heroic Resource', scope: 'hero', min: 0 },
   { verb: 'surges', label: 'Surges', scope: 'hero', min: 0 },
   { verb: 'victories', label: 'Victories', scope: 'hero', min: 0 },
-  { verb: 'stamina-maximum', label: 'Stamina maximum', scope: 'hero', min: 0, provisional: true },
-  {
-    verb: 'recoveries-maximum',
-    label: 'Recoveries maximum',
-    scope: 'hero',
-    min: 0,
-    provisional: true,
-  },
   { verb: 'malice', label: 'Malice', scope: 'campaign', min: 0 },
 ];
+// Q-A-200 (option A, applied): the provisional `stamina-maximum` and `recoveries-maximum` verbs
+// existed only while no evaluated baseline could exist; A02 supplies the maxima from the build.
 
-function heroField(live: HeroLive, verb: string): number | null {
+function heroField(live: HeroLive, verb: string): number {
   switch (verb) {
     case 'stamina':
       return live.stamina;
@@ -440,10 +410,6 @@ function heroField(live: HeroLive, verb: string): number | null {
       return live.surges;
     case 'victories':
       return live.victories;
-    case 'stamina-maximum':
-      return live.staminaMaximum;
-    case 'recoveries-maximum':
-      return live.recoveriesMaximum;
     default:
       throw new ConvexError(`Unknown field ${verb}.`);
   }
@@ -463,24 +429,15 @@ function withHeroField(live: HeroLive, verb: string, value: number): HeroLive {
       return { ...live, surges: value };
     case 'victories':
       return { ...live, victories: value };
-    case 'stamina-maximum':
-      return { ...live, staminaMaximum: value };
-    case 'recoveries-maximum':
-      return { ...live, recoveriesMaximum: value };
     default:
       throw new ConvexError(`Unknown field ${verb}.`);
   }
 }
 
 function adjustOperation(field: AdjustableField): OperationDefinition {
-  const manual = (
-    subject: string,
-    before: number | null,
-    after: number,
-    creature: unknown,
-  ): Outcome => ({
+  const manual = (subject: string, before: number, after: number, creature: unknown): Outcome => ({
     kind: 'manual.adjustment',
-    description: `Manual adjustment — ${subject} ${field.label} ${before === null ? 'unset' : before} → ${after}.`,
+    description: `Manual adjustment — ${subject} ${field.label} ${before} → ${after}.`,
     data: { field: field.verb, label: field.label, creature, before, after },
   });
   return {
@@ -488,7 +445,7 @@ function adjustOperation(field: AdjustableField): OperationDefinition {
     family: 'adjust',
     verb: field.verb,
     title: `Adjust ${field.label}`,
-    description: `Director edit of the persistent ${field.label} value${field.scope === 'campaign' ? ' (the shared pool)' : ''}; appends a Manual adjustment entry with the previous and new value.${field.provisional ? ' Available while the hero has no evaluated build (A02 pending).' : ''}`,
+    description: `Director edit of the persistent ${field.label} value${field.scope === 'campaign' ? ' (the shared pool)' : ''}; appends a Manual adjustment entry with the previous and new value.`,
     args: { value: v.number() },
     argDescriptions: { value: `The new ${field.label} value.` },
     roles: ['director'],
@@ -523,11 +480,7 @@ function adjustOperation(field: AdjustableField): OperationDefinition {
         };
       }
       const character = await loadCharacter(ctx, context, actor!);
-      const live = character.liveState ?? initialHeroLive(Date.now());
-      if (field.provisional && character.derivedBaseline !== null)
-        throw new ConvexError(
-          `${field.label} comes from the evaluated build; it is not adjusted here.`,
-        );
+      const live = requireHeroLive(character);
       const before = heroField(live, field.verb);
       const outcome = manual(character.authored.name, before, value, {
         kind: 'character',
@@ -536,9 +489,8 @@ function adjustOperation(field: AdjustableField): OperationDefinition {
       return {
         ...outcome,
         commit: async (mctx, scope) => {
-          const current = await ensureHeroLive(mctx, scope, character);
           await journalPatch(mctx, scope, 'characters', character._id, {
-            liveState: withHeroField(current, field.verb, value),
+            liveState: withHeroField(live, field.verb, value),
           });
         },
       };
