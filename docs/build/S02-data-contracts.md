@@ -91,4 +91,98 @@ None.
 
 ## Work log
 
-_Empty._
+### 2026-09-14 — plan (lead/S02-impl)
+
+Spec sections read in this checkout: every anchor listed above. Discrepancies noted: none; the data
+architecture section 5 and the G7 audit entry both describe the current schema exactly as found
+(`sessions.combatActive`, required `events.actorId`, no change payload).
+
+Files to touch:
+
+- `convex/encounterTables.ts` (new): `encounters`, `snapshots`, `changes`, `diceStates`, `rolls`.
+- `convex/schema.ts`: spread `encounterTables`; `sessions.combatActive` becomes
+  `sessions.encounterId`; `events` gains `origin`, optional `actorId`/`actorName`, `commandId`,
+  `encounterId`, `causeEventId`, `disposition`, optional `dice`/`payload`; new indexes. No other
+  table is touched, so S01's `contentTables` spread merges cleanly.
+- `convex/lib/events.ts`: `appendEvent` takes a structured input, allocates the per-campaign sequence
+  under the campaign counter, rejects `origin: "user"` without an actor, rejects writes into closed
+  sessions and archived encounters.
+- `convex/lib/journal.ts` (new): `journalPatch`/`journalInsert`/`journalDelete` write one `changes`
+  row per changed field path with before/after (absence recorded explicitly) and apply the write.
+- `convex/lib/dice.ts` (new): `rollDice` with a per-campaign seeded hash-DRBG (SHA-256 over a
+  32-byte seed from `crypto.getRandomValues` plus a counter), rejection sampling, retry-idempotent on
+  `commandId` through the `rolls` table; `convex/dice.ts` exposes it as `internalMutation dice.roll`.
+- `convex/lib/encounters.ts` (new, small): `combatActive(ctx, session)` = session's encounter is
+  `committed`; used by `sessions.ts` and `characters.ts` in place of the boolean.
+- `convex/sessions.ts`, `convex/characters.ts`, `convex/campaigns.ts`, `convex/foes.ts`,
+  `convex/events.ts`, `web/campaigns.tsx`: adapt to the new event/session shape (origin label in the
+  log; `encounter` projection on sessions).
+- `shared/contracts/history.ts` (new): types mirroring the records, reusing `EncounterId`/`LogEntryId`
+  from `clock.ts`; no logic.
+- `scripts/setup-local.ts`: `--reset-data` empties every app table in the local deployment through
+  `convex import --table <t> --replace` (reset-and-reseed policy, no migrations).
+- Tests: `tests/app/journal.test.ts`, `tests/app/dice.test.ts`; `tests/app/access-sessions.test.ts`
+  and `tests/app/foes.test.ts` use an encounter row instead of `combatActive`;
+  `tests/app/setup-local.test.ts` covers the reset flag.
+- Docs: implementation notes in `docs/data-architecture-spec.md#5-encounter-actions-and-undo` (undo
+  unit) and `#6-session-closure-and-compression` (archive fields), G7 entry in the audit.
+
+Dependencies: none real. No development fixture is stubbed. No gameplay operation is added: nothing
+creates an encounter through the API yet; tests insert rows directly through `t.run`.
+
+### 2026-09-14 — verification (lead/S02-impl)
+
+Discrepancy from the plan: the reset lists tables from the deployment (`convex data`) rather than by
+importing `convex/schema.ts`, because plain Node cannot resolve the schema's extensionless imports and
+the deployed table list is the right thing to empty under the old schema anyway. `convex codegen`
+needs a reachable deployment, which this worktree has none of; `convex/_generated/api.d.ts` was
+updated by hand in the generator's exact pattern (sorted module list) and typechecks.
+
+`pnpm check` (full output in the thread; summary):
+
+```
+$ eslint . && prettier --check .            All matched files use Prettier code style!
+$ tsc --noEmit && vitest run --project engine   Test Files 6 passed (6)   Tests 39 passed (39)
+$ tsc -p tsconfig.web.json && vitest run --project app --project scripts
+                                             Test Files 10 passed (10)  Tests 55 passed (55)
+$ node scripts/check-links.ts / check-vendor / build-foe-source --check / vite build   ✓ built
+exit=0
+```
+
+Baseline before this slice: 39 engine and 42 app/scripts tests. The new suites:
+
+```
+✓ |app| tests/app/dice.test.ts > sha256 > matches the FIPS 180-4 vectors and Node for a multi-block input
+ ✓ |app| tests/app/dice.test.ts > shared dice operation > same commandId returns the identical accepted roll; a new id draws new values
+ ✓ |app| tests/app/journal.test.ts > event sequence and origin > concurrent appends to one campaign get distinct consecutive sequence numbers
+ ✓ |app| tests/app/dice.test.ts > shared dice operation > reusing a commandId with different dice is rejected and rolls nothing
+ ✓ |app| tests/app/dice.test.ts > shared dice operation > requests are validated: bounds, distinct die ids, valid command id
+ ✓ |app| tests/app/dice.test.ts > shared dice operation > every face is reachable and within range across the stream
+ ✓ |app| tests/app/dice.test.ts > shared dice operation > dice.roll is registered as an internal function and persists the same accepted roll
+ ✓ |app| tests/app/journal.test.ts > event sequence and origin > engine and clock origins insert without an actor; user origin without an actor is rejected
+ ✓ |app| tests/app/journal.test.ts > event sequence and origin > archived encounters and closed sessions refuse new events
+ ✓ |app| tests/app/journal.test.ts > change journal > diffFields records leaf changes, absence and unchanged fields
+ ✓ |app| tests/app/journal.test.ts > change journal > the journal for a sample command lists before/after for every changed field, read back
+ Test Files  2 passed (2)
+      Tests  11 passed (11)
+```
+
+Acceptance checks:
+
+1. `pnpm check` passes; `tests/app/access-sessions.test.ts` and `tests/app/foes.test.ts` now create a
+   committed `encounters` row instead of patching `combatActive`, and additionally check that a
+   draft or archived run does not lock the roster. Verified.
+2. `journal.test.ts` "concurrent appends": 20 `Promise.all` appends to one campaign read back as
+   sequences 1..N with no gap and `campaigns.eventSequence` equal to N. Verified.
+3. `dice.test.ts`: same `commandId` returns an equal accepted roll and one persisted `rolls` row;
+   a new id creates a second row with `counterStart` 2 and the generator counter reads 4; the faces
+   reproduce from the stored seed and counter; same id with different dice is rejected. Verified.
+4. `journal.test.ts` "engine and clock origins": engine and clock events insert with no `actorId`,
+   `causeEventId` set and the cause's `commandId`; `origin: user` without an actor throws
+   "must name the invoking user" and the event count is unchanged. Verified.
+5. `journal.test.ts` "sample command": one user event and one engine consequence under one
+   `commandId`; `commandJournal` reads back four `changes` rows with before/after for
+   `foes.live.stamina` (15 to 9), `foes.visible` (false to true), a whole-document insert and a
+   whole-document delete, ordered by event then ordinal; persisted foe state matches. Verified.
+6. Independent review deferred to the user's audit thread (lead's process change, 2026-09-14).
+   Not verified here; the implementer does not self-attest.
