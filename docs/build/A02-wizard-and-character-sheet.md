@@ -195,13 +195,22 @@ the real path. Dependencies R01, R02, R03, S01, A01, A03 and A04 are real; no fi
   `liveState.victories` 0 → 1, persisted 1; a player is refused; the provisional verbs are absent
   from `commands.list` and the four `character.*` operations are present.
 - Acceptance 8 (rules review): pending.
-- Browser walkthrough (wizard, submit, approve, three-audience sheet): **not run**. This worktree has
-  no local deployment and the shared one serves other slices; the updated browser specs are
-  unverified.
+- Browser walkthrough: run against an isolated local deployment (`.convex/local` in this worktree,
+  Vite on port 5181) after fixing a pre-existing deploy blocker found on `main`: pushing the
+  functions failed with `Failed to analyze commands.js: ... is not iterable (registry.ts)` because
+  `convex/lib/combatOperations.ts` imports `bindActor` from the registry, which imports it back;
+  `bindActor` now lives in `convex/lib/actors.ts` (registry re-exports it). With that fix:
+  `journey.spec.ts` (updated for the wizard entry) and `table-audit.spec.ts` (admitted heroes,
+  timeout raised to 360 s) **pass**; `wizard.spec.ts` (new) walked every presented step with the
+  supported options, showed Stamina maximum pending before the kit and 30 after, saved, submitted,
+  and the Director approved from the campaign page (all observed passing live); its final owner /
+  Director / peer sheet assertions were **not verified** (the run stopped on a locator that matched a
+  `<select>` option; corrected but not rerun). `combat.spec.ts` (A04, now seeding through admission)
+  was **not run**.
 
 ### Unfinished (2026-09-15)
 
-- Browser test of the wizard journey and the updated `table-audit.spec.ts` / `combat.spec.ts`.
+- Rerun `wizard.spec.ts` to its end and run `combat.spec.ts` against a deployment with the cycle fix.
 - No detach or duplicate operation (out of scope); no restore of pending-review UI beyond the
   campaign page queue and the character page badges.
 - Independent review and rules review not requested (deferred to the user's audit thread).

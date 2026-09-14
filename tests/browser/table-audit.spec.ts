@@ -18,7 +18,7 @@ async function register(page: Page, name: string, email: string) {
 test('three table contexts, palette, console and live CLI share persisted operations', async ({
   browser,
 }) => {
-  test.setTimeout(180_000);
+  test.setTimeout(360_000);
   const contexts = await Promise.all(
     Array.from({ length: 3 }, () => browser.newContext({ viewport: { width: 1440, height: 960 } })),
   );

@@ -30,6 +30,7 @@ import type * as initiativeTables from "../initiativeTables.js";
 import type * as interactions from "../interactions.js";
 import type * as lib_abilityOperations from "../lib/abilityOperations.js";
 import type * as lib_access from "../lib/access.js";
+import type * as lib_actors from "../lib/actors.js";
 import type * as lib_audience from "../lib/audience.js";
 import type * as lib_characterBuild from "../lib/characterBuild.js";
 import type * as lib_characterOperations from "../lib/characterOperations.js";
@@ -83,6 +84,7 @@ declare const fullApi: ApiFromModules<{
   interactions: typeof interactions;
   "lib/abilityOperations": typeof lib_abilityOperations;
   "lib/access": typeof lib_access;
+  "lib/actors": typeof lib_actors;
   "lib/audience": typeof lib_audience;
   "lib/characterBuild": typeof lib_characterBuild;
   "lib/characterOperations": typeof lib_characterOperations;

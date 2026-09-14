@@ -114,19 +114,26 @@ test('accounts, invitation approval, session lifecycle, private draft persistenc
   await expect(director.getByText('Closed the session.', { exact: true })).toBeVisible();
   await expect(player.getByRole('progressbar')).toHaveCount(1);
 
+  // A02: creation opens the wizard; authored details live on its Determine Details step.
   await player.getByRole('link', { name: 'Characters', exact: true }).click();
   await player.getByLabel('Name', { exact: true }).fill(`Ash ${stamp}`);
+  await player.getByRole('button', { name: 'Create and open the wizard' }).click();
+  await expect(player.getByRole('heading', { name: `Ash ${stamp}` })).toBeVisible();
+  const characterUrl = player.url();
+  await player.getByRole('button', { name: '9. Determine Details' }).click();
+  await player
+    .getByLabel('details.backstory-and-personality', { exact: true })
+    .fill('A saved journey from the north.');
   await player
     .getByLabel('Private notes', { exact: false })
     .fill('Only the owner may read this secret.');
-  await player.getByRole('button', { name: 'Create draft' }).click();
-  await expect(player.getByRole('heading', { name: `Ash ${stamp}` })).toBeVisible();
-  const characterUrl = player.url();
-  await player.getByLabel('Biography').fill('A saved journey from the north.');
-  await player.getByRole('button', { name: 'Save draft' }).click();
-  await expect(player.getByText('Draft saved.', { exact: true })).toBeVisible();
+  await player.getByRole('button', { name: 'Save draft', exact: true }).click();
+  await expect(player.getByText(/^Draft saved/)).toBeVisible();
   await player.reload();
-  await expect(player.getByLabel('Biography')).toHaveValue('A saved journey from the north.');
+  await player.getByRole('button', { name: '9. Determine Details' }).click();
+  await expect(player.getByLabel('details.backstory-and-personality', { exact: true })).toHaveValue(
+    'A saved journey from the north.',
+  );
   await expect(player.getByLabel('Private notes', { exact: false })).toHaveValue(
     'Only the owner may read this secret.',
   );

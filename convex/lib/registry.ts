@@ -22,10 +22,10 @@ import type {
   CommandEnvelope,
   ParsedValue,
   RecordedEnvelope,
-  Reference,
 } from '../../shared/commands/envelope';
 import type { DieResult, DieSpec } from '../../shared/contracts/history';
 import { requireMember, type ReadCtx } from './access';
+import { bindActor } from './actors';
 import { command } from './commands';
 import { rollDice } from './dice';
 import { appendEvent } from './events';
@@ -258,68 +258,7 @@ export function unavailableReason(
   return null;
 }
 
-/**
- * Resolves `@Character` to one live actor the caller may act for: the Director may act for any
- * character or foe at the table; a player only for characters they own. Names bind exactly and must
- * be unique; ambiguity is returned as an error naming the stable form, never resolved by first match.
- */
-export async function bindActor(
-  ctx: ReadCtx,
-  context: TableContext,
-  reference: Reference,
-): Promise<BoundActor> {
-  if ('selector' in reference)
-    throw new ConvexError('@self cannot be the actor: self resolves to the acting character.');
-  const candidates: { actor: BoundActor; ownerId: Id<'users'> | null }[] = [];
-  if ('refKind' in reference) {
-    if (reference.refKind === 'character') {
-      const id = ctx.db.normalizeId('characters', reference.id);
-      const character = id ? await ctx.db.get(id) : null;
-      if (character && character.campaignId === context.campaign._id)
-        candidates.push({
-          actor: { kind: 'character', id: character._id, name: character.authored.name },
-          ownerId: character.ownerId,
-        });
-    } else if (reference.refKind === 'foe') {
-      const id = ctx.db.normalizeId('foes', reference.id);
-      const foe = id ? await ctx.db.get(id) : null;
-      if (foe && foe.campaignId === context.campaign._id)
-        candidates.push({ actor: { kind: 'foe', id: foe._id, name: foe.name }, ownerId: null });
-    } else
-      throw new ConvexError(
-        `Unknown actor reference kind "${reference.refKind}"; use @{character:id} or @{foe:id}.`,
-      );
-    if (!candidates.length) throw new ConvexError('That actor is not at this table.');
-  } else {
-    const characters = await ctx.db
-      .query('characters')
-      .withIndex('by_campaign', q => q.eq('campaignId', context.campaign._id))
-      .take(200);
-    for (const character of characters)
-      if (character.authored.name === reference.name)
-        candidates.push({
-          actor: { kind: 'character', id: character._id, name: character.authored.name },
-          ownerId: character.ownerId,
-        });
-    const foes = await ctx.db
-      .query('foes')
-      .withIndex('by_campaign', q => q.eq('campaignId', context.campaign._id))
-      .take(200);
-    for (const foe of foes)
-      if (foe.name === reference.name)
-        candidates.push({ actor: { kind: 'foe', id: foe._id, name: foe.name }, ownerId: null });
-    if (!candidates.length)
-      throw new ConvexError(`No character or foe named "${reference.name}" is at this table.`);
-    if (candidates.length > 1)
-      throw new ConvexError(
-        `Several actors are named "${reference.name}"; choose one with @{character:id} or @{foe:id}.`,
-      );
-  }
-  const [candidate] = candidates;
-  if (context.role !== 'director' && candidate!.ownerId !== context.user._id)
-    throw new ConvexError(`You do not control ${candidate!.actor.name}.`);
-  return candidate!.actor;
-}
+export { bindActor } from './actors';
 
 // ---------------------------------------------------------------------------------------------
 // Operations.

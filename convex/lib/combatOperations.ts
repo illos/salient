@@ -44,7 +44,8 @@ import {
 } from './initiative';
 import { journalDelete, journalInsert, journalPatch } from './journal';
 import { rollDice } from './dice';
-import { bindActor, type OperationDefinition, type Role, type TableContext } from './registry';
+import type { OperationDefinition, Role, TableContext } from './registry';
+import { bindActor } from './actors';
 
 const SURPRISED_SOURCE = 'vendor/steel-compendium/en/unified/md/rule/combat/surprised.md';
 const COMBAT_ROUND_SOURCE = 'vendor/steel-compendium/en/unified/md/rule/combat/combat-round.md';
