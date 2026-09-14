@@ -25,7 +25,8 @@
     "scripts/check-links.ts",
     "scripts/app.ts",
     "scripts/setup-local.ts",
-    "scripts/build-foe-source.ts",
+    "scripts/build-content.ts",
+    "scripts/seed-content.ts",
     "vite.config.ts",
     "vitest.config.ts",
     "playwright.config.ts"

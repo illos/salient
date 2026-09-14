@@ -1,0 +1,3412 @@
+{
+  "schemaVersion": "s01.1",
+  "compendium": {
+    "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+    "tag": "v4.20260908021459",
+    "committedAt": "2026-09-07T22:14:55-04:00",
+    "submodulePath": "vendor/steel-compendium"
+  },
+  "generator": {
+    "script": "scripts/build-content.ts",
+    "version": "1.0.0"
+  },
+  "generatedAt": "2026-09-14",
+  "contentHash": "sha256:5789ec229151fd74f16958af528505706a3168b4bb2cbf17ac93004d4a972ac2",
+  "entryCount": 403,
+  "selections": [
+    {
+      "id": "goblin-warrior",
+      "description": "Goblin Warrior stat block, with the goblin group Malice features the stat block directory holds.",
+      "paths": [
+        "monster/goblin/statblock/goblin-warrior.md",
+        "monster/goblin/goblin-malice.md"
+      ],
+      "basis": "docs/monster-catalog-spec.md#features-and-supporting-rules: group Malice must be discoverable alongside the stat block."
+    },
+    {
+      "id": "devil-ancestry",
+      "description": "Devil ancestry and its traits.",
+      "paths": [
+        "ancestry/devil.md",
+        "feature/trait/devil"
+      ]
+    },
+    {
+      "id": "fury-level-one",
+      "description": "Fury class entry, every level-one class feature (including Ferocity and Growing Ferocity), every level-one ability (signature and heroic), and the Stormwight kit features that the level-one Beast Shape feature grants.",
+      "paths": [
+        "class/fury.md",
+        "feature/fury/level-1",
+        "feature/ability/fury/level-1",
+        "feature/fury/stormwight-kits",
+        "feature/fury/boren",
+        "feature/fury/corven",
+        "feature/fury/raden",
+        "feature/fury/vuken"
+      ],
+      "basis": "feature/fury/level-1/beast-shape.md: \"You can use and gain the benefits of a stormwight kit (see Stormwight Kits)\"."
+    },
+    {
+      "id": "kits",
+      "description": "Every kit entry, with its printed kit_type. The source names furies among the classes that use kits and states no kit_type restriction for them in chapter/kits.md or class/fury.md; eligibility by aspect is R01 question Q-R-103, not a pipeline decision.",
+      "paths": [
+        "kit"
+      ],
+      "basis": "chapter/kits.md: \"Censors, furies, shadows, tacticians, and troubadours can tap into these and many more archetypal concepts using kits.\""
+    },
+    {
+      "id": "background-options",
+      "description": "Every culture aspect and career entry, plus the Background chapter that defines culture assembly and career benefits.",
+      "paths": [
+        "culture",
+        "career",
+        "chapter/background.md"
+      ]
+    },
+    {
+      "id": "perks",
+      "description": "Every core perk entry (Beastheart perks on the same path are excluded).",
+      "paths": [
+        "perk"
+      ]
+    },
+    {
+      "id": "skills",
+      "description": "Every skill group and skill entry.",
+      "paths": [
+        "skill"
+      ]
+    },
+    {
+      "id": "complications",
+      "description": "Every complication entry.",
+      "paths": [
+        "complication"
+      ]
+    },
+    {
+      "id": "conditions",
+      "description": "The nine core conditions.",
+      "paths": [
+        "condition"
+      ]
+    },
+    {
+      "id": "common-actions",
+      "description": "The common main actions, maneuvers and move actions, and the common ability entries (free strikes, Grab, Knockback, Escape Grab and the rest of that directory).",
+      "paths": [
+        "feature/common",
+        "feature/ability/common"
+      ]
+    },
+    {
+      "id": "rules-r04-r05",
+      "description": "The rule pages cited by R04 (docs/roll-and-damage-resolution.md) and R05 (docs/conditions-and-clock.md): dice, damage, health, the cited combat, general and monster pages.",
+      "paths": [
+        "rule/dice",
+        "rule/damage",
+        "rule/health",
+        "rule/combat/combat-round.md",
+        "rule/combat/condition.md",
+        "rule/combat/critical-hit.md",
+        "rule/combat/end-of-turn.md",
+        "rule/combat/side.md",
+        "rule/combat/surprised.md",
+        "rule/combat/turn.md",
+        "rule/general/always-round-down.md",
+        "rule/general/saving-throw.md",
+        "rule/monster/creature-free-strike.md",
+        "rule/monster/end-effect.md",
+        "rule/monster/malice.md"
+      ]
+    }
+  ],
+  "entries": [
+    {
+      "id": "mcdm.heroes.v1/feature.ability.common/claw-dirt",
+      "kind": "ability",
+      "name": "Claw Dirt",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/common/claw-dirt.md",
+      "selection": "common-actions",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.common/dragons-fire",
+      "kind": "ability",
+      "name": "Dragon's Fire",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/common/dragons-fire.md",
+      "selection": "common-actions",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.common/escape-grab",
+      "kind": "ability",
+      "name": "Escape Grab",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/common/escape-grab.md",
+      "selection": "common-actions",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.common/grab",
+      "kind": "ability",
+      "name": "Grab",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/common/grab.md",
+      "selection": "common-actions",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.common/knockback",
+      "kind": "ability",
+      "name": "Knockback",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/common/knockback.md",
+      "selection": "common-actions",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.common/melee-weapon-free-strike",
+      "kind": "ability",
+      "name": "Melee Weapon Free Strike",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/common/melee-weapon-free-strike.md",
+      "selection": "common-actions",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.common/ranged-weapon-free-strike",
+      "kind": "ability",
+      "name": "Ranged Weapon Free Strike",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/common/ranged-weapon-free-strike.md",
+      "selection": "common-actions",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.fury.level-1/back",
+      "kind": "ability",
+      "name": "Back!",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-1/back.md",
+      "selection": "fury-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.fury.level-1/blood-for-blood",
+      "kind": "ability",
+      "name": "Blood for Blood!",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-1/blood-for-blood.md",
+      "selection": "fury-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.fury.level-1/brutal-slam",
+      "kind": "ability",
+      "name": "Brutal Slam",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-1/brutal-slam.md",
+      "selection": "fury-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.fury.level-1/furious-change",
+      "kind": "ability",
+      "name": "Furious Change",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-1/furious-change.md",
+      "selection": "fury-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.fury.level-1/hit-and-run",
+      "kind": "ability",
+      "name": "Hit and Run",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-1/hit-and-run.md",
+      "selection": "fury-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.fury.level-1/impaled",
+      "kind": "ability",
+      "name": "Impaled!",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-1/impaled.md",
+      "selection": "fury-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.fury.level-1/lines-of-force",
+      "kind": "ability",
+      "name": "Lines of Force",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-1/lines-of-force.md",
+      "selection": "fury-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.fury.level-1/make-peace-with-your-god",
+      "kind": "ability",
+      "name": "Make Peace With Your God!",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-1/make-peace-with-your-god.md",
+      "selection": "fury-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.fury.level-1/out-of-the-way",
+      "kind": "ability",
+      "name": "Out of the Way!",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-1/out-of-the-way.md",
+      "selection": "fury-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.fury.level-1/thunder-roar",
+      "kind": "ability",
+      "name": "Thunder Roar",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-1/thunder-roar.md",
+      "selection": "fury-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.fury.level-1/tide-of-death",
+      "kind": "ability",
+      "name": "Tide of Death",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-1/tide-of-death.md",
+      "selection": "fury-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.fury.level-1/to-the-death",
+      "kind": "ability",
+      "name": "To the Death!",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-1/to-the-death.md",
+      "selection": "fury-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.fury.level-1/to-the-uttermost-end",
+      "kind": "ability",
+      "name": "To the Uttermost End",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-1/to-the-uttermost-end.md",
+      "selection": "fury-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.fury.level-1/unearthly-reflexes",
+      "kind": "ability",
+      "name": "Unearthly Reflexes",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-1/unearthly-reflexes.md",
+      "selection": "fury-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.fury.level-1/your-entrails-are-your-extrails",
+      "kind": "ability",
+      "name": "Your Entrails Are Your Extrails!",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-1/your-entrails-are-your-extrails.md",
+      "selection": "fury-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/ancestry/devil",
+      "kind": "ancestry",
+      "name": "Devil",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/ancestry/devil.md",
+      "selection": "devil-ancestry",
+      "file": "ancestry.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/career/agent",
+      "kind": "career",
+      "name": "Agent",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/career/agent.md",
+      "selection": "background-options",
+      "file": "career.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/career/aristocrat",
+      "kind": "career",
+      "name": "Aristocrat",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/career/aristocrat.md",
+      "selection": "background-options",
+      "file": "career.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/career/artisan",
+      "kind": "career",
+      "name": "Artisan",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/career/artisan.md",
+      "selection": "background-options",
+      "file": "career.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/career/beggar",
+      "kind": "career",
+      "name": "Beggar",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/career/beggar.md",
+      "selection": "background-options",
+      "file": "career.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/career/criminal",
+      "kind": "career",
+      "name": "Criminal",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/career/criminal.md",
+      "selection": "background-options",
+      "file": "career.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/career/disciple",
+      "kind": "career",
+      "name": "Disciple",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/career/disciple.md",
+      "selection": "background-options",
+      "file": "career.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/career/explorer",
+      "kind": "career",
+      "name": "Explorer",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/career/explorer.md",
+      "selection": "background-options",
+      "file": "career.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/career/farmer",
+      "kind": "career",
+      "name": "Farmer",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/career/farmer.md",
+      "selection": "background-options",
+      "file": "career.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/career/gladiator",
+      "kind": "career",
+      "name": "Gladiator",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/career/gladiator.md",
+      "selection": "background-options",
+      "file": "career.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/career/laborer",
+      "kind": "career",
+      "name": "Laborer",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/career/laborer.md",
+      "selection": "background-options",
+      "file": "career.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/career/mages-apprentice",
+      "kind": "career",
+      "name": "Mage's Apprentice",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/career/mages-apprentice.md",
+      "selection": "background-options",
+      "file": "career.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/career/performer",
+      "kind": "career",
+      "name": "Performer",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/career/performer.md",
+      "selection": "background-options",
+      "file": "career.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/career/politician",
+      "kind": "career",
+      "name": "Politician",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/career/politician.md",
+      "selection": "background-options",
+      "file": "career.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/career/sage",
+      "kind": "career",
+      "name": "Sage",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/career/sage.md",
+      "selection": "background-options",
+      "file": "career.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/career/sailor",
+      "kind": "career",
+      "name": "Sailor",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/career/sailor.md",
+      "selection": "background-options",
+      "file": "career.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/career/soldier",
+      "kind": "career",
+      "name": "Soldier",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/career/soldier.md",
+      "selection": "background-options",
+      "file": "career.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/career/warden",
+      "kind": "career",
+      "name": "Warden",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/career/warden.md",
+      "selection": "background-options",
+      "file": "career.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/career/watch-officer",
+      "kind": "career",
+      "name": "Watch Officer",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/career/watch-officer.md",
+      "selection": "background-options",
+      "file": "career.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/chapter/background",
+      "kind": "chapter",
+      "name": "Background",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/chapter/background.md",
+      "selection": "background-options",
+      "file": "chapter.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/class/fury",
+      "kind": "class",
+      "name": "Fury",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/class/fury.md",
+      "selection": "fury-level-one",
+      "file": "class.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/advanced-studies",
+      "kind": "complication",
+      "name": "Advanced Studies",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/advanced-studies.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/amnesia",
+      "kind": "complication",
+      "name": "Amnesia",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/amnesia.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/animal-form",
+      "kind": "complication",
+      "name": "Animal Form",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/animal-form.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/antihero",
+      "kind": "complication",
+      "name": "Antihero",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/antihero.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/artifact-bonded",
+      "kind": "complication",
+      "name": "Artifact Bonded",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/artifact-bonded.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/bereaved",
+      "kind": "complication",
+      "name": "Bereaved",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/bereaved.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/betrothed",
+      "kind": "complication",
+      "name": "Betrothed",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/betrothed.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/chaos-touched",
+      "kind": "complication",
+      "name": "Chaos Touched",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/chaos-touched.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/chosen-one",
+      "kind": "complication",
+      "name": "Chosen One",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/chosen-one.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/consuming-interest",
+      "kind": "complication",
+      "name": "Consuming Interest",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/consuming-interest.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/corrupted-mentor",
+      "kind": "complication",
+      "name": "Corrupted Mentor",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/corrupted-mentor.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/coward",
+      "kind": "complication",
+      "name": "Coward",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/coward.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/crash-landed",
+      "kind": "complication",
+      "name": "Crash Landed",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/crash-landed.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/cult-victim",
+      "kind": "complication",
+      "name": "Cult Victim",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/cult-victim.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/curse-of-caution",
+      "kind": "complication",
+      "name": "Curse of Caution",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/curse-of-caution.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/curse-of-immortality",
+      "kind": "complication",
+      "name": "Curse of Immortality",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/curse-of-immortality.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/curse-of-misfortune",
+      "kind": "complication",
+      "name": "Curse of Misfortune",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/curse-of-misfortune.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/curse-of-poverty",
+      "kind": "complication",
+      "name": "Curse of Poverty",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/curse-of-poverty.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/curse-of-punishment",
+      "kind": "complication",
+      "name": "Curse of Punishment",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/curse-of-punishment.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/curse-of-stone",
+      "kind": "complication",
+      "name": "Curse of Stone",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/curse-of-stone.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/cursed-weapon",
+      "kind": "complication",
+      "name": "Cursed Weapon",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/cursed-weapon.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/disgraced",
+      "kind": "complication",
+      "name": "Disgraced",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/disgraced.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/dragon-dreams",
+      "kind": "complication",
+      "name": "Dragon Dreams",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/dragon-dreams.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/elemental-inside",
+      "kind": "complication",
+      "name": "Elemental Inside",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/elemental-inside.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/evanesceria",
+      "kind": "complication",
+      "name": "Evanesceria",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/evanesceria.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/exile",
+      "kind": "complication",
+      "name": "Exile",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/exile.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/fallen-immortal",
+      "kind": "complication",
+      "name": "Fallen Immortal",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/fallen-immortal.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/famous-relative",
+      "kind": "complication",
+      "name": "Famous Relative",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/famous-relative.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/feytouched",
+      "kind": "complication",
+      "name": "Feytouched",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/feytouched.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/fiery-ideal",
+      "kind": "complication",
+      "name": "Fiery Ideal",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/fiery-ideal.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/fire-and-chaos",
+      "kind": "complication",
+      "name": "Fire and Chaos",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/fire-and-chaos.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/following-in-the-footsteps",
+      "kind": "complication",
+      "name": "Following in the Footsteps",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/following-in-the-footsteps.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/forbidden-romance",
+      "kind": "complication",
+      "name": "Forbidden Romance",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/forbidden-romance.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/frostheart",
+      "kind": "complication",
+      "name": "Frostheart",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/frostheart.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/getting-too-old-for-this",
+      "kind": "complication",
+      "name": "Getting Too Old for This",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/getting-too-old-for-this.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/gnoll-mauled",
+      "kind": "complication",
+      "name": "Gnoll-Mauled",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/gnoll-mauled.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/greening",
+      "kind": "complication",
+      "name": "Greening",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/greening.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/grifter",
+      "kind": "complication",
+      "name": "Grifter",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/grifter.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/grounded",
+      "kind": "complication",
+      "name": "Grounded",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/grounded.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/guilty-conscience",
+      "kind": "complication",
+      "name": "Guilty Conscience",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/guilty-conscience.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/hawk-rider",
+      "kind": "complication",
+      "name": "Hawk Rider",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/hawk-rider.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/host-body",
+      "kind": "complication",
+      "name": "Host Body",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/host-body.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/hunted",
+      "kind": "complication",
+      "name": "Hunted",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/hunted.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/hunter",
+      "kind": "complication",
+      "name": "Hunter",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/hunter.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/indebted",
+      "kind": "complication",
+      "name": "Indebted",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/indebted.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/infernal-contract-but-like-bad",
+      "kind": "complication",
+      "name": "Infernal Contract... But, Like, Bad",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/infernal-contract-but-like-bad.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/infernal-contract",
+      "kind": "complication",
+      "name": "Infernal Contract",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/infernal-contract.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/ivory-tower",
+      "kind": "complication",
+      "name": "Ivory Tower",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/ivory-tower.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/lifebonded",
+      "kind": "complication",
+      "name": "Lifebonded",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/lifebonded.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/lightning-soul",
+      "kind": "complication",
+      "name": "Lightning Soul",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/lightning-soul.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/loner",
+      "kind": "complication",
+      "name": "Loner",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/loner.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/lost-in-time",
+      "kind": "complication",
+      "name": "Lost in Time",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/lost-in-time.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/lost-your-head",
+      "kind": "complication",
+      "name": "Lost Your Head",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/lost-your-head.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/lucky",
+      "kind": "complication",
+      "name": "Lucky",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/lucky.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/master-chef",
+      "kind": "complication",
+      "name": "Master Chef",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/master-chef.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/meddling-butler",
+      "kind": "complication",
+      "name": "Meddling Butler",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/meddling-butler.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/medium",
+      "kind": "complication",
+      "name": "Medium",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/medium.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/medusa-blood",
+      "kind": "complication",
+      "name": "Medusa Blood",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/medusa-blood.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/misunderstood",
+      "kind": "complication",
+      "name": "Misunderstood",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/misunderstood.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/mundane",
+      "kind": "complication",
+      "name": "Mundane",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/mundane.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/outlaw",
+      "kind": "complication",
+      "name": "Outlaw",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/outlaw.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/pirate",
+      "kind": "complication",
+      "name": "Pirate",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/pirate.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/preacher",
+      "kind": "complication",
+      "name": "Preacher",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/preacher.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/primordial-sickness",
+      "kind": "complication",
+      "name": "Primordial Sickness",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/primordial-sickness.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/prisoner-of-the-synlirii",
+      "kind": "complication",
+      "name": "Prisoner of the Synlirii",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/prisoner-of-the-synlirii.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/promising-apprentice",
+      "kind": "complication",
+      "name": "Promising Apprentice",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/promising-apprentice.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/psychic-eruption",
+      "kind": "complication",
+      "name": "Psychic Eruption",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/psychic-eruption.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/raised-by-beasts",
+      "kind": "complication",
+      "name": "Raised by Beasts",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/raised-by-beasts.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/refugee",
+      "kind": "complication",
+      "name": "Refugee",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/refugee.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/rival",
+      "kind": "complication",
+      "name": "Rival",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/rival.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/rogue-talent",
+      "kind": "complication",
+      "name": "Rogue Talent",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/rogue-talent.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/runaway",
+      "kind": "complication",
+      "name": "Runaway",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/runaway.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/searching-for-a-cure",
+      "kind": "complication",
+      "name": "Searching for a Cure",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/searching-for-a-cure.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/secret-identity",
+      "kind": "complication",
+      "name": "Secret Identity",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/secret-identity.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/secret-twin",
+      "kind": "complication",
+      "name": "Secret Twin",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/secret-twin.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/self-taught",
+      "kind": "complication",
+      "name": "Self-Taught",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/self-taught.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/sewer-folk",
+      "kind": "complication",
+      "name": "Sewer Folk",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/sewer-folk.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/shadow-born",
+      "kind": "complication",
+      "name": "Shadow Born",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/shadow-born.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/shared-spirit",
+      "kind": "complication",
+      "name": "Shared Spirit",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/shared-spirit.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/shattered-legacy",
+      "kind": "complication",
+      "name": "Shattered Legacy",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/shattered-legacy.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/shipwrecked",
+      "kind": "complication",
+      "name": "Shipwrecked",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/shipwrecked.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/siblings-shield",
+      "kind": "complication",
+      "name": "Sibling's Shield",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/siblings-shield.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/silent-sentinel",
+      "kind": "complication",
+      "name": "Silent Sentinel",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/silent-sentinel.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/slight-case-of-lycanthropy",
+      "kind": "complication",
+      "name": "Slight Case of Lycanthropy",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/slight-case-of-lycanthropy.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/stolen-face",
+      "kind": "complication",
+      "name": "Stolen Face",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/stolen-face.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/strange-inheritance",
+      "kind": "complication",
+      "name": "Strange Inheritance",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/strange-inheritance.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/stripped-of-rank",
+      "kind": "complication",
+      "name": "Stripped of Rank",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/stripped-of-rank.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/thrill-seeker",
+      "kind": "complication",
+      "name": "Thrill Seeker",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/thrill-seeker.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/vampire-scion",
+      "kind": "complication",
+      "name": "Vampire Scion",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/vampire-scion.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/voice-in-your-head",
+      "kind": "complication",
+      "name": "Voice in Your Head",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/voice-in-your-head.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/vow-of-duty",
+      "kind": "complication",
+      "name": "Vow of Duty",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/vow-of-duty.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/vow-of-honesty",
+      "kind": "complication",
+      "name": "Vow of Honesty",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/vow-of-honesty.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/waking-dreams",
+      "kind": "complication",
+      "name": "Waking Dreams",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/waking-dreams.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/war-dog-collar",
+      "kind": "complication",
+      "name": "War Dog Collar",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/war-dog-collar.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/war-of-assassins",
+      "kind": "complication",
+      "name": "War of Assassins",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/war-of-assassins.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/ward",
+      "kind": "complication",
+      "name": "Ward",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/ward.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/waterborn",
+      "kind": "complication",
+      "name": "Waterborn",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/waterborn.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/wodewalker",
+      "kind": "complication",
+      "name": "Wodewalker",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/wodewalker.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/wrathful-spirit",
+      "kind": "complication",
+      "name": "Wrathful Spirit",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/wrathful-spirit.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/complication/wrongly-imprisoned",
+      "kind": "complication",
+      "name": "Wrongly Imprisoned",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/complication/wrongly-imprisoned.md",
+      "selection": "complications",
+      "file": "complication.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/condition/bleeding",
+      "kind": "condition",
+      "name": "Bleeding",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/condition/bleeding.md",
+      "selection": "conditions",
+      "file": "condition.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/condition/dazed",
+      "kind": "condition",
+      "name": "Dazed",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/condition/dazed.md",
+      "selection": "conditions",
+      "file": "condition.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/condition/frightened",
+      "kind": "condition",
+      "name": "Frightened",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/condition/frightened.md",
+      "selection": "conditions",
+      "file": "condition.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/condition/grabbed",
+      "kind": "condition",
+      "name": "Grabbed",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/condition/grabbed.md",
+      "selection": "conditions",
+      "file": "condition.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/condition/prone",
+      "kind": "condition",
+      "name": "Prone",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/condition/prone.md",
+      "selection": "conditions",
+      "file": "condition.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/condition/restrained",
+      "kind": "condition",
+      "name": "Restrained",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/condition/restrained.md",
+      "selection": "conditions",
+      "file": "condition.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/condition/slowed",
+      "kind": "condition",
+      "name": "Slowed",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/condition/slowed.md",
+      "selection": "conditions",
+      "file": "condition.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/condition/taunted",
+      "kind": "condition",
+      "name": "Taunted",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/condition/taunted.md",
+      "selection": "conditions",
+      "file": "condition.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/condition/weakened",
+      "kind": "condition",
+      "name": "Weakened",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/condition/weakened.md",
+      "selection": "conditions",
+      "file": "condition.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/culture/academic",
+      "kind": "culture",
+      "name": "Academic",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/culture/academic.md",
+      "selection": "background-options",
+      "file": "culture.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/culture/bureaucratic",
+      "kind": "culture",
+      "name": "Bureaucratic",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/culture/bureaucratic.md",
+      "selection": "background-options",
+      "file": "culture.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/culture/communal",
+      "kind": "culture",
+      "name": "Communal",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/culture/communal.md",
+      "selection": "background-options",
+      "file": "culture.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/culture/creative",
+      "kind": "culture",
+      "name": "Creative",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/culture/creative.md",
+      "selection": "background-options",
+      "file": "culture.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/culture/labor",
+      "kind": "culture",
+      "name": "Labor",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/culture/labor.md",
+      "selection": "background-options",
+      "file": "culture.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/culture/lawless",
+      "kind": "culture",
+      "name": "Lawless",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/culture/lawless.md",
+      "selection": "background-options",
+      "file": "culture.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/culture/martial",
+      "kind": "culture",
+      "name": "Martial",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/culture/martial.md",
+      "selection": "background-options",
+      "file": "culture.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/culture/noble",
+      "kind": "culture",
+      "name": "Noble",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/culture/noble.md",
+      "selection": "background-options",
+      "file": "culture.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/culture/nomadic",
+      "kind": "culture",
+      "name": "Nomadic",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/culture/nomadic.md",
+      "selection": "background-options",
+      "file": "culture.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/culture/rural",
+      "kind": "culture",
+      "name": "Rural",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/culture/rural.md",
+      "selection": "background-options",
+      "file": "culture.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/culture/secluded",
+      "kind": "culture",
+      "name": "Secluded",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/culture/secluded.md",
+      "selection": "background-options",
+      "file": "culture.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/culture/urban",
+      "kind": "culture",
+      "name": "Urban",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/culture/urban.md",
+      "selection": "background-options",
+      "file": "culture.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/culture/wilderness",
+      "kind": "culture",
+      "name": "Wilderness",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/culture/wilderness.md",
+      "selection": "background-options",
+      "file": "culture.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.common.main-actions/charge",
+      "kind": "feature",
+      "name": "Charge",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/common/main-actions/charge.md",
+      "selection": "common-actions",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.common.main-actions/defend",
+      "kind": "feature",
+      "name": "Defend",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/common/main-actions/defend.md",
+      "selection": "common-actions",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.common.main-actions/free-strike",
+      "kind": "feature",
+      "name": "Free Strike",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/common/main-actions/free-strike.md",
+      "selection": "common-actions",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.common.main-actions/heal",
+      "kind": "feature",
+      "name": "Heal",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/common/main-actions/heal.md",
+      "selection": "common-actions",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.common.maneuvers/aid-attack",
+      "kind": "feature",
+      "name": "Aid Attack",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/common/maneuvers/aid-attack.md",
+      "selection": "common-actions",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.common.maneuvers/catch-breath",
+      "kind": "feature",
+      "name": "Catch Breath",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/common/maneuvers/catch-breath.md",
+      "selection": "common-actions",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.common.maneuvers/escape-grab",
+      "kind": "feature",
+      "name": "Escape Grab",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/common/maneuvers/escape-grab.md",
+      "selection": "common-actions",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.common.maneuvers/grab",
+      "kind": "feature",
+      "name": "Grab",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/common/maneuvers/grab.md",
+      "selection": "common-actions",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.common.maneuvers/hide",
+      "kind": "feature",
+      "name": "Hide",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/common/maneuvers/hide.md",
+      "selection": "common-actions",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.common.maneuvers/knockback",
+      "kind": "feature",
+      "name": "Knockback",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/common/maneuvers/knockback.md",
+      "selection": "common-actions",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.common.maneuvers/make-or-assist-a-test",
+      "kind": "feature",
+      "name": "Make or Assist a Test",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/common/maneuvers/make-or-assist-a-test.md",
+      "selection": "common-actions",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.common.maneuvers/search-for-hidden-creatures",
+      "kind": "feature",
+      "name": "Search for Hidden Creatures",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/common/maneuvers/search-for-hidden-creatures.md",
+      "selection": "common-actions",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.common.maneuvers/stand-up",
+      "kind": "feature",
+      "name": "Stand Up",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/common/maneuvers/stand-up.md",
+      "selection": "common-actions",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.common.maneuvers/use-consumable",
+      "kind": "feature",
+      "name": "Use Consumable",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/common/maneuvers/use-consumable.md",
+      "selection": "common-actions",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.common.move-actions/advance",
+      "kind": "feature",
+      "name": "Advance",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/common/move-actions/advance.md",
+      "selection": "common-actions",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.common.move-actions/disengage",
+      "kind": "feature",
+      "name": "Disengage",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/common/move-actions/disengage.md",
+      "selection": "common-actions",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.common.move-actions/ride",
+      "kind": "feature",
+      "name": "Ride",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/common/move-actions/ride.md",
+      "selection": "common-actions",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.fury.boren/animal-form-bear",
+      "kind": "feature",
+      "name": "Animal Form: Bear",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/boren/animal-form-bear.md",
+      "selection": "fury-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.fury.boren/aspect-benefits",
+      "kind": "feature",
+      "name": "Aspect Benefits",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/boren/aspect-benefits.md",
+      "selection": "fury-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.fury.boren/growing-ferocity",
+      "kind": "feature",
+      "name": "Growing Ferocity",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/boren/growing-ferocity.md",
+      "selection": "fury-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.fury.boren/hybrid-form-bear",
+      "kind": "feature",
+      "name": "Hybrid Form: Bear",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/boren/hybrid-form-bear.md",
+      "selection": "fury-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.fury.boren/kit-bonuses",
+      "kind": "feature",
+      "name": "Kit Bonuses",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/boren/kit-bonuses.md",
+      "selection": "fury-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.fury.boren/primordial-storm-blizzard",
+      "kind": "feature",
+      "name": "Primordial Storm: Blizzard",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/boren/primordial-storm-blizzard.md",
+      "selection": "fury-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.fury.corven/animal-form-crow",
+      "kind": "feature",
+      "name": "Animal Form: Crow",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/corven/animal-form-crow.md",
+      "selection": "fury-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.fury.corven/aspect-benefits",
+      "kind": "feature",
+      "name": "Aspect Benefits",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/corven/aspect-benefits.md",
+      "selection": "fury-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.fury.corven/growing-ferocity",
+      "kind": "feature",
+      "name": "Growing Ferocity",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/corven/growing-ferocity.md",
+      "selection": "fury-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.fury.corven/hybrid-form-crow",
+      "kind": "feature",
+      "name": "Hybrid Form: Crow",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/corven/hybrid-form-crow.md",
+      "selection": "fury-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.fury.corven/kit-bonuses",
+      "kind": "feature",
+      "name": "Kit Bonuses",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/corven/kit-bonuses.md",
+      "selection": "fury-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.fury.corven/primordial-storm-anabatic-wind",
+      "kind": "feature",
+      "name": "Primordial Storm: Anabatic Wind",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/corven/primordial-storm-anabatic-wind.md",
+      "selection": "fury-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.fury.level-1/1st-level-aspect-features",
+      "kind": "feature",
+      "name": "1st-Level Aspect Features",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/level-1/1st-level-aspect-features.md",
+      "selection": "fury-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.fury.level-1/aspect-triggered-action",
+      "kind": "feature",
+      "name": "Aspect Triggered Action",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/level-1/aspect-triggered-action.md",
+      "selection": "fury-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.fury.level-1/beast-shape",
+      "kind": "feature",
+      "name": "Beast Shape",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/level-1/beast-shape.md",
+      "selection": "fury-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.fury.level-1/ferocity",
+      "kind": "feature",
+      "name": "Ferocity",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/level-1/ferocity.md",
+      "selection": "fury-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.fury.level-1/fury-abilities",
+      "kind": "feature",
+      "name": "Fury Abilities",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/level-1/fury-abilities.md",
+      "selection": "fury-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.fury.level-1/growing-ferocity",
+      "kind": "feature",
+      "name": "Growing Ferocity",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/level-1/growing-ferocity.md",
+      "selection": "fury-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.fury.level-1/kit",
+      "kind": "feature",
+      "name": "Kit",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/level-1/kit.md",
+      "selection": "fury-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.fury.level-1/mighty-leaps",
+      "kind": "feature",
+      "name": "Mighty Leaps",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/level-1/mighty-leaps.md",
+      "selection": "fury-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.fury.level-1/primordial-aspect",
+      "kind": "feature",
+      "name": "Primordial Aspect",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/level-1/primordial-aspect.md",
+      "selection": "fury-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.fury.level-1/primordial-cunning",
+      "kind": "feature",
+      "name": "Primordial Cunning",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/level-1/primordial-cunning.md",
+      "selection": "fury-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.fury.level-1/primordial-strength",
+      "kind": "feature",
+      "name": "Primordial Strength",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/level-1/primordial-strength.md",
+      "selection": "fury-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.fury.level-1/relentless-hunter",
+      "kind": "feature",
+      "name": "Relentless Hunter",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/level-1/relentless-hunter.md",
+      "selection": "fury-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.fury.raden/animal-form-rat",
+      "kind": "feature",
+      "name": "Animal Form: Rat",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/raden/animal-form-rat.md",
+      "selection": "fury-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.fury.raden/aspect-benefits",
+      "kind": "feature",
+      "name": "Aspect Benefits",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/raden/aspect-benefits.md",
+      "selection": "fury-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.fury.raden/growing-ferocity",
+      "kind": "feature",
+      "name": "Growing Ferocity",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/raden/growing-ferocity.md",
+      "selection": "fury-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.fury.raden/hybrid-form-rat",
+      "kind": "feature",
+      "name": "Hybrid Form: Rat",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/raden/hybrid-form-rat.md",
+      "selection": "fury-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.fury.raden/kit-bonuses",
+      "kind": "feature",
+      "name": "Kit Bonuses",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/raden/kit-bonuses.md",
+      "selection": "fury-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.fury.raden/primordial-storm-rat-flood",
+      "kind": "feature",
+      "name": "Primordial Storm: Rat Flood",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/raden/primordial-storm-rat-flood.md",
+      "selection": "fury-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.fury.stormwight-kits/aspect-benefits-and-animal-form",
+      "kind": "feature",
+      "name": "Aspect Benefits and Animal Form",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/stormwight-kits/aspect-benefits-and-animal-form.md",
+      "selection": "fury-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.fury.stormwight-kits/aspect-of-the-wild",
+      "kind": "feature",
+      "name": "Aspect of the Wild",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/stormwight-kits/aspect-of-the-wild.md",
+      "selection": "fury-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.fury.stormwight-kits/equipment",
+      "kind": "feature",
+      "name": "Equipment",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/stormwight-kits/equipment.md",
+      "selection": "fury-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.fury.stormwight-kits/growing-ferocity",
+      "kind": "feature",
+      "name": "Growing Ferocity",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/stormwight-kits/growing-ferocity.md",
+      "selection": "fury-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.fury.stormwight-kits/kit-bonuses",
+      "kind": "feature",
+      "name": "Kit Bonuses",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/stormwight-kits/kit-bonuses.md",
+      "selection": "fury-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.fury.stormwight-kits/kit-features",
+      "kind": "feature",
+      "name": "Kit Features",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/stormwight-kits/kit-features.md",
+      "selection": "fury-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.fury.stormwight-kits/primordial-storm",
+      "kind": "feature",
+      "name": "Primordial Storm",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/stormwight-kits/primordial-storm.md",
+      "selection": "fury-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.fury.vuken/animal-form-wolf",
+      "kind": "feature",
+      "name": "Animal Form: Wolf",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/vuken/animal-form-wolf.md",
+      "selection": "fury-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.fury.vuken/aspect-benefits",
+      "kind": "feature",
+      "name": "Aspect Benefits",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/vuken/aspect-benefits.md",
+      "selection": "fury-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.fury.vuken/growing-ferocity",
+      "kind": "feature",
+      "name": "Growing Ferocity",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/vuken/growing-ferocity.md",
+      "selection": "fury-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.fury.vuken/hybrid-form-wolf",
+      "kind": "feature",
+      "name": "Hybrid Form: Wolf",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/vuken/hybrid-form-wolf.md",
+      "selection": "fury-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.fury.vuken/kit-bonuses",
+      "kind": "feature",
+      "name": "Kit Bonuses",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/vuken/kit-bonuses.md",
+      "selection": "fury-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.fury.vuken/primordial-storm-lightning-storm",
+      "kind": "feature",
+      "name": "Primordial Storm: Lightning Storm",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/vuken/primordial-storm-lightning-storm.md",
+      "selection": "fury-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.goblin/goblin-malice",
+      "kind": "featureblock",
+      "name": "Goblin Malice",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/monster/goblin/goblin-malice.md",
+      "selection": "goblin-warrior",
+      "file": "featureblock.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/kit/arcane-archer",
+      "kind": "kit",
+      "name": "Arcane Archer",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/kit/arcane-archer.md",
+      "selection": "kits",
+      "file": "kit.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/kit/battlemind",
+      "kind": "kit",
+      "name": "Battlemind",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/kit/battlemind.md",
+      "selection": "kits",
+      "file": "kit.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/kit/boren",
+      "kind": "kit",
+      "name": "Boren",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/kit/boren.md",
+      "selection": "kits",
+      "file": "kit.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/kit/cloak-and-dagger",
+      "kind": "kit",
+      "name": "Cloak and Dagger",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/kit/cloak-and-dagger.md",
+      "selection": "kits",
+      "file": "kit.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/kit/corven",
+      "kind": "kit",
+      "name": "Corven",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/kit/corven.md",
+      "selection": "kits",
+      "file": "kit.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/kit/dual-wielder",
+      "kind": "kit",
+      "name": "Dual Wielder",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/kit/dual-wielder.md",
+      "selection": "kits",
+      "file": "kit.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/kit/guisarmier",
+      "kind": "kit",
+      "name": "Guisarmier",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/kit/guisarmier.md",
+      "selection": "kits",
+      "file": "kit.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/kit/martial-artist",
+      "kind": "kit",
+      "name": "Martial Artist",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/kit/martial-artist.md",
+      "selection": "kits",
+      "file": "kit.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/kit/mountain",
+      "kind": "kit",
+      "name": "Mountain",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/kit/mountain.md",
+      "selection": "kits",
+      "file": "kit.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/kit/panther",
+      "kind": "kit",
+      "name": "Panther",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/kit/panther.md",
+      "selection": "kits",
+      "file": "kit.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/kit/pugilist",
+      "kind": "kit",
+      "name": "Pugilist",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/kit/pugilist.md",
+      "selection": "kits",
+      "file": "kit.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/kit/raden",
+      "kind": "kit",
+      "name": "Raden",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/kit/raden.md",
+      "selection": "kits",
+      "file": "kit.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/kit/raider",
+      "kind": "kit",
+      "name": "Raider",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/kit/raider.md",
+      "selection": "kits",
+      "file": "kit.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/kit/ranger",
+      "kind": "kit",
+      "name": "Ranger",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/kit/ranger.md",
+      "selection": "kits",
+      "file": "kit.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/kit/rapid-fire",
+      "kind": "kit",
+      "name": "Rapid-Fire",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/kit/rapid-fire.md",
+      "selection": "kits",
+      "file": "kit.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/kit/retiarius",
+      "kind": "kit",
+      "name": "Retiarius",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/kit/retiarius.md",
+      "selection": "kits",
+      "file": "kit.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/kit/shining-armor",
+      "kind": "kit",
+      "name": "Shining Armor",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/kit/shining-armor.md",
+      "selection": "kits",
+      "file": "kit.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/kit/sniper",
+      "kind": "kit",
+      "name": "Sniper",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/kit/sniper.md",
+      "selection": "kits",
+      "file": "kit.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/kit/spellsword",
+      "kind": "kit",
+      "name": "Spellsword",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/kit/spellsword.md",
+      "selection": "kits",
+      "file": "kit.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/kit/stick-and-robe",
+      "kind": "kit",
+      "name": "Stick and Robe",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/kit/stick-and-robe.md",
+      "selection": "kits",
+      "file": "kit.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/kit/swashbuckler",
+      "kind": "kit",
+      "name": "Swashbuckler",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/kit/swashbuckler.md",
+      "selection": "kits",
+      "file": "kit.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/kit/sword-and-board",
+      "kind": "kit",
+      "name": "Sword and Board",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/kit/sword-and-board.md",
+      "selection": "kits",
+      "file": "kit.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/kit/vuken",
+      "kind": "kit",
+      "name": "Vuken",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/kit/vuken.md",
+      "selection": "kits",
+      "file": "kit.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/kit/warrior-priest",
+      "kind": "kit",
+      "name": "Warrior Priest",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/kit/warrior-priest.md",
+      "selection": "kits",
+      "file": "kit.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/kit/whirlwind",
+      "kind": "kit",
+      "name": "Whirlwind",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/kit/whirlwind.md",
+      "selection": "kits",
+      "file": "kit.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/perk/arcane-trick",
+      "kind": "perk",
+      "name": "Arcane Trick",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/perk/arcane-trick.md",
+      "selection": "perks",
+      "file": "perk.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/perk/area-of-expertise",
+      "kind": "perk",
+      "name": "Area of Expertise",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/perk/area-of-expertise.md",
+      "selection": "perks",
+      "file": "perk.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/perk/brawny",
+      "kind": "perk",
+      "name": "Brawny",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/perk/brawny.md",
+      "selection": "perks",
+      "file": "perk.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/perk/but-i-know-who-does",
+      "kind": "perk",
+      "name": "But I Know Who Does",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/perk/but-i-know-who-does.md",
+      "selection": "perks",
+      "file": "perk.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/perk/camouflage-hunter",
+      "kind": "perk",
+      "name": "Camouflage Hunter",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/perk/camouflage-hunter.md",
+      "selection": "perks",
+      "file": "perk.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/perk/charming-liar",
+      "kind": "perk",
+      "name": "Charming Liar",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/perk/charming-liar.md",
+      "selection": "perks",
+      "file": "perk.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/perk/creature-sense",
+      "kind": "perk",
+      "name": "Creature Sense",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/perk/creature-sense.md",
+      "selection": "perks",
+      "file": "perk.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/perk/criminal-contacts",
+      "kind": "perk",
+      "name": "Criminal Contacts",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/perk/criminal-contacts.md",
+      "selection": "perks",
+      "file": "perk.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/perk/danger-sense",
+      "kind": "perk",
+      "name": "Danger Sense",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/perk/danger-sense.md",
+      "selection": "perks",
+      "file": "perk.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/perk/dazzler",
+      "kind": "perk",
+      "name": "Dazzler",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/perk/dazzler.md",
+      "selection": "perks",
+      "file": "perk.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/perk/eidetic-memory",
+      "kind": "perk",
+      "name": "Eidetic Memory",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/perk/eidetic-memory.md",
+      "selection": "perks",
+      "file": "perk.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/perk/engrossing-monologue",
+      "kind": "perk",
+      "name": "Engrossing Monologue",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/perk/engrossing-monologue.md",
+      "selection": "perks",
+      "file": "perk.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/perk/expert-artisan",
+      "kind": "perk",
+      "name": "Expert Artisan",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/perk/expert-artisan.md",
+      "selection": "perks",
+      "file": "perk.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/perk/expert-sage",
+      "kind": "perk",
+      "name": "Expert Sage",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/perk/expert-sage.md",
+      "selection": "perks",
+      "file": "perk.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/perk/familiar",
+      "kind": "perk",
+      "name": "Familiar",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/perk/familiar.md",
+      "selection": "perks",
+      "file": "perk.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/perk/forgettable-face",
+      "kind": "perk",
+      "name": "Forgettable Face",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/perk/forgettable-face.md",
+      "selection": "perks",
+      "file": "perk.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/perk/friend-catapult",
+      "kind": "perk",
+      "name": "Friend Catapult",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/perk/friend-catapult.md",
+      "selection": "perks",
+      "file": "perk.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/perk/gum-up-the-works",
+      "kind": "perk",
+      "name": "Gum Up the Works",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/perk/gum-up-the-works.md",
+      "selection": "perks",
+      "file": "perk.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/perk/handy",
+      "kind": "perk",
+      "name": "Handy",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/perk/handy.md",
+      "selection": "perks",
+      "file": "perk.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/perk/harmonizer",
+      "kind": "perk",
+      "name": "Harmonizer",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/perk/harmonizer.md",
+      "selection": "perks",
+      "file": "perk.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/perk/improvisation-creation",
+      "kind": "perk",
+      "name": "Improvisation Creation",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/perk/improvisation-creation.md",
+      "selection": "perks",
+      "file": "perk.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/perk/inspired-artisan",
+      "kind": "perk",
+      "name": "Inspired Artisan",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/perk/inspired-artisan.md",
+      "selection": "perks",
+      "file": "perk.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/perk/invisible-force",
+      "kind": "perk",
+      "name": "Invisible Force",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/perk/invisible-force.md",
+      "selection": "perks",
+      "file": "perk.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/perk/ive-got-you",
+      "kind": "perk",
+      "name": "I've Got You!",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/perk/ive-got-you.md",
+      "selection": "perks",
+      "file": "perk.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/perk/ive-read-about-this-place",
+      "kind": "perk",
+      "name": "I've Read About This Place",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/perk/ive-read-about-this-place.md",
+      "selection": "perks",
+      "file": "perk.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/perk/lie-detector",
+      "kind": "perk",
+      "name": "Lie Detector",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/perk/lie-detector.md",
+      "selection": "perks",
+      "file": "perk.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/perk/linguist",
+      "kind": "perk",
+      "name": "Linguist",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/perk/linguist.md",
+      "selection": "perks",
+      "file": "perk.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/perk/lucky-dog",
+      "kind": "perk",
+      "name": "Lucky Dog",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/perk/lucky-dog.md",
+      "selection": "perks",
+      "file": "perk.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/perk/master-of-disguise",
+      "kind": "perk",
+      "name": "Master of Disguise",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/perk/master-of-disguise.md",
+      "selection": "perks",
+      "file": "perk.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/perk/monster-whisperer",
+      "kind": "perk",
+      "name": "Monster Whisperer",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/perk/monster-whisperer.md",
+      "selection": "perks",
+      "file": "perk.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/perk/open-book",
+      "kind": "perk",
+      "name": "Open Book",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/perk/open-book.md",
+      "selection": "perks",
+      "file": "perk.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/perk/pardon-my-friend",
+      "kind": "perk",
+      "name": "Pardon My Friend",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/perk/pardon-my-friend.md",
+      "selection": "perks",
+      "file": "perk.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/perk/polymath",
+      "kind": "perk",
+      "name": "Polymath",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/perk/polymath.md",
+      "selection": "perks",
+      "file": "perk.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/perk/power-player",
+      "kind": "perk",
+      "name": "Power Player",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/perk/power-player.md",
+      "selection": "perks",
+      "file": "perk.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/perk/psychic-whisper",
+      "kind": "perk",
+      "name": "Psychic Whisper",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/perk/psychic-whisper.md",
+      "selection": "perks",
+      "file": "perk.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/perk/put-your-back-into-it",
+      "kind": "perk",
+      "name": "Put Your Back Into It!",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/perk/put-your-back-into-it.md",
+      "selection": "perks",
+      "file": "perk.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/perk/ritualist",
+      "kind": "perk",
+      "name": "Ritualist",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/perk/ritualist.md",
+      "selection": "perks",
+      "file": "perk.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/perk/slipped-lead",
+      "kind": "perk",
+      "name": "Slipped Lead",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/perk/slipped-lead.md",
+      "selection": "perks",
+      "file": "perk.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/perk/so-tell-me",
+      "kind": "perk",
+      "name": "So Tell Me...",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/perk/so-tell-me.md",
+      "selection": "perks",
+      "file": "perk.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/perk/specialist",
+      "kind": "perk",
+      "name": "Specialist",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/perk/specialist.md",
+      "selection": "perks",
+      "file": "perk.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/perk/spot-the-tell",
+      "kind": "perk",
+      "name": "Spot the Tell",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/perk/spot-the-tell.md",
+      "selection": "perks",
+      "file": "perk.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/perk/team-leader",
+      "kind": "perk",
+      "name": "Team Leader",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/perk/team-leader.md",
+      "selection": "perks",
+      "file": "perk.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/perk/teamwork",
+      "kind": "perk",
+      "name": "Teamwork",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/perk/teamwork.md",
+      "selection": "perks",
+      "file": "perk.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/perk/thingspeaker",
+      "kind": "perk",
+      "name": "Thingspeaker",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/perk/thingspeaker.md",
+      "selection": "perks",
+      "file": "perk.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/perk/traveling-artisan",
+      "kind": "perk",
+      "name": "Traveling Artisan",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/perk/traveling-artisan.md",
+      "selection": "perks",
+      "file": "perk.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/perk/traveling-sage",
+      "kind": "perk",
+      "name": "Traveling Sage",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/perk/traveling-sage.md",
+      "selection": "perks",
+      "file": "perk.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/perk/wood-wise",
+      "kind": "perk",
+      "name": "Wood Wise",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/perk/wood-wise.md",
+      "selection": "perks",
+      "file": "perk.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/rule.combat/combat-round",
+      "kind": "rule",
+      "name": "Combat Round",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/rule/combat/combat-round.md",
+      "selection": "rules-r04-r05",
+      "file": "rule.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/rule.combat/condition",
+      "kind": "rule",
+      "name": "Conditions",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/rule/combat/condition.md",
+      "selection": "rules-r04-r05",
+      "file": "rule.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/rule.combat/critical-hit",
+      "kind": "rule",
+      "name": "Critical Hit",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/rule/combat/critical-hit.md",
+      "selection": "rules-r04-r05",
+      "file": "rule.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/rule.combat/end-of-turn",
+      "kind": "rule",
+      "name": "End of Next Turn (EoT)",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/rule/combat/end-of-turn.md",
+      "selection": "rules-r04-r05",
+      "file": "rule.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/rule.combat/side",
+      "kind": "rule",
+      "name": "Sides",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/rule/combat/side.md",
+      "selection": "rules-r04-r05",
+      "file": "rule.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/rule.combat/surprised",
+      "kind": "rule",
+      "name": "Determine Surprise",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/rule/combat/surprised.md",
+      "selection": "rules-r04-r05",
+      "file": "rule.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/rule.combat/turn",
+      "kind": "rule",
+      "name": "Taking a Turn",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/rule/combat/turn.md",
+      "selection": "rules-r04-r05",
+      "file": "rule.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/rule.damage/damage-immunity",
+      "kind": "rule",
+      "name": "Damage Immunity",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/rule/damage/damage-immunity.md",
+      "selection": "rules-r04-r05",
+      "file": "rule.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/rule.damage/damage-type",
+      "kind": "rule",
+      "name": "Damage Types",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/rule/damage/damage-type.md",
+      "selection": "rules-r04-r05",
+      "file": "rule.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/rule.damage/damage-weakness",
+      "kind": "rule",
+      "name": "Damage Weakness",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/rule/damage/damage-weakness.md",
+      "selection": "rules-r04-r05",
+      "file": "rule.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/rule.damage/damage",
+      "kind": "rule",
+      "name": "Damage",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/rule/damage/damage.md",
+      "selection": "rules-r04-r05",
+      "file": "rule.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/rule.damage/rolled-damage",
+      "kind": "rule",
+      "name": "Rolled Damage",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/rule/damage/rolled-damage.md",
+      "selection": "rules-r04-r05",
+      "file": "rule.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/rule.dice/ability-roll",
+      "kind": "rule",
+      "name": "Ability Roll",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/rule/dice/ability-roll.md",
+      "selection": "rules-r04-r05",
+      "file": "rule.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/rule.dice/bane",
+      "kind": "rule",
+      "name": "Bane",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/rule/dice/bane.md",
+      "selection": "rules-r04-r05",
+      "file": "rule.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/rule.dice/bonuses-and-penalties",
+      "kind": "rule",
+      "name": "Bonuses and Penalties",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/rule/dice/bonuses-and-penalties.md",
+      "selection": "rules-r04-r05",
+      "file": "rule.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/rule.dice/edge",
+      "kind": "rule",
+      "name": "Edge",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/rule/dice/edge.md",
+      "selection": "rules-r04-r05",
+      "file": "rule.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/rule.dice/natural-19-20",
+      "kind": "rule",
+      "name": "Natural 19 or 20: Success With a Reward",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/rule/dice/natural-19-20.md",
+      "selection": "rules-r04-r05",
+      "file": "rule.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/rule.dice/natural-roll",
+      "kind": "rule",
+      "name": "Natural Roll",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/rule/dice/natural-roll.md",
+      "selection": "rules-r04-r05",
+      "file": "rule.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/rule.dice/opposed-power-roll",
+      "kind": "rule",
+      "name": "Opposed Power Rolls",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/rule/dice/opposed-power-roll.md",
+      "selection": "rules-r04-r05",
+      "file": "rule.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/rule.dice/power-roll",
+      "kind": "rule",
+      "name": "Power Rolls",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/rule/dice/power-roll.md",
+      "selection": "rules-r04-r05",
+      "file": "rule.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/rule.dice/tier-outcome",
+      "kind": "rule",
+      "name": "Power Roll Outcomes",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/rule/dice/tier-outcome.md",
+      "selection": "rules-r04-r05",
+      "file": "rule.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/rule.general/always-round-down",
+      "kind": "rule",
+      "name": "Always Round Down",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/rule/general/always-round-down.md",
+      "selection": "rules-r04-r05",
+      "file": "rule.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/rule.general/saving-throw",
+      "kind": "rule",
+      "name": "Saving Throw (Save Ends)",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/rule/general/saving-throw.md",
+      "selection": "rules-r04-r05",
+      "file": "rule.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/rule.health/dying",
+      "kind": "rule",
+      "name": "Dying and Death",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/rule/health/dying.md",
+      "selection": "rules-r04-r05",
+      "file": "rule.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/rule.health/falling",
+      "kind": "rule",
+      "name": "Falling",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/rule/health/falling.md",
+      "selection": "rules-r04-r05",
+      "file": "rule.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/rule.health/recoveries",
+      "kind": "rule",
+      "name": "Recoveries and Recovery Value",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/rule/health/recoveries.md",
+      "selection": "rules-r04-r05",
+      "file": "rule.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/rule.health/stamina",
+      "kind": "rule",
+      "name": "Stamina",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/rule/health/stamina.md",
+      "selection": "rules-r04-r05",
+      "file": "rule.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/rule.health/suffocating",
+      "kind": "rule",
+      "name": "Suffocating",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/rule/health/suffocating.md",
+      "selection": "rules-r04-r05",
+      "file": "rule.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/rule.health/temporary-stamina",
+      "kind": "rule",
+      "name": "Temporary Stamina",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/rule/health/temporary-stamina.md",
+      "selection": "rules-r04-r05",
+      "file": "rule.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/rule.health/winded",
+      "kind": "rule",
+      "name": "Winded",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/rule/health/winded.md",
+      "selection": "rules-r04-r05",
+      "file": "rule.json"
+    },
+    {
+      "id": "mcdm.monsters.v1/rule.monster/creature-free-strike",
+      "kind": "rule",
+      "name": "Creature Free Strikes",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/rule/monster/creature-free-strike.md",
+      "selection": "rules-r04-r05",
+      "file": "rule.json"
+    },
+    {
+      "id": "mcdm.monsters.v1/rule.monster/end-effect",
+      "kind": "rule",
+      "name": "End Effect",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/rule/monster/end-effect.md",
+      "selection": "rules-r04-r05",
+      "file": "rule.json"
+    },
+    {
+      "id": "mcdm.monsters.v1/rule.monster/malice",
+      "kind": "rule",
+      "name": "Malice",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/rule/monster/malice.md",
+      "selection": "rules-r04-r05",
+      "file": "rule.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/skill.crafting/alchemy",
+      "kind": "skill",
+      "name": "Alchemy",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/skill/crafting/alchemy.md",
+      "selection": "skills",
+      "file": "skill.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/skill.crafting/architecture",
+      "kind": "skill",
+      "name": "Architecture",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/skill/crafting/architecture.md",
+      "selection": "skills",
+      "file": "skill.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/skill.crafting/blacksmithing",
+      "kind": "skill",
+      "name": "Blacksmithing",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/skill/crafting/blacksmithing.md",
+      "selection": "skills",
+      "file": "skill.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/skill.crafting/carpentry",
+      "kind": "skill",
+      "name": "Carpentry",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/skill/crafting/carpentry.md",
+      "selection": "skills",
+      "file": "skill.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/skill.crafting/cooking",
+      "kind": "skill",
+      "name": "Cooking",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/skill/crafting/cooking.md",
+      "selection": "skills",
+      "file": "skill.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/skill.crafting/fletching",
+      "kind": "skill",
+      "name": "Fletching",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/skill/crafting/fletching.md",
+      "selection": "skills",
+      "file": "skill.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/skill.crafting/forgery",
+      "kind": "skill",
+      "name": "Forgery",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/skill/crafting/forgery.md",
+      "selection": "skills",
+      "file": "skill.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/skill.crafting/jewelry",
+      "kind": "skill",
+      "name": "Jewelry",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/skill/crafting/jewelry.md",
+      "selection": "skills",
+      "file": "skill.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/skill.crafting/mechanics",
+      "kind": "skill",
+      "name": "Mechanics",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/skill/crafting/mechanics.md",
+      "selection": "skills",
+      "file": "skill.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/skill.crafting/tailoring",
+      "kind": "skill",
+      "name": "Tailoring",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/skill/crafting/tailoring.md",
+      "selection": "skills",
+      "file": "skill.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/skill.exploration/climb",
+      "kind": "skill",
+      "name": "Climb",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/skill/exploration/climb.md",
+      "selection": "skills",
+      "file": "skill.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/skill.exploration/drive",
+      "kind": "skill",
+      "name": "Drive",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/skill/exploration/drive.md",
+      "selection": "skills",
+      "file": "skill.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/skill.exploration/endurance",
+      "kind": "skill",
+      "name": "Endurance",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/skill/exploration/endurance.md",
+      "selection": "skills",
+      "file": "skill.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/skill.exploration/gymnastics",
+      "kind": "skill",
+      "name": "Gymnastics",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/skill/exploration/gymnastics.md",
+      "selection": "skills",
+      "file": "skill.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/skill.exploration/heal",
+      "kind": "skill",
+      "name": "Heal",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/skill/exploration/heal.md",
+      "selection": "skills",
+      "file": "skill.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/skill.exploration/jump",
+      "kind": "skill",
+      "name": "Jump",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/skill/exploration/jump.md",
+      "selection": "skills",
+      "file": "skill.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/skill.exploration/lift",
+      "kind": "skill",
+      "name": "Lift",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/skill/exploration/lift.md",
+      "selection": "skills",
+      "file": "skill.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/skill.exploration/navigate",
+      "kind": "skill",
+      "name": "Navigate",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/skill/exploration/navigate.md",
+      "selection": "skills",
+      "file": "skill.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/skill.exploration/ride",
+      "kind": "skill",
+      "name": "Ride",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/skill/exploration/ride.md",
+      "selection": "skills",
+      "file": "skill.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/skill.exploration/swim",
+      "kind": "skill",
+      "name": "Swim",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/skill/exploration/swim.md",
+      "selection": "skills",
+      "file": "skill.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/skill.interpersonal/brag",
+      "kind": "skill",
+      "name": "Brag",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/skill/interpersonal/brag.md",
+      "selection": "skills",
+      "file": "skill.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/skill.interpersonal/empathize",
+      "kind": "skill",
+      "name": "Empathize",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/skill/interpersonal/empathize.md",
+      "selection": "skills",
+      "file": "skill.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/skill.interpersonal/flirt",
+      "kind": "skill",
+      "name": "Flirt",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/skill/interpersonal/flirt.md",
+      "selection": "skills",
+      "file": "skill.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/skill.interpersonal/gamble",
+      "kind": "skill",
+      "name": "Gamble",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/skill/interpersonal/gamble.md",
+      "selection": "skills",
+      "file": "skill.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/skill.interpersonal/handle-animals",
+      "kind": "skill",
+      "name": "Handle Animals",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/skill/interpersonal/handle-animals.md",
+      "selection": "skills",
+      "file": "skill.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/skill.interpersonal/interrogate",
+      "kind": "skill",
+      "name": "Interrogate",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/skill/interpersonal/interrogate.md",
+      "selection": "skills",
+      "file": "skill.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/skill.interpersonal/intimidate",
+      "kind": "skill",
+      "name": "Intimidate",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/skill/interpersonal/intimidate.md",
+      "selection": "skills",
+      "file": "skill.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/skill.interpersonal/lead",
+      "kind": "skill",
+      "name": "Lead",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/skill/interpersonal/lead.md",
+      "selection": "skills",
+      "file": "skill.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/skill.interpersonal/lie",
+      "kind": "skill",
+      "name": "Lie",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/skill/interpersonal/lie.md",
+      "selection": "skills",
+      "file": "skill.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/skill.interpersonal/music",
+      "kind": "skill",
+      "name": "Music",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/skill/interpersonal/music.md",
+      "selection": "skills",
+      "file": "skill.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/skill.interpersonal/perform",
+      "kind": "skill",
+      "name": "Perform",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/skill/interpersonal/perform.md",
+      "selection": "skills",
+      "file": "skill.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/skill.interpersonal/persuade",
+      "kind": "skill",
+      "name": "Persuade",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/skill/interpersonal/persuade.md",
+      "selection": "skills",
+      "file": "skill.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/skill.interpersonal/read-person",
+      "kind": "skill",
+      "name": "Read Person",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/skill/interpersonal/read-person.md",
+      "selection": "skills",
+      "file": "skill.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/skill.intrigue/alertness",
+      "kind": "skill",
+      "name": "Alertness",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/skill/intrigue/alertness.md",
+      "selection": "skills",
+      "file": "skill.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/skill.intrigue/conceal-object",
+      "kind": "skill",
+      "name": "Conceal Object",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/skill/intrigue/conceal-object.md",
+      "selection": "skills",
+      "file": "skill.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/skill.intrigue/disguise",
+      "kind": "skill",
+      "name": "Disguise",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/skill/intrigue/disguise.md",
+      "selection": "skills",
+      "file": "skill.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/skill.intrigue/eavesdrop",
+      "kind": "skill",
+      "name": "Eavesdrop",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/skill/intrigue/eavesdrop.md",
+      "selection": "skills",
+      "file": "skill.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/skill.intrigue/escape-artist",
+      "kind": "skill",
+      "name": "Escape Artist",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/skill/intrigue/escape-artist.md",
+      "selection": "skills",
+      "file": "skill.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/skill.intrigue/hide",
+      "kind": "skill",
+      "name": "Hide",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/skill/intrigue/hide.md",
+      "selection": "skills",
+      "file": "skill.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/skill.intrigue/pick-lock",
+      "kind": "skill",
+      "name": "Pick Lock",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/skill/intrigue/pick-lock.md",
+      "selection": "skills",
+      "file": "skill.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/skill.intrigue/pick-pocket",
+      "kind": "skill",
+      "name": "Pick Pocket",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/skill/intrigue/pick-pocket.md",
+      "selection": "skills",
+      "file": "skill.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/skill.intrigue/sabotage",
+      "kind": "skill",
+      "name": "Sabotage",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/skill/intrigue/sabotage.md",
+      "selection": "skills",
+      "file": "skill.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/skill.intrigue/search",
+      "kind": "skill",
+      "name": "Search",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/skill/intrigue/search.md",
+      "selection": "skills",
+      "file": "skill.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/skill.intrigue/sneak",
+      "kind": "skill",
+      "name": "Sneak",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/skill/intrigue/sneak.md",
+      "selection": "skills",
+      "file": "skill.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/skill.intrigue/track",
+      "kind": "skill",
+      "name": "Track",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/skill/intrigue/track.md",
+      "selection": "skills",
+      "file": "skill.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/skill.lore/criminal-underworld",
+      "kind": "skill",
+      "name": "Criminal Underworld",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/skill/lore/criminal-underworld.md",
+      "selection": "skills",
+      "file": "skill.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/skill.lore/culture",
+      "kind": "skill",
+      "name": "Culture",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/skill/lore/culture.md",
+      "selection": "skills",
+      "file": "skill.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/skill.lore/history",
+      "kind": "skill",
+      "name": "History",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/skill/lore/history.md",
+      "selection": "skills",
+      "file": "skill.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/skill.lore/magic",
+      "kind": "skill",
+      "name": "Magic",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/skill/lore/magic.md",
+      "selection": "skills",
+      "file": "skill.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/skill.lore/monsters",
+      "kind": "skill",
+      "name": "Monsters",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/skill/lore/monsters.md",
+      "selection": "skills",
+      "file": "skill.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/skill.lore/nature",
+      "kind": "skill",
+      "name": "Nature",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/skill/lore/nature.md",
+      "selection": "skills",
+      "file": "skill.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/skill.lore/psionics",
+      "kind": "skill",
+      "name": "Psionics",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/skill/lore/psionics.md",
+      "selection": "skills",
+      "file": "skill.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/skill.lore/religion",
+      "kind": "skill",
+      "name": "Religion",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/skill/lore/religion.md",
+      "selection": "skills",
+      "file": "skill.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/skill.lore/rumors",
+      "kind": "skill",
+      "name": "Rumors",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/skill/lore/rumors.md",
+      "selection": "skills",
+      "file": "skill.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/skill.lore/society",
+      "kind": "skill",
+      "name": "Society",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/skill/lore/society.md",
+      "selection": "skills",
+      "file": "skill.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/skill.lore/strategy",
+      "kind": "skill",
+      "name": "Strategy",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/skill/lore/strategy.md",
+      "selection": "skills",
+      "file": "skill.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/skill.lore/timescape",
+      "kind": "skill",
+      "name": "Timescape",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/skill/lore/timescape.md",
+      "selection": "skills",
+      "file": "skill.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/skill.group/crafting",
+      "kind": "skill-group",
+      "name": "Crafting Skills",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/skill/group/crafting.md",
+      "selection": "skills",
+      "file": "skill-group.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/skill.group/exploration",
+      "kind": "skill-group",
+      "name": "Exploration Skills",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/skill/group/exploration.md",
+      "selection": "skills",
+      "file": "skill-group.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/skill.group/interpersonal",
+      "kind": "skill-group",
+      "name": "Interpersonal Skills",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/skill/group/interpersonal.md",
+      "selection": "skills",
+      "file": "skill-group.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/skill.group/intrigue",
+      "kind": "skill-group",
+      "name": "Intrigue Skills",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/skill/group/intrigue.md",
+      "selection": "skills",
+      "file": "skill-group.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/skill.group/lore",
+      "kind": "skill-group",
+      "name": "Lore Skills",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/skill/group/lore.md",
+      "selection": "skills",
+      "file": "skill-group.json"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.goblin.statblock/goblin-warrior",
+      "kind": "statblock",
+      "name": "Goblin Warrior",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/monster/goblin/statblock/goblin-warrior.md",
+      "selection": "goblin-warrior",
+      "file": "statblock.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.devil/barbed-tail",
+      "kind": "trait",
+      "name": "Barbed Tail",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/devil/barbed-tail.md",
+      "selection": "devil-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.devil/beast-legs",
+      "kind": "trait",
+      "name": "Beast Legs",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/devil/beast-legs.md",
+      "selection": "devil-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.devil/devil-traits",
+      "kind": "trait",
+      "name": "Devil Traits",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/devil/devil-traits.md",
+      "selection": "devil-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.devil/glowing-eyes",
+      "kind": "trait",
+      "name": "Glowing Eyes",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/devil/glowing-eyes.md",
+      "selection": "devil-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.devil/hellsight",
+      "kind": "trait",
+      "name": "Hellsight",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/devil/hellsight.md",
+      "selection": "devil-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.devil/impressive-horns",
+      "kind": "trait",
+      "name": "Impressive Horns",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/devil/impressive-horns.md",
+      "selection": "devil-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.devil/prehensile-tail",
+      "kind": "trait",
+      "name": "Prehensile Tail",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/devil/prehensile-tail.md",
+      "selection": "devil-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.devil/silver-tongue",
+      "kind": "trait",
+      "name": "Signature Trait: Silver Tongue",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/devil/silver-tongue.md",
+      "selection": "devil-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.devil/wings",
+      "kind": "trait",
+      "name": "Wings",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/devil/wings.md",
+      "selection": "devil-ancestry",
+      "file": "trait.json"
+    }
+  ],
+  "excluded": [
+    {
+      "path": "perk/born-tracker.md",
+      "scc": "mcdm.beastheart.v1/perk/born-tracker",
+      "reason": "Sourcebook mcdm.beastheart.v1 is not core content for v0.01 (docs/reference-library-spec.md#official-content-is-not-necessarily-core-content)."
+    },
+    {
+      "path": "perk/people-sense.md",
+      "scc": "mcdm.beastheart.v1/perk/people-sense",
+      "reason": "Sourcebook mcdm.beastheart.v1 is not core content for v0.01 (docs/reference-library-spec.md#official-content-is-not-necessarily-core-content)."
+    },
+    {
+      "path": "perk/ride-along.md",
+      "scc": "mcdm.beastheart.v1/perk/ride-along",
+      "reason": "Sourcebook mcdm.beastheart.v1 is not core content for v0.01 (docs/reference-library-spec.md#official-content-is-not-necessarily-core-content)."
+    },
+    {
+      "path": "perk/trained-thief.md",
+      "scc": "mcdm.beastheart.v1/perk/trained-thief",
+      "reason": "Sourcebook mcdm.beastheart.v1 is not core content for v0.01 (docs/reference-library-spec.md#official-content-is-not-necessarily-core-content)."
+    },
+    {
+      "path": "perk/voice-of-the-wild.md",
+      "scc": "mcdm.beastheart.v1/perk/voice-of-the-wild",
+      "reason": "Sourcebook mcdm.beastheart.v1 is not core content for v0.01 (docs/reference-library-spec.md#official-content-is-not-necessarily-core-content)."
+    },
+    {
+      "path": "perk/wild-rumpus.md",
+      "scc": "mcdm.beastheart.v1/perk/wild-rumpus",
+      "reason": "Sourcebook mcdm.beastheart.v1 is not core content for v0.01 (docs/reference-library-spec.md#official-content-is-not-necessarily-core-content)."
+    },
+    {
+      "path": "perk/wilds-explorer.md",
+      "scc": "mcdm.beastheart.v1/perk/wilds-explorer",
+      "reason": "Sourcebook mcdm.beastheart.v1 is not core content for v0.01 (docs/reference-library-spec.md#official-content-is-not-necessarily-core-content)."
+    },
+    {
+      "path": "perk/you-can-pet-them-theyre-friendly.md",
+      "scc": "mcdm.beastheart.v1/perk/you-can-pet-them-theyre-friendly",
+      "reason": "Sourcebook mcdm.beastheart.v1 is not core content for v0.01 (docs/reference-library-spec.md#official-content-is-not-necessarily-core-content)."
+    },
+    {
+      "path": "chapter/perks.md",
+      "scc": "mcdm.beastheart.v1/chapter/perks",
+      "reason": "docs/compendium-navigation.md: the unified path selects a supplemental sourcebook chapter at this pin; not included."
+    },
+    {
+      "path": "chapter/rewards.md",
+      "scc": "mcdm.summoner.v1/chapter/rewards",
+      "reason": "docs/compendium-navigation.md: the unified path selects a supplemental sourcebook chapter at this pin; not included."
+    }
+  ],
+  "gaps": [
+    {
+      "topic": "languages",
+      "note": "The language tables (\"Languages in Orden\", \"Languages by Ancestry Table\") are not present under en/unified/md at this revision; chapter/background.md only refers to them. They exist in the clean Heroes book (en/books/heroes/clean/Draw Steel Heroes.md, readable with git show), which R01 cites directly. No language entries are generated."
+    },
+    {
+      "topic": "chapters",
+      "note": "Chapter pages other than chapter/background.md are not included. Extracted rule pages can omit chapter context; consult the chapter in the pinned submodule when a rule page reads as incomplete."
+    }
+  ]
+}

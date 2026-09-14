@@ -1,0 +1,572 @@
+[
+  {
+    "id": "mcdm.heroes.v1/skill.crafting/alchemy",
+    "kind": "skill",
+    "name": "Alchemy",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/skill/crafting/alchemy.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/skill/crafting/alchemy.json",
+    "selection": "skills",
+    "text": "---\nname: Alchemy\nscc: mcdm.heroes.v1/skill.crafting/alchemy\ntype: skill\n---\n\nMake bombs and potions.\n",
+    "structured": {}
+  },
+  {
+    "id": "mcdm.heroes.v1/skill.crafting/architecture",
+    "kind": "skill",
+    "name": "Architecture",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/skill/crafting/architecture.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/skill/crafting/architecture.json",
+    "selection": "skills",
+    "text": "---\nname: Architecture\nscc: mcdm.heroes.v1/skill.crafting/architecture\ntype: skill\n---\n\nCreate buildings and vehicles.\n",
+    "structured": {}
+  },
+  {
+    "id": "mcdm.heroes.v1/skill.crafting/blacksmithing",
+    "kind": "skill",
+    "name": "Blacksmithing",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/skill/crafting/blacksmithing.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/skill/crafting/blacksmithing.json",
+    "selection": "skills",
+    "text": "---\nname: Blacksmithing\nscc: mcdm.heroes.v1/skill.crafting/blacksmithing\ntype: skill\n---\n\nForge metal armor and weapons.\n",
+    "structured": {}
+  },
+  {
+    "id": "mcdm.heroes.v1/skill.crafting/carpentry",
+    "kind": "skill",
+    "name": "Carpentry",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/skill/crafting/carpentry.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/skill/crafting/carpentry.json",
+    "selection": "skills",
+    "text": "---\nname: Carpentry\nscc: mcdm.heroes.v1/skill.crafting/carpentry\ntype: skill\n---\n\nCreate items out of wood.\n",
+    "structured": {}
+  },
+  {
+    "id": "mcdm.heroes.v1/skill.crafting/cooking",
+    "kind": "skill",
+    "name": "Cooking",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/skill/crafting/cooking.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/skill/crafting/cooking.json",
+    "selection": "skills",
+    "text": "---\nname: Cooking\nscc: mcdm.heroes.v1/skill.crafting/cooking\ntype: skill\n---\n\nCreate delicious dishes.\n",
+    "structured": {}
+  },
+  {
+    "id": "mcdm.heroes.v1/skill.crafting/fletching",
+    "kind": "skill",
+    "name": "Fletching",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/skill/crafting/fletching.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/skill/crafting/fletching.json",
+    "selection": "skills",
+    "text": "---\nname: Fletching\nscc: mcdm.heroes.v1/skill.crafting/fletching\ntype: skill\n---\n\nMake [ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) weapons and ammunition.\n",
+    "structured": {}
+  },
+  {
+    "id": "mcdm.heroes.v1/skill.crafting/forgery",
+    "kind": "skill",
+    "name": "Forgery",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/skill/crafting/forgery.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/skill/crafting/forgery.json",
+    "selection": "skills",
+    "text": "---\nname: Forgery\nscc: mcdm.heroes.v1/skill.crafting/forgery\ntype: skill\n---\n\nCreate false badges, documents, and other items.\n",
+    "structured": {}
+  },
+  {
+    "id": "mcdm.heroes.v1/skill.crafting/jewelry",
+    "kind": "skill",
+    "name": "Jewelry",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/skill/crafting/jewelry.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/skill/crafting/jewelry.json",
+    "selection": "skills",
+    "text": "---\nname: Jewelry\nscc: mcdm.heroes.v1/skill.crafting/jewelry\ntype: skill\n---\n\nCreate bracelets, crowns, rings, and other jewelry.\n",
+    "structured": {}
+  },
+  {
+    "id": "mcdm.heroes.v1/skill.crafting/mechanics",
+    "kind": "skill",
+    "name": "Mechanics",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/skill/crafting/mechanics.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/skill/crafting/mechanics.json",
+    "selection": "skills",
+    "text": "---\nname: Mechanics\nscc: mcdm.heroes.v1/skill.crafting/mechanics\ntype: skill\n---\n\nBuild machines and clockwork items.\n",
+    "structured": {}
+  },
+  {
+    "id": "mcdm.heroes.v1/skill.crafting/tailoring",
+    "kind": "skill",
+    "name": "Tailoring",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/skill/crafting/tailoring.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/skill/crafting/tailoring.json",
+    "selection": "skills",
+    "text": "---\nname: Tailoring\nscc: mcdm.heroes.v1/skill.crafting/tailoring\ntype: skill\n---\n\nCraft clothing of cloth or leather.\n",
+    "structured": {}
+  },
+  {
+    "id": "mcdm.heroes.v1/skill.exploration/climb",
+    "kind": "skill",
+    "name": "Climb",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/skill/exploration/climb.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/skill/exploration/climb.json",
+    "selection": "skills",
+    "text": "---\nname: Climb\nscc: mcdm.heroes.v1/skill.exploration/climb\ntype: skill\n---\n\nMove up vertical surfaces.\n",
+    "structured": {}
+  },
+  {
+    "id": "mcdm.heroes.v1/skill.exploration/drive",
+    "kind": "skill",
+    "name": "Drive",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/skill/exploration/drive.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/skill/exploration/drive.json",
+    "selection": "skills",
+    "text": "---\nname: Drive\nscc: mcdm.heroes.v1/skill.exploration/drive\ntype: skill\n---\n\nControl vehicles.\n",
+    "structured": {}
+  },
+  {
+    "id": "mcdm.heroes.v1/skill.exploration/endurance",
+    "kind": "skill",
+    "name": "Endurance",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/skill/exploration/endurance.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/skill/exploration/endurance.json",
+    "selection": "skills",
+    "text": "---\nname: Endurance\nscc: mcdm.heroes.v1/skill.exploration/endurance\ntype: skill\n---\n\nRemain engaged in strenuous activity over a long period of time.\n",
+    "structured": {}
+  },
+  {
+    "id": "mcdm.heroes.v1/skill.exploration/gymnastics",
+    "kind": "skill",
+    "name": "Gymnastics",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/skill/exploration/gymnastics.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/skill/exploration/gymnastics.json",
+    "selection": "skills",
+    "text": "---\nname: Gymnastics\nscc: mcdm.heroes.v1/skill.exploration/gymnastics\ntype: skill\n---\n\nMove across unsteady or narrow surfaces; tumble.\n",
+    "structured": {}
+  },
+  {
+    "id": "mcdm.heroes.v1/skill.exploration/heal",
+    "kind": "skill",
+    "name": "Heal",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/skill/exploration/heal.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/skill/exploration/heal.json",
+    "selection": "skills",
+    "text": "---\nname: Heal\nscc: mcdm.heroes.v1/skill.exploration/heal\ntype: skill\n---\n\nUse mundane first aid.\n",
+    "structured": {}
+  },
+  {
+    "id": "mcdm.heroes.v1/skill.exploration/jump",
+    "kind": "skill",
+    "name": "Jump",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/skill/exploration/jump.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/skill/exploration/jump.json",
+    "selection": "skills",
+    "text": "---\nname: Jump\nscc: mcdm.heroes.v1/skill.exploration/jump\ntype: skill\n---\n\nLeap vertical and horizontal [distances](scc.v1:mcdm.heroes.v1/rule.combat/distance).\n",
+    "structured": {}
+  },
+  {
+    "id": "mcdm.heroes.v1/skill.exploration/lift",
+    "kind": "skill",
+    "name": "Lift",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/skill/exploration/lift.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/skill/exploration/lift.json",
+    "selection": "skills",
+    "text": "---\nname: Lift\nscc: mcdm.heroes.v1/skill.exploration/lift\ntype: skill\n---\n\nPick up, carry, and throw heavy objects.\n",
+    "structured": {}
+  },
+  {
+    "id": "mcdm.heroes.v1/skill.exploration/navigate",
+    "kind": "skill",
+    "name": "Navigate",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/skill/exploration/navigate.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/skill/exploration/navigate.json",
+    "selection": "skills",
+    "text": "---\nname: Navigate\nscc: mcdm.heroes.v1/skill.exploration/navigate\ntype: skill\n---\n\nRead a map and travel without becoming lost.\n",
+    "structured": {}
+  },
+  {
+    "id": "mcdm.heroes.v1/skill.exploration/ride",
+    "kind": "skill",
+    "name": "Ride",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/skill/exploration/ride.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/skill/exploration/ride.json",
+    "selection": "skills",
+    "text": "---\nname: Ride\nscc: mcdm.heroes.v1/skill.exploration/ride\ntype: skill\n---\n\nRide and control a nonsapient mount, such as a horse.\n",
+    "structured": {}
+  },
+  {
+    "id": "mcdm.heroes.v1/skill.exploration/swim",
+    "kind": "skill",
+    "name": "Swim",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/skill/exploration/swim.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/skill/exploration/swim.json",
+    "selection": "skills",
+    "text": "---\nname: Swim\nscc: mcdm.heroes.v1/skill.exploration/swim\ntype: skill\n---\n\nMove through deep liquid.\n",
+    "structured": {}
+  },
+  {
+    "id": "mcdm.heroes.v1/skill.interpersonal/brag",
+    "kind": "skill",
+    "name": "Brag",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/skill/interpersonal/brag.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/skill/interpersonal/brag.json",
+    "selection": "skills",
+    "text": "---\nname: Brag\nscc: mcdm.heroes.v1/skill.interpersonal/brag\ntype: skill\n---\n\nImpress others with stories of your deeds.\n",
+    "structured": {}
+  },
+  {
+    "id": "mcdm.heroes.v1/skill.interpersonal/empathize",
+    "kind": "skill",
+    "name": "Empathize",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/skill/interpersonal/empathize.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/skill/interpersonal/empathize.json",
+    "selection": "skills",
+    "text": "---\nname: Empathize\nscc: mcdm.heroes.v1/skill.interpersonal/empathize\ntype: skill\n---\n\nRelate to someone on a personal level.\n",
+    "structured": {}
+  },
+  {
+    "id": "mcdm.heroes.v1/skill.interpersonal/flirt",
+    "kind": "skill",
+    "name": "Flirt",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/skill/interpersonal/flirt.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/skill/interpersonal/flirt.json",
+    "selection": "skills",
+    "text": "---\nname: Flirt\nscc: mcdm.heroes.v1/skill.interpersonal/flirt\ntype: skill\n---\n\nAttract romantic attention from someone.\n",
+    "structured": {}
+  },
+  {
+    "id": "mcdm.heroes.v1/skill.interpersonal/gamble",
+    "kind": "skill",
+    "name": "Gamble",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/skill/interpersonal/gamble.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/skill/interpersonal/gamble.json",
+    "selection": "skills",
+    "text": "---\nname: Gamble\nscc: mcdm.heroes.v1/skill.interpersonal/gamble\ntype: skill\n---\n\nMake bets with others.\n",
+    "structured": {}
+  },
+  {
+    "id": "mcdm.heroes.v1/skill.interpersonal/handle-animals",
+    "kind": "skill",
+    "name": "Handle Animals",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/skill/interpersonal/handle-animals.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/skill/interpersonal/handle-animals.json",
+    "selection": "skills",
+    "text": "---\nname: Handle Animals\nscc: mcdm.heroes.v1/skill.interpersonal/handle-animals\ntype: skill\n---\n\nInteract with nonsapient animal wildlife.\n",
+    "structured": {}
+  },
+  {
+    "id": "mcdm.heroes.v1/skill.interpersonal/interrogate",
+    "kind": "skill",
+    "name": "Interrogate",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/skill/interpersonal/interrogate.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/skill/interpersonal/interrogate.json",
+    "selection": "skills",
+    "text": "---\nname: Interrogate\nscc: mcdm.heroes.v1/skill.interpersonal/interrogate\ntype: skill\n---\n\nObtain information from a creature withholding it.\n",
+    "structured": {}
+  },
+  {
+    "id": "mcdm.heroes.v1/skill.interpersonal/intimidate",
+    "kind": "skill",
+    "name": "Intimidate",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/skill/interpersonal/intimidate.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/skill/interpersonal/intimidate.json",
+    "selection": "skills",
+    "text": "---\nname: Intimidate\nscc: mcdm.heroes.v1/skill.interpersonal/intimidate\ntype: skill\n---\n\nAwe or scare a creature.\n",
+    "structured": {}
+  },
+  {
+    "id": "mcdm.heroes.v1/skill.interpersonal/lead",
+    "kind": "skill",
+    "name": "Lead",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/skill/interpersonal/lead.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/skill/interpersonal/lead.json",
+    "selection": "skills",
+    "text": "---\nname: Lead\nscc: mcdm.heroes.v1/skill.interpersonal/lead\ntype: skill\n---\n\nInspire people to action.\n",
+    "structured": {}
+  },
+  {
+    "id": "mcdm.heroes.v1/skill.interpersonal/lie",
+    "kind": "skill",
+    "name": "Lie",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/skill/interpersonal/lie.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/skill/interpersonal/lie.json",
+    "selection": "skills",
+    "text": "---\nname: Lie\nscc: mcdm.heroes.v1/skill.interpersonal/lie\ntype: skill\n---\n\nConvince someone that a falsehood is true.\n",
+    "structured": {}
+  },
+  {
+    "id": "mcdm.heroes.v1/skill.interpersonal/music",
+    "kind": "skill",
+    "name": "Music",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/skill/interpersonal/music.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/skill/interpersonal/music.json",
+    "selection": "skills",
+    "text": "---\nname: Music\nscc: mcdm.heroes.v1/skill.interpersonal/music\ntype: skill\n---\n\nPerform music vocally or with an instrument.\n",
+    "structured": {}
+  },
+  {
+    "id": "mcdm.heroes.v1/skill.interpersonal/perform",
+    "kind": "skill",
+    "name": "Perform",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/skill/interpersonal/perform.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/skill/interpersonal/perform.json",
+    "selection": "skills",
+    "text": "---\nname: Perform\nscc: mcdm.heroes.v1/skill.interpersonal/perform\ntype: skill\n---\n\nEngage in dance, oratory, acting, or some other physical performance.\n",
+    "structured": {}
+  },
+  {
+    "id": "mcdm.heroes.v1/skill.interpersonal/persuade",
+    "kind": "skill",
+    "name": "Persuade",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/skill/interpersonal/persuade.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/skill/interpersonal/persuade.json",
+    "selection": "skills",
+    "text": "---\nname: Persuade\nscc: mcdm.heroes.v1/skill.interpersonal/persuade\ntype: skill\n---\n\nConvince someone to agree with you through use of your charms and grace.\n",
+    "structured": {}
+  },
+  {
+    "id": "mcdm.heroes.v1/skill.interpersonal/read-person",
+    "kind": "skill",
+    "name": "Read Person",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/skill/interpersonal/read-person.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/skill/interpersonal/read-person.json",
+    "selection": "skills",
+    "text": "---\nname: Read Person\nscc: mcdm.heroes.v1/skill.interpersonal/read-person\ntype: skill\n---\n\nRead the emotions and body language of other creatures.\n",
+    "structured": {}
+  },
+  {
+    "id": "mcdm.heroes.v1/skill.intrigue/alertness",
+    "kind": "skill",
+    "name": "Alertness",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/skill/intrigue/alertness.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/skill/intrigue/alertness.json",
+    "selection": "skills",
+    "text": "---\nname: Alertness\nscc: mcdm.heroes.v1/skill.intrigue/alertness\ntype: skill\n---\n\nIntuitively sense the details of your surroundings.\n",
+    "structured": {}
+  },
+  {
+    "id": "mcdm.heroes.v1/skill.intrigue/conceal-object",
+    "kind": "skill",
+    "name": "Conceal Object",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/skill/intrigue/conceal-object.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/skill/intrigue/conceal-object.json",
+    "selection": "skills",
+    "text": "---\nname: Conceal Object\nscc: mcdm.heroes.v1/skill.intrigue/conceal-object\ntype: skill\n---\n\nHide an object on your person or in your environment.\n",
+    "structured": {}
+  },
+  {
+    "id": "mcdm.heroes.v1/skill.intrigue/disguise",
+    "kind": "skill",
+    "name": "Disguise",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/skill/intrigue/disguise.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/skill/intrigue/disguise.json",
+    "selection": "skills",
+    "text": "---\nname: Disguise\nscc: mcdm.heroes.v1/skill.intrigue/disguise\ntype: skill\n---\n\nChange your appearance to look like a different person.\n",
+    "structured": {}
+  },
+  {
+    "id": "mcdm.heroes.v1/skill.intrigue/eavesdrop",
+    "kind": "skill",
+    "name": "Eavesdrop",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/skill/intrigue/eavesdrop.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/skill/intrigue/eavesdrop.json",
+    "selection": "skills",
+    "text": "---\nname: Eavesdrop\nscc: mcdm.heroes.v1/skill.intrigue/eavesdrop\ntype: skill\n---\n\nActively listen to something that is hard to hear, such as a whispered conversation through a door.\n",
+    "structured": {}
+  },
+  {
+    "id": "mcdm.heroes.v1/skill.intrigue/escape-artist",
+    "kind": "skill",
+    "name": "Escape Artist",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/skill/intrigue/escape-artist.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/skill/intrigue/escape-artist.json",
+    "selection": "skills",
+    "text": "---\nname: Escape Artist\nscc: mcdm.heroes.v1/skill.intrigue/escape-artist\ntype: skill\n---\n\nEscape from bonds such as rope or manacles.\n",
+    "structured": {}
+  },
+  {
+    "id": "mcdm.heroes.v1/skill.intrigue/hide",
+    "kind": "skill",
+    "name": "Hide",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/skill/intrigue/hide.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/skill/intrigue/hide.json",
+    "selection": "skills",
+    "text": "---\nname: Hide\nscc: mcdm.heroes.v1/skill.intrigue/hide\ntype: skill\n---\n\nConceal yourself from others' observation.\n",
+    "structured": {}
+  },
+  {
+    "id": "mcdm.heroes.v1/skill.intrigue/pick-lock",
+    "kind": "skill",
+    "name": "Pick Lock",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/skill/intrigue/pick-lock.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/skill/intrigue/pick-lock.json",
+    "selection": "skills",
+    "text": "---\nname: Pick Lock\nscc: mcdm.heroes.v1/skill.intrigue/pick-lock\ntype: skill\n---\n\nOpen a lock without using the key.\n",
+    "structured": {}
+  },
+  {
+    "id": "mcdm.heroes.v1/skill.intrigue/pick-pocket",
+    "kind": "skill",
+    "name": "Pick Pocket",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/skill/intrigue/pick-pocket.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/skill/intrigue/pick-pocket.json",
+    "selection": "skills",
+    "text": "---\nname: Pick Pocket\nscc: mcdm.heroes.v1/skill.intrigue/pick-pocket\ntype: skill\n---\n\nSteal an item that another person wears or carries without them noticing.\n",
+    "structured": {}
+  },
+  {
+    "id": "mcdm.heroes.v1/skill.intrigue/sabotage",
+    "kind": "skill",
+    "name": "Sabotage",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/skill/intrigue/sabotage.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/skill/intrigue/sabotage.json",
+    "selection": "skills",
+    "text": "---\nname: Sabotage\nscc: mcdm.heroes.v1/skill.intrigue/sabotage\ntype: skill\n---\n\nDisable a mechanical device such as a trap.\n",
+    "structured": {}
+  },
+  {
+    "id": "mcdm.heroes.v1/skill.intrigue/search",
+    "kind": "skill",
+    "name": "Search",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/skill/intrigue/search.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/skill/intrigue/search.json",
+    "selection": "skills",
+    "text": "---\nname: Search\nscc: mcdm.heroes.v1/skill.intrigue/search\ntype: skill\n---\n\nActively search an environment for important details and items.\n",
+    "structured": {}
+  },
+  {
+    "id": "mcdm.heroes.v1/skill.intrigue/sneak",
+    "kind": "skill",
+    "name": "Sneak",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/skill/intrigue/sneak.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/skill/intrigue/sneak.json",
+    "selection": "skills",
+    "text": "---\nname: Sneak\nscc: mcdm.heroes.v1/skill.intrigue/sneak\ntype: skill\n---\n\nMove silently.\n",
+    "structured": {}
+  },
+  {
+    "id": "mcdm.heroes.v1/skill.intrigue/track",
+    "kind": "skill",
+    "name": "Track",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/skill/intrigue/track.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/skill/intrigue/track.json",
+    "selection": "skills",
+    "text": "---\nname: Track\nscc: mcdm.heroes.v1/skill.intrigue/track\ntype: skill\n---\n\nFollow a trail that another creature has left behind.\n",
+    "structured": {}
+  },
+  {
+    "id": "mcdm.heroes.v1/skill.lore/criminal-underworld",
+    "kind": "skill",
+    "name": "Criminal Underworld",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/skill/lore/criminal-underworld.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/skill/lore/criminal-underworld.json",
+    "selection": "skills",
+    "text": "---\nname: Criminal Underworld\nscc: mcdm.heroes.v1/skill.lore/criminal-underworld\ntype: skill\n---\n\nKnowing about criminal organizations, their crimes, their relationships, and their leaders.\n",
+    "structured": {}
+  },
+  {
+    "id": "mcdm.heroes.v1/skill.lore/culture",
+    "kind": "skill",
+    "name": "Culture",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/skill/lore/culture.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/skill/lore/culture.json",
+    "selection": "skills",
+    "text": "---\nname: Culture\nscc: mcdm.heroes.v1/skill.lore/culture\ntype: skill\n---\n\nKnowing about a culture's customs, folktales, and taboos.\n",
+    "structured": {}
+  },
+  {
+    "id": "mcdm.heroes.v1/skill.lore/history",
+    "kind": "skill",
+    "name": "History",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/skill/lore/history.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/skill/lore/history.json",
+    "selection": "skills",
+    "text": "---\nname: History\nscc: mcdm.heroes.v1/skill.lore/history\ntype: skill\n---\n\nKnowing about significant past events.\n",
+    "structured": {}
+  },
+  {
+    "id": "mcdm.heroes.v1/skill.lore/magic",
+    "kind": "skill",
+    "name": "Magic",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/skill/lore/magic.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/skill/lore/magic.json",
+    "selection": "skills",
+    "text": "---\nname: Magic\nscc: mcdm.heroes.v1/skill.lore/magic\ntype: skill\n---\n\nKnowing about magical places, spells, rituals, items, and phenomena.\n",
+    "structured": {}
+  },
+  {
+    "id": "mcdm.heroes.v1/skill.lore/monsters",
+    "kind": "skill",
+    "name": "Monsters",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/skill/lore/monsters.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/skill/lore/monsters.json",
+    "selection": "skills",
+    "text": "---\nname: Monsters\nscc: mcdm.heroes.v1/skill.lore/monsters\ntype: skill\n---\n\nKnowing monster ecology, strengths, and weaknesses.\n",
+    "structured": {}
+  },
+  {
+    "id": "mcdm.heroes.v1/skill.lore/nature",
+    "kind": "skill",
+    "name": "Nature",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/skill/lore/nature.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/skill/lore/nature.json",
+    "selection": "skills",
+    "text": "---\nname: Nature\nscc: mcdm.heroes.v1/skill.lore/nature\ntype: skill\n---\n\nKnowing about natural flora, fauna, and weather.\n",
+    "structured": {}
+  },
+  {
+    "id": "mcdm.heroes.v1/skill.lore/psionics",
+    "kind": "skill",
+    "name": "Psionics",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/skill/lore/psionics.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/skill/lore/psionics.json",
+    "selection": "skills",
+    "text": "---\nname: Psionics\nscc: mcdm.heroes.v1/skill.lore/psionics\ntype: skill\n---\n\nKnowing about psionic places, spells, rituals, items, and phenomena.\n",
+    "structured": {}
+  },
+  {
+    "id": "mcdm.heroes.v1/skill.lore/religion",
+    "kind": "skill",
+    "name": "Religion",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/skill/lore/religion.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/skill/lore/religion.json",
+    "selection": "skills",
+    "text": "---\nname: Religion\nscc: mcdm.heroes.v1/skill.lore/religion\ntype: skill\n---\n\nKnowing about religious mythology, practices, and rituals.\n",
+    "structured": {}
+  },
+  {
+    "id": "mcdm.heroes.v1/skill.lore/rumors",
+    "kind": "skill",
+    "name": "Rumors",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/skill/lore/rumors.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/skill/lore/rumors.json",
+    "selection": "skills",
+    "text": "---\nname: Rumors\nscc: mcdm.heroes.v1/skill.lore/rumors\ntype: skill\n---\n\nKnowing gossip, legends, and uncertain truths.\n",
+    "structured": {}
+  },
+  {
+    "id": "mcdm.heroes.v1/skill.lore/society",
+    "kind": "skill",
+    "name": "Society",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/skill/lore/society.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/skill/lore/society.json",
+    "selection": "skills",
+    "text": "---\nname: Society\nscc: mcdm.heroes.v1/skill.lore/society\ntype: skill\n---\n\nKnowing noble etiquette and the leadership and power dynamics of noble families.\n",
+    "structured": {}
+  },
+  {
+    "id": "mcdm.heroes.v1/skill.lore/strategy",
+    "kind": "skill",
+    "name": "Strategy",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/skill/lore/strategy.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/skill/lore/strategy.json",
+    "selection": "skills",
+    "text": "---\nname: Strategy\nscc: mcdm.heroes.v1/skill.lore/strategy\ntype: skill\n---\n\nKnowing about battle tactics and logistics.\n",
+    "structured": {}
+  },
+  {
+    "id": "mcdm.heroes.v1/skill.lore/timescape",
+    "kind": "skill",
+    "name": "Timescape",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/skill/lore/timescape.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/skill/lore/timescape.json",
+    "selection": "skills",
+    "text": "---\nname: Timescape\nscc: mcdm.heroes.v1/skill.lore/timescape\ntype: skill\n---\n\nKnowing about the many worlds of the timescape.\n\n\n> **For the Director: Make Your Own Skills**\n>\n> Directors should feel free to make their own skills that they feel are relevant and useful to their campaigns and adventures. For instance, the game doesn't have a Brewing skill for brewing ale or a Painting skill for making art because those aren't tasks that typically come up in a game about fighting monsters and saving the world. However, a Director could decide that their campaign involves poisoned barrels of ale and large amounts of counterfeit art, and that adding these two new skills to the game would make it more fun for the players. The Director simply needs to pick a group for these new skills—in this case, crafting makes sense. They then let the players know that they can swap out any crafting skill they have for these new skills.\n",
+    "structured": {}
+  }
+]

@@ -1,0 +1,728 @@
+[
+  {
+    "id": "mcdm.heroes.v1/feature.common.main-actions/charge",
+    "kind": "feature",
+    "name": "Charge",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/common/main-actions/charge.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/common/main-actions/charge.json",
+    "selection": "common-actions",
+    "text": "---\nname: Charge\nscc: mcdm.heroes.v1/feature.common.main-actions/charge\ntype: feature\n---\n\nWhen a creature takes the [Charge](scc.v1:mcdm.heroes.v1/feature.common.main-actions/charge) main action, they move up to their [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) in a straight line, then make a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) (see [Free Strikes](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) below) against a target when they end their move. If the creature has an ability with the Charge keyword, they can use that ability against the target instead of a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike).\n\nA creature can't move through [difficult terrain](scc.v1:mcdm.heroes.v1/movement/difficult-terrain) or [shift](scc.v1:mcdm.heroes.v1/movement/shifting) when they charge. They can [fly](scc.v1:mcdm.heroes.v1/movement/fly) or [burrow](scc.v1:mcdm.heroes.v1/movement/burrow) as part of the [Charge](scc.v1:mcdm.heroes.v1/feature.common.main-actions/charge) main action if they have that movement available to them, but they can't climb or swim while charging unless they can automatically use that movement at full [speed](scc.v1:mcdm.heroes.v1/rule.character/speed).\n",
+    "structured": {}
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.common.main-actions/defend",
+    "kind": "feature",
+    "name": "Defend",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/common/main-actions/defend.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/common/main-actions/defend.json",
+    "selection": "common-actions",
+    "text": "---\nname: Defend\nscc: mcdm.heroes.v1/feature.common.main-actions/defend\ntype: feature\n---\n\nWhen a creature takes the [Defend](scc.v1:mcdm.heroes.v1/feature.common.main-actions/defend) main action, [ability rolls](scc.v1:mcdm.heroes.v1/rule.dice/ability-roll) made against them have a double [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) until the start of their next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). Additionally, you have a double [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on [tests](scc.v1:mcdm.heroes.v1/rule.test/test) when called for to resist environmental effects or a creature's traits or abilities. A creature gains no benefit from this action while another creature is [taunted](scc.v1:mcdm.heroes.v1/condition/taunted) by them (see [Conditions](scc.v1:mcdm.heroes.v1/rule.combat/condition) in Chapter 5: [Classes](scc.v1:mcdm.heroes.v1/chapter/classes)).\n",
+    "structured": {}
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.common.main-actions/free-strike",
+    "kind": "feature",
+    "name": "Free Strike",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/common/main-actions/free-strike.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/common/main-actions/free-strike.json",
+    "selection": "common-actions",
+    "text": "---\nname: Free Strike\nscc: mcdm.heroes.v1/feature.common.main-actions/free-strike\ntype: feature\n---\n\nA creature can use this main action to make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) (see Free  Strikes below). Most of the time, you'll want to use the more impactful main actions granted by your class, kit, or other feature, just as the Director will use the main actions in a creature's stat block, but [free strikes](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) are available for when all else fails. For instance, a [fury](scc.v1:mcdm.heroes.v1/class/fury) who has no other options for [ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) [strikes](scc.v1:mcdm.heroes.v1/rule.combat/strike) might use the [Ranged Weapon Free Strike](scc.v1:mcdm.heroes.v1/feature.ability.common/ranged-weapon-free-strike) ability with an improvised weapon when battling a [flying](scc.v1:mcdm.heroes.v1/movement/fly) foe.\n",
+    "structured": {}
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.common.main-actions/heal",
+    "kind": "feature",
+    "name": "Heal",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/common/main-actions/heal.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/common/main-actions/heal.json",
+    "selection": "common-actions",
+    "text": "---\nname: Heal\nscc: mcdm.heroes.v1/feature.common.main-actions/heal\ntype: feature\n---\n\nA creature who uses the [Heal](scc.v1:mcdm.heroes.v1/feature.common.main-actions/heal) main action employs medicine or inspiring words to make an [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) creature feel better and stay in the fight. The target creature can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries) to regain [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina), or can make a [saving throw](scc.v1:mcdm.heroes.v1/rule.general/saving-throw) against one effect they are suffering that is ended by a [saving throw](scc.v1:mcdm.heroes.v1/rule.general/saving-throw).\n",
+    "structured": {}
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.common.maneuvers/aid-attack",
+    "kind": "feature",
+    "name": "Aid Attack",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/common/maneuvers/aid-attack.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/common/maneuvers/aid-attack.json",
+    "selection": "common-actions",
+    "text": "---\nname: Aid Attack\nscc: mcdm.heroes.v1/feature.common.maneuvers/aid-attack\ntype: feature\n---\n\nA creature who uses the [Aid Attack](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/aid-attack) maneuver chooses an enemy [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to them. The next [ability roll](scc.v1:mcdm.heroes.v1/rule.dice/ability-roll) an ally makes against that enemy before the start of the aiding creature's next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) gains an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge).\n",
+    "structured": {}
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.common.maneuvers/catch-breath",
+    "kind": "feature",
+    "name": "Catch Breath",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/common/maneuvers/catch-breath.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/common/maneuvers/catch-breath.json",
+    "selection": "common-actions",
+    "text": "---\nname: Catch Breath\nscc: mcdm.heroes.v1/feature.common.maneuvers/catch-breath\ntype: feature\n---\n\nA creature who uses the [Catch Breath](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/catch-breath) maneuver spends a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries) and regains [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) equal to their [recovery value](scc.v1:mcdm.heroes.v1/rule.health/recoveries). (See below for [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina). See [Recoveries](scc.v1:mcdm.heroes.v1/rule.health/recoveries) in Chapter 1: [The Basics](scc.v1:mcdm.heroes.v1/chapter/the-basics).)\n\nA creature who is [dying](scc.v1:mcdm.heroes.v1/rule.health/dying) (see [Dying](scc.v1:mcdm.heroes.v1/rule.health/dying) and Death in [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) below) can't use the [Catch Breath](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/catch-breath) maneuver, but other creatures can help them spend [Recoveries](scc.v1:mcdm.heroes.v1/rule.health/recoveries) in other ways.\n",
+    "structured": {}
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.common.maneuvers/escape-grab",
+    "kind": "feature",
+    "name": "Escape Grab",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/common/maneuvers/escape-grab.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/common/maneuvers/escape-grab.json",
+    "selection": "common-actions",
+    "text": "---\nname: Escape Grab\nscc: mcdm.heroes.v1/feature.common.maneuvers/escape-grab\ntype: feature\n---\n\nA creature who is [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed) by another creature, an object, or an effect (see [Grab](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/grab) below) can attempt to escape by using the following ability.\n",
+    "structured": {}
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.common.maneuvers/grab",
+    "kind": "feature",
+    "name": "Grab",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/common/maneuvers/grab.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/common/maneuvers/grab.json",
+    "selection": "common-actions",
+    "text": "---\nname: Grab\nscc: mcdm.heroes.v1/feature.common.maneuvers/grab\ntype: feature\n---\n\nA creature seeking to keep a foe close and locked down can attempt to grab a creature using the following ability.\n",
+    "structured": {}
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.common.maneuvers/hide",
+    "kind": "feature",
+    "name": "Hide",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/common/maneuvers/hide.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/common/maneuvers/hide.json",
+    "selection": "common-actions",
+    "text": "---\nname: Hide\nscc: mcdm.heroes.v1/feature.common.maneuvers/hide\ntype: feature\n---\n\nUsing the [Hide](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/hide) maneuver, a creature attempts to hide from other creatures who aren't observing them while they have [cover](scc.v1:mcdm.heroes.v1/rule.combat/cover) or [concealment](scc.v1:mcdm.heroes.v1/rule.combat/concealment). See Hide and Sneak in Chapter 9: [Tests](scc.v1:mcdm.heroes.v1/chapter/tests) for full details.\n",
+    "structured": {}
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.common.maneuvers/knockback",
+    "kind": "feature",
+    "name": "Knockback",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/common/maneuvers/knockback.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/common/maneuvers/knockback.json",
+    "selection": "common-actions",
+    "text": "---\nname: Knockback\nscc: mcdm.heroes.v1/feature.common.maneuvers/knockback\ntype: feature\n---\n\nA creature wanting to [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) an [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) creature away from them can attempt to shove that creature using the following ability.\n",
+    "structured": {}
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.common.maneuvers/make-or-assist-a-test",
+    "kind": "feature",
+    "name": "Make or Assist a Test",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/common/maneuvers/make-or-assist-a-test.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/common/maneuvers/make-or-assist-a-test.json",
+    "selection": "common-actions",
+    "text": "---\nname: Make or Assist a Test\nscc: mcdm.heroes.v1/feature.common.maneuvers/make-or-assist-a-test\ntype: feature\n---\n\nMany [tests](scc.v1:mcdm.heroes.v1/rule.test/test) are maneuvers if made in combat. Searching a chest with a [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) [test](scc.v1:mcdm.heroes.v1/rule.test/test), picking a door's lock with an [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility) [test](scc.v1:mcdm.heroes.v1/rule.test/test), or lifting a portcullis with a [Might](scc.v1:mcdm.heroes.v1/rule.character/might) [test](scc.v1:mcdm.heroes.v1/rule.test/test) would all be maneuvers. Assisting a [test](scc.v1:mcdm.heroes.v1/rule.test/test) is also a maneuver in combat (see Assist a [Test](scc.v1:mcdm.heroes.v1/rule.test/test) in Chapter 9: [Tests](scc.v1:mcdm.heroes.v1/chapter/tests)).\n\nComplex or time-consuming [tests](scc.v1:mcdm.heroes.v1/rule.test/test) might require a main action if made in combat—or could take so long that they can't be made during combat at all. Other [tests](scc.v1:mcdm.heroes.v1/rule.test/test) that take no time at all, such as a [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) [test](scc.v1:mcdm.heroes.v1/rule.test/test) to recall lore about mummies, are usually [free maneuvers](scc.v1:mcdm.heroes.v1/rule.combat/free-maneuver) in combat. The Director has the final say regarding which [tests](scc.v1:mcdm.heroes.v1/rule.test/test) can be made as maneuvers.\n",
+    "structured": {}
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.common.maneuvers/search-for-hidden-creatures",
+    "kind": "feature",
+    "name": "Search for Hidden Creatures",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/common/maneuvers/search-for-hidden-creatures.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/common/maneuvers/search-for-hidden-creatures.json",
+    "selection": "common-actions",
+    "text": "---\nname: Search for Hidden Creatures\nscc: mcdm.heroes.v1/feature.common.maneuvers/search-for-hidden-creatures\ntype: feature\n---\n\nThe [Search for Hidden Creatures](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/search-for-hidden-creatures) maneuver allows a creature to attempt to locate creatures hidden from them (see Hide and Sneak in Chapter 9: [Tests](scc.v1:mcdm.heroes.v1/chapter/tests)).\n",
+    "structured": {}
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.common.maneuvers/stand-up",
+    "kind": "feature",
+    "name": "Stand Up",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/common/maneuvers/stand-up.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/common/maneuvers/stand-up.json",
+    "selection": "common-actions",
+    "text": "---\nname: Stand Up\nscc: mcdm.heroes.v1/feature.common.maneuvers/stand-up\ntype: feature\n---\n\nA creature can use the [Stand Up](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/stand-up) maneuver to stand up if they [are prone](scc.v1:mcdm.heroes.v1/condition/prone), ending that [condition](scc.v1:mcdm.heroes.v1/rule.combat/condition). Alternatively, they can use this maneuver to make a willing [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) prone creature stand up.\n",
+    "structured": {}
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.common.maneuvers/use-consumable",
+    "kind": "feature",
+    "name": "Use Consumable",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/common/maneuvers/use-consumable.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/common/maneuvers/use-consumable.json",
+    "selection": "common-actions",
+    "text": "---\nname: Use Consumable\nscc: mcdm.heroes.v1/feature.common.maneuvers/use-consumable\ntype: feature\n---\n\nUnless otherwise noted in its description, a creature can activate a [consumable](scc.v1:mcdm.heroes.v1/rule.treasure/consumable) treasure such as a potion with the [Use Consumable](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/use-consumable) maneuver. A creature can use this maneuver to administer a [consumable](scc.v1:mcdm.heroes.v1/rule.treasure/consumable) treasure that benefits the user either to themself or to a willing [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) creature. See [Consumables](scc.v1:mcdm.heroes.v1/rule.treasure/consumable) in Chapter 13: [Rewards](scc.v1:mcdm.heroes.v1/chapter/rewards).\n",
+    "structured": {}
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.common.move-actions/advance",
+    "kind": "feature",
+    "name": "Advance",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/common/move-actions/advance.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/common/move-actions/advance.json",
+    "selection": "common-actions",
+    "text": "---\nname: Advance\nscc: mcdm.heroes.v1/feature.common.move-actions/advance\ntype: feature\n---\n\nWhen a creature takes the [Advance](scc.v1:mcdm.heroes.v1/feature.common.move-actions/advance) move action, they move a number of squares up to their [speed](scc.v1:mcdm.heroes.v1/rule.character/speed). They can break up this movement with their maneuver and main action however they wish.\n",
+    "structured": {}
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.common.move-actions/disengage",
+    "kind": "feature",
+    "name": "Disengage",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/common/move-actions/disengage.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/common/move-actions/disengage.json",
+    "selection": "common-actions",
+    "text": "---\nname: Disengage\nscc: mcdm.heroes.v1/feature.common.move-actions/disengage\ntype: feature\n---\n\nWhen a creature takes the [Disengage](scc.v1:mcdm.heroes.v1/feature.common.move-actions/disengage) move action, they can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) 1 square. Certain class features, kits, and other rules allow a creature to [shift](scc.v1:mcdm.heroes.v1/movement/shifting) more than 1 square when they disengage. A creature who does so can break up their [shift](scc.v1:mcdm.heroes.v1/movement/shifting) with their maneuver and main action however they wish.\n",
+    "structured": {}
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.common.move-actions/ride",
+    "kind": "feature",
+    "name": "Ride",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/common/move-actions/ride.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/common/move-actions/ride.json",
+    "selection": "common-actions",
+    "text": "---\nname: Ride\nscc: mcdm.heroes.v1/feature.common.move-actions/ride\ntype: feature\n---\n\nA creature can take the [Ride](scc.v1:mcdm.heroes.v1/feature.common.move-actions/ride) move action only while mounted on another creature (see [Mounted Combat](scc.v1:mcdm.heroes.v1/rule.combat/mounted-combat) below). When a creature takes the [Ride](scc.v1:mcdm.heroes.v1/feature.common.move-actions/ride) move action, they cause their mount to move up to the mount's [speed](scc.v1:mcdm.heroes.v1/rule.character/speed), taking the rider with them. Alternatively, a creature can use the [Ride](scc.v1:mcdm.heroes.v1/feature.common.move-actions/ride) move action to have their mount use the [Disengage](scc.v1:mcdm.heroes.v1/feature.common.move-actions/disengage) move action as a free [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action). A creature can use the [Ride](scc.v1:mcdm.heroes.v1/feature.common.move-actions/ride) move action only once per round. A mounted creature can only have this move action applied to them once per round. This movement can be broken up with the rider's maneuver and main action however they wish.\n",
+    "structured": {}
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.fury.boren/animal-form-bear",
+    "kind": "feature",
+    "name": "Animal Form: Bear",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/boren/animal-form-bear.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/fury/boren/animal-form-bear.json",
+    "selection": "fury-level-one",
+    "text": "---\nclass: fury\nkit: boren\nname: 'Animal Form: Bear'\nscc: mcdm.heroes.v1/feature.fury.boren/animal-form-bear\ntype: feature\n---\n\nWhile you are in your bear form, your [size](scc.v1:mcdm.heroes.v1/rule.character/size) is 2 and you gain a +1 [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) to [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) with [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) weapon abilities.\n",
+    "structured": {
+      "class": "fury",
+      "kit": "boren"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.fury.boren/aspect-benefits",
+    "kind": "feature",
+    "name": "Aspect Benefits",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/boren/aspect-benefits.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/fury/boren/aspect-benefits.json",
+    "selection": "fury-level-one",
+    "text": "---\nclass: fury\nkit: boren\nname: Aspect Benefits\nscc: mcdm.heroes.v1/feature.fury.boren/aspect-benefits\ntype: feature\n---\n\nWhenever you use [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) to [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) a creature, you can [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) that creature instead. Whenever you [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) a creature [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to you and that creature has M < AVERAGE, you can use a free [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) to make that creature [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed) by you.\n",
+    "structured": {
+      "class": "fury",
+      "kit": "boren"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.fury.boren/growing-ferocity",
+    "kind": "feature",
+    "name": "Growing Ferocity",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/boren/growing-ferocity.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/fury/boren/growing-ferocity.json",
+    "selection": "fury-level-one",
+    "text": "---\nclass: fury\nkit: boren\nname: Growing Ferocity\nscc: mcdm.heroes.v1/feature.fury.boren/growing-ferocity\ntype: feature\n---\n\nAs your ferocity grows, you gain benefits as noted on the [Boren](scc.v1:mcdm.heroes.v1/kit/boren) [Growing Ferocity](scc.v1:mcdm.heroes.v1/feature.fury.boren/growing-ferocity) table. Benefits are cumulative except where an improved benefit replaces a lesser benefit.\n\n###### Boren Growing Ferocity Table\n\n| Ferocity        | Benefit                                                                                                                                                                                                                   |\n|-----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|\n| 2               | You can have up to two creatures [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed) at a time. Additionally, whenever you make a [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) against a creature you have [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed), you gain 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge).                                                                       |\n| 4               | The first time you grab a creature on a [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), you gain 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge).                                                                                                                                                           |\n| 6               | You gain an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on the [Grab](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/grab) and [Knockback](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/knockback) maneuvers.                                                                                                                                                                     |\n| 8 (4th level)   | The first time you grab a creature on a [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), you gain 2 [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge) instead of 1.                                                                                                                                             |\n| 10 (7th level)  | You have a double [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on the [Grab](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/grab) and [Knockback](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/knockback) maneuvers.                                                                                                                                                               |\n| 12 (10th level) | Whenever you use a [heroic ability](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability), you gain 10 [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina). Additionally, whenever you have a creature [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed), any [ability roll](scc.v1:mcdm.heroes.v1/rule.dice/ability-roll) made against that creature gains a [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) to its [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) equal to your [Might](scc.v1:mcdm.heroes.v1/rule.character/might) score. |\n",
+    "structured": {
+      "class": "fury",
+      "kit": "boren"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.fury.boren/hybrid-form-bear",
+    "kind": "feature",
+    "name": "Hybrid Form: Bear",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/boren/hybrid-form-bear.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/fury/boren/hybrid-form-bear.json",
+    "selection": "fury-level-one",
+    "text": "---\nclass: fury\nkit: boren\nname: 'Hybrid Form: Bear'\nscc: mcdm.heroes.v1/feature.fury.boren/hybrid-form-bear\ntype: feature\n---\n\nWhile you are in your hybrid form, your [size](scc.v1:mcdm.heroes.v1/rule.character/size) is 2 and you gain a +1 [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) to [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) with [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) weapon abilities. At 4th level, the first time you take hybrid form in an encounter, you gain 10 [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina).\n",
+    "structured": {
+      "class": "fury",
+      "kit": "boren"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.fury.boren/kit-bonuses",
+    "kind": "feature",
+    "name": "Kit Bonuses",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/boren/kit-bonuses.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/fury/boren/kit-bonuses.json",
+    "selection": "fury-level-one",
+    "text": "---\nclass: fury\nkit: boren\nname: Kit Bonuses\nscc: mcdm.heroes.v1/feature.fury.boren/kit-bonuses\ntype: feature\n---\n\n- **[Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) [Bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties):** +9 per [echelon](scc.v1:mcdm.heroes.v1/rule.general/echelon)\n- **[Stability](scc.v1:mcdm.heroes.v1/rule.character/stability) [Bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties):** +2\n- **[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) Damage [Bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties):** +0/+0/+4\n",
+    "structured": {
+      "class": "fury",
+      "kit": "boren"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.fury.boren/primordial-storm-blizzard",
+    "kind": "feature",
+    "name": "Primordial Storm: Blizzard",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/boren/primordial-storm-blizzard.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/fury/boren/primordial-storm-blizzard.json",
+    "selection": "fury-level-one",
+    "text": "---\nclass: fury\nkit: boren\nname: 'Primordial Storm: Blizzard'\nscc: mcdm.heroes.v1/feature.fury.boren/primordial-storm-blizzard\ntype: feature\n---\n\nYour primordial [damage type](scc.v1:mcdm.heroes.v1/rule.damage/damage-type) is cold.\n",
+    "structured": {
+      "class": "fury",
+      "kit": "boren"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.fury.corven/animal-form-crow",
+    "kind": "feature",
+    "name": "Animal Form: Crow",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/corven/animal-form-crow.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/fury/corven/animal-form-crow.json",
+    "selection": "fury-level-one",
+    "text": "---\nclass: fury\nkit: corven\nname: 'Animal Form: Crow'\nscc: mcdm.heroes.v1/feature.fury.corven/animal-form-crow\ntype: feature\n---\n\nWhile you are in your crow form, your [size](scc.v1:mcdm.heroes.v1/rule.character/size) is 1T and you can [fly](scc.v1:mcdm.heroes.v1/movement/fly). You can use the [Hide](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/hide) maneuver as a [free maneuver](scc.v1:mcdm.heroes.v1/rule.combat/free-maneuver), and you can use your allies as [cover](scc.v1:mcdm.heroes.v1/rule.combat/cover) when you hide. You can't use any abilities while in this form except for [Aspect of the Wild](scc.v1:mcdm.heroes.v1/feature.ability.fury.stormwight-kits/aspect-of-the-wild).\n",
+    "structured": {
+      "class": "fury",
+      "kit": "corven"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.fury.corven/aspect-benefits",
+    "kind": "feature",
+    "name": "Aspect Benefits",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/corven/aspect-benefits.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/fury/corven/aspect-benefits.json",
+    "selection": "fury-level-one",
+    "text": "---\nclass: fury\nkit: corven\nname: Aspect Benefits\nscc: mcdm.heroes.v1/feature.fury.corven/aspect-benefits\ntype: feature\n---\n\nYou gain an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on [tests](scc.v1:mcdm.heroes.v1/rule.test/test) made to hide and sneak. Additionally, whenever you fall, you can use a free [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) to use your [Aspect of the Wild](scc.v1:mcdm.heroes.v1/feature.ability.fury.stormwight-kits/aspect-of-the-wild) ability.\n",
+    "structured": {
+      "class": "fury",
+      "kit": "corven"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.fury.corven/growing-ferocity",
+    "kind": "feature",
+    "name": "Growing Ferocity",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/corven/growing-ferocity.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/fury/corven/growing-ferocity.json",
+    "selection": "fury-level-one",
+    "text": "---\nclass: fury\nkit: corven\nname: Growing Ferocity\nscc: mcdm.heroes.v1/feature.fury.corven/growing-ferocity\ntype: feature\n---\n\nAs your ferocity grows, you gain benefits as noted on the [Corven](scc.v1:mcdm.heroes.v1/kit/corven) [Growing Ferocity](scc.v1:mcdm.heroes.v1/feature.fury.boren/growing-ferocity) table. Benefits are cumulative except where an improved benefit replaces a lesser benefit.\n\n###### Corven Growing Ferocity Table\n\n| Ferocity        | Benefit                                                                                                                                           |\n|-----------------|---------------------------------------------------------------------------------------------------------------------------------------------------|\n| 2               | Whenever you use the [Disengage](scc.v1:mcdm.heroes.v1/feature.common.move-actions/disengage) move action, the [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) you can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) gains a [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) equal to your [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility) score.                                 |\n| 4               | The first time you [shift](scc.v1:mcdm.heroes.v1/movement/shifting) on a [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), you gain 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge).                                                                                             |\n| 6               | You gain an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility) [tests](scc.v1:mcdm.heroes.v1/rule.test/test), the [Escape Grab](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/escape-grab) maneuver, and the [Knockback](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/knockback) maneuver.                                                          |\n| 8 (4th level)   | The first time you [shift](scc.v1:mcdm.heroes.v1/movement/shifting) on a [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), you gain 2 [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge) instead of 1.                                                                               |\n| 10 (7th level)  | You have a double [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility) [tests](scc.v1:mcdm.heroes.v1/rule.test/test), the [Escape Grab](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/escape-grab) maneuver, and the [Knockback](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/knockback) maneuver.                                                    |\n| 12 (10th level) | Whenever you use a [heroic ability](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability), you gain 10 [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina). Additionally, the [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) of any effects targeting you is reduced by 2 for you. |\n",
+    "structured": {
+      "class": "fury",
+      "kit": "corven"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.fury.corven/hybrid-form-crow",
+    "kind": "feature",
+    "name": "Hybrid Form: Crow",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/corven/hybrid-form-crow.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/fury/corven/hybrid-form-crow.json",
+    "selection": "fury-level-one",
+    "text": "---\nclass: fury\nkit: corven\nname: 'Hybrid Form: Crow'\nscc: mcdm.heroes.v1/feature.fury.corven/hybrid-form-crow\ntype: feature\n---\n\nWhile you are in your hybrid form, your [size](scc.v1:mcdm.heroes.v1/rule.character/size) is your choice of 1S or 1M. At 4th level, you can [fly](scc.v1:mcdm.heroes.v1/movement/fly).\n",
+    "structured": {
+      "class": "fury",
+      "kit": "corven"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.fury.corven/kit-bonuses",
+    "kind": "feature",
+    "name": "Kit Bonuses",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/corven/kit-bonuses.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/fury/corven/kit-bonuses.json",
+    "selection": "fury-level-one",
+    "text": "---\nclass: fury\nkit: corven\nname: Kit Bonuses\nscc: mcdm.heroes.v1/feature.fury.corven/kit-bonuses\ntype: feature\n---\n\n- **[Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) [Bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties):** +3 per [echelon](scc.v1:mcdm.heroes.v1/rule.general/echelon)\n- **[Speed](scc.v1:mcdm.heroes.v1/rule.character/speed) [Bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties):** +3\n- **[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) Damage [Bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties):** +2/+2/+2\n- **Disengage [Bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties):** +1\n",
+    "structured": {
+      "class": "fury",
+      "kit": "corven"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.fury.corven/primordial-storm-anabatic-wind",
+    "kind": "feature",
+    "name": "Primordial Storm: Anabatic Wind",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/corven/primordial-storm-anabatic-wind.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/fury/corven/primordial-storm-anabatic-wind.json",
+    "selection": "fury-level-one",
+    "text": "---\nclass: fury\nkit: corven\nname: 'Primordial Storm: Anabatic Wind'\nscc: mcdm.heroes.v1/feature.fury.corven/primordial-storm-anabatic-wind\ntype: feature\n---\n\nYour primordial [damage type](scc.v1:mcdm.heroes.v1/rule.damage/damage-type) is fire.\n",
+    "structured": {
+      "class": "fury",
+      "kit": "corven"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.fury.level-1/1st-level-aspect-features",
+    "kind": "feature",
+    "name": "1st-Level Aspect Features",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/level-1/1st-level-aspect-features.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/fury/level-1/1st-level-aspect-features.json",
+    "selection": "fury-level-one",
+    "text": "---\nclass: fury\nlevel: \"1\"\nname: 1st-Level Aspect Features\nscc: mcdm.heroes.v1/feature.fury.level-1/1st-level-aspect-features\ntype: feature\n---\n\nYour [primordial aspect](scc.v1:mcdm.heroes.v1/feature.fury.level-1/primordial-aspect) grants you two features, as shown on the 1st-Level Aspect Features table.\n\n###### 1st-Level Aspect Features Table\n\n| Aspect     | Feature                        |\n|------------|--------------------------------|\n| Berserker  | Kit, [Primordial Strength](scc.v1:mcdm.heroes.v1/feature.fury.level-1/primordial-strength)       |\n| Reaver     | Kit, [Primordial Cunning](scc.v1:mcdm.heroes.v1/feature.fury.level-1/primordial-cunning)        |\n| Stormwight | [Beast Shape](scc.v1:mcdm.heroes.v1/feature.fury.level-1/beast-shape), [Relentless Hunter](scc.v1:mcdm.heroes.v1/feature.fury.level-1/relentless-hunter) |\n",
+    "structured": {
+      "class": "fury",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.fury.level-1/aspect-triggered-action",
+    "kind": "feature",
+    "name": "Aspect Triggered Action",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/level-1/aspect-triggered-action.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/fury/level-1/aspect-triggered-action.json",
+    "selection": "fury-level-one",
+    "text": "---\nclass: fury\nlevel: \"1\"\nname: Aspect Triggered Action\nscc: mcdm.heroes.v1/feature.fury.level-1/aspect-triggered-action\ntype: feature\n---\n\nYour [primordial aspect](scc.v1:mcdm.heroes.v1/feature.fury.level-1/primordial-aspect) grants you a [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action), as shown on the Aspect [Triggered Actions](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) table.\n\n###### Aspect Triggered Actions Table\n\n| Aspect                   | [Triggered Action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action)   |\n|--------------------------|--------------------|\n| Berserker                | [Lines of Force](scc.v1:mcdm.heroes.v1/feature.ability.fury.level-1/lines-of-force)     |\n| Reaver                   | [Unearthly Reflexes](scc.v1:mcdm.heroes.v1/feature.ability.fury.level-1/unearthly-reflexes) |\n| Stormwight               | [Furious Change](scc.v1:mcdm.heroes.v1/feature.ability.fury.level-1/furious-change)     |\n",
+    "structured": {
+      "class": "fury",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.fury.level-1/beast-shape",
+    "kind": "feature",
+    "name": "Beast Shape",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/level-1/beast-shape.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/fury/level-1/beast-shape.json",
+    "selection": "fury-level-one",
+    "text": "---\nclass: fury\nlevel: \"1\"\nname: Beast Shape\nscc: mcdm.heroes.v1/feature.fury.level-1/beast-shape\nsubclass: stormwight\ntype: feature\n---\n\nYou can use and gain the benefits of a stormwight kit (see [Stormwight Kits](scc.v1:mcdm.heroes.v1/feature.fury.stormwight-kits/kit-features)). Your stormwight kit grants you a number of benefits, including benefits tied to your [Growing Ferocity](scc.v1:mcdm.heroes.v1/feature.fury.boren/growing-ferocity) feature.\n",
+    "structured": {
+      "class": "fury",
+      "level": "1",
+      "subclass": "stormwight"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.fury.level-1/ferocity",
+    "kind": "feature",
+    "name": "Ferocity",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/level-1/ferocity.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/fury/level-1/ferocity.json",
+    "selection": "fury-level-one",
+    "text": "---\nclass: fury\nlevel: \"1\"\nname: Ferocity\nscc: mcdm.heroes.v1/feature.fury.level-1/ferocity\ntype: feature\n---\n\nWithin the heat of battle, your determination and anger grow, fueling a [Heroic Resource](scc.v1:mcdm.heroes.v1/rule.resource/heroic-resource) called ferocity.\n\n> **Where's My Maneuver?**\n>\n> Since most other classes get a bespoke maneuver, you might find yourself asking, \"Where's the special maneuver for the [fury](scc.v1:mcdm.heroes.v1/class/fury)?\" The answer is that the class doesn't need its own maneuver, because most of the time, the fantasy of the [fury](scc.v1:mcdm.heroes.v1/class/fury) has them using the [Grab](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/grab) or [Knockback](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/knockback) maneuvers in combat. They're really good at those maneuvers too, so it doesn't make sense to give you another option that you'll rarely or never use.\n\n##### Ferocity in Combat\n\nAt the start of a combat encounter or some other stressful situation tracked in [combat rounds](scc.v1:mcdm.heroes.v1/rule.combat/combat-round) (as determined by the Director), you gain ferocity equal to your [Victories](scc.v1:mcdm.heroes.v1/rule.resource/victories). At the start of each of your [turns](scc.v1:mcdm.heroes.v1/rule.combat/turn) during combat, you gain 1d3 ferocity.\n\nAdditionally, the first time each [combat round](scc.v1:mcdm.heroes.v1/rule.combat/combat-round) that you take damage, you gain 1 ferocity. The first time you become [winded](scc.v1:mcdm.heroes.v1/rule.health/winded) or are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying) in an encounter, you gain 1d3 ferocity.\n\nYou lose any remaining ferocity at the end of the encounter.\n\n##### Ferocity Outside of Combat\n\nThough you can't gain ferocity outside of combat, you can use your [heroic abilities](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability) and effects that cost ferocity without spending it. Whenever you use an ability or effect outside of combat that costs ferocity, you can't use that same ability or effect outside of combat again until you earn 1 or more [Victories](scc.v1:mcdm.heroes.v1/rule.resource/victories) or finish a [respite](scc.v1:mcdm.heroes.v1/rule.resource/respite).\n\nWhen you use an ability outside of combat that lets you spend unlimited ferocity on its effect, such as [To the Uttermost End](scc.v1:mcdm.heroes.v1/feature.ability.fury.level-1/to-the-uttermost-end), you can use it as if you had spent an amount of ferocity equal to your [Victories](scc.v1:mcdm.heroes.v1/rule.resource/victories).\n",
+    "structured": {
+      "class": "fury",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.fury.level-1/fury-abilities",
+    "kind": "feature",
+    "name": "Fury Abilities",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/level-1/fury-abilities.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/fury/level-1/fury-abilities.json",
+    "selection": "fury-level-one",
+    "text": "---\nclass: fury\nlevel: \"1\"\nname: Fury Abilities\nscc: mcdm.heroes.v1/feature.fury.level-1/fury-abilities\ntype: feature\n---\n\nYou specialize in dealing massive damage on the battlefield, and have mastered unique martial abilities that allow you to strike hard and keep moving.\n\n##### Signature Ability\n\nChoose one [signature ability](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability) from the following options. [Signature abilities](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability) can be used at will. (*Quick Build:* [To the Death](scc.v1:mcdm.heroes.v1/feature.ability.fury.level-1/to-the-death)!)\n\n##### Heroic Abilities\n\nYou fight with an array of [heroic abilities](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability), all of which cost ferocity to fuel them.\n\n###### 3-Ferocity Ability\n\nChoose one [heroic ability](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability) from the following options, each of which costs 3 ferocity to use. (*Quick Build:* Back!)\n\n###### 5-Ferocity Ability\n\nChoose one [heroic ability](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability) from the following options, each of which costs 5 ferocity to use. (*Quick Build:* [Blood for Blood](scc.v1:mcdm.heroes.v1/feature.ability.fury.level-1/blood-for-blood)!)\n",
+    "structured": {
+      "class": "fury",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.fury.level-1/growing-ferocity",
+    "kind": "feature",
+    "name": "Growing Ferocity",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/level-1/growing-ferocity.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/fury/level-1/growing-ferocity.json",
+    "selection": "fury-level-one",
+    "text": "---\nclass: fury\nlevel: \"1\"\nname: Growing Ferocity\nscc: mcdm.heroes.v1/feature.fury.level-1/growing-ferocity\ntype: feature\n---\n\nYou gain certain benefits in combat based on the amount of ferocity you have (see 1st-Level Aspect Features for details). These benefits last until the end of your [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), even if a benefit would become unavailable to you because of the amount of ferocity you spend during your [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).\n\nSome [Growing Ferocity](scc.v1:mcdm.heroes.v1/feature.fury.boren/growing-ferocity) benefits can be applied only if you are a specific level or higher, with the level of those benefits noted in the various [Growing Ferocity](scc.v1:mcdm.heroes.v1/feature.fury.boren/growing-ferocity) tables in this section.\n\n###### Berserker Growing Ferocity Table\n\n| Ferocity        | Benefit                                                                                                                                                                                                                        |\n|-----------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|\n| 2               | Whenever you use the [Knockback](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/knockback) maneuver, the [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) gains a [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) equal to your [Might](scc.v1:mcdm.heroes.v1/rule.character/might) score.                                                                                                                 |\n| 4               | The first time you [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) a creature on a [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), you gain 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge).                                                                                                                                                                |\n| 6               | You gain an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on [Might](scc.v1:mcdm.heroes.v1/rule.character/might) [tests](scc.v1:mcdm.heroes.v1/rule.test/test) and the [Knockback](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/knockback) maneuver.                                                                                                                                                                    |\n| 8 (4th level)   | The first time you [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) a creature on a [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), you gain 2 [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge).                                                                                                                                                               |\n| 10 (7th level)  | You have a double [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on [Might](scc.v1:mcdm.heroes.v1/rule.character/might) [tests](scc.v1:mcdm.heroes.v1/rule.test/test) and the [Knockback](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/knockback) maneuver.                                                                                                                                                              |\n| 12 (10th level) | Whenever you use a [heroic ability](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability), you gain 10 [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina). Additionally, whenever you make a [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) that imposes [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) on a target, the [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) gains a [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) equal to your [Might](scc.v1:mcdm.heroes.v1/rule.character/might) score. |\n\n###### Reaver Growing Ferocity Table\n\n| Ferocity        | Benefit                                                                                                                                                                                                                          |\n|-----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|\n| 2               | Whenever you use the [Knockback](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/knockback) maneuver, the [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) gains a [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) equal to your [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility) score.                                                                                                                 |\n| 4               | The first time you [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) a creature on a [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), you gain 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge).                                                                                                                                                                 |\n| 6               | You gain an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility) [tests](scc.v1:mcdm.heroes.v1/rule.test/test) and the [Knockback](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/knockback) maneuver.                                                                                                                                                                    |\n| 8 (4th level)   | The first time you [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) a creature on a [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), you gain 2 [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge).                                                                                                                                                                |\n| 10 (7th level)  | You have a double [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility) [tests](scc.v1:mcdm.heroes.v1/rule.test/test) and the [Knockback](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/knockback) maneuver.                                                                                                                                                              |\n| 12 (10th level) | Whenever you use a [heroic ability](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability), you gain 10 [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina). Additionally, whenever you make a [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) that imposes [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) on a target, the [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) gains a [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) equal to your [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility) score. |\n",
+    "structured": {
+      "class": "fury",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.fury.level-1/kit",
+    "kind": "feature",
+    "name": "Kit",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/level-1/kit.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/fury/level-1/kit.json",
+    "selection": "fury-level-one",
+    "text": "---\nclass: fury\nlevel: \"1\"\nname: Kit\nscc: mcdm.heroes.v1/feature.fury.level-1/kit\ntype: feature\n---\n\nYou can use and gain the benefits of a kit. See Chapter 6: [Kits](scc.v1:mcdm.heroes.v1/chapter/kits) for more information. (*Quick Build:* [Panther](scc.v1:mcdm.heroes.v1/kit/panther).)\n",
+    "structured": {
+      "class": "fury",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.fury.level-1/mighty-leaps",
+    "kind": "feature",
+    "name": "Mighty Leaps",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/level-1/mighty-leaps.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/fury/level-1/mighty-leaps.json",
+    "selection": "fury-level-one",
+    "text": "---\nclass: fury\nlevel: \"1\"\nname: Mighty Leaps\nscc: mcdm.heroes.v1/feature.fury.level-1/mighty-leaps\ntype: feature\n---\n\nYou can't obtain lower than a tier 2 outcome on any [Might](scc.v1:mcdm.heroes.v1/rule.character/might) [test](scc.v1:mcdm.heroes.v1/rule.test/test) made to jump (see Movement Types in Chapter 10: [Combat](scc.v1:mcdm.heroes.v1/chapter/combat)).\n",
+    "structured": {
+      "class": "fury",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.fury.level-1/primordial-aspect",
+    "kind": "feature",
+    "name": "Primordial Aspect",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/level-1/primordial-aspect.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/fury/level-1/primordial-aspect.json",
+    "selection": "fury-level-one",
+    "text": "---\nclass: fury\nlevel: \"1\"\nname: Primordial Aspect\nscc: mcdm.heroes.v1/feature.fury.level-1/primordial-aspect\ntype: feature\n---\n\nYou are a product of customs older than warfare, older than civilization, older than most of the world. You have undergone a rite of passage that revealed the building blocks of the timescape—the Primordial Chaos—and that left an aspect of that chaos inside you. You choose a [primordial aspect](scc.v1:mcdm.heroes.v1/feature.fury.level-1/primordial-aspect) from the following options, each of which grants you a skill. (*Quick Build:* Berserker.)\n\n- **Berserker:** You channel your ferocity into physical might, acting as a living version of the forces that shape the world. You have the [Lift](scc.v1:mcdm.heroes.v1/skill.exploration/lift) skill.\n- **Reaver:** You channel your ferocity into instinct and cunning, challenging the order of civilization. You have the [Hide](scc.v1:mcdm.heroes.v1/skill.intrigue/hide) skill.\n- **Stormwight:** You channel your ferocity into primordial storms and can take on the form of an animal or an animal hybrid form. You have the [Track](scc.v1:mcdm.heroes.v1/skill.intrigue/track) skill.\n\nYour [primordial aspect](scc.v1:mcdm.heroes.v1/feature.fury.level-1/primordial-aspect) is your [subclass](scc.v1:mcdm.heroes.v1/rule.general/subclass), and your choice of aspect determines many of the features you'll gain as you gain new levels.\n",
+    "structured": {
+      "class": "fury",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.fury.level-1/primordial-cunning",
+    "kind": "feature",
+    "name": "Primordial Cunning",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/level-1/primordial-cunning.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/fury/level-1/primordial-cunning.json",
+    "selection": "fury-level-one",
+    "text": "---\nclass: fury\nlevel: \"1\"\nname: Primordial Cunning\nscc: mcdm.heroes.v1/feature.fury.level-1/primordial-cunning\nsubclass: reaver\ntype: feature\n---\n\nYou are never [surprised](scc.v1:mcdm.heroes.v1/rule.combat/surprised). Additionally, whenever you would [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) a target with [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement), you can [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) them instead.\n\nAs your ferocity grows, you gain benefits as noted on the Reaver [Growing Ferocity](scc.v1:mcdm.heroes.v1/feature.fury.boren/growing-ferocity) table. Benefits are cumulative except where an improved benefit replaces a lesser benefit.\n",
+    "structured": {
+      "class": "fury",
+      "level": "1",
+      "subclass": "reaver"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.fury.level-1/primordial-strength",
+    "kind": "feature",
+    "name": "Primordial Strength",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/level-1/primordial-strength.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/fury/level-1/primordial-strength.json",
+    "selection": "fury-level-one",
+    "text": "---\nclass: fury\nlevel: \"1\"\nname: Primordial Strength\nscc: mcdm.heroes.v1/feature.fury.level-1/primordial-strength\nsubclass: berserker\ntype: feature\n---\n\nWhenever you damage an object with a weapon [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), the [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) deals extra damage equal to your [Might](scc.v1:mcdm.heroes.v1/rule.character/might) score. Additionally, whenever you [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) another creature into an object, the creature takes extra damage equal to your [Might](scc.v1:mcdm.heroes.v1/rule.character/might) score.\n\nAs your ferocity grows, you gain benefits as noted on the Berserker [Growing Ferocity](scc.v1:mcdm.heroes.v1/feature.fury.boren/growing-ferocity) table. Benefits are cumulative except where an improved benefit replaces a lesser benefit.\n",
+    "structured": {
+      "class": "fury",
+      "level": "1",
+      "subclass": "berserker"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.fury.level-1/relentless-hunter",
+    "kind": "feature",
+    "name": "Relentless Hunter",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/level-1/relentless-hunter.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/fury/level-1/relentless-hunter.json",
+    "selection": "fury-level-one",
+    "text": "---\nclass: fury\nlevel: \"1\"\nname: Relentless Hunter\nscc: mcdm.heroes.v1/feature.fury.level-1/relentless-hunter\nsubclass: stormwight\ntype: feature\n---\n\nYou gain an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on [tests](scc.v1:mcdm.heroes.v1/rule.test/test) made using the [Track](scc.v1:mcdm.heroes.v1/skill.intrigue/track) skill.\n",
+    "structured": {
+      "class": "fury",
+      "level": "1",
+      "subclass": "stormwight"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.fury.raden/animal-form-rat",
+    "kind": "feature",
+    "name": "Animal Form: Rat",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/raden/animal-form-rat.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/fury/raden/animal-form-rat.json",
+    "selection": "fury-level-one",
+    "text": "---\nclass: fury\nkit: raden\nname: 'Animal Form: Rat'\nscc: mcdm.heroes.v1/feature.fury.raden/animal-form-rat\ntype: feature\n---\n\nWhile you are in your rat form, your [size](scc.v1:mcdm.heroes.v1/rule.character/size) is 1T and you can automatically climb at full [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) while moving. You can use the [Hide](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/hide) maneuver as a [free maneuver](scc.v1:mcdm.heroes.v1/rule.combat/free-maneuver), you can use your allies as [cover](scc.v1:mcdm.heroes.v1/rule.combat/cover) when you hide, and you can stay hidden while you move through squares occupied by any creature. Additionally, you gain an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on [tests](scc.v1:mcdm.heroes.v1/rule.test/test) made to climb other creatures. You can't use any abilities while in this form except for [Aspect of the Wild](scc.v1:mcdm.heroes.v1/feature.ability.fury.stormwight-kits/aspect-of-the-wild).\n",
+    "structured": {
+      "class": "fury",
+      "kit": "raden"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.fury.raden/aspect-benefits",
+    "kind": "feature",
+    "name": "Aspect Benefits",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/raden/aspect-benefits.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/fury/raden/aspect-benefits.json",
+    "selection": "fury-level-one",
+    "text": "---\nclass: fury\nkit: raden\nname: Aspect Benefits\nscc: mcdm.heroes.v1/feature.fury.raden/aspect-benefits\ntype: feature\n---\n\nYou gain an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on [tests](scc.v1:mcdm.heroes.v1/rule.test/test) made to hide and sneak. Additionally, you ignore [difficult terrain](scc.v1:mcdm.heroes.v1/movement/difficult-terrain).\n",
+    "structured": {
+      "class": "fury",
+      "kit": "raden"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.fury.raden/growing-ferocity",
+    "kind": "feature",
+    "name": "Growing Ferocity",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/raden/growing-ferocity.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/fury/raden/growing-ferocity.json",
+    "selection": "fury-level-one",
+    "text": "---\nclass: fury\nkit: raden\nname: Growing Ferocity\nscc: mcdm.heroes.v1/feature.fury.raden/growing-ferocity\ntype: feature\n---\n\nAs your ferocity grows, you gain benefits as noted on the [Raden](scc.v1:mcdm.heroes.v1/kit/raden) [Growing Ferocity](scc.v1:mcdm.heroes.v1/feature.fury.boren/growing-ferocity) table. Benefits are cumulative except where an improved benefit replaces a lesser benefit.\n\n###### Raden Growing Ferocity Table\n\n| Ferocity        | Benefit                                                                                                                                           |\n|-----------------|---------------------------------------------------------------------------------------------------------------------------------------------------|\n| 2               | Whenever you use the [Disengage](scc.v1:mcdm.heroes.v1/feature.common.move-actions/disengage) move action, the [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) you can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) gains a [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) equal to your [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility) score.                                 |\n| 4               | The first time you [shift](scc.v1:mcdm.heroes.v1/movement/shifting) on a [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), you gain 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge).                                                                                             |\n| 6               | You gain an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility) [tests](scc.v1:mcdm.heroes.v1/rule.test/test), the [Escape Grab](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/escape-grab) maneuver, and the [Knockback](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/knockback) maneuver.                                                          |\n| 8 (4th level)   | The first time you [shift](scc.v1:mcdm.heroes.v1/movement/shifting) on a [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), you gain 2 [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge) instead of 1.                                                                               |\n| 10 (7th level)  | You have a double [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility) [tests](scc.v1:mcdm.heroes.v1/rule.test/test), the [Escape Grab](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/escape-grab) maneuver, and the [Knockback](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/knockback) maneuver                                                     |\n| 12 (10th level) | Whenever you use a [heroic ability](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability), you gain 10 [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina). Additionally, the [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) of any effects targeting you is reduced by 2 for you. |\n",
+    "structured": {
+      "class": "fury",
+      "kit": "raden"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.fury.raden/hybrid-form-rat",
+    "kind": "feature",
+    "name": "Hybrid Form: Rat",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/raden/hybrid-form-rat.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/fury/raden/hybrid-form-rat.json",
+    "selection": "fury-level-one",
+    "text": "---\nclass: fury\nkit: raden\nname: 'Hybrid Form: Rat'\nscc: mcdm.heroes.v1/feature.fury.raden/hybrid-form-rat\ntype: feature\n---\n\nWhile you are in your hybrid form, your [size](scc.v1:mcdm.heroes.v1/rule.character/size) is your choice of 1S or 1M. At 4th level, you can automatically climb at full [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) while moving.\n",
+    "structured": {
+      "class": "fury",
+      "kit": "raden"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.fury.raden/kit-bonuses",
+    "kind": "feature",
+    "name": "Kit Bonuses",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/raden/kit-bonuses.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/fury/raden/kit-bonuses.json",
+    "selection": "fury-level-one",
+    "text": "---\nclass: fury\nkit: raden\nname: Kit Bonuses\nscc: mcdm.heroes.v1/feature.fury.raden/kit-bonuses\ntype: feature\n---\n\n- **[Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) [Bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties):** +3 per [echelon](scc.v1:mcdm.heroes.v1/rule.general/echelon)\n- **[Speed](scc.v1:mcdm.heroes.v1/rule.character/speed) [Bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties):** +3\n- **[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) Damage [Bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties):** +2/+2/+2\n- **Disengage [Bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties):** +1\n",
+    "structured": {
+      "class": "fury",
+      "kit": "raden"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.fury.raden/primordial-storm-rat-flood",
+    "kind": "feature",
+    "name": "Primordial Storm: Rat Flood",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/raden/primordial-storm-rat-flood.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/fury/raden/primordial-storm-rat-flood.json",
+    "selection": "fury-level-one",
+    "text": "---\nclass: fury\nkit: raden\nname: 'Primordial Storm: Rat Flood'\nscc: mcdm.heroes.v1/feature.fury.raden/primordial-storm-rat-flood\ntype: feature\n---\n\nYour primordial [damage type](scc.v1:mcdm.heroes.v1/rule.damage/damage-type) is corruption.\n",
+    "structured": {
+      "class": "fury",
+      "kit": "raden"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.fury.stormwight-kits/aspect-benefits-and-animal-form",
+    "kind": "feature",
+    "name": "Aspect Benefits and Animal Form",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/stormwight-kits/aspect-benefits-and-animal-form.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/fury/stormwight-kits/aspect-benefits-and-animal-form.json",
+    "selection": "fury-level-one",
+    "text": "---\nclass: fury\nname: Aspect Benefits and Animal Form\nscc: mcdm.heroes.v1/feature.fury.stormwight-kits/aspect-benefits-and-animal-form\ntype: feature\n---\n\nYour [primordial aspect](scc.v1:mcdm.heroes.v1/feature.fury.level-1/primordial-aspect) benefits are always available to you, and you gain additional benefits while in the animal or hybrid form granted by your stormwight kit.\n",
+    "structured": {
+      "class": "fury"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.fury.stormwight-kits/aspect-of-the-wild",
+    "kind": "feature",
+    "name": "Aspect of the Wild",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/stormwight-kits/aspect-of-the-wild.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/fury/stormwight-kits/aspect-of-the-wild.json",
+    "selection": "fury-level-one",
+    "text": "---\nclass: fury\nname: Aspect of the Wild\nscc: mcdm.heroes.v1/feature.fury.stormwight-kits/aspect-of-the-wild\ntype: feature\n---\n\nYou have the following ability.\n",
+    "structured": {
+      "class": "fury"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.fury.stormwight-kits/equipment",
+    "kind": "feature",
+    "name": "Equipment",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/stormwight-kits/equipment.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/fury/stormwight-kits/equipment.json",
+    "selection": "fury-level-one",
+    "text": "---\nclass: fury\nname: Equipment\nscc: mcdm.heroes.v1/feature.fury.stormwight-kits/equipment\ntype: feature\n---\n\nYou wear no armor and wield only your unarmed [strikes](scc.v1:mcdm.heroes.v1/rule.combat/strike)—which become devastating natural weapons as your ferocity grows.\n",
+    "structured": {
+      "class": "fury"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.fury.stormwight-kits/growing-ferocity",
+    "kind": "feature",
+    "name": "Growing Ferocity",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/stormwight-kits/growing-ferocity.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/fury/stormwight-kits/growing-ferocity.json",
+    "selection": "fury-level-one",
+    "text": "---\nclass: fury\nname: Growing Ferocity\nscc: mcdm.heroes.v1/feature.fury.stormwight-kits/growing-ferocity\ntype: feature\n---\n\nEach stormwight kit grants a set of benefits for your [Growing Ferocity](scc.v1:mcdm.heroes.v1/feature.fury.boren/growing-ferocity) feature.\n",
+    "structured": {
+      "class": "fury"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.fury.stormwight-kits/kit-bonuses",
+    "kind": "feature",
+    "name": "Kit Bonuses",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/stormwight-kits/kit-bonuses.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/fury/stormwight-kits/kit-bonuses.json",
+    "selection": "fury-level-one",
+    "text": "---\nclass: fury\nname: Kit Bonuses\nscc: mcdm.heroes.v1/feature.fury.stormwight-kits/kit-bonuses\ntype: feature\n---\n\nThese [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties)es apply in your true form, your [animal form](scc.v1:mcdm.heroes.v1/complication/animal-form), and your hybrid form. See Chapter 6: [Kits](scc.v1:mcdm.heroes.v1/chapter/kits) for information on [kit bonuses](scc.v1:mcdm.heroes.v1/feature.fury.boren/kit-bonuses).\n",
+    "structured": {
+      "class": "fury"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.fury.stormwight-kits/kit-features",
+    "kind": "feature",
+    "name": "Kit Features",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/stormwight-kits/kit-features.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/fury/stormwight-kits/kit-features.json",
+    "selection": "fury-level-one",
+    "text": "---\nclass: fury\nname: Kit Features\nscc: mcdm.heroes.v1/feature.fury.stormwight-kits/kit-features\ntype: feature\n---\n\nAll stormwight kits have the following features in common.\n\n##### Signature Ability\n\nYou gain a new [signature ability](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability) from your kit.\n",
+    "structured": {
+      "class": "fury"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.fury.stormwight-kits/primordial-storm",
+    "kind": "feature",
+    "name": "Primordial Storm",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/stormwight-kits/primordial-storm.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/fury/stormwight-kits/primordial-storm.json",
+    "selection": "fury-level-one",
+    "text": "---\nclass: fury\nname: Primordial Storm\nscc: mcdm.heroes.v1/feature.fury.stormwight-kits/primordial-storm\ntype: feature\n---\n\nEach stormwight kit is associated with a [primordial storm](scc.v1:mcdm.heroes.v1/feature.fury.stormwight-kits/primordial-storm), which channels a specific [damage type](scc.v1:mcdm.heroes.v1/rule.damage/damage-type) used by some of your abilities.\n",
+    "structured": {
+      "class": "fury"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.fury.vuken/animal-form-wolf",
+    "kind": "feature",
+    "name": "Animal Form: Wolf",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/vuken/animal-form-wolf.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/fury/vuken/animal-form-wolf.json",
+    "selection": "fury-level-one",
+    "text": "---\nclass: fury\nkit: vuken\nname: 'Animal Form: Wolf'\nscc: mcdm.heroes.v1/feature.fury.vuken/animal-form-wolf\ntype: feature\n---\n\nWhile you are in your wolf form, your [size](scc.v1:mcdm.heroes.v1/rule.character/size) is 1L, you have a +2 [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) to [speed](scc.v1:mcdm.heroes.v1/rule.character/speed), and you ignore [difficult terrain](scc.v1:mcdm.heroes.v1/movement/difficult-terrain).\n",
+    "structured": {
+      "class": "fury",
+      "kit": "vuken"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.fury.vuken/aspect-benefits",
+    "kind": "feature",
+    "name": "Aspect Benefits",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/vuken/aspect-benefits.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/fury/vuken/aspect-benefits.json",
+    "selection": "fury-level-one",
+    "text": "---\nclass: fury\nkit: vuken\nname: Aspect Benefits\nscc: mcdm.heroes.v1/feature.fury.vuken/aspect-benefits\ntype: feature\n---\n\nWhenever you use the [Knockback](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/knockback) maneuver, you can then use the [Aid Attack](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/aid-attack) maneuver as a free [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action).\n",
+    "structured": {
+      "class": "fury",
+      "kit": "vuken"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.fury.vuken/growing-ferocity",
+    "kind": "feature",
+    "name": "Growing Ferocity",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/vuken/growing-ferocity.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/fury/vuken/growing-ferocity.json",
+    "selection": "fury-level-one",
+    "text": "---\nclass: fury\nkit: vuken\nname: Growing Ferocity\nscc: mcdm.heroes.v1/feature.fury.vuken/growing-ferocity\ntype: feature\n---\n\nAs your ferocity grows, you gain benefits as noted on the [Vuken](scc.v1:mcdm.heroes.v1/kit/vuken) [Growing Ferocity](scc.v1:mcdm.heroes.v1/feature.fury.boren/growing-ferocity) table. Benefits are cumulative except where an improved benefit replaces a lesser benefit.\n\n###### Vuken Growing Ferocity Table\n\n| Ferocity        | Benefit                                                                                                                                                                                                                          |\n|-----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|\n| 2               | Whenever you use the [Knockback](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/knockback) maneuver, you can target one additional creature.                                                                                                                                                 |\n| 4               | The first time on a [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) that you [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) a creature or knock a [creature prone](scc.v1:mcdm.heroes.v1/condition/prone), you gain 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge).                                                                                                                                   |\n| 6               | You gain an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility) [tests](scc.v1:mcdm.heroes.v1/rule.test/test) and the [Knockback](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/knockback) maneuver.                                                                                                                                                                    |\n| 8 (4th level)   | The first time on a [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) that you [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) a creature or knock a [creature prone](scc.v1:mcdm.heroes.v1/condition/prone), you gain 2 [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge).                                                                                                                                  |\n| 10 (7th level)  | You have a double [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility) [tests](scc.v1:mcdm.heroes.v1/rule.test/test) and the [Knockback](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/knockback) maneuver.                                                                                                                                                              |\n| 12 (10th level) | Whenever you use a [heroic ability](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability), you gain 10 [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina). Additionally, whenever you make a [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) that imposes [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) on a target, the [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) gains a [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) equal to your [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility) score. |\n",
+    "structured": {
+      "class": "fury",
+      "kit": "vuken"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.fury.vuken/hybrid-form-wolf",
+    "kind": "feature",
+    "name": "Hybrid Form: Wolf",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/vuken/hybrid-form-wolf.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/fury/vuken/hybrid-form-wolf.json",
+    "selection": "fury-level-one",
+    "text": "---\nclass: fury\nkit: vuken\nname: 'Hybrid Form: Wolf'\nscc: mcdm.heroes.v1/feature.fury.vuken/hybrid-form-wolf\ntype: feature\n---\n\nWhile you are in your hybrid form, your [size](scc.v1:mcdm.heroes.v1/rule.character/size) is 1L, you have a +2 [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) to [speed](scc.v1:mcdm.heroes.v1/rule.character/speed), and you ignore [difficult terrain](scc.v1:mcdm.heroes.v1/movement/difficult-terrain). At 4th level, the first time you take hybrid form in an encounter, you gain 10 [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina).\n",
+    "structured": {
+      "class": "fury",
+      "kit": "vuken"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.fury.vuken/kit-bonuses",
+    "kind": "feature",
+    "name": "Kit Bonuses",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/vuken/kit-bonuses.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/fury/vuken/kit-bonuses.json",
+    "selection": "fury-level-one",
+    "text": "---\nclass: fury\nkit: vuken\nname: Kit Bonuses\nscc: mcdm.heroes.v1/feature.fury.vuken/kit-bonuses\ntype: feature\n---\n\n- **[Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) [Bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties):** +9 per [echelon](scc.v1:mcdm.heroes.v1/rule.general/echelon)\n- **[Speed](scc.v1:mcdm.heroes.v1/rule.character/speed) [Bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties):** +2\n- **[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) Damage [Bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties):** +2/+2/+2\n- **Disengage [Bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties):** +1\n",
+    "structured": {
+      "class": "fury",
+      "kit": "vuken"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.fury.vuken/primordial-storm-lightning-storm",
+    "kind": "feature",
+    "name": "Primordial Storm: Lightning Storm",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/vuken/primordial-storm-lightning-storm.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/fury/vuken/primordial-storm-lightning-storm.json",
+    "selection": "fury-level-one",
+    "text": "---\nclass: fury\nkit: vuken\nname: 'Primordial Storm: Lightning Storm'\nscc: mcdm.heroes.v1/feature.fury.vuken/primordial-storm-lightning-storm\ntype: feature\n---\n\nYour primordial [damage type](scc.v1:mcdm.heroes.v1/rule.damage/damage-type) is lightning.\n",
+    "structured": {
+      "class": "fury",
+      "kit": "vuken"
+    }
+  }
+]

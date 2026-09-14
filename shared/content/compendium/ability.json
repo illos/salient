@@ -1,0 +1,765 @@
+[
+  {
+    "id": "mcdm.heroes.v1/feature.ability.common/claw-dirt",
+    "kind": "ability",
+    "name": "Claw Dirt",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/common/claw-dirt.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/common/claw-dirt.json",
+    "selection": "common-actions",
+    "text": "---\naction_type: Maneuver\ndistance: Self\neffects:\n    - roll: Power Roll + [Might](scc.v1:mcdm.heroes.v1/rule.character/might)\n      tier1: You can move 1 square into, out of, or through ground you are touching that can be burrowed through, and you are [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) and [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn)).\n      tier2: You can use your main action this turn to move 1 square into, out of, or through ground you are touching that can be burrowed through, and you are [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn)).\n      tier3: You can move 1 square into, out of, or through ground you are touching that can be burrowed through.\nkeywords: []\nname: Claw Dirt\npower_roll_characteristic: '[Might](scc.v1:mcdm.heroes.v1/rule.character/might)'\nscc: mcdm.heroes.v1/feature.ability.common/claw-dirt\ntarget: Self\ntier1: You can move 1 square into, out of, or through ground you are touching that can be burrowed through, and you are [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) and [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn)).\ntier2: You can use your main action this turn to move 1 square into, out of, or through ground you are touching that can be burrowed through, and you are [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn)).\ntier3: You can move 1 square into, out of, or through ground you are touching that can be burrowed through.\ntype: ability\n---\n\n| **-**       | **Maneuver** |\n|-------------|-------------:|\n| **📏 Self** |  **🎯 Self** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Might](scc.v1:mcdm.heroes.v1/rule.character/might):**\n\n- **≤11:** You can move 1 square into, out of, or through ground you are touching that can be burrowed through, and you are [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) and [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn)).\n- **12-16:** You can use your main action this turn to move 1 square into, out of, or through ground you are touching that can be burrowed through, and you are [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn)).\n- **17+:** You can move 1 square into, out of, or through ground you are touching that can be burrowed through.\n",
+    "structured": {
+      "action_type": "Maneuver",
+      "distance": "Self",
+      "effects": [
+        {
+          "roll": "Power Roll + [Might](scc.v1:mcdm.heroes.v1/rule.character/might)",
+          "tier1": "You can move 1 square into, out of, or through ground you are touching that can be burrowed through, and you are [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) and [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn)).",
+          "tier2": "You can use your main action this turn to move 1 square into, out of, or through ground you are touching that can be burrowed through, and you are [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn)).",
+          "tier3": "You can move 1 square into, out of, or through ground you are touching that can be burrowed through."
+        }
+      ],
+      "keywords": [],
+      "power_roll_characteristic": "[Might](scc.v1:mcdm.heroes.v1/rule.character/might)",
+      "target": "Self",
+      "tier1": "You can move 1 square into, out of, or through ground you are touching that can be burrowed through, and you are [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) and [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn)).",
+      "tier2": "You can use your main action this turn to move 1 square into, out of, or through ground you are touching that can be burrowed through, and you are [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn)).",
+      "tier3": "You can move 1 square into, out of, or through ground you are touching that can be burrowed through."
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.common/dragons-fire",
+    "kind": "ability",
+    "name": "Dragon's Fire",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/common/dragons-fire.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/common/dragons-fire.json",
+    "selection": "common-actions",
+    "text": "---\naction_type: Main action\ndistance: 5 x 1 line within 1\neffects:\n    - roll: Power Roll + Your Highest [Characteristic](scc.v1:mcdm.heroes.v1/rule.character/characteristic) Score\n      tier1: 5 fire damage\n      tier2: 8 fire damage\n      tier3: 11 fire damage\nflavor: You open your maw and unleash hell.\nkeywords:\n    - Area\n    - Magic\nname: Dragon's Fire\npower_roll_characteristic: Your Highest [Characteristic](scc.v1:mcdm.heroes.v1/rule.character/characteristic) Score\nscc: mcdm.heroes.v1/feature.ability.common/dragons-fire\ntarget: Each enemy in the area\ntier1: 5 fire damage\ntier2: 8 fire damage\ntier3: 11 fire damage\ntype: ability\n---\n\n*You open your maw and unleash hell.*\n\n| **Area, Magic**            |               **Main action** |\n|----------------------------|------------------------------:|\n| **📏 5 x 1 line within 1** | **🎯 Each enemy in the area** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + Your Highest [Characteristic](scc.v1:mcdm.heroes.v1/rule.character/characteristic) Score:**\n\n- **≤11:** 5 fire damage\n- **12-16:** 8 fire damage\n- **17+:** 11 fire damage\n",
+    "structured": {
+      "action_type": "Main action",
+      "distance": "5 x 1 line within 1",
+      "effects": [
+        {
+          "roll": "Power Roll + Your Highest [Characteristic](scc.v1:mcdm.heroes.v1/rule.character/characteristic) Score",
+          "tier1": "5 fire damage",
+          "tier2": "8 fire damage",
+          "tier3": "11 fire damage"
+        }
+      ],
+      "flavor": "You open your maw and unleash hell.",
+      "keywords": [
+        "Area",
+        "Magic"
+      ],
+      "power_roll_characteristic": "Your Highest [Characteristic](scc.v1:mcdm.heroes.v1/rule.character/characteristic) Score",
+      "target": "Each enemy in the area",
+      "tier1": "5 fire damage",
+      "tier2": "8 fire damage",
+      "tier3": "11 fire damage"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.common/escape-grab",
+    "kind": "ability",
+    "name": "Escape Grab",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/common/escape-grab.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/common/escape-grab.json",
+    "selection": "common-actions",
+    "text": "---\naction_type: '[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\ndistance: Self\neffects:\n    - roll: Power Roll + [Might](scc.v1:mcdm.heroes.v1/rule.character/might) or [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)\n      tier1: No effect.\n      tier2: You can escape the grab, but if you do, a creature who has you [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed) can make a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against you before you are no longer [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed).\n      tier3: You are no longer [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed).\n    - effect: You take a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on this maneuver if your [size](scc.v1:mcdm.heroes.v1/rule.character/size) is smaller than the size of the creature, object, or effect that has you [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed).\n      name: Effect\nkeywords: []\nname: Escape Grab\npower_roll_characteristic: '[Might](scc.v1:mcdm.heroes.v1/rule.character/might) or [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)'\nscc: mcdm.heroes.v1/feature.ability.common/escape-grab\ntarget: Self\ntier1: No effect.\ntier2: You can escape the grab, but if you do, a creature who has you [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed) can make a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against you before you are no longer [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed).\ntier3: You are no longer [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed).\ntype: ability\n---\n\n\n| **-**       | **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|-------------|-------------:|\n| **📏 Self** |  **🎯 Self** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Might](scc.v1:mcdm.heroes.v1/rule.character/might) or [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility):**\n\n- **≤11:** No effect.\n- **12-16:** You can escape the grab, but if you do, a creature who has you [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed) can make a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against you before you are no longer [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed).\n- **17+:** You are no longer [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed).\n\n**Effect:** You take a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on this maneuver if your [size](scc.v1:mcdm.heroes.v1/rule.character/size) is smaller than the size of the creature, object, or effect that has you [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed).\n\nSee [Conditions](scc.v1:mcdm.heroes.v1/rule.combat/condition) in Chapter 5: [Classes](scc.v1:mcdm.heroes.v1/chapter/classes) for information on the [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed) [condition](scc.v1:mcdm.heroes.v1/rule.combat/condition).\n",
+    "structured": {
+      "action_type": "[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "distance": "Self",
+      "effects": [
+        {
+          "roll": "Power Roll + [Might](scc.v1:mcdm.heroes.v1/rule.character/might) or [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)",
+          "tier1": "No effect.",
+          "tier2": "You can escape the grab, but if you do, a creature who has you [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed) can make a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against you before you are no longer [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed).",
+          "tier3": "You are no longer [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)."
+        },
+        {
+          "effect": "You take a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on this maneuver if your [size](scc.v1:mcdm.heroes.v1/rule.character/size) is smaller than the size of the creature, object, or effect that has you [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed).",
+          "name": "Effect"
+        }
+      ],
+      "keywords": [],
+      "power_roll_characteristic": "[Might](scc.v1:mcdm.heroes.v1/rule.character/might) or [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)",
+      "target": "Self",
+      "tier1": "No effect.",
+      "tier2": "You can escape the grab, but if you do, a creature who has you [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed) can make a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against you before you are no longer [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed).",
+      "tier3": "You are no longer [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)."
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.common/grab",
+    "kind": "ability",
+    "name": "Grab",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/common/grab.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/common/grab.json",
+    "selection": "common-actions",
+    "text": "---\naction_type: '[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\ndistance: '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1'\neffects:\n    - roll: Power Roll + [Might](scc.v1:mcdm.heroes.v1/rule.character/might)\n      tier1: No effect.\n      tier2: You can grab the target, but if you do, the target can make a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against you before they are [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed).\n      tier3: The target is [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed) by you.\n    - effect: You can usually target only creatures of your [size](scc.v1:mcdm.heroes.v1/rule.character/size) or smaller. If your [Might](scc.v1:mcdm.heroes.v1/rule.character/might) score is 2 or higher, you can target any creature with a [size](scc.v1:mcdm.heroes.v1/rule.character/size) equal to or less than your [Might](scc.v1:mcdm.heroes.v1/rule.character/might) score.\n      name: Effect\nkeywords:\n    - '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)'\n    - Weapon\nname: Grab\npower_roll_characteristic: '[Might](scc.v1:mcdm.heroes.v1/rule.character/might)'\nscc: mcdm.heroes.v1/feature.ability.common/grab\ntarget: One creature\ntier1: No effect.\ntier2: You can grab the target, but if you do, the target can make a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against you before they are [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed).\ntier3: The target is [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed) by you.\ntype: ability\n---\n\n\n| **[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee), Weapon** |        **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|-------------------|--------------------:|\n| **📏 [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1**    | **🎯 One creature** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Might](scc.v1:mcdm.heroes.v1/rule.character/might):**\n\n- **≤11:** No effect.\n- **12-16:** You can grab the target, but if you do, the target can make a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against you before they are [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed).\n- **17+:** The target is [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed) by you.\n\n**Effect:** You can usually target only creatures of your [size](scc.v1:mcdm.heroes.v1/rule.character/size) or smaller. If your [Might](scc.v1:mcdm.heroes.v1/rule.character/might) score is 2 or higher, you can target any creature with a [size](scc.v1:mcdm.heroes.v1/rule.character/size) equal to or less than your [Might](scc.v1:mcdm.heroes.v1/rule.character/might) score.\n\nUnless otherwise indicated, a creature can grab only one creature at a time.\n\nSee [Conditions](scc.v1:mcdm.heroes.v1/rule.combat/condition) in Chapter 5: [Classes](scc.v1:mcdm.heroes.v1/chapter/classes) for information on the [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed) [condition](scc.v1:mcdm.heroes.v1/rule.combat/condition).\n",
+    "structured": {
+      "action_type": "[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "distance": "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1",
+      "effects": [
+        {
+          "roll": "Power Roll + [Might](scc.v1:mcdm.heroes.v1/rule.character/might)",
+          "tier1": "No effect.",
+          "tier2": "You can grab the target, but if you do, the target can make a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against you before they are [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed).",
+          "tier3": "The target is [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed) by you."
+        },
+        {
+          "effect": "You can usually target only creatures of your [size](scc.v1:mcdm.heroes.v1/rule.character/size) or smaller. If your [Might](scc.v1:mcdm.heroes.v1/rule.character/might) score is 2 or higher, you can target any creature with a [size](scc.v1:mcdm.heroes.v1/rule.character/size) equal to or less than your [Might](scc.v1:mcdm.heroes.v1/rule.character/might) score.",
+          "name": "Effect"
+        }
+      ],
+      "keywords": [
+        "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)",
+        "Weapon"
+      ],
+      "power_roll_characteristic": "[Might](scc.v1:mcdm.heroes.v1/rule.character/might)",
+      "target": "One creature",
+      "tier1": "No effect.",
+      "tier2": "You can grab the target, but if you do, the target can make a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against you before they are [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed).",
+      "tier3": "The target is [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed) by you."
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.common/knockback",
+    "kind": "ability",
+    "name": "Knockback",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/common/knockback.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/common/knockback.json",
+    "selection": "common-actions",
+    "text": "---\naction_type: '[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\ndistance: '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1'\neffects:\n    - roll: Power Roll + [Might](scc.v1:mcdm.heroes.v1/rule.character/might)\n      tier1: '[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1'\n      tier2: '[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2'\n      tier3: '[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3'\n    - effect: You can usually target only creatures of your [size](scc.v1:mcdm.heroes.v1/rule.character/size) or smaller. If your [Might](scc.v1:mcdm.heroes.v1/rule.character/might) score is 2 or higher, you can target any creature with a [size](scc.v1:mcdm.heroes.v1/rule.character/size) equal to or less than your [Might](scc.v1:mcdm.heroes.v1/rule.character/might) score.\n      name: Effect\nkeywords:\n    - '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)'\n    - Weapon\nname: Knockback\npower_roll_characteristic: '[Might](scc.v1:mcdm.heroes.v1/rule.character/might)'\nscc: mcdm.heroes.v1/feature.ability.common/knockback\ntarget: One creature\ntier1: '[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1'\ntier2: '[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2'\ntier3: '[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3'\ntype: ability\n---\n\n\n| **[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee), Weapon** |        **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|-------------------|--------------------:|\n| **📏 [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1**    | **🎯 One creature** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Might](scc.v1:mcdm.heroes.v1/rule.character/might):**\n\n- **≤11:** [Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1\n- **12-16:** [Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2\n- **17+:** [Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3\n\n**Effect:** You can usually target only creatures of your [size](scc.v1:mcdm.heroes.v1/rule.character/size) or smaller. If your [Might](scc.v1:mcdm.heroes.v1/rule.character/might) score is 2 or higher, you can target any creature with a [size](scc.v1:mcdm.heroes.v1/rule.character/size) equal to or less than your [Might](scc.v1:mcdm.heroes.v1/rule.character/might) score.\n",
+    "structured": {
+      "action_type": "[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "distance": "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1",
+      "effects": [
+        {
+          "roll": "Power Roll + [Might](scc.v1:mcdm.heroes.v1/rule.character/might)",
+          "tier1": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
+          "tier2": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
+          "tier3": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3"
+        },
+        {
+          "effect": "You can usually target only creatures of your [size](scc.v1:mcdm.heroes.v1/rule.character/size) or smaller. If your [Might](scc.v1:mcdm.heroes.v1/rule.character/might) score is 2 or higher, you can target any creature with a [size](scc.v1:mcdm.heroes.v1/rule.character/size) equal to or less than your [Might](scc.v1:mcdm.heroes.v1/rule.character/might) score.",
+          "name": "Effect"
+        }
+      ],
+      "keywords": [
+        "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)",
+        "Weapon"
+      ],
+      "power_roll_characteristic": "[Might](scc.v1:mcdm.heroes.v1/rule.character/might)",
+      "target": "One creature",
+      "tier1": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
+      "tier2": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
+      "tier3": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.common/melee-weapon-free-strike",
+    "kind": "ability",
+    "name": "Melee Weapon Free Strike",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/common/melee-weapon-free-strike.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/common/melee-weapon-free-strike.json",
+    "selection": "common-actions",
+    "text": "---\naction_type: Main action\ndistance: '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1'\neffects:\n    - roll: Power Roll + [Might](scc.v1:mcdm.heroes.v1/rule.character/might) or [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)\n      tier1: 2 + M or A damage\n      tier2: 5 + M or A damage\n      tier3: 7 + M or A damage\nkeywords:\n    - Charge\n    - '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)'\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\n    - Weapon\nname: Melee Weapon Free Strike\npower_roll_characteristic: '[Might](scc.v1:mcdm.heroes.v1/rule.character/might) or [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)'\nscc: mcdm.heroes.v1/feature.ability.common/melee-weapon-free-strike\nsubtype: free-strike\ntarget: One creature or object\ntier1: 2 + M or A damage\ntier2: 5 + M or A damage\ntier3: 7 + M or A damage\ntype: ability\n---\n\n| **Charge, [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee), [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), Weapon**  |               **Main action** |\n|------------------------------------|------------------------------:|\n| **📏 [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1**                     | **🎯 One creature or object** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Might](scc.v1:mcdm.heroes.v1/rule.character/might) or [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility):**\n\n- **≤11:** 2 + M or A damage\n- **12-16:** 5 + M or A damage\n- **17+:** 7 + M or A damage\n",
+    "structured": {
+      "action_type": "Main action",
+      "distance": "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1",
+      "effects": [
+        {
+          "roll": "Power Roll + [Might](scc.v1:mcdm.heroes.v1/rule.character/might) or [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)",
+          "tier1": "2 + M or A damage",
+          "tier2": "5 + M or A damage",
+          "tier3": "7 + M or A damage"
+        }
+      ],
+      "keywords": [
+        "Charge",
+        "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)",
+        "Weapon"
+      ],
+      "power_roll_characteristic": "[Might](scc.v1:mcdm.heroes.v1/rule.character/might) or [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)",
+      "subtype": "free-strike",
+      "target": "One creature or object",
+      "tier1": "2 + M or A damage",
+      "tier2": "5 + M or A damage",
+      "tier3": "7 + M or A damage"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.common/ranged-weapon-free-strike",
+    "kind": "ability",
+    "name": "Ranged Weapon Free Strike",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/common/ranged-weapon-free-strike.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/common/ranged-weapon-free-strike.json",
+    "selection": "common-actions",
+    "text": "---\naction_type: Main action\ndistance: '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 5'\neffects:\n    - roll: Power Roll + [Might](scc.v1:mcdm.heroes.v1/rule.character/might) or [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)\n      tier1: 2 + M or A damage\n      tier2: 4 + M or A damage\n      tier3: 6 + M or A damage\nkeywords:\n    - '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)'\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\n    - Weapon\nname: Ranged Weapon Free Strike\npower_roll_characteristic: '[Might](scc.v1:mcdm.heroes.v1/rule.character/might) or [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)'\nscc: mcdm.heroes.v1/feature.ability.common/ranged-weapon-free-strike\nsubtype: free-strike\ntarget: One creature or object\ntier1: 2 + M or A damage\ntier2: 4 + M or A damage\ntier3: 6 + M or A damage\ntype: ability\n---\n\n| **[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged), [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), Weapon**  |               **Main action** |\n|-----------------------------|------------------------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 5**             | **🎯 One creature or object** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Might](scc.v1:mcdm.heroes.v1/rule.character/might) or [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility):**\n\n- **≤11:** 2 + M or A damage\n- **12-16:** 4 + M or A damage\n- **17+:** 6 + M or A damage\n",
+    "structured": {
+      "action_type": "Main action",
+      "distance": "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 5",
+      "effects": [
+        {
+          "roll": "Power Roll + [Might](scc.v1:mcdm.heroes.v1/rule.character/might) or [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)",
+          "tier1": "2 + M or A damage",
+          "tier2": "4 + M or A damage",
+          "tier3": "6 + M or A damage"
+        }
+      ],
+      "keywords": [
+        "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)",
+        "Weapon"
+      ],
+      "power_roll_characteristic": "[Might](scc.v1:mcdm.heroes.v1/rule.character/might) or [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)",
+      "subtype": "free-strike",
+      "target": "One creature or object",
+      "tier1": "2 + M or A damage",
+      "tier2": "4 + M or A damage",
+      "tier3": "6 + M or A damage"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.fury.level-1/back",
+    "kind": "ability",
+    "name": "Back!",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-1/back.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/fury/level-1/back.json",
+    "selection": "fury-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: fury\ncost: 3 Ferocity\ndistance: 1 [burst](scc.v1:mcdm.heroes.v1/rule.combat/burst)\neffects:\n    - roll: Power Roll + [Might](scc.v1:mcdm.heroes.v1/rule.character/might)\n      tier1: 5 damage\n      tier2: 8 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1\n      tier3: 11 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3\nflavor: You hew about you with your mighty weapon, hurling enemies backward.\nkeywords:\n    - Area\n    - '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)'\n    - Weapon\nlevel: \"1\"\nname: Back!\npower_roll_characteristic: '[Might](scc.v1:mcdm.heroes.v1/rule.character/might)'\nscc: mcdm.heroes.v1/feature.ability.fury.level-1/back\ntarget: Each enemy in the area\ntier1: 5 damage\ntier2: 8 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1\ntier3: 11 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3\ntype: ability\n---\n\n\n*You hew about you with your mighty weapon, hurling enemies backward.*\n\n| **Area, [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee), Weapon** |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|-------------------------|------------------------------:|\n| **📏 1 [burst](scc.v1:mcdm.heroes.v1/rule.combat/burst)**          | **🎯 Each enemy in the area** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Might](scc.v1:mcdm.heroes.v1/rule.character/might):**\n\n- **≤11:** 5 damage\n- **12-16:** 8 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1\n- **17+:** 11 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "fury",
+      "cost": "3 Ferocity",
+      "distance": "1 [burst](scc.v1:mcdm.heroes.v1/rule.combat/burst)",
+      "effects": [
+        {
+          "roll": "Power Roll + [Might](scc.v1:mcdm.heroes.v1/rule.character/might)",
+          "tier1": "5 damage",
+          "tier2": "8 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
+          "tier3": "11 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3"
+        }
+      ],
+      "flavor": "You hew about you with your mighty weapon, hurling enemies backward.",
+      "keywords": [
+        "Area",
+        "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)",
+        "Weapon"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Might](scc.v1:mcdm.heroes.v1/rule.character/might)",
+      "target": "Each enemy in the area",
+      "tier1": "5 damage",
+      "tier2": "8 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
+      "tier3": "11 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.fury.level-1/blood-for-blood",
+    "kind": "ability",
+    "name": "Blood for Blood!",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-1/blood-for-blood.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/fury/level-1/blood-for-blood.json",
+    "selection": "fury-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: fury\ncost: 5 Ferocity\ndistance: '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1'\neffects:\n    - roll: Power Roll + [Might](scc.v1:mcdm.heroes.v1/rule.character/might)\n      tier1: 4 + M damage; M < WEAK, [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) and [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)\n      tier2: 6 + M damage; M < AVERAGE, [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) and [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)\n      tier3: 10 + M damage; M < STRONG, [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) and [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)\n    - effect: You can deal 1d6 damage to yourself to deal an extra 1d6 damage to the target.\n      name: Effect\nflavor: See how well they fight after you've bled them dry.\nkeywords:\n    - '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)'\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\n    - Weapon\nlevel: \"1\"\nname: Blood for Blood!\npower_roll_characteristic: '[Might](scc.v1:mcdm.heroes.v1/rule.character/might)'\nscc: mcdm.heroes.v1/feature.ability.fury.level-1/blood-for-blood\ntarget: One creature or object\ntier1: 4 + M damage; M < WEAK, [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) and [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)\ntier2: 6 + M damage; M < AVERAGE, [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) and [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)\ntier3: 10 + M damage; M < STRONG, [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) and [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)\ntype: ability\n---\n\n\n*See how well they fight after you've bled them dry.*\n\n| **[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee), [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), Weapon**   |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|-----------------------------|------------------------------:|\n| **📏 [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1**              | **🎯 One creature or object** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Might](scc.v1:mcdm.heroes.v1/rule.character/might):**\n\n- **≤11:** 4 + M damage; M < WEAK, [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) and [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)\n- **12-16:** 6 + M damage; M < AVERAGE, [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) and [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)\n- **17+:** 10 + M damage; M < STRONG, [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) and [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)\n\n**Effect:** You can deal 1d6 damage to yourself to deal an extra 1d6 damage to the target.\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "fury",
+      "cost": "5 Ferocity",
+      "distance": "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1",
+      "effects": [
+        {
+          "roll": "Power Roll + [Might](scc.v1:mcdm.heroes.v1/rule.character/might)",
+          "tier1": "4 + M damage; M < WEAK, [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) and [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)",
+          "tier2": "6 + M damage; M < AVERAGE, [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) and [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)",
+          "tier3": "10 + M damage; M < STRONG, [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) and [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)"
+        },
+        {
+          "effect": "You can deal 1d6 damage to yourself to deal an extra 1d6 damage to the target.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "See how well they fight after you've bled them dry.",
+      "keywords": [
+        "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)",
+        "Weapon"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Might](scc.v1:mcdm.heroes.v1/rule.character/might)",
+      "target": "One creature or object",
+      "tier1": "4 + M damage; M < WEAK, [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) and [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)",
+      "tier2": "6 + M damage; M < AVERAGE, [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) and [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)",
+      "tier3": "10 + M damage; M < STRONG, [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) and [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.fury.level-1/brutal-slam",
+    "kind": "ability",
+    "name": "Brutal Slam",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-1/brutal-slam.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/fury/level-1/brutal-slam.json",
+    "selection": "fury-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: fury\ndistance: '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1'\neffects:\n    - roll: Power Roll + [Might](scc.v1:mcdm.heroes.v1/rule.character/might)\n      tier1: 3 + M damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1\n      tier2: 6 + M damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2\n      tier3: 9 + M damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 4\nflavor: The heavy impact of your weapon attacks drives your foes ever back.\nkeywords:\n    - '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)'\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\n    - Weapon\nlevel: \"1\"\nname: Brutal Slam\npower_roll_characteristic: '[Might](scc.v1:mcdm.heroes.v1/rule.character/might)'\nscc: mcdm.heroes.v1/feature.ability.fury.level-1/brutal-slam\nsubtype: signature\ntarget: One creature or object\ntier1: 3 + M damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1\ntier2: 6 + M damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2\ntier3: 9 + M damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 4\ntype: ability\n---\n\n\n*The heavy impact of your weapon attacks drives your foes ever back.*\n\n| **[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee), [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), Weapon** |                **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|---------------------------|-------------------------------:|\n| **📏 [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1**            |  **🎯 One creature or object** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Might](scc.v1:mcdm.heroes.v1/rule.character/might):**\n\n- **≤11:** 3 + M damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1\n- **12-16:** 6 + M damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2\n- **17+:** 9 + M damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 4\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "fury",
+      "distance": "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1",
+      "effects": [
+        {
+          "roll": "Power Roll + [Might](scc.v1:mcdm.heroes.v1/rule.character/might)",
+          "tier1": "3 + M damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
+          "tier2": "6 + M damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
+          "tier3": "9 + M damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 4"
+        }
+      ],
+      "flavor": "The heavy impact of your weapon attacks drives your foes ever back.",
+      "keywords": [
+        "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)",
+        "Weapon"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Might](scc.v1:mcdm.heroes.v1/rule.character/might)",
+      "subtype": "signature",
+      "target": "One creature or object",
+      "tier1": "3 + M damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
+      "tier2": "6 + M damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
+      "tier3": "9 + M damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 4"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.fury.level-1/furious-change",
+    "kind": "ability",
+    "name": "Furious Change",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-1/furious-change.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/fury/level-1/furious-change.json",
+    "selection": "fury-level-one",
+    "text": "---\naction_type: '[Triggered](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action)'\nclass: fury\ndistance: Self\neffects:\n    - effect: You gain [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina) equal to your [Might](scc.v1:mcdm.heroes.v1/rule.character/might) score and can enter your [animal form](scc.v1:mcdm.heroes.v1/complication/animal-form) or hybrid form.\n      name: Effect\n    - cost: Spend 1 Ferocity\n      effect: If you are not [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), you can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries).\nflavor: In your anger, you revert to a more bestial form.\nkeywords: []\nlevel: \"1\"\nname: Furious Change\nscc: mcdm.heroes.v1/feature.ability.fury.level-1/furious-change\nsubclass: stormwight\nsubtype: triggered\ntarget: Self\ntrigger: You lose [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) and are not [dying](scc.v1:mcdm.heroes.v1/rule.health/dying).\ntype: ability\n---\n\n\n*In your anger, you revert to a more bestial form.*\n\n| **-**       | **[Triggered](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action)** |\n|-------------|--------------:|\n| **📏 Self** |   **🎯 Self** |\n\n**Trigger:** You lose [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) and are not [dying](scc.v1:mcdm.heroes.v1/rule.health/dying).\n\n**Effect:** You gain [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina) equal to your [Might](scc.v1:mcdm.heroes.v1/rule.character/might) score and can enter your [animal form](scc.v1:mcdm.heroes.v1/complication/animal-form) or hybrid form.\n\n**Spend 1 Ferocity:** If you are not [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), you can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries).\n",
+    "structured": {
+      "action_type": "[Triggered](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action)",
+      "class": "fury",
+      "distance": "Self",
+      "effects": [
+        {
+          "effect": "You gain [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina) equal to your [Might](scc.v1:mcdm.heroes.v1/rule.character/might) score and can enter your [animal form](scc.v1:mcdm.heroes.v1/complication/animal-form) or hybrid form.",
+          "name": "Effect"
+        },
+        {
+          "cost": "Spend 1 Ferocity",
+          "effect": "If you are not [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), you can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries)."
+        }
+      ],
+      "flavor": "In your anger, you revert to a more bestial form.",
+      "keywords": [],
+      "level": "1",
+      "subclass": "stormwight",
+      "subtype": "triggered",
+      "target": "Self",
+      "trigger": "You lose [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) and are not [dying](scc.v1:mcdm.heroes.v1/rule.health/dying)."
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.fury.level-1/hit-and-run",
+    "kind": "ability",
+    "name": "Hit and Run",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-1/hit-and-run.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/fury/level-1/hit-and-run.json",
+    "selection": "fury-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: fury\ndistance: '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1'\neffects:\n    - roll: Power Roll + [Might](scc.v1:mcdm.heroes.v1/rule.character/might)\n      tier1: 2 + M damage\n      tier2: 5 + M damage\n      tier3: 7 + M damage; A < STRONG, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\n    - effect: You can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) 1 square.\n      name: Effect\nflavor: Staying in constant motion helps you slip out of reach after a brutal assault.\nkeywords:\n    - '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)'\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\n    - Weapon\nlevel: \"1\"\nname: Hit and Run\npower_roll_characteristic: '[Might](scc.v1:mcdm.heroes.v1/rule.character/might)'\nscc: mcdm.heroes.v1/feature.ability.fury.level-1/hit-and-run\nsubtype: signature\ntarget: One creature or object\ntier1: 2 + M damage\ntier2: 5 + M damage\ntier3: 7 + M damage; A < STRONG, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\ntype: ability\n---\n\n\n*Staying in constant motion helps you slip out of reach after a brutal assault.*\n\n| **[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee), [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), Weapon** |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|---------------------------|------------------------------:|\n| **📏 [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1**            | **🎯 One creature or object** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Might](scc.v1:mcdm.heroes.v1/rule.character/might):**\n\n- **≤11:** 2 + M damage\n- **12-16:** 5 + M damage\n- **17+:** 7 + M damage; A < STRONG, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\n\n**Effect:** You can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) 1 square.\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "fury",
+      "distance": "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1",
+      "effects": [
+        {
+          "roll": "Power Roll + [Might](scc.v1:mcdm.heroes.v1/rule.character/might)",
+          "tier1": "2 + M damage",
+          "tier2": "5 + M damage",
+          "tier3": "7 + M damage; A < STRONG, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)"
+        },
+        {
+          "effect": "You can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) 1 square.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "Staying in constant motion helps you slip out of reach after a brutal assault.",
+      "keywords": [
+        "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)",
+        "Weapon"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Might](scc.v1:mcdm.heroes.v1/rule.character/might)",
+      "subtype": "signature",
+      "target": "One creature or object",
+      "tier1": "2 + M damage",
+      "tier2": "5 + M damage",
+      "tier3": "7 + M damage; A < STRONG, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.fury.level-1/impaled",
+    "kind": "ability",
+    "name": "Impaled!",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-1/impaled.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/fury/level-1/impaled.json",
+    "selection": "fury-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: fury\ndistance: '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1'\neffects:\n    - roll: Power Roll + [Might](scc.v1:mcdm.heroes.v1/rule.character/might)\n      tier1: 2 + M damage; M < WEAK, [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)\n      tier2: 5 + M damage; M < AVERAGE, [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)\n      tier3: 7 + M damage; M < STRONG, [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)\nflavor: You skewer your enemy like a boar upon a spit.\nkeywords:\n    - '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)'\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\n    - Weapon\nlevel: \"1\"\nname: Impaled!\npower_roll_characteristic: '[Might](scc.v1:mcdm.heroes.v1/rule.character/might)'\nscc: mcdm.heroes.v1/feature.ability.fury.level-1/impaled\nsubtype: signature\ntarget: One creature of your [size](scc.v1:mcdm.heroes.v1/rule.character/size) or smaller\ntier1: 2 + M damage; M < WEAK, [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)\ntier2: 5 + M damage; M < AVERAGE, [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)\ntier3: 7 + M damage; M < STRONG, [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)\ntype: ability\n---\n\n\n*You skewer your enemy like a boar upon a spit.*\n\n| **[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee), [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), Weapon** |                             **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|---------------------------|--------------------------------------------:|\n| **📏 [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1**            | **🎯 One creature of your [size](scc.v1:mcdm.heroes.v1/rule.character/size) or smaller** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Might](scc.v1:mcdm.heroes.v1/rule.character/might):**\n\n- **≤11:** 2 + M damage; M < WEAK, [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)\n- **12-16:** 5 + M damage; M < AVERAGE, [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)\n- **17+:** 7 + M damage; M < STRONG, [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "fury",
+      "distance": "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1",
+      "effects": [
+        {
+          "roll": "Power Roll + [Might](scc.v1:mcdm.heroes.v1/rule.character/might)",
+          "tier1": "2 + M damage; M < WEAK, [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
+          "tier2": "5 + M damage; M < AVERAGE, [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
+          "tier3": "7 + M damage; M < STRONG, [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)"
+        }
+      ],
+      "flavor": "You skewer your enemy like a boar upon a spit.",
+      "keywords": [
+        "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)",
+        "Weapon"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Might](scc.v1:mcdm.heroes.v1/rule.character/might)",
+      "subtype": "signature",
+      "target": "One creature of your [size](scc.v1:mcdm.heroes.v1/rule.character/size) or smaller",
+      "tier1": "2 + M damage; M < WEAK, [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
+      "tier2": "5 + M damage; M < AVERAGE, [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)",
+      "tier3": "7 + M damage; M < STRONG, [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed)"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.fury.level-1/lines-of-force",
+    "kind": "ability",
+    "name": "Lines of Force",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-1/lines-of-force.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/fury/level-1/lines-of-force.json",
+    "selection": "fury-level-one",
+    "text": "---\naction_type: '[Triggered](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action)'\nclass: fury\ndistance: '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1'\neffects:\n    - effect: You can select a new target of the same [size](scc.v1:mcdm.heroes.v1/rule.character/size) or smaller within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) to be force moved instead. You become the source of the [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement), determine the new target's destination, and can [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) the target instead of using the original [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) type. Additionally, the [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) gains a [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) equal to your [Might](scc.v1:mcdm.heroes.v1/rule.character/might) score.\n      name: Effect\n    - cost: Spend 1 Ferocity\n      effect: The [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) gains a [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) equal to twice your [Might](scc.v1:mcdm.heroes.v1/rule.character/might) score instead.\nflavor: You redirect the energy of motion.\nkeywords:\n    - Magic\n    - '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)'\nlevel: \"1\"\nname: Lines of Force\nscc: mcdm.heroes.v1/feature.ability.fury.level-1/lines-of-force\nsubclass: berserker\nsubtype: triggered\ntarget: Self or one creature\ntrigger: The target would be [force moved](scc.v1:mcdm.heroes.v1/movement/forced-movement).\ntype: ability\n---\n\n\n*You redirect the energy of motion.*\n\n| **Magic, [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)** |               **[Triggered](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action)** |\n|------------------|----------------------------:|\n| **📏 [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1**   | **🎯 Self or one creature** |\n\n**Trigger:** The target would be [force moved](scc.v1:mcdm.heroes.v1/movement/forced-movement).\n\n**Effect:** You can select a new target of the same [size](scc.v1:mcdm.heroes.v1/rule.character/size) or smaller within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) to be force moved instead. You become the source of the [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement), determine the new target's destination, and can [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) the target instead of using the original [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) type. Additionally, the [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) gains a [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) equal to your [Might](scc.v1:mcdm.heroes.v1/rule.character/might) score.\n\n**Spend 1 Ferocity:** The [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) gains a [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) equal to twice your [Might](scc.v1:mcdm.heroes.v1/rule.character/might) score instead.\n",
+    "structured": {
+      "action_type": "[Triggered](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action)",
+      "class": "fury",
+      "distance": "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1",
+      "effects": [
+        {
+          "effect": "You can select a new target of the same [size](scc.v1:mcdm.heroes.v1/rule.character/size) or smaller within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) to be force moved instead. You become the source of the [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement), determine the new target's destination, and can [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) the target instead of using the original [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) type. Additionally, the [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) gains a [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) equal to your [Might](scc.v1:mcdm.heroes.v1/rule.character/might) score.",
+          "name": "Effect"
+        },
+        {
+          "cost": "Spend 1 Ferocity",
+          "effect": "The [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) gains a [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) equal to twice your [Might](scc.v1:mcdm.heroes.v1/rule.character/might) score instead."
+        }
+      ],
+      "flavor": "You redirect the energy of motion.",
+      "keywords": [
+        "Magic",
+        "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)"
+      ],
+      "level": "1",
+      "subclass": "berserker",
+      "subtype": "triggered",
+      "target": "Self or one creature",
+      "trigger": "The target would be [force moved](scc.v1:mcdm.heroes.v1/movement/forced-movement)."
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.fury.level-1/make-peace-with-your-god",
+    "kind": "ability",
+    "name": "Make Peace With Your God!",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-1/make-peace-with-your-god.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/fury/level-1/make-peace-with-your-god.json",
+    "selection": "fury-level-one",
+    "text": "---\naction_type: '[Free maneuver](scc.v1:mcdm.heroes.v1/rule.combat/free-maneuver)'\nclass: fury\ncost: 5 Ferocity\ndistance: Self\neffects:\n    - effect: You gain 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge), and the next [ability roll](scc.v1:mcdm.heroes.v1/rule.dice/ability-roll) you make this [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) automatically obtains a tier 3 outcome.\n      name: Effect\nflavor: Anger is your energy.\nkeywords: []\nlevel: \"1\"\nname: Make Peace With Your God!\nscc: mcdm.heroes.v1/feature.ability.fury.level-1/make-peace-with-your-god\ntarget: Self\ntype: ability\n---\n\n\n*Anger is your energy.*\n\n| **-**       | **[Free maneuver](scc.v1:mcdm.heroes.v1/rule.combat/free-maneuver)** |\n|-------------|------------------:|\n| **📏 Self** |       **🎯 Self** |\n\n**Effect:** You gain 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge), and the next [ability roll](scc.v1:mcdm.heroes.v1/rule.dice/ability-roll) you make this [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) automatically obtains a tier 3 outcome.\n",
+    "structured": {
+      "action_type": "[Free maneuver](scc.v1:mcdm.heroes.v1/rule.combat/free-maneuver)",
+      "class": "fury",
+      "cost": "5 Ferocity",
+      "distance": "Self",
+      "effects": [
+        {
+          "effect": "You gain 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge), and the next [ability roll](scc.v1:mcdm.heroes.v1/rule.dice/ability-roll) you make this [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) automatically obtains a tier 3 outcome.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "Anger is your energy.",
+      "keywords": [],
+      "level": "1",
+      "target": "Self"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.fury.level-1/out-of-the-way",
+    "kind": "ability",
+    "name": "Out of the Way!",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-1/out-of-the-way.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/fury/level-1/out-of-the-way.json",
+    "selection": "fury-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: fury\ncost: 3 Ferocity\ndistance: '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1'\neffects:\n    - roll: Power Roll + [Might](scc.v1:mcdm.heroes.v1/rule.character/might)\n      tier1: 3 + M damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2\n      tier2: 5 + M damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3\n      tier3: 8 + M damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 5\n    - effect: When you [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) the target, you can move into any square they leave. If you take damage from an [opportunity attack](scc.v1:mcdm.heroes.v1/rule.combat/opportunity-attack) by moving this way, the target takes the same damage.\n      name: Effect\nflavor: Your enemies will clear your path—whether they want to or not.\nkeywords:\n    - '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)'\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\n    - Weapon\nlevel: \"1\"\nname: Out of the Way!\npower_roll_characteristic: '[Might](scc.v1:mcdm.heroes.v1/rule.character/might)'\nscc: mcdm.heroes.v1/feature.ability.fury.level-1/out-of-the-way\ntarget: One creature\ntier1: 3 + M damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2\ntier2: 5 + M damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3\ntier3: 8 + M damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 5\ntype: ability\n---\n\n\n*Your enemies will clear your path—whether they want to or not.*\n\n| **[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee), [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), Weapon** |     **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|---------------------------|--------------------:|\n| **📏 [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1**            | **🎯 One creature** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Might](scc.v1:mcdm.heroes.v1/rule.character/might):**\n\n- **≤11:** 3 + M damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2\n- **12-16:** 5 + M damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3\n- **17+:** 8 + M damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 5\n\n**Effect:** When you [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) the target, you can move into any square they leave. If you take damage from an [opportunity attack](scc.v1:mcdm.heroes.v1/rule.combat/opportunity-attack) by moving this way, the target takes the same damage.\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "fury",
+      "cost": "3 Ferocity",
+      "distance": "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1",
+      "effects": [
+        {
+          "roll": "Power Roll + [Might](scc.v1:mcdm.heroes.v1/rule.character/might)",
+          "tier1": "3 + M damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
+          "tier2": "5 + M damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3",
+          "tier3": "8 + M damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 5"
+        },
+        {
+          "effect": "When you [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) the target, you can move into any square they leave. If you take damage from an [opportunity attack](scc.v1:mcdm.heroes.v1/rule.combat/opportunity-attack) by moving this way, the target takes the same damage.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "Your enemies will clear your path—whether they want to or not.",
+      "keywords": [
+        "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)",
+        "Weapon"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Might](scc.v1:mcdm.heroes.v1/rule.character/might)",
+      "target": "One creature",
+      "tier1": "3 + M damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
+      "tier2": "5 + M damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3",
+      "tier3": "8 + M damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 5"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.fury.level-1/thunder-roar",
+    "kind": "ability",
+    "name": "Thunder Roar",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-1/thunder-roar.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/fury/level-1/thunder-roar.json",
+    "selection": "fury-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: fury\ncost: 5 Ferocity\ndistance: 5 x 1 line within 1\neffects:\n    - roll: Power Roll + [Might](scc.v1:mcdm.heroes.v1/rule.character/might)\n      tier1: 6 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2\n      tier2: 9 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 4\n      tier3: 13 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 6\n    - effect: The targets are [force moved](scc.v1:mcdm.heroes.v1/movement/forced-movement) one at a time, starting with the target nearest to you, and can be [pushed](scc.v1:mcdm.heroes.v1/movement/forced-movement) into other targets in the same line.\n      name: Effect\nflavor: You unleash a howl that hurls your enemies back.\nkeywords:\n    - Area\n    - '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)'\n    - Weapon\nlevel: \"1\"\nname: Thunder Roar\npower_roll_characteristic: '[Might](scc.v1:mcdm.heroes.v1/rule.character/might)'\nscc: mcdm.heroes.v1/feature.ability.fury.level-1/thunder-roar\ntarget: Each enemy in the area\ntier1: 6 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2\ntier2: 9 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 4\ntier3: 13 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 6\ntype: ability\n---\n\n\n*You unleash a howl that hurls your enemies back.*\n\n| **Area, [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee), Weapon**    |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|----------------------------|------------------------------:|\n| **📏 5 x 1 line within 1** | **🎯 Each enemy in the area** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Might](scc.v1:mcdm.heroes.v1/rule.character/might):**\n\n- **≤11:** 6 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2\n- **12-16:** 9 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 4\n- **17+:** 13 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 6\n\n**Effect:** The targets are [force moved](scc.v1:mcdm.heroes.v1/movement/forced-movement) one at a time, starting with the target nearest to you, and can be [pushed](scc.v1:mcdm.heroes.v1/movement/forced-movement) into other targets in the same line.\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "fury",
+      "cost": "5 Ferocity",
+      "distance": "5 x 1 line within 1",
+      "effects": [
+        {
+          "roll": "Power Roll + [Might](scc.v1:mcdm.heroes.v1/rule.character/might)",
+          "tier1": "6 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
+          "tier2": "9 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 4",
+          "tier3": "13 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 6"
+        },
+        {
+          "effect": "The targets are [force moved](scc.v1:mcdm.heroes.v1/movement/forced-movement) one at a time, starting with the target nearest to you, and can be [pushed](scc.v1:mcdm.heroes.v1/movement/forced-movement) into other targets in the same line.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "You unleash a howl that hurls your enemies back.",
+      "keywords": [
+        "Area",
+        "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)",
+        "Weapon"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Might](scc.v1:mcdm.heroes.v1/rule.character/might)",
+      "target": "Each enemy in the area",
+      "tier1": "6 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
+      "tier2": "9 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 4",
+      "tier3": "13 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 6"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.fury.level-1/tide-of-death",
+    "kind": "ability",
+    "name": "Tide of Death",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-1/tide-of-death.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/fury/level-1/tide-of-death.json",
+    "selection": "fury-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: fury\ncost: 3 Ferocity\ndistance: Self; see below\neffects:\n    - effect: You move up to your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) in a straight line, and enemy squares are not [difficult terrain](scc.v1:mcdm.heroes.v1/movement/difficult-terrain) for this movement. You can end this movement in a creature's space and move them to an [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) unoccupied space. You make one [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) that targets each enemy whose space you move through.\n      name: Effect\n    - roll: Power Roll + [Might](scc.v1:mcdm.heroes.v1/rule.character/might)\n      tier1: 2 damage\n      tier2: 3 damage\n      tier3: 5 damage\n    - effect: The last target you damage takes extra damage equal to your [Might](scc.v1:mcdm.heroes.v1/rule.character/might) score for each [opportunity attack](scc.v1:mcdm.heroes.v1/rule.combat/opportunity-attack) you trigger during your move.\n      name: Effect\nflavor: Teach them the folly of lining up for you.\nkeywords:\n    - '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)'\n    - Weapon\nlevel: \"1\"\nname: Tide of Death\npower_roll_characteristic: '[Might](scc.v1:mcdm.heroes.v1/rule.character/might)'\nscc: mcdm.heroes.v1/feature.ability.fury.level-1/tide-of-death\ntarget: Self\ntier1: 2 damage\ntier2: 3 damage\ntier3: 5 damage\ntype: ability\n---\n\n\n*Teach them the folly of lining up for you.*\n\n| **[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee), Weapon**      | **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|------------------------|----------------:|\n| **📏 Self; see below** |     **🎯 Self** |\n\n**Effect:** You move up to your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) in a straight line, and enemy squares are not [difficult terrain](scc.v1:mcdm.heroes.v1/movement/difficult-terrain) for this movement. You can end this movement in a creature's space and move them to an [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) unoccupied space. You make one [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) that targets each enemy whose space you move through.\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Might](scc.v1:mcdm.heroes.v1/rule.character/might):**\n\n- **≤11:** 2 damage\n- **12-16:** 3 damage\n- **17+:** 5 damage\n\n**Effect:** The last target you damage takes extra damage equal to your [Might](scc.v1:mcdm.heroes.v1/rule.character/might) score for each [opportunity attack](scc.v1:mcdm.heroes.v1/rule.combat/opportunity-attack) you trigger during your move.\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "fury",
+      "cost": "3 Ferocity",
+      "distance": "Self; see below",
+      "effects": [
+        {
+          "effect": "You move up to your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) in a straight line, and enemy squares are not [difficult terrain](scc.v1:mcdm.heroes.v1/movement/difficult-terrain) for this movement. You can end this movement in a creature's space and move them to an [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) unoccupied space. You make one [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) that targets each enemy whose space you move through.",
+          "name": "Effect"
+        },
+        {
+          "roll": "Power Roll + [Might](scc.v1:mcdm.heroes.v1/rule.character/might)",
+          "tier1": "2 damage",
+          "tier2": "3 damage",
+          "tier3": "5 damage"
+        },
+        {
+          "effect": "The last target you damage takes extra damage equal to your [Might](scc.v1:mcdm.heroes.v1/rule.character/might) score for each [opportunity attack](scc.v1:mcdm.heroes.v1/rule.combat/opportunity-attack) you trigger during your move.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "Teach them the folly of lining up for you.",
+      "keywords": [
+        "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)",
+        "Weapon"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Might](scc.v1:mcdm.heroes.v1/rule.character/might)",
+      "target": "Self",
+      "tier1": "2 damage",
+      "tier2": "3 damage",
+      "tier3": "5 damage"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.fury.level-1/to-the-death",
+    "kind": "ability",
+    "name": "To the Death!",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-1/to-the-death.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/fury/level-1/to-the-death.json",
+    "selection": "fury-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: fury\ndistance: '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1'\neffects:\n    - roll: Power Roll + [Might](scc.v1:mcdm.heroes.v1/rule.character/might)\n      tier1: 3 + M damage\n      tier2: 6 + M damage\n      tier3: 9 + M damage\n    - effect: You gain 2 [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge), and the target can make an [opportunity attack](scc.v1:mcdm.heroes.v1/rule.combat/opportunity-attack) against you as a free [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action).\n      name: Effect\nflavor: Your reckless assault leaves you tactically vulnerable.\nkeywords:\n    - '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)'\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\n    - Weapon\nlevel: \"1\"\nname: To the Death!\npower_roll_characteristic: '[Might](scc.v1:mcdm.heroes.v1/rule.character/might)'\nscc: mcdm.heroes.v1/feature.ability.fury.level-1/to-the-death\nsubtype: signature\ntarget: One creature or object\ntier1: 3 + M damage\ntier2: 6 + M damage\ntier3: 9 + M damage\ntype: ability\n---\n\n\n*Your reckless assault leaves you tactically vulnerable.*\n\n| **[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee), [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), Weapon** |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|---------------------------|------------------------------:|\n| **📏 [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1**            | **🎯 One creature or object** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Might](scc.v1:mcdm.heroes.v1/rule.character/might):**\n\n- **≤11:** 3 + M damage\n- **12-16:** 6 + M damage\n- **17+:** 9 + M damage\n\n**Effect:** You gain 2 [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge), and the target can make an [opportunity attack](scc.v1:mcdm.heroes.v1/rule.combat/opportunity-attack) against you as a free [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action).\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "fury",
+      "distance": "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1",
+      "effects": [
+        {
+          "roll": "Power Roll + [Might](scc.v1:mcdm.heroes.v1/rule.character/might)",
+          "tier1": "3 + M damage",
+          "tier2": "6 + M damage",
+          "tier3": "9 + M damage"
+        },
+        {
+          "effect": "You gain 2 [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge), and the target can make an [opportunity attack](scc.v1:mcdm.heroes.v1/rule.combat/opportunity-attack) against you as a free [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action).",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "Your reckless assault leaves you tactically vulnerable.",
+      "keywords": [
+        "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)",
+        "Weapon"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Might](scc.v1:mcdm.heroes.v1/rule.character/might)",
+      "subtype": "signature",
+      "target": "One creature or object",
+      "tier1": "3 + M damage",
+      "tier2": "6 + M damage",
+      "tier3": "9 + M damage"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.fury.level-1/to-the-uttermost-end",
+    "kind": "ability",
+    "name": "To the Uttermost End",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-1/to-the-uttermost-end.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/fury/level-1/to-the-uttermost-end.json",
+    "selection": "fury-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: fury\ncost: 5 Ferocity\ndistance: '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1'\neffects:\n    - roll: Power Roll + [Might](scc.v1:mcdm.heroes.v1/rule.character/might)\n      tier1: 7 + M damage\n      tier2: 11 + M damage\n      tier3: 16 + M damage\n    - cost: Spend 1+ Ferocity\n      effect: While you are [winded](scc.v1:mcdm.heroes.v1/rule.health/winded), this ability deals an extra 1d6 damage for each ferocity spent. While you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), it deals an extra 1d10 damage for each ferocity spent. In either case, you lose 1d6 [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) after making this [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike).\nflavor: You gut your life force to ensure a foe's demise.\nkeywords:\n    - '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)'\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\n    - Weapon\nlevel: \"1\"\nname: To the Uttermost End\npower_roll_characteristic: '[Might](scc.v1:mcdm.heroes.v1/rule.character/might)'\nscc: mcdm.heroes.v1/feature.ability.fury.level-1/to-the-uttermost-end\ntarget: One creature\ntier1: 7 + M damage\ntier2: 11 + M damage\ntier3: 16 + M damage\ntype: ability\n---\n\n\n*You gut your life force to ensure a foe's demise.*\n\n| **[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee), [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), Weapon** |     **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|---------------------------|--------------------:|\n| **📏 [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1**            | **🎯 One creature** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Might](scc.v1:mcdm.heroes.v1/rule.character/might):**\n\n- **≤11:** 7 + M damage\n- **12-16:** 11 + M damage\n- **17+:** 16 + M damage\n\n**Spend 1+ Ferocity:** While you are [winded](scc.v1:mcdm.heroes.v1/rule.health/winded), this ability deals an extra 1d6 damage for each ferocity spent. While you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), it deals an extra 1d10 damage for each ferocity spent. In either case, you lose 1d6 [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) after making this [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike).\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "fury",
+      "cost": "5 Ferocity",
+      "distance": "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1",
+      "effects": [
+        {
+          "roll": "Power Roll + [Might](scc.v1:mcdm.heroes.v1/rule.character/might)",
+          "tier1": "7 + M damage",
+          "tier2": "11 + M damage",
+          "tier3": "16 + M damage"
+        },
+        {
+          "cost": "Spend 1+ Ferocity",
+          "effect": "While you are [winded](scc.v1:mcdm.heroes.v1/rule.health/winded), this ability deals an extra 1d6 damage for each ferocity spent. While you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), it deals an extra 1d10 damage for each ferocity spent. In either case, you lose 1d6 [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) after making this [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)."
+        }
+      ],
+      "flavor": "You gut your life force to ensure a foe's demise.",
+      "keywords": [
+        "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)",
+        "Weapon"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Might](scc.v1:mcdm.heroes.v1/rule.character/might)",
+      "target": "One creature",
+      "tier1": "7 + M damage",
+      "tier2": "11 + M damage",
+      "tier3": "16 + M damage"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.fury.level-1/unearthly-reflexes",
+    "kind": "ability",
+    "name": "Unearthly Reflexes",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-1/unearthly-reflexes.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/fury/level-1/unearthly-reflexes.json",
+    "selection": "fury-level-one",
+    "text": "---\naction_type: '[Triggered](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action)'\nclass: fury\ndistance: Self\neffects:\n    - effect: You take half the damage from the triggering effect and can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to a number of squares equal to your [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility) score.\n      name: Effect\n    - cost: Spend 1 Ferocity\n      effect: If the damage has any [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) effects associated with it, the [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) is reduced by 1 for you.\nflavor: You are as elusive as a hummingbird.\nkeywords: []\nlevel: \"1\"\nname: Unearthly Reflexes\nscc: mcdm.heroes.v1/feature.ability.fury.level-1/unearthly-reflexes\nsubclass: reaver\nsubtype: triggered\ntarget: Self\ntrigger: You take damage.\ntype: ability\n---\n\n\n*You are as elusive as a hummingbird.*\n\n| **-**       | **[Triggered](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action)** |\n|-------------|--------------:|\n| **📏 Self** |    **🎯 Self** |\n\n**Trigger:** You take damage.\n\n**Effect:** You take half the damage from the triggering effect and can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to a number of squares equal to your [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility) score.\n\n**Spend 1 Ferocity:** If the damage has any [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) effects associated with it, the [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) is reduced by 1 for you.\n",
+    "structured": {
+      "action_type": "[Triggered](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action)",
+      "class": "fury",
+      "distance": "Self",
+      "effects": [
+        {
+          "effect": "You take half the damage from the triggering effect and can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to a number of squares equal to your [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility) score.",
+          "name": "Effect"
+        },
+        {
+          "cost": "Spend 1 Ferocity",
+          "effect": "If the damage has any [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) effects associated with it, the [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) is reduced by 1 for you."
+        }
+      ],
+      "flavor": "You are as elusive as a hummingbird.",
+      "keywords": [],
+      "level": "1",
+      "subclass": "reaver",
+      "subtype": "triggered",
+      "target": "Self",
+      "trigger": "You take damage."
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.fury.level-1/your-entrails-are-your-extrails",
+    "kind": "ability",
+    "name": "Your Entrails Are Your Extrails!",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-1/your-entrails-are-your-extrails.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/fury/level-1/your-entrails-are-your-extrails.json",
+    "selection": "fury-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: fury\ncost: 3 Ferocity\ndistance: '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1'\neffects:\n    - roll: Power Roll + [Might](scc.v1:mcdm.heroes.v1/rule.character/might)\n      tier1: 3 + M damage; M < WEAK, [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) (save ends)\n      tier2: 5 + M damage; M < AVERAGE, [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) (save ends)\n      tier3: 8 + M damage; M < STRONG, [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) (save ends)\n    - effect: While [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) this way, the target takes damage equal to your [Might](scc.v1:mcdm.heroes.v1/rule.character/might) score at the end of each of your [turns](scc.v1:mcdm.heroes.v1/rule.combat/turn).\n      name: Effect\nflavor: Hard for them to fight when they're busy holding in their giblets.\nkeywords:\n    - '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)'\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\n    - Weapon\nlevel: \"1\"\nname: Your Entrails Are Your Extrails!\npower_roll_characteristic: '[Might](scc.v1:mcdm.heroes.v1/rule.character/might)'\nscc: mcdm.heroes.v1/feature.ability.fury.level-1/your-entrails-are-your-extrails\ntarget: One creature or object\ntier1: 3 + M damage; M < WEAK, [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) (save ends)\ntier2: 5 + M damage; M < AVERAGE, [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) (save ends)\ntier3: 8 + M damage; M < STRONG, [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) (save ends)\ntype: ability\n---\n\n\n*Hard for them to fight when they're busy holding in their giblets.*\n\n| **[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee), [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), Weapon** |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|---------------------------|------------------------------:|\n| **📏 [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1**            | **🎯 One creature or object** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Might](scc.v1:mcdm.heroes.v1/rule.character/might):**\n\n- **≤11:** 3 + M damage; M < WEAK, [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) (save ends)\n- **12-16:** 5 + M damage; M < AVERAGE, [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) (save ends)\n- **17+:** 8 + M damage; M < STRONG, [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) (save ends)\n\n**Effect:** While [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) this way, the target takes damage equal to your [Might](scc.v1:mcdm.heroes.v1/rule.character/might) score at the end of each of your [turns](scc.v1:mcdm.heroes.v1/rule.combat/turn).\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "fury",
+      "cost": "3 Ferocity",
+      "distance": "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1",
+      "effects": [
+        {
+          "roll": "Power Roll + [Might](scc.v1:mcdm.heroes.v1/rule.character/might)",
+          "tier1": "3 + M damage; M < WEAK, [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) (save ends)",
+          "tier2": "5 + M damage; M < AVERAGE, [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) (save ends)",
+          "tier3": "8 + M damage; M < STRONG, [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) (save ends)"
+        },
+        {
+          "effect": "While [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) this way, the target takes damage equal to your [Might](scc.v1:mcdm.heroes.v1/rule.character/might) score at the end of each of your [turns](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "Hard for them to fight when they're busy holding in their giblets.",
+      "keywords": [
+        "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)",
+        "Weapon"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Might](scc.v1:mcdm.heroes.v1/rule.character/might)",
+      "target": "One creature or object",
+      "tier1": "3 + M damage; M < WEAK, [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) (save ends)",
+      "tier2": "5 + M damage; M < AVERAGE, [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) (save ends)",
+      "tier3": "8 + M damage; M < STRONG, [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) (save ends)"
+    }
+  }
+]

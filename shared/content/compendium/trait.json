@@ -1,0 +1,117 @@
+[
+  {
+    "id": "mcdm.heroes.v1/feature.trait.devil/barbed-tail",
+    "kind": "trait",
+    "name": "Barbed Tail",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/devil/barbed-tail.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/devil/barbed-tail.json",
+    "selection": "devil-ancestry",
+    "text": "---\nancestry: devil\ncost: 1 Point\nname: Barbed Tail\nscc: mcdm.heroes.v1/feature.trait.devil/barbed-tail\ntype: trait\n---\n\nYour pointy tail allows you to punctuate all your actions. Once per round when you make a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), you can deal extra damage with the [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) equal to your highest [characteristic](scc.v1:mcdm.heroes.v1/rule.character/characteristic) score.\n",
+    "structured": {
+      "ancestry": "devil",
+      "cost": "1 Point"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.devil/beast-legs",
+    "kind": "trait",
+    "name": "Beast Legs",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/devil/beast-legs.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/devil/beast-legs.json",
+    "selection": "devil-ancestry",
+    "text": "---\nancestry: devil\ncost: 1 Point\nname: Beast Legs\nscc: mcdm.heroes.v1/feature.trait.devil/beast-legs\ntype: trait\n---\n\nYour powerful legs make you faster. You have [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) 6.\n",
+    "structured": {
+      "ancestry": "devil",
+      "cost": "1 Point"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.devil/devil-traits",
+    "kind": "trait",
+    "name": "Devil Traits",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/devil/devil-traits.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/devil/devil-traits.json",
+    "selection": "devil-ancestry",
+    "text": "---\nancestry: devil\nname: Devil Traits\nscc: mcdm.heroes.v1/feature.trait.devil/devil-traits\ntype: trait\n---\n\n[Devil](scc.v1:mcdm.heroes.v1/ancestry/devil) heroes have access to the following traits.\n\n#### Purchased Devil Traits\n\nYou have 3 ancestry points to spend on the following traits. (*Quick Build:* Beast Legs, Impressive Horns.)\n",
+    "structured": {
+      "ancestry": "devil"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.devil/glowing-eyes",
+    "kind": "trait",
+    "name": "Glowing Eyes",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/devil/glowing-eyes.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/devil/glowing-eyes.json",
+    "selection": "devil-ancestry",
+    "text": "---\nancestry: devil\ncost: 1 Point\nname: Glowing Eyes\nscc: mcdm.heroes.v1/feature.trait.devil/glowing-eyes\ntype: trait\n---\n\nYour eyes are a solid, vibrant color that flares to show your excitement or rage. Whenever you take damage from a creature, you can use a [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) to deal that creature psychic damage equal to 1d10 + your level.\n",
+    "structured": {
+      "ancestry": "devil",
+      "cost": "1 Point"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.devil/hellsight",
+    "kind": "trait",
+    "name": "Hellsight",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/devil/hellsight.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/devil/hellsight.json",
+    "selection": "devil-ancestry",
+    "text": "---\nancestry: devil\ncost: 1 Point\nname: Hellsight\nscc: mcdm.heroes.v1/feature.trait.devil/hellsight\ntype: trait\n---\n\nYour eyes let you see through darkness, fog, and other obscuring effects. You don't take a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on [strikes](scc.v1:mcdm.heroes.v1/rule.combat/strike) made against creatures with [concealment](scc.v1:mcdm.heroes.v1/rule.combat/concealment).\n",
+    "structured": {
+      "ancestry": "devil",
+      "cost": "1 Point"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.devil/impressive-horns",
+    "kind": "trait",
+    "name": "Impressive Horns",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/devil/impressive-horns.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/devil/impressive-horns.json",
+    "selection": "devil-ancestry",
+    "text": "---\nancestry: devil\ncost: 2 Points\nname: Impressive Horns\nscc: mcdm.heroes.v1/feature.trait.devil/impressive-horns\ntype: trait\n---\n\nYour cherished horns are larger than the average [devil's](scc.v1:mcdm.heroes.v1/ancestry/devil), and a hardened representation of your force of will. Whenever you make a [saving throw](scc.v1:mcdm.heroes.v1/rule.general/saving-throw), you succeed on a roll of 5 or higher.\n",
+    "structured": {
+      "ancestry": "devil",
+      "cost": "2 Points"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.devil/prehensile-tail",
+    "kind": "trait",
+    "name": "Prehensile Tail",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/devil/prehensile-tail.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/devil/prehensile-tail.json",
+    "selection": "devil-ancestry",
+    "text": "---\nancestry: devil\ncost: 2 Points\nname: Prehensile Tail\nscc: mcdm.heroes.v1/feature.trait.devil/prehensile-tail\ntype: trait\n---\n\nYour prehensile tail allows you to challenge foes on all sides. You can't be flanked.\n",
+    "structured": {
+      "ancestry": "devil",
+      "cost": "2 Points"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.devil/silver-tongue",
+    "kind": "trait",
+    "name": "Signature Trait: Silver Tongue",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/devil/silver-tongue.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/devil/silver-tongue.json",
+    "selection": "devil-ancestry",
+    "text": "---\nancestry: devil\nname: 'Signature Trait: Silver Tongue'\nscc: mcdm.heroes.v1/feature.trait.devil/silver-tongue\ntype: trait\n---\n\nYour innate magic allows you to twist how your words are perceived to get a better read on people and convince them to see things your way. You have one skill of your choice from the [interpersonal skill group](scc.v1:mcdm.heroes.v1/skill.group/interpersonal) (see Skills in Chapter 9: [Tests](scc.v1:mcdm.heroes.v1/chapter/tests)), and you gain an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on [tests](scc.v1:mcdm.heroes.v1/rule.test/test) when attempting to discover an [NPC](scc.v1:mcdm.heroes.v1/rule.general/npc)'s motivations and pitfalls during a negotiation (see Chapter 11: [Negotiation](scc.v1:mcdm.heroes.v1/chapter/negotiation)).\n",
+    "structured": {
+      "ancestry": "devil"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.devil/wings",
+    "kind": "trait",
+    "name": "Wings",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/devil/wings.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/devil/wings.json",
+    "selection": "devil-ancestry",
+    "text": "---\nancestry: devil\ncost: 2 Points\nname: Wings\nscc: mcdm.heroes.v1/feature.trait.devil/wings\ntype: trait\n---\n\nYou possess wings powerful enough to take you airborne. While using your wings to [fly](scc.v1:mcdm.heroes.v1/movement/fly), you can stay aloft for a number of rounds equal to your [Might](scc.v1:mcdm.heroes.v1/rule.character/might) score (minimum 1 round) before you fall. While using your wings to [fly](scc.v1:mcdm.heroes.v1/movement/fly) at 3rd level or lower, you have [damage weakness](scc.v1:mcdm.heroes.v1/rule.damage/damage-weakness) 5.\n",
+    "structured": {
+      "ancestry": "devil",
+      "cost": "2 Points"
+    }
+  }
+]

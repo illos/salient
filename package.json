@@ -8,7 +8,7 @@
     "node": ">=24.12.0"
   },
   "scripts": {
-    "check": "pnpm lint && pnpm check:engine && pnpm check:app && pnpm check-links && pnpm check-vendor && pnpm foes:source && pnpm build",
+    "check": "pnpm lint && pnpm check:engine && pnpm check:app && pnpm check-links && pnpm check-vendor && pnpm content:check && pnpm build",
     "test": "vitest run --project engine",
     "play": "node src/cli.ts",
     "demo": "node src/cli.ts demo",
@@ -21,7 +21,8 @@
     "test:app": "vitest run --project app",
     "test:browser": "playwright test",
     "app": "node scripts/app.ts",
-    "foes:source": "node scripts/build-foe-source.ts --check",
+    "content:build": "node scripts/build-content.ts",
+    "content:check": "node scripts/build-content.ts --check",
     "setup:local": "node scripts/setup-local.ts",
     "prepare": "simple-git-hooks",
     "lint": "eslint . && prettier --check .",
