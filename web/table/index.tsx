@@ -25,6 +25,7 @@ import { CombatSetupCard, CommandButton, type Encounter } from './setup-card';
 import { InitiativePanel, TurnControls } from './initiative';
 import { HistoryControls, undoCommand } from './history-controls';
 import { AbilityCard, AbilityPanel, TargetControls, manualClausesOf } from './targeting';
+import { CharacterSheet } from '../character-sheet';
 
 type Roster = FunctionReturnType<typeof api.table.roster>;
 type Foe = Roster['foes'][number];
@@ -416,45 +417,26 @@ function DirectorPane({
   );
 }
 
-function value(n: number | null) {
-  return n === null ? '—' : String(n);
-}
-
 function HeroRow({
   campaignId,
   hero,
-  director,
   running,
   encounter,
   viewed,
   mayTarget,
+  selected,
   onTurnTaken,
 }: {
   campaignId: Id<'campaigns'>;
   hero: Hero;
-  director: boolean;
   running: boolean;
   encounter: Encounter | null;
   viewed: boolean;
   mayTarget: boolean;
+  selected: boolean;
   onTurnTaken: (actor: { kind: 'character' | 'foe'; id: string }) => void;
 }) {
-  const actor = actorRef('character', hero.id);
-  const live = hero.live;
-  const full = live && 'conditions' in live ? live : null;
   const canAct = hero.controlled && running;
-  const fields: [string, string, number | null][] = [
-    ['stamina', 'Stamina', live?.stamina ?? null],
-    ['temporary-stamina', 'Temporary Stamina', full?.temporaryStamina ?? null],
-    ['recoveries', 'Recoveries', live?.recoveries ?? null],
-    [
-      'heroic-resource',
-      full?.heroicResource.name ?? 'Heroic Resource',
-      full?.heroicResource.current ?? null,
-    ],
-    ['surges', 'Surges', full?.surges ?? null],
-    ['victories', 'Victories', full?.victories ?? null],
-  ];
   return (
     <li
       className={`rule-soft flex flex-col gap-2 py-3 ${viewed ? 'border-l-2 border-primary pl-2' : ''}`}
@@ -473,34 +455,16 @@ function HeroRow({
           />
         )}
       </div>
-      {live ? (
-        <dl className="grid grid-cols-[auto_1fr_auto] gap-x-3 gap-y-0.5 text-sm">
-          {fields
-            .filter(([field]) => full || field === 'stamina' || field === 'recoveries')
-            .map(([field, label, current]) => (
-              <div key={field} className="contents">
-                <dt className="text-muted-foreground">{label}</dt>
-                <dd className="m-0">{value(current)}</dd>
-                <dd className="m-0">
-                  {director && running && (
-                    <AdjustAction
-                      campaignId={campaignId}
-                      actor={actor}
-                      field={field}
-                      label={`${hero.name} ${label}`}
-                      current={current}
-                    />
-                  )}
-                </dd>
-              </div>
-            ))}
-        </dl>
+      {selected ? (
+        // A02: the character sheet, fed by the audience-projected characters.sheet read.
+        <CharacterSheet key={hero.id} characterId={hero.id} compact />
       ) : (
-        <p className="text-sm text-muted-foreground">
-          No live values recorded yet; the first table action records them.
+        <p className="m-0 text-sm text-muted-foreground">
+          {hero.live
+            ? `Stamina ${hero.live.stamina} · Recoveries ${hero.live.recoveries}`
+            : 'No live values: admission initializes them.'}
         </p>
       )}
-      {full && <ConditionBadges conditions={full.conditions} />}
       <TargetControls
         campaignId={campaignId}
         target={{ kind: 'character', id: hero.id, name: hero.name }}
@@ -513,25 +477,6 @@ function HeroRow({
           actor={{ kind: 'character', id: hero.id, name: hero.name }}
           running={running}
         />
-      )}
-      {canAct && (
-        <div className="flex flex-wrap items-center gap-2">
-          <QuickAction
-            campaignId={campaignId}
-            text={`${actor} /hero recover`}
-            label="Spend a Recovery"
-          />
-          <ConditionControls
-            campaignId={campaignId}
-            actor={actor}
-            conditions={full?.conditions ?? {}}
-          />
-        </div>
-      )}
-      {canAct && (
-        <p className="text-xs text-muted-foreground [overflow-wrap:anywhere]">
-          Test: <code>{`${actor} /test roll characteristic=M value=2 difficulty=medium`}</code>
-        </p>
       )}
     </li>
   );
@@ -550,7 +495,6 @@ function HeroesPane({
   viewedHeroId: Id<'characters'> | null;
   onTurnTaken: (actor: { kind: 'character' | 'foe'; id: string }) => void;
 }) {
-  const director = roster.role === 'director';
   const running = roster.session?.status === 'running';
   const mine = roster.heroes.filter(h => h.ownerId === roster.viewerId);
   const others = roster.heroes.filter(h => h.ownerId !== roster.viewerId);
@@ -558,6 +502,10 @@ function HeroesPane({
   const ordered = [...mine, ...others].sort((a, b) =>
     a.id === viewedHeroId ? -1 : b.id === viewedHeroId ? 1 : 0,
   );
+  // A02: one sheet is open at a time; a text selector switches between eligible heroes.
+  const [chosen, setChosen] = useState<Id<'characters'> | null>(null);
+  const selectedId =
+    ordered.find(h => h.id === chosen)?.id ?? viewedHeroId ?? ordered[0]?.id ?? null;
   return (
     <Card>
       <CardContent className="flex flex-col gap-4">
@@ -572,17 +520,34 @@ function HeroesPane({
         {ordered.length === 0 && (
           <p className="text-sm text-muted-foreground">No heroes are attached to this campaign.</p>
         )}
+        {ordered.length > 1 && (
+          <label className="flex items-center gap-2 text-xs">
+            <span className="caps text-muted-foreground">Sheet</span>
+            <select
+              className="native-select"
+              aria-label="Viewed hero"
+              value={selectedId ?? ''}
+              onChange={e => setChosen(e.target.value as Id<'characters'>)}
+            >
+              {ordered.map(hero => (
+                <option key={hero.id} value={hero.id}>
+                  {hero.name} · {hero.ownerName}
+                </option>
+              ))}
+            </select>
+          </label>
+        )}
         <ul className="m-0 list-none p-0">
           {ordered.map(hero => (
             <HeroRow
               key={hero.id}
               campaignId={campaignId}
               hero={hero}
-              director={director}
               running={running}
               encounter={encounter}
               viewed={hero.id === viewedHeroId}
               mayTarget={roster.role !== 'observer'}
+              selected={hero.id === selectedId}
               onTurnTaken={onTurnTaken}
             />
           ))}

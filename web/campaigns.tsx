@@ -10,6 +10,7 @@ import { Card, CardContent } from './components/ui/card';
 import { Input } from './components/ui/input';
 import { ErrorNotice, Eyebrow, Field, Loading, Notice, SectionHeading, useCommand } from './ui';
 import { FoesPanel } from './foes';
+import { PartyPanel } from './character-sheet/party';
 import { CommandConsole } from './command-input';
 
 export function CampaignsPage() {
@@ -304,14 +305,8 @@ export function CampaignPage({ campaignId }: { campaignId: Id<'campaigns'> }) {
                 </p>
               )}
               <div className="rule-soft border-t pt-4">
-                <h3>Party roster</h3>
-                <p className="mt-1 text-sm text-muted-foreground">
-                  Party play and combat controls are not available in this pre-alpha yet. You can
-                  save character drafts.
-                </p>
-                <Link to="/characters" className="text-sm">
-                  Open your characters →
-                </Link>
+                {/* A02: admitted heroes and the admission review queue. */}
+                <PartyPanel campaignId={campaignId} director={director} />
               </div>
             </CardContent>
           </Card>

@@ -65,11 +65,19 @@ test('three table contexts, palette, console and live CLI share persisted operat
     const contentStatus = await query('content:status', {});
     expect(contentStatus.entryCount).toBe(403);
     expect(contentStatus.revision).toBe('fb83a789da8f0327a389c277a0c790b1648d5810');
-    const playerProfile = await asRole('player', 'query', 'auth:viewer', '{}');
+    const credentials = (role: string) => ({
+      email: `audit-${role}-${stamp}@example.test`,
+      password,
+    });
     const heroName = `Thorn ${stamp}`;
-    await seedLocalHero(campaignId, playerProfile.userId, heroName);
-    const observerProfile = await asRole('observer', 'query', 'auth:viewer', '{}');
-    await seedLocalHero(campaignId, observerProfile.userId, `Watcher ${stamp}`);
+    // A02: heroes reach the table through admission (evaluated build, R03 live values).
+    await seedLocalHero(campaignId, heroName, credentials('player'), credentials('director'));
+    await seedLocalHero(
+      campaignId,
+      `Watcher ${stamp}`,
+      credentials('observer'),
+      credentials('director'),
+    );
     await Promise.all([director, player, observer].map(page => page.goto(`${campaignUrl}/table`)));
     for (const page of [director, player, observer]) {
       for (const name of ['Foes', 'Game log', 'Heroes'])
@@ -162,9 +170,8 @@ test('three table contexts, palette, console and live CLI share persisted operat
     expect(otherRoll.payload.data.rollId).not.toBe(recorded.payload.data.rollId);
 
     const command = (text: string) => cli('command', text, '--campaign', campaignId);
+    // The maxima (30 / 10) come from the admitted build (R02 4.1); only current values are set.
     for (const [field, value] of [
-      ['stamina-maximum', 30],
-      ['recoveries-maximum', 10],
       ['stamina', 22],
       ['recoveries', 10],
       ['heroic-resource', 7],

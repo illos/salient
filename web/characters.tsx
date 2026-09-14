@@ -1,87 +1,40 @@
 // SPDX-License-Identifier: GPL-3.0-only
+/**
+ * Your characters: the list, creation (which opens the wizard), and the standalone character
+ * page: the sheet, the wizard entry, and the admission controls (submit to a campaign, withdraw).
+ * Owning specifications: docs/character-wizard-spec.md#main-creation-and-editing and
+ * #7-revision-and-review-lifecycle; docs/character-sheet-spec.md#views-permissions-and-persistence
+ * (the standalone page prioritizes inspection and eligible editing; Open table when applicable).
+ */
 import { useState } from 'react';
 import type { FormEvent } from 'react';
 import { Link, useNavigate } from '@tanstack/react-router';
 import { useMutation, useQuery } from 'convex/react';
-import type { FunctionReturnType } from 'convex/server';
 import { api } from '../convex/_generated/api';
 import type { Id } from '../convex/_generated/dataModel';
-import { emptyAuthored, type CharacterAuthored } from '../shared/characterDraft';
+import { emptyAuthored } from '../shared/characterDraft';
+import type { CharacterSheet as SheetPayload } from '../shared/contracts/characterSheet';
 import { Badge } from './components/ui/badge';
 import { Button } from './components/ui/button';
 import { Card, CardContent } from './components/ui/card';
 import { Input } from './components/ui/input';
-import { Textarea } from './components/ui/textarea';
-import { ErrorNotice, Eyebrow, Field, Notice, SectionHeading, useCommand } from './ui';
+import { ErrorNotice, Eyebrow, Field, Loading, SectionHeading, useCommand } from './ui';
+import { CharacterSheet } from './character-sheet';
 
-function AuthoredFields({
-  value,
-  onChange,
-  disabled,
-}: {
-  value: CharacterAuthored;
-  onChange: (value: CharacterAuthored) => void;
-  disabled: boolean;
-}) {
-  return (
-    <fieldset disabled={disabled} className="m-0 flex flex-col gap-4 border-0 p-0">
-      <Field label="Name">
-        <Input
-          required
-          maxLength={100}
-          value={value.name}
-          onChange={event => onChange({ ...value, name: event.target.value })}
-        />
-      </Field>
-      <Field label="Appearance">
-        <Textarea
-          maxLength={10000}
-          value={value.appearance}
-          onChange={event => onChange({ ...value, appearance: event.target.value })}
-        />
-      </Field>
-      <Field label="Biography">
-        <Textarea
-          maxLength={10000}
-          value={value.biography}
-          onChange={event => onChange({ ...value, biography: event.target.value })}
-        />
-      </Field>
-      <Field label="Private notes" hint="Only you can read these notes.">
-        <Textarea
-          maxLength={10000}
-          value={value.notes}
-          onChange={event => onChange({ ...value, notes: event.target.value })}
-        />
-      </Field>
-    </fieldset>
-  );
-}
-function RulesPending() {
-  return (
-    <Notice>
-      <strong>Build choices are coming next.</strong>
-      <p className="mt-1">
-        You can save and reopen your character’s details now. The level-one devil Fury build choices
-        are not available yet. This draft cannot join a party yet.
-      </p>
-    </Notice>
-  );
-}
 export function CharactersPage() {
   const characters = useQuery(api.characters.listMine);
   const create = useMutation(api.characters.create);
   const navigate = useNavigate();
-  const [fields, setFields] = useState<CharacterAuthored>({ ...emptyAuthored });
+  const [name, setName] = useState('');
   const command = useCommand();
   async function submit(event: FormEvent) {
     event.preventDefault();
     await command.run(
       async commandId => {
-        const characterId = await create({ commandId, authored: fields });
-        await navigate({ to: '/characters/$characterId', params: { characterId } });
+        const characterId = await create({ commandId, authored: { ...emptyAuthored, name } });
+        await navigate({ to: '/characters/$characterId/wizard', params: { characterId } });
       },
-      JSON.stringify(['characters.create', fields]),
+      JSON.stringify(['characters.create', name]),
     );
   }
   return (
@@ -93,15 +46,13 @@ export function CharactersPage() {
       <div className="grid grid-cols-[minmax(0,1fr)_420px] items-start gap-8">
         <section>
           <SectionHeading aside={characters ? `${characters.length} total` : undefined}>
-            Drafts
+            Characters
           </SectionHeading>
           {characters === undefined ? (
-            <p role="status" className="text-sm text-muted-foreground">
-              Loading characters…
-            </p>
+            <Loading>Loading characters…</Loading>
           ) : characters.length === 0 ? (
             <p className="text-sm text-muted-foreground">
-              No characters yet. Start with a name and a few details.
+              No characters yet. Start with a name; the wizard takes it from there.
             </p>
           ) : (
             <ul className="m-0 list-none p-0">
@@ -117,9 +68,17 @@ export function CharactersPage() {
                   >
                     {character.name}
                   </Link>
-                  <span className="flex items-center gap-2">
-                    <Badge variant="outline">Draft</Badge>
-                    <span className="text-sm text-muted-foreground">— build choices pending</span>
+                  <span className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
+                    <Badge variant={character.attached ? 'default' : 'outline'}>
+                      {character.attached ? `In ${character.campaignName}` : 'Draft'}
+                    </Badge>
+                    <span>build {character.status}</span>
+                    {character.review && (
+                      <span>
+                        · {character.review.kind} {character.review.status} (
+                        {character.review.campaignName})
+                      </span>
+                    )}
                   </span>
                 </li>
               ))}
@@ -128,13 +87,23 @@ export function CharactersPage() {
         </section>
         <Card>
           <CardContent className="flex flex-col gap-4">
-            <h2>Start a character draft</h2>
-            <RulesPending />
+            <h2>Start a character</h2>
+            <p className="text-sm text-muted-foreground">
+              The v0.01 wizard builds a level-one devil Fury through every applicable step of Making
+              a Hero, with one supported option per step and the full pool visible.
+            </p>
             <form className="flex flex-col gap-4" onSubmit={submit}>
-              <AuthoredFields value={fields} onChange={setFields} disabled={command.pending} />
+              <Field label="Name">
+                <Input
+                  required
+                  maxLength={100}
+                  value={name}
+                  onChange={event => setName(event.target.value)}
+                />
+              </Field>
               <ErrorNotice error={command.error} />
               <Button className="w-fit" disabled={command.pending} type="submit">
-                {command.pending ? 'Saving…' : 'Create draft'}
+                {command.pending ? 'Creating…' : 'Create and open the wizard'}
               </Button>
             </form>
           </CardContent>
@@ -143,119 +112,192 @@ export function CharactersPage() {
     </>
   );
 }
-type LoadedCharacter = FunctionReturnType<typeof api.characters.get>;
-function CharacterEditor({ character }: { character: LoadedCharacter }) {
-  const [fields, setFields] = useState<CharacterAuthored>(character.authored);
-  const [expectedRevision, setExpectedRevision] = useState(character.revision);
-  const [saved, setSaved] = useState(false);
-  const save = useMutation(api.characters.save);
+
+function SubmitControls({ characterId }: { characterId: Id<'characters'> }) {
+  const character = useQuery(api.characters.get, { characterId });
+  const campaigns = useQuery(api.campaigns.list);
+  const submit = useMutation(api.characters.submit);
+  const withdraw = useMutation(api.characters.withdraw);
   const command = useCommand();
-  const stale = character.revision !== expectedRevision;
-  async function submit(event: FormEvent) {
-    event.preventDefault();
-    setSaved(false);
-    const success = await command.run(
-      async commandId => {
-        const revision = await save({
-          commandId,
-          characterId: character.id,
-          expectedRevision,
-          authored: fields,
-        });
-        setExpectedRevision(revision);
-      },
-      JSON.stringify(['characters.save', character.id, expectedRevision, fields]),
-    );
-    if (success) setSaved(true);
-  }
+  const [campaignId, setCampaignId] = useState<string>('');
+  if (!character || !campaigns) return <Loading />;
+  const pending = character.review?.status === 'pending' ? character.review : null;
+  const target = character.campaignId ?? (campaignId || campaigns[0]?.id) ?? null;
+  const canSubmit =
+    character.status === 'complete' &&
+    !pending &&
+    !character.draftIsEffective &&
+    !!target &&
+    !character.combatLocked;
+  return (
+    <div className="flex flex-col gap-2">
+      <div className="flex flex-wrap items-center gap-2">
+        <Link
+          to="/characters/$characterId/wizard"
+          params={{ characterId }}
+          className="text-sm font-bold"
+        >
+          Open the wizard →
+        </Link>
+        {character.campaignId && (
+          <Link
+            to="/campaigns/$campaignId/table"
+            params={{ campaignId: character.campaignId }}
+            className="text-sm font-bold"
+          >
+            Open table →
+          </Link>
+        )}
+      </div>
+      {pending ? (
+        <div className="flex flex-wrap items-center gap-2 text-sm">
+          <Badge variant="outline">
+            {pending.kind} awaiting review in {pending.campaignName} (revision {pending.revision})
+          </Badge>
+          <Button
+            type="button"
+            size="sm"
+            variant="outline"
+            disabled={command.pending}
+            onClick={() =>
+              void command.run(
+                commandId => withdraw({ commandId, characterId }),
+                JSON.stringify(['character.withdraw', characterId, pending.id]),
+              )
+            }
+          >
+            Withdraw submission
+          </Button>
+        </div>
+      ) : (
+        <div className="flex flex-wrap items-end gap-2 text-sm">
+          {!character.campaignId && (
+            <label className="flex flex-col gap-1">
+              <span className="caps text-muted-foreground">Campaign</span>
+              <select
+                className="native-select"
+                aria-label="Campaign to submit to"
+                value={target ?? ''}
+                onChange={event => setCampaignId(event.target.value)}
+              >
+                {campaigns.length === 0 && <option value="">Join a campaign first</option>}
+                {campaigns.map(c => (
+                  <option key={c.id} value={c.id}>
+                    {c.name}
+                  </option>
+                ))}
+              </select>
+            </label>
+          )}
+          <Button
+            type="button"
+            size="sm"
+            disabled={!canSubmit || command.pending}
+            title={
+              character.status !== 'complete'
+                ? `The build is ${character.status}; finish it in the wizard first.`
+                : character.draftIsEffective
+                  ? 'The saved build is already the effective one.'
+                  : undefined
+            }
+            onClick={() =>
+              target &&
+              void command.run(
+                commandId =>
+                  submit({ commandId, characterId, campaignId: target as Id<'campaigns'> }),
+                JSON.stringify(['character.submit', characterId, target, character.revision]),
+              )
+            }
+          >
+            {character.effectiveRevisionId ? 'Submit edit for review' : 'Submit for admission'}
+          </Button>
+          {character.review && character.review.status !== 'pending' && (
+            <span className="text-muted-foreground">
+              last submission: {character.review.status} ({character.review.campaignName})
+            </span>
+          )}
+        </div>
+      )}
+      <ErrorNotice error={command.error} />
+    </div>
+  );
+}
+
+export function CharacterPage({ characterId }: { characterId: Id<'characters'> }) {
+  const navigate = useNavigate();
+  const sheet = useQuery(api.characters.sheet, { characterId }) as SheetPayload | undefined;
+  const mine = useQuery(api.characters.listMine);
+  const [view, setView] = useState<'effective' | 'draft'>('effective');
+  if (!sheet) return <Loading>Loading character…</Loading>;
+  const owner = sheet.audience === 'owner';
+  const hasEffective = sheet.audience !== 'peer' && sheet.build?.label === 'effective';
   return (
     <>
       <Link to="/characters" className="mb-4 inline-block text-sm text-muted-foreground">
         ← Your characters
       </Link>
-      <div className="rule-strong mb-8 flex items-end justify-between gap-6 pb-5">
+      <div className="rule-strong mb-6 flex flex-wrap items-end justify-between gap-4 pb-4">
         <div>
-          <Eyebrow>Character draft</Eyebrow>
-          <h1>{character.authored.name}</h1>
+          <Eyebrow>{owner ? 'Your character' : 'Character sheet'}</Eyebrow>
+          <h1>{sheet.name}</h1>
         </div>
-        <Badge variant="outline" className="h-9 px-4 text-xs">
-          Draft
-        </Badge>
-      </div>
-      <div className="grid grid-cols-[minmax(0,1fr)_380px] items-start gap-8">
-        <Card>
-          <CardContent className="flex flex-col gap-4">
-            <h2>Character details</h2>
-            {stale && (
-              <Notice>
-                <p>
-                  A newer saved version is available. Reload it before saving; this replaces the
-                  text currently in this form.
-                </p>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="mt-2"
-                  type="button"
-                  disabled={command.pending}
-                  onClick={() => {
-                    setFields(character.authored);
-                    setExpectedRevision(character.revision);
-                    setSaved(false);
-                  }}
-                >
-                  Reload saved version
-                </Button>
-              </Notice>
-            )}
-            {character.combatLocked && <Notice>Character editing is locked during combat.</Notice>}
-            <form className="flex flex-col gap-4" onSubmit={submit}>
-              <AuthoredFields
-                value={fields}
-                onChange={value => {
-                  setFields(value);
-                  setSaved(false);
-                }}
-                disabled={command.pending || character.combatLocked}
-              />
-              <ErrorNotice error={command.error} />
-              {saved && (
-                <p role="status" className="text-sm text-success">
-                  Draft saved.
-                </p>
-              )}
-              <Button
-                className="w-fit"
-                disabled={command.pending || stale || character.combatLocked}
-                type="submit"
+        <div className="flex flex-wrap items-center gap-3">
+          {mine && mine.length > 1 && (
+            <label className="flex items-center gap-2 text-xs">
+              <span className="caps text-muted-foreground">Hero</span>
+              <select
+                className="native-select"
+                aria-label="Switch hero"
+                value={mine.some(c => c.id === characterId) ? characterId : ''}
+                onChange={event =>
+                  void navigate({
+                    to: '/characters/$characterId',
+                    params: { characterId: event.target.value as Id<'characters'> },
+                  })
+                }
               >
-                {command.pending ? 'Saving…' : 'Save draft'}
-              </Button>
-            </form>
+                {!mine.some(c => c.id === characterId) && (
+                  <option value="">Another owner's hero</option>
+                )}
+                {mine.map(c => (
+                  <option key={c.id} value={c.id}>
+                    {c.name}
+                  </option>
+                ))}
+              </select>
+            </label>
+          )}
+          {owner && hasEffective && (
+            <label className="flex items-center gap-2 text-xs">
+              <span className="caps text-muted-foreground">View</span>
+              <select
+                className="native-select"
+                aria-label="Sheet view"
+                value={view}
+                onChange={event => setView(event.target.value as 'effective' | 'draft')}
+              >
+                <option value="effective">Effective build</option>
+                <option value="draft">Draft preview</option>
+              </select>
+            </label>
+          )}
+        </div>
+      </div>
+      {owner && (
+        <Card className="mb-6">
+          <CardContent>
+            <SubmitControls characterId={characterId} />
           </CardContent>
         </Card>
-        <aside className="flex flex-col gap-6">
-          <RulesPending />
-          <section>
-            <SectionHeading>Build</SectionHeading>
-            <p className="text-sm text-muted-foreground">
-              {character.selections.length
-                ? `${character.selections.length} saved selections are preserved. Rules evaluation is pending.`
-                : 'No build choices yet. Your saved details will stay separate from build choices and play resources.'}
-            </p>
-          </section>
-        </aside>
-      </div>
+      )}
+      <Card>
+        <CardContent>
+          <CharacterSheet
+            characterId={characterId}
+            view={owner && hasEffective ? view : undefined}
+          />
+        </CardContent>
+      </Card>
     </>
-  );
-}
-export function CharacterPage({ characterId }: { characterId: Id<'characters'> }) {
-  const character = useQuery(api.characters.get, { characterId });
-  return character === undefined ? (
-    <p role="status" className="text-sm text-muted-foreground">
-      Loading character…
-    </p>
-  ) : (
-    <CharacterEditor key={character.id} character={character} />
   );
 }

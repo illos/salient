@@ -64,10 +64,13 @@ test('Director starts combat; a player takes and ends a turn; the round advances
       });
       return JSON.parse(result.stdout);
     };
-    const profileA = await asRole('a', 'query', 'auth:viewer', '{}');
-    const profileB = await asRole('b', 'query', 'auth:viewer', '{}');
-    await seedLocalHero(campaignId, profileA.userId, `Thorn ${stamp}`);
-    await seedLocalHero(campaignId, profileB.userId, `Elwin ${stamp}`);
+    const credentials = (role: string) => ({
+      email: `combat-${role}-${stamp}@example.test`,
+      password,
+    });
+    // A02: heroes reach the table through admission (evaluated build, R03 live values).
+    await seedLocalHero(campaignId, `Thorn ${stamp}`, credentials('a'), credentials('director'));
+    await seedLocalHero(campaignId, `Elwin ${stamp}`, credentials('b'), credentials('director'));
     await Promise.all([director, playerA, playerB].map(page => page.goto(`${campaignUrl}/table`)));
     await director.getByRole('button', { name: 'Add foe', exact: true }).click();
     await expect(playerA.getByRole('progressbar', { name: 'Goblin Warrior health' })).toBeVisible();

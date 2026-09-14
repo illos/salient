@@ -16,6 +16,7 @@ import type { Id } from '../convex/_generated/dataModel';
 import { authClient } from './auth-client';
 import { CampaignPage, CampaignsPage, JoinPage } from './campaigns';
 import { CharacterPage, CharactersPage } from './characters';
+import { WizardPage } from './wizard';
 import { TablePage } from './table';
 import { Button } from './components/ui/button';
 import { Card, CardContent } from './components/ui/card';
@@ -363,6 +364,13 @@ const characterRoute = createRoute({
     <CharacterPage characterId={characterRoute.useParams().characterId as Id<'characters'>} />
   ),
 });
+const wizardRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/characters/$characterId/wizard',
+  component: () => (
+    <WizardPage characterId={wizardRoute.useParams().characterId as Id<'characters'>} />
+  ),
+});
 export const router = createRouter({
   routeTree: rootRoute.addChildren([
     loginRoute,
@@ -372,6 +380,7 @@ export const router = createRouter({
     joinRoute,
     charactersRoute,
     characterRoute,
+    wizardRoute,
   ]),
   defaultErrorComponent: ({ error, reset }) => (
     <ProblemCard title="This page is unavailable">
