@@ -575,9 +575,11 @@ Return a comparison and require reconciliation/resubmission; never overwrite int
 Apply against current live state and inventory, not the snapshot taken when drafting began.
 
 Restoring a build retains current inventory and authored details, preserves later build records and
-follows existing campaign review. New selections after restoration need Q-CHAR-4. Maximum/resource
-changes need Q-CHAR-2 before activation on an affected played character. A successful preview is not
-an excuse to reset resources, apply partial changes, or claim that this policy is resolved.
+follows existing campaign review. New selections after restoration need Q-CHAR-4. **Confirmed 2026-09-15 (Q-CHAR-2):** Maximum increases leave compatible current values unchanged;
+a lower maximum caps any current value above it. Stamina 20/30 becomes 20/36, not 26/36. See
+[the owning policy](character-wizard-spec.md#current-values-when-a-build-changes). Replaced resource
+types require explicit reconciliation without an invented conversion. Apply against current live
+state atomically; source-defined restoration remains separate. A preview alone does not activate a build.
 
 ## 10. Representative acceptance examples
 

@@ -35,7 +35,8 @@ Ferocity creation value is R02's interpretation (section 1.11 there) and is refe
 Damage application, winded, Slain and Catch Breath arithmetic are R04
 (`docs/roll-and-damage-resolution.md`, sections 6 and 7). Condition ids and toggle semantics are R05
 (`docs/conditions-and-clock.md`, section 1). Reconciliation of live values when an activated build
-changes a maximum is **Open, Q-CHAR-2**, not decided here (section 3).
+changes a maximum follows **Q-CHAR-2, confirmed 2026-09-15** (section 3): retain current amounts,
+cap only amounts above a new maximum. Explicit resource-type reconciliation remains separate.
 
 ## 1. Terms
 
@@ -192,8 +193,8 @@ values (1 and 1 for the fixture) under the same rule as section 3.
 
 **In one sentence: saving a draft and re-evaluating a build recompute only the derived baseline and
 never read or write live values, which change only through registered table operations; the sole
-exception, activating a build that changes a maximum or resource of a hero who already has a live
-record, is not decided here and applies no default (Open, Q-CHAR-2).**
+exception is activating a changed build on an existing live record, which applies the confirmed
+current-value/downward-cap policy (Q-CHAR-2) and explicitly reconciles incompatible resource types.**
 
 Grounds: "Reopening the wizard or recalculating the character must not heal damage, replenish
 resources, remove conditions, or erase manual adjustments." and "Treat a build or item change that
@@ -207,16 +208,20 @@ Consequences for the application:
 
 1. A draft preview evaluates against the draft and shows the baseline it would produce; it is labeled
    and cannot act at the table (`docs/character-sheet-spec.md#views-permissions-and-persistence`).
-2. Activating a later build for a hero with a live record changes the baseline the projection reads
-   (new maxima, abilities, kit values) and leaves `HeroLiveState` byte-for-byte as it was. Where the
-   new baseline's `staminaMaximum`, `recoveriesMaximum` or `heroicResource` differs from the one the
-   live record was initialized or last reconciled against, the activation surfaces an
-   `UnreconciledMaximumChange` per field, labeled `Q-CHAR-2`, and applies no arithmetic to the current
-   value. Q-CHAR-2's recommendation (preserve damage and spent Recoveries) is a proposal awaiting the
-   user, not a default of this contract.
+2. **Confirmed 2026-09-15 (Q-CHAR-2):** Activating a later build updates the baseline and retains
+   compatible current amounts. For a value with a maximum, use `min(oldCurrent, newMaximum)`:
+   Stamina 20/30 → 20/36 on increase, or 18/18 if the maximum falls to 18. Recoveries 7/10 → 7/12,
+   or 6/6 if the maximum falls to six. Do not preserve the old damage/spending deficit by adding
+   the maximum increase to current values. Preserve conditions/counters and source-authorized
+   negative values. Derived statistics recalculate; actual respite restoration is separate.
+   Preview and commit the build and caps atomically using the same shared UI/headless operation.
+   Replaced resource types require explicit reconciliation, with no automatic cross-resource mapping.
+   See [the owning policy](character-wizard-spec.md#current-values-when-a-build-changes).
+   **Build handoff:** the earlier `UnreconciledMaximumChange` behavior was provisional. Retire
+   maximum-only Q-CHAR-2 markers and implement these caps; this doc change does not claim code repair.
 3. Re-admission of a character previously played elsewhere is **Open, Q-R-201** (the
    `docs/character-wizard-spec.md#12-open-decisions` row "Non-campaign live-state transfer on
-   detachment/duplication" has no question id yet). The ruling that detachment clears campaign XP and
+   detachment/duplication"). The ruling that detachment clears campaign XP and
    Victories stands; the other live values' fate is the question. Not reachable in the v0.01 journey.
 4. A build activation is blocked during an encounter, so live values are never reconciled mid-combat.
 
@@ -1047,7 +1052,7 @@ ability was the file body in the experiment and is the complete file here (S01 c
 
 | Id | Where | Status |
 | --- | --- | --- |
-| Q-CHAR-2 | section 3, `UnreconciledMaximumChange` | open; cited, no default applied |
+| Q-CHAR-2 | section 3, build activation | resolved 2026-09-15; retain current amounts, cap above new maxima; explicit reconciliation for incompatible resource types |
 | Q-R-200 | section 2.3, foe `slain` label after a Director edit above zero | resolved 2026-09-14; user confirmed that raising Stamina above zero automatically clears Slain |
 | Q-R-201 | section 3, live values on re-admission after detachment | open; raised by R03; provisional: none needed in v0.01, recommendation recorded |
 | Q-CHAR-3 | section 2.1.7, XP of a transferred higher-level hero | open; cited |

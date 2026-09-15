@@ -200,8 +200,30 @@ that same evaluation for the proposed build. It must be clear which is being sho
 possesses remains on the sheet when it is currently unaffordable or otherwise unavailable to use.
 
 Recalculation must not heal damage, replenish resources, remove conditions, or erase adjustments merely
-because the wizard was reopened. Baseline changes that affect current-resource limits require an explicit
-reconciliation policy; this is an open decision, not an implicit reset.
+because the wizard was reopened. Baseline changes use the following confirmed reconciliation policy.
+
+### Current values when a build changes
+
+**Confirmed 2026-09-15 (Q-CHAR-2):** Activating an edited, advanced or restored build updates its
+baseline and maxima while retaining each compatible current value. Increasing a maximum does not
+increase the current amount. If a new maximum is below the current amount, reduce the current amount
+to that maximum: `newCurrent = min(oldCurrent, newMaximum)` for a value with such a maximum.
+
+For example, Stamina 20/30 becomes 20/36 when the maximum rises, and 18/18 when the maximum falls to
+18. Recoveries 7/10 becomes 7/12, or 6/6 if the maximum falls to six. This preserves current amounts;
+the earlier proposal to preserve the numerical damage/spending deficit (20/30 → 26/36) is superseded.
+Do not add a zero floor to source-authorized negative values.
+
+This applies to values that actually have separate current amounts and maxima. Derived values such
+as recovery value, characteristics and winded threshold still recalculate from the effective build;
+this decision does not invent a second spendable/current version of those statistics. Preserve
+conditions and compatible counters. A replaced resource type requires explicit reconciliation;
+this rule supplies no automatic conversion between different resources. Actual source-defined
+restoration, including a completed respite, remains a separate operation.
+
+Preview the changes and apply the build and any required caps atomically through the shared
+UI/headless operation, under existing activation locks and review rules. This is user-selected app
+behavior; it is not a rulebook formula or a claim that the implementation has been updated.
 
 ## 3. Decision system
 
@@ -479,7 +501,10 @@ submission is a `characterReviews` row naming the exact revision; `characters.ca
 `effectiveRevisionId` change only on activation (approval, or the owning active Director's logged
 submission). A save after submission marks the review `stale` so a later approval cannot activate
 unseen edits. First activation initializes live state per R03; later activations leave it untouched
-and record unreconciled maximum changes labeled Q-CHAR-2. Withdraw and decline are not blocked by the
+and record unreconciled maximum changes labeled Q-CHAR-2. **Follow-up:** the confirmed
+[current-value policy](#current-values-when-a-build-changes) supersedes that provisional behavior;
+apply downward caps and retire maximum-only uncertainty markers. Resource-type changes still need
+explicit reconciliation. Withdraw and decline are not blocked by the
 combat lock (they change no effective build); submit, save and approve are.
 
 Initial admission uses the draft/review/activation path without an existing effective build, with the
@@ -655,8 +680,8 @@ for work that can proceed independently. These recommendations are not user ruli
 
 | Decision | What it affects |
 | --- | --- |
-| Current Stamina/damage, spent resources, and conditions when baseline maxima or resource types change | Applying rollback, class edits, and some level-ups to a played character. |
-| **Implementation note, 2026-09-14 (R03):** readiness-audit gap G3 is delivered as a contract: `live-state-initialization.md` (first-admission values with source sentences, the draft-save/re-evaluation rule, `HeroEntity`/`FoeEntity` projections with worked examples), `shared/contracts/liveState.ts`, `shared/contracts/entities.ts`, `tests/live-state-initialization.test.ts`. The reconciliation decision in the row above is **Q-CHAR-2**; R03 applies no default and surfaces an `UnreconciledMaximumChange` labeled with that id. Re-admission after detachment is **Q-R-201**. Rules review pending. | Activation of changed builds on played heroes waits for Q-CHAR-2. |
+| Resource-type replacement requiring explicit reconciliation | Q-CHAR-2 resolves compatible current values and maximum changes in [the confirmed policy](#current-values-when-a-build-changes); it does not provide an automatic conversion between different resources. |
+| **Implementation note, 2026-09-14 (R03):** readiness-audit gap G3 is delivered as a contract: `live-state-initialization.md` (first-admission values with source sentences, the draft-save/re-evaluation rule, `HeroEntity`/`FoeEntity` projections with worked examples), `shared/contracts/liveState.ts`, `shared/contracts/entities.ts`, `tests/live-state-initialization.test.ts`. The original contract surfaced `UnreconciledMaximumChange` labeled **Q-CHAR-2**. The confirmed current-value policy now supersedes maximum-only uncertainty; executable repair remains separate. Re-admission after detachment is **Q-R-201**. | Apply the confirmed cap policy through shared activation; explicitly reconcile incompatible resource types. |
 | Full list of campaign values and advancement eligibility after XP clears while level remains | Reset enumeration and the campaign level-up trigger. XP/Victories clearing itself is settled. |
 | New choices after rollback and treatment of retained future builds | Continued editing beyond history navigation. |
 | Non-campaign live-state transfer on detachment/duplication | Active build retention and private-draft preservation on detachment are confirmed; duplication excludes pending edits. Damage/resource reconciliation still needs definition. |
@@ -674,7 +699,7 @@ The confirmed v0.01 scope in section 1 takes precedence over the earlier broader
    a second build, inventory and historical restoration UI are not prerequisites.
 2. **Prototype campaign integration:** connect the wizard to owned characters, one-campaign attachment,
    exact-revision review, effective-build isolation and the table through shared persisted operations and
-   temporary desktop UI. Resolve live-resource reconciliation before applying affected edits to played
+   temporary desktop UI. Apply the confirmed live-resource reconciliation policy before activating affected edits on played
    characters. Use interchange research to review the model boundary without implementing converters.
 3. **Later progression and history UI:** add sourced higher-level choices, scoped level-up and historical
    browsing/restoration. Use the level-7-to-3 Shadow example and differing class structures to verify the

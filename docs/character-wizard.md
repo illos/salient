@@ -69,8 +69,9 @@ Proposed evaluation behavior:
 - Distinguish abilities the hero possesses from abilities currently usable with their resources, conditions,
   and known circumstances. An unaffordable ability still belongs on the sheet.
 - Treat a build or item change that affects a resource maximum as a state reconciliation, not an implicit
-  resource reset. The specific rules for preserving damage/current values when a maximum changes must be
-  established from the relevant rules before implementation.
+  resource reset. Confirmed 2026-09-15 (Q-CHAR-2): retain current amounts when maxima increase; cap them downward
+  when a new maximum is below the current amount. See [the owning policy](character-wizard-spec.md#current-values-when-a-build-changes)
+  for examples, resource-type replacement and separate source-defined restoration.
 - Keep recalculation deterministic. Commit play changes through the existing shared operations/history
   boundary. Table-history navigation restores recorded game state. Progression-history navigation restores
   only the recorded build and its derived baseline, as described below.
@@ -193,8 +194,8 @@ Acceptance example: retain a level-3 Shadow build, progress it to level 7 with a
 inventory change, then restore the level-3 history point. Assert the earlier decisions, grants, and
 build-derived values; assert that later-level contributions are absent and present inventory is identical
 before/after rollback. Also exercise an intermediate decision point and ensure restoration does not repeat
-item grants. Resource-maximum reconciliation needs its own established policy before implementing that part of
-the example. This is a required model capability, not a claim that Shadow progression is already implemented.
+item grants. Apply [the confirmed current-value and downward-cap policy](character-wizard-spec.md#current-values-when-a-build-changes)
+when restoring the lower-level build. This is a required model capability, not a claim that Shadow progression is already implemented.
 
 ## Proposed integration
 

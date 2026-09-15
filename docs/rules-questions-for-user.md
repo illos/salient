@@ -42,27 +42,8 @@ are the shared lifecycle decisions; the remaining entries are bounded content/sc
 All 13 then-open questions received an independent pinned-source and existing-specification check on
 2026-09-15; see [the evidence report](research/remaining-character-questions-review.md). Q-CHAR-8 and
 Q-CHAR-12 are now source-resolved. The remaining 11 comprise nine product decisions and two source
-ambiguities; their recommendations remain unanswered.
-
-### Q-CHAR-2: How should activating an edited build reconcile a played hero's resources?
-
-- **Status:** open
-- **Research check:** 2026-09-15 — product decision; [rules and spec evidence](research/remaining-character-questions-review.md#q-char-2).
-- **Raised by:** V1 wizard specification research, 2026-09-14
-- **Where:** `docs/character-wizard-spec.md#12-open-decisions`.
-- **Conflict or gap:** Retaining current inventory and avoiding a live-state rewind are settled. When
-  an edit changes Stamina/Recovery maxima or the resource type, the resulting current values are not.
-- **Recommendation:** Preserve damage and Recoveries spent for unchanged resource types: maximum
-  Stamina 30/current 20 becoming maximum 36 would yield current 26. Preserve conditions and compatible
-  counters. Preview the result and explicitly reconcile removed/replaced resources or values outside
-  their new legal ranges (including source-authorized negative resources such as clarity). Apply
-  atomically. Source-defined respite restoration remains separate.
-  This is an application proposal, not a universal rulebook formula.
-- **Related question:** Q-R-201 concerns retaining values across campaign transfer. This question
-  concerns reconciling a changed build; both apply only when transfer also changes the baseline.
-- **Blocked until answered:** affected activation on played characters; drafts/new-character evaluation
-  can proceed. Coordinate the same boundary with respite and inventory.
-- **Answer:**
+ambiguities at audit close. Subsequent Q-CHAR-2 answer leaves **10 open questions**; remaining
+recommendations are unanswered.
 
 ### Q-CHAR-3: How does a transferred higher-level hero qualify for advancement after campaign XP clears?
 
@@ -283,6 +264,27 @@ No user approval is implied by this classification.
 - **Answer:**
 
 ## Resolved questions
+
+### Q-CHAR-2: How should activating an edited build reconcile a played hero's resources?
+
+- **Status:** resolved 2026-09-15; [owning policy](character-wizard-spec.md#current-values-when-a-build-changes)
+- **Research check:** 2026-09-15 — product decision; [rules and spec evidence](research/remaining-character-questions-review.md#q-char-2).
+- **Raised by:** V1 wizard specification research, 2026-09-14
+- **Where:** `docs/character-wizard-spec.md#12-open-decisions`.
+- **Conflict or gap:** Retaining current inventory and avoiding a live-state rewind are settled. When
+  an edit changes Stamina/Recovery maxima or the resource type, the resulting current values are not.
+- **Original recommendation (superseded):** Preserve the damage/spending deficit when maxima rise,
+  e.g. Stamina 20/30 → 26/36. The user's clarification instead keeps current amounts unchanged.
+- **Answer:** Maximum increases do not increase current values. Stamina 20/30 → 20/36; Recoveries
+  7/10 → 7/12. When a lower maximum is below the current amount, cap it to that maximum: 20/30 →
+  18/18 if the new maximum is 18. Preserve conditions and compatible counters. Derived statistics
+  still recalculate; actual restoration remains separate. Replaced resource types require explicit
+  reconciliation; no automatic conversion is established. Record and apply through shared UI/headless
+  activation under existing locks/review.
+- **Related question:** Q-R-201 concerns retaining values across campaign transfer. This question
+  concerns reconciling a changed build; both apply only when transfer also changes the baseline.
+- **Build handoff:** Apply current-value preservation/downward caps and retire provisional maximum-only
+  Q-CHAR-2 markers. Documentation records the decision; executable repair remains with the build thread.
 
 ### Q-CHAR-8: Can both Melodrama improvements increase the same existing event?
 
