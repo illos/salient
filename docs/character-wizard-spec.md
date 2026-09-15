@@ -355,9 +355,27 @@ replace an effective build.
 
 Start from the current effective build and evaluate the choices/grants made available by the level transition.
 Preserve earlier choices except for replacements explicitly permitted by that advancement's rules. Apply and
-record a valid completed result without a review queue. The method of establishing advancement eligibility,
-including XP after campaign transfer, remains to be specified against the rules and campaign policy. Ungated
-review does not mean unrestricted advancement.
+record a valid completed result without a review queue. Ungated review does not mean unrestricted
+advancement.
+
+**Confirmed 2026-09-15 (Q-CHAR-3):** The campaign awards XP; the character sheet owns advancement
+eligibility and the level-up steps. Awarding XP does not choose build options or automatically activate
+a new build. The owner completes the scoped level-up through the character sheet and equivalent
+shared headless operation, under existing timing, encounter locks and validation.
+
+A transferred higher-level hero starts with zero destination-campaign XP and earns toward the next
+level from the admitted effective level. Keep an eligibility offset equal to that entry level's
+minimum standard XP threshold, separate from campaign XP. Compare `offset + campaignXP` against
+standard cumulative advancement thresholds. A level-seven entrant has offset 96 and needs 16 new
+campaign XP to reach level eight's threshold of 112. The offset remains the admission baseline as
+XP accumulates; ordinary level-ups do not reset campaign XP or add the offset again. A retained
+higher historical build does not set the offset when the hero enters at a lower level.
+
+This transfer policy is an app decision. Source-defined advancement timing during respite remains;
+the campaign/character responsibility split does not change XP award rules or enable a separate
+advancement mode. Source restoration remains distinct from activating the level-up build. See
+[the current-value policy](#current-values-when-a-build-changes) and
+[source research](research/remaining-character-questions-review.md#q-char-3).
 
 ## 5. Progression history
 
@@ -682,7 +700,7 @@ for work that can proceed independently. These recommendations are not user ruli
 | --- | --- |
 | Resource-type replacement requiring explicit reconciliation | Q-CHAR-2 resolves compatible current values and maximum changes in [the confirmed policy](#current-values-when-a-build-changes); it does not provide an automatic conversion between different resources. |
 | **Implementation note, 2026-09-14 (R03):** readiness-audit gap G3 is delivered as a contract: `live-state-initialization.md` (first-admission values with source sentences, the draft-save/re-evaluation rule, `HeroEntity`/`FoeEntity` projections with worked examples), `shared/contracts/liveState.ts`, `shared/contracts/entities.ts`, `tests/live-state-initialization.test.ts`. The original contract surfaced `UnreconciledMaximumChange` labeled **Q-CHAR-2**. The confirmed current-value policy now supersedes maximum-only uncertainty; executable repair remains separate. Re-admission after detachment is **Q-R-201**. | Apply the confirmed cap policy through shared activation; explicitly reconcile incompatible resource types. |
-| Full list of campaign values and advancement eligibility after XP clears while level remains | Reset enumeration and the campaign level-up trigger. XP/Victories clearing itself is settled. |
+| Full list of campaign values to clear on transfer | XP/Victories clearing is settled. Q-CHAR-3 now resolves transferred advancement eligibility and character-sheet ownership of level-up; any additional campaign-value reset enumeration remains separate. |
 | New choices after rollback and treatment of retained future builds | Continued editing beyond history navigation. |
 | Non-campaign live-state transfer on detachment/duplication | Active build retention and private-draft preservation on detachment are confirmed; duplication excludes pending edits. Damage/resource reconciliation still needs definition. |
 | Entry reservation timing, detachment during active play, and former-campaign history access | Finalizing proposed admission/detachment contracts and table linkage. |

@@ -42,27 +42,8 @@ are the shared lifecycle decisions; the remaining entries are bounded content/sc
 All 13 then-open questions received an independent pinned-source and existing-specification check on
 2026-09-15; see [the evidence report](research/remaining-character-questions-review.md). Q-CHAR-8 and
 Q-CHAR-12 are now source-resolved. The remaining 11 comprise nine product decisions and two source
-ambiguities at audit close. Subsequent Q-CHAR-2 answer leaves **10 open questions**; remaining
+ambiguities at audit close. Subsequent Q-CHAR-2/3 answers leave **9 open questions**; remaining
 recommendations are unanswered.
-
-### Q-CHAR-3: How does a transferred higher-level hero qualify for advancement after campaign XP clears?
-
-- **Status:** open
-- **Research check:** 2026-09-15 — product decision; [rules and spec evidence](research/remaining-character-questions-review.md#q-char-3).
-- **Raised by:** V1 wizard specification research, 2026-09-14
-- **Where:** `docs/character-wizard-spec.md#level-up`; sources
-  `vendor/steel-compendium/en/unified/md/chapter/making-a-hero.md#heroic-advancement` and
-  `vendor/steel-compendium/en/unified/md/rule/resource/experience.md`.
-- **Conflict or gap:** Standard source thresholds are cumulative 0,16,32,…,144, with advancement during
-  respite. Our transfer policy clears campaign XP but retains level. Comparing cleared XP directly to
-  absolute thresholds would make a level-seven arrival earn 112 new XP before level eight.
-- **Recommendation:** Keep a separate eligibility offset equal to the admitted effective level's lower threshold,
-  not a higher historical build's level.
-  Campaign XP still starts at zero. A level-seven entrant has offset 96 and needs 16 new XP for level
-  eight, without importing prior campaign XP. Advancement still uses its source-defined timing.
-  Coordinate with the respite thread; alternate advancement remains a separate scope choice.
-- **Blocked until answered:** eligibility after transfer/higher-level admission.
-- **Answer:**
 
 ### Q-CHAR-4: What happens when the owner makes new choices after restoring an earlier build?
 
@@ -264,6 +245,29 @@ No user approval is implied by this classification.
 - **Answer:**
 
 ## Resolved questions
+
+### Q-CHAR-3: How does a transferred higher-level hero qualify for advancement after campaign XP clears?
+
+- **Status:** resolved 2026-09-15; [owning policy](character-wizard-spec.md#level-up)
+- **Research check:** 2026-09-15 — product decision; [rules and spec evidence](research/remaining-character-questions-review.md#q-char-3).
+- **Raised by:** V1 wizard specification research, 2026-09-14
+- **Where:** `docs/character-wizard-spec.md#level-up`; sources
+  `vendor/steel-compendium/en/unified/md/chapter/making-a-hero.md#heroic-advancement` and
+  `vendor/steel-compendium/en/unified/md/rule/resource/experience.md`.
+- **Conflict or gap:** Standard source thresholds are cumulative 0,16,32,…,144, with advancement during
+  respite. Our transfer policy clears campaign XP but retains level. Comparing cleared XP directly to
+  absolute thresholds would make a level-seven arrival earn 112 new XP before level eight.
+- **Accepted recommendation:** Keep a separate eligibility offset equal to the admitted effective level's lower threshold,
+  not a higher historical build's level.
+  Campaign XP still starts at zero. A level-seven entrant has offset 96 and needs 16 new XP for level
+  eight, without importing prior campaign XP. Advancement still uses its source-defined timing.
+  Coordinate with the respite thread; alternate advancement remains a separate scope choice.
+- **Answer:** Yes. The campaign awards XP; the character sheet owns advancement eligibility and
+  the level-up steps. An entry-level offset supports the accepted 16-new-XP example without importing
+  prior campaign XP. XP awards do not choose options or automatically activate a build. Existing
+  source timing, locks and scoped review exemption remain. UI and headless use the same operations.
+- **Build handoff:** V01/V08 implement this division and offset; this documentation records the
+  decision without claiming delivery.
 
 ### Q-CHAR-2: How should activating an edited build reconcile a played hero's resources?
 

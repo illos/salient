@@ -549,7 +549,14 @@ Standard source advancement uses cumulative XP: thresholds for levels 1–10 are
 Alternative advancement is expressly allowed by the source; availability in our app remains a
 product choice. [Source: Heroic Advancement](../vendor/steel-compendium/en/unified/md/chapter/making-a-hero.md#heroic-advancement).
 Do not equate choosing a creation target level with authority to award an existing character a level.
-Campaign-transfer XP and level-up eligibility remain Q-CHAR-3 and a handoff to the respite workstream.
+**Confirmed 2026-09-15 (Q-CHAR-3):** The campaign awards XP; the character sheet evaluates eligibility
+and owns the scoped level-up choices/activation. A transfer starts campaign XP at zero with a separate
+eligibility offset equal to the admitted effective level's minimum standard threshold. Level seven:
+offset 96 plus 16 newly earned campaign XP reaches level eight at 112. Keep that admission offset
+fixed as campaign XP accumulates; do not re-add it or reset XP on each level-up. Awarding XP alone
+does not select choices or activate a new build. Preserve source respite timing and existing locks;
+all level-up operations have shared UI/headless paths. See [the owning level-up policy](character-wizard-spec.md#level-up).
+The respite/V08 handoff must use this confirmed policy; implementation is not claimed here.
 
 Source starting treasure guidance for campaigns beginning above level one is discretionary (“can
 give”), not an automatic treasure grant implied by changing the level selector. Source: Heroes clean,

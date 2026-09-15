@@ -131,7 +131,11 @@ starting number, but XP is gained only at a respite, cumulatively, and a newly c
 finished none, so the cumulative total is 0, which lies in the level-one band. Alternative considered:
 leaving XP absent until the first respite; rejected because the sheet shows a number and detachment
 "clearing campaign XP" presumes a stored value. Nothing in v0.01 changes XP (respite is V01,
-advancement V08; a transferred higher-level hero is Q-CHAR-3).
+advancement V08). **Confirmed 2026-09-15 (Q-CHAR-3):** Campaign XP starts at zero after transfer;
+a separate admission-level eligibility offset lets the character sheet evaluate progress toward the
+next level. A level-seven entrant uses offset 96 and needs 16 new XP for level eight. The campaign
+awards XP; the character sheet owns the level-up steps. See [the owning policy](character-wizard-spec.md#level-up).
+This does not credit the offset as earned campaign XP or change source-defined advancement timing.
 
 **2.1.8 Conditions.** Source: "Some abilities and other effects apply specific negative effects called
 conditions to a creature." (`SC/rule/combat/condition.md`). No creation step applies one, so every
@@ -1055,8 +1059,8 @@ ability was the file body in the experiment and is the complete file here (S01 c
 | Q-CHAR-2 | section 3, build activation | resolved 2026-09-15; retain current amounts, cap above new maxima; explicit reconciliation for incompatible resource types |
 | Q-R-200 | section 2.3, foe `slain` label after a Director edit above zero | resolved 2026-09-14; user confirmed that raising Stamina above zero automatically clears Slain |
 | Q-R-201 | section 3, live values on re-admission after detachment | open; raised by R03; provisional: none needed in v0.01, recommendation recorded |
-| Q-CHAR-3 | section 2.1.7, XP of a transferred higher-level hero | open; cited |
-| Q-R-100, Q-R-101, Q-CHAR-12 | historical R02 `uncertainties` in the example above | resolved; see queue and [potency research](research/remaining-character-questions-review.md#q-char-12); artifact owners remove stale labels |
+| Q-CHAR-3 | section 2.1.7, XP of a transferred higher-level hero | resolved 2026-09-15; admission-level eligibility offset, campaign awards XP, character sheet owns level-up |
+| Q-R-100, Q-R-101, Q-CHAR-12 | historical R02 `uncertainties` in the example above | resolved; see queue and [potency research](research/remaining-character-questions-review.md#q-char-12); labels removed in the A02 repair |
 
 Interpretations labeled above with their alternatives: current Stamina equals the maximum (2.1.1);
 Recoveries start full (2.1.3); XP starts at 0 (2.1.7); the printed Stamina is a foe's starting value

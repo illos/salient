@@ -102,6 +102,10 @@ Confirmed: there are different scopes of choice over the same character decision
 | Level-up wizard | Only choices available to this character for the level transition, including choices/grants that transition unlocks. Existing foundational choices stay in place. | Level-ups are not Director-review gated. Rules/eligibility validation still applies. |
 | Full character edit | Reopen the main wizard outside an active encounter, including foundational choices and all levels/options. | For an attached character, the Director approves the proposed edit before it takes effect in the campaign. |
 
+**Confirmed 2026-09-15 (Q-CHAR-3):** The campaign awards XP; the character sheet owns eligibility and
+level-up steps. A transferred hero earns toward the next level from their admitted level, with zero
+new-campaign XP and a separate entry-level eligibility offset. See [the owning level-up policy](character-wizard-spec.md#level-up).
+
 Foundational choices are normally made once during creation, but are revisitable through full editing. The
 main wizard is not restricted to level 1; the level-1 Fury proposal below is only the first implementation
 slice. Level-up is a scoped operation over the same definitions and history, not a second independently
