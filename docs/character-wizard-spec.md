@@ -164,6 +164,13 @@ size must not be treated as the v1 class target; see the [reference/source scope
 The implementation must report its actual supported coverage; importing this corpus does not establish a
 working choice system for every class.
 
+**Confirmed 2026-09-15 (Q-CHAR-6, language portion):** Custom campaign languages count as
+homebrew in this app and are deferred beyond V1. The core rules' permission to invent campaign
+languages does not bring them into app scope. Selectable language identities remain sourced core
+options; normal language edits and Director approval do not authorize custom language creation.
+Authored descriptive text does not create a selectable language or grant language knowledge.
+The custom deity/domain-portfolio part of Q-CHAR-6 remains unanswered.
+
 In scope: creation, advancement, full editing, history, authored details, inventory integration, derived
 sheets, attachment/detachment/duplication, Director review, and required Forge Steel import. Compatible Forge
 Steel export is not required for v1. The data model must preserve the information and interchange-adapter

@@ -218,8 +218,11 @@ grant its typical language. The language pool needs book-section identities: thi
 standalone language directory. Preserve named language references within the pinned Background chapter,
 including its human-language list and Languages by Ancestry table, now preserved in the
 [source matrix](research/v1-wizard-coverage-matrix.md#language-source-tables). Do not restrict languages to those
-of the 12 playable ancestries. Custom campaign languages/deities are a separate scope decision,
-Q-CHAR-6. Legal deferred language slots follow section 2.
+of the 12 playable ancestries. **Confirmed 2026-09-15 (Q-CHAR-6, language portion):** Custom
+campaign languages are homebrew and deferred beyond V1, including when source text permits the
+Director to invent them. Normal edits/approval do not enable custom selectable language identities.
+The custom deity/domain-portfolio boundary remains open under Q-CHAR-6. Legal deferred language
+slots follow section 2.
 
 ### Duplicate skills
 
