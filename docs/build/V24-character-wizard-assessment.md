@@ -23,11 +23,12 @@ committed into this worktree. The parser and foe worktrees remain independent.
 
 ## Scope clarification
 
-The user said “all 10 classes.” The pinned Heroes [Classes chapter](../../vendor/steel-compendium/en/unified/md/chapter/classes.md)
-explicitly lists **nine**: Censor, Conduit, Elementalist, Fury, Null, Shadow, Tactician, Talent,
-and Troubadour. The existing release scope is those nine through **levels 1–10**; Summoner and
-Beastheart are excluded supplements. Clarify the intended tenth class before expanding source
-scope. This does not block work on the confirmed core classes.
+The user clarified that “all 10 classes” meant the **nine** core classes in the pinned Heroes
+[Classes chapter](../../vendor/steel-compendium/en/unified/md/chapter/classes.md): Censor, Conduit,
+Elementalist, Fury, Null, Shadow, Tactician, Talent and Troubadour, through **levels 1–10**.
+The user also confirmed eventual support for **Beastheart and Summoner**. Whether their delivery
+belongs in this development cycle or a later one remains under discussion; this does not yet
+change the existing core-only V1 release gate. The eventual class target is therefore eleven.
 
 For this proposal, “fully realized in the editor” means complete legal creation and editing choices,
 correct automatic build grants and derived values, readable abilities/features, level transitions,
@@ -178,6 +179,51 @@ enchantment, ward and abilities from the pinned sources when claiming the slice.
   followed by independent implementation and rules reviews. Live checks use an isolated backend.
 
 ## Completion evidence for the eventual editor
+
+### Supplemental classes: editor inclusion proposed
+
+Following the user's scope clarification and observation that the exotic behavior principally
+belongs to the table/engine, recommend including **all eleven classes in the editor build-out**.
+The earlier recommendation to treat the supplements mainly as early architecture examples gave
+too much weight to wizard-specific complexity. Their complete creation/edit/progression choices
+can use the same bounded delivery process as core classes. Table UI and engine support have
+separate milestones and must not become a blanket prerequisite for their editor implementation.
+This is the revised recommendation; the overall core-only V1 release gate has not yet changed.
+
+The pinned sources expose concrete model requirements:
+
+| Class | Editor responsibilities | Larger gameplay dependency |
+| --- | --- | --- |
+| Beastheart | Choose a companion; preserve its identity and source; derive its build alongside the hero; show grants belonging to the hero, companion or both; test a companion advancement breakpoint. | Linked turns/action allowances, shared resources and distinct creature health/conditions; companion replacement and history. |
+| Summoner | Choose a circle, portfolio options and formation; preserve creature definitions and level-dependent improvements; keep learned options distinct from live summoned creatures. | Summoning/dismissal, controlled squads, pooled health, commands and hero-linked effects. Do not assume ordinary foe-minion behavior is identical. |
+
+Compendium evidence read: `feature/beastheart/level-1/companion.md`, `companion-rules.md`,
+`heart-of-the-beast.md`, `ferocity.md`, and `feature/beastheart/level-10/companion-advancement-feature.md`;
+`feature/summoner/level-1/portfolio.md`, `minions.md`, `formation.md` and `essence.md`, under
+`vendor/steel-compendium/en/unified/md/`. This establishes representative architecture concerns,
+not exhaustive mechanical acceptance.
+
+Forge Steel's `src/data/classes/beastheart/beastheart.ts` uses `createSummonChoice` for the
+companion; `src/data/classes/summoner/graves.ts` uses it for portfolio selections. Its
+`src/models/summon.ts` combines a creature definition with summoning information and advancement
+features. This demonstrates useful shared selection structure; it does not establish identical
+lifecycle rules for companions and summoned minions.
+
+Each class slice should actually evaluate, save/reload, change a dependent choice and
+restore a recorded build. Check explicit Forge Steel import/export mappings for the related
+creature and nested selections. Learning a summon must never spawn a live creature; reevaluating
+a companion's build must never refill its health. These examples should drive the minimum needed
+model extensions, avoiding an untested generic companion framework.
+
+The revised sequence keeps the first generalized class and progression slices, then includes
+Beastheart and Summoner alongside the other classes when their decision/grant dependencies are
+available. They do not have to wait for all nine core classes to be complete. Complete their
+editor progression in the same level bands; schedule creature control, table presentation and
+combat execution with the consuming tracks. No claim of full table support follows from editor
+completion alone. Do not advertise a source option as a valid build until its actual choices,
+permanent grants and derived values are supported.
+
+### Coverage checks
 
 Extend the existing coverage matrix with executable evidence for decisions, grants, derived values,
 save/reload, editing, each level transition and source display. Track gameplay automation separately.

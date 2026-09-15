@@ -164,6 +164,17 @@ size must not be treated as the v1 class target; see the [reference/source scope
 The implementation must report its actual supported coverage; importing this corpus does not establish a
 working choice system for every class.
 
+**User direction, 2026-09-15 (character-track assessment):** the core count is confirmed as nine.
+Beastheart and Summoner are now explicit eventual feature targets, bringing the eventual class
+target to eleven. The user is considering early inclusion to exercise the model's flexibility;
+their delivery cycle and any change to the core-only V1 gate are not yet decided. The
+[character-track assessment](build/V24-character-wizard-assessment.md#supplemental-classes-editor-inclusion-proposed)
+now recommends all eleven classes in the editor build-out, following the user's observation that
+their unusual complexity principally belongs to table UI and engine behavior. Their creation,
+editing and progression can advance in bounded class slices while table support has separate
+milestones. This records future inclusion and the revised delivery proposal, not implemented
+support or a new release commitment.
+
 **Confirmed 2026-09-15 (Q-CHAR-6, language portion):** Custom campaign languages count as
 homebrew in this app and are deferred beyond V1. The core rules' permission to invent campaign
 languages does not bring them into app scope. Selectable language identities remain sourced core
