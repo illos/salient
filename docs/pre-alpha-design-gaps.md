@@ -540,7 +540,9 @@ The user must be able to:
 2. Invite players through the established campaign membership flow.
 3. Start a session.
 4. Add at least one catalog stat block directly to the live foes roster.
-5. Create a level-one devil Fury through a minimal working wizard and load it into the party (hero) roster.
+5. Create a level-one devil **Berserker Fury** through a minimal working wizard and load it into the party (hero) roster.
+   Confirmed 2026-09-14 (Q-R-103): Reaver and Stormwight are outside v0.01; see the
+   [wizard scope](character-wizard-spec.md#v001-scope).
 6. Walk through the basic action economy of combat, with recorded gameplay visible in the game log.
 
 These are connected application workflows, not isolated component demos. The list describes required

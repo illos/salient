@@ -160,6 +160,9 @@ per career in the entries and Q-CHAR-9 covers project points.
 
 ## Step 5: Class
 
+**v0.01 scope, confirmed 2026-09-14:** Berserker only. Reaver and Stormwight appear below as
+source-model context for later V1 support; neither is a playable prototype choice.
+
 | Decision | Kind | Shape | Source and quote | Options (supported in v0.01 in bold) | Depends on / grants |
 | --- | --- | --- | --- | --- | --- |
 | `class.choice` | choice | single | `chapter/making-a-hero.md`: "You can be a censor, conduit, elementalist, fury, null, shadow, tactician, talent, or troubadour." | Censor, Conduit, Elementalist, **Fury**, Null, Shadow, Tactician, Talent, Troubadour (`class/<name>.md`). Beastheart and Summoner are excluded from V1 scope. | — |
@@ -189,8 +192,16 @@ operation, with identical validation and persisted choices. See
 
 | Decision | Kind | Shape | Source and quote | Options (supported in v0.01 in bold) | Depends on / grants |
 | --- | --- | --- | --- | --- | --- |
-| `kit.choice` | choice | single | Step: `chapter/making-a-hero.md`: "Your class might grant your hero a kit that helps define your approach to martial combat." Grant: `feature/fury/level-1/kit.md`: "You can use and gain the benefits of a kit." Stormwight: `feature/fury/level-1/beast-shape.md`: "You can use and gain the benefits of a stormwight kit". | Berserker/Reaver: the 21 non-stormwight kits in `_index/kit.md` (Arcane Archer, Battlemind, Cloak and Dagger, Dual Wielder, Guisarmier, Martial Artist, **Mountain**, Panther, Pugilist, Raider, Ranger, Rapid-Fire, Retiarius, Shining Armor, Sniper, Spellsword, Stick and Robe, Swashbuckler, Sword and Board, Warrior Priest, Whirlwind). Stormwight: Boren, Corven, Raden, Vuken. | Depends on `class.fury.aspect`. Eligibility split is an interpretation: **Q-R-103**. Kits can be changed as a respite activity (`chapter/kits.md`, *Changing Your Kit*): Q-CHAR-5. |
+| `kit.choice` | choice | single | Step: `chapter/making-a-hero.md`: "Your class might grant your hero a kit that helps define your approach to martial combat." Grant: `feature/fury/level-1/kit.md`: "You can use and gain the benefits of a kit." Stormwight: `feature/fury/level-1/beast-shape.md`: "You can use and gain the benefits of a stormwight kit". | Berserker/Reaver: the 21 non-stormwight kits in `_index/kit.md` (Arcane Archer, Battlemind, Cloak and Dagger, Dual Wielder, Guisarmier, Martial Artist, **Mountain**, Panther, Pugilist, Raider, Ranger, Rapid-Fire, Retiarius, Shining Armor, Sniper, Spellsword, Stick and Robe, Swashbuckler, Sword and Board, Warrior Priest, Whirlwind). Stormwight: Boren, Corven, Raden, Vuken. | Depends on `class.fury.aspect`. Eligibility split is source-supported and user-confirmed: **Q-R-103**; only Berserker/Mountain is supported in v0.01. Kits can be changed as a respite activity (`chapter/kits.md`, *Changing Your Kit*): Q-CHAR-5. |
 | `kit.mountain.contributions` | automatic | none | `kit/mountain.md`: "You wear heavy armor and wield a heavy weapon." | — | References for R02: "Stamina Bonus: +9 per echelon", "Stability Bonus: +2", "Melee Damage Bonus: +0/+0/+4", signature ability **Pain for Pain**. Every kit entry carries the same shape (equipment, bonuses, signature ability). Equipment is descriptive; inventory is deferred. |
+
+**Source check and decision, 2026-09-14 (Q-R-103):** the aspect table grants Kit to Berserker/Reaver
+and Beast Shape to Stormwight. Kit points to Chapter 6; Beast Shape points to the four Stormwight
+kits in the Fury chapter. The user confirms that eligibility split; the
+[research brief](research/fury-kit-eligibility.md) distinguishes this contextual support from an
+explicit blanket prohibition, which was not found. Use those source option groups, not `kit_type`
+metadata, to determine eligibility. Reaver and Stormwight are outside v0.01; the supported prototype
+path remains Berserker/Mountain through both UI and headless selection.
 
 ## Step 7: Add Free Strikes
 
@@ -231,7 +242,9 @@ Non-mechanical. Presented as an optional free-text field so the step exists; no 
    the union. Alternative considered: one from each group; rejected because the same corpus writes that
    case as "One skill from the exploration skill group and one skill from the intrigue group"
    (`career/soldier.md`).
-2. `kit.choice` split by aspect (Q-R-103). Alternative considered: any of the 25 kits for any aspect.
+2. `kit.choice` split by aspect is now user-confirmed (Q-R-103), supported by
+   [independent source research](research/fury-kit-eligibility.md). The earlier alternative was any of
+   the 25 kits for any aspect; the source grants distinguish ordinary and Stormwight option groups.
 3. `class.fury.array-assignment` any order is now user-confirmed (Q-R-101, 2026-09-14);
    the earlier alternative was printed order.
 4. `culture.language` / `career.soldier.languages` uses the two spoken-language tables: now
@@ -253,7 +266,7 @@ None is resolved by assumption; provisional defaults are labeled there.
 | Q-R-100 | `career.soldier.languages`, `culture.language` | Resolved 2026-09-14: show Caelian as automatically known common tongue; it is not selectable for or counted against a language slot. |
 | Q-R-101 | `class.fury.array-assignment` | Resolved 2026-09-14: any order, fixed scores locked, remaining slots initially blank; UI drag-and-drop and equivalent headless assignment. |
 | Q-R-102 | `culture.language`, `career.soldier.languages` | Resolved 2026-09-14: spoken languages only for v0.01, including printed regional languages; dead languages excluded. |
-| Q-R-103 | `kit.choice` | Kit eligibility by aspect; stormwight kits restricted to Stormwight. Raised by R01. |
+| Q-R-103 | `kit.choice` | Resolved 2026-09-14: Berserker/Reaver ordinary kits; Stormwight its four kits. Source-researched; only Berserker/Mountain is in v0.01. Raised by R01. |
 | Q-CHAR-1 | `step.complication` | Answered 2026-09-14: not presented in v0.01. |
 | Q-CHAR-5 | `career.soldier.languages`, `kit.choice` | Filling a deferred language slot / changing kit later without full-edit review (existing, open). |
 | Q-CHAR-6 | `culture.name`, `culture.language` | Campaign-specific languages and assembled cultures (existing, open). |

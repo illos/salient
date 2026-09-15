@@ -75,13 +75,19 @@ See [the pre-alpha journey](pre-alpha-design-gaps.md#confirmed-first-acceptance-
 advancement and interchange requirements below remain the fuller product destination; their complete delivery
 is not automatically a v0.01 gate. Selecting wizard entry does not cancel the eventual import requirement.
 
+**Scope clarification, 2026-09-14 (Q-R-103):** v0.01 supports only the **Berserker** Fury aspect.
+Reaver and Stormwight are outside the prototype's playable creation scope and remain later V1
+coverage. Mountain remains the supported v0.01 kit. Broader source pools may be documented without
+making those options playable; UI and headless selection must enforce the same supported subset.
+This does not expand class-specific runtime automation beyond the existing manual-play scope.
+
 **Implementation note, 2026-09-14 (R01):** the sourced decision definition for this slice is delivered as
 `docs/fury-level-one-decisions.md` with its machine-readable mirror `shared/content/fury-level-one-decisions.json`
 and the verbatim-source check `tests/fury-decisions.test.ts`. It lists all ten *Making a Hero* steps in source
 order with stable decision ids, selection shapes, full option pools (the v0.01 supported subset is an explicit
 marking), counts and budgets with their source sentences, dependencies and automatic grants, plus three worked
 selection sets. The complication step is recorded but not presented (Q-CHAR-1). Source silences it found are
-Q-R-103 remains open in `rules-questions-for-user.md`; Q-R-100 to Q-R-102 are confirmed below.
+Q-R-100 to Q-R-103 are now resolved in `rules-questions-for-user.md`; their confirmed contracts appear below.
 This closes readiness-audit gap G1 as a contract; A02 renders it and R02 derives values from it. Rules review
 is pending.
 
@@ -201,6 +207,11 @@ reconciliation policy; this is an open decision, not an implicit reset.
 
 ### Confirmed behavior
 
+- Confirmed 2026-09-14 (Q-R-103), with [independent source research](research/fury-kit-eligibility.md):
+  Berserker/Reaver use the 21 ordinary Chapter 6 kits; Stormwight uses Boren, Corven, Raden or Vuken.
+  This follows the aspect-specific Kit/Beast Shape grants and separate source sections. Do not infer
+  eligibility from the flattened catalog or a Martial-only filter. For v0.01, only Berserker with
+  Mountain is supported; Reaver and Stormwight remain outside prototype creation scope.
 - Confirmed 2026-09-14 (Q-R-102): the v0.01 culture/career language choices use spoken languages
   only: the printed Languages by Ancestry and Vaslorian Human Languages tables. Dead languages
   are not selectable at creation. Deduplicate names shared by those tables. Caelian remains visible
@@ -281,8 +292,7 @@ Input is the R01 decision ids and selection shapes; output is `complete | incomp
 diagnostics keyed by decision id, and a derived baseline in which every value carries the decision id,
 selected value and source sentence that supplied it. Status precedence (`invalid` > `unsupported` >
 `incomplete`) is a labeled engineering choice within this vocabulary; warnings never change the status. The
-baseline is distinct from live values (R03). Open questions it labels are Q-R-103 and
-Q-CHAR-10 to Q-CHAR-12; no new question was needed. A02 implements the evaluator against these types.
+baseline is distinct from live values (R03). Remaining questions are Q-CHAR-10 to Q-CHAR-12; no new question was needed. A02 implements the evaluator against these types.
 
 ## 4. Wizard flows
 

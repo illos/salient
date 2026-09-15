@@ -234,30 +234,6 @@ are the shared lifecycle decisions; the remaining entries are bounded content/sc
 - **Blocked until answered:** this optional workflow; higher-level build evaluation can proceed.
 - **Answer:**
 
-### Q-R-103: Which kits may a level-one Fury choose, by aspect?
-
-- **Status:** open
-- **Raised by:** R01, 2026-09-14
-- **Where:** `docs/fury-level-one-decisions.md#step-6-kit`; Compendium read:
-  `vendor/steel-compendium/en/unified/md/chapter/kits.md` (intro: "Censors, furies, shadows, tacticians, and
-  troubadours can tap into these and many more archetypal concepts using kits."; **Kits A to Z**),
-  `vendor/steel-compendium/en/unified/md/feature/fury/level-1/kit.md` ("You can use and gain the benefits of a
-  kit."), `feature/fury/level-1/1st-level-aspect-features.md`, `feature/fury/level-1/beast-shape.md` ("You can
-  use and gain the benefits of a stormwight kit"), `feature/fury/stormwight-kits/kit-features.md`,
-  `vendor/steel-compendium/en/unified/md/_index/kit.md` (25 kits; Boren, Corven, Raden, Vuken are stormwight
-  kits).
-- **Conflict or gap:** No kit entry states a class restriction. The Kit feature (Berserker, Reaver) says "a kit"
-  with no list; Beast Shape (Stormwight) says "a stormwight kit". Whether the 21 non-stormwight kits are all
-  eligible for a Berserker/Reaver, and whether a stormwight kit is excluded for them, is an interpretation of
-  "a kit" versus "a stormwight kit".
-- **Options:** A: Berserker/Reaver choose from the 21 non-stormwight kits; Stormwight chooses from the 4
-  stormwight kits only. B: Berserker/Reaver may also take a stormwight kit. C: some non-stormwight kits are
-  excluded for the Fury.
-- **Recommendation:** A. The stormwight kits describe themselves as "this stormwight kit" and are granted by
-  Beast Shape; nothing in the source excludes any other kit from a kit-using class. Labeled interpretation.
-- **Blocked until answered:** nothing; A is applied provisionally (only Mountain is supported in v0.01 anyway).
-- **Answer:**
-
 ### Q-R-201: What happens to a hero's live values on re-admission after detachment?
 
 - **Status:** open
@@ -317,6 +293,34 @@ No user approval is implied by this classification.
 - **Answer:**
 
 ## Resolved questions
+
+### Q-R-103: Which kits may a level-one Fury choose, by aspect?
+
+- **Status:** resolved 2026-09-14; [recorded decision](character-wizard-spec.md#3-decision-system) and [source check](research/fury-kit-eligibility.md)
+- **Raised by:** R01, 2026-09-14
+- **Where:** `docs/fury-level-one-decisions.md#step-6-kit`; Compendium read:
+  `vendor/steel-compendium/en/unified/md/chapter/kits.md` (intro: "Censors, furies, shadows, tacticians, and
+  troubadours can tap into these and many more archetypal concepts using kits."; **Kits A to Z**),
+  `vendor/steel-compendium/en/unified/md/feature/fury/level-1/kit.md` ("You can use and gain the benefits of a
+  kit."), `feature/fury/level-1/1st-level-aspect-features.md`, `feature/fury/level-1/beast-shape.md` ("You can
+  use and gain the benefits of a stormwight kit"), `feature/fury/stormwight-kits/kit-features.md`,
+  `vendor/steel-compendium/en/unified/md/_index/kit.md` (25 kits; Boren, Corven, Raden, Vuken are stormwight
+  kits).
+- **Conflict or gap:** No kit entry states a class restriction. The Kit feature (Berserker, Reaver) says "a kit"
+  with no list; Beast Shape (Stormwight) says "a stormwight kit". Whether the 21 non-stormwight kits are all
+  eligible for a Berserker/Reaver, and whether a stormwight kit is excluded for them, is an interpretation of
+  "a kit" versus "a stormwight kit".
+- **Options:** A: Berserker/Reaver choose from the 21 non-stormwight kits; Stormwight chooses from the 4
+  stormwight kits only. B: Berserker/Reaver may also take a stormwight kit. C: some non-stormwight kits are
+  excluded for the Fury.
+- **Recommendation:** A. The stormwight kits describe themselves as "this stormwight kit" and are granted by
+  Beast Shape; nothing in the source excludes any other kit from a kit-using class. Labeled interpretation.
+- **Blocked until answered:** answered and independently source-checked; apply the supported
+  v0.01 subset through A02.
+- **Answer:** Yes to the ordinary/Stormwight kit split; the user required subagent source
+  verification. That research supports the split through the aspect-specific feature grants and
+  book sections, not a verbatim blanket prohibition. The user also explicitly excludes Reaver and
+  Stormwight from v0.01: Berserker/Mountain remains the supported prototype path.
 
 ### Q-R-102: Which language lists are selectable for culture and career language choices?
 

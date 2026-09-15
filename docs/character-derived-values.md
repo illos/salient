@@ -478,7 +478,7 @@ resolved by assumption here; provisional defaults are labeled on the output.
 | Q-R-100 | `career.soldier.languages` duplicate Caelian (4.1) | resolved 2026-09-14; automatic known-language grant, no paid Caelian slot; fixture update remains |
 | Q-R-101 | `class.fury.array-assignment` order (1.1) | resolved 2026-09-14; any order with shared UI/headless assignment |
 | Q-R-102 | language pool (1.15) | resolved 2026-09-14; spoken-language tables only for v0.01 creation |
-| Q-R-103 | kit eligibility by aspect (`kit.choice`) | open; raised by R01 |
+| Q-R-103 | kit eligibility by aspect (`kit.choice`) | resolved 2026-09-14; sourced aspect-specific option groups, Berserker/Mountain only in v0.01 |
 | Q-CHAR-10 | unspent ancestry points (`budget-unspent`) | open; the three examples spend all 3 points or over-spend, so none depends on it |
 | Q-CHAR-11 | duplicate skills (`duplicate-skill`) | open; the examples have no duplicate skill |
 | Q-CHAR-12 | potency characteristic when another characteristic exceeds the class's (1.10) | open; every level-one Fury agrees, labeled anyway |

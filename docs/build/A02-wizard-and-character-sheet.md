@@ -55,6 +55,7 @@ mock wizard does not satisfy this slice.
 
 ## Out of scope
 
+- Reaver and Stormwight Fury creation (Q-R-103, confirmed 2026-09-14): v0.01 supports Berserker only.
 - Level-up, progression history UI, duplication, detachment UI, Forge Steel import (V08, V09).
 - Inventory or starting equipment (V07).
 - Any class-resource automation; Ferocity is an editable counter with readable rules.
@@ -253,3 +254,16 @@ remains visible as automatically known, without consuming a selection. Use the s
 for UI and headless input. Update the obsolete Q-R-102 unresolved label in the R01 content artifact
 and verify the pool against [the wizard contract](../character-wizard-spec.md#3-decision-system).
 Later acquisition and V1 custom-language policy are separate from this answer.
+
+### User scope clarification: Berserker only
+
+The user explicitly excludes Reaver and Stormwight from v0.01. Keep the supported creation path
+Berserker/Mountain; broader source eligibility does not enable additional playable choices. Enforce
+the same subset through UI and headless operations. See
+[the owning scope](../character-wizard-spec.md#v001-scope). This is a scope decision, separate from
+verification of the source's kit restrictions for later Fury aspects.
+
+The requested [Q-R-103 source check](../research/fury-kit-eligibility.md) supports ordinary kits for
+Berserker/Reaver and the four Stormwight kits for Stormwight, through the separate granted features
+and source sections. Do not use a Martial-only metadata filter. Q-R-103 is resolved; remove its
+obsolete unresolved labels while keeping the confirmed Berserker/Mountain prototype subset.
