@@ -1,8 +1,8 @@
-import { describe, expect, test } from 'vitest';
+import { describe, expect, test, vi } from 'vitest';
 import { convexTest } from 'convex-test';
 import betterAuthTest from '@convex-dev/better-auth/test';
 import schema from '../../convex/schema';
-import { api, components } from '../../convex/_generated/api';
+import { api, components, internal } from '../../convex/_generated/api';
 import type { Id } from '../../convex/_generated/dataModel';
 
 const modules = import.meta.glob('../../convex/**/*.ts');
@@ -121,7 +121,10 @@ describe('authenticated campaign and session operations', () => {
       owner.client.mutation(api.campaigns.create, { ...args, name: 'Changed' }),
     ).rejects.toThrow('different request');
     const original = await owner.client.query(api.campaigns.get, { campaignId });
-    const preview = await t.query(api.campaigns.preview, { shareCode: original.shareCode! });
+    expect(original.shareCode).toMatch(/^[A-HJ-NP-Z2-9]{8}$/);
+    const preview = await t.query(api.campaigns.preview, {
+      shareCode: ` ${original.shareCode!.toLowerCase()} `,
+    });
     expect(preview).toEqual({ id: campaignId, name: 'Campaign', ownerName: 'Director' });
     expect(JSON.stringify(preview)).not.toContain('private.example');
     await expect(applicant.client.query(api.campaigns.get, { campaignId })).rejects.toThrow(
@@ -130,7 +133,10 @@ describe('authenticated campaign and session operations', () => {
     await expect(applicant.client.query(api.events.list, { campaignId })).rejects.toThrow(
       'unavailable',
     );
-    const joinArgs = { shareCode: original.shareCode!, commandId: 'join-command' };
+    const joinArgs = {
+      shareCode: ` ${original.shareCode!.toLowerCase()} `,
+      commandId: 'join-command',
+    };
     await applicant.client.mutation(api.campaigns.requestJoin, joinArgs);
     await applicant.client.mutation(api.campaigns.requestJoin, {
       ...joinArgs,
@@ -145,10 +151,25 @@ describe('authenticated campaign and session operations', () => {
         commandId: 'self-approve',
       }),
     ).rejects.toThrow();
-    await owner.client.mutation(api.campaigns.regenerateShareCode, {
+    await expect(
+      applicant.client.mutation(api.campaigns.regenerateShareCode, {
+        campaignId,
+        commandId: 'forbidden-rotate',
+      }),
+    ).rejects.toThrow();
+    const rotation = {
       campaignId,
       commandId: 'rotate-code',
-    });
+    };
+    const replacement = await owner.client.mutation(api.campaigns.regenerateShareCode, rotation);
+    expect(replacement).toMatch(/^[A-HJ-NP-Z2-9]{8}$/);
+    expect(replacement).not.toBe(original.shareCode);
+    expect(await owner.client.mutation(api.campaigns.regenerateShareCode, rotation)).toBe(
+      replacement,
+    );
+    expect((await owner.client.query(api.campaigns.get, { campaignId })).shareCode).toBe(
+      replacement,
+    );
     expect(await t.query(api.campaigns.preview, { shareCode: original.shareCode! })).toBeNull();
     const approval = { requestId, commandId: 'approve-command' };
     await owner.client.mutation(api.campaigns.approveRequest, approval);
@@ -164,6 +185,111 @@ describe('authenticated campaign and session operations', () => {
     expect(JSON.stringify(joined)).not.toContain('private.example');
     const log = await applicant.client.query(api.events.list, { campaignId });
     expect(log.events.map(e => e.kind)).toEqual(['membership.approved', 'campaign.created']);
+  });
+  test('share-code allocation retries collisions and refuses invalid codes', async () => {
+    const t = backend();
+    const owner = await account(t, 'CodeOwner');
+    await t.run(async ctx => {
+      await ctx.db.insert('campaigns', {
+        name: 'Reserved',
+        ownerId: owner.profile.userId,
+        shareCode: 'AAAAAAAA',
+        activeSessionId: null,
+        eventSequence: 0,
+      });
+    });
+    const random = vi.spyOn(Math, 'random');
+    for (let i = 0; i < 8; i++) random.mockReturnValueOnce(0);
+    random.mockReturnValue(0.5);
+    try {
+      const campaignId = await owner.client.mutation(api.campaigns.create, {
+        name: 'Collision retry',
+        commandId: 'collision-create',
+      });
+      const created = await owner.client.query(api.campaigns.get, { campaignId });
+      expect(created.shareCode).toMatch(/^[A-HJ-NP-Z2-9]{8}$/);
+      expect(created.shareCode).not.toBe('AAAAAAAA');
+      expect(random.mock.calls.length).toBeGreaterThanOrEqual(16);
+      // An exhausted retry budget leaves the existing invitation intact.
+      random.mockReturnValue(0);
+      await expect(
+        owner.client.mutation(api.campaigns.regenerateShareCode, {
+          campaignId,
+          commandId: 'collision-exhausted',
+        }),
+      ).rejects.toThrow('Could not allocate');
+      expect((await owner.client.query(api.campaigns.get, { campaignId })).shareCode).toBe(
+        created.shareCode,
+      );
+    } finally {
+      random.mockRestore();
+    }
+    for (const shareCode of ['', 'ABCDEFGHI', 'ABCD-EFG', 'abcd!234', 'ＡＢＣＤ１２３４']) {
+      expect(await t.query(api.campaigns.preview, { shareCode })).toBeNull();
+      await expect(
+        owner.client.mutation(api.campaigns.requestJoin, {
+          shareCode,
+          commandId: 'invalid-share-code',
+        }),
+      ).rejects.toThrow('Invitation unavailable');
+    }
+  });
+
+  test('upgrading legacy codes is paginated and repeatable, preserving membership and requests', async () => {
+    const t = backend();
+    const f = await campaign(t);
+    const legacy = 'g0wyi2jq32jn30ny659ae6flltgtmwtj';
+    await t.run(async ctx => {
+      await ctx.db.patch(f.campaignId, { shareCode: legacy });
+      await ctx.db.insert('joinRequests', {
+        campaignId: f.campaignId,
+        userId: f.outsider.profile.userId,
+        status: 'pending',
+      });
+      for (let i = 0; i < 100; i++) {
+        await ctx.db.insert('campaigns', {
+          name: `Legacy ${i}`,
+          ownerId: f.owner.profile.userId,
+          shareCode: `legacy-code-${i}`,
+          activeSessionId: null,
+          eventSequence: 0,
+        });
+      }
+    });
+    const before = await f.owner.client.query(api.campaigns.get, { campaignId: f.campaignId });
+    let cursor: string | null = null;
+    let updated = 0;
+    let pages = 0;
+    while (true) {
+      const batch: { cursor: string; done: boolean; updated: number } = await t.mutation(
+        internal.campaigns.upgradeShareCodes,
+        { cursor },
+      );
+      updated += batch.updated;
+      pages++;
+      if (batch.done) break;
+      cursor = batch.cursor;
+    }
+    expect(updated).toBe(101);
+    expect(pages).toBeGreaterThan(1);
+    const codes = await t.run(async ctx =>
+      (await ctx.db.query('campaigns').take(102)).map(c => c.shareCode),
+    );
+    expect(codes.every(code => /^[A-HJ-NP-Z2-9]{8}$/.test(code))).toBe(true);
+    expect(new Set(codes).size).toBe(codes.length);
+    expect((await t.mutation(internal.campaigns.upgradeShareCodes, { cursor: null })).updated).toBe(
+      0,
+    );
+    const after = await f.owner.client.query(api.campaigns.get, { campaignId: f.campaignId });
+    expect(after).toEqual({ ...before, shareCode: expect.stringMatching(/^[A-HJ-NP-Z2-9]{8}$/) });
+    expect(await t.query(api.campaigns.preview, { shareCode: legacy })).toBeNull();
+    await f.owner.client.mutation(api.campaigns.approveRequest, {
+      requestId: after.pendingRequests[0]!.id,
+      commandId: 'approve-after-upgrade',
+    });
+    expect(
+      (await f.outsider.client.query(api.campaigns.get, { campaignId: f.campaignId })).members,
+    ).toHaveLength(3);
   });
   test('only Director controls sessions, lifecycle survives reads, stale transitions fail and closure is permanent', async () => {
     const t = backend();

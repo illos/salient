@@ -323,6 +323,20 @@ still need definition. Site-wide suspension remains administrative.
 
 ## 5. Campaign discovery, requests, and blocking
 
+**Confirmed campaign sharing (2026-09-15):** codes must be usable when spoken to another person:
+at most eight characters, letters and numbers only. Display the code separately from its invitation
+URL, with an icon-only copy button beside each field (no visible button label; accessible names identify
+which value is copied). The URL uses that same short code as `/join/<code>`. The campaign finder
+accepts either the code or the full URL. One replacement action rotates both together.
+
+**Implementation note (2026-09-15):** generate eight uppercase characters from
+`ABCDEFGHJKLMNPQRSTUVWXYZ23456789`, excluding I/1 and O/0; accept either letter case and trim
+surrounding whitespace. Allocation checks uniqueness transactionally and retries collisions. Codes
+identify a join-request entry point, never grant membership. Copy buttons show a check icon after
+success, announce success accessibly, and report failure with a manual-copy fallback. Existing
+32-character tokens are replaced through the paginated internal `campaigns:upgradeShareCodes`
+operation: old codes/URLs stop working, while pending requests and memberships remain intact.
+
 **Confirmed v1 discovery:** the public directory is deferred; campaigns are unlisted by default and discovered
 through share codes/URLs. **Proposed link-preview contract:** invitation links expose only a recruitment
 preview: campaign name, owner display identity, description, and whether requests are open. Public discovery
@@ -332,8 +346,8 @@ outside v1; link-preview access and membership remain separate permissions.
 The share URL/code identifies a campaign's request entry point; it never creates membership by itself.
 Confirmed for both personal and campaign codes: owners can regenerate them at any time. Regeneration
 invalidates the old code and URL, preserves already-pending requests, and does not remove established
-friendships or campaign memberships. Proposed implementation uses an unguessable token with server-side lookup
-and request limits; pending requests retain their target identity independently of the token used to create
+friendships or campaign memberships. Campaign lookup uses the confirmed short code above; request
+limits remain proposed. Pending requests retain their target identity independently of the code used to create
 them. Rotation does not bypass blocking or ordinary approval checks.
 
 Proposed request lifecycle: `pending` → `approved`, `declined`, or `withdrawn`. At most one pending request

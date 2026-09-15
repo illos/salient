@@ -1,5 +1,5 @@
 import { v, ConvexError } from 'convex/values';
-import { mutation, query } from './_generated/server';
+import { internalMutation, mutation, query, type MutationCtx } from './_generated/server';
 import type { Id } from './_generated/dataModel';
 import { requireUser, requireMember, requireOwner, checkMembershipCapacity } from './lib/access';
 import { command } from './lib/commands';
@@ -17,9 +17,28 @@ const pending = v.object({
   userId: v.id('users'),
   displayName: v.string(),
 });
-// Convex supplies seeded randomness in mutations; the token is generated only on the server.
-function shareCode() {
-  return Array.from({ length: 32 }, () => Math.floor(Math.random() * 36).toString(36)).join('');
+const shareAlphabet = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+
+// Convex supplies seeded randomness. The indexed read and write share a transaction, so concurrent
+// allocations retry on a collision too. Exclude easily confused I/1 and O/0 from spoken codes.
+async function shareCode(ctx: MutationCtx) {
+  for (let attempt = 0; attempt < 10; attempt++) {
+    const code = Array.from(
+      { length: 8 },
+      () => shareAlphabet[Math.floor(Math.random() * shareAlphabet.length)],
+    ).join('');
+    const existing = await ctx.db
+      .query('campaigns')
+      .withIndex('by_shareCode', q => q.eq('shareCode', code))
+      .first();
+    if (!existing) return code;
+  }
+  throw new ConvexError('Could not allocate a share code. Please try again.');
+}
+
+function normalizeShareCode(code: string) {
+  const trimmed = code.trim();
+  return /^[a-z0-9]{1,8}$/i.test(trimmed) ? trimmed.toUpperCase() : null;
 }
 
 export const list = query({
@@ -57,7 +76,7 @@ export const create = mutation({
     const id = await ctx.db.insert('campaigns', {
       name,
       ownerId: user._id,
-      shareCode: shareCode(),
+      shareCode: await shareCode(ctx),
       activeSessionId: null,
       eventSequence: 0,
     });
@@ -129,10 +148,11 @@ export const preview = query({
     v.null(),
   ),
   handler: async (ctx, args) => {
-    if (args.shareCode.length > 100) return null;
+    const code = normalizeShareCode(args.shareCode);
+    if (!code) return null;
     const campaign = await ctx.db
       .query('campaigns')
-      .withIndex('by_shareCode', q => q.eq('shareCode', args.shareCode.trim()))
+      .withIndex('by_shareCode', q => q.eq('shareCode', code))
       .unique();
     if (!campaign) return null;
     return {
@@ -149,9 +169,11 @@ export const requestJoin = mutation({
     const user = await requireUser(ctx);
     const receipt = await command(ctx, user._id, args.commandId, 'campaign.request', args);
     if (receipt.previous) return null;
+    const code = normalizeShareCode(args.shareCode);
+    if (!code) throw new ConvexError('Invitation unavailable.');
     const campaign = await ctx.db
       .query('campaigns')
-      .withIndex('by_shareCode', q => q.eq('shareCode', args.shareCode.trim()))
+      .withIndex('by_shareCode', q => q.eq('shareCode', code))
       .unique();
     if (!campaign) throw new ConvexError('Invitation unavailable.');
     const joined = await ctx.db
@@ -231,10 +253,28 @@ export const regenerateShareCode = mutation({
     await requireOwner(ctx, args.campaignId, user._id);
     const receipt = await command(ctx, user._id, args.commandId, 'campaign.rotate', args);
     if (receipt.previous) return receipt.previous.result!;
-    const code = shareCode();
+    const code = await shareCode(ctx);
     await ctx.db.patch(args.campaignId, { shareCode: code });
     await receipt.save(code);
     return code;
+  },
+});
+/** One-time development upgrade. Repeat with the returned cursor until done; reruns are safe. */
+export const upgradeShareCodes = internalMutation({
+  args: { cursor: v.union(v.string(), v.null()) },
+  returns: v.object({ cursor: v.string(), done: v.boolean(), updated: v.number() }),
+  handler: async (ctx, { cursor }) => {
+    const batch = await ctx.db
+      .query('campaigns')
+      .withIndex('by_creation_time')
+      .paginate({ cursor, numItems: 100 });
+    let updated = 0;
+    for (const campaign of batch.page) {
+      if (/^[A-Z0-9]{1,8}$/.test(campaign.shareCode)) continue;
+      await ctx.db.patch(campaign._id, { shareCode: await shareCode(ctx) });
+      updated++;
+    }
+    return { cursor: batch.continueCursor, done: batch.isDone, updated };
   },
 });
 export const myRequests = query({

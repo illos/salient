@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-only
-import { useState } from 'react';
+import { useId, useState } from 'react';
+import { Check, Copy } from 'lucide-react';
 import { Link, useNavigate } from '@tanstack/react-router';
 import { useConvexAuth, useMutation, useQuery } from 'convex/react';
 import { api } from '../convex/_generated/api';
@@ -191,7 +192,9 @@ export function JoinPage({ shareCode }: { shareCode: string }) {
       <Card className="w-full max-w-xl">
         <CardContent className="flex flex-col gap-3">
           <h1>Invitation unavailable</h1>
-          <p>This invitation may have been replaced. Ask the Director for their current link.</p>
+          <p>
+            This invitation may have been replaced. Ask the Director for their current code or link.
+          </p>
           <Link to="/">Back to campaigns</Link>
         </CardContent>
       </Card>
@@ -598,6 +601,60 @@ function EditPlayers({ session, members }: { session: Session; members: Member[]
     </div>
   );
 }
+function CopyInvitationField({
+  label,
+  value,
+  copyLabel,
+}: {
+  label: string;
+  value: string;
+  copyLabel: string;
+}) {
+  const id = useId();
+  const [copiedValue, setCopiedValue] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const copied = copiedValue === value;
+  return (
+    <div className="flex flex-col gap-1.5">
+      <label htmlFor={id} className="caps text-muted-foreground">
+        {label}
+      </label>
+      <div className="flex items-center gap-2">
+        <Input
+          id={id}
+          readOnly
+          className="min-w-0 font-mono text-sm"
+          value={value}
+          onFocus={e => e.currentTarget.select()}
+        />
+        <Button
+          type="button"
+          variant="outline"
+          size="icon-lg"
+          aria-label={copyLabel}
+          title={copied ? 'Copied' : copyLabel}
+          onClick={async () => {
+            setError(null);
+            setCopiedValue(null);
+            try {
+              await navigator.clipboard.writeText(value);
+              setCopiedValue(value);
+            } catch {
+              setError('Could not copy. Select the field and copy it manually.');
+            }
+          }}
+        >
+          {copied ? <Check aria-hidden="true" /> : <Copy aria-hidden="true" />}
+        </Button>
+      </div>
+      <span className="sr-only" role="status">
+        {copied ? `${label} copied.` : ''}
+      </span>
+      <ErrorNotice error={error} />
+    </div>
+  );
+}
+
 function Invitations({
   campaignId,
   shareCode,
@@ -614,16 +671,16 @@ function Invitations({
       <CardContent className="flex flex-col gap-4">
         <div>
           <h2>Invite your players</h2>
-          <p className="text-sm text-muted-foreground">Share this link. You approve who joins.</p>
+          <p className="text-sm text-muted-foreground">
+            Share this code or link. You approve who joins.
+          </p>
         </div>
-        <Field label="Invitation link">
-          <Input
-            readOnly
-            className="text-xs"
-            value={`${window.location.origin}/join/${shareCode}`}
-            onFocus={e => e.currentTarget.select()}
-          />
-        </Field>
+        <CopyInvitationField label="Campaign share code" value={shareCode} copyLabel="Copy code" />
+        <CopyInvitationField
+          label="Invitation link"
+          value={`${window.location.origin}/join/${shareCode}`}
+          copyLabel="Copy link"
+        />
         <Button
           variant="link"
           className="w-fit"
@@ -635,8 +692,11 @@ function Invitations({
             )
           }
         >
-          Replace invitation link
+          Replace code and link
         </Button>
+        <p className="text-sm text-muted-foreground">
+          Replacing these invalidates the old code and link. Pending requests and members stay.
+        </p>
         <ErrorNotice error={command.error} />
         <div className="rule-soft border-t pt-4">
           <p className="caps mb-2 text-muted-foreground">
