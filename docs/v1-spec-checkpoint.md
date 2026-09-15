@@ -65,7 +65,7 @@ for current decisions; the original review's unresolved scope questions are not 
 | Area | Included in v1 | Deferred or excluded |
 | --- | --- | --- |
 | Delivery | Online-first web app for phones, tablets, and desktop; headless/shared game operations; sustained table performance | No native-app plans; full offline operation is not required; preserve future LAN hosting without promising its packaging in v1 |
-| Rules content | Core rulebooks; every core class through levels 1–10; searchable Rules, Foes, and Items references | All official supplements, including Summoner/Beastheart and associated mechanics; homebrew monsters/options/items |
+| Rules content | Core rulebooks and searchable references; eleven-class wizard through levels 1–10, explicitly including Beastheart/Summoner editor dependencies (Q-CHAR-14) | Other official supplements and homebrew; Beastheart/Summoner table/engine delivery has separate milestones |
 | Play | Free play, combat, dedicated respite; initiative groups on both sides and multiple heroes per player; readable rules and recorded manual resolution where automation is incomplete | Playable retainers and friendly monsters; dedicated montage/negotiation flows, downtime projects, nested structured activities |
 | Characters | Creation, advancement, full edits, progression history, sharing, detachment/duplication, Forge Steel import | Forge Steel export implementation; preserve the model/adapter data needed to add it without a rewrite |
 | Encounters | Private user-owned templates, duplication, monsters/counts, prepared initiative groups and minion squads/captains, remembered party-strength calculator, prepared rewards | Template sharing and other authored encounter content |

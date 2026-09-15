@@ -39,25 +39,22 @@ The broader library coverage below remains the fuller-product destination.
 
 ## Confirmed release scope
 
-**Confirmed v1 scope: core rulebooks only.** Character creation and advancement support every core class
-through levels 1–10. All official supplemental content, if present in the source corpus, is outside v1,
-including Summoner, Beastheart, and their associated mechanics. Homebrew monsters, character options, and
-items are also excluded. Creating characters from core options and saving encounters/rewards assembled from
-core content remain in scope; these are user-created records, not homebrew rules content.
+Core rulebooks remain the general reference/encounter scope. **Confirmed character-track exception,
+2026-09-15 (Q-CHAR-14): the wizard includes all eleven classes through levels 1–10 from the outset,
+including Beastheart and Summoner and the sourced dependencies required for their editor choices,
+grants, derived builds and readable references.** This supersedes their earlier wizard exclusion.
+Their table UI and engine support have separate milestones. Other official supplements and homebrew
+remain excluded. See [character scope](character-wizard-spec.md#fuller-product-scope).
 
 ## Official content is not necessarily core content
 
-User clarification: **Summoner and Beastheart are official MCDM content, but are not core-rulebook classes and
-are not v1 targets. Their associated mechanics are also outside v1.** This qualifies the broad
-library-coverage decisions above; the presence of their summons, companions, features, or rules in the
-Compendium must not expand v1 scope implicitly.
+Beastheart and Summoner are official supplemental classes. Their inclusion in the editor is now
+explicitly authorized; retain their supplemental source identities. It does not automatically enable
+all supplemental content, generic friendly-monster play or unrelated encounter options.
 
-Homebrew authoring and selection of monsters, character options, and items are deferred beyond v1. Do not
-classify official supplemental content as homebrew merely because it is excluded from this release.
-
-Compendium presence, official authorship, core-book membership, v1 inclusion, and automation support are
-distinct properties. The inspected character corpus includes Summoner and Beastheart; that corpus count is not
-the app's v1 class list. The monster audit likewise includes their supplemental creature records.
+Compendium presence, official authorship, core-book membership, feature inclusion and automation
+support remain distinct properties. Neither a source import nor editor coverage proves table
+support. Homebrew authoring and selection remain deferred.
 
 ## Proposed source and delivery contract
 
@@ -69,8 +66,8 @@ the app's v1 class list. The monster audit likewise includes their supplemental 
 - Retain source-qualified identities and publication provenance. Classify core versus supplemental content
   using identified source material, not a generic class/monster category or the fact that data lives in a
   unified directory.
-- Apply v1 scope consistently to library entries, character choices, encounter selections, and mechanics. Do
-  not make excluded supplemental classes playable by importing a file or following a related-content link.
+- Apply the owning feature scope to library entries, character choices, encounter selections and mechanics.
+  The eleven-class editor exception does not enable unrelated content or unsupported table behavior.
   Preserve unsupported import data under the existing compatibility policy without claiming it is supported
   gameplay.
 - Keep an explicit source/coverage inventory. The [monster audit](research/monster-import-audit.md) identifies
@@ -91,17 +88,17 @@ entries/sections to compare ranking changes; merely returning results is insuffi
 [stack investigation](research/embedded-compendium.md#stack-fit-and-search-recommendation) recommends
 an initial search implementation, with performance and relevance targets still to be measured and agreed.
 
-- Every core class can be created and advanced through levels 1–10 with its sourced choices. This does not
+- All eleven included classes can be created and advanced through levels 1–10 with sourced choices. This does not
   assert full automation of every gameplay mechanic.
-- Official supplements and homebrew do not become selectable through pack configuration or imports; core-based
+- Other excluded supplements and homebrew do not become selectable through pack configuration or imports; core-based
   user characters and saved encounters remain supported.
 - Search finds core rules even when the app has no automated operation for the referenced mechanic.
 - An in-scope official item remains readable without falsely claiming its effects are automated; viewing it
   does not create an owned item.
 - Foes reference coverage accounts for eligible retainers, companions, and summons as well as standard
   monsters. Unsupported adapters are reported separately from missing reference content.
-- Summoner, Beastheart, and their supplemental dependencies do not enter v1 choices merely because they exist
-  in the unified Compendium corpus. Their official provenance remains correctly identified.
+- Beastheart/Summoner editor dependencies are deliberately inventoried and enabled under Q-CHAR-14;
+  their official supplemental provenance and actual automation coverage remain correctly identified.
 
 Reference bookmarks remain excluded from the currently recorded v1 milestone, but are an explicitly desired
 future use of the shared object model (2026-09-15); their implementation timing has not been reassigned.

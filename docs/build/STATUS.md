@@ -14,7 +14,9 @@ whose document is an outline until claimed).
 
 V24 lives on `slice/V24` in `/srv/presidium/projects/salient/characters`, based on `e83930e`.
 Assessment only; no backend/runtime changes. The user reaffirmed Forge Steel as a working structural
-reference and both import/export as planned features. V08 remains the broader implementation outline.
+reference and both import/export as planned features. Q-CHAR-14 confirms all eleven classes in
+the wizard track from the outset, with shared class knowledge for parser/engine/UI consumers. V08
+remains the broader implementation outline; table support has separate milestones.
 
 ```
 S00 process tooling ─────────────────────────────────────────────┐
@@ -90,7 +92,7 @@ See the [CI review and run record](audits/2026-09-14-ci-history-review.md) for t
 | V05 | [Ability parser and class/stat-block automation](V05-ability-automation.md) | A09, V04 | Outline |
 | V06 | [Monster catalog, saved encounters and party strength](V06-catalog-and-saved-encounters.md) | A09 | Outline |
 | V07 | [Inventory, loot and Director stash](V07-inventory-and-loot.md) | A09, V06 | Outline |
-| V08 | [Core class content through level 10, advancement and progression history](V08-classes-and-advancement.md) | A09 | Outline |
+| V08 | [Eleven-class editor, advancement and progression history](V08-classes-and-advancement.md) | A09 | Outline |
 | V09 | [Forge Steel import](V09-forge-steel-import.md) | V08 | Outline |
 | V10 | [Accounts: settings, password reset, friends, blocking, share codes, deletion](V10-accounts-social.md) | A09 | Outline |
 | V11 | [Character grants and delegated play](V11-character-grants.md) | V10 | Outline |

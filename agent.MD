@@ -98,10 +98,11 @@ rather than accumulating duplicate decisions here. The original [gap review](doc
 
 ### V1 scope
 
-- Core rulebooks only; every core class through levels 1–10. Summoner and Beastheart are official supplemental
-  content, not core, and are excluded with their associated mechanics. All other official supplements and
-  homebrew monsters/options/items are also excluded. Compendium presence and official provenance do not imply
-  v1 inclusion.
+- Character-track scope confirmed 2026-09-15 (Q-CHAR-14): include all eleven classes through levels
+  1–10 from the outset of wizard development: nine core classes plus Beastheart and Summoner, with
+  their editor choices, dependent grants and derived builds. Preserve sourced class knowledge for
+  parser, engine and UI work. Table support has separate milestones. Other supplements/homebrew
+  remain excluded; core versus supplemental provenance remains explicit. See the character spec.
 - Public searchable Rules, Foes and Items references include eligible core retainers/companions/summons and
   items even when not fully automated. Source coverage and automation coverage are separate.
 - Free play, combat and a dedicated respite loop are included. Montage/negotiation flows, downtime projects

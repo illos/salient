@@ -154,26 +154,25 @@ approval. Ordinary level-ups need no review. The campaign continues using its ef
 await approval.
 
 The complete wizard exposes foundational choices and all levels/options available in the supported rules
-content. **Confirmed v1 target: every core class through levels 1–10.** V1 uses core rulebooks only; all
-official supplemental content and homebrew character options/items are excluded. User-created characters using
-core choices remain supported. This coverage target does not require full gameplay automation of every
-ability. The inspected source set contains 11 classes with level 1–10 entries, including Beastheart and
-Summoner. **User-confirmed scope: Summoner and Beastheart are official MCDM supplemental classes, not
-core-rulebook classes, and neither they nor their associated mechanics are v1 targets.** The observed corpus
-size must not be treated as the v1 class target; see the [reference/source scope](reference-library-spec.md).
-The implementation must report its actual supported coverage; importing this corpus does not establish a
-working choice system for every class.
+content. **Confirmed character-track scope, 2026-09-15 (Q-CHAR-14): all eleven classes through levels
+1–10, included from the outset of wizard development.** This means the nine core classes plus
+Beastheart and Summoner, including their companion/portfolio choices, dependent grants and derived
+builds. This supersedes their earlier exclusion from the wizard track. Other official supplements
+and homebrew remain excluded unless separately authorized.
 
-**User direction, 2026-09-15 (character-track assessment):** the core count is confirmed as nine.
-Beastheart and Summoner are now explicit eventual feature targets, bringing the eventual class
-target to eleven. The user is considering early inclusion to exercise the model's flexibility;
-their delivery cycle and any change to the core-only V1 gate are not yet decided. The
-[character-track assessment](build/V24-character-wizard-assessment.md#supplemental-classes-editor-inclusion-proposed)
-now recommends all eleven classes in the editor build-out, following the user's observation that
-their unusual complexity principally belongs to table UI and engine behavior. Their creation,
-editing and progression can advance in bounded class slices while table support has separate
-milestones. This records future inclusion and the revised delivery proposal, not implemented
-support or a new release commitment.
+The user wants this work to build durable knowledge for the parser, engine and UI tracks. Each
+class slice records sourced decisions, automatic and conditional grants, progression, affected
+creatures/resources, Forge Steel mappings and relevant gameplay dependencies. Keep source findings,
+user rulings, proposed implementation and verified behavior distinguishable.
+
+Editor completeness and table support have separate acceptance. Creation, editing, progression,
+readable source and import/export model compatibility can advance before the class's table UI and
+engine behavior. Do not equate editor completion with complete combat support. Beastheart and
+Summoner remain correctly identified as supplemental sources; their inclusion is explicit user
+scope, not inferred from their presence in the corpus. The existing core research matrix still
+contains 90 class/level rows; expand it to 110 during content work without claiming missing rows
+are already researched or implemented. See the
+[character-track assessment](build/V24-character-wizard-assessment.md#supplemental-classes-editor-inclusion-confirmed).
 
 **Confirmed 2026-09-15 (Q-CHAR-6, language portion):** Custom campaign languages count as
 homebrew in this app and are deferred beyond V1. The core rules' permission to invent campaign
@@ -819,7 +818,7 @@ for independent work. Deferred research recommendations are not user rulings.
 | Full list of campaign values to clear on transfer | XP/Victories clearing is settled. Q-CHAR-3 now resolves transferred advancement eligibility and character-sheet ownership of level-up; any additional campaign-value reset enumeration remains separate. |
 | Entry reservation timing, detachment during active play, and former-campaign history access | Finalizing proposed admission/detachment contracts and table linkage. |
 | Player visibility without a grant, additional private-field exclusions, historical review visibility, and handling multiple competing submissions | Remaining access and review UX details; sheet viewing/combat grants are now established. |
-| Historical Forge Steel shapes and export coverage; preserving unsupported imported data | Homebrew and official supplemental content are excluded from v1 playable choices. Compatibility preservation must not enable them; conversion/export claims must follow demonstrated cases. |
+| Historical Forge Steel shapes and export coverage; preserving unsupported imported data | Other supplements and homebrew remain excluded; Beastheart/Summoner editor support is explicitly included by Q-CHAR-14. Preservation must not enable excluded choices or imply table support; conversion/export claims must follow demonstrated cases. |
 
 ## 13. Proposed delivery sequence
 
@@ -836,7 +835,7 @@ The confirmed v0.01 scope in section 1 takes precedence over the earlier broader
 3. **Later progression and history UI:** add sourced higher-level choices, scoped level-up and historical
    browsing/restoration. Use the level-7-to-3 Shadow example and differing class structures to verify the
    broader model when those features return to scope.
-4. **Later interchange and broader coverage:** implement Forge Steel import and expand core classes/levels.
+4. **Later interchange and broader coverage:** implement Forge Steel import and expand all eleven included classes/levels.
    Preserve the adapter path for desired export, which is not a V1 delivery requirement. Conversion claims
    follow real files and semantic round trips, not merely compatible-looking structures.
 

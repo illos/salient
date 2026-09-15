@@ -764,3 +764,16 @@ No user approval is implied by this classification.
 - **Recommendation:** A. It matches the ruling and keeps the v0.01 UI honest.
 - **Blocked until answered:** nothing; A is applied in A03 unless the user objects.
 - **Answer:** No, do not remove. The code stays dormant: no UI control, not in the registry, every foe visible in v0.01. (User answered "no" to a remove-or-keep question; read as "do not remove". Correct here if intended otherwise.)
+
+### Q-CHAR-14: Include Beastheart and Summoner in initial wizard development?
+
+- **Status:** resolved 2026-09-15; [owning scope](character-wizard-spec.md#fuller-product-scope).
+- **Raised by:** V24 character-track assessment, 2026-09-15; answered directly in the user thread.
+- **Conflict or gap:** Earlier scope excluded both supplemental classes. The user corrected the core
+  count to nine and considered whether early inclusion would help the model and other tracks.
+- **Decision:** Include all eleven classes from the outset of wizard-track development, through
+  levels 1–10. Their unusual play behavior principally belongs to table UI/engine work, which has
+  separate milestones. Preserve sourced class knowledge for parser, engine and UI consumers.
+- **Boundary:** Explicitly includes required supplemental editor choices, grants and derived builds;
+  does not enable unrelated supplements/homebrew or claim implemented table support. Forge Steel
+  remains a structural and import/export reference; Compendium remains rules authority.
