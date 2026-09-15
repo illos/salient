@@ -106,6 +106,12 @@ Candidate `Q-V-n` entries from `docs/character-wizard-spec.md#12-open-decisions`
 
 ## Shared class knowledge
 
+Use [targeted Forge Steel exports](../forge-steel-interchange.md#targeted-fixture-workflow) for
+chosen ancestry/class/level examples and Compendium-verified comparison targets. A live level-one
+Elementalist export was inspected and includes levels 1–10 definitions with future choices still
+empty; see the linked metadata. Completed before/after exports can support progression tests and
+later bidirectional compatibility checks without confusing available definitions with active grants.
+
 The user supplied [official pregenerated PDFs](../research/official-pregen-pdfs.md) as possible
 early parity milestones. Use them as independent complete-sheet comparison candidates as the
 required class/ancestry/background choices become supported. The nine examples supplement the
