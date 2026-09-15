@@ -23,6 +23,13 @@ name, action type, targets and full text is substantially simpler than executing
 files into a format usable by the app and parser. Engine interpretation and execution belong to the
 separate parser branch. Runtime observations below identify consumers, not added deliverables.
 
+**User refinement, 2026-09-15:** corrections must regenerate through the importer rather than require
+hand-edited stat blocks. Abilities and traits must be independently addressable, searchable/filterable
+and themeable. Stat blocks and abilities participate in the app's shared-object model; preserve the
+same capability for trait sharing. The [owning ingestion requirements](../monster-catalog-spec.md#confirmed-ingestion-requirements--2026-09-15)
+and [sharing contract](../data-architecture-spec.md#35-unified-object-references-and-sharing) record this
+refinement and acceptance examples. The notes below are the implementation proposal, not a shipped format.
+
 ## Current implementation
 
 | Layer | Current evidence | Ingestion relevance / downstream gap |
@@ -121,7 +128,9 @@ external mechanics; this assessment does not resolve or implement those rules.
 First bounded implementation: ingest all 438 core entries into a deterministic versioned package
 that both app code and the parser can consume. Read book-specific JSON for classification, stats and
 structured features; retain original Markdown and isolate full feature sections for parser input.
-Expanded Markdown and the existing Rules renderer supply the reading view.
+Expanded Markdown and the existing Rules renderer provide a reusable full-source reading view.
+Structured creature/feature data also supports independent themeable components; generated article
+HTML alone is insufficient for these consumers.
 
 Proposed record shape, to coordinate with the parser branch before changing its adapter:
 
@@ -132,9 +141,11 @@ Proposed record shape, to coordinate with the parser branch before changing its 
 | Printed stats | Source values for size, speed, Stamina, stability, free strike, characteristics, movement, immunities, weaknesses, captain benefit and EV | Both; preserve strings and absent fields |
 | Validated projections | Known constant values; EV amount with printed quantity basis; explicit choices/unresolved values instead of lossy coercion | App display and future consumers; no inferred mechanics |
 | Full source | Byte-preserved original Markdown and original JSON record; expanded reading source or reference to its existing article | App full reading; parser fallback and source evidence |
-| Ordered features | Local identity scoped to the definition/revision, name, source kind, ordinal, complete source section/locator, original structured feature | Parser gets entire abilities/traits, not only damage tiers |
+| Ordered features | Individually addressable logical child identity, content edition, parent, name, source kind, separate display ordinal, complete source section/locator, original structured feature | Parser gets entire abilities/traits; app resolves and shares a feature independently |
 | Ability envelope | Printed usage, keywords, distance, target, trigger, cost/label, roll text and ordered effects, where stated | App presentation and parser input; retain raw forms |
 | Relationships and issues | Explicit source links, separately labeled related group reading, extraction conflicts, missing values | Both; a related document is not automatically a granted feature |
+| Search projections | Separate creature and feature rows, with feature text/type/printed usage/keywords and parent classification | App can filter and find an ability or trait directly |
+| Corrections and editions | Shared importer/schema version, targeted correction records, original values and correction rationale | Rebuild affected outputs centrally; retain historical edition references |
 
 Use the existing content entry/manifest contracts where they fit. The exact TypeScript shape is an
 implementation choice to coordinate with consumers, not a competing engine representation. Do not
@@ -147,6 +158,18 @@ app or database. The app can publish a small browse index and lazily load full d
 from the same build output. Share pinned-source loading and rendering helpers with the Rules pipeline;
 keep one source identity across reference cards, definitions and engine inputs. Backend mirroring,
 if needed later, is a delivery adapter rather than a separate source of truth.
+
+Use the common object resolver for stat-block and feature references, independently of `/rules`
+routes. Keep logical keys separate from mutable titles and array positions; retain explicit mappings
+when source revisions cannot be matched safely. The current name-slug-to-parent-section adapter in
+`web/rules/reference.ts` is useful legacy navigation, not a complete child-object identity contract.
+Do not deduplicate same-named traits across creatures without establishing that they are the same
+source object. Parent feature ordering can change without changing identity.
+
+Keep semantic display structure separate from theme: components render stat fields, usage, target,
+trait text and ordered ability sections using shared theme tokens. Original source remains available;
+any derived HTML is rebuildable. A common extraction fix regenerates every affected record, while a
+source-specific correction is a small explicit override outside `vendor/` and generated output.
 
 ### 2. Validate ingestion and preserve exceptions
 
@@ -166,6 +189,9 @@ The first importer must verify:
    are not silently claimed to be resolved.
 8. Representative app-facing and parser-facing reads use the same package, without engine execution
    being necessary to accept the import.
+9. The correction, direct feature resolution, search, identity continuity and theme scenarios in the
+   owning ingestion requirements pass. Existing name/position-based navigation is adapted explicitly;
+   it must not silently resolve an old reference to a different feature.
 
 Malformed identity or lost source should fail generation. Unsupported rule semantics need not block
 correct ingestion. Deliver a corpus report of records, fields, features and extraction exceptions;

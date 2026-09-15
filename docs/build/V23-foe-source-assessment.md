@@ -92,3 +92,9 @@ None needed for this assessment. Implementation remains subject to the owning sp
   app behavior, parser behavior or backend was changed. Full application/browser tests and independent
   implementation/rules reviews are not claimed by this research record. The next implementation is
   the shared ingestion package; parser execution remains owned by its separate branch.
+- 2026-09-15 follow-up: recorded the user's correction/search/theming/sharing requirements as resolved
+  Q-V-1. Read data architecture section 3.5, table content sharing, inventory object sharing and current
+  Rules reference/rendering code. Updated owning specs and the proposed data contract: independently
+  addressable features, identities separate from ordering, regenerable corrections and shared resolution.
+  Sharing UI and engine execution remain downstream. Documentation links and diff whitespace pass;
+  no runtime code or generated corpus data changed.

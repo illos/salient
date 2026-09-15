@@ -140,6 +140,24 @@ No user approval is implied by this classification.
 
 ## Resolved questions
 
+### Q-V-1: Monster ingestion must support correction, feature access, themes and sharing
+
+- **Status:** resolved 2026-09-15; [ingestion requirements](monster-catalog-spec.md#confirmed-ingestion-requirements--2026-09-15)
+  and [shared object model](data-architecture-spec.md#35-unified-object-references-and-sharing).
+- **Raised by:** user clarification in V23 foe-track discussion, 2026-09-15.
+- **Where:** `docs/monster-catalog-spec.md#logical-records` and the shared object model above.
+- **Conflict or gap:** The assessment preserved feature sections but did not explicitly require
+  regeneration of corrections, independent feature search/rendering or sharing-model compatibility.
+  Its proposed position-based child identity was insufficient for durable object references.
+- **Options:** No question was presented; the user supplied these requirements directly.
+- **Recommendation:** Apply them to the ingestion contract and acceptance checks; keep exact storage,
+  identity mapping and correction-file formats as engineering proposals.
+- **Blocked until answered:** nothing; already answered by the user.
+- **Answer:** Imports must be flexible enough to correct without manually editing all stat blocks.
+  Individual abilities and traits must be programmatically addressable, filterable, searchable and
+  themeable. Use the existing app data-sharing model, definitely for abilities and stat blocks,
+  preserving the possibility of sharing individual traits. Engine work remains on the parser branch.
+
 ### Q-R-201: What happens to live values on detachment, duplication and later admission?
 
 - **Status:** resolved 2026-09-15; [owning policy](character-wizard-spec.md#campaign-lifecycle)

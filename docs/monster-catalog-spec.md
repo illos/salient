@@ -228,13 +228,72 @@ Use source-qualified SCC identity rather than names or filenames. Definition ref
 source revision and derived edition identifier. A change in importer interpretation can change derived data
 even if the upstream revision stays the same. Old loaded encounters retain their copied interpretation.
 
-Embedded features lack independent SCC IDs. Propose local child keys within a definition edition, using source
-position plus a readable name. Do not promise those keys survive source reordering. Homebrew receives a
-separate identity namespace and revision history; an edit never mutates a table's loaded copy.
+Embedded features lack independent SCC IDs. Give abilities and traits addressable child identities under
+their containing definition, with content edition separate from logical identity. The confirmed ingestion
+requirements below supersede the earlier proposal to use source position plus a name as the reference key:
+source order is presentation information, and reordering must not silently retarget a reference. The exact
+key-generation and revision-mapping implementation remains proposed. Homebrew remains outside V1; future
+homebrew has a separate namespace and revision history, and edits never mutate a table's loaded copy.
 
 Retain source and derived content together without confusing them. A correction belongs outside the vendored
 dependency, identifies the affected field and source, and records why the value changes. Avoid per-rule
 approval machinery or hash-based proof systems.
+
+### Confirmed ingestion requirements — 2026-09-15
+
+The user clarified the foe track's data requirements after the initial assessment:
+
+- **Regenerable corrections.** Fixing extraction or changing the data representation must not require
+  hand-editing every generated stat block. Keep source records immutable and generated output reproducible.
+  Shared importer changes regenerate all affected records. Individual source corrections belong in a
+  separate, targeted correction layer, retaining original values and the reason for the correction.
+- **Addressable contents.** Full stat blocks, individual abilities and individual traits are programmatically
+  addressable records. Preserve each feature's parent, kind, source order, complete text, structured fields
+  and provenance. Same-named features on different monsters must remain distinguishable; repeated names
+  within one monster must not collide. Indexes and parent feature lists refer to these identities.
+- **Search and filtering.** Support querying features as well as creatures by their own fields and text,
+  with parent context where useful. Feature search returns the particular ability/trait and its containing
+  creature, rather than only a whole article that happens to mention the search term. Do not infer
+  unsupported semantics just to populate a filter.
+- **Themeable display.** Stat blocks and individual features expose data suitable for independent views.
+  Keep structure and source wording separate from layout, colors, fonts, icons and other theme choices.
+  A style change must not require editing content records. Rendered HTML may be a generated cache, but
+  cannot be the only usable representation of an ability, trait or stat block.
+- **Shared object references.** Stat blocks and abilities must fit the app's
+  [unified sharing model](data-architecture-spec.md#35-unified-object-references-and-sharing).
+  Preserve the same capability for individual traits; the user identified trait sharing as a possible
+  use, while explicitly requiring abilities and stat blocks. Resolving a feature should provide enough
+  content for its own preview/card without scraping or rendering the entire parent article.
+- **Reference continuity.** Rebuilding identical content, fixing extraction, changing themes or changing
+  display order must not silently change which logical object an ID identifies. Keep edition-qualified
+  references for exact historical content. Source changes that cannot be matched unambiguously must be
+  reported or explicitly mapped, never guessed from array position or a newly matching display name.
+
+These requirements concern ingestion and consumer-ready data. They do not implement sharing UI, settle
+private-object disclosure/live-versus-snapshot policy, or move engine execution into this track.
+
+**Proposed implementation:** one canonical collection of feature records with ordered references from
+each monster, plus generated creature and feature search projections. Embedded serialized records are
+also acceptable if the same IDs resolve independently through a shared lookup. Use a generic source
+adapter and small versioned correction records keyed by definition/feature and field. Each correction
+records its applicable source revision, expected original value, replacement and rationale; stale or
+ambiguous targets fail validation. This is maintainer data repair, not V1 homebrew authoring. Importer,
+schema and correction changes produce a new content edition; existing loaded snapshots remain intact.
+
+Proposed acceptance additions for the implementation:
+
+1. Fix one importer convention and regenerate every affected creature/feature without hand-editing outputs.
+2. Apply a targeted correction, preserve original evidence, and reject it if its expected source no longer
+   matches. Repeated generation produces the same result.
+3. Resolve a stat block, one ability and one trait directly by reference; feature results include full text,
+   their parent context and provenance without returning private live-instance state.
+4. Search/filter individual features, including identically named features on different creatures and
+   repeated headings within a definition, without ID collisions or loss of source order.
+5. Reorder display features or change an extraction projection while keeping logical references bound to
+   the same features. Verify exact edition references still identify their original content.
+6. Render the same definition/feature fixture with different theme tokens without changing its data or IDs.
+
+### Encounter value accounting
 
 For EV totals, count a creature once even when it has several turn entries, and count a captain
 separately from its squad. Saved templates use prepared minion counts; the current undefeated-roster

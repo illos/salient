@@ -440,6 +440,22 @@ Each kind retains its own data and operations; a shared reference interface does
 database table or identical fields for rules, items and characters. Retain content revision/section
 information where a reference needs to identify a particular rules passage.
 
+**Confirmed foe-ingestion refinement, 2026-09-15:** whole stat blocks and individual abilities must
+be eligible objects in this model. Individual traits must also be addressable, searchable and
+independently renderable, preserving the option to share them. A feature reference identifies a
+particular ability/trait within its parent definition; it is not merely a page URL, mutable heading
+slug or array offset. Keep logical identity separate from content edition and source/display order,
+so importer corrections and theme changes do not silently rebind shared references. Preserve the
+parent relationship and enough source/context to render a feature on its own. Exact reference syntax
+and cross-source-revision mapping remain implementation proposals. See the
+[monster ingestion requirements](monster-catalog-spec.md#confirmed-ingestion-requirements--2026-09-15).
+
+The reusable public definition and a particular loaded monster remain different objects, just as item
+definitions and owned items do. A public ability reference does not reveal a loaded monster's current
+Stamina, campaign membership, hidden state or other private data. Future deliberate sharing of a private
+instance retains the separate disclosure contract; sharing an ability does not implicitly disclose its
+containing live stat block. This data requirement does not assign sharing UI to the ingestion slice.
+
 **Confirmed rendering requirement, 2026-09-15:** an object ID must support rendering wherever it is
 referenced in the app, including eventual quick popup previews. Resolution and presentation must be
 usable independently of a Compendium page route. Proposed views are a readable inline link, compact
