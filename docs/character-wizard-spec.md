@@ -292,7 +292,9 @@ Input is the R01 decision ids and selection shapes; output is `complete | incomp
 diagnostics keyed by decision id, and a derived baseline in which every value carries the decision id,
 selected value and source sentence that supplied it. Status precedence (`invalid` > `unsupported` >
 `incomplete`) is a labeled engineering choice within this vocabulary; warnings never change the status. The
-baseline is distinct from live values (R03). Remaining questions are Q-CHAR-10 to Q-CHAR-12; no new question was needed. A02 implements the evaluator against these types.
+baseline is distinct from live values (R03). Remaining questions are Q-CHAR-10 and Q-CHAR-11. Q-CHAR-12 was resolved through
+[source research](research/remaining-character-questions-review.md#q-char-12) on 2026-09-15: use the
+class-named potency characteristic with specific overrides. A02 implements the evaluator against these types.
 
 ## 4. Wizard flows
 

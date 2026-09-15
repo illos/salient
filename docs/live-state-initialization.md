@@ -806,6 +806,10 @@ byte-exact and `tests/live-state-initialization.test.ts` checks it.
 }
 ```
 
+The preceding projection is a historical snapshot: Q-R-100, Q-R-101 and Q-CHAR-12 are now resolved.
+Its uncertainty array is not the current required output. A02/R02/R03 artifact owners must reconcile
+these labels and the earlier paid-Caelian fixture; this docs review does not claim code repair.
+
 ## 5. `FoeEntity` projection
 
 Built at read time from the roster instance's content entry (`convex/foes.ts` stores the entry
@@ -1047,7 +1051,7 @@ ability was the file body in the experiment and is the complete file here (S01 c
 | Q-R-200 | section 2.3, foe `slain` label after a Director edit above zero | resolved 2026-09-14; user confirmed that raising Stamina above zero automatically clears Slain |
 | Q-R-201 | section 3, live values on re-admission after detachment | open; raised by R03; provisional: none needed in v0.01, recommendation recorded |
 | Q-CHAR-3 | section 2.1.7, XP of a transferred higher-level hero | open; cited |
-| Q-R-100, Q-R-101, Q-CHAR-12 | carried from the R02 baseline on `uncertainties` | open; R01/V1 research |
+| Q-R-100, Q-R-101, Q-CHAR-12 | historical R02 `uncertainties` in the example above | resolved; see queue and [potency research](research/remaining-character-questions-review.md#q-char-12); artifact owners remove stale labels |
 
 Interpretations labeled above with their alternatives: current Stamina equals the maximum (2.1.1);
 Recoveries start full (2.1.3); XP starts at 0 (2.1.7); the printed Stamina is a foe's starting value

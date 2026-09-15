@@ -1,5 +1,9 @@
 # Combat feasibility research
 
+[Remaining character questions review](remaining-character-questions-review.md) checks all 13 questions
+open on 2026-09-15 against pinned rules and existing specs: two source resolutions, nine product
+decisions and two source ambiguities. Every reviewed queue entry links to its evidence.
+
 Natural-roll precedence: [natural 19/20 and double bane](natural-roll-precedence.md) records the
 independent source support for Q-R-1, distinguishing tier precedence, test rewards and critical hits.
 

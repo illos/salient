@@ -44,6 +44,12 @@ A08 design tokens (independent) ────────────────
 
 ## Audit follow-up
 
+The [2026-09-15 remaining-question research](../research/remaining-character-questions-review.md)
+checked all 13 then-open questions against pinned rules and existing specs. Q-CHAR-8 and Q-CHAR-12
+are source-resolved; 11 remain open (nine product decisions, two source ambiguities). A02/R02/R03
+owners must reconcile stale potency uncertainty labels; V08 must preserve both Melodrama improvement
+choices when implementing later-level content. This documentation review does not claim app repairs.
+
 The [question-queue audit](audits/2026-09-14-question-queue-dedup.md) reviewed all 32 entries through
 Q-A-601. At audit close, 20 were open, 11 answered/resolved, and Q-A-200 was engineering follow-up. Q-A-400's
 policy is already settled; the A04 implementation repair remains outstanding.

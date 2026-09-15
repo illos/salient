@@ -305,12 +305,13 @@ class-feature, kit, complication and item modifiers afterward. Base recovery val
 Echelons are 1 for levels 1–3, 2 for 4–6, 3 for 7–9, and 4 for 10.
 [Echelon source](../vendor/steel-compendium/en/unified/md/rule/general/echelon.md).
 
-Class Basics list a specific potency characteristic, while the general
-[Potencies rule](../vendor/steel-compendium/en/unified/md/rule/character/potency.md) also describes the
-highest characteristic. Forge `HeroLogic.getPotency` uses the highest. These agree for ordinary
-unmodified legal class arrays/progression; record both source statements and do not silently choose a
-policy for a modified character where they diverge. See Q-CHAR-12. This is not a blocker for examples
-where they agree.
+**Source resolution, 2026-09-15 (Q-CHAR-12):** Class Basics supplies the potency characteristic.
+The [Potencies rule](../vendor/steel-compendium/en/unified/md/rule/character/potency.md) explicitly says
+its basis is determined by class; [Game of Exceptions](../vendor/steel-compendium/en/unified/md/chapter/the-basics.md)
+makes that specific formula prevail over the general highest-characteristic wording. Apply explicit
+feature overrides separately. For example, Conduit Intuition 2 with another characteristic 3 still
+has baseline potencies 0/1/2. Forge's highest-characteristic calculation is a compatibility difference.
+See [the independent review](research/remaining-character-questions-review.md#q-char-12).
 
 ### Level-one class decisions
 
@@ -440,8 +441,12 @@ at level 2, makes Melodrama choices at 4, and chooses one of its class act's two
 [Invocation](../vendor/steel-compendium/en/unified/md/feature/troubadour/level-2/invocation.md),
 [Melodrama](../vendor/steel-compendium/en/unified/md/feature/troubadour/level-4/melodrama.md),
 [class-act feature](../vendor/steel-compendium/en/unified/md/feature/troubadour/level-5/5th-level-class-act-feature.md).
-Melodrama permits using a choice to improve an existing drama event, including one gained with that
-feature; whether both improvements may target the same event is Q-CHAR-8.
+**Source-resolved interpretation, 2026-09-15 (Q-CHAR-8):** Each Melodrama choice may add a new event
+or improve an already-owned event, including one gained with this feature. Both choices may improve
+the same previously owned event for +2 drama; adding then improving a new event gives +1. Preserve
+both choice identities and do not select the same new event twice. The source provides no distinct-target
+or once-per-event restriction; this is a compositional reading, not a new user ruling. See
+[the source and exception check](research/remaining-character-questions-review.md#q-char-8).
 
 Other later features change the baseline or available configuration even without asking a creation
 question. For example, Null's level-nine

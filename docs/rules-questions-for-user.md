@@ -39,9 +39,15 @@ The following V1 wizard questions are prepared for discussion, not answered defa
 the V1 wizard thread, 2026-09-14; see [the contracts](v1-character-wizard-contracts.md). Q-CHAR-2–5
 are the shared lifecycle decisions; the remaining entries are bounded content/scope cases.
 
+All 13 then-open questions received an independent pinned-source and existing-specification check on
+2026-09-15; see [the evidence report](research/remaining-character-questions-review.md). Q-CHAR-8 and
+Q-CHAR-12 are now source-resolved. The remaining 11 comprise nine product decisions and two source
+ambiguities; their recommendations remain unanswered.
+
 ### Q-CHAR-2: How should activating an edited build reconcile a played hero's resources?
 
 - **Status:** open
+- **Research check:** 2026-09-15 — product decision; [rules and spec evidence](research/remaining-character-questions-review.md#q-char-2).
 - **Raised by:** V1 wizard specification research, 2026-09-14
 - **Where:** `docs/character-wizard-spec.md#12-open-decisions`.
 - **Conflict or gap:** Retaining current inventory and avoiding a live-state rewind are settled. When
@@ -49,7 +55,8 @@ are the shared lifecycle decisions; the remaining entries are bounded content/sc
 - **Recommendation:** Preserve damage and Recoveries spent for unchanged resource types: maximum
   Stamina 30/current 20 becoming maximum 36 would yield current 26. Preserve conditions and compatible
   counters. Preview the result and explicitly reconcile removed/replaced resources or values outside
-  their new legal ranges. Apply atomically. Source-defined respite restoration remains separate.
+  their new legal ranges (including source-authorized negative resources such as clarity). Apply
+  atomically. Source-defined respite restoration remains separate.
   This is an application proposal, not a universal rulebook formula.
 - **Related question:** Q-R-201 concerns retaining values across campaign transfer. This question
   concerns reconciling a changed build; both apply only when transfer also changes the baseline.
@@ -60,6 +67,7 @@ are the shared lifecycle decisions; the remaining entries are bounded content/sc
 ### Q-CHAR-3: How does a transferred higher-level hero qualify for advancement after campaign XP clears?
 
 - **Status:** open
+- **Research check:** 2026-09-15 — product decision; [rules and spec evidence](research/remaining-character-questions-review.md#q-char-3).
 - **Raised by:** V1 wizard specification research, 2026-09-14
 - **Where:** `docs/character-wizard-spec.md#level-up`; sources
   `vendor/steel-compendium/en/unified/md/chapter/making-a-hero.md#heroic-advancement` and
@@ -67,7 +75,8 @@ are the shared lifecycle decisions; the remaining entries are bounded content/sc
 - **Conflict or gap:** Standard source thresholds are cumulative 0,16,32,…,144, with advancement during
   respite. Our transfer policy clears campaign XP but retains level. Comparing cleared XP directly to
   absolute thresholds would make a level-seven arrival earn 112 new XP before level eight.
-- **Recommendation:** Keep a separate eligibility offset equal to the admitted level's lower threshold.
+- **Recommendation:** Keep a separate eligibility offset equal to the admitted effective level's lower threshold,
+  not a higher historical build's level.
   Campaign XP still starts at zero. A level-seven entrant has offset 96 and needs 16 new XP for level
   eight, without importing prior campaign XP. Advancement still uses its source-defined timing.
   Coordinate with the respite thread; alternate advancement remains a separate scope choice.
@@ -77,6 +86,7 @@ are the shared lifecycle decisions; the remaining entries are bounded content/sc
 ### Q-CHAR-4: What happens when the owner makes new choices after restoring an earlier build?
 
 - **Status:** open
+- **Research check:** 2026-09-15 — product decision; [rules and spec evidence](research/remaining-character-questions-review.md#q-char-4).
 - **Raised by:** V1 wizard specification research, 2026-09-14
 - **Where:** `docs/character-wizard-spec.md#5-progression-history`.
 - **Conflict or gap:** Restoration preserves later records and present inventory, but subsequent new
@@ -91,6 +101,7 @@ are the shared lifecycle decisions; the remaining entries are bounded content/sc
 ### Q-CHAR-5: Do source-authorized reconfigurations need full-edit approval?
 
 - **Status:** open
+- **Research check:** 2026-09-15 — product decision; [rules and spec evidence](research/remaining-character-questions-review.md#q-char-5).
 - **Raised by:** V1 wizard specification research, 2026-09-14
 - **Where:** `docs/character-wizard-spec.md#4-wizard-flows`; sources
   `vendor/steel-compendium/en/unified/md/chapter/kits.md#changing-your-kit`,
@@ -110,6 +121,7 @@ are the shared lifecycle decisions; the remaining entries are bounded content/sc
 ### Q-CHAR-6: Does core-only scope allow campaign-specific languages and deity portfolios?
 
 - **Status:** open
+- **Research check:** 2026-09-15 — product decision; [rules and spec evidence](research/remaining-character-questions-review.md#q-char-6).
 - **Raised by:** V1 wizard specification research, 2026-09-14
 - **Where:** `docs/character-wizard-spec.md#fuller-product-scope`; sources
   `vendor/steel-compendium/en/unified/md/chapter/background.md`, Heroes clean **Languages in Orden**,
@@ -121,14 +133,16 @@ are the shared lifecycle decisions; the remaining entries are bounded content/sc
 - **Recommendation:** Permit cultures assembled from core aspects and authored religious details.
   Use printed core languages and deity/saint portfolios for selectable V1 mechanics; preserve an
   extension path. This does not propose a custom-pack authoring workflow.
-- **Related questions:** Q-R-102 asks which printed language tables are selectable; Q-R-100 asks
-  whether a duplicate language consumes a slot. Neither decides custom language identities.
+- **Related questions:** Q-R-102 resolved spoken-language tables for v0.01; Q-R-100 resolved
+  Caelian as automatically known, without consuming a paid slot. Neither decides custom identities
+  or all fuller V1 language scope.
 - **Blocked until answered:** custom selectable languages/portfolios only; printed core options can proceed.
 - **Answer:**
 
 ### Q-CHAR-7: May a Revenant borrow Prismatic Scales without Wyrmplate?
 
 - **Status:** open
+- **Research check:** 2026-09-15 — source ambiguity; [rules and spec evidence](research/remaining-character-questions-review.md#q-char-7).
 - **Raised by:** V1 wizard specification research, 2026-09-14
 - **Where:** `vendor/steel-compendium/en/unified/md/feature/trait/revenant/former-life.md` and
   `previous-life-1-point.md` in that directory; `vendor/steel-compendium/en/unified/md/feature/trait/dragon-knight/prismatic-scales.md`
@@ -142,23 +156,10 @@ are the shared lifecycle decisions; the remaining entries are bounded content/sc
 - **Blocked until answered:** this exact combination; keep it explicitly unresolved.
 - **Answer:**
 
-### Q-CHAR-8: Can both Melodrama improvements increase the same existing event?
-
-- **Status:** open
-- **Raised by:** V1 wizard specification research, 2026-09-14
-- **Where:** `vendor/steel-compendium/en/unified/md/feature/troubadour/level-4/melodrama.md`;
-  Forge `src/data/classes/troubadour/troubadour.ts` as structural comparison.
-- **Conflict or gap:** Two event choices can instead improve an existing event, including one gained
-  with Melodrama. A new event followed by its improvement is clear; two improvements of the same event
-  are not expressly addressed. Forge's count of two alone does not settle repeated-target legality.
-- **Recommendation:** Permit each choice to add an event or improve one already owned; do not allow
-  two improvements of the same event through this feature without a specific ruling.
-- **Blocked until answered:** the repeated-improvement combination, not other Troubadour choices.
-- **Answer:**
-
 ### Q-CHAR-9: How should career project points work while V1 downtime projects are deferred?
 
 - **Status:** open
+- **Research check:** 2026-09-15 — product decision; [rules and spec evidence](research/remaining-character-questions-review.md#q-char-9).
 - **Raised by:** V1 wizard specification research, 2026-09-14
 - **Where:** Heroes clean `en/books/heroes/clean/Draw Steel Heroes.md`, **Career Benefits → Project
   Points**; `vendor/steel-compendium/en/unified/md/career/artisan.md` and `career/criminal.md`.
@@ -175,6 +176,7 @@ are the shared lifecycle decisions; the remaining entries are bounded content/sc
 ### Q-CHAR-10: Can a complete character intentionally leave ancestry points unspent?
 
 - **Status:** open
+- **Research check:** 2026-09-15 — product decision; [rules and spec evidence](research/remaining-character-questions-review.md#q-char-10).
 - **Raised by:** V1 wizard specification research, 2026-09-14
 - **Where:** Heroes clean **Ancestry Traits**;
   `vendor/steel-compendium/en/unified/md/feature/trait/devil/devil-traits.md` and
@@ -189,6 +191,7 @@ are the shared lifecycle decisions; the remaining entries are bounded content/sc
 ### Q-CHAR-11: Which skill collisions create an unrestricted replacement choice?
 
 - **Status:** open
+- **Research check:** 2026-09-15 — source ambiguity; [rules and spec evidence](research/remaining-character-questions-review.md#q-char-11).
 - **Raised by:** V1 wizard specification research, 2026-09-14
 - **Where:** `vendor/steel-compendium/en/unified/md/chapter/making-a-hero.md`, **Choosing Skills**;
   `vendor/steel-compendium/en/unified/md/career/warden.md`; `vendor/steel-compendium/en/unified/md/class/fury.md`.
@@ -202,41 +205,28 @@ are the shared lifecycle decisions; the remaining entries are bounded content/sc
   selections can proceed.
 - **Answer:**
 
-### Q-CHAR-12: Which potency basis applies when another characteristic exceeds the class's named one?
-
-- **Status:** open
-- **Raised by:** V1 wizard specification research, 2026-09-14
-- **Where:** `vendor/steel-compendium/en/unified/md/rule/character/potency.md`,
-  `vendor/steel-compendium/en/unified/md/class/conduit.md` (**Basics**),
-  `vendor/steel-compendium/en/unified/md/chapter/the-basics.md#game-of-exceptions`;
-  Forge `src/logic/hero-logic.ts#getPotency` for comparison.
-- **Conflict or gap:** The general rule names the highest characteristic; class Basics specifies one
-  characteristic. Normal unmodified progression makes them agree. Modified characters can diverge;
-  Forge always takes the highest.
-- **Recommendation:** Use the class's named characteristic, following specific-over-general, unless a
-  particular effect overrides it. Obtain a ruling on the divergent case before claiming an automatic
-  result; record Forge's behavior as a compatibility difference.
-- **Blocked until answered:** divergent modified-character calculation; examples where both agree proceed.
-- **Answer:**
-
 ### Q-CHAR-13: Should higher-level creation offer discretionary starting treasures?
 
 - **Status:** open
+- **Research check:** 2026-09-15 — product decision; [rules and spec evidence](research/remaining-character-questions-review.md#q-char-13).
 - **Raised by:** V1 wizard specification research, 2026-09-14
 - **Where:** `docs/character-wizard-spec.md#fuller-product-scope`; Heroes clean
   `en/books/heroes/clean/Draw Steel Heroes.md`, **For the Director → Treasures Above 1st Level**.
 - **Conflict or gap:** The Director can supply starting treasures above level one, with player selection.
   Higher-level creation is required, but a level selector must not silently award optional treasure or
   duplicate retained inventory on admission.
-- **Recommendation:** An explicit Director starting-treasure allowance on admission, optionally filled
-  from the book's echelon guidance, with owner selection and grants applied once. No automatic extra
+- **Recommendation:** An explicit Director starting-treasure allowance for new higher-level starting heroes,
+  optionally filled from the book's echelon guidance, with player selection and grants applied once.
+  Include its option to replace each leveled treasure/trinket with a consumable of the hero's echelon
+  or lower. Existing Director inventory editing is the alternative to a dedicated picker. No automatic extra
   inventory for existing heroes merely choosing an entry level. Coordinate with inventory.
 - **Blocked until answered:** this optional workflow; higher-level build evaluation can proceed.
 - **Answer:**
 
-### Q-R-201: What happens to a hero's live values on re-admission after detachment?
+### Q-R-201: What happens to live values on detachment, duplication and later admission?
 
 - **Status:** open
+- **Research check:** 2026-09-15 — product decision; [rules and spec evidence](research/remaining-character-questions-review.md#q-r-201).
 - **Raised by:** R03, 2026-09-14
 - **Where:** `docs/live-state-initialization.md` section 3; `docs/character-wizard-spec.md#12-open-decisions`
   (row "Non-campaign live-state transfer on detachment/duplication"); ruling in `agent.MD` (*Characters, privacy
@@ -247,11 +237,11 @@ are the shared lifecycle decisions; the remaining entries are bounded content/sc
 - **Conflict or gap:** First admission initializes live values from the baseline. A character detached from one
   campaign and attached to another has a prior live record; the ruling clears Victories and XP but says nothing
   about current Stamina, Recoveries, temporary Stamina, surges, the heroic resource or condition toggles.
-- **Options:** A: re-run first-admission initialization for everything (a fresh start, Victories and XP included).
-  B: keep the prior non-campaign live values (damage, spent Recoveries, toggles, resource) and clear only Victories
-  and XP per the ruling. C: keep the prior record and let the Director reconcile with Manual adjustments before play.
-- **Recommendation:** B, since it is the narrowest reading of the ruling; A is simplest to build and is what the
-  v0.01 code path would do if re-attachment were reachable.
+- **Recommendation:** Retain existing non-campaign live values with the same build, clearing the
+  already-confirmed campaign XP/Victories. Preserve only state remaining after applicable source
+  cleanup; do not resurrect expired surges, temporary Stamina or encounter resources. Detachment
+  itself is neither a respite nor an encounter-end event. Existing manual adjustments remain available.
+  This is a product proposal; the source does not define transfer or duplication.
 - **Related question:** Q-CHAR-2 governs changed-build reconciliation. This question asks which
   existing values transfer even when the baseline stays unchanged.
 - **Blocked until answered:** nothing in v0.01 (the journey admits one hero once). Re-attachment is V1.
@@ -293,6 +283,40 @@ No user approval is implied by this classification.
 - **Answer:**
 
 ## Resolved questions
+
+### Q-CHAR-8: Can both Melodrama improvements increase the same existing event?
+
+- **Status:** resolved by source research 2026-09-15
+- **Research check:** 2026-09-15 — source-resolved interpretation; [rules and spec evidence](research/remaining-character-questions-review.md#q-char-8).
+- **Raised by:** V1 wizard specification research, 2026-09-14
+- **Where:** `vendor/steel-compendium/en/unified/md/feature/troubadour/level-4/melodrama.md`;
+  Forge `src/data/classes/troubadour/troubadour.ts` as structural comparison.
+- **Resolution:** Each of the two choices may add a new event or improve an already-owned event.
+  Both can improve one previously owned event for +2 drama. Adding an event then improving it gives
+  +1. Keep both choice identities; this does not permit choosing the same new event twice.
+- **Basis:** The alternative has no different-target or once-per-event restriction. This is a
+  source-supported interpretation of the two-choice grant, not an explicit sentence saying “twice”
+  or a new user ruling. The old recommendation to prohibit repeats added an unsupported restriction.
+- **Owning contract:** [class advancement](v1-character-wizard-contracts.md#advancement-through-all-ten-levels).
+- **Build handoff:** V08 later-level choice validation; outside v0.01.
+
+### Q-CHAR-12: Which potency basis applies when another characteristic exceeds the class's named one?
+
+- **Status:** resolved by source research 2026-09-15
+- **Research check:** 2026-09-15 — source-resolved; [rules and spec evidence](research/remaining-character-questions-review.md#q-char-12).
+- **Raised by:** V1 wizard specification research, 2026-09-14
+- **Where:** `vendor/steel-compendium/en/unified/md/rule/character/potency.md`,
+  `vendor/steel-compendium/en/unified/md/class/conduit.md` (**Basics**),
+  `vendor/steel-compendium/en/unified/md/chapter/the-basics.md#game-of-exceptions`;
+  Forge `src/logic/hero-logic.ts#getPotency` for comparison.
+- **Resolution:** Use the class's named potency characteristic unless a specific effect overrides
+  it. Potencies explicitly says the basis is class-determined, and Game of Exceptions makes the
+  specific class formula prevail. A Conduit with Intuition 2 and another characteristic 3 has baseline
+  potencies 0/1/2. This is a source resolution, not a user ruling.
+- **Owning contracts:** [baseline statistics](v1-character-wizard-contracts.md#baseline-statistics-and-characteristic-assignment)
+  and [R02 potencies](character-derived-values.md#110-potencies).
+- **Build handoff:** Remove stale Q-CHAR-12 uncertainty labels in A02/R02/R03 artifacts; ordinary Fury
+  example values do not change. Forge's highest-characteristic behavior remains a compatibility difference.
 
 ### Q-R-103: Which kits may a level-one Fury choose, by aspect?
 

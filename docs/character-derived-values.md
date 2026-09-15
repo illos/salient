@@ -197,11 +197,16 @@ potencyCharacteristic = Might                (class.fury.baseline)
 weak = Might − 2 = 0;  average = Might − 1 = 1;  strong = Might = 2
 ```
 
-The class names Might; the general rule names the highest characteristic. For every level-one Fury
-they agree: Might 2 and Agility 2 are fixed and no array value exceeds 2. The divergent
-modified-character case is **Open, Q-CHAR-12** (cited, not re-decided); the output carries
-`uncertainty: Q-CHAR-12` on `potencyCharacteristic` so the label is visible if a later feature
-raises another characteristic.
+**Source resolution, 2026-09-15 (Q-CHAR-12):** Use the class-named characteristic, subject to
+specific effect overrides. Potencies says the basis is determined by class; *Game of Exceptions* in
+`en/unified/md/chapter/the-basics.md` makes the specific class formula prevail over the general
+highest-characteristic description. A Conduit with Intuition 2 and another characteristic 3 has
+baseline potencies 0/1/2. Ordinary level-one Fury numbers above remain unchanged. Effects on resisting
+potency do not automatically change offensive potency.
+
+[Independent research and spec check](research/remaining-character-questions-review.md#q-char-12).
+Q-CHAR-12 is no longer an uncertainty. A02/R02/R03 artifact owners must remove stale labels; this
+documentation resolution does not claim executable artifacts are already repaired.
 
 ### 1.11 Heroic resource
 
@@ -420,7 +425,7 @@ Input: R01 `selectionSets["hero-fixture"]`.
 | Abilities (7) | Brutal Slam (signature); Out of the Way! (3 ferocity); Thunder Roar (5 ferocity); Lines of Force (aspect triggered); Pain for Pain (kit signature, bonuses included); Melee Weapon Free Strike; Ranged Weapon Free Strike | |
 
 Status: **complete**. Diagnostics: `career.soldier.languages` → one `warning` (`duplicate-language`,
-Q-R-100). Original snapshot uncertainties were Q-R-100, Q-R-101 and Q-CHAR-12. Q-R-100/101 are now resolved;
+Q-R-100). Original snapshot uncertainties were Q-R-100, Q-R-101 and Q-CHAR-12. All three are now resolved;
 update their fixture/label artifacts through A02 as noted above.
 
 **Fixture check (acceptance check 2).** `docs/hero-fixture.md` states Stamina 30, Recoveries 10,
@@ -481,7 +486,7 @@ resolved by assumption here; provisional defaults are labeled on the output.
 | Q-R-103 | kit eligibility by aspect (`kit.choice`) | resolved 2026-09-14; sourced aspect-specific option groups, Berserker/Mountain only in v0.01 |
 | Q-CHAR-10 | unspent ancestry points (`budget-unspent`) | open; the three examples spend all 3 points or over-spend, so none depends on it |
 | Q-CHAR-11 | duplicate skills (`duplicate-skill`) | open; the examples have no duplicate skill |
-| Q-CHAR-12 | potency characteristic when another characteristic exceeds the class's (1.10) | open; every level-one Fury agrees, labeled anyway |
+| Q-CHAR-12 | potency characteristic when another characteristic exceeds the class's (1.10) | source-resolved 2026-09-15; class-named basis with specific overrides; remove stale labels |
 | Q-R-3 | Stamina regain cap (R04) | open; consumes `staminaMaximum`, no effect on this document |
 
 No new `Q-R-n` question was needed: every formula in section 1 rests on a quoted sentence, and the two
