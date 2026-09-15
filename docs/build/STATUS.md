@@ -85,7 +85,7 @@ See the [CI review and run record](audits/2026-09-14-ci-history-review.md) for t
 | V10 | [Accounts: settings, password reset, friends, blocking, share codes, deletion](V10-accounts-social.md) | A09 | Outline |
 | V11 | [Character grants and delegated play](V11-character-grants.md) | V10 | Outline |
 | V12 | [Campaign chat](V12-campaign-chat.md) | A09 | Outline |
-| V13 | [Reference libraries: Rules, Foes, Items](V13-reference-libraries.md) | S01 | Reviewed — rules wiki, 2026-09-15 |
+| V13 | [Reference libraries: Rules, Foes, Items](V13-reference-libraries.md) | S01 | Committed — `dafcd8a` (rules wiki, 2026-09-15) |
 | V14 | [Foe hiding and Add-visibility](V14-foe-hiding.md) | A09 | Outline |
 | V15 | [Hero tokens](V15-hero-tokens.md) | A09 | Outline |
 | V16 | [3D dice presentation](V16-dice-presentation.md) | A09 | Outline |

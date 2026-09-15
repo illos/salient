@@ -134,3 +134,5 @@ engine and 312 app/tooling tests. Final isolated browser rerun passed 2/2 (7.6s)
 assertion; an overlapping reviewer browser run had collided in Playwright's shared artifact directory,
 so the final run used its own output directory. Earlier account/theme regression suite passed 6/6.
 `pnpm rules:check` also verified generated files. No deployment or upstream pin change occurred.
+
+Committed: `7cda2ce` (research/shared-reference decisions), `dafcd8a` (implementation and review).
