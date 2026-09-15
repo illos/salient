@@ -167,3 +167,22 @@ The engine's long-term language and runtime remain open.
 Project-authored application code is licensed under [GNU GPL v3.0](LICENSE) (`GPL-3.0-only`). Vendored
 software, Draw Steel game content, and artwork retain their respective terms; see
 [third-party notices](THIRD_PARTY_NOTICES.md).
+
+## Embedded rules compendium
+
+Open `/rules` to browse and search the complete pinned **Heroes** and **Monsters** Markdown corpus.
+The library is public and independent of campaign data. It includes reading references for creatures
+and items without creating playable characters or inventory records.
+
+- `pnpm rules:ingest` rebuilds `public/rules-data/` from the pinned Git blobs, including blobs outside
+  the sparse working tree. `pnpm dev` and `pnpm build` run ingestion automatically.
+- `pnpm rules:check` verifies the generated files against a fresh deterministic import.
+- Generated assets are ignored by Git. They contain sanitized article HTML, chapter headings, a small
+  catalog, a separate worker-search corpus and a provenance/eligibility audit.
+- Each entry preserves its SCC `id`, original `sourcePath`, source revision, book and **`sourceUrl`**
+  pointing to the corresponding Steel Compendium page. Local routes remain independent of that URL.
+- Shared types live in `shared/contracts/rules.ts`; `RuleLink` and `RuleArticleView` in
+  `web/rules/article.tsx` accept the shared IDs/data for reuse elsewhere in the application.
+
+See [the implementation contract](docs/reference-library-spec.md) and
+[licenses and attribution](THIRD_PARTY_NOTICES.md). No artwork is imported.

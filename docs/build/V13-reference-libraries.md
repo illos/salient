@@ -75,4 +75,62 @@ Candidate `Q-V-n` entries from `docs/monster-catalog-spec.md#remaining-decisions
 
 ## Work log
 
-_Empty._
+2026-09-15 — explicitly authorized by the user for the provisional internal-tool stage. Build the
+complete core-book Compendium at `/rules`, using the native stack, with clean English rendering,
+search, sidebar/category/book navigation and reusable ID-based views. The user explicitly requests
+automated ingestion; never copy/paste or hand-maintain generated Markdown. This assignment brings
+V13 forward independently of the earlier milestone ordering. Existing source attribution and
+the provisional data-repository license uncertainty are recorded in the conversation.
+
+Plan: add a deterministic TypeScript ingest command reading Git blobs at the existing pin, generated
+static catalog/articles/search documents, shared reference contracts and search ranking, a lazy-loaded
+React rules route and shared article/link components. Verify corpus inclusion, source-text rendering,
+cross-book links, exact/partial/typo searches and browser navigation. Readable source names replace
+the older acceptance requirement to display filesystem paths. Static reference assets contain no
+campaign data and require no backend mutation. Work in the current checkout because there is one
+implementer and the earlier research/spec changes already live here; slice branches isolate concurrent
+implementers under the build policy.
+
+2026-09-15 — implementation and verification:
+
+- Added the complete core reading library at `/rules`, with category/book navigation, chapter contents,
+  linked articles, exact-title/prefix/fuzzy search in a web worker, filters, direct URLs and copy-link.
+  Public access bypasses the app shell's login gate only for the rules routes; no campaign query changed.
+- `scripts/ingest-rules.ts` reads both core books from the pin, validates every article link and emits
+  sanitized HTML, metadata, search documents and an eligibility audit. The user requested `sourceUrl`
+  explicitly: every record stores its original Steel Compendium SCC permalink separately from its
+  internal route. Source IDs, source paths and the pinned revision are retained as metadata.
+- Actual generated output is `public/rules-data/`, replacing the outline's proposed `content/index/`.
+  It is ignored by Git and rebuilt automatically by dev/build. The audit is documented in
+  `docs/core-source-audit.md`. Foes and Items are topics within the unified `/rules` surface as requested.
+- 2,614 entries, 20 chapters, nine core classes, 26 categories; zero unresolved article links, copied
+  images or decorative pictographs. Expanded chapter bodies preserve nested entries; raw bodies index
+  chapter-only prose without adding expanded-book duplicates to search. Source excerpts retain spaces
+  between blocks/table cells and render line breaks correctly.
+- `pnpm check` passed: 85 engine tests, 312 app/tooling tests, clean docs links, unchanged vendor pins,
+  unchanged 403-entry runtime snapshot, successful production build. The existing main-bundle size
+  warning remains; rules UI and search worker are separate lazy chunks.
+- `pnpm exec playwright test tests/browser/rules.spec.ts tests/browser/theme.spec.ts
+  tests/browser/journey.spec.ts` passed all six tests: public reading, exact/typo search, source URLs,
+  reload/history, chapter anchors, cross-references, filters, mobile navigation, plus existing account,
+  session and theme workflows. Visually inspected home/chapter/creature pages in light/dark and mobile.
+- Search acceptance checked all 2,208 unique case-insensitive titles for first-result placement; prefix,
+  typo and book/topic filter checks also pass. Two fresh imports compare byte-for-byte in the test suite.
+- No gameplay automation, inventory writes, chat/bookmark/preview behavior or deployment is included.
+  The shared `RuleLink` and article view establish ID-based reuse for later consumers.
+
+Independent review requested after `pnpm check` passed; verdict to be recorded below.
+
+2026-09-15 — review correction: frontmatter-only ability/item facts were missing from standalone
+pages. Added an explicit readable projection for source cost, level, signature status, item echelon/type,
+kit type and other source context, and included it in search. Source-derived tests cover Back!'s
+3 Ferocity cost, Brutal Slam's signature/level metadata, Black Ash Dart's echelon/type, and Arcane Archer's
+kit type. Added browser cost visibility and an anonymous private-roster rejection assertion. This keeps
+source metadata meaningful while hiding its machine keys. A new ingest and repository check verify the fix.
+
+2026-09-15 — independent review **pass**, `rules_review`, recorded in
+[the review](reviews/V13-rules-review.md). No open blockers. Refreshed `pnpm check` passed with 85
+engine and 312 app/tooling tests. Final isolated browser rerun passed 2/2 (7.6s), including the cost
+assertion; an overlapping reviewer browser run had collided in Playwright's shared artifact directory,
+so the final run used its own output directory. Earlier account/theme regression suite passed 6/6.
+`pnpm rules:check` also verified generated files. No deployment or upstream pin change occurred.

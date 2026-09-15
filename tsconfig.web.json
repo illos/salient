@@ -28,6 +28,7 @@
     "scripts/app.ts",
     "scripts/setup-local.ts",
     "scripts/build-content.ts",
+    "scripts/ingest-rules.ts",
     "scripts/seed-content.ts",
     "vite.config.ts",
     "vitest.config.ts",

@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
-import { useEffect, useState } from 'react';
+import { lazy, Suspense, useEffect, useState } from 'react';
 import {
   createRootRoute,
   createRoute,
@@ -24,6 +24,8 @@ import { Input } from './components/ui/input';
 import { ToggleGroup, ToggleGroupItem } from './components/ui/toggle-group';
 import { THEMES, useTheme, type Theme } from './theme';
 import { ErrorNotice, Eyebrow, Field, Loading, errorMessage } from './ui';
+
+const RulesPage = lazy(() => import('./rules').then(module => ({ default: module.RulesPage })));
 
 function ConnectionStatus() {
   const convex = useConvex();
@@ -95,6 +97,9 @@ function TopNav({ displayName }: { displayName: string }) {
           </Link>
           <Link to="/characters" className={navItem}>
             Characters
+          </Link>
+          <Link to="/rules" className={navItem}>
+            Rules
           </Link>
         </nav>
         <div className="ml-auto flex items-center gap-4">
@@ -177,6 +182,7 @@ function SignOut() {
 function Shell() {
   const { isAuthenticated, isLoading } = useConvexAuth();
   const path = useRouterState({ select: state => state.location.pathname });
+  if (path === '/rules' || path.startsWith('/rules/')) return <Outlet />;
   if (path === '/login') return <Outlet />;
   if (path.startsWith('/join/') && !isAuthenticated)
     return (
@@ -371,6 +377,40 @@ const wizardRoute = createRoute({
     <WizardPage characterId={wizardRoute.useParams().characterId as Id<'characters'>} />
   ),
 });
+function rulesSearch(search: Record<string, unknown>): {
+  q?: string;
+  book?: string;
+  category?: string;
+} {
+  return {
+    q: typeof search.q === 'string' ? search.q.slice(0, 200) : undefined,
+    book: typeof search.book === 'string' ? search.book : undefined,
+    category: typeof search.category === 'string' ? search.category : undefined,
+  };
+}
+const rulesRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/rules',
+  validateSearch: rulesSearch,
+  component: () => (
+    <Suspense fallback={<Loading>Opening the compendium…</Loading>}>
+      <RulesPage filters={rulesRoute.useSearch()} />
+    </Suspense>
+  ),
+});
+const rulesArticleRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/rules/$',
+  validateSearch: rulesSearch,
+  component: () => (
+    <Suspense fallback={<Loading>Opening the compendium…</Loading>}>
+      <RulesPage
+        path={rulesArticleRoute.useParams()._splat}
+        filters={rulesArticleRoute.useSearch()}
+      />
+    </Suspense>
+  ),
+});
 export const router = createRouter({
   routeTree: rootRoute.addChildren([
     loginRoute,
@@ -381,6 +421,8 @@ export const router = createRouter({
     charactersRoute,
     characterRoute,
     wizardRoute,
+    rulesRoute,
+    rulesArticleRoute,
   ]),
   defaultErrorComponent: ({ error, reset }) => (
     <ProblemCard title="This page is unavailable">

@@ -13,9 +13,9 @@
     "play": "node src/cli.ts",
     "demo": "node src/cli.ts demo",
     "character:sources": "node scripts/inspect-character-sources.ts",
-    "dev": "vite --host 0.0.0.0",
+    "dev": "pnpm rules:ingest && vite --host 0.0.0.0",
     "dev:backend": "convex dev",
-    "build": "tsc -p tsconfig.web.json && vite build",
+    "build": "pnpm rules:ingest && tsc -p tsconfig.web.json && vite build",
     "check:engine": "tsc --noEmit && vitest run --project engine",
     "check:app": "tsc -p tsconfig.web.json && vitest run --project app --project scripts",
     "test:app": "vitest run --project app",
@@ -31,7 +31,9 @@
     "check-links": "node scripts/check-links.ts",
     "check-vendor": "node scripts/check-vendor.ts",
     "check-commit": "node scripts/check-commit.ts",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "rules:ingest": "node scripts/ingest-rules.ts",
+    "rules:check": "node scripts/ingest-rules.ts --check"
   },
   "devDependencies": {
     "@convex-dev/eslint-plugin": "4.0.0",
@@ -39,6 +41,7 @@
     "@fontsource-variable/schibsted-grotesk": "5.3.0",
     "@playwright/test": "1.63.0",
     "@tailwindcss/vite": "4.3.3",
+    "@types/mdast": "^4.0.4",
     "@types/node": "24.13.4",
     "@types/react": "19.3.0",
     "@types/react-dom": "19.3.0",
@@ -66,8 +69,19 @@
     "cn": "0.3.0",
     "convex": "1.45.0",
     "lucide-react": "1.45.0",
+    "mdast-util-to-string": "^4.0.0",
+    "minisearch": "^7.2.0",
     "react": "19.3.0",
-    "react-dom": "19.3.0"
+    "react-dom": "19.3.0",
+    "rehype-raw": "^7.0.0",
+    "rehype-sanitize": "^6.0.0",
+    "rehype-stringify": "^10.0.1",
+    "remark-gfm": "^4.0.1",
+    "remark-parse": "^11.0.0",
+    "remark-rehype": "^11.1.2",
+    "unified": "^11.0.5",
+    "unist-util-visit": "^5.1.0",
+    "yaml": "^2.9.1"
   },
   "packageManager": "pnpm@11.5.3",
   "simple-git-hooks": {

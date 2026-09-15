@@ -25,3 +25,16 @@ application operations; it is not included in the browser bundle. No new artwork
 ## Tooling
 
 Third-party npm dependencies retain their own licenses, recorded in their packages and the lockfile.
+
+The embedded `/rules` library separately generates the complete core Heroes and Monsters text as public
+static assets under `public/rules-data/` during development/build. These assets are not GPL application
+code. Each entry preserves its SCC identity, source path, source book and original Steel Compendium page
+URL; the catalog records the pinned revision. The importer copies no artwork or upstream website code.
+The page displays the Draw Steel Creator License notice and credits Steel Compendium's text preparation.
+
+Salient is an independent product published under the DRAW STEEL Creator License and is not affiliated
+with MCDM Productions, LLC. DRAW STEEL © 2026 MCDM Productions, LLC.
+
+This import is authorized for the provisional internal-tool stage. The `data-unified` repository has no
+separate license file at the pin; the website code's CC0 license is not treated as a license for the data
+repository. See [the recorded research](docs/research/embedded-compendium.md) for the distinction.

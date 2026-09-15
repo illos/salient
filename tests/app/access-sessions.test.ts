@@ -114,6 +114,8 @@ describe('authenticated campaign and session operations', () => {
     const applicant = await account(t, 'Applicant');
     const args = { name: 'Campaign', commandId: 'create-unique' };
     const campaignId = await owner.client.mutation(api.campaigns.create, args);
+    // Public rules reading never grants access to the campaign's private roster.
+    await expect(t.query(api.table.roster, { campaignId })).rejects.toThrow('Sign in');
     expect(await owner.client.mutation(api.campaigns.create, args)).toEqual(campaignId);
     await expect(
       owner.client.mutation(api.campaigns.create, { ...args, name: 'Changed' }),

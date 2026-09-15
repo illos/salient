@@ -12,7 +12,7 @@ const url =
     ? `${window.location.origin}/convex-api`
     : import.meta.env.VITE_CONVEX_URL;
 const root = createRoot(document.getElementById('root')!);
-if (!url) {
+if (!url && !/^\/rules(?:\/|$)/.test(window.location.pathname)) {
   root.render(
     <main className="flex min-h-screen flex-col items-center justify-center gap-3 bg-card p-16 text-center">
       <h1>Salient</h1>
@@ -23,7 +23,9 @@ if (!url) {
     </main>,
   );
 } else {
-  const client = new ConvexReactClient(url, { skipConvexDeploymentUrlCheck: true });
+  const client = new ConvexReactClient(url || 'http://127.0.0.1:3210', {
+    skipConvexDeploymentUrlCheck: true,
+  });
   root.render(
     <React.StrictMode>
       <ConvexBetterAuthProvider client={client} authClient={authClient}>
