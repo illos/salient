@@ -48,6 +48,10 @@ round trip. The full build has not yet been audited against the pinned Compendiu
 
 ### Targeted fixture workflow
 
+**User-confirmed verification process, 2026-09-15:** the operational procedure is now recorded in
+[Character verification with Forge Steel examples](build/character-verification.md). The summary
+below describes how the file format supports that process.
+
 Use the website to build selected ancestry/class/subclass/level combinations when a slice needs
 a concrete target. Explicitly constrain sourcebooks and selections to our eleven-class scope;
 the live random generator can include content beyond that scope. Complete the target level's

@@ -770,6 +770,14 @@ terminology as prerequisites for using it. Exact screen order and visual design 
 
 ## 11. Acceptance scenarios
 
+**Verification process confirmed by the user, 2026-09-15:** generate targeted Forge Steel
+characters, preserve their exports, verify choices/grants/values against the pinned Compendium,
+then recreate and compare them through our wizard and shared operations. Use completed
+before/after exports for progression and reuse them for eventual import/export round trips.
+Embedded future definitions are not active selections or recorded history. Follow
+[the character verification procedure](build/character-verification.md) for capture, independent
+expectations, saved-state checks and evidence reporting.
+
 These describe fuller-product outcomes, not tests already passing or automatic v0.01 gates. For the
 prototype, demonstrate the supported level-one creation/edit/review path on desktop, saved selections and
 build revisions through reload, correct permissions/locks, and the resulting effective table character.

@@ -157,6 +157,11 @@ deployment. Development data remains disposable; reset and reseed rather than mi
 
 ## Verification baseline
 
+**Character-track verification, confirmed 2026-09-15:** use
+[Forge Steel reference builds checked against the Compendium](character-verification.md) for
+targeted wizard, progression and eventual import/export comparisons. This adds independent
+character examples to the checks below; it does not replace source review or persisted readback.
+
 `pnpm check` must pass before any review request. Since S00 it runs, in order: `pnpm lint`
 (ESLint, then Prettier `--check`), `pnpm check:engine` (engine typecheck and Vitest `engine` project),
 `pnpm check:app` (app typecheck and Vitest `app` and `scripts` projects), `pnpm check-links`
