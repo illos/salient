@@ -239,6 +239,17 @@ behavior; it is not a rulebook formula or a claim that the implementation has be
 
 ### Confirmed behavior
 
+- **Adopted for now, 2026-09-15 (Q-CHAR-11):** Resolve fixed skill grants first. When two sources
+  automatically grant the same skill, keep it once and provide an unrestricted replacement choice
+  with its grant provenance. Discretionary skill choices stay within their printed eligible lists;
+  deliberately selecting an already-granted skill does not create an unrestricted replacement.
+  This applies to fixed/chosen and chosen/chosen collisions regardless of UI selection order.
+  For example, a hero already granted Nature who must choose an exploration skill chooses another
+  eligible exploration skill. Preserve explicit feature-specific replacement rules. An exhausted
+  pool needs its actual source context and is not settled by this case. Apply the same entitlement
+  rules in UI/headless evaluation. This is the user's current interpretation, open to later revision,
+  not a claim that the source expressly says fixed-only.
+
 - **Confirmed 2026-09-15 (Q-CHAR-10):** Unspent ancestry points produce a visible warning and do
   not prevent character completion or finalization. Do not require full expenditure or a separate
   acknowledgement gate. An otherwise complete devil build spending two of its three ancestry points
@@ -332,7 +343,7 @@ Input is the R01 decision ids and selection shapes; output is `complete | incomp
 diagnostics keyed by decision id, and a derived baseline in which every value carries the decision id,
 selected value and source sentence that supplied it. Status precedence (`invalid` > `unsupported` >
 `incomplete`) is a labeled engineering choice within this vocabulary; warnings never change the status. The
-baseline is distinct from live values (R03). Q-CHAR-10 now permits completion with an unspent-points warning; Q-CHAR-11 remains open. Q-CHAR-12 was resolved through
+baseline is distinct from live values (R03). Q-CHAR-10 now permits completion with an unspent-points warning; Q-CHAR-11 now follows the adopted fixed-grant/discretionary-choice policy. Q-CHAR-12 was resolved through
 [source research](research/remaining-character-questions-review.md#q-char-12) on 2026-09-15: use the
 class-named potency characteristic with specific overrides. A02 implements the evaluator against these types.
 

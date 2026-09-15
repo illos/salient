@@ -13,8 +13,9 @@ other class exceptions are not established. Q-CHAR-6's language portion now expl
 [classifies custom languages as deferred homebrew](../character-wizard-spec.md#fuller-product-scope);
 custom deity/domain portfolios are also deferred as unnecessary for the narrow playtest.
 Q-CHAR-6 is closed as a scope deferral. Q-CHAR-10 now [warns without enforcing ancestry-point expenditure](../character-wizard-spec.md#confirmed-behavior).
-The audit findings below
-remain the historical pre-answer record; the queue is current.
+Q-CHAR-11 now follows the [current user interpretation](../character-wizard-spec.md#confirmed-behavior):
+fixed duplicates grant replacements, deliberate chosen duplicates do not expand their pools.
+The audit findings below remain the historical pre-answer record; the queue is current.
 
 ## Method and result
 

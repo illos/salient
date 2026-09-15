@@ -42,7 +42,7 @@ are the shared lifecycle decisions; the remaining entries are bounded content/sc
 All 13 then-open questions received an independent pinned-source and existing-specification check on
 2026-09-15; see [the evidence report](research/remaining-character-questions-review.md). Q-CHAR-8 and
 Q-CHAR-12 are now source-resolved. The remaining 11 comprise nine product decisions and two source
-ambiguities at audit close. Subsequent Q-CHAR-2/3/4/6/10 and scoped Q-CHAR-5 answers leave **5 open questions**; remaining
+ambiguities at audit close. Subsequent Q-CHAR-2/3/4/6/10/11 and scoped Q-CHAR-5 answers leave **4 open questions**; remaining
 recommendations are unanswered.
 
 ### Q-CHAR-7: May a Revenant borrow Prismatic Scales without Wyrmplate?
@@ -77,23 +77,6 @@ recommendations are unanswered.
   don't claim project automation. Career editing cannot regrant spent points. Alternatively, preserve
   the balance for later with no spending UI. Agree the bounded workflow with inventory.
 - **Blocked until answered:** using the grant/claiming complete career support; recording it can proceed.
-- **Answer:**
-
-### Q-CHAR-11: Which skill collisions create an unrestricted replacement choice?
-
-- **Status:** open
-- **Research check:** 2026-09-15 — source ambiguity; [rules and spec evidence](research/remaining-character-questions-review.md#q-char-11).
-- **Raised by:** V1 wizard specification research, 2026-09-14
-- **Where:** `vendor/steel-compendium/en/unified/md/chapter/making-a-hero.md`, **Choosing Skills**;
-  `vendor/steel-compendium/en/unified/md/career/warden.md`; `vendor/steel-compendium/en/unified/md/class/fury.md`.
-- **Conflict or gap:** Two sources granting the same specific skill permit an unrestricted replacement.
-  Warden/Fury fixed Nature grants are clear. Choosing a duplicate from a restricted pool in order to
-  obtain an unrestricted choice is less explicit and could make UI order affect entitlement.
-- **Recommendation:** Resolve fixed grants first, with replacements for unavoidable duplicates. Free
-  selections choose distinct eligible skills not already granted; deliberate duplication does not expand
-  their pool. An exhausted pool needs its own concrete ruling. This is a proposed interpretation.
-- **Blocked until answered:** fixed/chosen or chosen/chosen collisions; fixed/fixed and noncolliding
-  selections can proceed.
 - **Answer:**
 
 ### Q-CHAR-13: Should higher-level creation offer discretionary starting treasures?
@@ -174,6 +157,25 @@ No user approval is implied by this classification.
 - **Answer:**
 
 ## Resolved questions
+
+### Q-CHAR-11: Which skill collisions create an unrestricted replacement choice?
+
+- **Status:** resolved by current user interpretation 2026-09-15 (adopted for now); [owning policy](character-wizard-spec.md#confirmed-behavior)
+- **Research check:** 2026-09-15 — source ambiguity; [rules and spec evidence](research/remaining-character-questions-review.md#q-char-11).
+- **Raised by:** V1 wizard specification research, 2026-09-14
+- **Where:** `vendor/steel-compendium/en/unified/md/chapter/making-a-hero.md`, **Choosing Skills**;
+  `vendor/steel-compendium/en/unified/md/career/warden.md`; `vendor/steel-compendium/en/unified/md/class/fury.md`.
+- **Conflict or gap:** Two sources granting the same specific skill permit an unrestricted replacement.
+  Warden/Fury fixed Nature grants are clear. Choosing a duplicate from a restricted pool in order to
+  obtain an unrestricted choice is less explicit and could make UI order affect entitlement.
+- **Accepted policy:** Resolve fixed grants first, with replacements for unavoidable duplicates. Free
+  selections choose distinct eligible skills not already granted; deliberate duplication does not expand
+  their pool. An exhausted pool needs its own concrete ruling. This is the current user-selected interpretation, not an explicit fixed-only source restriction.
+- **Answer:** “That seems to make sense. I think, let's go with it for now.” Unavoidable fixed
+  duplicates allow an unrestricted replacement; deliberate duplicates do not expand a printed
+  selection pool. Preserve explicit feature exceptions and do not infer a rule for exhausted pools.
+- **Build handoff:** A02/R02/V08 use the same grant accounting independently of UI/headless selection
+  order. This adopted policy can be revisited; the user question is answered for current work.
 
 ### Q-CHAR-10: Can a complete character intentionally leave ancestry points unspent?
 

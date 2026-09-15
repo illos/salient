@@ -237,10 +237,18 @@ group. Example: Warden and Fury both grant Nature; keep Nature once and create o
 replacement entitlement with both grant origins. Choosing the replacement does not erase the original
 source's history. [Source: Choosing Skills](../vendor/steel-compendium/en/unified/md/chapter/making-a-hero.md).
 
-Resolve fixed grants before presenting unrestricted replacements. Do not silently lose a grant by
-deduplicating a set. Nor should free choices be intentionally duplicated to manufacture unrestricted
-choices without an established interpretation: fixed-versus-chosen collisions are Q-CHAR-11.
-Skills selected as modifier targets (Passionate Artisan, Specialist) are not another skill grant.
+**Adopted for now, 2026-09-15 (Q-CHAR-11):** Resolve fixed grants before presenting unrestricted
+replacements. Do not silently lose a fixed grant by deduplicating a set. Discretionary choices select
+distinct eligible skills from their printed pools; deliberately duplicating an already-owned skill
+does not manufacture an unrestricted replacement. Apply this to fixed/chosen and chosen/chosen
+collisions independently of selection order, identically in UI/headless evaluation. A hero granted
+Nature who chooses an exploration skill selects another eligible exploration skill.
+
+This is the user's current interpretation of the ambiguous discretionary case, not a literal
+fixed-only restriction in the source. Preserve explicit feature exceptions such as God's Library.
+An exhausted pool still needs its concrete source context. Skills selected as modifier targets
+(Passionate Artisan, Specialist) are not another skill grant. See
+[the owning policy](character-wizard-spec.md#confirmed-behavior).
 
 ### All career grants
 
