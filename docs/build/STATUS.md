@@ -44,6 +44,12 @@ A08 design tokens (independent) ────────────────
 
 ## Audit follow-up
 
+**Question walkthrough complete, 2026-09-15:** All 13 reviewed questions have a source resolution,
+user decision or explicit deferral. The [deferred queue](../rules-questions-for-user.md#deferred-questions)
+retains Q-CHAR-7/9/13 until after the narrow playtest. They are not implementation gates for v0.01;
+their underlying recommendations remain undecided. This closes the questionnaire batch, not build
+verification or all later design work.
+
 The [2026-09-15 remaining-question research](../research/remaining-character-questions-review.md)
 checked all 13 then-open questions against pinned rules and existing specs. Q-CHAR-8 and Q-CHAR-12
 are source-resolved; 11 remain open (nine product decisions, two source ambiguities). A02/R02/R03

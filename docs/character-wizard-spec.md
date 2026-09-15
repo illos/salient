@@ -174,6 +174,13 @@ considers them unnecessary for the narrow playtest. Use printed supported combin
 portfolio workflow is required in the current delivery scope. Any later inclusion needs an explicit
 scope decision. This does not remove authored religious flavor.
 
+**Deferred until after the narrow playtest, confirmed 2026-09-15:** Q-CHAR-7 (Revenant borrowing
+Prismatic Scales without Wyrmplate), Q-CHAR-9 (career project-point spending while downtime projects
+are deferred), and Q-CHAR-13 (optional higher-level starting-treasure workflow). Keep their source
+research and undecided recommendations for later V1 work. The deferral neither adopts a rule for the
+borrowed trait, removes the career benefit, nor awards optional treasure. None is a playtest gate.
+See [the deferred queue](rules-questions-for-user.md#deferred-questions).
+
 In scope: creation, advancement, full editing, history, authored details, inventory integration, derived
 sheets, attachment/detachment/duplication, Director review, and required Forge Steel import. Compatible Forge
 Steel export is not required for v1. The data model must preserve the information and interchange-adapter
@@ -778,11 +785,11 @@ Director does not certify parser correctness or turn unsupported automation into
 These do not prevent implementing draft/choice evaluation and history foundations. Resolve each before
 shipping the dependent behavior; no silent default is authorized merely by listing it here.
 
-The V1 research pass supplies concrete recommendations and source evidence in
-[Q-CHAR-2 through Q-CHAR-13](rules-questions-for-user.md#open-questions). They cover the existing
-resource/XP/history questions and newly exposed choice-timing, career-point, nested-trait and
-starting-treasure cases. See [the contracts](v1-character-wizard-contracts.md#11-remaining-work-and-review-handoff)
-for work that can proceed independently. These recommendations are not user rulings.
+The [reviewed question queue](rules-questions-for-user.md) has no open items after the 2026-09-15
+user walkthrough. Q-CHAR-7/9/13 are deferred until after the playtest; the other reviewed items have
+source resolutions or user decisions recorded in their owning sections. This does not settle every
+future design detail below. See [the contracts](v1-character-wizard-contracts.md#11-remaining-work-and-review-handoff)
+for independent work. Deferred research recommendations are not user rulings.
 
 | Decision | What it affects |
 | --- | --- |

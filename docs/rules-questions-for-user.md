@@ -23,7 +23,7 @@ Rules for entries:
 ```
 ### Q-XX-n: <short title>
 
-- **Status:** open | answered YYYY-MM-DD | resolved (link to spec commit or section)
+- **Status:** open | deferred YYYY-MM-DD (resumption condition) | answered YYYY-MM-DD | resolved (link to spec commit or section)
 - **Raised by:** <slice id or audit>, YYYY-MM-DD
 - **Where:** <spec file#anchor, and Compendium paths read>
 - **Conflict or gap:** two or three sentences.
@@ -35,19 +35,21 @@ Rules for entries:
 
 ## Open questions
 
-The following V1 wizard questions are prepared for discussion, not answered defaults. Research by
-the V1 wizard thread, 2026-09-14; see [the contracts](v1-character-wizard-contracts.md). Q-CHAR-2–5
-are the shared lifecycle decisions; the remaining entries are bounded content/scope cases.
+None in this reviewed queue as of 2026-09-15. The user answered or deferred all 13 questions from
+[the pinned-rules/specification audit](research/remaining-character-questions-review.md). The three
+items below are deferred until after the narrow playtest; their recommendations are not rulings.
+Other future design work remains in its owning specifications, including class reconfiguration
+workflows beyond the language/kit decisions in Q-CHAR-5. This closes the reviewed question batch,
+not implementation or playtest verification.
 
-All 13 then-open questions received an independent pinned-source and existing-specification check on
-2026-09-15; see [the evidence report](research/remaining-character-questions-review.md). Q-CHAR-8 and
-Q-CHAR-12 are now source-resolved. The remaining 11 comprise nine product decisions and two source
-ambiguities at audit close. Subsequent Q-CHAR-2/3/4/6/10/11, Q-R-201 and scoped Q-CHAR-5 answers leave **3 open questions**; remaining
-recommendations are unanswered.
+## Deferred questions
+
+Confirmed 2026-09-15: Q-CHAR-7, Q-CHAR-9 and Q-CHAR-13 wait until after the playtest. Retain the
+source evidence and undecided alternatives for later V1 work; none blocks the narrow playtest.
 
 ### Q-CHAR-7: May a Revenant borrow Prismatic Scales without Wyrmplate?
 
-- **Status:** open
+- **Status:** deferred until after the playtest, user-confirmed 2026-09-15
 - **Research check:** 2026-09-15 — source ambiguity; [rules and spec evidence](research/remaining-character-questions-review.md#q-char-7).
 - **Raised by:** V1 wizard specification research, 2026-09-14
 - **Where:** `vendor/steel-compendium/en/unified/md/feature/trait/revenant/former-life.md` and
@@ -56,15 +58,16 @@ recommendations are unanswered.
 - **Conflict or gap:** Previous Life permits a one-point purchased trait, but grants no former signature
   trait. Prismatic Scales qualifies by cost yet asks for an immunity from “your Wyrmplate trait,” which
   the Revenant lacks. Forge's flattened damage-type variants do not resolve that dependency.
-- **Recommendation:** For this case, allow choosing one of Wyrmplate's six types with level-scaled
+- **Research recommendation (not adopted):** For this case, allow choosing one of Wyrmplate's six types with level-scaled
   immunity, without granting Wyrmplate or a second changeable immunity. Alternatively, disallow this
   borrowed trait without its prerequisite. The recommendation is not a general borrowing precedent.
-- **Blocked until answered:** this exact combination; keep it explicitly unresolved.
-- **Answer:**
+- **Resumption:** Revisit with the later V1 work that needs this behavior; no playtest implementation
+  or default is authorized by the research recommendation.
+- **Answer:** “Yep, defer all of those.” The scope deferral does not settle the underlying rule or workflow.
 
 ### Q-CHAR-9: How should career project points work while V1 downtime projects are deferred?
 
-- **Status:** open
+- **Status:** deferred until after the playtest, user-confirmed 2026-09-15
 - **Research check:** 2026-09-15 — product decision; [rules and spec evidence](research/remaining-character-questions-review.md#q-char-9).
 - **Raised by:** V1 wizard specification research, 2026-09-14
 - **Where:** Heroes clean `en/books/heroes/clean/Draw Steel Heroes.md`, **Career Benefits → Project
@@ -72,16 +75,17 @@ recommendations are unanswered.
 - **Conflict or gap:** Seven careers give 120 or 240 points. The source permits splitting them between
   qualifying projects once, retaining them, and sometimes using them before the adventure with
   Director-provided materials. Deferring downtime must not silently discard or change that benefit.
-- **Recommendation:** Preserve the grant/balance, with manual Director-recorded allocation to named
+- **Research recommendation (not adopted):** Preserve the grant/balance, with manual Director-recorded allocation to named
   core projects and resulting items through inventory authority. Label prerequisites/resolution manual;
   don't claim project automation. Career editing cannot regrant spent points. Alternatively, preserve
   the balance for later with no spending UI. Agree the bounded workflow with inventory.
-- **Blocked until answered:** using the grant/claiming complete career support; recording it can proceed.
-- **Answer:**
+- **Resumption:** Revisit with the later V1 work that needs this behavior; no playtest implementation
+  or default is authorized by the research recommendation.
+- **Answer:** “Yep, defer all of those.” The scope deferral does not settle the underlying rule or workflow.
 
 ### Q-CHAR-13: Should higher-level creation offer discretionary starting treasures?
 
-- **Status:** open
+- **Status:** deferred until after the playtest, user-confirmed 2026-09-15
 - **Research check:** 2026-09-15 — product decision; [rules and spec evidence](research/remaining-character-questions-review.md#q-char-13).
 - **Raised by:** V1 wizard specification research, 2026-09-14
 - **Where:** `docs/character-wizard-spec.md#fuller-product-scope`; Heroes clean
@@ -89,13 +93,14 @@ recommendations are unanswered.
 - **Conflict or gap:** The Director can supply starting treasures above level one, with player selection.
   Higher-level creation is required, but a level selector must not silently award optional treasure or
   duplicate retained inventory on admission.
-- **Recommendation:** An explicit Director starting-treasure allowance for new higher-level starting heroes,
+- **Research recommendation (not adopted):** An explicit Director starting-treasure allowance for new higher-level starting heroes,
   optionally filled from the book's echelon guidance, with player selection and grants applied once.
   Include its option to replace each leveled treasure/trinket with a consumable of the hero's echelon
   or lower. Existing Director inventory editing is the alternative to a dedicated picker. No automatic extra
   inventory for existing heroes merely choosing an entry level. Coordinate with inventory.
-- **Blocked until answered:** this optional workflow; higher-level build evaluation can proceed.
-- **Answer:**
+- **Resumption:** Revisit with the later V1 work that needs this behavior; no playtest implementation
+  or default is authorized by the research recommendation.
+- **Answer:** “Yep, defer all of those.” The scope deferral does not settle the underlying rule or workflow.
 
 ## Engineering follow-ups
 

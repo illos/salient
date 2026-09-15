@@ -91,15 +91,17 @@ Rulings that apply: v0.01 Fury decisions in R01 remain; they are not precedent f
 
 ## Open questions
 
-Q-CHAR-2 through Q-CHAR-13 in `docs/rules-questions-for-user.md` now supply researched recommendations
-for wizard lifecycle and bounded source/scope cases. Coordinate overlapping rest/inventory/access
-decisions with their owning threads; these are proposals, not resolved defaults.
+The 2026-09-15 user walkthrough answered or deferred the reviewed character-question batch.
+Q-CHAR-7 (Revenant/Prismatic Scales), Q-CHAR-9 (career project-point spending), and Q-CHAR-13
+(higher-level starting treasure) are explicitly deferred until after the playtest. Preserve their
+research and undecided alternatives; do not treat them as playtest gates or adopt defaults.
+Use the owning specs for accepted lifecycle, skill, completion and source resolutions. Coordinate
+later rest/inventory/access work without reopening answered questions.
 
 Candidate `Q-V-n` entries from `docs/character-wizard-spec.md#12-open-decisions`:
 
-- Current Stamina/resources/conditions when maxima or resource types change.
-- Full list of campaign values and advancement eligibility after XP clears.
-- New choices after rollback and treatment of retained future builds.
+- Incompatible resource-type reconciliation beyond the current-value/cap policy already settled by Q-CHAR-2.
+- Any remaining campaign-value enumeration beyond Q-R-201; advancement eligibility is already settled by Q-CHAR-3.
 - Handling multiple competing submissions.
 
 ## Work log

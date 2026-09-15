@@ -20,6 +20,11 @@ with full Stamina/Recoveries and other resources initialized normally; the earli
 recommendation below was rejected. The audit findings below remain the historical pre-answer
 record; the queue is current.
 
+**Walkthrough complete, 2026-09-15:** the user deferred Q-CHAR-7, Q-CHAR-9 and Q-CHAR-13 until
+after the narrow playtest. All 13 reviewed questions now have a source resolution, user decision or
+explicit deferral. The three deferred recommendations remain undecided and preserved for later V1
+work. This does not certify app implementation or settle unrelated future design details.
+
 ## Method and result
 
 Three independent research agents read the relevant local Compendium entries and surrounding Heroes
@@ -31,7 +36,7 @@ authority. References below name the actual source sections read; absence claims
 research, not a claim to have proved that no passage anywhere could bear on a case.
 
 **Result: two source resolutions, nine product decisions, two unresolved source ambiguities.**
-The [queue](../rules-questions-for-user.md) now has 11 open questions. A recommendation below is
+At that audit close, the [queue](../rules-questions-for-user.md) had 11 open questions. A recommendation below is
 unanswered unless explicitly marked source-resolved. No new user ruling or app implementation is
 claimed. Later class content remains outside the v0.01 Berserker/Mountain wizard scope.
 

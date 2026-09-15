@@ -185,7 +185,8 @@ Do not invent a generic repeatable-trait purchase policy.
   [Former Life](../vendor/steel-compendium/en/unified/md/feature/trait/revenant/former-life.md),
   [one-point](../vendor/steel-compendium/en/unified/md/feature/trait/revenant/previous-life-1-point.md),
   [two-point](../vendor/steel-compendium/en/unified/md/feature/trait/revenant/previous-life-2-points.md).
-  Borrowing a trait that relies on an absent signature trait is Q-CHAR-7.
+  Borrowing a trait that relies on an absent signature trait is Q-CHAR-7, deferred by the user
+  until after the playtest (2026-09-15). Preserve the ambiguity; no proposed adaptation is adopted.
 - **Psionic Gift:** one of Concussive Slam, Psionic Bolt or Minor Acceleration, not any signature
   ability in the corpus. The source section following Psionic Gift and its ability entries define the pool.
   [Source](../vendor/steel-compendium/en/unified/md/feature/trait/time-raider/psionic-gift.md).
@@ -288,7 +289,9 @@ and **Wealth**.
 Career project points may be divided between qualifying crafting/research projects once, with other
 prerequisites still required. They are not free item picks or a renewable resource. Source: Heroes
 clean, **Career Benefits → Project Points**. Their treatment with V1 downtime deferred needs the
-bounded product choice Q-CHAR-9. Likewise, changing a career after play cannot repeatedly mint Wealth,
+bounded product choice Q-CHAR-9, which the user deferred until after the playtest (2026-09-15).
+Preserve the sourced benefit; the deferral does not approve a spending workflow or discard the grant.
+Likewise, changing a career after play cannot repeatedly mint Wealth,
 Renown or items; its initial grant and current state are different records.
 
 ## 6. Every core class
@@ -579,7 +582,9 @@ Source starting treasure guidance for campaigns beginning above level one is dis
 give”), not an automatic treasure grant implied by changing the level selector. Source: Heroes clean,
 **For the Director → Treasures Above 1st Level**. A proposed campaign starting-treasure allowance can
 use that guidance, with owner choices and ordinary admission review; whether to include that workflow
-is Q-CHAR-13. Existing starting-equipment scope does not by itself answer it.
+is Q-CHAR-13, deferred by the user until after the playtest (2026-09-15). No optional picker or
+allowance workflow is a playtest requirement. Existing starting-equipment scope does not settle
+that later workflow or automatically award treasure.
 
 ### Source-authorized reconfiguration versus full edit
 
