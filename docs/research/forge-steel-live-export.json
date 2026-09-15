@@ -1,0 +1,70 @@
+{
+  "inspectedOn": "2026-09-15",
+  "website": "https://forgesteel.net/",
+  "websiteVersion": "14.198.0",
+  "pinnedReferenceVersion": "14.197.0",
+  "creationMethod": "Live website: Use a Premade Hero > Bethell > Export > Export as Data",
+  "localArtifact": ".playtest/forge-reference/Bethell.ds-hero",
+  "fileBytes": 161898,
+  "sha256": "d21ab1c1a0a3f7eb2a582ad246805ee53fbd703b010b480c3f85cbbdf7ac157a",
+  "hero": {
+    "name": "Bethell",
+    "ancestry": "Polder",
+    "class": "Elementalist",
+    "level": 1,
+    "selectedSubclasses": [
+      "Fire"
+    ]
+  },
+  "classDefinitionLevels": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+  ],
+  "abilityPoolSize": 40,
+  "embeddedSubclasses": [
+    "Earth",
+    "Fire",
+    "Green",
+    "Void"
+  ],
+  "choiceExamples": [
+    {
+      "level": 1,
+      "id": "elementalist-1-9",
+      "type": "Class Ability",
+      "requiredCount": 2,
+      "selection": [
+        "elementalist-ability-2",
+        "elementalist-ability-8"
+      ]
+    },
+    {
+      "level": 2,
+      "id": "elementalist-2-2",
+      "type": "Class Ability",
+      "requiredCount": 1,
+      "selection": []
+    },
+    {
+      "level": 10,
+      "id": "elementalist-10-5",
+      "type": "Perk",
+      "requiredCount": 1,
+      "selection": []
+    }
+  ],
+  "limitations": [
+    "No Salient import or export adapter executed.",
+    "No Forge Steel reimport round trip performed.",
+    "Not an audited legal-build fixture or a complete higher-level character.",
+    "Raw artifact is local and ignored; metadata is committed."
+  ]
+}

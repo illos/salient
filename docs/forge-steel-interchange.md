@@ -20,6 +20,54 @@ Investigated source: Forge Steel commit `5a846aadb623a9855a023e9403bb887a956c341
 
 ## File format and import path
 
+### Live export inspection — 2026-09-15
+
+At the user's suggestion, inspected the current [Forge Steel website](https://forgesteel.net/)
+in an isolated local browser profile and used its actual **Use a Premade Hero → Bethell → Export
+→ Export as Data** flow. The About panel reported version **14.198.0**, distinct from our pinned
+source reference **14.197.0**. Neither vendor pin was changed.
+
+The resulting `Bethell.ds-hero` is a level-one Polder Elementalist with Fire selected. It embeds:
+
+- Class definitions at every level from 1 to 10.
+- All four specialization definitions, with only Fire marked selected.
+- A 40-entry class ability pool.
+- Filled level-one ability/enchantment/ward selections, plus future choice definitions with empty
+  selections. For example, the level-two ability choice exists but its `selectedIDs` array is empty.
+
+This confirms the user's observation that an exported hero carries later-level choice structure.
+It does **not** make those options active grants or establish a completed higher-level build.
+Retained selections may also exist in dormant branches of edited characters, so level, active
+branch and actual selection must all participate in determining effective grants.
+
+[Inspection metadata](research/forge-steel-live-export.json) records the version observed, file
+fingerprint and representative populated/empty choices. The actual 161,898-byte export is retained
+locally at `.playtest/forge-reference/Bethell.ds-hero` (ignored, not a committed content asset).
+This is an actual website-export inspection, not a successful Salient import/export or a reimport
+round trip. The full build has not yet been audited against the pinned Compendium.
+
+### Targeted fixture workflow
+
+Use the website to build selected ancestry/class/subclass/level combinations when a slice needs
+a concrete target. Explicitly constrain sourcebooks and selections to our eleven-class scope;
+the live random generator can include content beyond that scope. Complete the target level's
+choices before declaring a fixture complete, then export its data and readable sheet.
+
+Trace selected features and automatic grants against the pinned Compendium before accepting
+expected results. Preserve website version, sourcebook IDs, exact export and any differences
+from our pinned reference. A current website result must not silently advance vendored rules.
+
+One low-level export can inform progression-definition mapping across later levels. To test actual
+advancement, save separate completed exports before and after a transition, then compare the
+specific chosen grants and derived values. Preserve these as distinct observations; the embedded
+future definitions are not chronological character history. Recreate accepted targets through our
+wizard/headless paths, then use the same data in later import/export round-trip tests.
+
+The supplied official PDFs remain useful independent sheet comparisons; these structured exports
+add selectable progression detail and direct interchange test material.
+
+### Pinned serializer findings
+
 - **Current export:** `<hero name>.ds-hero` (fallback name `Unnamed Hero`). The data command passes the entire `Hero` object to `Utils.saveFile`.
 - **Encoding:** plain JSON, serialized with tab indentation by `JSON.stringify(data, null, '\t')`, downloaded as `application/octet-stream`. There is no archive, compression, wrapper, schema version, or application version added by this exporter.
 - **Accepted extensions:** `.drawsteel-hero` and `.ds-hero`. The picker calls `file.text()`, `JSON.parse`, and a TypeScript cast to `Hero`. That cast supplies no runtime validation.
