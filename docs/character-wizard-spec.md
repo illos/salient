@@ -239,6 +239,14 @@ behavior; it is not a rulebook formula or a claim that the implementation has be
 
 ### Confirmed behavior
 
+- **Confirmed 2026-09-15 (Q-CHAR-10):** Unspent ancestry points produce a visible warning and do
+  not prevent character completion or finalization. Do not require full expenditure or a separate
+  acknowledgement gate. An otherwise complete devil build spending two of its three ancestry points
+  is `complete` with a `budget-unspent` warning. Preserve any remaining required nested choices;
+  this warning does not complete unrelated unfinished decisions. Overspending remains invalid.
+  Later spending follows normal editing/review, without a new in-play reserve-spending permission.
+  The shared evaluator returns the same nonblocking diagnostic to UI and headless clients.
+
 - Confirmed 2026-09-14 (Q-R-103), with [independent source research](research/fury-kit-eligibility.md):
   Berserker/Reaver use the 21 ordinary Chapter 6 kits; Stormwight uses Boren, Corven, Raden or Vuken.
   This follows the aspect-specific Kit/Beast Shape grants and separate source sections. Do not infer
@@ -324,7 +332,7 @@ Input is the R01 decision ids and selection shapes; output is `complete | incomp
 diagnostics keyed by decision id, and a derived baseline in which every value carries the decision id,
 selected value and source sentence that supplied it. Status precedence (`invalid` > `unsupported` >
 `incomplete`) is a labeled engineering choice within this vocabulary; warnings never change the status. The
-baseline is distinct from live values (R03). Remaining questions are Q-CHAR-10 and Q-CHAR-11. Q-CHAR-12 was resolved through
+baseline is distinct from live values (R03). Q-CHAR-10 now permits completion with an unspent-points warning; Q-CHAR-11 remains open. Q-CHAR-12 was resolved through
 [source research](research/remaining-character-questions-review.md#q-char-12) on 2026-09-15: use the
 class-named potency characteristic with specific overrides. A02 implements the evaluator against these types.
 

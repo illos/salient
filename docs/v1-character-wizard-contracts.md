@@ -157,7 +157,11 @@ its signature and parent section are not additional purchased options.
 
 Budgets are sourced in each ancestry's `<ancestry>-traits` entry, except Revenant's budget, which is
 under [Tough But Withered](../vendor/steel-compendium/en/unified/md/feature/trait/revenant/tough-but-withered.md).
-Minimum expenditure/allowing intentional unspent points is Q-CHAR-10; over-budget selections are invalid.
+**Confirmed 2026-09-15 (Q-CHAR-10):** Unspent ancestry points warn without blocking completion.
+Do not require spending the full budget or a separate acknowledgement gate. An otherwise complete
+selection spending two of three points remains `complete` with a warning, consistently in UI/headless
+results. Other missing required choices still matter, and over-budget selections remain invalid.
+Later spending uses ordinary editing/review; no new in-play reserve is granted.
 Do not invent a generic repeatable-trait purchase policy.
 
 ### Nested ancestry choices

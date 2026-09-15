@@ -42,7 +42,7 @@ are the shared lifecycle decisions; the remaining entries are bounded content/sc
 All 13 then-open questions received an independent pinned-source and existing-specification check on
 2026-09-15; see [the evidence report](research/remaining-character-questions-review.md). Q-CHAR-8 and
 Q-CHAR-12 are now source-resolved. The remaining 11 comprise nine product decisions and two source
-ambiguities at audit close. Subsequent Q-CHAR-2/3/4/6 and scoped Q-CHAR-5 answers leave **6 open questions**; remaining
+ambiguities at audit close. Subsequent Q-CHAR-2/3/4/6/10 and scoped Q-CHAR-5 answers leave **5 open questions**; remaining
 recommendations are unanswered.
 
 ### Q-CHAR-7: May a Revenant borrow Prismatic Scales without Wyrmplate?
@@ -77,21 +77,6 @@ recommendations are unanswered.
   don't claim project automation. Career editing cannot regrant spent points. Alternatively, preserve
   the balance for later with no spending UI. Agree the bounded workflow with inventory.
 - **Blocked until answered:** using the grant/claiming complete career support; recording it can proceed.
-- **Answer:**
-
-### Q-CHAR-10: Can a complete character intentionally leave ancestry points unspent?
-
-- **Status:** open
-- **Research check:** 2026-09-15 — product decision; [rules and spec evidence](research/remaining-character-questions-review.md#q-char-10).
-- **Raised by:** V1 wizard specification research, 2026-09-14
-- **Where:** Heroes clean **Ancestry Traits**;
-  `vendor/steel-compendium/en/unified/md/feature/trait/devil/devil-traits.md` and
-  `vendor/steel-compendium/en/unified/md/feature/trait/memonek/memonek-traits.md`.
-- **Conflict or gap:** The source provides a budget “to spend” and forbids exceeding it, but does not
-  expressly make spending every point mandatory. Completion must distinguish unfinished from intentional.
-- **Recommendation:** Permit acknowledged unspent points with a warning. Later spending follows the
-  established edit/review flow; no extra in-play spending permission. Overspending remains invalid.
-- **Blocked until answered:** final completion status for intentionally under-budget builds only.
 - **Answer:**
 
 ### Q-CHAR-11: Which skill collisions create an unrestricted replacement choice?
@@ -189,6 +174,24 @@ No user approval is implied by this classification.
 - **Answer:**
 
 ## Resolved questions
+
+### Q-CHAR-10: Can a complete character intentionally leave ancestry points unspent?
+
+- **Status:** resolved 2026-09-15; [owning policy](character-wizard-spec.md#confirmed-behavior)
+- **Research check:** 2026-09-15 — product decision; [rules and spec evidence](research/remaining-character-questions-review.md#q-char-10).
+- **Raised by:** V1 wizard specification research, 2026-09-14
+- **Where:** Heroes clean **Ancestry Traits**;
+  `vendor/steel-compendium/en/unified/md/feature/trait/devil/devil-traits.md` and
+  `vendor/steel-compendium/en/unified/md/feature/trait/memonek/memonek-traits.md`.
+- **Conflict or gap:** The source provides a budget “to spend” and forbids exceeding it, but does not
+  expressly make spending every point mandatory. Completion must distinguish unfinished from intentional.
+- **Accepted policy:** Permit unspent points with a warning, without requiring a separate acknowledgement. Later spending follows the
+  established edit/review flow; no extra in-play spending permission. Overspending remains invalid.
+- **Answer:** Warn, but do not enforce spending. Unspent points alone do not block completion;
+  an otherwise complete build stays complete. Return the same warning through shared UI/headless
+  evaluation. Other required choices and the maximum budget retain their existing validation.
+- **Build handoff:** A02/R02/V08 align completion diagnostics with this decision; docs do not claim
+  executable verification.
 
 ### Q-CHAR-6: Does core-only scope allow custom languages and deity portfolios?
 
