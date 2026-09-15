@@ -25,6 +25,15 @@ even though the v0.01 scope below now defers hiding; the scope decision, not the
 Resolved 2026-09-14 (Q-REC-1): the code is not removed. It stays dormant: the controls are not exposed in
 the v0.01 UI or command registry, and every loaded foe is visible until foe hiding returns in V1.
 
+**Ingestion assessment, 2026-09-15:** all 438 core stat blocks are already readable in the generated
+Rules library, while the shared structured snapshot and live add operation still select only Goblin
+Warrior. The [foe-track kickoff](research/foe-catalog-kickoff.md) and
+[core inventory](research/foe-catalog-audit-2026-09-15.json) record current source coverage, extraction
+checks and exceptions. The user clarified that the foe track owns correct source ingestion into a
+shared format for app and parser consumers; interpretation/execution belongs to the parser branch.
+The proposed next deliverable is a deterministic all-core monster package preserving complete source
+and structured features. This assessment does not implement that package or extend live foe support.
+
 The [source audit](research/monster-import-audit.md) records the corpus counts, observed inconsistencies, and
 limits of the exploratory checks. This document builds on [the product inventory](product-features.md),
 [engine architecture](engine-architecture.md), and [storage research](research/content-storage-options.md).
