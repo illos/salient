@@ -1,0 +1,70 @@
+{
+  "sourcePage": "https://www.mcdmproductions.com/draw-steel-resources",
+  "inspectedOn": "2026-09-15",
+  "purpose": "Official example-sheet comparison candidates; not canonical rules or implemented fixtures.",
+  "files": [
+    {
+      "name": "DwarfFury",
+      "url": "https://files.mcdmproductions.com/DrawSteel/DwarfFury.pdf",
+      "sha256": "170f7480f0c57b6954b008f78940a2ee48eed5061dab54637ef20b05db3133c3",
+      "pages": 2,
+      "printedLevel": "not filled"
+    },
+    {
+      "name": "HighElfTactician",
+      "url": "https://files.mcdmproductions.com/DrawSteel/HighElfTactician.pdf",
+      "sha256": "459e2651d066b5464c2845ddc18488c732f3885e72c36f39498d9562a1f746cd",
+      "pages": 2,
+      "printedLevel": "not filled"
+    },
+    {
+      "name": "HumanCensor",
+      "url": "https://files.mcdmproductions.com/DrawSteel/HumanCensor.pdf",
+      "sha256": "635a19b4a19dfb78b54b5face9cca10e4dfee2efaf51b7da9c70838fab5ffaf5",
+      "pages": 2,
+      "printedLevel": "not filled"
+    },
+    {
+      "name": "HumanNull",
+      "url": "https://files.mcdmproductions.com/DrawSteel/HumanNull.pdf",
+      "sha256": "7b68849e3faa8449837b88b37e3b2397591a5d893efe648bb550317c26cab6bb",
+      "pages": 2,
+      "printedLevel": "not filled"
+    },
+    {
+      "name": "HumanTalent",
+      "url": "https://files.mcdmproductions.com/DrawSteel/HumanTalent.pdf",
+      "sha256": "adceeadbbe0897862faf2b790117608bdbb95a12c4ee162e42a4a1c4fe7cdd68",
+      "pages": 2,
+      "printedLevel": "not filled"
+    },
+    {
+      "name": "OrcConduit",
+      "url": "https://files.mcdmproductions.com/DrawSteel/OrcConduit.pdf",
+      "sha256": "a3a5838c701029bb882616929445ec119c6c20f30e6f2e20f69f09aef7ebd950",
+      "pages": 2,
+      "printedLevel": "not filled"
+    },
+    {
+      "name": "PolderElementalist",
+      "url": "https://files.mcdmproductions.com/DrawSteel/PolderElementalist.pdf",
+      "sha256": "731d4f15fa02ac8d4ac350dc9939af92238a533358a3d9eb1e9c189d474e2375",
+      "pages": 2,
+      "printedLevel": "not filled"
+    },
+    {
+      "name": "PolderShadow",
+      "url": "https://files.mcdmproductions.com/DrawSteel/PolderShadow.pdf",
+      "sha256": "3fef1bef24744261a90005bf3cb1a4286a89ffe4e10c00a2ced3968b422a751a",
+      "pages": 2,
+      "printedLevel": "not filled"
+    },
+    {
+      "name": "WodeElfTroubadour",
+      "url": "https://files.mcdmproductions.com/DrawSteel/WodeElfTroubadour.pdf",
+      "sha256": "7ffbb8b0d3c8bd35988ed6ef0c573e86f0e78bf97ab1921cd95c19c73ebc8a79",
+      "pages": 2,
+      "printedLevel": "not filled"
+    }
+  ]
+}

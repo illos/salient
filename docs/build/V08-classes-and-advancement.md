@@ -106,6 +106,11 @@ Candidate `Q-V-n` entries from `docs/character-wizard-spec.md#12-open-decisions`
 
 ## Shared class knowledge
 
+The user supplied [official pregenerated PDFs](../research/official-pregen-pdfs.md) as possible
+early parity milestones. Use them as independent complete-sheet comparison candidates as the
+required class/ancestry/background choices become supported. The nine examples supplement the
+eleven-class and progression checks; PDF equality is not rules authority or import/export proof.
+
 As each class slice is researched and built, retain concise class notes beside its sourced decision
 contract and link them from the coverage report. Reuse existing research; avoid a separate tracker.
 Each note covers:
