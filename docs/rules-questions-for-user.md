@@ -42,28 +42,8 @@ are the shared lifecycle decisions; the remaining entries are bounded content/sc
 All 13 then-open questions received an independent pinned-source and existing-specification check on
 2026-09-15; see [the evidence report](research/remaining-character-questions-review.md). Q-CHAR-8 and
 Q-CHAR-12 are now source-resolved. The remaining 11 comprise nine product decisions and two source
-ambiguities at audit close. Subsequent Q-CHAR-2/3/4 answers leave **8 open questions**; remaining
+ambiguities at audit close. Subsequent Q-CHAR-2/3/4 and scoped Q-CHAR-5 answers leave **7 open questions**; remaining
 recommendations are unanswered.
-
-### Q-CHAR-5: Do source-authorized reconfigurations need full-edit approval?
-
-- **Status:** open
-- **Research check:** 2026-09-15 — product decision; [rules and spec evidence](research/remaining-character-questions-review.md#q-char-5).
-- **Raised by:** V1 wizard specification research, 2026-09-14
-- **Where:** `docs/character-wizard-spec.md#4-wizard-flows`; sources
-  `vendor/steel-compendium/en/unified/md/chapter/kits.md#changing-your-kit`,
-  `vendor/steel-compendium/en/unified/md/feature/conduit/level-1/prayer.md`, and
-  `vendor/steel-compendium/en/unified/md/chapter/making-a-hero.md` (I Speak Their Language; Changing
-  Character Options). Related research: `docs/research/respite-rules.md`.
-- **Conflict or gap:** Attached full edits require review; source-authorized respite changes and
-  filling deferred language slots are not level-ups. Their application approval path is unspecified.
-- **Recommendation:** Scoped, logged operations without review for choices explicitly permitted by
-  source at that time, including filling a retained language entitlement. No unrelated build changes
-  or extra entitlements. Preserve combat/session locks. Do not automatically enable the optional
-  general respite ability-change rule for every campaign.
-- **Blocked until answered:** reconfiguration activation policy; initial selections and definitions
-  can proceed. Coordinate the respite operation with its owning thread.
-- **Answer:**
 
 ### Q-CHAR-6: Does core-only scope allow campaign-specific languages and deity portfolios?
 
@@ -230,6 +210,32 @@ No user approval is implied by this classification.
 - **Answer:**
 
 ## Resolved questions
+
+### Q-CHAR-5: Do source-authorized reconfigurations need full-edit approval?
+
+- **Status:** resolved for languages and kits 2026-09-15; [owning policy](character-wizard-spec.md#language-edits-and-respite-kit-changes)
+- **Research check:** 2026-09-15 — product decision; [rules and spec evidence](research/remaining-character-questions-review.md#q-char-5).
+- **Raised by:** V1 wizard specification research, 2026-09-14
+- **Where:** `docs/character-wizard-spec.md#4-wizard-flows`; sources
+  `vendor/steel-compendium/en/unified/md/chapter/kits.md#changing-your-kit`,
+  `vendor/steel-compendium/en/unified/md/feature/conduit/level-1/prayer.md`, and
+  `vendor/steel-compendium/en/unified/md/chapter/making-a-hero.md` (I Speak Their Language; Changing
+  Character Options). Related research: `docs/research/respite-rules.md`.
+- **Conflict or gap:** Attached full edits require review; source-authorized respite changes and
+  filling deferred language slots are not level-ups. Their application approval path is unspecified.
+- **Original recommendation (not adopted as a blanket policy):** Exempt source-authorized narrow
+  changes, including languages, from full-edit approval.
+- **Answer:** Language changes use ordinary edits and existing Director approval, including filling
+  deferred language slots. Kits have a dedicated swap option in the respite gameplay loop, without
+  a separate full-edit submission. Kits also remain selectable in the regular character editor;
+  outside the respite path, these changes require normal Director approval. Preserve the source's
+  activity cost and eligibility for respite swaps, log/finalize
+  the resulting revision, and expose the same shared operation headlessly.
+- **Scope:** No approval exemption was established for prayers, wards, augmentations or other class
+  changes. Their exact respite workflows remain in [respite research question 3](research/respite-rules.md#8-product-decision-queue);
+  existing full-edit policy applies meanwhile. Optional general ability swapping remains separate.
+- **Build handoff:** V01/V08 implement the kit activity and ordinary language-edit path. Respite
+  remains outside v0.01. This decision is not implementation evidence.
 
 ### Q-CHAR-4: What happens when the owner makes new choices after restoring an earlier build?
 

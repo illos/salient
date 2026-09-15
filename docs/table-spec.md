@@ -1606,6 +1606,17 @@ activation operations call the same helper. Characters not in the encounter are 
 
 ### Respite mode
 
+**Kit-change option, confirmed 2026-09-15 (Q-CHAR-5):** The respite loop provides a dedicated,
+owner-controlled option to swap to an eligible kit as the source permits. It is a logged respite
+activity with no separate full-edit approval queue; preserve the ordinary activity cost and actual
+source-specific exceptions. Finalizing the change records a build revision through the shared
+UI/headless operation. Apply the current-value policy separately from actual respite restoration.
+Kit swaps made through the regular character editor use normal Director approval; the respite
+activity is the scoped exception. Language changes use normal edits and existing Director approval; other class reconfiguration
+exemptions are not established by this ruling. See [the owning wizard policy](character-wizard-spec.md#language-edits-and-respite-kit-changes)
+and [Changing Your Kit](../vendor/steel-compendium/en/unified/md/chapter/kits.md#changing-your-kit).
+This is fuller V1 work and remains outside v0.01.
+
 Confirmed: respite is its own dedicated table mode, with a self-contained gameplay loop that the Director
 starts and ends. It has mechanics to support rather than being only a pause or a descriptive log entry.
 

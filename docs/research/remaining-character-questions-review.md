@@ -7,7 +7,9 @@ Subsequent user decisions: Q-CHAR-2 now [preserves current amounts with downward
 superseding the deficit-preservation proposal below. Q-CHAR-3 now [uses admission-level advancement eligibility](../character-wizard-spec.md#level-up),
 with the campaign awarding XP and the character sheet owning level-up steps. Q-CHAR-4 now
 [appends a new snapshot when restoring a build](../character-wizard-spec.md#5-progression-history),
-with later edits continuing from that newest entry. The audit findings below
+with later edits continuing from that newest entry. Q-CHAR-5 now [uses normal edits for languages
+and a dedicated respite option for kits](../character-wizard-spec.md#language-edits-and-respite-kit-changes);
+other class exceptions are not established. The audit findings below
 remain the historical pre-answer record; the queue is current.
 
 ## Method and result

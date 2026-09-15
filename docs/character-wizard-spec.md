@@ -336,6 +336,29 @@ review.
 All flows preserve independent inventory when changing progression. A historical point can be an incomplete
 build; restoring it to a draft does not make it campaign-ready automatically.
 
+### Language edits and respite kit changes
+
+**Confirmed 2026-09-15 (Q-CHAR-5):** Language changes, including filling a previously deferred
+language choice, use the normal edit workflow and its existing Director approval rules. No special
+language-change operation or approval exemption is required. Preserve existing language entitlements;
+this workflow decision does not grant extra languages.
+
+Kit swapping is also available in the regular character editor, where it follows normal Director
+approval rules outside the respite path (including the established owning-Director exception).
+Kit swapping has a dedicated option in the respite gameplay loop. The owner selects an eligible kit
+through that scoped, logged activity without a separate full-edit approval submission. Apply the
+source's ordinary respite-activity cost and any actual named exceptions; the option does not grant
+unlimited free swaps. It cannot carry unrelated build edits. Finalization records a build revision,
+with current values reconciled under Q-CHAR-2 and respite restoration handled at its actual boundary.
+Use the same shared operation for UI and headless clients, respecting applicable session permissions.
+Respite remains deferred beyond v0.01.
+
+This ruling covers languages and kits only. It does not establish approval exemptions for prayers,
+wards, augmentations or other class reconfigurations, nor enable optional general ability swapping.
+The existing full-edit policy remains unless a specific future respite contract establishes another
+path. See [the respite mode](table-spec.md#respite-mode) and
+[the source research](research/remaining-character-questions-review.md#q-char-5).
+
 ### Main creation and editing
 
 Proposed user flow: choose/create an owned character, establish a target level, work through the applicable

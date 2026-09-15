@@ -142,11 +142,14 @@ separately. The book also offers an explicitly optional rule permitting any numb
 and heroic ability swaps as one respite activity. That optional rule is not automatically active because
 full editing exists.[^5][^6]
 
-Salient already keeps full edits review-gated for another owner's attached character and scoped level-ups
-ungated. It has not yet settled whether a narrow source-permitted respite change is another ungated
-operation or a full-edit submission. The owner still makes underlying build choices; the Director's
-table authority does not silently grant build authorship. A decision here belongs jointly in the
-[wizard spec](../character-wizard-spec.md) and [table spec](../table-spec.md#respite-mode).
+**Confirmed 2026-09-15 (Q-CHAR-5):** Kit swapping has a dedicated, logged respite option without a
+separate full-edit approval submission. It retains source eligibility and activity cost. Kits can
+also change in the regular character editor with normal Director approval outside respite. Language
+changes, including filling deferred slots, follow normal edits and existing Director approval.
+Other class reconfiguration exemptions remain undecided; this is not a blanket permission or an
+activation of optional general ability swapping. The owner still makes underlying build choices.
+See the [wizard policy](../character-wizard-spec.md#language-edits-and-respite-kit-changes) and
+[table policy](../table-spec.md#respite-mode); both UI and headless use the same operation.
 
 ### Downtime remains a separate scope boundary
 
@@ -299,15 +302,15 @@ for the product discussion.
 
 ## 8. Product decision queue
 
-Question 1's participation choice is now settled as Director-selected participants; the remaining questions are
-unanswered. The recommendations are independent proposals, not a package whose
+Question 1's participation choice is settled as Director-selected participants. Question 3 is now
+partially settled for kits by Q-CHAR-5; other named class reconfiguration workflows remain undecided. The recommendations are independent proposals, not a package whose
 acceptance is implied by continuing the discussion. Record decisions in the owning specs one at a time.
 
 | Order | Question to resolve | Recommendation and reason |
 | --- | --- | --- |
 | 1 — settled | Whole-party respite or selectable participants? | Confirmed Director selection, with the current party selected by default and individual exclusions available. Supersedes the intervening whole-party-only choice. Source-specific differences in benefits remain; interruption behavior is still question 5. |
 | 2 | Can respite continue between closed game sessions so players can make their choices asynchronously? | Support a campaign respite that can span sessions, with narrowly scoped permissions. Keep closed session history immutable and record later actions in an appropriate current history context. This changes the current running-session-only gameplay boundary and needs explicit acceptance. |
-| 3 | Do source-permitted kit/ward/augmentation changes apply directly, or require the existing full-edit review? | Add a narrow owner-controlled respite operation for only the source-permitted choices, without another approval queue. Keep unrelated full edits under their existing review policy. |
+| 3 — kits settled | Which other source-permitted class reconfigurations need a dedicated respite path? | Q-CHAR-5 confirms dedicated kit swaps without full-edit review, while languages use normal edits/approval. No equivalent exemption is established for wards/prayers/augmentations; the earlier broad exemption recommendation is not accepted. Retain existing full-edit policy pending specific design. |
 | 4 | Must eligible level-ups be completed before the Director finishes respite, or may a hero finish those choices later? | Prefer a completion flow that exposes and resolves required build choices, using the final baseline for restoration. Define an explicit deferral path if offline players must not delay the group; never choose a player's build silently. |
 | 5 | How should the Director record an interruption and move back into play? | Provide an explicit interruption outcome, no ordinary completion benefits, and preservation of already-real consequences. Starting combat then follows its existing explicit setup; interruption is not a combat Void/reset. |
 | 6 | Should optional ability swapping and alternative advancement modes have dedicated V1 controls? | Keep ordinary source-granted changes separate. Offer optional unrestricted class-ability swapping only through an explicit campaign choice; decide alternative advancement within the progression work, without silently selecting it here. |

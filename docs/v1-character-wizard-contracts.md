@@ -569,9 +569,14 @@ is Q-CHAR-13. Existing starting-equipment scope does not by itself answer it.
 The source permits changing kits, various wards/prayers/augmentations, and other specifically named
 choices at respite; it also gives examples of changing options for fun between sessions and an
 optional respite ability-change rule. These are different from a scoped level-up. Keep the source
-permission with each decision. Whether source-authorized changes use an ungated scoped application
-operation or existing full-edit review is Q-CHAR-5. Do not silently enable the optional rule for all
-campaigns. [Changing Character Options](../vendor/steel-compendium/en/unified/md/chapter/making-a-hero.md#changing-character-options).
+permission with each decision. **Confirmed 2026-09-15 (Q-CHAR-5):** Language changes, including
+filling a deferred slot, use normal edits with existing Director approval. Kit swaps use a dedicated,
+logged respite activity without separate full-edit approval, retaining source eligibility/activity
+cost and shared UI/headless behavior. Kits remain editable in the regular character editor with
+normal Director approval outside that respite path. No blanket exception was approved for prayers, wards or other
+class changes; those remain under existing full-edit policy until their specific respite workflow
+is settled. Do not silently enable the optional rule for all campaigns. See
+[the owning workflow](character-wizard-spec.md#language-edits-and-respite-kit-changes). [Changing Character Options](../vendor/steel-compendium/en/unified/md/chapter/making-a-hero.md#changing-character-options).
 
 ### Revision activation proposal
 

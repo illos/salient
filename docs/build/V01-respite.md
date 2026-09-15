@@ -32,9 +32,12 @@ spec and stops where it has not yet decided.
 - `docs/v1-spec-checkpoint.md#release-scope` — respite included; montage/negotiation, downtime projects, nested activities deferred.
 - `docs/pre-alpha-design-gaps.md#respite-and-fictional-time--deferred-beyond-v001` — the deferral this slice lifts; no invented resets or free reuse.
 - `docs/table-spec.md#8-continue-exploring` — "FreePlay mechanics" row: outside-combat resource/reuse rules, Recoveries and fictional time.
-- `docs/character-wizard-spec.md#level-up` — advancement eligibility method still to be specified; respite hands off here.
+- `docs/character-wizard-spec.md#level-up` — Q-CHAR-3 confirms campaign XP awards and character-sheet level-up ownership, including transferred eligibility.
+- `docs/character-wizard-spec.md#language-edits-and-respite-kit-changes` — Q-CHAR-5 confirms dedicated kit swaps in respite; language changes use normal edits/approval.
 
 ## In scope
+
+- Dedicated, logged kit-swap activity with shared UI/headless behavior, source eligibility/activity cost and no separate full-edit approval. Finalization records a build revision. Regular-editor kit changes remain available with normal Director approval outside respite. No language-specific route or blanket class-reconfiguration exemption (Q-CHAR-5).
 
 - A sourced respite contract document: what a respite restores, what it costs in fictional time, what choices it offers, and how Victories convert to XP, each claim citing a Compendium path.
 - Registered shared operations to start and end respite, with ordered attributed log entries and audience-correct reads.
@@ -92,11 +95,11 @@ No ruling in `docs/gameplay-decision-record.md` covers respite; there is nothing
 Candidate `Q-V-n` entries (not yet filed):
 
 - Respite participation default (`docs/v1-roadmap.md#current-discussion`; `docs/research/respite-rules.md#8-product-decision-queue` question 1) — owned by the user's thread; do not file, wait for the spec.
-- Respite spanning closed sessions, kit/ward changes without review, level-up completion timing, interruption recording, unused optional choices, reversal (`docs/research/respite-rules.md#8-product-decision-queue` questions 2–8) — same ownership.
+- Respite spanning closed sessions, other class changes without review (kits resolved by Q-CHAR-5), level-up completion timing, interruption recording, unused optional choices, reversal (`docs/research/respite-rules.md#8-product-decision-queue` questions 2–8) — same ownership.
 - Interrupted rest with until-end effects, level-ten at completion, Bounce Back Fast, next-respite binding, stacked Recovery modifications, extra-activity stacking (`docs/research/respite-rules.md#9-bounded-rules-uncertainties`) — candidate `Q-V-n` rules questions once the slice is claimed.
 - Relationship of respite to the downtime system (`docs/table-spec.md#respite-mode`, "explicitly unresolved").
 - Interruption and session closure during respite (`docs/table-spec.md#respite-mode`).
-- Advancement eligibility method, including XP after campaign transfer (`docs/character-wizard-spec.md#level-up`).
+- Q-CHAR-3 advancement eligibility is resolved; integrate the character-sheet level-up handoff (`docs/character-wizard-spec.md#level-up`).
 
 ## Work log
 
