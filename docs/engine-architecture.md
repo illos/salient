@@ -518,6 +518,16 @@ layer: registered operations call the adapter when they need rules evaluation, a
 by A01 (`session.note`, `table.roll`, `card.respond`) do not. Revisit placement only if a concrete
 limit appears (bundle size, execution time, or a non-TypeScript client that must host the engine).
 
+Assessment note (V22, 2026-09-15): the historical checkout/A01 notes above do not describe the
+current gameplay call path. Registered ability operations in `convex/lib/abilityOperations.ts` use
+`convex/lib/resolve.ts` for content/live-state adapters and call the pure arithmetic in
+`shared/resolve/index.ts`; the operations journal costs, damage and effective result records.
+`convex/lib/engine.ts` still wraps the separate `src/engine.ts` experiment, but no registered operation
+calls that wrapper. The live tier parser handles supported damage and retains other clauses for
+manual resolution; whole-ability parsing, source-specific saves and Ferocity grants are not thereby
+automated. New bounded automation should extend the shared resolution/journal path while preserving
+the experiment as reference. See [the engine/parser assessment](build/V22-engine-parser-assessment.md).
+
 The [v1 tech stack](v1-tech-stack-spec.md) records the recommended React frontend, selected Better Auth,
 Cloudflare/Convex Cloud hosting, and future home-server/LAN portability. Authoritative calculations should run
 server-side while browser interactions remain responsive. Keep the engine runnable on a home server as well
