@@ -6,6 +6,16 @@ whose document is an outline until claimed).
 
 ## Dependency graph
 
+### Character track assessment — 2026-09-15
+
+| Id | Slice | Depends on | Status | Owner |
+| --- | --- | --- | --- | --- |
+| V24 | [Character wizard assessment and delivery proposal](V24-character-wizard-assessment.md) | A09; assesses A02/V21 | Assessment complete; next implementation slice proposed | Codex, character wizard thread |
+
+V24 lives on `slice/V24` in `/srv/presidium/projects/salient/characters`, based on `e83930e`.
+Assessment only; no backend/runtime changes. The user reaffirmed Forge Steel as a working structural
+reference and both import/export as planned features. V08 remains the broader implementation outline.
+
 ```
 S00 process tooling ─────────────────────────────────────────────┐
 S01 content pipeline ──┬──> R01 Fury decisions ──> R02 derived ──> R03 live state ──┐

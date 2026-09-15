@@ -2,6 +2,12 @@
 
 ## Requirement and investigation scope
 
+**User reaffirmation, 2026-09-15:** retain both import and export as planned features. The working
+Forge Steel wizard is a reference for choice ordering and specific grants, including nested and
+level-dependent choices. Verify mechanical meaning against the pinned Compendium. Preserve the
+bidirectional adapter boundary while generalizing the editor; this does not require adopting
+Forge Steel's UI/storage model or implementing the adapters in the initial expansion slice.
+
 **Pre-alpha clarification, 2026-09-11:** import and export implementation are both deferred beyond v0.01.
 Compatibility remains a present design requirement: use this research when defining the character model and
 shared wizard operations so later adapters do not require tearing down the wizard. The

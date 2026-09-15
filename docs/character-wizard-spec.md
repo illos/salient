@@ -686,6 +686,11 @@ missing choices; do not claim a guessed build is the player's recorded past.
 
 ### Desired export
 
+**User reaffirmation, 2026-09-15:** preserve both Forge Steel import and compatible export as features
+to develop. Use the pinned working builder's choice ordering, nested selections and grants as a
+reference while verifying rules against the Compendium. Bidirectional compatibility must inform the
+generalized character model now; implementation remains later work, with no new export release gate.
+
 Implementation is explicitly deferred beyond v0.01; preserve the adapter path alongside future import.
 
 Export the explicitly selected character revision into a compatible hero graph. Proposed default: the
