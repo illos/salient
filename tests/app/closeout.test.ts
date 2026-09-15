@@ -372,6 +372,7 @@ describe('A07 closeout and Void', () => {
       target: { kind: 'foe', id: foeId, name: 'Goblin A' },
       clause,
       abilityName: 'Brutal Slam',
+      abilityId: 'mcdm.heroes.v1/feature.ability.fury.level-1/brutal-slam',
     });
     const before = await t.run(ctx => ctx.db.get(foeId));
     const args = { event: used.eventId, clause, target: { refKind: 'foe', id: foeId } };

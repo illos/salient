@@ -375,6 +375,28 @@ This is a replaceable desktop baseline, not a mobile or visual-polish requiremen
 its separate two-list layout. The user also accepted this three-pane baseline for FreePlay, with no active
 initiative or turn tracking; see the FreePlay section below.
 
+**User decision, 2026-09-15 (desktop presentation):** the V1 mockups' desktop layouts are binding
+for this pane structure; see the [mockup README](design-mockups/v1/README.md) and the
+[design fidelity audit](build/audits/2026-09-15-v1-design-audit.md). Three further decisions from the
+same thread:
+
+- **Director rosters are compact cards on both sides.** In the Director's view, foes and heroes use
+  the same compact card style showing the resources this section already lists: Stamina (current,
+  maximum, temporary), Recoveries, Heroic Resource and the hero's other point pools, with the health
+  bar and reticle from the mockup rows. Clicking a card replaces the content of that pane's roster
+  section with the full character sheet or monster stat block for that creature, with a control to
+  return to the roster. This is a drill-in that replaces the roster section, not an accordion that
+  expands a row in place. The player's pane keeps its selected-sheet prominence; the compact party
+  roster uses the same card style.
+- **Table settings move to a settings pop-up.** Campaign presentation settings (monster health
+  display mode, Show Malice, Show test difficulty, and later settings of the same kind) leave the
+  Director pane and open in a dedicated settings menu that uses the same centered card, blurred
+  backdrop and dismissal behavior as the [app-wide rule cards](reference-library-spec.md#app-wide-rule-cards).
+  The settings remain registered operations; the pop-up is presentation only.
+- **The provisional horizontal portrait row** for the player party roster and the exact turn
+  indicator design are resolved by the mockups: the combat mockups' ring-portrait row with resource
+  badges and an Acting label, and the segmented initiative bar, are the target presentation.
+
 ### Roster targeting controls
 
 Confirmed during the 2026-09-12 discussion. Each displayed participant in either roster has a dedicated
@@ -454,6 +476,12 @@ alone neither expires a valid response nor extends an expired window. A live car
 controls while preserving the original entries and the [historical edit boundary](#director-edits-to-inline-results).
 
 ### Game log and chat scope
+
+Implementation note (2026-09-15): the user's [app-wide rule card presentation](reference-library-spec.md#app-wide-rule-cards)
+supersedes inline source expansions. Readable labels and the shared rulebook icon open a centered,
+scrollable reference card with a blurred backdrop. Source paths and IDs remain metadata; operational
+values and controls retain their behavior.
+
 
 For v1, the game log is the main centerpiece. A later UI may choose not to expose it as a main surface;
 durable recording remains required. Keep the shared operations independent of the visual log and panes.

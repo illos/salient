@@ -1,0 +1,40 @@
+.rulebook-icon {
+  display: inline-block;
+  width: 0.75rem;
+  height: 0.75rem;
+  background: currentColor;
+  mask: url('/icons/rulebook.svg') center / contain no-repeat;
+  flex-shrink: 0;
+}
+.rulebook-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  vertical-align: middle;
+  color: var(--muted-foreground);
+  border-radius: 0.25rem;
+  flex-shrink: 0;
+}
+.rulebook-link:hover {
+  color: var(--foreground);
+  background: var(--muted);
+}
+.rulebook-link:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+.rulebook-link[aria-disabled='true'] {
+  opacity: 0.45;
+}
+/* The card frame lives in web/style.css (.overlay-card-*); these classes only scope the prose. */
+.rule-preview {
+  --rules-line: var(--border);
+}
+.rule-preview .rules-prose {
+  font-size: 1rem;
+}
+.rule-preview .rules-prose :is(h2, h3, h4, h5, h6) {
+  scroll-margin-top: 0.5rem;
+}

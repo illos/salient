@@ -105,7 +105,9 @@ test('reference screenshots: login, campaign home and character list in light an
   await expect(page.getByRole('heading', { name: `Blackcastle ${stamp}` })).toBeVisible();
   await expect(page.getByRole('status').filter({ hasText: 'Connected' })).toBeVisible();
   await page.getByRole('button', { name: 'Add foe' }).click();
-  await expect(page.getByRole('button', { name: 'Inspect source', exact: true })).toBeVisible();
+  await expect(
+    page.getByRole('button', { name: 'Read Goblin Warrior in the rules', exact: true }).first(),
+  ).toBeVisible();
   await settled(page);
   await page.screenshot({ path: `${SHOTS}/campaign-home-light.png`, fullPage: true });
   await appearance(page).getByRole('button', { name: 'Dark' }).click();
@@ -116,7 +118,9 @@ test('reference screenshots: login, campaign home and character list in light an
   await page.getByLabel('Name', { exact: true }).fill(`Ash ${stamp}`);
   await page.getByRole('button', { name: 'Create and open the wizard' }).click();
   await expect(page.getByRole('heading', { name: `Ash ${stamp}` })).toBeVisible();
-  await page.getByRole('link', { name: 'Characters', exact: true }).click();
+  // The wizard renders its own header instead of the site nav (V21 item 10), so leaving it is a
+  // navigation, not a nav-link click.
+  await page.goto('/characters');
   await expect(page.getByRole('link', { name: `Ash ${stamp}` })).toBeVisible();
   await settled(page);
   await page.screenshot({ path: `${SHOTS}/characters-dark.png`, fullPage: true });

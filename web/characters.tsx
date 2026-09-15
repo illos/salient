@@ -15,7 +15,7 @@ import type { Id } from '../convex/_generated/dataModel';
 import { emptyAuthored } from '../shared/characterDraft';
 import type { CharacterSheet as SheetPayload } from '../shared/contracts/characterSheet';
 import { Badge } from './components/ui/badge';
-import { Button } from './components/ui/button';
+import { Button, buttonVariants } from './components/ui/button';
 import { Card, CardContent } from './components/ui/card';
 import { Input } from './components/ui/input';
 import { ErrorNotice, Eyebrow, Field, Loading, SectionHeading, useCommand } from './ui';
@@ -113,6 +113,7 @@ export function CharactersPage() {
   );
 }
 
+/** The standalone page's header actions: EDIT (the wizard), Open table and the review submission. */
 function SubmitControls({ characterId }: { characterId: Id<'characters'> }) {
   const character = useQuery(api.characters.get, { characterId });
   const campaigns = useQuery(api.campaigns.list);
@@ -129,31 +130,50 @@ function SubmitControls({ characterId }: { characterId: Id<'characters'> }) {
     !character.draftIsEffective &&
     !!target &&
     !character.combatLocked;
+  const action = buttonVariants({
+    variant: 'outline',
+    size: 'sm',
+    className: 'hover:no-underline',
+  });
   return (
-    <div className="flex flex-col gap-2">
-      <div className="flex flex-wrap items-center gap-2">
+    <div className="flex flex-col items-end gap-2">
+      <div className="flex flex-wrap items-center justify-end gap-2">
+        {!character.campaignId && !pending && (
+          <label className="flex items-center gap-2 text-xs">
+            <span className="caps text-muted-foreground">Campaign</span>
+            <select
+              className="native-select h-7"
+              aria-label="Campaign to submit to"
+              value={target ?? ''}
+              onChange={event => setCampaignId(event.target.value)}
+            >
+              {campaigns.length === 0 && <option value="">Join a campaign first</option>}
+              {campaigns.map(c => (
+                <option key={c.id} value={c.id}>
+                  {c.name}
+                </option>
+              ))}
+            </select>
+          </label>
+        )}
         <Link
           to="/characters/$characterId/wizard"
           params={{ characterId }}
-          className="text-sm font-bold"
+          className={action}
+          title="Open the wizard"
         >
-          Open the wizard →
+          Edit
         </Link>
         {character.campaignId && (
           <Link
             to="/campaigns/$campaignId/table"
             params={{ campaignId: character.campaignId }}
-            className="text-sm font-bold"
+            className={action}
           >
-            Open table →
+            Open table
           </Link>
         )}
-      </div>
-      {pending ? (
-        <div className="flex flex-wrap items-center gap-2 text-sm">
-          <Badge variant="outline">
-            {pending.kind} awaiting review in {pending.campaignName} (revision {pending.revision})
-          </Badge>
+        {pending ? (
           <Button
             type="button"
             size="sm"
@@ -168,30 +188,11 @@ function SubmitControls({ characterId }: { characterId: Id<'characters'> }) {
           >
             Withdraw submission
           </Button>
-        </div>
-      ) : (
-        <div className="flex flex-wrap items-end gap-2 text-sm">
-          {!character.campaignId && (
-            <label className="flex flex-col gap-1">
-              <span className="caps text-muted-foreground">Campaign</span>
-              <select
-                className="native-select"
-                aria-label="Campaign to submit to"
-                value={target ?? ''}
-                onChange={event => setCampaignId(event.target.value)}
-              >
-                {campaigns.length === 0 && <option value="">Join a campaign first</option>}
-                {campaigns.map(c => (
-                  <option key={c.id} value={c.id}>
-                    {c.name}
-                  </option>
-                ))}
-              </select>
-            </label>
-          )}
+        ) : (
           <Button
             type="button"
             size="sm"
+            variant="outline"
             disabled={!canSubmit || command.pending}
             title={
               character.status !== 'complete'
@@ -211,12 +212,19 @@ function SubmitControls({ characterId }: { characterId: Id<'characters'> }) {
           >
             {character.effectiveRevisionId ? 'Submit edit for review' : 'Submit for admission'}
           </Button>
-          {character.review && character.review.status !== 'pending' && (
-            <span className="text-muted-foreground">
-              last submission: {character.review.status} ({character.review.campaignName})
-            </span>
-          )}
-        </div>
+        )}
+      </div>
+      {pending ? (
+        <Badge variant="outline">
+          {pending.kind} awaiting review in {pending.campaignName} (revision {pending.revision})
+        </Badge>
+      ) : (
+        character.review &&
+        character.review.status !== 'pending' && (
+          <span className="text-xs text-muted-foreground">
+            last submission: {character.review.status} ({character.review.campaignName})
+          </span>
+        )
       )}
       <ErrorNotice error={command.error} />
     </div>
@@ -236,17 +244,14 @@ export function CharacterPage({ characterId }: { characterId: Id<'characters'> }
       <Link to="/characters" className="mb-4 inline-block text-sm text-muted-foreground">
         ← Your characters
       </Link>
-      <div className="rule-strong mb-6 flex flex-wrap items-end justify-between gap-4 pb-4">
-        <div>
-          <Eyebrow>{owner ? 'Your character' : 'Character sheet'}</Eyebrow>
-          <h1>{sheet.name}</h1>
-        </div>
-        <div className="flex flex-wrap items-center gap-3">
+      <div className="mb-6 flex flex-wrap items-start justify-between gap-4">
+        <Eyebrow className="mb-0 pt-1.5">{owner ? 'Your character' : 'Character sheet'}</Eyebrow>
+        <div className="flex flex-wrap items-start justify-end gap-3">
           {mine && mine.length > 1 && (
             <label className="flex items-center gap-2 text-xs">
               <span className="caps text-muted-foreground">Hero</span>
               <select
-                className="native-select"
+                className="native-select h-7"
                 aria-label="Switch hero"
                 value={mine.some(c => c.id === characterId) ? characterId : ''}
                 onChange={event =>
@@ -271,7 +276,7 @@ export function CharacterPage({ characterId }: { characterId: Id<'characters'> }
             <label className="flex items-center gap-2 text-xs">
               <span className="caps text-muted-foreground">View</span>
               <select
-                className="native-select"
+                className="native-select h-7"
                 aria-label="Sheet view"
                 value={view}
                 onChange={event => setView(event.target.value as 'effective' | 'draft')}
@@ -281,23 +286,10 @@ export function CharacterPage({ characterId }: { characterId: Id<'characters'> }
               </select>
             </label>
           )}
+          {owner && <SubmitControls characterId={characterId} />}
         </div>
       </div>
-      {owner && (
-        <Card className="mb-6">
-          <CardContent>
-            <SubmitControls characterId={characterId} />
-          </CardContent>
-        </Card>
-      )}
-      <Card>
-        <CardContent>
-          <CharacterSheet
-            characterId={characterId}
-            view={owner && hasEffective ? view : undefined}
-          />
-        </CardContent>
-      </Card>
+      <CharacterSheet characterId={characterId} view={owner && hasEffective ? view : undefined} />
     </>
   );
 }

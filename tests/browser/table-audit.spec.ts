@@ -1,10 +1,31 @@
-import { expect, test, type Page } from '@playwright/test';
+import { expect, test, type Locator, type Page } from '@playwright/test';
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { seedLocalHero } from './local-fixtures';
 
 const password = 'Test-only-salient-password-42';
+
+/**
+ * One entry in the game-log feed. V21 gave the feed the mockup's shape: the actor's name is the
+ * bold line and the event text sits beneath it, so an assertion matches the entry, not a `strong`.
+ */
+function logEntry(page: Page, text: RegExp | string) {
+  return page.locator('[data-log-feed] li[data-sequence]').filter({ hasText: text });
+}
+
+/**
+ * The campaign presentation settings moved out of the Director pane into the shared settings card
+ * (V21 item 3, docs/table-spec.md#confirmed-combat-layout). Each toggle keeps its operation.
+ */
+async function withTableSettings(page: Page, act: (card: Locator) => Promise<void>) {
+  await page.getByRole('button', { name: 'Table settings', exact: true }).click();
+  const card = page.getByRole('dialog');
+  await expect(card).toBeVisible();
+  await act(card);
+  await page.keyboard.press('Escape');
+  await expect(card).toBeHidden();
+}
 async function register(page: Page, name: string, email: string) {
   await page.goto('/login');
   await page.getByRole('button', { name: 'New here? Create an account' }).click();
@@ -102,30 +123,24 @@ test('three table contexts, palette, console and live CLI share persisted operat
     expect(goblin.features).toHaveLength(3);
     expect(JSON.parse(detail.sourceSnapshot).features).toEqual(goblin.features);
     expect(JSON.parse(detail.sourceSnapshot).jsonPath).toBe(goblin.jsonPath);
-    await director.getByText(/^Command palette/).click();
+    // V21: the palette opens from the control inside the pinned command line.
+    await director.getByRole('button', { name: 'Command palette', exact: true }).click();
     const note = director
       .locator('li')
       .filter({ has: director.getByText('Session note', { exact: true }) });
     await note.getByRole('button', { name: 'Use', exact: true }).click();
     await expect(director.getByLabel('Slash command')).toHaveValue(/\/session note/);
-    await director.getByText(/^Command palette/).click();
     await director.getByLabel('Slash command').fill(`@{foe:${foeId}} /adjust stamina value=11`);
-    await director.getByRole('button', { name: 'Run', exact: true }).click();
-    await expect(
-      director.locator('strong').filter({ hasText: /Manual adjustment.*Stamina.*11/i }),
-    ).toHaveCount(1);
+    await director.getByLabel('Slash command').press('Enter');
+    await expect(logEntry(director, /Manual adjustment.*Stamina.*11/i)).toHaveCount(1);
     for (const page of [player, observer]) {
-      await expect(
-        page.locator('strong').filter({ hasText: /Manual adjustment.*Stamina.*adjusted/i }),
-      ).toHaveCount(1);
+      await expect(logEntry(page, /Manual adjustment.*Stamina.*adjusted/i)).toHaveCount(1);
       await expect(page.getByText(/15 → 11/)).toHaveCount(0);
     }
     const after = await query('table:roster');
     expect(after.foes[0].health.stamina).toBe(11);
     await player.reload();
-    await expect(
-      player.locator('strong').filter({ hasText: /Manual adjustment.*Stamina.*adjusted/i }),
-    ).toHaveCount(1);
+    await expect(logEntry(player, /Manual adjustment.*Stamina.*adjusted/i)).toHaveCount(1);
     const commandId = crypto.randomUUID();
     const commandArgs = [
       'command',
@@ -179,9 +194,7 @@ test('three table contexts, palette, console and live CLI share persisted operat
       await command(`@{character:${heroId}} /adjust ${field} value=${value}`);
     }
     await command('/adjust malice value=47');
-    await expect(
-      observer.locator('strong').filter({ hasText: /Manual adjustment.*Malice.*adjusted/ }),
-    ).toHaveCount(1);
+    await expect(logEntry(observer, /Manual adjustment.*Malice.*adjusted/)).toHaveCount(1);
     let observerRoster = await asRole(
       'observer',
       'query',
@@ -199,15 +212,16 @@ test('three table contexts, palette, console and live CLI share persisted operat
     );
     expect(ownRoster.heroes[0].live.heroicResource.current).toBe(7);
     await player.getByRole('button', { name: 'Spend a Recovery', exact: true }).click();
-    await expect(player.locator('strong').filter({ hasText: /spent a Recovery/i })).toHaveCount(1);
+    await expect(logEntry(player, /spent a Recovery/i)).toHaveCount(1);
     const recovered = await query('table:roster');
     expect(recovered.heroes[0].live.stamina).toBe(30);
     expect(recovered.heroes[0].live.recoveries).toBe(9);
-    const recoveryEvent = player
-      .locator('li')
-      .filter({ has: player.locator('strong').filter({ hasText: /spent a Recovery/i }) });
-    await recoveryEvent.getByText('Source', { exact: true }).click();
-    await expect(recoveryEvent.locator('pre').first()).toContainText('Recovery');
+    const recoveryEvent = logEntry(player, /spent a Recovery/i);
+    await recoveryEvent
+      .getByRole('button', { name: 'Read Catch Breath in the rules', exact: true })
+      .click();
+    await expect(player.getByRole('dialog')).toContainText('Recovery');
+    await player.getByRole('button', { name: 'Close rule', exact: true }).click();
     mkdirSync('.playtest/fixes', { recursive: true });
     await player.screenshot({ path: '.playtest/fixes/recovery-source.png', fullPage: true });
     const tested = await asRole(
@@ -228,17 +242,23 @@ test('three table contexts, palette, console and live CLI share persisted operat
     expect(peerTest.payload.envelope.arguments).not.toHaveProperty('difficulty');
     expect(peerTest.description).toContain('(Lore; hard: winter)');
     expect(peerTest.description.endsWith(`; ${peerTest.payload.data.result.outcome}.`)).toBe(true);
-    await director.getByRole('button', { name: 'Show test difficulty', exact: true }).click();
+    await withTableSettings(director, card =>
+      card.getByRole('switch', { name: 'Show test difficulty', exact: true }).click(),
+    );
     peerHistory = await asRole('observer', 'query', 'events:list', JSON.stringify({ campaignId }));
     peerTest = peerHistory.events.find((event: { id: string }) => event.id === tested.eventId);
     expect(peerTest.payload.data.result.difficulty).toBe('hard');
-    await expect(observer.locator('strong').filter({ hasText: /hard:/ })).toHaveCount(1);
-    await director.getByRole('button', { name: 'winded', exact: true }).click();
+    await expect(logEntry(observer, /hard:/)).toHaveCount(1);
+    await withTableSettings(director, card =>
+      card.getByRole('button', { name: 'Winded', exact: true }).click(),
+    );
     await expect(observer.getByText('Not winded', { exact: true })).toBeVisible();
     const peerFoes = await asRole('observer', 'query', 'foes:list', JSON.stringify({ campaignId }));
     expect(peerFoes.rows[0].health).toEqual({ mode: 'winded', winded: false });
     expect(peerFoes.rows[0]).not.toHaveProperty('healthFraction');
-    await director.getByRole('button', { name: 'Show Malice', exact: true }).click();
+    await withTableSettings(director, card =>
+      card.getByRole('switch', { name: 'Show Malice', exact: true }).click(),
+    );
     observerRoster = await asRole(
       'observer',
       'query',
@@ -246,9 +266,11 @@ test('three table contexts, palette, console and live CLI share persisted operat
       JSON.stringify({ campaignId }),
     );
     expect(observerRoster.malice).toBe(47);
-    await expect(observer.locator('strong').filter({ hasText: /Malice 0 → 47/ })).toHaveCount(1);
-    await director.getByRole('button', { name: 'Hide Malice from players', exact: true }).click();
-    await expect(observer.locator('strong').filter({ hasText: /Malice 0 → 47/ })).toHaveCount(0);
+    await expect(logEntry(observer, /Malice 0 → 47/)).toHaveCount(1);
+    await withTableSettings(director, card =>
+      card.getByRole('switch', { name: 'Show Malice', exact: true }).click(),
+    );
+    await expect(logEntry(observer, /Malice 0 → 47/)).toHaveCount(0);
     await player.reload();
     await expect(player.getByRole('heading', { name: 'Heroes', exact: true })).toBeVisible();
     await expect(
@@ -296,10 +318,13 @@ test('three table contexts, palette, console and live CLI share persisted operat
       [player, 'player'],
       [observer, 'observer'],
     ] as const) {
+      // V21: on the table the appearance switch sits in the header's user menu.
+      await page.getByRole('button', { name: /account menu$/ }).click();
       await page
         .getByRole('group', { name: 'Appearance' })
         .getByRole('button', { name: 'Dark', exact: true })
         .click();
+      await page.keyboard.press('Escape');
       await page.waitForTimeout(300);
       await page.screenshot({ path: `.playtest/fixes/table-${name}-dark.png`, fullPage: true });
     }

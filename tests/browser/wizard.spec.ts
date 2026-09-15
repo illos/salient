@@ -65,84 +65,76 @@ test('wizard, admission review and the three sheet audiences', async ({ browser 
     await expect(player!.getByLabel('Dwarf', { exact: true })).toBeDisabled();
     await expect(player!.getByText('not offered in v0.01').first()).toBeVisible();
     await player!.getByLabel('Devil', { exact: true }).check();
-    await pick('ancestry.devil.silver-tongue-skill', 'Persuade');
+    await pick('Silver Tongue skill', 'Persuade');
     await player!.getByLabel('Beast Legs', { exact: true }).check();
     await player!.getByLabel('Impressive Horns', { exact: true }).check();
     await expect(player!.getByText('3 of 3 points spent')).toBeVisible();
     // 3. Culture.
     await step('3. Culture');
     await expect(
-      player!.getByLabel('culture.language', { exact: true }).locator('option[value="Caelian"]'),
+      player!.getByLabel('Additional language', { exact: true }).locator('option[value="Caelian"]'),
     ).toBeDisabled();
     await expect(
       player!
-        .getByLabel('culture.language', { exact: true })
+        .getByLabel('Additional language', { exact: true })
         .locator('option[value="Khoursirian"]'),
     ).toHaveCount(1);
-    await pick('culture.language', 'Anjali');
+    await pick('Additional language', 'Anjali');
     await player!.getByLabel('Wilderness', { exact: true }).check();
-    await pick('culture.environment.skill', 'Swim');
+    await pick('Environment skill', 'Swim');
     await player!.getByLabel('Communal', { exact: true }).check();
-    await pick('culture.organization.skill', 'Blacksmithing');
+    await pick('Organization skill', 'Blacksmithing');
     await player!.getByLabel('Martial', { exact: true }).check();
-    await pick('culture.upbringing.skill', 'Intimidate');
+    await pick('Upbringing skill', 'Intimidate');
     // 4. Career.
     await step('4. Career');
     await player!.getByLabel('Soldier', { exact: true }).check();
-    await pick('career.soldier.skill.exploration', 'Endurance');
-    await pick('career.soldier.skill.intrigue', 'Alertness');
-    await pick('career.soldier.languages slot 1', '__open__');
-    await pick('career.soldier.languages slot 2', 'Vaslorian');
-    await pick('career.soldier.perk', 'Teamwork');
+    await pick('Exploration skill', 'Endurance');
+    await pick('Intrigue skill', 'Alertness');
+    await pick('Career languages 1', '__open__');
+    await pick('Career languages 2', 'Vaslorian');
+    await pick('Career perk', 'Teamwork');
     await player!.getByLabel('Sole Survivor', { exact: true }).check();
     // 5. Class.
     await step('5. Class');
     await player!.getByLabel('Fury', { exact: true }).check();
     await player!.getByLabel('1, 0, 0', { exact: true }).check();
-    await expect(
-      player!.getByLabel('class.fury.array-assignment Might', { exact: true }),
-    ).toHaveValue('2');
-    await expect(
-      player!.getByLabel('class.fury.array-assignment Might', { exact: true }),
-    ).toBeDisabled();
-    await expect(
-      player!.getByLabel('class.fury.array-assignment Agility', { exact: true }),
-    ).toBeDisabled();
+    // V21: the class-fixed values are compact stat boxes, not inputs.
+    await expect(player!.getByLabel('Might (fixed)', { exact: true })).toContainText('2');
+    await expect(player!.getByLabel('Agility (fixed)', { exact: true })).toContainText('2');
     for (const target of ['Reason', 'Intuition', 'Presence'])
-      await expect(
-        player!.getByLabel(`class.fury.array-assignment ${target}`, { exact: true }),
-      ).toHaveValue('');
+      await expect(player!.getByLabel(`Assign ${target}`, { exact: true })).toHaveValue('');
     await player!.getByTestId('array-value-1').dragTo(player!.getByTestId('assignment-Reason'));
-    await expect(
-      player!.getByLabel('class.fury.array-assignment Reason', { exact: true }),
-    ).toHaveValue('0');
-    await pick('class.fury.array-assignment Intuition', '1');
+    await expect(player!.getByLabel('Assign Reason', { exact: true })).toHaveValue('0');
+    await pick('Assign Intuition', '1');
     await player!.getByTestId('array-value-0').dragTo(player!.getByTestId('assignment-Presence'));
-    await expect(
-      player!.getByLabel('class.fury.array-assignment Presence', { exact: true }),
-    ).toHaveValue('0');
+    await expect(player!.getByLabel('Assign Presence', { exact: true })).toHaveValue('0');
     await mkdir('.playtest/audit-2026-09-15', { recursive: true });
     await player!.evaluate(() => window.scrollTo(0, 0));
     await player!.screenshot({
       path: '.playtest/audit-2026-09-15/wizard-assignment.png',
       fullPage: true,
     });
-    await pick('class.fury.skills slot 1', 'Jump');
-    await pick('class.fury.skills slot 2', 'Climb');
+    await pick('Additional class skills 1', 'Jump');
+    await pick('Additional class skills 2', 'Climb');
     await player!.getByLabel('Berserker', { exact: true }).check();
     await player!.getByLabel('Brutal Slam', { exact: true }).check();
     await player!.getByLabel('Out of the Way!', { exact: true }).check();
     await player!.getByLabel('Thunder Roar', { exact: true }).check();
     // Before the kit: Stamina maximum is pending, never a number (R02 4.2).
     await expect(soFar).toContainText('incomplete');
-    await expect(soFar.getByText('Stamina max').locator('..')).toContainText('pending');
+    await expect(soFar.getByText('Stamina', { exact: true }).locator('..')).toContainText(
+      'Pending',
+    );
     // 6. Kit: the source text of an option is readable before choosing it.
     await step('6. Kit');
-    await pick('kit.choice', 'Mountain');
-    await player!.getByRole('button', { name: 'Source text', exact: true }).first().click();
-    await expect(player!.getByLabel('Source text: Mountain')).toContainText('Stamina');
+    await pick('Choose a kit', 'Mountain');
+    await player!.getByRole('button', { name: 'Read Mountain in the rules', exact: true }).click();
+    await expect(player!.getByRole('dialog')).toContainText('Stamina');
+    await player!.getByRole('button', { name: 'Close rule', exact: true }).click();
+    await expect(player!.getByLabel('Choose a kit', { exact: true })).toHaveValue('Mountain');
     await expect(soFar.getByText('complete', { exact: true })).toBeVisible();
-    await expect(soFar.getByText('Stamina max').locator('..')).toContainText('30');
+    await expect(soFar.getByText('Stamina', { exact: true }).locator('..')).toContainText('30');
     // Q-CHAR-10: underspending is visibly warned without changing a complete build's status.
     await step('2. Ancestry');
     await player!.getByLabel('Beast Legs', { exact: true }).uncheck();
@@ -156,7 +148,8 @@ test('wizard, admission review and the three sheet audiences', async ({ browser 
     await expect(player!.getByRole('button', { name: /^8\. Complication/ })).toHaveCount(0);
     await step('9. Determine Details');
     await player!.getByLabel('Private notes', { exact: false }).fill('Grug fears the sea.');
-    await player!.getByRole('button', { name: 'Save and close', exact: true }).click();
+    // V21: EXIT saves the draft (the former "Save and close") and returns to the character page.
+    await player!.getByRole('button', { name: 'Exit', exact: true }).click();
     // Submit for admission from the character page; the Director approves from the campaign page.
     await expect(player!.getByRole('heading', { name: `Grug ${stamp}` })).toBeVisible();
     await expect(player!.getByText('No live values', { exact: false })).toBeVisible();
@@ -177,6 +170,12 @@ test('wizard, admission review and the three sheet audiences', async ({ browser 
     await expect(player!.getByText('Grug fears the sea.').first()).toBeAttached();
     await expect(player!.getByText('Brutal Slam').first()).toBeVisible();
     await expect(player!.getByRole('button', { name: 'Catch Breath', exact: true })).toBeDisabled();
+    await player!
+      .getByRole('button', { name: 'Read Brutal Slam in the rules', exact: true })
+      .click();
+    await expect(player!.getByRole('dialog')).toContainText('Brutal Slam');
+    await expect(player!.getByRole('dialog')).not.toContainText('scc.v1:');
+    await player!.keyboard.press('Escape');
     // Director: the full sheet without notes; a peer: Stamina and Recoveries only.
     await director!.goto(characterUrl);
     await expect(director!.getByText('Brutal Slam').first()).toBeVisible();

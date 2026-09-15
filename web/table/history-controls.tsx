@@ -5,6 +5,11 @@
  * is available, and why not, comes from `history.status` on the server, so a stale control cannot
  * bypass a seam (the operation checks again when it runs).
  *
+ * V21 presentation: a compact caps toolbar directly under the LOG / RULES / ROLLS tabs
+ * (docs/build/V21-desktop-layout-fidelity.md item 5; the mockup omits the controls, A06 requires
+ * them). The explanation of what each control would act on, and the history floor, collapse into
+ * the buttons' tooltips and one grey line.
+ *
  * Owning specification: docs/table-spec.md#undo-permissions-and-proposed-campaign-control (an Undo
  * button accompanies inline results under existing player/Director permissions; Enable user undo).
  */
@@ -22,49 +27,59 @@ export function undoCommand(role: HistoryStatus['role'], eventId?: string): stri
   return eventId ? `${verb} event="${eventId}"` : verb;
 }
 
-function Availability({ label, entry }: { label: string; entry: HistoryStatus['undo'] }) {
-  return (
-    <p className="text-xs text-muted-foreground [overflow-wrap:anywhere]">
-      {entry.available && entry.target
-        ? `${label}: #${entry.target.sequence} ${entry.target.description}`
-        : `${label}: ${entry.reason ?? 'unavailable'}`}
-    </p>
-  );
+/** One line: what the control would act on, or why it is unavailable. */
+function availability(label: string, entry: HistoryStatus['undo']): string {
+  return entry.available && entry.target
+    ? `${label}: #${entry.target.sequence} ${entry.target.description}`
+    : `${label}: ${entry.reason ?? 'unavailable'}`;
 }
 
 export function HistoryControls({ campaignId }: { campaignId: Id<'campaigns'> }) {
   const view = useQuery(api.history.status, { campaignId });
   if (!view || view.role === 'observer') return null;
   const director = view.role === 'director';
+  const undoLabel = director ? 'Rewind' : 'Undo';
+  const undoText = availability(undoLabel, view.undo);
+  const redoText = availability('Redo', view.redo);
   return (
-    <div className="flex flex-col gap-2">
-      <div className="flex flex-wrap items-center gap-2">
+    <div
+      className="flex flex-wrap items-center gap-x-3 gap-y-1"
+      role="toolbar"
+      aria-label="History"
+      data-history-toolbar
+    >
+      <span className="flex items-center gap-1.5" title={undoText}>
         <CommandButton
           campaignId={campaignId}
           text={undoCommand(view.role)}
-          label={director ? 'Rewind' : 'Undo'}
+          label={undoLabel}
           disabled={!view.undo.available}
         />
+      </span>
+      <span className="flex items-center gap-1.5" title={redoText}>
         <CommandButton
           campaignId={campaignId}
           text="/history redo"
           label="Redo"
           disabled={!view.redo.available}
         />
-        {director && (
-          <CommandButton
-            campaignId={campaignId}
-            text={`/campaign user-undo state=${view.enableUserUndo ? 'off' : 'on'}`}
-            label={view.enableUserUndo ? 'Disable user undo' : 'Enable user undo'}
-            variant="ghost"
-          />
-        )}
-      </div>
-      <Availability label={director ? 'Rewind' : 'Undo'} entry={view.undo} />
-      <Availability label="Redo" entry={view.redo} />
-      <p className="text-xs text-muted-foreground">
-        History does not cross {view.floor.label}.
-        {!view.enableUserUndo && ' Player undo is off for this campaign.'}
+      </span>
+      {director && (
+        <CommandButton
+          campaignId={campaignId}
+          text={`/campaign user-undo state=${view.enableUserUndo ? 'off' : 'on'}`}
+          label={view.enableUserUndo ? 'Disable user undo' : 'Enable user undo'}
+          variant="ghost"
+        />
+      )}
+      <p
+        className="m-0 w-full basis-full truncate text-xs text-muted-foreground"
+        title={`${undoText}\n${redoText}\nHistory does not cross ${view.floor.label}.`}
+      >
+        {view.undo.available && view.undo.target
+          ? `${undoLabel}: ${view.undo.target.description}`
+          : `Nothing to ${undoLabel.toLowerCase()} · history does not cross ${view.floor.label}.`}
+        {!view.enableUserUndo && ' Player undo is off.'}
       </p>
     </div>
   );

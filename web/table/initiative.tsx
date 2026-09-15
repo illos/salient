@@ -1,10 +1,14 @@
 // SPDX-License-Identifier: GPL-3.0-only
 /**
- * The initiative panel and the turn controls: groups of actor-linked turn entries (spent entries
- * grayed, surprised and Slain marked, the turn in progress highlighted), Take turn / End turn, and
- * Director regrouping of one selected entry. Every control submits a registered operation; the
- * server decides who may act. The invoking user's pane switches to the hero whose turn they took
- * (confirmed explicit Take turn navigation); nobody else's view changes.
+ * The initiative group list and the turn controls: groups of actor-linked turn entries (spent
+ * entries grayed, surprised and Slain marked, the turn in progress highlighted), Take turn / End
+ * turn, and Director regrouping of one selected entry. Every control submits a registered
+ * operation; the server decides who may act. The invoking user's pane switches to the hero whose
+ * turn they took (confirmed explicit Take turn navigation); nobody else's view changes.
+ *
+ * V21: the segmented initiative bar (web/table/initiative-bar.tsx) is the shared presentation;
+ * this list is the Director's regroup view opened from the bar's GROUPS control, rendered without
+ * a card wrapper (docs/build/V21-desktop-layout-fidelity.md item 7).
  *
  * Owning specifications: docs/table-spec.md#initiative-groups-confirmed-app-model, #taking-a-turn,
  * #player-sheet-actions-and-explicit-end-turn (advisory graying, explicit End turn),
@@ -15,8 +19,7 @@ import { useMutation } from 'convex/react';
 import { api } from '../../convex/_generated/api';
 import type { Id } from '../../convex/_generated/dataModel';
 import { Badge } from '../components/ui/badge';
-import { Card, CardContent } from '../components/ui/card';
-import { ErrorNotice, SectionHeading, useCommand } from '../ui';
+import { ErrorNotice, useCommand } from '../ui';
 import { CommandButton, type Encounter } from './setup-card';
 
 type Group = Encounter['groups'][number];
@@ -172,11 +175,15 @@ function EntryRow({
   );
 }
 
-function sideName(side: 'heroes' | 'director') {
+export function sideName(side: 'heroes' | 'director') {
   return side === 'heroes' ? 'Heroes' : 'Foes';
 }
 
-export function InitiativePanel({
+/**
+ * The regroup list: both sides' groups and entries with Take turn / End turn and the Director's
+ * Move-to control. One column so it fits the centre pane; no card wrapper.
+ */
+export function InitiativeGroups({
   campaignId,
   encounter,
   director,
@@ -190,69 +197,58 @@ export function InitiativePanel({
   onTurnTaken: (actor: { kind: 'character' | 'foe'; id: string }) => void;
 }) {
   if (encounter.status !== 'committed') return null;
-  const status =
-    encounter.phase !== 'turns'
-      ? 'Opening'
-      : encounter.activeTurn
-        ? `Round ${encounter.round} · ${encounter.activeTurn.actor.name} is acting`
-        : `Round ${encounter.round} · ${encounter.activeSide ? `${sideName(encounter.activeSide)} to act` : 'awaiting a turn'}`;
   return (
-    <Card>
-      <CardContent className="flex flex-col gap-3">
-        <SectionHeading aside={status} className="mb-0">
-          Initiative
-        </SectionHeading>
-        {encounter.startingSide && (
-          <p className="text-xs text-muted-foreground">
-            {sideName(encounter.startingSide)} went first in round 1 and go first in every round.
-          </p>
-        )}
-        <div className="grid grid-cols-2 gap-6">
-          {(['heroes', 'director'] as const).map(side => (
-            <div key={side}>
-              <SectionHeading as="h3" className="mb-1">
-                {sideName(side)}
-              </SectionHeading>
-              {encounter.groups
-                .filter(g => g.side === side)
-                .map(group => (
-                  <div
-                    key={group.id}
-                    className={`rule-soft mb-2 border-l-2 pl-2 ${
-                      group.active
-                        ? 'border-primary'
-                        : group.completed
-                          ? 'border-rule-strong text-muted-foreground'
-                          : 'border-transparent'
-                    }`}
-                  >
-                    <p className="caps text-xs text-muted-foreground">
-                      Group {group.order}
-                      {group.active ? ' · active' : group.completed ? ' · finished' : ''}
-                    </p>
-                    <ul className="m-0 list-none p-0">
-                      {group.entries.map(entry => (
-                        <EntryRow
-                          key={entry.id}
-                          campaignId={campaignId}
-                          encounter={encounter}
-                          group={group}
-                          entry={entry}
-                          director={director}
-                          running={running}
-                          onTurnTaken={onTurnTaken}
-                        />
-                      ))}
-                      {group.entries.length === 0 && (
-                        <li className="text-xs text-muted-foreground">Empty</li>
-                      )}
-                    </ul>
-                  </div>
-                ))}
-            </div>
-          ))}
-        </div>
-      </CardContent>
-    </Card>
+    <div className="flex flex-col gap-4" data-initiative-groups>
+      {encounter.startingSide && (
+        <p className="m-0 text-xs text-muted-foreground">
+          {sideName(encounter.startingSide)} went first in round 1 and go first in every round.
+          {director && ' Move to changes only the selected turn entry.'}
+        </p>
+      )}
+      <div className="grid grid-cols-1 gap-x-6 gap-y-4 @lg:grid-cols-2">
+        {(['heroes', 'director'] as const).map(side => (
+          <div key={side}>
+            <h3 className="caps rule-strong mb-2 pb-1 text-muted-foreground">{sideName(side)}</h3>
+            {encounter.groups
+              .filter(g => g.side === side)
+              .map(group => (
+                <div
+                  key={group.id}
+                  className={`rule-soft mb-2 border-l-2 pl-2 ${
+                    group.active
+                      ? 'border-l-primary'
+                      : group.completed
+                        ? 'border-l-rule-strong text-muted-foreground'
+                        : 'border-l-transparent'
+                  }`}
+                  data-group-order={group.order}
+                >
+                  <p className="caps m-0 text-muted-foreground">
+                    Group {group.order}
+                    {group.active ? ' · active' : group.completed ? ' · finished' : ''}
+                  </p>
+                  <ul className="m-0 list-none p-0">
+                    {group.entries.map(entry => (
+                      <EntryRow
+                        key={entry.id}
+                        campaignId={campaignId}
+                        encounter={encounter}
+                        group={group}
+                        entry={entry}
+                        director={director}
+                        running={running}
+                        onTurnTaken={onTurnTaken}
+                      />
+                    ))}
+                    {group.entries.length === 0 && (
+                      <li className="text-xs text-muted-foreground">Empty</li>
+                    )}
+                  </ul>
+                </div>
+              ))}
+          </div>
+        ))}
+      </div>
+    </div>
   );
 }

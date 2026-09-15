@@ -134,3 +134,26 @@ inventory instances and hover previews remain subsequent consumers of the shared
 The generated audit records core-book provenance and creature eligibility reasons. Source coverage does
 not imply mechanical automation. No artwork or upstream website runtime is imported. Attribution and the
 provisional data-repository license uncertainty remain in `THIRD_PARTY_NOTICES.md`.
+
+
+## App-wide rule cards
+
+Confirmed by the user, 2026-09-15: replace inline rule/source blocks, raw source paths and technical
+rule labels throughout the app with clean English and a discreet rulebook icon. The icon opens a
+centered embedded card with a blurred backdrop, a scrollable body, and backdrop-click/Escape/close
+button dismissal. This supersedes the initial new-tab proposal. Opening or dismissing a reference
+preserves the underlying route, unsaved inputs and table action state. Keyboard focus stays in the
+card and returns to its trigger on dismissal. Related references navigate inside the same card with
+a Back control. The full `/rules` library remains the dedicated browsing/search surface.
+
+Use stable SCC IDs, with a legacy source-path adapter for existing character decisions. Chapter
+choices open at their relevant section; monster abilities open at a named block within the original
+statblock. Keep source metadata and historical snapshots in data, not reading text. Operational
+choices, costs, live statistics, applied results and unresolved-effect controls remain in place.
+Unavailable references are identified honestly; do not guess an entry from an editable actor name.
+
+Implementation: the shared icon loads the public reader lazily; no campaign data enters the catalog.
+Wizard labels are presentation metadata, independent of decision IDs. Cleanup reads now include the
+existing ability ID to support the same card. Current privacy projections and gameplay operations
+remain unchanged. Historical rule icons read the current pinned library; stored event snapshots
+remain available as historical evidence in data.

@@ -244,6 +244,12 @@ behavior; it is not a rulebook formula or a claim that the implementation has be
 
 ## 3. Decision system
 
+Implementation note (2026-09-15): the user's [app-wide rule card presentation](reference-library-spec.md#app-wide-rule-cards)
+supersedes inline source expansions. Readable labels and the shared rulebook icon open a centered,
+scrollable reference card with a blurred backdrop. Source paths and IDs remain metadata; operational
+values and controls retain their behavior.
+
+
 ### Confirmed behavior
 
 - **Adopted for now, 2026-09-15 (Q-CHAR-11):** Resolve fixed skill grants first. When two sources

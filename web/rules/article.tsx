@@ -1,48 +1,34 @@
 // SPDX-License-Identifier: GPL-3.0-only
-import { useEffect, useState } from 'react';
-import { Link, useNavigate } from '@tanstack/react-router';
+import { useEffect, useRef, useState } from 'react';
+import { useNavigate } from '@tanstack/react-router';
 import type { RuleArticle, RuleSummary, RulesCatalog } from '../../shared/contracts/rules';
-import { getRuleArticle, useRulesCatalog } from './content';
+import { getRuleArticle } from './content';
 import './rules.css';
-
-/** An ID can be rendered anywhere: callers do not need to know its source path or page route. */
-export function RuleLink({
-  id,
-  children,
-  section,
-}: {
-  id: string;
-  children?: React.ReactNode;
-  section?: string;
-}) {
-  const { catalog } = useRulesCatalog();
-  const entry = catalog?.entries.find(e => e.id === id);
-  if (!entry) return <span>{children ?? 'Read rule'}</span>;
-  return (
-    <Link
-      to="/rules/$"
-      params={{ _splat: entry.path }}
-      hash={section}
-      className="rules-inline-link"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      {children ?? entry.name}
-    </Link>
-  );
-}
 
 export function RuleArticleView({
   catalog,
   entry,
   onLoaded,
+  onFollow,
+  section,
 }: {
   catalog: RulesCatalog;
   entry: RuleSummary;
   onLoaded?: (article: RuleArticle) => void;
+  onFollow?: (path: string, section?: string) => void;
+  section?: string;
 }) {
   const [state, setState] = useState<{ id: string; article?: RuleArticle; error?: string }>();
   const navigate = useNavigate();
+  const prose = useRef<HTMLDivElement>(null);
+  const [attempt, setAttempt] = useState(0);
+  useEffect(() => {
+    if (!state?.article || state.id !== entry.id || !section) return;
+    const target = Array.from(prose.current?.querySelectorAll('[id]') ?? []).find(
+      el => el.id === section,
+    );
+    target?.scrollIntoView({ block: 'start' });
+  }, [state, entry.id, section]);
   useEffect(() => {
     let active = true;
     getRuleArticle(catalog, entry).then(
@@ -59,7 +45,7 @@ export function RuleArticleView({
     return () => {
       active = false;
     };
-  }, [catalog, entry, onLoaded]);
+  }, [catalog, entry, onLoaded, attempt]);
   if (state?.id !== entry.id)
     return (
       <p role="status" className="rules-loading">
@@ -70,12 +56,20 @@ export function RuleArticleView({
     return (
       <div role="alert">
         <p>{state.error}</p>
-        <button onClick={() => window.location.reload()}>Reload references</button>
+        <button
+          onClick={() => {
+            setState(undefined);
+            setAttempt(n => n + 1);
+          }}
+        >
+          Try again
+        </button>
       </div>
     );
   return (
     <div
       className="rules-prose"
+      ref={prose}
       onClick={event => {
         if (
           event.defaultPrevented ||
@@ -92,7 +86,14 @@ export function RuleArticleView({
         if (href?.startsWith('/rules/')) {
           event.preventDefault();
           const [path, hash] = href.slice('/rules/'.length).split('#');
-          void navigate({ to: '/rules/$', params: { _splat: path }, hash: hash ?? '', search: {} });
+          if (onFollow) onFollow(path!, hash ? decodeURIComponent(hash) : undefined);
+          else
+            void navigate({
+              to: '/rules/$',
+              params: { _splat: path },
+              hash: hash ?? '',
+              search: {},
+            });
         }
       }}
       dangerouslySetInnerHTML={{ __html: state.article?.html ?? '' }}

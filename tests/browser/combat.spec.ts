@@ -10,6 +10,14 @@ import { promisify } from 'node:util';
 import { seedLocalHero } from './local-fixtures';
 
 const password = 'Test-only-salient-password-42';
+
+/**
+ * One entry in the game-log feed. V21 gave the feed the mockup's shape: the actor's name is the
+ * bold line and the event text sits beneath it, so an assertion matches the entry, not a `strong`.
+ */
+function logEntry(page: Page, text: RegExp | string) {
+  return page.locator('[data-log-feed] li[data-sequence]').filter({ hasText: text });
+}
 async function register(page: Page, name: string, email: string) {
   await page.goto('/login');
   await page.getByRole('button', { name: 'New here? Create an account' }).click();
@@ -93,8 +101,10 @@ test('Director starts combat; a player takes and ends a turn; the round advances
     await playerA.getByRole('button', { name: 'Roll initiative (d10)', exact: true }).click();
     await expect(director.getByText('Combat committed · who goes first?')).toBeVisible();
     await director.getByRole('button', { name: 'Heroes first', exact: true }).click();
-    await expect(director.getByText(/Combat · round 1/)).toBeVisible();
-    await expect(playerB.getByText(/Combat · round 1/)).toBeVisible();
+    await expect(
+      director.getByRole('status').filter({ hasText: /Combat · Round 1/ }),
+    ).toBeVisible();
+    await expect(playerB.getByRole('status').filter({ hasText: /Combat · Round 1/ })).toBeVisible();
     // Player A takes Thorn's turn from the hero pane; only A's pane switches to Thorn.
     const thornRowA = playerA
       .locator('li')
@@ -106,35 +116,32 @@ test('Director starts combat; a player takes and ends a turn; the round advances
     await expect(
       playerB.locator('li[aria-current="true"]').filter({ hasText: `Thorn ${stamp}` }),
     ).toHaveCount(1);
-    await expect(
-      playerA.locator('strong').filter({ hasText: /takes their turn \(round 1\)/ }),
-    ).toHaveCount(1);
+    await expect(logEntry(playerA, /takes their turn \(round 1\)/)).toHaveCount(1);
     await expect(playerB.getByRole('button', { name: 'End turn', exact: true })).toHaveCount(0);
     // Step 7: explicit End turn, then the Director's group, then round 2 with one Malice gain.
     await playerA.getByRole('button', { name: 'End turn', exact: true }).first().click();
-    await expect(director.getByText(/Round 1 · Foes to act/)).toBeVisible();
+    // V21: the initiative bar's eyebrow takes the mockup's wording (`ROUND n · FOES ACTING`).
+    await expect(director.getByText(/Round 1 · Foes acting/)).toBeVisible();
     const goblinRow = director
       .locator('li')
       .filter({ has: director.getByText('Goblin Warrior', { exact: true }) });
     await goblinRow.getByRole('button', { name: 'Take turn', exact: true }).first().click();
     await director.getByRole('button', { name: 'End turn', exact: true }).first().click();
     // The heroes' side still has Elwin's group: play returns to it; round 1 ends after that turn.
-    await expect(director.getByText(/Round 1 · Heroes to act/)).toBeVisible();
+    await expect(director.getByText(/Round 1 · Heroes acting/)).toBeVisible();
     const elwinRowB = playerB
       .locator('li')
       .filter({ has: playerB.getByText(`Elwin ${stamp}`, { exact: true }) });
     await elwinRowB.getByRole('button', { name: 'Take turn', exact: true }).first().click();
     await playerB.getByRole('button', { name: 'End turn', exact: true }).first().click();
-    await expect(director.getByText(/Combat · round 2/)).toBeVisible();
-    await expect(playerA.getByText(/Combat · round 2/)).toBeVisible();
     await expect(
-      director
-        .locator('strong')
-        .filter({ hasText: 'Malice: round 2 gain — 2 heroes + round 2 = 4' }),
-    ).toHaveCount(1);
-    await expect(
-      playerA.locator('strong').filter({ hasText: 'Malice: round 2 gain applied.' }),
-    ).toHaveCount(1);
+      director.getByRole('status').filter({ hasText: /Combat · Round 2/ }),
+    ).toBeVisible();
+    await expect(playerA.getByRole('status').filter({ hasText: /Combat · Round 2/ })).toBeVisible();
+    await expect(logEntry(director, 'Malice: round 2 gain — 2 heroes + round 2 = 4')).toHaveCount(
+      1,
+    );
+    await expect(logEntry(playerA, 'Malice: round 2 gain applied.')).toHaveCount(1);
     const after = await asRole(
       'director',
       'query',

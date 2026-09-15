@@ -34,6 +34,7 @@ export const current = query({
           target: v.union(actorRef, v.null()),
           clause: v.string(),
           abilityName: v.string(),
+          abilityId: v.string(),
         }),
       ),
     }),
@@ -51,6 +52,7 @@ export const current = query({
       target: Doc<'abilityResults'>['actor'] | null;
       clause: string;
       abilityName: string;
+      abilityId: string;
     }[] = [];
     if (encounter.phase === 'closeout') {
       const events = await ctx.db
@@ -75,6 +77,7 @@ export const current = query({
                 target: target.target,
                 clause,
                 abilityName: result.abilityName,
+                abilityId: result.abilityId,
               });
           }
         const recorded = (event.payload as { data?: { result?: AbilityRollResult } })?.data?.result;
@@ -87,6 +90,7 @@ export const current = query({
               target: null,
               clause,
               abilityName: result.abilityName,
+              abilityId: result.abilityId,
             });
         }
       }

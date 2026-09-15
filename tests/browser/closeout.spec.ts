@@ -89,7 +89,9 @@ test('closeout awards once, is shared with observers, and paused session closure
       await director.getByRole('button', { name: 'OK', exact: true }).click();
       await director.getByRole('button', { name: 'Roll initiative (d10)', exact: true }).click();
       await director.getByRole('button', { name: 'Heroes first', exact: true }).click();
-      await expect(director.getByText(/Session running · Combat · round 1/)).toBeVisible();
+      await expect(
+        director.getByRole('status').filter({ hasText: /Running · Combat · Round 1/ }),
+      ).toBeVisible();
     };
     await startCombat();
     await command(`@{character:${heroId}} /adjust surges value=2`);
@@ -127,7 +129,9 @@ test('closeout awards once, is shared with observers, and paused session closure
       expect(awarded.heroes[index].live.victories).toBe(before.heroes[index].live.victories + 1);
     }
     await director.getByRole('button', { name: 'Finish cleanup', exact: true }).click();
-    await expect(director.getByText('Session running · FreePlay', { exact: true })).toBeVisible();
+    await expect(
+      director.getByRole('status').filter({ hasText: /Running · Free play$/ }),
+    ).toBeVisible();
     const cleaned = await roster();
     const thorn = cleaned.heroes.find((hero: { id: string }) => hero.id === heroId);
     expect(thorn.live.surges).toBe(0);

@@ -136,3 +136,48 @@ so the final run used its own output directory. Earlier account/theme regression
 `pnpm rules:check` also verified generated files. No deployment or upstream pin change occurred.
 
 Committed: `7cda2ce` (research/shared-reference decisions), `dafcd8a` (implementation and review).
+
+
+2026-09-15 — user assigned the app-wide reference presentation follow-up. Replace inline source
+blocks, source paths and decision IDs with clean English and a shared, discreet rulebook icon linking
+to the matching `/rules` article or section. Keep operational choices, costs, results and unresolved
+resolution controls. Plan: shared ID/path resolver and accessible icon, wizard labels/section mapping,
+sheet/condition/foe/log consumers, source-block anchors, browser journey and reference coverage checks.
+No backend changes or gameplay semantics are planned. Independent review follows `pnpm check`.
+
+
+Follow-up steering: the user replaced new-tab links with centered modal cards, blurred backdrop,
+overflow scrolling and backdrop dismissal. References within a card navigate in place with Back;
+Escape and close restore focus. The cleanup query passes through its existing ability ID, the only
+backend projection change. Added exhaustive runtime/wizard-reference resolution and section-anchor
+checks plus popup/draft-preservation and updated full journey browser coverage.
+
+2026-09-15 — app-wide rule-card verification and review:
+
+- Replaced inline source expansions in wizard decisions/options, standalone and table sheets,
+  conditions, foe panels, campaign/table activity logs and cleanup cards. Machine decision labels
+  now have English display names; provenance remains in existing data and snapshots.
+- Added the shared lazy modal reader with centered layout, blurred backdrop, scrolling, related-rule
+  navigation/Back, close/Escape/backdrop dismissal and focus restoration. User follow-up reduced
+  the original 16px book artwork by 25% to 12px; the 28px interaction area is retained.
+- Chapter decisions resolve to matching sections. Ingestion gives bold monster ability/trait titles
+  stable section anchors. All current wizard sources and 403 runtime references resolve; unknown
+  identities are not guessed from editable names. The existing cleanup query now projects abilityId.
+- `pnpm check` passed 85 engine plus 315 app/tooling tests, docs/vendor/content checks and production
+  build. New reference checks share the existing in-memory ingestion fixture, so clean checkouts do
+  not depend on ignored generated assets. Independent focused reference/closeout checks passed 10/10.
+- Final focused browser run passed 2/2 in 28s (`journey.spec.ts`, `rule-popup.spec.ts`), covering foe
+  references, account/session flows, private draft save/reload, relevant-section scrolling, in-card
+  navigation, backdrop blur/dismissal, Escape, focus restoration, unchanged drafts/route and mobile
+  popup bounds. Earlier rules/theme regression tests passed 5/5. Visually inspected the popup.
+- The fuller wizard run completed creation, admission, sheet audiences and the new Brutal Slam
+  popup assertion, then failed in the existing later reconnect expectation: the player's pending
+  ability draft was already null. No draft/reconnect write path changed in this slice. The additional
+  broad closeout run timed out during environment slowdown; the table audit was interrupted. Those
+  full regressions are not claimed as passing. The final focused journey reconnect check passed.
+- Local backend sync succeeded at `anonymous-agent`, `http://127.0.0.1:3212`; the existing local daemon
+  required direct attachment. The ignored environment file was restored afterwards. No external
+  deployment, content reseed or vendor change occurred.
+- Independent review: [rule-card review](reviews/V13-rule-cards-review.md), pass for this feature.
+  Nonblocking follow-up: project foe identity in roster reads to avoid fetching full Director-only
+  source snapshots merely to render their icons. No unresolved implementation blocker remains.

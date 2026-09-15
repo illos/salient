@@ -8,6 +8,8 @@ import type { Id } from '../../convex/_generated/dataModel';
 import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
 import { ErrorNotice, SectionHeading, useCommand } from '../ui';
+import { RuleLink } from '../rules/link';
+import { readableRuleText } from '../rules/reference';
 import { CommandButton } from './setup-card';
 
 type Closeout = NonNullable<FunctionReturnType<typeof api.closeout.current>>;
@@ -26,10 +28,11 @@ function CleanupChoices({
       <p>
         <strong>
           {choice.actor.name} · {choice.abilityName}
+          <RuleLink id={choice.abilityId} label={choice.abilityName} />
         </strong>
       </p>
       {choice.target && <p>Target: {choice.target.name}</p>}
-      <p className="whitespace-pre-wrap">{choice.clause}</p>
+      <p className="whitespace-pre-wrap">{readableRuleText(choice.clause)}</p>
       {mayManage && (
         <CommandButton
           campaignId={campaignId}

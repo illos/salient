@@ -1,14 +1,16 @@
 // SPDX-License-Identifier: GPL-3.0-only
 /**
- * The v0.01 character sheet (docs/character-sheet-spec.md): compact header (identity, Stamina,
- * Recoveries, heroic resource, surges, Victories, turn state placeholder), then Actions and
- * abilities, Conditions, Features and modifiers, Character details. The same component renders
- * on the standalone character page and in the table's heroes pane; every value comes from the
- * audience-projected `characters.sheet` read, and every control submits a registered operation.
- * Nothing here computes a game value.
+ * The character sheet (docs/character-sheet-spec.md), laid out after character-sheet.png (V21):
+ * the header band (disc, name, chips, characteristic boxes), then three columns on the
+ * standalone page — Stamina block, Stats, Skills and Conditions at the left; Abilities as cards in
+ * the centre; Kit, Features, Languages, Details and Notes at the right — or one column in the
+ * table's heroes pane with the header and Stamina block sticky above the scrolling body. Every
+ * value comes from the audience-projected `characters.sheet` read, and every control submits a
+ * registered operation. Nothing here computes a game value.
  */
 import { useState } from 'react';
 import { useMutation, useQuery } from 'convex/react';
+import { cn } from 'cn';
 import { api } from '../../convex/_generated/api';
 import type { Id } from '../../convex/_generated/dataModel';
 import type {
@@ -16,42 +18,36 @@ import type {
   HeroSheet,
   PeerSheet,
   SheetAbility,
-  SheetFeature,
 } from '../../shared/contracts/characterSheet';
-import type { DerivedBaseline, PartialBaseline } from '../../shared/contracts/characterEvaluation';
-import { Badge } from '../components/ui/badge';
+import type { PartialBaseline } from '../../shared/contracts/characterEvaluation';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
+import { Disc } from '../components/disc';
+import { HealthBar } from '../components/health-bar';
 import { ErrorNotice, Loading, Notice, useCommand } from '../ui';
+import { AbilityCard, CommonActionCard } from './ability-card';
+import { ActiveConditionBadges, ConditionToggles, actorRef } from './controls';
+import { CHARACTERISTICS, SheetHeader, type CharacteristicKey } from './header';
 import {
-  ActiveConditionBadges,
-  CatchBreathButton,
-  AdjustControl,
-  ConditionToggles,
-  SlashButton,
-  SourceText,
-  actorRef,
-} from './controls';
+  DetailsRows,
+  FeatureRows,
+  KitBoxes,
+  LanguageChips,
+  NotesBox,
+  SheetSection,
+  SkillChips,
+  StatsList,
+  pending,
+} from './sections';
+import { StaminaBlock } from './stamina-block';
 
-const CHARACTERISTICS: [keyof DerivedBaseline['characteristics'], string][] = [
-  ['M', 'Might'],
-  ['A', 'Agility'],
-  ['R', 'Reason'],
-  ['I', 'Intuition'],
-  ['P', 'Presence'],
-];
 const GROUPS: [SheetAbility['group'], string][] = [
   ['main', 'Main actions'],
   ['maneuver', 'Maneuvers'],
   ['move', 'Move actions'],
   ['triggered', 'Triggered actions'],
-  ['other', 'Other (no structured action type in the source entry)'],
+  ['other', 'Other abilities'],
 ];
-
-/** A value the baseline has not derived yet is shown as pending, never as a zero. */
-function pending(value: number | string | undefined | null): string {
-  return value === undefined || value === null ? 'pending' : String(value);
-}
 
 /** The shared encounter read supplies turn status; no separate sheet clock. */
 function TurnState({
@@ -80,27 +76,52 @@ function TurnState({
             : 'Not in combat';
     }
   }
-  return <Stat label="Turn state" value={label} />;
+  return (
+    <div className="flex items-center justify-between gap-2 text-sm">
+      <span className="caps text-muted-foreground">Turn state</span>
+      <span className="font-bold">{label}</span>
+    </div>
+  );
 }
 
+/** Peers see Stamina and Recoveries only; no Heroic Resource reaches this payload. */
 function PeerCard({ sheet }: { sheet: PeerSheet }) {
+  const max = sheet.maxima?.staminaMaximum;
   return (
-    <div className="flex flex-col gap-1 py-2">
-      <div className="flex flex-wrap items-baseline justify-between gap-x-3">
-        <strong>{sheet.name}</strong>
-        <span className="caps text-muted-foreground">{sheet.ownerName}</span>
+    <div
+      className="flex flex-col gap-2 rounded-md border border-rule-strong bg-card p-4 shadow-hard"
+      data-sheet-peer
+    >
+      <div className="flex items-center gap-3">
+        <Disc name={sheet.name} size="md" />
+        <div className="flex min-w-0 flex-1 flex-col">
+          <strong className="truncate text-base">{sheet.name}</strong>
+          <span className="caps text-muted-foreground">{sheet.ownerName}</span>
+        </div>
       </div>
-      <dl className="grid grid-cols-[auto_1fr] gap-x-3 text-sm">
-        <dt className="text-muted-foreground">Stamina</dt>
-        <dd className="m-0">
-          {sheet.live ? `${sheet.live.stamina} / ${pending(sheet.maxima?.staminaMaximum)}` : '—'}
-        </dd>
-        <dt className="text-muted-foreground">Recoveries</dt>
-        <dd className="m-0">
-          {sheet.live
-            ? `${sheet.live.recoveries} / ${pending(sheet.maxima?.recoveriesMaximum)}`
-            : '—'}
-        </dd>
+      {sheet.live && max !== undefined && (
+        <HealthBar
+          value={sheet.live.stamina}
+          max={max}
+          tone="hero"
+          label={`${sheet.name} Stamina`}
+        />
+      )}
+      <dl className="m-0 grid grid-cols-2 gap-x-3 text-sm">
+        <div className="flex flex-col">
+          <dt className="caps text-muted-foreground">Stamina</dt>
+          <dd className="m-0 font-bold tabular-nums">
+            {sheet.live ? `${sheet.live.stamina} / ${pending(max)}` : '—'}
+          </dd>
+        </div>
+        <div className="flex flex-col items-end text-right">
+          <dt className="caps text-muted-foreground">Recoveries</dt>
+          <dd className="m-0 font-bold tabular-nums">
+            {sheet.live
+              ? `${sheet.live.recoveries} / ${pending(sheet.maxima?.recoveriesMaximum)}`
+              : '—'}
+          </dd>
+        </div>
       </dl>
     </div>
   );
@@ -111,14 +132,18 @@ function RollTest({
   campaignId,
   characterId,
   characteristic,
+  onCharacteristic,
   skills,
   enabled,
+  onClose,
 }: {
   campaignId: Id<'campaigns'>;
   characterId: string;
-  characteristic: string;
+  characteristic: CharacteristicKey;
+  onCharacteristic: (key: CharacteristicKey) => void;
   skills: string[];
   enabled: boolean;
+  onClose: () => void;
 }) {
   const submit = useMutation(api.commands.submit);
   const command = useCommand();
@@ -134,9 +159,11 @@ function RollTest({
     difficulty ? `difficulty=${difficulty}` : '',
   ].filter(Boolean);
   const text = parts.join(' ');
+  const name = CHARACTERISTICS.find(([key]) => key === characteristic)?.[1] ?? characteristic;
   return (
     <form
-      className="flex flex-wrap items-end gap-2 text-xs"
+      className="flex flex-wrap items-end gap-2 rounded-md border border-rule-strong bg-background p-3 text-xs shadow-hard"
+      aria-label="Roll test"
       onSubmit={event => {
         event.preventDefault();
         void command.run(
@@ -145,6 +172,22 @@ function RollTest({
         );
       }}
     >
+      <span className="caps mr-1 self-center text-foreground">Roll test</span>
+      <label className="flex flex-col gap-1">
+        <span className="caps text-muted-foreground">Characteristic</span>
+        <select
+          className="native-select"
+          aria-label="Test characteristic"
+          value={characteristic}
+          onChange={e => onCharacteristic(e.target.value as CharacteristicKey)}
+        >
+          {CHARACTERISTICS.map(([key, label]) => (
+            <option key={key} value={key}>
+              {label}
+            </option>
+          ))}
+        </select>
+      </label>
       <label className="flex flex-col gap-1">
         <span className="caps text-muted-foreground">Skill</span>
         <select className="native-select" value={skill} onChange={e => setSkill(e.target.value)}>
@@ -159,7 +202,7 @@ function RollTest({
       <label className="flex flex-col gap-1">
         <span className="caps text-muted-foreground">Edges</span>
         <Input
-          className="h-7 w-14"
+          className="h-8 w-14"
           inputMode="numeric"
           value={edges}
           onChange={e => setEdges(e.target.value)}
@@ -168,7 +211,7 @@ function RollTest({
       <label className="flex flex-col gap-1">
         <span className="caps text-muted-foreground">Banes</span>
         <Input
-          className="h-7 w-14"
+          className="h-8 w-14"
           inputMode="numeric"
           value={banes}
           onChange={e => setBanes(e.target.value)}
@@ -188,154 +231,110 @@ function RollTest({
         </select>
       </label>
       <Button type="submit" size="sm" disabled={!enabled || command.pending} title={text}>
-        Roll test ({characteristic})
+        Roll test ({name})
+      </Button>
+      <Button type="button" size="sm" variant="ghost" onClick={onClose}>
+        Close
       </Button>
       <ErrorNotice error={command.error} />
     </form>
   );
 }
 
-function AbilityEntry({ ability }: { ability: SheetAbility }) {
-  const [open, setOpen] = useState(false);
-  const m = ability.metadata;
+function Abilities({ sheet, compact }: { sheet: HeroSheet; compact?: boolean }) {
+  const groups = GROUPS.map(([group, title]) => ({
+    group,
+    title,
+    abilities: sheet.abilities.filter(a => a.group === group),
+    common: sheet.commonActions.filter(a => a.group === group),
+  })).filter(g => g.abilities.length || g.common.length);
   return (
-    <li className="rule-soft py-2">
-      <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-        <strong>{ability.name}</strong>
-        <span className="caps text-muted-foreground">
-          {m.actionType ?? 'action type in text'}
-          {m.cost
-            ? ` · ${m.cost}`
-            : ability.cost
-              ? ` · ${ability.cost.amount} ${ability.cost.resource}`
-              : ''}
-          {ability.kitBonusesIncluded ? ' · kit bonuses included' : ''}
-        </span>
-        <Button type="button" variant="ghost" size="xs" onClick={() => setOpen(!open)}>
-          {open ? 'Close' : 'Read'}
-        </Button>
-      </div>
-      {open && (
-        <div className="mt-1 flex flex-col gap-1 text-xs">
-          <p className="text-muted-foreground">
-            Granted by {ability.grantedBy.decisionId}
-            {ability.grantedBy.selection ? ` (${ability.grantedBy.selection})` : ''}: “
-            {ability.grantedBy.quote}” — {ability.grantedBy.path}
-          </p>
-          {m.keywords.length > 0 && <p>Keywords: {m.keywords.join(', ')}</p>}
-          {m.distance && <p>Distance: {m.distance}</p>}
-          {m.target && <p>Target: {m.target}</p>}
-          {m.roll && <p>{m.roll}</p>}
-          {m.tiers && (
-            <ol className="m-0 list-none p-0">
-              <li>≤11: {m.tiers[0]}</li>
-              <li>12–16: {m.tiers[1]}</li>
-              <li>17+: {m.tiers[2]}</li>
-            </ol>
-          )}
-          {m.trigger && <p>Trigger: {m.trigger}</p>}
-          {m.effects?.map((effect, index) => (
-            <p key={index}>
-              <strong>{effect.label}:</strong> {effect.text}
-            </p>
-          ))}
-          <p className="text-muted-foreground">
-            Effects are resolved at the table from the source text below; nothing is applied
-            automatically in v0.01.
-          </p>
-          {ability.content ? (
-            <SourceText text={ability.content.text} label={ability.name} />
-          ) : (
-            <p className="text-muted-foreground">
-              The content snapshot has no entry for {ability.sourcePath}; run pnpm content:seed.
-            </p>
-          )}
-        </div>
+    <SheetSection
+      title="Abilities"
+      aside={`${sheet.abilities.length} granted`}
+      compact={compact}
+      id="sheet-abilities"
+    >
+      {sheet.build?.status === 'incomplete' && (
+        <p className="m-0 mb-2 text-xs text-muted-foreground">
+          The build is incomplete; abilities its missing choices would grant are absent.
+        </p>
       )}
-    </li>
-  );
-}
-
-function FeatureEntry({ feature }: { feature: SheetFeature }) {
-  const [open, setOpen] = useState(false);
-  return (
-    <li className="rule-soft py-2">
-      <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-        <strong>{feature.name}</strong>
-        <span className="caps text-muted-foreground">
-          {feature.kind.replace(/-/g, ' ')}
-          {feature.cost !== undefined
-            ? ` · ${feature.cost} point${feature.cost === 1 ? '' : 's'}`
-            : ''}
-          {feature.affects?.length ? ` · affects ${feature.affects.join(', ')}` : ''}
-        </span>
-        <Button type="button" variant="ghost" size="xs" onClick={() => setOpen(!open)}>
-          {open ? 'Close' : 'Read'}
-        </Button>
+      <div className={cn('flex flex-col', compact ? 'gap-3' : 'gap-5')}>
+        {groups.map(group => (
+          <div key={group.group} className="flex flex-col gap-2">
+            <h4 className="caps m-0 text-muted-foreground">{group.title}</h4>
+            <ul className="m-0 flex list-none flex-col gap-2 p-0" aria-label={group.title}>
+              {group.abilities.map(ability => (
+                <AbilityCard
+                  key={`${ability.kind}:${ability.name}`}
+                  ability={ability}
+                  compact={compact}
+                />
+              ))}
+              {group.common.map(action => (
+                <CommonActionCard
+                  key={action.id}
+                  name={action.name}
+                  id={action.content.id}
+                  compact={compact}
+                />
+              ))}
+            </ul>
+          </div>
+        ))}
       </div>
-      {open && (
-        <div className="mt-1 text-xs">
-          <p className="text-muted-foreground">
-            Granted by {feature.grantedBy.decisionId}
-            {feature.grantedBy.selection ? ` (${feature.grantedBy.selection})` : ''}: “
-            {feature.grantedBy.quote}” — {feature.grantedBy.path}
-          </p>
-          {feature.content ? (
-            <SourceText text={feature.content.text} label={feature.name} />
-          ) : (
-            <p className="mt-1">
-              {feature.grantedBy.quote}{' '}
-              <span className="text-muted-foreground">({feature.sourcePath})</span>
-            </p>
-          )}
-        </div>
+    </SheetSection>
+  );
+}
+
+function Conditions({
+  sheet,
+  campaignId,
+  canAct,
+  compact,
+}: {
+  sheet: HeroSheet;
+  campaignId: Id<'campaigns'> | null;
+  canAct: boolean;
+  compact?: boolean;
+}) {
+  const live = sheet.live;
+  const running = sheet.viewer.sessionRunning;
+  return (
+    <SheetSection
+      title="Conditions"
+      compact={compact}
+      id="sheet-conditions"
+      aside={
+        live ? `${Object.values(live.conditions).filter(Boolean).length} active` : 'no live record'
+      }
+    >
+      {live ? (
+        <ConditionToggles
+          campaignId={campaignId}
+          characterId={sheet.id}
+          conditions={live.conditions}
+          canToggle={canAct}
+          reason={
+            !campaignId
+              ? 'Conditions are toggled at the table.'
+              : !running
+                ? 'Toggles need a running session.'
+                : !sheet.viewer.controls
+                  ? 'Only the hero’s controller or the Director toggles conditions.'
+                  : null
+          }
+        />
+      ) : (
+        <p className="m-0 text-sm text-muted-foreground">No live record yet.</p>
       )}
-    </li>
-  );
-}
-
-function Section({
-  title,
-  aside,
-  defaultOpen,
-  children,
-}: {
-  title: string;
-  aside?: React.ReactNode;
-  defaultOpen?: boolean;
-  children: React.ReactNode;
-}) {
-  return (
-    <details open={defaultOpen} className="rule-soft py-2">
-      <summary className="flex cursor-pointer items-baseline justify-between gap-3">
-        <h3 className="m-0">{title}</h3>
-        {aside && <span className="caps text-muted-foreground">{aside}</span>}
-      </summary>
-      <div className="mt-2">{children}</div>
-    </details>
-  );
-}
-
-function Stat({
-  label,
-  value,
-  aside,
-}: {
-  label: string;
-  value: React.ReactNode;
-  aside?: React.ReactNode;
-}) {
-  return (
-    <div className="flex items-baseline gap-2 text-sm">
-      <span className="caps text-muted-foreground">{label}</span>
-      <span className="font-bold">{value}</span>
-      {aside}
-    </div>
+    </SheetSection>
   );
 }
 
 export function HeroSheetView({ sheet, compact }: { sheet: HeroSheet; compact?: boolean }) {
-  const [rollFor, setRollFor] = useState<string | null>(null);
+  const [rollFor, setRollFor] = useState<CharacteristicKey | null>(null);
   const baseline = sheet.build?.baseline ?? null;
   const partial: PartialBaseline | null = baseline ?? sheet.build?.partial ?? null;
   const campaignId = sheet.campaign ? (sheet.campaign.id as Id<'campaigns'>) : null;
@@ -344,396 +343,172 @@ export function HeroSheetView({ sheet, compact }: { sheet: HeroSheet; compact?: 
   const running = sheet.viewer.sessionRunning;
   const canAct = !!campaignId && sheet.viewer.controls && running;
   const canEdit = !!campaignId && director && running;
-  const actor = actorRef(sheet.id);
   const skills = partial?.skills?.map(s => s.name) ?? [];
-  const groups = GROUPS.map(([group, title]) => ({
-    group,
-    title,
-    abilities: sheet.abilities.filter(a => a.group === group),
-    common: sheet.commonActions.filter(a => a.group === group),
-  })).filter(g => g.abilities.length || g.common.length);
-  const buildLabel =
-    sheet.build?.label === 'effective'
-      ? 'Effective build'
-      : sheet.build?.label === 'proposed'
-        ? 'Proposed build (awaiting review)'
-        : sheet.build?.label === 'draft'
-          ? 'Draft preview (not in play)'
-          : 'No build yet';
-  return (
-    <article
-      className={compact ? 'flex flex-col gap-3' : 'flex flex-col gap-6'}
-      aria-label={`${sheet.name} character sheet`}
+  const level = partial?.level?.value;
+  const activation =
+    sheet.activationPreview &&
+    (sheet.activationPreview.changes.length > 0 || sheet.activationPreview.incompatibleResource) ? (
+      <Notice role="status">
+        On activation:{' '}
+        {sheet.activationPreview.changes
+          .map(
+            change =>
+              `${change.field} ${change.currentBefore}/${change.maximumBefore ?? '—'} → ${change.currentAfter}/${change.maximumAfter}`,
+          )
+          .join('; ')}
+        {sheet.activationPreview.incompatibleResource &&
+          ` Activation blocked: changing ${sheet.activationPreview.incompatibleResource.before} to ${sheet.activationPreview.incompatibleResource.after} requires explicit resource reconciliation.`}
+      </Notice>
+    ) : null;
+  const rollTest =
+    rollFor &&
+    (campaignId ? (
+      <RollTest
+        campaignId={campaignId}
+        characterId={sheet.id}
+        characteristic={rollFor}
+        onCharacteristic={setRollFor}
+        skills={skills}
+        enabled={canAct}
+        onClose={() => setRollFor(null)}
+      />
+    ) : (
+      <p className="m-0 text-xs text-muted-foreground" role="status">
+        Tests are rolled at the table of an attached campaign.
+      </p>
+    ));
+  const rollEntry = (
+    <Button
+      type="button"
+      size="sm"
+      variant="outline"
+      aria-expanded={rollFor !== null}
+      onClick={() => setRollFor(rollFor ? null : 'M')}
     >
-      <header className="flex flex-col gap-2">
-        <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
-          <h2 className="m-0">{sheet.name}</h2>
-          <span className="flex flex-wrap items-center gap-1">
-            <Badge variant={sheet.build?.label === 'effective' ? 'default' : 'outline'}>
-              {buildLabel}
-            </Badge>
-            {sheet.build && sheet.build.status !== 'complete' && (
-              <Badge variant="outline">{sheet.build.status}</Badge>
-            )}
-            {sheet.review?.status === 'pending' && <Badge variant="outline">Review pending</Badge>}
-            {sheet.combatLocked && <Badge variant="outline">Combat lock</Badge>}
-          </span>
-        </div>
-        <p className="m-0 text-sm text-muted-foreground">
-          Level {pending(partial?.level?.value)} {partial?.ancestry?.value ?? 'ancestry pending'}{' '}
-          {partial?.class?.value ?? 'class pending'}
-          {partial?.subclass ? ` (${partial.subclass.value})` : ''} ·{' '}
-          {partial?.career?.value ?? 'career pending'}
-          {' · '}
-          {sheet.campaign ? sheet.campaign.name : 'not attached to a campaign'} · owned by{' '}
-          {sheet.ownerName}
-        </p>
-        {sheet.activationPreview &&
-          (sheet.activationPreview.changes.length > 0 ||
-            sheet.activationPreview.incompatibleResource) && (
-            <Notice role="status">
-              On activation:{' '}
-              {sheet.activationPreview.changes
-                .map(
-                  change =>
-                    `${change.field} ${change.currentBefore}/${change.maximumBefore ?? '—'} → ${change.currentAfter}/${change.maximumAfter}`,
-                )
-                .join('; ')}
-              {sheet.activationPreview.incompatibleResource &&
-                ` Activation blocked: changing ${sheet.activationPreview.incompatibleResource.before} to ${sheet.activationPreview.incompatibleResource.after} requires explicit resource reconciliation.`}
-            </Notice>
-          )}
-        <div className="flex flex-wrap gap-x-4 gap-y-1">
-          {CHARACTERISTICS.map(([key, name]) => (
-            <Button
-              key={key}
-              type="button"
-              variant="ghost"
-              size="sm"
-              className="h-auto flex-col items-start gap-0 px-1"
-              title={`Open the Roll test flow with ${name} selected`}
-              onClick={() => setRollFor(rollFor === key ? null : key)}
-            >
-              <span className="caps text-muted-foreground">{name}</span>
-              <span className="text-lg">{pending(partial?.characteristics?.[key]?.value)}</span>
-            </Button>
-          ))}
-          <Stat label="Size" value={pending(partial?.size?.value)} />
-          <Stat label="Speed" value={pending(partial?.speed?.value)} />
-          <Stat label="Stability" value={pending(partial?.stability?.value)} />
-          <Stat label="Disengage" value={pending(partial?.disengage?.value)} />
-          <Stat
-            label="Potency"
-            value={
-              partial?.potency
-                ? `${partial.potency.weak.value} / ${partial.potency.average.value} / ${partial.potency.strong.value}`
-                : 'pending'
-            }
-          />
-          <Stat
-            label="Saves on"
-            value={
-              partial?.savingThrowThreshold ? `${partial.savingThrowThreshold.value}+` : 'pending'
-            }
-          />
-        </div>
-        {rollFor && campaignId && (
-          <RollTest
-            campaignId={campaignId}
-            characterId={sheet.id}
-            characteristic={rollFor}
-            skills={skills}
-            enabled={canAct}
-          />
-        )}
-        {rollFor && !campaignId && (
-          <p className="text-xs text-muted-foreground">
-            Tests are rolled at the table of an attached campaign.
-          </p>
-        )}
-        {live ? (
-          <div className="flex flex-wrap gap-x-5 gap-y-1">
-            <Stat
-              label="Stamina"
-              value={`${live.stamina} / ${pending(baseline?.staminaMaximum.value)}`}
-              aside={
-                <>
-                  {live.temporaryStamina > 0 && (
-                    <span className="text-sm text-muted-foreground">
-                      +{live.temporaryStamina} temporary
-                    </span>
-                  )}
-                  {live.labels.winded && (
-                    <Badge variant="outline">Winded (≤ {live.labels.windedValue})</Badge>
-                  )}
-                  {canEdit && campaignId && (
-                    <>
-                      <AdjustControl
-                        campaignId={campaignId}
-                        characterId={sheet.id}
-                        field="stamina"
-                        label="Stamina"
-                        current={live.stamina}
-                      />
-                      <AdjustControl
-                        campaignId={campaignId}
-                        characterId={sheet.id}
-                        field="temporary-stamina"
-                        label="Temporary Stamina"
-                        current={live.temporaryStamina}
-                      />
-                    </>
-                  )}
-                </>
-              }
-            />
-            <Stat
-              label="Recoveries"
-              value={`${live.recoveries} / ${pending(baseline?.recoveriesMaximum.value)}`}
-              aside={
-                <>
-                  <span className="text-sm text-muted-foreground">
-                    recovery value {pending(baseline?.recoveryValue.value)} Stamina restored
-                  </span>
-                  {canEdit && campaignId && (
-                    <AdjustControl
-                      campaignId={campaignId}
-                      characterId={sheet.id}
-                      field="recoveries"
-                      label="Recoveries"
-                      current={live.recoveries}
-                    />
-                  )}
-                </>
-              }
-            />
-            <Stat
-              label={live.heroicResource.name}
-              value={live.heroicResource.current}
-              aside={
-                canEdit && campaignId ? (
-                  <AdjustControl
-                    campaignId={campaignId}
-                    characterId={sheet.id}
-                    field="heroic-resource"
-                    label="Heroic Resource"
-                    current={live.heroicResource.current}
-                  />
-                ) : undefined
-              }
-            />
-            <Stat
-              label="Surges"
-              value={live.surges}
-              aside={
-                canEdit && campaignId ? (
-                  <AdjustControl
-                    campaignId={campaignId}
-                    characterId={sheet.id}
-                    field="surges"
-                    label="Surges"
-                    current={live.surges}
-                  />
-                ) : undefined
-              }
-            />
-            <Stat
-              label="Victories"
-              value={live.victories}
-              aside={
-                canEdit && campaignId ? (
-                  <AdjustControl
-                    campaignId={campaignId}
-                    characterId={sheet.id}
-                    field="victories"
-                    label="Victories"
-                    current={live.victories}
-                  />
-                ) : undefined
-              }
-            />
-            <Stat label="XP" value={live.xp} />
-            <TurnState campaignId={campaignId} characterId={sheet.id} />
-          </div>
-        ) : (
-          <p className="text-sm text-muted-foreground">
-            No live values: they are initialized when the build is admitted to a campaign.
-          </p>
-        )}
-        {live && <ActiveConditionBadges conditions={live.conditions} />}
-        {live && campaignId && (!compact || sheet.viewer.controls) && (
-          <div className="flex flex-wrap items-center gap-2">
-            <CatchBreathButton campaignId={campaignId} characterId={sheet.id} disabled={!canAct} />
-            <SlashButton
-              campaignId={campaignId}
-              text={`${actor} /hero recover`}
-              label="Spend a Recovery"
-              disabled={!canAct}
-              title={
-                canAct
-                  ? `${actor} /hero recover`
-                  : 'Needs a running session and control of this hero'
-              }
-            />
-          </div>
-        )}
-      </header>
-      <div className={compact ? 'max-h-[60vh] overflow-y-auto' : ''}>
-        <Section
-          title="Actions and abilities"
-          aside={`${sheet.abilities.length} granted`}
-          defaultOpen
+      Roll test
+    </Button>
+  );
+  const stamina = (
+    <StaminaBlock
+      sheet={sheet}
+      compact={compact}
+      campaignId={campaignId}
+      canAct={canAct}
+      canEdit={canEdit}
+      turnState={<TurnState campaignId={campaignId} characterId={sheet.id} />}
+      extraControls={rollEntry}
+    />
+  );
+  if (compact) {
+    return (
+      <article className="flex flex-col gap-3" aria-label={`${sheet.name} character sheet`}>
+        {/* The hard rule marks where the pinned identity ends and the scrolling body begins;
+            without it a card passing underneath reads as clipped. */}
+        <div
+          className="rule-strong sticky top-0 z-10 -mx-1 flex flex-col gap-3 bg-background px-1 pb-3"
+          data-sheet-sticky
         >
-          {sheet.build?.status === 'incomplete' && (
-            <p className="text-xs text-muted-foreground">
-              The build is incomplete; abilities its missing choices would grant are absent.
-            </p>
-          )}
-          {groups.map(group => (
-            <div key={group.group} className="mt-2">
-              <h4 className="m-0 caps text-muted-foreground">{group.title}</h4>
-              <ul className="m-0 list-none p-0">
-                {group.abilities.map(ability => (
-                  <AbilityEntry key={`${ability.kind}:${ability.name}`} ability={ability} />
-                ))}
-                {group.common.map(action => (
-                  <CommonActionEntry
-                    key={action.id}
-                    name={action.name}
-                    text={action.content.text}
-                  />
-                ))}
-              </ul>
+          <SheetHeader
+            sheet={sheet}
+            partial={partial}
+            compact
+            rollFor={rollFor}
+            onRollFor={setRollFor}
+          >
+            {live && <ActiveConditionBadges conditions={live.conditions} />}
+          </SheetHeader>
+          {activation}
+          {stamina}
+          {rollTest}
+        </div>
+        <div className="flex flex-col gap-5" data-sheet-body>
+          <Abilities sheet={sheet} compact />
+          <Conditions sheet={sheet} campaignId={campaignId} canAct={canAct} compact />
+          <SheetSection
+            title={partial?.kit ? `Features · Kit · ${partial.kit.name.value}` : 'Features'}
+            aside={`${sheet.features.length} entries`}
+            compact
+            id="sheet-features"
+          >
+            <div className="flex flex-col gap-3">
+              {partial?.kit && <KitBoxes kit={partial.kit} compact />}
+              <FeatureRows features={sheet.features} level={level} compact />
             </div>
-          ))}
-        </Section>
-        <Section
-          title="Conditions"
-          aside={
-            live
-              ? `${Object.values(live.conditions).filter(Boolean).length} active`
-              : 'no live record'
-          }
-        >
-          {live ? (
-            <ConditionToggles
-              campaignId={campaignId}
-              characterId={sheet.id}
-              conditions={live.conditions}
-              canToggle={canAct}
-              reason={
-                !campaignId
-                  ? 'Conditions are toggled at the table.'
-                  : !running
-                    ? 'Toggles need a running session.'
-                    : !sheet.viewer.controls
-                      ? 'Only the hero’s controller or the Director toggles conditions.'
-                      : null
-              }
-            />
-          ) : (
-            <p className="text-sm text-muted-foreground">No live record yet.</p>
-          )}
-        </Section>
-        <Section title="Features and modifiers" aside={`${sheet.features.length} entries`}>
+          </SheetSection>
+          <SheetSection title="Stats" compact id="sheet-stats">
+            <StatsList partial={partial} xp={live?.xp ?? null} compact />
+          </SheetSection>
+          <SheetSection title="Details" compact id="sheet-details">
+            <div className="flex flex-col gap-3">
+              <div className="flex flex-col gap-1.5">
+                <span className="caps text-muted-foreground">Skills</span>
+                <SkillChips partial={partial} />
+              </div>
+              <div className="flex flex-col gap-1.5">
+                <span className="caps text-muted-foreground">Languages</span>
+                <LanguageChips partial={partial} />
+              </div>
+              <DetailsRows sheet={sheet} partial={partial} />
+              {sheet.audience === 'owner' && <NotesBox notes={sheet.authored.notes} compact />}
+            </div>
+          </SheetSection>
+        </div>
+      </article>
+    );
+  }
+  return (
+    <article className="flex flex-col gap-8" aria-label={`${sheet.name} character sheet`}>
+      <div className="flex flex-col gap-4">
+        <SheetHeader sheet={sheet} partial={partial} rollFor={rollFor} onRollFor={setRollFor}>
+          {live && <ActiveConditionBadges conditions={live.conditions} />}
+        </SheetHeader>
+        {activation}
+        {rollTest}
+      </div>
+      <div
+        className="grid grid-cols-[340px_minmax(0,1fr)_360px] items-start gap-8"
+        data-sheet-columns
+      >
+        <div className="flex flex-col gap-8">
+          {stamina}
+          <SheetSection title="Stats" id="sheet-stats">
+            <StatsList partial={partial} xp={live?.xp ?? null} />
+          </SheetSection>
+          <SheetSection title="Skills" aside={`${skills.length}`} id="sheet-skills">
+            <SkillChips partial={partial} />
+          </SheetSection>
+          <Conditions sheet={sheet} campaignId={campaignId} canAct={canAct} />
+        </div>
+        <Abilities sheet={sheet} />
+        <div className="flex flex-col gap-8">
           {partial?.kit && (
-            <div className="rule-soft py-2 text-sm">
-              <strong>Kit: {partial.kit.name.value}</strong>{' '}
-              <span className="text-muted-foreground">{partial.kit.equipmentText.value}</span>
-              <p className="m-0 text-xs text-muted-foreground">
-                Stamina +{partial.kit.staminaBonusApplied.value} (echelon{' '}
-                {partial.kit.echelon.value}) · speed +{partial.kit.speedBonus.value} · stability +
-                {partial.kit.stabilityBonus.value} · melee damage +
-                {partial.kit.meleeDamageBonus.value.join('/+')} · ranged damage +
-                {partial.kit.rangedDamageBonus.value.join('/+')} · melee distance +
-                {partial.kit.meleeDistanceBonus.value} · ranged distance +
-                {partial.kit.rangedDistanceBonus.value} · disengage +
-                {partial.kit.disengageBonus.value}
-              </p>
-            </div>
+            <SheetSection title={`Kit · ${partial.kit.name.value}`} id="sheet-kit">
+              <KitBoxes kit={partial.kit} />
+            </SheetSection>
           )}
-          <ul className="m-0 list-none p-0">
-            {sheet.features.map(feature => (
-              <FeatureEntry key={`${feature.kind}:${feature.name}`} feature={feature} />
-            ))}
-          </ul>
-        </Section>
-        <Section title="Character details">
-          <dl className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-1 text-sm">
-            <dt className="text-muted-foreground">Culture</dt>
-            <dd className="m-0">
-              {sheet.details.cultureName ?? '—'}
-              {sheet.details.cultureLanguage || sheet.details.environment
-                ? ` (${[sheet.details.cultureLanguage, sheet.details.environment, sheet.details.organization, sheet.details.upbringing].filter(Boolean).join(', ')})`
-                : ''}
-            </dd>
-            <dt className="text-muted-foreground">Career</dt>
-            <dd className="m-0">
-              {partial?.career?.value ?? '—'}
-              {sheet.details.incitingIncident ? ` · ${sheet.details.incitingIncident}` : ''}
-            </dd>
-            <dt className="text-muted-foreground">Skills</dt>
-            <dd className="m-0">{skills.length ? skills.join(', ') : '—'}</dd>
-            <dt className="text-muted-foreground">Languages</dt>
-            <dd className="m-0">
-              {partial?.languages?.length
-                ? partial.languages
-                    .map(l => `${l.name}${l.duplicateOf ? ' (duplicate, Q-R-100)' : ''}`)
-                    .join(', ')
-                : '—'}
-            </dd>
-            <dt className="text-muted-foreground">Renown / Wealth</dt>
-            <dd className="m-0">
-              {pending(partial?.renown?.value)} / {pending(partial?.wealth?.value)}
-            </dd>
-            {sheet.details.whatWasTaken && (
-              <>
-                <dt className="text-muted-foreground">What was taken</dt>
-                <dd className="m-0 whitespace-pre-wrap">{sheet.details.whatWasTaken}</dd>
-              </>
-            )}
-            {sheet.details.connections && (
-              <>
-                <dt className="text-muted-foreground">Connections</dt>
-                <dd className="m-0 whitespace-pre-wrap">{sheet.details.connections}</dd>
-              </>
-            )}
-            <dt className="text-muted-foreground">Appearance</dt>
-            <dd className="m-0 whitespace-pre-wrap">{sheet.authored.appearance || '—'}</dd>
-            <dt className="text-muted-foreground">Biography</dt>
-            <dd className="m-0 whitespace-pre-wrap">{sheet.authored.biography || '—'}</dd>
-            {sheet.audience === 'owner' && (
-              <>
-                <dt className="text-muted-foreground">Private notes</dt>
-                <dd className="m-0 whitespace-pre-wrap">{sheet.authored.notes || '—'}</dd>
-              </>
-            )}
-          </dl>
-          {partial?.uncertainties?.length ? (
-            <p className="mt-2 text-xs text-muted-foreground">
-              Provisional defaults in this build: {partial.uncertainties.join(', ')}{' '}
-              (docs/rules-questions-for-user.md).
-            </p>
-          ) : null}
-        </Section>
+          <SheetSection
+            title="Features"
+            aside={`${sheet.features.length} entries`}
+            id="sheet-features"
+          >
+            <FeatureRows features={sheet.features} level={level} />
+          </SheetSection>
+          <SheetSection title="Languages" id="sheet-languages">
+            <LanguageChips partial={partial} />
+          </SheetSection>
+          <SheetSection title="Details" id="sheet-details">
+            <DetailsRows sheet={sheet} partial={partial} />
+            {partial?.uncertainties?.length ? (
+              <p className="mt-2 text-xs text-muted-foreground">
+                Some character details still need a rules decision. Review this build with your
+                Director.
+              </p>
+            ) : null}
+          </SheetSection>
+          {sheet.audience === 'owner' && <NotesBox notes={sheet.authored.notes} />}
+        </div>
       </div>
     </article>
-  );
-}
-
-function CommonActionEntry({ name, text }: { name: string; text: string }) {
-  const [open, setOpen] = useState(false);
-  return (
-    <li className="rule-soft py-2">
-      <div className="flex flex-wrap items-baseline gap-x-3">
-        <span>{name}</span>
-        <span className="caps text-muted-foreground">common action · readable</span>
-        <Button type="button" variant="ghost" size="xs" onClick={() => setOpen(!open)}>
-          {open ? 'Close' : 'Read'}
-        </Button>
-      </div>
-      {open && <SourceText text={text} label={name} />}
-    </li>
   );
 }
 
@@ -745,6 +520,7 @@ export function CharacterSheet({
 }: {
   characterId: Id<'characters'>;
   view?: 'effective' | 'draft' | 'proposed';
+  /** Heroes-pane variant: one column, sticky header, no card wrapper and no own scroll. */
   compact?: boolean;
 }) {
   const sheet = useQuery(api.characters.sheet, { characterId, ...(view ? { view } : {}) }) as

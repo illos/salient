@@ -7,7 +7,6 @@ import {
   Link,
   Navigate,
   Outlet,
-  useNavigate,
   useRouterState,
 } from '@tanstack/react-router';
 import { useConvex, useConvexAuth, useMutation, useQuery } from 'convex/react';
@@ -21,8 +20,7 @@ import { TablePage } from './table';
 import { Button } from './components/ui/button';
 import { Card, CardContent } from './components/ui/card';
 import { Input } from './components/ui/input';
-import { ToggleGroup, ToggleGroupItem } from './components/ui/toggle-group';
-import { THEMES, useTheme, type Theme } from './theme';
+import { SignOut, ThemeSwitch } from './components/session-user';
 import { ErrorNotice, Eyebrow, Field, Loading, errorMessage } from './ui';
 
 const RulesPage = lazy(() => import('./rules').then(module => ({ default: module.RulesPage })));
@@ -45,35 +43,7 @@ function ConnectionStatus() {
   );
 }
 
-const THEME_LABELS: Record<Theme, string> = { light: 'Light', dark: 'Dark', system: 'System' };
-
-/** Light / dark / system appearance switch; the preference is stored locally (see web/theme.ts). */
-export function ThemeSwitch() {
-  const { theme, setTheme } = useTheme();
-  return (
-    <ToggleGroup
-      aria-label="Appearance"
-      value={[theme]}
-      onValueChange={value => {
-        const next = value[0];
-        if (typeof next === 'string' && THEMES.includes(next as Theme)) setTheme(next as Theme);
-      }}
-      spacing={0}
-      className="rounded-md border border-rule-strong"
-    >
-      {THEMES.map(option => (
-        <ToggleGroupItem
-          key={option}
-          value={option}
-          aria-label={THEME_LABELS[option]}
-          className="caps h-7 rounded-none px-2.5 text-muted-foreground hover:text-foreground data-pressed:bg-secondary data-pressed:text-secondary-foreground"
-        >
-          {THEME_LABELS[option]}
-        </ToggleGroupItem>
-      ))}
-    </ToggleGroup>
-  );
-}
+export { ThemeSwitch };
 
 function Wordmark() {
   return (
@@ -113,7 +83,17 @@ function TopNav({ displayName }: { displayName: string }) {
   );
 }
 
-function ProfileGate() {
+/** `/campaigns/:id/table` renders the session shell (web/table/shell.tsx) instead of the site nav. */
+export function isTableRoute(path: string): boolean {
+  return /^\/campaigns\/[^/]+\/table\/?$/.test(path);
+}
+
+/** `/characters/:id/wizard` renders the wizard header (web/wizard/header.tsx) instead of the site nav. */
+export function isWizardRoute(path: string): boolean {
+  return /^\/characters\/[^/]+\/wizard\/?$/.test(path);
+}
+
+function ProfileGate({ path }: { path: string }) {
   const viewer = useQuery(api.auth.viewer);
   const ensure = useMutation(api.auth.ensureProfile);
   const [error, setError] = useState<string | null>(null);
@@ -128,6 +108,8 @@ function ProfileGate() {
         {error && <Button onClick={() => window.location.reload()}>Retry</Button>}
       </CenteredPage>
     );
+  // V21: the table and the wizard are full-viewport frames with their own headers; no site nav.
+  if (isTableRoute(path) || isWizardRoute(path)) return <Outlet key={viewer.userId} />;
   return (
     <div className="flex min-h-screen flex-col" key={viewer.userId}>
       <TopNav displayName={viewer.displayName} />
@@ -150,35 +132,6 @@ function CenteredPage({ children }: { children: React.ReactNode }) {
   );
 }
 
-function SignOut() {
-  const navigate = useNavigate();
-  const [error, setError] = useState<string | null>(null);
-  const [pending, setPending] = useState(false);
-  return (
-    <>
-      <Button
-        variant="outline"
-        size="sm"
-        disabled={pending}
-        onClick={async () => {
-          setPending(true);
-          setError(null);
-          try {
-            const result = await authClient.signOut();
-            if (result.error) throw new Error(result.error.message);
-            await navigate({ to: '/login', search: { next: '/' }, replace: true });
-          } catch (e) {
-            setError(errorMessage(e));
-            setPending(false);
-          }
-        }}
-      >
-        Sign out
-      </Button>
-      <ErrorNotice error={error} />
-    </>
-  );
-}
 function Shell() {
   const { isAuthenticated, isLoading } = useConvexAuth();
   const path = useRouterState({ select: state => state.location.pathname });
@@ -197,7 +150,7 @@ function Shell() {
       </CenteredPage>
     );
   if (!isAuthenticated) return <Navigate to="/login" search={{ next: path }} replace />;
-  return <ProfileGate />;
+  return <ProfileGate path={path} />;
 }
 function Login() {
   const { isAuthenticated, isLoading } = useConvexAuth();

@@ -12,6 +12,8 @@
  * #v001-critical-hits-and-additional-main-actions, #inline-interaction-cards-in-the-game-log,
  * #director-edits-to-inline-results, docs/table-command-spec.md#results-and-pending-interactions.
  */
+import { RuleLink } from '../rules/link';
+import { readableRuleText } from '../rules/reference';
 import { useState } from 'react';
 import { useMutation, useQuery } from 'convex/react';
 import { api } from '../../convex/_generated/api';
@@ -30,8 +32,8 @@ export type AbilityResult = Results[number];
 const ref = (actor: { kind: string; id: string }) => `@{${actor.kind}:${actor.id}}`;
 const key = (actor: { kind: string; id: string }) => `${actor.kind}:${actor.id}`;
 
-// Compact metadata uses readable labels; the Read control retains the verbatim source block.
-const summaryText = (text: string) => text.replace(/\[([^\]]+)\]\([^)]+\)/g, '$1');
+// Operational clauses stay readable; complete references open in the rule card.
+const summaryText = readableRuleText;
 
 /** A button that submits one slash command through the shared path. */
 function Command({
@@ -171,17 +173,6 @@ function AbilityRow({
   ability: AbilityView;
   pending: boolean;
 }) {
-  const [open, setOpen] = useState(false);
-  const line = [
-    ability.actionType ?? ability.usage,
-    ability.cost,
-    ability.distance,
-    ability.target,
-    ability.roll,
-  ]
-    .filter((value): value is string => !!value)
-    .map(summaryText)
-    .join(' · ');
   return (
     <li className="rule-soft flex flex-col gap-1 py-2">
       <div className="flex flex-wrap items-center justify-between gap-2">
@@ -205,26 +196,9 @@ function AbilityRow({
             label={pending ? 'Cancel' : 'Use'}
             variant={pending ? 'default' : 'outline'}
           />
-          <Button type="button" variant="ghost" size="sm" onClick={() => setOpen(!open)}>
-            {open ? 'Close' : 'Read'}
-          </Button>
+          <RuleLink id={ability.id} sourcePath={ability.sourcePath} label={ability.name} />
         </span>
       </div>
-      <span className="text-xs text-muted-foreground">{line}</span>
-      {ability.tiers && (
-        <span className="text-xs text-muted-foreground">
-          ≤11: {summaryText(ability.tiers[0]!)} · 12-16: {summaryText(ability.tiers[1]!)} · 17+:{' '}
-          {summaryText(ability.tiers[2]!)}
-        </span>
-      )}
-      {open &&
-        (ability.text ? (
-          <pre className="mt-1 border-l-2 border-rule-strong pl-3 text-xs font-sans whitespace-pre-wrap [overflow-wrap:anywhere]">
-            {ability.text}
-          </pre>
-        ) : (
-          <p className="text-xs text-muted-foreground">The stat block text is Director-only.</p>
-        ))}
     </li>
   );
 }
@@ -459,7 +433,7 @@ export function AbilityCard({
                   <Badge variant="outline">
                     {disposition ? 'Resolved at table' : 'Unresolved'}
                   </Badge>
-                  <code className="[overflow-wrap:anywhere]">{clause}</code>
+                  <span className="[overflow-wrap:anywhere]">{summaryText(clause)}</span>
                   {disposition?.note && (
                     <span className="text-muted-foreground">{disposition.note}</span>
                   )}
@@ -482,7 +456,7 @@ export function AbilityCard({
         return (
           <span key={clause} className="flex flex-wrap items-center gap-2">
             <Badge variant="outline">{disposition ? 'Resolved at table' : 'Unresolved'}</Badge>
-            <code className="[overflow-wrap:anywhere]">{clause}</code>
+            <span className="[overflow-wrap:anywhere]">{summaryText(clause)}</span>
             {director && running && result.mayResolve && !disposition && (
               <Command
                 campaignId={campaignId}

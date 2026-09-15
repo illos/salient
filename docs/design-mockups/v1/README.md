@@ -1,8 +1,21 @@
 # Final V1 design mockups
 
-These mockups are the final V1 reference for **visual style and theme only**. Their labels, values, controls, screen content, and depicted behavior are approximate and are not product requirements or acceptance criteria. The written design specifications are the authoritative guide for product content, behavior, workflows, permissions, and supported features. If a mockup conflicts with a written specification, follow the written specification.
+These mockups are the final V1 reference for the **desktop visual design: style, theme, layout,
+proportions and display mechanics**. Confirmed by the user, 2026-09-15: the full-viewport session
+shell and its pane proportions, the compact roster rows and cards, health bars, portrait discs, the
+log feed with dice chips, the bottom-pinned command line, the initiative bar, the three-column
+character sheet and the wizard step rail are design requirements, not illustrations. Build them.
+(Before this date the README called the mockups a reference for visual style only; that framing is
+withdrawn. The [design fidelity audit](../../build/audits/2026-09-15-v1-design-audit.md) records
+what that framing cost.)
 
-The images are design references, not screenshots of implemented functionality and not a claim that every depicted element is in scope.
+Labels, sample values and placeholder text in the pictures remain approximate. The written design
+specifications stay authoritative for product content, behavior, workflows, permissions and supported
+features. Where a mockup shows a control or workflow the specifications exclude, the departures
+table below wins; where a mockup shows how something the specifications require should look, the
+mockup wins. Mobile and tablet layouts are V17 and are not read off these desktop pictures.
+
+The images are not screenshots of implemented functionality and not a claim that every depicted element is in scope.
 
 ## Reference screens
 
@@ -44,11 +57,11 @@ application-code license; see the [character sheet spec](../../character-sheet-s
 
 ## Visual tokens
 
-The only visual assertions these mockups establish are the ones already stated above: Schibsted
-Grotesk typography, an achromatic white/grey or dark foundation, a muted brick-red accent, strong
-rules and borders, and compact uppercase metadata. Exact colour values, the spacing scale, component
-sizes and breakpoints are not yet defined; producing them (design tokens and a component library) is a
-build-slice deliverable, not something to read off these images.
+Typography, foundation colours, the brick-red accent, rules and uppercase metadata are recorded as
+tokens in [design tokens](../../design-tokens.md) (A08). Layout measurements taken from these
+images (pane widths, header height, column ratios) are recorded in the
+[design fidelity audit](../../build/audits/2026-09-15-v1-design-audit.md) and are the targets for
+the layout slice. Where a measurement is missing, measure the image; do not invent a value.
 
 ## Login footer wording
 

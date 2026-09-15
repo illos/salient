@@ -1,738 +1,32 @@
 // SPDX-License-Identifier: GPL-3.0-only
 /**
- * The table: the three-pane running-session layout. Director pane (foes roster, Malice, quick
- * actions), center game log with the A01 command console, heroes pane. Every control submits a
- * registered operation as slash text through `commands.submit`; nothing here resolves a rule, and
- * what each role may see is decided by `table.roster` on the server, not by hiding fields here.
+ * The table: composition of the V21 session shell and its three panes. Director pane
+ * (web/table/director-pane.tsx), centre column with the combat cards, initiative panel and game
+ * log (web/table/log.tsx) over the pinned command line (web/table/command-line.tsx), heroes pane
+ * (web/table/heroes-pane.tsx). Every control submits a registered operation through
+ * `commands.submit` / `commands.invoke`; nothing here resolves a rule, and what each role may see
+ * is decided by `table.roster` on the server, not by hiding fields here.
  *
  * Owning specifications: docs/table-spec.md#3-table-surfaces, #confirmed-combat-layout (the same
  * layout hosts FreePlay), #foes-roster, #party-sheets-and-resource-visibility, #game-log-and-chat-scope,
  * #malice-visibility, #monster-visibility-and-health-display, #4-session-status-and-play-mode.
  */
 import { useEffect, useRef, useState } from 'react';
-import { Link } from '@tanstack/react-router';
 import { useMutation, useQuery } from 'convex/react';
 import { api } from '../../convex/_generated/api';
 import type { Id } from '../../convex/_generated/dataModel';
-import type { FunctionReturnType } from 'convex/server';
-import conditions from '../../shared/content/core-conditions.json';
-import { Badge } from '../components/ui/badge';
-import { Button } from '../components/ui/button';
-import { Card, CardContent } from '../components/ui/card';
-import { CommandConsole } from '../command-input';
-import { ErrorNotice, Eyebrow, Loading, SectionHeading, errorMessage, useCommand } from '../ui';
-import { CombatSetupCard, CommandButton, type Encounter } from './setup-card';
-import { InitiativePanel, TurnControls } from './initiative';
-import { HistoryControls, undoCommand } from './history-controls';
-import { AbilityCard, AbilityPanel, TargetControls, manualClausesOf } from './targeting';
-import { CharacterSheet } from '../character-sheet';
+import { ErrorNotice, Loading, errorMessage } from '../ui';
+import { CombatSetupCard } from './setup-card';
 import { CloseoutCard } from './closeout-card';
-import { VoidCard } from './void-card';
+import { CommandLine } from './command-line';
+import { DirectorPane } from './director-pane';
+import { HeroesPane } from './heroes-pane';
+import { LogPane } from './log';
+import { SessionHeader, SessionPanes, SessionShell } from './shell';
 
-type Roster = FunctionReturnType<typeof api.table.roster>;
-type Foe = Roster['foes'][number];
-type Hero = Roster['heroes'][number];
-
-const CONDITION_NAMES = (conditions as { conditions: { id: string; name: string }[] }).conditions;
-
-/** Submits one slash command through the shared path; the label is the button text. */
-function QuickAction({
-  campaignId,
-  text,
-  label,
-  disabled,
-}: {
-  campaignId: Id<'campaigns'>;
-  text: string;
-  label: string;
-  disabled?: boolean;
-}) {
-  const submit = useMutation(api.commands.submit);
-  const command = useCommand();
-  return (
-    <span className="inline-flex flex-col">
-      <Button
-        type="button"
-        variant="outline"
-        size="sm"
-        disabled={disabled || command.pending}
-        title={text}
-        onClick={() =>
-          void command.run(
-            commandId => submit({ campaignId, text, commandId }),
-            JSON.stringify(['quick', campaignId, text]),
-          )
-        }
-      >
-        {label}
-      </Button>
-      <ErrorNotice error={command.error} />
-    </span>
-  );
-}
-
-/** Prompted numeric edit: the Director types a value, the page submits `/adjust <field>`. */
-function AdjustAction({
-  campaignId,
-  actor,
-  field,
-  label,
-  current,
-}: {
-  campaignId: Id<'campaigns'>;
-  actor: string | null;
-  field: string;
-  label: string;
-  current: number | null;
-}) {
-  const submit = useMutation(api.commands.submit);
-  const command = useCommand();
-  return (
-    <span className="inline-flex flex-col">
-      <Button
-        type="button"
-        variant="ghost"
-        size="sm"
-        disabled={command.pending}
-        onClick={() => {
-          const answer = window.prompt(`${label}${current === null ? '' : ` (now ${current})`}`);
-          if (answer === null || !answer.trim()) return;
-          const text = `${actor ? `${actor} ` : ''}/adjust ${field} value=${answer.trim()}`;
-          void command.run(
-            commandId => submit({ campaignId, text, commandId }),
-            JSON.stringify(['adjust', campaignId, text]),
-          );
-        }}
-      >
-        Edit
-      </Button>
-      <ErrorNotice error={command.error} />
-    </span>
-  );
-}
-
-function actorRef(kind: 'character' | 'foe', id: string) {
-  return `@{${kind}:${id}}`;
-}
-
-function ConditionBadges({ conditions }: { conditions: Record<string, boolean> }) {
-  const active = CONDITION_NAMES.filter(c => conditions[c.id]);
-  if (!active.length) return null;
-  return (
-    <span className="flex flex-wrap gap-1">
-      {active.map(c => (
-        <Badge key={c.id} variant="outline">
-          {c.name}
-        </Badge>
-      ))}
-    </span>
-  );
-}
-
-function ConditionControls({
-  campaignId,
-  actor,
-  conditions,
-}: {
-  campaignId: Id<'campaigns'>;
-  actor: string;
-  conditions: Record<string, boolean>;
-}) {
-  const submit = useMutation(api.commands.submit);
-  const command = useCommand();
-  return (
-    <label className="flex items-center gap-2 text-xs">
-      <span className="caps text-muted-foreground">Condition</span>
-      <select
-        className="native-select"
-        value=""
-        disabled={command.pending}
-        onChange={e => {
-          const id = e.target.value;
-          if (!id) return;
-          const verb = conditions[id] ? 'off' : 'on';
-          const text = `${actor} /condition ${verb} name=${id}`;
-          void command.run(
-            commandId => submit({ campaignId, text, commandId }),
-            JSON.stringify(['condition', campaignId, text]),
-          );
-        }}
-      >
-        <option value="">Toggle…</option>
-        {CONDITION_NAMES.map(c => (
-          <option key={c.id} value={c.id}>
-            {conditions[c.id] ? `Remove ${c.name}` : `Apply ${c.name}`}
-          </option>
-        ))}
-      </select>
-      <ErrorNotice error={command.error} />
-    </label>
-  );
-}
-
-function FoeHealth({ foe }: { foe: Foe }) {
-  const health = foe.health;
-  switch (health.mode) {
-    case 'director':
-      return (
-        <span className="text-sm">
-          {health.stamina} / {health.maxStamina} Stamina
-          {health.temporaryStamina ? ` (+${health.temporaryStamina} temporary)` : ''}
-          {health.winded ? ' · Winded' : ''}
-        </span>
-      );
-    case 'numerical':
-      return <span className="text-sm">{health.stamina} Stamina</span>;
-    case 'bar':
-      return <progress aria-label={`${foe.name} health`} value={health.fraction} max={1} />;
-    case 'winded':
-      return (
-        <span className="caps text-muted-foreground">
-          {health.winded ? 'Winded' : 'Not winded'}
-        </span>
-      );
-  }
-}
-
-function FoeStatBlock({ campaignId, foeId }: { campaignId: Id<'campaigns'>; foeId: Id<'foes'> }) {
-  const detail = useQuery(api.foes.detail, { campaignId, foeId });
-  if (!detail) return <Loading>Loading stat block…</Loading>;
-  const source = JSON.parse(detail.sourceSnapshot) as { name: string; text: string };
-  return (
-    <pre className="mt-2 border-l-2 border-rule-strong pl-3 text-xs font-sans whitespace-pre-wrap [overflow-wrap:anywhere]">
-      {source.text}
-    </pre>
-  );
-}
-
-function FoeRow({
-  campaignId,
-  foe,
-  director,
-  running,
-  abilitiesAllowed,
-  mayTarget,
-}: {
-  campaignId: Id<'campaigns'>;
-  foe: Foe;
-  director: boolean;
-  running: boolean;
-  abilitiesAllowed: boolean;
-  mayTarget: boolean;
-}) {
-  const remove = useMutation(api.commands.invoke);
-  const deletion = useCommand();
-  const [open, setOpen] = useState(false);
-  const actor = actorRef('foe', foe.id);
-  return (
-    <li className="rule-soft flex flex-col gap-2 py-3">
-      <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
-        <strong className={foe.slain ? 'line-through' : ''}>{foe.name}</strong>
-        {foe.slain && <Badge>Slain</Badge>}
-        <FoeHealth foe={foe} />
-      </div>
-      <ConditionBadges conditions={foe.conditions} />
-      {/* A05: the reticle and per-target edge/bane inputs belong to the viewer's draft. */}
-      <TargetControls
-        campaignId={campaignId}
-        target={{ kind: 'foe', id: foe.id, name: foe.name }}
-        running={running && abilitiesAllowed}
-        mayTarget={mayTarget}
-      />
-      {director && running && abilitiesAllowed && (
-        <AbilityPanel
-          campaignId={campaignId}
-          actor={{ kind: 'foe', id: foe.id, name: foe.name }}
-          running={running}
-        />
-      )}
-      {director && (
-        <div className="flex flex-wrap items-center gap-2">
-          {running && (
-            <>
-              <AdjustAction
-                campaignId={campaignId}
-                actor={actor}
-                field="stamina"
-                label="Stamina"
-                current={foe.health.mode === 'director' ? foe.health.stamina : null}
-              />
-              <ConditionControls
-                campaignId={campaignId}
-                actor={actor}
-                conditions={foe.conditions}
-              />
-            </>
-          )}
-          <Button type="button" variant="ghost" size="sm" onClick={() => setOpen(!open)}>
-            {open ? 'Close stat block' : 'Stat block'}
-          </Button>
-          <Button
-            type="button"
-            variant="ghost"
-            size="sm"
-            disabled={deletion.pending}
-            onClick={() =>
-              void deletion.run(
-                commandId =>
-                  remove({
-                    campaignId,
-                    operation: 'foe.remove',
-                    actor: { refKind: 'foe', id: foe.id },
-                    arguments: {},
-                    commandId,
-                  }),
-                JSON.stringify(['foes.remove', campaignId, foe.id]),
-              )
-            }
-          >
-            Remove
-          </Button>
-          <ErrorNotice error={deletion.error} />
-        </div>
-      )}
-      {open && director && <FoeStatBlock campaignId={campaignId} foeId={foe.id} />}
-    </li>
-  );
-}
-
-function DirectorPane({
-  campaignId,
-  roster,
-  encounter,
-}: {
-  campaignId: Id<'campaigns'>;
-  roster: Roster;
-  encounter: Encounter | null;
-}) {
-  const director = roster.role === 'director';
-  const running = roster.session?.status === 'running';
-  const catalog = useQuery(api.foes.catalog, director ? { campaignId } : 'skip');
-  const add = useMutation(api.commands.invoke);
-  const addition = useCommand();
-  const [voiding, setVoiding] = useState<Id<'encounters'> | null>(null);
-  return (
-    <Card>
-      <CardContent className="flex flex-col gap-4">
-        <SectionHeading aside={`${roster.foes.length} loaded`} className="mb-0">
-          Foes
-        </SectionHeading>
-        {roster.foes.length === 0 && (
-          <p className="text-sm text-muted-foreground">No foes are loaded.</p>
-        )}
-        <ul className="m-0 list-none p-0">
-          {roster.foes.map(foe => (
-            <FoeRow
-              key={foe.id}
-              campaignId={campaignId}
-              foe={foe}
-              director={director}
-              running={running}
-              abilitiesAllowed={encounter?.phase !== 'closeout'}
-              mayTarget={roster.role !== 'observer'}
-            />
-          ))}
-        </ul>
-        {director && catalog && (
-          <div className="flex items-center justify-between gap-3">
-            <span className="text-sm">{catalog.name}</span>
-            <Button
-              type="button"
-              size="sm"
-              disabled={addition.pending || !running}
-              onClick={() =>
-                void addition.run(
-                  commandId =>
-                    add({
-                      campaignId,
-                      operation: 'foe.add',
-                      arguments: { definition: catalog.definitionId },
-                      commandId,
-                    }),
-                  JSON.stringify(['foes.add', campaignId, catalog.definitionId]),
-                )
-              }
-            >
-              Add foe
-            </Button>
-          </div>
-        )}
-        <ErrorNotice error={addition.error} />
-        {director && running && !encounter && (
-          <div className="rule-soft border-t pt-4">
-            {/* A04: opens the staged setup card; nothing is committed until OK. */}
-            <CommandButton
-              campaignId={campaignId}
-              text="/combat start"
-              label="Start combat"
-              variant="default"
-            />
-          </div>
-        )}
-        {director && encounter?.status === 'committed' && (
-          <div className="rule-soft flex flex-col gap-3 border-t pt-4">
-            {running && encounter.phase !== 'closeout' && (
-              <CommandButton
-                campaignId={campaignId}
-                text={`/combat end encounter=${encounter.id}`}
-                label="End combat"
-                variant="default"
-              />
-            )}
-            <Button variant="outline" size="sm" onClick={() => setVoiding(encounter.id)}>
-              Void combat
-            </Button>
-            {voiding === encounter.id && (
-              <VoidCard
-                key={encounter.id}
-                campaignId={campaignId}
-                encounterId={encounter.id}
-                paused={!running}
-                onCancel={() => setVoiding(null)}
-                onDone={() => setVoiding(null)}
-              />
-            )}
-          </div>
-        )}
-        <div className="rule-soft border-t pt-4">
-          <SectionHeading className="mb-2">Malice</SectionHeading>
-          {roster.malice === null ? (
-            <p className="text-sm text-muted-foreground">The Director is not showing Malice.</p>
-          ) : (
-            <p className="text-2xl font-bold">{roster.malice}</p>
-          )}
-          {director && roster.settings && (
-            <div className="mt-2 flex flex-wrap items-center gap-2">
-              {running && (
-                <AdjustAction
-                  campaignId={campaignId}
-                  actor={null}
-                  field="malice"
-                  label="Malice"
-                  current={roster.malice}
-                />
-              )}
-              <QuickAction
-                campaignId={campaignId}
-                text={`/campaign malice-visible state=${roster.settings.showMalice ? 'off' : 'on'}`}
-                label={roster.settings.showMalice ? 'Hide Malice from players' : 'Show Malice'}
-              />
-            </div>
-          )}
-        </div>
-        {director && roster.settings && (
-          <div className="rule-soft border-t pt-4">
-            <QuickAction
-              campaignId={campaignId}
-              text={`/campaign test-difficulty-visible state=${roster.settings.showTestDifficulty ? 'off' : 'on'}`}
-              label={
-                roster.settings.showTestDifficulty ? 'Hide test difficulty' : 'Show test difficulty'
-              }
-            />
-            <SectionHeading className="mb-2 mt-4">Monster health display</SectionHeading>
-            <div className="flex flex-wrap gap-2">
-              {(['bar', 'numerical', 'winded'] as const).map(mode => (
-                <QuickAction
-                  key={mode}
-                  campaignId={campaignId}
-                  text={`/campaign health-display mode=${mode}`}
-                  label={mode}
-                  disabled={roster.settings!.healthDisplay === mode}
-                />
-              ))}
-            </div>
-          </div>
-        )}
-      </CardContent>
-    </Card>
-  );
-}
-
-function HeroRow({
-  campaignId,
-  hero,
-  running,
-  encounter,
-  viewed,
-  mayTarget,
-  selected,
-  onTurnTaken,
-}: {
-  campaignId: Id<'campaigns'>;
-  hero: Hero;
-  running: boolean;
-  encounter: Encounter | null;
-  viewed: boolean;
-  mayTarget: boolean;
-  selected: boolean;
-  onTurnTaken: (actor: { kind: 'character' | 'foe'; id: string }) => void;
-}) {
-  const abilitiesAllowed = running && encounter?.phase !== 'closeout';
-  const canAct = hero.controlled && abilitiesAllowed;
-  return (
-    <li
-      className={`rule-soft flex flex-col gap-2 py-3 ${viewed ? 'border-l-2 border-primary pl-2' : ''}`}
-      aria-current={viewed ? 'true' : undefined}
-    >
-      <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
-        <strong>{hero.name}</strong>
-        <span className="caps text-muted-foreground">{hero.ownerName}</span>
-        {encounter && (
-          <TurnControls
-            campaignId={campaignId}
-            encounter={encounter}
-            actor={{ kind: 'character', id: hero.id, name: hero.name }}
-            running={running}
-            onTurnTaken={onTurnTaken}
-          />
-        )}
-      </div>
-      {selected ? (
-        // A02: the character sheet, fed by the audience-projected characters.sheet read.
-        <CharacterSheet key={hero.id} characterId={hero.id} compact />
-      ) : (
-        <p className="m-0 text-sm text-muted-foreground">
-          {hero.live
-            ? `Stamina ${hero.live.stamina} · Recoveries ${hero.live.recoveries}`
-            : 'No live values: admission initializes them.'}
-        </p>
-      )}
-      <TargetControls
-        campaignId={campaignId}
-        target={{ kind: 'character', id: hero.id, name: hero.name }}
-        running={abilitiesAllowed}
-        mayTarget={mayTarget}
-      />
-      {canAct && (
-        <AbilityPanel
-          campaignId={campaignId}
-          actor={{ kind: 'character', id: hero.id, name: hero.name }}
-          running={running}
-        />
-      )}
-    </li>
-  );
-}
-
-function HeroesPane({
-  campaignId,
-  roster,
-  encounter,
-  viewedHeroId,
-  onTurnTaken,
-}: {
-  campaignId: Id<'campaigns'>;
-  roster: Roster;
-  encounter: Encounter | null;
-  viewedHeroId: Id<'characters'> | null;
-  onTurnTaken: (actor: { kind: 'character' | 'foe'; id: string }) => void;
-}) {
-  const running = roster.session?.status === 'running';
-  const mine = roster.heroes.filter(h => h.ownerId === roster.viewerId);
-  const others = roster.heroes.filter(h => h.ownerId !== roster.viewerId);
-  // The viewed hero (the one whose turn this user last took) leads the pane.
-  const ordered = [...mine, ...others].sort((a, b) =>
-    a.id === viewedHeroId ? -1 : b.id === viewedHeroId ? 1 : 0,
-  );
-  // A02: one sheet is open at a time; a text selector switches between eligible heroes.
-  const [chosen, setChosen] = useState<Id<'characters'> | null>(null);
-  const selectedId =
-    ordered.find(h => h.id === chosen)?.id ?? viewedHeroId ?? ordered[0]?.id ?? null;
-  return (
-    <Card>
-      <CardContent className="flex flex-col gap-4">
-        <SectionHeading aside={`${roster.heroes.length} at the table`} className="mb-0">
-          Heroes
-        </SectionHeading>
-        {roster.role === 'observer' && (
-          <p className="text-sm text-muted-foreground">
-            You are observing; the panes are read-only.
-          </p>
-        )}
-        {ordered.length === 0 && (
-          <p className="text-sm text-muted-foreground">No heroes are attached to this campaign.</p>
-        )}
-        {ordered.length > 1 && (
-          <label className="flex items-center gap-2 text-xs">
-            <span className="caps text-muted-foreground">Sheet</span>
-            <select
-              className="native-select"
-              aria-label="Viewed hero"
-              value={selectedId ?? ''}
-              onChange={e => setChosen(e.target.value as Id<'characters'>)}
-            >
-              {ordered.map(hero => (
-                <option key={hero.id} value={hero.id}>
-                  {hero.name} · {hero.ownerName}
-                </option>
-              ))}
-            </select>
-          </label>
-        )}
-        <ul className="m-0 list-none p-0">
-          {ordered.map(hero => (
-            <HeroRow
-              key={hero.id}
-              campaignId={campaignId}
-              hero={hero}
-              running={running}
-              encounter={encounter}
-              viewed={hero.id === viewedHeroId}
-              mayTarget={roster.role !== 'observer'}
-              selected={hero.id === selectedId}
-              onTurnTaken={onTurnTaken}
-            />
-          ))}
-        </ul>
-      </CardContent>
-    </Card>
-  );
-}
-
-/** Verbatim source text carried by an event (a used action) or the Catch Breath reference. */
-type EventSourceRecord = {
-  id?: string;
-  text?: string;
-  note?: string;
-  revision?: string;
-  sourcePath?: string;
-  supporting?: EventSourceRecord[];
-};
-function EventSource({ payload }: { payload: unknown }) {
-  const source = (payload as { data?: { source?: EventSourceRecord } })?.data?.source;
-  if (!source) return null;
-  return (
-    <details className="mt-1 text-xs">
-      <summary className="cursor-pointer text-muted-foreground">Source</summary>
-      {[source, ...(source.supporting ?? [])].map((entry, index) => (
-        <div key={entry.id ?? index}>
-          <p className="mt-1 text-muted-foreground">{entry.id}</p>
-          {entry.text && (
-            <pre className="mt-1 border-l-2 border-rule-strong pl-3 font-sans whitespace-pre-wrap">
-              {entry.text}
-            </pre>
-          )}
-          {entry.sourcePath && (
-            <p className="mt-1 text-muted-foreground">
-              {entry.sourcePath} · {entry.revision}
-            </p>
-          )}
-        </div>
-      ))}
-      {source.note && <p className="mt-1 text-muted-foreground">{source.note}</p>}
-    </details>
-  );
-}
-
-function boundActorName(payload: unknown): string | null {
-  const envelope = (payload as { envelope?: { boundActor?: { name?: string } | null } })?.envelope;
-  return envelope?.boundActor?.name ?? null;
-}
-
-const CARD_KINDS = new Set(['ability.use']);
-
-function GameLog({
-  campaignId,
-  sessionId,
-  director,
-  running,
-}: {
-  campaignId: Id<'campaigns'>;
-  sessionId?: Id<'sessions'>;
-  director: boolean;
-  running: boolean;
-}) {
-  const [before, setBefore] = useState<number | undefined>();
-  const results = useQuery(api.abilities.results, { campaignId });
-  const result = useQuery(api.events.list, {
-    campaignId,
-    ...(sessionId ? { sessionId } : {}),
-    ...(before === undefined ? {} : { before }),
-  });
-  // A06: which entry the viewer's Undo/Rewind would act on; the operation checks again when run.
-  const history = useQuery(api.history.status, { campaignId });
-  if (!result) return <Loading>Loading the log…</Loading>;
-  const undoTarget = history?.undo.available ? history.undo.target?.eventId : undefined;
-  return (
-    <>
-      {result.events.length === 0 ? (
-        <p className="py-8 text-center text-sm text-muted-foreground">No recorded activity yet.</p>
-      ) : (
-        <ol className="m-0 list-none p-0">
-          {result.events.map(event => {
-            const actor = boundActorName(event.payload);
-            const undone = event.disposition === 'undone';
-            return (
-              <li
-                key={event.id}
-                className={`rule-soft flex items-start gap-4 py-3 text-sm ${undone ? 'text-muted-foreground' : ''}`}
-                data-disposition={event.disposition}
-              >
-                <span className="w-10 shrink-0 text-xs text-muted-foreground">
-                  #{event.sequence}
-                </span>
-                <div className="flex-1">
-                  <strong className={undone ? 'line-through' : ''}>{event.description}</strong>
-                  {event.disposition !== 'applied' && (
-                    <Badge variant="outline" className="ml-2 align-middle">
-                      {event.disposition === 'undone'
-                        ? 'Undone'
-                        : event.disposition === 'redone'
-                          ? 'Redone'
-                          : event.disposition}
-                    </Badge>
-                  )}
-                  {history && event.id === undoTarget && (
-                    <span className="ml-2 inline-flex align-middle">
-                      <CommandButton
-                        campaignId={campaignId}
-                        text={undoCommand(history.role, event.id)}
-                        label={history.role === 'director' ? 'Rewind' : 'Undo'}
-                        variant="ghost"
-                      />
-                    </span>
-                  )}
-                  {event.dice && (
-                    <small className="mt-0.5 block text-xs text-muted-foreground">
-                      Dice: {event.dice.map(die => `d${die.sides}=${die.value}`).join(' ')}
-                    </small>
-                  )}
-                  <small className="mt-0.5 block text-xs text-muted-foreground">
-                    {event.actorName ?? (event.origin === 'clock' ? 'Game clock' : 'Engine')}
-                    {actor ? ` as ${actor}` : ''} · {new Date(event.createdAt).toLocaleString()}
-                  </small>
-                  <EventSource payload={event.payload} />
-                  {CARD_KINDS.has(event.kind) && (
-                    <AbilityCard
-                      campaignId={campaignId}
-                      eventId={event.id}
-                      result={results?.find(r => r.eventId === event.id)}
-                      director={director}
-                      running={running}
-                      manualClauses={manualClausesOf(event.payload)}
-                    />
-                  )}
-                </div>
-              </li>
-            );
-          })}
-        </ol>
-      )}
-      <div className="mt-4 flex items-center gap-3">
-        {before !== undefined && (
-          <Button variant="outline" onClick={() => setBefore(undefined)}>
-            Latest activity
-          </Button>
-        )}
-        {result.nextBefore !== null && (
-          <Button variant="outline" onClick={() => setBefore(result.nextBefore!)}>
-            Older activity
-          </Button>
-        )}
-      </div>
-    </>
-  );
-}
+export { DirectorPane } from './director-pane';
+export { HeroesPane } from './heroes-pane';
+export { GameLog } from './log';
 
 export function TablePage({ campaignId }: { campaignId: Id<'campaigns'> }) {
   const roster = useQuery(api.table.roster, { campaignId });
@@ -758,93 +52,58 @@ export function TablePage({ campaignId }: { campaignId: Id<'campaigns'> }) {
   }, [campaignId, roster, drafts, invoke]);
   // Explicit Take turn switches only this user's pane to the chosen hero (local state, never shared).
   const [viewedHeroId, setViewedHeroId] = useState<Id<'characters'> | null>(null);
-  if (!roster || !campaign || encounter === undefined) return <Loading>Opening the table…</Loading>;
-  const status = roster.session?.status ?? 'none';
-  const running = status === 'running';
-  const combat =
-    encounter?.status === 'committed'
-      ? encounter.phase === 'closeout'
-        ? 'Combat · closeout'
-        : encounter.phase === 'turns'
-          ? `Combat · round ${encounter.round}`
-          : 'Combat · opening'
-      : encounter?.status === 'draft'
-        ? 'FreePlay · combat setup open'
-        : 'FreePlay';
+  if (!roster || !campaign || encounter === undefined)
+    return (
+      <div className="p-(--pane-padding-x)">
+        <Loading>Opening the table…</Loading>
+      </div>
+    );
+  const running = roster.session?.status === 'running';
   const onTurnTaken = (actor: { kind: 'character' | 'foe'; id: string }) => {
     if (actor.kind === 'character') setViewedHeroId(actor.id as Id<'characters'>);
   };
   return (
-    <>
-      <Link
-        to="/campaigns/$campaignId"
-        params={{ campaignId }}
-        className="mb-4 inline-block text-sm text-muted-foreground"
-      >
-        ← {campaign.name}
-      </Link>
-      <ErrorNotice error={entryError} />
-      <div className="rule-strong mb-6 flex items-end justify-between gap-6 pb-4">
-        <div>
-          <Eyebrow>The table</Eyebrow>
-          <h1>{campaign.name}</h1>
-          <p className="mt-1 text-muted-foreground">
-            {status === 'running'
-              ? `Session running · ${combat}`
-              : status === 'paused'
-                ? 'Session paused · gameplay waits for the Director'
-                : 'No active session · read-only'}
-          </p>
-        </div>
-        <Badge
-          variant={roster.role === 'director' ? 'default' : 'outline'}
-          className="h-9 px-4 text-xs"
-        >
-          {roster.role === 'director'
-            ? 'Director'
-            : roster.role === 'player'
-              ? 'Player'
-              : 'Observer'}
-        </Badge>
-      </div>
-      <div className="grid grid-cols-[340px_minmax(0,1fr)_340px] items-start gap-6">
-        <DirectorPane campaignId={campaignId} roster={roster} encounter={encounter} />
-        <div className="flex flex-col gap-6">
-          {encounter && <CombatSetupCard campaignId={campaignId} encounter={encounter} />}
-          {encounter?.phase === 'closeout' && <CloseoutCard campaignId={campaignId} />}
-          {encounter && encounter.phase !== 'closeout' && (
-            <InitiativePanel
-              campaignId={campaignId}
-              encounter={encounter}
-              director={roster.role === 'director'}
-              running={running}
-              onTurnTaken={onTurnTaken}
-            />
-          )}
-          {roster.role !== 'observer' && (
-            <CommandConsole campaignId={campaignId} sessionRevision={roster.session?.revision} />
-          )}
-          <Card>
-            <CardContent className="flex flex-col gap-3">
-              <h2>Game log</h2>
-              {running && <HistoryControls campaignId={campaignId} />}
-              <GameLog
-                campaignId={campaignId}
-                sessionId={roster.session?.id}
-                director={roster.role === 'director'}
-                running={running}
-              />
-            </CardContent>
-          </Card>
-        </div>
-        <HeroesPane
+    <SessionShell
+      header={
+        <SessionHeader
           campaignId={campaignId}
+          campaignName={campaign.name}
           roster={roster}
           encounter={encounter}
-          viewedHeroId={viewedHeroId}
-          onTurnTaken={onTurnTaken}
         />
-      </div>
-    </>
+      }
+    >
+      <SessionPanes
+        combat={encounter?.status === 'committed'}
+        director={<DirectorPane campaignId={campaignId} roster={roster} encounter={encounter} />}
+        center={
+          <LogPane
+            campaignId={campaignId}
+            roster={roster}
+            encounter={encounter}
+            running={running}
+            onTurnTaken={onTurnTaken}
+          >
+            <ErrorNotice error={entryError} />
+            {encounter && <CombatSetupCard campaignId={campaignId} encounter={encounter} />}
+            {encounter?.phase === 'closeout' && <CloseoutCard campaignId={campaignId} />}
+          </LogPane>
+        }
+        centerFooter={
+          roster.role !== 'observer' ? (
+            <CommandLine campaignId={campaignId} sessionRevision={roster.session?.revision} />
+          ) : undefined
+        }
+        heroes={
+          <HeroesPane
+            campaignId={campaignId}
+            roster={roster}
+            encounter={encounter}
+            viewedHeroId={viewedHeroId}
+            onTurnTaken={onTurnTaken}
+          />
+        }
+      />
+    </SessionShell>
   );
 }

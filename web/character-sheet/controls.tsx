@@ -10,10 +10,12 @@ import { useMutation } from 'convex/react';
 import { api } from '../../convex/_generated/api';
 import type { Id } from '../../convex/_generated/dataModel';
 import conditions from '../../shared/content/core-conditions.json';
-import { Badge } from '../components/ui/badge';
+import { cn } from 'cn';
+import { Chip } from '../components/chip';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { ErrorNotice, useCommand } from '../ui';
+import { RuleLink } from '../rules/link';
 
 export const CONDITIONS = (
   conditions as { conditions: { id: string; name: string; text: string }[] }
@@ -137,7 +139,11 @@ export function AdjustControl({
   );
 }
 
-/** One labeled on/off toggle per core condition, each a `/condition on|off` submission. */
+/**
+ * One labeled on/off toggle per core condition, each a `/condition on|off` submission, styled as
+ * the mockup's chips (filled when active). The native checkbox keeps its label for tests and
+ * assistive technology; the chip is its visible form.
+ */
 export function ConditionToggles({
   campaignId,
   characterId,
@@ -153,71 +159,67 @@ export function ConditionToggles({
 }) {
   const submit = useMutation(api.commands.submit);
   const command = useCommand();
-  const [open, setOpen] = useState<string | null>(null);
+  const disabled = !canToggle || !campaignId || command.pending;
   return (
     <div className="flex flex-col gap-2">
-      {reason && <p className="text-xs text-muted-foreground">{reason}</p>}
-      <ul className="m-0 grid list-none grid-cols-1 gap-1 p-0 sm:grid-cols-3">
+      {reason && <p className="m-0 text-xs text-muted-foreground">{reason}</p>}
+      <ul className="m-0 flex list-none flex-wrap gap-1.5 p-0" aria-label="Condition toggles">
         {CONDITIONS.map(condition => {
           const on = conditions[condition.id] ?? false;
           const text = `${actorRef(characterId)} /condition ${on ? 'off' : 'on'} name=${condition.id}`;
           return (
-            <li key={condition.id} className="flex items-center gap-2 text-sm">
-              <input
-                type="checkbox"
-                aria-label={condition.name}
-                checked={on}
-                disabled={!canToggle || !campaignId || command.pending}
-                onChange={() =>
-                  campaignId &&
-                  void command.run(
-                    commandId => submit({ campaignId, text, commandId }),
-                    JSON.stringify(['condition', campaignId, text]),
-                  )
-                }
-              />
-              <span className={on ? 'font-bold' : ''}>{condition.name}</span>
-              <Button
-                type="button"
-                variant="ghost"
-                size="xs"
-                onClick={() => setOpen(open === condition.id ? null : condition.id)}
+            <li key={condition.id} className="inline-flex items-center">
+              <label
+                className={cn(
+                  'caps inline-flex h-6 cursor-pointer items-center rounded-(--chip-radius) border-(length:--chip-border) px-1.5 transition-colors has-focus-visible:ring-3 has-focus-visible:ring-ring/50',
+                  on
+                    ? 'border-foreground bg-foreground text-background'
+                    : 'border-input text-foreground hover:bg-muted',
+                  disabled && 'cursor-default opacity-60',
+                )}
+                title={canToggle ? text : undefined}
               >
-                {open === condition.id ? 'Hide' : 'Text'}
-              </Button>
+                <input
+                  type="checkbox"
+                  className="sr-only"
+                  aria-label={condition.name}
+                  checked={on}
+                  disabled={disabled}
+                  onChange={() =>
+                    campaignId &&
+                    void command.run(
+                      commandId => submit({ campaignId, text, commandId }),
+                      JSON.stringify(['condition', campaignId, text]),
+                    )
+                  }
+                />
+                {condition.name}
+              </label>
+              <RuleLink id={`mcdm.heroes.v1/condition/${condition.id}`} label={condition.name} />
             </li>
           );
         })}
       </ul>
-      {open && <SourceText text={CONDITIONS.find(c => c.id === open)!.text} label={open} />}
       <ErrorNotice error={command.error} />
     </div>
   );
 }
 
+/** Active conditions as ink-filled chips; shown in the header so they survive body scrolling. */
 export function ActiveConditionBadges({ conditions }: { conditions: Record<string, boolean> }) {
   const active = CONDITIONS.filter(c => conditions[c.id]);
   if (!active.length) return null;
   return (
-    <span className="flex flex-wrap gap-1">
+    <span className="flex flex-wrap items-center gap-1" aria-label="Active conditions">
       {active.map(c => (
-        <Badge key={c.id} variant="outline">
-          {c.name}
-        </Badge>
+        <span key={c.id} className="inline-flex items-center">
+          <Chip kind="result" caps>
+            {c.name}
+          </Chip>
+          <RuleLink id={`mcdm.heroes.v1/condition/${c.id}`} label={c.name} />
+        </span>
       ))}
     </span>
-  );
-}
-
-/** Verbatim source text, shown as the file prints it. */
-export function SourceText({ text, label }: { text: string; label?: string }) {
-  return (
-    <pre
-      aria-label={label ? `Source text: ${label}` : 'Source text'}
-      className="mt-1 max-h-96 overflow-auto border-l-2 border-rule-strong pl-3 font-sans text-xs whitespace-pre-wrap [overflow-wrap:anywhere]"
-    >
-      {text}
-    </pre>
   );
 }
 

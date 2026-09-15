@@ -112,6 +112,31 @@ and 4.79:1 against the dark card surface. Primary-action color remains the measu
 | Control height | 36px default buttons and inputs, 28px small, 44px large (login) | Chosen. |
 | Minimum body width | 760px | Retained from the previous stylesheet; desktop first. |
 
+## Session shell and table primitives (V21)
+
+Added by build slice V21 (2026-09-15) for the desktop layout fidelity work. The mockup
+measurements come from the [design fidelity audit](build/audits/2026-09-15-v1-design-audit.md)
+(combat-table-dark.png: 1606px frame, header rule at 80px, pane rules at x 448 and x 1064). The
+tokens are CSS custom properties on `:root` in `web/style.css`; the shell classes
+(`.session-shell`, `.session-panes`, `.session-pane`, `.session-pane-scroll`) and the overlay card
+classes (`.overlay-card*`) consume them. Primitives live under `web/components/`.
+
+| Token | Value | Provenance |
+| --- | --- | --- |
+| `--session-header-height` | 70px | Measured (80px at the 1606px mockup frame, about 70px at 1440). |
+| `--pane-side-width` | `min(424px, calc(424 / 1440 * 100vw))` | Measured 424px (Director pane; heroes pane in FreePlay). Chosen: fixed from 1440px up, scaled proportionally below; the body minimum of 760px still applies. |
+| `--pane-heroes-combat-width` | `min(566px, calc(566 / 1440 * 100vw))` | Measured 566px (heroes pane while an encounter is committed). Same scaling rule. |
+| `--pane-padding-x` / `--pane-padding-y` | 24px / 20px | Horizontal measured (24px in every session mockup); vertical chosen. |
+| Pane rules | 1px `--rule-strong`, full height, between panes and under the header | Measured. Panes have no card wrappers; cards are reserved for callouts. |
+| `--bar-thickness` | 6px | Measured (roster and sheet Stamina bars in the light mockups). |
+| `--disc-sm` / `--disc-md` / `--disc-lg` / `--disc-ring` | 32px / 44px / 110px / 60px | Measured approximately (log entries, roster rows, sheet header, ring portraits). |
+| `--disc-ring-stroke` | 3px | Measured approximately (ring portrait stroke). |
+| `--chip-radius` / `--chip-border` | 2px / 1px | Measured (square-cornered chips with a 1px `--input` border; result chips filled ink, accent chips brick red). |
+| `--pip-size` | 10px | Measured approximately (Recoveries squares). |
+| Status pill | `--primary` fill, 28px tall, caps label; feed marker pill outlined `--input`, fully rounded | Measured (header pill filled; `SESSION STARTED` pill outlined). |
+| Overlay card | `min(850px, 100vw - 2rem)` wide, `min(850px, 100dvh - 3rem)` tall, blurred 35% backdrop | Retained from the V13 rule card unchanged. |
+| Dark theme shadows | none (`--shadow-hard-color: transparent`, unchanged) | Measured: the dark mockup has no offset shadow; the light hard-shadow token is kept for callout cards. |
+
 ## Motion, focus and disabled states
 
 | Token | Value | Provenance |

@@ -226,6 +226,22 @@ export function renderArticle(
     m => ({ text: plainText(m[1]), id: m[2] }),
   );
   const tree = markdown.parse(readableMarkdown(body)) as Root;
+  const blockTitles = new WeakSet<Heading>();
+  // Monster abilities and traits are printed as bold blockquote titles, not headings.
+  // Promote those titles so table references can land on the exact ability or trait.
+  visit(tree, 'blockquote', node => {
+    const first = node.children[0];
+    if (
+      first?.type !== 'paragraph' ||
+      first.children.length !== 1 ||
+      first.children[0]?.type !== 'strong'
+    )
+      return;
+    const title = first.children[0];
+    const heading: Heading = { type: 'heading', depth: 3, children: title.children };
+    blockTitles.add(heading);
+    node.children[0] = heading;
+  });
   const headings: RuleHeading[] = [];
   const unresolved: string[] = [];
   const seen = new Map<string, number>();
@@ -236,7 +252,8 @@ export function renderArticle(
   const minDepth = Math.min(6, ...sourceHeadings.map(h => h.depth));
   for (const node of sourceHeadings) {
     const text = toString(node);
-    const slug = slugify(text) || 'section';
+    const slug =
+      slugify(blockTitles.has(node) ? text.replace(/\s*\([^)]*\)\s*$/, '') : text) || 'section';
     const count = seen.get(slug) ?? 0;
     seen.set(slug, count + 1);
     const id = count ? `${slug}-${count}` : slug;

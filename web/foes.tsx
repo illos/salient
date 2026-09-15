@@ -1,28 +1,19 @@
 // SPDX-License-Identifier: GPL-3.0-only
-import { useState } from 'react';
 import { useMutation, useQuery } from 'convex/react';
 import { api } from '../convex/_generated/api';
 import type { Id } from '../convex/_generated/dataModel';
 import { Button } from './components/ui/button';
 import { ErrorNotice, SectionHeading, useCommand } from './ui';
+import { RuleLink } from './rules/link';
 
-function SourceText({ sourceSnapshot }: { sourceSnapshot: string }) {
-  const source = JSON.parse(sourceSnapshot) as { name: string; text: string };
-  return (
-    <details className="text-sm">
-      <summary className="cursor-pointer py-1 text-muted-foreground">
-        Read complete source: {source.name}
-      </summary>
-      <pre className="mt-2 border-l-2 border-rule-strong pl-3 font-sans whitespace-pre-wrap [overflow-wrap:anywhere]">
-        {source.text}
-      </pre>
-    </details>
-  );
+function FoeReference({ sourceSnapshot }: { sourceSnapshot: string }) {
+  const source = JSON.parse(sourceSnapshot) as { id: string; name: string; sourcePath: string };
+  return <RuleLink id={source.id} sourcePath={source.sourcePath} label={source.name} />;
 }
 function FoeSource({ campaignId, foeId }: { campaignId: Id<'campaigns'>; foeId: Id<'foes'> }) {
   const source = useQuery(api.foes.detail, { campaignId, foeId });
   return source ? (
-    <SourceText sourceSnapshot={source.sourceSnapshot} />
+    <FoeReference sourceSnapshot={source.sourceSnapshot} />
   ) : (
     <p role="status" className="text-sm text-muted-foreground">
       Loading source…
@@ -39,7 +30,6 @@ function DirectorFoe({
   // Foe hiding is deferred (Q-REC-1): foes.setVisible stays in code, dormant, with no control here.
   const remove = useMutation(api.foes.remove);
   const deletion = useCommand();
-  const [showSource, setShowSource] = useState(false);
   return (
     <div className="rule-soft flex flex-col gap-3 py-3">
       <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
@@ -49,14 +39,7 @@ function DirectorFoe({
         </span>
       </div>
       <div className="flex flex-wrap items-center gap-2">
-        <Button
-          variant="outline"
-          size="sm"
-          type="button"
-          onClick={() => setShowSource(!showSource)}
-        >
-          {showSource ? 'Close source' : 'Inspect source'}
-        </Button>
+        <FoeSource campaignId={campaignId} foeId={foe.id} />
         <Button
           variant="outline"
           size="sm"
@@ -73,7 +56,6 @@ function DirectorFoe({
         </Button>
       </div>
       <ErrorNotice error={deletion.error} />
-      {showSource && <FoeSource campaignId={campaignId} foeId={foe.id} />}
     </div>
   );
 }
@@ -87,7 +69,9 @@ function AddFoe({ campaignId }: { campaignId: Id<'campaigns'> }) {
       {source ? (
         <>
           <div className="flex items-center justify-between gap-3 border border-rule-strong bg-card px-3 py-2">
-            <span className="text-sm font-bold">{source.name}</span>
+            <span className="text-sm font-bold">
+              {source.name} <FoeReference sourceSnapshot={source.sourceSnapshot} />
+            </span>
             <Button
               type="button"
               size="sm"
@@ -102,7 +86,6 @@ function AddFoe({ campaignId }: { campaignId: Id<'campaigns'> }) {
               {addition.pending ? 'Adding…' : 'Add foe'}
             </Button>
           </div>
-          <SourceText sourceSnapshot={source.sourceSnapshot} />
         </>
       ) : (
         <p role="status" className="text-sm text-muted-foreground">

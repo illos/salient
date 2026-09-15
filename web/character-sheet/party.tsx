@@ -1,9 +1,12 @@
 // SPDX-License-Identifier: GPL-3.0-only
 /**
- * The campaign page's party panel: admitted heroes, and the admission review queue
+ * The campaign page's party section: admitted heroes, and the admission review queue
  * (docs/character-wizard-spec.md#7-revision-and-review-lifecycle: the Director approves or
  * declines the exact submitted revision through registered operations; owners see the state of
- * their own submissions). Mounted by web/campaigns.tsx.
+ * their own submissions). Mounted by web/campaigns.tsx. V21 presentation: a hard-rule "Party"
+ * heading, hero rows with a disc, name and owner caps at the right, and the review rows with
+ * APPROVE (primary) / DECLINE (outline). The roster projection carries no class or level, so the
+ * second line shows the live Stamina and Recoveries the projection does supply.
  */
 import { useState } from 'react';
 import { Link } from '@tanstack/react-router';
@@ -12,7 +15,8 @@ import { api } from '../../convex/_generated/api';
 import type { Id } from '../../convex/_generated/dataModel';
 import { Badge } from '../components/ui/badge';
 import { Button } from '../components/ui/button';
-import { ErrorNotice, Loading, useCommand } from '../ui';
+import { Disc } from '../components/disc';
+import { ErrorNotice, Loading, SectionHeading, useCommand } from '../ui';
 import { CharacterSheet } from './index';
 
 function Decision({
@@ -59,72 +63,120 @@ export function PartyPanel({
   const reviews = useQuery(api.characters.reviews, { campaignId });
   const [open, setOpen] = useState<Id<'characters'> | null>(null);
   if (!roster || !reviews) return <Loading>Loading the party…</Loading>;
+  const pending = reviews.filter(review => review.status === 'pending').length;
   return (
-    <div className="flex flex-col gap-3">
-      <h3>Party roster</h3>
+    <section className="flex flex-col gap-2" aria-labelledby="party-heading">
+      <SectionHeading
+        aside={
+          <span className="flex items-center gap-4">
+            <Link to="/characters" className="normal-case tracking-normal">
+              Your characters →
+            </Link>
+            <span>
+              {roster.heroes.length} {roster.heroes.length === 1 ? 'hero' : 'heroes'}
+            </span>
+          </span>
+        }
+      >
+        <span id="party-heading">Party</span>
+      </SectionHeading>
       {roster.heroes.length === 0 ? (
         <p className="m-0 text-sm text-muted-foreground">No heroes are admitted yet.</p>
       ) : (
-        <ul className="m-0 list-none p-0 text-sm">
+        <ul className="m-0 list-none p-0">
           {roster.heroes.map(hero => (
-            <li key={hero.id} className="rule-soft flex items-baseline justify-between gap-3 py-2">
-              <Link to="/characters/$characterId" params={{ characterId: hero.id }}>
-                {hero.name}
+            <li key={hero.id} className="rule-soft">
+              <Link
+                to="/characters/$characterId"
+                params={{ characterId: hero.id }}
+                className="flex items-center gap-4 py-3 transition-colors duration-(--motion-fast) hover:bg-muted hover:no-underline"
+              >
+                <span aria-hidden>
+                  <Disc
+                    name={hero.name}
+                    variant={hero.ownerId === roster.viewerId ? 'ink' : 'grey'}
+                  />
+                </span>
+                <span className="flex min-w-0 flex-1 flex-col">
+                  <span className="truncate font-bold">{hero.name}</span>
+                  <span className="text-sm text-muted-foreground">
+                    {hero.live && hero.live.stamina !== null
+                      ? `Stamina ${hero.live.stamina} · Recoveries ${hero.live.recoveries ?? '—'}`
+                      : 'No live values yet'}
+                  </span>
+                </span>
+                <span className="caps shrink-0 text-muted-foreground">{hero.ownerName}</span>
               </Link>
-              <span className="text-muted-foreground">
-                {hero.ownerName}
-                {hero.live
-                  ? ` · Stamina ${hero.live.stamina} · Recoveries ${hero.live.recoveries}`
-                  : ''}
-              </span>
             </li>
           ))}
         </ul>
       )}
-      <Link to="/characters" className="text-sm">
-        Open your characters →
-      </Link>
-      <h3>{director ? 'Submissions awaiting your review' : 'Your submissions'}</h3>
-      {reviews.length === 0 ? (
-        <p className="m-0 text-sm text-muted-foreground">None.</p>
-      ) : (
-        <ul className="m-0 list-none p-0 text-sm">
-          {reviews.map(review => (
-            <li key={review.id} className="rule-soft flex flex-col gap-2 py-2">
-              <div className="flex flex-wrap items-center justify-between gap-2">
-                <span>
-                  <strong>{review.characterName}</strong> · {review.ownerName} · revision{' '}
-                  {review.revision} · {review.kind === 'admission' ? 'admission' : 'full edit'}
-                </span>
-                <span className="flex flex-wrap items-center gap-2">
-                  <Badge variant="outline">{review.status}</Badge>
-                  {director && review.status === 'pending' && (
-                    <>
-                      <Button
-                        type="button"
-                        size="sm"
-                        variant="ghost"
-                        onClick={() =>
-                          setOpen(open === review.characterId ? null : review.characterId)
-                        }
-                      >
-                        {open === review.characterId
-                          ? 'Hide proposed sheet'
-                          : 'View proposed sheet'}
-                      </Button>
-                      <Decision characterId={review.characterId} action="approve" label="Approve" />
-                      <Decision characterId={review.characterId} action="decline" label="Decline" />
-                    </>
+      {(director || reviews.length > 0) && (
+        <div className="mt-4 flex flex-col gap-2">
+          <p className="caps text-muted-foreground">
+            {director ? 'Awaiting your review' : 'Your submissions'}
+            {director && pending > 0 && <span className="ml-2 text-primary">{pending}</span>}
+          </p>
+          {reviews.length === 0 ? (
+            <p className="m-0 text-sm text-muted-foreground">None.</p>
+          ) : (
+            <ul className="m-0 list-none p-0 text-sm">
+              {reviews.map(review => (
+                <li key={review.id} className="rule-soft flex flex-col gap-2 py-3">
+                  <div className="flex flex-wrap items-center justify-between gap-3">
+                    <span className="flex items-center gap-3">
+                      <span aria-hidden>
+                        <Disc name={review.characterName} size="sm" />
+                      </span>
+                      <span className="flex flex-col">
+                        <strong>{review.characterName}</strong>
+                        <span className="text-muted-foreground">
+                          {review.ownerName} · revision {review.revision} ·{' '}
+                          {review.kind === 'admission' ? 'admission' : 'full edit'}
+                        </span>
+                      </span>
+                    </span>
+                    <span className="flex flex-wrap items-center gap-2">
+                      {(!director || review.status !== 'pending') && (
+                        <Badge variant="outline">{review.status}</Badge>
+                      )}
+                      {director && review.status === 'pending' && (
+                        <>
+                          <Button
+                            type="button"
+                            size="sm"
+                            variant="ghost"
+                            onClick={() =>
+                              setOpen(open === review.characterId ? null : review.characterId)
+                            }
+                          >
+                            {open === review.characterId
+                              ? 'Hide proposed sheet'
+                              : 'View proposed sheet'}
+                          </Button>
+                          <Decision
+                            characterId={review.characterId}
+                            action="approve"
+                            label="Approve"
+                          />
+                          <Decision
+                            characterId={review.characterId}
+                            action="decline"
+                            label="Decline"
+                          />
+                        </>
+                      )}
+                    </span>
+                  </div>
+                  {open === review.characterId && (
+                    <CharacterSheet characterId={review.characterId} view="proposed" compact />
                   )}
-                </span>
-              </div>
-              {open === review.characterId && (
-                <CharacterSheet characterId={review.characterId} view="proposed" compact />
-              )}
-            </li>
-          ))}
-        </ul>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
       )}
-    </div>
+    </section>
   );
 }

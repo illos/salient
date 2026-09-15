@@ -66,6 +66,12 @@ values remain an integration dependency, never a displayed zero or an invented f
 
 ## Actions, tests and readable rules
 
+Implementation note (2026-09-15): the user's [app-wide rule card presentation](reference-library-spec.md#app-wide-rule-cards)
+supersedes inline source expansions. Readable labels and the shared rulebook icon open a centered,
+scrollable reference card with a blurred backdrop. Source paths and IDs remain metadata; operational
+values and controls retain their behavior.
+
+
 Group action entries by **Main actions**, **Maneuvers**, **Move actions**, and **Triggered/other**,
 using supported source metadata. A short common-actions list appears alongside granted abilities
 within these groups. No favorites, custom ordering or ability-search system is required initially.

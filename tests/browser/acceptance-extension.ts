@@ -76,7 +76,9 @@ export async function tableJourney(pages: Page[], campaignUrl: string, stamp: st
     await page.waitForTimeout(300);
     await page.context().setOffline(false);
     await page.reload();
-    await expect(page.getByText(/Session running · Combat · round 1/)).toBeVisible();
+    await expect(
+      page.getByRole('status').filter({ hasText: /Running · Combat · Round 1/ }),
+    ).toBeVisible();
     expect((await query('encounters:current')).activeTurn.id).toBe(current.activeTurn.id);
     expect((await readPending()).status).toBe('awaiting-input');
     await expect(page.getByText(/awaiting input: which dice to roll/).first()).toBeVisible();
@@ -129,6 +131,31 @@ export async function tableJourney(pages: Page[], campaignUrl: string, stamp: st
   expect((await query('abilities:results'))[0].dice).toEqual(result.dice);
   await command(`@{character:${heroId}} /condition on name=prone`, 'player');
   await command(`@{foe:${foeId}} /adjust temporary-stamina value=7`);
+
+  // Reading action, condition and monster references preserves the live table route.
+  const tableUrl = player.url();
+  await player
+    .getByRole('button', { name: 'Read Melee Weapon Free Strike in the rules', exact: true })
+    .last()
+    .click();
+  await expect(player.getByRole('dialog')).toContainText('Melee Weapon Free Strike');
+  await player.getByRole('button', { name: 'Close rule', exact: true }).click();
+  await player
+    .getByRole('button', { name: 'Read Prone in the rules', exact: true })
+    .first()
+    .click();
+  await expect(player.getByRole('dialog')).toContainText('Prone');
+  await player.keyboard.press('Escape');
+  await expect(player).toHaveURL(tableUrl);
+  // V21: a foe's abilities and their references live in the roster drill-in, not on the card.
+  await director.getByRole('button', { name: 'Open Goblin Warrior', exact: true }).first().click();
+  await director
+    .getByRole('button', { name: 'Read Spear Charge in the rules', exact: true })
+    .first()
+    .click();
+  await expect(director.getByRole('dialog').locator('[id="spear-charge"]')).toBeInViewport();
+  await director.getByRole('button', { name: 'Close rule', exact: true }).click();
+  await director.getByRole('button', { name: 'Foes', exact: true }).click();
 
   // Repeated real actions keep the three reactive views active; collect post-GC heap/DOM samples.
   const sessions = await Promise.all(pages.map(page => page.context().newCDPSession(page)));
@@ -193,7 +220,9 @@ export async function tableJourney(pages: Page[], campaignUrl: string, stamp: st
     observer.getByRole('status').filter({ hasText: 'Victory award confirmed: 1' }),
   ).toBeVisible();
   await director.getByRole('button', { name: 'Finish cleanup', exact: true }).click();
-  await expect(player.getByText('Session running · FreePlay', { exact: true })).toBeVisible();
+  await expect(
+    player.getByRole('status').filter({ hasText: /Running · Free play$/ }),
+  ).toBeVisible();
   expect((await query('table:roster')).heroes[0].live.victories).toBe(1);
   await director.goto(campaignUrl);
   await director.getByRole('button', { name: 'End session', exact: true }).click();

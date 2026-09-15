@@ -298,10 +298,11 @@ campaigns, characters and saved encounters, even during active combat in another
    loading, free play/combat/respite, loot, session closure and the next session through the same authorized
    headless operations used by the UI. Check multiplayer access/retry behavior and sustained table performance
    during implementation.
-8. **Design tokens and component library:** the [V1 mockups](design-mockups/v1/README.md) fix only the
-   visual language (typography, achromatic foundation, brick-red accent, rules, uppercase metadata). Exact
-   colour values, spacing scale, component set and breakpoints are undefined and are a build-slice
-   deliverable; the mockups' recorded departures from the specifications must not be implemented.
+8. **Design tokens and component library:** the [V1 mockups](design-mockups/v1/README.md) fix the
+   desktop visual design: the visual language (typography, achromatic foundation, brick-red accent, rules,
+   uppercase metadata) and, confirmed 2026-09-15, the layouts, proportions and display mechanics. Tokens
+   were delivered by A08; layout fidelity is the V21 slice. The mockups' recorded departures from the
+   specifications must not be implemented.
 
 Detailed technical contracts remain proposals where labeled. Source-backed opening and group findings are
 recorded in the table spec; this checkpoint is not an implementation, deployment or completion report.

@@ -56,16 +56,27 @@ test('accounts, invitation approval, session lifecycle, private draft persistenc
   await expect(observer.getByRole('progressbar', { name: 'Goblin Warrior Stamina' })).toHaveCount(
     1,
   );
-  await expect(player.getByRole('button', { name: 'Inspect source' })).toHaveCount(0);
+  await expect(
+    player.getByRole('button', { name: 'Read Goblin Warrior in the rules' }),
+  ).toHaveCount(0);
   await expect(player.locator('pre')).toHaveCount(0);
   await expect(director.getByRole('button', { name: 'Show', exact: true })).toHaveCount(0);
   await expect(director.getByLabel('Show newly added foes to players')).toHaveCount(0);
   await director.getByRole('button', { name: 'Add foe' }).click();
   await expect(player.getByRole('progressbar')).toHaveCount(2);
   await director.reload();
-  await expect(director.getByRole('button', { name: 'Inspect source', exact: true })).toHaveCount(
-    2,
-  );
+  // Two on the campaign page (the add control's chip and the loaded foe). V21 moved the table's
+  // per-foe stat-block link into the drill-in, so a compact roster row no longer carries one.
+  await expect(
+    director.getByRole('button', { name: 'Read Goblin Warrior in the rules', exact: true }),
+  ).toHaveCount(2);
+  await director
+    .getByRole('button', { name: 'Read Goblin Warrior in the rules', exact: true })
+    .first()
+    .click();
+  await expect(director.getByRole('dialog')).toContainText('Spear Charge');
+  await expect(director.getByRole('dialog')).not.toContainText('scc.v1:');
+  await director.getByRole('button', { name: 'Close rule', exact: true }).click();
   // The headless CLI authenticates normally and calls the same persisted operations.
   const campaignId = campaignUrl.split('/').at(-1)!;
   const cliEnv = {
@@ -122,7 +133,7 @@ test('accounts, invitation approval, session lifecycle, private draft persistenc
   const characterUrl = player.url();
   await player.getByRole('button', { name: '9. Determine Details' }).click();
   await player
-    .getByLabel('details.backstory-and-personality', { exact: true })
+    .getByLabel('Backstory and personality', { exact: true })
     .fill('A saved journey from the north.');
   await player
     .getByLabel('Private notes', { exact: false })
@@ -131,7 +142,7 @@ test('accounts, invitation approval, session lifecycle, private draft persistenc
   await expect(player.getByText(/^Draft saved/)).toBeVisible();
   await player.reload();
   await player.getByRole('button', { name: '9. Determine Details' }).click();
-  await expect(player.getByLabel('details.backstory-and-personality', { exact: true })).toHaveValue(
+  await expect(player.getByLabel('Backstory and personality', { exact: true })).toHaveValue(
     'A saved journey from the north.',
   );
   await expect(player.getByLabel('Private notes', { exact: false })).toHaveValue(

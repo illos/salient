@@ -1,7 +1,15 @@
 // SPDX-License-Identifier: GPL-3.0-only
-import { beforeAll, expect, test } from 'vitest';
+import { beforeAll, describe, expect, it, test } from 'vitest';
 import { buildRules, plainText, renderArticle } from '../../scripts/ingest-rules';
 import { createRulesSearch } from '../../web/rules/search';
+
+import definitionsJson from '../../shared/content/fury-level-one-decisions.json';
+import manifest from '../../shared/content/compendium/manifest.json';
+import type { DecisionDefinitions } from '../../shared/evaluate/definitions';
+import { resolveRule, readableRuleText, type RuleReference } from '../../web/rules/reference';
+import { DECISION_LABELS, decisionReference, stepReference } from '../../web/wizard/presentation';
+
+const definitions = definitionsJson as unknown as DecisionDefinitions;
 
 let built: ReturnType<typeof buildRules>;
 beforeAll(() => {
@@ -91,3 +99,48 @@ test('ranks every unique exact title first, supports prefixes, typos and filters
 test('regenerates identical articles, metadata and search from the same pin', () => {
   expect(buildRules().outputs).toEqual(built.outputs);
 }, 120_000);
+
+function verify(reference: RuleReference) {
+  const target = resolveRule(built.catalog, reference);
+  expect(target, JSON.stringify(reference)).toBeDefined();
+  if (target?.section) {
+    const chunk = built.articles[target.entry.file];
+    expect(
+      chunk.find(a => a.id === target.entry.id)!.headings.map(h => h.id),
+      JSON.stringify(reference),
+    ).toContain(target.section);
+  }
+}
+describe('app-wide rule references', () => {
+  it('resolves every wizard step, decision, option, grant and dependent pool to core content', () => {
+    for (const step of definitions.steps.filter(s => s.presentedInV001)) {
+      verify(stepReference(step));
+      for (const decision of step.decisions) {
+        expect(DECISION_LABELS[decision.id]).toBeTruthy();
+        verify(decisionReference(decision, step));
+        for (const option of decision.options ?? [])
+          if (option.source) verify({ sourcePath: option.source });
+        for (const path of Object.values(decision.optionSources ?? {}))
+          verify({ sourcePath: path });
+        for (const grant of decision.grants ?? [])
+          if (grant.source) verify({ sourcePath: grant.source });
+        for (const pool of Object.values(decision.optionsByParent ?? {}))
+          verify({ sourcePath: pool.source });
+      }
+    }
+  });
+  it('resolves every runtime source without using editable character or foe names', () => {
+    for (const entry of manifest.entries) verify({ id: entry.id, sourcePath: entry.sourcePath });
+    for (const name of ['spear-charge', 'bury-the-point', 'crafty'])
+      verify({ id: `mcdm.monsters.v1/monster.goblin.statblock/goblin-warrior/${name}` });
+    verify({ id: 'mcdm.monsters.v1/monster.goblin.statblock/goblin-warrior/free-strike' });
+    expect(resolveRule(built.catalog, { id: 'unknown', label: 'Goblin Warrior' })).toBeUndefined();
+  });
+  it('renders actionable clauses without source-link syntax or emphasis markers', () => {
+    expect(
+      readableRuleText(
+        '**Effect:** [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) (save ends)',
+      ),
+    ).toBe('Effect: bleeding (save ends)');
+  });
+});

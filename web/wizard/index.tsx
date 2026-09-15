@@ -3,9 +3,13 @@
  * The minimal level-one devil Fury wizard: a real decision flow over the R01 table
  * (shared/content/fury-level-one-decisions.json). Every presented step appears in source order
  * with its decisions; the full option pool is visible with unsupported options labeled; each
- * option and decision exposes its source sentence and, where the content snapshot carries the
- * entry, the verbatim text. The "hero so far" is the shared `characters.evaluate` read over the
- * current selections; nothing here derives a value.
+ * option and decision links to the embedded rules with readable labels. The "hero so far" is the
+ * shared `characters.evaluate` read over the current selections; nothing here derives a value.
+ *
+ * V21 (docs/build/V21-desktop-layout-fidelity.md item 10): the page is the mockup's full-viewport
+ * frame (character-wizard-class.png) with its own header, the step rail, a scrolling centre
+ * column with the pinned step navigation, and the hero-so-far column. Presentation only: every
+ * decision writes through the same `characters.save` mutation with the same arguments as before.
  *
  * Owning specifications: docs/character-wizard-spec.md#v001-scope, #3-decision-system,
  * #main-creation-and-editing, #10-mobile-interaction-requirements (desktop first for v0.01);
@@ -13,18 +17,16 @@
  * step is not presented, Q-CHAR-1).
  */
 import { useMemo, useState } from 'react';
-import { Link, useNavigate } from '@tanstack/react-router';
+import { useNavigate } from '@tanstack/react-router';
 import { useMutation, useQuery } from 'convex/react';
 import type { FunctionReturnType } from 'convex/server';
 import { api } from '../../convex/_generated/api';
 import type { Id } from '../../convex/_generated/dataModel';
 import definitionsJson from '../../shared/content/fury-level-one-decisions.json';
-import manifest from '../../shared/content/compendium/manifest.json';
 import type { CharacterAuthored } from '../../shared/characterDraft';
 import type {
   Diagnostic,
   EvaluationResult,
-  PartialBaseline,
   SelectionValue,
 } from '../../shared/contracts/characterEvaluation';
 import type { Decision, DecisionDefinitions, Step } from '../../shared/evaluate/definitions';
@@ -44,24 +46,30 @@ import {
   unavailableReason,
   type Selections,
 } from '../../shared/evaluate/structure';
-import { Badge } from '../components/ui/badge';
-import { Button } from '../components/ui/button';
-import { Card, CardContent } from '../components/ui/card';
 import { Input } from '../components/ui/input';
 import { Textarea } from '../components/ui/textarea';
-import { ErrorNotice, Eyebrow, Field, Loading, Notice, useCommand } from '../ui';
-import { SourceText } from '../character-sheet/controls';
+import { StatBox } from '../components/stat-box';
+import { ErrorNotice, Field, Loading, Notice, useCommand } from '../ui';
+import { RuleLink } from '../rules/link';
+import { readableRuleText } from '../rules/reference';
+import {
+  decisionLabel,
+  decisionReference,
+  primaryDecisionId,
+  readableGuidance,
+  stepExcerpt,
+  stepName,
+  stepNumber,
+  stepReference,
+} from './presentation';
+import { WizardHeader } from './header';
+import { StepRail, type RailStep } from './rail';
+import { ChoiceList, ChoiceRow, ChoiceSection, StepNav, StepTitle } from './choice-list';
+import { HeroSoFar } from './hero-so-far';
 
 const definitions = definitionsJson as unknown as DecisionDefinitions;
 const decisions = indexDecisions(definitions);
 const PRESENTED: Step[] = definitions.steps.filter(step => step.presentedInV001);
-/** Source path (relative to the Compendium) to content id, for the "Read entry" control. */
-const CONTENT_ID_BY_PATH = new Map(
-  (manifest as { entries: { id: string; sourcePath: string }[] }).entries.map(entry => [
-    entry.sourcePath.replace(/^vendor\/steel-compendium\//, ''),
-    entry.id,
-  ]),
-);
 /** Authored decisions that are the character's own fields rather than selections. */
 const AUTHORED_FIELDS: Record<string, keyof CharacterAuthored> = {
   'details.name': 'name',
@@ -70,32 +78,6 @@ const AUTHORED_FIELDS: Record<string, keyof CharacterAuthored> = {
 };
 
 type LoadedCharacter = FunctionReturnType<typeof api.characters.get>;
-
-/** The decision's own source sentence plus, when the snapshot has the entry, its verbatim text. */
-function SourcePanel({ path, quote, label }: { path: string; quote?: string; label: string }) {
-  const [open, setOpen] = useState(false);
-  const contentId = CONTENT_ID_BY_PATH.get(path);
-  const entry = useQuery(api.content.get, open && contentId ? { id: contentId } : 'skip');
-  return (
-    <div className="text-xs text-muted-foreground">
-      {quote && <p className="m-0">“{quote}”</p>}
-      <p className="m-0 flex flex-wrap items-center gap-2">
-        <span>{path}</span>
-        {contentId ? (
-          <Button type="button" variant="ghost" size="xs" onClick={() => setOpen(!open)}>
-            {open ? 'Close entry' : 'Read entry'}
-          </Button>
-        ) : (
-          <span>(no snapshot entry: the sentence is quoted from the pinned file)</span>
-        )}
-      </p>
-      {open && contentId && (entry ? <SourceText text={entry.text} label={label} /> : <Loading />)}
-      {open && contentId && entry === null && (
-        <p className="m-0">Content entry {contentId} is not loaded; run pnpm content:seed.</p>
-      )}
-    </div>
-  );
-}
 
 function Diagnostics({ list }: { list: Diagnostic[] | undefined }) {
   if (!list?.length) return null;
@@ -106,16 +88,11 @@ function Diagnostics({ list }: { list: Diagnostic[] | undefined }) {
           key={i}
           className={d.severity === 'warning' ? 'text-muted-foreground' : 'text-destructive'}
         >
-          <strong>{d.severity}</strong> ({d.code}): {d.message}
-          {d.uncertainty ? ` [${d.uncertainty}]` : ''}
+          {readableGuidance(d.message)}
         </li>
       ))}
     </ul>
   );
-}
-
-function UnsupportedLabel() {
-  return <span className="caps text-muted-foreground">not offered in v0.01</span>;
 }
 
 /** One selectable value from a pool, disabled and labeled when the v0.01 app does not offer it. */
@@ -138,7 +115,7 @@ function PoolSelect({
   const unsupported = values.filter(v => !isSupported(decision, v));
   return (
     <select
-      className="native-select"
+      className="native-select max-w-sm"
       aria-label={label}
       value={value === null ? '__open__' : (value ?? '')}
       onChange={event => {
@@ -169,6 +146,7 @@ function PoolSelect({
 
 function DecisionEditor({
   decision,
+  step,
   selections,
   onSelect,
   authored,
@@ -176,6 +154,7 @@ function DecisionEditor({
   diagnostics,
 }: {
   decision: Decision;
+  step: Step;
   selections: Selections;
   onSelect: (id: string, value: SelectionValue | undefined) => void;
   authored: CharacterAuthored;
@@ -185,26 +164,18 @@ function DecisionEditor({
   const available = isAvailable(decision, selections, decisions);
   const value = selections[decision.id];
   const shape = decision.shape;
-  const heading = (
-    <div className="flex flex-wrap items-baseline justify-between gap-2">
-      <h4 className="m-0">
-        {decision.id}
-        <span className="ml-2 caps text-muted-foreground">{decision.kind}</span>
-      </h4>
-      {decision.questions?.length ? (
-        <span className="caps text-muted-foreground">open: {decision.questions.join(', ')}</span>
-      ) : null}
-    </div>
-  );
+  const label = decisionLabel(decision.id);
+  const reference = <RuleLink {...decisionReference(decision, step)} />;
   if (!available)
     return (
-      <div className="rule-soft flex flex-col gap-1 py-3 opacity-60">
-        {heading}
-        <p className="m-0 text-xs text-muted-foreground">
-          {unavailableReason(decision, decisions)}
+      <ChoiceSection label={label} reference={reference} muted>
+        <p className="m-0 text-sm text-muted-foreground">
+          {readableGuidance(
+            unavailableReason(decision, decisions) ?? 'Complete the earlier choices first.',
+          )}
         </p>
         <Diagnostics list={diagnostics} />
-      </div>
+      </ChoiceSection>
     );
   let control: React.ReactNode = null;
   if (decision.kind === 'none') control = null;
@@ -212,10 +183,11 @@ function DecisionEditor({
     control = (
       <ul className="m-0 list-none p-0 text-sm">
         {(decision.grants ?? []).map((grant, i) => (
-          <li key={i}>
-            <Badge variant="outline">{grant.kind}</Badge> {grant.value}
-            {grant.quote ? <span className="text-muted-foreground"> — “{grant.quote}”</span> : null}
-            {grant.note ? <span className="text-muted-foreground"> ({grant.note})</span> : null}
+          <li key={i} className="flex items-center gap-2 py-0.5">
+            {readableRuleText(grant.value)
+              .replace(/ \(derived in R02\)/g, '')
+              .replace(/manual in v0.01/g, 'resolved at the table')}
+            {grant.source && <RuleLink sourcePath={grant.source} label={grant.value} />}
           </li>
         ))}
       </ul>
@@ -226,16 +198,18 @@ function DecisionEditor({
     control =
       field === 'name' ? (
         <Input
-          aria-label={decision.id}
+          aria-label={label}
           required
           maxLength={100}
+          className="max-w-md"
           value={text}
           onChange={event => onAuthored({ ...authored, name: event.target.value })}
         />
       ) : (
         <Textarea
-          aria-label={decision.id}
+          aria-label={label}
           maxLength={10000}
+          className="max-w-2xl"
           value={text}
           onChange={event =>
             field
@@ -246,51 +220,47 @@ function DecisionEditor({
       );
   } else if (shape.type === 'single' && decision.options) {
     control = (
-      <ul className="m-0 list-none p-0">
+      <ChoiceList>
         {decision.options.map(option => (
-          <li key={option.id} className="flex flex-wrap items-center gap-2 py-0.5 text-sm">
-            <label className="flex items-center gap-2">
-              <input
-                type="radio"
-                name={decision.id}
-                value={option.value}
-                checked={value === option.value}
-                disabled={!option.supportedInV001}
-                onChange={() => onSelect(decision.id, option.value)}
-              />
-              <span>{option.value}</span>
-            </label>
-            {option.cost !== undefined && (
-              <span className="text-muted-foreground">{option.cost} pt</span>
-            )}
-            {!option.supportedInV001 && <UnsupportedLabel />}
-            {option.source && <OptionSource path={option.source} label={option.value} />}
-          </li>
+          <ChoiceRow
+            key={option.id}
+            type="radio"
+            group={decision.id}
+            name={option.value}
+            checked={value === option.value}
+            supported={option.supportedInV001}
+            onChange={() => onSelect(decision.id, option.value)}
+            meta={option.cost !== undefined ? `${option.cost} pt` : undefined}
+            reference={
+              option.source ? <RuleLink sourcePath={option.source} label={option.value} /> : null
+            }
+          />
         ))}
-      </ul>
+      </ChoiceList>
     );
   } else if (shape.type === 'single') {
     const pool = poolOf(decision, selections, definitions);
     control = (
-      <div className="flex flex-col gap-1">
-        {pool.parent?.quote && (
-          <p className="m-0 text-xs text-muted-foreground">
-            {pool.parentValue}: “{pool.parent.quote}” ({pool.parent.source})
-          </p>
+      <div className="flex flex-col gap-1.5">
+        {pool.parent && (
+          <span className="text-xs text-muted-foreground">
+            {pool.parentValue}
+            <RuleLink sourcePath={pool.parent.source} label={pool.parentValue ?? 'Culture skill'} />
+          </span>
         )}
-        <PoolSelect
-          decision={decision}
-          value={typeof value === 'string' ? value : undefined}
-          values={pool.values}
-          onChange={next => onSelect(decision.id, next ?? undefined)}
-          label={decision.id}
-        />
-        {typeof value === 'string' && decision.optionSources?.[value] && (
-          <OptionSource path={decision.optionSources[value]} label={value} />
-        )}
-        <span className="text-xs text-muted-foreground">
-          {pool.values.length} options in the source pool
-        </span>
+        <div className="flex items-center gap-2">
+          <PoolSelect
+            decision={decision}
+            value={typeof value === 'string' ? value : undefined}
+            values={pool.values}
+            onChange={next => onSelect(decision.id, next ?? undefined)}
+            label={label}
+          />
+          {typeof value === 'string' && decision.optionSources?.[value] && (
+            <RuleLink sourcePath={decision.optionSources[value]} label={value} />
+          )}
+        </div>
+        <span className="text-xs text-muted-foreground">{pool.values.length} options</span>
       </div>
     );
   } else if (shape.type === 'multi') {
@@ -299,7 +269,7 @@ function DecisionEditor({
       ? value
       : Array.from({ length: shape.count }, () => undefined);
     control = (
-      <div className="flex flex-col gap-1">
+      <div className="flex flex-col gap-1.5">
         {slots.map((slot, index) => (
           <PoolSelect
             key={index}
@@ -307,7 +277,7 @@ function DecisionEditor({
             value={slot}
             values={pool.values}
             allowOpen={shape.deferrable}
-            label={`${decision.id} slot ${index + 1}`}
+            label={`${label} ${index + 1}`}
             onChange={next => {
               const nextSlots = [...slots];
               nextSlots[index] = next;
@@ -333,32 +303,28 @@ function DecisionEditor({
       0,
     );
     control = (
-      <div className="flex flex-col gap-1">
-        <ul className="m-0 list-none p-0">
+      <div className="flex flex-col gap-2">
+        <ChoiceList>
           {(decision.options ?? []).map(option => (
-            <li key={option.id} className="flex flex-wrap items-center gap-2 py-0.5 text-sm">
-              <label className="flex items-center gap-2">
-                <input
-                  type="checkbox"
-                  checked={chosen.includes(option.value)}
-                  disabled={!option.supportedInV001}
-                  onChange={event => {
-                    const next = event.target.checked
-                      ? [...chosen, option.value]
-                      : chosen.filter(name => name !== option.value);
-                    onSelect(decision.id, next.length ? next : undefined);
-                  }}
-                />
-                <span>{option.value}</span>
-              </label>
-              <span className="text-muted-foreground">
-                {option.cost} point{option.cost === 1 ? '' : 's'}
-              </span>
-              {!option.supportedInV001 && <UnsupportedLabel />}
-              {option.source && <OptionSource path={option.source} label={option.value} />}
-            </li>
+            <ChoiceRow
+              key={option.id}
+              type="checkbox"
+              name={option.value}
+              checked={chosen.includes(option.value)}
+              supported={option.supportedInV001}
+              onChange={() => {
+                const next = chosen.includes(option.value)
+                  ? chosen.filter(name => name !== option.value)
+                  : [...chosen, option.value];
+                onSelect(decision.id, next.length ? next : undefined);
+              }}
+              meta={`${option.cost} point${option.cost === 1 ? '' : 's'}`}
+              reference={
+                option.source ? <RuleLink sourcePath={option.source} label={option.value} /> : null
+              }
+            />
           ))}
-        </ul>
+        </ChoiceList>
         <span className="text-xs text-muted-foreground">
           {total} of {shape.budget} points spent
           {decision.supportedSetInV001
@@ -371,13 +337,10 @@ function DecisionEditor({
     control = <AssignmentEditor selections={selections} onSelect={onSelect} />;
   }
   return (
-    <div className="rule-soft flex flex-col gap-2 py-3">
-      {heading}
+    <ChoiceSection label={label} reference={reference}>
       {control}
-      <SourcePanel path={decision.source} quote={decision.quote} label={decision.id} />
-      {decision.note && <p className="m-0 text-xs text-muted-foreground">{decision.note}</p>}
       <Diagnostics list={diagnostics} />
-    </div>
+    </ChoiceSection>
   );
 }
 
@@ -408,38 +371,50 @@ function AssignmentEditor({
     }
   }
   return (
-    <div className="flex flex-col gap-3">
-      <p className="m-0 text-xs text-muted-foreground">
+    <div className="flex flex-col gap-4">
+      <p className="m-0 text-sm text-muted-foreground">
         Might and Agility are fixed by Fury. Place each remaining value in a blank characteristic,
         or choose it by name.
       </p>
-      <div aria-label="Remaining characteristic values" className="flex gap-2">
-        {remaining.map((amount, index) => (
-          <span
-            key={`${amount}:${index}`}
-            draggable
-            data-testid={`array-value-${index}`}
-            className="rounded border p-2 cursor-grab"
-            onDragStart={event =>
-              event.dataTransfer.setData('application/json', JSON.stringify({ value: amount }))
-            }
-          >
-            {amount}
-          </span>
-        ))}
+      <div className="flex items-center gap-3">
+        <span className="caps text-muted-foreground">Remaining values</span>
+        <div aria-label="Remaining characteristic values" className="flex gap-2">
+          {remaining.map((amount, index) => (
+            <span
+              key={`${amount}:${index}`}
+              draggable
+              // Without a payload the drop target has nothing to read and the assignment is lost.
+              onDragStart={event =>
+                event.dataTransfer.setData('application/json', JSON.stringify({ value: amount }))
+              }
+              data-testid={`array-value-${index}`}
+              className="inline-flex size-9 cursor-grab items-center justify-center rounded-md border border-rule-strong bg-background text-base font-bold tabular-nums shadow-hard"
+            >
+              {amount}
+            </span>
+          ))}
+          {remaining.length === 0 && (
+            <span className="text-sm text-muted-foreground">All values placed</span>
+          )}
+        </div>
       </div>
       <div className="flex flex-wrap items-end gap-3">
         {['Might', 'Agility'].map(target => (
-          <label key={target} className="flex flex-col gap-1 text-sm">
-            <span>{target} (fixed)</span>
-            <Input aria-label={`${ASSIGNMENT_ID} ${target}`} value="2" disabled className="w-20" />
-          </label>
+          <span
+            key={target}
+            role="group"
+            aria-label={`${target} (fixed)`}
+            className="flex flex-col items-center gap-1"
+          >
+            <StatBox compact emphasis value="2" label={target.slice(0, 3)} />
+            <span className="caps text-muted-foreground">Fixed</span>
+          </span>
         ))}
         {['Reason', 'Intuition', 'Presence'].map(target => (
           <label
             key={target}
             data-testid={`assignment-${target}`}
-            className="flex flex-col gap-1 rounded border border-dashed p-2 text-sm"
+            className={`flex flex-col items-center gap-1 rounded-md border border-dashed px-3 py-2 text-sm ${current[target] === undefined ? 'border-input' : 'border-rule-strong bg-muted'}`}
             onDragOver={event => event.preventDefault()}
             onDrop={event => {
               event.preventDefault();
@@ -469,7 +444,7 @@ function AssignmentEditor({
             </span>
             <select
               className="native-select"
-              aria-label={`${ASSIGNMENT_ID} ${target}`}
+              aria-label={`Assign ${target}`}
               value={current[target] === undefined ? '' : String(current[target])}
               onChange={event =>
                 assign(target, event.target.value === '' ? null : Number(event.target.value))
@@ -494,116 +469,9 @@ function AssignmentEditor({
   );
 }
 
-function OptionSource({ path, label }: { path: string; label: string }) {
-  const [open, setOpen] = useState(false);
-  const contentId = CONTENT_ID_BY_PATH.get(path);
-  const entry = useQuery(api.content.get, open && contentId ? { id: contentId } : 'skip');
-  if (!contentId) return <span className="text-xs text-muted-foreground">{path}</span>;
-  return (
-    <span className="flex flex-col">
-      <Button type="button" variant="ghost" size="xs" onClick={() => setOpen(!open)}>
-        {open ? 'Close text' : 'Source text'}
-      </Button>
-      {open && (entry ? <SourceText text={entry.text} label={label} /> : <Loading />)}
-    </span>
-  );
-}
-
-function HeroSoFar({ evaluation }: { evaluation: EvaluationResult | undefined }) {
-  if (!evaluation) return <Loading>Evaluating…</Loading>;
-  const b: PartialBaseline = evaluation.baseline ?? evaluation.partial ?? {};
-  const show = (v: { value: number | string } | undefined) => (v ? String(v.value) : 'pending');
-  const chars = b.characteristics;
-  const problems = Object.values(evaluation.diagnostics)
-    .flat()
-    .filter(d => d.severity !== 'warning');
-  return (
-    <div className="flex flex-col gap-2 text-sm" aria-label="Hero so far">
-      <div className="flex items-center justify-between">
-        <h3 className="m-0">Hero so far</h3>
-        <Badge variant={evaluation.status === 'complete' ? 'default' : 'outline'}>
-          {evaluation.status}
-        </Badge>
-      </div>
-      <p className="m-0 text-muted-foreground">
-        Level {show(b.level)} {b.ancestry?.value ?? '…'} {b.class?.value ?? '…'}
-        {b.subclass ? ` (${b.subclass.value})` : ''} · {b.career?.value ?? '…'}
-      </p>
-      <dl className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-0.5">
-        <dt className="text-muted-foreground">M / A / R / I / P</dt>
-        <dd className="m-0">
-          {chars
-            ? [chars.M, chars.A, chars.R, chars.I, chars.P].map(c => c.value).join(' / ')
-            : 'pending'}
-        </dd>
-        <dt className="text-muted-foreground">Stamina max</dt>
-        <dd className="m-0">{show(b.staminaMaximum)}</dd>
-        <dt className="text-muted-foreground">Recoveries</dt>
-        <dd className="m-0">
-          {show(b.recoveriesMaximum)} (value {show(b.recoveryValue)})
-        </dd>
-        <dt className="text-muted-foreground">Winded</dt>
-        <dd className="m-0">{show(b.windedValue)}</dd>
-        <dt className="text-muted-foreground">Speed / stability / size</dt>
-        <dd className="m-0">
-          {show(b.speed)} / {show(b.stability)} / {show(b.size)}
-        </dd>
-        <dt className="text-muted-foreground">Disengage</dt>
-        <dd className="m-0">{show(b.disengage)}</dd>
-        <dt className="text-muted-foreground">Potency</dt>
-        <dd className="m-0">
-          {b.potency
-            ? `${b.potency.weak.value} / ${b.potency.average.value} / ${b.potency.strong.value}`
-            : 'pending'}
-        </dd>
-        <dt className="text-muted-foreground">Saves on</dt>
-        <dd className="m-0">
-          {b.savingThrowThreshold ? `${b.savingThrowThreshold.value}+` : 'pending'}
-        </dd>
-        <dt className="text-muted-foreground">Heroic resource</dt>
-        <dd className="m-0">
-          {b.heroicResource
-            ? `${b.heroicResource.name.value} ${b.heroicResource.startingValue.value}`
-            : 'pending'}
-        </dd>
-        <dt className="text-muted-foreground">Renown / Wealth</dt>
-        <dd className="m-0">
-          {show(b.renown)} / {show(b.wealth)}
-        </dd>
-        <dt className="text-muted-foreground">Kit</dt>
-        <dd className="m-0">{b.kit ? b.kit.name.value : 'pending'}</dd>
-        <dt className="text-muted-foreground">Skills</dt>
-        <dd className="m-0">{b.skills?.map(s => s.name).join(', ') || '—'}</dd>
-        <dt className="text-muted-foreground">Languages</dt>
-        <dd className="m-0">{b.languages?.map(l => l.name).join(', ') || '—'}</dd>
-        <dt className="text-muted-foreground">Traits</dt>
-        <dd className="m-0">{b.traits?.map(t => t.name).join(', ') || '—'}</dd>
-        <dt className="text-muted-foreground">Features</dt>
-        <dd className="m-0">{b.features?.map(f => f.name).join(', ') || '—'}</dd>
-        <dt className="text-muted-foreground">Perks</dt>
-        <dd className="m-0">{b.perks?.map(p => p.name).join(', ') || '—'}</dd>
-        <dt className="text-muted-foreground">Abilities</dt>
-        <dd className="m-0">{b.abilities?.map(a => a.name).join(', ') || '—'}</dd>
-      </dl>
-      {problems.length > 0 && (
-        <div>
-          <h4 className="m-0 caps text-muted-foreground">Outstanding</h4>
-          <ul className="m-0 list-none p-0 text-xs">
-            {problems.map((d, i) => (
-              <li key={i}>
-                {d.decisionId}: {d.code}
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-      {b.uncertainties?.length ? (
-        <p className="m-0 text-xs text-muted-foreground">
-          Provisional: {b.uncertainties.join(', ')}
-        </p>
-      ) : null}
-    </div>
-  );
+/** Whether the step has anything the user records (a choice or an authored text). */
+function hasInteractiveDecision(step: Step): boolean {
+  return step.decisions.some(d => d.kind === 'choice' || d.kind === 'authored');
 }
 
 function Wizard({ character }: { character: LoadedCharacter }) {
@@ -616,15 +484,23 @@ function Wizard({ character }: { character: LoadedCharacter }) {
   const [authored, setAuthored] = useState<CharacterAuthored>(character.authored);
   const [expectedRevision, setExpectedRevision] = useState(character.revision);
   const [stepIndex, setStepIndex] = useState(0);
+  const [reached, setReached] = useState(0);
   const [saved, setSaved] = useState(false);
+  const [dirty, setDirty] = useState(false);
   const [cleared, setCleared] = useState<string[]>([]);
   const stale = character.revision !== expectedRevision;
   const draft = useMemo(() => draftSelectionsFrom(selections, definitions), [selections]);
   const evaluation = useQuery(api.characters.evaluate, { selections: draft }) as
     EvaluationResult | undefined;
   const step = PRESENTED[stepIndex]!;
+  const canSave = !command.pending && !stale && !character.combatLocked;
+  function goTo(index: number) {
+    setStepIndex(index);
+    setReached(r => Math.max(r, index));
+  }
   function select(id: string, value: SelectionValue | undefined) {
     setSaved(false);
+    setDirty(true);
     const next = { ...selections };
     if (id === 'class.fury.characteristic-array' && value !== selections[id])
       delete next[ASSIGNMENT_ID];
@@ -633,6 +509,11 @@ function Wizard({ character }: { character: LoadedCharacter }) {
     const pruned = pruneUnavailable(next, definitions);
     setSelections(pruned.selections);
     setCleared(pruned.removed.filter(removed => removed !== id));
+  }
+  function author(value: CharacterAuthored) {
+    setSaved(false);
+    setDirty(true);
+    setAuthored(value);
   }
   async function persist(close: boolean) {
     setSaved(false);
@@ -651,9 +532,15 @@ function Wizard({ character }: { character: LoadedCharacter }) {
     );
     if (ok) {
       setSaved(true);
+      setDirty(false);
       if (close)
         await navigate({ to: '/characters/$characterId', params: { characterId: character.id } });
     }
+  }
+  /** EXIT: the old "Save and close" when there is something to save; otherwise just leave. */
+  async function exit() {
+    if (dirty && canSave) return persist(true);
+    await navigate({ to: '/characters/$characterId', params: { characterId: character.id } });
   }
   const problemsByStep = (s: Step) =>
     s.decisions.reduce(
@@ -661,158 +548,135 @@ function Wizard({ character }: { character: LoadedCharacter }) {
         n + (evaluation?.diagnostics[d.id]?.filter(x => x.severity !== 'warning').length ?? 0),
       0,
     );
+  const recordedValue = (id: string | undefined): string | undefined => {
+    if (!id) return undefined;
+    const field = AUTHORED_FIELDS[id];
+    if (field) return authored[field] || undefined;
+    const value = selections[id];
+    return typeof value === 'string' ? value : undefined;
+  };
+  const railSteps: RailStep[] = PRESENTED.map((s, index) => {
+    const problems = problemsByStep(s);
+    const recorded = s.decisions.some(d =>
+      AUTHORED_FIELDS[d.id] ? Boolean(authored[AUTHORED_FIELDS[d.id]!]) : d.id in selections,
+    );
+    const done =
+      evaluation !== undefined &&
+      problems === 0 &&
+      (hasInteractiveDecision(s) ? recorded : index < reached);
+    return {
+      id: s.id,
+      name: stepName(s),
+      number: stepNumber(s) ?? index + 1,
+      chosen: recordedValue(primaryDecisionId(s)),
+      problems,
+      done,
+    };
+  });
+  const previous = stepIndex > 0 ? PRESENTED[stepIndex - 1] : undefined;
+  const next = stepIndex < PRESENTED.length - 1 ? PRESENTED[stepIndex + 1] : undefined;
   return (
-    <>
-      <Link
-        to="/characters/$characterId"
-        params={{ characterId: character.id }}
-        className="mb-4 inline-block text-sm text-muted-foreground"
-      >
-        ← {character.authored.name}
-      </Link>
-      <div className="rule-strong mb-6 flex flex-wrap items-end justify-between gap-4 pb-4">
-        <div>
-          <Eyebrow>Character wizard · level-one devil Fury</Eyebrow>
-          <h1>{authored.name || 'Unnamed hero'}</h1>
-          <p className="mt-1 text-sm text-muted-foreground">
-            Steps follow Making a Hero in source order; the complication step is not presented
-            (Q-CHAR-1). Draft revision {expectedRevision}
-            {character.effectiveRevisionId ? ' · edits await review before they take effect' : ''}.
-          </p>
+    <div
+      className="grid h-dvh grid-rows-[var(--session-header-height)_minmax(0,1fr)] overflow-hidden bg-background"
+      data-wizard-shell
+    >
+      <WizardHeader
+        heroName={authored.name}
+        editing={Boolean(character.effectiveRevisionId)}
+        saving={command.pending}
+        canSave={canSave}
+        onSaveDraft={() => void persist(false)}
+        onExit={() => void exit()}
+      />
+      <div className="grid min-h-0 grid-cols-[280px_minmax(0,1fr)_330px]">
+        <div className="min-h-0 border-r border-rule-strong">
+          <StepRail
+            steps={railSteps}
+            currentIndex={stepIndex}
+            sourceTotal={definitions.steps.length}
+            onSelect={goTo}
+          />
         </div>
-        <div className="flex flex-wrap items-center gap-2">
-          {evaluation && (
-            <Badge variant={evaluation.status === 'complete' ? 'default' : 'outline'}>
-              {evaluation.status}
-            </Badge>
-          )}
-          <Button
-            type="button"
-            variant="outline"
-            disabled={command.pending || stale || character.combatLocked}
-            onClick={() => void persist(false)}
-          >
-            {command.pending ? 'Saving…' : 'Save draft'}
-          </Button>
-          <Button
-            type="button"
-            disabled={command.pending || stale || character.combatLocked}
-            onClick={() => void persist(true)}
-          >
-            Save and close
-          </Button>
-        </div>
-      </div>
-      {stale && (
-        <Notice className="mb-4">
-          A newer saved version exists. Reload the page before saving.
-        </Notice>
-      )}
-      {character.combatLocked && (
-        <Notice className="mb-4">Character editing is locked during combat.</Notice>
-      )}
-      <ErrorNotice error={command.error} />
-      {saved && (
-        <p role="status" className="mb-4 text-sm text-success">
-          Draft saved (revision {expectedRevision}).
-        </p>
-      )}
-      {cleared.length > 0 && (
-        <Notice className="mb-4" role="status">
-          Cleared because a parent choice changed: {cleared.join(', ')}.
-        </Notice>
-      )}
-      <div className="grid grid-cols-[220px_minmax(0,1fr)_320px] items-start gap-6">
-        <nav aria-label="Steps">
-          <ol className="m-0 list-none p-0">
-            {PRESENTED.map((s, index) => {
-              const problems = problemsByStep(s);
-              return (
-                <li key={s.id} className="rule-soft">
-                  <button
-                    type="button"
-                    aria-current={index === stepIndex ? 'step' : undefined}
-                    className={`flex w-full items-center justify-between gap-2 py-2 text-left text-sm ${index === stepIndex ? 'font-bold' : ''}`}
-                    onClick={() => setStepIndex(index)}
-                  >
-                    <span>{s.sourceStep}</span>
-                    {problems > 0 && <Badge variant="outline">{problems}</Badge>}
-                  </button>
-                </li>
-              );
-            })}
-          </ol>
-        </nav>
-        <Card>
-          <CardContent className="flex flex-col gap-3">
-            <div>
-              <h2 className="m-0">{step.sourceStep}</h2>
-              <p className="m-0 text-xs text-muted-foreground">
-                {step.source}
-                {step.optional ? ` · optional in the source: “${step.optionalQuote}”` : ''}
-                {step.note ? ` · ${step.note}` : ''}
+        <section className="flex min-h-0 flex-col" aria-label="Current step">
+          <div className="min-h-0 flex-1 overflow-y-auto px-10 pt-8 pb-8" data-wizard-pane="centre">
+            {stale && (
+              <Notice className="mb-4">
+                A newer saved version exists. Reload the page before saving.
+              </Notice>
+            )}
+            {character.combatLocked && (
+              <Notice className="mb-4">Character editing is locked during combat.</Notice>
+            )}
+            <ErrorNotice error={command.error} />
+            {saved && (
+              <p role="status" className="mb-4 text-sm text-success">
+                Draft saved (revision {expectedRevision}).
               </p>
-            </div>
+            )}
+            {cleared.length > 0 && (
+              <Notice className="mb-4" role="status">
+                Cleared because a parent choice changed: {cleared.map(decisionLabel).join(', ')}.
+              </Notice>
+            )}
+            <StepTitle
+              title={stepName(step)}
+              description={stepExcerpt(step)}
+              reference={<RuleLink {...stepReference(step)} />}
+              optional={step.optional}
+            />
             {step.decisions.map(decision => (
               <DecisionEditor
                 key={decision.id}
                 decision={decision}
+                step={step}
                 selections={selections}
                 onSelect={select}
                 authored={authored}
-                onAuthored={value => {
-                  setSaved(false);
-                  setAuthored(value);
-                }}
+                onAuthored={author}
                 diagnostics={evaluation?.diagnostics[decision.id]}
               />
             ))}
             {step.id === 'step.details' && (
-              <Field label="Private notes" hint="Only you can read these notes.">
+              <Field label="Private notes" hint="Only you can read these notes." className="py-5">
                 <Textarea
                   maxLength={10000}
+                  className="max-w-2xl"
                   value={authored.notes}
-                  onChange={event => {
-                    setSaved(false);
-                    setAuthored({ ...authored, notes: event.target.value });
-                  }}
+                  onChange={event => author({ ...authored, notes: event.target.value })}
                 />
               </Field>
             )}
-            <div className="flex justify-between">
-              <Button
-                type="button"
-                variant="outline"
-                size="sm"
-                disabled={stepIndex === 0}
-                onClick={() => setStepIndex(stepIndex - 1)}
-              >
-                ← Previous step
-              </Button>
-              <Button
-                type="button"
-                variant="outline"
-                size="sm"
-                disabled={stepIndex === PRESENTED.length - 1}
-                onClick={() => setStepIndex(stepIndex + 1)}
-              >
-                Next step →
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent>
-            <HeroSoFar evaluation={evaluation} />
-          </CardContent>
-        </Card>
+          </div>
+          <StepNav
+            previous={previous ? stepName(previous) : undefined}
+            next={next ? stepName(next) : undefined}
+            onPrevious={() => goTo(stepIndex - 1)}
+            onNext={() => goTo(stepIndex + 1)}
+            finishLabel={command.pending ? 'Saving…' : 'Save and close'}
+            finishDisabled={!canSave}
+            onFinish={() => void persist(true)}
+          />
+        </section>
+        <div className="min-h-0 border-l border-rule-strong">
+          <HeroSoFar
+            evaluation={evaluation}
+            heroName={authored.name}
+            sourceReference={stepReference(step)}
+            sourceExcerpt={stepExcerpt(step)}
+          />
+        </div>
       </div>
-    </>
+    </div>
   );
 }
 
 export function WizardPage({ characterId }: { characterId: Id<'characters'> }) {
   const character = useQuery(api.characters.get, { characterId });
-  if (character === undefined) return <Loading>Loading character…</Loading>;
+  if (character === undefined)
+    return (
+      <div className="p-10">
+        <Loading>Loading character…</Loading>
+      </div>
+    );
   return <Wizard key={character.id} character={character} />;
 }

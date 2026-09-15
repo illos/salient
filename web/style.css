@@ -50,6 +50,21 @@
   --sidebar-border: #e1e1e1;
   --sidebar-ring: #111111;
   --radius: 0.125rem;
+  /* V21 layout tokens (docs/design-tokens.md, "Session shell and table primitives"). */
+  --session-header-height: 70px;
+  --pane-side-width: min(424px, calc(424 / 1440 * 100vw));
+  --pane-heroes-combat-width: min(566px, calc(566 / 1440 * 100vw));
+  --pane-padding-x: 24px;
+  --pane-padding-y: 20px;
+  --bar-thickness: 6px;
+  --disc-sm: 32px;
+  --disc-md: 44px;
+  --disc-lg: 110px;
+  --disc-ring: 60px;
+  --disc-ring-stroke: 3px;
+  --chip-radius: 2px;
+  --chip-border: 1px;
+  --pip-size: 10px;
   --motion-fast: 120ms;
   --motion-base: 180ms;
   --motion-slow: 260ms;
@@ -247,6 +262,91 @@
   /* Native controls that stay native (select, progress) but take the tokens. */
   .native-select {
     @apply h-8 rounded-md border border-input bg-background px-2 text-sm text-foreground;
+  }
+  /* Centered scrollable card with a blurred backdrop (rule cards, settings, reference library). */
+  .overlay-card-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 80;
+    background: rgb(0 0 0 / 35%);
+    backdrop-filter: blur(6px);
+  }
+  .overlay-card {
+    position: fixed;
+    z-index: 81;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: min(850px, calc(100vw - 2rem));
+    max-height: min(850px, calc(100dvh - 3rem));
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+    background: var(--background);
+    color: var(--foreground);
+    box-shadow: 0 24px 80px rgb(0 0 0 / 30%);
+    outline: none;
+  }
+  .overlay-card-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+  }
+  .overlay-card-title {
+    margin: 0.25rem 0 0;
+    font-size: 1.5rem;
+    line-height: 1.2;
+  }
+  .overlay-card-close {
+    margin-left: auto;
+  }
+  .overlay-card-scroll {
+    min-height: 0;
+    overflow: auto;
+    overscroll-behavior: contain;
+    padding: 1.5rem;
+  }
+  /* The session shell: a full-viewport frame whose panes scroll independently. */
+  .session-shell {
+    display: grid;
+    grid-template-rows: var(--session-header-height) minmax(0, 1fr);
+    height: 100dvh;
+    overflow: hidden;
+  }
+  .session-panes {
+    display: grid;
+    grid-template-columns: var(--pane-side-width) minmax(0, 1fr) var(--pane-side-width);
+    min-height: 0;
+  }
+  .session-panes[data-combat='true'] {
+    grid-template-columns:
+      var(--pane-side-width) minmax(0, 1fr)
+      var(--pane-heroes-combat-width);
+  }
+  .session-pane {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    min-width: 0;
+  }
+  .session-pane + .session-pane {
+    border-left: 1px solid var(--rule-strong);
+  }
+  .session-pane-scroll {
+    flex: 1 1 auto;
+    min-height: 0;
+    /* The pane is the containing block for its absolutely positioned descendants: a visually
+       hidden control (Base UI's checkbox input) would otherwise resolve against the initial
+       containing block, escape the shell's clip and extend the document. */
+    position: relative;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding: var(--pane-padding-y) var(--pane-padding-x);
   }
 }
 
