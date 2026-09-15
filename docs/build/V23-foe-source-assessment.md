@@ -98,3 +98,9 @@ None needed for this assessment. Implementation remains subject to the owning sp
   addressable features, identities separate from ordering, regenerable corrections and shared resolution.
   Sharing UI and engine execution remain downstream. Documentation links and diff whitespace pass;
   no runtime code or generated corpus data changed.
+- 2026-09-15 comparison follow-up: user authorized examining Steel Cauldron's generated stat blocks
+  as a secondary completeness comparison and explicitly excluded direct adaptation without a clear
+  license. Inspected eleven undead outputs and four Malice features at a fixed external revision;
+  [comparison report](../research/steel-cauldron-output-comparison.md) records checks, differences and
+  limits. Expected content remains the pinned local Compendium; no external implementation or data
+  was added to the application. Documentation links and diff whitespace pass.

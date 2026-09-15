@@ -30,6 +30,12 @@ same capability for trait sharing. The [owning ingestion requirements](../monste
 and [sharing contract](../data-architecture-spec.md#35-unified-object-references-and-sharing) record this
 refinement and acceptance examples. The notes below are the implementation proposal, not a shipped format.
 
+**Comparison boundary, user-confirmed 2026-09-15:** study Steel Cauldron as an example of a working
+tool and compare its generated stat blocks for completeness. Do not directly adapt its code without
+a clear applicable license. The [generated undead comparison](steel-cauldron-output-comparison.md)
+records observations against our pinned source; external output is not our rules authority or a
+production data dependency.
+
 ## Current implementation
 
 | Layer | Current evidence | Ingestion relevance / downstream gap |
