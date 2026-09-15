@@ -169,7 +169,10 @@ homebrew in this app and are deferred beyond V1. The core rules' permission to i
 languages does not bring them into app scope. Selectable language identities remain sourced core
 options; normal language edits and Director approval do not authorize custom language creation.
 Authored descriptive text does not create a selectable language or grant language knowledge.
-The custom deity/domain-portfolio part of Q-CHAR-6 remains unanswered.
+**Custom deity/domain combinations are also deferred (Q-CHAR-6, confirmed 2026-09-15):** the user
+considers them unnecessary for the narrow playtest. Use printed supported combinations; no custom
+portfolio workflow is required in the current delivery scope. Any later inclusion needs an explicit
+scope decision. This does not remove authored religious flavor.
 
 In scope: creation, advancement, full editing, history, authored details, inventory integration, derived
 sheets, attachment/detachment/duplication, Director review, and required Forge Steel import. Compatible Forge

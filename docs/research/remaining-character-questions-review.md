@@ -11,7 +11,8 @@ with later edits continuing from that newest entry. Q-CHAR-5 now [uses normal ed
 and a dedicated respite option for kits](../character-wizard-spec.md#language-edits-and-respite-kit-changes);
 other class exceptions are not established. Q-CHAR-6's language portion now explicitly
 [classifies custom languages as deferred homebrew](../character-wizard-spec.md#fuller-product-scope);
-its deity/domain-portfolio portion remains unanswered. The audit findings below
+custom deity/domain portfolios are also deferred as unnecessary for the narrow playtest.
+Q-CHAR-6 is closed as a scope deferral. The audit findings below
 remain the historical pre-answer record; the queue is current.
 
 ## Method and result

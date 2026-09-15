@@ -42,31 +42,8 @@ are the shared lifecycle decisions; the remaining entries are bounded content/sc
 All 13 then-open questions received an independent pinned-source and existing-specification check on
 2026-09-15; see [the evidence report](research/remaining-character-questions-review.md). Q-CHAR-8 and
 Q-CHAR-12 are now source-resolved. The remaining 11 comprise nine product decisions and two source
-ambiguities at audit close. Subsequent Q-CHAR-2/3/4 and scoped Q-CHAR-5 answers leave **7 open questions**; remaining
+ambiguities at audit close. Subsequent Q-CHAR-2/3/4/6 and scoped Q-CHAR-5 answers leave **6 open questions**; remaining
 recommendations are unanswered.
-
-### Q-CHAR-6: Does core-only scope allow custom deity portfolios? (Languages resolved)
-
-- **Status:** open for deity portfolios; custom languages resolved 2026-09-15
-- **Research check:** 2026-09-15 — product decision; [rules and spec evidence](research/remaining-character-questions-review.md#q-char-6).
-- **Raised by:** V1 wizard specification research, 2026-09-14
-- **Where:** `docs/character-wizard-spec.md#fuller-product-scope`; sources
-  `vendor/steel-compendium/en/unified/md/chapter/background.md`, Heroes clean **Languages in Orden**,
-  and `vendor/steel-compendium/en/unified/md/feature/conduit/level-1/deity-and-domains.md`.
-- **Confirmed language decision:** Custom languages are homebrew in this app and deferred beyond
-  V1. The core permission to invent them does not change that scope. Normal language edits and
-  Director approval do not introduce custom selectable identities. See [the owning scope](character-wizard-spec.md#fuller-product-scope).
-- **Remaining gap:** Whether custom deity portfolios assembled from existing core domains count
-  as supported V1 choices. Authored religious flavor and core culture assembly remain separately
-  allowed; this question does not reopen custom languages.
-- **Recommendation:** Use printed core deity/saint portfolios for selectable V1 mechanics; defer
-  custom deity portfolios. This recommendation is unanswered.
-- **Related questions:** Q-R-102 resolved spoken-language tables for v0.01; Q-R-100 resolved
-  Caelian as automatically known, without consuming a paid slot. Neither decides custom identities
-  or all fuller V1 language scope.
-- **Blocked until answered:** custom deity portfolios only; printed core options can proceed.
-- **Answer (language portion):** “Custom languages are part of homebrew in this app and are deferred.”
-  No deity/domain-portfolio answer recorded.
 
 ### Q-CHAR-7: May a Revenant borrow Prismatic Scales without Wyrmplate?
 
@@ -212,6 +189,28 @@ No user approval is implied by this classification.
 - **Answer:**
 
 ## Resolved questions
+
+### Q-CHAR-6: Does core-only scope allow custom languages and deity portfolios?
+
+- **Status:** resolved by scope deferral 2026-09-15; [owning scope](character-wizard-spec.md#fuller-product-scope)
+- **Research check:** 2026-09-15 — product decision; [rules and spec evidence](research/remaining-character-questions-review.md#q-char-6).
+- **Raised by:** V1 wizard specification research, 2026-09-14
+- **Where:** `docs/character-wizard-spec.md#fuller-product-scope`; sources
+  `vendor/steel-compendium/en/unified/md/chapter/background.md`, Heroes clean **Languages in Orden**,
+  and `vendor/steel-compendium/en/unified/md/feature/conduit/level-1/deity-and-domains.md`.
+- **Confirmed language decision:** Custom languages are homebrew in this app and deferred beyond
+  V1. The core permission to invent them does not change that scope. Normal language edits and
+  Director approval do not introduce custom selectable identities. See [the owning scope](character-wizard-spec.md#fuller-product-scope).
+- **Deity decision:** Custom deity/domain combinations are deferred because they are unnecessary
+  for the narrow playtest. Use printed supported combinations; no custom portfolio workflow is
+  required in the current delivery scope. Later inclusion needs an explicit scope decision.
+  Authored religious flavor and core culture assembly remain separately allowed.
+- **Related questions:** Q-R-102 resolved spoken-language tables for v0.01; Q-R-100 resolved
+  Caelian as automatically known, without consuming a paid slot. Neither decides custom identities
+  or all fuller V1 language scope.
+- **Build handoff:** Do not build custom selectable languages or deity portfolios for the current scope.
+- **Answer (language portion):** “Custom languages are part of homebrew in this app and are deferred.”
+  **Answer (deity portion):** “Not Needed for a narrow play test. Defer”
 
 ### Q-CHAR-5: Do source-authorized reconfigurations need full-edit approval?
 

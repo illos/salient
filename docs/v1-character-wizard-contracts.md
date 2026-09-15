@@ -221,8 +221,10 @@ including its human-language list and Languages by Ancestry table, now preserved
 of the 12 playable ancestries. **Confirmed 2026-09-15 (Q-CHAR-6, language portion):** Custom
 campaign languages are homebrew and deferred beyond V1, including when source text permits the
 Director to invent them. Normal edits/approval do not enable custom selectable language identities.
-The custom deity/domain-portfolio boundary remains open under Q-CHAR-6. Legal deferred language
-slots follow section 2.
+Custom deity/domain portfolios are also deferred under Q-CHAR-6 (2026-09-15): they are unnecessary
+for the narrow playtest and have no required custom-selection workflow in the current delivery
+scope. Use printed supported combinations; later inclusion needs an explicit scope decision.
+Legal deferred language slots follow section 2.
 
 ### Duplicate skills
 
