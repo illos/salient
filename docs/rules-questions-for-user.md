@@ -42,7 +42,7 @@ are the shared lifecycle decisions; the remaining entries are bounded content/sc
 All 13 then-open questions received an independent pinned-source and existing-specification check on
 2026-09-15; see [the evidence report](research/remaining-character-questions-review.md). Q-CHAR-8 and
 Q-CHAR-12 are now source-resolved. The remaining 11 comprise nine product decisions and two source
-ambiguities at audit close. Subsequent Q-CHAR-2/3/4/6/10/11 and scoped Q-CHAR-5 answers leave **4 open questions**; remaining
+ambiguities at audit close. Subsequent Q-CHAR-2/3/4/6/10/11, Q-R-201 and scoped Q-CHAR-5 answers leave **3 open questions**; remaining
 recommendations are unanswered.
 
 ### Q-CHAR-7: May a Revenant borrow Prismatic Scales without Wyrmplate?
@@ -97,30 +97,6 @@ recommendations are unanswered.
 - **Blocked until answered:** this optional workflow; higher-level build evaluation can proceed.
 - **Answer:**
 
-### Q-R-201: What happens to live values on detachment, duplication and later admission?
-
-- **Status:** open
-- **Research check:** 2026-09-15 — product decision; [rules and spec evidence](research/remaining-character-questions-review.md#q-r-201).
-- **Raised by:** R03, 2026-09-14
-- **Where:** `docs/live-state-initialization.md` section 3; `docs/character-wizard-spec.md#12-open-decisions`
-  (row "Non-campaign live-state transfer on detachment/duplication"); ruling in `agent.MD` (*Characters, privacy
-  and inventory*: detachment clears campaign XP/Victories). Compendium read:
-  `vendor/steel-compendium/en/unified/md/rule/resource/{victories,experience,respite}.md`,
-  `vendor/steel-compendium/en/unified/md/rule/health/{stamina,recoveries}.md`. The source has no notion of a
-  character changing campaigns.
-- **Conflict or gap:** First admission initializes live values from the baseline. A character detached from one
-  campaign and attached to another has a prior live record; the ruling clears Victories and XP but says nothing
-  about current Stamina, Recoveries, temporary Stamina, surges, the heroic resource or condition toggles.
-- **Recommendation:** Retain existing non-campaign live values with the same build, clearing the
-  already-confirmed campaign XP/Victories. Preserve only state remaining after applicable source
-  cleanup; do not resurrect expired surges, temporary Stamina or encounter resources. Detachment
-  itself is neither a respite nor an encounter-end event. Existing manual adjustments remain available.
-  This is a product proposal; the source does not define transfer or duplication.
-- **Related question:** Q-CHAR-2 governs changed-build reconciliation. This question asks which
-  existing values transfer even when the baseline stays unchanged.
-- **Blocked until answered:** nothing in v0.01 (the journey admits one hero once). Re-attachment is V1.
-- **Answer:**
-
 ## Engineering follow-ups
 
 These entries retain integration context without asking the user for routine engineering decisions.
@@ -157,6 +133,32 @@ No user approval is implied by this classification.
 - **Answer:**
 
 ## Resolved questions
+
+### Q-R-201: What happens to live values on detachment, duplication and later admission?
+
+- **Status:** resolved 2026-09-15; [owning policy](character-wizard-spec.md#campaign-lifecycle)
+- **Research check:** 2026-09-15 — product decision; [rules and spec evidence](research/remaining-character-questions-review.md#q-r-201).
+- **Raised by:** R03, 2026-09-14
+- **Where:** `docs/live-state-initialization.md` section 3; `docs/character-wizard-spec.md#12-open-decisions`
+  (row "Non-campaign live-state transfer on detachment/duplication"); ruling in `agent.MD` (*Characters, privacy
+  and inventory*: detachment clears campaign XP/Victories). Compendium read:
+  `vendor/steel-compendium/en/unified/md/rule/resource/{victories,experience,respite}.md`,
+  `vendor/steel-compendium/en/unified/md/rule/health/{stamina,recoveries}.md`. The source has no notion of a
+  character changing campaigns.
+- **Conflict or gap:** First admission initializes live values from the baseline. A character detached from one
+  campaign and attached to another has a prior live record; the ruling clears Victories and XP but says nothing
+  about current Stamina, Recoveries, temporary Stamina, surges, the heroic resource or condition toggles.
+- **Original recommendation (rejected):** Carry prior non-campaign live values across transfer.
+- **Answer:** These are campaign-tracked values. Moving to a new campaign starts fresh: Stamina
+  and Recoveries full, prior conditions and temporary effects cleared, other resources at their
+  normal initial state. XP/Victories stay zero. Retain level/build, independent inventory and
+  progression history. A duplicate's fresh state does not change the original character.
+- **Boundary:** This is destination-campaign initialization, not an earned respite, and does not
+  grant maximum heroic resources, convert old Victories into XP or replay item grants. Q-CHAR-2
+  governs build changes within an existing campaign; destination admission starts full against its
+  admitted build. UI/headless use the same admission operation.
+- **Build handoff:** R03/A02/V08 align re-admission with the fresh-start policy; no implementation
+  verification is claimed by this decision.
 
 ### Q-CHAR-11: Which skill collisions create an unrestricted replacement choice?
 

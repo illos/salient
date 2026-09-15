@@ -492,6 +492,26 @@ multiple campaign characters.
 
 ### Campaign lifecycle
 
+**Confirmed 2026-09-15 (Q-R-201):** Current play values belong to the campaign. They do not carry
+over when a character leaves and enters another campaign, including a duplicate entering another
+campaign. On destination admission, initialize a fresh live record from the admitted effective build:
+current Stamina and remaining Recoveries equal their new maxima; prior conditions, temporary
+Stamina, surges, temporary effects and campaign-specific live adjustments are cleared. Other
+resources and usage counters use their source-defined initial state. In particular, “full” does
+not mean maximizing Ferocity or another resource that normally starts empty or has no maximum.
+XP and Victories start at zero; Q-CHAR-3 supplies the separate entry-level advancement offset.
+
+Retain character identity/ownership as appropriate, admitted level/build, authored details,
+independent inventory and progression history. Duplicating does not change the original's campaign
+state. Existing logs remain governed by their history/retention rules; do not rewrite old gameplay
+or restore it into the new campaign. This fresh start is campaign initialization, not a fictional
+respite: it does not convert old Victories into XP, award treasure or rerun creation item grants.
+
+Q-CHAR-2 still preserves current amounts and caps lowered maxima for build changes within the
+same attachment. New-campaign admission instead starts full against the admitted build, including
+when entry uses a lower-level snapshot. Use the same shared UI/headless admission operation with
+existing approval and locks. This records required behavior, not implementation verification.
+
 Confirmed character management outside combat: owners may edit names, appearance, biography, and notes without
 Director review, and may detach their own characters without Director approval. Notes retain owner-only
 visibility. Pending full edits survive departure as a private draft; detachment does not activate that draft.
@@ -769,7 +789,6 @@ for work that can proceed independently. These recommendations are not user ruli
 | Resource-type replacement requiring explicit reconciliation | Q-CHAR-2 resolves compatible current values and maximum changes in [the confirmed policy](#current-values-when-a-build-changes); it does not provide an automatic conversion between different resources. |
 | **Implementation note, 2026-09-14 (R03):** readiness-audit gap G3 is delivered as a contract: `live-state-initialization.md` (first-admission values with source sentences, the draft-save/re-evaluation rule, `HeroEntity`/`FoeEntity` projections with worked examples), `shared/contracts/liveState.ts`, `shared/contracts/entities.ts`, `tests/live-state-initialization.test.ts`. The original contract surfaced `UnreconciledMaximumChange` labeled **Q-CHAR-2**. The confirmed current-value policy now supersedes maximum-only uncertainty; executable repair remains separate. Re-admission after detachment is **Q-R-201**. | Apply the confirmed cap policy through shared activation; explicitly reconcile incompatible resource types. |
 | Full list of campaign values to clear on transfer | XP/Victories clearing is settled. Q-CHAR-3 now resolves transferred advancement eligibility and character-sheet ownership of level-up; any additional campaign-value reset enumeration remains separate. |
-| Non-campaign live-state transfer on detachment/duplication | Active build retention and private-draft preservation on detachment are confirmed; duplication excludes pending edits. Damage/resource reconciliation still needs definition. |
 | Entry reservation timing, detachment during active play, and former-campaign history access | Finalizing proposed admission/detachment contracts and table linkage. |
 | Player visibility without a grant, additional private-field exclusions, historical review visibility, and handling multiple competing submissions | Remaining access and review UX details; sheet viewing/combat grants are now established. |
 | Historical Forge Steel shapes and export coverage; preserving unsupported imported data | Homebrew and official supplemental content are excluded from v1 playable choices. Compatibility preservation must not enable them; conversion/export claims must follow demonstrated cases. |

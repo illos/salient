@@ -223,10 +223,15 @@ Consequences for the application:
    See [the owning policy](character-wizard-spec.md#current-values-when-a-build-changes).
    **Build handoff:** the earlier `UnreconciledMaximumChange` behavior was provisional. Retire
    maximum-only Q-CHAR-2 markers and implement these caps; this doc change does not claim code repair.
-3. Re-admission of a character previously played elsewhere is **Open, Q-R-201** (the
-   `docs/character-wizard-spec.md#12-open-decisions` row "Non-campaign live-state transfer on
-   detachment/duplication"). The ruling that detachment clears campaign XP and
-   Victories stands; the other live values' fate is the question. Not reachable in the v0.01 journey.
+3. **Confirmed 2026-09-15 (Q-R-201):** Destination-campaign admission initializes a fresh live
+   record even when the character has prior play history. Use the admitted effective build: Stamina
+   and Recoveries full, XP/Victories zero, no prior conditions/temporary effects, and other resources
+   at source-defined initial values. A resource that starts empty is not maximized by “full.”
+   This also applies to duplicates entering another campaign; the original is unaffected. Retain
+   independent inventory/history without replaying grants. This is campaign initialization, not
+   respite, and does not convert old Victories to XP. Q-CHAR-2 governs edits within an existing
+   attachment, not this fresh-start boundary. See [the owning lifecycle](character-wizard-spec.md#campaign-lifecycle).
+   Re-attachment remains later scope; this decision does not claim executable repair.
 4. A build activation is blocked during an encounter, so live values are never reconciled mid-combat.
 
 ## 4. `HeroEntity` projection
@@ -1058,7 +1063,7 @@ ability was the file body in the experiment and is the complete file here (S01 c
 | --- | --- | --- |
 | Q-CHAR-2 | section 3, build activation | resolved 2026-09-15; retain current amounts, cap above new maxima; explicit reconciliation for incompatible resource types |
 | Q-R-200 | section 2.3, foe `slain` label after a Director edit above zero | resolved 2026-09-14; user confirmed that raising Stamina above zero automatically clears Slain |
-| Q-R-201 | section 3, live values on re-admission after detachment | open; raised by R03; provisional: none needed in v0.01, recommendation recorded |
+| Q-R-201 | section 3, new-campaign admission | resolved 2026-09-15; campaign-tracked live state resets to full/normal initial values against the admitted build |
 | Q-CHAR-3 | section 2.1.7, XP of a transferred higher-level hero | resolved 2026-09-15; admission-level eligibility offset, campaign awards XP, character sheet owns level-up |
 | Q-R-100, Q-R-101, Q-CHAR-12 | historical R02 `uncertainties` in the example above | resolved; see queue and [potency research](research/remaining-character-questions-review.md#q-char-12); labels removed in the A02 repair |
 

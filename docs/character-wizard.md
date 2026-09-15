@@ -227,8 +227,10 @@ Campaign values, including XP and Victories, clear on detachment and do not tran
 The character keeps its current level and build; zeroing XP must not recalculate the character down to a
 starting level. Inventory, authored details, and progression history remain with the character. A duplicate
 entering another campaign starts with cleared campaign values while the original's campaign values remain
-unchanged. This is distinct from restoring a progression history point within the same campaign, and does not
-establish a blanket reset of damage or conditions.
+unchanged. **Confirmed 2026-09-15 (Q-R-201):** Current play values are campaign-tracked and do not
+transfer. Destination admission starts Stamina and Recoveries full from the admitted build, clears
+prior conditions/temporary effects and initializes other resources normally. Within-campaign build
+restoration still uses Q-CHAR-2. See [the owning campaign lifecycle](character-wizard-spec.md#campaign-lifecycle).
 
 Attachment includes choosing an entry level no higher than the character's current level. This selects the
 corresponding build from progression history and its derived baseline for Director review while keeping
@@ -243,8 +245,9 @@ attachment; detach a character with nonzero XP/Victories and verify both clear w
 history, and inventory remain; duplicate into another campaign and verify cleared campaign values in the copy,
 unchanged values in the original, and independent subsequent changes; verify sheet/history visibility for the
 campaign owner and active Director under the access spec's private-field policy without allowing that role to
-choose someone else's build options. Reconciliation of damage and other non-campaign live state remains to be
-defined. Imported snapshots may require reconstructing missing lower-level choices, as described in
+choose someone else's build options. Assert full Stamina/Recoveries and fresh source-defined live
+state on destination admission, with old campaign damage/conditions absent and original-copy state
+unchanged (Q-R-201). Imported snapshots may require reconstructing missing lower-level choices, as described in
 [interchange research](forge-steel-interchange.md).
 
 ### Progression and content inputs

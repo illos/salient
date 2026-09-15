@@ -595,6 +595,14 @@ class changes; those remain under existing full-edit policy until their specific
 is settled. Do not silently enable the optional rule for all campaigns. See
 [the owning workflow](character-wizard-spec.md#language-edits-and-respite-kit-changes). [Changing Character Options](../vendor/steel-compendium/en/unified/md/chapter/making-a-hero.md#changing-character-options).
 
+**Confirmed campaign boundary, 2026-09-15 (Q-R-201):** Live play values are campaign-tracked.
+Destination admission creates fresh state against the admitted build: full Stamina/Recoveries,
+zero XP/Victories, cleared prior conditions/temporary effects, and normal initial values for other
+resources. Apply the Q-CHAR-3 eligibility offset separately. This includes duplication into another
+campaign without changing the original. Retain inventory and build/history without replaying item
+grants or awarding respite benefits. See [campaign lifecycle](character-wizard-spec.md#campaign-lifecycle).
+Within-campaign activation still follows Q-CHAR-2; the fresh-start boundary is separate.
+
 ### Revision activation proposal
 
 Every proposed build references its base effective revision. Approval applies the exact evaluated

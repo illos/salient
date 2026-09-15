@@ -15,7 +15,10 @@ custom deity/domain portfolios are also deferred as unnecessary for the narrow p
 Q-CHAR-6 is closed as a scope deferral. Q-CHAR-10 now [warns without enforcing ancestry-point expenditure](../character-wizard-spec.md#confirmed-behavior).
 Q-CHAR-11 now follows the [current user interpretation](../character-wizard-spec.md#confirmed-behavior):
 fixed duplicates grant replacements, deliberate chosen duplicates do not expand their pools.
-The audit findings below remain the historical pre-answer record; the queue is current.
+Q-R-201 now [starts destination-campaign live state fresh](../character-wizard-spec.md#campaign-lifecycle),
+with full Stamina/Recoveries and other resources initialized normally; the earlier carry-over
+recommendation below was rejected. The audit findings below remain the historical pre-answer
+record; the queue is current.
 
 ## Method and result
 
