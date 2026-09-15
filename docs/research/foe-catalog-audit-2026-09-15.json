@@ -1,0 +1,3357 @@
+{
+  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+  "scope": "All type=statblock JSON entries in pinned Heroes and Monsters book trees; compare ten printed cells and feature title associations, not mechanics.",
+  "books": {
+    "heroes": 1,
+    "monsters": 437
+  },
+  "organizations": {
+    "(blank)": 8,
+    "Solo": 22,
+    "Minion": 116,
+    "Leader": 30,
+    "Horde": 76,
+    "Elite": 97,
+    "Platoon": 68,
+    "Retainer": 21
+  },
+  "missingCounterparts": [],
+  "identityProblems": [],
+  "fieldConflicts": [],
+  "repeatedStatCells": [
+    {
+      "id": "mcdm.monsters.v1/monster.retainer.statblock/hobgoblin-flameslinger",
+      "field": "size",
+      "values": [
+        "1M",
+        "1M"
+      ]
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.retainer.statblock/hobgoblin-flameslinger",
+      "field": "speed",
+      "values": [
+        "5",
+        "5"
+      ]
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.retainer.statblock/hobgoblin-flameslinger",
+      "field": "stamina",
+      "values": [
+        "48",
+        "48"
+      ]
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.retainer.statblock/hobgoblin-flameslinger",
+      "field": "stability",
+      "values": [
+        "0",
+        "0"
+      ]
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.retainer.statblock/hobgoblin-flameslinger",
+      "field": "free_strike",
+      "values": [
+        "5",
+        "5"
+      ]
+    }
+  ],
+  "featureAssociationProblems": [],
+  "nonIntegerStamina": [],
+  "unusualSizes": [
+    {
+      "id": "mcdm.monsters.v1/monster.kobold.statblock/shieldscale-drangolin",
+      "value": "2 or 3"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.noncombatant.statblock/noncombatant",
+      "value": "1S-2"
+    }
+  ],
+  "unusualEv": [
+    {
+      "id": "mcdm.heroes.v1/monster.summon.elementalist.statblock/source-of-earth",
+      "value": "-"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.noncombatant.statblock/noncombatant",
+      "value": "-"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.retainer.statblock/angulotl-hopper",
+      "value": "-"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.retainer.statblock/bugbear-commando",
+      "value": "-"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.retainer.statblock/devil-defector",
+      "value": "-"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.retainer.statblock/dwarf-mortar",
+      "value": "-"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.retainer.statblock/goblin-guide",
+      "value": "-"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.retainer.statblock/high-elf-weatherwise",
+      "value": "-"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.retainer.statblock/hobgoblin-flameslinger",
+      "value": "-"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.retainer.statblock/human-warrior",
+      "value": "-"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.retainer.statblock/kobold-shieldbearer",
+      "value": "-"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.retainer.statblock/minotaur-gorer",
+      "value": "-"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.retainer.statblock/orc-charger",
+      "value": "-"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.retainer.statblock/radenwight-sidekick",
+      "value": "-"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.retainer.statblock/shadow-elf-shade",
+      "value": "-"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.retainer.statblock/the-nameless",
+      "value": "-"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.retainer.statblock/time-raider-mind-healer",
+      "value": "-"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.retainer.statblock/troll-mercenary",
+      "value": "-"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.retainer.statblock/undead-servitor",
+      "value": "-"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.retainer.statblock/unquiet-spirit",
+      "value": "-"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.retainer.statblock/vampire-rebel",
+      "value": "-"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.retainer.statblock/wode-elf-arrowswift",
+      "value": "-"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.xorannox-the-tyract.statblock/compulsion-eye",
+      "value": "-"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.xorannox-the-tyract.statblock/demolition",
+      "value": "-"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.xorannox-the-tyract.statblock/mover-eye",
+      "value": "-"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.xorannox-the-tyract.statblock/necrotic-eye",
+      "value": "-"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.xorannox-the-tyract.statblock/toxic-eye",
+      "value": "-"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.xorannox-the-tyract.statblock/zapper-eye",
+      "value": "-"
+    }
+  ],
+  "blankOrganization": [
+    {
+      "id": "mcdm.heroes.v1/monster.summon.elementalist.statblock/source-of-earth",
+      "name": "Source of Earth",
+      "ev": "-"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.noncombatant.statblock/noncombatant",
+      "name": "Noncombatant",
+      "ev": "-"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.xorannox-the-tyract.statblock/compulsion-eye",
+      "name": "Compulsion Eye",
+      "ev": "-"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.xorannox-the-tyract.statblock/demolition",
+      "name": "Demolition",
+      "ev": "-"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.xorannox-the-tyract.statblock/mover-eye",
+      "name": "Mover Eye",
+      "ev": "-"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.xorannox-the-tyract.statblock/necrotic-eye",
+      "name": "Necrotic Eye",
+      "ev": "-"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.xorannox-the-tyract.statblock/toxic-eye",
+      "name": "Toxic Eye",
+      "ev": "-"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.xorannox-the-tyract.statblock/zapper-eye",
+      "name": "Zapper Eye",
+      "ev": "-"
+    }
+  ],
+  "weaknessesWithoutTrailingNumber": [
+    {
+      "id": "mcdm.monsters.v1/monster.retainer.statblock/troll-mercenary",
+      "value": "fire"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.troll.statblock/troll-butcher",
+      "value": "fire"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.troll.statblock/troll-crack-trooper",
+      "value": "fire"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.troll.statblock/troll-glutton",
+      "value": "fire"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.troll.statblock/troll-limbjumble",
+      "value": "fire"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.troll.statblock/troll-ravager",
+      "value": "fire"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.troll.statblock/troll-whelp",
+      "value": "fire"
+    }
+  ],
+  "features": {
+    "trait": 642,
+    "ability": 1158
+  },
+  "statsCompared": 4380,
+  "featureless": [
+    "mcdm.monsters.v1/monster.noncombatant.statblock/noncombatant"
+  ],
+  "entries": [
+    {
+      "id": "mcdm.heroes.v1/monster.summon.elementalist.statblock/source-of-earth",
+      "name": "Source of Earth",
+      "sourcePath": "en/books/heroes/md/monster/summon/elementalist/statblock/source-of-earth.md",
+      "organization": "",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.ajax-the-invincible.statblock/ajax-the-invincible",
+      "name": "Ajax the Invincible",
+      "sourcePath": "en/books/monsters/md/monster/ajax-the-invincible/statblock/ajax-the-invincible.md",
+      "organization": "Solo",
+      "featureCount": 14
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.angulotl.statblock/angulotl-cleaver",
+      "name": "Angulotl Cleaver",
+      "sourcePath": "en/books/monsters/md/monster/angulotl/statblock/angulotl-cleaver.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.angulotl.statblock/angulotl-dart",
+      "name": "Angulotl Dart",
+      "sourcePath": "en/books/monsters/md/monster/angulotl/statblock/angulotl-dart.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.angulotl.statblock/angulotl-daybringer",
+      "name": "Angulotl Daybringer",
+      "sourcePath": "en/books/monsters/md/monster/angulotl/statblock/angulotl-daybringer.md",
+      "organization": "Leader",
+      "featureCount": 8
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.angulotl.statblock/angulotl-needler",
+      "name": "Angulotl Needler",
+      "sourcePath": "en/books/monsters/md/monster/angulotl/statblock/angulotl-needler.md",
+      "organization": "Horde",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.angulotl.statblock/angulotl-pollywog",
+      "name": "Angulotl Pollywog",
+      "sourcePath": "en/books/monsters/md/monster/angulotl/statblock/angulotl-pollywog.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.angulotl.statblock/angulotl-slink",
+      "name": "Angulotl Slink",
+      "sourcePath": "en/books/monsters/md/monster/angulotl/statblock/angulotl-slink.md",
+      "organization": "Horde",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.angulotl.statblock/angulotl-wave",
+      "name": "Angulotl Wave",
+      "sourcePath": "en/books/monsters/md/monster/angulotl/statblock/angulotl-wave.md",
+      "organization": "Horde",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.angulotl.statblock/clawfish",
+      "name": "Clawfish",
+      "sourcePath": "en/books/monsters/md/monster/angulotl/statblock/clawfish.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.animal.statblock/animal-swarm",
+      "name": "Animal Swarm",
+      "sourcePath": "en/books/monsters/md/monster/animal/statblock/animal-swarm.md",
+      "organization": "Elite",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.animal.statblock/animal",
+      "name": "Animal",
+      "sourcePath": "en/books/monsters/md/monster/animal/statblock/animal.md",
+      "organization": "Elite",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.animal.statblock/big-animal-a",
+      "name": "Big Animal A",
+      "sourcePath": "en/books/monsters/md/monster/animal/statblock/big-animal-a.md",
+      "organization": "Elite",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.animal.statblock/big-animal-b",
+      "name": "Big Animal B",
+      "sourcePath": "en/books/monsters/md/monster/animal/statblock/big-animal-b.md",
+      "organization": "Elite",
+      "featureCount": 5
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.animal.statblock/predator-a",
+      "name": "Predator A",
+      "sourcePath": "en/books/monsters/md/monster/animal/statblock/predator-a.md",
+      "organization": "Elite",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.animal.statblock/predator-b",
+      "name": "Predator B",
+      "sourcePath": "en/books/monsters/md/monster/animal/statblock/predator-b.md",
+      "organization": "Elite",
+      "featureCount": 5
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.arixx.statblock/arixx",
+      "name": "Arixx",
+      "sourcePath": "en/books/monsters/md/monster/arixx/statblock/arixx.md",
+      "organization": "Solo",
+      "featureCount": 12
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.ashen-hoarder.statblock/ashen-hoarder",
+      "name": "Ashen Hoarder",
+      "sourcePath": "en/books/monsters/md/monster/ashen-hoarder/statblock/ashen-hoarder.md",
+      "organization": "Solo",
+      "featureCount": 11
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.basilisk.statblock/basilisk-tonguesnapper",
+      "name": "Basilisk Tonguesnapper",
+      "sourcePath": "en/books/monsters/md/monster/basilisk/statblock/basilisk-tonguesnapper.md",
+      "organization": "Elite",
+      "featureCount": 5
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.basilisk.statblock/basilisk",
+      "name": "Basilisk",
+      "sourcePath": "en/books/monsters/md/monster/basilisk/statblock/basilisk.md",
+      "organization": "Elite",
+      "featureCount": 5
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.bredbeddle.statblock/bredbeddle",
+      "name": "Bredbeddle",
+      "sourcePath": "en/books/monsters/md/monster/bredbeddle/statblock/bredbeddle.md",
+      "organization": "Solo",
+      "featureCount": 11
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.bugbear.statblock/bugbear-channeler",
+      "name": "Bugbear Channeler",
+      "sourcePath": "en/books/monsters/md/monster/bugbear/statblock/bugbear-channeler.md",
+      "organization": "Elite",
+      "featureCount": 6
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.bugbear.statblock/bugbear-commander",
+      "name": "Bugbear Commander",
+      "sourcePath": "en/books/monsters/md/monster/bugbear/statblock/bugbear-commander.md",
+      "organization": "Elite",
+      "featureCount": 6
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.bugbear.statblock/bugbear-knightmare",
+      "name": "Bugbear Knightmare",
+      "sourcePath": "en/books/monsters/md/monster/bugbear/statblock/bugbear-knightmare.md",
+      "organization": "Minion",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.bugbear.statblock/bugbear-mob",
+      "name": "Bugbear Mob",
+      "sourcePath": "en/books/monsters/md/monster/bugbear/statblock/bugbear-mob.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.bugbear.statblock/bugbear-roughneck",
+      "name": "Bugbear Roughneck",
+      "sourcePath": "en/books/monsters/md/monster/bugbear/statblock/bugbear-roughneck.md",
+      "organization": "Elite",
+      "featureCount": 6
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.bugbear.statblock/bugbear-snare",
+      "name": "Bugbear Snare",
+      "sourcePath": "en/books/monsters/md/monster/bugbear/statblock/bugbear-snare.md",
+      "organization": "Minion",
+      "featureCount": 1
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.bugbear.statblock/bugbear-sneak",
+      "name": "Bugbear Sneak",
+      "sourcePath": "en/books/monsters/md/monster/bugbear/statblock/bugbear-sneak.md",
+      "organization": "Elite",
+      "featureCount": 6
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.chimera.statblock/chimera",
+      "name": "Chimera",
+      "sourcePath": "en/books/monsters/md/monster/chimera/statblock/chimera.md",
+      "organization": "Solo",
+      "featureCount": 10
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.count-rhodar-von-glauer.statblock/count-rhodar-von-glauer",
+      "name": "Count Rhodar von Glauer",
+      "sourcePath": "en/books/monsters/md/monster/count-rhodar-von-glauer/statblock/count-rhodar-von-glauer.md",
+      "organization": "Solo",
+      "featureCount": 13
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.demon.1st-echelon.statblock/bendrak",
+      "name": "Bendrak",
+      "sourcePath": "en/books/monsters/md/monster/demon/1st-echelon/statblock/bendrak.md",
+      "organization": "Horde",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.demon.1st-echelon.statblock/chorogaunt",
+      "name": "Chorogaunt",
+      "sourcePath": "en/books/monsters/md/monster/demon/1st-echelon/statblock/chorogaunt.md",
+      "organization": "Leader",
+      "featureCount": 9
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.demon.1st-echelon.statblock/ensnarer",
+      "name": "Ensnarer",
+      "sourcePath": "en/books/monsters/md/monster/demon/1st-echelon/statblock/ensnarer.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.demon.1st-echelon.statblock/frenzied",
+      "name": "Frenzied",
+      "sourcePath": "en/books/monsters/md/monster/demon/1st-echelon/statblock/frenzied.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.demon.1st-echelon.statblock/muceron",
+      "name": "Muceron",
+      "sourcePath": "en/books/monsters/md/monster/demon/1st-echelon/statblock/muceron.md",
+      "organization": "Horde",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.demon.1st-echelon.statblock/pitling",
+      "name": "Pitling",
+      "sourcePath": "en/books/monsters/md/monster/demon/1st-echelon/statblock/pitling.md",
+      "organization": "Minion",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.demon.1st-echelon.statblock/remasch",
+      "name": "Remasch",
+      "sourcePath": "en/books/monsters/md/monster/demon/1st-echelon/statblock/remasch.md",
+      "organization": "Horde",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.demon.1st-echelon.statblock/ruinant",
+      "name": "Ruinant",
+      "sourcePath": "en/books/monsters/md/monster/demon/1st-echelon/statblock/ruinant.md",
+      "organization": "Horde",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.demon.1st-echelon.statblock/torlas",
+      "name": "Torlas",
+      "sourcePath": "en/books/monsters/md/monster/demon/1st-echelon/statblock/torlas.md",
+      "organization": "Horde",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.demon.2nd-echelon.statblock/bale-eye",
+      "name": "Bale Eye",
+      "sourcePath": "en/books/monsters/md/monster/demon/2nd-echelon/statblock/bale-eye.md",
+      "organization": "Horde",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.demon.2nd-echelon.statblock/fangling",
+      "name": "Fangling",
+      "sourcePath": "en/books/monsters/md/monster/demon/2nd-echelon/statblock/fangling.md",
+      "organization": "Horde",
+      "featureCount": 5
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.demon.2nd-echelon.statblock/fiktin",
+      "name": "Fiktin",
+      "sourcePath": "en/books/monsters/md/monster/demon/2nd-echelon/statblock/fiktin.md",
+      "organization": "Horde",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.demon.2nd-echelon.statblock/grulqin",
+      "name": "Grulqin",
+      "sourcePath": "en/books/monsters/md/monster/demon/2nd-echelon/statblock/grulqin.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.demon.2nd-echelon.statblock/gunge",
+      "name": "Gunge",
+      "sourcePath": "en/books/monsters/md/monster/demon/2nd-echelon/statblock/gunge.md",
+      "organization": "Horde",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.demon.2nd-echelon.statblock/lumbering-egress",
+      "name": "Lumbering Egress",
+      "sourcePath": "en/books/monsters/md/monster/demon/2nd-echelon/statblock/lumbering-egress.md",
+      "organization": "Leader",
+      "featureCount": 7
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.demon.2nd-echelon.statblock/orliq",
+      "name": "Orliq",
+      "sourcePath": "en/books/monsters/md/monster/demon/2nd-echelon/statblock/orliq.md",
+      "organization": "Minion",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.demon.2nd-echelon.statblock/tormenauk",
+      "name": "Tormenauk",
+      "sourcePath": "en/books/monsters/md/monster/demon/2nd-echelon/statblock/tormenauk.md",
+      "organization": "Horde",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.demon.2nd-echelon.statblock/wobalas",
+      "name": "Wobalas",
+      "sourcePath": "en/books/monsters/md/monster/demon/2nd-echelon/statblock/wobalas.md",
+      "organization": "Minion",
+      "featureCount": 1
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.demon.3rd-echelon.statblock/blight-phage",
+      "name": "Blight Phage",
+      "sourcePath": "en/books/monsters/md/monster/demon/3rd-echelon/statblock/blight-phage.md",
+      "organization": "Horde",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.demon.3rd-echelon.statblock/chimeron",
+      "name": "Chimeron",
+      "sourcePath": "en/books/monsters/md/monster/demon/3rd-echelon/statblock/chimeron.md",
+      "organization": "Horde",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.demon.3rd-echelon.statblock/soulraker-handmaiden",
+      "name": "Soulraker Handmaiden",
+      "sourcePath": "en/books/monsters/md/monster/demon/3rd-echelon/statblock/soulraker-handmaiden.md",
+      "organization": "Horde",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.demon.3rd-echelon.statblock/soulraker-hivequeen",
+      "name": "Soulraker Hivequeen",
+      "sourcePath": "en/books/monsters/md/monster/demon/3rd-echelon/statblock/soulraker-hivequeen.md",
+      "organization": "Leader",
+      "featureCount": 8
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.demon.3rd-echelon.statblock/soulraker-praetorian",
+      "name": "Soulraker Praetorian",
+      "sourcePath": "en/books/monsters/md/monster/demon/3rd-echelon/statblock/soulraker-praetorian.md",
+      "organization": "Horde",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.demon.3rd-echelon.statblock/soulraker-scout",
+      "name": "Soulraker Scout",
+      "sourcePath": "en/books/monsters/md/monster/demon/3rd-echelon/statblock/soulraker-scout.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.demon.3rd-echelon.statblock/soulraker-soldier",
+      "name": "Soulraker Soldier",
+      "sourcePath": "en/books/monsters/md/monster/demon/3rd-echelon/statblock/soulraker-soldier.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.demon.3rd-echelon.statblock/soulraker-stinger",
+      "name": "Soulraker Stinger",
+      "sourcePath": "en/books/monsters/md/monster/demon/3rd-echelon/statblock/soulraker-stinger.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.demon.3rd-echelon.statblock/styrich",
+      "name": "Styrich",
+      "sourcePath": "en/books/monsters/md/monster/demon/3rd-echelon/statblock/styrich.md",
+      "organization": "Horde",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.demon.4th-echelon.statblock/aurumvas",
+      "name": "Aurumvas",
+      "sourcePath": "en/books/monsters/md/monster/demon/4th-echelon/statblock/aurumvas.md",
+      "organization": "Leader",
+      "featureCount": 9
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.demon.4th-echelon.statblock/izyak",
+      "name": "Izyak",
+      "sourcePath": "en/books/monsters/md/monster/demon/4th-echelon/statblock/izyak.md",
+      "organization": "Horde",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.demon.4th-echelon.statblock/optacus",
+      "name": "Optacus",
+      "sourcePath": "en/books/monsters/md/monster/demon/4th-echelon/statblock/optacus.md",
+      "organization": "Minion",
+      "featureCount": 1
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.demon.4th-echelon.statblock/tyburaki",
+      "name": "Tyburaki",
+      "sourcePath": "en/books/monsters/md/monster/demon/4th-echelon/statblock/tyburaki.md",
+      "organization": "Minion",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.demon.4th-echelon.statblock/unguloid",
+      "name": "Unguloid",
+      "sourcePath": "en/books/monsters/md/monster/demon/4th-echelon/statblock/unguloid.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.demon.4th-echelon.statblock/vicisitator",
+      "name": "Vicisitator",
+      "sourcePath": "en/books/monsters/md/monster/demon/4th-echelon/statblock/vicisitator.md",
+      "organization": "Horde",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.devil.statblock/devil-adjudicator",
+      "name": "Devil Adjudicator",
+      "sourcePath": "en/books/monsters/md/monster/devil/statblock/devil-adjudicator.md",
+      "organization": "Elite",
+      "featureCount": 6
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.devil.statblock/devil-clerk",
+      "name": "Devil Clerk",
+      "sourcePath": "en/books/monsters/md/monster/devil/statblock/devil-clerk.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.devil.statblock/devil-high-judge",
+      "name": "Devil High Judge",
+      "sourcePath": "en/books/monsters/md/monster/devil/statblock/devil-high-judge.md",
+      "organization": "Leader",
+      "featureCount": 8
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.devil.statblock/devil-jurist",
+      "name": "Devil Jurist",
+      "sourcePath": "en/books/monsters/md/monster/devil/statblock/devil-jurist.md",
+      "organization": "Elite",
+      "featureCount": 6
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.devil.statblock/devil-legate",
+      "name": "Devil Legate",
+      "sourcePath": "en/books/monsters/md/monster/devil/statblock/devil-legate.md",
+      "organization": "Elite",
+      "featureCount": 6
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.devil.statblock/devil-magistrate",
+      "name": "Devil Magistrate",
+      "sourcePath": "en/books/monsters/md/monster/devil/statblock/devil-magistrate.md",
+      "organization": "Elite",
+      "featureCount": 6
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.devil.statblock/devil-notary",
+      "name": "Devil Notary",
+      "sourcePath": "en/books/monsters/md/monster/devil/statblock/devil-notary.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.devil.statblock/devil-scrivener",
+      "name": "Devil Scrivener",
+      "sourcePath": "en/books/monsters/md/monster/devil/statblock/devil-scrivener.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.draconian.statblock/aeolyxria-the-uncanny",
+      "name": "Aeolyxria the Uncanny",
+      "sourcePath": "en/books/monsters/md/monster/draconian/statblock/aeolyxria-the-uncanny.md",
+      "organization": "Elite",
+      "featureCount": 5
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.draconian.statblock/dorzinuuth-the-base",
+      "name": "Dorzinuuth the Base",
+      "sourcePath": "en/books/monsters/md/monster/draconian/statblock/dorzinuuth-the-base.md",
+      "organization": "Leader",
+      "featureCount": 9
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.draconian.statblock/locratix-the-morningstar",
+      "name": "Locratix the Morningstar",
+      "sourcePath": "en/books/monsters/md/monster/draconian/statblock/locratix-the-morningstar.md",
+      "organization": "Elite",
+      "featureCount": 6
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.draconian.statblock/lydixavus-the-deadeye",
+      "name": "Lydixavus the Deadeye",
+      "sourcePath": "en/books/monsters/md/monster/draconian/statblock/lydixavus-the-deadeye.md",
+      "organization": "Elite",
+      "featureCount": 5
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.draconian.statblock/myxovidan-the-sintaker",
+      "name": "Myxovidan the Sintaker",
+      "sourcePath": "en/books/monsters/md/monster/draconian/statblock/myxovidan-the-sintaker.md",
+      "organization": "Elite",
+      "featureCount": 5
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.draconian.statblock/phrrygalax-the-subduer",
+      "name": "Phrrygalax the Subduer",
+      "sourcePath": "en/books/monsters/md/monster/draconian/statblock/phrrygalax-the-subduer.md",
+      "organization": "Elite",
+      "featureCount": 6
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.dragon.statblock/crucible-dragon",
+      "name": "Crucible Dragon",
+      "sourcePath": "en/books/monsters/md/monster/dragon/statblock/crucible-dragon.md",
+      "organization": "Solo",
+      "featureCount": 11
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.dragon.statblock/gloom-dragon",
+      "name": "Gloom Dragon",
+      "sourcePath": "en/books/monsters/md/monster/dragon/statblock/gloom-dragon.md",
+      "organization": "Solo",
+      "featureCount": 10
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.dragon.statblock/meteor-dragon",
+      "name": "Meteor Dragon",
+      "sourcePath": "en/books/monsters/md/monster/dragon/statblock/meteor-dragon.md",
+      "organization": "Solo",
+      "featureCount": 11
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.dragon.statblock/omen-dragon",
+      "name": "Omen Dragon",
+      "sourcePath": "en/books/monsters/md/monster/dragon/statblock/omen-dragon.md",
+      "organization": "Solo",
+      "featureCount": 12
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.dragon.statblock/thorn-dragon",
+      "name": "Thorn Dragon",
+      "sourcePath": "en/books/monsters/md/monster/dragon/statblock/thorn-dragon.md",
+      "organization": "Solo",
+      "featureCount": 11
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.dwarf.statblock/dwarf-axethrower",
+      "name": "Dwarf Axethrower",
+      "sourcePath": "en/books/monsters/md/monster/dwarf/statblock/dwarf-axethrower.md",
+      "organization": "Minion",
+      "featureCount": 1
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.dwarf.statblock/dwarf-catchpole",
+      "name": "Dwarf Catchpole",
+      "sourcePath": "en/books/monsters/md/monster/dwarf/statblock/dwarf-catchpole.md",
+      "organization": "Minion",
+      "featureCount": 1
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.dwarf.statblock/dwarf-driver",
+      "name": "Dwarf Driver",
+      "sourcePath": "en/books/monsters/md/monster/dwarf/statblock/dwarf-driver.md",
+      "organization": "Minion",
+      "featureCount": 1
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.dwarf.statblock/dwarf-gunner",
+      "name": "Dwarf Gunner",
+      "sourcePath": "en/books/monsters/md/monster/dwarf/statblock/dwarf-gunner.md",
+      "organization": "Platoon",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.dwarf.statblock/dwarf-hunter",
+      "name": "Dwarf Hunter",
+      "sourcePath": "en/books/monsters/md/monster/dwarf/statblock/dwarf-hunter.md",
+      "organization": "Minion",
+      "featureCount": 1
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.dwarf.statblock/dwarf-launcher",
+      "name": "Dwarf Launcher",
+      "sourcePath": "en/books/monsters/md/monster/dwarf/statblock/dwarf-launcher.md",
+      "organization": "Platoon",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.dwarf.statblock/dwarf-marauder",
+      "name": "Dwarf Marauder",
+      "sourcePath": "en/books/monsters/md/monster/dwarf/statblock/dwarf-marauder.md",
+      "organization": "Leader",
+      "featureCount": 7
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.dwarf.statblock/dwarf-reel-winch",
+      "name": "Dwarf Reel Winch",
+      "sourcePath": "en/books/monsters/md/monster/dwarf/statblock/dwarf-reel-winch.md",
+      "organization": "Platoon",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.dwarf.statblock/dwarf-shieldwall",
+      "name": "Dwarf Shieldwall",
+      "sourcePath": "en/books/monsters/md/monster/dwarf/statblock/dwarf-shieldwall.md",
+      "organization": "Platoon",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.dwarf.statblock/dwarf-stone-whisperer",
+      "name": "Dwarf Stone Whisperer",
+      "sourcePath": "en/books/monsters/md/monster/dwarf/statblock/dwarf-stone-whisperer.md",
+      "organization": "Platoon",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.dwarf.statblock/dwarf-trapper",
+      "name": "Dwarf Trapper",
+      "sourcePath": "en/books/monsters/md/monster/dwarf/statblock/dwarf-trapper.md",
+      "organization": "Platoon",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.dwarf.statblock/dwarf-warden",
+      "name": "Dwarf Warden",
+      "sourcePath": "en/books/monsters/md/monster/dwarf/statblock/dwarf-warden.md",
+      "organization": "Platoon",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.dwarf.statblock/servitor-war-walker",
+      "name": "Servitor War Walker",
+      "sourcePath": "en/books/monsters/md/monster/dwarf/statblock/servitor-war-walker.md",
+      "organization": "Elite",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.elemental.statblock/crux-of-fire",
+      "name": "Crux of Fire",
+      "sourcePath": "en/books/monsters/md/monster/elemental/statblock/crux-of-fire.md",
+      "organization": "Elite",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.elemental.statblock/essence-of-storms",
+      "name": "Essence of Storms",
+      "sourcePath": "en/books/monsters/md/monster/elemental/statblock/essence-of-storms.md",
+      "organization": "Elite",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.elemental.statblock/essence-of-tides",
+      "name": "Essence of Tides",
+      "sourcePath": "en/books/monsters/md/monster/elemental/statblock/essence-of-tides.md",
+      "organization": "Elite",
+      "featureCount": 5
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.elemental.statblock/field-of-growth",
+      "name": "Field of Growth",
+      "sourcePath": "en/books/monsters/md/monster/elemental/statblock/field-of-growth.md",
+      "organization": "Elite",
+      "featureCount": 5
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.elemental.statblock/force-of-earth",
+      "name": "Force of Earth",
+      "sourcePath": "en/books/monsters/md/monster/elemental/statblock/force-of-earth.md",
+      "organization": "Elite",
+      "featureCount": 6
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.elf-high.statblock/brambleguard",
+      "name": "Brambleguard",
+      "sourcePath": "en/books/monsters/md/monster/elf-high/statblock/brambleguard.md",
+      "organization": "Platoon",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.elf-high.statblock/ceramic-horse",
+      "name": "Ceramic Horse",
+      "sourcePath": "en/books/monsters/md/monster/elf-high/statblock/ceramic-horse.md",
+      "organization": "Platoon",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.elf-high.statblock/elemental-mote",
+      "name": "Elemental Mote",
+      "sourcePath": "en/books/monsters/md/monster/elf-high/statblock/elemental-mote.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.elf-high.statblock/high-elf-bloodletter",
+      "name": "High Elf Bloodletter",
+      "sourcePath": "en/books/monsters/md/monster/elf-high/statblock/high-elf-bloodletter.md",
+      "organization": "Platoon",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.elf-high.statblock/high-elf-dawn-mage",
+      "name": "High Elf Dawn Mage",
+      "sourcePath": "en/books/monsters/md/monster/elf-high/statblock/high-elf-dawn-mage.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.elf-high.statblock/high-elf-deathtouch",
+      "name": "High Elf Deathtouch",
+      "sourcePath": "en/books/monsters/md/monster/elf-high/statblock/high-elf-deathtouch.md",
+      "organization": "Platoon",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.elf-high.statblock/high-elf-orbweaver",
+      "name": "High Elf Orbweaver",
+      "sourcePath": "en/books/monsters/md/monster/elf-high/statblock/high-elf-orbweaver.md",
+      "organization": "Platoon",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.elf-high.statblock/high-elf-ordinator",
+      "name": "High Elf Ordinator",
+      "sourcePath": "en/books/monsters/md/monster/elf-high/statblock/high-elf-ordinator.md",
+      "organization": "Leader",
+      "featureCount": 8
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.elf-high.statblock/high-elf-palinode",
+      "name": "High Elf Palinode",
+      "sourcePath": "en/books/monsters/md/monster/elf-high/statblock/high-elf-palinode.md",
+      "organization": "Platoon",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.elf-high.statblock/high-elf-quiver",
+      "name": "High Elf Quiver",
+      "sourcePath": "en/books/monsters/md/monster/elf-high/statblock/high-elf-quiver.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.elf-high.statblock/high-elf-wyrd",
+      "name": "High Elf Wyrd",
+      "sourcePath": "en/books/monsters/md/monster/elf-high/statblock/high-elf-wyrd.md",
+      "organization": "Platoon",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.elf-high.statblock/high-elf-zephyr",
+      "name": "High Elf Zephyr",
+      "sourcePath": "en/books/monsters/md/monster/elf-high/statblock/high-elf-zephyr.md",
+      "organization": "Platoon",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.elf-high.statblock/soot-crow",
+      "name": "Soot Crow",
+      "sourcePath": "en/books/monsters/md/monster/elf-high/statblock/soot-crow.md",
+      "organization": "Minion",
+      "featureCount": 1
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.elf-shadow.statblock/brush-stalker",
+      "name": "Brush Stalker",
+      "sourcePath": "en/books/monsters/md/monster/elf-shadow/statblock/brush-stalker.md",
+      "organization": "Platoon",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.elf-shadow.statblock/shadow-elf-assassin",
+      "name": "Shadow Elf Assassin",
+      "sourcePath": "en/books/monsters/md/monster/elf-shadow/statblock/shadow-elf-assassin.md",
+      "organization": "Platoon",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.elf-shadow.statblock/shadow-elf-cloak",
+      "name": "Shadow Elf Cloak",
+      "sourcePath": "en/books/monsters/md/monster/elf-shadow/statblock/shadow-elf-cloak.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.elf-shadow.statblock/shadow-elf-dusk-mage",
+      "name": "Shadow Elf Dusk Mage",
+      "sourcePath": "en/books/monsters/md/monster/elf-shadow/statblock/shadow-elf-dusk-mage.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.elf-shadow.statblock/shadow-elf-duskcaller",
+      "name": "Shadow Elf Duskcaller",
+      "sourcePath": "en/books/monsters/md/monster/elf-shadow/statblock/shadow-elf-duskcaller.md",
+      "organization": "Platoon",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.elf-shadow.statblock/shadow-elf-eclipse",
+      "name": "Shadow Elf Eclipse",
+      "sourcePath": "en/books/monsters/md/monster/elf-shadow/statblock/shadow-elf-eclipse.md",
+      "organization": "Leader",
+      "featureCount": 8
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.elf-shadow.statblock/shadow-elf-knightfell",
+      "name": "Shadow Elf Knightfell",
+      "sourcePath": "en/books/monsters/md/monster/elf-shadow/statblock/shadow-elf-knightfell.md",
+      "organization": "Platoon",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.elf-shadow.statblock/shadow-elf-luminator",
+      "name": "Shadow Elf Luminator",
+      "sourcePath": "en/books/monsters/md/monster/elf-shadow/statblock/shadow-elf-luminator.md",
+      "organization": "Platoon",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.elf-shadow.statblock/shadow-elf-moondancer",
+      "name": "Shadow Elf Moondancer",
+      "sourcePath": "en/books/monsters/md/monster/elf-shadow/statblock/shadow-elf-moondancer.md",
+      "organization": "Platoon",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.elf-shadow.statblock/shadow-elf-mournblade",
+      "name": "Shadow Elf Mournblade",
+      "sourcePath": "en/books/monsters/md/monster/elf-shadow/statblock/shadow-elf-mournblade.md",
+      "organization": "Platoon",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.elf-shadow.statblock/shadow-elf-nightstrike",
+      "name": "Shadow Elf Nightstrike",
+      "sourcePath": "en/books/monsters/md/monster/elf-shadow/statblock/shadow-elf-nightstrike.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.elf-shadow.statblock/shadow-elf-noctis-mage",
+      "name": "Shadow Elf Noctis Mage",
+      "sourcePath": "en/books/monsters/md/monster/elf-shadow/statblock/shadow-elf-noctis-mage.md",
+      "organization": "Platoon",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.elf-shadow.statblock/shadow-elf-panther",
+      "name": "Shadow Elf Panther",
+      "sourcePath": "en/books/monsters/md/monster/elf-shadow/statblock/shadow-elf-panther.md",
+      "organization": "Platoon",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.elf-shadow.statblock/shadow-elf-sniper",
+      "name": "Shadow Elf Sniper",
+      "sourcePath": "en/books/monsters/md/monster/elf-shadow/statblock/shadow-elf-sniper.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.elf-wode.statblock/wode-elf-chirurgeon",
+      "name": "Wode Elf Chirurgeon",
+      "sourcePath": "en/books/monsters/md/monster/elf-wode/statblock/wode-elf-chirurgeon.md",
+      "organization": "Platoon",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.elf-wode.statblock/wode-elf-druid",
+      "name": "Wode Elf Druid",
+      "sourcePath": "en/books/monsters/md/monster/elf-wode/statblock/wode-elf-druid.md",
+      "organization": "Platoon",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.elf-wode.statblock/wode-elf-green-seer",
+      "name": "Wode Elf Green Seer",
+      "sourcePath": "en/books/monsters/md/monster/elf-wode/statblock/wode-elf-green-seer.md",
+      "organization": "Platoon",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.elf-wode.statblock/wode-elf-greenskeeper",
+      "name": "Wode Elf Greenskeeper",
+      "sourcePath": "en/books/monsters/md/monster/elf-wode/statblock/wode-elf-greenskeeper.md",
+      "organization": "Platoon",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.elf-wode.statblock/wode-elf-guerrilla",
+      "name": "Wode Elf Guerrilla",
+      "sourcePath": "en/books/monsters/md/monster/elf-wode/statblock/wode-elf-guerrilla.md",
+      "organization": "Platoon",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.elf-wode.statblock/wode-elf-gweiadur",
+      "name": "Wode Elf Gweiadur",
+      "sourcePath": "en/books/monsters/md/monster/elf-wode/statblock/wode-elf-gweiadur.md",
+      "organization": "Platoon",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.elf-wode.statblock/wode-elf-lookout",
+      "name": "Wode Elf Lookout",
+      "sourcePath": "en/books/monsters/md/monster/elf-wode/statblock/wode-elf-lookout.md",
+      "organization": "Minion",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.elf-wode.statblock/wode-elf-runner",
+      "name": "Wode Elf Runner",
+      "sourcePath": "en/books/monsters/md/monster/elf-wode/statblock/wode-elf-runner.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.elf-wode.statblock/wode-elf-scout",
+      "name": "Wode Elf Scout",
+      "sourcePath": "en/books/monsters/md/monster/elf-wode/statblock/wode-elf-scout.md",
+      "organization": "Minion",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.elf-wode.statblock/wode-elf-sentry",
+      "name": "Wode Elf Sentry",
+      "sourcePath": "en/books/monsters/md/monster/elf-wode/statblock/wode-elf-sentry.md",
+      "organization": "Platoon",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.elf-wode.statblock/wode-elf-warleader",
+      "name": "Wode Elf Warleader",
+      "sourcePath": "en/books/monsters/md/monster/elf-wode/statblock/wode-elf-warleader.md",
+      "organization": "Leader",
+      "featureCount": 9
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.elf-wode.statblock/wode-elf-yeoman",
+      "name": "Wode Elf Yeoman",
+      "sourcePath": "en/books/monsters/md/monster/elf-wode/statblock/wode-elf-yeoman.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.elf-wode.statblock/wodenelg",
+      "name": "Wodenelg",
+      "sourcePath": "en/books/monsters/md/monster/elf-wode/statblock/wodenelg.md",
+      "organization": "Platoon",
+      "featureCount": 5
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.fossil-cryptic.statblock/fossil-cryptic",
+      "name": "Fossil Cryptic",
+      "sourcePath": "en/books/monsters/md/monster/fossil-cryptic/statblock/fossil-cryptic.md",
+      "organization": "Solo",
+      "featureCount": 11
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.giant.statblock/basalt-stone-giant",
+      "name": "Basalt Stone Giant",
+      "sourcePath": "en/books/monsters/md/monster/giant/statblock/basalt-stone-giant.md",
+      "organization": "Elite",
+      "featureCount": 7
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.giant.statblock/fire-giant-chief",
+      "name": "Fire Giant Chief",
+      "sourcePath": "en/books/monsters/md/monster/giant/statblock/fire-giant-chief.md",
+      "organization": "Leader",
+      "featureCount": 8
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.giant.statblock/fire-giant-fireballer",
+      "name": "Fire Giant Fireballer",
+      "sourcePath": "en/books/monsters/md/monster/giant/statblock/fire-giant-fireballer.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.giant.statblock/fire-giant-lightbearer",
+      "name": "Fire Giant Lightbearer",
+      "sourcePath": "en/books/monsters/md/monster/giant/statblock/fire-giant-lightbearer.md",
+      "organization": "Elite",
+      "featureCount": 6
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.giant.statblock/fire-giant-red-fist",
+      "name": "Fire Giant Red Fist",
+      "sourcePath": "en/books/monsters/md/monster/giant/statblock/fire-giant-red-fist.md",
+      "organization": "Elite",
+      "featureCount": 6
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.giant.statblock/frost-giant-snowblaster",
+      "name": "Frost Giant Snowblaster",
+      "sourcePath": "en/books/monsters/md/monster/giant/statblock/frost-giant-snowblaster.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.giant.statblock/frost-giant-storm-hurler",
+      "name": "Frost Giant Storm Hurler",
+      "sourcePath": "en/books/monsters/md/monster/giant/statblock/frost-giant-storm-hurler.md",
+      "organization": "Elite",
+      "featureCount": 5
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.giant.statblock/frost-giant-wind-sprinter",
+      "name": "Frost Giant Wind Sprinter",
+      "sourcePath": "en/books/monsters/md/monster/giant/statblock/frost-giant-wind-sprinter.md",
+      "organization": "Elite",
+      "featureCount": 6
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.giant.statblock/granite-stone-giant",
+      "name": "Granite Stone Giant",
+      "sourcePath": "en/books/monsters/md/monster/giant/statblock/granite-stone-giant.md",
+      "organization": "Elite",
+      "featureCount": 7
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.giant.statblock/hill-giant-clobberer",
+      "name": "Hill Giant Clobberer",
+      "sourcePath": "en/books/monsters/md/monster/giant/statblock/hill-giant-clobberer.md",
+      "organization": "Elite",
+      "featureCount": 6
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.giant.statblock/hill-giant-mosstooth",
+      "name": "Hill Giant Mosstooth",
+      "sourcePath": "en/books/monsters/md/monster/giant/statblock/hill-giant-mosstooth.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.giant.statblock/marble-stone-giant",
+      "name": "Marble Stone Giant",
+      "sourcePath": "en/books/monsters/md/monster/giant/statblock/marble-stone-giant.md",
+      "organization": "Elite",
+      "featureCount": 7
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.giant.statblock/sand-stone-giant",
+      "name": "Sand Stone Giant",
+      "sourcePath": "en/books/monsters/md/monster/giant/statblock/sand-stone-giant.md",
+      "organization": "Minion",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.gnoll.statblock/abyssal-hyena",
+      "name": "Abyssal Hyena",
+      "sourcePath": "en/books/monsters/md/monster/gnoll/statblock/abyssal-hyena.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.gnoll.statblock/gnoll-abyssal-archer",
+      "name": "Gnoll Abyssal Archer",
+      "sourcePath": "en/books/monsters/md/monster/gnoll/statblock/gnoll-abyssal-archer.md",
+      "organization": "Horde",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.gnoll.statblock/gnoll-abyssal-summoner",
+      "name": "Gnoll Abyssal Summoner",
+      "sourcePath": "en/books/monsters/md/monster/gnoll/statblock/gnoll-abyssal-summoner.md",
+      "organization": "Horde",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.gnoll.statblock/gnoll-bonesplitter",
+      "name": "Gnoll Bonesplitter",
+      "sourcePath": "en/books/monsters/md/monster/gnoll/statblock/gnoll-bonesplitter.md",
+      "organization": "Horde",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.gnoll.statblock/gnoll-cackler",
+      "name": "Gnoll Cackler",
+      "sourcePath": "en/books/monsters/md/monster/gnoll/statblock/gnoll-cackler.md",
+      "organization": "Horde",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.gnoll.statblock/gnoll-carnage",
+      "name": "Gnoll Carnage",
+      "sourcePath": "en/books/monsters/md/monster/gnoll/statblock/gnoll-carnage.md",
+      "organization": "Leader",
+      "featureCount": 8
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.gnoll.statblock/gnoll-chainflail",
+      "name": "Gnoll Chainflail",
+      "sourcePath": "en/books/monsters/md/monster/gnoll/statblock/gnoll-chainflail.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.gnoll.statblock/gnoll-mage-mauler",
+      "name": "Gnoll Mage Mauler",
+      "sourcePath": "en/books/monsters/md/monster/gnoll/statblock/gnoll-mage-mauler.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.gnoll.statblock/gnoll-marauder",
+      "name": "Gnoll Marauder",
+      "sourcePath": "en/books/monsters/md/monster/gnoll/statblock/gnoll-marauder.md",
+      "organization": "Horde",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.gnoll.statblock/gnoll-wildling",
+      "name": "Gnoll Wildling",
+      "sourcePath": "en/books/monsters/md/monster/gnoll/statblock/gnoll-wildling.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.gnoll.statblock/tusker-demon",
+      "name": "Tusker Demon",
+      "sourcePath": "en/books/monsters/md/monster/gnoll/statblock/tusker-demon.md",
+      "organization": "Elite",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.goblin.statblock/goblin-assassin",
+      "name": "Goblin Assassin",
+      "sourcePath": "en/books/monsters/md/monster/goblin/statblock/goblin-assassin.md",
+      "organization": "Horde",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.goblin.statblock/goblin-cursespitter",
+      "name": "Goblin Cursespitter",
+      "sourcePath": "en/books/monsters/md/monster/goblin/statblock/goblin-cursespitter.md",
+      "organization": "Horde",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.goblin.statblock/goblin-monarch",
+      "name": "Goblin Monarch",
+      "sourcePath": "en/books/monsters/md/monster/goblin/statblock/goblin-monarch.md",
+      "organization": "Leader",
+      "featureCount": 8
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.goblin.statblock/goblin-runner",
+      "name": "Goblin Runner",
+      "sourcePath": "en/books/monsters/md/monster/goblin/statblock/goblin-runner.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.goblin.statblock/goblin-sniper",
+      "name": "Goblin Sniper",
+      "sourcePath": "en/books/monsters/md/monster/goblin/statblock/goblin-sniper.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.goblin.statblock/goblin-spinecleaver",
+      "name": "Goblin Spinecleaver",
+      "sourcePath": "en/books/monsters/md/monster/goblin/statblock/goblin-spinecleaver.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.goblin.statblock/goblin-stinker",
+      "name": "Goblin Stinker",
+      "sourcePath": "en/books/monsters/md/monster/goblin/statblock/goblin-stinker.md",
+      "organization": "Horde",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.goblin.statblock/goblin-underboss",
+      "name": "Goblin Underboss",
+      "sourcePath": "en/books/monsters/md/monster/goblin/statblock/goblin-underboss.md",
+      "organization": "Horde",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.goblin.statblock/goblin-warrior",
+      "name": "Goblin Warrior",
+      "sourcePath": "en/books/monsters/md/monster/goblin/statblock/goblin-warrior.md",
+      "organization": "Horde",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.goblin.statblock/skitterling",
+      "name": "Skitterling",
+      "sourcePath": "en/books/monsters/md/monster/goblin/statblock/skitterling.md",
+      "organization": "Minion",
+      "featureCount": 1
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.goblin.statblock/war-spider",
+      "name": "War Spider",
+      "sourcePath": "en/books/monsters/md/monster/goblin/statblock/war-spider.md",
+      "organization": "Elite",
+      "featureCount": 7
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.goblin.statblock/worg",
+      "name": "Worg",
+      "sourcePath": "en/books/monsters/md/monster/goblin/statblock/worg.md",
+      "organization": "Horde",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.griffon.statblock/griffon",
+      "name": "Griffon",
+      "sourcePath": "en/books/monsters/md/monster/griffon/statblock/griffon.md",
+      "organization": "Elite",
+      "featureCount": 6
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.griffon.statblock/striped-condor-griffon",
+      "name": "Striped Condor Griffon",
+      "sourcePath": "en/books/monsters/md/monster/griffon/statblock/striped-condor-griffon.md",
+      "organization": "Elite",
+      "featureCount": 7
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.hag.statblock/wode-hag",
+      "name": "Wode Hag",
+      "sourcePath": "en/books/monsters/md/monster/hag/statblock/wode-hag.md",
+      "organization": "Solo",
+      "featureCount": 9
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.hobgoblin.statblock/grilp",
+      "name": "Grilp",
+      "sourcePath": "en/books/monsters/md/monster/hobgoblin/statblock/grilp.md",
+      "organization": "Minion",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.hobgoblin.statblock/hobgoblin-bloodlord",
+      "name": "Hobgoblin Bloodlord",
+      "sourcePath": "en/books/monsters/md/monster/hobgoblin/statblock/hobgoblin-bloodlord.md",
+      "organization": "Leader",
+      "featureCount": 8
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.hobgoblin.statblock/hobgoblin-brandbearer",
+      "name": "Hobgoblin Brandbearer",
+      "sourcePath": "en/books/monsters/md/monster/hobgoblin/statblock/hobgoblin-brandbearer.md",
+      "organization": "Minion",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.hobgoblin.statblock/hobgoblin-burning-witch",
+      "name": "Hobgoblin Burning Witch",
+      "sourcePath": "en/books/monsters/md/monster/hobgoblin/statblock/hobgoblin-burning-witch.md",
+      "organization": "Platoon",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.hobgoblin.statblock/hobgoblin-death-captain",
+      "name": "Hobgoblin Death Captain",
+      "sourcePath": "en/books/monsters/md/monster/hobgoblin/statblock/hobgoblin-death-captain.md",
+      "organization": "Platoon",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.hobgoblin.statblock/hobgoblin-firerunner",
+      "name": "Hobgoblin Firerunner",
+      "sourcePath": "en/books/monsters/md/monster/hobgoblin/statblock/hobgoblin-firerunner.md",
+      "organization": "Platoon",
+      "featureCount": 5
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.hobgoblin.statblock/hobgoblin-grandguard",
+      "name": "Hobgoblin Grandguard",
+      "sourcePath": "en/books/monsters/md/monster/hobgoblin/statblock/hobgoblin-grandguard.md",
+      "organization": "Platoon",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.hobgoblin.statblock/hobgoblin-hell-trooper",
+      "name": "Hobgoblin Hell Trooper",
+      "sourcePath": "en/books/monsters/md/monster/hobgoblin/statblock/hobgoblin-hell-trooper.md",
+      "organization": "Platoon",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.hobgoblin.statblock/hobgoblin-incendiarist",
+      "name": "Hobgoblin Incendiarist",
+      "sourcePath": "en/books/monsters/md/monster/hobgoblin/statblock/hobgoblin-incendiarist.md",
+      "organization": "Platoon",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.hobgoblin.statblock/hobgoblin-lancer",
+      "name": "Hobgoblin Lancer",
+      "sourcePath": "en/books/monsters/md/monster/hobgoblin/statblock/hobgoblin-lancer.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.hobgoblin.statblock/hobgoblin-recruit",
+      "name": "Hobgoblin Recruit",
+      "sourcePath": "en/books/monsters/md/monster/hobgoblin/statblock/hobgoblin-recruit.md",
+      "organization": "Minion",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.hobgoblin.statblock/hobgoblin-redglare",
+      "name": "Hobgoblin Redglare",
+      "sourcePath": "en/books/monsters/md/monster/hobgoblin/statblock/hobgoblin-redglare.md",
+      "organization": "Platoon",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.hobgoblin.statblock/hobgoblin-smokebinder",
+      "name": "Hobgoblin Smokebinder",
+      "sourcePath": "en/books/monsters/md/monster/hobgoblin/statblock/hobgoblin-smokebinder.md",
+      "organization": "Platoon",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.hobgoblin.statblock/hobgoblin-war-mage",
+      "name": "Hobgoblin War Mage",
+      "sourcePath": "en/books/monsters/md/monster/hobgoblin/statblock/hobgoblin-war-mage.md",
+      "organization": "Elite",
+      "featureCount": 6
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.hobgoblin.statblock/slaughter-demon",
+      "name": "Slaughter Demon",
+      "sourcePath": "en/books/monsters/md/monster/hobgoblin/statblock/slaughter-demon.md",
+      "organization": "Elite",
+      "featureCount": 6
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.human.statblock/giant-hawk",
+      "name": "Giant Hawk",
+      "sourcePath": "en/books/monsters/md/monster/human/statblock/giant-hawk.md",
+      "organization": "Platoon",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.human.statblock/human-apprentice-mage",
+      "name": "Human Apprentice Mage",
+      "sourcePath": "en/books/monsters/md/monster/human/statblock/human-apprentice-mage.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.human.statblock/human-archer",
+      "name": "Human Archer",
+      "sourcePath": "en/books/monsters/md/monster/human/statblock/human-archer.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.human.statblock/human-bandit-chief",
+      "name": "Human Bandit Chief",
+      "sourcePath": "en/books/monsters/md/monster/human/statblock/human-bandit-chief.md",
+      "organization": "Leader",
+      "featureCount": 8
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.human.statblock/human-blackguard",
+      "name": "Human Blackguard",
+      "sourcePath": "en/books/monsters/md/monster/human/statblock/human-blackguard.md",
+      "organization": "Leader",
+      "featureCount": 8
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.human.statblock/human-brawler",
+      "name": "Human Brawler",
+      "sourcePath": "en/books/monsters/md/monster/human/statblock/human-brawler.md",
+      "organization": "Platoon",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.human.statblock/human-death-acolyte",
+      "name": "Human Death Acolyte",
+      "sourcePath": "en/books/monsters/md/monster/human/statblock/human-death-acolyte.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.human.statblock/human-death-cultist",
+      "name": "Human Death Cultist",
+      "sourcePath": "en/books/monsters/md/monster/human/statblock/human-death-cultist.md",
+      "organization": "Platoon",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.human.statblock/human-guard",
+      "name": "Human Guard",
+      "sourcePath": "en/books/monsters/md/monster/human/statblock/human-guard.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.human.statblock/human-knave",
+      "name": "Human Knave",
+      "sourcePath": "en/books/monsters/md/monster/human/statblock/human-knave.md",
+      "organization": "Platoon",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.human.statblock/human-raider",
+      "name": "Human Raider",
+      "sourcePath": "en/books/monsters/md/monster/human/statblock/human-raider.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.human.statblock/human-rogue",
+      "name": "Human Rogue",
+      "sourcePath": "en/books/monsters/md/monster/human/statblock/human-rogue.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.human.statblock/human-scoundrel",
+      "name": "Human Scoundrel",
+      "sourcePath": "en/books/monsters/md/monster/human/statblock/human-scoundrel.md",
+      "organization": "Platoon",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.human.statblock/human-storm-mage",
+      "name": "Human Storm Mage",
+      "sourcePath": "en/books/monsters/md/monster/human/statblock/human-storm-mage.md",
+      "organization": "Platoon",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.human.statblock/human-trickshot",
+      "name": "Human Trickshot",
+      "sourcePath": "en/books/monsters/md/monster/human/statblock/human-trickshot.md",
+      "organization": "Platoon",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.kingfissure-worm.statblock/kingfissure-worm",
+      "name": "Kingfissure Worm",
+      "sourcePath": "en/books/monsters/md/monster/kingfissure-worm/statblock/kingfissure-worm.md",
+      "organization": "Solo",
+      "featureCount": 14
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.kobold.statblock/kobold-adeptus",
+      "name": "Kobold Adeptus",
+      "sourcePath": "en/books/monsters/md/monster/kobold/statblock/kobold-adeptus.md",
+      "organization": "Horde",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.kobold.statblock/kobold-artifex",
+      "name": "Kobold Artifex",
+      "sourcePath": "en/books/monsters/md/monster/kobold/statblock/kobold-artifex.md",
+      "organization": "Horde",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.kobold.statblock/kobold-centurion",
+      "name": "Kobold Centurion",
+      "sourcePath": "en/books/monsters/md/monster/kobold/statblock/kobold-centurion.md",
+      "organization": "Leader",
+      "featureCount": 8
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.kobold.statblock/kobold-legionary",
+      "name": "Kobold Legionary",
+      "sourcePath": "en/books/monsters/md/monster/kobold/statblock/kobold-legionary.md",
+      "organization": "Horde",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.kobold.statblock/kobold-princeps",
+      "name": "Kobold Princeps",
+      "sourcePath": "en/books/monsters/md/monster/kobold/statblock/kobold-princeps.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.kobold.statblock/kobold-sagittarion",
+      "name": "Kobold Sagittarion",
+      "sourcePath": "en/books/monsters/md/monster/kobold/statblock/kobold-sagittarion.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.kobold.statblock/kobold-signifer",
+      "name": "Kobold Signifer",
+      "sourcePath": "en/books/monsters/md/monster/kobold/statblock/kobold-signifer.md",
+      "organization": "Horde",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.kobold.statblock/kobold-tiro",
+      "name": "Kobold Tiro",
+      "sourcePath": "en/books/monsters/md/monster/kobold/statblock/kobold-tiro.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.kobold.statblock/kobold-veles",
+      "name": "Kobold Veles",
+      "sourcePath": "en/books/monsters/md/monster/kobold/statblock/kobold-veles.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.kobold.statblock/kobold-venator",
+      "name": "Kobold Venator",
+      "sourcePath": "en/books/monsters/md/monster/kobold/statblock/kobold-venator.md",
+      "organization": "Horde",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.kobold.statblock/shieldscale-drangolin",
+      "name": "Shieldscale Drangolin",
+      "sourcePath": "en/books/monsters/md/monster/kobold/statblock/shieldscale-drangolin.md",
+      "organization": "Elite",
+      "featureCount": 5
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.kobold.statblock/trained-gummy-brick",
+      "name": "Trained Gummy Brick",
+      "sourcePath": "en/books/monsters/md/monster/kobold/statblock/trained-gummy-brick.md",
+      "organization": "Elite",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.lich.statblock/lich",
+      "name": "Lich",
+      "sourcePath": "en/books/monsters/md/monster/lich/statblock/lich.md",
+      "organization": "Solo",
+      "featureCount": 12
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.lightbender.statblock/lightbender-pouncer",
+      "name": "Lightbender Pouncer",
+      "sourcePath": "en/books/monsters/md/monster/lightbender/statblock/lightbender-pouncer.md",
+      "organization": "Elite",
+      "featureCount": 5
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.lightbender.statblock/lightbender",
+      "name": "Lightbender",
+      "sourcePath": "en/books/monsters/md/monster/lightbender/statblock/lightbender.md",
+      "organization": "Elite",
+      "featureCount": 5
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.lizardfolk.statblock/lizardfolk-bloodeye",
+      "name": "Lizardfolk Bloodeye",
+      "sourcePath": "en/books/monsters/md/monster/lizardfolk/statblock/lizardfolk-bloodeye.md",
+      "organization": "Platoon",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.lizardfolk.statblock/lizardfolk-deathrex",
+      "name": "Lizardfolk Deathrex",
+      "sourcePath": "en/books/monsters/md/monster/lizardfolk/statblock/lizardfolk-deathrex.md",
+      "organization": "Leader",
+      "featureCount": 8
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.lizardfolk.statblock/lizardfolk-grunt",
+      "name": "Lizardfolk Grunt",
+      "sourcePath": "en/books/monsters/md/monster/lizardfolk/statblock/lizardfolk-grunt.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.lizardfolk.statblock/lizardfolk-scaletooth",
+      "name": "Lizardfolk Scaletooth",
+      "sourcePath": "en/books/monsters/md/monster/lizardfolk/statblock/lizardfolk-scaletooth.md",
+      "organization": "Platoon",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.lizardfolk.statblock/lizardfolk-shellguard",
+      "name": "Lizardfolk Shellguard",
+      "sourcePath": "en/books/monsters/md/monster/lizardfolk/statblock/lizardfolk-shellguard.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.lizardfolk.statblock/lizardfolk-skyterror",
+      "name": "Lizardfolk Skyterror",
+      "sourcePath": "en/books/monsters/md/monster/lizardfolk/statblock/lizardfolk-skyterror.md",
+      "organization": "Platoon",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.lizardfolk.statblock/lizardfolk-tonguer",
+      "name": "Lizardfolk Tonguer",
+      "sourcePath": "en/books/monsters/md/monster/lizardfolk/statblock/lizardfolk-tonguer.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.lord-syuul.statblock/lord-syuul",
+      "name": "Lord Syuul",
+      "sourcePath": "en/books/monsters/md/monster/lord-syuul/statblock/lord-syuul.md",
+      "organization": "Solo",
+      "featureCount": 10
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.manticore.statblock/manticore",
+      "name": "Manticore",
+      "sourcePath": "en/books/monsters/md/monster/manticore/statblock/manticore.md",
+      "organization": "Solo",
+      "featureCount": 9
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.medusa.statblock/medusa",
+      "name": "Medusa",
+      "sourcePath": "en/books/monsters/md/monster/medusa/statblock/medusa.md",
+      "organization": "Solo",
+      "featureCount": 11
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.minotaur.statblock/minotaur-bully",
+      "name": "Minotaur Bully",
+      "sourcePath": "en/books/monsters/md/monster/minotaur/statblock/minotaur-bully.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.minotaur.statblock/minotaur-lackey",
+      "name": "Minotaur Lackey",
+      "sourcePath": "en/books/monsters/md/monster/minotaur/statblock/minotaur-lackey.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.minotaur.statblock/minotaur-stampede",
+      "name": "Minotaur Stampede",
+      "sourcePath": "en/books/monsters/md/monster/minotaur/statblock/minotaur-stampede.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.minotaur.statblock/minotaur-sunderer",
+      "name": "Minotaur Sunderer",
+      "sourcePath": "en/books/monsters/md/monster/minotaur/statblock/minotaur-sunderer.md",
+      "organization": "Elite",
+      "featureCount": 5
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.minotaur.statblock/minotaur",
+      "name": "Minotaur",
+      "sourcePath": "en/books/monsters/md/monster/minotaur/statblock/minotaur.md",
+      "organization": "Elite",
+      "featureCount": 5
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.noncombatant.statblock/noncombatant",
+      "name": "Noncombatant",
+      "sourcePath": "en/books/monsters/md/monster/noncombatant/statblock/noncombatant.md",
+      "organization": "",
+      "featureCount": 0
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.ogre.statblock/cyclops",
+      "name": "Cyclops",
+      "sourcePath": "en/books/monsters/md/monster/ogre/statblock/cyclops.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.ogre.statblock/ogre-blue-blood",
+      "name": "Ogre Blue Blood",
+      "sourcePath": "en/books/monsters/md/monster/ogre/statblock/ogre-blue-blood.md",
+      "organization": "Minion",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.ogre.statblock/ogre-goon",
+      "name": "Ogre Goon",
+      "sourcePath": "en/books/monsters/md/monster/ogre/statblock/ogre-goon.md",
+      "organization": "Elite",
+      "featureCount": 5
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.ogre.statblock/ogre-juggernaut",
+      "name": "Ogre Juggernaut",
+      "sourcePath": "en/books/monsters/md/monster/ogre/statblock/ogre-juggernaut.md",
+      "organization": "Elite",
+      "featureCount": 6
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.ogre.statblock/ogre-tantrum",
+      "name": "Ogre Tantrum",
+      "sourcePath": "en/books/monsters/md/monster/ogre/statblock/ogre-tantrum.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.olothec.statblock/olothec",
+      "name": "Olothec",
+      "sourcePath": "en/books/monsters/md/monster/olothec/statblock/olothec.md",
+      "organization": "Solo",
+      "featureCount": 12
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.orc.statblock/mohler",
+      "name": "Mohler",
+      "sourcePath": "en/books/monsters/md/monster/orc/statblock/mohler.md",
+      "organization": "Minion",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.orc.statblock/orc-blitzer",
+      "name": "Orc Blitzer",
+      "sourcePath": "en/books/monsters/md/monster/orc/statblock/orc-blitzer.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.orc.statblock/orc-bloodrunner",
+      "name": "Orc Bloodrunner",
+      "sourcePath": "en/books/monsters/md/monster/orc/statblock/orc-bloodrunner.md",
+      "organization": "Platoon",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.orc.statblock/orc-bloodspark",
+      "name": "Orc Bloodspark",
+      "sourcePath": "en/books/monsters/md/monster/orc/statblock/orc-bloodspark.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.orc.statblock/orc-chainlock",
+      "name": "Orc Chainlock",
+      "sourcePath": "en/books/monsters/md/monster/orc/statblock/orc-chainlock.md",
+      "organization": "Platoon",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.orc.statblock/orc-eye-of-grole",
+      "name": "Orc Eye of Grole",
+      "sourcePath": "en/books/monsters/md/monster/orc/statblock/orc-eye-of-grole.md",
+      "organization": "Platoon",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.orc.statblock/orc-garotter",
+      "name": "Orc Garotter",
+      "sourcePath": "en/books/monsters/md/monster/orc/statblock/orc-garotter.md",
+      "organization": "Platoon",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.orc.statblock/orc-glorifier",
+      "name": "Orc Glorifier",
+      "sourcePath": "en/books/monsters/md/monster/orc/statblock/orc-glorifier.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.orc.statblock/orc-godcaller",
+      "name": "Orc Godcaller",
+      "sourcePath": "en/books/monsters/md/monster/orc/statblock/orc-godcaller.md",
+      "organization": "Platoon",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.orc.statblock/orc-juggernaut",
+      "name": "Orc Juggernaut",
+      "sourcePath": "en/books/monsters/md/monster/orc/statblock/orc-juggernaut.md",
+      "organization": "Platoon",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.orc.statblock/orc-rampart",
+      "name": "Orc Rampart",
+      "sourcePath": "en/books/monsters/md/monster/orc/statblock/orc-rampart.md",
+      "organization": "Platoon",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.orc.statblock/orc-razor",
+      "name": "Orc Razor",
+      "sourcePath": "en/books/monsters/md/monster/orc/statblock/orc-razor.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.orc.statblock/orc-terranova",
+      "name": "Orc Terranova",
+      "sourcePath": "en/books/monsters/md/monster/orc/statblock/orc-terranova.md",
+      "organization": "Platoon",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.orc.statblock/orc-warleader",
+      "name": "Orc Warleader",
+      "sourcePath": "en/books/monsters/md/monster/orc/statblock/orc-warleader.md",
+      "organization": "Leader",
+      "featureCount": 9
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.orc.statblock/scyza",
+      "name": "Scyza",
+      "sourcePath": "en/books/monsters/md/monster/orc/statblock/scyza.md",
+      "organization": "Elite",
+      "featureCount": 7
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.radenwight.statblock/radenwight-bruxer",
+      "name": "Radenwight Bruxer",
+      "sourcePath": "en/books/monsters/md/monster/radenwight/statblock/radenwight-bruxer.md",
+      "organization": "Platoon",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.radenwight.statblock/radenwight-maestro",
+      "name": "Radenwight Maestro",
+      "sourcePath": "en/books/monsters/md/monster/radenwight/statblock/radenwight-maestro.md",
+      "organization": "Leader",
+      "featureCount": 7
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.radenwight.statblock/radenwight-mischiever",
+      "name": "Radenwight Mischiever",
+      "sourcePath": "en/books/monsters/md/monster/radenwight/statblock/radenwight-mischiever.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.radenwight.statblock/radenwight-piper",
+      "name": "Radenwight Piper",
+      "sourcePath": "en/books/monsters/md/monster/radenwight/statblock/radenwight-piper.md",
+      "organization": "Platoon",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.radenwight.statblock/radenwight-ratcrobat",
+      "name": "Radenwight Ratcrobat",
+      "sourcePath": "en/books/monsters/md/monster/radenwight/statblock/radenwight-ratcrobat.md",
+      "organization": "Platoon",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.radenwight.statblock/radenwight-redeye",
+      "name": "Radenwight Redeye",
+      "sourcePath": "en/books/monsters/md/monster/radenwight/statblock/radenwight-redeye.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.radenwight.statblock/radenwight-scrapper",
+      "name": "Radenwight Scrapper",
+      "sourcePath": "en/books/monsters/md/monster/radenwight/statblock/radenwight-scrapper.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.radenwight.statblock/radenwight-swiftpaw",
+      "name": "Radenwight Swiftpaw",
+      "sourcePath": "en/books/monsters/md/monster/radenwight/statblock/radenwight-swiftpaw.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.retainer.statblock/angulotl-hopper",
+      "name": "Angulotl Hopper",
+      "sourcePath": "en/books/monsters/md/monster/retainer/statblock/angulotl-hopper.md",
+      "organization": "Retainer",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.retainer.statblock/bugbear-commando",
+      "name": "Bugbear Commando",
+      "sourcePath": "en/books/monsters/md/monster/retainer/statblock/bugbear-commando.md",
+      "organization": "Retainer",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.retainer.statblock/devil-defector",
+      "name": "Devil Defector",
+      "sourcePath": "en/books/monsters/md/monster/retainer/statblock/devil-defector.md",
+      "organization": "Retainer",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.retainer.statblock/dwarf-mortar",
+      "name": "Dwarf Mortar",
+      "sourcePath": "en/books/monsters/md/monster/retainer/statblock/dwarf-mortar.md",
+      "organization": "Retainer",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.retainer.statblock/gnoll-gnasher",
+      "name": "Gnoll Gnasher",
+      "sourcePath": "en/books/monsters/md/monster/retainer/statblock/gnoll-gnasher.md",
+      "organization": "Retainer",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.retainer.statblock/goblin-guide",
+      "name": "Goblin Guide",
+      "sourcePath": "en/books/monsters/md/monster/retainer/statblock/goblin-guide.md",
+      "organization": "Retainer",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.retainer.statblock/high-elf-weatherwise",
+      "name": "High Elf Weatherwise",
+      "sourcePath": "en/books/monsters/md/monster/retainer/statblock/high-elf-weatherwise.md",
+      "organization": "Retainer",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.retainer.statblock/hobgoblin-flameslinger",
+      "name": "Hobgoblin Flameslinger",
+      "sourcePath": "en/books/monsters/md/monster/retainer/statblock/hobgoblin-flameslinger.md",
+      "organization": "Retainer",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.retainer.statblock/human-warrior",
+      "name": "Human Warrior",
+      "sourcePath": "en/books/monsters/md/monster/retainer/statblock/human-warrior.md",
+      "organization": "Retainer",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.retainer.statblock/kobold-shieldbearer",
+      "name": "Kobold Shieldbearer",
+      "sourcePath": "en/books/monsters/md/monster/retainer/statblock/kobold-shieldbearer.md",
+      "organization": "Retainer",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.retainer.statblock/minotaur-gorer",
+      "name": "Minotaur Gorer",
+      "sourcePath": "en/books/monsters/md/monster/retainer/statblock/minotaur-gorer.md",
+      "organization": "Retainer",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.retainer.statblock/orc-charger",
+      "name": "Orc Charger",
+      "sourcePath": "en/books/monsters/md/monster/retainer/statblock/orc-charger.md",
+      "organization": "Retainer",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.retainer.statblock/radenwight-sidekick",
+      "name": "Radenwight Sidekick",
+      "sourcePath": "en/books/monsters/md/monster/retainer/statblock/radenwight-sidekick.md",
+      "organization": "Retainer",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.retainer.statblock/shadow-elf-shade",
+      "name": "Shadow Elf Shade",
+      "sourcePath": "en/books/monsters/md/monster/retainer/statblock/shadow-elf-shade.md",
+      "organization": "Retainer",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.retainer.statblock/the-nameless",
+      "name": "The Nameless",
+      "sourcePath": "en/books/monsters/md/monster/retainer/statblock/the-nameless.md",
+      "organization": "Retainer",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.retainer.statblock/time-raider-mind-healer",
+      "name": "Time Raider Mind Healer",
+      "sourcePath": "en/books/monsters/md/monster/retainer/statblock/time-raider-mind-healer.md",
+      "organization": "Retainer",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.retainer.statblock/troll-mercenary",
+      "name": "Troll Mercenary",
+      "sourcePath": "en/books/monsters/md/monster/retainer/statblock/troll-mercenary.md",
+      "organization": "Retainer",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.retainer.statblock/undead-servitor",
+      "name": "Undead Servitor",
+      "sourcePath": "en/books/monsters/md/monster/retainer/statblock/undead-servitor.md",
+      "organization": "Retainer",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.retainer.statblock/unquiet-spirit",
+      "name": "Unquiet Spirit",
+      "sourcePath": "en/books/monsters/md/monster/retainer/statblock/unquiet-spirit.md",
+      "organization": "Retainer",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.retainer.statblock/vampire-rebel",
+      "name": "Vampire Rebel",
+      "sourcePath": "en/books/monsters/md/monster/retainer/statblock/vampire-rebel.md",
+      "organization": "Retainer",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.retainer.statblock/wode-elf-arrowswift",
+      "name": "Wode Elf Arrowswift",
+      "sourcePath": "en/books/monsters/md/monster/retainer/statblock/wode-elf-arrowswift.md",
+      "organization": "Retainer",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.rival.1st-echelon.statblock/rival-conduit",
+      "name": "Rival Conduit",
+      "sourcePath": "en/books/monsters/md/monster/rival/1st-echelon/statblock/rival-conduit.md",
+      "organization": "Elite",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.rival.1st-echelon.statblock/rival-elementalist",
+      "name": "Rival Elementalist",
+      "sourcePath": "en/books/monsters/md/monster/rival/1st-echelon/statblock/rival-elementalist.md",
+      "organization": "Elite",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.rival.1st-echelon.statblock/rival-fury",
+      "name": "Rival Fury",
+      "sourcePath": "en/books/monsters/md/monster/rival/1st-echelon/statblock/rival-fury.md",
+      "organization": "Elite",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.rival.1st-echelon.statblock/rival-null",
+      "name": "Rival Null",
+      "sourcePath": "en/books/monsters/md/monster/rival/1st-echelon/statblock/rival-null.md",
+      "organization": "Elite",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.rival.1st-echelon.statblock/rival-shadow",
+      "name": "Rival Shadow",
+      "sourcePath": "en/books/monsters/md/monster/rival/1st-echelon/statblock/rival-shadow.md",
+      "organization": "Elite",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.rival.1st-echelon.statblock/rival-tactician",
+      "name": "Rival Tactician",
+      "sourcePath": "en/books/monsters/md/monster/rival/1st-echelon/statblock/rival-tactician.md",
+      "organization": "Elite",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.rival.1st-echelon.statblock/rival-talent",
+      "name": "Rival Talent",
+      "sourcePath": "en/books/monsters/md/monster/rival/1st-echelon/statblock/rival-talent.md",
+      "organization": "Elite",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.rival.2nd-echelon.statblock/rival-conduit",
+      "name": "Rival Conduit",
+      "sourcePath": "en/books/monsters/md/monster/rival/2nd-echelon/statblock/rival-conduit.md",
+      "organization": "Elite",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.rival.2nd-echelon.statblock/rival-elementalist",
+      "name": "Rival Elementalist",
+      "sourcePath": "en/books/monsters/md/monster/rival/2nd-echelon/statblock/rival-elementalist.md",
+      "organization": "Elite",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.rival.2nd-echelon.statblock/rival-fury",
+      "name": "Rival Fury",
+      "sourcePath": "en/books/monsters/md/monster/rival/2nd-echelon/statblock/rival-fury.md",
+      "organization": "Elite",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.rival.2nd-echelon.statblock/rival-null",
+      "name": "Rival Null",
+      "sourcePath": "en/books/monsters/md/monster/rival/2nd-echelon/statblock/rival-null.md",
+      "organization": "Elite",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.rival.2nd-echelon.statblock/rival-shadow",
+      "name": "Rival Shadow",
+      "sourcePath": "en/books/monsters/md/monster/rival/2nd-echelon/statblock/rival-shadow.md",
+      "organization": "Elite",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.rival.2nd-echelon.statblock/rival-tactician",
+      "name": "Rival Tactician",
+      "sourcePath": "en/books/monsters/md/monster/rival/2nd-echelon/statblock/rival-tactician.md",
+      "organization": "Elite",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.rival.2nd-echelon.statblock/rival-talent",
+      "name": "Rival Talent",
+      "sourcePath": "en/books/monsters/md/monster/rival/2nd-echelon/statblock/rival-talent.md",
+      "organization": "Elite",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.rival.3rd-echelon.statblock/rival-conduit",
+      "name": "Rival Conduit",
+      "sourcePath": "en/books/monsters/md/monster/rival/3rd-echelon/statblock/rival-conduit.md",
+      "organization": "Elite",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.rival.3rd-echelon.statblock/rival-elementalist",
+      "name": "Rival Elementalist",
+      "sourcePath": "en/books/monsters/md/monster/rival/3rd-echelon/statblock/rival-elementalist.md",
+      "organization": "Elite",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.rival.3rd-echelon.statblock/rival-fury",
+      "name": "Rival Fury",
+      "sourcePath": "en/books/monsters/md/monster/rival/3rd-echelon/statblock/rival-fury.md",
+      "organization": "Elite",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.rival.3rd-echelon.statblock/rival-null",
+      "name": "Rival Null",
+      "sourcePath": "en/books/monsters/md/monster/rival/3rd-echelon/statblock/rival-null.md",
+      "organization": "Elite",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.rival.3rd-echelon.statblock/rival-shadow",
+      "name": "Rival Shadow",
+      "sourcePath": "en/books/monsters/md/monster/rival/3rd-echelon/statblock/rival-shadow.md",
+      "organization": "Elite",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.rival.3rd-echelon.statblock/rival-tactician",
+      "name": "Rival Tactician",
+      "sourcePath": "en/books/monsters/md/monster/rival/3rd-echelon/statblock/rival-tactician.md",
+      "organization": "Elite",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.rival.3rd-echelon.statblock/rival-talent",
+      "name": "Rival Talent",
+      "sourcePath": "en/books/monsters/md/monster/rival/3rd-echelon/statblock/rival-talent.md",
+      "organization": "Elite",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.rival.4th-echelon.statblock/rival-conduit",
+      "name": "Rival Conduit",
+      "sourcePath": "en/books/monsters/md/monster/rival/4th-echelon/statblock/rival-conduit.md",
+      "organization": "Elite",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.rival.4th-echelon.statblock/rival-elementalist",
+      "name": "Rival Elementalist",
+      "sourcePath": "en/books/monsters/md/monster/rival/4th-echelon/statblock/rival-elementalist.md",
+      "organization": "Elite",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.rival.4th-echelon.statblock/rival-fury",
+      "name": "Rival Fury",
+      "sourcePath": "en/books/monsters/md/monster/rival/4th-echelon/statblock/rival-fury.md",
+      "organization": "Elite",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.rival.4th-echelon.statblock/rival-null",
+      "name": "Rival Null",
+      "sourcePath": "en/books/monsters/md/monster/rival/4th-echelon/statblock/rival-null.md",
+      "organization": "Elite",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.rival.4th-echelon.statblock/rival-shadow",
+      "name": "Rival Shadow",
+      "sourcePath": "en/books/monsters/md/monster/rival/4th-echelon/statblock/rival-shadow.md",
+      "organization": "Elite",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.rival.4th-echelon.statblock/rival-tactician",
+      "name": "Rival Tactician",
+      "sourcePath": "en/books/monsters/md/monster/rival/4th-echelon/statblock/rival-tactician.md",
+      "organization": "Elite",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.rival.4th-echelon.statblock/rival-talent",
+      "name": "Rival Talent",
+      "sourcePath": "en/books/monsters/md/monster/rival/4th-echelon/statblock/rival-talent.md",
+      "organization": "Elite",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.shambling-mound.statblock/shambling-mound",
+      "name": "Shambling Mound",
+      "sourcePath": "en/books/monsters/md/monster/shambling-mound/statblock/shambling-mound.md",
+      "organization": "Solo",
+      "featureCount": 12
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.time-raider.statblock/time-raider-archon",
+      "name": "Time Raider Archon",
+      "sourcePath": "en/books/monsters/md/monster/time-raider/statblock/time-raider-archon.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.time-raider.statblock/time-raider-armiger",
+      "name": "Time Raider Armiger",
+      "sourcePath": "en/books/monsters/md/monster/time-raider/statblock/time-raider-armiger.md",
+      "organization": "Platoon",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.time-raider.statblock/time-raider-cannonfall",
+      "name": "Time Raider Cannonfall",
+      "sourcePath": "en/books/monsters/md/monster/time-raider/statblock/time-raider-cannonfall.md",
+      "organization": "Platoon",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.time-raider.statblock/time-raider-helix",
+      "name": "Time Raider Helix",
+      "sourcePath": "en/books/monsters/md/monster/time-raider/statblock/time-raider-helix.md",
+      "organization": "Platoon",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.time-raider.statblock/time-raider-hijack",
+      "name": "Time Raider Hijack",
+      "sourcePath": "en/books/monsters/md/monster/time-raider/statblock/time-raider-hijack.md",
+      "organization": "Platoon",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.time-raider.statblock/time-raider-mind-punk",
+      "name": "Time Raider Mind Punk",
+      "sourcePath": "en/books/monsters/md/monster/time-raider/statblock/time-raider-mind-punk.md",
+      "organization": "Platoon",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.time-raider.statblock/time-raider-myriad",
+      "name": "Time Raider Myriad",
+      "sourcePath": "en/books/monsters/md/monster/time-raider/statblock/time-raider-myriad.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.time-raider.statblock/time-raider-nemesis",
+      "name": "Time Raider Nemesis",
+      "sourcePath": "en/books/monsters/md/monster/time-raider/statblock/time-raider-nemesis.md",
+      "organization": "Platoon",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.time-raider.statblock/time-raider-tyrannis",
+      "name": "Time Raider Tyrannis",
+      "sourcePath": "en/books/monsters/md/monster/time-raider/statblock/time-raider-tyrannis.md",
+      "organization": "Leader",
+      "featureCount": 8
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.time-raider.statblock/time-raider-vertex",
+      "name": "Time Raider Vertex",
+      "sourcePath": "en/books/monsters/md/monster/time-raider/statblock/time-raider-vertex.md",
+      "organization": "Platoon",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.troll.statblock/troll-butcher",
+      "name": "Troll Butcher",
+      "sourcePath": "en/books/monsters/md/monster/troll/statblock/troll-butcher.md",
+      "organization": "Elite",
+      "featureCount": 6
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.troll.statblock/troll-crack-trooper",
+      "name": "Troll Crack Trooper",
+      "sourcePath": "en/books/monsters/md/monster/troll/statblock/troll-crack-trooper.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.troll.statblock/troll-glutton",
+      "name": "Troll Glutton",
+      "sourcePath": "en/books/monsters/md/monster/troll/statblock/troll-glutton.md",
+      "organization": "Elite",
+      "featureCount": 6
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.troll.statblock/troll-limbjumble",
+      "name": "Troll Limbjumble",
+      "sourcePath": "en/books/monsters/md/monster/troll/statblock/troll-limbjumble.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.troll.statblock/troll-ravager",
+      "name": "Troll Ravager",
+      "sourcePath": "en/books/monsters/md/monster/troll/statblock/troll-ravager.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.troll.statblock/troll-whelp",
+      "name": "Troll Whelp",
+      "sourcePath": "en/books/monsters/md/monster/troll/statblock/troll-whelp.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.undead.1st-echelon.statblock/crawling-claw",
+      "name": "Crawling Claw",
+      "sourcePath": "en/books/monsters/md/monster/undead/1st-echelon/statblock/crawling-claw.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.undead.1st-echelon.statblock/decrepit-skeleton",
+      "name": "Decrepit Skeleton",
+      "sourcePath": "en/books/monsters/md/monster/undead/1st-echelon/statblock/decrepit-skeleton.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.undead.1st-echelon.statblock/ghost",
+      "name": "Ghost",
+      "sourcePath": "en/books/monsters/md/monster/undead/1st-echelon/statblock/ghost.md",
+      "organization": "Leader",
+      "featureCount": 8
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.undead.1st-echelon.statblock/ghoul",
+      "name": "Ghoul",
+      "sourcePath": "en/books/monsters/md/monster/undead/1st-echelon/statblock/ghoul.md",
+      "organization": "Horde",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.undead.1st-echelon.statblock/rotting-zombie",
+      "name": "Rotting Zombie",
+      "sourcePath": "en/books/monsters/md/monster/undead/1st-echelon/statblock/rotting-zombie.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.undead.1st-echelon.statblock/shade",
+      "name": "Shade",
+      "sourcePath": "en/books/monsters/md/monster/undead/1st-echelon/statblock/shade.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.undead.1st-echelon.statblock/skeleton",
+      "name": "Skeleton",
+      "sourcePath": "en/books/monsters/md/monster/undead/1st-echelon/statblock/skeleton.md",
+      "organization": "Horde",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.undead.1st-echelon.statblock/soulwight",
+      "name": "Soulwight",
+      "sourcePath": "en/books/monsters/md/monster/undead/1st-echelon/statblock/soulwight.md",
+      "organization": "Horde",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.undead.1st-echelon.statblock/specter",
+      "name": "Specter",
+      "sourcePath": "en/books/monsters/md/monster/undead/1st-echelon/statblock/specter.md",
+      "organization": "Horde",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.undead.1st-echelon.statblock/umbral-stalker",
+      "name": "Umbral Stalker",
+      "sourcePath": "en/books/monsters/md/monster/undead/1st-echelon/statblock/umbral-stalker.md",
+      "organization": "Horde",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.undead.1st-echelon.statblock/zombie",
+      "name": "Zombie",
+      "sourcePath": "en/books/monsters/md/monster/undead/1st-echelon/statblock/zombie.md",
+      "organization": "Horde",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.undead.2nd-echelon.statblock/flesh-mournling",
+      "name": "Flesh Mournling",
+      "sourcePath": "en/books/monsters/md/monster/undead/2nd-echelon/statblock/flesh-mournling.md",
+      "organization": "Horde",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.undead.2nd-echelon.statblock/fleshflayed-shambler-zombie",
+      "name": "Fleshflayed Shambler Zombie",
+      "sourcePath": "en/books/monsters/md/monster/undead/2nd-echelon/statblock/fleshflayed-shambler-zombie.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.undead.2nd-echelon.statblock/ghoul-craver",
+      "name": "Ghoul Craver",
+      "sourcePath": "en/books/monsters/md/monster/undead/2nd-echelon/statblock/ghoul-craver.md",
+      "organization": "Minion",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.undead.2nd-echelon.statblock/giant-zombie",
+      "name": "Giant Zombie",
+      "sourcePath": "en/books/monsters/md/monster/undead/2nd-echelon/statblock/giant-zombie.md",
+      "organization": "Elite",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.undead.2nd-echelon.statblock/hollowbone-launcher",
+      "name": "Hollowbone Launcher",
+      "sourcePath": "en/books/monsters/md/monster/undead/2nd-echelon/statblock/hollowbone-launcher.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.undead.2nd-echelon.statblock/mummy-lord",
+      "name": "Mummy Lord",
+      "sourcePath": "en/books/monsters/md/monster/undead/2nd-echelon/statblock/mummy-lord.md",
+      "organization": "Leader",
+      "featureCount": 7
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.undead.2nd-echelon.statblock/mummy",
+      "name": "Mummy",
+      "sourcePath": "en/books/monsters/md/monster/undead/2nd-echelon/statblock/mummy.md",
+      "organization": "Horde",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.undead.2nd-echelon.statblock/vampire-spawn",
+      "name": "Vampire Spawn",
+      "sourcePath": "en/books/monsters/md/monster/undead/2nd-echelon/statblock/vampire-spawn.md",
+      "organization": "Horde",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.undead.2nd-echelon.statblock/wraith",
+      "name": "Wraith",
+      "sourcePath": "en/books/monsters/md/monster/undead/2nd-echelon/statblock/wraith.md",
+      "organization": "Horde",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.undead.3rd-echelon.statblock/blood-starved-vampire",
+      "name": "Blood-Starved Vampire",
+      "sourcePath": "en/books/monsters/md/monster/undead/3rd-echelon/statblock/blood-starved-vampire.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.undead.3rd-echelon.statblock/dirt-mournling",
+      "name": "Dirt Mournling",
+      "sourcePath": "en/books/monsters/md/monster/undead/3rd-echelon/statblock/dirt-mournling.md",
+      "organization": "Horde",
+      "featureCount": 5
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.undead.3rd-echelon.statblock/faded-echo-spirit",
+      "name": "Faded Echo Spirit",
+      "sourcePath": "en/books/monsters/md/monster/undead/3rd-echelon/statblock/faded-echo-spirit.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.undead.3rd-echelon.statblock/haunt",
+      "name": "Haunt",
+      "sourcePath": "en/books/monsters/md/monster/undead/3rd-echelon/statblock/haunt.md",
+      "organization": "Horde",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.undead.3rd-echelon.statblock/koptourok",
+      "name": "Koptourok",
+      "sourcePath": "en/books/monsters/md/monster/undead/3rd-echelon/statblock/koptourok.md",
+      "organization": "Horde",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.undead.3rd-echelon.statblock/mummy-rotwrap",
+      "name": "Mummy Rotwrap",
+      "sourcePath": "en/books/monsters/md/monster/undead/3rd-echelon/statblock/mummy-rotwrap.md",
+      "organization": "Minion",
+      "featureCount": 1
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.undead.3rd-echelon.statblock/vampire-lord",
+      "name": "Vampire Lord",
+      "sourcePath": "en/books/monsters/md/monster/undead/3rd-echelon/statblock/vampire-lord.md",
+      "organization": "Leader",
+      "featureCount": 7
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.undead.3rd-echelon.statblock/vampire",
+      "name": "Vampire",
+      "sourcePath": "en/books/monsters/md/monster/undead/3rd-echelon/statblock/vampire.md",
+      "organization": "Horde",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.undead.3rd-echelon.statblock/waxen",
+      "name": "Waxen",
+      "sourcePath": "en/books/monsters/md/monster/undead/3rd-echelon/statblock/waxen.md",
+      "organization": "Horde",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.undead.4th-echelon.statblock/bonecage",
+      "name": "Bonecage",
+      "sourcePath": "en/books/monsters/md/monster/undead/4th-echelon/statblock/bonecage.md",
+      "organization": "Horde",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.undead.4th-echelon.statblock/giant-shambler-zombie",
+      "name": "Giant Shambler Zombie",
+      "sourcePath": "en/books/monsters/md/monster/undead/4th-echelon/statblock/giant-shambler-zombie.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.undead.4th-echelon.statblock/lithgekh",
+      "name": "Lithgekh",
+      "sourcePath": "en/books/monsters/md/monster/undead/4th-echelon/statblock/lithgekh.md",
+      "organization": "Horde",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.undead.4th-echelon.statblock/skeleton-knight",
+      "name": "Skeleton Knight",
+      "sourcePath": "en/books/monsters/md/monster/undead/4th-echelon/statblock/skeleton-knight.md",
+      "organization": "Minion",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.undead.4th-echelon.statblock/wraith-skulker",
+      "name": "Wraith Skulker",
+      "sourcePath": "en/books/monsters/md/monster/undead/4th-echelon/statblock/wraith-skulker.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.valok.statblock/multivok-bodyguard",
+      "name": "Multivok Bodyguard",
+      "sourcePath": "en/books/monsters/md/monster/valok/statblock/multivok-bodyguard.md",
+      "organization": "Elite",
+      "featureCount": 7
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.valok.statblock/multivok-chief",
+      "name": "Multivok Chief",
+      "sourcePath": "en/books/monsters/md/monster/valok/statblock/multivok-chief.md",
+      "organization": "Elite",
+      "featureCount": 7
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.valok.statblock/servok-builder",
+      "name": "Servok Builder",
+      "sourcePath": "en/books/monsters/md/monster/valok/statblock/servok-builder.md",
+      "organization": "Elite",
+      "featureCount": 8
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.valok.statblock/servok-miner",
+      "name": "Servok Miner",
+      "sourcePath": "en/books/monsters/md/monster/valok/statblock/servok-miner.md",
+      "organization": "Elite",
+      "featureCount": 8
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.valok.statblock/servok-war-engine",
+      "name": "Servok War Engine",
+      "sourcePath": "en/books/monsters/md/monster/valok/statblock/servok-war-engine.md",
+      "organization": "Elite",
+      "featureCount": 8
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.voiceless-talker.statblock/hulking-brain",
+      "name": "Hulking Brain",
+      "sourcePath": "en/books/monsters/md/monster/voiceless-talker/statblock/hulking-brain.md",
+      "organization": "Elite",
+      "featureCount": 6
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.voiceless-talker.statblock/mindkiller-whelp",
+      "name": "Mindkiller Whelp",
+      "sourcePath": "en/books/monsters/md/monster/voiceless-talker/statblock/mindkiller-whelp.md",
+      "organization": "Minion",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.voiceless-talker.statblock/mindkiller",
+      "name": "Mindkiller",
+      "sourcePath": "en/books/monsters/md/monster/voiceless-talker/statblock/mindkiller.md",
+      "organization": "Elite",
+      "featureCount": 7
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.voiceless-talker.statblock/voiceless-talker-artillerist",
+      "name": "Voiceless Talker Artillerist",
+      "sourcePath": "en/books/monsters/md/monster/voiceless-talker/statblock/voiceless-talker-artillerist.md",
+      "organization": "Elite",
+      "featureCount": 6
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.voiceless-talker.statblock/voiceless-talker-evolutionist",
+      "name": "Voiceless Talker Evolutionist",
+      "sourcePath": "en/books/monsters/md/monster/voiceless-talker/statblock/voiceless-talker-evolutionist.md",
+      "organization": "Leader",
+      "featureCount": 8
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.voiceless-talker.statblock/voiceless-talker-graywarper",
+      "name": "Voiceless Talker Graywarper",
+      "sourcePath": "en/books/monsters/md/monster/voiceless-talker/statblock/voiceless-talker-graywarper.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.voiceless-talker.statblock/voiceless-talker-invader",
+      "name": "Voiceless Talker Invader",
+      "sourcePath": "en/books/monsters/md/monster/voiceless-talker/statblock/voiceless-talker-invader.md",
+      "organization": "Elite",
+      "featureCount": 5
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.war-dog.1st-echelon.statblock/war-dog-amalgamite",
+      "name": "War Dog Amalgamite",
+      "sourcePath": "en/books/monsters/md/monster/war-dog/1st-echelon/statblock/war-dog-amalgamite.md",
+      "organization": "Horde",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.war-dog.1st-echelon.statblock/war-dog-commando",
+      "name": "War Dog Commando",
+      "sourcePath": "en/books/monsters/md/monster/war-dog/1st-echelon/statblock/war-dog-commando.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.war-dog.1st-echelon.statblock/war-dog-conscript",
+      "name": "War Dog Conscript",
+      "sourcePath": "en/books/monsters/md/monster/war-dog/1st-echelon/statblock/war-dog-conscript.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.war-dog.1st-echelon.statblock/war-dog-crucibite",
+      "name": "War Dog Crucibite",
+      "sourcePath": "en/books/monsters/md/monster/war-dog/1st-echelon/statblock/war-dog-crucibite.md",
+      "organization": "Horde",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.war-dog.1st-echelon.statblock/war-dog-eviscerite",
+      "name": "War Dog Eviscerite",
+      "sourcePath": "en/books/monsters/md/monster/war-dog/1st-echelon/statblock/war-dog-eviscerite.md",
+      "organization": "Horde",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.war-dog.1st-echelon.statblock/war-dog-ground-commander",
+      "name": "War Dog Ground Commander",
+      "sourcePath": "en/books/monsters/md/monster/war-dog/1st-echelon/statblock/war-dog-ground-commander.md",
+      "organization": "Leader",
+      "featureCount": 8
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.war-dog.1st-echelon.statblock/war-dog-neuronite",
+      "name": "War Dog Neuronite",
+      "sourcePath": "en/books/monsters/md/monster/war-dog/1st-echelon/statblock/war-dog-neuronite.md",
+      "organization": "Horde",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.war-dog.1st-echelon.statblock/war-dog-pestilite",
+      "name": "War Dog Pestilite",
+      "sourcePath": "en/books/monsters/md/monster/war-dog/1st-echelon/statblock/war-dog-pestilite.md",
+      "organization": "Horde",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.war-dog.1st-echelon.statblock/war-dog-phosphorite",
+      "name": "War Dog Phosphorite",
+      "sourcePath": "en/books/monsters/md/monster/war-dog/1st-echelon/statblock/war-dog-phosphorite.md",
+      "organization": "Horde",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.war-dog.1st-echelon.statblock/war-dog-sharpshooter",
+      "name": "War Dog Sharpshooter",
+      "sourcePath": "en/books/monsters/md/monster/war-dog/1st-echelon/statblock/war-dog-sharpshooter.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.war-dog.1st-echelon.statblock/war-dog-subcommander",
+      "name": "War Dog Subcommander",
+      "sourcePath": "en/books/monsters/md/monster/war-dog/1st-echelon/statblock/war-dog-subcommander.md",
+      "organization": "Horde",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.war-dog.1st-echelon.statblock/war-dog-teletalite",
+      "name": "War Dog Teletalite",
+      "sourcePath": "en/books/monsters/md/monster/war-dog/1st-echelon/statblock/war-dog-teletalite.md",
+      "organization": "Horde",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.war-dog.1st-echelon.statblock/war-dog-tetherite",
+      "name": "War Dog Tetherite",
+      "sourcePath": "en/books/monsters/md/monster/war-dog/1st-echelon/statblock/war-dog-tetherite.md",
+      "organization": "Minion",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.war-dog.2nd-echelon.statblock/war-dog-arachnite",
+      "name": "War Dog Arachnite",
+      "sourcePath": "en/books/monsters/md/monster/war-dog/2nd-echelon/statblock/war-dog-arachnite.md",
+      "organization": "Horde",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.war-dog.2nd-echelon.statblock/war-dog-doomthief",
+      "name": "War Dog Doomthief",
+      "sourcePath": "en/books/monsters/md/monster/war-dog/2nd-echelon/statblock/war-dog-doomthief.md",
+      "organization": "Horde",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.war-dog.2nd-echelon.statblock/war-dog-equivite",
+      "name": "War Dog Equivite",
+      "sourcePath": "en/books/monsters/md/monster/war-dog/2nd-echelon/statblock/war-dog-equivite.md",
+      "organization": "Horde",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.war-dog.2nd-echelon.statblock/war-dog-hypokrite",
+      "name": "War Dog Hypokrite",
+      "sourcePath": "en/books/monsters/md/monster/war-dog/2nd-echelon/statblock/war-dog-hypokrite.md",
+      "organization": "Horde",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.war-dog.2nd-echelon.statblock/war-dog-mischievite",
+      "name": "War Dog Mischievite",
+      "sourcePath": "en/books/monsters/md/monster/war-dog/2nd-echelon/statblock/war-dog-mischievite.md",
+      "organization": "Horde",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.war-dog.2nd-echelon.statblock/war-dog-sparkslinger",
+      "name": "War Dog Sparkslinger",
+      "sourcePath": "en/books/monsters/md/monster/war-dog/2nd-echelon/statblock/war-dog-sparkslinger.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.war-dog.2nd-echelon.statblock/war-dog-sweeper",
+      "name": "War Dog Sweeper",
+      "sourcePath": "en/books/monsters/md/monster/war-dog/2nd-echelon/statblock/war-dog-sweeper.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.war-dog.2nd-echelon.statblock/war-dog-tetrarch",
+      "name": "War Dog Tetrarch",
+      "sourcePath": "en/books/monsters/md/monster/war-dog/2nd-echelon/statblock/war-dog-tetrarch.md",
+      "organization": "Leader",
+      "featureCount": 7
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.war-dog.2nd-echelon.statblock/war-dog-thanatite",
+      "name": "War Dog Thanatite",
+      "sourcePath": "en/books/monsters/md/monster/war-dog/2nd-echelon/statblock/war-dog-thanatite.md",
+      "organization": "Horde",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.war-dog.2nd-echelon.statblock/war-dog-tormentite",
+      "name": "War Dog Tormentite",
+      "sourcePath": "en/books/monsters/md/monster/war-dog/2nd-echelon/statblock/war-dog-tormentite.md",
+      "organization": "Horde",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.war-dog.2nd-echelon.statblock/war-dog-war-doc",
+      "name": "War Dog War Doc",
+      "sourcePath": "en/books/monsters/md/monster/war-dog/2nd-echelon/statblock/war-dog-war-doc.md",
+      "organization": "Horde",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.war-dog.2nd-echelon.statblock/war-dog-war-frog",
+      "name": "War Dog War Frog",
+      "sourcePath": "en/books/monsters/md/monster/war-dog/2nd-echelon/statblock/war-dog-war-frog.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.war-dog.3rd-echelon.statblock/war-dog-aerocite",
+      "name": "War Dog Aerocite",
+      "sourcePath": "en/books/monsters/md/monster/war-dog/3rd-echelon/statblock/war-dog-aerocite.md",
+      "organization": "Horde",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.war-dog.3rd-echelon.statblock/war-dog-ballistite",
+      "name": "War Dog Ballistite",
+      "sourcePath": "en/books/monsters/md/monster/war-dog/3rd-echelon/statblock/war-dog-ballistite.md",
+      "organization": "Horde",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.war-dog.3rd-echelon.statblock/war-dog-blackcap",
+      "name": "War Dog Blackcap",
+      "sourcePath": "en/books/monsters/md/monster/war-dog/3rd-echelon/statblock/war-dog-blackcap.md",
+      "organization": "Horde",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.war-dog.3rd-echelon.statblock/war-dog-breaker",
+      "name": "War Dog Breaker",
+      "sourcePath": "en/books/monsters/md/monster/war-dog/3rd-echelon/statblock/war-dog-breaker.md",
+      "organization": "Elite",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.war-dog.3rd-echelon.statblock/war-dog-draconite",
+      "name": "War Dog Draconite",
+      "sourcePath": "en/books/monsters/md/monster/war-dog/3rd-echelon/statblock/war-dog-draconite.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.war-dog.3rd-echelon.statblock/war-dog-firestarter",
+      "name": "War Dog Firestarter",
+      "sourcePath": "en/books/monsters/md/monster/war-dog/3rd-echelon/statblock/war-dog-firestarter.md",
+      "organization": "Horde",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.war-dog.3rd-echelon.statblock/war-dog-geomancer",
+      "name": "War Dog Geomancer",
+      "sourcePath": "en/books/monsters/md/monster/war-dog/3rd-echelon/statblock/war-dog-geomancer.md",
+      "organization": "Horde",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.war-dog.3rd-echelon.statblock/war-dog-iron-priest",
+      "name": "War Dog Iron Priest",
+      "sourcePath": "en/books/monsters/md/monster/war-dog/3rd-echelon/statblock/war-dog-iron-priest.md",
+      "organization": "Horde",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.war-dog.3rd-echelon.statblock/war-dog-prismite",
+      "name": "War Dog Prismite",
+      "sourcePath": "en/books/monsters/md/monster/war-dog/3rd-echelon/statblock/war-dog-prismite.md",
+      "organization": "Horde",
+      "featureCount": 4
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.war-dog.3rd-echelon.statblock/war-dog-saboteur",
+      "name": "War Dog Saboteur",
+      "sourcePath": "en/books/monsters/md/monster/war-dog/3rd-echelon/statblock/war-dog-saboteur.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.war-dog.3rd-echelon.statblock/war-dog-shriketroop",
+      "name": "War Dog Shriketroop",
+      "sourcePath": "en/books/monsters/md/monster/war-dog/3rd-echelon/statblock/war-dog-shriketroop.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.war-dog.3rd-echelon.statblock/war-dog-taxiarch",
+      "name": "War Dog Taxiarch",
+      "sourcePath": "en/books/monsters/md/monster/war-dog/3rd-echelon/statblock/war-dog-taxiarch.md",
+      "organization": "Leader",
+      "featureCount": 7
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.war-dog.4th-echelon.statblock/castellan-hoplon",
+      "name": "Castellan Hoplon",
+      "sourcePath": "en/books/monsters/md/monster/war-dog/4th-echelon/statblock/castellan-hoplon.md",
+      "organization": "Elite",
+      "featureCount": 6
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.war-dog.4th-echelon.statblock/iron-champion-doru",
+      "name": "Iron Champion Doru",
+      "sourcePath": "en/books/monsters/md/monster/war-dog/4th-echelon/statblock/iron-champion-doru.md",
+      "organization": "Elite",
+      "featureCount": 7
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.war-dog.4th-echelon.statblock/logostician-vesper",
+      "name": "Logostician Vesper",
+      "sourcePath": "en/books/monsters/md/monster/war-dog/4th-echelon/statblock/logostician-vesper.md",
+      "organization": "Elite",
+      "featureCount": 6
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.war-dog.4th-echelon.statblock/soulbinder-psyche",
+      "name": "Soulbinder Psyche",
+      "sourcePath": "en/books/monsters/md/monster/war-dog/4th-echelon/statblock/soulbinder-psyche.md",
+      "organization": "Elite",
+      "featureCount": 7
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.war-dog.4th-echelon.statblock/strategos-alkestis",
+      "name": "Strategos Alkestis",
+      "sourcePath": "en/books/monsters/md/monster/war-dog/4th-echelon/statblock/strategos-alkestis.md",
+      "organization": "Leader",
+      "featureCount": 8
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.war-dog.4th-echelon.statblock/war-dog-blood-jumper",
+      "name": "War Dog Blood Jumper",
+      "sourcePath": "en/books/monsters/md/monster/war-dog/4th-echelon/statblock/war-dog-blood-jumper.md",
+      "organization": "Minion",
+      "featureCount": 3
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.war-dog.4th-echelon.statblock/war-dog-hunter-killer",
+      "name": "War Dog Hunter-Killer",
+      "sourcePath": "en/books/monsters/md/monster/war-dog/4th-echelon/statblock/war-dog-hunter-killer.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.war-dog.4th-echelon.statblock/war-dog-socialite",
+      "name": "War Dog Socialite",
+      "sourcePath": "en/books/monsters/md/monster/war-dog/4th-echelon/statblock/war-dog-socialite.md",
+      "organization": "Minion",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.werewolf.statblock/werewolf",
+      "name": "Werewolf",
+      "sourcePath": "en/books/monsters/md/monster/werewolf/statblock/werewolf.md",
+      "organization": "Solo",
+      "featureCount": 12
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.wyvern.statblock/wyvern-lurker",
+      "name": "Wyvern Lurker",
+      "sourcePath": "en/books/monsters/md/monster/wyvern/statblock/wyvern-lurker.md",
+      "organization": "Elite",
+      "featureCount": 6
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.wyvern.statblock/wyvern-predator",
+      "name": "Wyvern Predator",
+      "sourcePath": "en/books/monsters/md/monster/wyvern/statblock/wyvern-predator.md",
+      "organization": "Elite",
+      "featureCount": 6
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.xorannox-the-tyract.statblock/compulsion-eye",
+      "name": "Compulsion Eye",
+      "sourcePath": "en/books/monsters/md/monster/xorannox-the-tyract/statblock/compulsion-eye.md",
+      "organization": "",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.xorannox-the-tyract.statblock/demolition",
+      "name": "Demolition",
+      "sourcePath": "en/books/monsters/md/monster/xorannox-the-tyract/statblock/demolition.md",
+      "organization": "",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.xorannox-the-tyract.statblock/mover-eye",
+      "name": "Mover Eye",
+      "sourcePath": "en/books/monsters/md/monster/xorannox-the-tyract/statblock/mover-eye.md",
+      "organization": "",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.xorannox-the-tyract.statblock/necrotic-eye",
+      "name": "Necrotic Eye",
+      "sourcePath": "en/books/monsters/md/monster/xorannox-the-tyract/statblock/necrotic-eye.md",
+      "organization": "",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.xorannox-the-tyract.statblock/toxic-eye",
+      "name": "Toxic Eye",
+      "sourcePath": "en/books/monsters/md/monster/xorannox-the-tyract/statblock/toxic-eye.md",
+      "organization": "",
+      "featureCount": 2
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.xorannox-the-tyract.statblock/xorannox-the-tyract",
+      "name": "Xorannox the Tyract",
+      "sourcePath": "en/books/monsters/md/monster/xorannox-the-tyract/statblock/xorannox-the-tyract.md",
+      "organization": "Solo",
+      "featureCount": 12
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.xorannox-the-tyract.statblock/zapper-eye",
+      "name": "Zapper Eye",
+      "sourcePath": "en/books/monsters/md/monster/xorannox-the-tyract/statblock/zapper-eye.md",
+      "organization": "",
+      "featureCount": 2
+    }
+  ],
+  "minionEvForms": {
+    "3 for 4 minions": 12,
+    "10 for four minions": 5,
+    "7 for four minions": 7,
+    "3 for four minions": 40,
+    "6 for four minions": 17,
+    "9 for four minions": 12,
+    "12 for four minions": 11,
+    "11 for four minions": 3,
+    "4 for four minions": 5,
+    "5 for four minions": 2,
+    "8 for four minions": 2
+  },
+  "rawMarkdownBytes": 1332421,
+  "jsonBytes": 1411496,
+  "existingRulesLibrary": {
+    "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+    "statblockCount": 438,
+    "missingCoreStatblocks": []
+  }
+}
