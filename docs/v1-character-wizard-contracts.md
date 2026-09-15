@@ -582,7 +582,15 @@ Return a comparison and require reconciliation/resubmission; never overwrite int
 Apply against current live state and inventory, not the snapshot taken when drafting began.
 
 Restoring a build retains current inventory and authored details, preserves later build records and
-follows existing campaign review. New selections after restoration need Q-CHAR-4. **Confirmed 2026-09-15 (Q-CHAR-2):** Maximum increases leave compatible current values unchanged;
+follows existing campaign review. **Confirmed 2026-09-15 (Q-CHAR-4):** Every finalized edit appends
+a build snapshot. Restoring a historical build appends its snapshot as a new latest revision and
+records the source revision; it preserves every intervening entry. New choices continue from that
+new latest revision. Returning to an old higher-level build likewise adds a new entry. Previewing
+history alone makes no finalized revision, and pending revisions do not activate themselves.
+See [progression history](character-wizard-spec.md#5-progression-history). Shared UI/headless
+operations must preserve these semantics without requiring Git storage or branching UI.
+
+**Confirmed 2026-09-15 (Q-CHAR-2):** Maximum increases leave compatible current values unchanged;
 a lower maximum caps any current value above it. Stamina 20/30 becomes 20/36, not 26/36. See
 [the owning policy](character-wizard-spec.md#current-values-when-a-build-changes). Replaced resource
 types require explicit reconciliation without an invented conversion. Apply against current live

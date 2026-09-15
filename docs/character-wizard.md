@@ -141,8 +141,9 @@ changing resources during play. The exact boundary for standalone flavor/invento
 wizard remains open; do not introduce review of every combat resource change by treating it as full editing.
 
 Inspecting progression history remains available. Activating an earlier or otherwise edited build in an
-attached campaign is a proposed full change subject to review. New choices after rollback, and handling a
-pending proposal when the effective build levels up or the character detaches, still need concrete behavior.
+attached campaign is a proposed full change subject to review. Q-CHAR-4 now defines restoration as
+appending a new snapshot revision; subsequent finalized edits follow it. Pending proposals still
+follow the owning [revision/review lifecycle](character-wizard-spec.md#7-revision-and-review-lifecycle).
 Approval of an obsolete proposal must not silently overwrite intervening build changes. These requirements
 call for versioned character revisions, not a general-purpose source-control system.
 
@@ -174,19 +175,24 @@ completed levels.
 | Decisions, level, and build-derived stats/abilities | Restore the recorded earlier build and its baseline. |
 | Inventory | Keep present item instances, quantities, and item state, including items acquired after the chosen progression point. Do not rerun starting-equipment grants. |
 | Authored descriptions and flavor | Keep independently authored content; restoring the build is not a rewind of unrelated edits. |
-| Current damage, spent resources, conditions, and other live effects | Do not restore an old encounter state. Reconcile with the restored baseline where necessary; the policy when maxima or resource types change remains open. |
+| Current damage, spent resources, conditions, and other live effects | Do not restore an old encounter state. Retain compatible current amounts and cap above lowered maxima under Q-CHAR-2; explicitly reconcile incompatible resource types. |
 
 An unchanged inventory can still have different mechanical effects under the restored build, where item rules
 depend on level or another build property. Keep the item's ownership/state distinct from its contribution to
 the effective sheet. The resulting character combines the earlier progression with present inventory and
 applicable live state; it is not the entire character as they existed on an earlier date.
 
-Proposed history implementation: record decision transitions and their resolved build state, with enough
-retained state to restore the earlier baseline without rerunning grant effects or interpreting it against a
-newer content revision. Moving the active history position should preserve later records so they remain
-available for returning forward. Whether making new choices after rollback replaces the future path or creates
-an alternate build remains an open product decision; do not assume a branching-history UI or discard later
-choices merely on navigation.
+**Confirmed 2026-09-15 (Q-CHAR-4):** Every finalized edit appends an immutable build snapshot,
+like a commit. Restoring the old level-three build makes a new latest entry containing that build;
+it keeps the intervening level-four through level-seven history. New finalized choices follow the
+restoration entry. Record the source revision of a restoration independently from its position at
+the top of history. Restoring the old level-seven build later also appends a new snapshot.
+
+Retain enough resolved build state and source context to restore without replaying grants or
+reinterpreting against newer content. Inventory, authored details and live state retain their
+independent scopes above. Previewing history does not finalize a revision, and a finalized revision
+still follows campaign review before activation where required. See [the owning history contract](character-wizard-spec.md#5-progression-history).
+This model does not require Git storage or a general branch/merge interface.
 
 The shared operations must support applying this change to the actual character sheet, not just preview older
 wizard screens. For an attached campaign character, restoring a different build follows the full-edit review
@@ -197,8 +203,10 @@ played character remains to be designed, while preserving the table's existing s
 Acceptance example: retain a level-3 Shadow build, progress it to level 7 with additional decisions and an
 inventory change, then restore the level-3 history point. Assert the earlier decisions, grants, and
 build-derived values; assert that later-level contributions are absent and present inventory is identical
-before/after rollback. Also exercise an intermediate decision point and ensure restoration does not repeat
-item grants. Apply [the confirmed current-value and downward-cap policy](character-wizard-spec.md#current-values-when-a-build-changes)
+before/after rollback. Assert a new latest revision containing the level-three build, linked to its
+source snapshot, with the original level-three and level-seven entries unchanged. Finalize another
+edit and verify it follows the restoration entry. Also exercise an intermediate finalized decision
+point and ensure restoration does not repeat item grants. Apply [the confirmed current-value and downward-cap policy](character-wizard-spec.md#current-values-when-a-build-changes)
 when restoring the lower-level build. This is a required model capability, not a claim that Shadow progression is already implemented.
 
 ## Proposed integration

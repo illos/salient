@@ -42,23 +42,8 @@ are the shared lifecycle decisions; the remaining entries are bounded content/sc
 All 13 then-open questions received an independent pinned-source and existing-specification check on
 2026-09-15; see [the evidence report](research/remaining-character-questions-review.md). Q-CHAR-8 and
 Q-CHAR-12 are now source-resolved. The remaining 11 comprise nine product decisions and two source
-ambiguities at audit close. Subsequent Q-CHAR-2/3 answers leave **9 open questions**; remaining
+ambiguities at audit close. Subsequent Q-CHAR-2/3/4 answers leave **8 open questions**; remaining
 recommendations are unanswered.
-
-### Q-CHAR-4: What happens when the owner makes new choices after restoring an earlier build?
-
-- **Status:** open
-- **Research check:** 2026-09-15 — product decision; [rules and spec evidence](research/remaining-character-questions-review.md#q-char-4).
-- **Raised by:** V1 wizard specification research, 2026-09-14
-- **Where:** `docs/character-wizard-spec.md#5-progression-history`.
-- **Conflict or gap:** Restoration preserves later records and present inventory, but subsequent new
-  choices have no established history policy. This is a product decision, not rulebook uncertainty.
-- **Recommendation:** Save a new revision descended from the restored point and retain the previous
-  future for inspection/restoration. Show dated build history and an origin label; no general branch/
-  merge UI. Existing approval rules still govern activation.
-- **Blocked until answered:** new choices after rollback; ordinary revision storage/history inspection
-  remains independent.
-- **Answer:**
 
 ### Q-CHAR-5: Do source-authorized reconfigurations need full-edit approval?
 
@@ -245,6 +230,25 @@ No user approval is implied by this classification.
 - **Answer:**
 
 ## Resolved questions
+
+### Q-CHAR-4: What happens when the owner makes new choices after restoring an earlier build?
+
+- **Status:** resolved 2026-09-15; [owning policy](character-wizard-spec.md#5-progression-history)
+- **Research check:** 2026-09-15 — product decision; [rules and spec evidence](research/remaining-character-questions-review.md#q-char-4).
+- **Raised by:** V1 wizard specification research, 2026-09-14
+- **Where:** `docs/character-wizard-spec.md#5-progression-history`.
+- **Conflict or gap:** Restoration preserves later records and present inventory, but subsequent new
+  choices have no established history policy. This is a product decision, not rulebook uncertainty.
+- **Original recommendation (refined):** Continue from the restored point with retained history.
+  The user specified a new snapshot at the top of history, rather than moving the history position
+  back to the old revision.
+- **Answer:** Each finalized edit is like a commit. Restoring level three copies that old build into
+  a new latest revision. The intervening history remains unchanged; subsequent edits follow the
+  restoration revision. Record the source snapshot. Keep present inventory and independent live
+  state with Q-CHAR-2 reconciliation; existing review/activation locks and UI/headless parity apply.
+- **Build handoff:** V08 implements immutable finalized revisions and restoration by appending a
+  snapshot; browsing/restoration UI remains deferred beyond v0.01. No Git storage or branch/merge UI
+  requirement is implied by the analogy.
 
 ### Q-CHAR-3: How does a transferred higher-level hero qualify for advancement after campaign XP clears?
 

@@ -5,7 +5,9 @@ Q-CHAR-2 through Q-CHAR-13, and Q-R-201.
 
 Subsequent user decisions: Q-CHAR-2 now [preserves current amounts with downward caps](../character-wizard-spec.md#current-values-when-a-build-changes),
 superseding the deficit-preservation proposal below. Q-CHAR-3 now [uses admission-level advancement eligibility](../character-wizard-spec.md#level-up),
-with the campaign awarding XP and the character sheet owning level-up steps. The audit findings below
+with the campaign awarding XP and the character sheet owning level-up steps. Q-CHAR-4 now
+[appends a new snapshot when restoring a build](../character-wizard-spec.md#5-progression-history),
+with later edits continuing from that newest entry. The audit findings below
 remain the historical pre-answer record; the queue is current.
 
 ## Method and result

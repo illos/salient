@@ -392,15 +392,31 @@ Lowering a numeric level field alone does not meet this requirement.
 | --- | --- |
 | Selected progression point, active decisions, automatic grants, and resulting baseline | Present inventory, independent descriptions/flavor, and current live state subject to necessary resource reconciliation |
 
-History must survive save/reload and support any recorded decision point, not only completed levels.
+History must survive save/reload and support recorded finalized decision points, not only completed levels.
 Navigating to an earlier point must not erase later records or rerun item/resource grants. Retain enough
 resolved state and source context to restore the historical build without reinterpreting it against a newer
 corpus. Evaluating present inventory against that restored build is distinct from replaying historical game
 effects.
 
-Preserved later records allow returning forward. How new choices after rollback affect the future path remains
-open; version history must not silently delete it. A generic branching/merging interface is not required by
-this spec.
+**Confirmed 2026-09-15 (Q-CHAR-4):** Character history follows the user's commit/snapshot model.
+Each finalized edit records a new immutable build revision at the top of the chronological history.
+Restoring an earlier build copies that recorded build into a new latest revision; it does not move
+the active history position backward or remove the intervening entries. Record which earlier
+revision supplied the restored snapshot. Subsequent finalized edits continue from this new latest
+revision. Restoring a previously recorded higher-level build works the same way: another new entry.
+
+Example, oldest to newest: level-three revision A → level-seven revision B → revision C restoring
+A's level-three build → revision D containing new choices. C follows B in history and identifies A
+as its restoration source; A and B remain unchanged and available to inspect or restore. Display
+D first when listing newest entries first. This establishes snapshot/history behavior, without
+requiring Git storage or a branch/merge interface.
+
+A history entry snapshots the build scope defined above, not old inventory or live encounter state.
+Current values use [the confirmed maximum policy](#current-values-when-a-build-changes). Merely
+previewing an old entry does not finalize an edit. Finalizing a revision does not bypass campaign
+review or activation locks; pending revisions leave the effective campaign build unchanged. UI and
+headless restoration use the same shared operation. This decision does not bring the deferred
+history/restoration interface into v0.01.
 
 Progression restoration and table-history restoration have different scopes. Table rollback restores the
 recorded affected game state. Progression rollback restores only the build and its baseline, combines them
@@ -701,7 +717,6 @@ for work that can proceed independently. These recommendations are not user ruli
 | Resource-type replacement requiring explicit reconciliation | Q-CHAR-2 resolves compatible current values and maximum changes in [the confirmed policy](#current-values-when-a-build-changes); it does not provide an automatic conversion between different resources. |
 | **Implementation note, 2026-09-14 (R03):** readiness-audit gap G3 is delivered as a contract: `live-state-initialization.md` (first-admission values with source sentences, the draft-save/re-evaluation rule, `HeroEntity`/`FoeEntity` projections with worked examples), `shared/contracts/liveState.ts`, `shared/contracts/entities.ts`, `tests/live-state-initialization.test.ts`. The original contract surfaced `UnreconciledMaximumChange` labeled **Q-CHAR-2**. The confirmed current-value policy now supersedes maximum-only uncertainty; executable repair remains separate. Re-admission after detachment is **Q-R-201**. | Apply the confirmed cap policy through shared activation; explicitly reconcile incompatible resource types. |
 | Full list of campaign values to clear on transfer | XP/Victories clearing is settled. Q-CHAR-3 now resolves transferred advancement eligibility and character-sheet ownership of level-up; any additional campaign-value reset enumeration remains separate. |
-| New choices after rollback and treatment of retained future builds | Continued editing beyond history navigation. |
 | Non-campaign live-state transfer on detachment/duplication | Active build retention and private-draft preservation on detachment are confirmed; duplication excludes pending edits. Damage/resource reconciliation still needs definition. |
 | Entry reservation timing, detachment during active play, and former-campaign history access | Finalizing proposed admission/detachment contracts and table linkage. |
 | Player visibility without a grant, additional private-field exclusions, historical review visibility, and handling multiple competing submissions | Remaining access and review UX details; sheet viewing/combat grants are now established. |
