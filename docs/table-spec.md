@@ -703,6 +703,12 @@ later history are revealed still needs definition. See the
 
 ### Proposed content sharing
 
+**Confirmed long-term architecture, 2026-09-15:** chat shares and bookmarks use the same object-reference
+foundation as the embedded Compendium and inventory. Rules are the main use case, with inventory items
+and other supported objects sharing that model. See
+[the owning data contract](data-architecture-spec.md#35-unified-object-references-and-sharing).
+Detailed UI/disclosure behavior below remains proposed; implementation timing has not been assigned.
+
 The user wants to explore a way to show abilities, character sheets, and monster stat blocks to the group.
 Inventory discussion reinforces this as a general direction for objects shared through messaging, including
 items/loot; see the [inventory specification](inventory-spec.md#objects-shared-through-messages). Sharing a

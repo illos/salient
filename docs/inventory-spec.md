@@ -217,6 +217,12 @@ The user reinforced the direction that objects of different kinds should be shar
 extending the earlier idea of sharing abilities, character sheets, and monster stat blocks. Items and loot
 provide another use case.
 
+**Confirmed long-term refinement, 2026-09-15:** inventory items participate in the same app-wide sharing
+foundation as Compendium rules and other supported objects, including chat sharing and bookmarks.
+Follow the [shared reference direction](data-architecture-spec.md#35-unified-object-references-and-sharing)
+while retaining the distinction between reusable item definitions and particular owned instances.
+This does not assign these future sharing workflows to the current inventory milestone.
+
 The interface, supported object types for v1, and disclosure behavior remain open. Showing an object in a
 message is distinct from moving an inventory item, granting character control, or granting editing access. Do
 not make posting an item duplicate or transfer it implicitly. Private saved-encounter sharing remains deferred

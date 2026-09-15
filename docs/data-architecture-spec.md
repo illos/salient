@@ -423,6 +423,43 @@ party-strength calculator setup, and prepared rewards. Duplication does not load
 public campaign directory is deferred beyond v1; campaigns are unlisted by default and v1 discovery uses
 campaign share codes/URLs. Opting into a public listing belongs to the later directory feature.
 
+### 3.5 Unified object references and sharing
+
+**Confirmed long-term direction, 2026-09-15:** use one data-sharing model throughout the app.
+Rules will account for most shared content, but inventory items and other supported objects use
+the same foundation. Users should be able to put these objects into chat and bookmark them.
+The embedded Compendium is an initial consumer of this model. This establishes an architectural
+direction and future capabilities; it does not assign chat, inventory sharing or bookmarks to the
+current implementation milestone. Earlier bookmark exclusions describe release timing, not a
+requirement to prevent bookmarking in the architecture.
+
+**Proposed implementation boundary:** a common object reference identifies the object and its kind;
+shared resolution provides a readable title, preview and full view under the viewer's access rules.
+Compendium links, contextual rule panels, chat attachments and bookmarks consume those references.
+Each kind retains its own data and operations; a shared reference interface does not require one
+database table or identical fields for rules, items and characters. Retain content revision/section
+information where a reference needs to identify a particular rules passage.
+
+**Confirmed rendering requirement, 2026-09-15:** an object ID must support rendering wherever it is
+referenced in the app, including eventual quick popup previews. Resolution and presentation must be
+usable independently of a Compendium page route. Proposed views are a readable inline link, compact
+preview, embedded card and full article, sharing the same identity and authorized object resolution.
+
+For inventory, preserve the distinction between an item's reusable rules definition and a particular
+owned instance. A reference to the definition opens its catalog text; an instance reference may need
+an authorized view of that item's state. Posting or bookmarking either does not duplicate, transfer,
+equip or grant control of the item. Existing private inventory and table visibility rules still apply;
+a shared object must not implicitly expose its containing inventory, character or campaign.
+
+The detailed reference format, supported object types, chat interaction, bookmark organization, and
+whether shares show live state or a snapshot remain to be designed. So do explicit disclosure,
+revocation, deletion and historical-access behavior for private objects. The user's “drop into chat”
+example establishes the intended interaction; exact pointer drag-and-drop mechanics are not yet selected.
+
+See [reference libraries](reference-library-spec.md),
+[items shared through messages](inventory-spec.md#objects-shared-through-messages), and
+[table content sharing](table-spec.md#proposed-content-sharing).
+
 ## 4. User records and current state
 
 Hiding the Director's stash cancels all outstanding provisional claims and releases their reservations without
