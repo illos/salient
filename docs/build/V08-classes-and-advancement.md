@@ -68,6 +68,9 @@ Table/engine support has separate acceptance; other supplements and homebrew rem
 
 ## Acceptance checks
 
+Follow the user-confirmed [character verification procedure](character-verification.md) when
+establishing comparison targets and recording evidence for these checks.
+
 1. A level-7 wood elf Shadow restored to its level-3 record shows the level-3 choices, grants and derived values, keeps present inventory, and retains the level-4–7 records for forward navigation.
 2. Level-up from 1 to 2 on any included class offers only that transition's choices and activates without a review row.
 3. A non-Director owner's full edit creates a pending revision; the play sheet is unchanged until Director approval of that exact revision.
