@@ -28,7 +28,7 @@
           "career.choice": "Soldier",
           "career.soldier.skill.exploration": "Endurance",
           "career.soldier.skill.intrigue": "Alertness",
-          "career.soldier.languages": ["Caelian", "Vaslorian"],
+          "career.soldier.languages": [null, "Vaslorian"],
           "career.soldier.perk": "Teamwork",
           "career.soldier.inciting-incident": "Sole Survivor",
           "class.choice": "Fury",
@@ -49,23 +49,7 @@
       },
       "expected": {
         "status": "complete",
-        "diagnostics": {
-          "career.soldier.languages": [
-            {
-              "decisionId": "career.soldier.languages",
-              "severity": "warning",
-              "code": "duplicate-language",
-              "message": "Caelian duplicates the automatic grant from culture.caelian; kept under the Q-R-100 provisional default",
-              "source": {
-                "path": "en/books/heroes/clean/Draw Steel Heroes.md",
-                "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
-                "quote": "All player characters know Caelian!",
-                "heading": "Caelian Empire"
-              },
-              "uncertainty": "Q-R-100"
-            }
-          ]
-        },
+        "diagnostics": {},
         "baseline": {
           "level": {
             "value": 1,
@@ -198,8 +182,7 @@
                     "heading": "Basics"
                   },
                   "operation": "set",
-                  "amount": 0,
-                  "uncertainty": "Q-R-101"
+                  "amount": 0
                 }
               ]
             },
@@ -226,8 +209,7 @@
                     "heading": "Basics"
                   },
                   "operation": "set",
-                  "amount": 1,
-                  "uncertainty": "Q-R-101"
+                  "amount": 1
                 }
               ]
             },
@@ -254,8 +236,7 @@
                     "heading": "Basics"
                   },
                   "operation": "set",
-                  "amount": 0,
-                  "uncertainty": "Q-R-101"
+                  "amount": 0
                 }
               ]
             }
@@ -458,8 +439,7 @@
                   "quote": "Strong Potency: Might",
                   "heading": "Basics"
                 },
-                "uncertainty": "Q-CHAR-12",
-                "note": "class-named characteristic; general rule names the highest (rule/character/potency.md), equal for every level-one Fury (Q-CHAR-12)"
+                "note": "class-named characteristic; the specific Fury formula applies (Potencies and Game of Exceptions)."
               }
             ]
           },
@@ -969,20 +949,6 @@
               }
             },
             {
-              "name": "Caelian",
-              "provenance": {
-                "decisionId": "career.soldier.languages",
-                "selection": "Caelian",
-                "source": {
-                  "path": "en/unified/md/career/soldier.md",
-                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
-                  "quote": "Languages: Two languages"
-                },
-                "uncertainty": "Q-R-100"
-              },
-              "duplicateOf": "culture.caelian"
-            },
-            {
               "name": "Vaslorian",
               "provenance": {
                 "decisionId": "career.soldier.languages",
@@ -1265,7 +1231,7 @@
               }
             }
           ],
-          "uncertainties": ["Q-R-100", "Q-R-101", "Q-CHAR-12"]
+          "uncertainties": []
         },
         "evaluatedAgainst": {
           "definitionsSchemaVersion": "r01.1",
@@ -1293,7 +1259,7 @@
           "career.choice": "Soldier",
           "career.soldier.skill.exploration": "Endurance",
           "career.soldier.skill.intrigue": "Alertness",
-          "career.soldier.languages": ["Caelian", "Vaslorian"],
+          "career.soldier.languages": [null, "Vaslorian"],
           "career.soldier.perk": "Teamwork",
           "career.soldier.inciting-incident": "Sole Survivor",
           "class.choice": "Fury",
@@ -1325,21 +1291,6 @@
                 "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
                 "quote": "You can use and gain the benefits of a kit."
               }
-            }
-          ],
-          "career.soldier.languages": [
-            {
-              "decisionId": "career.soldier.languages",
-              "severity": "warning",
-              "code": "duplicate-language",
-              "message": "Caelian duplicates the automatic grant from culture.caelian; kept under the Q-R-100 provisional default",
-              "source": {
-                "path": "en/books/heroes/clean/Draw Steel Heroes.md",
-                "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
-                "quote": "All player characters know Caelian!",
-                "heading": "Caelian Empire"
-              },
-              "uncertainty": "Q-R-100"
             }
           ]
         },
@@ -1476,8 +1427,7 @@
                     "heading": "Basics"
                   },
                   "operation": "set",
-                  "amount": 0,
-                  "uncertainty": "Q-R-101"
+                  "amount": 0
                 }
               ]
             },
@@ -1504,8 +1454,7 @@
                     "heading": "Basics"
                   },
                   "operation": "set",
-                  "amount": 1,
-                  "uncertainty": "Q-R-101"
+                  "amount": 1
                 }
               ]
             },
@@ -1532,8 +1481,7 @@
                     "heading": "Basics"
                   },
                   "operation": "set",
-                  "amount": 0,
-                  "uncertainty": "Q-R-101"
+                  "amount": 0
                 }
               ]
             }
@@ -1608,8 +1556,7 @@
                   "quote": "Strong Potency: Might",
                   "heading": "Basics"
                 },
-                "uncertainty": "Q-CHAR-12",
-                "note": "class-named characteristic; general rule names the highest (rule/character/potency.md), equal for every level-one Fury (Q-CHAR-12)"
+                "note": "class-named characteristic; the specific Fury formula applies (Potencies and Game of Exceptions)."
               }
             ]
           },
@@ -1931,20 +1878,6 @@
               }
             },
             {
-              "name": "Caelian",
-              "provenance": {
-                "decisionId": "career.soldier.languages",
-                "selection": "Caelian",
-                "source": {
-                  "path": "en/unified/md/career/soldier.md",
-                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
-                  "quote": "Languages: Two languages"
-                },
-                "uncertainty": "Q-R-100"
-              },
-              "duplicateOf": "culture.caelian"
-            },
-            {
               "name": "Vaslorian",
               "provenance": {
                 "decisionId": "career.soldier.languages",
@@ -2212,7 +2145,7 @@
               }
             }
           ],
-          "uncertainties": ["Q-R-100", "Q-R-101", "Q-CHAR-12"]
+          "uncertainties": []
         },
         "evaluatedAgainst": {
           "definitionsSchemaVersion": "r01.1",
@@ -2240,7 +2173,7 @@
           "career.choice": "Soldier",
           "career.soldier.skill.exploration": "Endurance",
           "career.soldier.skill.intrigue": "Alertness",
-          "career.soldier.languages": ["Caelian", "Vaslorian"],
+          "career.soldier.languages": [null, "Vaslorian"],
           "career.soldier.perk": "Teamwork",
           "career.soldier.inciting-incident": "Sole Survivor",
           "class.choice": "Fury",
@@ -2275,21 +2208,6 @@
                 "heading": "Ancestry Traits"
               }
             }
-          ],
-          "career.soldier.languages": [
-            {
-              "decisionId": "career.soldier.languages",
-              "severity": "warning",
-              "code": "duplicate-language",
-              "message": "Caelian duplicates the automatic grant from culture.caelian; kept under the Q-R-100 provisional default",
-              "source": {
-                "path": "en/books/heroes/clean/Draw Steel Heroes.md",
-                "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
-                "quote": "All player characters know Caelian!",
-                "heading": "Caelian Empire"
-              },
-              "uncertainty": "Q-R-100"
-            }
           ]
         },
         "baseline": null,
@@ -2425,8 +2343,7 @@
                     "heading": "Basics"
                   },
                   "operation": "set",
-                  "amount": 0,
-                  "uncertainty": "Q-R-101"
+                  "amount": 0
                 }
               ]
             },
@@ -2453,8 +2370,7 @@
                     "heading": "Basics"
                   },
                   "operation": "set",
-                  "amount": 1,
-                  "uncertainty": "Q-R-101"
+                  "amount": 1
                 }
               ]
             },
@@ -2481,8 +2397,7 @@
                     "heading": "Basics"
                   },
                   "operation": "set",
-                  "amount": 0,
-                  "uncertainty": "Q-R-101"
+                  "amount": 0
                 }
               ]
             }
@@ -2646,8 +2561,7 @@
                   "quote": "Strong Potency: Might",
                   "heading": "Basics"
                 },
-                "uncertainty": "Q-CHAR-12",
-                "note": "class-named characteristic; general rule names the highest (rule/character/potency.md), equal for every level-one Fury (Q-CHAR-12)"
+                "note": "class-named characteristic; the specific Fury formula applies (Potencies and Game of Exceptions)."
               }
             ]
           },
@@ -3130,20 +3044,6 @@
               }
             },
             {
-              "name": "Caelian",
-              "provenance": {
-                "decisionId": "career.soldier.languages",
-                "selection": "Caelian",
-                "source": {
-                  "path": "en/unified/md/career/soldier.md",
-                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
-                  "quote": "Languages: Two languages"
-                },
-                "uncertainty": "Q-R-100"
-              },
-              "duplicateOf": "culture.caelian"
-            },
-            {
               "name": "Vaslorian",
               "provenance": {
                 "decisionId": "career.soldier.languages",
@@ -3438,7 +3338,7 @@
               }
             }
           ],
-          "uncertainties": ["Q-R-100", "Q-R-101", "Q-CHAR-12"]
+          "uncertainties": []
         },
         "evaluatedAgainst": {
           "definitionsSchemaVersion": "r01.1",

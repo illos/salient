@@ -33,18 +33,20 @@ export function TurnControls({
   actor,
   running,
   onTurnTaken,
+  entryId,
 }: {
   campaignId: Id<'campaigns'>;
   encounter: Encounter;
   actor: { kind: 'character' | 'foe'; id: string; name: string };
   running: boolean;
+  entryId?: string;
   onTurnTaken?: (actor: { kind: 'character' | 'foe'; id: string }) => void;
 }) {
   if (encounter.phase !== 'turns' || !running) return null;
   const entries = encounter.groups.flatMap(g => g.entries).filter(e => e.actor.id === actor.id);
   if (!entries.length) return null;
   const active = encounter.activeTurn;
-  if (active && active.actor.id === actor.id)
+  if (active && active.actor.id === actor.id && (!entryId || active.entryId === entryId))
     return active.mayEnd ? (
       <CommandButton
         campaignId={campaignId}
@@ -55,12 +57,14 @@ export function TurnControls({
     ) : (
       <Badge>Taking their turn</Badge>
     );
-  const entry = entries.find(e => !e.spent);
+  const entry = entryId
+    ? entries.find(e => e.id === entryId)
+    : (entries.find(e => !e.spent) ?? entries[0]);
   if (!entry || !entry.controlled) return null;
   return (
     <CommandButton
       campaignId={campaignId}
-      text={`${ref(actor)} /turn take`}
+      text={`${ref(actor)} /turn take entry="${entry.id}"`}
       label="Take turn"
       disabled={active !== null}
       onDone={() => onTurnTaken?.(actor)}
@@ -151,6 +155,7 @@ function EntryRow({
           campaignId={campaignId}
           encounter={encounter}
           actor={entry.actor}
+          entryId={entry.id}
           running={running}
           onTurnTaken={onTurnTaken}
         />

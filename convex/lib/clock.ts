@@ -47,7 +47,8 @@ export async function registerWork(
   input: RegistrationInput,
 ): Promise<Id<'clockRegistrations'>> {
   const encounter = await ctx.db.get(encounterId);
-  if (!encounter) throw new ConvexError('Encounter unavailable.');
+  if (!encounter || encounter.status !== 'committed' || encounter.archivedAt !== null)
+    throw new ConvexError('Clock work requires a current committed encounter.');
   const enqueueSeq = (encounter.registrationSeq ?? 0) + 1;
   await journalPatch(ctx, scope, 'encounters', encounterId, { registrationSeq: enqueueSeq });
   return journalInsert(ctx, scope, 'clockRegistrations', {
@@ -136,9 +137,17 @@ export const operationHandlers = new Map<string, WorkHandler>();
 /** Malice growth rule, quoted from vendor/steel-compendium/en/unified/md/rule/monster/malice.md. */
 const MALICE_SOURCE = 'vendor/steel-compendium/en/unified/md/rule/monster/malice.md';
 
-/** Hero participants committed at OK (Q-R-50 provisional default A: every committed hero counts). */
+/** Q-R-50: distinct currently participating heroes; dying heroes still count. */
 async function heroParticipants(ctx: MutationCtx, encounter: Doc<'encounters'>) {
-  const ids = encounter.heroParticipantIds ?? [];
+  const entries = await ctx.db
+    .query('turnEntries')
+    .withIndex('by_encounter', q => q.eq('encounterId', encounter._id))
+    .take(1000);
+  const ids = new Set(
+    entries
+      .filter(entry => entry.actor.kind === 'character')
+      .map(entry => entry.actor.id as Id<'characters'>),
+  );
   const heroes: Doc<'characters'>[] = [];
   for (const id of ids) {
     const hero = await ctx.db.get(id);
@@ -165,7 +174,7 @@ async function fireMalice(
     // Victories are read, never changed; a hero with no live record has the R03 initial 0.
     const victoriesTotal = heroes.reduce((sum, hero) => sum + (hero.liveState?.victories ?? 0), 0);
     const averageVictories = heroCount ? victoriesTotal / heroCount : 0;
-    // Q-R-51 provisional default A: round a fractional average down; log the unrounded value.
+    // Q-R-51 confirmed: round a fractional average down; log the unrounded value.
     const delta = heroCount ? Math.floor(averageVictories) : 0;
     const rounding: MaliceChange['inputs']['rounding'] =
       delta === averageVictories ? 'none' : 'down';
@@ -173,7 +182,7 @@ async function fireMalice(
       notes.push(
         'No hero participants: the average Victories per hero is undefined; 0 applied and recorded.',
       );
-    if (rounding === 'down') notes.push('Fractional average rounded down (Q-R-51 provisional).');
+    if (rounding === 'down') notes.push('Fractional average rounded down (confirmed Q-R-51).');
     change = {
       step,
       inputs: { heroCount, victoriesTotal, averageVictories, rounding },
@@ -194,7 +203,9 @@ async function fireMalice(
       delta,
       after: before + delta,
     };
-    notes.push('Hero count is every hero committed at OK (Q-R-50 provisional default A).');
+    notes.push(
+      'Hero count is distinct current combat participants, including dying heroes (confirmed Q-R-50).',
+    );
     description = `Malice: round ${firing.event.round} gain — ${heroCount} hero${heroCount === 1 ? '' : 'es'} + round ${firing.event.round} = ${delta}; pool ${before} → ${change.after}.`;
   } else {
     // "At the end of an encounter, any unused Malice is lost."
@@ -286,7 +297,8 @@ export async function dispatchBoundary(
   actorName?: string,
 ): Promise<DispatchResult> {
   const encounter = await ctx.db.get(encounterId);
-  if (!encounter) throw new ConvexError('Encounter unavailable.');
+  if (!encounter || encounter.status !== 'committed' || encounter.archivedAt !== null)
+    throw new ConvexError('Clock work requires a current committed encounter.');
   const cause = await ctx.db.get(scope.eventId);
   if (!cause) throw new ConvexError('Cause event unavailable.');
   const event: BoundaryEvent = {
@@ -320,7 +332,15 @@ export async function dispatchBoundary(
     payload: { event, plan: { ordinary: plan.ordinary, saves: plan.saves } },
   });
   const records: DispatchRecord[] = [];
-  const fireOne = async (registration: Registration, phase: DispatchRecord['phase']) => {
+  const fireOne = async (planned: Registration, phase: DispatchRecord['phase']) => {
+    // Earlier queued work may have ended the effect. Never fire a retired/deleted stale row.
+    const registration = await ctx.db.get(planned._id);
+    if (
+      !registration ||
+      registration.status !== 'active' ||
+      !isDue(registration.timing as TimingClause, event)
+    )
+      return;
     const current = await ctx.db.get(encounterId);
     const result = await fire(ctx, {
       scope,

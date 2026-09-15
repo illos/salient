@@ -1,5 +1,20 @@
 # App workstream status
 
+## Current audit — 2026-09-15
+
+A02–A07 implementation and repairs have passed independent code/source review. The audit incorporates
+settled characteristic/language/potency decisions, real admitted baselines, compatible current-value
+caps (Q-CHAR-2), warning-based turn departures, fixed costs, shared recovery tracking, privacy-safe
+history and formal closeout/Void. A connected fresh-backend walkthrough passes from admission to the
+next session and both paused Void paths. Full checks pass (392 tests), all eight live browser
+scenarios pass, and independent desktop visual review passes. Q-CHAR-10/11 and resolved language
+labels are reconciled; the reviewed question queue has no open questions and three explicit deferrals.
+
+Use [the single build tracker](build/STATUS.md) and
+[integrated acceptance evidence](build/evidence/v001-acceptance.md) for current verification and scope.
+The implementation history below predates the slice build and retains its original limitations as
+historical context; it is not the current feature/visibility contract.
+
 Started 2026-09-11 after the user authorized implementation and a baseline commit.
 Baseline: `5efb7c7` (clean checkout); TypeScript check and all 28 existing Node tests passed.
 

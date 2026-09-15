@@ -328,3 +328,121 @@ describe('owned character drafts', () => {
     expect((await alice.client.query(api.characters.get, { characterId })).revision).toBe(1);
   });
 });
+
+test('named characteristic assignment and wizard drag/drop persist identical choices and evaluated values', async () => {
+  const { t, alice } = await setup();
+  const { assignCharacteristic } = await import('../../shared/evaluate/assignment');
+  const base = {
+    ...examples.examples.complete!.input.selections,
+    'class.fury.characteristic-array': '1, 1, −1',
+    'class.fury.array-assignment': {},
+  };
+  const namedId = await alice.client.mutation(api.characters.create, {
+    commandId: 'named-create',
+    authored: details,
+  });
+  const dragId = await alice.client.mutation(api.characters.create, {
+    commandId: 'drag-create',
+    authored: details,
+  });
+  let selections = base as EvaluationInput['selections'];
+  for (const id of [namedId, dragId])
+    await alice.client.mutation(api.characters.save, {
+      characterId: id,
+      commandId: `start-${id}`,
+      expectedRevision: 1,
+      authored: details,
+      selections: draftSelectionsFrom(selections, definitions),
+    });
+  let revision = 2;
+  for (const [target, value, fromTarget] of [
+    ['Reason', 1, undefined],
+    ['Intuition', 1, undefined],
+    ['Presence', -1, undefined],
+    ['Presence', 1, 'Reason'],
+    ['Reason', -1, undefined],
+  ] as const) {
+    selections = assignCharacteristic(selections, target, value, fromTarget);
+    const commandId = `assign-${revision}`;
+    const args = {
+      characterId: namedId,
+      commandId,
+      expectedRevision: revision,
+      authored: details,
+      assignment: { target, value, ...(fromTarget ? { fromTarget } : {}) },
+    };
+    await alice.client.mutation(api.characters.save, args);
+    expect(await alice.client.mutation(api.characters.save, args)).toBe(revision + 1);
+    await alice.client.mutation(api.characters.save, {
+      characterId: dragId,
+      commandId: `drag-save-${revision}`,
+      expectedRevision: revision,
+      authored: details,
+      selections: draftSelectionsFrom(selections, definitions),
+    });
+    revision++;
+    const named = await alice.client.query(api.characters.get, { characterId: namedId });
+    const drag = await alice.client.query(api.characters.get, { characterId: dragId });
+    expect(named.selections).toEqual(drag.selections);
+    expect(named.evaluation).toEqual(drag.evaluation);
+  }
+  const named = await alice.client.query(api.characters.get, { characterId: namedId });
+  const evaluation = named.evaluation as EvaluationResult;
+  expect(evaluation.status).toBe('complete');
+  expect(
+    (['M', 'A', 'R', 'I', 'P'] as const).map(
+      key => evaluation.baseline!.characteristics[key].value,
+    ),
+  ).toEqual([2, 2, -1, 1, 1]);
+  for (const assignment of [
+    { target: 'Might', value: 0 },
+    { target: 'Reason', value: 3 },
+    { target: 'Reason', value: 1 },
+  ]) {
+    await expect(
+      alice.client.mutation(api.characters.save, {
+        characterId: namedId,
+        commandId: `invalid-${assignment.target}-${assignment.value}`,
+        expectedRevision: revision,
+        authored: details,
+        assignment,
+      }),
+    ).rejects.toThrow();
+  }
+  const persisted = await t.run(ctx => ctx.db.get(namedId));
+  expect(persisted!.revision).toBe(revision);
+  expect(persisted!.liveState).toBeNull();
+});
+
+test('known saved choices cannot forge their branch/source or shadow a decision under another branch', async () => {
+  const { alice } = await setup();
+  const characterId = await alice.client.mutation(api.characters.create, {
+    commandId: 'provenance-create',
+    authored: details,
+  });
+  const selections = fixtureSelections();
+  selections[0] = {
+    ...selections[0]!,
+    ownerBranchId: 'forged',
+    sources: [{ id: 'fake', path: 'fake', revision: 'fake' }],
+  };
+  await alice.client.mutation(api.characters.save, {
+    characterId,
+    commandId: 'provenance-save',
+    expectedRevision: 1,
+    authored: details,
+    selections,
+  });
+  const saved = await alice.client.query(api.characters.get, { characterId });
+  expect(saved.selections).toEqual(fixtureSelections());
+  await expect(
+    alice.client.mutation(api.characters.save, {
+      characterId,
+      commandId: 'shadow-save',
+      expectedRevision: 2,
+      authored: details,
+      selections: [...selections, { ...selections[0]!, ownerBranchId: 'another-branch' }],
+    }),
+  ).rejects.toThrow('only be saved once');
+  expect((await alice.client.query(api.characters.get, { characterId })).revision).toBe(2);
+});

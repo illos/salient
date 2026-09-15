@@ -2029,19 +2029,20 @@ group with one unspent entry (Q-R-52 confirmed choice A); `foe.remove` of the ac
 `spentRound`; group completion is `completedRound === encounter.round`, so a finished destination stays
 finished and every group is unspent again when the round changes without a reset write. A group left with
 no entries is removed unless it is the active group, which completes when the current turn ends (the
-empty-group presentation question is otherwise unchanged). `/turn take` is refused for an entry already
-spent this round, for an entry whose group finished this round, and while another group is active
-(Q-A-400 was raised about the second refusal); acting out of side order is recorded as a warning.
+empty-group presentation question is otherwise unchanged). `/turn take` warns for an entry already
+spent this round, for an entry whose group finished this round, and while another group is active.
+Spent/completed state remains recorded; an unfinished group's activation resumes after a deliberate
+departure. Acting out of side order also warns. A competing active turn is still refused.
 Round advance happens in `settle` (`convex/lib/initiative.ts`) when no turn is active and every group is
 finished, at most one round per operation, and only when some entry can act in the new round.
 
 **Documentation audit, 2026-09-14 (Q-A-400):** the existing [Take turn policy](#taking-a-turn)
 and [regrouping contract](#mid-combat-additions-and-regrouping) already distinguish automatic rule
-eligibility from warned deliberate departures. The implementation note above describes a repair
-needed in A04, not an unanswered policy choice. Preserve completed groups and spent-entry history;
+eligibility from warned deliberate departures. The earlier hard refusals required an A04 repair,
+not an unanswered policy choice. Preserve completed groups and spent-entry history;
 do not force regrouping merely to bypass a rule-eligibility refusal. Access/session restrictions and
-coherent sequencing still apply, including no competing ordinary active turns. Implementation and
-verification of the warned path remain with A04.
+coherent sequencing still apply, including no competing ordinary active turns. The repair was
+implemented and independently reviewed on 2026-09-15; persisted-state regressions cover the warned path.
 
 #### Source expectations and timing distinctions
 
@@ -2247,6 +2248,20 @@ Separate inventory/progression history keeps its existing scope and cannot reope
 This is a gameplay boundary, not a requirement to wait for compression or move storage before play
 continues. The next FreePlay stretch starts after this boundary; a paused session remains paused. Void
 retains its voided disposition and skips normal ending effects and awards.
+
+Implementation note (A07, 2026-09-15): shared commands are `/combat end`,
+`/combat victories amount=1 recipients=["character-id"]`, `/combat finish`, and
+`/combat void mode=keep|reset`. Controls include the encounter identity to reject stale cards.
+End combat and the explicit Victory confirmation remain ordinary sequential journal units until
+Finish cleanup or Void seals the archive; rewinding End combat restores its recorded turn and
+pending choices without rerunning a boundary. Manual clause dispositions offered during the current
+closeout are continuations, not corrections of old damage; ordinary correction limits still apply.
+
+The v0.01 reset uses the existing combat-start hero/foe/Malice snapshot. A foe deleted during play
+receives a new storage ID on restoration because the database allocates IDs; the existing historical
+identity alias links it to its original record. Surviving foes retain their IDs and all records restore
+from the captured values. Loot, squad/captain relationships and saved roster preparation do not yet
+have v0.01 persistence; this implementation does not claim those deferred subsystems.
 
 ### Voiding an encounter
 
@@ -2744,8 +2759,9 @@ after the ordinary phase. Handlers exist for `malice` steps and for `operation` 
 as `clock.unsupported` and never rolled (Q-TS-1). One-shot clauses retire after firing; recurring ones stay.
 Boundaries dispatched by A04: `combat-start` at OK, `round-start` at the starting-side announcement and after
 each `round-end`, `turn-start` at Take turn, `turn-end` at End turn or acting-foe removal; `combat-end` is
-registered for A07. Malice: `round-start-gain` counts `heroParticipantIds` recorded at OK (Q-R-50 A);
-`combat-start-grant` floors a fractional average (Q-R-51 A) and logs the unrounded value; `clock.malice`
+registered for A07. Malice: `round-start-gain` counts distinct current hero actors with remaining combat
+turn entries, including dying heroes (Q-R-50); `heroParticipantIds` retains the starting snapshot.
+`combat-start-grant` floors a fractional average (Q-R-51) and logs the unrounded value; `clock.malice`
 events hide pool values from players and observers while Show Malice is off.
 
 ### Undo permissions and proposed campaign control

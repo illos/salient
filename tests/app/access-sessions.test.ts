@@ -203,17 +203,30 @@ describe('authenticated campaign and session operations', () => {
         commandId: 'stale-resume',
       }),
     ).rejects.toThrow('changed');
-    await owner.client.mutation(api.sessions.setPlayers, {
-      sessionId,
-      expectedRevision: 1,
-      selectedPlayerIds: [owner.profile.userId],
-      commandId: 'select-during-pause',
+    await expect(
+      owner.client.mutation(api.sessions.setPlayers, {
+        sessionId,
+        expectedRevision: 1,
+        selectedPlayerIds: [owner.profile.userId],
+        commandId: 'select-during-pause',
+      }),
+    ).rejects.toThrow('paused');
+    expect(await player.client.query(api.sessions.get, { sessionId })).toMatchObject({
+      status: 'paused',
+      revision: 1,
+      selectedPlayerIds: [player.profile.userId],
     });
     await owner.client.mutation(api.sessions.transition, {
       sessionId,
-      expectedRevision: 2,
+      expectedRevision: 1,
       action: 'resume',
       commandId: 'resume-session',
+    });
+    await owner.client.mutation(api.sessions.setPlayers, {
+      sessionId,
+      expectedRevision: 2,
+      selectedPlayerIds: [owner.profile.userId],
+      commandId: 'select-after-resume',
     });
     const close = {
       sessionId,
@@ -251,15 +264,15 @@ describe('authenticated campaign and session operations', () => {
     const log = await player.client.query(api.events.list, { campaignId, sessionId });
     expect(log.events.map(e => e.kind)).toEqual([
       'session.closed',
-      'session.running',
       'session.players',
+      'session.running',
       'session.paused',
       'session.started',
     ]);
     await owner.client.mutation(api.sessions.start, { ...start, commandId: 'new-session' });
     expect(await player.client.query(api.events.list, { campaignId, sessionId })).toEqual(log);
   });
-  test('combat preserves pause but locks players and requires an explicit future closure contract', async () => {
+  test('combat preserves pause and roster locks; session closure requires an explicit Void choice', async () => {
     const t = backend();
     const { owner, player, campaignId } = await campaign(t);
     const sessionId = await owner.client.mutation(api.sessions.start, {
@@ -281,7 +294,7 @@ describe('authenticated campaign and session operations', () => {
         selectedPlayerIds: [],
         commandId: 'combat-change',
       }),
-    ).rejects.toThrow('locks');
+    ).rejects.toThrow('paused');
     await expect(
       owner.client.mutation(api.sessions.transition, {
         sessionId,
@@ -289,12 +302,18 @@ describe('authenticated campaign and session operations', () => {
         action: 'close',
         commandId: 'combat-close',
       }),
-    ).rejects.toThrow('void keep/reset');
+    ).rejects.toThrow('Void choice');
     expect((await owner.client.query(api.sessions.get, { sessionId })).encounter).toEqual({
       id: encounterId,
       status: 'committed',
     });
-    // A draft (uncommitted setup) or an archived run does not lock the roster or block closure.
+    await owner.client.mutation(api.sessions.transition, {
+      sessionId,
+      expectedRevision: 1,
+      action: 'resume',
+      commandId: 'combat-resume',
+    });
+    // Once running, a draft (uncommitted setup) or an archived run does not lock the roster.
     for (const status of ['draft', 'closed-out', 'voided'] as const) {
       await t.run(ctx =>
         ctx.db.patch(encounterId, {

@@ -33,6 +33,7 @@ import type { JournalScope } from './journal';
 import { tableOperations } from './tableOperations';
 import { foeOperations } from './foeOperations';
 import { combatOperations } from './combatOperations';
+import { closeoutOperations } from './closeoutOperations';
 import { historyOperations } from './history';
 import { currentEncounter } from './encounters';
 import { abilityOperations } from './abilityOperations';
@@ -410,21 +411,27 @@ const cardClose: OperationDefinition = {
   },
 };
 
-export const operations: OperationDefinition[] = [
-  sessionNote,
-  tableRoll,
-  cardRespond,
-  cardClose,
-  ...tableOperations,
-  ...foeOperations,
-  ...combatOperations,
-  ...historyOperations,
-  ...abilityOperations,
-  ...characterOperations,
-];
+// Assemble lazily: operation modules call this runner. Eager spreads during module
+// initialization create a cycle in Convex's bundled deployment even when unit imports pass.
+let cachedOperations: OperationDefinition[] | undefined;
+export function registeredOperations(): OperationDefinition[] {
+  return (cachedOperations ??= [
+    sessionNote,
+    tableRoll,
+    cardRespond,
+    cardClose,
+    ...tableOperations,
+    ...foeOperations,
+    ...combatOperations,
+    ...closeoutOperations,
+    ...historyOperations,
+    ...abilityOperations,
+    ...characterOperations,
+  ]);
+}
 
 export function findOperation(id: string): OperationDefinition | undefined {
-  return operations.find(operation => operation.id === id);
+  return registeredOperations().find(operation => operation.id === id);
 }
 
 // ---------------------------------------------------------------------------------------------
@@ -455,6 +462,18 @@ export async function run(
     throw new ConvexError('Arguments must be an object of named values.');
   const reason = unavailableReason(operation, context);
   if (reason) throw new ConvexError(reason);
+  // End combat stops structured turns and attacks. Manual resolution, corrections and
+  // ordinary dice remain available for the table's optional cleanup work.
+  const activeEncounter = context.session ? await currentEncounter(ctx, context.session) : null;
+  if (
+    activeEncounter?.phase === 'closeout' &&
+    ((['combat', 'turn', 'group', 'target'].includes(operation.family) &&
+      !['combat.end', 'combat.victories', 'combat.finish', 'combat.void'].includes(operation.id)) ||
+      ['ability.select', 'ability.use', 'ability.fire', 'hero.recover'].includes(operation.id))
+  )
+    throw new ConvexError(
+      'Combat has ended and is in closeout; finish cleanup before taking turns or using abilities.',
+    );
   if (
     envelope.expectedRevision !== undefined &&
     context.session?.revision !== envelope.expectedRevision

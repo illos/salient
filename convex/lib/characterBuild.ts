@@ -40,11 +40,11 @@ import { ConvexError } from 'convex/values';
 import type { Doc, Id } from '../_generated/dataModel';
 import type { MutationCtx } from '../_generated/server';
 import type { ReadCtx } from './access';
-import { requireCharacterEditable } from './encounters';
-import type { ConditionToggles } from '../../shared/contracts/liveState';
+import { combatActive, requireCharacterEditable } from './encounters';
+import type { BuildReconciliation, ConditionToggles } from '../../shared/contracts/liveState';
+import { previewBuildReconciliation } from '../../shared/evaluate/liveReconciliation';
 
 export type HeroLive = NonNullable<Doc<'characters'>['liveState']>;
-export type Unreconciled = NonNullable<Doc<'characters'>['unreconciled']>[number];
 
 /** The nine toggles in R05 order (shared/content/core-conditions.json, liveState.ts ConditionId). */
 export const CONDITION_IDS = [
@@ -106,9 +106,8 @@ export function initialHeroLive(
 
 /**
  * Activates one complete revision as the effective build for `campaignId`. First admission
- * initializes the live record; a later activation leaves `liveState` byte-for-byte as it was and
- * records each changed maximum or resource as an UnreconciledMaximumChange (Q-CHAR-2), applying no
- * arithmetic (docs/live-state-initialization.md section 3).
+ * initializes the live record; later activation applies the confirmed Q-CHAR-2 downward caps atomically with the build.
+ * Compatible current amounts and other live state survive; incompatible resource types are refused.
  */
 export async function activateRevision(
   ctx: MutationCtx,
@@ -116,7 +115,17 @@ export async function activateRevision(
   revision: Doc<'characterRevisions'>,
   campaignId: Id<'campaigns'>,
   now: number,
-): Promise<{ firstAdmission: boolean; unreconciled: Unreconciled[] }> {
+): Promise<{ firstAdmission: boolean; reconciliation: BuildReconciliation }> {
+  // First attachment changes the campaign's party roster, including a hero not yet combat-locked.
+  if (character.campaignId !== campaignId) {
+    const campaign = await ctx.db.get(campaignId);
+    if (!campaign) throw new ConvexError('Campaign unavailable.');
+    const session = campaign.activeSessionId ? await ctx.db.get(campaign.activeSessionId) : null;
+    if (session?.status === 'paused')
+      throw new ConvexError('The party roster is locked while paused.');
+    if (session && (await combatActive(ctx, session)))
+      throw new ConvexError('The party roster is locked during combat.');
+  }
   const baseline = baselineOf(revision.derivedBaseline);
   const evaluation = revision.evaluation as EvaluationResult | undefined;
   if (revision.status !== 'complete' || !baseline || !evaluation)
@@ -124,7 +133,7 @@ export async function activateRevision(
       `Revision ${revision.revision} is ${revision.status}; only a complete build can be activated.`,
     );
   const previous = baselineOf(character.derivedBaseline);
-  const added: Unreconciled[] = [];
+  let reconciliation: BuildReconciliation = { changes: [], incompatibleResource: null };
   const patch: Partial<Doc<'characters'>> = {
     effectiveRevisionId: revision._id,
     derivedBaseline: baseline,
@@ -133,46 +142,24 @@ export async function activateRevision(
   const firstAdmission = character.liveState === null;
   if (firstAdmission) {
     patch.liveState = initialHeroLive(baseline, revision._id, evaluation.evaluatedAgainst, now);
-  } else if (previous && character.liveState) {
+  } else if (character.liveState) {
     const live = character.liveState;
-    const compare = (
-      field: Unreconciled['field'],
-      before: number | string,
-      after: number | string,
-      currentValue: number,
-    ) => {
-      if (before !== after)
-        added.push({
-          field,
-          before,
-          after,
-          currentValue,
-          question: 'Q-CHAR-2',
-          revisionId: revision._id,
-        });
+    reconciliation = previewBuildReconciliation(live, previous, baseline);
+    if (reconciliation.incompatibleResource)
+      throw new ConvexError(
+        `Changing ${reconciliation.incompatibleResource.before} to ${reconciliation.incompatibleResource.after} requires explicit resource reconciliation before activation.`,
+      );
+    patch.liveState = {
+      ...live,
+      ...Object.fromEntries(
+        reconciliation.changes.map(change => [change.field, change.currentAfter]),
+      ),
     };
-    compare(
-      'staminaMaximum',
-      previous.staminaMaximum.value,
-      baseline.staminaMaximum.value,
-      live.stamina,
-    );
-    compare(
-      'recoveriesMaximum',
-      previous.recoveriesMaximum.value,
-      baseline.recoveriesMaximum.value,
-      live.recoveries,
-    );
-    compare(
-      'heroicResource',
-      previous.heroicResource.name.value,
-      baseline.heroicResource.name.value,
-      live.heroicResource.current,
-    );
   }
-  if (added.length) patch.unreconciled = [...(character.unreconciled ?? []), ...added];
+  // Legacy provisional markers are no longer an unresolved maximum policy.
+  if (character.unreconciled) patch.unreconciled = [];
   await ctx.db.patch(character._id, patch);
-  return { firstAdmission, unreconciled: added };
+  return { firstAdmission, reconciliation };
 }
 
 /** The hero's live record; only first admission creates it (R03 2.1). */
@@ -198,6 +185,7 @@ export async function pendingReview(ctx: ReadCtx, characterId: Id<'characters'>)
   const reviews = await ctx.db
     .query('characterReviews')
     .withIndex('by_character', q => q.eq('characterId', characterId))
+    .order('desc')
     .take(100);
   return reviews.find(review => review.status === 'pending') ?? null;
 }
@@ -207,6 +195,7 @@ export async function latestReview(ctx: ReadCtx, characterId: Id<'characters'>) 
   const reviews = await ctx.db
     .query('characterReviews')
     .withIndex('by_character', q => q.eq('characterId', characterId))
+    .order('desc')
     .take(100);
   return reviews.sort((a, b) => b.submittedAt - a.submittedAt)[0] ?? null;
 }

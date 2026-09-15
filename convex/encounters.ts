@@ -26,6 +26,7 @@ const phase = v.union(
   v.literal('roll'),
   v.literal('choice'),
   v.literal('turns'),
+  v.literal('closeout'),
 );
 
 const participant = v.object({
@@ -195,7 +196,10 @@ export const current = query({
           )
           .take(100)
       : [];
-    const setupCard = pendingCards.find(row => row.kind === 'combat-setup') ?? null;
+    const setupCard =
+      pendingCards.find(
+        row => row.kind === 'combat-setup' && row.sessionId === encounter.sessionId,
+      ) ?? null;
     const opening = encounter.opening ?? null;
     const entitlement = opening?.roll?.entitlement ?? 'director';
     const running = context.session.status === 'running';
@@ -239,7 +243,7 @@ export const current = query({
             groupId: activeTurn.groupId,
             actor: activeTurn.actor,
             round: activeTurn.round,
-            mayEnd: running && controls(activeTurn.actor),
+            mayEnd: running && encounter.phase === 'turns' && controls(activeTurn.actor),
           }
         : null,
     };

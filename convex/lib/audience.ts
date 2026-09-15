@@ -69,7 +69,12 @@ function record(value: unknown): Record<string, unknown> | undefined {
 
 /** Field-specific projection: public source text, dice, modifiers, total and outcome are untouched.
  * Do not recursively strip arbitrary numbers or resource words from public gameplay records. */
-export function projectEvent(event: Doc<'events'>, campaign: Doc<'campaigns'>, director: boolean) {
+export function projectEvent(
+  event: Doc<'events'>,
+  campaign: Doc<'campaigns'>,
+  director: boolean,
+  historyTarget?: Doc<'events'> | null,
+): { description: string; payload: Doc<'events'>['payload'] } {
   if (director) return { description: event.description, payload: event.payload };
   const settings = settingsOf(campaign);
   const original = record(event.payload);
@@ -82,6 +87,46 @@ export function projectEvent(event: Doc<'events'>, campaign: Doc<'campaigns'>, d
   if (envelope) payload.envelope = envelope;
   if (envelope && args) envelope.arguments = args;
   let description = event.description;
+  if (event.kind.startsWith('history.') && data) {
+    const target = record(data.target);
+    if (target) {
+      const targetDescription = historyTarget
+        ? projectEvent(historyTarget, campaign, false).description
+        : 'Recorded gameplay';
+      data.target = { ...target, description: targetDescription };
+      const verb =
+        event.kind === 'history.redo'
+          ? 'Redone'
+          : event.kind === 'history.rewind'
+            ? 'Rewound'
+            : 'Undone';
+      description = `${verb}: #${target.sequence} ${targetDescription}.`;
+    }
+  }
+  if (event.kind.startsWith('ability.') && data && !settings.showMalice) {
+    if (typeof data.publicDescription === 'string') description = data.publicDescription;
+    const hidePool = (value: unknown) => {
+      const cost = record(value);
+      if (!cost || String(cost.resource).toLowerCase() !== 'malice') return value;
+      const { before, after, ...visible } = cost;
+      void before;
+      void after;
+      return visible;
+    };
+    const result = record(data.result);
+    if (result?.cost) data.result = { ...result, cost: hidePool(result.cost) };
+    if (data.cost) data.cost = hidePool(data.cost);
+    const blocked = record(data.blocked);
+    if (String(record(blocked?.cost)?.resource).toLowerCase() === 'malice') {
+      const { poolBefore, ...visible } = blocked!;
+      void poolBefore;
+      const reason = 'Insufficient Malice for the fixed cost';
+      data.blocked = { ...visible, reason };
+      const actor = record(envelope?.boundActor);
+      const ability = record(data.ability);
+      description = `Blocked: ${actor?.name ?? 'Creature'} cannot use ${ability?.name ?? 'this ability'} — ${reason}. No roll, no cost, no action used; the pending selection is kept.`;
+    }
+  }
   if (event.kind === 'test.roll' && !settings.showTestDifficulty) {
     const result = record(data?.result) ? { ...record(data?.result) } : undefined;
     if (data && result) data.result = result;
@@ -106,11 +151,7 @@ export function projectEvent(event: Doc<'events'>, campaign: Doc<'campaigns'>, d
       };
     description = description.replace(/ — .*$/, ' applied.');
   }
-  if (
-    (event.kind === 'ability.use' || event.kind === 'correction.ability') &&
-    data &&
-    settings.healthDisplay !== 'numerical'
-  ) {
+  if ((event.kind === 'ability.use' || event.kind === 'correction.ability') && data) {
     // A05: damage arithmetic and winded/Slain stay public; a foe's resulting Stamina values follow
     // the health-display setting (docs/table-spec.md#monster-visibility-and-health-display).
     const strip = (application: unknown) => {
@@ -127,7 +168,9 @@ export function projectEvent(event: Doc<'events'>, campaign: Doc<'campaigns'>, d
       void staminaAfter;
       void temporaryStaminaBefore;
       void temporaryStaminaAfter;
-      return rest;
+      return settings.healthDisplay === 'numerical'
+        ? { ...rest, staminaBefore, staminaAfter }
+        : rest;
     };
     const foeIds = new Set<string>();
     for (const item of Array.isArray(data.damage) ? data.damage : []) {
@@ -155,8 +198,21 @@ export function projectEvent(event: Doc<'events'>, campaign: Doc<'campaigns'>, d
     const correction = record(data.correction);
     if (correction && target?.kind === 'foe') {
       data.correction = { ...correction, damageAfter: strip(correction.damageAfter) };
-      description = description.replace(/; [^;]* Stamina -?\d+ → -?\d+[^.]*\./, '.');
+      // Generated separately from the private current-pool suffix, so punctuation in a name
+      // cannot corrupt the redaction or leave a second private suffix behind.
+      description =
+        typeof data.publicDescription === 'string'
+          ? data.publicDescription
+          : `Ability correction against ${target.name ?? 'foe'} recorded.`;
     }
+  }
+  if (event.kind === 'combat.resource-cleared' && data?.foeId) {
+    delete data.before;
+    delete data.after;
+    description =
+      typeof data.publicDescription === 'string'
+        ? data.publicDescription
+        : 'Foe temporary Stamina cleared at combat end.';
   }
   if (event.kind === 'manual.adjustment' && data) {
     const creature = record(data.creature);

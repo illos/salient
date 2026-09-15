@@ -483,3 +483,253 @@ describe('A02 admission', () => {
     );
   });
 });
+
+test('first admission cannot bypass paused or committed-combat party roster locks', async () => {
+  const t = backend();
+  const { director, player, campaignId, sessionId } = await table(t);
+  const { characterId } = await draftOf(t, player, 'LateArrival');
+  await player.client.mutation(api.characters.submit, {
+    campaignId,
+    characterId,
+    commandId: 'late-submit',
+  });
+  await director.client.mutation(api.sessions.transition, {
+    sessionId: sessionId!,
+    expectedRevision: (await t.run(ctx => ctx.db.get(sessionId!)))!.revision,
+    action: 'pause',
+    commandId: 'pause-admission',
+  });
+  await expect(
+    director.client.mutation(api.characters.approve, {
+      campaignId,
+      characterId,
+      commandId: 'paused-approve',
+    }),
+  ).rejects.toThrow('roster is locked while paused');
+  expect((await stored(t, characterId))!.campaignId).toBeNull();
+  expect((await reviewsOf(t, characterId))[0]!.status).toBe('pending');
+  await director.client.mutation(api.sessions.transition, {
+    sessionId: sessionId!,
+    expectedRevision: (await t.run(ctx => ctx.db.get(sessionId!)))!.revision,
+    action: 'resume',
+    commandId: 'resume-admission',
+  });
+  await director.client.mutation(api.commands.submit, {
+    campaignId,
+    commandId: 'combat-late-start',
+    text: '/combat start',
+  });
+  await director.client.mutation(api.commands.submit, {
+    campaignId,
+    commandId: 'combat-late-commit',
+    text: '/combat commit',
+  });
+  expect((await t.run(ctx => ctx.db.get(sessionId!)))!.encounterId).not.toBeNull();
+  await expect(
+    director.client.mutation(api.characters.approve, {
+      campaignId,
+      characterId,
+      commandId: 'combat-approve',
+    }),
+  ).rejects.toThrow('roster is locked during combat');
+  expect((await stored(t, characterId))!.liveState).toBeNull();
+  expect((await reviewsOf(t, characterId))[0]!.status).toBe('pending');
+});
+
+test('recent pending reviews remain discoverable after more than 200 prior decisions', async () => {
+  const t = backend();
+  const { director, player, campaignId } = await table(t, { session: false });
+  const { characterId } = await draftOf(t, player, 'VeteranDraft');
+  const revision = (await stored(t, characterId))!;
+  await t.run(async ctx => {
+    for (let i = 0; i < 205; i++)
+      await ctx.db.insert('characterReviews', {
+        characterId,
+        campaignId,
+        ownerId: player.profile.userId,
+        revisionId: revision.draftRevisionId!,
+        revision: 2,
+        kind: 'admission',
+        status: 'declined',
+        submittedAt: i,
+        decidedAt: i,
+        decidedById: director.profile.userId,
+      });
+  });
+  await player.client.mutation(api.characters.submit, {
+    campaignId,
+    characterId,
+    commandId: 'latest-review-submit',
+  });
+  expect((await player.client.query(api.characters.get, { characterId })).review!.status).toBe(
+    'pending',
+  );
+  const queue = await director.client.query(api.characters.reviews, { campaignId });
+  expect(queue.some(review => review.characterId === characterId)).toBe(true);
+  await director.client.mutation(api.characters.approve, {
+    campaignId,
+    characterId,
+    commandId: 'latest-review-approve',
+  });
+  expect((await stored(t, characterId))!.campaignId).toBe(campaignId);
+});
+
+/** Synthetic later baselines exercise the settled lifecycle without widening playable options. */
+async function futureDraft(
+  t: Backend,
+  characterId: Id<'characters'>,
+  stamina: number,
+  recoveries: number,
+  resource = 'ferocity',
+) {
+  await t.run(async ctx => {
+    const character = (await ctx.db.get(characterId))!;
+    const revision = (await ctx.db.get(character.effectiveRevisionId!))!;
+    const baseline = structuredClone(
+      revision.derivedBaseline,
+    ) as import('../../shared/contracts/characterEvaluation').DerivedBaseline;
+    baseline.staminaMaximum.value = stamina;
+    baseline.recoveriesMaximum.value = recoveries;
+    baseline.recoveryValue.value = Math.floor(stamina / 3);
+    baseline.windedValue.value = Math.floor(stamina / 2);
+    baseline.heroicResource.name.value = resource as typeof baseline.heroicResource.name.value;
+    const id = await ctx.db.insert('characterRevisions', {
+      characterId,
+      revision: character.revision + 1,
+      parentRevisionId: revision._id,
+      selections: revision.selections,
+      status: 'complete',
+      derivedBaseline: baseline,
+      evaluation: { ...(revision.evaluation as object), baseline },
+    });
+    await ctx.db.patch(characterId, { revision: character.revision + 1, draftRevisionId: id });
+  });
+}
+
+test.each([
+  {
+    label: 'increased maxima do not refill',
+    current: [20, 7],
+    maxima: [36, 12],
+    expected: [20, 7],
+  },
+  {
+    label: 'decreased maxima cap current amounts',
+    current: [20, 7],
+    maxima: [18, 6],
+    expected: [18, 6],
+  },
+  {
+    label: 'negative Stamina keeps its source-authorized value',
+    current: [-4, 4],
+    maxima: [18, 6],
+    expected: [-4, 4],
+  },
+])(
+  'Q-CHAR-2: $label, preview and commit agree atomically',
+  async ({ current, maxima, expected }) => {
+    const t = backend();
+    const { player, director, campaignId, thornId } = await table(t, { session: false });
+    await t.run(async ctx => {
+      const row = (await ctx.db.get(thornId))!;
+      await ctx.db.patch(thornId, {
+        liveState: {
+          ...row.liveState!,
+          stamina: current[0]!,
+          recoveries: current[1]!,
+          temporaryStamina: 5,
+          surges: 2,
+          victories: 3,
+          xp: 4,
+          heroicResource: { name: 'ferocity', current: 8 },
+          conditions: { ...row.liveState!.conditions, prone: true },
+        },
+        unreconciled: [
+          {
+            field: 'staminaMaximum',
+            before: 21,
+            after: 30,
+            currentValue: current[0]!,
+            question: 'Q-CHAR-2',
+            revisionId: row.effectiveRevisionId!,
+          },
+        ],
+      });
+    });
+    await futureDraft(t, thornId, maxima[0]!, maxima[1]!);
+    const before = (await stored(t, thornId))!;
+    const preview = (await player.client.query(api.characters.get, { characterId: thornId }))
+      .activationPreview!;
+    expect(preview.incompatibleResource).toBeNull();
+    expect(preview.changes.map(c => [c.currentBefore, c.currentAfter, c.maximumAfter])).toEqual([
+      [current[0], expected[0], maxima[0]],
+      [current[1], expected[1], maxima[1]],
+    ]);
+    expect((await stored(t, thornId))!.liveState).toEqual(before.liveState);
+    await player.client.mutation(api.characters.submit, {
+      campaignId,
+      characterId: thornId,
+      commandId: 'caps-submit',
+    });
+    const proposed = (await director.client.query(api.characters.sheet, {
+      characterId: thornId,
+      view: 'proposed',
+    })) as HeroSheet;
+    expect(proposed.activationPreview).toEqual(preview);
+    const result = await director.client.mutation(api.characters.approve, {
+      campaignId,
+      characterId: thornId,
+      commandId: 'caps-approve',
+    });
+    const after = (await stored(t, thornId))!;
+    expect(after.liveState).toEqual({
+      ...before.liveState,
+      stamina: expected[0],
+      recoveries: expected[1],
+    });
+    expect(after.effectiveRevisionId).toBe(before.draftRevisionId);
+    expect(after.unreconciled ?? []).toEqual([]);
+    const event = (await storedEvents(t, campaignId)).find(e => e._id === result.eventId)!;
+    expect((event.payload as { data: { reconciliation: unknown } }).data.reconciliation).toEqual(
+      preview,
+    );
+    expect(JSON.stringify(event.payload)).not.toContain('Q-CHAR-2');
+    await director.client.mutation(api.characters.approve, {
+      campaignId,
+      characterId: thornId,
+      commandId: 'caps-approve',
+    });
+    expect(await stored(t, thornId)).toEqual(after);
+  },
+);
+
+test('Q-CHAR-2: incompatible resource replacement is previewed and refused without partial activation', async () => {
+  const t = backend();
+  const { player, director, campaignId, thornId } = await table(t, { session: false });
+  await futureDraft(t, thornId, 18, 6, 'focus');
+  await player.client.mutation(api.characters.submit, {
+    campaignId,
+    characterId: thornId,
+    commandId: 'resource-submit',
+  });
+  const before = (await stored(t, thornId))!;
+  const events = await storedEvents(t, campaignId);
+  const proposed = (await director.client.query(api.characters.sheet, {
+    characterId: thornId,
+    view: 'proposed',
+  })) as HeroSheet;
+  expect(proposed.activationPreview!.incompatibleResource).toEqual({
+    before: 'ferocity',
+    after: 'focus',
+  });
+  await expect(
+    director.client.mutation(api.characters.approve, {
+      campaignId,
+      characterId: thornId,
+      commandId: 'resource-approve',
+    }),
+  ).rejects.toThrow('requires explicit resource reconciliation');
+  expect(await stored(t, thornId)).toEqual(before);
+  expect((await reviewsOf(t, thornId)).some(r => r.status === 'pending')).toBe(true);
+  expect(await storedEvents(t, campaignId)).toEqual(events);
+});

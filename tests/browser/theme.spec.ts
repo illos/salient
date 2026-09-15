@@ -114,7 +114,7 @@ test('reference screenshots: login, campaign home and character list in light an
 
   await page.getByRole('link', { name: 'Characters', exact: true }).click();
   await page.getByLabel('Name', { exact: true }).fill(`Ash ${stamp}`);
-  await page.getByRole('button', { name: 'Create draft' }).click();
+  await page.getByRole('button', { name: 'Create and open the wizard' }).click();
   await expect(page.getByRole('heading', { name: `Ash ${stamp}` })).toBeVisible();
   await page.getByRole('link', { name: 'Characters', exact: true }).click();
   await expect(page.getByRole('link', { name: `Ash ${stamp}` })).toBeVisible();

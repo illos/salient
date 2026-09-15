@@ -140,7 +140,6 @@ describe('R04 section 10 worked examples', () => {
       damageCharacteristicValue: 2,
       kitBonus: 0,
       rolledDamage: 4,
-      uncertainty: 'Q-R-2',
     });
     expect(r.damageApplications[0]).toMatchObject({
       incoming: 4,
@@ -370,7 +369,6 @@ describe('R04 section 10 worked examples', () => {
       staminaAfter: 30,
       healed: 8,
       capApplied: true,
-      uncertainty: 'Q-R-3',
     });
     const full = resolveCatchBreath({ ...base, stamina: 30 });
     expect(full).toMatchObject({ staminaAfter: 30, healed: 0, recoveriesAfter: 9 });
@@ -462,9 +460,9 @@ describe('R04 section 10 worked examples', () => {
     expect(twoBanes.after).toMatchObject({ total: 17, baseTier: 3, tier: 2 });
     expect(twoBanes.after.damage!.rolledDamage).toBe(7);
     expect(twoBanes.staminaReconciliationDelta).toBe(0);
-    // Natural 19 with two banes → Q-R-1 provisional tier 3, labeled.
+    // Natural 19 with two banes → confirmed tier 3, without uncertainty.
     const nat19 = strike(freeStrike, [9, 10], goblin(), { banes: 2 });
-    expect(nat19.targets[0]).toMatchObject({ tier: 3, uncertainty: 'Q-R-1' });
+    expect(nat19.targets[0]).toMatchObject({ tier: 3 });
     expect(() =>
       correctTarget(freeStrike, grug, t3, 'e2', t3.targets[0]!, undefined, undefined, -1, 0),
     ).toThrow();
@@ -688,5 +686,113 @@ describe('R04 section 10 worked examples', () => {
       { targetId: 'grug', amount: 10, causeLabel: 'x' },
     );
     expect(floor).toMatchObject({ afterImmunity: 0, staminaAfter: 30 });
+  });
+});
+
+describe('resolved R04 rulings and conservative damage parsing', () => {
+  test('Q-R-2: default damage uses highest printed choice independently of roll, and explicit damage choice survives correction', () => {
+    const actor = { ...grug, characteristics: { M: 2, A: 1, R: 0, I: 0, P: 0 } };
+    const input = {
+      ability: freeStrike,
+      actor,
+      selectedCharacteristic: 'A' as const,
+      dice: dice(5, 6),
+      targets: [{ targetId: 'goblin', edges: 0, banes: 0 }],
+      targetFacts: [goblin()],
+      inCombat: true,
+    };
+    const defaulted = resolveAbilityRoll(input);
+    expect(defaulted.kind).toBe('resolved');
+    if (defaulted.kind !== 'resolved') return;
+    expect(defaulted.selectedCharacteristic).toBe('A');
+    expect(defaulted.targets[0]!.damage).toMatchObject({
+      damageCharacteristic: 'M',
+      damageCharacteristicValue: 2,
+      rolledDamage: 7,
+    });
+    expect(defaulted.targets[0]!.damage?.uncertainty).toBeUndefined();
+    const chosen = resolveAbilityRoll({ ...input, selectedDamageCharacteristic: 'A' });
+    if (chosen.kind !== 'resolved') throw new Error('Expected resolved');
+    expect(chosen.targets[0]!.damage).toMatchObject({ damageCharacteristic: 'A', rolledDamage: 6 });
+    const correction = correctTarget(
+      freeStrike,
+      actor,
+      chosen,
+      'attack',
+      chosen.targets[0]!,
+      chosen.damageApplications[0],
+      { ...goblin(), stamina: 9 },
+      0,
+      1,
+    );
+    expect(correction.after.damage).toMatchObject({ damageCharacteristic: 'A', rolledDamage: 3 });
+    expect(correction.staminaReconciliationDelta).toBe(3);
+    expect(() => resolveAbilityRoll({ ...input, selectedDamageCharacteristic: 'R' })).toThrow(
+      'not permitted',
+    );
+  });
+
+  test('Q-R-1 and Q-R-3: confirmed natural and healing outcomes carry no obsolete uncertainty', () => {
+    const ability = resolveAbilityRoll({
+      ability: freeStrike,
+      actor: grug,
+      dice: dice(9, 10),
+      targets: [{ targetId: 'goblin', edges: 0, banes: 2 }],
+      targetFacts: [goblin()],
+      inCombat: true,
+    });
+    if (ability.kind !== 'resolved') throw new Error('Expected resolved');
+    expect(ability.targets[0]).toMatchObject({ tier: 3 });
+    expect(ability.targets[0]!.uncertainty).toBeUndefined();
+    expect(
+      resolveTestRoll({
+        actorId: 'grug',
+        characteristic: 'M',
+        characteristicValue: 2,
+        dice: dice(9, 10),
+        edges: 0,
+        banes: 2,
+      }).uncertainty,
+    ).toBeUndefined();
+    expect(
+      resolveCatchBreath({
+        actorId: 'grug',
+        inCombat: true,
+        stamina: 24,
+        maxStamina: 30,
+        recoveries: 10,
+        temporaryStamina: 3,
+      }),
+    ).toMatchObject({
+      staminaAfter: 30,
+      healed: 6,
+      recoveriesAfter: 9,
+      capApplied: true,
+      temporaryStaminaUnchanged: 3,
+    });
+    expect(
+      resolveCatchBreath({
+        actorId: 'grug',
+        inCombat: true,
+        stamina: 24,
+        maxStamina: 30,
+        recoveries: 10,
+        temporaryStamina: 3,
+      }),
+    ).not.toHaveProperty('uncertainty');
+  });
+
+  test('unrecognized damage never becomes an invented expression; waiver needs a matching known pool', () => {
+    for (const clause of [
+      '5 + level damage',
+      '5 damage if the target is prone',
+      '5 damage plus 2 fire damage',
+      'M damage',
+    ]) {
+      expect(parseTierText(clause)).toEqual({ text: clause, unresolvedClauses: [clause] });
+    }
+    expect(checkAffordability({ resource: 'ferocity', amount: 5 }, undefined, false).kind).toBe(
+      'blocked',
+    );
   });
 });

@@ -221,8 +221,11 @@ Consequences for the application:
    Preview and commit the build and caps atomically using the same shared UI/headless operation.
    Replaced resource types require explicit reconciliation, with no automatic cross-resource mapping.
    See [the owning policy](character-wizard-spec.md#current-values-when-a-build-changes).
-   **Build handoff:** the earlier `UnreconciledMaximumChange` behavior was provisional. Retire
-   maximum-only Q-CHAR-2 markers and implement these caps; this doc change does not claim code repair.
+   **Implementation, 2026-09-15:** shared activation now consumes the same reconciliation preview
+   returned to the owner and Director, applies these caps atomically, and refuses incompatible
+   resource names. Current reads/events no longer surface maximum-only question markers. The legacy
+   stored field remains schema-compatible and is cleared on activation. See
+   [the implementation and test evidence](build/audits/2026-09-15-A02-independent-review.md#q-char-2-implementation-and-validation).
 3. **Confirmed 2026-09-15 (Q-R-201):** Destination-campaign admission initializes a fresh live
    record even when the character has prior play history. Use the admitted effective build: Stamina
    and Recoveries full, XP/Victories zero, no prior conditions/temporary effects, and other resources
@@ -812,17 +815,12 @@ byte-exact and `tests/live-state-initialization.test.ts` checks it.
       "text": "---\nflavor: When you take your first turn during any montage test, you can both make a test and assist another hero's test.\nname: Teamwork\nscc: mcdm.heroes.v1/perk/teamwork\ntype: perk\n---\n\nWhen you take your first [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) during any [montage test](scc.v1:mcdm.heroes.v1/rule.test/montage-test), you can both make a [test](scc.v1:mcdm.heroes.v1/rule.test/test) and assist another hero's [test](scc.v1:mcdm.heroes.v1/rule.test/test).\n"
     }
   ],
-  "uncertainties": [
-    "Q-R-100",
-    "Q-R-101",
-    "Q-CHAR-12"
-  ]
+  "uncertainties": []
 }
 ```
 
-The preceding projection is a historical snapshot: Q-R-100, Q-R-101 and Q-CHAR-12 are now resolved.
-Its uncertainty array is not the current required output. A02/R02/R03 artifact owners must reconcile
-these labels and the earlier paid-Caelian fixture; this docs review does not claim code repair.
+The projection was refreshed in the 2026-09-15 A02 repair: resolved Q-R-100, Q-R-101 and
+Q-CHAR-12 labels are removed, matching the current R02 fixture. Its numeric values are unchanged.
 
 ## 5. `FoeEntity` projection
 

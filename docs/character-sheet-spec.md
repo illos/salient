@@ -157,8 +157,9 @@ pending submission) or a peer payload (name, Stamina and Recoveries with their m
 leave the owner payload. Ability grouping uses the entry's printed `action_type`; the kit's signature
 ability, carried by the kit entry with no ability frontmatter, is listed under "other" with its text.
 Director numeric edits submit `/adjust <field>`; condition toggles submit `/condition on|off`; the
-Catch Breath control is disabled and labeled pending A05 while the FreePlay `/hero recover` control
-remains. Turn state reads "pending A04" until the pane's turn controls are joined to the sheet.
+Catch Breath control invokes the shared `ability.use` operation, including its combat allowance
+and FreePlay behavior. The `/hero recover` control uses that same operation during combat.
+Turn state reads the shared current encounter, including active/spent entries and opening/closeout.
 
 ## First-pass acceptance
 

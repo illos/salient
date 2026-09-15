@@ -120,7 +120,7 @@ const submit: OperationDefinition = {
           revisionAfter: draft._id,
           revision: draft.revision,
           firstAdmission: result.firstAdmission,
-          unreconciled: result.unreconciled,
+          reconciliation: result.reconciliation,
         },
       };
     }
@@ -183,7 +183,7 @@ const approve: OperationDefinition = {
   verb: 'approve',
   title: 'Approve a submitted build',
   description:
-    'Approve the exact submitted revision. First admission attaches the character and initializes its live values from the build; a later approval replaces the effective build and leaves live values untouched.',
+    'Approve the exact submitted revision. First admission attaches the character and initializes its live values from the build; a later approval replaces the effective build, retains compatible current amounts and caps them at new maxima.',
   args: { character: characterArg },
   argDescriptions: { character: characterArgDescription },
   roles: ['director'],
@@ -213,7 +213,7 @@ const approve: OperationDefinition = {
     });
     return {
       kind: activationKind(result.firstAdmission),
-      description: `${character.authored.name} ${result.firstAdmission ? 'admitted' : 'build updated'}: the Director approved revision ${review.revision}.${result.unreconciled.length ? ` ${result.unreconciled.length} maximum change(s) await the user's decision (Q-CHAR-2).` : ''}`,
+      description: `${character.authored.name} ${result.firstAdmission ? 'admitted' : 'build updated'}: the Director approved revision ${review.revision}.${result.reconciliation.changes.some(change => change.currentAfter !== change.currentBefore) ? ' Current values capped to the new maxima.' : ''}`,
       data: {
         characterId: character._id,
         reviewId: review._id,
@@ -223,7 +223,7 @@ const approve: OperationDefinition = {
         revisionAfter: revision._id,
         revision: review.revision,
         firstAdmission: result.firstAdmission,
-        unreconciled: result.unreconciled,
+        reconciliation: result.reconciliation,
       },
     };
   },

@@ -149,10 +149,12 @@ the real path. Dependencies R01, R02, R03, S01, A01, A03 and A04 are real; no fi
   option A as recommended). `/hero recover` reads the maximum and recovery value from the effective
   baseline, `/test roll` reads the characteristic from it (`value=` is refused when it disagrees, and
   still accepted as a supplied fact only for a hero without a baseline, which admission never
-  produces). A later activation compares `staminaMaximum`, `recoveriesMaximum` and the heroic
-  resource name and records `UnreconciledMaximumChange` entries (Q-CHAR-2) on the character; the
-  sheet shows them. No v0.01 supported path changes a maximum, so this branch is exercised only for
-  the "same build, new revision" case in tests.
+  produces). Following the Q-CHAR-2 answer, later activation now preserves compatible current
+  amounts and caps them at the new maxima using the same shared preview shown on proposed/draft
+  sheets. Resource-type replacement is refused until explicitly reconciled. Current marker UI is
+  retired; the optional legacy stored field is cleared on activation. Synthetic future baselines
+  exercise increases, decreases, negative Stamina, preview/event parity and atomic refusal without
+  widening the supported playable options.
 - **Sheet audiences.** `characters.sheet` returns three shapes: owner (with notes), Director of the
   attached campaign or of a campaign with a pending submission (no notes; the `proposed` view shows
   the submitted revision), and peer members of the attached campaign (name, Stamina and Recoveries

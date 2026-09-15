@@ -10,7 +10,7 @@ import { mutation, query } from './_generated/server';
 import { requireUser } from './lib/access';
 import {
   invoke as invokeEnvelope,
-  operations,
+  registeredOperations,
   tableContext,
   typeName,
   unavailableReason,
@@ -78,7 +78,7 @@ export const list = query({
   handler: async (ctx, args) => {
     const user = await requireUser(ctx);
     const context = await tableContext(ctx, user, args.campaignId);
-    return operations.map(operation => {
+    return registeredOperations().map(operation => {
       const reason = unavailableReason(operation, context);
       return {
         id: operation.id,

@@ -109,12 +109,13 @@ No user approval is implied by this classification.
 
 ### Q-A-200: How should a hero's Stamina maximum, Recoveries and characteristics reach the table before A02?
 
-- **Status:** engineering follow-up, 2026-09-14; no user answer recorded
+- **Status:** engineering follow-up completed, 2026-09-15; no user ruling needed. See
+  [A02 verification](build/audits/2026-09-15-A02-independent-review.md).
 - **Raised by:** A03, 2026-09-14
 - **Where:** `docs/table-spec.md#v001-catch-breath`, `docs/table-spec.md#persistent-values-and-manual-adjustment-entries`,
   `docs/table-command-spec.md#direct-test-rolls`, `shared/contracts/liveState.ts` (`HeroAdjustableField`),
   `docs/live-state-initialization.md` section 2.1.
-- **Conflict or gap:** R03 takes a hero's initial Stamina, Recoveries, heroic resource and the maxima from
+- **Historical conflict or gap (before A02):** R03 takes a hero's initial Stamina, Recoveries, heroic resource and the maxima from
   the evaluated baseline, and lists only current values as Director-adjustable. No evaluator exists in
   this checkout (`derivedBaseline` is null for every character), so `/hero recover` has no recovery
   value and `/test roll` has no characteristic score to add. A03 records `null` for every
@@ -127,7 +128,7 @@ No user approval is implied by this classification.
 - **Recommendation:** A. It keeps the FreePlay operations testable end to end without inventing values,
   and the two provisional verbs refuse to run once a baseline exists.
 - **Blocked until answered:** nothing; A applied provisionally and labeled in the slice work log.
-- **Audit disposition:** this is a live temporary A03/A02 integration dependency, not an
+- **Original audit disposition:** this was a temporary A03/A02 integration dependency, not an
   already-answered duplicate. Evaluated values and first-admission initialization are already
   required by R03/A02. Retain the provisional bridge as explicit engineering context until A02
   supplies real baselines, then retire it. This reclassification does not authorize permanent

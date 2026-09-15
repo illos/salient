@@ -25,6 +25,7 @@ import { Input } from '../components/ui/input';
 import { ErrorNotice, Loading, Notice, useCommand } from '../ui';
 import {
   ActiveConditionBadges,
+  CatchBreathButton,
   AdjustControl,
   ConditionToggles,
   SlashButton,
@@ -50,6 +51,36 @@ const GROUPS: [SheetAbility['group'], string][] = [
 /** A value the baseline has not derived yet is shown as pending, never as a zero. */
 function pending(value: number | string | undefined | null): string {
   return value === undefined || value === null ? 'pending' : String(value);
+}
+
+/** The shared encounter read supplies turn status; no separate sheet clock. */
+function TurnState({
+  campaignId,
+  characterId,
+}: {
+  campaignId: Id<'campaigns'> | null;
+  characterId: string;
+}) {
+  const encounter = useQuery(api.encounters.current, campaignId ? { campaignId } : 'skip');
+  let label = 'Free play';
+  if (campaignId && encounter === undefined) label = 'Loading…';
+  else if (encounter?.status === 'committed') {
+    if (encounter.phase !== 'turns')
+      label = encounter.phase === 'closeout' ? 'Closing combat' : 'Opening combat';
+    else {
+      const entries = encounter.groups
+        .flatMap(group => group.entries)
+        .filter(entry => entry.actor.kind === 'character' && entry.actor.id === characterId);
+      label = entries.some(entry => entry.active)
+        ? 'Active turn'
+        : entries.length && entries.every(entry => entry.spent)
+          ? 'Acted this round'
+          : entries.length
+            ? 'Awaiting turn'
+            : 'Not in combat';
+    }
+  }
+  return <Stat label="Turn state" value={label} />;
 }
 
 function PeerCard({ sheet }: { sheet: PeerSheet }) {
@@ -357,16 +388,21 @@ export function HeroSheetView({ sheet, compact }: { sheet: HeroSheet; compact?: 
           {sheet.campaign ? sheet.campaign.name : 'not attached to a campaign'} · owned by{' '}
           {sheet.ownerName}
         </p>
-        {sheet.unreconciled.length > 0 && (
-          <Notice role="status">
-            An approved build changed a maximum for a played hero; no live value was changed (open
-            question Q-CHAR-2):{' '}
-            {sheet.unreconciled
-              .map(u => `${u.field} ${u.before} → ${u.after} (current ${u.currentValue})`)
-              .join('; ')}
-            .
-          </Notice>
-        )}
+        {sheet.activationPreview &&
+          (sheet.activationPreview.changes.length > 0 ||
+            sheet.activationPreview.incompatibleResource) && (
+            <Notice role="status">
+              On activation:{' '}
+              {sheet.activationPreview.changes
+                .map(
+                  change =>
+                    `${change.field} ${change.currentBefore}/${change.maximumBefore ?? '—'} → ${change.currentAfter}/${change.maximumAfter}`,
+                )
+                .join('; ')}
+              {sheet.activationPreview.incompatibleResource &&
+                ` Activation blocked: changing ${sheet.activationPreview.incompatibleResource.before} to ${sheet.activationPreview.incompatibleResource.after} requires explicit resource reconciliation.`}
+            </Notice>
+          )}
         <div className="flex flex-wrap gap-x-4 gap-y-1">
           {CHARACTERISTICS.map(([key, name]) => (
             <Button
@@ -517,7 +553,7 @@ export function HeroSheetView({ sheet, compact }: { sheet: HeroSheet; compact?: 
               }
             />
             <Stat label="XP" value={live.xp} />
-            <Stat label="Turn state" value="pending A04" />
+            <TurnState campaignId={campaignId} characterId={sheet.id} />
           </div>
         ) : (
           <p className="text-sm text-muted-foreground">
@@ -525,17 +561,9 @@ export function HeroSheetView({ sheet, compact }: { sheet: HeroSheet; compact?: 
           </p>
         )}
         {live && <ActiveConditionBadges conditions={live.conditions} />}
-        {live && campaignId && (
+        {live && campaignId && (!compact || sheet.viewer.controls) && (
           <div className="flex flex-wrap items-center gap-2">
-            <Button
-              type="button"
-              size="sm"
-              variant="outline"
-              disabled
-              title="Catch Breath maneuver: pending A05"
-            >
-              Catch Breath (pending A05)
-            </Button>
+            <CatchBreathButton campaignId={campaignId} characterId={sheet.id} disabled={!canAct} />
             <SlashButton
               campaignId={campaignId}
               text={`${actor} /hero recover`}

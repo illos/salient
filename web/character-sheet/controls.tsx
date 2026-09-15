@@ -220,3 +220,43 @@ export function SourceText({ text, label }: { text: string; label?: string }) {
     </pre>
   );
 }
+
+/** A05 shared Recovery operation owns both free-play recovery and combat maneuver allowance. */
+export function CatchBreathButton({
+  campaignId,
+  characterId,
+  disabled,
+}: {
+  campaignId: Id<'campaigns'>;
+  characterId: string;
+  disabled: boolean;
+}) {
+  const invoke = useMutation(api.commands.invoke);
+  const command = useCommand();
+  return (
+    <span className="inline-flex flex-col">
+      <Button
+        type="button"
+        size="sm"
+        variant="outline"
+        disabled={disabled || command.pending}
+        onClick={() =>
+          void command.run(
+            commandId =>
+              invoke({
+                campaignId,
+                commandId,
+                operation: 'ability.use',
+                actor: { refKind: 'character', id: characterId },
+                arguments: { ability: 'mcdm.heroes.v1/feature.common.maneuvers/catch-breath' },
+              }),
+            JSON.stringify(['catch-breath', campaignId, characterId]),
+          )
+        }
+      >
+        Catch Breath
+      </Button>
+      <ErrorNotice error={command.error} />
+    </span>
+  );
+}

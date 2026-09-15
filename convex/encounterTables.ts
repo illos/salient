@@ -47,7 +47,13 @@ export const encounterTables = {
     // written before A04 remain valid; absent reads as the pre-A04 committed state with no phase.
     /** `setup` while a draft; after OK: `roll` (shared d10 due), `choice` (starting side due), `turns`. */
     phase: v.optional(
-      v.union(v.literal('setup'), v.literal('roll'), v.literal('choice'), v.literal('turns')),
+      v.union(
+        v.literal('setup'),
+        v.literal('roll'),
+        v.literal('choice'),
+        v.literal('turns'),
+        v.literal('closeout'),
+      ),
     ),
     /**
      * Draft setup choices keyed by `character:<id>` / `foe:<id>`; absent creatures follow the live
@@ -68,7 +74,7 @@ export const encounterTables = {
     activeSide: v.optional(v.union(v.literal('heroes'), v.literal('director'), v.null())),
     activeGroupId: v.optional(v.union(v.id('initiativeGroups'), v.null())),
     activeTurnId: v.optional(v.union(v.id('turns'), v.null())),
-    /** Hero participants committed at OK; the Malice hero count (Q-R-50 provisional default A). */
+    /** Starting hero participant snapshot; Q-R-50 round gains count distinct current turn-entry actors. */
     heroParticipantIds: v.optional(v.array(v.id('characters'))),
     /** How the starting side was or will be determined (rule/combat/combat-round.md). */
     opening: v.optional(
@@ -90,6 +96,14 @@ export const encounterTables = {
           }),
         ),
         chosenBy: v.union(v.id('users'), v.null()),
+      }),
+    ),
+    /** Director-confirmed closeout award; absence means no award has been confirmed. */
+    victoryAward: v.optional(
+      v.object({
+        amount: v.number(),
+        recipientIds: v.array(v.id('characters')),
+        eventId: v.id('events'),
       }),
     ),
     /** Monotonic enqueue counter for clock registrations. */

@@ -100,7 +100,7 @@ step, and is not used as a step name.
 | `ancestry.devil.base-statistics` | automatic | none | `en/books/heroes/clean/Draw Steel Heroes.md`, *Starting Size and Speed*: "Unless otherwise noted, a character of any of these ancestries is size 1M and has speed 5 and stability 0." | — | Grants size 1M, speed 5, stability 0 (R02 derives; Beast Legs and kits modify). This sentence is absent from `en/unified/md/chapter/ancestries.md`. |
 | `ancestry.devil.signature-trait` | automatic | none | `chapter/ancestries.md`, *Ancestry Traits*: "Each ancestry has one or more signature traits, which your hero gets for free if they take that ancestry." | — | Grants **Silver Tongue** (`feature/trait/devil/silver-tongue.md`). |
 | `ancestry.devil.silver-tongue-skill` | choice | single | `feature/trait/devil/silver-tongue.md`: "You have one skill of your choice from the interpersonal skill group" | Interpersonal skills (`skill/group/interpersonal.md`): Brag, Empathize, Flirt, Gamble, Handle Animals, Interrogate, Intimidate, Lead, Lie, Music, Perform, **Persuade**, Read Person | Depends on the signature trait. Also grants an edge on negotiation discovery tests (manual in v0.01). Duplicate-skill handling: Q-CHAR-11. |
-| `ancestry.devil.purchased-traits` | choice | points, budget **3** | `feature/trait/devil/devil-traits.md`: "You have 3 ancestry points to spend on the following traits." Budget rule, `chapter/ancestries.md`, *Ancestry Traits*: "But they couldn't select both Impressive Horns and Wings, since their combined cost of 4 exceeds the ancestry points budget for the devil." | Barbed Tail (1), **Beast Legs (1)**, Glowing Eyes (1), Hellsight (1), **Impressive Horns (2)**, Prehensile Tail (2), Wings (2). Costs from each entry's `cost:` field (`feature/trait/devil/<name>.md`). Supported v0.01 *set*: {Beast Legs, Impressive Horns} = 3 points. | Unspent points: Q-CHAR-10 (open; not decided here). Overspending is invalid per the quoted example. |
+| `ancestry.devil.purchased-traits` | choice | points, budget **3** | `feature/trait/devil/devil-traits.md`: "You have 3 ancestry points to spend on the following traits." Budget rule, `chapter/ancestries.md`, *Ancestry Traits*: "But they couldn't select both Impressive Horns and Wings, since their combined cost of 4 exceeds the ancestry points budget for the devil." | Barbed Tail (1), **Beast Legs (1)**, Glowing Eyes (1), Hellsight (1), **Impressive Horns (2)**, Prehensile Tail (2), Wings (2). Costs from each entry's `cost:` field (`feature/trait/devil/<name>.md`). Supported v0.01 traits: Beast Legs and Impressive Horns; either, both or neither may be selected within the budget. | Q-CHAR-10 confirmed: unspent points warn without blocking completion or requiring acknowledgement. Overspending is invalid per the quoted example. |
 
 The seven purchased traits match the chapter's count ("3 ancestry points to spend on seven different
 traits"). Trait effects (speed 6, saves at 5+, and so on) are R02/R05 concerns and remain manual where
@@ -115,9 +115,9 @@ text (see *Source path corrections* below).
 
 | Decision | Kind | Shape | Source and quote | Options (supported in v0.01 in bold) | Depends on / grants |
 | --- | --- | --- | --- | --- | --- |
-| `culture.name` | authored | text | `chapter/making-a-hero.md`: "Choose or create your hero's culture." | free text | Non-mechanical. Assembled cultures: Q-CHAR-6. |
+| `culture.name` | authored | text | `chapter/making-a-hero.md`: "Choose or create your hero's culture." | free text | Non-mechanical name for assembled core culture aspects; no custom selectable language is introduced. |
 | `culture.caelian` | automatic | none | clean Heroes, *Caelian Empire*: "All player characters know Caelian!" | — | Grants language **Caelian**. |
-| `culture.language` | choice | single | clean Heroes, *Culture Benefits*: "You know the language of your culture, in addition to knowing Caelian." | Extant languages: *Languages by Ancestry Table* (25: **Anjali**, Axiomatic, Caelian, Filliaric, The First Language, Hyrallic, Illyvric, Kalliak, Kethaic, Khelt, Khoursirian, High Kuric, Low Kuric, Mindspeech, Proto-Ctholl, Szetch, Tholl, Urollialic, Variac, Vastariax, Vhoric, Voll, Yllyric, Za'hariax, Zaliac) and *Vaslorian Human Languages Table* (9: Uvalic, Higaran, Oaxuatl, Khemharic, Khoursirian, Phaedran, Riojan, Vaniric, Vaslorian). Dead languages (9) are excluded from v0.01 creation by confirmed Q-R-102; the old unresolved JSON label needs updating. | Pool boundary: Q-R-102. Duplicating Caelian: Q-R-100. Campaign-specific languages: Q-CHAR-6. The *Typical Ancestry Cultures Table* suggests Anjali for a devil; it is a suggestion, not a restriction. |
+| `culture.language` | choice | single | clean Heroes, *Culture Benefits*: "You know the language of your culture, in addition to knowing Caelian." | Extant languages: *Languages by Ancestry Table* (25: **Anjali**, Axiomatic, Caelian, Filliaric, The First Language, Hyrallic, Illyvric, Kalliak, Kethaic, Khelt, Khoursirian, High Kuric, Low Kuric, Mindspeech, Proto-Ctholl, Szetch, Tholl, Urollialic, Variac, Vastariax, Vhoric, Voll, Yllyric, Za'hariax, Zaliac) and *Vaslorian Human Languages Table* (9: Uvalic, Higaran, Oaxuatl, Khemharic, Khoursirian, Phaedran, Riojan, Vaniric, Vaslorian). Dead languages (9) are excluded from v0.01 creation by confirmed Q-R-102; the JSON and shared pool enforce that boundary. | Pool boundary: Q-R-102. Duplicating Caelian: Q-R-100. Q-CHAR-6: custom selectable languages are deferred homebrew. The *Typical Ancestry Cultures Table* suggests Anjali for a devil; it is a suggestion, not a restriction. |
 | `culture.environment` | choice | single | clean Heroes, *Environment*: "When you build a culture, select its environment aspect from the following options: nomadic, rural, secluded, urban, or wilderness." | Nomadic, Rural, Secluded, Urban, **Wilderness** (`culture/<name>.md`) | — |
 | `culture.environment.skill` | choice | single | clean Heroes, *Culture Benefits*: "You can select one skill from each aspect's list of options." Per aspect: Nomadic "One skill from the exploration or interpersonal skill groups."; Rural "One skill from the crafting or lore skill groups."; Secluded "One skill from the interpersonal or lore skill groups."; Urban "One skill from the interpersonal or intrigue skill groups."; Wilderness "One skill from the crafting or exploration skill groups." | Pool depends on the chosen environment. Wilderness: crafting (10) + exploration (10). Supported: **Swim** | Depends on `culture.environment`. Q-CHAR-11. |
 | `culture.organization` | choice | single | clean Heroes, *Organization*: "When you build a culture, select its organization aspect from the following options: bureaucratic or communal." | Bureaucratic, **Communal** | — |
@@ -149,7 +149,7 @@ selection paths must use the same allowed pool; later language acquisition remai
 | `career.choice` | choice | single | `chapter/making-a-hero.md`: "Choose your hero's career, which describes what you did for a living before you became a hero." | Agent, Aristocrat, Artisan, Beggar, Criminal, Disciple, Explorer, Farmer, Gladiator, Laborer, Mage's Apprentice, Performer, Politician, Sage, Sailor, **Soldier**, Warden, Watch Officer (`career/<name>.md`, 18 per `_index/career.md`) | Each career defines its own skills, languages, perk type, Renown, wealth, project points and six inciting incidents. Sub-decisions are defined below for Soldier only; V08 expands the others from the same entries. |
 | `career.soldier.skill.exploration` | choice | single | `career/soldier.md`: "One skill from the exploration skill group and one skill from the intrigue group" | exploration (10): Climb, Drive, **Endurance**, Gymnastics, Heal, Jump, Lift, Navigate, Ride, Swim | Available when career = Soldier. Q-CHAR-11. |
 | `career.soldier.skill.intrigue` | choice | single | same sentence | intrigue (12): **Alertness**, Conceal Object, Disguise, Eavesdrop, Escape Artist, Hide, Pick Lock, Pick Pocket, Sabotage, Search, Sneak, Track | Q-CHAR-11. |
-| `career.soldier.languages` | choice | multi, count **2**, deferrable | `career/soldier.md`: "Languages: Two languages". Pool: `chapter/background.md`, *Languages*: "Some careers allow you to learn extra languages, chosen from those available in Languages in Orden above." Deferral: `chapter/making-a-hero.md`, *I Speak Their Language*: "You can choose to leave some of the languages you know open until you discover what might be a good choice for the campaign you're playing in." | Same extant language pool as `culture.language`. Original fixture: **Caelian, Vaslorian**; the Caelian slot is superseded by Q-R-100 and needs correction | Q-R-100 (duplicate of the automatic Caelian), Q-R-102 (pool), Q-CHAR-5 (filling a deferred slot later). |
+| `career.soldier.languages` | choice | multi, count **2**, deferrable | `career/soldier.md`: "Languages: Two languages". Pool: `chapter/background.md`, *Languages*: "Some careers allow you to learn extra languages, chosen from those available in Languages in Orden above." Deferral: `chapter/making-a-hero.md`, *I Speak Their Language*: "You can choose to leave some of the languages you know open until you discover what might be a good choice for the campaign you're playing in." | Same extant language pool as `culture.language`. Current fixture: **one deferred slot, Vaslorian**; Caelian is automatic | Q-R-100 (duplicate of the automatic Caelian), Q-R-102 (pool), Q-CHAR-5 (filling a deferred slot later). |
 | `career.soldier.renown` | automatic | none | `career/soldier.md`: "Renown: +1". Base: `rule/resource/renown.md`: "At the start of character creation, your Renown is 0." | — | Grants Renown +1 (so Renown 1). |
 | `career.soldier.perk` | choice | single | `career/soldier.md`: "Perk: One exploration perk". Type rule: `en/books/heroes/md/chapter/perks.md`: "Whenever a feature allows you to gain a perk, that feature tells you which type of perk to choose." | Exploration perks (clean Heroes, *Exploration Perks* headings; entries `perk/<name>.md`): Brawny, Camouflage Hunter, Danger Sense, Friend Catapult, I've Got You!, Monster Whisperer, Put Your Back Into It!, Team Leader, **Teamwork**, Wood Wise | Perk types are not in the unified perk entries (see corrections). |
 | `career.soldier.inciting-incident` | choice | single (d6 rollable) | `career/soldier.md` table *Inciting Incident*. Rule: `chapter/background.md`: "You can roll for or choose an inciting incident from the table that accompanies each career." | Dishonorable Discharge, Out of Retirement, Peace Through Healing, **Sole Survivor**, Stolen Valor, Vow of Sacrifice | A unique incident authored with the Director is source-permitted ("come up with a unique inciting incident of your own") and deliberately not supported in v0.01. |
@@ -169,7 +169,7 @@ source-model context for later V1 support; neither is a playable prototype choic
 | `class.level` | automatic | none | `chapter/making-a-hero.md`: "Each option you can choose for your hero at 1st level includes a parenthetical selection labeled "Quick Build."" | — | Level 1 (v0.01 creates at level one only). |
 | `class.fury.fixed-characteristics` | automatic | none | `class/fury.md`, *Basics*: "You start with a Might of 2 and an Agility of 2" | — | Might 2, Agility 2. |
 | `class.fury.characteristic-array` | choice | single | `class/fury.md`: "you can choose one of the following arrays for your other characteristic scores:" | 2, −1, −1 / 1, 1, −1 / **1, 0, 0** | — |
-| `class.fury.array-assignment` | choice | assignment to Reason, Intuition, Presence | same sentence ("for your other characteristic scores") | Supported: **Intuition 1, Reason 0, Presence 0** (the fixture) | Depends on the array. **Q-R-101 confirmed:** assign in any order; new-build slots start blank and fixed class values are locked. |
+| `class.fury.array-assignment` | choice | assignment to Reason, Intuition, Presence | same sentence ("for your other characteristic scores") | Supported: every ordering of all three source arrays; fixture **Intuition 1, Reason 0, Presence 0** | Depends on the array. **Q-R-101 confirmed:** assign in any order; new-build slots start blank and fixed class values are locked. |
 | `class.fury.baseline` | automatic | none | `class/fury.md`: "Starting Stamina at 1st Level: 21"; "Recoveries: 10"; potencies "Weak Potency: Might − 2; Average Potency: Might − 1; Strong Potency: Might" | — | Values recorded as references; R02 derives them. |
 | `class.fury.skill.nature` | automatic | none | `class/fury.md`: "You gain the Nature skill" | — | Grants **Nature**. Collision with a culture/career Nature: Q-CHAR-11. |
 | `class.fury.skills` | choice | multi, count **2** | `class/fury.md`: "Then choose any two skills from the exploration or intrigue skill groups." | exploration (10) + intrigue (12). Supported: **Jump, Climb** | Interpretation: "any two" from the union of both groups (both may come from one group); the source uses "One skill from ... and one skill from ..." when it means one per group (Soldier). Q-CHAR-11. |
@@ -259,7 +259,7 @@ Non-mechanical. Presented as an optional free-text field so the step exists; no 
 ## Ambiguities and questions
 
 Every place the source is silent or ambiguous for this hero, with its id in `docs/rules-questions-for-user.md`.
-None is resolved by assumption; provisional defaults are labeled there.
+Resolved rows follow the owning specification; no new default or unanswered ruling is inferred here.
 
 | Id | Decision(s) | Summary |
 | --- | --- | --- |
@@ -268,23 +268,23 @@ None is resolved by assumption; provisional defaults are labeled there.
 | Q-R-102 | `culture.language`, `career.soldier.languages` | Resolved 2026-09-14: spoken languages only for v0.01, including printed regional languages; dead languages excluded. |
 | Q-R-103 | `kit.choice` | Resolved 2026-09-14: Berserker/Reaver ordinary kits; Stormwight its four kits. Source-researched; only Berserker/Mountain is in v0.01. Raised by R01. |
 | Q-CHAR-1 | `step.complication` | Answered 2026-09-14: not presented in v0.01. |
-| Q-CHAR-5 | `career.soldier.languages`, `kit.choice` | Filling a deferred language slot / changing kit later without full-edit review (existing, open). |
-| Q-CHAR-6 | `culture.name`, `culture.language` | Campaign-specific languages and assembled cultures (existing, open). |
-| Q-CHAR-10 | `ancestry.devil.purchased-traits` | Whether a complete hero may leave ancestry points unspent (existing, open). The supported v0.01 set spends all 3. |
-| Q-CHAR-11 | every skill decision | Duplicate-skill replacement rules (existing, open). The three worked sets below avoid duplicates so they do not depend on it. |
+| Q-CHAR-5 | `career.soldier.languages`, `kit.choice` | Resolved: deferred-language and ordinary kit edits use existing edit/review; source-authorized respite swaps have the separately confirmed handling. |
+| Q-CHAR-6 | `culture.language` | Resolved: custom languages are deferred homebrew; authored assembly of core culture aspects remains allowed. |
+| Q-CHAR-10 | `ancestry.devil.purchased-traits` | Resolved: unspent points warn without blocking completion; no separate acknowledgement. |
+| Q-CHAR-11 | every skill decision | Adopted for now: fixed grants first; discretionary duplicates must choose distinctly in their printed pools and create no unrestricted replacement. No supported fixed/fixed collision exists. |
 
 ## Worked selection sets
 
-**Historical fixture status:** the examples and their JSON/test mirrors below predate the Q-R-100
-answer. Set A's paid Caelian selection and complete-with-warning result are no longer valid as
-current acceptance evidence. A02 must replace that selection through the normal choice flow (or an
-explicit source-supported deferral), preserving the automatic Caelian grant and the full extra-language
-entitlement. No replacement language has been chosen by this ruling.
+**Fixture repair, 2026-09-15:** Set A and its JSON/test mirrors now explicitly defer the former
+paid Caelian slot (`null`), retaining Vaslorian and the automatic Caelian grant. This uses the
+source's deferred-language permission without inventing a replacement. It is complete with no
+language warning. The evaluator offers all spoken languages and all characteristic permutations
+under the confirmed decisions; the broader second path still exceeds supported v0.01 options.
 
 Hand-validated against the tables above; the same three sets are in the JSON and checked by
 `tests/fury-decisions.test.ts`.
 
-### Set A: hero-fixture path (`docs/hero-fixture.md`, Grug) — complete, one warning
+### Set A: hero-fixture path (`docs/hero-fixture.md`, Grug) — complete, one deferred language
 
 | Decision | Selection | Check |
 | --- | --- | --- |
@@ -298,7 +298,7 @@ Hand-validated against the tables above; the same three sets are in the JSON and
 | `career.choice` | Soldier | supported |
 | `career.soldier.skill.exploration` | Endurance | exploration |
 | `career.soldier.skill.intrigue` | Alertness | intrigue |
-| `career.soldier.languages` | Caelian, Vaslorian | count 2, both in pool; **warning**: Caelian duplicates the automatic grant (Q-R-100, provisional: accepted) |
+| `career.soldier.languages` | null, Vaslorian | two entitlement slots; one explicitly deferred, one chosen; Caelian granted automatically |
 | `career.soldier.perk` | Teamwork | exploration perk |
 | `career.soldier.inciting-incident` | Sole Survivor | in Soldier table |
 | `class.choice` | Fury | supported |
@@ -313,7 +313,7 @@ Hand-validated against the tables above; the same three sets are in the JSON and
 Automatic grants in this set: Silver Tongue; Caelian; culture edge; Renown +1; Might 2, Agility 2; Nature;
 Ferocity, Growing Ferocity, Mighty Leaps; Pain for Pain and the Mountain bonuses; both free strikes. Skill
 list has no duplicates (Persuade, Swim, Blacksmithing, Intimidate, Endurance, Alertness, Nature, Jump, Climb,
-Lift), so Q-CHAR-11 is not triggered. Every required choice is present: **complete**, with one warning. The
+Lift), so Q-CHAR-11 is not triggered. Every required choice is present: **complete**, with one deferred language slot and no warning. The
 complication step is not presented, so its absence is not a diagnostic.
 
 ### Set B: a second legal path — complete

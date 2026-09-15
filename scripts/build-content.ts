@@ -80,7 +80,7 @@ export const SELECTIONS: ManifestSelection[] = [
   {
     id: 'kits',
     description:
-      'Every kit entry, with its printed kit_type. The source names furies among the classes that use kits and states no kit_type restriction for them in chapter/kits.md or class/fury.md; eligibility by aspect is R01 question Q-R-103, not a pipeline decision.',
+      'Every kit entry, with its printed kit_type. The source names furies among the classes that use kits and states no kit_type restriction for them in chapter/kits.md or class/fury.md; Q-R-103 confirms Berserker and Reaver use ordinary Chapter 6 kits while Stormwight uses its four aspect kits; the pipeline preserves source fields rather than inferring eligibility.',
     paths: ['kit'],
     basis:
       'chapter/kits.md: "Censors, furies, shadows, tacticians, and troubadours can tap into these and many more archetypal concepts using kits."',

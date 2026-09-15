@@ -223,9 +223,9 @@ test('R02 check 2: the complete example reproduces the numbers the source files 
   ]);
   assert.deepEqual(
     b.languages.map(l => l.name),
-    ['Caelian', 'Anjali', 'Caelian', 'Vaslorian'],
+    ['Caelian', 'Anjali', 'Vaslorian'],
   );
-  assert.equal(b.languages.filter(l => l.duplicateOf).length, 1);
+  assert.equal(b.languages.filter(l => l.duplicateOf).length, 0);
   assert.equal(
     b.traits
       .filter(t => t.kind === 'ancestry-purchased-trait')
@@ -249,7 +249,7 @@ test('R02 check 2: the complete example reproduces the numbers the source files 
   const warnings = Object.values(file.examples.complete.expected.diagnostics).flat();
   assert.deepEqual(
     warnings.map(w => [w.decisionId, w.severity]),
-    [['career.soldier.languages', 'warning']],
+    [],
   );
 });
 

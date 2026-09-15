@@ -23,6 +23,7 @@ export const drafts = query({
         targets: v.array(actorRef),
         modifiers: v.record(v.string(), v.object({ edges: v.number(), banes: v.number() })),
         characteristic: v.union(v.string(), v.null()),
+        damageCharacteristic: v.union(v.string(), v.null()),
       }),
     ),
     others: v.array(
@@ -58,6 +59,7 @@ export const drafts = query({
             targets: mine.targets,
             modifiers: mine.modifiers,
             characteristic: mine.characteristic,
+            damageCharacteristic: mine.damageCharacteristic ?? null,
           }
         : null,
       others,

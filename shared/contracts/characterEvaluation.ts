@@ -49,7 +49,7 @@ export type DiagnosticCode =
   | 'required-choice-missing'
   /** A `points` decision's selected costs exceed its budget. */
   | 'budget-exceeded'
-  /** A `points` decision leaves points unspent (Q-CHAR-10; warning until answered). */
+  /** A `points` decision leaves points unspent (confirmed nonblocking warning). */
   | 'budget-unspent'
   /** A `multi` decision has the wrong number of slots. */
   | 'count-mismatch'
@@ -57,9 +57,9 @@ export type DiagnosticCode =
   | 'value-not-in-pool'
   /** An `assignment` does not use exactly the chosen array's values, or targets the wrong names. */
   | 'assignment-mismatch'
-  /** The same skill arrives from two sources (Q-CHAR-11; warning until answered). */
+  /** A discretionary skill duplicates another grant, or an unsupported fixed replacement is needed. */
   | 'duplicate-skill'
-  /** A chosen language duplicates a granted one (Q-R-100; warning under its provisional default). */
+  /** A chosen language duplicates an already known language. */
   | 'duplicate-language'
   /** A legal source option the v0.01 application does not support (not offered in v0.01). */
   | 'unsupported-option'
@@ -81,8 +81,7 @@ export interface SourceSentence {
 }
 
 /** Open question ids that label provisional behavior in this contract (docs/rules-questions-for-user.md). */
-export type UncertaintyId =
-  'Q-R-100' | 'Q-R-101' | 'Q-R-102' | 'Q-R-103' | 'Q-CHAR-10' | 'Q-CHAR-11' | 'Q-CHAR-12';
+export type UncertaintyId = never;
 
 export interface Diagnostic {
   decisionId: DecisionId;
@@ -129,7 +128,7 @@ export interface GrantedSkill {
 export interface GrantedLanguage {
   name: string;
   provenance: Provenance;
-  /** Set when this pick duplicates a language already granted (Q-R-100 provisional: kept, warned). */
+  /** Set when this pick duplicates a language already granted. */
   duplicateOf?: DecisionId;
 }
 

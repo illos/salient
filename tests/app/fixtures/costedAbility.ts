@@ -12,7 +12,7 @@ import type { Id } from '../../../convex/_generated/dataModel';
 import { rollDice } from '../../../convex/lib/dice';
 import { appendEvent } from '../../../convex/lib/events';
 import { journalPatch } from '../../../convex/lib/journal';
-import { operations, type OperationDefinition } from '../../../convex/lib/registry';
+import { registeredOperations, type OperationDefinition } from '../../../convex/lib/registry';
 import { requireHeroLive } from '../../../convex/lib/characterBuild';
 
 export const FIXTURE_STRIKE_ID = 'fixture.strike';
@@ -105,6 +105,6 @@ const fixtureStrike: OperationDefinition = {
 
 /** Registers the fixture in the shared registry once, for the test process only. */
 export function registerFixtureStrike(): void {
-  if (!operations.some(operation => operation.id === FIXTURE_STRIKE_ID))
-    operations.push(fixtureStrike);
+  if (!registeredOperations().some(operation => operation.id === FIXTURE_STRIKE_ID))
+    registeredOperations().push(fixtureStrike);
 }

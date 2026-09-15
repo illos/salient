@@ -20,7 +20,7 @@ import { actorRef } from './initiativeTables';
 import { abilitiesFor, type AbilityDefinition } from './lib/resolve';
 import { allowanceFor, loadActorRecords } from './lib/abilityOperations';
 import { settingsOf } from './lib/audience';
-import { correctionWindow } from './lib/history';
+import { loadCorrectionWindows, resolveHistoricalId } from './lib/history';
 
 export { abilityOperations } from './lib/abilityOperations';
 
@@ -56,6 +56,7 @@ const abilityView = v.object({
   sourcePath: v.string(),
   targetShape,
   permittedCharacteristics: v.array(v.string()),
+  permittedDamageCharacteristics: v.array(v.string()),
   fixedCost: v.union(v.object({ resource: v.string(), amount: v.number() }), v.null()),
   unknownCost: v.union(v.string(), v.null()),
   freeStrikeValue: v.union(v.number(), v.null()),
@@ -84,7 +85,14 @@ function projectAbility(ability: AbilityDefinition, director: boolean, foe: bool
     sourcePath: ability.source.path,
     targetShape: ability.targetShape,
     permittedCharacteristics: ability.metadata?.permittedCharacteristics ?? [],
-    fixedCost: ability.metadata?.fixedCost ?? null,
+    permittedDamageCharacteristics: [
+      ...new Set(
+        (ability.metadata?.tiers ?? []).flatMap(t =>
+          t.damage?.kind === 'plusChoice' ? t.damage.choices : [],
+        ),
+      ),
+    ],
+    fixedCost: ability.fixedCost ?? null,
     unknownCost: ability.unknownCost ?? null,
     freeStrikeValue: ability.freeStrikeValue ?? null,
   };
@@ -98,6 +106,7 @@ const draftView = v.union(
     targets: v.array(actorRef),
     modifiers: v.record(v.string(), v.object({ edges: v.number(), banes: v.number() })),
     characteristic: v.union(v.string(), v.null()),
+    damageCharacteristic: v.union(v.string(), v.null()),
   }),
 );
 
@@ -137,7 +146,9 @@ export const sheet = query({
       (context.role === 'player' &&
         args.actor.kind === 'character' &&
         records.character?.ownerId === user._id);
-    const abilities = await abilitiesFor(ctx, args.actor, records);
+    const mayRead =
+      director || (args.actor.kind === 'character' && records.character?.ownerId === user._id);
+    const abilities = mayRead ? await abilitiesFor(ctx, args.actor, records) : [];
     const allowance = await allowanceFor(ctx, context, args.actor);
     const drafts = await ctx.db
       .query('targetingDrafts')
@@ -171,11 +182,15 @@ export const sheet = query({
               targets: mine.targets,
               modifiers: mine.modifiers,
               characteristic: mine.characteristic,
+              damageCharacteristic: mine.damageCharacteristic ?? null,
             }
           : null,
       otherDrafts: others,
       missingFacts:
-        args.actor.kind === 'character' && !records.facts
+        mayRead &&
+        args.actor.kind === 'character' &&
+        !records.facts &&
+        !records.character?.derivedBaseline
           ? `${args.actor.name} has no recorded characteristics or kit bonuses (no evaluated build); the Director records them with /hero facts.`
           : null,
     };
@@ -211,6 +226,7 @@ export const results = query({
       correctionEventIds: v.array(v.id('events')),
       /** Whether the viewer may submit a correction for this use now. */
       mayCorrect: v.boolean(),
+      mayResolve: v.boolean(),
     }),
   ),
   handler: async (ctx, args) => {
@@ -223,13 +239,21 @@ export const results = query({
       .withIndex('by_campaign', q => q.eq('campaignId', args.campaignId))
       .order('desc')
       .take(100);
+    const windowFor = await loadCorrectionWindows(ctx, context);
     const windows = new Map<string, boolean>();
-    for (const row of rows)
-      windows.set(row._id, (await correctionWindow(ctx, row.eventId, user)).allowed);
+    const manualWindows = new Map<string, boolean>();
+    const aliases = new Map<string, string>();
+    for (const row of rows) {
+      windows.set(row._id, (await windowFor(row.eventId)).allowed);
+      manualWindows.set(row._id, director && (await windowFor(row.eventId, 'manual')).allowed);
+      for (const actor of [row.actor, ...row.targets.map(t => t.target)])
+        if (!aliases.has(actor.id))
+          aliases.set(actor.id, await resolveHistoricalId(ctx, args.campaignId, actor.id));
+    }
     return rows.map(row => ({
       id: row._id,
       eventId: row.eventId,
-      actor: row.actor,
+      actor: { ...row.actor, id: aliases.get(row.actor.id) ?? row.actor.id },
       abilityId: row.abilityId,
       abilityName: row.abilityName,
       dice: row.dice,
@@ -237,26 +261,31 @@ export const results = query({
       selectedCharacteristic: row.selectedCharacteristic,
       targets: row.targets.map(t => ({
         ...t,
+        target: { ...t.target, id: aliases.get(t.target.id) ?? t.target.id },
         // Foe Stamina numbers follow the health-display setting for players and observers.
         applied:
-          t.applied && t.target.kind === 'foe' && !director && !numerical
-            ? hideFoeStamina(t.applied as Record<string, unknown>)
+          t.applied && t.target.kind === 'foe' && !director
+            ? hideFoeStamina(t.applied as Record<string, unknown>, numerical)
             : t.applied,
       })),
       manualDispositions: row.manualDispositions,
       correctionEventIds: row.correctionEventIds,
       mayCorrect: windows.get(row._id) ?? false,
+      mayResolve: manualWindows.get(row._id) ?? false,
     }));
   },
 });
 
 /** Keeps the damage arithmetic public and removes the foe's resulting Stamina values. */
-export function hideFoeStamina(application: Record<string, unknown>): Record<string, unknown> {
+export function hideFoeStamina(
+  application: Record<string, unknown>,
+  numerical = false,
+): Record<string, unknown> {
   const { staminaBefore, staminaAfter, temporaryStaminaBefore, temporaryStaminaAfter, ...rest } =
     application;
   void staminaBefore;
   void staminaAfter;
   void temporaryStaminaBefore;
   void temporaryStaminaAfter;
-  return rest;
+  return { ...rest, ...(numerical ? { staminaBefore, staminaAfter } : {}) };
 }

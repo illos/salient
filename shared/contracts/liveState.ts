@@ -157,16 +157,15 @@ export interface HeroLiveRecord {
   live: HeroLiveState;
 }
 
-/**
- * Raised, not resolved, when an activated build changes a maximum or resource of a hero that already
- * has a live record. The application applies no default: the current value is left as it was and the
- * change is surfaced for the user's decision (Q-CHAR-2, docs/character-wizard-spec.md#12-open-decisions).
- */
-export interface UnreconciledMaximumChange {
-  field: 'staminaMaximum' | 'recoveriesMaximum' | 'heroicResource';
-  before: number | string;
-  after: number | string;
-  /** The live value at the time of activation, unchanged. */
-  currentValue: number;
-  question: 'Q-CHAR-2';
+/** Shared preview and recorded result of the confirmed Q-CHAR-2 activation policy. */
+export interface BuildReconciliation {
+  changes: {
+    field: 'stamina' | 'recoveries';
+    maximumBefore: number | null;
+    maximumAfter: number;
+    currentBefore: number;
+    currentAfter: number;
+  }[];
+  /** No implicit conversion exists; activation is refused until explicitly reconciled. */
+  incompatibleResource: { before: string; after: string } | null;
 }

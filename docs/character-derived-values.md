@@ -366,8 +366,7 @@ list with `null` for a deferred slot; assignment map).
    yields an `invalid` diagnostic.
 3. A legal option that R01 marks not supported in v0.01 yields `unsupported-option` (`unsupported`).
 4. `status` = `invalid` if any invalid diagnostic; else `unsupported` if any unsupported; else
-   `incomplete` if any incomplete; else `complete`. Warnings (`duplicate-language`, `duplicate-skill`,
-   `budget-unspent`) never change the status. This precedence is a routine decision so one status is
+   `incomplete` if any incomplete; else `complete`. Warnings (`duplicate-language`, `budget-unspent`) never change the status. This precedence is a routine decision so one status is
    reported for a set with several faults (R01's Set C is both over budget and missing choices; it
    reports `invalid`).
 5. Grants and derived contributions come only from valid, available selections. Decisions of kind
@@ -389,12 +388,10 @@ Computed by hand from the sentences in section 1; the same three examples are in
 `shared/content/character-evaluation-examples.json` in the contract shape, and
 `tests/character-derived-values.test.ts` checks their quotes and numbers against the source files.
 
-**Q-R-100 update, 2026-09-14:** the worked examples below preserve their original fixture snapshot.
-Their duplicate paid-Caelian entry, warning and complete-status claim are superseded by the
-[confirmed wizard contract](character-wizard-spec.md#3-decision-system). Caelian is shown once as
-already known and does not satisfy or consume a culture/career selection. Update the fixture,
-JSON mirror and evaluator expectations together through A02; no automatic replacement selection
-is implied by the ruling. The arithmetic unrelated to language choices is unchanged.
+**Fixture repair, 2026-09-15:** the worked examples, JSON mirrors and evaluator now explicitly
+defer the former paid Caelian slot (`null`), retain Vaslorian, and list Caelian only as an automatic
+grant. This uses the source-supported deferral without choosing a replacement. Resolved Q-R-101
+and Q-CHAR-12 uncertainty metadata is removed; unrelated arithmetic is unchanged.
 
 ### 4.1 Complete: the hero fixture (`docs/hero-fixture.md`, Grug; R01 Set A)
 
@@ -418,15 +415,14 @@ Input: R01 `selectionSets["hero-fixture"]`.
 | Renown / Wealth | 1 / 1 | 0 + 1; base 1 |
 | Kit | Mountain: Stamina +9 (echelon 1), speed +0, stability +2, melee damage +0/+0/+4, ranged +0/+0/+0, distances +0, disengage +0 | section 1.14 |
 | Skills (10) | Persuade, Swim, Blacksmithing, Intimidate, Endurance, Alertness, Nature, Jump, Climb, Lift | one per granting decision; no duplicates, so Q-CHAR-11 is not triggered |
-| Languages (4 entries) | Caelian (automatic), Anjali, Caelian (Soldier slot, duplicate), Vaslorian | duplicate kept with a `duplicate-language` warning (Q-R-100 provisional) |
+| Languages (3 known, 1 deferred slot) | Caelian (automatic), Anjali, Vaslorian | Soldier slots are null/Vaslorian; the deferred slot is not a diagnostic |
 | Traits | Silver Tongue (signature); Beast Legs (1), Impressive Horns (2) = 3 of 3 points | budget exactly spent |
 | Features | Culture edge; Ferocity, Growing Ferocity, Mighty Leaps; Kit, Primordial Strength | class table row and aspect table |
 | Perks | Teamwork | "Perk: One exploration perk" |
 | Abilities (7) | Brutal Slam (signature); Out of the Way! (3 ferocity); Thunder Roar (5 ferocity); Lines of Force (aspect triggered); Pain for Pain (kit signature, bonuses included); Melee Weapon Free Strike; Ranged Weapon Free Strike | |
 
-Status: **complete**. Diagnostics: `career.soldier.languages` → one `warning` (`duplicate-language`,
-Q-R-100). Original snapshot uncertainties were Q-R-100, Q-R-101 and Q-CHAR-12. All three are now resolved;
-update their fixture/label artifacts through A02 as noted above.
+Status: **complete**. Diagnostics and uncertainty labels are empty for this fixture. The three
+previous labels Q-R-100, Q-R-101 and Q-CHAR-12 are resolved in their owning contracts.
 
 **Fixture check (acceptance check 2).** `docs/hero-fixture.md` states Stamina 30, Recoveries 10,
 recovery value floor(30/3) = 10, speed 6 (Beast Legs), stability 2 (Mountain), size 1M, Might 2,
@@ -444,12 +440,11 @@ Diagnostics:
 - `kit.choice` → `incomplete`, `required-choice-missing`: the Berserker aspect grants the Kit feature
   ("You can use and gain the benefits of a kit.", `feature/fury/level-1/kit.md`), so the decision is
   available and required (R01: "no for this class" in the optional column).
-- `career.soldier.languages` → the same Q-R-100 warning as 4.1.
 
 Status: **incomplete**. `baseline` is `null`. `partial` carries everything that does not depend on
 the kit: level, identity, characteristics, Recoveries 10, speed 6 (base 5 set by Beast Legs; the kit
 term is absent), size 1M, potencies 0/1/2, ferocity 0, save threshold 5, Renown 1, Wealth 1, the ten
-skills, four language entries, traits, features, the perk, and six abilities (no Pain for Pain).
+skills, three known languages and one deferred slot, traits, features, the perk, and six abilities (no Pain for Pain).
 Stamina maximum, recovery value, winded value, stability, disengage and the kit block are absent
 because their formulas read a kit term that does not exist yet; the sheet shows them as pending, not
 as 21 or 0 (`docs/character-sheet-spec.md`: "never a displayed zero or an invented formula").
@@ -465,7 +460,6 @@ Diagnostics:
 
 - `ancestry.devil.purchased-traits` → `invalid`, `budget-exceeded`: 2 + 2 = 4 > 3 (costs from
   `cost: 2 Points` in `impressive-horns.md` and `wings.md`).
-- `career.soldier.languages` → the same Q-R-100 warning.
 
 Status: **invalid**. `baseline` is `null`. `partial` is 4.1's baseline with the rejected decision
 contributing nothing: speed 5 (no Beast Legs), saving-throw threshold 6 (no Impressive Horns), traits
@@ -480,14 +474,14 @@ resolved by assumption here; provisional defaults are labeled on the output.
 
 | Id | Where it applies | Status |
 | --- | --- | --- |
-| Q-R-100 | `career.soldier.languages` duplicate Caelian (4.1) | resolved 2026-09-14; automatic known-language grant, no paid Caelian slot; fixture update remains |
+| Q-R-100 | `career.soldier.languages` duplicate Caelian (4.1) | resolved 2026-09-14; automatic known-language grant, no paid Caelian slot; fixture repaired with an explicit deferred slot |
 | Q-R-101 | `class.fury.array-assignment` order (1.1) | resolved 2026-09-14; any order with shared UI/headless assignment |
 | Q-R-102 | language pool (1.15) | resolved 2026-09-14; spoken-language tables only for v0.01 creation |
 | Q-R-103 | kit eligibility by aspect (`kit.choice`) | resolved 2026-09-14; sourced aspect-specific option groups, Berserker/Mountain only in v0.01 |
 | Q-CHAR-10 | unspent ancestry points (`budget-unspent`) | resolved 2026-09-15; warn without enforcing expenditure; an otherwise complete two-of-three-point build remains complete |
-| Q-CHAR-11 | duplicate skills (`duplicate-skill`) | resolved by current user interpretation 2026-09-15; fixed duplicates grant replacements, deliberate chosen duplicates do not expand pools; executable follow-up remains separate |
+| Q-CHAR-11 | duplicate skills (`duplicate-skill`) | resolved by current user interpretation 2026-09-15; fixed duplicates grant replacements, deliberate chosen duplicates are invalid and do not expand pools; the evaluator accounts for fixed grants first, independent of selection order |
 | Q-CHAR-12 | potency characteristic when another characteristic exceeds the class's (1.10) | source-resolved 2026-09-15; class-named basis with specific overrides; remove stale labels |
-| Q-R-3 | Stamina regain cap (R04) | open; consumes `staminaMaximum`, no effect on this document |
+| Q-R-3 | Stamina regain cap (R04) | resolved; consumes `staminaMaximum`, no effect on this document |
 
 No new `Q-R-n` question was needed: every formula in section 1 rests on a quoted sentence, and the two
 interpretations (Stamina maximum reading in 1.3, ferocity starting value in 1.11) are labeled with

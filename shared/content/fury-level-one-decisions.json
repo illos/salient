@@ -142,7 +142,7 @@
     "pool.languages.dead": {
       "source": "en/books/heroes/clean/Draw Steel Heroes.md",
       "sourceSection": "Dead Languages Table",
-      "selectable": "unresolved (Q-R-102)",
+      "selectable": false,
       "values": [
         "Ananjali",
         "High Rhyvian",
@@ -365,7 +365,7 @@
           "quote": "You have one skill of your choice from the interpersonal skill group",
           "optionsFrom": "pool.skills.interpersonal",
           "supportedInV001": ["Persuade"],
-          "questions": ["Q-CHAR-11"]
+          "questions": []
         },
         {
           "id": "ancestry.devil.purchased-traits",
@@ -444,7 +444,7 @@
             }
           ],
           "supportedSetInV001": ["Beast Legs", "Impressive Horns"],
-          "questions": ["Q-CHAR-10"]
+          "questions": []
         }
       ]
     },
@@ -464,7 +464,7 @@
           },
           "source": "en/unified/md/chapter/making-a-hero.md",
           "quote": "Choose or create your hero's culture.",
-          "note": "Non-mechanical. Q-CHAR-6 covers assembled cultures."
+          "note": "Authored name for an assembly of core culture aspects; this does not introduce a custom selectable language."
         },
         {
           "id": "culture.caelian",
@@ -491,8 +491,41 @@
           "source": "en/books/heroes/clean/Draw Steel Heroes.md",
           "quote": "You know the language of your culture, in addition to knowing Caelian.",
           "optionsFrom": ["pool.languages.by-ancestry", "pool.languages.vaslorian-human"],
-          "supportedInV001": ["Anjali"],
-          "questions": ["Q-R-100", "Q-R-102", "Q-CHAR-6"]
+          "supportedInV001": [
+            "Anjali",
+            "Axiomatic",
+            "Filliaric",
+            "The First Language",
+            "Hyrallic",
+            "Illyvric",
+            "Kalliak",
+            "Kethaic",
+            "Khelt",
+            "Khoursirian",
+            "High Kuric",
+            "Low Kuric",
+            "Mindspeech",
+            "Proto-Ctholl",
+            "Szetch",
+            "Tholl",
+            "Urollialic",
+            "Variac",
+            "Vastariax",
+            "Vhoric",
+            "Voll",
+            "Yllyric",
+            "Za'hariax",
+            "Zaliac",
+            "Uvalic",
+            "Higaran",
+            "Oaxuatl",
+            "Khemharic",
+            "Phaedran",
+            "Riojan",
+            "Vaniric",
+            "Vaslorian"
+          ],
+          "questions": []
         },
         {
           "id": "culture.environment",
@@ -574,7 +607,7 @@
             }
           },
           "supportedInV001": ["Swim"],
-          "questions": ["Q-CHAR-11"]
+          "questions": []
         },
         {
           "id": "culture.organization",
@@ -623,7 +656,7 @@
             }
           },
           "supportedInV001": ["Blacksmithing"],
-          "questions": ["Q-CHAR-11"]
+          "questions": []
         },
         {
           "id": "culture.upbringing",
@@ -729,7 +762,7 @@
             }
           },
           "supportedInV001": ["Intimidate"],
-          "questions": ["Q-CHAR-11"]
+          "questions": []
         },
         {
           "id": "culture.edge",
@@ -891,7 +924,7 @@
           "quote": "One skill from the exploration skill group and one skill from the intrigue group",
           "optionsFrom": "pool.skills.exploration",
           "supportedInV001": ["Endurance"],
-          "questions": ["Q-CHAR-11"]
+          "questions": []
         },
         {
           "id": "career.soldier.skill.intrigue",
@@ -908,7 +941,7 @@
           "quote": "One skill from the exploration skill group and one skill from the intrigue group",
           "optionsFrom": "pool.skills.intrigue",
           "supportedInV001": ["Alertness"],
-          "questions": ["Q-CHAR-11"]
+          "questions": []
         },
         {
           "id": "career.soldier.languages",
@@ -933,8 +966,41 @@
             "quote": "Some careers allow you to learn extra languages, chosen from those available in Languages in Orden above."
           },
           "optionsFrom": ["pool.languages.by-ancestry", "pool.languages.vaslorian-human"],
-          "supportedInV001": ["Caelian", "Vaslorian"],
-          "questions": ["Q-R-100", "Q-R-102", "Q-CHAR-5"]
+          "supportedInV001": [
+            "Anjali",
+            "Axiomatic",
+            "Filliaric",
+            "The First Language",
+            "Hyrallic",
+            "Illyvric",
+            "Kalliak",
+            "Kethaic",
+            "Khelt",
+            "Khoursirian",
+            "High Kuric",
+            "Low Kuric",
+            "Mindspeech",
+            "Proto-Ctholl",
+            "Szetch",
+            "Tholl",
+            "Urollialic",
+            "Variac",
+            "Vastariax",
+            "Vhoric",
+            "Voll",
+            "Yllyric",
+            "Za'hariax",
+            "Zaliac",
+            "Uvalic",
+            "Higaran",
+            "Oaxuatl",
+            "Khemharic",
+            "Phaedran",
+            "Riojan",
+            "Vaniric",
+            "Vaslorian"
+          ],
+          "questions": []
         },
         {
           "id": "career.soldier.renown",
@@ -1185,12 +1251,12 @@
             {
               "id": "class.fury.array.2-m1-m1",
               "value": "2, −1, −1",
-              "supportedInV001": false
+              "supportedInV001": true
             },
             {
               "id": "class.fury.array.1-1-m1",
               "value": "1, 1, −1",
-              "supportedInV001": false
+              "supportedInV001": true
             },
             {
               "id": "class.fury.array.1-0-0",
@@ -1209,9 +1275,8 @@
           },
           "source": "en/unified/md/class/fury.md",
           "quote": "for your other characteristic scores",
-          "supportedInV001": ["Intuition 1, Reason 0, Presence 0"],
-          "questions": ["Q-R-101"],
-          "note": "The source does not state whether the array values may be assigned to Reason, Intuition and Presence in any order."
+          "questions": [],
+          "note": "Q-R-101 resolved: any ordering of the chosen source array; fixed Might and Agility remain locked, new assignable slots start blank."
         },
         {
           "id": "class.fury.baseline",
@@ -1261,7 +1326,7 @@
               "value": "Nature"
             }
           ],
-          "questions": ["Q-CHAR-11"]
+          "questions": []
         },
         {
           "id": "class.fury.skills",
@@ -1278,7 +1343,7 @@
           "quote": "Then choose any two skills from the exploration or intrigue skill groups.",
           "optionsFrom": ["pool.skills.exploration", "pool.skills.intrigue"],
           "supportedInV001": ["Jump", "Climb"],
-          "questions": ["Q-CHAR-11"]
+          "questions": []
         },
         {
           "id": "class.fury.features",
@@ -1417,7 +1482,7 @@
             "source": "en/unified/md/feature/fury/level-1/aspect-triggered-action.md",
             "quote": "Your primordial aspect grants you a triggered action, as shown on the Aspect Triggered Actions table."
           },
-          "questions": ["Q-CHAR-11"]
+          "questions": []
         },
         {
           "id": "class.fury.signature-ability",
@@ -1617,7 +1682,7 @@
             "Vuken": "en/unified/md/kit/vuken.md"
           },
           "supportedInV001": ["Mountain"],
-          "questions": ["Q-R-103"]
+          "questions": []
         },
         {
           "id": "kit.mountain.contributions",
@@ -1774,7 +1839,7 @@
   ],
   "selectionSets": {
     "hero-fixture": {
-      "description": "docs/hero-fixture.md (Grug), one legal path; expected status complete with one open warning (Q-R-100).",
+      "description": "docs/hero-fixture.md (Grug), one legal path; expected status complete with one explicitly deferred language slot.",
       "selections": {
         "ancestry.choice": "Devil",
         "ancestry.devil.silver-tongue-skill": "Persuade",
@@ -1790,7 +1855,7 @@
         "career.choice": "Soldier",
         "career.soldier.skill.exploration": "Endurance",
         "career.soldier.skill.intrigue": "Alertness",
-        "career.soldier.languages": ["Caelian", "Vaslorian"],
+        "career.soldier.languages": [null, "Vaslorian"],
         "career.soldier.perk": "Teamwork",
         "career.soldier.inciting-incident": "Sole Survivor",
         "class.choice": "Fury",
@@ -1810,7 +1875,7 @@
       }
     },
     "second-legal-path": {
-      "description": "Quick-build-leaning alternative; expected status complete (array assignment subject to Q-R-101).",
+      "description": "Quick-build-leaning alternative; expected status complete under the confirmed array assignment ruling.",
       "selections": {
         "ancestry.choice": "Devil",
         "ancestry.devil.silver-tongue-skill": "Lie",
@@ -1884,15 +1949,5 @@
       ]
     }
   },
-  "questions": [
-    "Q-R-100",
-    "Q-R-101",
-    "Q-R-102",
-    "Q-R-103",
-    "Q-CHAR-1",
-    "Q-CHAR-5",
-    "Q-CHAR-6",
-    "Q-CHAR-10",
-    "Q-CHAR-11"
-  ]
+  "questions": []
 }

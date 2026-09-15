@@ -107,3 +107,116 @@ test('selections for an unavailable decision, an unknown decision and a mismatch
   );
   assert.equal(result.diagnostics['ancestry.choice']?.[0]?.code, 'unsupported-option');
 });
+
+test('resolved language choices share the full spoken pool, excluding paid Caelian and dead languages', () => {
+  const base = file.examples.complete!.input;
+  const spoken = [
+    ...new Set([
+      ...definitions.pools['pool.languages.by-ancestry']!.values,
+      ...definitions.pools['pool.languages.vaslorian-human']!.values,
+    ]),
+  ].filter(name => name !== 'Caelian');
+  assert.equal(spoken.length, 32);
+  for (const language of spoken) {
+    const result = evaluateCharacter(
+      {
+        ...base,
+        selections: {
+          ...base.selections,
+          'culture.language': language,
+          'career.soldier.languages': [null, null],
+        },
+      },
+      definitions,
+    );
+    assert.equal(result.status, 'complete', language);
+    assert.deepEqual(
+      result.baseline!.languages.map(l => l.name),
+      ['Caelian', language],
+    );
+  }
+  for (const language of ['Caelian', ...definitions.pools['pool.languages.dead']!.values]) {
+    const result = evaluateCharacter(
+      {
+        ...base,
+        selections: {
+          ...base.selections,
+          'career.soldier.languages': [language, null],
+        },
+      },
+      definitions,
+    );
+    assert.equal(result.status, 'invalid', language);
+    assert.equal(result.diagnostics['career.soldier.languages']?.[0]?.code, 'value-not-in-pool');
+  }
+});
+
+test('all nine distinct Fury array permutations are complete; partial assignments stay incomplete and fixed/overused scores are invalid', () => {
+  const base = file.examples.complete!.input;
+  for (const [array, permutations] of [
+    [
+      '2, −1, −1',
+      [
+        [2, -1, -1],
+        [-1, 2, -1],
+        [-1, -1, 2],
+      ],
+    ],
+    [
+      '1, 1, −1',
+      [
+        [-1, 1, 1],
+        [1, -1, 1],
+        [1, 1, -1],
+      ],
+    ],
+    [
+      '1, 0, 0',
+      [
+        [1, 0, 0],
+        [0, 1, 0],
+        [0, 0, 1],
+      ],
+    ],
+  ] as const) {
+    for (const [Reason, Intuition, Presence] of permutations) {
+      const result = evaluateCharacter(
+        {
+          ...base,
+          selections: {
+            ...base.selections,
+            'class.fury.characteristic-array': array,
+            'class.fury.array-assignment': { Reason, Intuition, Presence },
+          },
+        },
+        definitions,
+      );
+      assert.equal(result.status, 'complete');
+      assert.deepEqual(
+        Object.values(result.baseline!.characteristics).map(v => v.value),
+        [2, 2, Reason, Intuition, Presence],
+      );
+      assert.equal(result.baseline!.staminaMaximum.value, 30);
+      assert.ok(!JSON.stringify(result).includes('Q-R-101'));
+    }
+  }
+  const partialAssignments: Record<string, number>[] = [{}, { Reason: 0 }];
+  for (const assignment of partialAssignments) {
+    const result = evaluateCharacter(
+      { ...base, selections: { ...base.selections, 'class.fury.array-assignment': assignment } },
+      definitions,
+    );
+    assert.equal(result.status, 'incomplete');
+  }
+  const invalidAssignments: Record<string, number>[] = [
+    { Might: 0, Reason: 0, Intuition: 1, Presence: 0 },
+    { Reason: 1, Intuition: 1, Presence: 0 },
+  ];
+  for (const assignment of invalidAssignments) {
+    const result = evaluateCharacter(
+      { ...base, selections: { ...base.selections, 'class.fury.array-assignment': assignment } },
+      definitions,
+    );
+    assert.equal(result.status, 'invalid');
+  }
+});

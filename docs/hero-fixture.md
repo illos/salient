@@ -10,11 +10,10 @@ Source revision: `fb83a789da8f0327a389c277a0c790b1648d5810`. All links below poi
 
 ## Grug: level-one devil Berserker Fury
 
-**Language decision update, 2026-09-14 (Q-R-100):** the original Soldier choices below include
-Caelian, but Caelian is now confirmed as automatically known and must not consume a language slot.
-Keep its visible common-tongue explanation. The extra-language selection needs correction in the
-wizard/fixture work; this historical row is not evidence of two valid Soldier language choices.
-See [the current wizard contract](character-wizard-spec.md#3-decision-system).
+**Language fixture repair, 2026-09-15 (Q-R-100):** Caelian is automatically known and consumes
+no language slot. The former paid Caelian slot is now explicitly deferred (`null`), as permitted
+by *I Speak Their Language*; the other Soldier language remains Vaslorian. No replacement was
+silently selected. See [the current wizard contract](character-wizard-spec.md#3-decision-system).
 
 | Choice | Value and source |
 | --- | --- |
@@ -25,7 +24,7 @@ See [the current wizard contract](character-wizard-spec.md#3-decision-system).
 | Class skills | Nature, Jump, Climb. |
 | Aspect | [Berserker](../vendor/steel-compendium/en/unified/md/feature/fury/level-1/primordial-aspect.md), granting Lift. |
 | Culture | A fictional wilderness mercenary commune: [Wilderness](../vendor/steel-compendium/en/unified/md/culture/wilderness.md) environment (Swim), [Communal](../vendor/steel-compendium/en/unified/md/culture/communal.md) organization (Blacksmithing), [Martial](../vendor/steel-compendium/en/unified/md/culture/martial.md) upbringing (Intimidate). Culture language Anjali. |
-| Career | [Soldier](../vendor/steel-compendium/en/unified/md/career/soldier.md): Endurance and Alertness, Renown +1, choose Caelian and Vaslorian as its two languages, [Teamwork](../vendor/steel-compendium/en/unified/md/perk/teamwork.md) exploration perk, inciting incident Sole Survivor. |
+| Career | [Soldier](../vendor/steel-compendium/en/unified/md/career/soldier.md): Endurance and Alertness, Renown +1, choose Vaslorian and explicitly leave its other language slot open, [Teamwork](../vendor/steel-compendium/en/unified/md/perk/teamwork.md) exploration perk, inciting incident Sole Survivor. |
 | Kit | [Mountain](../vendor/steel-compendium/en/unified/md/kit/mountain.md): heavy armor, heavy weapon, +9 Stamina at first echelon, +2 stability, +0/+0/+4 melee weapon damage. |
 | Health | Fury base 21 + kit 9 = maximum Stamina 30; current 30, temporary 0. Ten maximum/current Recoveries. [Recovery value](../vendor/steel-compendium/en/unified/md/rule/health/recoveries.md) is floor(30/3) = 10. |
 | Initial resources | Zero Victories, Ferocity, and surges. Initial record precedes the first Fury turn. Record supplied start-turn d3 and Ferocity gain as a manual action; do not silently preload resources. |

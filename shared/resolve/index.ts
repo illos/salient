@@ -3,8 +3,7 @@
  * R04 roll and damage resolution engine: pure functions over the types in
  * shared/contracts/rollResolution.ts. No dice generation, no storage, no authorization. Every
  * function names the section of docs/roll-and-damage-resolution.md it implements and does exactly
- * what that section states; where the contract records an interpretation (Q-R-1, Q-R-2, Q-R-3,
- * negative rolled damage) the output carries the label from section 11.
+ * what that section states; unsupported negative rolled damage retains its section 11 label.
  *
  * Owning specifications: docs/roll-and-damage-resolution.md (all arithmetic),
  * docs/table-spec.md#v001-edge-and-bane-inputs (target-only counts), #v001-roll-characteristic-default,
@@ -198,24 +197,27 @@ export function kitBonusFor(
 
 /**
  * Section 4.1 and 4.3: `rolledDamage = tierConstant + damageCharacteristicValue + kitBonus`. A
- * "M or A" choice uses the roll characteristic (Q-R-2). Returns undefined when the clause cannot be
- * resolved (the roll characteristic is outside the printed choice); the caller records it verbatim.
+ * Damage choices default to the highest permitted current score independently from the roll.
+ * An explicit damage override must be among the expression’s permitted choices (confirmed Q-R-2).
  */
 export function damageFor(
   expression: DamageExpression,
   actor: ActorRollFacts,
-  selectedCharacteristic: Characteristic | undefined,
+  _selectedCharacteristic: Characteristic | undefined,
   kitBonus: number,
   damageType?: string,
+  damageCharacteristic?: Characteristic,
 ): DamageBreakdown | undefined {
   let characteristic: Characteristic | undefined;
-  let uncertainty: DamageBreakdown['uncertainty'];
   if (expression.kind === 'plusCharacteristic') characteristic = expression.characteristic;
   else if (expression.kind === 'plusChoice') {
-    if (!selectedCharacteristic || !expression.choices.includes(selectedCharacteristic))
-      return undefined;
-    characteristic = selectedCharacteristic;
-    uncertainty = 'Q-R-2';
+    if (damageCharacteristic && !expression.choices.includes(damageCharacteristic))
+      throw new Error(`Damage characteristic ${damageCharacteristic} is not permitted.`);
+    characteristic =
+      damageCharacteristic ??
+      expression.choices.reduce((best, next) =>
+        actor.characteristics[next] > actor.characteristics[best] ? next : best,
+      );
   }
   const damageCharacteristicValue = characteristic ? actor.characteristics[characteristic] : 0;
   const rolledDamage = expression.constant + damageCharacteristicValue + kitBonus;
@@ -226,11 +228,7 @@ export function damageFor(
     kitBonus,
     rolledDamage,
     ...(damageType ? { damageType } : {}),
-    ...(rolledDamage < 0
-      ? { uncertainty: 'negative-rolled-damage' as const }
-      : uncertainty
-        ? { uncertainty }
-        : {}),
+    ...(rolledDamage < 0 ? { uncertainty: 'negative-rolled-damage' as const } : {}),
   };
 }
 
@@ -239,7 +237,7 @@ export function damageFor(
 
 /**
  * One target's outcome from the shared natural roll: bonuses, that target's edges and banes, total,
- * tier with the natural 19/20 override (Q-R-1 under a double bane), then the tier's damage clause.
+ * tier with the confirmed natural 19/20 override, then the tier's damage clause.
  */
 export function resolveTarget(
   ability: AbilityRollMetadata,
@@ -248,6 +246,7 @@ export function resolveTarget(
   characteristicValue: number,
   selectedCharacteristic: Characteristic | undefined,
   inputs: TargetRollInputs,
+  damageCharacteristic?: Characteristic,
 ): TargetRollOutcome {
   const edgeBane = resolveEdgeBane(inputs.edges, inputs.banes);
   // Section 1.3: bonuses and penalties add together, before edges and banes.
@@ -256,10 +255,9 @@ export function resolveTarget(
   const total = naturalRoll + characteristicValue + bonusTotal + edgeBane.modifier;
   const baseTier = baseTierOf(total);
   const shifted = tierOf(total, edgeBane.tierShift);
-  // Section 1.6: natural 19 or 20 is tier 3 regardless of any modifier; Q-R-1 under a double bane.
+  // Section 1.6: natural 19 or 20 is tier 3 regardless of any modifier, including a double bane.
   const natural = naturalRoll >= 19;
   const tier: Tier = natural ? 3 : shifted;
-  const uncertainty = natural && edgeBane.tierShift === -1 ? ('Q-R-1' as const) : undefined;
   const tierText = ability.tiers[tier - 1]!;
   const unresolvedClauses = [...tierText.unresolvedClauses];
   let damage: DamageBreakdown | undefined;
@@ -270,6 +268,7 @@ export function resolveTarget(
       selectedCharacteristic,
       kitBonusFor(ability, actor, tier),
       tierText.damageType,
+      damageCharacteristic,
     );
     if (!damage) unresolvedClauses.unshift(plainText(tierText.text.split(';')[0]!));
   }
@@ -280,7 +279,6 @@ export function resolveTarget(
     total,
     baseTier,
     tier,
-    ...(uncertainty ? { uncertainty } : {}),
     tierText: tierText.text,
     ...(damage ? { damage } : {}),
     unresolvedClauses,
@@ -390,7 +388,7 @@ export function checkAffordability(
   inCombat: boolean,
 ): Affordability {
   if (!fixedCost) return { kind: 'none' };
-  const waived = fixedCost.resource === 'ferocity' && !inCombat;
+  const waived = fixedCost.resource === 'ferocity' && pool?.resource === 'ferocity' && !inCombat;
   if (waived) {
     const warnings: string[] = [];
     if (pool?.usedOutsideCombatSinceLastVictoryOrRespite)
@@ -469,7 +467,15 @@ export function resolveAbilityRoll(input: AbilityRollInput): AbilityRollResponse
   // Section 2: an ability roll made as a main action; a natural 19 or 20 before modifiers.
   const criticalHit = naturalNineteenOrTwenty && ability.actionType === 'main action';
   const targets = input.targets.map(inputs =>
-    resolveTarget(ability, actor, naturalRoll, value, selected, inputs),
+    resolveTarget(
+      ability,
+      actor,
+      naturalRoll,
+      value,
+      selected,
+      inputs,
+      input.selectedDamageCharacteristic,
+    ),
   );
   const manualResolutions: ManualResolution[] = [];
   const damageApplications: DamageApplication[] = [];
@@ -507,6 +513,9 @@ export function resolveAbilityRoll(input: AbilityRollInput): AbilityRollResponse
     naturalRoll,
     naturalNineteenOrTwenty,
     ...(selected ? { selectedCharacteristic: selected } : {}),
+    ...(input.selectedDamageCharacteristic
+      ? { selectedDamageCharacteristic: input.selectedDamageCharacteristic }
+      : {}),
     characteristicValue: value,
     criticalHit,
     additionalMainActionOffered: criticalHit,
@@ -532,7 +541,10 @@ export function resolveAbilityRoll(input: AbilityRollInput): AbilityRollResponse
 export function correctTarget(
   ability: AbilityRollMetadata,
   actor: ActorRollFacts,
-  original: Pick<AbilityRollResult, 'dice' | 'characteristicValue' | 'selectedCharacteristic'>,
+  original: Pick<
+    AbilityRollResult,
+    'dice' | 'characteristicValue' | 'selectedCharacteristic' | 'selectedDamageCharacteristic'
+  >,
   originalEventId: string,
   before: TargetRollOutcome,
   applied: DamageApplication | undefined,
@@ -549,6 +561,7 @@ export function correctTarget(
     original.characteristicValue,
     original.selectedCharacteristic,
     { targetId: before.targetId, edges, banes },
+    original.selectedDamageCharacteristic,
   );
   const result: PostRollCorrectionResult = {
     originalEventId,
@@ -597,7 +610,7 @@ export function recoveryValueOf(maxStamina: number): number {
   return Math.floor(maxStamina / 3);
 }
 
-/** Section 7: one Recovery; Stamina regained up to the maximum (Q-R-3); temporary Stamina untouched. */
+/** Section 7: one Recovery; Stamina regained up to the confirmed maximum; temporary Stamina untouched. */
 export function resolveCatchBreath(request: CatchBreathRequest): CatchBreathResponse {
   if (request.recoveries === undefined)
     return {
@@ -630,7 +643,6 @@ export function resolveCatchBreath(request: CatchBreathRequest): CatchBreathResp
     staminaAfter,
     healed,
     capApplied,
-    ...(capApplied ? { uncertainty: 'Q-R-3' as const } : {}),
     temporaryStaminaUnchanged: request.temporaryStamina,
     warnings,
   };
@@ -681,7 +693,6 @@ export function resolveTestRoll(request: TestRollRequest): TestRollResult {
           outcome: testOutcome(tier, criticalSuccess, request.difficulty),
         }
       : {}),
-    ...(criticalSuccess && edgeBane.tierShift === -1 ? { uncertainty: 'Q-R-1' as const } : {}),
   };
 }
 

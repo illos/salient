@@ -59,25 +59,36 @@ export const list = query({
           .take(51);
     const page = rows.slice(0, 50);
     return {
-      events: page.map(e => {
-        const projected = projectEvent(e, campaign, campaign.ownerId === user._id);
-        return {
-          id: e._id,
-          sequence: e.sequence,
-          sessionId: e.sessionId,
-          encounterId: e.encounterId,
-          origin: e.origin,
-          actorName: e.actorName ?? null,
-          commandId: e.commandId,
-          causeEventId: e.causeEventId,
-          disposition: e.disposition,
-          kind: e.kind,
-          description: projected.description,
-          ...(e.dice ? { dice: e.dice } : {}),
-          ...(projected.payload === undefined ? {} : { payload: projected.payload }),
-          createdAt: e.createdAt,
-        };
-      }),
+      events: await Promise.all(
+        page.map(async e => {
+          const targetId = e.kind.startsWith('history.')
+            ? ctx.db.normalizeId('events', String(e.payload?.data?.target?.eventId ?? ''))
+            : null;
+          const target = targetId ? await ctx.db.get(targetId) : null;
+          const projected = projectEvent(
+            e,
+            campaign,
+            campaign.ownerId === user._id,
+            target?.campaignId === campaign._id ? target : null,
+          );
+          return {
+            id: e._id,
+            sequence: e.sequence,
+            sessionId: e.sessionId,
+            encounterId: e.encounterId,
+            origin: e.origin,
+            actorName: e.actorName ?? null,
+            commandId: e.commandId,
+            causeEventId: e.causeEventId,
+            disposition: e.disposition,
+            kind: e.kind,
+            description: projected.description,
+            ...(e.dice ? { dice: e.dice } : {}),
+            ...(projected.payload === undefined ? {} : { payload: projected.payload }),
+            createdAt: e.createdAt,
+          };
+        }),
+      ),
       nextBefore: rows.length > 50 ? page[49]!.sequence : null,
     };
   },

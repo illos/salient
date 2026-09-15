@@ -13,7 +13,7 @@ import type {
   GrantedFeature,
   PartialBaseline,
 } from './characterEvaluation.ts';
-import type { HealthLabels, HeroLiveState } from './liveState.ts';
+import type { BuildReconciliation, HealthLabels, HeroLiveState } from './liveState.ts';
 
 /** A content snapshot entry carrying verbatim source text (shared/contracts/content.ts). */
 export interface SheetContent {
@@ -91,14 +91,6 @@ export interface SheetDetails {
   connections: string | null;
 }
 
-export interface SheetUnreconciled {
-  field: 'staminaMaximum' | 'recoveriesMaximum' | 'heroicResource';
-  before: number | string;
-  after: number | string;
-  currentValue: number;
-  question: 'Q-CHAR-2';
-}
-
 export interface HeroSheet {
   audience: 'owner' | 'director';
   id: string;
@@ -120,7 +112,8 @@ export interface HeroSheet {
   features: SheetFeature[];
   commonActions: CommonAction[];
   live: (HeroLiveState & { labels: HealthLabels }) | null;
-  unreconciled: SheetUnreconciled[];
+  /** The proposed build's effect on current live values; null for an effective/initial build. */
+  activationPreview: BuildReconciliation | null;
   details: SheetDetails;
   authored: { appearance: string; biography: string; notes?: string };
   review: SheetReview | null;

@@ -56,7 +56,15 @@ export function poolValues(
 ): string[] {
   if (!from) return [];
   const ids = Array.isArray(from) ? from : [from];
-  return ids.flatMap(poolId => definitions.pools[poolId]?.values ?? []);
+  return [
+    ...new Set(
+      ids.flatMap(poolId =>
+        (definitions.pools[poolId]?.values ?? []).filter(
+          value => !poolId.startsWith('pool.languages.') || value !== 'Caelian',
+        ),
+      ),
+    ),
+  ];
 }
 
 /** The option values a decision offers for the current parent selections. */

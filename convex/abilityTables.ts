@@ -46,6 +46,7 @@ export const abilityTables = {
     modifiers: v.record(v.string(), v.object({ edges: v.number(), banes: v.number() })),
     /** Explicit pre-fire roll characteristic override, when chosen. */
     characteristic: v.union(characteristic, v.null()),
+    damageCharacteristic: v.optional(v.union(characteristic, v.null())),
     updatedAt: v.number(),
   }).index('by_campaign_user', ['campaignId', 'userId']),
   /**
@@ -89,7 +90,7 @@ export const abilityTables = {
     actor: actorRef,
     kind: v.literal('additional-main-action'),
     sourceEventId: v.id('events'),
-    status: v.union(v.literal('offered'), v.literal('used')),
+    status: v.union(v.literal('offered'), v.literal('used'), v.literal('closed')),
     usedEventId: v.union(v.id('events'), v.null()),
   }).index('by_encounter_actor', ['encounterId', 'actor.id']),
   /**
@@ -104,6 +105,8 @@ export const abilityTables = {
     actor: actorRef,
     abilityId: v.string(),
     abilityName: v.string(),
+    /** Original pure-resolution facts; corrections never recompute from subsequently edited builds. */
+    resolutionInputs: v.optional(v.any()),
     dice: v.object({ d10a: v.number(), d10b: v.number() }),
     characteristicValue: v.number(),
     selectedCharacteristic: v.union(characteristic, v.null()),

@@ -14,6 +14,8 @@
  * formula cannot be derived because a term is missing (no kit chosen), the value is absent from the
  * partial, never a displayed zero. Provisional defaults carry their open question id.
  */
+import { assignmentError } from './assignment.ts';
+import { poolValues } from './structure.ts';
 import type { Characteristic } from '../contracts/rollResolution.ts';
 import type {
   DerivedBaseline,
@@ -61,15 +63,7 @@ import {
 export const DEFINITIONS_SCHEMA_VERSION = 'r01.1';
 
 /** Canonical order of the open-question labels on the output (the contract's union order). */
-const UNCERTAINTY_ORDER: UncertaintyId[] = [
-  'Q-R-100',
-  'Q-R-101',
-  'Q-R-102',
-  'Q-R-103',
-  'Q-CHAR-10',
-  'Q-CHAR-11',
-  'Q-CHAR-12',
-];
+const UNCERTAINTY_ORDER: UncertaintyId[] = [];
 
 type Sentence = Omit<SourceSentence, 'revision'>;
 
@@ -94,12 +88,6 @@ function parseCost(costQuote: string | undefined): GrantedAbility['cost'] | unde
   const resource = match[2]!.toLowerCase();
   if (resource !== 'ferocity') return undefined;
   return { resource, amount: Number(match[1]) };
-}
-
-function sameMultiset(a: number[], b: number[]): boolean {
-  const sa = [...a].sort((x, y) => x - y);
-  const sb = [...b].sort((x, y) => x - y);
-  return sa.length === sb.length && sa.every((v, i) => v === sb[i]);
 }
 
 class Evaluation {
@@ -192,9 +180,7 @@ class Evaluation {
   }
 
   poolValues(from: string | string[] | undefined): string[] {
-    if (!from) return [];
-    const ids = Array.isArray(from) ? from : [from];
-    return ids.flatMap(poolId => this.definitions.pools[poolId]?.values ?? []);
+    return poolValues(this.definitions, from);
   }
 
   /** The option values a decision offers for the current parent selections, and the parent entry used. */
@@ -457,9 +443,8 @@ class Evaluation {
             decision.id,
             'warning',
             'budget-unspent',
-            `${total} of ${shape.budget} ${words.unit} spent; whether points may stay unspent is open (Q-CHAR-10)`,
+            `${total} of ${shape.budget} ${words.unit} spent. Unspent points are allowed; spending them later follows normal editing and review.`,
             this.own(decision),
-            'Q-CHAR-10',
           );
         for (const option of chosen)
           if (!this.supported(decision, option.value)) this.unsupported(decision, option.value);
@@ -483,31 +468,22 @@ class Evaluation {
           );
           return;
         }
-        const keys = Object.keys(selection);
-        const targetsMatch =
-          keys.length === shape.targets.length && shape.targets.every(t => keys.includes(t));
-        const amounts = shape.targets.map(t => selection[t]!);
-        if (
-          !targetsMatch ||
-          amounts.some(a => typeof a !== 'number' || !Number.isInteger(a)) ||
-          !sameMultiset(amounts, parseArray(array))
-        ) {
+        const error = assignmentError(selection, parseArray(array));
+        if (error) {
+          this.diagnose(decision.id, 'invalid', 'assignment-mismatch', error, this.own(decision));
+          return;
+        }
+        if (Object.keys(selection).length < shape.targets.length) {
           this.diagnose(
             decision.id,
-            'invalid',
-            'assignment-mismatch',
-            `The assignment must use exactly the values of the chosen array ${array}, one per ${shape.targets.join(', ')}`,
+            'incomplete',
+            'required-choice-missing',
+            `Assign the remaining values of ${array} to ${shape.targets.filter(t => selection[t] === undefined).join(', ')}.`,
             this.own(decision),
           );
           return;
         }
         this.valid.set(decision.id, selection);
-        const supported = (decision.supportedInV001 ?? []).some(text => {
-          const expected = parseAssignment(text);
-          return shape.targets.every(t => expected[t] === selection[t]);
-        });
-        if (!supported)
-          this.unsupported(decision, shape.targets.map(t => `${t} ${selection[t]}`).join(', '));
         return;
       }
       default:
@@ -635,7 +611,6 @@ class Evaluation {
             source: this.sentence(SENTENCES.characteristicArray),
             operation: 'set',
             amount: assignment[target]!,
-            uncertainty: 'Q-R-101',
           }),
         ]);
       out.characteristics = {
@@ -891,14 +866,13 @@ class Evaluation {
         }),
       ]);
 
-    // 1.10 Potencies from the class-named characteristic (Q-CHAR-12 labeled).
+    // 1.10 Potencies from the class-named characteristic.
     if (this.isFury()) {
       out.potencyCharacteristic = dv('M' as Characteristic, [
         p({
           decisionId: 'class.fury.baseline',
           source: this.sentence(SENTENCES.potencyStrong),
-          uncertainty: 'Q-CHAR-12',
-          note: 'class-named characteristic; general rule names the highest (rule/character/potency.md), equal for every level-one Fury (Q-CHAR-12)',
+          note: 'class-named characteristic; the specific Fury formula applies (Potencies and Game of Exceptions).',
         }),
       ]);
       if (might !== undefined) {
@@ -1012,21 +986,12 @@ class Evaluation {
   }
 
   private skills(): GrantedSkill[] {
-    const out: GrantedSkill[] = [];
-    const seen = new Map<string, string>();
-    const add = (name: string, decisionId: string, provenance: Provenance) => {
-      const earlier = seen.get(name);
-      if (earlier)
-        this.diagnose(
-          decisionId,
-          'warning',
-          'duplicate-skill',
-          `${name} is already granted by ${earlier}; how a duplicate skill is replaced is open (Q-CHAR-11)`,
-          provenance.source,
-          'Q-CHAR-11',
-        );
-      else seen.set(name, decisionId);
-      out.push({ name, group: this.skillGroup(name), provenance: this.provenance(provenance) });
+    const candidates: { skill: GrantedSkill; fixed: boolean }[] = [];
+    const add = (name: string, provenance: Provenance, fixed: boolean) => {
+      candidates.push({
+        skill: { name, group: this.skillGroup(name), provenance: this.provenance(provenance) },
+        fixed,
+      });
     };
     for (const decision of this.order) {
       if (!this.available.has(decision.id)) continue;
@@ -1035,7 +1000,7 @@ class Evaluation {
       if (decision.kind === 'automatic') {
         for (const grant of decision.grants ?? [])
           if (grant.kind === 'skill')
-            add(grant.value, decision.id, { decisionId: decision.id, source: sentence });
+            add(grant.value, { decisionId: decision.id, source: sentence }, true);
         continue;
       }
       if (decision.kind !== 'choice' || !this.valid.has(decision.id)) continue;
@@ -1044,21 +1009,64 @@ class Evaluation {
         const names = Array.isArray(value) ? value : [value];
         for (const name of names)
           if (typeof name === 'string')
-            add(name, decision.id, { decisionId: decision.id, selection: name, source: sentence });
+            add(name, { decisionId: decision.id, selection: name, source: sentence }, false);
         continue;
       }
       for (const grant of this.grantsOf(decision.id))
         if (grant.kind === 'skill')
-          add(grant.value, decision.id, {
-            decisionId: decision.id,
-            selection: typeof value === 'string' ? value : undefined,
-            source: this.sentence({
-              path: grant.source ?? decision.source,
-              quote: grant.quote ?? decision.quote,
-            }),
-          });
+          add(
+            grant.value,
+            {
+              decisionId: decision.id,
+              selection: typeof value === 'string' ? value : undefined,
+              source: this.sentence({
+                path: grant.source ?? decision.source,
+                quote: grant.quote ?? decision.quote,
+              }),
+            },
+            true,
+          );
     }
-    return out;
+    // Fixed grants win regardless of where the granting choice appeared in the wizard.
+    const fixed = new Map<string, GrantedSkill>();
+    for (const candidate of candidates.filter(candidate => candidate.fixed)) {
+      const skill = candidate.skill;
+      if (fixed.has(skill.name)) {
+        // No supported Soldier/Berserker option creates this case. Preserve the entitlement as
+        // unsupported rather than silently choosing its unrestricted replacement for future paths.
+        this.diagnose(
+          skill.provenance.decisionId,
+          'unsupported',
+          'duplicate-skill',
+          `${skill.name} is granted by two fixed sources and requires an unrestricted replacement choice; that creation path is not supported in v0.01.`,
+          skill.provenance.source,
+        );
+      } else fixed.set(skill.name, skill);
+    }
+    const chosen = candidates
+      .filter(candidate => !candidate.fixed)
+      .map(candidate => candidate.skill);
+    const invalidChoices = new Set<string>();
+    for (const skill of chosen) {
+      if (fixed.has(skill.name) || chosen.filter(other => other.name === skill.name).length > 1) {
+        invalidChoices.add(skill.provenance.decisionId);
+        this.diagnose(
+          skill.provenance.decisionId,
+          'invalid',
+          'duplicate-skill',
+          `${skill.name} is already granted by another creation choice or fixed source. Choose a distinct eligible skill from this decision's printed pool; duplication grants no unrestricted replacement.`,
+          skill.provenance.source,
+        );
+      }
+    }
+    // Keep the fixture's stable presentation order; accounting above never depends on input order.
+    return candidates
+      .filter(({ skill, fixed: isFixed }) =>
+        isFixed
+          ? fixed.get(skill.name) === skill
+          : !invalidChoices.has(skill.provenance.decisionId),
+      )
+      .map(candidate => candidate.skill);
   }
 
   private languages(): GrantedLanguage[] {
@@ -1068,15 +1076,13 @@ class Evaluation {
       const earlier = granted.get(name);
       const entry: GrantedLanguage = { name, provenance };
       if (earlier) {
-        provenance.uncertainty = 'Q-R-100';
         entry.duplicateOf = earlier.decisionId;
         this.diagnose(
           provenance.decisionId,
           'warning',
           'duplicate-language',
-          `${name} duplicates the ${earlier.automatic ? 'automatic grant from' : 'earlier choice'} ${earlier.decisionId}; kept under the Q-R-100 provisional default`,
+          `${name} is already known through ${earlier.decisionId}; choose an extra language or leave the career slot open.`,
           this.sentence(earlier.automatic ? SENTENCES.caelian : SENTENCES.cultureLanguage),
-          'Q-R-100',
         );
       } else granted.set(name, { decisionId: provenance.decisionId, automatic });
       out.push({ ...entry, provenance: this.provenance(provenance) });

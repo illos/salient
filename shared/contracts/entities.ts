@@ -176,8 +176,8 @@ export interface HeroEntity {
   uncertainties: (EvaluationUncertaintyId | ProjectionUncertaintyId)[];
 }
 
-/** Open question ids that label provisional behavior in this contract (docs/rules-questions-for-user.md). */
-export type ProjectionUncertaintyId = 'Q-R-200' | 'Q-R-201' | 'Q-CHAR-2';
+/** Historical projection labels retained for stored-contract compatibility; both questions are resolved. */
+export type ProjectionUncertaintyId = 'Q-R-200' | 'Q-R-201';
 
 /** Printed stat-block values of a Director-controlled creature. */
 export interface FoeMaxima {

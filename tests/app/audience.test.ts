@@ -3,7 +3,34 @@
 import { readFileSync } from 'node:fs';
 import { describe, expect, test } from 'vitest';
 import { api, internal } from '../../convex/_generated/api';
+import type { Id } from '../../convex/_generated/dataModel';
+import type { TestRollResult } from '../../shared/contracts/rollResolution';
 import { account, backend, storedEvents, table } from './fixtures/table';
+
+/** These fixtures inspect command envelopes; the production event payload remains unknown.
+ * Difficulty is optional because audience projection removes it. Keep all absence/value checks
+ * below against the actual returned object: this assertion supplies types without adding fields.
+ */
+type AudiencePayload = {
+  envelope: { arguments: Record<string, unknown> };
+  data: {
+    result: Omit<TestRollResult, 'difficulty'> & { difficulty?: TestRollResult['difficulty'] };
+    [key: string]: unknown;
+  };
+};
+async function eventHistory(
+  client: Awaited<ReturnType<typeof table>>['director']['client'],
+  campaignId: Id<'campaigns'>,
+) {
+  const result = await client.query(api.events.list, { campaignId });
+  return {
+    ...result,
+    events: result.events.map(event => ({
+      ...event,
+      payload: event.payload as AudiencePayload,
+    })),
+  };
+}
 
 describe('table audience boundaries', () => {
   test.each(['Lore; hard: winter', 'Lore; hard: Failure.'])(
@@ -16,13 +43,13 @@ describe('table audience boundaries', () => {
         commandId: 'punctuated-skill',
         text: `@Thorn /test roll characteristic=M value=2 skill="${skill}" difficulty=hard`,
       });
-      const stored = (await director.client.query(api.events.list, { campaignId })).events.find(
+      const stored = (await eventHistory(director.client, campaignId)).events.find(
         e => e.id === roll.eventId,
       )!;
       const outcome = stored.payload.data.result.outcome;
       const suffix = `; hard: ${outcome}.`;
       expect(stored.description.endsWith(suffix)).toBe(true);
-      const peer = (await observer.client.query(api.events.list, { campaignId })).events.find(
+      const peer = (await eventHistory(observer.client, campaignId)).events.find(
         e => e.id === roll.eventId,
       )!;
       expect(peer.description).toBe(`${stored.description.slice(0, -suffix.length)}; ${outcome}.`);
@@ -40,9 +67,7 @@ describe('table audience boundaries', () => {
       text: '/adjust malice value=47',
     });
     const history = async (client: typeof director.client) =>
-      (await client.query(api.events.list, { campaignId })).events.find(
-        e => e.id === adjusted.eventId,
-      )!;
+      (await eventHistory(client, campaignId)).events.find(e => e.id === adjusted.eventId)!;
     expect((await t.run(ctx => ctx.db.get(campaignId)))?.malice).toBe(47);
     for (const client of [player.client, observer.client]) {
       const row = await history(client);
@@ -81,9 +106,7 @@ describe('table audience boundaries', () => {
     });
     const stored = (await storedEvents(t, campaignId)).find(e => e._id === roll.eventId)!;
     const history = async (client: typeof director.client) =>
-      (await client.query(api.events.list, { campaignId })).events.find(
-        e => e.id === roll.eventId,
-      )!;
+      (await eventHistory(client, campaignId)).events.find(e => e.id === roll.eventId)!;
     for (const client of [player.client, observer.client]) {
       const row = await history(client);
       expect(row.description).not.toContain('hard:');
@@ -167,7 +190,7 @@ describe('table audience boundaries', () => {
         expect(roster.foes[0]!.health).toEqual(expected);
         expect(legacy.rows[0]).toEqual({ id: foeId, name: 'Goblin', health: expected });
         expect(JSON.stringify([roster.foes, legacy.rows])).not.toContain('sourceSnapshot');
-        const history = (await client.query(api.events.list, { campaignId })).events;
+        const history = (await eventHistory(client, campaignId)).events;
         const event = history.find(e => e.id === stamina.eventId)!;
         if (mode === 'numerical') {
           expect(event.payload.data.after).toBe(7);
@@ -184,7 +207,7 @@ describe('table audience boundaries', () => {
         expect(temp.description).toBe('Manual adjustment — Goblin Temporary Stamina adjusted.');
       }
     }
-    const history = (await director.client.query(api.events.list, { campaignId })).events;
+    const history = (await eventHistory(director.client, campaignId)).events;
     expect(history.find(e => e.id === temporary.eventId)!.payload.data.after).toBe(9);
   });
 
@@ -229,9 +252,8 @@ describe('table audience boundaries', () => {
       arguments: { value: 8 },
     });
     expect(
-      (await observer.client.query(api.events.list, { campaignId })).events.find(
-        e => e.id === event.eventId,
-      )?.description,
+      (await eventHistory(observer.client, campaignId)).events.find(e => e.id === event.eventId)
+        ?.description,
     ).toContain('7 → 8');
   });
 
@@ -298,7 +320,7 @@ describe('table audience boundaries', () => {
     );
     expect(source.revision).toMatch(/^[a-f0-9]{40}$/);
     expect(source.sourcePath).toContain('catch-breath.md');
-    const row = (await observer.client.query(api.events.list, { campaignId })).events.find(
+    const row = (await eventHistory(observer.client, campaignId)).events.find(
       e => e.id === used.eventId,
     )!;
     expect(row.payload.data.source).toEqual(source);

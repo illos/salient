@@ -11,7 +11,7 @@
     "version": "1.0.1"
   },
   "generatedAt": "2026-09-08",
-  "contentHash": "sha256:746e8b51d64f379113c8757785f7cd68c287ce814e32476ef5d6dbb7ddfc0cb5",
+  "contentHash": "sha256:7c2dc77a745444ea7143888a2497dea812530109e0b26e7a2511dcad16925420",
   "entryCount": 403,
   "selections": [
     {
@@ -48,7 +48,7 @@
     },
     {
       "id": "kits",
-      "description": "Every kit entry, with its printed kit_type. The source names furies among the classes that use kits and states no kit_type restriction for them in chapter/kits.md or class/fury.md; eligibility by aspect is R01 question Q-R-103, not a pipeline decision.",
+      "description": "Every kit entry, with its printed kit_type. The source names furies among the classes that use kits and states no kit_type restriction for them in chapter/kits.md or class/fury.md; Q-R-103 confirms Berserker and Reaver use ordinary Chapter 6 kits while Stormwight uses its four aspect kits; the pipeline preserves source fields rather than inferring eligibility.",
       "paths": [
         "kit"
       ],

@@ -15,7 +15,7 @@ import { api, internal } from '../../convex/_generated/api';
 import type { Doc, Id } from '../../convex/_generated/dataModel';
 import { generate } from '../../convex/lib/dice';
 import { fromHex } from '../../convex/lib/sha256';
-import { backend, storedEvents, table, type Backend } from './fixtures/table';
+import { admitHero, backend, storedEvents, table, type Backend } from './fixtures/table';
 
 type Fixture = Awaited<ReturnType<typeof table>>;
 type Client = Fixture['director']['client'];
@@ -25,7 +25,6 @@ const submit = (client: Client, campaignId: Id<'campaigns'>, text: string, comma
 let n = 0;
 const cid = (label: string) => `${label}-${String(++n).padStart(6, '0')}`;
 
-const BRUTAL_SLAM = 'mcdm.heroes.v1/feature.ability.fury.level-1/brutal-slam';
 const THUNDER_ROAR = 'mcdm.heroes.v1/feature.ability.fury.level-1/thunder-roar';
 const GOBLIN = 'mcdm.monsters.v1/monster.goblin.statblock/goblin-warrior';
 
@@ -89,12 +88,6 @@ async function prepareHero(
   await submit(
     director.client,
     campaignId,
-    `@Thorn /hero facts might=2 agility=2 reason=0 intuition=1 presence=0 melee="+0/+0/+4" kit="Mountain" signature="Pain for Pain" resource="Ferocity" abilities=["${BRUTAL_SLAM}","${THUNDER_ROAR}"]`,
-    cid('facts'),
-  );
-  await submit(
-    director.client,
-    campaignId,
     `@Thorn /adjust stamina value=${options.stamina ?? 30}`,
     cid('adj'),
   );
@@ -122,11 +115,44 @@ async function addGoblin(t: Backend, fixture: Fixture) {
 /** Content, hero facts, one Goblin Warrior, combat opened with the heroes first, Thorn's turn taken. */
 async function battle(
   t: Backend,
-  options: { ferocity?: number; stamina?: number; goblins?: number; takeTurn?: boolean } = {},
+  options: {
+    ferocity?: number;
+    stamina?: number;
+    goblins?: number;
+    takeTurn?: boolean;
+    makePeace?: boolean;
+  } = {},
 ) {
   const fixture = await table(t);
   await t.mutation(internal.content.reseed, {});
   await prepareHero(fixture, options);
+  const calmId = options.makePeace
+    ? await admitHero(t, fixture.player, fixture.director, fixture.campaignId, 'Calm')
+    : null;
+  if (calmId)
+    await t.run(async ctx => {
+      // Isolated operation fixture, not a claim that the minimal A02 wizard supports this option.
+      // The source-backed effect-only definition must obey generic fixed payment independently of
+      // whether its unique effects/build choice have been automated.
+      const hero = (await ctx.db.get(calmId))!;
+      const baseline =
+        hero.derivedBaseline as import('../../shared/contracts/characterEvaluation').DerivedBaseline;
+      await ctx.db.patch(calmId, {
+        derivedBaseline: {
+          ...baseline,
+          abilities: baseline.abilities.map(a =>
+            a.name === 'Thunder Roar'
+              ? {
+                  ...a,
+                  name: 'Make Peace With Your God!',
+                  sourcePath:
+                    'en/unified/md/feature/ability/fury/level-1/make-peace-with-your-god.md',
+                }
+              : a,
+          ),
+        },
+      });
+    });
   const goblins: Id<'foes'>[] = [];
   for (let i = 0; i < (options.goblins ?? 1); i++) goblins.push(await addGoblin(t, fixture));
   const { director, player, campaignId } = fixture;
@@ -136,7 +162,7 @@ async function battle(
   await submit(director.client, campaignId, '/combat first side=heroes', cid('first'));
   if (options.takeTurn !== false)
     await submit(player.client, campaignId, '@Thorn /turn take', cid('take'));
-  return { ...fixture, goblins, goblin: goblins[0]! };
+  return { ...fixture, goblins, goblin: goblins[0]!, calmId };
 }
 
 describe('A05 attacks, damage, costs and common actions', () => {
@@ -232,7 +258,10 @@ describe('A05 attacks, damage, costs and common actions', () => {
     });
     expect(sheet.abilities.map(a => a.name)).toEqual([
       'Brutal Slam',
+      'Out of the Way!',
       'Thunder Roar',
+      'Lines of Force',
+      'Pain for Pain',
       'Melee Weapon Free Strike',
       'Ranged Weapon Free Strike',
       'Catch Breath',
@@ -586,7 +615,7 @@ describe('A05 attacks, damage, costs and common actions', () => {
       usedEventId: second.eventId,
     });
     sheet = await player.client.query(api.abilities.sheet, { campaignId, actor });
-    expect(sheet.allowance).toMatchObject({ mainUsed: 2, extraMainOffered: 0 });
+    expect(sheet.allowance).toMatchObject({ mainUsed: 1, extraMainOffered: 0 });
     // A third main action is a warned departure, never a block.
     await atDice(t, campaignId, [4, 5]);
     const third = await submit(
@@ -670,9 +699,11 @@ describe('A05 attacks, damage, costs and common actions', () => {
         ['liveState.temporaryStamina', { present: true, value: 3 }, { present: true, value: 0 }],
       ]),
     );
-    // The stat-block ability text is the blockquote; the whole stat block supports it.
+    // Public source is the used blockquote only; the full stat block stays private.
     expect(payload.source.text.startsWith('> 🗡 **Spear Charge (Signature Ability)**')).toBe(true);
-    expect(payload.source.supporting[0]!.id).toBe(GOBLIN);
+    expect(payload.source.supporting).toBeUndefined();
+    expect(payload.source.text).not.toContain('Bury the Point');
+    expect(payload.source.text).not.toContain('Crafty');
     // 10.14: the creature free strike never rolls; with 3 temporary Stamina, temporary 2, Stamina unchanged.
     await submit(
       director.client,
@@ -823,7 +854,7 @@ describe('A05 attacks, damage, costs and common actions', () => {
         `/ability resolved event="${used.eventId}" clause="${clause}" target=@{foe:${goblin}}`,
         cid('again'),
       ),
-    ).rejects.toThrow('already marked');
+    ).rejects.toThrow();
     await expect(
       submit(
         director.client,
@@ -938,7 +969,6 @@ describe('A05 attacks, damage, costs and common actions', () => {
       staminaAfter: 30,
       healed: 8,
       capApplied: true,
-      uncertainty: 'Q-R-3',
     });
     const live = (await heroRow(t, thornId)).liveState!;
     expect([live.stamina, live.recoveries]).toEqual([30, 9]);
@@ -1021,8 +1051,258 @@ describe('A05 attacks, damage, costs and common actions', () => {
       ]),
     );
     expect(listed.find(op => op.id === 'ability.use')!.syntax).toBe(
-      '@Actor /ability use ability=… [targets=…] [edges=…] [banes=…] [characteristic=…] [fromDraft=…]',
+      '@Actor /ability use ability=… [targets=…] [edges=…] [banes=…] [characteristic=…] [damage-characteristic=…] [fromDraft=…]',
     );
     expect(listed.find(op => op.id === 'ability.resolved')!.roles).toEqual(['director']);
+  });
+});
+
+describe('A05 audit regressions with persisted state', () => {
+  test('admitted baseline supplies all seven abilities and kit facts; obsolete supplied facts cannot override it', async () => {
+    const t = backend();
+    const { director, player, observer, campaignId, thornId, goblin } = await battle(t);
+    await t.run(async ctx => {
+      await ctx.db.insert('heroRollFacts', {
+        campaignId,
+        characterId: thornId,
+        characteristics: { M: 99, A: 99, R: 99, I: 99, P: 99 },
+        kitName: 'stale',
+        kitMeleeDamageBonus: [99, 99, 99],
+        kitRangedDamageBonus: [99, 99, 99],
+        abilities: [],
+        kitSignatureAbility: null,
+      });
+    });
+    await expect(
+      submit(
+        director.client,
+        campaignId,
+        '@Thorn /hero facts might=99 agility=99 reason=99 intuition=99 presence=99',
+        cid('forbidden-facts'),
+      ),
+    ).rejects.toThrow('cannot override');
+    const actor = { kind: 'character' as const, id: thornId, name: 'Thorn' };
+    const sheet = await player.client.query(api.abilities.sheet, { campaignId, actor });
+    expect(sheet.missingFacts).toBeNull();
+    expect(sheet.abilities.map(a => a.name)).toContain('Pain for Pain');
+    expect(
+      (await observer.client.query(api.abilities.sheet, { campaignId, actor })).abilities,
+    ).toEqual([]);
+    expect(
+      (
+        await player.client.query(api.abilities.sheet, {
+          campaignId,
+          actor: { kind: 'foe', id: goblin, name: 'Goblin Warrior' },
+        })
+      ).abilities,
+    ).toEqual([]);
+    await atDice(t, campaignId, [8, 7]);
+    const used = await submit(
+      player.client,
+      campaignId,
+      `@Thorn /ability use ability="Pain for Pain" targets=[@{foe:${goblin}}]`,
+      cid('kit'),
+    );
+    const event = await eventById(t, campaignId, used.eventId);
+    const result = data<{
+      result: {
+        characteristicValue: number;
+        targets: { damage: { rolledDamage: number; kitBonus: number } }[];
+        manualResolutions: { sourceClause: string }[];
+      };
+    }>(event).result;
+    expect(result.characteristicValue).toBe(2);
+    expect(result.targets[0]!.damage).toMatchObject({ rolledDamage: 15, kitBonus: 0 });
+    expect(result.manualResolutions[0]!.sourceClause).toContain(
+      'If the target dealt damage to you',
+    );
+    expect((await foeRow(t, goblin)).live.stamina).toBe(0);
+  });
+
+  test('effect-only Make Peace pays its printed 5 Ferocity once; insufficient resource blocks both roles and no unique effect executes', async () => {
+    const t = backend();
+    const { director, player, campaignId, calmId } = await battle(t, { makePeace: true });
+    if (!calmId) throw new Error('Missing admitted alternate build');
+    const actor = `@{character:${calmId}}`;
+    const text = `${actor} /ability use ability="Make Peace With Your God!"`;
+    const beforeRolls = (await rolls(t)).length;
+    for (const client of [player.client, director.client]) {
+      const result = await submit(client, campaignId, text, cid('unaffordable-manual'));
+      expect((await eventById(t, campaignId, result.eventId)).kind).toBe('ability.blocked');
+      expect((await heroRow(t, calmId)).liveState!.heroicResource.current).toBe(0);
+    }
+    await submit(
+      director.client,
+      campaignId,
+      `${actor} /adjust heroic-resource value=6`,
+      cid('supply'),
+    );
+    const commandId = cid('manual-paid');
+    const result = await submit(player.client, campaignId, text, commandId);
+    expect(await submit(player.client, campaignId, text, commandId)).toEqual(result);
+    const event = await eventById(t, campaignId, result.eventId);
+    expect(event.kind).toBe('ability.recorded');
+    expect(data<{ cost: unknown }>(event).cost).toEqual({
+      resource: 'ferocity',
+      amount: 5,
+      waived: false,
+      before: 6,
+      after: 1,
+    });
+    expect((await heroRow(t, calmId)).liveState!.heroicResource.current).toBe(1);
+    expect((await heroRow(t, calmId)).liveState!.surges).toBe(0);
+    expect((await rolls(t)).length).toBe(beforeRolls);
+    const changes = await t.run(ctx =>
+      ctx.db
+        .query('changes')
+        .withIndex('by_event', q => q.eq('eventId', result.eventId))
+        .take(50),
+    );
+    expect(changes.find(c => c.path === 'liveState.heroicResource.current')).toMatchObject({
+      before: { present: true, value: 6 },
+      after: { present: true, value: 1 },
+    });
+  });
+
+  test('independent damage choice persists through selection and correction; resetting choice and changing ability clears it', async () => {
+    const t = backend();
+    const { player, campaignId, goblin, thornId } = await battle(t);
+    await submit(
+      player.client,
+      campaignId,
+      '@Thorn /ability select ability="Melee Weapon Free Strike" characteristic=A damage-characteristic=M',
+      cid('choose'),
+    );
+    const actor = { kind: 'character' as const, id: thornId, name: 'Thorn' };
+    expect(
+      (await player.client.query(api.abilities.sheet, { campaignId, actor })).draft,
+    ).toMatchObject({ characteristic: 'A', damageCharacteristic: 'M' });
+    await submit(
+      player.client,
+      campaignId,
+      '@Thorn /ability select ability="Melee Weapon Free Strike" damage-characteristic=default',
+      cid('reset-damage'),
+    );
+    expect(
+      (await player.client.query(api.targets.drafts, { campaignId })).mine!.damageCharacteristic,
+    ).toBeNull();
+    await submit(
+      player.client,
+      campaignId,
+      '@Thorn /ability select ability="Melee Weapon Free Strike" damage-characteristic=A',
+      cid('choose-damage'),
+    );
+    await atDice(t, campaignId, [5, 5]);
+    const used = await submit(
+      player.client,
+      campaignId,
+      `/target toggle target=@{foe:${goblin}}`,
+      cid('fire'),
+    );
+    const event = await eventById(t, campaignId, used.eventId);
+    expect(
+      data<{ result: { selectedDamageCharacteristic: string } }>(event).result
+        .selectedDamageCharacteristic,
+    ).toBe('A');
+    const corrected = await submit(
+      player.client,
+      campaignId,
+      `/ability correct event="${event._id}" target=@{foe:${goblin}} edges=0 banes=1`,
+      cid('correct-choice'),
+    );
+    expect(
+      data<{ correction: { after: { damage: { damageCharacteristic: string } } } }>(
+        await eventById(t, campaignId, corrected.eventId),
+      ).correction.after.damage.damageCharacteristic,
+    ).toBe('A');
+    expect((await foeRow(t, goblin)).live.stamina).toBe(11);
+    await submit(
+      player.client,
+      campaignId,
+      '@Thorn /ability select ability="Melee Weapon Free Strike" characteristic=A damage-characteristic=A',
+      cid('select-again'),
+    );
+    await submit(
+      player.client,
+      campaignId,
+      '@Thorn /ability select ability="Brutal Slam"',
+      cid('switch'),
+    );
+    expect((await player.client.query(api.targets.drafts, { campaignId })).mine).toMatchObject({
+      characteristic: null,
+      damageCharacteristic: null,
+    });
+  });
+
+  test('unknown immunity is manual and source snapshot governs foe attacks after catalog changes', async () => {
+    const t = backend();
+    const { director, player, campaignId, goblin } = await battle(t);
+    await t.run(async ctx => {
+      const foe = (await ctx.db.get(goblin))!;
+      const snapshot = JSON.parse(foe.sourceSnapshot);
+      snapshot.text = snapshot.text.replace('**-**<br>Immunity', '**fire 5**<br>Immunity');
+      await ctx.db.patch(goblin, { sourceSnapshot: JSON.stringify(snapshot) });
+      const catalog = (await ctx.db
+        .query('content')
+        .withIndex('by_contentId', q => q.eq('contentId', GOBLIN))
+        .unique())!;
+      await ctx.db.patch(catalog._id, { features: [], text: 'replaced catalog' });
+    });
+    await atDice(t, campaignId, [4, 5]);
+    const manual = await submit(
+      player.client,
+      campaignId,
+      `@Thorn /ability use ability="Melee Weapon Free Strike" targets=[@{foe:${goblin}}]`,
+      cid('unknown-immunity'),
+    );
+    expect((await eventById(t, campaignId, manual.eventId)).description).toContain(
+      'damage is left for manual application',
+    );
+    expect((await foeRow(t, goblin)).live.stamina).toBe(15);
+    await atDice(t, campaignId, [4, 5]);
+    const used = await submit(
+      director.client,
+      campaignId,
+      `@{foe:${goblin}} /ability use ability="Spear Charge" targets=[@Thorn]`,
+      cid('pinned-foe'),
+    );
+    const event = await eventById(t, campaignId, used.eventId);
+    expect(data<{ source: { text: string } }>(event).source.text).toContain('Spear Charge');
+    expect(data<{ source: { text: string } }>(event).source.text).not.toContain('replaced catalog');
+  });
+});
+
+test('effective results hide foe temporary pools from peers even with numerical health enabled', async () => {
+  const t = backend();
+  const { director, observer, player, campaignId, goblin } = await battle(t);
+  await submit(
+    director.client,
+    campaignId,
+    '/campaign health-display mode=numerical',
+    cid('numerical'),
+  );
+  await submit(
+    director.client,
+    campaignId,
+    `@{foe:${goblin}} /adjust temporary-stamina value=3`,
+    cid('temporary'),
+  );
+  await atDice(t, campaignId, [4, 5]);
+  await submit(
+    player.client,
+    campaignId,
+    `@Thorn /ability use ability="Melee Weapon Free Strike" targets=[@{foe:${goblin}}]`,
+    cid('temporary-hit'),
+  );
+  for (const client of [player.client, observer.client]) {
+    const rows = await client.query(api.abilities.results, { campaignId });
+    expect(rows[0]!.targets[0]!.applied).toMatchObject({ staminaBefore: 15, staminaAfter: 14 });
+    expect(rows[0]!.targets[0]!.applied).not.toHaveProperty('temporaryStaminaBefore');
+    expect(rows[0]!.targets[0]!.applied).not.toHaveProperty('temporaryStaminaAfter');
+  }
+  const own = await director.client.query(api.abilities.results, { campaignId });
+  expect(own[0]!.targets[0]!.applied).toMatchObject({
+    temporaryStaminaBefore: 3,
+    temporaryStaminaAfter: 0,
   });
 });

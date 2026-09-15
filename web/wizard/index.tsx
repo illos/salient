@@ -28,7 +28,12 @@ import type {
   SelectionValue,
 } from '../../shared/contracts/characterEvaluation';
 import type { Decision, DecisionDefinitions, Step } from '../../shared/evaluate/definitions';
-import { parseArray } from '../../shared/evaluate/character';
+import {
+  assignCharacteristic,
+  assignmentError,
+  characteristicArray,
+  ASSIGNMENT_ID,
+} from '../../shared/evaluate/assignment';
 import { draftSelectionsFrom } from '../../shared/evaluate/draft';
 import {
   indexDecisions,
@@ -36,7 +41,6 @@ import {
   isSupported,
   poolOf,
   pruneUnavailable,
-  singleValue,
   unavailableReason,
   type Selections,
 } from '../../shared/evaluate/structure';
@@ -143,6 +147,11 @@ function PoolSelect({
       }}
     >
       <option value="">Choose…</option>
+      {(decision.id === 'culture.language' || decision.id === 'career.soldier.languages') && (
+        <option value="Caelian" disabled>
+          Caelian — automatically known common tongue
+        </option>
+      )}
       {allowOpen && <option value="__open__">Leave open (deferred)</option>}
       {supported.map(v => (
         <option key={v} value={v}>
@@ -359,42 +368,7 @@ function DecisionEditor({
       </div>
     );
   } else if (shape.type === 'assignment') {
-    const array = singleValue(selections, decision.dependsOn?.[0] ?? '');
-    const values = array ? parseArray(array) : [];
-    const current =
-      value && typeof value === 'object' && !Array.isArray(value)
-        ? value
-        : ({} as Record<string, number>);
-    control = (
-      <div className="flex flex-wrap items-end gap-3">
-        {shape.targets.map(target => (
-          <label key={target} className="flex flex-col gap-1 text-sm">
-            <span className="caps text-muted-foreground">{target}</span>
-            <select
-              className="native-select"
-              aria-label={`${decision.id} ${target}`}
-              value={current[target] === undefined ? '' : String(current[target])}
-              onChange={event => {
-                const next = { ...current };
-                if (event.target.value === '') delete next[target];
-                else next[target] = Number(event.target.value);
-                onSelect(decision.id, Object.keys(next).length ? next : undefined);
-              }}
-            >
-              <option value="">Choose…</option>
-              {[...new Set(values)].map(v => (
-                <option key={v} value={String(v)}>
-                  {v}
-                </option>
-              ))}
-            </select>
-          </label>
-        ))}
-        <span className="text-xs text-muted-foreground">
-          Array {array ?? '—'}; offered assignment: {decision.supportedInV001?.join('; ') ?? '—'}
-        </span>
-      </div>
-    );
+    control = <AssignmentEditor selections={selections} onSelect={onSelect} />;
   }
   return (
     <div className="rule-soft flex flex-col gap-2 py-3">
@@ -403,6 +377,119 @@ function DecisionEditor({
       <SourcePanel path={decision.source} quote={decision.quote} label={decision.id} />
       {decision.note && <p className="m-0 text-xs text-muted-foreground">{decision.note}</p>}
       <Diagnostics list={diagnostics} />
+    </div>
+  );
+}
+
+/** Each repeated array value has its own draggable token; named selects use the same transition. */
+function AssignmentEditor({
+  selections,
+  onSelect,
+}: {
+  selections: Selections;
+  onSelect: (id: string, value: SelectionValue | undefined) => void;
+}) {
+  const [error, setError] = useState<string | null>(null);
+  const array = characteristicArray(selections['class.fury.characteristic-array']);
+  const value = selections[ASSIGNMENT_ID];
+  const current = value && typeof value === 'object' && !Array.isArray(value) ? value : {};
+  const remaining = [...array];
+  for (const amount of Object.values(current)) {
+    const index = remaining.indexOf(amount);
+    if (index >= 0) remaining.splice(index, 1);
+  }
+  function assign(target: string, amount: number | null, fromTarget?: string) {
+    try {
+      const next = assignCharacteristic(selections, target, amount, fromTarget);
+      onSelect(ASSIGNMENT_ID, next[ASSIGNMENT_ID]);
+      setError(null);
+    } catch (error) {
+      setError(error instanceof Error ? error.message : 'Invalid assignment.');
+    }
+  }
+  return (
+    <div className="flex flex-col gap-3">
+      <p className="m-0 text-xs text-muted-foreground">
+        Might and Agility are fixed by Fury. Place each remaining value in a blank characteristic,
+        or choose it by name.
+      </p>
+      <div aria-label="Remaining characteristic values" className="flex gap-2">
+        {remaining.map((amount, index) => (
+          <span
+            key={`${amount}:${index}`}
+            draggable
+            data-testid={`array-value-${index}`}
+            className="rounded border p-2 cursor-grab"
+            onDragStart={event =>
+              event.dataTransfer.setData('application/json', JSON.stringify({ value: amount }))
+            }
+          >
+            {amount}
+          </span>
+        ))}
+      </div>
+      <div className="flex flex-wrap items-end gap-3">
+        {['Might', 'Agility'].map(target => (
+          <label key={target} className="flex flex-col gap-1 text-sm">
+            <span>{target} (fixed)</span>
+            <Input aria-label={`${ASSIGNMENT_ID} ${target}`} value="2" disabled className="w-20" />
+          </label>
+        ))}
+        {['Reason', 'Intuition', 'Presence'].map(target => (
+          <label
+            key={target}
+            data-testid={`assignment-${target}`}
+            className="flex flex-col gap-1 rounded border border-dashed p-2 text-sm"
+            onDragOver={event => event.preventDefault()}
+            onDrop={event => {
+              event.preventDefault();
+              try {
+                const dropped = JSON.parse(event.dataTransfer.getData('application/json')) as {
+                  value: number;
+                  fromTarget?: string;
+                };
+                assign(target, dropped.value, dropped.fromTarget);
+              } catch {
+                setError('Drop a characteristic value from this array.');
+              }
+            }}
+          >
+            <span
+              draggable={current[target] !== undefined}
+              className="caps text-muted-foreground"
+              onDragStart={event =>
+                event.dataTransfer.setData(
+                  'application/json',
+                  JSON.stringify({ value: current[target], fromTarget: target }),
+                )
+              }
+            >
+              {target}
+              {current[target] === undefined ? '' : `: ${current[target]}`}
+            </span>
+            <select
+              className="native-select"
+              aria-label={`${ASSIGNMENT_ID} ${target}`}
+              value={current[target] === undefined ? '' : String(current[target])}
+              onChange={event =>
+                assign(target, event.target.value === '' ? null : Number(event.target.value))
+              }
+            >
+              <option value="">Choose…</option>
+              {[...new Set(array)].map(amount => (
+                <option
+                  key={amount}
+                  value={String(amount)}
+                  disabled={assignmentError({ ...current, [target]: amount }, array) !== null}
+                >
+                  {amount}
+                </option>
+              ))}
+            </select>
+          </label>
+        ))}
+      </div>
+      <ErrorNotice error={error} />
     </div>
   );
 }
@@ -539,6 +626,8 @@ function Wizard({ character }: { character: LoadedCharacter }) {
   function select(id: string, value: SelectionValue | undefined) {
     setSaved(false);
     const next = { ...selections };
+    if (id === 'class.fury.characteristic-array' && value !== selections[id])
+      delete next[ASSIGNMENT_ID];
     if (value === undefined) delete next[id];
     else next[id] = value;
     const pruned = pruneUnavailable(next, definitions);

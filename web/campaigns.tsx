@@ -5,13 +5,14 @@ import { useConvexAuth, useMutation, useQuery } from 'convex/react';
 import { api } from '../convex/_generated/api';
 import type { Id } from '../convex/_generated/dataModel';
 import { Badge } from './components/ui/badge';
-import { Button } from './components/ui/button';
+import { Button, buttonVariants } from './components/ui/button';
 import { Card, CardContent } from './components/ui/card';
 import { Input } from './components/ui/input';
 import { ErrorNotice, Eyebrow, Field, Loading, Notice, SectionHeading, useCommand } from './ui';
 import { FoesPanel } from './foes';
 import { PartyPanel } from './character-sheet/party';
 import { CommandConsole } from './command-input';
+import { VoidCard } from './table/void-card';
 
 export function CampaignsPage() {
   const campaigns = useQuery(api.campaigns.list);
@@ -207,12 +208,13 @@ export function JoinPage({ shareCode }: { shareCode: string }) {
           </p>
         </div>
         {!isAuthenticated ? (
-          <Button
-            render={<Link to="/login" search={{ next: `/join/${shareCode}` }} />}
-            className="w-fit hover:no-underline"
+          <Link
+            to="/login"
+            search={{ next: `/join/${shareCode}` }}
+            className={buttonVariants({ className: 'w-fit hover:no-underline' })}
           >
             Sign in to request membership
-          </Button>
+          </Link>
         ) : sent ? (
           <Notice role="status">
             Your request has been saved. Its status appears on your campaigns page.
@@ -467,6 +469,7 @@ function SessionControls({
 }) {
   const transition = useMutation(api.sessions.transition);
   const command = useCommand();
+  const [closing, setClosing] = useState<Id<'encounters'> | null>(null);
   if (!director)
     return (
       <Notice>
@@ -504,8 +507,12 @@ function SessionControls({
         </Button>
         <Button
           variant="outline"
-          disabled={command.pending || session.encounter?.status === 'committed'}
-          onClick={() =>
+          disabled={command.pending}
+          onClick={() => {
+            if (session.encounter?.status === 'committed') {
+              setClosing(session.encounter.id);
+              return;
+            }
             void command.run(
               commandId =>
                 transition({
@@ -518,12 +525,23 @@ function SessionControls({
                 'session.transition',
                 { sessionId: session.id, expectedRevision: session.revision, action: 'close' },
               ]),
-            )
-          }
+            );
+          }}
         >
           End session
         </Button>
       </div>
+      {closing === session.encounter?.id && session.encounter?.status === 'committed' && (
+        <VoidCard
+          key={session.encounter.id}
+          campaignId={session.campaignId}
+          encounterId={session.encounter.id}
+          session={{ id: session.id, revision: session.revision }}
+          paused={session.status === 'paused'}
+          onCancel={() => setClosing(null)}
+          onDone={() => setClosing(null)}
+        />
+      )}
       <ErrorNotice error={command.error} />
       <details className="text-sm">
         <summary className="cursor-pointer py-1 text-muted-foreground">
@@ -623,7 +641,7 @@ function Invitations({
         <div className="rule-soft border-t pt-4">
           <p className="caps mb-2 text-muted-foreground">
             Join requests{' '}
-            {requests.length > 0 && <span className="text-primary">{requests.length}</span>}
+            {requests.length > 0 && <span className="text-foreground">{requests.length}</span>}
           </p>
           {requests.length === 0 ? (
             <p className="text-sm text-muted-foreground">No pending requests.</p>
@@ -692,7 +710,7 @@ function GameLog({
   return (
     <>
       <p className="mb-2 text-sm text-muted-foreground">
-        Session and campaign activity is recorded here. Combat action entries are not available yet.
+        Session and campaign activity is recorded here.
       </p>
       {result.events.length === 0 ? (
         <p className="py-8 text-center text-sm text-muted-foreground">No recorded activity yet.</p>

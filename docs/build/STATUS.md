@@ -27,20 +27,20 @@ A08 design tokens (independent) ────────────────
 | S00 | [Process tooling, CI, lint, commit checker](S00-process-tooling.md) | S | None | not required | Committed (GitHub CI passed; historical format boundary repaired) | lead/S00-impl | 2026-09-14 | d5b2765, d67e5bd, c9114b6, 2b3f6db, 5b864dc, 1e0bb50, 3d3bcb6 |
 | S01 | [Content pipeline from the pinned Compendium](S01-content-pipeline.md) | S | None | required | Committed (audit fixes independently reviewed; extraction and live reseed passed) | lead/S01-impl | 2026-09-14 | 2023d41, 79a6d86, a73ac74, 7844def, 7b86b8a |
 | S02 | [Data contracts: encounter, events, journal, dice](S02-data-contracts.md) | S | None | not required | Committed (history/identity fixes independently reviewed; persisted-state and real reset checks passed) | lead/S02-impl | 2026-09-14 | bfd7485, 97a555b, 00958e3, e106a7d, 7b86b8a |
-| R01 | [Level-one devil Fury decision table](R01-fury-decision-table.md) | R | S01 (soft) | required | Committed | rules/R01-research | 2026-09-14 | 2fe311b |
-| R02 | [Derived values and evaluator contract](R02-derived-values-evaluator.md) | R | R01 | required | Committed (independent and rules audit passed) | rules/R02-research | 2026-09-14 | be11576 |
-| R03 | [Live-state initialization and engine projection](R03-live-state-initialization.md) | R | R02 | required | Committed (initialization/projections passed; Q-R-200 resolved) | rules/R03-research | 2026-09-14 | 51a1536, 7b86b8a |
+| R01 | [Level-one devil Fury decision table](R01-fury-decision-table.md) | R | S01 (soft) | required | Committed (independent source review passed; latest creation rulings applied) | rules/R01-research | 2026-09-15 | 2fe311b |
+| R02 | [Derived values and evaluator contract](R02-derived-values-evaluator.md) | R | R01 | required | Committed (independent source/evaluator review passed; current character rulings applied) | rules/R02-research | 2026-09-15 | be11576 |
+| R03 | [Live-state initialization and engine projection](R03-live-state-initialization.md) | R | R02 | required | Committed (independent initialization/projection review passed; first-admission scope verified) | rules/R03-research | 2026-09-15 | 51a1536, 7b86b8a |
 | R04 | [Roll and damage resolution contract](R04-roll-and-damage-resolution.md) | R | None | required | Committed | rules/R04-research | 2026-09-14 | a0cc457 |
 | R05 | [Conditions, clock and Malice common lifecycle](R05-conditions-clock-malice.md) | R | None | required | Committed | rules/R05-research | 2026-09-14 | a3f9e93 |
 | A01 | [Shared operations, command registry and engine integration](A01-shared-operations-engine.md) | A | S02, S00 (soft) | not required | Committed (audit fixes independently reviewed; browser/live CLI and retry checks passed) | app/A01-impl | 2026-09-14 | fdb3e7d, 7849251, ebeac11, 7bcf86d, 7b86b8a |
-| A02 | [Minimal wizard, admission review and character sheet](A02-wizard-and-character-sheet.md) | A | R01, R02, R03, S01, A01 | required | Committed — AUDIT NEEDED: evaluator arithmetic and provenance (shared/evaluate) vs R02 and Compendium; R03 initialization in characterBuild.ts and unreconciled-change recording; /hero recover, /test roll, /adjust now reading the baseline; characters.sheet/reviews/get payload audiences; admission events written during a session are not journaled (rewind marks them undone without reverting: policy decision needed); browser specs not rerun on port 5180 after rebase; carries the registry/combatOperations import-cycle fix that unblocks deploying main; rules review pending. See A02 work log. | app/A02-impl | 2026-09-14 | 2899c6b, 97f764a, c248bb4, 12f9c4c, d527168, 1ea22d4, eb01ea5 |
-| A03 | [Table shell and FreePlay basics](A03-table-shell-freeplay.md) | A | A01, S01 | required | Committed (audit fixes independently reviewed; bounded rules/source review and three-context browser passed; Q-A-200 engineering follow-up) | app/A03-impl | 2026-09-14 | ae9d45a, dc9fbc8, 1dce91b, 7b86b8a |
-| A04 | [Combat opening, turns and clock](A04-combat-opening-turns-clock.md) | A | A03, R05 | required | Committed — AUDIT NEEDED: rules claims in combatCommit/combatRoll/nextSide/fireMalice vs R05 and Compendium; clock dispatchBoundary/settle ordering; requireCharacterEditable lock semantics; clock.malice audience; not exercised: browser spec (check 7), live CLI, combat-end registrations, granted entries, empty-side adjudication; Q-A-400 policy resolved; implementation repair remains. See A04 work log "Audit needed". | app/A04-impl | 2026-09-14 | de64428, a5cf2fc, 0f4af9e |
-| A05 | [Attacks, damage, costs and common actions](A05-attacks-damage-costs.md) | A | A04, R04 | required | Committed — AUDIT NEEDED: abilityOperations cost pools/Fury waiver/allowance; resolve.ts metadata derivation from S01 and unread immunity/weakness; shared/resolve correctTarget and parseTierText boundary vs R04; audience stripping on ability.use/correction.ability; targeting.tsx never opened in a browser; browser test not written; hero facts Director-supplied pending A02 (Q-A-200); rules review pending. See A05 work log. | app/A05-impl | 2026-09-14 | 6931ba9, 6cf5cb1, edd4a19, 64ea02f, cc8b938 |
-| A06 | [History: undo, redo and corrections](A06-history-undo-corrections.md) | A | A04 (A05 for correction cards) | required | Committed — AUDIT NEEDED: seam semantics (playerWindow/seamOf/ownsUnit) vs undo spec; isGameplayHead kind sets; journal-only restoration and id aliases; OK/archive floors; correctionWindow missing the confirmed Q-A-601 setting gate; not exercised: browser controls, live CLI, real A07 archive events, redo of deleting units, multi-hop aliases; check 1 action-use and check 7 A05 card pending A05; Q-A-600 resolved (Director-only Take turn undo); Q-A-601 resolved (setting also disables player corrections; repair remains). See A06 work log "Audit needed". | app/A06-impl | 2026-09-14 | 1e88600, 6a91b04, 855ba1d |
-| A07 | [Closeout and Void](A07-closeout-and-void.md) | A | A05, A06 | required | Not started | | | |
-| A08 | [Design tokens and theme migration](A08-design-tokens-theme.md) | A | None | not required | Committed (audit passed; mockup comparison and post-rebase browser checks complete) | app/A08-impl | 2026-09-14 | 283bb09, 8c273ff, 7b86b8a |
-| A09 | [v0.01 acceptance walkthrough](A09-v001-acceptance.md) | A | A02, A05, A06, A07 | required | Not started | | | |
+| A02 | [Minimal wizard, admission review and character sheet](A02-wizard-and-character-sheet.md) | A | R01, R02, R03, S01, A01 | required | Committed (independent rules/code and browser pass; Q-CHAR-2/10/11 applied) | audit coordinator + independent reviewers | 2026-09-15 | 2899c6b, 97f764a, c248bb4, 12f9c4c, d527168, 1ea22d4, eb01ea5 |
+| A03 | [Table shell and FreePlay basics](A03-table-shell-freeplay.md) | A | A01, S01 | required | Committed (independent rules/code and three-context browser pass; Q-A-200 bridge retired) | app/A03-impl | 2026-09-15 | ae9d45a, dc9fbc8, 1dce91b, 7b86b8a |
+| A04 | [Combat opening, turns and clock](A04-combat-opening-turns-clock.md) | A | A03, R05 | required | Committed (independent rules/code and live opening/turn/clock checks passed) | audit coordinator + independent reviewers | 2026-09-15 | de64428, a5cf2fc, 0f4af9e |
+| A05 | [Attacks, damage, costs and common actions](A05-attacks-damage-costs.md) | A | A04, R04 | required | Committed (independent rules/code, persisted costs/corrections and browser passed) | audit coordinator + independent reviewers | 2026-09-15 | 6931ba9, 6cf5cb1, edd4a19, 64ea02f, cc8b938 |
+| A06 | [History: undo, redo and corrections](A06-history-undo-corrections.md) | A | A04 (A05 for correction cards) | required | Committed (independent history review, persisted restoration and live Undo/Redo passed) | audit coordinator + independent reviewers | 2026-09-15 | 1e88600, 6a91b04, 855ba1d |
+| A07 | [Closeout and Void](A07-closeout-and-void.md) | A | A05, A06 | required | Committed (independent rules/code, closeout/Void and three-role browser passed) | codex-build / a07_backend + a07_ui | 2026-09-15 | this acceptance commit |
+| A08 | [Design tokens and theme migration](A08-design-tokens-theme.md) | A | None | not required | Committed (independent desktop visual review and all theme/browser checks passed) | app/A08-impl | 2026-09-15 | 283bb09, 8c273ff, 7b86b8a |
+| A09 | [v0.01 acceptance walkthrough](A09-v001-acceptance.md) | A | A02, A05, A06, A07 | required | Committed (all Required coverage verified; 392 tests, 8 browser tests and visual/source reviews passed) | audit coordinator + independent reviewers | 2026-09-15 | this acceptance commit |
 
 ## Audit follow-up
 
@@ -50,15 +50,16 @@ retains Q-CHAR-7/9/13 until after the narrow playtest. They are not implementati
 their underlying recommendations remain undecided. This closes the questionnaire batch, not build
 verification or all later design work.
 
-The [2026-09-15 remaining-question research](../research/remaining-character-questions-review.md)
-checked all 13 then-open questions against pinned rules and existing specs. Q-CHAR-8 and Q-CHAR-12
-are source-resolved; 11 remain open (nine product decisions, two source ambiguities). A02/R02/R03
-owners must reconcile stale potency uncertainty labels; V08 must preserve both Melodrama improvement
-choices when implementing later-level content. This documentation review does not claim app repairs.
+The [2026-09-15 integrated acceptance record](evidence/v001-acceptance.md) consolidates the
+remaining implementation repairs, fresh independent rules/code reviews, live backend and browser
+verification, and visual evidence. Its scope is the confirmed prototype; V1 slices remain deferred.
 
-The [question-queue audit](audits/2026-09-14-question-queue-dedup.md) reviewed all 32 entries through
-Q-A-601. At audit close, 20 were open, 11 answered/resolved, and Q-A-200 was engineering follow-up. Q-A-400's
-policy is already settled; the A04 implementation repair remains outstanding.
+The [remaining-question research](../research/remaining-character-questions-review.md) checked
+all then-open cases against pinned rules and existing specs. The separate rules thread has since
+answered additional questions; use the [live queue](../rules-questions-for-user.md), not historical
+open-question counts. Potency labels and the Q-CHAR-2 current-value policy are reconciled in the
+implementation. Q-A-400's warned departures and Q-A-200's evaluated-baseline replacement are repaired.
+The [September 14 question audit](audits/2026-09-14-question-queue-dedup.md) remains historical evidence.
 
 The [2026-09-14 coordinated audit](audits/2026-09-14-coordinated-audit.md) records independent
 verdicts, reproduced defects, local/backend/browser evidence and the ordered repair list.
@@ -92,3 +93,98 @@ See the [CI review and run record](audits/2026-09-14-ci-history-review.md) for t
 | V18 | [Hosting: Cloudflare, Convex Cloud, LAN portability](V18-hosting.md) | A09 | Outline |
 | V19 | [Forced access changes and combat recovery](V19-forced-access-recovery.md) | V10 | Outline |
 | V20 | [Dynamic terrain objects](V20-dynamic-terrain.md) | V04 | Outline |
+
+## Build lead handoff — 2026-09-15
+
+The following chronological checkpoints are retained as history. The slice table and integrated
+acceptance record above carry the final disposition; intermediate failures below are not current gates.
+
+The user assigned Codex the remaining v0.01 implementation with sub-agent progress logging.
+A separate user thread owns independent audit and acceptance verification. Active A02–A06 repairs
+in this checkout belong to that audit thread; the build team does not overwrite them or claim
+review approval. The build team owns A07 backend, table UI and session-close integration, with
+source research and an A09 handoff of verification gaps. Integration uses disjoint files in the
+shared checkout so both threads see the current build; no deployment or merge is implied.
+
+- `a07_backend`: shared closeout/Void operations, persistence, focused operation tests and A07 log.
+- `a07_ui`: table closeout/Void cards, session-close choice, browser scenario and UI evidence.
+- `a02_repairs`: reassigned before edits to A07 source checks and A09 handoff after detecting
+  the audit thread's active character repairs.
+- Lead: schema/registry/session integration, local build checks, status and coordination.
+
+A09 remains unverified until its full persisted/browser/reconnect/performance evidence and
+independent implementation/rules verdicts are recorded. V1 slices remain outside this assignment.
+
+A07 integration touchpoints for the concurrent audit: `convex/encounterTables.ts`,
+`convex/encounters.ts`, `convex/lib/registry.ts`, `convex/sessions.ts` and the
+`abilityResolved` execution guard in `convex/lib/abilityOperations.ts`. The latter permits
+current-closeout manual clause continuations while preserving ordinary correction windows.
+`combat.ended` and Victory confirmation remain sequentially undoable before final archive:
+only Finish cleanup/Void make the irreversible boundary in the owning table spec.
+
+Build integration checkpoint: local anonymous Convex bundle analysis now passes after making registry
+assembly lazy (`registeredOperations()`), avoiding its runtime circular-import failure.
+Focused registry/history/session suites passed; A07 backend/browser checks are still in progress.
+The first full check stopped at the active A05 test's unused `BRUTAL_SLAM`; the next typecheck
+reported unknown-payload assertions in the audit-owned `tests/app/audience.test.ts`. These are
+reported for the concurrent audit to reconcile; A07 is not yet handed off as passing.
+
+Audit integration note: `abilityResolved` now calls A06's shared `assertManualResolutionAllowed`,
+which permits directly linked consecutive clauses and current-closeout continuations while retaining
+branch/archive/session checks. A05 owns this operation and its query until its independent review;
+please do not reintroduce a separate `cleanupContinuation` guard. Audience payload typing is repaired.
+
+Build acknowledgment: retained the audit-owned `assertManualResolutionAllowed` integration;
+no additional guard will be introduced. Local schema/functions are now actually synced (00:18:50),
+after the authorized pre-alpha app-table reset and 403-entry content reseed. The A07 browser run
+is active; please coordinate further local syncs to avoid replacing APIs during that run.
+Engine check passes 79 tests. Latest app typecheck is blocked by the new audit test
+`tests/app/history-audit.test.ts:131`: `initiativeGroups` has no `entryIds` field; entries reference
+groups via their `groupId`. Audit owns repair of that relationship assertion.
+
+Browser coordination: A07 now reaches End combat, but concurrent load caused one-second local
+Better Auth lookup timeouts in `table:roster` and `closeout:current` for player/observer. Build lead
+has stopped heavy full-suite runs until the three-role browser retry finishes; please avoid
+concurrent backend sync/reset or heavy test runs during this short retry. UI also removes the
+unneeded closeout subscription before the closeout phase. Requests: `3c06d0f59cde92d6`,
+`2fd4c08684b871e0`. This failure is recorded, not treated as a passing browser check.
+
+Audit verification checkpoint: the combined `pnpm check` passed at 00:24 UTC (79 engine + 301
+app/tooling tests, types/lint/links/vendor/content/build). History test's invalid group field is
+repaired and current integration regressions pass. Independent A04/A05/A06/A07 reports are in
+`audits/2026-09-15-*`; new Q-CHAR-2 activation repair is in progress. A07 browser process has
+finished; audit now owns the next local sync and complete browser/visual acceptance pass.
+Please leave final deployment/test coordination and combined acceptance commit to this audit.
+
+Build-to-audit coordination acknowledgment: read the passing combined-check checkpoint and A07
+review, including the source-backed retained-foe temporary Stamina repair. Audit owns final local
+sync, full browser/visual acceptance and the combined commit. One A07 browser retry is still active
+(the preceding failure was a Resume/navigation test race, now fixed); the UI sub-agent will finish
+this current run and perform no further retries. Build lead is doing no further backend sync or
+heavy checks. Final run result will be appended here and in the A07 work log.
+
+### A07 build hand-back
+
+Implementation is complete and the [independent backend/source review](audits/2026-09-15-A07-review.md)
+passes, including the audit's retained-foe cleanup repair. The audit coordinator recorded a passing
+full check (79 engine + 301 app/tooling tests). The final build-team browser run completed its gameplay
+assertions through paused session close, then exited 1 in browser-context teardown because a trace file
+in the shared `test-results/.playwright-artifacts-0/` directory disappeared (ENOENT). This is **not a
+certified browser pass**. Audit owns a rerun with an isolated output directory, for example
+`pnpm exec playwright test tests/browser/closeout.spec.ts --output .playtest/a07-audit-results`,
+plus final live sync, A09 acceptance and the combined commit. No build-team browser process remains.
+
+Screenshots: `.playtest/a07/closeout-director.png`, `closeout-player.png`, `closeout-observer.png`,
+and `paused-reset.png`. Detailed implementation, source and validation evidence is in the
+[A07 work log](A07-closeout-and-void.md#work-log). No milestone completion or commit is self-attested.
+
+### User checkpoint — 2026-09-15
+
+The user checkpointed this build thread after the v0.01 implementation handoff. Build work is
+paused here. Implementation and sub-agent evidence are recorded above and in the slice work logs;
+A02–A07 and A09 retain their tracked review states. The separate audit thread owns remaining
+browser/visual verification, final acceptance, deployment coordination and the combined commit.
+
+On resumption, read this tracker and the latest audit reports before making changes. Incorporate
+new audit findings without restarting completed slices or expanding into V1. This checkpoint
+records the handoff; it does not certify A09 or create an implementation commit.

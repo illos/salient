@@ -348,9 +348,7 @@ test('R01 checks 2-3: every option value, grant and quoted count/budget sentence
 test('R01 check 4: the hero-fixture set is complete, the second path is complete, the invalid set is rejected', () => {
   const fixture = validate(data.selectionSets['hero-fixture']!.selections);
   assert.deepEqual(fixture.diagnostics, []);
-  assert.deepEqual(fixture.warnings, [
-    'career.soldier.languages: Caelian is already granted automatically (Q-R-100)',
-  ]);
+  assert.deepEqual(fixture.warnings, []);
   const second = validate(data.selectionSets['second-legal-path']!.selections);
   assert.deepEqual(second.diagnostics, []);
   assert.deepEqual(second.warnings, []);
@@ -367,4 +365,23 @@ test('R01: the document mirrors every decision id and question', () => {
   const questionsDoc = readFileSync(join(root, 'docs/rules-questions-for-user.md'), 'utf8');
   for (const q of data.questions)
     assert.ok(questionsDoc.includes(`${q}:`), `questions file missing ${q}`);
+});
+
+test('the spoken language pools exactly match both pinned printed tables', () => {
+  const text = readPinnedSource(
+    root,
+    join(sourceRoot, 'en/books/heroes/clean/Draw Steel Heroes.md'),
+  );
+  for (const [pool, heading, column] of [
+    ['pool.languages.by-ancestry', 'Languages by Ancestry Table', 1],
+    ['pool.languages.vaslorian-human', 'Vaslorian Human Languages Table', 2],
+  ] as const) {
+    const section = text.split(`###### ${heading}\n`)[1]!.split('\n#')[0]!;
+    const rows = section
+      .split('\n')
+      .filter(line => line.startsWith('|'))
+      .slice(2);
+    const names = rows.map(row => normalize(row.split('|')[column]!.trim()));
+    assert.deepEqual(data.pools[pool]!.values, names);
+  }
 });

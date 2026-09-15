@@ -613,11 +613,10 @@ by `characters.submit|withdraw|approve|decline` for the character page and the h
 submission is a `characterReviews` row naming the exact revision; `characters.campaignId` and
 `effectiveRevisionId` change only on activation (approval, or the owning active Director's logged
 submission). A save after submission marks the review `stale` so a later approval cannot activate
-unseen edits. First activation initializes live state per R03; later activations leave it untouched
-and record unreconciled maximum changes labeled Q-CHAR-2. **Follow-up:** the confirmed
-[current-value policy](#current-values-when-a-build-changes) supersedes that provisional behavior;
-apply downward caps and retire maximum-only uncertainty markers. Resource-type changes still need
-explicit reconciliation. Withdraw and decline are not blocked by the
+unseen edits. First activation initializes live state per R03; later activations apply the confirmed
+[current-value policy](#current-values-when-a-build-changes) through a shared preview and atomic
+downward caps. Maximum-only uncertainty markers are retired from current reads and events.
+Resource-type replacement is refused until explicitly reconciled. Withdraw and decline are not blocked by the
 combat lock (they change no effective build); submit, save and approve are.
 
 Initial admission uses the draft/review/activation path without an existing effective build, with the
@@ -794,7 +793,7 @@ for independent work. Deferred research recommendations are not user rulings.
 | Decision | What it affects |
 | --- | --- |
 | Resource-type replacement requiring explicit reconciliation | Q-CHAR-2 resolves compatible current values and maximum changes in [the confirmed policy](#current-values-when-a-build-changes); it does not provide an automatic conversion between different resources. |
-| **Implementation note, 2026-09-14 (R03):** readiness-audit gap G3 is delivered as a contract: `live-state-initialization.md` (first-admission values with source sentences, the draft-save/re-evaluation rule, `HeroEntity`/`FoeEntity` projections with worked examples), `shared/contracts/liveState.ts`, `shared/contracts/entities.ts`, `tests/live-state-initialization.test.ts`. The original contract surfaced `UnreconciledMaximumChange` labeled **Q-CHAR-2**. The confirmed current-value policy now supersedes maximum-only uncertainty; executable repair remains separate. Re-admission after detachment is **Q-R-201**. | Apply the confirmed cap policy through shared activation; explicitly reconcile incompatible resource types. |
+| **Implementation note, 2026-09-14 (R03):** readiness-audit gap G3 is delivered as a contract: `live-state-initialization.md` (first-admission values with source sentences, the draft-save/re-evaluation rule, `HeroEntity`/`FoeEntity` projections with worked examples), `shared/contracts/liveState.ts`, `shared/contracts/entities.ts`, `tests/live-state-initialization.test.ts`. The original contract surfaced `UnreconciledMaximumChange` labeled **Q-CHAR-2**. The confirmed current-value policy is now implemented through shared preview/activation; legacy maximum-only markers are retired from current output. Re-admission after detachment is **Q-R-201**. | Apply the confirmed cap policy through shared activation; explicitly reconcile incompatible resource types. |
 | Full list of campaign values to clear on transfer | XP/Victories clearing is settled. Q-CHAR-3 now resolves transferred advancement eligibility and character-sheet ownership of level-up; any additional campaign-value reset enumeration remains separate. |
 | Entry reservation timing, detachment during active play, and former-campaign history access | Finalizing proposed admission/detachment contracts and table linkage. |
 | Player visibility without a grant, additional private-field exclusions, historical review visibility, and handling multiple competing submissions | Remaining access and review UX details; sheet viewing/combat grants are now established. |

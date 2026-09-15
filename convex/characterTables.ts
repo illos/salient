@@ -51,7 +51,7 @@ export const heroLiveValidator = v.object({
     initializedAt: v.number(),
   }),
 });
-/** R03 `UnreconciledMaximumChange`: surfaced, never applied (Q-CHAR-2). */
+/** Legacy stored markers; retained for existing rows, hidden from current reads and cleared on activation. */
 export const unreconciledValidator = v.object({
   field: v.union(
     v.literal('staminaMaximum'),
@@ -63,6 +63,18 @@ export const unreconciledValidator = v.object({
   currentValue: v.number(),
   question: v.literal('Q-CHAR-2'),
   revisionId: v.id('characterRevisions'),
+});
+export const reconciliationValidator = v.object({
+  changes: v.array(
+    v.object({
+      field: v.union(v.literal('stamina'), v.literal('recoveries')),
+      maximumBefore: v.union(v.number(), v.null()),
+      maximumAfter: v.number(),
+      currentBefore: v.number(),
+      currentAfter: v.number(),
+    }),
+  ),
+  incompatibleResource: v.union(v.null(), v.object({ before: v.string(), after: v.string() })),
 });
 export const reviewKindValidator = v.union(v.literal('admission'), v.literal('full-edit'));
 /**
@@ -104,12 +116,12 @@ export const characterTables = {
     effectiveRevisionId: v.union(v.id('characterRevisions'), v.null()),
     /** The R02 DerivedBaseline of the effective revision; null until first admission. */
     derivedBaseline: v.union(v.null(), v.any()),
-    /** Null until first admission initializes it (R03 section 2.1); untouched by later activations. */
+    /** Null until first admission; later activation retains current amounts with confirmed downward caps. */
     liveState: v.union(v.null(), heroLiveValidator),
     /** The campaign the character is attached to: set by admission, one at a time. */
     campaignId: v.union(v.id('campaigns'), v.null()),
     combatLocked: v.boolean(),
-    /** Maximum or resource changes a later activation surfaced for the user's decision (Q-CHAR-2). */
+    /** Legacy provisional records; current activation uses the confirmed caps and clears these. */
     unreconciled: v.optional(v.array(unreconciledValidator)),
   })
     .index('by_owner', ['ownerId'])
@@ -143,5 +155,6 @@ export const characterTables = {
     decidedById: v.union(v.id('users'), v.null()),
   })
     .index('by_character', ['characterId'])
+    .index('by_campaign_owner', ['campaignId', 'ownerId'])
     .index('by_campaign_status', ['campaignId', 'status']),
 };

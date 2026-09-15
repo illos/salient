@@ -8,7 +8,7 @@
  * docs/character-sheet-spec.md#views-permissions-and-persistence (one payload per audience,
  * owner-private notes excluded server-side), docs/accounts-and-access-spec.md#characters,
  * docs/table-spec.md#party-sheets-and-resource-visibility (peers: Stamina and Recoveries).
- * Live values are never written here (docs/live-state-initialization.md section 3).
+ * Draft saves never write live values; shared activation applies the confirmed current-value caps.
  */
 import { ConvexError, v } from 'convex/values';
 import { mutation, query } from './_generated/server';
@@ -27,11 +27,16 @@ import {
   reviewStatusValidator,
   revisionStatusValidator,
   selectionValidator,
-  unreconciledValidator,
+  reconciliationValidator,
 } from './characterTables';
+import { assignCharacteristic } from '../shared/evaluate/assignment';
+import { draftSelectionsFrom } from '../shared/evaluate/draft';
+import { previewBuildReconciliation } from '../shared/evaluate/liveReconciliation';
+import { selectionsFrom } from '../shared/evaluate/character';
 import { isJsonValue, type CharacterAuthored, type DraftSelection } from '../shared/characterDraft';
 import {
   baselineOf,
+  definitions,
   evaluateSelections,
   latestReview,
   pendingReview,
@@ -117,7 +122,7 @@ const detail = v.object({
   draftIsEffective: v.boolean(),
   derivedBaseline: v.union(v.any(), v.null()),
   liveState: v.union(v.null(), heroLiveValidator),
-  unreconciled: v.array(unreconciledValidator),
+  activationPreview: v.union(v.null(), reconciliationValidator),
   review: v.union(reviewValidator, v.null()),
 });
 
@@ -195,7 +200,14 @@ export const get = query({
         character.effectiveRevisionId === character.draftRevisionId,
       derivedBaseline: character.derivedBaseline,
       liveState: character.liveState,
-      unreconciled: character.unreconciled ?? [],
+      activationPreview:
+        character.liveState && draft?.derivedBaseline
+          ? previewBuildReconciliation(
+              character.liveState,
+              baselineOf(character.derivedBaseline),
+              baselineOf(draft.derivedBaseline)!,
+            )
+          : null,
       review: review ? await reviewView(ctx, review) : null,
     };
   },
@@ -246,6 +258,14 @@ export const save = mutation({
     expectedRevision: v.number(),
     authored: authoredValidator,
     selections: v.optional(v.array(selectionValidator)),
+    /** Named equivalent of wizard drag/drop; saved through this same revision operation. */
+    assignment: v.optional(
+      v.object({
+        target: v.string(),
+        value: v.union(v.number(), v.null()),
+        fromTarget: v.optional(v.string()),
+      }),
+    ),
   },
   returns: v.number(),
   handler: async (ctx, args) => {
@@ -260,7 +280,7 @@ export const save = mutation({
       );
     const fields = authored(args.authored);
     const old = character.draftRevisionId ? await ctx.db.get(character.draftRevisionId) : null;
-    const selections = args.selections ?? old?.selections ?? [];
+    let selections = args.selections ?? old?.selections ?? [];
     if (
       selections.length > 100 ||
       JSON.stringify(selections).length > 64000 ||
@@ -278,14 +298,33 @@ export const save = mutation({
       throw new ConvexError(
         'Selections must contain bounded JSON values and complete decision, branch and source references.',
       );
-    if (
-      new Set(
-        selections.map(selection =>
-          JSON.stringify([selection.ownerBranchId, selection.decisionId]),
-        ),
-      ).size !== selections.length
-    )
-      throw new ConvexError('A decision can only be saved once within its owning branch.');
+    if (new Set(selections.map(selection => selection.decisionId)).size !== selections.length)
+      throw new ConvexError(
+        'A decision can only be saved once within its owning branch or across branches.',
+      );
+    if (args.assignment) {
+      try {
+        selections = draftSelectionsFrom(
+          assignCharacteristic(
+            selectionsFrom(selections),
+            args.assignment.target,
+            args.assignment.value,
+            args.assignment.fromTarget,
+          ),
+          definitions,
+        );
+      } catch (error) {
+        throw new ConvexError(error instanceof Error ? error.message : 'Invalid assignment.');
+      }
+    }
+    // Known decisions always persist canonical pinned provenance; client labels cannot forge it.
+    const canonical = new Map(
+      draftSelectionsFrom(selectionsFrom(selections), definitions).map(s => [s.decisionId, s]),
+    );
+    const known = new Set(definitions.steps.flatMap(step => step.decisions.map(d => d.id)));
+    selections = selections.map(selection =>
+      known.has(selection.decisionId) ? canonical.get(selection.decisionId)! : selection,
+    );
     const revision = character.revision + 1;
     // Draft saves evaluate the build and never touch live values (R03 section 3).
     const evaluation = evaluateSelections(selections);
@@ -378,12 +417,16 @@ export const reviews = query({
       .unique();
     if (!campaign || !membership) throw new ConvexError('Campaign unavailable.');
     const director = campaign.ownerId === user._id;
-    const rows = (
-      await ctx.db
-        .query('characterReviews')
-        .withIndex('by_campaign_status', q => q.eq('campaignId', args.campaignId))
-        .take(200)
-    ).filter(review => (director ? review.status === 'pending' : review.ownerId === user._id));
+    const query = ctx.db.query('characterReviews');
+    const scoped = director
+      ? query.withIndex('by_campaign_status', q =>
+          q.eq('campaignId', args.campaignId).eq('status', 'pending'),
+        )
+      : query.withIndex('by_campaign_owner', q =>
+          q.eq('campaignId', args.campaignId).eq('ownerId', user._id),
+        );
+    // Scope before bounding; other owners and status sorting must not hide a recent submission.
+    const rows = await scoped.order('desc').take(200);
     return Promise.all(
       rows.map(async review => ({
         id: review._id,
@@ -646,15 +689,10 @@ export const sheet = query({
       ),
       commonActions: await commonActions(ctx),
       live: live ? { ...live, labels: labelsOf(live, baseline) } : null,
-      unreconciled: (character.unreconciled ?? []).map(
-        ({ field, before, after, currentValue, question }) => ({
-          field,
-          before,
-          after,
-          currentValue,
-          question,
-        }),
-      ),
+      activationPreview:
+        label !== 'effective' && live && shown
+          ? previewBuildReconciliation(live, baseline, shown)
+          : null,
       details: {
         cultureName: selectionText(selections, 'culture.name'),
         cultureLanguage: selectionText(selections, 'culture.language'),

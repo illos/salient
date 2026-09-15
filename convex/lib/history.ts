@@ -32,7 +32,7 @@ import type { MutationCtx } from '../_generated/server';
 import type { BoundActor } from '../../shared/commands/envelope';
 import type { JournalValue } from '../../shared/contracts/history';
 import type { ReadCtx } from './access';
-import { settingsOf } from './audience';
+import { projectEvent, settingsOf } from './audience';
 import { currentEncounter } from './encounters';
 import { journalDelete, journalInsert, journalPatch, type JournalScope } from './journal';
 import type { OperationDefinition, TableContext } from './registry';
@@ -57,6 +57,8 @@ export const NON_GAMEPLAY_KINDS = new Set([
   'membership.approved',
   'interaction.opened',
   'interaction.closed',
+  'target.draft',
+  'ability.blocked',
 ]);
 
 /**
@@ -79,6 +81,7 @@ export function isGameplayHead(event: { origin: string; kind: string }): boolean
     event.origin === 'user' &&
     !NON_GAMEPLAY_KINDS.has(event.kind) &&
     !ENCOUNTER_LIFECYCLE_KINDS.has(event.kind) &&
+    !event.kind.startsWith('character.') &&
     !isHistoryKind(event.kind)
   );
 }
@@ -175,7 +178,11 @@ export function walkHistory<E extends EventLike>(events: E[]): Walk<E> {
     const key = event.commandKey ?? JSON.stringify([event.actorId ?? null, event._id]);
     const unit: Unit<E> = {
       head: event,
-      actor: boundActorOf(event.payload),
+      actor:
+        boundActorOf(event.payload) ??
+        (event.kind.startsWith('correction.')
+          ? ((event.payload as { data?: { actor?: BoundActor } } | undefined)?.data?.actor ?? null)
+          : null),
       issuerId: event.actorId ?? null,
       commandKey: key,
     };
@@ -207,14 +214,19 @@ async function sessionEvents(ctx: ReadCtx, sessionId: Id<'sessions'>) {
   return ctx.db
     .query('events')
     .withIndex('by_session_sequence', q => q.eq('sessionId', sessionId))
-    .take(10000);
+    .collect();
 }
 
 /** Loads the history scope of the campaign's active session. Reads only. */
 export async function loadHistory(ctx: ReadCtx, context: TableContext): Promise<HistoryScope> {
   const session = context.session;
   if (!session) throw new ConvexError('History needs an active session.');
-  const events = await sessionEvents(ctx, session._id);
+  const events = (await sessionEvents(ctx, session._id)).map(event => ({
+    ...event,
+    // Window targets and refusal messages obey the same audience as the game log. Keep stored
+    // payloads for operation/history identity; restoration reads the original journal separately.
+    description: projectEvent(event, context.campaign, context.role === 'director').description,
+  }));
   const walk = walkHistory(events);
   const current = await currentEncounter(ctx, session);
   const encounter = current?.status === 'committed' ? current : null;
@@ -234,7 +246,7 @@ export async function loadHistory(ctx: ReadCtx, context: TableContext): Promise<
     const encounters = await ctx.db
       .query('encounters')
       .withIndex('by_session', q => q.eq('sessionId', session._id))
-      .take(100);
+      .collect();
     const archived = new Set(encounters.filter(e => e.archivedAt !== null).map(e => e._id));
     for (const event of events)
       if (event.encounterId && archived.has(event.encounterId) && event.sequence > floorSequence) {
@@ -252,7 +264,11 @@ const label = (unit: Unit) => `#${unit.head.sequence} ${unit.head.description}`;
 
 /** Whether the unit is a Director correction or adjustment (a seam for players). */
 export function isDirectorCorrection(unit: Unit): boolean {
-  return unit.head.kind === 'manual.adjustment' || unit.head.kind.startsWith('correction.');
+  const byRole = (unit.head.payload as { data?: { byRole?: string } } | undefined)?.data?.byRole;
+  return (
+    unit.head.kind === 'manual.adjustment' ||
+    (unit.head.kind.startsWith('correction.') && byRole !== 'player')
+  );
 }
 
 /** Names the seam a unit that is not the player's own character's action creates. */
@@ -274,7 +290,12 @@ export async function ownsUnit(ctx: ReadCtx, unit: Unit, user: Doc<'users'>): Pr
   if (!unit.actor || unit.actor.kind !== 'character') return false;
   const id = ctx.db.normalizeId('characters', unit.actor.id);
   const character = id ? await ctx.db.get(id) : null;
-  return !!character && character.ownerId === user._id;
+  const campaignId = (unit.head as Partial<Doc<'events'>>).campaignId;
+  return (
+    !!character &&
+    character.ownerId === user._id &&
+    (!campaignId || character.campaignId === campaignId)
+  );
 }
 
 function belowFloor(scope: HistoryScope, unit: Unit): string | null {
@@ -349,6 +370,11 @@ export async function redoWindow(
     return { allowed: false, reason: `Redo restores in order: ${label(top)} comes first.` };
   const floor = belowFloor(scope, top);
   if (floor) return { allowed: false, reason: `Nothing to redo: ${floor}` };
+  if (context.role !== 'director' && top.head.kind === 'turn.take')
+    return {
+      allowed: false,
+      reason: 'Turn start is outside the player history window; the Director can redo it.',
+    };
   if (context.role !== 'director' && !(await ownsUnit(ctx, top, context.user)))
     return {
       allowed: false,
@@ -372,19 +398,26 @@ export interface CorrectionWindow {
  * Whether `user` may append a correction to `eventId` now. The event's unit must be the latest on
  * the branch (older events need the intervening chain rewound first, Director included), inside
  * the current encounter or FreePlay stretch of the running session. The acting player's window is
- * their undo window: own character, no seam, next actor's turn start as the outer cutoff. Enable
- * user undo does not gate corrections (it governs undo; recorded as an interpretation).
+ * their undo window: own character, no seam, next actor's turn start as the outer cutoff. The
+ * Enable user undo setting also gates player corrections (confirmed Q-A-601).
  */
 export async function correctionWindow(
   ctx: ReadCtx,
   eventId: Id<'events'>,
   user: Doc<'users'>,
+  mode: 'correction' | 'manual' = 'correction',
+  prepared?: { context: TableContext; scope: HistoryScope | null },
 ): Promise<CorrectionWindow> {
-  const event = await ctx.db.get(eventId);
+  const event =
+    prepared?.scope?.events.find(row => row._id === eventId) ?? (await ctx.db.get(eventId));
   if (!event) return { allowed: false, reason: 'That event is unavailable.', unit: null };
-  const campaign = await ctx.db.get(event.campaignId);
+  const campaign = prepared?.context.campaign ?? (await ctx.db.get(event.campaignId));
   if (!campaign) return { allowed: false, reason: 'Campaign unavailable.', unit: null };
-  const session = campaign.activeSessionId ? await ctx.db.get(campaign.activeSessionId) : null;
+  const session = prepared
+    ? prepared.context.session
+    : campaign.activeSessionId
+      ? await ctx.db.get(campaign.activeSessionId)
+      : null;
   if (!session || session._id !== event.sessionId)
     return {
       allowed: false,
@@ -407,7 +440,20 @@ export async function correctionWindow(
   };
   if (context.role === 'observer')
     return { allowed: false, reason: 'Observers cannot correct results.', unit: null };
-  const scope = await loadHistory(ctx, context);
+  if (context.role !== 'director') {
+    const membership = await ctx.db
+      .query('memberships')
+      .withIndex('by_campaign_user', q => q.eq('campaignId', campaign._id).eq('userId', user._id))
+      .unique();
+    if (!membership) return { allowed: false, reason: 'Campaign unavailable.', unit: null };
+    if (!settingsOf(campaign).enableUserUndo)
+      return {
+        allowed: false,
+        reason: 'Enable user undo is off; player corrections are disabled.',
+        unit: null,
+      };
+  }
+  const scope = prepared?.scope ?? (await loadHistory(ctx, context));
   const headId = scope.walk.unitOfEvent.get(event._id);
   const unit = headId ? scope.walk.units.get(headId) : undefined;
   if (!unit) return { allowed: false, reason: 'That event is not a gameplay unit.', unit: null };
@@ -417,6 +463,19 @@ export async function correctionWindow(
       reason: `${label(unit)} is undone; redo it before correcting it.`,
       unit,
     };
+  if (mode === 'manual' && context.role === 'director' && !belowFloor(scope, unit)) {
+    // Dispositions continue the original card. Several directly linked clauses can be marked
+    // consecutively; formal closeout also offers outstanding clauses from this encounter.
+    const later = scope.walk.branch.slice(scope.walk.branch.indexOf(unit) + 1);
+    const linkedOnly = later.every(
+      next =>
+        next.head.kind === 'ability.resolved-at-table' &&
+        next.head.payload?.data?.originalEventId === event._id,
+    );
+    const cleanup =
+      scope.encounter?.phase === 'closeout' && event.encounterId === scope.encounter._id;
+    if (linkedOnly || cleanup) return { allowed: true, reason: '', unit };
+  }
   const window =
     context.role === 'director'
       ? directorWindow(scope, unit)
@@ -434,6 +493,48 @@ export async function assertCorrectionAllowed(
   const window = await correctionWindow(ctx, eventId, user);
   if (!window.allowed || !window.unit) throw new ConvexError(window.reason);
   return window.unit;
+}
+
+/** Build one history walk per result-list query, shared by all correction/disposition controls. */
+export async function loadCorrectionWindows(ctx: ReadCtx, context: TableContext) {
+  const scope = context.session?.status === 'running' ? await loadHistory(ctx, context) : null;
+  const prepared = { context, scope };
+  return (eventId: Id<'events'>, mode: 'correction' | 'manual' = 'correction') =>
+    correctionWindow(ctx, eventId, context.user, mode, prepared);
+}
+
+/** Shared read/write window for source-card manual continuations, including formal closeout. */
+export const manualResolutionWindow = (ctx: ReadCtx, eventId: Id<'events'>, user: Doc<'users'>) =>
+  correctionWindow(ctx, eventId, user, 'manual');
+
+export async function assertManualResolutionAllowed(
+  ctx: ReadCtx,
+  eventId: Id<'events'>,
+  user: Doc<'users'>,
+) {
+  const window = await manualResolutionWindow(ctx, eventId, user);
+  if (!window.allowed || !window.unit) throw new ConvexError(window.reason);
+  return window.unit;
+}
+
+/** Resolve a historical creature reference without rewriting the original event/result. */
+export async function resolveHistoricalId(
+  ctx: ReadCtx,
+  campaignId: Id<'campaigns'>,
+  id: string,
+): Promise<string> {
+  const seen = new Set<string>();
+  let current = id;
+  while (!seen.has(current)) {
+    seen.add(current);
+    const alias = await ctx.db
+      .query('historyAliases')
+      .withIndex('by_campaign_former', q => q.eq('campaignId', campaignId).eq('formerId', current))
+      .unique();
+    if (!alias) return current;
+    current = alias.currentId;
+  }
+  throw new ConvexError('History contains a cyclic creature reference.');
 }
 
 // ---------------------------------------------------------------------------------------------
@@ -484,7 +585,7 @@ async function loadAliases(ctx: MutationCtx, campaignId: Id<'campaigns'>) {
     await ctx.db
       .query('historyAliases')
       .withIndex('by_campaign_former', q => q.eq('campaignId', campaignId))
-      .take(10000),
+      .collect(),
   );
 }
 
@@ -495,14 +596,14 @@ export async function unitJournal(ctx: ReadCtx, unit: Unit<Doc<'events'>>) {
     .withIndex('by_campaign_command_key', q =>
       q.eq('campaignId', unit.head.campaignId).eq('commandKey', unit.commandKey),
     )
-    .take(1000);
+    .collect();
   events.sort((a, b) => a.sequence - b.sequence);
   const changes: Doc<'changes'>[] = [];
   for (const event of events) {
     const rows = await ctx.db
       .query('changes')
       .withIndex('by_event', q => q.eq('eventId', event._id))
-      .take(1000);
+      .collect();
     rows.sort((a, b) => a.ordinal - b.ordinal);
     changes.push(...rows);
   }
@@ -583,9 +684,31 @@ export async function restoreUnit(
       change,
       direction === 'undo' ? change.before : change.after,
     );
+  // A deletion unit can recreate a group before its entries (or an entry before its actor).
+  // Reconcile references after every recreated id is known, including repeated alias hops.
+  const touched = new Map<string, TableNames>();
+  for (const change of ordered) touched.set(change.entityId, change.entityTable as TableNames);
+  for (const [recordedId, table] of touched) {
+    const id = ctx.db.normalizeId(table, aliases.resolve(recordedId));
+    const document = id ? await ctx.db.get(id) : null;
+    if (!document) continue;
+    const { _id, _creationTime, ...value } = document;
+    void _creationTime;
+    await journalPatch(ctx, scope, table, _id, aliases.mapValue(value) as never);
+  }
   for (const event of events)
     await ctx.db.patch(event._id, { disposition: direction === 'undo' ? 'undone' : 'redone' });
   return { changes: ordered.length, events: events.length };
+}
+
+async function clearPendingTargets(ctx: MutationCtx, context: TableContext) {
+  const draft = await ctx.db
+    .query('targetingDrafts')
+    .withIndex('by_campaign_user', q =>
+      q.eq('campaignId', context.campaign._id).eq('userId', context.user._id),
+    )
+    .unique();
+  if (draft) await ctx.db.delete(draft._id);
 }
 
 // ---------------------------------------------------------------------------------------------
@@ -651,6 +774,7 @@ const historyUndo: OperationDefinition = {
       data: { target: targetData(unit), mode: context.role === 'director' ? 'rewind' : 'player' },
       commit: async (mctx, journal) => {
         await restoreUnit(mctx, journal, unit, 'undo');
+        await clearPendingTargets(mctx, context);
       },
     };
   },
@@ -680,6 +804,7 @@ const historyRewind: OperationDefinition = {
       data: { target: targetData(unit), mode: 'rewind' },
       commit: async (mctx, journal) => {
         await restoreUnit(mctx, journal, unit, 'undo');
+        await clearPendingTargets(mctx, context);
       },
     };
   },

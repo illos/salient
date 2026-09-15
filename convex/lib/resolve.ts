@@ -28,6 +28,7 @@ import type {
   ResourceCost,
   SourceRef,
 } from '../../shared/contracts/rollResolution';
+import { manifest } from '../../shared/content/compendium/index';
 import { parseTierText, plainText } from '../../shared/resolve/index';
 import { findContent, requireContent } from '../content';
 import { journalPatch, type JournalScope } from './journal';
@@ -71,6 +72,7 @@ export interface AbilityDefinition {
   target: string;
   keywords: string[];
   cost?: string;
+  fixedCost?: ResourceCost;
   roll?: string;
   tiers?: [string, string, string];
   effects?: { label: string; text: string }[];
@@ -116,7 +118,8 @@ function rollEntry(rollText: string | undefined): {
   const permitted: Characteristic[] = [];
   for (const word of plain.split(/\s+or\s+/i)) {
     const c = NAMES[word.trim().toLowerCase()];
-    if (c && !permitted.includes(c)) permitted.push(c);
+    if (!c) return { permitted: [] };
+    if (!permitted.includes(c)) permitted.push(c);
   }
   return { permitted };
 }
@@ -128,7 +131,9 @@ export function parseCost(cost: string | undefined): {
   if (!cost) return {};
   const match = /^(\d+)\s+([A-Za-z]+)$/.exec(plainText(cost));
   if (!match) return { unknownCost: cost };
-  return { fixedCost: { resource: match[2]!.toLowerCase(), amount: Number(match[1]) } };
+  const amount = Number(match[1]);
+  if (!Number.isSafeInteger(amount)) return { unknownCost: cost };
+  return { fixedCost: { resource: match[2]!.toLowerCase(), amount } };
 }
 
 const COUNT_WORDS: Record<string, number> = { one: 1, two: 2, three: 3, four: 4, five: 5, six: 6 };
@@ -181,7 +186,12 @@ function effectsOf(list: unknown): {
   return out;
 }
 
-function sourceOf(entry: Doc<'content'>): SourceRef {
+type ContentSource = Pick<
+  Doc<'content'>,
+  'contentId' | 'name' | 'sourcePath' | 'revision' | 'text' | 'structured' | 'features'
+>;
+
+function sourceOf(entry: ContentSource): SourceRef {
   return { path: entry.sourcePath, revision: entry.revision, id: entry.contentId };
 }
 
@@ -204,6 +214,7 @@ function build(
     kind: rolled ? 'rolled' : 'recorded',
     targetShape: targetShapeOf(base.target, base.keywords),
     ...(unknownCost ? { unknownCost } : {}),
+    ...(fixedCost ? { fixedCost } : {}),
   };
   if (rolled && actionType)
     definition.metadata = {
@@ -250,6 +261,49 @@ export function abilityFromEntry(
   });
 }
 
+/** A kit's own named signature, extracted only from its printed section; unknown text stays manual. */
+function abilityFromKit(entry: Doc<'content'>, name: string): AbilityDefinition {
+  const marker = `###### ${name}\n`;
+  const offset = entry.text.indexOf(marker);
+  const section = offset < 0 ? entry.text : entry.text.slice(offset).split(/\n#{1,6} /)[0]!;
+  const lines = section.split('\n');
+  const tableRows = lines.filter(line => line.startsWith('|')).map(plainText);
+  const header = tableRows[0]?.split('|').map(v => v.trim()) ?? [];
+  const targetRow =
+    tableRows
+      .find(line => line.includes('🎯'))
+      ?.split('|')
+      .map(v => v.trim()) ?? [];
+  const roll = lines
+    .map(plainText)
+    .find(line => line.startsWith('Power Roll + '))
+    ?.replace(/:$/, '');
+  const tiers = ['≤11', '12-16', '17+'].map(label => {
+    const line = lines.find(l => plainText(l).startsWith(`- ${label}:`));
+    return line ? line.replace(/^[- ]*\*\*[^*]+\*\*\s*/, '') : '';
+  });
+  const effects = lines
+    .filter(line => line.startsWith('**Effect:**'))
+    .map(line => ({ label: 'Effect', text: line.slice('**Effect:**'.length).trim() }));
+  return build({
+    abilityId: `${entry.contentId}/${slug(name)}`,
+    name,
+    contentId: entry.contentId,
+    source: sourceOf(entry),
+    text: section,
+    usage: header[2] ?? '',
+    keywords: (header[1] ?? '')
+      .split(',')
+      .map(v => v.trim())
+      .filter(Boolean),
+    distance: (targetRow[1] ?? '').replace(/^📏\s*/, ''),
+    target: (targetRow[2] ?? '').replace(/^🎯\s*/, ''),
+    ...(roll ? { roll, tiers: tiers as [string, string, string] } : {}),
+    effects,
+    kitBonusesIncluded: true,
+  });
+}
+
 const slug = (value: string) =>
   value
     .toLowerCase()
@@ -270,7 +324,7 @@ function statBlockFeatureText(text: string, name: string): string {
 }
 
 /** Every ability printed in a stat block, in printed order. */
-export function abilitiesFromStatBlock(entry: Doc<'content'>): AbilityDefinition[] {
+export function abilitiesFromStatBlock(entry: ContentSource): AbilityDefinition[] {
   const out: AbilityDefinition[] = [];
   for (const raw of entry.features ?? []) {
     const feature = raw as Structured;
@@ -435,23 +489,37 @@ export async function abilitiesFor(
 ): Promise<AbilityDefinition[]> {
   const granted: AbilityDefinition[] = [];
   if (actor.kind === 'character') {
-    for (const id of records.facts?.abilities ?? []) {
-      const entry = await findContent(ctx, id);
+    const baseline = records.character ? baselineOf(records.character.derivedBaseline) : null;
+    for (const grant of baseline?.abilities ?? []) {
+      const contentId = manifest.entries.find(
+        e => e.sourcePath === `vendor/steel-compendium/${grant.sourcePath}`,
+      )?.id;
+      if (!contentId) continue;
+      const entry = await findContent(ctx, contentId);
       if (!entry) continue;
       granted.push(
-        abilityFromEntry(entry, {
-          kitBonusesIncluded:
-            records.facts?.kitSignatureAbility !== null &&
-            records.facts?.kitSignatureAbility === entry.name,
-        }),
+        grant.kind === 'kit-signature'
+          ? abilityFromKit(entry, grant.name)
+          : abilityFromEntry(entry, { kitBonusesIncluded: grant.kitBonusesIncluded }),
       );
     }
   } else if (records.foe) {
     const snapshot = foeSnapshot(records.foe);
-    const entry = await findContent(ctx, snapshot.id);
-    if (entry) granted.push(...abilitiesFromStatBlock(entry));
+    if (snapshot.sourcePath && snapshot.revision)
+      granted.push(
+        ...abilitiesFromStatBlock({
+          contentId: snapshot.id,
+          name: snapshot.name,
+          text: snapshot.text,
+          structured: snapshot.structured ?? {},
+          features: snapshot.features,
+          sourcePath: snapshot.sourcePath,
+          revision: snapshot.revision,
+        }),
+      );
   }
-  return [...granted, ...(await commonActions(ctx, actor, records.foe))];
+  const common = await commonActions(ctx, actor, records.foe);
+  return [...granted, ...common.filter(a => !granted.some(g => g.abilityId === a.abilityId))];
 }
 
 /** Finds an ability by content id, ability id, or exact (case-insensitive) printed name. */
@@ -478,22 +546,34 @@ export async function heroFacts(ctx: ReadCtx, characterId: Id<'characters'>) {
 /** Section 1.1 / 4.2 inputs. A hero needs Director-supplied facts until an evaluated baseline exists. */
 export function actorRollFacts(
   actor: BoundActor,
-  records: { facts?: Doc<'heroRollFacts'> | null; foe?: Doc<'foes'> },
+  records: {
+    character?: Doc<'characters'>;
+    facts?: Doc<'heroRollFacts'> | null;
+    foe?: Doc<'foes'>;
+  },
 ): ActorRollFacts {
   if (actor.kind === 'foe') {
     if (!records.foe) throw new ConvexError('Foe unavailable.');
     return { actorId: actor.id, characteristics: foeCharacteristics(foeSnapshot(records.foe)) };
   }
-  const facts = records.facts;
-  if (!facts)
-    throw new ConvexError(
-      `${actor.name} has no recorded characteristics or kit bonuses; no evaluated build exists (A02). The Director records them with /hero facts (they are recorded as supplied facts).`,
-    );
+  const baseline = records.character ? baselineOf(records.character.derivedBaseline) : null;
+  if (!baseline)
+    throw new ConvexError(`${actor.name} has no evaluated effective build; admission supplies it.`);
   return {
     actorId: actor.id,
-    characteristics: facts.characteristics,
-    kitMeleeDamageBonus: facts.kitMeleeDamageBonus as [number, number, number],
-    kitRangedDamageBonus: facts.kitRangedDamageBonus as [number, number, number],
+    characteristics: {
+      M: baseline.characteristics.M.value,
+      A: baseline.characteristics.A.value,
+      R: baseline.characteristics.R.value,
+      I: baseline.characteristics.I.value,
+      P: baseline.characteristics.P.value,
+    },
+    ...(baseline.kit
+      ? {
+          kitMeleeDamageBonus: baseline.kit.meleeDamageBonus.value,
+          kitRangedDamageBonus: baseline.kit.rangedDamageBonus.value,
+        }
+      : {}),
   };
 }
 

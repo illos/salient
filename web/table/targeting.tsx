@@ -30,6 +30,9 @@ export type AbilityResult = Results[number];
 const ref = (actor: { kind: string; id: string }) => `@{${actor.kind}:${actor.id}}`;
 const key = (actor: { kind: string; id: string }) => `${actor.kind}:${actor.id}`;
 
+// Compact metadata uses readable labels; the Read control retains the verbatim source block.
+const summaryText = (text: string) => text.replace(/\[([^\]]+)\]\([^)]+\)/g, '$1');
+
 /** A button that submits one slash command through the shared path. */
 function Command({
   campaignId,
@@ -176,7 +179,8 @@ function AbilityRow({
     ability.target,
     ability.roll,
   ]
-    .filter(Boolean)
+    .filter((value): value is string => !!value)
+    .map(summaryText)
     .join(' · ');
   return (
     <li className="rule-soft flex flex-col gap-1 py-2">
@@ -209,7 +213,8 @@ function AbilityRow({
       <span className="text-xs text-muted-foreground">{line}</span>
       {ability.tiers && (
         <span className="text-xs text-muted-foreground">
-          ≤11: {ability.tiers[0]} · 12-16: {ability.tiers[1]} · 17+: {ability.tiers[2]}
+          ≤11: {summaryText(ability.tiers[0]!)} · 12-16: {summaryText(ability.tiers[1]!)} · 17+:{' '}
+          {summaryText(ability.tiers[2]!)}
         </span>
       )}
       {open &&
@@ -272,7 +277,7 @@ export function AbilityPanel({
                 value={draft!.characteristic ?? ''}
                 disabled={command.pending}
                 onChange={e => {
-                  const text = `${ref(actor)} /ability select ability="${pending.id}" characteristic=${e.target.value}`;
+                  const text = `${ref(actor)} /ability select ability="${pending.id}" characteristic=${e.target.value || 'default'}`;
                   void command.run(
                     commandId => submit({ campaignId, text, commandId }),
                     JSON.stringify(['char', campaignId, text]),
@@ -281,6 +286,31 @@ export function AbilityPanel({
               >
                 <option value="">highest (default)</option>
                 {pending.permittedCharacteristics.map(c => (
+                  <option key={c} value={c}>
+                    {c}
+                  </option>
+                ))}
+              </select>
+            </label>
+          )}
+          {pending.permittedDamageCharacteristics.length > 1 && (
+            <label className="flex items-center gap-1">
+              <span className="caps text-muted-foreground">Damage with</span>
+              <select
+                className="native-select"
+                aria-label="Damage characteristic"
+                value={draft!.damageCharacteristic ?? ''}
+                disabled={command.pending}
+                onChange={e => {
+                  const text = `${ref(actor)} /ability select ability="${pending.id}" damage-characteristic=${e.target.value || 'default'}`;
+                  void command.run(
+                    commandId => submit({ campaignId, text, commandId }),
+                    JSON.stringify(['damage-char', campaignId, text]),
+                  );
+                }}
+              >
+                <option value="">highest (default)</option>
+                {pending.permittedDamageCharacteristics.map(c => (
                   <option key={c} value={c}>
                     {c}
                   </option>
@@ -433,7 +463,7 @@ export function AbilityCard({
                   {disposition?.note && (
                     <span className="text-muted-foreground">{disposition.note}</span>
                   )}
-                  {director && running && !disposition && (
+                  {director && running && result.mayResolve && !disposition && (
                     <Command
                       campaignId={campaignId}
                       text={`/ability resolved event="${eventId}" target=${ref(target)} clause=${JSON.stringify(clause)}`}
@@ -453,7 +483,7 @@ export function AbilityCard({
           <span key={clause} className="flex flex-wrap items-center gap-2">
             <Badge variant="outline">{disposition ? 'Resolved at table' : 'Unresolved'}</Badge>
             <code className="[overflow-wrap:anywhere]">{clause}</code>
-            {director && running && !disposition && (
+            {director && running && result.mayResolve && !disposition && (
               <Command
                 campaignId={campaignId}
                 text={`/ability resolved event="${eventId}" clause=${JSON.stringify(clause)}`}

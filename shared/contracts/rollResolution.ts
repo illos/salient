@@ -27,7 +27,7 @@ export type TestOutcome =
  * Labels for provisional behavior (section 11): open user question ids, plus
  * `negative-rolled-damage` for a negative section 4.3 result (unreachable with v0.01 content).
  */
-export type UncertaintyId = 'Q-R-1' | 'Q-R-2' | 'Q-R-3' | 'negative-rolled-damage';
+export type UncertaintyId = 'negative-rolled-damage';
 
 /** Pinned source citation for a quoted clause or ability. */
 export interface SourceRef {
@@ -110,6 +110,8 @@ export interface AbilityRollRequest {
   actor: ActorRollFacts;
   /** Explicit pre-fire override; otherwise the highest permitted characteristic is selected. */
   selectedCharacteristic?: Characteristic;
+  /** Explicit damage choice, independent of the roll; absent defaults to highest permitted. */
+  selectedDamageCharacteristic?: Characteristic;
   targets: TargetRollInputs[];
   dice: PowerRollDice;
   inCombat: boolean;
@@ -145,7 +147,7 @@ export interface TargetRollOutcome {
   total: number;
   baseTier: Tier;
   tier: Tier;
-  /** Set when a natural 19/20 overrode a double bane's tier decrease (Q-R-1). */
+  /** Reserved for unresolved arithmetic facts; confirmed natural precedence needs no label. */
   uncertainty?: UncertaintyId;
   /** Verbatim tier text applied to this target. */
   tierText: string;
@@ -161,7 +163,7 @@ export interface DamageBreakdown {
   kitBonus: number;
   rolledDamage: number;
   damageType?: string;
-  /** Q-R-2 when a "M or A" choice was resolved by the roll characteristic. */
+  /** Negative rolled damage is recorded, never applied as healing. */
   uncertainty?: UncertaintyId;
 }
 
@@ -174,6 +176,8 @@ export interface AbilityRollResult {
   naturalRoll: number;
   naturalNineteenOrTwenty: boolean;
   selectedCharacteristic?: Characteristic;
+  /** Explicit damage choice, independent of the roll; absent defaults to highest permitted. */
+  selectedDamageCharacteristic?: Characteristic;
   characteristicValue: number;
   criticalHit: boolean;
   /** Offered to the acting user; never executed by the app (section 2). */

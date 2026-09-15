@@ -4,6 +4,8 @@
 // owner (Stamina 30 / 30, private notes), as the Director (no notes) and as a peer (Stamina and
 // Recoveries only). Expected numbers are the R02/R03 fixture values from the documents.
 import { expect, test, type Page } from '@playwright/test';
+import { mkdir } from 'node:fs/promises';
+import { tableJourney } from './acceptance-extension';
 
 const password = 'Test-only-salient-password-42';
 
@@ -18,7 +20,7 @@ async function register(page: Page, name: string, email: string) {
 }
 
 test('wizard, admission review and the three sheet audiences', async ({ browser }) => {
-  test.setTimeout(300_000);
+  test.setTimeout(600_000);
   const contexts = await Promise.all([
     browser.newContext(),
     browser.newContext(),
@@ -69,6 +71,14 @@ test('wizard, admission review and the three sheet audiences', async ({ browser 
     await expect(player!.getByText('3 of 3 points spent')).toBeVisible();
     // 3. Culture.
     await step('3. Culture');
+    await expect(
+      player!.getByLabel('culture.language', { exact: true }).locator('option[value="Caelian"]'),
+    ).toBeDisabled();
+    await expect(
+      player!
+        .getByLabel('culture.language', { exact: true })
+        .locator('option[value="Khoursirian"]'),
+    ).toHaveCount(1);
     await pick('culture.language', 'Anjali');
     await player!.getByLabel('Wilderness', { exact: true }).check();
     await pick('culture.environment.skill', 'Swim');
@@ -81,7 +91,7 @@ test('wizard, admission review and the three sheet audiences', async ({ browser 
     await player!.getByLabel('Soldier', { exact: true }).check();
     await pick('career.soldier.skill.exploration', 'Endurance');
     await pick('career.soldier.skill.intrigue', 'Alertness');
-    await pick('career.soldier.languages slot 1', 'Caelian');
+    await pick('career.soldier.languages slot 1', '__open__');
     await pick('career.soldier.languages slot 2', 'Vaslorian');
     await pick('career.soldier.perk', 'Teamwork');
     await player!.getByLabel('Sole Survivor', { exact: true }).check();
@@ -89,9 +99,34 @@ test('wizard, admission review and the three sheet audiences', async ({ browser 
     await step('5. Class');
     await player!.getByLabel('Fury', { exact: true }).check();
     await player!.getByLabel('1, 0, 0', { exact: true }).check();
-    await pick('class.fury.array-assignment Reason', '0');
+    await expect(
+      player!.getByLabel('class.fury.array-assignment Might', { exact: true }),
+    ).toHaveValue('2');
+    await expect(
+      player!.getByLabel('class.fury.array-assignment Might', { exact: true }),
+    ).toBeDisabled();
+    await expect(
+      player!.getByLabel('class.fury.array-assignment Agility', { exact: true }),
+    ).toBeDisabled();
+    for (const target of ['Reason', 'Intuition', 'Presence'])
+      await expect(
+        player!.getByLabel(`class.fury.array-assignment ${target}`, { exact: true }),
+      ).toHaveValue('');
+    await player!.getByTestId('array-value-1').dragTo(player!.getByTestId('assignment-Reason'));
+    await expect(
+      player!.getByLabel('class.fury.array-assignment Reason', { exact: true }),
+    ).toHaveValue('0');
     await pick('class.fury.array-assignment Intuition', '1');
-    await pick('class.fury.array-assignment Presence', '0');
+    await player!.getByTestId('array-value-0').dragTo(player!.getByTestId('assignment-Presence'));
+    await expect(
+      player!.getByLabel('class.fury.array-assignment Presence', { exact: true }),
+    ).toHaveValue('0');
+    await mkdir('.playtest/audit-2026-09-15', { recursive: true });
+    await player!.evaluate(() => window.scrollTo(0, 0));
+    await player!.screenshot({
+      path: '.playtest/audit-2026-09-15/wizard-assignment.png',
+      fullPage: true,
+    });
     await pick('class.fury.skills slot 1', 'Jump');
     await pick('class.fury.skills slot 2', 'Climb');
     await player!.getByLabel('Berserker', { exact: true }).check();
@@ -106,8 +141,15 @@ test('wizard, admission review and the three sheet audiences', async ({ browser 
     await pick('kit.choice', 'Mountain');
     await player!.getByRole('button', { name: 'Source text', exact: true }).first().click();
     await expect(player!.getByLabel('Source text: Mountain')).toContainText('Stamina');
-    await expect(soFar).toContainText('complete');
+    await expect(soFar.getByText('complete', { exact: true })).toBeVisible();
     await expect(soFar.getByText('Stamina max').locator('..')).toContainText('30');
+    // Q-CHAR-10: underspending is visibly warned without changing a complete build's status.
+    await step('2. Ancestry');
+    await player!.getByLabel('Beast Legs', { exact: true }).uncheck();
+    await expect(player!.getByText(/Unspent points are allowed/)).toBeVisible();
+    await expect(soFar.getByText('complete', { exact: true })).toBeVisible();
+    await player!.getByLabel('Beast Legs', { exact: true }).check();
+    await expect(player!.getByText(/Unspent points are allowed/)).toHaveCount(0);
     // 7. Free strikes (display only), 9. Details, 10. Connections.
     await step('7. Add Free Strikes');
     await expect(player!.getByText('Melee Weapon Free Strike').first()).toBeVisible();
@@ -134,9 +176,7 @@ test('wizard, admission review and the three sheet audiences', async ({ browser 
     // Private notes sit in the collapsed Character details section: present for the owner only.
     await expect(player!.getByText('Grug fears the sea.').first()).toBeAttached();
     await expect(player!.getByText('Brutal Slam').first()).toBeVisible();
-    await expect(
-      player!.getByRole('button', { name: 'Catch Breath (pending A05)' }),
-    ).toBeDisabled();
+    await expect(player!.getByRole('button', { name: 'Catch Breath', exact: true })).toBeDisabled();
     // Director: the full sheet without notes; a peer: Stamina and Recoveries only.
     await director!.goto(characterUrl);
     await expect(director!.getByText('Brutal Slam').first()).toBeVisible();
@@ -146,6 +186,20 @@ test('wizard, admission review and the three sheet audiences', async ({ browser 
     await expect(observer!.getByText('Brutal Slam')).toHaveCount(0);
     await expect(observer!.getByText('Grug fears the sea.')).toHaveCount(0);
     await expect(observer!.getByText('ferocity')).toHaveCount(0);
+    for (const [page, role] of [
+      [player!, 'owner'],
+      [director!, 'director'],
+      [observer!, 'peer'],
+    ] as const) {
+      await page.screenshot({
+        path: `.playtest/audit-2026-09-15/sheet-${role}.png`,
+        fullPage: true,
+      });
+      expect(
+        await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth),
+      ).toBe(true);
+    }
+    await tableJourney([director!, player!, observer!], campaignUrl, stamp);
   } finally {
     await Promise.all(contexts.map(c => c.close()));
   }

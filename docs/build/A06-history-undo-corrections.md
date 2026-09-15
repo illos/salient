@@ -251,3 +251,12 @@ corrections. Update the shared correction permission check consumed by A05 and i
 previously opened cards must not bypass the current setting. Verify both player refusal when off
 and ordinary window-limited access when on, with Director authority retained. The original
 implementation/verification notes above describe the earlier ungated behavior, not proof of this fix.
+
+### 2026-09-15 — Independent repair closure
+
+Q-A-601 now gates player corrections through the shared history policy. Independent review and
+persisted regressions cover recorded-dice restoration, sequential seams, repeated identity aliases,
+current audience projection and clearing the invoker's targeting preparation on Undo/Rewind.
+A07 establishes the completed encounter archive floor. The earlier integration checklist is
+historical. See [the A06 verdict](audits/2026-09-15-A06-review.md) and
+[combined acceptance evidence](evidence/v001-acceptance.md).

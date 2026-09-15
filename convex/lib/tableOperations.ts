@@ -35,7 +35,8 @@ import type { ConditionId } from '../../shared/contracts/liveState';
 import { rollDice } from './dice';
 import { requireContent } from '../content';
 import { journalPatch } from './journal';
-import type { OperationDefinition, Outcome, TableContext } from './registry';
+import { run, type OperationDefinition, type Outcome, type TableContext } from './registry';
+import { currentEncounter } from './encounters';
 
 // ---------------------------------------------------------------------------------------------
 // Live-state shapes and helpers.
@@ -173,7 +174,7 @@ const testRoll: OperationDefinition = {
     const edgeBane = resolveEdgeBane(edges, banes);
     // Section 5 / 1.5: total = natural + characteristic + skill + other bonuses + edge/bane modifier.
     const total = naturalRoll + characteristicValue + skillBonus + edgeBane.modifier;
-    // Section 1.6: a natural 19 or 20 is tier 3 regardless of modifiers; Q-R-1 under a double bane.
+    // Section 1.6: a natural 19 or 20 is tier 3 regardless of modifiers (Q-R-1 resolved).
     const criticalSuccess = naturalRoll >= 19;
     const tier: Tier = criticalSuccess ? 3 : tierOf(total, edgeBane.tierShift);
     const result: TestRollResult = {
@@ -191,7 +192,6 @@ const testRoll: OperationDefinition = {
       ...(difficulty
         ? { difficulty, outcome: testOutcome(tier, criticalSuccess, difficulty) }
         : {}),
-      ...(criticalSuccess && edgeBane.tierShift === -1 ? { uncertainty: 'Q-R-1' as const } : {}),
     };
     const parts = [
       `${a!.value} + ${b!.value}`,
@@ -237,7 +237,17 @@ const heroRecover: OperationDefinition = {
   roles: ['director', 'player'],
   session: RUNNING_SESSION,
   actor: 'required',
-  execute: async (ctx, { context, actor }) => {
+  execute: async (ctx, { context, actor, envelope }) => {
+    const encounter = context.session ? await currentEncounter(ctx, context.session) : null;
+    if (encounter?.status === 'committed')
+      return {
+        delegated: await run(ctx, context, {
+          ...envelope,
+          operation: 'ability.use',
+          actor: { refKind: actor!.kind, id: actor!.id },
+          arguments: { ability: 'mcdm.heroes.v1/feature.common.maneuvers/catch-breath' },
+        }),
+      };
     const character = await loadCharacter(ctx, context, actor!);
     const live = requireHeroLive(character);
     const baseline = requireBaseline(character);
@@ -250,7 +260,7 @@ const heroRecover: OperationDefinition = {
     const recoveryValue = baseline.recoveryValue.value;
     if (recoveryValue !== recoveryValueOf(staminaMaximum))
       throw new ConvexError('The baseline recovery value disagrees with R04 section 7; refusing.');
-    // Section 7: stamina' = min(maxStamina, stamina + recoveryValue) (cap: Q-R-3); temporary unchanged.
+    // Section 7: stamina' = min(maxStamina, stamina + recoveryValue) (Q-R-3 confirmed cap); temporary unchanged.
     const staminaAfter = Math.min(staminaMaximum, live.stamina + recoveryValue);
     const healed = staminaAfter - live.stamina;
     const capApplied = live.stamina + recoveryValue > staminaMaximum;
@@ -267,7 +277,6 @@ const heroRecover: OperationDefinition = {
       staminaAfter,
       healed,
       capApplied,
-      ...(capApplied ? { uncertainty: 'Q-R-3' as const } : {}),
       temporaryStaminaUnchanged: live.temporaryStamina,
       warnings,
     };

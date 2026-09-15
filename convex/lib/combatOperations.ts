@@ -118,14 +118,18 @@ async function requireCommitted(ctx: MutationCtx, context: TableContext) {
   return encounter;
 }
 
-async function setupInteraction(ctx: MutationCtx, campaignId: Id<'campaigns'>) {
+async function setupInteraction(
+  ctx: MutationCtx,
+  campaignId: Id<'campaigns'>,
+  sessionId: Id<'sessions'>,
+) {
   const pending = await ctx.db
     .query('interactions')
     .withIndex('by_campaign_status', q =>
       q.eq('campaignId', campaignId).eq('status', 'awaiting-input'),
     )
     .take(100);
-  return pending.find(row => row.kind === 'combat-setup') ?? null;
+  return pending.find(row => row.kind === 'combat-setup' && row.sessionId === sessionId) ?? null;
 }
 
 const DIRECTOR_RUNNING: { roles: Role[]; session: 'running' } = {
@@ -275,7 +279,7 @@ const combatCancel: OperationDefinition = {
   actor: 'none',
   execute: async (ctx, { context }) => {
     const encounter = await requireDraft(ctx, context);
-    const card = await setupInteraction(ctx, context.campaign._id);
+    const card = await setupInteraction(ctx, context.campaign._id, encounter.sessionId);
     return {
       kind: 'combat.setup-canceled',
       description: 'Combat setup canceled; no encounter was started.',
@@ -337,7 +341,9 @@ const combatCommit: OperationDefinition = {
       path = 'surprise-determined';
       startingSide = surprisedSides[0] === 'heroes' ? 'director' : 'heroes';
     } else path = 'adjudication'; // both sides surprised or an empty side: no source default.
-    const card = respondsTo ? null : await setupInteraction(ctx, context.campaign._id);
+    const card = respondsTo
+      ? null
+      : await setupInteraction(ctx, context.campaign._id, encounter.sessionId);
     const opening = `${heroes.length} hero${heroes.length === 1 ? '' : 'es'} and ${foes.length} foe${foes.length === 1 ? '' : 's'}`;
     const pathText =
       path === 'roll'
@@ -647,6 +653,7 @@ const turnEnd: OperationDefinition = {
   actor: 'optional',
   execute: async (ctx, { context, actor }) => {
     const encounter = await requireCommitted(ctx, context);
+    if (encounter.phase !== 'turns') throw new ConvexError('Structured turn play is not active.');
     if (!encounter.activeTurnId) throw new ConvexError('No turn is in progress.');
     const turn = (await ctx.db.get(encounter.activeTurnId))!;
     if (actor && (actor.kind !== turn.actor.kind || actor.id !== turn.actor.id))

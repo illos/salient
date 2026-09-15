@@ -79,11 +79,15 @@ Dark foundation (`.dark`):
 | `--ring` | `#e7e3e0` | Chosen. |
 | `--placeholder` | `#242424` | Measured. |
 | `--shadow-hard-color` | `transparent` | Chosen: the dark mockup has no offset shadows. |
-| `--destructive` | `#c4524f` | Chosen: brick red lifted for text contrast on dark. |
+| `--destructive` | `#e07470` | Chosen in the September 15 visual audit: lifted for readable error text on dark cards and notices. |
 | `--success` / `--warning` | `#7fb88a` / `#d9a45b` | Chosen. |
 
-Contrast notes (chosen, WCAG AA targets): `#717070` on `#ffffff` is 4.6:1; `#8a8a8a` on `#0e0e0e` is
-6.3:1; white on `#a63b3a` is 6.9:1.
+Contrast notes (calculated using sRGB relative luminance): `#717070` on `#ffffff` is 4.94:1;
+`#8a8a8a` on `#0e0e0e` is 5.59:1; white on `#a63b3a` is 6.35:1. Dark error text
+`#e07470` on `#171717` is 5.89:1, or approximately 5.17:1 on an error notice's 10% tinted
+background. These are text-pair spot checks, not a complete accessibility certification.
+Dark destructive buttons use 10% tint normally and 15% on hover, giving approximately 5.17:1
+and 4.79:1 against the dark card surface. Primary-action color remains the measured brick red.
 
 ## Rules, borders, radius and shadow
 

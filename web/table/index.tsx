@@ -9,7 +9,7 @@
  * layout hosts FreePlay), #foes-roster, #party-sheets-and-resource-visibility, #game-log-and-chat-scope,
  * #malice-visibility, #monster-visibility-and-health-display, #4-session-status-and-play-mode.
  */
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from '@tanstack/react-router';
 import { useMutation, useQuery } from 'convex/react';
 import { api } from '../../convex/_generated/api';
@@ -20,12 +20,14 @@ import { Badge } from '../components/ui/badge';
 import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
 import { CommandConsole } from '../command-input';
-import { ErrorNotice, Eyebrow, Loading, SectionHeading, useCommand } from '../ui';
+import { ErrorNotice, Eyebrow, Loading, SectionHeading, errorMessage, useCommand } from '../ui';
 import { CombatSetupCard, CommandButton, type Encounter } from './setup-card';
 import { InitiativePanel, TurnControls } from './initiative';
 import { HistoryControls, undoCommand } from './history-controls';
 import { AbilityCard, AbilityPanel, TargetControls, manualClausesOf } from './targeting';
 import { CharacterSheet } from '../character-sheet';
+import { CloseoutCard } from './closeout-card';
+import { VoidCard } from './void-card';
 
 type Roster = FunctionReturnType<typeof api.table.roster>;
 type Foe = Roster['foes'][number];
@@ -208,12 +210,14 @@ function FoeRow({
   foe,
   director,
   running,
+  abilitiesAllowed,
   mayTarget,
 }: {
   campaignId: Id<'campaigns'>;
   foe: Foe;
   director: boolean;
   running: boolean;
+  abilitiesAllowed: boolean;
   mayTarget: boolean;
 }) {
   const remove = useMutation(api.commands.invoke);
@@ -232,10 +236,10 @@ function FoeRow({
       <TargetControls
         campaignId={campaignId}
         target={{ kind: 'foe', id: foe.id, name: foe.name }}
-        running={running}
+        running={running && abilitiesAllowed}
         mayTarget={mayTarget}
       />
-      {director && running && (
+      {director && running && abilitiesAllowed && (
         <AbilityPanel
           campaignId={campaignId}
           actor={{ kind: 'foe', id: foe.id, name: foe.name }}
@@ -306,6 +310,7 @@ function DirectorPane({
   const catalog = useQuery(api.foes.catalog, director ? { campaignId } : 'skip');
   const add = useMutation(api.commands.invoke);
   const addition = useCommand();
+  const [voiding, setVoiding] = useState<Id<'encounters'> | null>(null);
   return (
     <Card>
       <CardContent className="flex flex-col gap-4">
@@ -323,6 +328,7 @@ function DirectorPane({
               foe={foe}
               director={director}
               running={running}
+              abilitiesAllowed={encounter?.phase !== 'closeout'}
               mayTarget={roster.role !== 'observer'}
             />
           ))}
@@ -361,6 +367,31 @@ function DirectorPane({
               label="Start combat"
               variant="default"
             />
+          </div>
+        )}
+        {director && encounter?.status === 'committed' && (
+          <div className="rule-soft flex flex-col gap-3 border-t pt-4">
+            {running && encounter.phase !== 'closeout' && (
+              <CommandButton
+                campaignId={campaignId}
+                text={`/combat end encounter=${encounter.id}`}
+                label="End combat"
+                variant="default"
+              />
+            )}
+            <Button variant="outline" size="sm" onClick={() => setVoiding(encounter.id)}>
+              Void combat
+            </Button>
+            {voiding === encounter.id && (
+              <VoidCard
+                key={encounter.id}
+                campaignId={campaignId}
+                encounterId={encounter.id}
+                paused={!running}
+                onCancel={() => setVoiding(null)}
+                onDone={() => setVoiding(null)}
+              />
+            )}
           </div>
         )}
         <div className="rule-soft border-t pt-4">
@@ -436,7 +467,8 @@ function HeroRow({
   selected: boolean;
   onTurnTaken: (actor: { kind: 'character' | 'foe'; id: string }) => void;
 }) {
-  const canAct = hero.controlled && running;
+  const abilitiesAllowed = running && encounter?.phase !== 'closeout';
+  const canAct = hero.controlled && abilitiesAllowed;
   return (
     <li
       className={`rule-soft flex flex-col gap-2 py-3 ${viewed ? 'border-l-2 border-primary pl-2' : ''}`}
@@ -468,7 +500,7 @@ function HeroRow({
       <TargetControls
         campaignId={campaignId}
         target={{ kind: 'character', id: hero.id, name: hero.name }}
-        running={running}
+        running={abilitiesAllowed}
         mayTarget={mayTarget}
       />
       {canAct && (
@@ -706,6 +738,24 @@ export function TablePage({ campaignId }: { campaignId: Id<'campaigns'> }) {
   const roster = useQuery(api.table.roster, { campaignId });
   const campaign = useQuery(api.campaigns.get, { campaignId });
   const encounter = useQuery(api.encounters.current, { campaignId });
+  const drafts = useQuery(api.targets.drafts, { campaignId });
+  const invoke = useMutation(api.commands.invoke);
+  const entered = useRef<string | null>(null);
+  const [entryError, setEntryError] = useState<string | null>(null);
+  useEffect(() => {
+    if (!roster || drafts === undefined || entered.current === campaignId) return;
+    entered.current = campaignId;
+    setEntryError(null);
+    // A09 reload acceptance: discard only this user's unsubmitted targeting. Persisted input
+    // cards and gameplay survive. The registered cancellation also works during a pause.
+    if (roster.role === 'observer' || !roster.session || !drafts.mine) return;
+    void invoke({
+      campaignId,
+      commandId: crypto.randomUUID(),
+      operation: 'selection.cancel',
+      arguments: {},
+    }).catch(error => setEntryError(errorMessage(error)));
+  }, [campaignId, roster, drafts, invoke]);
   // Explicit Take turn switches only this user's pane to the chosen hero (local state, never shared).
   const [viewedHeroId, setViewedHeroId] = useState<Id<'characters'> | null>(null);
   if (!roster || !campaign || encounter === undefined) return <Loading>Opening the table…</Loading>;
@@ -713,9 +763,11 @@ export function TablePage({ campaignId }: { campaignId: Id<'campaigns'> }) {
   const running = status === 'running';
   const combat =
     encounter?.status === 'committed'
-      ? encounter.phase === 'turns'
-        ? `Combat · round ${encounter.round}`
-        : 'Combat · opening'
+      ? encounter.phase === 'closeout'
+        ? 'Combat · closeout'
+        : encounter.phase === 'turns'
+          ? `Combat · round ${encounter.round}`
+          : 'Combat · opening'
       : encounter?.status === 'draft'
         ? 'FreePlay · combat setup open'
         : 'FreePlay';
@@ -731,6 +783,7 @@ export function TablePage({ campaignId }: { campaignId: Id<'campaigns'> }) {
       >
         ← {campaign.name}
       </Link>
+      <ErrorNotice error={entryError} />
       <div className="rule-strong mb-6 flex items-end justify-between gap-6 pb-4">
         <div>
           <Eyebrow>The table</Eyebrow>
@@ -758,7 +811,8 @@ export function TablePage({ campaignId }: { campaignId: Id<'campaigns'> }) {
         <DirectorPane campaignId={campaignId} roster={roster} encounter={encounter} />
         <div className="flex flex-col gap-6">
           {encounter && <CombatSetupCard campaignId={campaignId} encounter={encounter} />}
-          {encounter && (
+          {encounter?.phase === 'closeout' && <CloseoutCard campaignId={campaignId} />}
+          {encounter && encounter.phase !== 'closeout' && (
             <InitiativePanel
               campaignId={campaignId}
               encounter={encounter}

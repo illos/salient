@@ -184,3 +184,11 @@ excess healing is lost and the Recovery remains spent. Keep cap metadata and the
 amount, but remove the resolved Q-R-3 uncertainty label. The confirmed example is 24/30 Stamina
 plus a recovery value of 10: one Recovery spent, 6 healed, ending at 30. This records the decision;
 implementation verification remains build work.
+
+### 2026-09-15 — Independent repair closure
+
+Q-R-1/2/3 are implemented with source-checked numeric regressions. The audit also repaired real
+admitted-baseline inputs, fixed costs before initiative, historical correction inputs, target
+aliases and public payload audiences. The earlier decision handoffs are no longer outstanding
+implementation tasks. See [the A05 verdict](audits/2026-09-15-A05-independent-review.md) and
+[combined acceptance evidence](evidence/v001-acceptance.md).

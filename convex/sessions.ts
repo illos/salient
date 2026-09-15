@@ -7,6 +7,7 @@ import { command } from './lib/commands';
 import { appendEvent } from './lib/events';
 import { combatActive, currentEncounter } from './lib/encounters';
 import { encounterStatus } from './encounterTables';
+import { voidEncounter } from './lib/closeoutOperations';
 
 const sessionValue = v.object({
   id: v.id('sessions'),
@@ -114,6 +115,8 @@ export const transition = mutation({
     sessionId: v.id('sessions'),
     expectedRevision: v.number(),
     action: v.union(v.literal('pause'), v.literal('resume'), v.literal('close')),
+    voidMode: v.optional(v.union(v.literal('keep'), v.literal('reset'))),
+    expectedEncounterId: v.optional(v.id('encounters')),
     commandId: v.string(),
   },
   returns: v.null(),
@@ -131,10 +134,27 @@ export const transition = mutation({
       throw new ConvexError('Only a running session can pause.');
     if (args.action === 'resume' && session.status !== 'paused')
       throw new ConvexError('Only a paused session can resume.');
-    if (args.action === 'close' && (await combatActive(ctx, session)))
-      throw new ConvexError(
-        "Combat closure requires the rules workstream's void keep/reset operation.",
-      );
+    if (args.voidMode && args.action !== 'close')
+      throw new ConvexError('A Void choice applies only when closing the session.');
+    const encounter = await currentEncounter(ctx, session);
+    if (args.expectedEncounterId && encounter?._id !== args.expectedEncounterId)
+      throw new ConvexError('The encounter changed. Review the current session before closing it.');
+    if (args.action === 'close' && encounter?.status === 'committed') {
+      if (!args.voidMode)
+        throw new ConvexError('Closing active combat requires a Void choice: keep or reset.');
+      const eventId = await appendEvent(ctx, {
+        campaignId: campaign._id,
+        sessionId: session._id,
+        encounterId: encounter._id,
+        origin: 'user',
+        actor: user,
+        commandId: args.commandId,
+        kind: 'combat.voided',
+        description: `Voided combat before closing the session; ${args.voidMode === 'keep' ? 'kept current state' : 'restored starting state'}.`,
+        payload: { mode: args.voidMode },
+      });
+      await voidEncounter(ctx, { campaignId: campaign._id, eventId }, encounter, args.voidMode);
+    }
     const status =
       args.action === 'pause' ? 'paused' : args.action === 'resume' ? 'running' : 'closed';
     // Append closure before setting closed: the event helper never permits later history writes.
@@ -175,6 +195,8 @@ export const setPlayers = mutation({
     checkRevision(session, args.expectedRevision);
     if (campaign.activeSessionId !== session._id)
       throw new ConvexError('Session is no longer active.');
+    if (session.status === 'paused')
+      throw new ConvexError('The session is paused; resume before changing the party roster.');
     if (await combatActive(ctx, session))
       throw new ConvexError('Combat locks the party roster. End or void combat first.');
     await validatePlayers(ctx, campaign._id, args.selectedPlayerIds);

@@ -158,9 +158,7 @@ export function FoesPanel({
               </div>
             ),
           )}
-          <p className="text-sm text-muted-foreground">
-            Foes stay in this campaign until removed. Combat actions are not available yet.
-          </p>
+          <p className="text-sm text-muted-foreground">Foes stay in this campaign until removed.</p>
         </>
       )}
     </section>

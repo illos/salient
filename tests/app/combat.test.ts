@@ -10,7 +10,13 @@ import { describe, expect, test } from 'vitest';
 import { api, internal } from '../../convex/_generated/api';
 import type { Doc, Id } from '../../convex/_generated/dataModel';
 import { appendEvent } from '../../convex/lib/events';
-import { registerWork } from '../../convex/lib/clock';
+import {
+  dispatchBoundary,
+  operationHandlers,
+  registerWork,
+  retireWork,
+} from '../../convex/lib/clock';
+import { createEntry, createGroup } from '../../convex/lib/initiative';
 import { backend, storedEvents, table, type Backend } from './fixtures/table';
 
 type Client = Awaited<ReturnType<typeof table>>['director']['client'];
@@ -605,9 +611,7 @@ describe('A04 combat opening, turns and clock', () => {
       [true, true],
       [false, false],
     ]);
-    await expect(
-      submit(player.client, campaignId, '@Thorn /turn take', cid('take-again')),
-    ).rejects.toThrow('already acted');
+    // Deliberate repeat turns are covered separately under the settled warned-departure policy.
     // The foe's turn, then the round boundary: round-end, round-start with one gain of 1 + 2 = 3.
     await submit(director.client, campaignId, `@{foe:${goblin}} /turn take`, cid('take'));
     await submit(director.client, campaignId, '/turn end', cid('end'));
@@ -707,7 +711,7 @@ describe('A04 combat opening, turns and clock', () => {
     await submit(player.client, campaignId, '@Thorn /turn end', cid('end'));
     await submit(director.client, campaignId, `@{foe:${goblinA}} /turn take`, cid('take'));
     await submit(director.client, campaignId, '/turn end', cid('end'));
-    // A spent entry moved to a new group stays spent and cannot take another turn.
+    // A spent entry moved to a new group stays spent; a deliberate repeat is warned.
     await submit(
       director.client,
       campaignId,
@@ -717,9 +721,18 @@ describe('A04 combat opening, turns and clock', () => {
     const movedA = await entryOf('Goblin A');
     expect(movedA.spent).toBe(true);
     expect((await t.run(ctx => ctx.db.get(movedA.id)))!.spentRound).toBe(2);
-    await expect(
-      submit(director.client, campaignId, `@{foe:${goblinA}} /turn take`, cid('take-spent')),
-    ).rejects.toThrow('already acted');
+    const repeat = await submit(
+      director.client,
+      campaignId,
+      `@{foe:${goblinA}} /turn take`,
+      cid('take-spent'),
+    );
+    expect((await t.run(ctx => ctx.db.get(repeat.eventId)))!.description).toContain(
+      'already acted',
+    );
+    expect((await encounterRow(t, sessionId!))!.activeGroupId).toBe(groupA.id);
+    await submit(director.client, campaignId, '/turn end', cid('end-repeat'));
+    expect((await t.run(ctx => ctx.db.get(movedA.id)))!.spentRound).toBe(2);
     // Group A (Goblin B unspent) is still the active group; finish it.
     await submit(director.client, campaignId, `@{foe:${goblinB}} /turn take`, cid('take'));
     await submit(director.client, campaignId, '/turn end', cid('end'));
@@ -727,7 +740,7 @@ describe('A04 combat opening, turns and clock', () => {
     after = (await encounterRow(t, sessionId!))!;
     expect(after.round).toBe(3);
     // Round 3: heroes first; Thorn's group finishes; the Director takes Goblin B (group A) and ends it,
-    // so group A is finished. A newcomer moved into A does not reopen it and cannot act from there.
+    // so group A is finished. An arrival does not reopen it; acting there would be a warned departure.
     await submit(player.client, campaignId, '@Thorn /turn take', cid('take'));
     await submit(player.client, campaignId, '@Thorn /turn end', cid('end'));
     await submit(director.client, campaignId, `@{foe:${goblinB}} /turn take`, cid('take'));
@@ -767,7 +780,7 @@ describe('A04 combat opening, turns and clock', () => {
           .take(50)
       ).filter(turn => turn.actor.id === goblinA),
     );
-    expect(turnsA.map(turn => turn.round)).toEqual([1, 2]);
+    expect(turnsA.map(turn => turn.round)).toEqual([1, 2, 2]);
     expect(
       maliceGains(await clockEvents(t, campaignId))
         .filter(c => c.step === 'round-start-gain')
@@ -1042,4 +1055,301 @@ describe('A04 combat opening, turns and clock', () => {
     expect(byId.get('group.move')!.session).toBe('unpaused');
     expect(byId.get('turn.take')!.syntax).toBe('@Actor /turn take [entry=…]');
   });
+});
+
+describe('A04 settled-policy regressions', () => {
+  test('warned spent and finished-group departures preserve completion and reject competing or unauthorized turns', async () => {
+    const t = backend();
+    const fixture = await table(t);
+    const { director, player, observer, campaignId, sessionId, thornId } = fixture;
+    const foe = await addGoblin(t, campaignId);
+    await openCombat(t, fixture);
+    await submit(player.client, campaignId, '@Thorn /turn take', cid('take'));
+    await submit(player.client, campaignId, '@Thorn /turn end', cid('end'));
+    const before = (await current(director.client, campaignId))!;
+    const heroEntry = before.groups.flatMap(g => g.entries).find(e => e.actor.id === thornId)!;
+    const heroGroup = before.groups.find(g => g.entries.includes(heroEntry))!;
+    const repeat = await submit(player.client, campaignId, '@Thorn /turn take', cid('repeat'));
+    const log = (await t.run(ctx => ctx.db.get(repeat.eventId)))!;
+    expect(log.description).toContain('already acted');
+    expect(log.description).toContain('already finished');
+    expect((await t.run(ctx => ctx.db.get(heroEntry.id)))!.spentRound).toBe(1);
+    expect((await t.run(ctx => ctx.db.get(heroGroup.id)))!.completedRound).toBe(1);
+    await expect(
+      submit(director.client, campaignId, `@{foe:${foe}} /turn take`, cid('competing')),
+    ).rejects.toThrow('in progress');
+    await submit(player.client, campaignId, '@Thorn /turn end', cid('end-repeat'));
+    expect((await encounterRow(t, sessionId!))!.round).toBe(1);
+    await expect(
+      submit(observer.client, campaignId, '@Thorn /turn take', cid('observer')),
+    ).rejects.toThrow('observer');
+    await expect(
+      submit(player.client, campaignId, `@{foe:${foe}} /turn take`, cid('foreign')),
+    ).rejects.toThrow();
+    const turns = await t.run(ctx =>
+      ctx.db
+        .query('turns')
+        .withIndex('by_encounter', q => q.eq('encounterId', before.id))
+        .take(20),
+    );
+    expect(turns.map(turn => [turn.actor.id, turn.status])).toEqual([
+      [thornId, 'ended'],
+      [thornId, 'ended'],
+    ]);
+  });
+
+  test('Malice counts distinct remaining heroes, includes dying heroes, and logs confirmed fractional rounding', async () => {
+    const t = backend();
+    const fixture = await table(t);
+    const { director, campaignId, sessionId, thornId } = fixture;
+    await addGoblin(t, campaignId);
+    const secondId = await t.run(async ctx => {
+      const hero = (await ctx.db.get(thornId))!;
+      await ctx.db.patch(thornId, { liveState: { ...hero.liveState!, victories: 1, stamina: 0 } });
+      const { _id, _creationTime, ...copy } = hero;
+      void _id;
+      void _creationTime;
+      return ctx.db.insert('characters', {
+        ...copy,
+        authored: { ...copy.authored, name: 'Second' },
+        liveState: { ...copy.liveState!, victories: 2 },
+      });
+    });
+    await openCombat(t, fixture);
+    const encounter = (await encounterRow(t, sessionId!))!;
+    let gains = (await clockEvents(t, campaignId)).filter(e => e.kind === 'clock.malice');
+    expect(gains[0]!.payload.data.change).toMatchObject({
+      delta: 1,
+      inputs: { heroCount: 2, averageVictories: 1.5, rounding: 'down' },
+    });
+    expect(gains[1]!.payload.data.change).toMatchObject({ delta: 3, inputs: { heroCount: 2 } });
+    await t.run(async ctx => {
+      const eventId = await appendEvent(ctx, {
+        campaignId,
+        sessionId: sessionId!,
+        encounterId: encounter._id,
+        origin: 'user',
+        actor: (await ctx.db.get(director.profile.userId))!,
+        commandId: cid('participants'),
+        kind: 'test.participants',
+        description: 'Fixture participation change.',
+      });
+      const scope = { campaignId, eventId };
+      const entries = await ctx.db
+        .query('turnEntries')
+        .withIndex('by_encounter', q => q.eq('encounterId', encounter._id))
+        .take(20);
+      for (const entry of entries.filter(e => e.actor.id === secondId))
+        await ctx.db.delete(entry._id);
+      const original = entries.find(e => e.actor.id === thornId)!;
+      const groupId = await createGroup(ctx, scope, encounter, 'heroes');
+      await createEntry(ctx, scope, encounter, groupId, original.actor, { source: 'granted' });
+      await dispatchBoundary(ctx, scope, encounter._id, { kind: 'round-start', round: 2 });
+    });
+    gains = (await clockEvents(t, campaignId)).filter(e => e.kind === 'clock.malice');
+    expect(gains[2]!.payload.data.change).toMatchObject({
+      delta: 3,
+      inputs: { heroCount: 1 },
+      before: 4,
+      after: 7,
+    });
+    expect((await t.run(ctx => ctx.db.get(campaignId)))!.malice).toBe(7);
+    expect((await t.run(ctx => ctx.db.get(thornId)))!.liveState!.stamina).toBe(0);
+    expect((await t.run(ctx => ctx.db.get(encounter._id)))!.heroParticipantIds).toContain(secondId);
+  });
+
+  test('clock skips work retired earlier in its queue and includes late saves without rolling', async () => {
+    const t = backend();
+    const fixture = await table(t);
+    const { director, campaignId, sessionId } = fixture;
+    await addGoblin(t, campaignId);
+    await openCombat(t, fixture);
+    const encounter = (await encounterRow(t, sessionId!))!;
+    const rollsBefore = await t.run(ctx => ctx.db.query('rolls').take(20));
+    let retireId: Id<'clockRegistrations'>;
+    operationHandlers.set('test.retire-and-save', async (ctx, firing) => {
+      await retireWork(ctx, firing.scope, retireId);
+      await registerWork(ctx, firing.scope, encounter._id, {
+        timing: { scope: 'round', boundary: 'round-end', round: 1 },
+        work: { kind: 'saving-throw', effectInstanceId: 'late-save', creatureId: fixture.thornId },
+        source: { logEntryId: firing.scope.eventId, label: 'Late save' },
+      });
+      return { kind: 'test.retirement', description: 'Retired later work and registered a save.' };
+    });
+    try {
+      await t.run(async ctx => {
+        const eventId = await appendEvent(ctx, {
+          campaignId,
+          sessionId: sessionId!,
+          encounterId: encounter._id,
+          origin: 'user',
+          actor: (await ctx.db.get(director.profile.userId))!,
+          commandId: cid('dispatch'),
+          kind: 'test.boundary',
+          description: 'Fixture boundary.',
+        });
+        const scope = { campaignId, eventId };
+        await registerWork(ctx, scope, encounter._id, {
+          timing: { scope: 'round', boundary: 'round-end', round: 1 },
+          work: { kind: 'operation', operationId: 'test.retire-and-save' },
+          source: { logEntryId: eventId, label: 'First' },
+        });
+        retireId = await registerWork(ctx, scope, encounter._id, {
+          timing: { scope: 'round', boundary: 'round-end', round: 1 },
+          work: { kind: 'operation', operationId: 'test.retired' },
+          source: { logEntryId: eventId, label: 'Retired before firing' },
+        });
+        await dispatchBoundary(ctx, scope, encounter._id, { kind: 'round-end', round: 1 });
+      });
+    } finally {
+      operationHandlers.delete('test.retire-and-save');
+    }
+    const events = await storedEvents(t, campaignId);
+    expect(events.some(e => e.description.includes('Retired before firing: due'))).toBe(false);
+    const applied = events.find(e => e.kind === 'test.retirement')!;
+    const save = events.find(e => e.description.startsWith('Late save:'))!;
+    expect(save.sequence).toBeGreaterThan(applied.sequence);
+    expect(save.kind).toBe('clock.unsupported');
+    expect(save.payload.phase).toBe('saves');
+    expect((await t.run(ctx => ctx.db.get(retireId!)))!.status).toBe('retired');
+    expect(await t.run(ctx => ctx.db.query('rolls').take(20))).toEqual(rollsBefore);
+  });
+});
+
+describe('A04 lifecycle edge regressions', () => {
+  test('an exhausted starting side does not produce false side-order warnings next round', async () => {
+    const t = backend();
+    const fixture = await table(t);
+    const { director, player, campaignId, sessionId } = fixture;
+    const foe = await addGoblin(t, campaignId);
+    await openCombat(t, fixture, { heroesFirst: false });
+    await submit(director.client, campaignId, `@{foe:${foe}} /turn take`, cid('take'));
+    await submit(director.client, campaignId, '/turn end', cid('end'));
+    await submit(player.client, campaignId, '@Thorn /turn take', cid('take'));
+    await submit(
+      director.client,
+      campaignId,
+      `@{foe:${foe}} /adjust stamina value=0`,
+      cid('slain'),
+    );
+    await submit(player.client, campaignId, '@Thorn /turn end', cid('end'));
+    expect((await encounterRow(t, sessionId!))!).toMatchObject({
+      round: 2,
+      startingSide: 'director',
+      activeSide: 'heroes',
+    });
+    const turn = await submit(player.client, campaignId, '@Thorn /turn take', cid('take-next'));
+    expect((await t.run(ctx => ctx.db.get(turn.eventId)))!.description).not.toContain(
+      'Rule warning',
+    );
+  });
+
+  test('archived encounter cannot dispatch or register clock work', async () => {
+    const t = backend();
+    const fixture = await table(t);
+    const { campaignId, sessionId } = fixture;
+    await addGoblin(t, campaignId);
+    await openCombat(t, fixture);
+    const encounter = (await encounterRow(t, sessionId!))!;
+    const events = await storedEvents(t, campaignId);
+    const scope = { campaignId, eventId: events.at(-1)!._id };
+    await t.run(ctx => ctx.db.patch(encounter._id, { status: 'voided', archivedAt: Date.now() }));
+    await expect(
+      t.run(ctx => dispatchBoundary(ctx, scope, encounter._id, { kind: 'round-start', round: 2 })),
+    ).rejects.toThrow('current committed encounter');
+    await expect(
+      t.run(ctx =>
+        registerWork(ctx, scope, encounter._id, {
+          timing: { scope: 'combat', boundary: 'combat-end' },
+          work: { kind: 'malice', step: 'encounter-end-loss' },
+          source: { logEntryId: scope.eventId, label: 'Invalid late work' },
+        }),
+      ),
+    ).rejects.toThrow('current committed encounter');
+    expect(await storedEvents(t, campaignId)).toEqual(events);
+  });
+
+  test('setup card lookup ignores a stale pending card from a closed session', async () => {
+    const t = backend();
+    const fixture = await table(t);
+    const { director, campaignId, sessionId } = fixture;
+    const first = await submit(director.client, campaignId, '/combat start', cid('old-start'));
+    const staleId = await t.run(async ctx => {
+      const card = (await ctx.db.get(first.interactionId!))!;
+      const session = (await ctx.db.get(sessionId!))!;
+      const { _id, _creationTime, ...sessionFields } = session;
+      void _id;
+      void _creationTime;
+      const oldSession = await ctx.db.insert('sessions', {
+        ...sessionFields,
+        status: 'closed',
+        encounterId: null,
+        closedAt: Date.now(),
+      });
+      await ctx.db.patch(card._id, { sessionId: oldSession });
+      const { _id: cardId, _creationTime: created, ...fields } = card;
+      void cardId;
+      void created;
+      await ctx.db.insert('interactions', fields);
+      return card._id;
+    });
+    const view = (await current(director.client, campaignId))!;
+    expect(view.setupInteractionId).not.toBe(staleId);
+    await submit(director.client, campaignId, '/combat cancel', cid('cancel'));
+    expect((await t.run(ctx => ctx.db.get(staleId)))!.status).toBe('awaiting-input');
+    expect((await t.run(ctx => ctx.db.get(view.setupInteractionId!)))!.status).toBe('closed');
+    expect(await encounterRow(t, sessionId!)).toBeNull();
+  });
+});
+
+test.each(['heroes', 'foes'] as const)(
+  'empty opposing side uses Director adjudication with %s only',
+  async side => {
+    const t = backend();
+    const fixture = await table(t);
+    const { director, player, campaignId, sessionId, thornId } = fixture;
+    const foe = side === 'foes' ? await addGoblin(t, campaignId) : null;
+    await submit(director.client, campaignId, '/combat start', cid('start'));
+    if (foe)
+      await submit(
+        director.client,
+        campaignId,
+        '/combat setup creature=@Thorn included=false',
+        cid('exclude'),
+      );
+    await submit(director.client, campaignId, '/combat commit', cid('commit'));
+    const committed = (await encounterRow(t, sessionId!))!;
+    expect(committed).toMatchObject({
+      phase: 'choice',
+      opening: { path: 'adjudication', roll: null },
+    });
+    await expect(submit(player.client, campaignId, '/combat roll', cid('roll'))).rejects.toThrow(
+      'No initiative roll',
+    );
+    await expect(
+      submit(player.client, campaignId, `/combat first side=${side}`, cid('choose')),
+    ).rejects.toThrow('Director adjudicates');
+    await submit(director.client, campaignId, `/combat first side=${side}`, cid('first'));
+    const actor = foe ? `@{foe:${foe}}` : `@{character:${thornId}}`;
+    await submit(director.client, campaignId, `${actor} /turn take`, cid('take'));
+    await submit(director.client, campaignId, '/turn end', cid('end'));
+    expect((await encounterRow(t, sessionId!))!.round).toBe(2);
+    expect(await t.run(ctx => ctx.db.query('rolls').take(20))).toHaveLength(0);
+  },
+);
+
+test('closeout phase does not offer or accept End turn even with a stale active-turn pointer', async () => {
+  const t = backend();
+  const fixture = await table(t);
+  const { director, player, campaignId, sessionId } = fixture;
+  await addGoblin(t, campaignId);
+  await openCombat(t, fixture);
+  await submit(player.client, campaignId, '@Thorn /turn take', cid('take'));
+  const row = (await encounterRow(t, sessionId!))!;
+  await t.run(ctx => ctx.db.patch(row._id, { phase: 'closeout' }));
+  expect((await current(player.client, campaignId))!.activeTurn!.mayEnd).toBe(false);
+  await expect(submit(director.client, campaignId, '/turn end', cid('end'))).rejects.toThrow(
+    /Structured turn play|Combat has ended|Combat is in closeout/,
+  );
+  expect((await t.run(ctx => ctx.db.get(row.activeTurnId!)))!.status).toBe('active');
 });

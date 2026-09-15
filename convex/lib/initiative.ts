@@ -15,7 +15,7 @@
  *   monster finishes its turn; round advance even with an unacted arrival in a finished group.
  * - docs/conditions-and-clock.md#22-boundaries-the-app-dispatches — round ends when no unspent entry
  *   remains among current participants (Slain or removed creatures do not hold it open; Q-R-52
- *   provisional default: an added creature has a turn in the current round); the sequence at a round
+ *   confirmed: an added creature has a turn in the current round); the sequence at a round
  *   change is turn-end work, then round-end, then round-start; the first turn-start waits for Take turn.
  * - vendor/steel-compendium/en/unified/md/rule/combat/combat-round.md — "When that turn is over, the
  *   other side chooses a creature to act"; the exhausted-side rule; "The side whose members acted
@@ -145,8 +145,8 @@ export interface StartResult {
 }
 
 /**
- * Coherence checks for a claim (one active turn, one active group, the entry has a turn to take,
- * a finished group does not reopen) and the warned departures (acting out of side order; Slain).
+ * Coherence checks require one active turn. Rule departures warn without erasing spent state,
+ * reopening completed groups, or abandoning the active group (settled Q-A-400).
  */
 export async function validateTurnStart(
   ctx: MutationCtx,
@@ -165,21 +165,21 @@ export async function validateTurnStart(
       `${active?.actor.name ?? 'Another creature'}'s turn is in progress; end it before another begins.`,
     );
   }
+  const warnings: string[] = [];
   if (entry.spentRound === round)
-    throw new ConvexError(
-      `${entry.actor.name} has already acted this round (that entry's turn is spent).`,
+    warnings.push(
+      `Rule warning: ${entry.actor.name} has already acted this round (that entry's turn stays spent).`,
     );
   const group = await ctx.db.get(entry.groupId);
   if (!group) throw new ConvexError('Initiative group unavailable.');
   if (group.completedRound === round)
-    throw new ConvexError(
-      `${entry.actor.name}'s initiative group already finished this round; a finished group does not reopen. The Director can move the entry into a new group.`,
+    warnings.push(
+      `Rule warning: ${entry.actor.name}'s initiative group already finished this round; its completion remains recorded.`,
     );
   if (encounter.activeGroupId && encounter.activeGroupId !== group._id)
-    throw new ConvexError(
-      'Another initiative group is active; its remaining members finish before play passes on.',
+    warnings.push(
+      'Rule warning: another initiative group is active; its remaining members resume after this turn.',
     );
-  const warnings: string[] = [];
   const side = sideOf(entry.actor);
   if (!encounter.activeGroupId && encounter.activeSide && encounter.activeSide !== side)
     warnings.push(
@@ -219,8 +219,9 @@ export async function startTurn(
   await journalPatch(ctx, scope, 'turnEntries', entry._id, { spentRound: round });
   await journalPatch(ctx, scope, 'encounters', encounterId, {
     activeTurnId: turnId,
-    activeGroupId: group._id,
-    activeSide: side,
+    // A deliberate departure does not abandon an unfinished group's remaining members.
+    activeGroupId: encounter.activeGroupId ?? group._id,
+    activeSide: encounter.activeGroupId ? encounter.activeSide : side,
   });
   const turn = (await ctx.db.get(turnId))!;
   await dispatchBoundary(
@@ -250,6 +251,18 @@ export async function endTurn(
   );
   await journalPatch(ctx, scope, 'turns', turnId, { status: 'ended', endedEventId: scope.eventId });
   await journalPatch(ctx, scope, 'encounters', turn.encounterId, { activeTurnId: null });
+  // A warned turn from another group may finish that group without reopening or replacing
+  // the group whose activation was preserved. Moving the acting entry keeps this distinction.
+  const init = await loadInitiative(ctx, turn.encounterId);
+  const encounter = (await ctx.db.get(turn.encounterId))!;
+  const group = init.groups.find(row => row._id === turn.groupId);
+  if (
+    group &&
+    group._id !== encounter.activeGroupId &&
+    groupFinished(group, init, turn.round) &&
+    group.completedRound !== turn.round
+  )
+    await journalPatch(ctx, scope, 'initiativeGroups', group._id, { completedRound: turn.round });
   await settle(ctx, scope, turn.encounterId);
 }
 
@@ -313,7 +326,9 @@ export async function settle(
   await journalPatch(ctx, scope, 'encounters', encounterId, {
     round: round + 1,
     activeGroupId: null,
-    activeSide: encounter.startingSide ?? null,
+    activeSide: encounter.startingSide
+      ? nextSide(init, round + 1, otherSide(encounter.startingSide))
+      : null,
   });
   await dispatchBoundary(ctx, scope, encounterId, { kind: 'round-start', round: round + 1 });
   result.roundAdvanced = true;

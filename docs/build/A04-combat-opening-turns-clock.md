@@ -203,3 +203,11 @@ Preserve completed-group and spent-entry history, access/session checks, and coh
 never create competing ordinary active turns. Treat active-group representation as engineering work
 under those constraints. Verify refused unauthorized/incoherent requests separately from accepted,
 logged rule departures. No new user approval is required for that repair.
+
+### 2026-09-15 — Independent repair closure
+
+The Q-R-50 participant count and Q-A-400 warned departures are implemented and independently
+source/code reviewed. Persisted tests cover current distinct heroes, preserved spent/group state,
+coherent turns and clock queue ordering. The earlier outstanding-work notes are historical. See
+[the A04 verdict](audits/2026-09-15-A04-independent-review.md) and
+[combined acceptance evidence](evidence/v001-acceptance.md).

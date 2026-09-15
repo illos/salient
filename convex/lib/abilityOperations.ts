@@ -32,11 +32,14 @@ import type {
   AbilityRollBlocked,
   AbilityRollResult,
   Characteristic,
+  CostApplication,
   DamageApplication,
+  DamageTargetFacts,
   TargetRollOutcome,
 } from '../../shared/contracts/rollResolution';
 import {
   CHARACTERISTICS,
+  checkAffordability,
   correctTarget,
   resolveAbilityRoll,
   resolveCatchBreath,
@@ -44,7 +47,11 @@ import {
 } from '../../shared/resolve/index';
 import type { ReadCtx } from './access';
 import { committedEncounter } from './encounters';
-import { assertCorrectionAllowed } from './history';
+import {
+  assertCorrectionAllowed,
+  assertManualResolutionAllowed,
+  resolveHistoricalId,
+} from './history';
 import { journalInsert, journalPatch, type JournalScope } from './journal';
 import { rollDice } from './dice';
 import {
@@ -55,7 +62,6 @@ import {
   heroFacts,
   RECOVERIES_RULE_ID,
   CREATURE_FREE_STRIKE_RULE_ID,
-  sourceRecord,
   supportingSource,
   writeDamage,
   type AbilityDefinition,
@@ -117,7 +123,11 @@ export async function bindTarget(
     return loadActorRecords(ctx, context, actor);
   }
   const director: TableContext = { ...context, role: 'director' };
-  const bound = await bindActor(ctx, director, reference);
+  const currentReference =
+    'id' in reference
+      ? { ...reference, id: await resolveHistoricalId(ctx, context.campaign._id, reference.id) }
+      : reference;
+  const bound = await bindActor(ctx, director, currentReference);
   return loadActorRecords(ctx, context, bound);
 }
 
@@ -159,6 +169,7 @@ function emptyDraft(context: TableContext, actor: Actor | null): DraftFields {
     targets: [],
     modifiers: {},
     characteristic: null,
+    damageCharacteristic: null,
     updatedAt: Date.now(),
   };
 }
@@ -226,6 +237,9 @@ function fireEnvelope(
       edges: targets.map(t => draftCounts(draft, t).edges),
       banes: targets.map(t => draftCounts(draft, t).banes),
       ...(draft.characteristic ? { characteristic: draft.characteristic } : {}),
+      ...(draft.damageCharacteristic
+        ? { 'damage-characteristic': draft.damageCharacteristic }
+        : {}),
       fromDraft: true,
     },
   };
@@ -273,6 +287,27 @@ function prompt(ability: AbilityDefinition, targets: Actor[]): string {
   }
 }
 
+function damageChoices(ability: AbilityDefinition): Characteristic[] {
+  const choices = (ability.metadata?.tiers ?? []).flatMap(t =>
+    t.damage?.kind === 'plusChoice' ? t.damage.choices : [],
+  );
+  return [...new Set(choices)];
+}
+
+function selectedOverride(
+  value: unknown,
+  name: string,
+  permitted: Characteristic[],
+): Characteristic | null {
+  if (String(value).toLowerCase() === 'default') return null;
+  const c = String(value).toUpperCase() as Characteristic;
+  if (!permitted.includes(c))
+    throw new ConvexError(
+      `"${name}" must be ${permitted.join(' or ') || 'a supported characteristic choice'}, or default.`,
+    );
+  return c;
+}
+
 const abilitySelect: OperationDefinition = {
   id: 'ability.select',
   family: 'ability',
@@ -280,11 +315,17 @@ const abilitySelect: OperationDefinition = {
   title: 'Select an ability',
   description:
     'Choose an ability for the acting creature. A self-only ability fires at once; a single-target ability fires when its target is selected; a multi-target ability fires at the full count or with /ability fire. Selecting the pending ability again cancels it.',
-  args: { ability: v.string(), characteristic: v.optional(v.string()) },
+  args: {
+    ability: v.string(),
+    characteristic: v.optional(v.string()),
+    'damage-characteristic': v.optional(v.string()),
+  },
   argDescriptions: {
     ability: 'The ability by printed name or content id.',
     characteristic:
-      'Optional roll characteristic override (M, A, R, I or P) among the permitted ones.',
+      'Optional roll characteristic override (M, A, R, I or P); default resets the choice.',
+    'damage-characteristic':
+      'Independent damage characteristic override among the printed choices; default resets it.',
   },
   roles: PLAYERS,
   session: 'running',
@@ -299,7 +340,11 @@ const abilitySelect: OperationDefinition = {
       );
     const existing = await draftOf(ctx, context);
     const draft = draftFor(context, existing, actor!);
-    if (draft.abilityId === ability.abilityId && args.characteristic === undefined)
+    if (
+      draft.abilityId === ability.abilityId &&
+      args.characteristic === undefined &&
+      args['damage-characteristic'] === undefined
+    )
       // Clicking the pending ability again cancels the un-fired selection (confirmed).
       return {
         kind: 'target.draft',
@@ -309,17 +354,23 @@ const abilitySelect: OperationDefinition = {
           await clearDraft(mctx, context);
         },
       };
-    draft.abilityId = ability.abilityId;
-    if (args.characteristic !== undefined) {
-      const c = String(args.characteristic).toUpperCase() as Characteristic;
-      if (!CHARACTERISTICS.includes(c))
-        throw new ConvexError('"characteristic" must be M, A, R, I or P.');
-      if (!ability.metadata?.permittedCharacteristics.includes(c))
-        throw new ConvexError(
-          `${ability.name} rolls ${ability.metadata?.permittedCharacteristics.join(' or ') || 'no characteristic'}; ${c} is not permitted.`,
-        );
-      draft.characteristic = c;
+    if (draft.abilityId !== ability.abilityId) {
+      draft.characteristic = null;
+      draft.damageCharacteristic = null;
     }
+    draft.abilityId = ability.abilityId;
+    if (args.characteristic !== undefined)
+      draft.characteristic = selectedOverride(
+        args.characteristic,
+        'characteristic',
+        ability.metadata?.permittedCharacteristics ?? [],
+      );
+    if (args['damage-characteristic'] !== undefined)
+      draft.damageCharacteristic = selectedOverride(
+        args['damage-characteristic'],
+        'damageCharacteristic',
+        damageChoices(ability),
+      );
     // A single-target ability keeps at most the last selected target.
     if (ability.targetShape.kind === 'single' && draft.targets.length > 1)
       draft.targets = draft.targets.slice(-1);
@@ -518,7 +569,11 @@ export async function allowanceFor(
     maneuverUsed: 0,
     extraMainOffered: [],
   };
-  if (!encounter || encounter.phase !== 'turns') return none;
+  if (!encounter) return none;
+  // OK commits combat before initiative resolves. Its roll/choice stages still require fixed
+  // resource payment; they only lack an active turn and its ordinary action allowances.
+  if (encounter.phase !== 'turns')
+    return { ...none, inCombat: true, encounterId: encounter._id, round: encounter.round ?? 0 };
   const active = encounter.activeTurnId ? await ctx.db.get(encounter.activeTurnId) : null;
   const onTurn = !!active && sameActor(active.actor, actor);
   const uses = onTurn
@@ -541,7 +596,7 @@ export async function allowanceFor(
     round: encounter.round ?? 0,
     turnId: onTurn ? active!._id : null,
     onTurn,
-    mainUsed: uses.filter(u => u.actionType === 'main action').length,
+    mainUsed: uses.filter(u => u.actionType === 'main action' && u.opportunityId === null).length,
     maneuverUsed: uses.filter(u => u.actionType === 'maneuver').length,
     extraMainOffered: opportunities,
   };
@@ -575,7 +630,7 @@ function planTracking(allowance: Allowance, actor: Actor, actionType: string | n
       warnings.push(
         `Rule warning: ${actor.name} already used a maneuver this turn; a main action may be spent on a second maneuver (rule/combat/turn.md).`,
       );
-  } else if (!allowance.onTurn)
+  } else if (!allowance.onTurn && ['move action', 'free maneuver'].includes(actionType))
     warnings.push(`Rule warning: it is not ${actor.name}'s turn (rule/combat/turn.md).`);
   return { warnings, opportunity };
 }
@@ -674,13 +729,15 @@ function describeTarget(outcome: TargetRollOutcome, name: string, applied?: Dama
   return `${name}${counts}: ${tier}; ${damage}${unresolved}`;
 }
 
-async function sourceFor(ctx: ReadCtx, ability: AbilityDefinition) {
-  const entry = await requireContent(ctx, ability.contentId);
-  const record = sourceRecord(entry);
-  // A stat-block ability's own text is its blockquote; the record keeps the whole entry as support.
-  return ability.text === entry.text
-    ? record
-    : { ...record, text: ability.text, supporting: [record] };
+function sourceFor(ability: AbilityDefinition) {
+  // Only the used action is public. Never attach the private full monster stat block as support.
+  return {
+    id: ability.contentId,
+    name: ability.name,
+    text: ability.text,
+    sourcePath: ability.source.path,
+    revision: ability.source.revision,
+  };
 }
 
 const abilityUse: OperationDefinition = {
@@ -696,6 +753,7 @@ const abilityUse: OperationDefinition = {
     edges: v.optional(v.union(v.number(), v.array(v.number()))),
     banes: v.optional(v.union(v.number(), v.array(v.number()))),
     characteristic: v.optional(v.string()),
+    'damage-characteristic': v.optional(v.string()),
     fromDraft: v.optional(v.boolean()),
   },
   argDescriptions: {
@@ -704,6 +762,8 @@ const abilityUse: OperationDefinition = {
     edges: 'Edges per target, one number per target in order (or one number for a single target).',
     banes: 'Banes per target, one number per target in order (or one number for a single target).',
     characteristic: 'Roll characteristic override (M, A, R, I or P) among the permitted ones.',
+    'damage-characteristic':
+      'Independent choice among the printed damage characteristics; otherwise highest permitted.',
     fromDraft: 'Set by the selection controls when they fire the invoking user’s draft.',
   },
   roles: PLAYERS,
@@ -749,7 +809,7 @@ const abilityUse: OperationDefinition = {
     const allowance = await allowanceFor(ctx, context, actor!);
     const tracking = planTracking(allowance, actor!, ability.actionType);
     warnings.push(...tracking.warnings);
-    const source = await sourceFor(ctx, ability);
+    const source = sourceFor(ability);
     const clear = async (mctx: MutationCtx) => {
       // Firing clears the invoking user's draft (confirmed), whichever path fired it.
       await clearDraft(mctx, context);
@@ -770,6 +830,42 @@ const abilityUse: OperationDefinition = {
       ...(ability.tiers ? { tiers: ability.tiers } : {}),
       ...(ability.effects ? { effects: ability.effects } : {}),
     };
+
+    const costPool = ability.fixedCost
+      ? poolFor(records, context, ability.fixedCost.resource)
+      : undefined;
+    const affordability = checkAffordability(ability.fixedCost, costPool, allowance.inCombat);
+    if (affordability.kind === 'blocked')
+      return {
+        kind: 'ability.blocked',
+        description: `Blocked: ${actor!.name} cannot use ${ability.name} — ${affordability.reason}. No roll, no cost, no action used; the pending selection is kept.`,
+        data: {
+          ability: abilityData,
+          blocked: { ...affordability, abilityId: ability.abilityId, actorId: actor!.id },
+          targets: targets.map(t => t.actor),
+          source,
+        },
+      };
+    const cost: CostApplication | undefined =
+      affordability.kind === 'affordable'
+        ? {
+            ...affordability.cost,
+            waived: false,
+            before: affordability.before,
+            after: affordability.after,
+          }
+        : affordability.kind === 'waived'
+          ? {
+              ...affordability.cost,
+              waived: true,
+              before: affordability.pool,
+              after: affordability.pool,
+            }
+          : undefined;
+    if (cost?.waived)
+      warnings.push(
+        'The outside-combat Ferocity reuse restriction is checked manually from the Ferocity source; no reuse limit or resource lifecycle is automated.',
+      );
 
     // ---- Catch Breath (R04 section 7): a maneuver in combat, the same operation in FreePlay.
     if (ability.kind === 'catch-breath') {
@@ -839,15 +935,27 @@ const abilityUse: OperationDefinition = {
         ? `Cost "${ability.unknownCost}" is not a fixed "N Resource" cost the app can check; the ability is recorded for manual resolution with no roll, no debit and no effect.`
         : !ability.actionType
           ? `Action type "${ability.usage}" is not one the app tracks; recorded for manual resolution.`
-          : 'Benefits are resolved manually through the per-target edge and bane inputs (docs/table-spec.md#v001-defend-and-aid-attack).';
+          : 'Effects are recorded for manual resolution; only supported fixed payment and action tracking are applied.';
       const type = ability.actionType ?? 'unknown';
+      const describeRecorded = (payment: string) =>
+        `${actor!.name} uses ${ability.name}${ability.actionType ? ` (${ability.actionType})` : ''}${targets.length && ability.targetShape.kind !== 'self' ? ` on ${targetNames}` : ''}. ${reason}${payment}${warnings.length ? ` ${warnings.join(' ')}` : ''}`;
+      const payment = cost
+        ? cost.waived
+          ? ` Cost ${cost.amount} ${cost.resource} waived outside combat.`
+          : ` Spent ${cost.amount} ${cost.resource} (${cost.before} → ${cost.after}).`
+        : '';
+
       return {
         kind: 'ability.recorded',
-        description: `${actor!.name} uses ${ability.name}${ability.actionType ? ` (${ability.actionType})` : ''}${targets.length && ability.targetShape.kind !== 'self' ? ` on ${targetNames}` : ''}. ${reason}${warnings.length ? ` ${warnings.join(' ')}` : ''}`,
+        description: describeRecorded(payment),
         data: {
           ability: abilityData,
           targets: targets.map(t => t.actor),
           manual: true,
+          publicDescription: describeRecorded(
+            cost?.resource === 'malice' ? ` Spent ${cost.amount} malice.` : payment,
+          ),
+          ...(cost ? { cost } : {}),
           reason,
           allowance: {
             inCombat: allowance.inCombat,
@@ -858,6 +966,7 @@ const abilityUse: OperationDefinition = {
           source,
         },
         commit: async (mctx, scope) => {
+          if (cost && !cost.waived) await debit(mctx, scope, records, context, cost.after);
           if (ability.actionType)
             await recordUse(mctx, scope, allowance, actor!, type, ability.name, tracking);
           await clear(mctx);
@@ -928,6 +1037,14 @@ const abilityUse: OperationDefinition = {
           `${ability.name} rolls ${metadata.permittedCharacteristics.join(' or ') || 'a fixed bonus'}; ${characteristic} is not permitted.`,
         );
     }
+    const damageCharacteristic =
+      args['damage-characteristic'] === undefined
+        ? null
+        : selectedOverride(
+            args['damage-characteristic'],
+            'damageCharacteristic',
+            damageChoices(ability),
+          );
     const pool = metadata.fixedCost
       ? poolFor(records, context, metadata.fixedCost.resource)
       : undefined;
@@ -945,6 +1062,7 @@ const abilityUse: OperationDefinition = {
       inCombat: allowance.inCombat,
       ...(pool ? { resourcePool: pool } : {}),
       ...(characteristic ? { selectedCharacteristic: characteristic } : {}),
+      ...(damageCharacteristic ? { selectedDamageCharacteristic: damageCharacteristic } : {}),
     });
     if (probe.kind === 'blocked') {
       const blocked: AbilityRollBlocked = probe;
@@ -979,6 +1097,7 @@ const abilityUse: OperationDefinition = {
       inCombat: allowance.inCombat,
       ...(pool ? { resourcePool: pool } : {}),
       ...(characteristic ? { selectedCharacteristic: characteristic } : {}),
+      ...(damageCharacteristic ? { selectedDamageCharacteristic: damageCharacteristic } : {}),
       ...(ability.effects ? { effectClauses: ability.effects } : {}),
     });
     if (response.kind !== 'resolved')
@@ -999,14 +1118,18 @@ const abilityUse: OperationDefinition = {
     const critText = result.criticalHit
       ? ' Critical hit (natural 19+ on a main action): an additional main action is available to the acting user; it is not taken automatically.'
       : '';
-    const description = `${actor!.name} uses ${ability.name} on ${targetNames}: ${describeRoll(result)}.${costText} ${perTarget.map(p => describeTarget(p.outcome, p.target.name, p.applied ?? undefined)).join(' ')}${critText}${result.manualResolutions?.length ? ` Recorded for manual resolution: ${result.manualResolutions.map(m => `"${m.sourceClause}"`).join(', ')}.` : ''}${warnings.length ? ` ${warnings.join(' ')}` : ''}`;
+    const describeUse = (payment: string) =>
+      `${actor!.name} uses ${ability.name} on ${targetNames}: ${describeRoll(result)}.${payment} ${perTarget.map(p => describeTarget(p.outcome, p.target.name, p.applied ?? undefined)).join(' ')}${critText}${result.manualResolutions?.length ? ` Recorded for manual resolution: ${result.manualResolutions.map(m => `"${m.sourceClause}"`).join(', ')}.` : ''}${warnings.length ? ` ${warnings.join(' ')}` : ''}`;
     return {
       kind: 'ability.use',
-      description,
+      description: describeUse(costText),
       dice: accepted.dice,
       data: {
         ability: abilityData,
         result,
+        publicDescription: describeUse(
+          result.cost?.resource === 'malice' ? ` Spent ${result.cost.amount} malice.` : costText,
+        ),
         rollId: accepted.rollId,
         targets: perTarget.map(p => ({ target: p.target, edges: p.edges, banes: p.banes })),
         damage: perTarget.map(p => ({
@@ -1039,6 +1162,11 @@ const abilityUse: OperationDefinition = {
           encounterId: allowance.encounterId,
           actor: actor!,
           abilityId: ability.abilityId,
+          resolutionInputs: {
+            ability: metadata,
+            actor: actorFacts,
+            targetFacts: targetFacts.flatMap(t => ('facts' in t.facts ? [t.facts.facts] : [])),
+          },
           abilityName: ability.name,
           dice: { d10a: result.dice.d10a, d10b: result.dice.d10b },
           characteristicValue: result.characteristicValue,
@@ -1126,7 +1254,13 @@ const abilityCorrect: OperationDefinition = {
     const edges = integer(args.edges, 'edges', 0);
     const banes = integer(args.banes, 'banes', 0);
     const targetRecord = await bindTarget(ctx, context, args.target as Reference, result.actor);
-    const index = result.targets.findIndex(t => sameActor(t.target, targetRecord.actor));
+    const effectiveTargets = await Promise.all(
+      result.targets.map(async t => ({
+        ...t.target,
+        id: await resolveHistoricalId(ctx, context.campaign._id, t.target.id),
+      })),
+    );
+    const index = effectiveTargets.findIndex(t => sameActor(t, targetRecord.actor));
     if (index < 0)
       throw new ConvexError(`${targetRecord.actor.name} was not a target of that use.`);
     const entry = result.targets[index]!;
@@ -1134,18 +1268,41 @@ const abilityCorrect: OperationDefinition = {
       throw new ConvexError(
         `${targetRecord.actor.name} already has ${edges} edges and ${banes} banes on that use.`,
       );
-    const records = await loadActorRecords(ctx, context, result.actor);
-    const ability = findAbility(await abilitiesFor(ctx, result.actor, records), result.abilityId);
-    if (!ability?.metadata)
-      throw new ConvexError('The ability of that use is no longer resolvable.');
-    const facts = damageTargetFacts(targetRecord);
+    const inputs = result.resolutionInputs as
+      | {
+          ability: import('../../shared/contracts/rollResolution').AbilityRollMetadata;
+          actor: import('../../shared/contracts/rollResolution').ActorRollFacts;
+          targetFacts: import('../../shared/contracts/rollResolution').DamageTargetFacts[];
+        }
+      | undefined;
+    if (!inputs)
+      throw new ConvexError(
+        'This older ability use has no recorded resolution inputs; use a new current-state adjustment rather than recomputing it from changed facts.',
+      );
+    const currentFacts = damageTargetFacts(targetRecord);
+    const originalFacts = inputs.targetFacts.find(f => f.targetId === entry.target.id);
+    const facts: { facts: DamageTargetFacts } | { missing: string } =
+      'facts' in currentFacts && originalFacts
+        ? {
+            facts: {
+              ...originalFacts,
+              stamina: currentFacts.facts.stamina,
+              temporaryStamina: currentFacts.facts.temporaryStamina,
+            },
+          }
+        : { missing: 'The original use had no supported target facts; damage remains manual.' };
     const applied = (entry.applied as DamageApplication | null) ?? undefined;
+    const originalResult = (event.payload as { data?: { result?: AbilityRollResult } })?.data
+      ?.result;
     const correction = correctTarget(
-      ability.metadata,
-      actorRollFacts(result.actor, records),
+      inputs.ability,
+      inputs.actor,
       {
         dice: { d10a: result.dice.d10a as never, d10b: result.dice.d10b as never },
         characteristicValue: result.characteristicValue,
+        ...(originalResult?.selectedDamageCharacteristic
+          ? { selectedDamageCharacteristic: originalResult.selectedDamageCharacteristic }
+          : {}),
         ...(result.selectedCharacteristic
           ? { selectedCharacteristic: result.selectedCharacteristic }
           : {}),
@@ -1164,12 +1321,14 @@ const abilityCorrect: OperationDefinition = {
         : 'facts' in facts && applied
           ? `; ${name} Stamina ${facts.facts.stamina} → ${facts.facts.stamina + correction.staminaReconciliationDelta}`
           : '';
+    const publicDescription = `Correction by ${context.user.displayName}: ${result.actor.name}'s ${result.abilityName} against ${name}, edges ${entry.edges} → ${edges}, banes ${entry.banes} → ${banes} (same dice ${result.dice.d10a} + ${result.dice.d10b}): tier ${correction.before.tier} → ${correction.after.tier}, damage ${correction.before.damage?.rolledDamage ?? 'none'} → ${correction.after.damage?.rolledDamage ?? 'none'}, reconciliation ${correction.staminaReconciliationDelta >= 0 ? '+' : ''}${correction.staminaReconciliationDelta} Stamina.`;
     return {
       kind: 'correction.ability',
       description: `Correction by ${context.user.displayName}: ${result.actor.name}'s ${result.abilityName} against ${name}, edges ${entry.edges} → ${edges}, banes ${entry.banes} → ${banes} (same dice ${result.dice.d10a} + ${result.dice.d10b}): tier ${correction.before.tier} → ${correction.after.tier}, damage ${correction.before.damage?.rolledDamage ?? 'none'} → ${correction.after.damage?.rolledDamage ?? 'none'}, reconciliation ${correction.staminaReconciliationDelta >= 0 ? '+' : ''}${correction.staminaReconciliationDelta} Stamina${stamina}.`,
       causeEventId: event._id,
       data: {
         originalEventId: event._id,
+        publicDescription,
         actor: result.actor,
         target: targetRecord.actor,
         correction,
@@ -1237,7 +1396,13 @@ const abilityResolved: OperationDefinition = {
     let index = -1;
     if (args.target !== undefined) {
       targetActor = (await bindTarget(ctx, context, args.target as Reference, result.actor)).actor;
-      index = result.targets.findIndex(t => sameActor(t.target, targetActor!));
+      const effectiveTargets = await Promise.all(
+        result.targets.map(async t => ({
+          ...t.target,
+          id: await resolveHistoricalId(ctx, context.campaign._id, t.target.id),
+        })),
+      );
+      index = effectiveTargets.findIndex(t => sameActor(t, targetActor!));
       if (index < 0) throw new ConvexError(`${targetActor.name} was not a target of that use.`);
       const outcome = result.targets[index]!.outcome as TargetRollOutcome;
       if (!outcome.unresolvedClauses.includes(clause))
@@ -1258,6 +1423,7 @@ const abilityResolved: OperationDefinition = {
       if (result.manualDispositions.some(d => d.clause === clause))
         throw new ConvexError(`"${clause}" is already marked resolved at table.`);
     }
+    await assertManualResolutionAllowed(ctx, event._id, context.user);
     return {
       kind: 'ability.resolved-at-table',
       description: `Resolved at table by ${context.user.displayName}: "${clause}"${targetActor ? ` for ${targetActor.name}` : ''} from ${result.actor.name}'s ${result.abilityName}${note ? ` — ${note}` : ''}. No state was changed by this record.`,
@@ -1300,7 +1466,7 @@ const heroFactsOperation: OperationDefinition = {
   verb: 'facts',
   title: 'Record hero roll facts',
   description:
-    'Director: record the characteristic scores, kit damage bonuses and granted ability ids a hero uses for power rolls while no evaluated build exists (A02 pending). Recorded as supplied facts with the previous values; nothing is defaulted.',
+    'Legacy supplied-fact bridge: refused for heroes with an evaluated build. Admitted heroes use their reviewed build for characteristics, kits and granted abilities.',
   args: {
     might: v.number(),
     agility: v.number(),
@@ -1337,6 +1503,10 @@ const heroFactsOperation: OperationDefinition = {
     if (actor!.kind !== 'character')
       throw new ConvexError('Roll facts are recorded for heroes only.');
     const records = await loadActorRecords(ctx, context, actor!);
+    if (records.character?.derivedBaseline)
+      throw new ConvexError(
+        'This hero has an evaluated build. The temporary /hero facts bridge cannot override an admitted build; use the character revision and review workflow.',
+      );
     const characteristics = {
       M: integer(args.might, 'might'),
       A: integer(args.agility, 'agility'),

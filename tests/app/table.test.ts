@@ -214,7 +214,6 @@ describe('A03 table operations', () => {
       recoveryValue: 10,
       healed: 8,
       capApplied: true,
-      uncertainty: 'Q-R-3',
       temporaryStaminaUnchanged: 5,
     });
     expect(event.actorName).toBe('Player');
