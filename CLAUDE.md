@@ -29,6 +29,14 @@ work. If anything here conflicts with `agent.MD`, follow `agent.MD` and fix this
   `docs/rules-questions-for-user.md` using its template and continue with work that does not depend on
   the answer. The user resolves that file in a standalone thread.
 
+## Character track scope
+
+Confirmed 2026-09-15 (Q-CHAR-14): the wizard track includes all eleven classes through levels 1–10
+from the outset, including Beastheart and Summoner. Preserve sourced decisions, grants, progression
+and Forge Steel import/export mappings as shared knowledge for parser, engine and UI work. Table
+support has separate milestones. Other supplements/homebrew remain excluded. Follow
+[the character specification](docs/character-wizard-spec.md#fuller-product-scope).
+
 ## Sources and dependencies
 
 - `vendor/steel-compendium` and `vendor/forge-steel` are pinned Git submodules. Never modify their files

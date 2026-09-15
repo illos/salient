@@ -26,9 +26,11 @@ committed into this worktree. The parser and foe worktrees remain independent.
 The user clarified that “all 10 classes” meant the **nine** core classes in the pinned Heroes
 [Classes chapter](../../vendor/steel-compendium/en/unified/md/chapter/classes.md): Censor, Conduit,
 Elementalist, Fury, Null, Shadow, Tactician, Talent and Troubadour, through **levels 1–10**.
-The user also confirmed eventual support for **Beastheart and Summoner**. Whether their delivery
-belongs in this development cycle or a later one remains under discussion; this does not yet
-change the existing core-only V1 release gate. The eventual class target is therefore eleven.
+**Confirmed 2026-09-15 (Q-CHAR-14): include Beastheart and Summoner from the outset of wizard
+track development.** The editor target is all eleven classes through levels 1–10. The user
+explicitly wants durable class knowledge to inform the parser, engine and UI tracks. The earlier
+supplemental-class editor exclusion and tentative inclusion proposal are superseded. Table and
+engine completeness remain separate milestones.
 
 For this proposal, “fully realized in the editor” means complete legal creation and editing choices,
 correct automatic build grants and derived values, readable abilities/features, level transitions,
@@ -143,9 +145,9 @@ Integrate and review each completed slice, including working UI/headless behavio
 | Order | Outcome | Why this order |
 | --- | --- | --- |
 | 1 | Preserve the current Fury and add one complete supported level-one Elementalist path through generalized definitions, assignment, resource identity and no-kit derivation. | A contrasting class exposes Fury assumptions early and makes the generalization visibly useful. Limit common ancestry/background choices initially; publish the exact supported Elementalist selections. |
-| 2 | Implement a sourced Fury 1→2 transition, scoped level-up, history browsing and restoration of recorded builds. | Prove progression and review/live-state isolation before authoring nine ten-level trees. Use the settled eligibility policy and manual XP entry where the respite loop is unavailable. |
+| 2 | Implement a sourced Fury 1→2 transition, scoped level-up, history browsing and restoration of recorded builds. | Prove progression and review/live-state isolation before authoring eleven ten-level trees. Use the settled eligibility policy and manual XP entry where the respite loop is unavailable. |
 | 3 | Add bounded Conduit and Tactician paths; include Conduit 1→2 dependency behavior and Tactician two-kit composition. | Exercise nested religion/domain choices, grants from a prior selection, and overlapping kit bonuses before bulk expansion. These are architecture acceptance examples, not optional late exceptions. |
-| 4 | Complete the remaining level-one classes and branches in small batches; expand shared ancestry, culture, career, skill, language and perk options alongside them. | Existing primitives can now support broad usable coverage. Fury's other aspects, Shadow, Censor, Null, Talent and Troubadour each need their own sourced acceptance. |
+| 4 | Complete the remaining level-one classes and branches in small batches; expand shared ancestry, culture, career, skill, language and perk options alongside them. | Existing primitives can now support broad usable coverage. Fury's other aspects, Shadow, Censor, Null, Talent, Troubadour, Beastheart and Summoner each need their own sourced acceptance. |
 | 5 | Complete progression in bands: levels 2–3, 4–6, 7–9, then 10, across supported classes. | Explicitly exercise every transition and echelon boundary, including delayed choices and changes to earlier grants. Do not postpone all higher-level work until every level-one option is finished. |
 | 6 | Close exceptional ancestry/perk/complication and starting-item gaps; finish lifecycle and Forge Steel import acceptance, followed by the planned compatible-export slice. | Nested former ancestry, drawbacks, conditional grants, private Director inputs and one-time inventory grants need their actual dependencies. Bidirectional adapter design starts in stage 1; implementation and real round-trip proof follow a stable evaluated model. |
 
@@ -180,15 +182,13 @@ enchantment, ward and abilities from the pinned sources when claiming the slice.
 
 ## Completion evidence for the eventual editor
 
-### Supplemental classes: editor inclusion proposed
+### Supplemental classes: editor inclusion confirmed
 
-Following the user's scope clarification and observation that the exotic behavior principally
-belongs to the table/engine, recommend including **all eleven classes in the editor build-out**.
-The earlier recommendation to treat the supplements mainly as early architecture examples gave
-too much weight to wizard-specific complexity. Their complete creation/edit/progression choices
-can use the same bounded delivery process as core classes. Table UI and engine support have
-separate milestones and must not become a blanket prerequisite for their editor implementation.
-This is the revised recommendation; the overall core-only V1 release gate has not yet changed.
+The user approved **all eleven classes in the editor build-out from the outset**. Build their
+creation, editing and progression in bounded slices alongside the core classes. Table UI and
+engine support have separate milestones; they are not a blanket prerequisite for editor work.
+This supersedes the earlier proposal to defer full supplemental editor coverage or treat these
+classes only as architecture examples.
 
 The pinned sources expose concrete model requirements:
 
@@ -254,7 +254,7 @@ choices needed for each lower-level build; imported missing history must remain 
 - `pnpm check-vendor`: both source submodules match their recorded pins.
 - `node scripts/inspect-character-sources.ts`: inspected 11 Forge Steel classes and 33 subclasses,
   with ten level entries per class. These include the nine core classes plus Beastheart and
-  Summoner; counts do not certify choice coverage or change the core scope.
+  Summoner; counts do not certify choice coverage. This inventory preceded confirmation of eleven-class editor scope.
 - Checked all nine relative link targets in this assessment (the vendor target against the pinned
   baseline checkout); formatted the assessment with Prettier and ran `git diff --check`.
 - No implementation, backend sync, seed, live browser walkthrough or deployment performed. The full

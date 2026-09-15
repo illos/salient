@@ -9,6 +9,12 @@ policy. This companion makes its core-content requirements concrete.
 deployment or independently reviewed rules implementation is delivered by this document. The v0.01
 R01–R03 contracts are not marked delivered by this work. Ambiguous behavior below remains undecided.
 
+**Scope update, 2026-09-15 (Q-CHAR-14):** all eleven classes are included from the outset of the
+wizard track, including Beastheart and Summoner. The research below and generated matrix currently
+cover the nine core classes; supplemental decisions, grants and progression still need their sourced
+contracts and coverage rows. Preserve class findings for parser, engine and UI consumers. See
+[the owning scope](character-wizard-spec.md#fuller-product-scope).
+
 ## 1. Evidence and coverage
 
 Sources inspected:
@@ -658,7 +664,7 @@ to pass. Fixtures must specify every relevant selection and state assumption.
 | Exact approval | A pending edit based on revision A cannot overwrite a level-up to B. The reviewer sees an explicit stale proposal, with current live state unchanged. |
 | Higher-level creation | Creating at level seven records the required earlier selections without fabricated encounters or earned campaign XP. Lowering the draft target level removes later contributions from its preview. |
 | Skill-target dependency | Removing the only source of an Area of Expertise target skill invalidates that perk's parameter; it cannot keep silently applying. |
-| Content exclusion | Beastheart/Summoner options do not become selectable because their files or imported IDs exist. |
+| Content scope | Beastheart/Summoner editor options are explicitly included by Q-CHAR-14; other excluded content does not become selectable through files/imported IDs, and editor support does not certify table behavior. |
 
 Coverage requirements extend beyond one fixture per class. Exercise all 12 ancestry budgets and special
 parameters; every class branch and domain; each level transition; ordinary and Stormwight kits;
