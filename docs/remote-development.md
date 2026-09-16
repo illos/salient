@@ -144,10 +144,13 @@ print only deploymentName, backendVersion and ports when recording evidence.
    file checksums in an operator-only location outside Git. Stream this selected backup over the
    authorized administrative SSH connection into a protected remote staging directory, not the
    ordinary source archive or a shell argument. This transfers backend development secrets too.
-4. With the destination environment stopped, restore into only its Compose `backend-data` volume
+4. With the destination environment stopped and its `local/default` destination absent or empty,
+   restore into only its Compose `backend-data` volume
    at `local/default/`. Determine the qualified volume name from Compose labels/inspection, not
    a guessed string. Verify transferred bytes/checksums and ownership before startup. Do not
-   modify global volumes. The startup pins the same backend version and requests 3210/3211
+   modify global volumes. If destination data already exists, preserve/quarantine it through a
+   separately recorded replacement before restoring; never overlay a prior database or storage.
+   The startup pins the same backend version and requests 3210/3211
    within its private container; those ports need not match the previous host ports.
 5. Start the remote environment with migrated state. Read back a known sentinel development
    record through the app, check existing accounts/campaigns, sign-in, CRUD, WebSocket updates,
@@ -174,3 +177,71 @@ automatic restart. The infrastructure runbook owns guest-console recovery.
 All enrolled projects share a Docker daemon. An agent with Docker access can control every guest
 container and recover secrets. Names, labels, helper checks and the shared Unix account do not
 provide hostile tenant isolation; the hard LXC ceiling protects Presidium's allocation.
+
+### Operator stopped-data transfer details
+
+Re-inventory and stop the selected main launchers, native backend and transient recovery frontend
+before these commands. Confirm the database has no open file descriptors and its backend ports are
+closed. The examples are operator actions, not agent startup hooks; backups remain outside Git.
+
+```sh
+# On Presidium, only after the selected main backend is stopped:
+set -eu
+umask 077
+install -d -m 0700 /srv/presidium/runtime-backups
+backup_dir=/srv/presidium/runtime-backups/salient-main-$(date -u +%Y%m%d-%H%M%S)
+mkdir -m 0700 "$backup_dir" # Refuse an existing backup location.
+tar --numeric-owner -C /srv/presidium/projects/salient/code/.convex/local \
+  -cpf "$backup_dir/default.tar" default
+chmod 0600 "$backup_dir/default.tar"
+sha256sum "$backup_dir/default.tar" > "$backup_dir/default.tar.sha256"
+stat -c '%s' "$backup_dir/default.tar" > "$backup_dir/default.tar.bytes"
+```
+
+Stream that archive through the administrative broker's stdin into a mode-0600 guest staging file.
+Compare its SHA-256 and byte count with the local files **before extraction**. Discover the exact
+main `backend-data` volume from its Compose labels/inspection, with main stopped. Require
+`local/default` to be absent or empty; if it already holds data, preserve/quarantine that data in a
+separately recorded replacement first. Never overlay SQLite sidecars or storage files from another
+instance. Mount that one volume at `/data` in a bounded disposable tool container, create
+`/data/local`, and extract with
+`tar --no-same-owner -C /data/local -xpf /staging/default.tar`. The resulting path must be
+`/data/local/default/config.json`; the named volume itself becomes `/app/.convex` in backend.
+Verify the full stopped-data file manifest/checksums in protected storage, including SQLite and
+storage contents, then remove only the staging copy after retaining the original backup.
+
+The installed Convex 1.45.0 source confirms the port transition: `anonymous.ts` reads existing
+admin/instance credentials; `utils.ts` prioritizes the requested ports over saved suggestions;
+`upgrade.ts` takes the no-upgrade branch at the unchanged version, saves the new ports and reuses
+nonlegacy credentials; `filePaths.ts` preserves the deployment name when writing config. The
+inspected main has both credentials and does not use the legacy shared constant. Startup should
+therefore change saved ports 3212/3213 to container ports 3210/3211 without replacing identity or
+credentials. Verify this on the migrated copy using comparisons that print only pass/fail, never
+credential values. Do not create a fresh `runtime.env` auth override for migrated main.
+
+### Operator rollback
+
+If remote main fails validation, stop it and retain its logs/data:
+
+```sh
+presidium-dev --env main logs backend
+presidium-dev --env main stop
+```
+
+From the original preserved checkout, restore the prior local development launchers in the same
+operator-managed persistent sessions used before migration, one command per session:
+
+```sh
+cd /srv/presidium/projects/salient/code
+CONVEX_AGENT_MODE=anonymous pnpm dev:backend
+# Separate persistent session, same cwd:
+pnpm dev
+```
+
+Do not extract the remote database over the original local state. Do not run reset, seed or
+initialization commands for rollback. If rollback needs the former loopback recovery frontend,
+restart its still-existing transient unit with `sudo systemctl start salient-dev-recovery.service`;
+a transient unit may need its exact previously recorded definition recreated after a guest reboot.
+Restore only the previously recorded local preview mapping if it was changed. Verify the original
+backend ports and existing account/data readback before returning users to the local URL. Record
+the rollback so agents do not restart the incomplete remote main alongside it.

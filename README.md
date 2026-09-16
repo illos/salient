@@ -15,52 +15,48 @@ combat journey remain integration dependencies. The broader mobile-optimized pro
 
 ## Run the development app
 
-Use Node 24.12+ and pnpm 11.5.3. Keep the pinned submodules checked out with
-`git submodule update --init --recursive` (without `--remote`).
+Development workloads belong on the dedicated guest through the brokered `presidium-dev` helper.
+See [the remote runtime runbook](docs/remote-development.md) for enrollment, selected secrets,
+resource limits, data preservation and current cutover status. The adapter's isolated validation
+passed; the operator is preparing the main-data cutover. Do not stop or replace the existing
+playable environment until that recorded migration step completes.
+
+From an enrolled provider session in the selected Salient checkout:
 
 ```sh
-pnpm install --frozen-lockfile
-CONVEX_AGENT_MODE=anonymous pnpm exec convex init
-pnpm dev:backend
+presidium-dev up
+presidium-dev status
+presidium-dev logs backend
+presidium-dev run build -- pnpm check
+presidium-dev run browser -- pnpm exec playwright test --workers=1 --output=/artifacts/browser --reporter=line
+presidium-dev fetch generated/api.d.ts --output remote-api.d.ts
+presidium-dev stop
 ```
 
-Leave the backend running. In another terminal:
+`up` transfers selected source edits and installs locked dependencies remotely. It starts the
+anonymous Convex backend and web frontend, returning the stable tailnet HTTPS preview URL.
+Builds, tests and browsers run inside bounded guest containers; do not run local installers,
+`pnpm dev`, `pnpm dev:backend`, builds or headless browsers on Presidium after cutover. Browser
+tests use the actual HTTPS preview and create disposable accounts/data, so use an explicit
+`--env validation` slot when testing should remain separate from the shared playable data.
 
-```sh
-pnpm setup:local
-pnpm dev
-```
+The default `main` slot is shared. A second concurrent checkout must use an explicitly named
+separate environment, such as `presidium-dev --env feature-name up`. Helpers refuse an accidental
+worktree replacement. Pinned vendor checkouts must remain clean and match their Git pins; neither
+builds nor runtime setup advances them. Generated files are retrieved individually for review,
+never reverse-synchronized over a local checkout. Runtime data lives in named volumes and
+survives source replacement, stop and ordinary remove. Do not use `--data` or reset commands as
+part of ordinary development.
 
-Open [Salient locally](http://127.0.0.1:5180). Create an account; there are no default credentials.
-Create a campaign, share its invitation URL with another browser/user, approve their request, select session
-players and start/pause/resume/end the session. Characters currently save authored drafts and private notes;
-build choices, evaluation, admission and combat controls await the rules contracts. The Director can load
-Goblin Warriors, inspect their complete source and control roster visibility. Foes survive session closure.
+The app uses same-origin HTTP and WebSocket proxies for backend/auth traffic. Preserve the app's
+own sign-in: tailnet reachability is not an application account. New empty development environments
+have no content rows until the operator seeds their exact backend container as described in the
+runbook. Existing migrated data must not be reset or reseeded blindly. The content snapshot
+generator remains `scripts/build-content.ts` (see `shared/content/README.md`).
 
-The local Convex deployment stores real data in ignored `.convex/`; keep `pnpm dev:backend` running.
-Its assigned ports and endpoint URLs live in ignored `.env.local`. `setup:local` refuses cloud targets,
-preserves an existing auth secret and configures loopback origins only. Development data is disposable:
-after a breaking schema change, run `pnpm setup:local --reset-data` while the old schema is still
-deployed to empty every table of the local deployment, then let `pnpm dev:backend` push the new schema
-and reseed through the app. There are no migrations. Vite proxies the backend/auth paths
-for local development. Other frontend origins require deliberate auth-origin configuration. For hosted
-builds, configure the real `VITE_CONVEX_URL` / `VITE_CONVEX_SITE_URL` and disable `VITE_LOCAL_PROXY`.
-No Cloudflare or Convex Cloud deployment has been performed.
-
-```sh
-pnpm check          # Existing engine + application typechecks and behavior tests, then web build
-pnpm content:check  # Verify the generated content snapshot against the unchanged pinned corpus
-pnpm content:build  # Regenerate shared/content/compendium after a reviewed pin change
-pnpm content:seed   # Load the snapshot into the local development deployment (disposable data)
-pnpm exec playwright install chromium
-pnpm test:browser   # Requires both development servers above; creates disposable test accounts/data
-```
-
-The browser scenario uses separate Director/player/observer contexts, real sign-up/sign-in/out, invitations,
-reactive foe visibility, session lifecycle, network interruption/reload, private draft readback and headless
-application calls. See [app status](docs/workstream-app-status.md) for evidence and remaining contracts.
-The content snapshot generator is `scripts/build-content.ts` (see `shared/content/README.md`); builds never
-advance a submodule pin. A fresh local deployment has no content rows until `pnpm content:seed` runs.
+All enrolled projects share the guest's Docker daemon. Helper names and labels avoid accidental
+collisions; they do not prevent a trusted agent with Docker access from inspecting or changing
+another project's containers or secrets. No production credentials belong on this guest.
 
 ## Headless application operations
 

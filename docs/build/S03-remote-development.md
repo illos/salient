@@ -175,3 +175,45 @@ This is not full cutover acceptance. Salient provider authorization, the intende
 main startup-hook changes, reboot/recovery and user-device testing still need their recorded
 infrastructure/migration steps. Keep the local playable environment until that coordinated cutover.
 To resume this worktree's isolated slot from an enrolled provider: `presidium-dev --env validation up`.
+
+### Fresh integration and cutover inventory — 2026-09-16
+
+The adapter was committed and rebased without conflicts onto clean main
+`bf191656bf4bc589f7eac1076f5a435cc52af111`, producing branch commit
+`7946b15ed88832f9ab36636c2868e6efa5afff91`. Independent integration code review passed; V31's
+new application changes remain untouched. Main was not modified. The merge-format gate passed
+`node scripts/check-commit.ts --merge --range main..HEAD`. Fresh remote checks on this exact
+combined commit are recorded below when complete.
+
+Read-only inventory at this checkpoint (PIDs are observations, not future kill instructions):
+
+| Role | PID / ancestry | Local target |
+| --- | --- | --- |
+| Backend launcher | pnpm 5017 → shell 5209 → Convex CLI 5211 | Main checkout; CLI 1.45.0 |
+| Active native backend | 549847, adopted by PID 1 | Main, cloud 3212/site 3213 |
+| Frontend launcher | pnpm 5018 → shell 5196 → Vite 5969 | Main, 0.0.0.0:5180 |
+| Recovery frontend | Vite 2193, `salient-dev-recovery.service` | Main, 127.0.0.1:5181 |
+
+The main environment selects `anonymous:anonymous-agent`, backend
+`precompiled-2026-09-11-157eb19`. Its `.convex/local/default/convex_local_backend.sqlite3` was
+114,278,400 bytes at inspection; the same directory contains `config.json`, `dashboard.json`
+and `convex_local_storage/`. No live database bytes were copied. Only public configuration keys
+and process identity/ports were inspected; no secret arguments or environment values were printed.
+Other worktree configuration directories exist and are not the established main data.
+
+Normal main launchers are descendants of `presidium-t3.service`; never stop that shared service
+for this migration. The recovery service is transient under `/run/systemd/transient`, with
+`Restart=no`. No persistent Salient unit was found in the inspected system/user unit directories.
+The tracked README still directs agents to `pnpm dev:backend`, `pnpm setup:local` and `pnpm dev`;
+replace that default guidance at actual cutover, along with the agent instructions. No repository
+provider-startup hook was found. Stop the identified launcher trees and standalone backend at
+cutover, then stop the exact recovery unit; re-inventory first to avoid stale PIDs.
+
+Installed CLI help confirms `export --include-file-storage --path <protected.zip>` and snapshot
+`import <zip>`, with component selection on import. The export implementation requests a data ZIP
+with an optional file-storage flag; complete environment/auth/component parity has not been
+rehearsed, so the planned stopped-data transfer procedure remains the conservative migration
+choice at this unchanged backend revision. Never use `setup:local --reset-data` for migration.
+For migrated `main`, leave `config/runtime.env` absent/empty unless intentionally transferring the
+existing auth secret; a newly generated override would replace the auth secret already preserved
+in the copied database. Protected config.json transfer also carries the instance credential.
