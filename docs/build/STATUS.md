@@ -111,6 +111,7 @@ See the [CI review and run record](audits/2026-09-14-ci-history-review.md) for t
 | V19 | [Forced access changes and combat recovery](V19-forced-access-recovery.md) | V10 | Outline |
 | V20 | [Dynamic terrain objects](V20-dynamic-terrain.md) | V04 | Outline |
 | V21 | [Desktop layout fidelity](V21-desktop-layout-fidelity.md) | A08, A09, V13 | Built, not committed — 2026-09-15 (foundation + five parallel implementers, lead integration and repairs); lint, typecheck, 85 engine tests, 317 app tests, links, vendor, content and the full 20-test browser suite pass; screenshots under `.playtest/v21/` compared with each mockup; review deferred to the user's audit thread |
+| V28 | [Draw Steel glyph typography](V28-glyph-typography.md) | A08, S01, V13 | Outline — specification recorded 2026-09-16 in `docs/glyph-usage-spec.md`; UI/polish track, worktree `ui`, branch `slice/V28`; not implemented |
 
 ## Build lead handoff — 2026-09-15
 

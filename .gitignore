@@ -9,3 +9,8 @@ dist/
 test-results/
 playwright-report/
 public/rules-data/
+
+# Core-book page scans and upstream font archives kept as local design reference only.
+# Never distributable, never copied into application assets; the README is tracked.
+docs/design-mockups/v1/reference/*
+!docs/design-mockups/v1/reference/README.md

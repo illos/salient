@@ -40,6 +40,13 @@ spacing scale, component sizes and breakpoints are a build deliverable).
 | Uppercase metadata (`.caps`, `.eyebrow`) | 11px, weight 600, letter-spacing `0.12em`, uppercase | Size and tracking measured approximately (eyebrows are ~11px with ~1.3px tracking in the PNGs). |
 | Heading tracking | `tracking-tight` (−0.025em); login headline `tracking-tighter` | Chosen. |
 
+A second face is specified but not yet shipped: the Draw Steel Glyphs typeface, which sets the stat
+block and ability-card icons, power roll tier pills, characteristic tiles and potency notation.
+[The glyph usage specification](glyph-usage-spec.md) is a sub-specification of this document and owns
+its vocabulary, composition rules and accessibility contract. Its glyphs are mapped onto ordinary ASCII
+letters, so every use is subject to the `aria-hidden` and paired-text requirements in that document's
+section 6; no component may write a raw glyph character.
+
 ## Colour
 
 Light foundation (`:root`):
