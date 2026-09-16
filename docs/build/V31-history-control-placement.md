@@ -207,3 +207,31 @@ discriminates at 1024 in combat. One test-only line was added after that verdict
 suggestion: the spec now asserts the inert control's 0.5 opacity, so a change to the conditional
 class string cannot stop it looking unavailable without failing the suite.
 
+### 2026-09-16 — merged into `main` and the shared playable app updated
+
+Merge complete. `slice/V31` sat directly on `main` `f7137dc`, so the fast-forward needed no rebase
+and no conflict resolution: **`bd0c512`**.
+
+**Runtime target.** Serving checkout `/srv/presidium/projects/salient/code` on `main`; frontend the
+Vite dev server on `0.0.0.0:5180`; backend the local Convex deployment `anonymous:anonymous-agent`
+on 3212 with its site proxy on 3213. No secrets recorded.
+
+**Update result.** V31 contains no `convex/` function, no schema and no seeded content, so no
+backend sync, seed or reset was performed and no play data was touched. The frontend watcher was
+the only component that needed to move, and it did: the shared server returns
+`web/table/history-controls.tsx` exporting `HistoryControls` again, and its
+`web/table/settings-popup.tsx` mentions Rewind only in the comment explaining that it is not
+there. The backend answers on its version endpoint.
+
+**Live changed-feature check**, against the shared app itself (5180 / 3212) with disposable
+verification accounts and campaigns, resetting nothing: `v21-log.spec.ts` passes there — the icon
+pair beside the tabs with its accessible names, tooltips and descriptions, an inert control that
+submits nothing by pointer or keyboard, the Rewind and Redo round trip read back from the feed's
+`data-disposition`, the settings pop-up holding `Enable user undo` and no history action, and the
+inline per-entry Undo and Redo. `v21-rosters.spec.ts` passes there and captures the pop-up.
+Evidence from the shared app: `evidence/V31-live/live-history-icon-pair-dark.png` and
+`evidence/V31-live/live-settings-user-undo-dark.png`.
+
+Nothing is pending. `slice/V31` is retired and the isolated backend and dev server for this slice
+are stopped, which releases the browser window the engine and character tracks were queued behind.
+

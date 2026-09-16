@@ -156,7 +156,7 @@ See the [CI review and run record](audits/2026-09-14-ci-history-review.md) for t
 | V23 | [Foe source ingestion assessment](V23-foe-source-assessment.md) | S01, A09, Rules portion of V13 | Merged — source assessment and confirmed ingestion requirements integrated with V27, 2026-09-16 |
 | V27 | [Undead ingestion and independent feature access](V27-undead-ingestion.md) | S01, A09, Rules portion of V13, V23 docs | Merged and live — rebased implementation `6d47dc0`, test repair `e4590e9`; integrated at `f019e3a`, 2026-09-16; 432 tests, build, isolated and shared-app browser checks pass; public `/foes` verified on 5180 |
 | V29 | [Desktop layout feedback follow-ups](V29-desktop-feedback.md) | V21 | Merged — `7b80e56`, 2026-09-16; independent implementation review pass; integrated checks and the full 22-test browser suite pass; shared playable app on `5180` updated and the changed-feature journey verified live |
-| V31 | [History control placement correction](V31-history-control-placement.md) | V29 | In progress — 2026-09-16 user correction: only the Enable user undo toggle belongs in the settings pop-up; Rewind and Redo return to the table as a discreet icon control. UI/polish track, worktree `ui`, branch `slice/V31` |
+| V31 | [History control placement correction](V31-history-control-placement.md) | V29 | Merged — `bd0c512`, 2026-09-16; user correction to V29 (only the Enable user undo toggle is a settings row; Rewind and Redo are a discreet icon pair beside the tabs); independent implementation review pass over three rounds; full 22-test browser suite passes; shared playable app on `5180` updated and the changed-feature journey verified live |
 
 ## Build lead handoff — 2026-09-15
 
