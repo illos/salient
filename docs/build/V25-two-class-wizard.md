@@ -9,7 +9,7 @@
 | Rules review | Required, every delivered feature/trait/grant |
 | Depends on | A09, R01–R03, S01, A01; V24 assessment/specification carried forward |
 | Unblocks | Further classes/ancestries and first progression slice |
-| Status | Verified; independent implementation and rules reviews passed; see STATUS.md |
+| Status | Committed — `4cb3f1f`; both independent reviews passed; see STATUS.md |
 
 ## Goal
 
@@ -212,3 +212,7 @@ the eleven-class, levels 1–10 track and eventual Forge Steel import/export rem
 work. Class-specific resource generation, persistent effects, wards and movement remain manual.
 The implementation is isolated on `slice/V25`; integration into `main` and the user's playable
 environment belong to the integration handoff.
+
+Implementation committed as `4cb3f1f` on `slice/V25`. All verification and review evidence is
+committed with the implementation; ignored local captures/logs are indexed by the portable
+reference metadata and work log. The worktree is ready for integration review.

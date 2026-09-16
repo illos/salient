@@ -11,7 +11,7 @@ whose document is an outline until claimed).
 | Id | Slice | Depends on | Status | Owner |
 | --- | --- | --- | --- | --- |
 | V24 | [Character wizard assessment and delivery proposal](V24-character-wizard-assessment.md) | A09; assesses A02/V21 | Assessment complete; V25 implementation verified | Codex, character wizard thread |
-| V25 | [Shared Fury/Bethell wizard](V25-two-class-wizard.md) | A09, R01–R03, S01, A01; V24 docs | Verified — implementation and rules reviews passed; ready to commit | Codex character team |
+| V25 | [Shared Fury/Bethell wizard](V25-two-class-wizard.md) | A09, R01–R03, S01, A01; V24 docs | Committed — `4cb3f1f`; implementation and rules reviews passed | Codex character team |
 
 V25 works in `/srv/presidium/projects/salient/characters-build` on `slice/V25`. It carries the
 committed V24 specifications and owns shared character evaluation, supporting content and connected
