@@ -9,7 +9,7 @@
 | Rules review | required |
 | Depends on | V25, A09; V29 integrated UI contracts |
 | Unblocks | Further class progression and dependent grants |
-| Status | Verified on `slice/V32`; not merged |
+| Status | Committed as `d9da1df` on `slice/V32`; not merged |
 
 ## Goal
 
@@ -175,3 +175,6 @@ Final closeout:
   closes implementation and rules acceptance.
 - Stopped every owned runtime after capture; 3230/3231/5290 have no listeners. The shared playable
   environment is unchanged. This is a reviewed branch handoff, not a completed merge.
+
+Branch handoff: implementation/evidence committed as `d9da1df`. All 186 Markdown link checks,
+whitespace checks and the branch commit gate pass. No merge or shared runtime update was performed.
