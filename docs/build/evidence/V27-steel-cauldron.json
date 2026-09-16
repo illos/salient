@@ -1,0 +1,849 @@
+{
+  "edition": "6c6bbd40f2460c196511a2f0cc19b2ff9184ddee27be90245e5d5a8a915ed331",
+  "sourceRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+  "externalRevision": "eba4b8bb8bc1baf947f15e67e9e923951092fd89",
+  "rows": [
+    {
+      "id": "mcdm.monsters.v1/monster.undead.1st-echelon.statblock/crawling-claw",
+      "name": "Crawling Claw",
+      "counterpart": "crawling-claw",
+      "source": "en/books/monsters/md/monster/undead/1st-echelon/statblock/crawling-claw.md",
+      "status": "explained",
+      "differences": [
+        {
+          "field": "stamina",
+          "ours": "4",
+          "theirs": 4,
+          "classification": "presentation"
+        },
+        {
+          "field": "keywords",
+          "ours": [
+            "Undead",
+            "Soulless"
+          ],
+          "theirs": [
+            "Soulless",
+            "Undead"
+          ],
+          "classification": "presentation"
+        },
+        {
+          "field": "ev.quantity",
+          "ours": 4,
+          "theirs": null,
+          "classification": "explained",
+          "disposition": "External generated field omits the printed four-minion quantity. Preserve our source EV 3 for four minions; no inference about the external app calculator."
+        },
+        {
+          "field": "Fingernails.effect presentation",
+          "ours": "Compendium Markdown / effect grouping",
+          "theirs": "External HTML / effect grouping",
+          "classification": "presentation"
+        },
+        {
+          "field": "Disorganized.kind",
+          "ours": "trait",
+          "theirs": "feature",
+          "classification": "explained",
+          "disposition": "External generic feature type; retain our parent-qualified trait/Malice classification."
+        },
+        {
+          "field": "Disorganized.effect presentation",
+          "ours": "Compendium Markdown / effect grouping",
+          "theirs": "External HTML / effect grouping",
+          "classification": "presentation"
+        }
+      ]
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.undead.1st-echelon.statblock/decrepit-skeleton",
+      "name": "Decrepit Skeleton",
+      "counterpart": "decrepit-skeleton",
+      "source": "en/books/monsters/md/monster/undead/1st-echelon/statblock/decrepit-skeleton.md",
+      "status": "explained",
+      "differences": [
+        {
+          "field": "stamina",
+          "ours": "3",
+          "theirs": 3,
+          "classification": "presentation"
+        },
+        {
+          "field": "keywords",
+          "ours": [
+            "Undead",
+            "Soulless"
+          ],
+          "theirs": [
+            "Soulless",
+            "Undead"
+          ],
+          "classification": "presentation"
+        },
+        {
+          "field": "ev.quantity",
+          "ours": 4,
+          "theirs": null,
+          "classification": "explained",
+          "disposition": "External generated field omits the printed four-minion quantity. Preserve our source EV 3 for four minions; no inference about the external app calculator."
+        },
+        {
+          "field": "movement",
+          "ours": [],
+          "theirs": [
+            "walk"
+          ],
+          "classification": "explained",
+          "disposition": "External default walk versus absent printed movement mode. Our absent source value remains absent."
+        },
+        {
+          "field": "Bone Bow.effect presentation",
+          "ours": "Compendium Markdown / effect grouping",
+          "theirs": "External HTML / effect grouping",
+          "classification": "presentation"
+        },
+        {
+          "field": "Bonetrops.kind",
+          "ours": "trait",
+          "theirs": "feature",
+          "classification": "explained",
+          "disposition": "External generic feature type; retain our parent-qualified trait/Malice classification."
+        },
+        {
+          "field": "Bonetrops.effect presentation",
+          "ours": "Compendium Markdown / effect grouping",
+          "theirs": "External HTML / effect grouping",
+          "classification": "presentation"
+        }
+      ]
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.undead.1st-echelon.statblock/ghost",
+      "name": "Ghost",
+      "counterpart": "ghost",
+      "source": "en/books/monsters/md/monster/undead/1st-echelon/statblock/ghost.md",
+      "status": "explained",
+      "differences": [
+        {
+          "field": "stamina",
+          "ours": "80",
+          "theirs": 80,
+          "classification": "presentation"
+        },
+        {
+          "field": "with_captain",
+          "ours": null,
+          "theirs": "",
+          "classification": "presentation"
+        },
+        {
+          "field": "ev.quantity",
+          "ours": 1,
+          "theirs": null,
+          "classification": "explained",
+          "disposition": "External numeric EV has no explicit quantity; the printed unqualified source EV describes one creature. An explicit external quantity must agree."
+        },
+        {
+          "field": "Heat Death.effect presentation",
+          "ours": "Compendium Markdown / effect grouping",
+          "theirs": "External HTML / effect grouping",
+          "classification": "presentation"
+        },
+        {
+          "field": "Haunt.effect presentation",
+          "ours": "Compendium Markdown / effect grouping",
+          "theirs": "External HTML / effect grouping",
+          "classification": "presentation"
+        },
+        {
+          "field": "Shriek.effect presentation",
+          "ours": "Compendium Markdown / effect grouping",
+          "theirs": "External HTML / effect grouping",
+          "classification": "presentation"
+        },
+        {
+          "field": "Phantom Flow.kind",
+          "ours": "trait",
+          "theirs": "feature",
+          "classification": "explained",
+          "disposition": "External generic feature type; retain our parent-qualified trait/Malice classification."
+        },
+        {
+          "field": "Phantom Flow.effect presentation",
+          "ours": "Compendium Markdown / effect grouping",
+          "theirs": "External HTML / effect grouping",
+          "classification": "presentation"
+        },
+        {
+          "field": "Paranormal Activity.ability_type",
+          "ours": null,
+          "theirs": "Villain Action 1",
+          "classification": "explained",
+          "disposition": "Same printed Villain Action ordinal, separate field representation."
+        },
+        {
+          "field": "Paranormal Activity.cost",
+          "ours": "Villain Action 1",
+          "theirs": null,
+          "classification": "explained",
+          "disposition": "Printed Villain Action ordinal is stored as ability_type externally and cost upstream; our activation.villainAction is a label, never a resource expense."
+        },
+        {
+          "field": "Paranormal Activity.effect presentation",
+          "ours": "Compendium Markdown / effect grouping",
+          "theirs": "External HTML / effect grouping",
+          "classification": "presentation"
+        },
+        {
+          "field": "Spirited Away.ability_type",
+          "ours": null,
+          "theirs": "Villain Action 2",
+          "classification": "explained",
+          "disposition": "Same printed Villain Action ordinal, separate field representation."
+        },
+        {
+          "field": "Spirited Away.cost",
+          "ours": "Villain Action 2",
+          "theirs": null,
+          "classification": "explained",
+          "disposition": "Printed Villain Action ordinal is stored as ability_type externally and cost upstream; our activation.villainAction is a label, never a resource expense."
+        },
+        {
+          "field": "Spirited Away.effect presentation",
+          "ours": "Compendium Markdown / effect grouping",
+          "theirs": "External HTML / effect grouping",
+          "classification": "presentation"
+        },
+        {
+          "field": "Awful Wail.ability_type",
+          "ours": null,
+          "theirs": "Villain Action 3",
+          "classification": "explained",
+          "disposition": "Same printed Villain Action ordinal, separate field representation."
+        },
+        {
+          "field": "Awful Wail.cost",
+          "ours": "Villain Action 3",
+          "theirs": null,
+          "classification": "explained",
+          "disposition": "Printed Villain Action ordinal is stored as ability_type externally and cost upstream; our activation.villainAction is a label, never a resource expense."
+        },
+        {
+          "field": "Awful Wail.effect presentation",
+          "ours": "Compendium Markdown / effect grouping",
+          "theirs": "External HTML / effect grouping",
+          "classification": "presentation"
+        },
+        {
+          "field": "Corruptive Phasing.kind",
+          "ours": "trait",
+          "theirs": "feature",
+          "classification": "explained",
+          "disposition": "External generic feature type; retain our parent-qualified trait/Malice classification."
+        },
+        {
+          "field": "Corruptive Phasing.effect presentation",
+          "ours": "Compendium Markdown / effect grouping",
+          "theirs": "External HTML / effect grouping",
+          "classification": "presentation"
+        }
+      ]
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.undead.1st-echelon.statblock/ghoul",
+      "name": "Ghoul",
+      "counterpart": "ghoul",
+      "source": "en/books/monsters/md/monster/undead/1st-echelon/statblock/ghoul.md",
+      "status": "explained",
+      "differences": [
+        {
+          "field": "stamina",
+          "ours": "15",
+          "theirs": 15,
+          "classification": "presentation"
+        },
+        {
+          "field": "with_captain",
+          "ours": null,
+          "theirs": "",
+          "classification": "presentation"
+        },
+        {
+          "field": "ev.quantity",
+          "ours": 1,
+          "theirs": null,
+          "classification": "explained",
+          "disposition": "External numeric EV has no explicit quantity; the printed unqualified source EV describes one creature. An explicit external quantity must agree."
+        },
+        {
+          "field": "movement",
+          "ours": [],
+          "theirs": [
+            "walk"
+          ],
+          "classification": "explained",
+          "disposition": "External default walk versus absent printed movement mode. Our absent source value remains absent."
+        },
+        {
+          "field": "Razor Claws.effect presentation",
+          "ours": "Compendium Markdown / effect grouping",
+          "theirs": "External HTML / effect grouping",
+          "classification": "presentation"
+        },
+        {
+          "field": "Leap.keywords",
+          "ours": null,
+          "theirs": [
+            "-"
+          ],
+          "classification": "presentation"
+        },
+        {
+          "field": "Leap.effect presentation",
+          "ours": "Compendium Markdown / effect grouping",
+          "theirs": "External HTML / effect grouping",
+          "classification": "presentation"
+        },
+        {
+          "field": "Arise.kind",
+          "ours": "trait",
+          "theirs": "feature",
+          "classification": "explained",
+          "disposition": "External generic feature type; retain our parent-qualified trait/Malice classification."
+        },
+        {
+          "field": "Arise.effect presentation",
+          "ours": "Compendium Markdown / effect grouping",
+          "theirs": "External HTML / effect grouping",
+          "classification": "presentation"
+        },
+        {
+          "field": "Hunger.kind",
+          "ours": "trait",
+          "theirs": "feature",
+          "classification": "explained",
+          "disposition": "External generic feature type; retain our parent-qualified trait/Malice classification."
+        }
+      ]
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.undead.1st-echelon.statblock/rotting-zombie",
+      "name": "Rotting Zombie",
+      "counterpart": "rotting-zombie",
+      "source": "en/books/monsters/md/monster/undead/1st-echelon/statblock/rotting-zombie.md",
+      "status": "explained",
+      "differences": [
+        {
+          "field": "stamina",
+          "ours": "5",
+          "theirs": 5,
+          "classification": "presentation"
+        },
+        {
+          "field": "keywords",
+          "ours": [
+            "Undead",
+            "Soulless"
+          ],
+          "theirs": [
+            "Soulless",
+            "Undead"
+          ],
+          "classification": "presentation"
+        },
+        {
+          "field": "ev.quantity",
+          "ours": 4,
+          "theirs": null,
+          "classification": "explained",
+          "disposition": "External generated field omits the printed four-minion quantity. Preserve our source EV 3 for four minions; no inference about the external app calculator."
+        },
+        {
+          "field": "movement",
+          "ours": [],
+          "theirs": [
+            "walk"
+          ],
+          "classification": "explained",
+          "disposition": "External default walk versus absent printed movement mode. Our absent source value remains absent."
+        },
+        {
+          "field": "Rotting Fist.effect presentation",
+          "ours": "Compendium Markdown / effect grouping",
+          "theirs": "External HTML / effect grouping",
+          "classification": "presentation"
+        },
+        {
+          "field": "Death Grasp.kind",
+          "ours": "trait",
+          "theirs": "feature",
+          "classification": "explained",
+          "disposition": "External generic feature type; retain our parent-qualified trait/Malice classification."
+        },
+        {
+          "field": "Death Grasp.effect presentation",
+          "ours": "Compendium Markdown / effect grouping",
+          "theirs": "External HTML / effect grouping",
+          "classification": "presentation"
+        }
+      ]
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.undead.1st-echelon.statblock/shade",
+      "name": "Shade",
+      "counterpart": "shade",
+      "source": "en/books/monsters/md/monster/undead/1st-echelon/statblock/shade.md",
+      "status": "explained",
+      "differences": [
+        {
+          "field": "stamina",
+          "ours": "4",
+          "theirs": 4,
+          "classification": "presentation"
+        },
+        {
+          "field": "ev.quantity",
+          "ours": 4,
+          "theirs": null,
+          "classification": "explained",
+          "disposition": "External generated field omits the printed four-minion quantity. Preserve our source EV 3 for four minions; no inference about the external app calculator."
+        },
+        {
+          "field": "Life Drain.effect presentation",
+          "ours": "Compendium Markdown / effect grouping",
+          "theirs": "External HTML / effect grouping",
+          "classification": "presentation"
+        },
+        {
+          "field": "Shadow Phasing.kind",
+          "ours": "trait",
+          "theirs": "feature",
+          "classification": "explained",
+          "disposition": "External generic feature type; retain our parent-qualified trait/Malice classification."
+        },
+        {
+          "field": "Shadow Phasing.effect presentation",
+          "ours": "Compendium Markdown / effect grouping",
+          "theirs": "External HTML / effect grouping",
+          "classification": "presentation"
+        }
+      ]
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.undead.1st-echelon.statblock/skeleton",
+      "name": "Skeleton",
+      "counterpart": "skeleton",
+      "source": "en/books/monsters/md/monster/undead/1st-echelon/statblock/skeleton.md",
+      "status": "explained",
+      "differences": [
+        {
+          "field": "stamina",
+          "ours": "10",
+          "theirs": 10,
+          "classification": "presentation"
+        },
+        {
+          "field": "with_captain",
+          "ours": null,
+          "theirs": "",
+          "classification": "presentation"
+        },
+        {
+          "field": "keywords",
+          "ours": [
+            "Undead",
+            "Soulless"
+          ],
+          "theirs": [
+            "Soulless",
+            "Undead"
+          ],
+          "classification": "presentation"
+        },
+        {
+          "field": "ev.quantity",
+          "ours": 1,
+          "theirs": null,
+          "classification": "explained",
+          "disposition": "External numeric EV has no explicit quantity; the printed unqualified source EV describes one creature. An explicit external quantity must agree."
+        },
+        {
+          "field": "movement",
+          "ours": [],
+          "theirs": [
+            "walk"
+          ],
+          "classification": "explained",
+          "disposition": "External default walk versus absent printed movement mode. Our absent source value remains absent."
+        },
+        {
+          "field": "Bone Shards.effect presentation",
+          "ours": "Compendium Markdown / effect grouping",
+          "theirs": "External HTML / effect grouping",
+          "classification": "presentation"
+        },
+        {
+          "field": "Bone Spur.effect presentation",
+          "ours": "Compendium Markdown / effect grouping",
+          "theirs": "External HTML / effect grouping",
+          "classification": "presentation"
+        },
+        {
+          "field": "Arise.kind",
+          "ours": "trait",
+          "theirs": "feature",
+          "classification": "explained",
+          "disposition": "External generic feature type; retain our parent-qualified trait/Malice classification."
+        },
+        {
+          "field": "Arise.effect presentation",
+          "ours": "Compendium Markdown / effect grouping",
+          "theirs": "External HTML / effect grouping",
+          "classification": "presentation"
+        }
+      ]
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.undead.1st-echelon.statblock/soulwight",
+      "name": "Soulwight",
+      "counterpart": "soulwight",
+      "source": "en/books/monsters/md/monster/undead/1st-echelon/statblock/soulwight.md",
+      "status": "explained",
+      "differences": [
+        {
+          "field": "stamina",
+          "ours": "10",
+          "theirs": 10,
+          "classification": "presentation"
+        },
+        {
+          "field": "with_captain",
+          "ours": null,
+          "theirs": "",
+          "classification": "presentation"
+        },
+        {
+          "field": "ev.quantity",
+          "ours": 1,
+          "theirs": null,
+          "classification": "explained",
+          "disposition": "External numeric EV has no explicit quantity; the printed unqualified source EV describes one creature. An explicit external quantity must agree."
+        },
+        {
+          "field": "movement",
+          "ours": [],
+          "theirs": [
+            "walk"
+          ],
+          "classification": "explained",
+          "disposition": "External default walk versus absent printed movement mode. Our absent source value remains absent."
+        },
+        {
+          "field": "Soulstealer Longsword.effect presentation",
+          "ours": "Compendium Markdown / effect grouping",
+          "theirs": "External HTML / effect grouping",
+          "classification": "presentation"
+        },
+        {
+          "field": "Stolen Vitality.effect presentation",
+          "ours": "Compendium Markdown / effect grouping",
+          "theirs": "External HTML / effect grouping",
+          "classification": "presentation"
+        },
+        {
+          "field": "Arise.kind",
+          "ours": "trait",
+          "theirs": "feature",
+          "classification": "explained",
+          "disposition": "External generic feature type; retain our parent-qualified trait/Malice classification."
+        },
+        {
+          "field": "Arise.effect presentation",
+          "ours": "Compendium Markdown / effect grouping",
+          "theirs": "External HTML / effect grouping",
+          "classification": "presentation"
+        }
+      ]
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.undead.1st-echelon.statblock/specter",
+      "name": "Specter",
+      "counterpart": "specter",
+      "source": "en/books/monsters/md/monster/undead/1st-echelon/statblock/specter.md",
+      "status": "explained",
+      "differences": [
+        {
+          "field": "stamina",
+          "ours": "10",
+          "theirs": 10,
+          "classification": "presentation"
+        },
+        {
+          "field": "with_captain",
+          "ours": null,
+          "theirs": "",
+          "classification": "presentation"
+        },
+        {
+          "field": "ev.quantity",
+          "ours": 1,
+          "theirs": null,
+          "classification": "explained",
+          "disposition": "External numeric EV has no explicit quantity; the printed unqualified source EV describes one creature. An explicit external quantity must agree."
+        },
+        {
+          "field": "Decaying Touch.effect presentation",
+          "ours": "Compendium Markdown / effect grouping",
+          "theirs": "External HTML / effect grouping",
+          "classification": "presentation"
+        },
+        {
+          "field": "Hidden Movement.keywords",
+          "ours": null,
+          "theirs": [
+            "-"
+          ],
+          "classification": "presentation"
+        },
+        {
+          "field": "Hidden Movement.effect presentation",
+          "ours": "Compendium Markdown / effect grouping",
+          "theirs": "External HTML / effect grouping",
+          "classification": "presentation"
+        },
+        {
+          "field": "Corruptive Phasing.kind",
+          "ours": "trait",
+          "theirs": "feature",
+          "classification": "explained",
+          "disposition": "External generic feature type; retain our parent-qualified trait/Malice classification."
+        },
+        {
+          "field": "Corruptive Phasing.effect presentation",
+          "ours": "Compendium Markdown / effect grouping",
+          "theirs": "External HTML / effect grouping",
+          "classification": "presentation"
+        }
+      ]
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.undead.1st-echelon.statblock/umbral-stalker",
+      "name": "Umbral Stalker",
+      "counterpart": "umbral-stalker",
+      "source": "en/books/monsters/md/monster/undead/1st-echelon/statblock/umbral-stalker.md",
+      "status": "explained",
+      "differences": [
+        {
+          "field": "stamina",
+          "ours": "15",
+          "theirs": 15,
+          "classification": "presentation"
+        },
+        {
+          "field": "with_captain",
+          "ours": null,
+          "theirs": "",
+          "classification": "presentation"
+        },
+        {
+          "field": "ev.quantity",
+          "ours": 1,
+          "theirs": null,
+          "classification": "explained",
+          "disposition": "External numeric EV has no explicit quantity; the printed unqualified source EV describes one creature. An explicit external quantity must agree."
+        },
+        {
+          "field": "Chilling Grasp.effect presentation",
+          "ours": "Compendium Markdown / effect grouping",
+          "theirs": "External HTML / effect grouping",
+          "classification": "presentation"
+        },
+        {
+          "field": "Freezing Dark.effect presentation",
+          "ours": "Compendium Markdown / effect grouping",
+          "theirs": "External HTML / effect grouping",
+          "classification": "presentation"
+        },
+        {
+          "field": "Shadow Jump.keywords",
+          "ours": null,
+          "theirs": [
+            "-"
+          ],
+          "classification": "presentation"
+        },
+        {
+          "field": "Shadow Jump.effect presentation",
+          "ours": "Compendium Markdown / effect grouping",
+          "theirs": "External HTML / effect grouping",
+          "classification": "presentation"
+        },
+        {
+          "field": "Corruptive Phasing.kind",
+          "ours": "trait",
+          "theirs": "feature",
+          "classification": "explained",
+          "disposition": "External generic feature type; retain our parent-qualified trait/Malice classification."
+        },
+        {
+          "field": "Corruptive Phasing.effect presentation",
+          "ours": "Compendium Markdown / effect grouping",
+          "theirs": "External HTML / effect grouping",
+          "classification": "presentation"
+        }
+      ]
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.undead.1st-echelon.statblock/zombie",
+      "name": "Zombie",
+      "counterpart": "zombie",
+      "source": "en/books/monsters/md/monster/undead/1st-echelon/statblock/zombie.md",
+      "status": "explained",
+      "differences": [
+        {
+          "field": "stamina",
+          "ours": "20",
+          "theirs": 20,
+          "classification": "presentation"
+        },
+        {
+          "field": "with_captain",
+          "ours": null,
+          "theirs": "",
+          "classification": "presentation"
+        },
+        {
+          "field": "keywords",
+          "ours": [
+            "Undead",
+            "Soulless"
+          ],
+          "theirs": [
+            "Soulless",
+            "Undead"
+          ],
+          "classification": "presentation"
+        },
+        {
+          "field": "ev.quantity",
+          "ours": 1,
+          "theirs": null,
+          "classification": "explained",
+          "disposition": "External numeric EV has no explicit quantity; the printed unqualified source EV describes one creature. An explicit external quantity must agree."
+        },
+        {
+          "field": "movement",
+          "ours": [],
+          "theirs": [
+            "walk"
+          ],
+          "classification": "explained",
+          "disposition": "External default walk versus absent printed movement mode. Our absent source value remains absent."
+        },
+        {
+          "field": "Clobber and Clutch.effect presentation",
+          "ours": "Compendium Markdown / effect grouping",
+          "theirs": "External HTML / effect grouping",
+          "classification": "presentation"
+        },
+        {
+          "field": "Zombie Dust.effect presentation",
+          "ours": "Compendium Markdown / effect grouping",
+          "theirs": "External HTML / effect grouping",
+          "classification": "presentation"
+        },
+        {
+          "field": "Endless Knight.kind",
+          "ours": "trait",
+          "theirs": "feature",
+          "classification": "explained",
+          "disposition": "External generic feature type; retain our parent-qualified trait/Malice classification."
+        },
+        {
+          "field": "Endless Knight.effect presentation",
+          "ours": "Compendium Markdown / effect grouping",
+          "theirs": "External HTML / effect grouping",
+          "classification": "presentation"
+        }
+      ]
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.undead.1st-echelon/undead-malice-level-1-malice-features",
+      "name": "Undead Malice (Level 1+ Malice Features)",
+      "counterpart": "undead-malice",
+      "source": "en/books/monsters/md/monster/undead/1st-echelon/undead-malice-level-1-malice-features.md",
+      "status": "explained",
+      "differences": [
+        {
+          "field": "name",
+          "ours": "Undead Malice (Level 1+ Malice Features)",
+          "theirs": "Undead Malice",
+          "classification": "explained",
+          "disposition": "Representation: local title retains the printed level qualifier; external level and featureblockType retain it separately."
+        },
+        {
+          "field": "Ravenous Horde.kind",
+          "ours": "malice",
+          "theirs": "feature",
+          "classification": "explained",
+          "disposition": "External generic feature type; retain our parent-qualified trait/Malice classification."
+        },
+        {
+          "field": "Ravenous Horde.effect presentation",
+          "ours": "Compendium Markdown / effect grouping",
+          "theirs": "External HTML / effect grouping",
+          "classification": "presentation"
+        },
+        {
+          "field": "Paranormal Fling.kind",
+          "ours": "malice",
+          "theirs": "feature",
+          "classification": "explained",
+          "disposition": "External generic feature type; retain our parent-qualified trait/Malice classification."
+        },
+        {
+          "field": "Paranormal Fling.effect presentation",
+          "ours": "Compendium Markdown / effect grouping",
+          "theirs": "External HTML / effect grouping",
+          "classification": "presentation"
+        },
+        {
+          "field": "The Grasping, the Hungry.kind",
+          "ours": "malice",
+          "theirs": "feature",
+          "classification": "explained",
+          "disposition": "External generic feature type; retain our parent-qualified trait/Malice classification."
+        },
+        {
+          "field": "The Grasping, the Hungry.effect presentation",
+          "ours": "Compendium Markdown / effect grouping",
+          "theirs": "External HTML / effect grouping",
+          "classification": "presentation"
+        },
+        {
+          "field": "Dread March.kind",
+          "ours": "malice",
+          "theirs": "feature",
+          "classification": "explained",
+          "disposition": "External generic feature type; retain our parent-qualified trait/Malice classification."
+        },
+        {
+          "field": "Dread March.effect presentation",
+          "ours": "Compendium Markdown / effect grouping",
+          "theirs": "External HTML / effect grouping",
+          "classification": "presentation"
+        }
+      ]
+    }
+  ],
+  "counts": {
+    "match": 0,
+    "explained": 12,
+    "review": 0,
+    "missing": 0,
+    "ambiguous": 0,
+    "error": 0
+  },
+  "retrievalErrors": []
+}

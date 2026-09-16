@@ -143,3 +143,61 @@ consumer-contract conflict materially changes the implementation; keep ordinary 
   started. Primary track foe coverage. Intended branch `slice/V27`; no backend or frontend process
   configured. Prerequisite docs are on `slice/V23` in `/srv/presidium/projects/salient/foes`.
   The kickoff records setup and coordination without changing other tracks or shared main.
+
+- 2026-09-16: Claimed by Codex. Reused clean `/srv/presidium/projects/salient/foes` on new
+  `slice/V27`, based on current main `e83930e` plus the five explicit V23 documentation prerequisites.
+  Main's uncommitted instructions read in place and preserved. Local build/read-only Vite on port 5187;
+  no backend configuration or deployment. Plan: additive shared foe contract/package and identity registry,
+  generic importer/corrections, exhaustive cached comparison, standalone public preview and tests.
+  Existing parser and Convex adapters remain untouched; consumers use the new pure lookup boundary.
+  Verify deterministic regeneration, source completeness, comparison failure cases, full check and browser
+  screenshots, then independent implementation and source reviews. No fixture replaces production sources.
+
+- Implementation: additive `shared/contracts/foes.ts`, `shared/foes/catalog.ts`, versioned generated
+  package, maintained feature identities and paired correction support; `scripts/ingest-foes.ts` and
+  `scripts/compare-foes.ts`; public `/foes` cards using shared themes and existing Rules rendering.
+  Source reads use pinned book Git blobs; all 40 features retain original records and ordered complete
+  sections. Existing Convex/parser files and Goblin loader are untouched. Rules header adds a preview link.
+- Comparison: all 11 stat blocks plus shared Malice inspected at external revision
+  `eba4b8bb8bc1baf947f15e67e9e923951092fd89`; [report](evidence/V27-steel-cauldron.json).
+  Initial outcome: 12 explained rows; zero unresolved, missing, ambiguous or failed comparisons.
+  Explanations retain source evidence: minion quantity absent from external numeric EV, default walk
+  versus absent printed movement, generic external feature classifications, split Malice title and
+  villain ordinals moved from upstream cost to external ability type. Effect markup/grouping differences
+  are presentation-only when the ordered labels and text agree. Neither data source proves the other.
+- Browser evidence: [light](evidence/V27-undead-light.png) and [dark](evidence/V27-undead-dark.png).
+  Search, kind/usage/keyword filters, independent trait and ability cards, parent/back navigation,
+  within-card Rules navigation, Escape/close dismissal and restored focus pass on isolated Vite 5187.
+  No backend started/synced; the existing shell makes an unsuccessful optional auth-session request
+  without preventing public reading. Screenshots inspected and text-button/line-break issues corrected.
+
+- Verification before review: `pnpm check` passed (engine 85 tests; app/scripts suite and build,
+  links, pins, snapshot checks). Subsequent extraction guards pass 13 focused foe tests plus typecheck/lint;
+  complete final checks are rerun for review. `foes:check` is offline and source-regenerates identically.
+  Explicit missing-cache CLI run exited 1 with all 12 parent records counted missing; normal cached
+  comparison exits 0 with all 12 explained. Browser artifacts also include independent Haunt cards in
+  [light](evidence/V27-ability-light.png) and [dark](evidence/V27-ability-dark.png).
+
+- Independent review found and regression-tested four fixes: compare explicit EV quantities for ordinary
+  foes too; revalidate corrected fields against corrected display; diagnose unknown parent prose/table
+  content; reset card navigation when reopened. Focused tests now total 14. Generated edition stays
+  `6c6bbd40f2460c196511a2f0cc19b2ff9184ddee27be90245e5d5a8a915ed331`.
+- Final full-suite rerun exposed an unrelated existing `closeout-audit` false positive: its substring
+  check for private Stamina value `37` matched timestamp `1789522853757`, while the returned payload
+  correctly omitted the value. Replaced that assertion with an exact public-payload shape check,
+  retaining the persisted private-journal checks. No backend behavior changed; this small test repair
+  is reviewed separately with the implementation review.
+
+- Final verification after repairs: `pnpm check` passes: 85 engine tests plus 331 app/scripts tests
+  (including all 14 foe tests), lint/format/typechecks, documentation links, both clean vendor pins,
+  existing content snapshot, offline foe/report validation and production build. The existing large
+  main-chunk build advisory remains; the new lazy foe chunk is about 31 KB gzip.
+  `pnpm exec playwright test --config playwright.foes.config.ts` passes the complete public browser flow
+  and saves all four screenshots. Cached `node scripts/compare-foes.ts` exits 0; missing-cache run exits 1.
+- Independent [implementation review](audits/2026-09-16-V27-independent-review.md) and
+  [source review](audits/2026-09-16-V27-source-review.md) pass after fixes. Source review independently
+  verified 36 pinned input blobs and 40 exact feature records/spans, and reproduced the comparison report.
+- Integration boundary: main advanced independently to `a25a0e8` (V24/V25) during this assignment.
+  V27 retains its documented base plus V23 prerequisites. Lead rebase/integration must preserve both
+  tracks' status/question/spec edits and rerun integrated checks. This handoff does not merge main,
+  update the user's running app, or deploy. Live Goblin support and all engine execution remain separate.

@@ -25,6 +25,8 @@ import { ErrorNotice, Eyebrow, Field, Loading, errorMessage } from './ui';
 
 const RulesPage = lazy(() => import('./rules').then(module => ({ default: module.RulesPage })));
 
+const FoesPage = lazy(() => import('./foes/index'));
+
 function ConnectionStatus() {
   const convex = useConvex();
   const [online, setOnline] = useState(convex.connectionState().isWebSocketConnected);
@@ -135,6 +137,7 @@ function CenteredPage({ children }: { children: React.ReactNode }) {
 function Shell() {
   const { isAuthenticated, isLoading } = useConvexAuth();
   const path = useRouterState({ select: state => state.location.pathname });
+  if (path === '/foes') return <Outlet />;
   if (path === '/rules' || path.startsWith('/rules/')) return <Outlet />;
   if (path === '/login') return <Outlet />;
   if (path.startsWith('/join/') && !isAuthenticated)
@@ -341,6 +344,15 @@ function rulesSearch(search: Record<string, unknown>): {
     category: typeof search.category === 'string' ? search.category : undefined,
   };
 }
+const foesRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/foes',
+  component: () => (
+    <Suspense fallback={<Loading>Opening undead…</Loading>}>
+      <FoesPage />
+    </Suspense>
+  ),
+});
 const rulesRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/rules',
@@ -374,6 +386,7 @@ export const router = createRouter({
     charactersRoute,
     characterRoute,
     wizardRoute,
+    foesRoute,
     rulesRoute,
     rulesArticleRoute,
   ]),

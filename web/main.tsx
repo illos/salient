@@ -12,7 +12,7 @@ const url =
     ? `${window.location.origin}/convex-api`
     : import.meta.env.VITE_CONVEX_URL;
 const root = createRoot(document.getElementById('root')!);
-if (!url && !/^\/rules(?:\/|$)/.test(window.location.pathname)) {
+if (!url && !/^\/(?:rules|foes)(?:\/|$)/.test(window.location.pathname)) {
   root.render(
     <main className="flex min-h-screen flex-col items-center justify-center gap-3 bg-card p-16 text-center">
       <h1>Salient</h1>

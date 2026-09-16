@@ -450,6 +450,12 @@ parent relationship and enough source/context to render a feature on its own. Ex
 and cross-source-revision mapping remain implementation proposals. See the
 [monster ingestion requirements](monster-catalog-spec.md#confirmed-ingestion-requirements--2026-09-15).
 
+**V27 implementation, 2026-09-16:** the public foe adapter uses `{kind, id, edition}` and pure
+`foeReference`, `resolveFoe`, `searchFoes` functions. A feature resolves with parent context independently
+of its route; mismatched kind/edition is refused. Retained package editions support exact old references.
+This adapter does not select private-instance disclosure policy or modify existing Rules snapshots.
+See the [consumer contract](../shared/foes/README.md).
+
 The reusable public definition and a particular loaded monster remain different objects, just as item
 definitions and owned items do. A public ability reference does not reveal a loaded monster's current
 Stamina, campaign membership, hidden state or other private data. Future deliberate sharing of a private

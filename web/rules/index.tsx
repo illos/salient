@@ -473,6 +473,9 @@ export function RulesPage({ path, filters }: { path?: string; filters: RulesFilt
             <kbd>⌘ / Ctrl K</kbd>
           )}
         </div>
+        <Link to="/foes" className="rules-back">
+          Undead references
+        </Link>
         <Link to="/" className="rules-back">
           Back to app <ArrowRight size={15} />
         </Link>

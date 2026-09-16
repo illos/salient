@@ -8,6 +8,7 @@ absent, never defaulted.
 
 | Path | Owner | How it is produced |
 | --- | --- | --- |
+| `foes/` | V27 | **Generated.** Independent undead definitions/features and retained editions; see [consumer contract](../foes/README.md). `pnpm foes:build` / `pnpm foes:check`. |
 | `compendium/` | S01 | **Generated.** `pnpm content:build` regenerates it from the submodule; `pnpm content:check` (part of `pnpm check`) regenerates in memory and fails on any difference, including a hand edit. Do not edit by hand. |
 | `core-conditions.json` | R05 | Hand-authored from the source, verified by `tests/core-conditions.test.ts`. |
 | `fury-level-one-decisions.json` | R01 | Hand-authored decision table mirror, described in `docs/fury-level-one-decisions.md`. |

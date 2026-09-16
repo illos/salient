@@ -1,0 +1,202 @@
+[
+  {
+    "parent": "mcdm.monsters.v1/monster.undead.1st-echelon.statblock/crawling-claw",
+    "fingerprint": "2e135c736a87a4d814870e70ab2a97c7c0c16d246377c210e3ae923239eb3ef9",
+    "id": "foe-feature:bca261bf-244b-488f-acc0-64c60505d562"
+  },
+  {
+    "parent": "mcdm.monsters.v1/monster.undead.1st-echelon.statblock/crawling-claw",
+    "fingerprint": "d90ea167dbb15c20d93bab8a0f7e3d7fc082acdf777eeae70e3a9a38fd3046ba",
+    "id": "foe-feature:9735c476-28c8-469d-a46a-c9d530cc0e4e"
+  },
+  {
+    "parent": "mcdm.monsters.v1/monster.undead.1st-echelon.statblock/decrepit-skeleton",
+    "fingerprint": "a9b05545e7d8d8ca3c588409d79b00537a3ee0f11ba92d80ab4829adcb2b4395",
+    "id": "foe-feature:7841f3d9-88c8-49f0-beb4-bc3d590d4ff5"
+  },
+  {
+    "parent": "mcdm.monsters.v1/monster.undead.1st-echelon.statblock/decrepit-skeleton",
+    "fingerprint": "65667b22eed01a8d717bee3ea2605a7e6f56c8ede1a19abc8927c2f89f658ede",
+    "id": "foe-feature:66571e36-678a-4cd8-8ef5-edfde64e46f0"
+  },
+  {
+    "parent": "mcdm.monsters.v1/monster.undead.1st-echelon.statblock/ghost",
+    "fingerprint": "2befef29774dce69734304a73b5740ab5da35cdff4d3fa5f57cc8ff191598ee7",
+    "id": "foe-feature:548c425b-cf0e-4d09-ba16-826545f9c3b6"
+  },
+  {
+    "parent": "mcdm.monsters.v1/monster.undead.1st-echelon.statblock/ghost",
+    "fingerprint": "532e279567112148dd876cde57775670cddaf10231f7f94b4c90a275383c7208",
+    "id": "foe-feature:d6f8849a-8c57-4736-9e20-b2dc2591c3ff"
+  },
+  {
+    "parent": "mcdm.monsters.v1/monster.undead.1st-echelon.statblock/ghost",
+    "fingerprint": "bc7aa5582e4d4573b3024139d403297ec84b03bc0b49daebdc49c995995466f5",
+    "id": "foe-feature:9d1bd539-c732-4fba-95d1-ac7036cb89dc"
+  },
+  {
+    "parent": "mcdm.monsters.v1/monster.undead.1st-echelon.statblock/ghost",
+    "fingerprint": "fbaecd183285ec16297fe0d6b8b3e7a17ae57258b45a44d4d957ce5199d9bc4f",
+    "id": "foe-feature:34a7eecc-0568-46c1-ae3d-1a1d7927d5a7"
+  },
+  {
+    "parent": "mcdm.monsters.v1/monster.undead.1st-echelon.statblock/ghost",
+    "fingerprint": "b6541008d0ca1c506850a2f6915c43ac97841434e65f4d7255b869047752e656",
+    "id": "foe-feature:62fa2d23-4bec-4e9f-9c01-8dcee419e844"
+  },
+  {
+    "parent": "mcdm.monsters.v1/monster.undead.1st-echelon.statblock/ghost",
+    "fingerprint": "5abe0982cf57c8df2d5bb7fb33be80d975aea961f7504a456e2fdf8117003f76",
+    "id": "foe-feature:92a10c8c-5694-42ac-b95b-92a93a017c23"
+  },
+  {
+    "parent": "mcdm.monsters.v1/monster.undead.1st-echelon.statblock/ghost",
+    "fingerprint": "a1edee30d43b0af95ffe3cc18227599a313bceb53d3681e6443c4542316c9e71",
+    "id": "foe-feature:9a881e0d-cd78-4fd0-b17d-0de381524678"
+  },
+  {
+    "parent": "mcdm.monsters.v1/monster.undead.1st-echelon.statblock/ghost",
+    "fingerprint": "4687378010d2b168204e7bd65801e8546f6b0b9e2ee65b7e382b5a8299187418",
+    "id": "foe-feature:00277867-255e-402e-af25-36cb117ff64c"
+  },
+  {
+    "parent": "mcdm.monsters.v1/monster.undead.1st-echelon.statblock/ghoul",
+    "fingerprint": "d37620e961c5df45ed50a4b9a2b24205f3133ff1c921b12814050939a648b1f5",
+    "id": "foe-feature:a0cf5ff7-f923-4ce3-8e1a-07adc576dd2c"
+  },
+  {
+    "parent": "mcdm.monsters.v1/monster.undead.1st-echelon.statblock/ghoul",
+    "fingerprint": "211c5357e3e5e4a8c3e225e80d3b500b10295549e4a67a9b2578c5b9d29e33b5",
+    "id": "foe-feature:616cc67d-4016-4038-9b4e-df67b97a2556"
+  },
+  {
+    "parent": "mcdm.monsters.v1/monster.undead.1st-echelon.statblock/ghoul",
+    "fingerprint": "9b911d9e660b6f0f828db4ec429b3aa16349c6778962b3c34d3bb2d0480fa455",
+    "id": "foe-feature:045f1786-919e-4e3e-8dcf-98ee9b81fee4"
+  },
+  {
+    "parent": "mcdm.monsters.v1/monster.undead.1st-echelon.statblock/ghoul",
+    "fingerprint": "5e3247184d214e4062d7e0c515f7a30e638dc7e8243eef951a9eb80351dd3229",
+    "id": "foe-feature:1e4c2ace-edb9-4b2c-a0bb-63244ede8d7b"
+  },
+  {
+    "parent": "mcdm.monsters.v1/monster.undead.1st-echelon.statblock/rotting-zombie",
+    "fingerprint": "d39b624293784dfebd24fd3231dd441dbb5ed952e0421779a374c7b134c1c720",
+    "id": "foe-feature:20446c23-b5c8-4b3b-9c02-a53afab3bd70"
+  },
+  {
+    "parent": "mcdm.monsters.v1/monster.undead.1st-echelon.statblock/rotting-zombie",
+    "fingerprint": "5295cbf2157e22dc096aba51c2935ce01c22ce7729050375823573f1eabe4603",
+    "id": "foe-feature:3e0cff29-be1b-4ca0-a44d-b018ce6c41d4"
+  },
+  {
+    "parent": "mcdm.monsters.v1/monster.undead.1st-echelon.statblock/shade",
+    "fingerprint": "c15f74ced7c19b9151e8636d5d1f605fe0a6e727945f7b5744e81ba177c00068",
+    "id": "foe-feature:d6277abd-6d92-474c-a5d0-9e0160092cb8"
+  },
+  {
+    "parent": "mcdm.monsters.v1/monster.undead.1st-echelon.statblock/shade",
+    "fingerprint": "73a47046ce04318a05a1a199cc78ca4b2cd90db869fff946851499bcf3c4748e",
+    "id": "foe-feature:c24c33fa-b0e9-4ada-9c7a-2fa2b09f29ad"
+  },
+  {
+    "parent": "mcdm.monsters.v1/monster.undead.1st-echelon.statblock/skeleton",
+    "fingerprint": "d7ee45ca2a5a5ebdd4c06f2a709bf325b69a334ae33baa0453b87ffe5d3be3af",
+    "id": "foe-feature:f3adb033-1c1d-4b37-abe4-98d996b27324"
+  },
+  {
+    "parent": "mcdm.monsters.v1/monster.undead.1st-echelon.statblock/skeleton",
+    "fingerprint": "d915a1ee1dd8c3fc0cd33bd7c35dfb62397ff85269fef6648ea5b6feb2696d99",
+    "id": "foe-feature:77cbca92-0a9e-40e8-b402-97d0b11eca24"
+  },
+  {
+    "parent": "mcdm.monsters.v1/monster.undead.1st-echelon.statblock/skeleton",
+    "fingerprint": "0308ac2b284c0ed127698a966236f946c44379da5d0faa4c12cb06b80ce6ba92",
+    "id": "foe-feature:8cba7246-18c8-4004-aad7-443147685384"
+  },
+  {
+    "parent": "mcdm.monsters.v1/monster.undead.1st-echelon.statblock/soulwight",
+    "fingerprint": "fd0b9b742ff1203de98c0124f0b19f8c1c916ed18385bc8a9800e68af67f861b",
+    "id": "foe-feature:8019fee0-215c-4367-8200-6b7a198c3c58"
+  },
+  {
+    "parent": "mcdm.monsters.v1/monster.undead.1st-echelon.statblock/soulwight",
+    "fingerprint": "ce123bbc66a6df335088f41b4bb702bb386b71818ab6e9d6299829fe97474441",
+    "id": "foe-feature:275949ac-b58a-4a98-abbf-adeea52261b0"
+  },
+  {
+    "parent": "mcdm.monsters.v1/monster.undead.1st-echelon.statblock/soulwight",
+    "fingerprint": "3fb59bd98c7d0a8cf194c76ec6d72bdf71c9dfbcebb9a44bc358858503ffba84",
+    "id": "foe-feature:83802b4e-0b8e-4166-a714-b6b5d824ce58"
+  },
+  {
+    "parent": "mcdm.monsters.v1/monster.undead.1st-echelon.statblock/specter",
+    "fingerprint": "a3713920d082dfa702ae30bcadd9087e4bbc4c135c8251e010e07abfb8d39b15",
+    "id": "foe-feature:41c25df0-9cac-4c76-ac45-db0e230ef462"
+  },
+  {
+    "parent": "mcdm.monsters.v1/monster.undead.1st-echelon.statblock/specter",
+    "fingerprint": "3f0114996a850bce077b107ff327f34f04a0384d545e71cf2659127967318166",
+    "id": "foe-feature:777a5e0c-5ff6-4570-a37f-27acff161180"
+  },
+  {
+    "parent": "mcdm.monsters.v1/monster.undead.1st-echelon.statblock/specter",
+    "fingerprint": "2864bb0ae111a1717bc52b9f7cbc1ac803bd1840f892268bebb12c4c33c7e4fe",
+    "id": "foe-feature:15763312-3eed-4803-bebd-18b3a27d2bf8"
+  },
+  {
+    "parent": "mcdm.monsters.v1/monster.undead.1st-echelon.statblock/umbral-stalker",
+    "fingerprint": "aeac897e26fff68aea5448e805f653b18aeca7e5f48b388c748bf32812800150",
+    "id": "foe-feature:8a09521e-9817-4da5-9b90-c8cfe6f52aa2"
+  },
+  {
+    "parent": "mcdm.monsters.v1/monster.undead.1st-echelon.statblock/umbral-stalker",
+    "fingerprint": "7c327fa55b6091a31f754832981e39c39ad8cf397952c1b6951e0a7da2dd8220",
+    "id": "foe-feature:c62553b2-56fa-4cf7-894d-e7275848cf5e"
+  },
+  {
+    "parent": "mcdm.monsters.v1/monster.undead.1st-echelon.statblock/umbral-stalker",
+    "fingerprint": "ca8946443378e680a62eff30b062ed11ff9ddcad299130f188346b1eef5c3f16",
+    "id": "foe-feature:e98702c2-bf2c-41da-b686-89e0bd1c3931"
+  },
+  {
+    "parent": "mcdm.monsters.v1/monster.undead.1st-echelon.statblock/umbral-stalker",
+    "fingerprint": "f1e52a652ee454f51359d781b6cc91f0355df36a04439fbeebd8c903035e6be3",
+    "id": "foe-feature:73b3e50b-b5ab-4a60-bd79-e7f5dab1dbe9"
+  },
+  {
+    "parent": "mcdm.monsters.v1/monster.undead.1st-echelon.statblock/zombie",
+    "fingerprint": "84bc02fe9b93a3778263394376402f7266bd1699d415bd10d17a0d75a94a5713",
+    "id": "foe-feature:4e8a9923-53b2-4d4f-8a77-55ba4357e7ac"
+  },
+  {
+    "parent": "mcdm.monsters.v1/monster.undead.1st-echelon.statblock/zombie",
+    "fingerprint": "1245e5d97ebdc08f014a41aaca608fb02343dec81117e6151316c1d8255414b2",
+    "id": "foe-feature:ac3d80c8-3f08-4a5c-ab2f-18509c6a8d0b"
+  },
+  {
+    "parent": "mcdm.monsters.v1/monster.undead.1st-echelon.statblock/zombie",
+    "fingerprint": "3d2c753931abd70f1eab5523bf25b6c5ffd5ada4c98e8e6c792f09932173c28b",
+    "id": "foe-feature:9daa2313-0023-473c-a744-68e0fc14f4b3"
+  },
+  {
+    "parent": "mcdm.monsters.v1/monster.undead.1st-echelon/undead-malice-level-1-malice-features",
+    "fingerprint": "2be2f70f6134da13505b9a26d9e72191d19f86f1d5112f8338042aded5c9c223",
+    "id": "foe-feature:a0539670-4770-4702-a25e-b575ab5ec099"
+  },
+  {
+    "parent": "mcdm.monsters.v1/monster.undead.1st-echelon/undead-malice-level-1-malice-features",
+    "fingerprint": "56c7e46f4b66f61780286caa9d5593bd2029e849a57a860f1762f8477013bc1c",
+    "id": "foe-feature:f898a84e-8a90-4e58-93e6-53c6618f83a2"
+  },
+  {
+    "parent": "mcdm.monsters.v1/monster.undead.1st-echelon/undead-malice-level-1-malice-features",
+    "fingerprint": "2391d495a1d08d220837eaff38b1a4481482445ca0cd2557677b493309baa190",
+    "id": "foe-feature:f9f797a3-9f7b-4095-8899-9d72ca3cb7ef"
+  },
+  {
+    "parent": "mcdm.monsters.v1/monster.undead.1st-echelon/undead-malice-level-1-malice-features",
+    "fingerprint": "e37f33fa2112d24275bbaa640ad1264abb4543e67d84afc4b8034df92200097a",
+    "id": "foe-feature:205449aa-04f1-4d5b-891d-36f0830aad22"
+  }
+]

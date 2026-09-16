@@ -38,3 +38,9 @@ with MCDM Productions, LLC. DRAW STEEL © 2026 MCDM Productions, LLC.
 This import is authorized for the provisional internal-tool stage. The `data-unified` repository has no
 separate license file at the pin; the website code's CC0 license is not treated as a license for the data
 repository. See [the recorded research](docs/research/embedded-compendium.md) for the distinction.
+
+The V27 `shared/content/foes/` package adds the selected first-echelon undead source records and
+independent features to the public browser preview at `/foes`. Exact source text retains its game-content
+provenance and the same provisional internal-tool boundary as the embedded Rules library. It is not GPL
+application code. No artwork is included. Steel Cauldron generated outputs are used only in a local,
+pinned comparison cache; no external application code, styling, or generated content supplies this package.

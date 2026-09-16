@@ -1,8 +1,11 @@
-# Undead ingestion: next-session kickoff
+# Undead ingestion: kickoff and build handoff
 
-Checkpoint: **2026-09-16**. Discussion and source assessment complete; the next session should build
-[V27: Undead ingestion and independent feature access](build/V27-undead-ingestion.md).
-This is a handoff, not a claim that the importer or preview already exists.
+Updated **2026-09-16**: [V27](build/V27-undead-ingestion.md) has been implemented and independently
+reviewed. Read its closing work log and the [consumer contract](../shared/foes/README.md) for the
+current package, commands, evidence and integration boundary. The original kickoff below is historical;
+do not repeat the assessment or rebuild the finished slice. Next is lead integration with current main,
+including the explicit V23 documentation prerequisites, followed by a separately bounded coverage slice.
+No deployment or engine execution is implied.
 
 ## Ready-to-paste kickoff
 

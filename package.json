@@ -8,7 +8,7 @@
     "node": ">=24.12.0"
   },
   "scripts": {
-    "check": "pnpm lint && pnpm check:engine && pnpm check:app && pnpm check-links && pnpm check-vendor && pnpm content:check && pnpm build",
+    "check": "pnpm lint && pnpm check:engine && pnpm check:app && pnpm check-links && pnpm check-vendor && pnpm content:check && pnpm foes:check && pnpm build",
     "test": "vitest run --project engine",
     "play": "node src/cli.ts",
     "demo": "node src/cli.ts demo",
@@ -33,7 +33,10 @@
     "check-commit": "node scripts/check-commit.ts",
     "format:check": "prettier --check .",
     "rules:ingest": "node scripts/ingest-rules.ts",
-    "rules:check": "node scripts/ingest-rules.ts --check"
+    "rules:check": "node scripts/ingest-rules.ts --check",
+    "foes:build": "node scripts/ingest-foes.ts",
+    "foes:check": "node scripts/ingest-foes.ts --check",
+    "foes:compare": "node scripts/compare-foes.ts"
   },
   "devDependencies": {
     "@convex-dev/eslint-plugin": "4.0.0",

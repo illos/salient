@@ -293,6 +293,25 @@ Proposed acceptance additions for the implementation:
    the same features. Verify exact edition references still identify their original content.
 6. Render the same definition/feature fixture with different theme tokens without changing its data or IDs.
 
+### V27 implementation — 2026-09-16
+
+The first structured package now covers the 11 first-echelon undead, their 23 abilities and 13 traits,
+plus four shared Malice features. The [consumer contract](../shared/foes/README.md) documents exact
+files, commands, correction preconditions and `{kind, id, edition}` references. Parents retain source
+SCC identities; child UUIDs are maintained in an explicit registry separately from source selectors,
+mutable names, order and edition. Unmatched/ambiguous selectors fail rather than allocate replacement IDs.
+
+The package retains full original JSON/Markdown/linked Markdown, complete ordered feature spans and
+sections, source/display projections and independent search results. `ev` preserves the per-four minion
+basis; `activation` keeps villain ordinals separate from cost text. Unknown prose/fields remain readable
+and require comparison review. Corrections are revision/expected-value guarded and preserve originals.
+Generated immutable editions stay available to consumers; current-package resolution refuses old editions.
+
+The read-only `/foes` route and reusable `FoeView` provide whole-block and independent feature cards with
+existing themes, related Rules navigation inside the card and focus-restoring dismissal. Live loading,
+parser execution, squads and persistent sharing UI remain outside this slice. Existing Goblin support
+and private encounter state are unchanged. Verification/reviews are recorded in [V27](build/V27-undead-ingestion.md).
+
 ### Full-output comparison — confirmed 2026-09-16
 
 The user requires comparing **every generated stat block** with its Steel Cauldron counterpart as a
