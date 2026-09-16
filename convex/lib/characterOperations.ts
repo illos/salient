@@ -79,15 +79,27 @@ const submit: OperationDefinition = {
       throw new ConvexError(
         `The saved build is ${draft.status}; resolve its diagnostics in the wizard before submitting.`,
       );
-    if (character.effectiveRevisionId === draft._id)
+    if (character.campaignId && character.effectiveRevisionId === draft._id)
       throw new ConvexError(
         `Revision ${draft.revision} is already the effective build; save a change before submitting.`,
+      );
+    if (character.staleFullEditRevisionId === draft._id)
+      throw new ConvexError(
+        'This full-edit draft predates the effective build. Reconcile and save it against the current build before submitting.',
+      );
+    if (
+      draft._id !== character.effectiveRevisionId &&
+      draft.baseEffectiveRevisionId !== undefined &&
+      draft.baseEffectiveRevisionId !== character.effectiveRevisionId
+    )
+      throw new ConvexError(
+        'This full-edit draft predates the effective build. Reconcile and save it against the current build before submitting.',
       );
     if (await pendingReview(ctx, character._id))
       throw new ConvexError(
         `${character.authored.name} already has a submission awaiting review; withdraw it first.`,
       );
-    const kind = character.effectiveRevisionId ? 'full-edit' : 'admission';
+    const kind = character.campaignId ? 'full-edit' : 'admission';
     const now = Date.now();
     const base = {
       characterId: character._id,
@@ -203,6 +215,14 @@ const approve: OperationDefinition = {
     await requireEditable(ctx, character);
     const revision = await ctx.db.get(review.revisionId);
     if (!revision) throw new ConvexError('Submitted revision unavailable.');
+    if (
+      revision._id !== character.effectiveRevisionId &&
+      revision.baseEffectiveRevisionId !== undefined &&
+      revision.baseEffectiveRevisionId !== character.effectiveRevisionId
+    )
+      throw new ConvexError(
+        'The effective build changed after this proposal was prepared. The owner must reconcile and resubmit.',
+      );
     const before = character.effectiveRevisionId;
     const now = Date.now();
     const result = await activateRevision(ctx, character, revision, context.campaign._id, now);

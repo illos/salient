@@ -1,0 +1,9 @@
+
+Running 2 tests using 1 worker
+
+(node:701606) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 tests/browser/v25-elementalist.spec.ts:7:1 › corrected Forge Bethell: complete wizard, reload, review and sourced sheet (14.5s)
+  ✓  2 tests/browser/v32-progression.spec.ts:29:1 › Fury advancement preserves live state; source-complete sheet and reviewed history restoration (38.9s)
+
+  2 passed (54.1s)

@@ -1,0 +1,661 @@
+{
+  "schemaVersion": "v32-independent-1",
+  "compendiumRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+  "sourceRoot": "vendor/steel-compendium",
+  "reference": {
+    "name": "Independent Compendium-derived Grug Fury level-two progression target",
+    "baseFixture": "tests/fixtures/v25-fury.json",
+    "externalForgeComparison": "Separate live website capture is required; this fixture is not an exported Forge hero.",
+    "deferredLanguage": "Preserve one open Soldier language slot from the accepted level-one build.",
+    "chosenTransition": "Danger Sense and Wrecking Ball; choices are an acceptance path, not mandatory automatic defaults."
+  },
+  "selections": {
+    "ancestry.choice": "Devil",
+    "ancestry.devil.silver-tongue-skill": "Persuade",
+    "ancestry.devil.purchased-traits": ["Beast Legs", "Impressive Horns"],
+    "culture.name": "wilderness mercenary commune",
+    "culture.language": "Anjali",
+    "culture.environment": "Wilderness",
+    "culture.environment.skill": "Swim",
+    "culture.organization": "Communal",
+    "culture.organization.skill": "Blacksmithing",
+    "culture.upbringing": "Martial",
+    "culture.upbringing.skill": "Intimidate",
+    "career.choice": "Soldier",
+    "career.soldier.skill.exploration": "Endurance",
+    "career.soldier.skill.intrigue": "Alertness",
+    "career.soldier.languages": [null, "Vaslorian"],
+    "career.soldier.perk": "Teamwork",
+    "career.soldier.inciting-incident": "Sole Survivor",
+    "class.choice": "Fury",
+    "class.fury.characteristic-array": "1, 0, 0",
+    "class.fury.array-assignment": {
+      "Intuition": 1,
+      "Reason": 0,
+      "Presence": 0
+    },
+    "class.fury.skills": ["Jump", "Climb"],
+    "class.fury.aspect": "Berserker",
+    "class.fury.signature-ability": "Brutal Slam",
+    "class.fury.ability-3": "Out of the Way!",
+    "class.fury.ability-5": "Thunder Roar",
+    "kit.choice": "Mountain",
+    "details.name": "Grug",
+    "class.fury.level-2.perk": "Danger Sense",
+    "class.fury.level-2.aspect-ability": "Wrecking Ball"
+  },
+  "expected": {
+    "level": 2,
+    "ancestry": "Devil",
+    "class": "Fury",
+    "subclass": "Berserker",
+    "career": "Soldier",
+    "characteristics": {
+      "M": 2,
+      "A": 2,
+      "R": 0,
+      "I": 1,
+      "P": 0
+    },
+    "staminaMaximum": 39,
+    "recoveriesMaximum": 10,
+    "recoveryValue": 13,
+    "windedValue": 19,
+    "speed": 6,
+    "stability": 2,
+    "size": "1M",
+    "disengage": 1,
+    "potencyCharacteristic": "M",
+    "potency": {
+      "weak": 0,
+      "average": 1,
+      "strong": 2
+    },
+    "heroicResource": "ferocity",
+    "savingThrowThreshold": 5,
+    "renown": 1,
+    "wealth": 1,
+    "kit": "Mountain",
+    "skills": [
+      "Alertness",
+      "Blacksmithing",
+      "Climb",
+      "Endurance",
+      "Intimidate",
+      "Jump",
+      "Lift",
+      "Nature",
+      "Persuade",
+      "Swim"
+    ],
+    "languages": ["Anjali", "Caelian", "Vaslorian"],
+    "traits": ["Silver Tongue", "Beast Legs", "Impressive Horns"],
+    "features": [
+      "Culture edge",
+      "Ferocity",
+      "Growing Ferocity",
+      "Mighty Leaps",
+      "Kit",
+      "Primordial Strength",
+      "Unstoppable Force"
+    ],
+    "perks": ["Teamwork", "Danger Sense"],
+    "abilities": [
+      "Brutal Slam",
+      "Out of the Way!",
+      "Thunder Roar",
+      "Lines of Force",
+      "Pain for Pain",
+      "Melee Weapon Free Strike",
+      "Ranged Weapon Free Strike",
+      "Wrecking Ball"
+    ],
+    "abilityDamageTiers": {
+      "Brutal Slam": [5, 8, 15],
+      "Out of the Way!": [5, 7, 14],
+      "Thunder Roar": [6, 9, 17],
+      "Pain for Pain": [5, 7, 15],
+      "Melee Weapon Free Strike": [4, 7, 13],
+      "Ranged Weapon Free Strike": [4, 6, 8]
+    }
+  },
+  "ledger": [
+    {
+      "name": "Devil",
+      "kind": "ancestry",
+      "sourcePath": "en/unified/md/ancestry/devil.md",
+      "sourceSha256": "0d4ea539d90fbe879a45fb04f2c5dc25b3583d3e691b4a9bd25be6852f824ca5",
+      "classification": "build",
+      "expectedEffect": "Default size1M speed5 stability0; signature Silver Tongue."
+    },
+    {
+      "name": "Devil Traits",
+      "kind": "entitlement",
+      "sourcePath": "en/unified/md/feature/trait/devil/devil-traits.md",
+      "sourceSha256": "9a7bee3cda688eab4033927ebac09cdbfeb3bd3e3ae4f0b1515d4f9210178476",
+      "classification": "build",
+      "expectedEffect": "3 point budget; Beast Legs1 + Impressive Horns2; unspent permitted under Q-CHAR-10."
+    },
+    {
+      "name": "Silver Tongue",
+      "kind": "trait",
+      "sourcePath": "en/unified/md/feature/trait/devil/silver-tongue.md",
+      "sourceSha256": "1a381fd6c9cd61ec50496edcaed500095a08c460276f53b9f0d64ddb665359d9",
+      "classification": "build-and-manual",
+      "expectedEffect": "Persuade from interpersonal; negotiation discovery edge manual."
+    },
+    {
+      "name": "Beast Legs",
+      "kind": "trait",
+      "sourcePath": "en/unified/md/feature/trait/devil/beast-legs.md",
+      "sourceSha256": "aa0330f529bdcc4b6acff0d9aab3e27519c6d7c23e0a8cd1c43d06a90506101d",
+      "classification": "build",
+      "expectedEffect": "Speed6 replacement, not +6."
+    },
+    {
+      "name": "Impressive Horns",
+      "kind": "trait",
+      "sourcePath": "en/unified/md/feature/trait/devil/impressive-horns.md",
+      "sourceSha256": "07fe6ab2f0b881d56b3146f3803f3f18790c8ebb6d79a03c1614f21f8eb40b3f",
+      "classification": "build",
+      "expectedEffect": "Saves5+ replaces ordinary6+."
+    },
+    {
+      "name": "Wilderness / Swim",
+      "kind": "skill-entitlement",
+      "sourcePath": "en/unified/md/culture/wilderness.md",
+      "sourceSha256": "abf043490386079307336784b12e2a27566f0f75aec673a47f166a06ea1537a6",
+      "classification": "build",
+      "expectedEffect": "One crafting/exploration skill; Swim eligible."
+    },
+    {
+      "name": "Communal / Blacksmithing",
+      "kind": "skill-entitlement",
+      "sourcePath": "en/unified/md/culture/communal.md",
+      "sourceSha256": "16e32193ef1ef573ffec18ee521c928cefddd715595a399a3319f67f8683a2f8",
+      "classification": "build",
+      "expectedEffect": "One crafting/exploration skill; Blacksmithing eligible."
+    },
+    {
+      "name": "Martial / Intimidate",
+      "kind": "skill-entitlement",
+      "sourcePath": "en/unified/md/culture/martial.md",
+      "sourceSha256": "c10f166df482e7393cb7afc6d8527d7ac019dedde2af2518754e703e8a446102",
+      "classification": "build",
+      "expectedEffect": "Listed Martial options include Intimidate."
+    },
+    {
+      "name": "Culture edge",
+      "kind": "feature",
+      "sourcePath": "en/books/heroes/clean/Draw Steel Heroes.md",
+      "sourceSha256": "784677631b216450a738c1ce1aa33686816105cf20e683768d6a518e0cbd0d01",
+      "classification": "manual",
+      "expectedEffect": "Edge recalling culture lore or interacting with its people."
+    },
+    {
+      "name": "Caelian / Anjali / Vaslorian",
+      "kind": "language-entitlement",
+      "sourcePath": "en/books/heroes/clean/Draw Steel Heroes.md",
+      "sourceSha256": "784677631b216450a738c1ce1aa33686816105cf20e683768d6a518e0cbd0d01",
+      "classification": "build",
+      "expectedEffect": "Caelian automatic; Anjali culture; Vaslorian one Soldier slot, second legally deferred in existing R02 fixture."
+    },
+    {
+      "name": "Soldier",
+      "kind": "career",
+      "sourcePath": "en/unified/md/career/soldier.md",
+      "sourceSha256": "d340f1ec1e748550447d19e46677f4a7e9a8a2e051cddd0ee50e961911f12959",
+      "classification": "build",
+      "expectedEffect": "Endurance exploration and Alertness intrigue; two language slots; renown+1; exploration perk Teamwork; Sole Survivor incident."
+    },
+    {
+      "name": "Teamwork",
+      "kind": "perk",
+      "sourcePath": "en/unified/md/perk/teamwork.md",
+      "sourceSha256": "5d91951185e0e1b4a6a92910850206b51064f1a910209b3bbe9a649cfcb34859",
+      "classification": "manual",
+      "expectedEffect": "First turn in montage can both test and assist another hero."
+    },
+    {
+      "name": "Fury",
+      "kind": "class",
+      "sourcePath": "en/unified/md/class/fury.md",
+      "sourceSha256": "7afd02382cb9947d37a5f13c8ee91f2d02f2b34fc344deb0673abe2c4827b415",
+      "classification": "build",
+      "expectedEffect": "Might2 Agility2; remaining array1,0,0 assigned I1 R0 P0. Starting stamina21, Recoveries10; Might potencies0/1/2; fixed Nature and choose Jump/Climb."
+    },
+    {
+      "name": "Primordial Aspect",
+      "kind": "entitlement",
+      "sourcePath": "en/unified/md/feature/fury/level-1/primordial-aspect.md",
+      "sourceSha256": "59c9ae6d375b2fd41cb95b6cc3329c04c8607739051da5914dac0de64c73e649",
+      "classification": "build",
+      "expectedEffect": "Berserker grants fixed Lift."
+    },
+    {
+      "name": "1st-Level Aspect Features",
+      "kind": "entitlement",
+      "sourcePath": "en/unified/md/feature/fury/level-1/1st-level-aspect-features.md",
+      "sourceSha256": "5a3fedf9ed9cb2e14d8df75033c825fe670526459639e26ee318d9f5602eaf75",
+      "classification": "build",
+      "expectedEffect": "Berserker grants Kit and Primordial Strength."
+    },
+    {
+      "name": "Aspect Triggered Action",
+      "kind": "entitlement",
+      "sourcePath": "en/unified/md/feature/fury/level-1/aspect-triggered-action.md",
+      "sourceSha256": "5233c5551592294a94422876d443f5099a3b6240db9293d9f6765f460926a12d",
+      "classification": "build",
+      "expectedEffect": "Berserker grants Lines of Force."
+    },
+    {
+      "name": "Ferocity",
+      "kind": "feature",
+      "sourcePath": "en/unified/md/feature/fury/level-1/ferocity.md",
+      "sourceSha256": "3277d98dc5b658ef2ee1c20fd0365555175cc470a027fae3ffa21710d5430256",
+      "classification": "build-and-manual",
+      "expectedEffect": "Ferocity identity; encounter Victories, turn1d3, first damage/round1, first winded/dying encounter1d3; end encounter clears. Outside-combat waiver/once-use reset; lifecycle manual."
+    },
+    {
+      "name": "Growing Ferocity",
+      "kind": "feature",
+      "sourcePath": "en/unified/md/feature/fury/level-1/growing-ferocity.md",
+      "sourceSha256": "b7ac23fe227dffccc77f69a52f5c9a328c93c2cc1e9770c05451016dfbb87e1b",
+      "classification": "manual",
+      "expectedEffect": "Level1 Berserker thresholds2 Knockback+M;4 first push/turn surge1;6 edge Might tests/Knockback. Benefits persist through turn even after spending; higher-level rows inactive."
+    },
+    {
+      "name": "Mighty Leaps",
+      "kind": "feature",
+      "sourcePath": "en/unified/md/feature/fury/level-1/mighty-leaps.md",
+      "sourceSha256": "3e25af6df810949061b8edb29e64e36d7eddeefaa45a8a4eb0b97925ac59b026",
+      "classification": "manual",
+      "expectedEffect": "Might jump test minimum tier2, not a universal roll bonus."
+    },
+    {
+      "name": "Kit",
+      "kind": "feature",
+      "sourcePath": "en/unified/md/feature/fury/level-1/kit.md",
+      "sourceSha256": "45ddfe1c15df132735420d82f4f6b234d9c95c0d6f0219e41d6b865761c66ccf",
+      "classification": "build",
+      "expectedEffect": "May use a kit, here Mountain."
+    },
+    {
+      "name": "Primordial Strength",
+      "kind": "feature",
+      "sourcePath": "en/unified/md/feature/fury/level-1/primordial-strength.md",
+      "sourceSha256": "3091877c01fcbd6ac75c3d157e22a6f01428007ad91f317ed1fe5c62c7b35ab0",
+      "classification": "manual",
+      "expectedEffect": "Weapon strike against object extra M2; creature pushed into object extra M2. Contextual damage, not universal passive bonus."
+    },
+    {
+      "name": "Fury Abilities",
+      "kind": "entitlement",
+      "sourcePath": "en/unified/md/feature/fury/level-1/fury-abilities.md",
+      "sourceSha256": "decd69225fa66342128c942fd8dc43ec355842d78e166c44342bd4487b829838",
+      "classification": "build",
+      "expectedEffect": "Choose one signature, one3-Ferocity, one5-Ferocity."
+    },
+    {
+      "name": "Mountain",
+      "kind": "kit",
+      "sourcePath": "en/unified/md/kit/mountain.md",
+      "sourceSha256": "86bbe933d9511a3ce9b2754464b8056435dd1565431a5ba38166ab4d0f7d4ee6",
+      "classification": "build-and-manual",
+      "expectedEffect": "Heavy armor/heavy weapon; stamina+9 per echelon=>30 total; stability+2; melee weapon rolled damage0/0/+4; Pain for Pain already includes kit bonus."
+    },
+    {
+      "name": "Kit damage rules",
+      "kind": "baseline",
+      "sourcePath": "en/unified/md/chapter/kits.md",
+      "sourceSha256": "bc723dd87b9c660c589fb96f984b285b447eda457c468b89029fd11fec0d16ad",
+      "classification": "build",
+      "expectedEffect": "Bonuses apply Melee+Weapon rolled damage including Area Thunder Roar. Kit signature damage already includes bonuses; avoid double count."
+    },
+    {
+      "name": "Brutal Slam",
+      "kind": "ability",
+      "sourcePath": "en/unified/md/feature/ability/fury/level-1/brutal-slam.md",
+      "sourceSha256": "9e0509b539ca0b65af29204542e2c04469fb6f156d239517e1ec2b3f27a98bf3",
+      "classification": "manual-with-build-metadata",
+      "expectedEffect": "Main Melee1 Weapon Strike creature/object; roll M;3+M/6+M/9+M plus Mountain=>5/8/15; push1/2/4."
+    },
+    {
+      "name": "Out of the Way!",
+      "kind": "ability",
+      "sourcePath": "en/unified/md/feature/ability/fury/level-1/out-of-the-way.md",
+      "sourceSha256": "d8be9457814799c0dba8d78a8a03b33e7a12c36ba50dc653fadb7755b1b9bacd",
+      "classification": "manual-with-build-metadata",
+      "expectedEffect": "3 Ferocity Main Melee1 Weapon Strike one creature;3+M/5+M/8+M plus Mountain=>5/7/14, slide2/3/5; follow vacated squares; target shares opportunity damage you take from follow."
+    },
+    {
+      "name": "Thunder Roar",
+      "kind": "ability",
+      "sourcePath": "en/unified/md/feature/ability/fury/level-1/thunder-roar.md",
+      "sourceSha256": "6c2ee5ced4d6039dec1eea1ac08e54f68157887dcbcf0023476d5beec163f4c1",
+      "classification": "manual-with-build-metadata",
+      "expectedEffect": "5 Ferocity Main Area Melee Weapon,5x1 line within1 each enemy; roll M;6/9/13 plus Mountain=>6/9/17; push2/4/6 one at a time nearest first."
+    },
+    {
+      "name": "Lines of Force",
+      "kind": "ability",
+      "sourcePath": "en/unified/md/feature/ability/fury/level-1/lines-of-force.md",
+      "sourceSha256": "2dcf6106e449593727186c4c7b4d9201cbdddaa370210050b2426c36c77fb39b",
+      "classification": "manual",
+      "expectedEffect": "Triggered Magic Melee1 Self/creature when would be force moved; new same/smaller target, new source/destination/type push; distance+M2 or spend1 Ferocity+2M4."
+    },
+    {
+      "name": "Pain for Pain",
+      "kind": "ability",
+      "sourcePath": "en/unified/md/kit/mountain.md",
+      "sourceSha256": "86bbe933d9511a3ce9b2754464b8056435dd1565431a5ba38166ab4d0f7d4ee6",
+      "classification": "manual-with-build-metadata",
+      "expectedEffect": "Signature Main Melee1 Weapon Strike one creature;3+M/5+M/13+M=>5/7/15, already kit-included. If target damaged user since end last turn +M or A2, conditional manual."
+    },
+    {
+      "name": "Melee Weapon Free Strike",
+      "kind": "ability",
+      "sourcePath": "en/unified/md/feature/ability/common/melee-weapon-free-strike.md",
+      "sourceSha256": "f167bd66881e0452fd019e3b267bb9ab12cdb625fc82ca8765adb737bd3b9c93",
+      "classification": "manual-with-build-metadata",
+      "expectedEffect": "Melee1 Charge Weapon Strike;2+M/5+M/7+M plus Mountain=>4/7/13."
+    },
+    {
+      "name": "Ranged Weapon Free Strike",
+      "kind": "ability",
+      "sourcePath": "en/unified/md/feature/ability/common/ranged-weapon-free-strike.md",
+      "sourceSha256": "e2114794d3d21e5da051e9498f4760b39bfd3b6abe9d8a8d11077d406c775b8f",
+      "classification": "manual-with-build-metadata",
+      "expectedEffect": "Ranged5 Weapon Strike;2+M/4+M/6+M=>4/6/8, no ranged kit bonus."
+    },
+    {
+      "name": "Starting Size and Speed",
+      "kind": "baseline",
+      "sourcePath": "en/unified/md/rule/character/speed.md",
+      "sourceSha256": "ac435b9ab73fd3f594d3c304205e2d2937ed8b4726ca91e4f667e7486d7dfa6b",
+      "classification": "build",
+      "expectedEffect": "Default size1M speed5 stability0; selected trait and kit modify speed/stability."
+    },
+    {
+      "name": "Recovery value",
+      "kind": "baseline",
+      "sourcePath": "en/unified/md/rule/health/recoveries.md",
+      "sourceSha256": "2fe8aec0bbb138d3442ed3d8d3628911c20dd7ee9366f0dbdadc645b294e0fb9",
+      "classification": "build",
+      "expectedEffect": "floor30/3=10."
+    },
+    {
+      "name": "Winded",
+      "kind": "baseline",
+      "sourcePath": "en/unified/md/rule/health/winded.md",
+      "sourceSha256": "36cda2160d1b684e17feaa3ca8e04d453a01106554c1cbd3b0a51a53dc8885ee",
+      "classification": "build",
+      "expectedEffect": "Half maximum30=>15."
+    },
+    {
+      "name": "Disengage",
+      "kind": "baseline",
+      "sourcePath": "en/unified/md/feature/common/move-actions/disengage.md",
+      "sourceSha256": "54e4e50bbdece67a328baef4b64c2908391e323d223be9146c441e52379bfaba",
+      "classification": "build",
+      "expectedEffect": "Default shift1; no selected bonus."
+    },
+    {
+      "name": "Renown",
+      "kind": "baseline",
+      "sourcePath": "en/unified/md/rule/resource/renown.md",
+      "sourceSha256": "ad1b4918655fcc7e51d5c0daa1aa04619e5f11df59f4a9d870583162b3f7fb3c",
+      "classification": "build",
+      "expectedEffect": "Default0 plus Soldier1=>1."
+    },
+    {
+      "name": "Wealth",
+      "kind": "baseline",
+      "sourcePath": "en/unified/md/rule/resource/wealth.md",
+      "sourceSha256": "9d662cec851de19a09c65cc2d3db0e797647ec6934d9229fe6051d85c58169b9",
+      "classification": "build",
+      "expectedEffect": "Default wealth1, no selected adjustment."
+    },
+    {
+      "name": "Echelon",
+      "kind": "baseline",
+      "sourcePath": "en/unified/md/rule/general/echelon.md",
+      "sourceSha256": "fac3cc3050d9a364e7132fad67db7640b4d5a6e5152c5bfa277f1a50798580f3",
+      "classification": "build",
+      "expectedEffect": "Level1 is first echelon; Mountain stamina9 once."
+    },
+    {
+      "name": "Free strikes",
+      "kind": "entitlement",
+      "sourcePath": "en/unified/md/chapter/making-a-hero.md",
+      "sourceSha256": "9ee2dbccc874a9fae9c3aa814e802112d2330f98730681b3b32c1d305e252c87",
+      "classification": "build",
+      "expectedEffect": "Every hero receives melee and ranged weapon free strikes."
+    },
+    {
+      "name": "Persuade",
+      "kind": "skill",
+      "sourcePath": "en/unified/md/skill/interpersonal/persuade.md",
+      "sourceSha256": "21b4e6065561bdde76d3a3055e55fc58920926554902f01e3028873879ef9caf",
+      "classification": "manual",
+      "expectedEffect": "Distinct granted skill from audited pool; sourced description available, skill bonus applied to suitable tests."
+    },
+    {
+      "name": "Swim",
+      "kind": "skill",
+      "sourcePath": "en/unified/md/skill/exploration/swim.md",
+      "sourceSha256": "d5d4da74811a500502a805014ac9725063bc51c0f45733c7917725eaa23624f7",
+      "classification": "manual",
+      "expectedEffect": "Distinct granted skill from audited pool; sourced description available, skill bonus applied to suitable tests."
+    },
+    {
+      "name": "Blacksmithing",
+      "kind": "skill",
+      "sourcePath": "en/unified/md/skill/crafting/blacksmithing.md",
+      "sourceSha256": "1ff007d9fe2eec6a622bd351ed90258720a1777c89f6409da95818d7c6453318",
+      "classification": "manual",
+      "expectedEffect": "Distinct granted skill from audited pool; sourced description available, skill bonus applied to suitable tests."
+    },
+    {
+      "name": "Intimidate",
+      "kind": "skill",
+      "sourcePath": "en/unified/md/skill/interpersonal/intimidate.md",
+      "sourceSha256": "4c26564b73fa5e613d35252cff388d7c623cd49788e63c9b3f4baca4c469a177",
+      "classification": "manual",
+      "expectedEffect": "Distinct granted skill from audited pool; sourced description available, skill bonus applied to suitable tests."
+    },
+    {
+      "name": "Endurance",
+      "kind": "skill",
+      "sourcePath": "en/unified/md/skill/exploration/endurance.md",
+      "sourceSha256": "f4c47293f868b76b25f1af84a68f263fee2d73bb2fa3470795a1e69bf8c438d3",
+      "classification": "manual",
+      "expectedEffect": "Distinct granted skill from audited pool; sourced description available, skill bonus applied to suitable tests."
+    },
+    {
+      "name": "Alertness",
+      "kind": "skill",
+      "sourcePath": "en/unified/md/skill/intrigue/alertness.md",
+      "sourceSha256": "714c6458e1aaa81a8bd74f593c87f08c9b4633f5d747190db3e821ff977edb6f",
+      "classification": "manual",
+      "expectedEffect": "Distinct granted skill from audited pool; sourced description available, skill bonus applied to suitable tests."
+    },
+    {
+      "name": "Nature",
+      "kind": "skill",
+      "sourcePath": "en/unified/md/skill/lore/nature.md",
+      "sourceSha256": "59c2ceff3a420af937cae96031350b6473566b921866cbf739d42d0c0029e41a",
+      "classification": "manual",
+      "expectedEffect": "Distinct granted skill from audited pool; sourced description available, skill bonus applied to suitable tests."
+    },
+    {
+      "name": "Jump",
+      "kind": "skill",
+      "sourcePath": "en/unified/md/skill/exploration/jump.md",
+      "sourceSha256": "054edc0c5e2421e97f16bd9bace2b014dbd36f6a80f1f225b9e4d149ac519886",
+      "classification": "manual",
+      "expectedEffect": "Distinct granted skill from audited pool; sourced description available, skill bonus applied to suitable tests."
+    },
+    {
+      "name": "Climb",
+      "kind": "skill",
+      "sourcePath": "en/unified/md/skill/exploration/climb.md",
+      "sourceSha256": "a821115996819bbb4b95104d6a285068bddf08684177679fc787d90053e1214a",
+      "classification": "manual",
+      "expectedEffect": "Distinct granted skill from audited pool; sourced description available, skill bonus applied to suitable tests."
+    },
+    {
+      "name": "Lift",
+      "kind": "skill",
+      "sourcePath": "en/unified/md/skill/exploration/lift.md",
+      "sourceSha256": "e147a2614dc19541a7a18e27debc88e98666f55aa2254bbcbca4a9e2f4dea974",
+      "classification": "manual",
+      "expectedEffect": "Distinct granted skill from audited pool; sourced description available, skill bonus applied to suitable tests."
+    },
+    {
+      "name": "Level-two Perk entitlement",
+      "kind": "progression-source",
+      "sourcePath": "en/unified/md/feature/fury/level-2/perk.md",
+      "sourceSha256": "03dd0cc496ee21e8ab2c54bf8e0b2c75cabb95617f2a989540e0d4f57c04cd5d",
+      "classification": "source-and-build",
+      "expectedEffect": "One crafting, exploration or intrigue perk; chosen Danger Sense."
+    },
+    {
+      "name": "Level-two Aspect Feature entitlement",
+      "kind": "progression-source",
+      "sourcePath": "en/unified/md/feature/fury/level-2/2nd-level-aspect-feature.md",
+      "sourceSha256": "50b0a5c8da694c3bd66651751a8a3ffdff8811b04e25e3cf9cbc5f1c56b8bcec",
+      "classification": "source-and-build",
+      "expectedEffect": "Berserker automatically gains Unstoppable Force."
+    },
+    {
+      "name": "Unstoppable Force",
+      "kind": "progression-source",
+      "sourcePath": "en/unified/md/feature/fury/level-2/unstoppable-force.md",
+      "sourceSha256": "dc41865739c45f84abf93cca0514790526471416045cc8a4ef3bcebe921d0ac4",
+      "classification": "source-and-build",
+      "expectedEffect": "Charge can use a strike signature/heroic ability and can include jumping; readable manual feature."
+    },
+    {
+      "name": "Level-two Aspect Ability entitlement",
+      "kind": "progression-source",
+      "sourcePath": "en/unified/md/feature/fury/level-2/2nd-level-aspect-ability.md",
+      "sourceSha256": "eecfdab354b7ddb45292c366c37c600607ae28309f65a4ecea44671068e2b0cd",
+      "classification": "source-and-build",
+      "expectedEffect": "Exactly one Berserker option; pool established by Heroes book-clean context."
+    },
+    {
+      "name": "Wrecking Ball",
+      "kind": "progression-source",
+      "sourcePath": "en/unified/md/feature/ability/fury/level-2/wrecking-ball.md",
+      "sourceSha256": "2e4aecdb33e3e5a1f62539c940e8ea2b6d23d285a24ef75d757f2aef8fb44889",
+      "classification": "source-and-build",
+      "expectedEffect": "Chosen 5-Ferocity maneuver, Might roll +2, push1/2/3, no damage tiers; full body retains target sentence."
+    },
+    {
+      "name": "Special Delivery alternative",
+      "kind": "progression-source",
+      "sourcePath": "en/unified/md/feature/ability/fury/level-2/special-delivery.md",
+      "sourceSha256": "b78838722c130c9a538b1aaa4a8bb5025af7ed03319c091e9f48460552e7c0e4",
+      "classification": "source-and-build",
+      "expectedEffect": "Alternative legal Berserker choice, not granted in this fixture."
+    },
+    {
+      "name": "Danger Sense",
+      "kind": "progression-source",
+      "sourcePath": "en/unified/md/perk/danger-sense.md",
+      "sourceSha256": "73e8273150af9533b0fa08c622f74e562b5cdac4e8948d925e437c50671e78ba",
+      "classification": "source-and-build",
+      "expectedEffect": "Chosen exploration perk; conditional Alertness edge/no surprise in natural environments excluding settlements; 72h natural-disaster warning."
+    },
+    {
+      "name": "Echelons",
+      "kind": "progression-source",
+      "sourcePath": "en/unified/md/rule/general/echelon.md",
+      "sourceSha256": "fac3cc3050d9a364e7132fad67db7640b4d5a6e5152c5bfa277f1a50798580f3",
+      "classification": "source-and-build",
+      "expectedEffect": "Levels1 and2 both echelon1; Mountain remains +9 Stamina."
+    },
+    {
+      "name": "Half rounding",
+      "kind": "progression-source",
+      "sourcePath": "en/unified/md/rule/general/always-round-down.md",
+      "sourceSha256": "1e4cd0537a4759ae6d2cc5cb0b2e4280b59bb1d3d8d20386b71da8d582e14783",
+      "classification": "source-and-build",
+      "expectedEffect": "39/2 rounds down to19 winded value."
+    },
+    {
+      "name": "Experience",
+      "kind": "progression-source",
+      "sourcePath": "en/unified/md/rule/resource/experience.md",
+      "sourceSha256": "bdfa996fb3be65ad3322061ce4908b58a50990e7c0de3ca7ccb8323daf60cce1",
+      "classification": "source-and-build",
+      "expectedEffect": "Respite converts Victories to cumulative XP then resets Victories0."
+    },
+    {
+      "name": "Respite",
+      "kind": "progression-source",
+      "sourcePath": "en/unified/md/rule/resource/respite.md",
+      "sourceSha256": "ba840dca9cb7a945ebd9ffb0844b53ea303374f550874d61eb1f43512430ba50",
+      "classification": "source-and-build",
+      "expectedEffect": "24 uninterrupted hours; source restoration separate from build activation."
+    },
+    {
+      "name": "Heroic Advancement",
+      "kind": "progression-source",
+      "sourcePath": "en/unified/md/chapter/making-a-hero.md",
+      "sourceSha256": "9ee2dbccc874a9fae9c3aa814e802112d2330f98730681b3b32c1d305e252c87",
+      "classification": "source-and-build",
+      "expectedEffect": "Level2 requires16 cumulative XP; level during same respite; no automatic earlier-choice replacement entitlement."
+    },
+    {
+      "name": "Heroes book context: Berserker ability and perk pools",
+      "kind": "progression-source",
+      "sourcePath": "en/books/heroes/clean/Draw Steel Heroes.md",
+      "sourceSha256": "784677631b216450a738c1ce1aa33686816105cf20e683768d6a518e0cbd0d01",
+      "classification": "source-and-build",
+      "expectedEffect": "Berserker section lines9284\u20139314: Special Delivery/Wrecking Ball. Exploration Perks contains Danger Sense. Unified perks chapter is not Heroes."
+    }
+  ],
+  "transition": {
+    "fromLevel": 1,
+    "toLevel": 2,
+    "minimumStandardCumulativeXP": 16,
+    "admissionOffsetForLevelOne": 0,
+    "sourceTiming": "During the same respite in which sufficient Experience is gained.",
+    "selectionCount": 2,
+    "newGrants": ["Unstoppable Force", "Danger Sense", "Wrecking Ball"],
+    "noNewGrants": ["characteristic increase", "skill", "language", "ancestry trait points", "kit"],
+    "unchangedDamageTiers": true,
+    "wreckingBall": {
+      "cost": 5,
+      "resource": "ferocity",
+      "action": "Maneuver",
+      "keywords": ["Melee", "Weapon"],
+      "powerRollCharacteristic": "M",
+      "powerRollBonus": 2,
+      "pushTiers": [1, 2, 3],
+      "damageTiers": null
+    },
+    "restorationExamples": [
+      {
+        "oldCurrent": 20,
+        "oldMaximum": 30,
+        "newMaximum": 39,
+        "expectedCurrent": 20
+      },
+      {
+        "oldCurrent": -3,
+        "oldMaximum": 30,
+        "newMaximum": 39,
+        "expectedCurrent": -3
+      },
+      {
+        "oldCurrent": 35,
+        "oldMaximum": 39,
+        "newMaximum": 30,
+        "expectedCurrent": 30
+      }
+    ]
+  }
+}

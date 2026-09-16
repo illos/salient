@@ -35,6 +35,7 @@ import type * as lib_actors from "../lib/actors.js";
 import type * as lib_audience from "../lib/audience.js";
 import type * as lib_characterBuild from "../lib/characterBuild.js";
 import type * as lib_characterOperations from "../lib/characterOperations.js";
+import type * as lib_characterProgression from "../lib/characterProgression.js";
 import type * as lib_clock from "../lib/clock.js";
 import type * as lib_closeoutOperations from "../lib/closeoutOperations.js";
 import type * as lib_combatOperations from "../lib/combatOperations.js";
@@ -91,6 +92,7 @@ declare const fullApi: ApiFromModules<{
   "lib/audience": typeof lib_audience;
   "lib/characterBuild": typeof lib_characterBuild;
   "lib/characterOperations": typeof lib_characterOperations;
+  "lib/characterProgression": typeof lib_characterProgression;
   "lib/clock": typeof lib_clock;
   "lib/closeoutOperations": typeof lib_closeoutOperations;
   "lib/combatOperations": typeof lib_combatOperations;

@@ -1,0 +1,188 @@
+{
+  "result": "pass",
+  "characterId": "k174w2vad5kf7018n92kt14rzn8eg45s",
+  "campaignId": "jh7cv4gdp41b5cvtxn3a4gn0c58egc20",
+  "sourceRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+  "sourceGrantCount": 20,
+  "exactSourceTextMatches": true,
+  "allFixtureBaselineFieldsMatch": true,
+  "before": {
+    "level": 1,
+    "currentStamina": 20,
+    "maximumStamina": 30
+  },
+  "advanced": {
+    "level": 2,
+    "currentStamina": 20,
+    "maximumStamina": 39,
+    "recoveryValue": 13,
+    "windedValue": 19
+  },
+  "restored": {
+    "level": 1,
+    "currentStamina": 30,
+    "maximumStamina": 30,
+    "baselineExactlyMatchesOriginal": true,
+    "authoredExactlyMatchesOriginal": true
+  },
+  "history": [
+    {
+      "createdAt": 1789559784923.6199,
+      "id": "jx74rt56cv8f3ev9wcex3emntd8ehde0",
+      "isDraft": true,
+      "isEffective": true,
+      "kind": "restore",
+      "level": 1,
+      "parentRevisionId": "jx7by9tt4h1djr42teyrc760pd8eg8wp",
+      "restoredFromRevisionId": "jx78mgc037q2wh20qw53zbqnf18egh3c",
+      "revision": 4,
+      "status": "complete"
+    },
+    {
+      "createdAt": 1789559778491.052,
+      "id": "jx7by9tt4h1djr42teyrc760pd8eg8wp",
+      "isDraft": false,
+      "isEffective": false,
+      "kind": "level-up",
+      "level": 2,
+      "parentRevisionId": "jx78mgc037q2wh20qw53zbqnf18egh3c",
+      "restoredFromRevisionId": null,
+      "revision": 3,
+      "status": "complete"
+    },
+    {
+      "createdAt": 1789559763332.301,
+      "id": "jx78mgc037q2wh20qw53zbqnf18egh3c",
+      "isDraft": false,
+      "isEffective": false,
+      "kind": "full-edit",
+      "level": 1,
+      "parentRevisionId": "jx7cvkgd7hkwqzebe000wm2wa18egxae",
+      "restoredFromRevisionId": null,
+      "revision": 2,
+      "status": "complete"
+    },
+    {
+      "createdAt": 1789559761377.1035,
+      "id": "jx7cvkgd7hkwqzebe000wm2wa18egxae",
+      "isDraft": false,
+      "isEffective": false,
+      "kind": "creation",
+      "level": 1,
+      "parentRevisionId": null,
+      "restoredFromRevisionId": null,
+      "revision": 1,
+      "status": "incomplete"
+    }
+  ],
+  "sourceReadback": [
+    {
+      "name": "Silver Tongue",
+      "path": "vendor/steel-compendium/en/unified/md/feature/trait/devil/silver-tongue.md",
+      "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+    },
+    {
+      "name": "Beast Legs",
+      "path": "vendor/steel-compendium/en/unified/md/feature/trait/devil/beast-legs.md",
+      "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+    },
+    {
+      "name": "Impressive Horns",
+      "path": "vendor/steel-compendium/en/unified/md/feature/trait/devil/impressive-horns.md",
+      "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+    },
+    {
+      "name": "Culture edge",
+      "path": "vendor/steel-compendium/en/unified/md/chapter/background.md",
+      "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+    },
+    {
+      "name": "Ferocity",
+      "path": "vendor/steel-compendium/en/unified/md/feature/fury/level-1/ferocity.md",
+      "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+    },
+    {
+      "name": "Growing Ferocity",
+      "path": "vendor/steel-compendium/en/unified/md/feature/fury/level-1/growing-ferocity.md",
+      "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+    },
+    {
+      "name": "Mighty Leaps",
+      "path": "vendor/steel-compendium/en/unified/md/feature/fury/level-1/mighty-leaps.md",
+      "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+    },
+    {
+      "name": "Kit",
+      "path": "vendor/steel-compendium/en/unified/md/feature/fury/level-1/kit.md",
+      "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+    },
+    {
+      "name": "Primordial Strength",
+      "path": "vendor/steel-compendium/en/unified/md/feature/fury/level-1/primordial-strength.md",
+      "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+    },
+    {
+      "name": "Unstoppable Force",
+      "path": "vendor/steel-compendium/en/unified/md/feature/fury/level-2/unstoppable-force.md",
+      "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+    },
+    {
+      "name": "Teamwork",
+      "path": "vendor/steel-compendium/en/unified/md/perk/teamwork.md",
+      "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+    },
+    {
+      "name": "Danger Sense",
+      "path": "vendor/steel-compendium/en/unified/md/perk/danger-sense.md",
+      "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+    },
+    {
+      "name": "Brutal Slam",
+      "path": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-1/brutal-slam.md",
+      "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+    },
+    {
+      "name": "Out of the Way!",
+      "path": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-1/out-of-the-way.md",
+      "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+    },
+    {
+      "name": "Thunder Roar",
+      "path": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-1/thunder-roar.md",
+      "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+    },
+    {
+      "name": "Lines of Force",
+      "path": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-1/lines-of-force.md",
+      "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+    },
+    {
+      "name": "Pain for Pain",
+      "path": "vendor/steel-compendium/en/unified/md/kit/mountain.md",
+      "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+    },
+    {
+      "name": "Melee Weapon Free Strike",
+      "path": "vendor/steel-compendium/en/unified/md/feature/ability/common/melee-weapon-free-strike.md",
+      "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+    },
+    {
+      "name": "Ranged Weapon Free Strike",
+      "path": "vendor/steel-compendium/en/unified/md/feature/ability/common/ranged-weapon-free-strike.md",
+      "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+    },
+    {
+      "name": "Wrecking Ball",
+      "path": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-2/wrecking-ball.md",
+      "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+    }
+  ],
+  "rawReadback": {
+    "path": ".playtest/v32/application/readback.json",
+    "sha256": "42dff6d72071c5762faa8da9009dc8ffae23468dd7ceb61ca16b4b7c61b1179f"
+  },
+  "sourceLevelLabelsVerified": {
+    "Ferocity": "Class \u00b7 L1",
+    "Unstoppable Force": "Subclass \u00b7 L2"
+  }
+}

@@ -33,7 +33,7 @@ import type {
 } from '../shared/contracts/content.ts';
 import { parseFrontmatter, splitFrontmatter, type FrontmatterValue } from './lib/frontmatter.ts';
 
-export const GENERATOR_VERSION = '1.0.2';
+export const GENERATOR_VERSION = '1.0.3';
 export const SCHEMA_VERSION = 's01.1';
 export const SUBMODULE_PATH = 'vendor/steel-compendium';
 export const OUTPUT_DIR = 'shared/content/compendium';
@@ -59,6 +59,21 @@ export const SELECTIONS: ManifestSelection[] = [
     id: 'devil-ancestry',
     description: 'Devil ancestry and its traits.',
     paths: ['ancestry/devil.md', 'feature/trait/devil'],
+  },
+  {
+    id: 'fury-level-two',
+    description:
+      'V32 bounded Berserker Fury advancement: automatic feature, both aspect abilities and supported Danger Sense perk.',
+    paths: [
+      'feature/fury/level-2/unstoppable-force.md',
+      'feature/fury/level-2/perk.md',
+      'feature/fury/level-2/2nd-level-aspect-ability.md',
+      'feature/fury/level-2/2nd-level-aspect-feature.md',
+      'feature/ability/fury/level-2/special-delivery.md',
+      'feature/ability/fury/level-2/wrecking-ball.md',
+    ],
+    basis:
+      'docs/research/v32-fury-progression-contract.md: verified Fury level-two automatic and selected grants.',
   },
   {
     id: 'fury-level-one',

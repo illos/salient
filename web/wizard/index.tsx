@@ -18,18 +18,19 @@
  */
 import { useMemo, useState } from 'react';
 import { useNavigate } from '@tanstack/react-router';
-import { useMutation, useQuery } from 'convex/react';
+import { useConvex, useMutation, useQuery } from 'convex/react';
 import type { FunctionReturnType } from 'convex/server';
 import { api } from '../../convex/_generated/api';
 import type { Id } from '../../convex/_generated/dataModel';
-import { definitions } from '../../shared/content/level-one-decisions';
+import { definitions as levelOneDefinitions } from '../../shared/content/level-one-decisions';
+import { getDefinitions } from '../../shared/content/character-decisions';
 import type { CharacterAuthored } from '../../shared/characterDraft';
 import type {
   Diagnostic,
   EvaluationResult,
   SelectionValue,
 } from '../../shared/contracts/characterEvaluation';
-import type { Decision, Step } from '../../shared/evaluate/definitions';
+import type { Decision, DecisionDefinitions, Step } from '../../shared/evaluate/definitions';
 import {
   assignCharacteristic,
   assignmentError,
@@ -66,8 +67,6 @@ import { StepRail, type RailStep } from './rail';
 import { ChoiceList, ChoiceRow, ChoiceSection, StepNav, StepTitle } from './choice-list';
 import { HeroSoFar } from './hero-so-far';
 
-const decisions = indexDecisions(definitions);
-const PRESENTED: Step[] = definitions.steps.filter(step => step.presentedInV001);
 /** Authored decisions that are the character's own fields rather than selections. */
 const AUTHORED_FIELDS: Record<string, keyof CharacterAuthored> = {
   'details.name': 'name',
@@ -143,7 +142,11 @@ function PoolSelect({
 }
 
 /** Follow structural parents so inactive class/ancestry branches disappear as a unit. */
-function belongsToOtherBranch(decision: Decision, selections: Selections): boolean {
+function belongsToOtherBranch(
+  decision: Decision,
+  selections: Selections,
+  decisions: Map<string, Decision>,
+): boolean {
   const condition = decision.availableWhen;
   if (
     condition &&
@@ -153,11 +156,12 @@ function belongsToOtherBranch(decision: Decision, selections: Selections): boole
     return true;
   return (decision.dependsOn ?? []).some(parentId => {
     const parent = decisions.get(parentId);
-    return parent ? belongsToOtherBranch(parent, selections) : false;
+    return parent ? belongsToOtherBranch(parent, selections, decisions) : false;
   });
 }
 
-function DecisionEditor({
+export function DecisionEditor({
+  definitions = levelOneDefinitions,
   decision,
   step,
   selections,
@@ -166,6 +170,7 @@ function DecisionEditor({
   onAuthored,
   diagnostics,
 }: {
+  definitions?: DecisionDefinitions;
   decision: Decision;
   step: Step;
   selections: Selections;
@@ -174,6 +179,7 @@ function DecisionEditor({
   onAuthored: (value: CharacterAuthored) => void;
   diagnostics: Diagnostic[] | undefined;
 }) {
+  const decisions = useMemo(() => indexDecisions(definitions), [definitions]);
   const available = isAvailable(decision, selections, decisions);
   const value = selections[decision.id];
   const shape = decision.shape;
@@ -181,7 +187,7 @@ function DecisionEditor({
   const reference = <RuleLink {...decisionReference(decision, step)} />;
   // Parent-specific branches disappear together; unmet dependencies in the active branch still
   // explain the next choice. This keeps a second class from doubling every wizard section.
-  if (!available && belongsToOtherBranch(decision, selections)) return null;
+  if (!available && belongsToOtherBranch(decision, selections, decisions)) return null;
   if (!available)
     return (
       <ChoiceSection label={label} reference={reference} muted>
@@ -198,6 +204,7 @@ function DecisionEditor({
   else if (decision.kind === 'automatic')
     control = (
       <ul className="m-0 list-none p-0 text-sm">
+        {!decision.grants?.length && decision.quote && <li>{readableRuleText(decision.quote)}</li>}
         {(decision.grants ?? []).map((grant, i) => (
           <li key={i} className="flex items-center gap-2 py-0.5">
             {readableRuleText(grant.value)
@@ -350,7 +357,9 @@ function DecisionEditor({
       </div>
     );
   } else if (shape.type === 'assignment') {
-    control = <AssignmentEditor selections={selections} onSelect={onSelect} />;
+    control = (
+      <AssignmentEditor definitions={definitions} selections={selections} onSelect={onSelect} />
+    );
   }
   return (
     <ChoiceSection label={label} reference={reference}>
@@ -362,9 +371,11 @@ function DecisionEditor({
 
 /** Each repeated array value has its own draggable token; named selects use the same transition. */
 function AssignmentEditor({
+  definitions,
   selections,
   onSelect,
 }: {
+  definitions: DecisionDefinitions;
   selections: Selections;
   onSelect: (id: string, value: SelectionValue | undefined) => void;
 }) {
@@ -496,7 +507,10 @@ function hasInteractiveDecision(step: Step): boolean {
 }
 
 function Wizard({ character }: { character: LoadedCharacter }) {
+  const definitions = useMemo(() => getDefinitions(character.level), [character.level]);
+  const PRESENTED = definitions.steps.filter(step => step.presentedInV001);
   const navigate = useNavigate();
+  const client = useConvex();
   const save = useMutation(api.characters.save);
   const command = useCommand();
   const [selections, setSelections] = useState<Selections>(() =>
@@ -504,17 +518,32 @@ function Wizard({ character }: { character: LoadedCharacter }) {
   );
   const [authored, setAuthored] = useState<CharacterAuthored>(character.authored);
   const [expectedRevision, setExpectedRevision] = useState(character.revision);
+  const [expectedEffectiveRevisionId, setExpectedEffectiveRevisionId] = useState(
+    character.effectiveRevisionId,
+  );
+  const [reconciled, setReconciled] = useState(false);
   const [stepIndex, setStepIndex] = useState(0);
   const [reached, setReached] = useState(0);
   const [saved, setSaved] = useState(false);
   const [dirty, setDirty] = useState(false);
   const [cleared, setCleared] = useState<string[]>([]);
-  const stale = character.revision !== expectedRevision;
-  const draft = useMemo(() => draftSelectionsFrom(selections, definitions), [selections]);
-  const evaluation = useQuery(api.characters.evaluate, { selections: draft }) as
-    EvaluationResult | undefined;
+  const stale =
+    character.revision !== expectedRevision ||
+    character.effectiveRevisionId !== expectedEffectiveRevisionId;
+  const draft = useMemo(
+    () => draftSelectionsFrom(selections, definitions),
+    [selections, definitions],
+  );
+  const evaluation = useQuery(api.characters.evaluate, {
+    selections: draft,
+    targetLevel: character.level,
+  }) as EvaluationResult | undefined;
   const step = PRESENTED[stepIndex]!;
-  const canSave = !command.pending && !stale && !character.combatLocked;
+  const canSave =
+    !command.pending &&
+    !stale &&
+    !character.combatLocked &&
+    (!character.fullEditIsStale || reconciled);
   function goTo(index: number) {
     setStepIndex(index);
     setReached(r => Math.max(r, index));
@@ -545,10 +574,19 @@ function Wizard({ character }: { character: LoadedCharacter }) {
           commandId,
           characterId: character.id,
           expectedRevision,
+          expectedEffectiveRevisionId,
           authored,
           selections: draft,
+          targetLevel: character.level,
         });
         setExpectedRevision(revision);
+        // An already-effective standalone build follows its own complete saves. Accept only
+        // this acknowledged revision; another tab's newer save must still make this editor stale.
+        if (!character.campaignId && expectedEffectiveRevisionId) {
+          const current = await client.query(api.characters.get, { characterId: character.id });
+          if (current.revision === revision && !current.campaignId && current.draftIsEffective)
+            setExpectedEffectiveRevisionId(current.effectiveRevisionId);
+        }
       },
       JSON.stringify(['characters.save', character.id, expectedRevision, authored, draft]),
     );
@@ -621,6 +659,20 @@ function Wizard({ character }: { character: LoadedCharacter }) {
         </div>
         <section className="flex min-h-0 flex-col" aria-label="Current step">
           <div className="min-h-0 flex-1 overflow-y-auto px-10 pt-8 pb-8" data-wizard-pane="centre">
+            {character.fullEditIsStale && (
+              <Notice className="mb-4">
+                Your effective build advanced after this draft was saved. Review its earlier choices
+                and level before saving a reconciled full edit. Saving does not activate it.
+                <label className="mt-2 flex items-center gap-2">
+                  <input
+                    type="checkbox"
+                    checked={reconciled}
+                    onChange={event => setReconciled(event.target.checked)}
+                  />
+                  I reviewed this draft against the current effective build.
+                </label>
+              </Notice>
+            )}
             {stale && (
               <Notice className="mb-4">
                 A newer saved version exists. Reload the page before saving.
@@ -655,6 +707,7 @@ function Wizard({ character }: { character: LoadedCharacter }) {
               <DecisionEditor
                 key={decision.id}
                 decision={decision}
+                definitions={definitions}
                 step={step}
                 selections={selections}
                 onSelect={select}

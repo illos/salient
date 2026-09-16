@@ -222,11 +222,15 @@ const FEATURE_CATEGORY: Record<SheetFeature['kind'], string> = {
 
 export function featureCategory(feature: SheetFeature, level: number | undefined): string {
   const base = FEATURE_CATEGORY[feature.kind];
+  // A source's grant level is independent of the hero's current level. Do not relabel
+  // inherited features when advancing; omit a level when the source does not identify one.
+  const sourceLevel = /(?:^|\/)level-(\d+)\//.exec(feature.sourcePath)?.[1];
   if (
     (feature.kind === 'class-feature' || feature.kind === 'aspect-feature') &&
-    level !== undefined
+    level !== undefined &&
+    sourceLevel
   )
-    return `${base} · L${level}`;
+    return `${base} · L${sourceLevel}`;
   return base;
 }
 

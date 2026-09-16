@@ -1674,6 +1674,72 @@
     }
   },
   {
+    "id": "mcdm.heroes.v1/feature.ability.fury.level-2/special-delivery",
+    "kind": "ability",
+    "name": "Special Delivery",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-2/special-delivery.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/fury/level-2/special-delivery.json",
+    "selection": "fury-level-two",
+    "text": "---\naction_type: '[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: fury\ncost: 5 Ferocity\ndistance: '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1'\neffects:\n    - effect: You vertically [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) the target up to 4 squares. This [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) ignores the target's [stability](scc.v1:mcdm.heroes.v1/rule.character/stability), and the target takes no damage from colliding with creatures or objects. At the end of this movement, the target can make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) that deals extra damage equal to your [Might](scc.v1:mcdm.heroes.v1/rule.character/might) score.\n      name: Effect\nflavor: You ready?\nkeywords:\n    - '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)'\n    - Weapon\nlevel: \"2\"\nname: Special Delivery\nscc: mcdm.heroes.v1/feature.ability.fury.level-2/special-delivery\ntarget: One willing ally\ntype: ability\n---\n\n\n*You ready?*\n\n| **[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee), Weapon** |            **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|-------------------|------------------------:|\n| **📏 [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1**    | **🎯 One willing ally** |\n\n**Effect:** You vertically [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) the target up to 4 squares. This [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) ignores the target's [stability](scc.v1:mcdm.heroes.v1/rule.character/stability), and the target takes no damage from colliding with creatures or objects. At the end of this movement, the target can make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) that deals extra damage equal to your [Might](scc.v1:mcdm.heroes.v1/rule.character/might) score.\n",
+    "structured": {
+      "action_type": "[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "fury",
+      "cost": "5 Ferocity",
+      "distance": "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1",
+      "effects": [
+        {
+          "effect": "You vertically [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) the target up to 4 squares. This [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) ignores the target's [stability](scc.v1:mcdm.heroes.v1/rule.character/stability), and the target takes no damage from colliding with creatures or objects. At the end of this movement, the target can make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) that deals extra damage equal to your [Might](scc.v1:mcdm.heroes.v1/rule.character/might) score.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "You ready?",
+      "keywords": [
+        "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)",
+        "Weapon"
+      ],
+      "level": "2",
+      "target": "One willing ally"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.fury.level-2/wrecking-ball",
+    "kind": "ability",
+    "name": "Wrecking Ball",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-2/wrecking-ball.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/fury/level-2/wrecking-ball.json",
+    "selection": "fury-level-two",
+    "text": "---\naction_type: '[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: fury\ncost: 5 Ferocity\ndistance: Self; see below\neffects:\n    - effect: You move up to your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) in a straight line. During this movement, you can move through mundane structures, including walls, which are [difficult terrain](scc.v1:mcdm.heroes.v1/movement/difficult-terrain) for you. You automatically destroy each square of structure you move through and leave behind a square of [difficult terrain](scc.v1:mcdm.heroes.v1/movement/difficult-terrain).\n      name: Effect\n    - roll: Power Roll + [Might](scc.v1:mcdm.heroes.v1/rule.character/might)\n      tier1: '[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1'\n      tier2: '[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2'\n      tier3: '[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3'\nflavor: It's easier to destroy than to create. Much easier, in fact!\nkeywords:\n    - '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)'\n    - Weapon\nlevel: \"2\"\nname: Wrecking Ball\npower_roll_characteristic: '[Might](scc.v1:mcdm.heroes.v1/rule.character/might)'\nscc: mcdm.heroes.v1/feature.ability.fury.level-2/wrecking-ball\ntarget: Self\ntier1: '[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1'\ntier2: '[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2'\ntier3: '[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3'\ntype: ability\n---\n\n\n*It's easier to destroy than to create. Much easier, in fact!*\n\n| **[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee), Weapon**      | **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|------------------------|-------------:|\n| **📏 Self; see below** |  **🎯 Self** |\n\n**Effect:** You move up to your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) in a straight line. During this movement, you can move through mundane structures, including walls, which are [difficult terrain](scc.v1:mcdm.heroes.v1/movement/difficult-terrain) for you. You automatically destroy each square of structure you move through and leave behind a square of [difficult terrain](scc.v1:mcdm.heroes.v1/movement/difficult-terrain).\n\nAdditionally, you make one [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) that targets each enemy you move [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to during this movement.\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Might](scc.v1:mcdm.heroes.v1/rule.character/might):**\n\n- **≤11:** [Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1\n- **12-16:** [Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2\n- **17+:** [Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3\n",
+    "structured": {
+      "action_type": "[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "fury",
+      "cost": "5 Ferocity",
+      "distance": "Self; see below",
+      "effects": [
+        {
+          "effect": "You move up to your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) in a straight line. During this movement, you can move through mundane structures, including walls, which are [difficult terrain](scc.v1:mcdm.heroes.v1/movement/difficult-terrain) for you. You automatically destroy each square of structure you move through and leave behind a square of [difficult terrain](scc.v1:mcdm.heroes.v1/movement/difficult-terrain).",
+          "name": "Effect"
+        },
+        {
+          "roll": "Power Roll + [Might](scc.v1:mcdm.heroes.v1/rule.character/might)",
+          "tier1": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
+          "tier2": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
+          "tier3": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3"
+        }
+      ],
+      "flavor": "It's easier to destroy than to create. Much easier, in fact!",
+      "keywords": [
+        "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)",
+        "Weapon"
+      ],
+      "level": "2",
+      "power_roll_characteristic": "[Might](scc.v1:mcdm.heroes.v1/rule.character/might)",
+      "target": "Self",
+      "tier1": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
+      "tier2": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
+      "tier3": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3"
+    }
+  },
+  {
     "id": "mcdm.heroes.v1/feature.ability.polder/shadowmeld",
     "kind": "ability",
     "name": "Shadowmeld",

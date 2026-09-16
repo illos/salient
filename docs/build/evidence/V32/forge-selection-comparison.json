@@ -1,0 +1,48 @@
+{
+  "result": "pass",
+  "actualExport": ".playtest/v32/forge-reference/Grug-level-2.ds-hero",
+  "level": 2,
+  "activeGrantsMatched": [
+    "Silver Tongue",
+    "Beast Legs",
+    "Impressive Horns",
+    "Teamwork",
+    "Danger Sense",
+    "Ferocity",
+    "Growing Ferocity",
+    "Mighty Leaps",
+    "Kit",
+    "Primordial Strength",
+    "Unstoppable Force",
+    "Brutal Slam",
+    "Out of the Way!",
+    "Thunder Roar",
+    "Lines of Force",
+    "Pain for Pain",
+    "Wrecking Ball"
+  ],
+  "skills": [
+    "Alertness",
+    "Blacksmithing",
+    "Climb",
+    "Endurance",
+    "Intimidate",
+    "Jump",
+    "Lift",
+    "Nature",
+    "Persuade",
+    "Swim"
+  ],
+  "characteristics": {
+    "M": 2,
+    "A": 2,
+    "R": 0,
+    "I": 1,
+    "P": 0
+  },
+  "normalizations": [
+    "Case-insensitive grant names: Forge serializes Pain For Pain; pinned source is Pain for Pain."
+  ],
+  "scope": "Only level<=2 features, selected subclass, nested chosen options, selected kits and selected class ability IDs were traversed. Unselected alternatives and later levels excluded.",
+  "sharedGrantLimits": "Culture edge and both free strikes are shared grants rather than serialized class choices; checked separately against pinned source and captured Forge sheet text/metadata."
+}

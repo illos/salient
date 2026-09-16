@@ -1,0 +1,368 @@
+{
+  "schemaVersion": "v32-forge-reference-1",
+  "capturedDate": "2026-09-16",
+  "website": "https://forgesteel.net/",
+  "websiteVersionObserved": "14.199.0",
+  "pinnedForgeVersion": "14.197.0",
+  "pinnedForgeCommit": "5a846aadb623a9855a023e9403bb887a956c341f",
+  "compendiumRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+  "purpose": "Reference observation for V32 Fury level-one to level-two progression; pinned Compendium remains sole game-rules authority.",
+  "workflow": [
+    "Created Grug from scratch through the actual website Hero Builder UI, matching tests/fixtures/v25-fury.json selections. No programmatic hero payload fabrication.",
+    "Saved level one and used Export > Export as Data to download Grug-level-1.ds-hero.",
+    "Imported that exact file through Heroes > Add > Import a Hero File, opened Edit > Class > Class Choices and increased level from one to two.",
+    "Selected Danger Sense and Wrecking Ball in Level 2 Choices, saved and downloaded Grug-level-2.ds-hero through actual export UI.",
+    "Imported the level-two export through actual file picker, reloaded, photographed the rendered sheet and re-exported.",
+    "Also reimported the original level-one file and re-exported it separately to verify preservation at both levels."
+  ],
+  "sourcebookIDs": [
+    "core",
+    "orden",
+    "beastheart",
+    "summoner"
+  ],
+  "baselineFixture": "tests/fixtures/v25-fury.json",
+  "levelTwoFixture": "tests/fixtures/v32-fury-level-two.json",
+  "identity": {
+    "name": "Grug",
+    "ancestry": "Devil",
+    "class": "Fury",
+    "subclass": "Berserker",
+    "career": "Soldier",
+    "kit": "Mountain"
+  },
+  "observedChoices": {
+    "levelOneClassAbilityIDs": [
+      {
+        "featureID": "fury-1-5",
+        "selectedIDs": [
+          "fury-ability-1"
+        ]
+      },
+      {
+        "featureID": "fury-1-6",
+        "selectedIDs": [
+          "fury-ability-6"
+        ]
+      },
+      {
+        "featureID": "fury-1-7",
+        "selectedIDs": [
+          "fury-ability-11"
+        ]
+      }
+    ],
+    "levelTwoPerk": {
+      "featureID": "fury-2-1",
+      "selectedID": "perk-danger-sense",
+      "name": "Danger Sense"
+    },
+    "levelTwoAspectAbility": {
+      "featureID": "fury-sub-1-2-2",
+      "selectedID": "fury-sub-1-2-2b",
+      "name": "Wrecking Ball"
+    },
+    "levelTwoAutomaticFeature": {
+      "featureID": "fury-sub-1-2-1",
+      "name": "Unstoppable Force"
+    },
+    "deferredSoldierLanguage": {
+      "count": 2,
+      "selected": [
+        "Vaslorian"
+      ],
+      "unselectedSlots": 1
+    }
+  },
+  "renderedSheetObservations": {
+    "levelOne": {
+      "level": 1,
+      "stamina": 30,
+      "recoveries": 10,
+      "recoveryValue": 10,
+      "xp": 0
+    },
+    "levelTwo": {
+      "level": 2,
+      "stamina": 39,
+      "recoveries": 10,
+      "recoveryValue": 13,
+      "xp": 16
+    },
+    "unchanged": {
+      "characteristics": {
+        "M": 2,
+        "A": 2,
+        "R": 0,
+        "I": 1,
+        "P": 0
+      },
+      "size": "1M",
+      "speed": 6,
+      "stability": 2,
+      "disengage": 1,
+      "saveThreshold": 5,
+      "ferocity": 0,
+      "renown": 1,
+      "wealth": 1,
+      "skills": [
+        "Alertness",
+        "Blacksmithing",
+        "Climb",
+        "Endurance",
+        "Intimidate",
+        "Jump",
+        "Lift",
+        "Nature",
+        "Persuade",
+        "Swim"
+      ],
+      "languages": [
+        "Anjali",
+        "Caelian",
+        "Vaslorian"
+      ]
+    },
+    "levelTwoAbilityDamageTiers": {
+      "Brutal Slam": [
+        5,
+        8,
+        15
+      ],
+      "Pain for Pain": [
+        5,
+        7,
+        15
+      ],
+      "Out of the Way!": [
+        5,
+        7,
+        14
+      ],
+      "Thunder Roar": [
+        6,
+        9,
+        17
+      ],
+      "Melee Weapon Free Strike": [
+        4,
+        7,
+        13
+      ],
+      "Ranged Weapon Free Strike": [
+        4,
+        6,
+        8
+      ]
+    },
+    "wreckingBall": {
+      "cost": 5,
+      "action": "Maneuver",
+      "keywords": [
+        "Melee",
+        "Weapon"
+      ],
+      "powerRollBonus": 2,
+      "tiers": [
+        "Push 1",
+        "Push 2",
+        "Push 3"
+      ],
+      "movementLimit": 6
+    }
+  },
+  "roundTrips": [
+    {
+      "level": 1,
+      "result": "pass",
+      "changedTopLevelKeys": [
+        "id"
+      ],
+      "explanation": "Import into a profile already holding this hero regenerates the colliding hero ID. Every other exported field is deeply equal."
+    },
+    {
+      "level": 2,
+      "result": "pass",
+      "changedTopLevelKeys": [
+        "id"
+      ],
+      "explanation": "Import into a profile already holding this hero regenerates the colliding hero ID. Every other exported field is deeply equal."
+    }
+  ],
+  "differencesAndLimits": [
+    {
+      "subject": "Website version",
+      "observation": "Live website is 14.199.0; the source reference remains pinned to 14.197.0. Neither source pin was advanced."
+    },
+    {
+      "subject": "Deferred language",
+      "observation": "Forge displays I Speak Their Language (Soldier) for the unselected language slot and marks Career In Progress. Its export has only Vaslorian selected; this is not a fourth granted language. The existing audited Grug deliberately retains one lawful deferred Soldier language."
+    },
+    {
+      "subject": "Wrecking Ball distance/target labels",
+      "observation": "Forge puts see below on target: distance Self, target Self; see below. Pinned Compendium puts it on distance: distance Self; see below, target Self. Movement and adjacent-enemy roll text are present; Salient must preserve source labels."
+    },
+    {
+      "subject": "Experience",
+      "observation": "The website sets XP to 16 when the editor level increases to two. This is reference-site behavior, not authorization for Salient to award campaign XP as a side effect of advancement."
+    },
+    {
+      "subject": "Level definitions versus active grants",
+      "observation": "Both files embed higher-level definitions and unselected options. Only class levels <= current level, the selected Berserker branch and actual nested selections establish active grants; Special Delivery is present as an option but was not selected."
+    },
+    {
+      "subject": "Winded",
+      "observation": "Rendered desktop Hero tab captured Stamina and Recovery Value but did not display winded threshold. Winded19 remains an independent pinned-source expectation rather than a Forge screenshot observation."
+    },
+    {
+      "subject": "Scope",
+      "observation": "These are actual Forge Steel UI exports and Forge Steel reimport/export comparisons. They do not implement or verify Salient import/export, campaign advancement, progression history, live resource reconciliation or table automation."
+    }
+  ],
+  "artifacts": [
+    {
+      "path": ".playtest/v32/forge-reference/Forge-version.png",
+      "bytes": 115036,
+      "sha256": "71d55072d40a0c6dd4701e00d73026ce481d607c1354d36387c20dfca458c17c",
+      "capturedAt": "2026-09-16T10:50:43.244Z"
+    },
+    {
+      "path": ".playtest/v32/forge-reference/Forge-version.txt",
+      "bytes": 2233,
+      "sha256": "f5a015ce8b0760e4c51851ad48263191783dd9fcf3cfa9b5bc495859ffa9298f",
+      "capturedAt": "2026-09-16T10:50:43.246Z"
+    },
+    {
+      "path": ".playtest/v32/forge-reference/Grug-level-1-reimported.ds-hero",
+      "bytes": 131910,
+      "sha256": "cdbc066a7584c154881d1ddf88ec07fc131d39249f17f6da9c15c44550cbdc1e",
+      "capturedAt": "2026-09-16T10:50:30.425Z"
+    },
+    {
+      "path": ".playtest/v32/forge-reference/Grug-level-1-sheet.png",
+      "bytes": 113082,
+      "sha256": "87aa467addf1f71ebc17036c46dfbd74c3433f6fa92dda703a363342d469c128",
+      "capturedAt": "2026-09-16T10:50:30.003Z"
+    },
+    {
+      "path": ".playtest/v32/forge-reference/Grug-level-1-sheet.txt",
+      "bytes": 1442,
+      "sha256": "46e2bb0856e27fffaca61e657ac94555c79d39e4d3015900d55bc63a82968a5e",
+      "capturedAt": "2026-09-16T10:50:30.005Z"
+    },
+    {
+      "path": ".playtest/v32/forge-reference/Grug-level-1.ds-hero",
+      "bytes": 131910,
+      "sha256": "efa8fe3c77d96fe80fc4721618e6c2cffef30f6123dd8fc9f47a3c6c71d84270",
+      "capturedAt": "2026-09-16T10:38:56.177Z"
+    },
+    {
+      "path": ".playtest/v32/forge-reference/Grug-level-2-choices.png",
+      "bytes": 135073,
+      "sha256": "5760ef2d2e3ede010f275ec4102b5eddccc1da4df454c9f78a9cbe8cb84c6c93",
+      "capturedAt": "2026-09-16T10:40:11.482Z"
+    },
+    {
+      "path": ".playtest/v32/forge-reference/Grug-level-2-choices.txt",
+      "bytes": 1896,
+      "sha256": "b0750a8e4a6de11534096a7a86ef2dbbe7db225644aae751ef70cae3516a6b7b",
+      "capturedAt": "2026-09-16T10:40:11.416Z"
+    },
+    {
+      "path": ".playtest/v32/forge-reference/Grug-level-2-features.png",
+      "bytes": 146611,
+      "sha256": "faaa050f8c42c711cba1a8390ef12cced0674f65993bb0d0a34f10dfa606ecc3",
+      "capturedAt": "2026-09-16T10:40:28.888Z"
+    },
+    {
+      "path": ".playtest/v32/forge-reference/Grug-level-2-features.txt",
+      "bytes": 2734,
+      "sha256": "43ee8e8f1967ed1cb00c07205963b52d0fd5b45f81fab180f0cde2ab19c80229",
+      "capturedAt": "2026-09-16T10:40:28.890Z"
+    },
+    {
+      "path": ".playtest/v32/forge-reference/Grug-level-2-free-strikes.png",
+      "bytes": 99947,
+      "sha256": "ff8898b64d629ca841fc30b31f4b680babe3e839e6a184620719e64324bfafaf",
+      "capturedAt": "2026-09-16T10:40:44.154Z"
+    },
+    {
+      "path": ".playtest/v32/forge-reference/Grug-level-2-free-strikes.txt",
+      "bytes": 1276,
+      "sha256": "129bf588b5508400aec473c2a3fcf0a839352bbb1961cd8d52a6cf76f7dbe233",
+      "capturedAt": "2026-09-16T10:40:44.156Z"
+    },
+    {
+      "path": ".playtest/v32/forge-reference/Grug-level-2-mains.png",
+      "bytes": 173527,
+      "sha256": "98c4ce100f1546ded9477908ecaa0ff0d55ef99c26d1a5a6c0dc6a0f3c4c62f7",
+      "capturedAt": "2026-09-16T10:40:43.528Z"
+    },
+    {
+      "path": ".playtest/v32/forge-reference/Grug-level-2-mains.txt",
+      "bytes": 2371,
+      "sha256": "0d1d59c09c8af1c90f7010f6f1304dad8d38a8a742da95fe9b3b5c5b31b60964",
+      "capturedAt": "2026-09-16T10:40:43.530Z"
+    },
+    {
+      "path": ".playtest/v32/forge-reference/Grug-level-2-maneuvers.png",
+      "bytes": 121810,
+      "sha256": "3c724f726e4b27fc0055fcab74fff570af58598476d9fd1671c70a945817c31e",
+      "capturedAt": "2026-09-16T10:40:43.757Z"
+    },
+    {
+      "path": ".playtest/v32/forge-reference/Grug-level-2-maneuvers.txt",
+      "bytes": 1548,
+      "sha256": "9d2ae133bef5d349d94baff6581dd1e0e54b0c5cf0b8b1ca96e4b445377ece08",
+      "capturedAt": "2026-09-16T10:40:43.758Z"
+    },
+    {
+      "path": ".playtest/v32/forge-reference/Grug-level-2-reimported-sheet.png",
+      "bytes": 113511,
+      "sha256": "e49a65b5e141bfb61499c8a50865c42df200cf2596df45147f936b4d8e970c66",
+      "capturedAt": "2026-09-16T10:40:56.438Z"
+    },
+    {
+      "path": ".playtest/v32/forge-reference/Grug-level-2-reimported-sheet.txt",
+      "bytes": 1453,
+      "sha256": "84dea882215acc1850db77bb55c0b975c5ba26a0d3f56510092de5c996fe2a42",
+      "capturedAt": "2026-09-16T10:40:56.440Z"
+    },
+    {
+      "path": ".playtest/v32/forge-reference/Grug-level-2-reimported.ds-hero",
+      "bytes": 134508,
+      "sha256": "1cda79ab86827365be3354be85a63d28deab6772050e1725e322a45b90189681",
+      "capturedAt": "2026-09-16T10:40:55.332Z"
+    },
+    {
+      "path": ".playtest/v32/forge-reference/Grug-level-2-sheet.png",
+      "bytes": 113511,
+      "sha256": "e49a65b5e141bfb61499c8a50865c42df200cf2596df45147f936b4d8e970c66",
+      "capturedAt": "2026-09-16T10:40:28.645Z"
+    },
+    {
+      "path": ".playtest/v32/forge-reference/Grug-level-2-sheet.txt",
+      "bytes": 1453,
+      "sha256": "84dea882215acc1850db77bb55c0b975c5ba26a0d3f56510092de5c996fe2a42",
+      "capturedAt": "2026-09-16T10:40:28.647Z"
+    },
+    {
+      "path": ".playtest/v32/forge-reference/Grug-level-2-triggers.png",
+      "bytes": 117812,
+      "sha256": "72b728a03ea4ea26193418f13f4ff4e981bc2145f05f96c9477a3f9a4a504c73",
+      "capturedAt": "2026-09-16T10:40:43.956Z"
+    },
+    {
+      "path": ".playtest/v32/forge-reference/Grug-level-2-triggers.txt",
+      "bytes": 1554,
+      "sha256": "6a968299299801a9c0ac9d923e5468fead12aaa54c5c88b11b01a6c05968faff",
+      "capturedAt": "2026-09-16T10:40:43.957Z"
+    },
+    {
+      "path": ".playtest/v32/forge-reference/Grug-level-2.ds-hero",
+      "bytes": 134508,
+      "sha256": "707adb5bd26efcef34b5f72752a49a1bb2bcc8f3a19b7b622642deb08b650d10",
+      "capturedAt": "2026-09-16T10:40:18.653Z"
+    }
+  ]
+}

@@ -127,7 +127,8 @@ function SubmitControls({ characterId }: { characterId: Id<'characters'> }) {
   const canSubmit =
     character.status === 'complete' &&
     !pending &&
-    !character.draftIsEffective &&
+    (!character.campaignId || !character.draftIsEffective) &&
+    !character.fullEditIsStale &&
     !!target &&
     !character.combatLocked;
   const action = buttonVariants({
@@ -197,9 +198,11 @@ function SubmitControls({ characterId }: { characterId: Id<'characters'> }) {
             title={
               character.status !== 'complete'
                 ? `The build is ${character.status}; finish it in the wizard first.`
-                : character.draftIsEffective
-                  ? 'The saved build is already the effective one.'
-                  : undefined
+                : character.fullEditIsStale
+                  ? 'Review and save this older draft in the editor before submitting.'
+                  : character.campaignId && character.draftIsEffective
+                    ? 'The saved build is already the effective one.'
+                    : undefined
             }
             onClick={() =>
               target &&
@@ -210,10 +213,15 @@ function SubmitControls({ characterId }: { characterId: Id<'characters'> }) {
               )
             }
           >
-            {character.effectiveRevisionId ? 'Submit edit for review' : 'Submit for admission'}
+            {character.campaignId ? 'Submit edit for review' : 'Submit for admission'}
           </Button>
         )}
       </div>
+      {character.fullEditIsStale && (
+        <p className="text-xs text-muted-foreground">
+          This draft predates the effective build. Open Edit to review and reconcile it.
+        </p>
+      )}
       {pending ? (
         <Badge variant="outline">
           {pending.kind} awaiting review in {pending.campaignName} (revision {pending.revision})
@@ -284,6 +292,15 @@ export function CharacterPage({ characterId }: { characterId: Id<'characters'> }
                 <option value="draft">Draft preview</option>
               </select>
             </label>
+          )}
+          {sheet.audience !== 'peer' && (
+            <Link
+              to="/characters/$characterId/progression"
+              params={{ characterId }}
+              className={buttonVariants({ variant: 'outline', size: 'sm' })}
+            >
+              Progression
+            </Link>
           )}
           {owner && <SubmitControls characterId={characterId} />}
         </div>

@@ -7,6 +7,7 @@
  * the only place values are derived.
  */
 import { definitions } from '../../shared/content/level-one-decisions';
+import { getDefinitions } from '../../shared/content/character-decisions';
 import type { DerivedBaseline, EvaluationResult } from '../../shared/contracts/characterEvaluation';
 import { evaluateCharacter, selectionsFrom } from '../../shared/evaluate/character';
 import type { DraftSelection } from '../../shared/characterDraft';
@@ -14,12 +15,13 @@ import type { DraftSelection } from '../../shared/characterDraft';
 export { definitions };
 
 /** Evaluates saved selections against the pinned definitions (deterministic, no side effects). */
-export function evaluateSelections(selections: DraftSelection[]): EvaluationResult {
+export function evaluateSelections(selections: DraftSelection[], level = 1): EvaluationResult {
+  const definitions = getDefinitions(level);
   return evaluateCharacter(
     {
       definitionsSchemaVersion: 'r01.1',
       compendiumRevision: definitions.compendiumRevision,
-      level: 1,
+      level,
       selections: selectionsFrom(selections),
     },
     definitions,
@@ -138,9 +140,12 @@ export async function activateRevision(
     derivedBaseline: baseline,
     campaignId,
   };
+  if (character.campaignId !== campaignId)
+    patch.entryLevelXpOffset = ((revision.level ?? baseline.level.value) - 1) * 16;
   const firstAdmission = character.liveState === null;
   if (firstAdmission) {
     patch.liveState = initialHeroLive(baseline, revision._id, evaluation.evaluatedAgainst, now);
+    patch.entryLevelXpOffset = ((revision.level ?? baseline.level.value) - 1) * 16;
   } else if (character.liveState) {
     const live = character.liveState;
     reconciliation = previewBuildReconciliation(live, previous, baseline);
@@ -197,4 +202,38 @@ export async function latestReview(ctx: ReadCtx, characterId: Id<'characters'>) 
     .order('desc')
     .take(100);
   return reviews.sort((a, b) => b.submittedAt - a.submittedAt)[0] ?? null;
+}
+
+/** Activate an unattached recorded build without first-admission initialization or game-effect replay. */
+export async function activateUnattachedRevision(
+  ctx: MutationCtx,
+  character: Doc<'characters'>,
+  revision: Doc<'characterRevisions'>,
+) {
+  const baseline = baselineOf(revision.derivedBaseline);
+  if (character.campaignId || revision.status !== 'complete' || !baseline)
+    throw new ConvexError('A complete unattached build is required.');
+  const reconciliation = character.liveState
+    ? previewBuildReconciliation(
+        character.liveState,
+        baselineOf(character.derivedBaseline),
+        baseline,
+      )
+    : null;
+  if (reconciliation?.incompatibleResource)
+    throw new ConvexError('Changing this resource type requires explicit reconciliation.');
+  await ctx.db.patch(character._id, {
+    effectiveRevisionId: revision._id,
+    derivedBaseline: baseline,
+    ...(character.liveState && reconciliation
+      ? {
+          liveState: {
+            ...character.liveState,
+            ...Object.fromEntries(
+              reconciliation.changes.map(change => [change.field, change.currentAfter]),
+            ),
+          },
+        }
+      : {}),
+  });
 }

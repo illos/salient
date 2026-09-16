@@ -121,6 +121,22 @@ export const characterTables = {
     /** The campaign the character is attached to: set by admission, one at a time. */
     campaignId: v.union(v.id('campaigns'), v.null()),
     combatLocked: v.boolean(),
+    /** Campaign-entry XP threshold, distinct from awarded campaign XP. Legacy level-one rows use 0. */
+    entryLevelXpOffset: v.optional(v.number()),
+    /** Invalidates a preserved legacy full-edit draft without rewriting its historical snapshot. */
+    staleFullEditRevisionId: v.optional(v.union(v.id('characterRevisions'), v.null())),
+    /** Scoped advancement is independent of the ordinary full-edit draft. */
+    advancementDraft: v.optional(
+      v.union(
+        v.null(),
+        v.object({
+          baseRevisionId: v.id('characterRevisions'),
+          targetLevel: v.literal(2),
+          version: v.number(),
+          selections: v.array(selectionValidator),
+        }),
+      ),
+    ),
     /** Legacy provisional records; current activation uses the confirmed caps and clears these. */
     unreconciled: v.optional(v.array(unreconciledValidator)),
   })
@@ -130,6 +146,18 @@ export const characterTables = {
     characterId: v.id('characters'),
     revision: v.number(),
     parentRevisionId: v.union(v.id('characterRevisions'), v.null()),
+    /** Optional so pre-progression snapshots retain their original storage shape. */
+    level: v.optional(v.number()),
+    kind: v.optional(
+      v.union(
+        v.literal('creation'),
+        v.literal('full-edit'),
+        v.literal('level-up'),
+        v.literal('restore'),
+      ),
+    ),
+    baseEffectiveRevisionId: v.optional(v.union(v.id('characterRevisions'), v.null())),
+    restoredFromRevisionId: v.optional(v.id('characterRevisions')),
     selections: v.array(selectionValidator),
     status: revisionStatusValidator,
     /**

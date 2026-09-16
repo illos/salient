@@ -113,6 +113,8 @@ export interface ClassProfile {
 }
 
 export interface DecisionDefinitions {
+  /** Selected build level; legacy r01.1 definitions omit this and mean level one. */
+  level?: number;
   schemaVersion: string;
   classProfiles?: Record<string, ClassProfile>;
   compendiumRevision: string;

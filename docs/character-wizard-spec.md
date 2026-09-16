@@ -452,12 +452,27 @@ advancement mode. Source restoration remains distinct from activating the level-
 [the current-value policy](#current-values-when-a-build-changes) and
 [source research](research/remaining-character-questions-review.md#q-char-3).
 
+**Implementation note — 2026-09-16 (V32):** The first progression slice supports a campaign-attached
+Berserker Fury from level one to two, with Danger Sense and either sourced Berserker ability. It uses
+an owner-confirmed respite timing field, cumulative XP plus the retained entry-level offset, and the
+existing Director numeric-adjustment workflow extended to XP. It does not calculate XP awards or
+restore resources. Scoped choices are saved separately from a full-edit draft and bind to the exact
+effective revision; advancing invalidates older full-edit submissions without deleting their choices.
+Unattached advancement and other level/class transitions remain future coverage. See the
+[V32 slice](build/V32-fury-progression-history.md) and [source contract](research/v32-fury-progression-contract.md).
+
 ## 5. Progression history
 
 **Confirmed v0.01 scope:** record saved character-build revisions and preserve them through save/reload.
 Browsing and restoring earlier builds through a history interface is deferred beyond the prototype. This
 decision covers saved builds, not every in-progress wizard interaction, and does not settle combat history.
 The fuller restoration requirements below remain the design destination.
+
+**Implementation note — 2026-09-16 (V32):** Owner and Director history views now browse saved
+build revisions. Restoring copies the recorded decisions and evaluation into a new revision, preserving
+later history and independent authored/live/inventory state. Complete attached restorations follow
+full-edit review; incomplete snapshots restore as private drafts. Complete unattached restorations
+activate without initializing campaign resources. Original snapshots remain immutable.
 
 Confirmed example: restore a level-7 wood elf Shadow to the build they had at level 3. Restore its choices,
 including ones later replaced, automatic grants, and build-derived stats/abilities. Retain present inventory.

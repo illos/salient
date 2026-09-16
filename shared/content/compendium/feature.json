@@ -845,6 +845,59 @@
     }
   },
   {
+    "id": "mcdm.heroes.v1/feature.fury.level-2/2nd-level-aspect-ability",
+    "kind": "feature",
+    "name": "2nd-Level Aspect Ability",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/level-2/2nd-level-aspect-ability.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/fury/level-2/2nd-level-aspect-ability.json",
+    "selection": "fury-level-two",
+    "text": "---\nclass: fury\nlevel: \"2\"\nname: 2nd-Level Aspect Ability\nscc: mcdm.heroes.v1/feature.fury.level-2/2nd-level-aspect-ability\ntype: feature\n---\n\nYour [primordial aspect](scc.v1:mcdm.heroes.v1/feature.fury.level-1/primordial-aspect) grants your choice of one of two [heroic abilities](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability).\n\n##### 2nd-Level Berserker Ability\n\nChoose one of the following abilities.\n\n##### 2nd-Level Reaver Ability\n\nChoose one of the following abilities.\n\n##### 2nd-Level Stormwight Ability\n\nChoose one of the following abilities.\n",
+    "structured": {
+      "class": "fury",
+      "level": "2"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.fury.level-2/2nd-level-aspect-feature",
+    "kind": "feature",
+    "name": "2nd-Level Aspect Feature",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/level-2/2nd-level-aspect-feature.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/fury/level-2/2nd-level-aspect-feature.json",
+    "selection": "fury-level-two",
+    "text": "---\nclass: fury\nlevel: \"2\"\nname: 2nd-Level Aspect Feature\nscc: mcdm.heroes.v1/feature.fury.level-2/2nd-level-aspect-feature\ntype: feature\n---\n\nYour [primordial aspect](scc.v1:mcdm.heroes.v1/feature.fury.level-1/primordial-aspect) grants you a feature, as shown on the 2nd-Level Aspect Features table.\n\n###### 2nd-Level Aspect Features Table\n\n| Aspect     | Feature           |\n|------------|-------------------|\n| Berserker  | [Unstoppable Force](scc.v1:mcdm.heroes.v1/feature.fury.level-2/unstoppable-force) |\n| Reaver     | [Inescapable Wrath](scc.v1:mcdm.heroes.v1/feature.fury.level-2/inescapable-wrath) |\n| Stormwight | [Tooth and Claw](scc.v1:mcdm.heroes.v1/feature.fury.level-2/tooth-and-claw)    |\n",
+    "structured": {
+      "class": "fury",
+      "level": "2"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.fury.level-2/perk",
+    "kind": "feature",
+    "name": "Perk",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/level-2/perk.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/fury/level-2/perk.json",
+    "selection": "fury-level-two",
+    "text": "---\nclass: fury\nlevel: \"2\"\nname: Perk\nscc: mcdm.heroes.v1/feature.fury.level-2/perk\ntype: feature\n---\n\nYou gain one crafting, exploration, or intrigue perk of your choice. See Chapter 7: [Perks](scc.v1:mcdm.heroes.v1/chapter/perks).\n",
+    "structured": {
+      "class": "fury",
+      "level": "2"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.fury.level-2/unstoppable-force",
+    "kind": "feature",
+    "name": "Unstoppable Force",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/level-2/unstoppable-force.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/fury/level-2/unstoppable-force.json",
+    "selection": "fury-level-two",
+    "text": "---\nclass: fury\nlevel: \"2\"\nname: Unstoppable Force\nscc: mcdm.heroes.v1/feature.fury.level-2/unstoppable-force\nsubclass: berserker\ntype: feature\n---\n\nWhenever you use the [Charge](scc.v1:mcdm.heroes.v1/feature.common.main-actions/charge) main action, you can use a [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) [signature ability](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability) or a [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) [heroic ability](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability) instead of a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike). Additionally, you can jump as part of your charge.\n",
+    "structured": {
+      "class": "fury",
+      "level": "2",
+      "subclass": "berserker"
+    }
+  },
+  {
     "id": "mcdm.heroes.v1/feature.fury.raden/animal-form-rat",
     "kind": "feature",
     "name": "Animal Form: Rat",

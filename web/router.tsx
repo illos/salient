@@ -16,6 +16,7 @@ import { authClient } from './auth-client';
 import { CampaignPage, CampaignsPage, JoinPage } from './campaigns';
 import { CharacterPage, CharactersPage } from './characters';
 import { WizardPage } from './wizard';
+import { ProgressionPage } from './progression';
 import { TablePage } from './table';
 import { Button } from './components/ui/button';
 import { Card, CardContent } from './components/ui/card';
@@ -333,6 +334,13 @@ const wizardRoute = createRoute({
     <WizardPage characterId={wizardRoute.useParams().characterId as Id<'characters'>} />
   ),
 });
+const progressionRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/characters/$characterId/progression',
+  component: () => (
+    <ProgressionPage characterId={progressionRoute.useParams().characterId as Id<'characters'>} />
+  ),
+});
 function rulesSearch(search: Record<string, unknown>): {
   q?: string;
   book?: string;
@@ -386,6 +394,7 @@ export const router = createRouter({
     charactersRoute,
     characterRoute,
     wizardRoute,
+    progressionRoute,
     foesRoute,
     rulesRoute,
     rulesArticleRoute,

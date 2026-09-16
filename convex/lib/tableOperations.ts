@@ -400,6 +400,8 @@ const ADJUSTABLE: AdjustableField[] = [
   { verb: 'heroic-resource', label: 'Heroic Resource', scope: 'hero', min: 0 },
   { verb: 'surges', label: 'Surges', scope: 'hero', min: 0 },
   { verb: 'victories', label: 'Victories', scope: 'hero', min: 0 },
+  // V32: manual campaign XP bookkeeping; this does not award XP by rule or advance the build.
+  { verb: 'xp', label: 'XP', scope: 'hero', min: 0 },
   { verb: 'malice', label: 'Malice', scope: 'campaign', min: 0 },
 ];
 // Q-A-200 (option A, applied): the provisional `stamina-maximum` and `recoveries-maximum` verbs
@@ -419,6 +421,8 @@ function heroField(live: HeroLive, verb: string): number {
       return live.surges;
     case 'victories':
       return live.victories;
+    case 'xp':
+      return live.xp;
     default:
       throw new ConvexError(`Unknown field ${verb}.`);
   }
@@ -438,6 +442,8 @@ function withHeroField(live: HeroLive, verb: string, value: number): HeroLive {
       return { ...live, surges: value };
     case 'victories':
       return { ...live, victories: value };
+    case 'xp':
+      return { ...live, xp: value };
     default:
       throw new ConvexError(`Unknown field ${verb}.`);
   }

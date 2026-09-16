@@ -29,8 +29,8 @@ export interface EvaluationInput {
   definitionsSchemaVersion: 'r01.1';
   /** Pinned Compendium revision the definitions cite; a mismatch is a diagnostic, not a silent upgrade. */
   compendiumRevision: string;
-  /** v0.01 creates and edits at level one only (docs/character-wizard-spec.md#v001-scope). */
-  level: 1;
+  /** Requested build level; unsupported class/level paths receive diagnostics. */
+  level: number;
   selections: Record<DecisionId, SelectionValue>;
 }
 
@@ -207,7 +207,7 @@ export interface KitContributions {
  * spent Recoveries, resources, conditions or manual adjustments; R03 owns those.
  */
 export interface DerivedBaseline {
-  level: DerivedValue<1>;
+  level: DerivedValue<number>;
   ancestry: DerivedValue<string>;
   class: DerivedValue<string>;
   /** The Fury's primordial aspect is its subclass. */

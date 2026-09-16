@@ -11,6 +11,19 @@
  * Draft saves never write live values; shared activation applies the confirmed current-value caps.
  */
 import { ConvexError, v } from 'convex/values';
+import { paginationOptsValidator } from 'convex/server';
+import { appendEvent } from './lib/events';
+import {
+  advancementDecisionIds,
+  advancementSelections,
+  historyEntry,
+  progressionBase,
+  progressionEligibility,
+  requireHistoryReader,
+  requireProgressionBase,
+  revisionLevel,
+} from './lib/characterProgression';
+import { getDefinitions } from '../shared/content/character-decisions';
 import { mutation, query } from './_generated/server';
 import type { Doc, Id } from './_generated/dataModel';
 import { requireUser, type ReadCtx } from './lib/access';
@@ -39,8 +52,9 @@ import { previewBuildReconciliation } from '../shared/evaluate/liveReconciliatio
 import { selectionsFrom } from '../shared/evaluate/character';
 import { isJsonValue, type CharacterAuthored, type DraftSelection } from '../shared/characterDraft';
 import {
+  activateRevision,
+  activateUnattachedRevision,
   baselineOf,
-  definitions,
   evaluateSelections,
   latestReview,
   pendingReview,
@@ -118,6 +132,8 @@ const detail = v.object({
   status: revisionStatusValidator,
   /** The R02 EvaluationResult of the draft revision (shared/contracts/characterEvaluation.ts). */
   evaluation: v.union(v.any(), v.null()),
+  level: v.number(),
+  fullEditIsStale: v.boolean(),
   combatLocked: v.boolean(),
   campaignId: v.union(v.id('campaigns'), v.null()),
   campaignName: v.union(v.string(), v.null()),
@@ -136,11 +152,11 @@ const detail = v.object({
  * the wizard's live "hero so far", headless callers and `save` all use it. Pure: nothing is written.
  */
 export const evaluate = query({
-  args: { selections: v.array(selectionValidator) },
+  args: { selections: v.array(selectionValidator), targetLevel: v.optional(v.number()) },
   returns: v.any(),
   handler: async (ctx, args) => {
     await requireUser(ctx);
-    return evaluateSelections(args.selections);
+    return evaluateSelections(args.selections, args.targetLevel ?? 1);
   },
 });
 export const listMine = query({
@@ -168,7 +184,7 @@ export const listMine = query({
           campaignName: character.campaignId
             ? ((await ctx.db.get(character.campaignId))?.name ?? null)
             : null,
-          attached: character.effectiveRevisionId !== null,
+          attached: character.campaignId !== null,
           review: review ? await reviewView(ctx, review) : null,
         };
       }),
@@ -193,6 +209,13 @@ export const get = query({
       selections: draft?.selections ?? [],
       status: draft?.status ?? ('awaiting-rules-evaluation' as const),
       evaluation: draft?.evaluation ?? null,
+      level: draft ? revisionLevel(draft) : 1,
+      fullEditIsStale:
+        !!draft &&
+        (character.staleFullEditRevisionId === draft._id ||
+          (draft.baseEffectiveRevisionId !== undefined &&
+            draft._id !== character.effectiveRevisionId &&
+            draft.baseEffectiveRevisionId !== character.effectiveRevisionId)),
       combatLocked: character.combatLocked,
       campaignId: character.campaignId,
       campaignName: character.campaignId
@@ -263,6 +286,8 @@ export const save = mutation({
     expectedRevision: v.number(),
     authored: authoredValidator,
     selections: v.optional(v.array(selectionValidator)),
+    targetLevel: v.optional(v.number()),
+    expectedEffectiveRevisionId: v.optional(v.union(v.id('characterRevisions'), v.null())),
     /** Named equivalent of wizard drag/drop; saved through this same revision operation. */
     assignment: v.optional(
       v.object({
@@ -279,12 +304,19 @@ export const save = mutation({
     const receipt = await command(ctx, user._id, args.commandId, 'characters.save', args);
     if (receipt.previous) return Number(receipt.previous.result);
     await requireEditable(ctx, character);
-    if (args.expectedRevision !== character.revision)
+    if (
+      args.expectedRevision !== character.revision ||
+      (args.expectedEffectiveRevisionId !== undefined &&
+        args.expectedEffectiveRevisionId !== character.effectiveRevisionId)
+    )
       throw new ConvexError(
         'This character changed since you opened it. Reload the saved version before saving.',
       );
     const fields = authored(args.authored);
     const old = character.draftRevisionId ? await ctx.db.get(character.draftRevisionId) : null;
+    const level = args.targetLevel ?? old?.level ?? 1;
+    if (level !== 1 && level !== 2) throw new ConvexError('Only levels 1 and 2 are supported.');
+    const definitions = getDefinitions(level);
     let selections = args.selections ?? old?.selections ?? [];
     if (
       selections.length > 100 ||
@@ -333,17 +365,27 @@ export const save = mutation({
     );
     const revision = character.revision + 1;
     // Draft saves evaluate the build and never touch live values (R03 section 3).
-    const evaluation = evaluateSelections(selections);
+    const evaluation = evaluateSelections(selections, level);
     const revisionId = await ctx.db.insert('characterRevisions', {
       characterId: character._id,
       revision,
       parentRevisionId: character.draftRevisionId,
+      level,
+      kind: 'full-edit',
+      baseEffectiveRevisionId: character.effectiveRevisionId,
       selections,
       status: evaluation.status,
       evaluation,
       derivedBaseline: evaluation.baseline,
     });
-    await ctx.db.patch(character._id, { authored: fields, revision, draftRevisionId: revisionId });
+    await ctx.db.patch(character._id, {
+      authored: fields,
+      revision,
+      draftRevisionId: revisionId,
+      staleFullEditRevisionId: null,
+    });
+    if (!character.campaignId && character.effectiveRevisionId && evaluation.status === 'complete')
+      await activateUnattachedRevision(ctx, character, (await ctx.db.get(revisionId))!);
     // A pending submission no longer matches the owner's latest saved revision: approval of the
     // older submission must never activate unseen edits (wizard spec section 7, rule 4).
     const pending = await pendingReview(ctx, character._id);
@@ -754,5 +796,280 @@ export const sheet = query({
       review: pending ? await reviewView(ctx, pending) : null,
     };
     return payload;
+  },
+});
+
+// ---------------------------------------------------------------------------------------------
+// V32 progression/history. The ordinary full-edit draft remains independent of scoped advancement.
+export const progression = query({
+  args: { characterId: v.id('characters') },
+  returns: v.any(),
+  handler: async (ctx, args) => {
+    const user = await requireUser(ctx);
+    const character = await owned(ctx, args.characterId, user._id);
+    const base = await progressionBase(ctx, character);
+    const draft = character.advancementDraft ?? null;
+    const draftIsStale = !!draft && draft.baseRevisionId !== base?._id;
+    return {
+      revision: character.revision,
+      baseRevisionId: base?._id ?? null,
+      baseLevel: base ? revisionLevel(base) : 1,
+      targetLevel: 2,
+      ...progressionEligibility(character, base),
+      draft,
+      draftIsStale,
+      baseSelections: base?.selections ?? [],
+      newDecisionIds: advancementDecisionIds(),
+      evaluation: base
+        ? evaluateSelections(
+            [...base.selections, ...(draft && !draftIsStale ? draft.selections : [])],
+            2,
+          )
+        : null,
+    };
+  },
+});
+
+const advancementArgs = {
+  commandId: v.string(),
+  characterId: v.id('characters'),
+  expectedRevision: v.number(),
+  expectedBaseRevisionId: v.id('characterRevisions'),
+  expectedDraftVersion: v.number(),
+};
+export const saveAdvancement = mutation({
+  args: { ...advancementArgs, selections: v.array(selectionValidator) },
+  returns: v.number(),
+  handler: async (ctx, args) => {
+    const user = await requireUser(ctx);
+    const character = await owned(ctx, args.characterId, user._id);
+    const receipt = await command(
+      ctx,
+      user._id,
+      args.commandId,
+      'characters.saveAdvancement',
+      args,
+    );
+    if (receipt.previous) return Number(receipt.previous.result);
+    await requireEditable(ctx, character);
+    const base = requireProgressionBase(
+      character,
+      await progressionBase(ctx, character),
+      args.expectedRevision,
+      args.expectedBaseRevisionId,
+    );
+    const eligibility = progressionEligibility(character, base);
+    if (!eligibility.eligible) throw new ConvexError(eligibility.reason!);
+    const old = character.advancementDraft;
+    if (args.expectedDraftVersion !== (old?.version ?? 0))
+      throw new ConvexError('The advancement draft changed. Reload before saving.');
+    const version = (old?.version ?? 0) + 1;
+    await ctx.db.patch(character._id, {
+      advancementDraft: {
+        baseRevisionId: base._id,
+        targetLevel: 2,
+        version,
+        selections: advancementSelections(args.selections),
+      },
+    });
+    await receipt.save(String(version));
+    return version;
+  },
+});
+export const finalizeAdvancement = mutation({
+  args: { ...advancementArgs, duringRespite: v.boolean() },
+  returns: v.id('characterRevisions'),
+  handler: async (ctx, args) => {
+    const user = await requireUser(ctx);
+    const character = await owned(ctx, args.characterId, user._id);
+    const receipt = await command(
+      ctx,
+      user._id,
+      args.commandId,
+      'characters.finalizeAdvancement',
+      args,
+    );
+    if (receipt.previous) return receipt.previous.result as Id<'characterRevisions'>;
+    await requireEditable(ctx, character);
+    const base = requireProgressionBase(
+      character,
+      await progressionBase(ctx, character),
+      args.expectedRevision,
+      args.expectedBaseRevisionId,
+    );
+    const eligibility = progressionEligibility(character, base);
+    if (!eligibility.eligible) throw new ConvexError(eligibility.reason!);
+    if (!args.duringRespite)
+      throw new ConvexError(
+        'Level advancement occurs during a respite. Confirm the normal source timing; this does not restore resources.',
+      );
+    const draft = character.advancementDraft;
+    if (!draft || draft.version !== args.expectedDraftVersion || draft.baseRevisionId !== base._id)
+      throw new ConvexError(
+        'The advancement draft changed or has a different effective base. Reload before finalizing.',
+      );
+    const selections = [...base.selections, ...advancementSelections(draft.selections)];
+    const evaluation = evaluateSelections(selections, 2);
+    if (evaluation.status !== 'complete')
+      throw new ConvexError(
+        `The level-up is ${evaluation.status}; resolve its choices before finalizing.`,
+      );
+    const revision = character.revision + 1;
+    const id = await ctx.db.insert('characterRevisions', {
+      characterId: character._id,
+      revision,
+      parentRevisionId: base._id,
+      level: 2,
+      kind: 'level-up',
+      baseEffectiveRevisionId: base._id,
+      selections,
+      evaluation,
+      status: evaluation.status,
+      derivedBaseline: evaluation.baseline,
+    });
+    const saved = (await ctx.db.get(id))!;
+    const { reconciliation } = await activateRevision(
+      ctx,
+      character,
+      saved,
+      character.campaignId!,
+      Date.now(),
+    );
+    // A prepared full edit survives privately, but its old effective base cannot be submitted.
+    await ctx.db.patch(character._id, {
+      revision,
+      advancementDraft: null,
+      staleFullEditRevisionId:
+        character.draftRevisionId !== base._id ? character.draftRevisionId : null,
+      ...(character.draftRevisionId === base._id ? { draftRevisionId: id } : {}),
+    });
+    const pending = await pendingReview(ctx, character._id);
+    if (pending) await ctx.db.patch(pending._id, { status: 'stale' });
+    await appendEvent(ctx, {
+      campaignId: character.campaignId!,
+      origin: 'user',
+      actor: user,
+      commandId: args.commandId,
+      kind: 'character.level-up',
+      description: `${character.authored.name} advanced from level 1 to level 2 during a respite (revision ${revision}); current resources retained.`,
+      payload: {
+        characterId: character._id,
+        revisionBefore: base._id,
+        revisionAfter: id,
+        reconciliation,
+        timing: 'owner-declared-respite',
+        xp: eligibility.xp,
+        entryLevelXpOffset: eligibility.entryLevelXpOffset,
+      },
+    });
+    await receipt.save(id);
+    return id;
+  },
+});
+
+export const history = query({
+  args: { characterId: v.id('characters'), paginationOpts: paginationOptsValidator },
+  returns: v.any(),
+  handler: async (ctx, args) => {
+    const user = await requireUser(ctx);
+    const character = await requireHistoryReader(ctx, args.characterId, user._id);
+    const result = await ctx.db
+      .query('characterRevisions')
+      .withIndex('by_character_and_revision', q => q.eq('characterId', character._id))
+      .order('desc')
+      .paginate({ ...args.paginationOpts, numItems: Math.min(50, args.paginationOpts.numItems) });
+    return { ...result, page: result.page.map(row => historyEntry(character, row)) };
+  },
+});
+export const historySnapshot = query({
+  args: { characterId: v.id('characters'), revisionId: v.id('characterRevisions') },
+  returns: v.any(),
+  handler: async (ctx, args) => {
+    const user = await requireUser(ctx);
+    const character = await requireHistoryReader(ctx, args.characterId, user._id);
+    const revision = await ctx.db.get(args.revisionId);
+    if (!revision || revision.characterId !== character._id)
+      throw new ConvexError('Historical build unavailable.');
+    const baseline = baselineOf(revision.derivedBaseline);
+    return {
+      entry: historyEntry(character, revision),
+      selections: revision.selections,
+      evaluation: revision.evaluation ?? null,
+      derivedBaseline: baseline,
+      activationPreview:
+        character.liveState && baseline
+          ? previewBuildReconciliation(
+              character.liveState,
+              baselineOf(character.derivedBaseline),
+              baseline,
+            )
+          : null,
+    };
+  },
+});
+export const restore = mutation({
+  args: {
+    commandId: v.string(),
+    characterId: v.id('characters'),
+    expectedRevision: v.number(),
+    sourceRevisionId: v.id('characterRevisions'),
+    expectedEffectiveRevisionId: v.union(v.id('characterRevisions'), v.null()),
+  },
+  returns: v.id('characterRevisions'),
+  handler: async (ctx, args) => {
+    const user = await requireUser(ctx);
+    const character = await owned(ctx, args.characterId, user._id);
+    const receipt = await command(ctx, user._id, args.commandId, 'characters.restore', args);
+    if (receipt.previous) return receipt.previous.result as Id<'characterRevisions'>;
+    await requireEditable(ctx, character);
+    if (
+      args.expectedRevision !== character.revision ||
+      args.expectedEffectiveRevisionId !== character.effectiveRevisionId
+    )
+      throw new ConvexError(
+        'This character or effective build changed. Reload before restoring a build.',
+      );
+    const source = await ctx.db.get(args.sourceRevisionId);
+    if (!source || source.characterId !== character._id)
+      throw new ConvexError('Historical build unavailable.');
+    const complete =
+      source.status === 'complete' && !!source.evaluation && !!source.derivedBaseline;
+    const revision = character.revision + 1;
+    // Deliberately copy the recorded evaluation; never reinterpret an old build with today's rules.
+    const id = await ctx.db.insert('characterRevisions', {
+      characterId: character._id,
+      revision,
+      parentRevisionId: character.draftRevisionId,
+      level: revisionLevel(source),
+      kind: 'restore',
+      baseEffectiveRevisionId: character.effectiveRevisionId,
+      restoredFromRevisionId: source._id,
+      selections: source.selections,
+      status: source.status,
+      ...(source.evaluation !== undefined ? { evaluation: source.evaluation } : {}),
+      ...(source.derivedBaseline !== undefined ? { derivedBaseline: source.derivedBaseline } : {}),
+    });
+    const pending = await pendingReview(ctx, character._id);
+    if (pending) await ctx.db.patch(pending._id, { status: 'stale' });
+    await ctx.db.patch(character._id, {
+      revision,
+      draftRevisionId: id,
+      staleFullEditRevisionId: null,
+    });
+    if (complete && character.campaignId) {
+      // Existing shared submission path preserves exact-revision review and owning-Director logging.
+      await invoke(ctx, user, {
+        schemaVersion: 1,
+        commandId: `restore-review-${id}`,
+        campaignId: character.campaignId,
+        operation: 'character.submit',
+        actor: null,
+        arguments: { character: { refKind: 'character', id: character._id } },
+      });
+    } else if (complete) {
+      await activateUnattachedRevision(ctx, character, (await ctx.db.get(id))!);
+    }
+    await receipt.save(id);
+    return id;
   },
 });

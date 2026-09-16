@@ -101,12 +101,18 @@ class Evaluation {
   readonly valid = new Map<string, SelectionValue>();
   readonly uncertainties = new Set<UncertaintyId>();
 
+  readonly level: number;
   readonly definitions: DecisionDefinitions;
   readonly selections: Record<string, SelectionValue>;
   /** Steps the v0.01 wizard does not present (the complication step, Q-CHAR-1): never a diagnostic. */
   readonly notPresented = new Set<string>();
 
-  constructor(definitions: DecisionDefinitions, selections: Record<string, SelectionValue>) {
+  constructor(
+    definitions: DecisionDefinitions,
+    selections: Record<string, SelectionValue>,
+    level: number,
+  ) {
+    this.level = level;
     this.definitions = definitions;
     this.selections = selections;
     this.revision = definitions.compendiumRevision;
@@ -533,12 +539,15 @@ class Evaluation {
     const dv = <T>(value: T, provenance: Provenance[]): DerivedValue<T> => ({ value, provenance });
 
     // 1.2 Level and echelon: class.level is an automatic step with no availability condition.
-    out.level = dv(1 as const, [
+    out.level = dv(this.level, [
       p({
         decisionId: 'class.level',
-        source: this.sentence(SENTENCES.level),
+        source:
+          this.level === 2
+            ? this.own(this.decisions.get('class.level')!)
+            : this.sentence(SENTENCES.level),
         operation: 'set',
-        amount: 1,
+        amount: this.level,
       }),
     ]);
     const echelon = 1;
@@ -732,6 +741,19 @@ class Evaluation {
           note: s.notes.stamina,
         }),
       ]);
+    }
+    // V32 progression is an explicit sourced contribution, never a live-state refill.
+    const levelTwoStamina = this.decisions.get('class.fury.level-2.stamina');
+    if (out.staminaMaximum && levelTwoStamina && this.available.has(levelTwoStamina.id)) {
+      out.staminaMaximum.value += 9;
+      out.staminaMaximum.provenance.push(
+        p({
+          decisionId: levelTwoStamina.id,
+          source: this.own(levelTwoStamina, 'Basics'),
+          operation: 'add',
+          amount: 9,
+        }),
+      );
     }
     // 1.4 Recoveries and recovery value.
     if (this.isFury())
@@ -1156,7 +1178,7 @@ class Evaluation {
         out.damageImmunities = [
           {
             damageType: 'corruption',
-            value: dv(3, [
+            value: dv(this.level + 2, [
               sourced(
                 'ancestry.polder.purchased-traits',
                 'en/unified/md/feature/trait/polder/corruption-immunity.md',
@@ -1164,8 +1186,8 @@ class Evaluation {
                 {
                   selection: 'Corruption Immunity',
                   operation: 'set',
-                  amount: 3,
-                  note: 'Level 1 + 2',
+                  amount: this.level + 2,
+                  note: `Level ${this.level} + 2`,
                 },
               ),
             ]),
@@ -1528,10 +1550,10 @@ class Evaluation {
           });
     for (const decision of this.order)
       for (const grant of this.grantsOf(decision.id))
-        if (grant.kind === 'class-feature')
+        if (grant.kind === 'class-feature' || grant.kind === 'aspect-feature')
           out.push({
             name: grant.value,
-            kind: 'class-feature',
+            kind: grant.kind,
             sourcePath: grant.source ?? decision.source,
             provenance: this.grantProvenance(decision, grant),
           });
@@ -1713,7 +1735,7 @@ export function evaluateCharacter(
   input: EvaluationInput,
   definitions: DecisionDefinitions,
 ): EvaluationResult {
-  const evaluation = new Evaluation(definitions, input.selections);
+  const evaluation = new Evaluation(definitions, input.selections, input.level);
   const evaluatedAgainst = {
     definitionsSchemaVersion: DEFINITIONS_SCHEMA_VERSION as 'r01.1',
     compendiumRevision: definitions.compendiumRevision,
@@ -1721,13 +1743,34 @@ export function evaluateCharacter(
   if (
     input.definitionsSchemaVersion !== definitions.schemaVersion ||
     input.compendiumRevision !== definitions.compendiumRevision ||
-    input.level !== 1
+    !Object.is(input.level, definitions.level ?? 1)
   )
     evaluation.diagnose(
       'definitions',
       'invalid',
       'definition-mismatch',
-      `The selections cite definitions ${input.definitionsSchemaVersion} at ${input.compendiumRevision} (level ${input.level}); this evaluator uses ${definitions.schemaVersion} at ${definitions.compendiumRevision} at level 1`,
+      `The selections cite definitions ${input.definitionsSchemaVersion} at ${input.compendiumRevision} (level ${input.level}); this evaluator uses ${definitions.schemaVersion} at ${definitions.compendiumRevision} at level ${definitions.level ?? 1}`,
+    );
+  if (input.level !== 1 && input.level !== 2)
+    evaluation.diagnose(
+      'class.level',
+      'unsupported',
+      'unsupported-option',
+      `Level ${input.level} has no supported character definitions; this slice supports level one and Berserker Fury level two.`,
+    );
+  if (input.level === 2 && input.selections['class.choice'] !== 'Fury')
+    evaluation.diagnose(
+      'class.choice',
+      'unsupported',
+      'unsupported-option',
+      'Level two currently supports Fury only.',
+    );
+  if (input.level === 2 && input.selections['class.fury.aspect'] !== 'Berserker')
+    evaluation.diagnose(
+      'class.fury.aspect',
+      'unsupported',
+      'unsupported-option',
+      'Level two currently supports the Berserker aspect only.',
     );
   evaluation.validate();
   const fields = evaluation.derive();

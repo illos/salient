@@ -157,7 +157,7 @@ export interface HeroEntity {
   /** Effective build revision the baseline was evaluated from. */
   buildRevisionId: string;
   name: string;
-  level: 1;
+  level: number;
   ancestry: string;
   class: string;
   subclass: string;

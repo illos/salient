@@ -8,11 +8,11 @@
   },
   "generator": {
     "script": "scripts/build-content.ts",
-    "version": "1.0.2"
+    "version": "1.0.3"
   },
   "generatedAt": "2026-09-08",
-  "contentHash": "sha256:d076c3d75a546811c031d9d14a1075990a900bd61750dd1fd99b014722046dc9",
-  "entryCount": 467,
+  "contentHash": "sha256:376862af66922ded336d274f5d45d20b857ece6ae8b5203e53b05207e4cdc985",
+  "entryCount": 473,
   "selections": [
     {
       "id": "goblin-warrior",
@@ -30,6 +30,19 @@
         "ancestry/devil.md",
         "feature/trait/devil"
       ]
+    },
+    {
+      "id": "fury-level-two",
+      "description": "V32 bounded Berserker Fury advancement: automatic feature, both aspect abilities and supported Danger Sense perk.",
+      "paths": [
+        "feature/fury/level-2/unstoppable-force.md",
+        "feature/fury/level-2/perk.md",
+        "feature/fury/level-2/2nd-level-aspect-ability.md",
+        "feature/fury/level-2/2nd-level-aspect-feature.md",
+        "feature/ability/fury/level-2/special-delivery.md",
+        "feature/ability/fury/level-2/wrecking-ball.md"
+      ],
+      "basis": "docs/research/v32-fury-progression-contract.md: verified Fury level-two automatic and selected grants."
     },
     {
       "id": "fury-level-one",
@@ -515,6 +528,22 @@
       "name": "Your Entrails Are Your Extrails!",
       "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-1/your-entrails-are-your-extrails.md",
       "selection": "fury-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.fury.level-2/special-delivery",
+      "kind": "ability",
+      "name": "Special Delivery",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-2/special-delivery.md",
+      "selection": "fury-level-two",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.fury.level-2/wrecking-ball",
+      "kind": "ability",
+      "name": "Wrecking Ball",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/fury/level-2/wrecking-ball.md",
+      "selection": "fury-level-two",
       "file": "ability.json"
     },
     {
@@ -2227,6 +2256,38 @@
       "name": "Relentless Hunter",
       "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/level-1/relentless-hunter.md",
       "selection": "fury-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.fury.level-2/2nd-level-aspect-ability",
+      "kind": "feature",
+      "name": "2nd-Level Aspect Ability",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/level-2/2nd-level-aspect-ability.md",
+      "selection": "fury-level-two",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.fury.level-2/2nd-level-aspect-feature",
+      "kind": "feature",
+      "name": "2nd-Level Aspect Feature",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/level-2/2nd-level-aspect-feature.md",
+      "selection": "fury-level-two",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.fury.level-2/perk",
+      "kind": "feature",
+      "name": "Perk",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/level-2/perk.md",
+      "selection": "fury-level-two",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.fury.level-2/unstoppable-force",
+      "kind": "feature",
+      "name": "Unstoppable Force",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/level-2/unstoppable-force.md",
+      "selection": "fury-level-two",
       "file": "feature.json"
     },
     {
