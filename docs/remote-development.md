@@ -17,7 +17,9 @@ presidium-dev run build -- pnpm build
 presidium-dev run build -- pnpm exec vitest run --maxWorkers=1
 presidium-dev run browser -- pnpm exec playwright test --workers=1 --output=/artifacts/browser --reporter=line
 presidium-dev run build -- tar -czf /artifacts/browser.tar.gz -C /artifacts browser
+presidium-dev run build -- tar -czf /artifacts/playtest.tar.gz -C /app .playtest
 presidium-dev fetch browser.tar.gz --output remote-browser.tar.gz
+presidium-dev fetch playtest.tar.gz --output remote-screenshots.tar.gz
 presidium-dev fetch generated/api.d.ts --output remote-api.d.ts
 presidium-dev stop
 ```
@@ -30,6 +32,9 @@ has separate Convex data and dependencies. Follow the infrastructure helper's ex
 flag when intentionally transferring slot ownership. Generated files are retrieved to artifacts and
 reviewed before copying into source; never reverse-sync the remote checkout. `fetch` retrieves one
 regular file into a new local output path; package an artifact directory remotely first, as above.
+Existing browser fixtures also write screenshots into source `.playtest`. Before another `up`,
+explicitly package and fetch them as shown above. Source replacement does not retain that source
+directory. The configured `/artifacts/browser` test output is already outside source.
 
 `runtime/compose.yaml` defines the app directly. The helper supplies the paths `DEV_SOURCE`,
 `DEV_CONFIG` (directory containing optional mode-0600 `runtime.env`), `DEV_ARTIFACTS`, and the stable
@@ -74,6 +79,29 @@ Browser tests use the actual preview HTTPS URL and require working tailnet DNS/r
 browser container. Read-only rules tests can override `SALIENT_TEST_URL=http://web:5180`, but
 authenticated app operations require secure browser APIs that plain HTTP on a Docker hostname
 does not provide. Do not disable browser certificate or secure-context checks to hide that failure.
+
+### Provision an additional environment
+
+Every new environment needs the pinned backend executable and checksum before its first `up`.
+After main has been validated, an enrolled Salient agent can copy only those two nonsecret files
+through the existing broker grant. **Main provisioning is pending in this handoff; wait for the
+recorded main cutover before using it as the verified source.** Substitute a valid explicit
+environment slug for `feature-name`; do not copy `runtime.env`, backend data or unrelated config.
+
+```sh
+presidium-ssh dev-runtime 'set -eu
+target=/srv/dev/salient/feature-name/config
+install -d -m 0700 "$target"
+install -m 0755 /srv/dev/salient/main/config/convex-local-backend "$target/convex-local-backend"
+install -m 0600 /srv/dev/salient/main/config/convex-local-backend.sha256 "$target/convex-local-backend.sha256"'
+presidium-dev --env feature-name up
+```
+
+These directories/files are owned by the connected `dev` account. No additional grant or operator
+credential is required. The helper verifies the executable checksum, provisions distinct routes
+and volumes, and the fresh backend generates its own instance/authentication secrets. Seed content
+only through that environment's exact backend container if needed; no main database is shared or
+copied. This account already has shared Docker control, as documented below.
 
 ## Backend instance secret compatibility patch
 

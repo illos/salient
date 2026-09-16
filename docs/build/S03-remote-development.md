@@ -217,3 +217,19 @@ choice at this unchanged backend revision. Never use `setup:local --reset-data` 
 For migrated `main`, leave `config/runtime.env` absent/empty unless intentionally transferring the
 existing auth secret; a newly generated override would replace the auth secret already preserved
 in the copied database. Protected config.json transfer also carries the instance credential.
+
+Fresh candidate `7946b15` validation completed successfully: `run build -- pnpm check` exited 0
+with 97 engine plus 336 app/script tests, 183 Markdown link checks and the full content/vendor/
+foe/type/lint/build gates. The complete `run browser -- pnpm exec playwright test --workers=1
+--output=/artifacts/browser-final --reporter=line` suite passed **22/22 in 11.0 minutes** through
+the actual HTTPS preview, including V31's integrated history-control tests. Browser and backend
+limits remained enforced; no certificate or secure-context bypass was used. The same URL survived
+Docker host-port change to 32790, and the original validation content sentinel remained unchanged.
+
+Existing browser screenshot outputs were explicitly packaged with
+`run build -- tar -czf /artifacts/playtest.tar.gz -C /app .playtest` before any source replacement.
+The generic helper fetched that archive, generated `api.d.ts` and final browser result to the
+protected directory `/srv/presidium/home/.local/state/dev-runtime-evidence/salient-validation-20260916`
+outside Git, alongside check/browser logs. No generated file overwrote local source. The branch is
+reviewed and ready for coordinated integration/migration; the infrastructure owner will stop the
+validation stack, preserve its data, perform main cutover and verify reboot recovery separately.
