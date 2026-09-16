@@ -1,7 +1,7 @@
 # S03 — Salient remote development adapter
 
-Status: merged and main data migrated; local workloads stopped. Final main reboot and
-provider/human-session acceptance checks remain pending.
+Status: merged, main data migrated and reboot recovery passed; local workloads stopped.
+Actual Salient provider and human existing-account checks remain pending.
 Owner: Voltar infrastructure thread.
 Rules review: not required (deployment configuration; no game rules change).
 
@@ -274,3 +274,21 @@ actual registered Salient provider session, and human sign-in/readback using an 
 The Hermes administrative bootstrap path does not prove that Salient provider path, and record
 fingerprints plus fresh-fixture browser tests do not replace an existing-account user check.
 Full V1 acceptance remains incomplete until those gates are recorded.
+
+### Main reboot recovery — 2026-09-16
+
+The infrastructure owner rebooted CT114 and verified a changed boot ID, an empty Docker process
+list before explicit startup, and working brokered administrative SSH. Manual main `up` exited 0;
+the backend became healthy and the original main HTTPS URL again returned TLS-verified HTTP 200.
+Docker's loopback published port changed from 32791 to 32768; the Service name and browser URL
+stayed the same. All five record fingerprints and the existing auth secret, instance secret and
+admin credential still match after reboot and source replacement. Validation remained stopped.
+Inspection of the six main-container process argument lists found neither the instance secret
+nor admin key in arguments; no credential values were printed.
+
+The recovered source snapshot was `d663c15`, containing the reviewed application code `7946b15`.
+The subsequent commits only update documentation and do not require another runtime recreation.
+Reboot/recovery acceptance is now verified. Two final checks remain explicitly unproven from this
+Hermes infrastructure session: broker access by an actual registered Salient provider and human
+sign-in/readback with an existing migrated account. The remote default remains in effect; no local
+replacement stack should be started while those user-session checks are completed.

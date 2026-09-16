@@ -8,8 +8,9 @@ text.
 The [remote development runbook](docs/remote-development.md) owns the Salient pilot adapter and
 cutover status. Main data is now on CT114 with matching record/credential fingerprints, and the
 identified superseded local processes are stopped. Isolated validation passed 433 check-suite
-tests and all 22 real HTTPS browser tests. Main reboot verification, an actual Salient
-provider-session broker check and human existing-account sign-in remain pending.
+tests and all 22 real HTTPS browser tests. Main also passed reboot recovery with the same HTTPS
+URL, data and credentials. An actual Salient provider-session broker check and human
+existing-account sign-in remain pending.
 
 Use `presidium-dev` for dependency installation, backend/frontend,
 builds and browsers. Do not run those workloads on Presidium or start a stack automatically

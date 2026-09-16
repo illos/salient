@@ -4,8 +4,9 @@ Status: merged through `d663c15`; main development data migrated to CT114 on 202
 matching record fingerprints and credentials. The identified superseded local processes are
 stopped; the original data and protected backup remain available for operator rollback. Heavy
 development commands now belong on the dedicated guest. The isolated pilot passed 433 check-suite
-tests and all 22 HTTPS browser tests. **Main reboot proof, real Salient provider-session
-broker verification and human existing-account sign-in remain pending; full V1 acceptance is not
+tests and all 22 HTTPS browser tests. Main passed explicit restart after reboot with unchanged
+data/credentials and the same HTTPS URL. **Real Salient provider-session broker verification
+and human existing-account sign-in remain pending; full V1 acceptance is not
 claimed.** See the dated [migration evidence](build/S03-remote-development.md#main-data-cutover--2026-09-16).
 
 ## Workflow
@@ -87,9 +88,8 @@ does not provide. Do not disable browser certificate or secure-context checks to
 
 Every new environment needs the pinned backend executable and checksum before its first `up`.
 After main has been validated, an enrolled Salient agent can copy only those two nonsecret files
-through the existing broker grant. Main's patched binary and checksum are provisioned. Backend
-health was verified before the recovery reboot; explicit restart and recovery checks remain pending.
-Substitute a valid explicit
+through the existing broker grant. Main's patched binary and checksum are provisioned, and its
+backend/data/HTTPS recovery after reboot is verified. Substitute a valid explicit
 environment slug for `feature-name`; do not copy `runtime.env`, backend data or unrelated config.
 
 ```sh

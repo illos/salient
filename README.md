@@ -19,8 +19,8 @@ Development workloads belong on the dedicated guest through the brokered `presid
 See [the remote runtime runbook](docs/remote-development.md) for enrollment, selected secrets,
 resource limits, data preservation and current cutover status. Main's development data has moved
 to CT114 with matching record fingerprints and credentials; the superseded local processes are
-stopped. Main reboot verification, an actual Salient provider's broker check and human
-existing-account sign-in are still pending. Preserve the rollback backup and use the remote
+stopped. Main recovered after reboot at the same HTTPS URL with matching data and credentials.
+An actual Salient provider's broker check and human existing-account sign-in are still pending. Preserve the rollback backup and use the remote
 workflow; do not recreate the old local stack.
 
 From an enrolled provider session in the selected Salient checkout:
