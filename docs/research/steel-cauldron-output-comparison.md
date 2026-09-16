@@ -2,6 +2,11 @@
 
 Research: 2026-09-15. User-authorized comparison of generated output, not a new rules source.
 
+**Follow-up decision, 2026-09-16:** comparison is required for every stat block we generate, with
+substantial divergences flagged for manual investigation. Missing/ambiguous counterparts must be
+accounted for explicitly. See the [owning requirement](../monster-catalog-spec.md#full-output-comparison--confirmed-2026-09-16).
+The sample below is historical evidence and a starting set of examples, not the completed comparator.
+
 ## Purpose and reuse boundary
 
 The user confirmed that Steel Cauldron is an example of another working tool, not code to adapt
@@ -78,7 +83,8 @@ tests rather than prompt adoption of the external schema or unverified correctio
 ## How to use this during the first slice
 
 Build our importer from the pinned source. Derive expected text/fields from that source, including the
-examples above. Compare our generated records against source, and optionally inspect both tools'
+examples above. Compare every generated stat block against source and its identified Steel Cauldron
+counterpart, recording unmatched cases and divergences. Additionally inspect both tools'
 rendered versions for missing visible sections. Verify lookup/search/sharing references and themed
 views independently. Record any discrepancy as extraction, presentation, source-version difference or
 unresolved evidence before changing data. External output is a secondary comparison, never a replacement

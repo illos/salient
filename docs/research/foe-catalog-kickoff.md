@@ -198,6 +198,10 @@ The first importer must verify:
 9. The correction, direct feature resolution, search, identity continuity and theme scenarios in the
    owning ingestion requirements pass. Existing name/position-based navigation is adapted explicitly;
    it must not silently resolve an old reference to a different feature.
+10. Every generated stat block appears in the Steel Cauldron comparison report, with material divergence
+    routed to manual investigation and missing/ambiguous matches explicit. Follow the
+    [2026-09-16 comparison requirement](../monster-catalog-spec.md#full-output-comparison--confirmed-2026-09-16);
+    the earlier sampled comparison does not satisfy this full-coverage check.
 
 Malformed identity or lost source should fail generation. Unsupported rule semantics need not block
 correct ingestion. Deliver a corpus report of records, fields, features and extraction exceptions;

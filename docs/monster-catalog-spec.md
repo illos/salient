@@ -293,6 +293,54 @@ Proposed acceptance additions for the implementation:
    the same features. Verify exact edition references still identify their original content.
 6. Render the same definition/feature fixture with different theme tokens without changing its data or IDs.
 
+### Full-output comparison — confirmed 2026-09-16
+
+The user requires comparing **every generated stat block** with its Steel Cauldron counterpart as a
+completeness sanity check. Substantial divergence triggers manual investigation of why the outputs differ.
+This replaces sampling as the intended comparison coverage; the earlier eleven-undead comparison is
+research evidence, not completion of this requirement.
+
+Steel Cauldron remains a secondary comparison, under the user's example-only reuse boundary. The pinned
+Compendium is the rules authority. Do not adapt external application code without a clear applicable
+license, import external generated data as our canonical content, or automatically alter our output to
+agree with it. Agreement does not establish correctness, particularly where both tools share upstream data.
+
+**Proposed comparison implementation:**
+
+- Produce one report row for every generated definition, including our content edition/source revision,
+  the inspected external repository revision, both identifiers and the match outcome. Use a recorded
+  external revision/cache for reproducible comparison, not a changing website response on every build.
+- Match counterparts using verified identity mappings and source/classification context. Names alone
+  cannot distinguish all variants. Report missing or ambiguous counterparts explicitly; they are not
+  matches and must not silently disappear from the denominator. Counterpart availability does not define
+  our eligible core corpus.
+- Compare stats, classification, movement, defenses, captain benefits, EV and its quantity basis,
+  ordered abilities/traits, and complete ability sections: usage, targets, range, triggers, costs/labels,
+  rolls, tier text and additional effects. Compare related Malice records separately where included.
+  Full raw text and field differences remain available alongside the normalized comparison.
+- Normalize understood presentation differences such as markup and equivalent number/string forms.
+  Do not normalize away quantities, qualifiers, ordering, missing paragraphs or unresolved values.
+  Format equivalence is separate from factual agreement; the earlier unordered effect-content scan is
+  insufficient as the final comparator.
+- Flag substantial differences for review: changed numeric values, missing/additional features or
+  sections, changed targeting/cost/trigger text, consequential ordering, or lost source context. Report
+  representation-only differences separately so recurring formatting differences do not obscure losses.
+  Failure to retrieve/compare data is an explicit incomplete check, not a successful match.
+- Review discrepancies against the pinned source and classify the cause: our extraction/rendering error,
+  an external omission/error, differing source versions, an intentional representation difference, or
+  unresolved evidence. Record the disposition and supporting source. Manual review may be agent-assisted;
+  ask the user only when an actual source ambiguity or product decision remains.
+
+Comparison findings feed importer fixes and explicit corrections, followed by regeneration and rechecking.
+They do not create a per-monster approval queue. No stat block is described as comparison-verified while
+its material discrepancies remain unexplained; report unmatched and unresolved cases separately from
+verified matches. This status is about content comparison, not whether the creature works in the engine.
+
+Acceptance for the ingestion implementation includes exhaustive report accounting; a known matching case;
+a missing and an ambiguous counterpart; a presentation-only change; and deliberately removed effect text
+or changed numeric values that trigger review. Review resolutions must retain enough evidence to explain
+why a difference was accepted or fixed. The comparison machinery is not implemented by this spec update.
+
 ### Encounter value accounting
 
 For EV totals, count a creature once even when it has several turn entries, and count a captain

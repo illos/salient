@@ -140,6 +140,21 @@ No user approval is implied by this classification.
 
 ## Resolved questions
 
+### Q-V-2: Compare every generated stat block against Steel Cauldron
+
+- **Status:** resolved 2026-09-16; [full-output comparison](monster-catalog-spec.md#full-output-comparison--confirmed-2026-09-16).
+- **Raised by:** user direction in V23 foe-track discussion, 2026-09-16.
+- **Where:** `docs/research/steel-cauldron-output-comparison.md` and the ingestion specification.
+- **Conflict or gap:** The investigation compared eleven undead examples; the user wants systematic
+  coverage so substantial divergence in any generated stat block is noticed and investigated.
+- **Options:** No question was presented; the user supplied the requirement directly.
+- **Recommendation:** Include every generated definition in a reproducible comparison report, preserve
+  explicit missing/ambiguous outcomes and review material differences against the pinned source.
+- **Blocked until answered:** nothing; already answered.
+- **Answer:** Compare every generated stat block with its Steel Cauldron counterpart. A large divergence
+  should trigger additional manual review to determine why our output differs. The previously confirmed
+  example-only reuse boundary remains in force.
+
 ### Q-V-1: Monster ingestion must support correction, feature access, themes and sharing
 
 - **Status:** resolved 2026-09-15; [ingestion requirements](monster-catalog-spec.md#confirmed-ingestion-requirements--2026-09-15)
