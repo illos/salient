@@ -17,9 +17,11 @@ combat journey remain integration dependencies. The broader mobile-optimized pro
 
 Development workloads belong on the dedicated guest through the brokered `presidium-dev` helper.
 See [the remote runtime runbook](docs/remote-development.md) for enrollment, selected secrets,
-resource limits, data preservation and current cutover status. The adapter's isolated validation
-passed; the operator is preparing the main-data cutover. Do not stop or replace the existing
-playable environment until that recorded migration step completes.
+resource limits, data preservation and current cutover status. Main's development data has moved
+to CT114 with matching record fingerprints and credentials; the superseded local processes are
+stopped. Main reboot verification, an actual Salient provider's broker check and human
+existing-account sign-in are still pending. Preserve the rollback backup and use the remote
+workflow; do not recreate the old local stack.
 
 From an enrolled provider session in the selected Salient checkout:
 
@@ -36,7 +38,7 @@ presidium-dev stop
 `up` transfers selected source edits and installs locked dependencies remotely. It starts the
 anonymous Convex backend and web frontend, returning the stable tailnet HTTPS preview URL.
 Builds, tests and browsers run inside bounded guest containers; do not run local installers,
-`pnpm dev`, `pnpm dev:backend`, builds or headless browsers on Presidium after cutover. Browser
+`pnpm dev`, `pnpm dev:backend`, builds or headless browsers on Presidium. Browser
 tests use the actual HTTPS preview and create disposable accounts/data, so use an explicit
 `--env validation` slot when testing should remain separate from the shared playable data.
 

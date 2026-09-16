@@ -1,9 +1,12 @@
 # Separate development runtime
 
-Status: adapter on `slice/S03-dev-runtime`; isolated `validation` pilot passed remote checks and
-HTTPS browser tests on 2026-09-16. **Not merged or cut over; existing main data stays local.**
-Use the existing coordinated environment until the infrastructure owner records the completed
-migration. After cutover, heavy development commands belong on the dedicated dev guest.
+Status: merged through `d663c15`; main development data migrated to CT114 on 2026-09-16 with
+matching record fingerprints and credentials. The identified superseded local processes are
+stopped; the original data and protected backup remain available for operator rollback. Heavy
+development commands now belong on the dedicated guest. The isolated pilot passed 433 check-suite
+tests and all 22 HTTPS browser tests. **Main reboot proof, real Salient provider-session
+broker verification and human existing-account sign-in remain pending; full V1 acceptance is not
+claimed.** See the dated [migration evidence](build/S03-remote-development.md#main-data-cutover--2026-09-16).
 
 ## Workflow
 
@@ -25,7 +28,7 @@ presidium-dev stop
 ```
 
 Do not run dependency installers, `pnpm dev`, `pnpm dev:backend`, builds or headless browsers on
-Presidium after cutover. No provider-startup hook launches a stack. Deploy edits with another `up`.
+Presidium. No provider-startup hook launches a stack. Deploy edits with another `up`.
 The default `main` slot is shared and records its source worktree. Explicitly choose a distinct
 `--env` for a concurrently deployed branch; do not replace a peer's slot casually. Every environment
 has separate Convex data and dependencies. Follow the infrastructure helper's explicit replacement
@@ -84,8 +87,9 @@ does not provide. Do not disable browser certificate or secure-context checks to
 
 Every new environment needs the pinned backend executable and checksum before its first `up`.
 After main has been validated, an enrolled Salient agent can copy only those two nonsecret files
-through the existing broker grant. **Main provisioning is pending in this handoff; wait for the
-recorded main cutover before using it as the verified source.** Substitute a valid explicit
+through the existing broker grant. Main's patched binary and checksum are provisioned. Backend
+health was verified before the recovery reboot; explicit restart and recovery checks remain pending.
+Substitute a valid explicit
 environment slug for `feature-name`; do not copy `runtime.env`, backend data or unrelated config.
 
 ```sh
@@ -111,8 +115,8 @@ requires that argument; it has no environment/file fallback. Thus this preserved
 **would violate V1's no-credential-values-in-command-arguments criterion without the patch**.
 Passing application env values by stdin does not fix the upstream instance-secret exposure.
 The compatibility build below has disposable keygen/startup evidence and a running Salient
-validation stack whose actual process arguments contain no instance secret. Data migration remains
-pending.
+validation run whose actual process arguments contained no instance secret. Main data migration
+completed with matching record/credential fingerprints; final acceptance gates are listed above.
 
 Evidence: installed `node_modules/convex/src/cli/lib/localDeployment/run.ts` and `secrets.ts`, and
 [the pinned upstream configuration](https://github.com/get-convex/convex-backend/blob/157eb19/crates/local_backend/src/config.rs).

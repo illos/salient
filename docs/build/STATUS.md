@@ -257,4 +257,4 @@ records the handoff; it does not certify A09 or create an implementation commit.
 
 | Id | Slice | Depends on | Status | Owner |
 | --- | --- | --- | --- | --- |
-| S03 | [Remote development adapter](S03-remote-development.md) | External dev-host V1 helpers and enrollment | Isolated validation: remote checks and HTTPS browser passed; no main cutover | Voltar infrastructure thread |
+| S03 | [Remote development adapter](S03-remote-development.md) | External dev-host V1 helpers and enrollment | Merged through `d663c15`; main data migrated and local workloads stopped; final reboot and provider/human checks pending | Voltar infrastructure thread |

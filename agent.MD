@@ -6,16 +6,18 @@ text.
 ## Separate runtime rollout — 2026-09-16
 
 The [remote development runbook](docs/remote-development.md) owns the Salient pilot adapter and
-cutover status. Isolated validation passed remote checks and the real HTTPS browser journey;
-main-data migration and local-process cutover are being coordinated separately. Do not recreate
-local workloads or independently replace the shared playable target during migration.
+cutover status. Main data is now on CT114 with matching record/credential fingerprints, and the
+identified superseded local processes are stopped. Isolated validation passed 433 check-suite
+tests and all 22 real HTTPS browser tests. Main reboot verification, an actual Salient
+provider-session broker check and human existing-account sign-in remain pending.
 
-After recorded cutover, use `presidium-dev` for dependency installation, backend/frontend,
+Use `presidium-dev` for dependency installation, backend/frontend,
 builds and browsers. Do not run those workloads on Presidium or start a stack automatically
 for every provider. Reuse the default main slot from its recorded checkout; different concurrent
 worktrees require explicitly named environments. Retrieve generated types/artifacts selectively.
 All enrolled agents share Docker access on the guest; names and helper checks are conventions,
-not hostile isolation. Preserve development data and the operator's rollback backup.
+not hostile isolation. Preserve development data and the operator's rollback backup. Restarting
+the old local runtime is an explicit operator rollback action, never routine agent startup.
 
 ## Post-v0.01 development checkpoint — 2026-09-15
 

@@ -1,6 +1,7 @@
 # S03 — Salient remote development adapter
 
-Status: isolated validation pilot passed remote checks and HTTPS browser journey; not merged or cut over.
+Status: merged and main data migrated; local workloads stopped. Final main reboot and
+provider/human-session acceptance checks remain pending.
 Owner: Voltar infrastructure thread.
 Rules review: not required (deployment configuration; no game rules change).
 
@@ -9,19 +10,21 @@ Rules review: not required (deployment configuration; no game rules change).
 Implement the Salient adapter to the operator's separate-development-runtime V1 specification.
 The canonical infrastructure copy lives at `/srv/presidium/projects/hermes/code/docs/dev-runtime/spec.md`;
 its helpers live in the Hermes/Voltar repository. This slice owns application Compose configuration,
-remote CLI startup, bounded browser/build workers, and exact preview origins. No cloud deployment,
-production change, data reset or local-process cutover is part of this branch handoff.
+remote CLI startup, bounded browser/build workers, and exact preview origins. The infrastructure
+owner subsequently performed the coordinated main-data transfer and targeted local-process stop
+recorded below. No cloud deployment, production change or data reset occurred.
 
 Acceptance requires remote dependency install/build/backend/browser operation, same-origin HTTPS
 HTTP and WebSocket traffic, data persistence across source replacement, scoped volumes, verified
 resource limits and no application credentials in arguments or source transfer. Independent review
-and the full remote `pnpm check` remain required before integration. A configuration diff is not
-runtime proof. The [runbook](../remote-development.md) records the current blocker and migration.
+and the full remote `pnpm check` are integration gates. A configuration diff is not runtime proof.
+The [runbook](../remote-development.md) records the remaining acceptance gates and migration.
 
 ## Work log
 
 Entries below are chronological checkpoints. Earlier pending-status statements are superseded by
-the later recorded native build and isolated validation results; main cutover remains pending.
+the later recorded native build, isolated validation and main-data cutover results. Remaining
+acceptance gates are stated in the latest entry and current status above.
 
 2026-09-16: created `/srv/presidium/projects/salient/dev-runtime`, branch
 `slice/S03-dev-runtime`, from integrated main `f7137dc`. Existing shared main and peer worktrees
@@ -233,3 +236,41 @@ protected directory `/srv/presidium/home/.local/state/dev-runtime-evidence/salie
 outside Git, alongside check/browser logs. No generated file overwrote local source. The branch is
 reviewed and ready for coordinated integration/migration; the infrastructure owner will stop the
 validation stack, preserve its data, perform main cutover and verify reboot recovery separately.
+
+### Main data cutover — 2026-09-16
+
+The infrastructure owner fast-forwarded main through `d663c15`, stopped the exact nine identified
+local Salient processes (including the transient recovery frontend), confirmed no process held
+the database open, and preserved the original local data. No production deployment was touched.
+A protected stopped backup remains at
+`/srv/presidium/runtime-backups/salient-main-20260916-232634/default.tar`:
+173,404,160 bytes, SHA-256
+`ab062c1d2271bda2b07eb2c4e81dd976fc29952b460af7a66bd5f27417df9f9b`.
+
+All 132 files were verified byte-for-byte after restoration into the fresh, labeled main volume
+`salient-dev-b90776c53141_backend-data`, at `local/default` inside that volume. The original
+local state and backup were not overwritten. Main runtime configuration contains only the verified
+patched binary/checksum and an empty `runtime.env`, preserving the copied database's auth secret.
+Before the recovery reboot, backend health was verified on container ports 3210/3211.
+Its deployment name, pinned version,
+instance secret, admin key and existing auth secret all compare exactly with the preserved source;
+comparison output did not reveal credential values.
+
+Read-only before/after record fingerprints also match: one content manifest, 177 campaigns,
+209 characters, 511 Better Auth users and 511 accounts. No fixtures were seeded into main and no
+mutating browser suite was run against migrated main. Its automatically provisioned URL is
+[Salient remote main](https://salient-dev-fc4f48cb09a0.tail41404c.ts.net/). The infrastructure owner
+verified TLS and HTTP 200, then passed both read-only HTTPS rules-browser tests in 12.7 seconds.
+The earlier 22-test mutating suite ran only against the independent validation data.
+
+Validation is now stopped with its data and route identity retained. No local Salient runtime
+processes remain. The infrastructure owner's point-in-time Presidium measurements changed from
+3,576 to 1,226 MiB used memory and from 746 to 82 MiB swap; these are observations, not reserved
+capacity or a steady-state guarantee. The default development workflow is remote. Local startup
+is restricted to an explicit operator rollback using the retained original state.
+
+Remaining gates: main recovery at the same URL after a real guest reboot, brokered access from an
+actual registered Salient provider session, and human sign-in/readback using an existing account.
+The Hermes administrative bootstrap path does not prove that Salient provider path, and record
+fingerprints plus fresh-fixture browser tests do not replace an existing-account user check.
+Full V1 acceptance remains incomplete until those gates are recorded.
