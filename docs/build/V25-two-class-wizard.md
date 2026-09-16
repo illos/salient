@@ -216,3 +216,18 @@ environment belong to the integration handoff.
 Implementation committed as `4cb3f1f` on `slice/V25`. All verification and review evidence is
 committed with the implementation; ignored local captures/logs are indexed by the portable
 reference metadata and work log. The worktree is ready for integration review.
+
+### Main integration, 2026-09-16
+
+At the user's instruction, `main` fast-forwarded from `e83930e` to `cf02ad6`, including
+implementation `4cb3f1f` and its V24 specification prerequisites. No code conflicts or behavior
+changes were needed. A fresh `pnpm check` on that exact incoming tree passed: 97 engine and
+321 app/scripts tests, lint/typechecks, source pins, deterministic content, links and production
+build. Log: `/srv/presidium/projects/salient/characters-build/.playtest/v25-merge-check.log`.
+The previously audited browser journeys remain applicable to the unchanged implementation.
+
+Unrelated uncommitted planning changes in the main checkout were preserved; the restored checkout
+passed `pnpm check-links` (166 Markdown files) and `git diff --check`. All incoming commit trailers
+passed the merge gate. This records local Git integration; no backend sync, data reset or external
+push was performed. The merged V25 branch is retired; its worktree and local verification captures
+remain available for reference.
