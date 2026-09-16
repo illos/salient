@@ -1,0 +1,9 @@
+
+Running 1 test using 1 worker
+
+(node:555737) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/1] tests/browser/table-audit.spec.ts:40:1 › three table contexts, palette, console and live CLI share persisted operations
+  1 passed (1.1m)

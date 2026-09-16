@@ -1,0 +1,62 @@
+$ pnpm lint && pnpm check:engine && pnpm check:app && pnpm check-links && pnpm check-vendor && pnpm content:check && pnpm foes:check && pnpm build
+$ eslint . && prettier --check .
+Checking formatting...
+All matched files use Prettier code style!
+$ tsc --noEmit && vitest run --project engine
+
+ RUN  v4.1.11 /srv/presidium/projects/salient/characters-build
+
+
+ Test Files  14 passed (14)
+      Tests  97 passed (97)
+   Start at  05:59:04
+   Duration  4.54s (transform 446ms, setup 0ms, import 825ms, tests 2.00s, environment 1ms)
+
+$ tsc -p tsconfig.web.json && vitest run --project app --project scripts
+
+ RUN  v4.1.11 /srv/presidium/projects/salient/characters-build
+
+
+ Test Files  37 passed (37)
+      Tests  336 passed (336)
+   Start at  05:59:18
+   Duration  104.48s (transform 1.62s, setup 0ms, import 3.97s, tests 96.33s, environment 3ms)
+
+$ node scripts/check-links.ts
+Checked 177 Markdown files: no broken relative links or anchors.
+$ node scripts/check-vendor.ts
+vendor/ matches the pinned submodule commits (2 submodules).
+$ node scripts/build-content.ts --check
+shared/content/compendium matches the clean pinned Compendium (467 entries, 10 excluded, revision fb83a789da8f).
+$ node scripts/ingest-foes.ts --check
+Foes: 11 stat blocks, 40 features; edition 6c6bbd40f2460c196511a2f0cc19b2ff9184ddee27be90245e5d5a8a915ed331; verified
+$ pnpm rules:ingest && tsc -p tsconfig.web.json && vite build
+$ node scripts/ingest-rules.ts
+Ingested 2614 entries, 26 categories from fb83a789da8f. No unresolved links.
+vite v8.3.0 building client environment for production...
+transforming...
+✓ 2521 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                                       1.58 kB │ gzip:   0.67 kB
+dist/assets/search.worker-oMKCTI8n.js                                19.07 kB
+dist/assets/schibsted-grotesk-latin-ext-wght-normal-hsMS0n0O.woff2   20.92 kB
+dist/assets/schibsted-grotesk-latin-wght-normal-Bb8VGrTG.woff2       46.75 kB
+dist/assets/overlay-card-C1jW4vvI.css                                 0.75 kB │ gzip:   0.39 kB
+dist/assets/article-Dre97K8_.css                                     11.34 kB │ gzip:   2.68 kB
+dist/assets/index-DPl_tBZr.css                                       82.02 kB │ gzip:  14.57 kB
+dist/assets/preview-i8nGsJ0b.js                                       0.93 kB │ gzip:   0.56 kB
+dist/assets/article-DmvMzvpZ.js                                       1.32 kB │ gzip:   0.81 kB
+dist/assets/x-BcaBsPsn.js                                             4.80 kB │ gzip:   2.17 kB
+dist/assets/content-Cv9SGCpJ.js                                      10.20 kB │ gzip:   3.95 kB
+dist/assets/rules-_ZCdCsB3.js                                        13.59 kB │ gzip:   4.43 kB
+dist/assets/overlay-card-Cm19lIWn.js                                 90.77 kB │ gzip:  32.29 kB
+dist/assets/foes-C2eXcH4x.js                                        353.73 kB │ gzip:  31.04 kB
+dist/assets/index-3WAOqnuH.js                                       675.94 kB │ gzip: 196.33 kB
+
+✓ built in 2.10s
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.

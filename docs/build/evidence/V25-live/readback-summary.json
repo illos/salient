@@ -1,0 +1,20 @@
+[
+  {
+    "class": "Elementalist",
+    "characterId": "k57ajzv2h2k3njrktq4yhadbd18egcb4",
+    "name": "Bethell 537eb3eb",
+    "revision": 2,
+    "status": "complete",
+    "baselineMatchesFixture": true,
+    "grantsWithExactPinnedSource": 30
+  },
+  {
+    "class": "Fury",
+    "characterId": "k57fp9f0zgfeayym9s82fx8t718egya3",
+    "name": "Grug bf05657f",
+    "revision": 2,
+    "status": "complete",
+    "baselineMatchesFixture": true,
+    "grantsWithExactPinnedSource": 17
+  }
+]

@@ -9,7 +9,7 @@
 | Rules review | Required, every delivered feature/trait/grant |
 | Depends on | A09, R01–R03, S01, A01; V24 assessment/specification carried forward |
 | Unblocks | Further classes/ancestries and first progression slice |
-| Status | Committed — `4cb3f1f`; both independent reviews passed; see STATUS.md |
+| Status | Implementation merged; shared playable verification passed; see closeout below |
 
 ## Goal
 
@@ -271,3 +271,38 @@ an unrelated browser assertion expecting 403 content entries instead of the V25 
 
 This checkpoint changes documentation only; no runtime update or live feature check is needed for
 this commit. No new implementation or deployment was started while checkpointing.
+
+
+### Shared playable closeout — 2026-09-16
+
+The user requested completing the outstanding live verification. Coordinated shared runtime
+ownership through Chords and confirmed main `663b49f` serves frontend 5180 with local anonymous
+backend 3212/site 3213. The stored 403-entry content snapshot was stale. Synced reviewed main
+backend functions/schema and loaded the committed 467-entry snapshot, then read back its exact
+revision, generator version and content hash. All 13,838 existing application records across
+28 root tables were unchanged by the update. No reset or external publication occurred.
+
+Both saved effective builds match the independent fixtures, with all 47 delivered grant source
+texts byte-equal to the pinned Compendium. Shared-app Elementalist creation/save/reload/review
+and sourced-sheet checks passed; Fury creation/review and all three sheet audiences also passed.
+The extended Fury journey exposed Convex diagnostics mixed into CLI JSON stdout. Follow-up
+branch `slice/V25-live` routes those diagnostics to stderr, adds an actual CLI regression, and
+repairs the table audit's obsolete 403-entry assertion to use the committed manifest/hash.
+No gameplay or backend implementation changes were needed. The independent
+[live verification repair review](../reviews/V25-live-verification-review.md) passed.
+
+The [live evidence record](evidence/V25-live/README.md) preserves screenshots, authenticated
+readback, content identity, data-preservation counts, interrupted attempts and final checks.
+Original implementation/rules reviews and Forge evidence remain applicable with their stated
+limits. Final integration and verification results follow below.
+
+Final verification passed: `VITEST_MAX_WORKERS=1 pnpm check` (97 engine + 336 app/scripts =
+433 tests, lint, typechecks, links, pins/content and build); shared Elementalist browser journey;
+full Fury journey with 60-toggle soak, corrections/history/reconnect and closeout; and shared
+table audit including the exact seeded manifest. The focused CLI regression and independent
+repair review passed. Host-pressure timeouts/interruption are recorded in the evidence; the
+unchanged checks passed after reducing concurrency and restarting the same shared backend to
+release accumulated memory. No assertions or timeouts were relaxed.
+
+The shared-runtime verification gap recorded at the checkpoint is closed. This slice still
+delivers only the two bounded level-one paths. Next character slice remains unstarted.

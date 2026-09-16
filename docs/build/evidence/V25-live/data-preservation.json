@@ -1,0 +1,170 @@
+{
+  "abilityResults": {
+    "before": 8,
+    "after": 8,
+    "missing": 0,
+    "changed": 0
+  },
+  "actionOpportunities": {
+    "before": 0,
+    "after": 0,
+    "missing": 0,
+    "changed": 0
+  },
+  "actionUses": {
+    "before": 8,
+    "after": 8,
+    "missing": 0,
+    "changed": 0
+  },
+  "campaigns": {
+    "before": 158,
+    "after": 158,
+    "missing": 0,
+    "changed": 0
+  },
+  "changes": {
+    "before": 4687,
+    "after": 4687,
+    "missing": 0,
+    "changed": 0
+  },
+  "characterReviews": {
+    "before": 144,
+    "after": 144,
+    "missing": 0,
+    "changed": 0
+  },
+  "characterRevisions": {
+    "before": 346,
+    "after": 346,
+    "missing": 0,
+    "changed": 0
+  },
+  "characters": {
+    "before": 189,
+    "after": 189,
+    "missing": 0,
+    "changed": 0
+  },
+  "clockRegistrations": {
+    "before": 258,
+    "after": 258,
+    "missing": 0,
+    "changed": 0
+  },
+  "commands": {
+    "before": 2840,
+    "after": 2840,
+    "missing": 0,
+    "changed": 0
+  },
+  "diceStates": {
+    "before": 85,
+    "after": 85,
+    "missing": 0,
+    "changed": 0
+  },
+  "encounters": {
+    "before": 86,
+    "after": 86,
+    "missing": 0,
+    "changed": 0
+  },
+  "events": {
+    "before": 2809,
+    "after": 2809,
+    "missing": 0,
+    "changed": 0
+  },
+  "foeSettings": {
+    "before": 0,
+    "after": 0,
+    "missing": 0,
+    "changed": 0
+  },
+  "foes": {
+    "before": 198,
+    "after": 198,
+    "missing": 0,
+    "changed": 0
+  },
+  "heroRollFacts": {
+    "before": 0,
+    "after": 0,
+    "missing": 0,
+    "changed": 0
+  },
+  "historyAliases": {
+    "before": 0,
+    "after": 0,
+    "missing": 0,
+    "changed": 0
+  },
+  "initiativeGroups": {
+    "before": 252,
+    "after": 252,
+    "missing": 0,
+    "changed": 0
+  },
+  "interactions": {
+    "before": 108,
+    "after": 108,
+    "missing": 0,
+    "changed": 0
+  },
+  "joinRequests": {
+    "before": 218,
+    "after": 218,
+    "missing": 0,
+    "changed": 0
+  },
+  "memberships": {
+    "before": 371,
+    "after": 371,
+    "missing": 0,
+    "changed": 0
+  },
+  "rolls": {
+    "before": 151,
+    "after": 151,
+    "missing": 0,
+    "changed": 0
+  },
+  "sessions": {
+    "before": 124,
+    "after": 124,
+    "missing": 0,
+    "changed": 0
+  },
+  "snapshots": {
+    "before": 86,
+    "after": 86,
+    "missing": 0,
+    "changed": 0
+  },
+  "targetingDrafts": {
+    "before": 1,
+    "after": 1,
+    "missing": 0,
+    "changed": 0
+  },
+  "turnEntries": {
+    "before": 252,
+    "after": 252,
+    "missing": 0,
+    "changed": 0
+  },
+  "turns": {
+    "before": 65,
+    "after": 65,
+    "missing": 0,
+    "changed": 0
+  },
+  "users": {
+    "before": 394,
+    "after": 394,
+    "missing": 0,
+    "changed": 0
+  }
+}

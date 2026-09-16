@@ -3,6 +3,7 @@ import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { seedLocalHero } from './local-fixtures';
+import manifest from '../../shared/content/compendium/manifest.json' with { type: 'json' };
 
 const password = 'Test-only-salient-password-42';
 
@@ -84,8 +85,9 @@ test('three table contexts, palette, console and live CLI share persisted operat
     const query = (name: string, args: unknown = { campaignId }) =>
       cli('query', name, JSON.stringify(args));
     const contentStatus = await query('content:status', {});
-    expect(contentStatus.entryCount).toBe(403);
-    expect(contentStatus.revision).toBe('fb83a789da8f0327a389c277a0c790b1648d5810');
+    expect(contentStatus.entryCount).toBe(manifest.entryCount);
+    expect(contentStatus.revision).toBe(manifest.compendium.revision);
+    expect(contentStatus.contentHash).toBe(manifest.contentHash);
     const credentials = (role: string) => ({
       email: `audit-${role}-${stamp}@example.test`,
       password,

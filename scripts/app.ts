@@ -67,7 +67,15 @@ try {
   const url = process.env.VITE_CONVEX_URL;
   const siteUrl = process.env.VITE_CONVEX_SITE_URL;
   if (!url || !siteUrl) throw new Error('Configure the Convex client and HTTP URLs in .env.local.');
-  const client = new ConvexHttpClient(url);
+  // Keep stdout machine-readable even when Convex returns server diagnostics with a result.
+  const client = new ConvexHttpClient(url, {
+    logger: {
+      logVerbose: console.error,
+      log: console.error,
+      warn: console.error,
+      error: console.error,
+    },
+  });
   let token = process.env.SALIENT_AUTH_TOKEN;
   if (!token) {
     const email = process.env.SALIENT_EMAIL;
