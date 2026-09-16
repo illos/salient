@@ -26,6 +26,9 @@ consumer of that boundary. This priority is an engineering recommendation, not a
 
 ## Spec references
 
+- `docs/build/README.md#engine-ability-design-and-playtest-evidence` — confirmed per-ability design,
+  live app screenshots and visibility/completion gate.
+
 - `docs/rules-language.md#proposed-implementation-model` — structural adapters, grammar, semantic
   checks, execution and presentation; a small compositional grammar rather than ability-name logic.
 - `docs/engine-architecture.md#from-rules-text-to-executable-behavior` — source preservation,
@@ -209,8 +212,9 @@ support ledger. The same source mutation tests must prove no name-specific handl
 - Pure compiler/effect contract next to `shared/resolve` and its source adapters.
 - Existing ability-use, result-read, manual-disposition and correction paths consuming that contract
   for the bounded supported shapes, with journaled effect records and a small log-card rendering.
-- Source-grounded compiler/pure-resolution tests, persisted shared-operation tests, one browser
-  scenario and a generated support report. Intended commands/scenarios are specified below.
+- Source-grounded compiler/pure-resolution tests, persisted shared-operation tests, per-ability
+  in-app playtests with durable game-log screenshots, and a generated support report. Intended
+  commands/scenarios are specified below.
 - Dated implementation notes in owning engine/rules-language/roll-resolution specs: the actual
   supported grammar, legacy/manual boundary, versions and remaining unsupported behavior.
 
@@ -263,10 +267,57 @@ These are **future implementation acceptance checks**, not results from writing 
    existing boundaries. Other occurrences remain unchanged. Used-action text remains public;
    unrelated monster abilities and private state remain private.
 10. **Connected proof and report.** Run compiler/pure tests, persisted `convex-test` scenarios and
-    `pnpm check`; run one isolated-backend headless and browser journey through use, manual
-    disposition and sequential correction/undo/redo, reading saved rows back. Generate the support
-    report twice with identical output and no hand edits. Obtain independent implementation and
-    pinned-source rules review. No claim of full-encounter automation or long-session usability.
+    `pnpm check`; run isolated-backend in-app playtests for every built or changed ability in the
+    inventory below. Retain readable screenshots correlating actual game-log output to source and
+    expected outcomes, with persisted readback from the same run. Include a connected headless and
+    browser journey through use, manual disposition and sequential correction/undo/redo. Generate
+    the support report twice with identical output and no hand edits. Independent implementation
+    and pinned-source rules review must check the per-ability design/evidence mapping. Pending or
+    failed live evidence blocks implementation acceptance. No claim of full-encounter automation
+    or long-session usability.
+
+## Ability design and playtest evidence
+
+User-confirmed workflow, 2026-09-16: follow the
+[per-ability gate](README.md#engine-ability-design-and-playtest-evidence). This specification is a
+shared design foundation. Before implementation, finish the source-to-behavior record for each
+candidate, including exact sections/tiers and expected scenario outputs. Every ability newly built,
+migrated or behaviorally changed by the shared compiler/adapter must be enumerated individually;
+the report population is not automatically the implementation scope.
+
+Initial inventory below uses source paths relative to
+`vendor/steel-compendium/en/unified/md/` at the pin in Rules research. All live evidence is **pending**.
+The rows for grouped regression candidates must be expanded to individual abilities before building;
+they are not a substitute for the final inventory.
+
+| Ability | Source / design | Designed | Built | In-app playtested / evidence |
+| --- | --- | --- | --- | --- |
+| Brutal Slam | `feature/ability/fury/level-1/brutal-slam.md`; checks 1, 7, 8: damage, push allowance, manual movement, correction/history. | Shared contract and numeric scenario specified. | No | Pending; no screenshots. |
+| Spear Charge | `monster/goblin/statblock/goblin-warrior.md`, Spear Charge; check 2: embedded damage. | Contract specified; finish actor/target, dice and expected state cases. | No | Pending; no screenshots. |
+| Bury the Point | Same stat block, Bury the Point; check 2: supported damage and explicit manual potency/condition/save remainder. | Contract specified; finish per-case calculations and log expectations. | No | Pending; no screenshots. |
+| Thunder Roar | `feature/ability/fury/level-1/thunder-roar.md`; check 6: compatibility damage and manual ordered area movement. | Boundary specified; finish live regression cases. | No V26 change | Pending; no screenshots. |
+| Out of the Way | `feature/ability/fury/level-1/out-of-the-way.md`; check 6: compatibility damage and manual slide/rider. | Boundary specified; finish live regression cases. | No V26 change | Pending; no screenshots. |
+| Free-strike and kit-signature regression candidates | Check 3; enumerate each affected definition with its exact source, including Pain for Pain if its adapter changes. | Inventory and per-ability designs pending. | No V26 change | Pending; no screenshots. |
+| Other standalone/embedded candidates discovered in the support report | Add individual rows for each ability gaining or changing live behavior; retain unsupported entries as such. | Inventory pending. | No | Pending if included in live scope. |
+| Spinecleaver Axe | `monster/goblin/statblock/goblin-spinecleaver.md`, Axe; check 2. | Compile-only comparison; live minion design deferred to V02. | No live implementation | Deferred; cannot count as a built or playtested ability. |
+
+For each live case, show the ability being used through the rendered table, then the resulting
+source/result log card. Link the exact source clause and general-rule passages to a caption with
+expected arithmetic, actual output, accepted inputs and observed saved state. Expand manual effects
+so a reader can tell which source clauses the app did not execute. Preserve existing audiences.
+Capture correction/history results where claimed. A seeded fixture is allowed; record its setup and
+how deterministic dice, if used, entered the normal accepted-dice path. Never manufacture log rows.
+
+Brutal Slam's first evidence must correlate its tier-2 source and size rule with check 1's **8 damage,
+15 → 7 Stamina, and push allowance 2 + 1 = 3**, explicitly leaving physical movement manual. Check 8
+adds screenshots of the corrected output and restoration. These are expected results for future
+playtests, not observations or screenshot proof from this specification turn.
+
+Keep the run record and screenshots under `docs/build/evidence/V26/` (to be created during actual
+playtesting), linked from each ability row, with tested revision, source pin, runtime identity,
+event IDs, pass/fail and limitations. Reconcile the final inventory against adapter changes and the
+generated report before review; no ability may inherit a playtest pass from another ability merely
+because they share grammar. Reuse lower-level mechanics tests without duplicating them per ability.
 
 ## Rules research
 
@@ -348,3 +399,16 @@ execution and report why; do not invent independence to increase coverage.
   This records the recommended priority and reviewable contract; it does not claim new automation.
 - Before implementation, rebase the slice onto integrated main, coordinate the shared adapters
   with foe/character owners, establish an isolated backend and follow the acceptance checks above.
+
+### 2026-09-16 — confirmed per-ability visibility and live evidence
+
+- User requires every built ability to have a source-backed design followed by a real in-app
+  playtest, with screenshot proof correlating game-log output to the source.
+- Recorded the standing gate in the build process, linked the development principles and slice
+  template, and strengthened V26 deliverables/check 10 with a per-ability inventory and evidence
+  requirements. The proposed mechanical scope and source-derived numbers are unchanged.
+- All V26 implementation and live-playtest evidence remains pending. No screenshots were produced
+  or claimed by this documentation change; the earlier spec reviews certify their recorded scope.
+- Amendment review: **pass**, `v26_spec_review`, recorded in the existing review report; no
+  blocking findings. `pnpm check-links` passes all 158 files and `git diff --check` passes.
+  This documentation-only amendment does not rerun the previously passing full code baseline.

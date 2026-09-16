@@ -119,3 +119,36 @@ not newly authorized game content.
 - No implementation, live backend journey, browser journey, generated V26 support report or
   persisted V26 effect record exists to reproduce in this assignment. The specification says so.
 - No blocking findings, decision requests, application edits, vendor edits or deployments.
+
+## Amendment review — 2026-09-16
+
+Reviewer: `v26_spec_review`. Verdict: **pass**. No blocking findings.
+
+Reviewed the subsequent uncommitted changes to `docs/build/README.md`,
+`docs/development-process.md`, `docs/build/_template.md`, `docs/build/V26-compiled-ability-effects.md`
+and `docs/build/STATUS.md` against the user's requirement for every engine ability to have a
+source-backed design, then an actual in-app playtest with screenshots correlating game-log output
+to source, with visible progress.
+
+- The process requires design before implementation and rendered-app evidence afterward for
+  every built or changed ability, including shared-handler and adapter changes. Representative
+  examples cannot substitute for the affected-ability inventory.
+- Acceptance requires real table controls or the in-app palette, an isolated backend, durable
+  screenshots, same-run event identity and persisted readback. Expected source calculations,
+  observed output, setup, accepted dice and limitations must be connected explicitly. Pending
+  or failed evidence blocks implementation acceptance.
+- Designed, built and playtested states remain separate. V26's grouped candidate rows are
+  explicitly provisional and must be expanded before implementation. Compile-only examples
+  cannot count as live support. Existing abilities marked "No V26 change" do not claim that their
+  earlier implementation is absent.
+- One owning process section, slice-local records and the existing status tracker provide the
+  required visibility. Links from the template and development principles avoid separate
+  tracking systems. Reusable mechanics tests remain reusable; no user approval queue or new
+  CI enforcement is claimed.
+- Mechanical scope and expected numbers are unchanged. All V26 implementation, live playtests
+  and screenshot evidence remain pending. This amendment therefore needs no renewed rules
+  research or gameplay verification, and does not certify an actual app run.
+
+Review validation is limited to the documentation diff and its consistency with the requirement;
+the previous full-check baseline was not rerun. The original implementation acceptance statuses
+above remain unchanged; amended check 10 strengthens the future evidence gate.

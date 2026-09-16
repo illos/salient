@@ -127,6 +127,12 @@ Use ordinary implementation judgment within the authorized scope. Surface actual
 
 ## Verification strategy
 
+Confirmed 2026-09-16: every ability built in parser/engine work requires a source-backed design and
+an actual in-app playtest with screenshots correlating its game-log outputs to that source. The
+[build process](build/README.md#engine-ability-design-and-playtest-evidence) owns the required record
+and completion gate. Track designed, built and playtested separately in the owning slice; headless
+checks and representative examples alone do not complete an ability.
+
 For consequential rules changes, verify more than the happy path: missing facts, boundaries, effect sequencing, target-specific differences, choices, and deterministic replay where applicable. Expected outcomes must have independent support; do not generate expectations by invoking the implementation being tested.
 
 For shared-state changes, exercise permissions, duplicate commands, stale state, and reconnect behavior.
@@ -142,7 +148,7 @@ checks return with mobile scope. Verify future LAN readiness when that deploymen
 
 An integration scenario should demonstrate that the same structured spatial effect can be rendered as table instructions and consumed by a minimal map adapter. The adapter can be a test fixture before a VTT exists.
 
-Track content availability separately from behavior support. A readable ability description does not establish that the engine can resolve it. Generate supported and unsupported results from parser and runtime diagnostics. Distinguish missing runtime facts from missing implementation. Use reusable mechanics tests and a few whole-ability examples; add regression tests for actual bugs rather than writing a bespoke test suite for every monster.
+Track content availability separately from behavior support. A readable ability description does not establish that the engine can resolve it. Generate supported and unsupported results from parser and runtime diagnostics. Distinguish missing runtime facts from missing implementation. Reuse shared mechanics tests and add regression tests for actual bugs; a bespoke lower-level test suite for every monster is unnecessary. Each built or changed ability still needs its own source-backed design and in-app screenshot evidence under the confirmed build-process gate.
 
 ## Headless development workflow
 

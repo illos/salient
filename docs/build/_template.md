@@ -43,6 +43,13 @@ Files, tables, operations, documents, tests. Be specific enough that a reviewer 
 Numbered. Each is verifiable by a reviewer without the implementer present: the command or scenario,
 the expected persisted state or output, and how to read it back.
 
+## Ability design and playtest evidence
+
+For parser/engine ability work, follow the [per-ability gate](README.md#engine-ability-design-and-playtest-evidence).
+Enumerate affected abilities, source-backed designs, designed/built/playtested status and durable
+screenshot evidence. Include changes through shared handlers. Write `Not applicable` for other work.
+Do not mark pending live evidence complete on the strength of parser or unit tests.
+
 ## Rules research
 
 `None` or: the Compendium paths to read first, the mechanical claims this slice makes, and which of

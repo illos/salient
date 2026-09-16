@@ -58,6 +58,8 @@ The dependency graph is in `STATUS.md`. A slice may start when every dependency 
    of UI components. Every table control goes through a registered shared operation.
 5. **Verify.** Run the slice's acceptance checks and `pnpm check`. Read persisted state back through
    the application; a mutation response is not evidence. Record commands and output in the work log.
+   For engine ability work, complete the per-ability design and in-app evidence gate below, even
+   when no UI code changed.
 6. **Spec update.** If implementation revealed a gap or a routine engineering choice, record it in the
    owning spec as a dated *Implementation note*. If it needs the user, append a question to
    `docs/rules-questions-for-user.md` and continue on work that does not depend on it.
@@ -255,6 +257,65 @@ servers running. Every `A` slice adds tests at the shared-operation level (conve
 tests. The commit checker runs in the `commit-msg` hook and in CI (`.github/workflows/check.yml`),
 not inside `pnpm check`, so a clean checkout of any commit passes `pnpm check` regardless of its
 history. `pnpm format` applies Prettier (print width 100).
+
+## Engine ability design and playtest evidence
+
+Confirmed by the user, 2026-09-16: every ability built through the parser/rules-engine track must
+have a source-backed design before implementation and a real in-app playtest afterward, with
+screenshot proof correlating game-log outputs to that source. This applies across short-lived
+slice branches; parser and engine remain one track, without a permanent track branch.
+
+Keep the record inside the owning slice, with linked evidence files. `STATUS.md` remains the slice
+tracker. Enumerate every ability added or whose behavior changes, including changes through a
+shared handler or source adapter. A shared design can cover common mechanics, but each affected
+ability needs its own source mapping, intended support and playtest result. Inventory imported or
+compile-only examples separately; they cannot count as built, playable abilities.
+
+### Before building an ability
+
+Record its identity, pinned Compendium revision, exact source path and section/tier, relevant general
+rules, and any case-specific product decision. Specify inputs, effect order, calculations, state
+changes and expected game-log output. State which clauses are automated, instructions, manual,
+unsupported or waiting on facts. Derive expected outcomes from the source before running the code.
+Shared mechanics and test fixtures may be referenced instead of copied.
+
+### After building an ability
+
+Play it through the actual rendered app against an isolated development backend. Use real table
+controls or the in-app command palette and shared persisted operations. Browser automation is
+acceptable; label who or what drove the run. Seeded starting state and deterministic test dice must
+be disclosed. A pure resolver test, mocked page, headless-only run or fabricated log is insufficient.
+
+Capture readable screenshots of the actual game-log entry and its expanded source/results. Use
+linked captures when the source and outcome cannot fit together. The evidence record must include:
+
+- Ability, tested code revision, content pin, date, nonsecret runtime identity and scenario steps.
+- Initial actor/target state, accepted dice and choices/modifiers relevant to the expected result.
+- Exact source clause → expected calculation/effect → observed log output, with screenshot links
+  and event identity tying the captures to the same run.
+- Persisted before/after state read back through the app, plus explicit manual/unsupported work.
+  A screenshot of a claimed result alone does not establish that state changed correctly.
+- Pass/fail and limitations for each designed case, including the behavior newly claimed by the
+  slice. Exercise relevant corrections/history and partial-support displays; retain failed evidence
+  and link the rerun that resolves it.
+
+Store evidence durably under `docs/build/evidence/<slice>/` or an accessible artifact location linked
+from the slice. Ignored local `.playtest` output alone is not a handoff. Preserve source/privacy
+boundaries when taking screenshots; used-action source does not expose an entire private stat block.
+
+### Visibility and completion
+
+Maintain a compact per-ability table in the slice: **designed**, **built**, **in-app playtested**, and
+links to source/design and evidence. Mark pending, failed and deferred work explicitly. These are
+separate milestones: built without passing app evidence is not complete. Partial support can pass
+only for its declared scope, with the remaining clauses visibly manual/unsupported in the log.
+
+Implementation handoff includes this table and the screenshots. Independent review checks the
+source-to-output correlation and persisted results for every affected ability; missing or failing
+evidence blocks implementation acceptance. Shared unit/integration tests remain reusable and the
+usual checks still apply. This is an acceptance requirement, not a per-rule user approval queue or
+an assertion that an automated playtest measures human enjoyment. No new CI enforcement is claimed
+by recording this workflow.
 
 ## Questions for the user
 
