@@ -18,7 +18,16 @@ Existing V outlines can be split into smaller assignments when their scope/depen
 Track organization does not change the implementation/review states below; verify current Git and
 evidence when claiming work rather than treating historical handoff notes as current gates.
 
-## Active parser/engine ownership — 2026-09-15
+## Active parser/engine ownership — 2026-09-16
+
+V26 specification is merged; implementation has not started. User-requested real-app baseline tests
+now cover all ten currently available abilities with [source/log screenshots and saved readback](evidence/V26/baseline-2026-09-16/README.md).
+Baseline damage/cost/history checks passed; V26 compiled effects/push arithmetic and full acceptance
+remain pending. Evidence work is on short-lived `slice/V26-playtest` in
+`/srv/presidium/projects/salient/engine-parser-spec`, tested revision `f019e3a`, isolated frontend 5184 /
+backend 3234 / site 3235. No shared playable target change. See the [slice work log](V26-compiled-ability-effects.md#2026-09-16--real-app-baseline-playtests).
+
+### Historical assessment and specification checkpoints
 
 Codex owns the parser/rules-engine track in the user's engine/parser thread. Initial assessment
 V22 is on `slice/V22` in `/srv/presidium/projects/salient/engine-parser`, based on `e83930e`.
@@ -150,7 +159,7 @@ See the [CI review and run record](audits/2026-09-14-ci-history-review.md) for t
 | V19 | [Forced access changes and combat recovery](V19-forced-access-recovery.md) | V10 | Outline |
 | V20 | [Dynamic terrain objects](V20-dynamic-terrain.md) | V04 | Outline |
 | V21 | [Desktop layout fidelity](V21-desktop-layout-fidelity.md) | A08, A09, V13 | Built, not committed — 2026-09-15 (foundation + five parallel implementers, lead integration and repairs); lint, typecheck, 85 engine tests, 317 app tests, links, vendor, content and the full 20-test browser suite pass; screenshots under `.playtest/v21/` compared with each mockup; review deferred to the user's audit thread |
-| V26 | [Compiled ability effects: damage and push instructions](V26-compiled-ability-effects.md) | S01, S02, A01, A02, A04, A05, A06, A09 | Ready — specification merged into main at `3689226`, 2026-09-16; independent design and rules review pass; 10 live designs including Viscous Fire; 3 compile-only comparisons; implementation and screenshot evidence pending; documentation-only integration needs no runtime update |
+| V26 | [Compiled ability effects: damage and push instructions](V26-compiled-ability-effects.md) | S01, S02, A01, A02, A04, A05, A06, A09 | Ready — specification merged into main at `3689226`, 2026-09-16; independent design and rules review pass; 10 live designs including Viscous Fire; 3 compile-only comparisons; implementation pending; [ten-ability baseline screenshots and readback](evidence/V26/baseline-2026-09-16/README.md) captured on `slice/V26-playtest`, not V26 acceptance; specification integration needs no runtime update |
 | V23 | [Foe source ingestion assessment](V23-foe-source-assessment.md) | S01, A09, Rules portion of V13 | Committed — assessment only; foe coverage / Codex, `slice/V23`; ingestion implementation remains next |
 | V27 | [Undead ingestion and independent feature access](V27-undead-ingestion.md) | S01, A09, Rules portion of V13, V23 docs | Committed — `02be722` ingestion/reference package, `c209a6e` test repair; both reviews and checks pass; lead integration pending |
 
