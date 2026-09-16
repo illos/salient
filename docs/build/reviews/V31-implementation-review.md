@@ -1002,10 +1002,49 @@ control cannot submit by pointer, script, `Enter` or `Space`; the geometry asser
 combat and discriminates at 1024; and lint, tsc and the specs covering every changed path pass.
 I did not reproduce the two full 22-of-22 suites, deliberately, for the reason given above.
 
+### A second divergence, this one test-only — executed, and now committed as `bd0c512`
+
+At 12:48 UTC, while I was writing this section, `tests/browser/v21-log.spec.ts` changed again in
+the worktree. It is three lines, and it is T4 above:
+
+```
++    // `aria-disabled` replaces the native `disabled:` variants, so the dimming is asserted too.
++    await expect(redo).toHaveCSS('opacity', '0.5');
++    await expect(rewind).not.toHaveCSS('opacity', '0.5');
+```
+
+I am recording it rather than ignoring it, for the same reason as the first divergence — but it
+does not need a fourth round and I am not asking for one. It is test-only, additive, touches no
+application code, and asserts exactly the two values I measured independently this round (0.5 on
+the unavailable control, 1 on the available one, in both themes). So unlike the first divergence,
+my evidence does apply to it.
+
+I ran it rather than leaving it on reasoning. `pnpm exec playwright test v21-log.spec.ts` against
+blob `fe7f5cc`: **2 passed, 1.2 minutes**, with the blob verified unchanged across the run. A
+first attempt had failed at `v21-fixtures.ts:117` with
+`ENOENT … test-results/.playwright-artifacts-0/traces/…`, which is a Playwright artefact
+collision between two runs sharing this worktree's `test-results/`, not an assertion failure; the
+clean re-run of the identical file passes, which settles it.
+
+It has since been committed. `bd0c512` amends `21786fc` with three things: that test line, eight
+lines in the slice document recording this verdict, and this review. Two checks close the loop:
+`git rev-parse HEAD:tests/browser/v21-log.spec.ts` is `fe7f5cc`, **byte-identical to the blob I
+executed**, so the run above covers the committed tree exactly; and
+`node scripts/check-commit.ts --rev bd0c512` reports "commit message ok". The slice document's
+new paragraph describes this verdict accurately and does not overclaim. There is no executable
+difference between `21786fc` and `bd0c512` beyond that one asserted property.
+
+One loose end for the implementer, not a finding: `bd0c512` captured this document as it stood a
+few minutes ago, so it does not yet contain this subsection or the verdict below. Amend it once
+more to pick them up. That amend changes nothing executable and needs no further verification
+from me.
+
 ## Final verdict
 
 pass
 
-For `21786fc`. This supersedes the round-two `pass` on `da6a0a4` and the first-round
-`changes required` on `6c47704`. No blocking finding remains, every acceptance check is verified,
-and the four observations above are all one-line follow-ups that do not need a further review.
+For `bd0c512` (and equally for `21786fc`, which it amends with one asserted property I executed
+and two documentation changes). This supersedes the round-two `pass` on `da6a0a4` and the
+first-round `changes required` on `6c47704`. No blocking finding remains, every acceptance check
+is verified, and T1 to T3 are one-line follow-ups that do not need a further review. Amend in this
+document as it now stands and the slice is ready for the lead.
