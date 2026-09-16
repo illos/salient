@@ -109,3 +109,8 @@ None needed for this assessment. Implementation remains subject to the owning sp
   comparison-failure outcomes, reproducible revisions, source-based dispositions and comparator acceptance
   cases to the owning spec. This extends the next ingestion slice's checks; it does not claim that the
   importer or full comparator exists. Documentation links and diff whitespace verified.
+- 2026-09-16 user checkpoint: prepared [V27](V27-undead-ingestion.md) and a
+  [ready-to-paste kickoff](../kickoff-undead-ingestion.md) for building the selected undead slice.
+  Preserved the agreed ingestion boundary, feature/search/theme/sharing requirements, external
+  comparison policy, source pins, branch state and pending setup. Implementation remains Not started;
+  this session stops after the documentation checkpoint. Main and other worktrees were not modified.
