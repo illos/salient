@@ -1,8 +1,9 @@
 // SPDX-License-Identifier: GPL-3.0-only
 /**
  * V21 items 5, 6, 7 and 8: the game log as the mockups' feed (discs, dice chips, centred session
- * markers), the LOG / ROLLS tabs over the same subscription, the history controls in their V29
- * placement (the table settings pop-up, docs/build/V29-desktop-feedback.md item 1), the
+ * markers), the LOG / ROLLS tabs over the same subscription, the history controls in their V31
+ * placement (a discreet icon pair beside the tabs, with only the Enable user undo setting in the
+ * table settings pop-up; docs/build/V31-history-control-placement.md), the
  * pinned command line, the segmented initiative bar over the existing group model, and the hero
  * ring row.
  *
@@ -22,7 +23,7 @@ async function run(page: Page, text: string) {
   await page.getByLabel('Slash command').press('Enter');
 }
 
-test('log feed: dice chips, markers, ROLLS filter, history in settings, command line', async ({
+test('log feed: dice chips, markers, ROLLS filter, history icon pair, command line', async ({
   browser,
 }) => {
   test.setTimeout(300_000);
@@ -83,9 +84,51 @@ test('log feed: dice chips, markers, ROLLS filter, history in settings, command 
     await expect(director.locator('[data-toast-viewport]')).toBeHidden();
     await director.getByLabel('Slash command').fill('');
 
-    // V29 item 1: the toolbar left the log pane for the table settings pop-up, and keeps its
-    // operations there — the Director's Rewind undoes the roll and Redo restores it.
+    // V31 item 2: Rewind and Redo are a discreet icon pair beside the tabs, not the V21 caps
+    // buttons and not a row of their own. They keep their operations: Rewind undoes the roll.
     await expect(director.getByRole('toolbar', { name: 'History' })).toHaveCount(0);
+    const history = director.getByRole('group', { name: 'History' });
+    await expect(history.getByRole('button')).toHaveCount(2);
+    const rewind = history.getByRole('button', { name: 'Rewind', exact: true });
+    const redo = history.getByRole('button', { name: 'Redo', exact: true });
+    // Icon only: the accessible name comes from the label, not from visible text.
+    await expect(rewind).toHaveText('');
+    await expect(redo).toHaveText('');
+    // The tooltip carries what each would act on, or why it is unavailable.
+    await expect(rewind).toHaveAttribute('title', /^Rewind: #\d+ /);
+    await expect(redo).toHaveAttribute('title', /^Redo: Nothing to redo/);
+    // An unavailable control is inert but still says why, by every route: it keeps its tooltip,
+    // it stays in the tab order, and it is described for assistive technology.
+    await expect(redo).toHaveAttribute('aria-disabled', 'true');
+    await expect(redo).toHaveAttribute('title', /^Redo: Nothing to redo/);
+    // `aria-disabled` replaces the native `disabled:` variants, so the dimming is asserted too.
+    await expect(redo).toHaveCSS('opacity', '0.5');
+    await expect(rewind).not.toHaveCSS('opacity', '0.5');
+    await redo.focus();
+    await expect(redo).toBeFocused();
+    const describedBy = await redo.getAttribute('aria-describedby');
+    await expect(director.locator(`#${describedBy}`)).toHaveText(/^Redo: Nothing to redo/);
+    // Focusable does not mean live: `aria-disabled` keeps the control reachable and inert, so
+    // clicking it must submit nothing — no entry, no disposition change and no failure toast.
+    const before = await feed(director).locator('li[data-sequence]').count();
+    // Playwright refuses an ordinary click on an `aria-disabled` control, which is itself the
+    // first half of the evidence; force one past that check, and press Enter on it focused.
+    await redo.click({ force: true });
+    await director.keyboard.press('Enter');
+    await expect(director.locator('[data-toast-viewport] li')).toHaveCount(0);
+    await expect(feed(director).locator('li[data-sequence]')).toHaveCount(before);
+    await expect(feed(director).locator('li[data-disposition="undone"]')).toHaveCount(0);
+    await rewind.click();
+    await expect(
+      feed(director).locator('li[data-dice="true"][data-disposition="undone"]'),
+    ).toHaveCount(1);
+    await expect(redo).not.toHaveAttribute('aria-disabled', 'true');
+    await redo.click();
+    await expect(
+      feed(director).locator('li[data-dice="true"][data-disposition="undone"]'),
+    ).toHaveCount(0);
+
+    // V31 item 1: the settings pop-up keeps the campaign setting and nothing else from the strip.
     // Raise a toast again and leave it up, so the pop-up opens over a live one.
     await run(director, '/test roll characteristic=M');
     await expect(toast).toHaveCount(1);
@@ -100,19 +143,17 @@ test('log feed: dice chips, markers, ROLLS filter, history in settings, command 
     await expect(director.locator('#root')).not.toHaveAttribute('aria-hidden', 'true');
     await expect(director.getByRole('alert')).toHaveCount(1);
     await expect(settings.getByRole('switch', { name: 'Enable user undo' })).toBeVisible();
-    await settings.getByRole('button', { name: /^Rewind/ }).click();
-    await expect(
-      feed(director).locator('li[data-dice="true"][data-disposition="undone"]'),
-    ).toHaveCount(1);
-    await settings.getByRole('button', { name: /^Redo/ }).click();
-    await expect(
-      feed(director).locator('li[data-dice="true"][data-disposition="undone"]'),
-    ).toHaveCount(0);
+    await expect(settings.getByRole('button', { name: /Rewind|Redo/ })).toHaveCount(0);
     await settings.getByRole('button', { name: 'Close settings' }).click();
     await expect(settings).toBeHidden();
     // That second toast is left to its own lifetime, which is the other half of the contract:
     // a toast nobody touches expires. Manual dismissal is asserted above.
     await expect(toast).toHaveCount(0, { timeout: 20_000 });
+
+    // An observer-free check that the pair is the player's too, under their own label.
+    await expect(
+      player.getByRole('group', { name: 'History' }).getByRole('button', { name: 'Undo' }),
+    ).toHaveCount(1);
 
     // V29 item 1: a player's undo and redo keep the inline placement, on the entry each would act
     // on. The player's own roll is the head of their window; Enable user undo is on by default.
@@ -169,6 +210,18 @@ test('initiative bar: a segment per turn entry, the current one marked, Groups f
     await expect(bar.locator('li[data-entry-id][data-state="acting"]')).toHaveCount(0);
 
     // The ring row stands above the heroes pane in combat.
+    // V31 review R1: the pair keeps a reserved column, so it cannot cover the ROLLS tab. Assert
+    // it in combat, where the heroes column is wider and the centre pane correspondingly
+    // narrower — free play is the wide case and the absolute layout this replaced passed there.
+    const pair = director.getByRole('group', { name: 'History' });
+    for (const width of [1440, 1152, 1024]) {
+      await director.setViewportSize({ width, height: 900 });
+      const rolls = await tab(director, 'Rolls').boundingBox();
+      const box = await pair.boundingBox();
+      expect(rolls && box && rolls.x + rolls.width).toBeLessThanOrEqual(box!.x);
+    }
+    await director.setViewportSize(VIEWPORTS[0]);
+
     const rings = director.locator('[data-hero-ring-row]');
     await expect(rings).toBeVisible();
     await expect(rings.getByRole('button')).toHaveCount(1);

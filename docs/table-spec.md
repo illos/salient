@@ -400,14 +400,19 @@ same thread:
 **User decision, 2026-09-16 (desktop review of the built layout):** two further placements, recorded
 in [V29](build/V29-desktop-feedback.md).
 
-- **The history controls belong in the settings pop-up.** The strip V21 put under the LOG / RULES /
-  ROLLS tabs is gone, and the Director's Rewind, Redo and Enable user undo become rows of the same
-  settings pop-up, which now covers presentation and history. The centre pane keeps the log feed
-  alone under its tabs. The pop-up is the Director's, so a player's undo and redo are not in it:
-  they keep the inline buttons on the entries they would act on (see
-  [Undo permissions](#undo-permissions-and-proposed-campaign-control)), and reach the operations
-  from the command line when the target entry is not in the current view. The controls remain
-  registered operations under unchanged authority.
+- **Enable user undo belongs in the settings pop-up; Rewind and Redo stay in the table.** The
+  campaign setting becomes a switch row of the settings pop-up. Rewind and Redo are actions taken
+  during play, so they remain in the main table UI, and as a discreet icon control rather than the
+  caps buttons V21 drew. Undo and Redo also keep the inline placement on the entry they would act
+  on (see [Undo permissions](#undo-permissions-and-proposed-campaign-control)). The controls remain
+  registered operations under unchanged authority. Recorded first as moving the whole strip into
+  the pop-up and corrected by the user the same day on seeing it; the correction is what stands.
+
+  Implementation choices under that decision, not part of it and open to change: the pair sits at
+  the right-hand end of the LOG / RULES / ROLLS tab row in a reserved column, so the tabs stay
+  centred and nothing overlaps as the pane narrows; and what each control would act on, or why it
+  is unavailable, is carried by its tooltip and its accessible description rather than by a line
+  of visible text ([V31](build/V31-history-control-placement.md)).
 - **A failed operation is a dismissible toast, not a block beside the control.** Error messages from
   registered operations appear in one fixed, screen-reader announced toast region with a Dismiss
   control, instead of an inline notice that overlaps neighbouring content and moves the layout. The
@@ -1556,9 +1561,10 @@ extends the narrow modifier exception to additions and removals, not direct dama
 
 Confirmed placement: an Undo button accompanies inline results, under existing player/Director undo
 permissions. Confirmed 2026-09-16: Redo takes the matching inline placement on the entry it would
-restore, and the Director's Rewind, Redo and Enable user undo controls live in the table settings
-pop-up (see [Confirmed combat layout](#confirmed-combat-layout)); no placement changes who may
-undo, rewind or redo. Confirmed 2026-09-13: undoing an adjudication restores the prior effective result while
+restore; Rewind and Redo are also a discreet icon pair in the log pane's tab row, and only the
+Enable user undo campaign setting lives in the table settings pop-up (see
+[Confirmed combat layout](#confirmed-combat-layout)). No placement changes who may undo, rewind or
+redo. Confirmed 2026-09-13: undoing an adjudication restores the prior effective result while
 leaving the original ability use intact; undoing the original action is a distinct operation that reverses
 its applied effects. Both correction and undo append new entries. The original log entry is never
 rewritten, and subsequent undo and interpretation use the effective result established by the new entry

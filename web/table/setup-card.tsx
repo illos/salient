@@ -28,26 +28,48 @@ export function CommandButton({
   label,
   disabled,
   variant = 'outline',
+  icon,
+  title,
+  describedBy,
   onDone,
 }: {
   campaignId: Id<'campaigns'>;
   text: string;
+  /** Visible text, or — with `icon` — the accessible name of an icon-only control. */
   label: string;
   disabled?: boolean;
   variant?: 'outline' | 'default' | 'ghost' | 'secondary';
+  /** Render an icon-only button carrying `label` as its accessible name (V31 item 2). */
+  icon?: React.ReactNode;
+  /** Tooltip; defaults to the slash text the button submits. */
+  title?: string;
+  /** Id of an element describing the control, e.g. why it is unavailable (V31). */
+  describedBy?: string;
   onDone?: () => void;
 }) {
   const submit = useMutation(api.commands.submit);
   const command = useCommand();
+  const tooltip = title ?? text;
+  const inert = disabled || command.pending;
   return (
     <span className="inline-flex flex-col">
       <Button
         type="button"
         variant={variant}
-        size="sm"
-        disabled={disabled || command.pending}
-        title={text}
-        onClick={() =>
+        size={icon ? 'icon-sm' : 'sm'}
+        aria-label={icon ? label : undefined}
+        aria-describedby={describedBy}
+        disabled={inert}
+        // An icon-only control carries its whole explanation in the tooltip and the description,
+        // and a natively disabled button reaches neither: it takes no pointer events, so the
+        // tooltip never opens, and it leaves the tab order (V31 review, finding 1). Base UI's
+        // `focusableWhenDisabled` emits `aria-disabled` instead, which stays inert but focusable
+        // and hoverable. Buttons with a visible label keep the native behaviour.
+        focusableWhenDisabled={icon ? true : undefined}
+        className={icon ? 'aria-disabled:cursor-default aria-disabled:opacity-50' : undefined}
+        title={tooltip}
+        onClick={() => {
+          if (inert) return;
           void command
             .run(
               commandId => submit({ campaignId, text, commandId }),
@@ -55,10 +77,10 @@ export function CommandButton({
             )
             .then(ok => {
               if (ok) onDone?.();
-            })
-        }
+            });
+        }}
       >
-        {label}
+        {icon ?? label}
       </Button>
     </span>
   );

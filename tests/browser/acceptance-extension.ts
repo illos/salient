@@ -121,11 +121,20 @@ export async function tableJourney(pages: Page[], campaignUrl: string, stamp: st
   await player.getByRole('button', { name: 'Add edge', exact: true }).click();
   await expect(player.getByText(/: 1 edge, 0 bane → total/).first()).toBeVisible();
   expect((await query('abilities:results'))[0].targets[0].edges).toBe(1);
-  await player.getByRole('button', { name: 'Undo', exact: true }).first().click();
+  // V31 put a header icon pair on the same operations; keep this on the inline per-entry button.
+  await player
+    .locator('[data-log-feed]')
+    .getByRole('button', { name: 'Undo', exact: true })
+    .first()
+    .click();
   await expect(player.getByText(/: 0 edge, 0 bane → total/).first()).toBeVisible();
   expect((await query('abilities:results'))[0].targets[0].edges).toBe(0);
   expect((await query('table:roster')).foes).toEqual(beforeCorrection.foes);
-  await player.getByRole('button', { name: 'Redo', exact: true }).first().click();
+  await player
+    .locator('[data-log-feed]')
+    .getByRole('button', { name: 'Redo', exact: true })
+    .first()
+    .click();
   await expect(player.getByText(/: 1 edge, 0 bane → total/).first()).toBeVisible();
   expect((await query('abilities:results'))[0].targets[0].edges).toBe(1);
   expect((await query('abilities:results'))[0].dice).toEqual(result.dice);

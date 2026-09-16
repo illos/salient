@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-only
 /**
- * The centre pane: LOG / RULES / ROLLS tabs and the shared game-log
+ * The centre pane: LOG / RULES / ROLLS tabs with the history icon pair, and the shared game-log
  * feed in the mockup presentation (session-free-play-director.png, combat-table-*.png; docs/build/
  * V21-desktop-layout-fidelity.md item 5) and the interactive cards index.tsx mounts beneath it.
  * The feed is chronological, oldest at the top, pinned to the newest entry unless the viewer has
@@ -22,6 +22,7 @@ import { OverlayCard } from '../components/overlay-card';
 import { Button } from '../components/ui/button';
 import { useRulesCatalog } from '../rules/content';
 import { Loading } from '../ui';
+import { HistoryControls } from './history-controls';
 import { InitiativeBar } from './initiative-bar';
 import { hasDice, LogEntry, type LogEvent } from './log-entry';
 import type { Roster } from './director-pane';
@@ -94,8 +95,8 @@ export function GameLog({
     ...(before === undefined ? {} : { before }),
   });
   // A06: which entries the viewer's Undo/Rewind and Redo would act on; each operation checks
-  // again when it runs. V29 moved the Director's toolbar into the table settings pop-up, so these
-  // inline buttons are the log's own history affordance.
+  // again when it runs. These are the inline affordance beside a result; the pane header's icon
+  // pair (V31) acts on the same targets without naming an entry.
   const history = useQuery(api.history.status, { campaignId });
   const list = useRef<HTMLOListElement>(null);
   usePinnedToBottom(list, before === undefined);
@@ -212,11 +213,7 @@ function LogTabs({
         : 'border-b-transparent text-muted-foreground hover:text-foreground'
     }`;
   return (
-    <div
-      className="rule-strong flex items-end justify-center gap-7"
-      role="tablist"
-      aria-label="Log"
-    >
+    <div className="flex items-end justify-center gap-7" role="tablist" aria-label="Log">
       <h2 className="sr-only">Game log</h2>
       <button
         type="button"
@@ -346,8 +343,9 @@ function RulesCard({ open, onOpenChange }: { open: boolean; onOpenChange: (o: bo
 }
 
 /**
- * The whole centre column: in combat the initiative bar, then the tabs (sticky at the top of the
- * pane), the feed, and the interactive cards index.tsx passes as children beneath the feed.
+ * The whole centre column: in combat the initiative bar, then the tabs with the discreet Rewind /
+ * Redo pair at their right edge (sticky at the top of the pane), the feed, and the interactive
+ * cards index.tsx passes as children beneath the feed.
  */
 export function LogPane({
   campaignId,
@@ -383,12 +381,24 @@ export function LogPane({
             onTurnTaken={onTurnTaken}
           />
         )}
-        <LogTabs
-          tab={tab}
-          onTab={setTab}
-          rulesOpen={rulesOpen}
-          onRules={() => setRulesOpen(true)}
-        />
+        {/* V31 item 2: three columns keep the tabs centred while reserving space for Rewind and
+            Redo at the right edge of the same row, so they never overlap ROLLS as the pane
+            narrows or the page is zoomed. The rule under the row belongs to this wrapper, not to
+            the tablist, so it still spans the full width. */}
+        <div className="rule-strong grid grid-cols-[1fr_auto_1fr] items-end">
+          <span aria-hidden />
+          <LogTabs
+            tab={tab}
+            onTab={setTab}
+            rulesOpen={rulesOpen}
+            onRules={() => setRulesOpen(true)}
+          />
+          {running && roster.role !== 'observer' ? (
+            <HistoryControls campaignId={campaignId} className="justify-self-end pb-1" />
+          ) : (
+            <span aria-hidden />
+          )}
+        </div>
       </div>
       <RulesCard open={rulesOpen} onOpenChange={setRulesOpen} />
       <GameLog

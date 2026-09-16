@@ -101,8 +101,8 @@ inline `ErrorNotice`. They are not transient action failures and have nowhere to
 3. A player with Enable user undo on sees the inline `Undo` button on the entry their undo would act
    on, and the inline `Redo` button on the entry their redo would restore; both work.
 4. Submitting an operation that fails raises one toast whose text is the operation's message, with
-   no `Server Error` or `Uncaught ConvexError:` prefix, and no `ErrorNotice` block appears beside the
-   control.
+   no `Server Error` or `Uncaught ConvexError:` prefix, and no `ErrorNotice` block appears next
+   to the control.
 5. The toast has a `Dismiss` button; pressing it removes the toast. The toast region is announced to
    assistive technology without stealing focus.
 6. A failing command renders no error block inside the pane that submitted it; the message appears
@@ -135,9 +135,9 @@ helpers (`HistoryStatus`, `undoCommand`, `redoCommand`, `undoLabel`, `availabili
 `redoTarget` alongside `undoTarget`; `web/table/log-entry.tsx` renders the inline Redo on that
 entry. No operation, argument or authority changed.
 
-**Item 2.** `web/toast.tsx` is new: a provider mounted in `web/main.tsx`, a `useToast` publisher, and
-a fixed viewport of `role="alert"` items with a `Dismiss` button and a ten-second lifetime, capped at
-four. `web/ui.tsx` drops `error` from `useCommand`'s return and raises the message through the toast
+**Item 2.** `web/toast.tsx` is new: a provider mounted in `web/main.tsx`, a `useToast` publisher
+and a fixed viewport of `role="alert"` items with a `Dismiss` button and a ten-second lifetime,
+capped at four. `web/ui.tsx` drops `error` from `useCommand`'s return and raises the message through the toast
 instead; `errorMessage` prefers a `ConvexError`'s `data` and strips the `Server Error` /
 `Uncaught ConvexError:` envelope. Forty-three inline `<ErrorNotice error={…} />` renders paired with
 a `useCommand` hook were removed, along with the three transient non-command notices (the sign-out
@@ -165,7 +165,12 @@ dev server at `127.0.0.1:5183`; the user's playable environment on `5180` was no
   `.playtest/v21/log/error-toast-dark-1440x900.png` (the toast reading
   `/test roll needs an @actor.`, clear of the command line).
 
-**Accepted losses, recorded rather than fixed.** The old toolbar rendered in the pane header for
+**Accepted losses, recorded rather than fixed** — and then not accepted: the user corrected this
+item the same day, and [V31](V31-history-control-placement.md) returns Rewind and Redo to the
+table as an icon pair. That removes the first two losses below outright, and answers the third by
+carrying the reason in the control's tooltip and its accessible description for every role —
+though the visible line is gone with nothing in its place, which is accepted as the cost of the
+discreet control the user asked for. Kept here as the record of what V29 shipped. The old toolbar rendered in the pane header for
 every non-observer while a session ran, independent of what the feed showed. The inline buttons
 render only when their target entry is rendered, so a player has no history button while the ROLLS
 tab filters that entry out, or after paging back to older activity; `/history undo` and
@@ -256,7 +261,8 @@ Redo round trip read back from the feed's `data-disposition`, the `Enable user u
 toast's message and clearance over the command line, the accessibility assertion with the pop-up
 open, the player's inline Undo and Redo on the right entries, manual dismissal and auto-expiry.
 `v21-rosters.spec.ts` also passes there and captures the pop-up. Evidence from the shared app:
-`evidence/V29-live/live-error-toast-dark.png` and `evidence/V29-live/live-settings-history-dark.png`.
+`evidence/V29-live/live-error-toast-dark.png` and
+`evidence/V29-live/live-settings-history-dark.png`.
 
 Nothing is pending. `slice/V29` is retired and the isolated backend and dev server for this slice
 are stopped.
