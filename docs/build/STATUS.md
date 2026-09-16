@@ -20,7 +20,9 @@ evidence when claiming work rather than treating historical handoff notes as cur
 
 ## Active parser/engine ownership — 2026-09-16
 
-V26 specification is merged; implementation has not started. User-requested real-app baseline tests
+V26 specification is merged. Prerequisite correction/turn-setup fixes are in progress on
+`slice/V26-corrections`, based on main `f7137dc` plus baseline evidence. Compiler implementation
+has not started. User-requested real-app baseline tests
 now cover all ten currently available abilities with [source/log screenshots and saved readback](evidence/V26/baseline-2026-09-16/README.md).
 Baseline damage/cost/history checks passed; V26 compiled effects/push arithmetic and full acceptance
 remain pending. Evidence work is on short-lived `slice/V26-playtest` in
@@ -163,7 +165,7 @@ See the [CI review and run record](audits/2026-09-14-ci-history-review.md) for t
 | V19 | [Forced access changes and combat recovery](V19-forced-access-recovery.md) | V10 | Outline |
 | V20 | [Dynamic terrain objects](V20-dynamic-terrain.md) | V04 | Outline |
 | V21 | [Desktop layout fidelity](V21-desktop-layout-fidelity.md) | A08, A09, V13 | Built, not committed — 2026-09-15 (foundation + five parallel implementers, lead integration and repairs); lint, typecheck, 85 engine tests, 317 app tests, links, vendor, content and the full 20-test browser suite pass; screenshots under `.playtest/v21/` compared with each mockup; review deferred to the user's audit thread |
-| V26 | [Compiled ability effects: damage and push instructions](V26-compiled-ability-effects.md) | S01, S02, A01, A02, A04, A05, A06, A09 | Ready — specification merged into main at `3689226`, 2026-09-16; independent design and rules review pass; 10 live designs including Viscous Fire; 3 compile-only comparisons; implementation pending; [ten-ability baseline screenshots and readback](evidence/V26/baseline-2026-09-16/README.md) captured on `slice/V26-playtest`, not V26 acceptance; specification integration needs no runtime update |
+| V26 | [Compiled ability effects: damage and push instructions](V26-compiled-ability-effects.md) | S01, S02, A01, A02, A04, A05, A06, A09 | In progress — prerequisite correction and proper-turn playtest fixes on `slice/V26-corrections`; specification merged into main at `3689226`, 2026-09-16; independent design and rules review pass; 10 live designs including Viscous Fire; 3 compile-only comparisons; implementation pending; [ten-ability baseline screenshots and readback](evidence/V26/baseline-2026-09-16/README.md) captured on `slice/V26-playtest`, not V26 acceptance; specification integration needs no runtime update |
 | V64 | [Ability grammar coverage audit](V64-ability-coverage-audit.md) | V26 specification, S01, V35 | Merged — read-only audit script, report and tests integrated into main at `458b6e8`, 2026-09-20; independent review pass; no runtime impact (no backend, frontend or content change) | Engine and parser thread |
 | V66 | [Browser test harness repair](V66-browser-test-harness-repair.md) | S03, browser failure audit | Not started — registered 2026-09-20 at the user's direction; do not claim until the user starts it; ends the browser testing moratorium when implemented | Unassigned |
 | V68 | [Campaign home redesign](V68-campaign-home.md) | V21, V29, V31, V43, A09 | In progress — claimed 2026-09-20 on `slice/V68` (`code/.worktrees/campaign-home`) from main `2f5544f`; builds the user's V2 simplified campaign-home mockup: owner/Director badges, connected presence, optional session titles, session history with RECAP, light campaign chat, Manage players pop-up; isolated CT114 env `campaign-home`; headless-only verification | Campaign home UI thread (Fable) |

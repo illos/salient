@@ -867,7 +867,7 @@ describe('A05 attacks, damage, costs and common actions', () => {
     expect((await eventById(t, campaignId, used.eventId)).description).toBe(event.description);
   });
 
-  test('acceptance 9: 10.10 post-roll Add bane changes tier and damage with the same dice as a linked correction; the original event is unchanged; a further correction needs the rewind first', async () => {
+  test('acceptance 9: 10.10 post-roll Add bane changes tier and damage with the same dice as a linked correction; the original event is unchanged and linked corrections continue without rewind', async () => {
     const t = backend();
     const { director, player, observer, campaignId, goblin } = await battle(t);
     await atDice(t, campaignId, [8, 2]);
@@ -926,18 +926,59 @@ describe('A05 attacks, damage, costs and common actions', () => {
     const results = await director.client.query(api.abilities.results, { campaignId });
     expect(results[0]!.targets[0]).toMatchObject({ edges: 0, banes: 1 });
     expect(results[0]!.correctionEventIds).toEqual([corrected.eventId]);
-    // The correction is its own unit (kind correction.*): a further correction of the older attack
-    // needs the sequential rewind first (A06 window), for the Director as well. Removal of the bane
-    // restoring tier 2 / 7 damage / Stamina 8 is verified in tests/resolve.test.ts (10.10).
-    await expect(
-      submit(
-        director.client,
+    // Consecutive corrections continue this effective roll, while each remains its own undo unit.
+    expect(results[0]!.mayCorrect).toBe(true);
+    const restoreId = cid('restore');
+    const restored = await submit(
+      player.client,
+      campaignId,
+      `/ability correct event="${used.eventId}" target=@{foe:${goblin}} edges=0 banes=0`,
+      restoreId,
+    );
+    expect((await foeRow(t, goblin)).live.stamina).toBe(8);
+    expect(
+      await submit(
+        player.client,
         campaignId,
         `/ability correct event="${used.eventId}" target=@{foe:${goblin}} edges=0 banes=0`,
-        cid('restore'),
+        restoreId,
       ),
-    ).rejects.toThrow('rewind');
+    ).toEqual(restored);
+    expect((await player.client.query(api.abilities.results, { campaignId }))[0]).toMatchObject({
+      mayCorrect: true,
+      correctionEventIds: [corrected.eventId, restored.eventId],
+    });
+    await submit(player.client, campaignId, '/history undo', cid('undo-correction'));
     expect((await foeRow(t, goblin)).live.stamina).toBe(11);
+    await submit(player.client, campaignId, '/history redo', cid('redo-correction'));
+    expect((await foeRow(t, goblin)).live.stamina).toBe(8);
+    expect(await eventById(t, campaignId, used.eventId)).toEqual(original);
+    expect(await rolls(t)).toHaveLength(rollsBefore);
+    // Director corrections still close the player's window, including within this linked chain.
+    await submit(
+      director.client,
+      campaignId,
+      `/ability correct event="${used.eventId}" target=@{foe:${goblin}} edges=0 banes=1`,
+      cid('director-correct'),
+    );
+    expect((await player.client.query(api.abilities.results, { campaignId }))[0]!.mayCorrect).toBe(
+      false,
+    );
+    await expect(
+      submit(
+        player.client,
+        campaignId,
+        `/ability correct event="${used.eventId}" target=@{foe:${goblin}} edges=0 banes=0`,
+        cid('player-after-director'),
+      ),
+    ).rejects.toThrow('Director');
+    await submit(
+      director.client,
+      campaignId,
+      `/ability correct event="${used.eventId}" target=@{foe:${goblin}} edges=0 banes=0`,
+      cid('director-again'),
+    );
+    expect((await foeRow(t, goblin)).live.stamina).toBe(8);
     // Player view: the foe's Stamina numbers are hidden under the default bar display; the arithmetic is not.
     const forPlayer = await player.client.query(api.events.list, { campaignId });
     const seen = forPlayer.events.find(e => e.id === corrected.eventId)!;
@@ -947,6 +988,119 @@ describe('A05 attacks, damage, costs and common actions', () => {
     const seenUse = forPlayer.events.find(e => e.id === used.eventId)!;
     expect(JSON.stringify(seenUse.payload)).not.toContain('"staminaAfter"');
     expect(JSON.stringify(seenUse.payload)).toContain('"rolledDamage":7');
+  });
+
+  test('consecutive corrections across targets preserve other results and cost, and cannot cross a different corrected roll', async () => {
+    const t = backend();
+    const { director, player, observer, campaignId, goblins, thornId } = await battle(t, {
+      goblins: 3,
+      ferocity: 5,
+    });
+    await atDice(t, campaignId, [7, 6]);
+    const used = await submit(
+      player.client,
+      campaignId,
+      `@Thorn /ability use ability="Thunder Roar" targets=[${goblins.map(id => `@{foe:${id}}`).join(',')}]`,
+      cid('multi'),
+    );
+    const before = (await director.client.query(api.abilities.results, { campaignId }))[0]!;
+    const rollCount = (await rolls(t)).length;
+    const correction = (eventId: Id<'events'>, target: Id<'foes'>, edges: number, banes: number) =>
+      submit(
+        player.client,
+        campaignId,
+        `/ability correct event="${eventId}" target=@{foe:${target}} edges=${edges} banes=${banes}`,
+        cid('multi-correct'),
+      );
+    await correction(used.eventId, goblins[0]!, 1, 0);
+    await correction(used.eventId, goblins[1]!, 0, 2);
+    const after = (await director.client.query(api.abilities.results, { campaignId }))[0]!;
+    expect(after.targets[0]!.applied.staminaAfter).toBe(-2);
+    expect(after.targets[1]!.applied.staminaAfter).toBe(9);
+    expect(after.targets[2]).toEqual(before.targets[2]);
+    expect(after.correctionEventIds).toHaveLength(2);
+    expect(after.dice).toEqual(before.dice);
+    expect((await heroRow(t, thornId)).liveState!.heroicResource.current).toBe(0);
+    expect(await rolls(t)).toHaveLength(rollCount);
+    expect(
+      (await observer.client.query(api.abilities.results, { campaignId }))[0]!.mayCorrect,
+    ).toBe(false);
+    // A newer roll and its corrections are a different chain, even for the same hero.
+    await atDice(t, campaignId, [4, 5]);
+    const later = await submit(
+      player.client,
+      campaignId,
+      `@Thorn /ability use ability="Melee Weapon Free Strike" targets=[@{foe:${goblins[2]}}]`,
+      cid('later-roll'),
+    );
+    await correction(later.eventId, goblins[2]!, 1, 0);
+    await expect(
+      submit(
+        director.client,
+        campaignId,
+        `/ability correct event="${used.eventId}" target=@{foe:${goblins[0]}} edges=0 banes=0`,
+        cid('old-roll'),
+      ),
+    ).rejects.toThrow('rewind');
+    expect((await foeRow(t, goblins[0]!)).live.stamina).toBe(-2);
+  });
+
+  test('linked ability corrections preserve disposition, later-action and settings boundaries', async () => {
+    const t = backend();
+    const { director, player, campaignId, goblin } = await battle(t);
+    await atDice(t, campaignId, [7, 7]);
+    const used = await submit(
+      player.client,
+      campaignId,
+      `@Thorn /ability use ability="Brutal Slam" targets=[@{foe:${goblin}}]`,
+      cid('slam'),
+    );
+    const correct = (client: Client, banes: number) =>
+      submit(
+        client,
+        campaignId,
+        `/ability correct event="${used.eventId}" target=@{foe:${goblin}} edges=0 banes=${banes}`,
+        cid('correct'),
+      );
+    await correct(player.client, 1);
+    await submit(director.client, campaignId, '/campaign user-undo state=off', cid('off'));
+    await expect(correct(player.client, 2)).rejects.toThrow('off');
+    await submit(director.client, campaignId, '/campaign user-undo state=on', cid('on'));
+    await correct(player.client, 2);
+    expect((await foeRow(t, goblin)).live.stamina).toBe(10);
+    const result = (await director.client.query(api.abilities.results, { campaignId }))[0]!;
+    expect(result.mayResolve).toBe(true);
+    await director.client.mutation(api.commands.invoke, {
+      campaignId,
+      commandId: cid('manual'),
+      operation: 'ability.resolved',
+      arguments: {
+        event: used.eventId,
+        target: { refKind: 'foe', id: goblin },
+        clause: result.targets[0]!.outcome.unresolvedClauses[0],
+      },
+    });
+    expect(
+      (await director.client.query(api.abilities.results, { campaignId }))[0]!.mayCorrect,
+    ).toBe(false);
+    await expect(correct(director.client, 0)).rejects.toThrow('rewind');
+    await submit(director.client, campaignId, '/history rewind', cid('undo-disposition'));
+    await correct(director.client, 0);
+    expect((await foeRow(t, goblin)).live.stamina).toBe(7);
+    await submit(player.client, campaignId, '@Thorn /turn end', cid('end'));
+    await expect(correct(director.client, 1)).rejects.toThrow('rewind');
+    await submit(director.client, campaignId, '/history rewind', cid('rewind-end'));
+    expect(
+      (await director.client.query(api.abilities.results, { campaignId }))[0]!.mayCorrect,
+    ).toBe(true);
+    await submit(
+      director.client,
+      campaignId,
+      `@{foe:${goblin}} /adjust stamina value=12`,
+      cid('later-adjustment'),
+    );
+    await expect(correct(director.client, 1)).rejects.toThrow('rewind');
+    expect((await foeRow(t, goblin)).live.stamina).toBe(12);
   });
 
   test('Catch Breath in combat is a maneuver with action tracking (10.9); FreePlay use spends no maneuver; Aid Attack is recorded with its text and a maneuver warning', async () => {
