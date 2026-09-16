@@ -87,4 +87,9 @@ Candidate `Q-V-n` entries from `docs/engine-architecture.md#open-decisions`:
 
 ## Work log
 
-_Empty._
+### 2026-09-16 — smaller precursor proposed
+
+V26's [compiled ability effects specification](V26-compiled-ability-effects.md) isolates source to
+shared damage execution and push instructions. It does not execute V04's areas/responses or V02's
+minions, and retains explicit manual effects. V05's A09/V04 hard dependencies and broader scope
+remain unchanged. V26 is specification work; no new automation is claimed.

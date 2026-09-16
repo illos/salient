@@ -72,3 +72,12 @@ Proof criteria:
 Generate a compact report of executable abilities and unsupported clauses. Expand the most reusable missing constructions based on actual corpus evidence. Count parsed documents separately from fully executable abilities.
 
 Use the report and behavior examples to guide work. Do not require hand-maintained certificates, per-monster approval records, or tests asserting only that a citation exists.
+
+## Proposed first integrated slice — 2026-09-16
+
+[V26: compiled ability effects](build/V26-compiled-ability-effects.md) proposes connecting a small
+shared compiler to the existing live roll/damage and journal path. Its first supported combination
+is damage plus a calculated push instruction; actual spatial movement remains table work. The slice
+requires full source retention, explicit unsupported dependencies, stable effect occurrences and
+persisted correction/undo evidence across hero and monster formats. It is a proposed implementation
+scope, not a claim that these effects are built or that a parsed ability is fully automated.
