@@ -178,3 +178,6 @@ Final closeout:
 
 Branch handoff: implementation/evidence committed as `d9da1df`. All 186 Markdown link checks,
 whitespace checks and the branch commit gate pass. No merge or shared runtime update was performed.
+
+User-requested pause: see the [character checkpoint](../checkpoint-2026-09-16-characters-v32.md)
+for the saved branch, newer-main observation, evidence and resume instructions.
