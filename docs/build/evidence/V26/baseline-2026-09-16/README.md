@@ -17,7 +17,9 @@ not completion of the [V26 design cases](../../../V26-ability-designs.md).
 - Executed [browser runner](../../../../../tests/browser/v26-baseline.spec.ts), SHA-256
   `de8a8fdb6bb6f258e8e6989a77d70aeb3d14d8b605dad0e71ed64112af1722a2`.
   `SALIENT_V26_BASELINE=1 SALIENT_TEST_URL=http://127.0.0.1:5184 pnpm exec playwright test tests/browser/v26-baseline.spec.ts --output .playtest/v26/browser-results-3 --reporter=line`
-  completed **1 passed (2.8 minutes)**, with no captured page errors.
+  completed **1 passed (2.8 minutes)**, with no captured page errors. This is a historical run:
+  the exact runner is preserved in commit `aeed035` (rebased unchanged as `5e010ac`). The linked
+  current runner now tests the correction fix and writes fresh evidence to an ignored directory.
 - Disposable Director/player accounts, real campaign/session and approved Fury/Elementalist builds.
   Account/campaign/session controls ran through the UI; character setup used authenticated public
   create/save/submit/approve operations with existing fixtures, not direct build/grant injection.

@@ -647,3 +647,45 @@ code-baseline results retain their recorded scope; they do not verify future V26
   runtime deployment. Independent baseline evidence and pinned-source rules review **pass**,
   `v26_spec_review`: [baseline playtest review](reviews/V26-baseline-playtest-review.md).
   All eleven V26 implementation acceptance checks remain pending.
+
+
+### 2026-09-16 — prerequisite correction and playtest fixes
+
+User accepted fixing consecutive corrections and proper-turn playtest setup before compiler work.
+Work is bounded to these prerequisites on `slice/V26-corrections`, in
+`/srv/presidium/projects/salient/engine-parser-spec`, based on integrated main `f7137dc` plus the
+rebased baseline evidence (`5e010ac`, formerly `aeed035`). Rebase resolved only STATUS.md while
+preserving V25/V27/V29 integrated records. Original baseline evidence remains historical and unchanged.
+
+Plan: update the shared correction-window helper used by the result query and mutation; preserve
+sequential undo units and player/Director seams; add focused saved-state regressions; replace the
+baseline runner's rewind workaround with consecutive player clicks and use actual turn transitions
+for all ten abilities. No compiler or movement implementation belongs to this prerequisite patch.
+Local anonymous backend 3234/site 3235 and frontend 5184 are isolated; shared playable data is untouched.
+
+Prerequisite acceptance:
+
+1. Two consecutive inline player corrections retain dice, reconcile damage once and leave the original
+   event intact. Player undo/redo restores each correction in sequence; retry remains idempotent.
+2. Director continuations work; Director corrections still close the player's window. Settings,
+   ownership, later actions/turns, manual dispositions and history boundaries remain enforced.
+3. Corrected cards permit the Director to mark manual clauses; the disposition is a subsequent
+   gameplay unit and blocks more correction until rewound.
+4. All ten live ability probes use proper fresh turns with no action/turn-order warnings, source/log
+   screenshots and saved readback. Manual movement/trigger limitations remain explicit.
+5. Full repository checks, independent implementation review and bounded source review pass.
+
+The existing A05 test explicitly expected a second correction to fail under the earlier strict
+interpretation. The user's accepted V26 recommendation clarifies directly linked corrections as
+continuations of the effective roll, while preserving individual undo and all unrelated-event seams.
+The table and command specs now state this distinction. Two new/updated regression cases failed
+before the fix and pass afterward; this is application correction policy, not a new Draw Steel rule.
+
+
+Verification checkpoint: full serial `pnpm check` passes **435 tests** (97 engine + 338 app/scripts)
+and build; the focused ability/history suite passes 38. Independent code/design review and subsequent
+bounded pinned-source review pass in [the prerequisite review](reviews/V26-corrections-review.md).
+Complete live prerequisite 4 remains pending. A partial run verified consecutive player clicks and
+undo/redo but stopped during later turn progression with a backend execution timeout under host memory
+pressure; a subsequent fixture setup failed to obtain its authentication token. All owned services are
+stopped while coordinating a browser window. No failed/partial run counts as complete live acceptance.

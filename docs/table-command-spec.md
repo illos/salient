@@ -436,6 +436,12 @@ committed actions. This applies to the Director as well as every other caller an
 results and applied effects. Three turns back requires undoing all intervening gameplay, not a selective
 patch to the old event. Turn progression also crosses the earlier event's boundary.
 
+V26 clarification, 2026-09-16: directly linked corrections of the same effective ability roll can
+continue consecutively, retaining separate sequential undo units. A player may continue only while
+all such units remain within their authority; a Director correction is still a player seam. Other
+later gameplay, including manual disposition, must be rewound first. See
+[the inline correction contract](table-spec.md#director-edits-to-inline-results).
+
 Enforce this through shared UI/headless operations, including stale inline controls. Rewind is sequential
 under the existing player seams and Director current-encounter scope. Once at the intended point, append
 the correction; original history remains readable, and new gameplay clears the available redo path while

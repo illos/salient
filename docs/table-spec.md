@@ -1533,6 +1533,17 @@ possible result editor. Acting-player authority confirmed 2026-09-14: the acting
 edges/banes to their own eligible attack in the same window as their gameplay undo, with the next
 actor's turn start as the outer cutoff. Existing Director correction authority remains available.
 
+Implementation clarification accepted for V26, 2026-09-16: consecutive edge/bane corrections
+may continue the **same effective ability roll** while every intervening gameplay unit is a directly
+linked correction of that roll. This includes correcting different targets of the same roll.
+Each correction remains a separately attributed, sequentially undoable unit; the original accepted
+dice and event remain unchanged. A Director correction still closes the player's window, and user-undo
+settings, ownership, pause and encounter/session boundaries still apply. Any other gameplay, including
+Resolved at table, requires sequential rewind before another correction. The Director may mark manual
+clauses on a card after its linked corrections; that disposition then closes the correction window.
+This clarification enables V26's consecutive one-bane then two-bane workflow without permitting edits
+through unrelated later actions.
+
 Confirmed 2026-09-14 (Q-A-601): **Enable user undo** also controls acting-player post-roll
 edge/bane corrections. When it is off, players cannot add or remove edges/banes on their recorded
 rolls; those corrections remain available to the Director under existing history/session limits.

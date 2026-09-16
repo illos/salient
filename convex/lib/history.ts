@@ -396,7 +396,8 @@ export interface CorrectionWindow {
 
 /**
  * Whether `user` may append a correction to `eventId` now. The event's unit must be the latest on
- * the branch (older events need the intervening chain rewound first, Director included), inside
+ * the branch, apart from directly linked ability-correction continuations. Older events need the
+ * intervening gameplay rewound first, Director included. The unit must be inside
  * the current encounter or FreePlay stretch of the running session. The acting player's window is
  * their undo window: own character, no seam, next actor's turn start as the outer cutoff. The
  * Enable user undo setting also gates player corrections (confirmed Q-A-601).
@@ -463,23 +464,51 @@ export async function correctionWindow(
       reason: `${label(unit)} is undone; redo it before correcting it.`,
       unit,
     };
+  const later = scope.walk.branch.slice(scope.walk.branch.indexOf(unit) + 1);
+  const correctsThisRoll = (next: Unit<Doc<'events'>>) =>
+    event.kind === 'ability.use' &&
+    next.head.kind === 'correction.ability' &&
+    next.head.causeEventId === event._id &&
+    next.head.payload?.data?.originalEventId === event._id;
   if (mode === 'manual' && context.role === 'director' && !belowFloor(scope, unit)) {
-    // Dispositions continue the original card. Several directly linked clauses can be marked
-    // consecutively; formal closeout also offers outstanding clauses from this encounter.
-    const later = scope.walk.branch.slice(scope.walk.branch.indexOf(unit) + 1);
+    // Dispositions continue the current effective card, including its linked corrections.
+    // Formal closeout also offers outstanding clauses from this encounter.
     const linkedOnly = later.every(
       next =>
-        next.head.kind === 'ability.resolved-at-table' &&
-        next.head.payload?.data?.originalEventId === event._id,
+        correctsThisRoll(next) ||
+        (next.head.kind === 'ability.resolved-at-table' &&
+          next.head.payload?.data?.originalEventId === event._id),
     );
     const cleanup =
       scope.encounter?.phase === 'closeout' && event.encounterId === scope.encounter._id;
     if (linkedOnly || cleanup) return { allowed: true, reason: '', unit };
   }
+  // A directly linked correction continues the same effective roll; it is not permission to
+  // skip other gameplay. Keep every correction as a separate undo unit in the real history.
+  // Validate the original unit's floor/ownership as well as each continuation's player seam.
+  let correctionScope = scope;
+  if (mode === 'correction' && later.length && later.every(correctsThisRoll)) {
+    if (context.role !== 'director') {
+      for (const next of later)
+        if (!(await ownsUnit(ctx, next, user)))
+          return {
+            allowed: false,
+            reason: `Your correction window is closed by ${seamOf(next)}.`,
+            unit,
+          };
+    }
+    correctionScope = {
+      ...scope,
+      walk: {
+        ...scope.walk,
+        branch: scope.walk.branch.slice(0, scope.walk.branch.indexOf(unit) + 1),
+      },
+    };
+  }
   const window =
     context.role === 'director'
-      ? directorWindow(scope, unit)
-      : await playerWindow(ctx, scope, user, unit);
+      ? directorWindow(correctionScope, unit)
+      : await playerWindow(ctx, correctionScope, user, unit);
   if (!window.allowed) return { allowed: false, reason: window.reason, unit };
   return { allowed: true, reason: '', unit };
 }
