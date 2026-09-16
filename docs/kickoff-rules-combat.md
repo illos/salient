@@ -1,5 +1,9 @@
 # Kickoff prompt: rules process and combat
 
+Historical foundation kickoff. For new work, use [the post-v0.01 track kickoff](kickoff-development-track.md)
+and [five-track roadmap](v1-roadmap.md). The original assignment below is retained as history; its
+questionnaire and tooling-first instructions do not override the current bounded-slice workflow.
+
 ## Revised starting order — 2026-09-11
 
 The user has moved FreePlay and combat encounter specification ahead of the tooling pilot and implementation

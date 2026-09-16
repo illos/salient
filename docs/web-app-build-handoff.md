@@ -1,5 +1,16 @@
 # Web app build thread handoff
 
+## Current handoff — 2026-09-15
+
+For new post-v0.01 work, use the [five-track roadmap](v1-roadmap.md),
+[track kickoff](kickoff-development-track.md), and [build process](build/README.md).
+The [integrated acceptance](build/evidence/v001-acceptance.md) closes the recorded prototype scope.
+The two-thread division and remaining-build instructions below describe the earlier foundation phase;
+they do not override the five tracks or require rebuilding accepted behavior. Existing detailed
+contracts still apply within their scope, and later implementations need their own evidence.
+
+## Earlier foundation handoff
+
 The user selected two workstreams: a dedicated thread works through rules tooling and combat behavior with
 the user, while a separate app thread reads the specifications, builds the ordinary web application, and
 reviews its work autonomously. This handoff records that division. Both threads have since started:

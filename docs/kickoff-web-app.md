@@ -1,5 +1,9 @@
 # Kickoff prompt: web application implementation
 
+Historical v0.01 kickoff. For new work, use [the post-v0.01 track kickoff](kickoff-development-track.md)
+and [five-track roadmap](v1-roadmap.md). The original assignment below is retained as history; it does
+not restart accepted foundation work or replace the current isolation/feedback policy.
+
 You are the lead for implementing and reviewing the ordinary web-application portion of this Draw Steel
 companion. Build working connected v0.01 flows from the specifications. Make routine engineering decisions
 autonomously and use subagents for bounded implementation and independent review. You own integration,

@@ -3,9 +3,11 @@
 Status: process adopted 2026-09-14 for the v0.01 build and the V1 slices that follow. This document
 owns *how* work is assigned, reviewed and committed. The specifications under `docs/` own *what* is
 built. `docs/development-process.md` records the earlier principles this process implements; where the
-two differ, this document is current and that one is historical.
+two differ, this document owns the operational procedure. The confirmed post-v0.01
+[five-track roadmap](../v1-roadmap.md) owns workstream boundaries and user-feedback cadence.
 
 Read `CLAUDE.md` and `agent.MD` before anything else. Then read this file, then your slice document.
+For new post-v0.01 work, use [the track kickoff](../kickoff-development-track.md).
 
 ## Why slices
 
@@ -49,7 +51,8 @@ The dependency graph is in `STATUS.md`. A slice may start when every dependency 
 1. **Claim.** Set the `STATUS.md` row to `In progress`, add your team label and date.
 2. **Read.** Every spec section the slice cites, in the current checkout. If a cited section no longer
    says what the slice document summarizes, the spec wins. Note the discrepancy in the slice's work log.
-3. **Plan.** Add a short plan to the slice document's *Work log* section: files to touch, tests to add,
+3. **Plan.** Add a short plan to the slice document's *Work log* section: primary track, worktree/branch,
+   development/test target (no secrets), files to touch, checks, affected shared-contract consumers,
    which dependencies are real and which are stubbed with a clearly named development fixture.
 4. **Implement** in a worktree branch named `slice/<id>` (for example `slice/A05`). Keep game rules out
    of UI components. Every table control goes through a registered shared operation.
@@ -150,10 +153,48 @@ from the implementation. A rules review that cannot ground a claim in the Compen
 
 ## Branch and merge policy
 
-The pre-alpha policy of one current playable version stands. Slice branches exist only to isolate
-concurrent teams; they are short-lived, rebased onto `main` before merge, merged fast-forward by the
-lead after review, and deleted. No long-running feature branches, no release branches, no automatic
-deployment. Development data remains disposable; reset and reseed rather than migrate.
+Confirmed post-v0.01 arrangement, 2026-09-15: protect one integrated, tested playable version on `main`.
+The five tracks use separate worktrees while active and short-lived `slice/<id>` branches. A track is an
+area of ownership, not a permanent branch or a release gate. Integrate completed slices frequently instead
+of waiting for track completion. Worktree paths are an engineering choice; record actual paths in slice
+work logs, outside the shared main checkout. Do not switch the branch in another active thread's directory.
+
+Before starting an implementation slice:
+
+1. Inspect current branches/worktrees, uncommitted work and `STATUS.md`; coordinate with the lead before
+   claiming overlapping files or shared contracts. Preserve all existing changes.
+2. Create the slice branch/worktree from current integrated `main`. Reuse a track's worktree only when
+   its earlier work is committed/integrated and the directory is clean. Two active slices need separate
+   worktrees, including when they belong to the same track.
+3. Initialize vendored sources at the repository's recorded pins and install the pinned dependencies.
+   Do not copy an active working directory's uncommitted files or advance vendor pins.
+4. Establish an isolated development/test environment where required below and record its nonsecret
+   target identity. Run the appropriate baseline checks; report existing failures accurately.
+
+The implementer hands back the reviewed slice. The lead rebases it onto current `main`, resolves any
+integration conflicts, and verifies the resulting integration. Substantive behavior changes require
+renewed applicable review. Run required checks on the integrated result, validate commit trailers, then
+fast-forward `main` and retire the merged branch. A worktree may be reused for another slice; remove it
+only when clean and no active thread uses it. No release branches or automatic deployment are introduced.
+
+### Runtime isolation
+
+Git branches do not isolate Convex deployments, data, frontend servers or test output. A slice that changes
+backend functions or schemas uses an isolated development backend for live verification. Pure parser or
+evaluator work can use deterministic local tests until live integration requires that backend. UI-only work
+may use a compatible coordinated read target, but tests that write/reset data require isolated test data
+and must not disturb the user's playable environment.
+
+Keep per-worktree local configuration, server ports and test output directories distinct as needed. Do not
+blindly copy ignored deployment credentials/configuration from the main checkout: confirm the actual target
+before any sync, seed or reset. Record target identities and commands without secrets. Stop only processes
+owned by the slice. Use the applicable backend setup/deployment instructions; this plan does not select a
+particular cloud service or authorize production deployment.
+
+Development data remains disposable in the correct target. Reset/reseed may replace prototype migrations,
+but a track may not reset or repoint another track's backend or the user's active app. The lead coordinates
+updates to the shared playable environment after integration, including any deliberate reset/reseed and
+relevant smoke checks. A local merge and a running-app update are separate steps; report which occurred.
 
 ## Verification baseline
 

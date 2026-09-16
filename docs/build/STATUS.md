@@ -4,6 +4,45 @@ Single tracker for every slice. Update your row when you claim, block, hand off 
 values: `Not started`, `In progress`, `Blocked (Q-id)`, `In review`, `Committed`, `Outline` (V1 slice
 whose document is an outline until claimed).
 
+## Post-v0.01 organization — 2026-09-15
+
+The [five-track roadmap](../v1-roadmap.md) and [track kickoff](../kickoff-development-track.md)
+govern new work after the recorded A09 acceptance. Tracks are parser/rules engine, foe coverage,
+characters, UI/polish, and app/social features; this file remains the single slice status tracker.
+Record each claimed slice's primary track, owner, worktree/branch and development/test target in its
+work log. Use isolated worktrees and short-lived slice branches under the
+[build policy](README.md#branch-and-merge-policy). No track branches, environments or new feature
+implementations are claimed merely by recording this plan.
+
+Existing V outlines can be split into smaller assignments when their scope/dependencies are recorded.
+Track organization does not change the implementation/review states below; verify current Git and
+evidence when claiming work rather than treating historical handoff notes as current gates.
+
+## Active parser/engine ownership — 2026-09-15
+
+Codex owns the parser/rules-engine track in the user's engine/parser thread. Initial assessment
+V22 is on `slice/V22` in `/srv/presidium/projects/salient/engine-parser`, based on `e83930e`.
+Assessment committed as `9d50b47` with independent review pass and 402 passing baseline tests;
+lead integration is pending. Its slice document and verification live in that worktree. Recommended
+first implementation: source-linked Fury turn-start Ferocity through the existing clock/history.
+Assessment only: no backend or shared playable environment changes. Coordinate engine/clock/history
+contract edits with this owner.
+
+On 2026-09-16 the user requested the first slice spec optimized for parser/engine viability.
+V26 specification work is on `slice/V26` in `/srv/presidium/projects/salient/engine-parser-spec`.
+The current proposed priority is compiled damage/push effects through shared resolution, ahead of
+the bookkeeping-focused Ferocity slice. Specification committed as `9949aba`; independent design
+and pinned-source rules reviews pass. Final serial full check passes 402 tests and build.
+Implementation has not started; lead integration is pending. The V26 work log records the earlier
+Rules-library timeout and the existing closeout test's timestamp-substring false positive.
+
+User-confirmed workflow, 2026-09-16: every engine ability requires a source-backed design, then a
+real in-app playtest with screenshot evidence correlating game-log results to the source. V26
+amendment `80d1f97` records the standing gate in its build process, slice template and per-ability
+inventory; independent amendment review and documentation checks pass. Designed, built and
+playtested states must remain visible separately. No V26 implementation or screenshots exist yet;
+these commits remain pending lead integration from `slice/V26`.
+
 ## Dependency graph
 
 ### Character track assessment — 2026-09-15

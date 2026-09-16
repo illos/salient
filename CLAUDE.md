@@ -4,6 +4,20 @@ These rules carry the project's standing instructions from `AGENTS.md` and `agen
 session and subagent. `agent.MD` remains the complete instruction set; read it in full before starting
 work. If anything here conflicts with `agent.MD`, follow `agent.MD` and fix this file.
 
+## Post-v0.01 development checkpoint — 2026-09-15
+
+- Follow [the five-track roadmap](docs/v1-roadmap.md) and
+  [track kickoff](docs/kickoff-development-track.md): parser/rules engine, foes, characters
+  (wizard/sheets/progression), UI/polish, and app/social features.
+- The [recorded prototype acceptance](docs/build/evidence/v001-acceptance.md) closes v0.01's bounded
+  scope. Earlier shared-basics restrictions do not prohibit assigned post-prototype mechanics.
+- Content and character coverage may grow with correct supported calculations and explicit manual
+  effects while automation develops. Preserve V1 exclusions, privacy and shared-operation contracts.
+- Use separate worktrees for active tracks, short-lived slice branches, and isolated development
+  backends for backend changes. Keep `main` integrated and tested; coordinate shared playable updates.
+- Desktop UI feedback may be slow; reports, screenshots and phone discussion support other work.
+  Continue authorized work independent of pending user decisions; record answers in owning specs.
+
 ## Communication
 
 - Never use the multiple-choice question widget or any structured question tool. Ask in plain text,

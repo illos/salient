@@ -1,10 +1,17 @@
 # Development process
 
-Status: rules-review workflow accepted for trial on 2026-09-11; implementation tooling remains to be built.
-Other proposed procedures remain labeled below. Product philosophy is recorded in
+Status: post-v0.01 development arrangement confirmed 2026-09-15. The
+[five-track roadmap](v1-roadmap.md) owns workstream scope and feedback cadence; the
+[build process](build/README.md) owns implemented tooling, review and branch procedures.
+The earlier rules-review trial is retained below as design history. Product philosophy is recorded in
 [rules adaptation principles](rules-adaptation-principles.md).
 
-Current order, revised 2026-09-14: establish [shared game basics](pre-alpha-design-gaps.md#game-basics-first--current-runtime-scope)
+Current work follows the five tracks after [prototype acceptance](build/evidence/v001-acceptance.md).
+Use isolated worktrees and short-lived slice branches to protect the playable baseline. Content and
+character coverage can progress with explicit manual mechanics while parser/engine automation develops.
+Only work dependent on a material unanswered question waits for user feedback.
+
+Earlier foundation order, 2026-09-14: establish [shared game basics](pre-alpha-design-gaps.md#game-basics-first--current-runtime-scope)
 as a playable, testable foundation before class/stat-block-specific execution and sustained parser/engine
 feature work. Define and verify a common-operation walkthrough with source-backed inputs, actual state,
 manual resolution and history. Defer unique feature automation together instead of continuing the
@@ -13,6 +20,10 @@ separate work. Bounded source research can proceed; the accepted review trial re
 work, not an installed or enforced gate.
 
 ## Rules-review workflow accepted for trial
+
+The 2026-09-11 trial below records its original intent. Later operational tooling and review requirements
+are in [the build process](build/README.md); historical statements about unbuilt tooling are not current
+implementation claims.
 
 The [skills design](rules-skills-design.md) develops the proposed researcher contract and reviewer handoff.
 Its detailed design remains provisional; the accepted workflow below is the baseline.
@@ -69,6 +80,11 @@ Git branch names, remove version control/checks, or establish an automatic deplo
 priority does not change the deliberate-update policy for pinned rules and Forge Steel dependencies.
 See the [pre-alpha clarification queue](pre-alpha-design-gaps.md). The current work remains specification;
 no deployment or data reset is performed by recording this policy.
+
+Confirmed transition, 2026-09-15: that working baseline now exists and the user accepted separate worktrees
+for active tracks with short-lived slice branches. Follow [branch and environment isolation](build/README.md#branch-and-merge-policy).
+The disposable-data policy does not permit one track to disrupt the user's active app or another track's
+environment. Integrate tested slices regularly; there is no requirement to complete a track before merging.
 
 ## Keep the process small
 

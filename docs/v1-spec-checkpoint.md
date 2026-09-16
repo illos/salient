@@ -3,8 +3,17 @@
 Consolidated through 2026-09-13 after the product, technology and gameplay design discussions. This is a
 documentation checkpoint, not an implementation milestone or approval of proposed technical defaults.
 
-The [V1 roadmap](v1-roadmap.md) records the working order for continued specification alongside the
-v0.01 build, beginning with respite and advancement.
+The [V1 roadmap](v1-roadmap.md#confirmed-development-tracks--2026-09-15) records the confirmed
+five post-v0.01 tracks: parser/rules engine, foe coverage, characters (wizard, sheets and progression),
+UI/polish, and app/social features.
+Character and foe coverage can advance with explicit manual mechanics while automation develops.
+It also retains the earlier specification sequence and the respite discussion checkpoint.
+
+Post-v0.01 implementation uses [the track kickoff](kickoff-development-track.md) and
+[build process](build/README.md), including separate worktrees, short-lived slice branches and runtime
+isolation. The [accepted prototype record](build/evidence/v001-acceptance.md) closes the scope described
+below; historical statements about its remaining work are not instructions to restart it. Fuller V1
+behavior still requires its own implementation and verification.
 
 ## Immediate milestone: v0.01
 

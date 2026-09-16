@@ -3,6 +3,24 @@ text.
 
 # Project instructions
 
+## Post-v0.01 development checkpoint — 2026-09-15
+
+The user confirmed five development tracks: parser/rules engine, foe coverage, characters
+(wizard/sheets/progression), UI/polish, and app/social features. Read the
+[durable roadmap](docs/v1-roadmap.md), [track kickoff](docs/kickoff-development-track.md), and
+[build process](docs/build/README.md) before new implementation. The
+[acceptance record](docs/build/evidence/v001-acceptance.md) closes the recorded prototype scope;
+older instructions below to finish the shared-basics walkthrough describe that milestone, not a global
+ban on assigned post-prototype mechanics. V1 exclusions and unresolved product/rules decisions still apply.
+
+Character and foe coverage can advance with correct supported data/calculations and explicit manual
+gameplay effects while automation develops. Use separate worktrees for active tracks, short-lived slice
+branches, and isolated development backends for backend changes. Keep `main` integrated and tested;
+coordinate updates to the user's playable environment. UI feedback may wait for desktop time; concrete
+reports, screenshots and phone discussion support independent work elsewhere. Continue authorized work
+that does not depend on pending answers. The roadmap records confirmed organization and recommended
+first assignments separately; use bounded build slices rather than implementing an entire track at once.
+
 ## Communication
 
 - Ask questions directly in the conversation using plain text. Do not use question widgets or structured

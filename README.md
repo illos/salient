@@ -78,10 +78,11 @@ reuse the ID and unchanged arguments when retrying a command. For example, `sess
   [`CLAUDE.md`](CLAUDE.md).
 - [Questions for the user](docs/rules-questions-for-user.md): the only channel from build threads to the
   user for rules and product decisions; resolved in a standalone thread.
-- [Web app build thread handoff](docs/web-app-build-handoff.md): independent app implementation and review,
-  coordinated with the dedicated rules/combat thread and scoped to v0.01.
-- Ready-to-paste kickoff prompts: [web app](docs/kickoff-web-app.md) and
-  [rules process/combat](docs/kickoff-rules-combat.md), including delegation and when to ask for input.
+- [Development track kickoff](docs/kickoff-development-track.md): current ready-to-paste implementation
+  handoff for one of the five tracks, with isolation, feedback, verification and integration instructions.
+- [Web app build thread handoff](docs/web-app-build-handoff.md): historical v0.01 contracts and handoff.
+  Earlier kickoff prompts remain available for context: [web app](docs/kickoff-web-app.md) and
+  [rules process/combat](docs/kickoff-rules-combat.md).
 
 - [Rules adaptation principles](docs/rules-adaptation-principles.md): faithful automation, table authority,
   warnings without blocking, complete source text, visible workings, and supported manual play.
@@ -92,8 +93,8 @@ reuse the ID and unchanged arguments when retrying a command. For example, `sess
   from the specs, the blocking gaps with the artifact that closes each, and findings for agents to resolve.
 - [V1 specification checkpoint](docs/v1-spec-checkpoint.md): agreed release scope, settled boundaries, primary
   specs, and remaining work for the fuller product as of 2026-09-11.
-- [V1 roadmap](docs/v1-roadmap.md): specification order from respite and advancement through stable V1,
-  alongside the current v0.01 build.
+- [V1 roadmap](docs/v1-roadmap.md): five development tracks, independent content/automation progress,
+  feedback cadence, shared contracts and recommended first assignments after v0.01.
 - [V1 tech stack](docs/v1-tech-stack-spec.md): recommended libraries and rationale, selected Better Auth,
   table realtime/performance, SSR tradeoffs, Cloudflare/Convex hosting, and future LAN portability.
 - [Inventory and loot](docs/inventory-spec.md): character/party inventories, Director stash, claims, approval,
