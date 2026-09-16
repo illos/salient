@@ -306,3 +306,15 @@ release accumulated memory. No assertions or timeouts were relaxed.
 
 The shared-runtime verification gap recorded at the checkpoint is closed. This slice still
 delivers only the two bounded level-one paths. Next character slice remains unstarted.
+
+#### Main integration completed
+
+Fast-forwarded the reviewed closeout `a3a144f` into main on 2026-09-16. The follow-up changes
+only the CLI, verification and documentation, so the already-synced backend/content and running
+frontend require no additional deployment. After integration and the backend restart, authenticated
+reads through main's CLI again verified both effective builds and all 47 exact source texts.
+Shared frontend 5180, backend 3212 and site 3213 remain running. The V25 merge is now complete
+under the project-wide directive, with no outstanding V25 verification blocker.
+
+Retired `slice/V25-live`; retained its character worktree and ignored evidence/configuration.
+The unused isolated character services 3230/3231 and 5290 are stopped. No new wizard slice began.
