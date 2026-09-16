@@ -188,3 +188,25 @@ under constrained host memory use one test worker and avoid concurrent broad bui
 
 Final documentation validation checks 178 Markdown files; whitespace and commit merge gates pass.
 No further coverage slice has been selected or started.
+
+
+### User-requested checkpoint — 2026-09-16
+
+User requested a checkpoint after the completed branch handoff. V30 remains committed and unmerged:
+implementation `510f6c7`, handoff `aa51c6d`, branch `slice/V30` in the clean foe worktree at checkpoint
+start. Main is now `f7137dc`, including V25 closeout and V29 UI integration. No rebase, merge, new
+implementation or runtime change was performed for this checkpoint.
+
+The [current resume prompt](../kickoff-undead-ingestion.md#ready-to-paste-v30-resume) identifies the
+correct worktree, preserved source/identity contracts, verification evidence and remaining integration
+steps. The main checkout's kickoff remains V27-era until this branch merges. The next user request
+controls resumption; no further monster batch is selected.
+
+Read Chords again before integration: peer V31/V26/V32 verification is serialized around host memory
+pressure. Main's V29 includes toast handling and preserves public-reference startup. V30 already routes
+old V27 screenshots to ignored Playwright output, addressing the UI peer's overwrite report. Preserve
+peer changes when rebasing, rerun integrated checks and verify the actual shared app after an assigned
+merge. Existing branch checks remain evidence for the reviewed branch, not for future combined code.
+
+Checkpoint validation: Markdown links, whitespace and commit merge gates. Documentation-only change;
+no runtime update, source regeneration or broad test rerun needed. No peer review work was claimed.

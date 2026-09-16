@@ -1,22 +1,52 @@
 # Undead ingestion: kickoff and build handoff
 
-## Current slice — V30 second-echelon undead
+## Current checkpoint — V30 awaiting integration, 2026-09-16
 
-The user selected and authorized the next slice: all nine second-echelon undead and their level-four
-Malice. Work is on `slice/V30` in `/srv/presidium/projects/salient/foes`, based on main `663b49f`.
-Implementation is committed on `slice/V30` at `510f6c7`: 437 tests, both browser journeys and independent implementation/source
-reviews pass. Integration into main is pending. Read [V30](build/V30-second-echelon-undead.md), its current
-status and reviews before continuing.
-The older V27 checkpoint below is retained as history; its “next batch unselected” statement is superseded.
+**V30 is complete on `slice/V30`, not merged.** Resume in
+`/srv/presidium/projects/salient/foes`; the shared main checkout still has the older V27 kickoff.
+Implementation: `510f6c7`; verified branch handoff: `aa51c6d`; branch base: `663b49f`.
+The worktree was clean when this checkpoint began. Main has advanced to `f7137dc` with V25 closeout
+and V29 UI changes; refresh its actual head before integration.
 
-V30 expands the package to 20 stat blocks, 44 abilities, 24 traits and six features in two Malice records.
-It preserves every original V27 object and edition. Batch selection, explicit counterpart mappings and
-supporting-Malice links are maintained in `scripts/foes/batches.ts`. Engine execution, live roster loading
-and persistent sharing UI remain separate. No additional monster batch is authorized by this handoff.
+- Package: 20 undead, 44 abilities, 24 traits and six features in two shared Malice records.
+- Every monster and both Malice records were compared: 22 explained outcomes, zero unresolved,
+  missing, ambiguous or erroneous cases. Source corrections were unnecessary.
+- All 52 original V27 objects, existing IDs and the historical edition are preserved. Batch selection,
+  counterpart identities and supporting-Malice links live in `scripts/foes/batches.ts`.
+- Verification: 437 tests and production build, both browser journeys opening all 20 stat blocks,
+  and independent implementation/source reviews pass. Evidence and limitations are in
+  [V30](build/V30-second-echelon-undead.md); [consumer contract](../shared/foes/README.md).
+- Isolated frontend 5187 was stopped after testing. No backend/schema/seed changes are included.
+  This checkpoint changes documentation only and does not alter the shared playable app.
+- No further coverage batch is selected. Engine execution, live roster loading and persistent
+  sharing UI remain separate work.
 
-For integration, refresh Chords and current main, preserve peer work, rebase and run the required checks.
-An assigned merge includes verification at the shared playable development target under the standing
-merge directive. This branch's isolated browser target is frontend 5187; it needs no backend or data seed.
+### Ready-to-paste V30 resume
+
+```text
+Resume the foe ingestion track in /srv/presidium/projects/salient/foes on slice/V30.
+Read that worktree's docs/kickoff-undead-ingestion.md and docs/build/V30-second-echelon-undead.md;
+the main checkout still carries the older kickoff because V30 has not merged.
+V30 is built, tested, independently reviewed and committed (implementation 510f6c7, handoff aa51c6d,
+plus the checkpoint commit). Do not rebuild V30 or start another monster batch.
+
+Refresh instructions, Chords, Git/worktrees and current main before following my next request.
+Main was f7137dc at checkpoint, ahead of V30's 663b49f base. If I request the merge, rebase onto
+current main, preserve peer changes and resolve status-document overlap. Preserve the V29 toast
+and public-reference startup behavior; inspect any newer shared UI changes. Verify the integrated
+result with VITEST_MAX_WORKERS=1 pnpm check, commit merge gate and focused browser checks.
+Coordinate browser/build windows through Chords before starting services; host memory contention
+caused prior timeouts. Never weaken assertions or treat a timeout as a pass.
+
+Complete an assigned merge by verifying all 20 stat blocks, independent cards, themes and both Malice
+links at the established shared playable frontend, preserving existing play data. This content/UI
+slice alone needs no backend sync or seed. Retain old editions and maintained identity bindings.
+The exhaustive Steel Cauldron report is comparison evidence; pinned Compendium remains authority.
+No external code adaptation, engine execution or additional coverage is authorized by this checkpoint.
+```
+
+The V27 checkpoint and prompts below are historical; their detached-worktree and unselected-next-batch
+observations no longer describe the current V30 state.
 
 ## Resume checkpoint — 2026-09-16
 
