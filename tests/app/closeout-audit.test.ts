@@ -63,5 +63,17 @@ test('normal cleanup clears a retained foe temporary pool once, with a private p
   const publicEvent = (
     await f.observer.client.query(api.events.list, { campaignId: f.campaignId })
   ).events.find(e => e.id === events[0]!._id);
-  expect(JSON.stringify(publicEvent)).not.toContain('37');
+  // Inspect the public payload, not timestamps/IDs that can coincidentally contain the digits 37.
+  expect(publicEvent).toBeDefined();
+  expect(publicEvent!.description).toBe(
+    'Retained goblin: temporary Stamina cleared (combat cleanup).',
+  );
+  expect(publicEvent!.payload).toEqual({
+    data: {
+      field: 'temporaryStamina',
+      foeId,
+      publicDescription: 'Retained goblin: temporary Stamina cleared (combat cleanup).',
+      sourcePath: expect.any(String),
+    },
+  });
 });
