@@ -151,8 +151,8 @@ See the [CI review and run record](audits/2026-09-14-ci-history-review.md) for t
 | V20 | [Dynamic terrain objects](V20-dynamic-terrain.md) | V04 | Outline |
 | V21 | [Desktop layout fidelity](V21-desktop-layout-fidelity.md) | A08, A09, V13 | Built, not committed — 2026-09-15 (foundation + five parallel implementers, lead integration and repairs); lint, typecheck, 85 engine tests, 317 app tests, links, vendor, content and the full 20-test browser suite pass; screenshots under `.playtest/v21/` compared with each mockup; review deferred to the user's audit thread |
 | V26 | [Compiled ability effects: damage and push instructions](V26-compiled-ability-effects.md) | S01, S02, A01, A02, A04, A05, A06, A09 | Ready — specification merged into main at `3689226`, 2026-09-16; independent design and rules review pass; 10 live designs including Viscous Fire; 3 compile-only comparisons; implementation and screenshot evidence pending; documentation-only integration needs no runtime update |
-| V23 | [Foe source ingestion assessment](V23-foe-source-assessment.md) | S01, A09, Rules portion of V13 | Committed — assessment only; foe coverage / Codex, `slice/V23`; ingestion implementation remains next |
-| V27 | [Undead ingestion and independent feature access](V27-undead-ingestion.md) | S01, A09, Rules portion of V13, V23 docs | Committed — `02be722` ingestion/reference package, `c209a6e` test repair; both reviews and checks pass; lead integration pending |
+| V23 | [Foe source ingestion assessment](V23-foe-source-assessment.md) | S01, A09, Rules portion of V13 | Merged — source assessment and confirmed ingestion requirements integrated with V27, 2026-09-16 |
+| V27 | [Undead ingestion and independent feature access](V27-undead-ingestion.md) | S01, A09, Rules portion of V13, V23 docs | Merged and live — rebased implementation `6d47dc0`, test repair `e4590e9`; integrated at `f019e3a`, 2026-09-16; 432 tests, build, isolated and shared-app browser checks pass; public `/foes` verified on 5180 |
 
 ## Build lead handoff — 2026-09-15
 

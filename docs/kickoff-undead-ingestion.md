@@ -3,9 +3,9 @@
 Updated **2026-09-16**: [V27](build/V27-undead-ingestion.md) has been implemented and independently
 reviewed. Read its closing work log and the [consumer contract](../shared/foes/README.md) for the
 current package, commands, evidence and integration boundary. The original kickoff below is historical;
-do not repeat the assessment or rebuild the finished slice. Next is lead integration with current main,
-including the explicit V23 documentation prerequisites, followed by a separately bounded coverage slice.
-No deployment or engine execution is implied.
+do not repeat the assessment or rebuild the finished slice. V27 and its V23 prerequisites are now merged into main and verified in the shared playable app at
+`/foes`; see the final integration section in the slice log. Next is a separately bounded coverage
+slice. Engine execution remains separate.
 
 ## Ready-to-paste kickoff
 

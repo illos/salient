@@ -206,3 +206,40 @@ consumer-contract conflict materially changes the implementation; keep ordinary 
   `slice/V27`, ready for lead integration. The [updated kickoff](../kickoff-undead-ingestion.md)
   points future sessions to the build handoff rather than repeating the assessment. Remaining work
   is integration and future broader coverage, engine execution and sharing UI, each in its own scope.
+
+## Main integration and live verification — 2026-09-16
+
+User requested merge. V23 prerequisites and V27 were rebased onto current main, including the V25
+checkpoint `64dc658` and integrated V26 specification. One STATUS.md conflict preserved both tracks'
+rows; no source/runtime code conflict occurred. The reviewed implementation is byte-identical in all
+V27 code/data/test paths after rebase. Rebased implementation is `6d47dc0` (formerly `02be722`),
+test repair `e4590e9` (formerly `c209a6e`), and integration tip `f019e3a` (formerly `d867ba9`).
+Main fast-forwarded from `64dc658` to `f019e3a`; no remote push or production publication occurred.
+
+Integrated `pnpm check` passes: **97 engine + 335 app/scripts tests = 432**, lint/format/typechecks,
+175 Markdown link checks, clean pinned vendors, 467-entry preexisting source snapshot, unchanged undead
+edition/report and production build. Initial V25 provenance check lacked the Heroes clean source in
+the foe worktree's sparse checkout; materialized that file at the same pin and reran successfully.
+The isolated browser first timed out during initial page loading; its rerun passed unchanged.
+Commit-range merge gate and whitespace checks pass. Both original independent/source reviews remain
+applicable because the rebase changed no reviewed implementation behavior.
+
+The established shared playable target is `/srv/presidium/projects/salient/code` on main,
+`http://127.0.0.1:5180`, local Convex `anonymous:anonymous-agent` on 3212 with site proxy 3213.
+Process working directories and whitelisted local configuration identify that target; peer V29's
+5183/3210 environment was not touched. Existing Vite watched the merged frontend and generated JSON.
+V27 changes no Convex function/schema or seeded `shared/content/compendium` files, so no backend sync,
+seed or reset was needed. Existing campaigns/characters/play state were preserved.
+
+Ran the full `tests/browser/foes.spec.ts` against **the shared 5180 server**, using an ignored config
+with no test webServer/startup. It passes search, filters, independent/parent cards, both themes,
+complete text, within-card Rules navigation, focus return and all dismissal paths. Confirmed HTTP 200
+for `/foes`, proxied auth session and proxied backend version after the merge. `pnpm foes:check` also
+passes from main. [Live dark preview](evidence/V27-live-undead-dark.png) is captured from that shared
+server. Runtime verification is public reference reading; no creature engine execution is claimed.
+
+Local evidence logs: `/tmp/salient-v27-integration-check-2.log`,
+`/tmp/salient-v27-integration-browser-2.log`, `/tmp/salient-v27-live-browser.log`.
+All four live screenshots and the isolated live-test config remain under `.playtest/v27-merge/`.
+The slice branch is retired after recording this integration; the clean foe worktree is retained
+at detached main for future work. Chords publishes the final commit and runtime handoff to peers.
