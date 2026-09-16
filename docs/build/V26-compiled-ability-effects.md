@@ -285,10 +285,18 @@ candidate, including exact sections/tiers and expected scenario outputs. Every a
 migrated or behaviorally changed by the shared compiler/adapter must be enumerated individually;
 the report population is not automatically the implementation scope.
 
-Initial inventory below uses source paths relative to
-`vendor/steel-compendium/en/unified/md/` at the pin in Rules research. All live evidence is **pending**.
-The rows for grouped regression candidates must be expanded to individual abilities before building;
-they are not a substitute for the final inventory.
+### Confirmed ability scope — 2026-09-16
+
+The user accepted three primary abilities: **Brutal Slam**, **Spear Charge** and **Bury the Point**.
+The named regression set is **Melee Free Strike**, **Ranged Free Strike**, **Pain for Pain**,
+**Out of the Way!**, **Thunder Roar** and **Lines of Force**. Spinecleaver Axe remains compile-only.
+This fixes the intended examples, not an ability-name dispatch rule or permission to omit other
+abilities affected by shared changes. Add any such abilities individually before changing their
+behavior; reconcile against current integrated content and adapters before implementation.
+
+The inventory uses source paths relative to `vendor/steel-compendium/en/unified/md/` at the pin in
+Rules research. All live evidence is **pending**. We are completing designs one at a time, starting
+with Brutal Slam; acceptance of the list does not mark the other designs complete.
 
 | Ability | Source / design | Designed | Built | In-app playtested / evidence |
 | --- | --- | --- | --- | --- |
@@ -296,9 +304,11 @@ they are not a substitute for the final inventory.
 | Spear Charge | `monster/goblin/statblock/goblin-warrior.md`, Spear Charge; check 2: embedded damage. | Contract specified; finish actor/target, dice and expected state cases. | No | Pending; no screenshots. |
 | Bury the Point | Same stat block, Bury the Point; check 2: supported damage and explicit manual potency/condition/save remainder. | Contract specified; finish per-case calculations and log expectations. | No | Pending; no screenshots. |
 | Thunder Roar | `feature/ability/fury/level-1/thunder-roar.md`; check 6: compatibility damage and manual ordered area movement. | Boundary specified; finish live regression cases. | No V26 change | Pending; no screenshots. |
-| Out of the Way | `feature/ability/fury/level-1/out-of-the-way.md`; check 6: compatibility damage and manual slide/rider. | Boundary specified; finish live regression cases. | No V26 change | Pending; no screenshots. |
-| Free-strike and kit-signature regression candidates | Check 3; enumerate each affected definition with its exact source, including Pain for Pain if its adapter changes. | Inventory and per-ability designs pending. | No V26 change | Pending; no screenshots. |
-| Other standalone/embedded candidates discovered in the support report | Add individual rows for each ability gaining or changing live behavior; retain unsupported entries as such. | Inventory pending. | No | Pending if included in live scope. |
+| Out of the Way! | `feature/ability/fury/level-1/out-of-the-way.md`; check 6: compatibility damage and manual slide/rider. | Boundary specified; finish live regression cases. | No V26 change | Pending; no screenshots. |
+| Melee Free Strike | `feature/ability/common/melee-weapon-free-strike.md`; check 3: preserve characteristic choices and damage arithmetic. | Per-ability cases pending. | No V26 change | Pending; no screenshots. |
+| Ranged Free Strike | `feature/ability/common/ranged-weapon-free-strike.md`; check 3: preserve characteristic choices and damage arithmetic. | Per-ability cases pending. | No V26 change | Pending; no screenshots. |
+| Pain for Pain | `kit/mountain.md`, Pain for Pain; check 3: preserve signature bonus inclusion and explicit manual rider. | Per-ability cases pending. | No V26 change | Pending; no screenshots. |
+| Lines of Force | `feature/ability/fury/level-1/lines-of-force.md`; preserve source and existing manual triggered-action behavior. | Per-ability cases pending. | No V26 change | Pending; no screenshots. |
 | Spinecleaver Axe | `monster/goblin/statblock/goblin-spinecleaver.md`, Axe; check 2. | Compile-only comparison; live minion design deferred to V02. | No live implementation | Deferred; cannot count as a built or playtested ability. |
 
 For each live case, show the ability being used through the rendered table, then the resulting
@@ -412,3 +422,14 @@ execution and report why; do not invent independence to increase coverage.
 - Amendment review: **pass**, `v26_spec_review`, recorded in the existing review report; no
   blocking findings. `pnpm check-links` passes all 158 files and `git diff --check` passes.
   This documentation-only amendment does not rerun the previously passing full code baseline.
+
+### 2026-09-16 — ability scope accepted
+
+- User accepted the three primary abilities and six named regression abilities discussed above,
+  with Spinecleaver Axe compile-only and any additional affected abilities explicitly added.
+- Expanded the grouped regression inventory into individual source references. Next discussion is
+  Brutal Slam's existing source-backed design; remaining per-ability designs/cases are still pending.
+- This is a documentation-only scope record, with no new mechanical claim, implementation,
+  deployment or playtest. Main now includes V25; reconcile its actor damage modifiers and target
+  immunities when rebasing for implementation. Do not replace those integrated facts with the
+  older branch baseline.
