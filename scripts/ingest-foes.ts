@@ -6,8 +6,9 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { validateComparisonReport } from './foes/compare.ts';
-import { importFoes, PATHS, REVISION } from './foes/import.ts';
+import { importFoes, REVISION } from './foes/import.ts';
 import type { Correction, Identity, Input } from './foes/import.ts';
+import { PATHS, SELECTION, COMPARISON_REPORT } from './foes/batches.ts';
 const root = fileURLToPath(new URL('..', import.meta.url));
 export function readInputs(): Input[] {
   const git = (...args: string[]) =>
@@ -62,7 +63,15 @@ export async function generateFoes() {
       throw new Error(`Reference identity mismatch: ${id}`);
     rulePaths[id] = `${book}/${path}`;
   }
-  return importFoes(inputs, identities, corrections, rulePaths);
+  const pack = await importFoes(inputs, identities, corrections, rulePaths);
+  for (const selected of SELECTION) {
+    const object = pack.objects.find(
+      o => !o.parentId && o.source.path === `en/books/monsters/md/${selected.path}.md`,
+    )!;
+    if (object.supportingIds.length !== selected.supportingPaths.length)
+      throw new Error(`Missing supporting source: ${selected.path}`);
+  }
+  return pack;
 }
 async function main() {
   const pack = await generateFoes();
@@ -83,10 +92,10 @@ async function main() {
   if (process.argv.includes('--check'))
     validateComparisonReport(
       pack,
-      JSON.parse(readFileSync(`${root}/docs/build/evidence/V27-steel-cauldron.json`, 'utf8')),
+      JSON.parse(readFileSync(`${root}/${COMPARISON_REPORT}`, 'utf8')),
     );
   console.log(
-    `Foes: 11 stat blocks, ${pack.objects.filter(o => o.parentId).length} features; edition ${pack.edition}; ${process.argv.includes('--check') ? 'verified' : 'generated'}`,
+    `Foes: ${pack.objects.filter(o => o.kind === 'statblock').length} stat blocks, ${pack.objects.filter(o => o.parentId).length} features; edition ${pack.edition}; ${process.argv.includes('--check') ? 'verified' : 'generated'}`,
   );
 }
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) await main();

@@ -10,28 +10,11 @@ import rehypeStringify from 'rehype-stringify';
 import { toString } from 'mdast-util-to-string';
 import { parse } from 'yaml';
 import type { Fields, FoeObject, FoePackage, Json } from '../../shared/contracts/foes.ts';
+import { SELECTION } from './batches.ts';
 import { splitFrontmatter } from '../lib/frontmatter.ts';
 
 export const REVISION = 'fb83a789da8f0327a389c277a0c790b1648d5810';
-export const GENERATOR = '1.0.0';
-export const ROOT = 'monster/undead/1st-echelon/';
-export const SLUGS = [
-  'crawling-claw',
-  'decrepit-skeleton',
-  'ghost',
-  'ghoul',
-  'rotting-zombie',
-  'shade',
-  'skeleton',
-  'soulwight',
-  'specter',
-  'umbral-stalker',
-  'zombie',
-];
-export const PATHS = [
-  ...SLUGS.map(s => `${ROOT}statblock/${s}`),
-  `${ROOT}undead-malice-level-1-malice-features`,
-];
+export const GENERATOR = '1.1.0';
 export interface Input {
   path: string;
   json: string;
@@ -341,7 +324,7 @@ export async function importFoes(
       throw new Error('A field correction must include its corrected display Markdown');
   }
   applyCorrections(objects, corrections, REVISION);
-  const malice = objects.find(o => o.kind === 'malice' && !o.parentId);
+
   for (const object of objects) {
     if (object.parentId) {
       validateFeature(object.fields, object.markdown, object.parentId);
@@ -371,6 +354,17 @@ export async function importFoes(
       );
       const expected = object.kind === 'malice' ? plain(object.fields.flavor) : '';
       if (prose !== expected) object.diagnostics.push(`Unmodeled parent text: ${prose}`);
+    }
+    if (!object.parentId) {
+      const selected = SELECTION.find(
+        entry => object.source.path === `en/books/monsters/md/${entry.path}.md`,
+      );
+      object.supportingIds = (selected?.supportingPaths ?? []).flatMap(path => {
+        const supporting = objects.find(
+          o => !o.parentId && o.source.path === `en/books/monsters/md/${path}.md`,
+        );
+        return supporting ? [supporting.id] : [];
+      });
     }
     object.sections = sections(object.markdown);
     object.html = await render(object.markdown);
@@ -439,7 +433,6 @@ export async function importFoes(
         quantity: match ? (match[2] ? 4 : 1) : null,
       };
       if (!match) object.diagnostics.push('Unresolved encounter value');
-      if (malice) object.supportingIds = [malice.id];
     }
   }
   const search = objects.map(o => ({

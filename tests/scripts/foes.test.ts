@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-only
 import { describe, expect, it } from 'vitest';
+import { COMPARISON_REPORT } from '../../scripts/foes/batches.ts';
 import { readFileSync } from 'node:fs';
 import { generateFoes, readInputs } from '../../scripts/ingest-foes.ts';
 import {
@@ -97,10 +98,10 @@ describe('undead source ingestion', () => {
       b = await generateFoes();
     expect(JSON.stringify(a)).toBe(JSON.stringify(b));
     expect(a).toEqual(pack);
-    expect(a.objects.filter(o => o.kind === 'statblock')).toHaveLength(11);
-    expect(a.objects.filter(o => o.kind === 'ability')).toHaveLength(23);
-    expect(a.objects.filter(o => o.kind === 'trait')).toHaveLength(13);
-    expect(a.objects.filter(o => o.kind === 'malice' && o.parentId)).toHaveLength(4);
+    expect(a.objects.filter(o => o.kind === 'statblock')).toHaveLength(20);
+    expect(a.objects.filter(o => o.kind === 'ability')).toHaveLength(44);
+    expect(a.objects.filter(o => o.kind === 'trait')).toHaveLength(24);
+    expect(a.objects.filter(o => o.kind === 'malice' && o.parentId)).toHaveLength(6);
     for (const input of readInputs()) {
       const object = a.objects.find(
         o => o.source.path.endsWith(input.path + '.md') && !o.parentId,
@@ -114,6 +115,80 @@ describe('undead source ingestion', () => {
       expect(object.original.markdown.endsWith(reconstructed)).toBe(true);
     }
   }, 30_000);
+  it('preserves every V27 object, identity binding and exact historical reference', () => {
+    const old = JSON.parse(
+      readFileSync(
+        new URL(
+          '../../shared/content/foes/editions/6c6bbd40f2460c196511a2f0cc19b2ff9184ddee27be90245e5d5a8a915ed331.json',
+          import.meta.url,
+        ),
+        'utf8',
+      ),
+    ) as FoePackage;
+    expect(old.edition).not.toBe(pack.edition);
+    for (const object of old.objects) {
+      expect(pack.objects.find(o => o.id === object.id)).toEqual(object);
+      const ref = foeReference(old, object.id);
+      expect(resolveFoe(old, ref)?.object).toEqual(object);
+      expect(resolveFoe(pack, ref)).toBeUndefined();
+      if (object.parentId)
+        expect(
+          identities.filter(
+            i =>
+              i.parent === object.parentId && i.fingerprint === fingerprint(object.original.record),
+          ),
+        ).toEqual([
+          {
+            parent: object.parentId,
+            fingerprint: fingerprint(object.original.record),
+            id: object.id,
+          },
+        ]);
+    }
+  });
+  it('links each echelon to its own Malice and retains the prior-Malice reference', () => {
+    const first = named('Undead Malice (Level 1+ Malice Features)');
+    const second = named('Undead Malice (Level 4+ Malice Features)');
+    for (const block of pack.objects.filter(o => o.kind === 'statblock')) {
+      expect(block.supportingIds).toEqual([block.fields.level === 1 ? first.id : second.id]);
+      for (const id of block.featureIds)
+        expect(resolveFoe(pack, foeReference(pack, id))?.parent).toBe(block);
+    }
+    expect(first.supportingIds).toEqual([]);
+    expect(second.supportingIds).toEqual([first.id]);
+    expect(second.featureIds.map(id => pack.objects.find(o => o.id === id)!.name)).toEqual([
+      'Prior Malice Features',
+      'Blood Hunger',
+    ]);
+  });
+  it('retains source-derived second-echelon quantities, nested spending and complete triggers', () => {
+    for (const name of ['Fleshflayed Shambler Zombie', 'Ghoul Craver', 'Hollowbone Launcher'])
+      expect(named(name).ev).toEqual({ printed: '6 for four minions', amount: 6, quantity: 4 });
+    expect(named('Binding Curse').activation?.costText).toBe('1 Malice');
+    const curse = named('Binding Curse').fields.effects as Fields[];
+    expect(curse[2]).toEqual({
+      cost: '2+ Malice',
+      effect:
+        'This ability targets one additional target for each 2 [Malice](scc.v1:mcdm.monsters.v1/rule.monster/malice) spent.',
+    });
+    expect((named('Cursed Transference').fields.effects as Fields[])[1].cost).toBe('5 Malice');
+    expect(named('Summon My Guard').fields.trigger).toBe(
+      'The mummy lord is made [winded](scc.v1:mcdm.heroes.v1/rule.health/winded) for the first time in the encounter.',
+    );
+    expect(named("Land's Guardian").activation).toEqual({
+      signature: false,
+      villainAction: 2,
+      costText: null,
+    });
+    expect(named('Blood Hunger').markdown).toContain('each undead within 5 squares');
+    expect(
+      searchFoes(pack, 'Binding Curse', {
+        kind: 'ability',
+        keyword: 'Magic',
+        usage: 'Main action',
+      }).map(o => o.parentName),
+    ).toEqual(['Mummy Lord']);
+  });
   it('preserves source envelope, minion quantity, villain labels and complete ordered sections', () => {
     expect(named('Crawling Claw').ev).toEqual({
       printed: '3 for four minions',
@@ -147,13 +222,18 @@ describe('undead source ingestion', () => {
       ).toBeUndefined();
     }
     const arises = searchFoes(pack, 'Arise', { kind: 'trait' });
-    expect(arises.map(e => e.parentName).sort()).toEqual(['Ghoul', 'Skeleton', 'Soulwight']);
-    expect(new Set(arises.map(e => e.id)).size).toBe(3);
+    expect(arises.map(e => e.parentName).sort()).toEqual([
+      'Flesh Mournling',
+      'Ghoul',
+      'Skeleton',
+      'Soulwight',
+    ]);
+    expect(new Set(arises.map(e => e.id)).size).toBe(4);
     expect(
       searchFoes(pack, 'Bone', { kind: 'ability', keyword: 'Ranged', usage: 'Main action' }).map(
         e => e.name,
       ),
-    ).toEqual(['Bone Bow', 'Bone Shards']);
+    ).toEqual(['Bone Bow', 'Bone Shards', 'Hollowbone Slug']);
     expect(tags(['-', 'Magic', ''])).toEqual(['Magic']);
     expect(tags(null)).toEqual([]);
   });
@@ -324,10 +404,7 @@ describe('undead source ingestion', () => {
 describe('exhaustive external comparison', () => {
   it('refuses a stale or incomplete committed comparison record', () => {
     const report = JSON.parse(
-      readFileSync(
-        new URL('../../docs/build/evidence/V27-steel-cauldron.json', import.meta.url),
-        'utf8',
-      ),
+      readFileSync(new URL(`../../${COMPARISON_REPORT}`, import.meta.url), 'utf8'),
     );
     expect(() => validateComparisonReport(pack, report)).not.toThrow();
     expect(() => validateComparisonReport(pack, { ...report, edition: 'old' })).toThrow('stale');
@@ -335,10 +412,70 @@ describe('exhaustive external comparison', () => {
       'incomplete',
     );
   });
+  it('preserves reviewed minion quantities and refuses explicit disagreement or changed EV', () => {
+    const block = structuredClone(named('Skeleton'));
+    block.ev = { printed: '6 for four minions', amount: 6, quantity: 4 };
+    const external = skeletonCounterpart();
+    external.ev = 6;
+    const row = compareBlock(pack, block, [external]);
+    expect(row.differences.find(d => d.field === 'ev.quantity')?.classification).toBe('explained');
+    external.evQuantity = 1;
+    expect(compareBlock(pack, block, [external]).status).toBe('review');
+    delete external.evQuantity;
+    external.ev = 7;
+    expect(compareBlock(pack, block, [external]).status).toBe('review');
+  });
+  it('matches distinct Malice counterparts and refuses substituting the first echelon', () => {
+    const first = named('Undead Malice (Level 1+ Malice Features)');
+    const second = named('Undead Malice (Level 4+ Malice Features)');
+    const external: Fields = {
+      id: 'undead-malice-4',
+      name: 'Undead Malice',
+      level: 4,
+      type: 'featureblock',
+      featureblockType: '+ Malice Features',
+      source: { book: 'Monsters' },
+      flavor:
+        "At the start of any level 4 or higher undead's turn, you can spend Malice to activate one of the following features.",
+      features: [
+        {
+          type: 'feature',
+          name: 'Prior Malice Features',
+          cost: '2-7+ Malice',
+          effects: [
+            {
+              effect:
+                'The undead activates a Malice feature available to undead of level 3 or lower.',
+            },
+          ],
+        },
+        {
+          type: 'feature',
+          name: 'Blood Hunger',
+          cost: '5 Malice',
+          effects: [
+            {
+              effect:
+                'One undead acting this turn uses a signature ability against a creature who is bleeding. As a free triggered action, each undead within 5 squares of the first undead moves up to their speed and can make a free strike against the same target.',
+            },
+          ],
+        },
+      ],
+    };
+    expect(compareBlock(pack, second, [external]).status).toBe('explained');
+    expect(compareBlock(pack, first, [external]).status).toBe('missing');
+    expect(compareBlock(pack, second, [external, external]).status).toBe('ambiguous');
+    external.level = 1;
+    expect(compareBlock(pack, second, [external]).status).toBe('review');
+    external.level = 4;
+    ((external.features as Fields[])[1].effects as Fields[])[0].effect =
+      'One undead uses a signature ability.';
+    expect(compareBlock(pack, second, [external]).status).toBe('review');
+  });
   it('reports all parents even if counterparts are missing or ambiguous', () => {
     const report = compareFoes(pack, []);
-    expect(report.rows).toHaveLength(12);
-    expect(report.counts.missing).toBe(12);
+    expect(report.rows).toHaveLength(22);
+    expect(report.counts.missing).toBe(22);
     const external = skeletonCounterpart();
     expect(compareBlock(pack, named('Skeleton'), [external, external]).status).toBe('ambiguous');
   });

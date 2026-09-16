@@ -312,6 +312,20 @@ existing themes, related Rules navigation inside the card and focus-restoring di
 parser execution, squads and persistent sharing UI remain outside this slice. Existing Goblin support
 and private encounter state are unchanged. Verification/reviews are recorded in [V27](build/V27-undead-ingestion.md).
 
+### V30 implementation — 2026-09-16
+
+The structured package adds all nine second-echelon undead: 20 stat blocks in total, 44 abilities,
+24 traits and six features in two shared Malice records. A maintained batch list selects source paths,
+external counterpart identities and supporting Malice references. Level-four monsters link to level-four
+Malice, whose prior-features reference links to level-one Malice. Existing V27 objects and its exact
+immutable edition remain unchanged; the expanded package receives a new edition.
+
+All 22 parent records have explicit comparison outcomes in the [V30 report](build/evidence/V30-steel-cauldron.json).
+Second-echelon minion counterparts omit the printed four-minion EV quantity; source values are retained
+and the guarded discrepancy is explained. Comparison still rejects explicit conflicting quantities,
+changed amounts and missing/ambiguous counterparts. No new source corrections or engine behaviors
+were introduced. See the [slice verification](build/V30-second-echelon-undead.md).
+
 ### Full-output comparison — confirmed 2026-09-16
 
 The user requires comparing **every generated stat block** with its Steel Cauldron counterpart as a

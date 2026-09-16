@@ -154,6 +154,8 @@ See the [CI review and run record](audits/2026-09-14-ci-history-review.md) for t
 | V23 | [Foe source ingestion assessment](V23-foe-source-assessment.md) | S01, A09, Rules portion of V13 | Merged — source assessment and confirmed ingestion requirements integrated with V27, 2026-09-16 |
 | V27 | [Undead ingestion and independent feature access](V27-undead-ingestion.md) | S01, A09, Rules portion of V13, V23 docs | Merged and live — rebased implementation `6d47dc0`, test repair `e4590e9`; integrated at `f019e3a`, 2026-09-16; 432 tests, build, isolated and shared-app browser checks pass; public `/foes` verified on 5180 |
 
+| V30 | [Second-echelon undead ingestion](V30-second-echelon-undead.md) | V27 | Verified on branch — foe track, slice/V30, 2026-09-16; 20 undead + 2 Malice compared, 437 tests and both browser journeys pass; independent/source reviews pass; integration pending |
+
 ## Build lead handoff — 2026-09-15
 
 The following chronological checkpoints are retained as history. The slice table and integrated
