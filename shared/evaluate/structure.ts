@@ -38,6 +38,13 @@ export function isAvailable(
     const parent = decisions.get(parentId);
     if (!parent || !isAvailable(parent, selections, decisions)) return false;
     if (parent.kind === 'choice' && selections[parentId] === undefined) return false;
+    if (
+      parent.kind === 'choice' &&
+      parent.shape.type === 'single' &&
+      parent.options &&
+      !parent.options.some(option => option.value === selections[parentId])
+    )
+      return false;
   }
   return true;
 }
@@ -112,7 +119,32 @@ export function pruneUnavailable(
     changed = false;
     for (const decision of decisions.values()) {
       if (next[decision.id] === undefined || decision.kind !== 'choice') continue;
-      if (!isAvailable(decision, next, decisions)) {
+      const selected = next[decision.id];
+      const pool = poolOf(decision, next, definitions).values;
+      let noLongerFits = false;
+      if (decision.shape.type === 'single')
+        noLongerFits = typeof selected !== 'string' || !pool.includes(selected);
+      if (decision.shape.type === 'multi' || decision.shape.type === 'points')
+        noLongerFits =
+          !Array.isArray(selected) ||
+          selected.some(value => value !== null && !pool.includes(value));
+      if (decision.shape.type === 'assignment') {
+        const rawArray = singleValue(next, decision.dependsOn?.[0] ?? '');
+        const remaining =
+          rawArray?.split(',').map(value => Number(value.trim().replace('−', '-'))) ?? [];
+        const targets = decision.shape.targets;
+        noLongerFits =
+          !selected ||
+          typeof selected !== 'object' ||
+          Array.isArray(selected) ||
+          Object.entries(selected).some(([target, value]) => {
+            const index = remaining.indexOf(value);
+            if (!targets.includes(target) || index < 0) return true;
+            remaining.splice(index, 1);
+            return false;
+          });
+      }
+      if (!isAvailable(decision, next, decisions) || noLongerFits) {
         delete next[decision.id];
         removed.push(decision.id);
         changed = true;

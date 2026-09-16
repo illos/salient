@@ -830,6 +830,22 @@ for independent work. Deferred research recommendations are not user rulings.
 
 ## 13. Proposed delivery sequence
 
+**Implementation authorized, 2026-09-16:** [V25](build/V25-two-class-wizard.md) delivers a shared
+wizard/evaluator for the existing Fury and the complete supported Bethell Polder Elementalist
+reference path, including its required ancestry/background choices. Verify every trait, feature,
+ability and automatic grant against the pinned Compendium, plus complete reference-build parity,
+persisted UI/headless behavior and independent implementation/rules reviews. Higher-level
+progression and the remaining classes follow bounded slices in the eleven-class track.
+
+**Implementation note, 2026-09-16 (V25):** the shared level-one definitions now support the existing
+Devil/Berserker Fury and a rules-corrected Polder/Fire Elementalist reference. Class profiles supply
+fixed characteristics, assignment targets, basic statistics, heroic resource and kit requirement.
+Dependent choices, sourced grants, passive contributions, saved revisions and campaign review use
+the shared operations. The reference's ineligible Creative skill and duplicate fixed Magic grant
+were corrected against the Compendium and checked in a fresh Forge export; preserve the original
+discrepancies in the [source audit](research/v25-character-source-audit.md). This delivers these
+level-one paths; eleven-class/higher-level coverage and Forge import/export remain later work.
+
 The confirmed v0.01 scope in section 1 takes precedence over the earlier broader delivery proposal.
 
 1. **Prototype choice/revision foundation:** implement the complete minimal level-one devil Fury creation

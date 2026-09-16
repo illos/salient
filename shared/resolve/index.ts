@@ -46,6 +46,7 @@ import type {
   Tier,
   TierDamageText,
 } from '../contracts/rollResolution.ts';
+import { matchesAbilityModifier } from '../evaluate/abilityModifiers.ts';
 
 export const CHARACTERISTICS: Characteristic[] = ['M', 'A', 'R', 'I', 'P'];
 
@@ -270,6 +271,15 @@ export function resolveTarget(
       tierText.damageType,
       damageCharacteristic,
     );
+    if (damage) {
+      const bonuses = (actor.abilityDamageModifiers ?? [])
+        .filter(modifier => matchesAbilityModifier(modifier, ability, tierText.damageType))
+        .map(({ label, amount }) => ({ label, amount }));
+      if (bonuses.length) {
+        damage.buildBonuses = bonuses;
+        damage.rolledDamage += bonuses.reduce((sum, bonus) => sum + bonus.amount, 0);
+      }
+    }
     if (!damage) unresolvedClauses.unshift(plainText(tierText.text.split(';')[0]!));
   }
   return {
@@ -388,12 +398,15 @@ export function checkAffordability(
   inCombat: boolean,
 ): Affordability {
   if (!fixedCost) return { kind: 'none' };
-  const waived = fixedCost.resource === 'ferocity' && pool?.resource === 'ferocity' && !inCombat;
+  const waived =
+    ['ferocity', 'essence'].includes(fixedCost.resource) &&
+    pool?.resource === fixedCost.resource &&
+    !inCombat;
   if (waived) {
     const warnings: string[] = [];
     if (pool?.usedOutsideCombatSinceLastVictoryOrRespite)
       warnings.push(
-        'Rule warning: this ability was already used outside combat since the last Victory or respite (feature/fury/level-1/ferocity.md).',
+        `Rule warning: this ability was already used outside combat since the last Victory or respite (feature/${fixedCost.resource === 'essence' ? 'elementalist/level-1/essence' : 'fury/level-1/ferocity'}.md).`,
       );
     return { kind: 'waived', cost: fixedCost, pool: pool?.current ?? 0, warnings };
   }

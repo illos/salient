@@ -100,6 +100,13 @@ export interface ActorRollFacts {
   /** Kit bonuses by tier index 0..2, e.g. Mountain [0, 0, 4]. Absent when the actor has no kit. */
   kitMeleeDamageBonus?: [number, number, number];
   kitRangedDamageBonus?: [number, number, number];
+  /** Permanent sourced build bonuses; keyword requirements are all-match. */
+  abilityDamageModifiers?: {
+    label: string;
+    amount: number;
+    keywords: string[];
+    alternative?: { ability: string; damageType: string };
+  }[];
   /** Supplied fact; the app cannot observe the weapon. Default false. */
   improvisedWeapon?: boolean;
 }
@@ -161,6 +168,8 @@ export interface DamageBreakdown {
   damageCharacteristic?: Characteristic;
   damageCharacteristicValue: number;
   kitBonus: number;
+  /** Applied separately from kit bonuses; source tier text remains unchanged. */
+  buildBonuses?: LabeledBonus[];
   rolledDamage: number;
   damageType?: string;
   /** Negative rolled damage is recorded, never applied as healing. */

@@ -113,5 +113,119 @@
       "ancestry": "devil",
       "cost": "2 Points"
     }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.polder/corruption-immunity",
+    "kind": "trait",
+    "name": "Corruption Immunity",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/polder/corruption-immunity.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/polder/corruption-immunity.json",
+    "selection": "polder-ancestry",
+    "text": "---\nancestry: polder\ncost: 1 Point\nname: Corruption Immunity\nscc: mcdm.heroes.v1/feature.trait.polder/corruption-immunity\ntype: trait\n---\n\nYour innate [shadow](scc.v1:mcdm.heroes.v1/class/shadow) magic grants you resilience against the unnatural. You have corruption immunity equal to your level + 2.\n",
+    "structured": {
+      "ancestry": "polder",
+      "cost": "1 Point"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.polder/fearless",
+    "kind": "trait",
+    "name": "Fearless",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/polder/fearless.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/polder/fearless.json",
+    "selection": "polder-ancestry",
+    "text": "---\nancestry: polder\ncost: 2 Points\nname: Fearless\nscc: mcdm.heroes.v1/feature.trait.polder/fearless\ntype: trait\n---\n\nCourage is all you know. You can't be made [frightened](scc.v1:mcdm.heroes.v1/condition/frightened).\n",
+    "structured": {
+      "ancestry": "polder",
+      "cost": "2 Points"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.polder/graceful-retreat",
+    "kind": "trait",
+    "name": "Graceful Retreat",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/polder/graceful-retreat.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/polder/graceful-retreat.json",
+    "selection": "polder-ancestry",
+    "text": "---\nancestry: polder\ncost: 1 Point\nname: Graceful Retreat\nscc: mcdm.heroes.v1/feature.trait.polder/graceful-retreat\ntype: trait\n---\n\nYour small [size](scc.v1:mcdm.heroes.v1/rule.character/size) makes it easier for you to slip away from the fray. You gain a +1 [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) to the [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) you can shift when you take the [Disengage](scc.v1:mcdm.heroes.v1/feature.common.move-actions/disengage) move action.\n",
+    "structured": {
+      "ancestry": "polder",
+      "cost": "1 Point"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.polder/nimblestep",
+    "kind": "trait",
+    "name": "Nimblestep",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/polder/nimblestep.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/polder/nimblestep.json",
+    "selection": "polder-ancestry",
+    "text": "---\nancestry: polder\ncost: 2 Points\nname: Nimblestep\nscc: mcdm.heroes.v1/feature.trait.polder/nimblestep\ntype: trait\n---\n\nA light step serves you well when [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) is of the essence. You ignore the effects of [difficult terrain](scc.v1:mcdm.heroes.v1/movement/difficult-terrain) and can move at full [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) while sneaking.\n",
+    "structured": {
+      "ancestry": "polder",
+      "cost": "2 Points"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.polder/polder-geist",
+    "kind": "trait",
+    "name": "Polder Geist",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/polder/polder-geist.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/polder/polder-geist.json",
+    "selection": "polder-ancestry",
+    "text": "---\nancestry: polder\ncost: 1 Point\nname: Polder Geist\nscc: mcdm.heroes.v1/feature.trait.polder/polder-geist\ntype: trait\n---\n\nEvading others' notice gives you freedom to move. At the start of each of your [turns](scc.v1:mcdm.heroes.v1/rule.combat/turn) during combat, if no enemy has [line of effect](scc.v1:mcdm.heroes.v1/rule.combat/line-of-effect) to you or if you are hidden from or have [concealment](scc.v1:mcdm.heroes.v1/rule.combat/concealment) from any enemy with [line of effect](scc.v1:mcdm.heroes.v1/rule.combat/line-of-effect) to you, you gain a +3 [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) to [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) until the end of your [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).\n",
+    "structured": {
+      "ancestry": "polder",
+      "cost": "1 Point"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.polder/polder-traits",
+    "kind": "trait",
+    "name": "Polder Traits",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/polder/polder-traits.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/polder/polder-traits.json",
+    "selection": "polder-ancestry",
+    "text": "---\nancestry: polder\nname: Polder Traits\nscc: mcdm.heroes.v1/feature.trait.polder/polder-traits\ntype: trait\n---\n\n[Polder](scc.v1:mcdm.heroes.v1/ancestry/polder) heroes have access to the following traits.\n\n#### Purchased Polder Traits\n\nYou have 4 ancestry points to spend on the following traits. (*Quick Build:* Corruption Immunity, Fearless, Graceful Retreat.)\n",
+    "structured": {
+      "ancestry": "polder"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.polder/reactive-tumble",
+    "kind": "trait",
+    "name": "Reactive Tumble",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/polder/reactive-tumble.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/polder/reactive-tumble.json",
+    "selection": "polder-ancestry",
+    "text": "---\nancestry: polder\ncost: 1 Point\nname: Reactive Tumble\nscc: mcdm.heroes.v1/feature.trait.polder/reactive-tumble\ntype: trait\n---\n\nStaying light on your feet lets you quickly get back into position. Whenever you are [force moved](scc.v1:mcdm.heroes.v1/movement/forced-movement), you can use a free [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) to [shift](scc.v1:mcdm.heroes.v1/movement/shifting) 1 square after the [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) is resolved.\n",
+    "structured": {
+      "ancestry": "polder",
+      "cost": "1 Point"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.polder/shadowmeld",
+    "kind": "trait",
+    "name": "Signature Trait: Shadowmeld",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/polder/shadowmeld.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/polder/shadowmeld.json",
+    "selection": "polder-ancestry",
+    "text": "---\nancestry: polder\nname: 'Signature Trait: Shadowmeld'\nscc: mcdm.heroes.v1/feature.trait.polder/shadowmeld\ntype: trait\n---\n\nYou have the following ability.\n",
+    "structured": {
+      "ancestry": "polder"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.polder/small",
+    "kind": "trait",
+    "name": "Signature Trait: Small!",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/polder/small.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/polder/small.json",
+    "selection": "polder-ancestry",
+    "text": "---\nancestry: polder\nname: 'Signature Trait: Small!'\nscc: mcdm.heroes.v1/feature.trait.polder/small\ntype: trait\n---\n\nYour diminutive stature lets you easily get out of—or into—trouble. Your [size](scc.v1:mcdm.heroes.v1/rule.character/size) is 1S.\n",
+    "structured": {
+      "ancestry": "polder"
+    }
   }
 ]

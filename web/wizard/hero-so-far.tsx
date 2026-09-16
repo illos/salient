@@ -117,7 +117,7 @@ export function HeroSoFar({
               : undefined
           }
         />
-        <Row label="Kit" value={b.kit ? b.kit.name.value : undefined} />
+        <Row label="Kit" value={b.kit === null ? 'None' : b.kit?.name.value} />
         <Row label="Speed" value={show(b.speed)} />
         <Row label="Stability" value={show(b.stability)} />
         <Row label="Size" value={show(b.size)} />

@@ -1,0 +1,640 @@
+{
+  "schemaVersion": "v25-independent-1",
+  "compendiumRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+  "sourceRoot": "vendor/steel-compendium",
+  "reference": {
+    "name": "Bethell, corrected legal source target",
+    "rawExportSha256": "d21ab1c1a0a3f7eb2a582ad246805ee53fbd703b010b480c3f85cbbdf7ac157a",
+    "forgeWebsiteVersion": "14.198.0",
+    "forgeVendorRevision": "5a846aadb623a9855a023e9403bb887a956c341f",
+    "corrections": [
+      {
+        "path": "culture.upbringing.data.selected",
+        "raw": ["Empathize"],
+        "corrected": ["Tailoring"],
+        "reason": "Creative only Music/Perform/crafting."
+      },
+      {
+        "path": "class.featuresByLevel[level=1].features[id=elementalist-1-2].data.selected",
+        "raw": ["Blacksmithing", "Tailoring", "Alchemy"],
+        "corrected": ["Blacksmithing", "History", "Alchemy"],
+        "reason": "Tailoring now supplied by Creative; distinct class crafting/lore choice History."
+      },
+      {
+        "path": "career.features[id=mages-apprentice-feature-1].data.selected",
+        "raw": ["Magic"],
+        "corrected": ["Empathize"],
+        "reason": "Fixed career/class Magic collision creates one unrestricted replacement."
+      }
+    ],
+    "correctedExportSha256": "978b0c15f1c1169e06cf78dc50919f5d2833de7fca54eb2478e95716c7fb3a3e",
+    "correctedReferenceMetadata": "docs/research/v25-corrected-forge-reference.json"
+  },
+  "selections": {
+    "ancestry.choice": "Polder",
+    "ancestry.polder.purchased-traits": ["Corruption Immunity", "Graceful Retreat", "Fearless"],
+    "culture.name": "Polder",
+    "culture.language": "Khoursirian",
+    "culture.environment": "Urban",
+    "culture.environment.skill": "Alertness",
+    "culture.organization": "Communal",
+    "culture.organization.skill": "Gymnastics",
+    "culture.upbringing": "Creative",
+    "culture.upbringing.skill": "Tailoring",
+    "career.choice": "Mage's Apprentice",
+    "career.mages-apprentice.skills": ["Monsters", "Timescape"],
+    "career.mages-apprentice.languages": ["The First Language"],
+    "career.mages-apprentice.perk": "Arcane Trick",
+    "career.mages-apprentice.inciting-incident": "Forgotten Memories",
+    "class.choice": "Elementalist",
+    "class.elementalist.characteristic-array": "2, 1, 1, \u22121",
+    "class.elementalist.array-assignment": {
+      "Might": -1,
+      "Agility": 1,
+      "Intuition": 2,
+      "Presence": 1
+    },
+    "class.elementalist.skills": ["Alchemy", "Blacksmithing", "History"],
+    "class.elementalist.magic-replacement": "Empathize",
+    "class.elementalist.specialization": "Fire",
+    "class.elementalist.enchantment": "Enchantment of Destruction",
+    "class.elementalist.ward": "Ward of Delightful Consequences",
+    "class.elementalist.signature-abilities": ["Bifurcated Incineration", "Viscous Fire"],
+    "class.elementalist.ability-3": "The Flesh, a Crucible",
+    "class.elementalist.ability-5": "Conflagration",
+    "details.name": "Bethell"
+  },
+  "expected": {
+    "level": 1,
+    "ancestry": "Polder",
+    "class": "Elementalist",
+    "subclass": "Fire",
+    "career": "Mage's Apprentice",
+    "characteristics": {
+      "M": -1,
+      "A": 1,
+      "R": 2,
+      "I": 2,
+      "P": 1
+    },
+    "staminaMaximum": 18,
+    "recoveriesMaximum": 8,
+    "recoveryValue": 6,
+    "windedValue": 9,
+    "speed": 5,
+    "stability": 0,
+    "size": "1S",
+    "disengage": 2,
+    "potencyCharacteristic": "R",
+    "potency": {
+      "weak": 0,
+      "average": 1,
+      "strong": 2
+    },
+    "heroicResource": "essence",
+    "savingThrowThreshold": 6,
+    "renown": 1,
+    "wealth": 1,
+    "kit": null,
+    "skills": [
+      "Alchemy",
+      "Alertness",
+      "Blacksmithing",
+      "Empathize",
+      "Gymnastics",
+      "History",
+      "Magic",
+      "Monsters",
+      "Tailoring",
+      "Timescape"
+    ],
+    "languages": ["Caelian", "Khoursirian", "The First Language"],
+    "traits": ["Shadowmeld", "Small!", "Corruption Immunity", "Graceful Retreat", "Fearless"],
+    "features": [
+      "Culture edge",
+      "Elemental Specialization",
+      "Essence",
+      "Hurl Element",
+      "Persistent Magic",
+      "Practical Magic",
+      "Enchantment",
+      "Elementalist Ward",
+      "Elementalist Abilities",
+      "Fire: Acolyte of Fire",
+      "Enchantment of Destruction",
+      "Ward of Delightful Consequences"
+    ],
+    "perks": ["Arcane Trick"],
+    "abilities": [
+      "Shadowmeld",
+      "Arcane Trick",
+      "Hurl Element",
+      "Practical Magic",
+      "Return to Formlessness",
+      "Explosive Assistance",
+      "Bifurcated Incineration",
+      "Viscous Fire",
+      "The Flesh, a Crucible",
+      "Conflagration",
+      "Melee Weapon Free Strike",
+      "Ranged Weapon Free Strike"
+    ],
+    "damageImmunities": {
+      "corruption": 3
+    },
+    "conditionImmunities": ["frightened"],
+    "abilityDamageTiers": {
+      "Hurl Element (nonfire)": [5, 7, 9],
+      "Hurl Element (fire)": [6, 8, 10],
+      "Bifurcated Incineration": [4, 6, 8],
+      "Viscous Fire": [6, 9, 11],
+      "The Flesh, a Crucible": [9, 12, 15],
+      "Conflagration": [6, 8, 12],
+      "Melee Weapon Free Strike": [3, 6, 8],
+      "Ranged Weapon Free Strike": [3, 5, 7]
+    },
+    "practicalMagicFlatDamage": 2,
+    "initialLive": {
+      "staminaCurrent": 18,
+      "recoveriesCurrent": 8,
+      "heroicResource": 0,
+      "surges": 0,
+      "victories": 0,
+      "xp": 0
+    }
+  },
+  "ledger": [
+    {
+      "name": "Polder",
+      "kind": "ancestry",
+      "sourcePath": "en/unified/md/ancestry/polder.md",
+      "sourceSha256": "f969e891bb11f5565645972e4cc97d6400d69e3d05ca8b9b811ae1a4db7e033a",
+      "classification": "build",
+      "expectedEffect": "Selects Polder signature traits and a 4-point purchased-trait budget; ancestry does not fix culture."
+    },
+    {
+      "name": "Polder Traits",
+      "kind": "entitlement",
+      "sourcePath": "en/unified/md/feature/trait/polder/polder-traits.md",
+      "sourceSha256": "5e59bd2a6b278147201db8c8e3ace7338a87c2ec7793ed47ab271132468054b6",
+      "classification": "build",
+      "expectedEffect": "4 ancestry points; selected costs 1 + 1 + 2 = 4."
+    },
+    {
+      "name": "Shadowmeld",
+      "kind": "trait",
+      "sourcePath": "en/unified/md/feature/trait/polder/shadowmeld.md",
+      "sourceSha256": "8a288896924c941d55977ae7e5985357ef61b7263442f6ac0d3a8a8aa4b471fb",
+      "classification": "manual",
+      "expectedEffect": "Grants Shadowmeld ability, not an always-on hidden state."
+    },
+    {
+      "name": "Small!",
+      "kind": "trait",
+      "sourcePath": "en/unified/md/feature/trait/polder/small.md",
+      "sourceSha256": "a3de3dfb2ae35401d43240a90137538bc608e402901e01eedb7393d0c7701280",
+      "classification": "build",
+      "expectedEffect": "Size 1S replaces ordinary size 1M."
+    },
+    {
+      "name": "Corruption Immunity",
+      "kind": "trait",
+      "sourcePath": "en/unified/md/feature/trait/polder/corruption-immunity.md",
+      "sourceSha256": "6280c35cac4dad4c14b06bb2012e51bf06371a4bd0760912418a0c0c828479ef",
+      "classification": "build-and-generic-runtime",
+      "expectedEffect": "Corruption immunity level + 2 = 3; sourced static immunity feeds existing generic damage facts. Feature-specific triggered damage remains outside this contribution."
+    },
+    {
+      "name": "Graceful Retreat",
+      "kind": "trait",
+      "sourcePath": "en/unified/md/feature/trait/polder/graceful-retreat.md",
+      "sourceSha256": "bc5d3ad24b7b8bbcdbedfbd6653872a548c2ab1c9c04cb8079dca9dc5fc7414b",
+      "classification": "build",
+      "expectedEffect": "Disengage shift distance +1; ordinary 1 becomes 2."
+    },
+    {
+      "name": "Fearless",
+      "kind": "trait",
+      "sourcePath": "en/unified/md/feature/trait/polder/fearless.md",
+      "sourceSha256": "f5bba588506cd5ccf7b0a175c45d5c76f0cb6b8ba44de35564b1c303dfefe62c",
+      "classification": "build-and-manual",
+      "expectedEffect": "Cannot be made frightened; expose immunity, do not reject deliberate manual condition overrides."
+    },
+    {
+      "name": "Urban / Alertness",
+      "kind": "skill-entitlement",
+      "sourcePath": "en/unified/md/culture/urban.md",
+      "sourceSha256": "ce28714e37ee1ac56f12f1510e6508089d44c2e49fa94b65e1782feb952158d2",
+      "classification": "build",
+      "expectedEffect": "One interpersonal or intrigue skill; Alertness is intrigue."
+    },
+    {
+      "name": "Communal / Gymnastics",
+      "kind": "skill-entitlement",
+      "sourcePath": "en/unified/md/culture/communal.md",
+      "sourceSha256": "16e32193ef1ef573ffec18ee521c928cefddd715595a399a3319f67f8683a2f8",
+      "classification": "build",
+      "expectedEffect": "One crafting or exploration skill; Gymnastics is exploration."
+    },
+    {
+      "name": "Creative / Tailoring",
+      "kind": "skill-entitlement",
+      "sourcePath": "en/unified/md/culture/creative.md",
+      "sourceSha256": "0bf9a5957b9357ec1024fcdae2857cc881d038b6d0c2d56099484ac24a987467",
+      "classification": "build",
+      "expectedEffect": "Music, Perform, or one crafting skill; Tailoring is crafting. Empathize is not eligible here."
+    },
+    {
+      "name": "Culture edge",
+      "kind": "feature",
+      "sourcePath": "en/books/heroes/clean/Draw Steel Heroes.md",
+      "sourceSha256": "784677631b216450a738c1ce1aa33686816105cf20e683768d6a518e0cbd0d01",
+      "classification": "manual",
+      "expectedEffect": "Edge on tests to recall lore about the culture or influence/interact with its people; Culture Benefits heading."
+    },
+    {
+      "name": "Caelian / Khoursirian / The First Language",
+      "kind": "language-entitlement",
+      "sourcePath": "en/books/heroes/clean/Draw Steel Heroes.md",
+      "sourceSha256": "784677631b216450a738c1ce1aa33686816105cf20e683768d6a518e0cbd0d01",
+      "classification": "build",
+      "expectedEffect": "Caelian automatically known; Khoursirian culture language; First Language career language; both appear in Languages by Ancestry, not the dead-language table."
+    },
+    {
+      "name": "Mage's Apprentice",
+      "kind": "career",
+      "sourcePath": "en/unified/md/career/mages-apprentice.md",
+      "sourceSha256": "75d71aacbea25d44c522b63548c0b5b97fe3fce838a9fd76f697e5ed255603d5",
+      "classification": "build",
+      "expectedEffect": "Fixed Magic; two other lore skills Monsters and Timescape; one language; renown +1; supernatural perk Arcane Trick; Forgotten Memories incident."
+    },
+    {
+      "name": "Duplicate fixed Magic / Empathize",
+      "kind": "skill-entitlement",
+      "sourcePath": "en/unified/md/chapter/making-a-hero.md",
+      "sourceSha256": "9ee2dbccc874a9fae9c3aa814e802112d2330f98730681b3b32c1d305e252c87",
+      "classification": "build",
+      "expectedEffect": "Choosing Skills permits any-group replacement for same specific skill granted from two sources. Keep career and class fixed Magic provenance; grant one effective Magic and one Empathize replacement. Q-CHAR-11 forbids manufacturing replacements via optional duplicate choices."
+    },
+    {
+      "name": "Arcane Trick",
+      "kind": "perk",
+      "sourcePath": "en/unified/md/perk/arcane-trick.md",
+      "sourceSha256": "9f68b9e9c20e26563d28902fde5be43406fe9bc86620e20d349b69d72238ecd9",
+      "classification": "manual",
+      "expectedEffect": "Grants the Arcane Trick main action; seven cosmetic/minor utility options, no rolled damage or permanent numeric bonus."
+    },
+    {
+      "name": "Elementalist",
+      "kind": "class",
+      "sourcePath": "en/unified/md/class/elementalist.md",
+      "sourceSha256": "5b0651654895ce080b45d3a9e13339905faae4566343e8e9245cc1f205a1a1b1",
+      "classification": "build",
+      "expectedEffect": "Reason 2; assign array 2,1,1,-1 to Intuition2 Agility1 Presence1 Might-1. Stamina18, Recoveries8, potency R-2/R-1/R. Fixed Magic plus three crafting/lore skills Alchemy, Blacksmithing, History."
+    },
+    {
+      "name": "Elemental Specialization",
+      "kind": "entitlement",
+      "sourcePath": "en/unified/md/feature/elementalist/level-1/elemental-specialization.md",
+      "sourceSha256": "0bbc1cd4c940dc9671cf38e9c4c5a192afd2d1b066fc9f973db9fe95737c4767",
+      "classification": "build",
+      "expectedEffect": "Choose Fire; grants Acolyte of Fire and Fire specialization level-one feature/triggered action."
+    },
+    {
+      "name": "1st-Level Specialization Feature",
+      "kind": "entitlement",
+      "sourcePath": "en/unified/md/feature/elementalist/level-1/1st-level-specialization-feature.md",
+      "sourceSha256": "e3cd9629d71187034cae76c1687ca6847c10e7129294d51a5ab4d68d50932bf1",
+      "classification": "build",
+      "expectedEffect": "Fire grants Return to Formlessness."
+    },
+    {
+      "name": "Specialization Triggered Action",
+      "kind": "entitlement",
+      "sourcePath": "en/unified/md/feature/elementalist/level-1/specialization-triggered-action.md",
+      "sourceSha256": "825203583c1a1362c3597d0dbb341ac7d3c452e2dec05d88a9d35e47435c47e2",
+      "classification": "build",
+      "expectedEffect": "Fire grants Explosive Assistance."
+    },
+    {
+      "name": "Essence",
+      "kind": "feature",
+      "sourcePath": "en/unified/md/feature/elementalist/level-1/essence.md",
+      "sourceSha256": "aa573a062ddf06d3057353c22e493009cf1e54037eb3283fad8eda622bf68924",
+      "classification": "build-and-manual",
+      "expectedEffect": "Resource identity Essence. Start encounter gain Victories, turn start +2, first qualifying non-untyped/non-holy damage within10 each round +1, lose remaining at encounter end. Generation/reset remain manual. Existing generic outside-combat cost waiver applies, with once-use-until-Victory/respite restriction shown. Starting new hero Essence0."
+    },
+    {
+      "name": "Hurl Element permission",
+      "kind": "feature",
+      "sourcePath": "en/unified/md/feature/elementalist/level-1/hurl-element.md",
+      "sourceSha256": "9c78af76e94029a97dc500d5f627581dc57060570d00348e96a754f15d6fea5c",
+      "classification": "manual",
+      "expectedEffect": "Hurl Element may be used as a ranged free strike; this wrapper permission is not printed in the ability-only extraction."
+    },
+    {
+      "name": "Persistent Magic",
+      "kind": "feature",
+      "sourcePath": "en/unified/md/feature/elementalist/level-1/persistent-magic.md",
+      "sourceSha256": "0bf695cdfa32190d54f0eaa2766ed7ff235ca77a53b542b53e34fde002f2fa72",
+      "classification": "manual",
+      "expectedEffect": "Maintain immediately; reduces essence gained at turn start by Persistent value, cannot make gain negative; damage >=5R=10 in one turn stops all; ends encounter; voluntary stop no action; no duplicate effect on one creature."
+    },
+    {
+      "name": "Enchantment",
+      "kind": "entitlement",
+      "sourcePath": "en/unified/md/feature/elementalist/level-1/enchantment.md",
+      "sourceSha256": "9dfb2142386a3872e49c64da29b4bf2850944fb6aac039cfc7ffc5285c2d88b8",
+      "classification": "build",
+      "expectedEffect": "Choose one, Destruction; change with ward by respite ritual. No kit granted."
+    },
+    {
+      "name": "Enchantment of Destruction",
+      "kind": "feature",
+      "sourcePath": "en/unified/md/feature/elementalist/level-1/enchantment-of-destruction.md",
+      "sourceSha256": "89b90dccecd57158258b89cc68fd5e412f56f0c4a27a9b8fbabcddf5df2dfa54",
+      "classification": "build-and-generic-runtime",
+      "expectedEffect": "+1 rolled damage with all Magic abilities, including Area abilities; never flat damage without a power roll."
+    },
+    {
+      "name": "Elementalist Ward",
+      "kind": "entitlement",
+      "sourcePath": "en/unified/md/feature/elementalist/level-1/elementalist-ward.md",
+      "sourceSha256": "1dc0229e9dde79bdc8fbbbe072b7a1fdd9272a936ff55b59885415c90610fcfc",
+      "classification": "build",
+      "expectedEffect": "Choose one, Ward of Delightful Consequences; change with enchantment by respite ritual."
+    },
+    {
+      "name": "Ward of Delightful Consequences",
+      "kind": "feature",
+      "sourcePath": "en/unified/md/feature/elementalist/level-1/ward-of-delightful-consequences.md",
+      "sourceSha256": "9e7355e04ad8331efe62f64c5b9b2e9c7bf3dd629c4eb9193b952fd17fee6547",
+      "classification": "manual",
+      "expectedEffect": "First damage taken each round grants1 surge; no permanent stamina or defense bonus; no automatic surge generation in this slice."
+    },
+    {
+      "name": "Fire: Acolyte of Fire",
+      "kind": "feature",
+      "sourcePath": "en/unified/md/feature/elementalist/level-1/fire-acolyte-of-fire.md",
+      "sourceSha256": "273c17e8d3fbbf158cfb120ef5681138694c88168902900240b0fe39fadeb9fb",
+      "classification": "build-and-generic-runtime",
+      "expectedEffect": "+1 rolled damage with both Fire and Magic; also Hurl Element when dealing fire. Stacks with Destruction for total+2 on selected Fire spells, never on nonrolled Practical Magic."
+    },
+    {
+      "name": "Elementalist Abilities",
+      "kind": "entitlement",
+      "sourcePath": "en/unified/md/feature/elementalist/level-1/elementalist-abilities.md",
+      "sourceSha256": "bdeecdc4c74df02314d8ef5ecf88db0d89a634a71f06d94b38a0d62ef26ed703",
+      "classification": "build",
+      "expectedEffect": "Choose two signatures, one3-Essence and one5-Essence ability; selectable across specializations, support subset explicit."
+    },
+    {
+      "name": "Shadowmeld",
+      "kind": "ability",
+      "sourcePath": "en/unified/md/feature/ability/polder/shadowmeld.md",
+      "sourceSha256": "4485bd309e62e82d739e0f299c299bc49414a15a2aecbd5ad66d06993a6708ef",
+      "classification": "manual-with-build-metadata",
+      "expectedEffect": "Maneuver Self Magic. Shadow against touched surface; conditional hiding, enemy strike/search bane, cannot move/be forced or act except listed exceptions; larger areas only if affect surface; exit maneuver; destroyed surface ends form and deals irreducible1d6."
+    },
+    {
+      "name": "Arcane Trick",
+      "kind": "ability",
+      "sourcePath": "en/unified/md/perk/arcane-trick.md",
+      "sourceSha256": "9f68b9e9c20e26563d28902fde5be43406fe9bc86620e20d349b69d72238ecd9",
+      "classification": "manual-with-build-metadata",
+      "expectedEffect": "Main action Self Magic, seven utility options; no rolled damage."
+    },
+    {
+      "name": "Hurl Element",
+      "kind": "ability",
+      "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/hurl-element.md",
+      "sourceSha256": "712ca7c00bbc3d0081f99546b2c2b84b1a487a29bd7cae1ec63228e9bc8288b1",
+      "classification": "manual-with-build-metadata",
+      "expectedEffect": "Main action Ranged10 Magic Strike one creature/object; roll R; source tiers2+R/4+R/6+R; choose acid/cold/corruption/fire/lightning/poison/sonic. Destruction+1; Acolyte another+1 only fire."
+    },
+    {
+      "name": "Practical Magic",
+      "kind": "ability",
+      "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/practical-magic.md",
+      "sourceSha256": "81534ccf68f52de461997d4d6873a250182256119df4d75020e2c08647c8c6d8",
+      "classification": "manual-with-build-metadata",
+      "expectedEffect": "Maneuver Magic: Knockback at Hurl range10 using R; OR flat R2 elemental damage within10; OR teleport R2 plus1 square per Essence. Damage2 has no rolled bonuses."
+    },
+    {
+      "name": "Return to Formlessness",
+      "kind": "ability",
+      "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/return-to-formlessness.md",
+      "sourceSha256": "e99389e4a1a0e597d12701e1ac6bae33021b8df994da91ce0efb3e7a97eaa596",
+      "classification": "manual-with-build-metadata",
+      "expectedEffect": "Main action Fire Magic Melee1 mundane object; destroy touched square of larger object. No damage roll."
+    },
+    {
+      "name": "Explosive Assistance",
+      "kind": "ability",
+      "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/explosive-assistance.md",
+      "sourceSha256": "548d7b1c68b68e97f6ef89b7889f0e83922f178156e8d9c58f95f3a58e799751",
+      "classification": "manual-with-build-metadata",
+      "expectedEffect": "Triggered (not free) Fire Magic Ranged10 Self/ally when target force moves; +R2 movement distance, spend1 Essence for +2R4 instead. No damage roll."
+    },
+    {
+      "name": "Bifurcated Incineration",
+      "kind": "ability",
+      "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/bifurcated-incineration.md",
+      "sourceSha256": "c362c82afc59971922f9c9f5491a4d1a04bfdfd6c29a699a130358be61e654fa",
+      "classification": "manual-with-build-metadata",
+      "expectedEffect": "Signature Main action Fire Magic Ranged Strike; Ranged10 two creatures/objects; roll+R2, base2/4/6 plus2 rolled bonuses =>4/6/8 fire. R is NOT added to damage."
+    },
+    {
+      "name": "Viscous Fire",
+      "kind": "ability",
+      "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/viscous-fire.md",
+      "sourceSha256": "931e88ee85fd9facbf13fa02747b11acde26ca5751683328260053e9dfff8923",
+      "classification": "manual-with-build-metadata",
+      "expectedEffect": "Signature Main action Fire Magic Ranged Strike; Ranged10 one creature/object; roll+R2, base2+R/5+R/7+R plus2 =>6/9/11 fire; push2/3/4."
+    },
+    {
+      "name": "The Flesh, a Crucible",
+      "kind": "ability",
+      "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/the-flesh-a-crucible.md",
+      "sourceSha256": "a60c12960e29c0ba0f9182785f13f65cf2a7a53a2777f508a7a6a084ce7bc7c0",
+      "classification": "manual-with-build-metadata",
+      "expectedEffect": "3 Essence Main action Fire Magic Ranged Strike; Ranged10 one creature/object; roll+R2,5+R/8+R/11+R plus2=>9/12/15 fire; Persistent1 reroll at start of turn in range, no action/Essence spend."
+    },
+    {
+      "name": "Conflagration",
+      "kind": "ability",
+      "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/conflagration.md",
+      "sourceSha256": "4cf4272c314ad5d8a877692498d0f46aae6c258b46887489c635eebd48ff695d",
+      "classification": "manual-with-build-metadata",
+      "expectedEffect": "5 Essence Main action Area Fire Magic Ranged; 3cube within10 each enemy; roll+R2, base4/6/10 plus2=>6/8/12 fire; Persistent2 use maneuver at turn start to repeat free of Essence."
+    },
+    {
+      "name": "Melee Weapon Free Strike",
+      "kind": "ability",
+      "sourcePath": "en/unified/md/feature/ability/common/melee-weapon-free-strike.md",
+      "sourceSha256": "f167bd66881e0452fd019e3b267bb9ab12cdb625fc82ca8765adb737bd3b9c93",
+      "classification": "manual-with-build-metadata",
+      "expectedEffect": "Main action Charge Melee Strike Weapon; Melee1 creature/object; choose M or A, optimal A1 gives3/6/8. No Magic bonus."
+    },
+    {
+      "name": "Ranged Weapon Free Strike",
+      "kind": "ability",
+      "sourcePath": "en/unified/md/feature/ability/common/ranged-weapon-free-strike.md",
+      "sourceSha256": "e2114794d3d21e5da051e9498f4760b39bfd3b6abe9d8a8d11077d406c775b8f",
+      "classification": "manual-with-build-metadata",
+      "expectedEffect": "Main action Ranged Strike Weapon; Ranged5 creature/object; choose M or A, optimal A1 gives3/5/7. No Magic bonus."
+    },
+    {
+      "name": "Alchemy",
+      "kind": "skill",
+      "sourcePath": "en/unified/md/skill/crafting/alchemy.md",
+      "sourceSha256": "f3b85108bd1676178de6ebd3f88b816367e5c52127dbf5b8b9f23facbae4e144",
+      "classification": "manual",
+      "expectedEffect": "Granted once; appropriate tests gain skill bonus, applied by shared test workflow/table judgment."
+    },
+    {
+      "name": "Alertness",
+      "kind": "skill",
+      "sourcePath": "en/unified/md/skill/intrigue/alertness.md",
+      "sourceSha256": "714c6458e1aaa81a8bd74f593c87f08c9b4633f5d747190db3e821ff977edb6f",
+      "classification": "manual",
+      "expectedEffect": "Granted once; appropriate tests gain skill bonus, applied by shared test workflow/table judgment."
+    },
+    {
+      "name": "Blacksmithing",
+      "kind": "skill",
+      "sourcePath": "en/unified/md/skill/crafting/blacksmithing.md",
+      "sourceSha256": "1ff007d9fe2eec6a622bd351ed90258720a1777c89f6409da95818d7c6453318",
+      "classification": "manual",
+      "expectedEffect": "Granted once; appropriate tests gain skill bonus, applied by shared test workflow/table judgment."
+    },
+    {
+      "name": "Empathize",
+      "kind": "skill",
+      "sourcePath": "en/unified/md/skill/interpersonal/empathize.md",
+      "sourceSha256": "abf56098a83faa0e96fdfe9bc006c1b9f4ff54a759f6ca9a4febc859e14b3b87",
+      "classification": "manual",
+      "expectedEffect": "Granted once; appropriate tests gain skill bonus, applied by shared test workflow/table judgment."
+    },
+    {
+      "name": "Gymnastics",
+      "kind": "skill",
+      "sourcePath": "en/unified/md/skill/exploration/gymnastics.md",
+      "sourceSha256": "222a07b35d116c22422c7ac092264d6cad7f502aff5b4d731eae869b6e66afdf",
+      "classification": "manual",
+      "expectedEffect": "Granted once; appropriate tests gain skill bonus, applied by shared test workflow/table judgment."
+    },
+    {
+      "name": "History",
+      "kind": "skill",
+      "sourcePath": "en/unified/md/skill/lore/history.md",
+      "sourceSha256": "ebcbbdd31dfd9d0756442ca05fae5c7f76526bfc08abbd753c79cfd13a7a970d",
+      "classification": "manual",
+      "expectedEffect": "Granted once; appropriate tests gain skill bonus, applied by shared test workflow/table judgment."
+    },
+    {
+      "name": "Magic",
+      "kind": "skill",
+      "sourcePath": "en/unified/md/skill/lore/magic.md",
+      "sourceSha256": "22f8d345e0eacf1f9c053f28dde3429f01ae4162bde518a8d2032b358dfdcc4e",
+      "classification": "manual",
+      "expectedEffect": "Granted once; appropriate tests gain skill bonus, applied by shared test workflow/table judgment."
+    },
+    {
+      "name": "Monsters",
+      "kind": "skill",
+      "sourcePath": "en/unified/md/skill/lore/monsters.md",
+      "sourceSha256": "f2bae465a3c1e301eaedf0d750d385ecc981a70ca88080218281ce774f7bf1a1",
+      "classification": "manual",
+      "expectedEffect": "Granted once; appropriate tests gain skill bonus, applied by shared test workflow/table judgment."
+    },
+    {
+      "name": "Tailoring",
+      "kind": "skill",
+      "sourcePath": "en/unified/md/skill/crafting/tailoring.md",
+      "sourceSha256": "d6ea60bb0080650e17e74601d6465bc33a0a35c6d64e68d701bd8a1ffaffa1a7",
+      "classification": "manual",
+      "expectedEffect": "Granted once; appropriate tests gain skill bonus, applied by shared test workflow/table judgment."
+    },
+    {
+      "name": "Timescape",
+      "kind": "skill",
+      "sourcePath": "en/unified/md/skill/lore/timescape.md",
+      "sourceSha256": "1718828894102f9a03a02dd33d8849c5a4abdb6cf230a331baa5394e51c0edbd",
+      "classification": "manual",
+      "expectedEffect": "Granted once; appropriate tests gain skill bonus, applied by shared test workflow/table judgment."
+    },
+    {
+      "name": "Default size/speed/stability",
+      "kind": "baseline",
+      "sourcePath": "en/unified/md/rule/character/speed.md",
+      "sourceSha256": "ac435b9ab73fd3f594d3c304205e2d2937ed8b4726ca91e4f667e7486d7dfa6b",
+      "classification": "build",
+      "expectedEffect": "Ordinary size1M speed5 stability0; Small replaces size."
+    },
+    {
+      "name": "Recoveries and recovery value",
+      "kind": "baseline",
+      "sourcePath": "en/unified/md/rule/health/recoveries.md",
+      "sourceSha256": "2fe8aec0bbb138d3442ed3d8d3628911c20dd7ee9366f0dbdadc645b294e0fb9",
+      "classification": "build",
+      "expectedEffect": "Recovery value floor(maximum Stamina/3)=6; class Recoveries8."
+    },
+    {
+      "name": "Winded",
+      "kind": "baseline",
+      "sourcePath": "en/unified/md/rule/health/winded.md",
+      "sourceSha256": "36cda2160d1b684e17feaa3ca8e04d453a01106554c1cbd3b0a51a53dc8885ee",
+      "classification": "build",
+      "expectedEffect": "At half maximum Stamina or less: threshold9."
+    },
+    {
+      "name": "Disengage",
+      "kind": "baseline",
+      "sourcePath": "en/unified/md/feature/common/move-actions/disengage.md",
+      "sourceSha256": "54e4e50bbdece67a328baef4b64c2908391e323d223be9146c441e52379bfaba",
+      "classification": "build",
+      "expectedEffect": "Default shift1 plus Graceful Retreat1 =2."
+    },
+    {
+      "name": "Saving throw",
+      "kind": "baseline",
+      "sourcePath": "en/unified/md/rule/general/saving-throw.md",
+      "sourceSha256": "c10e7c0565074ea0e04ac1400e379c16f84562c6bb7345e9e83bfae0d5df0a7c",
+      "classification": "build",
+      "expectedEffect": "Ordinary saving throw succeeds6+; no selected modifier."
+    },
+    {
+      "name": "Renown",
+      "kind": "baseline",
+      "sourcePath": "en/unified/md/rule/resource/renown.md",
+      "sourceSha256": "ad1b4918655fcc7e51d5c0daa1aa04619e5f11df59f4a9d870583162b3f7fb3c",
+      "classification": "build",
+      "expectedEffect": "Default0 + career1 =1."
+    },
+    {
+      "name": "Wealth",
+      "kind": "baseline",
+      "sourcePath": "en/unified/md/rule/resource/wealth.md",
+      "sourceSha256": "9d662cec851de19a09c65cc2d3db0e797647ec6934d9229fe6051d85c58169b9",
+      "classification": "build",
+      "expectedEffect": "Starting hero wealth1; career does not add any."
+    },
+    {
+      "name": "Free strikes",
+      "kind": "baseline",
+      "sourcePath": "en/unified/md/chapter/making-a-hero.md",
+      "sourceSha256": "9ee2dbccc874a9fae9c3aa814e802112d2330f98730681b3b32c1d305e252c87",
+      "classification": "build",
+      "expectedEffect": "Every hero receives both melee and ranged weapon free strike."
+    },
+    {
+      "name": "Practical Magic permission",
+      "kind": "feature",
+      "sourcePath": "en/unified/md/feature/elementalist/level-1/practical-magic.md",
+      "sourceSha256": "60fbb0b6cec689ab0c7311924031efd7ba004f1b4f20c7543af7ed94fcda7083",
+      "classification": "manual",
+      "expectedEffect": "Wrapper grants Practical Magic ability; complete mechanics are in the separate ability entry."
+    }
+  ]
+}

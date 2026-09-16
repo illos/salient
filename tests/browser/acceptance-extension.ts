@@ -175,11 +175,20 @@ export async function tableJourney(pages: Page[], campaignUrl: string, stamp: st
         const metrics = Object.fromEntries(
           (await cdp.send('Performance.getMetrics')).metrics.map(m => [m.name, m.value]),
         );
+        // Mutations and GC do not guarantee that each client's reactive DOM has settled.
+        // Sample the same bounded window once visible, retaining the original count invariants.
+        let logRows = 0;
+        await expect(async () => {
+          logRows = await pages[index]!.locator('li[data-disposition]').count();
+          expect(logRows).toBeGreaterThan(0);
+          expect(logRows).toBeLessThanOrEqual(50);
+          if (cycle >= 40) expect(logRows).toBe(50);
+        }).toPass({ timeout: 15_000 });
         roles.push({
           role: ['director', 'player', 'observer'][index],
           heapBytes: metrics.JSHeapUsedSize,
           nodes: metrics.Nodes,
-          logRows: await pages[index]!.locator('li[data-disposition]').count(),
+          logRows,
         });
       }
       for (const role of roles) {

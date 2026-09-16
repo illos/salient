@@ -119,6 +119,8 @@ export interface DerivedValue<T> {
 }
 
 export interface GrantedSkill {
+  /** Other fixed entitlements to the same skill; their replacement remains a separate choice. */
+  additionalProvenance?: Provenance[];
   name: string;
   /** Skill group as the R01 pools name it (crafting, exploration, interpersonal, intrigue, lore). */
   group: string;
@@ -153,12 +155,32 @@ export interface GrantedFeature {
 
 export interface GrantedAbility {
   name: string;
-  kind: 'signature' | 'heroic' | 'aspect-triggered' | 'kit-signature' | 'free-strike';
+  kind:
+    | 'signature'
+    | 'heroic'
+    | 'aspect-triggered'
+    | 'kit-signature'
+    | 'free-strike'
+    | 'ancestry'
+    | 'class'
+    | 'perk';
   sourcePath: string;
   /** Fixed heroic-resource cost from the source, if any. */
-  cost?: { resource: 'ferocity'; amount: number };
+  cost?: { resource: 'ferocity' | 'essence'; amount: number };
   /** True for the kit's own signature ability: its damage and distance already include the kit bonuses. */
   kitBonusesIncluded: boolean;
+  provenance: Provenance;
+}
+
+/** A permanent sourced bonus. All required keywords must match; conditions remain explicit. */
+export interface AbilityModifier {
+  id: string;
+  label?: string;
+  field: 'rolled-damage';
+  amount: number;
+  keywords: string[];
+  /** Alternative eligibility for a named ability with a selected damage type. */
+  alternative?: { ability: string; damageType: string };
   provenance: Provenance;
 }
 
@@ -210,7 +232,7 @@ export interface DerivedBaseline {
     strong: DerivedValue<number>;
   };
   heroicResource: {
-    name: DerivedValue<'ferocity'>;
+    name: DerivedValue<'ferocity' | 'essence'>;
     /** Value at creation; in-combat generation is manual in v0.01 (docs/fury-goblin-automation.md). */
     startingValue: DerivedValue<number>;
   };
@@ -225,6 +247,10 @@ export interface DerivedBaseline {
   features: GrantedFeature[];
   perks: GrantedFeature[];
   abilities: GrantedAbility[];
+  /** Permanent non-kit ability contributions; applied once when eligible. */
+  abilityModifiers?: AbilityModifier[];
+  damageImmunities?: { damageType: string; value: DerivedValue<number> }[];
+  conditionImmunities?: { condition: string; provenance: Provenance }[];
   /** Every open question whose provisional default influenced this baseline. */
   uncertainties: UncertaintyId[];
 }

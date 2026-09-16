@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-only
 /**
- * The minimal level-one devil Fury wizard: a real decision flow over the R01 table
- * (shared/content/fury-level-one-decisions.json). Every presented step appears in source order
+ * The shared level-one wizard: a decision flow over the supported class definitions
+ * (shared/content/level-one-decisions.ts). Every presented step appears in source order
  * with its decisions; the full option pool is visible with unsupported options labeled; each
  * option and decision links to the embedded rules with readable labels. The "hero so far" is the
  * shared `characters.evaluate` read over the current selections; nothing here derives a value.
@@ -22,19 +22,18 @@ import { useMutation, useQuery } from 'convex/react';
 import type { FunctionReturnType } from 'convex/server';
 import { api } from '../../convex/_generated/api';
 import type { Id } from '../../convex/_generated/dataModel';
-import definitionsJson from '../../shared/content/fury-level-one-decisions.json';
+import { definitions } from '../../shared/content/level-one-decisions';
 import type { CharacterAuthored } from '../../shared/characterDraft';
 import type {
   Diagnostic,
   EvaluationResult,
   SelectionValue,
 } from '../../shared/contracts/characterEvaluation';
-import type { Decision, DecisionDefinitions, Step } from '../../shared/evaluate/definitions';
+import type { Decision, Step } from '../../shared/evaluate/definitions';
 import {
   assignCharacteristic,
   assignmentError,
-  characteristicArray,
-  ASSIGNMENT_ID,
+  assignmentContext,
 } from '../../shared/evaluate/assignment';
 import { draftSelectionsFrom } from '../../shared/evaluate/draft';
 import {
@@ -67,7 +66,6 @@ import { StepRail, type RailStep } from './rail';
 import { ChoiceList, ChoiceRow, ChoiceSection, StepNav, StepTitle } from './choice-list';
 import { HeroSoFar } from './hero-so-far';
 
-const definitions = definitionsJson as unknown as DecisionDefinitions;
 const decisions = indexDecisions(definitions);
 const PRESENTED: Step[] = definitions.steps.filter(step => step.presentedInV001);
 /** Authored decisions that are the character's own fields rather than selections. */
@@ -124,7 +122,7 @@ function PoolSelect({
       }}
     >
       <option value="">Choose…</option>
-      {(decision.id === 'culture.language' || decision.id === 'career.soldier.languages') && (
+      {(decision.id === 'culture.language' || decision.id.endsWith('.languages')) && (
         <option value="Caelian" disabled>
           Caelian — automatically known common tongue
         </option>
@@ -137,11 +135,26 @@ function PoolSelect({
       ))}
       {unsupported.map(v => (
         <option key={v} value={v} disabled>
-          {v} — not offered in v0.01
+          {v} — not offered yet
         </option>
       ))}
     </select>
   );
+}
+
+/** Follow structural parents so inactive class/ancestry branches disappear as a unit. */
+function belongsToOtherBranch(decision: Decision, selections: Selections): boolean {
+  const condition = decision.availableWhen;
+  if (
+    condition &&
+    selections[condition.decision] !== undefined &&
+    selections[condition.decision] !== condition.value
+  )
+    return true;
+  return (decision.dependsOn ?? []).some(parentId => {
+    const parent = decisions.get(parentId);
+    return parent ? belongsToOtherBranch(parent, selections) : false;
+  });
 }
 
 function DecisionEditor({
@@ -166,6 +179,9 @@ function DecisionEditor({
   const shape = decision.shape;
   const label = decisionLabel(decision.id);
   const reference = <RuleLink {...decisionReference(decision, step)} />;
+  // Parent-specific branches disappear together; unmet dependencies in the active branch still
+  // explain the next choice. This keeps a second class from doubling every wizard section.
+  if (!available && belongsToOtherBranch(decision, selections)) return null;
   if (!available)
     return (
       <ChoiceSection label={label} reference={reference} muted>
@@ -353,8 +369,10 @@ function AssignmentEditor({
   onSelect: (id: string, value: SelectionValue | undefined) => void;
 }) {
   const [error, setError] = useState<string | null>(null);
-  const array = characteristicArray(selections['class.fury.characteristic-array']);
-  const value = selections[ASSIGNMENT_ID];
+  const context = assignmentContext(selections, definitions);
+  if (!context) return null;
+  const { array, targets, fixed, decisionId } = context;
+  const value = selections[decisionId];
   const current = value && typeof value === 'object' && !Array.isArray(value) ? value : {};
   const remaining = [...array];
   for (const amount of Object.values(current)) {
@@ -363,8 +381,8 @@ function AssignmentEditor({
   }
   function assign(target: string, amount: number | null, fromTarget?: string) {
     try {
-      const next = assignCharacteristic(selections, target, amount, fromTarget);
-      onSelect(ASSIGNMENT_ID, next[ASSIGNMENT_ID]);
+      const next = assignCharacteristic(selections, target, amount, fromTarget, definitions);
+      onSelect(decisionId, next[decisionId]);
       setError(null);
     } catch (error) {
       setError(error instanceof Error ? error.message : 'Invalid assignment.');
@@ -373,7 +391,8 @@ function AssignmentEditor({
   return (
     <div className="flex flex-col gap-4">
       <p className="m-0 text-sm text-muted-foreground">
-        Might and Agility are fixed by Fury. Place each remaining value in a blank characteristic,
+        {Object.keys(fixed).join(' and ')} {Object.keys(fixed).length === 1 ? 'is' : 'are'} fixed by{' '}
+        {String(selections['class.choice'])}. Place each remaining value in a blank characteristic,
         or choose it by name.
       </p>
       <div className="flex items-center gap-3">
@@ -399,18 +418,18 @@ function AssignmentEditor({
         </div>
       </div>
       <div className="flex flex-wrap items-end gap-3">
-        {['Might', 'Agility'].map(target => (
+        {Object.entries(fixed).map(([target, score]) => (
           <span
             key={target}
             role="group"
             aria-label={`${target} (fixed)`}
             className="flex flex-col items-center gap-1"
           >
-            <StatBox compact emphasis value="2" label={target.slice(0, 3)} />
+            <StatBox compact emphasis value={score} label={target.slice(0, 3)} />
             <span className="caps text-muted-foreground">Fixed</span>
           </span>
         ))}
-        {['Reason', 'Intuition', 'Presence'].map(target => (
+        {targets.map(target => (
           <label
             key={target}
             data-testid={`assignment-${target}`}
@@ -455,7 +474,9 @@ function AssignmentEditor({
                 <option
                   key={amount}
                   value={String(amount)}
-                  disabled={assignmentError({ ...current, [target]: amount }, array) !== null}
+                  disabled={
+                    assignmentError({ ...current, [target]: amount }, array, targets) !== null
+                  }
                 >
                   {amount}
                 </option>
@@ -502,8 +523,9 @@ function Wizard({ character }: { character: LoadedCharacter }) {
     setSaved(false);
     setDirty(true);
     const next = { ...selections };
-    if (id === 'class.fury.characteristic-array' && value !== selections[id])
-      delete next[ASSIGNMENT_ID];
+    const assignment = assignmentContext(selections, definitions);
+    if (assignment?.arrayDecisionId === id && value !== selections[id])
+      delete next[assignment.decisionId];
     if (value === undefined) delete next[id];
     else next[id] = value;
     const pruned = pruneUnavailable(next, definitions);
@@ -624,6 +646,12 @@ function Wizard({ character }: { character: LoadedCharacter }) {
               reference={<RuleLink {...stepReference(step)} />}
               optional={step.optional}
             />
+            {step.id === 'step.kit' && evaluation?.partial?.kit === null && (
+              <p className="text-sm text-muted-foreground">
+                This build has no kit. Its class features supply its starting statistics and
+                abilities.
+              </p>
+            )}
             {step.decisions.map(decision => (
               <DecisionEditor
                 key={decision.id}

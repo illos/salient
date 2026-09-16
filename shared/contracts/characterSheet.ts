@@ -44,6 +44,13 @@ export interface SheetAbility extends Omit<GrantedAbility, 'provenance'> {
   content: SheetContent | null;
   group: ActionGroup;
   metadata: SheetAbilityMetadata;
+  /** Contributions displayed separately from verbatim printed tiers, never baked into source text. */
+  buildModifiers?: {
+    label: string;
+    amount: number;
+    sourcePath: string;
+    condition?: string;
+  }[];
   /** The source sentence that granted the ability (its provenance). */
   grantedBy: { decisionId: string; selection?: string; quote: string; path: string };
 }

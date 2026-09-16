@@ -268,13 +268,24 @@ both Melee and Weapon, so the kit melee bonus applies to it even though it is no
 ### 4.3 Damage number
 
 ```
-rolledDamage(target) = tierConstant + damageCharacteristicValue + kitBonus
+rolledDamage(target) = tierConstant + damageCharacteristicValue + kitBonus + eligibleBuildBonuses
 ```
 
-All three terms are integers; the sum is never negative in the v0.01 content (a negative
+All terms are integers; the sum is never negative in the v0.01 content (a negative
 characteristic could make a clause smaller than the constant; the source states no floor, so the
 arithmetic value is recorded and a negative result is labeled `negative-rolled-damage` (section 11)
 rather than applied as healing; unreachable with v0.01 content).
+
+**V25 extension, 2026-09-16:** `eligibleBuildBonuses` is zero for the original Fury path.
+For the supported Elementalist, Enchantment of Destruction adds 1 to rolled damage with Magic;
+Fire: Acolyte of Fire adds 1 with both Fire and Magic, or with Hurl Element when its damage type
+is fire. These are additive, separately labeled contributions, applied once without rewriting
+printed tier text. They apply to qualifying Area abilities as well as Strikes, and do not apply
+to nonrolled damage. Sources: `SC/feature/elementalist/level-1/enchantment-of-destruction.md` and
+`SC/feature/elementalist/level-1/fire-acolyte-of-fire.md`. A conditional bonus requires its facts;
+an unresolved damage-type choice stays explicit/manual. The existing target immunity pipeline
+also receives the supported Polder's corruption immunity 2 + level (3 at level one), from
+`SC/feature/trait/polder/corruption-immunity.md`. This does not automate triggers or movement.
 
 ### 4.4 Director-controlled creature free strikes
 
@@ -503,11 +514,17 @@ Contract:
 
 ```
 fixedCost   = ability metadata (e.g. "5 Ferocity", "2 Malice"); signature/free strikes: none
-waived      = hero Ferocity cost while not in combat (source waiver above)   // other classes: their own text
-legalFloor  = 0 for Ferocity and Malice at this pin; a class-specific negative range is a
+waived      = supported Fury Ferocity or Elementalist Essence cost while not in combat
+legalFloor  = 0 for these Ferocity/Essence pools and Malice at this pin; a class-specific negative range is a
               supplied fact (Talent clarity, docs/table-spec.md#ability-costs-and-optional-spending)
 affordable  = fixedCost == none || waived || (pool − fixedCost.amount) >= legalFloor
 ```
+
+**V25 extension, 2026-09-16:** Elementalist's own
+`SC/feature/elementalist/level-1/essence.md` supplies its outside-combat waiver and the same
+restriction on reusing an ability/effect until a Victory or respite. The existing reuse warning
+policy applies; Essence generation and persistent effects remain manual. Shared resource display
+names do not establish another class's rules; future classes need their own source review.
 
 Unaffordable: blocked; no roll, no debit, no action-allowance use, no effects
 (`docs/table-spec.md#ability-costs-and-optional-spending`). Affordable: debit once, then roll. The

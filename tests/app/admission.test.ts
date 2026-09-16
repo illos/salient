@@ -384,12 +384,13 @@ describe('A02 admission', () => {
       'main',
     ]);
     expect(owner.abilities[1]!.metadata.cost).toBe('3 Ferocity');
-    // Features carry the same verbatim text where an entry exists; the culture edge has none.
+    // Features carry verbatim source text, including the readable chapter for Culture edge.
     const withText = owner.features.filter(f => f.content);
     expect(withText.map(f => f.name)).toEqual([
       'Silver Tongue',
       'Beast Legs',
       'Impressive Horns',
+      'Culture edge',
       'Ferocity',
       'Growing Ferocity',
       'Mighty Leaps',
@@ -398,10 +399,10 @@ describe('A02 admission', () => {
       'Teamwork',
     ]);
     for (const feature of withText)
-      expect(feature.content!.text).toBe(
-        readFileSync(`vendor/steel-compendium/${feature.sourcePath}`, 'utf8'),
-      );
-    expect(owner.features.find(f => f.name === 'Culture edge')?.content).toBeNull();
+      expect(feature.content!.text).toBe(readFileSync(feature.content!.sourcePath, 'utf8'));
+    expect(owner.features.find(f => f.name === 'Culture edge')?.content?.id).toBe(
+      'mcdm.heroes.v1/chapter/background',
+    );
     // Live labels (R03 2.3) and identity from the baseline.
     expect(owner.live?.labels).toEqual({
       windedValue: 15,

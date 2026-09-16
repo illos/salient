@@ -30,6 +30,10 @@ import {
   reconciliationValidator,
 } from './characterTables';
 import { assignCharacteristic } from '../shared/evaluate/assignment';
+import {
+  matchesAbilityModifier,
+  abilityModifierCondition,
+} from '../shared/evaluate/abilityModifiers';
 import { draftSelectionsFrom } from '../shared/evaluate/draft';
 import { previewBuildReconciliation } from '../shared/evaluate/liveReconciliation';
 import { selectionsFrom } from '../shared/evaluate/character';
@@ -44,6 +48,7 @@ import {
 } from './lib/characterBuild';
 import type {
   DerivedBaseline,
+  AbilityModifier,
   EvaluationResult,
   GrantedAbility,
   GrantedFeature,
@@ -310,6 +315,7 @@ export const save = mutation({
             args.assignment.target,
             args.assignment.value,
             args.assignment.fromTarget,
+            definitions,
           ),
           definitions,
         );
@@ -516,33 +522,61 @@ async function contentFor(ctx: ReadCtx, sourcePath: string) {
   const id = CONTENT_ID_BY_PATH.get(sourcePath);
   return id ? await findContent(ctx, id) : null;
 }
-async function abilityView(ctx: ReadCtx, ability: GrantedAbility): Promise<SheetAbility> {
+async function abilityView(
+  ctx: ReadCtx,
+  ability: GrantedAbility,
+  modifiers: AbilityModifier[] = [],
+): Promise<SheetAbility> {
   const row = await contentFor(ctx, ability.sourcePath);
   // A kit's signature ability is carried by the kit entry, whose frontmatter prints no ability
   // metadata: it groups as "other" and the table reads its action type from the text.
   const metadata = row && row.kind === 'ability' ? metadataOf(row) : { keywords: [] };
   const { provenance, ...rest } = ability;
+  const facts = { name: ability.name, keywords: metadata.keywords };
+  const buildModifiers = metadata.roll
+    ? modifiers.flatMap(modifier => {
+        const condition = abilityModifierCondition(modifier, facts);
+        if (!condition && !matchesAbilityModifier(modifier, facts)) return [];
+        return [
+          {
+            label: modifier.label ?? modifier.provenance.selection ?? modifier.id,
+            amount: modifier.amount,
+            sourcePath: modifier.provenance.source.path,
+            ...(condition ? { condition } : {}),
+          },
+        ];
+      })
+    : [];
   return {
     ...rest,
     content: row ? contentView(row) : null,
     group: groupOf(metadata.actionType),
     metadata,
+    ...(buildModifiers.length ? { buildModifiers } : {}),
     grantedBy: grantedBy(provenance),
   };
 }
 async function featureView(ctx: ReadCtx, feature: GrantedFeature): Promise<SheetFeature> {
-  const row =
-    feature.sourcePath === CLEAN_HEROES_PATH ? null : await contentFor(ctx, feature.sourcePath);
+  // The original Fury provenance cites the full book. Its readable counterpart is the
+  // imported background chapter, while the original grant citation remains intact.
+  const row = await contentFor(
+    ctx,
+    feature.sourcePath === CLEAN_HEROES_PATH && feature.kind === 'culture-benefit'
+      ? 'en/unified/md/chapter/background.md'
+      : feature.sourcePath,
+  );
   const { provenance, ...rest } = feature;
   return { ...rest, content: row ? contentView(row) : null, grantedBy: grantedBy(provenance) };
 }
 async function commonActions(ctx: ReadCtx): Promise<CommonAction[]> {
-  const rows = await ctx.db
-    .query('content')
-    .withIndex('by_kind', q => q.eq('kind', 'feature'))
-    .take(500);
+  // Exact source IDs keep common actions complete as other class features expand the corpus.
+  const rows = await Promise.all(
+    manifest.entries
+      .filter(entry => entry.id.startsWith('mcdm.heroes.v1/feature.common.'))
+      .map(entry => findContent(ctx, entry.id)),
+  );
   return rows
-    .filter(row => row.contentId.startsWith('mcdm.heroes.v1/feature.common.'))
+    .filter((row): row is NonNullable<typeof row> => row !== null)
     .map(row => {
       const category = row.contentId.split('/')[1]?.split('.').at(-1) ?? '';
       const group: ActionGroup =
@@ -681,7 +715,9 @@ export const sheet = query({
             diagnostics: evaluation?.diagnostics ?? {},
           }
         : null,
-      abilities: await Promise.all((granted?.abilities ?? []).map(a => abilityView(ctx, a))),
+      abilities: await Promise.all(
+        (granted?.abilities ?? []).map(a => abilityView(ctx, a, granted?.abilityModifiers)),
+      ),
       features: await Promise.all(
         [...(granted?.traits ?? []), ...(granted?.features ?? []), ...(granted?.perks ?? [])].map(
           f => featureView(ctx, f),
@@ -699,7 +735,11 @@ export const sheet = query({
         environment: selectionText(selections, 'culture.environment'),
         organization: selectionText(selections, 'culture.organization'),
         upbringing: selectionText(selections, 'culture.upbringing'),
-        incitingIncident: selectionText(selections, 'career.soldier.inciting-incident'),
+        incitingIncident:
+          selections
+            .filter(selection => selection.decisionId.endsWith('.inciting-incident'))
+            .map(selection => selectionText(selections, selection.decisionId))
+            .find(value => value !== null) ?? null,
         whatWasTaken: selectionText(selections, 'career.what-was-taken'),
         connections: selectionText(selections, 'connections.notes'),
       },

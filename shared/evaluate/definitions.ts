@@ -24,6 +24,7 @@ export interface DecisionOption {
   source?: string;
   cost?: number;
   costQuote?: string;
+  abilityKind?: 'signature' | 'heroic';
   supportedInV001: boolean;
   grants?: OptionGrant[];
 }
@@ -60,6 +61,8 @@ export interface Decision {
   grants?: OptionGrant[];
   questions?: string[];
   note?: string;
+  /** Fixed skill entitlement whose duplicate this explicit choice replaces. */
+  replacesDuplicateSkill?: string;
   budgetRule?: SourcedQuote;
   deferralRule?: SourcedQuote;
   poolRule?: SourcedQuote;
@@ -85,12 +88,33 @@ export interface Step {
 export interface Pool {
   source: string;
   sourceSection?: string;
-  selectable?: string;
+  selectable?: string | boolean;
   values: string[];
+}
+
+export interface ClassProfile {
+  fixedCharacteristics: Record<string, number>;
+  assignmentDecisionId: string;
+  arrayDecisionId: string;
+  fixedDecisionId: string;
+  baselineDecisionId: string;
+  subclassDecisionId: string;
+  source: string;
+  characteristicsQuote: string;
+  startingStamina: number;
+  recoveries: number;
+  potencyCharacteristic: 'M' | 'A' | 'R' | 'I' | 'P';
+  resource: 'ferocity' | 'essence';
+  resourceSource: string;
+  resourceQuote: string;
+  resourceOutsideCombatQuote: string;
+  /** Whether this supported class path grants a kit. */
+  kit: 'required' | 'none';
 }
 
 export interface DecisionDefinitions {
   schemaVersion: string;
+  classProfiles?: Record<string, ClassProfile>;
   compendiumRevision: string;
   sourceRoot: string;
   pools: Record<string, Pool>;

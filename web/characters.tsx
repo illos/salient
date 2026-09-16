@@ -89,8 +89,9 @@ export function CharactersPage() {
           <CardContent className="flex flex-col gap-4">
             <h2>Start a character</h2>
             <p className="text-sm text-muted-foreground">
-              The v0.01 wizard builds a level-one devil Fury through every applicable step of Making
-              a Hero, with one supported option per step and the full pool visible.
+              The wizard supports level-one Devil Fury and Polder Elementalist builds through Making
+              a Hero. Supported choices are enabled; additional options remain visible for
+              reference.
             </p>
             <form className="flex flex-col gap-4" onSubmit={submit}>
               <Field label="Name">

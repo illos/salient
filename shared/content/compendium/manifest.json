@@ -8,11 +8,11 @@
   },
   "generator": {
     "script": "scripts/build-content.ts",
-    "version": "1.0.1"
+    "version": "1.0.2"
   },
   "generatedAt": "2026-09-08",
-  "contentHash": "sha256:7c2dc77a745444ea7143888a2497dea812530109e0b26e7a2511dcad16925420",
-  "entryCount": 403,
+  "contentHash": "sha256:d076c3d75a546811c031d9d14a1075990a900bd61750dd1fd99b014722046dc9",
+  "entryCount": 467,
   "selections": [
     {
       "id": "goblin-warrior",
@@ -45,6 +45,25 @@
         "feature/fury/vuken"
       ],
       "basis": "feature/fury/level-1/beast-shape.md: \"You can use and gain the benefits of a stormwight kit (see Stormwight Kits)\"."
+    },
+    {
+      "id": "polder-ancestry",
+      "description": "Polder ancestry and its traits, for the V25 character wizard path.",
+      "paths": [
+        "ancestry/polder.md",
+        "feature/trait/polder",
+        "feature/ability/polder"
+      ]
+    },
+    {
+      "id": "elementalist-level-one",
+      "description": "Elementalist class, level-one features and abilities. Readable alternatives do not imply wizard or execution support.",
+      "paths": [
+        "class/elementalist.md",
+        "feature/elementalist/level-1",
+        "feature/ability/elementalist/level-1"
+      ],
+      "basis": "docs/build/V25-two-class-wizard.md#in-scope: complete sourced Bethell path."
     },
     {
       "id": "kits",
@@ -179,6 +198,206 @@
       "file": "ability.json"
     },
     {
+      "id": "mcdm.heroes.v1/feature.ability.elementalist.level-1/afflict-a-bountiful-decay",
+      "kind": "ability",
+      "name": "Afflict a Bountiful Decay",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-1/afflict-a-bountiful-decay.md",
+      "selection": "elementalist-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.elementalist.level-1/behold-the-mystery",
+      "kind": "ability",
+      "name": "Behold the Mystery",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-1/behold-the-mystery.md",
+      "selection": "elementalist-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.elementalist.level-1/bifurcated-incineration",
+      "kind": "ability",
+      "name": "Bifurcated Incineration",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-1/bifurcated-incineration.md",
+      "selection": "elementalist-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.elementalist.level-1/breath-of-dawn-remembered",
+      "kind": "ability",
+      "name": "Breath of Dawn Remembered",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-1/breath-of-dawn-remembered.md",
+      "selection": "elementalist-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.elementalist.level-1/conflagration",
+      "kind": "ability",
+      "name": "Conflagration",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-1/conflagration.md",
+      "selection": "elementalist-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.elementalist.level-1/explosive-assistance",
+      "kind": "ability",
+      "name": "Explosive Assistance",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-1/explosive-assistance.md",
+      "selection": "elementalist-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.elementalist.level-1/grasp-of-beyond",
+      "kind": "ability",
+      "name": "Grasp of Beyond",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-1/grasp-of-beyond.md",
+      "selection": "elementalist-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.elementalist.level-1/hurl-element",
+      "kind": "ability",
+      "name": "Hurl Element",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-1/hurl-element.md",
+      "selection": "elementalist-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.elementalist.level-1/instantaneous-excavation",
+      "kind": "ability",
+      "name": "Instantaneous Excavation",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-1/instantaneous-excavation.md",
+      "selection": "elementalist-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.elementalist.level-1/invigorating-growth",
+      "kind": "ability",
+      "name": "Invigorating Growth",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-1/invigorating-growth.md",
+      "selection": "elementalist-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.elementalist.level-1/meteoric-introduction",
+      "kind": "ability",
+      "name": "Meteoric Introduction",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-1/meteoric-introduction.md",
+      "selection": "elementalist-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.elementalist.level-1/motivate-earth",
+      "kind": "ability",
+      "name": "Motivate Earth",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-1/motivate-earth.md",
+      "selection": "elementalist-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.elementalist.level-1/no-more-than-a-breeze",
+      "kind": "ability",
+      "name": "No More Than a Breeze",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-1/no-more-than-a-breeze.md",
+      "selection": "elementalist-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.elementalist.level-1/practical-magic",
+      "kind": "ability",
+      "name": "Practical Magic",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-1/practical-magic.md",
+      "selection": "elementalist-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.elementalist.level-1/ray-of-agonizing-self-reflection",
+      "kind": "ability",
+      "name": "Ray of Agonizing Self-Reflection",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-1/ray-of-agonizing-self-reflection.md",
+      "selection": "elementalist-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.elementalist.level-1/return-to-formlessness",
+      "kind": "ability",
+      "name": "Return to Formlessness",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-1/return-to-formlessness.md",
+      "selection": "elementalist-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.elementalist.level-1/ripples-in-the-earth",
+      "kind": "ability",
+      "name": "Ripples in the Earth",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-1/ripples-in-the-earth.md",
+      "selection": "elementalist-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.elementalist.level-1/shared-void-sense",
+      "kind": "ability",
+      "name": "Shared Void Sense",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-1/shared-void-sense.md",
+      "selection": "elementalist-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.elementalist.level-1/skin-like-castle-walls",
+      "kind": "ability",
+      "name": "Skin Like Castle Walls",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-1/skin-like-castle-walls.md",
+      "selection": "elementalist-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.elementalist.level-1/subtle-relocation",
+      "kind": "ability",
+      "name": "Subtle Relocation",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-1/subtle-relocation.md",
+      "selection": "elementalist-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.elementalist.level-1/test-of-rain",
+      "kind": "ability",
+      "name": "Test of Rain",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-1/test-of-rain.md",
+      "selection": "elementalist-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.elementalist.level-1/the-flesh-a-crucible",
+      "kind": "ability",
+      "name": "The Flesh, a Crucible",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-1/the-flesh-a-crucible.md",
+      "selection": "elementalist-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.elementalist.level-1/the-green-within-the-green-without",
+      "kind": "ability",
+      "name": "The Green Within, the Green Without",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-1/the-green-within-the-green-without.md",
+      "selection": "elementalist-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.elementalist.level-1/unquiet-ground",
+      "kind": "ability",
+      "name": "Unquiet Ground",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-1/unquiet-ground.md",
+      "selection": "elementalist-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.elementalist.level-1/viscous-fire",
+      "kind": "ability",
+      "name": "Viscous Fire",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-1/viscous-fire.md",
+      "selection": "elementalist-level-one",
+      "file": "ability.json"
+    },
+    {
       "id": "mcdm.heroes.v1/feature.ability.fury.level-1/back",
       "kind": "ability",
       "name": "Back!",
@@ -299,11 +518,27 @@
       "file": "ability.json"
     },
     {
+      "id": "mcdm.heroes.v1/feature.ability.polder/shadowmeld",
+      "kind": "ability",
+      "name": "Shadowmeld",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/polder/shadowmeld.md",
+      "selection": "polder-ancestry",
+      "file": "ability.json"
+    },
+    {
       "id": "mcdm.heroes.v1/ancestry/devil",
       "kind": "ancestry",
       "name": "Devil",
       "sourcePath": "vendor/steel-compendium/en/unified/md/ancestry/devil.md",
       "selection": "devil-ancestry",
+      "file": "ancestry.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/ancestry/polder",
+      "kind": "ancestry",
+      "name": "Polder",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/ancestry/polder.md",
+      "selection": "polder-ancestry",
       "file": "ancestry.json"
     },
     {
@@ -457,6 +692,14 @@
       "sourcePath": "vendor/steel-compendium/en/unified/md/chapter/background.md",
       "selection": "background-options",
       "file": "chapter.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/class/elementalist",
+      "kind": "class",
+      "name": "Elementalist",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/class/elementalist.md",
+      "selection": "elementalist-level-one",
+      "file": "class.json"
     },
     {
       "id": "mcdm.heroes.v1/class/fury",
@@ -1576,6 +1819,222 @@
       "name": "Ride",
       "sourcePath": "vendor/steel-compendium/en/unified/md/feature/common/move-actions/ride.md",
       "selection": "common-actions",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.elementalist.level-1/1st-level-specialization-feature",
+      "kind": "feature",
+      "name": "1st-Level Specialization Feature",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/elementalist/level-1/1st-level-specialization-feature.md",
+      "selection": "elementalist-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.elementalist.level-1/a-beyonding-of-vision",
+      "kind": "feature",
+      "name": "A Beyonding of Vision",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/elementalist/level-1/a-beyonding-of-vision.md",
+      "selection": "elementalist-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.elementalist.level-1/earth-acolyte-of-earth",
+      "kind": "feature",
+      "name": "Earth: Acolyte of Earth",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/elementalist/level-1/earth-acolyte-of-earth.md",
+      "selection": "elementalist-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.elementalist.level-1/elemental-specialization",
+      "kind": "feature",
+      "name": "Elemental Specialization",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/elementalist/level-1/elemental-specialization.md",
+      "selection": "elementalist-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.elementalist.level-1/elementalist-abilities",
+      "kind": "feature",
+      "name": "Elementalist Abilities",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/elementalist/level-1/elementalist-abilities.md",
+      "selection": "elementalist-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.elementalist.level-1/elementalist-ward",
+      "kind": "feature",
+      "name": "Elementalist Ward",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/elementalist/level-1/elementalist-ward.md",
+      "selection": "elementalist-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.elementalist.level-1/enchantment-of-battle",
+      "kind": "feature",
+      "name": "Enchantment of Battle",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/elementalist/level-1/enchantment-of-battle.md",
+      "selection": "elementalist-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.elementalist.level-1/enchantment-of-celerity",
+      "kind": "feature",
+      "name": "Enchantment of Celerity",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/elementalist/level-1/enchantment-of-celerity.md",
+      "selection": "elementalist-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.elementalist.level-1/enchantment-of-destruction",
+      "kind": "feature",
+      "name": "Enchantment of Destruction",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/elementalist/level-1/enchantment-of-destruction.md",
+      "selection": "elementalist-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.elementalist.level-1/enchantment-of-distance",
+      "kind": "feature",
+      "name": "Enchantment of Distance",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/elementalist/level-1/enchantment-of-distance.md",
+      "selection": "elementalist-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.elementalist.level-1/enchantment-of-permanence",
+      "kind": "feature",
+      "name": "Enchantment of Permanence",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/elementalist/level-1/enchantment-of-permanence.md",
+      "selection": "elementalist-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.elementalist.level-1/enchantment",
+      "kind": "feature",
+      "name": "Enchantment",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/elementalist/level-1/enchantment.md",
+      "selection": "elementalist-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.elementalist.level-1/essence",
+      "kind": "feature",
+      "name": "Essence",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/elementalist/level-1/essence.md",
+      "selection": "elementalist-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.elementalist.level-1/fire-acolyte-of-fire",
+      "kind": "feature",
+      "name": "Fire: Acolyte of Fire",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/elementalist/level-1/fire-acolyte-of-fire.md",
+      "selection": "elementalist-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.elementalist.level-1/green-acolyte-of-the-green",
+      "kind": "feature",
+      "name": "Green: Acolyte of the Green",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/elementalist/level-1/green-acolyte-of-the-green.md",
+      "selection": "elementalist-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.elementalist.level-1/hurl-element",
+      "kind": "feature",
+      "name": "Hurl Element",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/elementalist/level-1/hurl-element.md",
+      "selection": "elementalist-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.elementalist.level-1/it-is-the-soul-which-hears",
+      "kind": "feature",
+      "name": "It Is the Soul Which Hears",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/elementalist/level-1/it-is-the-soul-which-hears.md",
+      "selection": "elementalist-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.elementalist.level-1/motivate-earth",
+      "kind": "feature",
+      "name": "Motivate Earth",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/elementalist/level-1/motivate-earth.md",
+      "selection": "elementalist-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.elementalist.level-1/persistent-magic",
+      "kind": "feature",
+      "name": "Persistent Magic",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/elementalist/level-1/persistent-magic.md",
+      "selection": "elementalist-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.elementalist.level-1/practical-magic",
+      "kind": "feature",
+      "name": "Practical Magic",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/elementalist/level-1/practical-magic.md",
+      "selection": "elementalist-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.elementalist.level-1/return-to-formlessness",
+      "kind": "feature",
+      "name": "Return to Formlessness",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/elementalist/level-1/return-to-formlessness.md",
+      "selection": "elementalist-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.elementalist.level-1/specialization-triggered-action",
+      "kind": "feature",
+      "name": "Specialization Triggered Action",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/elementalist/level-1/specialization-triggered-action.md",
+      "selection": "elementalist-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.elementalist.level-1/void-acolyte-of-the-mystery",
+      "kind": "feature",
+      "name": "Void: Acolyte of the Mystery",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/elementalist/level-1/void-acolyte-of-the-mystery.md",
+      "selection": "elementalist-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.elementalist.level-1/ward-of-delightful-consequences",
+      "kind": "feature",
+      "name": "Ward of Delightful Consequences",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/elementalist/level-1/ward-of-delightful-consequences.md",
+      "selection": "elementalist-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.elementalist.level-1/ward-of-excellent-protection",
+      "kind": "feature",
+      "name": "Ward of Excellent Protection",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/elementalist/level-1/ward-of-excellent-protection.md",
+      "selection": "elementalist-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.elementalist.level-1/ward-of-natures-affection",
+      "kind": "feature",
+      "name": "Ward of Nature's Affection",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/elementalist/level-1/ward-of-natures-affection.md",
+      "selection": "elementalist-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.elementalist.level-1/ward-of-surprising-reactivity",
+      "kind": "feature",
+      "name": "Ward of Surprising Reactivity",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/elementalist/level-1/ward-of-surprising-reactivity.md",
+      "selection": "elementalist-level-one",
       "file": "feature.json"
     },
     {
@@ -3344,6 +3803,78 @@
       "name": "Wings",
       "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/devil/wings.md",
       "selection": "devil-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.polder/corruption-immunity",
+      "kind": "trait",
+      "name": "Corruption Immunity",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/polder/corruption-immunity.md",
+      "selection": "polder-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.polder/fearless",
+      "kind": "trait",
+      "name": "Fearless",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/polder/fearless.md",
+      "selection": "polder-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.polder/graceful-retreat",
+      "kind": "trait",
+      "name": "Graceful Retreat",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/polder/graceful-retreat.md",
+      "selection": "polder-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.polder/nimblestep",
+      "kind": "trait",
+      "name": "Nimblestep",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/polder/nimblestep.md",
+      "selection": "polder-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.polder/polder-geist",
+      "kind": "trait",
+      "name": "Polder Geist",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/polder/polder-geist.md",
+      "selection": "polder-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.polder/polder-traits",
+      "kind": "trait",
+      "name": "Polder Traits",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/polder/polder-traits.md",
+      "selection": "polder-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.polder/reactive-tumble",
+      "kind": "trait",
+      "name": "Reactive Tumble",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/polder/reactive-tumble.md",
+      "selection": "polder-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.polder/shadowmeld",
+      "kind": "trait",
+      "name": "Signature Trait: Shadowmeld",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/polder/shadowmeld.md",
+      "selection": "polder-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.polder/small",
+      "kind": "trait",
+      "name": "Signature Trait: Small!",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/polder/small.md",
+      "selection": "polder-ancestry",
       "file": "trait.json"
     }
   ],

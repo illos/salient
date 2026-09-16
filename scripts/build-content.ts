@@ -33,7 +33,7 @@ import type {
 } from '../shared/contracts/content.ts';
 import { parseFrontmatter, splitFrontmatter, type FrontmatterValue } from './lib/frontmatter.ts';
 
-export const GENERATOR_VERSION = '1.0.1';
+export const GENERATOR_VERSION = '1.0.2';
 export const SCHEMA_VERSION = 's01.1';
 export const SUBMODULE_PATH = 'vendor/steel-compendium';
 export const OUTPUT_DIR = 'shared/content/compendium';
@@ -76,6 +76,22 @@ export const SELECTIONS: ManifestSelection[] = [
     ],
     basis:
       'feature/fury/level-1/beast-shape.md: "You can use and gain the benefits of a stormwight kit (see Stormwight Kits)".',
+  },
+  {
+    id: 'polder-ancestry',
+    description: 'Polder ancestry and its traits, for the V25 character wizard path.',
+    paths: ['ancestry/polder.md', 'feature/trait/polder', 'feature/ability/polder'],
+  },
+  {
+    id: 'elementalist-level-one',
+    description:
+      'Elementalist class, level-one features and abilities. Readable alternatives do not imply wizard or execution support.',
+    paths: [
+      'class/elementalist.md',
+      'feature/elementalist/level-1',
+      'feature/ability/elementalist/level-1',
+    ],
+    basis: 'docs/build/V25-two-class-wizard.md#in-scope: complete sourced Bethell path.',
   },
   {
     id: 'kits',

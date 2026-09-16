@@ -6,13 +6,12 @@
  * docs/fury-level-one-decisions.md. No rule is resolved here; `shared/evaluate/character.ts` is
  * the only place values are derived.
  */
-import definitionsJson from '../../shared/content/fury-level-one-decisions.json';
-import type { DecisionDefinitions } from '../../shared/evaluate/definitions';
+import { definitions } from '../../shared/content/level-one-decisions';
 import type { DerivedBaseline, EvaluationResult } from '../../shared/contracts/characterEvaluation';
 import { evaluateCharacter, selectionsFrom } from '../../shared/evaluate/character';
 import type { DraftSelection } from '../../shared/characterDraft';
 
-export const definitions = definitionsJson as unknown as DecisionDefinitions;
+export { definitions };
 
 /** Evaluates saved selections against the pinned definitions (deterministic, no side effects). */
 export function evaluateSelections(selections: DraftSelection[]): EvaluationResult {

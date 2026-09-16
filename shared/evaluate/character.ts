@@ -86,7 +86,7 @@ function parseCost(costQuote: string | undefined): GrantedAbility['cost'] | unde
   const match = costQuote ? /^cost: (\d+) (\w+)$/.exec(costQuote) : null;
   if (!match) return undefined;
   const resource = match[2]!.toLowerCase();
-  if (resource !== 'ferocity') return undefined;
+  if (resource !== 'ferocity' && resource !== 'essence') return undefined;
   return { resource, amount: Number(match[1]) };
 }
 
@@ -468,7 +468,7 @@ class Evaluation {
           );
           return;
         }
-        const error = assignmentError(selection, parseArray(array));
+        const error = assignmentError(selection, parseArray(array), shape.targets);
         if (error) {
           this.diagnose(decision.id, 'invalid', 'assignment-mismatch', error, this.own(decision));
           return;
@@ -504,8 +504,8 @@ class Evaluation {
     const decision = this.decisions.get(decisionId);
     if (!decision || !this.available.has(decisionId)) return [];
     if (decision.kind === 'automatic') return decision.grants ?? [];
-    const selection = this.single(decisionId);
-    return decision.options?.find(o => o.value === selection)?.grants ?? [];
+    const values = this.list(decisionId) ?? [this.single(decisionId)];
+    return values.flatMap(value => decision.options?.find(o => o.value === value)?.grants ?? []);
   }
 
   private isFury(): boolean {
@@ -967,6 +967,8 @@ class Evaluation {
       ]);
     }
 
+    this.deriveProfiles(out);
+
     // 1.15 Granted content, in definition order per group.
     out.skills = this.skills();
     out.languages = this.languages();
@@ -976,6 +978,287 @@ class Evaluation {
     out.abilities = this.abilities();
     out.uncertainties = UNCERTAINTY_ORDER.filter(id => this.uncertainties.has(id));
     return out;
+  }
+
+  /** Source of the granting rule remains distinct from the readable entry's source path. */
+  private grantProvenance(decision: Decision, grant: OptionGrant): Provenance {
+    return {
+      decisionId: decision.id,
+      ...(this.single(decision.id) ? { selection: this.single(decision.id) } : {}),
+      source: this.own(decision),
+      ...(grant.note ? { note: grant.note } : {}),
+    };
+  }
+
+  /** Additional sourced class profiles share assignment, no-kit baselines and resource derivation. */
+  private deriveProfiles(out: PartialBaseline) {
+    const profile = this.definitions.classProfiles?.[this.single('class.choice') ?? ''];
+    const dv = <T>(value: T, provenance: Provenance[]): DerivedValue<T> => ({ value, provenance });
+    const sourced = (
+      decisionId: string,
+      source: string,
+      quote: string,
+      extra: Partial<Provenance> = {},
+    ): Provenance => ({ decisionId, source: this.sentence({ path: source, quote }), ...extra });
+    const names: Record<Characteristic, string> = {
+      M: 'Might',
+      A: 'Agility',
+      R: 'Reason',
+      I: 'Intuition',
+      P: 'Presence',
+    };
+    if (profile && !this.isFury() && this.available.has(profile.baselineDecisionId)) {
+      const id = profile.baselineDecisionId;
+      const entry = (quote: string, extra: Partial<Provenance> = {}) =>
+        sourced(id, profile.source, quote, extra);
+      const assignment = this.valid.get(profile.assignmentDecisionId);
+      const array = this.single(profile.arrayDecisionId);
+      if (array && assignment && typeof assignment === 'object' && !Array.isArray(assignment)) {
+        out.characteristics = Object.fromEntries(
+          Object.entries(names).map(([key, name]) => {
+            const fixed = profile.fixedCharacteristics[name];
+            return [
+              key,
+              fixed !== undefined
+                ? dv(fixed, [
+                    sourced(profile.fixedDecisionId, profile.source, profile.characteristicsQuote, {
+                      operation: 'set',
+                      amount: fixed,
+                    }),
+                  ])
+                : dv(assignment[name]!, [
+                    sourced(profile.arrayDecisionId, profile.source, profile.characteristicsQuote, {
+                      selection: array,
+                    }),
+                    sourced(
+                      profile.assignmentDecisionId,
+                      profile.source,
+                      profile.characteristicsQuote,
+                      {
+                        selection: `${name} ${assignment[name]}`,
+                        operation: 'set',
+                        amount: assignment[name]!,
+                      },
+                    ),
+                  ]),
+            ];
+          }),
+        ) as DerivedBaseline['characteristics'];
+      }
+      const subclass = this.single(profile.subclassDecisionId);
+      if (subclass)
+        out.subclass = dv(subclass, [
+          {
+            decisionId: profile.subclassDecisionId,
+            selection: subclass,
+            source: this.own(this.decisions.get(profile.subclassDecisionId)!),
+          },
+        ]);
+      if (profile.kit === 'none') {
+        out.kit = null;
+        out.staminaMaximum = dv(profile.startingStamina, [
+          entry(`Starting Stamina at 1st Level: ${profile.startingStamina}`, {
+            operation: 'base',
+            amount: profile.startingStamina,
+          }),
+        ]);
+      }
+      out.recoveriesMaximum = dv(profile.recoveries, [
+        entry(`Recoveries: ${profile.recoveries}`, {
+          operation: 'set',
+          amount: profile.recoveries,
+        }),
+      ]);
+      if (out.staminaMaximum) {
+        out.recoveryValue = dv(Math.floor(out.staminaMaximum.value / 3), [
+          sourced(id, SENTENCES.recoveryValue.path, SENTENCES.recoveryValue.quote, {
+            operation: 'floor-divide',
+            amount: 3,
+          }),
+        ]);
+        out.windedValue = dv(Math.floor(out.staminaMaximum.value / 2), [
+          sourced(id, SENTENCES.winded.path, SENTENCES.winded.quote, {
+            operation: 'floor-divide',
+            amount: 2,
+          }),
+        ]);
+      }
+      out.potencyCharacteristic = dv(profile.potencyCharacteristic, [
+        entry(`Strong Potency: ${names[profile.potencyCharacteristic]}`),
+      ]);
+      const score = out.characteristics?.[profile.potencyCharacteristic].value;
+      if (score !== undefined) {
+        const name = names[profile.potencyCharacteristic];
+        out.potency = {
+          weak: dv(score - 2, [
+            entry(`Weak Potency: ${name} − 2`, { operation: 'set', amount: score - 2 }),
+          ]),
+          average: dv(score - 1, [
+            entry(`Average Potency: ${name} − 1`, { operation: 'set', amount: score - 1 }),
+          ]),
+          strong: dv(score, [
+            entry(`Strong Potency: ${name}`, { operation: 'set', amount: score }),
+          ]),
+        };
+      }
+      out.heroicResource = {
+        name: dv(profile.resource, [sourced(id, profile.resourceSource, profile.resourceQuote)]),
+        startingValue: dv(0, [
+          sourced(id, profile.resourceSource, profile.resourceOutsideCombatQuote, {
+            operation: 'set',
+            amount: 0,
+            note: 'A newly created hero has not gained combat resources; live initialization is separate.',
+          }),
+        ]),
+      };
+    }
+    // Default ancestry statistics still apply when a supported class has no kit.
+    const noKit = profile?.kit === 'none' && this.available.has(profile.baselineDecisionId);
+    if (noKit && this.isDevil()) {
+      out.stability = dv(0, [
+        sourced(
+          'ancestry.devil.base-statistics',
+          SENTENCES.baseStatistics.path,
+          SENTENCES.baseStatistics.quote,
+          { operation: 'base', amount: 0 },
+        ),
+      ]);
+    }
+    const polder = this.available.has('ancestry.polder.base-statistics');
+    if (polder) {
+      const base = (amount: number) =>
+        sourced(
+          'ancestry.polder.base-statistics',
+          SENTENCES.baseStatistics.path,
+          SENTENCES.baseStatistics.quote,
+          { operation: 'base', amount },
+        );
+      const kit = out.kit;
+      out.speed = dv(5 + (kit?.speedBonus.value ?? 0), [
+        base(5),
+        ...(kit?.speedBonus.provenance ?? []),
+      ]);
+      if (kit || noKit)
+        out.stability = dv(kit?.stabilityBonus.value ?? 0, [
+          base(0),
+          ...(kit?.stabilityBonus.provenance ?? []),
+        ]);
+      out.size = dv('1S', [
+        sourced(
+          'ancestry.polder.signature-trait',
+          'en/unified/md/feature/trait/polder/small.md',
+          'Your size is 1S.',
+          { operation: 'set' },
+        ),
+      ]);
+      const selected = this.list('ancestry.polder.purchased-traits') ?? [];
+      if (selected.includes('Corruption Immunity'))
+        out.damageImmunities = [
+          {
+            damageType: 'corruption',
+            value: dv(3, [
+              sourced(
+                'ancestry.polder.purchased-traits',
+                'en/unified/md/feature/trait/polder/corruption-immunity.md',
+                'You have corruption immunity equal to your level + 2.',
+                {
+                  selection: 'Corruption Immunity',
+                  operation: 'set',
+                  amount: 3,
+                  note: 'Level 1 + 2',
+                },
+              ),
+            ]),
+          },
+        ];
+      if (selected.includes('Fearless'))
+        out.conditionImmunities = [
+          {
+            condition: 'frightened',
+            provenance: sourced(
+              'ancestry.polder.purchased-traits',
+              'en/unified/md/feature/trait/polder/fearless.md',
+              "You can't be made frightened.",
+              { selection: 'Fearless' },
+            ),
+          },
+        ];
+    }
+    if (noKit)
+      out.disengage = dv(1, [
+        sourced('free-strikes.grant', SENTENCES.disengage.path, SENTENCES.disengage.quote, {
+          operation: 'base',
+          amount: 1,
+        }),
+      ]);
+    if (
+      out.disengage &&
+      (this.list('ancestry.polder.purchased-traits') ?? []).includes('Graceful Retreat')
+    ) {
+      out.disengage = dv(out.disengage.value + 1, [
+        ...out.disengage.provenance,
+        sourced(
+          'ancestry.polder.purchased-traits',
+          'en/unified/md/feature/trait/polder/graceful-retreat.md',
+          'You gain a +1 bonus to the distance you can shift when you take the Disengage move action.',
+          { selection: 'Graceful Retreat', operation: 'add', amount: 1 },
+        ),
+      ]);
+    }
+    if (this.available.has('career.mages-apprentice.renown')) {
+      out.renown = dv(1, [
+        sourced(
+          'career.mages-apprentice.renown',
+          SENTENCES.renownBase.path,
+          SENTENCES.renownBase.quote,
+          { operation: 'base', amount: 0 },
+        ),
+        sourced(
+          'career.mages-apprentice.renown',
+          'en/unified/md/career/mages-apprentice.md',
+          'Renown: +1',
+          { operation: 'add', amount: 1 },
+        ),
+      ]);
+      out.wealth = dv(1, [
+        sourced('career.choice', SENTENCES.wealthBase.path, SENTENCES.wealthBase.quote, {
+          selection: "Mage's Apprentice",
+          operation: 'base',
+          amount: 1,
+        }),
+      ]);
+    }
+    const modifiers: NonNullable<DerivedBaseline['abilityModifiers']> = [];
+    if (this.single('class.elementalist.enchantment') === 'Enchantment of Destruction')
+      modifiers.push({
+        id: 'elementalist.enchantment-of-destruction',
+        label: 'Enchantment of Destruction',
+        field: 'rolled-damage',
+        amount: 1,
+        keywords: ['Magic'],
+        provenance: sourced(
+          'class.elementalist.enchantment',
+          'en/unified/md/feature/elementalist/level-1/enchantment-of-destruction.md',
+          'You gain a +1 bonus to rolled damage with magic abilities.',
+          { selection: 'Enchantment of Destruction', operation: 'add', amount: 1 },
+        ),
+      });
+    if (this.single('class.elementalist.specialization') === 'Fire')
+      modifiers.push({
+        id: 'elementalist.acolyte-of-fire',
+        label: 'Fire: Acolyte of Fire',
+        field: 'rolled-damage',
+        amount: 1,
+        keywords: ['Fire', 'Magic'],
+        alternative: { ability: 'Hurl Element', damageType: 'fire' },
+        provenance: sourced(
+          'class.elementalist.specialization',
+          'en/unified/md/feature/elementalist/level-1/fire-acolyte-of-fire.md',
+          'Your abilities that have the Fire and Magic keywords gain a +1 bonus to rolled damage. Your Hurl Element ability (see below) also gains this bonus when you use it to deal fire damage.',
+          { selection: 'Fire', operation: 'add', amount: 1 },
+        ),
+      });
+    if (modifiers.length) out.abilityModifiers = modifiers;
   }
 
   private skillGroup(name: string): string {
@@ -1005,7 +1288,7 @@ class Evaluation {
       }
       if (decision.kind !== 'choice' || !this.valid.has(decision.id)) continue;
       const value = this.valid.get(decision.id)!;
-      if (/\.skills?(\.|$)|-skill$/.test(decision.id)) {
+      if (/\.skills?(\.|$)|-skill$/.test(decision.id) || decision.replacesDuplicateSkill) {
         const names = Array.isArray(value) ? value : [value];
         for (const name of names)
           if (typeof name === 'string')
@@ -1032,6 +1315,14 @@ class Evaluation {
     for (const candidate of candidates.filter(candidate => candidate.fixed)) {
       const skill = candidate.skill;
       if (fixed.has(skill.name)) {
+        const replacement = this.order.find(
+          decision =>
+            decision.replacesDuplicateSkill === skill.name && this.available.has(decision.id),
+        );
+        if (replacement) {
+          (fixed.get(skill.name)!.additionalProvenance ??= []).push(skill.provenance);
+          continue;
+        }
         // No supported Soldier/Berserker option creates this case. Preserve the entitlement as
         // unsupported rather than silently choosing its unrestricted replacement for future paths.
         this.diagnose(
@@ -1108,6 +1399,17 @@ class Evaluation {
     for (const name of this.list('career.soldier.languages') ?? [])
       if (name !== null && soldier)
         add(name, { decisionId: soldier.id, selection: name, source: this.own(soldier) }, false);
+    for (const decision of this.order) {
+      if (!decision.id.endsWith('.languages') || decision.id === 'career.soldier.languages')
+        continue;
+      for (const name of this.list(decision.id) ?? [])
+        if (name !== null)
+          add(
+            name,
+            { decisionId: decision.id, selection: name, source: this.own(decision) },
+            false,
+          );
+    }
     return out;
   }
 
@@ -1145,6 +1447,39 @@ class Evaluation {
           ...(effect ? { affects: [effect.field] } : {}),
         });
       }
+    for (const decision of this.order) {
+      for (const grant of this.grantsOf(decision.id))
+        if (grant.kind === 'ancestry-signature-trait')
+          out.push({
+            name: grant.value,
+            kind: 'ancestry-signature-trait',
+            sourcePath: grant.source ?? decision.source,
+            provenance: this.grantProvenance(decision, grant),
+          });
+      if (
+        !decision.id.endsWith('.purchased-traits') ||
+        decision.id === 'ancestry.devil.purchased-traits'
+      )
+        continue;
+      for (const name of this.list(decision.id) ?? []) {
+        const option = decision.options?.find(option => option.value === name);
+        if (option)
+          out.push({
+            name: option.value,
+            kind: 'ancestry-purchased-trait',
+            sourcePath: option.source ?? decision.source,
+            cost: option.cost,
+            provenance: {
+              decisionId: decision.id,
+              selection: option.value,
+              source: this.own(decision),
+            },
+            ...(option.value === 'Graceful Retreat'
+              ? { affects: ['disengage'] as const as ['disengage'] }
+              : {}),
+          });
+      }
+    }
     return out;
   }
 
@@ -1191,25 +1526,40 @@ class Evaluation {
             }),
             ...(grant.value === 'Kit' ? { affects: ['kit' as const] } : {}),
           });
+    for (const decision of this.order)
+      for (const grant of this.grantsOf(decision.id))
+        if (grant.kind === 'class-feature')
+          out.push({
+            name: grant.value,
+            kind: 'class-feature',
+            sourcePath: grant.source ?? decision.source,
+            provenance: this.grantProvenance(decision, grant),
+          });
     return out;
   }
 
   private perks(): GrantedFeature[] {
-    const perk = this.decisions.get('career.soldier.perk');
-    const name = this.single('career.soldier.perk');
-    if (!perk || !name) return [];
-    return [
-      {
-        name,
-        kind: 'perk',
-        sourcePath: perk.optionSources?.[name] ?? perk.source,
-        provenance: this.provenance({
-          decisionId: perk.id,
-          selection: name,
-          source: this.own(perk),
-        }),
-      },
-    ];
+    return this.order
+      .filter(decision => decision.id.endsWith('.perk'))
+      .flatMap(decision => {
+        const name = this.single(decision.id);
+        if (!name) return [];
+        return [
+          {
+            name,
+            kind: 'perk' as const,
+            sourcePath:
+              decision.optionSources?.[name] ??
+              decision.options?.find(option => option.value === name)?.source ??
+              decision.source,
+            provenance: this.provenance({
+              decisionId: decision.id,
+              selection: name,
+              source: this.own(decision),
+            }),
+          },
+        ];
+      });
   }
 
   private abilities(): GrantedAbility[] {
@@ -1278,6 +1628,39 @@ class Evaluation {
               source: this.sentence(SENTENCES.freeStrikes),
             }),
           });
+    for (const decision of this.order) {
+      const values = this.list(decision.id) ?? [this.single(decision.id)];
+      for (const name of values) {
+        const option = decision.options?.find(option => option.value === name);
+        if (!name || !option?.abilityKind) continue;
+        const cost = parseCost(option.costQuote);
+        out.push({
+          name,
+          kind: option.abilityKind,
+          sourcePath: option.source ?? decision.source,
+          ...(cost ? { cost } : {}),
+          kitBonusesIncluded: false,
+          provenance: { decisionId: decision.id, selection: name, source: this.own(decision) },
+        });
+      }
+      const kinds: Record<string, GrantedAbility['kind']> = {
+        'ancestry-ability': 'ancestry',
+        'class-ability': 'class',
+        'aspect-ability': 'aspect-triggered',
+        'perk-ability': 'perk',
+      };
+      for (const grant of this.grantsOf(decision.id)) {
+        const kind = kinds[grant.kind];
+        if (kind)
+          out.push({
+            name: grant.value,
+            kind,
+            sourcePath: grant.source ?? decision.source,
+            kitBonusesIncluded: false,
+            provenance: this.grantProvenance(decision, grant),
+          });
+      }
+    }
     return out;
   }
 }

@@ -574,6 +574,16 @@ export function actorRollFacts(
           kitRangedDamageBonus: baseline.kit.rangedDamageBonus.value,
         }
       : {}),
+    ...(baseline.abilityModifiers?.length
+      ? {
+          abilityDamageModifiers: baseline.abilityModifiers.map(modifier => ({
+            label: modifier.label ?? modifier.id,
+            amount: modifier.amount,
+            keywords: modifier.keywords,
+            ...(modifier.alternative ? { alternative: modifier.alternative } : {}),
+          })),
+        }
+      : {}),
   };
 }
 
@@ -621,6 +631,14 @@ export function damageTargetFacts(
       stamina: live.stamina,
       maxStamina: baseline.staminaMaximum.value,
       temporaryStamina: live.temporaryStamina,
+      ...(baseline.damageImmunities?.length
+        ? {
+            immunities: baseline.damageImmunities.map(immunity => ({
+              type: immunity.damageType,
+              value: immunity.value.value,
+            })),
+          }
+        : {}),
     },
   };
 }

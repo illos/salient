@@ -1,0 +1,130 @@
+{
+  "compendiumRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+  "forgeVendorRevision": "5a846aadb623a9855a023e9403bb887a956c341f",
+  "observedWebsiteVersion": "14.198.0",
+  "captureDateUTC": "2026-09-15",
+  "independentComparisonDateUTC": "2026-09-16",
+  "captureProcedure": "Lead corrected the three documented choice allocations in a copy of original Bethell, imported that copy into actual Forge Steel website, then exported it again and captured the rendered hero sheet. This is a Forge-side round trip only, not our unimplemented import/export adapter.",
+  "artifacts": [
+    {
+      "path": ".playtest/forge-reference/Bethell.ds-hero",
+      "bytes": 161898,
+      "sha256": "d21ab1c1a0a3f7eb2a582ad246805ee53fbd703b010b480c3f85cbbdf7ac157a",
+      "portable": false
+    },
+    {
+      "path": ".playtest/forge-reference/Bethell-corrected-input.ds-hero",
+      "bytes": 117088,
+      "sha256": "162c6b52cd551ea7d08f4bd9db48f886f5d4bed20cb2b1c476b4a92acb28ef9c",
+      "portable": false
+    },
+    {
+      "path": ".playtest/forge-reference/Bethell-corrected-export.ds-hero",
+      "bytes": 161914,
+      "sha256": "978b0c15f1c1169e06cf78dc50919f5d2833de7fca54eb2478e95716c7fb3a3e",
+      "portable": false
+    },
+    {
+      "path": ".playtest/forge-reference/Bethell-corrected-sheet.txt",
+      "bytes": 1510,
+      "sha256": "ed9d23762e1a7e18193fe9d19e77756c7a7c222b69e34e93420edaf1201373f5",
+      "portable": false
+    },
+    {
+      "path": ".playtest/forge-reference/Bethell-corrected-sheet.png",
+      "bytes": 87692,
+      "sha256": "b22ccc4e0d74a7730d7cc537aab8ba0d5de76c75215b8f95f0d575488a60c02b",
+      "portable": false
+    }
+  ],
+  "normalizations": [
+    "Forge character display name Bethell Corrected V25 versus internal fixture name Bethell is authored label only.",
+    "Forge typographic Mage\u2019s Apprentice normalized to ASCII apostrophe.",
+    "Forge Acolyte of Fire display name maps to Compendium Fire: Acolyte of Fire.",
+    "Core free strikes supplied by Forge common action logic are not embedded in hero JSON.",
+    "Fixed Magic duplicate replacement is serialized as career free Skill selection Empathize; preserve both fixed grant origins in our model."
+  ],
+  "observed": {
+    "name": "Bethell Corrected V25",
+    "sourcebookIDs": [
+      "core",
+      "orden"
+    ],
+    "level": 1,
+    "ancestry": "Polder",
+    "class": "Elementalist",
+    "subclass": "Fire",
+    "traits": [
+      "Corruption Immunity",
+      "Fearless",
+      "Graceful Retreat",
+      "Shadowmeld",
+      "Small!"
+    ],
+    "embeddedGrantedAbilities": [
+      "Arcane Trick",
+      "Bifurcated Incineration",
+      "Conflagration",
+      "Explosive Assistance",
+      "Hurl Element",
+      "Practical Magic",
+      "Return to Formlessness",
+      "Shadowmeld",
+      "The Flesh, a Crucible",
+      "Viscous Fire"
+    ],
+    "skills": [
+      "Alchemy",
+      "Alertness",
+      "Blacksmithing",
+      "Empathize",
+      "Gymnastics",
+      "History",
+      "Magic",
+      "Monsters",
+      "Tailoring",
+      "Timescape"
+    ],
+    "languages": [
+      "Caelian",
+      "Khoursirian",
+      "The First Language"
+    ],
+    "characteristics": {
+      "M": -1,
+      "A": 1,
+      "R": 2,
+      "I": 2,
+      "P": 1
+    },
+    "sheetTotals": {
+      "staminaMaximum": 18,
+      "recoveriesMaximum": 8,
+      "recoveryValue": 6,
+      "size": "1S",
+      "speed": 5,
+      "stability": 0,
+      "disengage": 2,
+      "savingThrowThreshold": 6,
+      "essence": 0,
+      "surges": 0,
+      "victories": 0,
+      "xp": 0,
+      "renown": 1,
+      "wealth": 1,
+      "corruptionImmunity": 3,
+      "conditionImmunity": [
+        "frightened"
+      ]
+    }
+  },
+  "comparison": {
+    "activeChoices": "Pass against independently source-verified corrected fixture.",
+    "allEmbeddedGrantedAbilities": "Pass: 10 selected or automatic abilities, plus two shared free strikes from core rules.",
+    "traits": "Pass: both signatures and three purchased traits.",
+    "featureGraph": "Pass: level-one Fire features only, Essence, Persistent Magic, selected enchantment/ward, selected spell entitlements, career/perk and background origins.",
+    "renderedSheetTotals": "Pass for every listed value and skill/language membership in captured rendered sheet text.",
+    "renderedAbilityDamageCards": "Not captured; independent source arithmetic established in fixture, no claim of website rendered damage-card parity.",
+    "localEditorPersistenceAndBrowser": "Separate implementation acceptance; this metadata does not attest local app verification."
+  }
+}
