@@ -231,3 +231,43 @@ passed `pnpm check-links` (166 Markdown files) and `git diff --check`. All incom
 passed the merge gate. This records local Git integration; no backend sync, data reset or external
 push was performed. The merged V25 branch is retired; its worktree and local verification captures
 remain available for reference.
+
+
+### User checkpoint — 2026-09-16
+
+Paused at the user's request after adopting the project-wide merge completion directive.
+
+- **Completed:** V25 implementation `4cb3f1f`, handoff `cf02ad6`, and main integration record
+  `a25a0e8`. The branch is retired; `/srv/presidium/projects/salient/characters-build` retains
+  the detached implementation and local screenshots/logs. The user reviewed the sheet screenshots
+  and authorized the merge.
+- **Verification:** both independent reviews passed; all 108 source-ledger records checked;
+  97 engine and 321 app/scripts tests and both browser journeys passed. Bethell uses an actual
+  corrected Forge export; Fury has independent source regression coverage. Forge rendered damage
+  cards were not captured. Detailed evidence and limits remain in the review links above.
+- **Standing directive:** `14b7536` is on main. A merge includes updating the established shared
+  playable development environment and verifying the changed feature there, without asking for a
+  second routine deployment approval. See [merge completion](README.md#merge-completion-includes-the-playable-app).
+- **Outstanding:** this thread has not verified V25's backend/content sync or changed-feature journey
+  in the shared playable environment. The earlier Git integration alone does not close that work
+  under the new directive. A watcher or another thread may have updated it since; inspect current
+  state before deciding what needs syncing. Do not claim the runtime is either current or stale
+  solely from this checkpoint.
+- **Resume first:** read current instructions, Git/worktree state and Chords updates. Coordinate
+  shared runtime ownership, identify its frontend/backend, perform any necessary V25 sync/content
+  update, and verify create/save/reload/review/sheet behavior there. Preserve compatible play data;
+  record actual target, commit and evidence. Do not repeat completed implementation or source audits
+  unless later changes invalidate their evidence.
+- **Future character scope:** all eleven classes (nine core plus Beastheart and Summoner), levels
+  1–10, and eventual Forge Steel import/export remain planned. Only the two bounded level-one paths
+  are delivered here. Class-specific gameplay automation remains separate. Select the next bounded
+  wizard slice after closing the shared runtime verification gap.
+
+Coordination at this checkpoint: main observed at `8ef8b5e` with V26 specifications integrated.
+The foes thread is actively integrating V27; the UI thread reports V29 on its own branch. Recheck
+these moving states through Chords before touching shared code or runtime. The UI peer also reports
+an unrelated browser assertion expecting 403 content entries instead of the V25 snapshot's 467 in
+`tests/browser/table-audit.spec.ts`; this checkpoint does not repair or independently reproduce it.
+
+This checkpoint changes documentation only; no runtime update or live feature check is needed for
+this commit. No new implementation or deployment was started while checkpointing.
