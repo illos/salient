@@ -689,3 +689,29 @@ Complete live prerequisite 4 remains pending. A partial run verified consecutive
 undo/redo but stopped during later turn progression with a backend execution timeout under host memory
 pressure; a subsequent fixture setup failed to obtain its authentication token. All owned services are
 stopped while coordinating a browser window. No failed/partial run counts as complete live acceptance.
+
+
+### 2026-09-16 — prerequisite live verification completed
+
+- Correction implementation is committed at `f69843b` on `slice/V26-corrections`, not merged.
+  The subsequently reviewed test-only authentication adapter supports the production-built preview;
+  the final readback records both its runner hash and the unchanged history module hash.
+- The complete opt-in browser journey **passes in 6.5 minutes**. All ten abilities use fresh actor
+  turns, with 240 ordinary turn-transition events through round 11 and no action/turn-order warnings.
+  Consecutive player bane clicks, undo/redo, damage/costs, insufficient-resource blocking, manual
+  dispositions and reload persistence pass. Readback has 23 records and no page errors.
+- [Fresh evidence](evidence/V26/corrections-2026-09-16/README.md) contains 33 screenshots including
+  paired source dialogs and game-log outputs, saved state, full-check output and the final browser
+  result. Historical baseline and failed local attempts remain separate. The original baseline's
+  correction workaround and turn-setup limitations are now superseded by this evidence.
+- Host contention required serializing peer browser work. A later run reached Thunder Roar before
+  the preview process exited with signal 15; the complete unchanged rerun used a monitored terminal
+  session. No gameplay assertion or timeout was relaxed. All task-owned ports 3234/3235/5184 were
+  stopped after success, and the browser window was released to V32 through Chords.
+- Full checks remain 435 passing tests and build, with 38 focused history/ability tests; targeted
+  lint/types passed after the test-only authentication adapter. Documentation links and whitespace
+  pass. Independent final evidence review **passes**, completing all five prerequisite checks;
+  see [the prerequisite review](reviews/V26-corrections-review.md).
+- These are the five bounded prerequisite checks. All eleven V26 compiler acceptance checks,
+  compiled definitions/occurrences and calculated push allowances remain pending. This branch has
+  not changed main or the shared playable runtime; any later merge must follow runtime integration.

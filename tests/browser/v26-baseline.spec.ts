@@ -78,10 +78,24 @@ test('V26 real-app regression: consecutive corrections and ten abilities on prop
   for (const page of [director, player]) page.on('pageerror', error => errors.push(error.message));
   const connect = async (page: Page) => {
     const token = await page.evaluate(async () => {
-      const path = '/web/auth-client.ts';
-      const { authClient } = await import(path);
-      const result = await authClient.convex.token();
-      return result.data.token as string;
+      // Mirror installed crossDomainClient.getCookie()/init(): this app stores the browser
+      // session in localStorage and sends Better-Auth-Cookie, not ordinary browser cookies.
+      // Keep credentials in memory only; this also works with the production-built frontend.
+      const stored = JSON.parse(localStorage.getItem('better-auth_cookie') ?? '{}') as Record<
+        string,
+        { value: string; expires: string | null }
+      >;
+      const cookie = Object.entries(stored)
+        .filter(([, value]) => !value.expires || new Date(value.expires) >= new Date())
+        .map(([key, value]) => `${key}=${value.value}`)
+        .join('; ');
+      if (!cookie) throw new Error('No active browser session for readback');
+      const response = await fetch('/api/auth/convex/token', {
+        credentials: 'omit',
+        headers: { 'Better-Auth-Cookie': cookie },
+      });
+      if (!response.ok) throw new Error(`Application token request failed: ${response.status}`);
+      return ((await response.json()) as { token: string }).token;
     });
     const client = new ConvexHttpClient('http://127.0.0.1:3234');
     client.setAuth(token);
