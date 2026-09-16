@@ -104,3 +104,8 @@ None needed for this assessment. Implementation remains subject to the owning sp
   [comparison report](../research/steel-cauldron-output-comparison.md) records checks, differences and
   limits. Expected content remains the pinned local Compendium; no external implementation or data
   was added to the application. Documentation links and diff whitespace pass.
+- 2026-09-16 follow-up: recorded Q-V-2, requiring Steel Cauldron comparison accounting for every generated
+  stat block and manual investigation of substantial differences. Added explicit missing/ambiguous and
+  comparison-failure outcomes, reproducible revisions, source-based dispositions and comparator acceptance
+  cases to the owning spec. This extends the next ingestion slice's checks; it does not claim that the
+  importer or full comparator exists. Documentation links and diff whitespace verified.
