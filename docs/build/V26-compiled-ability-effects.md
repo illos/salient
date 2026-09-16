@@ -592,3 +592,28 @@ code-baseline results retain their recorded scope; they do not verify future V26
 - Design package is ready for implementation after routine rebase/coordination and isolated-runtime
   setup. Committed on `slice/V26` for lead integration; not merged into main. This documentation-only
   change has no runtime impact and requires no playable-app update.
+
+
+### 2026-09-16 — specification integrated into main
+
+- User requested the merge. Rebased the five documentation commits onto main `14b7536` without
+  conflicts. `git range-diff` confirms all five patches are unchanged; prior design/rules review
+  remains applicable. Original finalization `5273563` is now `3689226` after rebase.
+- Fast-forwarded main to `3689226`. The nine changed paths are documentation only; verified no
+  application, backend, generated content, dependency or vendor change relative to `14b7536`.
+  Main's V25 behavior and merge-completion policy are preserved. This integration note follows
+  as a documentation commit, and the merged specification branch is retired after integration.
+- Integration checks: `pnpm check-links` passes all 168 Markdown files in the rebased worktree
+  and main; whitespace checks and `node scripts/check-commit.ts --merge --range main..HEAD`
+  pass for the five incoming commits before the fast-forward. No executable change warrants
+  rerunning the application suite; earlier baseline results retain their historical scope.
+- **Runtime: no update required.** Frontend, backend, schema and content are unchanged by V26's
+  documentation merge. No restart, sync, data reset or live feature check was needed/performed.
+  This does not certify or complete any other slice's pending runtime integration.
+- Chords coordination read and acknowledged the UI track's V29 handoff. Its branch remains
+  separate; its changed command-error/log components must be reconciled if integrated before
+  V26 implementation. No peer worktree or runtime was changed.
+- V26 is ready for implementation, not completed gameplay. Ten live ability proof sets and all
+  eleven implementation acceptance checks remain pending. Start implementation from then-current
+  main in a fresh short-lived slice branch, repeat the content/grant audit and establish an isolated
+  backend. The parser/engine track does not retain a permanent branch.
