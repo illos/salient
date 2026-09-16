@@ -252,3 +252,9 @@ browser/visual verification, final acceptance, deployment coordination and the c
 On resumption, read this tracker and the latest audit reports before making changes. Incorporate
 new audit findings without restarting completed slices or expanding into V1. This checkpoint
 records the handoff; it does not certify A09 or create an implementation commit.
+
+## Development infrastructure — 2026-09-16
+
+| Id | Slice | Depends on | Status | Owner |
+| --- | --- | --- | --- | --- |
+| S03 | [Remote development adapter](S03-remote-development.md) | External dev-host V1 helpers and enrollment | Isolated validation: remote checks and HTTPS browser passed; no main cutover | Voltar infrastructure thread |

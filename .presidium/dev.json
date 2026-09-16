@@ -1,0 +1,8 @@
+{
+  "compose": "runtime/compose.yaml",
+  "services": ["backend", "web"],
+  "setup": ["install"],
+  "endpoints": { "web": { "service": "web", "port": 5180 } },
+  "secretKeys": ["BETTER_AUTH_SECRET"],
+  "timeout": 1800
+}

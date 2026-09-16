@@ -11,7 +11,7 @@ export const authComponent = createClient<DataModel>(components.betterAuth);
 export const createAuth = (ctx: GenericCtx<DataModel>) => {
   const siteUrl = process.env.SITE_URL!;
   return betterAuth({
-    baseURL: process.env.CONVEX_SITE_URL,
+    baseURL: process.env.SALIENT_AUTH_BASE_URL ?? process.env.CONVEX_SITE_URL,
     trustedOrigins: [
       siteUrl,
       ...(process.env.ADDITIONAL_TRUSTED_ORIGINS ?? '')

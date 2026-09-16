@@ -9,3 +9,6 @@ dist/
 test-results/
 playwright-report/
 public/rules-data/
+
+# Package caches are runtime state, never selected application source.
+.pnpm-store/

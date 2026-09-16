@@ -3,6 +3,14 @@ text.
 
 # Project instructions
 
+## Separate runtime rollout — 2026-09-16
+
+The [remote development runbook](docs/remote-development.md) owns the Salient pilot adapter and
+cutover status. This branch has not cut over the shared app. After recorded cutover, use
+`presidium-dev` for dependency installation, backend/frontend, builds and browsers; do not
+recreate these workloads on Presidium or start a stack automatically for every provider.
+Different concurrently deployed worktrees use explicitly named environments.
+
 ## Post-v0.01 development checkpoint — 2026-09-15
 
 The user confirmed five development tracks: parser/rules engine, foe coverage, characters

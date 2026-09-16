@@ -2,7 +2,7 @@
 // Expected outcomes follow the rules written in docs/build/README.md#commit-format.
 import { describe, expect, test } from 'vitest';
 import { execFileSync, spawnSync } from 'node:child_process';
-import { copyFileSync, mkdirSync, mkdtempSync, rmSync } from 'node:fs';
+import { copyFileSync, mkdirSync, mkdtempSync, rmSync, readFileSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import {
@@ -49,22 +49,46 @@ const without = (prefix: string) =>
 describe('check-commit', () => {
   test('range checks exempt only fixed pre-contract history; explicit and future checks remain strict', () => {
     const scratch = mkdtempSync(join(tmpdir(), 'salient-commit-history-'));
-    const adoption = 'd74ecf9d42e8e3d4f9cfc7743133785f41ad1524';
-    const legacy = '517ffc4555551f24dc8d4b4a8a2fbacdac0ab4ff';
-    const source = execFileSync('git', ['rev-parse', '--show-toplevel'], {
-      encoding: 'utf8',
-    }).trim();
     const git = (...args: string[]) =>
       execFileSync('git', args, { cwd: scratch, encoding: 'utf8' }).trim();
     try {
-      // Borrow immutable objects in a disposable repository; never change this checkout's refs/index.
-      execFileSync('git', ['clone', '--shared', '--no-checkout', '--quiet', source, scratch]);
+      // Build independent fixture history. Remote source snapshots intentionally carry no
+      // original branch history; borrowing the caller's immutable Git objects was unnecessary.
+      git('init', '--quiet');
+      git('config', 'user.name', 'Test');
+      git('config', 'user.email', 'test@example.invalid');
+      git('config', 'core.hooksPath', '/dev/null');
+      for (let index = 0; index < 3; index++)
+        git('commit', '--quiet', '--allow-empty', '-m', `Legacy message ${index}`);
+      const legacy = git('rev-parse', 'HEAD');
+      mkdirSync(join(scratch, 'docs/build'), { recursive: true });
+      for (const [path, content] of Object.entries(specs))
+        writeFileSync(join(scratch, path), content);
+      writeFileSync(join(scratch, 'docs/build/README.md'), '# Adopted build contract\n');
+      git('add', 'docs');
+      git(
+        'commit',
+        '--quiet',
+        '-m',
+        'docs(none): adopt commit format\n\nSlice: none\nRules-Review: not required',
+      );
+      const adoption = git('rev-parse', 'HEAD');
       mkdirSync(join(scratch, 'scripts/lib'), { recursive: true });
       for (const file of ['check-commit.ts', 'lib/markdown.ts'])
         copyFileSync(
           new URL(`../../scripts/${file}`, import.meta.url),
           join(scratch, 'scripts', file),
         );
+      // Substitute only the disposable checker's history boundary. The real checker keeps its
+      // historical constant; this fixture tests exemption behavior with a known local graph.
+      const checker = join(scratch, 'scripts/check-commit.ts');
+      const checkerSource = readFileSync(checker, 'utf8');
+      const boundary = "const PRE_FORMAT_HISTORY = '517ffc4555551f24dc8d4b4a8a2fbacdac0ab4ff';";
+      expect(checkerSource).toContain(boundary);
+      writeFileSync(
+        checker,
+        checkerSource.replace(boundary, `const PRE_FORMAT_HISTORY = '${legacy}';`),
+      );
       const check = (...args: string[]) =>
         spawnSync(process.execPath, ['scripts/check-commit.ts', ...args], {
           cwd: scratch,
