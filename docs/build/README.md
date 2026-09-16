@@ -65,10 +65,12 @@ The dependency graph is in `STATUS.md`. A slice may start when every dependency 
    required`. Address findings; re-review after substantive changes. The implementer never
    self-attests.
 8. **Rules review** when the slice document requires it, after independent review passes.
-9. **Commit** using the format below, one logical change per commit, fast-forward or rebase onto `main`.
-   The lead merges; the implementer does not push to `main` directly.
-10. **Hand back.** Set `STATUS.md` to `Committed` with the commit hashes, and write the closing entry in
-    the slice work log: what works, what was tested, what remains.
+9. **Commit and integrate** using the format below, one logical change per commit. The lead verifies
+   and fast-forwards `main`, then updates and verifies the shared playable environment under the
+   [merge completion directive](#merge-completion-includes-the-playable-app).
+10. **Hand back.** Set `STATUS.md` to `Committed` with the commit hashes. Distinguish a branch handoff
+    awaiting integration from a completed merge. The closing work log records the running target,
+    runtime update and live checks (or a justified no-runtime-impact result), plus anything remaining.
 
 If a slice is blocked on a user answer, set `STATUS.md` to `Blocked (Q-xxx)` and finish every part
 of the slice that does not depend on the answer before stopping.
@@ -174,8 +176,45 @@ Before starting an implementation slice:
 The implementer hands back the reviewed slice. The lead rebases it onto current `main`, resolves any
 integration conflicts, and verifies the resulting integration. Substantive behavior changes require
 renewed applicable review. Run required checks on the integrated result, validate commit trailers, then
-fast-forward `main` and retire the merged branch. A worktree may be reused for another slice; remove it
-only when clean and no active thread uses it. No release branches or automatic deployment are introduced.
+fast-forward `main`, complete the playable-app update below, and retire the merged branch. A worktree
+may be reused for another slice; remove it only when clean and no active thread uses it. No release
+branches or unattended deployment pipeline are introduced.
+
+### Merge completion includes the playable app
+
+**User-confirmed project-wide directive, 2026-09-16:** a request to merge includes Git integration
+and bringing the established shared playable development environment up to the merged version.
+The integrating lead owns both steps through verification. Routine updates to that established
+development target are already authorized by the merge request; do not ask again merely because
+Convex calls its code sync a deployment. This supersedes the earlier code-only merge handoff default.
+
+1. **Coordinate and identify the target.** Check Chords updates and the actual checkout/configuration.
+   Record the merged commit, serving checkout, frontend URL and backend identity/ports without secrets.
+   Confirm this is the shared playable target, not an isolated test backend. Serialize shared runtime
+   updates with peer threads; preserve unrelated work and deploy only the reviewed integrated code.
+2. **Update the affected running components.** Sync backend functions/schema and required content;
+   refresh or rebuild/restart the frontend as needed. Keep frontend, backend and content compatible.
+   A file watcher may perform the sync, but verify that it succeeded. A Git merge or passing isolated
+   tests alone does not establish that the playable app is current.
+3. **Check the actual app.** Verify frontend/backend connectivity and a focused changed-feature journey
+   at the shared playable URL. For persistence changes, save and reload/read back the resulting state.
+   Check relevant errors and retain compact evidence, including screenshots for visible changes.
+   Use disposable verification records without resetting the user's existing campaigns or characters.
+4. **Record completion.** In the slice work log and status handoff, record the integrated commit,
+   runtime target, update result and live-check evidence. Publish the result through Chords. Report
+   the merge complete only when these steps pass. If Git integration succeeded but the runtime update
+   failed or is pending, say so explicitly, record the blocker and continue fixing it within scope.
+
+Keep existing play data where compatible. If a breaking development update needs a deliberate reset,
+follow the existing disposable-data policy and coordinate its impact before acting; a merge is not a
+reason to reset data routinely. Never reset or repoint another track's environment. This directive
+covers the established development target; it does not authorize new hosting, external publication,
+remote Git pushes or production deployment. Follow actual session authorization for those actions.
+
+For changes with no runtime impact (such as this documentation directive), record why no runtime sync
+or live feature check is needed. An explicit user request to merge code only overrides this default;
+record that exception and the pending runtime work. Skip runtime updates for unchanged components.
+A handoff to another thread does not complete a still-pending runtime update.
 
 ### Runtime isolation
 
@@ -193,8 +232,9 @@ particular cloud service or authorize production deployment.
 
 Development data remains disposable in the correct target. Reset/reseed may replace prototype migrations,
 but a track may not reset or repoint another track's backend or the user's active app. The lead coordinates
-updates to the shared playable environment after integration, including any deliberate reset/reseed and
-relevant smoke checks. A local merge and a running-app update are separate steps; report which occurred.
+updates to the shared playable environment as part of merge completion, including any necessary
+coordinated reset/reseed and relevant smoke checks. Git integration and the running-app update remain
+separately evidenced steps; both are required by the default merge completion directive above.
 
 ## Verification baseline
 

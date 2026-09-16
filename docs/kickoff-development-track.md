@@ -66,5 +66,9 @@ self-attest review or treat automated browser checks as proof of enjoyable long-
 
 Update the owning specs and slice work log with what changed, what passed, what remains manual, and
 any real limitations. Commit using the existing trailers and hand the slice to the lead for verified
-integration into `main`. Report code integration separately from any running-app update. A track's
-unfinished future work does not prevent integration of a complete, reviewed slice.
+integration into `main`. When assigned the merge, complete both Git integration and the shared playable
+app update under [the merge completion directive](build/README.md#merge-completion-includes-the-playable-app).
+The merge request authorizes routine updates to the established development target without a second
+confirmation. Record the target, affected backend/content/frontend sync and live changed-feature check;
+report pending runtime work as incomplete. Documentation-only changes may record no runtime impact.
+A track's unfinished future work does not prevent integration of a complete, reviewed slice.

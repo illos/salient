@@ -57,3 +57,9 @@ new ones there, not here.
 ## Work log
 
 Append-only. Plan, decisions, verification output, review verdicts, commit hashes, closing summary.
+
+At integration, follow [merge completion](README.md#merge-completion-includes-the-playable-app): record
+whether this is a branch handoff or a completed merge; the merged commit and shared playable target;
+affected backend/content/frontend update results; live changed-feature checks and evidence; and any
+pending work. For no-runtime-impact changes, explain why no sync or live feature check is needed.
+Git integration alone does not complete an ordinary merge request.

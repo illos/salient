@@ -60,6 +60,16 @@ support has separate milestones. Other supplements/homebrew remain excluded. Fol
 - Project-authored code is `GPL-3.0-only`. Game content and artwork keep their own rights; do not copy
   them into application assets.
 
+## Merge completion directive — 2026-09-16
+
+A user request to merge includes integrating into `main`, updating the established shared playable
+development environment's affected backend/content/frontend, and checking the result in the running
+app. This is standing authorization for routine development updates; no second deployment confirmation
+is needed. Verify the target, coordinate through Chords, and preserve compatible play data. Report any
+pending runtime update as incomplete. Documentation-only changes may record no runtime impact; an
+explicit code-only request overrides the default. Existing external/production publication boundaries
+remain. Follow [the full procedure](docs/build/README.md#merge-completion-includes-the-playable-app).
+
 ## Building
 
 - The build is organized into slices under `docs/build/`. Read `docs/build/README.md` for the process,

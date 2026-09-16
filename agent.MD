@@ -21,6 +21,21 @@ reports, screenshots and phone discussion support independent work elsewhere. Co
 that does not depend on pending answers. The roadmap records confirmed organization and recommended
 first assignments separately; use bounded build slices rather than implementing an entire track at once.
 
+## Merge completion directive — 2026-09-16
+
+When the user asks to merge, complete both Git integration into `main` and the update of the
+established shared playable development environment, including affected backend functions/schema,
+content and frontend. This is standing authorization for those routine development updates; do not
+ask for a second deployment confirmation. Verify the actual target and the changed behavior in the
+running app before reporting the merge complete. Keep ownership coordinated through Chords.
+
+Follow [the merge completion procedure](docs/build/README.md#merge-completion-includes-the-playable-app).
+A successful Git merge with a pending or failed runtime update is incomplete; record the blocker and
+continue the authorized work. Preserve existing play data where compatible. This directive does not
+choose a new hosting target or authorize external publication/production deployment. Documentation-only
+changes can record that no runtime update is needed. An explicit user request for a code-only merge
+can override this default.
+
 ## Communication
 
 - Ask questions directly in the conversation using plain text. Do not use question widgets or structured

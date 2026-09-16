@@ -86,6 +86,16 @@ for active tracks with short-lived slice branches. Follow [branch and environmen
 The disposable-data policy does not permit one track to disrupt the user's active app or another track's
 environment. Integrate tested slices regularly; there is no requirement to complete a track before merging.
 
+## Merge completion — confirmed 2026-09-16
+
+A user request to merge includes updating the established shared playable development environment
+and verifying the changed behavior there. Git integration alone is incomplete. Routine backend,
+content and frontend updates for that target need no second permission request. The integrating lead
+coordinates the update, preserves compatible play data and records the commit, target and live result.
+Follow [the owning procedure](build/README.md#merge-completion-includes-the-playable-app), including
+no-runtime-impact documentation changes, explicit code-only exceptions and existing publication limits.
+This updates the earlier integration handoff default; it does not create an unattended deployment job.
+
 ## Keep the process small
 
 This is a hobby project. Working, understandable behavior is the unit of progress. Previous attempts failed through both fabricated rules and excessive process. Do not rebuild human approval queues, terminology bans, source-hash proof systems, or a large governance framework.
