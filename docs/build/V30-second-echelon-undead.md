@@ -171,3 +171,20 @@ Pinned-source review: **pass**, `v30_source_review`; see
 source blobs, all 74 feature spans/fields, historical continuity and supporting links. It reproduced
 the full report with verified cached digests and rejected 89 source-sensitive comparison mutations.
 No source discrepancies or correction records were required. Both required reviews now pass.
+
+### Committed branch handoff — 2026-09-16
+
+Implementation committed as **`510f6c7`** on `slice/V30`. All seven acceptance checks pass; both independent
+reviews pass. The source package edition is
+`24315df7920eadd03b5a546af9deae3f460bafa531c77e9650421cf628323425`.
+All 20 stat blocks and both Malice records have explained comparison outcomes; zero outstanding cases.
+
+This is a completed branch handoff, **not a merge into main**. The shared app still serves its integrated
+main version. No backend/schema/seed changes are included. On an assigned merge, rebase onto current main,
+resolve the small status-document overlap preserving peer closeout records, verify the integrated result,
+and check the changed public `/foes` page on the established shared frontend. Keep the retained V27 edition
+and identity registry. The stopped isolated frontend can be recreated with `playwright.foes.config.ts`;
+under constrained host memory use one test worker and avoid concurrent broad builds.
+
+Final documentation validation checks 178 Markdown files; whitespace and commit merge gates pass.
+No further coverage slice has been selected or started.

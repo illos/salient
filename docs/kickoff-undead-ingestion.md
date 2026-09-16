@@ -4,7 +4,7 @@
 
 The user selected and authorized the next slice: all nine second-echelon undead and their level-four
 Malice. Work is on `slice/V30` in `/srv/presidium/projects/salient/foes`, based on main `663b49f`.
-The slice is verified on branch: 437 tests, both browser journeys and independent implementation/source
+Implementation is committed on `slice/V30` at `510f6c7`: 437 tests, both browser journeys and independent implementation/source
 reviews pass. Integration into main is pending. Read [V30](build/V30-second-echelon-undead.md), its current
 status and reviews before continuing.
 The older V27 checkpoint below is retained as history; its “next batch unselected” statement is superseded.
