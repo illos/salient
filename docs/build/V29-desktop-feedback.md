@@ -223,3 +223,41 @@ average above 30 on four cores; those are environment, not code, and cleared whe
 
 Acceptance checks 1 to 6 are asserted in `tests/browser/v21-log.spec.ts`; check 7 is the command
 list above.
+
+### 2026-09-16 — merged into `main` and the shared playable app updated
+
+Merge complete. `slice/V29` rebased onto `main` `78a3a55` (after the V25 live closeout and the V27
+undead ingestion landed) and fast-forwarded as **`7b80e56`**. The rebase's only conflict was
+`STATUS.md`; `web/main.tsx` auto-merged, keeping V27's broadened public-route guard alongside the
+new `ToastProvider`.
+
+Integrated verification in `/srv/presidium/projects/salient/ui` on the isolated backend
+`anonymous:anonymous-agent` (127.0.0.1:3210, frontend 127.0.0.1:5183), single-worker to respect the
+host contention peers reported: `pnpm lint`, `pnpm check:engine` (97), `pnpm check:app` (336),
+`pnpm check-links` (179), `pnpm check-vendor`, `pnpm content:check`, `pnpm build`, and
+`pnpm exec playwright test` — **22 of 22**. The `table-audit.spec.ts` content-count failure carried
+through this slice's own runs is gone: the V25 live closeout replaced that stale 403 expectation
+with a manifest check on `main`.
+
+**Runtime target.** Serving checkout `/srv/presidium/projects/salient/code` on `main`; frontend the
+Vite dev server on `0.0.0.0:5180`; backend the local Convex deployment `anonymous:anonymous-agent`
+at 127.0.0.1:3210-equivalent port 3212 with its site proxy on 3213. No secrets recorded.
+
+**Update result.** V29 contains no `convex/` function, no schema and no seeded content, so no
+backend sync, seed or reset was performed and no play data was touched. The frontend watcher was
+the only component that needed to move, and it did: the shared server returns 200 for
+`/web/toast.tsx` with `aria-live` present and for `/web/main.tsx` with `ToastProvider` mounted, and
+the backend answers 200 on its version endpoint.
+
+**Live changed-feature check**, run against the shared app itself (5180 / 3212) with disposable
+verification accounts and campaigns, resetting nothing: `v21-log.spec.ts:25` passes there, which
+exercises the whole slice end to end — no toolbar under the tabs, the settings pop-up's Rewind and
+Redo round trip read back from the feed's `data-disposition`, the `Enable user undo` switch, the
+toast's message and clearance over the command line, the accessibility assertion with the pop-up
+open, the player's inline Undo and Redo on the right entries, manual dismissal and auto-expiry.
+`v21-rosters.spec.ts` also passes there and captures the pop-up. Evidence from the shared app:
+`evidence/V29-live/live-error-toast-dark.png` and `evidence/V29-live/live-settings-history-dark.png`.
+
+Nothing is pending. `slice/V29` is retired and the isolated backend and dev server for this slice
+are stopped.
+
