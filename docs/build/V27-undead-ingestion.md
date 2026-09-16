@@ -201,3 +201,8 @@ consumer-contract conflict materially changes the implementation; keep ordinary 
   V27 retains its documented base plus V23 prerequisites. Lead rebase/integration must preserve both
   tracks' status/question/spec edits and rerun integrated checks. This handoff does not merge main,
   update the user's running app, or deploy. Live Goblin support and all engine execution remain separate.
+
+- Committed implementation as `02be722`; incidental test repair as `c209a6e`. V27 is complete in
+  `slice/V27`, ready for lead integration. The [updated kickoff](../kickoff-undead-ingestion.md)
+  points future sessions to the build handoff rather than repeating the assessment. Remaining work
+  is integration and future broader coverage, engine execution and sharing UI, each in its own scope.
