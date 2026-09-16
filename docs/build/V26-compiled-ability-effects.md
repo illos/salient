@@ -352,21 +352,23 @@ specified; they remain engineering designs grounded in source, not new user rule
 The integrated-content audit additionally identified Meteoric Introduction, Viscous Fire and Ray of
 Agonizing Self-Reflection as matching the same grammar. Viscous Fire is additionally affected live;
 Meteoric and Ray remain compile-only because current wizard choices cannot grant them. These are
-included under the accepted affected-ability audit requirement. All live evidence is **pending**.
+included under the accepted affected-ability audit requirement. [Baseline evidence](evidence/V26/baseline-2026-09-16/README.md)
+now covers the ten available abilities. **V26 implementation acceptance remains pending**; existing
+manual results do not prove compiled behavior, and the baseline discloses turn-setup deviations.
 
 | Ability | Source / design | Designed | Built | In-app playtested / evidence |
 | --- | --- | --- | --- | --- |
-| Brutal Slam | [Source, design and BS1–BS8](V26-ability-designs.md#brutal-slam) | Complete | No | Pending; no screenshots. |
-| Spear Charge | [Source, design and SC1–SC4](V26-ability-designs.md#spear-charge) | Complete | No | Pending; no screenshots. |
-| Bury the Point | [Source, design and BP1–BP5](V26-ability-designs.md#bury-the-point) | Complete | No | Pending; no screenshots. |
-| Melee Free Strike | [Source, design and MF3](V26-ability-designs.md#melee-free-strike) | Complete | No V26 change | Pending; no screenshots. |
-| Ranged Free Strike | [Source, design and RF3](V26-ability-designs.md#ranged-free-strike) | Complete | No V26 change | Pending; no screenshots. |
-| Pain for Pain | [Source, design and PP3](V26-ability-designs.md#pain-for-pain) | Complete | Compatibility retained; unverified for V26 | Pending; no screenshots. |
-| Out of the Way! | [Source, design and OW2](V26-ability-designs.md#out-of-the-way) | Complete | Compatibility retained; unverified for V26 | Pending; no screenshots. |
-| Thunder Roar | [Source, design and TR1](V26-ability-designs.md#thunder-roar) | Complete | Compatibility retained; unverified for V26 | Pending; no screenshots. |
-| Lines of Force | [Source, design and LF1](V26-ability-designs.md#lines-of-force) | Complete | Compatibility retained; unverified for V26 | Pending; no screenshots. |
+| Brutal Slam | [Source, design and BS1–BS8](V26-ability-designs.md#brutal-slam) | Complete | No | [Baseline screenshots/readback](evidence/V26/baseline-2026-09-16/README.md); full V26 case pending. |
+| Spear Charge | [Source, design and SC1–SC4](V26-ability-designs.md#spear-charge) | Complete | No | [Baseline screenshots/readback](evidence/V26/baseline-2026-09-16/README.md); full V26 case pending. |
+| Bury the Point | [Source, design and BP1–BP5](V26-ability-designs.md#bury-the-point) | Complete | No | [Baseline screenshots/readback](evidence/V26/baseline-2026-09-16/README.md); full V26 case pending. |
+| Melee Free Strike | [Source, design and MF3](V26-ability-designs.md#melee-free-strike) | Complete | No V26 change | [Baseline screenshots/readback](evidence/V26/baseline-2026-09-16/README.md); full V26 case pending. |
+| Ranged Free Strike | [Source, design and RF3](V26-ability-designs.md#ranged-free-strike) | Complete | No V26 change | [Baseline screenshots/readback](evidence/V26/baseline-2026-09-16/README.md); full V26 case pending. |
+| Pain for Pain | [Source, design and PP3](V26-ability-designs.md#pain-for-pain) | Complete | Compatibility retained; unverified for V26 | [Baseline screenshots/readback](evidence/V26/baseline-2026-09-16/README.md); full V26 case pending. |
+| Out of the Way! | [Source, design and OW2](V26-ability-designs.md#out-of-the-way) | Complete | Compatibility retained; unverified for V26 | [Baseline screenshots/readback](evidence/V26/baseline-2026-09-16/README.md); full V26 case pending. |
+| Thunder Roar | [Source, design and TR1](V26-ability-designs.md#thunder-roar) | Complete | Compatibility retained; unverified for V26 | [Baseline screenshots/readback](evidence/V26/baseline-2026-09-16/README.md); full V26 case pending. |
+| Lines of Force | [Source, design and LF1](V26-ability-designs.md#lines-of-force) | Complete | Compatibility retained; unverified for V26 | [Baseline screenshots/readback](evidence/V26/baseline-2026-09-16/README.md); full V26 case pending. |
 | Meteoric Introduction | [Source and pure MI2](V26-ability-designs.md#compile-only-comparison-meteoric-introduction) | Complete for compilation | No V26 change | Deferred; no current live grant option. |
-| Viscous Fire | [Source, design and VF2](V26-ability-designs.md#additional-affected-ability-viscous-fire) | Complete | No V26 change | Pending; no screenshots. |
+| Viscous Fire | [Source, design and VF2](V26-ability-designs.md#additional-affected-ability-viscous-fire) | Complete | No V26 change | [Baseline screenshots/readback](evidence/V26/baseline-2026-09-16/README.md); full V26 case pending. |
 | Ray of Agonizing Self-Reflection | [Source and pure RA2](V26-ability-designs.md#compile-only-comparison-ray-of-agonizing-self-reflection) | Complete for compilation | No V26 change | Deferred; no current live grant option. |
 | Spinecleaver Axe | [Source and compile-only comparison](V26-ability-designs.md#compile-only-comparison-spinecleaver-axe) | Complete for compilation; live minion design deferred to V02 | No live implementation | Deferred; cannot count as built or playtested. |
 
@@ -382,8 +384,7 @@ Brutal Slam's first evidence must correlate its tier-2 source and size rule with
 adds screenshots of the corrected output and restoration. These are expected results for future
 playtests, not observations or screenshot proof from this specification turn.
 
-Keep the run record and screenshots under `docs/build/evidence/V26/` (to be created during actual
-playtesting), linked from each ability row, with tested revision, source pin, runtime identity,
+Keep the run record and screenshots under `docs/build/evidence/V26/`, linked from each ability row, with tested revision, source pin, runtime identity,
 event IDs, pass/fail and limitations. Reconcile the final inventory against adapter changes and the
 generated report before review; no ability may inherit a playtest pass from another ability merely
 because they share grammar. Reuse lower-level mechanics tests without duplicating them per ability.
@@ -617,3 +618,32 @@ code-baseline results retain their recorded scope; they do not verify future V26
   eleven implementation acceptance checks remain pending. Start implementation from then-current
   main in a fresh short-lived slice branch, repeat the content/grant audit and establish an isolated
   backend. The parser/engine track does not retain a permanent branch.
+
+
+### 2026-09-16 — real-app baseline playtests
+
+- User requested playtests. Created short-lived `slice/V26-playtest` in the existing clean worktree
+  `/srv/presidium/projects/salient/engine-parser-spec`. Actual tested code is `f019e3a` (main advanced
+  during branch creation); the run records the full revision and runner SHA rather than the earlier
+  intended `64dc658` baseline. Shared main, runtime and peer data were not changed.
+- Ran all ten currently selectable abilities through the rendered app on isolated frontend 5184,
+  anonymous backend 3234/site 3235. Added an opt-in browser evidence runner and retained paired source/log
+  screenshots, actual before/after readback, correction/manual-disposition/history proof. See the
+  [complete baseline report](evidence/V26/baseline-2026-09-16/README.md) for fixture setup, event IDs,
+  observed arithmetic, known missing behavior and honest case-coverage limits.
+- Baseline passed: supported damage, costs, affordability blocking, condition non-mutation and legacy
+  manual/history behavior. V26 is still unimplemented: no compiled format, occurrence identity or
+  calculated push allowance. Consecutive inline corrections are unavailable after the first; rewind
+  then a single two-bane correction verifies arithmetic but does not pass the designed BS7 sequence.
+- The baseline reused one turn with logged resets; repeated-action/off-turn warnings are visible.
+  Full designed legal-turn playtests remain required after implementation. No compile-only case,
+  new product behavior, backend schema/function or app source was added.
+- Early harness attempts exposed the correction limitation and Vite reloading on evidence writes;
+  preserved failures locally and disabled file watching only on this isolated frontend. Final browser
+  run passed in 2.8 minutes with no page errors. Full `pnpm check` passed: 97 engine + 335 app/scripts
+  tests, lint/types, links, vendor/content/foe checks and production build. An earlier full-check process
+  exited 143 during build; the complete rerun passed. Existing chunk-size build warning remains.
+- Evidence is on this branch, not merged into main. This test/documentation change needs no shared
+  runtime deployment. Independent baseline evidence and pinned-source rules review **pass**,
+  `v26_spec_review`: [baseline playtest review](reviews/V26-baseline-playtest-review.md).
+  All eleven V26 implementation acceptance checks remain pending.

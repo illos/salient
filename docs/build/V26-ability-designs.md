@@ -1,7 +1,9 @@
 # V26 ability designs and playtest cases
 
 This is the per-ability design appendix to [V26](V26-compiled-ability-effects.md).
-Status: **design only; every implementation and in-app evidence result is pending**.
+Status: **V26 implementation and acceptance pending**. A [real-app baseline run](evidence/V26/baseline-2026-09-16/README.md)
+now documents all ten currently available abilities, screenshots, saved state and known gaps; it does
+not satisfy the complete designed cases below.
 Expected values below are independently calculated from pinned source, never observed app results.
 The owning slice inventory tracks designed, built and playtested separately.
 
