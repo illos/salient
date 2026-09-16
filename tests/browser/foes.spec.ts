@@ -2,13 +2,13 @@
 import { expect, test } from '@playwright/test';
 test('public undead search, independent cards, navigation, dismissal and themes', async ({
   page,
-}) => {
+}, testInfo) => {
   await page.goto('/foes');
   await expect(page.getByRole('heading', { name: 'The restless dead' })).toBeVisible();
   const search = page.getByRole('textbox', { name: 'Search undead' });
   await search.fill('Arise');
   await page.getByRole('combobox', { name: 'Kind', exact: true }).selectOption('trait');
-  await expect(page.getByRole('status')).toHaveText('3 references');
+  await expect(page.getByRole('status')).toHaveText('4 references');
   const trigger = page.getByRole('button', { name: 'Skeleton · trait Arise', exact: true });
   await trigger.click();
   let dialog = page.getByRole('dialog');
@@ -37,13 +37,13 @@ test('public undead search, independent cards, navigation, dismissal and themes'
     await expect(dialog).toContainText('The ghost chooses one additional target.');
     await expect(dialog).toContainText('while flying this way.');
     await page.screenshot({
-      path: `docs/build/evidence/V27-undead-${theme.toLowerCase()}.png`,
+      path: testInfo.outputPath(`first-echelon-${theme.toLowerCase()}.png`),
       fullPage: true,
     });
     await dialog.getByRole('button', { name: 'Open Haunt', exact: true }).click();
     await expect(dialog).toContainText('The ghost chooses one additional target.');
     await page.screenshot({
-      path: `docs/build/evidence/V27-ability-${theme.toLowerCase()}.png`,
+      path: testInfo.outputPath(`first-echelon-ability-${theme.toLowerCase()}.png`),
       fullPage: true,
     });
     await dialog.getByRole('button', { name: 'Close foe reference' }).click();
@@ -66,4 +66,92 @@ test('public undead search, independent cards, navigation, dismissal and themes'
   await expect(dialog.getByRole('heading', { name: 'Zombie Dust', exact: true })).toBeVisible();
   await page.keyboard.press('Escape');
   await expect(search).toHaveValue('Zombie Dust');
+});
+
+test('second-echelon references preserve independent features and correct Malice navigation', async ({
+  page,
+}) => {
+  await page.goto('/foes');
+  await expect(page.getByText('Explore 20 stat blocks', { exact: false })).toBeVisible();
+  const search = page.getByRole('textbox', { name: 'Search undead' });
+  const kind = page.getByRole('combobox', { name: 'Kind', exact: true });
+  await kind.selectOption('statblock');
+  await expect(page.getByRole('status')).toHaveText('20 references');
+  const firstEchelon = [
+    'Crawling Claw',
+    'Decrepit Skeleton',
+    'Ghost',
+    'Ghoul',
+    'Rotting Zombie',
+    'Shade',
+    'Skeleton',
+    'Soulwight',
+    'Specter',
+    'Umbral Stalker',
+    'Zombie',
+  ];
+  for (const name of [
+    ...firstEchelon,
+    'Flesh Mournling',
+    'Fleshflayed Shambler Zombie',
+    'Ghoul Craver',
+    'Giant Zombie',
+    'Hollowbone Launcher',
+    'Mummy Lord',
+    'Mummy',
+    'Vampire Spawn',
+    'Wraith',
+  ]) {
+    await page.getByRole('button', { name: `Undead · statblock ${name}`, exact: true }).click();
+    const dialog = page.getByRole('dialog');
+    await expect(dialog.getByRole('heading', { name, exact: true })).toBeVisible();
+    await expect(
+      dialog.getByRole('button', {
+        name: `Undead Malice (Level ${firstEchelon.includes(name) ? 1 : 4}+ Malice Features)`,
+        exact: true,
+      }),
+    ).toBeVisible();
+    await page.keyboard.press('Escape');
+  }
+  for (const theme of ['Light', 'Dark']) {
+    await page.getByRole('button', { name: theme, exact: true }).click();
+    await search.fill('Binding Curse');
+    await kind.selectOption('ability');
+    const trigger = page.getByRole('button', {
+      name: 'Mummy Lord · ability Binding Curse Main action',
+      exact: true,
+    });
+    await trigger.click();
+    const dialog = page.getByRole('dialog');
+    await expect(dialog).toContainText('one additional target for each 2 Malice spent');
+    await expect(dialog).toContainText('4 psychic damage whenever they use a move action');
+    await page.screenshot({
+      path: `docs/build/evidence/V30-ability-${theme.toLowerCase()}.png`,
+      fullPage: true,
+    });
+    await dialog.getByRole('button', { name: 'From Mummy Lord', exact: true }).click();
+    await expect(dialog).toContainText('Villain Action 3');
+    await page.screenshot({
+      path: `docs/build/evidence/V30-undead-${theme.toLowerCase()}.png`,
+      fullPage: true,
+    });
+    await dialog.getByRole('button', { name: 'Open Cursed Transference', exact: true }).click();
+    await expect(dialog).toContainText("This damage can't be reduced");
+    await dialog.getByRole('button', { name: 'From Mummy Lord', exact: true }).click();
+    await dialog
+      .getByRole('button', { name: 'Undead Malice (Level 4+ Malice Features)', exact: true })
+      .click();
+    await expect(dialog).toContainText('At the start of any level 4 or higher');
+    await dialog.getByRole('button', { name: 'Open Blood Hunger', exact: true }).click();
+    await expect(dialog).toContainText('each undead within 5 squares');
+    await dialog
+      .getByRole('button', { name: 'From Undead Malice (Level 4+ Malice Features)', exact: true })
+      .click();
+    await dialog
+      .getByRole('button', { name: 'Undead Malice (Level 1+ Malice Features)', exact: true })
+      .click();
+    await expect(dialog).toContainText('Ravenous Horde');
+    await page.keyboard.press('Escape');
+    await expect(trigger).toBeFocused();
+  }
 });

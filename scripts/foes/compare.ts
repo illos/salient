@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-only
 import type { Fields, FoeObject, FoePackage, Json } from '../../shared/contracts/foes.ts';
+import { SELECTION } from './batches.ts';
 import { plain, tags } from './import.ts';
 export const EXTERNAL_REVISION = 'eba4b8bb8bc1baf947f15e67e9e923951092fd89';
 export interface Difference {
@@ -52,7 +53,9 @@ export function compareBlock(
   block: FoeObject,
   candidates: Fields[],
 ): ComparisonRow {
-  const counterpart = block.kind === 'malice' ? 'undead-malice' : block.id.split('/').at(-1)!;
+  const counterpart =
+    SELECTION.find(entry => block.source.path === `en/books/monsters/md/${entry.path}.md`)
+      ?.counterpart ?? block.id.split('/').at(-1)!;
   const row: ComparisonRow = {
     id: block.id,
     name: block.name,
@@ -101,9 +104,9 @@ export function compareBlock(
     if (block.kind === 'malice') {
       if (other.type !== 'featureblock') throw new Error('Wrong Malice counterpart type');
       if (
-        block.name === 'Undead Malice (Level 1+ Malice Features)' &&
+        block.name === `Undead Malice (Level ${block.fields.level}+ Malice Features)` &&
         other.name === 'Undead Malice' &&
-        other.level === 1 &&
+        other.level === block.fields.level &&
         other.featureblockType === '+ Malice Features'
       )
         explain(
@@ -132,14 +135,14 @@ export function compareBlock(
       {
         compare('ev.quantity', block.ev?.quantity, other.evQuantity);
         if (
-          block.ev?.printed === '3 for four minions' &&
+          block.ev?.printed === `${block.ev?.amount} for four minions` &&
           block.ev.quantity === 4 &&
-          other.ev === 3 &&
+          other.ev === block.ev.amount &&
           other.evQuantity === undefined
         )
           explain(
             'ev.quantity',
-            'External generated field omits the printed four-minion quantity. Preserve our source EV 3 for four minions; no inference about the external app calculator.',
+            'External generated field omits the printed four-minion quantity. Preserve our printed source EV and its four-minion basis; no inference about the external app calculator.',
           );
       }
       if (block.ev?.quantity === 1 && other.evQuantity === undefined)

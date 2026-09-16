@@ -158,6 +158,8 @@ See the [CI review and run record](audits/2026-09-14-ci-history-review.md) for t
 | V29 | [Desktop layout feedback follow-ups](V29-desktop-feedback.md) | V21 | Merged — `7b80e56`, 2026-09-16; independent implementation review pass; integrated checks and the full 22-test browser suite pass; shared playable app on `5180` updated and the changed-feature journey verified live |
 | V31 | [History control placement correction](V31-history-control-placement.md) | V29 | Merged — `bd0c512`, 2026-09-16; user correction to V29 (only the Enable user undo toggle is a settings row; Rewind and Redo are a discreet icon pair beside the tabs); independent implementation review pass over three rounds; full 22-test browser suite passes; shared playable app on `5180` updated and the changed-feature journey verified live |
 
+| V30 | [Second-echelon undead ingestion](V30-second-echelon-undead.md) | V27 | Verified on branch — foe track, slice/V30, 2026-09-16; 20 undead + 2 Malice compared, 437 tests and both browser journeys pass; independent/source reviews pass; integration pending |
+
 ## Build lead handoff — 2026-09-15
 
 The following chronological checkpoints are retained as history. The slice table and integrated

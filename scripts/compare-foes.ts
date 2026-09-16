@@ -5,13 +5,13 @@ import { fileURLToPath } from 'node:url';
 import { createHash } from 'node:crypto';
 import type { Fields, FoePackage } from '../shared/contracts/foes.ts';
 import { compareFoes, EXTERNAL_REVISION } from './foes/compare.ts';
-import { SLUGS } from './foes/import.ts';
+import { SELECTION, COMPARISON_REPORT } from './foes/batches.ts';
 const root = fileURLToPath(new URL('..', import.meta.url));
 const cache = resolve(
   process.env.SALIENT_FOE_COMPARISON_CACHE ||
     `${root}/.playtest/steel-cauldron/${EXTERNAL_REVISION}`,
 );
-const files = [...SLUGS.map(s => `data/monsters/${s}.json`), 'data/malice/undead-malice.json'];
+const files = [...new Set(SELECTION.map(entry => entry.externalPath))];
 const manifestPath = `${cache}/manifest.json`;
 const digest = (s: string) => createHash('sha256').update(s).digest('hex');
 const errors: string[] = [];
@@ -62,10 +62,7 @@ const pack = JSON.parse(
   readFileSync(`${root}/shared/content/foes/catalog.json`, 'utf8'),
 ) as FoePackage;
 const report = { ...compareFoes(pack, candidates), retrievalErrors: errors };
-const output = resolve(
-  process.env.SALIENT_FOE_COMPARISON_REPORT ||
-    `${root}/docs/build/evidence/V27-steel-cauldron.json`,
-);
+const output = resolve(process.env.SALIENT_FOE_COMPARISON_REPORT || `${root}/${COMPARISON_REPORT}`);
 mkdirSync(resolve(output, '..'), { recursive: true });
 writeFileSync(output, JSON.stringify(report, null, 2) + '\n');
 console.log(JSON.stringify(report.counts));

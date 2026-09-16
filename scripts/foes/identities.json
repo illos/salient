@@ -198,5 +198,175 @@
     "parent": "mcdm.monsters.v1/monster.undead.1st-echelon/undead-malice-level-1-malice-features",
     "fingerprint": "e37f33fa2112d24275bbaa640ad1264abb4543e67d84afc4b8034df92200097a",
     "id": "foe-feature:205449aa-04f1-4d5b-891d-36f0830aad22"
+  },
+  {
+    "parent": "mcdm.monsters.v1/monster.undead.2nd-echelon.statblock/flesh-mournling",
+    "fingerprint": "a9567345e50bf6f015eb1b77f5a42be0a1d7eb508c8f2cd202f6d9507579ec11",
+    "id": "urn:uuid:322801b0-44aa-40e8-b015-a9529ffb0189"
+  },
+  {
+    "parent": "mcdm.monsters.v1/monster.undead.2nd-echelon.statblock/flesh-mournling",
+    "fingerprint": "a71a3beb4282da74e4c2f128bba943d2323e7e16bee95dea206c3536403d0cee",
+    "id": "urn:uuid:25a3a626-e3ab-4a81-8540-8d0d66095006"
+  },
+  {
+    "parent": "mcdm.monsters.v1/monster.undead.2nd-echelon.statblock/flesh-mournling",
+    "fingerprint": "6bcf66b83622a8b319f626a51f611eb54e26413d5b1a5dcb9fd2788e986e64e5",
+    "id": "urn:uuid:f26b268d-dce3-4ec4-8193-26d6fda8cd12"
+  },
+  {
+    "parent": "mcdm.monsters.v1/monster.undead.2nd-echelon.statblock/flesh-mournling",
+    "fingerprint": "39b9aa9450c8b8fbc6513278192b3a9156991f0999acd091a803c5fa039ac89b",
+    "id": "urn:uuid:df07cdf2-938e-41fc-be5f-4163cf2ca77d"
+  },
+  {
+    "parent": "mcdm.monsters.v1/monster.undead.2nd-echelon.statblock/fleshflayed-shambler-zombie",
+    "fingerprint": "57109922d7527974dcfd623fab177a2dbb14dd37697f135cbdfc4fdbb8e7797e",
+    "id": "urn:uuid:9b7d7a72-1a9a-453a-a648-b00cf123ca31"
+  },
+  {
+    "parent": "mcdm.monsters.v1/monster.undead.2nd-echelon.statblock/fleshflayed-shambler-zombie",
+    "fingerprint": "83602b3971411373f80aab867d785686877acec51db232ac9893885837169050",
+    "id": "urn:uuid:88e437f9-f668-4dc5-bd20-93b5ed597045"
+  },
+  {
+    "parent": "mcdm.monsters.v1/monster.undead.2nd-echelon.statblock/ghoul-craver",
+    "fingerprint": "99f24087c3ccb2bd0800205c40fa4d2b26d92cacb2fa2aaf06809331bb10ea62",
+    "id": "urn:uuid:e966843a-c11b-4e3b-93d0-31e6494dab2d"
+  },
+  {
+    "parent": "mcdm.monsters.v1/monster.undead.2nd-echelon.statblock/ghoul-craver",
+    "fingerprint": "c9135290f122f5799f9a7bf2d7f43d19cb5f722b9d12f15ec92169b7a98c60a6",
+    "id": "urn:uuid:ade205c1-3aca-4f48-bc15-da8b0edbae68"
+  },
+  {
+    "parent": "mcdm.monsters.v1/monster.undead.2nd-echelon.statblock/ghoul-craver",
+    "fingerprint": "6e64d4bfbd4d9ecc7b0d572f9c92292f4cd9c6450b5575bc506ea44e990d718c",
+    "id": "urn:uuid:ad858b5d-dcd3-4f46-8198-92a92f193bef"
+  },
+  {
+    "parent": "mcdm.monsters.v1/monster.undead.2nd-echelon.statblock/giant-zombie",
+    "fingerprint": "c127467cb5cc5c86bae0778134e09a3ce0bcf88cca9befecd6d89480861bf011",
+    "id": "urn:uuid:a6a61c9d-e051-4fe1-acf3-95d74a53de71"
+  },
+  {
+    "parent": "mcdm.monsters.v1/monster.undead.2nd-echelon.statblock/giant-zombie",
+    "fingerprint": "96cac2ad49d1c5238da548b1b7cb5ab3d3077616c7875d4e85a4e132f64aca2d",
+    "id": "urn:uuid:dbffddb7-1439-4a71-a3c7-0f7284945ef7"
+  },
+  {
+    "parent": "mcdm.monsters.v1/monster.undead.2nd-echelon.statblock/giant-zombie",
+    "fingerprint": "0ca1f840405ade1999d2bc667fff796f26f11cecd3eb7dd0df1ddd23f4715f07",
+    "id": "urn:uuid:81556c35-9196-47fc-952d-33e0b9c85236"
+  },
+  {
+    "parent": "mcdm.monsters.v1/monster.undead.2nd-echelon.statblock/giant-zombie",
+    "fingerprint": "50d380bb9d8b89e8a7cf2d9d341958eba5edad738fee5ed5f861d7299ff0eca6",
+    "id": "urn:uuid:bd172a5b-8625-4ac6-8f90-b6be59568cdb"
+  },
+  {
+    "parent": "mcdm.monsters.v1/monster.undead.2nd-echelon.statblock/hollowbone-launcher",
+    "fingerprint": "860edc9642e8d71a9629e4d8d2f4283cde595ddeb99214a06cdd9e4b7dfc3ae4",
+    "id": "urn:uuid:406e68c2-1b20-4bf7-af3f-a71738b6a8ef"
+  },
+  {
+    "parent": "mcdm.monsters.v1/monster.undead.2nd-echelon.statblock/hollowbone-launcher",
+    "fingerprint": "99010753098a10501dcb82b6baefddf82969acc0a8d2ac9c4edf523c4c06b02a",
+    "id": "urn:uuid:b50b608a-a5f9-46ce-9de4-85f2309292d2"
+  },
+  {
+    "parent": "mcdm.monsters.v1/monster.undead.2nd-echelon.statblock/mummy-lord",
+    "fingerprint": "ce6c259a50dee5f96c1049f15399920651403ecb30cc021335dd2019c55baf94",
+    "id": "urn:uuid:b42ce46f-c4d8-4ee4-b937-19fa6dab63c6"
+  },
+  {
+    "parent": "mcdm.monsters.v1/monster.undead.2nd-echelon.statblock/mummy-lord",
+    "fingerprint": "bf98b24a12605e27e570028f8e5cddee1cc807576d26418252945ac231dec778",
+    "id": "urn:uuid:dce59e0a-7cce-47c7-9df5-0c40fc65a60d"
+  },
+  {
+    "parent": "mcdm.monsters.v1/monster.undead.2nd-echelon.statblock/mummy-lord",
+    "fingerprint": "ba35003a6d0ed86aab9da0125dcccc4a88682f06367a07cacd13c138c708ea8e",
+    "id": "urn:uuid:90e95f0a-b2d5-4034-98b8-cac561a3cec7"
+  },
+  {
+    "parent": "mcdm.monsters.v1/monster.undead.2nd-echelon.statblock/mummy-lord",
+    "fingerprint": "f372c1299559327010c119c0392efd4da7636a903fbf8ae7dc2a460a49eb569a",
+    "id": "urn:uuid:9e82a0dd-b89c-44d1-88ee-7adde9faa223"
+  },
+  {
+    "parent": "mcdm.monsters.v1/monster.undead.2nd-echelon.statblock/mummy-lord",
+    "fingerprint": "ac56339a8b22b8abbd7d7a2b062d1c38e8317372a846dc6a1fd277a041b9b1cf",
+    "id": "urn:uuid:ff58a490-11ad-45fa-81f4-e379d5616fd7"
+  },
+  {
+    "parent": "mcdm.monsters.v1/monster.undead.2nd-echelon.statblock/mummy-lord",
+    "fingerprint": "bed0090bc213abdc7d673c5722c85849d806b557a3baeaacf1033a6e2de079da",
+    "id": "urn:uuid:0463a087-1de9-41e6-80be-d31c8b4610b5"
+  },
+  {
+    "parent": "mcdm.monsters.v1/monster.undead.2nd-echelon.statblock/mummy-lord",
+    "fingerprint": "6d2663f112409e8a64b0c3d96fb86724b435e6d6678bc5af3a2485169feebf99",
+    "id": "urn:uuid:3ad9ac22-0ac8-4f5f-96a8-401fe57fa5af"
+  },
+  {
+    "parent": "mcdm.monsters.v1/monster.undead.2nd-echelon.statblock/mummy",
+    "fingerprint": "ec9735b8b93ae2e74e46875ddd4ff51a15628f82ff7f6f68b9b3ac2709fe135b",
+    "id": "urn:uuid:b824f255-c65c-4735-bd81-0c5749f3a78a"
+  },
+  {
+    "parent": "mcdm.monsters.v1/monster.undead.2nd-echelon.statblock/mummy",
+    "fingerprint": "5e3ce3b9370f3511e66900ca4bd9eb6f10dddea22b2481ba61a3bd235fd110ed",
+    "id": "urn:uuid:cedc64ca-8378-41d8-ba6a-5a3ad158a750"
+  },
+  {
+    "parent": "mcdm.monsters.v1/monster.undead.2nd-echelon.statblock/mummy",
+    "fingerprint": "db630ae24c5100e3c6945a029df2fdfba49a8a10ec4a37eb2e183d0774e2ef79",
+    "id": "urn:uuid:6b6e8db7-e656-4f0e-942b-a6d76e8c06a4"
+  },
+  {
+    "parent": "mcdm.monsters.v1/monster.undead.2nd-echelon.statblock/vampire-spawn",
+    "fingerprint": "0c26265ec806903a189620c57ff515a700a787115d249cd9d0534cca3b90c4d8",
+    "id": "urn:uuid:bd3ffc1d-e248-414c-95b2-b1fd0b6d2595"
+  },
+  {
+    "parent": "mcdm.monsters.v1/monster.undead.2nd-echelon.statblock/vampire-spawn",
+    "fingerprint": "95dd700bd66044fdda3ec8683f06270b461d8df26bc7cf69bf3729186b9a54d8",
+    "id": "urn:uuid:88c44366-a38a-45e5-8470-ea7d7d813951"
+  },
+  {
+    "parent": "mcdm.monsters.v1/monster.undead.2nd-echelon.statblock/vampire-spawn",
+    "fingerprint": "df41afee6548b912a0c8ab9b304f456cd1cca2a3d79d6e0ed482915dd6f1b7e2",
+    "id": "urn:uuid:353acae9-2eae-4020-9797-1526ef9edb15"
+  },
+  {
+    "parent": "mcdm.monsters.v1/monster.undead.2nd-echelon.statblock/wraith",
+    "fingerprint": "83e36c7e6b1973e96645f39e1a60d4065b7a62fb7f49d7ae4116a176977244e1",
+    "id": "urn:uuid:321417ca-42e6-4aae-bbaa-992be504761c"
+  },
+  {
+    "parent": "mcdm.monsters.v1/monster.undead.2nd-echelon.statblock/wraith",
+    "fingerprint": "9c1d1c05abd9051d447f25b38d2ada2527acd9b2177d9cd8fd311a3bfea0f69d",
+    "id": "urn:uuid:bc446b1a-888e-4477-a118-f0fa24e4168b"
+  },
+  {
+    "parent": "mcdm.monsters.v1/monster.undead.2nd-echelon.statblock/wraith",
+    "fingerprint": "f51638da465e57b0fcde5ab69252bb30f67d9d0417ca9589d6d933f7ed99f198",
+    "id": "urn:uuid:920e162e-c180-4353-be90-db16368be61b"
+  },
+  {
+    "parent": "mcdm.monsters.v1/monster.undead.2nd-echelon.statblock/wraith",
+    "fingerprint": "f7cf4017e95e3579f3eb082eccb3c1f4ae80f918044a1117470754d1f7a53ebc",
+    "id": "urn:uuid:70b338cc-ca40-4ef8-824d-e0640a5a0dc3"
+  },
+  {
+    "parent": "mcdm.monsters.v1/monster.undead.2nd-echelon/undead-malice-level-4-malice-features",
+    "fingerprint": "01ffae8cf65c25f0f59958bd1c85a55a013546f0ea82857f13579d8ea6fcc485",
+    "id": "urn:uuid:7dd63667-a1f5-41b7-969a-a6baeddebe1f"
+  },
+  {
+    "parent": "mcdm.monsters.v1/monster.undead.2nd-echelon/undead-malice-level-4-malice-features",
+    "fingerprint": "11fa5f817b099607224096d2a37d9efd6a00cf5a002f1848cd0312448d93f341",
+    "id": "urn:uuid:378cd19a-ea27-43b4-8194-4f90e1008db0"
   }
 ]

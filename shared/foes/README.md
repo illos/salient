@@ -1,8 +1,8 @@
-# Public undead content (V27)
+# Public undead content
 
 This package contains source definitions, not live creatures or executable mechanics. It is usable
-without Convex. The initial selection is 11 first-echelon undead, 36 embedded abilities/traits and
-four shared Malice features, from the pinned Monsters book.
+without Convex. The current selection is 20 first/second-echelon undead, 68 embedded abilities/traits and
+six shared Malice features, from the pinned Monsters book.
 
 ## Generate and verify
 
@@ -13,7 +13,7 @@ four shared Malice features, from the pinned Monsters book.
   no incomplete/unresolved outcomes. It needs only the clean pinned Compendium, not generated Rules assets or network access.
 - `pnpm foes:compare --fetch` retrieves the explicitly pinned Steel Cauldron generated JSON into
   `.playtest/steel-cauldron/<revision>/`. `pnpm foes:compare` reuses the recorded cache and verifies its
-  revision/digests. Both write `docs/build/evidence/V27-steel-cauldron.json` and exit unsuccessfully
+  revision/digests. Both write `docs/build/evidence/V30-steel-cauldron.json` and exit unsuccessfully
   for missing, ambiguous, erroneous or unresolved outcomes. Use `SALIENT_FOE_COMPARISON_CACHE` and
   `SALIENT_FOE_COMPARISON_REPORT` for other local paths. External content is comparison evidence only;
   it is never imported into application data. Ordinary tests use synthetic counterparts, offline.
@@ -92,3 +92,21 @@ All initial rows have explained differences; this is not a claim of byte equalit
 certification. Both sources can share upstream errors. The report covers generated data, not the live
 Steel Cauldron renderer, encounter calculations or either tool's engine execution. Expand coverage in
 another bounded slice, retaining missing/unresolved outcomes in the denominator.
+
+## V30 coverage and batch selection
+
+The current package covers 20 first/second-echelon undead, 44 independently addressable abilities,
+24 traits, and six features across two shared Malice records. V27's exact immutable edition remains
+available and all its logical objects are unchanged in the expanded package.
+
+`scripts/foes/batches.ts` selects source batches and records verified external counterpart identities.
+Each batch names its monsters, shared Malice and prior-Malice dependencies. Adding a batch requires
+explicit child identity allocations, source review and complete comparison evidence. The importer
+links monsters to their own batch's Malice; level-four Malice links back to level-one Malice.
+The full generator refuses missing supporting records. Small importer test fixtures may omit them.
+
+The current comparison report is selected by `COMPARISON_REPORT` in the batch module. Historical
+V27 evidence remains attached to its original edition. All 22 current parent records have explained
+comparison outcomes. Three level-four minion counterparts omit the printed four-minion quantity;
+our source-derived `ev` retains both amount 6 and quantity 4. Explicit conflicting quantities or
+amounts still fail comparison. No new source corrections were needed.

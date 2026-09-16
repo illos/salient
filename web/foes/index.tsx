@@ -58,7 +58,7 @@ export function FoeView({
           className="text-sm font-medium text-primary underline underline-offset-4 mt-4"
           onClick={() => onFollow(id)}
         >
-          Undead Malice
+          {resolveFoe(pack, foeReference(pack, id))!.object.name}
         </button>
       ))}
       {object.diagnostics.map(d => (
@@ -174,10 +174,11 @@ export default function FoesPage() {
         </a>
         <ThemeSwitch />
       </header>
-      <p className="eyebrow">Foes · First-echelon undead</p>
+      <p className="eyebrow">Foes · Undead</p>
       <h1 className="mb-3 text-4xl font-bold">The restless dead</h1>
       <p className="mb-8 text-muted-foreground">
-        Explore 11 stat blocks, their abilities and traits, and shared Undead Malice.
+        Explore {pack.objects.filter(o => o.kind === 'statblock').length} stat blocks, their
+        abilities and traits, and shared Undead Malice.
       </p>
       <div className="mb-6 grid gap-4 md:grid-cols-4">
         <label>
