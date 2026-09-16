@@ -152,3 +152,93 @@ to source, with visible progress.
 Review validation is limited to the documentation diff and its consistency with the requirement;
 the previous full-check baseline was not rerun. The original implementation acceptance statuses
 above remain unchanged; amended check 10 strengthens the future evidence gate.
+
+## Per-ability finalization review — 2026-09-16
+
+Reviewer: `v26_spec_review`, independent of the author. Reviewed the uncommitted finalization of
+`docs/build/V26-compiled-ability-effects.md` and the new `docs/build/V26-ability-designs.md`,
+including the author's repairs below. The specification branch remains at `be5995b` before this
+documentation change; the integration audit reads main `14b7536` without changing either checkout.
+
+### Independent design verdict: pass after repairs
+
+No remaining blocking findings. Reviewed design first, then pinned-source mechanics; rechecked
+the repaired scope and compatibility behavior before issuing the final rules verdict.
+
+The exact envelope, bounded potency-remainder syntax, and compiler/compatibility result isolation
+are implementable. Full-source checks still prevent silently admitting extra sections, target
+restrictions or effects. Legacy records retain their existing reads and manual controls; only
+compiled records gain occurrence-addressed effects. The spec preserves current authority,
+minimum-input policy, sequential correction/history and source audiences.
+
+Independently inspected the integrated manifest and all 48 standalone entries' targets, roll
+structures and additional sections, plus the existing Goblin source. The report populations of
+48 standalone entries, 25 kits and two Goblin abilities are consistent with main. Structural
+matching and live grant availability are separate: six compiled live abilities, four compatibility
+live regressions, and three compile-only comparisons. The final audit must still be repeated
+after rebase and against actual implementation changes; this is not a future-code certification.
+
+The appendix gives individual source mappings, accepted inputs, expected arithmetic/state and
+live proof requirements. Brutal Slam explicitly covers lethal damage, correction, manual disposition
+and sequential undo/redo. Viscous Fire exercises integrated V25 modifiers and typed damage.
+The final design requires ten individual live proofs and preserves honest compile-only status
+for Meteoric Introduction, Ray of Agonizing Self-Reflection and Spinecleaver Axe.
+
+#### Findings resolved during this review
+
+1. **Blocking, medium — unavailable live fixtures.** The initial Meteoric/Ray designs required
+   legal selection through the integrated wizard. At main `14b7536`,
+   `shared/content/level-one-decisions.ts:396` offers only Bifurcated Incineration and Viscous Fire
+   as Elementalist signatures; `convex/lib/resolve.ts` builds live ability lists from evaluated
+   grants. The repaired appendix makes Meteoric/Ray pure comparisons, records the missing grant
+   prerequisite and requires future live promotion/evidence without expanding V26's character
+   scope. The owning inventory, audit and check 11 now agree. **Resolved.**
+2. **Blocking, medium — overstated compatibility action tracking.** LF1 initially implied
+   tracked triggered-action use. Main's `convex/lib/resolve.ts:98` does not normalize printed
+   `Triggered` to `triggered action`; the recorded path in
+   `convex/lib/abilityOperations.ts:932` therefore skips allowance tracking. LF1 now requires
+   the existing manual action-type warning, unchanged allowance, no ability-result row and no
+   new occurrence/disposition control. No incidental action-type fix is introduced. **Resolved.**
+
+### Pinned-source rules verdict: pass
+
+All research used local Compendium `fb83a789da8f0327a389c277a0c790b1648d5810` only.
+Rechecked the expanded appendix against full ability entries and the general rules named in
+its shared source contract. Prior source findings above remain applicable to unchanged claims.
+
+| Ability/case | Independently checked expected result and source basis |
+| --- | --- |
+| Brutal Slam | Printed 3/6/9 + Might, Mountain +0/+0/+4 and size bonus give damage 5/8/15 and push 2/3/5. Tier 3 retains movement after lethal damage. BS7 keeps accepted dice and correctly changes effective damage 8→5, health 7→10 and allowance 3→2 with double bane. |
+| Spear Charge | Goblin Warrior's printed constant damage is 3/4/5, giving H health 27/26/25. Temporary Stamina 3 absorbs the first 3 of tier-2 damage 4, leaving ordinary Stamina 29. No characteristic or roll bonus is added to damage. |
+| Bury the Point | Printed damage 5/6/7, cost 2 Malice and tier-specific Might thresholds 0/1/2 are retained. H's Might 2 satisfies none of those strict inequalities, but the app deliberately leaves potency unexecuted. Disposition does not apply damage, bleeding or saves. |
+| Melee Free Strike | Printed 2/5/7 plus characteristic 2 and applicable Mountain bonuses gives 4/7/13 damage. The asymmetric roll/damage-choice fixture correctly yields total 16 and damage 7. |
+| Ranged Free Strike | Printed 2/4/6 plus characteristic 2 gives 4/6/8. Free Strike and Kits explicitly support improvised ranged use with no kit bonus. |
+| Pain for Pain | Printed 3/5/13 plus characteristic 2 gives base 5/7/15; kit bonuses are already included. The history-conditioned extra damage remains explicit manual work, so a true predicate does not become a claim of fully resolved damage. |
+| Out of the Way! | Printed 3/5/8 + Might and Mountain give 5/7/14; cost 3 Ferocity. Slide 2/3/5 and the linked movement/damage rider remain manual rather than ordinary push. |
+| Thunder Roar | Dice 7+6 plus Might 2 give base total 15. One edge yields tier 3 and 13+4=17; double bane yields tier 1 and 6; unmodified tier 2 gives 9. G health is -2/9/6, with one cost 5 and manual push/order consequences. Negative saved foe health follows the existing R04 arithmetic interpretation; Slain is the relevant status. |
+| Lines of Force | Full Trigger, Effect and optional Spend 1 Ferocity support manual replacement/source/distance choices. No power roll or fixed spend is printed. The recorded-action limitation is identified as existing app behavior, not a source rule. |
+| Meteoric Introduction, pure | Printed 3/5/8 + Reason 2 plus Enchantment of Destruction 1 gives 6/8/11. Fire: Acolyte of Fire does not apply without Fire; size-based movement bonus does not apply without Weapon. Push remains 2/3/4. |
+| Viscous Fire | Printed 2/5/7 + Reason 2 plus both applicable +1 features gives 6/9/11 fire damage. VF2 leaves G at 6 and has push 3. Known fire immunity 5 reduces 9 to 4, leaving a Stamina-15 target at 11; immunity does not erase the movement instruction. |
+| Ray, pure | Printed 2/4/6 + Reason 2 plus Enchantment of Destruction 1 gives 5/7/9 corruption damage. Fire bonus does not apply. WEAK/AVERAGE/STRONG and slowed/save wording remain verbatim unsupported clauses; no invented potency values. |
+| Spinecleaver, compile-only | Axe's printed damage 2/4/5 and push 1/3/4 retain minion targeting/captain context. No live ordinary-creature substitution or minion automation is implied. |
+
+Additional source passages read for this finalization: both common weapon free strikes;
+`feature/common/main-actions/free-strike.md`; Lines of Force; the three Elementalist abilities;
+Enchantment of Destruction; Fire: Acolyte of Fire; Elementalist Abilities; Kits' Improvised Weapons;
+Power Roll Outcomes; Damage Immunity; Temporary Stamina; Stamina; Fury's starting statistics,
+Growing Ferocity and Primordial Strength. All paths are under the appendix's pinned local source.
+The prepared Berserker thresholds do not add damage to these tested creature strikes; their
+unexecuted movement/resource consequences stay manual.
+
+### Acceptance and evidence status
+
+Checks 1–10 remain **not verified as implemented**. Their newly detailed cases are coherent
+future acceptance requirements. Check 11 is likewise **not verified as implemented**; its design
+now distinguishes Viscous Fire's live test from Meteoric/Ray's pure tests and preserves V25 facts.
+Source arithmetic above is independently verified specification evidence, not observed app output.
+
+Inspected main's damage-modifier projection, keyword eligibility, target immunity projection,
+ability grants and recorded-action path. No gameplay code, backend, generated screenshot or
+persisted V26 record was created or tested. No full application suite was rerun. Earlier baseline
+logs retain their original scope and do not validate main's V25 changes or future V26 behavior.
+All ten in-app proof sets and all implementation checks remain pending; no playtest pass is claimed.

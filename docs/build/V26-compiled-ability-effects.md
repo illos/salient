@@ -9,7 +9,7 @@
 | Rules review | required |
 | Depends on | S01, S02, A01, A02, A04, A05, A06, A09 |
 | Unblocks | Incremental ability grammar, condition effects and later timed resource effects |
-| Status | see `STATUS.md`; specification proposal, implementation not started |
+| Status | see `STATUS.md`; per-ability specification complete; independent design and rules review pass; implementation not started |
 
 ## Goal
 
@@ -77,8 +77,9 @@ responses or dependent movement consequences, so V04 is not a hard dependency he
 not needed: Spinecleaver is a compile-only comparison, never an ordinary live foe fixture.
 
 V22 (`9d50b47`, on `slice/V22`) is assessment evidence, not an unmerged code dependency. V23 foe
-coverage and V25 character build work are concurrent consumers. No branch depends on their unmerged
-implementations. Coordinate content/snapshot adapters and derived-fact projections before edits.
+coverage is a concurrent consumer. V25 character work is integrated on main `14b7536` at this design
+audit; rebase before implementation and preserve its actor damage modifiers, target immunities and
+resource-waiver behavior. Coordinate content/snapshot adapters and derived-fact projections before edits.
 
 ## Proposed implementation contract
 
@@ -90,7 +91,8 @@ must keep their current damage semantics and source boundary; include them in ad
 coverage even if their complex effects remain manual. Normalize display markup only.
 
 The bounded automatic grammar is one power roll with three tiers, supported current damage
-expressions, and a following nonnegative integer `push N`. Preserve current characteristic choices,
+expressions, optionally followed by a nonnegative integer `push N` or the bounded post-damage
+potency-condition remainder below. Preserve current characteristic choices,
 fixed monster roll bonuses, damage types and kit-bonus inclusion metadata. Multiple damage
 components, multiple rolls, nested alternatives and additional target subjects are unsupported.
 Do not discard a second roll, unnamed paragraph, extra table, trigger or Effect section. Only
@@ -116,7 +118,11 @@ Unknown text cannot be assumed independent. If its effect on payment, targeting,
 cannot be established, the affected automation stays unavailable and the source remains manually
 usable. A manual-completion marker does not certify that an unknown modifier had no effect.
 Support the current basic damage-plus-potency-condition remainder as a source-grounded example of
-post-damage work without executing the condition. Any dependency classification must be grounded in
+post-damage work without executing the condition: a characteristic letter, `<`, a signed integer or
+symbolic `WEAK`/`AVERAGE`/`STRONG`, an optional comma, then `bleeding` or `slowed` and `(save ends)`.
+This recognizes ordering and preserves the entire clause as Unsupported; it does not evaluate the
+inequality, derive potency, apply a condition or schedule saves. Other remainder shapes stay
+unsupported unless separately designed. Any dependency classification must be grounded in
 the syntax/general rules and tested with counterexamples, never chosen from an ability's name.
 
 For complex abilities already using A05's explicit manual remainder, preserve their established
@@ -126,6 +132,30 @@ automation. It must not be a catch-all bypass for malformed/new source accepted 
 Only the unchanged existing sourced definitions are eligible for that compatibility path; a
 changed body/projection or source revision must be diagnosed and cannot silently fall back.
 Record this boundary in the report; progressively removing it is later work.
+
+#### Runtime migration boundary
+
+New compiled execution requires the fully checked standalone or ordinary-monster envelope above,
+an existing single-target shape (`One creature`, `One creature or object`, or the equivalent
+already-supported one-ally/enemy shape), and no additional mechanical section, trigger, restricted
+target predicate, extra subject, area or second roll. Printed object targeting is retained but adds
+no new object runtime. An omitted or contradictory section is a diagnostic, never harmless by default.
+
+Keep the **kit-signature adapter** on its unchanged compatibility execution path for this slice;
+Pain for Pain remains an individually designed regression. Common creature Free Strike, Catch Breath,
+Defend and Aid Attack keep their existing special/recorded paths. New occurrence IDs and effect-list
+controls apply to newly compiled results only. Unchanged compatibility results retain their existing
+manual-clause storage/reads/operations; historical results never gain occurrences by being read.
+Named regression abilities test that boundary without converting every manual ability to a new format.
+
+This is structural eligibility, not rules dispatch by name. At the audited integrated snapshot the
+structurally matching set has eight abilities, but only six are currently selectable for live
+compiled execution: **Brutal Slam, Spear Charge, Bury the Point, Melee Weapon Free Strike,
+Ranged Weapon Free Strike and Viscous Fire**. Meteoric Introduction and Ray of Agonizing
+Self-Reflection match the grammar but lack a current wizard grant option; retain them as compile-only
+comparisons. The four named compatibility regressions bring the live-proof inventory to ten.
+New qualifying content must be added to that inventory before its behavior changes; do not silently
+migrate it because a grammar check passes.
 
 ### 2. Definition to outcome
 
@@ -178,7 +208,7 @@ compiled records retain their existing read path; do not compile them opportunis
 Store only the selected
 used ability in public source records, not a whole private monster stat block.
 
-Extend existing ability-result reads and cards with this small effect list. All controls use the
+Extend compiled ability-result reads and cards with this small effect list. All controls use the
 registered operations and equivalent headless access. Extend `ability.resolved` to identify a
 specific effect occurrence; retain old text/target calls only when unambiguous. A repeated clause
 must not mark another occurrence resolved. Preserve existing Director authority and history limits.
@@ -196,10 +226,12 @@ manual dispositions with the existing state/history branch, without compiling, r
 
 ### 4. Evidence that this scales beyond a demonstration
 
-Generate a deterministic JSON/Markdown report over the 22 standalone ability entries in the current
-S01 snapshot, every embedded ability of its Goblin Warrior, and the named compile-only Spinecleaver
-example. Report the actual discovered denominator if integrated content has expanded before build;
-record snapshot identity and keep standalone, embedded and test-only populations separate.
+Generate a deterministic JSON/Markdown report over the integrated snapshot's standalone ability
+entries, embedded Goblin Warrior abilities, kit signatures, and named compile-only Spinecleaver
+example. Main `14b7536` has **48 standalone entries, two Goblin Warrior abilities and 25 kit
+signatures**; the old spec baseline had 22 standalone entries. Report the actual discovered denominator
+if content changes before build; record snapshot identity and keep standalone, embedded, kit and
+test-only populations separate. Recognition of a kit fragment does not migrate its runtime path.
 
 For each ability report envelope recognition, recognized nodes, executable stages, unresolved
 clauses and missing prerequisites. Count fully/partially/unrecognized parsing separately from
@@ -217,6 +249,19 @@ support ledger. The same source mutation tests must prove no name-specific handl
   commands/scenarios are specified below.
 - Dated implementation notes in owning engine/rules-language/roll-resolution specs: the actual
   supported grammar, legacy/manual boundary, versions and remaining unsupported behavior.
+
+### Build sequence
+
+1. Rebase onto integrated main, re-run the affected-content comparison, and establish the isolated
+   development backend before backend changes. Preserve V25 facts and unchanged operation contracts.
+2. Implement pure envelope checks/nodes and deterministic reporting; test source mutations and
+   independent expected values before wiring live execution.
+3. Integrate compiled results through existing damage, payment, journaling and history operations;
+   implement occurrence-addressed disposition without changing compatibility records.
+4. Render source-linked effects/calculations in the log and expose identical shared/headless reads.
+5. Execute all ten per-ability in-app designs’ required cases, retain screenshots and state readback, then perform
+   required independent implementation/rules reviews. Do not report slice completion while evidence
+   is missing. Integration/runtime update follows the current main build process when assigned.
 
 ## Acceptance checks
 
@@ -276,12 +321,20 @@ These are **future implementation acceptance checks**, not results from writing 
     failed live evidence blocks implementation acceptance. No claim of full-encounter automation
     or long-session usability.
 
+11. **Integrated content and build facts.** Execute Viscous Fire in-app and the compile-only
+    Meteoric Introduction/Ray cases through the pure compiler/resolver. Their missing live grant
+    prerequisite must be explicit; do not expand the wizard or manufacture granted abilities. Preserve
+    V25's evaluated Magic/Fire bonuses and target immunities, damage types, and unchanged optional
+    spend/resource behavior. Compare generated eligibility and live grant availability with the
+    inventory of ten live abilities and three compile-only comparisons; any additional behavioral
+    change requires its own completed design and live evidence.
+
 ## Ability design and playtest evidence
 
 User-confirmed workflow, 2026-09-16: follow the
 [per-ability gate](README.md#engine-ability-design-and-playtest-evidence). This specification is a
-shared design foundation. Before implementation, finish the source-to-behavior record for each
-candidate, including exact sections/tiers and expected scenario outputs. Every ability newly built,
+shared design foundation. The [per-ability design appendix](V26-ability-designs.md) records exact
+source sections/tiers, input facts and expected scenario outputs. Every ability newly built,
 migrated or behaviorally changed by the shared compiler/adapter must be enumerated individually;
 the report population is not automatically the implementation scope.
 
@@ -294,22 +347,28 @@ This fixes the intended examples, not an ability-name dispatch rule or permissio
 abilities affected by shared changes. Add any such abilities individually before changing their
 behavior; reconcile against current integrated content and adapters before implementation.
 
-The inventory uses source paths relative to `vendor/steel-compendium/en/unified/md/` at the pin in
-Rules research. All live evidence is **pending**. We are completing designs one at a time, starting
-with Brutal Slam; acceptance of the list does not mark the other designs complete.
+The user resumed specification work after the checkpoint. The designs below are now individually
+specified; they remain engineering designs grounded in source, not new user rules rulings.
+The integrated-content audit additionally identified Meteoric Introduction, Viscous Fire and Ray of
+Agonizing Self-Reflection as matching the same grammar. Viscous Fire is additionally affected live;
+Meteoric and Ray remain compile-only because current wizard choices cannot grant them. These are
+included under the accepted affected-ability audit requirement. All live evidence is **pending**.
 
 | Ability | Source / design | Designed | Built | In-app playtested / evidence |
 | --- | --- | --- | --- | --- |
-| Brutal Slam | `feature/ability/fury/level-1/brutal-slam.md`; checks 1, 7, 8: damage, push allowance, manual movement, correction/history. | Shared contract and numeric scenario specified. | No | Pending; no screenshots. |
-| Spear Charge | `monster/goblin/statblock/goblin-warrior.md`, Spear Charge; check 2: embedded damage. | Contract specified; finish actor/target, dice and expected state cases. | No | Pending; no screenshots. |
-| Bury the Point | Same stat block, Bury the Point; check 2: supported damage and explicit manual potency/condition/save remainder. | Contract specified; finish per-case calculations and log expectations. | No | Pending; no screenshots. |
-| Thunder Roar | `feature/ability/fury/level-1/thunder-roar.md`; check 6: compatibility damage and manual ordered area movement. | Boundary specified; finish live regression cases. | No V26 change | Pending; no screenshots. |
-| Out of the Way! | `feature/ability/fury/level-1/out-of-the-way.md`; check 6: compatibility damage and manual slide/rider. | Boundary specified; finish live regression cases. | No V26 change | Pending; no screenshots. |
-| Melee Free Strike | `feature/ability/common/melee-weapon-free-strike.md`; check 3: preserve characteristic choices and damage arithmetic. | Per-ability cases pending. | No V26 change | Pending; no screenshots. |
-| Ranged Free Strike | `feature/ability/common/ranged-weapon-free-strike.md`; check 3: preserve characteristic choices and damage arithmetic. | Per-ability cases pending. | No V26 change | Pending; no screenshots. |
-| Pain for Pain | `kit/mountain.md`, Pain for Pain; check 3: preserve signature bonus inclusion and explicit manual rider. | Per-ability cases pending. | No V26 change | Pending; no screenshots. |
-| Lines of Force | `feature/ability/fury/level-1/lines-of-force.md`; preserve source and existing manual triggered-action behavior. | Per-ability cases pending. | No V26 change | Pending; no screenshots. |
-| Spinecleaver Axe | `monster/goblin/statblock/goblin-spinecleaver.md`, Axe; check 2. | Compile-only comparison; live minion design deferred to V02. | No live implementation | Deferred; cannot count as a built or playtested ability. |
+| Brutal Slam | [Source, design and BS1–BS8](V26-ability-designs.md#brutal-slam) | Complete | No | Pending; no screenshots. |
+| Spear Charge | [Source, design and SC1–SC4](V26-ability-designs.md#spear-charge) | Complete | No | Pending; no screenshots. |
+| Bury the Point | [Source, design and BP1–BP5](V26-ability-designs.md#bury-the-point) | Complete | No | Pending; no screenshots. |
+| Melee Free Strike | [Source, design and MF3](V26-ability-designs.md#melee-free-strike) | Complete | No V26 change | Pending; no screenshots. |
+| Ranged Free Strike | [Source, design and RF3](V26-ability-designs.md#ranged-free-strike) | Complete | No V26 change | Pending; no screenshots. |
+| Pain for Pain | [Source, design and PP3](V26-ability-designs.md#pain-for-pain) | Complete | Compatibility retained; unverified for V26 | Pending; no screenshots. |
+| Out of the Way! | [Source, design and OW2](V26-ability-designs.md#out-of-the-way) | Complete | Compatibility retained; unverified for V26 | Pending; no screenshots. |
+| Thunder Roar | [Source, design and TR1](V26-ability-designs.md#thunder-roar) | Complete | Compatibility retained; unverified for V26 | Pending; no screenshots. |
+| Lines of Force | [Source, design and LF1](V26-ability-designs.md#lines-of-force) | Complete | Compatibility retained; unverified for V26 | Pending; no screenshots. |
+| Meteoric Introduction | [Source and pure MI2](V26-ability-designs.md#compile-only-comparison-meteoric-introduction) | Complete for compilation | No V26 change | Deferred; no current live grant option. |
+| Viscous Fire | [Source, design and VF2](V26-ability-designs.md#additional-affected-ability-viscous-fire) | Complete | No V26 change | Pending; no screenshots. |
+| Ray of Agonizing Self-Reflection | [Source and pure RA2](V26-ability-designs.md#compile-only-comparison-ray-of-agonizing-self-reflection) | Complete for compilation | No V26 change | Deferred; no current live grant option. |
+| Spinecleaver Axe | [Source and compile-only comparison](V26-ability-designs.md#compile-only-comparison-spinecleaver-axe) | Complete for compilation; live minion design deferred to V02 | No live implementation | Deferred; cannot count as built or playtested. |
 
 For each live case, show the ability being used through the rendered table, then the resulting
 source/result log card. Link the exact source clause and general-rule passages to a caption with
@@ -329,6 +388,33 @@ event IDs, pass/fail and limitations. Reconcile the final inventory against adap
 generated report before review; no ability may inherit a playtest pass from another ability merely
 because they share grammar. Reuse lower-level mechanics tests without duplicating them per ability.
 
+### Affected-ability audit — 2026-09-16
+
+Read-only audit against integrated main `14b7536`, independently checked by `v26_scope_audit`:
+48 standalone abilities, 25 kit signatures and the Goblin Warrior's two abilities are present in
+the adapter input population. The design appendix covers eight structural matches, of which six
+have current live grants, and four named compatibility regressions. Main's
+`shared/content/level-one-decisions.ts` offers Bifurcated Incineration and Viscous Fire as the two
+Elementalist signature choices; Meteoric Introduction and Ray cannot currently be granted by the
+wizard. These two remain compile-only alongside Spinecleaver. Do not change character builds to
+turn compiler coverage into purported live support. Future grant expansion must promote the relevant
+inventory row and supply real in-app proof before reporting that ability supported live.
+
+The remaining standalone entries do not meet the complete runtime envelope: additional Effect
+sections, multiple targets/areas, restricted targeting, triggers or no qualifying damage roll.
+Examples checked: Impaled! restricts the target to the actor's size or smaller; Back! is multitarget;
+Hurl Element's Effect chooses the damage type; Blood for Blood!'s additional mechanics affect damage.
+Do not discard these differences to admit their tier fragments. All 25 kit signatures stay on the
+existing kit execution path; otherwise Bear Claws, Hamstring Shot, Net and Stab, Unbalancing Attack
+and Shield Bash would add affected abilities requiring individual designs and proof.
+
+Shared changes must preserve the nonmigrated definitions' execution, source visibility, costs and
+manual handling. Add differential adapter/result-format regression checks against the integrated
+baseline; a changed behavior or effect control in any excluded ability invalidates its exclusion
+and requires extending this inventory before implementing that change. Reporting a diagnostic in
+the developer support report alone is not a gameplay migration. Re-run this audit after rebase and
+against the final implementation diff; this design audit does not certify a future implementation.
+
 ## Rules research
 
 All paths below are under the pinned local Compendium revision
@@ -347,6 +433,10 @@ All paths below are under the pinned local Compendium revision
 | `monster/goblin/statblock/goblin-warrior.md` | Live ordinary foe and embedded ability format. |
 | `monster/goblin/statblock/goblin-spinecleaver.md` | Compile-only damage/push comparison and retained minion context. |
 | `kit/mountain.md` | Existing fixture +0/+0/+4 melee damage bonuses. |
+
+The [design appendix](V26-ability-designs.md#shared-source-and-fixture-contract) links exact sources
+for free strikes, Lines of Force, the additional Elementalist abilities, their feature bonuses,
+kit inclusion and damage mitigation. Those per-ability sources form part of this slice's rules review.
 
 The default ancestry size 1M is in `en/books/heroes/clean/Draw Steel Heroes.md`, line 1501
 at this pin (read with `git show` in the submodule), and is absent from the extracted unified
@@ -466,3 +556,39 @@ modifiers/immunities before implementation. The parser and engine own a track, n
 No V26 implementation, in-app playtest or screenshot exists. No deployment, merge or runtime change
 was made; this documentation-only checkpoint needs no playable-app update. Earlier review and full
 code-baseline results retain their recorded scope; they do not verify future V26 behavior.
+
+
+### 2026-09-16 — resumed and completed per-ability specification
+
+- User resumed from the checkpoint and requested building out the spec. Finished each ability's
+  source/behavior/input/output/playtest design in [the appendix](V26-ability-designs.md); no V26
+  gameplay implementation or real playtest was performed in this documentation turn.
+- Read current main instructions and audited integrated main `14b7536`. V25 increased standalone
+  content from 22 to 48 and projects damage feature bonuses/immunities into live shared resolution.
+  Independent read-only audit `v26_scope_audit` identified Meteoric Introduction, Viscous Fire and
+  Ray of Agonizing Self-Reflection as matching the grammar. Final independent review found that
+  only Viscous Fire has an integrated live grant option; Meteoric/Ray are compile-only without
+  expanding character builds. Added individual source designs: six live compiled candidates and
+  four unchanged compatibility regressions, ten live total, plus three compile-only comparisons.
+- Specified complete single-target envelope eligibility, numeric/symbolic potency remainder syntax,
+  kit/common-action exclusions, and persisted-format isolation for legacy manual results. Retained
+  source-mutation diagnostics and avoided name-based rules dispatch or silent blanket migration.
+- The specification branch remains based on the pre-V25 baseline; implementation must rebase onto
+  main and repeat the eligibility audit. This work changes only the slice spec, design appendix,
+  review record and tracker. No code, vendor pin, backend, runtime, peer branch or main edit.
+- Chords task-start identity/thread/update checks succeeded with no unread messages. Later MCP
+  calls reported ambiguous provider session; the documented CLI fallback identified this thread
+  correctly and is used for subsequent coordination without supplying a sender identity.
+- `pnpm check-links`: 159 Markdown files pass; `git diff --check`: pass. No code changed, so the
+  earlier full baseline is not rerun or presented as validation of integrated V25 or future V26.
+- Final review caught the unselectable Meteoric/Ray fixture prerequisite and Lines of Force's
+  existing unrecognized `Triggered` usage. Corrected the designs to retain compile-only coverage
+  and the exact manual action-type/unchanged-allowance limitation respectively; no incidental
+  character or triggered-action implementation was added.
+- Final independent design review **pass**, followed by pinned-source rules review **pass**,
+  `v26_spec_review`; see the [finalization review](reviews/V26-spec-review.md). Both fixture findings
+  are resolved. All eleven implementation acceptance checks, persisted effect evidence and actual
+  in-app screenshots remain pending.
+- Design package is ready for implementation after routine rebase/coordination and isolated-runtime
+  setup. Committed on `slice/V26` for lead integration; not merged into main. This documentation-only
+  change has no runtime impact and requires no playable-app update.
