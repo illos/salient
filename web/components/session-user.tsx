@@ -10,7 +10,8 @@ import { useNavigate } from '@tanstack/react-router';
 import { cn } from 'cn';
 import { authClient } from '../auth-client';
 import { THEMES, useTheme, type Theme } from '../theme';
-import { ErrorNotice, errorMessage } from '../ui';
+import { errorMessage } from '../ui';
+import { useToast } from '../toast';
 import { Button } from './ui/button';
 import { ToggleGroup, ToggleGroupItem } from './ui/toggle-group';
 import { Disc } from './disc';
@@ -48,32 +49,28 @@ export function ThemeSwitch({ className }: { className?: string }) {
 /** Signs out through Better Auth and returns to the login page. */
 export function SignOut({ className }: { className?: string }) {
   const navigate = useNavigate();
-  const [error, setError] = useState<string | null>(null);
+  const showError = useToast();
   const [pending, setPending] = useState(false);
   return (
-    <>
-      <Button
-        variant="outline"
-        size="sm"
-        className={className}
-        disabled={pending}
-        onClick={async () => {
-          setPending(true);
-          setError(null);
-          try {
-            const result = await authClient.signOut();
-            if (result.error) throw new Error(result.error.message);
-            await navigate({ to: '/login', search: { next: '/' }, replace: true });
-          } catch (e) {
-            setError(errorMessage(e));
-            setPending(false);
-          }
-        }}
-      >
-        Sign out
-      </Button>
-      <ErrorNotice error={error} />
-    </>
+    <Button
+      variant="outline"
+      size="sm"
+      className={className}
+      disabled={pending}
+      onClick={async () => {
+        setPending(true);
+        try {
+          const result = await authClient.signOut();
+          if (result.error) throw new Error(result.error.message);
+          await navigate({ to: '/login', search: { next: '/' }, replace: true });
+        } catch (e) {
+          showError(errorMessage(e));
+          setPending(false);
+        }
+      }}
+    >
+      Sign out
+    </Button>
   );
 }
 

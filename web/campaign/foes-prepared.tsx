@@ -16,7 +16,7 @@ import { api } from '../../convex/_generated/api';
 import type { Id } from '../../convex/_generated/dataModel';
 import { Button } from '../components/ui/button';
 import { HealthBar } from '../components/health-bar';
-import { ErrorNotice, Loading, SectionHeading, useCommand } from '../ui';
+import { Loading, SectionHeading, useCommand } from '../ui';
 import { RuleLink } from '../rules/link';
 
 function FoeReference({ sourceSnapshot }: { sourceSnapshot: string }) {
@@ -66,7 +66,6 @@ function AddFoe({ campaignId }: { campaignId: Id<'campaigns'> }) {
       ) : (
         <Loading>Loading available foe…</Loading>
       )}
-      <ErrorNotice error={addition.error} />
     </div>
   );
 }
@@ -108,7 +107,6 @@ function FoeChip({
           <X aria-hidden="true" />
         </Button>
       </span>
-      <ErrorNotice error={deletion.error} />
     </li>
   );
 }

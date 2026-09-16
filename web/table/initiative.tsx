@@ -19,7 +19,7 @@ import { useMutation } from 'convex/react';
 import { api } from '../../convex/_generated/api';
 import type { Id } from '../../convex/_generated/dataModel';
 import { Badge } from '../components/ui/badge';
-import { ErrorNotice, useCommand } from '../ui';
+import { useCommand } from '../ui';
 import { CommandButton, type Encounter } from './setup-card';
 
 type Group = Encounter['groups'][number];
@@ -116,7 +116,6 @@ function MoveControl({
           ))}
         <option value="new">New group at the bottom</option>
       </select>
-      <ErrorNotice error={command.error} />
     </label>
   );
 }

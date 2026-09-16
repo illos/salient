@@ -4,9 +4,12 @@
  * combat-table-*.png; docs/build/V21-desktop-layout-fidelity.md item 5): a small disc at the
  * left (ink for the viewer's own creature, red for a foe, grey otherwise), the actor's name in
  * bold with the time at the right, the recorded description in grey beneath, dice as chips with
- * the total filled and the tier in brick red, and the existing correction / rewind affordance as
- * a small ghost button. Session and combat markers render as a centred pill. Presentation only:
- * every number shown here is read from the recorded event; nothing is computed.
+ * the total filled and the tier in brick red, and the history affordance as a small ghost button:
+ * Undo / Rewind on the entry the viewer's undo would act on, and Redo on the undone entry their
+ * redo would restore (V29 item 1 gave Redo the same inline placement Undo already had, so a
+ * player keeps both after the Director's toolbar moved into the settings pop-up). Session and
+ * combat markers render as a centred pill. Presentation only: every number shown here is read
+ * from the recorded event; nothing is computed.
  *
  * Owning specifications: docs/table-spec.md#game-log-and-chat-scope,
  * #confirmed-action-and-log-contract, #undo-permissions-and-proposed-campaign-control.
@@ -20,7 +23,7 @@ import { Pill } from '../components/pill';
 import { EventRuleLinks } from '../rules/event-links';
 import { readableRuleText } from '../rules/reference';
 import { CommandButton } from './setup-card';
-import { undoCommand, type HistoryStatus } from './history-controls';
+import { redoCommand, undoCommand, undoLabel, type HistoryStatus } from './history-controls';
 import { AbilityCard, manualClausesOf, type AbilityResult } from './targeting';
 
 export type LogEvent = FunctionReturnType<typeof api.events.list>['events'][number];
@@ -198,6 +201,7 @@ export function LogEntry({
   event,
   history,
   undoTarget,
+  redoTarget,
   result,
   director,
   running,
@@ -208,6 +212,8 @@ export function LogEntry({
   history: HistoryStatus | undefined;
   /** The event the viewer's Undo / Rewind would act on, from `history.status`. */
   undoTarget: string | undefined;
+  /** The undone event the viewer's Redo would restore, from `history.status`. */
+  redoTarget: string | undefined;
   result: AbilityResult | undefined;
   director: boolean;
   running: boolean;
@@ -278,7 +284,17 @@ export function LogEntry({
                 <CommandButton
                   campaignId={campaignId}
                   text={undoCommand(history.role, event.id)}
-                  label={history.role === 'director' ? 'Rewind' : 'Undo'}
+                  label={undoLabel(history.role)}
+                  variant="ghost"
+                />
+              </span>
+            )}
+            {history && event.id === redoTarget && (
+              <span className="opacity-0 transition-opacity duration-(--motion-fast) group-focus-within/entry:opacity-100 group-hover/entry:opacity-100">
+                <CommandButton
+                  campaignId={campaignId}
+                  text={redoCommand(event.id)}
+                  label="Redo"
                   variant="ghost"
                 />
               </span>

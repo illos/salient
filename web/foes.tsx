@@ -3,7 +3,7 @@ import { useMutation, useQuery } from 'convex/react';
 import { api } from '../convex/_generated/api';
 import type { Id } from '../convex/_generated/dataModel';
 import { Button } from './components/ui/button';
-import { ErrorNotice, SectionHeading, useCommand } from './ui';
+import { SectionHeading, useCommand } from './ui';
 import { RuleLink } from './rules/link';
 
 function FoeReference({ sourceSnapshot }: { sourceSnapshot: string }) {
@@ -55,7 +55,6 @@ function DirectorFoe({
           Remove
         </Button>
       </div>
-      <ErrorNotice error={deletion.error} />
     </div>
   );
 }
@@ -92,7 +91,6 @@ function AddFoe({ campaignId }: { campaignId: Id<'campaigns'> }) {
           Loading available foe…
         </p>
       )}
-      <ErrorNotice error={addition.error} />
     </div>
   );
 }

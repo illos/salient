@@ -22,7 +22,7 @@ import { HealthBar } from '../components/health-bar';
 import { Badge } from '../components/ui/badge';
 import { Button } from '../components/ui/button';
 import { RuleLink } from '../rules/link';
-import { ErrorNotice, Loading, useCommand } from '../ui';
+import { Loading, useCommand } from '../ui';
 import { AbilityPanel } from './targeting';
 import { TargetReticle } from './roster-card';
 
@@ -66,7 +66,6 @@ export function QuickAction({
       >
         {label}
       </Button>
-      <ErrorNotice error={command.error} />
     </span>
   );
 }
@@ -106,7 +105,6 @@ export function AdjustAction({
       >
         Edit
       </Button>
-      <ErrorNotice error={command.error} />
     </span>
   );
 }
@@ -169,7 +167,6 @@ export function ConditionControls({
           </option>
         ))}
       </select>
-      <ErrorNotice error={command.error} />
     </label>
   );
 }
@@ -344,7 +341,6 @@ export function FoeSheet({
         >
           Remove
         </Button>
-        <ErrorNotice error={deletion.error} />
       </div>
     </article>
   );

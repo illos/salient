@@ -7,7 +7,7 @@ import { api } from '../../convex/_generated/api';
 import type { Id } from '../../convex/_generated/dataModel';
 import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
-import { ErrorNotice, SectionHeading, useCommand } from '../ui';
+import { SectionHeading, useCommand } from '../ui';
 import { RuleLink } from '../rules/link';
 import { readableRuleText } from '../rules/reference';
 import { CommandButton } from './setup-card';
@@ -128,7 +128,6 @@ function VictoryAward({
       >
         Confirm Victory award
       </Button>
-      <ErrorNotice error={command.error} />
     </fieldset>
   );
 }

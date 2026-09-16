@@ -20,7 +20,7 @@ import { useMutation } from 'convex/react';
 import { api } from '../../convex/_generated/api';
 import type { Id } from '../../convex/_generated/dataModel';
 import { Button } from '../components/ui/button';
-import { ErrorNotice, useCommand } from '../ui';
+import { useCommand } from '../ui';
 import { InitiativeGroups, sideName } from './initiative';
 import type { Encounter } from './setup-card';
 
@@ -129,7 +129,6 @@ function Segment({
           }
         />
       </button>
-      <ErrorNotice error={command.error} />
     </li>
   );
 }

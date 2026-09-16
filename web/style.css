@@ -311,6 +311,65 @@
     overscroll-behavior: contain;
     padding: 1.5rem;
   }
+  /* Transient failure notices, above every other layer (web/toast.tsx, V29 item 2). The bottom
+     offset clears the table's pinned command line so a toast never covers a control. */
+  .toast-viewport {
+    position: fixed;
+    z-index: 90;
+    right: 1rem;
+    bottom: 5.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: min(28rem, calc(100vw - 2rem));
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    /* The region is mounted for the life of the app so it is a live region before a modal opens;
+       empty it must neither draw nor take a click. */
+    pointer-events: none;
+  }
+  .toast-viewport:empty {
+    display: none;
+  }
+  .toast {
+    pointer-events: auto;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    padding: 0.75rem 0.75rem 0.75rem 1rem;
+    border: 1px solid var(--destructive);
+    border-radius: 0.5rem;
+    background: var(--popover);
+    color: var(--destructive);
+    box-shadow: 0 24px 80px rgb(0 0 0 / 30%);
+  }
+  .toast-message {
+    flex: 1;
+    min-width: 0;
+    font-size: 0.875rem;
+    line-height: 1.35;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+  .toast-dismiss {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    padding: 0;
+    border: 0;
+    border-radius: 0.25rem;
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+    transition: background-color var(--motion-fast);
+  }
+  .toast-dismiss:hover {
+    background: var(--muted);
+  }
   /* The session shell: a full-viewport frame whose panes scroll independently. */
   .session-shell {
     display: grid;

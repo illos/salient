@@ -17,7 +17,7 @@ import type { Id } from '../../convex/_generated/dataModel';
 import { Badge } from '../components/ui/badge';
 import { Button } from '../components/ui/button';
 import { PaneHeading } from '../components/pane-heading';
-import { ErrorNotice, useCommand } from '../ui';
+import { useCommand } from '../ui';
 import { CommandButton, type Encounter } from './setup-card';
 import { TurnControls } from './initiative';
 import { VoidCard } from './void-card';
@@ -162,7 +162,6 @@ function AddFoe({ campaignId, running }: { campaignId: Id<'campaigns'>; running:
           <PlusIcon aria-hidden />
         </Button>
       </div>
-      <ErrorNotice error={addition.error} />
     </div>
   );
 }

@@ -1,22 +1,27 @@
 // SPDX-License-Identifier: GPL-3.0-only
 /**
  * SettingsPopup: the Director's table settings in the app-wide card (OverlayCard), opened from
- * the gear in the Foes heading. Three rows in the account-mockup style (label, one-line
- * description, control at the right): Monster health display (Bar / Numerical / Winded),
- * Show Malice, Show test difficulty. Each control submits the same registered operation the
- * pane-body buttons did before V21; the current value is read from `table.roster.settings`,
- * which the server returns to the Director only.
+ * the gear in the Foes heading. Rows in the account-mockup style (label, one-line description,
+ * control at the right): the presentation settings — Monster health display (Bar / Numerical /
+ * Winded), Show Malice, Show test difficulty — then the history group the user moved here in V29,
+ * Rewind / Redo and Enable user undo. Each control submits the same registered operation it did
+ * before it moved; the presentation values are read from `table.roster.settings` and the history
+ * availability from `history.status`, both of which the server returns to the Director only.
  *
- * Owning specifications: docs/table-spec.md#confirmed-combat-layout (settings pop-up decision),
- * #monster-visibility-and-health-display, #malice-visibility (test difficulty visibility: the same campaign settings section).
+ * Owning specifications: docs/table-spec.md#confirmed-combat-layout (settings pop-up decision,
+ * and the 2026-09-16 decision that the history controls live here),
+ * #monster-visibility-and-health-display, #malice-visibility (test difficulty visibility: the same campaign settings section),
+ * #undo-permissions-and-proposed-campaign-control; docs/build/V29-desktop-feedback.md item 1.
  */
-import { useMutation } from 'convex/react';
+import { useMutation, useQuery } from 'convex/react';
 import { cn } from 'cn';
 import { api } from '../../convex/_generated/api';
 import type { Id } from '../../convex/_generated/dataModel';
 import { OverlayCard } from '../components/overlay-card';
-import { ErrorNotice, useCommand } from '../ui';
+import { useCommand } from '../ui';
 import type { Roster } from './foe-sheet';
+import { availability, redoCommand, undoCommand, undoLabel } from './history-controls';
+import { CommandButton } from './setup-card';
 
 type Settings = NonNullable<Roster['settings']>;
 type HealthMode = Settings['healthDisplay'];
@@ -90,7 +95,6 @@ function HealthDisplayControl({
           );
         })}
       </span>
-      <ErrorNotice error={command.error} />
     </span>
   );
 }
@@ -104,7 +108,7 @@ function SettingSwitch({
 }: {
   campaignId: Id<'campaigns'>;
   label: string;
-  setting: 'malice-visible' | 'test-difficulty-visible';
+  setting: 'malice-visible' | 'test-difficulty-visible' | 'user-undo';
   checked: boolean;
 }) {
   const submit = useMutation(api.commands.submit);
@@ -138,8 +142,46 @@ function SettingSwitch({
           )}
         />
       </button>
-      <ErrorNotice error={command.error} />
     </span>
+  );
+}
+
+/**
+ * The Director's Rewind and Redo, with the line describing what each would act on. Availability
+ * and the reasons come from `history.status`; the operations check again when they run, so a
+ * control left open on a stale window cannot bypass a seam.
+ */
+function HistoryRow({ campaignId }: { campaignId: Id<'campaigns'> }) {
+  const view = useQuery(api.history.status, { campaignId });
+  const label = undoLabel(view?.role ?? 'director');
+  const undoText = view ? availability(label, view.undo) : `${label}: reading the history…`;
+  const redoText = view ? availability('Redo', view.redo) : 'Redo: reading the history…';
+  const description = !view
+    ? 'Reading this session’s history…'
+    : view.undo.available && view.undo.target
+      ? `${label}: ${view.undo.target.description}`
+      : `Nothing to ${label.toLowerCase()} · history does not cross ${view.floor.label}.`;
+  return (
+    <SettingRow label={`${label} and redo`} description={description}>
+      <span className="inline-flex items-center gap-2">
+        <span title={undoText}>
+          <CommandButton
+            campaignId={campaignId}
+            text={undoCommand(view?.role ?? 'director')}
+            label={label}
+            disabled={!view?.undo.available}
+          />
+        </span>
+        <span title={redoText}>
+          <CommandButton
+            campaignId={campaignId}
+            text={redoCommand()}
+            label="Redo"
+            disabled={!view?.redo.available}
+          />
+        </span>
+      </span>
+    </SettingRow>
   );
 }
 
@@ -159,7 +201,7 @@ export function SettingsPopup({
       open={open}
       onOpenChange={onOpenChange}
       title="Table settings"
-      eyebrow="Campaign presentation"
+      eyebrow="Presentation and history"
       closeLabel="Close settings"
       className="w-[min(560px,calc(100vw-2rem))]"
     >
@@ -190,6 +232,18 @@ export function SettingsPopup({
             label="Show test difficulty"
             setting="test-difficulty-visible"
             checked={settings.showTestDifficulty}
+          />
+        </SettingRow>
+        <HistoryRow campaignId={campaignId} />
+        <SettingRow
+          label="Enable user undo"
+          description="Players may undo and redo their own recent actions."
+        >
+          <SettingSwitch
+            campaignId={campaignId}
+            label="Enable user undo"
+            setting="user-undo"
+            checked={settings.enableUserUndo}
           />
         </SettingRow>
       </ul>

@@ -1,20 +1,48 @@
 // SPDX-License-Identifier: GPL-3.0-only
 import { useRef, useState } from 'react';
+import { ConvexError } from 'convex/values';
 import { cn } from 'cn';
 import { CommandIdentities } from './command-identities';
+import { useToast } from './toast';
 
+/** Shown when an operation failed but left nothing readable behind. */
+const UNREADABLE_FAILURE = 'The operation failed without a message. Check the log and retry.';
+
+/**
+ * The message a person should read. Convex wraps an operation's own `ConvexError` in a transport
+ * envelope — the `[CONVEX M(...)]` and `[Request ID: ...]` tags, a `Server Error` line, an
+ * `Uncaught ConvexError:` prefix and the server stack. The table needs the operation's message,
+ * so the envelope is stripped; the structured `data` is preferred when the client kept it. The
+ * envelope strips run only on a message that actually carried the Convex tags, so an operation
+ * whose own wording begins with those words keeps it, and a message that is nothing but envelope
+ * falls back rather than raising a blank notice.
+ */
 export function errorMessage(error: unknown): string {
+  if (error instanceof ConvexError) {
+    const data: unknown = error.data;
+    if (typeof data === 'string' && data.trim()) return data.trim();
+  }
   const message = error instanceof Error ? error.message : String(error);
-  return message
+  const wrapped = /\[CONVEX[^\]]*\]/.test(message);
+  let text = message
     .replace(/\[CONVEX[^\]]*\]\s*/g, '')
     .replace(/\[Request ID:[^\]]*\]\s*/g, '')
     .split('\n    at ')[0];
+  if (wrapped)
+    text = text
+      .replace(/^\s*Server Error\s*/i, '')
+      .replace(/^\s*Uncaught (?:Convex)?Error:\s*/i, '');
+  return text.trim() || UNREADABLE_FAILURE;
 }
 
-/** Retain a command identity after an ambiguous failure; a retry cannot duplicate a write. */
+/**
+ * Retain a command identity after an ambiguous failure; a retry cannot duplicate a write. A
+ * failure raises a toast (docs/build/V29-desktop-feedback.md item 2) rather than an error block
+ * beside the control, so a failed operation never moves the layout it failed in.
+ */
 export function useCommand() {
+  const showError = useToast();
   const [pending, setPending] = useState(false);
-  const [error, setError] = useState<string | null>(null);
   const inFlight = useRef(false);
   const commands = useRef(new CommandIdentities());
   async function run(
@@ -24,21 +52,20 @@ export function useCommand() {
     if (inFlight.current) return false;
     inFlight.current = true;
     setPending(true);
-    setError(null);
     const commandId = commands.current.forPayload(payloadKey);
     try {
       await fn(commandId);
       commands.current.acknowledged(payloadKey);
       return true;
     } catch (e) {
-      setError(errorMessage(e));
+      showError(errorMessage(e));
       return false;
     } finally {
       inFlight.current = false;
       setPending(false);
     }
   }
-  return { run, pending, error };
+  return { run, pending };
 }
 
 export function ErrorNotice({ error }: { error: string | null }) {

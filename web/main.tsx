@@ -5,6 +5,7 @@ import { ConvexBetterAuthProvider } from '@convex-dev/better-auth/react';
 import { RouterProvider } from '@tanstack/react-router';
 import { authClient } from './auth-client';
 import { router } from './router';
+import { ToastProvider } from './toast';
 import './style.css';
 
 const url =
@@ -29,7 +30,9 @@ if (!url && !/^\/(?:rules|foes)(?:\/|$)/.test(window.location.pathname)) {
   root.render(
     <React.StrictMode>
       <ConvexBetterAuthProvider client={client} authClient={authClient}>
-        <RouterProvider router={router} />
+        <ToastProvider>
+          <RouterProvider router={router} />
+        </ToastProvider>
       </ConvexBetterAuthProvider>
     </React.StrictMode>,
   );

@@ -14,7 +14,7 @@ import { cn } from 'cn';
 import { Chip } from '../components/chip';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
-import { ErrorNotice, useCommand } from '../ui';
+import { useCommand } from '../ui';
 import { RuleLink } from '../rules/link';
 
 export const CONDITIONS = (
@@ -60,7 +60,6 @@ export function SlashButton({
       >
         {label}
       </Button>
-      <ErrorNotice error={command.error} />
     </span>
   );
 }
@@ -134,7 +133,6 @@ export function AdjustControl({
           Cancel
         </Button>
       </span>
-      <ErrorNotice error={command.error} />
     </form>
   );
 }
@@ -200,7 +198,6 @@ export function ConditionToggles({
           );
         })}
       </ul>
-      <ErrorNotice error={command.error} />
     </div>
   );
 }
@@ -258,7 +255,6 @@ export function CatchBreathButton({
       >
         Catch Breath
       </Button>
-      <ErrorNotice error={command.error} />
     </span>
   );
 }

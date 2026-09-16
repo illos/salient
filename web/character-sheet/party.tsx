@@ -16,7 +16,7 @@ import type { Id } from '../../convex/_generated/dataModel';
 import { Badge } from '../components/ui/badge';
 import { Button } from '../components/ui/button';
 import { Disc } from '../components/disc';
-import { ErrorNotice, Loading, SectionHeading, useCommand } from '../ui';
+import { Loading, SectionHeading, useCommand } from '../ui';
 import { CharacterSheet } from './index';
 
 function Decision({
@@ -47,7 +47,6 @@ function Decision({
       >
         {label}
       </Button>
-      <ErrorNotice error={command.error} />
     </span>
   );
 }

@@ -14,7 +14,7 @@ import { api } from '../../convex/_generated/api';
 import type { Id } from '../../convex/_generated/dataModel';
 import { Badge } from '../components/ui/badge';
 import { Button, buttonVariants } from '../components/ui/button';
-import { ErrorNotice, Eyebrow, useCommand } from '../ui';
+import { Eyebrow, useCommand } from '../ui';
 import { VoidCard } from '../table/void-card';
 
 export type Session = {
@@ -140,7 +140,6 @@ function StartSessionAction({
       >
         {command.pending ? 'Starting…' : 'Start session'}
       </Button>
-      <ErrorNotice error={command.error} />
     </div>
   );
 }
@@ -223,7 +222,6 @@ function SessionActions({
           End session
         </Button>
       </div>
-      <ErrorNotice error={command.error} />
       {closing === session.encounter?.id && session.encounter?.status === 'committed' && (
         <div className="w-full max-w-xl text-left">
           <VoidCard

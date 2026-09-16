@@ -5,7 +5,7 @@ import { api } from '../../convex/_generated/api';
 import type { Id } from '../../convex/_generated/dataModel';
 import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
-import { ErrorNotice, SectionHeading, useCommand } from '../ui';
+import { SectionHeading, useCommand } from '../ui';
 
 export function VoidCard({
   campaignId,
@@ -80,7 +80,6 @@ export function VoidCard({
             Cancel
           </Button>
         </div>
-        <ErrorNotice error={command.error} />
       </CardContent>
     </Card>
   );

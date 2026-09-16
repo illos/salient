@@ -15,7 +15,8 @@ import { useEffect, useRef, useState } from 'react';
 import { useMutation, useQuery } from 'convex/react';
 import { api } from '../../convex/_generated/api';
 import type { Id } from '../../convex/_generated/dataModel';
-import { ErrorNotice, Loading, errorMessage } from '../ui';
+import { Loading, errorMessage } from '../ui';
+import { useToast } from '../toast';
 import { CombatSetupCard } from './setup-card';
 import { CloseoutCard } from './closeout-card';
 import { CommandLine } from './command-line';
@@ -35,11 +36,10 @@ export function TablePage({ campaignId }: { campaignId: Id<'campaigns'> }) {
   const drafts = useQuery(api.targets.drafts, { campaignId });
   const invoke = useMutation(api.commands.invoke);
   const entered = useRef<string | null>(null);
-  const [entryError, setEntryError] = useState<string | null>(null);
+  const showError = useToast();
   useEffect(() => {
     if (!roster || drafts === undefined || entered.current === campaignId) return;
     entered.current = campaignId;
-    setEntryError(null);
     // A09 reload acceptance: discard only this user's unsubmitted targeting. Persisted input
     // cards and gameplay survive. The registered cancellation also works during a pause.
     if (roster.role === 'observer' || !roster.session || !drafts.mine) return;
@@ -48,8 +48,8 @@ export function TablePage({ campaignId }: { campaignId: Id<'campaigns'> }) {
       commandId: crypto.randomUUID(),
       operation: 'selection.cancel',
       arguments: {},
-    }).catch(error => setEntryError(errorMessage(error)));
-  }, [campaignId, roster, drafts, invoke]);
+    }).catch(error => showError(errorMessage(error)));
+  }, [campaignId, roster, drafts, invoke, showError]);
   // Explicit Take turn switches only this user's pane to the chosen hero (local state, never shared).
   const [viewedHeroId, setViewedHeroId] = useState<Id<'characters'> | null>(null);
   if (!roster || !campaign || encounter === undefined)
@@ -84,7 +84,6 @@ export function TablePage({ campaignId }: { campaignId: Id<'campaigns'> }) {
             running={running}
             onTurnTaken={onTurnTaken}
           >
-            <ErrorNotice error={entryError} />
             {encounter && <CombatSetupCard campaignId={campaignId} encounter={encounter} />}
             {encounter?.phase === 'closeout' && <CloseoutCard campaignId={campaignId} />}
           </LogPane>

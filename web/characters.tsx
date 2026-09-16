@@ -18,7 +18,7 @@ import { Badge } from './components/ui/badge';
 import { Button, buttonVariants } from './components/ui/button';
 import { Card, CardContent } from './components/ui/card';
 import { Input } from './components/ui/input';
-import { ErrorNotice, Eyebrow, Field, Loading, SectionHeading, useCommand } from './ui';
+import { Eyebrow, Field, Loading, SectionHeading, useCommand } from './ui';
 import { CharacterSheet } from './character-sheet';
 
 export function CharactersPage() {
@@ -102,7 +102,6 @@ export function CharactersPage() {
                   onChange={event => setName(event.target.value)}
                 />
               </Field>
-              <ErrorNotice error={command.error} />
               <Button className="w-fit" disabled={command.pending} type="submit">
                 {command.pending ? 'Creating…' : 'Create and open the wizard'}
               </Button>
@@ -227,7 +226,6 @@ function SubmitControls({ characterId }: { characterId: Id<'characters'> }) {
           </span>
         )
       )}
-      <ErrorNotice error={command.error} />
     </div>
   );
 }

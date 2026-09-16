@@ -21,7 +21,7 @@ import type { Id } from '../../convex/_generated/dataModel';
 import type { FunctionReturnType } from 'convex/server';
 import { Badge } from '../components/ui/badge';
 import { Button } from '../components/ui/button';
-import { ErrorNotice, useCommand } from '../ui';
+import { useCommand } from '../ui';
 
 type Actor = { kind: 'character' | 'foe'; id: string; name: string };
 type Sheet = FunctionReturnType<typeof api.abilities.sheet>;
@@ -70,7 +70,6 @@ function Command({
       >
         {label}
       </Button>
-      <ErrorNotice error={command.error} />
     </span>
   );
 }
@@ -157,7 +156,6 @@ export function TargetControls({
           {o.actor ? ` (${o.actor.name})` : ''}
         </Badge>
       ))}
-      <ErrorNotice error={command.error} />
     </div>
   );
 }
@@ -307,7 +305,6 @@ export function AbilityPanel({
             label="Cancel"
             variant="ghost"
           />
-          <ErrorNotice error={command.error} />
         </div>
       )}
       <ul className="m-0 list-none p-0">

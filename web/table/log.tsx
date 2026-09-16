@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-only
 /**
- * The centre pane: LOG / RULES / ROLLS tabs, the compact history toolbar, the shared game-log
+ * The centre pane: LOG / RULES / ROLLS tabs and the shared game-log
  * feed in the mockup presentation (session-free-play-director.png, combat-table-*.png; docs/build/
  * V21-desktop-layout-fidelity.md item 5) and the interactive cards index.tsx mounts beneath it.
  * The feed is chronological, oldest at the top, pinned to the newest entry unless the viewer has
@@ -22,7 +22,6 @@ import { OverlayCard } from '../components/overlay-card';
 import { Button } from '../components/ui/button';
 import { useRulesCatalog } from '../rules/content';
 import { Loading } from '../ui';
-import { HistoryControls } from './history-controls';
 import { InitiativeBar } from './initiative-bar';
 import { hasDice, LogEntry, type LogEvent } from './log-entry';
 import type { Roster } from './director-pane';
@@ -94,13 +93,16 @@ export function GameLog({
     ...(sessionId ? { sessionId } : {}),
     ...(before === undefined ? {} : { before }),
   });
-  // A06: which entry the viewer's Undo/Rewind would act on; the operation checks again when run.
+  // A06: which entries the viewer's Undo/Rewind and Redo would act on; each operation checks
+  // again when it runs. V29 moved the Director's toolbar into the table settings pop-up, so these
+  // inline buttons are the log's own history affordance.
   const history = useQuery(api.history.status, { campaignId });
   const list = useRef<HTMLOListElement>(null);
   usePinnedToBottom(list, before === undefined);
   const own = useMemo(() => ownActorIds ?? new Set<string>(), [ownActorIds]);
   if (!result) return <Loading>Loading the log…</Loading>;
   const undoTarget = history?.undo.available ? history.undo.target?.eventId : undefined;
+  const redoTarget = history?.redo.available ? history.redo.target?.eventId : undefined;
   // The read returns newest first; the feed reads oldest to newest.
   const ordered: LogEvent[] = [...result.events].reverse();
   const shown = tab === 'rolls' ? ordered.filter(hasDice) : ordered;
@@ -133,6 +135,7 @@ export function GameLog({
               event={event}
               history={history}
               undoTarget={undoTarget}
+              redoTarget={redoTarget}
               result={results?.find(r => r.eventId === event.id)}
               director={director}
               running={running}
@@ -343,9 +346,8 @@ function RulesCard({ open, onOpenChange }: { open: boolean; onOpenChange: (o: bo
 }
 
 /**
- * The whole centre column: in combat the initiative bar, then the tabs and the history toolbar
- * (sticky at the top of the pane), the feed, and the interactive cards index.tsx passes as
- * children beneath the feed.
+ * The whole centre column: in combat the initiative bar, then the tabs (sticky at the top of the
+ * pane), the feed, and the interactive cards index.tsx passes as children beneath the feed.
  */
 export function LogPane({
   campaignId,
@@ -387,7 +389,6 @@ export function LogPane({
           rulesOpen={rulesOpen}
           onRules={() => setRulesOpen(true)}
         />
-        {running && roster.role !== 'observer' && <HistoryControls campaignId={campaignId} />}
       </div>
       <RulesCard open={rulesOpen} onOpenChange={setRulesOpen} />
       <GameLog

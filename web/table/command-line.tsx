@@ -15,7 +15,7 @@ import { useMutation } from 'convex/react';
 import { ListIcon } from 'lucide-react';
 import { api } from '../../convex/_generated/api';
 import type { Id } from '../../convex/_generated/dataModel';
-import { ErrorNotice, Notice, useCommand } from '../ui';
+import { Notice, useCommand } from '../ui';
 import { Palette } from '../palette';
 
 /** How many submitted commands Up / Down can recall. */
@@ -103,11 +103,13 @@ export function CommandLine({
               return next;
             });
             draft.current = '';
+          } else {
+            // A failure now raises a toast (V29 item 2); the last success line must not outlive it.
+            setLast(null);
           }
         }}
       >
-        <ErrorNotice error={command.error} />
-        {last && !command.error && (
+        {last && (
           <Notice role="status" className="text-xs">
             Recorded: {last}
           </Notice>

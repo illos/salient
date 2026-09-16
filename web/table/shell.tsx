@@ -19,7 +19,7 @@ import { Button } from '../components/ui/button';
 import { Pill } from '../components/pill';
 import { OverlayCard } from '../components/overlay-card';
 import { UserMenu } from '../components/session-user';
-import { ErrorNotice, useCommand } from '../ui';
+import { useCommand } from '../ui';
 import { VoidCard } from './void-card';
 import type { Roster } from './director-pane';
 import type { Encounter } from './setup-card';
@@ -117,7 +117,6 @@ function SessionControls({
       >
         End
       </Button>
-      <ErrorNotice error={command.error} />
       {encounter?.status === 'committed' && (
         <OverlayCard
           open={closing === encounter.id}

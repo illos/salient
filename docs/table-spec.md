@@ -397,6 +397,23 @@ same thread:
   indicator design are resolved by the mockups: the combat mockups' ring-portrait row with resource
   badges and an Acting label, and the segmented initiative bar, are the target presentation.
 
+**User decision, 2026-09-16 (desktop review of the built layout):** two further placements, recorded
+in [V29](build/V29-desktop-feedback.md).
+
+- **The history controls belong in the settings pop-up.** The strip V21 put under the LOG / RULES /
+  ROLLS tabs is gone, and the Director's Rewind, Redo and Enable user undo become rows of the same
+  settings pop-up, which now covers presentation and history. The centre pane keeps the log feed
+  alone under its tabs. The pop-up is the Director's, so a player's undo and redo are not in it:
+  they keep the inline buttons on the entries they would act on (see
+  [Undo permissions](#undo-permissions-and-proposed-campaign-control)), and reach the operations
+  from the command line when the target entry is not in the current view. The controls remain
+  registered operations under unchanged authority.
+- **A failed operation is a dismissible toast, not a block beside the control.** Error messages from
+  registered operations appear in one fixed, screen-reader announced toast region with a Dismiss
+  control, instead of an inline notice that overlaps neighbouring content and moves the layout. The
+  transport envelope Convex wraps around an operation's message is stripped, so the person reads the
+  operation's own wording. Deliberate page-level and form-level error slots are unaffected.
+
 ### Roster targeting controls
 
 Confirmed during the 2026-09-12 discussion. Each displayed participant in either roster has a dedicated
@@ -1538,7 +1555,10 @@ Keep the original dice, re-evaluate supported outcomes and append the linked cor
 extends the narrow modifier exception to additions and removals, not direct damage editing.
 
 Confirmed placement: an Undo button accompanies inline results, under existing player/Director undo
-permissions. Confirmed 2026-09-13: undoing an adjudication restores the prior effective result while
+permissions. Confirmed 2026-09-16: Redo takes the matching inline placement on the entry it would
+restore, and the Director's Rewind, Redo and Enable user undo controls live in the table settings
+pop-up (see [Confirmed combat layout](#confirmed-combat-layout)); no placement changes who may
+undo, rewind or redo. Confirmed 2026-09-13: undoing an adjudication restores the prior effective result while
 leaving the original ability use intact; undoing the original action is a distinct operation that reverses
 its applied effects. Both correction and undo append new entries. The original log entry is never
 rewritten, and subsequent undo and interpretation use the effective result established by the new entry

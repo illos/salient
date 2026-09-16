@@ -19,7 +19,7 @@ import { api } from '../../convex/_generated/api';
 import type { Id } from '../../convex/_generated/dataModel';
 import { Disc } from '../components/disc';
 import { HealthBar } from '../components/health-bar';
-import { ErrorNotice, useCommand } from '../ui';
+import { useCommand } from '../ui';
 import type { Encounter } from './setup-card';
 
 export type RosterActor = { kind: 'character' | 'foe'; id: string; name: string };
@@ -93,7 +93,6 @@ export function TargetReticle({
           {others.map(o => `${o.userName}${o.actor ? ` (${o.actor.name})` : ''}`).join(', ')}
         </span>
       )}
-      <ErrorNotice error={command.error} />
     </span>
   );
 }
@@ -170,7 +169,6 @@ export function TargetModifiers({
           {o.actor ? ` (${o.actor.name})` : ''}
         </span>
       ))}
-      <ErrorNotice error={command.error} />
     </div>
   );
 }

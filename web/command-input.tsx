@@ -11,7 +11,7 @@ import type { Id } from '../convex/_generated/dataModel';
 import { Button } from './components/ui/button';
 import { Card, CardContent } from './components/ui/card';
 import { Input } from './components/ui/input';
-import { ErrorNotice, Field, Notice, useCommand } from './ui';
+import { Field, Notice, useCommand } from './ui';
 import { Palette } from './palette';
 
 export function CommandConsole({
@@ -52,7 +52,9 @@ export function CommandConsole({
               },
               JSON.stringify(['command.submit', { campaignId, text: trimmed, sessionRevision }]),
             );
+            // A failure now raises a toast (V29 item 2); the last success line must not outlive it.
             if (ok) setText('');
+            else setLast(null);
           }}
         >
           <Field
@@ -74,8 +76,7 @@ export function CommandConsole({
               {command.pending ? 'Sending…' : 'Run'}
             </Button>
           </div>
-          <ErrorNotice error={command.error} />
-          {last && !command.error && <Notice role="status">Recorded: {last}</Notice>}
+          {last && <Notice role="status">Recorded: {last}</Notice>}
         </form>
         <Palette campaignId={campaignId} onPick={syntax => setText(syntax)} />
       </CardContent>

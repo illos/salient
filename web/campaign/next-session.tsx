@@ -16,7 +16,7 @@ import type { Id } from '../../convex/_generated/dataModel';
 import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
 import { Disc } from '../components/disc';
-import { ErrorNotice, Notice, useCommand } from '../ui';
+import { Notice, useCommand } from '../ui';
 import type { Member, Session } from './header';
 
 export function PlayerTiles({
@@ -213,7 +213,6 @@ function EditPlayers({
           Save players
         </Button>
       )}
-      <ErrorNotice error={command.error} />
     </div>
   );
 }

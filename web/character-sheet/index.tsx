@@ -24,7 +24,7 @@ import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Disc } from '../components/disc';
 import { HealthBar } from '../components/health-bar';
-import { ErrorNotice, Loading, Notice, useCommand } from '../ui';
+import { Loading, Notice, useCommand } from '../ui';
 import { AbilityCard, CommonActionCard } from './ability-card';
 import { ActiveConditionBadges, ConditionToggles, actorRef } from './controls';
 import { CHARACTERISTICS, SheetHeader, type CharacteristicKey } from './header';
@@ -236,7 +236,6 @@ function RollTest({
       <Button type="button" size="sm" variant="ghost" onClick={onClose}>
         Close
       </Button>
-      <ErrorNotice error={command.error} />
     </form>
   );
 }

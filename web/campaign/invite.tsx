@@ -16,12 +16,13 @@ import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
 import { Input } from '../components/ui/input';
 import { Disc } from '../components/disc';
-import { ErrorNotice, useCommand } from '../ui';
+import { useCommand } from '../ui';
+import { useToast } from '../toast';
 
 /** Clipboard write with the "Copied" state held for two seconds. */
 function useCopy(value: string) {
   const [copiedValue, setCopiedValue] = useState<string | null>(null);
-  const [error, setError] = useState<string | null>(null);
+  const showError = useToast();
   const copied = copiedValue === value;
   useEffect(() => {
     if (!copied) return;
@@ -29,16 +30,15 @@ function useCopy(value: string) {
     return () => window.clearTimeout(timer);
   }, [copied, copiedValue]);
   async function copy() {
-    setError(null);
     setCopiedValue(null);
     try {
       await navigator.clipboard.writeText(value);
       setCopiedValue(value);
     } catch {
-      setError('Could not copy. Select the field and copy it manually.');
+      showError('Could not copy. Select the field and copy it manually.');
     }
   }
-  return { copied, error, copy };
+  return { copied, copy };
 }
 
 /**
@@ -57,7 +57,7 @@ function CopyField({
   copyLabel: string;
 }) {
   const id = useId();
-  const { copied, error, copy } = useCopy(value);
+  const { copied, copy } = useCopy(value);
   return (
     <div className="flex flex-col gap-1.5">
       <label htmlFor={id} className="caps text-muted-foreground">
@@ -86,7 +86,6 @@ function CopyField({
       <span className="sr-only" role="status">
         {copied ? `${label} copied.` : ''}
       </span>
-      <ErrorNotice error={error} />
     </div>
   );
 }
@@ -131,7 +130,6 @@ export function InviteCard({
           >
             Replace code and link
           </Button>
-          <ErrorNotice error={command.error} />
         </div>
         <div className="rule-soft border-t pt-4">
           <p className="caps mb-2 text-muted-foreground">
@@ -198,7 +196,6 @@ function ReviewRequest({ request }: { request: { id: Id<'joinRequests'>; display
           </Button>
         </div>
       </div>
-      <ErrorNotice error={command.error} />
     </li>
   );
 }

@@ -8,7 +8,7 @@ import { Badge } from './components/ui/badge';
 import { Button, buttonVariants } from './components/ui/button';
 import { Card, CardContent } from './components/ui/card';
 import { Input } from './components/ui/input';
-import { ErrorNotice, Eyebrow, Field, Loading, Notice, SectionHeading, useCommand } from './ui';
+import { Eyebrow, Field, Loading, Notice, SectionHeading, useCommand } from './ui';
 import { PartyPanel } from './character-sheet/party';
 import { CommandConsole } from './command-input';
 import { CampaignHeader, type CampaignRole } from './campaign/header';
@@ -124,7 +124,6 @@ export function CampaignsPage() {
                     placeholder="The road to Blackcastle"
                   />
                 </Field>
-                <ErrorNotice error={command.error} />
                 <Button type="submit" disabled={command.pending}>
                   {command.pending ? 'Creating…' : 'Create campaign'}
                 </Button>
@@ -179,7 +178,6 @@ function WithdrawRequest({ requestId }: { requestId: Id<'joinRequests'> }) {
       >
         Withdraw
       </Button>
-      <ErrorNotice error={command.error} />
     </div>
   );
 }
@@ -242,7 +240,6 @@ export function JoinPage({ shareCode }: { shareCode: string }) {
             {command.pending ? 'Sending…' : 'Request to join'}
           </Button>
         )}
-        <ErrorNotice error={command.error} />
         <p>
           <Link to="/">Back to campaigns</Link>
         </p>

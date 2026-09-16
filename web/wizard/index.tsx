@@ -629,7 +629,6 @@ function Wizard({ character }: { character: LoadedCharacter }) {
             {character.combatLocked && (
               <Notice className="mb-4">Character editing is locked during combat.</Notice>
             )}
-            <ErrorNotice error={command.error} />
             {saved && (
               <p role="status" className="mb-4 text-sm text-success">
                 Draft saved (revision {expectedRevision}).

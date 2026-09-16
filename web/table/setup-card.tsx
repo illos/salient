@@ -16,7 +16,7 @@ import type { FunctionReturnType } from 'convex/server';
 import { Badge } from '../components/ui/badge';
 import { Button } from '../components/ui/button';
 import { Card, CardContent } from '../components/ui/card';
-import { ErrorNotice, SectionHeading, useCommand } from '../ui';
+import { SectionHeading, useCommand } from '../ui';
 
 export type Encounter = NonNullable<FunctionReturnType<typeof api.encounters.current>>;
 type Participant = Encounter['participants'][number];
@@ -60,7 +60,6 @@ export function CommandButton({
       >
         {label}
       </Button>
-      <ErrorNotice error={command.error} />
     </span>
   );
 }
@@ -136,7 +135,6 @@ function ParticipantRow({
               }}
             />
           </label>
-          <ErrorNotice error={command.error} />
         </div>
       )}
     </li>
@@ -201,7 +199,6 @@ function OkButton({
       >
         OK
       </Button>
-      <ErrorNotice error={command.error} />
     </span>
   );
 }
