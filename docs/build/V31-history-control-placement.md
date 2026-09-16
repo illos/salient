@@ -235,3 +235,25 @@ Evidence from the shared app: `evidence/V31-live/live-history-icon-pair-dark.png
 Nothing is pending. `slice/V31` is retired and the isolated backend and dev server for this slice
 are stopped, which releases the browser window the engine and character tracks were queued behind.
 
+### 2026-09-16 — follow-up: an inert control no longer lights up on hover
+
+The reviewer's close-out left three one-line follow-ups. Two mattered and are done here, on `main`,
+because the slice was already merged when it raised them.
+
+Keeping pointer events on the control is what makes its tooltip open, and it also let the ghost
+variant's hover background through, so an unavailable Rewind or Redo brightened under the cursor as
+though it were live. `aria-disabled:hover:bg-transparent` did not win, and the arbitrary variant
+`[&[aria-disabled=true]:hover]:bg-transparent` does — but not for the reason first recorded here.
+The reviewer read the emitted rules: all three are specificity `(0,3,0)`, because the dark ghost
+rule's `:is(.dark *)` supplies its third component. Both attempts tie with it and the tie breaks on
+source order, which the arbitrary variant wins by being emitted last. So the first attempt would
+have worked in the light theme and failed only in dark, which is why a dark-only measurement caught
+it; and the win is an ordering tie-break that a Tailwind upgrade could flip. That is acceptable only
+because it is now asserted: the spec checks the hovered background stays fully transparent, in
+whichever notation Chromium reports it, and the pre-fix values fail that check.
+The no-op `aria-disabled:cursor-default` went with it, and the spec now presses `Space` as well as
+`Enter` on the inert control, which the reviewer had measured but nothing asserted.
+
+Verified: `pnpm lint`, `tsc`, 336 app/script tests, 97 engine tests, `pnpm build`,
+`pnpm check-links` (181), and `v21-log.spec.ts` against the shared app on 5180 — both tests pass.
+

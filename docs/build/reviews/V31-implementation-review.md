@@ -1039,12 +1039,110 @@ few minutes ago, so it does not yet contain this subsection or the verdict below
 more to pick them up. That amend changes nothing executable and needs no further verification
 from me.
 
+## Follow-up — 2026-09-16, `b828c34` on `main`
+
+A separate, short round on the three one-line follow-ups the close-out left. `b828c34` is a
+commit on `main` in `/srv/presidium/projects/salient/code`, not an amend to the slice, because
+V31 had already merged when I raised them. Three files: `web/table/setup-card.tsx` (T1 and T2),
+`tests/browser/v21-log.spec.ts` (T3 plus a guard for T1) and the slice work log. The implementer
+deliberately left `Reviewed-By:` off pending this note, which was the right call.
+
+I verified against the **shared playable target** on `127.0.0.1:5180` / `3212`, because the
+slice's isolated backend is stopped. Disposable accounts only; nothing was reset and no existing
+campaign or character was touched. First I confirmed the server is actually serving this commit
+rather than a stale bundle: the button's class list contains
+`[&[aria-disabled=true]:hover]:bg-transparent` and no longer contains
+`aria-disabled:cursor-default`.
+
+### T1 — fixed, and I checked the two things the dark-only run could not
+
+Measured on the live app, resting and hovered, in both themes:
+
+| Theme | Control | Resting background | Hovered background |
+| --- | --- | --- | --- |
+| dark | Rewind (available) | `rgba(0, 0, 0, 0)` | `oklab(0.204625 …/0.5)` — still highlights |
+| dark | Redo (unavailable) | `rgba(0, 0, 0, 0)` | `rgba(0, 0, 0, 0)` — **fixed** |
+| light | Rewind (available) | `rgba(0, 0, 0, 0)` | `rgb(245, 245, 245)` — still highlights |
+| light | Redo (unavailable) | `rgba(0, 0, 0, 0)` | `rgba(0, 0, 0, 0)` — **fixed** |
+
+So the inert control no longer lights up in either theme, and the available control's hover is
+untouched — the two hovered values for `Rewind` are byte-identical to what I measured on the
+broken code in round three, which is the cleanest possible evidence that nothing else moved.
+
+The text branch is untouched too, measured rather than assumed: every non-iconic `CommandButton`
+on a combat table reports no `aria-disabled` attribute, no `aria-disabled` class, and — on the two
+disabled `Take turn` buttons — native `disabled` with `pointer-events: none` and no wrapper title.
+That is `main`'s rendering, unchanged.
+
+### The stated reason for the fix is not quite right, though the fix is
+
+Worth one line in the record, because the work log and the commit message both explain it the same
+way and a future reader will be misled. Both say the arbitrary variant wins "by adding the
+attribute selector". The old attempt had the attribute selector too. Reading the emitted rules:
+
+```
+.aria-disabled\:hover\:bg-transparent[aria-disabled="true"]:hover                    (index 0)
+.dark\:hover\:bg-muted\/50:is(.dark *):hover                                         (index 5)
+.\[\&\[aria-disabled\=true\]\:hover\]\:bg-transparent[aria-disabled="true"]:hover    (index 697)
+```
+
+All three are specificity (0,3,0): one class plus one attribute plus `:hover` for the two
+`bg-transparent` rules, and one class plus `:is(.dark *)` plus `:hover` for the dark ghost rule.
+So the old attempt did not lose for want of an attribute selector — it tied with
+`dark:hover:bg-muted/50` and lost on source order, Tailwind sorting `aria-*` utilities ahead of
+`dark:`. The new arbitrary variant ties as well and wins for the same reason in reverse: Tailwind
+emits arbitrary variants last, at index 697 against 5.
+
+Two consequences, neither blocking. The competitor is the *dark* rule specifically, so the old
+attempt would have worked in light — where the competitor is `.hover\:bg-muted:hover` at (0,2,0)
+— and failed only in dark, which is consistent with the dark-only measurement that found it. And
+because the win is an order tie-break rather than a specificity win, it could in principle flip
+under a Tailwind upgrade. That is acceptable precisely because the new assertion guards it: a
+reordering would fail the suite rather than ship silently. I would correct the sentence in the
+work log and leave the code alone.
+
+### T2 and T3 — done
+
+`aria-disabled:cursor-default` is gone, and removing it changed nothing, which confirms it was the
+no-op I called it: the cursor still computes to `default` on both controls in both themes. The
+spec now presses `Space` beside `Enter` on the inert control, which is the key I had measured but
+nothing asserted.
+
+### On the regex, since you asked
+
+Keep it. `/(?:\/ 0\)|, 0\))$/` asserts the property that actually matters — the hovered background
+has zero alpha — and is agnostic to whether Chromium answers in `rgba()` or `oklab()`, which is
+the right call given it returned both across calls in one run. Pinning an exact string would just
+re-introduce the flake. It also discriminates: the pre-fix values end `/ 0.5)` in dark and `245)`
+in light, and neither matches. And it cannot pass by accident on a non-transparent colour, because
+`, 0)` and `/ 0)` require the digit to be preceded by a separator — `rgb(1, 2, 10)` does not
+match. The only tightening I would consider is anchoring the front as well, and it buys nothing.
+
+### What I ran
+
+Targeted, as asked, because peers are queued for the browser window:
+
+- `pnpm exec playwright test v21-log.spec.ts` against `5180` — **2 passed, 58.6 s**, one-minute
+  load average 2.3. That is the only spec that renders an iconic `CommandButton`, so it is the
+  only spec the CSS change can reach; the text branch I verified is unchanged in the DOM, above.
+- One throwaway probe under `/tmp/v31probe4/`, outside the repository, for the table and the rule
+  ordering above.
+- `pnpm lint` exit 0, `pnpm exec tsc -p tsconfig.web.json` exit 0, `pnpm check-links` 181 files,
+  `node scripts/check-commit.ts --rev b828c34` — "commit message ok". I did not re-run the unit
+  projects or `pnpm build`: the diff is one className string, one spec and one document, and the
+  implementer ran all of them.
+
+The working tree is clean after my runs; `foes.spec.ts` was not among them, so
+`docs/build/evidence/V27-*.png` needed no restoring.
+
 ## Final verdict
 
 pass
 
-For `bd0c512` (and equally for `21786fc`, which it amends with one asserted property I executed
-and two documentation changes). This supersedes the round-two `pass` on `da6a0a4` and the
-first-round `changes required` on `6c47704`. No blocking finding remains, every acceptance check
-is verified, and T1 to T3 are one-line follow-ups that do not need a further review. Amend in this
-document as it now stands and the slice is ready for the lead.
+For `b828c34`, and previously for `bd0c512` and `21786fc`. This supersedes the round-two `pass` on
+`da6a0a4` and the first-round `changes required` on `6c47704`. No blocking finding remains at any
+point in the chain. The single correction outstanding is the explanation of *why* the arbitrary
+variant wins, in the `b828c34` work log and commit message; it is a documentation accuracy point,
+not a defect, and I am not holding the verdict for it.
+
+Trailer for `b828c34`: `Reviewed-By: v31_implementation_review (pass, 2026-09-16)`.

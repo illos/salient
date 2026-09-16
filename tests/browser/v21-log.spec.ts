@@ -104,6 +104,10 @@ test('log feed: dice chips, markers, ROLLS filter, history icon pair, command li
     // `aria-disabled` replaces the native `disabled:` variants, so the dimming is asserted too.
     await expect(redo).toHaveCSS('opacity', '0.5');
     await expect(rewind).not.toHaveCSS('opacity', '0.5');
+    // Inert means inert to the eye too: hovering it must not paint the ghost hover background.
+    // Any notation, as long as the alpha is zero — Chromium reports oklab or rgba by turns.
+    await redo.hover();
+    await expect(redo).toHaveCSS('background-color', /(?:\/ 0\)|, 0\))$/);
     await redo.focus();
     await expect(redo).toBeFocused();
     const describedBy = await redo.getAttribute('aria-describedby');
@@ -115,6 +119,7 @@ test('log feed: dice chips, markers, ROLLS filter, history icon pair, command li
     // first half of the evidence; force one past that check, and press Enter on it focused.
     await redo.click({ force: true });
     await director.keyboard.press('Enter');
+    await director.keyboard.press('Space');
     await expect(director.locator('[data-toast-viewport] li')).toHaveCount(0);
     await expect(feed(director).locator('li[data-sequence]')).toHaveCount(before);
     await expect(feed(director).locator('li[data-disposition="undone"]')).toHaveCount(0);

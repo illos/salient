@@ -66,7 +66,11 @@ export function CommandButton({
         // `focusableWhenDisabled` emits `aria-disabled` instead, which stays inert but focusable
         // and hoverable. Buttons with a visible label keep the native behaviour.
         focusableWhenDisabled={icon ? true : undefined}
-        className={icon ? 'aria-disabled:cursor-default aria-disabled:opacity-50' : undefined}
+        // Pointer events stay on so the tooltip opens, so the hover background has to be turned
+        // off explicitly or an inert control lights up as though it were live.
+        className={
+          icon ? 'aria-disabled:opacity-50 [&[aria-disabled=true]:hover]:bg-transparent' : undefined
+        }
         title={tooltip}
         onClick={() => {
           if (inert) return;
