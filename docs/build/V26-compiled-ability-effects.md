@@ -433,3 +433,36 @@ execution and report why; do not invent independence to increase coverage.
   deployment or playtest. Main now includes V25; reconcile its actor damage modifiers and target
   immunities when rebasing for implementation. Do not replace those integrated facts with the
   older branch baseline.
+
+### 2026-09-16 — user checkpoint: paused during per-ability design
+
+The user asked to checkpoint here. Pause this thread; do not advance implementation from this
+checkpoint alone. Resume the design discussion one ability at a time.
+
+**Settled:** the three primary abilities and six named regressions in
+[Confirmed ability scope](#confirmed-ability-scope--2026-09-16). Every built/changed ability requires
+source-backed design and real in-app playtest screenshots correlating game-log output to source,
+with persisted-state readback. Keep designed, built and playtested states separate.
+
+**Where we stopped:** Brutal Slam's design was presented to the user, using the existing reviewed
+contract and acceptance check 1. In the prepared tier-2 fixture, the expected log shows roll
+7 + 7 + Might 2 = 16, damage 6 + Might 2 = 8, Goblin Stamina 15 → 7, and push allowance
+2 + size bonus 1 = 3. Actual movement, optional stability reduction, collision and terrain
+consequences stay manual. These are expected outputs, not observed results. The user's checkpoint
+request is not an additional rules ruling or a claim that all ability designs are finalized.
+
+**Next:** resume at Brutal Slam, address any feedback, and finish its source-to-behavior record and
+playtest cases. Then work through Spear Charge, Bury the Point and the named regressions individually.
+Complete the affected-ability audit and independent review before claiming implementation readiness.
+No new product question is currently blocking independent source research.
+
+**Repository handoff:** use `/srv/presidium/projects/salient/engine-parser-spec`, branch `slice/V26`.
+Specification `9949aba`, evidence workflow `80d1f97`, accepted scope `42fd47b` are committed there,
+not merged into main. The latest checkpoint commit follows those commits. Main was observed at
+`14b7536`; recheck it and Chords on resume, preserve peer work, and reconcile the integrated V25
+modifiers/immunities before implementation. The parser and engine own a track, not a permanent branch.
+
+**Verification and runtime:** documentation links and whitespace checks pass for this checkpoint.
+No V26 implementation, in-app playtest or screenshot exists. No deployment, merge or runtime change
+was made; this documentation-only checkpoint needs no playable-app update. Earlier review and full
+code-baseline results retain their recorded scope; they do not verify future V26 behavior.
