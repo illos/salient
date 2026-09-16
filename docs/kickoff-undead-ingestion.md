@@ -1,13 +1,51 @@
 # Undead ingestion: kickoff and build handoff
 
-Updated **2026-09-16**: [V27](build/V27-undead-ingestion.md) has been implemented and independently
-reviewed. Read its closing work log and the [consumer contract](../shared/foes/README.md) for the
-current package, commands, evidence and integration boundary. The original kickoff below is historical;
-do not repeat the assessment or rebuild the finished slice. V27 and its V23 prerequisites are now merged into main and verified in the shared playable app at
-`/foes`; see the final integration section in the slice log. Next is a separately bounded coverage
-slice. Engine execution remains separate.
+## Resume checkpoint — 2026-09-16
 
-## Ready-to-paste kickoff
+**V27 is complete, merged and live.** Main was clean at `e6ba249` when this checkpoint began.
+Read the [final integration log](build/V27-undead-ingestion.md#main-integration-and-live-verification--2026-09-16)
+and [consumer contract](../shared/foes/README.md); do not rebuild the finished slice.
+
+- Public `/foes` on the shared app (port 5180) contains 11 first-echelon undead stat blocks,
+  36 independently addressable abilities/traits, and four shared Malice features.
+- Every emitted stat block and the shared Malice record has a Steel Cauldron comparison:
+  12 explained outcomes, zero unresolved/missing/ambiguous/error outcomes. The
+  [committed report](build/evidence/V27-steel-cauldron.json) records the exact revisions and findings.
+  This coverage applies to V27; the rest of the core catalog has not yet been structured and compared
+  by this pipeline. All 438 core stat blocks already have readable Rules articles.
+- Integrated verification passed 432 tests, build and both isolated/shared-app browser checks.
+  No backend sync, seed or reset was needed; existing play data was preserved.
+- `slice/V27` is retired. `/srv/presidium/projects/salient/foes` is retained clean and detached at
+  `e6ba249`; create a new slice branch from current main before future implementation.
+- The next coverage batch/family is **not selected**. This checkpoint starts no new implementation.
+  Engine execution, live foe loading and sharing UI remain separately scoped work.
+
+## Ready-to-paste resume
+
+```text
+Resume the foe ingestion track from docs/kickoff-undead-ingestion.md in the current main checkout.
+V27 is complete, merged and verified live; do not repeat its assessment or implementation.
+Refresh project instructions, Chords, Git/worktrees and docs/build/STATUS.md, then read V27's final
+integration log and shared/foes/README.md. Follow my next request; no next coverage slice is selected.
+
+If I request more coverage, select a bounded batch and an available slice ID, and branch from current
+main in an isolated worktree. Preserve stable object IDs, the maintained identity registry, retained
+editions, independently addressable features, original source content and regenerable corrections.
+The parser branch owns rules interpretation and execution.
+
+Compare every new output to its Steel Cauldron counterpart. Significant divergence requires review
+against the pinned Compendium; missing/ambiguous/error outcomes never count as passing. Steel Cauldron
+is an example and output comparison only: do not adapt its code without a clear license or use its
+outputs as canonical app content. Do not infer whole-corpus implementation from this checkpoint.
+```
+
+## Historical V27 kickoff
+
+The remainder records the original pre-implementation handoff. Its branch/setup observations,
+verification counts and deployment limits describe that earlier point, not the current resume state
+or the standing merge-completion directive.
+
+### Original ready-to-paste kickoff
 
 ```text
 Resume the foe track from /srv/presidium/projects/salient/foes/docs/kickoff-undead-ingestion.md.
@@ -29,7 +67,7 @@ run the slice checks and required independent/source reviews, update docs, and h
 with screenshots and comparison results. No deployment is authorized by this kickoff.
 ```
 
-## Current state and setup
+### Current state and setup
 
 - Shared main: `/srv/presidium/projects/salient/code`, observed at `e83930e`. Its roadmap/process/root
   instruction changes and development-track checkpoint are uncommitted work belonging to the lead.
@@ -55,7 +93,7 @@ Use `git status --short`, `git log`, `git worktree list` and the current `docs/b
 refresh these observations. V27's row is Not started; update it on claim. Branch IDs and paths do not
 establish that another session's work is reviewed or integrated.
 
-## Read next
+### Read next
 
 1. [V27 build slice](build/V27-undead-ingestion.md): complete scope, inputs and acceptance checks.
 2. [Monster catalog](monster-catalog-spec.md#confirmed-ingestion-requirements--2026-09-15), including
@@ -66,7 +104,7 @@ establish that another session's work is reviewed or integrated.
    [core inventory](research/foe-catalog-audit-2026-09-15.json), and
    [Steel Cauldron comparison](research/steel-cauldron-output-comparison.md).
 
-## Existing implementation to build on
+### Existing implementation to build on
 
 - `scripts/ingest-rules.ts`: core book Git-blob loading, source IDs, expanded Markdown, links and public
   reader assets. All 438 core stat blocks already have Rules articles; this is not structured foe ingestion.
@@ -85,7 +123,7 @@ Exact new filenames are implementation choices. Prefer a reusable TypeScript imp
 source paths, not eleven bespoke conversion scripts. Preserve complete feature text; normalization
 and presentation must never become the only retained representation.
 
-## Evidence already established, with limits
+### Evidence already established, with limits
 
 - Core corpus: 438 stat blocks, 4,380 agreeing stat comparisons, 1,800 matched feature headings.
   This established feasibility, not complete feature-section extraction or engine correctness.
@@ -100,7 +138,7 @@ and presentation must never become the only retained representation.
 - Temporary `/tmp/` comparison files/scripts are disposable and not required to resume. Reproduce
   inspection from the recorded revisions; no external generated data was committed as application data.
 
-## Expected hand-back
+### Expected hand-back
 
 A working, regenerable undead package; individual feature lookup/search and themed previews; a complete
 comparison report with explained discrepancies; source-derived tests and browser screenshots; and the

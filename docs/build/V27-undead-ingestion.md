@@ -243,3 +243,23 @@ Local evidence logs: `/tmp/salient-v27-integration-check-2.log`,
 All four live screenshots and the isolated live-test config remain under `.playtest/v27-merge/`.
 The slice branch is retired after recording this integration; the clean foe worktree is retained
 at detached main for future work. Chords publishes the final commit and runtime handoff to peers.
+
+
+## User-requested checkpoint — 2026-09-16
+
+Checkpoint follows the completed merge/live verification recorded at main `e6ba249`. V27 remains
+complete: 11 undead stat blocks, 36 embedded abilities/traits and four shared Malice features;
+all 12 parent comparison outcomes are explained, with no unresolved or missing counterparts.
+The 432-test integrated check and isolated/shared-app browser verification above remain the runtime
+evidence. This checkpoint changes documentation only; no runtime update or repeat implementation
+verification is needed.
+
+The [resume kickoff](../kickoff-undead-ingestion.md#resume-checkpoint--2026-09-16) now distinguishes
+current state from the historical build prompt. The next coverage batch/family is unselected;
+resume from the user's next request, refresh peer/Git state and use a new bounded slice from current
+main. Preserve the identity registry, retained editions, correction/regeneration and exhaustive
+comparison contract. Engine execution and sharing UI remain separately scoped work.
+
+Retained foe worktree: `/srv/presidium/projects/salient/foes`, clean detached `e6ba249`; `slice/V27`
+is retired. No new ingestion or engine work started. Checkpoint validation: documentation links and
+`git diff --check`; publish the resulting documentation commit through Chords for future sessions.
