@@ -146,6 +146,13 @@ test('Fury advancement preserves live state; source-complete sheet and reviewed 
         revision: content.revision,
       });
     }
+    // V34's full-source card must retain the target rule outside the metadata table.
+    await expect(
+      player.getByText(
+        'Additionally, you make one power roll that targets each enemy you move adjacent to during this movement.',
+        { exact: true },
+      ),
+    ).toBeVisible();
     for (const name of ['Unstoppable Force', 'Danger Sense', 'Wrecking Ball']) {
       await player
         .getByRole('button', { name: `Read ${name} in the rules`, exact: true })

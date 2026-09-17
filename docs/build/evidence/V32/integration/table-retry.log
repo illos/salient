@@ -1,0 +1,5 @@
+
+Running 1 test using 1 worker
+
+[1/1] tests/browser/table-audit.spec.ts:40:1 › three table contexts, palette, console and live CLI share persisted operations
+  1 passed (1.5m)

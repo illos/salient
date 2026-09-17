@@ -181,3 +181,30 @@ whitespace checks and the branch commit gate pass. No merge or shared runtime up
 
 User-requested pause: see the [character checkpoint](../checkpoint-2026-09-16-characters-v32.md)
 for the saved branch, newer-main observation, evidence and resume instructions.
+
+## Integration — 2026-09-17
+
+The user authorized merging V32 and updating the shared playable app before expanding supporting
+character choices. Rebased all three original commits onto main `a0ac6d4` without conflicts;
+`git range-diff` reports identical patches. New implementation commit is `73b7ab4`, with checkpoint
+head `6456651`. The complete branch commit gate and whitespace check pass.
+
+All new development workloads run on CT114. Isolated environment `characters`, Compose
+`salient-characters-dev-2389e144b9dd`, uses an independent anonymous backend and the HTTPS origin
+`https://salient-characters-dev-aa988a1a3752.tail41404c.ts.net`. The backend pushed successfully
+and loaded the 473-entry V32 source snapshot. Original local runtimes remain stopped.
+
+The infrastructure client has the known sibling-worktree broker cwd issue. A temporary local
+launcher preserves its normal archive, source identity and validation but launches only its broker
+subprocess from the canonical project directory. No installed helper, grant or credentials changed.
+
+[Independent integration review](../reviews/V32-integration-review.md) passes static checks,
+including all 62 source-ledger hashes and 24 retained Forge artifacts. Added a focused rendered
+Wrecking Ball paragraph assertion for its interaction with V34 full-source presentation.
+Integrated `pnpm check` passed 466 tests (106 engine, 360 app/scripts), lint/types, content/vendor/foe
+checks and production build. Generated Convex API types exactly match the checked-in declarations.
+The first browser run passed V25 Elementalist, V32 progression/history and V21 character-sheet
+journeys, including the Wrecking Ball paragraph. The table audit failed after a one-second
+`history:status` timeout inside `safeGetAuthUser`; its unchanged isolated retry passed (1.5 minutes). No assertion or timeout was relaxed.
+Shared live verification remains pending until integration. Screenshots and compact authenticated
+readback are retained under `docs/build/evidence/V32/integration/`.

@@ -1,0 +1,49 @@
+
+Running 4 tests using 1 worker
+
+[1/4] tests/browser/table-audit.spec.ts:40:1 › three table contexts, palette, console and live CLI share persisted operations
+  1) tests/browser/table-audit.spec.ts:40:1 › three table contexts, palette, console and live CLI share persisted operations 
+
+    TimeoutError: locator.click: Timeout 15000ms exceeded.
+    Call log:
+      - waiting for getByRole('button', { name: 'Command palette', exact: true })
+
+
+      127 |     expect(JSON.parse(detail.sourceSnapshot).jsonPath).toBe(goblin.jsonPath);
+      128 |     // V21: the palette opens from the control inside the pinned command line.
+    > 129 |     await director.getByRole('button', { name: 'Command palette', exact: true }).click();
+          |                                                                                  ^
+      130 |     const note = director
+      131 |       .locator('li')
+      132 |       .filter({ has: director.getByText('Session note', { exact: true }) });
+        at /app/tests/browser/table-audit.spec.ts:129:82
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../artifacts/v32-integration-browser/table-audit-three-table-co-9d727--share-persisted-operations/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../artifacts/v32-integration-browser/table-audit-three-table-co-9d727--share-persisted-operations/test-failed-2.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../artifacts/v32-integration-browser/table-audit-three-table-co-9d727--share-persisted-operations/test-failed-3.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../artifacts/v32-integration-browser/table-audit-three-table-co-9d727--share-persisted-operations/error-context.md
+
+    attachment #5: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../artifacts/v32-integration-browser/table-audit-three-table-co-9d727--share-persisted-operations/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../artifacts/v32-integration-browser/table-audit-three-table-co-9d727--share-persisted-operations/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[2/4] tests/browser/v21-sheet.spec.ts:52:1 › standalone sheet: band, columns, Roll test, Catch Breath, Director edit, peer, compact
+[3/4] tests/browser/v25-elementalist.spec.ts:7:1 › corrected Forge Bethell: complete wizard, reload, review and sourced sheet
+[4/4] tests/browser/v32-progression.spec.ts:29:1 › Fury advancement preserves live state; source-complete sheet and reviewed history restoration
+  1 failed
+    tests/browser/table-audit.spec.ts:40:1 › three table contexts, palette, console and live CLI share persisted operations 
+  3 passed (2.7m)
