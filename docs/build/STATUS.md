@@ -293,3 +293,9 @@ records the handoff; it does not certify A09 or create an implementation commit.
 | Id | Slice | Status | Owner |
 | --- | --- | --- | --- |
 | V38 | [Foes integration and top-level navigation](V38-foes-integration-navigation.md) | Complete — merged/live `40206a5`; separate Rules/Foes links, 663 tests, 12 isolated and 5 shared browser scenarios pass | Integration lead |
+
+## V39 account email — 2026-09-17
+
+| Id | Slice | Status | Owner |
+| --- | --- | --- | --- |
+| V39 | [Account email and password recovery](V39-account-email.md) | Blocked on sending credential/test inbox — implementation reviewed, 672 tests and 2 browser scenarios pass on slice/V39; not merged or activated | Deploy thread, hosting worktree |

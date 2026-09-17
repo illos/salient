@@ -214,9 +214,29 @@ mechanism must respect that boundary. Editing a profile email alone is not chang
 **Implementation verification:** pin compatible Better Auth/Convex integration versions and exercise signup,
 signin, sign-out, forgotten-password recovery, authenticated credential changes, session revocation, and
 account deletion. Verify configured origins/session behavior for the selected frontend and future local
-deployment. The email delivery provider/API and local recovery arrangement are deferred work; no earlier
+deployment. Cloudflare Email Service is selected below; its live delivery verification and local recovery arrangement remain pending; no earlier
 Resend suggestion selects a provider. Use provider-supported credential handling rather than custom password
 cryptography. Authentication verification does not replace the application authorization cases below.
+
+### Cloudflare account email — 2026-09-17
+
+User selected Cloudflare Email Service and sender `salient@blackgate.studio`; the domain is
+reported onboarded. V39 implements password recovery only. Better Auth owns tokens and credential
+updates; reset links expire after 30 minutes and a successful reset revokes all provider sessions.
+The public request response does not disclose account existence. Reset mail is queued through an
+internal Convex action with a canonical `SITE_URL` link and text/HTML content. The sending token is
+server-only `CLOUDFLARE_EMAIL_API_TOKEN`, scoped to Blackgate Studio with Email Sending: Edit.
+
+Recovery remains unavailable unless the sending token and site URL are configured. Better Auth
+request limits use its persisted database adapter (three recovery requests/minute/client IP and
+five reset attempts/minute/client IP); its other auth defaults remain in force. These provider limits
+are abuse mitigation, not a strict atomic quota. Convex must supply a trusted client IP header for
+IP limits; mail failures are recorded as sanitized internal action errors, without exposing provider
+payloads to callers. Queued delivery is acceptance by the mail service, not proof of inbox arrival.
+
+Implementation is under validation in [V39](build/V39-account-email.md); cloud activation and actual
+inbox verification remain pending a suitable email-sending credential and selected test recipient.
+Authenticated credential-change/account-deletion flows and offline LAN recovery remain separate work.
 
 ### Proposed regular-account behavior
 
@@ -236,7 +256,7 @@ cryptography. Authentication verification does not replace the application autho
   chat in retained campaigns keep their username attribution. A deleted active Director is replaced by the
   campaign owner in retained campaigns. Account export and affected combat-participation handling remain open.
 - Apply provider-supported credential protection and request limits; keep credentials and verification codes
-  out of gameplay logs and public records. Email delivery still needs provider selection/configuration;
+  out of gameplay logs and public records. Email delivery uses the Cloudflare configuration above;
   storing auth in Convex does not itself deliver mail.
   [Better Auth password recovery](https://better-auth.com/docs/authentication/email-password)
 

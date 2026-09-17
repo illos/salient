@@ -10,6 +10,7 @@
 
 import type * as abilities from "../abilities.js";
 import type * as abilityTables from "../abilityTables.js";
+import type * as accountEmail from "../accountEmail.js";
 import type * as auth from "../auth.js";
 import type * as campaigns from "../campaigns.js";
 import type * as characterSecrets from "../characterSecrets.js";
@@ -32,6 +33,7 @@ import type * as initiativeTables from "../initiativeTables.js";
 import type * as interactions from "../interactions.js";
 import type * as lib_abilityOperations from "../lib/abilityOperations.js";
 import type * as lib_access from "../lib/access.js";
+import type * as lib_accountEmail from "../lib/accountEmail.js";
 import type * as lib_actors from "../lib/actors.js";
 import type * as lib_audience from "../lib/audience.js";
 import type * as lib_characterBuild from "../lib/characterBuild.js";
@@ -70,6 +72,7 @@ import type {
 declare const fullApi: ApiFromModules<{
   abilities: typeof abilities;
   abilityTables: typeof abilityTables;
+  accountEmail: typeof accountEmail;
   auth: typeof auth;
   campaigns: typeof campaigns;
   characterSecrets: typeof characterSecrets;
@@ -92,6 +95,7 @@ declare const fullApi: ApiFromModules<{
   interactions: typeof interactions;
   "lib/abilityOperations": typeof lib_abilityOperations;
   "lib/access": typeof lib_access;
+  "lib/accountEmail": typeof lib_accountEmail;
   "lib/actors": typeof lib_actors;
   "lib/audience": typeof lib_audience;
   "lib/characterBuild": typeof lib_characterBuild;

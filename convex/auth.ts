@@ -2,10 +2,11 @@ import { createClient, type GenericCtx } from '@convex-dev/better-auth';
 import { convex, crossDomain } from '@convex-dev/better-auth/plugins';
 import { betterAuth } from 'better-auth/minimal';
 import { v, ConvexError } from 'convex/values';
-import { components } from './_generated/api';
+import { components, internal } from './_generated/api';
 import type { DataModel } from './_generated/dataModel';
 import { mutation, query } from './_generated/server';
 import authConfig from './auth.config';
+import { passwordRecoveryEnabled, RESET_TOKEN_SECONDS } from './lib/accountEmail';
 
 export const authComponent = createClient<DataModel>(components.betterAuth);
 export const createAuth = (ctx: GenericCtx<DataModel>) => {
@@ -20,7 +21,31 @@ export const createAuth = (ctx: GenericCtx<DataModel>) => {
         .filter(Boolean),
     ],
     database: authComponent.adapter(ctx),
-    emailAndPassword: { enabled: true, requireEmailVerification: false },
+    advanced: { disableOriginCheck: false },
+    emailAndPassword: {
+      enabled: true,
+      requireEmailVerification: false,
+      resetPasswordTokenExpiresIn: RESET_TOKEN_SECONDS,
+      revokeSessionsOnPasswordReset: true,
+      sendResetPassword: passwordRecoveryEnabled()
+        ? async ({ user, token }) => {
+            if (!('scheduler' in ctx)) throw new Error('Recovery requires an action context.');
+            // Queue mail durably instead of waiting for delivery in the public auth response.
+            await ctx.scheduler.runAfter(0, internal.accountEmail.sendPasswordReset, {
+              email: user.email,
+              token,
+            });
+          }
+        : undefined,
+    },
+    rateLimit: {
+      enabled: true,
+      storage: 'database',
+      customRules: {
+        '/request-password-reset': { window: 60, max: 3 },
+        '/reset-password': { window: 60, max: 5 },
+      },
+    },
     plugins: [crossDomain({ siteUrl }), convex({ authConfig })],
   });
 };
@@ -54,4 +79,11 @@ export const ensureProfile = mutation({
     const userId = await ctx.db.insert('users', { authId: auth._id, displayName });
     return { userId, displayName };
   },
+});
+
+/** Capability only: never exposes provider credentials or account existence. */
+export const recoveryAvailable = query({
+  args: {},
+  returns: v.boolean(),
+  handler: async () => passwordRecoveryEnabled(),
 });

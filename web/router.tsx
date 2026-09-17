@@ -14,6 +14,7 @@ import { useConvex, useConvexAuth, useMutation, useQuery } from 'convex/react';
 import { api } from '../convex/_generated/api';
 import type { Id } from '../convex/_generated/dataModel';
 import { authClient } from './auth-client';
+import { ForgotPassword, ResetPassword } from './password-recovery';
 import { CampaignPage, CampaignsPage, JoinPage } from './campaigns';
 import { CharacterPage, CharactersPage } from './characters';
 import { WizardPage } from './wizard';
@@ -144,7 +145,7 @@ function Shell() {
   const path = useRouterState({ select: state => state.location.pathname });
   if (path === '/foes') return <Outlet />;
   if (path === '/rules' || path.startsWith('/rules/')) return <Outlet />;
-  if (path === '/login') return <Outlet />;
+  if (['/login', '/forgot-password', '/reset-password'].includes(path)) return <Outlet />;
   if (path.startsWith('/join/') && !isAuthenticated)
     return (
       <CenteredPage>
@@ -163,6 +164,7 @@ function Shell() {
 function Login() {
   const { isAuthenticated, isLoading } = useConvexAuth();
   const { next } = loginRoute.useSearch();
+  const recoveryAvailable = useQuery(api.auth.recoveryAvailable);
   const [register, setRegister] = useState(false);
   const [pending, setPending] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -258,6 +260,7 @@ function Login() {
             >
               {register ? 'Already have an account? Sign in' : 'New here? Create an account'}
             </Button>
+            {!register && recoveryAvailable && <Link to="/forgot-password">Forgot password?</Link>}
           </form>
         </div>
       </section>
@@ -296,6 +299,20 @@ const loginRoute = createRoute({
         : '/',
   }),
   component: Login,
+});
+const forgotPasswordRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/forgot-password',
+  component: ForgotPassword,
+});
+const resetPasswordRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/reset-password',
+  validateSearch: (search: Record<string, unknown>) => ({
+    token: typeof search.token === 'string' ? search.token : undefined,
+    invalid: typeof search.error === 'string',
+  }),
+  component: () => <ResetPassword {...resetPasswordRoute.useSearch()} />,
 });
 const homeRoute = createRoute({
   getParentRoute: () => rootRoute,
@@ -392,6 +409,8 @@ const rulesArticleRoute = createRoute({
 export const router = createRouter({
   routeTree: rootRoute.addChildren([
     loginRoute,
+    forgotPasswordRoute,
+    resetPasswordRoute,
     homeRoute,
     campaignRoute,
     tableRoute,

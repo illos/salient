@@ -45,9 +45,9 @@ systems. This scope change does not remove the established priority on table per
   for the backend**.
 - Preserve the option to run the application on one home server with players connecting over LAN. The v1
   architecture must allow this; a packaged self-hosted edition is not established as an initial release gate.
-- Email-provider integration and the local email/recovery arrangement are deferred decisions. Hosted email
-  is acceptable. Password reset remains the only v1 email flow; deferring integration design does not remove
-  that feature from v1.
+- Cloudflare Email Service is selected (2026-09-17), with sender `salient@blackgate.studio`.
+  [V39](build/V39-account-email.md) implements password reset, the only v1 email flow; live sending
+  configuration and offline LAN recovery remain pending.
 
 **Recommended baseline** below means an implementation recommendation with supporting reasoning. Only
 explicitly confirmed entries are settled user choices. SSR, engine technology, and exact package versions
@@ -263,9 +263,10 @@ of the selected library, not a
 new library-selection gate. Provider support for verification email, MFA, or OAuth does not add those flows
 to v1 or restore the excluded admin dashboard.
 
-Keep email delivery behind a small integration boundary. The user accepts hosted email, but the exact
-provider/API, configuration, and LAN recovery behavior are explicitly work for another day. Do not install
-Resend or another provider based on earlier suggestions. Existing password-reset scope and pending
+Keep email delivery behind a small integration boundary. The user selected Cloudflare Email Service on
+2026-09-17, from `salient@blackgate.studio`, using the REST API from Convex. See
+[the account-email contract](accounts-and-access-spec.md#cloudflare-account-email--2026-09-17).
+Live delivery configuration/verification and offline LAN recovery remain pending. Existing password-reset scope and pending
 credential-change policy remain fuller-product requirements; password recovery is not a v0.01 gate.
 
 For a disconnected LAN edition, local email/password login should not depend on a cloud identity service.
@@ -367,7 +368,7 @@ Sources: [convex-test](https://docs.convex.dev/testing/convex-test),
   reopen this solely because a long-running table needs memory cleanup.
 - Establish runtime placement and server integration for the TypeScript engine. Revisit its language
   only if a concrete reason emerges, using the separate engine criteria.
-- Implement and verify Better Auth account flows; settle email delivery and local recovery later.
+- Implement and verify Better Auth account flows; verify the selected Cloudflare email delivery and design offline local recovery later.
 - Select the concrete Cloudflare storage/upload arrangement and local storage adapter, and define future LAN
   packaging/migration when that edition becomes an implementation task.
 - Establish measured table payload/cache/resource budgets and prove the optional dice technique.
