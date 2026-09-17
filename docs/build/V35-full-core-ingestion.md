@@ -137,3 +137,13 @@ links check covers 201 Markdown files; changed comparison-ledger formatting pass
 `node scripts/check-commit.ts --merge --range main..HEAD` gate accepts both implementation commits.
 Chords handoff sent the exact implementation revision and consumer/test paths to V36. Main remains
 `a0ac6d4`, clean and unmodified; this is a committed branch handoff awaiting integration.
+
+
+## Shared integration — 2026-09-17
+
+This reviewed dependency is now merged into main and running in the shared CT114 app through
+V38 `40206a5`. Full integrated checks and isolated/shared browser verification passed, including
+the full catalog and separate top-level Rules/Foes navigation. Existing play data was preserved.
+See [V38 delivery](V38-foes-integration-navigation.md#merge-and-shared-rollout) and
+[actual shared evidence](evidence/V38/README.md#shared-rollout). Earlier branch handoff notes above
+record the state before this integration.

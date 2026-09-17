@@ -1,0 +1,9 @@
+
+Running 5 tests using 1 worker
+
+[1/5] tests/browser/foes-library.spec.ts:4:1 › foe browsing, composed filters, URL persistence, sorting and empty recovery
+[2/5] tests/browser/foes-library.spec.ts:48:1 › light and dark, mobile, enlarged text and keyboard search
+[3/5] tests/browser/foes-library.spec.ts:96:1 › full catalog bands, pagination, sourcebooks, Malice and related rules
+[4/5] tests/browser/v35-full-foes.spec.ts:9:1 › all core definitions render their complete feature lists through the public consumer
+[5/5] tests/browser/v38-library-navigation.spec.ts:5:1 › primary navigation exposes independent Rules and Foes libraries
+  5 passed (1.7m)

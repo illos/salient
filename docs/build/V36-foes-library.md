@@ -8,7 +8,7 @@
 | Rules review | not required — presentation of existing printed metadata only |
 | Depends on | V34, V35 (compact browser catalog) |
 | Unblocks | Foe library desktop feedback |
-| Status | Committed — `e691e15` on slice/V36; not merged into main |
+| Status | Merged and live via V38 `40206a5`, 2026-09-17 |
 
 ## Goal
 
@@ -112,3 +112,13 @@ Implementation committed as `e691e15` on `slice/V36`, after V30 `214d04b` and V3
 `0b07723`/`5634420`. This is a reviewed branch handoff, not a main merge or shared-runtime update.
 The isolated [Foes library preview](https://salient-foes-library-dev-cb627850fa3d.tail41404c.ts.net/foes)
 serves the tested implementation. Final documentation link and commit-trailer checks pass.
+
+
+## Shared integration — 2026-09-17
+
+This reviewed dependency is now merged into main and running in the shared CT114 app through
+V38 `40206a5`. Full integrated checks and isolated/shared browser verification passed, including
+the full catalog and separate top-level Rules/Foes navigation. Existing play data was preserved.
+See [V38 delivery](V38-foes-integration-navigation.md#merge-and-shared-rollout) and
+[actual shared evidence](evidence/V38/README.md#shared-rollout). Earlier branch handoff notes above
+record the state before this integration.

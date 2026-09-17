@@ -1,8 +1,8 @@
 # V38 integration evidence
 
 The [slice](../../V38-foes-integration-navigation.md) integrates reviewed V30/V35/V36 into main
-with a separate primary Foes link. CT114 named environment `characters` is the isolated target;
-shared main stays on the preceding verified version until merge/rollout. Text logs omit ANSI color
+with a separate primary Foes link. CT114 named environment `characters` was the isolated validation target;
+the completed shared-main rollout is recorded below. Text logs omit ANSI color
 escapes and trailing whitespace, preserving results and diagnostics.
 
 ## Integrated checks
@@ -36,4 +36,20 @@ and [enlarged mobile layout](v36-library-mobile.png).
 
 ## Shared rollout
 
-Pending; isolated verification does not establish a completed shared rollout.
+Merged and deployed `40206a5f544f91a828797e44fed75366f4a776e6` from clean canonical main on
+2026-09-17. [Runtime identity](shared/runtime-status.json) records CT114 `main`, compose
+`salient-dev-b90776c53141`, unchanged vendor pins, and the established
+[shared app](https://salient-dev-fc4f48cb09a0.tail41404c.ts.net). Backend/frontend restarted healthy.
+Foes ships in the frontend catalog; no database reseed, migration or data reset was needed.
+Existing play volumes and character implementation were preserved.
+
+[Five shared-browser scenarios](shared/browser.log) passed in 1.7 minutes with no skipped,
+unexpected or flaky results. The [structured report](shared/browser-report.json) retains the
+actual [coverage attachment](shared/full-corpus-coverage.json): all 501 parent cards, all 2,006
+feature controls and zero page errors. This is a fresh run on shared main, separate from the
+isolated test evidence. Primary navigation, independent Rules/Foes searches, filters, cards,
+sourcebook/Malice context, mobile/enlarged text and themes passed.
+
+The [shared primary navigation](shared/primary-navigation.png) and
+[shared Foes library](shared/foes-library.png) show the actual deployed behavior. The final
+closeout commit updates documentation only; runtime remains `40206a5`.

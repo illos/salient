@@ -171,3 +171,13 @@ Pinned-source review: **pass**, `v30_source_review`; see
 source blobs, all 74 feature spans/fields, historical continuity and supporting links. It reproduced
 the full report with verified cached digests and rejected 89 source-sensitive comparison mutations.
 No source discrepancies or correction records were required. Both required reviews now pass.
+
+
+## Shared integration — 2026-09-17
+
+This reviewed dependency is now merged into main and running in the shared CT114 app through
+V38 `40206a5`. Full integrated checks and isolated/shared browser verification passed, including
+the full catalog and separate top-level Rules/Foes navigation. Existing play data was preserved.
+See [V38 delivery](V38-foes-integration-navigation.md#merge-and-shared-rollout) and
+[actual shared evidence](evidence/V38/README.md#shared-rollout). Earlier branch handoff notes above
+record the state before this integration.

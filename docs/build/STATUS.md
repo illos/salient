@@ -160,7 +160,7 @@ See the [CI review and run record](audits/2026-09-14-ci-history-review.md) for t
 | V29 | [Desktop layout feedback follow-ups](V29-desktop-feedback.md) | V21 | Merged — `7b80e56`, 2026-09-16; independent implementation review pass; integrated checks and the full 22-test browser suite pass; shared playable app on `5180` updated and the changed-feature journey verified live |
 | V31 | [History control placement correction](V31-history-control-placement.md) | V29 | Merged — `bd0c512`, 2026-09-16; user correction to V29 (only the Enable user undo toggle is a settings row; Rewind and Redo are a discreet icon pair beside the tabs); independent implementation review pass over three rounds; full 22-test browser suite passes; shared playable app on `5180` updated and the changed-feature journey verified live |
 
-| V30 | [Second-echelon undead ingestion](V30-second-echelon-undead.md) | V27 | Verified on branch — foe track, slice/V30, 2026-09-16; 20 undead + 2 Malice compared, 437 tests and both browser journeys pass; independent/source reviews pass; integration pending |
+| V30 | [Second-echelon undead ingestion](V30-second-echelon-undead.md) | V27 | Merged and live via V38 `40206a5`, 2026-09-17; reviewed V30 dependency `214d04b` included in full-catalog verification |
 
 ## Build lead handoff — 2026-09-15
 
@@ -279,16 +279,16 @@ records the handoff; it does not certify A09 or create an implementation commit.
 
 | Slice | Outcome | Status | Owner |
 | --- | --- | --- | --- |
-| V35 | [Full core stat-block ingestion](V35-full-core-ingestion.md) | Committed — `0b07723` on `slice/V35` (prerequisite `214d04b`); 455 tests, 5 browser scenarios and both reviews pass; handed to V36, not merged into main | Codex, foes-full worktree |
+| V35 | [Full core stat-block ingestion](V35-full-core-ingestion.md) | Merged and live via V38 `40206a5`; full 438-statblock catalog and retained source reviews; 663 integrated tests and shared exhaustive browser verification pass | Codex, foes-full worktree |
 
 ## V36 Foes library — 2026-09-17
 
 | Id | Slice | Dependencies | Status |
 | --- | --- | --- | --- |
-| V36 | [Foes library browsing UI](V36-foes-library.md) | V34, V35 | Committed — `e691e15` on slice/V36; 459 tests and 8 browser scenarios pass; independent review pass; not merged into main |
+| V36 | [Foes library browsing UI](V36-foes-library.md) | V34, V35 | Merged and live via V38 `40206a5`; reviewed library plus new primary navigation, 12 isolated and 5 shared browser scenarios pass |
 
 ## Current integration
 
 | Id | Slice | Status | Owner |
 | --- | --- | --- | --- |
-| V38 | [Foes integration and top-level navigation](V38-foes-integration-navigation.md) | In progress — merge V30/V35/V36 and expose separate Rules/Foes destinations | Integration lead |
+| V38 | [Foes integration and top-level navigation](V38-foes-integration-navigation.md) | Complete — merged/live `40206a5`; separate Rules/Foes links, 663 tests, 12 isolated and 5 shared browser scenarios pass | Integration lead |

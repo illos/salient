@@ -6,7 +6,7 @@
 | Owner | Integration lead |
 | Depends on | V30, V35, V36, current main including V37 |
 | Rules review | Not required for navigation; existing V30/V35 source reviews retained |
-| Status | Verified on integration branch — shared rollout pending |
+| Status | Complete — merged and verified in the shared app |
 
 ## Authorized outcome
 
@@ -59,3 +59,18 @@ responsive references, hero/Director sheets and V37 supporting/private choices. 
 primary navigation and the Foes destination screenshots. [Evidence](evidence/V38/README.md) and
 [independent review](reviews/V38-integration-review.md) record the pre-merge pass. Shared rollout
 remains the subsequent delivery gate.
+
+
+## Merge and shared rollout
+
+Integrated all six commits through `40206a5f544f91a828797e44fed75366f4a776e6` into main after
+review and the commit gate passed. `presidium-dev up` synchronized the clean canonical checkout
+to CT114 environment `main`, preserving its play-data volume and existing HTTPS URL. Backend
+and frontend are healthy. This is the established private development target, not a new hosted
+deployment. No character schema/content reseed was needed for the frontend Foes dataset.
+
+All five actual shared-browser scenarios passed in 1.7 minutes. Retained JSON reporter evidence
+records 501 parent cards and 2,006 feature controls with zero page errors; the top-level navigation
+journey and independent library searches also passed. See [shared evidence](evidence/V38/README.md#shared-rollout).
+The final documentation closeout requires no further runtime update. V30, V35 and V36 are now
+integrated/live as dependencies; their original branch reviews retain their original scope.
