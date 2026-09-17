@@ -9,11 +9,14 @@ The [remote development runbook](docs/remote-development.md) owns the Salient pi
 cutover status. Main data is now on CT114 with matching record/credential fingerprints, and the
 identified superseded local processes are stopped. Isolated validation passed 433 check-suite
 tests and all 22 real HTTPS browser tests. Main also passed reboot recovery with the same HTTPS
-URL, data and credentials. An actual Salient provider-session broker check and human
-existing-account sign-in remain pending.
+URL, data and credentials. The actual Salient provider-session broker check passed on 2026-09-16:
+`presidium-ssh dev-runtime id` and `presidium-dev status` both succeeded. Human existing-account
+sign-in remains pending.
 
-Use `presidium-dev` for dependency installation, backend/frontend,
-builds and browsers. Do not run those workloads on Presidium or start a stack automatically
+All future Salient development server activity, across all branches and worktrees, runs on the
+dedicated dev LXC (CT114), accessed through the secret broker. Use `presidium-dev` for dependency
+installation, backend/frontend, builds and browsers, and `presidium-ssh dev-runtime` for guest
+administration. Do not run those workloads on Presidium or start a stack automatically
 for every provider. Reuse the default main slot from its recorded checkout; different concurrent
 worktrees require explicitly named environments. Retrieve generated types/artifacts selectively.
 All enrolled agents share Docker access on the guest; names and helper checks are conventions,

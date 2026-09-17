@@ -5,9 +5,10 @@ matching record fingerprints and credentials. The identified superseded local pr
 stopped; the original data and protected backup remain available for operator rollback. Heavy
 development commands now belong on the dedicated guest. The isolated pilot passed 433 check-suite
 tests and all 22 HTTPS browser tests. Main passed explicit restart after reboot with unchanged
-data/credentials and the same HTTPS URL. **Real Salient provider-session broker verification
-and human existing-account sign-in remain pending; full V1 acceptance is not
-claimed.** See the dated [migration evidence](build/S03-remote-development.md#main-data-cutover--2026-09-16).
+data/credentials and the same HTTPS URL. Real Salient provider-session broker verification passed
+on 2026-09-16; see the [session checkpoint](build/S03-remote-development.md#salient-provider-access-checkpoint--2026-09-16).
+**Human existing-account sign-in remains pending; full V1 acceptance is not claimed.** See the dated
+[migration evidence](build/S03-remote-development.md#main-data-cutover--2026-09-16).
 
 ## Workflow
 

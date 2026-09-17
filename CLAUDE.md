@@ -4,6 +4,12 @@ These rules carry the project's standing instructions from `AGENTS.md` and `agen
 session and subagent. `agent.MD` remains the complete instruction set; read it in full before starting
 work. If anything here conflicts with `agent.MD`, follow `agent.MD` and fix this file.
 
+All future Salient development server activity, across all branches and worktrees, runs on the
+dedicated dev LXC (CT114), accessed through the secret broker. Use `presidium-dev` for servers,
+dependency installation, builds and browser tests, and `presidium-ssh dev-runtime` for guest
+administration. Do not start these workloads on Presidium. Reuse the shared `main` environment;
+concurrent branches need explicitly named environments. See [the runbook](docs/remote-development.md).
+
 ## Post-v0.01 development checkpoint — 2026-09-15
 
 - Follow [the five-track roadmap](docs/v1-roadmap.md) and

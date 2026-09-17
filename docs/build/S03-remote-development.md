@@ -1,7 +1,7 @@
 # S03 — Salient remote development adapter
 
 Status: merged, main data migrated and reboot recovery passed; local workloads stopped.
-Actual Salient provider and human existing-account checks remain pending.
+Actual Salient provider access passed; human existing-account sign-in remains pending.
 Owner: Voltar infrastructure thread.
 Rules review: not required (deployment configuration; no game rules change).
 
@@ -292,3 +292,25 @@ Reboot/recovery acceptance is now verified. Two final checks remain explicitly u
 Hermes infrastructure session: broker access by an actual registered Salient provider and human
 sign-in/readback with an existing migrated account. The remote default remains in effect; no local
 replacement stack should be started while those user-session checks are completed.
+
+### Salient provider access checkpoint — 2026-09-16
+
+Paused at the user's request after verifying broker access from the actual Salient Codex thread
+`f3ecbe62-7b03-4d6d-8830-6319ad0a7012`, in the main checkout at `ffa32d0` before this documentation
+checkpoint. Both read-only commands exited successfully:
+
+- `presidium-ssh dev-runtime id`: `uid=1000(dev) gid=1000(dev) groups=1000(dev),991(docker)`.
+- `presidium-dev status`: main environment `salient-dev-b90776c53141`, backend healthy and web running;
+  recorded remote source `d663c15808df7477bdc8573334e042cb1184074c`.
+
+The recorded preview is <https://salient-dev-fc4f48cb09a0.tail41404c.ts.net>. This session did not
+repeat browser tests or existing-account sign-in, expose credentials, or change runtime/data.
+The actual Salient provider authorization gate is now satisfied. Human sign-in/readback using an
+existing migrated account remains the outstanding acceptance check.
+
+At the user's direction, `AGENTS.md`, `CLAUDE.md` and `agent.MD` now explicitly direct all future
+development server activity across branches/worktrees to CT114 through the broker. Use
+`presidium-dev` for runtime/build/browser work and `presidium-ssh dev-runtime` for administration;
+concurrent branches need named environments. These are documentation-only changes; no runtime
+update is needed. Resume from the [remote development runbook](../remote-development.md), retain
+the existing data and rollback backup, and do not start a local replacement stack.
