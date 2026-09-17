@@ -12,3 +12,7 @@ public/rules-data/
 
 # Package caches are runtime state, never selected application source.
 .pnpm-store/
+
+# Local Core-book reference scans and upstream archives.
+docs/design-mockups/v1/reference/*
+!docs/design-mockups/v1/reference/README.md

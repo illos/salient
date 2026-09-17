@@ -258,3 +258,9 @@ records the handoff; it does not certify A09 or create an implementation commit.
 | Id | Slice | Depends on | Status | Owner |
 | --- | --- | --- | --- | --- |
 | S03 | [Remote development adapter](S03-remote-development.md) | External dev-host V1 helpers and enrollment | Merged through `d663c15`; main data migrated, local workloads stopped and reboot recovery passed; provider/human checks pending | Voltar infrastructure thread |
+
+## V33 UI design — 2026-09-17
+
+| Id | Slice | Status | Owner |
+| --- | --- | --- | --- |
+| V33 | [Core stat blocks and automatic glyph semantics](V33-core-stat-block-design.md) | Committed on `slice/V33` (this commit); reviewed design/reference implementation; not merged or rolled out | Codex, UI worktree |

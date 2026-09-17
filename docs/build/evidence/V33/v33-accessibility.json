@@ -1,0 +1,306 @@
+[
+  {
+    "role": "image",
+    "name": "Distance"
+  },
+  {
+    "role": "image",
+    "name": "Target"
+  },
+  {
+    "role": "image",
+    "name": "Trait"
+  },
+  {
+    "role": "image",
+    "name": "Melee"
+  },
+  {
+    "role": "image",
+    "name": "Ranged"
+  },
+  {
+    "role": "image",
+    "name": "Melee or ranged"
+  },
+  {
+    "role": "image",
+    "name": "Self"
+  },
+  {
+    "role": "image",
+    "name": "Area"
+  },
+  {
+    "role": "image",
+    "name": "Aura or burst"
+  },
+  {
+    "role": "image",
+    "name": "Special"
+  },
+  {
+    "role": "image",
+    "name": "Triggered action"
+  },
+  {
+    "role": "image",
+    "name": "Leader or solo feature"
+  },
+  {
+    "role": "image",
+    "name": "Activation"
+  },
+  {
+    "role": "image",
+    "name": "Tier 1, 11 or lower"
+  },
+  {
+    "role": "image",
+    "name": "Tier 2, 12 to 16"
+  },
+  {
+    "role": "image",
+    "name": "Tier 3, 17 or higher"
+  },
+  {
+    "role": "image",
+    "name": "Might"
+  },
+  {
+    "role": "image",
+    "name": "Might"
+  },
+  {
+    "role": "image",
+    "name": "Might less than 0"
+  },
+  {
+    "role": "image",
+    "name": "Might less than 1"
+  },
+  {
+    "role": "image",
+    "name": "Might less than 2"
+  },
+  {
+    "role": "image",
+    "name": "Might less than 3"
+  },
+  {
+    "role": "image",
+    "name": "Might less than 4"
+  },
+  {
+    "role": "image",
+    "name": "Might less than 5"
+  },
+  {
+    "role": "image",
+    "name": "Might less than 6"
+  },
+  {
+    "role": "image",
+    "name": "Might less than weak"
+  },
+  {
+    "role": "image",
+    "name": "Might less than average"
+  },
+  {
+    "role": "image",
+    "name": "Might less than strong"
+  },
+  {
+    "role": "image",
+    "name": "Agility"
+  },
+  {
+    "role": "image",
+    "name": "Agility"
+  },
+  {
+    "role": "image",
+    "name": "Agility less than 0"
+  },
+  {
+    "role": "image",
+    "name": "Agility less than 1"
+  },
+  {
+    "role": "image",
+    "name": "Agility less than 2"
+  },
+  {
+    "role": "image",
+    "name": "Agility less than 3"
+  },
+  {
+    "role": "image",
+    "name": "Agility less than 4"
+  },
+  {
+    "role": "image",
+    "name": "Agility less than 5"
+  },
+  {
+    "role": "image",
+    "name": "Agility less than 6"
+  },
+  {
+    "role": "image",
+    "name": "Agility less than weak"
+  },
+  {
+    "role": "image",
+    "name": "Agility less than average"
+  },
+  {
+    "role": "image",
+    "name": "Agility less than strong"
+  },
+  {
+    "role": "image",
+    "name": "Reason"
+  },
+  {
+    "role": "image",
+    "name": "Reason"
+  },
+  {
+    "role": "image",
+    "name": "Reason less than 0"
+  },
+  {
+    "role": "image",
+    "name": "Reason less than 1"
+  },
+  {
+    "role": "image",
+    "name": "Reason less than 2"
+  },
+  {
+    "role": "image",
+    "name": "Reason less than 3"
+  },
+  {
+    "role": "image",
+    "name": "Reason less than 4"
+  },
+  {
+    "role": "image",
+    "name": "Reason less than 5"
+  },
+  {
+    "role": "image",
+    "name": "Reason less than 6"
+  },
+  {
+    "role": "image",
+    "name": "Reason less than weak"
+  },
+  {
+    "role": "image",
+    "name": "Reason less than average"
+  },
+  {
+    "role": "image",
+    "name": "Reason less than strong"
+  },
+  {
+    "role": "image",
+    "name": "Intuition"
+  },
+  {
+    "role": "image",
+    "name": "Intuition"
+  },
+  {
+    "role": "image",
+    "name": "Intuition less than 0"
+  },
+  {
+    "role": "image",
+    "name": "Intuition less than 1"
+  },
+  {
+    "role": "image",
+    "name": "Intuition less than 2"
+  },
+  {
+    "role": "image",
+    "name": "Intuition less than 3"
+  },
+  {
+    "role": "image",
+    "name": "Intuition less than 4"
+  },
+  {
+    "role": "image",
+    "name": "Intuition less than 5"
+  },
+  {
+    "role": "image",
+    "name": "Intuition less than 6"
+  },
+  {
+    "role": "image",
+    "name": "Intuition less than weak"
+  },
+  {
+    "role": "image",
+    "name": "Intuition less than average"
+  },
+  {
+    "role": "image",
+    "name": "Intuition less than strong"
+  },
+  {
+    "role": "image",
+    "name": "Presence"
+  },
+  {
+    "role": "image",
+    "name": "Presence"
+  },
+  {
+    "role": "image",
+    "name": "Presence less than 0"
+  },
+  {
+    "role": "image",
+    "name": "Presence less than 1"
+  },
+  {
+    "role": "image",
+    "name": "Presence less than 2"
+  },
+  {
+    "role": "image",
+    "name": "Presence less than 3"
+  },
+  {
+    "role": "image",
+    "name": "Presence less than 4"
+  },
+  {
+    "role": "image",
+    "name": "Presence less than 5"
+  },
+  {
+    "role": "image",
+    "name": "Presence less than 6"
+  },
+  {
+    "role": "image",
+    "name": "Presence less than weak"
+  },
+  {
+    "role": "image",
+    "name": "Presence less than average"
+  },
+  {
+    "role": "image",
+    "name": "Presence less than strong"
+  }
+]

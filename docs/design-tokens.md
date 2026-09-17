@@ -181,3 +181,10 @@ Base UI `Checkbox` and `Select` remain available for new screens.
   slice (the mockup README departure concerns presenting Observer as a standing role; the existing
   page derives Player from the active session's selection and Observer from its absence, which is
   the specified meaning). Changing that presentation is outside A08.
+
+## Core reference typography proposal
+
+[V33](monster-presentation-spec.md#presentation) proposes a book-like serif treatment for rule text
+and the [shared glyph vocabulary](glyph-usage-spec.md). It is exercised in the design study only;
+production typography remains unchanged. Color uses existing tokens. The reference glyph font is
+self-hosted, with explicit load success before enabling visual codes and readable text on failure.

@@ -1,0 +1,148 @@
+$ pnpm lint && pnpm check:engine && pnpm check:app && pnpm check-links && pnpm check-vendor && pnpm content:check && pnpm foes:check && pnpm build
+$ eslint . && prettier --check .
+Checking formatting...
+All matched files use Prettier code style!
+$ tsc --noEmit && vitest run --project engine
+
+[1m[30m[46m RUN [49m[39m[22m [36mv4.1.11 [39m[90m/app[39m
+
+ [32m✓[39m [30m[46m engine [49m[39m tests/resolve.test.ts [2m([22m[2m19 tests[22m[2m)[22m[32m 14[2mms[22m[39m
+ [32m✓[39m [30m[46m engine [49m[39m tests/engine.test.ts [2m([22m[2m13 tests[22m[2m)[22m[32m 15[2mms[22m[39m
+ [32m✓[39m [30m[46m engine [49m[39m tests/fury-decisions.test.ts [2m([22m[2m5 tests[22m[2m)[22m[33m 363[2mms[22m[39m
+   [33m[2m✓[22m[39m R01 checks 2-3: every option value, grant and quoted count/budget sentence is verbatim in its cited source [33m 347[2mms[22m[39m
+ [32m✓[39m [30m[46m engine [49m[39m tests/character-v25-evaluator.test.ts [2m([22m[2m8 tests[22m[2m)[22m[33m 304[2mms[22m[39m
+ [32m✓[39m [30m[46m engine [49m[39m tests/character-derived-values.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 51[2mms[22m[39m
+ [32m✓[39m [30m[46m engine [49m[39m tests/live-state-initialization.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 72[2mms[22m[39m
+ [32m✓[39m [30m[46m engine [49m[39m tests/character-evaluator.test.ts [2m([22m[2m8 tests[22m[2m)[22m[32m 27[2mms[22m[39m
+ [32m✓[39m [30m[46m engine [49m[39m tests/acceptance.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 98[2mms[22m[39m
+ [32m✓[39m [30m[46m engine [49m[39m tests/parser.test.ts [2m([22m[2m8 tests[22m[2m)[22m[32m 77[2mms[22m[39m
+ [32m✓[39m [30m[46m engine [49m[39m tests/history.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 47[2mms[22m[39m
+ [32m✓[39m [30m[46m engine [49m[39m tests/character-creation-rulings.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 17[2mms[22m[39m
+ [32m✓[39m [30m[46m engine [49m[39m tests/v25-build-roll-contributions.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32m✓[39m [30m[46m engine [49m[39m tests/core-conditions.test.ts [2m([22m[2m11 tests[22m[2m)[22m[32m 29[2mms[22m[39m
+ [32m✓[39m [30m[46m engine [49m[39m tests/cli.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 203[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m14 passed[39m[22m[90m (14)[39m
+[2m      Tests [22m [1m[32m97 passed[39m[22m[90m (97)[39m
+[2m   Start at [22m 01:25:50
+[2m   Duration [22m 3.00s[2m (transform 225ms, setup 0ms, import 434ms, tests 1.32s, environment 1ms)[22m
+
+$ tsc -p tsconfig.web.json && vitest run --project app --project scripts
+
+[1m[30m[46m RUN [49m[39m[22m [36mv4.1.11 [39m[90m/app[39m
+
+ [32m✓[39m [30m[43m app [49m[39m tests/app/combat.test.ts [2m([22m[2m19 tests[22m[2m)[22m[33m 1780[2mms[22m[39m
+     [33m[2m✓[22m[39m acceptance 1: the setup card is a Director draft that follows the rosters; Cancel leaves no encounter, snapshot or lock [33m 920[2mms[22m[39m
+ [32m✓[39m [30m[43m app [49m[39m tests/app/abilities.test.ts [2m([22m[2m17 tests[22m[2m)[22m[33m 1986[2mms[22m[39m
+     [33m[2m✓[22m[39m acceptance 1 and 2: 10.1 free strike through /ability use; retry returns the same result with no second roll or damage [33m 593[2mms[22m[39m
+ [32m✓[39m [30m[43m app [49m[39m tests/app/history.test.ts [2m([22m[2m14 tests[22m[2m)[22m[33m 1404[2mms[22m[39m
+ [32m✓[39m [30m[43m app [49m[39m tests/app/admission.test.ts [2m([22m[2m11 tests[22m[2m)[22m[33m 951[2mms[22m[39m
+     [33m[2m✓[22m[39m acceptance 3: a player submission is not effective until approval; withdrawal and decline leave it unchanged [33m 509[2mms[22m[39m
+ [32m✓[39m [30m[43m app [49m[39m tests/app/access-sessions.test.ts [2m([22m[2m8 tests[22m[2m)[22m[33m 554[2mms[22m[39m
+ [32m✓[39m [30m[43m app [49m[39m tests/app/table.test.ts [2m([22m[2m6 tests[22m[2m)[22m[33m 662[2mms[22m[39m
+     [33m[2m✓[22m[39m acceptance 1 and 2: authority matrix across Director, player and observer [33m 453[2mms[22m[39m
+ [32m✓[39m [30m[43m app [49m[39m tests/app/v001-walkthrough.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 892[2mms[22m[39m
+   [33m[2m✓[22m[39m A09: admitted hero → real combat → correction/history → closeout → next session → paused Void keep/reset [33m 891[2mms[22m[39m
+ [32m✓[39m [30m[43m app [49m[39m tests/app/characters.test.ts [2m([22m[2m9 tests[22m[2m)[22m[33m 579[2mms[22m[39m
+     [33m[2m✓[22m[39m create/reopen persists authored fields and isolates private drafts across users [33m 410[2mms[22m[39m
+ [32m✓[39m [30m[43m app [49m[39m tests/app/closeout.test.ts [2m([22m[2m7 tests[22m[2m)[22m[33m 876[2mms[22m[39m
+     [33m[2m✓[22m[39m ends structure without synthetic boundaries/dice; closes cards, supports rewind/redo, rejects turns and attacks [33m 520[2mms[22m[39m
+ [32m✓[39m [30m[43m app [49m[39m tests/app/registry.test.ts [2m([22m[2m7 tests[22m[2m)[22m[33m 630[2mms[22m[39m
+     [33m[2m✓[22m[39m acceptance 1: the same /table roll from two submitters yields events of identical shape with server dice [33m 453[2mms[22m[39m
+ [32m✓[39m [30m[43m app [49m[39m tests/app/audience.test.ts [2m([22m[2m8 tests[22m[2m)[22m[33m 724[2mms[22m[39m
+     [33m[2m✓[22m[39m difficulty projection preserves public skill text containing result-like punctuation: Lore; hard: winter [33m 439[2mms[22m[39m
+ [32m✓[39m [30m[43m app [49m[39m tests/app/history-interaction-regressions.test.ts [2m([22m[2m8 tests[22m[2m)[22m[33m 301[2mms[22m[39m
+ [32m✓[39m [30m[43m app [49m[39m tests/app/foes.test.ts [2m([22m[2m5 tests[22m[2m)[22m[33m 578[2mms[22m[39m
+     [33m[2m✓[22m[39m Director loads independent sourced foes; peers see every foe through the selected health projection [33m 440[2mms[22m[39m
+ [32m✓[39m [30m[43m app [49m[39m tests/app/journal.test.ts [2m([22m[2m5 tests[22m[2m)[22m[33m 440[2mms[22m[39m
+ [32m✓[39m [30m[43m app [49m[39m tests/app/elementalist-character.test.ts [2m([22m[2m4 tests[22m[2m)[22m[33m 357[2mms[22m[39m
+ [32m✓[39m [30m[43m app [49m[39m tests/app/history-audit.test.ts [2m([22m[2m5 tests[22m[2m)[22m[33m 774[2mms[22m[39m
+     [33m[2m✓[22m[39m admission is separate; targeting preparation does not consume undo and is cleared by it [33m 497[2mms[22m[39m
+ [32m✓[39m [30m[43m app [49m[39m tests/app/interactions.test.ts [2m([22m[2m3 tests[22m[2m)[22m[33m 539[2mms[22m[39m
+     [33m[2m✓[22m[39m acceptance 5: opened by a short command, labeled in the log, answered headlessly, resolved [33m 470[2mms[22m[39m
+ [32m✓[39m [30m[43m app [49m[39m tests/app/closeout-session.test.ts [2m([22m[2m6 tests[22m[2m)[22m[33m 918[2mms[22m[39m
+     [33m[2m✓[22m[39m missing Void choice, unauthorized closure and pause with a Void choice leave state and history untouched [33m 539[2mms[22m[39m
+ [32m✓[39m [30m[43m app [49m[39m tests/app/dice.test.ts [2m([22m[2m6 tests[22m[2m)[22m[33m 321[2mms[22m[39m
+     [33m[2m✓[22m[39m same commandId returns the identical accepted roll; a new id draws new values [33m 301[2mms[22m[39m
+ [32m✓[39m [30m[43m app [49m[39m tests/app/content.test.ts [2m([22m[2m3 tests[22m[2m)[22m[33m 524[2mms[22m[39m
+     [33m[2m✓[22m[39m reseed loads every manifest entry; queries return the Goblin Warrior source verbatim [33m 430[2mms[22m[39m
+ [32m✓[39m [30m[43m app [49m[39m tests/app/independent-review.test.ts [2m([22m[2m4 tests[22m[2m)[22m[33m 475[2mms[22m[39m
+   [33m[2m✓[22m[39m independent: persisted session deletion revokes already issued identity across all private surfaces [33m 407[2mms[22m[39m
+ [32m✓[39m [30m[43m app [49m[39m tests/app/setup-local.test.ts [2m([22m[2m6 tests[22m[2m)[22m[33m 559[2mms[22m[39m
+ [32m✓[39m [30m[43m app [49m[39m tests/app/parse.test.ts [2m([22m[2m97 tests[22m[2m)[22m[32m 16[2mms[22m[39m
+ [32m✓[39m [30m[43m app [49m[39m tests/app/foe-operations.test.ts [2m([22m[2m2 tests[22m[2m)[22m[33m 541[2mms[22m[39m
+   [33m[2m✓[22m[39m foe buttons/API/commands share retries, source snapshots and journaled creation/removal [33m 483[2mms[22m[39m
+ [32m✓[39m [30m[43m app [49m[39m tests/app/a05-review-regressions.test.ts [2m([22m[2m3 tests[22m[2m)[22m[33m 622[2mms[22m[39m
+   [33m[2m✓[22m[39m committed combat checks Ferocity affordability during roll [33m 496[2mms[22m[39m
+ [32m✓[39m [30m[43m app [49m[39m tests/app/character-rulings.test.ts [2m([22m[2m2 tests[22m[2m)[22m[33m 503[2mms[22m[39m
+   [33m[2m✓[22m[39m Q-CHAR-10 shared evaluation, persisted draft and admission allow two of three ancestry points [33m 457[2mms[22m[39m
+ [32m✓[39m [30m[43m app [49m[39m tests/app/closeout-audit.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 488[2mms[22m[39m
+   [33m[2m✓[22m[39m normal cleanup clears a retained foe temporary pool once, with a private persisted journal [33m 487[2mms[22m[39m
+ [32m✓[39m [30m[43m app [49m[39m tests/app/character-review-queue.test.ts [2m([22m[2m2 tests[22m[2m)[22m[33m 640[2mms[22m[39m
+   [33m[2m✓[22m[39m an owner sees a new pending submission after 205 withdrawn reviews from same owner [33m 591[2mms[22m[39m
+ [32m✓[39m [30m[43m app [49m[39m tests/app/command-identities.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 3[2mms[22m[39m
+ [32m✓[39m [30m[43m app [49m[39m tests/app/engine-adapter.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 6[2mms[22m[39m
+ [32m✓[39m [30m[46m scripts [49m[39m tests/scripts/foes.test.ts [2m([22m[2m14 tests[22m[2m)[22m[33m 5297[2mms[22m[39m
+     [33m[2m✓[22m[39m regenerates twice byte-for-byte and retains exact pinned input [33m 2274[2mms[22m[39m
+     [33m[2m✓[22m[39m survives reordering without retargeting IDs and refuses missing or duplicate identity bindings [33m 322[2mms[22m[39m
+     [33m[2m✓[22m[39m supports duplicate names with distinct explicit identities and refuses unresolvable identical records [33m 302[2mms[22m[39m
+     [33m[2m✓[22m[39m uses generic whitespace extraction across multiple fixtures, rejects lost text and stat disagreements [33m 612[2mms[22m[39m
+     [33m[2m✓[22m[39m checks feature table fields and optional-spend labels against printed Markdown [33m 572[2mms[22m[39m
+     [33m[2m✓[22m[39m rejects incoherent corrections and reports additional parent prose [33m 606[2mms[22m[39m
+     [33m[2m✓[22m[39m keeps unfamiliar source text readable and flags it for comparison review [33m 304[2mms[22m[39m
+     [33m[2m✓[22m[39m applies revision/expected-value guarded corrections, preserving originals and exact older editions [32m 300[2mms[22m[39m
+ [32m✓[39m [30m[46m scripts [49m[39m tests/scripts/build-content.test.ts [2m([22m[2m22 tests[22m[2m)[22m[33m 1774[2mms[22m[39m
+     [33m[2m✓[22m[39m detects a hand-edited generation date 9999-99-99 independently [33m 580[2mms[22m[39m
+     [33m[2m✓[22m[39m detects a hand-edited generation date 2020-01-01 independently [33m 537[2mms[22m[39m
+ [32m✓[39m [30m[46m scripts [49m[39m tests/scripts/check-commit.test.ts [2m([22m[2m14 tests[22m[2m)[22m[32m 268[2mms[22m[39m
+ [32m✓[39m [30m[46m scripts [49m[39m tests/scripts/rules.test.ts [2m([22m[2m8 tests[22m[2m)[22m[33m 58902[2mms[22m[39m
+   [33m[2m✓[22m[39m ranks every unique exact title first, supports prefixes, typos and filters [33m 4721[2mms[22m[39m
+   [33m[2m✓[22m[39m regenerates identical articles, metadata and search from the same pin [33m 26767[2mms[22m[39m
+ [32m✓[39m [30m[46m scripts [49m[39m tests/scripts/glyphs.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 41[2mms[22m[39m
+ [32m✓[39m [30m[46m scripts [49m[39m tests/scripts/check-links.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 8[2mms[22m[39m
+ [32m✓[39m [30m[46m scripts [49m[39m tests/scripts/pinned-source.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 41[2mms[22m[39m
+ [32m✓[39m [30m[46m scripts [49m[39m tests/scripts/app-output.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 202[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m38 passed[39m[22m[90m (38)[39m
+[2m      Tests [22m [1m[32m340 passed[39m[22m[90m (340)[39m
+[2m   Start at [22m 01:26:02
+[2m   Duration [22m 92.71s[2m (transform 1.10s, setup 0ms, import 3.10s, tests 86.18s, environment 3ms)[22m
+
+$ node scripts/check-links.ts
+Checked 189 Markdown files: no broken relative links or anchors.
+$ node scripts/check-vendor.ts
+vendor/ matches the pinned submodule commits (2 submodules).
+$ node scripts/build-content.ts --check
+shared/content/compendium matches the clean pinned Compendium (467 entries, 10 excluded, revision fb83a789da8f).
+$ node scripts/ingest-foes.ts --check
+Foes: 11 stat blocks, 40 features; edition 6c6bbd40f2460c196511a2f0cc19b2ff9184ddee27be90245e5d5a8a915ed331; verified
+$ pnpm rules:ingest && tsc -p tsconfig.web.json && vite build
+$ node scripts/ingest-rules.ts
+Ingested 2614 entries, 26 categories from fb83a789da8f. No unresolved links.
+[36mvite v8.3.0 [32mbuilding client environment for production...[36m[39m
+transforming...
+✓ 2522 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                                       1.58 kB │ gzip:   0.67 kB
+dist/assets/search.worker-oMKCTI8n.js                                19.07 kB
+dist/assets/schibsted-grotesk-latin-ext-wght-normal-hsMS0n0O.woff2   20.92 kB
+dist/assets/schibsted-grotesk-latin-wght-normal-Bb8VGrTG.woff2       46.75 kB
+dist/assets/overlay-card-C1jW4vvI.css                                 0.75 kB │ gzip:   0.39 kB
+dist/assets/article-Dre97K8_.css                                     11.34 kB │ gzip:   2.68 kB
+dist/assets/index-CNT-51bR.css                                       83.49 kB │ gzip:  14.89 kB
+dist/assets/preview-Dg3IO590.js                                       0.93 kB │ gzip:   0.56 kB
+dist/assets/article-DmvMzvpZ.js                                       1.32 kB │ gzip:   0.81 kB
+dist/assets/x-BcaBsPsn.js                                             4.80 kB │ gzip:   2.17 kB
+dist/assets/content-Cv9SGCpJ.js                                      10.20 kB │ gzip:   3.95 kB
+dist/assets/rules-DNoh8Kp6.js                                        13.59 kB │ gzip:   4.43 kB
+dist/assets/overlay-card-Cm19lIWn.js                                 90.77 kB │ gzip:  32.29 kB
+dist/assets/foes-CMnGmtWL.js                                        353.73 kB │ gzip:  31.04 kB
+dist/assets/index-DHnyyCIh.js                                       677.05 kB │ gzip: 196.96 kB
+
+[32m✓ built in 2.69s[39m
+[33m[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.[39m

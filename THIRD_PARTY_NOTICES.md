@@ -44,3 +44,7 @@ independent features to the public browser preview at `/foes`. Exact source text
 provenance and the same provisional internal-tool boundary as the embedded Rules library. It is not GPL
 application code. No artwork is included. Steel Cauldron generated outputs are used only in a local,
 pinned comparison cache; no external application code, styling, or generated content supplies this package.
+
+## Draw Steel Glyphs
+
+The V33 design/reference renderer uses Draw Steel Glyphs Regular 002.101, © 2025 MCDM Productions, LLC, licensed under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). The unmodified font and its license are in `web/assets/draw-steel/`. Upstream: `https://files.mcdmproductions.com/DrawSteel/DrawSteelGlyphs.zip`. OTF SHA-256: `f97eee1680443ad69620bcdf0889542feed534bc62b7ae99c511390a05e85c71`. The font is redistributed byte-identically; no adaptation has been made. Core-book page scans remain local design references and are not distributed.

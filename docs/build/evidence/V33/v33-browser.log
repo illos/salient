@@ -1,0 +1,6 @@
+
+Running 2 tests using 1 worker
+
+[1/2] tests/browser/v33-design.spec.ts:9:1 › Core stat blocks, automatic glyph accessibility and plain-text fallback
+[2/2] tests/browser/v33-design.spec.ts:147:1 › a missing font leaves readable text rather than ASCII font codes
+  2 passed (4.9s)
