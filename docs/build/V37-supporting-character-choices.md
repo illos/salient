@@ -6,7 +6,7 @@
 | Owner | Character wizard lead |
 | Depends on | V25, V32 |
 | Rules review | Required |
-| Status | Verified on slice/V37 — shared-main integration pending |
+| Status | Complete — merged into main and verified in the shared app |
 
 ## Authorized outcome
 
@@ -115,5 +115,22 @@ The earlier table/sheet regression journeys also pass. Independent implementatio
 reviews cover every authored area without self-certification; the
 [integration receipt](../reviews/V37-integration-review.md) links those scopes and artifacts.
 The source comparison and Dragon Dreams/Wyrmplate ruling are complete. Parser/gameplay automation
-and additional class/ancestry trees retain their separate milestones. Git merge and verification
-of the established shared development app are the remaining delivery steps.
+and additional class/ancestry trees retain their separate milestones. Git merge and shared application verification are complete as recorded below.
+
+
+## Merge and shared app completion
+
+Merged `6eeaf5b873f0798f898d7a38cc644205c3a608b5` into main on 2026-09-17 after all independent
+reviews, 648 tests, five final isolated browser journeys and the two-commit trailer gate passed.
+The canonical main checkout was clean when `presidium-dev up` synchronized CT114 environment
+`main`, compose project `salient-dev-b90776c53141`. Backend functions/additive schema and frontend
+are healthy at [the established shared app](https://salient-dev-fc4f48cb09a0.tail41404c.ts.net).
+The existing play-data volume was preserved and the content-only seed loaded 483 source records.
+No source/dependency pins changed and no other track branch was merged.
+
+All four actual shared authenticated journeys passed in 2.4 minutes: Elementalist, Fury level-two
+advancement/restoration, supporting-choice save/review, and private Director inheritance including
+the owning-Director path. [Logs, screenshots and persisted readbacks](evidence/V37/README.md#shared-development-rollout)
+record the actual target. The closeout commit changes only documentation/evidence and does not
+require another runtime rollout. The short-lived slice branch can be retired; parser/gameplay
+execution and other class/ancestry expansions remain separate work.

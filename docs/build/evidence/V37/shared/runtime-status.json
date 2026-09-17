@@ -1,0 +1,47 @@
+{
+  "project": "salient",
+  "environment": "main",
+  "installation": "39ebd4ec-3fc4-417a-bcc2-a4666d5e53d3",
+  "compose": "salient-dev-b90776c53141",
+  "source": {
+    "submodules": [
+      {
+        "path": "vendor/steel-compendium",
+        "url": "https://github.com/SteelCompendium/data-unified.git",
+        "gitlink": "fb83a789da8f0327a389c277a0c790b1648d5810",
+        "initialized": true,
+        "commit": "fb83a789da8f0327a389c277a0c790b1648d5810",
+        "dirty": false
+      },
+      {
+        "path": "vendor/forge-steel",
+        "url": "https://github.com/andyaiken/forgesteel.git",
+        "gitlink": "5a846aadb623a9855a023e9403bb887a956c341f",
+        "initialized": true,
+        "commit": "5a846aadb623a9855a023e9403bb887a956c341f",
+        "dirty": false
+      }
+    ],
+    "checkout": "/srv/presidium/projects/salient/code",
+    "identity": "ff99c9f507ebb2dfebd4ca7c25f824165fdcece115413e30e9f0f76cc22c6df9",
+    "commit": "6eeaf5b873f0798f898d7a38cc644205c3a608b5",
+    "dirty": false
+  },
+  "phase": "running",
+  "updated": 1789655343,
+  "lastJob": {
+    "container": "salient-dev-b90776c53141-job-967c5cc3",
+    "service": "install",
+    "started": 1789655343,
+    "exitCode": 0
+  },
+  "routes": {
+    "web": {
+      "name": "salient-dev-fc4f48cb09a0",
+      "identity": "{\"endpoint\":\"web\",\"environment\":\"main\",\"installation\":\"39ebd4ec-3fc4-417a-bcc2-a4666d5e53d3\",\"managedBy\":\"presidium-dev-v1\",\"project\":\"salient\"}",
+      "port": 32800,
+      "url": "https://salient-dev-fc4f48cb09a0.tail41404c.ts.net",
+      "phase": "https-verified-from-host"
+    }
+  }
+}

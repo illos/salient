@@ -16,7 +16,7 @@ import attribute failure; the generator now aligns the import and actual startup
 [Supporting browser run](integration/supporting-browser.log) passed both initial V37 journeys:
 
 - Artisan skills, owned perk target, changing perk, source links, custom incident, Arcane Archer,
-  Elemental Inside's permanent drawback, save/reload, Director review and effective sheet.
+  Elemental Inside's Stamina bonus and full drawback text, save/reload, Director review and effective sheet.
 - Strange Inheritance private Director setup, approval readiness, item persistence, owner privacy,
   and the owning Director's pre-submit setup path.
 
@@ -41,4 +41,21 @@ failure was an old availability-label expectation; the [corrected wizard rerun](
 passed. Together these cover all five requested final journeys.
 [Fury persisted advancement/restoration](isolated/fury-progression/readback.json) and
 [level-two sheet](isolated/fury-progression/level-two-sheet.png) retain the exact readback.
-Shared-main rollout remains pending.
+## Shared development rollout
+
+Git integration and runtime update use `6eeaf5b873f0798f898d7a38cc644205c3a608b5`.
+The [runtime identity](shared/runtime-status.json) records a clean main checkout, unchanged pins,
+healthy backend and the established HTTPS endpoint. [Catalog sync](shared/content-seed.log)
+loaded all 483 entries into the existing anonymous development backend;
+[authenticated status readback](shared/content-status.json) confirms the count and pinned revision. Existing play data
+volumes were retained; no reset or destructive migration occurred. [Four authenticated shared browser journeys](shared/browser.log) passed in 2.4 minutes:
+Elementalist creation/source sheet; Fury advancement including hidden-target pruning, persisted
+level two and restoration; supporting career/perk/kit/complication choices and review; and private
+Director inheritance with owning-Director setup. These are new disposable test characters in the
+shared target, not a claim that isolated evidence alone proves deployment.
+
+[Supporting-choice readback](shared/supporting-choices/readback.json),
+[Fury progression readback](shared/fury-progression/readback.json),
+[reviewed character sheet](shared/supporting-choices/reviewed-sheet.png), and
+[private Director screen](shared/private-inheritance/director.png) capture actual shared behavior.
+The final closeout changes documentation only; runtime remains the reviewed `6eeaf5b` code.

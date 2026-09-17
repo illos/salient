@@ -1,0 +1,6 @@
+Target: local development anonymous:anonymous-agent at http://127.0.0.1:3210
+{
+  "entryCount": 483,
+  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+}
+Content snapshot loaded. Read it back with content:status or content:get.

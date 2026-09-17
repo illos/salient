@@ -1,0 +1,8 @@
+
+Running 4 tests using 1 worker
+
+[1/4] tests/browser/v25-elementalist.spec.ts:7:1 › corrected Forge Bethell: complete wizard, reload, review and sourced sheet
+[2/4] tests/browser/v32-progression.spec.ts:29:1 › Fury advancement preserves live state; source-complete sheet and reviewed history restoration
+[3/4] tests/browser/v37-supporting-choices.spec.ts:11:1 › supporting choices show complete sources, prune dependent targets and persist reviewed mechanics
+[4/4] tests/browser/v37-supporting-choices.spec.ts:157:1 › Strange Inheritance lets the Director save a private sourced item without exposing it to the owner
+  4 passed (2.4m)
