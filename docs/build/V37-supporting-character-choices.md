@@ -6,7 +6,7 @@
 | Owner | Character wizard lead |
 | Depends on | V25, V32 |
 | Rules review | Required |
-| Status | In progress — source inventory and independent rules research |
+| Status | Verified on slice/V37 — shared-main integration pending |
 
 ## Authorized outcome
 
@@ -29,8 +29,8 @@ preserved; this is not an assignment to implement additional class or ancestry t
 ## Scope and delivery
 
 Inventory cultures, careers/inciting incidents, skill groups/skills, languages, kits, perks and
-complications. The current content snapshot contains 13 culture aspects, 18 careers, 57 skill/group
-records, 25 kits, 47 core perks and 100 complications. Recount from the pinned sources and identify
+complications. The current content snapshot contains 13 culture aspects, 18 careers, 57 selectable skill
+records plus five group records, 25 kits, 47 core perks and 100 complications. Recount from the pinned sources and identify
 excluded supplemental records explicitly. Source presence does not establish class eligibility.
 
 Research and compare source text, choice counts/pools, fixed grants, nested choices, conditional
@@ -63,4 +63,57 @@ their owning contracts; record concrete unresolved dependencies in the existing 
 2026-09-17: source work claimed in `/srv/presidium/projects/salient/characters-build`, branch
 `slice/V37`, from integrated V32 `ea831d6`. V32 shared rollout passed both real character journeys; closeout is `d9dac21`.
 New implementation will use the named CT114 `characters` environment after V32 evidence is
-archived. No new supporting-choice backend/runtime changes yet. Source research precedes changes.
+archived. This initial claim preceded the source and implementation work recorded below.
+
+
+## Source and implementation checkpoint
+
+The [complete inventory](../research/v37-supporting-choice-inventory.md) links both exhaustive
+ledgers. The first reproduction check passed against 289 exact source records and all named core
+records/Forge matches. Source comparison exposed required nested choices beyond Forge's controls;
+those choices are represented in shared definitions and the owner wizard.
+
+Shared evaluation covers all career rewards, ordinary kit contributions, fixed-skill replacements,
+owned targets, real skill/language loss, conditional Shared Spirit skill sets, permanent complication
+values, source ability grants and source cost adjustments. Initial items/project points remain
+recorded build entitlements; their equipment use/spending and conditional play remain separate.
+Strange Inheritance has a separate private Director store and picker, bound to the displayed build
+revision. It never writes the secret identity into owner selections or public history.
+
+Following in the Footsteps stores server-derived choice origins in immutable revisions. Legal
+future references survive reaching their level; changing the reference establishes a new origin.
+Fury aspect restrictions apply to the future catalog. Full edit, progression and restoration share
+this rule; clients cannot supply an earlier origin through public mutation arguments.
+
+Independent static reviews found and corrected missing level-scaled immunity, removed-skill
+ownership, choice-origin retention, cost-floor and private revision-view issues. Subsequent remote results and integration are recorded below.
+
+
+## Validation checkpoint
+
+The first complete CT114 check passed all 648 tests (274 evaluator, 374 app/tooling), lint,
+TypeScript, source/link checks and frontend build. The generated snapshot contains 483 entries,
+including ten added Dragon Knight trait/ability sources. Existing Fury and Elementalist fixture
+values and provenance remain unchanged.
+
+A real startup failure exposed a pinned bundler compatibility issue: mixed attributed/unattributed
+imports of the same complication JSON produce a synthetic esbuild metafile path, which Convex 1.45
+incorrectly passes to `stat` and then suppresses the error. A CT114 minimal reproducer confirmed
+that path does not exist. The generator now emits the same JSON attribute as the shared evaluator;
+no dependency pins or source records changed. The next actual function upload completed in 4.44s.
+Normal restart reached a healthy backend and verified HTTPS route. Final full check passed
+648 tests after the UI corrections. Elementalist, Fury advancement, supporting choices and
+private inheritance all passed actual authenticated journeys. The older wizard-frame test
+required updated step/availability labels; final evidence and shared rollout are tracked in
+[the evidence index](evidence/V37/README.md).
+
+
+## Integration readiness
+
+All 648 checks and five final authenticated browser journeys pass on CT114 `characters`.
+The earlier table/sheet regression journeys also pass. Independent implementation and rules
+reviews cover every authored area without self-certification; the
+[integration receipt](../reviews/V37-integration-review.md) links those scopes and artifacts.
+The source comparison and Dragon Dreams/Wyrmplate ruling are complete. Parser/gameplay automation
+and additional class/ancestry trees retain their separate milestones. Git merge and verification
+of the established shared development app are the remaining delivery steps.

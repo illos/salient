@@ -20,6 +20,7 @@ import { Card, CardContent } from './components/ui/card';
 import { Input } from './components/ui/input';
 import { Eyebrow, Field, Loading, SectionHeading, useCommand } from './ui';
 import { CharacterSheet } from './character-sheet';
+import { SecretInheritance } from './character-sheet/secret-inheritance';
 
 export function CharactersPage() {
   const characters = useQuery(api.characters.listMine);
@@ -117,18 +118,34 @@ export function CharactersPage() {
 function SubmitControls({ characterId }: { characterId: Id<'characters'> }) {
   const character = useQuery(api.characters.get, { characterId });
   const campaigns = useQuery(api.campaigns.list);
+  const viewer = useQuery(api.auth.viewer);
   const submit = useMutation(api.characters.submit);
   const withdraw = useMutation(api.characters.withdraw);
   const command = useCommand();
   const [campaignId, setCampaignId] = useState<string>('');
-  if (!character || !campaigns) return <Loading />;
+  const target = character?.campaignId ?? (campaignId || campaigns?.[0]?.id) ?? null;
+  const strangeInheritance = character?.selections.some(
+    selection =>
+      selection.decisionId === 'complication.choice' && selection.value === 'Strange Inheritance',
+  );
+  const directingTarget =
+    !!target &&
+    campaigns?.some(campaign => campaign.id === target && campaign.ownerId === viewer?.userId);
+  const needsPrivateSetup = !!strangeInheritance && !!directingTarget;
+  const inheritance = useQuery(
+    api.characterSecrets.inheritance,
+    needsPrivateSetup && target
+      ? { characterId, view: 'draft', campaignId: target as Id<'campaigns'> }
+      : 'skip',
+  );
+  if (!character || !campaigns || viewer === undefined) return <Loading />;
   const pending = character.review?.status === 'pending' ? character.review : null;
-  const target = character.campaignId ?? (campaignId || campaigns[0]?.id) ?? null;
   const canSubmit =
     character.status === 'complete' &&
     !pending &&
     (!character.campaignId || !character.draftIsEffective) &&
     !character.fullEditIsStale &&
+    (!needsPrivateSetup || !!inheritance?.item) &&
     !!target &&
     !character.combatLocked;
   const action = buttonVariants({
@@ -200,9 +217,11 @@ function SubmitControls({ characterId }: { characterId: Id<'characters'> }) {
                 ? `The build is ${character.status}; finish it in the wizard first.`
                 : character.fullEditIsStale
                   ? 'Review and save this older draft in the editor before submitting.'
-                  : character.campaignId && character.draftIsEffective
-                    ? 'The saved build is already the effective one.'
-                    : undefined
+                  : needsPrivateSetup && !inheritance?.item
+                    ? 'Save the Director’s private inheritance choice before submitting.'
+                    : character.campaignId && character.draftIsEffective
+                      ? 'The saved build is already the effective one.'
+                      : undefined
             }
             onClick={() =>
               target &&
@@ -222,6 +241,26 @@ function SubmitControls({ characterId }: { characterId: Id<'characters'> }) {
           This draft predates the effective build. Open Edit to review and reconcile it.
         </p>
       )}
+      {(character.pendingDirectorSetup || (needsPrivateSetup && !inheritance?.item)) && (
+        <p className="max-w-lg text-xs text-muted-foreground">
+          {character.pendingDirectorSetup && <>{character.pendingDirectorSetup} </>}
+          {needsPrivateSetup
+            ? 'Your recorded character choices can be complete while private Director setup is still required. Save the inherited trinket below before submitting.'
+            : 'Your recorded character choices can be complete while private Director setup is still required. Submit for review; your Director chooses the inherited trinket privately before approving the build.'}
+        </p>
+      )}
+      {needsPrivateSetup &&
+        target &&
+        !pending &&
+        (!character.campaignId || !character.draftIsEffective) && (
+          <div className="w-full max-w-2xl text-left">
+            <SecretInheritance
+              characterId={characterId}
+              view="draft"
+              campaignId={target as Id<'campaigns'>}
+            />
+          </div>
+        )}
       {pending ? (
         <Badge variant="outline">
           {pending.kind} awaiting review in {pending.campaignName} (revision {pending.revision})

@@ -8,10 +8,11 @@
     "node": ">=24.12.0"
   },
   "scripts": {
-    "check": "pnpm lint && pnpm check:engine && pnpm check:app && pnpm check-links && pnpm check-vendor && pnpm content:check && pnpm foes:check && pnpm build",
+    "check": "pnpm lint && pnpm check:engine && pnpm check:app && pnpm check-links && pnpm check-vendor && pnpm content:check && pnpm supporting:check && pnpm foes:check && pnpm build",
     "test": "vitest run --project engine",
     "play": "node src/cli.ts",
     "demo": "node src/cli.ts demo",
+    "supporting:check": "node scripts/check-supporting-inventory.ts",
     "character:sources": "node scripts/inspect-character-sources.ts",
     "dev": "pnpm rules:ingest && vite --host 0.0.0.0",
     "dev:backend": "convex dev",

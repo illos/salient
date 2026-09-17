@@ -11,9 +11,18 @@
     "version": "1.0.3"
   },
   "generatedAt": "2026-09-08",
-  "contentHash": "sha256:376862af66922ded336d274f5d45d20b857ece6ae8b5203e53b05207e4cdc985",
-  "entryCount": 473,
+  "contentHash": "sha256:64a08e925f76657409df983b706d2599edcb499457e9b21325d65ee7268c10d8",
+  "entryCount": 483,
   "selections": [
+    {
+      "id": "supporting-character-choices",
+      "description": "V37 borrowed Dragon Knight traits and abilities; Grounded sources are already in the Elementalist selection.",
+      "paths": [
+        "feature/trait/dragon-knight",
+        "feature/ability/dragon-knight"
+      ],
+      "basis": "docs/build/V37-supporting-character-choices.md: full source for supporting character choices; ancestry/class availability remains separately restricted."
+    },
     {
       "id": "goblin-warrior",
       "description": "Goblin Warrior stat block, with the goblin group Malice features the stat block directory holds.",
@@ -208,6 +217,22 @@
       "name": "Ranged Weapon Free Strike",
       "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/common/ranged-weapon-free-strike.md",
       "selection": "common-actions",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.dragon-knight/draconian-pride",
+      "kind": "ability",
+      "name": "Draconian Pride",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/dragon-knight/draconian-pride.md",
+      "selection": "supporting-character-choices",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.dragon-knight/dragon-breath",
+      "kind": "ability",
+      "name": "Dragon Breath",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/dragon-knight/dragon-breath.md",
+      "selection": "supporting-character-choices",
       "file": "ability.json"
     },
     {
@@ -3864,6 +3889,70 @@
       "name": "Wings",
       "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/devil/wings.md",
       "selection": "devil-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.dragon-knight/draconian-guard",
+      "kind": "trait",
+      "name": "Draconian Guard",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/dragon-knight/draconian-guard.md",
+      "selection": "supporting-character-choices",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.dragon-knight/draconian-pride",
+      "kind": "trait",
+      "name": "Draconian Pride",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/dragon-knight/draconian-pride.md",
+      "selection": "supporting-character-choices",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.dragon-knight/dragon-breath",
+      "kind": "trait",
+      "name": "Dragon Breath",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/dragon-knight/dragon-breath.md",
+      "selection": "supporting-character-choices",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.dragon-knight/dragon-knight-traits",
+      "kind": "trait",
+      "name": "Dragon Knight Traits",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/dragon-knight/dragon-knight-traits.md",
+      "selection": "supporting-character-choices",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.dragon-knight/prismatic-scales",
+      "kind": "trait",
+      "name": "Prismatic Scales",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/dragon-knight/prismatic-scales.md",
+      "selection": "supporting-character-choices",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.dragon-knight/remember-your-oath",
+      "kind": "trait",
+      "name": "Remember Your Oath",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/dragon-knight/remember-your-oath.md",
+      "selection": "supporting-character-choices",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.dragon-knight/wings",
+      "kind": "trait",
+      "name": "Wings",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/dragon-knight/wings.md",
+      "selection": "supporting-character-choices",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.dragon-knight/wyrmplate",
+      "kind": "trait",
+      "name": "Signature Trait: Wyrmplate",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/dragon-knight/wyrmplate.md",
+      "selection": "supporting-character-choices",
       "file": "trait.json"
     },
     {

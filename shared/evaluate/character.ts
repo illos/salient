@@ -15,7 +15,11 @@
  * partial, never a displayed zero. Provisional defaults carry their open question id.
  */
 import { assignmentError } from './assignment.ts';
-import { poolValues } from './structure.ts';
+import { isAvailable, poolOf, poolValues } from './structure.ts';
+import { CAREER_BENEFITS } from '../content/supporting-backgrounds.ts';
+import { COMPLICATION_ABILITIES } from '../content/supporting-complication-abilities.ts';
+import { COMPLICATION_EFFECTS } from '../content/supporting-complications.ts';
+import { SUPPORTING_KITS, KIT_BONUS_SOURCES } from '../content/supporting-kits.ts';
 import type { Characteristic } from '../contracts/rollResolution.ts';
 import type {
   DerivedBaseline,
@@ -173,16 +177,7 @@ class Evaluation {
   // Availability, pools and validation (R02 section 3, status rules 1 to 3 and 5).
 
   isAvailable(decision: Decision): boolean {
-    if (decision.availableWhen) {
-      const parent = this.single(decision.availableWhen.decision);
-      if (parent !== decision.availableWhen.value) return false;
-    }
-    for (const parentId of decision.dependsOn ?? []) {
-      const parent = this.decisions.get(parentId);
-      if (!parent || !this.available.has(parentId)) return false;
-      if (parent.kind === 'choice' && !this.valid.has(parentId)) return false;
-    }
-    return true;
+    return isAvailable(decision, Object.fromEntries(this.valid), this.decisions);
   }
 
   poolValues(from: string | string[] | undefined): string[] {
@@ -242,6 +237,19 @@ class Evaluation {
       if (available) this.available.add(decision.id);
       const selection = this.selections[decision.id];
       if (decision.kind === 'authored') {
+        if (!available) {
+          if (selection !== undefined)
+            this.diagnose(
+              decision.id,
+              'invalid',
+              'unavailable-decision',
+              `${decision.id} is not available for the current selections`,
+              this.own(decision),
+            );
+          continue;
+        }
+        if (decision.requiredText && (typeof selection !== 'string' || !selection.trim()))
+          this.missing(decision);
         if (selection !== undefined && typeof selection !== 'string')
           this.diagnose(
             decision.id,
@@ -276,10 +284,60 @@ class Evaluation {
         continue;
       }
       if (selection === undefined) {
-        this.missing(decision);
+        if (!decision.optional) this.missing(decision);
         continue;
       }
       this.validateShape(decision, selection);
+    }
+    // Owned targets can refer to skills chosen later in the wizard; validate only after all
+    // ordinary choices, and repeat when removing an invalid target invalidates its dependents.
+    let changed = true;
+    while (changed) {
+      changed = false;
+      const selections = Object.fromEntries(this.valid);
+      for (const decision of this.order) {
+        if (!this.available.has(decision.id)) continue;
+        if (!isAvailable(decision, selections, this.decisions)) {
+          this.available.delete(decision.id);
+          delete this.diagnostics[decision.id];
+          if (this.valid.has(decision.id))
+            this.diagnose(
+              decision.id,
+              'invalid',
+              'unavailable-decision',
+              `${decision.id} is unavailable for these choices and grants nothing.`,
+              this.own(decision),
+            );
+          changed = this.valid.delete(decision.id) || changed;
+          continue;
+        }
+        if (
+          (!decision.ownedPool &&
+            !decision.selectedPool &&
+            !decision.abilityPool &&
+            !decision.options?.some(option => option.requiresFeature)) ||
+          !this.valid.has(decision.id)
+        )
+          continue;
+        const value = this.valid.get(decision.id)!;
+        const values = Array.isArray(value) ? value : [value];
+        const allowed = poolOf(decision, selections, this.definitions).values;
+        if (
+          values.some(
+            item => item !== null && (typeof item !== 'string' || !allowed.includes(item)),
+          )
+        ) {
+          this.diagnose(
+            decision.id,
+            'invalid',
+            'value-not-in-pool',
+            `Choose an eligible ${decision.ownedPool?.kind ?? 'option'} for ${decision.label ?? decision.id}. Its ownership requirements are not met.`,
+            this.own(decision),
+          );
+          this.valid.delete(decision.id);
+          changed = true;
+        }
+      }
     }
   }
 
@@ -321,9 +379,11 @@ class Evaluation {
           );
           return;
         }
-        if (!pool.includes(selection)) return notInPool(selection);
+        if (!pool.includes(selection) && !shape.customAllowed) return notInPool(selection);
+        if (shape.customAllowed && !selection.trim()) return this.missing(decision);
         this.valid.set(decision.id, selection);
-        if (!this.supported(decision, selection)) this.unsupported(decision, selection);
+        if (!shape.customAllowed && !this.supported(decision, selection))
+          this.unsupported(decision, selection);
         return;
       }
       case 'multi': {
@@ -443,6 +503,16 @@ class Evaluation {
           );
           return;
         }
+        if (decision.exactBudget && total < shape.budget) {
+          this.diagnose(
+            decision.id,
+            'incomplete',
+            'required-choice-missing',
+            `${total} of ${shape.budget} points selected; this source requires ${shape.budget} points.`,
+            this.own(decision),
+          );
+          return;
+        }
         this.valid.set(decision.id, items);
         if (total < shape.budget)
           this.diagnose(
@@ -527,7 +597,11 @@ class Evaluation {
   }
   private kit() {
     const kit = this.single('kit.choice');
-    const sentences = kit ? KIT_SENTENCES[kit] : undefined;
+    const sentences = kit
+      ? this.definitions.supportingChoicesVersion
+        ? (KIT_SENTENCES[kit] ?? SUPPORTING_KITS[kit])
+        : KIT_SENTENCES[kit]
+      : undefined;
     return sentences && this.available.has(`kit.${kit!.toLowerCase()}.contributions`)
       ? { name: kit!, s: sentences, decisionId: `kit.${kit!.toLowerCase()}.contributions` }
       : undefined;
@@ -990,6 +1064,8 @@ class Evaluation {
     }
 
     this.deriveProfiles(out);
+    this.deriveSupportingBenefits(out);
+    this.citeSupportingKit(out);
 
     // 1.15 Granted content, in definition order per group.
     out.skills = this.skills();
@@ -998,8 +1074,337 @@ class Evaluation {
     out.features = this.features();
     out.perks = this.perks();
     out.abilities = this.abilities();
+    this.deriveSupportingChoices(out);
     out.uncertainties = UNCERTAINTY_ORDER.filter(id => this.uncertainties.has(id));
     return out;
+  }
+
+  private citeSupportingKit(out: PartialBaseline) {
+    const kit = this.kit();
+    if (!kit || !this.definitions.supportingChoicesVersion || KIT_SENTENCES[kit.name]) return;
+    const sources = KIT_BONUS_SOURCES[kit.name];
+    if (!sources) return;
+    const cite = (value: { provenance: Provenance[] } | undefined, field: string) => {
+      const source = sources[field];
+      if (!value || !source) return;
+      value.provenance = value.provenance.map(entry =>
+        entry.decisionId === kit.decisionId ? { ...entry, source: this.sentence(source) } : entry,
+      );
+    };
+    for (const [field, source] of [
+      ['staminaMaximum', 'stamina'],
+      ['speed', 'speed'],
+      ['stability', 'stability'],
+      ['disengage', 'disengage'],
+    ] as const)
+      cite(out[field], source);
+    for (const [field, source] of [
+      ['staminaBonusPerEchelon', 'stamina'],
+      ['speedBonus', 'speed'],
+      ['stabilityBonus', 'stability'],
+      ['meleeDamageBonus', 'meleeDamage'],
+      ['rangedDamageBonus', 'rangedDamage'],
+      ['meleeDistanceBonus', 'meleeDistance'],
+      ['rangedDistanceBonus', 'rangedDistance'],
+      ['disengageBonus', 'disengage'],
+    ] as const)
+      cite(out.kit?.[field], source);
+  }
+
+  private deriveSupportingBenefits(out: PartialBaseline) {
+    if (!this.definitions.supportingChoicesVersion) return;
+    const career = this.single('career.choice');
+    const benefit = career ? CAREER_BENEFITS[career] : undefined;
+    if (benefit) {
+      const sourced = (quote: string, amount: number): Provenance => ({
+        decisionId: 'career.choice',
+        selection: career,
+        source: this.sentence({ path: benefit.source, quote }),
+        operation: 'add',
+        amount,
+      });
+      if (out.renown?.value !== benefit.renown)
+        out.renown = {
+          value: benefit.renown,
+          provenance: [
+            {
+              decisionId: 'career.choice',
+              source: this.sentence(SENTENCES.renownBase),
+              operation: 'base',
+              amount: 0,
+            },
+            ...(benefit.renown ? [sourced(benefit.quotes.renown, benefit.renown)] : []),
+          ],
+        };
+      if (out.wealth?.value !== 1 + benefit.wealth)
+        out.wealth = {
+          value: 1 + benefit.wealth,
+          provenance: [
+            {
+              decisionId: 'career.choice',
+              source: this.sentence(SENTENCES.wealthBase),
+              operation: 'base',
+              amount: 1,
+            },
+            ...(benefit.wealth ? [sourced(benefit.quotes.wealth, benefit.wealth)] : []),
+          ],
+        };
+      if (benefit.projectPoints)
+        out.projectPoints = {
+          value: benefit.projectPoints,
+          provenance: [sourced(benefit.quotes.projectPoints, benefit.projectPoints)],
+        };
+    }
+    const complication = this.single('complication.choice');
+    const effects = complication ? COMPLICATION_EFFECTS[complication] : undefined;
+    if (!effects) return;
+    const numericFields = ['staminaMaximum', 'recoveriesMaximum', 'speed', 'stability'] as const;
+    const highest = out.characteristics
+      ? Math.max(...Object.values(out.characteristics).map(value => value.value))
+      : undefined;
+    const amountOf = (value: unknown): number | undefined =>
+      typeof value === 'number'
+        ? value
+        : value === '3 * echelon'
+          ? 3 * Math.ceil(this.level / 3)
+          : value === 'level'
+            ? this.level
+            : value === 'level - 1'
+              ? this.level - 1
+              : value === 'highest characteristic'
+                ? highest
+                : undefined;
+    const provenance = (
+      quote: string,
+      amount: number,
+      operation: 'add' | 'set' = 'add',
+    ): Provenance => ({
+      decisionId: 'complication.choice',
+      selection: complication,
+      source: this.sentence({ path: effects.source, quote }),
+      operation,
+      amount,
+    });
+    const selectedBenefit = this.single('complication.infernal-contract-but-like-bad.benefit');
+    const benefitField = selectedBenefit?.split('+')[0];
+    const selectedModifiers =
+      selectedBenefit && benefitField
+        ? [
+            {
+              field:
+                benefitField === 'renown'
+                  ? 'initialRenown'
+                  : benefitField === 'wealth'
+                    ? 'initialWealthBonus'
+                    : 'staminaMaximum',
+              operation: 'add',
+              value: Number(selectedBenefit.split('+')[1]),
+              quote: effects.fullText,
+            },
+          ]
+        : [];
+    for (const modifier of [...effects.permanentModifiers, ...selectedModifiers]) {
+      const amount = amountOf(modifier.value);
+      if (amount === undefined) continue;
+      const entry = provenance(
+        modifier.quote ?? effects.fullText,
+        amount,
+        ['set', 'cap', 'initialBaseline'].includes(modifier.operation) ? 'set' : 'add',
+      );
+      const field = numericFields.find(field => field === modifier.field);
+      if (field && out[field])
+        out[field] = {
+          value: out[field]!.value + amount,
+          provenance: [...out[field]!.provenance, entry],
+        };
+      if (modifier.field === 'initialRenown' && out.renown)
+        out.renown = {
+          value: out.renown.value + amount,
+          provenance: [...out.renown.provenance, entry],
+        };
+      if (modifier.field === 'initialWealthBonus' && out.wealth)
+        out.wealth = {
+          value: out.wealth.value + amount,
+          provenance: [...out.wealth.provenance, entry],
+        };
+      if (modifier.field === 'initialWealth') out.wealth = { value: amount, provenance: [entry] };
+      if (modifier.field === 'renownMaximum')
+        out.renownMaximum = { value: amount, provenance: [entry] };
+      if (modifier.field.startsWith('immunity.') || modifier.field.startsWith('weakness.')) {
+        const field = modifier.field.startsWith('immunity.')
+          ? 'damageImmunities'
+          : 'damageWeaknesses';
+        const damageType = modifier.field.split('.')[1]!;
+        const list = (out[field] ??= []);
+        const existing = list.find(item => item.damageType === damageType);
+        if (existing)
+          existing.value = {
+            value: Math.max(existing.value.value, amount),
+            provenance: [...existing.value.provenance, entry],
+          };
+        else list.push({ damageType, value: { value: amount, provenance: [entry] } });
+      }
+    }
+    if (out.renown && out.renownMaximum && out.renown.value > out.renownMaximum.value)
+      out.renown = {
+        value: out.renownMaximum.value,
+        provenance: [...out.renown.provenance, ...out.renownMaximum.provenance],
+      };
+    if (out.staminaMaximum) {
+      const changedStamina = [...effects.permanentModifiers, ...selectedModifiers].some(
+        modifier => modifier.field === 'staminaMaximum',
+      );
+      if (changedStamina) {
+        out.recoveryValue = {
+          value: Math.floor(out.staminaMaximum.value / 3),
+          provenance: [
+            ...out.staminaMaximum.provenance,
+            {
+              decisionId: 'complication.choice',
+              source: this.sentence(SENTENCES.recoveryValue),
+              operation: 'floor-divide',
+              amount: 3,
+            },
+          ],
+        };
+        out.windedValue = {
+          value: Math.floor(out.staminaMaximum.value / 2),
+          provenance: [
+            ...out.staminaMaximum.provenance,
+            {
+              decisionId: 'complication.choice',
+              source: this.sentence(SENTENCES.winded),
+              operation: 'floor-divide',
+              amount: 2,
+            },
+          ],
+        };
+      }
+    }
+    for (const modifier of effects.permanentModifiers)
+      if (modifier.field === 'recoveryValue' && out.recoveryValue) {
+        const amount = amountOf(modifier.value);
+        if (amount !== undefined)
+          out.recoveryValue = {
+            value: out.recoveryValue.value + amount,
+            provenance: [
+              ...out.recoveryValue.provenance,
+              provenance(modifier.quote ?? effects.fullText, amount),
+            ],
+          };
+      }
+  }
+
+  private deriveSupportingChoices(out: PartialBaseline) {
+    const complication = this.single('complication.choice');
+    const effects = complication ? COMPLICATION_EFFECTS[complication] : undefined;
+    const choices: NonNullable<DerivedBaseline['supportingChoices']> = [];
+    for (const decision of this.order) {
+      const value = this.valid.get(decision.id);
+      if (!this.available.has(decision.id) || value === undefined) continue;
+      const effect = effects?.selectionEffects.find(effect => effect.decision === decision.id);
+      const configured =
+        decision.selectionRole && !['skill', 'language'].includes(decision.selectionRole);
+      if (!configured && !effect) continue;
+      const values = (Array.isArray(value) ? value : [value]).filter(
+        (value): value is string => typeof value === 'string',
+      );
+      if (!values.length) continue;
+      choices.push({
+        decisionId: decision.id,
+        label: decision.label ?? decision.id,
+        values,
+        operation: effect
+          ? `${effect.operation}${effect.value === undefined ? '' : `: ${effect.value}`}`
+          : decision.selectionRole!,
+        condition: effect?.condition ?? decision.note,
+        sourcePath: decision.source,
+        actor: decision.decisionActor,
+      });
+      if (effect?.operation === 'skill-bonus' && typeof effect.value === 'number')
+        for (const skill of out.skills ?? [])
+          if (values.includes(skill.name))
+            skill.bonus = {
+              value: effect.value,
+              provenance: [
+                {
+                  decisionId: decision.id,
+                  selection: skill.name,
+                  source: this.own(decision),
+                  operation: 'set',
+                  amount: effect.value,
+                },
+              ],
+            };
+      if (effect?.operation === 'ability-cost' && typeof effect.value === 'number')
+        for (const ability of out.abilities ?? [])
+          if (values.includes(ability.name)) {
+            (ability.costAdjustments ??= []).push({
+              decisionId: decision.id,
+              amount: effect.value,
+              minimum: 1,
+              sourcePath: decision.source,
+            });
+            if (ability.cost)
+              ability.cost = {
+                ...ability.cost,
+                amount: Math.max(1, ability.cost.amount + effect.value),
+              };
+          }
+      if (effect?.operation === 'item') {
+        const state =
+          complication === 'Artifact Bonded'
+            ? 'absent'
+            : complication === 'Shattered Legacy'
+              ? 'broken'
+              : 'possessed';
+        for (const name of values)
+          (out.initialItems ??= []).push({
+            decisionId: decision.id,
+            name,
+            sourcePath:
+              decision.optionSources?.[name] ??
+              decision.options?.find(option => option.value === name)?.source ??
+              decision.source,
+            state,
+            condition: effect.condition,
+          });
+      }
+    }
+    if (effects) {
+      for (const modifier of effects.permanentModifiers)
+        if (
+          ![
+            'staminaMaximum',
+            'recoveriesMaximum',
+            'speed',
+            'stability',
+            'recoveryValue',
+            'initialWealth',
+            'initialRenown',
+            'renownMaximum',
+          ].includes(modifier.field) &&
+          !/^(immunity|weakness)\./.test(modifier.field)
+        )
+          choices.push({
+            decisionId: 'complication.choice',
+            label: modifier.field,
+            values: [String(modifier.value)],
+            operation: modifier.operation,
+            sourcePath: effects.source,
+            condition: modifier.quote,
+          });
+      if (complication === 'Strange Inheritance')
+        (out.initialItems ??= []).push({
+          decisionId: 'complication.strange-inheritance.secretTrinket',
+          name: 'Secret second-echelon trinket',
+          sourcePath: effects.source,
+          state: 'pending-Director',
+          condition:
+            'The Director chooses privately; powers activate when level + Victories reaches 5.',
+        });
+    }
+    if (choices.length) out.supportingChoices = choices;
   }
 
   /** Source of the granting rule remains distinct from the readable entry's source path. */
@@ -1310,7 +1715,11 @@ class Evaluation {
       }
       if (decision.kind !== 'choice' || !this.valid.has(decision.id)) continue;
       const value = this.valid.get(decision.id)!;
-      if (/\.skills?(\.|$)|-skill$/.test(decision.id) || decision.replacesDuplicateSkill) {
+      if (
+        decision.selectionRole
+          ? decision.selectionRole === 'skill'
+          : /\.skills?(\.|$)|-skill$/.test(decision.id) || decision.replacesDuplicateSkill
+      ) {
         const names = Array.isArray(value) ? value : [value];
         for (const name of names)
           if (typeof name === 'string')
@@ -1372,6 +1781,17 @@ class Evaluation {
         );
       }
     }
+    const removed = new Set(
+      this.order
+        .filter(
+          decision =>
+            decision.selectionRole === 'skill-removal' ||
+            (decision.selectionRole === 'skill-conditional' &&
+              decision.ownedPool &&
+              !decision.ownedPool.exclude),
+        )
+        .flatMap(decision => this.list(decision.id) ?? [this.single(decision.id)]),
+    );
     // Keep the fixture's stable presentation order; accounting above never depends on input order.
     return candidates
       .filter(({ skill, fixed: isFixed }) =>
@@ -1379,7 +1799,8 @@ class Evaluation {
           ? fixed.get(skill.name) === skill
           : !invalidChoices.has(skill.provenance.decisionId),
       )
-      .map(candidate => candidate.skill);
+      .map(candidate => candidate.skill)
+      .filter(skill => !removed.has(skill.name));
   }
 
   private languages(): GrantedLanguage[] {
@@ -1400,39 +1821,50 @@ class Evaluation {
       } else granted.set(name, { decisionId: provenance.decisionId, automatic });
       out.push({ ...entry, provenance: this.provenance(provenance) });
     };
-    if (this.available.has('culture.caelian'))
-      add(
-        'Caelian',
-        { decisionId: 'culture.caelian', source: this.sentence(SENTENCES.caelian) },
-        true,
-      );
-    const culture = this.single('culture.language');
-    if (culture)
-      add(
-        culture,
-        {
-          decisionId: 'culture.language',
-          selection: culture,
-          source: this.sentence(SENTENCES.cultureLanguage),
-        },
-        false,
-      );
-    const soldier = this.decisions.get('career.soldier.languages');
-    for (const name of this.list('career.soldier.languages') ?? [])
-      if (name !== null && soldier)
-        add(name, { decisionId: soldier.id, selection: name, source: this.own(soldier) }, false);
     for (const decision of this.order) {
-      if (!decision.id.endsWith('.languages') || decision.id === 'career.soldier.languages')
-        continue;
-      for (const name of this.list(decision.id) ?? [])
-        if (name !== null)
+      if (!this.available.has(decision.id)) continue;
+      for (const grant of this.grantsOf(decision.id))
+        if (grant.kind === 'language')
+          add(
+            grant.value,
+            {
+              decisionId: decision.id,
+              source:
+                decision.id === 'culture.caelian'
+                  ? this.sentence(SENTENCES.caelian)
+                  : this.sentence({
+                      path: grant.source ?? decision.source,
+                      quote: grant.quote ?? decision.quote,
+                    }),
+            },
+            true,
+          );
+      const isLanguage = decision.selectionRole
+        ? decision.selectionRole === 'language'
+        : decision.id === 'culture.language' || decision.id.endsWith('.languages');
+      if (!isLanguage || decision.kind !== 'choice') continue;
+      const value = this.valid.get(decision.id);
+      for (const name of Array.isArray(value) ? value : [value])
+        if (typeof name === 'string')
           add(
             name,
-            { decisionId: decision.id, selection: name, source: this.own(decision) },
+            {
+              decisionId: decision.id,
+              selection: name,
+              source:
+                decision.id === 'culture.language'
+                  ? this.sentence(SENTENCES.cultureLanguage)
+                  : this.own(decision),
+            },
             false,
           );
     }
-    return out;
+    const removed = new Set(
+      this.order
+        .filter(decision => decision.selectionRole === 'language-removal')
+        .flatMap(decision => this.list(decision.id) ?? [this.single(decision.id)]),
+    );
+    return out.filter(language => !removed.has(language.name));
   }
 
   private traits(): GrantedFeature[] {
@@ -1507,6 +1939,18 @@ class Evaluation {
 
   private features(): GrantedFeature[] {
     const out: GrantedFeature[] = [];
+    const complication = this.single('complication.choice');
+    if (complication && COMPLICATION_EFFECTS[complication])
+      out.push({
+        name: complication,
+        kind: 'complication',
+        sourcePath: COMPLICATION_EFFECTS[complication].source,
+        provenance: {
+          decisionId: 'complication.choice',
+          selection: complication,
+          source: this.own(this.decisions.get('complication.choice')!),
+        },
+      });
     if (this.available.has('culture.edge'))
       out.push({
         name: 'Culture edge',
@@ -1517,6 +1961,23 @@ class Evaluation {
           source: this.sentence(SENTENCES.cultureEdge),
         }),
       });
+    const borrowed = this.decisions.get('complication.dragon-dreams.traits');
+    if (borrowed && this.available.has(borrowed.id))
+      for (const name of this.list(borrowed.id) ?? []) {
+        const option = borrowed.options?.find(option => option.value === name);
+        if (!option || !name) continue;
+        out.push({
+          name,
+          kind: 'supporting-feature',
+          sourcePath: option.source ?? borrowed.source,
+          provenance: {
+            decisionId: borrowed.id,
+            selection: name,
+            source: this.own(borrowed),
+            note: 'Active only with 5 or more Victories.',
+          },
+        });
+      }
     const classFeatures = this.decisions.get('class.fury.features');
     if (classFeatures && this.available.has(classFeatures.id))
       for (const grant of classFeatures.grants ?? [])
@@ -1550,7 +2011,13 @@ class Evaluation {
           });
     for (const decision of this.order)
       for (const grant of this.grantsOf(decision.id))
-        if (grant.kind === 'class-feature' || grant.kind === 'aspect-feature')
+        if (
+          grant.kind === 'class-feature' ||
+          grant.kind === 'aspect-feature' ||
+          grant.kind === 'career-benefit' ||
+          grant.kind === 'complication' ||
+          grant.kind === 'supporting-feature'
+        )
           out.push({
             name: grant.value,
             kind: grant.kind,
@@ -1683,6 +2150,26 @@ class Evaluation {
           });
       }
     }
+    for (const source of COMPLICATION_ABILITIES) {
+      if (this.single(source.availability.decision) !== source.availability.value) continue;
+      if (
+        source.selectedTrait &&
+        !this.list(source.selectedTrait.decision)?.includes(source.selectedTrait.value)
+      )
+        continue;
+      out.push({
+        name: source.name,
+        kind: source.kind,
+        sourcePath: source.sourcePath,
+        kitBonusesIncluded: false,
+        ...(source.condition ? { activationCondition: source.condition } : {}),
+        provenance: {
+          decisionId: source.selectedTrait?.decision ?? source.availability.decision,
+          selection: source.selectedTrait?.value ?? source.availability.value,
+          source: this.own(this.decisions.get(source.availability.decision)!),
+        },
+      });
+    }
     return out;
   }
 }
@@ -1735,7 +2222,11 @@ export function evaluateCharacter(
   input: EvaluationInput,
   definitions: DecisionDefinitions,
 ): EvaluationResult {
-  const evaluation = new Evaluation(definitions, input.selections, input.level);
+  const evaluation = new Evaluation(
+    input.choiceOrigins ? { ...definitions, choiceOrigins: input.choiceOrigins } : definitions,
+    input.selections,
+    input.level,
+  );
   const evaluatedAgainst = {
     definitionsSchemaVersion: DEFINITIONS_SCHEMA_VERSION as 'r01.1',
     compendiumRevision: definitions.compendiumRevision,

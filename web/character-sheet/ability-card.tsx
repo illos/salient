@@ -20,11 +20,14 @@ export function abilityTags(ability: SheetAbility): AbilityTag[] {
   const type = ability.metadata.actionType ? readableRuleText(ability.metadata.actionType) : '';
   if (ability.kind === 'signature' || ability.kind === 'kit-signature')
     tags.push({ text: 'Signature', kind: 'result' });
-  const cost = ability.metadata.cost
-    ? readableRuleText(ability.metadata.cost)
-    : ability.cost
+  const cost =
+    ability.cost && ability.costAdjustments?.length
       ? `${ability.cost.amount} ${ability.cost.resource}`
-      : null;
+      : ability.metadata.cost
+        ? readableRuleText(ability.metadata.cost)
+        : ability.cost
+          ? `${ability.cost.amount} ${ability.cost.resource}`
+          : null;
   if (cost) tags.push({ text: cost, kind: 'accent' });
   if (/triggered/i.test(type))
     tags.push({ text: /free/i.test(type) ? 'Free triggered' : 'Triggered', kind: 'plain' });
@@ -69,7 +72,17 @@ export function AbilityCard({ ability, compact }: { ability: SheetAbility; compa
           <RuleLink id={ability.content?.id} sourcePath={ability.sourcePath} label={ability.name} />
         </span>
       </header>
+      {ability.activationCondition && (
+        <p className="text-sm">Available when: {ability.activationCondition}</p>
+      )}
       <CoreSource source={abilitySource(ability)} />
+      {ability.costAdjustments?.map(adjustment => (
+        <p key={adjustment.decisionId} className="text-xs">
+          Cost adjustment: {adjustment.amount > 0 ? '+' : ''}
+          {adjustment.amount} (minimum {adjustment.minimum}).{' '}
+          <RuleLink sourcePath={adjustment.sourcePath} label="Cost adjustment" />
+        </p>
+      ))}
       {ability.kitBonusesIncluded && (
         <p className="text-xs text-muted-foreground">Kit bonuses included</p>
       )}

@@ -23,6 +23,9 @@ import {
   requireProgressionBase,
   revisionLevel,
 } from './lib/characterProgression';
+import { pendingDirectorSetup } from './lib/characterDirectorSetup';
+import { canonicalChoiceOrigins } from './lib/characterChoiceOrigins';
+import { COMPLICATION_ABILITIES } from '../shared/content/supporting-complication-abilities';
 import { getDefinitions } from '../shared/content/character-decisions';
 import { mutation, query } from './_generated/server';
 import type { Doc, Id } from './_generated/dataModel';
@@ -133,6 +136,8 @@ const detail = v.object({
   /** The R02 EvaluationResult of the draft revision (shared/contracts/characterEvaluation.ts). */
   evaluation: v.union(v.any(), v.null()),
   level: v.number(),
+  pendingDirectorSetup: v.optional(v.string()),
+  choiceOrigins: v.record(v.string(), v.object({ value: v.string(), level: v.number() })),
   fullEditIsStale: v.boolean(),
   combatLocked: v.boolean(),
   campaignId: v.union(v.id('campaigns'), v.null()),
@@ -152,11 +157,31 @@ const detail = v.object({
  * the wizard's live "hero so far", headless callers and `save` all use it. Pure: nothing is written.
  */
 export const evaluate = query({
-  args: { selections: v.array(selectionValidator), targetLevel: v.optional(v.number()) },
+  args: {
+    selections: v.array(selectionValidator),
+    targetLevel: v.optional(v.number()),
+    characterId: v.optional(v.id('characters')),
+    context: v.optional(v.literal('progression')),
+  },
   returns: v.any(),
   handler: async (ctx, args) => {
-    await requireUser(ctx);
-    return evaluateSelections(args.selections, args.targetLevel ?? 1);
+    const user = await requireUser(ctx);
+    const level = args.targetLevel ?? 1;
+    let previous: Doc<'characterRevisions'> | null = null;
+    if (args.characterId) {
+      const character = await owned(ctx, args.characterId, user._id);
+      previous =
+        args.context === 'progression'
+          ? await progressionBase(ctx, character)
+          : character.draftRevisionId
+            ? await ctx.db.get(character.draftRevisionId)
+            : null;
+    }
+    return evaluateSelections(
+      args.selections,
+      level,
+      canonicalChoiceOrigins(args.selections, level, previous ?? undefined),
+    );
   },
 });
 export const listMine = query({
@@ -202,7 +227,16 @@ export const get = query({
       ? await ctx.db.get(character.effectiveRevisionId)
       : null;
     const review = await latestReview(ctx, character._id);
+    const directorSetup = draft
+      ? await pendingDirectorSetup(
+          ctx,
+          character._id,
+          draft,
+          character.campaignId ?? (review?.status === 'pending' ? review.campaignId : null),
+        )
+      : null;
     return {
+      ...(directorSetup ? { pendingDirectorSetup: directorSetup } : {}),
       id: character._id,
       authored: character.authored,
       revision: character.revision,
@@ -210,6 +244,7 @@ export const get = query({
       status: draft?.status ?? ('awaiting-rules-evaluation' as const),
       evaluation: draft?.evaluation ?? null,
       level: draft ? revisionLevel(draft) : 1,
+      choiceOrigins: draft?.choiceOrigins ?? {},
       fullEditIsStale:
         !!draft &&
         (character.staleFullEditRevisionId === draft._id ||
@@ -365,13 +400,15 @@ export const save = mutation({
     );
     const revision = character.revision + 1;
     // Draft saves evaluate the build and never touch live values (R03 section 3).
-    const evaluation = evaluateSelections(selections, level);
+    const choiceOrigins = canonicalChoiceOrigins(selections, level, old ?? undefined);
+    const evaluation = evaluateSelections(selections, level, choiceOrigins);
     const revisionId = await ctx.db.insert('characterRevisions', {
       characterId: character._id,
       revision,
       parentRevisionId: character.draftRevisionId,
       level,
       kind: 'full-edit',
+      choiceOrigins,
       baseEffectiveRevisionId: character.effectiveRevisionId,
       selections,
       status: evaluation.status,
@@ -591,7 +628,22 @@ async function abilityView(
     : [];
   return {
     ...rest,
-    content: row ? contentView(row) : null,
+    content: row
+      ? contentView(row)
+      : (() => {
+          const source = COMPLICATION_ABILITIES.find(
+            source => source.name === ability.name && source.sourcePath === ability.sourcePath,
+          );
+          return source
+            ? {
+                id: `supporting/${ability.name}`,
+                name: ability.name,
+                text: source.text,
+                sourcePath: source.sourcePath,
+                revision: ability.provenance.source.revision,
+              }
+            : null;
+        })(),
     group: groupOf(metadata.actionType),
     metadata,
     ...(buildModifiers.length ? { buildModifiers } : {}),
@@ -819,11 +871,13 @@ export const progression = query({
       draft,
       draftIsStale,
       baseSelections: base?.selections ?? [],
+      choiceOrigins: base?.choiceOrigins ?? {},
       newDecisionIds: advancementDecisionIds(),
       evaluation: base
         ? evaluateSelections(
             [...base.selections, ...(draft && !draftIsStale ? draft.selections : [])],
             2,
+            canonicalChoiceOrigins(base.selections, 2, base),
           )
         : null,
     };
@@ -909,7 +963,8 @@ export const finalizeAdvancement = mutation({
         'The advancement draft changed or has a different effective base. Reload before finalizing.',
       );
     const selections = [...base.selections, ...advancementSelections(draft.selections)];
-    const evaluation = evaluateSelections(selections, 2);
+    const choiceOrigins = canonicalChoiceOrigins(selections, 2, base);
+    const evaluation = evaluateSelections(selections, 2, choiceOrigins);
     if (evaluation.status !== 'complete')
       throw new ConvexError(
         `The level-up is ${evaluation.status}; resolve its choices before finalizing.`,
@@ -921,6 +976,7 @@ export const finalizeAdvancement = mutation({
       parentRevisionId: base._id,
       level: 2,
       kind: 'level-up',
+      choiceOrigins,
       baseEffectiveRevisionId: base._id,
       selections,
       evaluation,
@@ -1045,6 +1101,7 @@ export const restore = mutation({
       baseEffectiveRevisionId: character.effectiveRevisionId,
       restoredFromRevisionId: source._id,
       selections: source.selections,
+      ...(source.choiceOrigins ? { choiceOrigins: source.choiceOrigins } : {}),
       status: source.status,
       ...(source.evaluation !== undefined ? { evaluation: source.evaluation } : {}),
       ...(source.derivedBaseline !== undefined ? { derivedBaseline: source.derivedBaseline } : {}),
@@ -1057,15 +1114,22 @@ export const restore = mutation({
       staleFullEditRevisionId: null,
     });
     if (complete && character.campaignId) {
-      // Existing shared submission path preserves exact-revision review and owning-Director logging.
-      await invoke(ctx, user, {
-        schemaVersion: 1,
-        commandId: `restore-review-${id}`,
-        campaignId: character.campaignId,
-        operation: 'character.submit',
-        actor: null,
-        arguments: { character: { refKind: 'character', id: character._id } },
-      });
+      const campaign = await ctx.db.get(character.campaignId);
+      const directorSetup =
+        campaign?.ownerId === user._id
+          ? await pendingDirectorSetup(ctx, character._id, source, character.campaignId)
+          : null;
+      // An owning Director needs this restored draft to exist before configuring its private
+      // choice. Keep it saved until ordinary submit can log activation; other owners still submit.
+      if (!directorSetup)
+        await invoke(ctx, user, {
+          schemaVersion: 1,
+          commandId: `restore-review-${id}`,
+          campaignId: character.campaignId,
+          operation: 'character.submit',
+          actor: null,
+          arguments: { character: { refKind: 'character', id: character._id } },
+        });
     } else if (complete) {
       await activateUnattachedRevision(ctx, character, (await ctx.db.get(id))!);
     }

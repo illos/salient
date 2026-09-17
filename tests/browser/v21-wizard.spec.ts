@@ -50,11 +50,11 @@ test('wizard frame: header, rail, choice rows, persistence, independent scrollin
       '5. Class',
       '6. Kit',
       '7. Add Free Strikes',
+      '8. Complication',
       '9. Determine Details',
       '10. Make Connections',
     ]);
-    // The eyebrow counts the source's steps, not the presented ones: 8. Complication is not
-    // offered in v0.01, so the rail skips it and the numbering still matches the book.
+    // V37 offers the optional Complication step; all ten source steps now appear in the rail.
     await expect(rail.getByText('Step 1 of 10')).toBeVisible();
     await expect(rows.nth(0)).toHaveAttribute('aria-current', 'step');
     const progress = page.getByRole('progressbar', { name: 'Steps completed' });
@@ -80,7 +80,7 @@ test('wizard frame: header, rail, choice rows, persistence, independent scrollin
     await step(page, '2. Ancestry').click();
     await expect(page.getByRole('heading', { name: 'Ancestry', exact: true })).toBeVisible();
     await expect(page.getByLabel('Dwarf', { exact: true })).toBeDisabled();
-    await expect(page.getByText('Not offered in v0.01').first()).toBeVisible();
+    await expect(page.getByText('Not offered yet').first()).toBeVisible();
     await page.getByLabel('Devil', { exact: true }).check();
     await page.getByLabel('Silver Tongue skill', { exact: true }).selectOption('Persuade');
     await page.getByLabel('Beast Legs', { exact: true }).check();

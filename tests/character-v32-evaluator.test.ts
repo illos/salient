@@ -128,8 +128,8 @@ test('V32 progression adds a sourced Stamina contribution and new grant provenan
   assert.equal(Math.floor(fixture.expected.staminaMaximum / 2), fixture.expected.windedValue);
 });
 
-test('V32 level-one entry keeps the original definitions and both existing builds byte-identical', () => {
-  assert.equal(getDefinitions(1), levelOneDefinitions);
+test('V37 extends the level-one definitions while preserving both existing builds byte-identically', () => {
+  assert.equal(getDefinitions(1).supportingChoicesVersion, 'v37');
   for (const previous of [oldFixture, bethell]) {
     const input = {
       definitionsSchemaVersion: 'r01.1' as const,
@@ -165,7 +165,7 @@ test('V32 Special Delivery is the alternate legal Berserker choice with exact co
   assert.match(source, /ignores the target's \[stability\]/);
 });
 
-test('V32 exposes 22 sourced perk alternatives but only Danger Sense is currently supported', () => {
+test('V37 supports all 22 source-eligible Fury perks and still refuses ineligible groups', () => {
   assert.deepEqual(
     Object.values(FURY_LEVEL_TWO_PERK_GROUPS).map(group => group.length),
     [6, 10, 6],
@@ -173,8 +173,11 @@ test('V32 exposes 22 sourced perk alternatives but only Danger Sense is currentl
   const perk = indexDecisions(definitions).get('class.fury.level-2.perk')!;
   assert.equal(perk.options!.length, 22);
   assert.deepEqual(
-    perk.options!.filter(option => option.supportedInV001).map(option => option.value),
-    ['Danger Sense'],
+    perk
+      .options!.filter(option => option.supportedInV001)
+      .map(option => option.value)
+      .sort(),
+    Object.values(FURY_LEVEL_TWO_PERK_GROUPS).flat().sort(),
   );
   for (const option of perk.options!) {
     assert.ok(
@@ -182,10 +185,13 @@ test('V32 exposes 22 sourced perk alternatives but only Danger Sense is currentl
         'scc: mcdm.heroes.v1/perk/',
       ),
     );
-    if (option.value === 'Danger Sense') continue;
     const result = evaluate({ ...selections, 'class.fury.level-2.perk': option.value });
-    assert.equal(result.status, 'unsupported', option.value);
-    assert.equal(result.baseline, null);
+    // Area of Expertise additionally requires an owned crafting-skill target.
+    assert.equal(
+      result.status,
+      option.value === 'Area of Expertise' ? 'incomplete' : 'complete',
+      option.value,
+    );
   }
   const ineligible = evaluate({ ...selections, 'class.fury.level-2.perk': 'Arcane Trick' });
   assert.equal(ineligible.status, 'invalid');

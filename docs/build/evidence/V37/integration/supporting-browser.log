@@ -1,0 +1,6 @@
+
+Running 2 tests using 1 worker
+
+[1/2] tests/browser/v37-supporting-choices.spec.ts:11:1 › supporting choices show complete sources, prune dependent targets and persist reviewed mechanics
+[2/2] tests/browser/v37-supporting-choices.spec.ts:149:1 › Strange Inheritance lets the Director save a private sourced item without exposing it to the owner
+  2 passed (1.2m)

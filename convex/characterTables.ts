@@ -108,6 +108,17 @@ export const revisionStatusValidator = v.union(
   evaluationStatusValidator,
 );
 export const characterTables = {
+  /** Director-private source selection; never embedded in public character revisions or events. */
+  characterSecrets: defineTable({
+    characterId: v.id('characters'),
+    campaignId: v.id('campaigns'),
+    itemName: v.string(),
+    itemSourcePath: v.string(),
+    version: v.number(),
+    basedOnRevisionId: v.id('characterRevisions'),
+    updatedById: v.id('users'),
+    updatedAt: v.number(),
+  }).index('by_character_campaign', ['characterId', 'campaignId']),
   characters: defineTable({
     ownerId: v.id('users'),
     authored: authoredValidator,
@@ -159,6 +170,10 @@ export const characterTables = {
     baseEffectiveRevisionId: v.optional(v.union(v.id('characterRevisions'), v.null())),
     restoredFromRevisionId: v.optional(v.id('characterRevisions')),
     selections: v.array(selectionValidator),
+    /** Server-owned level when a choice was first made, preserved through immutable revisions. */
+    choiceOrigins: v.optional(
+      v.record(v.string(), v.object({ value: v.string(), level: v.number() })),
+    ),
     status: revisionStatusValidator,
     /**
      * The R02 `EvaluationResult` for these selections (shared/contracts/characterEvaluation.ts):

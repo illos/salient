@@ -4,6 +4,8 @@ import { defineConfig } from 'vitest/config';
 // from their imports; the app project holds the convex-test suites; scripts covers the process tooling.
 export default defineConfig({
   test: {
+    // Keep simultaneous workers within the dedicated CT114 job memory budget.
+    maxWorkers: 1,
     projects: [
       { test: { name: 'engine', include: ['tests/*.test.ts'], environment: 'node' } },
       {

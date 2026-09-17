@@ -562,6 +562,16 @@ that the Director supply an option is a different decision actor from owner buil
 the source-required input without transferring general control of the character's build. Exact
 secret-item review interaction and starting reward reconciliation need owning inventory/access contracts.
 
+### Dragon Dreams prerequisite (Q-CHAR-15)
+
+Confirmed 2026-09-17: follow the corpus requirement that Prismatic Scales selects an immunity
+from **your Wyrmplate trait**. Dragon Dreams grants purchased traits, so it does not supply that
+signature prerequisite. Display Scales with its full source and requirement, unavailable when
+Wyrmplate is absent. Other borrowed traits use the printed two-point budget and five-Victory
+activation condition. Forge's six flattened Scales choices belong to its ancestry that already
+has Wyrmplate; its text-only Dragon Dreams supplies no contrary borrowing implementation.
+This case does not settle deferred Revenant Q-CHAR-7.
+
 ## 9. Higher-level creation, advancement and revision safety
 
 Proposed higher-level creation uses the same definitions as sequential advancement: resolve level-one

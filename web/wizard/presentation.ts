@@ -78,7 +78,19 @@ export const DECISION_LABELS: Record<string, string> = {
   'connections.notes': 'Connections',
 };
 export function decisionLabel(id: string): string {
-  return DECISION_LABELS[id] ?? id.split('.').at(-1)!.replace(/-/g, ' ');
+  const known = DECISION_LABELS[id];
+  if (known) return known;
+  if (id.endsWith('.inciting-incident')) return 'Inciting incident';
+  if (/^career\..+\.perk$/.test(id)) return 'Career perk';
+  if (/^career\..+\.languages$/.test(id)) return 'Career languages';
+  if (/^career\..+\.skills$/.test(id)) return 'Career skills';
+  if (id.endsWith('.renown')) return 'Starting Renown';
+  if (id.endsWith('.wealth')) return 'Starting Wealth';
+  return id
+    .split('.')
+    .at(-1)!
+    .replace(/-/g, ' ')
+    .replace(/^./, letter => letter.toUpperCase());
 }
 export function stepReference(step: Step): RuleReference {
   return {
@@ -89,7 +101,7 @@ export function stepReference(step: Step): RuleReference {
 }
 /** Source-only records in the old decision table map to their imported chapter sections. */
 export function decisionReference(decision: Decision, step: Step): RuleReference {
-  const label = decisionLabel(decision.id);
+  const label = decision.label ?? decisionLabel(decision.id);
   if (decision.source.endsWith('/making-a-hero.md')) return { ...stepReference(step), label };
   if (decision.id === 'ancestry.devil.base-statistics')
     return { id: 'mcdm.heroes.v1/ancestry/devil', label };

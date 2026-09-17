@@ -1,0 +1,164 @@
+$ pnpm lint && pnpm check:engine && pnpm check:app && pnpm check-links && pnpm check-vendor && pnpm content:check && pnpm supporting:check && pnpm foes:check && pnpm build
+$ eslint . && prettier --check .
+Checking formatting...
+All matched files use Prettier code style!
+$ tsc --noEmit && vitest run --project engine
+
+ RUN  v4.1.11 /app
+
+ ✓  engine  tests/fury-decisions.test.ts (5 tests) 354ms
+   ✓ R01 checks 2-3: every option value, grant and quoted count/budget sentence is verbatim in its cited source  341ms
+ ✓  engine  tests/supporting-coverage.test.ts (101 tests) 398ms
+ ✓  engine  tests/character-v25-evaluator.test.ts (8 tests) 303ms
+ ✓  engine  tests/cli.test.ts (1 test) 199ms
+ ✓  engine  tests/supporting-complications.test.ts (21 tests) 200ms
+ ✓  engine  tests/supporting-backgrounds.test.ts (46 tests) 142ms
+ ✓  engine  tests/character-v32-evaluator.test.ts (9 tests) 137ms
+ ✓  engine  tests/acceptance.test.ts (3 tests) 97ms
+ ✓  engine  tests/parser.test.ts (8 tests) 76ms
+ ✓  engine  tests/live-state-initialization.test.ts (4 tests) 76ms
+ ✓  engine  tests/character-derived-values.test.ts (4 tests) 50ms
+ ✓  engine  tests/history.test.ts (3 tests) 45ms
+ ✓  engine  tests/character-evaluator.test.ts (8 tests) 41ms
+ ✓  engine  tests/core-conditions.test.ts (11 tests) 25ms
+ ✓  engine  tests/character-creation-rulings.test.ts (6 tests) 21ms
+ ✓  engine  tests/engine.test.ts (13 tests) 15ms
+ ✓  engine  tests/resolve.test.ts (19 tests) 15ms
+ ✓  engine  tests/v25-build-roll-contributions.test.ts (4 tests) 4ms
+
+ Test Files  18 passed (18)
+      Tests  274 passed (274)
+   Start at  14:19:37
+   Duration  4.78s (transform 390ms, setup 0ms, import 938ms, tests 2.20s, environment 1ms)
+
+$ tsc -p tsconfig.web.json && vitest run --project app --project scripts
+
+ RUN  v4.1.11 /app
+
+ ✓  app  tests/app/abilities.test.ts (17 tests) 2615ms
+     ✓ acceptance 1 and 2: 10.1 free strike through /ability use; retry returns the same result with no second roll or damage  1145ms
+ ✓  app  tests/app/history.test.ts (14 tests) 1492ms
+ ✓  app  tests/app/combat.test.ts (19 tests) 1474ms
+     ✓ acceptance 1: the setup card is a Director draft that follows the rosters; Cancel leaves no encounter, snapshot or lock  551ms
+ ✓  app  tests/app/character-progression.test.ts (13 tests) 1077ms
+   ✓ Fury level-up persists, retries once and preserves every compatible live value  487ms
+ ✓  app  tests/app/admission.test.ts (11 tests) 1038ms
+     ✓ acceptance 3: a player submission is not effective until approval; withdrawal and decline leave it unchanged  555ms
+ ✓  app  tests/app/closeout-session.test.ts (6 tests) 1010ms
+     ✓ missing Void choice, unauthorized closure and pause with a Void choice leave state and history untouched  599ms
+ ✓  app  tests/app/closeout.test.ts (7 tests) 989ms
+     ✓ ends structure without synthetic boundaries/dice; closes cards, supports rewind/redo, rejects turns and attacks  575ms
+ ✓  app  tests/app/v001-walkthrough.test.ts (1 test) 951ms
+   ✓ A09: admitted hero → real combat → correction/history → closeout → next session → paused Void keep/reset  950ms
+ ✓  app  tests/app/history-audit.test.ts (5 tests) 852ms
+     ✓ admission is separate; targeting preparation does not consume undo and is cleared by it  548ms
+ ✓  app  tests/app/characterSecrets.test.ts (5 tests) 856ms
+   ✓ only the campaign Director can read/write the inheritance; public revisions, sheets and events disclose no item  525ms
+ ✓  app  tests/app/characterDirectorSetup.test.ts (7 tests) 829ms
+   ✓ player submits owner-complete inputs, but admission waits atomically for the private Director choice  484ms
+ ✓  app  tests/app/audience.test.ts (8 tests) 765ms
+     ✓ difficulty projection preserves public skill text containing result-like punctuation: Lore; hard: winter  481ms
+ ✓  app  tests/app/table.test.ts (6 tests) 716ms
+     ✓ acceptance 1 and 2: authority matrix across Director, player and observer  489ms
+ ✓  app  tests/app/character-review-queue.test.ts (2 tests) 718ms
+   ✓ an owner sees a new pending submission after 205 withdrawn reviews from same owner  658ms
+ ✓  app  tests/app/registry.test.ts (7 tests) 693ms
+     ✓ acceptance 1: the same /table roll from two submitters yields events of identical shape with server dice  499ms
+ ✓  app  tests/app/a05-review-regressions.test.ts (3 tests) 702ms
+   ✓ committed combat checks Ferocity affordability during roll  571ms
+ ✓  app  tests/app/characters.test.ts (9 tests) 673ms
+     ✓ create/reopen persists authored fields and isolates private drafts across users  448ms
+ ✓  app  tests/app/foes.test.ts (5 tests) 625ms
+     ✓ Director loads independent sourced foes; peers see every foe through the selected health projection  477ms
+ ✓  app  tests/app/interactions.test.ts (3 tests) 586ms
+     ✓ acceptance 5: opened by a short command, labeled in the log, answered headlessly, resolved  505ms
+ ✓  app  tests/app/characterChoiceOrigins.test.ts (2 tests) 571ms
+   ✓ immutable revisions retain the future choice through advancement, edits and restore  557ms
+ ✓  app  tests/app/setup-local.test.ts (6 tests) 543ms
+ ✓  app  tests/app/foe-operations.test.ts (2 tests) 584ms
+   ✓ foe buttons/API/commands share retries, source snapshots and journaled creation/removal  525ms
+ ✓  app  tests/app/access-sessions.test.ts (8 tests) 576ms
+ ✓  app  tests/app/character-rulings.test.ts (2 tests) 584ms
+   ✓ Q-CHAR-10 shared evaluation, persisted draft and admission allow two of three ancestry points  532ms
+ ✓  app  tests/app/closeout-audit.test.ts (1 test) 538ms
+   ✓ normal cleanup clears a retained foe temporary pool once, with a private persisted journal  537ms
+ ✓  app  tests/app/content.test.ts (3 tests) 529ms
+     ✓ reseed loads every manifest entry; queries return the Goblin Warrior source verbatim  434ms
+ ✓  app  tests/app/independent-review.test.ts (4 tests) 506ms
+   ✓ independent: persisted session deletion revokes already issued identity across all private surfaces  442ms
+ ✓  app  tests/app/journal.test.ts (5 tests) 498ms
+     ✓ concurrent appends to one campaign get distinct consecutive sequence numbers  327ms
+ ✓  app  tests/app/elementalist-character.test.ts (4 tests) 422ms
+ ✓  app  tests/app/history-interaction-regressions.test.ts (8 tests) 391ms
+ ✓  app  tests/app/dice.test.ts (6 tests) 334ms
+     ✓ same commandId returns the identical accepted roll; a new id draws new values  315ms
+ ✓  app  tests/app/parse.test.ts (97 tests) 15ms
+ ✓  app  tests/app/engine-adapter.test.ts (1 test) 6ms
+ ✓  app  tests/app/command-identities.test.ts (2 tests) 3ms
+ ✓  scripts  tests/scripts/rules.test.ts (8 tests) 67540ms
+   ✓ ranks every unique exact title first, supports prefixes, typos and filters  4623ms
+   ✓ regenerates identical articles, metadata and search from the same pin  30753ms
+ ✓  scripts  tests/scripts/core-presentation.test.ts (7 tests) 14360ms
+   ✓ covers every Core glyph family through the production projection and React semantics  14184ms
+ ✓  scripts  tests/scripts/foes.test.ts (14 tests) 4648ms
+     ✓ regenerates twice byte-for-byte and retains exact pinned input  1621ms
+     ✓ survives reordering without retargeting IDs and refuses missing or duplicate identity bindings  324ms
+     ✓ supports duplicate names with distinct explicit identities and refuses unresolvable identical records  302ms
+     ✓ uses generic whitespace extraction across multiple fixtures, rejects lost text and stat disagreements  595ms
+     ✓ checks feature table fields and optional-spend labels against printed Markdown  583ms
+     ✓ rejects incoherent corrections and reports additional parent prose  613ms
+     ✓ keeps unfamiliar source text readable and flags it for comparison review  307ms
+ ✓  scripts  tests/scripts/build-content.test.ts (22 tests) 1677ms
+     ✓ detects a hand-edited generation date 9999-99-99 independently  509ms
+     ✓ detects a hand-edited generation date 2020-01-01 independently  509ms
+ ✓  scripts  tests/scripts/check-commit.test.ts (14 tests) 272ms
+ ✓  scripts  tests/scripts/app-output.test.ts (1 test) 202ms
+ ✓  scripts  tests/scripts/pinned-source.test.ts (1 test) 41ms
+ ✓  scripts  tests/scripts/glyphs.test.ts (4 tests) 40ms
+ ✓  scripts  tests/scripts/check-links.test.ts (4 tests) 8ms
+
+ Test Files  43 passed (43)
+      Tests  374 passed (374)
+   Start at  14:19:53
+   Duration  121.44s (transform 1.39s, setup 0ms, import 3.97s, tests 113.55s, environment 3ms)
+
+$ node scripts/check-links.ts
+Checked 213 Markdown files: no broken relative links or anchors.
+$ node scripts/check-vendor.ts
+vendor/ matches the pinned submodule commits (2 submodules).
+$ node scripts/build-content.ts --check
+shared/content/compendium matches the clean pinned Compendium (483 entries, 10 excluded, revision fb83a789da8f).
+$ node scripts/check-supporting-inventory.ts
+V37 inventory verified: 18 careers/108 incidents, 13 culture aspects, 47 core perks, 57 skills+5 groups, 42 languages, 25 kits, 100 complications; 289 exact source records checked.
+$ node scripts/ingest-foes.ts --check
+Foes: 11 stat blocks, 40 features; edition 6c6bbd40f2460c196511a2f0cc19b2ff9184ddee27be90245e5d5a8a915ed331; verified
+$ pnpm rules:ingest && tsc -p tsconfig.web.json && vite build
+$ node scripts/ingest-rules.ts
+Ingested 2614 entries, 26 categories from fb83a789da8f. No unresolved links.
+vite v8.3.0 building client environment for production...
+transforming...
+✓ 2845 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                                         1.66 kB │ gzip:   0.69 kB
+dist/assets/search.worker-oMKCTI8n.js                                  19.07 kB
+dist/assets/schibsted-grotesk-latin-ext-wght-normal-hsMS0n0O.woff2     20.92 kB
+dist/assets/DrawSteelGlyphs-Regular-Bxmll151.otf                       21.63 kB
+dist/assets/schibsted-grotesk-latin-wght-normal-Bb8VGrTG.woff2         46.75 kB
+dist/assets/overlay-card-C1jW4vvI.css                                   0.75 kB │ gzip:   0.39 kB
+dist/assets/article-Dre97K8_.css                                       11.34 kB │ gzip:   2.68 kB
+dist/assets/index-D6Qwr7NS.css                                         90.16 kB │ gzip:  16.12 kB
+dist/assets/preview-B1HVBF9G.js                                         0.88 kB │ gzip:   0.53 kB
+dist/assets/x-B2CtMrqX.js                                               4.80 kB │ gzip:   2.16 kB
+dist/assets/article-BWyiCa1k.js                                        11.59 kB │ gzip:   4.61 kB
+dist/assets/rules-BPhp0ZAt.js                                          13.59 kB │ gzip:   4.41 kB
+dist/assets/overlay-card-C2Cf5NBo.js                                   90.77 kB │ gzip:  32.29 kB
+dist/assets/foes-D-k1li4j.js                                          353.67 kB │ gzip:  31.02 kB
+dist/assets/index-DXYm_qi0.js                                       1,716.53 kB │ gzip: 420.93 kB
+
+✓ built in 2.97s
+[plugin builtin:vite-reporter]
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.

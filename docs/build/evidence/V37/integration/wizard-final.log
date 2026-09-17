@@ -1,0 +1,5 @@
+
+Running 1 test using 1 worker
+
+[1/1] tests/browser/v21-wizard.spec.ts:16:1 › wizard frame: header, rail, choice rows, persistence, independent scrolling
+  1 passed (13.5s)

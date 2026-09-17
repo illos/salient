@@ -65,6 +65,8 @@ export interface ChoiceRowProps {
   checked: boolean;
   /** Offered in v0.01; unsupported rows stay visible, muted and disabled. */
   supported: boolean;
+  /** Source prerequisite prevents selection, while the reference remains readable. */
+  unavailableReason?: string;
   onChange: () => void;
   /** Caps metadata after the name (heroic resource, kit type, point cost). */
   meta?: string;
@@ -82,6 +84,7 @@ export function ChoiceRow({
   name,
   checked,
   supported,
+  unavailableReason,
   onChange,
   meta,
   description,
@@ -119,7 +122,7 @@ export function ChoiceRow({
         <span className="caps whitespace-nowrap text-muted-foreground">{meta ?? ''}</span>
         <span className="truncate text-muted-foreground">{description ?? ''}</span>
         <span className="caps justify-self-end text-right text-muted-foreground">
-          {supported ? (facts ?? '') : 'Not offered in v0.01'}
+          {supported ? (facts ?? '') : (unavailableReason ?? 'Not offered yet')}
         </span>
       </label>
     </li>

@@ -23,6 +23,9 @@ export type DecisionId = string;
  */
 export type SelectionValue = string | (string | null)[] | Record<string, number>;
 
+/** Server-recorded selection provenance; public write endpoints never accept this from clients. */
+export type CharacterChoiceOrigins = Record<DecisionId, { value: string; level: number }>;
+
 /** Input to the evaluator: the R01 definitions to evaluate against and the saved selections. */
 export interface EvaluationInput {
   /** `schemaVersion` of the decision definitions the selections were made against. */
@@ -32,6 +35,8 @@ export interface EvaluationInput {
   /** Requested build level; unsupported class/level paths receive diagnostics. */
   level: number;
   selections: Record<DecisionId, SelectionValue>;
+  /** Trusted saved provenance for editor/progression preview; the server reconstructs it on writes. */
+  choiceOrigins?: CharacterChoiceOrigins;
 }
 
 /**
@@ -119,6 +124,8 @@ export interface DerivedValue<T> {
 }
 
 export interface GrantedSkill {
+  /** Printed replacement for the ordinary skill bonus, e.g. Rival. */
+  bonus?: DerivedValue<number>;
   /** Other fixed entitlements to the same skill; their replacement remains a separate choice. */
   additionalProvenance?: Provenance[];
   name: string;
@@ -143,7 +150,10 @@ export interface GrantedFeature {
     | 'culture-benefit'
     | 'class-feature'
     | 'aspect-feature'
-    | 'perk';
+    | 'perk'
+    | 'career-benefit'
+    | 'complication'
+    | 'supporting-feature';
   /** Entry path relative to `vendor/steel-compendium` whose body is the readable text. */
   sourcePath: string;
   /** Ancestry point cost for purchased traits. */
@@ -154,6 +164,8 @@ export interface GrantedFeature {
 }
 
 export interface GrantedAbility {
+  /** Source activation requirement is displayed; build selection does not activate it. */
+  activationCondition?: string;
   name: string;
   kind:
     | 'signature'
@@ -163,10 +175,13 @@ export interface GrantedAbility {
     | 'free-strike'
     | 'ancestry'
     | 'class'
+    | 'complication'
     | 'perk';
   sourcePath: string;
   /** Fixed heroic-resource cost from the source, if any. */
   cost?: { resource: 'ferocity' | 'essence'; amount: number };
+  /** Source adjustments are recorded separately from the unaltered ability source text. */
+  costAdjustments?: { decisionId: string; amount: number; minimum: number; sourcePath: string }[];
   /** True for the kit's own signature ability: its damage and distance already include the kit bonuses. */
   kitBonusesIncluded: boolean;
   provenance: Provenance;
@@ -206,6 +221,16 @@ export interface KitContributions {
  * (docs/character-wizard.md#character-model-direction). Recalculation never touches current Stamina,
  * spent Recoveries, resources, conditions or manual adjustments; R03 owns those.
  */
+export interface SupportingChoice {
+  decisionId: string;
+  label: string;
+  values: string[];
+  operation: string;
+  condition?: string;
+  sourcePath: string;
+  actor?: 'owner' | 'Director' | 'owner+Director';
+}
+
 export interface DerivedBaseline {
   level: DerivedValue<number>;
   ancestry: DerivedValue<string>;
@@ -240,6 +265,8 @@ export interface DerivedBaseline {
   savingThrowThreshold: DerivedValue<number>;
   renown: DerivedValue<number>;
   wealth: DerivedValue<number>;
+  /** One-time career reward; project allocation/spending is recorded separately. */
+  projectPoints?: DerivedValue<number>;
   kit: KitContributions | null;
   skills: GrantedSkill[];
   languages: GrantedLanguage[];
@@ -249,6 +276,16 @@ export interface DerivedBaseline {
   abilities: GrantedAbility[];
   /** Permanent non-kit ability contributions; applied once when eligible. */
   abilityModifiers?: AbilityModifier[];
+  supportingChoices?: SupportingChoice[];
+  initialItems?: {
+    decisionId: string;
+    name: string;
+    sourcePath: string;
+    state: 'possessed' | 'broken' | 'absent' | 'pending-Director';
+    condition?: string;
+  }[];
+  renownMaximum?: DerivedValue<number>;
+  damageWeaknesses?: { damageType: string; value: DerivedValue<number> }[];
   damageImmunities?: { damageType: string; value: DerivedValue<number> }[];
   conditionImmunities?: { condition: string; provenance: Provenance }[];
   /** Every open question whose provisional default influenced this baseline. */

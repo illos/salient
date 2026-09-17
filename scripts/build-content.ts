@@ -48,6 +48,14 @@ export const INCLUDED_SOURCEBOOKS = new Set(['mcdm.heroes.v1', 'mcdm.monsters.v1
  */
 export const SELECTIONS: ManifestSelection[] = [
   {
+    id: 'supporting-character-choices',
+    description:
+      'V37 borrowed Dragon Knight traits and abilities; Grounded sources are already in the Elementalist selection.',
+    paths: ['feature/trait/dragon-knight', 'feature/ability/dragon-knight'],
+    basis:
+      'docs/build/V37-supporting-character-choices.md: full source for supporting character choices; ancestry/class availability remains separately restricted.',
+  },
+  {
     id: 'goblin-warrior',
     description:
       'Goblin Warrior stat block, with the goblin group Malice features the stat block directory holds.',
@@ -421,7 +429,12 @@ function renderIndex(kinds: string[]): string {
     '// the index-signature contract rejects; the generator has already validated every entry.',
     'const typed = (list: unknown): ContentEntry[] => list as ContentEntry[];',
     "import manifestJson from './manifest.json';",
-    ...kinds.map(kind => `import ${identifier(kind)}Json from './${kind}.json';`),
+    // Shared NodeNext evaluation imports complications with JSON attributes. Keep this import
+    // identical: esbuild/Convex 1.45 cannot stat mixed-attribute metafile input names.
+    ...kinds.map(
+      kind =>
+        `import ${identifier(kind)}Json from './${kind}.json'${kind === 'complication' ? " with { type: 'json' }" : ''};`,
+    ),
     '',
     'export const manifest: ContentManifest = manifestJson;',
     '/** Entries grouped by their source `type`, in source-path order within each kind. */',

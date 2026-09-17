@@ -59,12 +59,26 @@ test('Fury advancement preserves live state; source-complete sheet and reviewed 
       await adjust(field, value);
     const before: HeroSheet = await query('characters:sheet', { characterId });
     const original = await query('characters:get', { characterId });
+    // V37: switching a level-up perk removes its hidden modifier target before saving.
+    await player.getByLabel('Area of Expertise', { exact: true }).check();
+    const target = player.getByLabel('Area of Expertise: choose an owned crafting skill', {
+      exact: true,
+    });
+    await target.selectOption('Blacksmithing');
     await player.getByLabel('Danger Sense', { exact: true }).check();
+    await expect(target).toHaveCount(0);
     await player.getByLabel('Wrecking Ball', { exact: true }).check();
     await player.getByRole('button', { name: 'Save advancement draft', exact: true }).click();
     await expect
       .poll(async () => (await query('characters:progression', { characterId })).draft?.version)
       .toBe(1);
+    const savedAdvancement = await query('characters:progression', { characterId });
+    expect(
+      savedAdvancement.draft.selections.some((selection: { decisionId: string }) =>
+        selection.decisionId.includes('area-of-expertise'),
+      ),
+    ).toBe(false);
+    expect(savedAdvancement.baseSelections).toEqual(original.selections);
     await player.reload();
     await expect(player.getByLabel('Danger Sense', { exact: true })).toBeChecked();
     await expect(player.getByLabel('Wrecking Ball', { exact: true })).toBeChecked();

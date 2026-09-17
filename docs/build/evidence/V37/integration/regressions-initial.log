@@ -1,0 +1,90 @@
+
+Running 5 tests using 1 worker
+
+[1/5] tests/browser/table-audit.spec.ts:40:1 › three table contexts, palette, console and live CLI share persisted operations
+[2/5] tests/browser/v21-sheet.spec.ts:52:1 › standalone sheet: band, columns, Roll test, Catch Breath, Director edit, peer, compact
+[3/5] tests/browser/v21-wizard.spec.ts:16:1 › wizard frame: header, rail, choice rows, persistence, independent scrolling
+  1) tests/browser/v21-wizard.spec.ts:16:1 › wizard frame: header, rail, choice rows, persistence, independent scrolling
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 0
+    + Received  + 1
+
+    @@ -4,8 +4,9 @@
+        "3. Culture",
+        "4. Career",
+        "5. Class",
+        "6. Kit",
+        "7. Add Free Strikes",
+    +   "8. Complication",
+        "9. Determine Details",
+        "10. Make Connections",
+      ]
+
+      43 |     const rows = rail.getByRole('button');
+      44 |     const names = await rows.evaluateAll(nodes => nodes.map(n => n.getAttribute('aria-label')));
+    > 45 |     expect(names).toEqual([
+         |                   ^
+      46 |       '1. Think',
+      47 |       '2. Ancestry',
+      48 |       '3. Culture',
+        at /app/tests/browser/v21-wizard.spec.ts:45:19
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../artifacts/v37-regressions/v21-wizard-wizard-frame-he-e4bce-tence-independent-scrolling/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../artifacts/v37-regressions/v21-wizard-wizard-frame-he-e4bce-tence-independent-scrolling/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../artifacts/v37-regressions/v21-wizard-wizard-frame-he-e4bce-tence-independent-scrolling/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../artifacts/v37-regressions/v21-wizard-wizard-frame-he-e4bce-tence-independent-scrolling/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[4/5] tests/browser/v25-elementalist.spec.ts:7:1 › corrected Forge Bethell: complete wizard, reload, review and sourced sheet
+  2) tests/browser/v25-elementalist.spec.ts:7:1 › corrected Forge Bethell: complete wizard, reload, review and sourced sheet
+
+    TimeoutError: locator.selectOption: Timeout 15000ms exceeded.
+    Call log:
+      - waiting for getByLabel('Replacement for duplicate Magic skill', { exact: true })
+
+
+      33 |       page!.getByRole('button', { name: new RegExp(`^${name.replace('.', '\\.')}`) }).click();
+      34 |     const pick = async (label: string, value: string) =>
+    > 35 |       page!.getByLabel(label, { exact: true }).selectOption(value);
+         |                                                ^
+      36 |     const check = async (label: string) => page!.getByLabel(label, { exact: true }).check();
+      37 |     await step('2. Ancestry');
+      38 |     await check('Polder');
+        at pick (/app/tests/browser/v25-elementalist.spec.ts:35:48)
+        at /app/tests/browser/v25-elementalist.spec.ts:68:11
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../artifacts/v37-regressions/v25-elementalist-corrected-3ef89-ad-review-and-sourced-sheet/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../artifacts/v37-regressions/v25-elementalist-corrected-3ef89-ad-review-and-sourced-sheet/test-failed-2.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../artifacts/v37-regressions/v25-elementalist-corrected-3ef89-ad-review-and-sourced-sheet/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../artifacts/v37-regressions/v25-elementalist-corrected-3ef89-ad-review-and-sourced-sheet/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../artifacts/v37-regressions/v25-elementalist-corrected-3ef89-ad-review-and-sourced-sheet/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[5/5] tests/browser/v32-progression.spec.ts:29:1 › Fury advancement preserves live state; source-complete sheet and reviewed history restoration
+  2 failed
+    tests/browser/v21-wizard.spec.ts:16:1 › wizard frame: header, rail, choice rows, persistence, independent scrolling
+    tests/browser/v25-elementalist.spec.ts:7:1 › corrected Forge Bethell: complete wizard, reload, review and sourced sheet
+  3 passed (3.7m)

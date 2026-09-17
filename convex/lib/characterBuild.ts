@@ -8,21 +8,31 @@
  */
 import { definitions } from '../../shared/content/level-one-decisions';
 import { getDefinitions } from '../../shared/content/character-decisions';
-import type { DerivedBaseline, EvaluationResult } from '../../shared/contracts/characterEvaluation';
+import type {
+  CharacterChoiceOrigins,
+  DerivedBaseline,
+  EvaluationResult,
+} from '../../shared/contracts/characterEvaluation';
 import { evaluateCharacter, selectionsFrom } from '../../shared/evaluate/character';
 import type { DraftSelection } from '../../shared/characterDraft';
+import { pendingDirectorSetup, requireDirectorSetup } from './characterDirectorSetup';
 
 export { definitions };
 
 /** Evaluates saved selections against the pinned definitions (deterministic, no side effects). */
-export function evaluateSelections(selections: DraftSelection[], level = 1): EvaluationResult {
-  const definitions = getDefinitions(level);
+export function evaluateSelections(
+  selections: DraftSelection[],
+  level = 1,
+  choiceOrigins?: CharacterChoiceOrigins,
+): EvaluationResult {
+  const definitions = getDefinitions(level, choiceOrigins);
   return evaluateCharacter(
     {
       definitionsSchemaVersion: 'r01.1',
       compendiumRevision: definitions.compendiumRevision,
       level,
       selections: selectionsFrom(selections),
+      choiceOrigins,
     },
     definitions,
   );
@@ -133,6 +143,7 @@ export async function activateRevision(
     throw new ConvexError(
       `Revision ${revision.revision} is ${revision.status}; only a complete build can be activated.`,
     );
+  await requireDirectorSetup(ctx, character._id, revision, campaignId);
   const previous = baselineOf(character.derivedBaseline);
   let reconciliation: BuildReconciliation = { changes: [], incompatibleResource: null };
   const patch: Partial<Doc<'characters'>> = {
@@ -213,6 +224,10 @@ export async function activateUnattachedRevision(
   const baseline = baselineOf(revision.derivedBaseline);
   if (character.campaignId || revision.status !== 'complete' || !baseline)
     throw new ConvexError('A complete unattached build is required.');
+  // Preserve the saved/restored draft, but do not borrow another campaign's private setup or
+  // make an unresolved build effective. Destination admission supplies the Director context.
+  const pending = await pendingDirectorSetup(ctx, character._id, revision, null);
+  if (pending) return { activated: false, pendingDirectorSetup: pending };
   const reconciliation = character.liveState
     ? previewBuildReconciliation(
         character.liveState,
@@ -236,4 +251,5 @@ export async function activateUnattachedRevision(
         }
       : {}),
   });
+  return { activated: true, pendingDirectorSetup: null };
 }

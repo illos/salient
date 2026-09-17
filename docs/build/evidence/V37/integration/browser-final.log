@@ -1,0 +1,49 @@
+
+Running 5 tests using 1 worker
+
+[1/5] tests/browser/v21-wizard.spec.ts:16:1 › wizard frame: header, rail, choice rows, persistence, independent scrolling
+  1) tests/browser/v21-wizard.spec.ts:16:1 › wizard frame: header, rail, choice rows, persistence, independent scrolling
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByText('Not offered in v0.01').first()
+    Expected: visible
+    Timeout: 15000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByText('Not offered in v0.01').first() with timeout 15000ms
+      - waiting for getByText('Not offered in v0.01').first()
+
+
+      81 |     await expect(page.getByRole('heading', { name: 'Ancestry', exact: true })).toBeVisible();
+      82 |     await expect(page.getByLabel('Dwarf', { exact: true })).toBeDisabled();
+    > 83 |     await expect(page.getByText('Not offered in v0.01').first()).toBeVisible();
+         |                                                                  ^
+      84 |     await page.getByLabel('Devil', { exact: true }).check();
+      85 |     await page.getByLabel('Silver Tongue skill', { exact: true }).selectOption('Persuade');
+      86 |     await page.getByLabel('Beast Legs', { exact: true }).check();
+        at /app/tests/browser/v21-wizard.spec.ts:83:66
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../artifacts/v37-final-browser/v21-wizard-wizard-frame-he-e4bce-tence-independent-scrolling/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../artifacts/v37-final-browser/v21-wizard-wizard-frame-he-e4bce-tence-independent-scrolling/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../artifacts/v37-final-browser/v21-wizard-wizard-frame-he-e4bce-tence-independent-scrolling/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../artifacts/v37-final-browser/v21-wizard-wizard-frame-he-e4bce-tence-independent-scrolling/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[2/5] tests/browser/v25-elementalist.spec.ts:7:1 › corrected Forge Bethell: complete wizard, reload, review and sourced sheet
+[3/5] tests/browser/v32-progression.spec.ts:29:1 › Fury advancement preserves live state; source-complete sheet and reviewed history restoration
+[4/5] tests/browser/v37-supporting-choices.spec.ts:11:1 › supporting choices show complete sources, prune dependent targets and persist reviewed mechanics
+[5/5] tests/browser/v37-supporting-choices.spec.ts:157:1 › Strange Inheritance lets the Director save a private sourced item without exposing it to the owner
+  1 failed
+    tests/browser/v21-wizard.spec.ts:16:1 › wizard frame: header, rail, choice rows, persistence, independent scrolling
+  4 passed (2.7m)

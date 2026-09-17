@@ -115,6 +115,108 @@
     }
   },
   {
+    "id": "mcdm.heroes.v1/feature.trait.dragon-knight/draconian-guard",
+    "kind": "trait",
+    "name": "Draconian Guard",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/dragon-knight/draconian-guard.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/dragon-knight/draconian-guard.json",
+    "selection": "supporting-character-choices",
+    "text": "---\nancestry: dragon-knight\ncost: 1 Point\nname: Draconian Guard\nscc: mcdm.heroes.v1/feature.trait.dragon-knight/draconian-guard\ntype: trait\n---\n\nWhenever you or an [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) creature takes damage from a [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), you can use a [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) to guard against the blow. You reduce any damage from the [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) by an amount equal to your level.\n",
+    "structured": {
+      "ancestry": "dragon-knight",
+      "cost": "1 Point"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.dragon-knight/draconian-pride",
+    "kind": "trait",
+    "name": "Draconian Pride",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/dragon-knight/draconian-pride.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/dragon-knight/draconian-pride.json",
+    "selection": "supporting-character-choices",
+    "text": "---\nancestry: dragon-knight\ncost: 2 Points\nname: Draconian Pride\nscc: mcdm.heroes.v1/feature.trait.dragon-knight/draconian-pride\ntype: trait\n---\n\nYou have the following [signature ability](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability).\n",
+    "structured": {
+      "ancestry": "dragon-knight",
+      "cost": "2 Points"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.dragon-knight/dragon-breath",
+    "kind": "trait",
+    "name": "Dragon Breath",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/dragon-knight/dragon-breath.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/dragon-knight/dragon-breath.json",
+    "selection": "supporting-character-choices",
+    "text": "---\nancestry: dragon-knight\ncost: 2 Points\nname: Dragon Breath\nscc: mcdm.heroes.v1/feature.trait.dragon-knight/dragon-breath\ntype: trait\n---\n\nYou have the following [signature ability](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability).\n",
+    "structured": {
+      "ancestry": "dragon-knight",
+      "cost": "2 Points"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.dragon-knight/dragon-knight-traits",
+    "kind": "trait",
+    "name": "Dragon Knight Traits",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/dragon-knight/dragon-knight-traits.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/dragon-knight/dragon-knight-traits.json",
+    "selection": "supporting-character-choices",
+    "text": "---\nancestry: dragon-knight\nname: Dragon Knight Traits\nscc: mcdm.heroes.v1/feature.trait.dragon-knight/dragon-knight-traits\ntype: trait\n---\n\n[Dragon knight](scc.v1:mcdm.heroes.v1/ancestry/dragon-knight) heroes have access to the following traits.\n\n#### Purchased Dragon Knight Traits\n\nYou have 3 ancestry points to spend on the following traits. (*Quick Build:* [Dragon Breath](scc.v1:mcdm.heroes.v1/feature.ability.dragon-knight/dragon-breath), Prismatic Scales.)\n",
+    "structured": {
+      "ancestry": "dragon-knight"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.dragon-knight/prismatic-scales",
+    "kind": "trait",
+    "name": "Prismatic Scales",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/dragon-knight/prismatic-scales.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/dragon-knight/prismatic-scales.json",
+    "selection": "supporting-character-choices",
+    "text": "---\nancestry: dragon-knight\ncost: 1 Point\nname: Prismatic Scales\nscc: mcdm.heroes.v1/feature.trait.dragon-knight/prismatic-scales\ntype: trait\n---\n\nSelect one [damage immunity](scc.v1:mcdm.heroes.v1/rule.damage/damage-immunity) granted by your Wyrmplate trait. You always have this immunity, in addition to the immunity granted by Wyrmplate.\n",
+    "structured": {
+      "ancestry": "dragon-knight",
+      "cost": "1 Point"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.dragon-knight/remember-your-oath",
+    "kind": "trait",
+    "name": "Remember Your Oath",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/dragon-knight/remember-your-oath.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/dragon-knight/remember-your-oath.json",
+    "selection": "supporting-character-choices",
+    "text": "---\nancestry: dragon-knight\ncost: 1 Point\nname: Remember Your Oath\nscc: mcdm.heroes.v1/feature.trait.dragon-knight/remember-your-oath\ntype: trait\n---\n\nAs a maneuver, you can recite the following oath. Until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), whenever you make a [saving throw](scc.v1:mcdm.heroes.v1/rule.general/saving-throw), you succeed on a 4 or higher.\n\n*Even should the sun stop in the sky Even should the night last a thousand years I will stand forever I shall not yield Those who suffer and yearn for justice I am your sword and shield I will yield no ground I will speak no lies I will stand against all tyrants Until the last villain dies*\n",
+    "structured": {
+      "ancestry": "dragon-knight",
+      "cost": "1 Point"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.dragon-knight/wings",
+    "kind": "trait",
+    "name": "Wings",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/dragon-knight/wings.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/dragon-knight/wings.json",
+    "selection": "supporting-character-choices",
+    "text": "---\nancestry: dragon-knight\ncost: 2 Points\nname: Wings\nscc: mcdm.heroes.v1/feature.trait.dragon-knight/wings\ntype: trait\n---\n\nYou possess wings powerful enough to take you airborne. While using your wings to [fly](scc.v1:mcdm.heroes.v1/movement/fly), you can stay aloft for a number of rounds equal to your [Might](scc.v1:mcdm.heroes.v1/rule.character/might) score (minimum 1 round) before you fall. While using your wings to [fly](scc.v1:mcdm.heroes.v1/movement/fly) at 3rd level or lower, you have [damage weakness](scc.v1:mcdm.heroes.v1/rule.damage/damage-weakness) 5.\n",
+    "structured": {
+      "ancestry": "dragon-knight",
+      "cost": "2 Points"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.dragon-knight/wyrmplate",
+    "kind": "trait",
+    "name": "Signature Trait: Wyrmplate",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/dragon-knight/wyrmplate.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/dragon-knight/wyrmplate.json",
+    "selection": "supporting-character-choices",
+    "text": "---\nancestry: dragon-knight\nname: 'Signature Trait: Wyrmplate'\nscc: mcdm.heroes.v1/feature.trait.dragon-knight/wyrmplate\ntype: trait\n---\n\nYour hardened scales grant you [damage immunity](scc.v1:mcdm.heroes.v1/rule.damage/damage-immunity) equal to your level to one of the following [damage types](scc.v1:mcdm.heroes.v1/rule.damage/damage-type): acid, cold, corruption, fire, lightning, or poison. You can change your [damage immunity](scc.v1:mcdm.heroes.v1/rule.damage/damage-immunity) type when you finish a [respite](scc.v1:mcdm.heroes.v1/rule.resource/respite).\n",
+    "structured": {
+      "ancestry": "dragon-knight"
+    }
+  },
+  {
     "id": "mcdm.heroes.v1/feature.trait.polder/corruption-immunity",
     "kind": "trait",
     "name": "Corruption Immunity",

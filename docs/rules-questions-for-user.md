@@ -42,6 +42,24 @@ Other future design work remains in its owning specifications, including class r
 workflows beyond the language/kit decisions in Q-CHAR-5. This closes the reviewed question batch,
 not implementation or playtest verification.
 
+### Q-CHAR-15: Does Dragon Dreams permit Prismatic Scales without Wyrmplate?
+
+- **Status:** resolved 2026-09-17 — [supporting-choice contract](v1-character-wizard-contracts.md#dragon-dreams-prerequisite-q-char-15)
+- **Raised by:** V37 supporting-choice research
+- **Where:** `vendor/steel-compendium/en/unified/md/complication/dragon-dreams.md`;
+  `vendor/steel-compendium/en/unified/md/feature/trait/dragon-knight/prismatic-scales.md`
+  and `wyrmplate.md`.
+- **Conflict or gap:** Dragon Dreams grants two points of purchased Dragon Knight traits but
+  does not grant the Wyrmplate signature trait. Prismatic Scales costs one point yet requires
+  choosing an immunity supplied by “your Wyrmplate trait.” Q-CHAR-7 concerns Revenants and remains
+  deferred; it supplies no ruling for this separate complication.
+- **Recommendation:** Require Wyrmplate for Prismatic Scales; show its source but make it
+  unavailable to a character lacking Wyrmplate. This preserves the trait's explicit dependency.
+  Alternatively, explicitly allow one of Wyrmplate's six immunities without granting Wyrmplate.
+- **Blocked until answered:** Enabling this specific borrowed trait on characters without
+  Wyrmplate. Other Dragon Dreams traits and all independent supporting-choice work can proceed.
+- **Answer:** “That sounds right, but I’m not familiar with the pool so we’ll have to go off of the corpus, or maybe try to infer an answer from how forge steel did it.” The source-based prerequisite is retained. Forge grants Wyrmplate automatically on its Dragon Knight ancestry and provides only text for Dragon Dreams; it supplies no counterexample without Wyrmplate. This does not resolve deferred Revenant Q-CHAR-7.
+
 ## Deferred questions
 
 Confirmed 2026-09-15: Q-CHAR-7, Q-CHAR-9 and Q-CHAR-13 wait until after the playtest. Retain the

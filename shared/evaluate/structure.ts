@@ -8,6 +8,7 @@
  */
 import type { SelectionValue } from '../contracts/characterEvaluation.ts';
 import type { Decision, DecisionDefinitions, OptionsByParentEntry } from './definitions.ts';
+import { COMPLICATION_FUTURE_ABILITY_ELIGIBILITY } from '../content/supporting-complications.ts';
 
 export type Selections = Record<string, SelectionValue>;
 
@@ -28,15 +29,44 @@ export function isAvailable(
   decision: Decision,
   selections: Selections,
   decisions: Map<string, Decision>,
+  scanningFixedGrants = false,
 ): boolean {
+  if (scanningFixedGrants && decision.duplicateFixedSkill) return false;
   if (
     decision.availableWhen &&
     singleValue(selections, decision.availableWhen.decision) !== decision.availableWhen.value
   )
     return false;
+  for (const condition of decision.conditions ?? []) {
+    const selected = selections[condition.decision];
+    const matches = condition.includes
+      ? Array.isArray(selected) && selected.includes(condition.value)
+      : selected === condition.value;
+    if (condition.not ? matches : !matches) return false;
+  }
+  if (decision.duplicateFixedSkill) {
+    const { skill, occurrence } = decision.duplicateFixedSkill;
+    let count = 0;
+    for (const candidate of decisions.values()) {
+      if (candidate.duplicateFixedSkill || !isAvailable(candidate, selections, decisions, true))
+        continue;
+      const value = selections[candidate.id];
+      const selected = Array.isArray(value) ? value : [value];
+      const grants =
+        candidate.kind === 'automatic'
+          ? (candidate.grants ?? [])
+          : selected.flatMap(
+              item =>
+                candidate.options?.find(option => option.value === item && option.supportedInV001)
+                  ?.grants ?? [],
+            );
+      count += grants.filter(grant => grant.kind === 'skill' && grant.value === skill).length;
+    }
+    if (count < occurrence) return false;
+  }
   for (const parentId of decision.dependsOn ?? []) {
     const parent = decisions.get(parentId);
-    if (!parent || !isAvailable(parent, selections, decisions)) return false;
+    if (!parent || !isAvailable(parent, selections, decisions, scanningFixedGrants)) return false;
     if (parent.kind === 'choice' && selections[parentId] === undefined) return false;
     if (
       parent.kind === 'choice' &&
@@ -47,6 +77,81 @@ export function isAvailable(
       return false;
   }
   return true;
+}
+
+/** Knowledge candidates retain each fixed origin, so duplicate entitlements are not lost. */
+export function knowledgeCandidates(
+  selections: Selections,
+  definitions: DecisionDefinitions,
+  kind: 'skill' | 'language',
+  includeRemoved = false,
+): { name: string; decisionId: string; fixed: boolean }[] {
+  const index = indexDecisions(definitions);
+  const out: { name: string; decisionId: string; fixed: boolean }[] = [];
+  for (const decision of index.values()) {
+    if (!isAvailable(decision, selections, index)) continue;
+    const selected = selections[decision.id];
+    const values = (Array.isArray(selected) ? selected : [selected]).filter(
+      (value): value is string => typeof value === 'string',
+    );
+    const grants =
+      decision.kind === 'automatic'
+        ? (decision.grants ?? [])
+        : values.flatMap(
+            value =>
+              decision.options?.find(option => option.value === value && option.supportedInV001)
+                ?.grants ?? [],
+          );
+    for (const grant of grants)
+      if (grant.kind === kind)
+        out.push({ name: grant.value, decisionId: decision.id, fixed: true });
+    const inferred =
+      kind === 'skill'
+        ? /\.skills?(\.|$)|-skill$/.test(decision.id) || !!decision.replacesDuplicateSkill
+        : decision.id === 'culture.language' || decision.id.endsWith('.languages');
+    if (
+      decision.kind !== 'choice' ||
+      !(decision.selectionRole ? decision.selectionRole === kind : inferred)
+    )
+      continue;
+    const pool = basePoolOf(decision, selections, definitions).values;
+    for (const value of values)
+      if (pool.includes(value) && isSupported(decision, value))
+        out.push({ name: value, decisionId: decision.id, fixed: false });
+  }
+  if (kind === 'skill') {
+    const fixed = new Set(out.filter(item => item.fixed).map(item => item.name));
+    const chosen = out.filter(item => !item.fixed);
+    const invalid = new Set(
+      chosen
+        .filter(
+          item =>
+            fixed.has(item.name) || chosen.filter(other => other.name === item.name).length > 1,
+        )
+        .map(item => item.decisionId),
+    );
+    out.splice(0, out.length, ...out.filter(item => item.fixed || !invalid.has(item.decisionId)));
+  }
+  if (includeRemoved) return out;
+  const removed = new Set<string>();
+  for (const decision of index.values()) {
+    if (decision.selectionRole !== `${kind}-removal` || !isAvailable(decision, selections, index))
+      continue;
+    const selected = selections[decision.id];
+    const values = Array.isArray(selected) ? selected : [selected];
+    const base = basePoolOf(decision, selections, definitions).values;
+    const chosen = decision.selectedPool ? selections[decision.selectedPool.decision] : undefined;
+    for (const value of values)
+      if (
+        typeof value === 'string' &&
+        base.includes(value) &&
+        (!decision.selectedPool ||
+          (Array.isArray(chosen) ? chosen.includes(value) : chosen === value)) &&
+        out.some(item => item.name === value)
+      )
+        removed.add(value);
+  }
+  return out.filter(item => !removed.has(item.name));
 }
 
 /** A human reason a decision is unavailable, for the wizard. */
@@ -75,7 +180,7 @@ export function poolValues(
 }
 
 /** The option values a decision offers for the current parent selections. */
-export function poolOf(
+function basePoolOf(
   decision: Decision,
   selections: Selections,
   definitions: DecisionDefinitions,
@@ -92,6 +197,144 @@ export function poolOf(
     };
   }
   return { values: poolValues(definitions, decision.optionsFrom) };
+}
+
+/** Shared owned-skill/language restrictions for editor controls and evaluator validation. */
+export function poolOf(
+  decision: Decision,
+  selections: Selections,
+  definitions: DecisionDefinitions,
+): { values: string[]; parent?: OptionsByParentEntry; parentValue?: string } {
+  let pool = basePoolOf(decision, selections, definitions);
+  if (decision.options?.some(option => option.requiresFeature)) {
+    const index = indexDecisions(definitions);
+    const features = new Set<string>();
+    for (const candidate of index.values()) {
+      if (candidate.id === decision.id || !isAvailable(candidate, selections, index)) continue;
+      const value = selections[candidate.id];
+      const selected = Array.isArray(value) ? value : [value];
+      const grants =
+        candidate.kind === 'automatic'
+          ? (candidate.grants ?? [])
+          : selected.flatMap(
+              item => candidate.options?.find(option => option.value === item)?.grants ?? [],
+            );
+      for (const grant of grants) features.add(grant.value);
+    }
+    pool = {
+      ...pool,
+      values: pool.values.filter(value => {
+        const required = decision.options?.find(option => option.value === value)?.requiresFeature;
+        return !required || features.has(required);
+      }),
+    };
+  }
+  if (decision.selectedPool) {
+    const selected = selections[decision.selectedPool.decision];
+    const values = Array.isArray(selected) ? selected : [selected];
+    pool = {
+      ...pool,
+      values: pool.values.filter(value =>
+        decision.selectedPool!.exclude ? !values.includes(value) : values.includes(value),
+      ),
+    };
+  }
+  if (decision.abilityPool) {
+    const restriction = decision.abilityPool;
+    const classSlug = singleValue(selections, 'class.choice')?.toLowerCase();
+    const known = new Set<string>();
+    const index = indexDecisions(definitions);
+    for (const candidate of index.values()) {
+      if (candidate.id === decision.id || !isAvailable(candidate, selections, index)) continue;
+      const value = selections[candidate.id];
+      const selected = Array.isArray(value) ? value : [value];
+      for (const option of candidate.options ?? [])
+        if (
+          (option.abilityKind || /^class\.fury\.ability-(3|5)$/.test(candidate.id)) &&
+          option.supportedInV001 &&
+          selected.includes(option.value)
+        )
+          known.add(option.value);
+      const grants =
+        candidate.kind === 'automatic'
+          ? (candidate.grants ?? [])
+          : selected.flatMap(
+              item => candidate.options?.find(option => option.value === item)?.grants ?? [],
+            );
+      for (const grant of grants)
+        if (grant.kind === 'ability' || grant.kind.endsWith('-ability')) known.add(grant.value);
+    }
+    pool = {
+      ...pool,
+      values: pool.values.filter(value => {
+        if (restriction.knownOnly && !known.has(value)) return false;
+        const paths = decision.optionSources?.[value]
+          ? [decision.optionSources[value]]
+          : (decision.options ?? [])
+              .filter(option => option.value === value)
+              .map(option => option.source ?? '');
+        const origin = definitions.choiceOrigins?.[decision.id];
+        const originLevel =
+          origin?.value === value &&
+          origin.value === singleValue(selections, decision.id) &&
+          Number.isInteger(origin.level) &&
+          origin.level >= 1 &&
+          origin.level <= (definitions.level ?? 1)
+            ? origin.level
+            : (definitions.level ?? 1);
+        return paths.some(path => {
+          if (restriction.classOnly && (!classSlug || !path.includes(`/ability/${classSlug}/`)))
+            return false;
+          const eligibility = COMPLICATION_FUTURE_ABILITY_ELIGIBILITY[path];
+          if (
+            restriction.classOnly &&
+            eligibility?.requiredChoice &&
+            singleValue(selections, eligibility.requiredChoice.decision) !==
+              eligibility.requiredChoice.value
+          )
+            return false;
+          if (
+            restriction.higherLevelThanCurrent &&
+            Number(/\/level-(\d+)\//.exec(path)?.[1] ?? 0) <= originLevel
+          )
+            return false;
+          return true;
+        });
+      }),
+    };
+  }
+  if (!decision.ownedPool) return pool;
+  const { kind, groups, exclude, fromDecision } = decision.ownedPool;
+  const known = new Set(
+    knowledgeCandidates(
+      selections,
+      definitions,
+      kind,
+      decision.selectionRole === `${kind}-removal` || decision.selectionRole === kind,
+    )
+      .filter(
+        candidate =>
+          candidate.decisionId !== decision.id &&
+          (!fromDecision || candidate.decisionId === fromDecision),
+      )
+      .map(candidate => candidate.name),
+  );
+  const allowedGroups = groups
+    ? new Set(
+        poolValues(
+          definitions,
+          groups.map(group => `pool.skills.${group}`),
+        ),
+      )
+    : null;
+  return {
+    ...pool,
+    values: pool.values.filter(
+      value =>
+        (!allowedGroups || allowedGroups.has(value)) &&
+        (exclude ? !known.has(value) : known.has(value)),
+    ),
+  };
 }
 
 /** Whether the v0.01 application offers an option value (the R01 supported marking). */
@@ -118,12 +361,15 @@ export function pruneUnavailable(
   while (changed) {
     changed = false;
     for (const decision of decisions.values()) {
-      if (next[decision.id] === undefined || decision.kind !== 'choice') continue;
+      if (next[decision.id] === undefined || !['choice', 'authored'].includes(decision.kind))
+        continue;
       const selected = next[decision.id];
       const pool = poolOf(decision, next, definitions).values;
       let noLongerFits = false;
       if (decision.shape.type === 'single')
-        noLongerFits = typeof selected !== 'string' || !pool.includes(selected);
+        noLongerFits =
+          typeof selected !== 'string' ||
+          (!decision.shape.customAllowed && !pool.includes(selected));
       if (decision.shape.type === 'multi' || decision.shape.type === 'points')
         noLongerFits =
           !Array.isArray(selected) ||

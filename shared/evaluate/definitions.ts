@@ -5,6 +5,8 @@
  * Owning document: docs/fury-level-one-decisions.md ("Schema note for the JSON").
  */
 
+import type { CharacterChoiceOrigins } from '../contracts/characterEvaluation.ts';
+
 export interface SourcedQuote {
   source: string;
   quote?: string;
@@ -24,6 +26,8 @@ export interface DecisionOption {
   source?: string;
   cost?: number;
   costQuote?: string;
+  requiresFeature?: string;
+  unavailableReason?: string;
   abilityKind?: 'signature' | 'heroic';
   supportedInV001: boolean;
   grants?: OptionGrant[];
@@ -46,12 +50,44 @@ export type DecisionShape =
 
 export interface Decision {
   id: string;
+  /** A sourced decision's readable control label, independent of its stable storage ID. */
+  label?: string;
   kind: 'choice' | 'automatic' | 'authored' | 'none';
   shape: DecisionShape;
   source: string;
   quote: string;
   availableWhen?: { decision: string; value: string };
+  /** Additional parent conditions, including choices in a purchased-trait list. */
+  conditions?: { decision: string; value: string; includes?: boolean; not?: boolean }[];
   dependsOn?: string[];
+  /** Optional selections (such as no complication) do not prevent a complete build. */
+  optional?: boolean;
+  /** Required narrative/Director input; ordinary authored flavor remains optional. */
+  requiredText?: boolean;
+  /** Who makes this source choice; saved drafts may propose it for ordinary campaign review. */
+  decisionActor?: 'owner' | 'Director' | 'owner+Director';
+  selectedPool?: { decision: string; exclude?: boolean };
+  abilityPool?: { classOnly?: boolean; knownOnly?: boolean; higherLevelThanCurrent?: boolean };
+  /** Distinguish granting knowledge from selecting an already-known modifier target. */
+  selectionRole?:
+    | 'skill'
+    | 'language'
+    | 'skill-target'
+    | 'language-removal'
+    | 'reference'
+    | 'skill-removal'
+    | 'skill-conditional';
+  /** Intersect with, or exclude, the hero's known choices after ordinary validation. */
+  ownedPool?: {
+    kind: 'skill' | 'language';
+    groups?: string[];
+    exclude?: boolean;
+    fromDecision?: string;
+  };
+  /** This replacement exists only when this many fixed sources grant the named skill. */
+  duplicateFixedSkill?: { skill: string; occurrence: number };
+  /** Some source budgets require an exact expenditure, unlike ordinary ancestry warnings. */
+  exactBudget?: boolean;
   options?: DecisionOption[];
   optionsFrom?: string | string[];
   optionsByParent?: Record<string, OptionsByParentEntry>;
@@ -113,9 +149,12 @@ export interface ClassProfile {
 }
 
 export interface DecisionDefinitions {
+  /** Per-build saved selection origins; never mutate the cached shared definitions with these. */
+  choiceOrigins?: CharacterChoiceOrigins;
   /** Selected build level; legacy r01.1 definitions omit this and mean level one. */
   level?: number;
   schemaVersion: string;
+  supportingChoicesVersion?: 'v37';
   classProfiles?: Record<string, ClassProfile>;
   compendiumRevision: string;
   sourceRoot: string;

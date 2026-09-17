@@ -13,8 +13,8 @@
  *
  * Owning specifications: docs/character-wizard-spec.md#v001-scope, #3-decision-system,
  * #main-creation-and-editing, #10-mobile-interaction-requirements (desktop first for v0.01);
- * docs/fury-level-one-decisions.md (steps, decisions, pools, supported marking; the complication
- * step is not presented, Q-CHAR-1).
+ * docs/build/V37-supporting-character-choices.md (full supporting-choice text and conditional
+ * controls). Availability, pools and permanent mechanics are owned by the shared evaluator.
  */
 import { useMemo, useState } from 'react';
 import { useNavigate } from '@tanstack/react-router';
@@ -66,6 +66,13 @@ import { WizardHeader } from './header';
 import { StepRail, type RailStep } from './rail';
 import { ChoiceList, ChoiceRow, ChoiceSection, StepNav, StepTitle } from './choice-list';
 import { HeroSoFar } from './hero-so-far';
+import {
+  CatalogSelect,
+  IncidentText,
+  SelectedLanguageSource,
+  SelectedRuleSource,
+  SelectedSkillSource,
+} from './supporting-components';
 
 /** Authored decisions that are the character's own fields rather than selections. */
 const AUTHORED_FIELDS: Record<string, keyof CharacterAuthored> = {
@@ -120,7 +127,11 @@ function PoolSelect({
         onChange(next === '' ? undefined : next === '__open__' ? null : next);
       }}
     >
-      <option value="">Choose…</option>
+      <option value="">
+        {decision.optional || (decision.shape.type === 'single' && decision.shape.noneAllowed)
+          ? 'None'
+          : 'Choose…'}
+      </option>
       {(decision.id === 'culture.language' || decision.id.endsWith('.languages')) && (
         <option value="Caelian" disabled>
           Caelian — automatically known common tongue
@@ -183,11 +194,18 @@ export function DecisionEditor({
   const available = isAvailable(decision, selections, decisions);
   const value = selections[decision.id];
   const shape = decision.shape;
-  const label = decisionLabel(decision.id);
+  const label = decision.label ?? decisionLabel(decision.id);
   const reference = <RuleLink {...decisionReference(decision, step)} />;
   // Parent-specific branches disappear together; unmet dependencies in the active branch still
   // explain the next choice. This keeps a second class from doubling every wizard section.
-  if (!available && belongsToOtherBranch(decision, selections, decisions)) return null;
+  if (
+    !available &&
+    (decision.availableWhen ||
+      decision.conditions?.length ||
+      decision.duplicateFixedSkill ||
+      belongsToOtherBranch(decision, selections, decisions))
+  )
+    return null;
   if (!available)
     return (
       <ChoiceSection label={label} reference={reference} muted>
@@ -231,6 +249,7 @@ export function DecisionEditor({
       ) : (
         <Textarea
           aria-label={label}
+          required={decision.requiredText}
           maxLength={10000}
           className="max-w-2xl"
           value={text}
@@ -241,25 +260,77 @@ export function DecisionEditor({
           }
         />
       );
-  } else if (shape.type === 'single' && decision.options) {
+  } else if (
+    shape.type === 'single' &&
+    decision.options &&
+    !['skill', 'language', 'skill-target', 'language-removal'].includes(
+      decision.selectionRole ?? '',
+    )
+  ) {
+    const pool = poolOf(decision, selections, definitions);
+    const options = decision.options.filter(
+      option => pool.values.includes(option.value) || option.requiresFeature,
+    );
     control = (
-      <ChoiceList>
-        {decision.options.map(option => (
-          <ChoiceRow
-            key={option.id}
-            type="radio"
-            group={decision.id}
-            name={option.value}
-            checked={value === option.value}
-            supported={option.supportedInV001}
-            onChange={() => onSelect(decision.id, option.value)}
-            meta={option.cost !== undefined ? `${option.cost} pt` : undefined}
-            reference={
-              option.source ? <RuleLink sourcePath={option.source} label={option.value} /> : null
-            }
+      <>
+        {options.length > 30 ? (
+          <CatalogSelect
+            decision={decision}
+            label={label}
+            value={typeof value === 'string' ? value : undefined}
+            values={pool.values}
+            onChange={next => onSelect(decision.id, next)}
           />
-        ))}
-      </ChoiceList>
+        ) : (
+          <ChoiceList>
+            {(decision.optional || shape.noneAllowed) && (
+              <ChoiceRow
+                type="radio"
+                group={decision.id}
+                name={decision.id === 'complication.choice' ? 'No complication' : 'None'}
+                checked={value === undefined}
+                supported
+                onChange={() => onSelect(decision.id, undefined)}
+              />
+            )}
+            {options.map(option => (
+              <ChoiceRow
+                key={option.id}
+                type="radio"
+                group={decision.id}
+                name={option.value}
+                checked={value === option.value}
+                supported={option.supportedInV001 && pool.values.includes(option.value)}
+                unavailableReason={
+                  !pool.values.includes(option.value) ? option.unavailableReason : undefined
+                }
+                onChange={() => onSelect(decision.id, option.value)}
+                meta={option.cost !== undefined ? `${option.cost} pt` : undefined}
+                reference={
+                  option.source ? (
+                    <RuleLink sourcePath={option.source} label={option.value} />
+                  ) : null
+                }
+              />
+            ))}
+          </ChoiceList>
+        )}
+        {shape.customAllowed && (
+          <details
+            className="mt-3"
+            open={typeof value === 'string' && !pool.values.includes(value) ? true : undefined}
+          >
+            <summary className="cursor-pointer text-sm">Or write your own incident</summary>
+            <Textarea
+              aria-label={`Custom ${label.toLowerCase()}`}
+              className="mt-2 max-w-2xl"
+              maxLength={10000}
+              value={typeof value === 'string' && !pool.values.includes(value) ? value : ''}
+              onChange={event => onSelect(decision.id, event.target.value || undefined)}
+            />
+          </details>
+        )}
+      </>
     );
   } else if (shape.type === 'single') {
     const pool = poolOf(decision, selections, definitions);
@@ -288,9 +359,9 @@ export function DecisionEditor({
     );
   } else if (shape.type === 'multi') {
     const pool = poolOf(decision, selections, definitions);
-    const slots: (string | null | undefined)[] = Array.isArray(value)
-      ? value
-      : Array.from({ length: shape.count }, () => undefined);
+    const slots: (string | null | undefined)[] = Array.from({ length: shape.count }, (_, index) =>
+      Array.isArray(value) ? value[index] : undefined,
+    );
     control = (
       <div className="flex flex-col gap-1.5">
         {slots.map((slot, index) => (
@@ -298,7 +369,11 @@ export function DecisionEditor({
             key={index}
             decision={decision}
             value={slot}
-            values={pool.values}
+            values={pool.values.filter(
+              option =>
+                option === slot ||
+                !slots.some((other, otherIndex) => otherIndex !== index && other === option),
+            )}
             allowOpen={shape.deferrable}
             label={`${label} ${index + 1}`}
             onChange={next => {
@@ -320,6 +395,7 @@ export function DecisionEditor({
       </div>
     );
   } else if (shape.type === 'points') {
+    const pool = poolOf(decision, selections, definitions);
     const chosen = Array.isArray(value) ? (value.filter(Boolean) as string[]) : [];
     const total = chosen.reduce(
       (sum, name) => sum + (decision.options?.find(o => o.value === name)?.cost ?? 0),
@@ -328,28 +404,36 @@ export function DecisionEditor({
     control = (
       <div className="flex flex-col gap-2">
         <ChoiceList>
-          {(decision.options ?? []).map(option => (
-            <ChoiceRow
-              key={option.id}
-              type="checkbox"
-              name={option.value}
-              checked={chosen.includes(option.value)}
-              supported={option.supportedInV001}
-              onChange={() => {
-                const next = chosen.includes(option.value)
-                  ? chosen.filter(name => name !== option.value)
-                  : [...chosen, option.value];
-                onSelect(decision.id, next.length ? next : undefined);
-              }}
-              meta={`${option.cost} point${option.cost === 1 ? '' : 's'}`}
-              reference={
-                option.source ? <RuleLink sourcePath={option.source} label={option.value} /> : null
-              }
-            />
-          ))}
+          {(decision.options ?? [])
+            .filter(option => pool.values.includes(option.value) || option.requiresFeature)
+            .map(option => (
+              <ChoiceRow
+                key={option.id}
+                type="checkbox"
+                name={option.value}
+                checked={chosen.includes(option.value)}
+                supported={option.supportedInV001 && pool.values.includes(option.value)}
+                unavailableReason={
+                  !pool.values.includes(option.value) ? option.unavailableReason : undefined
+                }
+                onChange={() => {
+                  const next = chosen.includes(option.value)
+                    ? chosen.filter(name => name !== option.value)
+                    : [...chosen, option.value];
+                  onSelect(decision.id, next.length ? next : undefined);
+                }}
+                meta={`${option.cost} point${option.cost === 1 ? '' : 's'}`}
+                reference={
+                  option.source ? (
+                    <RuleLink sourcePath={option.source} label={option.value} />
+                  ) : null
+                }
+              />
+            ))}
         </ChoiceList>
         <span className="text-xs text-muted-foreground">
           {total} of {shape.budget} points spent
+          {decision.exactBudget ? ' · spend exactly this budget' : ''}
           {decision.supportedSetInV001
             ? ` · offered set: ${decision.supportedSetInV001.join(' + ')}`
             : ''}
@@ -361,10 +445,102 @@ export function DecisionEditor({
       <AssignmentEditor definitions={definitions} selections={selections} onSelect={onSelect} />
     );
   }
+  const supporting =
+    /^(culture|career|kit|complication)\./.test(decision.id) || /\.perk$/.test(decision.id);
+  const selectedNames = (Array.isArray(value) ? value : [value]).filter(
+    (item): item is string => typeof item === 'string',
+  );
+  const skillSelection =
+    decision.selectionRole?.startsWith('skill') || /(?:^|[.-])skills?(?:[.-]|$)/.test(decision.id);
+  const languageSelection =
+    decision.selectionRole?.startsWith('language') ||
+    /(?:^|[.-])languages?(?:[.-]|$)/.test(decision.id);
+  const knowledgeGrants = [
+    ...(decision.grants ?? []),
+    ...selectedNames.flatMap(
+      name => decision.options?.find(option => option.value === name)?.grants ?? [],
+    ),
+  ];
+  const selectedSkills = [
+    ...new Set([
+      ...(skillSelection ? selectedNames : []),
+      ...knowledgeGrants.filter(grant => grant.kind === 'skill').map(grant => grant.value),
+    ]),
+  ];
+  const selectedLanguages = [
+    ...new Set([
+      ...(languageSelection ? selectedNames : []),
+      ...knowledgeGrants.filter(grant => grant.kind === 'language').map(grant => grant.value),
+    ]),
+  ];
+  const selectedSources =
+    supporting &&
+    !skillSelection &&
+    !languageSelection &&
+    !decision.id.endsWith('.inciting-incident')
+      ? selectedNames.flatMap(name => {
+          const sourcePath =
+            decision.options?.find(option => option.value === name)?.source ??
+            decision.optionSources?.[name];
+          // Career skill options cite their parent career; its complete text is already shown once.
+          const parentSource =
+            sourcePath === decision.source &&
+            !/^(career|kit|complication)\.choice$/.test(decision.id);
+          return sourcePath && !parentSource ? [{ name, sourcePath }] : [];
+        })
+      : [];
   return (
     <ChoiceSection label={label} reference={reference}>
+      {decision.decisionActor && decision.decisionActor !== 'owner' && (
+        <p className="m-0 text-sm text-muted-foreground">
+          {decision.id === 'complication.strange-inheritance.secretTrinket' ? (
+            'The Director privately chooses your inherited trinket. Its identity and powers stay hidden until the source reveals them.'
+          ) : (
+            <>
+              {decision.decisionActor === 'Director'
+                ? 'The Director determines this choice.'
+                : 'Make this choice together with your Director.'}{' '}
+              Record the proposed choice here for campaign review.
+            </>
+          )}
+        </p>
+      )}
+      {decision.label && decision.quote && decision.quote.length <= 400 && (
+        <p className="m-0 text-sm text-muted-foreground">{readableRuleText(decision.quote)}</p>
+      )}
       {control}
+      {decision.selectionRole === 'skill-target' && (
+        <p className="m-0 text-sm text-muted-foreground">
+          {decision.ownedPool?.kind === 'skill' && !decision.ownedPool.exclude
+            ? 'Choose a skill you already know. This choice modifies that skill; it does not grant another skill.'
+            : 'This choice records a skill for this feature; it does not grant another skill.'}
+        </p>
+      )}
+      {decision.deferralRule?.quote && (
+        <p className="m-0 text-sm text-muted-foreground">
+          {readableRuleText(decision.deferralRule.quote)}
+        </p>
+      )}
       <Diagnostics list={diagnostics} />
+      {selectedSkills.map(name => (
+        <SelectedSkillSource key={name} name={name} />
+      ))}
+      {selectedLanguages.map(name => (
+        <SelectedLanguageSource key={name} name={name} />
+      ))}
+      {selectedSources.map(source => (
+        <SelectedRuleSource key={`${source.name}:${source.sourcePath}`} {...source} />
+      ))}
+      {decision.id.endsWith('.inciting-incident') && typeof value === 'string' && (
+        <IncidentText
+          career={
+            typeof selections['career.choice'] === 'string'
+              ? selections['career.choice']
+              : undefined
+          }
+          name={value}
+        />
+      )}
     </ChoiceSection>
   );
 }
@@ -507,7 +683,10 @@ function hasInteractiveDecision(step: Step): boolean {
 }
 
 function Wizard({ character }: { character: LoadedCharacter }) {
-  const definitions = useMemo(() => getDefinitions(character.level), [character.level]);
+  const definitions = useMemo(
+    () => getDefinitions(character.level, character.choiceOrigins),
+    [character.level, character.choiceOrigins],
+  );
   const PRESENTED = definitions.steps.filter(step => step.presentedInV001);
   const navigate = useNavigate();
   const client = useConvex();
@@ -535,6 +714,7 @@ function Wizard({ character }: { character: LoadedCharacter }) {
     [selections, definitions],
   );
   const evaluation = useQuery(api.characters.evaluate, {
+    characterId: character.id,
     selections: draft,
     targetLevel: character.level,
   }) as EvaluationResult | undefined;

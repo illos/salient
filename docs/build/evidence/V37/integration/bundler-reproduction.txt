@@ -1,0 +1,15 @@
+CT114 isolated characters build job, 2026-09-17.
+Bundled one stdin entry importing the same complication.json with and without
+`with { type: 'json' }`, using installed esbuild and metafile:true.
+For each metafile input, checked existsSync(resolve(input)).
+
+esbuild 0.27.0
+shared/content/compendium/complication.json with { type: 'json' } exists=false
+shared/content/compendium/complication.json exists=true
+<stdin> exists=false
+
+The Convex 1.45.0 doEsbuild implementation calls ctx.fs.stat() on these input keys.
+Its catch path assumes esbuild has printed an error and uses printedMessage:null.
+The fix aligns the generated complication import with the evaluator import.
+The subsequent actual anonymous development function upload completed in4.44s.
+Normal clean restart also reached a healthy backend and verified HTTPS route.

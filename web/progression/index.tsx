@@ -7,12 +7,16 @@ import type { FunctionReturnType } from 'convex/server';
 import { api } from '../../convex/_generated/api';
 import type { Id } from '../../convex/_generated/dataModel';
 import type { DraftSelection } from '../../shared/characterDraft';
-import type { EvaluationResult, SelectionValue } from '../../shared/contracts/characterEvaluation';
+import type {
+  CharacterChoiceOrigins,
+  EvaluationResult,
+  SelectionValue,
+} from '../../shared/contracts/characterEvaluation';
 import type { CharacterSheet, HeroSheet } from '../../shared/contracts/characterSheet';
 import type { BuildReconciliation } from '../../shared/contracts/liveState';
 import { getDefinitions } from '../../shared/content/character-decisions';
 import { draftSelectionsFrom } from '../../shared/evaluate/draft';
-import type { Selections } from '../../shared/evaluate/structure';
+import { pruneUnavailable, type Selections } from '../../shared/evaluate/structure';
 import { DecisionEditor } from '../wizard';
 import { HeroSoFar } from '../wizard/hero-so-far';
 import { decisionLabel } from '../wizard/presentation';
@@ -21,14 +25,6 @@ import { RuleLink } from '../rules/link';
 import { readableRuleText } from '../rules/reference';
 import { Loading, Notice, useCommand } from '../ui';
 
-const definitions = getDefinitions(2);
-const firstLevelIds = new Set(getDefinitions(1).steps.flatMap(s => s.decisions.map(d => d.id)));
-const newDecisions = definitions.steps.flatMap(step =>
-  step.decisions
-    .filter(decision => !firstLevelIds.has(decision.id))
-    .map(decision => ({ step, decision })),
-);
-const newIds = new Set(newDecisions.map(({ decision }) => decision.id));
 type OwnedCharacter = FunctionReturnType<typeof api.characters.get>;
 interface Advancement {
   revision: number;
@@ -41,6 +37,7 @@ interface Advancement {
   entryLevelXpOffset: number;
   requiredXp: number;
   baseSelections: DraftSelection[];
+  choiceOrigins: CharacterChoiceOrigins;
   draft: {
     version: number;
     selections: DraftSelection[];
@@ -136,7 +133,16 @@ function AdvancementEditor({
     revision: progression.revision,
     id: progression.baseRevisionId,
     selections: progression.baseSelections,
+    definitions: getDefinitions(2, progression.choiceOrigins),
   }));
+  const definitions = base.definitions;
+  const firstLevelIds = new Set(getDefinitions(1).steps.flatMap(s => s.decisions.map(d => d.id)));
+  const newDecisions = definitions.steps.flatMap(step =>
+    step.decisions
+      .filter(decision => !firstLevelIds.has(decision.id))
+      .map(decision => ({ step, decision })),
+  );
+  const newIds = new Set(newDecisions.map(({ decision }) => decision.id));
   const [choices, setChoices] = useState<Selections>(() =>
     selectionMap(progression.draftIsStale ? [] : (progression.draft?.selections ?? [])),
   );
@@ -153,6 +159,8 @@ function AdvancementEditor({
   );
   const merged = [...base.selections, ...newSelections];
   const evaluation = useQuery(api.characters.evaluate, {
+    characterId,
+    context: 'progression',
     selections: merged,
     targetLevel: 2,
   }) as EvaluationResult | undefined;
@@ -220,7 +228,14 @@ function AdvancementEditor({
                       const next = { ...previous };
                       if (value === undefined) delete next[id];
                       else next[id] = value;
-                      return next;
+                      // Evaluate dependencies against the frozen build, but only edit this level's choices.
+                      const pruned = pruneUnavailable(
+                        { ...selectionMap(base.selections), ...next },
+                        definitions,
+                      );
+                      return Object.fromEntries(
+                        Object.entries(pruned.selections).filter(([key]) => newIds.has(key)),
+                      );
                     });
                     setDirty(true);
                     setMessage('');

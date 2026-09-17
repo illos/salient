@@ -1,6 +1,10 @@
 // SPDX-License-Identifier: GPL-3.0-only
 /** Level-qualified wizard content. Rules contract: docs/research/v32-fury-progression-contract.md. */
-import { definitions as levelOne } from './level-one-decisions.ts';
+import { extendBackgroundDefinitions } from './supporting-backgrounds.ts';
+import { extendComplicationDefinitions } from './supporting-complications.ts';
+import type { CharacterChoiceOrigins } from '../contracts/characterEvaluation.ts';
+import { extendSkillReplacements } from './supporting-replacements.ts';
+import { definitions as legacyLevelOne } from './level-one-decisions.ts';
 import type { Decision, DecisionDefinitions, DecisionOption } from '../evaluate/definitions.ts';
 
 const source = (path: string) => `en/unified/md/${path}.md`;
@@ -57,6 +61,7 @@ const perkOptions: DecisionOption[] = Object.values(FURY_LEVEL_TWO_PERK_GROUPS)
     supportedInV001: value === 'Danger Sense',
   }));
 
+const levelOne: DecisionDefinitions = structuredClone(legacyLevelOne);
 const levelTwo: DecisionDefinitions = structuredClone(levelOne);
 levelTwo.level = 2;
 const classStep = levelTwo.steps.find(step => step.id === 'step.class')!;
@@ -114,9 +119,28 @@ const progression: Decision[] = [
 ];
 classStep.decisions.push(...progression);
 
+for (const definitions of [levelOne, levelTwo]) {
+  definitions.supportingChoicesVersion = 'v37';
+  extendBackgroundDefinitions(definitions);
+  extendComplicationDefinitions(definitions);
+  for (const step of definitions.steps)
+    for (const decision of step.decisions)
+      if (decision.id.startsWith('culture.') && decision.id !== 'culture.caelian')
+        (decision.conditions ??= []).push({
+          decision: 'complication.choice',
+          value: 'Raised by Beasts',
+          not: true,
+        });
+  extendSkillReplacements(definitions);
+}
+
 /** The legacy level-one object and schema remain intact; unknown levels are diagnosed by evaluation. */
-export function getDefinitions(level: number): DecisionDefinitions {
-  if (level === 1) return levelOne;
-  if (level === 2) return levelTwo;
-  return { ...levelOne, level };
+export function getDefinitions(
+  level: number,
+  choiceOrigins?: CharacterChoiceOrigins,
+): DecisionDefinitions {
+  const definitions = level === 1 ? levelOne : level === 2 ? levelTwo : { ...levelOne, level };
+  return choiceOrigins
+    ? { ...definitions, choiceOrigins: structuredClone(choiceOrigins) }
+    : definitions;
 }

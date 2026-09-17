@@ -6,11 +6,16 @@
  * every value is the projection's, and a value the baseline has not derived yet reads "pending".
  */
 import { cn } from 'cn';
+import { Fragment } from 'react';
 import type { HeroSheet, SheetFeature } from '../../shared/contracts/characterSheet';
 import type { KitContributions, PartialBaseline } from '../../shared/contracts/characterEvaluation';
 import { Chip } from '../components/chip';
 import { StatBox } from '../components/stat-box';
 import { RuleLink } from '../rules/link';
+import { CoreSource } from '../components/core-content';
+import { SupportingBuildFacts } from '../wizard/supporting-components';
+import { SecretInheritance } from './secret-inheritance';
+import type { Id } from '../../convex/_generated/dataModel';
 
 /** A value the baseline has not derived yet is shown as pending, never as a zero. */
 export function pending(value: number | string | undefined | null): string {
@@ -218,6 +223,9 @@ const FEATURE_CATEGORY: Record<SheetFeature['kind'], string> = {
   'class-feature': 'Class',
   'aspect-feature': 'Subclass',
   perk: 'Perk',
+  'career-benefit': 'Career',
+  complication: 'Complication',
+  'supporting-feature': 'Supporting feature',
 };
 
 export function featureCategory(feature: SheetFeature, level: number | undefined): string {
@@ -248,28 +256,34 @@ export function FeatureRows({
   return (
     <ul className="m-0 list-none p-0" aria-label="Features">
       {features.map(feature => (
-        <RuledRow
-          key={`${feature.kind}:${feature.name}`}
-          compact={compact}
-          label={
-            <>
-              <span className="truncate font-bold">{feature.name}</span>
-              <RuleLink
-                id={feature.content?.id}
-                sourcePath={feature.sourcePath}
-                label={feature.name}
-              />
-            </>
-          }
-          value={
-            <span className="caps font-semibold text-muted-foreground">
-              {featureCategory(feature, level)}
-              {feature.cost !== undefined
-                ? ` · ${feature.cost} point${feature.cost === 1 ? '' : 's'}`
-                : ''}
-            </span>
-          }
-        />
+        <Fragment key={`${feature.kind}:${feature.name}`}>
+          <RuledRow
+            compact={compact}
+            label={
+              <>
+                <span className="truncate font-bold">{feature.name}</span>
+                <RuleLink
+                  id={feature.content?.id}
+                  sourcePath={feature.sourcePath}
+                  label={feature.name}
+                />
+              </>
+            }
+            value={
+              <span className="caps font-semibold text-muted-foreground">
+                {featureCategory(feature, level)}
+                {feature.cost !== undefined
+                  ? ` · ${feature.cost} point${feature.cost === 1 ? '' : 's'}`
+                  : ''}
+              </span>
+            }
+          />
+          {feature.content && feature.sourcePath.includes('/complication/') && (
+            <li className="py-3" aria-label={`${feature.name} full text`}>
+              <CoreSource source={feature.content.text} />
+            </li>
+          )}
+        </Fragment>
       ))}
     </ul>
   );
@@ -322,6 +336,23 @@ export function DetailsRows({
       {sheet.details.connections && (
         <DetailRow label="Connections" value={sheet.details.connections} />
       )}
+      <li className="py-3">
+        <SupportingBuildFacts baseline={partial} />
+      </li>
+      {(sheet.audience === 'director' || sheet.viewer.role === 'director') &&
+        sheet.build &&
+        sheet.build.label !== 'draft' &&
+        partial?.features?.some(
+          feature => feature.kind === 'complication' && feature.name === 'Strange Inheritance',
+        ) && (
+          <li>
+            <SecretInheritance
+              characterId={sheet.id as Id<'characters'>}
+              view={sheet.build.label}
+              displayedRevision={sheet.build.revision}
+            />
+          </li>
+        )}
       <DetailRow label="Appearance" value={sheet.authored.appearance || '—'} />
       <DetailRow label="Biography" value={sheet.authored.biography || '—'} />
     </ul>

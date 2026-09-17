@@ -222,6 +222,76 @@
     }
   },
   {
+    "id": "mcdm.heroes.v1/feature.ability.dragon-knight/draconian-pride",
+    "kind": "ability",
+    "name": "Draconian Pride",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/dragon-knight/draconian-pride.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/dragon-knight/draconian-pride.json",
+    "selection": "supporting-character-choices",
+    "text": "---\naction_type: Main action\nancestry: dragon-knight\ndistance: 1 [burst](scc.v1:mcdm.heroes.v1/rule.combat/burst)\neffects:\n    - roll: Power Roll + [Might](scc.v1:mcdm.heroes.v1/rule.character/might) or [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence)\n      tier1: 2 damage\n      tier2: 5 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1\n      tier3: 7 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2\nflavor: You let loose a mighty roar to shake your foes' spirits.\nkeywords:\n    - Area\n    - Magic\nname: Draconian Pride\npower_roll_characteristic: '[Might](scc.v1:mcdm.heroes.v1/rule.character/might) or [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence)'\nscc: mcdm.heroes.v1/feature.ability.dragon-knight/draconian-pride\nsubtype: signature\ntarget: Each enemy in the area\ntier1: 2 damage\ntier2: 5 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1\ntier3: 7 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2\ntype: ability\n---\n\n*You let loose a mighty roar to shake your foes' spirits.*\n\n| **Area, Magic** |               **Main action** |\n|-----------------|------------------------------:|\n| **📏 1 [burst](scc.v1:mcdm.heroes.v1/rule.combat/burst)**  | **🎯 Each enemy in the area** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Might](scc.v1:mcdm.heroes.v1/rule.character/might) or [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence):**\n\n- **≤11:** 2 damage\n- **12-16:** 5 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1\n- **17+:** 7 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2\n",
+    "structured": {
+      "action_type": "Main action",
+      "ancestry": "dragon-knight",
+      "distance": "1 [burst](scc.v1:mcdm.heroes.v1/rule.combat/burst)",
+      "effects": [
+        {
+          "roll": "Power Roll + [Might](scc.v1:mcdm.heroes.v1/rule.character/might) or [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence)",
+          "tier1": "2 damage",
+          "tier2": "5 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
+          "tier3": "7 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2"
+        }
+      ],
+      "flavor": "You let loose a mighty roar to shake your foes' spirits.",
+      "keywords": [
+        "Area",
+        "Magic"
+      ],
+      "power_roll_characteristic": "[Might](scc.v1:mcdm.heroes.v1/rule.character/might) or [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence)",
+      "subtype": "signature",
+      "target": "Each enemy in the area",
+      "tier1": "2 damage",
+      "tier2": "5 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
+      "tier3": "7 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.dragon-knight/dragon-breath",
+    "kind": "ability",
+    "name": "Dragon Breath",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/dragon-knight/dragon-breath.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/dragon-knight/dragon-breath.json",
+    "selection": "supporting-character-choices",
+    "text": "---\naction_type: Main action\nancestry: dragon-knight\ndistance: 3 [cube](scc.v1:mcdm.heroes.v1/rule.combat/cube) within 1\neffects:\n    - roll: Power Roll + [Might](scc.v1:mcdm.heroes.v1/rule.character/might) or [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence)\n      tier1: 2 damage\n      tier2: 4 damage\n      tier3: 6 damage\n    - effect: You choose the ability's [damage type](scc.v1:mcdm.heroes.v1/rule.damage/damage-type) from acid, cold, corruption, fire, lightning, or poison.\n      name: Effect\nflavor: A furious exhalation of energy washes over your foes.\nkeywords:\n    - Area\n    - Magic\nname: Dragon Breath\npower_roll_characteristic: '[Might](scc.v1:mcdm.heroes.v1/rule.character/might) or [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence)'\nscc: mcdm.heroes.v1/feature.ability.dragon-knight/dragon-breath\nsubtype: signature\ntarget: Each enemy in the area\ntier1: 2 damage\ntier2: 4 damage\ntier3: 6 damage\ntype: ability\n---\n\n*A furious exhalation of energy washes over your foes.*\n\n| **Area, Magic**        |               **Main action** |\n|------------------------|------------------------------:|\n| **📏 3 [cube](scc.v1:mcdm.heroes.v1/rule.combat/cube) within 1** | **🎯 Each enemy in the area** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Might](scc.v1:mcdm.heroes.v1/rule.character/might) or [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence):**\n\n- **≤11:** 2 damage\n- **12-16:** 4 damage\n- **17+:** 6 damage\n\n**Effect:** You choose the ability's [damage type](scc.v1:mcdm.heroes.v1/rule.damage/damage-type) from acid, cold, corruption, fire, lightning, or poison.\n",
+    "structured": {
+      "action_type": "Main action",
+      "ancestry": "dragon-knight",
+      "distance": "3 [cube](scc.v1:mcdm.heroes.v1/rule.combat/cube) within 1",
+      "effects": [
+        {
+          "roll": "Power Roll + [Might](scc.v1:mcdm.heroes.v1/rule.character/might) or [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence)",
+          "tier1": "2 damage",
+          "tier2": "4 damage",
+          "tier3": "6 damage"
+        },
+        {
+          "effect": "You choose the ability's [damage type](scc.v1:mcdm.heroes.v1/rule.damage/damage-type) from acid, cold, corruption, fire, lightning, or poison.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "A furious exhalation of energy washes over your foes.",
+      "keywords": [
+        "Area",
+        "Magic"
+      ],
+      "power_roll_characteristic": "[Might](scc.v1:mcdm.heroes.v1/rule.character/might) or [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence)",
+      "subtype": "signature",
+      "target": "Each enemy in the area",
+      "tier1": "2 damage",
+      "tier2": "4 damage",
+      "tier3": "6 damage"
+    }
+  },
+  {
     "id": "mcdm.heroes.v1/feature.ability.elementalist.level-1/afflict-a-bountiful-decay",
     "kind": "ability",
     "name": "Afflict a Bountiful Decay",

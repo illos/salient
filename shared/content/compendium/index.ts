@@ -12,7 +12,7 @@ import ancestryJson from './ancestry.json';
 import careerJson from './career.json';
 import chapterJson from './chapter.json';
 import classJson from './class.json';
-import complicationJson from './complication.json';
+import complicationJson from './complication.json' with { type: 'json' };
 import conditionJson from './condition.json';
 import cultureJson from './culture.json';
 import featureJson from './feature.json';
