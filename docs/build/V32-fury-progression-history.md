@@ -9,7 +9,7 @@
 | Rules review | required |
 | Depends on | V25, A09; V29 integrated UI contracts |
 | Unblocks | Further class progression and dependent grants |
-| Status | Committed as `d9da1df` on `slice/V32`; not merged |
+| Status | Merged and live verified — implementation `73b7ab4`, integration `ea831d6` |
 
 ## Goal
 
@@ -208,3 +208,23 @@ journeys, including the Wrecking Ball paragraph. The table audit failed after a 
 `history:status` timeout inside `safeGetAuthUser`; its unchanged isolated retry passed (1.5 minutes). No assertion or timeout was relaxed.
 Shared live verification remains pending until integration. Screenshots and compact authenticated
 readback are retained under `docs/build/evidence/V32/integration/`.
+
+### Shared-app completion
+
+V32 merged into main at `ea831d6`. `presidium-dev up` from the clean canonical checkout updated
+shared CT114 Compose `salient-dev-b90776c53141` at
+`https://salient-dev-fc4f48cb09a0.tail41404c.ts.net`. Backend functions pushed successfully,
+content reseeded to the exact 473-entry snapshot, frontend restarted, existing data volume retained.
+No application data reset or migration occurred.
+
+Both actual shared HTTPS browser journeys passed in 1.1 minutes: Elementalist creation/reload/review
+and Fury advancement/history/restoration, including 20 exact source grants and rendered Wrecking
+Ball text. No backend timeouts or uncaught errors occurred during shared verification. See
+[the shared browser log](evidence/V32/main/browser.log),
+[readback](evidence/V32/main/readback-summary.json),
+[level-two sheet](evidence/V32/main/level-two-sheet.png) and
+[restored sheet](evidence/V32/main/restored-sheet.png).
+
+The character worktree has moved to the next user-assigned supporting-choice slice, V37. Original
+Forge artifacts remain preserved there. This closeout changes documentation/evidence only; the
+verified running implementation remains `ea831d6` and requires no additional runtime update.
