@@ -89,6 +89,7 @@ Implementation `62ca7b9` is live on hosted dev, Worker version
 `97387eb7-b9b7-41c1-b19e-dc96379cecc3`. Actual hosted browser checks passed reset, old-password
 rejection, fresh sign-in, session revocation, token reuse rejection and request limiting with a
 disposable account. Cloudflare accepted/queued a separate test to the operator-selected inbox.
-Received sender/link and inbox arrival remain unconfirmed; queued acceptance is not inbox delivery.
+The user confirmed receipt of that test email. The received message was a delivery test, while
+reset-link behavior was checked separately through the disposable account.
 See [V39](build/V39-account-email.md) for the validation record. Shared private main also has the code
 but keeps recovery unavailable because it has no email token.

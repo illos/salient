@@ -7,5 +7,5 @@
   "queued": true,
   "permanentBounce": false,
   "errors": [],
-  "inboxConfirmation": "pending user confirmation"
+  "inboxConfirmation": "User confirmed receipt: Got the test email"
 }

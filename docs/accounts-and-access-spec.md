@@ -214,7 +214,7 @@ mechanism must respect that boundary. Editing a profile email alone is not chang
 **Implementation verification:** pin compatible Better Auth/Convex integration versions and exercise signup,
 signin, sign-out, forgotten-password recovery, authenticated credential changes, session revocation, and
 account deletion. Verify configured origins/session behavior for the selected frontend and future local
-deployment. Cloudflare Email Service is selected below; its live delivery verification and local recovery arrangement remain pending; no earlier
+deployment. Cloudflare Email Service is selected below; test-message inbox receipt is confirmed, while the local recovery arrangement remains pending; no earlier
 Resend suggestion selects a provider. Use provider-supported credential handling rather than custom password
 cryptography. Authentication verification does not replace the application authorization cases below.
 
@@ -236,7 +236,7 @@ payloads to callers. Queued delivery is acceptance by the mail service, not proo
 
 [V39](build/V39-account-email.md) is merged and live on hosted development. Actual hosted browser
 checks passed password/session replacement, token reuse rejection and request limiting. Cloudflare
-accepted/queued a separate test message to the selected inbox; inbox receipt is awaiting confirmation.
+accepted/queued a separate test message to the selected inbox, and the user confirmed receiving it.
 Authenticated credential-change/account-deletion flows and offline LAN recovery remain separate work.
 
 ### Proposed regular-account behavior

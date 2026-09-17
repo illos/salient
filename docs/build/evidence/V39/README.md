@@ -31,7 +31,7 @@ Convex dev `different-bat-943`, Worker `salient-dev`, and the shared private CT1
   cloud request limiting, password/session replacement and single-use tokens.
 - [Cloud request confirmation](cloud-request-complete.png) and [cloud reset completion](cloud-reset-complete.png).
 - [Delivery response](delivery.json): a plainly labeled test to the user-selected inbox was accepted
-  and queued by Cloudflare (HTTP 200); actual inbox receipt is **not yet confirmed**.
+  and queued by Cloudflare (HTTP 200); the user subsequently **confirmed receiving the test email**.
 - [Shared-main journey](main-browser.log): signup/login, invitation, lifecycle, persistence and
   reconnect pass in 37.8s after serializing guest workloads. The first attempt encountered a
   backend query timeout during concurrent build work; this log is the successful rerun.

@@ -9,7 +9,7 @@
 | Rules review | not required |
 | Depends on | S04 and existing Better Auth integration |
 | Unblocks | Hosted password recovery |
-| Status | Merged and activated on hosted dev; inbox confirmation pending; see [STATUS](STATUS.md) |
+| Status | Merged and activated on hosted dev; user confirmed test email receipt; see [STATUS](STATUS.md) |
 
 ## Goal
 
@@ -70,9 +70,10 @@ integration tests, isolated browser fixture/tests, owning specs and evidence/rev
 Reviewed code is deployed to dev `different-bat-943` / Worker `salient-dev`. The backend-only
 Cloudflare token is installed. Cloudflare accepted/queued a clearly labeled test message to the
 user-selected inbox. That inbox has no hosted account, so the full reset and cloud request-limit
-checks used a separate disposable account on the same hosted app. Those checks passed. Actual inbox
-receipt and the received-message sender/link remain unverified; do not equate queued acceptance
-with receipt. No content reset, existing-user credential change or data migration occurred.
+checks used a separate disposable account on the same hosted app. Those checks passed. The user then
+confirmed receipt of the delivery test. This confirms inbox delivery separately from the automated
+reset checks; no real-account reset link was sent to that inbox. No content reset, existing-user
+credential change or data migration occurred.
 
 ## Ability design and playtest evidence
 
@@ -84,7 +85,7 @@ Not applicable.
 
 ## Open questions
 
-No open product questions. Awaiting the user’s confirmation that the delivery test reached their inbox.
+No open product questions or delivery-confirmation blocker. The user confirmed receiving the test email.
 
 ## Work log
 
@@ -129,7 +130,7 @@ subsequent authorized activation follows.
 2026-09-17 activation: user installed `CLOUDFLARE_EMAIL_API_TOKEN` directly on the selected Convex
 dev deployment and supplied an iCloud test inbox. The new credential passed API authentication;
 a clearly labeled delivery test returned HTTP 200, success, queued recipient and no permanent bounce.
-Inbox receipt is pending user confirmation. The existing deployment token remains separate.
+The user subsequently confirmed receipt: “Got the test email”. The existing deployment token remains separate.
 
 Reviewed implementation commit `62ca7b964c700eae20fd32b3393fdbcd175c9af4` was fast-forward merged
 into main, deployed to Convex dev `different-bat-943` and published to Worker `salient-dev`, version
