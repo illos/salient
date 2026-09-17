@@ -155,4 +155,3 @@ These rows add up to more than the total. Callbacks can overlap, so the same tim
   - @tailwindcss/vite:generate:build transform (6 calls)
   - vite:asset load (2 calls)
 See https://rolldown.rs/reference/InputOptions.checks#plugintimings for more details.
-

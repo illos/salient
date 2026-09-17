@@ -283,4 +283,4 @@ records the handoff; it does not certify A09 or create an implementation commit.
 
 | Id | Slice | Dependencies | Status |
 | --- | --- | --- | --- |
-| V36 | [Foes library browsing UI](V36-foes-library.md) | V34, V35 | Reviewed — slice/V36; 459 tests and 8 browser scenarios pass; independent review pass; branch commit pending, not merged into main |
+| V36 | [Foes library browsing UI](V36-foes-library.md) | V34, V35 | Committed — `e691e15` on slice/V36; 459 tests and 8 browser scenarios pass; independent review pass; not merged into main |

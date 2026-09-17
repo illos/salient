@@ -8,7 +8,7 @@
 | Rules review | not required — presentation of existing printed metadata only |
 | Depends on | V34, V35 (compact browser catalog) |
 | Unblocks | Foe library desktop feedback |
-| Status | Reviewed — ready for branch commit; not merged into main |
+| Status | Committed — `e691e15` on slice/V36; not merged into main |
 
 ## Goal
 
@@ -105,3 +105,10 @@ in [the review record](reviews/V36-implementation-review.md).
 
 Independent implementation review: **pass**, `review_foes_library`, 2026-09-17. All acceptance
 checks verified; no outstanding findings. No rules review is required for this presentation slice.
+
+## Branch handoff
+
+Implementation committed as `e691e15` on `slice/V36`, after V30 `214d04b` and V35
+`0b07723`/`5634420`. This is a reviewed branch handoff, not a main merge or shared-runtime update.
+The isolated [Foes library preview](https://salient-foes-library-dev-cb627850fa3d.tail41404c.ts.net/foes)
+serves the tested implementation. Final documentation link and commit-trailer checks pass.
