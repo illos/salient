@@ -264,3 +264,9 @@ records the handoff; it does not certify A09 or create an implementation commit.
 | Id | Slice | Status | Owner |
 | --- | --- | --- | --- |
 | V33 | [Core stat blocks and automatic glyph semantics](V33-core-stat-block-design.md) | Committed on `slice/V33` (this commit); reviewed design/reference implementation; not merged or rolled out | Codex, UI worktree |
+
+## V34 UI rollout — 2026-09-17
+
+| Slice | Outcome | Status | Owner |
+| --- | --- | --- | --- |
+| V34 | [Sitewide Core presentation](V34-sitewide-core-presentation.md) | Verified on `slice/V34`; main/runtime integration pending | Codex, UI worktree |

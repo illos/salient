@@ -1,14 +1,11 @@
 // SPDX-License-Identifier: GPL-3.0-only
-/**
- * Ability cards from character-sheet.png: name, a tag chip (SIGNATURE ink-filled, a resource cost
- * in brick red, TRIGGERED / MANEUVER / FREE STRIKE outlined), the action type and distance in grey
- * at the right, then the roll and tier chips when the source prints them. Everything shown is the
- * projection's printed metadata (docs/character-sheet-spec.md#actions-tests-and-readable-rules);
- * the card computes nothing, and the rulebook icon opens the complete source text.
- */
+/** Core-style printed ability cards. Full source and glyphs are presentation only;
+ * build damage modifiers remain separate and the rulebook control opens the complete reference. */
 import { cn } from 'cn';
 import type { SheetAbility } from '../../shared/contracts/characterSheet';
-import { Chip, type ChipKind } from '../components/chip';
+import type { ChipKind } from '../components/chip';
+import { CoreSource } from '../components/core-content';
+import { abilitySource } from '../../shared/presentation/ability';
 import { RuleLink } from '../rules/link';
 import { readableRuleText } from '../rules/reference';
 
@@ -60,50 +57,22 @@ export function abilitySummary(ability: SheetAbility): string | null {
 const CARD = 'flex flex-col gap-2 rounded-md border';
 
 export function AbilityCard({ ability, compact }: { ability: SheetAbility; compact?: boolean }) {
-  const m = ability.metadata;
-  const tags = abilityTags(ability);
-  const placement = abilityPlacement(ability);
-  const summary = abilitySummary(ability);
-  const signature = ability.kind === 'signature' || ability.kind === 'kit-signature';
+  const tags = abilityTags(ability).filter(tag => tag.kind === 'result' || tag.kind === 'accent');
   return (
-    <li
-      className={cn(
-        CARD,
-        compact ? 'p-3' : 'p-4',
-        signature ? 'border-rule-strong bg-card shadow-hard' : 'border-border bg-background',
-      )}
-      data-ability-kind={ability.kind}
-    >
-      <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-        <strong className="text-base">{ability.name}</strong>
-        {tags.map(tag => (
-          <Chip key={tag.text} kind={tag.kind} caps>
-            {tag.text}
-          </Chip>
-        ))}
-        <span className="ml-auto flex items-center gap-1 text-xs text-muted-foreground">
-          {placement}
+    <li className={cn('ds-hero-ability', compact && 'text-sm')} data-ability-kind={ability.kind}>
+      <header>
+        <strong>{ability.name}</strong>
+        <span className="flex items-center gap-2 text-sm">
+          {tags.map(tag => (
+            <span key={tag.text}>{tag.text}</span>
+          ))}
           <RuleLink id={ability.content?.id} sourcePath={ability.sourcePath} label={ability.name} />
         </span>
-      </div>
-      {m.roll || m.tiers ? (
-        <div className="flex flex-wrap items-center gap-1.5">
-          {m.roll && <Chip>{readableRuleText(m.roll)}</Chip>}
-          {m.tiers?.map((tier, index) => (
-            <Chip key={index} className="h-auto min-h-6 py-0.5 whitespace-normal">
-              <span className="mr-1 text-muted-foreground">Tier {index + 1} ·</span>
-              {readableRuleText(tier)}
-            </Chip>
-          ))}
-          {ability.kitBonusesIncluded && (
-            <span className="text-xs text-muted-foreground">Kit bonuses included</span>
-          )}
-        </div>
-      ) : summary ? (
-        <p className="m-0 truncate text-sm text-muted-foreground" title={summary}>
-          {summary}
-        </p>
-      ) : null}
+      </header>
+      <CoreSource source={abilitySource(ability)} />
+      {ability.kitBonusesIncluded && (
+        <p className="text-xs text-muted-foreground">Kit bonuses included</p>
+      )}
       {ability.buildModifiers?.length ? (
         <div className="flex flex-col gap-1 text-xs text-muted-foreground">
           <span>Printed tiers shown above. Rolled damage bonuses:</span>

@@ -1,0 +1,10 @@
+
+Running 6 tests using 1 worker
+
+[1/6] tests/browser/foes.spec.ts:3:1 › public undead search, independent cards, navigation, dismissal and themes
+[2/6] tests/browser/rules.spec.ts:4:1 › public rules search, readable articles, original sources and browser history
+[3/6] tests/browser/rules.spec.ts:34:1 › chapter contents, cross-references, topic filters and mobile navigation
+[4/6] tests/browser/v34-core-content.spec.ts:6:1 › live Rules and Foes share Core typography, automatic semantics and accessible navigation
+[5/6] tests/browser/v34-core-content.spec.ts:80:1 › live content retains readable text when the glyph font cannot load
+[6/6] tests/browser/v34-core-content.spec.ts:90:1 › hero and Director sheets use full Core content while live stats and audience stay separate
+  6 passed (49.7s)

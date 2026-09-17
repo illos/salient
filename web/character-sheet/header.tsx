@@ -1,3 +1,4 @@
+import { Glyph } from '../components/glyph';
 // SPDX-License-Identifier: GPL-3.0-only
 /**
  * The sheet's header band from character-sheet.png: disc with initials, the name, a row of caps
@@ -140,7 +141,14 @@ export function SheetHeader({
             >
               <StatBox
                 value={value}
-                label={compact ? key : name}
+                label={
+                  <Glyph
+                    token={{
+                      kind: compact ? 'characteristic' : 'characteristicName',
+                      characteristic: key,
+                    }}
+                  />
+                }
                 compact={compact}
                 emphasis={open}
                 className={cn(

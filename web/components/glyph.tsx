@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-only
 import { describeGlyph, type Glyph as GlyphToken } from '../../shared/presentation/glyphs';
 import './glyph.css';
+import fontLicense from '../assets/draw-steel/FontLicense.txt?url';
 
 /** Same semantic function as generated HTML. Callers cannot supply role, label or raw font codes. */
 export function Glyph({ token }: { token: GlyphToken }) {
@@ -27,4 +28,13 @@ export async function loadGlyphFont() {
   } catch {
     /* The semantic text fallback is already visible. */
   }
+}
+
+/** Attribution travels with the unmodified font in the web build. */
+export function GlyphFontNotice() {
+  return (
+    <span>
+      Glyph font © 2025 MCDM Productions, LLC · <a href={fontLicense}>CC BY-SA 4.0</a> · unmodified.
+    </span>
+  );
 }

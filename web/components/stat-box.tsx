@@ -9,7 +9,7 @@ import { cn } from 'cn';
 
 export interface StatBoxProps {
   value: React.ReactNode;
-  label: string;
+  label: React.ReactNode;
   /** Wizard column size: ~56px square with an abbreviated label. */
   compact?: boolean;
   /** Emphasized box (the wizard marks chosen characteristics with a heavier border). */

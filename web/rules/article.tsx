@@ -68,7 +68,7 @@ export function RuleArticleView({
     );
   return (
     <div
-      className="rules-prose"
+      className="rules-prose ds-content"
       ref={prose}
       onClick={event => {
         if (

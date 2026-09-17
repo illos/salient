@@ -25,6 +25,7 @@ import { RuleLink } from '../rules/link';
 import { Loading, useCommand } from '../ui';
 import { AbilityPanel } from './targeting';
 import { TargetReticle } from './roster-card';
+import { CoreSource } from '../components/core-content';
 
 export type Roster = FunctionReturnType<typeof api.table.roster>;
 export type Foe = Roster['foes'][number];
@@ -175,6 +176,7 @@ type Snapshot = {
   id: string;
   name: string;
   sourcePath: string;
+  text?: string;
   structured?: Record<string, unknown> | null;
 };
 
@@ -319,6 +321,11 @@ export function FoeSheet({
           <Loading>Loading stat block…</Loading>
         )}
       </div>
+      {source?.text && (
+        <section aria-label="Printed reference">
+          <CoreSource source={source.text} title={source.name} />
+        </section>
+      )}
       <div className="flex flex-col items-start gap-1">
         <Button
           type="button"

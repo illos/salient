@@ -14,6 +14,7 @@
  */
 import { RuleLink } from '../rules/link';
 import { readableRuleText } from '../rules/reference';
+import { GlyphText } from '../components/core-content';
 import { useState } from 'react';
 import { useMutation, useQuery } from 'convex/react';
 import { api } from '../../convex/_generated/api';
@@ -430,7 +431,9 @@ export function AbilityCard({
                   <Badge variant="outline">
                     {disposition ? 'Resolved at table' : 'Unresolved'}
                   </Badge>
-                  <span className="[overflow-wrap:anywhere]">{summaryText(clause)}</span>
+                  <span className="[overflow-wrap:anywhere]">
+                    <GlyphText text={summaryText(clause)} />
+                  </span>
                   {disposition?.note && (
                     <span className="text-muted-foreground">{disposition.note}</span>
                   )}
@@ -453,7 +456,9 @@ export function AbilityCard({
         return (
           <span key={clause} className="flex flex-wrap items-center gap-2">
             <Badge variant="outline">{disposition ? 'Resolved at table' : 'Unresolved'}</Badge>
-            <span className="[overflow-wrap:anywhere]">{summaryText(clause)}</span>
+            <span className="[overflow-wrap:anywhere]">
+              <GlyphText text={summaryText(clause)} />
+            </span>
             {director && running && result.mayResolve && !disposition && (
               <Command
                 campaignId={campaignId}

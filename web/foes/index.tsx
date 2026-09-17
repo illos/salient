@@ -1,5 +1,7 @@
+import { GlyphFontNotice } from '../components/glyph';
 // SPDX-License-Identifier: GPL-3.0-only
 import { useState } from 'react';
+import { SourceHtml } from '../components/core-content';
 import { Dialog } from '@base-ui/react/dialog';
 import type { FoeKind, FoeObject, FoePackage, FoeSearchEntry } from '../../shared/contracts/foes';
 import data from '../../shared/content/foes/catalog.json';
@@ -32,7 +34,10 @@ export function FoeView({
           From {parent.name}
         </button>
       )}
-      <div className="rules-prose" dangerouslySetInnerHTML={{ __html: object.html }} />
+      <SourceHtml
+        html={object.html}
+        title={object.kind === 'statblock' ? object.name : undefined}
+      />
       {object.featureIds.map(id => {
         const feature = resolveFoe(pack, foeReference(pack, id))!.object;
         return (
@@ -43,7 +48,7 @@ export function FoeView({
             >
               Open {feature.name}
             </button>
-            <div className="rules-prose" dangerouslySetInnerHTML={{ __html: feature.html }} />
+            <SourceHtml html={feature.html} />
           </section>
         );
       })}
@@ -162,7 +167,7 @@ export default function FoesPage() {
     usage: usage || undefined,
   });
   return (
-    <main className="mx-auto max-w-6xl px-8 py-10">
+    <main className="foes-reference-page mx-auto max-w-6xl px-8 py-10">
       <header className="mb-10 flex items-center justify-between border-b border-border pb-5">
         <a href="/rules" className="text-xl font-bold">
           Salient / References
@@ -241,6 +246,8 @@ export default function FoesPage() {
         </a>{' '}
         and is not affiliated with MCDM Productions, LLC. DRAW STEEL © 2026 MCDM Productions, LLC.
         Text prepared by Steel Compendium.
+        <br />
+        <GlyphFontNotice />
       </footer>
     </main>
   );

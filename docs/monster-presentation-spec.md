@@ -1,9 +1,9 @@
 # Core-style monster presentation and automatic glyph semantics
 
-Status: V33 design and executable reference implementation, 2026-09-17. The user requested a
+Status: V33 approved design; V34 production rollout in progress, 2026-09-17. The user requested a
 Core-book presentation design and, especially, a small system that automatically assigns ARIA
-semantics to every known glyph combination. The preview demonstrates that contract. Production
-Foes, sheets and Rules have **not** been migrated by this slice.
+semantics to every known glyph combination. The preview demonstrates that contract. The user approved the display and requested sitewide rollout;
+[V34](build/V34-sitewide-core-presentation.md) owns its production integration and verification.
 
 ## Presentation
 
@@ -28,8 +28,7 @@ Concussive Slam and The Wode Defends. The scans remain ignored under the
   divider separates features. Traits share the same rhythm, with their star marker.
 - Use one continuous column for a solo; avoid CSS newspaper columns that split abilities or create
   an unclear reading order. Catalog comparisons can put independent monsters side by side.
-- The study proposes Georgia for rule text and retains Schibsted for app controls. This is a visual
-  proposal, not a global typography change. Text remains selectable and zoomable. Narrow containers
+- The study proposes Georgia for rule text and retains Schibsted for app controls. Apply this typography to source/reference content; app controls retain their existing font. Text remains selectable and zoomable. Narrow containers
   wrap metadata and characteristics; they do not horizontally scroll the entire stat block.
 
 The live Director sheet must retain the existing permission-filtered read and registered gameplay
@@ -102,6 +101,8 @@ inheritance, including forced colors. Font codes are never added to search text 
 
 ## What the current pipelines do
 
+Historical baseline recorded for V33; [production adapters](#production-adapters) document the V34 changes.
+
 | Path | Existing transformation | Gap and integration seam |
 | --- | --- | --- |
 | Rules | `scripts/ingest-rules.ts` reads Core `md` plus expanded `md-linked`, strips markers in `readableMarkdown`, promotes feature titles, resolves links, sanitizes HTML, writes ignored `public/rules-data` | Tokenize before marker destruction. Recognize block structure separately. Sanitization happens at ingest, **not** in `web/rules/article.tsx`. |
@@ -149,8 +150,8 @@ never needs the glyph font and headless JSON snapshots must remain unchanged by 
    new package, issue a new edition and keep old editions resolvable.
 
 This design does **not** require a new backend or changing the rules parser. Production projection
-changes may need additive sheet metadata, with its own tested integration. The current standalone
-reference components and preview are ready to exercise the policy before connecting those consumers.
+changes may need additive sheet metadata in future. V34 uses the complete existing source body and
+does not change backend projections or contracts.
 
 ## Coverage that prevents omissions
 
@@ -175,3 +176,33 @@ scores; nested/linked/spend effects; unknown markers and malformed comparisons; 
 `I`, code and URLs; source headings/deep links; sanitization; archived editions; Director/player
 visibility; light/dark/forced colors; missing font; narrow width and 200% text; keyboard links;
 selection/clipboard. Test the actual accessibility tree, not just `aria-label` attributes.
+
+
+## Production adapters
+
+V34 implementation uses [the shared HAST projection](../shared/presentation/content.ts) after
+sanitization. Rules generation preserves source markers and stable plain heading IDs, then applies
+that projection and bumps the renderer/cache version to `rules.2-core`. Complete recognized stat
+grids become semantic description lists; ordinary tables remain tables. Expanded chapter creature
+headings move into their identity band with IDs intact. Standalone pages/dialogs retain their outer
+navigation heading and repeat the source name as ordinary bold text inside the identity band.
+Feature titles separate printed signature/Malice/villain-action text while retaining its links.
+
+Public Foes project immutable edition HTML at the UI boundary. Director sheets render their stored
+snapshot text, below the live controls, without substituting newer catalog content. Hero cards use
+complete source bodies, or a named source heading for embedded kit abilities; their metadata-only
+fallback uses the same renderer. Existing calculated kit bonuses remain explicitly separate.
+Operational unresolved/closeout clauses use the shared React text-token adapter. Characteristic
+controls retain native button labels and use the same characteristic glyph vocabulary.
+
+The contextual damage adapter recognizes initial additive number/dice/characteristic expressions,
+including source emphasis around letters; it preserves that emphasis, links, dice and constants.
+It does not replace standalone letters elsewhere in prose or interpret an expression mechanically.
+The automated Core audit includes source positions and canonical tokens for icons, potencies, tier
+labels, characteristic fields and damage expressions, checked against actual production output and
+React semantics. Its report is generated by the V34 scripts test using `SALIENT_PRESENTATION_REPORT`.
+
+The pinned Noncombatant grid has a blank placeholder and the Hobgoblin Flameslinger grid repeats
+its printed stat row. Both layouts are recognized; the repeated source row remains visible rather
+than silently correcting upstream content. Unknown comparison/feature markers remain literal and
+are listed by the audit. The current Core pin has zero such fallback diagnostics.

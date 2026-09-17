@@ -46,7 +46,8 @@ test('renders readable, sanitized prose, tables, headings and internal links', (
     '# Heading {data-scc="some.id"}\n\n📏 5\n\n# Heading\n\n[Other](scc.v1:other)\n\n<script>alert(1)</script>',
     () => '/rules/heroes/other',
   );
-  expect(result.html).toContain('Distance: 5');
+  expect(result.html).toContain('aria-label="Distance"');
+  expect(result.html).toContain('</span> 5');
   expect(result.html).toContain('href="/rules/heroes/other"');
   expect(result.html).not.toMatch(/<script|data-scc|scc.v1:/);
   expect(result.headings.map(h => h.id)).toEqual(['heading', 'heading-1']);

@@ -7,6 +7,9 @@ import { authClient } from './auth-client';
 import { router } from './router';
 import { ToastProvider } from './toast';
 import './style.css';
+import { loadGlyphFont } from './components/glyph';
+import './components/core-content.css';
+void loadGlyphFont();
 
 const url =
   import.meta.env.VITE_LOCAL_PROXY === 'true'

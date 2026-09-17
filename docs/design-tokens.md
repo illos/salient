@@ -184,7 +184,7 @@ Base UI `Checkbox` and `Select` remain available for new screens.
 
 ## Core reference typography proposal
 
-[V33](monster-presentation-spec.md#presentation) proposes a book-like serif treatment for rule text
-and the [shared glyph vocabulary](glyph-usage-spec.md). It is exercised in the design study only;
-production typography remains unchanged. Color uses existing tokens. The reference glyph font is
+[V33](monster-presentation-spec.md#presentation) establishes the approved Georgia serif treatment
+for rule text and the [shared glyph vocabulary](glyph-usage-spec.md). V34 applies it to production
+source/reference content, retaining Schibsted for app controls. Color uses existing tokens. The reference glyph font is
 self-hosted, with explicit load success before enabling visual codes and readable text on failure.

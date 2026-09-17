@@ -1,3 +1,4 @@
+import { GlyphFontNotice } from '../components/glyph';
 // SPDX-License-Identifier: GPL-3.0-only
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useNavigate } from '@tanstack/react-router';
@@ -566,7 +567,8 @@ export function RulesPage({ path, filters }: { path?: string; filters: RulesFilt
             <a href="https://steelcompendium.io/v2/" target="_blank" rel="noopener noreferrer">
               Steel Compendium
             </a>
-            .
+            .<br />
+            <GlyphFontNotice />
           </footer>
         </main>
       </div>

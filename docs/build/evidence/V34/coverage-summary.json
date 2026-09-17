@@ -1,0 +1,12 @@
+{
+  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+  "scope": "Raw Core md bodies once; offsets relative to body; icons, potencies, printed tiers and characteristic fields/damage checked through production HAST and React adapters",
+  "recordCount": 2614,
+  "potencies": 1611,
+  "markers": 6020,
+  "tiers": 3780,
+  "characteristics": 2991,
+  "missing": 0,
+  "diagnostics": [],
+  "fallbacks": []
+}

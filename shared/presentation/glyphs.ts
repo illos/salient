@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
-/** V33 reference implementation. Presentation only; never interprets or resolves game effects. */
+/** Shared Core presentation vocabulary. Presentation only; never interprets or resolves game effects. */
 const icons = {
   distance: ['o', 'Distance'],
   target: ['x', 'Target'],
@@ -107,7 +107,7 @@ export function sourceIcon(marker: string): Glyph | undefined {
 }
 
 export type GlyphRun = string | Glyph;
-/** Called on Markdown text nodes, never on raw HTML, URLs, code, headings or arbitrary letters.
+/** Called on Markdown text nodes, never on raw HTML, URLs, code or arbitrary letters. Heading IDs must be assigned before presentation.
  * Standalone M/A/R/I/P require a structured damage-expression adapter; the English pronoun I is text.
  */
 export function tokenizeGlyphText(text: string): GlyphRun[] {
@@ -136,7 +136,7 @@ function escape(text: string): string {
     c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]!,
   );
 }
-/** Trusted renderer used by the design prototype and the proposed generated-HTML adapter.
+/** Trusted HTML renderer used by the design study; production HAST and React use the same descriptor.
  * Font codes exist only in data attributes/CSS content. DOM text remains meaningful even on copy.
  */
 export function glyphHtml(glyph: Glyph): string {

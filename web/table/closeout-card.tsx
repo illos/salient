@@ -10,6 +10,7 @@ import { Card, CardContent } from '../components/ui/card';
 import { SectionHeading, useCommand } from '../ui';
 import { RuleLink } from '../rules/link';
 import { readableRuleText } from '../rules/reference';
+import { GlyphText } from '../components/core-content';
 import { CommandButton } from './setup-card';
 
 type Closeout = NonNullable<FunctionReturnType<typeof api.closeout.current>>;
@@ -32,7 +33,9 @@ function CleanupChoices({
         </strong>
       </p>
       {choice.target && <p>Target: {choice.target.name}</p>}
-      <p className="whitespace-pre-wrap">{readableRuleText(choice.clause)}</p>
+      <p className="whitespace-pre-wrap">
+        <GlyphText text={readableRuleText(choice.clause)} />
+      </p>
       {mayManage && (
         <CommandButton
           campaignId={campaignId}

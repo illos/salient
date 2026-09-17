@@ -26,9 +26,14 @@ import type {
 import { inspectCompendium } from './build-content.ts';
 import { splitFrontmatter } from './lib/frontmatter.ts';
 import { slugify } from './lib/markdown.ts';
+import {
+  addContentTitle,
+  presentationMarkdown,
+  rehypeCorePresentation,
+} from '../shared/presentation/content.ts';
 
 const ROOT = fileURLToPath(new URL('../', import.meta.url));
-const GENERATOR = 'rules.1';
+const GENERATOR = 'rules.2-core';
 export const BOOKS = [
   {
     id: 'heroes',
@@ -198,6 +203,7 @@ const html = unified()
       '*': [...(defaultSchema.attributes?.['*'] ?? []), 'id'],
     },
   })
+  .use(rehypeCorePresentation)
   .use(rehypeStringify);
 
 export function plainText(body: string): string {
@@ -220,12 +226,13 @@ export function plainText(body: string): string {
 export function renderArticle(
   body: string,
   resolve: (target: string) => string | undefined,
+  title?: string,
 ): { html: string; headings: RuleHeading[]; unresolved: string[] } {
   // Keep SCC heading associations separately before removing their presentation attributes.
   const headingRefs = [...body.matchAll(/^#{1,6}\s+(.+?)\s*\{data-scc="([^"]+)"[^}]*\}/gm)].map(
     m => ({ text: plainText(m[1]), id: m[2] }),
   );
-  const tree = markdown.parse(readableMarkdown(body)) as Root;
+  const tree = markdown.parse(presentationMarkdown(body)) as Root;
   const blockTitles = new WeakSet<Heading>();
   // Monster abilities and traits are printed as bold blockquote titles, not headings.
   // Promote those titles so table references can land on the exact ability or trait.
@@ -233,12 +240,17 @@ export function renderArticle(
     const first = node.children[0];
     if (
       first?.type !== 'paragraph' ||
-      first.children.length !== 1 ||
-      first.children[0]?.type !== 'strong'
+      first.children.filter(n => n.type === 'strong').length !== 1 ||
+      first.children.some(
+        n => n.type !== 'strong' && !(n.type === 'text' && !readableMarkdown(n.value).trim()),
+      )
     )
       return;
-    const title = first.children[0];
-    const heading: Heading = { type: 'heading', depth: 3, children: title.children };
+    const heading: Heading = {
+      type: 'heading',
+      depth: 3,
+      children: first.children.flatMap(n => (n.type === 'strong' ? n.children : [n])),
+    };
     blockTitles.add(heading);
     node.children[0] = heading;
   });
@@ -251,7 +263,7 @@ export function renderArticle(
   });
   const minDepth = Math.min(6, ...sourceHeadings.map(h => h.depth));
   for (const node of sourceHeadings) {
-    const text = toString(node);
+    const text = readableMarkdown(toString(node)).trim();
     const slug =
       slugify(blockTitles.has(node) ? text.replace(/\s*\([^)]*\)\s*$/, '') : text) || 'section';
     const count = seen.get(slug) ?? 0;
@@ -283,7 +295,9 @@ export function renderArticle(
       node.url = '';
     }
   });
-  return { html: html.stringify(html.runSync(tree)), headings, unresolved };
+  const rendered = html.runSync(tree);
+  addContentTitle(rendered, title);
+  return { html: html.stringify(rendered), headings, unresolved };
 }
 
 export function buildRules() {
@@ -346,7 +360,11 @@ export function buildRules() {
       }
       return found ? url(found) + (fragment ? `#${fragment}` : '') : undefined;
     };
-    const rendered = renderArticle(`${source.details}\n\n${source.expanded}`, resolve);
+    const rendered = renderArticle(
+      `${source.details}\n\n${source.expanded}`,
+      resolve,
+      source.kind === 'statblock' ? source.name : undefined,
+    );
     for (const target of rendered.unresolved) broken.push(`${source.path}: ${target}`);
     const category = source.kind;
     const file = `${source.book}-${category}.json`;
