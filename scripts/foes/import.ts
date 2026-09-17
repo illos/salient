@@ -10,29 +10,14 @@ import rehypeStringify from 'rehype-stringify';
 import { toString } from 'mdast-util-to-string';
 import { parse } from 'yaml';
 import type { Fields, FoeObject, FoePackage, Json } from '../../shared/contracts/foes.ts';
+import { sourceFeatures, sourceAdaptations } from './source-adaptations.ts';
+import { SELECTION } from './batches.ts';
 import { splitFrontmatter } from '../lib/frontmatter.ts';
 
 export const REVISION = 'fb83a789da8f0327a389c277a0c790b1648d5810';
-export const GENERATOR = '1.0.0';
-export const ROOT = 'monster/undead/1st-echelon/';
-export const SLUGS = [
-  'crawling-claw',
-  'decrepit-skeleton',
-  'ghost',
-  'ghoul',
-  'rotting-zombie',
-  'shade',
-  'skeleton',
-  'soulwight',
-  'specter',
-  'umbral-stalker',
-  'zombie',
-];
-export const PATHS = [
-  ...SLUGS.map(s => `${ROOT}statblock/${s}`),
-  `${ROOT}undead-malice-level-1-malice-features`,
-];
+export const GENERATOR = '1.2.0';
 export interface Input {
+  book?: 'monsters' | 'heroes';
   path: string;
   json: string;
   markdown: string;
@@ -110,7 +95,7 @@ export function sections(markdown: string) {
 export function featureSpans(markdown: string) {
   const { body } = splitFrontmatter(markdown);
   const offset = markdown.length - body.length;
-  const starts = [...body.matchAll(/^>[ \t]*[\u0080-\uFFFF]+[ \t]+\*\*/gm)].map(
+  const starts = [...body.matchAll(/^(?:>[ \t]*)?[\u0080-\uFFFF]+[ \t]*\*\*/gm)].map(
     m => m.index! + offset,
   );
   return starts.map((start, i) => ({
@@ -128,15 +113,23 @@ export function unmodeledText(markdown: string, feature: Fields): string {
     .parse(markdown)
     .children.slice(1)
     .filter(n => n.type !== 'table');
-  let text = plain(nodes.map(n => toString(n)).join(' '));
+  let text = plain(nodes.map(n => toString(n)).join(' ')).replace(/[:\s]/g, '');
   const values = [
     feature.trigger,
+    ...(typeof feature.trailing === 'string' ? feature.trailing.split(/\n\s*\n/) : []),
     ...((feature.effects ?? []) as Fields[]).flatMap(e =>
       ['name', 'cost', 'effect', 'roll', 'tier1', 'tier2', 'tier3'].map(k => e[k]),
     ),
   ];
-  for (const value of values) if (typeof value === 'string') text = text.replace(plain(value), '');
-  return text.replace(/(?:≤11|12-16|17\+|Trigger):/g, '').replace(/[:\s]/g, '');
+  for (const value of values)
+    if (typeof value === 'string')
+      text = text.replace(
+        plain(
+          toString(parser.parse(value.startsWith('- ') ? value.replaceAll(' - ', '\n- ') : value)),
+        ).replace(/[:\s]/g, ''),
+        '',
+      );
+  return text.replace(/(?:≤11|12-16|17\+|Trigger):?/g, '').replace(/[:\s]/g, '');
 }
 function validateSource(record: Fields, markdown: string) {
   const { frontmatter, body } = splitFrontmatter(markdown);
@@ -174,13 +167,18 @@ function validatePrinted(record: Fields, body: string) {
       .map(plain);
     if (
       cells[0] !== tags(record.keywords).join(', ') ||
-      cells[2] !== `Level ${record.level}` ||
-      cells[3] !== `${record.organization} ${record.role ?? ''}`.trim() ||
+      (record.level !== undefined && cells[2] !== `Level ${record.level}`) ||
+      ![
+        (record.organization === 'Retainer'
+          ? `${record.role ?? ''} Retainer`
+          : `${record.organization ?? ''} ${record.role ?? ''}`
+        ).trim() || '-',
+      ].includes(cells[3]) ||
       cells[4] !== `EV ${record.ev}`
     )
       throw new Error(`Printed envelope disagreement: ${record.name}`);
     for (const [key, label] of Object.entries({
-      immunities: 'Immunity',
+      immunities: 'Immunit(?:y|ies)',
       weaknesses: 'Weakness',
       movement: 'Movement',
       with_captain: 'With Captain',
@@ -196,17 +194,21 @@ function validatePrinted(record: Fields, body: string) {
 }
 function validateFeature(feature: Fields, md: string, parent: string) {
   const nodes = parser.parse(md).children;
-  const title = toString(nodes[0]);
+  const title = plain(toString(nodes[0]));
   const tables = nodes.filter(n => n.type === 'table');
-  if (feature.feature_type === 'ability') {
+  if (
+    feature.distance !== undefined ||
+    feature.target !== undefined ||
+    feature.usage !== undefined
+  ) {
     const expected = [
-      [tags(feature.keywords).join(', ') || '-', String(feature.usage ?? '-')],
+      [tags(feature.keywords).join(', ') || '-', plain(feature.usage ?? '-')],
       [`📏 ${feature.distance}`, `🎯 ${feature.target}`],
     ];
-    const cells = tables[0]?.children.map(row => row.children.map(cell => toString(cell)));
-    if (tables.length !== 1 || JSON.stringify(cells) !== JSON.stringify(expected))
+    const cells = tables[0]?.children.map(row => row.children.map(cell => plain(toString(cell))));
+    if (JSON.stringify(cells) !== JSON.stringify(expected))
       throw new Error(`Feature envelope disagreement: ${parent}/${feature.name}`);
-  } else if (tables.length) throw new Error(`Unmodeled feature table: ${parent}/${feature.name}`);
+  }
   const qualifier = feature.ability_type || feature.cost;
   if (
     title.replace(/^[^\p{L}\p{N}]+/u, '') !== `${feature.name}${qualifier ? ` (${qualifier})` : ''}`
@@ -229,6 +231,15 @@ function validateFeature(feature: Fields, md: string, parent: string) {
   for (const key of ['usage', 'distance', 'target', 'trigger', 'cost', 'ability_type']) {
     if (feature[key] && feature[key] !== '-' && !sourceText.includes(plain(feature[key])))
       throw new Error(`Missing feature field: ${parent}/${feature.name}/${key}`);
+  }
+  if (typeof feature.trailing === 'string') {
+    let at = 0;
+    for (const paragraph of feature.trailing.split(/\n\s*\n/)) {
+      const value = plain(paragraph);
+      const found = sourceText.indexOf(value, at);
+      if (found < 0) throw new Error(`Missing trailing source text: ${parent}/${feature.name}`);
+      at = found + value.length;
+    }
   }
 }
 export async function importFoes(
@@ -261,12 +272,13 @@ export async function importFoes(
     validateSource(record, input.markdown);
     const parent = String((record.metadata as Fields).scc);
     const spans = featureSpans(input.markdown);
-    const features = record.features as Fields[];
+    const bindings = sourceFeatures(input, record);
+    const features = bindings.map(b => b.feature);
     if (spans.length !== features.length)
       throw new Error(`Incomplete feature boundaries: ${parent}`);
     const metadata = {
       revision: REVISION,
-      path: `en/books/monsters/md/${input.path}.md`,
+      path: `en/books/${input.book ?? 'monsters'}/md/${input.path}.md`,
       scc: parent,
     };
     const prefix = input.markdown.slice(
@@ -298,7 +310,7 @@ export async function importFoes(
     objects.push(block);
     for (const [order, feature] of features.entries()) {
       const matches = identities.filter(
-        i => i.parent === parent && i.fingerprint === fingerprint(feature),
+        i => i.parent === parent && i.fingerprint === fingerprint(bindings[order].identity),
       );
       if (matches.length !== 1 || ids.has(matches[0].id))
         throw new Error(`Missing/ambiguous feature identity: ${parent}/${feature.name}`);
@@ -325,7 +337,11 @@ export async function importFoes(
         markdown: md,
         html: await render(md),
         source: { ...metadata, start: span.start, end: span.end },
-        original: { record: feature, markdown: span.markdown },
+        original: {
+          record: bindings[order].originals[0] ?? {},
+          markdown: span.markdown,
+          ...(bindings[order].originals.length !== 1 ? { records: bindings[order].originals } : {}),
+        },
         diagnostics: [],
       });
       block.featureIds.push(id);
@@ -341,7 +357,7 @@ export async function importFoes(
       throw new Error('A field correction must include its corrected display Markdown');
   }
   applyCorrections(objects, corrections, REVISION);
-  const malice = objects.find(o => o.kind === 'malice' && !o.parentId);
+
   for (const object of objects) {
     if (object.parentId) {
       validateFeature(object.fields, object.markdown, object.parentId);
@@ -353,7 +369,9 @@ export async function importFoes(
       const nodes = parser.parse(object.markdown).children;
       if (object.kind === 'statblock') {
         const tables = nodes.filter(n => n.type === 'table');
-        const cells = tables[0]?.children.map(row => row.children.map(cell => toString(cell)));
+        const cells = tables[0]?.children.map(row =>
+          row.children.map(cell => plain(toString(cell))),
+        );
         if (
           tables.length !== 1 ||
           cells?.length !== 4 ||
@@ -371,6 +389,20 @@ export async function importFoes(
       );
       const expected = object.kind === 'malice' ? plain(object.fields.flavor) : '';
       if (prose !== expected) object.diagnostics.push(`Unmodeled parent text: ${prose}`);
+    }
+    if (!object.parentId) {
+      const selected = SELECTION.find(
+        entry => object.source.path === `en/books/${entry.book}/md/${entry.path}.md`,
+      );
+      if (selected?.relatedRules?.length) object.relatedRules = selected.relatedRules;
+      object.supportingIds = (selected?.supportingPaths ?? []).flatMap(path => {
+        const supporting = objects.find(
+          o =>
+            !o.parentId &&
+            o.source.path === `en/books/${selected?.book ?? 'monsters'}/md/${path}.md`,
+        );
+        return supporting ? [supporting.id] : [];
+      });
     }
     object.sections = sections(object.markdown);
     object.html = await render(object.markdown);
@@ -419,6 +451,7 @@ export async function importFoes(
       'usage',
       'cost',
       'trigger',
+      'trailing',
       'body',
       'intro',
       'power_roll',
@@ -439,8 +472,15 @@ export async function importFoes(
         quantity: match ? (match[2] ? 4 : 1) : null,
       };
       if (!match) object.diagnostics.push('Unresolved encounter value');
-      if (malice) object.supportingIds = [malice.id];
     }
+  }
+  for (const object of objects) {
+    const owner = object.parentId ? objects.find(p => p.id === object.parentId)! : object;
+    const selected = SELECTION.find(
+      e => owner.source.path === `en/books/${e.book}/md/${e.path}.md`,
+    );
+    if (selected?.group) object.group = selected.group;
+    if (selected?.sourcebook) object.sourcebook = selected.sourcebook;
   }
   const search = objects.map(o => ({
     id: o.id,
@@ -450,6 +490,16 @@ export async function importFoes(
     text: plain(o.markdown),
     keywords: o.keywords,
     usage: o.usage,
+    group: o.group,
+    sourcebook: o.sourcebook,
+    ...(() => {
+      const fields = (o.parentId ? objects.find(p => p.id === o.parentId)! : o).fields;
+      return {
+        ...(typeof fields.level === 'number' ? { level: fields.level } : {}),
+        ...(typeof fields.organization === 'string' ? { organization: fields.organization } : {}),
+        ...(typeof fields.role === 'string' ? { role: fields.role } : {}),
+      };
+    })(),
   }));
   const payload = {
     schema: 'foes.1' as const,
@@ -457,7 +507,10 @@ export async function importFoes(
     sourceRevision: REVISION,
     objects,
     search,
-    corrections: corrections as unknown as Fields[],
+    corrections: [
+      ...corrections,
+      ...sourceAdaptations.filter(a => objects.some(o => o.id === a.parent)),
+    ] as unknown as Fields[],
   };
   return { ...payload, edition: hash(payload) };
 }

@@ -1,0 +1,2682 @@
+{
+  "repository": "https://github.com/erik-meier/monster-library",
+  "revision": "eba4b8bb8bc1baf947f15e67e9e923951092fd89",
+  "inventoryRoots": ["data/monsters/", "data/malice/"],
+  "treeTruncated": false,
+  "files": [
+    {
+      "path": "data/malice/ajax-s-malice.json",
+      "id": "ajax-s-malice",
+      "sha256": "116a1f2e70e1147b1a428f1d6feadd1fcc5bb3104bb67fb109a22952dda7dff2"
+    },
+    {
+      "path": "data/malice/angulotl-malice.json",
+      "id": "angulotl-malice",
+      "sha256": "8366aa6ebdb1bf2d68b4e1527788049a8066cc00b8f3d28494d6b53a82d55722"
+    },
+    {
+      "path": "data/malice/arixx-malice.json",
+      "id": "arixx-malice",
+      "sha256": "0ef37ce47960eb1c16014bd1f2795b019bd7695689b17e7ceda3bcabe502c83a"
+    },
+    {
+      "path": "data/malice/ashen-hoarder-malice.json",
+      "id": "ashen-hoarder-malice",
+      "sha256": "9ca4e7e496d5af232dae08788edb7b0a6b79dbb981a7432c5043ec034e1b1831"
+    },
+    {
+      "path": "data/malice/basilisk-malice.json",
+      "id": "basilisk-malice",
+      "sha256": "313ab9b8ee2b58c803a0e3c44122bc41d5822cd068bdca5a10c26c2b85f27c26"
+    },
+    {
+      "path": "data/malice/bredbeddle-malice.json",
+      "id": "bredbeddle-malice",
+      "sha256": "a1564a204db05f35022bd3b8d22553e8e9bbe3decbf31e35b5152cc3eef6eb47"
+    },
+    {
+      "path": "data/malice/bugbear-malice.json",
+      "id": "bugbear-malice",
+      "sha256": "406d8d5a0c2762cd814fdf5fa99720eff45ef57aeb5b314e227a6abc15d7d101"
+    },
+    {
+      "path": "data/malice/chimera-malice.json",
+      "id": "chimera-malice",
+      "sha256": "1199013b855d1f879733bda0effc0889e1946b2576e64341aaf1823446b0dcaf"
+    },
+    {
+      "path": "data/malice/crucible-dragon-malice.json",
+      "id": "crucible-dragon-malice",
+      "sha256": "350d0a796bae58e895ac334a21270624c0d2590ca76804f928b8cc2e625728bd"
+    },
+    {
+      "path": "data/malice/demon-malice-10.json",
+      "id": "demon-malice-10",
+      "sha256": "e1373f34fb6b9009e0d270837f399a68342c8ec06388d41c3ac8cc242c3f10cc"
+    },
+    {
+      "path": "data/malice/demon-malice-4.json",
+      "id": "demon-malice-4",
+      "sha256": "c322bd0913f0c90db6b337f6fc6b7f58e5836ec6b2c7e74bb89e6265ad10ebaa"
+    },
+    {
+      "path": "data/malice/demon-malice-7.json",
+      "id": "demon-malice-7",
+      "sha256": "3934c298f29135b56b201b0b7947318ea6c5af5d31f11044d14ac3adddeb8d90"
+    },
+    {
+      "path": "data/malice/demon-malice.json",
+      "id": "demon-malice",
+      "sha256": "b71083e07e55057e7760dd0962bcea051de543e03748cf0aa34da7475bf65cec"
+    },
+    {
+      "path": "data/malice/devil-malice.json",
+      "id": "devil-malice",
+      "sha256": "5c7233c6db754512bd971a30d46c8f6cb9451ff5081e8f4d24af56d8a31ca8d3"
+    },
+    {
+      "path": "data/malice/draconian-malice.json",
+      "id": "draconian-malice",
+      "sha256": "50a6b6fd77a35290950ddb1e687c04eabe7a19b09a6f6fb6e5885445f3f1db3f"
+    },
+    {
+      "path": "data/malice/dwarf-malice.json",
+      "id": "dwarf-malice",
+      "sha256": "fbc033b0673caf34a4786619e652d53df0e3793ec8f55d2e3241fc6ee9a07c85"
+    },
+    {
+      "path": "data/malice/elemental-malice.json",
+      "id": "elemental-malice",
+      "sha256": "0d8cb2843c79f63defad76f735c0cbae0135d423b91870e6faa571d8a1551edc"
+    },
+    {
+      "path": "data/malice/fossil-cryptic-malice.json",
+      "id": "fossil-cryptic-malice",
+      "sha256": "8006ca17d29ebc440a85c2e05b3f1a122b0b69845e36e5cda760f94099ce972d"
+    },
+    {
+      "path": "data/malice/giant-malice.json",
+      "id": "giant-malice",
+      "sha256": "b5d0236c34be2350f3be8c1f9e3fc76c62ea4a7dc9497658dd31429fcc342bde"
+    },
+    {
+      "path": "data/malice/gloom-dragon-malice.json",
+      "id": "gloom-dragon-malice",
+      "sha256": "cb4334067e6d400978c154db2c19bb0e69194b08626d416dd01293be8ae8d324"
+    },
+    {
+      "path": "data/malice/gnoll-malice.json",
+      "id": "gnoll-malice",
+      "sha256": "f2ed0c061b22f4ed0854a920753bf4c04fececb0dc07330f6495bd515f54a7d7"
+    },
+    {
+      "path": "data/malice/goblin-malice.json",
+      "id": "goblin-malice",
+      "sha256": "7b716a3c13416b30e4976847b9cb8b9527bd0721cddae0b4c71d5cc83b89fc10"
+    },
+    {
+      "path": "data/malice/griffon-malice.json",
+      "id": "griffon-malice",
+      "sha256": "d3f94b189eee2532f647fa5aa60a3bb3ea91064309615a5f7e6e70988345c1bd"
+    },
+    {
+      "path": "data/malice/hag-malice.json",
+      "id": "hag-malice",
+      "sha256": "73cbf0018927fca61b3eab5020bf499ff936b4b32ace7601b06fb4a50afca8f9"
+    },
+    {
+      "path": "data/malice/high-elf-malice.json",
+      "id": "high-elf-malice",
+      "sha256": "fec5f9e6e7002074dc82223e71e8662151631f90bf90e5eef1a19406fc181869"
+    },
+    {
+      "path": "data/malice/hobgoblin-malice.json",
+      "id": "hobgoblin-malice",
+      "sha256": "e218d62254a1fb7a7ad31feba7b8baa77cbbd1eab96500e5dba97b7c1d14f9d6"
+    },
+    {
+      "path": "data/malice/human-malice.json",
+      "id": "human-malice",
+      "sha256": "5322067956d0d2fce4313426a79fa18f489f1d7b097bfcbf80bacfa23fadc35f"
+    },
+    {
+      "path": "data/malice/kingfissure-worm-malice.json",
+      "id": "kingfissure-worm-malice",
+      "sha256": "10cecb194e2c975ed923a216c122b522c739bcdc4a34dca4e74ecf14e721d934"
+    },
+    {
+      "path": "data/malice/kobold-malice.json",
+      "id": "kobold-malice",
+      "sha256": "ede1f1816c9513a254a7acc084c1d4f57cb74ce595619dc19b1aee147dc6f4d8"
+    },
+    {
+      "path": "data/malice/lich-malice.json",
+      "id": "lich-malice",
+      "sha256": "6e6e30158f4a680f70952a5365aeeea32c2ca3dba1d8f3440551a079aab9af7c"
+    },
+    {
+      "path": "data/malice/lizardfolk-malice.json",
+      "id": "lizardfolk-malice",
+      "sha256": "42fb1a484f309396603d849734f2c7402f18910f38cb9a1abacfb0d142ae2400"
+    },
+    {
+      "path": "data/malice/lord-syuul-s-malice.json",
+      "id": "lord-syuul-s-malice",
+      "sha256": "e2ae6a7d4bd733371bbb55a5ed1d87c0ed2c0a374da6757d040e29b6a4f630c8"
+    },
+    {
+      "path": "data/malice/manticore-malice.json",
+      "id": "manticore-malice",
+      "sha256": "34824243d318ee9cb551e11401b1cd27f0863b7a9a06b48e2feefc6542eba3b6"
+    },
+    {
+      "path": "data/malice/medusa-malice.json",
+      "id": "medusa-malice",
+      "sha256": "ae38d5b6fae2feb6ef693e6469bd244f45114c909137fa7289f84e1d2cbec5ad"
+    },
+    {
+      "path": "data/malice/meteor-dragon-malice.json",
+      "id": "meteor-dragon-malice",
+      "sha256": "35b0da104baccdb3409752ffeacff6b191bc396ab333b3a69d936d3aa3988302"
+    },
+    {
+      "path": "data/malice/minotaur-malice.json",
+      "id": "minotaur-malice",
+      "sha256": "1ea7e384992eba3b5f0d5e308e0670897f5a46e6afd30bd9cf20a598afe44cca"
+    },
+    {
+      "path": "data/malice/ogre-malice.json",
+      "id": "ogre-malice",
+      "sha256": "155473b52ae226ef81273377ad67cd8d578bfd63b8e83362d6700fd4e95a1a8d"
+    },
+    {
+      "path": "data/malice/olothec-malice.json",
+      "id": "olothec-malice",
+      "sha256": "e71a38ef36397bf367c54c51a8ba03ca9aae481bdf1a2958d5cb4f45ef42f06a"
+    },
+    {
+      "path": "data/malice/omen-dragon-malice.json",
+      "id": "omen-dragon-malice",
+      "sha256": "75354326bc9d1b1623453626983d0b2deaf4c758e99285dfbd4ae43b859fd8b3"
+    },
+    {
+      "path": "data/malice/orc-malice.json",
+      "id": "orc-malice",
+      "sha256": "5f387663d3081b7a850affd3bfd4625eb3bd4816543b6ceca65fe4c91d437d97"
+    },
+    {
+      "path": "data/malice/radenwight-malice.json",
+      "id": "radenwight-malice",
+      "sha256": "85077777ca5b17a3d2f7212d93d76a3f18750cbd34889c951ac18f69c1ef6af8"
+    },
+    {
+      "path": "data/malice/rhodar-s-malice.json",
+      "id": "rhodar-s-malice",
+      "sha256": "82d2f9d1d9f250f3504ab1b5c4c4c51e92c36b6a412890180b33e9ce7a6c16b9"
+    },
+    {
+      "path": "data/malice/rival-malice.json",
+      "id": "rival-malice",
+      "sha256": "b7308d53483cf2c5fcf1c7630d4eb74212fecc07e497ba4be589a761e4b83876"
+    },
+    {
+      "path": "data/malice/shadow-elf-malice.json",
+      "id": "shadow-elf-malice",
+      "sha256": "410726c97ff6e05996d19fcec5e638be5ff75386eeaffb78293e459e19a94bc6"
+    },
+    {
+      "path": "data/malice/shambling-mound-malice.json",
+      "id": "shambling-mound-malice",
+      "sha256": "d6d2ab6dcefcb32431b30a4ebc46f6559ee592f791e9e571e0dcecdcc77683e0"
+    },
+    {
+      "path": "data/malice/tactical-stance.json",
+      "id": "tactical-stance",
+      "sha256": "b4107ce871901d348cda667720d83d143c702d3af851a878dfa040b120860ed6"
+    },
+    {
+      "path": "data/malice/thorn-dragon-malice.json",
+      "id": "thorn-dragon-malice",
+      "sha256": "02327f9a3b75ff1ae969791b0e3f2d43d511e9553bea5e741892b91bf4a90171"
+    },
+    {
+      "path": "data/malice/time-raider-malice.json",
+      "id": "time-raider-malice",
+      "sha256": "cb14d2af0cbe6ddc90ea896e035bf707d6b1e512d85f1368fd3ed71c80ad25b9"
+    },
+    {
+      "path": "data/malice/troll-malice.json",
+      "id": "troll-malice",
+      "sha256": "5c21d1a10b044394f5a7387fc5e2ef3e1b669663edd6a8869a2fea2414fbb88b"
+    },
+    {
+      "path": "data/malice/undead-malice-10.json",
+      "id": "undead-malice-10",
+      "sha256": "7f8f0fc39f1d2085dd9194cbe32ba4f14ba3f4dac2c98c875d20b7be1128b619"
+    },
+    {
+      "path": "data/malice/undead-malice-4.json",
+      "id": "undead-malice-4",
+      "sha256": "3b70a43a913bac3fae5578ef41d7d285c0d71d3b38c653071a5e1dd87e43c01f"
+    },
+    {
+      "path": "data/malice/undead-malice-7.json",
+      "id": "undead-malice-7",
+      "sha256": "737d72ff4b13043fd9ad1b45dfa6d125336465e0e4a93ce4e6bb7506e1c31f4c"
+    },
+    {
+      "path": "data/malice/undead-malice.json",
+      "id": "undead-malice",
+      "sha256": "704d3f86e39fd76bddf27e30c90fa1f8db414b4d8beeb8775bc469ce774bf219"
+    },
+    {
+      "path": "data/malice/valok-malice.json",
+      "id": "valok-malice",
+      "sha256": "6d4936840ef202e0ab99e12eb177b63cefcf1aaaad3b1e258415c2c2e1de786b"
+    },
+    {
+      "path": "data/malice/voiceless-talker-malice.json",
+      "id": "voiceless-talker-malice",
+      "sha256": "439313e5b068890b3cba35b4fd635a142c9e27c5f8ed77c7ed5cd11c596b1299"
+    },
+    {
+      "path": "data/malice/war-dog-malice-10.json",
+      "id": "war-dog-malice-10",
+      "sha256": "f09e980e21f8f1077d2897bfa41432aedd7a30bc09372e55c601f703c084f889"
+    },
+    {
+      "path": "data/malice/war-dog-malice-4.json",
+      "id": "war-dog-malice-4",
+      "sha256": "d9bacddd70f5ee9dbe5aefd5d852201bfdbe6ab8b020f306ef617d3c4ad61245"
+    },
+    {
+      "path": "data/malice/war-dog-malice-7.json",
+      "id": "war-dog-malice-7",
+      "sha256": "66d13af91a4b2f0f891eebb6abeb717195b604e89b4e1c95a71d3a79b94abe3c"
+    },
+    {
+      "path": "data/malice/war-dog-malice.json",
+      "id": "war-dog-malice",
+      "sha256": "3cd6e3bb7d8c867dd219ce6bb0b92597dfaceb6d45192b590f7eafbb52ce5c95"
+    },
+    {
+      "path": "data/malice/werewolf-malice.json",
+      "id": "werewolf-malice",
+      "sha256": "7f3ae294de67431b4a3217a3ae6342366738bfe4a2899c68f7ae50b37d2fd778"
+    },
+    {
+      "path": "data/malice/wode-elf-malice.json",
+      "id": "wode-elf-malice",
+      "sha256": "2b0229bbbba49529015acaffc89271f9a298df1f9bf1b64adaefb1be9e5439be"
+    },
+    {
+      "path": "data/malice/wyvern-malice.json",
+      "id": "wyvern-malice",
+      "sha256": "6a401b6f63eecbfce260d8091d2649b8a723a0029bee71becd82ca800053e8f5"
+    },
+    {
+      "path": "data/malice/xorannox-s-malice.json",
+      "id": "xorannox-s-malice",
+      "sha256": "cca4365c2ebda743cafdc60717e7e8ba9831065cea0f7f5975e986a8f9c12dbc"
+    },
+    {
+      "path": "data/monsters/abyssal-hyena.json",
+      "id": "abyssal-hyena",
+      "sha256": "48f5849b1becbc7eb1d887bb5c04613e462a45eb2ecb63a600271d88a3de5262"
+    },
+    {
+      "path": "data/monsters/aeolyxria-the-uncanny.json",
+      "id": "aeolyxria-the-uncanny",
+      "sha256": "fa2500b44e17ae883e4c630968a72e2e714bd4851bea600cbea92c58ec50c391"
+    },
+    {
+      "path": "data/monsters/ajax-the-invincible.json",
+      "id": "ajax-the-invincible",
+      "sha256": "71dbd9aaa2c0d0ee7545a4cf2d72c501ed892b476e037a245d66498568b64de2"
+    },
+    {
+      "path": "data/monsters/angulotl-cleaver.json",
+      "id": "angulotl-cleaver",
+      "sha256": "7734cfba9cd733c6b90c0753ad793bb4bf97007b6972d54cfcc015676aeb0730"
+    },
+    {
+      "path": "data/monsters/angulotl-dart.json",
+      "id": "angulotl-dart",
+      "sha256": "c3022f66460dcab60bd66da578b59972ba44c468265eb1ec5f2352ec3f48b9ae"
+    },
+    {
+      "path": "data/monsters/angulotl-daybringer.json",
+      "id": "angulotl-daybringer",
+      "sha256": "36fef8408cce21d80014976b40e7a8968c3e6effa9023241daa759b2d17b36ab"
+    },
+    {
+      "path": "data/monsters/angulotl-needler.json",
+      "id": "angulotl-needler",
+      "sha256": "44e31cb2deebcf03d8c47cf7ae250dd86e0953a74b5fb303164cf7cb5b8a9f66"
+    },
+    {
+      "path": "data/monsters/angulotl-pollywog.json",
+      "id": "angulotl-pollywog",
+      "sha256": "ebc750ec168aa213846e46de97850c16961779ea824e2865344dbf19520e48f1"
+    },
+    {
+      "path": "data/monsters/angulotl-slink.json",
+      "id": "angulotl-slink",
+      "sha256": "daa817f282fb239da6598041cd2b04cd83f63d94351c0cd6b51881d2c3b15a12"
+    },
+    {
+      "path": "data/monsters/angulotl-wave.json",
+      "id": "angulotl-wave",
+      "sha256": "78c8d41411020065ecfa3ef54b22b607e04cd995f5985d90586345c425717d57"
+    },
+    {
+      "path": "data/monsters/animal-swarm.json",
+      "id": "animal-swarm",
+      "sha256": "921dd9e7e12c7e131d5d0d64d31e266b214b2aec2b491993e61f20a85fcb775d"
+    },
+    {
+      "path": "data/monsters/animal.json",
+      "id": "animal",
+      "sha256": "8059855d78df53069a36b39b5abb90585cf09ee56c36ba08196185e81f19d5bb"
+    },
+    {
+      "path": "data/monsters/arixx.json",
+      "id": "arixx",
+      "sha256": "e9c9af1f3c88f89565db46fd0685129ae93e00971e55ac257f072185a3deeb59"
+    },
+    {
+      "path": "data/monsters/ashen-hoarder.json",
+      "id": "ashen-hoarder",
+      "sha256": "f7868ecf5e9de58eaf3def62664274d5c7dfffb681f286e1c3c93fa926d24a89"
+    },
+    {
+      "path": "data/monsters/aurumvas.json",
+      "id": "aurumvas",
+      "sha256": "eb4d175ad869384a56e7dbe8f22caeb9ec7919fd64fdd558397627e14eb8db12"
+    },
+    {
+      "path": "data/monsters/bale-eye.json",
+      "id": "bale-eye",
+      "sha256": "5cdd762ce9e9ef232fda32fd595d61aa8638a9e5d859c845a2b5517db1ccadf2"
+    },
+    {
+      "path": "data/monsters/basalt-stone-giant.json",
+      "id": "basalt-stone-giant",
+      "sha256": "eab3025d092826507b39a40b5aa6a74bcbd5e7c5696452bf98c32926862608ac"
+    },
+    {
+      "path": "data/monsters/basilisk-tonguesnapper.json",
+      "id": "basilisk-tonguesnapper",
+      "sha256": "0745c51018af011a0ccaff8b832380d06f654e4dd39003ec01ce932e51045235"
+    },
+    {
+      "path": "data/monsters/basilisk.json",
+      "id": "basilisk",
+      "sha256": "590f9ee13ebef0fa89a0db9afb9f9064c7ee3a51f5be428ca1763977c67ed096"
+    },
+    {
+      "path": "data/monsters/bendrak.json",
+      "id": "bendrak",
+      "sha256": "ca9949c77345ac8a8b9bc053deaa3b9ff00fef74641b899eb376206263e428d7"
+    },
+    {
+      "path": "data/monsters/big-animal-a.json",
+      "id": "big-animal-a",
+      "sha256": "52ccef9bf7302c27feacf3c35010443887841f4477cb4d296333e666a934f03a"
+    },
+    {
+      "path": "data/monsters/big-animal-b.json",
+      "id": "big-animal-b",
+      "sha256": "0156ad16592b53801cd03d2d187155d76ad5486ae765407d949eba1bd4ed3262"
+    },
+    {
+      "path": "data/monsters/blight-phage.json",
+      "id": "blight-phage",
+      "sha256": "ac25cd639366fe68880b60c74bc182ce9134de0e84056f801345b728f25ebd72"
+    },
+    {
+      "path": "data/monsters/blood-starved-vampire.json",
+      "id": "blood-starved-vampire",
+      "sha256": "95eea3701369381fbe827ddb1d290fff4e80f310098cae9484221874b878dbed"
+    },
+    {
+      "path": "data/monsters/bonecage.json",
+      "id": "bonecage",
+      "sha256": "3a8c05bd5384ff1348d9063bf95417a16f1af1ee906f054a541f2b42adfec6d4"
+    },
+    {
+      "path": "data/monsters/brambleguard.json",
+      "id": "brambleguard",
+      "sha256": "51e6ecb1bdf12999657df1917c6d0ccbcf6fcd454fce9539fe53771e13b157d9"
+    },
+    {
+      "path": "data/monsters/bredbeddle.json",
+      "id": "bredbeddle",
+      "sha256": "d6bd1d5cd38baf1e19a204ab0116ffbf89860d20e41bc18ea59d2b701520f3c1"
+    },
+    {
+      "path": "data/monsters/brush-stalker.json",
+      "id": "brush-stalker",
+      "sha256": "df6bf4cd7bb6dca518b2452cb9ecc0e3219a1139170ac465e24319cc37747ae6"
+    },
+    {
+      "path": "data/monsters/bugbear-channeler.json",
+      "id": "bugbear-channeler",
+      "sha256": "18ebaeb5a019259b4ca251f8924feef67e7bd5496f49c668f30103b2f85b379c"
+    },
+    {
+      "path": "data/monsters/bugbear-commander.json",
+      "id": "bugbear-commander",
+      "sha256": "f97731769e5a767a6d67bd77698efa3743573a1956941830fd30caa66696359e"
+    },
+    {
+      "path": "data/monsters/bugbear-knightmare.json",
+      "id": "bugbear-knightmare",
+      "sha256": "7d1a8183a198e61180646a0d40bc971f45b4db06092bfcd5b6fe53bc5b210730"
+    },
+    {
+      "path": "data/monsters/bugbear-mob.json",
+      "id": "bugbear-mob",
+      "sha256": "717d26fd36c2839c14122177ff012a74126ba5b023601ddd32ed281b6080fe6a"
+    },
+    {
+      "path": "data/monsters/bugbear-roughneck.json",
+      "id": "bugbear-roughneck",
+      "sha256": "22f2866f3210feb90083a9597586232b550a83afab7035a988c3ba9eec60a243"
+    },
+    {
+      "path": "data/monsters/bugbear-snare.json",
+      "id": "bugbear-snare",
+      "sha256": "b8974f142c18db7679add0853968b2e4b1f3c78ad3222fb53a49b8901e52839a"
+    },
+    {
+      "path": "data/monsters/bugbear-sneak.json",
+      "id": "bugbear-sneak",
+      "sha256": "33ee106ebb8c22d9ccbf3c08a1e9bae7f86f655556dcf1ec699615f89cd9b248"
+    },
+    {
+      "path": "data/monsters/castellan-hoplon.json",
+      "id": "castellan-hoplon",
+      "sha256": "9e739bee8c0677815fa6213bf80c241434ba640ab04f812820ed3e7ebe6a1bc6"
+    },
+    {
+      "path": "data/monsters/ceramic-horse.json",
+      "id": "ceramic-horse",
+      "sha256": "796f7da27139de1b9734cd7d5f6d94677ddc6500b7ad5904235e95feefb67e88"
+    },
+    {
+      "path": "data/monsters/chimera.json",
+      "id": "chimera",
+      "sha256": "c691ac1ee6b29c2d8b5399aea84fe930b3420c15f14aba010a3ed5d13860e2ca"
+    },
+    {
+      "path": "data/monsters/chimeron.json",
+      "id": "chimeron",
+      "sha256": "70760f28f45bc6b931548b29acdc3741a86aecb566dcbba195152a179d0a3ae6"
+    },
+    {
+      "path": "data/monsters/chorogaunt.json",
+      "id": "chorogaunt",
+      "sha256": "18f8a5395d1aa7c25cc2b913e5ddf470df593828bb57f531aa39cac8779e755c"
+    },
+    {
+      "path": "data/monsters/clawfish.json",
+      "id": "clawfish",
+      "sha256": "b13e888a13d9ad80d75dfb4ee6c8e42301c538b1a1911baccff37799c4f2377d"
+    },
+    {
+      "path": "data/monsters/compulsion-eye.json",
+      "id": "compulsion-eye",
+      "sha256": "db6e666bf2fc8320b5fe54d4a8463b0635c13f8f16142686633cf38111c2e0c9"
+    },
+    {
+      "path": "data/monsters/count-rhodar-von-glauer.json",
+      "id": "count-rhodar-von-glauer",
+      "sha256": "caa681da9903dd6047625c23ca927e9af5bdc39a7b6d324e06634770df74837d"
+    },
+    {
+      "path": "data/monsters/crawling-claw.json",
+      "id": "crawling-claw",
+      "sha256": "4faa713742396eed50d9d9f452db02b74476f78aa618b17a60367673a5e661d1"
+    },
+    {
+      "path": "data/monsters/crucible-dragon.json",
+      "id": "crucible-dragon",
+      "sha256": "056c5b5646e8478a99a56e0f8a3e92d88534c9bdef5f3a173b524d39f9f04da4"
+    },
+    {
+      "path": "data/monsters/crux-of-fire.json",
+      "id": "crux-of-fire",
+      "sha256": "5fc900f0f09a4232ac5cf8d1ca7c26188187355391b36dc458fcd4973c3f6485"
+    },
+    {
+      "path": "data/monsters/cyclops.json",
+      "id": "cyclops",
+      "sha256": "113ee7bb1dda1d7f97efd608bd43d08b5f11d1d4aece2946d962943f283c718d"
+    },
+    {
+      "path": "data/monsters/decrepit-skeleton.json",
+      "id": "decrepit-skeleton",
+      "sha256": "4c3036df5e355d58c0bc90a3f7af211e6fa32908a51b8f7518340bed3a6c271c"
+    },
+    {
+      "path": "data/monsters/demolition.json",
+      "id": "demolition",
+      "sha256": "ce87c6b6928bb506d5b82d910357a9efa1e4bd25714753e0d6912ed9f185a3c1"
+    },
+    {
+      "path": "data/monsters/devil-adjudicator.json",
+      "id": "devil-adjudicator",
+      "sha256": "e5145708295bb90c07070a9e3b9168a2fe0977a17cd6c61d60af8d9885b77ca6"
+    },
+    {
+      "path": "data/monsters/devil-clerk.json",
+      "id": "devil-clerk",
+      "sha256": "743ea8eb6d542aa3667181a69ddd40ef4abed3e98fc24f5c4812478abe2cc468"
+    },
+    {
+      "path": "data/monsters/devil-high-judge.json",
+      "id": "devil-high-judge",
+      "sha256": "245a7cd3c3a18c0c3e6ee490ba700c18e0f1fa3ea235f6d5941e43383682e1c4"
+    },
+    {
+      "path": "data/monsters/devil-jurist.json",
+      "id": "devil-jurist",
+      "sha256": "18ddf61a8b40cfc43181ced02855979d883819f06072b3a8b59576c054272a17"
+    },
+    {
+      "path": "data/monsters/devil-legate.json",
+      "id": "devil-legate",
+      "sha256": "af89a9c1dfad2770c513b3aebb057c21e75eea4d2014a9c05f53f3f6ce58bd35"
+    },
+    {
+      "path": "data/monsters/devil-magistrate.json",
+      "id": "devil-magistrate",
+      "sha256": "e125ebde2059a0274d8666cff02c86b4a0773a2f0564c995181c35f2950b8842"
+    },
+    {
+      "path": "data/monsters/devil-notary.json",
+      "id": "devil-notary",
+      "sha256": "c23936f40002c6a31302e57b9af462eea2c5d7336a5f63f8e78fdb622a9d8557"
+    },
+    {
+      "path": "data/monsters/devil-scrivener.json",
+      "id": "devil-scrivener",
+      "sha256": "5f3de122db1502db14c85bf9a67302608c735d20784f272b893fba40e677536a"
+    },
+    {
+      "path": "data/monsters/dirt-mournling.json",
+      "id": "dirt-mournling",
+      "sha256": "c02e84eb13ae4c7b6e19965641c6b839c5f8ae3620b1e75b6ffb3c34b6c043a1"
+    },
+    {
+      "path": "data/monsters/dorzinuuth-the-base.json",
+      "id": "dorzinuuth-the-base",
+      "sha256": "779c4cc72cb2b2a80c60435422ed1cf3bb7de4f9c75b53ac2eadc72b41682dde"
+    },
+    {
+      "path": "data/monsters/dwarf-axethrower.json",
+      "id": "dwarf-axethrower",
+      "sha256": "abe202ab2449a14671c035bb28589dd509b981b1bd5c01fd60b28bf250671a13"
+    },
+    {
+      "path": "data/monsters/dwarf-catchpole.json",
+      "id": "dwarf-catchpole",
+      "sha256": "904f2928486535471b995640f5d1a09ed3e5acc85f781119ab32ea72e787109d"
+    },
+    {
+      "path": "data/monsters/dwarf-driver.json",
+      "id": "dwarf-driver",
+      "sha256": "60dd8264d8f4257669eb7e0a40ce4d8408d31badea0af2d342b2488f1f9ff744"
+    },
+    {
+      "path": "data/monsters/dwarf-gunner.json",
+      "id": "dwarf-gunner",
+      "sha256": "6c5b5c824dc4d307ba075246a2017ff550fe6a5cfe7320a7a9ad539bb7bb26b3"
+    },
+    {
+      "path": "data/monsters/dwarf-hunter.json",
+      "id": "dwarf-hunter",
+      "sha256": "ce76fa6e246c755ad12298f5ad181acc2e138cff79c209909f044e8e2b82bb30"
+    },
+    {
+      "path": "data/monsters/dwarf-launcher.json",
+      "id": "dwarf-launcher",
+      "sha256": "a424199741dd60c845ab7af3adb78cc3972c31a4ba48a1a1474def3b3a45da23"
+    },
+    {
+      "path": "data/monsters/dwarf-marauder.json",
+      "id": "dwarf-marauder",
+      "sha256": "32aa4a899821f914e15a68fa709ed1363475bbca84b4eb09562bd2ec2ebf1632"
+    },
+    {
+      "path": "data/monsters/dwarf-reel-winch.json",
+      "id": "dwarf-reel-winch",
+      "sha256": "e8e9573c8747089f31f76dac5363e0dd1910cefa18d35ba893322840cde118dd"
+    },
+    {
+      "path": "data/monsters/dwarf-shieldwall.json",
+      "id": "dwarf-shieldwall",
+      "sha256": "a4dfd4744fe2ae1fa5f4696eb0b7f617455dd2784ec2435df15cdee5b43daec2"
+    },
+    {
+      "path": "data/monsters/dwarf-stone-whisperer.json",
+      "id": "dwarf-stone-whisperer",
+      "sha256": "bbd0ca3e7c58616ea411a80b411534154cac9edd493139cbbd5015803c00092c"
+    },
+    {
+      "path": "data/monsters/dwarf-trapper.json",
+      "id": "dwarf-trapper",
+      "sha256": "257068b1dc2f2c0f8f81700c4de2bd7fba653507269430dd50da939c1c067475"
+    },
+    {
+      "path": "data/monsters/dwarf-warden.json",
+      "id": "dwarf-warden",
+      "sha256": "6c0d7ca62edb6bca39af02f1b432bd1137e635467edbe9c16ea56f136394322c"
+    },
+    {
+      "path": "data/monsters/elemental-mote.json",
+      "id": "elemental-mote",
+      "sha256": "2be69aab89e00e1a9289a4729fdf8cac56579e5d663c305e7d84d417df181f28"
+    },
+    {
+      "path": "data/monsters/ensnarer.json",
+      "id": "ensnarer",
+      "sha256": "26e4212c604e1326431a966cdb04779ab433702e8a26b1cbc28f9dfeb16bf98b"
+    },
+    {
+      "path": "data/monsters/essence-of-storms.json",
+      "id": "essence-of-storms",
+      "sha256": "26a1e509d48656747e29262a998fba48f4f67a2e388f95079cf63ece1c88f77a"
+    },
+    {
+      "path": "data/monsters/essence-of-tides.json",
+      "id": "essence-of-tides",
+      "sha256": "60ce4e4a100bca2a787355df54309ab0fbf1eb760b8944f6efeffc3d413f5d32"
+    },
+    {
+      "path": "data/monsters/faded-echo-spirit.json",
+      "id": "faded-echo-spirit",
+      "sha256": "a40e1a4d13d81144220c92f31eb9deaa30e5163faf26f9bdc661ffb726b30fb1"
+    },
+    {
+      "path": "data/monsters/fangling.json",
+      "id": "fangling",
+      "sha256": "49fe565f9cff79973d9d86005bd729dd244a1e974b20aeb74b548d6c457fb8f6"
+    },
+    {
+      "path": "data/monsters/field-of-growth.json",
+      "id": "field-of-growth",
+      "sha256": "857e66404272872f49992539e05fe49d23da8445e8cd5ffe36b6720fa86fae2c"
+    },
+    {
+      "path": "data/monsters/fiktin.json",
+      "id": "fiktin",
+      "sha256": "9c180dd3da680a9f82b3792eec46c4272f75a5f617da96262a83e4b9e0bc1af4"
+    },
+    {
+      "path": "data/monsters/fire-giant-chief.json",
+      "id": "fire-giant-chief",
+      "sha256": "8865e4b0941a824c0e3bdedf1aaecbf167ec4ff38361b094212061b0108c90d7"
+    },
+    {
+      "path": "data/monsters/fire-giant-fireballer.json",
+      "id": "fire-giant-fireballer",
+      "sha256": "490c4bf06b0b4c4c9f9839783501ef9880cc2f23341ab89a3df7751895a3e52a"
+    },
+    {
+      "path": "data/monsters/fire-giant-lightbearer.json",
+      "id": "fire-giant-lightbearer",
+      "sha256": "9ba4639e8fb110db44c41c3f211795332e197fd4534071ce019887714cc2d716"
+    },
+    {
+      "path": "data/monsters/fire-giant-red-fist.json",
+      "id": "fire-giant-red-fist",
+      "sha256": "9c08f3b6c4b0d18152d5b2ffcba2c9765b5c049ee98dd02d82f89de6695d8f4b"
+    },
+    {
+      "path": "data/monsters/flesh-mournling.json",
+      "id": "flesh-mournling",
+      "sha256": "3a0af767b04f244efd13b9ae2f324f577f5bd9b031163655d1af79e0452bc963"
+    },
+    {
+      "path": "data/monsters/fleshflayed-shambler-zombie.json",
+      "id": "fleshflayed-shambler-zombie",
+      "sha256": "2489c6249eec7e7dd077efb498db276616a05da6934bcb0e771ee0732cf20ba4"
+    },
+    {
+      "path": "data/monsters/force-of-earth.json",
+      "id": "force-of-earth",
+      "sha256": "356e87be772ecbbfa5c868bb0836e406e35dca941d0eaab39c8b826da52aaf2e"
+    },
+    {
+      "path": "data/monsters/fossil-cryptic.json",
+      "id": "fossil-cryptic",
+      "sha256": "2c24c83c1098ad04f597cc813bbe469401a50b8d97fd4d7668223e6897d79c64"
+    },
+    {
+      "path": "data/monsters/frenzied.json",
+      "id": "frenzied",
+      "sha256": "39b344aa6a977e9a0f87f48aaf6d618924d9e0dd4c8251c3a91582596df82dcd"
+    },
+    {
+      "path": "data/monsters/frost-giant-snowblaster.json",
+      "id": "frost-giant-snowblaster",
+      "sha256": "835c6a8c62db16d981cec8fc2feb6b067d473bb2615ff879d20e14a89ac7fb04"
+    },
+    {
+      "path": "data/monsters/frost-giant-storm-hurler.json",
+      "id": "frost-giant-storm-hurler",
+      "sha256": "6366b7490d108e207d8092cd030ebcd8836bb636c25c9d597f1a58895bda58c0"
+    },
+    {
+      "path": "data/monsters/frost-giant-wind-sprinter.json",
+      "id": "frost-giant-wind-sprinter",
+      "sha256": "c8edd927407e0c8c1d3324e4dfe8a1755560351c492d44282421b20e99775b1d"
+    },
+    {
+      "path": "data/monsters/ghost.json",
+      "id": "ghost",
+      "sha256": "98e1d86c0f31129b41c384bedbb8f7fcf78602c21f56b3dfc195d3477102aa1e"
+    },
+    {
+      "path": "data/monsters/ghoul-craver.json",
+      "id": "ghoul-craver",
+      "sha256": "157ea8f4f45b13a4d867dfa0e0bf92bd0bc320d582264e1dd9d02a9546b2c7ae"
+    },
+    {
+      "path": "data/monsters/ghoul.json",
+      "id": "ghoul",
+      "sha256": "2cac5ad3ad888302e06faf741966ad273a8065f38041854d7e345d345886e50c"
+    },
+    {
+      "path": "data/monsters/giant-hawk.json",
+      "id": "giant-hawk",
+      "sha256": "c149407d07c23645f1afdccc3258394b552ddb1e052e707c948cd3736250f03e"
+    },
+    {
+      "path": "data/monsters/giant-shambler-zombie.json",
+      "id": "giant-shambler-zombie",
+      "sha256": "0ca54b16dfeddefb3ecc7bb58766b501c722734c990dd93d6b173cb1a8ef19da"
+    },
+    {
+      "path": "data/monsters/giant-zombie.json",
+      "id": "giant-zombie",
+      "sha256": "c6529826206cebfd3ed1443d2a328d8fc01c9a908ba6ded31f5fb0ce2bd20c7d"
+    },
+    {
+      "path": "data/monsters/gloom-dragon.json",
+      "id": "gloom-dragon",
+      "sha256": "ca17e6368a5697236ce16eda3fdad7898bb1167ca3e4630ac84704c747ad3a94"
+    },
+    {
+      "path": "data/monsters/gnoll-abyssal-archer.json",
+      "id": "gnoll-abyssal-archer",
+      "sha256": "a8f9162e4c3385a2460f84a28fa04d1725d88159f2538edeb2664176941a5585"
+    },
+    {
+      "path": "data/monsters/gnoll-abyssal-summoner.json",
+      "id": "gnoll-abyssal-summoner",
+      "sha256": "b034c4691baad1a7d99efb07991752fbc8a3f5fdf451b91c704eee8d530c15a9"
+    },
+    {
+      "path": "data/monsters/gnoll-bonesplitter.json",
+      "id": "gnoll-bonesplitter",
+      "sha256": "3beb2a394805a365dcf91f0dcba17d279cb9905a12287a7aa57a945e0a0356a0"
+    },
+    {
+      "path": "data/monsters/gnoll-cackler.json",
+      "id": "gnoll-cackler",
+      "sha256": "119186eec3066d5789850842010fbfecb8f3977c65ac87663cb73b0b2f2f735a"
+    },
+    {
+      "path": "data/monsters/gnoll-carnage.json",
+      "id": "gnoll-carnage",
+      "sha256": "3cc1cce2ad54c53c08cb902c7580469b7c950469e6b7cedf1491796aded2c6bc"
+    },
+    {
+      "path": "data/monsters/gnoll-chainflail.json",
+      "id": "gnoll-chainflail",
+      "sha256": "848775935c8d10c16435108afd8b36db4e29c14b858d289b503a4a862fa7f578"
+    },
+    {
+      "path": "data/monsters/gnoll-mage-mauler.json",
+      "id": "gnoll-mage-mauler",
+      "sha256": "36257a7cdf42b04fe84aea664b5fada91e8d93ea9f42669539e6280e89aea57b"
+    },
+    {
+      "path": "data/monsters/gnoll-marauder.json",
+      "id": "gnoll-marauder",
+      "sha256": "af76b6eb6c85d4cb08d342db5233998f277f30818ea246e4af799ddad71ddbda"
+    },
+    {
+      "path": "data/monsters/gnoll-wildling.json",
+      "id": "gnoll-wildling",
+      "sha256": "767cd743c4ed83616c99b6fc6029db07d9f9a03657795fce3e698d25c162a7be"
+    },
+    {
+      "path": "data/monsters/goblin-assassin.json",
+      "id": "goblin-assassin",
+      "sha256": "216a8bad57fc78a46b7ca8b5780b05375fc491daf7c1c316e46e1b84a490f58a"
+    },
+    {
+      "path": "data/monsters/goblin-cursespitter.json",
+      "id": "goblin-cursespitter",
+      "sha256": "686aa6de79ff32c6cd1e5b40fe11c4688c1b16fa98bcd0c18e7956404bfe8ee9"
+    },
+    {
+      "path": "data/monsters/goblin-monarch.json",
+      "id": "goblin-monarch",
+      "sha256": "7eba5606b5bc651ee1a3bbac608c60c38e03fbd2aff3795163544e94ce504b84"
+    },
+    {
+      "path": "data/monsters/goblin-runner.json",
+      "id": "goblin-runner",
+      "sha256": "e97ec5c0e528520d1c0f2477cfb866cbed8f91430e9a20b19fbfc91a1479f22c"
+    },
+    {
+      "path": "data/monsters/goblin-sniper.json",
+      "id": "goblin-sniper",
+      "sha256": "3454a89e38448cc881d5c55ee67c570f5926baab39b50b6678f844cdaa1676bb"
+    },
+    {
+      "path": "data/monsters/goblin-spinecleaver.json",
+      "id": "goblin-spinecleaver",
+      "sha256": "4355cdd32c1b7e8a767736175b74134b5006418f352b747da9205946c1b49c58"
+    },
+    {
+      "path": "data/monsters/goblin-stinker.json",
+      "id": "goblin-stinker",
+      "sha256": "40009f007325ec3cd7218b7862fe7a335ef7e7fea1da81b4f2ff515625e73d2e"
+    },
+    {
+      "path": "data/monsters/goblin-underboss.json",
+      "id": "goblin-underboss",
+      "sha256": "504c292ddacd917ba56651a047d2bf09550649af0bb91147430dbaefc4c9ebd3"
+    },
+    {
+      "path": "data/monsters/goblin-warrior.json",
+      "id": "goblin-warrior",
+      "sha256": "d34a801e4e45cf7049c982704699294ce29a7c08d2a1b27f09dd42db26dd2556"
+    },
+    {
+      "path": "data/monsters/granite-stone-giant.json",
+      "id": "granite-stone-giant",
+      "sha256": "cc7d14eb96561f32be57f9e05f102a030350181e1336b0ff7ee3c90b40ab1443"
+    },
+    {
+      "path": "data/monsters/griffon.json",
+      "id": "griffon",
+      "sha256": "9a222c64f603289aafbd9037283cc3e4b33c648400d4d1c50925aba79fe48f21"
+    },
+    {
+      "path": "data/monsters/grilp.json",
+      "id": "grilp",
+      "sha256": "520cb9512c571c7ef0a66fbad32e0ecc179463b172f5ce4362a6f77c3db12b7d"
+    },
+    {
+      "path": "data/monsters/grulqin.json",
+      "id": "grulqin",
+      "sha256": "f3c3a96faca4641473b21dfb2982576f82a2f96ec9517e7ab45322e9a0089e08"
+    },
+    {
+      "path": "data/monsters/gunge.json",
+      "id": "gunge",
+      "sha256": "507d05a30091f38e08eb588a7970f85078cbda8880aa8ed2a9d13b815953d362"
+    },
+    {
+      "path": "data/monsters/haunt.json",
+      "id": "haunt",
+      "sha256": "be3f38e28f9119b68eebe84ec8a9e65cc2460d34928d8f2402f47b5850f0c0a8"
+    },
+    {
+      "path": "data/monsters/high-elf-bloodletter.json",
+      "id": "high-elf-bloodletter",
+      "sha256": "3fd5b9c909a011589c8f7fb9c3f63988e92505282ce7d4d1d4d246b6e69d4cf8"
+    },
+    {
+      "path": "data/monsters/high-elf-dawn-mage.json",
+      "id": "high-elf-dawn-mage",
+      "sha256": "b983ed87f412bcc99a8d6496dbf339afb97dd9c7f5bbbb02ecd7886e8b94ce29"
+    },
+    {
+      "path": "data/monsters/high-elf-deathtouch.json",
+      "id": "high-elf-deathtouch",
+      "sha256": "3028cccfe836593333cc36294bc9dc0d8e7e45fcfe10331fb78c9f21b71dbc6a"
+    },
+    {
+      "path": "data/monsters/high-elf-orbweaver.json",
+      "id": "high-elf-orbweaver",
+      "sha256": "428eb83d231342a9a910c4a38a836c06dacabc20c0a6f063231fa7bc1bb1e299"
+    },
+    {
+      "path": "data/monsters/high-elf-ordinator.json",
+      "id": "high-elf-ordinator",
+      "sha256": "a9d142761b29c70084918bd8d5585bbf6ccab5e4ae9588b596679c4521495fa6"
+    },
+    {
+      "path": "data/monsters/high-elf-palinode.json",
+      "id": "high-elf-palinode",
+      "sha256": "b79660e0ec650a22f3d60682d8286891d37c9e99e618996cd91e42f191c8920b"
+    },
+    {
+      "path": "data/monsters/high-elf-quiver.json",
+      "id": "high-elf-quiver",
+      "sha256": "03d93ea45ed24004556a830cf07ce9097a7c99cd2c3fcb3721fe11e082f3a5f4"
+    },
+    {
+      "path": "data/monsters/high-elf-wyrd.json",
+      "id": "high-elf-wyrd",
+      "sha256": "70a852a29f9b7639aff54aa724dbaab1be4529c46a636ad11d12988297ef4db1"
+    },
+    {
+      "path": "data/monsters/high-elf-zephyr.json",
+      "id": "high-elf-zephyr",
+      "sha256": "2bf48c15a8fe2355ecbfe2ba9fc8a4da2df0a09c5268dfcd5276ece4f3af46d6"
+    },
+    {
+      "path": "data/monsters/hill-giant-clobberer.json",
+      "id": "hill-giant-clobberer",
+      "sha256": "90b15717f81be974d5e5dea5af10759d631ca9ab0ecf4904791eca0c3ade1d3f"
+    },
+    {
+      "path": "data/monsters/hill-giant-mosstooth.json",
+      "id": "hill-giant-mosstooth",
+      "sha256": "ce7bbce433f6ad334ddcaabb76c14250c106d498fb43537dad4dbc39616c3db2"
+    },
+    {
+      "path": "data/monsters/hobgoblin-bloodlord.json",
+      "id": "hobgoblin-bloodlord",
+      "sha256": "a6e19e8ea5a30a40c8b534d1edead19719c13e590356c67650dd037981937f3c"
+    },
+    {
+      "path": "data/monsters/hobgoblin-brandbearer.json",
+      "id": "hobgoblin-brandbearer",
+      "sha256": "2161a99d742329ea7c6b825e0d45d5c3e060afa924966f9968389ae4771f0ef3"
+    },
+    {
+      "path": "data/monsters/hobgoblin-burning-witch.json",
+      "id": "hobgoblin-burning-witch",
+      "sha256": "2bf3da81394f6b7d9fb3c5c6b0f1749bc0de0577209618a917e4e6feea1f6892"
+    },
+    {
+      "path": "data/monsters/hobgoblin-death-captain.json",
+      "id": "hobgoblin-death-captain",
+      "sha256": "4aec64a8a04940a513581429a9e3d93aada6935008ab30bc07b1f92781293d0d"
+    },
+    {
+      "path": "data/monsters/hobgoblin-firerunner.json",
+      "id": "hobgoblin-firerunner",
+      "sha256": "af90855e65bb604aca5abe6fa2ed5006ce85fa85eea013b0d48d3b994d80786d"
+    },
+    {
+      "path": "data/monsters/hobgoblin-grandguard.json",
+      "id": "hobgoblin-grandguard",
+      "sha256": "24d62ac0676464e938357a4496977d6b69a43bc58524efea8d4c563ddcd27477"
+    },
+    {
+      "path": "data/monsters/hobgoblin-hell-trooper.json",
+      "id": "hobgoblin-hell-trooper",
+      "sha256": "fe56aacd046f0469a1417813275804d50a30eb7f6b82b1c4c66f2c582692b4e5"
+    },
+    {
+      "path": "data/monsters/hobgoblin-incendiarist.json",
+      "id": "hobgoblin-incendiarist",
+      "sha256": "b36d98f38fe9a2f2b1d8f6423a4fe1c599bd541b24f6693fc89a5faf28178e64"
+    },
+    {
+      "path": "data/monsters/hobgoblin-lancer.json",
+      "id": "hobgoblin-lancer",
+      "sha256": "375752c3a501148ea9442be113d99455a186eb49a008f66b1e98ebba451d7675"
+    },
+    {
+      "path": "data/monsters/hobgoblin-recruit.json",
+      "id": "hobgoblin-recruit",
+      "sha256": "9acae437e1ad84c610f385d1ccefae73d671fb5992e81e3609bf514d2531ade8"
+    },
+    {
+      "path": "data/monsters/hobgoblin-redglare.json",
+      "id": "hobgoblin-redglare",
+      "sha256": "aed05a751ad7b1579594b7208d75f06b806383a678b03147e15be98404f0aaf1"
+    },
+    {
+      "path": "data/monsters/hobgoblin-smokebinder.json",
+      "id": "hobgoblin-smokebinder",
+      "sha256": "03a0a29e17a1bdb447073ac1a0134d05c3aac7ff4d3dc23b559ea595918f26b1"
+    },
+    {
+      "path": "data/monsters/hobgoblin-war-mage.json",
+      "id": "hobgoblin-war-mage",
+      "sha256": "a81992313ea1842b799ba523c04dbfdab83518e29dad7ca3c71d7e97f30a993c"
+    },
+    {
+      "path": "data/monsters/hollowbone-launcher.json",
+      "id": "hollowbone-launcher",
+      "sha256": "ef87ec88c84e4c64062e961d5c9eab590fa5cf6f8259d5999d8934881f84a27c"
+    },
+    {
+      "path": "data/monsters/hulking-brain.json",
+      "id": "hulking-brain",
+      "sha256": "9e73c7c4156440c727a34426b7d3caf9b54c68feba24c85368c957ddba6b7fad"
+    },
+    {
+      "path": "data/monsters/human-apprentice-mage.json",
+      "id": "human-apprentice-mage",
+      "sha256": "b23c40d11573f998313b212b5f8c74c1e6be1910c5c0740583dc8fa115068613"
+    },
+    {
+      "path": "data/monsters/human-archer.json",
+      "id": "human-archer",
+      "sha256": "bee1c3b6de78b47d5f2599645158493c25ce15a877daa0d63f044badbbe8fe94"
+    },
+    {
+      "path": "data/monsters/human-bandit-chief.json",
+      "id": "human-bandit-chief",
+      "sha256": "1ef0b059503afcd562a957a837c9620691c9c6ebf07fb3abb9185fea1bd9ddfd"
+    },
+    {
+      "path": "data/monsters/human-blackguard.json",
+      "id": "human-blackguard",
+      "sha256": "1627ee7b0d0f9f2f30ce5a0133593294f2803f4ad980830037efd8ab77af1f68"
+    },
+    {
+      "path": "data/monsters/human-brawler.json",
+      "id": "human-brawler",
+      "sha256": "658618e33eea7f384857e4bf837a2b70eb6a53c752fe38aa573bd29d00eea5a7"
+    },
+    {
+      "path": "data/monsters/human-death-acolyte.json",
+      "id": "human-death-acolyte",
+      "sha256": "40c890b1d9bfdb32a3031b432a783d37886d8fa9d49559cf7d1a75ed369881f6"
+    },
+    {
+      "path": "data/monsters/human-death-cultist.json",
+      "id": "human-death-cultist",
+      "sha256": "e16450c1c9cb371064c8a258b8a3626d6711f84d66b7d6b11f1e83b644393244"
+    },
+    {
+      "path": "data/monsters/human-guard.json",
+      "id": "human-guard",
+      "sha256": "4f686f5118fa416f35ce6035506eb7a2e0237be03fadd262fe5a60406f8d326c"
+    },
+    {
+      "path": "data/monsters/human-knave.json",
+      "id": "human-knave",
+      "sha256": "fe80a0bbf7108e3aec13eb8d3c2b626a075b465efb873cb2cb09a19abd0706d1"
+    },
+    {
+      "path": "data/monsters/human-raider.json",
+      "id": "human-raider",
+      "sha256": "30c4dc2c9b401b74c02e45f24ccf6800fef922bdc519b4dc8c67ba92ca652b7f"
+    },
+    {
+      "path": "data/monsters/human-rogue.json",
+      "id": "human-rogue",
+      "sha256": "f3905a4de9a69b1cf0ea458775564dbb36aea7fc5bb1f0efce2fe1ce1c9adeda"
+    },
+    {
+      "path": "data/monsters/human-scoundrel.json",
+      "id": "human-scoundrel",
+      "sha256": "beca541550dab315c74275e8b23362533f6c9f6acca7ca0dd854b441a96478f8"
+    },
+    {
+      "path": "data/monsters/human-storm-mage.json",
+      "id": "human-storm-mage",
+      "sha256": "1d9588c67ba05a34659b7bfe743c1a738a36ae2f777cc64fec4fdeee8108c70e"
+    },
+    {
+      "path": "data/monsters/human-trickshot.json",
+      "id": "human-trickshot",
+      "sha256": "a53f807cc6cb61dbb502c51e29ce1c9dec06b8327fbc51eef1e7e1176636a654"
+    },
+    {
+      "path": "data/monsters/iron-champion-doru.json",
+      "id": "iron-champion-doru",
+      "sha256": "757c699715ae674dece55eed19a0110fadb0a6dbcb553bf5f4b11f6b39060518"
+    },
+    {
+      "path": "data/monsters/izyak.json",
+      "id": "izyak",
+      "sha256": "7d8ec6801a332703727024203753200b3c4f43c63ba227cdea731e8b838b0513"
+    },
+    {
+      "path": "data/monsters/kingfissure-worm.json",
+      "id": "kingfissure-worm",
+      "sha256": "50a186c9ba4facaf1b3987b16ef2e7a6c61fc9e4a464630f72772b68260b2841"
+    },
+    {
+      "path": "data/monsters/kobold-adeptus.json",
+      "id": "kobold-adeptus",
+      "sha256": "d3e1bb45294e600ba3401e3587507457bc591c75dd8657be556aeb7e8166d0b9"
+    },
+    {
+      "path": "data/monsters/kobold-artifex.json",
+      "id": "kobold-artifex",
+      "sha256": "2b084a3fba1ecde62ec702fbf0230a8c1ca841871ec6c1596af1bde6c3119f50"
+    },
+    {
+      "path": "data/monsters/kobold-centurion.json",
+      "id": "kobold-centurion",
+      "sha256": "4604d48296f0e6288910518bbbf6f96217d67e235bdadd92b4d1c4b5625b3665"
+    },
+    {
+      "path": "data/monsters/kobold-legionary.json",
+      "id": "kobold-legionary",
+      "sha256": "f0a950d3185e699d55ce78e2243c4c0781dc97459116f2fbb2b702d924c72690"
+    },
+    {
+      "path": "data/monsters/kobold-princeps.json",
+      "id": "kobold-princeps",
+      "sha256": "1acacfeaacba678b23deaed6c982a07eec67e6f4d7b111ed5960379ae6edf8bb"
+    },
+    {
+      "path": "data/monsters/kobold-sagittarion.json",
+      "id": "kobold-sagittarion",
+      "sha256": "12f852483677a847ed5aada432ddb906d703839058ab2a0acdb810456a111e26"
+    },
+    {
+      "path": "data/monsters/kobold-signifer.json",
+      "id": "kobold-signifer",
+      "sha256": "0d073309e87888e745280879fa4047c42ca9ab102893a868401589bc9035f618"
+    },
+    {
+      "path": "data/monsters/kobold-tiro.json",
+      "id": "kobold-tiro",
+      "sha256": "7f4b1ec81ba28d9b69ce86e1acde6b53f2d0cbdd2b662149cef411341ddea016"
+    },
+    {
+      "path": "data/monsters/kobold-veles.json",
+      "id": "kobold-veles",
+      "sha256": "c8229583fb88acefca332518b0955e3ecdd3535492642aab1bff2835fa10ddb4"
+    },
+    {
+      "path": "data/monsters/kobold-venator.json",
+      "id": "kobold-venator",
+      "sha256": "7e737342a4707c29f294dfd72a5fecd803b4b54c42c5ceb5354e189b55e42098"
+    },
+    {
+      "path": "data/monsters/koptourok.json",
+      "id": "koptourok",
+      "sha256": "9188c1c1fb523d0ccc6f61ce0d024795a1de206560c1be832fad742f3debc337"
+    },
+    {
+      "path": "data/monsters/lich.json",
+      "id": "lich",
+      "sha256": "bbc23bb0c7f383bac021f9c6e98d7c26a00cbcdfb12e0aed220faa3212d79ad7"
+    },
+    {
+      "path": "data/monsters/lithgekh.json",
+      "id": "lithgekh",
+      "sha256": "8c8e0ba0b4fdec7a640230da677b55bf8f72baca484fe1658469fd8eca2474a7"
+    },
+    {
+      "path": "data/monsters/lizardfolk-bloodeye.json",
+      "id": "lizardfolk-bloodeye",
+      "sha256": "57a0e3821ff56bb125fa1f34d809609e672ed8ad943c347bc2e54f93ed9234d1"
+    },
+    {
+      "path": "data/monsters/lizardfolk-deathrex.json",
+      "id": "lizardfolk-deathrex",
+      "sha256": "1de1cdf5591878b3ed8655feb54844c849e51f27bde3d82b7c1173e955922861"
+    },
+    {
+      "path": "data/monsters/lizardfolk-grunt.json",
+      "id": "lizardfolk-grunt",
+      "sha256": "1abdc038c5878d51195b421fdb8243d7d8a6b2a0e4d2ff640226c99b818ce9d5"
+    },
+    {
+      "path": "data/monsters/lizardfolk-scaletooth.json",
+      "id": "lizardfolk-scaletooth",
+      "sha256": "bf66dbd88bc6c53627fd14a1b8610d41acb94e9e44a67ba7e5af18e70e269fe5"
+    },
+    {
+      "path": "data/monsters/lizardfolk-shellguard.json",
+      "id": "lizardfolk-shellguard",
+      "sha256": "0a6bf27c1d89738fed16fceea0a5ffe69c2dc3349f09e788801d83ab38714403"
+    },
+    {
+      "path": "data/monsters/lizardfolk-skyterror.json",
+      "id": "lizardfolk-skyterror",
+      "sha256": "153272b165c59910795a4bc898d4dbcb6ee51a2399d75da13afdbe5f7f9b9110"
+    },
+    {
+      "path": "data/monsters/lizardfolk-tonguer.json",
+      "id": "lizardfolk-tonguer",
+      "sha256": "af837fe7bcf01f09f07ce16feafad162fde59b9dd61647207151816dc733fa81"
+    },
+    {
+      "path": "data/monsters/locratix-the-morningstar.json",
+      "id": "locratix-the-morningstar",
+      "sha256": "c993c8ff2f735c08ed09620b70cd42bfef866d5e485e6b98edb8759851b8f932"
+    },
+    {
+      "path": "data/monsters/logostician-vesper.json",
+      "id": "logostician-vesper",
+      "sha256": "edd2b528a1aa3bcea6d45edc9ae85eabedff682e89890d34c41cf4e3a0db7087"
+    },
+    {
+      "path": "data/monsters/lord-syuul.json",
+      "id": "lord-syuul",
+      "sha256": "5f2b823dd8893b1a62bbd3fc7ed301dc4d70e3cc524875929a2f04333988f4c2"
+    },
+    {
+      "path": "data/monsters/lumbering-egress.json",
+      "id": "lumbering-egress",
+      "sha256": "6e48c751a8a146c14e04f8248d12afc5931668feaa6ca0db09710caa06a1a884"
+    },
+    {
+      "path": "data/monsters/lydixavus-the-deadeye.json",
+      "id": "lydixavus-the-deadeye",
+      "sha256": "c5676c0c49285ee5e5299cdd14e73effcb1796974123d740fc5bf80202fcfd29"
+    },
+    {
+      "path": "data/monsters/manticore.json",
+      "id": "manticore",
+      "sha256": "ac93a2aab72efcda0827ede00865bd7c3248ebc6ee8a2cff8171948ed92cb6ff"
+    },
+    {
+      "path": "data/monsters/marble-stone-giant.json",
+      "id": "marble-stone-giant",
+      "sha256": "7ead8b0a1d1c0ee8a5c15ffb32d584bf7879132d27013238b1778509f729fbac"
+    },
+    {
+      "path": "data/monsters/medusa.json",
+      "id": "medusa",
+      "sha256": "64e18e9ed1b6ef481c9f1b00d07c69cf1e8692adf582e6619d207343f26b021f"
+    },
+    {
+      "path": "data/monsters/meteor-dragon.json",
+      "id": "meteor-dragon",
+      "sha256": "4d83ae767e121b2c716085e2d168083bf77a522d5bb9986bc31eaaf64c551214"
+    },
+    {
+      "path": "data/monsters/mindkiller-whelp.json",
+      "id": "mindkiller-whelp",
+      "sha256": "573053442ca0e1afddf8743326918f96cc9e8391e5b89a61a0dd0bbd52205940"
+    },
+    {
+      "path": "data/monsters/mindkiller.json",
+      "id": "mindkiller",
+      "sha256": "fd14a0877af45ef053ff2ce1915e75c912d49e79cd12206a5903c81d3e1bd8a6"
+    },
+    {
+      "path": "data/monsters/minotaur-bully.json",
+      "id": "minotaur-bully",
+      "sha256": "884ae391e88c58b354253d69f4e9d88f515916ad3f70420fb6ea0979f747eb78"
+    },
+    {
+      "path": "data/monsters/minotaur-lackey.json",
+      "id": "minotaur-lackey",
+      "sha256": "3818d45871d31dcd1d7dc00f7088dc814e3b91ea01455ba0d4a3cd30c982422a"
+    },
+    {
+      "path": "data/monsters/minotaur-stampede.json",
+      "id": "minotaur-stampede",
+      "sha256": "7a3cf8dd33865532c613617644dcb7a8a42fc99304e4c9340ef69452ee5137e2"
+    },
+    {
+      "path": "data/monsters/minotaur-sunderer.json",
+      "id": "minotaur-sunderer",
+      "sha256": "c650aa81c6b55f35126059c37914cb3c6632640444b2b956e737ac69a235f8cd"
+    },
+    {
+      "path": "data/monsters/minotaur.json",
+      "id": "minotaur",
+      "sha256": "e719df0f26837acc87771dfde4fa8e0b6824605fa7b14ea9a243a9afa0343dca"
+    },
+    {
+      "path": "data/monsters/mohler.json",
+      "id": "mohler",
+      "sha256": "d64ef02bbd071a520a9861036f4d31f57cffc36a5dfa933b770c9d7e987561f8"
+    },
+    {
+      "path": "data/monsters/mover-eye.json",
+      "id": "mover-eye",
+      "sha256": "c2877b3f0c1d06ce399581c7849a217499ddf9413ef3935bc2c26ee43482863d"
+    },
+    {
+      "path": "data/monsters/muceron.json",
+      "id": "muceron",
+      "sha256": "0b960a216db199fa793dd7bec80d4a9161e9fa68af12fc7120192409c127b267"
+    },
+    {
+      "path": "data/monsters/multivok-bodyguard.json",
+      "id": "multivok-bodyguard",
+      "sha256": "f5c1f8f409b24d4ad836696e2e9320f8d1b1d88fcbd5e8a43b8f0e087b499757"
+    },
+    {
+      "path": "data/monsters/multivok-chief.json",
+      "id": "multivok-chief",
+      "sha256": "21f3d13582d4899cb2c8920ebc6e024fe00c53047207ccde885b685dcb957eb6"
+    },
+    {
+      "path": "data/monsters/mummy-lord.json",
+      "id": "mummy-lord",
+      "sha256": "f86ac724db8ad4f0818dbbedd9149426ab41275bf7bba9b24664666db29d5787"
+    },
+    {
+      "path": "data/monsters/mummy-rotwrap.json",
+      "id": "mummy-rotwrap",
+      "sha256": "afeefe8f672ab2f34fe608d43e2d66026d0d1538aabc74656bd1ab744f2cdf1a"
+    },
+    {
+      "path": "data/monsters/mummy.json",
+      "id": "mummy",
+      "sha256": "c7e904fd6076ea9dc2bd58c5ff12eb81863db864e95c9652d6685a71bedb6527"
+    },
+    {
+      "path": "data/monsters/myxovidan-the-sintaker.json",
+      "id": "myxovidan-the-sintaker",
+      "sha256": "182334de7ab3858892aefe3afaca892d97279df6cd1ad3d38aa31fded47d3713"
+    },
+    {
+      "path": "data/monsters/necrotic-eye.json",
+      "id": "necrotic-eye",
+      "sha256": "ac23a664b1605e6e4c0bf3f9476fca978fe5a2e8ae52c83a118ac154a3a7e992"
+    },
+    {
+      "path": "data/monsters/ogre-blue-blood.json",
+      "id": "ogre-blue-blood",
+      "sha256": "d6cc3f64626123c8788c05e5b4a077099c6d5acfa00ed881bb5986d6d0646c3e"
+    },
+    {
+      "path": "data/monsters/ogre-goon.json",
+      "id": "ogre-goon",
+      "sha256": "9d2d86f8ca15b9bd81335a3735f98da9ee399a9cc627f6e38efa0bac7fefb6b5"
+    },
+    {
+      "path": "data/monsters/ogre-juggernaut.json",
+      "id": "ogre-juggernaut",
+      "sha256": "a13a6e8adb2ebad83adcd3720dde364b0b15118fe9763fd921fa91980252ecb4"
+    },
+    {
+      "path": "data/monsters/ogre-tantrum.json",
+      "id": "ogre-tantrum",
+      "sha256": "01ca03a4286fa70ead2671f1cb6241bbee63c2082f5dd9cabb7274b0ceb3e2b8"
+    },
+    {
+      "path": "data/monsters/olothec.json",
+      "id": "olothec",
+      "sha256": "ee6408fd70353e317c567d6fc90b33fa379075ceff2c04952a0e155959705257"
+    },
+    {
+      "path": "data/monsters/omen-dragon.json",
+      "id": "omen-dragon",
+      "sha256": "26d104916be21fe22061cd39f8a4e8813f973499d942945cef2728421dbb9e7e"
+    },
+    {
+      "path": "data/monsters/optacus.json",
+      "id": "optacus",
+      "sha256": "dce6733f38c6ae24483175c95b8e79be932390e7ea32e28c98851efb1c660b9c"
+    },
+    {
+      "path": "data/monsters/orc-blitzer.json",
+      "id": "orc-blitzer",
+      "sha256": "b061a3f9087766f668e4a5c9e02ed0ad650e2dbe1fd7301eaeafcaab5f4278fa"
+    },
+    {
+      "path": "data/monsters/orc-bloodrunner.json",
+      "id": "orc-bloodrunner",
+      "sha256": "3b49d880615c52302be88d256b5561d5a14767cc7831566b20628e009b79b08a"
+    },
+    {
+      "path": "data/monsters/orc-bloodspark.json",
+      "id": "orc-bloodspark",
+      "sha256": "f2711f16400e8599ed8ad001918cb859fa6106cbe61809a9e98aaa424fa34b68"
+    },
+    {
+      "path": "data/monsters/orc-chainlock.json",
+      "id": "orc-chainlock",
+      "sha256": "6f073e6d423267376c4287a9260986afd99dc1d35000511ae4cdefb243fab4ec"
+    },
+    {
+      "path": "data/monsters/orc-eye-of-grole.json",
+      "id": "orc-eye-of-grole",
+      "sha256": "b4610dca6f049db9ec38a332a7a77a2fbca4f7692fc27ecceafa16ebeddb5719"
+    },
+    {
+      "path": "data/monsters/orc-garotter.json",
+      "id": "orc-garotter",
+      "sha256": "0ac9f162bb5afbb0669812dae9a3cca10df7e9835df69971f5b9482c85fc6241"
+    },
+    {
+      "path": "data/monsters/orc-glorifier.json",
+      "id": "orc-glorifier",
+      "sha256": "7e2ddbb544e495efe962b05411fc3da689ccdeddc62ccd3828bddddb390cd7e0"
+    },
+    {
+      "path": "data/monsters/orc-godcaller.json",
+      "id": "orc-godcaller",
+      "sha256": "257bbf6850f4b9c890ea9915690578ad54ce1646a263fd041f1e909a00d1ced1"
+    },
+    {
+      "path": "data/monsters/orc-juggernaut.json",
+      "id": "orc-juggernaut",
+      "sha256": "13607cc8885dedb92c09c81d3eb77f9bf03d2688ac75cdd7aa26e79e1df226e1"
+    },
+    {
+      "path": "data/monsters/orc-rampart.json",
+      "id": "orc-rampart",
+      "sha256": "dec2ade9828c83bfae8e911a73c99b42c088caf96a58a0d3ba2020739f79c29a"
+    },
+    {
+      "path": "data/monsters/orc-razor.json",
+      "id": "orc-razor",
+      "sha256": "8291f82bd91837fc0066bdceae19361cf35334ae8ce96be0dc82c5b4497d59e7"
+    },
+    {
+      "path": "data/monsters/orc-terranova.json",
+      "id": "orc-terranova",
+      "sha256": "e943ebeff9d762c8b4cded00d76d16f035c11a6afee534dd81a0f636c4e1f3cd"
+    },
+    {
+      "path": "data/monsters/orc-warleader.json",
+      "id": "orc-warleader",
+      "sha256": "cbce5eb04d0d49e039165e819d7856c1081eb5a1baa914828a0e2865b1e153ad"
+    },
+    {
+      "path": "data/monsters/orliq.json",
+      "id": "orliq",
+      "sha256": "c8993b4497273b91d1b3c5e6b77e58bc2fa5ecd52bff94432b28d141d62a35ba"
+    },
+    {
+      "path": "data/monsters/phrrygalax-the-subduer.json",
+      "id": "phrrygalax-the-subduer",
+      "sha256": "14c2dffc177413a8df4ffce5039ea0b7cffea282b06e304307ecdac4e42e26d9"
+    },
+    {
+      "path": "data/monsters/pitling.json",
+      "id": "pitling",
+      "sha256": "827bb323c2e2dda19175b956d28ce8c010c2a95fb6e2c8025ce0098a255944e2"
+    },
+    {
+      "path": "data/monsters/predator-a.json",
+      "id": "predator-a",
+      "sha256": "ca45fe87e541979ca7c6df21f2abb35cbf4f744cbc8fb1215494454e2f91cb1f"
+    },
+    {
+      "path": "data/monsters/predator-b.json",
+      "id": "predator-b",
+      "sha256": "294648e627fc5ab13cc90240903e446e08175a0f588374bb084e1893e590cb9b"
+    },
+    {
+      "path": "data/monsters/radenwight-bruxer.json",
+      "id": "radenwight-bruxer",
+      "sha256": "e5bc03db3daae7b60453478623c2eb25d938572786d765034295db4d4df7bb6c"
+    },
+    {
+      "path": "data/monsters/radenwight-maestro.json",
+      "id": "radenwight-maestro",
+      "sha256": "efb4abcad8011d393aceb7eaf7caffd10efbadcaecabd96ff5b8b17370f69156"
+    },
+    {
+      "path": "data/monsters/radenwight-mischiever.json",
+      "id": "radenwight-mischiever",
+      "sha256": "474930bc883ad81302a9860349b4a17634fdbeab2a08f8051c988096f8e61263"
+    },
+    {
+      "path": "data/monsters/radenwight-piper.json",
+      "id": "radenwight-piper",
+      "sha256": "319a0b59545842742812c95db16b2cb9406eda61389f1c2b2165e7020c37ee5b"
+    },
+    {
+      "path": "data/monsters/radenwight-ratcrobat.json",
+      "id": "radenwight-ratcrobat",
+      "sha256": "137b5359beb7b28af209f7a63e428d16cbb473e010f6ce055d2ee63ea0433cee"
+    },
+    {
+      "path": "data/monsters/radenwight-redeye.json",
+      "id": "radenwight-redeye",
+      "sha256": "2bdbeb80acada3ba754b582e772fc3cdb3056e0c9cb7fee161ef6753ebb13db8"
+    },
+    {
+      "path": "data/monsters/radenwight-scrapper.json",
+      "id": "radenwight-scrapper",
+      "sha256": "be53b778b2b0cb804a244a7eda2db9b242e1c77687c648f6e32cc44f16b3defa"
+    },
+    {
+      "path": "data/monsters/radenwight-swiftpaw.json",
+      "id": "radenwight-swiftpaw",
+      "sha256": "73f9bdf23ae789cbbec9452084262ee851ebc14948350c419fa50945d9848492"
+    },
+    {
+      "path": "data/monsters/remasch.json",
+      "id": "remasch",
+      "sha256": "dcaa2631b2939564aa505c8df55e223be530efdc89ddca88e2960209a5d8a387"
+    },
+    {
+      "path": "data/monsters/rival-conduit-2.json",
+      "id": "rival-conduit-2",
+      "sha256": "039a1a4540813bbd3ec7251927ff750ee5d392b9e3ad7016e17145ddcab3b5e3"
+    },
+    {
+      "path": "data/monsters/rival-conduit-3.json",
+      "id": "rival-conduit-3",
+      "sha256": "84c20644ae13b03d883f33a3220c93a6fcb563a2ba5141542fcc3ceea703bcc5"
+    },
+    {
+      "path": "data/monsters/rival-conduit-4.json",
+      "id": "rival-conduit-4",
+      "sha256": "fa445c7b40121840699f15275b6c63e47c4dcd4a4f39a08bde426c1e3950bed5"
+    },
+    {
+      "path": "data/monsters/rival-conduit.json",
+      "id": "rival-conduit",
+      "sha256": "b020a7e1c26196e87c3fd6a7bf3314199faae9f38261886975d818a06bfb2485"
+    },
+    {
+      "path": "data/monsters/rival-elementalist-2.json",
+      "id": "rival-elementalist-2",
+      "sha256": "98b1b61b23d817ce432ee270e901f061adaf790604386a952e5238001ccd1cd3"
+    },
+    {
+      "path": "data/monsters/rival-elementalist-3.json",
+      "id": "rival-elementalist-3",
+      "sha256": "da16de6be40481d606937e885d18986c936208434b48032b265bf8f8486b4d50"
+    },
+    {
+      "path": "data/monsters/rival-elementalist-4.json",
+      "id": "rival-elementalist-4",
+      "sha256": "da7867f1620bfac09eeaa261efcd8a7e6e8162d4a8e738a8886ac0441369992a"
+    },
+    {
+      "path": "data/monsters/rival-elementalist.json",
+      "id": "rival-elementalist",
+      "sha256": "3c7ad668ad67aa90914b325def2535de9f637f9cbbdba70e613ec968559d4972"
+    },
+    {
+      "path": "data/monsters/rival-fury-2.json",
+      "id": "rival-fury-2",
+      "sha256": "1ee34fc337d5693e113e771a519525068ce0fd32160ddbbc86d6b348bb3d9365"
+    },
+    {
+      "path": "data/monsters/rival-fury-3.json",
+      "id": "rival-fury-3",
+      "sha256": "e85a014d0f5e8e82934aa83dfbf9c51bf508171f31284aa902ee2c16c4b0bba1"
+    },
+    {
+      "path": "data/monsters/rival-fury-4.json",
+      "id": "rival-fury-4",
+      "sha256": "f06bfb8ae502803f4cd786f4cefa1d79c069931ba2b476e70412ebe7ae045e62"
+    },
+    {
+      "path": "data/monsters/rival-fury.json",
+      "id": "rival-fury",
+      "sha256": "ac932f99c86e55ccbf9d63a77809098aeb3bef15843358f52b711319dcec8f02"
+    },
+    {
+      "path": "data/monsters/rival-null-2.json",
+      "id": "rival-null-2",
+      "sha256": "f9fc07ea1ca969e947eb3631ca8481663adc67cb0b19ac8ff6f1535548a0ff25"
+    },
+    {
+      "path": "data/monsters/rival-null-3.json",
+      "id": "rival-null-3",
+      "sha256": "9e419e6aa3b9ffde08cac1a14526264d571a6b1a35efd850cc6c99291f633dfe"
+    },
+    {
+      "path": "data/monsters/rival-null-4.json",
+      "id": "rival-null-4",
+      "sha256": "342da1971a194f72834897018087dbd84baf4a78533d2624844806920550ddd9"
+    },
+    {
+      "path": "data/monsters/rival-null.json",
+      "id": "rival-null",
+      "sha256": "8185a727e83494143e2190e9a30e5090abfbf21ce0cb4d98224bcc3d0087418f"
+    },
+    {
+      "path": "data/monsters/rival-shadow-2.json",
+      "id": "rival-shadow-2",
+      "sha256": "1fb05e2f54c53000233bdc69a40bb20bb3522e4faeda1f58edebaf36ab796448"
+    },
+    {
+      "path": "data/monsters/rival-shadow-3.json",
+      "id": "rival-shadow-3",
+      "sha256": "c07ff984a64dba32914b90f0546057698c6ef6255fd9042dcd7d186456441e7e"
+    },
+    {
+      "path": "data/monsters/rival-shadow-4.json",
+      "id": "rival-shadow-4",
+      "sha256": "b49e9a6cd7770fb5cfed3fe9689489b1607442d2076d2d0d9b90ec99fe6db978"
+    },
+    {
+      "path": "data/monsters/rival-shadow.json",
+      "id": "rival-shadow",
+      "sha256": "acb01505fad69e50f51c26925d01375dc8a26638a24d18584ff4b92377ba66f5"
+    },
+    {
+      "path": "data/monsters/rival-tactician-2.json",
+      "id": "rival-tactician-2",
+      "sha256": "d4787d57d0692922a4b1ce4cf7537f5617ae14098cc207b7a0ea1e55a221805c"
+    },
+    {
+      "path": "data/monsters/rival-tactician-3.json",
+      "id": "rival-tactician-3",
+      "sha256": "d36579e062483b56117098c3f6cb60757db9784a717fd4f576a118d44be334f1"
+    },
+    {
+      "path": "data/monsters/rival-tactician-4.json",
+      "id": "rival-tactician-4",
+      "sha256": "ff15172c1d96af2428f0fd119d9cef4c864e67c4c007e30eb9daaadf9ba9c94d"
+    },
+    {
+      "path": "data/monsters/rival-tactician.json",
+      "id": "rival-tactician",
+      "sha256": "12379d880d89c10c82b2515c37a8323144ca0535f3e7819b77df9289023818c8"
+    },
+    {
+      "path": "data/monsters/rival-talent-2.json",
+      "id": "rival-talent-2",
+      "sha256": "99a1abd4f5bd76179777d8bdf44d308fcfb7dc1ea6d0a578d573f8cc5baab7d2"
+    },
+    {
+      "path": "data/monsters/rival-talent-3.json",
+      "id": "rival-talent-3",
+      "sha256": "f2c2013d623691c4c84d6d63064eade3b507d0f77c1a438d139418d3dadfbe00"
+    },
+    {
+      "path": "data/monsters/rival-talent-4.json",
+      "id": "rival-talent-4",
+      "sha256": "acac74be4d238e02c8fc51d5656dee45ec94812f2d627e41ff613983e0c20c53"
+    },
+    {
+      "path": "data/monsters/rival-talent.json",
+      "id": "rival-talent",
+      "sha256": "4dbd1f096e9ec633bc804f6630565d21ee3cb35adc515a2f27b6d28be75122df"
+    },
+    {
+      "path": "data/monsters/rotting-zombie.json",
+      "id": "rotting-zombie",
+      "sha256": "ed9779214ee0a74ffe21adca3307f111197ed573f44b825e9e6d0edbf9d7f795"
+    },
+    {
+      "path": "data/monsters/ruinant.json",
+      "id": "ruinant",
+      "sha256": "9167043bdad7bdb8eb280cbf15aaf7b7742b1069b45601a29d0b4957d275e984"
+    },
+    {
+      "path": "data/monsters/sand-stone-giant.json",
+      "id": "sand-stone-giant",
+      "sha256": "175a08fccb26aa012d6b0ccc783f08b0c02e5b8f00e73f7371a56fc6751fa80f"
+    },
+    {
+      "path": "data/monsters/scyza.json",
+      "id": "scyza",
+      "sha256": "c7781c86f4bb653964027adf7c211271cf8d587212128b5a626ce331aaea3401"
+    },
+    {
+      "path": "data/monsters/servitor-war-walker.json",
+      "id": "servitor-war-walker",
+      "sha256": "3c7492a3e9af30c82b8bf661dc7eb4c36a8d7ca40b9ebef82ad01e19143c6fd9"
+    },
+    {
+      "path": "data/monsters/servok-builder.json",
+      "id": "servok-builder",
+      "sha256": "30043da5ec91d7138dd9d23789815e75d61fa863dce2c5e44997d68f7e12a236"
+    },
+    {
+      "path": "data/monsters/servok-miner.json",
+      "id": "servok-miner",
+      "sha256": "695cc1b5e43e8ca1d7529845f835cdbb195100ecfac0b606443d608e98e6b81c"
+    },
+    {
+      "path": "data/monsters/servok-war-engine.json",
+      "id": "servok-war-engine",
+      "sha256": "1117303ccedaeb958365efc5e9238c15eb54ec42a9101f44fc66d22f7fde0940"
+    },
+    {
+      "path": "data/monsters/shade.json",
+      "id": "shade",
+      "sha256": "12c8f6a81507ef9074ed0d43f67b0276bd409aa989fae206e7264de2e86feb06"
+    },
+    {
+      "path": "data/monsters/shadow-elf-assassin.json",
+      "id": "shadow-elf-assassin",
+      "sha256": "f775e39a354cb57af9f53abb6fbc9871f98b144108225a09887f73783aff526e"
+    },
+    {
+      "path": "data/monsters/shadow-elf-cloak.json",
+      "id": "shadow-elf-cloak",
+      "sha256": "8cf9a8e81707865142d08d49530ecc26848f7f36b03987eff66e13105ede8b81"
+    },
+    {
+      "path": "data/monsters/shadow-elf-dusk-mage.json",
+      "id": "shadow-elf-dusk-mage",
+      "sha256": "905e047d8054201d75f18dde78777c205b6a8c13148c250120bc6f724bb81433"
+    },
+    {
+      "path": "data/monsters/shadow-elf-duskcaller.json",
+      "id": "shadow-elf-duskcaller",
+      "sha256": "c6692741d3fea058032563c644d31109e728ac3ac061717da81563ed96b4af50"
+    },
+    {
+      "path": "data/monsters/shadow-elf-eclipse.json",
+      "id": "shadow-elf-eclipse",
+      "sha256": "f43ab6cdbee68505c5fe8f5bdbc02cc4ad45e1ec3a4638d2509fadc00a6210b6"
+    },
+    {
+      "path": "data/monsters/shadow-elf-knightfell.json",
+      "id": "shadow-elf-knightfell",
+      "sha256": "49feb57509f2a405f7a43844f036c884ec1681a812df62c5493c536394e5e987"
+    },
+    {
+      "path": "data/monsters/shadow-elf-luminator.json",
+      "id": "shadow-elf-luminator",
+      "sha256": "d280d4b5a5646a026ee2e60b043320b94b499f8936633abe02759a6b2adf7b8c"
+    },
+    {
+      "path": "data/monsters/shadow-elf-moondancer.json",
+      "id": "shadow-elf-moondancer",
+      "sha256": "3cab5b7c1913e66a7038364abef014d5a3ede213e5d79d7e74554b7d83f3a41c"
+    },
+    {
+      "path": "data/monsters/shadow-elf-mournblade.json",
+      "id": "shadow-elf-mournblade",
+      "sha256": "614d4a66ef0037dc1a3501d92b004b54bf8b554b6bbf6b915f94cd01f312fe00"
+    },
+    {
+      "path": "data/monsters/shadow-elf-nightstrike.json",
+      "id": "shadow-elf-nightstrike",
+      "sha256": "a9b672717dbab36540f51d800fe3f8b6c105198f1a917b188d0a44ffb49e7de4"
+    },
+    {
+      "path": "data/monsters/shadow-elf-noctis-mage.json",
+      "id": "shadow-elf-noctis-mage",
+      "sha256": "d88556ff6d996b2cb87a74c352f72fd93001429de41dca6f5b49bf35243dce31"
+    },
+    {
+      "path": "data/monsters/shadow-elf-panther.json",
+      "id": "shadow-elf-panther",
+      "sha256": "7c9fdcc7c8f0d2847107d82fcca86c9dceb8df54397cd718b4439bb6e1184847"
+    },
+    {
+      "path": "data/monsters/shadow-elf-sniper.json",
+      "id": "shadow-elf-sniper",
+      "sha256": "ba92c629c6ec89a09832956bb1c3811627052800d0f697aad8cc1cac4d56ee9e"
+    },
+    {
+      "path": "data/monsters/shambling-mound.json",
+      "id": "shambling-mound",
+      "sha256": "de8ceed4eb40216045677c60068304c6b2fe5f389234200f8db2f0f5649ef328"
+    },
+    {
+      "path": "data/monsters/shieldscale-drangolin.json",
+      "id": "shieldscale-drangolin",
+      "sha256": "eacb830730c90190f92683cf2e5d4aa185bf1ab85e0ec13318bde05d5cd4a30c"
+    },
+    {
+      "path": "data/monsters/skeleton-knight.json",
+      "id": "skeleton-knight",
+      "sha256": "33f2e357d651c36c073045de90345e9cf74378b32dffd55e930d83b2c10dd4b4"
+    },
+    {
+      "path": "data/monsters/skeleton.json",
+      "id": "skeleton",
+      "sha256": "6d5c313dd96a48dbc5bd08f44bfbdf8caae8e70fea13048a85ec3c1b137d8341"
+    },
+    {
+      "path": "data/monsters/skitterling.json",
+      "id": "skitterling",
+      "sha256": "fde71f022b2554c1235be0d35c4166b3b34b37038acab0d89290c2ca4da5c340"
+    },
+    {
+      "path": "data/monsters/slaughter-demon.json",
+      "id": "slaughter-demon",
+      "sha256": "2cbb03716a0c6aed939e4517c8ce86418b665ea502b07189675920015f0890e8"
+    },
+    {
+      "path": "data/monsters/soot-crow.json",
+      "id": "soot-crow",
+      "sha256": "f1bcaff349aff5a7de418deec61c9e39f2676ba548ae7cba63f92881d5a6c9d3"
+    },
+    {
+      "path": "data/monsters/soulbinder-psyche.json",
+      "id": "soulbinder-psyche",
+      "sha256": "3756f9b0094e01a6e7403bb21bd4a366efe29df17b578af93bdc96425d4f6225"
+    },
+    {
+      "path": "data/monsters/soulraker-handmaiden.json",
+      "id": "soulraker-handmaiden",
+      "sha256": "f2b8769fa44eff708b6f4614ba84dda0e14e41f622578874672c082ffe0dcd38"
+    },
+    {
+      "path": "data/monsters/soulraker-hivequeen.json",
+      "id": "soulraker-hivequeen",
+      "sha256": "e953273666b0bb60c669351de21b403714385a5438a99301d013117a0a637e8f"
+    },
+    {
+      "path": "data/monsters/soulraker-praetorian.json",
+      "id": "soulraker-praetorian",
+      "sha256": "43ed41da80e1e6bd73a630cde328dc35be8457ca57ca58fe31f161a881a20473"
+    },
+    {
+      "path": "data/monsters/soulraker-scout.json",
+      "id": "soulraker-scout",
+      "sha256": "95540f9a8890e74cd25a6c6eb48117914ce6ea43e7c5f8e6d32d51ab81459d14"
+    },
+    {
+      "path": "data/monsters/soulraker-soldier.json",
+      "id": "soulraker-soldier",
+      "sha256": "dfc96e704b1c21d3beb1a29b4639e9ecbcf0756a50400b1f8f1252e7cf01e174"
+    },
+    {
+      "path": "data/monsters/soulraker-stinger.json",
+      "id": "soulraker-stinger",
+      "sha256": "62e16a6a6d182394649b4cec9b1cecf62658b5b3f984795d014c5e54bc1c6701"
+    },
+    {
+      "path": "data/monsters/soulwight.json",
+      "id": "soulwight",
+      "sha256": "b7bdca96e23c203b3f8a999c70cb236f2ee5c1361b04f74aedd310e51243a84c"
+    },
+    {
+      "path": "data/monsters/specter.json",
+      "id": "specter",
+      "sha256": "61c5be8e701bd198aee6526a4706e2bf52bbf9d6abedd5616116cc3f368f571a"
+    },
+    {
+      "path": "data/monsters/strategos-alkestis.json",
+      "id": "strategos-alkestis",
+      "sha256": "e10d800c0715939e16ac39f0603bd0ea24b537843ab70376dc5d625cc9733096"
+    },
+    {
+      "path": "data/monsters/striped-condor-griffon.json",
+      "id": "striped-condor-griffon",
+      "sha256": "9de4449c5181285f23bd68688b6c9b598dc871f7b05d3ab861ba2ea2b81e100e"
+    },
+    {
+      "path": "data/monsters/styrich.json",
+      "id": "styrich",
+      "sha256": "f34ce394778b0a8eea59c19774f5b3f4cf37864fc7bf343559d86b30e408983c"
+    },
+    {
+      "path": "data/monsters/thorn-dragon.json",
+      "id": "thorn-dragon",
+      "sha256": "2ae15b554fa1a2687b7b9f1b4102dff0550cef3537081085cf9ccb7bf5cca1aa"
+    },
+    {
+      "path": "data/monsters/time-raider-archon.json",
+      "id": "time-raider-archon",
+      "sha256": "4bfc8353befb6bdceb53c8e3cae27f0feb1ef7ea0aca00fb267af610a903248c"
+    },
+    {
+      "path": "data/monsters/time-raider-armiger.json",
+      "id": "time-raider-armiger",
+      "sha256": "aa80bc64436885be69016a2014fb01a76b80001d106d2c03c6cbc7f2bb2d741a"
+    },
+    {
+      "path": "data/monsters/time-raider-cannonfall.json",
+      "id": "time-raider-cannonfall",
+      "sha256": "f74fb2122a989d8ccd1a98e9bd89aca2ecae2c6ea6461dc7e3b3be18a28bc706"
+    },
+    {
+      "path": "data/monsters/time-raider-helix.json",
+      "id": "time-raider-helix",
+      "sha256": "fce02b56b454d625d4830b891773cde18e13f0f2f983a5827422569b607e35a8"
+    },
+    {
+      "path": "data/monsters/time-raider-hijack.json",
+      "id": "time-raider-hijack",
+      "sha256": "58a08f5e2b31875f0c74f9f05ed7bc30407693b800f033b217b03d410569c2d8"
+    },
+    {
+      "path": "data/monsters/time-raider-mind-punk.json",
+      "id": "time-raider-mind-punk",
+      "sha256": "f56e29db3d8e7460e1a75e88c6ff9e4043d578d0c9c4e6b52fd93992c8a92562"
+    },
+    {
+      "path": "data/monsters/time-raider-myriad.json",
+      "id": "time-raider-myriad",
+      "sha256": "e073167b6a9e07711a1635a284ac817a91ff46d105c0627ea9732cfead82ecb3"
+    },
+    {
+      "path": "data/monsters/time-raider-nemesis.json",
+      "id": "time-raider-nemesis",
+      "sha256": "4cf2fe655b1ac583460198cab66b626d3596c8bbd6472870af05d0a95561af6a"
+    },
+    {
+      "path": "data/monsters/time-raider-tyrannis.json",
+      "id": "time-raider-tyrannis",
+      "sha256": "2b501758d1196805b44b00000d8fbebfb6403d45348185ff85e0a6cfaca8ee81"
+    },
+    {
+      "path": "data/monsters/time-raider-vertex.json",
+      "id": "time-raider-vertex",
+      "sha256": "5def59396fc6234d75696639c5d738c64795c1bbe80e7f301a3284e8d23f84d0"
+    },
+    {
+      "path": "data/monsters/torlas.json",
+      "id": "torlas",
+      "sha256": "88e0cef6d97aaf1fef14d8c2c8a0ccf792d0767ee5bbf24836cca11fd1a4ebb5"
+    },
+    {
+      "path": "data/monsters/tormenauk.json",
+      "id": "tormenauk",
+      "sha256": "5f8e3e9ac97e0ded082a2b320bf4a368aa6144468d96ce3dd339434279c42da6"
+    },
+    {
+      "path": "data/monsters/toxic-eye.json",
+      "id": "toxic-eye",
+      "sha256": "d7a2e2f2848a448bd03788716669dfa8d2fd416aeaa29636b0dd085cff498ea8"
+    },
+    {
+      "path": "data/monsters/trained-gummy-brick.json",
+      "id": "trained-gummy-brick",
+      "sha256": "7228c007e3a3642d86f2be8f141976649abf1d8fc7b6a664fe2d0989b32ac51d"
+    },
+    {
+      "path": "data/monsters/troll-butcher.json",
+      "id": "troll-butcher",
+      "sha256": "94ee11db1e855ec8f8ce91c6986909135441eb89b62e341c49e09e57d0e61d50"
+    },
+    {
+      "path": "data/monsters/troll-crack-trooper.json",
+      "id": "troll-crack-trooper",
+      "sha256": "40cb0afd5765de2aab4569130ca3e04c76dd2e82002090a48899fb1dfaaa3cc5"
+    },
+    {
+      "path": "data/monsters/troll-glutton.json",
+      "id": "troll-glutton",
+      "sha256": "2a81235e98dce383d4f8c39023d7b631315b2105bd85e299ffb1a6a680af8969"
+    },
+    {
+      "path": "data/monsters/troll-limbjumble.json",
+      "id": "troll-limbjumble",
+      "sha256": "37a4a08fb0e4b5ee9be111e61b04cf4330daaf9c634ecd14a9ed6c31febf6e1c"
+    },
+    {
+      "path": "data/monsters/troll-ravager.json",
+      "id": "troll-ravager",
+      "sha256": "d699f058c573412f3d7f894c8ff9e5347722c87496048a79e73291ebc66a5f3f"
+    },
+    {
+      "path": "data/monsters/troll-whelp.json",
+      "id": "troll-whelp",
+      "sha256": "495f66e675d07931901a198ff54d1f9801503331b57446d6bad6e5fffc3722b1"
+    },
+    {
+      "path": "data/monsters/tusker-demon.json",
+      "id": "tusker-demon",
+      "sha256": "67a5f2ce89fd6f79f42d6d4a3b0c5e96ee5ad6a5863e7d7d6b3282caf3ab52ac"
+    },
+    {
+      "path": "data/monsters/tyburaki.json",
+      "id": "tyburaki",
+      "sha256": "1a43e856ad3300c19784ce8b84d3b0bd7177dea46efd798798063f8d1731114c"
+    },
+    {
+      "path": "data/monsters/umbral-stalker.json",
+      "id": "umbral-stalker",
+      "sha256": "df7a4e36c091a9855348e9c0543b5de74af0cf636bf45d2653e25d39945e2e78"
+    },
+    {
+      "path": "data/monsters/unguloid.json",
+      "id": "unguloid",
+      "sha256": "6495b71f861e201ba9e97bd5be960705b9dec68f703143aa04395dd6996d4032"
+    },
+    {
+      "path": "data/monsters/vampire-lord.json",
+      "id": "vampire-lord",
+      "sha256": "e10012ac9d29935e13e9652ae19552a5bc6fcdb0e2f6ef58eacd765f9d5c41d3"
+    },
+    {
+      "path": "data/monsters/vampire-spawn.json",
+      "id": "vampire-spawn",
+      "sha256": "03cf2281fbac3f67ca4b981df9da6f4d4cdaa6cd98fa4c9825d5e45974eafe96"
+    },
+    {
+      "path": "data/monsters/vampire.json",
+      "id": "vampire",
+      "sha256": "0dc3749776f2b7923881d88bb787a7002e2024ab1f10a8aa0b3527a7083f6e00"
+    },
+    {
+      "path": "data/monsters/vicisitator.json",
+      "id": "vicisitator",
+      "sha256": "4656fad6b82e5ea39c7226ee0834eeaf7b42b3524e29c9e78f18844e0b463073"
+    },
+    {
+      "path": "data/monsters/voiceless-talker-artillerist.json",
+      "id": "voiceless-talker-artillerist",
+      "sha256": "a318f2c820b7131f9aedaa862218a40cdfb6534c92cabc7abdf0fd383778f88d"
+    },
+    {
+      "path": "data/monsters/voiceless-talker-evolutionist.json",
+      "id": "voiceless-talker-evolutionist",
+      "sha256": "bcf8c8fefa06aa39e63699a9cdf6f26470c03e696f3052477f5043b291d27aee"
+    },
+    {
+      "path": "data/monsters/voiceless-talker-graywarper.json",
+      "id": "voiceless-talker-graywarper",
+      "sha256": "f00eeb223bf1789824641e88cdf7f1dcbb08db0efebd17a2c791ead185933882"
+    },
+    {
+      "path": "data/monsters/voiceless-talker-invader.json",
+      "id": "voiceless-talker-invader",
+      "sha256": "dd023337c2771a1f73169136067d852b1530ee018d546573c3465020bb19c035"
+    },
+    {
+      "path": "data/monsters/war-dog-aerocite.json",
+      "id": "war-dog-aerocite",
+      "sha256": "98c3fea4b1a3251dc72d76a1bbc26e455fa84aa8a03fb00f070b211bb42c9d0a"
+    },
+    {
+      "path": "data/monsters/war-dog-amalgamite.json",
+      "id": "war-dog-amalgamite",
+      "sha256": "ab6d6382e964e4ba55904fb72b8bb19826ac54fd880926a9933a530d2b2ca9f0"
+    },
+    {
+      "path": "data/monsters/war-dog-arachnite.json",
+      "id": "war-dog-arachnite",
+      "sha256": "8747b39a9937977b3d56abd2957cbb818691b3e281e8192bf614d6b1cbd3a4ab"
+    },
+    {
+      "path": "data/monsters/war-dog-ballistite.json",
+      "id": "war-dog-ballistite",
+      "sha256": "2f1124ac65f353a4f7aaceaf4bfbb1e9e41791bd886feb4d19c54f629ba79233"
+    },
+    {
+      "path": "data/monsters/war-dog-blackcap.json",
+      "id": "war-dog-blackcap",
+      "sha256": "75af445a1db4c89e04df17c833b55ad1c538d227cf79b01dec2acf569c3aee66"
+    },
+    {
+      "path": "data/monsters/war-dog-blood-jumper.json",
+      "id": "war-dog-blood-jumper",
+      "sha256": "eac62656a3c776469d4bcb6dcd22c7f73f27a92939074eb19c33b5523e4ffba3"
+    },
+    {
+      "path": "data/monsters/war-dog-breaker.json",
+      "id": "war-dog-breaker",
+      "sha256": "f93505d0325763474da23dacc500eb3c7d8f667936fedce34d6ce6af285ab6c3"
+    },
+    {
+      "path": "data/monsters/war-dog-commando.json",
+      "id": "war-dog-commando",
+      "sha256": "17eb9ee0cbe9355340791b6b66aef2a0a7b500e712eaaeabf6035a1e668fbca3"
+    },
+    {
+      "path": "data/monsters/war-dog-conscript.json",
+      "id": "war-dog-conscript",
+      "sha256": "8dfb500392a5e0a5a3848874d41d4f13f765bc158d03865eeb264a99ef2b9ca3"
+    },
+    {
+      "path": "data/monsters/war-dog-crucibite.json",
+      "id": "war-dog-crucibite",
+      "sha256": "08c953f02b27a17325eed8a04054332b57fecc37474a5388dea9af2acbc5c028"
+    },
+    {
+      "path": "data/monsters/war-dog-doomthief.json",
+      "id": "war-dog-doomthief",
+      "sha256": "4678fb3789db3b103d210a1f4425e0f88257e2a460bdf84caff85c68060b67d0"
+    },
+    {
+      "path": "data/monsters/war-dog-draconite.json",
+      "id": "war-dog-draconite",
+      "sha256": "3c0a43283b83a415e6b4f5cb23507fd7667d1929863b67bd0fc1698050c67099"
+    },
+    {
+      "path": "data/monsters/war-dog-equivite.json",
+      "id": "war-dog-equivite",
+      "sha256": "f885df2c5220fa8e0e1676484b30f1fa008f1d427bdf5adf145c6a6374a5bc2d"
+    },
+    {
+      "path": "data/monsters/war-dog-eviscerite.json",
+      "id": "war-dog-eviscerite",
+      "sha256": "7e5e78ceaa269a9c325c633f684a1d9be60437e69a3302b0f86de1ba340b81df"
+    },
+    {
+      "path": "data/monsters/war-dog-firestarter.json",
+      "id": "war-dog-firestarter",
+      "sha256": "92edfd08cfcaacd1e3fa6702b6acab4f92d7f1636455e12e9f699d7647314d22"
+    },
+    {
+      "path": "data/monsters/war-dog-geomancer.json",
+      "id": "war-dog-geomancer",
+      "sha256": "cbe31b49887f9285af1d486eb29af8c88e2853b2b1015d54d95731f55663b952"
+    },
+    {
+      "path": "data/monsters/war-dog-ground-commander.json",
+      "id": "war-dog-ground-commander",
+      "sha256": "c85149205817e98c0cfd5794e0d9608332ac28b49dddc188a0fe24b7cf6e5dae"
+    },
+    {
+      "path": "data/monsters/war-dog-hunter-killer.json",
+      "id": "war-dog-hunter-killer",
+      "sha256": "caffb3f5c828ce85bd00f319a036b943684bd52c37ba8cab89129cb3f6cd9286"
+    },
+    {
+      "path": "data/monsters/war-dog-hypokrite.json",
+      "id": "war-dog-hypokrite",
+      "sha256": "de0713f8d006e733dbf300c2b2ac25f62af07f641e4e726f2a9292e4349ebbe9"
+    },
+    {
+      "path": "data/monsters/war-dog-iron-priest.json",
+      "id": "war-dog-iron-priest",
+      "sha256": "289b8e6c690787e3f9b3b2309ca246fd751e04bfa8891ff39481ba4d9a3d7b5a"
+    },
+    {
+      "path": "data/monsters/war-dog-mischievite.json",
+      "id": "war-dog-mischievite",
+      "sha256": "5e0a4be0fa9fc7224ac3de4420aca8784bb7c39fccd94718e5cca902c6b5f9f0"
+    },
+    {
+      "path": "data/monsters/war-dog-neuronite.json",
+      "id": "war-dog-neuronite",
+      "sha256": "c3f8e393ef45251580083927fbe992c9e1a3b4e58bf16d09fbb9a65de0bcc46a"
+    },
+    {
+      "path": "data/monsters/war-dog-pestilite.json",
+      "id": "war-dog-pestilite",
+      "sha256": "08f93bc3a4b806683cc2efe1c256b450894bc13d4b769026074ab9c675075ae8"
+    },
+    {
+      "path": "data/monsters/war-dog-phosphorite.json",
+      "id": "war-dog-phosphorite",
+      "sha256": "2fc4af8591cdb7e557ac56ba8eaa9944f0a8b26cab8bc2e58dac68329b113bb6"
+    },
+    {
+      "path": "data/monsters/war-dog-prismite.json",
+      "id": "war-dog-prismite",
+      "sha256": "a4f9bf4601c75c32e480bcccb9fa8c253295b027d178087889bed6e217f5f682"
+    },
+    {
+      "path": "data/monsters/war-dog-saboteur.json",
+      "id": "war-dog-saboteur",
+      "sha256": "543c668c377e43b4793140f39c39396d91b9b3a541eee60ea3de3cd9b2a329e6"
+    },
+    {
+      "path": "data/monsters/war-dog-sharpshooter.json",
+      "id": "war-dog-sharpshooter",
+      "sha256": "19fff2772689c3b811acbb6d1ad703d7406b4b8df2ba276053bfdc932def9275"
+    },
+    {
+      "path": "data/monsters/war-dog-shriketroop.json",
+      "id": "war-dog-shriketroop",
+      "sha256": "1053e620b3ad41995c5acb2ee65fa5c04282470e6aed42545e23beceb6f6f6b5"
+    },
+    {
+      "path": "data/monsters/war-dog-socialite.json",
+      "id": "war-dog-socialite",
+      "sha256": "54472eadbdba2cfed51bb25a6ce49f3a1a3dfc7ee5a280084a22d0be3363280d"
+    },
+    {
+      "path": "data/monsters/war-dog-sparkslinger.json",
+      "id": "war-dog-sparkslinger",
+      "sha256": "c9e6dc38e240f2883e931080976bf498383b3f2754138bdedfb126412e20566a"
+    },
+    {
+      "path": "data/monsters/war-dog-subcommander.json",
+      "id": "war-dog-subcommander",
+      "sha256": "f569a79a4956e11e77e6f3b37fccafb99f08de7e65085d9b812aa4aba0d3882b"
+    },
+    {
+      "path": "data/monsters/war-dog-sweeper.json",
+      "id": "war-dog-sweeper",
+      "sha256": "3f6f925953dbb6d3baceab1ff78162fdd0e599396cef7b144bb258d0eb4bba52"
+    },
+    {
+      "path": "data/monsters/war-dog-taxiarch.json",
+      "id": "war-dog-taxiarch",
+      "sha256": "b7b175c2323d7cd4c6b417430af5da48442242e3c86607bffc285c6fdd19e059"
+    },
+    {
+      "path": "data/monsters/war-dog-teletalite.json",
+      "id": "war-dog-teletalite",
+      "sha256": "197ae6aa3c1a8651cce1588e25043386485d1ede2463b57674a4268c9bb14495"
+    },
+    {
+      "path": "data/monsters/war-dog-tetherite.json",
+      "id": "war-dog-tetherite",
+      "sha256": "a9590d8b64cc3cb95cfb2276b9b432f3998c8a8c4c71cfe9dcee19b144015d33"
+    },
+    {
+      "path": "data/monsters/war-dog-tetrarch.json",
+      "id": "war-dog-tetrarch",
+      "sha256": "6ab901faa35fa588ed08780589b177537919d537146aedf56340e54d96ddfeb1"
+    },
+    {
+      "path": "data/monsters/war-dog-thanatite.json",
+      "id": "war-dog-thanatite",
+      "sha256": "94ff9b2610a1c643d949a65c566f7109bcb8ea3ea78a148883164bdf42dc58ea"
+    },
+    {
+      "path": "data/monsters/war-dog-tormentite.json",
+      "id": "war-dog-tormentite",
+      "sha256": "82c43688fe61d7e261fc2a88a37acb3833777a754af3cc751e9648ef8aaebc4c"
+    },
+    {
+      "path": "data/monsters/war-dog-war-doc.json",
+      "id": "war-dog-war-doc",
+      "sha256": "3abf6568c11d5c2e3cbc3aeee855a2141ef7b76106f1f2ce7c046fb79bfc0264"
+    },
+    {
+      "path": "data/monsters/war-dog-war-frog.json",
+      "id": "war-dog-war-frog",
+      "sha256": "c7ab7b7846b20e00b42357b86e4a01b027d30e3d7c95727cd0d9a880d6a28afd"
+    },
+    {
+      "path": "data/monsters/war-spider.json",
+      "id": "war-spider",
+      "sha256": "95e532100df61c0b4ab48d4e1ebab5bfd0c26e3b44f846b180105a2b26a6ec85"
+    },
+    {
+      "path": "data/monsters/waxen.json",
+      "id": "waxen",
+      "sha256": "e425b19cb65d93c52fd7248f064e95ad1584b6cafbdc55d7504494eab74e7609"
+    },
+    {
+      "path": "data/monsters/werewolf.json",
+      "id": "werewolf",
+      "sha256": "7d0e682d5f7c3c7ed1123ee52d403395292b5654c48af5b415233920f10a17df"
+    },
+    {
+      "path": "data/monsters/wobalas.json",
+      "id": "wobalas",
+      "sha256": "0eb887089689eeb9112ff768dde91d008ed06de6d6f2d154a75d59b2675a397c"
+    },
+    {
+      "path": "data/monsters/wode-elf-chirurgeon.json",
+      "id": "wode-elf-chirurgeon",
+      "sha256": "7cc58925c3e51446172db15a4dd5479fe847254ac6fb31be41c61c5f9d09e608"
+    },
+    {
+      "path": "data/monsters/wode-elf-druid.json",
+      "id": "wode-elf-druid",
+      "sha256": "40de78c0ada07f35385b1cfe66df1e9355ca10a4671cf8406dbe5859db8db959"
+    },
+    {
+      "path": "data/monsters/wode-elf-green-seer.json",
+      "id": "wode-elf-green-seer",
+      "sha256": "c9fe205bec975c0f63d1242ac976dbef366528f07ed445890b2857ba5042903a"
+    },
+    {
+      "path": "data/monsters/wode-elf-greenskeeper.json",
+      "id": "wode-elf-greenskeeper",
+      "sha256": "ff6c1c21fb928f2ad4704f1e4e2ee871849844985a8271189f6d028dbf952cc8"
+    },
+    {
+      "path": "data/monsters/wode-elf-guerrilla.json",
+      "id": "wode-elf-guerrilla",
+      "sha256": "dd446218e41b4f984cc2fe6ef7bf4505c96fc9e7364cada243270e2d3812782c"
+    },
+    {
+      "path": "data/monsters/wode-elf-gweiadur.json",
+      "id": "wode-elf-gweiadur",
+      "sha256": "f25ee9145c4fb21e27cb455599229d3149981bb02fd9b4ae8d1db6abfb965d04"
+    },
+    {
+      "path": "data/monsters/wode-elf-lookout.json",
+      "id": "wode-elf-lookout",
+      "sha256": "d9c2455435f0809e6b2cb9d8e6ae08472063c9da8ac44cf5ef639d0224f6df7e"
+    },
+    {
+      "path": "data/monsters/wode-elf-runner.json",
+      "id": "wode-elf-runner",
+      "sha256": "1b4d54140625a49fbee4115978743e4da360754ff8a58755011d29c80fdfe9ec"
+    },
+    {
+      "path": "data/monsters/wode-elf-scout.json",
+      "id": "wode-elf-scout",
+      "sha256": "292bcbf0eb67a3f9437760a9a925875d89e485e214039b963c3d4e448e6d64d4"
+    },
+    {
+      "path": "data/monsters/wode-elf-sentry.json",
+      "id": "wode-elf-sentry",
+      "sha256": "1798d31375fa8200f1be919ed01458a1ce40dbca0c8fda895744c20bbd082f27"
+    },
+    {
+      "path": "data/monsters/wode-elf-warleader.json",
+      "id": "wode-elf-warleader",
+      "sha256": "d22b3c550787db54ccffe184eac48bd8ba72cadc6fa8f023dcd9540596d788fd"
+    },
+    {
+      "path": "data/monsters/wode-elf-yeoman.json",
+      "id": "wode-elf-yeoman",
+      "sha256": "07abd5d4c54b9fbf0259ddf71f9578e71d9324cd5dc6178afd6302623288bf4a"
+    },
+    {
+      "path": "data/monsters/wode-hag.json",
+      "id": "wode-hag",
+      "sha256": "1799b927d90f4fbe8207b6ff708bac48c0bdb1c34cfd91282d38e5c2e2dfcaaf"
+    },
+    {
+      "path": "data/monsters/wodenelg.json",
+      "id": "wodenelg",
+      "sha256": "88c9bc153ce59275dc4518d8926fc1dd032f310765560449c7ca618916074bf8"
+    },
+    {
+      "path": "data/monsters/worg.json",
+      "id": "worg",
+      "sha256": "893c3b3c758edb0a884534bdc13fbc94c3e8ed97aa9807af070971df70b2fbfb"
+    },
+    {
+      "path": "data/monsters/wraith-skulker.json",
+      "id": "wraith-skulker",
+      "sha256": "38dcc693d70e0da902b252367edeb38cb0ffaa3b2ca78296efd8006b76f19e99"
+    },
+    {
+      "path": "data/monsters/wraith.json",
+      "id": "wraith",
+      "sha256": "7c22f58db81f95caa71b5312035195b6c84edb467e5d40205d319bc36a305954"
+    },
+    {
+      "path": "data/monsters/wyvern-lurker.json",
+      "id": "wyvern-lurker",
+      "sha256": "1b0934c785bd8b185c6aedb852ed14969c37ba203b17dbb2dc4b59fb674701c8"
+    },
+    {
+      "path": "data/monsters/wyvern-predator.json",
+      "id": "wyvern-predator",
+      "sha256": "da489c3d4ab49a406a4f5b4394f5c07a1162bfa145012ca508e99c9925d7764f"
+    },
+    {
+      "path": "data/monsters/xorannox-the-tyract.json",
+      "id": "xorannox-the-tyract",
+      "sha256": "b794f6cd000c81ca388a251617e3c72b3b93a594d3ea7ab0ad82a0c9762dfae9"
+    },
+    {
+      "path": "data/monsters/zapper-eye.json",
+      "id": "zapper-eye",
+      "sha256": "a717b70fb0c16e53de98c2d8c9f231e3857c1535f8f50ae680be655d45ab5008"
+    },
+    {
+      "path": "data/monsters/zombie.json",
+      "id": "zombie",
+      "sha256": "881783f766181b72121d203cde34542d8103b357e93c45535a8e6e23afb00c24"
+    }
+  ],
+  "unavailable": [
+    {
+      "id": "mcdm.monsters.v1/monster.lightbender/lightbender-malice",
+      "source": "en/books/monsters/md/monster/lightbender/lightbender-malice.md",
+      "name": "Lightbender Malice",
+      "level": null,
+      "counterpart": "lightbender-malice",
+      "disposition": "No counterpart in the complete pinned generated data/monsters and data/malice inventory. Source is included and displayed from the pinned Compendium; external comparison remains unavailable, not verified.",
+      "sourceJsonSha256": "447812352b11954b863b025aed232964aa519fced28dcc293fb08bbdbed719f5",
+      "sourceMarkdownSha256": "b169b985343c4cab1c04a8389d43dbc780e02824ee48296737ce80ab5813ff32",
+      "projectionSha256": "53e5c39120bbc07aff5b28fee76c95191d7ab547bed11e130dfa2b1f559bf63f"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.lightbender.statblock/lightbender-pouncer",
+      "source": "en/books/monsters/md/monster/lightbender/statblock/lightbender-pouncer.md",
+      "name": "Lightbender Pouncer",
+      "level": 3,
+      "counterpart": "lightbender-pouncer",
+      "disposition": "No counterpart in the complete pinned generated data/monsters and data/malice inventory. Source is included and displayed from the pinned Compendium; external comparison remains unavailable, not verified.",
+      "sourceJsonSha256": "85c2decb6cf709325e7277c3ba1815142f97e7bc2459a0ddd8a37394185f7fb2",
+      "sourceMarkdownSha256": "89fc6ee18175c44e665b331266b4843835ab3d428b1c7442ba76dd6139200ed0",
+      "projectionSha256": "f2b6f74814b68ff93dad5955fbda32b1e28a24ea781de546959d30de4dc4204d"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.lightbender.statblock/lightbender",
+      "source": "en/books/monsters/md/monster/lightbender/statblock/lightbender.md",
+      "name": "Lightbender",
+      "level": 3,
+      "counterpart": "lightbender",
+      "disposition": "No counterpart in the complete pinned generated data/monsters and data/malice inventory. Source is included and displayed from the pinned Compendium; external comparison remains unavailable, not verified.",
+      "sourceJsonSha256": "fdcfad5f27a7690cdd63cb4dba92bb318f33263a02b85e3f34946997051f289c",
+      "sourceMarkdownSha256": "67778f3dc0f4cf4313146b87bd67b6e63dfea707c80fd90069c3974bccc1f62e",
+      "projectionSha256": "ed2413df33017c0096b50d02be415f2e2df2f6a524f61ac849c1ddc3fcf3114c"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.noncombatant.statblock/noncombatant",
+      "source": "en/books/monsters/md/monster/noncombatant/statblock/noncombatant.md",
+      "name": "Noncombatant",
+      "level": 0,
+      "counterpart": "noncombatant",
+      "disposition": "No counterpart in the complete pinned generated data/monsters and data/malice inventory. Source is included and displayed from the pinned Compendium; external comparison remains unavailable, not verified.",
+      "sourceJsonSha256": "d347005fc39afd3e59392d21d84400c7803757baef893516f0a2bebf7616ba0b",
+      "sourceMarkdownSha256": "8adaddcfd1dd1e51f5fc51869e30442a0b4a879dbbd73895f602e3ee14b916b5",
+      "projectionSha256": "beaccd7ba113abd0bd6d5705d9f75328f42fb6487887ad10aa35af64a9c56775"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.retainer.statblock/angulotl-hopper",
+      "source": "en/books/monsters/md/monster/retainer/statblock/angulotl-hopper.md",
+      "name": "Angulotl Hopper",
+      "level": 1,
+      "counterpart": "angulotl-hopper",
+      "disposition": "No counterpart in the complete pinned generated data/monsters and data/malice inventory. Source is included and displayed from the pinned Compendium; external comparison remains unavailable, not verified.",
+      "sourceJsonSha256": "ddef367fd7f1f6e6fc88ecb03dbfd308b8c218b5b00e0bef26bda691999cc824",
+      "sourceMarkdownSha256": "94412fd8660866b84218b042d45a7044066a5c66cf8ca7007aab571d5d19c413",
+      "projectionSha256": "08eb578f41b4cc61d16a470e9adf8aa41621b10dfe4db309eb28519fda011667"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.retainer.statblock/bugbear-commando",
+      "source": "en/books/monsters/md/monster/retainer/statblock/bugbear-commando.md",
+      "name": "Bugbear Commando",
+      "level": 2,
+      "counterpart": "bugbear-commando",
+      "disposition": "No counterpart in the complete pinned generated data/monsters and data/malice inventory. Source is included and displayed from the pinned Compendium; external comparison remains unavailable, not verified.",
+      "sourceJsonSha256": "8fa26dadce80378186fc3b15fc9e7c4d2e3ffef4b5061f4a309e68494d5d0803",
+      "sourceMarkdownSha256": "8a3877910784fa6073abc9836a0d1491ba73014b004daa4bcb80eecf748f74f2",
+      "projectionSha256": "c36fafcbe72de690180d5fc6ee796c3607f621afe7f65a9e7215abd751bd74ef"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.retainer.statblock/devil-defector",
+      "source": "en/books/monsters/md/monster/retainer/statblock/devil-defector.md",
+      "name": "Devil Defector",
+      "level": 5,
+      "counterpart": "devil-defector",
+      "disposition": "No counterpart in the complete pinned generated data/monsters and data/malice inventory. Source is included and displayed from the pinned Compendium; external comparison remains unavailable, not verified.",
+      "sourceJsonSha256": "0099fe997fb48ea0f7c32af1e63d33ff2e41a56efbe1c666755be05d20a5b2f5",
+      "sourceMarkdownSha256": "ba1f40e605f0b1674c1a21487a075755eaf03373d0c9906ed03af4add446141c",
+      "projectionSha256": "7c6a2522c746d80efe4c094cb1e4fefc7fc048ce9e3392f15acd040e62d71137"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.retainer.statblock/dwarf-mortar",
+      "source": "en/books/monsters/md/monster/retainer/statblock/dwarf-mortar.md",
+      "name": "Dwarf Mortar",
+      "level": 1,
+      "counterpart": "dwarf-mortar",
+      "disposition": "No counterpart in the complete pinned generated data/monsters and data/malice inventory. Source is included and displayed from the pinned Compendium; external comparison remains unavailable, not verified.",
+      "sourceJsonSha256": "13cec23f5115b2ffdd83ee02232a5fff048c03c4faa7c8f7d37915d0c6c54114",
+      "sourceMarkdownSha256": "921412437faee2f4137258c958614fd112cf6bb61272eb989fce799d05951f68",
+      "projectionSha256": "91846fda5bc6cd405c8a762a83ab2fb66da7d7caba1e74ef89c295779b7c3c26"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.retainer.statblock/gnoll-gnasher",
+      "source": "en/books/monsters/md/monster/retainer/statblock/gnoll-gnasher.md",
+      "name": "Gnoll Gnasher",
+      "level": 2,
+      "counterpart": "gnoll-gnasher",
+      "disposition": "No counterpart in the complete pinned generated data/monsters and data/malice inventory. Source is included and displayed from the pinned Compendium; external comparison remains unavailable, not verified.",
+      "sourceJsonSha256": "353e1ad1b3576d7fd7c9ed35607cae7773bd7c800c166a5a813b96f1669a4c2f",
+      "sourceMarkdownSha256": "0cae3de0593b924cf82d54bd3442cded179ddbef73910d93dc4e07c1bc26c7a0",
+      "projectionSha256": "5e8ccaa62a9f5ec33f837263eb2f2c34eff664906c6fae569bffa639d5db20e6"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.retainer.statblock/goblin-guide",
+      "source": "en/books/monsters/md/monster/retainer/statblock/goblin-guide.md",
+      "name": "Goblin Guide",
+      "level": 1,
+      "counterpart": "goblin-guide",
+      "disposition": "No counterpart in the complete pinned generated data/monsters and data/malice inventory. Source is included and displayed from the pinned Compendium; external comparison remains unavailable, not verified.",
+      "sourceJsonSha256": "2d88d3f5a9b52dc433f91fb25dead2a3264ae0e5d667bdaf0170341591c23c13",
+      "sourceMarkdownSha256": "a51967b6445e30ef41329df0443210225cf911e1bf73b52e9df209b7f8349d60",
+      "projectionSha256": "63e5e32fef334d773522e775c5047e9fad54cabcb7dfdde90e40eb848d0365d3"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.retainer.statblock/high-elf-weatherwise",
+      "source": "en/books/monsters/md/monster/retainer/statblock/high-elf-weatherwise.md",
+      "name": "High Elf Weatherwise",
+      "level": 1,
+      "counterpart": "high-elf-weatherwise",
+      "disposition": "No counterpart in the complete pinned generated data/monsters and data/malice inventory. Source is included and displayed from the pinned Compendium; external comparison remains unavailable, not verified.",
+      "sourceJsonSha256": "017675b14b7030fa51d62ccbc9dfb44836e677f093ea8b469a51b68cd0bfbf2c",
+      "sourceMarkdownSha256": "4b6c4828cafbcf2db9efdda5f2079f3bbe6af5a600556c7b97fafd56241a4940",
+      "projectionSha256": "5f9e03525a8068392cdffb89fb17ecf5103080bbbb7c72d15487735af17a83ec"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.retainer.statblock/hobgoblin-flameslinger",
+      "source": "en/books/monsters/md/monster/retainer/statblock/hobgoblin-flameslinger.md",
+      "name": "Hobgoblin Flameslinger",
+      "level": 4,
+      "counterpart": "hobgoblin-flameslinger",
+      "disposition": "No counterpart in the complete pinned generated data/monsters and data/malice inventory. Source is included and displayed from the pinned Compendium; external comparison remains unavailable, not verified.",
+      "sourceJsonSha256": "92983e4d44a8712ec447066bb866ce82f791a7217ebed6ce2da7dbbe6bcf0392",
+      "sourceMarkdownSha256": "3344043e1387f9bf09242c0f4cc56d1f1aa1236aaccd2204a301f62bb3147c6a",
+      "projectionSha256": "674b097c2a1b2730ea1747581a6175e2fa18ec4df5e2eb39ad7278e28e3dec7a"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.retainer.statblock/human-warrior",
+      "source": "en/books/monsters/md/monster/retainer/statblock/human-warrior.md",
+      "name": "Human Warrior",
+      "level": 1,
+      "counterpart": "human-warrior",
+      "disposition": "No counterpart in the complete pinned generated data/monsters and data/malice inventory. Source is included and displayed from the pinned Compendium; external comparison remains unavailable, not verified.",
+      "sourceJsonSha256": "bf082ebc1c6e782ddafbfc51f97cb280bf2c564740c89c3cfd01ea7634d3dda7",
+      "sourceMarkdownSha256": "d9e62f373c6cd329d10423746b5eb3ccf75a52f87d143e8234ef182d8ef0e4a7",
+      "projectionSha256": "06067c9cd1da5314064bca96d42832e398909cfde014c1b261903cf8ac6e5c4d"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.retainer.statblock/kobold-shieldbearer",
+      "source": "en/books/monsters/md/monster/retainer/statblock/kobold-shieldbearer.md",
+      "name": "Kobold Shieldbearer",
+      "level": 1,
+      "counterpart": "kobold-shieldbearer",
+      "disposition": "No counterpart in the complete pinned generated data/monsters and data/malice inventory. Source is included and displayed from the pinned Compendium; external comparison remains unavailable, not verified.",
+      "sourceJsonSha256": "ce36697028c1f59382dcfbde23105aa94c727a9f7725dd7b86cf0346f08dad37",
+      "sourceMarkdownSha256": "2a933413df846f9145c7472e56463dce5d6f9f468d42d77ecfbefda7424be94c",
+      "projectionSha256": "27a30a779e1ecdf4385f72bc0356aac3982680766d28fd1210a34ef55980e197"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.retainer.statblock/minotaur-gorer",
+      "source": "en/books/monsters/md/monster/retainer/statblock/minotaur-gorer.md",
+      "name": "Minotaur Gorer",
+      "level": 3,
+      "counterpart": "minotaur-gorer",
+      "disposition": "No counterpart in the complete pinned generated data/monsters and data/malice inventory. Source is included and displayed from the pinned Compendium; external comparison remains unavailable, not verified.",
+      "sourceJsonSha256": "6d7871748c097aabc0b77d1cf5dce7bd43203b3979b0aa874d014a3b9fc77c7a",
+      "sourceMarkdownSha256": "ae0b92f9b6971346734aea3d2ef01ae704af143ab9866fc3054503517dea9c4a",
+      "projectionSha256": "322a55658926cf81f8b8fa4a74454d7ecc2895fbbe545c72b7f0d601e3d35e79"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.retainer.statblock/orc-charger",
+      "source": "en/books/monsters/md/monster/retainer/statblock/orc-charger.md",
+      "name": "Orc Charger",
+      "level": 1,
+      "counterpart": "orc-charger",
+      "disposition": "No counterpart in the complete pinned generated data/monsters and data/malice inventory. Source is included and displayed from the pinned Compendium; external comparison remains unavailable, not verified.",
+      "sourceJsonSha256": "f7a136b718a2b0a791474c6d42c4171dbc606f2f70a151b94b6df4e5c5874e37",
+      "sourceMarkdownSha256": "bba69bbed92984fad3771f531197d3429d411830f673737231ffafb5ef209581",
+      "projectionSha256": "cce937346fd42089c6c3c886bc73a41f33af7bc252d34e61d0a2687e93a5a629"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.retainer.statblock/radenwight-sidekick",
+      "source": "en/books/monsters/md/monster/retainer/statblock/radenwight-sidekick.md",
+      "name": "Radenwight Sidekick",
+      "level": 1,
+      "counterpart": "radenwight-sidekick",
+      "disposition": "No counterpart in the complete pinned generated data/monsters and data/malice inventory. Source is included and displayed from the pinned Compendium; external comparison remains unavailable, not verified.",
+      "sourceJsonSha256": "33d789e9ec979dad057ba29d592ed6c2c03368062e5fe5019200929c51e0aa30",
+      "sourceMarkdownSha256": "f1c2b48f5698916f8036153982109bfbcdc9973e987192efe3240334a6a9f25a",
+      "projectionSha256": "ffad6b2233cf07d2e7ab9945eab9428d95ad146bbc0c582f5e99bc7ab159c31b"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.retainer.statblock/shadow-elf-shade",
+      "source": "en/books/monsters/md/monster/retainer/statblock/shadow-elf-shade.md",
+      "name": "Shadow Elf Shade",
+      "level": 4,
+      "counterpart": "shadow-elf-shade",
+      "disposition": "No counterpart in the complete pinned generated data/monsters and data/malice inventory. Source is included and displayed from the pinned Compendium; external comparison remains unavailable, not verified.",
+      "sourceJsonSha256": "35cbdabdc88b99b5023959e587de6988e27fc63d956c33579cab032885d18947",
+      "sourceMarkdownSha256": "b481e8cfda0ff88b47eb7769d41990c2353b1ed528eb7e29f4d3c54ec38c7b82",
+      "projectionSha256": "45db7d0a2f92cef1f80f0b6d721aa48420a92ea723d1b82c40fe7c48763e09a8"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.retainer.statblock/the-nameless",
+      "source": "en/books/monsters/md/monster/retainer/statblock/the-nameless.md",
+      "name": "The Nameless",
+      "level": 6,
+      "counterpart": "the-nameless",
+      "disposition": "No counterpart in the complete pinned generated data/monsters and data/malice inventory. Source is included and displayed from the pinned Compendium; external comparison remains unavailable, not verified.",
+      "sourceJsonSha256": "12c927e0e498e14213e0d59b5eceae125f0b032dc847d77c4ae2a0757b8d0043",
+      "sourceMarkdownSha256": "ffa4ec1cd2e1006603816de564ab65664cde6d1ae7d7fe7d193a4e79481da689",
+      "projectionSha256": "4ea2cb7d43985af4ae4c289428c6c789716bb184194635d4ce6d6c4702f241a3"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.retainer.statblock/time-raider-mind-healer",
+      "source": "en/books/monsters/md/monster/retainer/statblock/time-raider-mind-healer.md",
+      "name": "Time Raider Mind Healer",
+      "level": 3,
+      "counterpart": "time-raider-mind-healer",
+      "disposition": "No counterpart in the complete pinned generated data/monsters and data/malice inventory. Source is included and displayed from the pinned Compendium; external comparison remains unavailable, not verified.",
+      "sourceJsonSha256": "390559bdec2e698a395365c6a2ef61ef69dd4300e6006f22e1a17fb324593a33",
+      "sourceMarkdownSha256": "7fb64fa95a1d11d9498ccf26db4dc5ec39e71e11dbf12b5c01359fed6e2e002c",
+      "projectionSha256": "f5201d68a3bb33d07da3d5a8f74aa7654abb3e52f59c6bbc42107bb6b3d6c77c"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.retainer.statblock/troll-mercenary",
+      "source": "en/books/monsters/md/monster/retainer/statblock/troll-mercenary.md",
+      "name": "Troll Mercenary",
+      "level": 5,
+      "counterpart": "troll-mercenary",
+      "disposition": "No counterpart in the complete pinned generated data/monsters and data/malice inventory. Source is included and displayed from the pinned Compendium; external comparison remains unavailable, not verified.",
+      "sourceJsonSha256": "d211bf4948433c54df239d3215513efaa7d9a81b097703602d63da85dba205b8",
+      "sourceMarkdownSha256": "f37d6aad8ee9d98a8996e1a2a3c2d339d800262556f18ee7ae83df799317d9f4",
+      "projectionSha256": "5db76ecd7d95b72f541571edead54f9dbb39ee5da04fc53d6750c16a48a02a37"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.retainer.statblock/undead-servitor",
+      "source": "en/books/monsters/md/monster/retainer/statblock/undead-servitor.md",
+      "name": "Undead Servitor",
+      "level": 1,
+      "counterpart": "undead-servitor",
+      "disposition": "No counterpart in the complete pinned generated data/monsters and data/malice inventory. Source is included and displayed from the pinned Compendium; external comparison remains unavailable, not verified.",
+      "sourceJsonSha256": "a382e89d685d9386b7af64c5c1634724b0380ae58e96feda1d8255fb2246fae9",
+      "sourceMarkdownSha256": "7933b096e7e62b05a19f51fbb69dd0a60eae0e497deb5978b58e101ef8f21a20",
+      "projectionSha256": "97bfcdd80068b0fe3b72975789c1faeeac7d02f14d308cae02c9be36fda5036c"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.retainer.statblock/unquiet-spirit",
+      "source": "en/books/monsters/md/monster/retainer/statblock/unquiet-spirit.md",
+      "name": "Unquiet Spirit",
+      "level": 1,
+      "counterpart": "unquiet-spirit",
+      "disposition": "No counterpart in the complete pinned generated data/monsters and data/malice inventory. Source is included and displayed from the pinned Compendium; external comparison remains unavailable, not verified.",
+      "sourceJsonSha256": "3a39ebcd3a0d2018e0baceb5fbb559035df06c9e75812169dfc97e3d9e86c46d",
+      "sourceMarkdownSha256": "ea63d98c3e4c0b80d42e3fccd82b0a5f0b5395b7d120f519b8fd47dcc272f54d",
+      "projectionSha256": "90bed9b078397ac0baf91725f8304e02c26857dc0874dba87a3613351a09c7cf"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.retainer.statblock/vampire-rebel",
+      "source": "en/books/monsters/md/monster/retainer/statblock/vampire-rebel.md",
+      "name": "Vampire Rebel",
+      "level": 4,
+      "counterpart": "vampire-rebel",
+      "disposition": "No counterpart in the complete pinned generated data/monsters and data/malice inventory. Source is included and displayed from the pinned Compendium; external comparison remains unavailable, not verified.",
+      "sourceJsonSha256": "fec370fa321ea7bdb6dbe0e744545c8e0e1b645fef2bde1a8b86f36d9903fe24",
+      "sourceMarkdownSha256": "671ecbc36d8b3cf7e98b6df07243a7e9d68a697adf7ca8b13ef7e11de11e94f1",
+      "projectionSha256": "a6c8b70211c407cbb0bab9f21aabeec10a846f01fbeb628547c0bff40365321a"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.retainer.statblock/wode-elf-arrowswift",
+      "source": "en/books/monsters/md/monster/retainer/statblock/wode-elf-arrowswift.md",
+      "name": "Wode Elf Arrowswift",
+      "level": 1,
+      "counterpart": "wode-elf-arrowswift",
+      "disposition": "No counterpart in the complete pinned generated data/monsters and data/malice inventory. Source is included and displayed from the pinned Compendium; external comparison remains unavailable, not verified.",
+      "sourceJsonSha256": "f7ba3b0d722eb7834893a932879d1ba4160a8ad3de6230e5c9f5450bd3a66914",
+      "sourceMarkdownSha256": "ef3292c06a35cc23009eaab0fb47f666b247a1f426b7de5b4aa416f2f4590d70",
+      "projectionSha256": "445d40f3fa2864247c5a5eeb43770316260a216d0b68e14346b67bd3ac7e9115"
+    },
+    {
+      "id": "mcdm.heroes.v1/monster.summon.elementalist.statblock/source-of-earth",
+      "source": "en/books/heroes/md/monster/summon/elementalist/statblock/source-of-earth.md",
+      "name": "Source of Earth",
+      "level": 8,
+      "counterpart": "source-of-earth",
+      "disposition": "No counterpart in the complete pinned generated data/monsters and data/malice inventory. Source is included and displayed from the pinned Compendium; external comparison remains unavailable, not verified.",
+      "sourceJsonSha256": "408f6c864c76a74f26cecc489fbb7e30cc34ac1fa58d2266df33535134dfee7f",
+      "sourceMarkdownSha256": "2eb64c11d80f035a91f685c9a2b00551c3a9b3d8022e6a27f1ad68fa3fea73c6",
+      "projectionSha256": "f70ab3dc14957c021e144a4646644b4aa68d6a2cb66b74fc9b240df1320293a5"
+    }
+  ],
+  "unmatchedExternal": [
+    {
+      "id": "tactical-stance",
+      "disposition": "External Tactical Stance corresponds to the separate pinned Compendium Ajax Feature at en/books/monsters/md/monster/ajax-the-invincible/tactical-stance.md. It is outside the statblock/Malice comparison corpus and must remain accessible as Ajax supporting rules."
+    }
+  ]
+}

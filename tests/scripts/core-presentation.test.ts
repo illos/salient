@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-only
 import { execFileSync } from 'node:child_process';
-import { writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { createElement } from 'react';
@@ -12,7 +12,10 @@ import {
 import { CoreSource, SourceHtml } from '../../web/components/core-content';
 import { abilitySource } from '../../shared/presentation/ability';
 import { renderArticle } from '../../scripts/ingest-rules';
-import catalog from '../../shared/content/foes/catalog.json';
+import type { FoePackage } from '../../shared/contracts/foes';
+const catalog = JSON.parse(
+  readFileSync(new URL('../../shared/content/foes/catalog.json', import.meta.url), 'utf8'),
+) as FoePackage;
 import type { SheetAbility } from '../../shared/contracts/characterSheet';
 const revision = 'fb83a789da8f0327a389c277a0c790b1648d5810';
 function source(path: string) {
@@ -52,7 +55,7 @@ describe('shared production source presentation', () => {
       );
     }
     expect(JSON.stringify(catalog)).toBe(original);
-  });
+  }, 30_000);
   it('renders nested hero tiers and embedded kit sources without truncating effects', () => {
     const raw = source('heroes/md/feature/ability/time-raider/concussive-slam.md');
     const html = renderSource(raw);

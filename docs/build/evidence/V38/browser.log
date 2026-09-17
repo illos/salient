@@ -1,0 +1,16 @@
+
+Running 12 tests using 1 worker
+
+[1/12] tests/browser/foes-library.spec.ts:4:1 › foe browsing, composed filters, URL persistence, sorting and empty recovery
+[2/12] tests/browser/foes-library.spec.ts:48:1 › light and dark, mobile, enlarged text and keyboard search
+[3/12] tests/browser/foes-library.spec.ts:96:1 › full catalog bands, pagination, sourcebooks, Malice and related rules
+[4/12] tests/browser/foes.spec.ts:3:1 › public foes search, independent cards, navigation, dismissal and themes
+[5/12] tests/browser/foes.spec.ts:71:1 › second-echelon references preserve independent features and correct Malice navigation
+[6/12] tests/browser/v34-core-content.spec.ts:6:1 › live Rules and Foes share Core typography, automatic semantics and accessible navigation
+[7/12] tests/browser/v34-core-content.spec.ts:80:1 › live content retains readable text when the glyph font cannot load
+[8/12] tests/browser/v34-core-content.spec.ts:90:1 › hero and Director sheets use full Core content while live stats and audience stay separate
+[9/12] tests/browser/v35-full-foes.spec.ts:9:1 › all core definitions render their complete feature lists through the public consumer
+[10/12] tests/browser/v37-supporting-choices.spec.ts:11:1 › supporting choices show complete sources, prune dependent targets and persist reviewed mechanics
+[11/12] tests/browser/v37-supporting-choices.spec.ts:157:1 › Strange Inheritance lets the Director save a private sourced item without exposing it to the owner
+[12/12] tests/browser/v38-library-navigation.spec.ts:5:1 › primary navigation exposes independent Rules and Foes libraries
+  12 passed (3.7m)

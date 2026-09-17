@@ -1,3 +1,4 @@
+import { foesSearch } from './foes/filters';
 // SPDX-License-Identifier: GPL-3.0-only
 import { lazy, Suspense, useEffect, useState } from 'react';
 import {
@@ -71,8 +72,11 @@ function TopNav({ displayName }: { displayName: string }) {
           <Link to="/characters" className={navItem}>
             Characters
           </Link>
-          <Link to="/rules" className={navItem}>
+          <Link to="/rules" search={{}} className={navItem}>
             Rules
+          </Link>
+          <Link to="/foes" search={{}} className={navItem}>
+            Foes
           </Link>
         </nav>
         <div className="ml-auto flex items-center gap-4">
@@ -355,9 +359,10 @@ function rulesSearch(search: Record<string, unknown>): {
 const foesRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/foes',
+  validateSearch: foesSearch,
   component: () => (
-    <Suspense fallback={<Loading>Opening undead…</Loading>}>
-      <FoesPage />
+    <Suspense fallback={<Loading>Opening foes…</Loading>}>
+      <FoesPage filters={foesRoute.useSearch()} />
     </Suspense>
   ),
 });

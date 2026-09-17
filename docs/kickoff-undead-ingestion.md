@@ -1,5 +1,23 @@
 # Undead ingestion: kickoff and build handoff
 
+## Current slice — V30 second-echelon undead
+
+The user selected and authorized the next slice: all nine second-echelon undead and their level-four
+Malice. Work is on `slice/V30` in `/srv/presidium/projects/salient/foes`, based on main `663b49f`.
+The slice is verified on branch: 437 tests, both browser journeys and independent implementation/source
+reviews pass. Integration into main is pending. Read [V30](build/V30-second-echelon-undead.md), its current
+status and reviews before continuing.
+The older V27 checkpoint below is retained as history; its “next batch unselected” statement is superseded.
+
+V30 expands the package to 20 stat blocks, 44 abilities, 24 traits and six features in two Malice records.
+It preserves every original V27 object and edition. Batch selection, explicit counterpart mappings and
+supporting-Malice links are maintained in `scripts/foes/batches.ts`. Engine execution, live roster loading
+and persistent sharing UI remain separate. No additional monster batch is authorized by this handoff.
+
+For integration, refresh Chords and current main, preserve peer work, rebase and run the required checks.
+An assigned merge includes verification at the shared playable development target under the standing
+merge directive. This branch's isolated browser target is frontend 5187; it needs no backend or data seed.
+
 ## Resume checkpoint — 2026-09-16
 
 **V27 is complete, merged and live.** Main was clean at `e6ba249` when this checkpoint began.
@@ -20,7 +38,7 @@ and [consumer contract](../shared/foes/README.md); do not rebuild the finished s
 - The next coverage batch/family is **not selected**. This checkpoint starts no new implementation.
   Engine execution, live foe loading and sharing UI remain separately scoped work.
 
-## Ready-to-paste resume
+## Historical V27 resume prompt
 
 ```text
 Resume the foe ingestion track from docs/kickoff-undead-ingestion.md in the current main checkout.

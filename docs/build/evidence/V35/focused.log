@@ -1,0 +1,13 @@
+
+ RUN  v4.1.11 /app
+
+ ✓  scripts  tests/scripts/foes.test.ts (25 tests) 30908ms
+     ✓ regenerates twice byte-for-byte and retains exact pinned input  30058ms
+ ✓  scripts  tests/scripts/core-presentation.test.ts (7 tests) 14095ms
+     ✓ projects all immutable Foe edition objects without editing their source HTML  1335ms
+   ✓ covers every Core glyph family through the production projection and React semantics  12640ms
+
+ Test Files  2 passed (2)
+      Tests  32 passed (32)
+   Start at  03:13:16
+   Duration  46.26s (transform 227ms, setup 0ms, import 981ms, tests 45.00s, environment 0ms)

@@ -95,6 +95,11 @@ choose a final UI layout.
 
 ## User-visible flow
 
+Confirmed 2026-09-17: the app exposes Rules and Foes as separate top-level destinations.
+The primary navigation has a **Rules** link to `/rules` and a **Foes** link to `/foes`.
+Each library keeps its own dataset, search and filters; cross-reference links connect related
+content without combining the catalogs. Both reference destinations remain publicly readable.
+
 1. Browse or search Foes. Proposed filters: name, level, organization, role, creature group/keywords, and
    sourcebook. Optional search by feature name can help locate mechanics.
 2. Open a foe to see its stat block, traits, abilities, captain benefit, immunities/weaknesses, and relevant
@@ -311,6 +316,33 @@ The read-only `/foes` route and reusable `FoeView` provide whole-block and indep
 existing themes, related Rules navigation inside the card and focus-restoring dismissal. Live loading,
 parser execution, squads and persistent sharing UI remain outside this slice. Existing Goblin support
 and private encounter state are unchanged. Verification/reviews are recorded in [V27](build/V27-undead-ingestion.md).
+
+### V30 implementation — 2026-09-16
+
+The structured package adds all nine second-echelon undead: 20 stat blocks in total, 44 abilities,
+24 traits and six features in two shared Malice records. A maintained batch list selects source paths,
+external counterpart identities and supporting Malice references. Level-four monsters link to level-four
+Malice, whose prior-features reference links to level-one Malice. Existing V27 objects and its exact
+immutable edition remain unchanged; the expanded package receives a new edition.
+
+All 22 parent records have explicit comparison outcomes in the [V30 report](build/evidence/V30-steel-cauldron.json).
+Second-echelon minion counterparts omit the printed four-minion EV quantity; source values are retained
+and the guarded discrepancy is explained. Comparison still rejects explicit conflicting quantities,
+changed amounts and missing/ambiguous counterparts. No new source corrections or engine behaviors
+were introduced. See the [slice verification](build/V30-second-echelon-undead.md).
+
+### Full core ingestion implementation — 2026-09-17
+
+V35 extends the source package to all 438 core stat blocks and all 63 core Malice parents, with
+2,006 independently addressable features. It adds a compact browser projection, explicit group and
+sourcebook facets, source-checked contextual Rules links, and exact original source retention.
+The user assigned the library browse/sort UI to a parallel thread; live roster loading and ability
+execution remain separate. See [V35](build/V35-full-core-ingestion.md) for actual verification/branch
+status and [the consumer contract](../shared/foes/README.md) for the generated interface.
+
+Two guarded source repairs address malformed Gnoll extraction and omitted/mislabeled Hag material.
+Every parent has a comparison outcome; unavailable external counterparts are explicit, not successes
+or omitted denominators. Corrections do not advance the pinned source or overwrite old editions.
 
 ### Full-output comparison — confirmed 2026-09-16
 
@@ -533,3 +565,20 @@ catalog-only milestone must not claim those behaviors are complete.
 
 These decisions do not block the written design. They remain proposals to address in the relevant later
 implementation task.
+
+## Foes library browsing — V36
+
+The public `/foes` library follows the Rules index layout, with a monster-band sidebar, a responsive
+list and shared Core reference cards. A band is the source monster family/group, independently of
+organization and level. Stat blocks are the default; abilities, traits, Malice and all-reference views
+remain available. Filters combine band, level, role, organization, sourcebook, keyword and ability usage. Search
+includes names, source text and a creature's feature names/text, with exact-title priority, partial
+matching and typo tolerance. Sorting supports name, band, level in both directions and printed EV
+amount; EV quantities remain visibly attached and no encounter arithmetic is implied.
+
+Filter/search/sort state lives in the URL and survives reload and reference-card dismissal. Results
+are revealed in batches of 40. Cards retain complete source, feature/parent navigation, related Malice,
+nested rules navigation, keyboard dismissal and focus restoration. Reading remains public and separate
+from live roster loading. The catalog determines available bands/levels/roles and actual coverage;
+this UI does not add content or confer automation support. Verification is tracked in
+[the V36 slice](build/V36-foes-library.md).
