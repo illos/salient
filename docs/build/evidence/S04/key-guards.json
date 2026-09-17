@@ -1,0 +1,10 @@
+[
+  {
+    "target": "prod:different-bat-943",
+    "rejected": true
+  },
+  {
+    "target": "dev:wrong-target",
+    "rejected": true
+  }
+]

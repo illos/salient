@@ -1,0 +1,11 @@
+{
+  "classification": "dev",
+  "url": "https://different-bat-943.convex.cloud",
+  "functionCount": 68,
+  "envNames": [
+    "BETTER_AUTH_SECRET",
+    "SITE_URL"
+  ],
+  "siteUrl": "https://salient-dev.rdxx.workers.dev",
+  "authSecretPresent": true
+}

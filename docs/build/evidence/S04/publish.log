@@ -1,0 +1,86 @@
+Target: dev (different-bat-943); frontend https://salient-dev.rdxx.workers.dev; operation frontend
+Progress: resolved 1, reused 0, downloaded 0, added 0
+Progress: resolved 36, reused 0, downloaded 9, added 0
+Packages: +35
++++++++++++++++++++++++++++++++++++
+Progress: resolved 91, reused 0, downloaded 15, added 0
+Progress: resolved 91, reused 0, downloaded 35, added 33
+Progress: resolved 91, reused 0, downloaded 36, added 33
+Progress: resolved 91, reused 0, downloaded 37, added 34
+Progress: resolved 91, reused 0, downloaded 38, added 35, done
+Added 8 entries to minimumReleaseAgeExclude in pnpm-workspace.yaml (set minimumReleaseAgeStrict to true to gate these updates with a prompt):
+  @cloudflare/workerd-darwin-64@1.20260917.1
+  @cloudflare/workerd-darwin-arm64@1.20260917.1
+  @cloudflare/workerd-linux-64@1.20260917.1
+  @cloudflare/workerd-linux-arm64@1.20260917.1
+  @cloudflare/workerd-windows-64@1.20260917.1
+  miniflare@5.20260917.0-alpha
+  workerd@1.20260917.1
+  wrangler@4.134.0
+
+ ⛅️ wrangler 4.134.0
+────────────────────
+🌀 Building list of assets...
+✨ Read 54 files from the assets directory /app/dist
+🌀 Starting asset upload...
+🌀 Found 50 new or modified static assets to upload. Proceeding with upload...
++ /icons/rulebook.svg
++ /assets/preview-COsT8h1n.js
++ /assets/x-B2CtMrqX.js
++ /rules-data/b3fb9fdf79c0cd37/heroes-condition.json
++ /assets/rules-Bq2CVEkc.js
++ /assets/schibsted-grotesk-latin-ext-wght-normal-hsMS0n0O.woff2
++ /rules-data/b3fb9fdf79c0cd37/heroes-negotiation.json
++ /rules-data/b3fb9fdf79c0cd37/monsters-rule.json
++ /rules-data/b3fb9fdf79c0cd37/heroes-saint.json
++ /rules-data/b3fb9fdf79c0cd37/heroes-god.json
++ /rules-data/b3fb9fdf79c0cd37/heroes-project.json
++ /rules-data/b3fb9fdf79c0cd37/heroes-ancestry.json
++ /rules-data/b3fb9fdf79c0cd37/monsters-dynamic-terrain.json
++ /rules-data/b3fb9fdf79c0cd37/heroes-rule.json
++ /assets/index-mBknbwdD.js
++ /rules-data/b3fb9fdf79c0cd37/search.json
++ /rules-data/b3fb9fdf79c0cd37/monsters-chapter.json
++ /assets/search-Csys-MlF.js
++ /index.html
++ /rules-data/b3fb9fdf79c0cd37/heroes-statblock.json
++ /assets/article-Dre97K8_.css
++ /rules-data/b3fb9fdf79c0cd37/heroes-culture.json
++ /assets/DrawSteelGlyphs-Regular-Bxmll151.otf
++ /rules-data/b3fb9fdf79c0cd37/heroes-perk.json
++ /assets/schibsted-grotesk-latin-wght-normal-Bb8VGrTG.woff2
++ /assets/index-iymW9mKQ.css
++ /rules-data/b3fb9fdf79c0cd37/heroes-title.json
++ /rules-data/b3fb9fdf79c0cd37/heroes-trait.json
++ /rules-data/audit.json
++ /rules-data/b3fb9fdf79c0cd37/monsters-monster.json
++ /rules-data/b3fb9fdf79c0cd37/heroes-ability.json
++ /rules-data/b3fb9fdf79c0cd37/heroes-class.json
++ /rules-data/b3fb9fdf79c0cd37/heroes-chapter.json
++ /assets/foes-W2LmpIph.js
++ /assets/overlay-card-C1jW4vvI.css
++ /assets/foes-BGgFncNM.css
++ /rules-data/b3fb9fdf79c0cd37/heroes-skill.json
++ /assets/article-BWyiCa1k.js
++ /assets/search.worker-oMKCTI8n.js
++ /rules-data/b3fb9fdf79c0cd37/heroes-skill-group.json
++ /rules-data/b3fb9fdf79c0cd37/heroes-movement.json
++ /rules-data/b3fb9fdf79c0cd37/heroes-career.json
++ /assets/overlay-card-C2Cf5NBo.js
++ /rules-data/b3fb9fdf79c0cd37/heroes-complication.json
++ /rules-data/b3fb9fdf79c0cd37/heroes-kit.json
++ /rules-data/b3fb9fdf79c0cd37/heroes-treasure.json
++ /rules-data/b3fb9fdf79c0cd37/monsters-featureblock.json
++ /rules-data/catalog.json
++ /rules-data/b3fb9fdf79c0cd37/heroes-feature.json
++ /rules-data/b3fb9fdf79c0cd37/monsters-statblock.json
+Uploaded 16 of 50 assets
+Uploaded 33 of 50 assets
+Uploaded 50 of 50 assets
+✨ Success! Uploaded 50 files (15.59 sec)
+
+Total Upload: 0.44 KiB / gzip: 0.31 KiB
+Uploaded salient-dev (18.38 sec)
+Deployed salient-dev triggers (0.69 sec)
+  https://salient-dev.rdxx.workers.dev
+Current Version ID: e5d0f086-0964-4434-92d8-656e7a11276e

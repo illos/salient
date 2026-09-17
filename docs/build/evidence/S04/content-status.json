@@ -1,0 +1,14 @@
+{
+  "url": "https://different-bat-943.convex.cloud",
+  "method": "authenticated ordinary-user CLI content:status from hosted table-audit",
+  "contentStatus": {
+    "committedAt": "2026-09-07T22:14:55-04:00",
+    "contentHash": "sha256:64a08e925f76657409df983b706d2599edcb499457e9b21325d65ee7268c10d8",
+    "entryCount": 483,
+    "generatedAt": "2026-09-08",
+    "generatorVersion": "1.0.3",
+    "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+    "seededAt": 1789663636295,
+    "tag": "v4.20260908021459"
+  }
+}

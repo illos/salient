@@ -1,0 +1,1814 @@
+{
+  "campaignId": "jh7f1da2906mss9kqyxbk9xf0d8ejhg7",
+  "contentStatus": {
+    "committedAt": "2026-09-07T22:14:55-04:00",
+    "contentHash": "sha256:64a08e925f76657409df983b706d2599edcb499457e9b21325d65ee7268c10d8",
+    "entryCount": 483,
+    "generatedAt": "2026-09-08",
+    "generatorVersion": "1.0.3",
+    "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+    "seededAt": 1789663636295,
+    "tag": "v4.20260908021459"
+  },
+  "before": {
+    "foes": [
+      {
+        "conditions": {
+          "bleeding": false,
+          "dazed": false,
+          "frightened": false,
+          "grabbed": false,
+          "prone": false,
+          "restrained": false,
+          "slowed": false,
+          "taunted": false,
+          "weakened": false
+        },
+        "health": {
+          "maxStamina": 15,
+          "mode": "director",
+          "stamina": 15,
+          "temporaryStamina": 0,
+          "winded": false
+        },
+        "id": "m574avyns73ahc4pab8zyxk7t18ekzfp",
+        "name": "Goblin Warrior",
+        "slain": false
+      }
+    ],
+    "healthDisplay": "bar",
+    "heroes": [
+      {
+        "controlled": true,
+        "id": "k576rk24sbkg7xxwg27t66kqas8ej77s",
+        "live": {
+          "conditions": {
+            "bleeding": false,
+            "dazed": false,
+            "frightened": false,
+            "grabbed": false,
+            "prone": false,
+            "restrained": false,
+            "slowed": false,
+            "taunted": false,
+            "weakened": false
+          },
+          "heroicResource": {
+            "current": 0,
+            "name": "ferocity"
+          },
+          "origin": {
+            "buildRevisionId": "jx73jm8zf3y4re9kh65nes28g18ek2ht",
+            "evaluatedAgainst": {
+              "compendiumRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+              "definitionsSchemaVersion": "r01.1"
+            },
+            "initializedAt": 1789664331503,
+            "kind": "first-admission"
+          },
+          "recoveries": 10,
+          "stamina": 30,
+          "surges": 0,
+          "temporaryStamina": 0,
+          "victories": 0,
+          "xp": 0
+        },
+        "name": "Thorn e8bf4950",
+        "ownerId": "ns7b1nhbpnq9h6h8vner8gh7h18ej4hd",
+        "ownerName": "Player e8bf4950"
+      },
+      {
+        "controlled": true,
+        "id": "k570sfb1hkkepsaphg3nsqphcs8ejsgm",
+        "live": {
+          "conditions": {
+            "bleeding": false,
+            "dazed": false,
+            "frightened": false,
+            "grabbed": false,
+            "prone": false,
+            "restrained": false,
+            "slowed": false,
+            "taunted": false,
+            "weakened": false
+          },
+          "heroicResource": {
+            "current": 0,
+            "name": "ferocity"
+          },
+          "origin": {
+            "buildRevisionId": "jx71w6v9rz7zhdydzj4s87mm418ekfdq",
+            "evaluatedAgainst": {
+              "compendiumRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+              "definitionsSchemaVersion": "r01.1"
+            },
+            "initializedAt": 1789664339908,
+            "kind": "first-admission"
+          },
+          "recoveries": 10,
+          "stamina": 30,
+          "surges": 0,
+          "temporaryStamina": 0,
+          "victories": 0,
+          "xp": 0
+        },
+        "name": "Watcher e8bf4950",
+        "ownerId": "ns7cvw46s7cg4fwmmmxj144pad8ejt7e",
+        "ownerName": "Observer e8bf4950"
+      }
+    ],
+    "malice": 0,
+    "role": "director",
+    "session": {
+      "id": "n57dmv5p6tx6dfry000hbxswss8ejxmf",
+      "revision": 0,
+      "status": "running"
+    },
+    "settings": {
+      "enableUserUndo": true,
+      "healthDisplay": "bar",
+      "showMalice": false,
+      "showTestDifficulty": false
+    },
+    "viewerId": "ns7fv820crtwgs8maq0gdp2qx18ej8fa"
+  },
+  "after": {
+    "foes": [
+      {
+        "conditions": {
+          "bleeding": false,
+          "dazed": false,
+          "frightened": false,
+          "grabbed": false,
+          "prone": false,
+          "restrained": false,
+          "slowed": false,
+          "taunted": false,
+          "weakened": false
+        },
+        "health": {
+          "maxStamina": 15,
+          "mode": "director",
+          "stamina": 11,
+          "temporaryStamina": 0,
+          "winded": false
+        },
+        "id": "m574avyns73ahc4pab8zyxk7t18ekzfp",
+        "name": "Goblin Warrior",
+        "slain": false
+      }
+    ],
+    "healthDisplay": "bar",
+    "heroes": [
+      {
+        "controlled": true,
+        "id": "k576rk24sbkg7xxwg27t66kqas8ej77s",
+        "live": {
+          "conditions": {
+            "bleeding": false,
+            "dazed": false,
+            "frightened": false,
+            "grabbed": false,
+            "prone": false,
+            "restrained": false,
+            "slowed": false,
+            "taunted": false,
+            "weakened": false
+          },
+          "heroicResource": {
+            "current": 0,
+            "name": "ferocity"
+          },
+          "origin": {
+            "buildRevisionId": "jx73jm8zf3y4re9kh65nes28g18ek2ht",
+            "evaluatedAgainst": {
+              "compendiumRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+              "definitionsSchemaVersion": "r01.1"
+            },
+            "initializedAt": 1789664331503,
+            "kind": "first-admission"
+          },
+          "recoveries": 10,
+          "stamina": 30,
+          "surges": 0,
+          "temporaryStamina": 0,
+          "victories": 0,
+          "xp": 0
+        },
+        "name": "Thorn e8bf4950",
+        "ownerId": "ns7b1nhbpnq9h6h8vner8gh7h18ej4hd",
+        "ownerName": "Player e8bf4950"
+      },
+      {
+        "controlled": true,
+        "id": "k570sfb1hkkepsaphg3nsqphcs8ejsgm",
+        "live": {
+          "conditions": {
+            "bleeding": false,
+            "dazed": false,
+            "frightened": false,
+            "grabbed": false,
+            "prone": false,
+            "restrained": false,
+            "slowed": false,
+            "taunted": false,
+            "weakened": false
+          },
+          "heroicResource": {
+            "current": 0,
+            "name": "ferocity"
+          },
+          "origin": {
+            "buildRevisionId": "jx71w6v9rz7zhdydzj4s87mm418ekfdq",
+            "evaluatedAgainst": {
+              "compendiumRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+              "definitionsSchemaVersion": "r01.1"
+            },
+            "initializedAt": 1789664339908,
+            "kind": "first-admission"
+          },
+          "recoveries": 10,
+          "stamina": 30,
+          "surges": 0,
+          "temporaryStamina": 0,
+          "victories": 0,
+          "xp": 0
+        },
+        "name": "Watcher e8bf4950",
+        "ownerId": "ns7cvw46s7cg4fwmmmxj144pad8ejt7e",
+        "ownerName": "Observer e8bf4950"
+      }
+    ],
+    "malice": 0,
+    "role": "director",
+    "session": {
+      "id": "n57dmv5p6tx6dfry000hbxswss8ejxmf",
+      "revision": 0,
+      "status": "running"
+    },
+    "settings": {
+      "enableUserUndo": true,
+      "healthDisplay": "bar",
+      "showMalice": false,
+      "showTestDifficulty": false
+    },
+    "viewerId": "ns7fv820crtwgs8maq0gdp2qx18ej8fa"
+  },
+  "rolled": {
+    "description": "rolled 2d10: 10, 9.",
+    "eventId": "kx7dpsj4wandqcfa6vdhac3znd8ejbay",
+    "interactionId": null,
+    "sequence": 11
+  },
+  "playerRolled": {
+    "description": "rolled 2d10: 10, 10.",
+    "eventId": "kx7dqqfza458xeavdvpnhyt75n8ekz0v",
+    "interactionId": null,
+    "sequence": 12
+  },
+  "pending": {
+    "actorLabel": null,
+    "answer": null,
+    "createdAt": 1789664364356,
+    "id": "mn795v1qn599azv5sygqmwfy2d8ekgdz",
+    "kind": "guided-input",
+    "mayAnswer": true,
+    "openedEventId": "kx7caqn59p772xn4vchmvzvzp98ekksh",
+    "operation": "table.roll",
+    "requesterName": "Director e8bf4950",
+    "requiredInputs": [
+      {
+        "description": "Dice as NdS, for example \"2d10\" or \"d6\". Omit it to be asked.",
+        "name": "dice",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "resolvedAt": null,
+    "resolvedEventId": null,
+    "revision": 0,
+    "sessionId": "n57dmv5p6tx6dfry000hbxswss8ejxmf",
+    "status": "awaiting-input"
+  },
+  "resolved": {
+    "actorLabel": null,
+    "answer": {
+      "dice": "d6"
+    },
+    "createdAt": 1789664364356,
+    "id": "mn795v1qn599azv5sygqmwfy2d8ekgdz",
+    "kind": "guided-input",
+    "mayAnswer": false,
+    "openedEventId": "kx7caqn59p772xn4vchmvzvzp98ekksh",
+    "operation": "table.roll",
+    "requesterName": "Director e8bf4950",
+    "requiredInputs": [
+      {
+        "description": "Dice as NdS, for example \"2d10\" or \"d6\". Omit it to be asked.",
+        "name": "dice",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "resolvedAt": 1789664369047,
+    "resolvedEventId": "kx7ex48cak9c41p5xc7bsgyqzh8ekby8",
+    "revision": 1,
+    "sessionId": "n57dmv5p6tx6dfry000hbxswss8ejxmf",
+    "status": "resolved"
+  },
+  "history": {
+    "events": [
+      {
+        "actorName": "Director e8bf4950",
+        "causeEventId": "kx7caqn59p772xn4vchmvzvzp98ekksh",
+        "commandId": "cf51c1d8-4a56-4af9-8e09-9bf6487a623b",
+        "createdAt": 1789664369047,
+        "description": "rolled d6: 5.",
+        "dice": [
+          {
+            "id": "die-1",
+            "sides": 6,
+            "value": 5
+          }
+        ],
+        "disposition": "applied",
+        "encounterId": null,
+        "id": "kx7ex48cak9c41p5xc7bsgyqzh8ekby8",
+        "kind": "table.roll",
+        "origin": "user",
+        "payload": {
+          "data": {
+            "dice": "d6",
+            "rollId": "n178x0kwr23fbd0sht2ca44wen8ekere"
+          },
+          "envelope": {
+            "actor": null,
+            "arguments": {
+              "dice": "d6"
+            },
+            "boundActor": null,
+            "campaignId": "jh7f1da2906mss9kqyxbk9xf0d8ejhg7",
+            "commandId": "cf51c1d8-4a56-4af9-8e09-9bf6487a623b",
+            "issuerId": "ns7fv820crtwgs8maq0gdp2qx18ej8fa",
+            "operation": "table.roll",
+            "schemaVersion": 1
+          },
+          "respondsTo": {
+            "answer": {
+              "dice": "d6"
+            },
+            "interactionId": "mn795v1qn599azv5sygqmwfy2d8ekgdz"
+          }
+        },
+        "sequence": 14,
+        "sessionId": "n57dmv5p6tx6dfry000hbxswss8ejxmf"
+      },
+      {
+        "actorName": "Director e8bf4950",
+        "causeEventId": null,
+        "commandId": "d10cedd8-ce50-428b-bdff-b5fbd349e137",
+        "createdAt": 1789664364356,
+        "description": "Director e8bf4950 — awaiting input: which dice to roll.",
+        "disposition": "applied",
+        "encounterId": null,
+        "id": "kx7caqn59p772xn4vchmvzvzp98ekksh",
+        "kind": "interaction.opened",
+        "origin": "user",
+        "payload": {
+          "envelope": {
+            "actor": null,
+            "arguments": {},
+            "boundActor": null,
+            "campaignId": "jh7f1da2906mss9kqyxbk9xf0d8ejhg7",
+            "commandId": "d10cedd8-ce50-428b-bdff-b5fbd349e137",
+            "issuerId": "ns7fv820crtwgs8maq0gdp2qx18ej8fa",
+            "operation": "table.roll",
+            "schemaVersion": 1
+          }
+        },
+        "sequence": 13,
+        "sessionId": "n57dmv5p6tx6dfry000hbxswss8ejxmf"
+      },
+      {
+        "actorName": "Player e8bf4950",
+        "causeEventId": null,
+        "commandId": "f72bafc8-74c7-4a59-9ef1-66fef2f98398",
+        "createdAt": 1789664362103,
+        "description": "rolled 2d10: 10, 10.",
+        "dice": [
+          {
+            "id": "die-1",
+            "sides": 10,
+            "value": 10
+          },
+          {
+            "id": "die-2",
+            "sides": 10,
+            "value": 10
+          }
+        ],
+        "disposition": "applied",
+        "encounterId": null,
+        "id": "kx7dqqfza458xeavdvpnhyt75n8ekz0v",
+        "kind": "table.roll",
+        "origin": "user",
+        "payload": {
+          "data": {
+            "dice": "2d10",
+            "rollId": "n170pt9adqg60p5vkabyncx9318ej75e"
+          },
+          "envelope": {
+            "actor": null,
+            "arguments": {
+              "dice": "2d10"
+            },
+            "boundActor": null,
+            "campaignId": "jh7f1da2906mss9kqyxbk9xf0d8ejhg7",
+            "commandId": "f72bafc8-74c7-4a59-9ef1-66fef2f98398",
+            "issuerId": "ns7b1nhbpnq9h6h8vner8gh7h18ej4hd",
+            "operation": "table.roll",
+            "schemaVersion": 1
+          }
+        },
+        "sequence": 12,
+        "sessionId": "n57dmv5p6tx6dfry000hbxswss8ejxmf"
+      },
+      {
+        "actorName": "Director e8bf4950",
+        "causeEventId": null,
+        "commandId": "f72bafc8-74c7-4a59-9ef1-66fef2f98398",
+        "createdAt": 1789664357432,
+        "description": "rolled 2d10: 10, 9.",
+        "dice": [
+          {
+            "id": "die-1",
+            "sides": 10,
+            "value": 10
+          },
+          {
+            "id": "die-2",
+            "sides": 10,
+            "value": 9
+          }
+        ],
+        "disposition": "applied",
+        "encounterId": null,
+        "id": "kx7dpsj4wandqcfa6vdhac3znd8ejbay",
+        "kind": "table.roll",
+        "origin": "user",
+        "payload": {
+          "data": {
+            "dice": "2d10",
+            "rollId": "n1758r1y3wsgf34dg8dhgn3e8n8ejkr4"
+          },
+          "envelope": {
+            "actor": null,
+            "arguments": {
+              "dice": "2d10"
+            },
+            "boundActor": null,
+            "campaignId": "jh7f1da2906mss9kqyxbk9xf0d8ejhg7",
+            "commandId": "f72bafc8-74c7-4a59-9ef1-66fef2f98398",
+            "issuerId": "ns7fv820crtwgs8maq0gdp2qx18ej8fa",
+            "operation": "table.roll",
+            "schemaVersion": 1
+          }
+        },
+        "sequence": 11,
+        "sessionId": "n57dmv5p6tx6dfry000hbxswss8ejxmf"
+      },
+      {
+        "actorName": "Director e8bf4950",
+        "causeEventId": null,
+        "commandId": "0191e3cc-9154-4e41-89a3-69dfab6326e1",
+        "createdAt": 1789664351035,
+        "description": "Manual adjustment — Goblin Warrior Stamina 15 → 11.",
+        "disposition": "applied",
+        "encounterId": null,
+        "id": "kx7fr3dpdksjdrfzm9jmj4jdxh8eksbt",
+        "kind": "manual.adjustment",
+        "origin": "user",
+        "payload": {
+          "data": {
+            "after": 11,
+            "before": 15,
+            "creature": {
+              "id": "m574avyns73ahc4pab8zyxk7t18ekzfp",
+              "kind": "foe"
+            },
+            "field": "stamina",
+            "label": "Stamina"
+          },
+          "envelope": {
+            "actor": {
+              "id": "m574avyns73ahc4pab8zyxk7t18ekzfp",
+              "refKind": "foe"
+            },
+            "arguments": {
+              "value": 11
+            },
+            "boundActor": {
+              "id": "m574avyns73ahc4pab8zyxk7t18ekzfp",
+              "kind": "foe",
+              "name": "Goblin Warrior"
+            },
+            "campaignId": "jh7f1da2906mss9kqyxbk9xf0d8ejhg7",
+            "commandId": "0191e3cc-9154-4e41-89a3-69dfab6326e1",
+            "expectedRevision": 0,
+            "issuerId": "ns7fv820crtwgs8maq0gdp2qx18ej8fa",
+            "operation": "adjust.stamina",
+            "schemaVersion": 1
+          }
+        },
+        "sequence": 10,
+        "sessionId": "n57dmv5p6tx6dfry000hbxswss8ejxmf"
+      },
+      {
+        "actorName": "Director e8bf4950",
+        "causeEventId": null,
+        "commandId": "6abca544-b886-4932-8fc9-91b62b2f23d7",
+        "createdAt": 1789664343040,
+        "description": "Goblin Warrior added to the foes roster.",
+        "disposition": "applied",
+        "encounterId": null,
+        "id": "kx77z3qrsy72zhqe1y1sekxx298ekcjd",
+        "kind": "foe-added",
+        "origin": "user",
+        "payload": {
+          "data": {
+            "definitionId": "mcdm.monsters.v1/monster.goblin.statblock/goblin-warrior"
+          },
+          "envelope": {
+            "actor": null,
+            "arguments": {
+              "definition": "mcdm.monsters.v1/monster.goblin.statblock/goblin-warrior"
+            },
+            "boundActor": null,
+            "campaignId": "jh7f1da2906mss9kqyxbk9xf0d8ejhg7",
+            "commandId": "6abca544-b886-4932-8fc9-91b62b2f23d7",
+            "issuerId": "ns7fv820crtwgs8maq0gdp2qx18ej8fa",
+            "operation": "foe.add",
+            "schemaVersion": 1
+          }
+        },
+        "sequence": 9,
+        "sessionId": "n57dmv5p6tx6dfry000hbxswss8ejxmf"
+      },
+      {
+        "actorName": "Director e8bf4950",
+        "causeEventId": null,
+        "commandId": "181eb589-a973-40e3-a483-56e8bdf26c68",
+        "createdAt": 1789664339908,
+        "description": "Watcher e8bf4950 admitted: the Director approved revision 2.",
+        "disposition": "applied",
+        "encounterId": null,
+        "id": "kx7e0qxcfap2ay4xjmp98bgctn8eknen",
+        "kind": "character.admitted",
+        "origin": "user",
+        "payload": {
+          "data": {
+            "characterId": "k570sfb1hkkepsaphg3nsqphcs8ejsgm",
+            "firstAdmission": true,
+            "kind": "admission",
+            "reconciliation": {
+              "changes": [],
+              "incompatibleResource": null
+            },
+            "review": "approved",
+            "reviewId": "js73vnberp4bhpt5qrkackpwf18ekvgj",
+            "revision": 2,
+            "revisionAfter": "jx71w6v9rz7zhdydzj4s87mm418ekfdq",
+            "revisionBefore": null
+          },
+          "envelope": {
+            "actor": null,
+            "arguments": {
+              "character": {
+                "id": "k570sfb1hkkepsaphg3nsqphcs8ejsgm",
+                "refKind": "character"
+              }
+            },
+            "boundActor": null,
+            "campaignId": "jh7f1da2906mss9kqyxbk9xf0d8ejhg7",
+            "commandId": "181eb589-a973-40e3-a483-56e8bdf26c68",
+            "issuerId": "ns7fv820crtwgs8maq0gdp2qx18ej8fa",
+            "operation": "character.approve",
+            "schemaVersion": 1
+          }
+        },
+        "sequence": 8,
+        "sessionId": "n57dmv5p6tx6dfry000hbxswss8ejxmf"
+      },
+      {
+        "actorName": "Observer e8bf4950",
+        "causeEventId": null,
+        "commandId": "9f4f17f5-aaec-4b38-bf5a-d4ab6adbdc3d",
+        "createdAt": 1789664337839,
+        "description": "Watcher e8bf4950 (revision 2) submitted for admission; the effective build is unchanged until the Director approves.",
+        "disposition": "applied",
+        "encounterId": null,
+        "id": "kx78t0mqn67w3pebcbkmxt8emd8ej6h9",
+        "kind": "character.submitted",
+        "origin": "user",
+        "payload": {
+          "data": {
+            "characterId": "k570sfb1hkkepsaphg3nsqphcs8ejsgm",
+            "kind": "admission",
+            "reviewId": "js73vnberp4bhpt5qrkackpwf18ekvgj",
+            "revision": 2,
+            "revisionId": "jx71w6v9rz7zhdydzj4s87mm418ekfdq"
+          },
+          "envelope": {
+            "actor": null,
+            "arguments": {
+              "character": {
+                "id": "k570sfb1hkkepsaphg3nsqphcs8ejsgm",
+                "refKind": "character"
+              }
+            },
+            "boundActor": null,
+            "campaignId": "jh7f1da2906mss9kqyxbk9xf0d8ejhg7",
+            "commandId": "9f4f17f5-aaec-4b38-bf5a-d4ab6adbdc3d",
+            "issuerId": "ns7cvw46s7cg4fwmmmxj144pad8ejt7e",
+            "operation": "character.submit",
+            "schemaVersion": 1
+          }
+        },
+        "sequence": 7,
+        "sessionId": "n57dmv5p6tx6dfry000hbxswss8ejxmf"
+      },
+      {
+        "actorName": "Director e8bf4950",
+        "causeEventId": null,
+        "commandId": "bb2b582c-dc35-4223-9bcf-bbcbc80853d3",
+        "createdAt": 1789664331503,
+        "description": "Thorn e8bf4950 admitted: the Director approved revision 2.",
+        "disposition": "applied",
+        "encounterId": null,
+        "id": "kx70rh610hve26ge62nc35w9858ekdmy",
+        "kind": "character.admitted",
+        "origin": "user",
+        "payload": {
+          "data": {
+            "characterId": "k576rk24sbkg7xxwg27t66kqas8ej77s",
+            "firstAdmission": true,
+            "kind": "admission",
+            "reconciliation": {
+              "changes": [],
+              "incompatibleResource": null
+            },
+            "review": "approved",
+            "reviewId": "js7ek6w5cxe0f5wfa8cz9bar618ekahv",
+            "revision": 2,
+            "revisionAfter": "jx73jm8zf3y4re9kh65nes28g18ek2ht",
+            "revisionBefore": null
+          },
+          "envelope": {
+            "actor": null,
+            "arguments": {
+              "character": {
+                "id": "k576rk24sbkg7xxwg27t66kqas8ej77s",
+                "refKind": "character"
+              }
+            },
+            "boundActor": null,
+            "campaignId": "jh7f1da2906mss9kqyxbk9xf0d8ejhg7",
+            "commandId": "bb2b582c-dc35-4223-9bcf-bbcbc80853d3",
+            "issuerId": "ns7fv820crtwgs8maq0gdp2qx18ej8fa",
+            "operation": "character.approve",
+            "schemaVersion": 1
+          }
+        },
+        "sequence": 6,
+        "sessionId": "n57dmv5p6tx6dfry000hbxswss8ejxmf"
+      },
+      {
+        "actorName": "Player e8bf4950",
+        "causeEventId": null,
+        "commandId": "d5efa1f2-a191-460d-95ef-dec416ef8fd5",
+        "createdAt": 1789664329299,
+        "description": "Thorn e8bf4950 (revision 2) submitted for admission; the effective build is unchanged until the Director approves.",
+        "disposition": "applied",
+        "encounterId": null,
+        "id": "kx7383e602277j1rkb0etxf3bs8ej89j",
+        "kind": "character.submitted",
+        "origin": "user",
+        "payload": {
+          "data": {
+            "characterId": "k576rk24sbkg7xxwg27t66kqas8ej77s",
+            "kind": "admission",
+            "reviewId": "js7ek6w5cxe0f5wfa8cz9bar618ekahv",
+            "revision": 2,
+            "revisionId": "jx73jm8zf3y4re9kh65nes28g18ek2ht"
+          },
+          "envelope": {
+            "actor": null,
+            "arguments": {
+              "character": {
+                "id": "k576rk24sbkg7xxwg27t66kqas8ej77s",
+                "refKind": "character"
+              }
+            },
+            "boundActor": null,
+            "campaignId": "jh7f1da2906mss9kqyxbk9xf0d8ejhg7",
+            "commandId": "d5efa1f2-a191-460d-95ef-dec416ef8fd5",
+            "issuerId": "ns7b1nhbpnq9h6h8vner8gh7h18ej4hd",
+            "operation": "character.submit",
+            "schemaVersion": 1
+          }
+        },
+        "sequence": 5,
+        "sessionId": "n57dmv5p6tx6dfry000hbxswss8ejxmf"
+      },
+      {
+        "actorName": "Director e8bf4950",
+        "causeEventId": null,
+        "commandId": "b84ab05d-ebbb-402d-8b3a-26ccdc9515db",
+        "createdAt": 1789664320561,
+        "description": "Started a session.",
+        "disposition": "applied",
+        "encounterId": null,
+        "id": "kx77dgr59vfkbn10k16ea3crcn8ek38k",
+        "kind": "session.started",
+        "origin": "user",
+        "sequence": 4,
+        "sessionId": "n57dmv5p6tx6dfry000hbxswss8ejxmf"
+      },
+      {
+        "actorName": "Director e8bf4950",
+        "causeEventId": null,
+        "commandId": "ee7fd6f6-9d7d-4826-8e59-9253a3e382f5",
+        "createdAt": 1789664320398,
+        "description": "Admitted Observer e8bf4950.",
+        "disposition": "applied",
+        "encounterId": null,
+        "id": "kx7ed55n9ccg1f8g84bm04jkxd8ejvjm",
+        "kind": "membership.approved",
+        "origin": "user",
+        "sequence": 3,
+        "sessionId": null
+      },
+      {
+        "actorName": "Director e8bf4950",
+        "causeEventId": null,
+        "commandId": "b3853ac5-402c-447e-9e5d-94cb36a19102",
+        "createdAt": 1789664314091,
+        "description": "Admitted Player e8bf4950.",
+        "disposition": "applied",
+        "encounterId": null,
+        "id": "kx7e894p6zz6w0tzg7pfqyd3ss8ek6w8",
+        "kind": "membership.approved",
+        "origin": "user",
+        "sequence": 2,
+        "sessionId": null
+      },
+      {
+        "actorName": "Director e8bf4950",
+        "causeEventId": null,
+        "commandId": "148e5d08-7859-403a-b64f-4fce211d8e63",
+        "createdAt": 1789664307121,
+        "description": "Created Audit e8bf4950.",
+        "disposition": "applied",
+        "encounterId": null,
+        "id": "kx77r25cymr2rxdqen51dfdgg58ek5j1",
+        "kind": "campaign.created",
+        "origin": "user",
+        "sequence": 1,
+        "sessionId": null
+      }
+    ],
+    "nextBefore": null
+  },
+  "recovered": {
+    "foes": [
+      {
+        "conditions": {
+          "bleeding": false,
+          "dazed": false,
+          "frightened": false,
+          "grabbed": false,
+          "prone": false,
+          "restrained": false,
+          "slowed": false,
+          "taunted": false,
+          "weakened": false
+        },
+        "health": {
+          "maxStamina": 15,
+          "mode": "director",
+          "stamina": 11,
+          "temporaryStamina": 0,
+          "winded": false
+        },
+        "id": "m574avyns73ahc4pab8zyxk7t18ekzfp",
+        "name": "Goblin Warrior",
+        "slain": false
+      }
+    ],
+    "healthDisplay": "bar",
+    "heroes": [
+      {
+        "controlled": true,
+        "id": "k576rk24sbkg7xxwg27t66kqas8ej77s",
+        "live": {
+          "conditions": {
+            "bleeding": false,
+            "dazed": false,
+            "frightened": false,
+            "grabbed": false,
+            "prone": false,
+            "restrained": false,
+            "slowed": false,
+            "taunted": false,
+            "weakened": false
+          },
+          "heroicResource": {
+            "current": 7,
+            "name": "ferocity"
+          },
+          "origin": {
+            "buildRevisionId": "jx73jm8zf3y4re9kh65nes28g18ek2ht",
+            "evaluatedAgainst": {
+              "compendiumRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+              "definitionsSchemaVersion": "r01.1"
+            },
+            "initializedAt": 1789664331503,
+            "kind": "first-admission"
+          },
+          "recoveries": 9,
+          "stamina": 30,
+          "surges": 0,
+          "temporaryStamina": 0,
+          "victories": 0,
+          "xp": 0
+        },
+        "name": "Thorn e8bf4950",
+        "ownerId": "ns7b1nhbpnq9h6h8vner8gh7h18ej4hd",
+        "ownerName": "Player e8bf4950"
+      },
+      {
+        "controlled": true,
+        "id": "k570sfb1hkkepsaphg3nsqphcs8ejsgm",
+        "live": {
+          "conditions": {
+            "bleeding": false,
+            "dazed": false,
+            "frightened": false,
+            "grabbed": false,
+            "prone": false,
+            "restrained": false,
+            "slowed": false,
+            "taunted": false,
+            "weakened": false
+          },
+          "heroicResource": {
+            "current": 0,
+            "name": "ferocity"
+          },
+          "origin": {
+            "buildRevisionId": "jx71w6v9rz7zhdydzj4s87mm418ekfdq",
+            "evaluatedAgainst": {
+              "compendiumRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+              "definitionsSchemaVersion": "r01.1"
+            },
+            "initializedAt": 1789664339908,
+            "kind": "first-admission"
+          },
+          "recoveries": 10,
+          "stamina": 30,
+          "surges": 0,
+          "temporaryStamina": 0,
+          "victories": 0,
+          "xp": 0
+        },
+        "name": "Watcher e8bf4950",
+        "ownerId": "ns7cvw46s7cg4fwmmmxj144pad8ejt7e",
+        "ownerName": "Observer e8bf4950"
+      }
+    ],
+    "malice": 47,
+    "role": "director",
+    "session": {
+      "id": "n57dmv5p6tx6dfry000hbxswss8ejxmf",
+      "revision": 0,
+      "status": "running"
+    },
+    "settings": {
+      "enableUserUndo": true,
+      "healthDisplay": "bar",
+      "showMalice": false,
+      "showTestDifficulty": false
+    },
+    "viewerId": "ns7fv820crtwgs8maq0gdp2qx18ej8fa"
+  },
+  "observerRoster": {
+    "foes": [
+      {
+        "conditions": {
+          "bleeding": false,
+          "dazed": false,
+          "frightened": false,
+          "grabbed": false,
+          "prone": false,
+          "restrained": false,
+          "slowed": false,
+          "taunted": false,
+          "weakened": false
+        },
+        "health": {
+          "mode": "winded",
+          "winded": false
+        },
+        "id": "m574avyns73ahc4pab8zyxk7t18ekzfp",
+        "name": "Goblin Warrior",
+        "slain": false
+      }
+    ],
+    "healthDisplay": "winded",
+    "heroes": [
+      {
+        "controlled": false,
+        "id": "k576rk24sbkg7xxwg27t66kqas8ej77s",
+        "live": {
+          "recoveries": 9,
+          "stamina": 30
+        },
+        "name": "Thorn e8bf4950",
+        "ownerId": "ns7b1nhbpnq9h6h8vner8gh7h18ej4hd",
+        "ownerName": "Player e8bf4950"
+      },
+      {
+        "controlled": false,
+        "id": "k570sfb1hkkepsaphg3nsqphcs8ejsgm",
+        "live": {
+          "conditions": {
+            "bleeding": false,
+            "dazed": false,
+            "frightened": false,
+            "grabbed": false,
+            "prone": false,
+            "restrained": false,
+            "slowed": false,
+            "taunted": false,
+            "weakened": false
+          },
+          "heroicResource": {
+            "current": 0,
+            "name": "ferocity"
+          },
+          "origin": {
+            "buildRevisionId": "jx71w6v9rz7zhdydzj4s87mm418ekfdq",
+            "evaluatedAgainst": {
+              "compendiumRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+              "definitionsSchemaVersion": "r01.1"
+            },
+            "initializedAt": 1789664339908,
+            "kind": "first-admission"
+          },
+          "recoveries": 10,
+          "stamina": 30,
+          "surges": 0,
+          "temporaryStamina": 0,
+          "victories": 0,
+          "xp": 0
+        },
+        "name": "Watcher e8bf4950",
+        "ownerId": "ns7cvw46s7cg4fwmmmxj144pad8ejt7e",
+        "ownerName": "Observer e8bf4950"
+      }
+    ],
+    "malice": 47,
+    "role": "observer",
+    "session": {
+      "id": "n57dmv5p6tx6dfry000hbxswss8ejxmf",
+      "revision": 0,
+      "status": "running"
+    },
+    "settings": null,
+    "viewerId": "ns7cvw46s7cg4fwmmmxj144pad8ejt7e"
+  },
+  "peerFoes": {
+    "addVisible": null,
+    "director": false,
+    "rows": [
+      {
+        "health": {
+          "mode": "winded",
+          "winded": false
+        },
+        "id": "m574avyns73ahc4pab8zyxk7t18ekzfp",
+        "name": "Goblin Warrior"
+      }
+    ]
+  },
+  "peerHistory": {
+    "events": [
+      {
+        "actorName": "Director e8bf4950",
+        "causeEventId": null,
+        "commandId": "8c0f367f-5e0c-4207-a986-2e92060c484f",
+        "createdAt": 1789664397384,
+        "description": "Show test difficulty turned on.",
+        "disposition": "applied",
+        "encounterId": null,
+        "id": "kx7717znjt28pz1f9sb587fnph8eje15",
+        "kind": "campaign.setting",
+        "origin": "user",
+        "payload": {
+          "data": {
+            "after": true,
+            "before": false,
+            "setting": "showTestDifficulty"
+          },
+          "envelope": {
+            "actor": null,
+            "arguments": {
+              "state": {
+                "symbol": "on"
+              }
+            },
+            "boundActor": null,
+            "campaignId": "jh7f1da2906mss9kqyxbk9xf0d8ejhg7",
+            "commandId": "8c0f367f-5e0c-4207-a986-2e92060c484f",
+            "issuerId": "ns7fv820crtwgs8maq0gdp2qx18ej8fa",
+            "operation": "campaign.test-difficulty-visible",
+            "schemaVersion": 1
+          }
+        },
+        "sequence": 21,
+        "sessionId": "n57dmv5p6tx6dfry000hbxswss8ejxmf"
+      },
+      {
+        "actorName": "Player e8bf4950",
+        "causeEventId": null,
+        "commandId": "d4c81644-49b6-4d6c-9d77-92ca079acb95",
+        "createdAt": 1789664394454,
+        "description": "Thorn e8bf4950 tested M: 4 + 3 + 2 (M) + 2 (Lore; hard: winter) = 11 → tier 1; hard: Failure with a consequence.",
+        "dice": [
+          {
+            "id": "d10a",
+            "sides": 10,
+            "value": 4
+          },
+          {
+            "id": "d10b",
+            "sides": 10,
+            "value": 3
+          }
+        ],
+        "disposition": "applied",
+        "encounterId": null,
+        "id": "kx7fetr598p57h6xhey1rf26z18ekn00",
+        "kind": "test.roll",
+        "origin": "user",
+        "payload": {
+          "data": {
+            "characteristicValueSource": "baseline",
+            "result": {
+              "actorId": "k576rk24sbkg7xxwg27t66kqas8ej77s",
+              "bonusTotal": 2,
+              "characteristic": "M",
+              "characteristicValue": 2,
+              "criticalSuccess": false,
+              "dice": {
+                "d10a": 4,
+                "d10b": 3
+              },
+              "difficulty": "hard",
+              "edgeBane": {
+                "banes": 0,
+                "edges": 0,
+                "effectiveBanes": 0,
+                "effectiveEdges": 0,
+                "modifier": 0,
+                "net": 0,
+                "tierShift": 0
+              },
+              "naturalRoll": 7,
+              "outcome": "Failure with a consequence",
+              "skillBonus": 2,
+              "tier": 1,
+              "total": 11
+            },
+            "rollId": "n1740pyrwv75cbehckjehkyvw98ejsnr",
+            "skill": "Lore; hard: winter"
+          },
+          "envelope": {
+            "actor": {
+              "id": "k576rk24sbkg7xxwg27t66kqas8ej77s",
+              "refKind": "character"
+            },
+            "arguments": {
+              "characteristic": {
+                "symbol": "M"
+              },
+              "difficulty": {
+                "symbol": "hard"
+              },
+              "skill": "Lore; hard: winter",
+              "value": 2
+            },
+            "boundActor": {
+              "id": "k576rk24sbkg7xxwg27t66kqas8ej77s",
+              "kind": "character",
+              "name": "Thorn e8bf4950"
+            },
+            "campaignId": "jh7f1da2906mss9kqyxbk9xf0d8ejhg7",
+            "commandId": "d4c81644-49b6-4d6c-9d77-92ca079acb95",
+            "issuerId": "ns7b1nhbpnq9h6h8vner8gh7h18ej4hd",
+            "operation": "test.roll",
+            "schemaVersion": 1
+          }
+        },
+        "sequence": 20,
+        "sessionId": "n57dmv5p6tx6dfry000hbxswss8ejxmf"
+      },
+      {
+        "actorName": "Player e8bf4950",
+        "causeEventId": null,
+        "commandId": "e20f6db0-4315-4cab-80ab-c479da732afe",
+        "createdAt": 1789664389170,
+        "description": "Thorn e8bf4950 spent a Recovery (10 → 9) and regained 8 Stamina (22 → 30, capped at the maximum).",
+        "disposition": "applied",
+        "encounterId": null,
+        "id": "kx7anym9b5qgastkzxqe4b4ak18ejxww",
+        "kind": "hero.recover",
+        "origin": "user",
+        "payload": {
+          "data": {
+            "result": {
+              "actorId": "k576rk24sbkg7xxwg27t66kqas8ej77s",
+              "capApplied": true,
+              "healed": 8,
+              "kind": "resolved",
+              "recoveriesAfter": 9,
+              "recoveriesBefore": 10,
+              "recoveryValue": 10,
+              "staminaAfter": 30,
+              "staminaBefore": 22,
+              "temporaryStaminaUnchanged": 0,
+              "warnings": []
+            },
+            "source": {
+              "id": "mcdm.heroes.v1/feature.common.maneuvers/catch-breath",
+              "name": "Catch Breath",
+              "note": "FreePlay use: no maneuver allowance is consumed (docs/table-spec.md#v001-catch-breath).",
+              "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+              "sourcePath": "vendor/steel-compendium/en/unified/md/feature/common/maneuvers/catch-breath.md",
+              "supporting": [
+                {
+                  "id": "mcdm.heroes.v1/rule.health/recoveries",
+                  "name": "Recoveries and Recovery Value",
+                  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+                  "sourcePath": "vendor/steel-compendium/en/unified/md/rule/health/recoveries.md",
+                  "text": "---\nname: Recoveries and Recovery Value\nscc: mcdm.heroes.v1/rule.health/recoveries\ntype: rule\n---\n\nEach hero has a number of Recoveries determined by their class. A hero also has a recovery value that equals one-third of their [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) maximum, rounded down. When you use the [Catch Breath](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/catch-breath) maneuver in combat (see Maneuvers above), you spend a Recovery and regain [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) equal to your recovery value. Outside of combat, you can spend as many Recoveries as you have remaining. Some abilities, items, and other effects allow you to spend a Recovery to regain [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) equal to your recovery value plus a little extra (as described by the effect), or to regain [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) without spending a Recovery.\n"
+                }
+              ],
+              "text": "---\nname: Catch Breath\nscc: mcdm.heroes.v1/feature.common.maneuvers/catch-breath\ntype: feature\n---\n\nA creature who uses the [Catch Breath](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/catch-breath) maneuver spends a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries) and regains [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) equal to their [recovery value](scc.v1:mcdm.heroes.v1/rule.health/recoveries). (See below for [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina). See [Recoveries](scc.v1:mcdm.heroes.v1/rule.health/recoveries) in Chapter 1: [The Basics](scc.v1:mcdm.heroes.v1/chapter/the-basics).)\n\nA creature who is [dying](scc.v1:mcdm.heroes.v1/rule.health/dying) (see [Dying](scc.v1:mcdm.heroes.v1/rule.health/dying) and Death in [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) below) can't use the [Catch Breath](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/catch-breath) maneuver, but other creatures can help them spend [Recoveries](scc.v1:mcdm.heroes.v1/rule.health/recoveries) in other ways.\n"
+            }
+          },
+          "envelope": {
+            "actor": {
+              "id": "k576rk24sbkg7xxwg27t66kqas8ej77s",
+              "refKind": "character"
+            },
+            "arguments": {},
+            "boundActor": {
+              "id": "k576rk24sbkg7xxwg27t66kqas8ej77s",
+              "kind": "character",
+              "name": "Thorn e8bf4950"
+            },
+            "campaignId": "jh7f1da2906mss9kqyxbk9xf0d8ejhg7",
+            "commandId": "e20f6db0-4315-4cab-80ab-c479da732afe",
+            "issuerId": "ns7b1nhbpnq9h6h8vner8gh7h18ej4hd",
+            "operation": "hero.recover",
+            "schemaVersion": 1
+          }
+        },
+        "sequence": 19,
+        "sessionId": "n57dmv5p6tx6dfry000hbxswss8ejxmf"
+      },
+      {
+        "actorName": "Director e8bf4950",
+        "causeEventId": null,
+        "commandId": "91181e8a-5493-45e9-a1dd-07227581d971",
+        "createdAt": 1789664384111,
+        "description": "Manual adjustment — shared Malice adjusted.",
+        "disposition": "applied",
+        "encounterId": null,
+        "id": "kx79t19temegc1knchqrxvsff98ej3k6",
+        "kind": "manual.adjustment",
+        "origin": "user",
+        "payload": {
+          "data": {
+            "creature": null,
+            "field": "malice",
+            "label": "Malice"
+          },
+          "envelope": {
+            "actor": null,
+            "arguments": {},
+            "boundActor": null,
+            "campaignId": "jh7f1da2906mss9kqyxbk9xf0d8ejhg7",
+            "commandId": "91181e8a-5493-45e9-a1dd-07227581d971",
+            "issuerId": "ns7fv820crtwgs8maq0gdp2qx18ej8fa",
+            "operation": "adjust.malice",
+            "schemaVersion": 1
+          }
+        },
+        "sequence": 18,
+        "sessionId": "n57dmv5p6tx6dfry000hbxswss8ejxmf"
+      },
+      {
+        "actorName": "Director e8bf4950",
+        "causeEventId": null,
+        "commandId": "4f5e2140-75fa-4127-b58d-20b912e988d6",
+        "createdAt": 1789664381839,
+        "description": "Manual adjustment — Thorn e8bf4950 Heroic Resource 0 → 7.",
+        "disposition": "applied",
+        "encounterId": null,
+        "id": "kx7edmkzrn7yddg59cjrq97wtx8ek15b",
+        "kind": "manual.adjustment",
+        "origin": "user",
+        "payload": {
+          "data": {
+            "after": 7,
+            "before": 0,
+            "creature": {
+              "id": "k576rk24sbkg7xxwg27t66kqas8ej77s",
+              "kind": "character"
+            },
+            "field": "heroic-resource",
+            "label": "Heroic Resource"
+          },
+          "envelope": {
+            "actor": {
+              "id": "k576rk24sbkg7xxwg27t66kqas8ej77s",
+              "refKind": "character"
+            },
+            "arguments": {
+              "value": 7
+            },
+            "boundActor": {
+              "id": "k576rk24sbkg7xxwg27t66kqas8ej77s",
+              "kind": "character",
+              "name": "Thorn e8bf4950"
+            },
+            "campaignId": "jh7f1da2906mss9kqyxbk9xf0d8ejhg7",
+            "commandId": "4f5e2140-75fa-4127-b58d-20b912e988d6",
+            "issuerId": "ns7fv820crtwgs8maq0gdp2qx18ej8fa",
+            "operation": "adjust.heroic-resource",
+            "schemaVersion": 1
+          }
+        },
+        "sequence": 17,
+        "sessionId": "n57dmv5p6tx6dfry000hbxswss8ejxmf"
+      },
+      {
+        "actorName": "Director e8bf4950",
+        "causeEventId": null,
+        "commandId": "366cfeb7-a212-4f54-b96e-daf3da56fe61",
+        "createdAt": 1789664379553,
+        "description": "Manual adjustment — Thorn e8bf4950 Recoveries 10 → 10.",
+        "disposition": "applied",
+        "encounterId": null,
+        "id": "kx7e7p6bf4m930y0g9yeas2jwx8ek8dr",
+        "kind": "manual.adjustment",
+        "origin": "user",
+        "payload": {
+          "data": {
+            "after": 10,
+            "before": 10,
+            "creature": {
+              "id": "k576rk24sbkg7xxwg27t66kqas8ej77s",
+              "kind": "character"
+            },
+            "field": "recoveries",
+            "label": "Recoveries"
+          },
+          "envelope": {
+            "actor": {
+              "id": "k576rk24sbkg7xxwg27t66kqas8ej77s",
+              "refKind": "character"
+            },
+            "arguments": {
+              "value": 10
+            },
+            "boundActor": {
+              "id": "k576rk24sbkg7xxwg27t66kqas8ej77s",
+              "kind": "character",
+              "name": "Thorn e8bf4950"
+            },
+            "campaignId": "jh7f1da2906mss9kqyxbk9xf0d8ejhg7",
+            "commandId": "366cfeb7-a212-4f54-b96e-daf3da56fe61",
+            "issuerId": "ns7fv820crtwgs8maq0gdp2qx18ej8fa",
+            "operation": "adjust.recoveries",
+            "schemaVersion": 1
+          }
+        },
+        "sequence": 16,
+        "sessionId": "n57dmv5p6tx6dfry000hbxswss8ejxmf"
+      },
+      {
+        "actorName": "Director e8bf4950",
+        "causeEventId": null,
+        "commandId": "6df1e0fb-34a0-48e1-9dad-e6015bfb7c6b",
+        "createdAt": 1789664377275,
+        "description": "Manual adjustment — Thorn e8bf4950 Stamina 30 → 22.",
+        "disposition": "applied",
+        "encounterId": null,
+        "id": "kx731p5dv571r4cs4ct67k29j58eja4r",
+        "kind": "manual.adjustment",
+        "origin": "user",
+        "payload": {
+          "data": {
+            "after": 22,
+            "before": 30,
+            "creature": {
+              "id": "k576rk24sbkg7xxwg27t66kqas8ej77s",
+              "kind": "character"
+            },
+            "field": "stamina",
+            "label": "Stamina"
+          },
+          "envelope": {
+            "actor": {
+              "id": "k576rk24sbkg7xxwg27t66kqas8ej77s",
+              "refKind": "character"
+            },
+            "arguments": {
+              "value": 22
+            },
+            "boundActor": {
+              "id": "k576rk24sbkg7xxwg27t66kqas8ej77s",
+              "kind": "character",
+              "name": "Thorn e8bf4950"
+            },
+            "campaignId": "jh7f1da2906mss9kqyxbk9xf0d8ejhg7",
+            "commandId": "6df1e0fb-34a0-48e1-9dad-e6015bfb7c6b",
+            "issuerId": "ns7fv820crtwgs8maq0gdp2qx18ej8fa",
+            "operation": "adjust.stamina",
+            "schemaVersion": 1
+          }
+        },
+        "sequence": 15,
+        "sessionId": "n57dmv5p6tx6dfry000hbxswss8ejxmf"
+      },
+      {
+        "actorName": "Director e8bf4950",
+        "causeEventId": "kx7caqn59p772xn4vchmvzvzp98ekksh",
+        "commandId": "cf51c1d8-4a56-4af9-8e09-9bf6487a623b",
+        "createdAt": 1789664369047,
+        "description": "rolled d6: 5.",
+        "dice": [
+          {
+            "id": "die-1",
+            "sides": 6,
+            "value": 5
+          }
+        ],
+        "disposition": "applied",
+        "encounterId": null,
+        "id": "kx7ex48cak9c41p5xc7bsgyqzh8ekby8",
+        "kind": "table.roll",
+        "origin": "user",
+        "payload": {
+          "data": {
+            "dice": "d6",
+            "rollId": "n178x0kwr23fbd0sht2ca44wen8ekere"
+          },
+          "envelope": {
+            "actor": null,
+            "arguments": {
+              "dice": "d6"
+            },
+            "boundActor": null,
+            "campaignId": "jh7f1da2906mss9kqyxbk9xf0d8ejhg7",
+            "commandId": "cf51c1d8-4a56-4af9-8e09-9bf6487a623b",
+            "issuerId": "ns7fv820crtwgs8maq0gdp2qx18ej8fa",
+            "operation": "table.roll",
+            "schemaVersion": 1
+          },
+          "respondsTo": {
+            "answer": {
+              "dice": "d6"
+            },
+            "interactionId": "mn795v1qn599azv5sygqmwfy2d8ekgdz"
+          }
+        },
+        "sequence": 14,
+        "sessionId": "n57dmv5p6tx6dfry000hbxswss8ejxmf"
+      },
+      {
+        "actorName": "Director e8bf4950",
+        "causeEventId": null,
+        "commandId": "d10cedd8-ce50-428b-bdff-b5fbd349e137",
+        "createdAt": 1789664364356,
+        "description": "Director e8bf4950 — awaiting input: which dice to roll.",
+        "disposition": "applied",
+        "encounterId": null,
+        "id": "kx7caqn59p772xn4vchmvzvzp98ekksh",
+        "kind": "interaction.opened",
+        "origin": "user",
+        "payload": {
+          "envelope": {
+            "actor": null,
+            "arguments": {},
+            "boundActor": null,
+            "campaignId": "jh7f1da2906mss9kqyxbk9xf0d8ejhg7",
+            "commandId": "d10cedd8-ce50-428b-bdff-b5fbd349e137",
+            "issuerId": "ns7fv820crtwgs8maq0gdp2qx18ej8fa",
+            "operation": "table.roll",
+            "schemaVersion": 1
+          }
+        },
+        "sequence": 13,
+        "sessionId": "n57dmv5p6tx6dfry000hbxswss8ejxmf"
+      },
+      {
+        "actorName": "Player e8bf4950",
+        "causeEventId": null,
+        "commandId": "f72bafc8-74c7-4a59-9ef1-66fef2f98398",
+        "createdAt": 1789664362103,
+        "description": "rolled 2d10: 10, 10.",
+        "dice": [
+          {
+            "id": "die-1",
+            "sides": 10,
+            "value": 10
+          },
+          {
+            "id": "die-2",
+            "sides": 10,
+            "value": 10
+          }
+        ],
+        "disposition": "applied",
+        "encounterId": null,
+        "id": "kx7dqqfza458xeavdvpnhyt75n8ekz0v",
+        "kind": "table.roll",
+        "origin": "user",
+        "payload": {
+          "data": {
+            "dice": "2d10",
+            "rollId": "n170pt9adqg60p5vkabyncx9318ej75e"
+          },
+          "envelope": {
+            "actor": null,
+            "arguments": {
+              "dice": "2d10"
+            },
+            "boundActor": null,
+            "campaignId": "jh7f1da2906mss9kqyxbk9xf0d8ejhg7",
+            "commandId": "f72bafc8-74c7-4a59-9ef1-66fef2f98398",
+            "issuerId": "ns7b1nhbpnq9h6h8vner8gh7h18ej4hd",
+            "operation": "table.roll",
+            "schemaVersion": 1
+          }
+        },
+        "sequence": 12,
+        "sessionId": "n57dmv5p6tx6dfry000hbxswss8ejxmf"
+      },
+      {
+        "actorName": "Director e8bf4950",
+        "causeEventId": null,
+        "commandId": "f72bafc8-74c7-4a59-9ef1-66fef2f98398",
+        "createdAt": 1789664357432,
+        "description": "rolled 2d10: 10, 9.",
+        "dice": [
+          {
+            "id": "die-1",
+            "sides": 10,
+            "value": 10
+          },
+          {
+            "id": "die-2",
+            "sides": 10,
+            "value": 9
+          }
+        ],
+        "disposition": "applied",
+        "encounterId": null,
+        "id": "kx7dpsj4wandqcfa6vdhac3znd8ejbay",
+        "kind": "table.roll",
+        "origin": "user",
+        "payload": {
+          "data": {
+            "dice": "2d10",
+            "rollId": "n1758r1y3wsgf34dg8dhgn3e8n8ejkr4"
+          },
+          "envelope": {
+            "actor": null,
+            "arguments": {
+              "dice": "2d10"
+            },
+            "boundActor": null,
+            "campaignId": "jh7f1da2906mss9kqyxbk9xf0d8ejhg7",
+            "commandId": "f72bafc8-74c7-4a59-9ef1-66fef2f98398",
+            "issuerId": "ns7fv820crtwgs8maq0gdp2qx18ej8fa",
+            "operation": "table.roll",
+            "schemaVersion": 1
+          }
+        },
+        "sequence": 11,
+        "sessionId": "n57dmv5p6tx6dfry000hbxswss8ejxmf"
+      },
+      {
+        "actorName": "Director e8bf4950",
+        "causeEventId": null,
+        "commandId": "0191e3cc-9154-4e41-89a3-69dfab6326e1",
+        "createdAt": 1789664351035,
+        "description": "Manual adjustment — Goblin Warrior Stamina adjusted.",
+        "disposition": "applied",
+        "encounterId": null,
+        "id": "kx7fr3dpdksjdrfzm9jmj4jdxh8eksbt",
+        "kind": "manual.adjustment",
+        "origin": "user",
+        "payload": {
+          "data": {
+            "creature": {
+              "id": "m574avyns73ahc4pab8zyxk7t18ekzfp",
+              "kind": "foe"
+            },
+            "field": "stamina",
+            "label": "Stamina"
+          },
+          "envelope": {
+            "actor": {
+              "id": "m574avyns73ahc4pab8zyxk7t18ekzfp",
+              "refKind": "foe"
+            },
+            "arguments": {},
+            "boundActor": {
+              "id": "m574avyns73ahc4pab8zyxk7t18ekzfp",
+              "kind": "foe",
+              "name": "Goblin Warrior"
+            },
+            "campaignId": "jh7f1da2906mss9kqyxbk9xf0d8ejhg7",
+            "commandId": "0191e3cc-9154-4e41-89a3-69dfab6326e1",
+            "expectedRevision": 0,
+            "issuerId": "ns7fv820crtwgs8maq0gdp2qx18ej8fa",
+            "operation": "adjust.stamina",
+            "schemaVersion": 1
+          }
+        },
+        "sequence": 10,
+        "sessionId": "n57dmv5p6tx6dfry000hbxswss8ejxmf"
+      },
+      {
+        "actorName": "Director e8bf4950",
+        "causeEventId": null,
+        "commandId": "6abca544-b886-4932-8fc9-91b62b2f23d7",
+        "createdAt": 1789664343040,
+        "description": "Goblin Warrior added to the foes roster.",
+        "disposition": "applied",
+        "encounterId": null,
+        "id": "kx77z3qrsy72zhqe1y1sekxx298ekcjd",
+        "kind": "foe-added",
+        "origin": "user",
+        "payload": {
+          "data": {
+            "definitionId": "mcdm.monsters.v1/monster.goblin.statblock/goblin-warrior"
+          },
+          "envelope": {
+            "actor": null,
+            "arguments": {
+              "definition": "mcdm.monsters.v1/monster.goblin.statblock/goblin-warrior"
+            },
+            "boundActor": null,
+            "campaignId": "jh7f1da2906mss9kqyxbk9xf0d8ejhg7",
+            "commandId": "6abca544-b886-4932-8fc9-91b62b2f23d7",
+            "issuerId": "ns7fv820crtwgs8maq0gdp2qx18ej8fa",
+            "operation": "foe.add",
+            "schemaVersion": 1
+          }
+        },
+        "sequence": 9,
+        "sessionId": "n57dmv5p6tx6dfry000hbxswss8ejxmf"
+      },
+      {
+        "actorName": "Director e8bf4950",
+        "causeEventId": null,
+        "commandId": "181eb589-a973-40e3-a483-56e8bdf26c68",
+        "createdAt": 1789664339908,
+        "description": "Watcher e8bf4950 admitted: the Director approved revision 2.",
+        "disposition": "applied",
+        "encounterId": null,
+        "id": "kx7e0qxcfap2ay4xjmp98bgctn8eknen",
+        "kind": "character.admitted",
+        "origin": "user",
+        "payload": {
+          "data": {
+            "characterId": "k570sfb1hkkepsaphg3nsqphcs8ejsgm",
+            "firstAdmission": true,
+            "kind": "admission",
+            "reconciliation": {
+              "changes": [],
+              "incompatibleResource": null
+            },
+            "review": "approved",
+            "reviewId": "js73vnberp4bhpt5qrkackpwf18ekvgj",
+            "revision": 2,
+            "revisionAfter": "jx71w6v9rz7zhdydzj4s87mm418ekfdq",
+            "revisionBefore": null
+          },
+          "envelope": {
+            "actor": null,
+            "arguments": {
+              "character": {
+                "id": "k570sfb1hkkepsaphg3nsqphcs8ejsgm",
+                "refKind": "character"
+              }
+            },
+            "boundActor": null,
+            "campaignId": "jh7f1da2906mss9kqyxbk9xf0d8ejhg7",
+            "commandId": "181eb589-a973-40e3-a483-56e8bdf26c68",
+            "issuerId": "ns7fv820crtwgs8maq0gdp2qx18ej8fa",
+            "operation": "character.approve",
+            "schemaVersion": 1
+          }
+        },
+        "sequence": 8,
+        "sessionId": "n57dmv5p6tx6dfry000hbxswss8ejxmf"
+      },
+      {
+        "actorName": "Observer e8bf4950",
+        "causeEventId": null,
+        "commandId": "9f4f17f5-aaec-4b38-bf5a-d4ab6adbdc3d",
+        "createdAt": 1789664337839,
+        "description": "Watcher e8bf4950 (revision 2) submitted for admission; the effective build is unchanged until the Director approves.",
+        "disposition": "applied",
+        "encounterId": null,
+        "id": "kx78t0mqn67w3pebcbkmxt8emd8ej6h9",
+        "kind": "character.submitted",
+        "origin": "user",
+        "payload": {
+          "data": {
+            "characterId": "k570sfb1hkkepsaphg3nsqphcs8ejsgm",
+            "kind": "admission",
+            "reviewId": "js73vnberp4bhpt5qrkackpwf18ekvgj",
+            "revision": 2,
+            "revisionId": "jx71w6v9rz7zhdydzj4s87mm418ekfdq"
+          },
+          "envelope": {
+            "actor": null,
+            "arguments": {
+              "character": {
+                "id": "k570sfb1hkkepsaphg3nsqphcs8ejsgm",
+                "refKind": "character"
+              }
+            },
+            "boundActor": null,
+            "campaignId": "jh7f1da2906mss9kqyxbk9xf0d8ejhg7",
+            "commandId": "9f4f17f5-aaec-4b38-bf5a-d4ab6adbdc3d",
+            "issuerId": "ns7cvw46s7cg4fwmmmxj144pad8ejt7e",
+            "operation": "character.submit",
+            "schemaVersion": 1
+          }
+        },
+        "sequence": 7,
+        "sessionId": "n57dmv5p6tx6dfry000hbxswss8ejxmf"
+      },
+      {
+        "actorName": "Director e8bf4950",
+        "causeEventId": null,
+        "commandId": "bb2b582c-dc35-4223-9bcf-bbcbc80853d3",
+        "createdAt": 1789664331503,
+        "description": "Thorn e8bf4950 admitted: the Director approved revision 2.",
+        "disposition": "applied",
+        "encounterId": null,
+        "id": "kx70rh610hve26ge62nc35w9858ekdmy",
+        "kind": "character.admitted",
+        "origin": "user",
+        "payload": {
+          "data": {
+            "characterId": "k576rk24sbkg7xxwg27t66kqas8ej77s",
+            "firstAdmission": true,
+            "kind": "admission",
+            "reconciliation": {
+              "changes": [],
+              "incompatibleResource": null
+            },
+            "review": "approved",
+            "reviewId": "js7ek6w5cxe0f5wfa8cz9bar618ekahv",
+            "revision": 2,
+            "revisionAfter": "jx73jm8zf3y4re9kh65nes28g18ek2ht",
+            "revisionBefore": null
+          },
+          "envelope": {
+            "actor": null,
+            "arguments": {
+              "character": {
+                "id": "k576rk24sbkg7xxwg27t66kqas8ej77s",
+                "refKind": "character"
+              }
+            },
+            "boundActor": null,
+            "campaignId": "jh7f1da2906mss9kqyxbk9xf0d8ejhg7",
+            "commandId": "bb2b582c-dc35-4223-9bcf-bbcbc80853d3",
+            "issuerId": "ns7fv820crtwgs8maq0gdp2qx18ej8fa",
+            "operation": "character.approve",
+            "schemaVersion": 1
+          }
+        },
+        "sequence": 6,
+        "sessionId": "n57dmv5p6tx6dfry000hbxswss8ejxmf"
+      },
+      {
+        "actorName": "Player e8bf4950",
+        "causeEventId": null,
+        "commandId": "d5efa1f2-a191-460d-95ef-dec416ef8fd5",
+        "createdAt": 1789664329299,
+        "description": "Thorn e8bf4950 (revision 2) submitted for admission; the effective build is unchanged until the Director approves.",
+        "disposition": "applied",
+        "encounterId": null,
+        "id": "kx7383e602277j1rkb0etxf3bs8ej89j",
+        "kind": "character.submitted",
+        "origin": "user",
+        "payload": {
+          "data": {
+            "characterId": "k576rk24sbkg7xxwg27t66kqas8ej77s",
+            "kind": "admission",
+            "reviewId": "js7ek6w5cxe0f5wfa8cz9bar618ekahv",
+            "revision": 2,
+            "revisionId": "jx73jm8zf3y4re9kh65nes28g18ek2ht"
+          },
+          "envelope": {
+            "actor": null,
+            "arguments": {
+              "character": {
+                "id": "k576rk24sbkg7xxwg27t66kqas8ej77s",
+                "refKind": "character"
+              }
+            },
+            "boundActor": null,
+            "campaignId": "jh7f1da2906mss9kqyxbk9xf0d8ejhg7",
+            "commandId": "d5efa1f2-a191-460d-95ef-dec416ef8fd5",
+            "issuerId": "ns7b1nhbpnq9h6h8vner8gh7h18ej4hd",
+            "operation": "character.submit",
+            "schemaVersion": 1
+          }
+        },
+        "sequence": 5,
+        "sessionId": "n57dmv5p6tx6dfry000hbxswss8ejxmf"
+      },
+      {
+        "actorName": "Director e8bf4950",
+        "causeEventId": null,
+        "commandId": "b84ab05d-ebbb-402d-8b3a-26ccdc9515db",
+        "createdAt": 1789664320561,
+        "description": "Started a session.",
+        "disposition": "applied",
+        "encounterId": null,
+        "id": "kx77dgr59vfkbn10k16ea3crcn8ek38k",
+        "kind": "session.started",
+        "origin": "user",
+        "sequence": 4,
+        "sessionId": "n57dmv5p6tx6dfry000hbxswss8ejxmf"
+      },
+      {
+        "actorName": "Director e8bf4950",
+        "causeEventId": null,
+        "commandId": "ee7fd6f6-9d7d-4826-8e59-9253a3e382f5",
+        "createdAt": 1789664320398,
+        "description": "Admitted Observer e8bf4950.",
+        "disposition": "applied",
+        "encounterId": null,
+        "id": "kx7ed55n9ccg1f8g84bm04jkxd8ejvjm",
+        "kind": "membership.approved",
+        "origin": "user",
+        "sequence": 3,
+        "sessionId": null
+      },
+      {
+        "actorName": "Director e8bf4950",
+        "causeEventId": null,
+        "commandId": "b3853ac5-402c-447e-9e5d-94cb36a19102",
+        "createdAt": 1789664314091,
+        "description": "Admitted Player e8bf4950.",
+        "disposition": "applied",
+        "encounterId": null,
+        "id": "kx7e894p6zz6w0tzg7pfqyd3ss8ek6w8",
+        "kind": "membership.approved",
+        "origin": "user",
+        "sequence": 2,
+        "sessionId": null
+      },
+      {
+        "actorName": "Director e8bf4950",
+        "causeEventId": null,
+        "commandId": "148e5d08-7859-403a-b64f-4fce211d8e63",
+        "createdAt": 1789664307121,
+        "description": "Created Audit e8bf4950.",
+        "disposition": "applied",
+        "encounterId": null,
+        "id": "kx77r25cymr2rxdqen51dfdgg58ek5j1",
+        "kind": "campaign.created",
+        "origin": "user",
+        "sequence": 1,
+        "sessionId": null
+      }
+    ],
+    "nextBefore": null
+  }
+}

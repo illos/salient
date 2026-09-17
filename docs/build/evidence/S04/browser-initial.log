@@ -1,0 +1,49 @@
+
+Running 5 tests using 1 worker
+
+[1/5] tests/browser/hosting.spec.ts:3:1 › direct SPA routes and reloads load their assets without browser errors
+  1) tests/browser/hosting.spec.ts:3:1 › direct SPA routes and reloads load their assets without browser errors 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('heading', { name: 'Foes', exact: true })
+    Expected: visible
+    Timeout: 15000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByRole('heading', { name: 'Foes', exact: true }) with timeout 15000ms
+      - waiting for getByRole('heading', { name: 'Foes', exact: true })
+
+
+      12 |       await expect(
+      13 |         page.getByRole('heading', { name: route === '/rules' ? 'Rules' : 'Foes', exact: true }),
+    > 14 |       ).toBeVisible();
+         |         ^
+      15 |     }
+      16 |     await page.reload();
+      17 |     await expect(page.locator('#root')).not.toBeEmpty();
+        at /app/tests/browser/hosting.spec.ts:14:9
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../artifacts/s04-browser/hosting-direct-SPA-routes--97f15-sets-without-browser-errors/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../artifacts/s04-browser/hosting-direct-SPA-routes--97f15-sets-without-browser-errors/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../artifacts/s04-browser/hosting-direct-SPA-routes--97f15-sets-without-browser-errors/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../artifacts/s04-browser/hosting-direct-SPA-routes--97f15-sets-without-browser-errors/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[2/5] tests/browser/journey.spec.ts:15:1 › accounts, invitation approval, session lifecycle, private draft persistence and reconnect
+[3/5] tests/browser/table-audit.spec.ts:40:1 › three table contexts, palette, console and live CLI share persisted operations
+[4/5] tests/browser/v37-supporting-choices.spec.ts:11:1 › supporting choices show complete sources, prune dependent targets and persist reviewed mechanics
+[5/5] tests/browser/v37-supporting-choices.spec.ts:157:1 › Strange Inheritance lets the Director save a private sourced item without exposing it to the owner
+  1 failed
+    tests/browser/hosting.spec.ts:3:1 › direct SPA routes and reloads load their assets without browser errors 
+  4 passed (4.4m)

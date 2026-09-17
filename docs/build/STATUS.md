@@ -262,6 +262,7 @@ records the handoff; it does not certify A09 or create an implementation commit.
 | Id | Slice | Depends on | Status | Owner |
 | --- | --- | --- | --- | --- |
 | S03 | [Remote development adapter](S03-remote-development.md) | External dev-host V1 helpers and enrollment | Merged through `d663c15`; main data migrated, local workloads stopped and reboot recovery passed; provider/human checks pending | Voltar infrastructure thread |
+| S04 | [Hosted development environment](S04-hosted-development.md) | S03, V38 | Complete — hosted dev live; 663 tests, five hosted browser scenarios and independent review pass; private data preserved | Deploy thread, hosting worktree |
 
 ## V33 UI design — 2026-09-17
 

@@ -1,0 +1,7 @@
+{
+  "temporaryRemoteCredentialsRemoved": true,
+  "selectedSourceAndEvidenceCredentialScan": "pass",
+  "publicLoginHttpStatusWithBrowserHeaders": 200,
+  "defaultPythonUserAgent": "Cloudflare rejected with1010; actual browser journeys and browser-header request pass",
+  "hostedBuildServices": "stopped"
+}
