@@ -278,3 +278,9 @@ records the handoff; it does not certify A09 or create an implementation commit.
 | Slice | Outcome | Status | Owner |
 | --- | --- | --- | --- |
 | V35 | [Full core stat-block ingestion](V35-full-core-ingestion.md) | Committed — `0b07723` on `slice/V35` (prerequisite `214d04b`); 455 tests, 5 browser scenarios and both reviews pass; handed to V36, not merged into main | Codex, foes-full worktree |
+
+## V36 Foes library — 2026-09-17
+
+| Id | Slice | Dependencies | Status |
+| --- | --- | --- | --- |
+| V36 | [Foes library browsing UI](V36-foes-library.md) | V34, V35 | Reviewed — slice/V36; 459 tests and 8 browser scenarios pass; independent review pass; branch commit pending, not merged into main |

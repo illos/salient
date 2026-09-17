@@ -13,12 +13,16 @@ test('all core definitions render their complete feature lists through the publi
   const errors: string[] = [];
   page.on('pageerror', error => errors.push(error.message));
   await page.goto('/foes');
-  const kind = page.getByRole('combobox', { name: 'Kind', exact: true });
+  const setKind = async (kind: string) => {
+    await page
+      .getByRole('button', { name: kind === 'statblock' ? 'Stat blocks' : 'Malice', exact: true })
+      .click();
+  };
   const search = page.getByRole('textbox', { name: 'Search foes' });
-  await kind.selectOption('statblock');
-  await expect(page.getByRole('status')).toHaveText('438 references');
+  await setKind('statblock');
+  await expect(page.getByRole('status')).toHaveText('438 stat blocks');
   for (const object of pack.objects.filter(o => !o.parentId)) {
-    await kind.selectOption(object.kind);
+    await setKind(object.kind);
     await search.fill(object.name);
     await page.locator(`[data-foe-id="${object.id}"]`).click();
     const dialog = page.getByRole('dialog');
@@ -47,7 +51,7 @@ test('all core definitions render their complete feature lists through the publi
       'Noncombatant',
     ]) {
       const object = pack.objects.find(o => !o.parentId && o.name === name)!;
-      await kind.selectOption(object.kind);
+      await setKind(object.kind);
       await search.fill(name);
       await page.locator(`[data-foe-id="${object.id}"]`).click();
       const dialog = page.getByRole('dialog');

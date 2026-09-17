@@ -1,15 +1,15 @@
 // SPDX-License-Identifier: GPL-3.0-only
 import { expect, test } from '@playwright/test';
-test('public undead search, independent cards, navigation, dismissal and themes', async ({
+test('public foes search, independent cards, navigation, dismissal and themes', async ({
   page,
-}, testInfo) => {
+}) => {
   await page.goto('/foes');
-  await expect(page.getByRole('heading', { name: 'Foes' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Foes library' })).toBeVisible();
   const search = page.getByRole('textbox', { name: 'Search foes' });
   await search.fill('Arise');
-  await page.getByRole('combobox', { name: 'Kind', exact: true }).selectOption('trait');
+  await page.getByRole('button', { name: 'Traits', exact: true }).click();
   await expect(page.getByRole('status')).toContainText('references');
-  const trigger = page.getByRole('button', { name: 'Skeleton · trait Arise', exact: true });
+  const trigger = page.getByRole('button', { name: 'Open Arise · Skeleton', exact: true });
   await trigger.click();
   let dialog = page.getByRole('dialog');
   await expect(dialog).toContainText('they instead have 1 Stamina');
@@ -29,30 +29,30 @@ test('public undead search, independent cards, navigation, dismissal and themes'
   await expect(dialog).not.toBeVisible();
   await expect(trigger).toBeFocused();
   await search.fill('Ghost');
-  await page.getByRole('combobox', { name: 'Kind', exact: true }).selectOption('statblock');
+  await page.getByRole('button', { name: 'Stat blocks', exact: true }).click();
   for (const theme of ['Light', 'Dark']) {
     await page.getByRole('button', { name: theme, exact: true }).click();
-    await page.getByRole('button', { name: 'Undead · statblock Ghost' }).click();
+    await page.getByRole('button', { name: 'Open Ghost' }).click();
     dialog = page.getByRole('dialog');
     await expect(dialog).toContainText('The ghost chooses one additional target.');
     await expect(dialog).toContainText('while flying this way.');
     await page.screenshot({
-      path: testInfo.outputPath(`first-echelon-${theme.toLowerCase()}.png`),
+      path: `/artifacts/v36-regression-undead-${theme.toLowerCase()}.png`,
       fullPage: true,
     });
     await dialog.getByRole('button', { name: 'Open Haunt', exact: true }).click();
     await expect(dialog).toContainText('The ghost chooses one additional target.');
     await page.screenshot({
-      path: testInfo.outputPath(`first-echelon-ability-${theme.toLowerCase()}.png`),
+      path: `/artifacts/v36-regression-ability-${theme.toLowerCase()}.png`,
       fullPage: true,
     });
     await dialog.getByRole('button', { name: 'Close foe reference' }).click();
   }
   await search.fill('Zombie Dust');
-  await page.getByRole('combobox', { name: 'Kind', exact: true }).selectOption('ability');
+  await page.getByRole('button', { name: 'Abilities', exact: true }).click();
   await page.getByRole('combobox', { name: 'Usage', exact: true }).selectOption('Maneuver');
   await page.getByRole('combobox', { name: 'Keyword', exact: true }).selectOption('Area');
-  await page.getByRole('button', { name: 'Zombie · ability Zombie Dust Maneuver' }).click();
+  await page.getByRole('button', { name: 'Open Zombie Dust · Zombie' }).click();
   dialog = page.getByRole('dialog');
   await expect(dialog).toContainText('expelling a wave of rot and dust.');
   const text = await dialog.innerText();
@@ -61,7 +61,7 @@ test('public undead search, independent cards, navigation, dismissal and themes'
   await expect(prone).toHaveAttribute('href', '/rules/heroes/condition/prone');
   await prone.click();
   await expect(dialog.getByRole('heading', { name: 'Prone', exact: true }).first()).toBeVisible();
-  await expect(page).toHaveURL(/\/foes$/);
+  await expect(page).toHaveURL(/\/foes\?/);
   await dialog.getByRole('button', { name: 'Back', exact: true }).click();
   await expect(dialog.getByRole('heading', { name: 'Zombie Dust', exact: true })).toBeVisible();
   await page.keyboard.press('Escape');
@@ -72,11 +72,18 @@ test('second-echelon references preserve independent features and correct Malice
   page,
 }, testInfo) => {
   await page.goto('/foes');
-  await expect(page.getByText('Explore 438 stat blocks', { exact: false })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Foes library' })).toBeVisible();
   const search = page.getByRole('textbox', { name: 'Search foes' });
-  const kind = page.getByRole('combobox', { name: 'Kind', exact: true });
-  await kind.selectOption('statblock');
-  await expect(page.getByRole('status')).toHaveText('438 references');
+  const setKind = async (kind: string) => {
+    await page
+      .getByRole('button', {
+        name: kind === 'statblock' ? 'Stat blocks' : 'Abilities',
+        exact: true,
+      })
+      .click();
+  };
+  await setKind('statblock');
+  await expect(page.getByRole('status')).toHaveText('438 stat blocks');
   const firstEchelon = [
     'Crawling Claw',
     'Decrepit Skeleton',
@@ -102,7 +109,8 @@ test('second-echelon references preserve independent features and correct Malice
     'Vampire Spawn',
     'Wraith',
   ]) {
-    await page.getByRole('button', { name: `Undead · statblock ${name}`, exact: true }).click();
+    await search.fill(name);
+    await page.getByRole('button', { name: `Open ${name}`, exact: true }).click();
     const dialog = page.getByRole('dialog');
     await expect(dialog.getByRole('heading', { name, exact: true })).toBeVisible();
     await expect(
@@ -116,9 +124,9 @@ test('second-echelon references preserve independent features and correct Malice
   for (const theme of ['Light', 'Dark']) {
     await page.getByRole('button', { name: theme, exact: true }).click();
     await search.fill('Binding Curse');
-    await kind.selectOption('ability');
+    await setKind('ability');
     const trigger = page.getByRole('button', {
-      name: 'Mummy Lord · ability Binding Curse Main action',
+      name: 'Open Binding Curse · Mummy Lord',
       exact: true,
     });
     await trigger.click();

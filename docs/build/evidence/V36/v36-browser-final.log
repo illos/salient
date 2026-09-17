@@ -1,0 +1,10 @@
+
+Running 6 tests using 1 worker
+
+[1/6] tests/browser/foes-library.spec.ts:4:1 › foe browsing, composed filters, URL persistence, sorting and empty recovery
+[2/6] tests/browser/foes-library.spec.ts:48:1 › light and dark, mobile, enlarged text and keyboard search
+[3/6] tests/browser/foes-library.spec.ts:96:1 › full catalog bands, pagination, sourcebooks, Malice and related rules
+[4/6] tests/browser/foes.spec.ts:3:1 › public foes search, independent cards, navigation, dismissal and themes
+[5/6] tests/browser/v34-core-content.spec.ts:6:1 › live Rules and Foes share Core typography, automatic semantics and accessible navigation
+[6/6] tests/browser/v34-core-content.spec.ts:80:1 › live content retains readable text when the glyph font cannot load
+  6 passed (27.5s)

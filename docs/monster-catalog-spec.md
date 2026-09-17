@@ -560,3 +560,20 @@ catalog-only milestone must not claim those behaviors are complete.
 
 These decisions do not block the written design. They remain proposals to address in the relevant later
 implementation task.
+
+## Foes library browsing — V36
+
+The public `/foes` library follows the Rules index layout, with a monster-band sidebar, a responsive
+list and shared Core reference cards. A band is the source monster family/group, independently of
+organization and level. Stat blocks are the default; abilities, traits, Malice and all-reference views
+remain available. Filters combine band, level, role, organization, sourcebook, keyword and ability usage. Search
+includes names, source text and a creature's feature names/text, with exact-title priority, partial
+matching and typo tolerance. Sorting supports name, band, level in both directions and printed EV
+amount; EV quantities remain visibly attached and no encounter arithmetic is implied.
+
+Filter/search/sort state lives in the URL and survives reload and reference-card dismissal. Results
+are revealed in batches of 40. Cards retain complete source, feature/parent navigation, related Malice,
+nested rules navigation, keyboard dismissal and focus restoration. Reading remains public and separate
+from live roster loading. The catalog determines available bands/levels/roles and actual coverage;
+this UI does not add content or confer automation support. Verification is tracked in
+[the V36 slice](build/V36-foes-library.md).

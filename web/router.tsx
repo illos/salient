@@ -1,3 +1,4 @@
+import { foesSearch } from './foes/filters';
 // SPDX-License-Identifier: GPL-3.0-only
 import { lazy, Suspense, useEffect, useState } from 'react';
 import {
@@ -347,9 +348,10 @@ function rulesSearch(search: Record<string, unknown>): {
 const foesRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/foes',
+  validateSearch: foesSearch,
   component: () => (
-    <Suspense fallback={<Loading>Opening undead…</Loading>}>
-      <FoesPage />
+    <Suspense fallback={<Loading>Opening foes…</Loading>}>
+      <FoesPage filters={foesRoute.useSearch()} />
     </Suspense>
   ),
 });

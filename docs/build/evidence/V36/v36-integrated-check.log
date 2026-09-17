@@ -1,0 +1,158 @@
+$ pnpm lint && pnpm check:engine && pnpm check:app && pnpm check-links && pnpm check-vendor && pnpm content:check && pnpm foes:check && pnpm build
+$ eslint . && prettier --check .
+Checking formatting...
+All matched files use Prettier code style!
+$ tsc --noEmit && vitest run --project engine
+
+ RUN  v4.1.11 /app
+
+ ✓  engine  tests/fury-decisions.test.ts (5 tests) 362ms
+   ✓ R01 checks 2-3: every option value, grant and quoted count/budget sentence is verbatim in its cited source  346ms
+ ✓  engine  tests/character-v25-evaluator.test.ts (8 tests) 305ms
+ ✓  engine  tests/cli.test.ts (1 test) 201ms
+ ✓  engine  tests/acceptance.test.ts (3 tests) 92ms
+ ✓  engine  tests/live-state-initialization.test.ts (4 tests) 71ms
+ ✓  engine  tests/parser.test.ts (8 tests) 78ms
+ ✓  engine  tests/character-derived-values.test.ts (4 tests) 54ms
+ ✓  engine  tests/history.test.ts (3 tests) 45ms
+ ✓  engine  tests/character-evaluator.test.ts (8 tests) 28ms
+ ✓  engine  tests/core-conditions.test.ts (11 tests) 25ms
+ ✓  engine  tests/character-creation-rulings.test.ts (6 tests) 18ms
+ ✓  engine  tests/resolve.test.ts (19 tests) 13ms
+ ✓  engine  tests/engine.test.ts (13 tests) 15ms
+ ✓  engine  tests/v25-build-roll-contributions.test.ts (4 tests) 4ms
+
+ Test Files  14 passed (14)
+      Tests  97 passed (97)
+   Start at  03:35:07
+   Duration  3.04s (transform 244ms, setup 0ms, import 449ms, tests 1.31s, environment 1ms)
+
+$ tsc -p tsconfig.web.json && vitest run --project app --project scripts
+
+ RUN  v4.1.11 /app
+
+ ✓  app  tests/app/abilities.test.ts (17 tests) 2460ms
+     ✓ acceptance 1 and 2: 10.1 free strike through /ability use; retry returns the same result with no second roll or damage  1028ms
+ ✓  app  tests/app/combat.test.ts (19 tests) 1373ms
+     ✓ acceptance 1: the setup card is a Director draft that follows the rosters; Cancel leaves no encounter, snapshot or lock  522ms
+ ✓  app  tests/app/history.test.ts (14 tests) 1381ms
+ ✓  app  tests/app/admission.test.ts (11 tests) 939ms
+     ✓ acceptance 3: a player submission is not effective until approval; withdrawal and decline leave it unchanged  500ms
+ ✓  app  tests/app/closeout-session.test.ts (6 tests) 932ms
+     ✓ missing Void choice, unauthorized closure and pause with a Void choice leave state and history untouched  555ms
+ ✓  app  tests/app/v001-walkthrough.test.ts (1 test) 894ms
+   ✓ A09: admitted hero → real combat → correction/history → closeout → next session → paused Void keep/reset  893ms
+ ✓  app  tests/app/closeout.test.ts (7 tests) 875ms
+     ✓ ends structure without synthetic boundaries/dice; closes cards, supports rewind/redo, rejects turns and attacks  520ms
+ ✓  app  tests/app/history-audit.test.ts (5 tests) 772ms
+     ✓ admission is separate; targeting preparation does not consume undo and is cleared by it  513ms
+ ✓  app  tests/app/audience.test.ts (8 tests) 725ms
+     ✓ difficulty projection preserves public skill text containing result-like punctuation: Lore; hard: winter  445ms
+ ✓  app  tests/app/table.test.ts (6 tests) 695ms
+     ✓ acceptance 1 and 2: authority matrix across Director, player and observer  461ms
+ ✓  app  tests/app/character-review-queue.test.ts (2 tests) 645ms
+   ✓ an owner sees a new pending submission after 205 withdrawn reviews from same owner  598ms
+ ✓  app  tests/app/a05-review-regressions.test.ts (3 tests) 632ms
+   ✓ committed combat checks Ferocity affordability during roll  500ms
+ ✓  app  tests/app/registry.test.ts (7 tests) 619ms
+     ✓ acceptance 1: the same /table roll from two submitters yields events of identical shape with server dice  447ms
+ ✓  app  tests/app/foes.test.ts (5 tests) 602ms
+     ✓ Director loads independent sourced foes; peers see every foe through the selected health projection  460ms
+ ✓  app  tests/app/characters.test.ts (9 tests) 578ms
+     ✓ create/reopen persists authored fields and isolates private drafts across users  407ms
+ ✓  app  tests/app/setup-local.test.ts (6 tests) 565ms
+ ✓  app  tests/app/access-sessions.test.ts (8 tests) 540ms
+ ✓  app  tests/app/foe-operations.test.ts (2 tests) 572ms
+   ✓ foe buttons/API/commands share retries, source snapshots and journaled creation/removal  503ms
+ ✓  app  tests/app/content.test.ts (3 tests) 752ms
+     ✓ reseed loads every manifest entry; queries return the Goblin Warrior source verbatim  603ms
+ ✓  app  tests/app/interactions.test.ts (3 tests) 577ms
+     ✓ acceptance 5: opened by a short command, labeled in the log, answered headlessly, resolved  508ms
+ ✓  app  tests/app/character-rulings.test.ts (2 tests) 505ms
+   ✓ Q-CHAR-10 shared evaluation, persisted draft and admission allow two of three ancestry points  461ms
+ ✓  app  tests/app/closeout-audit.test.ts (1 test) 502ms
+   ✓ normal cleanup clears a retained foe temporary pool once, with a private persisted journal  501ms
+ ✓  app  tests/app/independent-review.test.ts (4 tests) 474ms
+   ✓ independent: persisted session deletion revokes already issued identity across all private surfaces  406ms
+ ✓  app  tests/app/journal.test.ts (5 tests) 455ms
+     ✓ concurrent appends to one campaign get distinct consecutive sequence numbers  303ms
+ ✓  app  tests/app/elementalist-character.test.ts (4 tests) 354ms
+ ✓  app  tests/app/dice.test.ts (6 tests) 321ms
+ ✓  app  tests/app/history-interaction-regressions.test.ts (8 tests) 305ms
+ ✓  app  tests/app/parse.test.ts (97 tests) 15ms
+ ✓  app  tests/app/engine-adapter.test.ts (1 test) 6ms
+ ✓  app  tests/app/command-identities.test.ts (2 tests) 3ms
+ ✓  scripts  tests/scripts/rules.test.ts (8 tests) 65355ms
+   ✓ ranks every unique exact title first, supports prefixes, typos and filters  4852ms
+   ✓ regenerates identical articles, metadata and search from the same pin  29755ms
+ ✓  scripts  tests/scripts/core-presentation.test.ts (7 tests) 15710ms
+     ✓ projects all immutable Foe edition objects without editing their source HTML  1333ms
+   ✓ covers every Core glyph family through the production projection and React semantics  14251ms
+ ✓  scripts  tests/scripts/foes.test.ts (25 tests) 27099ms
+     ✓ regenerates twice byte-for-byte and retains exact pinned input  26421ms
+ ✓  scripts  tests/scripts/build-content.test.ts (22 tests) 1791ms
+     ✓ detects a hand-edited generation date 9999-99-99 independently  580ms
+     ✓ detects a hand-edited generation date 2020-01-01 independently  551ms
+ ✓  scripts  tests/scripts/check-commit.test.ts (14 tests) 278ms
+ ✓  scripts  tests/scripts/app-output.test.ts (1 test) 206ms
+ ✓  scripts  tests/scripts/foes-library.test.ts (4 tests) 46ms
+ ✓  scripts  tests/scripts/glyphs.test.ts (4 tests) 40ms
+ ✓  scripts  tests/scripts/pinned-source.test.ts (1 test) 41ms
+ ✓  scripts  tests/scripts/check-links.test.ts (4 tests) 8ms
+
+ Test Files  40 passed (40)
+      Tests  362 passed (362)
+   Start at  03:35:19
+   Duration  138.28s (transform 1.20s, setup 0ms, import 3.91s, tests 130.64s, environment 3ms)
+
+$ node scripts/check-links.ts
+Checked 204 Markdown files: no broken relative links or anchors.
+$ node scripts/check-vendor.ts
+vendor/ matches the pinned submodule commits (2 submodules).
+$ node scripts/build-content.ts --check
+shared/content/compendium matches the clean pinned Compendium (467 entries, 10 excluded, revision fb83a789da8f).
+$ node scripts/ingest-foes.ts --check
+Foes: 438 stat blocks, 2006 features; edition bf262edf546e91e1540cc17489915f18c4873ddd8bd8e225b20f3441e3f74f30; verified
+$ pnpm rules:ingest && tsc -p tsconfig.web.json && vite build
+$ node scripts/ingest-rules.ts
+Ingested 2614 entries, 26 categories from fb83a789da8f. No unresolved links.
+vite v8.3.0 building client environment for production...
+transforming...
+✓ 2839 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                                         1.58 kB │ gzip:   0.67 kB
+dist/assets/search.worker-oMKCTI8n.js                                  19.07 kB
+dist/assets/schibsted-grotesk-latin-ext-wght-normal-hsMS0n0O.woff2     20.92 kB
+dist/assets/DrawSteelGlyphs-Regular-Bxmll151.otf                       21.63 kB
+dist/assets/schibsted-grotesk-latin-wght-normal-Bb8VGrTG.woff2         46.75 kB
+dist/assets/overlay-card-C1jW4vvI.css                                   0.75 kB │ gzip:   0.39 kB
+dist/assets/foes-BGgFncNM.css                                           3.96 kB │ gzip:   1.16 kB
+dist/assets/article-Dre97K8_.css                                       11.34 kB │ gzip:   2.68 kB
+dist/assets/index-B5pltIKh.css                                         88.25 kB │ gzip:  15.87 kB
+dist/assets/search-Dpk19Yep.js                                          0.44 kB │ gzip:   0.28 kB
+dist/assets/preview-botouLM5.js                                         0.93 kB │ gzip:   0.56 kB
+dist/assets/article-DfP8S_Mx.js                                         1.33 kB │ gzip:   0.82 kB
+dist/assets/x-CWHCGWgR.js                                               4.80 kB │ gzip:   2.16 kB
+dist/assets/content-DedMq4x3.js                                        10.32 kB │ gzip:   4.00 kB
+dist/assets/rules-BJAgCa-P.js                                          13.31 kB │ gzip:   4.30 kB
+dist/assets/overlay-card-BdINy0Yq.js                                   90.77 kB │ gzip:  32.29 kB
+dist/assets/index-BdS1P03l.js                                       1,017.90 kB │ gzip: 301.98 kB
+dist/assets/foes-DOtQYJQq.js                                        6,733.38 kB │ gzip: 705.37 kB
+
+✓ built in 3.67s
+[plugin builtin:vite-reporter]
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+[PLUGIN_TIMINGS] Plugin hooks ran for 3.2s of this 3.7s build (87%).
+The slowest hooks, timed inside each callback (the wait before a callback starts is excluded, the time it awaits is included):
+  - vite:worker-import-meta-url transform (84%, 3.1s, 1 call)
+  - vite:css transform (79%, 2.9s, 6 calls)
+These rows add up to more than the total. Callbacks can overlap, so the same time counts for more than one row.
+2 hooks are listed without a time. Their calls overlapped, so the time inside one call includes work from other calls. To find their cost, profile the build with `node --cpu-prof`:
+  - @tailwindcss/vite:generate:build transform (6 calls)
+  - vite:asset load (2 calls)
+See https://rolldown.rs/reference/InputOptions.checks#plugintimings for more details.
+
