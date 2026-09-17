@@ -46,8 +46,8 @@ systems. This scope change does not remove the established priority on table per
 - Preserve the option to run the application on one home server with players connecting over LAN. The v1
   architecture must allow this; a packaged self-hosted edition is not established as an initial release gate.
 - Cloudflare Email Service is selected (2026-09-17), with sender `salient@blackgate.studio`.
-  [V39](build/V39-account-email.md) implements password reset, the only v1 email flow; live sending
-  configuration and offline LAN recovery remain pending.
+  [V39](build/V39-account-email.md) enables hosted password reset, the only v1 email flow; Cloudflare
+  queued the delivery test. Inbox confirmation and offline LAN recovery remain pending.
 
 **Recommended baseline** below means an implementation recommendation with supporting reasoning. Only
 explicitly confirmed entries are settled user choices. SSR, engine technology, and exact package versions
@@ -266,7 +266,8 @@ to v1 or restore the excluded admin dashboard.
 Keep email delivery behind a small integration boundary. The user selected Cloudflare Email Service on
 2026-09-17, from `salient@blackgate.studio`, using the REST API from Convex. See
 [the account-email contract](accounts-and-access-spec.md#cloudflare-account-email--2026-09-17).
-Live delivery configuration/verification and offline LAN recovery remain pending. Existing password-reset scope and pending
+Hosted recovery is configured and browser-verified; the delivery test is queued, with inbox confirmation
+pending. Offline LAN recovery remains pending. Existing password-reset scope and pending
 credential-change policy remain fuller-product requirements; password recovery is not a v0.01 gate.
 
 For a disconnected LAN edition, local email/password login should not depend on a cloud identity service.

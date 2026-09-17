@@ -1,0 +1,6 @@
+
+Running 2 tests using 1 worker
+
+[1/2] tests/browser/password-recovery.spec.ts:18:1 › forgot-password response and missing/invalid reset links are clear
+[2/2] tests/browser/password-recovery.spec.ts:54:1 › real reset preserves account access, clears old session, and rejects token reuse
+  2 passed (20.7s)

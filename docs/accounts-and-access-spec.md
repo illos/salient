@@ -234,8 +234,9 @@ are abuse mitigation, not a strict atomic quota. Convex must supply a trusted cl
 IP limits; mail failures are recorded as sanitized internal action errors, without exposing provider
 payloads to callers. Queued delivery is acceptance by the mail service, not proof of inbox arrival.
 
-Implementation is under validation in [V39](build/V39-account-email.md); cloud activation and actual
-inbox verification remain pending a suitable email-sending credential and selected test recipient.
+[V39](build/V39-account-email.md) is merged and live on hosted development. Actual hosted browser
+checks passed password/session replacement, token reuse rejection and request limiting. Cloudflare
+accepted/queued a separate test message to the selected inbox; inbox receipt is awaiting confirmation.
 Authenticated credential-change/account-deletion flows and offline LAN recovery remain separate work.
 
 ### Proposed regular-account behavior

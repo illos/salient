@@ -72,11 +72,11 @@ backend; do not reset data as a rollback. Verify schema compatibility before rol
 
 ## Account email
 
-V39 prepares password-reset delivery from `salient@blackgate.studio` through Cloudflare Email Service.
+V39 enables hosted password-reset delivery from `salient@blackgate.studio` through Cloudflare Email Service.
 Use an email-only token for Blackgate Studio with **Email Sending: Edit**, supplied through the secret
 broker, and set it as **backend** `CLOUDFLARE_EMAIL_API_TOKEN` on `dev:different-bat-943`. Never use a
-`VITE_` variable or place it in the frontend build. The deployment token currently available for S04
-is active but the email API rejects it; no sending credential has been installed yet.
+`VITE_` variable or place it in the frontend build. The user installed the dedicated sending token
+directly in Convex on 2026-09-17; it is separate from the deployment token.
 
 The configured `SITE_URL` supplies the reset-link origin. No frontend key is needed. Recovery UI is
 available only when backend mail configuration exists. To disable new recovery requests, remove the
@@ -85,7 +85,10 @@ need no reseed. Internal mail failures contain only a sanitized category/HTTP st
 and Cloudflare Email Service delivery logs for operations. Avoid blind retries after ambiguous network
 failures: request a new reset link through the UI instead.
 
-Before activation, verify the sender domain is ready and exercise a reset with an operator-selected
-inbox. Confirm received sender/link, reset, old-password rejection, fresh sign-in and session revocation.
-Do not equate Cloudflare's queued acceptance with inbox delivery. See [V39](build/V39-account-email.md)
-for the validation record and remaining activation blocker.
+Implementation `62ca7b9` is live on hosted dev, Worker version
+`97387eb7-b9b7-41c1-b19e-dc96379cecc3`. Actual hosted browser checks passed reset, old-password
+rejection, fresh sign-in, session revocation, token reuse rejection and request limiting with a
+disposable account. Cloudflare accepted/queued a separate test to the operator-selected inbox.
+Received sender/link and inbox arrival remain unconfirmed; queued acceptance is not inbox delivery.
+See [V39](build/V39-account-email.md) for the validation record. Shared private main also has the code
+but keeps recovery unavailable because it has no email token.

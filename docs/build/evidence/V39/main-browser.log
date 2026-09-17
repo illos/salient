@@ -1,0 +1,5 @@
+
+Running 1 test using 1 worker
+
+[1/1] tests/browser/journey.spec.ts:15:1 › accounts, invitation approval, session lifecycle, private draft persistence and reconnect
+  1 passed (37.8s)

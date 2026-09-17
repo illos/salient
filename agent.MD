@@ -451,7 +451,8 @@ evidence; they do not prove semantics. Prefer meaningful examples and executable
 - Use [the accounts and access specification](docs/accounts-and-access-spec.md) for the detailed access
   contract. **Better Auth is selected** through its Convex integration; the prior Convex Auth preference is
   superseded. Cloudflare Email Service is selected for password reset (V39, sender
-  `salient@blackgate.studio`); live sending configuration and future LAN recovery remain pending. Preserve the distinction
+  `salient@blackgate.studio`); hosted recovery is live and browser-verified, with delivery-test inbox
+  confirmation and future LAN recovery pending. Preserve the distinction
   between confirmed requirements, proposed implementation contracts and unresolved policy. Specification work
   is not backend/deployment authorization.
 - Use [the v1 tech stack](docs/v1-tech-stack-spec.md) for recommended frontend libraries, table realtime and

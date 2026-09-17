@@ -298,4 +298,4 @@ records the handoff; it does not certify A09 or create an implementation commit.
 
 | Id | Slice | Status | Owner |
 | --- | --- | --- | --- |
-| V39 | [Account email and password recovery](V39-account-email.md) | Blocked on sending credential/test inbox — implementation reviewed, 672 tests and 2 browser scenarios pass on slice/V39; not merged or activated | Deploy thread, hosting worktree |
+| V39 | [Account email and password recovery](V39-account-email.md) | Merged/live `62ca7b9` — reviewed implementation, 672 tests; 2 hosted recovery scenarios and shared-main journey pass; Cloudflare accepted/queued test message, inbox confirmation pending | Deploy thread, hosting worktree |

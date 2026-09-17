@@ -1,0 +1,43 @@
+Target: dev (different-bat-943); frontend https://salient-dev.rdxx.workers.dev; operation frontend
+Progress: resolved 1, reused 0, downloaded 0, added 0
+Progress: resolved 22, reused 0, downloaded 9, added 0
+Packages: +35
++++++++++++++++++++++++++++++++++++
+Progress: resolved 91, reused 0, downloaded 34, added 32
+Progress: resolved 91, reused 0, downloaded 36, added 33
+Progress: resolved 91, reused 0, downloaded 37, added 34
+Progress: resolved 91, reused 0, downloaded 38, added 34
+Progress: resolved 91, reused 0, downloaded 38, added 35, done
+Added 8 entries to minimumReleaseAgeExclude in pnpm-workspace.yaml (set minimumReleaseAgeStrict to true to gate these updates with a prompt):
+  @cloudflare/workerd-darwin-64@1.20260917.1
+  @cloudflare/workerd-darwin-arm64@1.20260917.1
+  @cloudflare/workerd-linux-64@1.20260917.1
+  @cloudflare/workerd-linux-arm64@1.20260917.1
+  @cloudflare/workerd-windows-64@1.20260917.1
+  miniflare@5.20260917.0-alpha
+  workerd@1.20260917.1
+  wrangler@4.134.0
+
+ ⛅️ wrangler 4.134.0
+────────────────────
+🌀 Building list of assets...
+✨ Read 54 files from the assets directory /app/dist
+🌀 Starting asset upload...
+🌀 Found 7 new or modified static assets to upload. Proceeding with upload...
++ /assets/preview-CLZuKEfB.js
++ /assets/index-Cwn7TpfO.css
++ /assets/foes-7cvQWThp.js
++ /index.html
++ /assets/overlay-card-CC4zlAt4.js
++ /assets/rules-4M9lenNI.js
++ /assets/index-7p-1PPnJ.js
+Uploaded 2 of 7 assets
+Uploaded 4 of 7 assets
+Uploaded 7 of 7 assets
+✨ Success! Uploaded 7 files (43 already uploaded) (7.49 sec)
+
+Total Upload: 0.44 KiB / gzip: 0.31 KiB
+Uploaded salient-dev (10.53 sec)
+Deployed salient-dev triggers (0.67 sec)
+  https://salient-dev.rdxx.workers.dev
+Current Version ID: 97387eb7-b9b7-41c1-b19e-dc96379cecc3

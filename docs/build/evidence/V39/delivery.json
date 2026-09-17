@@ -1,0 +1,11 @@
+{
+  "checkedAt": "2026-09-17T23:44:07.168275+00:00",
+  "httpStatus": 200,
+  "success": true,
+  "recipient": "user-selected iCloud inbox",
+  "delivered": false,
+  "queued": true,
+  "permanentBounce": false,
+  "errors": [],
+  "inboxConfirmation": "pending user confirmation"
+}

@@ -9,7 +9,7 @@
 | Rules review | not required |
 | Depends on | S04 and existing Better Auth integration |
 | Unblocks | Hosted password recovery |
-| Status | Implementation reviewed; activation blocked on credential/test inbox; see [STATUS](STATUS.md) |
+| Status | Merged and activated on hosted dev; inbox confirmation pending; see [STATUS](STATUS.md) |
 
 ## Goal
 
@@ -41,7 +41,7 @@ Existing Better Auth and Convex components are real dependencies. External deliv
 in unit integration tests. Isolated browser verification uses
 `tests/fixtures/password-recovery.mjs`: a disposable account and provider verification record,
 an unusable credential for capability UI, and requests for nonexistent accounts. No deployed bypass.
-Live activation needs a suitable sending token and user-selected recipient; neither is available yet.
+The user subsequently supplied a backend sending token and selected a test inbox; see activation results below.
 
 ## Deliverables
 
@@ -65,13 +65,14 @@ integration tests, isolated browser fixture/tests, owning specs and evidence/rev
 6. Full `pnpm check`, clean isolated backend push, focused integration tests, real browser reset,
    reload/sign-in/revocation checks and independent implementation review pass.
 
-## Activation gate — pending external inputs
+## Activation verification
 
-After implementation review, install a valid backend-only email token for Cloudflare Blackgate Studio;
-confirm sender readiness; deploy reviewed code to dev `different-bat-943` / Worker `salient-dev` and
-verify an actual received email and full reset flow using the selected inbox. Verify request limits
-through the cloud endpoint as well (the isolated browser check proves the CT114 proxy only). Do not report sending
-or deployment complete until verified. No content reset, existing-user credential change or data migration.
+Reviewed code is deployed to dev `different-bat-943` / Worker `salient-dev`. The backend-only
+Cloudflare token is installed. Cloudflare accepted/queued a clearly labeled test message to the
+user-selected inbox. That inbox has no hosted account, so the full reset and cloud request-limit
+checks used a separate disposable account on the same hosted app. Those checks passed. Actual inbox
+receipt and the received-message sender/link remain unverified; do not equate queued acceptance
+with receipt. No content reset, existing-user credential change or data migration occurred.
 
 ## Ability design and playtest evidence
 
@@ -83,7 +84,7 @@ Not applicable.
 
 ## Open questions
 
-No open product questions. Activation inputs: sending credential and selected test inbox.
+No open product questions. Awaiting the user’s confirmation that the delivery test reached their inbox.
 
 ## Work log
 
@@ -121,6 +122,34 @@ Final focused checks after strengthening review coverage: lint, app TypeScript, 
 235 Markdown files passed; production code is unchanged from the full suite. Independent
 [implementation review](reviews/V39-account-email-review.md) passed (`v39_review`, 2026-09-17).
 The isolated fixture's `--cleanup` removed its fake mail environment variable and secret artifact;
-actual `auth:recoveryAvailable` readback returned false afterward. No hosted credentials were copied
-to CT114 for this slice. Cloud dev/Worker and shared private main remain unchanged; this branch is not
-merged or activated. Resume from reviewed V39 once email-sending credential and test inbox are supplied.
+actual `auth:recoveryAvailable` readback returned false afterward. At this implementation checkpoint,
+no hosted credentials had been copied to CT114 and cloud/shared-main remained unchanged. The
+subsequent authorized activation follows.
+
+2026-09-17 activation: user installed `CLOUDFLARE_EMAIL_API_TOKEN` directly on the selected Convex
+dev deployment and supplied an iCloud test inbox. The new credential passed API authentication;
+a clearly labeled delivery test returned HTTP 200, success, queued recipient and no permanent bounce.
+Inbox receipt is pending user confirmation. The existing deployment token remains separate.
+
+Reviewed implementation commit `62ca7b964c700eae20fd32b3393fdbcd175c9af4` was fast-forward merged
+into main, deployed to Convex dev `different-bat-943` and published to Worker `salient-dev`, version
+`97387eb7-b9b7-41c1-b19e-dc96379cecc3`. Public recovery capability read back true. The hosted build
+used the real cloud URLs, and its asset stamp passed before publication. No seed/reset was run.
+
+The actual hosted recovery browser suite passed both scenarios in 20.7s, including cloud IP request
+limiting, new-password login/reload, old-password/session rejection and token reuse rejection. Its
+disposable `.test` account obtained a token through the normal recovery endpoint; only that synthetic
+account's token was read for browser automation. The request also scheduled a message to the reserved
+`.test` address, which cannot prove inbox delivery. Earlier admin fixture insertion was refused by
+the deployment key's missing data-write permission; no permission expansion or app bypass was added.
+
+Shared private main on CT114 now serves the same implementation at its established HTTPS URL. The
+first journey attempt encountered the backend's one-second query timeout while builds were running.
+After stopping the unused hosted anonymous services and serializing work, the journey passed in
+37.8s. A focused browser check also confirmed private main reports recovery unavailable and hides
+the recovery link, since its backend has no email token. Existing data volumes were preserved.
+
+Temporary CT114 deployment credentials and the disposable cloud recovery fixture were removed.
+The hosted anonymous services remain stopped; shared main remains running. Documentation/evidence
+closeout does not change runtime code or require another deployment. See the
+[activation evidence](evidence/V39/README.md#hosted-activation).
