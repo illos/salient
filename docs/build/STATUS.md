@@ -277,4 +277,4 @@ records the handoff; it does not certify A09 or create an implementation commit.
 
 | Slice | Outcome | Status | Owner |
 | --- | --- | --- | --- |
-| V35 | [Full core stat-block ingestion](V35-full-core-ingestion.md) | Reviewed — full core ingest, 455 tests and 5 browser scenarios pass; both independent reviews pass; awaiting branch commit | Codex, foes-full worktree |
+| V35 | [Full core stat-block ingestion](V35-full-core-ingestion.md) | Committed — `0b07723` on `slice/V35` (prerequisite `214d04b`); 455 tests, 5 browser scenarios and both reviews pass; handed to V36, not merged into main | Codex, foes-full worktree |

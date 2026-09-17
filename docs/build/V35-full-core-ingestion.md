@@ -129,3 +129,11 @@ Corrected those descriptions and regenerated the report. The actual fields, sour
 were already correct. CT114 `pnpm foes:compare && pnpm foes:check` passes again with 475 explained,
 26 unavailable, zero other outcomes and the same immutable edition. No browser or engine behavior
 changed, so the passing full suite and browser evidence remain applicable.
+
+
+Committed implementation: `0b07723e6dba64e30d454eb6d8ed0d022cd8b656`, following prerequisite
+`214d04bc0125141b99d021e215bfee5d549e7b70`, on `slice/V35`. Both reviews pass. Final CT114
+links check covers 201 Markdown files; changed comparison-ledger formatting passes. The local
+`node scripts/check-commit.ts --merge --range main..HEAD` gate accepts both implementation commits.
+Chords handoff sent the exact implementation revision and consumer/test paths to V36. Main remains
+`a0ac6d4`, clean and unmodified; this is a committed branch handoff awaiting integration.
