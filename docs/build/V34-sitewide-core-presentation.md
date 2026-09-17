@@ -1,6 +1,6 @@
 # V34 — Sitewide Core presentation
 
-Status: Verified on `slice/V34`; main/runtime integration pending, 2026-09-17. Primary track: UI. Rules review: not required (presentation only).
+Status: Complete; merged into main and verified on shared CT114 runtime, 2026-09-17. Primary track: UI. Rules review: not required (presentation only).
 
 ## Scope and dependencies
 
@@ -45,3 +45,15 @@ User approved the V33 study and requested sitewide rollout. Depends on committed
   harness errors and the two detected corpus gaps were fixed before the final passing checks.
 - [Independent presentation review](reviews/V34-presentation-review.md) passed on 2026-09-17;
   all findings resolved. Main integration and shared-runtime verification follow this checkpoint.
+- Integrated V33 `bc773c1` and V34 `e3ae838` into `main` by fast-forward. Commit integration gate
+  passed for both reviewed commits. `presidium-dev up` from the canonical main checkout updated
+  CT114's established local-anonymous `main` environment, Compose `salient-dev-b90776c53141`, at
+  [the shared playable URL](https://salient-dev-fc4f48cb09a0.tail41404c.ts.net).
+  Runtime metadata confirms clean source `e3ae838ccf8272b565a45d31dd5ce041ec1f59e6`;
+  backend healthy, frontend HTTPS verified, Rules regenerated with no unresolved links.
+- All three V34 browser scenarios passed on shared `main` in 35.3 seconds, including authenticated
+  character/Director views, embedded previews, native AX, font fallback, keyboard navigation and
+  live Stamina reload. [Main rollout evidence](evidence/V34/README.md#shared-main-rollout)
+  records the final log and screenshots. Existing data volume was reused; no database reset,
+  migration or canonical content seed. Browser fixtures created their own test accounts/campaign.
+  The completion-record commit changes documentation only and needs no further runtime sync.

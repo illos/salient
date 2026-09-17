@@ -1,0 +1,7 @@
+
+Running 3 tests using 1 worker
+
+[1/3] tests/browser/v34-core-content.spec.ts:6:1 › live Rules and Foes share Core typography, automatic semantics and accessible navigation
+[2/3] tests/browser/v34-core-content.spec.ts:80:1 › live content retains readable text when the glyph font cannot load
+[3/3] tests/browser/v34-core-content.spec.ts:90:1 › hero and Director sheets use full Core content while live stats and audience stay separate
+  3 passed (35.3s)

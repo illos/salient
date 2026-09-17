@@ -1,6 +1,6 @@
 # V34 production presentation verification
 
-All dependency, compilation and browser workloads ran on CT114 in the named `ui` environment,
+Pre-integration dependency, compilation and browser workloads ran on CT114 in the named `ui` environment,
 Compose `salient-ui-dev-5363f12d852c`, at
 `https://salient-ui-dev-c70637603db5.tail41404c.ts.net`.
 
@@ -57,3 +57,27 @@ No backend, headless, game engine, canonical content or archived Foe edition byt
 uses stored foe snapshot text and complete hero source; build damage modifiers remain separate.
 Rules HTML has a new cache version. No unrelated V30/V32/parser branch was merged. Font and license
 remain unmodified, with an attribution/license link in the public Rules and Foes footers.
+
+## Shared main rollout
+
+On 2026-09-17, V33 `bc773c1` and V34 `e3ae838` were fast-forwarded into main. The normal
+`presidium-dev up` updated the established local-anonymous CT114 `main` environment from the clean
+canonical checkout at `e3ae838ccf8272b565a45d31dd5ce041ec1f59e6`. Compose identity:
+`salient-dev-b90776c53141`; [shared app](https://salient-dev-fc4f48cb09a0.tail41404c.ts.net).
+Both vendor pins were clean; backend healthy; frontend HTTPS verified. Rules ingestion regenerated
+2,614 records with no unresolved links. Existing backend data volume was preserved without reset,
+migration or content reseeding.
+
+`presidium-dev run browser -- … pnpm exec playwright test tests/browser/v34-core-content.spec.ts
+--workers=1 --output=/artifacts/v34-main-browser --reporter=line`: **3 passed in 35.3 seconds**.
+These repeated the changed-feature journeys against actual shared main, including normal authenticated
+hero/Director reads and writes with isolated test fixtures, native accessibility, blocked-font fallback,
+embedded preview focus return, and live Stamina 9/15 surviving reload alongside printed Stamina 15.
+
+- [Shared-main browser log](main/v34-main-browser.log)
+- [Shared-main Rules](main/v34-rules-light.png)
+- [Shared-main character sheet](main/v34-character.png)
+- [Shared-main Director sheet](main/v34-director.png)
+
+The later completion-record commit only updates documentation/evidence; runtime source remains the
+verified implementation commit above. No further runtime sync is needed for that record.

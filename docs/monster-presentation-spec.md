@@ -1,6 +1,6 @@
 # Core-style monster presentation and automatic glyph semantics
 
-Status: V33 approved design; V34 production rollout in progress, 2026-09-17. The user requested a
+Status: V33 approved design; V34 integrated and live on shared CT114 main, 2026-09-17. The user requested a
 Core-book presentation design and, especially, a small system that automatically assigns ARIA
 semantics to every known glyph combination. The preview demonstrates that contract. The user approved the display and requested sitewide rollout;
 [V34](build/V34-sitewide-core-presentation.md) owns its production integration and verification.

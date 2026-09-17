@@ -6,7 +6,7 @@
 | Owner | Codex, Core-Style Monster Content Presentation |
 | Depends on | A08, S01, integrated Rules/Foes/sheets; V28 vocabulary carried forward |
 | Rules review | not required: source transcription/presentation, no mechanical changes |
-| Status | Design/reference implementation; production rollout remains separate |
+| Status | Complete; approved design merged into main with V34 production rollout |
 
 ## Goal and scope
 
@@ -52,3 +52,8 @@ spacing at doubled text size. Full check passes 437 tests; final Chromium run pa
 tests in 4.9 seconds and records 76 native image roles/names. Font hash, five source fixtures,
 190 documentation links and whitespace verified. This commit is a branch handoff, **not merged**.
 The named UI preview remains running for the user's design review; shared main is unchanged.
+
+Subsequent integration, 2026-09-17: the user approved the design and requested sitewide rollout.
+[V34](V34-sitewide-core-presentation.md) integrated this commit `bc773c1` together with production
+adapters `e3ae838` into main, updated shared CT114 main, and passed all three live rollout scenarios.
+The earlier branch-only statements above describe the original V33 checkpoint.

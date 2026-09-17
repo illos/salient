@@ -263,10 +263,10 @@ records the handoff; it does not certify A09 or create an implementation commit.
 
 | Id | Slice | Status | Owner |
 | --- | --- | --- | --- |
-| V33 | [Core stat blocks and automatic glyph semantics](V33-core-stat-block-design.md) | Committed on `slice/V33` (this commit); reviewed design/reference implementation; not merged or rolled out | Codex, UI worktree |
+| V33 | [Core stat blocks and automatic glyph semantics](V33-core-stat-block-design.md) | Complete — `bc773c1` merged into main with V34; approved design and shared glyph contract | Codex, UI worktree |
 
 ## V34 UI rollout — 2026-09-17
 
 | Slice | Outcome | Status | Owner |
 | --- | --- | --- | --- |
-| V34 | [Sitewide Core presentation](V34-sitewide-core-presentation.md) | Verified on `slice/V34`; main/runtime integration pending | Codex, UI worktree |
+| V34 | [Sitewide Core presentation](V34-sitewide-core-presentation.md) | Complete — `e3ae838` merged into main and live on shared CT114 main; 444 tests, 7 UI browser tests and 3 shared-main scenarios pass; independent review pass | Codex, UI worktree |
