@@ -1,0 +1,178 @@
+[
+  {
+    "parent": "mcdm.monsters.v1/monster.gnoll/gnoll-malice",
+    "jsonSha256": "5a72fcd1a4ce6f693e8c1db011c216303b7af2297fb84cd782259fe16efb08e7",
+    "markdownSha256": "4eba6078b67ff9834e563c6e5670a72bd648fa1c1d26472d7de5b5a03238daa8",
+    "reason": "The source JSON mistakes the second Iron Jaws table row for a separate feature; join its effects to the named ability and retain the printed distance/target.",
+    "features": [
+      {
+        "sourceIndexes": [0, 1],
+        "record": {
+          "cost": "3 Malice",
+          "icon": "🔳",
+          "keywords": ["Area", "Ranged", "Weapon"],
+          "name": "Iron Jaws",
+          "usage": "Maneuver",
+          "distance": "1 cube within 3",
+          "target": "Special",
+          "effects": [
+            {
+              "effect": "A gnoll acting this turn drops an iron-jawed snare into the area. The first time any enemy moves into the area, they make an **Agility test**. If they were unaware of the snare, the test takes a bane.",
+              "name": "Effect",
+              "tier1": "6 damage; [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) (save ends)",
+              "tier2": "4 damage; [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) (EoT)",
+              "tier3": "No effect."
+            },
+            {
+              "effect": "While an enemy is [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) this way, each gnoll in the encounter gains an edge on strikes made against them.",
+              "name": "Effect"
+            }
+          ]
+        }
+      },
+      {
+        "sourceIndexes": [2],
+        "record": {
+          "body": "One gnoll [minion](scc.v1:mcdm.monsters.v1/rule.organization/minion) suddenly explodes into a pool of blood, splattering the area within 3 squares of them. Any gnoll who starts their turn in this area deals an extra 5 damage on their next strike before the end of their turn. Once per round, an abyssal hyena who starts their turn in the area turns into a **gnoll marauder**, keeping their current [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina).",
+          "cost": "5 Malice",
+          "effects": [
+            {
+              "effect": "One gnoll [minion](scc.v1:mcdm.monsters.v1/rule.organization/minion) suddenly explodes into a pool of blood, splattering the area within 3 squares of them. Any gnoll who starts their turn in this area deals an extra 5 damage on their next strike before the end of their turn. Once per round, an abyssal hyena who starts their turn in the area turns into a **gnoll marauder**, keeping their current [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina)."
+            }
+          ],
+          "icon": "👤",
+          "name": "Bloodpool"
+        }
+      },
+      {
+        "sourceIndexes": [3],
+        "record": {
+          "body": "Until the end of the encounter, the encounter map is encased in a soundscape of laughter and howling. Each enemy takes a bane on the first power roll they make each round. Whenever a gnoll is killed, this effect is suppressed until the start of the next round.",
+          "cost": "7 Malice",
+          "effects": [
+            {
+              "effect": "Until the end of the encounter, the encounter map is encased in a soundscape of laughter and howling. Each enemy takes a bane on the first power roll they make each round. Whenever a gnoll is killed, this effect is suppressed until the start of the next round."
+            }
+          ],
+          "icon": "🌀",
+          "name": "Echoes of Laughter"
+        }
+      }
+    ]
+  },
+  {
+    "parent": "mcdm.monsters.v1/monster.hag/hag-malice",
+    "jsonSha256": "8fe813f8a4e9ea1745148827e62020bdba8434b90d353a8bc17d7cd0eba0ab8b",
+    "markdownSha256": "842858753fb06e871a1fc120cb2a5d2bc9029cc96fff8cc03d1654834749805c",
+    "reason": "The source Markdown includes Casting Curses and Bodies omitted by JSON. Kick is printed as Signature Ability, not a resource cost; preserve House Call context and original JSON.",
+    "features": [
+      {
+        "sourceIndexes": [],
+        "record": {
+          "name": "Casting Curses and Bodies",
+          "icon": "❇️",
+          "cost": "3 Malice",
+          "effects": [
+            {
+              "effect": "The hag utters terrible words that [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) each enemy within 2 squares of them up to 3 squares."
+            }
+          ]
+        }
+      },
+      {
+        "sourceIndexes": [0],
+        "record": {
+          "cost": "5 Malice",
+          "distance": "10 x 1 line within 1",
+          "effects": [
+            {
+              "roll": "Power Roll + 3",
+              "tier1": "5 fire damage; R < 1 [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
+              "tier2": "8 fire damage; R < 2 [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
+              "tier3": "11 fire damage; R < 3 [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)"
+            },
+            {
+              "effect": "After making the power roll, the hag can choose to replace the damage type and condition with lightning damage and [dazed](scc.v1:mcdm.heroes.v1/condition/dazed), or cold damage and [slowed](scc.v1:mcdm.heroes.v1/condition/slowed).",
+              "name": "Effect"
+            }
+          ],
+          "icon": "🔳",
+          "keywords": ["Area", "Magic"],
+          "name": "Hag Wyrd",
+          "power_roll": {
+            "formula": "+ 3",
+            "tiers": {
+              "high": "11 fire damage; R < 3 [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
+              "low": "5 fire damage; R < 1 [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
+              "mid": "8 fire damage; R < 2 [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)"
+            }
+          },
+          "sections": [
+            {
+              "label": "Effect",
+              "text": "After making the power roll, the hag can choose to replace the damage type and condition with lightning damage and [dazed](scc.v1:mcdm.heroes.v1/condition/dazed), or cold damage and [slowed](scc.v1:mcdm.heroes.v1/condition/slowed)."
+            }
+          ],
+          "target": "Each enemy in the area",
+          "usage": "Main action"
+        }
+      },
+      {
+        "sourceIndexes": [1],
+        "record": {
+          "body": "The hag takes an additional main action on their turn. They can use this feature even if they are [dazed](scc.v1:mcdm.heroes.v1/condition/dazed).",
+          "cost": "5 Malice",
+          "effects": [
+            {
+              "effect": "The hag takes an additional main action on their turn. They can use this feature even if they are [dazed](scc.v1:mcdm.heroes.v1/condition/dazed)."
+            }
+          ],
+          "icon": "☠️",
+          "name": "Solo Action"
+        }
+      },
+      {
+        "sourceIndexes": [2],
+        "record": {
+          "body": "The hag's hut springs to life. It enters the encounter map within 10 squares of the hag if it isn't already there and takes its turn. The hut is size 4, has 75 [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) and damage immunity 3, and has speed 8 from its powerful set of animal legs. This feature can't be used if the hut is reduced to 0 [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina). In addition to its move action, the house can take only the following main action.",
+          "cost": "10 Malice",
+          "effects": [
+            {
+              "effect": "The hag's hut springs to life. It enters the encounter map within 10 squares of the hag if it isn't already there and takes its turn. The hut is size 4, has 75 [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) and damage immunity 3, and has speed 8 from its powerful set of animal legs. This feature can't be used if the hut is reduced to 0 [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina). In addition to its move action, the house can take only the following main action."
+            }
+          ],
+          "icon": "🌀",
+          "name": "House Call"
+        }
+      },
+      {
+        "sourceIndexes": [3],
+        "record": {
+          "distance": "2 cube within 2",
+          "effects": [
+            {
+              "roll": "Power Roll + 3",
+              "tier1": "6 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3; M < 1 [prone](scc.v1:mcdm.heroes.v1/condition/prone)",
+              "tier2": "10 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 4; M < 2 [prone](scc.v1:mcdm.heroes.v1/condition/prone)",
+              "tier3": "13 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 5; M < 3 [prone](scc.v1:mcdm.heroes.v1/condition/prone)"
+            }
+          ],
+          "icon": "🔳",
+          "keywords": ["Area", "Ranged", "Weapon"],
+          "name": "Kick",
+          "power_roll": {
+            "formula": "+ 3",
+            "tiers": {
+              "high": "13 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 5; M < 3 [prone](scc.v1:mcdm.heroes.v1/condition/prone)",
+              "low": "6 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3; M < 1 [prone](scc.v1:mcdm.heroes.v1/condition/prone)",
+              "mid": "10 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 4; M < 2 [prone](scc.v1:mcdm.heroes.v1/condition/prone)"
+            }
+          },
+          "target": "Each enemy in the area",
+          "usage": "Main action",
+          "ability_type": "Signature Ability"
+        }
+      }
+    ]
+  }
+]

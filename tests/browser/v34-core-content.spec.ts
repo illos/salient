@@ -63,7 +63,7 @@ test('live Rules and Foes share Core typography, automatic semantics and accessi
   await page.evaluate(() => (document.documentElement.style.fontSize = ''));
   await page.setViewportSize({ width: 1280, height: 900 });
   await page.goto('/foes');
-  await page.getByLabel('Search undead').fill('Crawling Claw');
+  await page.getByLabel('Search foes').fill('Crawling Claw');
   await page.getByRole('button', { name: 'Undead · statblock Crawling Claw' }).click();
   const dialog = page.getByRole('dialog');
   await expect(dialog.locator('.ds-stats')).toHaveCount(1);

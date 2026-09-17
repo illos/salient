@@ -16,10 +16,13 @@ export interface FoeObject {
   id: string;
   kind: FoeKind;
   name: string;
+  group?: { id: string; name: string };
+  sourcebook?: 'Monsters' | 'Heroes';
   parentId?: string;
   order?: number;
   featureIds: string[];
   supportingIds: string[];
+  relatedRules?: { id: string; path: string; name: string; relationship: string }[];
   fields: Fields;
   keywords: string[];
   usage: string | null;
@@ -29,7 +32,13 @@ export interface FoeObject {
   markdown: string;
   html: string;
   source: { revision: string; path: string; scc: string; start: number; end: number };
-  original: { record: Fields; markdown: string; json?: string; linkedMarkdown?: string };
+  original: {
+    records?: Fields[];
+    record: Fields;
+    markdown: string;
+    json?: string;
+    linkedMarkdown?: string;
+  };
   diagnostics: string[];
 }
 export interface FoeSearchEntry {
@@ -40,6 +49,11 @@ export interface FoeSearchEntry {
   text: string;
   keywords: string[];
   usage: string | null;
+  group?: { id: string; name: string };
+  sourcebook?: 'Monsters' | 'Heroes';
+  level?: number;
+  organization?: string;
+  role?: string;
 }
 export interface FoePackage {
   schema: 'foes.1';
@@ -49,4 +63,10 @@ export interface FoePackage {
   objects: FoeObject[];
   search: FoeSearchEntry[];
   corrections: Fields[];
+}
+
+/** Browser projection: source evidence stays in the archival package, never in the JS bundle. */
+export type FoeDisplayObject = Omit<FoeObject, 'original' | 'sections' | 'markdown'>;
+export interface FoeDisplayPackage extends Omit<FoePackage, 'objects' | 'corrections'> {
+  objects: FoeDisplayObject[];
 }

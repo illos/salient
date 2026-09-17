@@ -326,6 +326,19 @@ and the guarded discrepancy is explained. Comparison still rejects explicit conf
 changed amounts and missing/ambiguous counterparts. No new source corrections or engine behaviors
 were introduced. See the [slice verification](build/V30-second-echelon-undead.md).
 
+### Full core ingestion implementation — 2026-09-17
+
+V35 extends the source package to all 438 core stat blocks and all 63 core Malice parents, with
+2,006 independently addressable features. It adds a compact browser projection, explicit group and
+sourcebook facets, source-checked contextual Rules links, and exact original source retention.
+The user assigned the library browse/sort UI to a parallel thread; live roster loading and ability
+execution remain separate. See [V35](build/V35-full-core-ingestion.md) for actual verification/branch
+status and [the consumer contract](../shared/foes/README.md) for the generated interface.
+
+Two guarded source repairs address malformed Gnoll extraction and omitted/mislabeled Hag material.
+Every parent has a comparison outcome; unavailable external counterparts are explicit, not successes
+or omitted denominators. Corrections do not advance the pinned source or overwrite old editions.
+
 ### Full-output comparison — confirmed 2026-09-16
 
 The user requires comparing **every generated stat block** with its Steel Cauldron counterpart as a

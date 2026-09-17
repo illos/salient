@@ -272,3 +272,9 @@ records the handoff; it does not certify A09 or create an implementation commit.
 | Slice | Outcome | Status | Owner |
 | --- | --- | --- | --- |
 | V34 | [Sitewide Core presentation](V34-sitewide-core-presentation.md) | Complete — `e3ae838` merged into main and live on shared CT114 main; 444 tests, 7 UI browser tests and 3 shared-main scenarios pass; independent review pass | Codex, UI worktree |
+
+## V35 full core ingestion — 2026-09-17
+
+| Slice | Outcome | Status | Owner |
+| --- | --- | --- | --- |
+| V35 | [Full core stat-block ingestion](V35-full-core-ingestion.md) | Reviewed — full core ingest, 455 tests and 5 browser scenarios pass; both independent reviews pass; awaiting branch commit | Codex, foes-full worktree |

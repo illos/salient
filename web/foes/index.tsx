@@ -3,8 +3,13 @@ import { GlyphFontNotice } from '../components/glyph';
 import { useState } from 'react';
 import { SourceHtml } from '../components/core-content';
 import { Dialog } from '@base-ui/react/dialog';
-import type { FoeKind, FoeObject, FoePackage, FoeSearchEntry } from '../../shared/contracts/foes';
-import data from '../../shared/content/foes/catalog.json';
+import type {
+  FoeKind,
+  FoeDisplayObject as FoeObject,
+  FoeDisplayPackage as FoePackage,
+  FoeSearchEntry,
+} from '../../shared/contracts/foes';
+import data from '../../shared/content/foes/browser.json?raw';
 import { foeReference, resolveFoe, searchFoes } from '../../shared/foes/catalog';
 import { OverlayCardContent, OverlayCardTrigger } from '../components/overlay-card';
 import { useRulesCatalog } from '../rules/content';
@@ -12,7 +17,7 @@ import { RuleArticleView } from '../rules/article';
 import { ThemeSwitch } from '../components/session-user';
 import '../rules/rules.css';
 import '../rules/reference.css';
-const pack = data as unknown as FoePackage;
+const pack = JSON.parse(data) as FoePackage;
 /** This same public object renderer can be used by a future chat attachment or inline card. */
 export function FoeView({
   catalog: pack,
@@ -61,6 +66,15 @@ export function FoeView({
           {resolveFoe(pack, foeReference(pack, id))!.object.name}
         </button>
       ))}
+      {object.relatedRules?.map(rule => (
+        <p key={rule.id} className="mt-2 text-sm">
+          <a href={`/rules/${rule.path}`} className="text-primary underline">
+            {rule.name}
+          </a>
+          {' · '}
+          {rule.relationship}
+        </p>
+      ))}
       {object.diagnostics.map(d => (
         <p role="status" key={d}>
           {d}
@@ -70,7 +84,7 @@ export function FoeView({
         <a href={`https://steelcompendium.io/v2/scc/${object.source.scc}/`}>
           View source on Steel Compendium
         </a>
-        <p>Draw Steel: Monsters · Draw Steel Creator License</p>
+        <p>Draw Steel: {object.sourcebook ?? 'Monsters'} · Draw Steel Creator License</p>
       </footer>
     </article>
   );
@@ -86,7 +100,7 @@ function FoePreview({ initial }: { initial: string }) {
   return (
     <OverlayCardContent
       title={object?.name ?? entry?.name ?? 'Rule reference'}
-      eyebrow="Undead · source reference"
+      eyebrow={`${object?.group?.name ?? 'Foes'} · source reference`}
       closeLabel="Close foe reference"
       bodyKey={JSON.stringify(current)}
       leading={
@@ -145,9 +159,12 @@ function FoeResult({ result }: { result: FoeSearchEntry }) {
   const [open, setOpen] = useState(false);
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>
-      <OverlayCardTrigger className="rounded border border-border bg-card p-5 text-left hover:border-primary">
+      <OverlayCardTrigger
+        data-foe-id={result.id}
+        className="rounded border border-border bg-card p-5 text-left hover:border-primary"
+      >
         <span className="block text-xs text-muted-foreground">
-          {result.parentName || 'Undead'} · {result.kind}
+          {result.parentName || result.group?.name || 'Foes'} · {result.kind}
         </span>
         <span className="block text-lg font-semibold">{result.name}</span>
         {result.usage && <span className="text-sm text-muted-foreground">{result.usage}</span>}
@@ -174,15 +191,15 @@ export default function FoesPage() {
         </a>
         <ThemeSwitch />
       </header>
-      <p className="eyebrow">Foes · Undead</p>
-      <h1 className="mb-3 text-4xl font-bold">The restless dead</h1>
+      <p className="eyebrow">Foes · Core sources</p>
+      <h1 className="mb-3 text-4xl font-bold">Foes</h1>
       <p className="mb-8 text-muted-foreground">
         Explore {pack.objects.filter(o => o.kind === 'statblock').length} stat blocks, their
-        abilities and traits, and shared Undead Malice.
+        abilities and traits, and related Malice.
       </p>
       <div className="mb-6 grid gap-4 md:grid-cols-4">
         <label>
-          Search undead
+          Search foes
           <input
             className="mt-1 w-full rounded border border-input bg-background p-2"
             value={query}

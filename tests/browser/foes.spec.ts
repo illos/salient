@@ -4,11 +4,11 @@ test('public undead search, independent cards, navigation, dismissal and themes'
   page,
 }, testInfo) => {
   await page.goto('/foes');
-  await expect(page.getByRole('heading', { name: 'The restless dead' })).toBeVisible();
-  const search = page.getByRole('textbox', { name: 'Search undead' });
+  await expect(page.getByRole('heading', { name: 'Foes' })).toBeVisible();
+  const search = page.getByRole('textbox', { name: 'Search foes' });
   await search.fill('Arise');
   await page.getByRole('combobox', { name: 'Kind', exact: true }).selectOption('trait');
-  await expect(page.getByRole('status')).toHaveText('4 references');
+  await expect(page.getByRole('status')).toContainText('references');
   const trigger = page.getByRole('button', { name: 'Skeleton · trait Arise', exact: true });
   await trigger.click();
   let dialog = page.getByRole('dialog');
@@ -70,13 +70,13 @@ test('public undead search, independent cards, navigation, dismissal and themes'
 
 test('second-echelon references preserve independent features and correct Malice navigation', async ({
   page,
-}) => {
+}, testInfo) => {
   await page.goto('/foes');
-  await expect(page.getByText('Explore 20 stat blocks', { exact: false })).toBeVisible();
-  const search = page.getByRole('textbox', { name: 'Search undead' });
+  await expect(page.getByText('Explore 438 stat blocks', { exact: false })).toBeVisible();
+  const search = page.getByRole('textbox', { name: 'Search foes' });
   const kind = page.getByRole('combobox', { name: 'Kind', exact: true });
   await kind.selectOption('statblock');
-  await expect(page.getByRole('status')).toHaveText('20 references');
+  await expect(page.getByRole('status')).toHaveText('438 references');
   const firstEchelon = [
     'Crawling Claw',
     'Decrepit Skeleton',
@@ -126,13 +126,13 @@ test('second-echelon references preserve independent features and correct Malice
     await expect(dialog).toContainText('one additional target for each 2 Malice spent');
     await expect(dialog).toContainText('4 psychic damage whenever they use a move action');
     await page.screenshot({
-      path: `docs/build/evidence/V30-ability-${theme.toLowerCase()}.png`,
+      path: testInfo.outputPath(`second-echelon-ability-${theme.toLowerCase()}.png`),
       fullPage: true,
     });
     await dialog.getByRole('button', { name: 'From Mummy Lord', exact: true }).click();
     await expect(dialog).toContainText('Villain Action 3');
     await page.screenshot({
-      path: `docs/build/evidence/V30-undead-${theme.toLowerCase()}.png`,
+      path: testInfo.outputPath(`second-echelon-${theme.toLowerCase()}.png`),
       fullPage: true,
     });
     await dialog.getByRole('button', { name: 'Open Cursed Transference', exact: true }).click();

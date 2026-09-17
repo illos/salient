@@ -1,17 +1,19 @@
 // SPDX-License-Identifier: GPL-3.0-only
 import type { FoeKind, FoePackage, FoeReference } from '../contracts/foes.ts';
-export function foeReference(pack: FoePackage, id: string): FoeReference {
+type Addressable = { id: string; kind: FoeKind; parentId?: string };
+type Collection<T extends Addressable> = { edition: string; objects: T[] };
+export function foeReference<T extends Addressable>(pack: Collection<T>, id: string): FoeReference {
   const object = pack.objects.find(o => o.id === id);
   if (!object) throw new Error(`Unknown foe object: ${id}`);
   return { id, kind: object.kind, edition: pack.edition };
 }
-export function resolveFoe(pack: FoePackage, ref: FoeReference) {
+export function resolveFoe<T extends Addressable>(pack: Collection<T>, ref: FoeReference) {
   if (ref.edition !== pack.edition) return undefined;
   const object = pack.objects.find(o => o.id === ref.id && o.kind === ref.kind);
   return object ? { object, parent: pack.objects.find(o => o.id === object.parentId) } : undefined;
 }
 export function searchFoes(
-  pack: FoePackage,
+  pack: Pick<FoePackage, 'search'>,
   query = '',
   filters: { kind?: FoeKind; keyword?: string; usage?: string } = {},
 ) {
