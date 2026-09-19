@@ -340,4 +340,4 @@ records the handoff; it does not certify A09 or create an implementation commit.
 
 | Id | Slice | Status | Owner |
 | --- | --- | --- | --- |
-| V47 | [Fury level one](V47-fury-level-one.md) | In progress (preparation only) — source inventory, assembled-definition gap list, five shared-data defects, counterpart ledger and two independent subagent reviews folded in; lead findings applied; implementation released by the lead after the V46 pilot verdict; no application, shared-contract, runtime or hosted change | Opus implementer, slice/V47 in `opus-fury` |
+| V47 | [Fury level one](V47-fury-level-one.md) | Preparation complete, awaiting implementation release — source inventory, assembled-definition gap list, five shared-data defects, [five counterpart builds with source-derived expectations](evidence/V47/reference-builds.md), [capture plan](evidence/V47/capture-plan.md) and [test plan](evidence/V47/test-plan.md); four independent subagent reviews and the lead's findings folded in; implementation waits on the V46 pilot verdict; nothing executed anywhere, and no application, shared-contract, runtime or hosted change | Opus implementer, slice/V47 in `opus-fury` |
