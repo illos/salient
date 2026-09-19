@@ -14,9 +14,9 @@
 
 Complete the Polder ancestry at level one by enabling its three remaining purchasable traits —
 Nimblestep, Polder Geist and Reactive Tumble — with representations that match what the source
-actually says: an entitlement with no number, a conditional bonus that never reaches the printed
-speed, and a free triggered action that does not consume the one-per-round budget. Everything Polder
-already delivers must keep working unchanged.
+actually says: an entitlement with no number, a conditional amount that is calculated and shown but
+never reaches the ordinary speed, and a readable free triggered action that this slice does not
+automate. Everything Polder already delivers must keep working unchanged.
 
 This slice is in its **preparation stage**. Implementation waits for the integration lead's release,
 and this unit deliberately does not depend on V47's aspects or stormwight kits.
