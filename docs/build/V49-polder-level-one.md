@@ -102,7 +102,9 @@ Implementation stage:
   Nimblestep and Reactive Tumble change no derived value, so the unit's correctness is largely about
   what it does *not* add to the ordinary totals.
 - Tests in `tests/character-derived-values.test.ts` and `tests/character-evaluator.test.ts`, a
-  browser journey, and the counterpart evidence under `docs/build/evidence/V49/`.
+  browser journey, and the counterpart evidence under
+  [`docs/build/evidence/V49/`](evidence/V49/README.md), whose reference data, capture script and
+  test plan are already written.
 
 ## Acceptance checks
 
