@@ -362,7 +362,7 @@
       "total": 3,
       "covered": 0,
       "status": "INCOMPLETE — blocked on Q-CHAR-18",
-      "note": "While the rune's timing is unresolved, no same-build rune counterpart is certified. The capability is granted and readable; that is not coverage of the three rune options. There is NO reference limitation: Forge marks the rune selectAt: 'play', so its build editor offers none, but the Conditional Features modal writes a selection onto the hero that Export as Data serialises, so a rune-bearing counterpart is capturable if the answer turns out to require one."
+      "note": "COVERAGE LIMIT, not a safeguard: this unit's witness scope is the five purchased traits, so no rune is captured and rune coverage is INCOMPLETE. There is no reference limitation — Forge marks the rune selectAt: 'play', so its build editor offers none, but the Conditional Features modal writes a selection onto the hero that Export as Data serialises, so a rune-bearing counterpart is capturable. Creation-policy coverage stays open pending review."
     },
     "unspentPoints": {
       "status": "settled, not a question",

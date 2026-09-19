@@ -278,8 +278,11 @@ real editor tab by tab and exports through the application's own path, under the
 established and the lead directed — the pinned Forge application built and served on CT114, with
 `vendor/forge-steel` never built into or modified.
 
-The script does not select a rune, and in the pinned application it cannot: Forge marks the feature
-`selectAt: 'play'`, so the build editor offers no rune chooser.
+The script does not select a rune. That is a **coverage limit, not a safeguard**: this unit's witness
+scope is the five purchased traits. An earlier draft framed the omission as refusing to resolve an
+open source question by side effect, which was wrong — building a reference hero in Forge is
+observation, and observing a third-party tool adopts nothing about Salient's rules. Rune coverage is
+therefore INCOMPLETE and creation-policy coverage stays open pending review.
 
 **Completion state is not detected automatically, and the script does not pretend otherwise.** An
 earlier draft scraped three selectors for outstanding-choice warnings and claimed a partial capture

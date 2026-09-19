@@ -104,10 +104,13 @@ async function selectPurchasedTraits(page: Page, traits: string[]): Promise<void
  * earlier drafts of this comment were wrong in opposite directions — first that Forge models the
  * rune as a build-time choice, then that Forge cannot represent one at all.
  *
- * The script does not drive that modal because Q-CHAR-18 is open: selecting a rune would resolve an
- * open source question by side effect, and observing what this tool offers does not decide
- * Salient's rules. Rune coverage stays INCOMPLETE until the question is answered. If the answer is
- * that a rune is chosen at creation, extend this script to drive the Conditional Features modal.
+ * The script does not drive that modal, and that is a COVERAGE LIMIT, not a safeguard. An earlier
+ * draft of this comment said selecting a rune would "resolve an open source question by side
+ * effect". That was wrong: building a reference hero in Forge is observation, and observing a
+ * third-party tool adopts nothing about Salient's rules either way. The honest reason is narrower —
+ * this script's witness scope is the five purchased traits, which is what the three builds cover.
+ * Rune coverage is consequently INCOMPLETE and creation-policy coverage stays open pending review;
+ * extend this script to drive the Conditional Features modal when that scope is agreed.
  */
 async function captureBuild(
   page: Page,
