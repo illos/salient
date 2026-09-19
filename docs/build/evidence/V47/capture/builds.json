@@ -126,16 +126,16 @@
         "wealth": 1,
         "kit": "Panther",
         "skills": [
-          "Nature",
-          "Hide",
-          "Climb",
-          "Search",
-          "Endurance",
-          "Alertness",
+          "Persuade",
           "Swim",
           "Blacksmithing",
           "Intimidate",
-          "Persuade"
+          "Endurance",
+          "Alertness",
+          "Nature",
+          "Climb",
+          "Search",
+          "Hide"
         ],
         "traits": [
           "Silver Tongue",
@@ -165,14 +165,10 @@
           "Unearthly Reflexes": "no damage and no Melee+Weapon keywords"
         },
         "features": [
-          "Primordial Aspect",
+          "Culture edge",
           "Ferocity",
           "Growing Ferocity",
-          "Aspect Features",
-          "Aspect Triggered Action",
           "Mighty Leaps",
-          "Fury Abilities",
-          "Culture edge",
           "Kit",
           "Primordial Cunning"
         ]
@@ -183,7 +179,8 @@
         "savingThrowThreshold": "Impressive Horns replaces the default 6",
         "kitDamageBonus": "A kit's melee damage bonus applies to abilities with BOTH the Melee and Weapon keywords. A kit signature ability's printed damage already includes its own kit's bonuses and must not receive them again. The ranged free strike never receives a melee damage bonus.",
         "speedOrdering": "Beast Legs SETS speed 6, then the kit speed bonus is added to that. A set-last implementation would wrongly yield 6.",
-        "windedRounding": "Winded equals half the Stamina maximum; the rounding comes from the always-round-down rule."
+        "windedRounding": "Winded equals half the Stamina maximum; the rounding comes from the always-round-down rule.",
+        "emissionOrder": "Skills, features and abilities are emitted in definition order: ancestry, culture, career, class, then the aspect's option grants, with ancestry abilities after the free strikes. The canonical Fury/Berserker/Mountain row in docs/character-derived-values.md section 4.1 is the shape to match. The stormwight builds also grant Aspect of the Wild and a kit signature ability; their exact position among the abilities is NOT asserted here and is confirmed on the first real run."
       }
     },
     {
@@ -273,15 +270,15 @@
         "wealth": 1,
         "kit": "Boren",
         "skills": [
-          "Nature",
-          "Track",
-          "Climb",
-          "Search",
-          "Endurance",
-          "Alertness",
           "Swim",
           "Blacksmithing",
-          "Intimidate"
+          "Intimidate",
+          "Endurance",
+          "Alertness",
+          "Nature",
+          "Climb",
+          "Search",
+          "Track"
         ],
         "traits": [
           "Shadowmeld",
@@ -317,14 +314,10 @@
           "Shadowmeld": "no damage"
         },
         "features": [
-          "Primordial Aspect",
+          "Culture edge",
           "Ferocity",
           "Growing Ferocity",
-          "Aspect Features",
-          "Aspect Triggered Action",
           "Mighty Leaps",
-          "Fury Abilities",
-          "Culture edge",
           "Beast Shape",
           "Relentless Hunter"
         ],
@@ -344,7 +337,8 @@
         "kitDamageBonus": "A kit's melee damage bonus applies to abilities with BOTH the Melee and Weapon keywords. A kit signature ability's printed damage already includes its own kit's bonuses and must not receive them again. The ranged free strike never receives a melee damage bonus.",
         "damageImmunities": "Corruption Immunity grants corruption immunity equal to level + 2; at level 1 that is 3. It is a numeric immunity, not blanket immunity.",
         "shadowmeld": "Shadowmeld's final clause — if the surface is destroyed the ability ends and the hero takes 1d6 damage that cannot be reduced in any way — appears ONLY in the markdown body, not in the structured effects field of either the YAML frontmatter or the unified JSON. Any renderer that rebuilds text from structured effects silently drops it.",
-        "windedRounding": "Winded equals half the Stamina maximum; the rounding comes from the always-round-down rule."
+        "windedRounding": "Winded equals half the Stamina maximum; the rounding comes from the always-round-down rule.",
+        "emissionOrder": "Skills, features and abilities are emitted in definition order: ancestry, culture, career, class, then the aspect's option grants, with ancestry abilities after the free strikes. The canonical Fury/Berserker/Mountain row in docs/character-derived-values.md section 4.1 is the shape to match. The stormwight builds also grant Aspect of the Wild and a kit signature ability; their exact position among the abilities is NOT asserted here and is confirmed on the first real run."
       },
       "formConditional": {
         "note": "Not part of the build values.",
@@ -437,16 +431,16 @@
         "wealth": 1,
         "kit": "Corven",
         "skills": [
-          "Nature",
-          "Track",
-          "Climb",
-          "Search",
-          "Endurance",
-          "Alertness",
+          "Persuade",
           "Swim",
           "Blacksmithing",
           "Intimidate",
-          "Persuade"
+          "Endurance",
+          "Alertness",
+          "Nature",
+          "Climb",
+          "Search",
+          "Track"
         ],
         "traits": [
           "Silver Tongue",
@@ -478,14 +472,10 @@
           "Aspect of the Wild": "no damage"
         },
         "features": [
-          "Primordial Aspect",
+          "Culture edge",
           "Ferocity",
           "Growing Ferocity",
-          "Aspect Features",
-          "Aspect Triggered Action",
           "Mighty Leaps",
-          "Fury Abilities",
-          "Culture edge",
           "Beast Shape",
           "Relentless Hunter"
         ]
@@ -495,7 +485,8 @@
         "speed": "Beast Legs sets 6, Corven +3",
         "disengage": "base 1 + Corven +1",
         "kitDamageBonus": "A kit's melee damage bonus applies to abilities with BOTH the Melee and Weapon keywords. A kit signature ability's printed damage already includes its own kit's bonuses and must not receive them again. The ranged free strike never receives a melee damage bonus.",
-        "windedRounding": "Winded equals half the Stamina maximum; the rounding comes from the always-round-down rule."
+        "windedRounding": "Winded equals half the Stamina maximum; the rounding comes from the always-round-down rule.",
+        "emissionOrder": "Skills, features and abilities are emitted in definition order: ancestry, culture, career, class, then the aspect's option grants, with ancestry abilities after the free strikes. The canonical Fury/Berserker/Mountain row in docs/character-derived-values.md section 4.1 is the shape to match. The stormwight builds also grant Aspect of the Wild and a kit signature ability; their exact position among the abilities is NOT asserted here and is confirmed on the first real run."
       },
       "formConditional": {
         "note": "Not part of the build values.",
@@ -585,16 +576,16 @@
         "wealth": 1,
         "kit": "Raden",
         "skills": [
-          "Nature",
-          "Track",
-          "Climb",
-          "Search",
-          "Endurance",
-          "Alertness",
+          "Persuade",
           "Swim",
           "Blacksmithing",
           "Intimidate",
-          "Persuade"
+          "Endurance",
+          "Alertness",
+          "Nature",
+          "Climb",
+          "Search",
+          "Track"
         ],
         "traits": [
           "Silver Tongue",
@@ -626,14 +617,10 @@
           "Aspect of the Wild": "no damage"
         },
         "features": [
-          "Primordial Aspect",
+          "Culture edge",
           "Ferocity",
           "Growing Ferocity",
-          "Aspect Features",
-          "Aspect Triggered Action",
           "Mighty Leaps",
-          "Fury Abilities",
-          "Culture edge",
           "Beast Shape",
           "Relentless Hunter"
         ]
@@ -643,7 +630,8 @@
         "speed": "Beast Legs sets 6, Raden +3",
         "alwaysAvailable": "Raden Aspect Benefits include ignoring difficult terrain unconditionally",
         "kitDamageBonus": "A kit's melee damage bonus applies to abilities with BOTH the Melee and Weapon keywords. A kit signature ability's printed damage already includes its own kit's bonuses and must not receive them again. The ranged free strike never receives a melee damage bonus.",
-        "windedRounding": "Winded equals half the Stamina maximum; the rounding comes from the always-round-down rule."
+        "windedRounding": "Winded equals half the Stamina maximum; the rounding comes from the always-round-down rule.",
+        "emissionOrder": "Skills, features and abilities are emitted in definition order: ancestry, culture, career, class, then the aspect's option grants, with ancestry abilities after the free strikes. The canonical Fury/Berserker/Mountain row in docs/character-derived-values.md section 4.1 is the shape to match. The stormwight builds also grant Aspect of the Wild and a kit signature ability; their exact position among the abilities is NOT asserted here and is confirmed on the first real run."
       }
     },
     {
@@ -728,16 +716,16 @@
         "wealth": 1,
         "kit": "Vuken",
         "skills": [
-          "Nature",
-          "Track",
-          "Climb",
-          "Search",
-          "Endurance",
-          "Alertness",
+          "Persuade",
           "Swim",
           "Blacksmithing",
           "Intimidate",
-          "Persuade"
+          "Endurance",
+          "Alertness",
+          "Nature",
+          "Climb",
+          "Search",
+          "Track"
         ],
         "traits": [
           "Silver Tongue",
@@ -769,14 +757,10 @@
           "Aspect of the Wild": "no damage"
         },
         "features": [
-          "Primordial Aspect",
+          "Culture edge",
           "Ferocity",
           "Growing Ferocity",
-          "Aspect Features",
-          "Aspect Triggered Action",
           "Mighty Leaps",
-          "Fury Abilities",
-          "Culture edge",
           "Beast Shape",
           "Relentless Hunter"
         ]
@@ -786,7 +770,8 @@
         "speed": "Beast Legs sets 6, plus the UNCONDITIONAL Vuken kit Speed Bonus +2. The separate wolf/hybrid-form +2 is form-conditional and is NOT in the build value.",
         "kitDamageBonus": "A kit's melee damage bonus applies to abilities with BOTH the Melee and Weapon keywords. A kit signature ability's printed damage already includes its own kit's bonuses and must not receive them again. The ranged free strike never receives a melee damage bonus.",
         "alwaysAvailable": "Vuken Aspect Benefits: after using Knockback, may use Aid Attack as a free triggered action.",
-        "windedRounding": "Winded equals half the Stamina maximum; the rounding comes from the always-round-down rule."
+        "windedRounding": "Winded equals half the Stamina maximum; the rounding comes from the always-round-down rule.",
+        "emissionOrder": "Skills, features and abilities are emitted in definition order: ancestry, culture, career, class, then the aspect's option grants, with ancestry abilities after the free strikes. The canonical Fury/Berserker/Mountain row in docs/character-derived-values.md section 4.1 is the shape to match. The stormwight builds also grant Aspect of the Wild and a kit signature ability; their exact position among the abilities is NOT asserted here and is confirmed on the first real run."
       },
       "formConditional": {
         "note": "Not part of the build values.",
@@ -795,5 +780,5 @@
       }
     }
   ],
-  "correctionRound": "2026-09-19: independent audit corrected the kit-damage claims, added Build B's corruption immunity 3, completed the feature lists and recorded the Shadowmeld structured-effects trap."
+  "correctionRound": "2026-09-19: independent audit corrected the kit-damage claims, added Build B's corruption immunity 3, completed the feature lists and recorded the Shadowmeld structured-effects trap. | 2026-09-19 second correction: the feature lists added in the previous round were wrong — they included advancement-table umbrella rows, one duplicating its own expansion and another an ability. The evaluator emits six for this frame. Skills are also reordered to definition order."
 }

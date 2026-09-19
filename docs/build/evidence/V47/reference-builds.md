@@ -94,10 +94,10 @@ Growing Ferocity rows; Hit and Run; Back!; Blood for Blood!; the Reaver-with-ord
 | potency | weak 0, average 1, strong 2 | Might 2 |
 | savingThrowThreshold | **5** | Impressive Horns replaces the default 6 |
 | renown / wealth | 1 / 1 | Soldier +1 renown; wealth base 1, Soldier grants none |
-| skills (10) | Nature, Hide, Climb, Search, Endurance, Alertness, Swim, Blacksmithing, Intimidate, Persuade | class grant, aspect grant, then the seven choices |
+| skills (10), in emission order | Persuade, Swim, Blacksmithing, Intimidate, Endurance, Alertness, Nature, Climb, Search, Hide | ancestry, culture, career, class, then the aspect grant |
 | languages (4) | Caelian, Anjali, Vaslorian, Hyrallic | |
 | traits | Silver Tongue, Beast Legs, Impressive Horns | |
-| features | Primordial Aspect, Ferocity, Growing Ferocity, Aspect Features, Aspect Triggered Action, Mighty Leaps, Fury Abilities, Culture edge, Kit, Primordial Cunning | the advancement table lists seven class features at 1st level; the Reaver Growing Ferocity rows are readable threshold content |
+| features | Culture edge, Ferocity, Growing Ferocity, Mighty Leaps, Kit, Primordial Cunning | the six the evaluator emits, matching the canonical row in `docs/character-derived-values.md` section 4.1; the Reaver Growing Ferocity rows are readable threshold content |
 | abilities | Hit and Run, Back!, Blood for Blood!, Unearthly Reflexes, Devastating Rush, Melee Weapon Free Strike, Ranged Weapon Free Strike | Devastating Rush is Panther's signature |
 
 ## Build B — Polder Stormwight, Boren
@@ -137,10 +137,10 @@ full 4 points avoids the ceiling-versus-quota ambiguity noted below.
 | potency | 0 / 1 / 2 | |
 | savingThrowThreshold | 6 | default; no Polder trait changes it |
 | renown / wealth | 1 / 1 | |
-| skills (9) | Nature, Track, Climb, Search, Endurance, Alertness, Swim, Blacksmithing, Intimidate | |
+| skills (9), in emission order | Swim, Blacksmithing, Intimidate, Endurance, Alertness, Nature, Climb, Search, Track | Polder grants no ancestry skill |
 | languages (4) | Caelian, Anjali, Vaslorian, Hyrallic | |
 | traits | Shadowmeld, Small!, Corruption Immunity, Fearless, Graceful Retreat | Shadowmeld's readable text must include its final clause: if the surface is destroyed the ability ends and the hero takes 1d6 damage that cannot be reduced in any way. That sentence exists only in the markdown body, not in the structured effects field of the frontmatter or the unified JSON, so any renderer rebuilding text from structured effects drops it silently |
-| features | Primordial Aspect, Ferocity, Growing Ferocity, Aspect Features, Aspect Triggered Action, Mighty Leaps, Fury Abilities, Culture edge, Beast Shape, Relentless Hunter | plus Boren's always-available Aspect Benefits, Primordial Storm (cold), Equipment and Growing Ferocity rows, and the form-conditional Animal/Hybrid Form entries |
+| features | Culture edge, Ferocity, Growing Ferocity, Mighty Leaps, Beast Shape, Relentless Hunter | plus Boren's always-available Aspect Benefits, Primordial Storm (cold), Equipment and Growing Ferocity rows, and the form-conditional Animal/Hybrid Form entries |
 | damageImmunities | **corruption 3** | Corruption Immunity grants corruption immunity equal to level + 2; a numeric immunity, not blanket |
 | abilities | Impaled!, Tide of Death, Make Peace With Your God!, Furious Change, Aspect of the Wild, Bear Claws, Shadowmeld, Melee Weapon Free Strike, Ranged Weapon Free Strike | |
 
@@ -172,7 +172,7 @@ Witnesses Corven and the remaining three abilities.
 | disengage | **2** | base 1 + Corven +1 |
 | melee damage bonus | +2/+2/+2 | |
 | potency / save | 0 / 1 / 2; save 5 | Might 2 ties Reason 2 as highest, so both potency readings agree |
-| skills (10) | Nature, Track, Climb, Search, Endurance, Alertness, Swim, Blacksmithing, Intimidate, Persuade | |
+| skills (10), in emission order | Persuade, Swim, Blacksmithing, Intimidate, Endurance, Alertness, Nature, Climb, Search, Track | |
 | abilities | To the Death!, Your Entrails Are Your Extrails!, To the Uttermost End, Furious Change, Aspect of the Wild, Wing Buffet, free strikes | |
 | storm | fire (Anabatic Wind) | |
 | form-conditional | crow form size 1T, flight, Hide as a free maneuver, allies as cover, **no ability usable except Aspect of the Wild**; hybrid 1S or 1M | must not reach the build values |
@@ -253,9 +253,16 @@ are listed here rather than quietly fixed:
 4. Build B omitted its corruption immunity of 3, which Corruption Immunity grants as level + 2.
 5. Shadowmeld's final clause was missing entirely, along with the extraction trap behind it.
 
-Two presentational gaps were also corrected: the feature lists omitted Primordial Aspect, Aspect
-Features, Aspect Triggered Action and Fury Abilities, and the winded derivation cited a division
-without citing the always-round-down rule that supplies the rounding.
+One presentational gap was corrected: the winded derivation cited a division without citing the
+always-round-down rule that supplies the rounding.
+
+**Correction to that correction, 2026-09-19.** The same round added Primordial Aspect, Aspect
+Features, Aspect Triggered Action and Fury Abilities to the feature lists. That was wrong: those are
+advancement-table umbrella rows, not emitted features. Worse, "Aspect Features" sat alongside its own
+expansion and "Aspect Triggered Action" duplicated an ability already listed. The evaluator emits six
+features for this frame, matching `docs/character-derived-values.md` section 4.1, and the lists now
+say six. Skills are also reordered to the definition order the evaluator actually uses: ancestry,
+culture, career, class, then the aspect's grants.
 
 ## Hazards recorded during derivation
 
