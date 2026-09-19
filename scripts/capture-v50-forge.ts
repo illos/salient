@@ -19,9 +19,23 @@
  *
  * Every hero is built by driving the real editor — each chooser opened and its option clicked —
  * then saved and exported through the application's own `Export as Data` path. No export is
- * constructed programmatically and no selection is written into storage behind the editor. A
- * witness whose editor still reports outstanding choices is recorded with those warnings and is
- * NOT treated as a completed counterpart.
+ * constructed programmatically and no selection is written into storage behind the editor.
+ *
+ * COMPLETION STATE IS NOT DETECTED AUTOMATICALLY. An earlier draft scraped three CSS/ARIA selectors
+ * for outstanding-choice warnings and claimed a partial capture therefore could not look complete.
+ * An independent review found that none of those selectors matches anything in Forge, so the check
+ * was vacuous: every witness, including an incomplete one, would have been recorded clean with a
+ * zero exit. The guard is removed rather than left looking like protection. Every witness is
+ * written with `completionVerified: false` and MUST be confirmed by hand against the rendered sheet
+ * before it is treated as a counterpart, per
+ * `docs/build/character-verification.md#per-option-delivery-gate`, which requires a legal COMPLETED
+ * counterpart.
+ *
+ * LOCATORS ARE UNVALIDATED. They were authored against the editor's component structure, not a
+ * running instance, and some are known wrong — Forge's ancestry and culture pickers are clickable
+ * cards rather than ARIA options, and "Export as Data" is a button rather than a menu item. They
+ * fail loudly rather than silently, but this script has never been run and its selectors must be
+ * corrected against the real UI on first execution.
  *
  * Run only through the approved remote workflow, never on Presidium:
  *   presidium-dev --env <named> run browser -- pnpm exec tsx scripts/capture-v50-forge.ts \
@@ -50,8 +64,10 @@ interface Witness {
   sha256: string;
   sheetSha256: string;
   sourcebookIDs: string[];
-  /** Non-empty means the editor still reported outstanding choices: not a completed counterpart. */
-  editorWarnings: string[];
+  /** Always false until completion is derived from Forge's own model; confirm by hand. */
+  completionVerified: false;
+  /** Source-backed differences between what the editor produced and what the source requires. */
+  corrections: string[];
 }
 
 const sha256 = (data: Buffer | string) => createHash('sha256').update(data).digest('hex');
@@ -81,12 +97,11 @@ async function selectPurchasedTraits(page: Page, traits: string[]): Promise<void
 }
 
 /**
- * Runic Carving is deliberately NOT selected. Q-CHAR-18 is open: the pinned source describes rune
- * carving as a ten-minute in-play activity and never says a hero begins play with one, while Forge
- * models it as a build-time choice. Leaving it unselected records the editor's own warning rather
- * than resolving the question by clicking something. If the editor blocks completion without a
- * rune, that itself is evidence worth capturing — and it is recorded as an editorWarning, which
- * marks the witness as not-completed rather than silently passing.
+ * Runic Carving is not selected, and in the pinned application it cannot be: Forge marks the
+ * feature `selectAt: 'play'`, so its build editor offers no rune chooser at all. An earlier draft
+ * of this comment said Forge modelled it as a build-time choice; that was wrong about Forge. The
+ * omission is simply what the editor does. Q-CHAR-18 remains open on the source, and rune coverage
+ * stays INCOMPLETE regardless: observing this editor does not decide Salient's rules.
  */
 async function captureBuild(
   page: Page,
@@ -138,11 +153,6 @@ async function captureBuild(
   await page.getByLabel('Name').fill(heroName);
   await page.getByRole('button', { name: 'Save Changes' }).click();
 
-  // Record, rather than suppress, anything the editor still wants chosen.
-  const editorWarnings = await page
-    .locator('[data-outstanding-choice], .ds-warning, [role="alert"]')
-    .allInnerTexts();
-
   const download = await Promise.all([
     page.waitForEvent('download'),
     page.getByRole('button', { name: 'Export' }).click().then(() =>
@@ -172,18 +182,18 @@ async function captureBuild(
     sha256: sha256(bytes),
     sheetSha256: sha256(sheetText),
     sourcebookIDs: exported.sourcebookIDs ?? [],
-    editorWarnings: editorWarnings.filter(text => text.trim().length > 0),
+    completionVerified: false,
+    corrections: [],
   };
 }
 
 async function main(): Promise<void> {
   const baseUrl = arg('base-url');
   const outDir = arg('out', 'tests/fixtures/v50-dwarf');
+  await mkdir(outDir, { recursive: true });
   const maps = JSON.parse(
     await readFile(join(outDir, 'choice-maps.json'), 'utf8'),
   ) as ChoiceMaps;
-
-  await mkdir(outDir, { recursive: true });
   const browser = await chromium.launch();
   const page = await browser.newPage();
 
@@ -195,8 +205,6 @@ async function main(): Promise<void> {
     await browser.close();
   }
 
-  const incomplete = witnesses.filter(witness => witness.editorWarnings.length > 0);
-
   await writeFile(
     join(outDir, 'counterparts.json'),
     `${JSON.stringify(
@@ -206,8 +214,10 @@ async function main(): Promise<void> {
         forgeRevision: maps.forgeRevision,
         compendiumRevision: maps.compendiumRevision,
         note: 'Built by driving the real editor and exported through its own Export as Data path. Not a claim of parity with the current public website.',
+        completionDetection:
+          'NOT AUTOMATED. Every witness is completionVerified: false and must be confirmed by hand against the rendered sheet before it is treated as a counterpart.',
         runicCarvingCoverage:
-          'INCOMPLETE — Q-CHAR-18 open. No rune was selected; see scripts/capture-v50-forge.ts.',
+          'INCOMPLETE — Q-CHAR-18 open. Forge marks the rune selectAt: play, so its build editor offers no rune chooser; observing that does not decide Salient rules.',
         witnesses,
       },
       null,
@@ -216,14 +226,13 @@ async function main(): Promise<void> {
     'utf8',
   );
 
-  // A witness with outstanding editor choices is not a completed counterpart. Fail loudly rather
-  // than leave a partial capture looking like a pass.
-  if (incomplete.length) {
-    console.error(
-      `Incomplete witnesses: ${incomplete.map(w => `${w.label} (${w.editorWarnings.join('; ')})`).join(', ')}`,
-    );
-    process.exitCode = 1;
-  }
+  // No witness is a counterpart until its completion is confirmed by hand. Say so on every run
+  // rather than exiting 0 and letting the manifest imply otherwise.
+  console.error(
+    `Captured ${witnesses.length} witnesses with completionVerified: false. ` +
+      'Confirm each against its rendered sheet before treating it as a counterpart.',
+  );
+  process.exitCode = 1;
 }
 
 await main();

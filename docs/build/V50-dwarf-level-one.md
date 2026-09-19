@@ -172,14 +172,30 @@ Unit-specific additions:
    draft of this document claimed they did. A global `+1` to the Might characteristic produces the
    identical comparison value of 0 and therefore the identical outcome at every potency band. The
    check that actually catches the wrong implementation is 3.
-3. **The discriminating checks.** Stand Tough leaves the **Might characteristic** at −1 and leaves
-   every **Might-based damage or power-roll expression** unchanged. These are the only assertions in
-   this build that distinguish scoped potency resistance from a global Might increment.
+3. **The discriminating check.** Stand Tough leaves the **Might characteristic** at −1.
+
+   That is the *only* discriminating assertion available in the three counterpart builds, and an
+   earlier draft wrongly named a second. "Might-based damage or power-roll expressions are
+   unchanged" is **also vacuous here**: the only Might-referencing expressions in the build are the
+   two free strikes, whose rolls read "M **or** A", and with Agility 1 against a Might of −1 raised
+   to 0 the maximum is 1 either way, so every tier is identical. Elementalist abilities use Reason.
+   The assertion is kept for completeness but must not be counted as discriminating.
 
    Note a second limitation: asserting the hero's **own** weak/average/strong potency values is
    *also* non-discriminating in the three counterpart builds. Those derive from the highest
    characteristic score, which is 2 (Reason and Intuition) in the constant selections, and a Might of
    −1 becoming 0 does not change the highest. Check 3a closes that gap.
+3b. **Scope-to-Might checks.** Nothing above establishes that the +1 is scoped to *Might* rather
+   than applied to every potency comparison. The constant selections make this testable directly:
+   with Agility 1, an ability with potency **`A < 2` must still affect** the hero; likewise `P < 2`
+   with Presence 1, and `R < 3` with Reason 2. An implementation that raised every characteristic's
+   resistance would resist these and fail.
+3c. **Trait-applied-at-all contrast.** D2 and D3 have no Stand Tough, so both **must be affected by
+   `M < 0`**. Without this, a build that always applies the trait passes every other check.
+3d. **The edge must not be unconditional.** Stand Tough's edge applies only to Might *tests* called
+   for to resist environmental effects or a creature's traits or abilities. Assert that an ordinary
+   Might test, a saving throw (a d10 against 6, not a power roll) and an ability power roll receive
+   **no** edge from it.
 3a. **The Might-highest regression.** A focused non-Forge evaluator case: **Dwarf + Berserker Fury 1
    with Stand Tough**, using the level-one Fury array `M 2, A 2, R 0, I 1, P 0`
    (`tests/fixtures/v25-fury.json`). Expectations derived from the source, not from running the
@@ -196,8 +212,11 @@ Unit-specific additions:
 5. Changing ancestry from Polder to Dwarf removes Shadowmeld, Small!, corruption immunity, the
    frightened immunity and the Graceful Retreat disengage bonus, sets size 1M, and preserves the
    culture, career, class and authored details unchanged. Changing back restores them.
-6. Great Fortitude's `weakened` entry **appends** to `conditionImmunities` rather than replacing it,
-   verified on a build that already has another source of condition immunity.
+6. Great Fortitude's `weakened` entry **appends** to `conditionImmunities` rather than replacing it.
+   **No build this unit can construct exercises this**: the only other producer in the checkout is
+   Polder's Fearless (`shared/evaluate/ancestries/polder.ts:70`), and a Dwarf can never also be a
+   Polder. Verify it as an evaluator-level ordering test against a synthesised second producer, or
+   record the limitation explicitly. Do not report it as covered by a reference build.
 7. Spark Off Your Skin's +6 recomputes recovery value to 8 and winded to 12; neither is cached from
    the pre-trait Stamina.
 8. Existing Devil, Polder, Fury and Elementalist builds, and Fury 1→2 advancement, are unchanged.
@@ -211,23 +230,30 @@ Fury or Elementalist behaviour beyond the shared additions named above.
 
 ## Open questions
 
-**Q-CHAR-18 — is a Dwarf's rune chosen at character creation?** The pinned source describes carving
-as a 10-minute in-play activity that can be changed or removed, never says a hero begins play with a
-rune, and gives the Dwarf a quick build that names no rune despite the book's stated convention that
-every 1st-level option carries one. Forge models it as a build-time choice, but Forge is not rules
-authority. **This shapes the implementation**: under the play-time reading the unit delivers five new
-options and a readable capability; under the creation reading it delivers eight and needs a decision
-row with a nested open-ended Detection sub-choice. Recorded in
-[the questions file](../rules-questions-for-user.md). Until it is answered the unit implements the five purchased traits and grants Runic Carving as a
-readable capability, and does **not** invent a wizard decision.
+**Q-CHAR-18 — is a Dwarf's rune chosen at character creation?** The pinned source describes
+carving as a 10-minute in-play activity that can be changed **or removed**, and never says a hero
+begins play with a rune. Forge marks the feature `selectAt: 'play'`, so the structural reference
+agrees it is not a creation choice — corroboration, not authority. Against that, the pin's closest
+analogue cuts the other way: Dragon Knight's Wyrmplate is a free signature trait with an
+in-play-changeable selection, and the purchased trait Prismatic Scales says "Select one damage
+immunity **granted by your Wyrmplate trait**", presupposing that selection exists at build time.
+Runic Carving has no such dependent trait, and its explicit "remove" state has no Wyrmplate
+equivalent, so the analogue does not settle it.
 
-**That is not the same as complete coverage, and must not be recorded as such.** An earlier draft
-said the capability-only treatment is "correct under every candidate answer". It is not: if the
-answer is that a rune is chosen at creation, then a build with no rune is an incomplete build, and
-the same-build Forge counterpart — which does carry a rune — would not match. So while Q-CHAR-18 is
-open, **rune coverage is explicitly marked incomplete in the option ledger** and no same-build rune
-counterpart is certified. Preserving the readable capability is the right interim behaviour; calling
-it finished is not.
+**This shapes the implementation**: under the play-time reading the unit delivers five new options
+and a readable capability; under the creation reading it delivers eight and needs a decision row
+with a nested open-ended Detection type field. Until it is answered the unit implements the five
+purchased traits and grants Runic Carving as a readable capability, and does **not** invent a
+wizard decision.
+
+**That is not complete coverage.** Under the creation reading, a build with no rune is an incomplete
+build. **Rune coverage is marked INCOMPLETE in the option ledger** and no same-build rune
+counterpart is certified while the question is open. Note the counterpart consequence is not a
+mismatch: because Forge marks the rune `selectAt: 'play'`, its build editor offers no rune at all,
+so under the creation reading this is the "Forge cannot represent the same source-legal build" case
+in [the verification procedure](character-verification.md#per-option-delivery-gate), requiring the
+precise limitation to be recorded rather than a discrepancy explained. An earlier draft of this
+document asserted the opposite — that a Forge counterpart "does carry a rune" — which was wrong.
 
 Q-CHAR-19 and Q-CHAR-20 are recorded there too. **They are gameplay and adjudication questions, not
 editor-support questions**, and are deliberately kept separate from this unit's scope: whether Great
@@ -249,11 +275,17 @@ real editor tab by tab and exports through the application's own path, under the
 established and the lead directed — the pinned Forge application built and served on CT114, with
 `vendor/forge-steel` never built into or modified.
 
-Two behaviours in the script are deliberate. It does **not** select a rune, because Q-CHAR-18 is
-open and clicking one would resolve an unresolved question by side effect; whatever the editor then
-reports is recorded as a warning. And any witness whose editor still reports outstanding choices is
-written to the manifest with those warnings and causes a non-zero exit, so a partial capture cannot
-be mistaken for a completed counterpart.
+The script does not select a rune, and in the pinned application it cannot: Forge marks the feature
+`selectAt: 'play'`, so the build editor offers no rune chooser.
+
+**Completion state is not detected automatically, and the script does not pretend otherwise.** An
+earlier draft scraped three selectors for outstanding-choice warnings and claimed a partial capture
+therefore could not look complete. An independent review found that none of those selectors matches
+anything in Forge, so the guard was vacuous and would have recorded every witness clean. It is
+removed. Every witness is written `completionVerified: false` and must be confirmed by hand against
+the rendered sheet before it counts as a counterpart. The locators are also authored against the
+editor's component structure rather than a running instance, and some are known to be wrong; they
+fail loudly, but they must be corrected on first execution.
 
 ## Work log
 

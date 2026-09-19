@@ -65,8 +65,9 @@ know their name, and they speak a language you know.
 ### Whether a rune is a creation choice is UNRESOLVED, and must not be invented
 
 **The pinned source does not settle it, and describes an in-play activity.** An independent
-Compendium-only derivation, deliberately barred from Forge so its answer could not be contaminated,
-reached this conclusion; I verified its key claims directly.
+Compendium-only derivation reached this conclusion; an independent review then confirmed the
+conclusion while refuting one of the arguments originally offered for it. Both corrections are
+recorded below rather than quietly dropped.
 
 What the source says: "You can carve a rune onto your skin with **10 uninterrupted minutes of
 work**" and "You can have one rune active at a time, and can **change or remove** a rune with 10
@@ -75,24 +76,47 @@ same shape as Stone Singer's "When you spend 1 uninterrupted hour singing".
 
 **There is no sentence anywhere in the pin of the form "choose a rune when you create your
 character", "you begin play with a rune", or "you know the following runes."** That absence was
-established by searching the whole Heroes book for `rune` (ten hits: one chapter thumbnail, the six
-lines of the trait, three unrelated treasure and hazard entries) and the whole `en/` tree for
-"Runic Carving" (only the trait, its JSON twin, an index link, the ancestry frontmatter label and
-the per-book mirror). The word never appears in `making-a-hero.md` or `ancestries.md`.
+established by searching the whole Heroes book for `rune` — **12 matching lines**: one chapter
+thumbnail, four lines of the trait itself (the Light paragraph contains no occurrence), and seven
+unrelated entries across the Basics, a gear table, treasures and a title — and by searching the
+whole `en/` tree for "Runic Carving", which returns only the trait, its JSON twin, an index link,
+the ancestry frontmatter label and the per-book mirror. The word never appears in
+`making-a-hero.md` or `ancestries.md`. An earlier draft of this document said "ten hits" and
+miscategorised two of them; the corrected count does not change the conclusion, but a number
+offered as proof has to be right.
 
-Two further points from the pin cut against a creation-time reading:
+**What Forge actually does, corrected.** An earlier draft asserted that Forge models the rune as a
+build-time choice and treated that as a tension to be resolved against. **That was wrong, and I
+did not verify it before asserting it.** Forge marks the feature `selectAt: 'play'`
+(`src/data/ancestries/dwarf.ts`, on `dwarf-feature-1`). The field's type is
+`'build' | 'respite' | 'play'`, the factory default is `'build'`, and Forge uses all three
+deliberately — Dragon Knight's Wyrmplate is `'respite'`, and Dwarf Traits carries no `selectAt` and
+so is build-time. `HeroLogic.getConditionalFeatures` filters on `selectAt === 'play'` precisely to
+classify a feature as an in-play selection rather than a build choice. **The structural reference
+therefore agrees that the rune is not a creation choice.** That is corroboration, not authority, and
+the question remains open on the source.
 
-- The Quick Build convention is stated in `making-a-hero.md`: "Each option you can choose for your
-  hero at 1st level includes a parenthetical selection labeled 'Quick Build.'" The Dwarf quick build
-  names **only** "Grounded, Spark Off Your Skin" — no rune. By the book's own stated convention, a
-  1st-level build option would carry a quick-build pick.
-- "change **or remove** a rune" means **no rune active** is a legal state. A mandatory creation
-  choice cannot represent it.
-- The chapter thumbnail says "**Many** carve supernatural runes into their flesh" — not all.
+**One argument is withdrawn as refuted.** An earlier draft argued that `making-a-hero.md` states
+every 1st-level option carries a Quick Build pick, that the Dwarf quick build names no rune, and
+that a rune is therefore not a 1st-level option. The pin refutes this: the quick-build parenthetical
+sits inside the **Purchased Traits** heading in every ancestry that has one and names only purchased
+traits. Dragon Knight's is "Dragon Breath, Prismatic Scales" and names **no Wyrmplate damage type**,
+although Wyrmplate unambiguously requires a current selection. The convention never covers
+signature-trait selections, so the rune's absence from it carries no information either way.
 
-**Forge models Runic Carving as a build-time `createChoice`** (`dwarf-feature-1`, three options).
-That is a third-party tool's structure and is **not rules authority**. Enabling a mandatory creation
-choice on its basis would repeat the methodology error corrected in V48's ward reading.
+**The strongest in-pin consideration on the other side**, which the earlier draft missed:
+[Wyrmplate](../../vendor/steel-compendium/en/unified/md/feature/trait/dragon-knight/wyrmplate.md)
+is the pin's closest analogue — a free signature trait whose benefit requires a currently-selected
+option, explicitly re-selectable in play ("You can change your damage immunity type when you finish
+a respite"). The pin then hangs a purchased trait off that selection:
+[Prismatic Scales](../../vendor/steel-compendium/en/unified/md/feature/trait/dragon-knight/prismatic-scales.md)
+reads "**Select one damage immunity granted by your Wyrmplate trait.**" That presupposes the
+Wyrmplate selection exists at build time. So "the text describes an in-play, changeable activity"
+does **not** by itself imply "not chosen at creation" in this rules set.
+
+Two distinctions keep the rune unsettled rather than resolved by that analogue: Runic Carving has no
+dependent purchased trait, and "change **or remove**" makes *no rune* a legal state, which Wyrmplate
+has no equivalent of.
 
 Recorded as an open question. Until it is answered, the proposed treatment is to grant the Runic
 Carving **capability** with its full readable text and to model no mandatory creation decision. See

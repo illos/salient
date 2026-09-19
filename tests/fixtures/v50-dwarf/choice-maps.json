@@ -201,7 +201,7 @@
       "expectationSources": {
         "staminaMaximum": "feature/trait/dwarf/spark-off-your-skin.md — +6 at level one, over the Elementalist base 18",
         "recoveryValue": "rule/health/recoveries.md — floor(24/3) = 8; must be recomputed, not cached",
-        "windedValue": "floor(24/2) = 12"
+        "windedValue": "rule/health/winded.md states 'half your Stamina maximum' with no rounding rule; 24 is even so 12 is exact. The floor convention used elsewhere is not exercised here."
       }
     }
   ],
@@ -228,10 +228,12 @@
       }
     ],
     "discriminatingAssertions": [
-      "characteristics.Might remains -1, not 0",
-      "any Might-based damage or power-roll expression is unchanged"
+      "characteristics.Might remains -1, not 0"
     ],
-    "knownNonDiscriminating": "Own weak/average/strong potency values derive from the highest characteristic score, which is 2 here; Might -1 becoming 0 does not change it. A build where Might is the highest characteristic would be required, which the held-constant array cannot provide.",
+    "knownNonDiscriminating": [
+      "Own weak/average/strong potency values: they derive from the highest characteristic score, which is 2 here, so Might -1 becoming 0 does not change them. The mightHighestRegression below closes this.",
+      "Might-based damage or power-roll expressions: the only ones in this build are the free strikes, which read 'M or A'; with Agility 1 the maximum is 1 whether Might is -1 or 0, so every tier is identical."
+    ],
     "mightHighestRegression": {
       "$comment": "Non-Forge evaluator regression that IS discriminating. Not a fourth capture.",
       "build": "Dwarf + Berserker Fury 1 with Stand Tough",
@@ -262,6 +264,46 @@
         },
         "note": "A global +1 makes Might strictly the highest at 3, shifting own potency. This is the assertion that fails."
       }
+    },
+    "scopeToMightCases": {
+      "$comment": "Nothing else establishes the +1 is scoped to Might rather than every characteristic. These use the constant selections directly.",
+      "cases": [
+        {
+          "potency": "A < 2",
+          "characteristic": "Agility",
+          "score": 1,
+          "affected": true,
+          "note": "a wrongly-global implementation would resist"
+        },
+        {
+          "potency": "P < 2",
+          "characteristic": "Presence",
+          "score": 1,
+          "affected": true
+        },
+        {
+          "potency": "R < 3",
+          "characteristic": "Reason",
+          "score": 2,
+          "affected": true
+        }
+      ]
+    },
+    "traitAppliedContrast": {
+      "$comment": "Separates 'trait applied correctly' from 'trait always applied'.",
+      "builds": [
+        "D2",
+        "D3"
+      ],
+      "note": "Neither has Stand Tough, so both MUST be affected by M < 0."
+    },
+    "edgeNotUnconditional": {
+      "$comment": "The edge applies only to Might tests called for to resist environmental effects or a creature's traits or abilities.",
+      "assertNoEdgeOn": [
+        "an ordinary Might test",
+        "a saving throw (d10 against 6, not a power roll)",
+        "an ability power roll"
+      ]
     }
   },
   "illegalCases": [
@@ -278,7 +320,8 @@
         "Grounded",
         "Grounded"
       ],
-      "expect": "refused — a trait cannot be taken twice (see Q-CHAR-20 (iii) for underspend, which is a separate question)"
+      "expect": "refused — interpretation, not a direct citation: no dwarf trait carries a repeat clause, and the pin's only explicitly repeatable trait (revenant Previous Life: 1 Point) says so in its text. The pin's sole stated prohibition is exceeding the budget.",
+      "label": "interpretation"
     }
   ],
   "ancestryChangeCase": {
@@ -324,6 +367,15 @@
     "unspentPoints": {
       "status": "settled, not a question",
       "policy": "Q-CHAR-10 — permit unspent points with a warning, no separate acknowledgement; overspending remains invalid"
+    },
+    "completionDetection": {
+      "status": "NOT AUTOMATED",
+      "note": "capture-v50-forge.ts cannot detect editor completion state; every witness is completionVerified: false and must be confirmed by hand before it counts as a counterpart."
     }
+  },
+  "forgeCorrections": {
+    "$comment": "character-verification.md requires source-backed Forge differences to carry a recorded explanation. The paired Bethell baseline needed three (see tests/fixtures/v25-bethell.json reference.corrections), so this is a live possibility, not a hypothetical.",
+    "recorded": [],
+    "note": "If the pinned editor offers or records something the source does not permit, record it here and in counterparts.json rather than silently using the corrected value."
   }
 }

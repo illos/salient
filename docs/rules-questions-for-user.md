@@ -835,19 +835,28 @@ No user approval is implied by this classification.
 - **Raised by:** V50 Dwarf level-one preparation, 2026-09-19
 - **Where:** [character specification](character-wizard-spec.md#3-decision-system);
   `vendor/steel-compendium/en/unified/md/feature/trait/dwarf/runic-carving.md`;
-  `vendor/steel-compendium/en/unified/md/chapter/making-a-hero.md`;
-  `vendor/steel-compendium/en/unified/md/feature/trait/dwarf/dwarf-traits.md`
+  `vendor/steel-compendium/en/unified/md/feature/trait/dragon-knight/wyrmplate.md`;
+  `vendor/steel-compendium/en/unified/md/feature/trait/dragon-knight/prismatic-scales.md`
 - **Conflict or gap:** Runic Carving is the Dwarf's free signature trait. Its text describes carving
   as an in-play activity — "You can carve a rune onto your skin with 10 uninterrupted minutes of
-  work", and "You can have one rune active at a time, and can change or remove a rune with 10
-  uninterrupted minutes of work". The pin never says a dwarf begins play with a rune carved; an
+  work", and "You can have one rune active at a time, and can change **or remove** a rune with 10
+  uninterrupted minutes of work". The pin never says a dwarf begins play with a rune; an
   independent Compendium-only review searched the whole book and the whole source tree and found no
-  such sentence. Two further points cut against a creation-time reading: the Quick Build convention
-  in `making-a-hero.md` says every 1st-level option carries a parenthetical Quick Build pick, and
-  the Dwarf quick build names only Grounded and Spark Off Your Skin; and "change **or remove**"
-  means "no rune active" is a legal state that a mandatory creation choice cannot represent. Forge
-  Steel models the rune as a build-time choice, but Forge is a third-party tool and is not rules
-  authority.
+  such sentence, and "remove" means having no rune is a legal state.
+
+  Pointing the other way, the pin's closest analogue is Dragon Knight's **Wyrmplate**: also a free
+  signature trait, also carrying a selection that is changeable in play ("You can change your damage
+  immunity type when you finish a respite"). The pin then hangs a purchased trait off that
+  selection — **Prismatic Scales** reads "Select one damage immunity **granted by your Wyrmplate
+  trait**" — which presupposes the Wyrmplate selection exists at build time. So "the text describes
+  a changeable in-play activity" does not by itself mean "not chosen at creation" in this rules set.
+  Two things keep the rune unsettled rather than resolved by the analogue: Runic Carving has no
+  dependent purchased trait, and Wyrmplate has no equivalent of the rune's "remove" state.
+
+  Forge Steel marks the feature `selectAt: 'play'`, i.e. the third-party tool also treats it as an
+  in-play selection rather than a creation choice. That is corroboration only; Forge is not rules
+  authority. (An earlier draft of this entry stated the opposite about Forge; that was an error and
+  is corrected here.)
 - **Options:** A: a dwarf starts with no rune active and carves one in play. B: the player selects a
   rune at creation, with Detection's creature-or-object type as a nested sub-choice. C: the Director
   decides per campaign.
@@ -856,9 +865,15 @@ No user approval is implied by this classification.
   a decision the source never asks for. If the user prefers B, V50 adds a rune decision row with an
   open-ended nested type field for Detection, and the unit's new-option count rises from five to
   eight.
-- **Blocked until answered:** nothing. V50 implements the five purchased traits and grants Runic
-  Carving as a readable capability with its full source text, which is correct under every option.
-  No rune is silently defaulted either way.
+- **Blocked until answered:** no other work is blocked — V50 implements the five purchased traits and
+  grants Runic Carving as a readable capability, and no rune is silently defaulted either way.
+  **But something is at stake in the answer.** Under option B a build with no rune is an incomplete
+  build, so while this is open **rune coverage is recorded INCOMPLETE in V50's option ledger** and no
+  same-build rune counterpart is certified. Because Forge marks the rune `selectAt: 'play'`, its
+  build editor offers no rune, so under option B this becomes the "Forge cannot represent the same
+  source-legal build" case in the verification procedure, requiring the limitation to be recorded
+  rather than a discrepancy explained. An earlier draft of this entry said the interim treatment was
+  "correct under every option"; that was too strong and is withdrawn.
 - **Answer:** (user fills in)
 
 ### Q-CHAR-19: Does Great Fortitude prevent a hero from applying weakened to themselves?
