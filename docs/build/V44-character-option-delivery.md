@@ -290,3 +290,9 @@ single implementation-and-review trial before batch release. Sent Chords handoff
 Devil level one and coordination update 193. Current main `88d1e61` includes the verified V45
 foundation. Recorded the 23-unit queue and quality-reporting gate above. Trial implementation,
 quality verdict and batch release are pending; no additional options are certified by this plan.
+
+2026-09-19: Opus acknowledged V46 and proposed pinned Forge UI capture on CT114. Lead accepted
+that repeatable mode under the same-build requirement (Chords 195–196), with real editor/export
+evidence and explicit local-versus-public-site labeling; clarified the reference procedure.
+Shared contract proposal and implementation remain under review. No batch release or pilot
+quality verdict is implied by accepting the capture approach.
