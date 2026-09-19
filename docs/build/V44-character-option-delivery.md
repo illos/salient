@@ -145,6 +145,19 @@ any of these areas hold batch release while the lead reports the evidence to the
 Opus repair the trial. Do not silently repair substantive mistakes and then report a clean trial.
 A passing trial is permission to continue the queue, not permission to skip later per-unit review.
 
+**User resource-allocation clarification, 2026-09-19:** the objective is to use substantial
+remaining Anthropic subscription capacity before its reset in approximately twelve hours,
+producing more verified work with less ChatGPT token spend than Astra implementing the queue.
+Opus owns research, implementation, fixtures, captures, verification and repairs. Use Anthropic
+subagents where available for independent preparation and fresh reviews; the lead performs
+targeted milestone review and integration rather than duplicating implementation or continuously
+inspecting unfinished edits. Bundle handoffs with the exact diff, verification output, counterpart
+coverage, known gaps and substantive repair history. Report meaningful mistakes, fix them under
+supervision, and assess the repaired result without pretending the original trial was clean.
+While the pilot is verified, Opus may prepare source inventories, independent expectations and
+reference plans for later units. Their implementation still waits for the pilot verdict. Review,
+source, per-unit commit and merge gates are unchanged; token availability does not waive them.
+
 The level-one queue has **23 units: twelve core ancestries and eleven included classes**.
 Allocate new slice IDs only as a unit starts. The following is the scheduling queue, not another
 completion tracker; actual assignment, review and merge states remain in `STATUS.md`.
