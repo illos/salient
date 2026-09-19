@@ -35,3 +35,28 @@ An independent reviewer audited this data and the script and found real errors. 
 - the removal expectations did not match how the evaluator handles a stale selection;
 - the retained Bethell caveats omitted that its corrected choices were made by hand-editing an
   export rather than in the editor, and that its retained sheet text never mentions Shadowmeld.
+
+## Capture repairs, 2026-09-19
+
+A cross-review of both units' capture scripts found further defects here. Repaired:
+
+- **Selections were verified by substring search.** `JSON.stringify(hero).includes(name)` proves
+  nothing: a `.ds-hero` embeds unselected options, every subclass branch and later-level
+  definitions, so an unchosen trait's name appears in a correct export and a wrong one alike. The
+  script now reads **active selections**, using the same traversal as
+  `tests/helpers/v45-reference.ts` `projectForgeReference` — selected subclasses only, features
+  filtered to the hero's level, `data.selected` for choices, `data.selectedIDs` resolved against the
+  owning ability pool — and fails on a container type it does not understand.
+- **The flow skipped saving.** It now clicks Save Changes, fails if that control is disabled because
+  that means the editor recorded nothing, and exports from the hero view afterwards.
+- **Only the first sheet page was captured**, which is how the script would have reported that Forge
+  omits Polder Geist when it was our own screenshot that stopped at page one. Every page is captured
+  and concatenated before that judgement is made.
+- **Provenance was partly fabricated**: it hardcoded "pinned vendor source, NOT the public website"
+  regardless of the URL given and recorded an assumed version as observed. Declared values are now
+  required flags, recorded separately from observed values including the version read from the
+  application's own About modal and the serving command.
+
+A meaningful counterexample belongs with the first real run: capture a build that deliberately omits
+one required selection and confirm the verification fails, so the check is known to be capable of
+failing rather than merely passing.

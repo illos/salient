@@ -87,6 +87,90 @@ async function choose(page, tab, label, what) {
   await locator.click();
 }
 
+/**
+ * Verify the export by reading ACTIVE SELECTIONS, never by substring search.
+ *
+ * Repaired 2026-09-19: the previous version used JSON.stringify(hero).includes(name), which proves
+ * nothing — a .ds-hero embeds unselected options, every subclass branch and later-level definitions,
+ * so an unchosen trait's name is present in a correct export and in a wrong one alike.
+ *
+ * This traversal mirrors tests/helpers/v45-reference.ts projectForgeReference, which is the
+ * authoritative projection: selected subclasses only, features filtered to the hero's level,
+ * data.selected for choices, data.selectedIDs resolved against the owning ability pool. It stays
+ * narrow on purpose — it answers "were these specific selections made?", not "what is this hero?" —
+ * and it fails on a container type it does not understand rather than reporting a clean result.
+ */
+function activeSelections(hero) {
+  const chosen = [];
+  const abilities = [];
+  const unsupported = [];
+  const subclasses = (hero.class?.subclasses ?? []).filter(branch => branch.selected);
+  const abilityPool = [
+    ...(hero.class?.abilities ?? []),
+    ...subclasses.flatMap(branch => branch.abilities ?? []),
+  ];
+  const visit = feature => {
+    if (!feature || typeof feature !== 'object') return;
+    const data = feature.data ?? null;
+    switch (feature.type) {
+      case 'Choice':
+      case 'Perk':
+      case 'Kit':
+        for (const row of data?.selected ?? []) {
+          chosen.push(typeof row === 'string' ? row : row.name);
+          if (typeof row === 'object') (row.features ?? []).forEach(visit);
+        }
+        return;
+      case 'Multiple Features':
+        (data?.features ?? []).forEach(visit);
+        return;
+      case 'Ability':
+        if (data?.ability) abilities.push(data.ability.name);
+        return;
+      case 'Class Ability':
+        for (const id of data?.selectedIDs ?? []) {
+          const match = abilityPool.find(entry => entry.id === id);
+          if (!match) unsupported.push(`unresolved selected ability id ${id}`);
+          else {
+            abilities.push(match.name);
+            chosen.push(match.name);
+          }
+        }
+        return;
+      case 'Skill Choice':
+      case 'Language Choice':
+        for (const row of data?.selected ?? []) chosen.push(typeof row === 'string' ? row : row.name);
+        return;
+      default:
+        // Passive feature types carry no selection; anything genuinely unknown is reported.
+        if (data?.selected || data?.selectedIDs)
+          unsupported.push(`unhandled selection container type "${feature.type}"`);
+    }
+  };
+  (hero.ancestry?.features ?? []).forEach(visit);
+  const culture = hero.culture ?? {};
+  [culture.language, culture.environment, culture.organization, culture.upbringing].forEach(visit);
+  (hero.career?.features ?? []).forEach(visit);
+  for (const branch of [hero.class, ...subclasses])
+    (branch?.featuresByLevel ?? [])
+      .filter(row => row.level <= (hero.class?.level ?? 1))
+      .flatMap(row => row.features ?? [])
+      .forEach(visit);
+  (hero.features ?? []).forEach(visit);
+  const norm = name => String(name).replaceAll('’', "'");
+  return {
+    chosen: chosen.map(norm),
+    abilities: abilities.map(norm),
+    unsupported,
+    culture: {
+      environment: culture.environment?.data?.selected?.[0]?.name ?? culture.environment?.name ?? null,
+      organization:
+        culture.organization?.data?.selected?.[0]?.name ?? culture.organization?.name ?? null,
+      upbringing: culture.upbringing?.data?.selected?.[0]?.name ?? culture.upbringing?.name ?? null,
+    },
+  };
+}
+
 async function captureBuild(page, build, outDir) {
   const s = build.salient;
 
@@ -136,6 +220,13 @@ async function captureBuild(page, build, outDir) {
   if ((await nameField.count()) === 0) fail('The Details tab has no name field.');
   await nameField.fill(s['details.name']);
 
+  // The editor holds changes until they are saved; exporting from a dirty editor can capture a
+  // hero that is not the one the sheet shows.
+  const save = page.getByRole('button', { name: /^save changes$/i }).first();
+  if ((await save.count()) === 0) fail('The editor has no Save Changes control.');
+  if (await save.isDisabled()) fail('Save Changes is disabled, so the editor recorded no changes.');
+  await save.click();
+
   await page.getByRole('button', { name: UI.exportMenu }).first().click();
   const download = await Promise.all([
     page.waitForEvent('download'),
@@ -148,40 +239,71 @@ async function captureBuild(page, build, outDir) {
   // Verify the artifact before it is treated as evidence. An export that does not match the choice
   // map is a failed capture, not a result to explain away later.
   const hero = JSON.parse(await readFile(exportPath, 'utf8'));
-  const mismatches = [];
+  const active = activeSelections(hero);
+  const mismatches = [...active.unsupported];
   const check = (what, actual, wanted) => {
-    if (actual !== wanted) mismatches.push(`${what}: export has ${actual ?? 'nothing'}, expected ${wanted}`);
+    if (actual !== wanted)
+      mismatches.push(`${what}: export has ${actual ?? 'nothing'}, expected ${wanted}`);
+  };
+  const selected = (what, wanted) => {
+    if (!active.chosen.includes(wanted)) mismatches.push(`${what} "${wanted}" is not an active selection`);
   };
   check('ancestry', hero.ancestry?.name, s['ancestry.choice']);
   check('career', hero.career?.name, s['career.choice']);
   check('class', hero.class?.name, s['class.choice']);
   check('level', hero.class?.level, 1);
   check('name', hero.name, s['details.name']);
-  const selectedSubclasses = (hero.class?.subclasses ?? []).filter(entry => entry.selected);
-  check('subclass', selectedSubclasses.map(entry => entry.name).join(', '), s['class.fury.aspect']);
-  const serialised = JSON.stringify(hero);
-  for (const trait of s['ancestry.polder.purchased-traits'])
-    if (!serialised.includes(trait)) mismatches.push(`purchased trait "${trait}" is absent`);
+  check(
+    'subclass',
+    (hero.class?.subclasses ?? []).filter(b => b.selected).map(b => b.name).join(', '),
+    s['class.fury.aspect'],
+  );
+  check('culture environment', active.culture.environment, s['culture.environment']);
+  check('culture organization', active.culture.organization, s['culture.organization']);
+  check('culture upbringing', active.culture.upbringing, s['culture.upbringing']);
+  for (const trait of s['ancestry.polder.purchased-traits']) selected('purchased trait', trait);
+  for (const skill of s['class.fury.skills']) selected('class skill', skill);
   for (const ability of [
     s['class.fury.signature-ability'],
     s['class.fury.ability-3'],
     s['class.fury.ability-5'],
   ])
-    if (!serialised.includes(ability)) mismatches.push(`ability "${ability}" is absent`);
-  if (!serialised.includes(s['kit.choice'])) mismatches.push(`kit "${s['kit.choice']}" is absent`);
+    selected('ability', ability);
+  selected('kit', s['kit.choice']);
+  selected('career perk', s['career.soldier.perk']);
   if (mismatches.length)
     fail(`The export does not match the choice map:\n  - ${mismatches.join('\n  - ')}`);
 
-  const sheet = page.locator(UI.heroSheet).first();
-  if ((await sheet.count()) === 0) fail('The hero sheet did not render, so no sheet evidence exists.');
-  await sheet.screenshot({ path: join(outDir, 'sheet.png') });
-  const text = (await sheet.innerText()).trim();
+  // Every sheet page, not just the first. Capturing page one and concluding that Forge omits a
+  // trait would blame the reference for our own screenshot.
+  const pages = page.locator(UI.heroSheet);
+  const pageCount = await pages.count();
+  if (pageCount === 0) fail('The hero sheet did not render, so no sheet evidence exists.');
+  const texts = [];
+  for (let i = 0; i < pageCount; i += 1) {
+    const sheetPage = pages.nth(i);
+    await sheetPage.screenshot({ path: join(outDir, `sheet-page-${i + 1}.png`) });
+    texts.push((await sheetPage.innerText()).trim());
+  }
+  const text = texts.join('\n\n');
   await writeFile(join(outDir, 'sheet.txt'), text, 'utf8');
 
-  // Recorded, not asserted: Forge may not surface a conditional speed bonus as its own field. If it
-  // does not, that is a structural limitation to record, never a silent pass.
+  // Recorded, not asserted, and only meaningful because every page was read: Forge may not surface
+  // a conditional speed bonus as its own field. If it does not, that is a structural limitation to
+  // record with the closest comparison, never a silent pass.
   const mentionsGeist = /polder geist/i.test(text);
-  return { exportPath, mentionsGeist };
+  return { exportPath, mentionsGeist, sheetPageCount: pageCount };
+}
+
+/** Read the served version from the About modal; returns null rather than guessing. */
+async function readAboutVersion(page) {
+  const opener = page.getByRole('button', { name: /^about$/i }).first();
+  if ((await opener.count()) === 0) return null;
+  await opener.click();
+  const tag = page.getByText(/^Version\s+\S+/i).first();
+  const text = (await tag.count()) > 0 ? (await tag.innerText()).trim() : null;
+  await page.keyboard.press('Escape');
+  return text;
 }
 
 function parseArgs(argv) {
@@ -203,7 +325,7 @@ async function main() {
       `Missing required argument(s): ${missing.join(', ')}.\n` +
         'Usage: node forge-capture.mjs --build <id> --base-url <url> ' +
         '--served-from "<how the app was served>" --forge-commit <sha> --forge-version <semver> ' +
-        '[--out ../forge]\n' +
+        '[--serving-command "<exact command used>"] [--out ../forge]\n' +
         'served-from, forge-commit and forge-version are recorded verbatim into capture.json and ' +
         'are not defaulted, because a wrong provenance is worse than a missing capture.',
     );
@@ -231,7 +353,8 @@ async function main() {
 
   try {
     await page.goto(args['base-url'], { waitUntil: 'domcontentloaded' });
-    const { exportPath, mentionsGeist } = await captureBuild(page, build, outDir);
+    const { exportPath, mentionsGeist, sheetPageCount } = await captureBuild(page, build, outDir);
+    const observedVersion = await readAboutVersion(page);
     const bytes = await readFile(exportPath);
 
     await writeFile(
@@ -240,13 +363,20 @@ async function main() {
         {
           buildId: build.id,
           capturedAtUTC: new Date().toISOString(),
-          // Recorded from what the operator declares, never assumed: pointing --base-url at the
-          // public website and recording "pinned vendor source" would be a fabricated provenance.
-          servedFrom: args['served-from'],
-          forgeCommit: args['forge-commit'],
-          forgeVersion: args['forge-version'],
+          // Declared by the operator and observed from the running app are recorded SEPARATELY.
+          // Collapsing them is how a public-site capture ends up labelled as pinned source.
+          declared: {
+            servedFrom: args['served-from'],
+            forgeCommit: args['forge-commit'],
+            forgeVersion: args['forge-version'],
+            servingCommand: args['serving-command'] ?? null,
+          },
+          observed: {
+            baseUrl: args['base-url'],
+            aboutVersion: observedVersion,
+            sheetPageCount,
+          },
           compendiumRevision: data.compendiumRevision,
-          baseUrl: args['base-url'],
           selections: build.salient,
           sheetMentionsPolderGeist: mentionsGeist,
           artifacts: {
