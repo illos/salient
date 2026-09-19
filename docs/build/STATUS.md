@@ -312,7 +312,6 @@ records the handoff; it does not certify A09 or create an implementation commit.
 | --- | --- | --- | --- |
 | V42 | [Primary wizard choice summary](V42-primary-choice-summary.md) | Complete — merged/live `45426dc`; 674 tests, six isolated journeys, two shared checks and independent review; broader Fury timeout limitation recorded | Character wizard thread |
 
-
 ## V44 character option delivery — 2026-09-19
 
 | Id | Slice | Status | Owner |
@@ -323,5 +322,4 @@ records the handoff; it does not certify A09 or create an implementation commit.
 
 | Slice | Assignment | Status | Owner |
 | --- | --- | --- | --- |
-| V41 | [Reference performance](V41-reference-performance.md) | Verified — 676 tests, 18 browser scenarios and independent review pass; branch handoff pending commit | Codex performance, slice/V41 |
-
+| V41 | [Reference performance](V41-reference-performance.md) | Committed on slice/V41 `fd58cf7` — 676 tests, 18 browser scenarios and independent review pass; awaiting integration/hosted rollout | Codex performance, slice/V41 |

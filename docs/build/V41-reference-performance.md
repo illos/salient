@@ -7,7 +7,7 @@
 | Owner type | App team — performance |
 | Rules review | not required — no source/rules semantics change |
 | Depends on | V38, V39; coordinate V40 router integration |
-| Status | Verified — independent review pass; branch handoff |
+| Status | Committed on slice/V41 `fd58cf7` — awaiting integration |
 
 ## Goal
 
@@ -68,3 +68,9 @@ Not applicable. Only delivery and presentation boundaries change, using the exis
 ## Independent review
 
 [`v41_review`: pass, 2026-09-19](reviews/V41-reference-performance.md). All six acceptance checks verified within the isolated-runtime scope; no unresolved blocking finding. Rules review not required because source/gameplay semantics are unchanged.
+
+## Branch handoff
+
+Reviewed implementation: `fd58cf7443d42e31fb8c6efb5ca4c57aec1ecfe3`. Commit metadata validation passed with `node scripts/check-commit.ts --merge --range main..HEAD`. Final documentation links and whitespace checks passed. The isolated CT114 `performance` environment was stopped after verification, retaining its data; shared `main` and the hosted Worker were not changed. This is a reviewed branch handoff, not a completed merge or publication. No additional runtime sync is needed for this documentation-only closeout.
+
+The canonical main checkout still contains the original untracked audit report/evidence from the read-only audit; their complete preserved copies are committed here (the report adds the V41 follow-up link). An integrating lead should preserve/reconcile those owned audit files before fast-forwarding main.
