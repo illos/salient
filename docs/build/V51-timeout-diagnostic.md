@@ -74,49 +74,89 @@ Two further factors the design must respect, which the triage did not account fo
 ## The probes
 
 [`convex/diagnostics.ts`](../../convex/diagnostics.ts), two queries, each returning one boolean.
+Written against the installed tree: **convex 1.45.0, @convex-dev/better-auth 0.12.5,
+better-auth 1.6.15.**
 
 | Probe | Work | Purpose |
 | --- | --- | --- |
-| `probeWithAuthPrefix` | `requireUser(ctx)`, then return | **Treatment.** Pays the full shared prefix — two nested component `runQuery` calls plus one indexed `users` read — and stops. No campaign, no membership, no session, no application table. |
-| `probeIdentityOnly` | `ctx.auth.getUserIdentity()`, then return | **Control.** Authenticated, but no component round trip and no table read. Separates JWT verification from component invocation cost. |
+| `probeWithAuthPrefix` | `requireUser(ctx)`, then return | **Treatment.** Two nested component `runQuery` calls (session, then user) **plus one indexed read of the application `users` table**. It omits only what comes *after* the prefix: no campaign, no membership, no `sessions` row, no domain table. |
+| `probeIdentityOnly` | `ctx.auth.getUserIdentity()`, then return | **Control.** Authenticated, with no component `runQuery` and no `ctx.db` read. |
 
-**Both take a `nonce: v.string()` argument that is never read.** It changes the argument tuple so
-Convex cannot serve the call from cache, which is the difference between measuring an execution and
-measuring a cache hit. `auth:viewer` may be observed alongside, but only as context: repeated
-cached viewer reads are not an execution-cost measurement.
+An earlier draft described the treatment as touching "no session, no application table". That was
+wrong: `requireUser` reads a component session *and* the application `users` table. It also claimed
+the control performs per-call JWT verification. That is not demonstrated and no such claim is made —
+the control's stated property is only that it does no component round trip and no database read.
 
-Neither probe returns or logs any identity, session id, token, email or display name. The control
-returns *whether* an identity was present, not who it was.
+**Both take a `nonce: v.string()` that is never read.** It changes the argument tuple so Convex
+cannot serve the call from cache, which is the difference between measuring an execution and
+measuring a cache hit. `auth:viewer` may be observed alongside as a passive comparator, but it may
+legitimately stay cached, so it is context and not a measurement.
+
+**No third arm.** A session-lookup variant keyed only on session `_id`, with the same `expiresAt`
+check moved to the outer query, would test whether embedding a timestamp in the sub-query arguments
+causes cache misses. It is not included: **nested `ctx.runQuery` caching semantics are UNVERIFIED
+on this backend**, so such an arm could not be presented as an established equivalence, and adding
+it would risk reading as a proposed auth change. The uncertainty is recorded here instead. Whether
+those semantics can be investigated separately — without altering any production auth path — is a
+question for the integration owner, not something this slice assumes.
 
 ## The measurement
 
-Server-side execution time is the quantity of interest, and it is **not** the same as the client's
-round-trip latency. Client latency includes network, websocket scheduling and React work.
-`npx convex logs` reports `Function execution took N ms` per execution, which is the server figure.
-The driver records both and reports them separately; any conclusion is drawn from the server
-figure.
+Server-side execution time is the quantity of interest, and it is **not** the client's round-trip
+latency, which includes network, websocket scheduling and React work. The driver records both and
+reports them separately; conclusions are drawn only from the server figure.
 
-Two conditions, same probes, same deployment:
+**Preflight, before any arm is timed.** Three things are established first, and the experiment does
+not proceed if any fails:
 
-| Condition | What runs | What it discriminates |
-| --- | --- | --- |
-| **Idle** | Probes only, no browser suite, host otherwise quiet | Baseline cost of the prefix with no contention |
-| **Loaded** | Probes running while the real closeout scenario drives the same environment | Cost under exactly the conditions that produce the blocker |
+1. Both probes are reachable and **authenticated** — a probe that silently ran unauthenticated
+   would measure the wrong thing entirely.
+2. **The execution-timing source is verified on this actual backend.** `npx convex logs` is
+   *assumed* to emit per-execution durations; that assumption is checked by observing real lines for
+   a known probe call before relying on it. If durations are not emitted, the driver says so and the
+   experiment reports client latency only, explicitly labelled as such, rather than silently
+   substituting one for the other.
+3. A nonce-varied call and a repeated identical call are compared, to confirm the nonce actually
+   forces execution on this backend rather than being assumed to.
 
-Predictions, stated in advance so the result cannot be rationalised afterwards:
+**Protocol.** Arms are **interleaved**, not run in blocks, so drift in host conditions cannot be
+mistaken for a difference between arms. A bounded sample is taken — **30 paired calls per
+condition at roughly one pair every two seconds**, which is enough to separate a large fixed cost
+from noise without itself loading the backend. Host state is sampled **continuously across the
+window**, not once, because the triage's single post-hoc snapshot is exactly what made its swapping
+claim unsound.
 
-- **Prefix hypothesis:** `probeWithAuthPrefix` is slow in *both* conditions, and materially slower
-  than `probeIdentityOnly` in both.
-- **Contention hypothesis:** both probes are fast when idle and both degrade under load, with the
-  gap between them roughly unchanged.
-- **Neither:** both probes stay fast in both conditions while application queries time out. That
-  would refute the shared-prefix explanation outright and send the investigation back to per-query
-  work and payload size — `events:list` is the one named query with a plausible own-work cost
-  (rows bounded at 51, bytes unbounded through a `v.any()` payload, plus a `history.*` N+1).
+**Two conditions:**
 
-Retained per run: probe execution timings and counts from `npx convex logs`; client-side latency
-separately; continuous host samples across the window, not a single snapshot; the driver's own
-timeline; and any Playwright failure contexts from the loaded condition.
+| Condition | What runs |
+| --- | --- |
+| **Idle** | Probes only, no browser suite, host otherwise quiet |
+| **Loaded** | Probes interleaved while the closeout scenario drives the same environment |
+
+**The loaded condition is not equivalent to the full suite.** A single closeout scenario is a
+narrower load than the full browser run that produced the blocker. If the loaded condition does not
+reproduce an application timeout, that is a limitation of the experiment, not a finding about the
+application.
+
+## Outcomes, including the inconclusive ones
+
+Stated in advance so a result cannot be rationalised afterwards. The first draft listed three clean
+outcomes; that was too tidy, and the mixed cases are the likely ones.
+
+| Observation | What it supports |
+| --- | --- |
+| Treatment slow in **both** conditions, materially slower than control in both | Shared prefix carries a large fixed cost |
+| Both probes fast idle, **both** degrade under load, gap roughly unchanged | Contention dominates; the prefix is not the differentiator |
+| Both fast idle, treatment degrades **disproportionately** under load | **Mixed, and plausible:** the prefix is not a large fixed cost but amplifies under contention. Neither hypothesis alone; both terms matter |
+| Both probes fast in both conditions, **and** the loaded condition reproduced an application timeout | Refutes the shared-prefix explanation; look to per-query work and payload size |
+| Both probes fast in both conditions, **and** the loaded condition did **not** reproduce a timeout | **Inconclusive. Refutes nothing.** The experiment failed to recreate the failing conditions, and says nothing about the prefix |
+
+That fifth row is the one an earlier draft got wrong: it treated "both probes fast" as refuting the
+prefix hypothesis outright, without requiring that the load actually reproduced the symptom.
+
+Retained per run: probe execution timings and counts from the verified timing source; client
+latency separately; continuous host samples; the driver's timeline; and any Playwright failure
+contexts from the loaded condition.
 
 ## Runtime preconditions — none of this has run
 
@@ -142,6 +182,17 @@ candidate, and does not release the V46 batch. Bounding `closeout:current` and `
 separate follow-up work, out of this slice's scope and not a prerequisite for it.
 
 ## Work log
+
+2026-09-19, second pass after integration-lead review of `b7db556`: corrected four claims before
+any run. The treatment probe was described as touching "no session, no application table" when
+`requireUser` reads both a component session and the application `users` table. The control was
+described as verifying the caller's JWT per call, which is not demonstrated. The outcome table had
+no mixed or inconclusive rows, and in particular treated "both probes fast" as refuting the prefix
+hypothesis even where the loaded condition never reproduced a timeout. And the protocol did not
+state a sample size, an interleaving rule, a preflight, or that the execution-timing source must be
+verified on this backend rather than assumed. The proposed third arm is deliberately **not** added:
+nested `ctx.runQuery` caching semantics are unverified here, so it could not be presented as an
+established equivalence, and the uncertainty is recorded instead.
 
 2026-09-19: claimed V51 on `slice/V51` in `/srv/presidium/projects/salient/opus-diag`, branched
 from the frozen candidate `cc7d4ac`. Wrote the two probes and this plan. Corrected four triage
