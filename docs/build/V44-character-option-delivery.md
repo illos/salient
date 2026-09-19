@@ -309,3 +309,10 @@ that repeatable mode under the same-build requirement (Chords 195–196), with r
 evidence and explicit local-versus-public-site labeling; clarified the reference procedure.
 Shared contract proposal and implementation remain under review. No batch release or pilot
 quality verdict is implied by accepting the capture approach.
+
+2026-09-19: user requested a short reusable orchestration document while the three Opus assignments
+continue. Added the [working guide](../agent-orchestration.md), linked from the build process. It
+records ownership, milestone handoffs, independent reviews, explicit CT114 environment guards,
+Chords delivery versus wake behavior, and evaluation of useful output against coordinator effort.
+The pilot and measured efficiency remain unproven; no additional option support is certified.
+Documentation only, with no runtime impact.
