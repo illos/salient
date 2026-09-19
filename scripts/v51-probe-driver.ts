@@ -147,7 +147,11 @@ async function preflight(client: ConvexHttpClient) {
       'Preflight failed: a probe did not return true. A `false` from the control means no ' +
         'identity was present. A throw may be an authentication failure, a query timeout or a ' +
         'backend error — it is not interpreted here. Either way the timings below would not mean ' +
-        'what the experiment claims, so the run stops.',
+        'what the experiment claims, so the run stops.\n' +
+        // Surface WHICH probe failed and how. An earlier draft refused without saying, which made
+        // the refusal useless for diagnosing the refusal.
+        `  withAuthPrefix: returned=${JSON.stringify(a.returned)} error=${a.error ?? 'none'}\n` +
+        `  identityOnly:   returned=${JSON.stringify(b.returned)} error=${b.error ?? 'none'}`,
     );
 
   // 2. Does the nonce actually force execution here? Compare a repeated identical call against a
@@ -196,6 +200,13 @@ async function main(): Promise<void> {
   await mkdir(outDir, { recursive: true });
   const client = new ConvexHttpClient(url);
   client.setAuth(token);
+
+  // A freshly signed-up account has an auth identity but no application `users` row, so
+  // `requireUser` raises "Finish account setup first." until the app's own setup mutation runs.
+  // This is the ordinary account-setup path the web client already calls — not an auth change,
+  // and not a bypass of anything. The preflight caught this rather than letting it produce
+  // meaningless timings.
+  await client.mutation(makeFunctionReference<'mutation'>('auth:ensureProfile'), {});
 
   const runStartedAtUtc = new Date().toISOString();
   const checks = await preflight(client);
