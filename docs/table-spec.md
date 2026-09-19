@@ -3243,3 +3243,9 @@ Engineering work includes shared idempotent operations, current-state checks, au
 headless persistence/replay and tests for the selected slice. Neither this checkpoint nor the grammar
 recognizer certifies an implemented gameplay engine. Keep source findings, app decisions and proposed
 schemas distinct; [the decision record](gameplay-decision-record.md) preserves the discussion trail.
+
+## Incremental table loading — 2026-09-19
+
+User-confirmed performance follow-up: initial roster cards receive only their authorized summary facts; full character sheets and foe source load when opened. Independent roster/log/history reads start together and do not gate unrelated panes. Ability-result reads follow the visible log page, including older activity.
+
+Maintain a derived, incrementally updated history read projection so passive undo/correction controls do not replay the full session on each update. Existing sessions catch up in bounded batches without deleting history or blocking new gameplay. Authorization, sequential undo/redo, correction/manual-resolution windows, encounter floors and source-event identity remain governed by the existing contracts. The original append-only event journal remains authoritative.

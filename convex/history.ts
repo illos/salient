@@ -8,11 +8,13 @@
  * Owning specification: docs/table-spec.md#undo-permissions-and-proposed-campaign-control.
  */
 import { v } from 'convex/values';
-import { query } from './_generated/server';
+import { query, mutation, internalMutation } from './_generated/server';
 import { requireUser } from './lib/access';
+import { prepareHistoryIndex, catchUpHistoryIndex } from './lib/historyIndex';
+import { readHistory } from './lib/historyRead';
 import { settingsOf } from './lib/audience';
 import { tableContext } from './lib/registry';
-import { directorWindow, loadHistory, playerWindow, redoWindow, type Window } from './lib/history';
+import { directorWindow, playerWindow, redoWindow, type Window } from './lib/history';
 
 const availability = v.object({
   available: v.boolean(),
@@ -61,7 +63,15 @@ export const status = query({
         redo: closed('History needs a running session.'),
         floor: { sequence: 0, label: 'no running session' },
       };
-    const scope = await loadHistory(ctx, context);
+    const scope = await readHistory(ctx, context);
+    if (!scope)
+      return {
+        role: context.role,
+        enableUserUndo,
+        undo: closed('Preparing history controls…'),
+        redo: closed('Preparing history controls…'),
+        floor: { sequence: 0, label: 'preparing history' },
+      };
     const floor = { sequence: scope.floorSequence, label: scope.floorLabel };
     if (context.role === 'observer')
       return {
@@ -85,5 +95,25 @@ export const status = query({
         : await playerWindow(ctx, scope, context.user);
     const redo = await redoWindow(ctx, scope, context);
     return { role: context.role, enableUserUndo, undo: project(undo), redo: project(redo), floor };
+  },
+});
+
+/** Bounded, idempotent maintenance for sessions created before the read index existed. */
+export const prepare = mutation({
+  args: { campaignId: v.id('campaigns') },
+  returns: v.null(),
+  handler: async (ctx, { campaignId }) => {
+    const user = await requireUser(ctx);
+    const context = await tableContext(ctx, user, campaignId);
+    if (context.session) await prepareHistoryIndex(ctx, context.session._id);
+    return null;
+  },
+});
+export const backfill = internalMutation({
+  args: { sessionId: v.id('sessions') },
+  returns: v.null(),
+  handler: async (ctx, { sessionId }): Promise<null> => {
+    await catchUpHistoryIndex(ctx, sessionId);
+    return null;
   },
 });

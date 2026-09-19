@@ -12,7 +12,7 @@
  * #director-edits-to-inline-results, #inline-interaction-cards-in-the-game-log.
  * The operations live in convex/lib/abilityOperations.ts.
  */
-import { v } from 'convex/values';
+import { ConvexError, v } from 'convex/values';
 import { query } from './_generated/server';
 import { requireUser } from './lib/access';
 import { tableContext } from './lib/registry';
@@ -20,7 +20,8 @@ import { actorRef } from './initiativeTables';
 import { abilitiesFor, type AbilityDefinition } from './lib/resolve';
 import { allowanceFor, loadActorRecords } from './lib/abilityOperations';
 import { settingsOf } from './lib/audience';
-import { loadCorrectionWindows, resolveHistoricalId } from './lib/history';
+import { resolveHistoricalId } from './lib/history';
+import { loadReadCorrectionWindows } from './lib/historyRead';
 
 export { abilityOperations } from './lib/abilityOperations';
 
@@ -201,7 +202,7 @@ const disposition = v.object({ clause: v.string(), eventId: v.id('events'), note
 
 /** Effective results of resolved ability uses in this campaign, newest first. */
 export const results = query({
-  args: { campaignId: v.id('campaigns') },
+  args: { campaignId: v.id('campaigns'), eventIds: v.optional(v.array(v.id('events'))) },
   returns: v.array(
     v.object({
       id: v.id('abilityResults'),
@@ -234,12 +235,29 @@ export const results = query({
     const context = await tableContext(ctx, user, args.campaignId);
     const director = context.role === 'director';
     const numerical = settingsOf(context.campaign).healthDisplay === 'numerical';
-    const rows = await ctx.db
-      .query('abilityResults')
-      .withIndex('by_campaign', q => q.eq('campaignId', args.campaignId))
-      .order('desc')
-      .take(100);
-    const windowFor = await loadCorrectionWindows(ctx, context);
+    if (args.eventIds && args.eventIds.length > 50)
+      throw new ConvexError('Request at most one visible log page.');
+    const selected = args.eventIds
+      ? await Promise.all(
+          [...new Set(args.eventIds)].map(eventId =>
+            ctx.db
+              .query('abilityResults')
+              .withIndex('by_event', q => q.eq('eventId', eventId))
+              .unique(),
+          ),
+        )
+      : null;
+    const rows = selected
+      ? selected.filter(
+          (row): row is NonNullable<typeof row> => !!row && row.campaignId === args.campaignId,
+        )
+      : await ctx.db
+          .query('abilityResults')
+          .withIndex('by_campaign', q => q.eq('campaignId', args.campaignId))
+          .order('desc')
+          .take(100);
+    if (!rows.length) return [];
+    const windowFor = await loadReadCorrectionWindows(ctx, context);
     const windows = new Map<string, boolean>();
     const manualWindows = new Map<string, boolean>();
     const aliases = new Map<string, string>();

@@ -2,6 +2,7 @@
 // The one writer of game-log events. Owning specification:
 // docs/table-spec.md#confirmed-action-and-log-contract (ordered attributed entries; engine activity
 // never invents a user invocation) and docs/data-architecture-spec.md#5-encounter-actions-and-undo.
+import { indexHistoryEvent } from './historyIndex';
 import { ConvexError } from 'convex/values';
 import type { Doc, Id } from '../_generated/dataModel';
 import type { MutationCtx } from '../_generated/server';
@@ -63,7 +64,7 @@ export async function appendEvent(ctx: MutationCtx, input: EventInput): Promise<
   }
   const sequence = campaign.eventSequence + 1;
   await ctx.db.patch(input.campaignId, { eventSequence: sequence });
-  return ctx.db.insert('events', {
+  const eventId = await ctx.db.insert('events', {
     campaignId: input.campaignId,
     sessionId,
     encounterId,
@@ -80,4 +81,6 @@ export async function appendEvent(ctx: MutationCtx, input: EventInput): Promise<
     ...(input.payload !== undefined ? { payload: input.payload } : {}),
     createdAt: Date.now(),
   });
+  await indexHistoryEvent(ctx, (await ctx.db.get(eventId))!);
+  return eventId;
 }

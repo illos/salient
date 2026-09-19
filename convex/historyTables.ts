@@ -14,7 +14,29 @@
 import { defineTable } from 'convex/server';
 import { v } from 'convex/values';
 
+const eventPointer = v.union(v.id('events'), v.null());
 export const historyTables = {
+  /** Derived linked stacks; source events and journals remain authoritative. */
+  historyCursors: defineTable({
+    sessionId: v.id('sessions'),
+    sequence: v.number(),
+    branchTop: eventPointer,
+    redoTop: eventPointer,
+    redoClearedBy: eventPointer,
+    archivedFloor: v.number(),
+    scheduled: v.boolean(),
+  }).index('by_session', ['sessionId']),
+  historyUnits: defineTable({
+    sessionId: v.id('sessions'),
+    eventId: v.id('events'),
+    commandKey: v.string(),
+    active: v.boolean(),
+    previousBranch: eventPointer,
+    previousRedo: eventPointer,
+    continuationOf: eventPointer,
+  })
+    .index('by_event', ['eventId'])
+    .index('by_session_command', ['sessionId', 'commandKey']),
   historyAliases: defineTable({
     campaignId: v.id('campaigns'),
     /** An id the journal recorded that no longer names a live document. */

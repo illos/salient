@@ -8,6 +8,7 @@ export const list = query({
   args: {
     campaignId: v.id('campaigns'),
     sessionId: v.optional(v.id('sessions')),
+    activeSession: v.optional(v.boolean()),
     before: v.optional(v.number()),
   },
   returns: v.object({
@@ -36,17 +37,18 @@ export const list = query({
     const campaign = await requireMember(ctx, args.campaignId, user._id);
     if (args.before !== undefined && (!Number.isSafeInteger(args.before) || args.before < 1))
       throw new ConvexError('Invalid history cursor.');
-    if (args.sessionId) {
-      const session = await ctx.db.get(args.sessionId);
+    const sessionId = args.activeSession ? campaign.activeSessionId : args.sessionId;
+    if (sessionId) {
+      const session = await ctx.db.get(sessionId);
       if (!session || session.campaignId !== args.campaignId)
         throw new ConvexError('Session unavailable.');
     }
     const before = args.before ?? Number.MAX_SAFE_INTEGER;
-    const rows = args.sessionId
+    const rows = sessionId
       ? await ctx.db
           .query('events')
           .withIndex('by_session_sequence', q =>
-            q.eq('sessionId', args.sessionId!).lt('sequence', before),
+            q.eq('sessionId', sessionId).lt('sequence', before),
           )
           .order('desc')
           .take(51)

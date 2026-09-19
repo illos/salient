@@ -14,6 +14,7 @@ import {
   walkHistory,
   type EventLike,
 } from '../../convex/lib/history';
+import { indexArchivedEncounter } from '../../convex/lib/historyIndex';
 import { account, admit, admitHero, backend, storedEvents, type Backend } from './fixtures/table';
 import { FIXTURE_STRIKE_ID, registerFixtureStrike } from './fixtures/costedAbility';
 
@@ -385,11 +386,12 @@ describe('FreePlay undo, redo and seams', () => {
     const { director, player, campaignId, sessionId, thornId } = f;
     await openCombat(f);
     await strike(player.client, f, 'Thorn');
-    // A07 is not built: archive the encounter directly, as Finish cleanup will.
+    // Reproduce the archive write and derived-index maintenance performed by Finish cleanup.
     const encounter = (await encounterOf(t, sessionId))!;
-    await t.run(ctx =>
-      ctx.db.patch(encounter._id, { status: 'closed-out', archivedAt: Date.now() }),
-    );
+    await t.run(async ctx => {
+      await ctx.db.patch(encounter._id, { status: 'closed-out', archivedAt: Date.now() });
+      await indexArchivedEncounter(ctx, encounter);
+    });
     const view = await status(director.client, campaignId);
     expect(view.floor.label).toBe('the archived encounter');
     expect(view.undo).toMatchObject({ available: false });

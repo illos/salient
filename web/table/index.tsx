@@ -31,7 +31,6 @@ export { GameLog } from './log';
 
 export function TablePage({ campaignId }: { campaignId: Id<'campaigns'> }) {
   const roster = useQuery(api.table.roster, { campaignId });
-  const campaign = useQuery(api.campaigns.get, { campaignId });
   const encounter = useQuery(api.encounters.current, { campaignId });
   const drafts = useQuery(api.targets.drafts, { campaignId });
   const invoke = useMutation(api.commands.invoke);
@@ -52,30 +51,34 @@ export function TablePage({ campaignId }: { campaignId: Id<'campaigns'> }) {
   }, [campaignId, roster, drafts, invoke, showError]);
   // Explicit Take turn switches only this user's pane to the chosen hero (local state, never shared).
   const [viewedHeroId, setViewedHeroId] = useState<Id<'characters'> | null>(null);
-  if (!roster || !campaign || encounter === undefined)
-    return (
-      <div className="p-(--pane-padding-x)">
-        <Loading>Opening the table…</Loading>
-      </div>
-    );
-  const running = roster.session?.status === 'running';
+  const running = roster?.session?.status === 'running' && encounter !== undefined;
   const onTurnTaken = (actor: { kind: 'character' | 'foe'; id: string }) => {
     if (actor.kind === 'character') setViewedHeroId(actor.id as Id<'characters'>);
   };
   return (
     <SessionShell
       header={
-        <SessionHeader
-          campaignId={campaignId}
-          campaignName={campaign.name}
-          roster={roster}
-          encounter={encounter}
-        />
+        roster && encounter !== undefined ? (
+          <SessionHeader
+            campaignId={campaignId}
+            campaignName={roster.campaignName}
+            roster={roster}
+            encounter={encounter}
+          />
+        ) : (
+          <Loading>Opening the table…</Loading>
+        )
       }
     >
       <SessionPanes
         combat={encounter?.status === 'committed'}
-        director={<DirectorPane campaignId={campaignId} roster={roster} encounter={encounter} />}
+        director={
+          roster && encounter !== undefined ? (
+            <DirectorPane campaignId={campaignId} roster={roster} encounter={encounter} />
+          ) : (
+            <Loading>Loading foes…</Loading>
+          )
+        }
         center={
           <LogPane
             campaignId={campaignId}
@@ -89,18 +92,22 @@ export function TablePage({ campaignId }: { campaignId: Id<'campaigns'> }) {
           </LogPane>
         }
         centerFooter={
-          roster.role !== 'observer' ? (
+          roster && encounter !== undefined && roster.role !== 'observer' ? (
             <CommandLine campaignId={campaignId} sessionRevision={roster.session?.revision} />
           ) : undefined
         }
         heroes={
-          <HeroesPane
-            campaignId={campaignId}
-            roster={roster}
-            encounter={encounter}
-            viewedHeroId={viewedHeroId}
-            onTurnTaken={onTurnTaken}
-          />
+          roster && encounter !== undefined ? (
+            <HeroesPane
+              campaignId={campaignId}
+              roster={roster}
+              encounter={encounter}
+              viewedHeroId={viewedHeroId}
+              onTurnTaken={onTurnTaken}
+            />
+          ) : (
+            <Loading>Loading heroes…</Loading>
+          )
         }
       />
     </SessionShell>

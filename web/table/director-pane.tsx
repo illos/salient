@@ -90,19 +90,13 @@ function FoeCard({
   mayTarget: boolean;
   onOpen?: () => void;
 }) {
-  // The role / level line comes from the Director-only source snapshot; players see none.
-  const detail = useQuery(api.foes.detail, director ? { campaignId, foeId: foe.id } : 'skip');
-  const structured = detail
-    ? (JSON.parse(detail.sourceSnapshot) as { structured?: Record<string, unknown> | null })
-        .structured
-    : undefined;
   const turn = turnStateOf(encounter, foe.id);
   const state = foe.slain ? 'slain' : turn.acting ? 'acting' : turn.spent ? 'spent' : 'idle';
   return (
     <RosterCard
       campaignId={campaignId}
       actor={{ kind: 'foe', id: foe.id, name: foe.name }}
-      subtitle={director ? foeRoleLine(structured, { compact: true }) || undefined : undefined}
+      subtitle={director ? foeRoleLine(foe.summary, { compact: true }) || undefined : undefined}
       health={foeCardHealth(foe)}
       badges={<ConditionBadges conditions={foe.conditions} readable={false} />}
       state={state}

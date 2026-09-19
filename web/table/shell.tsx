@@ -12,7 +12,7 @@
  */
 import { useEffect, useState } from 'react';
 import { Link } from '@tanstack/react-router';
-import { useMutation, useQuery } from 'convex/react';
+import { useMutation } from 'convex/react';
 import { api } from '../../convex/_generated/api';
 import type { Id } from '../../convex/_generated/dataModel';
 import { Button } from '../components/ui/button';
@@ -151,14 +151,8 @@ export function SessionHeader({
   roster: Roster;
   encounter: Encounter | null;
 }) {
-  const viewer = useQuery(api.auth.viewer);
-  // Session number and start time: the roster carries only id/status/revision, so the ordered
-  // session list (newest first) supplies both. One extra subscription per table view.
-  const sessions = useQuery(api.sessions.list, { campaignId });
-  const active = roster.session ? sessions?.find(s => s.id === roster.session!.id) : undefined;
-  const number =
-    active && sessions ? sessions.length - sessions.findIndex(s => s.id === active.id) : null;
-  const elapsed = useElapsed(active?.startedAt);
+  const number = roster.session?.number ?? null;
+  const elapsed = useElapsed(roster.session?.startedAt);
   const status = sessionStatusText(roster, encounter);
   const live = roster.session?.status === 'running';
   return (
@@ -188,7 +182,7 @@ export function SessionHeader({
         {roster.role === 'director' && roster.session && (
           <SessionControls campaignId={campaignId} session={roster.session} encounter={encounter} />
         )}
-        {viewer && <UserMenu displayName={viewer.displayName} />}
+        <UserMenu displayName={roster.viewerName} />
       </div>
     </header>
   );

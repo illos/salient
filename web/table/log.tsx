@@ -13,7 +13,7 @@
  * docs/reference-library-spec.md#app-wide-rule-cards.
  */
 import { lazy, Suspense, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
-import { useQuery } from 'convex/react';
+import { useMutation, useQuery } from 'convex/react';
 import { ArrowLeftIcon, ExternalLinkIcon } from 'lucide-react';
 import { api } from '../../convex/_generated/api';
 import type { Id } from '../../convex/_generated/dataModel';
@@ -77,6 +77,7 @@ export function GameLog({
   director,
   running,
   tab = 'log',
+  activeSession = false,
   ownActorIds,
 }: {
   campaignId: Id<'campaigns'>;
@@ -84,20 +85,49 @@ export function GameLog({
   director: boolean;
   running: boolean;
   tab?: LogTab;
+  activeSession?: boolean;
   /** Heroes the viewer owns; their entries get the ink disc. */
   ownActorIds?: ReadonlySet<string>;
 }) {
-  const [before, setBefore] = useState<number | undefined>();
-  const results = useQuery(api.abilities.results, { campaignId });
+  const [page, setPage] = useState<{
+    sessionId?: Id<'sessions'>;
+    before?: number;
+  }>({ sessionId });
+  const before = page.sessionId === sessionId ? page.before : undefined;
+  const setBefore = (value: number | undefined) => setPage({ sessionId, before: value });
+  const history = useQuery(api.history.status, { campaignId });
+  const preparingHistory = history?.floor.label === 'preparing history';
+  const prepareHistory = useMutation(api.history.prepare);
+  const [historyAttempt, setHistoryAttempt] = useState(0);
+  const [historyError, setHistoryError] = useState(false);
+  useEffect(() => {
+    if (!preparingHistory) return;
+    let active = true;
+    void prepareHistory({ campaignId }).then(
+      () => {
+        if (active) setHistoryError(false);
+      },
+      () => {
+        if (active) setHistoryError(true);
+      },
+    );
+    return () => {
+      active = false;
+    };
+  }, [campaignId, sessionId, preparingHistory, prepareHistory, historyAttempt]);
   const result = useQuery(api.events.list, {
     campaignId,
-    ...(sessionId ? { sessionId } : {}),
+    ...(activeSession ? { activeSession: true } : sessionId ? { sessionId } : {}),
     ...(before === undefined ? {} : { before }),
   });
+  const resultIds = result?.events.filter(e => e.kind === 'ability.use').map(e => e.id);
+  const results = useQuery(
+    api.abilities.results,
+    resultIds?.length ? { campaignId, eventIds: resultIds } : 'skip',
+  );
   // A06: which entries the viewer's Undo/Rewind and Redo would act on; each operation checks
   // again when it runs. These are the inline affordance beside a result; the pane header's icon
   // pair (V31) acts on the same targets without naming an entry.
-  const history = useQuery(api.history.status, { campaignId });
   const list = useRef<HTMLOListElement>(null);
   usePinnedToBottom(list, before === undefined);
   const own = useMemo(() => ownActorIds ?? new Set<string>(), [ownActorIds]);
@@ -109,6 +139,12 @@ export function GameLog({
   const shown = tab === 'rolls' ? ordered.filter(hasDice) : ordered;
   return (
     <div className="flex flex-col" data-log-feed data-tab={tab}>
+      {historyError && preparingHistory && (
+        <p role="alert">
+          History controls could not load.{' '}
+          <button onClick={() => setHistoryAttempt(n => n + 1)}>Try again</button>
+        </p>
+      )}
       {(result.nextBefore !== null || before !== undefined) && (
         <div className="flex items-center justify-center gap-2 py-2">
           {result.nextBefore !== null && (
@@ -252,7 +288,7 @@ function LogTabs({
  * inside the card with a Back control, and a link to the full searchable library.
  */
 function RulesCard({ open, onOpenChange }: { open: boolean; onOpenChange: (o: boolean) => void }) {
-  const { catalog, error } = useRulesCatalog();
+  const { catalog, error } = useRulesCatalog(open);
   const [history, setHistory] = useState<{ entry: RuleSummary; section?: string }[]>([]);
   const current = history.at(-1);
   const bookName = (id: string) => catalog?.books.find(b => b.id === id)?.name ?? 'Draw Steel';
@@ -356,18 +392,18 @@ export function LogPane({
   children,
 }: {
   campaignId: Id<'campaigns'>;
-  roster: Roster;
-  encounter: Encounter | null;
+  roster: Roster | undefined;
+  encounter: Encounter | null | undefined;
   running: boolean;
   onTurnTaken: (actor: { kind: 'character' | 'foe'; id: string }) => void;
   children?: React.ReactNode;
 }) {
   const [tab, setTab] = useState<LogTab>('log');
   const [rulesOpen, setRulesOpen] = useState(false);
-  const director = roster.role === 'director';
+  const director = roster?.role === 'director';
   const ownActorIds = useMemo(
-    () => new Set(roster.heroes.filter(h => h.ownerId === roster.viewerId).map(h => h.id)),
-    [roster.heroes, roster.viewerId],
+    () => new Set(roster?.heroes.filter(h => h.ownerId === roster.viewerId).map(h => h.id) ?? []),
+    [roster],
   );
   return (
     <div className="flex min-h-full flex-col" data-log-pane>
@@ -393,7 +429,7 @@ export function LogPane({
             rulesOpen={rulesOpen}
             onRules={() => setRulesOpen(true)}
           />
-          {running && roster.role !== 'observer' ? (
+          {running && roster?.role !== 'observer' ? (
             <HistoryControls campaignId={campaignId} className="justify-self-end pb-1" />
           ) : (
             <span aria-hidden />
@@ -403,7 +439,8 @@ export function LogPane({
       <RulesCard open={rulesOpen} onOpenChange={setRulesOpen} />
       <GameLog
         campaignId={campaignId}
-        sessionId={roster.session?.id}
+        activeSession
+        sessionId={roster?.session?.id}
         director={director}
         running={running}
         tab={tab}

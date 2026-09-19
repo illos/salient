@@ -1,0 +1,57 @@
+
+Running 4 tests using 1 worker
+
+[1/4] tests/browser/journey.spec.ts:16:1 › accounts, invitation approval, session lifecycle, private draft persistence and reconnect
+[2/4] tests/browser/table-performance.spec.ts:6:1 › table opens without per-card detail reads, then drills in and preserves undo/redo
+[3/4] tests/browser/v38-library-navigation.spec.ts:5:1 › primary navigation exposes independent Rules and Foes libraries
+[4/4] tests/browser/wizard.spec.ts:23:1 › wizard, admission review and the three sheet audiences
+  1) tests/browser/wizard.spec.ts:23:1 › wizard, admission review and the three sheet audiences ────
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('heading', { name: 'Campaigns', exact: true })
+    Expected: visible
+    Timeout: 15000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByRole('heading', { name: 'Campaigns', exact: true }) with timeout 15000ms
+      - waiting for getByRole('heading', { name: 'Campaigns', exact: true })
+
+
+      18 |   await page.getByLabel('Password', { exact: true }).fill(password);
+      19 |   await page.getByRole('button', { name: 'Create account', exact: true }).click();
+    > 20 |   await expect(page.getByRole('heading', { name: 'Campaigns', exact: true })).toBeVisible();
+         |                                                                               ^
+      21 | }
+      22 |
+      23 | test('wizard, admission review and the three sheet audiences', async ({ browser }) => {
+        at register (/app/tests/browser/wizard.spec.ts:20:79)
+        at /app/tests/browser/wizard.spec.ts:43:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../artifacts/v43-browser/wizard-wizard-admission-review-and-the-three-sheet-audiences/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../artifacts/v43-browser/wizard-wizard-admission-review-and-the-three-sheet-audiences/test-failed-2.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../artifacts/v43-browser/wizard-wizard-admission-review-and-the-three-sheet-audiences/test-failed-3.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../artifacts/v43-browser/wizard-wizard-admission-review-and-the-three-sheet-audiences/error-context.md
+
+    attachment #5: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../artifacts/v43-browser/wizard-wizard-admission-review-and-the-three-sheet-audiences/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../artifacts/v43-browser/wizard-wizard-admission-review-and-the-three-sheet-audiences/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  1 failed
+    tests/browser/wizard.spec.ts:23:1 › wizard, admission review and the three sheet audiences ─────
+  3 passed (1.7m)

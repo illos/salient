@@ -323,3 +323,9 @@ records the handoff; it does not certify A09 or create an implementation commit.
 | Slice | Assignment | Status | Owner |
 | --- | --- | --- | --- |
 | V41 | [Reference performance](V41-reference-performance.md) | Committed on slice/V41 `fd58cf7` — 676 tests, 18 browser scenarios and independent review pass; awaiting integration/hosted rollout | Codex performance, slice/V41 |
+
+## V43 — table loading and history reads
+
+| Slice | Assignment | Status | Owner |
+| --- | --- | --- | --- |
+| V43 | [Table performance](V43-table-performance.md) | Reviewed — checks and browser journeys passed, integration pending | Codex performance, slice/V43 |

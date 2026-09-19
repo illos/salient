@@ -12,10 +12,7 @@
  * docs/character-sheet-spec.md#layout-and-content.
  */
 import { useState } from 'react';
-import { useQuery } from 'convex/react';
-import { api } from '../../convex/_generated/api';
 import type { Id } from '../../convex/_generated/dataModel';
-import type { CharacterSheet as SheetPayload } from '../../shared/contracts/characterSheet';
 import { Chip } from '../components/chip';
 import { PaneHeading } from '../components/pane-heading';
 import { CharacterSheet } from '../character-sheet';
@@ -28,27 +25,6 @@ import { AbilityPanel } from './targeting';
 import { HeroRingRow } from './hero-ring-row';
 
 export type Hero = Roster['heroes'][number];
-
-/** Build facts the card needs beyond the roster projection, from the audience-projected sheet read. */
-function sheetFacts(sheet: SheetPayload | undefined) {
-  if (!sheet) return null;
-  if (sheet.audience === 'peer')
-    return {
-      subtitle: undefined,
-      staminaMax: sheet.maxima?.staminaMaximum ?? null,
-      recoveriesMax: sheet.maxima?.recoveriesMaximum ?? null,
-      windedValue: null,
-    };
-  const baseline = sheet.build?.baseline ?? sheet.build?.partial ?? null;
-  const klass = baseline?.class?.value;
-  const level = baseline?.level?.value;
-  return {
-    subtitle: klass ? `${klass}${level !== undefined ? ` · Level ${level}` : ''}` : undefined,
-    staminaMax: baseline?.staminaMaximum?.value ?? null,
-    recoveriesMax: baseline?.recoveriesMaximum?.value ?? null,
-    windedValue: sheet.live?.labels.windedValue ?? null,
-  };
-}
 
 function HeroCard({
   campaignId,
@@ -73,9 +49,7 @@ function HeroCard({
   onOpen?: () => void;
   onTurnTaken: (actor: { kind: 'character' | 'foe'; id: string }) => void;
 }) {
-  const sheet = useQuery(api.characters.sheet, { characterId: hero.id }) as
-    SheetPayload | undefined;
-  const facts = sheetFacts(sheet);
+  const facts = hero.facts;
   const live = hero.live;
   const turn = turnStateOf(encounter, hero.id);
   const state = turn.acting ? 'acting' : turn.spent ? 'spent' : 'idle';

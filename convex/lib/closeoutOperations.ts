@@ -1,3 +1,4 @@
+import { indexArchivedEncounter } from './historyIndex';
 // SPDX-License-Identifier: GPL-3.0-only
 /** A07: docs/table-spec.md#formal-encounter-closeout and #voiding-an-encounter.
  * End structure without final turn/round work; explicit rewards; journaled cleanup and snapshot Void.
@@ -131,6 +132,7 @@ async function archive(
   for (const hero of await closeoutHeroes(ctx, encounter))
     await journalPatch(ctx, scope, 'characters', hero._id, { combatLocked: false });
   await journalPatch(ctx, scope, 'encounters', encounter._id, { status, archivedAt: Date.now() });
+  await indexArchivedEncounter(ctx, encounter);
   // Keep the session pointer to the archive: currentEncounter excludes it, and history sees the boundary.
 }
 

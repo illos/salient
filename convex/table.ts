@@ -13,6 +13,7 @@
  */
 import { v } from 'convex/values';
 import { query } from './_generated/server';
+import type { DerivedBaseline } from '../shared/contracts/characterEvaluation';
 import type { Doc } from './_generated/dataModel';
 import { requireUser } from './lib/access';
 import { tableContext } from './lib/registry';
@@ -31,6 +32,34 @@ function projectFoe(foe: Doc<'foes'>, director: boolean, mode: 'bar' | 'numerica
     slain: foe.live.stamina <= 0,
     conditions: foe.live.conditions ?? noConditions(),
     health,
+    summary: director ? foeSummary(foe.sourceSnapshot) : null,
+  };
+}
+
+function foeSummary(snapshot: string) {
+  try {
+    const source = JSON.parse(snapshot) as { structured?: { level?: unknown; role?: unknown } };
+    const value = source.structured;
+    return {
+      level:
+        typeof value?.level === 'number' || typeof value?.level === 'string' ? value.level : null,
+      role: typeof value?.role === 'string' ? value.role : null,
+    };
+  } catch {
+    return null; // Older plain-text snapshots have no structured card facts.
+  }
+}
+
+function heroFacts(character: Doc<'characters'>, full: boolean) {
+  const baseline = character.derivedBaseline as DerivedBaseline | null;
+  return {
+    subtitle:
+      full && baseline?.class?.value
+        ? `${baseline.class.value} · Level ${baseline.level?.value ?? '—'}`
+        : null,
+    staminaMax: baseline?.staminaMaximum?.value ?? null,
+    recoveriesMax: baseline?.recoveriesMaximum?.value ?? null,
+    windedValue: full ? (baseline?.windedValue?.value ?? null) : null,
   };
 }
 
@@ -39,12 +68,16 @@ export const roster = query({
   returns: v.object({
     role: v.union(v.literal('director'), v.literal('player'), v.literal('observer')),
     viewerId: v.id('users'),
+    viewerName: v.string(),
+    campaignName: v.string(),
     session: v.union(
       v.null(),
       v.object({
         id: v.id('sessions'),
         status: v.union(v.literal('running'), v.literal('paused'), v.literal('closed')),
         revision: v.number(),
+        startedAt: v.number(),
+        number: v.number(),
       }),
     ),
     malice: v.union(v.number(), v.null()),
@@ -65,6 +98,13 @@ export const roster = query({
         slain: v.boolean(),
         conditions: conditionsValidator,
         health: foeHealthValidator,
+        summary: v.union(
+          v.null(),
+          v.object({
+            level: v.union(v.number(), v.string(), v.null()),
+            role: v.union(v.string(), v.null()),
+          }),
+        ),
       }),
     ),
     heroes: v.array(
@@ -74,6 +114,12 @@ export const roster = query({
         ownerId: v.id('users'),
         ownerName: v.string(),
         controlled: v.boolean(),
+        facts: v.object({
+          subtitle: v.union(v.string(), v.null()),
+          staminaMax: v.union(v.number(), v.null()),
+          recoveriesMax: v.union(v.number(), v.null()),
+          windedValue: v.union(v.number(), v.null()),
+        }),
         live: v.union(
           v.null(),
           heroLiveValidator,
@@ -104,6 +150,7 @@ export const roster = query({
         name: character.authored.name,
         ownerId: character.ownerId,
         ownerName: (await ctx.db.get(character.ownerId))?.displayName ?? 'Unknown',
+        facts: heroFacts(character, director || character.ownerId === user._id),
         controlled: director || (context.role === 'player' && character.ownerId === user._id),
         live: !character.liveState
           ? null
@@ -112,14 +159,25 @@ export const roster = query({
             : { stamina: character.liveState.stamina, recoveries: character.liveState.recoveries },
       })),
     );
+    const sessions = context.session
+      ? await ctx.db
+          .query('sessions')
+          .withIndex('by_campaign', q => q.eq('campaignId', args.campaignId))
+          .order('desc')
+          .take(50)
+      : [];
     return {
       role: context.role,
+      viewerName: user.displayName,
+      campaignName: context.campaign.name,
       viewerId: user._id,
       session: context.session
         ? {
             id: context.session._id,
             status: context.session.status,
             revision: context.session.revision,
+            startedAt: context.session.startedAt,
+            number: sessions.length - sessions.findIndex(s => s._id === context.session!._id),
           }
         : null,
       // Audience enforcement: the pool is absent from the payload unless the viewer may see it.

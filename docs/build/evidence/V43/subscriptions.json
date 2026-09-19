@@ -1,0 +1,524 @@
+{
+  "fixture": {
+    "stamp": "55cc7048",
+    "foes": 6,
+    "heroes": 1
+  },
+  "records": [
+    {
+      "phase": "initial",
+      "event": "subscribe",
+      "path": "auth:viewer",
+      "time": 1789825616302
+    },
+    {
+      "phase": "initial",
+      "event": "subscribe",
+      "path": "auth:viewer",
+      "time": 1789825616302
+    },
+    {
+      "phase": "initial",
+      "event": "result",
+      "path": "auth:viewer",
+      "time": 1789825616353,
+      "bytes": 79
+    },
+    {
+      "phase": "initial",
+      "event": "result",
+      "path": "auth:viewer",
+      "time": 1789825616353,
+      "bytes": 79
+    },
+    {
+      "phase": "initial",
+      "event": "subscribe",
+      "path": "events:list",
+      "time": 1789825616671
+    },
+    {
+      "phase": "initial",
+      "event": "subscribe",
+      "path": "history:status",
+      "time": 1789825616671
+    },
+    {
+      "phase": "initial",
+      "event": "subscribe",
+      "path": "table:roster",
+      "time": 1789825616671
+    },
+    {
+      "phase": "initial",
+      "event": "subscribe",
+      "path": "encounters:current",
+      "time": 1789825616671
+    },
+    {
+      "phase": "initial",
+      "event": "subscribe",
+      "path": "targets:drafts",
+      "time": 1789825616671
+    },
+    {
+      "phase": "initial",
+      "event": "subscribe",
+      "path": "events:list",
+      "time": 1789825616672
+    },
+    {
+      "phase": "initial",
+      "event": "subscribe",
+      "path": "history:status",
+      "time": 1789825616672
+    },
+    {
+      "phase": "initial",
+      "event": "subscribe",
+      "path": "table:roster",
+      "time": 1789825616672
+    },
+    {
+      "phase": "initial",
+      "event": "subscribe",
+      "path": "encounters:current",
+      "time": 1789825616672
+    },
+    {
+      "phase": "initial",
+      "event": "subscribe",
+      "path": "targets:drafts",
+      "time": 1789825616672
+    },
+    {
+      "phase": "initial",
+      "event": "result",
+      "path": "events:list",
+      "time": 1789825616672,
+      "bytes": 3486
+    },
+    {
+      "phase": "initial",
+      "event": "result",
+      "path": "events:list",
+      "time": 1789825616672,
+      "bytes": 3486
+    },
+    {
+      "phase": "initial",
+      "event": "result",
+      "path": "history:status",
+      "time": 1789825616672,
+      "bytes": 336
+    },
+    {
+      "phase": "initial",
+      "event": "result",
+      "path": "table:roster",
+      "time": 1789825616672,
+      "bytes": 3454
+    },
+    {
+      "phase": "initial",
+      "event": "result",
+      "path": "encounters:current",
+      "time": 1789825616672,
+      "bytes": 4
+    },
+    {
+      "phase": "initial",
+      "event": "result",
+      "path": "targets:drafts",
+      "time": 1789825616672,
+      "bytes": 25
+    },
+    {
+      "phase": "initial",
+      "event": "subscribe",
+      "path": "foes:catalog",
+      "time": 1789825616704
+    },
+    {
+      "phase": "initial",
+      "event": "subscribe",
+      "path": "foes:catalog",
+      "time": 1789825616704
+    },
+    {
+      "phase": "initial",
+      "event": "result",
+      "path": "foes:catalog",
+      "time": 1789825616709,
+      "bytes": 4189
+    },
+    {
+      "phase": "initial",
+      "event": "result",
+      "path": "foes:catalog",
+      "time": 1789825616709,
+      "bytes": 4189
+    },
+    {
+      "phase": "foe-detail",
+      "event": "subscribe",
+      "path": "abilities:sheet",
+      "time": 1789825617246
+    },
+    {
+      "phase": "foe-detail",
+      "event": "subscribe",
+      "path": "foes:detail",
+      "time": 1789825617246
+    },
+    {
+      "phase": "foe-detail",
+      "event": "subscribe",
+      "path": "abilities:sheet",
+      "time": 1789825617246
+    },
+    {
+      "phase": "foe-detail",
+      "event": "subscribe",
+      "path": "foes:detail",
+      "time": 1789825617246
+    },
+    {
+      "phase": "foe-detail",
+      "event": "result",
+      "path": "abilities:sheet",
+      "time": 1789825617308,
+      "bytes": 8584
+    },
+    {
+      "phase": "foe-detail",
+      "event": "result",
+      "path": "abilities:sheet",
+      "time": 1789825617365,
+      "bytes": 8584
+    },
+    {
+      "phase": "foe-detail",
+      "event": "result",
+      "path": "foes:detail",
+      "time": 1789825617365,
+      "bytes": 4115
+    },
+    {
+      "phase": "foe-detail",
+      "event": "result",
+      "path": "events:list",
+      "time": 1789825618386,
+      "bytes": 4407
+    },
+    {
+      "phase": "foe-detail",
+      "event": "result",
+      "path": "history:status",
+      "time": 1789825618386,
+      "bytes": 350
+    },
+    {
+      "phase": "foe-detail",
+      "event": "result",
+      "path": "table:roster",
+      "time": 1789825618386,
+      "bytes": 3453
+    },
+    {
+      "phase": "foe-detail",
+      "event": "subscribe",
+      "path": "foes:catalog",
+      "time": 1789825618865
+    },
+    {
+      "phase": "foe-detail",
+      "event": "subscribe",
+      "path": "foes:catalog",
+      "time": 1789825618865
+    },
+    {
+      "phase": "foe-detail",
+      "event": "result",
+      "path": "foes:catalog",
+      "time": 1789825618956,
+      "bytes": 4189
+    },
+    {
+      "phase": "foe-detail",
+      "event": "result",
+      "path": "foes:catalog",
+      "time": 1789825618956,
+      "bytes": 4189
+    },
+    {
+      "phase": "foe-detail",
+      "event": "result",
+      "path": "events:list",
+      "time": 1789825619779,
+      "bytes": 5474
+    },
+    {
+      "phase": "foe-detail",
+      "event": "result",
+      "path": "history:status",
+      "time": 1789825619779,
+      "bytes": 448
+    },
+    {
+      "phase": "foe-detail",
+      "event": "result",
+      "path": "table:roster",
+      "time": 1789825619779,
+      "bytes": 3454
+    },
+    {
+      "phase": "foe-detail",
+      "event": "result",
+      "path": "events:list",
+      "time": 1789825621156,
+      "bytes": 6521
+    },
+    {
+      "phase": "foe-detail",
+      "event": "result",
+      "path": "history:status",
+      "time": 1789825621157,
+      "bytes": 350
+    },
+    {
+      "phase": "foe-detail",
+      "event": "result",
+      "path": "table:roster",
+      "time": 1789825621157,
+      "bytes": 3453
+    },
+    {
+      "phase": "hero-detail",
+      "event": "subscribe",
+      "path": "characters:sheet",
+      "time": 1789825621557
+    },
+    {
+      "phase": "hero-detail",
+      "event": "subscribe",
+      "path": "abilities:sheet",
+      "time": 1789825621557
+    },
+    {
+      "phase": "hero-detail",
+      "event": "subscribe",
+      "path": "characters:sheet",
+      "time": 1789825621557
+    },
+    {
+      "phase": "hero-detail",
+      "event": "subscribe",
+      "path": "abilities:sheet",
+      "time": 1789825621557
+    },
+    {
+      "phase": "hero-detail",
+      "event": "result",
+      "path": "characters:sheet",
+      "time": 1789825621646,
+      "bytes": 101212
+    },
+    {
+      "phase": "hero-detail",
+      "event": "result",
+      "path": "characters:sheet",
+      "time": 1789825621709,
+      "bytes": 101212
+    },
+    {
+      "phase": "hero-detail",
+      "event": "result",
+      "path": "abilities:sheet",
+      "time": 1789825621710,
+      "bytes": 27249
+    },
+    {
+      "phase": "persisted-reload",
+      "event": "subscribe",
+      "path": "auth:viewer",
+      "time": 1789825622441
+    },
+    {
+      "phase": "persisted-reload",
+      "event": "subscribe",
+      "path": "auth:viewer",
+      "time": 1789825622441
+    },
+    {
+      "phase": "persisted-reload",
+      "event": "result",
+      "path": "auth:viewer",
+      "time": 1789825622451,
+      "bytes": 79
+    },
+    {
+      "phase": "persisted-reload",
+      "event": "result",
+      "path": "auth:viewer",
+      "time": 1789825622453,
+      "bytes": 79
+    },
+    {
+      "phase": "persisted-reload",
+      "event": "subscribe",
+      "path": "events:list",
+      "time": 1789825622842
+    },
+    {
+      "phase": "persisted-reload",
+      "event": "subscribe",
+      "path": "history:status",
+      "time": 1789825622842
+    },
+    {
+      "phase": "persisted-reload",
+      "event": "subscribe",
+      "path": "table:roster",
+      "time": 1789825622842
+    },
+    {
+      "phase": "persisted-reload",
+      "event": "subscribe",
+      "path": "encounters:current",
+      "time": 1789825622842
+    },
+    {
+      "phase": "persisted-reload",
+      "event": "subscribe",
+      "path": "targets:drafts",
+      "time": 1789825622842
+    },
+    {
+      "phase": "persisted-reload",
+      "event": "subscribe",
+      "path": "events:list",
+      "time": 1789825622842
+    },
+    {
+      "phase": "persisted-reload",
+      "event": "subscribe",
+      "path": "history:status",
+      "time": 1789825622842
+    },
+    {
+      "phase": "persisted-reload",
+      "event": "subscribe",
+      "path": "table:roster",
+      "time": 1789825622842
+    },
+    {
+      "phase": "persisted-reload",
+      "event": "subscribe",
+      "path": "encounters:current",
+      "time": 1789825622842
+    },
+    {
+      "phase": "persisted-reload",
+      "event": "subscribe",
+      "path": "targets:drafts",
+      "time": 1789825622842
+    },
+    {
+      "phase": "persisted-reload",
+      "event": "result",
+      "path": "events:list",
+      "time": 1789825622844,
+      "bytes": 6521
+    },
+    {
+      "phase": "persisted-reload",
+      "event": "result",
+      "path": "history:status",
+      "time": 1789825622844,
+      "bytes": 350
+    },
+    {
+      "phase": "persisted-reload",
+      "event": "result",
+      "path": "table:roster",
+      "time": 1789825622844,
+      "bytes": 3453
+    },
+    {
+      "phase": "persisted-reload",
+      "event": "result",
+      "path": "encounters:current",
+      "time": 1789825622844,
+      "bytes": 4
+    },
+    {
+      "phase": "persisted-reload",
+      "event": "result",
+      "path": "targets:drafts",
+      "time": 1789825622844,
+      "bytes": 25
+    },
+    {
+      "phase": "persisted-reload",
+      "event": "result",
+      "path": "events:list",
+      "time": 1789825622844,
+      "bytes": 6521
+    },
+    {
+      "phase": "persisted-reload",
+      "event": "result",
+      "path": "history:status",
+      "time": 1789825622844,
+      "bytes": 350
+    },
+    {
+      "phase": "persisted-reload",
+      "event": "result",
+      "path": "table:roster",
+      "time": 1789825622844,
+      "bytes": 3453
+    },
+    {
+      "phase": "persisted-reload",
+      "event": "result",
+      "path": "encounters:current",
+      "time": 1789825622844,
+      "bytes": 4
+    },
+    {
+      "phase": "persisted-reload",
+      "event": "result",
+      "path": "targets:drafts",
+      "time": 1789825622844,
+      "bytes": 25
+    },
+    {
+      "phase": "persisted-reload",
+      "event": "subscribe",
+      "path": "foes:catalog",
+      "time": 1789825622857
+    },
+    {
+      "phase": "persisted-reload",
+      "event": "subscribe",
+      "path": "foes:catalog",
+      "time": 1789825622857
+    },
+    {
+      "phase": "persisted-reload",
+      "event": "result",
+      "path": "foes:catalog",
+      "time": 1789825622868,
+      "bytes": 4189
+    },
+    {
+      "phase": "persisted-reload",
+      "event": "result",
+      "path": "foes:catalog",
+      "time": 1789825622869,
+      "bytes": 4189
+    }
+  ]
+}
