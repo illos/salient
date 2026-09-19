@@ -1,7 +1,9 @@
 // SPDX-License-Identifier: GPL-3.0-only
 import { beforeAll, describe, expect, it, test } from 'vitest';
-import { buildRules, plainText, renderArticle } from '../../scripts/ingest-rules';
-import { createRulesSearch } from '../../web/rules/search';
+import { articleParts, buildRules, plainText, renderArticle } from '../../scripts/ingest-rules';
+import MiniSearch from 'minisearch';
+import { rulesSearchOptions, searchRulesIndex } from '../../web/rules/search';
+import type { RuleSearchDocument } from '../../shared/contracts/rules';
 
 import definitionsJson from '../../shared/content/fury-level-one-decisions.json';
 import manifest from '../../shared/content/compendium/manifest.json';
@@ -25,7 +27,8 @@ test('imports the complete core books with stable IDs and original-page metadata
   for (const entry of built.catalog.entries) {
     expect(entry.sourceUrl).toBe(`https://steelcompendium.io/v2/scc/${entry.id}/`);
     expect(entry.sourcePath).toMatch(/^en\/books\/(heroes|monsters)\/md\//);
-    expect(built.articles[entry.file].some(a => a.id === entry.id)).toBe(true);
+    expect(built.articles[entry.file]).toHaveLength(1);
+    expect(built.articles[entry.file][0].id).toBe(entry.id);
   }
   expect(new Set(built.catalog.entries.map(e => e.id)).size).toBe(2614);
   expect(new Set(built.catalog.entries.map(e => e.path)).size).toBe(2614);
@@ -36,6 +39,28 @@ test('imports the complete core books with stable IDs and original-page metadata
       e.sourcePath.endsWith('/chapter/retainers.md'),
     ),
   ).toBe(true);
+});
+
+test('streams oversized articles without losing or reordering source HTML', () => {
+  let chunked = 0;
+  for (const entry of built.catalog.entries) {
+    const [article] = JSON.parse(built.outputs.get(`${built.catalog.version}/${entry.file}`)!);
+    const chunks = [
+      article.html,
+      ...(article.parts ?? []).map(
+        (part: { file: string }) =>
+          JSON.parse(built.outputs.get(`${built.catalog.version}/${part.file}`)!).html,
+      ),
+    ];
+    expect(chunks.join('')).toBe(built.articles[entry.file][0].html);
+    if (chunks.length > 1) chunked++;
+  }
+  expect(chunked).toBeGreaterThan(0);
+  const html =
+    '<h2 id="start">Start</h2><table><tbody><tr><td>Never split a table</td></tr></tbody></table><p>End</p>';
+  const chunks = articleParts(html, 40);
+  expect(chunks.join('')).toBe(html);
+  expect(chunks.some(part => part.includes('<table>') && part.includes('</table>'))).toBe(true);
 });
 
 test('renders readable, sanitized prose, tables, headings and internal links', () => {
@@ -81,8 +106,13 @@ test('standalone pages retain source facts stored only in frontmatter', () => {
   expect(article('mcdm.heroes.v1/kit/arcane-archer')).toContain('<strong>Kit type:</strong> Magic');
 });
 
-test('ranks every unique exact title first, supports prefixes, typos and filters', () => {
-  const search = createRulesSearch(built.search);
+test('prebuilt index ranks every unique exact title first, supports prefixes, typos and filters', async () => {
+  const search = searchRulesIndex(
+    await MiniSearch.loadJSONAsync<RuleSearchDocument>(
+      built.outputs.get(`${built.catalog.version}/search-index.json`)!,
+      rulesSearchOptions,
+    ),
+  );
   const names = new Map<string, string[]>();
   for (const doc of built.search)
     names.set(doc.name.toLowerCase(), [...(names.get(doc.name.toLowerCase()) ?? []), doc.id]);

@@ -8,3 +8,5 @@ docs/
 shared/content/compendium/
 public/rules-data/
 shared/content/foes/
+public/foes-data/
+.wrangler/

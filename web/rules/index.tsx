@@ -18,7 +18,9 @@ import type {
   RulesCatalog,
   RulesSearchResult,
 } from '../../shared/contracts/rules';
-import { useRulesCatalog } from './content';
+import { useRulesCatalog, getRuleExcerpts } from './content';
+import { searchRules } from './search-client';
+import { searchRuleTitles } from './search';
 import { RuleArticleView } from './article';
 import './rules.css';
 
@@ -45,45 +47,33 @@ function EntryLink({
 }
 
 function useSearch(catalog: RulesCatalog, filters: RulesFilters) {
-  const worker = useRef<Worker | null>(null);
-  const sequence = useRef(0);
   const [state, setState] = useState<{
     key: string;
     results?: RulesSearchResult[];
     error?: string;
   }>();
   const { q = '', category = '', book = '' } = filters;
-  const key = JSON.stringify([q, category, book]);
-  useEffect(
-    () => () => {
-      worker.current?.terminate();
-      worker.current = null;
-    },
-    [],
-  );
+  const key = JSON.stringify([catalog.version, q, category, book]);
+  const [attempt, setAttempt] = useState(0);
   useEffect(() => {
-    const current = ++sequence.current;
     if (!q.trim()) return;
+    let active = true;
     const timeout = window.setTimeout(() => {
-      worker.current ??= new Worker(new URL('./search.worker.ts', import.meta.url), {
-        type: 'module',
-      });
-      worker.current.onmessage = event => {
-        if (event.data.sequence === sequence.current) setState({ key, ...event.data });
-      };
-      worker.current.onerror = () =>
-        setState({ key, error: 'Search could not start. Reload the page to try again.' });
-      worker.current.postMessage({
-        sequence: current,
-        version: catalog.version,
-        query: q,
-        category,
-        book,
-      });
+      void searchRules({ version: catalog.version, query: q, book, category }).then(
+        results => {
+          if (active) setState({ key, results });
+        },
+        error => {
+          if (active) setState({ key, error: error.message });
+        },
+      );
     }, 150);
-    return () => window.clearTimeout(timeout);
-  }, [q, category, book, key, catalog.version]);
-  return state?.key === key ? state : undefined;
+    return () => {
+      active = false;
+      window.clearTimeout(timeout);
+    };
+  }, [q, category, book, key, catalog.version, attempt]);
+  return { ...(state?.key === key ? state : {}), retry: () => setAttempt(n => n + 1) };
 }
 
 function Sidebar({
@@ -250,7 +240,10 @@ function Listing({ catalog, filters }: { catalog: RulesCatalog; filters: RulesFi
   const byId = useMemo(() => new Map(catalog.entries.map(e => [e.id, e])), [catalog]);
   const category = catalog.categories.find(c => c.id === filters.category);
   const entries = query
-    ? (results?.results ?? []).map(r => ({ entry: byId.get(r.id)!, excerpt: r.excerpt }))
+    ? (results.results ?? searchRuleTitles(catalog.entries, query, filters)).map(r => ({
+        entry: byId.get(r.id)!,
+        excerpt: r.excerpt,
+      }))
     : catalog.entries
         .filter(
           e =>
@@ -259,6 +252,30 @@ function Listing({ catalog, filters }: { catalog: RulesCatalog; filters: RulesFi
         )
         .sort((a, b) => a.name.localeCompare(b.name))
         .map(entry => ({ entry, excerpt: entry.excerpt }));
+  const [excerpts, setExcerpts] = useState<Record<string, string>>({});
+  const visibleIds = entries
+    .slice(0, limit)
+    .map(e => e.entry.id)
+    .join('|');
+  useEffect(() => {
+    if (query) return;
+    let active = true;
+    const ids = new Set(visibleIds.split('|'));
+    void getRuleExcerpts(
+      catalog,
+      catalog.entries.filter(e => ids.has(e.id)),
+    ).then(
+      values => {
+        if (active) setExcerpts(values);
+      },
+      () => {
+        /* Titles and article links remain usable when optional snippets fail. */
+      },
+    );
+    return () => {
+      active = false;
+    };
+  }, [catalog, query, visibleIds]);
   return (
     <section className="rules-listing">
       <span className="rules-kicker">
@@ -272,11 +289,15 @@ function Listing({ catalog, filters }: { catalog: RulesCatalog; filters: RulesFi
             'All references')}
       </h1>
       <p className="rules-list-count" role="status">
-        {query && !results
-          ? 'Searching…'
+        {query && !results.results && !results.error
+          ? 'Searching full text…'
           : `${entries.length === 120 && query ? 'Top ' : ''}${entries.length} ${entries.length === 1 ? 'reference' : 'references'}`}
       </p>
-      {results?.error && <p role="alert">{results.error}</p>}
+      {results.error && (
+        <p role="alert">
+          {results.error} <button onClick={results.retry}>Try again</button>
+        </p>
+      )}
       {(!query || results?.results) && entries.length === 0 && (
         <div className="rules-empty">
           <Search size={30} />
@@ -296,7 +317,7 @@ function Listing({ catalog, filters }: { catalog: RulesCatalog; filters: RulesFi
                 {catalog.books.find(b => b.id === entry.book)?.name}
               </span>
               <h2>{entry.name}</h2>
-              <p>{excerpt}</p>
+              <p>{excerpt || excerpts[entry.id]}</p>
             </div>
             <ChevronRight size={19} />
           </EntryLink>
@@ -414,7 +435,7 @@ function ArticlePage({ catalog, entry }: { catalog: RulesCatalog; entry: RuleSum
 }
 
 export function RulesPage({ path, filters }: { path?: string; filters: RulesFilters }) {
-  const { catalog, error } = useRulesCatalog();
+  const { catalog, error, retry } = useRulesCatalog();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const input = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
@@ -442,7 +463,7 @@ export function RulesPage({ path, filters }: { path?: string; filters: RulesFilt
       <div className="rules-loading" role="alert">
         <h1>Rules are unavailable</h1>
         <p>{error}</p>
-        <button onClick={() => window.location.reload()}>Try again</button>
+        <button onClick={retry}>Try again</button>
       </div>
     );
   if (!catalog)
@@ -454,9 +475,6 @@ export function RulesPage({ path, filters }: { path?: string; filters: RulesFilt
   return (
     <div className="rules-app">
       <header className="rules-topbar">
-        <Link to="/" className="rules-wordmark">
-          Salient<span> / Rules</span>
-        </Link>
         <div className="rules-search-box">
           <Search size={18} />
           <input
@@ -474,12 +492,6 @@ export function RulesPage({ path, filters }: { path?: string; filters: RulesFilt
             <kbd>⌘ / Ctrl K</kbd>
           )}
         </div>
-        <Link to="/foes" search={{}} className="rules-back">
-          Foes library
-        </Link>
-        <Link to="/" className="rules-back">
-          Back to app <ArrowRight size={15} />
-        </Link>
         <button
           className="rules-menu"
           aria-label={sidebarOpen ? 'Close navigation' : 'Open navigation'}

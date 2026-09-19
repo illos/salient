@@ -8,6 +8,7 @@ export default defineConfig(({ mode }) => {
   const preview = env.DEV_WEB_URL ? new URL(env.DEV_WEB_URL) : null;
   return {
     plugins: [react(), tailwindcss()],
+    build: { manifest: true },
     resolve: { alias: { '@': fileURLToPath(new URL('./web', import.meta.url)) } },
     server: {
       port: 5180,

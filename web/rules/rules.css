@@ -738,3 +738,47 @@ body:has(.rules-app) {
     font-size: 12px;
   }
 }
+
+/* Libraries retain the shared site header; this second row owns only library controls. */
+.reference-shell {
+  --reference-nav-height: 57px;
+}
+.reference-shell .rules-app {
+  min-height: calc(100vh - var(--reference-nav-height));
+}
+.reference-shell .rules-topbar {
+  top: var(--reference-nav-height);
+  z-index: 30;
+}
+.reference-shell .rules-sidebar {
+  top: calc(var(--reference-nav-height) + 76px);
+  height: calc(100vh - var(--reference-nav-height) - 76px);
+}
+
+@media (max-width: 760px) {
+  .reference-shell .rules-sidebar {
+    top: calc(var(--reference-nav-height) + 66px);
+    height: calc(100vh - var(--reference-nav-height) - 66px);
+  }
+}
+@media (max-width: 720px) {
+  .reference-shell {
+    --reference-nav-height: 90px;
+  }
+}
+
+.reference-shell .rules-toc {
+  top: calc(var(--reference-nav-height) + 111px);
+  max-height: calc(100vh - var(--reference-nav-height) - 111px);
+}
+.reference-shell .rules-article .rules-prose :is(h1, h2, h3, h4, h5, h6) {
+  scroll-margin-top: calc(var(--reference-nav-height) + 100px);
+}
+
+.rules-article-part {
+  display: contents;
+}
+.rules-part-status {
+  padding-block: 1rem;
+  color: var(--muted-foreground);
+}

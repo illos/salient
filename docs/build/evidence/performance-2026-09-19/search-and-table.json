@@ -1,0 +1,3946 @@
+{
+  "records": [
+    {
+      "label": "authenticated-table-0",
+      "start": 1789793486443,
+      "elapsed": 4531,
+      "stamp": {
+        "timeOrigin": 1789793486424.9,
+        "now": 21.09999990463257
+      },
+      "now": 4528.099999904633,
+      "timeOrigin": 1789793486447.7,
+      "long": [
+        {
+          "start": 1775.8000001907349,
+          "duration": 54
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "entryType": "paint",
+          "startTime": 1848,
+          "duration": 0,
+          "navigationId": 3020,
+          "paintTime": 1843.9000000953674,
+          "presentationTime": 1848
+        },
+        {
+          "name": "first-contentful-paint",
+          "entryType": "paint",
+          "startTime": 1848,
+          "duration": 0,
+          "navigationId": 3020,
+          "paintTime": 1843.9000000953674,
+          "presentationTime": 1848
+        }
+      ],
+      "nav": [
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/campaigns/jh7b7rtr0sqg3vkj55wkmb9rp98eqn0k/table",
+          "entryType": "navigation",
+          "startTime": 0,
+          "duration": 2226.699999809265,
+          "navigationId": 3020,
+          "initiatorType": "navigation",
+          "deliveryType": "",
+          "nextHopProtocol": "h2",
+          "renderBlockingStatus": "non-blocking",
+          "contentType": "text/html",
+          "contentEncoding": "zstd",
+          "workerStart": 0,
+          "workerRouterEvaluationStart": 0,
+          "workerCacheLookupStart": 0,
+          "workerMatchedSourceType": "",
+          "workerFinalSourceType": "",
+          "redirectStart": 0,
+          "redirectEnd": 0,
+          "fetchStart": 0,
+          "domainLookupStart": 0.8000001907348633,
+          "domainLookupEnd": 45.30000019073486,
+          "connectStart": 45.30000019073486,
+          "secureConnectionStart": 84.30000019073486,
+          "connectEnd": 243.59999990463257,
+          "requestStart": 243.90000009536743,
+          "responseStart": 377.59999990463257,
+          "firstInterimResponseStart": 0,
+          "finalResponseHeadersStart": 377.59999990463257,
+          "responseEnd": 386.90000009536743,
+          "transferSize": 1032,
+          "encodedBodySize": 732,
+          "decodedBodySize": 1665,
+          "responseStatus": 200,
+          "serverTiming": [],
+          "unloadEventStart": 0,
+          "unloadEventEnd": 0,
+          "domInteractive": 387.09999990463257,
+          "domContentLoadedEventStart": 1830.0999999046326,
+          "domContentLoadedEventEnd": 1830.1999998092651,
+          "domComplete": 2226.699999809265,
+          "loadEventStart": 2226.699999809265,
+          "loadEventEnd": 2226.699999809265,
+          "type": "navigate",
+          "redirectCount": 0,
+          "activationStart": 0,
+          "criticalCHRestart": 0,
+          "notRestoredReasons": null,
+          "confidence": {
+            "randomizedTriggerRate": 0.4994798,
+            "value": "high"
+          }
+        }
+      ],
+      "resources": [
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/index-7p-1PPnJ.js",
+          "start": 382.90000009536743,
+          "duration": 1382,
+          "transfer": 423647,
+          "encoded": 423347,
+          "decoded": 1720734
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/article-BWyiCa1k.js",
+          "start": 383,
+          "duration": 386,
+          "transfer": 5117,
+          "encoded": 4817,
+          "decoded": 11597
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/x-B2CtMrqX.js",
+          "start": 383,
+          "duration": 454.40000009536743,
+          "transfer": 2541,
+          "encoded": 2241,
+          "decoded": 4801
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/overlay-card-CC4zlAt4.js",
+          "start": 383,
+          "duration": 453.69999980926514,
+          "transfer": 33942,
+          "encoded": 33642,
+          "decoded": 90754
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/article-Dre97K8_.css",
+          "start": 383.09999990463257,
+          "duration": 142.90000009536743,
+          "transfer": 3314,
+          "encoded": 3014,
+          "decoded": 11344
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/index-Cwn7TpfO.css",
+          "start": 383.19999980926514,
+          "duration": 357,
+          "transfer": 17542,
+          "encoded": 17242,
+          "decoded": 89785
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/overlay-card-C1jW4vvI.css",
+          "start": 383.19999980926514,
+          "duration": 357.7000002861023,
+          "transfer": 701,
+          "encoded": 401,
+          "decoded": 755
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/DrawSteelGlyphs-Regular-Bxmll151.otf",
+          "start": 1828.9000000953674,
+          "duration": 318.69999980926514,
+          "transfer": 14704,
+          "encoded": 14404,
+          "decoded": 21636
+        },
+        {
+          "name": "https://different-bat-943.convex.site/api/auth/get-session",
+          "start": 1838.8000001907349,
+          "duration": 791.5,
+          "transfer": 0,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/schibsted-grotesk-latin-wght-normal-Bb8VGrTG.woff2",
+          "start": 1841.3000001907349,
+          "duration": 383.69999980926514,
+          "transfer": 47052,
+          "encoded": 46752,
+          "decoded": 46752
+        },
+        {
+          "name": "https://different-bat-943.convex.site/api/auth/convex/token",
+          "start": 2633.9000000953674,
+          "duration": 362.2999997138977,
+          "transfer": 0,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://different-bat-943.convex.site/api/auth/convex/token",
+          "start": 3282.5,
+          "duration": 261.09999990463257,
+          "transfer": 0,
+          "encoded": 0,
+          "decoded": 0
+        }
+      ]
+    },
+    {
+      "label": "authenticated-table-1",
+      "start": 1789793490978,
+      "elapsed": 2866,
+      "stamp": {
+        "timeOrigin": 1789793486447.7,
+        "now": 4531
+      },
+      "now": 2865.4000000953674,
+      "timeOrigin": 1789793490979.9,
+      "long": [],
+      "paint": [
+        {
+          "name": "first-paint",
+          "entryType": "paint",
+          "startTime": 1092,
+          "duration": 0,
+          "navigationId": 8194,
+          "paintTime": 1090,
+          "presentationTime": 1092
+        },
+        {
+          "name": "first-contentful-paint",
+          "entryType": "paint",
+          "startTime": 1092,
+          "duration": 0,
+          "navigationId": 8194,
+          "paintTime": 1090,
+          "presentationTime": 1092
+        }
+      ],
+      "nav": [
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/campaigns/jh7b7rtr0sqg3vkj55wkmb9rp98eqn0k/table",
+          "entryType": "navigation",
+          "startTime": 0,
+          "duration": 1059.8000001907349,
+          "navigationId": 8194,
+          "initiatorType": "navigation",
+          "deliveryType": "",
+          "nextHopProtocol": "h3",
+          "renderBlockingStatus": "non-blocking",
+          "contentType": "text/html",
+          "contentEncoding": "zstd",
+          "workerStart": 0,
+          "workerRouterEvaluationStart": 0,
+          "workerCacheLookupStart": 0,
+          "workerMatchedSourceType": "",
+          "workerFinalSourceType": "",
+          "redirectStart": 0,
+          "redirectEnd": 0,
+          "fetchStart": 0.6000003814697266,
+          "domainLookupStart": 0.6000003814697266,
+          "domainLookupEnd": 0.6000003814697266,
+          "connectStart": 0.6000003814697266,
+          "secureConnectionStart": 0.6000003814697266,
+          "connectEnd": 0.6000003814697266,
+          "requestStart": 1.1000003814697266,
+          "responseStart": 511.90000009536743,
+          "firstInterimResponseStart": 0,
+          "finalResponseHeadersStart": 511.90000009536743,
+          "responseEnd": 517,
+          "transferSize": 1032,
+          "encodedBodySize": 732,
+          "decodedBodySize": 1665,
+          "responseStatus": 200,
+          "serverTiming": [
+            {
+              "name": "cfExtPri",
+              "duration": 0,
+              "description": ""
+            }
+          ],
+          "unloadEventStart": 514.7000002861023,
+          "unloadEventEnd": 514.7000002861023,
+          "domInteractive": 519.2000002861023,
+          "domContentLoadedEventStart": 1059.6000003814697,
+          "domContentLoadedEventEnd": 1059.6000003814697,
+          "domComplete": 1059.8000001907349,
+          "loadEventStart": 1059.8000001907349,
+          "loadEventEnd": 1059.8000001907349,
+          "type": "navigate",
+          "redirectCount": 0,
+          "activationStart": 0,
+          "criticalCHRestart": 0,
+          "notRestoredReasons": null,
+          "confidence": {
+            "randomizedTriggerRate": 0.4994798,
+            "value": "low"
+          }
+        }
+      ],
+      "resources": [
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/index-7p-1PPnJ.js",
+          "start": 516.5,
+          "duration": 222.2000002861023,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/article-BWyiCa1k.js",
+          "start": 516.6000003814697,
+          "duration": 529.5,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/x-B2CtMrqX.js",
+          "start": 516.7000002861023,
+          "duration": 528.5999999046326,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/article-Dre97K8_.css",
+          "start": 516.8000001907349,
+          "duration": 198.09999990463257,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/overlay-card-C1jW4vvI.css",
+          "start": 516.8000001907349,
+          "duration": 204,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/overlay-card-CC4zlAt4.js",
+          "start": 516.8000001907349,
+          "duration": 245.69999980926514,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/index-Cwn7TpfO.css",
+          "start": 516.9000000953674,
+          "duration": 364.5,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/DrawSteelGlyphs-Regular-Bxmll151.otf",
+          "start": 882,
+          "duration": 0,
+          "transfer": 0,
+          "encoded": 14404,
+          "decoded": 21636
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/schibsted-grotesk-latin-wght-normal-Bb8VGrTG.woff2",
+          "start": 882.1000003814697,
+          "duration": 0,
+          "transfer": 0,
+          "encoded": 46752,
+          "decoded": 46752
+        },
+        {
+          "name": "https://different-bat-943.convex.site/api/auth/get-session",
+          "start": 1081.7000002861023,
+          "duration": 408.7999997138977,
+          "transfer": 0,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://different-bat-943.convex.site/api/auth/convex/token",
+          "start": 1491.8000001907349,
+          "duration": 259.19999980926514,
+          "transfer": 0,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://different-bat-943.convex.site/api/auth/convex/token",
+          "start": 2070,
+          "duration": 234.5,
+          "transfer": 0,
+          "encoded": 0,
+          "decoded": 0
+        }
+      ]
+    },
+    {
+      "label": "authenticated-table-2",
+      "start": 1789793493847,
+      "elapsed": 2090,
+      "stamp": {
+        "timeOrigin": 1789793490979.9,
+        "now": 2867.7000002861023
+      },
+      "now": 2090,
+      "timeOrigin": 1789793493848.8,
+      "long": [],
+      "paint": [
+        {
+          "name": "first-paint",
+          "entryType": "paint",
+          "startTime": 312,
+          "duration": 0,
+          "navigationId": 7494,
+          "paintTime": 307.5,
+          "presentationTime": 312
+        },
+        {
+          "name": "first-contentful-paint",
+          "entryType": "paint",
+          "startTime": 312,
+          "duration": 0,
+          "navigationId": 7494,
+          "paintTime": 307.5,
+          "presentationTime": 312
+        }
+      ],
+      "nav": [
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/campaigns/jh7b7rtr0sqg3vkj55wkmb9rp98eqn0k/table",
+          "entryType": "navigation",
+          "startTime": 0,
+          "duration": 295.40000009536743,
+          "navigationId": 7494,
+          "initiatorType": "navigation",
+          "deliveryType": "",
+          "nextHopProtocol": "h3",
+          "renderBlockingStatus": "non-blocking",
+          "contentType": "text/html",
+          "contentEncoding": "zstd",
+          "workerStart": 0,
+          "workerRouterEvaluationStart": 0,
+          "workerCacheLookupStart": 0,
+          "workerMatchedSourceType": "",
+          "workerFinalSourceType": "",
+          "redirectStart": 0,
+          "redirectEnd": 0,
+          "fetchStart": 0.7999997138977051,
+          "domainLookupStart": 0.7999997138977051,
+          "domainLookupEnd": 0.7999997138977051,
+          "connectStart": 0.7999997138977051,
+          "secureConnectionStart": 0.7999997138977051,
+          "connectEnd": 0.7999997138977051,
+          "requestStart": 1.1999998092651367,
+          "responseStart": 116.7999997138977,
+          "firstInterimResponseStart": 0,
+          "finalResponseHeadersStart": 116.7999997138977,
+          "responseEnd": 123.59999990463257,
+          "transferSize": 1032,
+          "encodedBodySize": 732,
+          "decodedBodySize": 1665,
+          "responseStatus": 200,
+          "serverTiming": [
+            {
+              "name": "cfExtPri",
+              "duration": 0,
+              "description": ""
+            }
+          ],
+          "unloadEventStart": 122.2999997138977,
+          "unloadEventEnd": 122.2999997138977,
+          "domInteractive": 126.5,
+          "domContentLoadedEventStart": 295.2999997138977,
+          "domContentLoadedEventEnd": 295.2999997138977,
+          "domComplete": 295.40000009536743,
+          "loadEventStart": 295.40000009536743,
+          "loadEventEnd": 295.40000009536743,
+          "type": "navigate",
+          "redirectCount": 0,
+          "activationStart": 0,
+          "criticalCHRestart": 0,
+          "notRestoredReasons": null,
+          "confidence": {
+            "randomizedTriggerRate": 0.4994798,
+            "value": "high"
+          }
+        }
+      ],
+      "resources": [
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/index-7p-1PPnJ.js",
+          "start": 123.5,
+          "duration": 146.2999997138977,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/article-BWyiCa1k.js",
+          "start": 123.59999990463257,
+          "duration": 160.19999980926514,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/overlay-card-CC4zlAt4.js",
+          "start": 123.69999980926514,
+          "duration": 149.09999990463257,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/x-B2CtMrqX.js",
+          "start": 123.69999980926514,
+          "duration": 156.59999990463257,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/article-Dre97K8_.css",
+          "start": 123.7999997138977,
+          "duration": 139.40000009536743,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/index-Cwn7TpfO.css",
+          "start": 123.90000009536743,
+          "duration": 135.09999990463257,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/overlay-card-C1jW4vvI.css",
+          "start": 123.90000009536743,
+          "duration": 142.59999990463257,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/DrawSteelGlyphs-Regular-Bxmll151.otf",
+          "start": 267.5,
+          "duration": 0,
+          "transfer": 0,
+          "encoded": 14404,
+          "decoded": 21636
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/schibsted-grotesk-latin-wght-normal-Bb8VGrTG.woff2",
+          "start": 267.59999990463257,
+          "duration": 0,
+          "transfer": 0,
+          "encoded": 46752,
+          "decoded": 46752
+        },
+        {
+          "name": "https://different-bat-943.convex.site/api/auth/get-session",
+          "start": 296.90000009536743,
+          "duration": 219.09999990463257,
+          "transfer": 0,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://different-bat-943.convex.site/api/auth/convex/token",
+          "start": 517.1999998092651,
+          "duration": 225.7000002861023,
+          "transfer": 0,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://different-bat-943.convex.site/api/auth/convex/token",
+          "start": 1161.1999998092651,
+          "duration": 233.2000002861023,
+          "transfer": 0,
+          "encoded": 0,
+          "decoded": 0
+        }
+      ]
+    },
+    {
+      "label": "rules-search-grab",
+      "start": 1789793497014,
+      "elapsed": 4043,
+      "stamp": {
+        "timeOrigin": 1789793495941.9,
+        "now": 1074
+      },
+      "now": 5116.800000190735,
+      "timeOrigin": 1789793495941.9,
+      "long": [],
+      "paint": [
+        {
+          "name": "first-paint",
+          "entryType": "paint",
+          "startTime": 300,
+          "duration": 0,
+          "navigationId": 4460,
+          "paintTime": 294.59999990463257,
+          "presentationTime": 300
+        },
+        {
+          "name": "first-contentful-paint",
+          "entryType": "paint",
+          "startTime": 300,
+          "duration": 0,
+          "navigationId": 4460,
+          "paintTime": 294.59999990463257,
+          "presentationTime": 300
+        }
+      ],
+      "nav": [
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/rules",
+          "entryType": "navigation",
+          "startTime": 0,
+          "duration": 279.80000019073486,
+          "navigationId": 4460,
+          "initiatorType": "navigation",
+          "deliveryType": "",
+          "nextHopProtocol": "h3",
+          "renderBlockingStatus": "non-blocking",
+          "contentType": "text/html",
+          "contentEncoding": "zstd",
+          "workerStart": 0,
+          "workerRouterEvaluationStart": 0,
+          "workerCacheLookupStart": 0,
+          "workerMatchedSourceType": "",
+          "workerFinalSourceType": "",
+          "redirectStart": 0,
+          "redirectEnd": 0,
+          "fetchStart": 0.7000002861022949,
+          "domainLookupStart": 0.7000002861022949,
+          "domainLookupEnd": 0.7000002861022949,
+          "connectStart": 0.7000002861022949,
+          "secureConnectionStart": 0.7000002861022949,
+          "connectEnd": 0.7000002861022949,
+          "requestStart": 1.0999999046325684,
+          "responseStart": 117.90000009536743,
+          "firstInterimResponseStart": 0,
+          "finalResponseHeadersStart": 117.90000009536743,
+          "responseEnd": 120.30000019073486,
+          "transferSize": 1032,
+          "encodedBodySize": 732,
+          "decodedBodySize": 1665,
+          "responseStatus": 200,
+          "serverTiming": [
+            {
+              "name": "cfExtPri",
+              "duration": 0,
+              "description": ""
+            }
+          ],
+          "unloadEventStart": 120,
+          "unloadEventEnd": 120,
+          "domInteractive": 124.59999990463257,
+          "domContentLoadedEventStart": 278.90000009536743,
+          "domContentLoadedEventEnd": 279,
+          "domComplete": 279.80000019073486,
+          "loadEventStart": 279.80000019073486,
+          "loadEventEnd": 279.80000019073486,
+          "type": "navigate",
+          "redirectCount": 0,
+          "activationStart": 0,
+          "criticalCHRestart": 0,
+          "notRestoredReasons": null,
+          "confidence": {
+            "randomizedTriggerRate": 0.4994798,
+            "value": "low"
+          }
+        }
+      ],
+      "resources": [
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/article-BWyiCa1k.js",
+          "start": 121.90000009536743,
+          "duration": 115.59999990463257,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/index-7p-1PPnJ.js",
+          "start": 121.90000009536743,
+          "duration": 126.90000009536743,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/overlay-card-CC4zlAt4.js",
+          "start": 122,
+          "duration": 132.2000002861023,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/x-B2CtMrqX.js",
+          "start": 122,
+          "duration": 136.7000002861023,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/article-Dre97K8_.css",
+          "start": 122,
+          "duration": 138.7000002861023,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/index-Cwn7TpfO.css",
+          "start": 122.09999990463257,
+          "duration": 140.40000009536743,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/overlay-card-C1jW4vvI.css",
+          "start": 122.09999990463257,
+          "duration": 144.30000019073486,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/DrawSteelGlyphs-Regular-Bxmll151.otf",
+          "start": 278.30000019073486,
+          "duration": 0,
+          "transfer": 0,
+          "encoded": 14404,
+          "decoded": 21636
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/schibsted-grotesk-latin-wght-normal-Bb8VGrTG.woff2",
+          "start": 278.40000009536743,
+          "duration": 0,
+          "transfer": 0,
+          "encoded": 46752,
+          "decoded": 46752
+        },
+        {
+          "name": "https://different-bat-943.convex.site/api/auth/get-session",
+          "start": 281.90000009536743,
+          "duration": 240.19999980926514,
+          "transfer": 0,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/rules-4M9lenNI.js",
+          "start": 283.40000009536743,
+          "duration": 134.69999980926514,
+          "transfer": 4907,
+          "encoded": 4607,
+          "decoded": 13274
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/search-Csys-MlF.js",
+          "start": 283.59999990463257,
+          "duration": 139.30000019073486,
+          "transfer": 582,
+          "encoded": 282,
+          "decoded": 448
+        },
+        {
+          "name": "https://different-bat-943.convex.site/api/auth/convex/token",
+          "start": 523.4000000953674,
+          "duration": 261.40000009536743,
+          "transfer": 0,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/rules-data/catalog.json",
+          "start": 584.9000000953674,
+          "duration": 393,
+          "transfer": 300,
+          "encoded": 232885,
+          "decoded": 1696717
+        },
+        {
+          "name": "https://different-bat-943.convex.site/api/auth/convex/token",
+          "start": 1198.4000000953674,
+          "duration": 230.40000009536743,
+          "transfer": 0,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/search.worker-oMKCTI8n.js",
+          "start": 2096.0999999046326,
+          "duration": -0.19999980926513672,
+          "transfer": 7005,
+          "encoded": 6705,
+          "decoded": 19072
+        }
+      ]
+    },
+    {
+      "label": "rules-search-prone",
+      "start": 1789793501062,
+      "elapsed": 177,
+      "stamp": {
+        "timeOrigin": 1789793495941.9,
+        "now": 5121.5
+      },
+      "now": 5299.200000286102,
+      "timeOrigin": 1789793495941.9,
+      "long": [],
+      "paint": [
+        {
+          "name": "first-paint",
+          "entryType": "paint",
+          "startTime": 300,
+          "duration": 0,
+          "navigationId": 4460,
+          "paintTime": 294.59999990463257,
+          "presentationTime": 300
+        },
+        {
+          "name": "first-contentful-paint",
+          "entryType": "paint",
+          "startTime": 300,
+          "duration": 0,
+          "navigationId": 4460,
+          "paintTime": 294.59999990463257,
+          "presentationTime": 300
+        }
+      ],
+      "nav": [
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/rules",
+          "entryType": "navigation",
+          "startTime": 0,
+          "duration": 279.80000019073486,
+          "navigationId": 4460,
+          "initiatorType": "navigation",
+          "deliveryType": "",
+          "nextHopProtocol": "h3",
+          "renderBlockingStatus": "non-blocking",
+          "contentType": "text/html",
+          "contentEncoding": "zstd",
+          "workerStart": 0,
+          "workerRouterEvaluationStart": 0,
+          "workerCacheLookupStart": 0,
+          "workerMatchedSourceType": "",
+          "workerFinalSourceType": "",
+          "redirectStart": 0,
+          "redirectEnd": 0,
+          "fetchStart": 0.7000002861022949,
+          "domainLookupStart": 0.7000002861022949,
+          "domainLookupEnd": 0.7000002861022949,
+          "connectStart": 0.7000002861022949,
+          "secureConnectionStart": 0.7000002861022949,
+          "connectEnd": 0.7000002861022949,
+          "requestStart": 1.0999999046325684,
+          "responseStart": 117.90000009536743,
+          "firstInterimResponseStart": 0,
+          "finalResponseHeadersStart": 117.90000009536743,
+          "responseEnd": 120.30000019073486,
+          "transferSize": 1032,
+          "encodedBodySize": 732,
+          "decodedBodySize": 1665,
+          "responseStatus": 200,
+          "serverTiming": [
+            {
+              "name": "cfExtPri",
+              "duration": 0,
+              "description": ""
+            }
+          ],
+          "unloadEventStart": 120,
+          "unloadEventEnd": 120,
+          "domInteractive": 124.59999990463257,
+          "domContentLoadedEventStart": 278.90000009536743,
+          "domContentLoadedEventEnd": 279,
+          "domComplete": 279.80000019073486,
+          "loadEventStart": 279.80000019073486,
+          "loadEventEnd": 279.80000019073486,
+          "type": "navigate",
+          "redirectCount": 0,
+          "activationStart": 0,
+          "criticalCHRestart": 0,
+          "notRestoredReasons": null,
+          "confidence": {
+            "randomizedTriggerRate": 0.4994798,
+            "value": "low"
+          }
+        }
+      ],
+      "resources": [
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/article-BWyiCa1k.js",
+          "start": 121.90000009536743,
+          "duration": 115.59999990463257,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/index-7p-1PPnJ.js",
+          "start": 121.90000009536743,
+          "duration": 126.90000009536743,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/overlay-card-CC4zlAt4.js",
+          "start": 122,
+          "duration": 132.2000002861023,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/x-B2CtMrqX.js",
+          "start": 122,
+          "duration": 136.7000002861023,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/article-Dre97K8_.css",
+          "start": 122,
+          "duration": 138.7000002861023,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/index-Cwn7TpfO.css",
+          "start": 122.09999990463257,
+          "duration": 140.40000009536743,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/overlay-card-C1jW4vvI.css",
+          "start": 122.09999990463257,
+          "duration": 144.30000019073486,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/DrawSteelGlyphs-Regular-Bxmll151.otf",
+          "start": 278.30000019073486,
+          "duration": 0,
+          "transfer": 0,
+          "encoded": 14404,
+          "decoded": 21636
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/schibsted-grotesk-latin-wght-normal-Bb8VGrTG.woff2",
+          "start": 278.40000009536743,
+          "duration": 0,
+          "transfer": 0,
+          "encoded": 46752,
+          "decoded": 46752
+        },
+        {
+          "name": "https://different-bat-943.convex.site/api/auth/get-session",
+          "start": 281.90000009536743,
+          "duration": 240.19999980926514,
+          "transfer": 0,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/rules-4M9lenNI.js",
+          "start": 283.40000009536743,
+          "duration": 134.69999980926514,
+          "transfer": 4907,
+          "encoded": 4607,
+          "decoded": 13274
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/search-Csys-MlF.js",
+          "start": 283.59999990463257,
+          "duration": 139.30000019073486,
+          "transfer": 582,
+          "encoded": 282,
+          "decoded": 448
+        },
+        {
+          "name": "https://different-bat-943.convex.site/api/auth/convex/token",
+          "start": 523.4000000953674,
+          "duration": 261.40000009536743,
+          "transfer": 0,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/rules-data/catalog.json",
+          "start": 584.9000000953674,
+          "duration": 393,
+          "transfer": 300,
+          "encoded": 232885,
+          "decoded": 1696717
+        },
+        {
+          "name": "https://different-bat-943.convex.site/api/auth/convex/token",
+          "start": 1198.4000000953674,
+          "duration": 230.40000009536743,
+          "transfer": 0,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/search.worker-oMKCTI8n.js",
+          "start": 2096.0999999046326,
+          "duration": -0.19999980926513672,
+          "transfer": 7005,
+          "encoded": 6705,
+          "decoded": 19072
+        }
+      ]
+    },
+    {
+      "label": "rules-search-grab",
+      "start": 1789793501244,
+      "elapsed": 179,
+      "stamp": {
+        "timeOrigin": 1789793495941.9,
+        "now": 5304.5
+      },
+      "now": 5482.700000286102,
+      "timeOrigin": 1789793495941.9,
+      "long": [],
+      "paint": [
+        {
+          "name": "first-paint",
+          "entryType": "paint",
+          "startTime": 300,
+          "duration": 0,
+          "navigationId": 4460,
+          "paintTime": 294.59999990463257,
+          "presentationTime": 300
+        },
+        {
+          "name": "first-contentful-paint",
+          "entryType": "paint",
+          "startTime": 300,
+          "duration": 0,
+          "navigationId": 4460,
+          "paintTime": 294.59999990463257,
+          "presentationTime": 300
+        }
+      ],
+      "nav": [
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/rules",
+          "entryType": "navigation",
+          "startTime": 0,
+          "duration": 279.80000019073486,
+          "navigationId": 4460,
+          "initiatorType": "navigation",
+          "deliveryType": "",
+          "nextHopProtocol": "h3",
+          "renderBlockingStatus": "non-blocking",
+          "contentType": "text/html",
+          "contentEncoding": "zstd",
+          "workerStart": 0,
+          "workerRouterEvaluationStart": 0,
+          "workerCacheLookupStart": 0,
+          "workerMatchedSourceType": "",
+          "workerFinalSourceType": "",
+          "redirectStart": 0,
+          "redirectEnd": 0,
+          "fetchStart": 0.7000002861022949,
+          "domainLookupStart": 0.7000002861022949,
+          "domainLookupEnd": 0.7000002861022949,
+          "connectStart": 0.7000002861022949,
+          "secureConnectionStart": 0.7000002861022949,
+          "connectEnd": 0.7000002861022949,
+          "requestStart": 1.0999999046325684,
+          "responseStart": 117.90000009536743,
+          "firstInterimResponseStart": 0,
+          "finalResponseHeadersStart": 117.90000009536743,
+          "responseEnd": 120.30000019073486,
+          "transferSize": 1032,
+          "encodedBodySize": 732,
+          "decodedBodySize": 1665,
+          "responseStatus": 200,
+          "serverTiming": [
+            {
+              "name": "cfExtPri",
+              "duration": 0,
+              "description": ""
+            }
+          ],
+          "unloadEventStart": 120,
+          "unloadEventEnd": 120,
+          "domInteractive": 124.59999990463257,
+          "domContentLoadedEventStart": 278.90000009536743,
+          "domContentLoadedEventEnd": 279,
+          "domComplete": 279.80000019073486,
+          "loadEventStart": 279.80000019073486,
+          "loadEventEnd": 279.80000019073486,
+          "type": "navigate",
+          "redirectCount": 0,
+          "activationStart": 0,
+          "criticalCHRestart": 0,
+          "notRestoredReasons": null,
+          "confidence": {
+            "randomizedTriggerRate": 0.4994798,
+            "value": "low"
+          }
+        }
+      ],
+      "resources": [
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/article-BWyiCa1k.js",
+          "start": 121.90000009536743,
+          "duration": 115.59999990463257,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/index-7p-1PPnJ.js",
+          "start": 121.90000009536743,
+          "duration": 126.90000009536743,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/overlay-card-CC4zlAt4.js",
+          "start": 122,
+          "duration": 132.2000002861023,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/x-B2CtMrqX.js",
+          "start": 122,
+          "duration": 136.7000002861023,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/article-Dre97K8_.css",
+          "start": 122,
+          "duration": 138.7000002861023,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/index-Cwn7TpfO.css",
+          "start": 122.09999990463257,
+          "duration": 140.40000009536743,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/overlay-card-C1jW4vvI.css",
+          "start": 122.09999990463257,
+          "duration": 144.30000019073486,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/DrawSteelGlyphs-Regular-Bxmll151.otf",
+          "start": 278.30000019073486,
+          "duration": 0,
+          "transfer": 0,
+          "encoded": 14404,
+          "decoded": 21636
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/schibsted-grotesk-latin-wght-normal-Bb8VGrTG.woff2",
+          "start": 278.40000009536743,
+          "duration": 0,
+          "transfer": 0,
+          "encoded": 46752,
+          "decoded": 46752
+        },
+        {
+          "name": "https://different-bat-943.convex.site/api/auth/get-session",
+          "start": 281.90000009536743,
+          "duration": 240.19999980926514,
+          "transfer": 0,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/rules-4M9lenNI.js",
+          "start": 283.40000009536743,
+          "duration": 134.69999980926514,
+          "transfer": 4907,
+          "encoded": 4607,
+          "decoded": 13274
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/search-Csys-MlF.js",
+          "start": 283.59999990463257,
+          "duration": 139.30000019073486,
+          "transfer": 582,
+          "encoded": 282,
+          "decoded": 448
+        },
+        {
+          "name": "https://different-bat-943.convex.site/api/auth/convex/token",
+          "start": 523.4000000953674,
+          "duration": 261.40000009536743,
+          "transfer": 0,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/rules-data/catalog.json",
+          "start": 584.9000000953674,
+          "duration": 393,
+          "transfer": 300,
+          "encoded": 232885,
+          "decoded": 1696717
+        },
+        {
+          "name": "https://different-bat-943.convex.site/api/auth/convex/token",
+          "start": 1198.4000000953674,
+          "duration": 230.40000009536743,
+          "transfer": 0,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/search.worker-oMKCTI8n.js",
+          "start": 2096.0999999046326,
+          "duration": -0.19999980926513672,
+          "transfer": 7005,
+          "encoded": 6705,
+          "decoded": 19072
+        }
+      ]
+    },
+    {
+      "label": "rules-open-article",
+      "start": 1789793501426,
+      "elapsed": 817,
+      "stamp": {
+        "timeOrigin": 1789793495941.9,
+        "now": 5485.5
+      },
+      "now": 6301.700000286102,
+      "timeOrigin": 1789793495941.9,
+      "long": [],
+      "paint": [
+        {
+          "name": "first-paint",
+          "entryType": "paint",
+          "startTime": 300,
+          "duration": 0,
+          "navigationId": 4460,
+          "paintTime": 294.59999990463257,
+          "presentationTime": 300
+        },
+        {
+          "name": "first-contentful-paint",
+          "entryType": "paint",
+          "startTime": 300,
+          "duration": 0,
+          "navigationId": 4460,
+          "paintTime": 294.59999990463257,
+          "presentationTime": 300
+        }
+      ],
+      "nav": [
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/rules",
+          "entryType": "navigation",
+          "startTime": 0,
+          "duration": 279.80000019073486,
+          "navigationId": 4460,
+          "initiatorType": "navigation",
+          "deliveryType": "",
+          "nextHopProtocol": "h3",
+          "renderBlockingStatus": "non-blocking",
+          "contentType": "text/html",
+          "contentEncoding": "zstd",
+          "workerStart": 0,
+          "workerRouterEvaluationStart": 0,
+          "workerCacheLookupStart": 0,
+          "workerMatchedSourceType": "",
+          "workerFinalSourceType": "",
+          "redirectStart": 0,
+          "redirectEnd": 0,
+          "fetchStart": 0.7000002861022949,
+          "domainLookupStart": 0.7000002861022949,
+          "domainLookupEnd": 0.7000002861022949,
+          "connectStart": 0.7000002861022949,
+          "secureConnectionStart": 0.7000002861022949,
+          "connectEnd": 0.7000002861022949,
+          "requestStart": 1.0999999046325684,
+          "responseStart": 117.90000009536743,
+          "firstInterimResponseStart": 0,
+          "finalResponseHeadersStart": 117.90000009536743,
+          "responseEnd": 120.30000019073486,
+          "transferSize": 1032,
+          "encodedBodySize": 732,
+          "decodedBodySize": 1665,
+          "responseStatus": 200,
+          "serverTiming": [
+            {
+              "name": "cfExtPri",
+              "duration": 0,
+              "description": ""
+            }
+          ],
+          "unloadEventStart": 120,
+          "unloadEventEnd": 120,
+          "domInteractive": 124.59999990463257,
+          "domContentLoadedEventStart": 278.90000009536743,
+          "domContentLoadedEventEnd": 279,
+          "domComplete": 279.80000019073486,
+          "loadEventStart": 279.80000019073486,
+          "loadEventEnd": 279.80000019073486,
+          "type": "navigate",
+          "redirectCount": 0,
+          "activationStart": 0,
+          "criticalCHRestart": 0,
+          "notRestoredReasons": null,
+          "confidence": {
+            "randomizedTriggerRate": 0.4994798,
+            "value": "low"
+          }
+        }
+      ],
+      "resources": [
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/article-BWyiCa1k.js",
+          "start": 121.90000009536743,
+          "duration": 115.59999990463257,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/index-7p-1PPnJ.js",
+          "start": 121.90000009536743,
+          "duration": 126.90000009536743,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/overlay-card-CC4zlAt4.js",
+          "start": 122,
+          "duration": 132.2000002861023,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/x-B2CtMrqX.js",
+          "start": 122,
+          "duration": 136.7000002861023,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/article-Dre97K8_.css",
+          "start": 122,
+          "duration": 138.7000002861023,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/index-Cwn7TpfO.css",
+          "start": 122.09999990463257,
+          "duration": 140.40000009536743,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/overlay-card-C1jW4vvI.css",
+          "start": 122.09999990463257,
+          "duration": 144.30000019073486,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/DrawSteelGlyphs-Regular-Bxmll151.otf",
+          "start": 278.30000019073486,
+          "duration": 0,
+          "transfer": 0,
+          "encoded": 14404,
+          "decoded": 21636
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/schibsted-grotesk-latin-wght-normal-Bb8VGrTG.woff2",
+          "start": 278.40000009536743,
+          "duration": 0,
+          "transfer": 0,
+          "encoded": 46752,
+          "decoded": 46752
+        },
+        {
+          "name": "https://different-bat-943.convex.site/api/auth/get-session",
+          "start": 281.90000009536743,
+          "duration": 240.19999980926514,
+          "transfer": 0,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/rules-4M9lenNI.js",
+          "start": 283.40000009536743,
+          "duration": 134.69999980926514,
+          "transfer": 4907,
+          "encoded": 4607,
+          "decoded": 13274
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/search-Csys-MlF.js",
+          "start": 283.59999990463257,
+          "duration": 139.30000019073486,
+          "transfer": 582,
+          "encoded": 282,
+          "decoded": 448
+        },
+        {
+          "name": "https://different-bat-943.convex.site/api/auth/convex/token",
+          "start": 523.4000000953674,
+          "duration": 261.40000009536743,
+          "transfer": 0,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/rules-data/catalog.json",
+          "start": 584.9000000953674,
+          "duration": 393,
+          "transfer": 300,
+          "encoded": 232885,
+          "decoded": 1696717
+        },
+        {
+          "name": "https://different-bat-943.convex.site/api/auth/convex/token",
+          "start": 1198.4000000953674,
+          "duration": 230.40000009536743,
+          "transfer": 0,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/search.worker-oMKCTI8n.js",
+          "start": 2096.0999999046326,
+          "duration": -0.19999980926513672,
+          "transfer": 7005,
+          "encoded": 6705,
+          "decoded": 19072
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/rules-data/b3fb9fdf79c0cd37/heroes-ability.json",
+          "start": 5521.400000095367,
+          "duration": 709.1999998092651,
+          "transfer": 91397,
+          "encoded": 91097,
+          "decoded": 1513763
+        }
+      ]
+    },
+    {
+      "label": "rules-search-after-article",
+      "start": 1789793502257,
+      "elapsed": 1784,
+      "stamp": {
+        "timeOrigin": 1789793495941.9,
+        "now": 6316
+      },
+      "now": 8100.700000286102,
+      "timeOrigin": 1789793495941.9,
+      "long": [],
+      "paint": [
+        {
+          "name": "first-paint",
+          "entryType": "paint",
+          "startTime": 300,
+          "duration": 0,
+          "navigationId": 4460,
+          "paintTime": 294.59999990463257,
+          "presentationTime": 300
+        },
+        {
+          "name": "first-contentful-paint",
+          "entryType": "paint",
+          "startTime": 300,
+          "duration": 0,
+          "navigationId": 4460,
+          "paintTime": 294.59999990463257,
+          "presentationTime": 300
+        }
+      ],
+      "nav": [
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/rules",
+          "entryType": "navigation",
+          "startTime": 0,
+          "duration": 279.80000019073486,
+          "navigationId": 4460,
+          "initiatorType": "navigation",
+          "deliveryType": "",
+          "nextHopProtocol": "h3",
+          "renderBlockingStatus": "non-blocking",
+          "contentType": "text/html",
+          "contentEncoding": "zstd",
+          "workerStart": 0,
+          "workerRouterEvaluationStart": 0,
+          "workerCacheLookupStart": 0,
+          "workerMatchedSourceType": "",
+          "workerFinalSourceType": "",
+          "redirectStart": 0,
+          "redirectEnd": 0,
+          "fetchStart": 0.7000002861022949,
+          "domainLookupStart": 0.7000002861022949,
+          "domainLookupEnd": 0.7000002861022949,
+          "connectStart": 0.7000002861022949,
+          "secureConnectionStart": 0.7000002861022949,
+          "connectEnd": 0.7000002861022949,
+          "requestStart": 1.0999999046325684,
+          "responseStart": 117.90000009536743,
+          "firstInterimResponseStart": 0,
+          "finalResponseHeadersStart": 117.90000009536743,
+          "responseEnd": 120.30000019073486,
+          "transferSize": 1032,
+          "encodedBodySize": 732,
+          "decodedBodySize": 1665,
+          "responseStatus": 200,
+          "serverTiming": [
+            {
+              "name": "cfExtPri",
+              "duration": 0,
+              "description": ""
+            }
+          ],
+          "unloadEventStart": 120,
+          "unloadEventEnd": 120,
+          "domInteractive": 124.59999990463257,
+          "domContentLoadedEventStart": 278.90000009536743,
+          "domContentLoadedEventEnd": 279,
+          "domComplete": 279.80000019073486,
+          "loadEventStart": 279.80000019073486,
+          "loadEventEnd": 279.80000019073486,
+          "type": "navigate",
+          "redirectCount": 0,
+          "activationStart": 0,
+          "criticalCHRestart": 0,
+          "notRestoredReasons": null,
+          "confidence": {
+            "randomizedTriggerRate": 0.4994798,
+            "value": "low"
+          }
+        }
+      ],
+      "resources": [
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/article-BWyiCa1k.js",
+          "start": 121.90000009536743,
+          "duration": 115.59999990463257,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/index-7p-1PPnJ.js",
+          "start": 121.90000009536743,
+          "duration": 126.90000009536743,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/overlay-card-CC4zlAt4.js",
+          "start": 122,
+          "duration": 132.2000002861023,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/x-B2CtMrqX.js",
+          "start": 122,
+          "duration": 136.7000002861023,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/article-Dre97K8_.css",
+          "start": 122,
+          "duration": 138.7000002861023,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/index-Cwn7TpfO.css",
+          "start": 122.09999990463257,
+          "duration": 140.40000009536743,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/overlay-card-C1jW4vvI.css",
+          "start": 122.09999990463257,
+          "duration": 144.30000019073486,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/DrawSteelGlyphs-Regular-Bxmll151.otf",
+          "start": 278.30000019073486,
+          "duration": 0,
+          "transfer": 0,
+          "encoded": 14404,
+          "decoded": 21636
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/schibsted-grotesk-latin-wght-normal-Bb8VGrTG.woff2",
+          "start": 278.40000009536743,
+          "duration": 0,
+          "transfer": 0,
+          "encoded": 46752,
+          "decoded": 46752
+        },
+        {
+          "name": "https://different-bat-943.convex.site/api/auth/get-session",
+          "start": 281.90000009536743,
+          "duration": 240.19999980926514,
+          "transfer": 0,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/rules-4M9lenNI.js",
+          "start": 283.40000009536743,
+          "duration": 134.69999980926514,
+          "transfer": 4907,
+          "encoded": 4607,
+          "decoded": 13274
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/search-Csys-MlF.js",
+          "start": 283.59999990463257,
+          "duration": 139.30000019073486,
+          "transfer": 582,
+          "encoded": 282,
+          "decoded": 448
+        },
+        {
+          "name": "https://different-bat-943.convex.site/api/auth/convex/token",
+          "start": 523.4000000953674,
+          "duration": 261.40000009536743,
+          "transfer": 0,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/rules-data/catalog.json",
+          "start": 584.9000000953674,
+          "duration": 393,
+          "transfer": 300,
+          "encoded": 232885,
+          "decoded": 1696717
+        },
+        {
+          "name": "https://different-bat-943.convex.site/api/auth/convex/token",
+          "start": 1198.4000000953674,
+          "duration": 230.40000009536743,
+          "transfer": 0,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/search.worker-oMKCTI8n.js",
+          "start": 2096.0999999046326,
+          "duration": -0.19999980926513672,
+          "transfer": 7005,
+          "encoded": 6705,
+          "decoded": 19072
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/rules-data/b3fb9fdf79c0cd37/heroes-ability.json",
+          "start": 5521.400000095367,
+          "duration": 709.1999998092651,
+          "transfer": 91397,
+          "encoded": 91097,
+          "decoded": 1513763
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/search.worker-oMKCTI8n.js",
+          "start": 6847.300000190735,
+          "duration": -2.200000286102295,
+          "transfer": 300,
+          "encoded": 6705,
+          "decoded": 19072
+        }
+      ]
+    },
+    {
+      "label": "rules-to-foes-first",
+      "start": 1789793504044,
+      "elapsed": 1828,
+      "stamp": {
+        "timeOrigin": 1789793495941.9,
+        "now": 8103.5
+      },
+      "now": 9931.5,
+      "timeOrigin": 1789793495941.9,
+      "long": [
+        {
+          "start": 9542.300000190735,
+          "duration": 178
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "entryType": "paint",
+          "startTime": 300,
+          "duration": 0,
+          "navigationId": 4460,
+          "paintTime": 294.59999990463257,
+          "presentationTime": 300
+        },
+        {
+          "name": "first-contentful-paint",
+          "entryType": "paint",
+          "startTime": 300,
+          "duration": 0,
+          "navigationId": 4460,
+          "paintTime": 294.59999990463257,
+          "presentationTime": 300
+        }
+      ],
+      "nav": [
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/rules",
+          "entryType": "navigation",
+          "startTime": 0,
+          "duration": 279.80000019073486,
+          "navigationId": 4460,
+          "initiatorType": "navigation",
+          "deliveryType": "",
+          "nextHopProtocol": "h3",
+          "renderBlockingStatus": "non-blocking",
+          "contentType": "text/html",
+          "contentEncoding": "zstd",
+          "workerStart": 0,
+          "workerRouterEvaluationStart": 0,
+          "workerCacheLookupStart": 0,
+          "workerMatchedSourceType": "",
+          "workerFinalSourceType": "",
+          "redirectStart": 0,
+          "redirectEnd": 0,
+          "fetchStart": 0.7000002861022949,
+          "domainLookupStart": 0.7000002861022949,
+          "domainLookupEnd": 0.7000002861022949,
+          "connectStart": 0.7000002861022949,
+          "secureConnectionStart": 0.7000002861022949,
+          "connectEnd": 0.7000002861022949,
+          "requestStart": 1.0999999046325684,
+          "responseStart": 117.90000009536743,
+          "firstInterimResponseStart": 0,
+          "finalResponseHeadersStart": 117.90000009536743,
+          "responseEnd": 120.30000019073486,
+          "transferSize": 1032,
+          "encodedBodySize": 732,
+          "decodedBodySize": 1665,
+          "responseStatus": 200,
+          "serverTiming": [
+            {
+              "name": "cfExtPri",
+              "duration": 0,
+              "description": ""
+            }
+          ],
+          "unloadEventStart": 120,
+          "unloadEventEnd": 120,
+          "domInteractive": 124.59999990463257,
+          "domContentLoadedEventStart": 278.90000009536743,
+          "domContentLoadedEventEnd": 279,
+          "domComplete": 279.80000019073486,
+          "loadEventStart": 279.80000019073486,
+          "loadEventEnd": 279.80000019073486,
+          "type": "navigate",
+          "redirectCount": 0,
+          "activationStart": 0,
+          "criticalCHRestart": 0,
+          "notRestoredReasons": null,
+          "confidence": {
+            "randomizedTriggerRate": 0.4994798,
+            "value": "low"
+          }
+        }
+      ],
+      "resources": [
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/article-BWyiCa1k.js",
+          "start": 121.90000009536743,
+          "duration": 115.59999990463257,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/index-7p-1PPnJ.js",
+          "start": 121.90000009536743,
+          "duration": 126.90000009536743,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/overlay-card-CC4zlAt4.js",
+          "start": 122,
+          "duration": 132.2000002861023,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/x-B2CtMrqX.js",
+          "start": 122,
+          "duration": 136.7000002861023,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/article-Dre97K8_.css",
+          "start": 122,
+          "duration": 138.7000002861023,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/index-Cwn7TpfO.css",
+          "start": 122.09999990463257,
+          "duration": 140.40000009536743,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/overlay-card-C1jW4vvI.css",
+          "start": 122.09999990463257,
+          "duration": 144.30000019073486,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/DrawSteelGlyphs-Regular-Bxmll151.otf",
+          "start": 278.30000019073486,
+          "duration": 0,
+          "transfer": 0,
+          "encoded": 14404,
+          "decoded": 21636
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/schibsted-grotesk-latin-wght-normal-Bb8VGrTG.woff2",
+          "start": 278.40000009536743,
+          "duration": 0,
+          "transfer": 0,
+          "encoded": 46752,
+          "decoded": 46752
+        },
+        {
+          "name": "https://different-bat-943.convex.site/api/auth/get-session",
+          "start": 281.90000009536743,
+          "duration": 240.19999980926514,
+          "transfer": 0,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/rules-4M9lenNI.js",
+          "start": 283.40000009536743,
+          "duration": 134.69999980926514,
+          "transfer": 4907,
+          "encoded": 4607,
+          "decoded": 13274
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/search-Csys-MlF.js",
+          "start": 283.59999990463257,
+          "duration": 139.30000019073486,
+          "transfer": 582,
+          "encoded": 282,
+          "decoded": 448
+        },
+        {
+          "name": "https://different-bat-943.convex.site/api/auth/convex/token",
+          "start": 523.4000000953674,
+          "duration": 261.40000009536743,
+          "transfer": 0,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/rules-data/catalog.json",
+          "start": 584.9000000953674,
+          "duration": 393,
+          "transfer": 300,
+          "encoded": 232885,
+          "decoded": 1696717
+        },
+        {
+          "name": "https://different-bat-943.convex.site/api/auth/convex/token",
+          "start": 1198.4000000953674,
+          "duration": 230.40000009536743,
+          "transfer": 0,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/search.worker-oMKCTI8n.js",
+          "start": 2096.0999999046326,
+          "duration": -0.19999980926513672,
+          "transfer": 7005,
+          "encoded": 6705,
+          "decoded": 19072
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/rules-data/b3fb9fdf79c0cd37/heroes-ability.json",
+          "start": 5521.400000095367,
+          "duration": 709.1999998092651,
+          "transfer": 91397,
+          "encoded": 91097,
+          "decoded": 1513763
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/search.worker-oMKCTI8n.js",
+          "start": 6847.300000190735,
+          "duration": -2.200000286102295,
+          "transfer": 300,
+          "encoded": 6705,
+          "decoded": 19072
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/foes-7cvQWThp.js",
+          "start": 8148.400000095367,
+          "duration": 1339.9000000953674,
+          "transfer": 692893,
+          "encoded": 692593,
+          "decoded": 6733336
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/foes-BGgFncNM.css",
+          "start": 8148.5,
+          "duration": 97,
+          "transfer": 1559,
+          "encoded": 1259,
+          "decoded": 3960
+        }
+      ]
+    },
+    {
+      "label": "foes-search",
+      "start": 1789793505875,
+      "elapsed": 21,
+      "stamp": {
+        "timeOrigin": 1789793495941.9,
+        "now": 9934.200000286102
+      },
+      "now": 9954.700000286102,
+      "timeOrigin": 1789793495941.9,
+      "long": [
+        {
+          "start": 9542.300000190735,
+          "duration": 178
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "entryType": "paint",
+          "startTime": 300,
+          "duration": 0,
+          "navigationId": 4460,
+          "paintTime": 294.59999990463257,
+          "presentationTime": 300
+        },
+        {
+          "name": "first-contentful-paint",
+          "entryType": "paint",
+          "startTime": 300,
+          "duration": 0,
+          "navigationId": 4460,
+          "paintTime": 294.59999990463257,
+          "presentationTime": 300
+        }
+      ],
+      "nav": [
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/rules",
+          "entryType": "navigation",
+          "startTime": 0,
+          "duration": 279.80000019073486,
+          "navigationId": 4460,
+          "initiatorType": "navigation",
+          "deliveryType": "",
+          "nextHopProtocol": "h3",
+          "renderBlockingStatus": "non-blocking",
+          "contentType": "text/html",
+          "contentEncoding": "zstd",
+          "workerStart": 0,
+          "workerRouterEvaluationStart": 0,
+          "workerCacheLookupStart": 0,
+          "workerMatchedSourceType": "",
+          "workerFinalSourceType": "",
+          "redirectStart": 0,
+          "redirectEnd": 0,
+          "fetchStart": 0.7000002861022949,
+          "domainLookupStart": 0.7000002861022949,
+          "domainLookupEnd": 0.7000002861022949,
+          "connectStart": 0.7000002861022949,
+          "secureConnectionStart": 0.7000002861022949,
+          "connectEnd": 0.7000002861022949,
+          "requestStart": 1.0999999046325684,
+          "responseStart": 117.90000009536743,
+          "firstInterimResponseStart": 0,
+          "finalResponseHeadersStart": 117.90000009536743,
+          "responseEnd": 120.30000019073486,
+          "transferSize": 1032,
+          "encodedBodySize": 732,
+          "decodedBodySize": 1665,
+          "responseStatus": 200,
+          "serverTiming": [
+            {
+              "name": "cfExtPri",
+              "duration": 0,
+              "description": ""
+            }
+          ],
+          "unloadEventStart": 120,
+          "unloadEventEnd": 120,
+          "domInteractive": 124.59999990463257,
+          "domContentLoadedEventStart": 278.90000009536743,
+          "domContentLoadedEventEnd": 279,
+          "domComplete": 279.80000019073486,
+          "loadEventStart": 279.80000019073486,
+          "loadEventEnd": 279.80000019073486,
+          "type": "navigate",
+          "redirectCount": 0,
+          "activationStart": 0,
+          "criticalCHRestart": 0,
+          "notRestoredReasons": null,
+          "confidence": {
+            "randomizedTriggerRate": 0.4994798,
+            "value": "low"
+          }
+        }
+      ],
+      "resources": [
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/article-BWyiCa1k.js",
+          "start": 121.90000009536743,
+          "duration": 115.59999990463257,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/index-7p-1PPnJ.js",
+          "start": 121.90000009536743,
+          "duration": 126.90000009536743,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/overlay-card-CC4zlAt4.js",
+          "start": 122,
+          "duration": 132.2000002861023,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/x-B2CtMrqX.js",
+          "start": 122,
+          "duration": 136.7000002861023,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/article-Dre97K8_.css",
+          "start": 122,
+          "duration": 138.7000002861023,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/index-Cwn7TpfO.css",
+          "start": 122.09999990463257,
+          "duration": 140.40000009536743,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/overlay-card-C1jW4vvI.css",
+          "start": 122.09999990463257,
+          "duration": 144.30000019073486,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/DrawSteelGlyphs-Regular-Bxmll151.otf",
+          "start": 278.30000019073486,
+          "duration": 0,
+          "transfer": 0,
+          "encoded": 14404,
+          "decoded": 21636
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/schibsted-grotesk-latin-wght-normal-Bb8VGrTG.woff2",
+          "start": 278.40000009536743,
+          "duration": 0,
+          "transfer": 0,
+          "encoded": 46752,
+          "decoded": 46752
+        },
+        {
+          "name": "https://different-bat-943.convex.site/api/auth/get-session",
+          "start": 281.90000009536743,
+          "duration": 240.19999980926514,
+          "transfer": 0,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/rules-4M9lenNI.js",
+          "start": 283.40000009536743,
+          "duration": 134.69999980926514,
+          "transfer": 4907,
+          "encoded": 4607,
+          "decoded": 13274
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/search-Csys-MlF.js",
+          "start": 283.59999990463257,
+          "duration": 139.30000019073486,
+          "transfer": 582,
+          "encoded": 282,
+          "decoded": 448
+        },
+        {
+          "name": "https://different-bat-943.convex.site/api/auth/convex/token",
+          "start": 523.4000000953674,
+          "duration": 261.40000009536743,
+          "transfer": 0,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/rules-data/catalog.json",
+          "start": 584.9000000953674,
+          "duration": 393,
+          "transfer": 300,
+          "encoded": 232885,
+          "decoded": 1696717
+        },
+        {
+          "name": "https://different-bat-943.convex.site/api/auth/convex/token",
+          "start": 1198.4000000953674,
+          "duration": 230.40000009536743,
+          "transfer": 0,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/search.worker-oMKCTI8n.js",
+          "start": 2096.0999999046326,
+          "duration": -0.19999980926513672,
+          "transfer": 7005,
+          "encoded": 6705,
+          "decoded": 19072
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/rules-data/b3fb9fdf79c0cd37/heroes-ability.json",
+          "start": 5521.400000095367,
+          "duration": 709.1999998092651,
+          "transfer": 91397,
+          "encoded": 91097,
+          "decoded": 1513763
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/search.worker-oMKCTI8n.js",
+          "start": 6847.300000190735,
+          "duration": -2.200000286102295,
+          "transfer": 300,
+          "encoded": 6705,
+          "decoded": 19072
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/foes-7cvQWThp.js",
+          "start": 8148.400000095367,
+          "duration": 1339.9000000953674,
+          "transfer": 692893,
+          "encoded": 692593,
+          "decoded": 6733336
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/foes-BGgFncNM.css",
+          "start": 8148.5,
+          "duration": 97,
+          "transfer": 1559,
+          "encoded": 1259,
+          "decoded": 3960
+        }
+      ]
+    },
+    {
+      "label": "foes-back-to-rules-history",
+      "start": 1789793505898,
+      "elapsed": 11,
+      "stamp": {
+        "timeOrigin": 1789793495941.9,
+        "now": 9957.300000190735
+      },
+      "now": 9968.400000095367,
+      "timeOrigin": 1789793495941.9,
+      "long": [
+        {
+          "start": 9542.300000190735,
+          "duration": 178
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "entryType": "paint",
+          "startTime": 300,
+          "duration": 0,
+          "navigationId": 4460,
+          "paintTime": 294.59999990463257,
+          "presentationTime": 300
+        },
+        {
+          "name": "first-contentful-paint",
+          "entryType": "paint",
+          "startTime": 300,
+          "duration": 0,
+          "navigationId": 4460,
+          "paintTime": 294.59999990463257,
+          "presentationTime": 300
+        }
+      ],
+      "nav": [
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/rules",
+          "entryType": "navigation",
+          "startTime": 0,
+          "duration": 279.80000019073486,
+          "navigationId": 4460,
+          "initiatorType": "navigation",
+          "deliveryType": "",
+          "nextHopProtocol": "h3",
+          "renderBlockingStatus": "non-blocking",
+          "contentType": "text/html",
+          "contentEncoding": "zstd",
+          "workerStart": 0,
+          "workerRouterEvaluationStart": 0,
+          "workerCacheLookupStart": 0,
+          "workerMatchedSourceType": "",
+          "workerFinalSourceType": "",
+          "redirectStart": 0,
+          "redirectEnd": 0,
+          "fetchStart": 0.7000002861022949,
+          "domainLookupStart": 0.7000002861022949,
+          "domainLookupEnd": 0.7000002861022949,
+          "connectStart": 0.7000002861022949,
+          "secureConnectionStart": 0.7000002861022949,
+          "connectEnd": 0.7000002861022949,
+          "requestStart": 1.0999999046325684,
+          "responseStart": 117.90000009536743,
+          "firstInterimResponseStart": 0,
+          "finalResponseHeadersStart": 117.90000009536743,
+          "responseEnd": 120.30000019073486,
+          "transferSize": 1032,
+          "encodedBodySize": 732,
+          "decodedBodySize": 1665,
+          "responseStatus": 200,
+          "serverTiming": [
+            {
+              "name": "cfExtPri",
+              "duration": 0,
+              "description": ""
+            }
+          ],
+          "unloadEventStart": 120,
+          "unloadEventEnd": 120,
+          "domInteractive": 124.59999990463257,
+          "domContentLoadedEventStart": 278.90000009536743,
+          "domContentLoadedEventEnd": 279,
+          "domComplete": 279.80000019073486,
+          "loadEventStart": 279.80000019073486,
+          "loadEventEnd": 279.80000019073486,
+          "type": "navigate",
+          "redirectCount": 0,
+          "activationStart": 0,
+          "criticalCHRestart": 0,
+          "notRestoredReasons": null,
+          "confidence": {
+            "randomizedTriggerRate": 0.4994798,
+            "value": "low"
+          }
+        }
+      ],
+      "resources": [
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/article-BWyiCa1k.js",
+          "start": 121.90000009536743,
+          "duration": 115.59999990463257,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/index-7p-1PPnJ.js",
+          "start": 121.90000009536743,
+          "duration": 126.90000009536743,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/overlay-card-CC4zlAt4.js",
+          "start": 122,
+          "duration": 132.2000002861023,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/x-B2CtMrqX.js",
+          "start": 122,
+          "duration": 136.7000002861023,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/article-Dre97K8_.css",
+          "start": 122,
+          "duration": 138.7000002861023,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/index-Cwn7TpfO.css",
+          "start": 122.09999990463257,
+          "duration": 140.40000009536743,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/overlay-card-C1jW4vvI.css",
+          "start": 122.09999990463257,
+          "duration": 144.30000019073486,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/DrawSteelGlyphs-Regular-Bxmll151.otf",
+          "start": 278.30000019073486,
+          "duration": 0,
+          "transfer": 0,
+          "encoded": 14404,
+          "decoded": 21636
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/schibsted-grotesk-latin-wght-normal-Bb8VGrTG.woff2",
+          "start": 278.40000009536743,
+          "duration": 0,
+          "transfer": 0,
+          "encoded": 46752,
+          "decoded": 46752
+        },
+        {
+          "name": "https://different-bat-943.convex.site/api/auth/get-session",
+          "start": 281.90000009536743,
+          "duration": 240.19999980926514,
+          "transfer": 0,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/rules-4M9lenNI.js",
+          "start": 283.40000009536743,
+          "duration": 134.69999980926514,
+          "transfer": 4907,
+          "encoded": 4607,
+          "decoded": 13274
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/search-Csys-MlF.js",
+          "start": 283.59999990463257,
+          "duration": 139.30000019073486,
+          "transfer": 582,
+          "encoded": 282,
+          "decoded": 448
+        },
+        {
+          "name": "https://different-bat-943.convex.site/api/auth/convex/token",
+          "start": 523.4000000953674,
+          "duration": 261.40000009536743,
+          "transfer": 0,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/rules-data/catalog.json",
+          "start": 584.9000000953674,
+          "duration": 393,
+          "transfer": 300,
+          "encoded": 232885,
+          "decoded": 1696717
+        },
+        {
+          "name": "https://different-bat-943.convex.site/api/auth/convex/token",
+          "start": 1198.4000000953674,
+          "duration": 230.40000009536743,
+          "transfer": 0,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/search.worker-oMKCTI8n.js",
+          "start": 2096.0999999046326,
+          "duration": -0.19999980926513672,
+          "transfer": 7005,
+          "encoded": 6705,
+          "decoded": 19072
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/rules-data/b3fb9fdf79c0cd37/heroes-ability.json",
+          "start": 5521.400000095367,
+          "duration": 709.1999998092651,
+          "transfer": 91397,
+          "encoded": 91097,
+          "decoded": 1513763
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/search.worker-oMKCTI8n.js",
+          "start": 6847.300000190735,
+          "duration": -2.200000286102295,
+          "transfer": 300,
+          "encoded": 6705,
+          "decoded": 19072
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/foes-7cvQWThp.js",
+          "start": 8148.400000095367,
+          "duration": 1339.9000000953674,
+          "transfer": 692893,
+          "encoded": 692593,
+          "decoded": 6733336
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/foes-BGgFncNM.css",
+          "start": 8148.5,
+          "duration": 97,
+          "transfer": 1559,
+          "encoded": 1259,
+          "decoded": 3960
+        }
+      ]
+    },
+    {
+      "label": "rules-to-foes-warm",
+      "start": 1789793505913,
+      "elapsed": 45,
+      "stamp": {
+        "timeOrigin": 1789793495941.9,
+        "now": 9971.700000286102
+      },
+      "now": 10017,
+      "timeOrigin": 1789793495941.9,
+      "long": [
+        {
+          "start": 9542.300000190735,
+          "duration": 178
+        }
+      ],
+      "paint": [
+        {
+          "name": "first-paint",
+          "entryType": "paint",
+          "startTime": 300,
+          "duration": 0,
+          "navigationId": 4460,
+          "paintTime": 294.59999990463257,
+          "presentationTime": 300
+        },
+        {
+          "name": "first-contentful-paint",
+          "entryType": "paint",
+          "startTime": 300,
+          "duration": 0,
+          "navigationId": 4460,
+          "paintTime": 294.59999990463257,
+          "presentationTime": 300
+        }
+      ],
+      "nav": [
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/rules",
+          "entryType": "navigation",
+          "startTime": 0,
+          "duration": 279.80000019073486,
+          "navigationId": 4460,
+          "initiatorType": "navigation",
+          "deliveryType": "",
+          "nextHopProtocol": "h3",
+          "renderBlockingStatus": "non-blocking",
+          "contentType": "text/html",
+          "contentEncoding": "zstd",
+          "workerStart": 0,
+          "workerRouterEvaluationStart": 0,
+          "workerCacheLookupStart": 0,
+          "workerMatchedSourceType": "",
+          "workerFinalSourceType": "",
+          "redirectStart": 0,
+          "redirectEnd": 0,
+          "fetchStart": 0.7000002861022949,
+          "domainLookupStart": 0.7000002861022949,
+          "domainLookupEnd": 0.7000002861022949,
+          "connectStart": 0.7000002861022949,
+          "secureConnectionStart": 0.7000002861022949,
+          "connectEnd": 0.7000002861022949,
+          "requestStart": 1.0999999046325684,
+          "responseStart": 117.90000009536743,
+          "firstInterimResponseStart": 0,
+          "finalResponseHeadersStart": 117.90000009536743,
+          "responseEnd": 120.30000019073486,
+          "transferSize": 1032,
+          "encodedBodySize": 732,
+          "decodedBodySize": 1665,
+          "responseStatus": 200,
+          "serverTiming": [
+            {
+              "name": "cfExtPri",
+              "duration": 0,
+              "description": ""
+            }
+          ],
+          "unloadEventStart": 120,
+          "unloadEventEnd": 120,
+          "domInteractive": 124.59999990463257,
+          "domContentLoadedEventStart": 278.90000009536743,
+          "domContentLoadedEventEnd": 279,
+          "domComplete": 279.80000019073486,
+          "loadEventStart": 279.80000019073486,
+          "loadEventEnd": 279.80000019073486,
+          "type": "navigate",
+          "redirectCount": 0,
+          "activationStart": 0,
+          "criticalCHRestart": 0,
+          "notRestoredReasons": null,
+          "confidence": {
+            "randomizedTriggerRate": 0.4994798,
+            "value": "low"
+          }
+        }
+      ],
+      "resources": [
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/article-BWyiCa1k.js",
+          "start": 121.90000009536743,
+          "duration": 115.59999990463257,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/index-7p-1PPnJ.js",
+          "start": 121.90000009536743,
+          "duration": 126.90000009536743,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/overlay-card-CC4zlAt4.js",
+          "start": 122,
+          "duration": 132.2000002861023,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/x-B2CtMrqX.js",
+          "start": 122,
+          "duration": 136.7000002861023,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/article-Dre97K8_.css",
+          "start": 122,
+          "duration": 138.7000002861023,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/index-Cwn7TpfO.css",
+          "start": 122.09999990463257,
+          "duration": 140.40000009536743,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/overlay-card-C1jW4vvI.css",
+          "start": 122.09999990463257,
+          "duration": 144.30000019073486,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/DrawSteelGlyphs-Regular-Bxmll151.otf",
+          "start": 278.30000019073486,
+          "duration": 0,
+          "transfer": 0,
+          "encoded": 14404,
+          "decoded": 21636
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/schibsted-grotesk-latin-wght-normal-Bb8VGrTG.woff2",
+          "start": 278.40000009536743,
+          "duration": 0,
+          "transfer": 0,
+          "encoded": 46752,
+          "decoded": 46752
+        },
+        {
+          "name": "https://different-bat-943.convex.site/api/auth/get-session",
+          "start": 281.90000009536743,
+          "duration": 240.19999980926514,
+          "transfer": 0,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/rules-4M9lenNI.js",
+          "start": 283.40000009536743,
+          "duration": 134.69999980926514,
+          "transfer": 4907,
+          "encoded": 4607,
+          "decoded": 13274
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/search-Csys-MlF.js",
+          "start": 283.59999990463257,
+          "duration": 139.30000019073486,
+          "transfer": 582,
+          "encoded": 282,
+          "decoded": 448
+        },
+        {
+          "name": "https://different-bat-943.convex.site/api/auth/convex/token",
+          "start": 523.4000000953674,
+          "duration": 261.40000009536743,
+          "transfer": 0,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/rules-data/catalog.json",
+          "start": 584.9000000953674,
+          "duration": 393,
+          "transfer": 300,
+          "encoded": 232885,
+          "decoded": 1696717
+        },
+        {
+          "name": "https://different-bat-943.convex.site/api/auth/convex/token",
+          "start": 1198.4000000953674,
+          "duration": 230.40000009536743,
+          "transfer": 0,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/search.worker-oMKCTI8n.js",
+          "start": 2096.0999999046326,
+          "duration": -0.19999980926513672,
+          "transfer": 7005,
+          "encoded": 6705,
+          "decoded": 19072
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/rules-data/b3fb9fdf79c0cd37/heroes-ability.json",
+          "start": 5521.400000095367,
+          "duration": 709.1999998092651,
+          "transfer": 91397,
+          "encoded": 91097,
+          "decoded": 1513763
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/search.worker-oMKCTI8n.js",
+          "start": 6847.300000190735,
+          "duration": -2.200000286102295,
+          "transfer": 300,
+          "encoded": 6705,
+          "decoded": 19072
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/foes-7cvQWThp.js",
+          "start": 8148.400000095367,
+          "duration": 1339.9000000953674,
+          "transfer": 692893,
+          "encoded": 692593,
+          "decoded": 6733336
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/foes-BGgFncNM.css",
+          "start": 8148.5,
+          "duration": 97,
+          "transfer": 1559,
+          "encoded": 1259,
+          "decoded": 3960
+        }
+      ]
+    },
+    {
+      "label": "foes-wordmark-to-app",
+      "start": 1789793505961,
+      "elapsed": 1950,
+      "stamp": {
+        "timeOrigin": 1789793495941.9,
+        "now": 10020.200000286102
+      },
+      "now": 1923,
+      "timeOrigin": 1789793505988.9,
+      "long": [],
+      "paint": [
+        {
+          "name": "first-paint",
+          "entryType": "paint",
+          "startTime": 304,
+          "duration": 0,
+          "navigationId": 3729,
+          "paintTime": 297.1000003814697,
+          "presentationTime": 304
+        },
+        {
+          "name": "first-contentful-paint",
+          "entryType": "paint",
+          "startTime": 304,
+          "duration": 0,
+          "navigationId": 3729,
+          "paintTime": 297.1000003814697,
+          "presentationTime": 304
+        }
+      ],
+      "nav": [
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/",
+          "entryType": "navigation",
+          "startTime": 0,
+          "duration": 281.5,
+          "navigationId": 3729,
+          "initiatorType": "navigation",
+          "deliveryType": "",
+          "nextHopProtocol": "h3",
+          "renderBlockingStatus": "non-blocking",
+          "contentType": "text/html",
+          "contentEncoding": "zstd",
+          "workerStart": 0,
+          "workerRouterEvaluationStart": 0,
+          "workerCacheLookupStart": 0,
+          "workerMatchedSourceType": "",
+          "workerFinalSourceType": "",
+          "redirectStart": 0,
+          "redirectEnd": 0,
+          "fetchStart": 0.7000002861022949,
+          "domainLookupStart": 0.7000002861022949,
+          "domainLookupEnd": 0.7000002861022949,
+          "connectStart": 0.7000002861022949,
+          "secureConnectionStart": 0.7000002861022949,
+          "connectEnd": 0.7000002861022949,
+          "requestStart": 1.200000286102295,
+          "responseStart": 123,
+          "firstInterimResponseStart": 0,
+          "finalResponseHeadersStart": 123,
+          "responseEnd": 124.7000002861023,
+          "transferSize": 1032,
+          "encodedBodySize": 732,
+          "decodedBodySize": 1665,
+          "responseStatus": 200,
+          "serverTiming": [
+            {
+              "name": "cfExtPri",
+              "duration": 0,
+              "description": ""
+            }
+          ],
+          "unloadEventStart": 124.90000009536743,
+          "unloadEventEnd": 124.90000009536743,
+          "domInteractive": 129.80000019073486,
+          "domContentLoadedEventStart": 281.40000009536743,
+          "domContentLoadedEventEnd": 281.40000009536743,
+          "domComplete": 281.5,
+          "loadEventStart": 281.5,
+          "loadEventEnd": 281.5,
+          "type": "navigate",
+          "redirectCount": 0,
+          "activationStart": 0,
+          "criticalCHRestart": 0,
+          "notRestoredReasons": null,
+          "confidence": {
+            "randomizedTriggerRate": 0.4994798,
+            "value": "high"
+          }
+        }
+      ],
+      "resources": [
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/index-7p-1PPnJ.js",
+          "start": 127.10000038146973,
+          "duration": 120.19999980926514,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/x-B2CtMrqX.js",
+          "start": 127.2000002861023,
+          "duration": 138.69999980926514,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/article-BWyiCa1k.js",
+          "start": 127.2000002861023,
+          "duration": 140.5,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/overlay-card-CC4zlAt4.js",
+          "start": 127.30000019073486,
+          "duration": 135.80000019073486,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/article-Dre97K8_.css",
+          "start": 127.40000009536743,
+          "duration": 119.40000009536743,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/overlay-card-C1jW4vvI.css",
+          "start": 127.40000009536743,
+          "duration": 131.59999990463257,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/index-Cwn7TpfO.css",
+          "start": 127.5,
+          "duration": 130.80000019073486,
+          "transfer": 300,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/DrawSteelGlyphs-Regular-Bxmll151.otf",
+          "start": 259.6000003814697,
+          "duration": 0,
+          "transfer": 0,
+          "encoded": 14404,
+          "decoded": 21636
+        },
+        {
+          "name": "https://salient-dev.rdxx.workers.dev/assets/schibsted-grotesk-latin-wght-normal-Bb8VGrTG.woff2",
+          "start": 259.7000002861023,
+          "duration": 0,
+          "transfer": 0,
+          "encoded": 46752,
+          "decoded": 46752
+        },
+        {
+          "name": "https://different-bat-943.convex.site/api/auth/get-session",
+          "start": 283,
+          "duration": 351,
+          "transfer": 0,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://different-bat-943.convex.site/api/auth/convex/token",
+          "start": 635.9000000953674,
+          "duration": 518.0999999046326,
+          "transfer": 0,
+          "encoded": 0,
+          "decoded": 0
+        },
+        {
+          "name": "https://different-bat-943.convex.site/api/auth/convex/token",
+          "start": 1388.7000002861023,
+          "duration": 280.40000009536743,
+          "transfer": 0,
+          "encoded": 0,
+          "decoded": 0
+        }
+      ]
+    }
+  ],
+  "network": [
+    {
+      "phase": "authenticated-table-0",
+      "url": "https://salient-dev.rdxx.workers.dev/campaigns/jh7b7rtr0sqg3vkj55wkmb9rp98eqn0k/table",
+      "status": 200,
+      "cache": "public, max-age=0, must-revalidate",
+      "encoding": "zstd",
+      "cf": "HIT",
+      "server": "cloudflare",
+      "ray": "a3d5f9ac1f4febf1-SJC"
+    },
+    {
+      "phase": "authenticated-table-0",
+      "url": "https://salient-dev.rdxx.workers.dev/assets/article-Dre97K8_.css",
+      "status": 200,
+      "cache": "public, max-age=0, must-revalidate",
+      "etag": "W/\"ca4f18798ada4e88a89571d0a36396fd\"",
+      "encoding": "zstd",
+      "cf": "HIT",
+      "server": "cloudflare",
+      "ray": "a3d5f9acd9a3ebf1-SJC"
+    },
+    {
+      "phase": "authenticated-table-0",
+      "url": "https://salient-dev.rdxx.workers.dev/assets/index-Cwn7TpfO.css",
+      "status": 200,
+      "cache": "public, max-age=0, must-revalidate",
+      "etag": "W/\"13f81da9243764efe7a5745bbbc7a875\"",
+      "encoding": "zstd",
+      "cf": "HIT",
+      "server": "cloudflare",
+      "ray": "a3d5f9acf9d9ebf1-SJC"
+    },
+    {
+      "phase": "authenticated-table-0",
+      "url": "https://salient-dev.rdxx.workers.dev/assets/overlay-card-C1jW4vvI.css",
+      "status": 200,
+      "cache": "public, max-age=0, must-revalidate",
+      "etag": "W/\"20f2abd802e2ccda86e43feec8ad57fa\"",
+      "encoding": "zstd",
+      "cf": "HIT",
+      "server": "cloudflare",
+      "ray": "a3d5f9ace9d5ebf1-SJC"
+    },
+    {
+      "phase": "authenticated-table-0",
+      "url": "https://salient-dev.rdxx.workers.dev/assets/article-BWyiCa1k.js",
+      "status": 200,
+      "cache": "public, max-age=0, must-revalidate",
+      "etag": "W/\"41275fe2991fff84ecec4e41396dede5\"",
+      "encoding": "zstd",
+      "cf": "HIT",
+      "server": "cloudflare",
+      "ray": "a3d5f9acf9dcebf1-SJC"
+    },
+    {
+      "phase": "authenticated-table-0",
+      "url": "https://salient-dev.rdxx.workers.dev/assets/x-B2CtMrqX.js",
+      "status": 200,
+      "cache": "public, max-age=0, must-revalidate",
+      "etag": "W/\"7aabff483bdca84be5a913d0a0c4b3e6\"",
+      "encoding": "zstd",
+      "cf": "HIT",
+      "server": "cloudflare",
+      "ray": "a3d5f9acf9dfebf1-SJC"
+    },
+    {
+      "phase": "authenticated-table-0",
+      "url": "https://salient-dev.rdxx.workers.dev/assets/overlay-card-CC4zlAt4.js",
+      "status": 200,
+      "cache": "public, max-age=0, must-revalidate",
+      "etag": "W/\"c618ba223632210bd7facaffce5d09c9\"",
+      "encoding": "zstd",
+      "cf": "HIT",
+      "server": "cloudflare",
+      "ray": "a3d5f9acf9e1ebf1-SJC"
+    },
+    {
+      "phase": "authenticated-table-0",
+      "url": "https://salient-dev.rdxx.workers.dev/assets/index-7p-1PPnJ.js",
+      "status": 200,
+      "cache": "public, max-age=0, must-revalidate",
+      "etag": "W/\"167d95bfdad16a5155aa31b88f10b371\"",
+      "encoding": "zstd",
+      "cf": "HIT",
+      "server": "cloudflare",
+      "ray": "a3d5f9acf9daebf1-SJC"
+    },
+    {
+      "phase": "authenticated-table-0",
+      "url": "https://salient-dev.rdxx.workers.dev/assets/DrawSteelGlyphs-Regular-Bxmll151.otf",
+      "status": 200,
+      "cache": "public, max-age=0, must-revalidate",
+      "etag": "W/\"44590af15ea9b81ab0133ed47c04f2e1\"",
+      "encoding": "zstd",
+      "cf": "HIT",
+      "server": "cloudflare",
+      "ray": "a3d5f9b5ea4cf97b-SJC"
+    },
+    {
+      "phase": "authenticated-table-0",
+      "url": "https://salient-dev.rdxx.workers.dev/assets/schibsted-grotesk-latin-wght-normal-Bb8VGrTG.woff2",
+      "status": 200,
+      "cache": "public, max-age=0, must-revalidate",
+      "etag": "\"e68ca351e687e8fbac0eb4f99f82f4d6\"",
+      "cf": "HIT",
+      "server": "cloudflare",
+      "ray": "a3d5f9b5fa4df97b-SJC"
+    },
+    {
+      "phase": "authenticated-table-0",
+      "url": "https://salient-dev.rdxx.workers.dev/rules-data/catalog.json",
+      "status": 200,
+      "cache": "public, max-age=0, must-revalidate",
+      "etag": "W/\"2fe85cf0639d41e7b3471e34bcd84ac0\"",
+      "encoding": "zstd",
+      "cf": "HIT",
+      "server": "cloudflare",
+      "ray": "a3d5f9c3ba98f97b-SJC"
+    },
+    {
+      "phase": "authenticated-table-1",
+      "url": "https://salient-dev.rdxx.workers.dev/campaigns/jh7b7rtr0sqg3vkj55wkmb9rp98eqn0k/table",
+      "status": 200,
+      "cache": "public, max-age=0, must-revalidate",
+      "encoding": "zstd",
+      "cf": "HIT",
+      "server": "cloudflare",
+      "ray": "a3d5f9c6bac8f97b-SJC"
+    },
+    {
+      "phase": "authenticated-table-1",
+      "url": "https://salient-dev.rdxx.workers.dev/assets/article-Dre97K8_.css",
+      "status": 304,
+      "cache": "public, max-age=0, must-revalidate",
+      "etag": "\"ca4f18798ada4e88a89571d0a36396fd\"",
+      "cf": "HIT",
+      "server": "cloudflare",
+      "ray": "a3d5f9ca2b0ef97b-SJC"
+    },
+    {
+      "phase": "authenticated-table-1",
+      "url": "https://salient-dev.rdxx.workers.dev/assets/overlay-card-C1jW4vvI.css",
+      "status": 304,
+      "cache": "public, max-age=0, must-revalidate",
+      "etag": "\"20f2abd802e2ccda86e43feec8ad57fa\"",
+      "cf": "HIT",
+      "server": "cloudflare",
+      "ray": "a3d5f9ca3b0ff97b-SJC"
+    },
+    {
+      "phase": "authenticated-table-1",
+      "url": "https://salient-dev.rdxx.workers.dev/assets/index-7p-1PPnJ.js",
+      "status": 304,
+      "cache": "public, max-age=0, must-revalidate",
+      "etag": "\"167d95bfdad16a5155aa31b88f10b371\"",
+      "cf": "HIT",
+      "server": "cloudflare",
+      "ray": "a3d5f9ca3b10f97b-SJC"
+    },
+    {
+      "phase": "authenticated-table-1",
+      "url": "https://salient-dev.rdxx.workers.dev/assets/overlay-card-CC4zlAt4.js",
+      "status": 304,
+      "cache": "public, max-age=0, must-revalidate",
+      "etag": "\"c618ba223632210bd7facaffce5d09c9\"",
+      "cf": "HIT",
+      "server": "cloudflare",
+      "ray": "a3d5f9ca6b14f97b-SJC"
+    },
+    {
+      "phase": "authenticated-table-1",
+      "url": "https://salient-dev.rdxx.workers.dev/assets/index-Cwn7TpfO.css",
+      "status": 304,
+      "cache": "public, max-age=0, must-revalidate",
+      "etag": "\"13f81da9243764efe7a5745bbbc7a875\"",
+      "cf": "HIT",
+      "server": "cloudflare",
+      "ray": "a3d5f9ca5b11f97b-SJC"
+    },
+    {
+      "phase": "authenticated-table-1",
+      "url": "https://salient-dev.rdxx.workers.dev/assets/DrawSteelGlyphs-Regular-Bxmll151.otf",
+      "status": 200,
+      "cache": "public, max-age=0, must-revalidate",
+      "etag": "W/\"44590af15ea9b81ab0133ed47c04f2e1\"",
+      "encoding": "zstd",
+      "cf": "HIT",
+      "server": "cloudflare",
+      "ray": "a3d5f9b5ea4cf97b-SJC"
+    },
+    {
+      "phase": "authenticated-table-1",
+      "url": "https://salient-dev.rdxx.workers.dev/assets/schibsted-grotesk-latin-wght-normal-Bb8VGrTG.woff2",
+      "status": 200,
+      "cache": "public, max-age=0, must-revalidate",
+      "etag": "\"e68ca351e687e8fbac0eb4f99f82f4d6\"",
+      "cf": "HIT",
+      "server": "cloudflare",
+      "ray": "a3d5f9b5fa4df97b-SJC"
+    },
+    {
+      "phase": "authenticated-table-1",
+      "url": "https://salient-dev.rdxx.workers.dev/assets/x-B2CtMrqX.js",
+      "status": 304,
+      "cache": "public, max-age=0, must-revalidate",
+      "etag": "\"7aabff483bdca84be5a913d0a0c4b3e6\"",
+      "cf": "HIT",
+      "server": "cloudflare",
+      "ray": "a3d5f9ca5b13f97b-SJC"
+    },
+    {
+      "phase": "authenticated-table-1",
+      "url": "https://salient-dev.rdxx.workers.dev/assets/article-BWyiCa1k.js",
+      "status": 304,
+      "cache": "public, max-age=0, must-revalidate",
+      "etag": "\"41275fe2991fff84ecec4e41396dede5\"",
+      "cf": "HIT",
+      "server": "cloudflare",
+      "ray": "a3d5f9ca5b12f97b-SJC"
+    },
+    {
+      "phase": "authenticated-table-1",
+      "url": "https://salient-dev.rdxx.workers.dev/rules-data/catalog.json",
+      "status": 200,
+      "cache": "public, max-age=0, must-revalidate",
+      "etag": "W/\"2fe85cf0639d41e7b3471e34bcd84ac0\"",
+      "encoding": "zstd",
+      "cf": "HIT",
+      "server": "cloudflare",
+      "ray": "a3d5f9d53bcef97b-SJC"
+    },
+    {
+      "phase": "authenticated-table-2",
+      "url": "https://salient-dev.rdxx.workers.dev/campaigns/jh7b7rtr0sqg3vkj55wkmb9rp98eqn0k/table",
+      "status": 200,
+      "cache": "public, max-age=0, must-revalidate",
+      "encoding": "zstd",
+      "cf": "HIT",
+      "server": "cloudflare",
+      "ray": "a3d5f9d8bc19f97b-SJC"
+    },
+    {
+      "phase": "authenticated-table-2",
+      "url": "https://salient-dev.rdxx.workers.dev/assets/index-Cwn7TpfO.css",
+      "status": 304,
+      "cache": "public, max-age=0, must-revalidate",
+      "etag": "\"13f81da9243764efe7a5745bbbc7a875\"",
+      "cf": "HIT",
+      "server": "cloudflare",
+      "ray": "a3d5f9d98c1df97b-SJC"
+    },
+    {
+      "phase": "authenticated-table-2",
+      "url": "https://salient-dev.rdxx.workers.dev/assets/article-Dre97K8_.css",
+      "status": 304,
+      "cache": "public, max-age=0, must-revalidate",
+      "etag": "\"ca4f18798ada4e88a89571d0a36396fd\"",
+      "cf": "HIT",
+      "server": "cloudflare",
+      "ray": "a3d5f9d98c1cf97b-SJC"
+    },
+    {
+      "phase": "authenticated-table-2",
+      "url": "https://salient-dev.rdxx.workers.dev/assets/overlay-card-C1jW4vvI.css",
+      "status": 304,
+      "cache": "public, max-age=0, must-revalidate",
+      "etag": "\"20f2abd802e2ccda86e43feec8ad57fa\"",
+      "cf": "HIT",
+      "server": "cloudflare",
+      "ray": "a3d5f9d98c1ef97b-SJC"
+    },
+    {
+      "phase": "authenticated-table-2",
+      "url": "https://salient-dev.rdxx.workers.dev/assets/DrawSteelGlyphs-Regular-Bxmll151.otf",
+      "status": 200,
+      "cache": "public, max-age=0, must-revalidate",
+      "etag": "W/\"44590af15ea9b81ab0133ed47c04f2e1\"",
+      "encoding": "zstd",
+      "cf": "HIT",
+      "server": "cloudflare",
+      "ray": "a3d5f9b5ea4cf97b-SJC"
+    },
+    {
+      "phase": "authenticated-table-2",
+      "url": "https://salient-dev.rdxx.workers.dev/assets/schibsted-grotesk-latin-wght-normal-Bb8VGrTG.woff2",
+      "status": 200,
+      "cache": "public, max-age=0, must-revalidate",
+      "etag": "\"e68ca351e687e8fbac0eb4f99f82f4d6\"",
+      "cf": "HIT",
+      "server": "cloudflare",
+      "ray": "a3d5f9b5fa4df97b-SJC"
+    },
+    {
+      "phase": "authenticated-table-2",
+      "url": "https://salient-dev.rdxx.workers.dev/assets/index-7p-1PPnJ.js",
+      "status": 304,
+      "cache": "public, max-age=0, must-revalidate",
+      "etag": "\"167d95bfdad16a5155aa31b88f10b371\"",
+      "cf": "HIT",
+      "server": "cloudflare",
+      "ray": "a3d5f9d98c1ff97b-SJC"
+    },
+    {
+      "phase": "authenticated-table-2",
+      "url": "https://salient-dev.rdxx.workers.dev/assets/overlay-card-CC4zlAt4.js",
+      "status": 304,
+      "cache": "public, max-age=0, must-revalidate",
+      "etag": "\"c618ba223632210bd7facaffce5d09c9\"",
+      "cf": "HIT",
+      "server": "cloudflare",
+      "ray": "a3d5f9d99c22f97b-SJC"
+    },
+    {
+      "phase": "authenticated-table-2",
+      "url": "https://salient-dev.rdxx.workers.dev/assets/x-B2CtMrqX.js",
+      "status": 304,
+      "cache": "public, max-age=0, must-revalidate",
+      "etag": "\"7aabff483bdca84be5a913d0a0c4b3e6\"",
+      "cf": "HIT",
+      "server": "cloudflare",
+      "ray": "a3d5f9d99c23f97b-SJC"
+    },
+    {
+      "phase": "authenticated-table-2",
+      "url": "https://salient-dev.rdxx.workers.dev/assets/article-BWyiCa1k.js",
+      "status": 304,
+      "cache": "public, max-age=0, must-revalidate",
+      "etag": "\"41275fe2991fff84ecec4e41396dede5\"",
+      "cf": "HIT",
+      "server": "cloudflare",
+      "ray": "a3d5f9d99c21f97b-SJC"
+    },
+    {
+      "phase": "authenticated-table-2",
+      "url": "https://salient-dev.rdxx.workers.dev/rules-data/catalog.json",
+      "status": 200,
+      "cache": "public, max-age=0, must-revalidate",
+      "etag": "W/\"2fe85cf0639d41e7b3471e34bcd84ac0\"",
+      "encoding": "zstd",
+      "cf": "HIT",
+      "server": "cloudflare",
+      "ray": "a3d5f9e1ac7bf97b-SJC"
+    },
+    {
+      "phase": "authenticated-table-2",
+      "url": "https://salient-dev.rdxx.workers.dev/rules",
+      "status": 200,
+      "cache": "public, max-age=0, must-revalidate",
+      "encoding": "zstd",
+      "cf": "HIT",
+      "server": "cloudflare",
+      "ray": "a3d5f9e5dcb8f97b-SJC"
+    },
+    {
+      "phase": "authenticated-table-2",
+      "url": "https://salient-dev.rdxx.workers.dev/assets/article-BWyiCa1k.js",
+      "status": 304,
+      "cache": "public, max-age=0, must-revalidate",
+      "etag": "\"41275fe2991fff84ecec4e41396dede5\"",
+      "cf": "HIT",
+      "server": "cloudflare",
+      "ray": "a3d5f9e68cdaf97b-SJC"
+    },
+    {
+      "phase": "authenticated-table-2",
+      "url": "https://salient-dev.rdxx.workers.dev/assets/index-7p-1PPnJ.js",
+      "status": 304,
+      "cache": "public, max-age=0, must-revalidate",
+      "etag": "\"167d95bfdad16a5155aa31b88f10b371\"",
+      "cf": "HIT",
+      "server": "cloudflare",
+      "ray": "a3d5f9e68cd9f97b-SJC"
+    },
+    {
+      "phase": "authenticated-table-2",
+      "url": "https://salient-dev.rdxx.workers.dev/assets/overlay-card-CC4zlAt4.js",
+      "status": 304,
+      "cache": "public, max-age=0, must-revalidate",
+      "etag": "\"c618ba223632210bd7facaffce5d09c9\"",
+      "cf": "HIT",
+      "server": "cloudflare",
+      "ray": "a3d5f9e69cdcf97b-SJC"
+    },
+    {
+      "phase": "authenticated-table-2",
+      "url": "https://salient-dev.rdxx.workers.dev/assets/x-B2CtMrqX.js",
+      "status": 304,
+      "cache": "public, max-age=0, must-revalidate",
+      "etag": "\"7aabff483bdca84be5a913d0a0c4b3e6\"",
+      "cf": "HIT",
+      "server": "cloudflare",
+      "ray": "a3d5f9e69cdbf97b-SJC"
+    },
+    {
+      "phase": "authenticated-table-2",
+      "url": "https://salient-dev.rdxx.workers.dev/assets/article-Dre97K8_.css",
+      "status": 304,
+      "cache": "public, max-age=0, must-revalidate",
+      "etag": "\"ca4f18798ada4e88a89571d0a36396fd\"",
+      "cf": "HIT",
+      "server": "cloudflare",
+      "ray": "a3d5f9e69cddf97b-SJC"
+    },
+    {
+      "phase": "authenticated-table-2",
+      "url": "https://salient-dev.rdxx.workers.dev/assets/index-Cwn7TpfO.css",
+      "status": 304,
+      "cache": "public, max-age=0, must-revalidate",
+      "etag": "\"13f81da9243764efe7a5745bbbc7a875\"",
+      "cf": "HIT",
+      "server": "cloudflare",
+      "ray": "a3d5f9e6ace0f97b-SJC"
+    },
+    {
+      "phase": "authenticated-table-2",
+      "url": "https://salient-dev.rdxx.workers.dev/assets/overlay-card-C1jW4vvI.css",
+      "status": 304,
+      "cache": "public, max-age=0, must-revalidate",
+      "etag": "\"20f2abd802e2ccda86e43feec8ad57fa\"",
+      "cf": "HIT",
+      "server": "cloudflare",
+      "ray": "a3d5f9e6acdff97b-SJC"
+    },
+    {
+      "phase": "authenticated-table-2",
+      "url": "https://salient-dev.rdxx.workers.dev/assets/DrawSteelGlyphs-Regular-Bxmll151.otf",
+      "status": 200,
+      "cache": "public, max-age=0, must-revalidate",
+      "etag": "W/\"44590af15ea9b81ab0133ed47c04f2e1\"",
+      "encoding": "zstd",
+      "cf": "HIT",
+      "server": "cloudflare",
+      "ray": "a3d5f9b5ea4cf97b-SJC"
+    },
+    {
+      "phase": "authenticated-table-2",
+      "url": "https://salient-dev.rdxx.workers.dev/assets/schibsted-grotesk-latin-wght-normal-Bb8VGrTG.woff2",
+      "status": 200,
+      "cache": "public, max-age=0, must-revalidate",
+      "etag": "\"e68ca351e687e8fbac0eb4f99f82f4d6\"",
+      "cf": "HIT",
+      "server": "cloudflare",
+      "ray": "a3d5f9b5fa4df97b-SJC"
+    },
+    {
+      "phase": "authenticated-table-2",
+      "url": "https://salient-dev.rdxx.workers.dev/assets/rules-4M9lenNI.js",
+      "status": 200,
+      "cache": "public, max-age=0, must-revalidate",
+      "etag": "W/\"3a04af9261883c981138057604a1a82c\"",
+      "encoding": "zstd",
+      "cf": "HIT",
+      "server": "cloudflare",
+      "ray": "a3d5f9e78ce8f97b-SJC"
+    },
+    {
+      "phase": "authenticated-table-2",
+      "url": "https://salient-dev.rdxx.workers.dev/assets/search-Csys-MlF.js",
+      "status": 200,
+      "cache": "public, max-age=0, must-revalidate",
+      "etag": "W/\"d5e3d9dff7c0acf3f879f72430323ef0\"",
+      "encoding": "zstd",
+      "cf": "HIT",
+      "server": "cloudflare",
+      "ray": "a3d5f9e78ce9f97b-SJC"
+    },
+    {
+      "phase": "authenticated-table-2",
+      "url": "https://salient-dev.rdxx.workers.dev/rules-data/catalog.json",
+      "status": 200,
+      "cache": "public, max-age=0, must-revalidate",
+      "etag": "\"2fe85cf0639d41e7b3471e34bcd84ac0\"",
+      "cf": "HIT",
+      "server": "cloudflare",
+      "ray": "a3d5f9e96cf7f97b-SJC"
+    },
+    {
+      "phase": "rules-search-grab",
+      "url": "https://salient-dev.rdxx.workers.dev/assets/search.worker-oMKCTI8n.js",
+      "status": 200,
+      "cache": "public, max-age=0, must-revalidate",
+      "etag": "W/\"b293e8e0063e962d408f4f38f094563f\"",
+      "encoding": "zstd",
+      "cf": "MISS",
+      "server": "cloudflare",
+      "ray": "a3d5f9ed8d23f97b-SJC"
+    },
+    {
+      "phase": "rules-search-grab",
+      "url": "https://salient-dev.rdxx.workers.dev/rules-data/b3fb9fdf79c0cd37/search.json",
+      "status": 200,
+      "cache": "public, max-age=0, must-revalidate",
+      "etag": "W/\"b522760993c5cfd47f14ab37b0218bd2\"",
+      "encoding": "zstd",
+      "cf": "MISS",
+      "server": "cloudflare",
+      "ray": "a3d5f9f2fd5af97b-SJC"
+    },
+    {
+      "phase": "rules-open-article",
+      "url": "https://salient-dev.rdxx.workers.dev/rules-data/b3fb9fdf79c0cd37/heroes-ability.json",
+      "status": 200,
+      "cache": "public, max-age=0, must-revalidate",
+      "etag": "W/\"a455fb0c3ab6a3338a5078baf058cf90\"",
+      "encoding": "zstd",
+      "cf": "MISS",
+      "server": "cloudflare",
+      "ray": "a3d5fa083e47f97b-SJC"
+    },
+    {
+      "phase": "rules-search-after-article",
+      "url": "https://salient-dev.rdxx.workers.dev/assets/search.worker-oMKCTI8n.js",
+      "status": 200,
+      "cache": "public, max-age=0, must-revalidate",
+      "etag": "\"b293e8e0063e962d408f4f38f094563f\"",
+      "cf": "HIT",
+      "server": "cloudflare",
+      "ray": "a3d5fa0e3e66f97b-SJC"
+    },
+    {
+      "phase": "rules-search-after-article",
+      "url": "https://salient-dev.rdxx.workers.dev/rules-data/b3fb9fdf79c0cd37/search.json",
+      "status": 200,
+      "cache": "public, max-age=0, must-revalidate",
+      "etag": "\"b522760993c5cfd47f14ab37b0218bd2\"",
+      "cf": "HIT",
+      "server": "cloudflare",
+      "ray": "a3d5fa108e77f97b-SJC"
+    },
+    {
+      "phase": "rules-to-foes-first",
+      "url": "https://salient-dev.rdxx.workers.dev/assets/foes-BGgFncNM.css",
+      "status": 200,
+      "cache": "public, max-age=0, must-revalidate",
+      "etag": "W/\"2d57e2f8dc53587610a620dd7ef13c55\"",
+      "encoding": "zstd",
+      "cf": "HIT",
+      "server": "cloudflare",
+      "ray": "a3d5fa18bea8f97b-SJC"
+    },
+    {
+      "phase": "rules-to-foes-first",
+      "url": "https://salient-dev.rdxx.workers.dev/assets/foes-7cvQWThp.js",
+      "status": 200,
+      "cache": "public, max-age=0, must-revalidate",
+      "etag": "W/\"7a18ad3825e5e70be59123f5f673946f\"",
+      "encoding": "zstd",
+      "cf": "HIT",
+      "server": "cloudflare",
+      "ray": "a3d5fa18cea9f97b-SJC"
+    },
+    {
+      "phase": "foes-wordmark-to-app",
+      "url": "https://salient-dev.rdxx.workers.dev/",
+      "status": 200,
+      "cache": "public, max-age=0, must-revalidate",
+      "encoding": "zstd",
+      "cf": "HIT",
+      "server": "cloudflare",
+      "ray": "a3d5fa249f4ff97b-SJC"
+    },
+    {
+      "phase": "foes-wordmark-to-app",
+      "url": "https://salient-dev.rdxx.workers.dev/assets/article-Dre97K8_.css",
+      "status": 304,
+      "cache": "public, max-age=0, must-revalidate",
+      "etag": "\"ca4f18798ada4e88a89571d0a36396fd\"",
+      "cf": "HIT",
+      "server": "cloudflare",
+      "ray": "a3d5fa256f5bf97b-SJC"
+    },
+    {
+      "phase": "foes-wordmark-to-app",
+      "url": "https://salient-dev.rdxx.workers.dev/assets/index-7p-1PPnJ.js",
+      "status": 304,
+      "cache": "public, max-age=0, must-revalidate",
+      "etag": "\"167d95bfdad16a5155aa31b88f10b371\"",
+      "cf": "HIT",
+      "server": "cloudflare",
+      "ray": "a3d5fa255f59f97b-SJC"
+    },
+    {
+      "phase": "foes-wordmark-to-app",
+      "url": "https://salient-dev.rdxx.workers.dev/assets/index-Cwn7TpfO.css",
+      "status": 304,
+      "cache": "public, max-age=0, must-revalidate",
+      "etag": "\"13f81da9243764efe7a5745bbbc7a875\"",
+      "cf": "HIT",
+      "server": "cloudflare",
+      "ray": "a3d5fa257f60f97b-SJC"
+    },
+    {
+      "phase": "foes-wordmark-to-app",
+      "url": "https://salient-dev.rdxx.workers.dev/assets/overlay-card-C1jW4vvI.css",
+      "status": 304,
+      "cache": "public, max-age=0, must-revalidate",
+      "etag": "\"20f2abd802e2ccda86e43feec8ad57fa\"",
+      "cf": "HIT",
+      "server": "cloudflare",
+      "ray": "a3d5fa257f5ff97b-SJC"
+    },
+    {
+      "phase": "foes-wordmark-to-app",
+      "url": "https://salient-dev.rdxx.workers.dev/assets/DrawSteelGlyphs-Regular-Bxmll151.otf",
+      "status": 200,
+      "cache": "public, max-age=0, must-revalidate",
+      "etag": "W/\"44590af15ea9b81ab0133ed47c04f2e1\"",
+      "encoding": "zstd",
+      "cf": "HIT",
+      "server": "cloudflare",
+      "ray": "a3d5f9b5ea4cf97b-SJC"
+    },
+    {
+      "phase": "foes-wordmark-to-app",
+      "url": "https://salient-dev.rdxx.workers.dev/assets/schibsted-grotesk-latin-wght-normal-Bb8VGrTG.woff2",
+      "status": 200,
+      "cache": "public, max-age=0, must-revalidate",
+      "etag": "\"e68ca351e687e8fbac0eb4f99f82f4d6\"",
+      "cf": "HIT",
+      "server": "cloudflare",
+      "ray": "a3d5f9b5fa4df97b-SJC"
+    },
+    {
+      "phase": "foes-wordmark-to-app",
+      "url": "https://salient-dev.rdxx.workers.dev/assets/overlay-card-CC4zlAt4.js",
+      "status": 304,
+      "cache": "public, max-age=0, must-revalidate",
+      "etag": "\"c618ba223632210bd7facaffce5d09c9\"",
+      "cf": "HIT",
+      "server": "cloudflare",
+      "ray": "a3d5fa257f61f97b-SJC"
+    },
+    {
+      "phase": "foes-wordmark-to-app",
+      "url": "https://salient-dev.rdxx.workers.dev/assets/x-B2CtMrqX.js",
+      "status": 304,
+      "cache": "public, max-age=0, must-revalidate",
+      "etag": "\"7aabff483bdca84be5a913d0a0c4b3e6\"",
+      "cf": "HIT",
+      "server": "cloudflare",
+      "ray": "a3d5fa257f63f97b-SJC"
+    },
+    {
+      "phase": "foes-wordmark-to-app",
+      "url": "https://salient-dev.rdxx.workers.dev/assets/article-BWyiCa1k.js",
+      "status": 304,
+      "cache": "public, max-age=0, must-revalidate",
+      "etag": "\"41275fe2991fff84ecec4e41396dede5\"",
+      "cf": "HIT",
+      "server": "cloudflare",
+      "ray": "a3d5fa257f62f97b-SJC"
+    }
+  ],
+  "frames": [
+    {
+      "phase": "authenticated-table-0",
+      "name": "auth:viewer",
+      "time": 1789793490048,
+      "ms": 316,
+      "bytes": 79
+    },
+    {
+      "phase": "authenticated-table-0",
+      "name": "table:roster",
+      "time": 1789793490329,
+      "ms": 280,
+      "bytes": 2322
+    },
+    {
+      "phase": "authenticated-table-0",
+      "name": "campaigns:get",
+      "time": 1789793490478,
+      "ms": 429,
+      "bytes": 313
+    },
+    {
+      "phase": "authenticated-table-0",
+      "name": "encounters:current",
+      "time": 1789793490478,
+      "ms": 429,
+      "bytes": 4
+    },
+    {
+      "phase": "authenticated-table-0",
+      "name": "targets:drafts",
+      "time": 1789793490478,
+      "ms": 429,
+      "bytes": 25
+    },
+    {
+      "phase": "authenticated-table-0",
+      "name": "sessions:list",
+      "time": 1789793490683,
+      "ms": 185,
+      "bytes": 205
+    },
+    {
+      "phase": "authenticated-table-0",
+      "name": "foes:catalog",
+      "time": 1789793490904,
+      "ms": 406,
+      "bytes": 4189
+    },
+    {
+      "phase": "authenticated-table-0",
+      "name": "foes:detail",
+      "time": 1789793490904,
+      "ms": 406,
+      "bytes": 4115
+    },
+    {
+      "phase": "authenticated-table-0",
+      "name": "foes:detail",
+      "time": 1789793490904,
+      "ms": 406,
+      "bytes": 4115
+    },
+    {
+      "phase": "authenticated-table-0",
+      "name": "foes:detail",
+      "time": 1789793490904,
+      "ms": 405,
+      "bytes": 4115
+    },
+    {
+      "phase": "authenticated-table-0",
+      "name": "foes:detail",
+      "time": 1789793490904,
+      "ms": 405,
+      "bytes": 4115
+    },
+    {
+      "phase": "authenticated-table-0",
+      "name": "foes:detail",
+      "time": 1789793490904,
+      "ms": 405,
+      "bytes": 4115
+    },
+    {
+      "phase": "authenticated-table-0",
+      "name": "foes:detail",
+      "time": 1789793490904,
+      "ms": 405,
+      "bytes": 4115
+    },
+    {
+      "phase": "authenticated-table-0",
+      "name": "history:status",
+      "time": 1789793490904,
+      "ms": 405,
+      "bytes": 335
+    },
+    {
+      "phase": "authenticated-table-0",
+      "name": "abilities:results",
+      "time": 1789793490904,
+      "ms": 405,
+      "bytes": 2
+    },
+    {
+      "phase": "authenticated-table-0",
+      "name": "events:list",
+      "time": 1789793490904,
+      "ms": 405,
+      "bytes": 5036
+    },
+    {
+      "phase": "authenticated-table-1",
+      "name": "auth:viewer",
+      "time": 1789793493163,
+      "ms": 112,
+      "bytes": 79
+    },
+    {
+      "phase": "authenticated-table-1",
+      "name": "table:roster",
+      "time": 1789793493284,
+      "ms": 120,
+      "bytes": 2322
+    },
+    {
+      "phase": "authenticated-table-1",
+      "name": "campaigns:get",
+      "time": 1789793493285,
+      "ms": 121,
+      "bytes": 313
+    },
+    {
+      "phase": "authenticated-table-1",
+      "name": "encounters:current",
+      "time": 1789793493285,
+      "ms": 121,
+      "bytes": 4
+    },
+    {
+      "phase": "authenticated-table-1",
+      "name": "targets:drafts",
+      "time": 1789793493285,
+      "ms": 121,
+      "bytes": 25
+    },
+    {
+      "phase": "authenticated-table-1",
+      "name": "sessions:list",
+      "time": 1789793493519,
+      "ms": 225,
+      "bytes": 205
+    },
+    {
+      "phase": "authenticated-table-1",
+      "name": "foes:catalog",
+      "time": 1789793493519,
+      "ms": 222,
+      "bytes": 4189
+    },
+    {
+      "phase": "authenticated-table-1",
+      "name": "foes:detail",
+      "time": 1789793493519,
+      "ms": 222,
+      "bytes": 4115
+    },
+    {
+      "phase": "authenticated-table-1",
+      "name": "foes:detail",
+      "time": 1789793493519,
+      "ms": 222,
+      "bytes": 4115
+    },
+    {
+      "phase": "authenticated-table-1",
+      "name": "foes:detail",
+      "time": 1789793493519,
+      "ms": 222,
+      "bytes": 4115
+    },
+    {
+      "phase": "authenticated-table-1",
+      "name": "foes:detail",
+      "time": 1789793493519,
+      "ms": 222,
+      "bytes": 4115
+    },
+    {
+      "phase": "authenticated-table-1",
+      "name": "foes:detail",
+      "time": 1789793493519,
+      "ms": 222,
+      "bytes": 4115
+    },
+    {
+      "phase": "authenticated-table-1",
+      "name": "foes:detail",
+      "time": 1789793493519,
+      "ms": 222,
+      "bytes": 4115
+    },
+    {
+      "phase": "authenticated-table-1",
+      "name": "history:status",
+      "time": 1789793493519,
+      "ms": 222,
+      "bytes": 335
+    },
+    {
+      "phase": "authenticated-table-1",
+      "name": "abilities:results",
+      "time": 1789793493519,
+      "ms": 222,
+      "bytes": 2
+    },
+    {
+      "phase": "authenticated-table-1",
+      "name": "events:list",
+      "time": 1789793493519,
+      "ms": 222,
+      "bytes": 5036
+    },
+    {
+      "phase": "authenticated-table-2",
+      "name": "auth:viewer",
+      "time": 1789793495145,
+      "ms": 134,
+      "bytes": 79
+    },
+    {
+      "phase": "authenticated-table-2",
+      "name": "table:roster",
+      "time": 1789793495276,
+      "ms": 130,
+      "bytes": 2322
+    },
+    {
+      "phase": "authenticated-table-2",
+      "name": "campaigns:get",
+      "time": 1789793495279,
+      "ms": 133,
+      "bytes": 313
+    },
+    {
+      "phase": "authenticated-table-2",
+      "name": "encounters:current",
+      "time": 1789793495279,
+      "ms": 133,
+      "bytes": 4
+    },
+    {
+      "phase": "authenticated-table-2",
+      "name": "targets:drafts",
+      "time": 1789793495279,
+      "ms": 133,
+      "bytes": 25
+    },
+    {
+      "phase": "authenticated-table-2",
+      "name": "sessions:list",
+      "time": 1789793495496,
+      "ms": 205,
+      "bytes": 205
+    },
+    {
+      "phase": "authenticated-table-2",
+      "name": "foes:catalog",
+      "time": 1789793495496,
+      "ms": 205,
+      "bytes": 4189
+    },
+    {
+      "phase": "authenticated-table-2",
+      "name": "foes:detail",
+      "time": 1789793495496,
+      "ms": 205,
+      "bytes": 4115
+    },
+    {
+      "phase": "authenticated-table-2",
+      "name": "foes:detail",
+      "time": 1789793495496,
+      "ms": 205,
+      "bytes": 4115
+    },
+    {
+      "phase": "authenticated-table-2",
+      "name": "foes:detail",
+      "time": 1789793495496,
+      "ms": 205,
+      "bytes": 4115
+    },
+    {
+      "phase": "authenticated-table-2",
+      "name": "foes:detail",
+      "time": 1789793495496,
+      "ms": 205,
+      "bytes": 4115
+    },
+    {
+      "phase": "authenticated-table-2",
+      "name": "foes:detail",
+      "time": 1789793495496,
+      "ms": 205,
+      "bytes": 4115
+    },
+    {
+      "phase": "authenticated-table-2",
+      "name": "foes:detail",
+      "time": 1789793495496,
+      "ms": 205,
+      "bytes": 4115
+    },
+    {
+      "phase": "authenticated-table-2",
+      "name": "history:status",
+      "time": 1789793495496,
+      "ms": 205,
+      "bytes": 335
+    },
+    {
+      "phase": "authenticated-table-2",
+      "name": "abilities:results",
+      "time": 1789793495496,
+      "ms": 205,
+      "bytes": 2
+    },
+    {
+      "phase": "authenticated-table-2",
+      "name": "events:list",
+      "time": 1789793495496,
+      "ms": 205,
+      "bytes": 5036
+    },
+    {
+      "phase": "foes-wordmark-to-app",
+      "name": "auth:viewer",
+      "time": 1789793507703,
+      "ms": 325,
+      "bytes": 79
+    }
+  ],
+  "errors": []
+}

@@ -1,188 +1,19 @@
 import { GlyphFontNotice } from '../components/glyph';
 // SPDX-License-Identifier: GPL-3.0-only
-import { useEffect, useId, useRef, useState } from 'react';
+import { lazy, Suspense, useEffect, useId, useRef, useState } from 'react';
 import { useNavigate } from '@tanstack/react-router';
-import { ArrowRight, ChevronRight, Search, Skull, X } from 'lucide-react';
-import { bandOf, bookOf, createFoesLibrary, type LibraryEntry } from './library';
+import { ChevronRight, Search, Skull, X } from 'lucide-react';
+import { filterFoes, type LibraryEntry } from './library';
 import { kinds, sorts, type FoesFilters } from './filters';
-import { SourceHtml } from '../components/core-content';
 import { Dialog } from '@base-ui/react/dialog';
-import type {
-  FoeDisplayObject as FoeObject,
-  FoeDisplayPackage as FoePackage,
-} from '../../shared/contracts/foes';
-import rawData from '../../shared/content/foes/browser.json?raw';
-import { foeReference, resolveFoe } from '../../shared/foes/catalog';
 import { OverlayCardContent, OverlayCardTrigger } from '../components/overlay-card';
-import { useRulesCatalog } from '../rules/content';
-import { RuleArticleView } from '../rules/article';
-import { ThemeSwitch } from '../components/session-user';
+import { useFoesCatalog, type FoesCatalog } from './content';
+import { useFoesSearch } from './search-client';
 import '../rules/rules.css';
 import '../rules/reference.css';
 import './foes.css';
-const pack = JSON.parse(rawData) as FoePackage;
-const library = createFoesLibrary(pack);
-const statblocks = library.entries.filter(e => e.object.kind === 'statblock');
-const bands = [...new Set(statblocks.map(e => e.band))].sort();
-/** This same public object renderer can be used by a future chat attachment or inline card. */
-export function FoeView({
-  catalog: pack,
-  object,
-  onFollow,
-  onRule,
-}: {
-  catalog: FoePackage;
-  object: FoeObject;
-  onFollow: (id: string) => void;
-  onRule?: (path: string) => void;
-}) {
-  const parent = pack.objects.find(o => o.id === object.parentId);
-  return (
-    <article>
-      {parent && (
-        <button
-          className="text-sm font-medium text-primary underline underline-offset-4 mb-4"
-          onClick={() => onFollow(parent.id)}
-        >
-          From {parent.name}
-        </button>
-      )}
-      <SourceHtml
-        html={object.html}
-        title={object.kind === 'statblock' ? object.name : undefined}
-      />
-      {object.featureIds.map(id => {
-        const feature = resolveFoe(pack, foeReference(pack, id))!.object;
-        return (
-          <section key={id} className="my-5 border-t border-border pt-4">
-            <button
-              className="text-sm font-medium text-primary underline underline-offset-4 mb-2"
-              onClick={() => onFollow(id)}
-            >
-              Open {feature.name}
-            </button>
-            <SourceHtml html={feature.html} />
-          </section>
-        );
-      })}
-      {object.supportingIds.map(id => (
-        <button
-          key={id}
-          className="text-sm font-medium text-primary underline underline-offset-4 mt-4"
-          onClick={() => onFollow(id)}
-        >
-          {pack.objects.find(o => o.id === id)?.name ?? 'Related reference'}
-        </button>
-      ))}
-      {Boolean(object.relatedRules?.length) && (
-        <nav className="foes-related-rules" aria-label="Related rules">
-          <h3>Related rules</h3>
-          {object.relatedRules?.map(rule => (
-            <a
-              key={rule.id}
-              href={`/rules/${rule.path}`}
-              onClick={event => {
-                if (
-                  onRule &&
-                  !event.ctrlKey &&
-                  !event.metaKey &&
-                  !event.shiftKey &&
-                  !event.altKey &&
-                  event.button === 0
-                ) {
-                  event.preventDefault();
-                  onRule(rule.path);
-                }
-              }}
-            >
-              {rule.name}
-              <small>{rule.relationship.replaceAll('-', ' ')}</small>
-            </a>
-          ))}
-        </nav>
-      )}
-      {object.diagnostics.map(d => (
-        <p role="status" key={d}>
-          {d}
-        </p>
-      ))}
-      <footer className="mt-6 border-t border-border pt-4 text-sm text-muted-foreground">
-        <a href={`https://steelcompendium.io/v2/scc/${object.source.scc}/`}>
-          View source on Steel Compendium
-        </a>
-        <p>Draw Steel: {bookOf(object)} · Draw Steel Creator License</p>
-      </footer>
-    </article>
-  );
-}
-type PreviewLocation = { foe: string } | { path: string; section?: string };
-function FoePreview({ initial }: { initial: string }) {
-  const [history, setHistory] = useState<PreviewLocation[]>([{ foe: initial }]);
-  const { catalog, error } = useRulesCatalog();
-  const current = history.at(-1)!;
-  const object =
-    'foe' in current ? resolveFoe(pack, foeReference(pack, current.foe))!.object : undefined;
-  const entry = 'path' in current ? catalog?.entries.find(e => e.path === current.path) : undefined;
-  return (
-    <OverlayCardContent
-      title={object?.name ?? entry?.name ?? 'Rule reference'}
-      eyebrow={`${object ? bandOf(object) : 'Rules'} · source reference`}
-      closeLabel="Close foe reference"
-      bodyKey={JSON.stringify(current)}
-      leading={
-        history.length > 1 ? (
-          <button
-            className="text-sm font-medium text-primary underline underline-offset-4"
-            onClick={() => setHistory(h => h.slice(0, -1))}
-          >
-            Back
-          </button>
-        ) : undefined
-      }
-    >
-      <div
-        onClick={event => {
-          if (
-            event.defaultPrevented ||
-            event.ctrlKey ||
-            event.metaKey ||
-            event.shiftKey ||
-            event.altKey ||
-            event.button !== 0
-          )
-            return;
-          const href = (event.target as Element).closest('a')?.getAttribute('href');
-          if (href?.startsWith('/rules/')) {
-            event.preventDefault();
-            const [path, section] = href.slice(7).split('#');
-            setHistory(h => [...h, { path, section }]);
-          }
-        }}
-      >
-        {object ? (
-          <FoeView
-            catalog={pack}
-            object={object}
-            onFollow={foe => setHistory(h => [...h, { foe }])}
-            onRule={path => setHistory(h => [...h, { path }])}
-          />
-        ) : catalog && entry ? (
-          <RuleArticleView
-            catalog={catalog}
-            entry={entry}
-            section={'section' in current ? current.section : undefined}
-            onFollow={(path, section) => setHistory(h => [...h, { path, section }])}
-          />
-        ) : (
-          <p role="status">
-            {error || (catalog ? 'This reference is unavailable.' : 'Opening reference…')}
-          </p>
-        )}
-      </div>
-    </OverlayCardContent>
-  );
-}
-function FoeResult({ entry }: { entry: LibraryEntry }) {
+const FoePreview = lazy(() => import('./preview'));
+function FoeResult({ entry, catalog }: { entry: LibraryEntry; catalog: FoesCatalog }) {
   const descriptionId = useId();
   const [open, setOpen] = useState(false);
   const { object, band, level, role, organization, parentName } = entry;
@@ -225,17 +56,27 @@ function FoeResult({ entry }: { entry: LibraryEntry }) {
         </span>
         <ChevronRight size={18} aria-hidden="true" />
       </OverlayCardTrigger>
-      {open && <FoePreview initial={object.id} />}
+      {open && (
+        <Suspense
+          fallback={
+            <OverlayCardContent title={object.name} closeLabel="Close foe reference">
+              <p role="status">Opening reference…</p>
+            </OverlayCardContent>
+          }
+        >
+          <FoePreview initial={object.id} entries={catalog} />
+        </Suspense>
+      )}
     </Dialog.Root>
   );
 }
-function Results({ results }: { results: LibraryEntry[] }) {
+function Results({ results, catalog }: { results: LibraryEntry[]; catalog: FoesCatalog }) {
   const [limit, setLimit] = useState(40);
   return (
     <>
       <div className="foes-results">
         {results.slice(0, limit).map(entry => (
-          <FoeResult key={entry.object.id} entry={entry} />
+          <FoeResult key={entry.object.id} entry={entry} catalog={catalog} />
         ))}
       </div>
       {limit < results.length && (
@@ -247,6 +88,22 @@ function Results({ results }: { results: LibraryEntry[] }) {
   );
 }
 export default function FoesPage({ filters }: { filters: FoesFilters }) {
+  const { catalog, error, retry } = useFoesCatalog();
+  return catalog ? (
+    <FoesLibrary filters={filters} catalog={catalog} />
+  ) : (
+    <main className="p-8" role="status">
+      {error ?? 'Opening foes…'}
+      {error && <button onClick={retry}>Try again</button>}
+    </main>
+  );
+}
+function FoesLibrary({ filters, catalog }: { filters: FoesFilters; catalog: FoesCatalog }) {
+  const statblocks = catalog.entries.filter(e => e.object.kind === 'statblock');
+  const bands = [...new Set(statblocks.map(e => e.band))].sort();
+  const search = useFoesSearch(catalog.version, filters.q ?? '');
+  const searching = Boolean(filters.q?.trim() && !search.scores);
+
   const navigate = useNavigate();
   const input = useRef<HTMLInputElement>(null);
   const update = (change: FoesFilters) => {
@@ -263,8 +120,8 @@ export default function FoesPage({ filters }: { filters: FoesFilters }) {
     window.addEventListener('keydown', handler);
     return () => window.removeEventListener('keydown', handler);
   }, []);
-  const results = library.search(filters);
-  const keywordEntries = library.entries.filter(
+  const results = filterFoes(catalog.entries, filters, search.scores);
+  const keywordEntries = catalog.entries.filter(
     e => (filters.kind ?? 'statblock') === 'all' || e.object.kind === (filters.kind ?? 'statblock'),
   );
   const keywords = [...new Set(keywordEntries.flatMap(e => e.object.keywords))].sort();
@@ -285,9 +142,6 @@ export default function FoesPage({ filters }: { filters: FoesFilters }) {
   return (
     <div className="rules-app foes-app">
       <header className="rules-topbar">
-        <a href="/" className="rules-wordmark">
-          Salient<span> / Foes</span>
-        </a>
         <div className="rules-search-box">
           <Search size={18} aria-hidden="true" />
           <input
@@ -305,10 +159,6 @@ export default function FoesPage({ filters }: { filters: FoesFilters }) {
             <kbd>⌘ / Ctrl K</kbd>
           )}
         </div>
-        <a href="/rules" className="foes-rules-link">
-          Rules index <ArrowRight size={15} />
-        </a>
-        <ThemeSwitch />
       </header>
       <div className="rules-layout">
         <aside className="rules-sidebar foes-sidebar" aria-label="Browse monster bands">
@@ -396,7 +246,7 @@ export default function FoesPage({ filters }: { filters: FoesFilters }) {
               Sourcebook
               <select value={filters.book ?? ''} onChange={e => update({ book: e.target.value })}>
                 <option value="">All books</option>
-                {[...new Set(library.entries.map(e => e.book))].sort().map(book => (
+                {[...new Set(catalog.entries.map(e => e.book))].sort().map(book => (
                   <option key={book}>{book}</option>
                 ))}
               </select>
@@ -421,7 +271,11 @@ export default function FoesPage({ filters }: { filters: FoesFilters }) {
                   onChange={e => update({ usage: e.target.value })}
                 >
                   <option value="">All usages</option>
-                  {[...new Set(pack.search.flatMap(e => (e.usage ? [e.usage] : [])))]
+                  {[
+                    ...new Set(
+                      catalog.entries.flatMap(e => (e.object.usage ? [e.object.usage] : [])),
+                    ),
+                  ]
                     .sort()
                     .map(k => (
                       <option key={k}>{k}</option>
@@ -449,7 +303,7 @@ export default function FoesPage({ filters }: { filters: FoesFilters }) {
           )}
           <div className="foes-results-toolbar">
             <p role="status">
-              {results.length}{' '}
+              {searching ? 'Searching…' : results.length}{' '}
               {filters.kind === 'statblock' || !filters.kind
                 ? results.length === 1
                   ? 'stat block'
@@ -473,8 +327,13 @@ export default function FoesPage({ filters }: { filters: FoesFilters }) {
               </select>
             </label>
           </div>
-          {results.length ? (
-            <Results key={JSON.stringify(filters)} results={results} />
+          {searching ? (
+            <div role={search.error ? 'alert' : undefined}>
+              {search.error ?? 'Searching references…'}
+              {search.error && <button onClick={search.retry}>Try again</button>}
+            </div>
+          ) : results.length ? (
+            <Results key={JSON.stringify(filters)} results={results} catalog={catalog} />
           ) : (
             <div className="rules-empty">
               <Search size={30} />

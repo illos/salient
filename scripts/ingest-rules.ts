@@ -16,6 +16,7 @@ import rehypeStringify from 'rehype-stringify';
 import { visit } from 'unist-util-visit';
 import { toString } from 'mdast-util-to-string';
 import type { Root, Heading } from 'mdast';
+import type { Root as HtmlRoot } from 'hast';
 import type {
   RuleArticle,
   RuleHeading,
@@ -23,6 +24,7 @@ import type {
   RulesCatalog,
   RuleSearchDocument,
 } from '../shared/contracts/rules.ts';
+import { buildRulesIndex } from '../web/rules/search.ts';
 import { inspectCompendium } from './build-content.ts';
 import { splitFrontmatter } from './lib/frontmatter.ts';
 import { slugify } from './lib/markdown.ts';
@@ -33,7 +35,7 @@ import {
 } from '../shared/presentation/content.ts';
 
 const ROOT = fileURLToPath(new URL('../', import.meta.url));
-const GENERATOR = 'rules.2-core';
+const GENERATOR = 'rules.3-chunks-index';
 export const BOOKS = [
   {
     id: 'heroes',
@@ -300,6 +302,28 @@ export function renderArticle(
   return { html: html.stringify(rendered), headings, unresolved };
 }
 
+/** Split only between complete top-level elements, preserving tables and source structure. */
+export function articleParts(html: string, budget = 128_000): string[] {
+  if (Buffer.byteLength(html) <= budget) return [html];
+  const processor = unified().use(rehypeRaw).use(rehypeStringify);
+  const tree = processor.runSync({
+    type: 'root',
+    children: [{ type: 'raw', value: html }],
+  }) as HtmlRoot;
+  const parts: string[] = [];
+  let current = '';
+  for (const node of tree.children) {
+    const fragment = String(processor.stringify({ type: 'root', children: [node] }));
+    if (current && Buffer.byteLength(current) + Buffer.byteLength(fragment) > budget) {
+      parts.push(current);
+      current = '';
+    }
+    current += fragment;
+  }
+  if (current) parts.push(current);
+  return parts;
+}
+
 export function buildRules() {
   const { revision } = inspectCompendium(ROOT);
   const blobs = readSources(revision);
@@ -367,7 +391,7 @@ export function buildRules() {
     );
     for (const target of rendered.unresolved) broken.push(`${source.path}: ${target}`);
     const category = source.kind;
-    const file = `${source.book}-${category}.json`;
+    const file = `articles/${createHash('sha256').update(source.id).digest('hex').slice(0, 20)}.json`;
     const excerpt = plainText(source.raw).slice(0, 230);
     entries.push({
       id: source.id,
@@ -407,16 +431,57 @@ export function buildRules() {
       count: entries.filter(e => e.category === id).length,
     }))
     .sort((a, b) => a.name.localeCompare(b.name));
+  const searchIndex = JSON.stringify(buildRulesIndex(search));
+  const excerptPageSize = 50;
+  const articleChunkBytes = 128_000;
   const version = createHash('sha256')
-    .update(revision + GENERATOR + JSON.stringify({ articles, search, entries }))
+    .update(
+      revision +
+        GENERATOR +
+        JSON.stringify({ articles, searchIndex, entries, excerptPageSize, articleChunkBytes }),
+    )
     .digest('hex')
     .slice(0, 16);
   const catalog: RulesCatalog = { revision, version, books: BOOKS, categories, entries };
   const outputs = new Map<string, string>();
-  outputs.set('catalog.json', JSON.stringify(catalog));
-  outputs.set(`${version}/search.json`, JSON.stringify(search));
-  for (const [file, content] of Object.entries(articles))
-    outputs.set(`${version}/${file}`, JSON.stringify(content));
+  // The current manifest is small; excerpts and complete articles load only for visible entries.
+  const ordered = [...entries].sort(
+    (a, b) => a.name.localeCompare(b.name) || a.id.localeCompare(b.id),
+  );
+  const excerptFiles = new Map<string, string>();
+  for (let start = 0; start < ordered.length; start += excerptPageSize) {
+    const page = ordered.slice(start, start + excerptPageSize);
+    const file = `excerpts/${start / excerptPageSize}.json`;
+    for (const entry of page) excerptFiles.set(entry.id, file);
+    outputs.set(
+      `${version}/${file}`,
+      JSON.stringify(Object.fromEntries(page.map(e => [e.id, e.excerpt]))),
+    );
+  }
+  outputs.set(
+    'catalog.json',
+    JSON.stringify({
+      ...catalog,
+      entries: entries.map(({ excerpt: _excerpt, sourceUrl: _url, ...entry }) => ({
+        ...entry,
+        excerptFile: excerptFiles.get(entry.id),
+      })),
+    }),
+  );
+  outputs.set(`${version}/search-index.json`, searchIndex);
+  for (const [file, content] of Object.entries(articles)) {
+    const article = content[0];
+    const chunks = articleParts(article.html, articleChunkBytes);
+    const parts = chunks.slice(1).map((html, i) => {
+      const partFile = file.replace('.json', `-${i + 1}.json`);
+      outputs.set(`${version}/${partFile}`, JSON.stringify({ html }));
+      return { file: partFile, ids: [...html.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]) };
+    });
+    outputs.set(
+      `${version}/${file}`,
+      JSON.stringify([{ ...article, html: chunks[0], ...(parts.length ? { parts } : {}) }]),
+    );
+  }
   const creatures = entries.filter(
     e => e.book === 'monsters' || /retainer|companion|summon/.test(e.path),
   );
@@ -447,11 +512,7 @@ function run() {
   const { outputs, catalog } = buildRules();
   const directory = join(ROOT, 'public/rules-data');
   const check = process.argv.includes('--check');
-  if (!check) {
-    mkdirSync(directory, { recursive: true });
-    for (const file of readdirSync(directory))
-      rmSync(join(directory, file), { recursive: true, force: true });
-  }
+  if (!check) mkdirSync(directory, { recursive: true });
   for (const [path, text] of outputs) {
     const file = join(directory, path);
     if (check) {
@@ -461,6 +522,12 @@ function run() {
       mkdirSync(dirname(file), { recursive: true });
       writeFileSync(file, text);
     }
+  }
+  if (!check) {
+    // Preserve the current tree so a running Vite watcher keeps tracking these assets.
+    for (const file of readdirSync(directory))
+      if (![catalog.version, 'catalog.json', 'audit.json'].includes(file))
+        rmSync(join(directory, file), { recursive: true, force: true });
   }
   console.log(
     `${check ? 'Verified' : 'Ingested'} ${catalog.entries.length} entries, ${catalog.categories.length} categories from ${catalog.revision.slice(0, 12)}. No unresolved links.`,

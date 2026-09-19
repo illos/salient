@@ -1,0 +1,108 @@
+$ eslint . && prettier --check .
+Checking formatting...
+All matched files use Prettier code style!
+$ pnpm rules:ingest && tsc -p tsconfig.web.json && vite build && node scripts/check-web-budget.ts
+$ node scripts/ingest-rules.ts && node scripts/build-foes-assets.ts
+Ingested 2614 entries, 26 categories from fb83a789da8f. No unresolved links.
+Foe delivery: 2507 entries; version ab2c43b79669b916
+vite v8.3.0 building client environment for production...
+transforming...
+✓ 2855 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                                         1.92 kB │ gzip:   0.76 kB
+dist/.vite/manifest.json                                               10.59 kB │ gzip:   1.51 kB
+dist/assets/search.worker-Bi7Y7SQU.js                                  18.32 kB
+dist/assets/search.worker-k8EMhjsh.js                                  19.13 kB
+dist/assets/schibsted-grotesk-latin-ext-wght-normal-hsMS0n0O.woff2     20.92 kB
+dist/assets/DrawSteelGlyphs-Regular-Bxmll151.otf                       21.63 kB
+dist/assets/schibsted-grotesk-latin-wght-normal-Bb8VGrTG.woff2         46.75 kB
+dist/assets/reference-C1jW4vvI.css                                      0.75 kB │ gzip:   0.39 kB
+dist/assets/foes-BGgFncNM.css                                           3.96 kB │ gzip:   1.16 kB
+dist/assets/rules-6fkgoGTZ.css                                         12.26 kB │ gzip:   2.86 kB
+dist/assets/index-DxiTn9UT.css                                         90.18 kB │ gzip:  16.38 kB
+dist/assets/arrow-left-2SZjxN2W.js                                      0.19 kB │ gzip:   0.17 kB
+dist/assets/external-link-BnffAPVo.js                                   0.27 kB │ gzip:   0.21 kB
+dist/assets/useNavigate-BhLc6pKf.js                                     0.31 kB │ gzip:   0.23 kB
+dist/assets/pill-D-biTKKB.js                                            0.50 kB │ gzip:   0.33 kB
+dist/assets/preview-CtJspceY.js                                         0.96 kB │ gzip:   0.57 kB
+dist/assets/worker-client-BLect5SJ.js                                   1.22 kB │ gzip:   0.74 kB
+dist/assets/composite-D3Fn7Vkj.js                                       2.94 kB │ gzip:   1.14 kB
+dist/assets/x-D0KqTHUP.js                                               3.23 kB │ gzip:   1.57 kB
+dist/assets/useStore-CuFll-SH.js                                        3.26 kB │ gzip:   1.51 kB
+dist/assets/event-links-BX7a4Rh3.js                                     3.47 kB │ gzip:   1.53 kB
+dist/assets/preview-IjSjVU44.js                                         3.67 kB │ gzip:   1.58 kB
+dist/assets/password-recovery-Bsl8eHDx.js                               3.76 kB │ gzip:   1.48 kB
+dist/assets/article-ByJ-9n60.js                                         4.50 kB │ gzip:   1.97 kB
+dist/assets/characters-CbvLwzF1.js                                      7.99 kB │ gzip:   2.63 kB
+dist/assets/with-selector-D-Vjxtnh.js                                  10.92 kB │ gzip:   4.10 kB
+dist/assets/foes-R86cRKWM.js                                           12.31 kB │ gzip:   4.41 kB
+dist/assets/rules-46dPKI6K.js                                          13.45 kB │ gzip:   4.39 kB
+dist/assets/progression-Bj9kTpiI.js                                    14.72 kB │ gzip:   5.23 kB
+dist/assets/overlay-card-6eKCJnk8.js                                   18.12 kB │ gzip:   6.88 kB
+dist/assets/campaigns-CMJbyNk3.js                                      30.11 kB │ gzip:   7.99 kB
+dist/assets/auth-client-BbzxrGAW.js                                    30.33 kB │ gzip:  11.46 kB
+dist/assets/reference-B-jjzpYZ.js                                      32.32 kB │ gzip:  11.03 kB
+dist/assets/createBaseUIEventDetails-ELM1N8LF.js                       34.84 kB │ gzip:  14.32 kB
+dist/assets/character-sheet-D5Er12UP.js                                46.69 kB │ gzip:  12.20 kB
+dist/assets/table-DD7UuO14.js                                          76.73 kB │ gzip:  20.51 kB
+dist/assets/ui-W_vUS40d.js                                             82.91 kB │ gzip:  24.33 kB
+dist/assets/wizard-C3PUZB96.js                                         99.08 kB │ gzip:  26.25 kB
+dist/assets/index-D9y4VYHA.js                                         321.40 kB │ gzip: 103.74 kB
+dist/assets/supporting-components-U_9xkZ_j.js                       1,014.27 kB │ gzip: 216.22 kB
+
+✓ built in 3.59s
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+[PLUGIN_TIMINGS] Plugin hooks ran for 3.4s of this 3.6s build (96%).
+The slowest hooks, timed inside each callback (the wait before a callback starts is excluded, the time it awaits is included):
+  - vite:css transform (80%, 2.9s, 6 calls)
+Additional hook time came from the hooks below and from hooks under 1s.
+2 hooks are listed without a time. Their calls overlapped, so the time inside one call includes work from other calls. To find their cost, profile the build with `node --cpu-prof`:
+  - @tailwindcss/vite:generate:build transform (6 calls)
+  - vite:worker-import-meta-url transform (2 calls)
+See https://rolldown.rs/reference/InputOptions.checks#plugintimings for more details.
+
+{
+  "initial": {
+    "raw": 490191,
+    "gzip": 160921
+  },
+  "assets": [
+    "assets/index-D9y4VYHA.js",
+    "assets/with-selector-D-Vjxtnh.js",
+    "assets/ui-W_vUS40d.js",
+    "assets/createBaseUIEventDetails-ELM1N8LF.js",
+    "assets/x-D0KqTHUP.js",
+    "assets/useStore-CuFll-SH.js",
+    "assets/useNavigate-BhLc6pKf.js",
+    "assets/auth-client-BbzxrGAW.js",
+    "assets/composite-D3Fn7Vkj.js"
+  ],
+  "rules": {
+    "catalog": {
+      "raw": 982599,
+      "gzip": 112848
+    },
+    "index": {
+      "raw": 5463389,
+      "gzip": 1411557
+    },
+    "largestContinuation": 135780,
+    "largestInitialArticle": 415705
+  },
+  "foes": {
+    "catalog": {
+      "raw": 877715,
+      "gzip": 101309
+    },
+    "index": {
+      "raw": 1484171,
+      "gzip": 373816
+    },
+    "largestDetail": 55297
+  }
+}

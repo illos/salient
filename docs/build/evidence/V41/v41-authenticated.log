@@ -1,0 +1,8 @@
+
+Running 4 tests using 1 worker
+
+[1/4] tests/browser/journey.spec.ts:16:1 › accounts, invitation approval, session lifecycle, private draft persistence and reconnect
+[2/4] tests/browser/v38-library-navigation.spec.ts:5:1 › primary navigation exposes independent Rules and Foes libraries
+[3/4] tests/browser/v40-unsaved-wizard.spec.ts:8:1 › unsaved wizard creates nothing until first explicit save, then edits the same character
+[4/4] tests/browser/v42-primary-choice.spec.ts:8:1 › primary choices collapse, edit without loss, prune on replacement and reopen saved
+  4 passed (1.3m)

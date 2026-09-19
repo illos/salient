@@ -1,6 +1,6 @@
 import { foesSearch } from './foes/filters';
 // SPDX-License-Identifier: GPL-3.0-only
-import { lazy, Suspense, useEffect, useState } from 'react';
+import { Component, lazy, Suspense, useEffect, useRef, useState, type ReactNode } from 'react';
 import {
   createRootRoute,
   createRoute,
@@ -14,12 +14,30 @@ import { useConvex, useConvexAuth, useMutation, useQuery } from 'convex/react';
 import { api } from '../convex/_generated/api';
 import type { Id } from '../convex/_generated/dataModel';
 import { authClient } from './auth-client';
-import { ForgotPassword, ResetPassword } from './password-recovery';
-import { CampaignPage, CampaignsPage, JoinPage } from './campaigns';
-import { CharacterPage, CharactersPage } from './characters';
-import { WizardPage } from './wizard';
-import { ProgressionPage } from './progression';
-import { TablePage } from './table';
+const ForgotPassword = lazy(() =>
+  import('./password-recovery').then(module => ({ default: module.ForgotPassword })),
+);
+const ResetPassword = lazy(() =>
+  import('./password-recovery').then(module => ({ default: module.ResetPassword })),
+);
+const CampaignPage = lazy(() =>
+  import('./campaigns').then(module => ({ default: module.CampaignPage })),
+);
+const CampaignsPage = lazy(() =>
+  import('./campaigns').then(module => ({ default: module.CampaignsPage })),
+);
+const JoinPage = lazy(() => import('./campaigns').then(module => ({ default: module.JoinPage })));
+const CharacterPage = lazy(() =>
+  import('./characters').then(module => ({ default: module.CharacterPage })),
+);
+const CharactersPage = lazy(() =>
+  import('./characters').then(module => ({ default: module.CharactersPage })),
+);
+const WizardPage = lazy(() => import('./wizard').then(module => ({ default: module.WizardPage })));
+const ProgressionPage = lazy(() =>
+  import('./progression').then(module => ({ default: module.ProgressionPage })),
+);
+const TablePage = lazy(() => import('./table').then(module => ({ default: module.TablePage })));
 import { Button } from './components/ui/button';
 import { Card, CardContent } from './components/ui/card';
 import { Input } from './components/ui/input';
@@ -58,12 +76,12 @@ function Wordmark() {
   );
 }
 
-function TopNav({ displayName }: { displayName: string }) {
+function TopNav({ displayName }: { displayName?: string }) {
   const navItem =
     'caps flex h-14 items-center border-b-2 border-transparent px-1 text-muted-foreground transition-colors duration-(--motion-fast) hover:text-foreground hover:no-underline data-[status=active]:border-primary data-[status=active]:text-foreground';
   return (
-    <header className="rule-strong sticky top-0 z-40 bg-background">
-      <div className="mx-auto flex max-w-[1460px] items-center gap-6 px-9">
+    <header className="site-nav rule-strong sticky top-0 z-40 bg-background">
+      <div className="site-nav-inner mx-auto flex max-w-[1460px] items-center gap-6 px-9">
         <Wordmark />
         <span aria-hidden className="h-6 w-px bg-rule-strong" />
         <nav aria-label="Primary" className="flex items-center gap-5">
@@ -81,10 +99,18 @@ function TopNav({ displayName }: { displayName: string }) {
           </Link>
         </nav>
         <div className="ml-auto flex items-center gap-4">
-          <ConnectionStatus />
+          {displayName && <ConnectionStatus />}
           <ThemeSwitch />
-          <span className="text-sm">{displayName}</span>
-          <SignOut />
+          {displayName ? (
+            <>
+              <span className="site-user-name text-sm">{displayName}</span>
+              <SignOut />
+            </>
+          ) : (
+            <Link to="/login" search={{ next: '/' }}>
+              Sign in
+            </Link>
+          )}
         </div>
       </div>
     </header>
@@ -99,6 +125,57 @@ export function isTableRoute(path: string): boolean {
 /** `/characters/:id/wizard` renders the wizard header (web/wizard/header.tsx) instead of the site nav. */
 export function isWizardRoute(path: string): boolean {
   return /^\/characters\/[^/]+\/wizard\/?$/.test(path);
+}
+
+class PageBoundary extends Component<{ children: ReactNode }, { failed: boolean }> {
+  state = { failed: false };
+  static getDerivedStateFromError() {
+    return { failed: true };
+  }
+  render() {
+    return this.state.failed ? (
+      <div className="p-8" role="alert">
+        This page could not load.{' '}
+        <Button onClick={() => window.location.reload()}>Try again</Button>
+      </div>
+    ) : (
+      this.props.children
+    );
+  }
+}
+function PageOutlet() {
+  const path = useRouterState({ select: state => state.location.pathname });
+  return (
+    <PageBoundary key={path}>
+      <Suspense fallback={<Loading>Opening page…</Loading>}>
+        <Outlet />
+      </Suspense>
+    </PageBoundary>
+  );
+}
+
+function ReferenceShell() {
+  const shell = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const container = shell.current!;
+    const header = container.querySelector('header')!;
+    const observer = new ResizeObserver(() =>
+      container.style.setProperty(
+        '--reference-nav-height',
+        `${header.getBoundingClientRect().height}px`,
+      ),
+    );
+    observer.observe(header);
+    return () => observer.disconnect();
+  }, []);
+  const { isAuthenticated } = useConvexAuth();
+  const viewer = useQuery(api.auth.viewer, isAuthenticated ? {} : 'skip');
+  return (
+    <div className="reference-shell" ref={shell}>
+      <TopNav displayName={viewer?.displayName} />
+      <PageOutlet />
+    </div>
+  );
 }
 
 function ProfileGate({ path }: { path: string }) {
@@ -117,12 +194,12 @@ function ProfileGate({ path }: { path: string }) {
       </CenteredPage>
     );
   // V21: the table and the wizard are full-viewport frames with their own headers; no site nav.
-  if (isTableRoute(path) || isWizardRoute(path)) return <Outlet key={viewer.userId} />;
+  if (isTableRoute(path) || isWizardRoute(path)) return <PageOutlet key={viewer.userId} />;
   return (
     <div className="flex min-h-screen flex-col" key={viewer.userId}>
       <TopNav displayName={viewer.displayName} />
       <main className="mx-auto w-full max-w-[1460px] flex-1 px-9 pt-8 pb-16">
-        <Outlet />
+        <PageOutlet />
       </main>
       <footer className="mx-auto w-full max-w-[1460px] px-9 pb-6">
         <span className="eyebrow">v0.01 · pre-alpha</span>
@@ -143,13 +220,13 @@ function CenteredPage({ children }: { children: React.ReactNode }) {
 function Shell() {
   const { isAuthenticated, isLoading } = useConvexAuth();
   const path = useRouterState({ select: state => state.location.pathname });
-  if (path === '/foes') return <Outlet />;
-  if (path === '/rules' || path.startsWith('/rules/')) return <Outlet />;
-  if (['/login', '/forgot-password', '/reset-password'].includes(path)) return <Outlet />;
+  if (path === '/foes') return <ReferenceShell />;
+  if (path === '/rules' || path.startsWith('/rules/')) return <ReferenceShell />;
+  if (['/login', '/forgot-password', '/reset-password'].includes(path)) return <PageOutlet />;
   if (path.startsWith('/join/') && !isAuthenticated)
     return (
       <CenteredPage>
-        <Outlet />
+        <PageOutlet />
       </CenteredPage>
     );
   if (isLoading)

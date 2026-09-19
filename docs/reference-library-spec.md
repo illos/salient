@@ -154,3 +154,11 @@ Wizard labels are presentation metadata, independent of decision IDs. Cleanup re
 existing ability ID to support the same card. Current privacy projections and gameplay operations
 remain unchanged. Historical rule icons read the current pinned library; stored event snapshots
 remain available as historical evidence in data.
+
+## Reference loading and navigation — 2026-09-19
+
+User-confirmed after the hosted performance audit: Rules and Foes share the application's primary navigation; library-specific search and filters sit below it. Public reading remains available without an account. Moving between app/reference views should retain the document and load only new view requirements.
+
+Page code is lazy loaded. Large reference libraries deliver compact listing metadata first and progressively fetch the required snippets/details; unrelated content must not block the page. Search indexes are generated at build time from the pinned common corpus, loaded off the main thread, and retained across reference navigation. Cache immutable content by version while revalidating the current manifest and app shell. Preserve relevance, source identities, attribution, deep links and complete supported reference coverage.
+
+Table query/history changes are separate from this reference delivery assignment.

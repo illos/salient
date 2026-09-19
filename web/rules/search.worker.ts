@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: GPL-3.0-only
-import { createRulesSearch } from './search';
+import MiniSearch from 'minisearch';
+import { rulesSearchOptions, searchRulesIndex } from './search';
 import type { RuleSearchDocument } from '../../shared/contracts/rules';
-
-let loaded: Promise<ReturnType<typeof createRulesSearch>> | undefined;
+let loaded: { version: string; promise: Promise<ReturnType<typeof searchRulesIndex>> } | undefined;
 self.onmessage = async (
   event: MessageEvent<{
     sequence: number;
@@ -14,16 +14,22 @@ self.onmessage = async (
 ) => {
   const { sequence, version, query, book, category } = event.data;
   try {
-    loaded ??= fetch(`/rules-data/${version}/search.json`)
-      .then(async response => {
+    if (loaded?.version !== version) {
+      const promise = fetch(`/rules-data/${version}/search-index.json`).then(async response => {
         if (!response.ok) throw new Error('Search is unavailable. Please try again.');
-        return createRulesSearch((await response.json()) as RuleSearchDocument[]);
-      })
-      .catch(error => {
-        loaded = undefined;
-        throw error;
+        return searchRulesIndex(
+          await MiniSearch.loadJSONAsync<RuleSearchDocument>(
+            await response.text(),
+            rulesSearchOptions,
+          ),
+        );
       });
-    const search = await loaded;
+      loaded = { version, promise };
+      void promise.catch(() => {
+        if (loaded?.promise === promise) loaded = undefined;
+      });
+    }
+    const search = await loaded.promise;
     self.postMessage({ sequence, results: search(query, { book, category }) });
   } catch (error) {
     self.postMessage({

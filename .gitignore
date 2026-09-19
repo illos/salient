@@ -17,3 +17,6 @@ public/rules-data/
 # Local Core-book reference scans and upstream archives.
 docs/design-mockups/v1/reference/*
 !docs/design-mockups/v1/reference/README.md
+
+public/foes-data/
+public/_headers

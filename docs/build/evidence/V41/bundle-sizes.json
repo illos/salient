@@ -1,0 +1,40 @@
+{
+  "initial": {
+    "raw": 490191,
+    "gzip": 160921
+  },
+  "assets": [
+    "assets/index-D9y4VYHA.js",
+    "assets/with-selector-D-Vjxtnh.js",
+    "assets/ui-W_vUS40d.js",
+    "assets/createBaseUIEventDetails-ELM1N8LF.js",
+    "assets/x-D0KqTHUP.js",
+    "assets/useStore-CuFll-SH.js",
+    "assets/useNavigate-BhLc6pKf.js",
+    "assets/auth-client-BbzxrGAW.js",
+    "assets/composite-D3Fn7Vkj.js"
+  ],
+  "rules": {
+    "catalog": {
+      "raw": 982599,
+      "gzip": 112848
+    },
+    "index": {
+      "raw": 5463389,
+      "gzip": 1411557
+    },
+    "largestContinuation": 135780,
+    "largestInitialArticle": 415705
+  },
+  "foes": {
+    "catalog": {
+      "raw": 877715,
+      "gzip": 101309
+    },
+    "index": {
+      "raw": 1484171,
+      "gzip": 373816
+    },
+    "largestDetail": 55297
+  }
+}

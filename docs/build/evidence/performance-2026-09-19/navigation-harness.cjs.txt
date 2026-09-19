@@ -1,0 +1,30 @@
+const {createRequire}=require('node:module');const {chromium}=createRequire('/app/package.json')('@playwright/test');const fs=require('node:fs');const crypto=require('node:crypto');
+const origin='https://salient-dev.rdxx.workers.dev',out='/artifacts/performance-audit';
+(async()=>{const browser=await chromium.launch();const context=await browser.newContext({viewport:{width:1440,height:1000},storageState:out+'/auth-state.json'});const page=await context.newPage();page.setDefaultTimeout(45000);const records=[],ws=[],requests=[],errors=[];let phase='setup';
+await page.addInitScript(()=>{window.__long=[];new PerformanceObserver(l=>window.__long.push(...l.getEntries().map(e=>({start:e.startTime,duration:e.duration})))).observe({type:'longtask',buffered:true});});
+page.on('pageerror',e=>errors.push({phase,message:e.message}));
+page.on('requestfinished',async r=>{const response=await r.response();requests.push({phase,url:r.url().replace(/\?.*$/,''),method:r.method(),status:response?.status(),timing:r.timing(),sizes:await r.sizes().catch(()=>null)});});
+page.on('websocket',socket=>{const queries=new Map();socket.on('framesent',({payload})=>{try{const m=JSON.parse(payload);if(m.type==='ModifyQuerySet')for(const q of m.modifications){if(q.type==='Add'){queries.set(q.queryId,{name:q.udfPath,sent:Date.now()});ws.push({phase,event:'subscribe',name:q.udfPath,id:q.queryId,time:Date.now()});}else ws.push({phase,event:'unsubscribe',id:q.queryId,time:Date.now()});}}catch{}});socket.on('framereceived',({payload})=>{try{const m=JSON.parse(payload);for(const q of m.modifications||[]){const meta=queries.get(q.queryId);ws.push({phase,event:q.type,name:meta?.name,id:q.queryId,sinceSubscribe:meta?Date.now()-meta.sent:null,bytes:Buffer.byteLength(JSON.stringify(q.value??null)),logs:q.logLines,time:Date.now()});}}catch{}});});
+function save(){fs.writeFileSync(out+'/navigation.json',JSON.stringify({records,ws,requests,errors},null,2));}
+async function measure(label,action,ready){phase=label;const start=Date.now(),timeOrigin=await page.evaluate(()=>performance.timeOrigin);await action();await ready();const elapsed=Date.now()-start;const data=await page.evaluate(()=>({timeOrigin:performance.timeOrigin,now:performance.now(),long:window.__long,heap:performance.memory?.usedJSHeapSize,resources:performance.getEntriesByType('resource').map(e=>({name:e.name,start:e.startTime,duration:e.duration,transfer:e.transferSize,decoded:e.decodedBodySize}))}));records.push({label,elapsed,reloaded:timeOrigin!==data.timeOrigin,...data});save();console.log(JSON.stringify({label,elapsed,reloaded:timeOrigin!==data.timeOrigin}));await page.waitForTimeout(300);}
+const {campaign}=JSON.parse(fs.readFileSync(out+'/fixture.json'));await page.goto(campaign);await page.getByRole('heading',{name:'Performance audit 2026-09-19',exact:true}).waitFor();await page.getByRole('button',{name:'Start session',exact:true}).click();await page.getByRole('button',{name:'Pause session',exact:true}).waitFor();
+for(let i=0;i<3;i++){
+ await measure('campaign-to-empty-table-'+i,()=>page.getByRole('link',{name:'Open the table',exact:true}).click(),()=>page.locator('[data-pane=director]').waitFor());
+ await measure('table-to-campaign-'+i,()=>page.getByRole('link',{name:'Performance audit 2026-09-19',exact:true}).click(),()=>page.getByRole('heading',{name:'Performance audit 2026-09-19',exact:true}).waitFor());
+}
+for(let i=0;i<6;i++){await page.getByRole('button',{name:'Add foe',exact:true}).click();await page.waitForTimeout(500);}
+for(let i=0;i<3;i++){
+ await measure('campaign-to-six-foe-table-'+i,()=>page.getByRole('link',{name:'Open the table',exact:true}).click(),()=>page.locator('[data-pane=director]').waitFor());await page.waitForTimeout(800);
+ await measure('table-log-to-rolls-'+i,()=>page.getByRole('tab',{name:'Rolls',exact:true}).click(),()=>page.locator('[data-log-feed][data-tab=rolls]').waitFor());
+ await measure('table-open-rules-'+i,()=>page.getByRole('tab',{name:'Rules',exact:true}).click(),()=>page.getByRole('dialog').waitFor());await page.keyboard.press('Escape');
+ await measure('six-foe-table-to-campaign-'+i,()=>page.getByRole('link',{name:'Performance audit 2026-09-19',exact:true}).click(),()=>page.getByRole('heading',{name:'Performance audit 2026-09-19',exact:true}).waitFor());
+}
+for(let i=0;i<3;i++){
+ await measure('app-to-rules-'+i,()=>page.getByRole('link',{name:'Rules',exact:true}).click(),()=>page.locator('.rules-intro').waitFor());
+ await measure('rules-to-foes-'+i,()=>page.getByRole('link',{name:'Foes library',exact:true}).click(),()=>page.locator('[data-foe-id]').first().waitFor());
+ await measure('foes-open-card-'+i,()=>page.locator('[data-foe-id]').first().click(),()=>page.getByRole('dialog').waitFor());await page.keyboard.press('Escape');
+ await measure('foes-to-rules-'+i,()=>page.getByRole('link',{name:'Rules index'}).click(),()=>page.locator('.rules-intro').waitFor());
+ await measure('rules-to-app-'+i,()=>page.getByRole('link',{name:'Back to app'}).click(),()=>page.getByRole('heading',{name:'Campaigns',exact:true}).waitFor());
+}
+await page.goto(campaign+'/table');await page.locator('[data-pane=director]').waitFor();await page.screenshot({path:out+'/table.png'});await context.storageState({path:out+'/auth-state.json'});fs.chmodSync(out+'/auth-state.json',0o600);save();await browser.close();
+})().catch(e=>{console.error(e);process.exit(1)});

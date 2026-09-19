@@ -10,6 +10,7 @@ export interface RuleSummary {
   classification: 'core';
   order?: number;
   excerpt: string;
+  excerptFile?: string;
   file: string;
   sourcePath: string;
   /** Upstream SCC permalink, independent of our application routes. */
@@ -27,6 +28,7 @@ export interface RuleArticle {
   id: string;
   html: string;
   headings: RuleHeading[];
+  parts?: { file: string; ids: string[] }[];
 }
 
 export interface RulesCatalog {

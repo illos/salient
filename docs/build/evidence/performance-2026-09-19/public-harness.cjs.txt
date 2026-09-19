@@ -1,0 +1,28 @@
+const {createRequire}=require('node:module');
+const requireApp=createRequire('/app/package.json');
+const {chromium}=requireApp('@playwright/test');
+const fs=require('node:fs');
+const origin='https://salient-dev.rdxx.workers.dev';
+const output='/artifacts/performance-audit';fs.mkdirSync(output,{recursive:true});
+(async()=>{
+ const browser=await chromium.launch({headless:true});
+ const records=[];
+ async function instrument(page){
+  await page.addInitScript(()=>{window.__long=[];new PerformanceObserver(l=>window.__long.push(...l.getEntries().map(e=>({start:e.startTime,duration:e.duration})))).observe({type:'longtask',buffered:true});});
+ }
+ async function measure(page,label,action,selector){
+  const start=Date.now();const baseline=await page.evaluate(()=>performance.now()).catch(()=>0);
+  await action(); await page.locator(selector).first().waitFor({state:'visible',timeout:60000});
+  const elapsed=Date.now()-start;
+  await page.waitForTimeout(350);
+  const data=await page.evaluate(()=>({url:location.href,nav:performance.getEntriesByType('navigation').map(e=>e.toJSON()),resources:performance.getEntriesByType('resource').map(e=>({name:e.name,start:e.startTime,duration:e.duration,transfer:e.transferSize,encoded:e.encodedBodySize,decoded:e.decodedBodySize})),long:window.__long,paint:performance.getEntriesByType('paint').map(e=>e.toJSON()),dom:document.querySelectorAll('*').length}));
+  records.push({label,elapsed,baseline,...data});fs.writeFileSync(output+'/public.json',JSON.stringify(records,null,2));console.log(JSON.stringify({label,elapsed,long:data.long,resources:data.resources.map(e=>({name:e.name.replace(origin,''),ms:Math.round(e.duration),transfer:e.transfer,decoded:e.decoded})),dom:data.dom}));
+ }
+ for(let i=0;i<3;i++)for(const [path,selector]of [['/login','input[name=email]'],['/rules','.rules-intro'],['/foes','[data-foe-id]']]){
+  const context=await browser.newContext({viewport:{width:1440,height:1000}});const page=await context.newPage();await instrument(page);
+  await measure(page,`cold-${path}-${i+1}`,()=>page.goto(origin+path),selector);
+  if(i===0){await page.screenshot({path:output+'/'+path.slice(1)+'.png'});fs.writeFileSync(output+'/'+path.slice(1)+'.txt',await page.locator('body').innerText());}
+  await context.close();
+ }
+ await browser.close();
+})().catch(e=>{console.error(e);process.exit(1)});

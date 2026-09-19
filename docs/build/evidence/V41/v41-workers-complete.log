@@ -1,0 +1,33 @@
+[WebServer] Progress: resolved 1, reused 0, downloaded 0, added 0
+
+[WebServer] Progress: resolved 38, reused 0, downloaded 9, added 0
+
+[WebServer] Packages: +35
+[WebServer] +++++++++++++++++++++++++++++++++++
+
+[WebServer] Progress: resolved 91, reused 0, downloaded 35, added 33
+
+[WebServer] Progress: resolved 91, reused 0, downloaded 37, added 34
+
+[WebServer] Progress: resolved 91, reused 0, downloaded 38, added 34
+
+[WebServer] Progress: resolved 91, reused 0, downloaded 38, added 35, done
+
+
+Running 14 tests using 1 worker
+
+[1/14] tests/browser/foes.spec.ts:3:1 › public foes search, independent cards, navigation, dismissal and themes
+[2/14] tests/browser/foes.spec.ts:71:1 › second-echelon references preserve independent features and correct Malice navigation
+[3/14] tests/browser/reference-cache.spec.ts:3:1 › Workers serves immutable versioned content and revalidates current manifests
+[4/14] tests/browser/reference-performance.spec.ts:4:1 › public navigation keeps its document and fetches only requested reference content
+[5/14] tests/browser/reference-performance.spec.ts:64:1 › failed detail downloads retry without losing the list or navigation
+[6/14] tests/browser/reference-performance.spec.ts:79:1 › catalog failure preserves shared navigation and supports retry
+[7/14] tests/browser/reference-performance.spec.ts:96:1 › article failure is local and section links stay below the shared headers
+[8/14] tests/browser/reference-performance.spec.ts:116:1 › a cleared search cannot resurrect delayed results
+[9/14] tests/browser/reference-performance.spec.ts:145:1 › a failed search index retries
+[10/14] tests/browser/reference-performance.spec.ts:159:1 › large chapter opening stays usable while later sections are delayed and retryable
+[11/14] tests/browser/rules.spec.ts:4:1 › public rules search, readable articles, original sources and browser history
+[12/14] tests/browser/rules.spec.ts:34:1 › chapter contents, cross-references, topic filters and mobile navigation
+[13/14] tests/browser/reference-streaming.spec.ts:7:3 › late chapter anchors stay visible as preceding content streams in
+[14/14] tests/browser/reference-streaming.spec.ts:7:3 › late chapter anchors respect reader scrolling as preceding content streams in
+  14 passed (46.3s)

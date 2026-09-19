@@ -1,0 +1,56 @@
+[WebServer] Progress: resolved 1, reused 0, downloaded 0, added 0
+
+[WebServer] Progress: resolved 21, reused 0, downloaded 9, added 0
+
+[WebServer] Packages: +35
+[WebServer] +++++++++++++++++++++++++++++++++++
+
+[WebServer] Progress: resolved 91, reused 0, downloaded 32, added 3
+
+[WebServer] Progress: resolved 91, reused 0, downloaded 36, added 33
+
+[WebServer] Progress: resolved 91, reused 0, downloaded 37, added 34
+
+[WebServer] Progress: resolved 91, reused 0, downloaded 38, added 35, done
+
+
+Running 1 test using 1 worker
+
+[1/1] tests/browser/reference-performance.spec.ts:190:3 › late chapter anchors stay visible as preceding content streams in
+tests/browser/reference-performance.spec.ts:190:3 › late chapter anchors stay visible as preceding content streams in
+ANCHOR_DEBUG {
+  y: 601959,
+  hash: '#necro-beam',
+  height: 720,
+  scrolls: [
+    { id: 'necro-beam', y: 0, top: 25648.40625 },
+    { id: 'necro-beam', y: 25491, top: 157.40625 },
+    { id: 'necro-beam', y: 25491, top: 19563.53125 },
+    { id: 'necro-beam', y: 44898, top: 156.53125 },
+    { id: 'necro-beam', y: 44898, top: 51745.65625 },
+    { id: 'necro-beam', y: 96487, top: 156.65625 },
+    { id: 'necro-beam', y: 96487, top: 55409.046875 },
+    { id: 'necro-beam', y: 151739, top: 157.046875 },
+    { id: 'necro-beam', y: 151739, top: 51777.125 },
+    { id: 'necro-beam', y: 203359, top: 157.125 },
+    { id: 'necro-beam', y: 203359, top: 50428.984375 },
+    { id: 'necro-beam', y: 253631, top: 156.984375 },
+    { id: 'necro-beam', y: 253631, top: 49245.515625 },
+    { id: 'necro-beam', y: 302720, top: 156.515625 },
+    { id: 'necro-beam', y: 302720, top: 50530.921875 },
+    { id: 'necro-beam', y: 353094, top: 156.921875 },
+    { id: 'necro-beam', y: 353094, top: 51336.453125 },
+    { id: 'necro-beam', y: 404273, top: 157.453125 },
+    { id: 'necro-beam', y: 404273, top: 46841.03125 },
+    { id: 'necro-beam', y: 450957, top: 157.03125 },
+    { id: 'necro-beam', y: 450957, top: 49121.015625 },
+    { id: 'necro-beam', y: 499921, top: 157.015625 },
+    { id: 'necro-beam', y: 499921, top: 53822.84375 },
+    { id: 'necro-beam', y: 553587, top: 156.84375 },
+    { id: 'necro-beam', y: 553587, top: 48528.984375 },
+    { id: 'necro-beam', y: 601959, top: 156.984375 }
+  ],
+  targets: [ { tag: 'H3', rect: [Object], parent: 'ds-feature' } ]
+}
+
+  1 passed (12.4s)

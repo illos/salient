@@ -1,6 +1,10 @@
 // SPDX-License-Identifier: GPL-3.0-only
 import MiniSearch, { type SearchResult } from 'minisearch';
-import type { RuleSearchDocument, RulesSearchResult } from '../../shared/contracts/rules';
+import type {
+  RuleSearchDocument,
+  RuleSummary,
+  RulesSearchResult,
+} from '../../shared/contracts/rules';
 
 export function normalizeQuery(text: string): string {
   return text
@@ -11,14 +15,24 @@ export function normalizeQuery(text: string): string {
     .trim();
 }
 
-export function createRulesSearch(documents: RuleSearchDocument[]) {
-  const byId = new Map(documents.map(d => [d.id, d]));
-  const index = new MiniSearch<RuleSearchDocument>({
-    fields: ['name', 'text'],
-    storeFields: ['name', 'book', 'category'],
-    processTerm: term => normalizeQuery(term),
-  });
+export const rulesSearchOptions = {
+  fields: ['name', 'text'],
+  storeFields: ['name', 'book', 'category', 'text'],
+  processTerm: normalizeQuery,
+};
+
+/** Build only: clients load the serialized index in a worker. */
+export function buildRulesIndex(documents: RuleSearchDocument[]) {
+  const index = new MiniSearch<RuleSearchDocument>(rulesSearchOptions);
   index.addAll(documents);
+  return index;
+}
+
+export function createRulesSearch(documents: RuleSearchDocument[]) {
+  return searchRulesIndex(buildRulesIndex(documents));
+}
+
+export function searchRulesIndex(index: MiniSearch<RuleSearchDocument>) {
   return (
     query: string,
     filters: { book?: string; category?: string } = {},
@@ -62,18 +76,43 @@ export function createRulesSearch(documents: RuleSearchDocument[]) {
       )
       .slice(0, 120)
       .map(result => {
-        const doc = byId.get(String(result.id))!;
+        const text = index.getStoredFields(String(result.id))!.text as string;
         const words = normalized.split(' ');
         const first =
           words
-            .map(w => doc.text.toLowerCase().indexOf(w))
+            .map(w => text.toLowerCase().indexOf(w))
             .filter(i => i >= 0)
             .sort((a, b) => a - b)[0] ?? 0;
         const start = Math.max(0, first - 65);
         return {
-          id: doc.id,
-          excerpt: `${start ? '…' : ''}${doc.text.slice(start, start + 220)}${doc.text.length > start + 220 ? '…' : ''}`,
+          id: String(result.id),
+          excerpt: `${start ? '…' : ''}${text.slice(start, start + 220)}${text.length > start + 220 ? '…' : ''}`,
         };
       });
   };
+}
+
+/** Catalogue title matches can render while the full-text worker downloads its index. */
+export function searchRuleTitles(
+  entries: RuleSummary[],
+  query: string,
+  filters: { book?: string; category?: string },
+): RulesSearchResult[] {
+  const normalized = normalizeQuery(query);
+  if (!normalized) return [];
+  const words = normalized.split(' ');
+  return entries
+    .filter(
+      entry =>
+        (!filters.book || entry.book === filters.book) &&
+        (!filters.category || entry.category === filters.category) &&
+        words.every(word => normalizeQuery(entry.name).includes(word)),
+    )
+    .sort(
+      (a, b) =>
+        Number(normalizeQuery(b.name) === normalized) -
+          Number(normalizeQuery(a.name) === normalized) || a.name.localeCompare(b.name),
+    )
+    .slice(0, 120)
+    .map(entry => ({ id: entry.id, excerpt: '' }));
 }
