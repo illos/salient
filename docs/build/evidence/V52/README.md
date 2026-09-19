@@ -36,21 +36,29 @@ diffing the runtime's `prettier --write` output before applying it locally.
 ## Focused specs — two attempts, and the first one failed
 
 **Attempt 1 failed and its full output was not preserved.** It ran `table-audit`, `v21-campaign`,
-`wizard` and `rule-popup` and failed inside `table-audit` waiting on the Goblin Warrior health
-progress bar — a failure unrelated to registration. The integration lead read it from the job
-container and holds the excerpt at
-`/srv/presidium/projects/salient/review-reports-20260919/v52-root-job-observation.md`; this thread
-does not. The loss was caused by stopping the local wrapper while believing the remote job was still
-in `pnpm check`: `presidium-dev` removes a job container on exit, so the container's stdout went
-with it. What survives here is the partial sign-up trace the run had already written,
-[`focused-attempt1-partial-signup-exchanges.json`](focused-attempt1-partial-signup-exchanges.json) —
-four registrations, all 200, all spaced 11820–11860 ms apart.
+`wizard` and `rule-popup` and failed inside `table-audit` on a foe health-display assertion. **The
+cause is unknown** — an earlier draft of this file called it "unrelated to registration", which was
+an assumption, not a finding. The integration lead read it from the job container before removal and
+holds the excerpt; a copy is retained here as
+[`attempt1-root-observation.md`](attempt1-root-observation.md). The loss was caused by stopping the
+local wrapper while believing the remote job was still in `pnpm check`: `presidium-dev` removes a
+job container on exit, so the container's stdout went with it.
+
+Its partial sign-up trace survives as
+[`focused-attempt1-partial-signup-exchanges.json`](focused-attempt1-partial-signup-exchanges.json):
+**4 rows**, all status 200, all observed and claimed, 3 gaps spanning **11820–11860 ms**. These are
+attempt 1's rows and are not part of attempt 2's counts.
 
 **Attempt 2 passed: 4 passed in 6.2m**, [`focused-four-specs.log`](focused-four-specs.log), with
-[`focused-attempt2-signup-exchanges.json`](focused-attempt2-signup-exchanges.json). Ten sign-ups,
-every one status 200, every one observed and claimed by the call that made it, **no unsolicited
-row**, and every gap from the previous response between 11812 and 11837 ms against the 11500 ms
-target. So the pacing does what it says.
+[`focused-attempt2-signup-exchanges.json`](focused-attempt2-signup-exchanges.json). Computed over
+every row rather than sampled: **10 rows**, all status 200, 10 of 10 observed, 10 of 10 claimed by
+the call that made them, and 9 gaps spanning **11812–70074 ms**. All exceed the 11500 ms quiet
+period; the large values are ordinary spec boundaries where no wait was needed, recorded with
+`reason: none`. An earlier draft quoted "11812–11837 ms", which was read off the `quiet-interval`
+rows alone and silently omitted the `none` rows — the range above is computed from all of them.
+
+**No row is an unclaimed observed response.** That is a narrower statement than "no other requests
+were made", which this record cannot support: it only sees responses on pages the helper watched.
 
 **What that does not establish.** All three previously-refused specs — `table-audit` and
 `v21-campaign` from V45 and V46, `wizard` from V43 — already passed in isolation on V46 with no
@@ -67,15 +75,53 @@ record**, and the empty file should not be read as "nothing happened".
 
 For the full suite the capture was moved to a `docker exec` against the already-running backend
 container — the sanctioned existing-container route — and confirmed to emit records before the run
-started.
+started. It worked: 10365 records.
+
+Separately, the integration lead recovered a **partial historical** window for the focused attempt 2
+run — 1106 records covering 22:11:15–22:12:28 — from the configured backend after the fact. That is
+a retrospective partial recovery of one pass-run window, not a live capture of the focused attempts,
+and the two must not be conflated.
 
 ## What this thread did not do
 
 - No product rate limit was changed, relaxed or disabled; no address spoofed; no counter cleared; no
   data reset; no refusal retried.
-- No change to `main`, no deployment, nothing published.
+- No change to `main`, no shared-`main` runtime update and no hosted or external publication. The
+  isolated `characters` environment **was** synced and replaced with `up --replace`, which is what
+  the verification required; an earlier draft said "no deployment", which was wrong.
 - No application code differs from the V46 base: `git diff` over `convex shared web src scripts
   public runtime` is empty.
+
+## Full suite — terminated, not completed
+
+`presidium-dev --env characters run browser -- pnpm exec playwright test --workers=1`, started
+2026-09-19T22:14:24Z. **It exited 143 (SIGTERM) at position 48 of 56**, about eighteen minutes into
+a fifty-five minute allowance, so it was stopped externally rather than timing out. No end stamp was
+written to `/artifacts/v52-full-end.txt`, which is itself the marker that it never reached its own
+end. **This is not a result and must not be read as one.** Positions 49–56 never ran; those include
+three of the four V46 journeys, `password-recovery` and `reference-streaming`, so nothing can be
+said about them.
+
+Two failures were recorded before termination, both at 22:29:
+
+1. `v32-progression.spec.ts:29` — `Error: Command failed: pnpm app query characters:sheet`,
+   `fetch failed`.
+2. `v34-core-content.spec.ts:90` — the `Campaigns` heading assertion, the same shape as the
+   registration refusals. **But it is not the same failure.** `v34` registers through `createTable`
+   in `v21-fixtures`, which *is* the paced helper, so a paced registration failed — and its
+   accessibility snapshot reads `alert: Unable to sign in. Please try again.`, which is
+   `web/router.tsx`'s generic fallback when the auth error carries no message. It is **not**
+   `Too many requests. Please try again later.`, the 429 body seen in V43, V45 and V46.
+
+The backend capture for 22:29:00–22:30:09 holds 85 records, **none with an error field and no 429**.
+The slowest are auth HTTP — `GET /api/auth/*` at 3.52 s and `POST /api/auth/*` at 2.66 s, both
+uncached, against sub-second norms elsewhere in the file. That is a correlation in one window and no
+cause is claimed from it.
+
+What the partial run supports, and only this: `table-audit` at position 22 and `v21-campaign` at 27
+both passed, which is where V46 failed them, and the rate-limit refusal was not reproduced in the 48
+positions that ran. It does not establish that pacing is why, for the reason given above — those
+specs also pass unpaced in isolation, and this run did not finish.
 
 ## Process failures in this sequence, recorded rather than smoothed over
 
