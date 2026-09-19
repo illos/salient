@@ -305,3 +305,9 @@ records the handoff; it does not certify A09 or create an implementation commit.
 | Id | Slice | Status | Owner |
 | --- | --- | --- | --- |
 | V40 | [Unsaved wizard entry](V40-unsaved-wizard.md) | Complete — merged/live `af69671`; 674 tests, nine isolated browser journeys, two shared browser checks and independent review pass | Character wizard thread |
+
+## V42 primary wizard choice summary — 2026-09-19
+
+| Id | Slice | Status | Owner |
+| --- | --- | --- | --- |
+| V42 | [Primary wizard choice summary](V42-primary-choice-summary.md) | In progress | Character wizard thread |

@@ -422,6 +422,16 @@ or leaving an unsaved draft discards it; the wizard explains this. A name of 1â€
 is required at save time; incomplete build choices may still be saved. Later saves retain the same
 character identity and existing revision, review and combat-lock protections.
 
+**Confirmed primary-choice presentation, 2026-09-19:** sections with one main catalog choice
+(Ancestry, Career, Class, Kit, and Complication) initially show that chooser. After selection,
+replace it with a compact chosen-name summary, a source reference, and Edit. Show the dependent
+choices beneath the summary. Edit reopens the main chooser and hides dependent controls; opening
+Edit alone does not alter the draft. The user can keep the current option or select a replacement.
+Only replacement uses the existing dependency pruning. Revisited and saved selections start
+collapsed. Optional None can also be confirmed; Culture and Details retain their independent fields.
+Full source text remains available through the selected option's reference. This is presentation
+state only: it does not save the character or change the decision/evaluation model.
+
 Proposed user flow: choose/create an owned character, establish a target level, work through the applicable
 decisions, add authored details, inspect the derived sheet and outstanding choices, then save or submit for
 campaign review. Users can revisit earlier decisions without starting over. Screen order is a presentation
