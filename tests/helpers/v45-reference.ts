@@ -93,6 +93,8 @@ export function projectForgeReference(hero: ForgeHero) {
     'Roll Modifier',
     'Size',
     'Speed',
+    // Pinned Forge Devil Wings includes a passive Movement Mode child (mode: Fly).
+    'Movement Mode',
     'Save Threshold',
     'Surge Gain',
     'Skill Choice',

@@ -337,3 +337,14 @@ records the handoff; it does not certify A09 or create an implementation commit.
 | V45 | [Character option foundation](V45-character-option-foundation.md) | Complete — merged/live `ebe66e2`; 691 tests, 5,584 exact comparisons, 49 applicable browser successes and two shared checks; both audits pass; initial timeout/retry limits retained; no new options enabled | Character integration lead and subagents |
 
 V46–V56 are retired Opus pilot IDs, not pending assignments. Allocate fresh IDs for replacement work.
+
+## Astra restart checkpoint — 2026-09-19
+
+| Id | Unit | Status | Owner |
+| --- | --- | --- | --- |
+| V57 | [Devil level one](V57-devil-level-one.md) | Paused — code and tests prepared, runtime and Forge verification pending; unmerged | Astra Devil / `slice/V57` |
+
+Lead paused under the user anti-spiral instruction after V58's required browser suite failed
+in combat closeout with a one-second backend execution timeout. V58 candidate is retained as
+`2291b29` on `slice/V58-integration`; shared main remains `6459c8d`. No V57 runtime run or
+acceptance is claimed. Next: discuss a bounded closeout investigation before resuming delivery.
