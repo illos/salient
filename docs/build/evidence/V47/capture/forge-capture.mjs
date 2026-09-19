@@ -15,7 +15,8 @@
  *
  * Usage, once a CT114 window is available (see ../capture-plan.md):
  *   node forge-capture.mjs --build A-devil-reaver-panther --base-url http://127.0.0.1:5173 \
- *     --out ../forge --forge-commit 5a846aadb623a9855a023e9403bb887a956c341f
+ *     --served-from "pinned vendor tree exported with git archive into scratch" \
+ *     --forge-commit 5a846aadb623a9855a023e9403bb887a956c341f --forge-version 14.197.0
  *
  * Playwright must come from the remote browser container, never a local install.
  */
@@ -47,6 +48,17 @@ const UI = {
 
 const escapeRe = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
+/** Read the served version from the About modal; returns null rather than guessing. */
+async function readAboutVersion(page) {
+  const opener = page.getByRole('button', { name: /^about$/i }).first();
+  if ((await opener.count()) === 0) return null;
+  await opener.click();
+  const tag = page.getByText(/^Version\s+\S+/i).first();
+  const text = (await tag.count()) > 0 ? (await tag.innerText()).trim() : null;
+  await page.keyboard.press('Escape');
+  return text;
+}
+
 function parseArgs(argv) {
   const args = {};
   for (let i = 0; i < argv.length; i += 1) {
@@ -65,11 +77,103 @@ function fail(message) {
   );
 }
 
+/**
+ * Verify the export by reading ACTIVE SELECTIONS, never by substring search.
+ *
+ * Repaired 2026-09-19: the previous version used JSON.stringify(hero).includes(name), which proves
+ * nothing — a .ds-hero embeds unselected options, every subclass branch and later-level definitions,
+ * so an unchosen trait's name is present in a correct export and in a wrong one alike.
+ *
+ * This traversal mirrors tests/helpers/v45-reference.ts projectForgeReference, which is the
+ * authoritative projection: selected subclasses only, features filtered to the hero's level,
+ * data.selected for choices, data.selectedIDs resolved against the owning ability pool. It stays
+ * narrow on purpose — it answers "were these specific selections made?", not "what is this hero?" —
+ * and it fails on a container type it does not understand rather than reporting a clean result.
+ */
+function activeSelections(hero) {
+  const chosen = [];
+  const abilities = [];
+  const unsupported = [];
+  const subclasses = (hero.class?.subclasses ?? []).filter(branch => branch.selected);
+  const abilityPool = [
+    ...(hero.class?.abilities ?? []),
+    ...subclasses.flatMap(branch => branch.abilities ?? []),
+  ];
+  const visit = feature => {
+    if (!feature || typeof feature !== 'object') return;
+    const data = feature.data ?? null;
+    switch (feature.type) {
+      case 'Choice':
+      case 'Perk':
+      case 'Kit':
+        for (const row of data?.selected ?? []) {
+          chosen.push(typeof row === 'string' ? row : row.name);
+          if (typeof row === 'object') (row.features ?? []).forEach(visit);
+        }
+        return;
+      case 'Multiple Features':
+        (data?.features ?? []).forEach(visit);
+        return;
+      case 'Ability':
+        if (data?.ability) abilities.push(data.ability.name);
+        return;
+      case 'Class Ability':
+        for (const id of data?.selectedIDs ?? []) {
+          const match = abilityPool.find(entry => entry.id === id);
+          if (!match) unsupported.push(`unresolved selected ability id ${id}`);
+          else {
+            abilities.push(match.name);
+            chosen.push(match.name);
+          }
+        }
+        return;
+      case 'Skill Choice':
+      case 'Language Choice':
+        for (const row of data?.selected ?? []) chosen.push(typeof row === 'string' ? row : row.name);
+        return;
+      default:
+        // Passive feature types carry no selection; anything genuinely unknown is reported.
+        if (data?.selected || data?.selectedIDs)
+          unsupported.push(`unhandled selection container type "${feature.type}"`);
+    }
+  };
+  (hero.ancestry?.features ?? []).forEach(visit);
+  const culture = hero.culture ?? {};
+  [culture.language, culture.environment, culture.organization, culture.upbringing].forEach(visit);
+  (hero.career?.features ?? []).forEach(visit);
+  for (const branch of [hero.class, ...subclasses])
+    (branch?.featuresByLevel ?? [])
+      .filter(row => row.level <= (hero.class?.level ?? 1))
+      .flatMap(row => row.features ?? [])
+      .forEach(visit);
+  (hero.features ?? []).forEach(visit);
+  const norm = name => String(name).replaceAll('’', "'");
+  return {
+    chosen: chosen.map(norm),
+    abilities: abilities.map(norm),
+    unsupported,
+    culture: {
+      environment: culture.environment?.data?.selected?.[0]?.name ?? culture.environment?.name ?? null,
+      organization:
+        culture.organization?.data?.selected?.[0]?.name ?? culture.organization?.name ?? null,
+      upbringing: culture.upbringing?.data?.selected?.[0]?.name ?? culture.upbringing?.name ?? null,
+    },
+  };
+}
+
 /** One editor interaction, with a readable failure that names what it was trying to choose. */
 async function choose(page, tab, label, what) {
-  const locator = page.getByRole(UI.option(label).role, { name: UI.option(label).name }).first();
-  if ((await locator.count()) === 0)
-    fail(`On the ${tab} tab, no control matched ${what} "${label}".`);
+  if (label === undefined || label === null) fail(`On ${tab}, no value was supplied for ${what}.`);
+  const panel = page.locator('.ant-segmented + *, [role="tabpanel"]').last();
+  const scope = (await panel.count()) > 0 ? panel : page;
+  const locator = scope.getByRole(UI.option(label).role, { name: UI.option(label).name });
+  const count = await locator.count();
+  if (count === 0) fail(`On the ${tab} tab, no control matched ${what} "${label}".`);
+  if (count > 1)
+    fail(
+      `On the ${tab} tab, ${count} controls matched ${what} "${label}". Refusing to guess; labels ` +
+        `repeat across mounted panels, so scope the selector and record the correction.`,
+    );
   await locator.click();
 }
 
@@ -137,6 +241,13 @@ async function captureBuild(page, build, shared, outDir) {
   if ((await nameField.count()) === 0) fail('The Details tab has no name field.');
   await nameField.fill(s['details.name']);
 
+  // The editor holds changes until saved; exporting from a dirty editor can capture a hero that is
+  // not the one the sheet shows.
+  const save = page.getByRole('button', { name: /^save changes$/i }).first();
+  if ((await save.count()) === 0) fail('The editor has no Save Changes control.');
+  if (await save.isDisabled()) fail('Save Changes is disabled, so the editor recorded no changes.');
+  await save.click();
+
   // Export through the application's own control and keep the bytes exactly as delivered.
   await page.getByRole(UI.exportMenu.role, { name: UI.exportMenu.name }).first().click();
   const download = await Promise.all([
@@ -147,20 +258,74 @@ async function captureBuild(page, build, shared, outDir) {
   const exportPath = join(outDir, 'export.ds-hero');
   await download.saveAs(exportPath);
 
-  const sheet = page.locator(UI.heroSheet).first();
-  if ((await sheet.count()) === 0) fail('The hero sheet was not rendered, so no sheet evidence exists.');
-  await sheet.screenshot({ path: join(outDir, 'sheet.png') });
-  await writeFile(join(outDir, 'sheet.txt'), (await sheet.innerText()).trim(), 'utf8');
+  // Verify by ACTIVE SELECTIONS, never substring search: an export embeds unselected options and
+  // every subclass branch, so a name being present proves nothing.
+  const hero = JSON.parse(await readFile(exportPath, 'utf8'));
+  const active = activeSelections(hero);
+  const mismatches = [...active.unsupported];
+  const check = (what, actual, wanted) => {
+    if (actual !== wanted)
+      mismatches.push(`${what}: export has ${actual ?? 'nothing'}, expected ${wanted}`);
+  };
+  const selected = (what, wanted) => {
+    if (!active.chosen.includes(wanted))
+      mismatches.push(`${what} "${wanted}" is not an active selection`);
+  };
+  check('ancestry', hero.ancestry?.name, s['ancestry.choice']);
+  check('career', hero.career?.name, s['career.choice']);
+  check('class', hero.class?.name, s['class.choice']);
+  check('level', hero.class?.level, 1);
+  check('name', hero.name, s['details.name']);
+  check(
+    'subclass',
+    (hero.class?.subclasses ?? []).filter(b => b.selected).map(b => b.name).join(', '),
+    s['class.fury.aspect'],
+  );
+  check('culture environment', active.culture.environment, s['culture.environment']);
+  check('culture organization', active.culture.organization, s['culture.organization']);
+  check('culture upbringing', active.culture.upbringing, s['culture.upbringing']);
+  for (const trait of s['ancestry.devil.purchased-traits'] ??
+    s['ancestry.polder.purchased-traits'] ??
+    [])
+    selected('purchased trait', trait);
+  for (const skill of s['class.fury.skills']) selected('class skill', skill);
+  for (const ability of [
+    s['class.fury.signature-ability'],
+    s['class.fury.ability-3'],
+    s['class.fury.ability-5'],
+  ])
+    selected('ability', ability);
+  selected('kit', s['kit.choice']);
+  selected('career perk', s['career.soldier.perk']);
+  if (mismatches.length)
+    fail(`The export does not match the choice map:\n  - ${mismatches.join('\n  - ')}`);
 
-  return exportPath;
+  // Every sheet page, not just the first.
+  const pages = page.locator(UI.heroSheet);
+  const pageCount = await pages.count();
+  if (pageCount === 0) fail('The hero sheet was not rendered, so no sheet evidence exists.');
+  const texts = [];
+  for (let i = 0; i < pageCount; i += 1) {
+    const sheetPage = pages.nth(i);
+    await sheetPage.screenshot({ path: join(outDir, `sheet-page-${i + 1}.png`) });
+    texts.push((await sheetPage.innerText()).trim());
+  }
+  await writeFile(join(outDir, 'sheet.txt'), texts.join('\n\n'), 'utf8');
+
+  return { exportPath, sheetPageCount: pageCount };
 }
 
 async function main() {
   const args = parseArgs(process.argv.slice(2));
-  if (!args.build || !args['base-url']) {
+  const required = ['build', 'base-url', 'served-from', 'forge-commit', 'forge-version'];
+  const missing = required.filter(key => !args[key] || args[key] === 'true');
+  if (missing.length) {
     console.error(
-      'Usage: node forge-capture.mjs --build <id> --base-url <url> [--out ../forge] ' +
-        '[--forge-commit <sha>] [--forge-version <semver>]',
+      `Missing required argument(s): ${missing.join(', ')}.\n` +
+        'Usage: node forge-capture.mjs --build <id> --base-url <url> ' +
+        '--served-from "<how the app was served>" --forge-commit <sha> --forge-version <semver> ' +
+        '[--serving-command "<exact command used>"] [--out ../forge]\n' +
+        'Provenance arguments are never defaulted: a wrong provenance is worse than no capture.',
     );
     process.exitCode = 2;
     return;
@@ -185,7 +350,8 @@ async function main() {
 
   try {
     await page.goto(args['base-url'], { waitUntil: 'domcontentloaded' });
-    const exportPath = await captureBuild(page, build, data.shared, outDir);
+    const { exportPath, sheetPageCount } = await captureBuild(page, build, data.shared, outDir);
+    const observedVersion = await readAboutVersion(page);
     const bytes = await readFile(exportPath);
 
     await writeFile(
@@ -194,11 +360,20 @@ async function main() {
         {
           buildId: build.id,
           capturedAtUTC: new Date().toISOString(),
-          servedFrom: 'pinned vendor source exported with git archive; NOT the public website',
-          forgeCommit: args['forge-commit'] ?? null,
-          forgeVersion: args['forge-version'] ?? data.forgePackageVersion,
+          // Declared and observed are recorded SEPARATELY; collapsing them is how a public-site
+          // capture ends up labelled as pinned source.
+          declared: {
+            servedFrom: args['served-from'],
+            forgeCommit: args['forge-commit'],
+            forgeVersion: args['forge-version'],
+            servingCommand: args['serving-command'] ?? null,
+          },
+          observed: {
+            baseUrl: args['base-url'],
+            aboutVersion: observedVersion,
+            sheetPageCount,
+          },
           compendiumRevision: data.compendiumRevision,
-          baseUrl: args['base-url'],
           selections: build.salient,
           artifacts: {
             'export.ds-hero': {
@@ -214,8 +389,13 @@ async function main() {
       'utf8',
     );
 
-    if (consoleErrors.length)
-      console.warn(`Captured with ${consoleErrors.length} console error(s); they are recorded.`);
+    if (consoleErrors.length) {
+      console.error(
+        `The page logged ${consoleErrors.length} console error(s); they are recorded in ` +
+          'capture.json. Treat this capture as failed until they are explained.',
+      );
+      process.exitCode = 1;
+    }
     console.log(`Captured ${build.id} into ${outDir}`);
   } finally {
     await context.close();

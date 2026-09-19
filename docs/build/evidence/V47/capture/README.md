@@ -33,3 +33,34 @@ Expect the selectors to need correction on the first real run — the editor's c
 from source, and antd renders several of them in ways a static read cannot confirm. Record each
 correction in the slice work log rather than silently editing, so the difference between "derived
 from source" and "verified against the running app" stays visible.
+
+## Repairs, 2026-09-19
+
+A cross-review of these scripts found defects that would have produced confident but empty results.
+All repaired:
+
+- **`normalize.mjs` reported a match while checking three fields of roughly twenty-five.** It is
+  rewritten as a ledger that names every expected field, records how each is verified — by the
+  export projection, by a person reading the captured sheet, or not at all — and returns
+  `incomplete` whenever any required field is unchecked. There is no path that returns a match with
+  a field unverified.
+- **It hand-rolled its own projection**, mis-keying characteristics (`Might` versus `M`), walking
+  unselected options and later levels, skipping ancestry, culture and career, and folding languages
+  into skills. That projection is deleted. The authoritative one is
+  `tests/helpers/v45-reference.ts` `projectForgeReference`, which already follows the pinned Forge
+  logic and asserts on unsupported container types; the comparison belongs in a test that imports
+  it, not in a second traversal here.
+- **The capture verified selections by substring search.** `JSON.stringify(hero).includes(name)`
+  proves nothing, because an export embeds unselected options and every subclass branch. It now
+  reads active selections with the same traversal shape as the helper and fails on a container type
+  it does not understand.
+- **The editor flow skipped saving.** It now clicks Save Changes, fails if that control is disabled
+  (which would mean the editor recorded nothing), and only then exports from the hero view.
+- **Only the first sheet page was captured.** All pages are captured and concatenated, so a missing
+  value is never blamed on the reference when it was our screenshot that stopped at page one.
+- **Provenance was partly fabricated**: a hardcoded "pinned vendor source, NOT the public website"
+  string regardless of the URL, and an assumed version recorded as if observed. Declared values now
+  come from required flags and are recorded separately from observed values, including the version
+  read from the application's own About modal.
+
+Selectors remain unverified until a real CT114 capture runs.

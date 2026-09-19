@@ -1,18 +1,26 @@
 // SPDX-License-Identifier: GPL-3.0-only
 /**
- * V47 normalized projection and comparison.
+ * V47 counterpart comparison ledger.
  *
- * STATUS: NEVER EXECUTED. No capture exists yet, so this has never been run against a real export.
+ * STATUS: NEVER EXECUTED.
  *
- * A .ds-hero file embeds definitions as well as choices — whole subclass trees, later levels and
- * unselected options — so diffing the raw file is meaningless. This projects an export down to the
- * fields the V47 ledger actually compares, then reports differences against the source-derived
- * expectations in builds.json.
+ * Rewritten 2026-09-19 after review. The previous version hand-rolled its own projection of a
+ * .ds-hero and then reported "matches source-derived expectations" while silently checking three
+ * fields out of roughly twenty-five. That is the failure mode this project treats most seriously:
+ * a green result that never looked at most of the claim. It also mis-keyed characteristics
+ * (Forge writes "Might", the expectations use "M"), walked unselected options and later levels,
+ * skipped ancestry, culture and career, and folded language selections into skills.
  *
- * It deliberately reports rather than asserts: an unexplained mismatch blocks the unit, and the
- * explanation is a human judgement recorded in the slice, not something a script should decide.
+ * The fix is not a better projection here. **The authoritative projection already exists**:
+ * `tests/helpers/v45-reference.ts` `projectForgeReference()`, which follows the pinned Forge
+ * FeatureLogic/HeroLogic, keeps only selected subclasses, filters features by level, resolves
+ * ability `selectedIDs` against their owning pool, separates skills from languages, and fails on
+ * container types it does not support instead of silently certifying them. The comparison belongs
+ * in a test that imports that helper, where TypeScript and the existing fixtures already live.
  *
- *   node normalize.mjs --build A-devil-reaver-panther --export ../forge/A.../export.ds-hero
+ * This file is therefore deliberately small: it owns the *ledger* — which expected fields are
+ * checked by code, which are read by a person from the captured sheet, and which are not verified
+ * at all — and it refuses to call a partial check a match.
  */
 
 import { readFile } from 'node:fs/promises';
@@ -21,90 +29,108 @@ import { fileURLToPath } from 'node:url';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 
-/** Fields excluded on purpose: play state and identity, not the build. */
-const EXCLUDED = ['state', 'abilityCustomizations', 'picture', 'folder', 'id'];
-
-const names = list => (list ?? []).map(entry => entry?.name ?? entry).filter(Boolean);
-
-/** Walk features recursively; a selection can itself contain choices. */
-function collectFeatures(node, out = []) {
-  if (!node || typeof node !== 'object') return out;
-  if (Array.isArray(node)) {
-    for (const entry of node) collectFeatures(entry, out);
-    return out;
-  }
-  if (node.name && node.type) out.push(node);
-  for (const key of ['features', 'featuresByLevel', 'selected', 'options', 'data', 'choices'])
-    if (node[key]) collectFeatures(node[key], out);
-  return out;
-}
+/**
+ * How each expected field is verified. `helper` fields come from the export through
+ * `projectForgeReference`; `sheet-manual` fields are read by a person from the captured sheet image
+ * and text, which is honest evidence and does not need automating now; `salient-only` fields are
+ * inputs we chose rather than results to compare.
+ */
+export const FIELD_LEDGER = {
+  level: 'helper',
+  ancestry: 'helper',
+  class: 'helper',
+  subclass: 'helper',
+  career: 'helper',
+  characteristics: 'helper',
+  skills: 'helper',
+  languages: 'helper',
+  kit: 'helper',
+  abilities: 'helper',
+  traits: 'helper',
+  features: 'helper',
+  perks: 'helper',
+  staminaMaximum: 'sheet-manual',
+  recoveriesMaximum: 'sheet-manual',
+  recoveryValue: 'sheet-manual',
+  windedValue: 'sheet-manual',
+  size: 'sheet-manual',
+  speed: 'sheet-manual',
+  stability: 'sheet-manual',
+  disengage: 'sheet-manual',
+  potency: 'sheet-manual',
+  savingThrowThreshold: 'sheet-manual',
+  renown: 'sheet-manual',
+  wealth: 'sheet-manual',
+  kitMeleeDamageBonusApplies: 'sheet-manual',
+  kitMeleeDamageBonusExcluded: 'sheet-manual',
+  primordialDamageType: 'sheet-manual',
+  heroicResource: 'sheet-manual',
+  potencyCharacteristic: 'sheet-manual',
+};
 
 /**
- * Project an export into the comparable set. Only the active path counts: an embedded subclass
- * carries its own `selected` flag, and presence in the file never means the hero has the feature.
+ * Build the completeness ledger for one build's expectations. `projected` is the output of
+ * `projectForgeReference` when a test has run it, or null during preparation; `sheetFindings` is
+ * what a person recorded from the captured sheet, keyed by field.
+ *
+ * The verdict is `incomplete` unless every expected field has been checked one way or the other.
+ * There is no code path that returns "matches" while a required field is unchecked.
  */
-export function projectExport(hero) {
-  const selectedSubclasses = (hero.class?.subclasses ?? []).filter(entry => entry.selected);
-  const features = collectFeatures(hero.class?.featuresByLevel ?? []).concat(
-    collectFeatures(selectedSubclasses.map(entry => entry.featuresByLevel ?? [])),
-    collectFeatures(hero.features ?? []),
-  );
+export function ledgerFor(expected, { projected = null, sheetFindings = {} } = {}) {
+  const checked = [];
+  const unverified = [];
+  const different = [];
+
+  for (const field of Object.keys(expected)) {
+    const how = FIELD_LEDGER[field];
+    if (!how) {
+      unverified.push({ field, why: 'no verification route is defined for this field' });
+      continue;
+    }
+    if (how === 'helper') {
+      if (!projected) {
+        unverified.push({ field, why: 'the export projection has not been run' });
+        continue;
+      }
+      if (!(field in projected)) {
+        unverified.push({ field, why: 'the projection does not expose this field' });
+        continue;
+      }
+      const same = JSON.stringify(projected[field]) === JSON.stringify(expected[field]);
+      (same ? checked : different).push(
+        same ? { field, how } : { field, sourceDerived: expected[field], forge: projected[field] },
+      );
+      continue;
+    }
+    if (!(field in sheetFindings)) {
+      unverified.push({ field, why: 'no recorded reading from the captured sheet' });
+      continue;
+    }
+    const finding = sheetFindings[field];
+    (finding.matches ? checked : different).push(
+      finding.matches
+        ? { field, how, evidence: finding.evidence }
+        : { field, sourceDerived: expected[field], forge: finding.observed, evidence: finding.evidence },
+    );
+  }
 
   return {
-    ancestry: hero.ancestry?.name ?? null,
-    culture: {
-      language: names(hero.culture?.languages).join(', ') || null,
-      environment: hero.culture?.environment?.name ?? null,
-      organization: hero.culture?.organization?.name ?? null,
-      upbringing: hero.culture?.upbringing?.name ?? null,
-    },
-    career: hero.career?.name ?? null,
-    class: hero.class?.name ?? null,
-    subclass: selectedSubclasses.map(entry => entry.name),
-    level: hero.class?.level ?? null,
-    characteristics: Object.fromEntries(
-      (hero.class?.characteristics ?? []).map(entry => [entry.characteristic, entry.value]),
-    ),
-    // Class ability choices store selected ids; resolve them within their owning class or subclass,
-    // because Forge ids are not safe to assume globally unique.
-    abilityIds: features
-      .filter(feature => feature.data?.selectedIDs)
-      .flatMap(feature => feature.data.selectedIDs),
-    skills: [...new Set(features.flatMap(feature => feature.data?.selected ?? []))].filter(
-      value => typeof value === 'string',
-    ),
-    kit: names(features.find(feature => feature.type === 'Kit')?.data?.selected ?? []),
-    featureNames: [...new Set(features.map(feature => feature.name))].sort(),
-    excluded: EXCLUDED,
-  };
-}
-
-/** Compare a projection against the source-derived expectations. Reports; never decides. */
-export function compare(projection, expected) {
-  const differences = [];
-  const note = (field, ours, theirs) =>
-    differences.push({ field, sourceDerived: ours, forge: theirs });
-
-  for (const [key, value] of Object.entries(expected.characteristics ?? {}))
-    if (projection.characteristics[key] !== value)
-      note(`characteristics.${key}`, value, projection.characteristics[key] ?? null);
-
-  for (const skill of expected.skills ?? [])
-    if (!projection.skills.includes(skill)) note('skills.missing', skill, null);
-  for (const skill of projection.skills)
-    if (!(expected.skills ?? []).includes(skill)) note('skills.extra', null, skill);
-
-  if (expected.kit && !projection.kit.includes(expected.kit))
-    note('kit', expected.kit, projection.kit.join(', ') || null);
-
-  return {
-    differences,
-    verdict: differences.length === 0 ? 'matches source-derived expectations' : 'differences found',
-    reminder:
-      'Forge agreeing with us is not evidence that either matches the source. Every difference ' +
-      'needs a recorded source-backed explanation before this unit can pass, and derived sheet ' +
-      'values (Stamina, recoveries, recovery value, winded, speed, size, stability, disengage, ' +
-      'damage bonuses) are compared from the captured sheet text, not from this projection.',
+    checked,
+    unverified,
+    different,
+    verdict: different.length
+      ? 'differences found'
+      : unverified.length
+        ? 'incomplete: some expected fields were not verified'
+        : 'every expected field verified',
+    notes: [
+      'Forge agreeing with us is not evidence that either matches the source. The source-derived ' +
+        'column is the arbiter, and every difference needs a recorded source-backed explanation.',
+      'Derived sheet values are read from the captured sheet by a person and recorded as ' +
+        'sheetFindings. Nothing in this file inspects a screenshot.',
+      'The export projection is tests/helpers/v45-reference.ts projectForgeReference. Do not write ' +
+        'a second traversal here; if it lacks a field, extend it there with its assertions intact.',
+    ],
   };
 }
 
@@ -118,12 +144,15 @@ async function main() {
       .map(part => part.trim().split(/\s+/))
       .map(([key, ...rest]) => [key, rest.join(' ')]),
   );
-  if (!args.build || !args.export) {
-    console.error('Usage: node normalize.mjs --build <id> --export <path to .ds-hero>');
+  if (!args.build) {
+    console.error(
+      'Usage: node normalize.mjs --build <id>\n' +
+        'Prints the verification ledger for that build. Running the export projection and ' +
+        'recording sheet findings happen in the slice tests, not here.',
+    );
     process.exitCode = 2;
     return;
   }
-
   const data = JSON.parse(await readFile(join(HERE, 'builds.json'), 'utf8'));
   const build = data.builds.find(entry => entry.id === args.build);
   if (!build) {
@@ -131,10 +160,9 @@ async function main() {
     process.exitCode = 1;
     return;
   }
-
-  const hero = JSON.parse(await readFile(args.export, 'utf8'));
-  const projection = projectExport(hero);
-  console.log(JSON.stringify({ projection, ...compare(projection, build.expected) }, null, 2));
+  const ledger = ledgerFor(build.expected);
+  console.log(JSON.stringify({ build: build.id, ...ledger }, null, 2));
+  if (ledger.verdict !== 'every expected field verified') process.exitCode = 1;
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) await main();
