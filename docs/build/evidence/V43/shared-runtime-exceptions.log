@@ -1,0 +1,6 @@
+✔ 13:56:21 Convex functions ready! (4.7s)
+9/19/2026, 1:57:06 PM [CONVEX Q(characters:reviews)] [WARN] Function execution took a long time. (maximum duration: 1s, actual duration: 926.957937ms).
+9/19/2026, 1:57:10 PM [CONVEX Q(foes:detail)] Uncaught ConvexError: Foe unavailable.
+9/19/2026, 1:57:24 PM [CONVEX Q(characters:get)] Uncaught ConvexError: Character unavailable.
+9/19/2026, 1:57:24 PM [CONVEX Q(characters:get)] Uncaught ConvexError: Character unavailable.
+9/19/2026, 1:57:25 PM [CONVEX Q(campaigns:get)] Uncaught ConvexError: Sign in to continue.

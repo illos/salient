@@ -1,0 +1,29 @@
+CONVEX_AGENT_MODE=anonymous mode is in beta, functionality may change in the future.
+waiting for local backend to start...
+✔ Configured a local deployment for http://127.0.0.1:3210 and saved its:
+    client URL as VITE_CONVEX_URL
+    HTTP actions URL as VITE_CONVEX_SITE_URL
+ to .env.local
+
+Write your Convex functions in convex/
+Give us feedback at https://convex.dev/community or support@convex.dev
+View the Convex dashboard at http://127.0.0.1:6790/
+
+▌ Developing against deployment:
+▌ [Local] Port 3210 • No Convex account (run npx convex login to link to a project)
+▌ └─ http://127.0.0.1:3210
+- Preparing Convex functions...
+
+A minor update is available for Convex (1.45.0 → 1.46.0)
+Changelog: https://github.com/get-convex/convex-js/blob/main/CHANGELOG.md#changelog
+Convex AI files are not installed. Run npx convex ai-files install to get started or npx convex ai-files disable to hide this message.
+Temporary directory '/tmp' and project directory '/app/convex/_generated' are on different filesystems.
+  If you're running into errors with other tools watching the project directory, override the temporary directory location with the CONVEX_TMPDIR environment variable.
+  Be sure to pick a temporary directory that's on the same filesystem as your project.
+✔ Added table indexes:
+  [+] historyCursors.by_session   sessionId, _creationTime
+  [+] historyUnits.by_event   eventId, _creationTime
+  [+] historyUnits.by_session_command   sessionId, commandKey, _creationTime
+✔ 13:56:21 Convex functions ready! (4.7s)
+Anonymous development backend configured; application secrets were not logged.
+9/19/2026, 1:56:36 PM [CONVEX H(GET /api/auth/convex/jwks)] [WARN] '2026-09-19T13:56:36.335Z WARN [Better Auth]: Rate limiting skipped: could not determine client IP address. Ensure your runtime forwards a trusted client IP header and configure `advanced.ipAddress.ipAddressHeaders` if needed.'

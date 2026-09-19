@@ -8,7 +8,7 @@
 | Rules review | not required — preserve existing operation semantics |
 | Depends on | V41, V42 |
 | Unblocks | Integrated performance rollout |
-| Status | Reviewed — integration pending |
+| Status | Complete — merged and shared development verified |
 
 ## Goal
 
@@ -68,4 +68,14 @@ None.
 
 - Verification: full CT114 `pnpm check` passed (274 engine + 406 app/scripts = 680 tests, lint, types, pinned content, links, build/budget). The added fifth real lifecycle/floor/backfill parity scenario subsequently passed with all five focused table tests. Backend sync added the two derived tables/indexes and reported functions ready without validation errors. Initial-JS gzip budget is 160,918 bytes against the live-baseline inventory's 458,779. Browser and independent review pending; no hosted timing improvement is inferred from development runtime timings.
 
-- Browser verification: journey, table and shared-navigation cases passed; unchanged standalone Fury wizard/admission/three-audience/60-action test passed in 3.0min after the batch hit account registration rate limiting. One979ms history warning remains; no timeout in the retry. Final prepare-gating refinement passed lint/types and the table browser again (33.7s). All52 implementation/config/test files match the tested remote source. [Evidence and limits](evidence/V43/README.md), [independent review PASS](reviews/V43-table-performance.md), reviewer `v43_review`,2026-09-19. Source-event history is preserved; full mutation validation remains an explicit cost limitation.
+- Browser verification: journey, table and shared-navigation cases passed; unchanged standalone Fury wizard/admission/three-audience/60-action test passed in 3.0 min after the batch hit account registration rate limiting. One 979 ms history warning remains; no timeout in the retry. Final prepare-gating refinement passed lint/types and the table browser again (33.7 s). All 52 implementation/config/test files match the tested remote source. [Evidence and limits](evidence/V43/README.md), [independent review PASS](reviews/V43-table-performance.md), reviewer `v43_review`, 2026-09-19. Source-event history is preserved; full mutation validation remains an explicit cost limitation.
+
+## Integration and shared development verification
+
+V41 implementation `bc74ddd` and V43 implementation `087a709` are merged into `main`, retaining V44's documentation commit `9fb4fa6`. Rebase reconciliation changed only documentation; all 52 implementation/config/test files match the reviewed isolated candidate. Commit metadata checks and 255 document link checks passed.
+
+`presidium-dev up` updated the established shared CT114 `main` environment from the clean `087a709598e6acf2d86f8b68ba62f835b46e0c33` checkout. Target: local-anonymous `anonymous:anonymous-agent`, Compose `salient-dev-b90776c53141`, internal backend ports 3210/3211, frontend host port 32830, [shared HTTPS app](https://salient-dev-fc4f48cb09a0.tail41404c.ts.net). Existing volumes, authentication secrets and pinned content were retained; no reset/reseed was run. New history indexes synchronized and Convex reported ready at 13:56:21 UTC.
+
+Three actual shared browser checks passed in 1.3 min: account/session/private-draft/reconnect journey; six-foe+one-hero table subscription/drill-in/edit/undo/redo/reload scenario; and signed-in Rules/Foes navigation. Persisted Stamina 9 was reread after reload. [Runtime evidence](evidence/V43/README.md#shared-development-rollout), source hashes, screenshot and logs are retained. No execution timeout occurred; one characters.reviews 927 ms warning remains a follow-up alongside the isolated history 979 ms warning. Near-limit backend execution and full mutation replay are not claimed solved.
+
+The owned isolated `performance` stack is stopped, volumes retained. Shared runtime remains available. No external hosted publication or remote Git push was performed. The final documentation-only closeout requires no further runtime update.

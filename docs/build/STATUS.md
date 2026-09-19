@@ -322,10 +322,10 @@ records the handoff; it does not certify A09 or create an implementation commit.
 
 | Slice | Assignment | Status | Owner |
 | --- | --- | --- | --- |
-| V41 | [Reference performance](V41-reference-performance.md) | Committed on slice/V41 `fd58cf7` — 676 tests, 18 browser scenarios and independent review pass; awaiting integration/hosted rollout | Codex performance, slice/V41 |
+| V41 | [Reference performance](V41-reference-performance.md) | Complete — merged `bc74ddd`, shared development verified at `087a709`; lazy reference delivery/navigation, checks and independent review pass; hosted publish separate | Codex performance, slice/V41 |
 
 ## V43 — table loading and history reads
 
 | Slice | Assignment | Status | Owner |
 | --- | --- | --- | --- |
-| V43 | [Table performance](V43-table-performance.md) | Reviewed — checks and browser journeys passed, integration pending | Codex performance, slice/V43 |
+| V43 | [Table performance](V43-table-performance.md) | Complete — merged/live `087a709`; 680 check tests plus added lifecycle regression, browser journeys, independent review and three shared checks pass | Codex performance, slice/V43 |

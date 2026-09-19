@@ -25,7 +25,7 @@ Convex retries transient/internal failures of scheduled mutations. A permanent a
 
 The real HTTPS browser fixture with six Goblin Warriors and one admitted Fury records a 3,454-byte roster JSON value, no initial `foes:detail` or `characters:sheet` subscriptions, and simultaneous `events:list`, `history:status`, `table:roster`, `encounters:current` and `targets:drafts` registration. There are seven distinct initial query paths including `auth:viewer` and the visible foe-add catalogue; frame-level reconnect/subscribe duplicates are retained in [the record](subscriptions.json), not counted as distinct queries. The original hosted six-foe/no-hero sample had 16 distinct subscriptions and 24,690 bytes of eager foe detail. These fixture populations differ; the structural query saving is established, not a matched before/after latency percentage. The 101,212-byte hero sheet appears only after its drill-in.
 
-The new browser scenario verifies Log/Rolls switches preserve document identity, source/sheet detail arrives when opened, foe Stamina edits persist, rewind restores15, redo restores9 and reload retains9. [Collapsed roster screenshot](table-summary.png).
+The new browser scenario verifies Log/Rolls switches preserve document identity, source/sheet detail arrives when opened, foe Stamina edits persist, rewind restores 15, redo restores 9 and reload retains 9. [Collapsed roster screenshot](table-summary.png).
 
 First authenticated batch: journey, table performance and V38 library navigation passed. The broader Fury test failed before character creation because the third registration received the existing account endpoint's “Too many requests” response after multiple tests created accounts. No rate-limit relaxation or product-code change was made for this harness failure. The unchanged standalone retry is recorded separately.
 
@@ -33,4 +33,16 @@ Standalone unchanged Fury retry: **1 passed in 3.0 minutes**, including real wiz
 
 Final UI refinement: `history.prepare` now runs only when `history.status` reports an incomplete legacy index. Already-current sessions no longer issue one or two redundant maintenance mutations on entry. A stale preparation error is hidden once the index is ready.
 
-Final prepare-gating refinement passed targeted ESLint, Prettier, web TypeScript and the full new table browser scenario again (**1 passed,33.7s**, [log](table-final.log)). The preceding full suite was not rerun for this narrow frontend refinement; shared-main browser verification remains the integration gate. The [first failure context](rate-limit-context.md) preserves the explicit account rate-limit alert.
+Final prepare-gating refinement passed targeted ESLint, Prettier, web TypeScript and the full new table browser scenario again (**1 passed, 33.7 s**, [log](table-final.log)). The preceding full suite was not rerun for this narrow frontend refinement; shared-main browser verification remains the integration gate. The [first failure context](rate-limit-context.md) preserves the explicit account rate-limit alert.
+
+## Shared development rollout
+
+Merged implementation `087a709598e6acf2d86f8b68ba62f835b46e0c33` (including V41 `bc74ddd`) was synchronized to the established CT114 `main` environment with `presidium-dev up`. Target: local-anonymous backend `anonymous:anonymous-agent`, Compose `salient-dev-b90776c53141`, [actual shared URL](https://salient-dev-fc4f48cb09a0.tail41404c.ts.net), frontend port 32830. Source checkout was clean; existing volumes, credentials and content pin were retained. No reset/reseed or hosted publish.
+
+- [Backend sync](shared-backend-ready.log): additive history indexes and functions ready 13:56:21 UTC.
+- [Source identity](shared-source-verification.json): all 52 implementation/config/test hashes match the reviewed candidate. Rebase onto V44 touched only documents.
+- [Shared browser results](shared-browser.log): **3 passed, 1.3 min**: journey/session lifecycle/private draft/reconnect, table performance and Rules/Foes navigation. The table scenario verifies real saved Stamina, rewind/redo and persisted reload.
+- [Shared table screenshot](shared-table.png) and [shared subscription capture](shared-subscriptions.json). No authentication frames, cookies or raw query results are included.
+- [Filtered runtime exceptions/warnings](shared-runtime-exceptions.log): no execution timeout or schema/return validation failure; a characters.reviews warning reached 926.957937 ms against the 1 s limit. Access refusals occurred during deliberate private-character access/signout and stale foe-detail disposal. The near-limit warning remains a performance concern, not a claimed regression fix.
+
+The isolated performance stack was stopped after validation, preserving its volumes. The final documentation closeout does not alter runtime code.

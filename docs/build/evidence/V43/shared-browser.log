@@ -1,0 +1,6 @@
+Running 3 tests using 1 worker
+
+[1/3] tests/browser/journey.spec.ts:16:1 › accounts, invitation approval, session lifecycle, private draft persistence and reconnect
+[2/3] tests/browser/table-performance.spec.ts:6:1 › table opens without per-card detail reads, then drills in and preserves undo/redo
+[3/3] tests/browser/v38-library-navigation.spec.ts:5:1 › primary navigation exposes independent Rules and Foes libraries
+  3 passed (1.3m)
