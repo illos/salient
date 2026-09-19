@@ -122,6 +122,56 @@ describe('owned character drafts', () => {
     await expect(t.query(api.characters.listMine, {})).rejects.toThrow('Sign in');
   });
 
+  test('first save stores choices atomically, evaluates without creating, and retries once', async () => {
+    const { t, alice, bob } = await setup();
+    const selections = fixtureSelections();
+    const preview = await alice.client.query(api.characters.evaluate, { selections });
+    expect(preview.status).toBe('complete');
+    expect(await alice.client.query(api.characters.listMine, {})).toEqual([]);
+    const args = { commandId: 'first-save', authored: details, selections };
+    const characterId = await alice.client.mutation(api.characters.create, args);
+    expect(await alice.client.mutation(api.characters.create, args)).toBe(characterId);
+    const saved = await alice.client.query(api.characters.get, { characterId });
+    expect(saved).toMatchObject({ revision: 1, authored: details, status: 'complete' });
+    expect(saved.selections).toEqual(selections);
+    expect(saved.evaluation.baseline).toEqual(preview.baseline);
+    const revisions = await t.run(ctx =>
+      ctx.db
+        .query('characterRevisions')
+        .withIndex('by_character_and_revision', q => q.eq('characterId', characterId))
+        .take(10),
+    );
+    expect(revisions).toHaveLength(1);
+    expect(await alice.client.query(api.characters.listMine, {})).toHaveLength(1);
+    await expect(bob.client.query(api.characters.get, { characterId })).rejects.toThrow(
+      'Character unavailable',
+    );
+    await expect(
+      t.mutation(api.characters.create, { ...args, commandId: 'anonymous' }),
+    ).rejects.toThrow('Sign in');
+  });
+
+  test('rejected first saves leave no character or revision and canonicalize valid choices', async () => {
+    const { t, alice } = await setup();
+    const attempt = (authored = details, selections: DraftSelection[] = []) =>
+      alice.client.mutation(api.characters.create, {
+        commandId: 'invalid-first-save',
+        authored,
+        selections,
+      });
+    await expect(attempt({ ...details, name: '   ' })).rejects.toThrow('name');
+    await expect(attempt(details, [{ ...choice, sources: [] }])).rejects.toThrow('Selections');
+    await expect(attempt(details, [choice, choice])).rejects.toThrow('once');
+    expect(await alice.client.query(api.characters.listMine, {})).toEqual([]);
+    expect(await t.run(ctx => ctx.db.query('characterRevisions').take(10))).toEqual([]);
+    const selections = fixtureSelections();
+    const forged = selections.map(s => ({ ...s, sources: choice.sources }));
+    const id = await attempt(details, forged);
+    expect((await alice.client.query(api.characters.get, { characterId: id })).selections).toEqual(
+      selections,
+    );
+  });
+
   test('save records immutable source-qualified choices and preserves them on authored-only edits', async () => {
     const { t, alice } = await setup();
     const characterId = await alice.client.mutation(api.characters.create, {

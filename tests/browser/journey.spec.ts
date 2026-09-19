@@ -1,3 +1,4 @@
+import { startCharacter } from './character-fixtures';
 import { expect, test, type Page } from '@playwright/test';
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
@@ -127,8 +128,7 @@ test('accounts, invitation approval, session lifecycle, private draft persistenc
 
   // A02: creation opens the wizard; authored details live on its Determine Details step.
   await player.getByRole('link', { name: 'Characters', exact: true }).click();
-  await player.getByLabel('Name', { exact: true }).fill(`Ash ${stamp}`);
-  await player.getByRole('button', { name: 'Create and open the wizard' }).click();
+  await startCharacter(player, `Ash ${stamp}`);
   await expect(player.getByRole('heading', { name: `Ash ${stamp}` })).toBeVisible();
   const characterUrl = player.url();
   await player.getByRole('button', { name: '9. Determine Details' }).click();

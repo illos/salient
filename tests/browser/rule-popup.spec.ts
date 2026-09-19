@@ -1,3 +1,4 @@
+import { startCharacter } from './character-fixtures';
 // SPDX-License-Identifier: GPL-3.0-only
 import { expect, test } from '@playwright/test';
 
@@ -13,8 +14,7 @@ test('rule cards preserve the wizard, navigate references, scroll and dismiss ac
   await page.getByLabel('Password', { exact: true }).fill('Test-only-salient-password-42');
   await page.getByRole('button', { name: 'Create account', exact: true }).click();
   await page.getByRole('link', { name: 'Characters', exact: true }).click();
-  await page.getByLabel('Name', { exact: true }).fill(`Reader hero ${stamp}`);
-  await page.getByRole('button', { name: 'Create and open the wizard' }).click();
+  await startCharacter(page, `Reader hero ${stamp}`);
   await expect(page.getByRole('heading', { name: 'Imagine your hero' })).toBeVisible();
   await expect(page.locator('body')).not.toContainText('think.prompts');
   await expect(page.locator('body')).not.toContainText('en/unified');

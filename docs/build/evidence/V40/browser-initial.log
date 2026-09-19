@@ -1,0 +1,115 @@
+
+Running 9 tests using 1 worker
+
+[1/9] tests/browser/journey.spec.ts:16:1 › accounts, invitation approval, session lifecycle, private draft persistence and reconnect
+  1) tests/browser/journey.spec.ts:16:1 › accounts, invitation approval, session lifecycle, private draft persistence and reconnect
+
+    TimeoutError: locator.click: Timeout 15000ms exceeded.
+    Call log:
+      - waiting for getByRole('button', { name: 'Add foe' })
+
+
+      64 |   await expect(director.getByRole('button', { name: 'Show', exact: true })).toHaveCount(0);
+      65 |   await expect(director.getByLabel('Show newly added foes to players')).toHaveCount(0);
+    > 66 |   await director.getByRole('button', { name: 'Add foe' }).click();
+         |                                                           ^
+      67 |   await expect(player.getByRole('progressbar')).toHaveCount(2);
+      68 |   await director.reload();
+      69 |   // Two on the campaign page (the add control's chip and the loaded foe). V21 moved the table's
+        at /app/tests/browser/journey.spec.ts:66:59
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../artifacts/v40-browser/journey-accounts-invitatio-e0df1-t-persistence-and-reconnect/test-failed-2.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../artifacts/v40-browser/journey-accounts-invitatio-e0df1-t-persistence-and-reconnect/test-failed-3.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../artifacts/v40-browser/journey-accounts-invitatio-e0df1-t-persistence-and-reconnect/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../artifacts/v40-browser/journey-accounts-invitatio-e0df1-t-persistence-and-reconnect/error-context.md
+
+    attachment #5: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../artifacts/v40-browser/journey-accounts-invitatio-e0df1-t-persistence-and-reconnect/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../artifacts/v40-browser/journey-accounts-invitatio-e0df1-t-persistence-and-reconnect/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[2/9] tests/browser/rule-popup.spec.ts:5:1 › rule cards preserve the wizard, navigate references, scroll and dismiss accessibly
+  2) tests/browser/rule-popup.spec.ts:5:1 › rule cards preserve the wizard, navigate references, scroll and dismiss accessibly
+
+    TimeoutError: locator.fill: Timeout 15000ms exceeded.
+    Call log:
+      - waiting for getByLabel('Name', { exact: true })
+
+
+       at character-fixtures.ts:8
+
+       6 |   await page.getByRole('link', { name: 'Open character wizard', exact: true }).click();
+       7 |   await page.getByRole('button', { name: /^9\. Determine Details/ }).click();
+    >  8 |   await page.getByLabel('Name', { exact: true }).fill(name);
+         |                                                  ^
+       9 |   await page.getByRole('button', { name: 'Save draft', exact: true }).click();
+      10 |   await expect(page).toHaveURL(/\/characters\/(?!new\/)[^/]+\/wizard$/);
+      11 | }
+        at startCharacter (/app/tests/browser/character-fixtures.ts:8:50)
+        at /app/tests/browser/rule-popup.spec.ts:17:3
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../artifacts/v40-browser/rule-popup-rule-cards-pres-8e822-roll-and-dismiss-accessibly/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../artifacts/v40-browser/rule-popup-rule-cards-pres-8e822-roll-and-dismiss-accessibly/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../artifacts/v40-browser/rule-popup-rule-cards-pres-8e822-roll-and-dismiss-accessibly/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../artifacts/v40-browser/rule-popup-rule-cards-pres-8e822-roll-and-dismiss-accessibly/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[3/9] tests/browser/theme.spec.ts:27:1 › light, dark and system preference switch without reload and persist across reload
+[4/9] tests/browser/theme.spec.ts:68:1 › prefers-reduced-motion disables transitions
+[5/9] tests/browser/theme.spec.ts:83:1 › reference screenshots: login, campaign home and character list in light and dark
+  3) tests/browser/theme.spec.ts:83:1 › reference screenshots: login, campaign home and character list in light and dark
+
+    TimeoutError: locator.fill: Timeout 15000ms exceeded.
+    Call log:
+      - waiting for getByLabel('Name', { exact: true })
+
+
+       at character-fixtures.ts:8
+
+       6 |   await page.getByRole('link', { name: 'Open character wizard', exact: true }).click();
+       7 |   await page.getByRole('button', { name: /^9\. Determine Details/ }).click();
+    >  8 |   await page.getByLabel('Name', { exact: true }).fill(name);
+         |                                                  ^
+       9 |   await page.getByRole('button', { name: 'Save draft', exact: true }).click();
+      10 |   await expect(page).toHaveURL(/\/characters\/(?!new\/)[^/]+\/wizard$/);
+      11 | }
+        at startCharacter (/app/tests/browser/character-fixtures.ts:8:50)
+        at /app/tests/browser/theme.spec.ts:119:3
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../artifacts/v40-browser/theme-reference-screenshot-aa09d-cter-list-in-light-and-dark/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../artifacts/v40-browser/theme-reference-screenshot-aa09d-cter-list-in-light-and-dark/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../artifacts/v40-browser/theme-reference-screenshot-aa09d-cter-list-in-light-and-dark/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../artifacts/v40-browser/theme-reference-screenshot-aa09d-cter-list-in-light-and-dark/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+

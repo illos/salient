@@ -1,3 +1,4 @@
+import { startCharacter } from './character-fixtures';
 // SPDX-License-Identifier: GPL-3.0-only
 /**
  * A08 acceptance checks 2 and 3: the appearance preference switches without reload and persists
@@ -115,8 +116,7 @@ test('reference screenshots: login, campaign home and character list in light an
   await page.screenshot({ path: `${SHOTS}/campaign-home-dark.png`, fullPage: true });
 
   await page.getByRole('link', { name: 'Characters', exact: true }).click();
-  await page.getByLabel('Name', { exact: true }).fill(`Ash ${stamp}`);
-  await page.getByRole('button', { name: 'Create and open the wizard' }).click();
+  await startCharacter(page, `Ash ${stamp}`);
   await expect(page.getByRole('heading', { name: `Ash ${stamp}` })).toBeVisible();
   // The wizard renders its own header instead of the site nav (V21 item 10), so leaving it is a
   // navigation, not a nav-link click.

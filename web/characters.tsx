@@ -7,37 +7,20 @@
  * (the standalone page prioritizes inspection and eligible editing; Open table when applicable).
  */
 import { useState } from 'react';
-import type { FormEvent } from 'react';
 import { Link, useNavigate } from '@tanstack/react-router';
 import { useMutation, useQuery } from 'convex/react';
 import { api } from '../convex/_generated/api';
 import type { Id } from '../convex/_generated/dataModel';
-import { emptyAuthored } from '../shared/characterDraft';
 import type { CharacterSheet as SheetPayload } from '../shared/contracts/characterSheet';
 import { Badge } from './components/ui/badge';
 import { Button, buttonVariants } from './components/ui/button';
 import { Card, CardContent } from './components/ui/card';
-import { Input } from './components/ui/input';
-import { Eyebrow, Field, Loading, SectionHeading, useCommand } from './ui';
+import { Eyebrow, Loading, SectionHeading, useCommand } from './ui';
 import { CharacterSheet } from './character-sheet';
 import { SecretInheritance } from './character-sheet/secret-inheritance';
 
 export function CharactersPage() {
   const characters = useQuery(api.characters.listMine);
-  const create = useMutation(api.characters.create);
-  const navigate = useNavigate();
-  const [name, setName] = useState('');
-  const command = useCommand();
-  async function submit(event: FormEvent) {
-    event.preventDefault();
-    await command.run(
-      async commandId => {
-        const characterId = await create({ commandId, authored: { ...emptyAuthored, name } });
-        await navigate({ to: '/characters/$characterId/wizard', params: { characterId } });
-      },
-      JSON.stringify(['characters.create', name]),
-    );
-  }
   return (
     <>
       <div className="rule-strong mb-8 pb-5">
@@ -53,7 +36,7 @@ export function CharactersPage() {
             <Loading>Loading characters…</Loading>
           ) : characters.length === 0 ? (
             <p className="text-sm text-muted-foreground">
-              No characters yet. Start with a name; the wizard takes it from there.
+              No characters yet. Explore the wizard and save when you’re ready.
             </p>
           ) : (
             <ul className="m-0 list-none p-0">
@@ -94,19 +77,16 @@ export function CharactersPage() {
               a Hero. Supported choices are enabled; additional options remain visible for
               reference.
             </p>
-            <form className="flex flex-col gap-4" onSubmit={submit}>
-              <Field label="Name">
-                <Input
-                  required
-                  maxLength={100}
-                  value={name}
-                  onChange={event => setName(event.target.value)}
-                />
-              </Field>
-              <Button className="w-fit" disabled={command.pending} type="submit">
-                {command.pending ? 'Creating…' : 'Create and open the wizard'}
-              </Button>
-            </form>
+            <p className="text-sm text-muted-foreground">
+              Choose a name in the Details step. Your character is created only when you save.
+            </p>
+            <Link
+              to="/characters/$characterId/wizard"
+              params={{ characterId: 'new' }}
+              className={buttonVariants({ className: 'w-fit' })}
+            >
+              Open character wizard
+            </Link>
           </CardContent>
         </Card>
       </div>

@@ -1,3 +1,4 @@
+import { startCharacter } from './character-fixtures';
 // SPDX-License-Identifier: GPL-3.0-only
 // A02 browser walkthrough: a player builds the hero-fixture devil Fury through every presented
 // wizard step, submits it, the Director approves it from the campaign page, and the sheet reads as
@@ -50,8 +51,7 @@ test('wizard, admission review and the three sheet audiences', async ({ browser 
     }
     // Create the hero: the wizard opens on step 1 with the "hero so far" evaluating live.
     await player!.getByRole('link', { name: 'Characters', exact: true }).click();
-    await player!.getByLabel('Name', { exact: true }).fill(`Grug ${stamp}`);
-    await player!.getByRole('button', { name: 'Create and open the wizard' }).click();
+    await startCharacter(player!, `Grug ${stamp}`);
     await expect(player!.getByRole('heading', { name: `Grug ${stamp}` })).toBeVisible();
     const soFar = player!.getByLabel('Hero so far');
     await expect(soFar).toContainText('incomplete');
@@ -63,7 +63,7 @@ test('wizard, admission review and the three sheet audiences', async ({ browser 
     // 2. Ancestry: the full pool is visible, unsupported ancestries are labeled and disabled.
     await step('2. Ancestry');
     await expect(player!.getByLabel('Dwarf', { exact: true })).toBeDisabled();
-    await expect(player!.getByText('not offered in v0.01').first()).toBeVisible();
+    await expect(player!.getByText('Not offered yet').first()).toBeVisible();
     await player!.getByLabel('Devil', { exact: true }).check();
     await pick('Silver Tongue skill', 'Persuade');
     await player!.getByLabel('Beast Legs', { exact: true }).check();
@@ -93,7 +93,7 @@ test('wizard, admission review and the three sheet audiences', async ({ browser 
     await pick('Intrigue skill', 'Alertness');
     await pick('Career languages 1', '__open__');
     await pick('Career languages 2', 'Vaslorian');
-    await pick('Career perk', 'Teamwork');
+    await player!.getByLabel('Teamwork', { exact: true }).check();
     await player!.getByLabel('Sole Survivor', { exact: true }).check();
     // 5. Class.
     await step('5. Class');
@@ -129,7 +129,10 @@ test('wizard, admission review and the three sheet audiences', async ({ browser 
     // 6. Kit: the source text of an option is readable before choosing it.
     await step('6. Kit');
     await pick('Choose a kit', 'Mountain');
-    await player!.getByRole('button', { name: 'Read Mountain in the rules', exact: true }).click();
+    await player!
+      .getByRole('region', { name: 'Mountain full text', exact: true })
+      .getByRole('button', { name: 'Read Mountain in the rules', exact: true })
+      .click();
     await expect(player!.getByRole('dialog')).toContainText('Stamina');
     await player!.getByRole('button', { name: 'Close rule', exact: true }).click();
     await expect(player!.getByLabel('Choose a kit', { exact: true })).toHaveValue('Mountain');
@@ -145,7 +148,7 @@ test('wizard, admission review and the three sheet audiences', async ({ browser 
     // 7. Free strikes (display only), 9. Details, 10. Connections.
     await step('7. Add Free Strikes');
     await expect(player!.getByText('Melee Weapon Free Strike').first()).toBeVisible();
-    await expect(player!.getByRole('button', { name: /^8\. Complication/ })).toHaveCount(0);
+    await expect(player!.getByRole('button', { name: /^8\. Complication/ })).toBeVisible();
     await step('9. Determine Details');
     await player!.getByLabel('Private notes', { exact: false }).fill('Grug fears the sea.');
     // V21: EXIT saves the draft (the former "Save and close") and returns to the character page.

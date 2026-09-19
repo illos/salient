@@ -1,3 +1,4 @@
+import { startCharacter } from './character-fixtures';
 // SPDX-License-Identifier: GPL-3.0-only
 import { expect, test } from '@playwright/test';
 import { mkdir } from 'node:fs/promises';
@@ -27,8 +28,7 @@ test('corrected Forge Bethell: complete wizard, reload, review and sourced sheet
     await page!.getByRole('button', { name: 'Request to join', exact: true }).click();
     await director!.getByRole('button', { name: 'Approve', exact: true }).click();
     await page!.getByRole('link', { name: 'Characters', exact: true }).click();
-    await page!.getByLabel('Name', { exact: true }).fill(name);
-    await page!.getByRole('button', { name: 'Create and open the wizard' }).click();
+    await startCharacter(page!, name);
     const step = async (name: string) =>
       page!.getByRole('button', { name: new RegExp(`^${name.replace('.', '\\.')}`) }).click();
     const pick = async (label: string, value: string) =>

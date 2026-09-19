@@ -1,0 +1,60 @@
+
+Running 8 tests using 1 worker
+
+[1/8] tests/browser/journey.spec.ts:16:1 › accounts, invitation approval, session lifecycle, private draft persistence and reconnect
+[2/8] tests/browser/rule-popup.spec.ts:5:1 › rule cards preserve the wizard, navigate references, scroll and dismiss accessibly
+[3/8] tests/browser/theme.spec.ts:27:1 › light, dark and system preference switch without reload and persist across reload
+[4/8] tests/browser/theme.spec.ts:68:1 › prefers-reduced-motion disables transitions
+[5/8] tests/browser/theme.spec.ts:83:1 › reference screenshots: login, campaign home and character list in light and dark
+[6/8] tests/browser/v21-wizard.spec.ts:17:1 › wizard frame: header, rail, choice rows, persistence, independent scrolling
+[7/8] tests/browser/v25-elementalist.spec.ts:8:1 › corrected Forge Bethell: complete wizard, reload, review and sourced sheet
+[8/8] tests/browser/wizard.spec.ts:23:1 › wizard, admission review and the three sheet audiences
+  1) tests/browser/wizard.spec.ts:23:1 › wizard, admission review and the three sheet audiences ────
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByText('not offered in v0.01').first()
+    Expected: visible
+    Timeout: 15000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByText('not offered in v0.01').first() with timeout 15000ms
+      - waiting for getByText('not offered in v0.01').first()
+
+
+      64 |     await step('2. Ancestry');
+      65 |     await expect(player!.getByLabel('Dwarf', { exact: true })).toBeDisabled();
+    > 66 |     await expect(player!.getByText('not offered in v0.01').first()).toBeVisible();
+         |                                                                     ^
+      67 |     await player!.getByLabel('Devil', { exact: true }).check();
+      68 |     await pick('Silver Tongue skill', 'Persuade');
+      69 |     await player!.getByLabel('Beast Legs', { exact: true }).check();
+        at /app/tests/browser/wizard.spec.ts:66:69
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../artifacts/v40-regression-final/wizard-wizard-admission-review-and-the-three-sheet-audiences/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../artifacts/v40-regression-final/wizard-wizard-admission-review-and-the-three-sheet-audiences/test-failed-2.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../artifacts/v40-regression-final/wizard-wizard-admission-review-and-the-three-sheet-audiences/test-failed-3.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../artifacts/v40-regression-final/wizard-wizard-admission-review-and-the-three-sheet-audiences/error-context.md
+
+    attachment #5: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../artifacts/v40-regression-final/wizard-wizard-admission-review-and-the-three-sheet-audiences/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../artifacts/v40-regression-final/wizard-wizard-admission-review-and-the-three-sheet-audiences/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  1 failed
+    tests/browser/wizard.spec.ts:23:1 › wizard, admission review and the three sheet audiences ─────
+  7 passed (1.9m)

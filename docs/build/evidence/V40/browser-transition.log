@@ -1,0 +1,92 @@
+
+Running 9 tests using 1 worker
+
+[1/9] tests/browser/journey.spec.ts:16:1 › accounts, invitation approval, session lifecycle, private draft persistence and reconnect
+  1) tests/browser/journey.spec.ts:16:1 › accounts, invitation approval, session lifecycle, private draft persistence and reconnect
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('heading', { name: 'Ash 27cda200' })
+    Expected: visible
+    Timeout: 15000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByRole('heading', { name: 'Ash 27cda200' }) with timeout 15000ms
+      - waiting for getByRole('heading', { name: 'Ash 27cda200' })
+
+
+      130 |   await player.getByRole('link', { name: 'Characters', exact: true }).click();
+      131 |   await startCharacter(player, `Ash ${stamp}`);
+    > 132 |   await expect(player.getByRole('heading', { name: `Ash ${stamp}` })).toBeVisible();
+          |                                                                       ^
+      133 |   const characterUrl = player.url();
+      134 |   await player.getByRole('button', { name: '9. Determine Details' }).click();
+      135 |   await player
+        at /app/tests/browser/journey.spec.ts:132:71
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../artifacts/v40-browser-final/journey-accounts-invitatio-e0df1-t-persistence-and-reconnect/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../artifacts/v40-browser-final/journey-accounts-invitatio-e0df1-t-persistence-and-reconnect/test-failed-2.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../artifacts/v40-browser-final/journey-accounts-invitatio-e0df1-t-persistence-and-reconnect/test-failed-3.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../artifacts/v40-browser-final/journey-accounts-invitatio-e0df1-t-persistence-and-reconnect/error-context.md
+
+    attachment #5: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../artifacts/v40-browser-final/journey-accounts-invitatio-e0df1-t-persistence-and-reconnect/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../artifacts/v40-browser-final/journey-accounts-invitatio-e0df1-t-persistence-and-reconnect/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[2/9] tests/browser/rule-popup.spec.ts:5:1 › rule cards preserve the wizard, navigate references, scroll and dismiss accessibly
+  2) tests/browser/rule-popup.spec.ts:5:1 › rule cards preserve the wizard, navigate references, scroll and dismiss accessibly
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('heading', { name: 'Imagine your hero' })
+    Expected: visible
+    Timeout: 15000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByRole('heading', { name: 'Imagine your hero' }) with timeout 15000ms
+      - waiting for getByRole('heading', { name: 'Imagine your hero' })
+
+
+      16 |   await page.getByRole('link', { name: 'Characters', exact: true }).click();
+      17 |   await startCharacter(page, `Reader hero ${stamp}`);
+    > 18 |   await expect(page.getByRole('heading', { name: 'Imagine your hero' })).toBeVisible();
+         |                                                                          ^
+      19 |   await expect(page.locator('body')).not.toContainText('think.prompts');
+      20 |   await expect(page.locator('body')).not.toContainText('en/unified');
+      21 |   const url = page.url();
+        at /app/tests/browser/rule-popup.spec.ts:18:74
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../artifacts/v40-browser-final/rule-popup-rule-cards-pres-8e822-roll-and-dismiss-accessibly/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../artifacts/v40-browser-final/rule-popup-rule-cards-pres-8e822-roll-and-dismiss-accessibly/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../artifacts/v40-browser-final/rule-popup-rule-cards-pres-8e822-roll-and-dismiss-accessibly/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../artifacts/v40-browser-final/rule-popup-rule-cards-pres-8e822-roll-and-dismiss-accessibly/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[3/9] tests/browser/theme.spec.ts:27:1 › light, dark and system preference switch without reload and persist across reload
+[4/9] tests/browser/theme.spec.ts:68:1 › prefers-reduced-motion disables transitions
+[5/9] tests/browser/theme.spec.ts:83:1 › reference screenshots: login, campaign home and character list in light and dark

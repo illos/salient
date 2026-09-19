@@ -1,0 +1,5 @@
+
+Running 1 test using 1 worker
+
+[1/1] tests/browser/v40-unsaved-wizard.spec.ts:8:1 › unsaved wizard creates nothing until first explicit save, then edits the same character
+  1 passed (19.8s)

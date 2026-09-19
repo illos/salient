@@ -275,8 +275,46 @@ export const get = query({
     };
   },
 });
+/** Creation and later saves share the same bounds and pinned provenance. */
+function validatedSelections(selections: DraftSelection[], level: number): DraftSelection[] {
+  const definitions = getDefinitions(level);
+  if (
+    selections.length > 100 ||
+    JSON.stringify(selections).length > 64000 ||
+    selections.some(
+      selection =>
+        !selection.decisionId.trim() ||
+        !selection.ownerBranchId.trim() ||
+        selection.sources.length === 0 ||
+        selection.sources.some(
+          source => !source.id.trim() || !source.path.trim() || !source.revision.trim(),
+        ) ||
+        !isJsonValue(selection.value),
+    )
+  )
+    throw new ConvexError(
+      'Selections must contain bounded JSON values and complete decision, branch and source references.',
+    );
+  if (new Set(selections.map(selection => selection.decisionId)).size !== selections.length)
+    throw new ConvexError(
+      'A decision can only be saved once within its owning branch or across branches.',
+    );
+  // Known decisions always persist canonical pinned provenance; client labels cannot forge it.
+  const canonical = new Map(
+    draftSelectionsFrom(selectionsFrom(selections), definitions).map(s => [s.decisionId, s]),
+  );
+  const known = new Set(definitions.steps.flatMap(step => step.decisions.map(d => d.id)));
+  selections = selections.map(selection =>
+    known.has(selection.decisionId) ? canonical.get(selection.decisionId)! : selection,
+  );
+  return selections;
+}
 export const create = mutation({
-  args: { commandId: v.string(), authored: authoredValidator },
+  args: {
+    commandId: v.string(),
+    authored: authoredValidator,
+    selections: v.optional(v.array(selectionValidator)),
+  },
   returns: v.id('characters'),
   handler: async (ctx, args) => {
     const user = await requireUser(ctx);
@@ -288,6 +326,9 @@ export const create = mutation({
       .withIndex('by_owner', q => q.eq('ownerId', user._id))
       .take(100);
     if (existing.length >= 100) throw new ConvexError('Prototype limit of 100 characters reached.');
+    const selections = validatedSelections(args.selections ?? [], 1);
+    const choiceOrigins = canonicalChoiceOrigins(selections, 1);
+    const evaluation = evaluateSelections(selections, 1, choiceOrigins);
     const id = await ctx.db.insert('characters', {
       ownerId: user._id,
       authored: fields,
@@ -299,12 +340,15 @@ export const create = mutation({
       campaignId: null,
       combatLocked: false,
     });
-    const evaluation = evaluateSelections([]);
     const revisionId = await ctx.db.insert('characterRevisions', {
       characterId: id,
       revision: 1,
       parentRevisionId: null,
-      selections: [],
+      selections,
+      level: 1,
+      kind: 'full-edit',
+      choiceOrigins,
+      baseEffectiveRevisionId: null,
       status: evaluation.status,
       evaluation,
       derivedBaseline: evaluation.baseline,
@@ -353,27 +397,7 @@ export const save = mutation({
     if (level !== 1 && level !== 2) throw new ConvexError('Only levels 1 and 2 are supported.');
     const definitions = getDefinitions(level);
     let selections = args.selections ?? old?.selections ?? [];
-    if (
-      selections.length > 100 ||
-      JSON.stringify(selections).length > 64000 ||
-      selections.some(
-        selection =>
-          !selection.decisionId.trim() ||
-          !selection.ownerBranchId.trim() ||
-          selection.sources.length === 0 ||
-          selection.sources.some(
-            source => !source.id.trim() || !source.path.trim() || !source.revision.trim(),
-          ) ||
-          !isJsonValue(selection.value),
-      )
-    )
-      throw new ConvexError(
-        'Selections must contain bounded JSON values and complete decision, branch and source references.',
-      );
-    if (new Set(selections.map(selection => selection.decisionId)).size !== selections.length)
-      throw new ConvexError(
-        'A decision can only be saved once within its owning branch or across branches.',
-      );
+    selections = validatedSelections(selections, level);
     if (args.assignment) {
       try {
         selections = draftSelectionsFrom(
@@ -390,14 +414,6 @@ export const save = mutation({
         throw new ConvexError(error instanceof Error ? error.message : 'Invalid assignment.');
       }
     }
-    // Known decisions always persist canonical pinned provenance; client labels cannot forge it.
-    const canonical = new Map(
-      draftSelectionsFrom(selectionsFrom(selections), definitions).map(s => [s.decisionId, s]),
-    );
-    const known = new Set(definitions.steps.flatMap(step => step.decisions.map(d => d.id)));
-    selections = selections.map(selection =>
-      known.has(selection.decisionId) ? canonical.get(selection.decisionId)! : selection,
-    );
     const revision = character.revision + 1;
     // Draft saves evaluate the build and never touch live values (R03 section 3).
     const choiceOrigins = canonicalChoiceOrigins(selections, level, old ?? undefined);

@@ -351,9 +351,14 @@ const characterRoute = createRoute({
 const wizardRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/characters/$characterId/wizard',
-  component: () => (
-    <WizardPage characterId={wizardRoute.useParams().characterId as Id<'characters'>} />
-  ),
+  component: () => {
+    const { characterId } = wizardRoute.useParams();
+    return (
+      <WizardPage
+        characterId={characterId === 'new' ? undefined : (characterId as Id<'characters'>)}
+      />
+    );
+  },
 });
 const progressionRoute = createRoute({
   getParentRoute: () => rootRoute,

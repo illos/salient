@@ -14,7 +14,8 @@ Rules review: not required (creation persistence and UI only).
 3. First explicit save atomically preserves authored text and choices in one character/revision;
    retries cannot duplicate it; validation failures write nothing; normal access controls apply.
 4. Later saves and reopened edits retain identity, choices and existing revision protections.
-5. Full checks and affected browser journeys pass; independent review passes before integration.
+5. Implementation gate: all check stages and affected browser journeys pass; independent review
+   follows the code/evidence checks and precedes integration.
 6. Integration and actual shared development verification are recorded separately from branch checks.
 
 ## Work log
@@ -28,3 +29,18 @@ No source pins, game mechanics, schema, engine automation or content changes.
 
 Validation planned: full `pnpm check`; first-save unit tests; new unsaved browser journey plus
 existing wizard, Elementalist and layout journeys; screenshots and authenticated persisted readback.
+
+Validation: lint/types and all 674 tests (274 engine, 400 app/tooling) passed. The aggregate command
+then found a pre-existing V39 review link to a renamed activation heading. Corrected that link
+without changing the historical review and resumed the remaining link/source/build stages.
+Subsequent browser/review work fixed the new-to-saved route hook count and blocked custom edits
+while a save is pending; final focused lint/types/build and browser evidence cover those changes.
+Earlier compile/lint catches removed
+unused creation-form imports and corrected the typed router link.
+
+Final browser coverage: nine distinct scenarios passed across the focused unsaved-draft journey,
+seven regression cases, and the complete Fury/admission/three-audience/table journey. Retained
+[verification evidence](evidence/V40/README.md) distinguishes initial selector errors, the fixed
+route transition, and a transient anonymous-backend table query timeout from passing runs.
+The bounded table retry passed in 3.8 minutes without changing table behavior or execution limits.
+All 13 changed code/test files byte-match the tested remote source. No schema migration or seed is needed.

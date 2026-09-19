@@ -1,0 +1,51 @@
+
+Running 1 test using 1 worker
+
+[1/1] tests/browser/wizard.spec.ts:23:1 › wizard, admission review and the three sheet audiences
+  1) tests/browser/wizard.spec.ts:23:1 › wizard, admission review and the three sheet audiences ────
+
+    Error: expect(received).toBeGreaterThan(expected)
+
+    Expected: > 0
+    Received:   0
+
+    Call Log:
+    - Timeout 15000ms exceeded while waiting on the predicate
+
+       at acceptance-extension.ts:195
+
+      193 |           expect(logRows).toBeLessThanOrEqual(50);
+      194 |           if (cycle >= 40) expect(logRows).toBe(50);
+    > 195 |         }).toPass({ timeout: 15_000 });
+          |            ^
+      196 |         roles.push({
+      197 |           role: ['director', 'player', 'observer'][index],
+      198 |           heapBytes: metrics.JSHeapUsedSize,
+        at tableJourney (/app/tests/browser/acceptance-extension.ts:195:12)
+        at /app/tests/browser/wizard.spec.ts:204:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../artifacts/v40-fury-final3/wizard-wizard-admission-review-and-the-three-sheet-audiences/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../artifacts/v40-fury-final3/wizard-wizard-admission-review-and-the-three-sheet-audiences/test-failed-2.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../artifacts/v40-fury-final3/wizard-wizard-admission-review-and-the-three-sheet-audiences/test-failed-3.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../artifacts/v40-fury-final3/wizard-wizard-admission-review-and-the-three-sheet-audiences/error-context.md
+
+    attachment #5: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../artifacts/v40-fury-final3/wizard-wizard-admission-review-and-the-three-sheet-audiences/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../artifacts/v40-fury-final3/wizard-wizard-admission-review-and-the-three-sheet-audiences/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  1 failed
+    tests/browser/wizard.spec.ts:23:1 › wizard, admission review and the three sheet audiences ─────

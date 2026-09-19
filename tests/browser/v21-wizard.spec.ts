@@ -1,3 +1,4 @@
+import { startCharacter } from './character-fixtures';
 // SPDX-License-Identifier: GPL-3.0-only
 /**
  * V21 item 10: the wizard's full-viewport frame. The header replaces the site nav; the rail
@@ -23,8 +24,7 @@ test('wizard frame: header, rail, choice rows, persistence, independent scrollin
     const stamp = crypto.randomUUID().slice(0, 8);
     await register(page, `Player ${stamp}`, `v21-wizard-${stamp}@example.test`);
     await page.getByRole('link', { name: 'Characters', exact: true }).click();
-    await page.getByLabel('Name', { exact: true }).fill(`Ember ${stamp}`);
-    await page.getByRole('button', { name: 'Create and open the wizard' }).click();
+    await startCharacter(page, `Ember ${stamp}`);
     await expect(page.getByRole('heading', { name: `Ember ${stamp}` })).toBeVisible();
     const wizardUrl = page.url();
 

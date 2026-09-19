@@ -15,7 +15,7 @@ does not approve or certify cloud activation, actual mail delivery, Git integrat
 - [Regular-account behavior](../../accounts-and-access-spec.md#proposed-regular-account-behavior)
 - [Hosted email configuration](../../hosted-development.md#account-email)
 - [V39 implementation acceptance](../V39-account-email.md#acceptance-checks--implementation-gate)
-- [V39 activation gate](../V39-account-email.md#activation-gate--pending-external-inputs)
+- [V39 activation gate](../V39-account-email.md#activation-verification)
 - [Review standard](../README.md#review-standard), project `AGENTS.md` and `agent.MD`.
 
 Read all production changes and new recovery tests/fixture; inspected

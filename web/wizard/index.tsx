@@ -24,7 +24,7 @@ import { api } from '../../convex/_generated/api';
 import type { Id } from '../../convex/_generated/dataModel';
 import { definitions as levelOneDefinitions } from '../../shared/content/level-one-decisions';
 import { getDefinitions } from '../../shared/content/character-decisions';
-import type { CharacterAuthored } from '../../shared/characterDraft';
+import { emptyAuthored, type CharacterAuthored } from '../../shared/characterDraft';
 import type {
   Diagnostic,
   EvaluationResult,
@@ -682,7 +682,30 @@ function hasInteractiveDecision(step: Step): boolean {
   return step.decisions.some(d => d.kind === 'choice' || d.kind === 'authored');
 }
 
-function Wizard({ character }: { character: LoadedCharacter }) {
+type WizardCharacter = Omit<LoadedCharacter, 'id'> & { id: Id<'characters'> | null };
+const unsavedCharacter: WizardCharacter = {
+  id: null,
+  authored: emptyAuthored,
+  revision: 0,
+  selections: [],
+  status: 'incomplete',
+  evaluation: null,
+  level: 1,
+  choiceOrigins: {},
+  fullEditIsStale: false,
+  combatLocked: false,
+  campaignId: null,
+  campaignName: null,
+  effectiveRevisionId: null,
+  effectiveRevision: null,
+  draftIsEffective: false,
+  derivedBaseline: null,
+  liveState: null,
+  activationPreview: null,
+  review: null,
+};
+
+function Wizard({ character }: { character: WizardCharacter }) {
   const definitions = useMemo(
     () => getDefinitions(character.level, character.choiceOrigins),
     [character.level, character.choiceOrigins],
@@ -691,6 +714,7 @@ function Wizard({ character }: { character: LoadedCharacter }) {
   const navigate = useNavigate();
   const client = useConvex();
   const save = useMutation(api.characters.save);
+  const create = useMutation(api.characters.create);
   const command = useCommand();
   const [selections, setSelections] = useState<Selections>(() =>
     Object.fromEntries(character.selections.map(s => [s.decisionId, s.value as SelectionValue])),
@@ -703,6 +727,7 @@ function Wizard({ character }: { character: LoadedCharacter }) {
   const [reconciled, setReconciled] = useState(false);
   const [stepIndex, setStepIndex] = useState(0);
   const [reached, setReached] = useState(0);
+  const [nameRequired, setNameRequired] = useState(false);
   const [saved, setSaved] = useState(false);
   const [dirty, setDirty] = useState(false);
   const [cleared, setCleared] = useState<string[]>([]);
@@ -714,7 +739,7 @@ function Wizard({ character }: { character: LoadedCharacter }) {
     [selections, definitions],
   );
   const evaluation = useQuery(api.characters.evaluate, {
-    characterId: character.id,
+    ...(character.id ? { characterId: character.id } : {}),
     selections: draft,
     targetLevel: character.level,
   }) as EvaluationResult | undefined;
@@ -729,6 +754,7 @@ function Wizard({ character }: { character: LoadedCharacter }) {
     setReached(r => Math.max(r, index));
   }
   function select(id: string, value: SelectionValue | undefined) {
+    if (command.pending) return;
     setSaved(false);
     setDirty(true);
     const next = { ...selections };
@@ -742,14 +768,26 @@ function Wizard({ character }: { character: LoadedCharacter }) {
     setCleared(pruned.removed.filter(removed => removed !== id));
   }
   function author(value: CharacterAuthored) {
+    if (command.pending) return;
     setSaved(false);
     setDirty(true);
     setAuthored(value);
   }
   async function persist(close: boolean) {
     setSaved(false);
+    if (!authored.name.trim()) {
+      goTo(PRESENTED.findIndex(step => step.id === 'step.details'));
+      setNameRequired(true);
+      return;
+    }
+    setNameRequired(false);
+    let createdId: Id<'characters'> | undefined;
     const ok = await command.run(
       async commandId => {
+        if (!character.id) {
+          createdId = await create({ commandId, authored, selections: draft });
+          return;
+        }
         const revision = await save({
           commandId,
           characterId: character.id,
@@ -773,12 +811,22 @@ function Wizard({ character }: { character: LoadedCharacter }) {
     if (ok) {
       setSaved(true);
       setDirty(false);
-      if (close)
+      if (createdId) {
+        await navigate({
+          to: close ? '/characters/$characterId' : '/characters/$characterId/wizard',
+          params: { characterId: createdId },
+          replace: true,
+        });
+      } else if (close && character.id)
         await navigate({ to: '/characters/$characterId', params: { characterId: character.id } });
     }
   }
   /** EXIT: the old "Save and close" when there is something to save; otherwise just leave. */
   async function exit() {
+    if (!character.id) {
+      await navigate({ to: '/characters' });
+      return;
+    }
     if (dirty && canSave) return persist(true);
     await navigate({ to: '/characters/$characterId', params: { characterId: character.id } });
   }
@@ -839,6 +887,17 @@ function Wizard({ character }: { character: LoadedCharacter }) {
         </div>
         <section className="flex min-h-0 flex-col" aria-label="Current step">
           <div className="min-h-0 flex-1 overflow-y-auto px-10 pt-8 pb-8" data-wizard-pane="centre">
+            {!character.id && (
+              <Notice className="mb-4">
+                Unsaved character. Save draft to keep your choices. Exiting or reloading before
+                saving discards them.
+              </Notice>
+            )}
+            {nameRequired && (
+              <p role="alert" className="mb-4 text-sm text-destructive">
+                Enter a name in Details before saving your character.
+              </p>
+            )}
             {character.fullEditIsStale && (
               <Notice className="mb-4">
                 Your effective build advanced after this draft was saved. Review its earlier choices
@@ -883,29 +942,31 @@ function Wizard({ character }: { character: LoadedCharacter }) {
                 abilities.
               </p>
             )}
-            {step.decisions.map(decision => (
-              <DecisionEditor
-                key={decision.id}
-                decision={decision}
-                definitions={definitions}
-                step={step}
-                selections={selections}
-                onSelect={select}
-                authored={authored}
-                onAuthored={author}
-                diagnostics={evaluation?.diagnostics[decision.id]}
-              />
-            ))}
-            {step.id === 'step.details' && (
-              <Field label="Private notes" hint="Only you can read these notes." className="py-5">
-                <Textarea
-                  maxLength={10000}
-                  className="max-w-2xl"
-                  value={authored.notes}
-                  onChange={event => author({ ...authored, notes: event.target.value })}
+            <fieldset disabled={command.pending} className="contents">
+              {step.decisions.map(decision => (
+                <DecisionEditor
+                  key={decision.id}
+                  decision={decision}
+                  definitions={definitions}
+                  step={step}
+                  selections={selections}
+                  onSelect={select}
+                  authored={authored}
+                  onAuthored={author}
+                  diagnostics={evaluation?.diagnostics[decision.id]}
                 />
-              </Field>
-            )}
+              ))}
+              {step.id === 'step.details' && (
+                <Field label="Private notes" hint="Only you can read these notes." className="py-5">
+                  <Textarea
+                    maxLength={10000}
+                    className="max-w-2xl"
+                    value={authored.notes}
+                    onChange={event => author({ ...authored, notes: event.target.value })}
+                  />
+                </Field>
+              )}
+            </fieldset>
           </div>
           <StepNav
             previous={previous ? stepName(previous) : undefined}
@@ -930,8 +991,9 @@ function Wizard({ character }: { character: LoadedCharacter }) {
   );
 }
 
-export function WizardPage({ characterId }: { characterId: Id<'characters'> }) {
-  const character = useQuery(api.characters.get, { characterId });
+export function WizardPage({ characterId }: { characterId?: Id<'characters'> }) {
+  const character = useQuery(api.characters.get, characterId ? { characterId } : 'skip');
+  if (!characterId) return <Wizard key="new" character={unsavedCharacter} />;
   if (character === undefined)
     return (
       <div className="p-10">
