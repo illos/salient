@@ -4,6 +4,7 @@ import { promisify } from 'node:util';
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { seedLocalHero } from './local-fixtures';
 import manifest from '../../shared/content/compendium/manifest.json' with { type: 'json' };
+import { pacedSignUp } from './signup-pacing';
 
 const password = 'Test-only-salient-password-42';
 
@@ -33,8 +34,11 @@ async function register(page: Page, name: string, email: string) {
   await page.getByLabel('Display name').fill(name);
   await page.getByLabel('Email', { exact: true }).fill(email);
   await page.getByLabel('Password', { exact: true }).fill(password);
-  await page.getByRole('button', { name: 'Create account', exact: true }).click();
-  await expect(page.getByRole('heading', { name: 'Campaigns', exact: true })).toBeVisible();
+  // V52: quiet interval before each sign-up; the helper observes the HTTP response.
+  await pacedSignUp(page, async () => {
+    await page.getByRole('button', { name: 'Create account', exact: true }).click();
+    await expect(page.getByRole('heading', { name: 'Campaigns', exact: true })).toBeVisible();
+  });
 }
 
 test('three table contexts, palette, console and live CLI share persisted operations', async ({

@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-only
 import { expect, test, type Page } from '@playwright/test';
+import { pacedSignUp } from './signup-pacing';
 
 async function register(page: Page, name: string, stamp: string) {
   await page.goto('/login');
@@ -7,8 +8,11 @@ async function register(page: Page, name: string, stamp: string) {
   await page.getByLabel('Display name').fill(name);
   await page.getByLabel('Email', { exact: true }).fill(`${name}-${stamp}@example.test`);
   await page.getByLabel('Password', { exact: true }).fill('Test-only-salient-password-42');
-  await page.getByRole('button', { name: 'Create account', exact: true }).click();
-  await expect(page.getByRole('heading', { name: 'Campaigns', exact: true })).toBeVisible();
+  // V52: quiet interval before each sign-up; the helper observes the HTTP response.
+  await pacedSignUp(page, async () => {
+    await page.getByRole('button', { name: 'Create account', exact: true }).click();
+    await expect(page.getByRole('heading', { name: 'Campaigns', exact: true })).toBeVisible();
+  });
 }
 
 async function findCampaign(page: Page, invitation: string) {

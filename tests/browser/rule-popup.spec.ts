@@ -1,6 +1,7 @@
 import { startCharacter } from './character-fixtures';
 // SPDX-License-Identifier: GPL-3.0-only
 import { expect, test } from '@playwright/test';
+import { pacedSignUp } from './signup-pacing';
 
 test('rule cards preserve the wizard, navigate references, scroll and dismiss accessibly', async ({
   page,
@@ -12,7 +13,11 @@ test('rule cards preserve the wizard, navigate references, scroll and dismiss ac
   await page.getByLabel('Display name').fill(`Reader ${stamp}`);
   await page.getByLabel('Email', { exact: true }).fill(`reader-${stamp}@example.test`);
   await page.getByLabel('Password', { exact: true }).fill('Test-only-salient-password-42');
-  await page.getByRole('button', { name: 'Create account', exact: true }).click();
+  // V52: paced like every other sign-up. This block has no post-submit assertion of its
+  // own, which is why the helper clocks the HTTP response rather than the callback.
+  await pacedSignUp(page, async () => {
+    await page.getByRole('button', { name: 'Create account', exact: true }).click();
+  });
   await page.getByRole('link', { name: 'Characters', exact: true }).click();
   await startCharacter(page, `Reader hero ${stamp}`);
   await expect(page.getByRole('heading', { name: 'Imagine your hero' })).toBeVisible();

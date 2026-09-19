@@ -4,6 +4,7 @@ import { expect, test, type Page } from '@playwright/test';
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
 import { seedLocalHero } from './local-fixtures';
+import { pacedSignUp } from './signup-pacing';
 
 test.use({ actionTimeout: 30_000 });
 
@@ -14,8 +15,11 @@ async function register(page: Page, name: string, email: string) {
   await page.getByLabel('Display name').fill(name);
   await page.getByLabel('Email', { exact: true }).fill(email);
   await page.getByLabel('Password', { exact: true }).fill(password);
-  await page.getByRole('button', { name: 'Create account', exact: true }).click();
-  await expect(page.getByRole('heading', { name: 'Campaigns', exact: true })).toBeVisible();
+  // V52: quiet interval before each sign-up; the helper observes the HTTP response.
+  await pacedSignUp(page, async () => {
+    await page.getByRole('button', { name: 'Create account', exact: true }).click();
+    await expect(page.getByRole('heading', { name: 'Campaigns', exact: true })).toBeVisible();
+  });
 }
 
 test('closeout awards once, is shared with observers, and paused session closure offers Void', async ({
