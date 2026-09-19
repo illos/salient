@@ -329,3 +329,11 @@ the active-session cadence in the orchestration guide. First check read V46 veri
 V47 completed preparation and V48 reference planning; assigned independent Polder V49 and Dwarf
 V50 preparation while pilot verification continues. This is coordination, not additional playable
 coverage or a persistent scheduler. No runtime impact.
+
+2026-09-19: recorded the reviewed [level-one source interpretations](../character-wizard-spec.md#level-one-source-interpretations)
+for the Elementalist ward/distance choices and Dwarf Runic Carving. Draft Q-CHAR-16/17/18 were
+withdrawn through source interpretation, not user rulings. The
+[fresh source re-review](evidence/V44/level-one-interpretations-review.md) passed after citation,
+alternatives and scope corrections; its explicitly assessed Behold the Mystery example and general
+area-rule links were included with the optional wording refinements. Implementation, real
+counterpart captures and per-unit verification remain pending. Documentation only; no runtime update.
