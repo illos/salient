@@ -1,0 +1,143 @@
+{
+  "$comment": "V50 Dwarf level-one reference choice maps and independently source-derived expectations. PREPARATION ONLY: no capture has been performed, no option is enabled, no expectation has been checked against any builder. Expectations are derived from the pinned Compendium, not from running Salient's evaluator.",
+  "schemaVersion": 1,
+  "unit": "V50",
+  "status": "prepared-unexecuted",
+  "compendiumRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+  "forgeRevision": "5a846aadb623a9855a023e9403bb887a956c341f",
+  "derivedFrom": "docs/research/dwarf-level-one-preparation.md",
+  "pairedReference": {
+    "build": "Bethell Corrected V25",
+    "export": "tests/fixtures/v45-reference/Bethell-corrected-export.ds-hero",
+    "role": "Polder counterpart held constant except for ancestry",
+    "verifiedBaseline": {
+      "size": "1S", "speed": 5, "stability": 0, "disengage": 2,
+      "staminaMaximum": 18, "recoveryValue": 6, "windedValue": 9,
+      "damageImmunities": { "corruption": 3 },
+      "conditionImmunities": ["frightened"]
+    }
+  },
+  "constantSelections": {
+    "culture.name": "Polder",
+    "culture.language": "Khoursirian",
+    "culture.environment": "Urban",
+    "culture.environment.skill": "Alertness",
+    "culture.organization": "Communal",
+    "culture.organization.skill": "Gymnastics",
+    "culture.upbringing": "Creative",
+    "culture.upbringing.skill": "Tailoring",
+    "career.choice": "Mage's Apprentice",
+    "career.mages-apprentice.skills": ["Monsters", "Timescape"],
+    "career.mages-apprentice.languages": ["The First Language"],
+    "career.mages-apprentice.perk": "Arcane Trick",
+    "career.mages-apprentice.inciting-incident": "Forgotten Memories",
+    "class.choice": "Elementalist",
+    "class.elementalist.characteristic-array": "2, 1, 1, −1",
+    "class.elementalist.array-assignment": { "Might": -1, "Agility": 1, "Intuition": 2, "Presence": 1 },
+    "class.elementalist.skills": ["Alchemy", "Blacksmithing", "History"],
+    "class.elementalist.magic-replacement": "Empathize",
+    "class.elementalist.specialization": "Fire",
+    "class.elementalist.enchantment": "Enchantment of Destruction",
+    "class.elementalist.ward": "Ward of Delightful Consequences",
+    "class.elementalist.signature-abilities": ["Bifurcated Incineration", "Viscous Fire"],
+    "class.elementalist.ability-3": "The Flesh, a Crucible",
+    "class.elementalist.ability-5": "Conflagration"
+  },
+  "constantNotes": [
+    "Holding Polder culture on a Dwarf is legal: ancestry 'doesn't grant you cultural benefits' (chapter/ancestries.md) and culture.language carries no dependsOn.",
+    "The Typical Ancestry Cultures table suggesting Zaliac for a dwarf is an optional archetype, not a grant.",
+    "Might is -1, which is the value the Stand Tough cases below depend on.",
+    "Reason is 2. Highest characteristic is 2 (Reason and Intuition)."
+  ],
+  "builds": [
+    {
+      "id": "D1",
+      "selections": { "ancestry.choice": "Dwarf", "ancestry.dwarf.purchased-traits": ["Grounded", "Stand Tough", "Stone Singer"] },
+      "points": { "spent": 3, "budget": 3 },
+      "covers": ["Grounded", "Stand Tough", "Stone Singer"],
+      "expected": {
+        "size": "1M", "speed": 5, "stability": 1, "disengage": 1,
+        "staminaMaximum": 18, "recoveryValue": 6, "windedValue": 9,
+        "damageImmunities": {}, "conditionImmunities": [],
+        "potencyResistMight": 0,
+        "characteristics": { "Might": -1, "Agility": 1, "Reason": 2, "Intuition": 2, "Presence": 1 }
+      },
+      "expectationSources": {
+        "size": "rule/character/speed.md — default 1M, no dwarf override",
+        "stability": "feature/trait/dwarf/grounded.md — +1 bonus to stability, over base 0",
+        "disengage": "no-kit base 1; Polder's Graceful Retreat +1 is absent on a dwarf",
+        "potencyResistMight": "feature/trait/dwarf/stand-tough.md — Might treated as 1 higher for resisting potencies only"
+      }
+    },
+    {
+      "id": "D2",
+      "selections": { "ancestry.choice": "Dwarf", "ancestry.dwarf.purchased-traits": ["Great Fortitude", "Stone Singer"] },
+      "points": { "spent": 3, "budget": 3 },
+      "covers": ["Great Fortitude"],
+      "expected": {
+        "size": "1M", "speed": 5, "stability": 0, "disengage": 1,
+        "staminaMaximum": 18, "recoveryValue": 6, "windedValue": 9,
+        "damageImmunities": {}, "conditionImmunities": ["weakened"],
+        "potencyResistMight": null,
+        "characteristics": { "Might": -1, "Agility": 1, "Reason": 2, "Intuition": 2, "Presence": 1 }
+      },
+      "expectationSources": {
+        "conditionImmunities": "feature/trait/dwarf/great-fortitude.md — you can't be made weakened; same shape as Polder Fearless/frightened"
+      }
+    },
+    {
+      "id": "D3",
+      "selections": { "ancestry.choice": "Dwarf", "ancestry.dwarf.purchased-traits": ["Spark Off Your Skin", "Grounded"] },
+      "points": { "spent": 3, "budget": 3 },
+      "covers": ["Spark Off Your Skin"],
+      "isPrintedQuickBuild": true,
+      "expected": {
+        "size": "1M", "speed": 5, "stability": 1, "disengage": 1,
+        "staminaMaximum": 24, "recoveryValue": 8, "windedValue": 12,
+        "damageImmunities": {}, "conditionImmunities": [],
+        "potencyResistMight": null,
+        "characteristics": { "Might": -1, "Agility": 1, "Reason": 2, "Intuition": 2, "Presence": 1 }
+      },
+      "expectationSources": {
+        "staminaMaximum": "feature/trait/dwarf/spark-off-your-skin.md — +6 at level one, over the Elementalist base 18",
+        "recoveryValue": "rule/health/recoveries.md — floor(24/3) = 8; must be recomputed, not cached",
+        "windedValue": "floor(24/2) = 12"
+      }
+    }
+  ],
+  "standToughCases": {
+    "$comment": "Correctness cases for the scoped potency value. NOT discriminating: a global +1 to the Might characteristic yields the same comparison value 0 and therefore the same outcome at every band.",
+    "heroMight": -1,
+    "potencyResistValue": 0,
+    "cases": [
+      { "potency": "M < -1", "affected": false },
+      { "potency": "M < 0",  "affected": false },
+      { "potency": "M < 1",  "affected": true },
+      { "potency": "M < 2",  "affected": true }
+    ],
+    "discriminatingAssertions": [
+      "characteristics.Might remains -1, not 0",
+      "any Might-based damage or power-roll expression is unchanged"
+    ],
+    "knownNonDiscriminating": "Own weak/average/strong potency values derive from the highest characteristic score, which is 2 here; Might -1 becoming 0 does not change it. A build where Might is the highest characteristic would be required, which the held-constant array cannot provide."
+  },
+  "illegalCases": [
+    { "selection": ["Great Fortitude", "Spark Off Your Skin"], "points": 4, "expect": "refused — exceeds the 3-point budget" },
+    { "selection": ["Grounded", "Grounded"], "expect": "refused — a trait cannot be taken twice (see Q-CHAR-20 (iii) for underspend, which is a separate question)" }
+  ],
+  "ancestryChangeCase": {
+    "from": "Polder", "to": "Dwarf",
+    "expectRemoved": ["Shadowmeld", "Small!", "Corruption Immunity", "Graceful Retreat", "Fearless", "damageImmunities.corruption", "conditionImmunities.frightened", "the Graceful Retreat disengage bonus"],
+    "expectPreserved": ["culture", "career", "class", "all class grants", "skills", "languages", "perks", "authored details"],
+    "expectChanged": { "size": "1S -> 1M", "disengage": "2 -> 1" }
+  },
+  "coverageLedger": {
+    "purchasedTraits": { "total": 5, "covered": 5, "status": "complete across D1-D3" },
+    "runicCarvingRunes": {
+      "total": 3,
+      "covered": 0,
+      "status": "INCOMPLETE — blocked on Q-CHAR-18",
+      "note": "While the rune's timing is unresolved, no same-build rune counterpart is certified. The capability is granted and readable; that is not coverage of the three rune options."
+    }
+  }
+}

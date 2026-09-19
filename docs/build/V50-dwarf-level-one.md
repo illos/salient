@@ -47,9 +47,11 @@ which the pinned source does not establish.
 | --- | --- |
 | `shared/content/ancestries/dwarf/level-one.ts` | New module: signature trait, purchased-trait decision with the three-point budget and per-trait costs and source paths |
 | `shared/evaluate/ancestries/dwarf.ts` | New: size, speed, stability baseline; Grounded stability; Spark Off Your Skin Stamina with recovery/winded recomputation; Great Fortitude condition immunity; Stand Tough's potency-resistance value |
-| `shared/content/level-one-decisions.ts` | One `allow('ancestry.choice', ['Dwarf'])` call — **requested from the integration owner**, as it is a shared composition file |
-| Shared contract | A potency-resistance representation — **requested from the integration owner**; see below |
-| `tests/fixtures/v50-dwarf/` | Three raw `.ds-hero` exports, sheets, capture metadata, hashes, normalized selections, derived expectations |
+| `shared/content/level-one-decisions.ts` | One `allow('ancestry.choice', ['Dwarf'])` call. **Owned by this unit**, with the shared-file edit claimed through Chords before it is made |
+| Shared contract | A potency-resistance representation. **Owned by this unit**, coordinated with the integration owner rather than delegated to them |
+| [`tests/fixtures/v50-dwarf/choice-maps.json`](../../tests/fixtures/v50-dwarf/choice-maps.json) | **Written.** Machine-readable D1–D3 selections, constant selections, derived expectations with their source citations, the Stand Tough cases, illegal and ancestry-change cases, and the coverage ledger |
+| [`scripts/capture-v50-forge.ts`](../../scripts/capture-v50-forge.ts) | **Authored, not executed.** Drives the pinned Forge application to build and export the three counterparts, following the capture mode V46 established |
+| `tests/fixtures/v50-dwarf/` | Three raw `.ds-hero` exports, sheets, `counterparts.json` with hashes and editor warnings. **None captured yet** |
 | `tests/character-v50-dwarf.test.ts` | Per-build comparison, the Stand Tough discriminating cases, ancestry-change removal, budget and duplicate cases |
 | `tests/browser/v50-dwarf.spec.ts` | Wizard journey, source display, sheet rendering, persisted readback |
 | `docs/build/V50-dwarf-level-one.md`, `docs/research/dwarf-level-one-preparation.md` | This document and its research |
@@ -67,7 +69,9 @@ Forge reaches the same shape structurally, using a dedicated `createPotencyResis
 a conditional `createRollModifier` edge rather than a Might bonus. That is corroboration of the
 shape, not rules authority; the source wording is what settles it.
 
-Requested from the integration owner: a narrow sourced field, for example
+This unit owns the change; it is coordinated with the integration owner rather than handed to them,
+and the shared-file claim goes through Chords before the edit. Proposed shape — a narrow sourced
+field, for example
 `potencyResistance?: { characteristic: Characteristic; value: DerivedValue<number>; provenance }[]`.
 It must not be folded into `characteristics`, and — following the V48 finding that
 `AbilityModifier.field` (`shared/contracts/characterEvaluation.ts:194`) has no runtime reader, so a
@@ -160,11 +164,25 @@ Unit-specific additions:
 
 1. All five purchased traits appear in at least one completed same-build Forge counterpart, per the
    three builds above. Whether the three rune options require witnesses depends on the rune question.
-2. **The Stand Tough discriminating cases.** With Might −1 and Stand Tough: an ability with potency
-   `M < 1` still applies, and an ability with potency `M < 0` does **not**. Both must be asserted.
-   An implementation modelling the trait as "+1 Might" passes the second and fails the first.
-3. Stand Tough leaves the Might characteristic, Might-based damage expressions, and the hero's own
-   weak/average/strong potency values byte-identical to the same build without it.
+2. **Stand Tough's potency behaviour.** With Might −1 and Stand Tough: an ability with potency
+   `M < 1` still applies, and one with potency `M < 0` does **not**. Both must be asserted as
+   correctness checks of the scoped value.
+
+   **These cases do not discriminate a correct implementation from a wrong one**, and an earlier
+   draft of this document claimed they did. A global `+1` to the Might characteristic produces the
+   identical comparison value of 0 and therefore the identical outcome at every potency band. The
+   check that actually catches the wrong implementation is 3.
+3. **The discriminating checks.** Stand Tough leaves the **Might characteristic** at −1 and leaves
+   every **Might-based damage or power-roll expression** unchanged. These are the only assertions in
+   this build that distinguish scoped potency resistance from a global Might increment.
+
+   Note a second limitation, so it is not mistaken for coverage: asserting the hero's **own**
+   weak/average/strong potency values is *also* non-discriminating here. Those derive from the
+   highest characteristic score, which is 2 (Reason and Intuition) in the constant selections, and a
+   Might of −1 becoming 0 does not change the highest. To make that assertion discriminating, a
+   build in which Might **is** the highest characteristic is required, which the held-constant
+   Bethell array cannot provide. Either add such a build outside the Forge-counterpart set or record
+   that own-potency preservation is untested in this unit.
 4. A four-point combination (Great Fortitude plus Spark Off Your Skin) is refused; a three-point
    combination is accepted; the same trait cannot be taken twice.
 5. Changing ancestry from Polder to Dwarf removes Shadowmeld, Small!, corruption immunity, the
@@ -192,14 +210,37 @@ every 1st-level option carries one. Forge models it as a build-time choice, but 
 authority. **This shapes the implementation**: under the play-time reading the unit delivers five new
 options and a readable capability; under the creation reading it delivers eight and needs a decision
 row with a nested open-ended Detection sub-choice. Recorded in
-[the questions file](../rules-questions-for-user.md). Until it is answered the unit implements the
-five purchased traits and grants Runic Carving as a readable capability, which is correct under both
-readings, and does **not** invent a wizard decision.
+[the questions file](../rules-questions-for-user.md). Until it is answered the unit implements the five purchased traits and grants Runic Carving as a
+readable capability, and does **not** invent a wizard decision.
 
-Four narrower questions are also recorded there and none blocks level-one work: whether Great
+**That is not the same as complete coverage, and must not be recorded as such.** An earlier draft
+said the capability-only treatment is "correct under every candidate answer". It is not: if the
+answer is that a rune is chosen at creation, then a build with no rune is an incomplete build, and
+the same-build Forge counterpart — which does carry a rune — would not match. So while Q-CHAR-18 is
+open, **rune coverage is explicitly marked incomplete in the option ledger** and no same-build rune
+counterpart is certified. Preserving the readable capability is the right interim behaviour; calling
+it finished is not.
+
+Q-CHAR-19 and Q-CHAR-20 are recorded there too. **They are gameplay and adjudication questions, not
+editor-support questions**, and are deliberately kept separate from this unit's scope: whether Great
 Fortitude prevents a hero self-applying weakened as an ability cost; what counts as an
 "environmental effect" for Stand Tough's edge; whether a Might +5 dwarf's potency-resist value is 6
-or clamps at 5; and whether underspending the three ancestry points is permitted.
+or clamps at 5; and whether underspending the three ancestry points is permitted. None blocks
+level-one editor support, and none licenses adding automation this unit was not asked for.
+
+## Capture status
+
+The choice maps and the capture script exist; **no capture has been run**. `choice-maps.json`
+carries the selections and independently derived expectations; `capture-v50-forge.ts` drives the
+real editor tab by tab and exports through the application's own path, under the capture mode V46
+established and the lead directed — the pinned Forge application built and served on CT114, with
+`vendor/forge-steel` never built into or modified.
+
+Two behaviours in the script are deliberate. It does **not** select a rune, because Q-CHAR-18 is
+open and clicking one would resolve an unresolved question by side effect; whatever the editor then
+reports is recorded as a warning. And any witness whose editor still reports outstanding choices is
+written to the manifest with those warnings and causes a non-zero exit, so a partial capture cannot
+be mistaken for a completed counterpart.
 
 ## Work log
 
