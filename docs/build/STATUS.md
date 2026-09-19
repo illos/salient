@@ -330,6 +330,12 @@ records the handoff; it does not certify A09 or create an implementation commit.
 | --- | --- | --- | --- |
 | V43 | [Table performance](V43-table-performance.md) | Complete — merged/live `087a709`; 680 check tests plus added lifecycle regression, browser journeys, independent review and three shared checks pass; hosted source `944a46a` published, CI 681 and 16 distinct live browser checks pass | Codex performance, slice/V43 |
 
+## V56 Hakaan level one — preparation — 2026-09-19
+
+| Id | Slice | Status | Owner |
+| --- | --- | --- | --- |
+| V56 | [Hakaan, level one](V56-hakaan-level-one.md) | **Preparation only, not implementation.** `slice/V56` in `/srv/presidium/projects/salient/opus-hakaan` from `7e5f50f`. Source-grounded option ledger, budget enumeration, primitive gaps and a capture plan; no application code, no runtime, no Forge export produced. Two of six traits are automatic with existing primitives, two need primitives that do not exist (forced movement, defensive potency resistance), two are entirely manual | Opus character wizard thread |
+
 ## V45 character option foundation — 2026-09-19
 
 | Id | Slice | Status | Owner |
