@@ -1,0 +1,34 @@
+
+Running 2 tests using 1 worker
+
+[1/2] tests/browser/journey.spec.ts:16:1 › accounts, invitation approval, session lifecycle, private draft persistence and reconnect
+[2/2] tests/browser/table-performance.spec.ts:6:1 › table opens without per-card detail reads, then drills in and preserves undo/redo
+  1) tests/browser/table-performance.spec.ts:6:1 › table opens without per-card detail reads, then drills in and preserves undo/redo 
+
+    Error: Command failed: pnpm app mutation characters:approve {"commandId":"c74779c7-2389-4351-829e-41b6a4295695","characterId":"k570jzdyycex38b2mvzn3909d18epneb"}
+    $ node scripts/app.ts mutation characters:approve '{"commandId":"c74779c7-2389-4351-829e-41b6a4295695","characterId":"k570jzdyycex38b2mvzn3909d18epneb"}'
+    Too many requests. Please try again later.
+
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../artifacts/v43-hosted-authenticated/table-performance-table-op-3cef0--in-and-preserves-undo-redo/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../artifacts/v43-hosted-authenticated/table-performance-table-op-3cef0--in-and-preserves-undo-redo/test-failed-2.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../artifacts/v43-hosted-authenticated/table-performance-table-op-3cef0--in-and-preserves-undo-redo/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../artifacts/v43-hosted-authenticated/table-performance-table-op-3cef0--in-and-preserves-undo-redo/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../artifacts/v43-hosted-authenticated/table-performance-table-op-3cef0--in-and-preserves-undo-redo/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  1 failed
+    tests/browser/table-performance.spec.ts:6:1 › table opens without per-card detail reads, then drills in and preserves undo/redo 
+  1 passed (1.2m)

@@ -112,3 +112,13 @@ None.
 - Reviewed implementation/evidence commit `4ba33d9cb588` fast-forwarded into main after the complete
   branch commit gate passed. No conflicts or post-review executable edits. Hosted Worker version
   and backend remain as verified above; private main requires no update for this optional tooling.
+
+## Hosted development publication — 2026-09-19
+
+The user subsequently authorized remote publication. Source `944a46ab7b05059d22d8403634867de56462e209`
+was pushed to `origin/main` and deployed to Convex Cloud development `different-bat-943` and
+Cloudflare Worker `salient-dev`, version `7e86903b-5f7c-46a8-8d68-540f8f21991f`.
+Existing cloud data, auth settings and content were retained; no reset, reseed or auth reconfiguration
+was performed. GitHub CI passed all 681 tests and the complete check suite.
+See [hosted deployment evidence](evidence/V43/hosted/README.md) for live verification and limitations.
+This supersedes the earlier unpublished status; the shared CT114 runtime was not changed by this publication.

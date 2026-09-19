@@ -1,0 +1,77 @@
+Running 16 tests using 1 worker
+
+[1/16] tests/browser/foes.spec.ts:3:1 › public foes search, independent cards, navigation, dismissal and themes
+[2/16] tests/browser/foes.spec.ts:71:1 › second-echelon references preserve independent features and correct Malice navigation
+[3/16] tests/browser/journey.spec.ts:16:1 › accounts, invitation approval, session lifecycle, private draft persistence and reconnect
+  1) tests/browser/journey.spec.ts:16:1 › accounts, invitation approval, session lifecycle, private draft persistence and reconnect
+
+    Error: Command failed: /tools/bin/node scripts/app.ts query foes:list {"campaignId":"jh77knqms66wcgb11s36nsw2qh8ep0be"}
+    Invalid origin
+
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../artifacts/v43-hosted-browser/journey-accounts-invitatio-e0df1-t-persistence-and-reconnect/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../artifacts/v43-hosted-browser/journey-accounts-invitatio-e0df1-t-persistence-and-reconnect/test-failed-3.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../artifacts/v43-hosted-browser/journey-accounts-invitatio-e0df1-t-persistence-and-reconnect/test-failed-2.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../artifacts/v43-hosted-browser/journey-accounts-invitatio-e0df1-t-persistence-and-reconnect/error-context.md
+
+    attachment #5: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../artifacts/v43-hosted-browser/journey-accounts-invitatio-e0df1-t-persistence-and-reconnect/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../artifacts/v43-hosted-browser/journey-accounts-invitatio-e0df1-t-persistence-and-reconnect/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[4/16] tests/browser/reference-cache.spec.ts:3:1 › Workers serves immutable versioned content and revalidates current manifests
+[5/16] tests/browser/reference-performance.spec.ts:4:1 › public navigation keeps its document and fetches only requested reference content
+[6/16] tests/browser/reference-performance.spec.ts:64:1 › failed detail downloads retry without losing the list or navigation
+[7/16] tests/browser/reference-performance.spec.ts:79:1 › catalog failure preserves shared navigation and supports retry
+[8/16] tests/browser/reference-performance.spec.ts:96:1 › article failure is local and section links stay below the shared headers
+[9/16] tests/browser/reference-performance.spec.ts:116:1 › a cleared search cannot resurrect delayed results
+[10/16] tests/browser/reference-performance.spec.ts:145:1 › a failed search index retries
+[11/16] tests/browser/reference-performance.spec.ts:159:1 › large chapter opening stays usable while later sections are delayed and retryable
+[12/16] tests/browser/rules.spec.ts:4:1 › public rules search, readable articles, original sources and browser history
+[13/16] tests/browser/rules.spec.ts:34:1 › chapter contents, cross-references, topic filters and mobile navigation
+[14/16] tests/browser/table-performance.spec.ts:6:1 › table opens without per-card detail reads, then drills in and preserves undo/redo
+  2) tests/browser/table-performance.spec.ts:6:1 › table opens without per-card detail reads, then drills in and preserves undo/redo
+
+    Error: Command failed: pnpm app mutation characters:create {"commandId":"f062d03b-e3f4-455f-9cb5-22341ff8b0bc","authored":{"name":"Thorn 7a037392","appearance":"","biography":"","notes":"Private audit fixture note"}}
+    $ node scripts/app.ts mutation characters:create '{"commandId":"f062d03b-e3f4-455f-9cb5-22341ff8b0bc","authored":{"name":"Thorn 7a037392","appearance":"","biography":"","notes":"Private audit fixture note"}}'
+    Invalid origin
+
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../artifacts/v43-hosted-browser/table-performance-table-op-3cef0--in-and-preserves-undo-redo/test-failed-2.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../artifacts/v43-hosted-browser/table-performance-table-op-3cef0--in-and-preserves-undo-redo/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../artifacts/v43-hosted-browser/table-performance-table-op-3cef0--in-and-preserves-undo-redo/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../artifacts/v43-hosted-browser/table-performance-table-op-3cef0--in-and-preserves-undo-redo/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../artifacts/v43-hosted-browser/table-performance-table-op-3cef0--in-and-preserves-undo-redo/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[15/16] tests/browser/reference-streaming.spec.ts:7:3 › late chapter anchors stay visible as preceding content streams in
+[16/16] tests/browser/reference-streaming.spec.ts:7:3 › late chapter anchors respect reader scrolling as preceding content streams in
+  2 failed
+    tests/browser/journey.spec.ts:16:1 › accounts, invitation approval, session lifecycle, private draft persistence and reconnect
+    tests/browser/table-performance.spec.ts:6:1 › table opens without per-card detail reads, then drills in and preserves undo/redo
+  14 passed (1.6m)

@@ -1,0 +1,129 @@
+Target: dev (different-bat-943); frontend https://salient-dev.rdxx.workers.dev; operation frontend
+Progress: resolved 1, reused 0, downloaded 0, added 0
+Progress: resolved 31, reused 0, downloaded 9, added 0
+Progress: resolved 91, reused 0, downloaded 31, added 0
+Packages: +35
++++++++++++++++++++++++++++++++++++
+Progress: resolved 91, reused 0, downloaded 36, added 34
+Progress: resolved 91, reused 0, downloaded 37, added 34
+Progress: resolved 91, reused 0, downloaded 38, added 34
+Progress: resolved 91, reused 0, downloaded 38, added 35, done
+
+ ⛅️ wrangler 4.134.0
+────────────────────
+🌀 Building list of assets...
+✨ Read 3295 files from the assets directory /app/dist
+🌀 Starting asset upload...
+🌀 Found 3276 new or modified static assets to upload. Proceeding with upload...
++ /rules-data/d9e78e997cdd88ef/articles/33b07d03049e93db1e32.json
++ /rules-data/d9e78e997cdd88ef/articles/65fe9dafb79f3458edc2.json
++ /rules-data/d9e78e997cdd88ef/articles/3a4474d4093d31455879.json
++ /rules-data/d9e78e997cdd88ef/articles/c5f7cf844903a1fa831b.json
++ /rules-data/d9e78e997cdd88ef/articles/28ed104714a7987bd5b2.json
++ /rules-data/d9e78e997cdd88ef/articles/3121a3db5dcee4f5d059.json
++ /rules-data/d9e78e997cdd88ef/articles/a9d6c48aef038873b24c.json
++ /rules-data/d9e78e997cdd88ef/articles/486590f004d048cfcb65.json
++ /rules-data/d9e78e997cdd88ef/articles/22b4a9e7ad8541dabfad.json
++ /rules-data/d9e78e997cdd88ef/articles/878bc4eb65f432f8a81d.json
++ /rules-data/d9e78e997cdd88ef/articles/fffeb2dfa57956769b5a.json
++ /rules-data/d9e78e997cdd88ef/articles/d63a6b7f95b2a530fe04.json
++ /rules-data/d9e78e997cdd88ef/articles/b16433a7f7369feed166.json
++ /rules-data/d9e78e997cdd88ef/articles/79be481ef7b5ee8e271f.json
++ /rules-data/d9e78e997cdd88ef/articles/a17fae36bf4f3aea9ae5.json
++ /rules-data/d9e78e997cdd88ef/articles/78ecd572adb97c7a6261.json
++ /rules-data/d9e78e997cdd88ef/articles/a72c2a762aae1d175aba.json
++ /rules-data/d9e78e997cdd88ef/articles/0ba7130e0e126571000f.json
++ /rules-data/d9e78e997cdd88ef/articles/18aa90bfefd7a3072bdd.json
++ /rules-data/d9e78e997cdd88ef/articles/755eceed0ff9a21f1d2a.json
++ /rules-data/d9e78e997cdd88ef/articles/0189591b58bde44a6741.json
++ /rules-data/d9e78e997cdd88ef/articles/79692fb59c8bd9f1e077.json
++ /rules-data/d9e78e997cdd88ef/articles/80752f3cc8d80ea2edf0.json
++ /rules-data/d9e78e997cdd88ef/articles/3b56dfdd25d127b9da06.json
++ /rules-data/d9e78e997cdd88ef/articles/b67604249437e190b70b.json
++ /rules-data/d9e78e997cdd88ef/articles/df86d208e9d53f71e541.json
++ /rules-data/d9e78e997cdd88ef/articles/8f8405eb43f84fb344b8.json
++ /rules-data/d9e78e997cdd88ef/articles/f271c329fda44072e979.json
++ /rules-data/d9e78e997cdd88ef/articles/3f2a09477189faa05335.json
++ /rules-data/d9e78e997cdd88ef/articles/abd94dd22a02444d268b.json
++ /rules-data/d9e78e997cdd88ef/articles/f4a4bd168e3d2293b93b.json
++ /rules-data/d9e78e997cdd88ef/articles/bd5891418b08721caa8f.json
++ /rules-data/d9e78e997cdd88ef/articles/3514c70ddec41dc52075.json
++ /rules-data/d9e78e997cdd88ef/articles/8d7adadfd4caaeffa071.json
++ /rules-data/d9e78e997cdd88ef/articles/64785c5c2812e213e7e7.json
++ /rules-data/d9e78e997cdd88ef/articles/b8167e8b8347a89c59e8.json
++ /rules-data/d9e78e997cdd88ef/articles/6c916195a90ac3678e56.json
++ /rules-data/d9e78e997cdd88ef/articles/6dd8392b2b15a24f48b8.json
++ /rules-data/d9e78e997cdd88ef/articles/75a38cd0540e22bb9d2a.json
++ /rules-data/d9e78e997cdd88ef/articles/b780d6acf69737e551b1.json
++ /rules-data/d9e78e997cdd88ef/articles/0ad55d6e1e373325834c.json
++ /rules-data/d9e78e997cdd88ef/articles/7462a9b573b93c99a605.json
++ /rules-data/d9e78e997cdd88ef/articles/6d2ce9ba858f3ce709d8.json
++ /rules-data/d9e78e997cdd88ef/articles/dcc1f204dbacdca47326.json
++ /rules-data/d9e78e997cdd88ef/articles/edcc568710387e736dba.json
++ /rules-data/d9e78e997cdd88ef/articles/101423beff39dfb31376.json
++ /rules-data/d9e78e997cdd88ef/articles/9ed3af72f3a9ad056136.json
++ /rules-data/d9e78e997cdd88ef/articles/d297f8424cd83b7f6148.json
++ /rules-data/d9e78e997cdd88ef/articles/5f8db417576557821ba4.json
++ /rules-data/d9e78e997cdd88ef/articles/29d8129c404f703975e0.json
++ /rules-data/d9e78e997cdd88ef/articles/fbab8969262efd16517a.json
++ /rules-data/d9e78e997cdd88ef/articles/5aefa817f070ddd88727.json
++ /rules-data/d9e78e997cdd88ef/articles/c02b0041b29149af8b70.json
++ /rules-data/d9e78e997cdd88ef/articles/5fa756fa90ab28920255.json
++ /rules-data/d9e78e997cdd88ef/articles/532e33aee7688b967127.json
++ /rules-data/d9e78e997cdd88ef/articles/01f5ddf71daa4835c18c.json
++ /rules-data/d9e78e997cdd88ef/articles/29211872cb2107a76f2c.json
++ /rules-data/d9e78e997cdd88ef/articles/363de33ca10010ab37e6.json
++ /rules-data/d9e78e997cdd88ef/articles/5bb44edc42b310c2956d.json
++ /rules-data/d9e78e997cdd88ef/articles/79ba3ea7f91ad57a6be3.json
++ /rules-data/d9e78e997cdd88ef/articles/a83423967cf5b62c8fa0.json
++ /rules-data/d9e78e997cdd88ef/articles/4c25109a3decd857434c.json
++ /rules-data/d9e78e997cdd88ef/articles/8b09e06ac7595abbe79f.json
++ /rules-data/d9e78e997cdd88ef/articles/a3910d9c34a422535fac.json
++ /rules-data/d9e78e997cdd88ef/articles/277650e3fd8b38b63ffe.json
++ /rules-data/d9e78e997cdd88ef/articles/43dd9862496e83aebec2.json
++ /rules-data/d9e78e997cdd88ef/articles/02be6278c2970a30b043.json
++ /rules-data/d9e78e997cdd88ef/articles/bb82b98a6188fbf7ffde.json
++ /rules-data/d9e78e997cdd88ef/articles/8059bc07555db0433ebc.json
++ /rules-data/d9e78e997cdd88ef/articles/8809d5bf0a77139c1239.json
++ /rules-data/d9e78e997cdd88ef/articles/1c0e19e1efcccda9c0dc.json
++ /rules-data/d9e78e997cdd88ef/articles/459ba8ac4525a6a7a9b9.json
++ /rules-data/d9e78e997cdd88ef/articles/d4e4e42559e7385a6822.json
++ /rules-data/d9e78e997cdd88ef/articles/a9c2cf2a8d3337d8289d.json
++ /rules-data/d9e78e997cdd88ef/articles/9f088858dad1149f9c69.json
++ /rules-data/d9e78e997cdd88ef/articles/74aa01b5eb9b58286261.json
++ /rules-data/d9e78e997cdd88ef/articles/ec45c640908600f96ac3.json
++ /rules-data/d9e78e997cdd88ef/articles/4717cdca642a7ab966c0.json
++ /rules-data/d9e78e997cdd88ef/articles/d90d361847aeaf607656.json
++ /rules-data/d9e78e997cdd88ef/articles/e5d817c9b81948e9a597.json
++ /rules-data/d9e78e997cdd88ef/articles/e7714a96c18438527e22.json
++ /rules-data/d9e78e997cdd88ef/articles/35efa4ea504382ceb836.json
++ /rules-data/d9e78e997cdd88ef/articles/ceb008daf519b85ed958.json
++ /rules-data/d9e78e997cdd88ef/articles/4c9942b807f3c62dcf8e.json
++ /rules-data/d9e78e997cdd88ef/articles/dc5555ae1b16ef928ce1.json
++ /rules-data/d9e78e997cdd88ef/articles/cd02418d2a3021e758d9.json
++ /rules-data/d9e78e997cdd88ef/articles/12b21d779f82da351d35.json
++ /rules-data/d9e78e997cdd88ef/articles/b5b9edf6079e39b70732.json
++ /rules-data/d9e78e997cdd88ef/articles/545e7a625eb9a2cbef52.json
++ /rules-data/d9e78e997cdd88ef/articles/ee5e433e1b91008b5d7b.json
++ /rules-data/d9e78e997cdd88ef/articles/2cdc787a146adbfde4e9.json
++ /rules-data/d9e78e997cdd88ef/articles/61e269dcc93f55c63151.json
++ /rules-data/d9e78e997cdd88ef/articles/3b58fad15028e2c44b29.json
++ /rules-data/d9e78e997cdd88ef/articles/717b184ae3cc02aab82f.json
++ /rules-data/d9e78e997cdd88ef/articles/5d7d70bffa6e7d9098d4.json
++ /rules-data/d9e78e997cdd88ef/articles/199ad9fd3c11d9f290e6.json
++ /rules-data/d9e78e997cdd88ef/articles/6d66bf64f4ad8de45d5f.json
++ /rules-data/d9e78e997cdd88ef/articles/735ea57474ed6399cd43.json
++ /rules-data/d9e78e997cdd88ef/articles/d14ccb21549ce311d63d.json
++ /rules-data/d9e78e997cdd88ef/articles/1800a5f1ac630d1e4f83.json
+   (truncating changed assets log, set `WRANGLER_LOG=debug` environment variable to see full diff)
+Uploaded 1000 of 3276 assets
+Uploaded 2000 of 3276 assets
+Uploaded 3000 of 3276 assets
+Uploaded 3276 of 3276 assets
+✨ Success! Uploaded 3276 files (8 already uploaded) (34.54 sec)
+
+Total Upload: 0.44 KiB / gzip: 0.31 KiB
+Uploaded salient-dev (39.17 sec)
+Deployed salient-dev triggers (0.47 sec)
+  https://salient-dev.rdxx.workers.dev
+Current Version ID: 7e86903b-5f7c-46a8-8d68-540f8f21991f

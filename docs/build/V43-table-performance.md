@@ -79,3 +79,13 @@ V41 implementation `bc74ddd` and V43 implementation `087a709` are merged into `m
 Three actual shared browser checks passed in 1.3 min: account/session/private-draft/reconnect journey; six-foe+one-hero table subscription/drill-in/edit/undo/redo/reload scenario; and signed-in Rules/Foes navigation. Persisted Stamina 9 was reread after reload. [Runtime evidence](evidence/V43/README.md#shared-development-rollout), source hashes, screenshot and logs are retained. No execution timeout occurred; one characters.reviews 927 ms warning remains a follow-up alongside the isolated history 979 ms warning. Near-limit backend execution and full mutation replay are not claimed solved.
 
 The owned isolated `performance` stack is stopped, volumes retained. Shared runtime remains available. No external hosted publication or remote Git push was performed. The final documentation-only closeout requires no further runtime update.
+
+## Hosted development publication — 2026-09-19
+
+The user subsequently authorized remote publication. Source `944a46ab7b05059d22d8403634867de56462e209`
+was pushed to `origin/main` and deployed to Convex Cloud development `different-bat-943` and
+Cloudflare Worker `salient-dev`, version `7e86903b-5f7c-46a8-8d68-540f8f21991f`.
+Existing cloud data, auth settings and content were retained; no reset, reseed or auth reconfiguration
+was performed. GitHub CI passed all 681 tests and the complete check suite.
+See [hosted deployment evidence](evidence/V43/hosted/README.md) for live verification and limitations.
+This supersedes the earlier unpublished status; the shared CT114 runtime was not changed by this publication.

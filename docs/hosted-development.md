@@ -60,8 +60,10 @@ references; the existing source pins and game-content records are unchanged.
 
 ## Verification and recovery
 
-Run checks/builds and Playwright only on CT114. Browser tests set `SALIENT_TEST_URL` to the Worker URL
-and `VITE_CONVEX_URL` / `VITE_CONVEX_SITE_URL` to the matching cloud URLs for CLI readback. Use fresh
+Run checks/builds and Playwright only on CT114. Browser tests set both `SALIENT_TEST_URL` and `VITE_SITE_URL` to the Worker URL,
+and `VITE_CONVEX_URL` / `VITE_CONVEX_SITE_URL` to the matching cloud URLs for CLI readback.
+The headless helper sends `VITE_SITE_URL` as its authentication Origin; inheriting the CT114 preview
+value causes an expected “Invalid origin” rejection from hosted auth. Use fresh
 test users; do not reset private main. Verify sign-out/in as well as signup, reload saved deep links,
 and observe real-time changes across separate browser contexts.
 
@@ -85,7 +87,7 @@ need no reseed. Internal mail failures contain only a sanitized category/HTTP st
 and Cloudflare Email Service delivery logs for operations. Avoid blind retries after ambiguous network
 failures: request a new reset link through the UI instead.
 
-Implementation `62ca7b9` is live on hosted dev, Worker version
+V39 implementation `62ca7b9` was initially published to hosted dev as Worker version
 `97387eb7-b9b7-41c1-b19e-dc96379cecc3`. Actual hosted browser checks passed reset, old-password
 rejection, fresh sign-in, session revocation, token reuse rejection and request limiting with a
 disposable account. Cloudflare accepted/queued a separate test to the operator-selected inbox.
@@ -93,3 +95,11 @@ The user confirmed receipt of that test email. The received message was a delive
 reset-link behavior was checked separately through the disposable account.
 See [V39](build/V39-account-email.md) for the validation record. Shared private main also has the code
 but keeps recovery unavailable because it has no email token.
+
+## Current release — 2026-09-19
+
+Performance source `944a46ab7b05059d22d8403634867de56462e209` is published to the targets above.
+Worker version: `7e86903b-5f7c-46a8-8d68-540f8f21991f`. Convex deployment added bounded-history
+read indexes without deleting existing indexes or resetting data. GitHub CI passed 681 tests.
+See [the release evidence](build/evidence/V43/hosted/README.md) for browser results,
+fixture limitations and deployment logs. Earlier Worker versions in slice records are historical.

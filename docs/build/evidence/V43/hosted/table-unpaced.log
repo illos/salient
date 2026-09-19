@@ -1,0 +1,32 @@
+
+Running 1 test using 1 worker
+
+[1/1] tests/browser/table-performance.spec.ts:6:1 › table opens without per-card detail reads, then drills in and preserves undo/redo
+  1) tests/browser/table-performance.spec.ts:6:1 › table opens without per-card detail reads, then drills in and preserves undo/redo 
+
+    Error: Command failed: pnpm app mutation characters:approve {"commandId":"78ad0d45-7ae0-4c94-b16d-956e008b1803","characterId":"k574w86zp7tfcr328hn9pz25ds8eph0g"}
+    $ node scripts/app.ts mutation characters:approve '{"commandId":"78ad0d45-7ae0-4c94-b16d-956e008b1803","characterId":"k574w86zp7tfcr328hn9pz25ds8eph0g"}'
+    Too many requests. Please try again later.
+
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../artifacts/v43-hosted-table-final/table-performance-table-op-3cef0--in-and-preserves-undo-redo/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../artifacts/v43-hosted-table-final/table-performance-table-op-3cef0--in-and-preserves-undo-redo/test-failed-2.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../artifacts/v43-hosted-table-final/table-performance-table-op-3cef0--in-and-preserves-undo-redo/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../artifacts/v43-hosted-table-final/table-performance-table-op-3cef0--in-and-preserves-undo-redo/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../artifacts/v43-hosted-table-final/table-performance-table-op-3cef0--in-and-preserves-undo-redo/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  1 failed
+    tests/browser/table-performance.spec.ts:6:1 › table opens without per-card detail reads, then drills in and preserves undo/redo 

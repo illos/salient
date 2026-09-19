@@ -1,0 +1,21 @@
+Target: dev (different-bat-943); frontend https://salient-dev.rdxx.workers.dev; operation backend
+▌ Deploying code to deployment:
+▌ [Development] jim-pringle:salient:dev/jim-pringle (dev) (dashboard: https://dashboard.convex.dev/t/jim-pringle/salient/different-bat-943)
+▌ └─ https://different-bat-943.convex.cloud
+- Deploying to https://different-bat-943.convex.cloud...
+
+A minor update is available for Convex (1.45.0 → 1.46.0)
+Changelog: https://github.com/get-convex/convex-js/blob/main/CHANGELOG.md#changelog
+Convex AI files are not installed. Run npx convex ai-files install to get started or npx convex ai-files disable to hide this message.
+✔ No indexes are deleted by this push
+Uploading functions to Convex...
+Generating TypeScript bindings...
+Running TypeScript...
+Pushing code to your Convex deployment...
+Schema validation complete.
+Finalizing push...
+✔ Added table indexes:
+  [+] historyCursors.by_session   sessionId, _creationTime
+  [+] historyUnits.by_event   eventId, _creationTime
+  [+] historyUnits.by_session_command   sessionId, commandKey, _creationTime
+✔ Deployed Convex functions to https://different-bat-943.convex.cloud

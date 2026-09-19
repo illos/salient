@@ -1,0 +1,5 @@
+
+Running 1 test using 1 worker
+
+[1/1] tests/browser/table-performance.spec.ts:6:1 › table opens without per-card detail reads, then drills in and preserves undo/redo
+  1 passed (2.1m)
