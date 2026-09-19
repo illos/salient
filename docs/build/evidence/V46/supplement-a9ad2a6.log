@@ -1,0 +1,23 @@
+# Second focused supplement, for the F9 level-two constant in tests/character-v46-devil.test.ts.
+# presidium-dev --env characters up --replace; status; run build -- prettier --check + tsc --noEmit
+# + vitest run (the three V46 engine files). No browser stage: no browser-facing file changed.
+
+===== RUNTIME SOURCE IDENTITY =====
+    "commit": "a9ad2a6800974c3fe7fa9fd4a18dfe380f4abebe",
+    "dirty": false
+    (both submodules at their pins, dirty false)
+
+===== ENGINE + TYPES =====
+Checking formatting...
+All matched files use Prettier code style!
+(tsc --noEmit: no output, no errors)
+
+ RUN  v4.1.11 /app
+ ✓  engine  tests/character-v45-reference.test.ts (7 tests) 297ms
+ ✓  engine  tests/character-v46-devil.test.ts (16 tests) 218ms
+ ✓  engine  tests/character-v46-forge.test.ts (16 tests) 91ms
+
+ Test Files  3 passed (3)
+      Tests  39 passed (39)
+   Start at  20:41:20
+   Duration  1.41s

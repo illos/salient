@@ -1,0 +1,260 @@
+HERO 536a4a53-9e53-472e-a89c-72556b5802ff
+OK   devil
+OK   skill
+OK   trait Hellsight
+OK   trait Wings
+OK   bespoke
+OK   culture name
+OK   environment
+OK   organization
+OK   upbringing
+OK   culture language
+OK   env skill
+OK   org skill
+OK   upb skill
+OK   career
+OK   lore 1
+OK   lore 2
+OK   career language
+OK   perk
+OK   incident
+--- career final ---
+CHOICES
+SKILL
+
+Choose a skill from any list.
+
+MagicKnowing about magical places, spells, rituals, items, and phenomena.
+LORE SKILLS
+
+Choose 2 from Lore skills.
+
+MonstersKnowing monster ecology, strengths, and weaknesses.
+TimescapeKnowing about the various planets of the timescape
+LANGUAGE
+
+Choose a language.
+
+The First LanguageSpoken by elder dragons; the language of magic.
+SUPERNATURAL PERK
+
+This feature allows you to choose a perk.
+
+Arcane Trick
+
+You cast an entertaining spell that creates a minor but impressive magical effect.
+
+INCITING INCIDENT
+Forgotten Memories
+
+While practicing a spell, your inexperience caused the magic to backfire and your memories were wiped, leaving you with only fragments of who you once were. Determined to recall your past, you now dedicate yourself to helping others, hoping your actions will spark some remembrance or lead you to a way to reverse the magic.
+OK   elementalist
+OK   array
+OK   assignment
+OK   specialization
+OK   free skill
+OK   class skill 1
+OK   class skill 2
+OK   class skill 3
+OK   enchantment
+OK   ward
+OK   signature 1
+OK   signature 2
+OK   3pt
+OK   5pt
+--- class final ---
+CHOICES
+Class Choices
+LEVEL
+1
+XP0
+CHARACTERISTICS
+Might
+-1
+Agility
+1
+Reason
+2
+Intuition
+2
+Presence
+1
+ELEMENTAL SPECIALIZATION
+Choose an Elemental Specialization.
+FireFire is the element of destruction. Fire abilities devastate enemies and melt objects to slag.
+Level 1 Choices
+SKILL
+
+Choose a skill from any list.
+
+EmpathizeRelate to someone on a personal level.
+CRAFTING / LORE SKILLS
+
+Choose 3 from Crafting skills, Lore skills.
+
+AlchemyMake bombs and potions.
+BlacksmithingForge metal armor and weapons.
+HistoryKnowing about significant past events.
+ENCHANTMENT
+
+This feature allows you to choose from a collection of features.
+
+Choose 1 option(s).
+Enchantment of Destruction
+
+You gain a bonus to rolled damage with magic abilities.
+
+ELEMENTALIST WARD
+
+This feature allows you to choose from a collection of features.
+
+Choose 1 option(s).
+Ward of Delightful Consequences
+
+A protective field of void magic absorbs violence aimed at you, then lets you hurl it back at your enemies.
+
+SIGNATURE ABILITY
+
+This feature allows you to choose an ability from your class.
+
+Choose 2 signature abilities.
+Bifurcated Incineration
+
+Two jets of flame lance out at your command.
+
+Viscous Fire
+
+A jet of heavy fire erupts where you strike.
+
+3PT ABILITY
+
+This feature allows you to choose an ability from your class.
+
+Choose a 3pt ability.
+The Flesh, a Crucible
+
+Fire engulfs your target and continues to churn.
+
+5PT ABILITY
+
+This feature allows you to choose an ability from your class.
+
+Choose a 5pt ability.
+Conflagration
+
+A storm of fire descends upon your enemies.
+OK   default language
+OK   name
+WARNINGS []
+OK   save
+--- sheet head ---
+HERO
+Edit
+Copy
+Export
+Delete
+Close
+V46 D-INTIMIDATE
+Resources
+Vitals
+Inventory
+Projects
+Titles
+Notes
+Take a Respite
+Customize
+Settings
+V46 D-INTIMIDATE - LEVEL 1 DEVIL ELEMENTALIST
+M
+-1
+A
+1
+R
+2
+I
+2
+P
+1
+Size
+1M
+Spd
+5 (Fly)
+Stab
+0
+Dis
+1
+Save
+6
+Hero
+Features
+Mains
+Maneuvers
+Triggers
+Free Strikes
+-1
+MIGHT
+1
+AGILITY
+2
+REASON
+2
+INTUITION
+1
+PRESENCE
+Essence
+0
+Surges
+0
+Victories
+0
+XP
+0
+Renown
+1
+Wealth
+1
+RESOURCES
+Size
+1
+M
+Speed (fly)
+5
+Stability
+0
+Disengage
+1
+Save
+6
+STATISTICS
+Stamina
+18
+Recoveries
+8
+Recovery Value
+6
+VITALS
+ANCESTRY
+AncestryDevil
+CULTURE
+CulturePolder
+EnvironmentUrban
+OrganizationCommunal
+UpbringingCreative
+CAREER
+CareerMage’s Apprentice
+Inciting IncidentForgotten Memories
+CLASS
+ClassElementalist
+Level1
+Elemental SpecializationFire
+Sta 18
+Rec 8
+ESSENCE
+0
+Start of your turn
++2 PER ROUND
+You or a creature within 10 of you takes damage that isn’t untyped or holy
++1 PER ROUND
+SURGES
+OK   export
+DONE D-intimidate file=D-intimidate.ds-hero

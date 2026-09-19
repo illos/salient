@@ -199,6 +199,44 @@ export interface AbilityModifier {
   provenance: Provenance;
 }
 
+/**
+ * A movement mode the build grants, such as the devil's Wings. The build records that the mode
+ * exists and the source restriction on using it; movement itself, elapsed rounds and falling are
+ * resolved at the table.
+ */
+export interface GrantedMovementMode {
+  /** Movement rule name as the source names it, for example `Fly`. */
+  mode: string;
+  /** Entry path of the granting feature, relative to `vendor/steel-compendium`. */
+  sourcePath: string;
+  /** Entry path of the movement rule itself, when the granting feature links one. */
+  ruleSourcePath?: string;
+  /** Verbatim source restriction on using the mode; absent when the source states none. */
+  condition?: string;
+  provenance: Provenance;
+}
+
+/**
+ * An amount the build calculates for an effect whose source gates it on a condition or an
+ * activation. Deliberately separate from `abilityModifiers`, which damage resolution applies
+ * automatically, and from `damageWeaknesses`, which is displayed as always in effect: nothing
+ * reads this list to change a roll or a pool. The condition is resolved at the table.
+ */
+export interface ConditionalEffect {
+  /** The granting feature, as the source names it. */
+  feature: string;
+  /** Which sourced conditional amount this is; each member is one source sentence. */
+  effect: 'rounds-aloft' | 'damage-weakness' | 'extra-strike-damage';
+  /** Verbatim source condition under which the amount applies. */
+  condition: string;
+  /** Entry path of the granting feature, relative to `vendor/steel-compendium`. */
+  sourcePath: string;
+  /** Damage type for a `damage-weakness`; `all-damage` when the source indicates no type, as
+   *  `DamageModifierEntry` in `rollResolution.ts` spells it. */
+  damageType?: string;
+  amount: DerivedValue<number>;
+}
+
 /** Kit contributions in the shape R04 consumes (`ActorRollFacts.kitMeleeDamageBonus`, ...). */
 export interface KitContributions {
   name: DerivedValue<string>;
@@ -285,6 +323,11 @@ export interface DerivedBaseline {
     condition?: string;
   }[];
   renownMaximum?: DerivedValue<number>;
+  /** Movement modes the build grants; table movement is never applied from this list. */
+  movementModes?: GrantedMovementMode[];
+  /** Calculated amounts for conditional or activated effects; never applied automatically. */
+  conditionalEffects?: ConditionalEffect[];
+  /** Weaknesses that always apply. Conditional weaknesses belong in `conditionalEffects`. */
   damageWeaknesses?: { damageType: string; value: DerivedValue<number> }[];
   damageImmunities?: { damageType: string; value: DerivedValue<number> }[];
   conditionImmunities?: { condition: string; provenance: Provenance }[];

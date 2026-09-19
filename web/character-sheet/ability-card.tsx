@@ -86,6 +86,9 @@ export function AbilityCard({ ability, compact }: { ability: SheetAbility; compa
       {ability.kitBonusesIncluded && (
         <p className="text-xs text-muted-foreground">Kit bonuses included</p>
       )}
+      {ability.grantedBy.note && (
+        <p className="text-xs text-muted-foreground">{ability.grantedBy.note}</p>
+      )}
       {ability.buildModifiers?.length ? (
         <div className="flex flex-col gap-1 text-xs text-muted-foreground">
           <span>Printed tiers shown above. Rolled damage bonuses:</span>

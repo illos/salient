@@ -1,0 +1,462 @@
+##### A-persuade
+OK   devil
+OK   skill
+OK   trait Beast Legs
+OK   trait Impressive Horns
+OK   bespoke
+OK   culture name
+OK   environment
+OK   organization
+OK   upbringing
+OK   culture language
+OK   env skill
+OK   org skill
+OK   upb skill
+OK   soldier
+OK   exploration skill
+OK   intrigue skill
+OK   language 1
+OK   language 2
+OK   perk
+OK   incident
+OK   fury
+OK   array
+OK   assignment
+OK   aspect
+OK   class skill 1
+OK   class skill 2
+OK   signature
+OK   3pt
+OK   5pt
+OK   kit
+OK   default language
+OK   name
+WARNINGS []
+OK   save
+OK   export
+DONE A-persuade file=A-persuade.ds-hero warnings=0
+##### A-empathize
+OK   devil
+OK   skill
+OK   trait Beast Legs
+OK   trait Impressive Horns
+OK   bespoke
+OK   culture name
+OK   environment
+OK   organization
+OK   upbringing
+OK   culture language
+OK   env skill
+OK   org skill
+OK   upb skill
+OK   soldier
+OK   exploration skill
+OK   intrigue skill
+OK   language 1
+OK   language 2
+OK   perk
+OK   incident
+OK   fury
+OK   array
+OK   assignment
+OK   aspect
+OK   class skill 1
+OK   class skill 2
+OK   signature
+OK   3pt
+OK   5pt
+OK   kit
+OK   default language
+OK   name
+WARNINGS []
+OK   save
+OK   export
+DONE A-empathize file=A-empathize.ds-hero warnings=0
+##### A-gamble
+OK   devil
+OK   skill
+FAIL trait Beast Legs: Error: page.waitForTimeout: Target page, context or browser has been closed
+FAIL trait Impressive Horns: Error: locator.count: Target page, context or browser has been closed
+node:internal/modules/run_main:107
+    triggerUncaughtException(
+    ^
+
+page.goto: Target page, context or browser has been closed
+    at tab (/work/lib.mjs:44:14)
+    at /work/fury.mjs:35:9 {
+  log: []
+}
+
+Node.js v24.20.0
+SKIP A-persuade
+SKIP A-empathize
+##### A-gamble
+OK   devil
+OK   skill
+OK   trait Beast Legs
+OK   trait Impressive Horns
+OK   bespoke
+OK   culture name
+OK   environment
+OK   organization
+OK   upbringing
+OK   culture language
+OK   env skill
+OK   org skill
+OK   upb skill
+OK   soldier
+OK   exploration skill
+OK   intrigue skill
+OK   language 1
+OK   language 2
+OK   perk
+OK   incident
+OK   fury
+OK   array
+OK   assignment
+OK   aspect
+OK   class skill 1
+OK   class skill 2
+OK   signature
+OK   3pt
+OK   5pt
+OK   kit
+OK   default language
+OK   name
+WARNINGS []
+OK   save
+OK   export
+DONE A-gamble file=A-gamble.ds-hero warnings=0
+##### A-handle-animals
+OK   devil
+OK   skill
+OK   trait Beast Legs
+OK   trait Impressive Horns
+OK   bespoke
+OK   culture name
+OK   environment
+OK   organization
+OK   upbringing
+OK   culture language
+OK   env skill
+OK   org skill
+OK   upb skill
+OK   soldier
+OK   exploration skill
+OK   intrigue skill
+OK   language 1
+OK   language 2
+OK   perk
+OK   incident
+OK   fury
+OK   array
+OK   assignment
+OK   aspect
+OK   class skill 1
+OK   class skill 2
+OK   signature
+OK   3pt
+OK   5pt
+OK   kit
+OK   default language
+OK   name
+WARNINGS []
+OK   save
+OK   export
+DONE A-handle-animals file=A-handle-animals.ds-hero warnings=0
+##### A-interrogate
+OK   devil
+OK   skill
+OK   trait Beast Legs
+OK   trait Impressive Horns
+OK   bespoke
+OK   culture name
+OK   environment
+OK   organization
+OK   upbringing
+OK   culture language
+OK   env skill
+OK   org skill
+OK   upb skill
+OK   soldier
+OK   exploration skill
+OK   intrigue skill
+OK   language 1
+OK   language 2
+OK   perk
+OK   incident
+OK   fury
+OK   array
+OK   assignment
+OK   aspect
+OK   class skill 1
+OK   class skill 2
+OK   signature
+OK   3pt
+OK   5pt
+OK   kit
+OK   default language
+OK   name
+WARNINGS []
+OK   save
+OK   export
+DONE A-interrogate file=A-interrogate.ds-hero warnings=0
+##### A-lead
+OK   devil
+OK   skill
+OK   trait Beast Legs
+OK   trait Impressive Horns
+OK   bespoke
+OK   culture name
+OK   environment
+OK   organization
+OK   upbringing
+OK   culture language
+OK   env skill
+OK   org skill
+OK   upb skill
+OK   soldier
+OK   exploration skill
+OK   intrigue skill
+OK   language 1
+OK   language 2
+OK   perk
+OK   incident
+OK   fury
+OK   array
+OK   assignment
+OK   aspect
+OK   class skill 1
+OK   class skill 2
+OK   signature
+OK   3pt
+OK   5pt
+OK   kit
+OK   default language
+OK   name
+WARNINGS []
+OK   save
+OK   export
+DONE A-lead file=A-lead.ds-hero warnings=0
+##### A-lie
+OK   devil
+OK   skill
+OK   trait Beast Legs
+OK   trait Impressive Horns
+OK   bespoke
+OK   culture name
+OK   environment
+OK   organization
+OK   upbringing
+OK   culture language
+OK   env skill
+OK   org skill
+OK   upb skill
+OK   soldier
+OK   exploration skill
+OK   intrigue skill
+OK   language 1
+OK   language 2
+OK   perk
+OK   incident
+OK   fury
+OK   array
+OK   assignment
+OK   aspect
+OK   class skill 1
+OK   class skill 2
+OK   signature
+OK   3pt
+OK   5pt
+OK   kit
+OK   default language
+OK   name
+WARNINGS []
+OK   save
+OK   export
+DONE A-lie file=A-lie.ds-hero warnings=0
+##### A-music
+OK   devil
+OK   skill
+OK   trait Beast Legs
+OK   trait Impressive Horns
+OK   bespoke
+OK   culture name
+OK   environment
+OK   organization
+OK   upbringing
+OK   culture language
+OK   env skill
+OK   org skill
+OK   upb skill
+OK   soldier
+OK   exploration skill
+OK   intrigue skill
+OK   language 1
+OK   language 2
+OK   perk
+OK   incident
+OK   fury
+OK   array
+OK   assignment
+OK   aspect
+OK   class skill 1
+OK   class skill 2
+OK   signature
+OK   3pt
+OK   5pt
+OK   kit
+OK   default language
+OK   name
+WARNINGS []
+OK   save
+OK   export
+DONE A-music file=A-music.ds-hero warnings=0
+##### A-perform
+OK   devil
+OK   skill
+OK   trait Beast Legs
+OK   trait Impressive Horns
+OK   bespoke
+OK   culture name
+OK   environment
+OK   organization
+OK   upbringing
+OK   culture language
+OK   env skill
+OK   org skill
+OK   upb skill
+OK   soldier
+OK   exploration skill
+OK   intrigue skill
+OK   language 1
+OK   language 2
+OK   perk
+OK   incident
+OK   fury
+OK   array
+OK   assignment
+OK   aspect
+OK   class skill 1
+OK   class skill 2
+OK   signature
+OK   3pt
+OK   5pt
+OK   kit
+OK   default language
+OK   name
+WARNINGS []
+OK   save
+OK   export
+DONE A-perform file=A-perform.ds-hero warnings=0
+##### A-read-person
+OK   devil
+OK   skill
+OK   trait Beast Legs
+OK   trait Impressive Horns
+OK   bespoke
+OK   culture name
+OK   environment
+OK   organization
+OK   upbringing
+OK   culture language
+OK   env skill
+OK   org skill
+OK   upb skill
+OK   soldier
+OK   exploration skill
+OK   intrigue skill
+OK   language 1
+OK   language 2
+OK   perk
+OK   incident
+OK   fury
+OK   array
+OK   assignment
+OK   aspect
+OK   class skill 1
+OK   class skill 2
+OK   signature
+OK   3pt
+OK   5pt
+OK   kit
+OK   default language
+OK   name
+WARNINGS []
+OK   save
+OK   export
+DONE A-read-person file=A-read-person.ds-hero warnings=0
+##### B-brag
+OK   devil
+OK   skill
+OK   trait Barbed Tail
+OK   trait Prehensile Tail
+OK   bespoke
+OK   culture name
+OK   environment
+OK   organization
+OK   upbringing
+OK   culture language
+OK   env skill
+OK   org skill
+OK   upb skill
+OK   soldier
+OK   exploration skill
+OK   intrigue skill
+OK   language 1
+OK   language 2
+OK   perk
+OK   incident
+OK   fury
+OK   array
+OK   assignment
+OK   aspect
+OK   class skill 1
+OK   class skill 2
+OK   signature
+OK   3pt
+OK   5pt
+OK   kit
+OK   default language
+OK   name
+WARNINGS []
+OK   save
+OK   export
+DONE B-brag file=B-brag.ds-hero warnings=0
+##### C-flirt
+OK   devil
+OK   skill
+OK   trait Glowing Eyes
+OK   trait Wings
+OK   bespoke
+OK   culture name
+OK   environment
+OK   organization
+OK   upbringing
+OK   culture language
+OK   env skill
+OK   org skill
+OK   upb skill
+OK   soldier
+OK   exploration skill
+OK   intrigue skill
+OK   language 1
+OK   language 2
+OK   perk
+OK   incident
+OK   fury
+OK   array
+OK   assignment
+OK   aspect
+OK   class skill 1
+OK   class skill 2
+OK   signature
+OK   3pt
+OK   5pt
+OK   kit
+OK   default language
+OK   name
+WARNINGS []
+OK   save
+OK   export
+DONE C-flirt file=C-flirt.ds-hero warnings=0

@@ -1,0 +1,85 @@
+===== RUNTIME SOURCE IDENTITY =====
+{
+  "project": "salient",
+  "environment": "characters",
+  "installation": "39ebd4ec-3fc4-417a-bcc2-a4666d5e53d3",
+  "compose": "salient-characters-dev-2389e144b9dd",
+  "source": {
+    "submodules": [
+      {
+        "path": "vendor/steel-compendium",
+        "url": "https://github.com/SteelCompendium/data-unified.git",
+        "gitlink": "fb83a789da8f0327a389c277a0c790b1648d5810",
+        "initialized": true,
+        "commit": "fb83a789da8f0327a389c277a0c790b1648d5810",
+        "dirty": false
+      },
+      {
+        "path": "vendor/forge-steel",
+        "url": "https://github.com/andyaiken/forgesteel.git",
+        "gitlink": "5a846aadb623a9855a023e9403bb887a956c341f",
+        "initialized": true,
+        "commit": "5a846aadb623a9855a023e9403bb887a956c341f",
+        "dirty": false
+      }
+    ],
+    "checkout": "/srv/presidium/projects/salient/opus-characters",
+    "identity": "d94a13318fd1b10571704cf5ecf64516e664b55a1a7c7a4c3a658bdfef654718",
+    "commit": "4c4d02146b0532b4cfc6f2d6dbec04732117b764",
+    "dirty": false
+  },
+  "phase": "running",
+  "updated": 1789849771,
+  "lastJob": {
+    "container": "salient-characters-dev-2389e144b9dd-job-af0bbb88",
+    "service": "install",
+    "started": 1789849771,
+    "exitCode": 0
+  },
+  "routes": {
+    "web": {
+      "name": "salient-characters-dev-aa988a1a3752",
+      "identity": "{\"endpoint\":\"web\",\"environment\":\"characters\",\"installation\":\"39ebd4ec-3fc4-417a-bcc2-a4666d5e53d3\",\"managedBy\":\"presidium-dev-v1\",\"project\":\"salient\"}",
+      "port": 32859,
+      "url": "https://salient-characters-dev-aa988a1a3752.tail41404c.ts.net",
+      "phase": "https-verified-from-host"
+    }
+  }
+}
+NAME                                            IMAGE                                                                                           COMMAND                  SERVICE   CREATED          STATUS                    PORTS
+salient-characters-dev-2389e144b9dd-backend-1   node:24.13.0-bookworm@sha256:1de022d8459f896fff2e7b865823699dc7a8d5567507e8b87b14a7442e07f206   "docker-entrypoint.s…"   backend   20 seconds ago   Up 18 seconds (healthy)   
+salient-characters-dev-2389e144b9dd-web-1       node:24.13.0-bookworm@sha256:1de022d8459f896fff2e7b865823699dc7a8d5567507e8b87b14a7442e07f206   "docker-entrypoint.s…"   web       19 seconds ago   Up 8 seconds              127.0.0.1:32859->5180/tcp
+salient-characters-dev-2389e144b9dd-web-1	162.01%	829.7MiB / 2GiB
+salient-characters-dev-2389e144b9dd-backend-1	3.24%	1.167GiB / 3GiB
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/loop4       79G   39G   36G  52% /
+===== LINT, TYPES, ENGINE =====
+ Container salient-characters-dev-2389e144b9dd-job-fd49d92e Creating 
+ Container salient-characters-dev-2389e144b9dd-job-fd49d92e Created 
+Checking formatting...
+All matched files use Prettier code style!
+
+ RUN  v4.1.11 /app
+
+ ✓  engine  tests/character-v45-reference.test.ts (7 tests) 295ms
+ ✓  engine  tests/character-v46-devil.test.ts (16 tests) 215ms
+ ✓  engine  tests/character-v46-forge.test.ts (16 tests) 90ms
+
+ Test Files  3 passed (3)
+      Tests  39 passed (39)
+   Start at  20:30:32
+   Duration  1.35s (transform 274ms, setup 0ms, import 477ms, tests 600ms, environment 0ms)
+
+===== CHANGED V46 BROWSER JOURNEYS =====
+ Container salient-characters-dev-2389e144b9dd-job-870e6677 Creating 
+ Container salient-characters-dev-2389e144b9dd-job-870e6677 Created 
+
+Running 4 tests using 1 worker
+
+[1/4] tests/browser/v46-devil-persistence.spec.ts:97:1 › V46: all thirteen counterpart builds save and read back through shared operations
+[2/4] tests/browser/v46-devil-persistence.spec.ts:186:1 › V46: changing a purchased trait or the ancestry removes its grants across a reload
+[3/4] tests/browser/v46-devil-persistence.spec.ts:304:1 › V46: a flying devil advances to Berserker Fury two with live state and history intact
+[4/4] tests/browser/v46-devil.spec.ts:13:1 › V46 Devil level one: every trait and skill offered, flight build saved and read back
+  4 passed (1.9m)
+
+[exited with code 0]

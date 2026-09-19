@@ -1,0 +1,11 @@
+ Container salient-characters-dev-2389e144b9dd-job-2f28af97 Creating 
+ Container salient-characters-dev-2389e144b9dd-job-2f28af97 Created 
+
+Running 3 tests using 1 worker
+
+[1/3] tests/browser/closeout.spec.ts:21:1 › closeout awards once, is shared with observers, and paused session closure offers Void
+[2/3] tests/browser/table-audit.spec.ts:40:1 › three table contexts, palette, console and live CLI share persisted operations
+[3/3] tests/browser/v21-campaign.spec.ts:23:1 › campaign home: header actions, player tiles, copy, join requests, foe chips, log filter
+  3 passed (3.4m)
+
+[exited with code 0]

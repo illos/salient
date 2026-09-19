@@ -352,6 +352,19 @@ Each derived value or ability should identify the choice, grant, item, or effect
 official text through Compendium SCC references. Unknown requirements must stay visible rather than being
 interpreted as satisfied, false, or harmless.
 
+**Implementation note, 2026-09-19 (V46):** completing an ancestry needed a way to record effects the
+source itself makes conditional or activated, because the existing baseline had only unconditional
+lists. `DerivedBaseline` gains two additive optional fields in
+`shared/contracts/characterEvaluation.ts`: `movementModes`, for a granted mode such as the devil's
+Wings with its verbatim source restriction, and `conditionalEffects`, for an amount the build
+calculates but the table applies only when the stated condition holds. Nothing reads either list to
+change a roll, a pool or a damage total. They are deliberately separate from `damageWeaknesses`,
+which is displayed as always in effect, and from `abilityModifiers`, which damage resolution applies
+automatically: a conditional weakness in the first or a once-per-round option in the second would be
+silently wrong. `ConditionalEffect.effect` is a closed union extended deliberately by each unit that
+needs a new sourced shape. This is an engineering choice within the confirmed decision system, not a
+new product rule.
+
 **Implementation note, 2026-09-15 (A02):** `shared/evaluate/character.ts` implements the R02
 contract; `characters.evaluate` runs it as a shared read and every saved revision persists its
 `EvaluationResult` and `derivedBaseline`. The wizard (`web/wizard/`) renders every presented R01 step

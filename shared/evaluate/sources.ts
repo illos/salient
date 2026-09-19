@@ -277,26 +277,88 @@ export const SKILL_SENTENCES: Record<string, Sentence> = {
 };
 
 /** Numeric trait effects R02 sections 1.6 and 1.12 read from the devil trait entries. */
-export const TRAIT_EFFECTS: Record<
-  string,
-  { field: 'speed' | 'savingThrowThreshold'; value: number; sentence: Sentence }
-> = {
+const TRAIT = 'en/unified/md/feature/trait/devil/';
+
+/**
+ * One source sentence per purchased devil trait. `field` is present only where the source sets a
+ * baseline value; a trait whose effect is conditional or manual carries its sentence alone, so a
+ * granted feature never claims a numeric contribution it does not make (V46).
+ */
+export type TraitEffect = { sentence: Sentence } & (
+  | { field: 'speed' | 'savingThrowThreshold'; value: number }
+  | { field?: undefined; value?: undefined }
+);
+
+export const TRAIT_EFFECTS: Record<string, TraitEffect> = {
+  'Barbed Tail': {
+    sentence: {
+      path: `${TRAIT}barbed-tail.md`,
+      quote:
+        'Once per round when you make a melee strike, you can deal extra damage with the strike equal to your highest characteristic score.',
+    },
+  },
   'Beast Legs': {
     field: 'speed',
     value: 6,
     sentence: {
-      path: 'en/unified/md/feature/trait/devil/beast-legs.md',
+      path: `${TRAIT}beast-legs.md`,
       quote: 'You have speed 6.',
+    },
+  },
+  'Glowing Eyes': {
+    sentence: {
+      path: `${TRAIT}glowing-eyes.md`,
+      quote:
+        'Whenever you take damage from a creature, you can use a triggered action to deal that creature psychic damage equal to 1d10 + your level.',
+    },
+  },
+  Hellsight: {
+    sentence: {
+      path: `${TRAIT}hellsight.md`,
+      quote: "You don't take a bane on strikes made against creatures with concealment.",
     },
   },
   'Impressive Horns': {
     field: 'savingThrowThreshold',
     value: 5,
     sentence: {
-      path: 'en/unified/md/feature/trait/devil/impressive-horns.md',
+      path: `${TRAIT}impressive-horns.md`,
       quote: 'Whenever you make a saving throw, you succeed on a roll of 5 or higher.',
     },
   },
+  'Prehensile Tail': {
+    sentence: {
+      path: `${TRAIT}prehensile-tail.md`,
+      quote: "You can't be flanked.",
+    },
+  },
+  Wings: {
+    sentence: {
+      path: `${TRAIT}wings.md`,
+      quote:
+        'While using your wings to fly, you can stay aloft for a number of rounds equal to your Might score (minimum 1 round) before you fall.',
+    },
+  },
+};
+
+/** Wings' second sentence; its weakness is conditional, never a baseline damage weakness (V46). */
+export const WINGS_WEAKNESS_SENTENCE: Sentence = {
+  path: `${TRAIT}wings.md`,
+  quote: 'While using your wings to fly at 3rd level or lower, you have damage weakness 5.',
+};
+
+/** Untyped "damage weakness X" applies to damage of any type; Wings states no type. */
+export const UNTYPED_DAMAGE_WEAKNESS: Sentence = {
+  path: 'en/unified/md/rule/damage/damage-weakness.md',
+  quote:
+    'A creature who has "damage weakness X" with no specific type or keyword indicated has weakness of the indicated amount when they take damage of any type.',
+};
+
+/** The general movement rule Wings links: flying is at full speed, in any direction. */
+export const FLY_RULE: Sentence = {
+  path: 'en/unified/md/movement/fly.md',
+  quote:
+    'A creature who has "fly" in their speed entry, or who gains the temporary ability to fly, can move through the air vertically or horizontally at full speed and remain in midair.',
 };
 
 /** Aspect grants beyond the R01 option grants: the sentence each grant kind rests on (R02 1.15). */

@@ -1,0 +1,85 @@
+{
+ "characterId": "k1745c3kpfg0ymyzab8spht5yn8eq6dk",
+ "heroName": "V46 flier b2b9c1cc",
+ "levelOne": {
+  "level": 1,
+  "movementModes": [
+   "Fly"
+  ],
+  "conditionalEffects": [
+   [
+    "rounds-aloft",
+    2
+   ],
+   [
+    "damage-weakness",
+    5
+   ]
+  ],
+  "staminaMaximum": 30,
+  "carried": {
+   "kit": "Mountain",
+   "equipment": "You wear heavy armor and wield a heavy weapon.",
+   "wealth": 1,
+   "renown": 1
+  }
+ },
+ "levelTwo": {
+  "level": 2,
+  "movementModes": [
+   "Fly"
+  ],
+  "conditionalEffects": [
+   [
+    "rounds-aloft",
+    2
+   ],
+   [
+    "damage-weakness",
+    5
+   ]
+  ],
+  "staminaMaximum": 39,
+  "liveStamina": 20,
+  "carried": {
+   "kit": "Mountain",
+   "equipment": "You wear heavy armor and wield a heavy weapon.",
+   "wealth": 1,
+   "renown": 1
+  }
+ },
+ "retainedLevelOneSnapshot": {
+  "level": 1,
+  "movementModes": [
+   "Fly"
+  ]
+ },
+ "restored": {
+  "level": 1,
+  "movementModes": [
+   "Fly"
+  ],
+  "conditionalEffects": [
+   [
+    "rounds-aloft",
+    2
+   ],
+   [
+    "damage-weakness",
+    5
+   ]
+  ],
+  "staminaMaximum": 30,
+  "liveStamina": 20,
+  "liveRecoveries": 4,
+  "liveXp": 16,
+  "carried": {
+   "kit": "Mountain",
+   "equipment": "You wear heavy armor and wield a heavy weapon.",
+   "wealth": 1,
+   "renown": 1
+  },
+  "identicalToLevelOneBuild": true
+ },
+ "note": "\"carried\" is build-time equipment only: the kit, its equipment text, and the Wealth and Renown values on the derived baseline. A mutable inventory is not implemented — no table in the composed convex/schema.ts holds items — so this records that the baseline equipment is conserved, not that any in-play possession was preserved."
+}

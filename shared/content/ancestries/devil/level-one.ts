@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
-/** Existing level-one Devil content; stable R01 decision IDs and source wording. */
+/** Level-one Devil content; stable R01 decision IDs and source wording (V46 completes it). */
 import type { Decision } from '../../../evaluate/definitions.ts';
 
 export const levelOneDecisions = [
@@ -22,7 +22,11 @@ export const levelOneDecisions = [
         value: 'size 1M, speed 5, stability 0 (derived in R02)',
       },
     ],
-    note: 'Absent from en/unified/md/chapter/ancestries.md; present only in the clean Heroes text.',
+    note:
+      'The same sentence is in the unified tree at en/unified/md/rule/character/speed.md, which is' +
+      ' the path the evaluator cites for this contribution; it is absent only from' +
+      ' en/unified/md/chapter/ancestries.md. Corrected in V46 after a rules review found the' +
+      ' earlier note claimed it existed only in the clean Heroes text.',
   },
   {
     id: 'ancestry.devil.signature-trait',
@@ -56,7 +60,22 @@ export const levelOneDecisions = [
     source: 'en/unified/md/feature/trait/devil/silver-tongue.md',
     quote: 'You have one skill of your choice from the interpersonal skill group',
     optionsFrom: 'pool.skills.interpersonal',
-    supportedInV001: ['Persuade'],
+    // V46: the complete interpersonal group. The pool, not this list, defines eligibility.
+    supportedInV001: [
+      'Brag',
+      'Empathize',
+      'Flirt',
+      'Gamble',
+      'Handle Animals',
+      'Interrogate',
+      'Intimidate',
+      'Lead',
+      'Lie',
+      'Music',
+      'Perform',
+      'Persuade',
+      'Read Person',
+    ],
     questions: [],
   },
   {
@@ -85,7 +104,7 @@ export const levelOneDecisions = [
         cost: 1,
         source: 'en/unified/md/feature/trait/devil/barbed-tail.md',
         costQuote: 'cost: 1 Point',
-        supportedInV001: false,
+        supportedInV001: true,
       },
       {
         id: 'trait.devil.beast-legs',
@@ -101,7 +120,17 @@ export const levelOneDecisions = [
         cost: 1,
         source: 'en/unified/md/feature/trait/devil/glowing-eyes.md',
         costQuote: 'cost: 1 Point',
-        supportedInV001: false,
+        supportedInV001: true,
+        grants: [
+          {
+            kind: 'ancestry-ability',
+            value: 'Glowing Eyes',
+            source: 'en/unified/md/feature/trait/devil/glowing-eyes.md',
+            quote:
+              'Whenever you take damage from a creature, you can use a triggered action to deal that creature psychic damage equal to 1d10 + your level.',
+            note: 'Readable grant only: the trigger, the roll and the damage are resolved manually.',
+          },
+        ],
       },
       {
         id: 'trait.devil.hellsight',
@@ -109,7 +138,7 @@ export const levelOneDecisions = [
         cost: 1,
         source: 'en/unified/md/feature/trait/devil/hellsight.md',
         costQuote: 'cost: 1 Point',
-        supportedInV001: false,
+        supportedInV001: true,
       },
       {
         id: 'trait.devil.impressive-horns',
@@ -125,7 +154,7 @@ export const levelOneDecisions = [
         cost: 2,
         source: 'en/unified/md/feature/trait/devil/prehensile-tail.md',
         costQuote: 'cost: 2 Points',
-        supportedInV001: false,
+        supportedInV001: true,
       },
       {
         id: 'trait.devil.wings',
@@ -133,10 +162,9 @@ export const levelOneDecisions = [
         cost: 2,
         source: 'en/unified/md/feature/trait/devil/wings.md',
         costQuote: 'cost: 2 Points',
-        supportedInV001: false,
+        supportedInV001: true,
       },
     ],
-    supportedSetInV001: ['Beast Legs', 'Impressive Horns'],
     questions: [],
   },
 ] as Decision[];

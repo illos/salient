@@ -1,0 +1,64 @@
+{
+ "characterId": "k17bz3908kcf0wkpfyvrcj6we18eqm8z",
+ "heroName": "V46 removal 50ea0027",
+ "flying": {
+  "movementModes": [
+   "Fly"
+  ],
+  "conditionalEffects": [
+   [
+    "rounds-aloft",
+    2
+   ],
+   [
+    "damage-weakness",
+    5
+   ]
+  ],
+  "ancestryAbilities": [
+   "Glowing Eyes"
+  ]
+ },
+ "afterReplacingTheTraits": {
+  "movementModes": [],
+  "conditionalEffects": [
+   [
+    "extra-strike-damage",
+    2
+   ]
+  ],
+  "traits": [
+   "Silver Tongue",
+   "Barbed Tail",
+   "Prehensile Tail"
+  ],
+  "skills": [
+   "Brag",
+   "Swim",
+   "Blacksmithing",
+   "Intimidate",
+   "Endurance",
+   "Alertness",
+   "Nature",
+   "Jump",
+   "Climb",
+   "Lift"
+  ],
+  "speed": 5,
+  "ancestryAbilities": []
+ },
+ "afterLeavingTheAncestry": {
+  "movementModes": [],
+  "conditionalEffects": [],
+  "traits": [
+   "Shadowmeld",
+   "Small!"
+  ],
+  "savingThrowThreshold": 6,
+  "class": "Fury",
+  "career": "Soldier",
+  "ancestryAbilities": [
+   "Shadowmeld"
+  ]
+ }
+}

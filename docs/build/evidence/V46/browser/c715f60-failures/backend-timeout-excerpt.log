@@ -1,0 +1,21 @@
+# Backend log excerpt, characters environment, c715f60 full browser suite window.
+#
+# DISCLOSURE: this line was read live at 19:44 UTC on 2026-09-19 from the then-running backend
+# container and is reproduced verbatim below. It can no longer be re-extracted: `up --replace`
+# recreated salient-characters-dev-2389e144b9dd-backend-1 at 19:57:19 UTC while preparing the
+# cc7d4ac run, and container logs do not survive replacement. The screenshot beside this file
+# (closeout-director-function-timeout.png) is the retained, independently readable artifact for
+# the same failure, and it was written by Playwright at 19:22:39 into the artifacts volume.
+#
+# Command used at 19:44, over the whole suite window:
+#   docker logs --since 2026-09-19T19:00:00 --until 2026-09-19T19:40:00 \
+#     salient-characters-dev-2389e144b9dd-backend-1 2>&1 \
+#   | grep -viE 'Rate limiting skipped' | grep -iE 'timed out|too many|429|TOO_MANY'
+#
+# It returned exactly one line for the whole window:
+
+9/19/2026, 7:22:10 PM [CONVEX Q(foes:catalog)] Function execution timed out (maximum duration: 1s)
+
+# Nothing matching "too many", "429" or "TOO_MANY" appeared in the backend log for that window;
+# the rate-limit text in the two register screenshots is the auth library's response rendered in
+# the page, and is evidenced by those screenshots rather than by this log.
