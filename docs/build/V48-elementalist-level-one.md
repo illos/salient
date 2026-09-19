@@ -410,38 +410,47 @@ What is actually missing is narrow:
 contributor and add `disengage` to `numericFields`. No new framework, and existing provenance and
 results are preserved by construction because the same code path produces them.
 
-### D. Enchantment of Battle: record the source amounts with their condition, not zero
+### D. Enchantment of Battle: V46's `ConditionalEffect`, extended by two union members
 
-An earlier draft of this document proposed recording Enchantment of Battle's bonuses as amount **0**
-because Salient has no equipment model. **That was wrong and is withdrawn.** Treating an unrecorded
-condition as false is exactly the silent default this project forbids, and it would have
-manufactured a false mismatch against Forge.
+An earlier draft proposed recording Enchantment of Battle's bonuses as amount **0** because Salient
+has no equipment model. **Withdrawn** — treating an unrecorded condition as false is the silent
+default this project forbids, and it would have manufactured a false Forge mismatch.
 
-The source gates both numbers: "**While you wear light armor,** you gain a +3 bonus to Stamina" and
-"**While you wield a light weapon,** you gain a +1 damage bonus with weapon abilities, including free
-strikes," plus "You can use light armor treasures and light weapon treasures." Forge encodes them
-unconditionally — `createBonus({ field: Stamina, valuePerEchelon: 3 })`,
-`createAbilityDamage({ keywords: [Weapon], value: 1 })` and a `createProficiency` entry — with the
-condition surviving only in prose.
+A second draft then proposed recording the +1 weapon damage in `abilityModifiers` with a `condition`
+string, on the grounds that `convex/characters.ts:625-649` already renders one. **Also withdrawn,
+and it was the more dangerous mistake.** That `condition` is presentation only.
+`convex/lib/resolve.ts:577-586` forwards every `abilityModifiers` entry's amount into damage after
+keyword matching alone and never consults a condition, so a conditional entry placed there would be
+applied **unconditionally** in automatic damage — the same hazard as [gap A](#a-abilitymodifierfield-has-zero-runtime-readers--do-not-widen-it).
+Nothing conditional may enter that array.
 
-**Correct treatment:** record the **source amounts** (+3 Stamina at echelon 1, +1 weapon damage) as
-conditional contributions carrying their full condition text and an explicit *activation unknown*
-state, because Salient does not yet model whether the hero wears light armor. The amounts are known
-and recorded; what is unknown is recorded as unknown. The `SupportingChoice` contract already carries
-a `condition?: string`, and `convex/characters.ts:625-649` already supports a per-modifier
-`condition` string that the sheet renders (`ability-card.tsx:96`), so the ability-damage half has an
-existing presentation path.
+V46 already solved this shape. Commit `dd514ff` adds `DerivedBaseline.conditionalEffects` with a
+`ConditionalEffect` interface carrying `feature`, a closed `effect` union, a verbatim `condition`,
+`sourcePath`, optional `damageType` and `amount: DerivedValue<number>` — documented as "Deliberately
+separate from `abilityModifiers`, which damage resolution applies automatically, and from
+`damageWeaknesses`, which is displayed as always in effect: nothing reads this list to change a roll
+or a pool."
 
-**Forge comparison:** the reference witness must state the condition assumption explicitly and
-compare under the **same** assumption. Assuming light armor worn, Forge's +3 and our +3 agree and
-there is no mismatch. The difference is Forge assuming the condition met, not a rules disagreement,
-and it must not be reported as an unexplained discrepancy in either direction. Salient lacking an
-equipment fact does not by itself excuse a numeric difference.
+**Smallest extension:** add two members to the existing `effect` union. No new field, no new
+interface, no consumer change.
 
-This needs a shared representation for a conditional permanent contribution with unknown activation.
-**Coordinate with V46 before inventing a second one** — the Devil's Wings grant needs exactly the
-same shape for its conditional damage weakness, and its preparation already records that the current
-baseline has unconditional `damageWeaknesses` entries but no conditional field.
+| `effect` member | Feature | Verbatim condition | Amount at level one |
+| --- | --- | --- | ---: |
+| `stamina-bonus` | Enchantment of Battle | While you wear light armor | 3 |
+| `weapon-damage-bonus` | Enchantment of Battle | While you wield a light weapon | 1 |
+
+`staminaMaximum` stays 18 and `abilityModifiers` gains nothing. The amounts are known and recorded;
+only the activation is unknown, and it is recorded as unknown rather than defaulted either way. The
+third clause — "You can use light armor treasures and light weapon treasures" — is a capability with
+no amount and is a readable feature grant, not a `ConditionalEffect`.
+
+This also narrows [gap C](#c-class-feature-vitals-the-mechanism-exists-but-is-reachable-only-from-complications):
+only **Permanence** (+6 Stamina, +1 stability) and **Celerity** (+1 speed, +1 Disengage) need the
+vitals contribution path. Battle needs none.
+
+For the reference comparison, the witness states the condition assumption and compares both builders
+under the **same** assumption; assuming light armor worn, Forge's +3 and our +3 agree. Salient
+lacking an equipment fact does not by itself excuse a numeric difference, and none is claimed here.
 
 ### E. Specialization grants are asymmetric
 
@@ -504,18 +513,26 @@ Class skills still vary across the builds below. That is deliberate but is **not
 options: it exercises the already-served pool against the new class grants and gives the duplicate
 and de-duplication paths something to bite on. It is not counted toward the unit's option ledger.
 
+**The complete choice maps, the independently derived source expectations for every build, the
+normalized comparison design and the capture plan are in
+[the reference plan](../research/v48-elementalist-reference-plan.md).** Deriving those expectations
+found an error in this matrix's first draft: three builds assigned class skills that collide with
+Bethell's fixed skills — Tailoring from culture, and Monsters and Timescape from the career — which
+would have made those builds illegal under Q-CHAR-11. The reference plan carries the corrected
+assignment, drawn only from the 18 legal values. The table below is the corrected version.
+
 | # | Specialization | Enchantment | Ward (nested type) | Signature ×2 | 3-essence | 5-essence | Class skills ×3 |
 | ---: | --- | --- | --- | --- | --- | --- | --- |
 | 1 | Fire | Destruction | Delightful Consequences | Bifurcated Incineration, Viscous Fire | The Flesh, a Crucible | Conflagration | Alchemy, Blacksmithing, History |
 | 2 | Earth | Celerity | Excellent Protection (acid) | Afflict a Bountiful Decay, Grasp of Beyond | Behold the Mystery | Instantaneous Excavation | Architecture, Carpentry, Cooking |
 | 3 | Green | Battle | Excellent Protection (cold) | The Green Within the Green Without, Meteoric Introduction | Invigorating Growth | No More Than a Breeze | Fletching, Forgery, Jewelry |
-| 4 | Void | Distance | Excellent Protection (corruption) | Ray of Agonizing Self-Reflection, Unquiet Ground | Ripples in the Earth | Test of Rain | Mechanics, Tailoring, Criminal Underworld |
-| 5 | Fire | Permanence | Excellent Protection (fire) | Bifurcated Incineration, Afflict a Bountiful Decay | Behold the Mystery | Instantaneous Excavation | Culture, Monsters, Nature |
-| 6 | Earth | Destruction | Excellent Protection (lightning) | Grasp of Beyond, Unquiet Ground | Invigorating Growth | Test of Rain | Psionics, Religion, Rumors |
-| 7 | Green | Celerity | Excellent Protection (poison) | Meteoric Introduction, Viscous Fire | Ripples in the Earth | Conflagration | Society, Strategy, Timescape |
-| 8 | Void | Battle | Excellent Protection (sonic) | Ray of Agonizing Self-Reflection, The Green Within the Green Without | The Flesh, a Crucible | No More Than a Breeze | Alchemy, History, Nature |
-| 9 | Fire | Distance | Nature's Affection | Bifurcated Incineration, Grasp of Beyond | Behold the Mystery | Test of Rain | Cooking, Jewelry, Strategy |
-| 10 | Earth | Permanence | Surprising Reactivity | Unquiet Ground, Viscous Fire | Ripples in the Earth | Instantaneous Excavation | Carpentry, Monsters, Timescape |
+| 4 | Void | Distance | Excellent Protection (corruption) | Ray of Agonizing Self-Reflection, Unquiet Ground | Ripples in the Earth | Test of Rain | Mechanics, Criminal Underworld, Culture |
+| 5 | Fire | Permanence | Excellent Protection (fire) | Bifurcated Incineration, Afflict a Bountiful Decay | Behold the Mystery | Instantaneous Excavation | Nature, Psionics, Religion |
+| 6 | Earth | Destruction | Excellent Protection (lightning) | Grasp of Beyond, Unquiet Ground | Invigorating Growth | Test of Rain | Rumors, Society, Strategy |
+| 7 | Green | Celerity | Excellent Protection (poison) | Meteoric Introduction, Viscous Fire | Ripples in the Earth | Conflagration | Alchemy, Architecture, Nature |
+| 8 | Void | Battle | Excellent Protection (sonic) | Ray of Agonizing Self-Reflection; The Green Within, the Green Without | The Flesh, a Crucible | No More Than a Breeze | Blacksmithing, Carpentry, Psionics |
+| 9 | Fire | Distance | Nature's Affection | Bifurcated Incineration, Grasp of Beyond | Behold the Mystery | Test of Rain | Cooking, Fletching, Religion |
+| 10 | Earth | Permanence | Surprising Reactivity | Unquiet Ground, Viscous Fire | Ripples in the Earth | Instantaneous Excavation | Forgery, Jewelry, Rumors |
 
 All four specializations appear at least twice. Every enchantment, every
 ward, all seven ward damage types, all eight signature abilities and all four options in each
@@ -542,6 +559,7 @@ Independent checks each build must carry, derived from the Compendium before our
 | `shared/content/classes/elementalist/level-one.ts` | All option rows completed; the two missing container features added; the nested ward damage-type decision added; existing decision IDs and source paths preserved |
 | `shared/evaluate/classes/elementalist.ts` | Acolyte modifiers for all four specializations; five enchantment contributions; ward immunity contribution |
 | Shared contracts/phases | **Requested from the integration owner**, not written here: gaps A, B, C and the D representation decision |
+| [`docs/research/v48-elementalist-reference-plan.md`](../research/v48-elementalist-reference-plan.md) | The ten legal choice maps, derived source expectations, normalized comparison design and capture plan |
 | `tests/fixtures/v48-elementalist/` | Ten raw `.ds-hero` exports, readable sheets, capture metadata, hashes, normalized selections, independently derived expectations |
 | `tests/character-v48-elementalist.test.ts` | Per-build comparison, parent-change removal, nested-choice removal, budget/count and duplicate-skill cases |
 | `tests/browser/v48-elementalist.spec.ts` | Wizard journeys, source display, sheet rendering, persisted readback |
