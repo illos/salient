@@ -87,18 +87,28 @@ A `foes:catalog` execution crossed the limit at 21:45:27, inside the window.
 **Fast minimal probes are evidence against a *uniform* prefix cost. They cannot exclude a
 context-dependent prefix cost.** That is the whole of the headline. The probe's median is 42 ms
 under verified load while application medians sit near 1000 ms on the same backend in the same
-window, so a fixed per-call prefix charge of that size is not what puts those queries over the
-limit.
+window. What follows is narrow: **a prefix charge that is the same size in the probes as in the
+application queries cannot account for the gap.** It does not follow that the prefix contributes
+nothing there — the same code could cost more inside a query with a different import graph, a
+different working set, or different contention exposure, and this experiment cannot see that.
 
 **The prefix is not immune to load.** Its p90 moves 49 → 204 ms and its maximum 51 → 490 ms, while
 the control moves 16 → 28 ms. Load reaches the prefix; it simply does not reach it anywhere near
 enough to explain a one-second limit on its own. The first run's "refuted" framing is withdrawn.
 
-**The probes do not isolate `requireMember` or database work.** The diagnostics module's import
-graph is minimal, while `targets.ts` pulls in `tableContext` from `lib/registry`, whose top-level
-imports reach every operation family, and `foes.ts` reaches the whole compendium through
-`content.ts`. Module initialization and bundle dependencies therefore differ between the probes and
-the real queries. That is an untested alternative to any database-work explanation, not a finding.
+**The probes do not isolate `requireMember` or database work.** The diagnostics module imports only
+`lib/access`. `targets.ts` pulls in `tableContext` from `lib/registry`, whose top-level imports
+reach every operation family; `foes.ts` reaches the whole compendium through `content.ts`. Module
+initialization and bundle dependencies therefore differ between the probes and the real queries.
+That is an untested alternative to any database-work explanation, not a finding.
+
+**Correction: this does not apply uniformly, and an earlier version of this report said it did.**
+`events.ts` imports only `requireUser` and `requireMember` from `lib/access` — it does **not** use
+`tableContext` and does not reach `lib/registry`. So "every slow query pulls in the registry" was
+false. Worth noting without overreading: `events:list` also has the **lowest** median of the slow
+set at 690.5 ms against roughly 1000 ms for the `tableContext` consumers. That is consistent with
+an import-graph effect and is equally consistent with `events:list` simply doing less work. One
+query is not a comparison, and nothing here tests it.
 
 **It refutes an argument from my own earlier triage.** I claimed `targets:drafts` and `foes:catalog`
 read too little to be slow and were a control group proving the cost was not in the handlers. They
