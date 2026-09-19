@@ -354,3 +354,14 @@ output and exit status, capture preflight, and inbox checks at each job boundary
 the existing V52 full-suite job after its own launch was rejected as busy, rather than claiming
 two running suites or a successful replacement. No verification gate or batch release changed.
 Documentation only; no runtime update.
+
+2026-09-19: the V52 full browser attempt on source `0987595` was stopped after the isolated
+backend became unavailable. The retained output has seven failure blocks and an exit of 143 at
+test position 48 of 56; this is not a full pass. The backend cgroup recorded an OOM kill while
+its marker-only health check continued reporting healthy. Three diagnostic log followers shared
+the backend memory limit, including one started by the lead; their contribution is a plausible
+factor, not an established sole cause. Evidence was archived before the followers were stopped
+and the same isolated backend was recovered. V55 owns the live-health correction. The
+orchestration guide now includes diagnostic resource accounting and evidence preservation after
+backend failure. Main application code is unchanged; character integration and batch release
+remain gated on successful verification. Documentation only; no shared runtime update.

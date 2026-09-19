@@ -105,6 +105,15 @@ startup error is missing evidence, not an absence of backend failures. Preserve 
 label historical or late-start capture with its actual coverage. Let workers retain implementation
 and review ownership when the lead takes over unreliable runtime orchestration.
 
+Budget the diagnostics too. A CLI launched with `docker exec` shares that container's memory
+limit; duplicate log followers can materially reduce the application's headroom. Use one capture
+owner and a lightweight collector, or an explicitly separate resource budget. Record capture
+processes and stop them at the end of the attempt. A startup marker alone does not prove current
+backend health: verify a live endpoint before trusting a container's healthy label. If the backend
+dies, stop dependent verification, preserve logs, exit status, process state and OOM counters before
+recovery, and record the run as failed or aborted. An OOM counter establishes an event, not its
+exact time or which workload caused it.
+
 For character units, retain the existing [Forge comparison gate](build/character-verification.md),
 persisted readbacks, full checks, and independent implementation review followed by fresh rules
 review. Read composed definitions and actual consumers: raw option metadata can understate served
