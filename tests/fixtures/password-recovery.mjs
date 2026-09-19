@@ -52,11 +52,39 @@ try {
 const email = `recovery-${randomUUID()}@example.test`;
 const password = `Before-${randomUUID()}`;
 const token = randomUUID();
+// V52: this is the suite's one non-UI sign-up, and it shares the per-address `/sign-up/email`
+// bucket with every browser registration (better-auth's key is the address and the exact path).
+// It runs in its own process, so it cannot share the browser helper's in-process pacing; a plain
+// quiet period before the request achieves the same guarantee — the server's own counter resets
+// on any request more than its ten-second window after the previous one.
+//
+// Deliberately NOT paced: the `/request-password-reset` and `/reset-password` calls this fixture
+// and `password-recovery.spec.ts` make on purpose. Those have their own custom rule
+// (`convex/auth.ts:42`) and, decisively, their own bucket, and the spec asserts the refusal they
+// are meant to provoke. Pacing them would destroy the thing under test.
+const SIGN_UP_QUIET_MS = 11_500;
+await new Promise(resolve => setTimeout(resolve, SIGN_UP_QUIET_MS));
+const signUpAt = new Date().toISOString();
 const response = await fetch('http://backend:3211/api/auth/sign-up/email', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json', Origin: process.env.DEV_WEB_URL },
   body: JSON.stringify({ name: 'Recovery browser fixture', email, password }),
 });
+// Logged in the same shape as the browser helper's record, so the two can be read together when
+// reconstructing what reached the endpoint during a run.
+console.log(
+  JSON.stringify({
+    signUpExchange: {
+      at: signUpAt,
+      status: response.status,
+      // 1.6.15's rateLimitResponse sets X-Retry-After; Retry-After is the fallback, not a case
+      // variant of it. Reading only one silently drops the header on a refusal.
+      retryAfter: response.headers.get('x-retry-after') ?? response.headers.get('retry-after'),
+      source: 'tests/fixtures/password-recovery.mjs',
+      quietMsBefore: SIGN_UP_QUIET_MS,
+    },
+  }),
+);
 if (!response.ok) throw new Error(`Fixture signup failed: HTTP ${response.status}`);
 const { user } = await response.json();
 const now = Date.now();

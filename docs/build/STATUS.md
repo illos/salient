@@ -336,6 +336,12 @@ records the handoff; it does not certify A09 or create an implementation commit.
 | --- | --- | --- | --- |
 | V45 | [Character option foundation](V45-character-option-foundation.md) | Complete — merged/live `ebe66e2`; 691 tests, 5,584 exact comparisons, 49 applicable browser successes and two shared checks; both audits pass; initial timeout/retry limits retained; no new options enabled | Character integration lead and subagents |
 
+## V52 browser sign-up pacing — 2026-09-19
+
+| Id | Slice | Status | Owner |
+| --- | --- | --- | --- |
+| V52 | [Browser sign-up pacing](V52-signup-pacing.md) | Prepared patch, **unverified** — `slice/V52` in `/srv/presidium/projects/salient/opus-auth-pacing` from the frozen V46 candidate `b2c660a`; no runtime job has run against it, CT114 held by V51. Test-only: all ten sign-up paths (nine UI helpers and the recovery fixture's direct `fetch`) wait out the product's own `/sign-up*` window, and the HTTP exchanges are retained. Conformance fix, not a demonstrated cure for the recorded refusals. Inherits all of V46, so it cannot merge ahead of V46's gates | Opus character wizard thread |
+
 ## V46 Devil level one — 2026-09-19
 
 | Id | Slice | Status | Owner |

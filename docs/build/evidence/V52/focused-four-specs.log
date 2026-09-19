@@ -1,0 +1,13 @@
+ Container salient-characters-dev-2389e144b9dd-job-2b2c0aed Creating 
+ Container salient-characters-dev-2389e144b9dd-job-2b2c0aed Created 
+
+Running 4 tests using 1 worker
+
+[1/4] tests/browser/rule-popup.spec.ts:6:1 › rule cards preserve the wizard, navigate references, scroll and dismiss accessibly
+[2/4] tests/browser/table-audit.spec.ts:44:1 › three table contexts, palette, console and live CLI share persisted operations
+[3/4] tests/browser/v21-campaign.spec.ts:23:1 › campaign home: header actions, player tiles, copy, join requests, foe chips, log filter
+[4/4] tests/browser/wizard.spec.ts:27:1 › wizard, admission review and the three sheet audiences
+  4 passed (6.2m)
+0 /artifacts/v52-focused-backend.jsonl
+
+[exited with code 0]

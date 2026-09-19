@@ -1,0 +1,141 @@
+{
+ "policy": {
+  "windowMs": 10000,
+  "marginMs": 1500,
+  "quietMs": 11500
+ },
+ "note": "One row per /api/auth/sign-up/email response seen on a watched page, timestamped at the response event. observed:false means a paced submit produced no response within the claim grace. initiated:false means no paced call claimed the response, which is how an unissued request shows up — but a response slower than the grace looks the same, so an observed:false row followed closely by an unclaimed one is probably one exchange, not two. The server-side counter is not visible here; only a backend read shows it.",
+ "processStarted": "2026-09-19T22:06:57.672Z",
+ "exchanges": [
+  {
+   "index": 1,
+   "at": "2026-09-19T22:07:09.521Z",
+   "sincePreviousMs": null,
+   "method": "POST",
+   "status": 200,
+   "retryAfter": null,
+   "observed": true,
+   "initiated": true,
+   "waitedMs": 10155,
+   "reason": "initial-quiescence",
+   "title": "rule cards preserve the wizard, navigate references, scroll and dismiss accessibly"
+  },
+  {
+   "index": 2,
+   "at": "2026-09-19T22:07:21.354Z",
+   "sincePreviousMs": 11833,
+   "method": "POST",
+   "status": 200,
+   "retryAfter": null,
+   "observed": true,
+   "initiated": true,
+   "waitedMs": 7638,
+   "reason": "quiet-interval",
+   "title": "three table contexts, palette, console and live CLI share persisted operations"
+  },
+  {
+   "index": 3,
+   "at": "2026-09-19T22:07:33.191Z",
+   "sincePreviousMs": 11837,
+   "method": "POST",
+   "status": 200,
+   "retryAfter": null,
+   "observed": true,
+   "initiated": true,
+   "waitedMs": 8799,
+   "reason": "quiet-interval",
+   "title": "three table contexts, palette, console and live CLI share persisted operations"
+  },
+  {
+   "index": 4,
+   "at": "2026-09-19T22:07:45.003Z",
+   "sincePreviousMs": 11812,
+   "method": "POST",
+   "status": 200,
+   "retryAfter": null,
+   "observed": true,
+   "initiated": true,
+   "waitedMs": 8286,
+   "reason": "quiet-interval",
+   "title": "three table contexts, palette, console and live CLI share persisted operations"
+  },
+  {
+   "index": 5,
+   "at": "2026-09-19T22:08:55.077Z",
+   "sincePreviousMs": 70074,
+   "method": "POST",
+   "status": 200,
+   "retryAfter": null,
+   "observed": true,
+   "initiated": true,
+   "waitedMs": 0,
+   "reason": "none",
+   "title": "campaign home: header actions, player tiles, copy, join requests, foe chips, log filter"
+  },
+  {
+   "index": 6,
+   "at": "2026-09-19T22:09:06.904Z",
+   "sincePreviousMs": 11827,
+   "method": "POST",
+   "status": 200,
+   "retryAfter": null,
+   "observed": true,
+   "initiated": true,
+   "waitedMs": 6341,
+   "reason": "quiet-interval",
+   "title": "campaign home: header actions, player tiles, copy, join requests, foe chips, log filter"
+  },
+  {
+   "index": 7,
+   "at": "2026-09-19T22:09:19.013Z",
+   "sincePreviousMs": 12109,
+   "method": "POST",
+   "status": 200,
+   "retryAfter": null,
+   "observed": true,
+   "initiated": true,
+   "waitedMs": 7965,
+   "reason": "quiet-interval",
+   "title": "campaign home: header actions, player tiles, copy, join requests, foe chips, log filter"
+  },
+  {
+   "index": 8,
+   "at": "2026-09-19T22:09:48.848Z",
+   "sincePreviousMs": 29835,
+   "method": "POST",
+   "status": 200,
+   "retryAfter": null,
+   "observed": true,
+   "initiated": true,
+   "waitedMs": 0,
+   "reason": "none",
+   "title": "wizard, admission review and the three sheet audiences"
+  },
+  {
+   "index": 9,
+   "at": "2026-09-19T22:10:00.682Z",
+   "sincePreviousMs": 11834,
+   "method": "POST",
+   "status": 200,
+   "retryAfter": null,
+   "observed": true,
+   "initiated": true,
+   "waitedMs": 8751,
+   "reason": "quiet-interval",
+   "title": "wizard, admission review and the three sheet audiences"
+  },
+  {
+   "index": 10,
+   "at": "2026-09-19T22:10:12.509Z",
+   "sincePreviousMs": 11827,
+   "method": "POST",
+   "status": 200,
+   "retryAfter": null,
+   "observed": true,
+   "initiated": true,
+   "waitedMs": 8457,
+   "reason": "quiet-interval",
+   "title": "wizard, admission review and the three sheet audiences"
+  }
+ ]
+}

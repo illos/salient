@@ -8,6 +8,7 @@
 import { expect, type Browser, type BrowserContext, type Page } from '@playwright/test';
 import { mkdirSync } from 'node:fs';
 import { seedLocalHero, type Credentials } from './local-fixtures';
+import { pacedSignUp } from './signup-pacing';
 
 export const PASSWORD = 'Test-only-salient-password-42';
 export type ThemeName = 'light' | 'dark';
@@ -24,8 +25,11 @@ export async function register(page: Page, name: string, email: string) {
   await page.getByLabel('Display name').fill(name);
   await page.getByLabel('Email', { exact: true }).fill(email);
   await page.getByLabel('Password', { exact: true }).fill(PASSWORD);
-  await page.getByRole('button', { name: 'Create account', exact: true }).click();
-  await expect(page.getByRole('heading', { name: 'Campaigns', exact: true })).toBeVisible();
+  // V52: quiet interval before each sign-up; the helper observes the HTTP response.
+  await pacedSignUp(page, async () => {
+    await page.getByRole('button', { name: 'Create account', exact: true }).click();
+    await expect(page.getByRole('heading', { name: 'Campaigns', exact: true })).toBeVisible();
+  });
 }
 
 export interface TableFixture {

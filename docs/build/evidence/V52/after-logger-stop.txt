@@ -1,0 +1,9 @@
+2026-09-19T22:43:54Z
+    PID    PPID COMMAND           RSS
+      1       0 docker-init       180
+      7       1 MainThread      29180
+     16       7 MainThread      185864
+     70      16 esbuild         18668
+   7287       0 sh               1536
+   7294    7287 ps               4256
+302272512

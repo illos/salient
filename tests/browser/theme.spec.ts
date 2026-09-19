@@ -7,6 +7,7 @@ import { startCharacter } from './character-fixtures';
  */
 import { expect, test, type Page } from '@playwright/test';
 import { mkdirSync } from 'node:fs';
+import { pacedSignUp } from './signup-pacing';
 
 const SHOTS = '.playtest/a08';
 /** Let the token transitions (--motion-base) finish before capturing. */
@@ -99,8 +100,11 @@ test('reference screenshots: login, campaign home and character list in light an
   await page.getByLabel('Display name').fill(`Director ${stamp}`);
   await page.getByLabel('Email', { exact: true }).fill(`theme-${stamp}@example.test`);
   await page.getByLabel('Password', { exact: true }).fill('Test-only-salient-password-42');
-  await page.getByRole('button', { name: 'Create account', exact: true }).click();
-  await expect(page.getByRole('heading', { name: 'Campaigns', exact: true })).toBeVisible();
+  // V52: quiet interval before each sign-up; the helper observes the HTTP response.
+  await pacedSignUp(page, async () => {
+    await page.getByRole('button', { name: 'Create account', exact: true }).click();
+    await expect(page.getByRole('heading', { name: 'Campaigns', exact: true })).toBeVisible();
+  });
   await page.getByLabel('Campaign name').fill(`Blackcastle ${stamp}`);
   await page.getByRole('button', { name: 'Create campaign', exact: true }).click();
   await expect(page.getByRole('heading', { name: `Blackcastle ${stamp}` })).toBeVisible();

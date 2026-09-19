@@ -1,0 +1,36 @@
+2026-09-19T22:43:06Z
+{"Status":"running","Running":true,"Paused":false,"Restarting":false,"OOMKilled":true,"Dead":false,"Pid":1781921,"ExitCode":0,"Error":"","StartedAt":"2026-09-19T21:54:49.350062832Z","FinishedAt":"0001-01-01T00:00:00Z","Health":{"Status":"healthy","FailingStreak":0,"Log":[{"Start":"2026-09-19T22:42:41.351267078Z","End":"2026-09-19T22:42:41.389423396Z","ExitCode":0,"Output":""},{"Start":"2026-09-19T22:42:46.390249426Z","End":"2026-09-19T22:42:46.429491387Z","ExitCode":0,"Output":""},{"Start":"2026-09-19T22:42:51.430332797Z","End":"2026-09-19T22:42:51.468279557Z","ExitCode":0,"Output":""},{"Start":"2026-09-19T22:42:56.46883837Z","End":"2026-09-19T22:42:56.507156617Z","ExitCode":0,"Output":""},{"Start":"2026-09-19T22:43:01.508427704Z","End":"2026-09-19T22:43:01.546168365Z","ExitCode":0,"Output":""}]}}
+low 0
+high 0
+max 67951
+oom 2
+oom_kill 1
+oom_group_kill 0
+sock_throttled 688
+772546560
+3221225472
+    PID    PPID COMMAND           RSS
+      1       0 docker-init       180
+      7       1 MainThread      29180
+     16       7 MainThread      185864
+     70      16 esbuild         18668
+   2890       0 sh               1480
+   2896    2890 MainThread      98444
+   2907    2896 MainThread      118312
+   2955       0 sh               1464
+   2961    2955 MainThread      98360
+   2972    2961 MainThread      120684
+   3106       0 sh               1528
+   3114    3106 timeout          1356
+   3115    3114 MainThread      115000
+   7098       0 sh               1728
+   7107    7098 ps               4148
+curl: (7) Failed to connect to 127.0.0.1 port 3210 after 0 ms: Couldn't connect to server
+backend_http=000
+capture_pid=3114
+logs_process=/proc/2896/cmdline
+logs_process=/proc/2907/cmdline
+logs_process=/proc/2961/cmdline
+logs_process=/proc/2972/cmdline
+logs_process=/proc/3114/cmdline
+logs_process=/proc/3115/cmdline
