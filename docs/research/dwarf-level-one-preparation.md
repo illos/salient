@@ -85,16 +85,25 @@ the ancestry frontmatter label and the per-book mirror. The word never appears i
 miscategorised two of them; the corrected count does not change the conclusion, but a number
 offered as proof has to be right.
 
-**What Forge actually does, corrected.** An earlier draft asserted that Forge models the rune as a
-build-time choice and treated that as a tension to be resolved against. **That was wrong, and I
-did not verify it before asserting it.** Forge marks the feature `selectAt: 'play'`
-(`src/data/ancestries/dwarf.ts`, on `dwarf-feature-1`). The field's type is
-`'build' | 'respite' | 'play'`, the factory default is `'build'`, and Forge uses all three
+**What Forge actually does, corrected twice.** A first draft asserted Forge models the rune as a
+build-time choice; **that was wrong and I did not verify it before asserting it.** Forge marks the
+feature `selectAt: 'play'` (`src/data/ancestries/dwarf.ts`, on `dwarf-feature-1`); the field's type
+is `'build' | 'respite' | 'play'`, the factory default is `'build'`, and Forge uses all three
 deliberately — Dragon Knight's Wyrmplate is `'respite'`, and Dwarf Traits carries no `selectAt` and
-so is build-time. `HeroLogic.getConditionalFeatures` filters on `selectAt === 'play'` precisely to
-classify a feature as an in-play selection rather than a build choice. **The structural reference
-therefore agrees that the rune is not a creation choice.** That is corroboration, not authority, and
-the question remains open on the source.
+so is build-time.
+
+A second draft then over-corrected, concluding that Forge therefore offers no rune at all and cannot
+produce a rune-bearing counterpart. **That was also wrong.** `HeroLogic.getConditionalFeatures`
+filters `selectAt === 'play'` features into the **Conditional Features** modal
+(`src/components/modals/hero-conditional/hero-conditional-modal.tsx`), reachable from the hero view
+(`src/components/panels/hero/name/name-panel.tsx`). Its `setData` writes the selection onto the hero
+object, and `Export as Data` (`src/components/pages/heroes/hero-view/hero-view-page.tsx`) serialises
+that hero. **A rune selected through the play UI is exported.**
+
+The accurate statement: Forge classifies the rune as an in-play selection rather than a build choice,
+and can still represent and export one. That is a third-party tool's classification. It is
+corroboration at most, it is **not** rules authority, and it does not decide whether the source
+requires a rune at creation.
 
 **One argument is withdrawn as refuted.** An earlier draft argued that `making-a-hero.md` states
 every 1st-level option carries a Quick Build pick, that the Dwarf quick build names no rune, and

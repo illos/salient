@@ -853,27 +853,35 @@ No user approval is implied by this classification.
   Two things keep the rune unsettled rather than resolved by the analogue: Runic Carving has no
   dependent purchased trait, and Wyrmplate has no equivalent of the rune's "remove" state.
 
-  Forge Steel marks the feature `selectAt: 'play'`, i.e. the third-party tool also treats it as an
-  in-play selection rather than a creation choice. That is corroboration only; Forge is not rules
-  authority. (An earlier draft of this entry stated the opposite about Forge; that was an error and
-  is corrected here.)
+  Forge Steel marks the feature `selectAt: 'play'`, so its **build editor** offers no rune chooser;
+  the selection is instead offered in the Conditional Features modal reachable from the hero view
+  (`src/logic/hero-logic.ts` `getConditionalFeatures`, `src/components/modals/hero-conditional/`,
+  reached via `src/components/panels/hero/name/name-panel.tsx`). That modal writes the selection
+  onto the hero object, which is what `Export as Data` serialises, so **Forge can represent and
+  export a hero with a rune selected.** Two earlier drafts of this entry were wrong in opposite
+  directions: the first said Forge models the rune as a build-time choice, and the second said Forge
+  cannot produce a rune-bearing counterpart at all. Neither is true, and neither bears on the
+  question: Forge is not rules authority, and how a third-party tool classifies the selection does
+  not decide whether the source requires one at creation.
 - **Options:** A: a dwarf starts with no rune active and carves one in play. B: the player selects a
   rune at creation, with Detection's creature-or-object type as a nested sub-choice. C: the Director
   decides per campaign.
-- **Recommendation:** A. It is what the trait's own wording describes, it is the only option that can
-  represent the "removed" state the rules explicitly contemplate, and it does not require inventing
-  a decision the source never asks for. If the user prefers B, V50 adds a rune decision row with an
+- **Recommendation:** A. It is what the trait's own wording describes, and it does not require
+  inventing a decision the source never asks for. (An earlier draft also argued that only A can
+  represent the "removed" state the rules contemplate. That does not follow — a rune selected at
+  creation can still be removed later — and the argument is withdrawn. The "remove" wording shows
+  that having no rune is legal, which is consistent with A but does not establish it.) If the user prefers B, V50 adds a rune decision row with an
   open-ended nested type field for Detection, and the unit's new-option count rises from five to
   eight.
 - **Blocked until answered:** no other work is blocked — V50 implements the five purchased traits and
   grants Runic Carving as a readable capability, and no rune is silently defaulted either way.
   **But something is at stake in the answer.** Under option B a build with no rune is an incomplete
   build, so while this is open **rune coverage is recorded INCOMPLETE in V50's option ledger** and no
-  same-build rune counterpart is certified. Because Forge marks the rune `selectAt: 'play'`, its
-  build editor offers no rune, so under option B this becomes the "Forge cannot represent the same
-  source-legal build" case in the verification procedure, requiring the limitation to be recorded
-  rather than a discrepancy explained. An earlier draft of this entry said the interim treatment was
-  "correct under every option"; that was too strong and is withdrawn.
+  same-build rune counterpart is certified. If the answer is B, a rune-bearing counterpart is
+  capturable from Forge through the Conditional Features modal rather than the build editor, so
+  there is **no reference limitation** — an earlier draft claimed one and it is withdrawn. An
+  earlier draft also said the interim treatment was "correct under every option"; that was too
+  strong and is withdrawn.
 - **Answer:** (user fills in)
 
 ### Q-CHAR-19: Does Great Fortitude prevent a hero from applying weakened to themselves?

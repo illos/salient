@@ -247,13 +247,16 @@ purchased traits and grants Runic Carving as a readable capability, and does **n
 wizard decision.
 
 **That is not complete coverage.** Under the creation reading, a build with no rune is an incomplete
-build. **Rune coverage is marked INCOMPLETE in the option ledger** and no same-build rune
-counterpart is certified while the question is open. Note the counterpart consequence is not a
-mismatch: because Forge marks the rune `selectAt: 'play'`, its build editor offers no rune at all,
-so under the creation reading this is the "Forge cannot represent the same source-legal build" case
-in [the verification procedure](character-verification.md#per-option-delivery-gate), requiring the
-precise limitation to be recorded rather than a discrepancy explained. An earlier draft of this
-document asserted the opposite — that a Forge counterpart "does carry a rune" — which was wrong.
+build. **Rune coverage is marked INCOMPLETE in the option ledger** and no same-build rune counterpart
+is certified while the question is open.
+
+There is, however, **no reference limitation**. Forge marks the rune `selectAt: 'play'`, so its build
+editor offers no rune chooser, but the selection is offered in the Conditional Features modal reached
+from the hero view, and that modal writes onto the hero object which `Export as Data` serialises. A
+rune-bearing counterpart is therefore capturable from Forge if the answer turns out to be B. Two
+earlier drafts of this document were wrong in opposite directions — first that Forge models the rune
+as a build-time choice, then that Forge cannot produce a rune-bearing counterpart at all. Neither is
+true, and neither bears on the rules question.
 
 Q-CHAR-19 and Q-CHAR-20 are recorded there too. **They are gameplay and adjudication questions, not
 editor-support questions**, and are deliberately kept separate from this unit's scope: whether Great

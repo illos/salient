@@ -97,11 +97,17 @@ async function selectPurchasedTraits(page: Page, traits: string[]): Promise<void
 }
 
 /**
- * Runic Carving is not selected, and in the pinned application it cannot be: Forge marks the
- * feature `selectAt: 'play'`, so its build editor offers no rune chooser at all. An earlier draft
- * of this comment said Forge modelled it as a build-time choice; that was wrong about Forge. The
- * omission is simply what the editor does. Q-CHAR-18 remains open on the source, and rune coverage
- * stays INCOMPLETE regardless: observing this editor does not decide Salient's rules.
+ * Runic Carving is not selected here. Forge marks the feature `selectAt: 'play'`, so the BUILD
+ * editor this script drives offers no rune chooser. That is not a limitation of Forge: the
+ * selection is available in the Conditional Features modal reached from the hero view, which writes
+ * onto the hero that `Export as Data` serialises, so a rune-bearing export IS producible. Two
+ * earlier drafts of this comment were wrong in opposite directions — first that Forge models the
+ * rune as a build-time choice, then that Forge cannot represent one at all.
+ *
+ * The script does not drive that modal because Q-CHAR-18 is open: selecting a rune would resolve an
+ * open source question by side effect, and observing what this tool offers does not decide
+ * Salient's rules. Rune coverage stays INCOMPLETE until the question is answered. If the answer is
+ * that a rune is chosen at creation, extend this script to drive the Conditional Features modal.
  */
 async function captureBuild(
   page: Page,

@@ -362,7 +362,7 @@
       "total": 3,
       "covered": 0,
       "status": "INCOMPLETE — blocked on Q-CHAR-18",
-      "note": "While the rune's timing is unresolved, no same-build rune counterpart is certified. The capability is granted and readable; that is not coverage of the three rune options."
+      "note": "While the rune's timing is unresolved, no same-build rune counterpart is certified. The capability is granted and readable; that is not coverage of the three rune options. There is NO reference limitation: Forge marks the rune selectAt: 'play', so its build editor offers none, but the Conditional Features modal writes a selection onto the hero that Export as Data serialises, so a rune-bearing counterpart is capturable if the answer turns out to require one."
     },
     "unspentPoints": {
       "status": "settled, not a question",
