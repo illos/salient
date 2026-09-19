@@ -110,7 +110,8 @@
           ],
           "meleeDistanceBonus": 0,
           "rangedDistanceBonus": 0,
-          "disengageBonus": 0
+          "disengageBonus": 0,
+          "equipmentText": "You wear heavy armor and wield a heavy weapon."
         },
         "skills": [
           "Swim",
@@ -149,8 +150,6 @@
           "Melee Weapon Free Strike",
           "Ranged Weapon Free Strike"
         ],
-        "damageImmunities": [],
-        "conditionImmunities": [],
         "traits": [
           "Detect the Supernatural",
           "Perseverance",
@@ -265,7 +264,8 @@
           ],
           "meleeDistanceBonus": 0,
           "rangedDistanceBonus": 0,
-          "disengageBonus": 0
+          "disengageBonus": 0,
+          "equipmentText": "You wear heavy armor and wield a heavy weapon."
         },
         "skills": [
           "Swim",
@@ -304,8 +304,6 @@
           "Melee Weapon Free Strike",
           "Ranged Weapon Free Strike"
         ],
-        "damageImmunities": [],
-        "conditionImmunities": [],
         "traits": [
           "Detect the Supernatural",
           "Can't Take Hold",
@@ -418,7 +416,8 @@
           ],
           "meleeDistanceBonus": 0,
           "rangedDistanceBonus": 0,
-          "disengageBonus": 0
+          "disengageBonus": 0,
+          "equipmentText": "You wear heavy armor and wield a heavy weapon."
         },
         "skills": [
           "Swim",
@@ -457,8 +456,6 @@
           "Melee Weapon Free Strike",
           "Ranged Weapon Free Strike"
         ],
-        "damageImmunities": [],
-        "conditionImmunities": [],
         "traits": [
           "Detect the Supernatural",
           "Can't Take Hold",
@@ -566,7 +563,8 @@
           ],
           "meleeDistanceBonus": 0,
           "rangedDistanceBonus": 0,
-          "disengageBonus": 0
+          "disengageBonus": 0,
+          "equipmentText": "You wear heavy armor and wield a heavy weapon."
         },
         "skills": [
           "Swim",
@@ -605,8 +603,6 @@
           "Melee Weapon Free Strike",
           "Ranged Weapon Free Strike"
         ],
-        "damageImmunities": [],
-        "conditionImmunities": [],
         "traits": [
           "Detect the Supernatural"
         ]
@@ -628,5 +624,10 @@
     "ancestryKeyMissingFromUnifiedTwins": "ancestry: human exists in the markdown frontmatter but not in the unified YAML or JSON, at top level or under metadata.",
     "costIsAnUnparsedString": "The unified twins carry cost as \"1 Point\" or \"2 Points\"; point arithmetic must parse it or read the md-dse variant.",
     "contentSnapshotLacksHuman": "shared/content/compendium/ancestry.json holds only Devil and Polder. The snapshot is generated and must regenerate byte-for-byte, so enabling Human requires a manifest selection change coordinated with the integration owner."
+  },
+  "auditNotes": {
+    "falsePositiveRejected": "An audit reported class.fury.skills ['Climb','Search'] as an unsupported selection, reading the module constant ['Jump','Climb']. Verified directly and REJECTED: shared/content/supporting-backgrounds.ts:1548-1555 widens every class.*.skills choice to all skills after composition, and character-decisions.ts runs that extension for each level. Search is offered. This is the same module-versus-assembled-definitions mistake the V47 preparation made and the lead corrected; the audit repeated it.",
+    "immunitiesOmitted": "damageImmunities and conditionImmunities are now absent rather than empty arrays: the evaluator only materialises those keys when a modifier exists, so a deep-equality assertion against [] would fail on an absent key.",
+    "equipmentTextAdded": "The kit block omitted equipmentText, which the canonical kit contributions carry."
   }
 }

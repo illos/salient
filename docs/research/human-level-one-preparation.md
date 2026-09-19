@@ -24,28 +24,40 @@ checks must assert the *presence of readable entitlements*, not only the absence
 | Value | Source | Note |
 | --- | --- | --- |
 | Size 1M, speed 5, stability 0 | [Starting Size and Speed](../../vendor/steel-compendium/en/unified/md/rule/character/speed.md) | Human's own record carries no size, speed or stability field; the baseline must come from the rule file |
-| No cultural benefits from ancestry | [Ancestries](../../vendor/steel-compendium/en/unified/md/chapter/ancestries.md) | Skills and languages come from culture, never from this ancestry |
+| No cultural benefits from ancestry | [Ancestries](../../vendor/steel-compendium/en/unified/md/chapter/ancestries.md) — "This choice doesn't grant you cultural benefits, such as crafting or lore skills, though." | Narrower than "ancestries never grant skills": Devil's Silver Tongue does grant one. True for Human, which grants none |
 
 No Human trait changes size, speed or stability.
 
-**A correction for an existing module.** `shared/content/ancestries/devil/level-one.ts` carries the
-note "Absent from `chapter/ancestries.md`; present only in the clean Heroes text." The first half is
-right; the second is wrong — the sentence is also in `rule/character/speed.md`, which is what
-`SENTENCES.baseStatistics` already cites. The Human module must not copy that note, and the Devil
-one should be corrected in a scoped commit by whoever owns it.
+**A correction for an existing module, stated precisely.** `shared/content/ancestries/devil/level-one.ts`
+carries the note "Absent from en/unified/md/chapter/ancestries.md; present only in the clean Heroes
+text." Its **second** half is wrong: the sentence appears in many files including
+`rule/character/speed.md`, which is what `SENTENCES.baseStatistics` already cites. Its first half is
+right as written, scoped to `en/unified/md/` — the sentence *is* present in the `md-linked` variant
+of that chapter, so the scope matters. This is also not a new observation; it is already recorded in
+`docs/fury-level-one-decisions.md` and `docs/hero-fixture.md`. The Human module must not copy the
+note; correcting Devil's belongs to whoever owns that module.
 
 ## Signature trait
 
 One, and the ancestry record's `signature_trait_name` is **correct** here — verified against the
-`#### Signature Trait:` headings in the printed Human Traits section, which contain exactly one
-entry. That field was wrong for Polder, which has two; this unit does not inherit that defect, but
-the headings remain the authority rather than the field.
+`#### Signature Trait:` headings in
+[the linked ancestries chapter](../../vendor/steel-compendium/en/unified/md-linked/chapter/ancestries.md)
+(line 1132) and the printed book at `en/books/heroes/clean/Draw Steel Heroes.md:2379`, which between
+them contain exactly one such heading for Human. Corrected 2026-09-19: an earlier draft cited "the
+printed Human Traits section", but `feature/trait/human/human-traits.md` carries only the
+`#### Purchased Human Traits` heading, and the unified `chapter/ancestries.md` stops before the
+per-ancestry sections. Those two paths are the citable ones. That field was wrong for Polder, which has two signature
+traits; this unit does not inherit that defect, but the headings remain the authority, not the field.
 
 [Detect the Supernatural](../../vendor/steel-compendium/en/unified/md/feature/trait/human/detect-the-supernatural.md)
-is a maneuver that reveals supernatural objects and creatures within 5 squares until the end of your
-next turn, including without line of effect, telling you whether each is an item or a creature and
-the nature of any creature detected. It contributes **no** build number; the 5 squares is a range
-inside a conditional action.
+is a maneuver after which, until the end of your next turn, you know the location of any
+**supernatural object**, or any **undead, construct, or creature from another world**, within 5
+squares, even without line of effect, and you know whether you are detecting an item or a creature
+and the nature of any creature detected. Note the asymmetry, corrected 2026-09-19 after audit: only
+*objects* are keyed to "supernatural"; the creature clause is a closed list of three kinds. An
+earlier draft here said "supernatural objects and creatures", which would broaden the trait for
+anyone writing readable content from this summary. It contributes **no** build number; the 5 squares
+is a range inside a conditional action.
 
 **Implementation trap:** it has **no `cost` key**, unlike every purchased trait. A loader that
 iterates "traits with a cost" drops the signature trait silently. It also lives under
@@ -65,9 +77,12 @@ Power.)" Total available cost is 7 against a budget of 3, so at most a subset is
 | [Resist the Unnatural](../../vendor/steel-compendium/en/unified/md/feature/trait/human/resist-the-unnatural.md) | 1 | On taking damage that is not untyped, a triggered action halves it | Conditional, **and it states a number** |
 | [Staying Power](../../vendor/steel-compendium/en/unified/md/feature/trait/human/staying-power.md) | 2 | "You increase your number of Recoveries by 2." | **Computed build value — the only one** |
 
-Two of these state numbers under conditions. Following the correction this project already applied
-to Polder Geist, they must not be filed as "non-numeric": the amount is real and belongs in readable
-content with its condition intact, while never reaching an unconditional total.
+**Three** of these state numbers under conditions — Can't Take Hold's reduction of 1, Perseverance's
+slowed value of 3, and Resist the Unnatural's halving. Corrected 2026-09-19: an earlier draft said
+two, which its own table already contradicted, and undercounting is exactly how the mis-filing this
+paragraph warns against happens. Following the correction this project applied to Polder Geist, none
+may be filed as "non-numeric": each amount is real and belongs in readable content with its
+condition intact, while never reaching an unconditional total.
 
 **No nested choices.** No Human trait offers a pick, so the only choice in this unit is the 3-point
 purchase itself. **No skill, language, ability or characteristic change** comes from Human — a
@@ -111,11 +126,16 @@ question is never forced by arithmetic.
 
 ## Pipeline dependency this unit cannot avoid
 
-`shared/content/compendium/ancestry.json` contains **only Devil and Polder**; the Human ancestry
-record is not in the generated snapshot at all. That file is generated and must not be hand-edited,
-so adding Human requires a manifest selection change and a regenerated snapshot that still passes
-`pnpm content:check` byte-for-byte from the clean pin. That is a shared-pipeline change and needs a
-file claim through the integration owner before it is made.
+`shared/content/compendium/ancestry.json` contains **only Devil and Polder**, and — understated in
+an earlier draft — `trait.json` likewise omits **all seven** `feature/trait/human/` entries, which
+acceptance check 1 depends on for source paths and verbatim text. Both files are generated and must
+regenerate byte-for-byte from the clean pin; the build script performs a full string comparison and
+refuses a dirty pin.
+
+The thing to edit is the `SELECTIONS` constant in `scripts/build-content.ts`, **not** `manifest.json`,
+which is itself generated output. An earlier draft said "a manifest selection change", which would
+have sent an implementer to the wrong file. This is a shared-pipeline change and needs a file claim
+through the integration owner before it is made.
 
 ## Witness plan
 
@@ -137,7 +157,8 @@ alone would also be produced by the traits not being granted at all.
 ## Recorded uncertainties
 
 All are resolution-time questions with **zero effect on any level-one derived number**, since the
-only such number is Recoveries +2 and it is unambiguous:
+only such number is Recoveries +2 and it is unambiguous. One further item an earlier draft listed
+here was withdrawn; see below.
 
 1. "Untyped damage" is never formally defined. The damage-type rule describes typical damage as
    having no type and names the nine types. *Interpretation, labelled:* "isn't untyped" means the
@@ -147,6 +168,13 @@ only such number is Recoveries +2 and it is unambiguous:
    distinguish temporary from permanent.
 3. Whether Can't Take Hold's reduction and stability stack, and in what order. Both are reductions to
    the same event; the pin never addresses them together.
-4. Whether "half the damage" rounds up or down for Resist the Unnatural.
+**Withdrawn, 2026-09-19 after audit:** an earlier draft listed the rounding of "half the damage" as
+a fourth uncertainty. The pin answers it, and its worked example is this exact case —
+[Always Round Down](../../vendor/steel-compendium/en/unified/md/rule/general/always-round-down.md):
+"Whenever you divide an odd number in half and it results in a decimal, round the result down to the
+nearest whole number. For instance, if a tactician takes 7 damage and uses the Parry ability in
+response—a triggered action that halves the damage—then the damage is reduced to 3." Recording a
+resolved rule as unresolved is itself an error, and the rule is already in this project's own
+content snapshot.
 
-None blocks the unit, and none is a question for the user in a build thread.
+None of the remaining items blocks the unit, and none is a question for the user in a build thread.

@@ -34,11 +34,12 @@ deliberately independent of V47 and V49.
 
 ## In scope
 
-- A new `shared/content/ancestries/human/level-one.ts` with the signature trait, the three-point
-  budget and all five purchased traits, carrying source paths and verbatim text.
+- A new `shared/content/ancestries/human/level-one.ts` with an `ancestry.human.base-statistics` row
+  carrying size 1M, speed 5 and stability 0 with their provenance, the signature trait, the
+  three-point budget and all five purchased traits, with source paths and verbatim text.
 - The one derived contribution: Staying Power increasing Recoveries by 2 over the class value.
 - Conditional and triggered traits represented with their conditions intact and no unconditional
-  numbers — including the two that state amounts under conditions.
+  numbers — including the **three** that state amounts under conditions.
 - Enabling `Human` in the ancestry choice, and the generated content-snapshot change that requires.
 - Counterpart builds, tests and evidence.
 
@@ -57,9 +58,10 @@ vendor submodules at their recorded pins. V45's extraction means a new ancestry 
 independently owned file.
 
 **One shared-pipeline dependency that cannot be avoided.**
-`shared/content/compendium/ancestry.json` contains only Devil and Polder; the Human record is not in
-the generated snapshot. That file is generated and must regenerate byte-for-byte from the clean pin
-under `pnpm content:check`, so adding Human means a manifest selection change. That is a shared file
+`shared/content/compendium/ancestry.json` contains only Devil and Polder, and `trait.json` omits all
+seven Human trait entries that acceptance check 1 depends on. Both are generated and must regenerate
+byte-for-byte from the clean pin under `pnpm content:check`. The file to edit is the `SELECTIONS`
+constant in `scripts/build-content.ts`, **not** the generated `manifest.json`. That is a shared file
 and needs a claim through the integration owner before the change is made.
 
 The counterpart builds use Fury, the Berserker aspect, the Mountain kit and career Soldier — all
@@ -80,6 +82,8 @@ counterparts.
 1. The signature trait and all five purchased traits are present with source paths and verbatim
    text, offered by the **assembled** definitions, with costs 1/2/1/1/2 against a budget of 3. The
    signature trait is granted despite having no cost field.
+1a. Size 1M, speed 5 and stability 0 derive from an owning `ancestry.human.base-statistics` decision
+   with provenance, rather than appearing in expectations with no source.
 2. Staying Power yields Recoveries = class value + 2, and leaves recovery value untouched, since that
    derives from Stamina maximum.
 3. **The load-bearing pair:** a build with Can't Take Hold and Determination derives values identical
@@ -140,3 +144,32 @@ Forge Steel for any purpose and from any web source. Findings that shaped the pl
 
 No application, evaluator, shared-contract, `main`, runtime or hosted change was made, and no
 install, build, typecheck, test or browser was run anywhere.
+
+2026-09-19 (correction round after independent audit): a fresh reviewer audited the preparation.
+Most of its findings were right and are applied; one was not, and is rejected on evidence.
+
+**Rejected.** The audit reported `class.fury.skills` selecting `Search` as an unsupported option
+that would block every build, having read the module constant `['Jump', 'Climb']`. Verified directly
+and rejected: `shared/content/supporting-backgrounds.ts:1548-1555` widens every `class.*.skills`
+choice to all skills after composition, and `character-decisions.ts` runs that extension per level,
+so `Search` is offered. This is precisely the module-constant-versus-assembled-definitions mistake
+the V47 preparation made and the lead corrected; the audit repeated it, and acting on it would have
+changed correct data.
+
+**Applied.** Detect the Supernatural was paraphrased too broadly — only *objects* are keyed to
+"supernatural", while the creature clause is a closed list of undead, construct or creature from
+another world. Three traits state conditional amounts, not two, which the preparation's own table
+already contradicted. The rounding of "half the damage" is **not** an open uncertainty: the pin's
+always-round-down rule answers it and its worked example is a triggered halving, so recording it as
+unresolved was itself an error. The signature-trait verification and the budget quote now cite paths
+that exist. The snapshot dependency understated its scope — `trait.json` omits all seven Human trait
+entries too — and named the wrong editable file. The Devil-note correction is now scoped precisely
+and credited to the places that already record it. `damageImmunities` and `conditionImmunities` are
+omitted rather than empty, since the evaluator materialises those keys only when a modifier exists.
+The kit block gained its `equipmentText`. The ancestry baseline now has an owning decision in scope.
+
+**Process correction.** This slice's header says the rules review is required, but commit `212518b`
+carried `Rules-Review: not required`. Per the build process, a slice awaiting its rules review
+commits `Rules-Review: required (pending)`. That commit is already handed off and rewriting it would
+create exactly the candidate-identity confusion this project has been untangling all evening, so it
+stands as history and this and subsequent V53 commits carry the correct value.
