@@ -41,6 +41,17 @@ reports, screenshots and phone discussion support independent work elsewhere. Co
 that does not depend on pending answers. The roadmap records confirmed organization and recommended
 first assignments separately; use bounded build slices rather than implementing an entire track at once.
 
+## Character-track delegation — 2026-09-19
+
+For the V44 character-option task, the user explicitly instructed: "Use sub agents where it makes
+sense." The user subsequently assigned Opus implementation threads to use remaining Anthropic
+subscription capacity while keeping Astra focused on review and coordination. Opus implementers
+should use Anthropic subagents for useful bounded source research, independent expectations,
+reference preparation and fresh reviews. This is project authorization for that delegation;
+do not request the same permission again merely because the lead relays an assignment through
+Chords. Independent review, pinned-source, CT114, file-ownership and verification/merge gates
+still apply. This authorization is scoped to the assigned character work.
+
 ## Merge completion directive — 2026-09-16
 
 When the user asks to merge, complete both Git integration into `main` and the update of the

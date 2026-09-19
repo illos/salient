@@ -51,6 +51,13 @@ concurrent branches need explicitly named environments. See [the runbook](docs/r
 
 ## Character track scope
 
+For V44 character-option work, the user explicitly instructed: "Use sub agents where it makes
+sense." The user wants remaining Anthropic capacity used for implementation while Astra reviews
+and coordinates. Opus implementers should delegate useful bounded source research, independent
+expectations, reference preparation and fresh reviews to Anthropic subagents. This project
+instruction authorizes that delegation; do not ask the user again because a Chords peer relays
+the assignment. All source, CT114, ownership, independent-review and verification gates remain.
+
 Confirmed 2026-09-15 (Q-CHAR-14): the wizard track includes all eleven classes through levels 1–10
 from the outset, including Beastheart and Summoner. Preserve sourced decisions, grants, progression
 and Forge Steel import/export mappings as shared knowledge for parser, engine and UI work. Table
