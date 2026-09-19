@@ -19,3 +19,19 @@ unmerged peer artifact.
 Expect the Forge selectors to need correction on the first real run; they were read from the pinned
 source, not observed. Record each correction in the slice work log so "derived from source" and
 "verified against the running app" stay distinguishable.
+
+## Correction round, 2026-09-19
+
+An independent reviewer audited this data and the script and found real errors. All corrected:
+
+- the expected feature list was wrong (ten entries including advancement-table umbrella rows; the
+  evaluator emits six), and skills and abilities were in the wrong order;
+- the conditional-effect contract was asserted as if it existed in this checkout, when it comes from
+  an unmerged peer commit and is provisional until that merges;
+- the capture script could write a complete-looking artifact from an incomplete build. It now
+  verifies the export against the choice map before anything is treated as evidence, refuses to
+  guess when a label matches more than one control, records provenance and version from required
+  flags rather than hardcoding or assuming them, and fails the run on console errors;
+- the removal expectations did not match how the evaluator handles a stale selection;
+- the retained Bethell caveats omitted that its corrected choices were made by hand-editing an
+  export rather than in the editor, and that its retained sheet text never mentions Shadowmeld.

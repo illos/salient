@@ -39,7 +39,7 @@ effects are not a simple number, which is why they were deferred and why they ne
 
 | Trait | Cost | Effect, verbatim | Classification |
 | --- | ---: | --- | --- |
-| [Nimblestep](../../vendor/steel-compendium/en/unified/md/feature/trait/polder/nimblestep.md) | 2 | "You ignore the effects of difficult terrain and can move at full speed while sneaking." | Permanent entitlement, **no number** |
+| [Nimblestep](../../vendor/steel-compendium/en/unified/md/feature/trait/polder/nimblestep.md) | 2 | "You ignore the effects of difficult terrain and can move at full speed while sneaking." | A movement-cost waiver **plus a second conditional numeric effect**; no unconditional change |
 | [Polder Geist](../../vendor/steel-compendium/en/unified/md/feature/trait/polder/polder-geist.md) | 1 | "At the start of each of your turns during combat, if no enemy has line of effect to you or if you are hidden from or have concealment from any enemy with line of effect to you, you gain a +3 bonus to speed until the end of your turn." | **Conditional amount**: a sourced +3 that never reaches the unconditional speed |
 | [Reactive Tumble](../../vendor/steel-compendium/en/unified/md/feature/trait/polder/reactive-tumble.md) | 1 | "Whenever you are force moved, you can use a free triggered action to shift 1 square after the forced movement is resolved." | Triggered, opt-in, **free** action |
 
@@ -56,23 +56,38 @@ any enemy that does — and it lasts **until the end of that turn**, being re-ev
 level-one Polder with Polder Geist still has speed 5 as their ordinary speed. Printing "speed 8", or
 "speed 5 (8)" without the full condition, misstates the source.
 
-**Proposed representation, and its dependency.** V46 introduces a `ConditionalEffect` entry on the
-derived baseline for exactly this shape of rule: a calculated amount plus the verbatim condition,
-deliberately kept out of the fields that resolve rolls or apply damage automatically. Its `effect`
-field is a closed union of `rounds-aloft`, `damage-weakness` and `extra-strike-damage`. Polder Geist
+**Proposed representation, and its dependency.** No conditional-effect type exists in this checkout;
+`ConditionalEffect` appears nowhere under `shared/`. The shape below was read read-only from V46's
+**unmerged** commit `7b7174b`, which adds a `ConditionalEffect` entry to the derived baseline for
+exactly this kind of rule: a calculated amount plus the verbatim condition, deliberately kept out of
+the fields that resolve rolls or apply damage automatically, with an `effect` field that is at that
+commit a closed union of `rounds-aloft`, `damage-weakness` and `extra-strike-damage`. Polder Geist
 needs one new member — `speed-bonus` — with `amount` 3, the verbatim condition sentence and the
-trait's source path. That is a minimal, additive extension of a seam another unit already built.
+trait's source path.
+
+That is a minimal additive extension of a seam another unit is building, and the citation is an
+unmerged commit rather than current main. If V46's shape changes before it merges, this proposal
+changes with it, and the field names in the reference data are provisional until then.
 
 This makes V49 **depend on V46 merging**, which is recorded here rather than hidden. If V46 has not
 landed when this unit is released, the options are to wait, or to implement the same shape locally
 and reconcile at integration; the first is preferable and the choice belongs to the integration
 owner, not to this unit.
 
-### Nimblestep is a movement-cost waiver, not speed
+### Nimblestep waives a cost and overrides a halving
+
+Corrected 2026-09-19 after independent review: calling both clauses plain entitlements was wrong,
+because the second one overrides a number the source states elsewhere.
 
 "Ignore the effects of difficult terrain" removes the extra square of movement cost that difficult
-terrain imposes. It is not a speed bonus and must not be folded into a speed total. The second
-clause, moving at full speed while sneaking, is likewise an entitlement.
+terrain imposes — a cost waiver, not a speed bonus, and it must not be folded into a speed total.
+
+"Can move at full speed while sneaking" overrides the sneaking rule in the tests chapter: "While
+sneaking, your speed is halved." So for a level-one Polder this is a **conditional numeric** effect
+in exactly the sense Polder Geist is — speed 5 instead of 2 while sneaking — and it deserves the same
+treatment: the condition is readable and the ordinary speed is untouched. The claim this unit
+actually tests, that none of the three traits changes an *unconditional* total, still holds for all
+three; the classification was what was wrong.
 
 ### Reactive Tumble stays readable and manual
 
@@ -90,7 +105,9 @@ additive to it.
 
 ## Shadowmeld: the full clause list and a real extraction trap
 
-Eight clauses, all verbatim from the ability body: flatten against a touched wall or floor and become
+Eight clauses. The summary below paraphrases for readability; the exact wording lives in the source
+file and in the test plan's quoted assertion, and any assertion must quote the source, not this
+paraphrase. The clauses are: flatten against a touched wall or floor and become
 hidden from any creature you have cover or concealment from or who is not observing you; full
 awareness while in shadow form; strikes against you and tests to search for you take a bane; you
 cannot move or be force moved; you cannot take main actions or maneuvers except to exit the form or
@@ -176,9 +193,11 @@ purchased trait while preserving independent class and career choices.
 
 ## Recorded uncertainties
 
-1. Whether Nimblestep's "ignore the effects of difficult terrain" also lifts the separate prohibition
-   on shifting into or while within difficult terrain. The pin does not say. Record it; do not
-   resolve it by assumption, and do not implement a shifting change on the strength of it.
+1. Whether Nimblestep's "ignore the effects of difficult terrain" also lifts the separate
+   prohibition in
+   [Shifting](../../vendor/steel-compendium/en/unified/md/movement/shifting.md) — "You can't shift
+   into or while within difficult terrain or damaging terrain". The pin does not say. Record it; do
+   not resolve it by assumption, and do not implement a shifting change on the strength of it.
 2. Shadowmeld states no use limit or duration cap. Represent what the source says and nothing more.
 
 Neither blocks the unit. If a rules reviewer needs item 1 settled before the entitlement can be

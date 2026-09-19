@@ -5,15 +5,23 @@
   "forgeVendorRevision": "5a846aadb623a9855a023e9403bb887a956c341f",
   "forgePackageVersion": "14.197.0",
   "derivation": "docs/research/polder-level-one-preparation.md; every expectation derived from the pinned Compendium before any evaluator run.",
-  "independence": "P1 uses only options already supported before V47 and V49 (Fury, Berserker, Mountain, Brutal Slam, Out of the Way!, Thunder Roar), so this unit is runnable without any unmerged peer artifact.",
+  "independence": "P1 uses only options already supported before V47 and V49: Fury, Berserker, Mountain, Brutal Slam, Out of the Way!, Thunder Roar, career Soldier, the Wilderness/Communal/Martial culture aspects and every skill and language it names, all of which the V37 extension already serves. No unmerged peer artifact is required to run this build.",
   "builds": [
     {
       "id": "P1-polder-new-traits",
       "role": "counterpart",
-      "witnesses": ["trait:Nimblestep", "trait:Polder Geist", "trait:Reactive Tumble"],
+      "witnesses": [
+        "trait:Nimblestep",
+        "trait:Polder Geist",
+        "trait:Reactive Tumble"
+      ],
       "salient": {
         "ancestry.choice": "Polder",
-        "ancestry.polder.purchased-traits": ["Nimblestep", "Polder Geist", "Reactive Tumble"],
+        "ancestry.polder.purchased-traits": [
+          "Nimblestep",
+          "Polder Geist",
+          "Reactive Tumble"
+        ],
         "culture.language": "Anjali",
         "culture.environment": "Wilderness",
         "culture.environment.skill": "Swim",
@@ -24,13 +32,23 @@
         "career.choice": "Soldier",
         "career.soldier.skill.exploration": "Endurance",
         "career.soldier.skill.intrigue": "Alertness",
-        "career.soldier.languages": ["Vaslorian", "Hyrallic"],
+        "career.soldier.languages": [
+          "Vaslorian",
+          "Hyrallic"
+        ],
         "career.soldier.perk": "Teamwork",
         "career.soldier.inciting-incident": "Sole Survivor",
         "class.choice": "Fury",
         "class.fury.characteristic-array": "1, 0, 0",
-        "class.fury.array-assignment": { "Reason": 1, "Intuition": 0, "Presence": 0 },
-        "class.fury.skills": ["Climb", "Search"],
+        "class.fury.array-assignment": {
+          "Reason": 1,
+          "Intuition": 0,
+          "Presence": 0
+        },
+        "class.fury.skills": [
+          "Climb",
+          "Search"
+        ],
         "class.fury.aspect": "Berserker",
         "class.fury.signature-ability": "Brutal Slam",
         "class.fury.ability-3": "Out of the Way!",
@@ -39,7 +57,13 @@
         "details.name": "V49 Reference P1"
       },
       "expected": {
-        "characteristics": { "M": 2, "A": 2, "R": 1, "I": 0, "P": 0 },
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": 1,
+          "I": 0,
+          "P": 0
+        },
         "staminaMaximum": 30,
         "recoveriesMaximum": 10,
         "recoveryValue": 10,
@@ -48,18 +72,77 @@
         "speed": 5,
         "stability": 2,
         "disengage": 1,
-        "meleeDamageBonus": [0, 0, 4],
-        "rangedDamageBonus": [0, 0, 0],
-        "potency": { "weak": 0, "average": 1, "strong": 2 },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
         "savingThrowThreshold": 6,
         "renown": 1,
         "wealth": 1,
-        "kit": "Mountain",
-        "skills": ["Nature", "Lift", "Climb", "Search", "Endurance", "Alertness", "Swim", "Blacksmithing", "Intimidate"],
-        "languages": ["Caelian", "Anjali", "Vaslorian", "Hyrallic"],
-        "traits": ["Shadowmeld", "Small!", "Nimblestep", "Polder Geist", "Reactive Tumble"],
-        "features": ["Primordial Aspect", "Ferocity", "Growing Ferocity", "Aspect Features", "Aspect Triggered Action", "Mighty Leaps", "Fury Abilities", "Culture edge", "Kit", "Primordial Strength"],
-        "abilities": ["Brutal Slam", "Out of the Way!", "Thunder Roar", "Lines of Force", "Shadowmeld", "Pain for Pain", "Melee Weapon Free Strike", "Ranged Weapon Free Strike"],
+        "kit": {
+          "name": "Mountain",
+          "staminaBonusPerEchelon": 9,
+          "echelon": 1,
+          "staminaBonusApplied": 9,
+          "speedBonus": 0,
+          "stabilityBonus": 2,
+          "meleeDamageBonus": [
+            0,
+            0,
+            4
+          ],
+          "rangedDamageBonus": [
+            0,
+            0,
+            0
+          ],
+          "meleeDistanceBonus": 0,
+          "rangedDistanceBonus": 0,
+          "disengageBonus": 0
+        },
+        "skills": [
+          "Swim",
+          "Blacksmithing",
+          "Intimidate",
+          "Endurance",
+          "Alertness",
+          "Nature",
+          "Climb",
+          "Search",
+          "Lift"
+        ],
+        "languages": [
+          "Caelian",
+          "Anjali",
+          "Vaslorian",
+          "Hyrallic"
+        ],
+        "traits": [
+          "Shadowmeld",
+          "Small!",
+          "Nimblestep",
+          "Polder Geist",
+          "Reactive Tumble"
+        ],
+        "features": [
+          "Culture edge",
+          "Ferocity",
+          "Growing Ferocity",
+          "Mighty Leaps",
+          "Kit",
+          "Primordial Strength"
+        ],
+        "abilities": [
+          "Brutal Slam",
+          "Out of the Way!",
+          "Thunder Roar",
+          "Lines of Force",
+          "Pain for Pain",
+          "Melee Weapon Free Strike",
+          "Ranged Weapon Free Strike",
+          "Shadowmeld"
+        ],
         "damageImmunities": [],
         "conditionImmunities": [],
         "conditionalEffects": [
@@ -68,8 +151,22 @@
             "effect": "speed-bonus",
             "amount": 3,
             "sourcePath": "en/unified/md/feature/trait/polder/polder-geist.md",
-            "condition": "At the start of each of your turns during combat, if no enemy has line of effect to you or if you are hidden from or have concealment from any enemy with line of effect to you, you gain a +3 bonus to speed until the end of your turn."
+            "condition": "At the start of each of your turns during combat, if no enemy has line of effect to you or if you are hidden from or have concealment from any enemy with line of effect to you, you gain a +3 bonus to speed until the end of your turn.",
+            "contractProvenance": "Field names copied from the ConditionalEffect interface in V46's UNMERGED commit 7b7174b, read read-only. No such type exists in this checkout; if V46's shape changes before it merges, this entry changes with it."
           }
+        ],
+        "level": 1,
+        "ancestry": "Polder",
+        "class": "Fury",
+        "subclass": "Berserker",
+        "career": "Soldier",
+        "potencyCharacteristic": "M",
+        "heroicResource": {
+          "name": "ferocity",
+          "startingValue": 0
+        },
+        "perks": [
+          "Teamwork"
         ]
       },
       "derivation": {
@@ -81,14 +178,52 @@
         "savingThrowThreshold": "default 6; no Polder trait changes it",
         "skills": "Nature from the class, Lift from the Berserker aspect, then seven choices; Polder grants no ancestry skill",
         "purchasedTraits": "2 + 1 + 1 = 4 of 4 points, the exact budget",
-        "conditionalEffects": "Polder Geist's +3 is a calculated conditional amount. It must be present AND must not reach speed."
+        "conditionalEffects": "Polder Geist's +3 is a calculated conditional amount. It must be present AND must not reach speed.",
+        "emissionOrder": "Skills, features and abilities are emitted in definition order: ancestry, culture, career, class, then the aspect's option grants, with ancestry abilities after the free strikes. The canonical Fury/Berserker/Mountain row in docs/character-derived-values.md section 4.1 is the shape to match.",
+        "kitShape": "Kit bonuses live inside the kit contributions object on the derived baseline, not as top-level baseline fields."
       }
     },
     {
       "id": "P0-polder-no-traits-control",
       "role": "control, not a Forge counterpart",
-      "purpose": "Proves the three new traits change no unconditional total. Identical to P1 except the purchased-trait list is empty. Legal but warned: Q-CHAR-10 resolved unspent ancestry points as warn-without-enforcing.",
-      "salient": { "ancestry.polder.purchased-traits": [] },
+      "purpose": "Proves the three new traits change no unconditional total. Identical to P1 except the empty purchased-trait list, written out in full so it can be constructed from this file alone. Legal but warned: Q-CHAR-10 resolved unspent ancestry points as warn-without-enforcing, and the points shape emits budget-unspent as a warning that still completes.",
+      "salient": {
+        "ancestry.choice": "Polder",
+        "ancestry.polder.purchased-traits": [],
+        "culture.language": "Anjali",
+        "culture.environment": "Wilderness",
+        "culture.environment.skill": "Swim",
+        "culture.organization": "Communal",
+        "culture.organization.skill": "Blacksmithing",
+        "culture.upbringing": "Martial",
+        "culture.upbringing.skill": "Intimidate",
+        "career.choice": "Soldier",
+        "career.soldier.skill.exploration": "Endurance",
+        "career.soldier.skill.intrigue": "Alertness",
+        "career.soldier.languages": [
+          "Vaslorian",
+          "Hyrallic"
+        ],
+        "career.soldier.perk": "Teamwork",
+        "career.soldier.inciting-incident": "Sole Survivor",
+        "class.choice": "Fury",
+        "class.fury.characteristic-array": "1, 0, 0",
+        "class.fury.array-assignment": {
+          "Reason": 1,
+          "Intuition": 0,
+          "Presence": 0
+        },
+        "class.fury.skills": [
+          "Climb",
+          "Search"
+        ],
+        "class.fury.aspect": "Berserker",
+        "class.fury.signature-ability": "Brutal Slam",
+        "class.fury.ability-3": "Out of the Way!",
+        "class.fury.ability-5": "Thunder Roar",
+        "kit.choice": "Mountain",
+        "details.name": "V49 Control P0"
+      },
       "expectedDelta": {
         "unconditionalVitals": "identical to P1 in every field",
         "conditionalEffects": "absent",
@@ -98,34 +233,80 @@
     {
       "id": "P2-bethell-retained",
       "role": "retained artifact, already captured; NOT re-captured by this unit",
-      "witnesses": ["trait:Corruption Immunity", "trait:Fearless", "trait:Graceful Retreat", "signature:Shadowmeld", "signature:Small!"],
+      "witnesses": [
+        "trait:Corruption Immunity",
+        "trait:Fearless",
+        "trait:Graceful Retreat",
+        "signature:Shadowmeld",
+        "signature:Small!"
+      ],
       "artifact": "tests/fixtures/v45-reference/Bethell-corrected-export.ds-hero, with Bethell-corrected-sheet.png and .txt",
-      "observedAncestryFeatures": ["Shadowmeld", "Small!", "Corruption Immunity", "Graceful Retreat", "Fearless"],
+      "observedAncestryFeatures": [
+        "Shadowmeld",
+        "Small!",
+        "Corruption Immunity",
+        "Graceful Retreat",
+        "Fearless"
+      ],
       "caveats": [
-        "Captured from the public Forge Steel website at version 14.198.0, which is NEWER than our pinned vendor source 14.197.0. Record the version difference; do not present the two as interchangeable.",
+        "Captured from the public Forge Steel website at version 14.198.0, NEWER than our pinned vendor source 14.197.0.",
         "It is a Polder Elementalist, not a Fury, so it evidences ancestry contributions rather than any class interaction.",
-        "It proves only what its retained artifacts actually show. It is not a witness for the three traits this unit newly enables."
+        "PROVENANCE, corrected 2026-09-19: docs/research/v25-corrected-forge-reference.json records that the three choice allocations were corrected in a HAND-EDITED COPY of the original export, which was then imported into the website and re-exported. The choices were not made in the editor. That is the very act our own capture script forbids, so this artifact is weaker evidence than an editor-built capture and must not be described as one.",
+        "Five recorded normalizations travel with the artifact and must be read with it.",
+        "Bethell-corrected-sheet.txt shows only the Hero tab and contains NO mention of Shadowmeld. The Shadowmeld witness rests on the export JSON, not on the retained sheet text or screenshot.",
+        "The export carries ten embedded granted abilities; listing only Shadowmeld below describes what this unit cares about, not the artifact's contents."
       ],
       "expectedFromThisArtifact": {
         "size": "1S",
-        "damageImmunities": [{ "damageType": "corruption", "value": 3 }],
-        "conditionImmunities": ["frightened"],
+        "damageImmunities": [
+          {
+            "damageType": "corruption",
+            "value": 3
+          }
+        ],
+        "conditionImmunities": [
+          "frightened"
+        ],
         "disengageBonusFromGracefulRetreat": 1,
-        "abilities": ["Shadowmeld"]
+        "abilities": [
+          "Shadowmeld"
+        ],
+        "abilitiesNote": "Shadowmeld is present among ten embedded granted abilities; this is not an exhaustive ability list."
       }
     }
   ],
   "removalExpectations": {
-    "note": "What must disappear when a parent choice changes. Stale selections are not active grants.",
-    "dropNimblestep": "Its readable entitlement disappears; no numeric field moves, because it contributed none.",
-    "dropPolderGeist": "Its conditionalEffects entry disappears entirely; ordinary speed is unchanged, because it never contributed there.",
-    "dropReactiveTumble": "Its readable triggered-action content disappears; no numeric field moves.",
-    "changeAncestryAwayFromPolder": "size returns to the 1M default, Shadowmeld and Small! are removed, every purchased Polder trait and its effects are removed, and the new ancestry's contributions apply. Class, career, culture, array and authored details are preserved.",
-    "swapTraitWithinBudget": "The removed trait's every effect disappears in the same evaluation that adds the new trait's; no residue of the old trait survives in derived values, readable content or provenance."
+    "note": "What must disappear when a parent choice changes, and what the evaluator actually does with a selection that is left behind.",
+    "pruningSemantics": "A stored selection whose decision becomes unavailable does not silently vanish: the evaluator raises an invalid unavailable-decision diagnostic, as tests/character-evaluator.test.ts asserts for the Devil purchased traits after an ancestry switch. The clean outcomes below therefore assume the wizard's prune step clears the stale selection first; the tests must exercise both paths, the pruned one and the stale-selection diagnostic.",
+    "dropNimblestep": "Its readable entitlement disappears; no unconditional field moves.",
+    "dropPolderGeist": "Its conditionalEffects entry disappears; ordinary speed is unchanged, because it never contributed there.",
+    "dropReactiveTumble": "Its readable triggered-action content disappears; no unconditional field moves.",
+    "changeAncestryToDevil": "Only Devil and Polder have content modules today, so Devil is the only concrete target: size becomes 1M because the Devil contribution sets it, Shadowmeld and Small! are removed, every purchased Polder trait and its effects are removed, and Devil's own contributions apply. Any other ancestry yields unsupported-option and no ancestry baseline. Class, career, culture, array and authored details are preserved.",
+    "swapTraitWithinBudget": "The removed trait's every effect disappears in the same evaluation that adds the new one. Provenance is recomputed from selections on every evaluation, so assert on derived values and readable content rather than on provenance residue, which cannot fail."
   },
   "normalizedComparisonFields": {
-    "compare": ["ancestry", "class", "subclass", "level", "characteristics", "skills", "languages", "kit", "traits", "abilityNames", "derived sheet values read from the captured sheet text"],
-    "exclude": ["state", "abilityCustomizations", "picture", "folder", "id", "embedded definitions for unselected options and later levels"],
+    "compare": [
+      "ancestry",
+      "class",
+      "subclass",
+      "level",
+      "characteristics",
+      "skills",
+      "languages",
+      "kit",
+      "traits",
+      "abilityNames",
+      "derived sheet values read from the captured sheet text"
+    ],
+    "exclude": [
+      "state",
+      "abilityCustomizations",
+      "picture",
+      "folder",
+      "id",
+      "embedded definitions for unselected options and later levels"
+    ],
     "forgeLimitations": "If the pinned Forge build cannot represent a conditional speed bonus as a distinct field, record that as a recorded structural limitation with the closest comparison rather than an exact-match pass."
-  }
+  },
+  "correctionRound": "2026-09-19: independent review corrected the feature list, skills and abilities ordering, the kit shape, the P2 provenance caveats, the pruning semantics and several omissions."
 }

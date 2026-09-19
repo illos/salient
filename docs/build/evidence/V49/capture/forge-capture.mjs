@@ -15,7 +15,8 @@
  * substitute a previous export for performing the change in the editor.
  *
  *   node forge-capture.mjs --build P1-polder-new-traits --base-url http://127.0.0.1:5173 \
- *     --out ../forge --forge-commit 5a846aadb623a9855a023e9403bb887a956c341f
+ *     --served-from "pinned vendor tree exported with git archive into scratch" \
+ *     --forge-commit 5a846aadb623a9855a023e9403bb887a956c341f --forge-version 14.197.0
  *
  * Serve the editor from an export of the pinned tree in scratch space; never install inside
  * vendor/forge-steel, because check-vendor fails on any untracked file there and the remote
@@ -65,13 +66,24 @@ async function openTab(page, name) {
   return fallback.click();
 }
 
+/**
+ * Click one option inside the ACTIVE panel only. antd keeps inactive panels mounted and labels
+ * repeat across tabs — "Climb" is both a class skill and a Martial upbringing option, "Endurance"
+ * appears in three pools — so an unscoped match can click the wrong control and produce a
+ * legal-looking but wrong export. Ambiguity is a failure, never a first() guess.
+ */
 async function choose(page, tab, label, what) {
   if (label === undefined || label === null) fail(`On ${tab}, no value was supplied for ${what}.`);
-  const locator = page
-    .getByRole('button', { name: new RegExp(`^${escapeRe(String(label))}$`, 'i') })
-    .first();
-  if ((await locator.count()) === 0)
-    fail(`On the ${tab} tab, no control matched ${what} "${label}".`);
+  const panel = page.locator('.ant-segmented + *, [role="tabpanel"]').last();
+  const scope = (await panel.count()) > 0 ? panel : page;
+  const locator = scope.getByRole('button', { name: new RegExp(`^${escapeRe(String(label))}$`, 'i') });
+  const count = await locator.count();
+  if (count === 0) fail(`On the ${tab} tab, no control matched ${what} "${label}".`);
+  if (count > 1)
+    fail(
+      `On the ${tab} tab, ${count} controls matched ${what} "${label}". Refusing to guess: scope ` +
+        `the selector to the right section and record the correction.`,
+    );
   await locator.click();
 }
 
@@ -133,6 +145,33 @@ async function captureBuild(page, build, outDir) {
   const exportPath = join(outDir, 'export.ds-hero');
   await download.saveAs(exportPath);
 
+  // Verify the artifact before it is treated as evidence. An export that does not match the choice
+  // map is a failed capture, not a result to explain away later.
+  const hero = JSON.parse(await readFile(exportPath, 'utf8'));
+  const mismatches = [];
+  const check = (what, actual, wanted) => {
+    if (actual !== wanted) mismatches.push(`${what}: export has ${actual ?? 'nothing'}, expected ${wanted}`);
+  };
+  check('ancestry', hero.ancestry?.name, s['ancestry.choice']);
+  check('career', hero.career?.name, s['career.choice']);
+  check('class', hero.class?.name, s['class.choice']);
+  check('level', hero.class?.level, 1);
+  check('name', hero.name, s['details.name']);
+  const selectedSubclasses = (hero.class?.subclasses ?? []).filter(entry => entry.selected);
+  check('subclass', selectedSubclasses.map(entry => entry.name).join(', '), s['class.fury.aspect']);
+  const serialised = JSON.stringify(hero);
+  for (const trait of s['ancestry.polder.purchased-traits'])
+    if (!serialised.includes(trait)) mismatches.push(`purchased trait "${trait}" is absent`);
+  for (const ability of [
+    s['class.fury.signature-ability'],
+    s['class.fury.ability-3'],
+    s['class.fury.ability-5'],
+  ])
+    if (!serialised.includes(ability)) mismatches.push(`ability "${ability}" is absent`);
+  if (!serialised.includes(s['kit.choice'])) mismatches.push(`kit "${s['kit.choice']}" is absent`);
+  if (mismatches.length)
+    fail(`The export does not match the choice map:\n  - ${mismatches.join('\n  - ')}`);
+
   const sheet = page.locator(UI.heroSheet).first();
   if ((await sheet.count()) === 0) fail('The hero sheet did not render, so no sheet evidence exists.');
   await sheet.screenshot({ path: join(outDir, 'sheet.png') });
@@ -157,10 +196,16 @@ function parseArgs(argv) {
 
 async function main() {
   const args = parseArgs(process.argv.slice(2));
-  if (!args.build || !args['base-url']) {
+  const required = ['build', 'base-url', 'served-from', 'forge-commit', 'forge-version'];
+  const missing = required.filter(key => !args[key] || args[key] === 'true');
+  if (missing.length) {
     console.error(
-      'Usage: node forge-capture.mjs --build <id> --base-url <url> [--out ../forge] ' +
-        '[--forge-commit <sha>] [--forge-version <semver>]',
+      `Missing required argument(s): ${missing.join(', ')}.\n` +
+        'Usage: node forge-capture.mjs --build <id> --base-url <url> ' +
+        '--served-from "<how the app was served>" --forge-commit <sha> --forge-version <semver> ' +
+        '[--out ../forge]\n' +
+        'served-from, forge-commit and forge-version are recorded verbatim into capture.json and ' +
+        'are not defaulted, because a wrong provenance is worse than a missing capture.',
     );
     process.exitCode = 2;
     return;
@@ -195,9 +240,11 @@ async function main() {
         {
           buildId: build.id,
           capturedAtUTC: new Date().toISOString(),
-          servedFrom: 'pinned vendor source exported with git archive; NOT the public website',
-          forgeCommit: args['forge-commit'] ?? null,
-          forgeVersion: args['forge-version'] ?? data.forgePackageVersion,
+          // Recorded from what the operator declares, never assumed: pointing --base-url at the
+          // public website and recording "pinned vendor source" would be a fabricated provenance.
+          servedFrom: args['served-from'],
+          forgeCommit: args['forge-commit'],
+          forgeVersion: args['forge-version'],
           compendiumRevision: data.compendiumRevision,
           baseUrl: args['base-url'],
           selections: build.salient,
@@ -221,6 +268,13 @@ async function main() {
         'The captured sheet does not mention Polder Geist. Record this as a Forge presentation ' +
           'limitation with the closest comparison; it is not an exact-match pass.',
       );
+    if (consoleErrors.length) {
+      console.error(
+        `The page logged ${consoleErrors.length} console error(s); they are recorded in ` +
+          'capture.json. Treat this capture as failed until they are explained.',
+      );
+      process.exitCode = 1;
+    }
     console.log(`Captured ${build.id} into ${outDir}`);
   } finally {
     await context.close();

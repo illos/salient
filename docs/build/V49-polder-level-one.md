@@ -169,9 +169,11 @@ Findings that shaped the plan:
 
 - The gap is exactly three traits, and their costs total the full 4-point budget, so a single
   counterpart build witnesses all of them.
-- All three are non-numeric by nature. The unit's correctness is mostly about what it must **not**
-  add: Polder Geist contributes no unconditional speed, Nimblestep is a movement-cost waiver rather
-  than a speed bonus, and Reactive Tumble is a free triggered action outside the one-per-round limit.
+- None of the three changes an unconditional total, which is what the unit must get right. Two of
+  them do carry sourced numbers under conditions — Polder Geist's +3 speed, and Nimblestep's override
+  of the rule halving speed while sneaking — and Reactive Tumble carries none. Both the
+  "non-numeric" framing and the action-budget phrasing in an earlier draft of this bullet were
+  corrected in the rounds below.
 - `signature_trait_name` in the ancestry record names only Shadowmeld, while Polder has two signature
   traits. Driving the free-trait list from that field would silently drop Small! and with it size 1S.
   Our module already lists both; the risk is for any future importer.
@@ -206,3 +208,39 @@ applied, recorded rather than silently absorbed.
 
 Question-id coordination noted: unmerged peer branches hold Q-CHAR-16 through Q-CHAR-20, so the next
 unused id is 21. This unit raises none.
+
+2026-09-19 (second correction round, independent review of the preparation and fixture logic): a
+fresh reviewer that did not write the material found further errors. All are corrected and recorded.
+
+- **The expected feature list was wrong**, listing ten entries including advancement-table umbrella
+  rows, one of which duplicated its own expansion and another an ability. The evaluator emits six for
+  this frame, matching the canonical row in `docs/character-derived-values.md` section 4.1. The same
+  error had been introduced into V47's data in its previous correction round and is fixed there too.
+- **Skills and abilities were in the wrong order.** Emission follows definition order — culture,
+  career, class, then the aspect's grants — and ancestry abilities are emitted after the free
+  strikes, so Shadowmeld is last.
+- **Nimblestep's classification was ungrounded.** Its sneaking clause overrides a stated number:
+  "While sneaking, your speed is halved." It is a conditional numeric effect, not a bare entitlement.
+  The tested claim — no unconditional change — was unaffected.
+- **The conditional-effect contract was asserted as if it existed here.** It does not: no such type
+  appears under `shared/`. The shape comes from V46's unmerged commit `7b7174b`, now cited as such,
+  with the field names marked provisional until V46 merges.
+- **The capture script could have written a complete-looking artifact from an incomplete build.** It
+  now verifies the export against the choice map before writing anything, records provenance from an
+  explicit flag instead of a hardcoded string, requires the served version rather than assuming the
+  pinned one, scopes selectors to the active panel, and fails on console errors.
+- **The removal expectations did not match the evaluator.** A stale selection whose decision becomes
+  unavailable raises an invalid diagnostic rather than silently disappearing; both that path and the
+  pruned path are now stated and must be tested. Only Devil and Polder have content modules, so the
+  ancestry-change case names Devil concretely, and the unfalsifiable "no provenance residue"
+  expectation is replaced, since provenance is recomputed from selections every evaluation.
+- **The retained Bethell caveats were incomplete in a way that mattered.** Its corrected choices were
+  made by hand-editing a copy of the export and re-importing it, not in the editor — the very act
+  this unit's own capture script forbids — and its retained sheet text contains no mention of
+  Shadowmeld, so that witness rests on the export JSON alone. Both are recorded, along with the five
+  normalizations that travel with the artifact.
+- Omissions added: perks, level, ancestry, class, subclass, career, potency characteristic, heroic
+  resource, and the kit contributions block, whose bonuses belong inside the kit object rather than
+  at the top level of the baseline.
+- The Shadowmeld clause list is now labelled a paraphrase, with assertions required to quote the
+  source; the shifting prohibition behind uncertainty 1 now carries its path.
