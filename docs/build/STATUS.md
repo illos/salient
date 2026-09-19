@@ -335,3 +335,9 @@ records the handoff; it does not certify A09 or create an implementation commit.
 | Id | Slice | Status | Owner |
 | --- | --- | --- | --- |
 | V45 | [Character option foundation](V45-character-option-foundation.md) | Complete — merged/live `ebe66e2`; 691 tests, 5,584 exact comparisons, 49 applicable browser successes and two shared checks; both audits pass; initial timeout/retry limits retained; no new options enabled | Character integration lead and subagents |
+
+## V54 Dragon Knight level one — 2026-09-19
+
+| Id | Slice | Status | Owner |
+| --- | --- | --- | --- |
+| V54 | [Dragon Knight level one](V54-dragon-knight-level-one.md) | Preparation in progress — trait/cost ledger, derived expectations, gap map and six-witness plan recorded on `slice/V54`. Twelve or eighteen new options depending on Q-CHAR-21, raised here: whether Prismatic Scales picks one of Wyrmplate's six types or is pinned to its current one. Salient already ships the six-option reading on the complication path, so an earlier draft calling it illegal is withdrawn. V37 already ships Dragon Breath and Draconian Pride for the Dragon Dreams complication; reuse, do not duplicate. No option enabled, no capture, nothing run | Opus implementer `88b6a7e6`, slice/V54 |

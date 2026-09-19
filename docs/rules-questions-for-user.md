@@ -828,3 +828,36 @@ No user approval is implied by this classification.
 - **Boundary:** Explicitly includes required supplemental editor choices, grants and derived builds;
   does not enable unrelated supplements/homebrew or claim implemented table support. Forge Steel
   remains a structural and import/export reference; Compendium remains rules authority.
+
+### Q-CHAR-21: Does Prismatic Scales pick one of Wyrmplate's six types, or the one it currently grants?
+
+- **Status:** open
+- **Raised by:** V54 Dragon Knight level-one preparation, 2026-09-19
+- **Where:** [character specification](character-wizard-spec.md#3-decision-system);
+  `vendor/steel-compendium/en/unified/md/feature/trait/dragon-knight/prismatic-scales.md`;
+  `vendor/steel-compendium/en/unified/md/feature/trait/dragon-knight/wyrmplate.md`;
+  `shared/content/supporting-complications.ts` (`complication.dragon-dreams.immunity`)
+- **Conflict or gap:** Prismatic Scales reads "Select one damage immunity granted by your Wyrmplate
+  trait. You always have this immunity, in addition to the immunity granted by Wyrmplate." Wyrmplate
+  grants immunity equal to your level to **one** of six types, changeable at a respite. Two readings
+  are live. **A:** the type is pinned to whatever Wyrmplate currently grants — supported by the pin's
+  only comparable phrasing, Null's level-9 reference to "the cold damage immunity granted by your
+  Entropic Adaptability trait", where that trait does confer a specific immunity. **B:** one of the
+  six types Wyrmplate can grant — supported by the sentence itself, since under A "Select one" has
+  exactly one candidate and "in addition to the immunity granted by Wyrmplate" is self-referential,
+  while under B all three clauses are meaningful at once. Under A, with respite reselection out of
+  scope, Prismatic Scales also has no observable effect at level one, which makes the printed quick
+  build spend a third of the ancestry budget on a level-one no-op.
+- **Options:** A: pinned to Wyrmplate's current type. B: one of Wyrmplate's six types, chosen freely.
+- **Recommendation:** B, on three grounds. It is the only reading under which every clause of the
+  sentence does work. Salient **already ships it**: `complication.dragon-dreams.immunity` offers all
+  six types with no link to any Wyrmplate selection, and is on main today. And the deferred
+  [Q-CHAR-7](#q-char-7-may-a-revenant-borrow-prismatic-scales-without-wyrmplate)'s recorded research
+  recommendation likewise reads "allow choosing one of Wyrmplate's six types". Forge Steel also
+  implements B, which is corroboration only and not authority.
+- **Blocked until answered:** V54's delivered option count (twelve under A, eighteen under B), its
+  data model, and whether the ancestry path may forbid what the complication path already permits.
+  The reference plan is deliberately built to be legal under **both** readings — every witness pins
+  Prismatic Scales to its own build's Wyrmplate type — so capture work is not blocked. An earlier
+  draft of V54 asserted A and described B as source-illegal; that assertion is withdrawn.
+- **Answer:** (user fills in)
