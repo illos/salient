@@ -73,7 +73,8 @@ Two further factors the design must respect, which the triage did not account fo
 
 ## The probes
 
-[`convex/diagnostics.ts`](../../convex/diagnostics.ts), two queries, each returning one boolean.
+[`convex/diagnostics.ts`](../../convex/diagnostics.ts), two queries, each returning one boolean,
+driven by [`scripts/v51-probe-driver.ts`](../../scripts/v51-probe-driver.ts).
 Written against the installed tree: **convex 1.45.0, @convex-dev/better-auth 0.12.5,
 better-auth 1.6.15.**
 
@@ -111,11 +112,15 @@ not proceed if any fails:
 
 1. Both probes are reachable and **authenticated** — a probe that silently ran unauthenticated
    would measure the wrong thing entirely.
-2. **The execution-timing source is verified on this actual backend.** `npx convex logs` is
-   *assumed* to emit per-execution durations; that assumption is checked by observing real lines for
-   a known probe call before relying on it. If durations are not emitted, the driver says so and the
-   experiment reports client latency only, explicitly labelled as such, rather than silently
-   substituting one for the other.
+2. **The execution-timing source, corrected against the installed CLI rather than assumed.**
+   `node_modules/convex/src/cli/lib/logs.ts` reads `log.executionTime * 1000` and formats the
+   Completion line as **"Function executed in N ms"** — not "Function execution took N ms", which
+   an earlier draft of this plan assumed and which would have matched nothing. More importantly,
+   that line is emitted only when `shouldShowSuccessLogs` is true (`logs.ts:226`), so the command
+   is **`npx convex logs --success`**. Without the flag a successful execution emits no timing line
+   at all, and a driver tailing plain `convex logs` would record nothing while reporting client
+   latency as though it were server time. That output is a required artifact; the driver does not
+   parse it and never substitutes client latency for it.
 3. A nonce-varied call and a repeated identical call are compared, to confirm the nonce actually
    forces execution on this backend rather than being assumed to.
 
@@ -175,6 +180,14 @@ Before any runtime step:
 3. The prepared plan and probe diff go to the integration lead **before** the experiment runs.
 
 ## What a result does and does not establish
+
+**Fast probes concurrent with an application failure are evidence against a fixed universal-prefix
+explanation, not logical proof.** They do not exclude rare or context-dependent prefix effects, and
+the report must not claim they do.
+
+**The diagnostics are not left deployed.** `convex/diagnostics.ts` and the driver are removed, or
+explicitly handed off with a restore step, as part of finishing the work — never abandoned on the
+deployment.
 
 A result identifies where the cost is. It does **not** fix anything, does not certify any
 candidate, and does not release the V46 batch. Bounding `closeout:current` and `characters:reviews`
