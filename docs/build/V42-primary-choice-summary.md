@@ -57,3 +57,20 @@ the reviewed None guard. All eight final changed code/test files byte-match the 
 Independent [review](reviews/V42-primary-choice-review.md) passed the bounded implementation gate;
 acceptance 1–5 verified with the broader runtime limitation explicitly retained. Shared delivery
 (acceptance 6) follows integration and is recorded separately.
+
+## Integration and shared verification
+
+Spec `ed98ca2` and implementation `45426dc8dabc2301b89659998e0f928bfb83b4f0` passed the commit
+merge gate and fast-forwarded into main. `presidium-dev up` updated the existing local-anonymous
+CT114 main environment, compose `salient-dev-b90776c53141`, at the established
+[development URL](https://salient-dev-fc4f48cb09a0.tail41404c.ts.net). Both V42/V40 browser journeys
+passed on that actual target in 31.6 seconds, including authenticated character readback and
+unchanged revisions after keeping existing choices. This completes lead-owned acceptance 6.
+
+[Shared evidence](evidence/V42/README.md#shared-delivery) records the running commit and checks.
+Existing data volumes and pinned sources remain intact; no migration/reseed/reset or hosted release
+was needed or performed. Runtime source is marked dirty solely because the main checkout contains
+peer-owned untracked performance-audit documents, preserved and excluded from V42 commits.
+The isolated characters services were stopped with data retained; shared main remains running.
+The performance thread was notified that the shared runtime window is released. This closeout
+changes documentation only and needs no further runtime rollout.

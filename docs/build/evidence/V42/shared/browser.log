@@ -1,0 +1,8 @@
+ Container salient-dev-b90776c53141-job-23bd6aee Creating 
+ Container salient-dev-b90776c53141-job-23bd6aee Created 
+
+Running 2 tests using 1 worker
+
+[1/2] tests/browser/v40-unsaved-wizard.spec.ts:8:1 › unsaved wizard creates nothing until first explicit save, then edits the same character
+[2/2] tests/browser/v42-primary-choice.spec.ts:8:1 › primary choices collapse, edit without loss, prune on replacement and reopen saved
+  2 passed (31.6s)

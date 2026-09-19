@@ -52,3 +52,15 @@ A final reviewed guard requires the raw optional choice to be absent before summ
 an unsupported saved value instead leaves its chooser and diagnostics visible. `final-check.log` records successful final lint/types/build; `final-browser.log` records both V42/V40
 journeys passing against that guard in 36.2 seconds. The earlier full-suite pass covers the unchanged
 backend/evaluator. Final source hashes match all eight code/test files including this condition.
+
+## Shared delivery
+
+`shared/browser.log` records both V42/V40 journeys passing on actual shared CT114 main in 31.6 seconds.
+`shared/runtime-status.json` identifies running source `45426dc8dabc2301b89659998e0f928bfb83b4f0`,
+compose `salient-dev-b90776c53141` and the unchanged private HTTPS URL. Existing data was preserved.
+The dirty-source flag reflects only peer-owned untracked audit documents in main, not additional
+application edits. No hosted release or source-pin update occurred. Isolated characters services
+were stopped after delivery with their data volumes retained; shared main stays running.
+
+Acceptance 6 is complete. The broader isolated Fury admission/table timeout limitation above is
+still retained; these two shared changed-feature checks do not claim a full table stress pass.
