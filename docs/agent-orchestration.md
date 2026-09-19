@@ -84,6 +84,14 @@ repair them, then review the changed areas and affected behavior. An unchanged c
 sufficient evidence does not need repeated expensive suites merely because another agent reads it.
 Changed integration behavior or unresolved failures do require applicable checks and fresh review.
 
+Tie artifacts to the source that actually ran. `presidium-dev run` does not upload changed source;
+record the commit and dirty state after `up` and before verification. A stable checkout identity is
+not a content fingerprint. Preserve logs, failure contexts and readbacks before replacing the
+runtime. When only tests or documentation change, retain the original full-suite result and run
+an appropriate supplement against the changed tree; show which application files are unchanged.
+An isolated rerun passing does not turn a failed full suite into a pass or establish its cause.
+Read the retained artifacts themselves before claiming that they contain a particular observation.
+
 For character units, retain the existing [Forge comparison gate](build/character-verification.md),
 persisted readbacks, full checks, and independent implementation review followed by fresh rules
 review. Read composed definitions and actual consumers: raw option metadata can understate served
@@ -125,6 +133,12 @@ Only eligible idle peers can wake. Busy recipients get no deferred wake when the
 broadcasts and self-wakes are rejected. There is a 60-second recipient cooldown and a maximum of
 six accepted or unresolved attempts per hour. A simultaneous user action can still race the idle
 check. Do not bypass lifecycle or approval/input blocks to keep a worker occupied.
+
+Check the inbox immediately before ending a turn, especially after a readiness handoff: a message
+sent while the recipient was busy can otherwise remain unread after it stops. If work is waiting
+only on a peer's handoff, use bounded waits while active. Avoid repeated readiness-only turns;
+they consume wake capacity without completing work. When the hourly limit is reached, record
+the next eligible time and resume then, preserving the limit.
 
 **No wake chains:** a Chords-woken thread cannot wake peers until it receives a later user message.
 Passive handoffs still work. A lead awakened by a worker therefore cannot assume it can wake the

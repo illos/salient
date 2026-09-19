@@ -337,3 +337,11 @@ withdrawn through source interpretation, not user rulings. The
 alternatives and scope corrections; its explicitly assessed Behold the Mystery example and general
 area-rule links were included with the optional wording refinements. Implementation, real
 counterpart captures and per-unit verification remain pending. Documentation only; no runtime update.
+
+2026-09-19: added observed verification and lifecycle lessons to the orchestration guide: actual
+uploaded source versus checkout identity, preserving artifacts before runtime replacement, scoped
+supplements without rewriting failed suite results, and checking the inbox before ending a busy
+turn. A missed runtime-release handoff and the six-wakes-per-hour limit delayed V51; the lead
+recorded its next eligible resume time rather than bypassing the limit. V46 implementation/evidence
+review has a scoped pass, but full-suite instability and remaining reviews still block integration.
+Documentation only; no runtime change or batch release.
