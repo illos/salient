@@ -20,22 +20,42 @@
     "careerChoices": {
       "explorationSkill": "Endurance",
       "intrigueSkill": "Alertness",
-      "languages": ["Vaslorian", "Hyrallic"],
+      "languages": [
+        "Vaslorian",
+        "Hyrallic"
+      ],
       "perk": "Teamwork",
       "incitingIncident": "Sole Survivor"
     },
-    "classSkills": ["Climb", "Search"],
+    "classSkills": [
+      "Climb",
+      "Search"
+    ],
     "complication": null,
-    "languages": ["Caelian", "Anjali", "Vaslorian", "Hyrallic"]
+    "languages": [
+      "Caelian",
+      "Anjali",
+      "Vaslorian",
+      "Hyrallic"
+    ]
   },
   "builds": [
     {
       "id": "A-devil-reaver-panther",
-      "witnesses": ["aspect:Reaver", "ability:Hit and Run", "ability:Back!", "ability:Blood for Blood!", "pairing:reaver-ordinary-kit"],
+      "witnesses": [
+        "aspect:Reaver",
+        "ability:Hit and Run",
+        "ability:Back!",
+        "ability:Blood for Blood!",
+        "pairing:reaver-ordinary-kit"
+      ],
       "salient": {
         "ancestry.choice": "Devil",
         "ancestry.devil.silver-tongue-skill": "Persuade",
-        "ancestry.devil.purchased-traits": ["Beast Legs", "Impressive Horns"],
+        "ancestry.devil.purchased-traits": [
+          "Beast Legs",
+          "Impressive Horns"
+        ],
         "culture.language": "Anjali",
         "culture.environment": "Wilderness",
         "culture.environment.skill": "Swim",
@@ -46,13 +66,23 @@
         "career.choice": "Soldier",
         "career.soldier.skill.exploration": "Endurance",
         "career.soldier.skill.intrigue": "Alertness",
-        "career.soldier.languages": ["Vaslorian", "Hyrallic"],
+        "career.soldier.languages": [
+          "Vaslorian",
+          "Hyrallic"
+        ],
         "career.soldier.perk": "Teamwork",
         "career.soldier.inciting-incident": "Sole Survivor",
         "class.choice": "Fury",
         "class.fury.characteristic-array": "1, 0, 0",
-        "class.fury.array-assignment": { "Reason": 1, "Intuition": 0, "Presence": 0 },
-        "class.fury.skills": ["Climb", "Search"],
+        "class.fury.array-assignment": {
+          "Reason": 1,
+          "Intuition": 0,
+          "Presence": 0
+        },
+        "class.fury.skills": [
+          "Climb",
+          "Search"
+        ],
         "class.fury.aspect": "Reaver",
         "class.fury.signature-ability": "Hit and Run",
         "class.fury.ability-3": "Back!",
@@ -61,7 +91,13 @@
         "details.name": "V47 Reference A"
       },
       "expected": {
-        "characteristics": { "M": 2, "A": 2, "R": 1, "I": 0, "P": 0 },
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": 1,
+          "I": 0,
+          "P": 0
+        },
         "staminaMaximum": 27,
         "recoveriesMaximum": 10,
         "recoveryValue": 9,
@@ -70,31 +106,103 @@
         "speed": 7,
         "stability": 1,
         "disengage": 1,
-        "meleeDamageBonus": [0, 0, 4],
-        "rangedDamageBonus": [0, 0, 0],
-        "potency": { "weak": 0, "average": 1, "strong": 2 },
+        "meleeDamageBonus": [
+          0,
+          0,
+          4
+        ],
+        "rangedDamageBonus": [
+          0,
+          0,
+          0
+        ],
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
         "savingThrowThreshold": 5,
         "renown": 1,
         "wealth": 1,
         "kit": "Panther",
-        "skills": ["Nature", "Hide", "Climb", "Search", "Endurance", "Alertness", "Swim", "Blacksmithing", "Intimidate", "Persuade"],
-        "traits": ["Silver Tongue", "Beast Legs", "Impressive Horns"],
-        "abilities": ["Hit and Run", "Back!", "Blood for Blood!", "Unearthly Reflexes", "Devastating Rush", "Melee Weapon Free Strike", "Ranged Weapon Free Strike"],
+        "skills": [
+          "Nature",
+          "Hide",
+          "Climb",
+          "Search",
+          "Endurance",
+          "Alertness",
+          "Swim",
+          "Blacksmithing",
+          "Intimidate",
+          "Persuade"
+        ],
+        "traits": [
+          "Silver Tongue",
+          "Beast Legs",
+          "Impressive Horns"
+        ],
+        "abilities": [
+          "Hit and Run",
+          "Back!",
+          "Blood for Blood!",
+          "Unearthly Reflexes",
+          "Devastating Rush",
+          "Melee Weapon Free Strike",
+          "Ranged Weapon Free Strike"
+        ],
         "kitSignatureAbility": "Devastating Rush",
-        "primordialDamageType": null
+        "primordialDamageType": null,
+        "kitMeleeDamageBonusApplies": [
+          "Hit and Run",
+          "Back!",
+          "Blood for Blood!",
+          "Melee Weapon Free Strike"
+        ],
+        "kitMeleeDamageBonusExcluded": {
+          "Devastating Rush": "kit signature; its printed damage already includes the kit bonus",
+          "Ranged Weapon Free Strike": "Ranged, not Melee; Panther has no ranged damage bonus",
+          "Unearthly Reflexes": "no damage and no Melee+Weapon keywords"
+        },
+        "features": [
+          "Primordial Aspect",
+          "Ferocity",
+          "Growing Ferocity",
+          "Aspect Features",
+          "Aspect Triggered Action",
+          "Mighty Leaps",
+          "Fury Abilities",
+          "Culture edge",
+          "Kit",
+          "Primordial Cunning"
+        ]
       },
       "derivation": {
         "staminaMaximum": "21 class + 6 Panther per echelon x echelon 1",
         "speed": "Beast Legs sets speed 6, then Panther +1",
-        "savingThrowThreshold": "Impressive Horns replaces the default 6"
+        "savingThrowThreshold": "Impressive Horns replaces the default 6",
+        "kitDamageBonus": "A kit's melee damage bonus applies to abilities with BOTH the Melee and Weapon keywords. A kit signature ability's printed damage already includes its own kit's bonuses and must not receive them again. The ranged free strike never receives a melee damage bonus.",
+        "speedOrdering": "Beast Legs SETS speed 6, then the kit speed bonus is added to that. A set-last implementation would wrongly yield 6.",
+        "windedRounding": "Winded equals half the Stamina maximum; the rounding comes from the always-round-down rule."
       }
     },
     {
       "id": "B-polder-stormwight-boren",
-      "witnesses": ["aspect:Stormwight", "kit:Boren", "ability:Impaled!", "ability:Tide of Death", "ability:Make Peace With Your God!", "pairing:stormwight-stormwight-kit"],
+      "witnesses": [
+        "aspect:Stormwight",
+        "kit:Boren",
+        "ability:Impaled!",
+        "ability:Tide of Death",
+        "ability:Make Peace With Your God!",
+        "pairing:stormwight-stormwight-kit"
+      ],
       "salient": {
         "ancestry.choice": "Polder",
-        "ancestry.polder.purchased-traits": ["Corruption Immunity", "Fearless", "Graceful Retreat"],
+        "ancestry.polder.purchased-traits": [
+          "Corruption Immunity",
+          "Fearless",
+          "Graceful Retreat"
+        ],
         "culture.language": "Anjali",
         "culture.environment": "Wilderness",
         "culture.environment.skill": "Swim",
@@ -105,13 +213,23 @@
         "career.choice": "Soldier",
         "career.soldier.skill.exploration": "Endurance",
         "career.soldier.skill.intrigue": "Alertness",
-        "career.soldier.languages": ["Vaslorian", "Hyrallic"],
+        "career.soldier.languages": [
+          "Vaslorian",
+          "Hyrallic"
+        ],
         "career.soldier.perk": "Teamwork",
         "career.soldier.inciting-incident": "Sole Survivor",
         "class.choice": "Fury",
         "class.fury.characteristic-array": "1, 1, −1",
-        "class.fury.array-assignment": { "Reason": 1, "Intuition": 1, "Presence": -1 },
-        "class.fury.skills": ["Climb", "Search"],
+        "class.fury.array-assignment": {
+          "Reason": 1,
+          "Intuition": 1,
+          "Presence": -1
+        },
+        "class.fury.skills": [
+          "Climb",
+          "Search"
+        ],
         "class.fury.aspect": "Stormwight",
         "class.fury.signature-ability": "Impaled!",
         "class.fury.ability-3": "Tide of Death",
@@ -120,7 +238,13 @@
         "details.name": "V47 Reference B"
       },
       "expected": {
-        "characteristics": { "M": 2, "A": 2, "R": 1, "I": 1, "P": -1 },
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": 1,
+          "I": 1,
+          "P": -1
+        },
         "staminaMaximum": 30,
         "recoveriesMaximum": 10,
         "recoveryValue": 10,
@@ -129,25 +253,98 @@
         "speed": 5,
         "stability": 2,
         "disengage": 2,
-        "meleeDamageBonus": [0, 0, 4],
-        "rangedDamageBonus": [0, 0, 0],
-        "potency": { "weak": 0, "average": 1, "strong": 2 },
+        "meleeDamageBonus": [
+          0,
+          0,
+          4
+        ],
+        "rangedDamageBonus": [
+          0,
+          0,
+          0
+        ],
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
         "savingThrowThreshold": 6,
         "renown": 1,
         "wealth": 1,
         "kit": "Boren",
-        "skills": ["Nature", "Track", "Climb", "Search", "Endurance", "Alertness", "Swim", "Blacksmithing", "Intimidate"],
-        "traits": ["Shadowmeld", "Small!", "Corruption Immunity", "Fearless", "Graceful Retreat"],
-        "abilities": ["Impaled!", "Tide of Death", "Make Peace With Your God!", "Furious Change", "Aspect of the Wild", "Bear Claws", "Shadowmeld", "Melee Weapon Free Strike", "Ranged Weapon Free Strike"],
+        "skills": [
+          "Nature",
+          "Track",
+          "Climb",
+          "Search",
+          "Endurance",
+          "Alertness",
+          "Swim",
+          "Blacksmithing",
+          "Intimidate"
+        ],
+        "traits": [
+          "Shadowmeld",
+          "Small!",
+          "Corruption Immunity",
+          "Fearless",
+          "Graceful Retreat"
+        ],
+        "abilities": [
+          "Impaled!",
+          "Tide of Death",
+          "Make Peace With Your God!",
+          "Furious Change",
+          "Aspect of the Wild",
+          "Bear Claws",
+          "Shadowmeld",
+          "Melee Weapon Free Strike",
+          "Ranged Weapon Free Strike"
+        ],
         "kitSignatureAbility": "Bear Claws",
-        "primordialDamageType": "cold"
+        "primordialDamageType": "cold",
+        "kitMeleeDamageBonusApplies": [
+          "Impaled!",
+          "Tide of Death",
+          "Melee Weapon Free Strike"
+        ],
+        "kitMeleeDamageBonusExcluded": {
+          "Bear Claws": "kit signature; printed damage already includes the kit bonus",
+          "Make Peace With Your God!": "free maneuver with no keywords and no damage",
+          "Ranged Weapon Free Strike": "Ranged, not Melee; stormwight equipment is unarmed strikes only, so a ranged free strike is improvised and takes no kit bonus",
+          "Furious Change": "no damage",
+          "Aspect of the Wild": "no damage",
+          "Shadowmeld": "no damage"
+        },
+        "features": [
+          "Primordial Aspect",
+          "Ferocity",
+          "Growing Ferocity",
+          "Aspect Features",
+          "Aspect Triggered Action",
+          "Mighty Leaps",
+          "Fury Abilities",
+          "Culture edge",
+          "Beast Shape",
+          "Relentless Hunter"
+        ],
+        "damageImmunities": [
+          {
+            "damageType": "corruption",
+            "value": 3
+          }
+        ]
       },
       "derivation": {
         "staminaMaximum": "21 class + 9 Boren per echelon x echelon 1",
         "size": "Polder Small! overrides the 1M baseline",
         "speed": "baseline 5; Boren has no speed bonus",
         "disengage": "base shift 1 + Graceful Retreat +1; Boren has no disengage bonus",
-        "purchasedTraits": "1 + 2 + 1 = 4 of 4 points, all currently supported options"
+        "purchasedTraits": "1 + 2 + 1 = 4 of 4 points, all currently supported options",
+        "kitDamageBonus": "A kit's melee damage bonus applies to abilities with BOTH the Melee and Weapon keywords. A kit signature ability's printed damage already includes its own kit's bonuses and must not receive them again. The ranged free strike never receives a melee damage bonus.",
+        "damageImmunities": "Corruption Immunity grants corruption immunity equal to level + 2; at level 1 that is 3. It is a numeric immunity, not blanket immunity.",
+        "shadowmeld": "Shadowmeld's final clause — if the surface is destroyed the ability ends and the hero takes 1d6 damage that cannot be reduced in any way — appears ONLY in the markdown body, not in the structured effects field of either the YAML frontmatter or the unified JSON. Any renderer that rebuilds text from structured effects silently drops it.",
+        "windedRounding": "Winded equals half the Stamina maximum; the rounding comes from the always-round-down rule."
       },
       "formConditional": {
         "note": "Not part of the build values.",
@@ -157,11 +354,19 @@
     },
     {
       "id": "C-devil-stormwight-corven",
-      "witnesses": ["kit:Corven", "ability:To the Death!", "ability:Your Entrails Are Your Extrails!", "ability:To the Uttermost End"],
+      "witnesses": [
+        "kit:Corven",
+        "ability:To the Death!",
+        "ability:Your Entrails Are Your Extrails!",
+        "ability:To the Uttermost End"
+      ],
       "salient": {
         "ancestry.choice": "Devil",
         "ancestry.devil.silver-tongue-skill": "Persuade",
-        "ancestry.devil.purchased-traits": ["Beast Legs", "Impressive Horns"],
+        "ancestry.devil.purchased-traits": [
+          "Beast Legs",
+          "Impressive Horns"
+        ],
         "culture.language": "Anjali",
         "culture.environment": "Wilderness",
         "culture.environment.skill": "Swim",
@@ -172,13 +377,23 @@
         "career.choice": "Soldier",
         "career.soldier.skill.exploration": "Endurance",
         "career.soldier.skill.intrigue": "Alertness",
-        "career.soldier.languages": ["Vaslorian", "Hyrallic"],
+        "career.soldier.languages": [
+          "Vaslorian",
+          "Hyrallic"
+        ],
         "career.soldier.perk": "Teamwork",
         "career.soldier.inciting-incident": "Sole Survivor",
         "class.choice": "Fury",
         "class.fury.characteristic-array": "2, −1, −1",
-        "class.fury.array-assignment": { "Reason": 2, "Intuition": -1, "Presence": -1 },
-        "class.fury.skills": ["Climb", "Search"],
+        "class.fury.array-assignment": {
+          "Reason": 2,
+          "Intuition": -1,
+          "Presence": -1
+        },
+        "class.fury.skills": [
+          "Climb",
+          "Search"
+        ],
         "class.fury.aspect": "Stormwight",
         "class.fury.signature-ability": "To the Death!",
         "class.fury.ability-3": "Your Entrails Are Your Extrails!",
@@ -187,7 +402,13 @@
         "details.name": "V47 Reference C"
       },
       "expected": {
-        "characteristics": { "M": 2, "A": 2, "R": 2, "I": -1, "P": -1 },
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": 2,
+          "I": -1,
+          "P": -1
+        },
         "staminaMaximum": 24,
         "recoveriesMaximum": 10,
         "recoveryValue": 8,
@@ -196,23 +417,85 @@
         "speed": 9,
         "stability": 0,
         "disengage": 2,
-        "meleeDamageBonus": [2, 2, 2],
-        "rangedDamageBonus": [0, 0, 0],
-        "potency": { "weak": 0, "average": 1, "strong": 2 },
+        "meleeDamageBonus": [
+          2,
+          2,
+          2
+        ],
+        "rangedDamageBonus": [
+          0,
+          0,
+          0
+        ],
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
         "savingThrowThreshold": 5,
         "renown": 1,
         "wealth": 1,
         "kit": "Corven",
-        "skills": ["Nature", "Track", "Climb", "Search", "Endurance", "Alertness", "Swim", "Blacksmithing", "Intimidate", "Persuade"],
-        "traits": ["Silver Tongue", "Beast Legs", "Impressive Horns"],
-        "abilities": ["To the Death!", "Your Entrails Are Your Extrails!", "To the Uttermost End", "Furious Change", "Aspect of the Wild", "Wing Buffet", "Melee Weapon Free Strike", "Ranged Weapon Free Strike"],
+        "skills": [
+          "Nature",
+          "Track",
+          "Climb",
+          "Search",
+          "Endurance",
+          "Alertness",
+          "Swim",
+          "Blacksmithing",
+          "Intimidate",
+          "Persuade"
+        ],
+        "traits": [
+          "Silver Tongue",
+          "Beast Legs",
+          "Impressive Horns"
+        ],
+        "abilities": [
+          "To the Death!",
+          "Your Entrails Are Your Extrails!",
+          "To the Uttermost End",
+          "Furious Change",
+          "Aspect of the Wild",
+          "Wing Buffet",
+          "Melee Weapon Free Strike",
+          "Ranged Weapon Free Strike"
+        ],
         "kitSignatureAbility": "Wing Buffet",
-        "primordialDamageType": "fire"
+        "primordialDamageType": "fire",
+        "kitMeleeDamageBonusApplies": [
+          "To the Death!",
+          "Your Entrails Are Your Extrails!",
+          "To the Uttermost End",
+          "Melee Weapon Free Strike"
+        ],
+        "kitMeleeDamageBonusExcluded": {
+          "Wing Buffet": "kit signature; printed damage already includes the kit bonus",
+          "Ranged Weapon Free Strike": "Ranged, not Melee; improvised under stormwight equipment",
+          "Furious Change": "no damage",
+          "Aspect of the Wild": "no damage"
+        },
+        "features": [
+          "Primordial Aspect",
+          "Ferocity",
+          "Growing Ferocity",
+          "Aspect Features",
+          "Aspect Triggered Action",
+          "Mighty Leaps",
+          "Fury Abilities",
+          "Culture edge",
+          "Beast Shape",
+          "Relentless Hunter"
+        ]
       },
       "derivation": {
         "staminaMaximum": "21 + 3 Corven",
         "speed": "Beast Legs sets 6, Corven +3",
-        "disengage": "base 1 + Corven +1"
+        "disengage": "base 1 + Corven +1",
+        "kitDamageBonus": "A kit's melee damage bonus applies to abilities with BOTH the Melee and Weapon keywords. A kit signature ability's printed damage already includes its own kit's bonuses and must not receive them again. The ranged free strike never receives a melee damage bonus.",
+        "windedRounding": "Winded equals half the Stamina maximum; the rounding comes from the always-round-down rule."
       },
       "formConditional": {
         "note": "Not part of the build values.",
@@ -222,11 +505,16 @@
     },
     {
       "id": "D-devil-stormwight-raden",
-      "witnesses": ["kit:Raden"],
+      "witnesses": [
+        "kit:Raden"
+      ],
       "salient": {
         "ancestry.choice": "Devil",
         "ancestry.devil.silver-tongue-skill": "Persuade",
-        "ancestry.devil.purchased-traits": ["Beast Legs", "Impressive Horns"],
+        "ancestry.devil.purchased-traits": [
+          "Beast Legs",
+          "Impressive Horns"
+        ],
         "culture.language": "Anjali",
         "culture.environment": "Wilderness",
         "culture.environment.skill": "Swim",
@@ -237,13 +525,23 @@
         "career.choice": "Soldier",
         "career.soldier.skill.exploration": "Endurance",
         "career.soldier.skill.intrigue": "Alertness",
-        "career.soldier.languages": ["Vaslorian", "Hyrallic"],
+        "career.soldier.languages": [
+          "Vaslorian",
+          "Hyrallic"
+        ],
         "career.soldier.perk": "Teamwork",
         "career.soldier.inciting-incident": "Sole Survivor",
         "class.choice": "Fury",
         "class.fury.characteristic-array": "1, 0, 0",
-        "class.fury.array-assignment": { "Reason": 1, "Intuition": 0, "Presence": 0 },
-        "class.fury.skills": ["Climb", "Search"],
+        "class.fury.array-assignment": {
+          "Reason": 1,
+          "Intuition": 0,
+          "Presence": 0
+        },
+        "class.fury.skills": [
+          "Climb",
+          "Search"
+        ],
         "class.fury.aspect": "Stormwight",
         "class.fury.signature-ability": "Brutal Slam",
         "class.fury.ability-3": "Out of the Way!",
@@ -252,7 +550,13 @@
         "details.name": "V47 Reference D"
       },
       "expected": {
-        "characteristics": { "M": 2, "A": 2, "R": 1, "I": 0, "P": 0 },
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": 1,
+          "I": 0,
+          "P": 0
+        },
         "staminaMaximum": 24,
         "recoveriesMaximum": 10,
         "recoveryValue": 8,
@@ -261,32 +565,99 @@
         "speed": 9,
         "stability": 0,
         "disengage": 2,
-        "meleeDamageBonus": [2, 2, 2],
-        "rangedDamageBonus": [0, 0, 0],
-        "potency": { "weak": 0, "average": 1, "strong": 2 },
+        "meleeDamageBonus": [
+          2,
+          2,
+          2
+        ],
+        "rangedDamageBonus": [
+          0,
+          0,
+          0
+        ],
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
         "savingThrowThreshold": 5,
         "renown": 1,
         "wealth": 1,
         "kit": "Raden",
-        "skills": ["Nature", "Track", "Climb", "Search", "Endurance", "Alertness", "Swim", "Blacksmithing", "Intimidate", "Persuade"],
-        "traits": ["Silver Tongue", "Beast Legs", "Impressive Horns"],
-        "abilities": ["Brutal Slam", "Out of the Way!", "Thunder Roar", "Furious Change", "Aspect of the Wild", "Driving Pounce", "Melee Weapon Free Strike", "Ranged Weapon Free Strike"],
+        "skills": [
+          "Nature",
+          "Track",
+          "Climb",
+          "Search",
+          "Endurance",
+          "Alertness",
+          "Swim",
+          "Blacksmithing",
+          "Intimidate",
+          "Persuade"
+        ],
+        "traits": [
+          "Silver Tongue",
+          "Beast Legs",
+          "Impressive Horns"
+        ],
+        "abilities": [
+          "Brutal Slam",
+          "Out of the Way!",
+          "Thunder Roar",
+          "Furious Change",
+          "Aspect of the Wild",
+          "Driving Pounce",
+          "Melee Weapon Free Strike",
+          "Ranged Weapon Free Strike"
+        ],
         "kitSignatureAbility": "Driving Pounce",
-        "primordialDamageType": "corruption"
+        "primordialDamageType": "corruption",
+        "kitMeleeDamageBonusApplies": [
+          "Brutal Slam",
+          "Out of the Way!",
+          "Thunder Roar",
+          "Melee Weapon Free Strike"
+        ],
+        "kitMeleeDamageBonusExcluded": {
+          "Driving Pounce": "kit signature; printed damage already includes the kit bonus",
+          "Ranged Weapon Free Strike": "Ranged, not Melee; improvised under stormwight equipment",
+          "Furious Change": "no damage",
+          "Aspect of the Wild": "no damage"
+        },
+        "features": [
+          "Primordial Aspect",
+          "Ferocity",
+          "Growing Ferocity",
+          "Aspect Features",
+          "Aspect Triggered Action",
+          "Mighty Leaps",
+          "Fury Abilities",
+          "Culture edge",
+          "Beast Shape",
+          "Relentless Hunter"
+        ]
       },
       "derivation": {
         "staminaMaximum": "21 + 3 Raden",
         "speed": "Beast Legs sets 6, Raden +3",
-        "alwaysAvailable": "Raden Aspect Benefits include ignoring difficult terrain unconditionally"
+        "alwaysAvailable": "Raden Aspect Benefits include ignoring difficult terrain unconditionally",
+        "kitDamageBonus": "A kit's melee damage bonus applies to abilities with BOTH the Melee and Weapon keywords. A kit signature ability's printed damage already includes its own kit's bonuses and must not receive them again. The ranged free strike never receives a melee damage bonus.",
+        "windedRounding": "Winded equals half the Stamina maximum; the rounding comes from the always-round-down rule."
       }
     },
     {
       "id": "E-devil-stormwight-vuken",
-      "witnesses": ["kit:Vuken"],
+      "witnesses": [
+        "kit:Vuken"
+      ],
       "salient": {
         "ancestry.choice": "Devil",
         "ancestry.devil.silver-tongue-skill": "Persuade",
-        "ancestry.devil.purchased-traits": ["Beast Legs", "Impressive Horns"],
+        "ancestry.devil.purchased-traits": [
+          "Beast Legs",
+          "Impressive Horns"
+        ],
         "culture.language": "Anjali",
         "culture.environment": "Wilderness",
         "culture.environment.skill": "Swim",
@@ -297,13 +668,23 @@
         "career.choice": "Soldier",
         "career.soldier.skill.exploration": "Endurance",
         "career.soldier.skill.intrigue": "Alertness",
-        "career.soldier.languages": ["Vaslorian", "Hyrallic"],
+        "career.soldier.languages": [
+          "Vaslorian",
+          "Hyrallic"
+        ],
         "career.soldier.perk": "Teamwork",
         "career.soldier.inciting-incident": "Sole Survivor",
         "class.choice": "Fury",
         "class.fury.characteristic-array": "1, 0, 0",
-        "class.fury.array-assignment": { "Reason": 1, "Intuition": 0, "Presence": 0 },
-        "class.fury.skills": ["Climb", "Search"],
+        "class.fury.array-assignment": {
+          "Reason": 1,
+          "Intuition": 0,
+          "Presence": 0
+        },
+        "class.fury.skills": [
+          "Climb",
+          "Search"
+        ],
         "class.fury.aspect": "Stormwight",
         "class.fury.signature-ability": "Brutal Slam",
         "class.fury.ability-3": "Out of the Way!",
@@ -312,7 +693,13 @@
         "details.name": "V47 Reference E"
       },
       "expected": {
-        "characteristics": { "M": 2, "A": 2, "R": 1, "I": 0, "P": 0 },
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": 1,
+          "I": 0,
+          "P": 0
+        },
         "staminaMaximum": 30,
         "recoveriesMaximum": 10,
         "recoveryValue": 10,
@@ -321,22 +708,85 @@
         "speed": 8,
         "stability": 0,
         "disengage": 2,
-        "meleeDamageBonus": [2, 2, 2],
-        "rangedDamageBonus": [0, 0, 0],
-        "potency": { "weak": 0, "average": 1, "strong": 2 },
+        "meleeDamageBonus": [
+          2,
+          2,
+          2
+        ],
+        "rangedDamageBonus": [
+          0,
+          0,
+          0
+        ],
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
         "savingThrowThreshold": 5,
         "renown": 1,
         "wealth": 1,
         "kit": "Vuken",
-        "skills": ["Nature", "Track", "Climb", "Search", "Endurance", "Alertness", "Swim", "Blacksmithing", "Intimidate", "Persuade"],
-        "traits": ["Silver Tongue", "Beast Legs", "Impressive Horns"],
-        "abilities": ["Brutal Slam", "Out of the Way!", "Thunder Roar", "Furious Change", "Aspect of the Wild", "Unbalancing Attack", "Melee Weapon Free Strike", "Ranged Weapon Free Strike"],
+        "skills": [
+          "Nature",
+          "Track",
+          "Climb",
+          "Search",
+          "Endurance",
+          "Alertness",
+          "Swim",
+          "Blacksmithing",
+          "Intimidate",
+          "Persuade"
+        ],
+        "traits": [
+          "Silver Tongue",
+          "Beast Legs",
+          "Impressive Horns"
+        ],
+        "abilities": [
+          "Brutal Slam",
+          "Out of the Way!",
+          "Thunder Roar",
+          "Furious Change",
+          "Aspect of the Wild",
+          "Unbalancing Attack",
+          "Melee Weapon Free Strike",
+          "Ranged Weapon Free Strike"
+        ],
         "kitSignatureAbility": "Unbalancing Attack",
-        "primordialDamageType": "lightning"
+        "primordialDamageType": "lightning",
+        "kitMeleeDamageBonusApplies": [
+          "Brutal Slam",
+          "Out of the Way!",
+          "Thunder Roar",
+          "Melee Weapon Free Strike"
+        ],
+        "kitMeleeDamageBonusExcluded": {
+          "Unbalancing Attack": "kit signature; printed damage already includes the kit bonus",
+          "Ranged Weapon Free Strike": "Ranged, not Melee; improvised under stormwight equipment",
+          "Furious Change": "no damage",
+          "Aspect of the Wild": "no damage"
+        },
+        "features": [
+          "Primordial Aspect",
+          "Ferocity",
+          "Growing Ferocity",
+          "Aspect Features",
+          "Aspect Triggered Action",
+          "Mighty Leaps",
+          "Fury Abilities",
+          "Culture edge",
+          "Beast Shape",
+          "Relentless Hunter"
+        ]
       },
       "derivation": {
         "staminaMaximum": "21 + 9 Vuken",
-        "speed": "Beast Legs sets 6, plus the UNCONDITIONAL Vuken kit Speed Bonus +2. The separate wolf/hybrid-form +2 is form-conditional and is NOT in the build value."
+        "speed": "Beast Legs sets 6, plus the UNCONDITIONAL Vuken kit Speed Bonus +2. The separate wolf/hybrid-form +2 is form-conditional and is NOT in the build value.",
+        "kitDamageBonus": "A kit's melee damage bonus applies to abilities with BOTH the Melee and Weapon keywords. A kit signature ability's printed damage already includes its own kit's bonuses and must not receive them again. The ranged free strike never receives a melee damage bonus.",
+        "alwaysAvailable": "Vuken Aspect Benefits: after using Knockback, may use Aid Attack as a free triggered action.",
+        "windedRounding": "Winded equals half the Stamina maximum; the rounding comes from the always-round-down rule."
       },
       "formConditional": {
         "note": "Not part of the build values.",
@@ -344,5 +794,6 @@
         "hybridForm": "wolf: size 1L, +2 speed, ignores difficult terrain; 4th-level temporary Stamina clause"
       }
     }
-  ]
+  ],
+  "correctionRound": "2026-09-19: independent audit corrected the kit-damage claims, added Build B's corruption immunity 3, completed the feature lists and recorded the Shadowmeld structured-effects trap."
 }

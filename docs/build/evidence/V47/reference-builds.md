@@ -84,9 +84,9 @@ Growing Ferocity rows; Hit and Run; Back!; Blood for Blood!; the Reaver-with-ord
 | staminaMaximum | **27** | 21 class + 6 Panther per echelon × echelon 1 |
 | recoveriesMaximum | 10 | class |
 | recoveryValue | 9 | ⌊27 ÷ 3⌋ |
-| windedValue | 13 | ⌊27 ÷ 2⌋ |
+| windedValue | 13 | half the Stamina maximum, rounded down under the always-round-down rule |
 | size | 1M | ancestry baseline |
-| speed | **7** | Beast Legs *sets* speed 6, then Panther +1 |
+| speed | **7** | Beast Legs *sets* speed 6, then the kit speed bonus is added to that. Order matters: applying the set last would wrongly yield 6 |
 | stability | 1 | 0 baseline + Panther +1 |
 | disengage | 1 | base shift 1; Panther has no disengage bonus |
 | melee damage bonus | +0/+0/+4 | Panther |
@@ -97,7 +97,7 @@ Growing Ferocity rows; Hit and Run; Back!; Blood for Blood!; the Reaver-with-ord
 | skills (10) | Nature, Hide, Climb, Search, Endurance, Alertness, Swim, Blacksmithing, Intimidate, Persuade | class grant, aspect grant, then the seven choices |
 | languages (4) | Caelian, Anjali, Vaslorian, Hyrallic | |
 | traits | Silver Tongue, Beast Legs, Impressive Horns | |
-| features | Culture edge, Ferocity, Growing Ferocity, Mighty Leaps, Kit, Primordial Cunning | plus the Reaver Growing Ferocity rows as readable threshold content |
+| features | Primordial Aspect, Ferocity, Growing Ferocity, Aspect Features, Aspect Triggered Action, Mighty Leaps, Fury Abilities, Culture edge, Kit, Primordial Cunning | the advancement table lists seven class features at 1st level; the Reaver Growing Ferocity rows are readable threshold content |
 | abilities | Hit and Run, Back!, Blood for Blood!, Unearthly Reflexes, Devastating Rush, Melee Weapon Free Strike, Ranged Weapon Free Strike | Devastating Rush is Panther's signature |
 
 ## Build B — Polder Stormwight, Boren
@@ -139,8 +139,9 @@ full 4 points avoids the ceiling-versus-quota ambiguity noted below.
 | renown / wealth | 1 / 1 | |
 | skills (9) | Nature, Track, Climb, Search, Endurance, Alertness, Swim, Blacksmithing, Intimidate | |
 | languages (4) | Caelian, Anjali, Vaslorian, Hyrallic | |
-| traits | Shadowmeld, Small!, Corruption Immunity, Fearless, Graceful Retreat | |
-| features | Culture edge, Ferocity, Growing Ferocity, Mighty Leaps, Beast Shape, Relentless Hunter | plus Boren's always-available Aspect Benefits, Primordial Storm (cold), Equipment and Growing Ferocity rows, and the form-conditional Animal/Hybrid Form entries |
+| traits | Shadowmeld, Small!, Corruption Immunity, Fearless, Graceful Retreat | Shadowmeld's readable text must include its final clause: if the surface is destroyed the ability ends and the hero takes 1d6 damage that cannot be reduced in any way. That sentence exists only in the markdown body, not in the structured effects field of the frontmatter or the unified JSON, so any renderer rebuilding text from structured effects drops it silently |
+| features | Primordial Aspect, Ferocity, Growing Ferocity, Aspect Features, Aspect Triggered Action, Mighty Leaps, Fury Abilities, Culture edge, Beast Shape, Relentless Hunter | plus Boren's always-available Aspect Benefits, Primordial Storm (cold), Equipment and Growing Ferocity rows, and the form-conditional Animal/Hybrid Form entries |
+| damageImmunities | **corruption 3** | Corruption Immunity grants corruption immunity equal to level + 2; a numeric immunity, not blanket |
 | abilities | Impaled!, Tide of Death, Make Peace With Your God!, Furious Change, Aspect of the Wild, Bear Claws, Shadowmeld, Melee Weapon Free Strike, Ranged Weapon Free Strike | |
 
 ## Build C — Devil Stormwight, Corven
@@ -206,7 +207,9 @@ Identical to Build D except the kit.
 | `kit.choice` | `Vuken` |
 
 Expected: Stamina **30**, recovery 10, winded 15, size 1M, speed **8**, stability 0, disengage **2**,
-melee +2/+2/+2, save 5, storm lightning, kit signature Unbalancing Attack.
+melee +2/+2/+2, save 5, storm lightning, kit signature Unbalancing Attack. Vuken's always-available
+Aspect Benefits let the hero use Aid Attack as a free triggered action after a Knockback; wolf and
+hybrid form additionally ignore difficult terrain, which is form-conditional.
 
 **Vuken's two +2 speed figures.** The build speed is 8: Beast Legs sets 6, plus the unconditional kit
 Speed Bonus of +2, which applies in true, animal and hybrid form. The further "+2 bonus to speed" in
@@ -236,16 +239,46 @@ Compare our expectations against **both** sides. Forge agreeing with us is not e
 matches the source; the source-derived column above is the arbiter, and a Forge difference needs a
 recorded source-backed explanation before the unit can pass.
 
+## Correction round, 2026-09-19
+
+An independent audit of these expectations found five substantive errors in the first version. They
+are listed here rather than quietly fixed:
+
+1. The "standard 2/5/7 signature progression" was an inference presented as source fact, and the pin
+   contradicts it. See hazard 1 below for the corrected statement.
+2. "Both free strikes receive the kit's melee damage bonus" was wrong: the ranged free strike never
+   does, and under stormwight equipment it is improvised and takes no kit bonus at all.
+3. "The Fury's own chosen abilities receive it" was over-broad: Make Peace With Your God! has no
+   keywords and deals no damage, so Build B's own 5-ferocity pick takes nothing.
+4. Build B omitted its corruption immunity of 3, which Corruption Immunity grants as level + 2.
+5. Shadowmeld's final clause was missing entirely, along with the extraction trap behind it.
+
+Two presentational gaps were also corrected: the feature lists omitted Primordial Aspect, Aspect
+Features, Aspect Triggered Action and Fury Abilities, and the winded derivation cited a division
+without citing the always-round-down rule that supplies the rounding.
+
 ## Hazards recorded during derivation
 
-1. **Kit signature abilities already include their kit's bonuses.** Chapter 6 states it directly:
-   "Each kit grants a signature ability, whose distance and damage already includes the kit's
-   bonuses." So Bear Claws, Wing Buffet, Driving Pounce and Unbalancing Attack must **not** have the
-   kit's melee damage bonus added again, while the Fury's own chosen abilities and both free strikes
-   **do** receive it. The arithmetic corroborates: the standard 2/5/7 signature progression plus
-   Boren's +0/+0/+4 gives Bear Claws' printed 2/5/11, and plus Raden's +2/+2/+2 gives Driving
-   Pounce's printed 4/7/9. Our existing fixtures record per-ability damage tiers, so this is a live
-   risk in the expected values, not a theoretical one.
+1. **Kit damage bonuses apply narrowly, and three separate mistakes are easy here.** The kits
+   chapter states the policy directly: "Each kit grants a signature ability, whose distance and
+   damage already includes the kit's bonuses", and separately that a melee damage bonus "is added to
+   the rolled damage of any damage-dealing ability with both the Melee and Weapon keywords". So:
+   - A kit signature ability — Devastating Rush, Bear Claws, Wing Buffet, Driving Pounce,
+     Unbalancing Attack — must **not** receive its own kit's bonus again.
+   - The **ranged** free strike never receives a melee damage bonus; it has Ranged, not Melee, and
+     none of these five kits has a ranged damage bonus. For Builds B–E the stormwight equipment is
+     unarmed strikes only, so a ranged free strike is improvised and takes no kit bonus at all.
+   - Not every chosen Fury ability qualifies. Make Peace With Your God! has no keywords, is a free
+     maneuver and deals no damage, so Build B's own 5-ferocity pick takes nothing. Each build's
+     `builds.json` entry now lists exactly which abilities receive the bonus and which do not, with
+     the reason.
+
+   **Correction, 2026-09-19:** an earlier draft claimed a "standard 2/5/7 signature progression" and
+   offered arithmetic as corroboration. That progression is not attested in the source and the pin
+   contradicts it — backing each kit's bonus out of its printed signature gives 3/6/9 for Panther and
+   1/4/6 for Corven, and the Fury's own signatures split between 2/5/7 and 3/6/9. The policy above is
+   stated outright in the source and needs no arithmetic; presenting the inference as source fact was
+   the error.
 2. **Beast Legs sets speed, it does not add.** "You have speed 6." For a Devil whose baseline is 5
    the two readings coincide numerically, so these builds cannot distinguish them; keep the set
    semantics anyway, because it matters once another speed-setting effect exists.
