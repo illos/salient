@@ -1,0 +1,632 @@
+{
+  "schemaVersion": "v53-reference-1",
+  "status": "UNEXECUTED preparation data. No capture, evaluator run or test has used this file.",
+  "compendiumRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+  "forgeVendorRevision": "5a846aadb623a9855a023e9403bb887a956c341f",
+  "forgePackageVersion": "14.197.0",
+  "derivation": "docs/research/human-level-one-preparation.md; expectations derived from the pinned Compendium before any evaluator run.",
+  "independence": "Every non-Human choice was supported before V47, V49 and this unit: Fury, Berserker, Mountain, the three enabled abilities, career Soldier and the named culture aspects. No unmerged peer artifact is required.",
+  "theOnlyDerivedNumber": "Staying Power increases Recoveries by 2 over the class value of 10. No other Human option changes any derived value, which is why H0 exists.",
+  "builds": [
+    {
+      "id": "H1-quickbuild",
+      "role": "counterpart",
+      "witnesses": [
+        "trait:Perseverance",
+        "trait:Staying Power",
+        "derived:recoveries 10 to 12"
+      ],
+      "pointsSpent": 3,
+      "salient": {
+        "ancestry.choice": "Human",
+        "ancestry.human.purchased-traits": [
+          "Perseverance",
+          "Staying Power"
+        ],
+        "culture.language": "Anjali",
+        "culture.environment": "Wilderness",
+        "culture.environment.skill": "Swim",
+        "culture.organization": "Communal",
+        "culture.organization.skill": "Blacksmithing",
+        "culture.upbringing": "Martial",
+        "culture.upbringing.skill": "Intimidate",
+        "career.choice": "Soldier",
+        "career.soldier.skill.exploration": "Endurance",
+        "career.soldier.skill.intrigue": "Alertness",
+        "career.soldier.languages": [
+          "Vaslorian",
+          "Hyrallic"
+        ],
+        "career.soldier.perk": "Teamwork",
+        "career.soldier.inciting-incident": "Sole Survivor",
+        "class.choice": "Fury",
+        "class.fury.characteristic-array": "1, 0, 0",
+        "class.fury.array-assignment": {
+          "Reason": 1,
+          "Intuition": 0,
+          "Presence": 0
+        },
+        "class.fury.skills": [
+          "Climb",
+          "Search"
+        ],
+        "class.fury.aspect": "Berserker",
+        "class.fury.signature-ability": "Brutal Slam",
+        "class.fury.ability-3": "Out of the Way!",
+        "class.fury.ability-5": "Thunder Roar",
+        "kit.choice": "Mountain",
+        "details.name": "V53 Reference H1"
+      },
+      "expected": {
+        "level": 1,
+        "ancestry": "Human",
+        "class": "Fury",
+        "subclass": "Berserker",
+        "career": "Soldier",
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": 1,
+          "I": 0,
+          "P": 0
+        },
+        "staminaMaximum": 30,
+        "recoveriesMaximum": 12,
+        "recoveryValue": 10,
+        "windedValue": 15,
+        "size": "1M",
+        "speed": 5,
+        "stability": 2,
+        "disengage": 1,
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "potencyCharacteristic": "M",
+        "savingThrowThreshold": 6,
+        "renown": 1,
+        "wealth": 1,
+        "heroicResource": {
+          "name": "ferocity",
+          "startingValue": 0
+        },
+        "kit": {
+          "name": "Mountain",
+          "staminaBonusPerEchelon": 9,
+          "echelon": 1,
+          "staminaBonusApplied": 9,
+          "speedBonus": 0,
+          "stabilityBonus": 2,
+          "meleeDamageBonus": [
+            0,
+            0,
+            4
+          ],
+          "rangedDamageBonus": [
+            0,
+            0,
+            0
+          ],
+          "meleeDistanceBonus": 0,
+          "rangedDistanceBonus": 0,
+          "disengageBonus": 0
+        },
+        "skills": [
+          "Swim",
+          "Blacksmithing",
+          "Intimidate",
+          "Endurance",
+          "Alertness",
+          "Nature",
+          "Climb",
+          "Search",
+          "Lift"
+        ],
+        "languages": [
+          "Caelian",
+          "Anjali",
+          "Vaslorian",
+          "Hyrallic"
+        ],
+        "perks": [
+          "Teamwork"
+        ],
+        "features": [
+          "Culture edge",
+          "Ferocity",
+          "Growing Ferocity",
+          "Mighty Leaps",
+          "Kit",
+          "Primordial Strength"
+        ],
+        "abilities": [
+          "Brutal Slam",
+          "Out of the Way!",
+          "Thunder Roar",
+          "Lines of Force",
+          "Pain for Pain",
+          "Melee Weapon Free Strike",
+          "Ranged Weapon Free Strike"
+        ],
+        "damageImmunities": [],
+        "conditionImmunities": [],
+        "traits": [
+          "Detect the Supernatural",
+          "Perseverance",
+          "Staying Power"
+        ]
+      },
+      "notes": {
+        "why": "The printed Quick Build, and the only build in the unit whose derived values differ from H0.",
+        "recoveryValueUnchanged": "10; Staying Power does not touch Stamina maximum, from which recovery value derives.",
+        "perseveranceMustNotAppearAsANumber": "The Endurance edge is a roll-time entitlement; the slowed value of 3 is conditional and flat, and must not combine with a kit speed bonus."
+      }
+    },
+    {
+      "id": "H2-zero-derived-change",
+      "role": "counterpart",
+      "witnesses": [
+        "trait:Can't Take Hold",
+        "trait:Determination",
+        "behaviour:no unconditional change"
+      ],
+      "pointsSpent": 3,
+      "salient": {
+        "ancestry.choice": "Human",
+        "ancestry.human.purchased-traits": [
+          "Can't Take Hold",
+          "Determination"
+        ],
+        "culture.language": "Anjali",
+        "culture.environment": "Wilderness",
+        "culture.environment.skill": "Swim",
+        "culture.organization": "Communal",
+        "culture.organization.skill": "Blacksmithing",
+        "culture.upbringing": "Martial",
+        "culture.upbringing.skill": "Intimidate",
+        "career.choice": "Soldier",
+        "career.soldier.skill.exploration": "Endurance",
+        "career.soldier.skill.intrigue": "Alertness",
+        "career.soldier.languages": [
+          "Vaslorian",
+          "Hyrallic"
+        ],
+        "career.soldier.perk": "Teamwork",
+        "career.soldier.inciting-incident": "Sole Survivor",
+        "class.choice": "Fury",
+        "class.fury.characteristic-array": "1, 0, 0",
+        "class.fury.array-assignment": {
+          "Reason": 1,
+          "Intuition": 0,
+          "Presence": 0
+        },
+        "class.fury.skills": [
+          "Climb",
+          "Search"
+        ],
+        "class.fury.aspect": "Berserker",
+        "class.fury.signature-ability": "Brutal Slam",
+        "class.fury.ability-3": "Out of the Way!",
+        "class.fury.ability-5": "Thunder Roar",
+        "kit.choice": "Mountain",
+        "details.name": "V53 Reference H2"
+      },
+      "expected": {
+        "level": 1,
+        "ancestry": "Human",
+        "class": "Fury",
+        "subclass": "Berserker",
+        "career": "Soldier",
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": 1,
+          "I": 0,
+          "P": 0
+        },
+        "staminaMaximum": 30,
+        "recoveriesMaximum": 10,
+        "recoveryValue": 10,
+        "windedValue": 15,
+        "size": "1M",
+        "speed": 5,
+        "stability": 2,
+        "disengage": 1,
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "potencyCharacteristic": "M",
+        "savingThrowThreshold": 6,
+        "renown": 1,
+        "wealth": 1,
+        "heroicResource": {
+          "name": "ferocity",
+          "startingValue": 0
+        },
+        "kit": {
+          "name": "Mountain",
+          "staminaBonusPerEchelon": 9,
+          "echelon": 1,
+          "staminaBonusApplied": 9,
+          "speedBonus": 0,
+          "stabilityBonus": 2,
+          "meleeDamageBonus": [
+            0,
+            0,
+            4
+          ],
+          "rangedDamageBonus": [
+            0,
+            0,
+            0
+          ],
+          "meleeDistanceBonus": 0,
+          "rangedDistanceBonus": 0,
+          "disengageBonus": 0
+        },
+        "skills": [
+          "Swim",
+          "Blacksmithing",
+          "Intimidate",
+          "Endurance",
+          "Alertness",
+          "Nature",
+          "Climb",
+          "Search",
+          "Lift"
+        ],
+        "languages": [
+          "Caelian",
+          "Anjali",
+          "Vaslorian",
+          "Hyrallic"
+        ],
+        "perks": [
+          "Teamwork"
+        ],
+        "features": [
+          "Culture edge",
+          "Ferocity",
+          "Growing Ferocity",
+          "Mighty Leaps",
+          "Kit",
+          "Primordial Strength"
+        ],
+        "abilities": [
+          "Brutal Slam",
+          "Out of the Way!",
+          "Thunder Roar",
+          "Lines of Force",
+          "Pain for Pain",
+          "Melee Weapon Free Strike",
+          "Ranged Weapon Free Strike"
+        ],
+        "damageImmunities": [],
+        "conditionImmunities": [],
+        "traits": [
+          "Detect the Supernatural",
+          "Can't Take Hold",
+          "Determination"
+        ]
+      },
+      "notes": {
+        "why": "The load-bearing build. Its derived values must be IDENTICAL to H0, and both entitlements must be present and readable. Identical numbers alone would also be produced by the traits not being granted at all, so both halves are required.",
+        "cantTakeHoldIsNotStability": "Its reduction applies only to magic or psionic forced movement and is optional; stability applies to all forced movement. Human has no stability trait."
+      }
+    },
+    {
+      "id": "H3-resist",
+      "role": "counterpart",
+      "witnesses": [
+        "trait:Resist the Unnatural"
+      ],
+      "pointsSpent": 3,
+      "salient": {
+        "ancestry.choice": "Human",
+        "ancestry.human.purchased-traits": [
+          "Can't Take Hold",
+          "Perseverance",
+          "Resist the Unnatural"
+        ],
+        "culture.language": "Anjali",
+        "culture.environment": "Wilderness",
+        "culture.environment.skill": "Swim",
+        "culture.organization": "Communal",
+        "culture.organization.skill": "Blacksmithing",
+        "culture.upbringing": "Martial",
+        "culture.upbringing.skill": "Intimidate",
+        "career.choice": "Soldier",
+        "career.soldier.skill.exploration": "Endurance",
+        "career.soldier.skill.intrigue": "Alertness",
+        "career.soldier.languages": [
+          "Vaslorian",
+          "Hyrallic"
+        ],
+        "career.soldier.perk": "Teamwork",
+        "career.soldier.inciting-incident": "Sole Survivor",
+        "class.choice": "Fury",
+        "class.fury.characteristic-array": "1, 0, 0",
+        "class.fury.array-assignment": {
+          "Reason": 1,
+          "Intuition": 0,
+          "Presence": 0
+        },
+        "class.fury.skills": [
+          "Climb",
+          "Search"
+        ],
+        "class.fury.aspect": "Berserker",
+        "class.fury.signature-ability": "Brutal Slam",
+        "class.fury.ability-3": "Out of the Way!",
+        "class.fury.ability-5": "Thunder Roar",
+        "kit.choice": "Mountain",
+        "details.name": "V53 Reference H3"
+      },
+      "expected": {
+        "level": 1,
+        "ancestry": "Human",
+        "class": "Fury",
+        "subclass": "Berserker",
+        "career": "Soldier",
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": 1,
+          "I": 0,
+          "P": 0
+        },
+        "staminaMaximum": 30,
+        "recoveriesMaximum": 10,
+        "recoveryValue": 10,
+        "windedValue": 15,
+        "size": "1M",
+        "speed": 5,
+        "stability": 2,
+        "disengage": 1,
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "potencyCharacteristic": "M",
+        "savingThrowThreshold": 6,
+        "renown": 1,
+        "wealth": 1,
+        "heroicResource": {
+          "name": "ferocity",
+          "startingValue": 0
+        },
+        "kit": {
+          "name": "Mountain",
+          "staminaBonusPerEchelon": 9,
+          "echelon": 1,
+          "staminaBonusApplied": 9,
+          "speedBonus": 0,
+          "stabilityBonus": 2,
+          "meleeDamageBonus": [
+            0,
+            0,
+            4
+          ],
+          "rangedDamageBonus": [
+            0,
+            0,
+            0
+          ],
+          "meleeDistanceBonus": 0,
+          "rangedDistanceBonus": 0,
+          "disengageBonus": 0
+        },
+        "skills": [
+          "Swim",
+          "Blacksmithing",
+          "Intimidate",
+          "Endurance",
+          "Alertness",
+          "Nature",
+          "Climb",
+          "Search",
+          "Lift"
+        ],
+        "languages": [
+          "Caelian",
+          "Anjali",
+          "Vaslorian",
+          "Hyrallic"
+        ],
+        "perks": [
+          "Teamwork"
+        ],
+        "features": [
+          "Culture edge",
+          "Ferocity",
+          "Growing Ferocity",
+          "Mighty Leaps",
+          "Kit",
+          "Primordial Strength"
+        ],
+        "abilities": [
+          "Brutal Slam",
+          "Out of the Way!",
+          "Thunder Roar",
+          "Lines of Force",
+          "Pain for Pain",
+          "Melee Weapon Free Strike",
+          "Ranged Weapon Free Strike"
+        ],
+        "damageImmunities": [],
+        "conditionImmunities": [],
+        "traits": [
+          "Detect the Supernatural",
+          "Can't Take Hold",
+          "Perseverance",
+          "Resist the Unnatural"
+        ]
+      },
+      "notes": {
+        "why": "Covers the fifth trait; the other two repeat deliberately so the ledger closes in three builds.",
+        "resistIsNotPassive": "It consumes the one triggered action per round and is not standing damage reduction."
+      }
+    },
+    {
+      "id": "H0-no-traits-control",
+      "role": "control, not a Forge counterpart",
+      "witnesses": [],
+      "pointsSpent": 0,
+      "salient": {
+        "ancestry.choice": "Human",
+        "ancestry.human.purchased-traits": [],
+        "culture.language": "Anjali",
+        "culture.environment": "Wilderness",
+        "culture.environment.skill": "Swim",
+        "culture.organization": "Communal",
+        "culture.organization.skill": "Blacksmithing",
+        "culture.upbringing": "Martial",
+        "culture.upbringing.skill": "Intimidate",
+        "career.choice": "Soldier",
+        "career.soldier.skill.exploration": "Endurance",
+        "career.soldier.skill.intrigue": "Alertness",
+        "career.soldier.languages": [
+          "Vaslorian",
+          "Hyrallic"
+        ],
+        "career.soldier.perk": "Teamwork",
+        "career.soldier.inciting-incident": "Sole Survivor",
+        "class.choice": "Fury",
+        "class.fury.characteristic-array": "1, 0, 0",
+        "class.fury.array-assignment": {
+          "Reason": 1,
+          "Intuition": 0,
+          "Presence": 0
+        },
+        "class.fury.skills": [
+          "Climb",
+          "Search"
+        ],
+        "class.fury.aspect": "Berserker",
+        "class.fury.signature-ability": "Brutal Slam",
+        "class.fury.ability-3": "Out of the Way!",
+        "class.fury.ability-5": "Thunder Roar",
+        "kit.choice": "Mountain",
+        "details.name": "V53 Reference H0"
+      },
+      "expected": {
+        "level": 1,
+        "ancestry": "Human",
+        "class": "Fury",
+        "subclass": "Berserker",
+        "career": "Soldier",
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": 1,
+          "I": 0,
+          "P": 0
+        },
+        "staminaMaximum": 30,
+        "recoveriesMaximum": 10,
+        "recoveryValue": 10,
+        "windedValue": 15,
+        "size": "1M",
+        "speed": 5,
+        "stability": 2,
+        "disengage": 1,
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "potencyCharacteristic": "M",
+        "savingThrowThreshold": 6,
+        "renown": 1,
+        "wealth": 1,
+        "heroicResource": {
+          "name": "ferocity",
+          "startingValue": 0
+        },
+        "kit": {
+          "name": "Mountain",
+          "staminaBonusPerEchelon": 9,
+          "echelon": 1,
+          "staminaBonusApplied": 9,
+          "speedBonus": 0,
+          "stabilityBonus": 2,
+          "meleeDamageBonus": [
+            0,
+            0,
+            4
+          ],
+          "rangedDamageBonus": [
+            0,
+            0,
+            0
+          ],
+          "meleeDistanceBonus": 0,
+          "rangedDistanceBonus": 0,
+          "disengageBonus": 0
+        },
+        "skills": [
+          "Swim",
+          "Blacksmithing",
+          "Intimidate",
+          "Endurance",
+          "Alertness",
+          "Nature",
+          "Climb",
+          "Search",
+          "Lift"
+        ],
+        "languages": [
+          "Caelian",
+          "Anjali",
+          "Vaslorian",
+          "Hyrallic"
+        ],
+        "perks": [
+          "Teamwork"
+        ],
+        "features": [
+          "Culture edge",
+          "Ferocity",
+          "Growing Ferocity",
+          "Mighty Leaps",
+          "Kit",
+          "Primordial Strength"
+        ],
+        "abilities": [
+          "Brutal Slam",
+          "Out of the Way!",
+          "Thunder Roar",
+          "Lines of Force",
+          "Pain for Pain",
+          "Melee Weapon Free Strike",
+          "Ranged Weapon Free Strike"
+        ],
+        "damageImmunities": [],
+        "conditionImmunities": [],
+        "traits": [
+          "Detect the Supernatural"
+        ]
+      },
+      "notes": {
+        "why": "Control for H2. Identical derived values expected, plus one unspent-points warning that does not block completion under Q-CHAR-10.",
+        "diagnostics": "budget-unspent warning; build still completes."
+      }
+    }
+  ],
+  "removalExpectations": {
+    "pruningSemantics": "A stored selection whose decision becomes unavailable raises an invalid unavailable-decision diagnostic rather than silently disappearing. Both that path and the pruned path must be tested.",
+    "dropStayingPower": "Recoveries return to the class value of 10.",
+    "dropAnyConditionalTrait": "Its readable entitlement disappears; no derived value moves, because it contributed none.",
+    "changeAncestryToDevilOrPolder": "Detect the Supernatural, every purchased Human trait and any Recoveries increase are removed, and the new ancestry's contributions apply. Class, career, culture, array and authored details are preserved."
+  },
+  "loaderTraps": {
+    "signatureTraitHasNoCostField": "Detect the Supernatural carries no cost key. A loader iterating traits with a cost drops it silently.",
+    "ancestryKeyMissingFromUnifiedTwins": "ancestry: human exists in the markdown frontmatter but not in the unified YAML or JSON, at top level or under metadata.",
+    "costIsAnUnparsedString": "The unified twins carry cost as \"1 Point\" or \"2 Points\"; point arithmetic must parse it or read the md-dse variant.",
+    "contentSnapshotLacksHuman": "shared/content/compendium/ancestry.json holds only Devil and Polder. The snapshot is generated and must regenerate byte-for-byte, so enabling Human requires a manifest selection change coordinated with the integration owner."
+  }
+}
