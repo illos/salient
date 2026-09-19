@@ -210,6 +210,12 @@ async function main(): Promise<void> {
 
   const runStartedAtUtc = new Date().toISOString();
   const checks = await preflight(client);
+  // Sampling starts AFTER preflight, and the aggregation window below is [samplingStartedAtUtc,
+  // runFinishedAtUtc]. That is what keeps preflight executions out of the sample distribution:
+  // the void first run mixed them in, and also mixed in earlier runs by pulling log history.
+  // Settle before opening the window so a preflight call in flight cannot land inside it.
+  await new Promise(resolve => setTimeout(resolve, 1500));
+  const samplingStartedAtUtc = new Date().toISOString();
 
   // Arms are INTERLEAVED, not run in blocks, so drift in host conditions across the window cannot
   // be mistaken for a difference between arms.
@@ -272,7 +278,16 @@ async function main(): Promise<void> {
     status: 'measured client latency only; server execution time comes from the retained logs artifact',
     condition,
     runStartedAtUtc,
+    samplingStartedAtUtc,
     runFinishedAtUtc: new Date().toISOString(),
+    aggregationWindow: {
+      fromUtc: samplingStartedAtUtc,
+      note:
+        'Bound every server-side aggregation to [samplingStartedAtUtc, runFinishedAtUtc]. Do NOT ' +
+        'use `convex logs --history`: it returns executions from before this window. Capture with ' +
+        'a live tail started before samplingStartedAtUtc.',
+    },
+    preflightCallCount: 5,
     convexUrlHash: createHash('sha256').update(url).digest('hex').slice(0, 12),
     pairs,
     intervalMs,
