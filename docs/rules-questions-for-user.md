@@ -854,9 +854,12 @@ No user approval is implied by this classification.
   rejected because it would make the ward's value unbounded in practice and has no support in the
   pinned text. If the user prefers A, the wizard behavior is unchanged and only the later respite
   workflow differs.
-- **Blocked until answered:** nothing blocking. V48 implements the level-one build choice, which is
-  identical under A and B. Only respite reselection, which is already out of V48's scope, depends
-  on this answer. No default is silently applied to anything the user can see at level one.
+- **Blocked until answered:** nothing blocking under A or B, where the level-one build choice is
+  identical and only respite reselection — already out of V48's scope — differs. **Answer C would
+  invalidate V48's design**: if the type is chosen afresh each time the immunity applies, there is
+  no build-time damage-type decision at all, and the nested decision plus its seven witness builds
+  would be wrong. V48 proceeds on the A-or-B assumption and records it as an assumption. No default
+  is silently applied to anything the user can see at level one.
 - **Answer:** (user fills in)
 
 ### Q-CHAR-17: Do two sourced distance increases stack on the same ability?

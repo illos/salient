@@ -113,7 +113,7 @@ Sense, Subtle Relocation); the other three grant three each.
 | Ward | Builds | Expected |
 | --- | --- | --- |
 | Delightful Consequences | 1 | No permanent value. 1 surge on first damage each round is manual |
-| Excellent Protection | 2–8 | One `damageImmunities` entry of the chosen type valued **2** (Reason) |
+| Excellent Protection | 2–8 | One `damageImmunities` entry of the chosen type valued **2** (Reason). **Exception, build 4:** its corruption ward merges with Polder's corruption 3 into a single entry valued 3 |
 | Nature's Affection | 9 | No permanent value. Readable free triggered ability; slide up to 2 |
 | Surprising Reactivity | 10 | No permanent value. Readable free triggered ability; push up to 4 (twice Reason) |
 
@@ -172,13 +172,14 @@ it, and the grounds offered were weaker than the label suggested:
 - Worse, it does not lexically reach one of the two effects. Enchantment of Distance says "+2
   **bonus** to the distance"; Acolyte of the Mystery says the distance "**increases by 2 squares**"
   and links no bonus rule at all.
-- The earlier draft also asserted flatly that "the pin contains no non-stacking rule for distance".
-  That overstates. [Distance](../../vendor/steel-compendium/en/unified/md/rule/combat/distance.md)
-  contains one: "if you have the Cloak and Dagger kit, which has a weapon damage bonus to melee
-  abilities and a weapon damage bonus to ranged abilities, **only one bonus at a time applies** to an
-  ability with both the Melee and Ranged keywords." It does **not** govern build 4 — the two
-  Elementalist increases are not mode-exclusive alternatives — but a distance-scoped non-stacking
-  sentence does exist, so absence cannot be asserted.
+- The nearest thing to a non-stacking rule sits on the
+  [Distance](../../vendor/steel-compendium/en/unified/md/rule/combat/distance.md) page but is not
+  about distance: "the Cloak and Dagger kit, which has a **weapon damage bonus** to melee abilities
+  and a **weapon damage bonus** to ranged abilities, only one bonus at a time applies to an ability
+  with both the Melee and Ranged keywords." That governs weapon damage bonuses for mode-exclusive
+  alternatives; it merely lives on the Distance page. A second draft of this document called it a
+  "distance-scoped non-stacking sentence", which was inaccurate and is corrected here. The honest
+  statement is the original one: the pin states no stacking rule for distance either way.
 
 Recorded as [Q-CHAR-17](../rules-questions-for-user.md) and **blocking nothing**. The build records
 two independent distance contributions, each with its own provenance, which is what gap A's
@@ -238,8 +239,11 @@ Forge feature shapes the helper must newly recognize, beyond what V45 supports:
   `createCharacteristic({ characteristics: [Reason], modifierType: Immunity })`. The selected
   sub-option is the ward's damage type; the unselected six are catalog, not grants.
 - `createMultiple` for Enchantment of Battle, Enchantment of Celerity and Enchantment of
-  Permanence, whose child features carry the actual bonuses: `Stamina` and a `createProficiency`
-  for Battle, `Speed` and `Disengage` for Celerity, `Stamina` and `Stability` for Permanence.
+  Permanence, whose child features carry the actual bonuses: **three** children for Battle —
+  `createBonus(Stamina, valuePerEchelon: 3)`, `createAbilityDamage([Weapon], 1)` and
+  `createProficiency` — then `Speed` and `Disengage` for Celerity, and `Stamina` and `Stability`
+  for Permanence. Battle's `createAbilityDamage` child is what expected-difference 2 below requires
+  the helper to compare, so it must not be omitted.
 - `createAbilityDistance` for Enchantment of Distance and Void's acolyte — a shape with no Salient
   counterpart until the new distance contribution exists.
 - `createSurgeGain` for Ward of Delightful Consequences.
@@ -286,6 +290,13 @@ local application version and source commit; enabled sourcebook IDs; byte count 
 the local target explicitly and label it as the pinned local application, never as the public
 website. Selections are made through the editor; fabricating an export or injecting selections into
 storage is not equivalent evidence.
+
+**Build 1's capture mode differs and that must be recorded, not glossed.** Bethell's retained export
+was captured from the public website at version 14.198.0, while this plan's other nine builds use
+the pinned local application at 14.197.0. Either recapture build 1 on the pinned application so all
+ten share one mode, or record the mixed mode and the version difference explicitly, as
+[the procedure](../build/character-verification.md#2-build-and-capture-the-reference) requires for
+website-versus-pin drift. Recapturing is the cleaner option and is the recommendation.
 
 A manifest in the same shape as
 [the V45 manifest](../../tests/fixtures/v45-reference/manifest.json) records all ten, so the

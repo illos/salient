@@ -387,15 +387,23 @@ and concatenating provenance, and already recomputes `recoveryValue` and `winded
 **final** Stamina when Stamina changed (`character.ts:1012-1040`). It runs after `deriveProfiles`,
 so it correctly lands after `profile.ts:79-93` sets the no-kit `staminaMaximum`.
 
-There is also an exact precedent for the echelon scaling both enchantments need. The
+There is also a precedent for the echelon scaling **Permanence** needs. The
 `'Elemental Inside'` complication (`shared/content/supporting-complications.ts:281-288`) uses
 `value: '3 * echelon'` with the quote "You gain a +3 bonus to Stamina at 1st level, then again at
 4th, 7th, and 10th levels" — the same sentence shape as Enchantment of Battle. `amountOf` resolves
 it as `3 * Math.ceil(level / 3)` (`character.ts:929`), which matches the source echelon boundaries
 1-3 / 4-6 / 7-9 / 10
 ([Echelons of Play](../../vendor/steel-compendium/en/unified/md/rule/general/echelon.md)).
-Enchantment of Permanence is therefore `'6 * echelon'` and Enchantment of Battle `'3 * echelon'`,
-both reducing to the printed base at level one.
+Enchantment of Permanence would therefore want `'6 * echelon'`, reducing to +6 at level one.
+
+**Enchantment of Battle is NOT part of this**, and an earlier draft wrongly listed it here.
+[Finding D](#d-enchantment-of-battle-the-conditioneffect-contract-extended-by-two-union-members)
+removes Battle from the vitals path entirely: its +3 is conditional and belongs in
+`conditionalEffects`, whose `amount` is a `DerivedValue<number>` — a resolved number with
+provenance, which cannot carry an echelon string at all. Following the earlier draft would have put
+Battle's +3 into the `numericFields` loop and applied it **unconditionally**, which is the exact
+hazard finding D exists to prevent. Battle's echelon scaling consequently has no representation
+yet; that is harmless at level one, where the value is 3, and levels 2+ are out of scope.
 
 What is actually missing is narrow:
 
@@ -434,7 +442,9 @@ keyword matching alone and never consults a condition, so a conditional entry pl
 applied **unconditionally** in automatic damage — the same hazard as [gap A](#a-abilitymodifierfield-has-zero-runtime-readers--do-not-widen-it).
 Nothing conditional may enter that array.
 
-V46 already solved this shape. Commit `dd514ff` adds `DerivedBaseline.conditionalEffects` with a
+V46 already solved this shape — **on its branch only**. Commit `dd514ff` exists on `slice/V46` and
+is not an ancestor of `main` or of this branch, so `conditionalEffects` does not exist in this
+checkout today. It adds `DerivedBaseline.conditionalEffects` with a
 `ConditionalEffect` interface carrying `feature`, a closed `effect` union, a verbatim `condition`,
 `sourcePath`, optional `damageType` and `amount: DerivedValue<number>` — documented as "Deliberately
 separate from `abilityModifiers`, which damage resolution applies automatically, and from
@@ -564,8 +574,11 @@ Independent checks each build must carry, derived from the Compendium before our
 - Build 1: unchanged Bethell values; Stamina 18, no speed/stability change.
 - Builds 2, 7: speed **5 → 6** and Disengage **2 → 3** from Celerity. Polder's baseline is speed 5,
   and its disengage of 2 already includes Graceful Retreat's +1 over the no-kit base of 1.
-- Builds 3, 8: Enchantment of Battle Stamina **unchanged at 18** with the light-armor condition
-  recorded and unsatisfied; expect and explain the Forge +3 difference.
+- Builds 3, 8: Enchantment of Battle's +3 is recorded as a `ConditionalEffect` with its condition
+  and **unknown** activation; baseline Stamina stays 18 because the condition is unresolved, **not
+  because it is false**. The comparison states a condition assumption and compares both builders
+  under it — assuming light armor worn, our 21 against Forge's 21. Reporting 18 against 21 and
+  calling it explained is forbidden; see the reference plan.
 - Builds 5, 10: Stamina 18 → 24, stability +1, recovery value and winded value recomputed from 24.
 - Builds 4, 9: +2 distance on ranged magic abilities; build 4 stacks Enchantment of Distance with
   Void's Acolyte of the Mystery — confirm from the source whether the two independent +2 bonuses
@@ -594,9 +607,11 @@ Independent checks each build must carry, derived from the Compendium before our
 The eight gates in
 [V44](V44-character-option-delivery.md#acceptance-checks) apply unchanged. Unit-specific additions:
 
-1. Every one of the 4 specializations, 5 enchantments, 4 wards, 7 ward damage types, 8 signature
-   abilities and 8 heroic abilities — the 29 options V48 newly delivers — appears in at least one
-   completed same-build Forge counterpart, per the ledger above. The 22 class skills are **not** in
+1. All **36** selectable options across these six decisions — 4 specializations, 5 enchantments,
+   4 wards, 7 ward damage types, 8 signature abilities and 8 heroic abilities, **of which 29 are
+   newly delivered** — appear in at least one completed same-build Forge counterpart, per the ledger
+   above. (The gate is deliberately stricter than V44's "every newly supported selectable option",
+   because the seven already-enabled ones are cheap to cover in the same builds.) The 22 class skills are **not** in
    this gate: they are carry-forward coverage already served since V25/V37. Three of them
    (Tailoring, Monsters, Timescape) are fixed by the constant culture and career selections, and
    **Magic can never appear in a legal completed counterpart at all** — it is a fixed class grant,
@@ -614,8 +629,14 @@ The eight gates in
    change, including provenance ordering.
 6. Existing Fury level-one and Berserker level-two behavior, and Fury 1→2 advancement, are
    unchanged. No Elementalist level-two support is enabled by this unit.
-7. Enchantment of Battle's Forge Stamina difference is recorded with its source explanation and
-   passes independent rules review, or the unit is not declared fully verified.
+7. Enchantment of Battle is compared under a **stated condition assumption**, so that the same
+   equipment state is compared on both sides — our 21 against Forge's 21 assuming light armor worn.
+   If that projection is not available, exact counterpart coverage for Enchantment of Battle is
+   marked **incomplete** with the precise limitation recorded. Reporting 18 against 21 and calling
+   the difference explained is **not** an acceptable outcome: it compares two different equipment
+   states and excuses the gap with our own missing fact, which
+   [the per-option delivery gate](character-verification.md#per-option-delivery-gate) forbids.
+   An earlier draft of this check certified exactly that comparison.
 
 ## Out of scope
 
