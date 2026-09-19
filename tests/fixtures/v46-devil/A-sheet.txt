@@ -1,0 +1,154 @@
+HERO
+Edit
+Copy
+Export
+Delete
+Close
+GRUG V46 A
+Resources
+Vitals
+Inventory
+Projects
+Titles
+Notes
+Take a Respite
+Customize
+Settings
+GRUG V46 A - LEVEL 1 DEVIL FURY
+M
+2
+A
+2
+R
+0
+I
+1
+P
+0
+Size
+1M
+Spd
+6
+Stab
+2
+Dis
+1
+Save
+5
+Hero
+Features
+Mains
+Triggers
+Free Strikes
+2
+MIGHT
+2
+AGILITY
+0
+REASON
+1
+INTUITION
+0
+PRESENCE
+Ferocity
+0
+Surges
+0
+Victories
+0
+XP
+0
+Renown
+1
+Wealth
+1
+RESOURCES
+Size
+1
+M
+Speed
+6
+Stability
+2
+Disengage
+1
+Save
+5
+STATISTICS
+Stamina
+30
+Recoveries
+10
+Recovery Value
+10
+VITALS
+ANCESTRY
+AncestryDevil
+CULTURE
+Culturewilderness mercenary commune
+EnvironmentWilderness
+OrganizationCommunal
+UpbringingMartial
+CAREER
+CareerSoldier
+Inciting IncidentSole Survivor
+CLASS
+ClassFury
+Level1
+Primordial AspectBerserker
+KIT
+KitMountain
+ArmorHeavy Armor
+WeaponsHeavy Weapon
+Sta 30
+Rec 10
+FEROCITY
+0
+Start of your turn
++1D3 PER ROUND
+You take damage
++1 PER ROUND
+You become winded or are dying
++1D3 PER ENCOUNTER
+TRIGGERED ACTIONS
+Lines of ForceThe target would be force moved.
+DistanceMelee 1
+TargetSelf or one creature
+LANGUAGES
+Anjali
+Caelian
+Khelt
+Vaslorian
+SKILLS
+Alertness
+Intrigue
+Blacksmithing
+Crafting
+Climb
+Exploration
+Endurance
+Exploration
+Intimidate
+Interpersonal
+Jump
+Exploration
+Lift
+Exploration
+Nature
+Lore
+Persuade
+Interpersonal
+Swim
+Exploration
+ROLL MODIFIERS
+All tests
+When discovering an NPC’s motivations and pitfalls during a negotiation
+Silver Tongue
+Heroes
+Library
+Session
+Cookies
+Reference
+Settings
+About
+Patreon

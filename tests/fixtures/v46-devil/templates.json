@@ -1,0 +1,303 @@
+{
+  "schemaVersion": "v46.1",
+  "compendiumRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+  "forgeRevision": "5a846aadb623a9855a023e9403bb887a956c341f",
+  "sourceRoot": "vendor/steel-compendium",
+  "reference": {
+    "name": "V46 Devil level-one option witnesses",
+    "derivation": "Every expected value below is derived from the pinned Compendium sentences recorded in docs/build/evidence/V46/expectations.md, before the evaluator was run. Templates A-C hold the independently audited Grug Berserker Fury baseline constant (tests/fixtures/v25-fury.json) and vary only the purchased traits; template D is the audited Bethell Fire Elementalist (tests/fixtures/v25-bethell.json) with its ancestry changed from Polder to Devil.",
+    "forgeCounterparts": "Captured from the pinned Forge Steel application served on CT114; see counterparts.md in docs/build/evidence/V46/."
+  },
+  "traitCosts": {
+    "Barbed Tail": 1,
+    "Beast Legs": 1,
+    "Glowing Eyes": 1,
+    "Hellsight": 1,
+    "Impressive Horns": 2,
+    "Prehensile Tail": 2,
+    "Wings": 2
+  },
+  "budget": 3,
+  "interpersonalSkills": [
+    "Brag",
+    "Empathize",
+    "Flirt",
+    "Gamble",
+    "Handle Animals",
+    "Interrogate",
+    "Intimidate",
+    "Lead",
+    "Lie",
+    "Music",
+    "Perform",
+    "Persuade",
+    "Read Person"
+  ],
+  "templates": {
+    "A": {
+      "base": "v25-fury",
+      "silverTongue": "Persuade",
+      "traits": ["Beast Legs", "Impressive Horns"],
+      "expected": {
+        "size": "1M",
+        "speed": 6,
+        "stability": 2,
+        "savingThrowThreshold": 5,
+        "movementModes": [],
+        "conditionalEffects": [],
+        "ancestryAbilities": [],
+        "ancestrySkill": "Persuade"
+      },
+      "note": "Identical to the existing V25 Fury reference; this template must not change it. Both Soldier language slots are completed (Vaslorian retained, Khelt for the slot the audited Grug base leaves deferred), because a counterpart must be a completed character.",
+      "overrides": {
+        "career.soldier.languages": ["Khelt", "Vaslorian"]
+      }
+    },
+    "B": {
+      "base": "v25-fury",
+      "silverTongue": "Brag",
+      "traits": ["Barbed Tail", "Prehensile Tail"],
+      "expected": {
+        "size": "1M",
+        "speed": 5,
+        "stability": 2,
+        "savingThrowThreshold": 6,
+        "movementModes": [],
+        "conditionalEffects": [
+          {
+            "feature": "Barbed Tail",
+            "effect": "extra-strike-damage",
+            "amount": 2
+          }
+        ],
+        "ancestryAbilities": [],
+        "ancestrySkill": "Brag"
+      },
+      "note": "Speed returns to the ancestry base 5 and the saving-throw threshold to the ordinary 6. Grug's highest characteristic score is 2 (Might 2, Agility 2). Both Soldier language slots are completed (Vaslorian retained, Khelt for the slot the audited Grug base leaves deferred), because a counterpart must be a completed character.",
+      "overrides": {
+        "career.soldier.languages": ["Khelt", "Vaslorian"]
+      }
+    },
+    "C": {
+      "base": "v25-fury",
+      "silverTongue": "Flirt",
+      "traits": ["Glowing Eyes", "Wings"],
+      "expected": {
+        "size": "1M",
+        "speed": 5,
+        "stability": 2,
+        "savingThrowThreshold": 6,
+        "movementModes": ["Fly"],
+        "conditionalEffects": [
+          {
+            "feature": "Wings",
+            "effect": "rounds-aloft",
+            "amount": 2
+          },
+          {
+            "feature": "Wings",
+            "effect": "damage-weakness",
+            "amount": 5
+          }
+        ],
+        "ancestryAbilities": ["Glowing Eyes"],
+        "ancestrySkill": "Flirt"
+      },
+      "note": "Might 2 gives 2 rounds aloft. The weakness is conditional and must not appear in damageWeaknesses. Both Soldier language slots are completed (Vaslorian retained, Khelt for the slot the audited Grug base leaves deferred), because a counterpart must be a completed character.",
+      "overrides": {
+        "career.soldier.languages": ["Khelt", "Vaslorian"]
+      }
+    },
+    "D": {
+      "base": "v25-bethell",
+      "silverTongue": "Intimidate",
+      "traits": ["Hellsight", "Wings"],
+      "expected": {
+        "size": "1M",
+        "speed": 5,
+        "stability": 0,
+        "savingThrowThreshold": 6,
+        "disengage": 1,
+        "movementModes": ["Fly"],
+        "conditionalEffects": [
+          {
+            "feature": "Wings",
+            "effect": "rounds-aloft",
+            "amount": 1
+          },
+          {
+            "feature": "Wings",
+            "effect": "damage-weakness",
+            "amount": 5
+          }
+        ],
+        "ancestryAbilities": [],
+        "ancestrySkill": "Intimidate",
+        "removedPolderTraits": [
+          "Shadowmeld",
+          "Small!",
+          "Corruption Immunity",
+          "Graceful Retreat",
+          "Fearless"
+        ],
+        "retainedDetails": {
+          "culture.name": "Polder"
+        }
+      },
+      "note": "Might -1 exercises the minimum-one-round clause. Size changes from the Polder 1S to the ordinary 1M, and the Polder disengage contribution is gone.",
+      "overrides": {}
+    }
+  },
+  "witnessLedger": [
+    {
+      "option": "Barbed Tail",
+      "kind": "purchased-trait",
+      "template": "B"
+    },
+    {
+      "option": "Beast Legs",
+      "kind": "purchased-trait",
+      "template": "A"
+    },
+    {
+      "option": "Glowing Eyes",
+      "kind": "purchased-trait",
+      "template": "C"
+    },
+    {
+      "option": "Hellsight",
+      "kind": "purchased-trait",
+      "template": "D"
+    },
+    {
+      "option": "Impressive Horns",
+      "kind": "purchased-trait",
+      "template": "A"
+    },
+    {
+      "option": "Prehensile Tail",
+      "kind": "purchased-trait",
+      "template": "B"
+    },
+    {
+      "option": "Wings",
+      "kind": "purchased-trait",
+      "template": "C"
+    },
+    {
+      "option": "Persuade",
+      "kind": "silver-tongue-skill",
+      "template": "A"
+    },
+    {
+      "option": "Empathize",
+      "kind": "silver-tongue-skill",
+      "template": "A"
+    },
+    {
+      "option": "Gamble",
+      "kind": "silver-tongue-skill",
+      "template": "A"
+    },
+    {
+      "option": "Handle Animals",
+      "kind": "silver-tongue-skill",
+      "template": "A"
+    },
+    {
+      "option": "Interrogate",
+      "kind": "silver-tongue-skill",
+      "template": "A"
+    },
+    {
+      "option": "Lead",
+      "kind": "silver-tongue-skill",
+      "template": "A"
+    },
+    {
+      "option": "Lie",
+      "kind": "silver-tongue-skill",
+      "template": "A"
+    },
+    {
+      "option": "Music",
+      "kind": "silver-tongue-skill",
+      "template": "A"
+    },
+    {
+      "option": "Perform",
+      "kind": "silver-tongue-skill",
+      "template": "A"
+    },
+    {
+      "option": "Read Person",
+      "kind": "silver-tongue-skill",
+      "template": "A"
+    },
+    {
+      "option": "Brag",
+      "kind": "silver-tongue-skill",
+      "template": "B"
+    },
+    {
+      "option": "Flirt",
+      "kind": "silver-tongue-skill",
+      "template": "C"
+    },
+    {
+      "option": "Intimidate",
+      "kind": "silver-tongue-skill",
+      "template": "D"
+    }
+  ],
+  "duplicateCases": [
+    {
+      "template": "A",
+      "choice": "Intimidate",
+      "expected": "duplicate-skill",
+      "reason": "Grug already receives Intimidate from the Martial upbringing."
+    },
+    {
+      "template": "D",
+      "choice": "Empathize",
+      "expected": "duplicate-skill",
+      "reason": "Bethell already uses Empathize as the duplicate fixed-Magic replacement."
+    }
+  ],
+  "budgetCases": [
+    {
+      "traits": ["Impressive Horns", "Wings"],
+      "cost": 4,
+      "expected": "budget-exceeded"
+    },
+    {
+      "traits": ["Barbed Tail", "Glowing Eyes", "Hellsight"],
+      "cost": 3,
+      "expected": "complete"
+    },
+    {
+      "traits": ["Beast Legs"],
+      "cost": 1,
+      "expected": "budget-unspent"
+    },
+    {
+      "traits": ["Prehensile Tail", "Wings"],
+      "cost": 4,
+      "expected": "budget-exceeded"
+    }
+  ],
+  "setNotAdd": {
+    "kit": "Panther",
+    "kitSpeedBonus": 1,
+    "withBeastLegs": 7,
+    "withoutBeastLegs": 6,
+    "reason": "\"You have speed 6\" replaces the ancestry speed 5; the kit bonus then adds to 6. The Mountain kit's speed bonus is 0, so the existing reference cannot distinguish set from add."
+  },
+  "forgeDifferences": [
+    {
+      "subject": "Mage\u2019s Apprentice and Elementalist free skill slots",
+      "difference": "Forge gives the career and the class one free \"Skill\" choice each, from any list. The V45 Bethell capture holds Empathize in the career slot and Magic in the class slot; the V46 template D capture holds them the other way round. The slots are identical free choices, so the placement is arbitrary and the effective skill set is the same.",
+      "checkedBy": "The test asserts the two slots together hold exactly Magic plus the recorded magic-replacement, instead of pinning either skill to a particular slot."
+    }
+  ]
+}

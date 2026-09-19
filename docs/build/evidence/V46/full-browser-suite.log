@@ -1,0 +1,162 @@
+ Container salient-characters-dev-2389e144b9dd-job-93e164f7 Creating 
+ Container salient-characters-dev-2389e144b9dd-job-93e164f7 Created 
+
+Running 53 tests using 1 worker
+
+[1/53] tests/browser/campaign-sharing.spec.ts:20:1 › visible share codes support joining and rotate with links without losing requests or members
+[2/53] tests/browser/closeout.spec.ts:21:1 › closeout awards once, is shared with observers, and paused session closure offers Void
+[3/53] tests/browser/combat.spec.ts:31:1 › Director starts combat; a player takes and ends a turn; the round advances
+[4/53] tests/browser/foes-library.spec.ts:4:1 › foe browsing, composed filters, URL persistence, sorting and empty recovery
+[5/53] tests/browser/foes-library.spec.ts:48:1 › light and dark, mobile, enlarged text and keyboard search
+[6/53] tests/browser/foes-library.spec.ts:96:1 › full catalog bands, pagination, sourcebooks, Malice and related rules
+[7/53] tests/browser/foes.spec.ts:3:1 › public foes search, independent cards, navigation, dismissal and themes
+[8/53] tests/browser/foes.spec.ts:71:1 › second-echelon references preserve independent features and correct Malice navigation
+[9/53] tests/browser/hosting.spec.ts:3:1 › direct SPA routes and reloads load their assets without browser errors
+[10/53] tests/browser/journey.spec.ts:16:1 › accounts, invitation approval, session lifecycle, private draft persistence and reconnect
+[11/53] tests/browser/reference-cache.spec.ts:3:1 › Workers serves immutable versioned content and revalidates current manifests
+[12/53] tests/browser/reference-performance.spec.ts:4:1 › public navigation keeps its document and fetches only requested reference content
+[13/53] tests/browser/reference-performance.spec.ts:64:1 › failed detail downloads retry without losing the list or navigation
+[14/53] tests/browser/reference-performance.spec.ts:79:1 › catalog failure preserves shared navigation and supports retry
+[15/53] tests/browser/reference-performance.spec.ts:96:1 › article failure is local and section links stay below the shared headers
+[16/53] tests/browser/reference-performance.spec.ts:116:1 › a cleared search cannot resurrect delayed results
+[17/53] tests/browser/reference-performance.spec.ts:145:1 › a failed search index retries
+[18/53] tests/browser/reference-performance.spec.ts:159:1 › large chapter opening stays usable while later sections are delayed and retryable
+[19/53] tests/browser/rule-popup.spec.ts:5:1 › rule cards preserve the wizard, navigate references, scroll and dismiss accessibly
+[20/53] tests/browser/rules.spec.ts:4:1 › public rules search, readable articles, original sources and browser history
+[21/53] tests/browser/rules.spec.ts:34:1 › chapter contents, cross-references, topic filters and mobile navigation
+[22/53] tests/browser/table-audit.spec.ts:40:1 › three table contexts, palette, console and live CLI share persisted operations
+  1) tests/browser/table-audit.spec.ts:40:1 › three table contexts, palette, console and live CLI share persisted operations 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('heading', { name: 'Campaigns', exact: true })
+    Expected: visible
+    Timeout: 15000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByRole('heading', { name: 'Campaigns', exact: true }) with timeout 15000ms
+      - waiting for getByRole('heading', { name: 'Campaigns', exact: true })
+
+
+      35 |   await page.getByLabel('Password', { exact: true }).fill(password);
+      36 |   await page.getByRole('button', { name: 'Create account', exact: true }).click();
+    > 37 |   await expect(page.getByRole('heading', { name: 'Campaigns', exact: true })).toBeVisible();
+         |                                                                               ^
+      38 | }
+      39 |
+      40 | test('three table contexts, palette, console and live CLI share persisted operations', async ({
+        at register (/app/tests/browser/table-audit.spec.ts:37:79)
+        at /app/tests/browser/table-audit.spec.ts:64:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../artifacts/browser/table-audit-three-table-co-9d727--share-persisted-operations/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../artifacts/browser/table-audit-three-table-co-9d727--share-persisted-operations/test-failed-2.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../artifacts/browser/table-audit-three-table-co-9d727--share-persisted-operations/test-failed-3.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../artifacts/browser/table-audit-three-table-co-9d727--share-persisted-operations/error-context.md
+
+    attachment #5: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../artifacts/browser/table-audit-three-table-co-9d727--share-persisted-operations/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../artifacts/browser/table-audit-three-table-co-9d727--share-persisted-operations/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[23/53] tests/browser/table-performance.spec.ts:6:1 › table opens without per-card detail reads, then drills in and preserves undo/redo
+[24/53] tests/browser/theme.spec.ts:27:1 › light, dark and system preference switch without reload and persist across reload
+[25/53] tests/browser/theme.spec.ts:68:1 › prefers-reduced-motion disables transitions
+[26/53] tests/browser/theme.spec.ts:83:1 › reference screenshots: login, campaign home and character list in light and dark
+[27/53] tests/browser/v21-campaign.spec.ts:23:1 › campaign home: header actions, player tiles, copy, join requests, foe chips, log filter
+  2) tests/browser/v21-campaign.spec.ts:23:1 › campaign home: header actions, player tiles, copy, join requests, foe chips, log filter 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('heading', { name: 'Campaigns', exact: true })
+    Expected: visible
+    Timeout: 15000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByRole('heading', { name: 'Campaigns', exact: true }) with timeout 15000ms
+      - waiting for getByRole('heading', { name: 'Campaigns', exact: true })
+
+
+       at v21-fixtures.ts:28
+
+      26 |   await page.getByLabel('Password', { exact: true }).fill(PASSWORD);
+      27 |   await page.getByRole('button', { name: 'Create account', exact: true }).click();
+    > 28 |   await expect(page.getByRole('heading', { name: 'Campaigns', exact: true })).toBeVisible();
+         |                                                                               ^
+      29 | }
+      30 |
+      31 | export interface TableFixture {
+        at register (/app/tests/browser/v21-fixtures.ts:28:79)
+        at /app/tests/browser/v21-campaign.spec.ts:85:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../artifacts/browser/v21-campaign-campaign-home-df85d-quests-foe-chips-log-filter/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../artifacts/browser/v21-campaign-campaign-home-df85d-quests-foe-chips-log-filter/test-failed-2.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../artifacts/browser/v21-campaign-campaign-home-df85d-quests-foe-chips-log-filter/test-failed-3.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../artifacts/browser/v21-campaign-campaign-home-df85d-quests-foe-chips-log-filter/error-context.md
+
+    attachment #5: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../artifacts/browser/v21-campaign-campaign-home-df85d-quests-foe-chips-log-filter/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../artifacts/browser/v21-campaign-campaign-home-df85d-quests-foe-chips-log-filter/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[28/53] tests/browser/v21-log.spec.ts:26:1 › log feed: dice chips, markers, ROLLS filter, history icon pair, command line
+[29/53] tests/browser/v21-log.spec.ts:193:1 › initiative bar: a segment per turn entry, the current one marked, Groups for the Director
+[30/53] tests/browser/v21-rosters.spec.ts:18:1 › director rosters: compact cards, drill-in, settings pop-up, audience boundary
+[31/53] tests/browser/v21-sheet.spec.ts:52:1 › standalone sheet: band, columns, Roll test, Catch Breath, Director edit, peer, compact
+[32/53] tests/browser/v21-shell.spec.ts:77:3 › session shell in FreePlay: no site nav, no page scroll, independent panes, pinned command line
+[33/53] tests/browser/v21-shell.spec.ts:77:3 › session shell in combat: no site nav, no page scroll, independent panes, pinned command line
+[34/53] tests/browser/v21-wizard.spec.ts:17:1 › wizard frame: header, rail, choice rows, persistence, independent scrolling
+[35/53] tests/browser/v25-elementalist.spec.ts:8:1 › corrected Forge Bethell: complete wizard, reload, review and sourced sheet
+[36/53] tests/browser/v32-progression.spec.ts:29:1 › Fury advancement preserves live state; source-complete sheet and reviewed history restoration
+[37/53] tests/browser/v33-design.spec.ts:9:1 › Core stat blocks, automatic glyph accessibility and plain-text fallback
+[38/53] tests/browser/v33-design.spec.ts:147:1 › a missing font leaves readable text rather than ASCII font codes
+[39/53] tests/browser/v34-core-content.spec.ts:6:1 › live Rules and Foes share Core typography, automatic semantics and accessible navigation
+[40/53] tests/browser/v34-core-content.spec.ts:80:1 › live content retains readable text when the glyph font cannot load
+[41/53] tests/browser/v34-core-content.spec.ts:90:1 › hero and Director sheets use full Core content while live stats and audience stay separate
+[42/53] tests/browser/v35-full-foes.spec.ts:9:1 › all core definitions render their complete feature lists through the public consumer
+[43/53] tests/browser/v37-supporting-choices.spec.ts:11:1 › supporting choices show complete sources, prune dependent targets and persist reviewed mechanics
+[44/53] tests/browser/v37-supporting-choices.spec.ts:175:1 › Strange Inheritance lets the Director save a private sourced item without exposing it to the owner
+[45/53] tests/browser/v38-library-navigation.spec.ts:5:1 › primary navigation exposes independent Rules and Foes libraries
+[46/53] tests/browser/v40-unsaved-wizard.spec.ts:8:1 › unsaved wizard creates nothing until first explicit save, then edits the same character
+[47/53] tests/browser/v42-primary-choice.spec.ts:8:1 › primary choices collapse, edit without loss, prune on replacement and reopen saved
+[48/53] tests/browser/v46-devil.spec.ts:13:1 › V46 Devil level one: every trait and skill offered, flight build saved and read back
+[49/53] tests/browser/wizard.spec.ts:23:1 › wizard, admission review and the three sheet audiences
+[50/53] tests/browser/password-recovery.spec.ts:18:1 › forgot-password response and missing/invalid reset links are clear
+[51/53] tests/browser/password-recovery.spec.ts:54:1 › real reset preserves account access, clears old session, and rejects token reuse
+[52/53] tests/browser/reference-streaming.spec.ts:7:3 › late chapter anchors stay visible as preceding content streams in
+[53/53] tests/browser/reference-streaming.spec.ts:7:3 › late chapter anchors respect reader scrolling as preceding content streams in
+  2 failed
+    tests/browser/table-audit.spec.ts:40:1 › three table contexts, palette, console and live CLI share persisted operations 
+    tests/browser/v21-campaign.spec.ts:23:1 › campaign home: header actions, player tiles, copy, join requests, foe chips, log filter 
+  3 skipped
+  48 passed (19.6m)
+
+
+[exited with code 1]

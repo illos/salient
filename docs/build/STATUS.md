@@ -335,3 +335,9 @@ records the handoff; it does not certify A09 or create an implementation commit.
 | Id | Slice | Status | Owner |
 | --- | --- | --- | --- |
 | V45 | [Character option foundation](V45-character-option-foundation.md) | Complete — merged/live `ebe66e2`; 691 tests, 5,584 exact comparisons, 49 applicable browser successes and two shared checks; both audits pass; initial timeout/retry limits retained; no new options enabled | Character integration lead and subagents |
+
+## V46 Devil level one — 2026-09-19
+
+| Id | Slice | Status | Owner |
+| --- | --- | --- | --- |
+| V46 | [Devil, level one](V46-devil-level-one.md) | In progress — `slice/V46` in `/srv/presidium/projects/salient/opus-characters` from `656d831`; pilot unit for the level-one batch, gated on the integration lead's review. All seven purchased traits and all thirteen Silver Tongue skills; no other ancestry, class or level enabled | Opus character wizard thread |

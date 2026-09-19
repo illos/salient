@@ -1,0 +1,265 @@
+{
+ "A-persuade": {
+  "characterId": "k1733z8f1xpmjh8f7mvdpxg5518ept5q",
+  "revision": 2,
+  "status": "complete",
+  "size": "1M",
+  "speed": 6,
+  "stability": 2,
+  "savingThrowThreshold": 5,
+  "movementModes": [],
+  "conditionalEffects": [],
+  "traits": [
+   "Silver Tongue",
+   "Beast Legs",
+   "Impressive Horns"
+  ],
+  "ancestrySkill": "Persuade",
+  "ancestryAbilities": []
+ },
+ "A-empathize": {
+  "characterId": "k1703jmn8w38bbfvhzt9j4tefh8eqx39",
+  "revision": 2,
+  "status": "complete",
+  "size": "1M",
+  "speed": 6,
+  "stability": 2,
+  "savingThrowThreshold": 5,
+  "movementModes": [],
+  "conditionalEffects": [],
+  "traits": [
+   "Silver Tongue",
+   "Beast Legs",
+   "Impressive Horns"
+  ],
+  "ancestrySkill": "Empathize",
+  "ancestryAbilities": []
+ },
+ "A-gamble": {
+  "characterId": "k175tw2e69h2qzfxkxkxck2xmn8ep7vv",
+  "revision": 2,
+  "status": "complete",
+  "size": "1M",
+  "speed": 6,
+  "stability": 2,
+  "savingThrowThreshold": 5,
+  "movementModes": [],
+  "conditionalEffects": [],
+  "traits": [
+   "Silver Tongue",
+   "Beast Legs",
+   "Impressive Horns"
+  ],
+  "ancestrySkill": "Gamble",
+  "ancestryAbilities": []
+ },
+ "A-handle-animals": {
+  "characterId": "k171h7nh0pyjftw57zztgqn11h8eqmpx",
+  "revision": 2,
+  "status": "complete",
+  "size": "1M",
+  "speed": 6,
+  "stability": 2,
+  "savingThrowThreshold": 5,
+  "movementModes": [],
+  "conditionalEffects": [],
+  "traits": [
+   "Silver Tongue",
+   "Beast Legs",
+   "Impressive Horns"
+  ],
+  "ancestrySkill": "Handle Animals",
+  "ancestryAbilities": []
+ },
+ "A-interrogate": {
+  "characterId": "k171pc2s112wepgd7y9z7zsfhx8eqgg4",
+  "revision": 2,
+  "status": "complete",
+  "size": "1M",
+  "speed": 6,
+  "stability": 2,
+  "savingThrowThreshold": 5,
+  "movementModes": [],
+  "conditionalEffects": [],
+  "traits": [
+   "Silver Tongue",
+   "Beast Legs",
+   "Impressive Horns"
+  ],
+  "ancestrySkill": "Interrogate",
+  "ancestryAbilities": []
+ },
+ "A-lead": {
+  "characterId": "k179v67qse3c75b24366dc8p2s8eq1z6",
+  "revision": 2,
+  "status": "complete",
+  "size": "1M",
+  "speed": 6,
+  "stability": 2,
+  "savingThrowThreshold": 5,
+  "movementModes": [],
+  "conditionalEffects": [],
+  "traits": [
+   "Silver Tongue",
+   "Beast Legs",
+   "Impressive Horns"
+  ],
+  "ancestrySkill": "Lead",
+  "ancestryAbilities": []
+ },
+ "A-lie": {
+  "characterId": "k175afv7j61p4htrjw1rj2tzq98epy45",
+  "revision": 2,
+  "status": "complete",
+  "size": "1M",
+  "speed": 6,
+  "stability": 2,
+  "savingThrowThreshold": 5,
+  "movementModes": [],
+  "conditionalEffects": [],
+  "traits": [
+   "Silver Tongue",
+   "Beast Legs",
+   "Impressive Horns"
+  ],
+  "ancestrySkill": "Lie",
+  "ancestryAbilities": []
+ },
+ "A-music": {
+  "characterId": "k175gbnrfh5e4b37wcp5p8fxxn8ep3ta",
+  "revision": 2,
+  "status": "complete",
+  "size": "1M",
+  "speed": 6,
+  "stability": 2,
+  "savingThrowThreshold": 5,
+  "movementModes": [],
+  "conditionalEffects": [],
+  "traits": [
+   "Silver Tongue",
+   "Beast Legs",
+   "Impressive Horns"
+  ],
+  "ancestrySkill": "Music",
+  "ancestryAbilities": []
+ },
+ "A-perform": {
+  "characterId": "k170b93tkqrkrpfjvphmh36sxd8epwe4",
+  "revision": 2,
+  "status": "complete",
+  "size": "1M",
+  "speed": 6,
+  "stability": 2,
+  "savingThrowThreshold": 5,
+  "movementModes": [],
+  "conditionalEffects": [],
+  "traits": [
+   "Silver Tongue",
+   "Beast Legs",
+   "Impressive Horns"
+  ],
+  "ancestrySkill": "Perform",
+  "ancestryAbilities": []
+ },
+ "A-read-person": {
+  "characterId": "k17am1s8a1rgqj7jj0enbjke1d8eqhex",
+  "revision": 2,
+  "status": "complete",
+  "size": "1M",
+  "speed": 6,
+  "stability": 2,
+  "savingThrowThreshold": 5,
+  "movementModes": [],
+  "conditionalEffects": [],
+  "traits": [
+   "Silver Tongue",
+   "Beast Legs",
+   "Impressive Horns"
+  ],
+  "ancestrySkill": "Read Person",
+  "ancestryAbilities": []
+ },
+ "B-brag": {
+  "characterId": "k17117v9kny8p91r1rrh2d564x8eq2pr",
+  "revision": 2,
+  "status": "complete",
+  "size": "1M",
+  "speed": 5,
+  "stability": 2,
+  "savingThrowThreshold": 6,
+  "movementModes": [],
+  "conditionalEffects": [
+   [
+    "extra-strike-damage",
+    2
+   ]
+  ],
+  "traits": [
+   "Silver Tongue",
+   "Barbed Tail",
+   "Prehensile Tail"
+  ],
+  "ancestrySkill": "Brag",
+  "ancestryAbilities": []
+ },
+ "C-flirt": {
+  "characterId": "k1764pwshznkx1z84tv7jne5jd8eq80h",
+  "revision": 2,
+  "status": "complete",
+  "size": "1M",
+  "speed": 5,
+  "stability": 2,
+  "savingThrowThreshold": 6,
+  "movementModes": [
+   "Fly"
+  ],
+  "conditionalEffects": [
+   [
+    "rounds-aloft",
+    2
+   ],
+   [
+    "damage-weakness",
+    5
+   ]
+  ],
+  "traits": [
+   "Silver Tongue",
+   "Glowing Eyes",
+   "Wings"
+  ],
+  "ancestrySkill": "Flirt",
+  "ancestryAbilities": [
+   "Glowing Eyes"
+  ]
+ },
+ "D-intimidate": {
+  "characterId": "k1747g7wn5bhvpxqvsavy9d1198eq4cy",
+  "revision": 2,
+  "status": "complete",
+  "size": "1M",
+  "speed": 5,
+  "stability": 0,
+  "savingThrowThreshold": 6,
+  "movementModes": [
+   "Fly"
+  ],
+  "conditionalEffects": [
+   [
+    "rounds-aloft",
+    1
+   ],
+   [
+    "damage-weakness",
+    5
+   ]
+  ],
+  "traits": [
+   "Silver Tongue",
+   "Hellsight",
+   "Wings"
+  ],
+  "ancestrySkill": "Intimidate",
+  "ancestryAbilities": []
+ }
+}
