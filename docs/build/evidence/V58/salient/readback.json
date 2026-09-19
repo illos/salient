@@ -1,0 +1,1498 @@
+{
+  "activationPreview": null,
+  "authored": {
+    "appearance": "",
+    "biography": "",
+    "name": "Polder movement c1306971",
+    "notes": ""
+  },
+  "campaignId": null,
+  "campaignName": null,
+  "choiceOrigins": {},
+  "combatLocked": false,
+  "derivedBaseline": null,
+  "draftIsEffective": false,
+  "effectiveRevision": null,
+  "effectiveRevisionId": null,
+  "evaluation": {
+    "baseline": {
+      "abilities": [
+        {
+          "kind": "free-strike",
+          "kitBonusesIncluded": false,
+          "name": "Melee Weapon Free Strike",
+          "provenance": {
+            "decisionId": "free-strikes.grant",
+            "source": {
+              "heading": "7. Add Free Strikes",
+              "path": "en/unified/md/chapter/making-a-hero.md",
+              "quote": "Every hero has a melee weapon free strike and a ranged weapon free strike.",
+              "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+            }
+          },
+          "sourcePath": "en/unified/md/feature/ability/common/melee-weapon-free-strike.md"
+        },
+        {
+          "kind": "free-strike",
+          "kitBonusesIncluded": false,
+          "name": "Ranged Weapon Free Strike",
+          "provenance": {
+            "decisionId": "free-strikes.grant",
+            "source": {
+              "heading": "7. Add Free Strikes",
+              "path": "en/unified/md/chapter/making-a-hero.md",
+              "quote": "Every hero has a melee weapon free strike and a ranged weapon free strike.",
+              "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+            }
+          },
+          "sourcePath": "en/unified/md/feature/ability/common/ranged-weapon-free-strike.md"
+        },
+        {
+          "kind": "ancestry",
+          "kitBonusesIncluded": false,
+          "name": "Shadowmeld",
+          "provenance": {
+            "decisionId": "ancestry.polder.signature-trait",
+            "source": {
+              "path": "en/unified/md/feature/trait/polder/polder-traits.md",
+              "quote": "Polder heroes have access to the following traits.",
+              "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+            }
+          },
+          "sourcePath": "en/unified/md/feature/ability/polder/shadowmeld.md"
+        },
+        {
+          "kind": "perk",
+          "kitBonusesIncluded": false,
+          "name": "Arcane Trick",
+          "provenance": {
+            "decisionId": "career.mages-apprentice.perk",
+            "selection": "Arcane Trick",
+            "source": {
+              "path": "en/unified/md/career/mages-apprentice.md",
+              "quote": "Perk: One supernatural perk",
+              "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+            }
+          },
+          "sourcePath": "en/unified/md/perk/arcane-trick.md"
+        },
+        {
+          "kind": "class",
+          "kitBonusesIncluded": false,
+          "name": "Hurl Element",
+          "provenance": {
+            "decisionId": "class.elementalist.features",
+            "source": {
+              "path": "en/unified/md/class/elementalist.md",
+              "quote": "Elementalist Advancement Table",
+              "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+            }
+          },
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/hurl-element.md"
+        },
+        {
+          "kind": "class",
+          "kitBonusesIncluded": false,
+          "name": "Practical Magic",
+          "provenance": {
+            "decisionId": "class.elementalist.features",
+            "source": {
+              "path": "en/unified/md/class/elementalist.md",
+              "quote": "Elementalist Advancement Table",
+              "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+            }
+          },
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/practical-magic.md"
+        },
+        {
+          "kind": "class",
+          "kitBonusesIncluded": false,
+          "name": "Return to Formlessness",
+          "provenance": {
+            "decisionId": "class.elementalist.specialization",
+            "selection": "Fire",
+            "source": {
+              "path": "en/unified/md/feature/elementalist/level-1/elemental-specialization.md",
+              "quote": "You choose an elemental specialization from the following options: earth, fire, green, or void.",
+              "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+            }
+          },
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/return-to-formlessness.md"
+        },
+        {
+          "kind": "aspect-triggered",
+          "kitBonusesIncluded": false,
+          "name": "Explosive Assistance",
+          "provenance": {
+            "decisionId": "class.elementalist.specialization",
+            "selection": "Fire",
+            "source": {
+              "path": "en/unified/md/feature/elementalist/level-1/elemental-specialization.md",
+              "quote": "You choose an elemental specialization from the following options: earth, fire, green, or void.",
+              "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+            }
+          },
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/explosive-assistance.md"
+        },
+        {
+          "kind": "signature",
+          "kitBonusesIncluded": false,
+          "name": "Bifurcated Incineration",
+          "provenance": {
+            "decisionId": "class.elementalist.signature-abilities",
+            "selection": "Bifurcated Incineration",
+            "source": {
+              "path": "en/unified/md/feature/elementalist/level-1/elementalist-abilities.md",
+              "quote": "Choose two signature abilities from the following options.",
+              "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+            }
+          },
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/bifurcated-incineration.md"
+        },
+        {
+          "kind": "signature",
+          "kitBonusesIncluded": false,
+          "name": "Viscous Fire",
+          "provenance": {
+            "decisionId": "class.elementalist.signature-abilities",
+            "selection": "Viscous Fire",
+            "source": {
+              "path": "en/unified/md/feature/elementalist/level-1/elementalist-abilities.md",
+              "quote": "Choose two signature abilities from the following options.",
+              "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+            }
+          },
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/viscous-fire.md"
+        },
+        {
+          "cost": {
+            "amount": 3,
+            "resource": "essence"
+          },
+          "kind": "heroic",
+          "kitBonusesIncluded": false,
+          "name": "The Flesh, a Crucible",
+          "provenance": {
+            "decisionId": "class.elementalist.ability-3",
+            "selection": "The Flesh, a Crucible",
+            "source": {
+              "path": "en/unified/md/feature/elementalist/level-1/elementalist-abilities.md",
+              "quote": "Choose one heroic ability from the following options, each of which costs 3 essence to use.",
+              "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+            }
+          },
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/the-flesh-a-crucible.md"
+        },
+        {
+          "cost": {
+            "amount": 5,
+            "resource": "essence"
+          },
+          "kind": "heroic",
+          "kitBonusesIncluded": false,
+          "name": "Conflagration",
+          "provenance": {
+            "decisionId": "class.elementalist.ability-5",
+            "selection": "Conflagration",
+            "source": {
+              "path": "en/unified/md/feature/elementalist/level-1/elementalist-abilities.md",
+              "quote": "Choose one heroic ability from the following options, each of which costs 5 essence to use.",
+              "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+            }
+          },
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/conflagration.md"
+        }
+      ],
+      "abilityModifiers": [
+        {
+          "amount": 1,
+          "field": "rolled-damage",
+          "id": "elementalist.enchantment-of-destruction",
+          "keywords": [
+            "Magic"
+          ],
+          "label": "Enchantment of Destruction",
+          "provenance": {
+            "amount": 1,
+            "decisionId": "class.elementalist.enchantment",
+            "operation": "add",
+            "selection": "Enchantment of Destruction",
+            "source": {
+              "path": "en/unified/md/feature/elementalist/level-1/enchantment-of-destruction.md",
+              "quote": "You gain a +1 bonus to rolled damage with magic abilities.",
+              "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+            }
+          }
+        },
+        {
+          "alternative": {
+            "ability": "Hurl Element",
+            "damageType": "fire"
+          },
+          "amount": 1,
+          "field": "rolled-damage",
+          "id": "elementalist.acolyte-of-fire",
+          "keywords": [
+            "Fire",
+            "Magic"
+          ],
+          "label": "Fire: Acolyte of Fire",
+          "provenance": {
+            "amount": 1,
+            "decisionId": "class.elementalist.specialization",
+            "operation": "add",
+            "selection": "Fire",
+            "source": {
+              "path": "en/unified/md/feature/elementalist/level-1/fire-acolyte-of-fire.md",
+              "quote": "Your abilities that have the Fire and Magic keywords gain a +1 bonus to rolled damage. Your Hurl Element ability (see below) also gains this bonus when you use it to deal fire damage.",
+              "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+            }
+          }
+        }
+      ],
+      "ancestry": {
+        "provenance": [
+          {
+            "decisionId": "ancestry.choice",
+            "selection": "Polder",
+            "source": {
+              "heading": "2. Ancestry",
+              "path": "en/unified/md/chapter/making-a-hero.md",
+              "quote": "Choose your hero's humanoid ancestry from among the range of ancestries available in the game",
+              "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+            }
+          }
+        ],
+        "value": "Polder"
+      },
+      "career": {
+        "provenance": [
+          {
+            "decisionId": "career.choice",
+            "selection": "Mage's Apprentice",
+            "source": {
+              "heading": "4. Career",
+              "path": "en/unified/md/chapter/making-a-hero.md",
+              "quote": "Choose your hero's career, which describes what you did for a living before you became a hero.",
+              "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+            }
+          }
+        ],
+        "value": "Mage's Apprentice"
+      },
+      "characteristics": {
+        "A": {
+          "provenance": [
+            {
+              "decisionId": "class.elementalist.characteristic-array",
+              "selection": "2, 1, 1, −1",
+              "source": {
+                "path": "en/unified/md/class/elementalist.md",
+                "quote": "You start with a Reason of 2, and you can choose one of the following arrays for your other characteristic scores:",
+                "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+              }
+            },
+            {
+              "amount": 1,
+              "decisionId": "class.elementalist.array-assignment",
+              "operation": "set",
+              "selection": "Agility 1",
+              "source": {
+                "path": "en/unified/md/class/elementalist.md",
+                "quote": "You start with a Reason of 2, and you can choose one of the following arrays for your other characteristic scores:",
+                "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+              }
+            }
+          ],
+          "value": 1
+        },
+        "I": {
+          "provenance": [
+            {
+              "decisionId": "class.elementalist.characteristic-array",
+              "selection": "2, 1, 1, −1",
+              "source": {
+                "path": "en/unified/md/class/elementalist.md",
+                "quote": "You start with a Reason of 2, and you can choose one of the following arrays for your other characteristic scores:",
+                "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+              }
+            },
+            {
+              "amount": 2,
+              "decisionId": "class.elementalist.array-assignment",
+              "operation": "set",
+              "selection": "Intuition 2",
+              "source": {
+                "path": "en/unified/md/class/elementalist.md",
+                "quote": "You start with a Reason of 2, and you can choose one of the following arrays for your other characteristic scores:",
+                "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+              }
+            }
+          ],
+          "value": 2
+        },
+        "M": {
+          "provenance": [
+            {
+              "decisionId": "class.elementalist.characteristic-array",
+              "selection": "2, 1, 1, −1",
+              "source": {
+                "path": "en/unified/md/class/elementalist.md",
+                "quote": "You start with a Reason of 2, and you can choose one of the following arrays for your other characteristic scores:",
+                "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+              }
+            },
+            {
+              "amount": -1,
+              "decisionId": "class.elementalist.array-assignment",
+              "operation": "set",
+              "selection": "Might -1",
+              "source": {
+                "path": "en/unified/md/class/elementalist.md",
+                "quote": "You start with a Reason of 2, and you can choose one of the following arrays for your other characteristic scores:",
+                "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+              }
+            }
+          ],
+          "value": -1
+        },
+        "P": {
+          "provenance": [
+            {
+              "decisionId": "class.elementalist.characteristic-array",
+              "selection": "2, 1, 1, −1",
+              "source": {
+                "path": "en/unified/md/class/elementalist.md",
+                "quote": "You start with a Reason of 2, and you can choose one of the following arrays for your other characteristic scores:",
+                "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+              }
+            },
+            {
+              "amount": 1,
+              "decisionId": "class.elementalist.array-assignment",
+              "operation": "set",
+              "selection": "Presence 1",
+              "source": {
+                "path": "en/unified/md/class/elementalist.md",
+                "quote": "You start with a Reason of 2, and you can choose one of the following arrays for your other characteristic scores:",
+                "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+              }
+            }
+          ],
+          "value": 1
+        },
+        "R": {
+          "provenance": [
+            {
+              "amount": 2,
+              "decisionId": "class.elementalist.fixed-characteristics",
+              "operation": "set",
+              "source": {
+                "path": "en/unified/md/class/elementalist.md",
+                "quote": "You start with a Reason of 2, and you can choose one of the following arrays for your other characteristic scores:",
+                "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+              }
+            }
+          ],
+          "value": 2
+        }
+      },
+      "class": {
+        "provenance": [
+          {
+            "decisionId": "class.choice",
+            "selection": "Elementalist",
+            "source": {
+              "heading": "5. Class",
+              "path": "en/unified/md/chapter/making-a-hero.md",
+              "quote": "You can be a censor, conduit, elementalist, fury, null, shadow, tactician, talent, or troubadour.",
+              "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+            }
+          }
+        ],
+        "value": "Elementalist"
+      },
+      "disengage": {
+        "provenance": [
+          {
+            "amount": 1,
+            "decisionId": "free-strikes.grant",
+            "operation": "base",
+            "source": {
+              "path": "en/unified/md/feature/common/move-actions/disengage.md",
+              "quote": "When a creature takes the Disengage move action, they can shift 1 square.",
+              "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+            }
+          }
+        ],
+        "value": 1
+      },
+      "features": [
+        {
+          "kind": "culture-benefit",
+          "name": "Culture edge",
+          "provenance": {
+            "decisionId": "culture.edge",
+            "source": {
+              "heading": "Culture Benefits",
+              "path": "en/books/heroes/clean/Draw Steel Heroes.md",
+              "quote": "You gain an edge on tests made to recall lore about your culture, and on tests made to influence and interact with people of your culture.",
+              "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+            }
+          },
+          "sourcePath": "en/books/heroes/clean/Draw Steel Heroes.md"
+        },
+        {
+          "kind": "class-feature",
+          "name": "Elemental Specialization",
+          "provenance": {
+            "decisionId": "class.elementalist.features",
+            "source": {
+              "path": "en/unified/md/class/elementalist.md",
+              "quote": "Elementalist Advancement Table",
+              "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+            }
+          },
+          "sourcePath": "en/unified/md/feature/elementalist/level-1/elemental-specialization.md"
+        },
+        {
+          "kind": "class-feature",
+          "name": "Essence",
+          "provenance": {
+            "decisionId": "class.elementalist.features",
+            "source": {
+              "path": "en/unified/md/class/elementalist.md",
+              "quote": "Elementalist Advancement Table",
+              "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+            }
+          },
+          "sourcePath": "en/unified/md/feature/elementalist/level-1/essence.md"
+        },
+        {
+          "kind": "class-feature",
+          "name": "Hurl Element",
+          "provenance": {
+            "decisionId": "class.elementalist.features",
+            "source": {
+              "path": "en/unified/md/class/elementalist.md",
+              "quote": "Elementalist Advancement Table",
+              "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+            }
+          },
+          "sourcePath": "en/unified/md/feature/elementalist/level-1/hurl-element.md"
+        },
+        {
+          "kind": "class-feature",
+          "name": "Persistent Magic",
+          "provenance": {
+            "decisionId": "class.elementalist.features",
+            "source": {
+              "path": "en/unified/md/class/elementalist.md",
+              "quote": "Elementalist Advancement Table",
+              "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+            }
+          },
+          "sourcePath": "en/unified/md/feature/elementalist/level-1/persistent-magic.md"
+        },
+        {
+          "kind": "class-feature",
+          "name": "Practical Magic",
+          "provenance": {
+            "decisionId": "class.elementalist.features",
+            "source": {
+              "path": "en/unified/md/class/elementalist.md",
+              "quote": "Elementalist Advancement Table",
+              "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+            }
+          },
+          "sourcePath": "en/unified/md/feature/elementalist/level-1/practical-magic.md"
+        },
+        {
+          "kind": "class-feature",
+          "name": "Enchantment",
+          "provenance": {
+            "decisionId": "class.elementalist.features",
+            "source": {
+              "path": "en/unified/md/class/elementalist.md",
+              "quote": "Elementalist Advancement Table",
+              "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+            }
+          },
+          "sourcePath": "en/unified/md/feature/elementalist/level-1/enchantment.md"
+        },
+        {
+          "kind": "class-feature",
+          "name": "Elementalist Ward",
+          "provenance": {
+            "decisionId": "class.elementalist.features",
+            "source": {
+              "path": "en/unified/md/class/elementalist.md",
+              "quote": "Elementalist Advancement Table",
+              "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+            }
+          },
+          "sourcePath": "en/unified/md/feature/elementalist/level-1/elementalist-ward.md"
+        },
+        {
+          "kind": "class-feature",
+          "name": "Elementalist Abilities",
+          "provenance": {
+            "decisionId": "class.elementalist.features",
+            "source": {
+              "path": "en/unified/md/class/elementalist.md",
+              "quote": "Elementalist Advancement Table",
+              "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+            }
+          },
+          "sourcePath": "en/unified/md/feature/elementalist/level-1/elementalist-abilities.md"
+        },
+        {
+          "kind": "class-feature",
+          "name": "Fire: Acolyte of Fire",
+          "provenance": {
+            "decisionId": "class.elementalist.specialization",
+            "selection": "Fire",
+            "source": {
+              "path": "en/unified/md/feature/elementalist/level-1/elemental-specialization.md",
+              "quote": "You choose an elemental specialization from the following options: earth, fire, green, or void.",
+              "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+            }
+          },
+          "sourcePath": "en/unified/md/feature/elementalist/level-1/fire-acolyte-of-fire.md"
+        },
+        {
+          "kind": "class-feature",
+          "name": "Enchantment of Destruction",
+          "provenance": {
+            "decisionId": "class.elementalist.enchantment",
+            "selection": "Enchantment of Destruction",
+            "source": {
+              "path": "en/unified/md/feature/elementalist/level-1/enchantment.md",
+              "quote": "Choose one of the following enchantments.",
+              "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+            }
+          },
+          "sourcePath": "en/unified/md/feature/elementalist/level-1/enchantment-of-destruction.md"
+        },
+        {
+          "kind": "class-feature",
+          "name": "Ward of Delightful Consequences",
+          "provenance": {
+            "decisionId": "class.elementalist.ward",
+            "selection": "Ward of Delightful Consequences",
+            "source": {
+              "path": "en/unified/md/feature/elementalist/level-1/elementalist-ward.md",
+              "quote": "Choose one of the following wards.",
+              "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+            }
+          },
+          "sourcePath": "en/unified/md/feature/elementalist/level-1/ward-of-delightful-consequences.md"
+        }
+      ],
+      "heroicResource": {
+        "name": {
+          "provenance": [
+            {
+              "decisionId": "class.elementalist.baseline",
+              "source": {
+                "path": "en/unified/md/feature/elementalist/level-1/essence.md",
+                "quote": "You channel the substance of creation in the form of a Heroic Resource called essence, gathering and burning it to cast and maintain spells.",
+                "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+              }
+            }
+          ],
+          "value": "essence"
+        },
+        "startingValue": {
+          "provenance": [
+            {
+              "amount": 0,
+              "decisionId": "class.elementalist.baseline",
+              "note": "A newly created hero has not gained combat resources; live initialization is separate.",
+              "operation": "set",
+              "source": {
+                "path": "en/unified/md/feature/elementalist/level-1/essence.md",
+                "quote": "Though you can't gain essence outside of combat, you can use your heroic abilities and effects that cost essence without spending it.",
+                "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+              }
+            }
+          ],
+          "value": 0
+        }
+      },
+      "kit": null,
+      "languages": [
+        {
+          "name": "Caelian",
+          "provenance": {
+            "decisionId": "culture.caelian",
+            "source": {
+              "heading": "Caelian Empire",
+              "path": "en/books/heroes/clean/Draw Steel Heroes.md",
+              "quote": "All player characters know Caelian!",
+              "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+            }
+          }
+        },
+        {
+          "name": "Khoursirian",
+          "provenance": {
+            "decisionId": "culture.language",
+            "selection": "Khoursirian",
+            "source": {
+              "heading": "Culture Benefits",
+              "path": "en/books/heroes/clean/Draw Steel Heroes.md",
+              "quote": "You know the language of your culture, in addition to knowing Caelian.",
+              "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+            }
+          }
+        },
+        {
+          "name": "The First Language",
+          "provenance": {
+            "decisionId": "career.mages-apprentice.languages",
+            "selection": "The First Language",
+            "source": {
+              "path": "en/unified/md/career/mages-apprentice.md",
+              "quote": "Languages: One language",
+              "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+            }
+          }
+        }
+      ],
+      "level": {
+        "provenance": [
+          {
+            "amount": 1,
+            "decisionId": "class.level",
+            "operation": "set",
+            "source": {
+              "heading": "Step-by-Step Hero Making",
+              "path": "en/unified/md/chapter/making-a-hero.md",
+              "quote": "Each option you can choose for your hero at 1st level includes a parenthetical selection labeled \"Quick Build.\"",
+              "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+            }
+          }
+        ],
+        "value": 1
+      },
+      "perks": [
+        {
+          "kind": "perk",
+          "name": "Arcane Trick",
+          "provenance": {
+            "decisionId": "career.mages-apprentice.perk",
+            "selection": "Arcane Trick",
+            "source": {
+              "path": "en/unified/md/career/mages-apprentice.md",
+              "quote": "Perk: One supernatural perk",
+              "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+            }
+          },
+          "sourcePath": "en/unified/md/perk/arcane-trick.md"
+        }
+      ],
+      "potency": {
+        "average": {
+          "provenance": [
+            {
+              "amount": 1,
+              "decisionId": "class.elementalist.baseline",
+              "operation": "set",
+              "source": {
+                "path": "en/unified/md/class/elementalist.md",
+                "quote": "Average Potency: Reason − 1",
+                "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+              }
+            }
+          ],
+          "value": 1
+        },
+        "strong": {
+          "provenance": [
+            {
+              "amount": 2,
+              "decisionId": "class.elementalist.baseline",
+              "operation": "set",
+              "source": {
+                "path": "en/unified/md/class/elementalist.md",
+                "quote": "Strong Potency: Reason",
+                "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+              }
+            }
+          ],
+          "value": 2
+        },
+        "weak": {
+          "provenance": [
+            {
+              "amount": 0,
+              "decisionId": "class.elementalist.baseline",
+              "operation": "set",
+              "source": {
+                "path": "en/unified/md/class/elementalist.md",
+                "quote": "Weak Potency: Reason − 2",
+                "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+              }
+            }
+          ],
+          "value": 0
+        }
+      },
+      "potencyCharacteristic": {
+        "provenance": [
+          {
+            "decisionId": "class.elementalist.baseline",
+            "source": {
+              "path": "en/unified/md/class/elementalist.md",
+              "quote": "Strong Potency: Reason",
+              "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+            }
+          }
+        ],
+        "value": "R"
+      },
+      "recoveriesMaximum": {
+        "provenance": [
+          {
+            "amount": 8,
+            "decisionId": "class.elementalist.baseline",
+            "operation": "set",
+            "source": {
+              "path": "en/unified/md/class/elementalist.md",
+              "quote": "Recoveries: 8",
+              "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+            }
+          }
+        ],
+        "value": 8
+      },
+      "recoveryValue": {
+        "provenance": [
+          {
+            "amount": 3,
+            "decisionId": "class.elementalist.baseline",
+            "operation": "floor-divide",
+            "source": {
+              "path": "en/unified/md/rule/health/recoveries.md",
+              "quote": "A hero also has a recovery value that equals one-third of their Stamina maximum, rounded down.",
+              "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+            }
+          }
+        ],
+        "value": 6
+      },
+      "renown": {
+        "provenance": [
+          {
+            "amount": 0,
+            "decisionId": "career.mages-apprentice.renown",
+            "operation": "base",
+            "source": {
+              "path": "en/unified/md/rule/resource/renown.md",
+              "quote": "At the start of character creation, your Renown is 0.",
+              "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+            }
+          },
+          {
+            "amount": 1,
+            "decisionId": "career.mages-apprentice.renown",
+            "operation": "add",
+            "source": {
+              "path": "en/unified/md/career/mages-apprentice.md",
+              "quote": "Renown: +1",
+              "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+            }
+          }
+        ],
+        "value": 1
+      },
+      "savingThrowThreshold": {
+        "provenance": [
+          {
+            "amount": 6,
+            "decisionId": "free-strikes.grant",
+            "note": "general rule, not a creation decision; attached to the automatic step",
+            "operation": "base",
+            "source": {
+              "path": "en/unified/md/rule/general/saving-throw.md",
+              "quote": "On a 6 or higher, the effect ends.",
+              "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+            }
+          }
+        ],
+        "value": 6
+      },
+      "size": {
+        "provenance": [
+          {
+            "decisionId": "ancestry.polder.signature-trait",
+            "operation": "set",
+            "source": {
+              "path": "en/unified/md/feature/trait/polder/small.md",
+              "quote": "Your size is 1S.",
+              "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+            }
+          }
+        ],
+        "value": "1S"
+      },
+      "skills": [
+        {
+          "group": "intrigue",
+          "name": "Alertness",
+          "provenance": {
+            "decisionId": "culture.environment.skill",
+            "selection": "Alertness",
+            "source": {
+              "heading": "Culture Benefits",
+              "path": "en/books/heroes/clean/Draw Steel Heroes.md",
+              "quote": "You can select one skill from each aspect's list of options.",
+              "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+            }
+          }
+        },
+        {
+          "group": "exploration",
+          "name": "Gymnastics",
+          "provenance": {
+            "decisionId": "culture.organization.skill",
+            "selection": "Gymnastics",
+            "source": {
+              "heading": "Culture Benefits",
+              "path": "en/books/heroes/clean/Draw Steel Heroes.md",
+              "quote": "You can select one skill from each aspect's list of options.",
+              "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+            }
+          }
+        },
+        {
+          "group": "crafting",
+          "name": "Tailoring",
+          "provenance": {
+            "decisionId": "culture.upbringing.skill",
+            "selection": "Tailoring",
+            "source": {
+              "heading": "Culture Benefits",
+              "path": "en/books/heroes/clean/Draw Steel Heroes.md",
+              "quote": "You can select one skill from each aspect's list of options.",
+              "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+            }
+          }
+        },
+        {
+          "additionalProvenance": [
+            {
+              "decisionId": "class.elementalist.skill.magic",
+              "source": {
+                "path": "en/unified/md/class/elementalist.md",
+                "quote": "You gain the Magic skill",
+                "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+              }
+            }
+          ],
+          "group": "lore",
+          "name": "Magic",
+          "provenance": {
+            "decisionId": "career.mages-apprentice.skill.magic",
+            "source": {
+              "path": "en/unified/md/career/mages-apprentice.md",
+              "quote": "The Magic skill (from the lore skill group), plus two other skills from the lore group",
+              "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+            }
+          }
+        },
+        {
+          "group": "lore",
+          "name": "Monsters",
+          "provenance": {
+            "decisionId": "career.mages-apprentice.skills",
+            "selection": "Monsters",
+            "source": {
+              "path": "en/unified/md/career/mages-apprentice.md",
+              "quote": "The Magic skill (from the lore skill group), plus two other skills from the lore group",
+              "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+            }
+          }
+        },
+        {
+          "group": "lore",
+          "name": "Timescape",
+          "provenance": {
+            "decisionId": "career.mages-apprentice.skills",
+            "selection": "Timescape",
+            "source": {
+              "path": "en/unified/md/career/mages-apprentice.md",
+              "quote": "The Magic skill (from the lore skill group), plus two other skills from the lore group",
+              "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+            }
+          }
+        },
+        {
+          "group": "crafting",
+          "name": "Alchemy",
+          "provenance": {
+            "decisionId": "class.elementalist.skills",
+            "selection": "Alchemy",
+            "source": {
+              "path": "en/unified/md/class/elementalist.md",
+              "quote": "Then choose any three skills from the crafting or lore skill groups.",
+              "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+            }
+          }
+        },
+        {
+          "group": "crafting",
+          "name": "Blacksmithing",
+          "provenance": {
+            "decisionId": "class.elementalist.skills",
+            "selection": "Blacksmithing",
+            "source": {
+              "path": "en/unified/md/class/elementalist.md",
+              "quote": "Then choose any three skills from the crafting or lore skill groups.",
+              "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+            }
+          }
+        },
+        {
+          "group": "lore",
+          "name": "History",
+          "provenance": {
+            "decisionId": "class.elementalist.skills",
+            "selection": "History",
+            "source": {
+              "path": "en/unified/md/class/elementalist.md",
+              "quote": "Then choose any three skills from the crafting or lore skill groups.",
+              "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+            }
+          }
+        },
+        {
+          "group": "interpersonal",
+          "name": "Empathize",
+          "provenance": {
+            "decisionId": "class.elementalist.magic-replacement",
+            "selection": "Empathize",
+            "source": {
+              "path": "en/unified/md/chapter/making-a-hero.md",
+              "quote": "If you gain the same specific skill from two different sources (for instance, from a career and a class), you can pick a different skill from any skill group.",
+              "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+            }
+          }
+        }
+      ],
+      "speed": {
+        "provenance": [
+          {
+            "amount": 5,
+            "decisionId": "ancestry.polder.base-statistics",
+            "operation": "base",
+            "source": {
+              "path": "en/unified/md/rule/character/speed.md",
+              "quote": "Unless otherwise noted, a character of any of these ancestries is size 1M and has speed 5 and stability 0.",
+              "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+            }
+          }
+        ],
+        "value": 5
+      },
+      "stability": {
+        "provenance": [
+          {
+            "amount": 0,
+            "decisionId": "ancestry.polder.base-statistics",
+            "operation": "base",
+            "source": {
+              "path": "en/unified/md/rule/character/speed.md",
+              "quote": "Unless otherwise noted, a character of any of these ancestries is size 1M and has speed 5 and stability 0.",
+              "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+            }
+          }
+        ],
+        "value": 0
+      },
+      "staminaMaximum": {
+        "provenance": [
+          {
+            "amount": 18,
+            "decisionId": "class.elementalist.baseline",
+            "operation": "base",
+            "source": {
+              "path": "en/unified/md/class/elementalist.md",
+              "quote": "Starting Stamina at 1st Level: 18",
+              "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+            }
+          }
+        ],
+        "value": 18
+      },
+      "subclass": {
+        "provenance": [
+          {
+            "decisionId": "class.elementalist.specialization",
+            "selection": "Fire",
+            "source": {
+              "path": "en/unified/md/feature/elementalist/level-1/elemental-specialization.md",
+              "quote": "You choose an elemental specialization from the following options: earth, fire, green, or void.",
+              "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+            }
+          }
+        ],
+        "value": "Fire"
+      },
+      "traits": [
+        {
+          "kind": "ancestry-signature-trait",
+          "name": "Shadowmeld",
+          "provenance": {
+            "decisionId": "ancestry.polder.signature-trait",
+            "source": {
+              "path": "en/unified/md/feature/trait/polder/polder-traits.md",
+              "quote": "Polder heroes have access to the following traits.",
+              "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+            }
+          },
+          "sourcePath": "en/unified/md/feature/ability/polder/shadowmeld.md"
+        },
+        {
+          "kind": "ancestry-signature-trait",
+          "name": "Small!",
+          "provenance": {
+            "decisionId": "ancestry.polder.signature-trait",
+            "source": {
+              "path": "en/unified/md/feature/trait/polder/polder-traits.md",
+              "quote": "Polder heroes have access to the following traits.",
+              "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+            }
+          },
+          "sourcePath": "en/unified/md/feature/trait/polder/small.md"
+        },
+        {
+          "cost": 2,
+          "kind": "ancestry-purchased-trait",
+          "name": "Nimblestep",
+          "provenance": {
+            "decisionId": "ancestry.polder.purchased-traits",
+            "selection": "Nimblestep",
+            "source": {
+              "path": "en/unified/md/feature/trait/polder/polder-traits.md",
+              "quote": "You have 4 ancestry points to spend on the following traits.",
+              "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+            }
+          },
+          "sourcePath": "en/unified/md/feature/trait/polder/nimblestep.md"
+        },
+        {
+          "cost": 1,
+          "kind": "ancestry-purchased-trait",
+          "name": "Polder Geist",
+          "provenance": {
+            "decisionId": "ancestry.polder.purchased-traits",
+            "selection": "Polder Geist",
+            "source": {
+              "path": "en/unified/md/feature/trait/polder/polder-traits.md",
+              "quote": "You have 4 ancestry points to spend on the following traits.",
+              "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+            }
+          },
+          "sourcePath": "en/unified/md/feature/trait/polder/polder-geist.md"
+        },
+        {
+          "cost": 1,
+          "kind": "ancestry-purchased-trait",
+          "name": "Reactive Tumble",
+          "provenance": {
+            "decisionId": "ancestry.polder.purchased-traits",
+            "selection": "Reactive Tumble",
+            "source": {
+              "path": "en/unified/md/feature/trait/polder/polder-traits.md",
+              "quote": "You have 4 ancestry points to spend on the following traits.",
+              "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+            }
+          },
+          "sourcePath": "en/unified/md/feature/trait/polder/reactive-tumble.md"
+        }
+      ],
+      "uncertainties": [],
+      "wealth": {
+        "provenance": [
+          {
+            "amount": 1,
+            "decisionId": "career.choice",
+            "operation": "base",
+            "selection": "Mage's Apprentice",
+            "source": {
+              "path": "en/unified/md/rule/resource/wealth.md",
+              "quote": "Some careers increase your starting Wealth score (from a base score of 1).",
+              "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+            }
+          }
+        ],
+        "value": 1
+      },
+      "windedValue": {
+        "provenance": [
+          {
+            "amount": 2,
+            "decisionId": "class.elementalist.baseline",
+            "operation": "floor-divide",
+            "source": {
+              "path": "en/unified/md/rule/health/winded.md",
+              "quote": "Your winded value equals half your Stamina maximum.",
+              "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+            }
+          }
+        ],
+        "value": 9
+      }
+    },
+    "diagnostics": {},
+    "evaluatedAgainst": {
+      "compendiumRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+      "definitionsSchemaVersion": "r01.1"
+    },
+    "status": "complete"
+  },
+  "fullEditIsStale": false,
+  "id": "k57fjb0yybdq63bx0hf52xxrn58eqekf",
+  "level": 1,
+  "liveState": null,
+  "review": null,
+  "revision": 2,
+  "selections": [
+    {
+      "decisionId": "ancestry.choice",
+      "ownerBranchId": "step.ancestry",
+      "sources": [
+        {
+          "id": "ancestry.choice",
+          "path": "en/unified/md/chapter/making-a-hero.md",
+          "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+        }
+      ],
+      "value": "Polder"
+    },
+    {
+      "decisionId": "ancestry.polder.purchased-traits",
+      "ownerBranchId": "step.ancestry",
+      "sources": [
+        {
+          "id": "ancestry.polder.purchased-traits",
+          "path": "en/unified/md/feature/trait/polder/polder-traits.md",
+          "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+        }
+      ],
+      "value": [
+        "Nimblestep",
+        "Polder Geist",
+        "Reactive Tumble"
+      ]
+    },
+    {
+      "decisionId": "culture.name",
+      "ownerBranchId": "step.culture",
+      "sources": [
+        {
+          "id": "culture.name",
+          "path": "en/unified/md/chapter/making-a-hero.md",
+          "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+        }
+      ],
+      "value": "Polder"
+    },
+    {
+      "decisionId": "culture.language",
+      "ownerBranchId": "step.culture",
+      "sources": [
+        {
+          "id": "culture.language",
+          "path": "en/books/heroes/clean/Draw Steel Heroes.md",
+          "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+        }
+      ],
+      "value": "Khoursirian"
+    },
+    {
+      "decisionId": "culture.environment",
+      "ownerBranchId": "step.culture",
+      "sources": [
+        {
+          "id": "culture.environment",
+          "path": "en/books/heroes/clean/Draw Steel Heroes.md",
+          "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+        }
+      ],
+      "value": "Urban"
+    },
+    {
+      "decisionId": "culture.environment.skill",
+      "ownerBranchId": "step.culture",
+      "sources": [
+        {
+          "id": "culture.environment.skill",
+          "path": "en/books/heroes/clean/Draw Steel Heroes.md",
+          "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+        }
+      ],
+      "value": "Alertness"
+    },
+    {
+      "decisionId": "culture.organization",
+      "ownerBranchId": "step.culture",
+      "sources": [
+        {
+          "id": "culture.organization",
+          "path": "en/books/heroes/clean/Draw Steel Heroes.md",
+          "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+        }
+      ],
+      "value": "Communal"
+    },
+    {
+      "decisionId": "culture.organization.skill",
+      "ownerBranchId": "step.culture",
+      "sources": [
+        {
+          "id": "culture.organization.skill",
+          "path": "en/books/heroes/clean/Draw Steel Heroes.md",
+          "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+        }
+      ],
+      "value": "Gymnastics"
+    },
+    {
+      "decisionId": "culture.upbringing",
+      "ownerBranchId": "step.culture",
+      "sources": [
+        {
+          "id": "culture.upbringing",
+          "path": "en/books/heroes/clean/Draw Steel Heroes.md",
+          "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+        }
+      ],
+      "value": "Creative"
+    },
+    {
+      "decisionId": "culture.upbringing.skill",
+      "ownerBranchId": "step.culture",
+      "sources": [
+        {
+          "id": "culture.upbringing.skill",
+          "path": "en/books/heroes/clean/Draw Steel Heroes.md",
+          "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+        }
+      ],
+      "value": "Tailoring"
+    },
+    {
+      "decisionId": "career.choice",
+      "ownerBranchId": "step.career",
+      "sources": [
+        {
+          "id": "career.choice",
+          "path": "en/unified/md/chapter/making-a-hero.md",
+          "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+        }
+      ],
+      "value": "Mage's Apprentice"
+    },
+    {
+      "decisionId": "career.mages-apprentice.skills",
+      "ownerBranchId": "step.career",
+      "sources": [
+        {
+          "id": "career.mages-apprentice.skills",
+          "path": "en/unified/md/career/mages-apprentice.md",
+          "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+        }
+      ],
+      "value": [
+        "Monsters",
+        "Timescape"
+      ]
+    },
+    {
+      "decisionId": "career.mages-apprentice.languages",
+      "ownerBranchId": "step.career",
+      "sources": [
+        {
+          "id": "career.mages-apprentice.languages",
+          "path": "en/unified/md/career/mages-apprentice.md",
+          "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+        }
+      ],
+      "value": [
+        "The First Language"
+      ]
+    },
+    {
+      "decisionId": "career.mages-apprentice.perk",
+      "ownerBranchId": "step.career",
+      "sources": [
+        {
+          "id": "career.mages-apprentice.perk",
+          "path": "en/unified/md/career/mages-apprentice.md",
+          "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+        }
+      ],
+      "value": "Arcane Trick"
+    },
+    {
+      "decisionId": "career.mages-apprentice.inciting-incident",
+      "ownerBranchId": "step.career",
+      "sources": [
+        {
+          "id": "career.mages-apprentice.inciting-incident",
+          "path": "en/unified/md/career/mages-apprentice.md",
+          "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+        }
+      ],
+      "value": "Forgotten Memories"
+    },
+    {
+      "decisionId": "class.choice",
+      "ownerBranchId": "step.class",
+      "sources": [
+        {
+          "id": "class.choice",
+          "path": "en/unified/md/chapter/making-a-hero.md",
+          "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+        }
+      ],
+      "value": "Elementalist"
+    },
+    {
+      "decisionId": "class.elementalist.characteristic-array",
+      "ownerBranchId": "step.class",
+      "sources": [
+        {
+          "id": "class.elementalist.characteristic-array",
+          "path": "en/unified/md/class/elementalist.md",
+          "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+        }
+      ],
+      "value": "2, 1, 1, −1"
+    },
+    {
+      "decisionId": "class.elementalist.array-assignment",
+      "ownerBranchId": "step.class",
+      "sources": [
+        {
+          "id": "class.elementalist.array-assignment",
+          "path": "en/unified/md/class/elementalist.md",
+          "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+        }
+      ],
+      "value": {
+        "Agility": 1,
+        "Intuition": 2,
+        "Might": -1,
+        "Presence": 1
+      }
+    },
+    {
+      "decisionId": "class.elementalist.skills",
+      "ownerBranchId": "step.class",
+      "sources": [
+        {
+          "id": "class.elementalist.skills",
+          "path": "en/unified/md/class/elementalist.md",
+          "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+        }
+      ],
+      "value": [
+        "Alchemy",
+        "Blacksmithing",
+        "History"
+      ]
+    },
+    {
+      "decisionId": "class.elementalist.magic-replacement",
+      "ownerBranchId": "step.class",
+      "sources": [
+        {
+          "id": "class.elementalist.magic-replacement",
+          "path": "en/unified/md/chapter/making-a-hero.md",
+          "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+        }
+      ],
+      "value": "Empathize"
+    },
+    {
+      "decisionId": "class.elementalist.specialization",
+      "ownerBranchId": "step.class",
+      "sources": [
+        {
+          "id": "class.elementalist.specialization",
+          "path": "en/unified/md/feature/elementalist/level-1/elemental-specialization.md",
+          "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+        }
+      ],
+      "value": "Fire"
+    },
+    {
+      "decisionId": "class.elementalist.enchantment",
+      "ownerBranchId": "step.class",
+      "sources": [
+        {
+          "id": "class.elementalist.enchantment",
+          "path": "en/unified/md/feature/elementalist/level-1/enchantment.md",
+          "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+        }
+      ],
+      "value": "Enchantment of Destruction"
+    },
+    {
+      "decisionId": "class.elementalist.ward",
+      "ownerBranchId": "step.class",
+      "sources": [
+        {
+          "id": "class.elementalist.ward",
+          "path": "en/unified/md/feature/elementalist/level-1/elementalist-ward.md",
+          "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+        }
+      ],
+      "value": "Ward of Delightful Consequences"
+    },
+    {
+      "decisionId": "class.elementalist.ability-3",
+      "ownerBranchId": "step.class",
+      "sources": [
+        {
+          "id": "class.elementalist.ability-3",
+          "path": "en/unified/md/feature/elementalist/level-1/elementalist-abilities.md",
+          "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+        }
+      ],
+      "value": "The Flesh, a Crucible"
+    },
+    {
+      "decisionId": "class.elementalist.ability-5",
+      "ownerBranchId": "step.class",
+      "sources": [
+        {
+          "id": "class.elementalist.ability-5",
+          "path": "en/unified/md/feature/elementalist/level-1/elementalist-abilities.md",
+          "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+        }
+      ],
+      "value": "Conflagration"
+    },
+    {
+      "decisionId": "class.elementalist.signature-abilities",
+      "ownerBranchId": "step.class",
+      "sources": [
+        {
+          "id": "class.elementalist.signature-abilities",
+          "path": "en/unified/md/feature/elementalist/level-1/elementalist-abilities.md",
+          "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+        }
+      ],
+      "value": [
+        "Bifurcated Incineration",
+        "Viscous Fire"
+      ]
+    }
+  ],
+  "status": "complete"
+}

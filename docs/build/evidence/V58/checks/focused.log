@@ -1,0 +1,35 @@
+
+[1m[30m[46m RUN [49m[39m[22m [36mv4.1.11 [39m[90m/app[39m
+
+ [31m❯[39m [30m[43m app [49m[39m tests/app/polder-v58.test.ts [2m([22m[2m1 test[22m[2m | [22m[31m1 failed[39m[2m)[22m[33m 1012[2mms[22m[39m
+[31m   [31m×[31m Polder movement traits survive save/readback with readable effects and replacement preserves live state[39m[33m 1011[2mms[22m[39m
+ [32m✓[39m [30m[46m engine [49m[39m tests/character-v58-polder.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 10[2mms[22m[39m
+
+[31m⎯⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 1 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m [30m[43m app [49m[39m tests/app/polder-v58.test.ts[2m > [22mPolder movement traits survive save/readback with readable effects and replacement preserves live state
+[31m[1mConvexError[22m: Provide a valid command ID (8–128 letters, numbers, underscores or hyphens).[39m
+[36m [2m❯[22m command convex/lib/commands.ts:[2m28:11[22m[39m
+    [90m 26|[39m ) {
+    [90m 27|[39m   [35mif[39m ([33m![39m[36m/^[A-Za-z0-9_-]{8,128}$/[39m[33m.[39m[34mtest[39m(commandId))
+    [90m 28|[39m     [35mthrow[39m [35mnew[39m [33mConvexError[39m(
+    [90m   |[39m           [31m^[39m
+    [90m 29|[39m       'Provide a valid command ID (8–128 letters, numbers, underscores…
+    [90m 30|[39m     )[33m;[39m
+[90m [2m❯[22m handler convex/characters.ts:[2m325:27[22m[39m
+[90m [2m❯[22m invokeFunction node_modules/.pnpm/convex@1.45.0_react@19.3.0/node_modules/convex/src/server/impl/registration_impl.ts:[2m90:13[22m[39m
+[90m [2m❯[22m invokeMutation node_modules/.pnpm/convex@1.45.0_react@19.3.0/node_modules/convex/src/server/impl/registration_impl.ts:[2m70:17[22m[39m
+[90m [2m❯[22m runMutationWithHandler node_modules/.pnpm/convex-test@0.0.57_convex@1.45.0_react@19.3.0_/node_modules/convex-test/dist/index.js:[2m1685:31[22m[39m
+[90m [2m❯[22m Object.mutationFromPath node_modules/.pnpm/convex-test@0.0.57_convex@1.45.0_react@19.3.0_/node_modules/convex-test/dist/index.js:[2m1826:32[22m[39m
+[90m [2m❯[22m mutation node_modules/.pnpm/convex-test@0.0.57_convex@1.45.0_react@19.3.0_/node_modules/convex-test/dist/index.js:[2m1874:20[22m[39m
+[90m [2m❯[22m admitHero tests/app/fixtures/table.ts:[2m100:23[22m[39m
+[90m [2m❯[22m tests/app/polder-v58.test.ts:[2m22:23[22m[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[2m | [22m[1m[32m1 passed[39m[22m[90m (2)[39m
+[2m      Tests [22m [1m[31m1 failed[39m[22m[2m | [22m[1m[32m2 passed[39m[22m[90m (3)[39m
+[2m   Start at [22m 23:47:16
+[2m   Duration [22m 1.68s[2m (transform 850ms, setup 0ms, import 456ms, tests 1.02s, environment 0ms)[22m
+

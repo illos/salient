@@ -1,0 +1,150 @@
+HERO
+Edit
+Copy
+Export
+Delete
+Close
+BETHELL CORRECTED V25
+Resources
+Vitals
+Inventory
+Projects
+Titles
+Notes
+Take a Respite
+Customize
+Settings
+BETHELL CORRECTED V25 - LEVEL 1 POLDER ELEMENTALIST
+M
+-1
+A
+1
+R
+2
+I
+2
+P
+1
+Size
+1S
+Spd
+5
+Stab
+0
+Dis
+1
+Save
+6
+Hero
+Features
+Mains
+Maneuvers
+Triggers
+Free Strikes
+-1
+MIGHT
+1
+AGILITY
+2
+REASON
+2
+INTUITION
+1
+PRESENCE
+Essence
+0
+Surges
+0
+Victories
+0
+XP
+0
+Renown
+1
+Wealth
+1
+RESOURCES
+Size
+1
+S
+Speed
+5
+Stability
+0
+Disengage
+1
+Save
+6
+STATISTICS
+Stamina
+18
+Recoveries
+8
+Recovery Value
+6
+VITALS
+ANCESTRY
+AncestryPolder
+CULTURE
+CulturePolder
+EnvironmentUrban
+OrganizationCommunal
+UpbringingCreative
+CAREER
+CareerMage’s Apprentice
+Inciting IncidentForgotten Memories
+CLASS
+ClassElementalist
+Level1
+Elemental SpecializationFire
+Sta 18
+Rec 8
+ESSENCE
+0
+Start of your turn
++2 PER ROUND
+You or a creature within 10 of you takes damage that isn’t untyped or holy
++1 PER ROUND
+SURGES
+0
+You take damage
+A protective field of void magic absorbs violence aimed at you, then lets you hurl it back at your enemies.
++1 PER ROUND
+TRIGGERED ACTIONS
+Explosive AssistanceThe target force moves a creature or object.
+DistanceRanged 10
+TargetSelf or one ally
+Reactive TumbleWhenever you are force moved
+LANGUAGES
+Caelian
+The First Language
+Khoursirian
+SKILLS
+Alchemy
+Crafting
+Alertness
+Intrigue
+Blacksmithing
+Crafting
+Empathize
+Interpersonal
+Gymnastics
+Exploration
+History
+Lore
+Magic
+Lore
+Monsters
+Lore
+Tailoring
+Crafting
+Timescape
+Lore
+Heroes
+Library
+Session
+Cookies
+Reference
+Settings
+About
+Patreon

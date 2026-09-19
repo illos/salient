@@ -316,7 +316,7 @@ records the handoff; it does not certify A09 or create an implementation commit.
 
 | Id | Slice | Status | Owner |
 | --- | --- | --- | --- |
-| V44 | [Character option delivery plan](V44-character-option-delivery.md) | Staged for a fresh Astra session; [handoff](character-restart-handoff.md). Opus pilot [abandoned without reuse](../decisions/2026-09-19-opus-pilot-dead-end.md); zero pilot option units delivered. V45 remains delivered. | Character integration lead |
+| V44 | [Character option delivery plan](V44-character-option-delivery.md) | In progress — user authorized restart 2026-09-19; [handoff](character-restart-handoff.md). Opus pilot [abandoned without reuse](../decisions/2026-09-19-opus-pilot-dead-end.md); zero pilot option units delivered. V45 remains delivered. | Character integration lead |
 
 ## V41 — reference loading and shared navigation
 
@@ -337,3 +337,19 @@ records the handoff; it does not certify A09 or create an implementation commit.
 | V45 | [Character option foundation](V45-character-option-foundation.md) | Complete — merged/live `ebe66e2`; 691 tests, 5,584 exact comparisons, 49 applicable browser successes and two shared checks; both audits pass; initial timeout/retry limits retained; no new options enabled | Character integration lead and subagents |
 
 V46–V56 are retired Opus pilot IDs, not pending assignments. Allocate fresh IDs for replacement work.
+
+## Astra restart — 2026-09-19
+
+| Id | Unit | Status | Owner / branch |
+| --- | --- | --- | --- |
+| V57 | Devil level one | Paused — code and tests prepared; runtime verification pending | Astra Devil / `slice/V57` |
+| V58 | [Polder level one](V58-polder-level-one.md) | Paused — candidate 694 checks, focused browser and Forge comparison pass; full browser blocked by combat closeout 1s query timeout; unmerged | Astra Polder / `slice/V58` |
+
+Lead owns shared integration and the new CT114 `character-restart` environment. Baseline source
+is main `6459c8d`; no pilot code, tests, research or artifacts are inputs. Shared main and stopped
+`characters` remain untouched. Baseline: `pnpm check` passed (691 tests); existing Polder/Elementalist browser journey passed
+in 22 seconds. Both candidates implemented; no units yet fully verified or merged. V58 new wizard/Forge comparison and candidate 694 checks passed; full suite failed in combat
+closeout (1s backend execution timeout). Lead stopped the suite at case 3 and paused under the
+user anti-spiral instruction. No runtime/backend repair or new unit was opened; no units merged.
+Next decision: separately bound the closeout timeout investigation before resuming merge gates.
+If verification becomes repeated infrastructure work without working options, pause for the user.

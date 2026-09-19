@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
-/** Existing V25 level-one Polder content. */
+/** Complete level-one Polder choices; conditional gameplay effects remain manual. */
 import type { Decision } from '../../../evaluate/definitions.ts';
 import { SENTENCES } from '../../../evaluate/sources.ts';
 import { auto, choice, grant, option, path } from '../../decision-builders.ts';
@@ -36,9 +36,9 @@ export const levelOneDecisions: Decision[] = [
       option('Corruption Immunity', trait('corruption-immunity'), { cost: 1 }),
       option('Fearless', trait('fearless'), { cost: 2 }),
       option('Graceful Retreat', trait('graceful-retreat'), { cost: 1 }),
-      option('Nimblestep', trait('nimblestep'), { cost: 2, supportedInV001: false }),
-      option('Polder Geist', trait('polder-geist'), { cost: 1, supportedInV001: false }),
-      option('Reactive Tumble', trait('reactive-tumble'), { cost: 1, supportedInV001: false }),
+      option('Nimblestep', trait('nimblestep'), { cost: 2 }),
+      option('Polder Geist', trait('polder-geist'), { cost: 1 }),
+      option('Reactive Tumble', trait('reactive-tumble'), { cost: 1 }),
     ],
     { shape: { type: 'points', budget: 4, costField: 'cost' } },
   ),
