@@ -34,47 +34,94 @@ A separately retained sample, `v51-loaded-nonoverlapping.json`, is **not** a loa
 window contains zero application queries because the suite had already finished. It is kept under
 that name so it cannot be mistaken for one.
 
+## Convention, disclosed rather than assumed
+
+Median is the mean of the two middle values for even n; p90 is nearest-rank. An earlier version of
+this report used an upper-middle order statistic without saying so, which inflated some medians —
+`foes:catalog` read 1068 where the standard median is 817.5. All figures below use the disclosed
+convention.
+
+Each arm shows **n = 29** against 30 issued pairs. The Convex log timestamps are second-resolution,
+so a call at a window boundary can fall outside a millisecond-precision window. The missing sample
+is a boundary artifact, not a failed call: the driver recorded **zero** failures in both conditions.
+Interior samples are unaffected.
+
+## File map, because two files share a name
+
+| File in the bundle | What it is |
+| --- | --- |
+| `v51-idle.json` | idle condition |
+| **`a4/v51-loaded.json`** | **the true loaded condition**, overlap verified |
+| `v51-loaded.json` (root level) | the **non-overlapping** sample; zero application queries in window. Not loaded evidence |
+| `v51-loaded-nonoverlapping.json` | copy of the above under an unambiguous name |
+| `attempt4-logs.txt` | live `convex logs --success` tail covering the loaded window |
+| `attempt3-*` | the attempt whose driver failed on my bad `--condition` argument; retained |
+
 ## Result, milliseconds of server execution
 
-| Probe | Idle p50 | Idle p90 | Idle max | Loaded p50 | Loaded p90 | Loaded max |
+| Probe | Idle median | Idle p90 | Idle max | Loaded median | Loaded p90 | Loaded max |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| `probeWithAuthPrefix` | 42 | 54 | 77 | **42** | **204** | **490** |
-| `probeIdentityOnly` | 11 | 13 | 40 | **14** | **28** | **55** |
+| `probeWithAuthPrefix` | 43 | 49 | 51 | **42** | **204** | **490** |
+| `probeIdentityOnly` | 13 | 16 | 16 | **14** | **28** | **55** |
 
-n = 29 per arm in the loaded window; zero failed samples in either condition.
+An earlier version of this report gave idle figures of 42/54/77 and 11/13/40. Those were carried
+over from the **void first run** and are wrong for this rerun; the values above are recomputed from
+`idle-logs.txt` bounded to the idle window.
 
-Application queries in the **same** window:
+Application queries in the **same loaded window**:
 
-| Query | p50 | p90 | max | n |
+| Query | median | p90 | max | n |
 | --- | ---: | ---: | ---: | ---: |
-| `foes:catalog` | 1068 | 1373 | 1373 | 10 |
 | `targets:drafts` | 1063 | 1191 | 1265 | 23 |
-| `history:status` | 1061 | 1175 | 1246 | 26 |
 | `characters:sheet` | 1059 | 1316 | 1316 | 9 |
 | `encounters:current` | 1058 | 1186 | 1311 | 23 |
+| `history:status` | 1040.5 | 1175 | 1246 | 26 |
 | `table:roster` | 1002 | 1155 | 1279 | 27 |
-| `events:list` | 702 | 1079 | 1150 | 26 |
+| `foes:catalog` | 817.5 | 1184 | 1373 | 10 |
+| `events:list` | 690.5 | 1079 | 1150 | 26 |
+
+A `foes:catalog` execution crossed the limit at 21:45:27, inside the window.
 
 ## What this supports, stated no more strongly than the data allows
 
-**The shared `requireUser` prefix cannot account for the application queries' cost.** Its median is
-42 ms under verified load — unchanged from idle — while application medians sit at roughly 1000 ms,
-about 24 times larger, measured on the same backend inside the same window.
+**Fast minimal probes are evidence against a *uniform* prefix cost. They cannot exclude a
+context-dependent prefix cost.** That is the whole of the headline. The probe's median is 42 ms
+under verified load while application medians sit near 1000 ms on the same backend in the same
+window, so a fixed per-call prefix charge of that size is not what puts those queries over the
+limit.
 
-**The prefix is not immune to load, and the first run's "refuted" framing was wrong.** Its tail
-degrades materially: p90 54 → 204 ms and maximum 77 → 490 ms. The control degrades far less,
-p90 13 → 28 ms. So load does reach the prefix; it simply does not reach it anywhere near enough to
-explain a one-second limit.
+**The prefix is not immune to load.** Its p90 moves 49 → 204 ms and its maximum 51 → 490 ms, while
+the control moves 16 → 28 ms. Load reaches the prefix; it simply does not reach it anywhere near
+enough to explain a one-second limit on its own. The first run's "refuted" framing is withdrawn.
 
-**This is evidence against a fixed universal-prefix explanation. It is not proof** excluding rare or
-context-dependent prefix effects, and it identifies no cause.
+**The probes do not isolate `requireMember` or database work.** The diagnostics module's import
+graph is minimal, while `targets.ts` pulls in `tableContext` from `lib/registry`, whose top-level
+imports reach every operation family, and `foes.ts` reaches the whole compendium through
+`content.ts`. Module initialization and bundle dependencies therefore differ between the probes and
+the real queries. That is an untested alternative to any database-work explanation, not a finding.
 
-**It also refutes an argument from my own earlier triage.** I claimed `targets:drafts` and
-`foes:catalog` read too little to be slow and should be treated as a control group proving the cost
-was not in the handlers. Both are among the slowest here — 1063 and 1068 ms medians. A small read
-set does not bound execution time on this backend, and that argument should not be reused.
+**It refutes an argument from my own earlier triage.** I claimed `targets:drafts` and `foes:catalog`
+read too little to be slow and were a control group proving the cost was not in the handlers. They
+are among the slowest measured. A small read set does not bound execution time here.
+
+## Invalid data in the bundle, disclosed
+
+`attempt4-host.txt` repeats an identical 21:44:41 snapshot on every row. The command substitution
+evaluated once at launch instead of per iteration, so it is **not** a continuous host series and no
+host behaviour may be inferred from it. `idle-host.txt` was produced differently and is a real
+series. Nothing in this report rests on either.
+
+**Registration confound, disclosed.** The driver mints a disposable account, so its signup overlaps
+the browser scenario's own registration and could in principle trigger signup limits. It did not
+here — zero failed samples in both conditions, and no 429 appears in the sampled probe calls — but
+the timing is in the artifacts if it needs checking.
 
 ## Not tested
+
+Browser failure artifacts for the loaded attempt — screenshots, `error-context.md` and `trace.zip` —
+are archived separately at `/srv/dev/salient/characters/artifacts/v51-attempt4-browser.tar.gz`,
+5,915,856 bytes, SHA-256 `eacb53150faa3c6a6b2aff0704f42568060c0b52a5453bbd12b72655018ce794`. The
+text bundle references them only.
 
 Neither probe exercises `requireMember` (a campaign read plus a membership lookup) or
 `tableContext` (a `sessions` read), which every slow query above runs. That remains the narrowest
