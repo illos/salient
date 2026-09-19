@@ -316,3 +316,10 @@ records ownership, milestone handoffs, independent reviews, explicit CT114 envir
 Chords delivery versus wake behavior, and evaluation of useful output against coordinator effort.
 The pilot and measured efficiency remain unproven; no additional option support is certified.
 Documentation only, with no runtime impact.
+
+2026-09-19: user installed Chords 0.3.0 with direct `wake: true` handoffs. Updated the orchestration
+guide to replace the earlier blanket no-wake limitation with its actual lifecycle, retry and
+wake-chain limits. Direct requests 240/241 for authorized Fury/Elementalist preparation were
+accepted and both Claude sessions subsequently reported running; Devil was already running.
+This records observed startup, not completed work or a comprehensive live-provider test. The
+separate Presidium repository's uncommitted Chords source was not modified or committed here.

@@ -86,13 +86,51 @@ pages and acknowledge messages. Use stable recipient IDs and reuse message keys 
 Publish useful completions, blockers and handoffs with actual commits and relative file paths.
 Thread titles, old broadcasts and status badges alone do not prove current implementation progress.
 
-Chords stores messages; it does **not** start a new model turn. A finished coordinator or worker is
-not automatically resumed by a handoff. Check whether the recipient is still checking messages;
-do not interpret silence as refusal or repeatedly resend the same assignment. While actively
-waiting with no independent work, use bounded `wait_for_update` calls (up to 45 seconds) rather than
-rapid polling. Do useful independent work when available and avoid repeated empty status reports.
-If a session must end while dependencies remain, record the next action and clearly state that a
-resume is needed; never promise unattended supervision without a working wake mechanism.
+Ordinary Chords sends store messages without starting a turn. **Chords 0.3.0**, installed by the
+user on 2026-09-19, adds explicit wakeups for an idle peer's already-authorized work. Existing
+sessions use the installed CLI; a fresh MCP session is needed for the updated tool schema. Read
+`/srv/presidium/projects/presidium/code/chords/README.md` for the installed lifecycle rules.
+
+```sh
+chords publish_update - <<'JSON'
+{
+  "message_key": "unit-next-step-COMMIT",
+  "to_thread_id": "RECIPIENT-T3-THREAD-ID",
+  "kind": "handoff",
+  "summary": "Dependency ready at COMMIT. Continue the assigned unit; see its work log.",
+  "wake": true
+}
+JSON
+```
+
+Use a wake for a concrete next action, not an acknowledgement or routine status broadcast. Message
+delivery and `wake.status` are separate: `accepted` means T3 accepted the request, not that Claude
+started or completed work. Verify subsequent session activity and a substantive handoff. `skipped`
+or `failed` needs its reason resolved before deliberately sending a new request. If the response is
+lost, retry the exact message/key; that does not dispatch again. For `unknown`, inspect the returned
+command receipt before recovery; never clear the reservation or try a new key to force another wake.
+
+Only eligible idle peers can wake. Busy recipients get no deferred wake when they later stop;
+broadcasts and self-wakes are rejected. There is a 60-second recipient cooldown and a maximum of
+six accepted or unresolved attempts per hour. A simultaneous user action can still race the idle
+check. Do not bypass lifecycle or approval/input blocks to keep a worker occupied.
+
+**No wake chains:** a Chords-woken thread cannot wake peers until it receives a later user message.
+Passive handoffs still work. A lead awakened by a worker therefore cannot assume it can wake the
+next worker, and an automatically awakened worker cannot wake an idle lead. Keep the relevant lead
+active for dependent handoffs, or explicitly record the required user resume. This version does
+not establish a fully unattended scheduling loop.
+
+While actively waiting with no independent work, use bounded `wait_for_update` calls (up to 45
+seconds) rather than rapid polling. Do useful independent work when available and avoid repeated
+empty status reports. If a session ends while dependencies remain, record the next action and who
+can resume it; never promise unattended supervision without a usable wake path.
+
+Initial live observation: direct continuation requests 240 and 241 were accepted for the Fury and
+Elementalist Claude threads, which subsequently reported `running`; Devil was already running.
+This confirms observed startup after those requests, not completed work, race freedom or general
+Claude wake reliability. The user's reported 47 Chords tests used a mock provider; they do not
+replace checking the live handoffs.
 
 ## Integrate and improve the workflow
 
