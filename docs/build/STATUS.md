@@ -335,3 +335,9 @@ records the handoff; it does not certify A09 or create an implementation commit.
 | Id | Slice | Status | Owner |
 | --- | --- | --- | --- |
 | V45 | [Character option foundation](V45-character-option-foundation.md) | Complete — merged/live `ebe66e2`; 691 tests, 5,584 exact comparisons, 49 applicable browser successes and two shared checks; both audits pass; initial timeout/retry limits retained; no new options enabled | Character integration lead and subagents |
+
+## V49 Polder level one — 2026-09-19
+
+| Id | Slice | Status | Owner |
+| --- | --- | --- | --- |
+| V49 | [Polder level one](V49-polder-level-one.md) | In progress (preparation only) — [source inventory](../research/polder-level-one-preparation.md) with the three-trait gap, each trait's contribution classification, the Shadowmeld structured-effects trap, six double-count hazards and a single-build witness plan; independent source derivation folded in; deliberately independent of V47; nothing executed, no application, shared-contract, runtime or hosted change | Opus implementer, slice/V49 in `opus-polder` |
