@@ -183,8 +183,16 @@ it, and the grounds offered were weaker than the label suggested:
 Recorded as [Q-CHAR-17](../rules-questions-for-user.md) and **blocking nothing**. The build records
 two independent distance contributions, each with its own provenance, which is what gap A's
 recommended representation produces anyway. Build 9 witnesses Distance without Void and build 8
-witnesses Void without Distance, both at +2, so each input is independently established. Only a
-combined displayed figure would depend on the ruling.
+witnesses Void without Distance, both at +2, so each input is independently established.
+
+**Ledger limitation, to be carried explicitly and not quietly dropped.** Displaying two separate
+contributions is an honest partial representation, but it is not the same as establishing the
+effective combined distance. **Build 4 must therefore not be labelled a fully verified counterpart
+for the Void-plus-Distance combination while Q-CHAR-17 is open.** Its two individual contributions
+are verified; its combined effective value is *not verified*, and the option ledger records that in
+those words. Enchantment of Distance and Acolyte of the Mystery each remain fully covered as
+individual options through builds 9 and 8, which carry no such limitation, so the unit's 29-option
+coverage does not depend on build 4's combination being resolved.
 
 ## Enchantment of Battle's kit exclusion — recorded, not enforced
 
