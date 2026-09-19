@@ -828,3 +828,86 @@ No user approval is implied by this classification.
 - **Boundary:** Explicitly includes required supplemental editor choices, grants and derived builds;
   does not enable unrelated supplements/homebrew or claim implemented table support. Forge Steel
   remains a structural and import/export reference; Compendium remains rules authority.
+
+### Q-CHAR-18: Is a Dwarf's Runic Carving rune chosen at character creation?
+
+- **Status:** open
+- **Raised by:** V50 Dwarf level-one preparation, 2026-09-19
+- **Where:** [character specification](character-wizard-spec.md#3-decision-system);
+  `vendor/steel-compendium/en/unified/md/feature/trait/dwarf/runic-carving.md`;
+  `vendor/steel-compendium/en/unified/md/chapter/making-a-hero.md`;
+  `vendor/steel-compendium/en/unified/md/feature/trait/dwarf/dwarf-traits.md`
+- **Conflict or gap:** Runic Carving is the Dwarf's free signature trait. Its text describes carving
+  as an in-play activity — "You can carve a rune onto your skin with 10 uninterrupted minutes of
+  work", and "You can have one rune active at a time, and can change or remove a rune with 10
+  uninterrupted minutes of work". The pin never says a dwarf begins play with a rune carved; an
+  independent Compendium-only review searched the whole book and the whole source tree and found no
+  such sentence. Two further points cut against a creation-time reading: the Quick Build convention
+  in `making-a-hero.md` says every 1st-level option carries a parenthetical Quick Build pick, and
+  the Dwarf quick build names only Grounded and Spark Off Your Skin; and "change **or remove**"
+  means "no rune active" is a legal state that a mandatory creation choice cannot represent. Forge
+  Steel models the rune as a build-time choice, but Forge is a third-party tool and is not rules
+  authority.
+- **Options:** A: a dwarf starts with no rune active and carves one in play. B: the player selects a
+  rune at creation, with Detection's creature-or-object type as a nested sub-choice. C: the Director
+  decides per campaign.
+- **Recommendation:** A. It is what the trait's own wording describes, it is the only option that can
+  represent the "removed" state the rules explicitly contemplate, and it does not require inventing
+  a decision the source never asks for. If the user prefers B, V50 adds a rune decision row with an
+  open-ended nested type field for Detection, and the unit's new-option count rises from five to
+  eight.
+- **Blocked until answered:** nothing. V50 implements the five purchased traits and grants Runic
+  Carving as a readable capability with its full source text, which is correct under every option.
+  No rune is silently defaulted either way.
+- **Answer:** (user fills in)
+
+### Q-CHAR-19: Does Great Fortitude prevent a hero from applying weakened to themselves?
+
+- **Status:** open
+- **Raised by:** V50 Dwarf level-one preparation, 2026-09-19
+- **Where:** `vendor/steel-compendium/en/unified/md/feature/trait/dwarf/great-fortitude.md`;
+  `vendor/steel-compendium/en/unified/md/condition/weakened.md`;
+  `vendor/steel-compendium/en/unified/md/feature/ability/talent/level-1/inertia-soak.md`
+- **Conflict or gap:** Great Fortitude says flatly "You can't be made weakened", with no qualifier
+  about the source. Several talent abilities apply weakened to the hero as their own cost and gate
+  their benefit on that state — Inertia Soak reads "You are weakened (save ends). While you are
+  weakened this way, whenever you are force moved, the forced movement distance gains a +5 bonus."
+  A dwarf talent with Great Fortitude is a legal level-one build within the three-point budget, and
+  on a literal reading can never gain that benefit because it can never enter the required state.
+  The pin does not address the interaction.
+- **Options:** A: the immunity is absolute, so the benefit is unreachable for such a hero.
+  B: the immunity covers only weakened imposed by another creature or effect, so voluntary
+  self-application still works. C: the hero may decline the immunity when self-applying.
+- **Recommendation:** A, as the literal reading, recorded as a limitation rather than an automated
+  block. Note this is a recommendation about how to *record* the interaction; the wizard does not
+  resolve it, because applying weakened happens at the table.
+- **Blocked until answered:** nothing at level one. V50 records the condition immunity as sourced and
+  does not model ability costs. Flagged because the combination is buildable at level one and a
+  later talent unit will meet it.
+- **Answer:** (user fills in)
+
+### Q-CHAR-20: Three narrow Dwarf trait boundaries the pin leaves open
+
+- **Status:** open
+- **Raised by:** V50 Dwarf level-one preparation, 2026-09-19
+- **Where:** `vendor/steel-compendium/en/unified/md/feature/trait/dwarf/stand-tough.md`;
+  `vendor/steel-compendium/en/unified/md/feature/trait/dwarf/dwarf-traits.md`;
+  `vendor/steel-compendium/en/unified/md/rule/character/characteristic.md`;
+  `vendor/steel-compendium/en/unified/md/chapter/ancestries.md`
+- **Conflict or gap:** Three small boundaries, grouped because each is one sentence and none blocks
+  level-one work. (i) Stand Tough's edge applies to Might tests "called for to resist environmental
+  effects or a creature's traits or abilities"; "environmental effect" is used in several places in
+  the pin but never defined, so whether a Might test to swim against a mighty current qualifies is
+  unclear. (ii) Characteristic scores "run from −5 to +5"; if a dwarf has Might +5 and Stand Tough,
+  is the potency-resisting value 6, or clamped to 5? The trait says "treated as 1 higher" with no
+  cap, and the stated range describes scores rather than treated-as values. (iii) The budget text
+  says "You have 3 ancestry points to spend" and the only stated prohibition is exceeding it, so it
+  is unclear whether underspending is permitted.
+- **Options:** For (iii): A: allow underspend with a warning. B: require the full three points.
+- **Recommendation:** (i) treat the edge as table-adjudicated and record the trigger verbatim rather
+  than encoding an inclusion list. (ii) do not clamp, since the range is stated for scores and the
+  trait states no cap; assert the behaviour in a test either way once ruled. (iii) A, allow
+  underspend with a warning, since the source forbids only overspending.
+- **Blocked until answered:** nothing. (i) is manual regardless. (ii) is unreachable at level one
+  with the reference builds, whose Might is −1. (iii) affects only a validation message.
+- **Answer:** (user fills in)

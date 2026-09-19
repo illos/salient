@@ -335,3 +335,9 @@ records the handoff; it does not certify A09 or create an implementation commit.
 | Id | Slice | Status | Owner |
 | --- | --- | --- | --- |
 | V45 | [Character option foundation](V45-character-option-foundation.md) | Complete — merged/live `ebe66e2`; 691 tests, 5,584 exact comparisons, 49 applicable browser successes and two shared checks; both audits pass; initial timeout/retry limits retained; no new options enabled | Character integration lead and subagents |
+
+## V50 Dwarf level one — 2026-09-19
+
+| Id | Slice | Status | Owner |
+| --- | --- | --- | --- |
+| V50 | [Dwarf level one](V50-dwarf-level-one.md) | Preparation in progress — source inventory, three-build minimal-cover reference plan and derived expectations recorded on `slice/V50`. Rune timing unresolved in the pin and raised as Q-CHAR-18; no mandatory creation choice invented from Forge structure. Stand Tough confirmed not to raise Might, with a discriminating Might −1 regression case. No option enabled, no reference captured, no verification run. Implementation gated on the V46 pilot verdict | Opus implementer `88b6a7e6`, slice/V50 |
