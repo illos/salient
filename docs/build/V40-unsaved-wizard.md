@@ -44,3 +44,19 @@ seven regression cases, and the complete Fury/admission/three-audience/table jou
 route transition, and a transient anonymous-backend table query timeout from passing runs.
 The bounded table retry passed in 3.8 minutes without changing table behavior or execution limits.
 All 13 changed code/test files byte-match the tested remote source. No schema migration or seed is needed.
+
+## Integration and shared verification
+
+Independent [implementation review](reviews/V40-unsaved-wizard-review.md) passed. Both actual
+commit-trailer gates passed; main fast-forwarded through spec `00ac99d` and implementation
+`af69671b6469ecaaf55e1374d9cbb5a859e13f5d`. `presidium-dev up` updated shared CT114 `main`,
+compose `salient-dev-b90776c53141`, at the established
+[development URL](https://salient-dev-fc4f48cb09a0.tail41404c.ts.net).
+Backend/frontend are healthy; compatible data volumes and source pins remain intact. No schema
+migration, content reseed, data reset or hosted release was needed or performed.
+
+Both shared browser checks passed in 32.1 seconds, including actual authenticated record-count,
+first-revision and later-save readback. [Shared evidence](evidence/V40/README.md#delivery) closes
+acceptance 6 independently of the pre-merge review. Peer-owned performance-audit files remain
+untracked on main and are excluded from these commits. The isolated `characters` test services
+were stopped after delivery, preserving data. Final documentation changes have no runtime effect.

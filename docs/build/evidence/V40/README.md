@@ -40,7 +40,19 @@ application readback, not from screenshots alone.
 
 ## Delivery
 
-Shared-main rollout is a separate lead-owned gate following review and integration.
+Implementation `af69671b6469ecaaf55e1374d9cbb5a859e13f5d` is merged and running on
+[shared CT114 main](https://salient-dev-fc4f48cb09a0.tail41404c.ts.net).
+[Runtime identity](shared/runtime-status.json) records the established `main` environment and
+`salient-dev-b90776c53141` compose target, same vendor pins and retained play-data volume.
+Its source dirty flag comes from peer-owned untracked performance-audit documentation; runtime
+code matches the reviewed commit. No migration, reseed, reset or hosted release was performed.
+
+[Both actual shared browser scenarios](shared/browser.log) passed in 32.1 seconds: the complete
+V40 unsaved/first-save/pending-drop/reload/edit journey and the existing wizard layout/persistence
+journey. See [shared unsaved Details](shared/unsaved.png) and [shared saved character](shared/saved.png).
+Verification used disposable accounts without modifying existing user records. The isolated
+`characters` services were then stopped, preserving their volumes; shared main remains running.
+The documentation closeout needs no further runtime update.
 
 The full Fury flow reached its shared-table repeated-action loop after passing wizard, admission
 and audience checks. One run then failed because `targets:drafts` hit the anonymous backend's

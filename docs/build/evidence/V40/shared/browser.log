@@ -1,0 +1,6 @@
+
+Running 2 tests using 1 worker
+
+[1/2] tests/browser/v21-wizard.spec.ts:17:1 › wizard frame: header, rail, choice rows, persistence, independent scrolling
+[2/2] tests/browser/v40-unsaved-wizard.spec.ts:8:1 › unsaved wizard creates nothing until first explicit save, then edits the same character
+  2 passed (32.1s)

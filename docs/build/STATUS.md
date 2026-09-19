@@ -304,4 +304,4 @@ records the handoff; it does not certify A09 or create an implementation commit.
 
 | Id | Slice | Status | Owner |
 | --- | --- | --- | --- |
-| V40 | [Unsaved wizard entry](V40-unsaved-wizard.md) | In progress | Character wizard thread |
+| V40 | [Unsaved wizard entry](V40-unsaved-wizard.md) | Complete — merged/live `af69671`; 674 tests, nine isolated browser journeys, two shared browser checks and independent review pass | Character wizard thread |
