@@ -1,10 +1,10 @@
 # V51 first run — RAW DATA LOST, FINDINGS WITHDRAWN
 
 Run 2026-09-19 on the CT114 `characters` environment, exclusively held, brought up from this
-worktree with `presidium-dev --env characters up --replace` through the guarded broker. Source
-identity confirmed by `status` before measuring: checkout `/srv/presidium/projects/salient/opus-diag`,
-commit `7f2f28a`, `dirty: false`, install job exit 0. Existing data volume preserved. Shared `main`
-untouched by this experiment.
+worktree with `presidium-dev --env characters up --replace` through the guarded broker. An early
+`status` recorded `7f2f28a` clean, but that is **not** the tree that produced the numbers below —
+see defect 2. The environment reported `b579450`, dirty, at 21:06. Existing data volume preserved.
+Shared `main` untouched by this experiment.
 
 ## Host intervention that must not be read as original suite conditions
 
@@ -110,9 +110,9 @@ Reported, and now withdrawn: that simple host contention is not the cause either
 equally, the probes would have degraded with everything else. They did not: both probes' medians
 are unchanged between idle and loaded, while application queries crossed the limit.
 
-This is the outcome the plan listed as refuting the shared-prefix explanation, and unlike the
-inconclusive case it is a real refutation, because the loaded condition reproduced an actual
-application failure rather than merely failing to.
+The void run treated this as the plan's refuting outcome. **It is not**, for the reasons above: the
+aggregation was not window-bounded, the source identity was misrecorded, the tails did degrade, and
+none of it can now be inspected.
 
 ## What this does not establish, stated plainly
 
