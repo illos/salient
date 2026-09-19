@@ -1,8 +1,12 @@
 # V52: pace browser-suite account creation to the product's own sign-up limit
 
-**Status: prepared patch, unverified.** No runtime job has been run against it. CT114's
-`characters` environment is owned by another thread for V51, so this is a checkpoint awaiting an
-explicit runtime handoff, not a delivered slice.
+**Status: partially verified; full-suite result is the integration lead's to record.**
+`pnpm check` passes and a focused four-spec run passes, both on `0987595`. What those do **not**
+establish is in [the evidence README](evidence/V52/README.md#focused-specs--two-attempts-and-the-first-one-failed):
+the three previously-refused specs already passed in isolation without any pacing, so a focused
+pass cannot distinguish this slice's effect from the isolation effect. The whole-suite run is the
+only one that can, and runtime orchestration passed to the integration lead partway through
+(Chords 486, 493, 499).
 
 ## Base and relationship to V46
 

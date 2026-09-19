@@ -1,0 +1,63 @@
+{
+ "policy": {
+  "windowMs": 10000,
+  "marginMs": 1500,
+  "quietMs": 11500
+ },
+ "note": "One row per /api/auth/sign-up/email response seen on a watched page, timestamped at the response event. observed:false means a paced submit produced no response within the claim grace. initiated:false means no paced call claimed the response, which is how an unissued request shows up — but a response slower than the grace looks the same, so an observed:false row followed closely by an unclaimed one is probably one exchange, not two. The server-side counter is not visible here; only a backend read shows it.",
+ "processStarted": "2026-09-19T21:59:28.883Z",
+ "exchanges": [
+  {
+   "index": 1,
+   "at": "2026-09-19T21:59:40.726Z",
+   "sincePreviousMs": null,
+   "method": "POST",
+   "status": 200,
+   "retryAfter": null,
+   "observed": true,
+   "initiated": true,
+   "waitedMs": 10145,
+   "reason": "initial-quiescence",
+   "title": "rule cards preserve the wizard, navigate references, scroll and dismiss accessibly"
+  },
+  {
+   "index": 2,
+   "at": "2026-09-19T21:59:52.586Z",
+   "sincePreviousMs": 11860,
+   "method": "POST",
+   "status": 200,
+   "retryAfter": null,
+   "observed": true,
+   "initiated": true,
+   "waitedMs": 7549,
+   "reason": "quiet-interval",
+   "title": "three table contexts, palette, console and live CLI share persisted operations"
+  },
+  {
+   "index": 3,
+   "at": "2026-09-19T22:00:04.419Z",
+   "sincePreviousMs": 11833,
+   "method": "POST",
+   "status": 200,
+   "retryAfter": null,
+   "observed": true,
+   "initiated": true,
+   "waitedMs": 8762,
+   "reason": "quiet-interval",
+   "title": "three table contexts, palette, console and live CLI share persisted operations"
+  },
+  {
+   "index": 4,
+   "at": "2026-09-19T22:00:16.239Z",
+   "sincePreviousMs": 11820,
+   "method": "POST",
+   "status": 200,
+   "retryAfter": null,
+   "observed": true,
+   "initiated": true,
+   "waitedMs": 8206,
+   "reason": "quiet-interval",
+   "title": "three table contexts, palette, console and live CLI share persisted operations"
+  }
+ ]
+}
