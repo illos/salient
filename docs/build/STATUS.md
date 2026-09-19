@@ -341,3 +341,9 @@ records the handoff; it does not certify A09 or create an implementation commit.
 | Id | Slice | Status | Owner |
 | --- | --- | --- | --- |
 | V46 | [Devil, level one](V46-devil-level-one.md) | In progress — `slice/V46` in `/srv/presidium/projects/salient/opus-characters` from `656d831`; pilot unit for the level-one batch, gated on the integration lead's review. All seven purchased traits and all thirteen Silver Tongue skills; no other ancestry, class or level enabled | Opus character wizard thread |
+
+## V51 timeout diagnostic — 2026-09-19
+
+| Id | Slice | Status | Owner |
+| --- | --- | --- | --- |
+| V51 | [Timeout diagnostic](V51-timeout-diagnostic.md) | Prepared, NOT RUN — two nonce-keyed boolean probes and a two-condition measurement plan on `slice/V51`, branched from the frozen V46 candidate `cc7d4ac`. Temporary instrumentation, deleted before any merge; this branch is never merged and is not a route around V46's gates. Four triage overstatements corrected before designing. No probe deployed, no measurement taken, nothing on CT114 — runtime waits on the V46 owner releasing the `characters` slot | Opus `88b6a7e6`, slice/V51 |
