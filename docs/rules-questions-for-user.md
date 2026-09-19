@@ -842,7 +842,10 @@ No user approval is implied by this classification.
   equal to Reason to **one** damage type from acid, cold, corruption, fire, lightning, poison or
   sonic, because Conduit and Censor Nature's Bounty use the identical "or" clause and disambiguate
   it with "choosing a different damage immunity each time", while five other entries use "and" for
-  the simultaneous reading. That settles *how many* types. It does not settle *when* the type is
+  the simultaneous reading. That is a **labelled interpretation**, strongly grounded in the corpus
+  but not stated outright by the ward's own text, and it is the implementation's working assumption
+  rather than a settled fact. Separately, and regardless of how many types are granted, the pin does
+  not settle *when* the type is
   chosen. The owning feature permits changing **which ward** you have by a complex ritual as a
   respite activity, and says nothing about the damage type inside a ward. The pinned Compendium
   does not state the timing anywhere.
@@ -850,10 +853,11 @@ No user approval is implied by this classification.
   respite ritual that already permits swapping wards, so it moves with the ward. C: chosen anew
   each time the immunity would apply.
 - **Recommendation:** B. It is the nearest stated analogue in the owning feature, and it keeps the
-  selection an explicit recorded build choice rather than a hidden play-time decision. C is
-  rejected because it would make the ward's value unbounded in practice and has no support in the
-  pinned text. If the user prefers A, the wizard behavior is unchanged and only the later respite
-  workflow differs.
+  selection an explicit recorded build choice rather than a hidden play-time decision. C has no
+  support in the pinned text. (An earlier draft also argued C would make the ward's value
+  "unbounded in practice"; that was a balance argument, not rules authority, and it is not even
+  accurate for an immunity sized by the Reason score. It is withdrawn.) If the user prefers A, the
+  wizard behavior is unchanged and only the later respite workflow differs.
 - **Blocked until answered:** nothing blocking under A or B, where the level-one build choice is
   identical and only respite reselection — already out of V48's scope — differs. **Answer C would
   invalidate V48's design**: if the type is chosen afresh each time the immunity applies, there is
@@ -878,8 +882,10 @@ No user approval is implied by this classification.
   squares". The pin does not say whether they combine. The Bonuses and Penalties rule says bonuses
   "always add together", but every sentence of it is scoped to power rolls, and the acolyte benefit
   is not even phrased as a bonus. The Distance rule does contain one non-stacking sentence — only
-  one Cloak and Dagger bonus applies to an ability with both Melee and Ranged keywords — but that
-  governs mode-exclusive alternatives, which these are not.
+  one Cloak and Dagger bonus applies to an ability with both Melee and Ranged keywords. **That
+  sentence is about weapon damage bonuses, not distance** — it concerns the kit's melee and ranged
+  *damage* bonuses and merely happens to sit on the Distance page. So the pin states no stacking
+  rule for distance in either direction.
 - **Options:** A: both apply, total +4. B: only the larger applies, total +2. C: they are distinct
   effects that the Director adjudicates per ability.
 - **Recommendation:** A, on the grounds that the two effects come from independent sources and the
