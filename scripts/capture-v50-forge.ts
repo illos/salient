@@ -109,8 +109,11 @@ async function selectPurchasedTraits(page: Page, traits: string[]): Promise<void
  * effect". That was wrong: building a reference hero in Forge is observation, and observing a
  * third-party tool adopts nothing about Salient's rules either way. The honest reason is narrower —
  * this script's witness scope is the five purchased traits, which is what the three builds cover.
- * Rune coverage is consequently INCOMPLETE and creation-policy coverage stays open pending review;
- * extend this script to drive the Conditional Features modal when that scope is agreed.
+ * Under the unit's recorded interpretation a level-one build has no rune and is still complete, so
+ * the runes are not level-one build options and need no counterpart here. That is a scope
+ * statement, not a claim that rune behaviour is verified. If a rune is ever captured, note that
+ * Forge does not model Detection's creature/object type — prose only, no data field — which is a
+ * real reference limit; extend this script to drive the Conditional Features modal at that point.
  */
 async function captureBuild(
   page: Page,
@@ -226,7 +229,7 @@ async function main(): Promise<void> {
         completionDetection:
           'NOT AUTOMATED. Every witness is completionVerified: false and must be confirmed by hand against the rendered sheet before it is treated as a counterpart.',
         runicCarvingCoverage:
-          'INCOMPLETE — Q-CHAR-18 open. Forge marks the rune selectAt: play, so its build editor offers no rune chooser; observing that does not decide Salient rules.',
+          'OUT OF LEVEL-ONE BUILD SCOPE. A level-one build has no rune and is complete, so no rune counterpart is required. This is scope, not a verification claim: rune behaviour is not covered. Forge also does not model Detection subtype, a real reference limit if a rune is ever captured.',
         witnesses,
       },
       null,

@@ -361,8 +361,9 @@
     "runicCarvingRunes": {
       "total": 3,
       "covered": 0,
-      "status": "INCOMPLETE — blocked on Q-CHAR-18",
-      "note": "COVERAGE LIMIT, not a safeguard: this unit's witness scope is the five purchased traits, so no rune is captured and rune coverage is INCOMPLETE. There is no reference limitation — Forge marks the rune selectAt: 'play', so its build editor offers none, but the Conditional Features modal writes a selection onto the hero that Export as Data serialises, so a rune-bearing counterpart is capturable. Creation-policy coverage stays open pending review."
+      "status": "OUT OF LEVEL-ONE BUILD SCOPE — not a coverage gap",
+      "note": "Recorded interpretation (see the slice document): a dwarf begins play with no rune active, and a level-one build with no rune is complete. The three rune options are therefore not level-one build options and need no counterparts. This is a SCOPE statement, not a claim that rune behaviour is verified: the runes, Detection's nested subtype, and carving, changing and removal all remain readable source with manual play resolution and no counterpart coverage.",
+      "referenceLimitIfEverTested": "Forge does not model Detection's creature/object type — it is prose in the option description with no data field — so a Forge counterpart could carry 'Detection selected' but not 'goblins' as structured data."
     },
     "unspentPoints": {
       "status": "settled, not a question",
@@ -371,6 +372,10 @@
     "completionDetection": {
       "status": "NOT AUTOMATED",
       "note": "capture-v50-forge.ts cannot detect editor completion state; every witness is completionVerified: false and must be confirmed by hand before it counts as a counterpart."
+    },
+    "newlyDeliveredOptions": {
+      "count": 5,
+      "what": "the five purchased traits"
     }
   },
   "forgeCorrections": {

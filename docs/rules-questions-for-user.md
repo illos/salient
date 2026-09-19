@@ -829,60 +829,35 @@ No user approval is implied by this classification.
   does not enable unrelated supplements/homebrew or claim implemented table support. Forge Steel
   remains a structural and import/export reference; Compendium remains rules authority.
 
-### Q-CHAR-18: Is a Dwarf's Runic Carving rune chosen at character creation?
+### Q-CHAR-18: Is a Dwarf's Runic Carving rune chosen at character creation? — WITHDRAWN
 
-- **Status:** open
-- **Raised by:** V50 Dwarf level-one preparation, 2026-09-19
-- **Where:** [character specification](character-wizard-spec.md#3-decision-system);
-  `vendor/steel-compendium/en/unified/md/feature/trait/dwarf/runic-carving.md`;
-  `vendor/steel-compendium/en/unified/md/feature/trait/dragon-knight/wyrmplate.md`;
-  `vendor/steel-compendium/en/unified/md/feature/trait/dragon-knight/prismatic-scales.md`
-- **Conflict or gap:** Runic Carving is the Dwarf's free signature trait. Its text describes carving
-  as an in-play activity — "You can carve a rune onto your skin with 10 uninterrupted minutes of
-  work", and "You can have one rune active at a time, and can change **or remove** a rune with 10
-  uninterrupted minutes of work". The pin never says a dwarf begins play with a rune; an
-  independent Compendium-only review searched the whole book and the whole source tree and found no
-  such sentence, and "remove" means having no rune is a legal state.
-
-  Pointing the other way, the pin's closest analogue is Dragon Knight's **Wyrmplate**: also a free
-  signature trait, also carrying a selection that is changeable in play ("You can change your damage
-  immunity type when you finish a respite"). The pin then hangs a purchased trait off that
-  selection — **Prismatic Scales** reads "Select one damage immunity **granted by your Wyrmplate
-  trait**" — which presupposes the Wyrmplate selection exists at build time. So "the text describes
-  a changeable in-play activity" does not by itself mean "not chosen at creation" in this rules set.
-  Two things keep the rune unsettled rather than resolved by the analogue: Runic Carving has no
-  dependent purchased trait, and Wyrmplate has no equivalent of the rune's "remove" state.
-
-  Forge Steel marks the feature `selectAt: 'play'`, so its **build editor** offers no rune chooser;
-  the selection is instead offered in the Conditional Features modal reachable from the hero view
-  (`src/logic/hero-logic.ts` `getConditionalFeatures`, `src/components/modals/hero-conditional/`,
-  reached via `src/components/panels/hero/name/name-panel.tsx`). That modal writes the selection
-  onto the hero object, which is what `Export as Data` serialises, so **Forge can represent and
-  export a hero with a rune selected.** Two earlier drafts of this entry were wrong in opposite
-  directions: the first said Forge models the rune as a build-time choice, and the second said Forge
-  cannot produce a rune-bearing counterpart at all. Neither is true, and neither bears on the
-  question: Forge is not rules authority, and how a third-party tool classifies the selection does
-  not decide whether the source requires one at creation.
-- **Options:** A: a dwarf starts with no rune active and carves one in play. B: the player selects a
-  rune at creation, with Detection's creature-or-object type as a nested sub-choice. C: the Director
-  decides per campaign.
-- **Recommendation:** A. It is what the trait's own wording describes, and it does not require
-  inventing a decision the source never asks for. (An earlier draft also argued that only A can
-  represent the "removed" state the rules contemplate. That does not follow — a rune selected at
-  creation can still be removed later — and the argument is withdrawn. The "remove" wording shows
-  that having no rune is legal, which is consistent with A but does not establish it.) If the user prefers B, V50 adds a rune decision row with an
-  open-ended nested type field for Detection, and the unit's new-option count rises from five to
-  eight.
-- **Blocked until answered:** no other work is blocked — V50 implements the five purchased traits and
-  grants Runic Carving as a readable capability, and no rune is silently defaulted either way.
-  **But something is at stake in the answer.** Under option B a build with no rune is an incomplete
-  build, so while this is open **rune coverage is recorded INCOMPLETE in V50's option ledger** and no
-  same-build rune counterpart is certified. If the answer is B, a rune-bearing counterpart is
-  capturable from Forge through the Conditional Features modal rather than the build editor, so
-  there is **no reference limitation** — an earlier draft claimed one and it is withdrawn. An
-  earlier draft also said the interim treatment was "correct under every option"; that was too
-  strong and is withdrawn.
-- **Answer:** (user fills in)
+- **Status:** withdrawn 2026-09-19, not a user question. Resolved by a labelled interpretation
+  recorded in [the V50 slice](build/V50-dwarf-level-one.md) and
+  [its source preparation](research/dwarf-level-one-preparation.md). The id is preserved so the
+  history stays traceable; no user ruling is required.
+- **Why withdrawn:** the trait's own grammar settles it. Runic Carving grants a capability
+  conditioned on an activity — "You can carve a rune onto your skin with 10 uninterrupted minutes of
+  work" — with no present-tense grant of any benefit, and "You can have one rune active at a time,
+  and can change **or remove** a rune" makes zero runes a legal state. A dwarf therefore begins play
+  with the trait and **no rune active**, and a level-one build with no rune is a **complete** build.
+  The builder must not require a rune and must not silently default one.
+- **The Wyrmplate analogy fails on that same grammar**, which an earlier draft of this entry did not
+  identify. Wyrmplate is a present-tense grant — "Your hardened scales **grant you** damage immunity
+  … to one of the following damage types" — so a selection must already exist for the sentence to be
+  true, which is why Prismatic Scales can reference "one damage immunity granted by your Wyrmplate
+  trait". Runic Carving grants nothing until the activity is performed. Compare also Revenant Former
+  Life, a signature trait whose selection is unmistakably build-time because it sets size and speed
+  in the present tense.
+- **What this does not establish:** removing the mandatory creation choice does not verify rune
+  behaviour. The three rune options, their nested Detection subtype, carving, changing and removal
+  all remain manual play activity with no counterpart coverage claimed. See the V50 ledger.
+- **Forge Steel, recorded as implementation observation and not as evidence here:** Forge marks the
+  feature `selectAt: 'play'` and offers it in its Conditional Features modal rather than the build
+  editor; a selection there is written onto the hero and exported. Forge does **not** model
+  Detection's creature/object type — it is prose inside the option description with no data field —
+  so a Forge counterpart could carry "Detection selected" but not "goblins" as structured data. That
+  is a real reference limit if a rune is ever captured, and it is the opposite of a limitation an
+  earlier draft claimed and then withdrew. None of this bears on the rules reading.
 
 ### Q-CHAR-19: Does Great Fortitude prevent a hero from applying weakened to themselves?
 

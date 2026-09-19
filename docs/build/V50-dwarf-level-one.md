@@ -228,70 +228,53 @@ Light's illumination and Voice's telepathy, all of which are table-resolved. Sto
 reshaping. Equipment and treasure modelling. Import/export adapters. Any change to Devil, Polder,
 Fury or Elementalist behaviour beyond the shared additions named above.
 
-## Open questions
+## Recorded interpretation, and the questions that remain
 
-**Q-CHAR-18 — is a Dwarf's rune chosen at character creation?** The pinned source describes
-carving as a 10-minute in-play activity that can be changed **or removed**, and never says a hero
-begins play with a rune. Forge marks the feature `selectAt: 'play'`, so the structural reference
-agrees it is not a creation choice — corroboration, not authority. Against that, the pin's closest
-analogue cuts the other way: Dragon Knight's Wyrmplate is a free signature trait with an
-in-play-changeable selection, and the purchased trait Prismatic Scales says "Select one damage
-immunity **granted by your Wyrmplate trait**", presupposing that selection exists at build time.
-Runic Carving has no such dependent trait, and its explicit "remove" state has no Wyrmplate
-equivalent, so the analogue does not settle it.
+### Runic Carving — no rune at creation (was Q-CHAR-18)
 
-**This shapes the implementation**: under the play-time reading the unit delivers five new options
-and a readable capability; under the creation reading it delivers eight and needs a decision row
-with a nested open-ended Detection type field. Until it is answered the unit implements the five
-purchased traits and grants Runic Carving as a readable capability, and does **not** invent a
-wizard decision.
+**Withdrawn as a user question; resolved by a labelled interpretation.** A dwarf hero begins play
+with the Runic Carving trait and **no rune active**. Carving, changing and removing a rune are
+play-time activities costing 10 uninterrupted minutes. **A level-one build with no rune is a
+complete build**; the builder must not require a rune and must not silently default one.
 
-**That is not complete coverage.** Under the creation reading, a build with no rune is an incomplete
-build. **Rune coverage is marked INCOMPLETE in the option ledger** and no same-build rune counterpart
-is certified while the question is open.
+The trait's grammar settles it. It grants a capability conditioned on an activity — "You can carve a
+rune onto your skin with 10 uninterrupted minutes of work" — with no present-tense grant of any
+benefit, and "You can have one rune active at a time, and can **change or remove** a rune" makes
+zero runes a legal state. What the ancestry gives free is the carving capability, not a carved rune.
 
-There is, however, **no reference limitation**. Forge marks the rune `selectAt: 'play'`, so its build
-editor offers no rune chooser, but the selection is offered in the Conditional Features modal reached
-from the hero view, and that modal writes onto the hero object which `Export as Data` serialises. A
-rune-bearing counterpart is therefore capturable from Forge if the answer turns out to be B. Two
-earlier drafts of this document were wrong in opposite directions — first that Forge models the rune
-as a build-time choice, then that Forge cannot produce a rune-bearing counterpart at all. Neither is
-true, and neither bears on the rules question.
+The Wyrmplate analogy an earlier draft offered as a counterweight fails on that same grammar.
+[Wyrmplate](../../vendor/steel-compendium/en/unified/md/feature/trait/dragon-knight/wyrmplate.md) is
+a present-tense grant — "Your hardened scales **grant you** damage immunity … to one of the
+following damage types" — so a selection must already exist for the sentence to be true, which is
+why [Prismatic Scales](../../vendor/steel-compendium/en/unified/md/feature/trait/dragon-knight/prismatic-scales.md)
+can reference "one damage immunity granted by your Wyrmplate trait". Runic Carving grants nothing
+until the activity is performed. The grammatical difference, not the absence of a dependent
+purchased trait, is what resolves the analogy.
 
-Q-CHAR-19 and Q-CHAR-20 are recorded there too. **They are gameplay and adjudication questions, not
-editor-support questions**, and are deliberately kept separate from this unit's scope: whether Great
+**What this interpretation does NOT establish.** Removing the mandatory creation choice does not
+verify rune behaviour, and nothing here claims rune states or counterparts are covered. The three
+rune options, Detection's nested creature-or-object subtype, and carving, changing and removal all
+remain readable source with manual play resolution. V50 delivers **five** purchased-trait options;
+the rune options are not level-one build options under this interpretation and therefore need no
+counterparts — which is a scope statement, not a coverage claim.
+
+**A real reference limit, recorded for whoever tests a rune later.** Forge does not model
+Detection's creature/object type; it is prose inside the option description with no data field. So a
+Forge counterpart could carry "Detection selected" but never "goblins" as structured data. This is
+implementation observation, not rules evidence, and it is the opposite of the limitation an earlier
+draft of this unit claimed and then withdrew.
+
+### Questions that remain, both later gameplay rather than editor support
+
+Q-CHAR-19 and Q-CHAR-20 in [the questions file](../rules-questions-for-user.md) are adjudication
+questions, deliberately kept separate from this unit's scope and blocking nothing: whether Great
 Fortitude prevents a hero self-applying weakened as an ability cost; what counts as an
-"environmental effect" for Stand Tough's edge; whether a Might +5 dwarf's potency-resist value is 6
-or clamps at 5; and whether a Might +5 dwarf's potency-resist value clamps. None blocks level-one editor support,
-and none licenses adding automation this unit was not asked for.
+"environmental effect" for Stand Tough's edge; and whether a Might +5 dwarf's potency-resist value
+clamps at 5. None licenses adding automation this unit was not asked for.
 
-**Underspending the three ancestry points is not an open question.** It is already settled by
-Q-CHAR-10 — permit unspent points with a warning, without a separate acknowledgement; unspent points
-alone do not block completion, and overspending remains invalid. An earlier draft of this unit
-wrongly reopened it. V50 follows the existing policy.
-
-## Capture status
-
-The choice maps and the capture script exist; **no capture has been run**. `choice-maps.json`
-carries the selections and independently derived expectations; `capture-v50-forge.ts` drives the
-real editor tab by tab and exports through the application's own path, under the capture mode V46
-established and the lead directed — the pinned Forge application built and served on CT114, with
-`vendor/forge-steel` never built into or modified.
-
-The script does not select a rune. That is a **coverage limit, not a safeguard**: this unit's witness
-scope is the five purchased traits. An earlier draft framed the omission as refusing to resolve an
-open source question by side effect, which was wrong — building a reference hero in Forge is
-observation, and observing a third-party tool adopts nothing about Salient's rules. Rune coverage is
-therefore INCOMPLETE and creation-policy coverage stays open pending review.
-
-**Completion state is not detected automatically, and the script does not pretend otherwise.** An
-earlier draft scraped three selectors for outstanding-choice warnings and claimed a partial capture
-therefore could not look complete. An independent review found that none of those selectors matches
-anything in Forge, so the guard was vacuous and would have recorded every witness clean. It is
-removed. Every witness is written `completionVerified: false` and must be confirmed by hand against
-the rendered sheet before it counts as a counterpart. The locators are also authored against the
-editor's component structure rather than a running instance, and some are known to be wrong; they
-fail loudly, but they must be corrected on first execution.
+**Underspending the three ancestry points is not an open question.** Q-CHAR-10 settles it — permit
+unspent points with a warning, no separate acknowledgement; unspent points alone do not block
+completion, and overspending remains invalid. An earlier draft wrongly reopened it.
 
 ## Work log
 

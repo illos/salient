@@ -62,74 +62,51 @@ Note the asymmetry: Detection's target type is re-selectable as a maneuver, Voic
 only by re-carving. Voice also carries prerequisites — willing, previously met, within 1 mile, you
 know their name, and they speak a language you know.
 
-### Whether a rune is a creation choice is UNRESOLVED, and must not be invented
+### The rune is not a creation choice — recorded interpretation
 
-**The pinned source does not settle it, and describes an in-play activity.** An independent
-Compendium-only derivation reached this conclusion; an independent review then confirmed the
-conclusion while refuting one of the arguments originally offered for it. Both corrections are
-recorded below rather than quietly dropped.
+**A dwarf begins play with the Runic Carving trait and no rune active**, and a level-one build with
+no rune is a complete build. Carving, changing and removing are play-time activities costing 10
+uninterrupted minutes. The builder must not require a rune and must not silently default one.
 
-What the source says: "You can carve a rune onto your skin with **10 uninterrupted minutes of
-work**" and "You can have one rune active at a time, and can **change or remove** a rune with 10
-uninterrupted minutes of work." Every clause is framed as a time-costed in-fiction activity, the
-same shape as Stone Singer's "When you spend 1 uninterrupted hour singing".
+The trait's grammar settles it. It grants a capability conditioned on an activity — "You can carve a
+rune onto your skin with 10 uninterrupted minutes of work" — with no present-tense grant of any
+benefit; and "You can have one rune active at a time, and can **change or remove** a rune with 10
+uninterrupted minutes of work" makes zero runes a legal state. Per
+[Ancestries](../../vendor/steel-compendium/en/unified/md/chapter/ancestries.md), a signature trait
+is what "your hero gets for free if they take that ancestry" — here, the carving capability, not a
+carved rune. No sentence anywhere in the pin puts a rune on a dwarf at creation.
 
-**There is no sentence anywhere in the pin of the form "choose a rune when you create your
-character", "you begin play with a rune", or "you know the following runes."** That absence was
-established by searching the whole Heroes book for `rune` — **12 matching lines**: one chapter
-thumbnail, four lines of the trait itself (the Light paragraph contains no occurrence), and seven
-unrelated entries across the Basics, a gear table, treasures and a title — and by searching the
-whole `en/` tree for "Runic Carving", which returns only the trait, its JSON twin, an index link,
-the ancestry frontmatter label and the per-book mirror. The word never appears in
-`making-a-hero.md` or `ancestries.md`. An earlier draft of this document said "ten hits" and
-miscategorised two of them; the corrected count does not change the conclusion, but a number
-offered as proof has to be right.
+**The Wyrmplate analogy fails on that same grammar.**
+[Wyrmplate](../../vendor/steel-compendium/en/unified/md/feature/trait/dragon-knight/wyrmplate.md) is
+a present-tense grant — "Your hardened scales **grant you** damage immunity equal to your level to
+one of the following damage types" — so a selection must already exist for the sentence to be true,
+which is why [Prismatic Scales](../../vendor/steel-compendium/en/unified/md/feature/trait/dragon-knight/prismatic-scales.md)
+can say "Select one damage immunity granted by your Wyrmplate trait". Runic Carving grants nothing
+until the activity is performed. Compare also
+[Former Life](../../vendor/steel-compendium/en/unified/md/feature/trait/revenant/former-life.md), a
+signature trait whose selection is unmistakably build-time because it sets size and speed in the
+present tense. Two earlier drafts of this document handled the analogy badly — the first missed it,
+the second offered it as an unresolved counterweight — and the grammatical distinction is what
+actually resolves it.
 
-**What Forge actually does, corrected twice.** A first draft asserted Forge models the rune as a
-build-time choice; **that was wrong and I did not verify it before asserting it.** Forge marks the
-feature `selectAt: 'play'` (`src/data/ancestries/dwarf.ts`, on `dwarf-feature-1`); the field's type
-is `'build' | 'respite' | 'play'`, the factory default is `'build'`, and Forge uses all three
-deliberately — Dragon Knight's Wyrmplate is `'respite'`, and Dwarf Traits carries no `selectAt` and
-so is build-time.
+**Withdrawn arguments, recorded rather than deleted.** An earlier draft argued from the Quick Build
+convention; that is refuted, because the parenthetical sits inside the Purchased Traits heading in
+every ancestry and names only purchased traits — Dragon Knight's names no Wyrmplate damage type
+despite Wyrmplate requiring a selection. An earlier draft also gave a rune line count of ten; the
+correct figure is twelve matching lines, with two miscategorised. And an earlier draft argued that
+only this reading can represent the "remove" state; that does not follow, since a rune chosen at
+creation could also be removed later.
 
-A second draft then over-corrected, concluding that Forge therefore offers no rune at all and cannot
-produce a rune-bearing counterpart. **That was also wrong.** `HeroLogic.getConditionalFeatures`
-filters `selectAt === 'play'` features into the **Conditional Features** modal
-(`src/components/modals/hero-conditional/hero-conditional-modal.tsx`), reachable from the hero view
-(`src/components/panels/hero/name/name-panel.tsx`). Its `setData` writes the selection onto the hero
-object, and `Export as Data` (`src/components/pages/heroes/hero-view/hero-view-page.tsx`) serialises
-that hero. **A rune selected through the play UI is exported.**
+**Forge Steel, as implementation observation only.** Forge marks the feature `selectAt: 'play'` and
+surfaces it in its Conditional Features modal rather than the build editor; a selection there is
+written onto the hero and is exported. Forge does **not** model Detection's creature/object type —
+prose in the option description, no data field — so a counterpart could carry "Detection selected"
+but never "goblins" as structured data. That is a real reference limit if a rune is ever captured.
+None of it is rules authority and none of it decided the reading above.
 
-The accurate statement: Forge classifies the rune as an in-play selection rather than a build choice,
-and can still represent and export one. That is a third-party tool's classification. It is
-corroboration at most, it is **not** rules authority, and it does not decide whether the source
-requires a rune at creation.
-
-**One argument is withdrawn as refuted.** An earlier draft argued that `making-a-hero.md` states
-every 1st-level option carries a Quick Build pick, that the Dwarf quick build names no rune, and
-that a rune is therefore not a 1st-level option. The pin refutes this: the quick-build parenthetical
-sits inside the **Purchased Traits** heading in every ancestry that has one and names only purchased
-traits. Dragon Knight's is "Dragon Breath, Prismatic Scales" and names **no Wyrmplate damage type**,
-although Wyrmplate unambiguously requires a current selection. The convention never covers
-signature-trait selections, so the rune's absence from it carries no information either way.
-
-**The strongest in-pin consideration on the other side**, which the earlier draft missed:
-[Wyrmplate](../../vendor/steel-compendium/en/unified/md/feature/trait/dragon-knight/wyrmplate.md)
-is the pin's closest analogue — a free signature trait whose benefit requires a currently-selected
-option, explicitly re-selectable in play ("You can change your damage immunity type when you finish
-a respite"). The pin then hangs a purchased trait off that selection:
-[Prismatic Scales](../../vendor/steel-compendium/en/unified/md/feature/trait/dragon-knight/prismatic-scales.md)
-reads "**Select one damage immunity granted by your Wyrmplate trait.**" That presupposes the
-Wyrmplate selection exists at build time. So "the text describes an in-play, changeable activity"
-does **not** by itself imply "not chosen at creation" in this rules set.
-
-Two distinctions keep the rune unsettled rather than resolved by that analogue: Runic Carving has no
-dependent purchased trait, and "change **or remove**" makes *no rune* a legal state, which Wyrmplate
-has no equivalent of.
-
-Recorded as an open question. Until it is answered, the proposed treatment is to grant the Runic
-Carving **capability** with its full readable text and to model no mandatory creation decision. See
-[V50's open questions](../build/V50-dwarf-level-one.md#open-questions).
+**What this does not establish:** rune behaviour is not verified by removing the mandatory choice.
+The three runes, Detection's subtype, and carving, changing and removal remain readable source with
+manual play resolution and no counterpart coverage.
 
 ## Purchased traits
 
