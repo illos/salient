@@ -316,7 +316,7 @@ records the handoff; it does not certify A09 or create an implementation commit.
 
 | Id | Slice | Status | Owner |
 | --- | --- | --- | --- |
-| V44 | [Character option delivery plan](V44-character-option-delivery.md) | Plan recorded; foundation, five level-one option units and full audits pending. User authorized per-ancestry/class/level commits, same-build Forge verification and incremental verified merges. | Character integration lead with ancestry/class implementers |
+| V44 | [Character option delivery plan](V44-character-option-delivery.md) | Plan recorded; V45 foundation audited/merged/live, five level-one option units and combined first-wave audit pending. User authorized per-ancestry/class/level commits, same-build Forge verification and incremental verified merges. | Character integration lead with ancestry/class implementers |
 
 ## V41 — reference loading and shared navigation
 
@@ -334,4 +334,4 @@ records the handoff; it does not certify A09 or create an implementation commit.
 
 | Id | Slice | Status | Owner |
 | --- | --- | --- | --- |
-| V45 | [Character option foundation](V45-character-option-foundation.md) | Reviewed — 691 tests, 5,584 exact comparisons and 49 applicable browser successes; implementation and rules audits pass; integration/shared delivery pending; initial timeout/retry evidence retained | Character integration lead and subagents |
+| V45 | [Character option foundation](V45-character-option-foundation.md) | Complete — merged/live `ebe66e2`; 691 tests, 5,584 exact comparisons, 49 applicable browser successes and two shared checks; both audits pass; initial timeout/retry limits retained; no new options enabled | Character integration lead and subagents |

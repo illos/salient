@@ -76,4 +76,30 @@ tests; these are automated checks, not user playtest feedback.
 
 ## Shared delivery
 
-Pending reviewed commit and integration. The shared playable main has not been changed by V45.
+Merged implementation `ebe66e2b631cb9d30acb59cb24011d0585bdf9d3` rebases the reviewed candidate
+over the performance thread's documentation-only `59fb792`. Only the STATUS conflict needed
+resolution; all 39 candidate hashes still match. Merge trailers and final documentation links pass.
+
+`presidium-dev up` synchronized the clean main checkout to established CT114 main, local-anonymous
+backend `anonymous:anonymous-agent`, Compose `salient-dev-b90776c53141`, frontend port 32834 and
+[shared URL](https://salient-dev-fc4f48cb09a0.tail41404c.ts.net). Existing volumes, credentials and
+play data were retained. [Backend sync](shared-backend-ready.log) completed at 14:53:02 UTC.
+[Serving source verification](shared-source-verification.json) matches all 39 candidate files.
+
+[Actual shared browser checks](shared-browser.log): **2 passed, 1.2 minutes**—corrected Polder/Fire
+Elementalist wizard, reload, review and sourced sheet; Devil/Berserker Fury advancement, live-value
+preservation, source cards and reviewed history restoration. Retained screenshots show
+[Elementalist](shared-elementalist-sheet.png), [Fury level two](shared-level-two-sheet.png) and
+[restored Fury](shared-restored-sheet.png); [raw application readback](shared-progression-readback.json)
+records persisted before/advanced/restored builds and live values. These create disposable test
+records without resetting existing campaigns or characters.
+
+[Filtered shared runtime log](shared-runtime-exceptions.log): no backend execution timeout or
+validation failure during these checks. `foes:list` near-limit warnings reached 808 and 888 ms;
+retain them with the broader performance follow-up.
+
+The owned isolated `characters` environment is stopped with volumes/artifacts retained. This is
+local shared development delivery only: hosted runtime remains the performance release's source
+`944a46a`/Worker `7e86903b-5f7c-46a8-8d68-540f8f21991f`. V45 was not published there or pushed to
+remote Git. The final delivery-record commit changes only documentation/evidence and needs no
+additional runtime restart.

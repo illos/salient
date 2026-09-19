@@ -8,7 +8,7 @@
 | Rules review | Required: preservation of sourced calculations and option boundaries |
 | Depends on | V44, V25, V32, V37, V40, V42 |
 | Unblocks | Independent ancestry and class/level option slices |
-| Status | Implementing; see `STATUS.md` |
+| Status | Complete — reviewed, merged and verified on shared CT114 main; see `STATUS.md` |
 
 ## Goal
 
@@ -120,3 +120,17 @@ authorized hosted publication; this slice has no hosted publication authorizatio
 2026-09-19: independent implementation and rules-preservation pre-merge audits both PASS.
 All reference/performance limitations remain explicit. Reviewed code is ready to commit;
 shared main integration and live verification remain the lead's delivery gate.
+
+2026-09-19: rebased over documentation-only `59fb792`, preserving both STATUS records; all 39
+reviewed code/reference hashes unchanged. Merge gate passes; implementation `ebe66e2b631c`
+fast-forwarded into main. `presidium-dev up` synchronized the clean main checkout to established
+local-anonymous CT114 main with existing data/credentials retained. Backend ready 14:53:02 UTC;
+both real shared character journeys pass in 1.2 minutes, including persisted progression/history
+readback. Thirty-nine runtime hashes match; no execution timeout in these checks, with retained
+foe-list near-limit warnings. See the [shared evidence](evidence/V45/README.md#shared-delivery).
+Owned isolated characters stack stopped with data/artifacts retained. No V45 hosted publish or
+remote Git push; the hosted performance source remains `944a46a`. Foundation complete; new
+ancestry/class units remain separate future commits under V44.
+
+Final independent delivery audit verifies acceptance check 7 and records PASS. The closeout
+commit contains documentation/evidence only; running application remains `ebe66e2`.

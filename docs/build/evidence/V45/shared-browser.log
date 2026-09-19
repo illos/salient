@@ -1,0 +1,8 @@
+ Container salient-dev-b90776c53141-job-a312c985 Creating
+ Container salient-dev-b90776c53141-job-a312c985 Created
+
+Running 2 tests using 1 worker
+
+[1/2] tests/browser/v25-elementalist.spec.ts:8:1 › corrected Forge Bethell: complete wizard, reload, review and sourced sheet
+[2/2] tests/browser/v32-progression.spec.ts:29:1 › Fury advancement preserves live state; source-complete sheet and reviewed history restoration
+  2 passed (1.2m)

@@ -1,19 +1,22 @@
 # V45 independent foundation review
 
 Reviewer: `wizard_plan_review`, 2026-09-19. Implementer: character integration lead and
-`foundation_content`. Review baseline: `9fb4fa6`; candidate: staged, uncommitted `slice/V45`
-on integration parent `944a46a`, identified by the V45 candidate hash manifest.
+`foundation_content`. Review baseline: `9fb4fa6`; reviewed candidate initially based on
+integration parent `944a46a`, identified by the V45 candidate hash manifest. Final implementation
+is `ebe66e2b631cb9d30acb59cb24011d0585bdf9d3`; all 39 candidate file identities remain unchanged.
 This reviewer did not implement application code. Initial review and repaired-candidate static
 re-review are recorded below. Repository, exact-preservation, portable-reference and applicable
-browser evidence have now been reviewed. Shared playable delivery remains the lead's post-merge gate.
+browser evidence have now been reviewed. Shared playable delivery evidence is accepted in the
+final addendum below.
 
 ## Verdict
 
-**Pass — pre-merge implementation audit, 2026-09-19.** Both initial static blockers are repaired.
+**Pass — implementation audit and shared development delivery, 2026-09-19.** Both initial static blockers are repaired.
 The unchanged candidate has passing evidence for all applicable foundation acceptance scenarios.
 The retained intermittent backend timeouts and account rate limits are acknowledged below; they
 are not certified fixed. No remaining V45 implementation blocker was identified. This verdict
-permits the lead's commit/integration procedure; it does not attest shared rollout completion.
+initially permitted the lead's commit/integration procedure. The final delivery addendum now
+accepts that completed integration and shared rollout; it does not certify a hosted release.
 
 ## Findings
 
@@ -104,7 +107,7 @@ results; no additional test workload was run by the reviewer.
 | Browser journeys | Initial 52-scenario batch: 45 pass, four fail, three environment-specific skips. All four failures subsequently pass unchanged in retained reruns. | Pass for all 49 applicable scenarios, with intermittent performance limitation |
 | Actual persisted advancement/restoration | Raw before/advanced/restored application readback, source-card identities and history; inspected corresponding screenshots. | Pass |
 | Candidate identity | Isolated source verification reports 39 compared application/test/reference files and zero mismatches. | Pass |
-| Shared playable delivery | Actual integrated commit, shared runtime update and changed-feature readback not yet available. | Pending post-merge lead gate |
+| Shared playable delivery | Implementation `ebe66e2`; backend ready; 39/39 serving source identities; two shared browser journeys and persisted progression readback. | Pass; see final addendum |
 
 Reviewed the initial browser log and all three retry logs. Closeout passes in 1.4 minutes;
 table-audit and campaign registration pass together in 2.0 minutes; Fury wizard/admission/sheet/
@@ -138,3 +141,36 @@ Before declaring merge complete, the lead must validate final commit trailers/do
 integrate the reviewed candidate, update the shared development runtime and retain the actual
 shared changed-feature verification. If application code changes, renew affected checks and
 review instead of inheriting this candidate's verdict.
+
+## Final shared-delivery acceptance
+
+**Acceptance check 7 is complete.** Reviewed the final
+[delivery record](../evidence/V45/README.md#shared-delivery),
+[shared browser results](../evidence/V45/shared-browser.log),
+[serving source verification](../evidence/V45/shared-source-verification.json),
+[backend-ready log](../evidence/V45/shared-backend-ready.log),
+[runtime warnings](../evidence/V45/shared-runtime-exceptions.log) and raw
+[persisted progression readback](../evidence/V45/shared-progression-readback.json).
+
+The reviewed application is integrated as `ebe66e2b631cb9d30acb59cb24011d0585bdf9d3` after a
+documentation-only main update; all 39 application/test/reference identities match the candidate.
+The established CT114 main backend synchronized successfully at 14:53:02 UTC. The source record
+identifies the shared HTTPS app and CT114 main, distinct from the earlier isolated environment.
+The lead records retained volumes, credentials and existing play data and successful final commit
+trailer/documentation validation.
+
+Both actual shared browser journeys pass in 1.2 minutes: corrected Bethell wizard/reload/review/
+source sheet, and Fury advancement/source sheet/history restoration. Direct readback again shows
+Stamina maximum/current 30/20 before advancement, 39/20 afterward, and 30/30 after the deliberate
+39-current restoration setup and approved cap. Recoveries 4 and Ferocity 3 remain unchanged;
+history retains the prior level-two revision and marks the level-one restore effective. Twenty
+source-card identities are retained. These observations agree with the accepted isolated behavior.
+
+The filtered shared runtime log contains only two `foes:list` near-limit warnings (808 and
+888 ms), with no recorded execution timeout or validation failure during these checks. The wider
+intermittent performance limitation remains open under the performance follow-up and is not erased
+by this focused shared success.
+
+No V45 implementation or shared-delivery blocker remains. This acceptance covers the established
+local development environment; no hosted publication or remote Git push is claimed. The pending
+closeout commit contains documentation/evidence only and needs no application runtime restart.
