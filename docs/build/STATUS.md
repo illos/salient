@@ -340,10 +340,16 @@ records the handoff; it does not certify A09 or create an implementation commit.
 
 | Id | Slice | Status | Owner |
 | --- | --- | --- | --- |
-| V52 | [Browser sign-up pacing](V52-signup-pacing.md) | Prepared patch, **unverified** — `slice/V52` in `/srv/presidium/projects/salient/opus-auth-pacing` from the frozen V46 candidate `b2c660a`; no runtime job has run against it, CT114 held by V51. Test-only: all ten sign-up paths (nine UI helpers and the recovery fixture's direct `fetch`) wait out the product's own `/sign-up*` window, and the HTTP exchanges are retained. Conformance fix, not a demonstrated cure for the recorded refusals. Inherits all of V46, so it cannot merge ahead of V46's gates | Opus character wizard thread |
+| V52 | [Browser sign-up pacing](V52-signup-pacing.md) | Verification pending — candidate `0987595` passed 723 repository tests and four focused browser specs; full suite failed and was aborted after backend loss (seven failures, exit 143). Retained evidence and known losses are recorded in the slice. Test pacing does not alter product limits. Awaiting combined isolated verification; not merged | Opus implementer; integration lead owns runtime |
 
 ## V46 Devil level one — 2026-09-19
 
 | Id | Slice | Status | Owner |
 | --- | --- | --- | --- |
-| V46 | [Devil, level one](V46-devil-level-one.md) | In progress — `slice/V46` in `/srv/presidium/projects/salient/opus-characters` from `656d831`; pilot unit for the level-one batch, gated on the integration lead's review. All seven purchased traits and all thirteen Silver Tongue skills; no other ancestry, class or level enabled | Opus character wizard thread |
+| V46 | [Devil, level one](V46-devil-level-one.md) | Implementation and rules reviews pass for `b2c660a`; thirteen genuine Forge counterpart builds retained. Full runtime verification and merge remain pending. Pilot covers seven purchased traits and thirteen Silver Tongue skills; no batch implementation release | Opus implementer and character integration lead |
+
+## V55 backend health — 2026-09-19
+
+| Id | Slice | Status | Owner |
+| --- | --- | --- | --- |
+| V55 | [Backend health](V55-backend-health.md) | Candidate `ea7936e` staged for isolated verification: live endpoint plus startup marker, seven tests. Independent review and CT114 checks pending; not merged | Opus infrastructure; integration lead owns runtime |
