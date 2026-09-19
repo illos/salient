@@ -345,3 +345,12 @@ turn. A missed runtime-release handoff and the six-wakes-per-hour limit delayed 
 recorded its next eligible resume time rather than bypassing the limit. V46 implementation/evidence
 review has a scoped pass, but full-suite instability and remaining reviews still block integration.
 Documentation only; no runtime change or batch release.
+
+2026-09-19: recorded further observed orchestration failures and safeguards: buffered wrappers hid
+the actual remote stage; completed job containers could not supply lost logs; an auxiliary CLI
+failed in the browser container despite the browser itself working; and queued Chords ownership
+changes were not read before another stage began. The guide now requires per-attempt persistent
+output and exit status, capture preflight, and inbox checks at each job boundary. The lead adopted
+the existing V52 full-suite job after its own launch was rejected as busy, rather than claiming
+two running suites or a successful replacement. No verification gate or batch release changed.
+Documentation only; no runtime update.

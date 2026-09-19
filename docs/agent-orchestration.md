@@ -92,6 +92,19 @@ an appropriate supplement against the changed tree; show which application files
 An isolated rerun passing does not turn a failed full suite into a pass or establish its cause.
 Read the retained artifacts themselves before claiming that they contain a particular observation.
 
+Give one owner control of runtime jobs through completion. Record the actual job identifier and
+stage; a buffered wrapper's last visible line does not identify what its remote child is doing.
+Write stdout and the workload's exit code to a unique directory under `/artifacts` **during** the
+job, then fetch it. Preserve the workload's exit separately from a pipe's `tee` exit. Job containers
+are removed on completion, so their logs are not a durable recovery plan. Never reuse an output
+directory for a second attempt before archiving the first; a passing rerun retains its own identity.
+
+Preflight auxiliary capture in its real execution context. A browser container can run Playwright
+successfully while its Convex CLI cannot resolve the local deployment. An empty capture with a
+startup error is missing evidence, not an absence of backend failures. Preserve the error, and
+label historical or late-start capture with its actual coverage. Let workers retain implementation
+and review ownership when the lead takes over unreliable runtime orchestration.
+
 For character units, retain the existing [Forge comparison gate](build/character-verification.md),
 persisted readbacks, full checks, and independent implementation review followed by fresh rules
 review. Read composed definitions and actual consumers: raw option metadata can understate served
@@ -139,6 +152,12 @@ sent while the recipient was busy can otherwise remain unread after it stops. If
 only on a peer's handoff, use bounded waits while active. Avoid repeated readiness-only turns;
 they consume wake capacity without completing work. When the hourly limit is reached, record
 the next eligible time and resume then, preserving the limit.
+
+Also check and acknowledge the inbox **after each remote job and before starting the next stage**.
+A queued ownership change is not necessarily injected into a busy provider's prompt. Reporting
+progress without reading incoming messages can start work after the lead has transferred the slot.
+On handoff, name already-running jobs explicitly; adopt or stop those jobs deliberately before
+launching replacements. A rejected `Environment busy` launch is not a started test run.
 
 **No wake chains:** a Chords-woken thread cannot wake peers until it receives a later user message.
 Passive handoffs still work. A lead awakened by a worker therefore cannot assume it can wake the
