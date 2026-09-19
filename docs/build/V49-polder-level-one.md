@@ -39,15 +39,16 @@ and this unit deliberately does not depend on V47's aspects or stormwight kits.
 
 - Enable Nimblestep, Polder Geist and Reactive Tumble with sourced readable content and the correct
   contribution classification for each.
-- Keep Polder Geist's +3 speed out of every unconditional speed total, preserving its full trigger
-  and duration wording.
-- Represent Reactive Tumble as a free triggered action that does not count against the one-per-round
-  triggered-action limit.
+- Represent Polder Geist's +3 as a **calculated conditional amount** with its verbatim condition,
+  kept out of every unconditional speed total. Both halves are required: dropping the amount is as
+  wrong as adding it to the ordinary speed.
+- Represent Reactive Tumble as readable, manual content that records its free-triggered-action
+  nature. This slice adds no action-budget tracking.
 - Assert that Shadowmeld's readable text retains its final clause — surface destruction ends the
   ability and deals 1d6 damage that cannot be reduced — which exists only in the source body and not
   in any structured `effects` field.
-- One new counterpart build covering all three traits, plus reuse of the V47 Build B evidence for the
-  three already-supported traits.
+- One new counterpart build covering all three traits. The three already-supported traits are covered
+  by the **real retained V45 Bethell artifact**, for exactly what it proves.
 - Budget behaviour tests: overspend invalid, underspend warns without blocking, trait swaps remove
   old effects.
 
@@ -72,8 +73,15 @@ at their recorded pins.
 
 Deliberately **not** dependent on V47: the counterpart build uses the Berserker aspect and the
 Mountain kit, both already supported, so this unit can be verified and merged whether or not the Fury
-unit has been released. The two units do share the Polder facts used by V47's Build B; that build's
-expectations and this unit's inventory must agree before either merges, and both are owned here.
+unit has been released. V47's Build B is a *planned* capture that has never been executed, so it is
+not evidence and this unit does not rest on it; the two units' Polder facts must still agree before
+either merges, and both are owned here.
+
+**Dependent on V46 for one seam.** Polder Geist's conditional amount should use the
+`ConditionalEffect` entry V46 adds to the derived baseline, extended by one union member for a speed
+bonus. That dependency is recorded rather than hidden: if V46 has not merged when this unit is
+released, the integration owner decides between waiting and implementing the same shape locally for
+reconciliation at integration.
 
 All installs, builds, tests, servers and browsers run on CT114 through `presidium-dev` in a named
 environment. Nothing in the preparation stage needs one, and V46 currently holds the characters slot.
@@ -90,9 +98,9 @@ Preparation stage (this handoff):
 Implementation stage:
 
 - `shared/content/ancestries/polder/level-one.ts`: the three traits enabled with sourced content.
-- `shared/evaluate/ancestries/polder.ts`: contributions only where a trait actually changes a derived
-  value, which for these three is nowhere — the unit's correctness is largely about what it does
-  *not* add.
+- `shared/evaluate/ancestries/polder.ts`: Polder Geist's conditional contribution, and nothing else —
+  Nimblestep and Reactive Tumble change no derived value, so the unit's correctness is largely about
+  what it does *not* add to the ordinary totals.
 - Tests in `tests/character-derived-values.test.ts` and `tests/character-evaluator.test.ts`, a
   browser journey, and the counterpart evidence under `docs/build/evidence/V49/`.
 
@@ -100,12 +108,15 @@ Implementation stage:
 
 1. All six purchasable traits and both signature traits are present with source paths and verbatim
    quotes, and the assembled definitions — not the module constant — offer all six.
-2. A build taking Nimblestep, Polder Geist and Reactive Tumble derives **exactly the same** speed,
-   stability, disengage and every other numeric field as the same build with no purchased traits.
-   Any numeric difference is a failure.
-3. Polder Geist's readable content carries its complete trigger and duration; no surface presents it
-   as an unconditional speed, including any parenthesised or "effective" speed.
-4. Reactive Tumble appears as a free triggered action and does not consume the one-per-round budget.
+2. A build taking Nimblestep, Polder Geist and Reactive Tumble derives the **same unconditional
+   vitals** — speed, stability, disengage, Stamina and the rest — as the same build with no purchased
+   traits. Any change to an unconditional total is a failure.
+3. That same build **does** carry Polder Geist's conditional contribution: amount 3, its verbatim
+   condition and its source path, present and readable. A missing conditional entry fails this check
+   just as an inflated speed fails check 2, and no surface presents the bonus as an unconditional or
+   parenthesised "effective" speed.
+4. Reactive Tumble's readable content records that it is an opt-in free triggered action resolving
+   after the forced movement. No action-budget tracking is added or asserted.
 5. Shadowmeld's rendered source text contains its final surface-destruction clause and the
    irreducible 1d6, through the content path, with a test that fails if the text is ever rebuilt from
    structured effects.
@@ -116,7 +127,10 @@ Implementation stage:
 8. The three already-supported traits keep their exact current derived values: corruption immunity 3
    at level one, frightened immunity, disengage +1.
 9. One completed legal Forge counterpart for the new-trait build, with unmodified export, readable
-   sheet, recorded versions and explained differences; V47 Build B reused only for what it proves.
+   sheet, recorded versions and explained differences. The three already-supported traits are covered
+   by the retained V45 Bethell artifact for exactly what it proves, with its two caveats recorded: it
+   was captured from the public site at 14.198.0, newer than our pinned Forge source, and it is an
+   Elementalist, so it evidences ancestry contributions rather than any Fury interaction.
 10. Full `pnpm check` plus `pnpm test:browser` on the isolated CT114 candidate; independent
     implementation and rules reviews pass; then merge and verify on shared CT114 main.
 
@@ -169,3 +183,24 @@ Findings that shaped the plan:
 
 No application, evaluator, shared-contract, `main`, runtime or hosted change was made, and no
 install, build, typecheck, test or browser was run anywhere.
+
+2026-09-19 (corrections after lead review of the preparation bundle): three bounded corrections
+applied, recorded rather than silently absorbed.
+
+- **Polder Geist was under-described.** Filing it as "non-numeric" understated the source, which
+  states a specific +3. It is a conditional *amount*: calculated and shown with its verbatim
+  condition, and kept out of the unconditional speed. The proposed representation extends V46's
+  `ConditionalEffect` union with one `speed-bonus` member, which creates an explicit V46 dependency
+  now recorded in this document. Acceptance check 2 was narrowed to unconditional vitals and a new
+  check 3 requires the conditional contribution to be present.
+- **An unexecuted capture was cited as evidence.** The first draft proposed reusing V47's Build B for
+  the three already-supported traits. That capture has never run, so no artifact exists, and treating
+  a plan as a witness is precisely what the per-option gate forbids. Replaced with the retained V45
+  Bethell export, a genuine level-one Polder whose ancestry features are exactly Shadowmeld, Small!,
+  Corruption Immunity, Graceful Retreat and Fearless, carrying its version and class caveats.
+- **Reactive Tumble implied automation this slice does not add.** Saying it "must not consume the
+  one-per-round budget" implies the wizard tracks that budget. It does not. The free-triggered-action
+  property is recorded as readable content; activation, timing and budget stay manual.
+
+Question-id coordination noted: unmerged peer branches hold Q-CHAR-16 through Q-CHAR-20, so the next
+unused id is 21. This unit raises none.

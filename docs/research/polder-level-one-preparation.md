@@ -40,18 +40,33 @@ effects are not a simple number, which is why they were deferred and why they ne
 | Trait | Cost | Effect, verbatim | Classification |
 | --- | ---: | --- | --- |
 | [Nimblestep](../../vendor/steel-compendium/en/unified/md/feature/trait/polder/nimblestep.md) | 2 | "You ignore the effects of difficult terrain and can move at full speed while sneaking." | Permanent entitlement, **no number** |
-| [Polder Geist](../../vendor/steel-compendium/en/unified/md/feature/trait/polder/polder-geist.md) | 1 | "At the start of each of your turns during combat, if no enemy has line of effect to you or if you are hidden from or have concealment from any enemy with line of effect to you, you gain a +3 bonus to speed until the end of your turn." | Conditional, **zero unconditional contribution** |
+| [Polder Geist](../../vendor/steel-compendium/en/unified/md/feature/trait/polder/polder-geist.md) | 1 | "At the start of each of your turns during combat, if no enemy has line of effect to you or if you are hidden from or have concealment from any enemy with line of effect to you, you gain a +3 bonus to speed until the end of your turn." | **Conditional amount**: a sourced +3 that never reaches the unconditional speed |
 | [Reactive Tumble](../../vendor/steel-compendium/en/unified/md/feature/trait/polder/reactive-tumble.md) | 1 | "Whenever you are force moved, you can use a free triggered action to shift 1 square after the forced movement is resolved." | Triggered, opt-in, **free** action |
 
-### Polder Geist must never reach the printed speed
+### Polder Geist is a conditional amount, not an absent one
 
-This is the single most likely error in the unit. The bonus is gated on three things at once — it is
-**at the start of your turn**, **during combat**, and **only if** no enemy has line of effect to you
-or you are hidden from or have concealment from any enemy that does — and it lasts **until the end of
-that turn**, being re-evaluated every turn. A level-one Polder with Polder Geist still has speed 5 on
-the sheet. Printing "speed 8", or even "speed 5 (8)" without the full condition, misstates the
-source. It must live in a conditional channel that the speed total cannot reach, and the source
-wording must be preserved rather than simplified for automation.
+Corrected 2026-09-19 after lead review: an earlier draft filed Polder Geist as "non-numeric", which
+understates it. The source states a specific amount — **+3 speed** — under a specific condition. The
+right representation carries **both**: the amount is calculated and shown, and it never reaches the
+unconditional speed.
+
+The condition is gated on three things at once — **at the start of your turn**, **during combat**,
+and **only if** no enemy has line of effect to you or you are hidden from or have concealment from
+any enemy that does — and it lasts **until the end of that turn**, being re-evaluated every turn. A
+level-one Polder with Polder Geist still has speed 5 as their ordinary speed. Printing "speed 8", or
+"speed 5 (8)" without the full condition, misstates the source.
+
+**Proposed representation, and its dependency.** V46 introduces a `ConditionalEffect` entry on the
+derived baseline for exactly this shape of rule: a calculated amount plus the verbatim condition,
+deliberately kept out of the fields that resolve rolls or apply damage automatically. Its `effect`
+field is a closed union of `rounds-aloft`, `damage-weakness` and `extra-strike-damage`. Polder Geist
+needs one new member — `speed-bonus` — with `amount` 3, the verbatim condition sentence and the
+trait's source path. That is a minimal, additive extension of a seam another unit already built.
+
+This makes V49 **depend on V46 merging**, which is recorded here rather than hidden. If V46 has not
+landed when this unit is released, the options are to wait, or to implement the same shape locally
+and reconcile at integration; the first is preferable and the choice belongs to the integration
+owner, not to this unit.
 
 ### Nimblestep is a movement-cost waiver, not speed
 
@@ -59,12 +74,19 @@ wording must be preserved rather than simplified for automation.
 terrain imposes. It is not a speed bonus and must not be folded into a speed total. The second
 clause, moving at full speed while sneaking, is likewise an entitlement.
 
-### Reactive Tumble is a free triggered action
+### Reactive Tumble stays readable and manual
 
-It must appear in the sheet's triggered-action list **without** consuming the one-per-round triggered
-action budget, because a free triggered action "doesn't count against your limit of one triggered
-action per round". It resolves *after* the forced movement, which also means it is sequential with
-stability rather than additive to it.
+The source makes it an opt-in free triggered action: "you can use a free triggered action to shift 1
+square after the forced movement is resolved", and a free triggered action "doesn't count against
+your limit of one triggered action per round". Both facts belong in the readable grant so the table
+can apply them correctly.
+
+Corrected 2026-09-19 after lead review: this slice adds **no action-budget automation**. An earlier
+draft said the trait "must appear in the sheet's triggered-action list without consuming the
+one-per-round budget", which implies the wizard tracks that budget. It does not, and this unit does
+not add it. Activation, timing and the budget itself remain manual. The sequencing note still holds:
+the shift resolves after the forced movement, so it is sequential with stability rather than
+additive to it.
 
 ## Shadowmeld: the full clause list and a real extraction trap
 
@@ -121,20 +143,31 @@ is needed.
 ## Witness plan
 
 Only three options are newly enabled, and their costs are 2 + 1 + 1 = exactly the 4-point budget, so
-**one new counterpart build covers all three**. The existing quick-build trio is already witnessed by
-the V47 Fury Build B, which uses Corruption Immunity, Fearless and Graceful Retreat; that build is
-reused for what it proves rather than re-captured.
+**one new counterpart build covers all three**.
 
-| Build | Ancestry choices | Class frame | Covers |
-| --- | --- | --- | --- |
-| P1 (new) | Nimblestep + Polder Geist + Reactive Tumble, 4 of 4 points | Fury, **Berserker**, Mountain kit — all already supported, so this unit does not depend on V47's release | All three newly enabled traits |
-| P2 (reused) | Corruption Immunity + Fearless + Graceful Retreat | V47 Build B | The three already-supported traits, size 1S, Shadowmeld, corruption immunity 3, disengage 2 |
+Corrected 2026-09-19 after lead review: an earlier draft proposed reusing the V47 Fury Build B as the
+witness for the three already-supported traits. That is not usable evidence — V47's capture script
+has never been executed, so no artifact exists. Certifying a planned capture as evidence is exactly
+the error the per-option gate forbids. The real retained artifact is used instead.
+
+| Build | Ancestry choices | Class frame | Covers | Evidence status |
+| --- | --- | --- | --- | --- |
+| P1 | Nimblestep + Polder Geist + Reactive Tumble, 4 of 4 points | Fury, **Berserker**, Mountain kit — all already supported, so this unit does not depend on V47's release | All three newly enabled traits | To be captured by this unit |
+| P2 | Corruption Immunity + Fearless + Graceful Retreat | Elementalist level 1, from V45 | Size 1S, Shadowmeld, corruption immunity, frightened immunity, Disengage +1 | **Real retained artifact**: `tests/fixtures/v45-reference/Bethell-corrected-export.ds-hero` with its sheet png and txt, a genuine level-one Polder Elementalist whose ancestry features are exactly Shadowmeld, Small!, Corruption Immunity, Graceful Retreat and Fearless |
+
+Bethell is authentic captured evidence and counts for what it actually proves: the three
+already-supported traits and both signature traits, as built in Forge. Two caveats travel with it —
+it was captured from the public website at version 14.198.0, which is newer than our pinned Forge
+source, and it is an Elementalist, so it proves the ancestry contributions rather than any Fury
+interaction. Record both rather than presenting it as a same-build Fury counterpart.
 
 Build P1 deliberately avoids the Reaver and Stormwight aspects and the stormwight kits so that V49
 can be verified and merged whether or not V47 has been released. Expected values for P1 are the
-Polder baseline — size 1S, speed 5, stability from the kit, Shadowmeld granted — plus **no numeric
-change at all from the three new traits**, which is precisely the point of the build: it proves the
-conditional and entitlement traits contribute no unconditional numbers.
+Polder baseline — size 1S, speed 5, stability from the kit, Shadowmeld granted — with **every
+unconditional vital unchanged** from the same build with no purchased traits, **and** Polder Geist's
+conditional +3 present as a calculated conditional contribution with its verbatim condition and
+readable source. Both halves are required: an implementation that silently drops the +3 fails this
+build just as one that adds it to the ordinary speed does.
 
 Behavioural cases, as tests rather than counterparts: overspending the budget is invalid;
 underspending warns without blocking; swapping a purchased trait removes the old trait's effects and
