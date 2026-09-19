@@ -335,3 +335,9 @@ records the handoff; it does not certify A09 or create an implementation commit.
 | Id | Slice | Status | Owner |
 | --- | --- | --- | --- |
 | V45 | [Character option foundation](V45-character-option-foundation.md) | Complete — merged/live `ebe66e2`; 691 tests, 5,584 exact comparisons, 49 applicable browser successes and two shared checks; both audits pass; initial timeout/retry limits retained; no new options enabled | Character integration lead and subagents |
+
+## V47 Fury level one — 2026-09-19
+
+| Id | Slice | Status | Owner |
+| --- | --- | --- | --- |
+| V47 | [Fury level one](V47-fury-level-one.md) | In progress (preparation only) — source research, option inventory, gap list and reference matrix delivered; implementation released by the lead after the V46 pilot verdict; no application, shared-contract, runtime or hosted change | Opus implementer, slice/V47 in `opus-fury` |
