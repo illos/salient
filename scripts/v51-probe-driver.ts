@@ -31,6 +31,48 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { ConvexHttpClient } from 'convex/browser';
 import { makeFunctionReference } from 'convex/server';
+import { createAuthClient } from 'better-auth/client';
+import { convexClient, crossDomainClient } from '@convex-dev/better-auth/client/plugins';
+
+try {
+  process.loadEnvFile('.env.local');
+} catch {
+  /* Explicit environment also works. */
+}
+
+/**
+ * Mints a token for a disposable probe account, using exactly the construction `scripts/app.ts`
+ * uses for headless calls. No production auth path is altered and no product limit is touched —
+ * in particular the signup rate limiter is left as configured, so this signs up at most once.
+ *
+ * The token is held in memory and never written to any artifact.
+ */
+async function mintToken(siteUrl: string, origin: string, email: string, password: string) {
+  const storage = new Map<string, string>();
+  const client = createAuthClient({
+    baseURL: siteUrl,
+    fetchOptions: { headers: { Origin: origin } },
+    plugins: [
+      convexClient(),
+      crossDomainClient({
+        storage: {
+          getItem: key => storage.get(key) ?? null,
+          setItem: (key, value) => {
+            storage.set(key, value);
+          },
+        },
+      }),
+    ],
+  });
+  const signUp = await client.signUp.email({ email, password, name: 'V51 probe' });
+  if (signUp.error && !/exists|taken|already/i.test(signUp.error.message ?? ''))
+    throw new Error(`Probe sign-up failed: ${signUp.error.message}`);
+  const signIn = await client.signIn.email({ email, password });
+  if (signIn.error) throw new Error(`Probe sign-in failed: ${signIn.error.message}`);
+  const jwt = await client.convex.token();
+  if (jwt.error || !jwt.data?.token) throw new Error('Could not obtain an authenticated token.');
+  return jwt.data.token;
+}
 
 type Condition = 'idle' | 'loaded';
 
@@ -137,12 +179,19 @@ async function main(): Promise<void> {
   const intervalMs = Number(arg('interval-ms', '2000'));
   const url = process.env.CONVEX_URL ?? process.env.VITE_CONVEX_URL;
   if (!url) throw new Error('Set CONVEX_URL or VITE_CONVEX_URL to the characters deployment.');
-  const token = process.env.SALIENT_AUTH_TOKEN;
-  if (!token)
-    throw new Error(
-      'Set SALIENT_AUTH_TOKEN. Obtain it the way scripts/app.ts does, with a disposable test ' +
-        'user. The token is never written to any artifact.',
-    );
+  let token = process.env.SALIENT_AUTH_TOKEN;
+  if (!token) {
+    const siteUrl = process.env.VITE_CONVEX_SITE_URL;
+    const origin = process.env.VITE_SITE_URL;
+    const email = process.env.V51_PROBE_EMAIL;
+    const password = process.env.V51_PROBE_PASSWORD;
+    if (!siteUrl || !origin || !email || !password)
+      throw new Error(
+        'Set SALIENT_AUTH_TOKEN, or V51_PROBE_EMAIL and V51_PROBE_PASSWORD with ' +
+          'VITE_CONVEX_SITE_URL and VITE_SITE_URL, for a disposable probe account.',
+      );
+    token = await mintToken(siteUrl, origin, email, password);
+  }
 
   await mkdir(outDir, { recursive: true });
   const client = new ConvexHttpClient(url);
