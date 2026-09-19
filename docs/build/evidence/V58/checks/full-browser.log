@@ -1,0 +1,52 @@
+
+Running 53 tests using 1 worker
+
+[1/53] tests/browser/campaign-sharing.spec.ts:20:1 › visible share codes support joining and rotate with links without losing requests or members
+[2/53] tests/browser/closeout.spec.ts:21:1 › closeout awards once, is shared with observers, and paused session closure offers Void
+  1) tests/browser/closeout.spec.ts:21:1 › closeout awards once, is shared with observers, and paused session closure offers Void 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('heading', { name: 'Combat closeout', exact: true })
+    Expected: visible
+    Timeout: 15000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByRole('heading', { name: 'Combat closeout', exact: true }) with timeout 15000ms
+      - waiting for getByRole('heading', { name: 'Combat closeout', exact: true })
+
+
+      102 |       await expect(
+      103 |         page.getByRole('heading', { name: 'Combat closeout', exact: true }),
+    > 104 |       ).toBeVisible();
+          |         ^
+      105 |       await expect(page.getByRole('button', { name: 'Take turn', exact: true })).toHaveCount(0);
+      106 |     }
+      107 |     await expect(observer.getByRole('button', { name: 'Confirm Victory award' })).toHaveCount(0);
+        at /app/tests/browser/closeout.spec.ts:104:9
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../artifacts/v58/full-browser/closeout-closeout-awards-o-d20ac-session-closure-offers-Void/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../artifacts/v58/full-browser/closeout-closeout-awards-o-d20ac-session-closure-offers-Void/test-failed-2.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../artifacts/v58/full-browser/closeout-closeout-awards-o-d20ac-session-closure-offers-Void/test-failed-3.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../artifacts/v58/full-browser/closeout-closeout-awards-o-d20ac-session-closure-offers-Void/error-context.md
+
+    attachment #5: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../artifacts/v58/full-browser/closeout-closeout-awards-o-d20ac-session-closure-offers-Void/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../artifacts/v58/full-browser/closeout-closeout-awards-o-d20ac-session-closure-offers-Void/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[3/53] tests/browser/combat.spec.ts:31:1 › Director starts combat; a player takes and ends a turn; the round advances

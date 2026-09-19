@@ -1,0 +1,15 @@
+$ pnpm lint && pnpm check:engine && pnpm check:app && pnpm check-links && pnpm check-vendor && pnpm content:check && pnpm supporting:check && pnpm foes:check && pnpm build
+$ eslint . && prettier --check .
+Checking formatting...
+All matched files use Prettier code style!
+$ tsc --noEmit && vitest run --project engine
+tests/character-v58-polder.test.ts(3,23): error TS1543: Importing a JSON file into an ECMAScript module requires a 'type: "json"' import attribute when 'module' is set to 'NodeNext'.
+tests/character-v58-polder.test.ts(4,29): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean '../shared/content/level-one-decisions.js'?
+tests/character-v58-polder.test.ts(5,35): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean '../shared/evaluate/character.js'?
+tests/character-v58-polder.test.ts(26,30): error TS7006: Parameter 'trait' implicitly has an 'any' type.
+tests/character-v58-polder.test.ts(38,36): error TS7006: Parameter 'ability' implicitly has an 'any' type.
+tests/character-v58-polder.test.ts(47,51): error TS7006: Parameter 'row' implicitly has an 'any' type.
+tests/character-v58-polder.test.ts(50,42): error TS7006: Parameter 'row' implicitly has an 'any' type.
+tests/character-v58-polder.test.ts(51,39): error TS7006: Parameter 'trait' implicitly has an 'any' type.
+[ELIFECYCLE] Command failed with exit code 2.
+[ELIFECYCLE] Command failed with exit code 2.

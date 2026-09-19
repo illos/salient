@@ -1,0 +1,67 @@
+{
+  "scope": "Independent same-build artifact comparison; not formal acceptance or automation proof",
+  "compendiumRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+  "forgeOnlyChangedSubtree": "ancestry.features[id=polder-feature-3].data.selected",
+  "forgeOutsideSelectedSubtreeEqual": true,
+  "forgePurchasedTraits": [
+    "Nimblestep",
+    "Polder Geist",
+    "Reactive Tumble"
+  ],
+  "salientSelectionsMatchV25WithNewTraitsIgnoringName": true,
+  "selectionDiscrepancies": {},
+  "expectedNumerics": {
+    "level": 1,
+    "staminaMaximum": 18,
+    "recoveriesMaximum": 8,
+    "recoveryValue": 6,
+    "windedValue": 9,
+    "speed": 5,
+    "stability": 0,
+    "size": "1S",
+    "disengage": 1,
+    "savingThrowThreshold": 6,
+    "renown": 1,
+    "wealth": 1
+  },
+  "salientNumerics": {
+    "level": 1,
+    "staminaMaximum": 18,
+    "recoveriesMaximum": 8,
+    "recoveryValue": 6,
+    "windedValue": 9,
+    "speed": 5,
+    "stability": 0,
+    "size": "1S",
+    "disengage": 1,
+    "savingThrowThreshold": 6,
+    "renown": 1,
+    "wealth": 1
+  },
+  "numericDiscrepancies": {},
+  "salientCharacteristics": {
+    "A": 1,
+    "I": 2,
+    "M": -1,
+    "P": 1,
+    "R": 2
+  },
+  "salientTraits": [
+    "Shadowmeld",
+    "Small!",
+    "Nimblestep",
+    "Polder Geist",
+    "Reactive Tumble"
+  ],
+  "skillsMatchV25": true,
+  "languagesMatchV25": true,
+  "evaluationStatus": "complete",
+  "diagnostics": {},
+  "representationDifference": "Forge Reactive Tumble is an Ability and appears under Triggered Actions. Salient stores a purchased trait with a readable source panel, absent from baseline.abilities; manual resolution only.",
+  "unresolvedRulesOrNumericDiscrepancies": [],
+  "observedPresentationIssue": "Reloaded Salient ancestry screen repeats Shadowmeld under signature traits; does not duplicate baseline ability.",
+  "limits": [
+    "Readback is a complete persisted draft: derivedBaseline, effectiveRevision and liveState are null. It does not prove activation or table automation.",
+    "Formal candidate check/reviewer acceptance handled separately."
+  ]
+}

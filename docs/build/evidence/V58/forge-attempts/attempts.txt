@@ -1,0 +1,7 @@
+All runs CT114 character-restart with canonical main6459c8d source; browser command presidium-dev --env character-restart run browser -- node /artifacts/capture.cjs.
+Attempt1 exit1: timeout12s button accessible name Go to your Heroes. Live visible text retained failure-first.txt.
+Correction1 use exact visible text for Go to your Heroes.
+Attempt2 exit1: timeout12s button accessible name Add. Live visible text retained failure-second.txt.
+Correction2 use exact visible text for action controls consistently.
+Attempt3 exit1: getByText Ancestry strict violation two elements (header-text and field-label). Import and Edit click completed; screenshot/body still hero sheet, likely editor transition synchronization required before tab selector.
+Stopped at assigned limit of two narrow selector corrections. No output ds-hero export, no V58 parity claim. Imported baseline sheet captured only, numeric Stamina18 Recoveries8 RecoveryValue6 Size1S Speed5 Stability0 Disengage2 Save6.
