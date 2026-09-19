@@ -1,0 +1,4 @@
+ Container salient-characters-dev-2389e144b9dd-job-72e5f206 Creating
+ Container salient-characters-dev-2389e144b9dd-job-72e5f206 Created
+tests/character-v45-foundation.test.ts(19,7): error TS2322: Type 'string' is not assignable to type '"r01.1"'.
+tests/character-v45-foundation.test.ts(39,9): error TS2322: Type 'string' is not assignable to type '"r01.1"'.

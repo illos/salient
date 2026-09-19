@@ -1,0 +1,7 @@
+9/19/2026, 2:12:00 PM [CONVEX Q(table:roster)] [WARN] Function execution took a long time. (maximum duration: 1s, actual duration: 895.471635ms).
+9/19/2026, 2:12:00 PM [CONVEX Q(table:roster)] [WARN] Function execution took a long time. (maximum duration: 1s, actual duration: 895.471635ms).
+9/19/2026, 2:12:00 PM [CONVEX Q(table:roster)] [WARN] Function execution took a long time. (maximum duration: 1s, actual duration: 895.471635ms).
+9/19/2026, 2:12:33 PM [CONVEX Q(foes:catalog)] [WARN] Function execution took a long time. (maximum duration: 1s, actual duration: 962.940699ms).
+9/19/2026, 2:12:38 PM [CONVEX Q(encounters:current)] Function execution timed out (maximum duration: 1s)
+9/19/2026, 2:14:31 PM [CONVEX Q(foes:detail)] [WARN] Function execution took a long time. (maximum duration: 1s, actual duration: 845.368632ms).
+9/19/2026, 2:28:34 PM [CONVEX Q(abilities:sheet)] Function execution timed out (maximum duration: 1s)

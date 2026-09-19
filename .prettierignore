@@ -10,3 +10,5 @@ public/rules-data/
 shared/content/foes/
 public/foes-data/
 .wrangler/
+# Immutable Forge UI exports and their original capture evidence.
+tests/fixtures/v45-reference/

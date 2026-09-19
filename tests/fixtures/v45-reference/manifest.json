@@ -1,0 +1,158 @@
+{
+  "schemaVersion": "v45-reference-recovery-1",
+  "recoveredDateUTC": "2026-09-19",
+  "compendiumRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+  "forgeVendorRevision": "5a846aadb623a9855a023e9403bb887a956c341f",
+  "artifacts": [
+    {
+      "path": "tests/fixtures/v45-reference/Bethell-corrected-export.ds-hero",
+      "bytes": 161914,
+      "sha256": "978b0c15f1c1169e06cf78dc50919f5d2833de7fca54eb2478e95716c7fb3a3e",
+      "originalMetadata": "docs/research/v25-corrected-forge-reference.json",
+      "originalPath": ".playtest/forge-reference/Bethell-corrected-export.ds-hero",
+      "recoveredFrom": "/srv/presidium/projects/salient/characters-build/.playtest/forge-reference/Bethell-corrected-export.ds-hero",
+      "captureDateUTC": "2026-09-15",
+      "observedWebsiteVersion": "14.198.0"
+    },
+    {
+      "path": "tests/fixtures/v45-reference/Bethell-corrected-sheet.txt",
+      "bytes": 1510,
+      "sha256": "ed9d23762e1a7e18193fe9d19e77756c7a7c222b69e34e93420edaf1201373f5",
+      "originalMetadata": "docs/research/v25-corrected-forge-reference.json",
+      "originalPath": ".playtest/forge-reference/Bethell-corrected-sheet.txt",
+      "recoveredFrom": "/srv/presidium/projects/salient/characters-build/.playtest/forge-reference/Bethell-corrected-sheet.txt",
+      "captureDateUTC": "2026-09-15",
+      "observedWebsiteVersion": "14.198.0"
+    },
+    {
+      "path": "tests/fixtures/v45-reference/Bethell-corrected-sheet.png",
+      "bytes": 87692,
+      "sha256": "b22ccc4e0d74a7730d7cc537aab8ba0d5de76c75215b8f95f0d575488a60c02b",
+      "originalMetadata": "docs/research/v25-corrected-forge-reference.json",
+      "originalPath": ".playtest/forge-reference/Bethell-corrected-sheet.png",
+      "recoveredFrom": "/srv/presidium/projects/salient/characters-build/.playtest/forge-reference/Bethell-corrected-sheet.png",
+      "captureDateUTC": "2026-09-15",
+      "observedWebsiteVersion": "14.198.0"
+    },
+    {
+      "path": "tests/fixtures/v45-reference/Grug-level-1-reimported.ds-hero",
+      "bytes": 131910,
+      "sha256": "cdbc066a7584c154881d1ddf88ec07fc131d39249f17f6da9c15c44550cbdc1e",
+      "originalMetadata": "docs/research/v32-forge-reference.json",
+      "originalPath": ".playtest/v32/forge-reference/Grug-level-1-reimported.ds-hero",
+      "recoveredFrom": "/srv/presidium/projects/salient/characters-build/.playtest/v32/forge-reference/Grug-level-1-reimported.ds-hero",
+      "captureDateUTC": "2026-09-16",
+      "observedWebsiteVersion": "14.199.0"
+    },
+    {
+      "path": "tests/fixtures/v45-reference/Grug-level-1-sheet.png",
+      "bytes": 113082,
+      "sha256": "87aa467addf1f71ebc17036c46dfbd74c3433f6fa92dda703a363342d469c128",
+      "originalMetadata": "docs/research/v32-forge-reference.json",
+      "originalPath": ".playtest/v32/forge-reference/Grug-level-1-sheet.png",
+      "recoveredFrom": "/srv/presidium/projects/salient/characters-build/.playtest/v32/forge-reference/Grug-level-1-sheet.png",
+      "captureDateUTC": "2026-09-16",
+      "observedWebsiteVersion": "14.199.0"
+    },
+    {
+      "path": "tests/fixtures/v45-reference/Grug-level-1-sheet.txt",
+      "bytes": 1442,
+      "sha256": "46e2bb0856e27fffaca61e657ac94555c79d39e4d3015900d55bc63a82968a5e",
+      "originalMetadata": "docs/research/v32-forge-reference.json",
+      "originalPath": ".playtest/v32/forge-reference/Grug-level-1-sheet.txt",
+      "recoveredFrom": "/srv/presidium/projects/salient/characters-build/.playtest/v32/forge-reference/Grug-level-1-sheet.txt",
+      "captureDateUTC": "2026-09-16",
+      "observedWebsiteVersion": "14.199.0"
+    },
+    {
+      "path": "tests/fixtures/v45-reference/Grug-level-1.ds-hero",
+      "bytes": 131910,
+      "sha256": "efa8fe3c77d96fe80fc4721618e6c2cffef30f6123dd8fc9f47a3c6c71d84270",
+      "originalMetadata": "docs/research/v32-forge-reference.json",
+      "originalPath": ".playtest/v32/forge-reference/Grug-level-1.ds-hero",
+      "recoveredFrom": "/srv/presidium/projects/salient/characters-build/.playtest/v32/forge-reference/Grug-level-1.ds-hero",
+      "captureDateUTC": "2026-09-16",
+      "observedWebsiteVersion": "14.199.0"
+    },
+    {
+      "path": "tests/fixtures/v45-reference/Grug-level-2-free-strikes.txt",
+      "bytes": 1276,
+      "sha256": "129bf588b5508400aec473c2a3fcf0a839352bbb1961cd8d52a6cf76f7dbe233",
+      "originalMetadata": "docs/research/v32-forge-reference.json",
+      "originalPath": ".playtest/v32/forge-reference/Grug-level-2-free-strikes.txt",
+      "recoveredFrom": "/srv/presidium/projects/salient/characters-build/.playtest/v32/forge-reference/Grug-level-2-free-strikes.txt",
+      "captureDateUTC": "2026-09-16",
+      "observedWebsiteVersion": "14.199.0"
+    },
+    {
+      "path": "tests/fixtures/v45-reference/Grug-level-2-mains.txt",
+      "bytes": 2371,
+      "sha256": "0d1d59c09c8af1c90f7010f6f1304dad8d38a8a742da95fe9b3b5c5b31b60964",
+      "originalMetadata": "docs/research/v32-forge-reference.json",
+      "originalPath": ".playtest/v32/forge-reference/Grug-level-2-mains.txt",
+      "recoveredFrom": "/srv/presidium/projects/salient/characters-build/.playtest/v32/forge-reference/Grug-level-2-mains.txt",
+      "captureDateUTC": "2026-09-16",
+      "observedWebsiteVersion": "14.199.0"
+    },
+    {
+      "path": "tests/fixtures/v45-reference/Grug-level-2-maneuvers.txt",
+      "bytes": 1548,
+      "sha256": "9d2ae133bef5d349d94baff6581dd1e0e54b0c5cf0b8b1ca96e4b445377ece08",
+      "originalMetadata": "docs/research/v32-forge-reference.json",
+      "originalPath": ".playtest/v32/forge-reference/Grug-level-2-maneuvers.txt",
+      "recoveredFrom": "/srv/presidium/projects/salient/characters-build/.playtest/v32/forge-reference/Grug-level-2-maneuvers.txt",
+      "captureDateUTC": "2026-09-16",
+      "observedWebsiteVersion": "14.199.0"
+    },
+    {
+      "path": "tests/fixtures/v45-reference/Grug-level-2-reimported.ds-hero",
+      "bytes": 134508,
+      "sha256": "1cda79ab86827365be3354be85a63d28deab6772050e1725e322a45b90189681",
+      "originalMetadata": "docs/research/v32-forge-reference.json",
+      "originalPath": ".playtest/v32/forge-reference/Grug-level-2-reimported.ds-hero",
+      "recoveredFrom": "/srv/presidium/projects/salient/characters-build/.playtest/v32/forge-reference/Grug-level-2-reimported.ds-hero",
+      "captureDateUTC": "2026-09-16",
+      "observedWebsiteVersion": "14.199.0"
+    },
+    {
+      "path": "tests/fixtures/v45-reference/Grug-level-2-sheet.png",
+      "bytes": 113511,
+      "sha256": "e49a65b5e141bfb61499c8a50865c42df200cf2596df45147f936b4d8e970c66",
+      "originalMetadata": "docs/research/v32-forge-reference.json",
+      "originalPath": ".playtest/v32/forge-reference/Grug-level-2-sheet.png",
+      "recoveredFrom": "/srv/presidium/projects/salient/characters-build/.playtest/v32/forge-reference/Grug-level-2-sheet.png",
+      "captureDateUTC": "2026-09-16",
+      "observedWebsiteVersion": "14.199.0"
+    },
+    {
+      "path": "tests/fixtures/v45-reference/Grug-level-2-sheet.txt",
+      "bytes": 1453,
+      "sha256": "84dea882215acc1850db77bb55c0b975c5ba26a0d3f56510092de5c996fe2a42",
+      "originalMetadata": "docs/research/v32-forge-reference.json",
+      "originalPath": ".playtest/v32/forge-reference/Grug-level-2-sheet.txt",
+      "recoveredFrom": "/srv/presidium/projects/salient/characters-build/.playtest/v32/forge-reference/Grug-level-2-sheet.txt",
+      "captureDateUTC": "2026-09-16",
+      "observedWebsiteVersion": "14.199.0"
+    },
+    {
+      "path": "tests/fixtures/v45-reference/Grug-level-2-triggers.txt",
+      "bytes": 1554,
+      "sha256": "6a968299299801a9c0ac9d923e5468fead12aaa54c5c88b11b01a6c05968faff",
+      "originalMetadata": "docs/research/v32-forge-reference.json",
+      "originalPath": ".playtest/v32/forge-reference/Grug-level-2-triggers.txt",
+      "recoveredFrom": "/srv/presidium/projects/salient/characters-build/.playtest/v32/forge-reference/Grug-level-2-triggers.txt",
+      "captureDateUTC": "2026-09-16",
+      "observedWebsiteVersion": "14.199.0"
+    },
+    {
+      "path": "tests/fixtures/v45-reference/Grug-level-2.ds-hero",
+      "bytes": 134508,
+      "sha256": "707adb5bd26efcef34b5f72752a49a1bb2bcc8f3a19b7b622642deb08b650d10",
+      "originalMetadata": "docs/research/v32-forge-reference.json",
+      "originalPath": ".playtest/v32/forge-reference/Grug-level-2.ds-hero",
+      "recoveredFrom": "/srv/presidium/projects/salient/characters-build/.playtest/v32/forge-reference/Grug-level-2.ds-hero",
+      "captureDateUTC": "2026-09-16",
+      "observedWebsiteVersion": "14.199.0"
+    }
+  ]
+}

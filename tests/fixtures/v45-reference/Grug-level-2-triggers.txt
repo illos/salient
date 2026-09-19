@@ -1,0 +1,123 @@
+HERO
+Edit
+Copy
+Export
+Delete
+Close
+GRUG
+Resources
+Vitals
+Inventory
+Projects
+Titles
+Notes
+Take a Respite
+Customize
+Settings
+GRUG - LEVEL 2 DEVIL FURY
+M
+2
+A
+2
+R
+0
+I
+1
+P
+0
+Size
+1M
+Spd
+6
+Stab
+2
+Dis
+1
+Save
+5
+Hero
+Features
+Mains
+Maneuvers
+Triggers
+Free Strikes
+LINES OF FORCE
+Berserker (level 1)
+
+You redirect the energy of motion.
+
+Magic
+Melee
+TRIGGER
+Triggered Action
+Distance
+
+Melee 1
+
+Target
+
+Self or one creature
+
+Trigger
+
+The target would be force moved.
+
+You can select a new target of the same size or smaller within distance to be force moved instead. You become the source of the forced movement, determine the new target’s destination, and can push the target instead of using the original forced movement type. Additionally, the forced movement distance gains a bonus equal to 2.
+
+Spend
+1PT
+
+The forced movement distance gains a bonus equal to 4 instead.
+
+Sta 39
+Rec 10
+FEROCITY
+0
+Start of your turn
++1D3 PER ROUND
+You take damage
++1 PER ROUND
+You become winded or are dying
++1D3 PER ENCOUNTER
+TRIGGERED ACTIONS
+Lines of ForceThe target would be force moved.
+DistanceMelee 1
+TargetSelf or one creature
+LANGUAGES
+Anjali
+Caelian
+I Speak Their Language (Soldier)
+Vaslorian
+SKILLS
+Alertness
+Intrigue
+Blacksmithing
+Crafting
+Climb
+Exploration
+Endurance
+Exploration
+Intimidate
+Interpersonal
+Jump
+Exploration
+Lift
+Exploration
+Nature
+Lore
+Persuade
+Interpersonal
+Swim
+Exploration
+ROLL MODIFIERS
+All tests
+When discovering an NPC’s motivations and pitfalls during a negotiation
+Silver Tongue
+Heroes
+Library
+Session
+Cookies
+Reference
+Settings
+About
+Patreon

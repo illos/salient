@@ -1,0 +1,7 @@
+ Container salient-characters-dev-2389e144b9dd-job-69b56f96 Creating
+ Container salient-characters-dev-2389e144b9dd-job-69b56f96 Created
+
+Running 1 test using 1 worker
+
+[1/1] tests/browser/wizard.spec.ts:23:1 › wizard, admission review and the three sheet audiences
+  1 passed (3.2m)

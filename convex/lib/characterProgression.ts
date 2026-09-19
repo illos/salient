@@ -4,6 +4,10 @@ import { ConvexError } from 'convex/values';
 import type { Doc, Id } from '../_generated/dataModel';
 import type { ReadCtx } from './access';
 import { baselineOf, pendingReview } from './characterBuild';
+import {
+  CURRENT_ADVANCEMENT,
+  supportsCurrentAdvancement,
+} from '../../shared/content/character-support';
 import { getDefinitions } from '../../shared/content/character-decisions';
 import { isJsonValue, type DraftSelection } from '../../shared/characterDraft';
 import { draftSelectionsFrom } from '../../shared/evaluate/draft';
@@ -13,8 +17,12 @@ export function revisionLevel(revision: Doc<'characterRevisions'>): number {
   return revision.level ?? baselineOf(revision.derivedBaseline)?.level.value ?? 1;
 }
 export function advancementDecisionIds(): string[] {
-  const oldIds = new Set(getDefinitions(1).steps.flatMap(step => step.decisions.map(d => d.id)));
-  return getDefinitions(2).steps.flatMap(step =>
+  const oldIds = new Set(
+    getDefinitions(CURRENT_ADVANCEMENT.fromLevel).steps.flatMap(step =>
+      step.decisions.map(d => d.id),
+    ),
+  );
+  return getDefinitions(CURRENT_ADVANCEMENT.targetLevel).steps.flatMap(step =>
     step.decisions.filter(d => !oldIds.has(d.id)).map(d => d.id),
   );
 }
@@ -30,7 +38,10 @@ export function advancementSelections(input: DraftSelection[]): DraftSelection[]
     );
   if (new Set(input.map(s => s.decisionId)).size !== input.length)
     throw new ConvexError('A level-up decision may appear only once.');
-  return draftSelectionsFrom(selectionsFrom(input), getDefinitions(2));
+  return draftSelectionsFrom(
+    selectionsFrom(input),
+    getDefinitions(CURRENT_ADVANCEMENT.targetLevel),
+  );
 }
 export async function progressionBase(ctx: ReadCtx, character: Doc<'characters'>) {
   const id = character.effectiveRevisionId ?? character.draftRevisionId;
@@ -48,15 +59,24 @@ export function progressionEligibility(
       ? 'Scoped advancement currently requires a campaign-attached character with recorded campaign XP.'
       : !base ||
           base.status !== 'complete' ||
-          revisionLevel(base) !== 1 ||
-          baseline?.class.value !== 'Fury'
-        ? 'This slice supports a complete level-one Fury advancing to level two.'
+          !supportsCurrentAdvancement(
+            revisionLevel(base),
+            baseline?.class.value,
+            baseline?.subclass.value,
+          )
+        ? CURRENT_ADVANCEMENT.unavailableReason
         : character.combatLocked
           ? 'Character progression is locked during combat.'
-          : xp + offset < 16
+          : xp + offset < CURRENT_ADVANCEMENT.requiredXp
             ? 'Level two requires 16 cumulative XP.'
             : null;
-  return { xp, entryLevelXpOffset: offset, requiredXp: 16, eligible: reason === null, reason };
+  return {
+    xp,
+    entryLevelXpOffset: offset,
+    requiredXp: CURRENT_ADVANCEMENT.requiredXp,
+    eligible: reason === null,
+    reason,
+  };
 }
 export function requireProgressionBase(
   character: Doc<'characters'>,

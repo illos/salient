@@ -1,0 +1,11 @@
+9/19/2026, 2:33:43 PM [CONVEX Q(encounters:current)] [WARN] Function execution took a long time. (maximum duration: 1s, actual duration: 847.019248ms).
+9/19/2026, 2:33:43 PM [CONVEX Q(history:status)] [WARN] Function execution took a long time. (maximum duration: 1s, actual duration: 802.978867ms).
+9/19/2026, 2:33:53 PM [CONVEX Q(characters:sheet)] [WARN] Function execution took a long time. (maximum duration: 1s, actual duration: 870.73233ms).
+9/19/2026, 2:35:00 PM [CONVEX Q(abilities:results)] [WARN] Function execution took a long time. (maximum duration: 1s, actual duration: 820.859025ms).
+9/19/2026, 2:35:07 PM [CONVEX Q(foes:catalog)] [WARN] Function execution took a long time. (maximum duration: 1s, actual duration: 896.376005ms).
+9/19/2026, 2:35:19 PM [CONVEX Q(characters:sheet)] [WARN] Function execution took a long time. (maximum duration: 1s, actual duration: 870.448659ms).
+9/19/2026, 2:35:24 PM [CONVEX Q(history:status)] [WARN] Function execution took a long time. (maximum duration: 1s, actual duration: 934.944794ms).
+9/19/2026, 2:35:24 PM [CONVEX Q(table:roster)] [WARN] Function execution took a long time. (maximum duration: 1s, actual duration: 857.358821ms).
+9/19/2026, 2:35:24 PM [CONVEX Q(characters:sheet)] [WARN] Function execution took a long time. (maximum duration: 1s, actual duration: 933.004723ms).
+9/19/2026, 2:35:41 PM [CONVEX Q(history:status)] [WARN] Function execution took a long time. (maximum duration: 1s, actual duration: 814.086223ms).
+9/19/2026, 2:35:58 PM [CONVEX Q(characters:sheet)] [WARN] Function execution took a long time. (maximum duration: 1s, actual duration: 914.982926ms).

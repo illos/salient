@@ -20,7 +20,6 @@ import { CAREER_BENEFITS } from '../content/supporting-backgrounds.ts';
 import { COMPLICATION_ABILITIES } from '../content/supporting-complication-abilities.ts';
 import { COMPLICATION_EFFECTS } from '../content/supporting-complications.ts';
 import { SUPPORTING_KITS, KIT_BONUS_SOURCES } from '../content/supporting-kits.ts';
-import type { Characteristic } from '../contracts/rollResolution.ts';
 import type {
   DerivedBaseline,
   DerivedValue,
@@ -61,8 +60,24 @@ import {
   KITS_TABLE_HEADING,
   SENTENCES,
   SKILL_SENTENCES,
-  TRAIT_EFFECTS,
 } from './sources.ts';
+
+import { characterSupportDiagnostics } from '../content/character-support.ts';
+import {
+  applyFurySubclass,
+  applyFuryCharacteristics,
+  applyFuryVitals,
+  applyFuryResource,
+} from './classes/fury.ts';
+import { applyClassProfile } from './classes/profile.ts';
+import { applyElementalistModifiers } from './classes/elementalist.ts';
+import {
+  applyDevilMovement,
+  applyDevilSavingThrow,
+  applyDevilNoKit,
+  appendDevilTraits,
+} from './ancestries/devil.ts';
+import { applyPolderBaseline, applyPolderDisengage } from './ancestries/polder.ts';
 
 export const DEFINITIONS_SCHEMA_VERSION = 'r01.1';
 
@@ -584,17 +599,6 @@ class Evaluation {
     return values.flatMap(value => decision.options?.find(o => o.value === value)?.grants ?? []);
   }
 
-  private isFury(): boolean {
-    return this.available.has('class.fury.baseline');
-  }
-  private isDevil(): boolean {
-    return this.available.has('ancestry.devil.base-statistics');
-  }
-  private purchasedTraits(): string[] {
-    return (this.list('ancestry.devil.purchased-traits') ?? []).filter(
-      (t): t is string => t !== null,
-    );
-  }
   private kit() {
     const kit = this.single('kit.choice');
     const sentences = kit
@@ -644,15 +648,7 @@ class Evaluation {
           source: this.sentence(SENTENCES.classStep),
         }),
       ]);
-    const aspect = this.single('class.fury.aspect');
-    if (aspect)
-      out.subclass = dv(aspect, [
-        p({
-          decisionId: 'class.fury.aspect',
-          selection: aspect,
-          source: this.sentence(SENTENCES.subclass),
-        }),
-      ]);
+    applyFurySubclass(this, out);
     const career = this.single('career.choice');
     if (career)
       out.career = dv(career, [
@@ -663,48 +659,7 @@ class Evaluation {
         }),
       ]);
 
-    // 1.1 Characteristics.
-    const fixed = this.available.has('class.fury.fixed-characteristics');
-    const array = this.single('class.fury.characteristic-array');
-    const assignment = this.valid.get('class.fury.array-assignment');
-    if (
-      fixed &&
-      array &&
-      assignment &&
-      typeof assignment === 'object' &&
-      !Array.isArray(assignment)
-    ) {
-      const fixedEntry = () =>
-        p({
-          decisionId: 'class.fury.fixed-characteristics',
-          source: this.sentence(SENTENCES.fixedCharacteristics),
-          operation: 'set',
-          amount: 2,
-        });
-      const assigned = (target: string): DerivedValue<number> =>
-        dv(assignment[target]!, [
-          p({
-            decisionId: 'class.fury.characteristic-array',
-            selection: array,
-            source: this.sentence(SENTENCES.characteristicArray),
-          }),
-          p({
-            decisionId: 'class.fury.array-assignment',
-            selection: `${target} ${assignment[target]}`,
-            source: this.sentence(SENTENCES.characteristicArray),
-            operation: 'set',
-            amount: assignment[target]!,
-          }),
-        ]);
-      out.characteristics = {
-        M: dv(2, [fixedEntry()]),
-        A: dv(2, [fixedEntry()]),
-        R: assigned('Reason'),
-        I: assigned('Intuition'),
-        P: assigned('Presence'),
-      };
-    }
-    const might = out.characteristics?.M.value;
+    applyFuryCharacteristics(this, out);
 
     // 1.14 Kit contributions (read first: 1.3, 1.6, 1.7 and 1.9 add its terms).
     const kit = this.kit();
@@ -792,152 +747,9 @@ class Evaluation {
       out.kit = contributions;
     }
 
-    // 1.3 Stamina maximum = class starting Stamina + kit Stamina bonus × echelon.
-    if (this.isFury() && kit) {
-      const s = kit.s;
-      const applied = s.staminaBonusPerEchelon.amount * echelon;
-      out.staminaMaximum = dv(21 + applied, [
-        p({
-          decisionId: 'class.fury.baseline',
-          source: this.sentence(SENTENCES.startingStamina),
-          operation: 'base',
-          amount: 21,
-        }),
-        p({
-          decisionId: kit.decisionId,
-          source: this.sentence({
-            path: s.entryPath,
-            quote: s.staminaBonusPerEchelon.quote,
-            heading: KIT_BONUSES_HEADING,
-          }),
-          operation: 'add',
-          amount: applied,
-          note: s.notes.stamina,
-        }),
-      ]);
-    }
-    // V32 progression is an explicit sourced contribution, never a live-state refill.
-    const levelTwoStamina = this.decisions.get('class.fury.level-2.stamina');
-    if (out.staminaMaximum && levelTwoStamina && this.available.has(levelTwoStamina.id)) {
-      out.staminaMaximum.value += 9;
-      out.staminaMaximum.provenance.push(
-        p({
-          decisionId: levelTwoStamina.id,
-          source: this.own(levelTwoStamina, 'Basics'),
-          operation: 'add',
-          amount: 9,
-        }),
-      );
-    }
-    // 1.4 Recoveries and recovery value.
-    if (this.isFury())
-      out.recoveriesMaximum = dv(10, [
-        p({
-          decisionId: 'class.fury.baseline',
-          source: this.sentence(SENTENCES.recoveries),
-          operation: 'set',
-          amount: 10,
-          note: 'rule: rule/health/recoveries.md, "determined by their class"',
-        }),
-      ]);
-    if (out.staminaMaximum) {
-      const stamina = out.staminaMaximum.value;
-      out.recoveryValue = dv(Math.floor(stamina / 3), [
-        p({
-          decisionId: 'class.fury.baseline',
-          source: this.sentence(SENTENCES.recoveryValue),
-          operation: 'floor-divide',
-          amount: 3,
-          note: `floor(${stamina} / 3)`,
-        }),
-      ]);
-      // 1.5 Winded value (restated from R04 6.3).
-      out.windedValue = dv(Math.floor(stamina / 2), [
-        p({
-          decisionId: 'class.fury.baseline',
-          source: this.sentence(SENTENCES.winded),
-          operation: 'floor-divide',
-          amount: 2,
-          note: `floor(${stamina} / 2); R04 section 6.3`,
-        }),
-      ]);
-    }
+    applyFuryVitals(this, out, kit, echelon);
 
-    // 1.6 to 1.8 Speed, stability and size from the ancestry base statistics.
-    const traits = this.purchasedTraits();
-    if (this.isDevil()) {
-      const base = (amount: number) =>
-        p({
-          decisionId: 'ancestry.devil.base-statistics',
-          source: this.sentence(SENTENCES.baseStatistics),
-          operation: 'base',
-          amount,
-        });
-      let speed = 5;
-      const speedProvenance: Provenance[] = [base(5)];
-      for (const trait of traits) {
-        const effect = TRAIT_EFFECTS[trait];
-        if (effect?.field === 'speed') {
-          speed = effect.value;
-          speedProvenance.push(
-            p({
-              decisionId: 'ancestry.devil.purchased-traits',
-              selection: trait,
-              source: this.sentence(effect.sentence),
-              operation: 'set',
-              amount: effect.value,
-            }),
-          );
-        }
-      }
-      if (kit) {
-        speed += kit.s.speedBonus;
-        speedProvenance.push(
-          p({
-            decisionId: kit.decisionId,
-            source: this.sentence({
-              path: KITS_PATH,
-              quote: kit.s.tableRow,
-              heading: KITS_TABLE_HEADING,
-            }),
-            operation: 'add',
-            amount: kit.s.speedBonus,
-            note: kit.s.notes.speed,
-          }),
-        );
-      }
-      out.speed = dv(speed, speedProvenance);
-      if (kit) {
-        const bonus = kit.s.stabilityBonus;
-        out.stability = dv(Math.max(0, 0 + (bonus?.amount ?? 0)), [
-          base(0),
-          p({
-            decisionId: kit.decisionId,
-            source: bonus
-              ? this.sentence({
-                  path: kit.s.entryPath,
-                  quote: bonus.quote,
-                  heading: KIT_BONUSES_HEADING,
-                })
-              : this.sentence({
-                  path: KITS_PATH,
-                  quote: kit.s.tableRow,
-                  heading: KITS_TABLE_HEADING,
-                }),
-            operation: 'add',
-            amount: bonus?.amount ?? 0,
-            note: kit.s.notes.stability,
-          }),
-        ]);
-      }
-      out.size = dv('1M', [
-        p({
-          decisionId: 'ancestry.devil.base-statistics',
-          source: this.sentence(SENTENCES.baseStatistics),
-          operation: 'set',
-        }),
-      ]);
-    }
+    applyDevilMovement(this, out, kit);
 
     // 1.9 Disengage = 1 + kit disengage bonus.
     if (kit)
@@ -962,48 +774,7 @@ class Evaluation {
         }),
       ]);
 
-    // 1.10 Potencies from the class-named characteristic.
-    if (this.isFury()) {
-      out.potencyCharacteristic = dv('M' as Characteristic, [
-        p({
-          decisionId: 'class.fury.baseline',
-          source: this.sentence(SENTENCES.potencyStrong),
-          note: 'class-named characteristic; the specific Fury formula applies (Potencies and Game of Exceptions).',
-        }),
-      ]);
-      if (might !== undefined) {
-        const potency = (sentence: Sentence, amount: number, note: string): DerivedValue<number> =>
-          dv(amount, [
-            p({
-              decisionId: 'class.fury.baseline',
-              source: this.sentence(sentence),
-              operation: 'set',
-              amount,
-              note,
-            }),
-          ]);
-        out.potency = {
-          weak: potency(SENTENCES.potencyWeak, might - 2, `Might ${might} − 2`),
-          average: potency(SENTENCES.potencyAverage, might - 1, `Might ${might} − 1`),
-          strong: potency(SENTENCES.potencyStrong, might, `Might ${might}`),
-        };
-      }
-      // 1.11 Heroic resource.
-      out.heroicResource = {
-        name: dv('ferocity' as const, [
-          p({ decisionId: 'class.fury.features', source: this.sentence(SENTENCES.ferocityName) }),
-        ]),
-        startingValue: dv(0, [
-          p({
-            decisionId: 'class.fury.features',
-            source: this.sentence(SENTENCES.ferocityOutsideCombat),
-            operation: 'set',
-            amount: 0,
-            note: 'Interpretation: a newly created hero has not been in combat and cannot have gained ferocity; see also "You lose any remaining ferocity at the end of the encounter." R03 owns live initialization.',
-          }),
-        ]),
-      };
-    }
+    applyFuryResource(this, out);
 
     // 1.12 Saving-throw threshold: 6 by rule, set by a trait that names another number.
     {
@@ -1017,21 +788,9 @@ class Evaluation {
           note: 'general rule, not a creation decision; attached to the automatic step',
         }),
       ];
-      for (const trait of traits) {
-        const effect = TRAIT_EFFECTS[trait];
-        if (effect?.field === 'savingThrowThreshold') {
-          threshold = effect.value;
-          provenance.push(
-            p({
-              decisionId: 'ancestry.devil.purchased-traits',
-              selection: trait,
-              source: this.sentence(effect.sentence),
-              operation: 'set',
-              amount: effect.value,
-            }),
-          );
-        }
-      }
+      applyDevilSavingThrow(this, provenance, value => {
+        threshold = value;
+      });
       out.savingThrowThreshold = dv(threshold, provenance);
     }
 
@@ -1419,6 +1178,7 @@ class Evaluation {
 
   /** Additional sourced class profiles share assignment, no-kit baselines and resource derivation. */
   private deriveProfiles(out: PartialBaseline) {
+    applyClassProfile(this, out);
     const profile = this.definitions.classProfiles?.[this.single('class.choice') ?? ''];
     const dv = <T>(value: T, provenance: Provenance[]): DerivedValue<T> => ({ value, provenance });
     const sourced = (
@@ -1427,190 +1187,10 @@ class Evaluation {
       quote: string,
       extra: Partial<Provenance> = {},
     ): Provenance => ({ decisionId, source: this.sentence({ path: source, quote }), ...extra });
-    const names: Record<Characteristic, string> = {
-      M: 'Might',
-      A: 'Agility',
-      R: 'Reason',
-      I: 'Intuition',
-      P: 'Presence',
-    };
-    if (profile && !this.isFury() && this.available.has(profile.baselineDecisionId)) {
-      const id = profile.baselineDecisionId;
-      const entry = (quote: string, extra: Partial<Provenance> = {}) =>
-        sourced(id, profile.source, quote, extra);
-      const assignment = this.valid.get(profile.assignmentDecisionId);
-      const array = this.single(profile.arrayDecisionId);
-      if (array && assignment && typeof assignment === 'object' && !Array.isArray(assignment)) {
-        out.characteristics = Object.fromEntries(
-          Object.entries(names).map(([key, name]) => {
-            const fixed = profile.fixedCharacteristics[name];
-            return [
-              key,
-              fixed !== undefined
-                ? dv(fixed, [
-                    sourced(profile.fixedDecisionId, profile.source, profile.characteristicsQuote, {
-                      operation: 'set',
-                      amount: fixed,
-                    }),
-                  ])
-                : dv(assignment[name]!, [
-                    sourced(profile.arrayDecisionId, profile.source, profile.characteristicsQuote, {
-                      selection: array,
-                    }),
-                    sourced(
-                      profile.assignmentDecisionId,
-                      profile.source,
-                      profile.characteristicsQuote,
-                      {
-                        selection: `${name} ${assignment[name]}`,
-                        operation: 'set',
-                        amount: assignment[name]!,
-                      },
-                    ),
-                  ]),
-            ];
-          }),
-        ) as DerivedBaseline['characteristics'];
-      }
-      const subclass = this.single(profile.subclassDecisionId);
-      if (subclass)
-        out.subclass = dv(subclass, [
-          {
-            decisionId: profile.subclassDecisionId,
-            selection: subclass,
-            source: this.own(this.decisions.get(profile.subclassDecisionId)!),
-          },
-        ]);
-      if (profile.kit === 'none') {
-        out.kit = null;
-        out.staminaMaximum = dv(profile.startingStamina, [
-          entry(`Starting Stamina at 1st Level: ${profile.startingStamina}`, {
-            operation: 'base',
-            amount: profile.startingStamina,
-          }),
-        ]);
-      }
-      out.recoveriesMaximum = dv(profile.recoveries, [
-        entry(`Recoveries: ${profile.recoveries}`, {
-          operation: 'set',
-          amount: profile.recoveries,
-        }),
-      ]);
-      if (out.staminaMaximum) {
-        out.recoveryValue = dv(Math.floor(out.staminaMaximum.value / 3), [
-          sourced(id, SENTENCES.recoveryValue.path, SENTENCES.recoveryValue.quote, {
-            operation: 'floor-divide',
-            amount: 3,
-          }),
-        ]);
-        out.windedValue = dv(Math.floor(out.staminaMaximum.value / 2), [
-          sourced(id, SENTENCES.winded.path, SENTENCES.winded.quote, {
-            operation: 'floor-divide',
-            amount: 2,
-          }),
-        ]);
-      }
-      out.potencyCharacteristic = dv(profile.potencyCharacteristic, [
-        entry(`Strong Potency: ${names[profile.potencyCharacteristic]}`),
-      ]);
-      const score = out.characteristics?.[profile.potencyCharacteristic].value;
-      if (score !== undefined) {
-        const name = names[profile.potencyCharacteristic];
-        out.potency = {
-          weak: dv(score - 2, [
-            entry(`Weak Potency: ${name} − 2`, { operation: 'set', amount: score - 2 }),
-          ]),
-          average: dv(score - 1, [
-            entry(`Average Potency: ${name} − 1`, { operation: 'set', amount: score - 1 }),
-          ]),
-          strong: dv(score, [
-            entry(`Strong Potency: ${name}`, { operation: 'set', amount: score }),
-          ]),
-        };
-      }
-      out.heroicResource = {
-        name: dv(profile.resource, [sourced(id, profile.resourceSource, profile.resourceQuote)]),
-        startingValue: dv(0, [
-          sourced(id, profile.resourceSource, profile.resourceOutsideCombatQuote, {
-            operation: 'set',
-            amount: 0,
-            note: 'A newly created hero has not gained combat resources; live initialization is separate.',
-          }),
-        ]),
-      };
-    }
     // Default ancestry statistics still apply when a supported class has no kit.
     const noKit = profile?.kit === 'none' && this.available.has(profile.baselineDecisionId);
-    if (noKit && this.isDevil()) {
-      out.stability = dv(0, [
-        sourced(
-          'ancestry.devil.base-statistics',
-          SENTENCES.baseStatistics.path,
-          SENTENCES.baseStatistics.quote,
-          { operation: 'base', amount: 0 },
-        ),
-      ]);
-    }
-    const polder = this.available.has('ancestry.polder.base-statistics');
-    if (polder) {
-      const base = (amount: number) =>
-        sourced(
-          'ancestry.polder.base-statistics',
-          SENTENCES.baseStatistics.path,
-          SENTENCES.baseStatistics.quote,
-          { operation: 'base', amount },
-        );
-      const kit = out.kit;
-      out.speed = dv(5 + (kit?.speedBonus.value ?? 0), [
-        base(5),
-        ...(kit?.speedBonus.provenance ?? []),
-      ]);
-      if (kit || noKit)
-        out.stability = dv(kit?.stabilityBonus.value ?? 0, [
-          base(0),
-          ...(kit?.stabilityBonus.provenance ?? []),
-        ]);
-      out.size = dv('1S', [
-        sourced(
-          'ancestry.polder.signature-trait',
-          'en/unified/md/feature/trait/polder/small.md',
-          'Your size is 1S.',
-          { operation: 'set' },
-        ),
-      ]);
-      const selected = this.list('ancestry.polder.purchased-traits') ?? [];
-      if (selected.includes('Corruption Immunity'))
-        out.damageImmunities = [
-          {
-            damageType: 'corruption',
-            value: dv(this.level + 2, [
-              sourced(
-                'ancestry.polder.purchased-traits',
-                'en/unified/md/feature/trait/polder/corruption-immunity.md',
-                'You have corruption immunity equal to your level + 2.',
-                {
-                  selection: 'Corruption Immunity',
-                  operation: 'set',
-                  amount: this.level + 2,
-                  note: `Level ${this.level} + 2`,
-                },
-              ),
-            ]),
-          },
-        ];
-      if (selected.includes('Fearless'))
-        out.conditionImmunities = [
-          {
-            condition: 'frightened',
-            provenance: sourced(
-              'ancestry.polder.purchased-traits',
-              'en/unified/md/feature/trait/polder/fearless.md',
-              "You can't be made frightened.",
-              { selection: 'Fearless' },
-            ),
-          },
-        ];
-    }
+    applyDevilNoKit(this, out, noKit);
+    applyPolderBaseline(this, out, noKit);
     if (noKit)
       out.disengage = dv(1, [
         sourced('free-strikes.grant', SENTENCES.disengage.path, SENTENCES.disengage.quote, {
@@ -1618,20 +1198,7 @@ class Evaluation {
           amount: 1,
         }),
       ]);
-    if (
-      out.disengage &&
-      (this.list('ancestry.polder.purchased-traits') ?? []).includes('Graceful Retreat')
-    ) {
-      out.disengage = dv(out.disengage.value + 1, [
-        ...out.disengage.provenance,
-        sourced(
-          'ancestry.polder.purchased-traits',
-          'en/unified/md/feature/trait/polder/graceful-retreat.md',
-          'You gain a +1 bonus to the distance you can shift when you take the Disengage move action.',
-          { selection: 'Graceful Retreat', operation: 'add', amount: 1 },
-        ),
-      ]);
-    }
+    applyPolderDisengage(this, out);
     if (this.available.has('career.mages-apprentice.renown')) {
       out.renown = dv(1, [
         sourced(
@@ -1655,37 +1222,7 @@ class Evaluation {
         }),
       ]);
     }
-    const modifiers: NonNullable<DerivedBaseline['abilityModifiers']> = [];
-    if (this.single('class.elementalist.enchantment') === 'Enchantment of Destruction')
-      modifiers.push({
-        id: 'elementalist.enchantment-of-destruction',
-        label: 'Enchantment of Destruction',
-        field: 'rolled-damage',
-        amount: 1,
-        keywords: ['Magic'],
-        provenance: sourced(
-          'class.elementalist.enchantment',
-          'en/unified/md/feature/elementalist/level-1/enchantment-of-destruction.md',
-          'You gain a +1 bonus to rolled damage with magic abilities.',
-          { selection: 'Enchantment of Destruction', operation: 'add', amount: 1 },
-        ),
-      });
-    if (this.single('class.elementalist.specialization') === 'Fire')
-      modifiers.push({
-        id: 'elementalist.acolyte-of-fire',
-        label: 'Fire: Acolyte of Fire',
-        field: 'rolled-damage',
-        amount: 1,
-        keywords: ['Fire', 'Magic'],
-        alternative: { ability: 'Hurl Element', damageType: 'fire' },
-        provenance: sourced(
-          'class.elementalist.specialization',
-          'en/unified/md/feature/elementalist/level-1/fire-acolyte-of-fire.md',
-          'Your abilities that have the Fire and Magic keywords gain a +1 bonus to rolled damage. Your Hurl Element ability (see below) also gains this bonus when you use it to deal fire damage.',
-          { selection: 'Fire', operation: 'add', amount: 1 },
-        ),
-      });
-    if (modifiers.length) out.abilityModifiers = modifiers;
+    applyElementalistModifiers(this, out);
   }
 
   private skillGroup(name: string): string {
@@ -1869,38 +1406,7 @@ class Evaluation {
 
   private traits(): GrantedFeature[] {
     const out: GrantedFeature[] = [];
-    const signature = this.decisions.get('ancestry.devil.signature-trait');
-    if (signature && this.available.has(signature.id))
-      for (const grant of signature.grants ?? [])
-        if (grant.kind === 'trait')
-          out.push({
-            name: grant.value,
-            kind: 'ancestry-signature-trait',
-            sourcePath: grant.source ?? signature.source,
-            provenance: this.provenance({
-              decisionId: signature.id,
-              source: this.sentence(SENTENCES.ancestryTraits),
-            }),
-          });
-    const purchased = this.decisions.get('ancestry.devil.purchased-traits');
-    if (purchased)
-      for (const name of this.purchasedTraits()) {
-        const option = purchased.options?.find(o => o.value === name);
-        if (!option) continue;
-        const effect = TRAIT_EFFECTS[name];
-        out.push({
-          name,
-          kind: 'ancestry-purchased-trait',
-          sourcePath: option.source ?? purchased.source,
-          ...(option.cost !== undefined ? { cost: option.cost } : {}),
-          provenance: this.provenance({
-            decisionId: purchased.id,
-            selection: name,
-            source: this.own(purchased),
-          }),
-          ...(effect ? { affects: [effect.field] } : {}),
-        });
-      }
+    appendDevilTraits(this, out);
     for (const decision of this.order) {
       for (const grant of this.grantsOf(decision.id))
         if (grant.kind === 'ancestry-signature-trait')
@@ -2242,26 +1748,12 @@ export function evaluateCharacter(
       'definition-mismatch',
       `The selections cite definitions ${input.definitionsSchemaVersion} at ${input.compendiumRevision} (level ${input.level}); this evaluator uses ${definitions.schemaVersion} at ${definitions.compendiumRevision} at level ${definitions.level ?? 1}`,
     );
-  if (input.level !== 1 && input.level !== 2)
+  for (const diagnostic of characterSupportDiagnostics(input.level, input.selections))
     evaluation.diagnose(
-      'class.level',
+      diagnostic.decisionId,
       'unsupported',
       'unsupported-option',
-      `Level ${input.level} has no supported character definitions; this slice supports level one and Berserker Fury level two.`,
-    );
-  if (input.level === 2 && input.selections['class.choice'] !== 'Fury')
-    evaluation.diagnose(
-      'class.choice',
-      'unsupported',
-      'unsupported-option',
-      'Level two currently supports Fury only.',
-    );
-  if (input.level === 2 && input.selections['class.fury.aspect'] !== 'Berserker')
-    evaluation.diagnose(
-      'class.fury.aspect',
-      'unsupported',
-      'unsupported-option',
-      'Level two currently supports the Berserker aspect only.',
+      diagnostic.message,
     );
   evaluation.validate();
   const fields = evaluation.derive();

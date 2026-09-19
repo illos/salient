@@ -1,0 +1,24 @@
+ Container salient-characters-dev-2389e144b9dd-job-94fd5236 Creating
+ Container salient-characters-dev-2389e144b9dd-job-94fd5236 Created
+
+ RUN  v4.1.11 /app
+
+ ✓  engine  tests/character-v45-reference.test.ts (7 tests) 311ms
+ ✓  engine  tests/character-v45-foundation.test.ts (3 tests) 59ms
+
+ Test Files  2 passed (2)
+      Tests  10 passed (10)
+   Start at  14:06:52
+   Duration  965ms (transform 269ms, setup 0ms, import 407ms, tests 370ms, environment 0ms)
+
+{
+  "definitions": 10,
+  "evaluations": 5584,
+  "statuses": [
+    "complete",
+    "incomplete",
+    "invalid",
+    "unsupported"
+  ],
+  "result": "exact deep equality"
+}

@@ -26,6 +26,10 @@ import {
 import { pendingDirectorSetup } from './lib/characterDirectorSetup';
 import { canonicalChoiceOrigins } from './lib/characterChoiceOrigins';
 import { COMPLICATION_ABILITIES } from '../shared/content/supporting-complication-abilities';
+import {
+  CURRENT_ADVANCEMENT,
+  isSupportedDefinitionLevel,
+} from '../shared/content/character-support';
 import { getDefinitions } from '../shared/content/character-decisions';
 import { mutation, query } from './_generated/server';
 import type { Doc, Id } from './_generated/dataModel';
@@ -394,7 +398,8 @@ export const save = mutation({
     const fields = authored(args.authored);
     const old = character.draftRevisionId ? await ctx.db.get(character.draftRevisionId) : null;
     const level = args.targetLevel ?? old?.level ?? 1;
-    if (level !== 1 && level !== 2) throw new ConvexError('Only levels 1 and 2 are supported.');
+    if (!isSupportedDefinitionLevel(level))
+      throw new ConvexError('Only levels 1 and 2 are supported.');
     const definitions = getDefinitions(level);
     let selections = args.selections ?? old?.selections ?? [];
     selections = validatedSelections(selections, level);
@@ -882,7 +887,7 @@ export const progression = query({
       revision: character.revision,
       baseRevisionId: base?._id ?? null,
       baseLevel: base ? revisionLevel(base) : 1,
-      targetLevel: 2,
+      targetLevel: CURRENT_ADVANCEMENT.targetLevel,
       ...progressionEligibility(character, base),
       draft,
       draftIsStale,
@@ -892,8 +897,8 @@ export const progression = query({
       evaluation: base
         ? evaluateSelections(
             [...base.selections, ...(draft && !draftIsStale ? draft.selections : [])],
-            2,
-            canonicalChoiceOrigins(base.selections, 2, base),
+            CURRENT_ADVANCEMENT.targetLevel,
+            canonicalChoiceOrigins(base.selections, CURRENT_ADVANCEMENT.targetLevel, base),
           )
         : null,
     };
@@ -937,7 +942,7 @@ export const saveAdvancement = mutation({
     await ctx.db.patch(character._id, {
       advancementDraft: {
         baseRevisionId: base._id,
-        targetLevel: 2,
+        targetLevel: CURRENT_ADVANCEMENT.targetLevel,
         version,
         selections: advancementSelections(args.selections),
       },
@@ -979,8 +984,12 @@ export const finalizeAdvancement = mutation({
         'The advancement draft changed or has a different effective base. Reload before finalizing.',
       );
     const selections = [...base.selections, ...advancementSelections(draft.selections)];
-    const choiceOrigins = canonicalChoiceOrigins(selections, 2, base);
-    const evaluation = evaluateSelections(selections, 2, choiceOrigins);
+    const choiceOrigins = canonicalChoiceOrigins(selections, CURRENT_ADVANCEMENT.targetLevel, base);
+    const evaluation = evaluateSelections(
+      selections,
+      CURRENT_ADVANCEMENT.targetLevel,
+      choiceOrigins,
+    );
     if (evaluation.status !== 'complete')
       throw new ConvexError(
         `The level-up is ${evaluation.status}; resolve its choices before finalizing.`,
@@ -990,7 +999,7 @@ export const finalizeAdvancement = mutation({
       characterId: character._id,
       revision,
       parentRevisionId: base._id,
-      level: 2,
+      level: CURRENT_ADVANCEMENT.targetLevel,
       kind: 'level-up',
       choiceOrigins,
       baseEffectiveRevisionId: base._id,
