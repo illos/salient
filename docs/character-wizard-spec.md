@@ -413,6 +413,15 @@ path. See [the respite mode](table-spec.md#respite-mode) and
 
 ### Main creation and editing
 
+**Confirmed entry and first-save behavior, 2026-09-19:** opening the creation wizard requires
+neither a name nor an existing character. Naming belongs to the wizard's Details step. Choices
+and authored details remain an unsaved browser draft until the user explicitly selects Save draft
+or Save and close. The first successful save creates the character and its first selection revision
+atomically. Exit before that save returns to the character list without creating anything. Reloading
+or leaving an unsaved draft discards it; the wizard explains this. A name of 1–100 trimmed characters
+is required at save time; incomplete build choices may still be saved. Later saves retain the same
+character identity and existing revision, review and combat-lock protections.
+
 Proposed user flow: choose/create an owned character, establish a target level, work through the applicable
 decisions, add authored details, inspect the derived sheet and outstanding choices, then save or submit for
 campaign review. Users can revisit earlier decisions without starting over. Screen order is a presentation

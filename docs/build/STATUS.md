@@ -299,3 +299,9 @@ records the handoff; it does not certify A09 or create an implementation commit.
 | Id | Slice | Status | Owner |
 | --- | --- | --- | --- |
 | V39 | [Account email and password recovery](V39-account-email.md) | Merged/live `62ca7b9` — reviewed implementation, 672 tests; 2 hosted recovery scenarios and shared-main journey pass; Cloudflare test message received, confirmed by user | Deploy thread, hosting worktree |
+
+## V40 unsaved wizard entry — 2026-09-19
+
+| Id | Slice | Status | Owner |
+| --- | --- | --- | --- |
+| V40 | [Unsaved wizard entry](V40-unsaved-wizard.md) | In progress | Character wizard thread |
