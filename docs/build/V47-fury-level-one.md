@@ -105,6 +105,8 @@ Preparation stage (this handoff):
   split for the stormwight kits, existing-support gap list checked against the assembled
   definitions, five defects found in shared data, the shared files to claim, the Forge structural
   comparison, the counterpart ledger and the one remaining interpretation.
+- [Evidence directory](evidence/V47/README.md) with the five counterpart builds and their
+  source-derived expectations, the Forge capture plan and the test plan.
 - This slice document and its `STATUS.md` row.
 
 Implementation stage (released after the pilot verdict):
@@ -309,3 +311,40 @@ Neither reviewer ran any install, build, typecheck, test or browser, and neither
 source. Remaining limits of this stage: every claim about the assembled definitions is from static
 reading, since the composer cannot be executed here; those counts are confirmed on CT114 with the
 implementation stage's first full check.
+
+2026-09-19 (preparation continuation, authorized by the lead while the pilot gate holds): wrote the
+five complete legal choice maps with independently source-derived expectations, the Forge capture
+plan and the test plan, under `docs/build/evidence/V47/`. Two further independent subagent reviews
+supplied the inputs: a static enumeration of the assembled decision inventory, and a source-only
+derivation of the expected values. Neither ran any install, build, test, server or browser, and
+neither consulted a web source.
+
+Facts that changed the plan in this round:
+
+- `complication.choice` is optional, so a build omits the key entirely rather than supplying an
+  empty value. The five references take no complication; the Lycanthropy exclusion is a negative
+  test.
+- The V37 extension regenerates every career row, so the career decision ids and option shapes in
+  the choice maps are the regenerated ones. Soldier has no fixed skills and no wealth row, which is
+  why it was chosen: it introduces no fixed-skill collision with the aspect grants.
+- Polder's supported traits allow an exactly-4-point spend (Corruption Immunity, Fearless, Graceful
+  Retreat), so Build B does not depend on whether the ancestry budget is read as a ceiling or a
+  quota. Graceful Retreat raises that build's disengage to 2.
+- The only complication with an explicit class or subclass prerequisite is Slight Case of
+  Lycanthropy. Two other `Special:` clauses exist — Gnoll-Mauled's condition-immunity prerequisite,
+  also unenforced, and Stripped of Rank's tactician benefit modifier, which is not a prerequisite.
+  Recorded for the lead; only the Lycanthropy rule is in this unit's scope.
+- Kit signature abilities already include their own kit's bonuses, stated directly in the kits
+  chapter. The kit's melee damage bonus must not be applied to them a second time, while the Fury's
+  chosen abilities and both free strikes do receive it. Our fixtures record per-ability damage
+  tiers, so this is a live risk in the expected values.
+- Installing dependencies inside `vendor/forge-steel` would break `pnpm check` and `presidium-dev up`
+  outright, because the vendor check fails on any untracked file and the remote installer rejects
+  dirty vendor state. The capture plan therefore exports the pinned tree with `git archive` into
+  scratch space and installs only there.
+
+Three interpretations are recorded rather than asserted: the 1st-echelon kit-Stamina multiplier of
+one, which the source implies but never states with a worked example and which matches the existing
+merged fixture; the coexistence of a Might-keyed and a highest-characteristic-keyed potency
+definition, which agree in all five builds; and the stormwight-kit eligibility reading already
+recorded in the research document.
