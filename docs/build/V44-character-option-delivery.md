@@ -323,3 +323,9 @@ wake-chain limits. Direct requests 240/241 for authorized Fury/Elementalist prep
 accepted and both Claude sessions subsequently reported running; Devil was already running.
 This records observed startup, not completed work or a comprehensive live-provider test. The
 separate Presidium repository's uncommitted Chords source was not modified or committed here.
+
+2026-09-19: user requested fleet check-ins about every ten minutes to catch stalled work. Recorded
+the active-session cadence in the orchestration guide. First check read V46 verification progress,
+V47 completed preparation and V48 reference planning; assigned independent Polder V49 and Dwarf
+V50 preparation while pilot verification continues. This is coordination, not additional playable
+coverage or a persistent scheduler. No runtime impact.

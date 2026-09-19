@@ -126,6 +126,14 @@ seconds) rather than rapid polling. Do useful independent work when available an
 empty status reports. If a session ends while dependencies remain, record the next action and who
 can resume it; never promise unattended supervision without a usable wake path.
 
+**Fleet cadence, user-requested 2026-09-19:** while coordinating actively, check the fleet about
+every ten minutes and handle substantive handoffs sooner. Compare lifecycle with the latest
+commit, artifact/job progress or handoff; distinguish long-running work, awaiting review and
+idle-with-next-action. Ask for a specific blocker when progress is unclear; wake an eligible idle
+owner only when it has concrete authorized work. Report meaningful changes, not every empty check.
+Record the next check time when handing over. An active-session cadence is not a persistent timer:
+ending the lead's turn needs a usable wake/resume path or the checks stop.
+
 Initial live observation: direct continuation requests 240 and 241 were accepted for the Fury and
 Elementalist Claude threads, which subsequently reported `running`; Devil was already running.
 This confirms observed startup after those requests, not completed work, race freedom or general
