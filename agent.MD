@@ -3,16 +3,17 @@ text.
 
 # Project instructions
 
-## Opus pilot quarantine — 2026-09-19
+## Character restart — 2026-09-19
 
-The user stopped the character Opus pilot and requested an independent fresh Astra audit. All
-pilot-era test infrastructure, orchestration guidance and unmerged candidates are quarantined.
-Do not resume those assignments, run their tools, restart the `characters` environment or merge
-their branches without a new user instruction. Their documents are historical evidence, not
-active instructions. The current task is analysis only, with Astra subagents explicitly authorized.
-See [the quarantine record](docs/quarantine/opus-pilot-20260919.md). Earlier delivered application
-code and pre-pilot tests remain intact; this quarantine does not certify the pilot or waive any
-user requirement for future work.
+The user permanently abandoned the entire Opus pilot. Its code, tests, fixtures, research and
+processes must not be reused. See [the dead-end decision](docs/decisions/2026-09-19-opus-pilot-dead-end.md).
+Keep the Opus fleet and old `characters` environment stopped. Earlier delivered code and the V45
+foundation remain intact. The replacement [Astra workflow](docs/build/astra-character-workflow.md)
+and [fresh-session handoff](docs/build/character-restart-handoff.md) are staged; staging does not
+restart implementation. Future character work uses fresh Astra subagents and current main.
+Every test must justify its existence through a concrete failure it catches and coverage it adds;
+reject implementation-mirroring assertions, redundant tests and test-count targets. Apply the
+[test value policy](docs/build/README.md#test-value) in implementation and review.
 
 ## Separate runtime rollout — 2026-09-16
 

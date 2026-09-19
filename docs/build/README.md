@@ -1,9 +1,9 @@
 # Build plan, review and commitment process
 
-The character Opus pilot's added procedures and infrastructure are
-[quarantined by the user](../quarantine/opus-pilot-20260919.md). Do not execute that workflow or
-treat its documents as current authority. The independent audit is an analysis task, not a new
-implementation slice requiring application builds or browser verification.
+The entire character Opus pilot is [abandoned without reuse](../decisions/2026-09-19-opus-pilot-dead-end.md).
+The replacement [Astra character workflow](astra-character-workflow.md) owns character-specific
+sequencing under this project's review and merge requirements. Its [fresh-session handoff](character-restart-handoff.md)
+is staged; implementation has not restarted.
 
 Status: process adopted 2026-09-14 for the v0.01 build and the V1 slices that follow. This document
 owns *how* work is assigned, reviewed and committed. The specifications under `docs/` own *what* is
@@ -258,10 +258,37 @@ character examples to the checks below; it does not replace source review or per
 content snapshot regenerates byte-for-byte from the clean pin; it replaced `pnpm foes:source`) and
 `pnpm build`.
 Browser tests (`pnpm test:browser`) are required for slices that change UI flows and need both dev
-servers running. Every `A` slice adds tests at the shared-operation level (convex-test) before UI
-tests. The commit checker runs in the `commit-msg` hook and in CI (`.github/workflows/check.yml`),
+servers running. For `A` slices, verify shared operations (convex-test) before UI tests; reuse adequate
+existing coverage and add tests only when they meet the test value policy. The commit checker runs
+in the `commit-msg` hook and in CI (`.github/workflows/check.yml`),
 not inside `pnpm check`, so a clean checkout of any commit passes `pnpm check` regardless of its
 history. `pnpm format` applies Prettier (print width 100).
+
+## Test value
+
+User requirement, 2026-09-19: every test must justify its existence. Test counts and coverage
+percentages are not acceptance targets. A test needs a concrete plausible failure it catches,
+an observable behavior or contract it protects, and value beyond existing coverage. Unit tests
+are useful when they isolate such a failure; merely reproducing the implementation is not proof.
+
+For each new or changed test, make that purpose clear in its name and assertions. Explain any
+non-obvious reason for it in the existing review handoff; no separate justification ledger is
+required. Reviewers must challenge the test's value as well as its correctness and remove or
+consolidate unjustified cases before acceptance. Existing tests are subject to the same standard
+when touched or relied on as evidence; age or a green result does not establish their value.
+This is not a prerequisite to audit or rewrite the entire inherited suite before delivering work.
+
+Reject assertions that calculate expected results with the code under test, snapshots or fixtures
+that merely freeze current output, duplicated scenarios with no distinct failure mode, and tests
+of internal structure unrelated to a supported contract. Expected mechanics come independently
+from pinned rules and actual counterpart builds. Prefer a small meaningful table for distinct
+mechanical cases and a few real persisted user journeys for integration. Exercise negative cases
+where they protect actual constraints or permissions, not to pad a checklist.
+
+Choose the cheapest level that catches the failure. Add browser coverage only when the behavior
+needs a browser; do not repeat every mechanical permutation there. Required regression suites
+still run, and required failures still block merge. Removing a test requires showing why its
+behavior is redundant, obsolete or uninformative; a failing result alone is not that justification.
 
 ## Engine ability design and playtest evidence
 

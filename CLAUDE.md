@@ -4,10 +4,12 @@ These rules carry the project's standing instructions from `AGENTS.md` and `agen
 session and subagent. `agent.MD` remains the complete instruction set; read it in full before starting
 work. If anything here conflicts with `agent.MD`, follow `agent.MD` and fix this file.
 
-The character Opus pilot is stopped and quarantined by the user as of 2026-09-19. Do not resume
-pilot work, child reviews, tests, runtime jobs or merges. Pilot guidance is historical evidence,
-not active instructions. Fresh Astra agents own the requested analysis; Opus has no new assignment.
-See [the quarantine record](docs/quarantine/opus-pilot-20260919.md).
+The user permanently abandoned the entire character Opus pilot on 2026-09-19. Do not resume
+its assignments or reuse its code, tests, fixtures, research or processes. Opus has no new assignment.
+See [the dead-end decision](docs/decisions/2026-09-19-opus-pilot-dead-end.md) and the staged
+[Astra handoff](docs/build/character-restart-handoff.md). Keep the old `characters` environment stopped.
+Every test must justify its existence with a concrete failure and added coverage; reject redundant
+or implementation-mirroring tests. Follow [the test value policy](docs/build/README.md#test-value).
 
 All future Salient development server activity, across all branches and worktrees, runs on the
 dedicated dev LXC (CT114), accessed through the secret broker. Use `presidium-dev` for servers,

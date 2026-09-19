@@ -316,7 +316,7 @@ records the handoff; it does not certify A09 or create an implementation commit.
 
 | Id | Slice | Status | Owner |
 | --- | --- | --- | --- |
-| V44 | [Character option delivery plan](V44-character-option-delivery.md) | Paused; Opus pilot infrastructure and procedures quarantined by user. V45 foundation remains delivered. Zero pilot option units merged. Fresh Astra analysis only; see [quarantine](../quarantine/opus-pilot-20260919.md). | Character integration lead |
+| V44 | [Character option delivery plan](V44-character-option-delivery.md) | Staged for a fresh Astra session; [handoff](character-restart-handoff.md). Opus pilot [abandoned without reuse](../decisions/2026-09-19-opus-pilot-dead-end.md); zero pilot option units delivered. V45 remains delivered. | Character integration lead |
 
 ## V41 — reference loading and shared navigation
 
@@ -335,3 +335,5 @@ records the handoff; it does not certify A09 or create an implementation commit.
 | Id | Slice | Status | Owner |
 | --- | --- | --- | --- |
 | V45 | [Character option foundation](V45-character-option-foundation.md) | Complete — merged/live `ebe66e2`; 691 tests, 5,584 exact comparisons, 49 applicable browser successes and two shared checks; both audits pass; initial timeout/retry limits retained; no new options enabled | Character integration lead and subagents |
+
+V46–V56 are retired Opus pilot IDs, not pending assignments. Allocate fresh IDs for replacement work.
