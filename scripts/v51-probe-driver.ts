@@ -37,10 +37,16 @@ type Condition = 'idle' | 'loaded';
 interface Sample {
   index: number;
   arm: 'withAuthPrefix' | 'identityOnly';
+  /** UTC instant this call was issued, so samples can be correlated with the closeout run,
+   *  the `convex logs --success` window and the host samples. */
+  atUtc: string;
   /** Round-trip time measured in this process. NOT server execution time. */
   clientLatencyMs: number;
   nonce: string;
+  /** The probe returned literal `true`. Anything else does not count as a successful sample. */
   ok: boolean;
+  /** The value actually returned, retained so a `false` is distinguishable from a throw. */
+  returned: boolean | null;
   error?: string;
 }
 
@@ -54,17 +60,29 @@ function arg(name: string, fallback?: string): string {
 const withPrefix = makeFunctionReference<'query'>('diagnostics:probeWithAuthPrefix');
 const identityOnly = makeFunctionReference<'query'>('diagnostics:probeIdentityOnly');
 
+/**
+ * A call counts as successful only when the probe returned literal `true`.
+ *
+ * The two probes fail differently and both matter. `probeWithAuthPrefix` THROWS when the caller is
+ * unauthenticated, because `requireUser` raises. `probeIdentityOnly` RETURNS `false` — it does not
+ * throw — so discarding the boolean would silently treat an unauthenticated control call as a
+ * clean sample. An earlier draft of this driver discarded it.
+ *
+ * A throw is not proof of anything in particular: it may be an authentication failure, a query
+ * timeout, or a backend error. The raw error string is retained rather than interpreted here.
+ */
 async function timed(
   client: ConvexHttpClient,
   ref: typeof withPrefix,
   nonce: string,
-): Promise<{ ms: number; ok: boolean; error?: string }> {
+): Promise<{ ms: number; ok: boolean; returned: boolean | null; atUtc: string; error?: string }> {
+  const atUtc = new Date().toISOString();
   const started = performance.now();
   try {
-    await client.query(ref, { nonce });
-    return { ms: performance.now() - started, ok: true };
+    const value = (await client.query(ref, { nonce })) as boolean;
+    return { ms: performance.now() - started, ok: value === true, returned: value, atUtc };
   } catch (error) {
-    return { ms: performance.now() - started, ok: false, error: String(error) };
+    return { ms: performance.now() - started, ok: false, returned: null, atUtc, error: String(error) };
   }
 }
 
@@ -75,18 +93,19 @@ async function timed(
 async function preflight(client: ConvexHttpClient) {
   const checks: Record<string, unknown> = {};
 
-  // 1. Both probes reachable AND authenticated. An unauthenticated probe measures the wrong thing:
-  //    requireUser would throw rather than pay the prefix.
+  // 1. Both probes must return literal `true`, which is the only evidence available here that the
+  //    caller is authenticated. The two fail differently: probeWithAuthPrefix throws (requireUser
+  //    raises), while probeIdentityOnly returns `false` without throwing.
   const a = await timed(client, withPrefix, randomUUID());
   const b = await timed(client, identityOnly, randomUUID());
-  checks.withAuthPrefixReachable = a.ok;
-  checks.identityOnlyReachable = b.ok;
-  if (!a.ok) checks.withAuthPrefixError = a.error;
-  if (!b.ok) checks.identityOnlyError = b.error;
+  checks.withAuthPrefix = { returnedTrue: a.ok, returned: a.returned, error: a.error ?? null };
+  checks.identityOnly = { returnedTrue: b.ok, returned: b.returned, error: b.error ?? null };
   if (!a.ok || !b.ok)
     throw new Error(
-      'Preflight failed: a probe did not return. If requireUser threw, the caller is not ' +
-        'authenticated and no timing below would mean anything.',
+      'Preflight failed: a probe did not return true. A `false` from the control means no ' +
+        'identity was present. A throw may be an authentication failure, a query timeout or a ' +
+        'backend error — it is not interpreted here. Either way the timings below would not mean ' +
+        'what the experiment claims, so the run stops.',
     );
 
   // 2. Does the nonce actually force execution here? Compare a repeated identical call against a
@@ -129,6 +148,7 @@ async function main(): Promise<void> {
   const client = new ConvexHttpClient(url);
   client.setAuth(token);
 
+  const runStartedAtUtc = new Date().toISOString();
   const checks = await preflight(client);
 
   // Arms are INTERLEAVED, not run in blocks, so drift in host conditions across the window cannot
@@ -138,14 +158,19 @@ async function main(): Promise<void> {
     const first = i % 2 === 0; // alternate which arm leads, so ordering cannot bias one arm
     const nonceA = randomUUID();
     const nonceB = randomUUID();
-    const runPrefix = async () => {
-      const r = await timed(client, withPrefix, nonceA);
-      samples.push({ index: i, arm: 'withAuthPrefix', clientLatencyMs: r.ms, nonce: nonceA, ok: r.ok, error: r.error });
-    };
-    const runControl = async () => {
-      const r = await timed(client, identityOnly, nonceB);
-      samples.push({ index: i, arm: 'identityOnly', clientLatencyMs: r.ms, nonce: nonceB, ok: r.ok, error: r.error });
-    };
+    const record = (arm: Sample['arm'], nonce: string, r: Awaited<ReturnType<typeof timed>>) =>
+      samples.push({
+        index: i,
+        arm,
+        atUtc: r.atUtc,
+        clientLatencyMs: r.ms,
+        nonce,
+        ok: r.ok,
+        returned: r.returned,
+        ...(r.error ? { error: r.error } : {}),
+      });
+    const runPrefix = async () => record('withAuthPrefix', nonceA, await timed(client, withPrefix, nonceA));
+    const runControl = async () => record('identityOnly', nonceB, await timed(client, identityOnly, nonceB));
     if (first) {
       await runPrefix();
       await runControl();
@@ -169,11 +194,25 @@ async function main(): Promise<void> {
     };
   };
 
+  // Failures are retained as failures and are NOT folded into the success latency distribution:
+  // a fast throw would otherwise look like a fast success.
+  const failures = samples
+    .filter(sample => !sample.ok)
+    .map(({ index, arm, atUtc, clientLatencyMs, returned, error }) => ({
+      index,
+      arm,
+      atUtc,
+      clientLatencyMs,
+      returned,
+      error: error ?? null,
+    }));
+
   const report = {
     unit: 'V51',
     status: 'measured client latency only; server execution time comes from the retained logs artifact',
     condition,
-    startedAt: new Date().toISOString(),
+    runStartedAtUtc,
+    runFinishedAtUtc: new Date().toISOString(),
     convexUrlHash: createHash('sha256').update(url).digest('hex').slice(0, 12),
     pairs,
     intervalMs,
@@ -183,8 +222,10 @@ async function main(): Promise<void> {
       identityOnly: summarise('identityOnly'),
       caveat:
         'Client latency includes network, websocket scheduling and process time. It is NOT server ' +
-        'execution time and must not be reported as such.',
+        'execution time and must not be reported as such. Only samples that returned literal ' +
+        '`true` are in this distribution.',
     },
+    failures: { count: failures.length, samples: failures },
     serverExecutionTime: {
       source: 'npx convex logs --success',
       lineFormat: 'Function executed in N ms',
