@@ -1,0 +1,7 @@
+ Container salient-characters-dev-2389e144b9dd-job-b893fd23 Creating 
+ Container salient-characters-dev-2389e144b9dd-job-b893fd23 Created 
+
+Running 1 test using 1 worker
+
+[1/1] tests/browser/v42-primary-choice.spec.ts:8:1 › primary choices collapse, edit without loss, prune on replacement and reopen saved
+  1 passed (16.0s)

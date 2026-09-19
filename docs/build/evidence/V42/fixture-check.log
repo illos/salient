@@ -1,0 +1,11 @@
+ Container salient-characters-dev-2389e144b9dd-job-c0dc4b23 Creating 
+ Container salient-characters-dev-2389e144b9dd-job-c0dc4b23 Created 
+[90mtests/browser/v21-wizard.spec.ts[39m 118ms (unchanged)
+[90mtests/browser/v25-elementalist.spec.ts[39m 33ms (unchanged)
+[90mtests/browser/v37-supporting-choices.spec.ts[39m 55ms (unchanged)
+[90mtests/browser/v40-unsaved-wizard.spec.ts[39m 35ms (unchanged)
+[90mtests/browser/v42-primary-choice.spec.ts[39m 31ms (unchanged)
+[90mtests/browser/wizard.spec.ts[39m 41ms (unchanged)
+$ eslint . && prettier --check .
+Checking formatting...
+All matched files use Prettier code style!

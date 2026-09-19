@@ -66,6 +66,7 @@ import { WizardHeader } from './header';
 import { StepRail, type RailStep } from './rail';
 import { ChoiceList, ChoiceRow, ChoiceSection, StepNav, StepTitle } from './choice-list';
 import { HeroSoFar } from './hero-so-far';
+import { PrimaryChoice } from './primary-choice';
 import {
   CatalogSelect,
   IncidentText,
@@ -731,6 +732,7 @@ function Wizard({ character }: { character: WizardCharacter }) {
   const [saved, setSaved] = useState(false);
   const [dirty, setDirty] = useState(false);
   const [cleared, setCleared] = useState<string[]>([]);
+  const [confirmedEmptyChoices, setConfirmedEmptyChoices] = useState<Set<string>>(() => new Set());
   const stale =
     character.revision !== expectedRevision ||
     character.effectiveRevisionId !== expectedEffectiveRevisionId;
@@ -861,6 +863,38 @@ function Wizard({ character }: { character: WizardCharacter }) {
       done,
     };
   });
+  const primary = step.decisions.find(
+    decision =>
+      decision.id === primaryDecisionId(step) &&
+      decision.kind === 'choice' &&
+      decision.shape.type === 'single' &&
+      isAvailable(decision, selections, indexDecisions(definitions)),
+  );
+  const primaryValue = primary ? selections[primary.id] : undefined;
+  const selectedName =
+    primary &&
+    typeof primaryValue === 'string' &&
+    isSupported(primary, primaryValue) &&
+    poolOf(primary, selections, definitions).values.includes(primaryValue)
+      ? primaryValue
+      : undefined;
+  const selectedSource = selectedName
+    ? (primary?.options?.find(option => option.value === selectedName)?.source ??
+      primary?.optionSources?.[selectedName])
+    : undefined;
+  const renderDecision = (decision: Decision, onSelect = select) => (
+    <DecisionEditor
+      key={decision.id}
+      decision={decision}
+      definitions={definitions}
+      step={step}
+      selections={selections}
+      onSelect={onSelect}
+      authored={authored}
+      onAuthored={author}
+      diagnostics={evaluation?.diagnostics[decision.id]}
+    />
+  );
   const previous = stepIndex > 0 ? PRESENTED[stepIndex - 1] : undefined;
   const next = stepIndex < PRESENTED.length - 1 ? PRESENTED[stepIndex + 1] : undefined;
   return (
@@ -943,19 +977,46 @@ function Wizard({ character }: { character: WizardCharacter }) {
               </p>
             )}
             <fieldset disabled={command.pending} className="contents">
-              {step.decisions.map(decision => (
-                <DecisionEditor
-                  key={decision.id}
-                  decision={decision}
-                  definitions={definitions}
-                  step={step}
-                  selections={selections}
-                  onSelect={select}
-                  authored={authored}
-                  onAuthored={author}
-                  diagnostics={evaluation?.diagnostics[decision.id]}
-                />
-              ))}
+              {primary ? (
+                <PrimaryChoice
+                  key={step.id}
+                  label={stepName(step)}
+                  selected={selectedName}
+                  noneConfirmed={
+                    primaryValue === undefined &&
+                    (Boolean(character.id) || confirmedEmptyChoices.has(primary.id))
+                  }
+                  noneLabel={
+                    primary.optional ||
+                    (primary.shape.type === 'single' && primary.shape.noneAllowed)
+                      ? `No ${stepName(step).toLowerCase()}`
+                      : undefined
+                  }
+                  reference={
+                    selectedSource ? (
+                      <RuleLink sourcePath={selectedSource} label={selectedName} />
+                    ) : undefined
+                  }
+                  diagnostics={<Diagnostics list={evaluation?.diagnostics[primary.id]} />}
+                  onSelect={value => {
+                    if (command.pending) return;
+                    if (value !== selections[primary.id]) select(primary.id, value);
+                    setConfirmedEmptyChoices(previous => {
+                      const next = new Set(previous);
+                      if (value === undefined) next.add(primary.id);
+                      else next.delete(primary.id);
+                      return next;
+                    });
+                  }}
+                  renderChooser={choose => renderDecision(primary, (_id, value) => choose(value))}
+                >
+                  {step.decisions
+                    .filter(decision => decision !== primary)
+                    .map(decision => renderDecision(decision))}
+                </PrimaryChoice>
+              ) : (
+                step.decisions.map(decision => renderDecision(decision))
+              )}
               {step.id === 'step.details' && (
                 <Field label="Private notes" hint="Only you can read these notes." className="py-5">
                   <Textarea

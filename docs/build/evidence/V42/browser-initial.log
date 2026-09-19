@@ -1,0 +1,50 @@
+ Container salient-characters-dev-2389e144b9dd-job-cfb02f46 Creating 
+ Container salient-characters-dev-2389e144b9dd-job-cfb02f46 Created 
+
+Running 1 test using 1 worker
+
+[1/1] tests/browser/v42-primary-choice.spec.ts:8:1 › primary choices collapse, edit without loss, prune on replacement and reopen saved
+  1) tests/browser/v42-primary-choice.spec.ts:8:1 › primary choices collapse, edit without loss, prune on replacement and reopen saved 
+
+    TimeoutError: locator.check: Timeout 15000ms exceeded.
+    Call log:
+      - waiting for getByLabel('Devil', { exact: true })
+        - locator resolved to <input type="radio" aria-label="Devil" name="ancestry.choice" class="size-4 shrink-0 appearance-none border border-foreground bg-background outline-none focus-visible:ring-2 focus-visible:ring-ring/50 disabled:border-input rounded-full checked:border-primary checked:bg-primary"/>
+      - attempting click action
+        - waiting for element to be visible, enabled and stable
+        - element is visible, enabled and stable
+        - scrolling into view if needed
+        - done scrolling
+        - performing click action
+        - click action done
+        - waiting for scheduled navigations to finish
+        - navigations have finished
+
+
+      37 |   await expect(page.getByLabel('Dwarf', { exact: true })).toBeDisabled();
+      38 |   await expect(page.getByLabel('Silver Tongue skill', { exact: true })).toHaveCount(0);
+    > 39 |   await page.getByLabel('Devil', { exact: true }).check();
+         |                                                   ^
+      40 |   await expect(summary('ancestry')).toContainText('Devil');
+      41 |   await expect(edit('ancestry')).toBeFocused();
+      42 |   await expect(page.getByLabel('Polder', { exact: true })).toHaveCount(0);
+        at /app/tests/browser/v42-primary-choice.spec.ts:39:51
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../artifacts/v42-focused/v42-primary-choice-primary-2e52c-eplacement-and-reopen-saved/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../artifacts/v42-focused/v42-primary-choice-primary-2e52c-eplacement-and-reopen-saved/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../artifacts/v42-focused/v42-primary-choice-primary-2e52c-eplacement-and-reopen-saved/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../artifacts/v42-focused/v42-primary-choice-primary-2e52c-eplacement-and-reopen-saved/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  1 failed
+    tests/browser/v42-primary-choice.spec.ts:8:1 › primary choices collapse, edit without loss, prune on replacement and reopen saved 
+

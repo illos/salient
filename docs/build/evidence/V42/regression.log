@@ -1,0 +1,60 @@
+ Container salient-characters-dev-2389e144b9dd-job-8e248141 Creating 
+ Container salient-characters-dev-2389e144b9dd-job-8e248141 Created 
+
+Running 6 tests using 1 worker
+
+[1/6] tests/browser/v21-wizard.spec.ts:17:1 › wizard frame: header, rail, choice rows, persistence, independent scrolling
+[2/6] tests/browser/v25-elementalist.spec.ts:8:1 › corrected Forge Bethell: complete wizard, reload, review and sourced sheet
+[3/6] tests/browser/v37-supporting-choices.spec.ts:11:1 › supporting choices show complete sources, prune dependent targets and persist reviewed mechanics
+[4/6] tests/browser/v37-supporting-choices.spec.ts:175:1 › Strange Inheritance lets the Director save a private sourced item without exposing it to the owner
+[5/6] tests/browser/v40-unsaved-wizard.spec.ts:8:1 › unsaved wizard creates nothing until first explicit save, then edits the same character
+[6/6] tests/browser/wizard.spec.ts:23:1 › wizard, admission review and the three sheet audiences
+  1) tests/browser/wizard.spec.ts:23:1 › wizard, admission review and the three sheet audiences ────
+
+    Error: expect(received).toBeGreaterThan(expected)
+
+    Expected: > 0
+    Received:   0
+
+    Call Log:
+    - Timeout 15000ms exceeded while waiting on the predicate
+
+       at acceptance-extension.ts:195
+
+      193 |           expect(logRows).toBeLessThanOrEqual(50);
+      194 |           if (cycle >= 40) expect(logRows).toBe(50);
+    > 195 |         }).toPass({ timeout: 15_000 });
+          |            ^
+      196 |         roles.push({
+      197 |           role: ['director', 'player', 'observer'][index],
+      198 |           heapBytes: metrics.JSHeapUsedSize,
+        at tableJourney (/app/tests/browser/acceptance-extension.ts:195:12)
+        at /app/tests/browser/wizard.spec.ts:206:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../artifacts/v42-regression/wizard-wizard-admission-review-and-the-three-sheet-audiences/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../artifacts/v42-regression/wizard-wizard-admission-review-and-the-three-sheet-audiences/test-failed-2.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../artifacts/v42-regression/wizard-wizard-admission-review-and-the-three-sheet-audiences/test-failed-3.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../artifacts/v42-regression/wizard-wizard-admission-review-and-the-three-sheet-audiences/error-context.md
+
+    attachment #5: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../artifacts/v42-regression/wizard-wizard-admission-review-and-the-three-sheet-audiences/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../artifacts/v42-regression/wizard-wizard-admission-review-and-the-three-sheet-audiences/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  1 failed
+    tests/browser/wizard.spec.ts:23:1 › wizard, admission review and the three sheet audiences ─────
+  5 passed (5.6m)
+

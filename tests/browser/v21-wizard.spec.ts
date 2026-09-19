@@ -81,7 +81,7 @@ test('wizard frame: header, rail, choice rows, persistence, independent scrollin
     await expect(page.getByRole('heading', { name: 'Ancestry', exact: true })).toBeVisible();
     await expect(page.getByLabel('Dwarf', { exact: true })).toBeDisabled();
     await expect(page.getByText('Not offered yet').first()).toBeVisible();
-    await page.getByLabel('Devil', { exact: true }).check();
+    await page.getByLabel('Devil', { exact: true }).click();
     await page.getByLabel('Silver Tongue skill', { exact: true }).selectOption('Persuade');
     await page.getByLabel('Beast Legs', { exact: true }).check();
     await page.getByLabel('Impressive Horns', { exact: true }).check();
@@ -97,8 +97,8 @@ test('wizard frame: header, rail, choice rows, persistence, independent scrollin
     await expect(step(page, '2. Ancestry')).toContainText('✓');
     await expect(page.getByRole('heading', { name: 'Class', exact: true })).toBeVisible();
     await expect(page.getByText(/^Step 5 of/)).toBeVisible();
-    await page.getByLabel('Fury', { exact: true }).check();
     await expect(page.getByLabel('Censor', { exact: true })).toBeDisabled();
+    await page.getByLabel('Fury', { exact: true }).click();
     await expect(step(page, '5. Class')).toContainText('Fury');
     await expect(page.getByLabel('Hero so far')).toContainText('Devil · Fury · Level 1');
     await page.getByRole('button', { name: 'Save draft', exact: true }).click();
@@ -134,7 +134,9 @@ test('wizard frame: header, rail, choice rows, persistence, independent scrollin
     await expect(page.getByRole('heading', { name: `Ember ${stamp}` })).toBeVisible();
     await expect(step(page, '5. Class')).toContainText('Fury');
     await step(page, '5. Class').click();
-    await expect(page.getByLabel('Fury', { exact: true })).toBeChecked();
+    await expect(page.getByRole('region', { name: 'Selected class', exact: true })).toContainText(
+      'Fury',
+    );
 
     // Screenshots: Class step, characteristic assignment, last step; both themes and viewports.
     await page.getByLabel('1, 0, 0', { exact: true }).check();

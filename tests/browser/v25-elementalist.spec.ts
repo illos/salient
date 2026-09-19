@@ -33,7 +33,12 @@ test('corrected Forge Bethell: complete wizard, reload, review and sourced sheet
       page!.getByRole('button', { name: new RegExp(`^${name.replace('.', '\\.')}`) }).click();
     const pick = async (label: string, value: string) =>
       page!.getByLabel(label, { exact: true }).selectOption(value);
-    const check = async (label: string) => page!.getByLabel(label, { exact: true }).check();
+    const check = async (label: string) => {
+      const control = page!.getByLabel(label, { exact: true });
+      // Main radios unmount as soon as selected; assert their dependent UI below.
+      if (['Polder', "Mage's Apprentice", 'Elementalist'].includes(label)) await control.click();
+      else await control.check();
+    };
     await step('2. Ancestry');
     await check('Polder');
     for (const trait of reference.selections['ancestry.polder.purchased-traits'])
@@ -84,7 +89,9 @@ test('corrected Forge Bethell: complete wizard, reload, review and sourced sheet
     await expect(page!.getByText(/^Draft saved \(revision \d+\)/)).toBeVisible();
     await page!.reload();
     await step('5. Class');
-    await expect(page!.getByLabel('Elementalist', { exact: true })).toBeChecked();
+    await expect(page!.getByRole('region', { name: 'Selected class', exact: true })).toContainText(
+      'Elementalist',
+    );
     await expect(page!.getByLabel('Assign Might', { exact: true })).toHaveValue('-1');
     await expect(
       page!.getByLabel('Hero so far').getByText('complete', { exact: true }),

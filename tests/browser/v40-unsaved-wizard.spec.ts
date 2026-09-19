@@ -43,7 +43,7 @@ test('unsaved wizard creates nothing until first explicit save, then edits the s
   await expect(page.getByRole('heading', { name: 'Unnamed hero', exact: true })).toBeVisible();
   await expect(page.getByRole('navigation', { name: 'Primary' })).toHaveCount(0);
   await step('2\\. Ancestry');
-  await page.getByLabel('Polder', { exact: true }).check();
+  await page.getByLabel('Polder', { exact: true }).click();
   expect(await query('characters:listMine')).toEqual([]);
   await page.getByRole('button', { name: 'Save draft', exact: true }).click();
   await expect(page.getByRole('alert')).toContainText('Enter a name in Details');
@@ -56,20 +56,20 @@ test('unsaved wizard creates nothing until first explicit save, then edits the s
   // A direct deep link and reload also remain read-only.
   await page.goto('/characters/new/wizard');
   await step('2\\. Ancestry');
-  await page.getByLabel('Polder', { exact: true }).check();
+  await page.getByLabel('Polder', { exact: true }).click();
   await page.reload();
   await expect(page.getByRole('heading', { name: 'Unnamed hero', exact: true })).toBeVisible();
   await step('2\\. Ancestry');
   await expect(page.getByLabel('Polder', { exact: true })).not.toBeChecked();
   expect(await query('characters:listMine')).toEqual([]);
-  await page.getByLabel('Polder', { exact: true }).check();
+  await page.getByLabel('Polder', { exact: true }).click();
   await step('9\\. Determine Details');
   await page.getByLabel('Hero name', { exact: true }).fill(name);
   await page.getByLabel('Private notes', { exact: false }).fill('My first unsaved notes');
   await mkdir('.playtest/v40', { recursive: true });
   await page.screenshot({ path: '.playtest/v40/before-first-save.png', fullPage: true });
   await step('5\\. Class');
-  await page.getByLabel('Fury', { exact: true }).check();
+  await page.getByLabel('Fury', { exact: true }).click();
   await page.getByLabel('1, 0, 0', { exact: true }).check();
   // Hold the first create in transit: even custom drag/drop must not mutate the saved snapshot.
   holdCreate = true;
@@ -96,7 +96,9 @@ test('unsaved wizard creates nothing until first explicit save, then edits the s
   expect(await query('characters:listMine')).toHaveLength(1);
   await page.reload();
   await step('2\\. Ancestry');
-  await expect(page.getByLabel('Polder', { exact: true })).toBeChecked();
+  await expect(page.getByRole('region', { name: 'Selected ancestry', exact: true })).toContainText(
+    'Polder',
+  );
   await step('9\\. Determine Details');
   await page.getByLabel('Hero name', { exact: true }).fill(`${name} edited`);
   await step('10\\. Make Connections');

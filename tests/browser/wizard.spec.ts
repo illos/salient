@@ -64,7 +64,7 @@ test('wizard, admission review and the three sheet audiences', async ({ browser 
     await step('2. Ancestry');
     await expect(player!.getByLabel('Dwarf', { exact: true })).toBeDisabled();
     await expect(player!.getByText('Not offered yet').first()).toBeVisible();
-    await player!.getByLabel('Devil', { exact: true }).check();
+    await player!.getByLabel('Devil', { exact: true }).click();
     await pick('Silver Tongue skill', 'Persuade');
     await player!.getByLabel('Beast Legs', { exact: true }).check();
     await player!.getByLabel('Impressive Horns', { exact: true }).check();
@@ -88,7 +88,7 @@ test('wizard, admission review and the three sheet audiences', async ({ browser 
     await pick('Upbringing skill', 'Intimidate');
     // 4. Career.
     await step('4. Career');
-    await player!.getByLabel('Soldier', { exact: true }).check();
+    await player!.getByLabel('Soldier', { exact: true }).click();
     await pick('Exploration skill', 'Endurance');
     await pick('Intrigue skill', 'Alertness');
     await pick('Career languages 1', '__open__');
@@ -97,7 +97,7 @@ test('wizard, admission review and the three sheet audiences', async ({ browser 
     await player!.getByLabel('Sole Survivor', { exact: true }).check();
     // 5. Class.
     await step('5. Class');
-    await player!.getByLabel('Fury', { exact: true }).check();
+    await player!.getByLabel('Fury', { exact: true }).click();
     await player!.getByLabel('1, 0, 0', { exact: true }).check();
     // V21: the class-fixed values are compact stat boxes, not inputs.
     await expect(player!.getByLabel('Might (fixed)', { exact: true })).toContainText('2');
@@ -130,12 +130,14 @@ test('wizard, admission review and the three sheet audiences', async ({ browser 
     await step('6. Kit');
     await pick('Choose a kit', 'Mountain');
     await player!
-      .getByRole('region', { name: 'Mountain full text', exact: true })
+      .getByRole('region', { name: 'Selected kit', exact: true })
       .getByRole('button', { name: 'Read Mountain in the rules', exact: true })
       .click();
     await expect(player!.getByRole('dialog')).toContainText('Stamina');
     await player!.getByRole('button', { name: 'Close rule', exact: true }).click();
-    await expect(player!.getByLabel('Choose a kit', { exact: true })).toHaveValue('Mountain');
+    await expect(player!.getByRole('region', { name: 'Selected kit', exact: true })).toContainText(
+      'Mountain',
+    );
     await expect(soFar.getByText('complete', { exact: true })).toBeVisible();
     await expect(soFar.getByText('Stamina', { exact: true }).locator('..')).toContainText('30');
     // Q-CHAR-10: underspending is visibly warned without changing a complete build's status.

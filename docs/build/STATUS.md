@@ -310,4 +310,4 @@ records the handoff; it does not certify A09 or create an implementation commit.
 
 | Id | Slice | Status | Owner |
 | --- | --- | --- | --- |
-| V42 | [Primary wizard choice summary](V42-primary-choice-summary.md) | In progress | Character wizard thread |
+| V42 | [Primary wizard choice summary](V42-primary-choice-summary.md) | Verified on slice/V42 — 674 tests, six browser journeys and independent review; shared delivery pending; broader Fury runtime timeouts retained | Character wizard thread |

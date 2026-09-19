@@ -33,8 +33,15 @@ test('supporting choices show complete sources, prune dependent targets and pers
   const step = (name: string) =>
     player.getByRole('button', { name: new RegExp(`^${name}`) }).click();
   const check = (name: string) => player.getByLabel(name, { exact: true }).check();
-  const pick = (label: string, value: string) =>
-    player.getByLabel(label, { exact: true }).selectOption(value);
+  const pick = async (label: string, value: string) => {
+    const main =
+      label === 'Choose a kit' ? 'kit' : label === 'Complication' ? 'complication' : undefined;
+    if (main) {
+      const edit = player.getByRole('button', { name: `Edit ${main}`, exact: true });
+      if (await edit.count()) await edit.click();
+    }
+    await player.getByLabel(label, { exact: true }).selectOption(value);
+  };
   const directory = '.playtest/v37/supporting-choices';
   await mkdir(directory, { recursive: true });
   try {
@@ -42,10 +49,14 @@ test('supporting choices show complete sources, prune dependent targets and pers
     const before = (await query('characters:sheet')) as HeroSheet;
     await player.getByRole('link', { name: 'Edit', exact: true }).click();
     await step('4\\. Career');
-    await check('Artisan');
-    await expect(
-      player.getByRole('region', { name: 'Artisan full text', exact: true }),
-    ).toContainText('240');
+    await player.getByRole('button', { name: 'Edit career', exact: true }).click();
+    await player.getByLabel('Artisan', { exact: true }).click();
+    await player
+      .getByRole('region', { name: 'Selected career', exact: true })
+      .getByRole('button', { name: 'Read Artisan in the rules', exact: true })
+      .click();
+    await expect(player.getByRole('dialog')).toContainText('240');
+    await player.keyboard.press('Escape');
     await pick('Artisan: choose 2 skills 1', 'Alchemy');
     await pick('Artisan: choose 2 skills 2', 'Tailoring');
     await pick('Artisan: 1 additional language 1', '__open__');
@@ -86,9 +97,12 @@ test('supporting choices show complete sources, prune dependent targets and pers
     await player.screenshot({ path: `${directory}/career.png`, fullPage: true });
     await step('6\\. Kit');
     await pick('Choose a kit', 'Arcane Archer');
-    await expect(
-      player.getByRole('region', { name: 'Arcane Archer full text', exact: true }),
-    ).toContainText('Signature');
+    await player
+      .getByRole('region', { name: 'Selected kit', exact: true })
+      .getByRole('button', { name: 'Read Arcane Archer in the rules', exact: true })
+      .click();
+    await expect(player.getByRole('dialog')).toContainText('Signature');
+    await player.keyboard.press('Escape');
     await step('8\\. Complication');
     await pick('Complication', 'Rival');
     await expect(
@@ -99,15 +113,17 @@ test('supporting choices show complete sources, prune dependent targets and pers
     ).toBeVisible();
     await expect(player.getByText(/^Choose a skill you already know\./)).toHaveCount(1);
     await pick('Complication', 'Elemental Inside');
-    const complication = player.getByRole('region', {
-      name: 'Elemental Inside full text',
-      exact: true,
-    });
+    await player
+      .getByRole('region', { name: 'Selected complication', exact: true })
+      .getByRole('button', { name: 'Read Elemental Inside in the rules', exact: true })
+      .click();
+    const complication = player.getByRole('dialog');
     await expect(complication).toContainText('Benefit:');
     await expect(complication).toContainText('Drawback:');
     await expect(complication).toContainText(
       'the Director can take temporary control of your hero',
     );
+    await player.keyboard.press('Escape');
     await pick('Complication', '');
     await expect(complication).toHaveCount(0);
     await pick('Complication', 'Elemental Inside');
@@ -117,13 +133,15 @@ test('supporting choices show complete sources, prune dependent targets and pers
     const saved = await query('characters:get');
     await player.reload();
     await step('4\\. Career');
-    await expect(player.getByLabel('Artisan', { exact: true })).toBeChecked();
+    await expect(
+      player.getByRole('region', { name: 'Selected career', exact: true }),
+    ).toContainText('Artisan');
     await expect(player.getByLabel(targetLabel, { exact: true })).toHaveValue('Alchemy');
     await expect(player.getByLabel('Continue the Work', { exact: true })).toBeChecked();
     await step('8\\. Complication');
-    await expect(player.getByLabel('Complication', { exact: true })).toHaveValue(
-      'Elemental Inside',
-    );
+    await expect(
+      player.getByRole('region', { name: 'Selected complication', exact: true }),
+    ).toContainText('Elemental Inside');
     await expect(
       player.getByLabel('Hero so far').getByText('complete', { exact: true }),
     ).toBeVisible();
@@ -166,6 +184,7 @@ test('Strange Inheritance lets the Director save a private sourced item without 
     await player.goto(`/characters/${characterId}`);
     await player.getByRole('link', { name: 'Edit', exact: true }).click();
     await player.getByRole('button', { name: /^8\. Complication/ }).click();
+    await player.getByRole('button', { name: 'Edit complication', exact: true }).click();
     await player.getByLabel('Complication', { exact: true }).selectOption('Strange Inheritance');
     await expect(
       player.getByText('The Director privately chooses your inherited trinket.', { exact: false }),
@@ -210,6 +229,7 @@ test('Strange Inheritance lets the Director save a private sourced item without 
     await director.goto(`/characters/${ownId}`);
     await director.getByRole('link', { name: 'Edit', exact: true }).click();
     await director.getByRole('button', { name: /^8\. Complication/ }).click();
+    await director.getByRole('button', { name: 'Edit complication', exact: true }).click();
     await director.getByLabel('Complication', { exact: true }).selectOption('Strange Inheritance');
     await director.getByRole('button', { name: 'Save draft', exact: true }).click();
     await expect(director.getByText(/^Draft saved \(revision \d+\)/)).toBeVisible();

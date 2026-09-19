@@ -1,0 +1,26 @@
+backend-1  | 9/19/2026, 5:51:38 AM [CONVEX Q(abilities:results)] [WARN] Function execution took a long time. (maximum duration: 1s, actual duration: 856.539696ms).
+backend-1  | 9/19/2026, 5:51:38 AM [CONVEX Q(campaigns:get)] Uncaught Error: Function execution timed out (maximum duration: 1s)
+backend-1  | 
+backend-1  |     at async safeGetAuthUser [as safeGetAuthUser] (../../node_modules/.pnpm/@convex-dev+better-auth@0.12.5_@standard-schema+spec@1.1.0_better-auth@1.6.15_react-dom_49f43f91f0314d38285e435cb231a895/node_modules/@convex-dev/better-auth/src/client/create-client.ts:149:13)
+backend-1  |     at async requireUser (../../convex/lib/access.ts:8:13)
+backend-1  |     at async handler (../convex/campaigns.ts:111:22)
+backend-1  | 
+backend-1  | 9/19/2026, 5:51:39 AM [CONVEX Q(encounters:current)] Uncaught Error: Function execution timed out (maximum duration: 1s)
+backend-1  | 
+backend-1  |     at async safeGetAuthUser [as safeGetAuthUser] (../../node_modules/.pnpm/@convex-dev+better-auth@0.12.5_@standard-schema+spec@1.1.0_better-auth@1.6.15_react-dom_49f43f91f0314d38285e435cb231a895/node_modules/@convex-dev/better-auth/src/client/create-client.ts:168:13)
+backend-1  |     at async requireUser (../../convex/lib/access.ts:8:13)
+backend-1  |     at async handler (../convex/encounters.ts:127:17)
+backend-1  | 
+backend-1  | 9/19/2026, 5:51:39 AM [CONVEX Q(sessions:list)] Uncaught Error: Function execution timed out (maximum duration: 1s)
+backend-1  | 
+backend-1  |     at async safeGetAuthUser [as safeGetAuthUser] (../../node_modules/.pnpm/@convex-dev+better-auth@0.12.5_@standard-schema+spec@1.1.0_better-auth@1.6.15_react-dom_49f43f91f0314d38285e435cb231a895/node_modules/@convex-dev/better-auth/src/client/create-client.ts:168:13)
+backend-1  |     at async requireUser (../../convex/lib/access.ts:8:13)
+backend-1  |     at async handler (../convex/sessions.ts:51:4)
+backend-1  | 
+backend-1  | 9/19/2026, 5:51:39 AM [CONVEX Q(sessions:list)] Uncaught Error: Function execution timed out (maximum duration: 1s)
+backend-1  | 
+backend-1  |     at async safeGetAuthUser [as safeGetAuthUser] (../../node_modules/.pnpm/@convex-dev+better-auth@0.12.5_@standard-schema+spec@1.1.0_better-auth@1.6.15_react-dom_49f43f91f0314d38285e435cb231a895/node_modules/@convex-dev/better-auth/src/client/create-client.ts:149:13)
+backend-1  |     at async requireUser (../../convex/lib/access.ts:8:13)
+backend-1  |     at async handler (../convex/sessions.ts:51:4)
+backend-1  | 
+backend-1  | 9/19/2026, 5:51:40 AM [CONVEX H(GET /api/auth/convex/jwks)] [WARN] '2026-09-19T05:51:40.640Z WARN [Better Auth]: Rate limiting skipped: could not determine client IP address. Ensure your runtime forwards a trusted client IP header and configure `advanced.ipAddress.ipAddressHeaders` if needed.'

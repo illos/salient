@@ -1,0 +1,55 @@
+ Container salient-characters-dev-2389e144b9dd-job-9a4e1271 Creating 
+ Container salient-characters-dev-2389e144b9dd-job-9a4e1271 Created 
+
+Running 1 test using 1 worker
+
+[1/1] tests/browser/wizard.spec.ts:23:1 › wizard, admission review and the three sheet audiences
+  1) tests/browser/wizard.spec.ts:23:1 › wizard, admission review and the three sheet audiences ────
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByText(/admission awaiting review/)
+    Expected: visible
+    Timeout: 15000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByText(/admission awaiting review/) with timeout 15000ms
+      - waiting for getByText(/admission awaiting review/)
+
+
+      160 |     await expect(player!.getByText('No live values', { exact: false })).toBeVisible();
+      161 |     await player!.getByRole('button', { name: 'Submit for admission', exact: true }).click();
+    > 162 |     await expect(player!.getByText(/admission awaiting review/)).toBeVisible();
+          |                                                                  ^
+      163 |     const characterUrl = player!.url();
+      164 |     await director!.goto(campaignUrl);
+      165 |     await director!.getByRole('button', { name: 'View proposed sheet', exact: true }).click();
+        at /app/tests/browser/wizard.spec.ts:162:66
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../artifacts/v42-fury-retry/wizard-wizard-admission-review-and-the-three-sheet-audiences/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../artifacts/v42-fury-retry/wizard-wizard-admission-review-and-the-three-sheet-audiences/test-failed-2.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../artifacts/v42-fury-retry/wizard-wizard-admission-review-and-the-three-sheet-audiences/test-failed-3.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../artifacts/v42-fury-retry/wizard-wizard-admission-review-and-the-three-sheet-audiences/error-context.md
+
+    attachment #5: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../artifacts/v42-fury-retry/wizard-wizard-admission-review-and-the-three-sheet-audiences/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../artifacts/v42-fury-retry/wizard-wizard-admission-review-and-the-three-sheet-audiences/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  1 failed
+    tests/browser/wizard.spec.ts:23:1 › wizard, admission review and the three sheet audiences ─────
+
