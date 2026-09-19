@@ -828,3 +828,33 @@ No user approval is implied by this classification.
 - **Boundary:** Explicitly includes required supplemental editor choices, grants and derived builds;
   does not enable unrelated supplements/homebrew or claim implemented table support. Forge Steel
   remains a structural and import/export reference; Compendium remains rules authority.
+
+### Q-CHAR-16: When is Ward of Excellent Protection's damage type chosen, and can it change?
+
+- **Status:** open
+- **Raised by:** V48 Elementalist level-one preparation, 2026-09-19
+- **Where:** [character specification](character-wizard-spec.md#3-decision-system);
+  `vendor/steel-compendium/en/unified/md/feature/elementalist/level-1/ward-of-excellent-protection.md`;
+  `vendor/steel-compendium/en/unified/md/feature/elementalist/level-1/elementalist-ward.md`;
+  `vendor/steel-compendium/en/unified/md/rule/damage/damage-immunity.md`;
+  corroborating: `vendor/steel-compendium/en/unified/md/feature/conduit/level-7/natures-bounty.md`
+- **Conflict or gap:** An independent Compendium-only review concluded that the ward grants immunity
+  equal to Reason to **one** damage type from acid, cold, corruption, fire, lightning, poison or
+  sonic, because Conduit and Censor Nature's Bounty use the identical "or" clause and disambiguate
+  it with "choosing a different damage immunity each time", while five other entries use "and" for
+  the simultaneous reading. That settles *how many* types. It does not settle *when* the type is
+  chosen. The owning feature permits changing **which ward** you have by a complex ritual as a
+  respite activity, and says nothing about the damage type inside a ward. The pinned Compendium
+  does not state the timing anywhere.
+- **Options:** A: chosen once during character creation and then fixed. B: chosen at the same
+  respite ritual that already permits swapping wards, so it moves with the ward. C: chosen anew
+  each time the immunity would apply.
+- **Recommendation:** B. It is the nearest stated analogue in the owning feature, and it keeps the
+  selection an explicit recorded build choice rather than a hidden play-time decision. C is
+  rejected because it would make the ward's value unbounded in practice and has no support in the
+  pinned text. If the user prefers A, the wizard behavior is unchanged and only the later respite
+  workflow differs.
+- **Blocked until answered:** nothing blocking. V48 implements the level-one build choice, which is
+  identical under A and B. Only respite reselection, which is already out of V48's scope, depends
+  on this answer. No default is silently applied to anything the user can see at level one.
+- **Answer:** (user fills in)

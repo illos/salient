@@ -64,28 +64,63 @@ table links the ability path. The existing module already follows this split and
 
 ## Current supported state
 
-`shared/content/classes/elementalist/level-one.ts` is the existing V25 content, extracted
-unchanged by V45. It is a single-path Fire build, not partial coverage of each family:
+`shared/content/classes/elementalist/level-one.ts` is the existing V25 content, extracted unchanged
+by V45. **Raw module metadata is not the served definition.** An independent audit of the assembled
+definitions corrected an earlier draft of this table: `character-decisions.ts` composes the level-one
+content and then runs the V37 extensions, one of which rewrites class skill support.
 
-| Decision | Source options | Currently enabled | Newly supported by V48 |
-| --- | ---: | ---: | ---: |
-| `class.elementalist.characteristic-array` | 4 | 4 | 0 |
-| `class.elementalist.skills` (choose 3) | 22 | 3 | 19 |
-| `class.elementalist.specialization` | 4 | 1 (Fire) | 3 |
-| `class.elementalist.enchantment` | 5 | 1 (Destruction) | 4 |
-| `class.elementalist.ward` | 4 | 1 (Delightful Consequences) | 3 |
-| Ward of Excellent Protection damage type (nested, new) | 7 | 0 | 7 |
-| `class.elementalist.signature-abilities` (choose 2) | 8 | 2 | 6 |
-| `class.elementalist.ability-3` | 4 | 1 | 3 |
-| `class.elementalist.ability-5` | 4 | 1 | 3 |
+`shared/content/supporting-backgrounds.ts:1548-1555` widens every `class.*` decision whose id matches
+`/\.skills?(\.|$)/` and whose kind is `choice`, assigning `supportedInV001 = allSkills` (57 names
+across all five groups). Its own comment states the boundary: "Widen only already-sourced class skill
+choices, not their classes, subclasses or abilities." `class.elementalist.skills` matches and is
+widened; `class.elementalist.skill.magic` is `automatic` and is skipped.
 
-The class's `features` row also omits two named level-one features that the advancement table
-lists: **1st-Level Specialization Feature** and **Specialization Triggered Action**. The current
-Fire option grants their Fire contents directly, so no Fire value is wrong, but the two container
-features are missing from the readable feature list and must be added.
+Crucially, `supportedInV001` does **not** produce options. `basePoolOf`
+(`shared/evaluate/structure.ts:182-198`) returns `decision.options` when present, otherwise the
+`optionsFrom` pools; `isSupported` (`structure.ts:341-347`) only marks a value as offered-or-not.
+An unsupported value is rendered disabled as "— not offered yet"
+(`web/wizard/index.tsx:142-151`) and, if selected headlessly, is kept and flagged `unsupported`
+rather than refused (`shared/evaluate/character.ts:399-401`).
+
+| Decision | Shape | Served + enabled today | Source total | Newly delivered by V48 |
+| --- | --- | ---: | ---: | ---: |
+| `class.elementalist.characteristic-array` | explicit options | 4 | 4 | 0 |
+| `class.elementalist.skills` (choose 3) | `optionsFrom` pools | **22** | 22 | **0** |
+| `class.elementalist.magic-replacement` | regenerated | **57** | 57 | **0** |
+| `class.elementalist.specialization` | explicit options | 1 (Fire) | 4 | 3 |
+| `class.elementalist.enchantment` | explicit options | 1 (Destruction) | 5 | 4 |
+| `class.elementalist.ward` | explicit options | 1 (Delightful Consequences) | 4 | 3 |
+| Ward of Excellent Protection damage type | nested, does not exist yet | 0 | 7 | 7 |
+| `class.elementalist.signature-abilities` (choose 2) | explicit options | 2 | 8 | 6 |
+| `class.elementalist.ability-3` | explicit options | 1 | 4 | 3 |
+| `class.elementalist.ability-5` | explicit options | 1 | 4 | 3 |
+
+**V48 newly delivers 29 selectable options.** The class skills and the Magic replacement are
+**reused shared coverage that is already served today**, not new options, and they do not need new
+witness builds to establish coverage. An earlier draft of this document claimed 19 newly supported
+skills; that was read from the stale raw `supportedInV001: ['Alchemy', 'Blacksmithing', 'History']`
+array, which `supporting-backgrounds.ts:1553` discards. The same staleness affects
+`magic-replacement`'s raw `['Empathize']`.
+
+The six explicit-option decisions carry `options: [...]` arrays, and no composition or extension step
+pushes options into a `class.*` decision. Their raw option lists therefore **are** the complete served
+set, and those counts stand. `signature-abilities` is worth naming: two options for two required
+slots is a forced selection with no freedom at all today.
+
+The class's `features` row also omits two named level-one features that the advancement table lists:
+**1st-Level Specialization Feature** and **Specialization Triggered Action**. The current Fire option
+grants their Fire contents directly, so no Fire value is wrong, but the two container features are
+missing from the readable feature list and must be added.
 
 `shared/evaluate/classes/elementalist.ts` currently produces exactly two rolled-damage ability
 modifiers (Enchantment of Destruction, Acolyte of Fire). Everything else below is new.
+
+Two observations recorded without a defect claim, because no spec section requires otherwise:
+Magic sits in the lore pool and is therefore now *enabled* in the choose-three dropdowns, but
+selecting it yields an `invalid`/`duplicate-skill` diagnostic because the class auto-grants Magic;
+several complication skill decisions pre-filter owned skills with `ownedPool` and this one does not.
+Per the settled Q-CHAR-11 policy (`docs/character-wizard-spec.md:264-275`), deliberately selecting an
+already-granted skill correctly creates **no** unrestricted replacement entitlement.
 
 ## Complete level-one inventory
 
@@ -141,12 +176,41 @@ enchantment and ward by performing a complex ritual as a respite activity." Resp
 | [Nature's Affection](../../vendor/steel-compendium/en/unified/md/feature/elementalist/level-1/ward-of-natures-affection.md) | When a creature within Reason squares damages you, a free triggered action slides it up to Reason squares | **Readable ability grant** (Forge models it as an ability). Slide resolution is manual |
 | [Surprising Reactivity](../../vendor/steel-compendium/en/unified/md/feature/elementalist/level-1/ward-of-surprising-reactivity.md) | When an adjacent creature damages you, a free triggered action pushes it up to twice Reason squares | **Readable ability grant.** Push resolution is manual |
 
-The "or" in Ward of Excellent Protection is a selection, not simultaneous immunity to all seven.
-This is an **interpretation** grounded in the source's singular "immunity … equal to your Reason
-score" plus Forge's seven-way choice encoding; the alternative reading (immunity to all seven
-types at once) would make it strictly better than every other ward and is not supported by the
-Forge structure. Recorded here as an interpretation for the rules reviewer to confirm, with both
-alternatives stated. It does not require a user ruling unless the reviewer disagrees.
+**The "or" in Ward of Excellent Protection is a selection of one damage type, not simultaneous
+immunity to all seven.** An earlier draft of this document justified that reading from Forge's
+seven-way encoding plus a balance argument. Both were invalid — a third-party tool's structure is not
+rules authority, and balance reasoning is not source text. The reading was re-established by an
+independent Compendium-only review, and the corpus evidence is decisive:
+
+- **The disambiguated twin.** Conduit and Censor *Nature's Bounty*
+  ([conduit](../../vendor/steel-compendium/en/unified/md/feature/conduit/level-7/natures-bounty.md),
+  [censor](../../vendor/steel-compendium/en/unified/md/feature/censor/level-7/natures-bounty.md))
+  use a word-for-word identical clause — same seven types, same order, same "or", same "damage equal
+  to your X" — and then resolve it: "You can choose this benefit twice, **choosing a different damage
+  immunity each time**." That sentence is only coherent if the clause denotes one selected immunity.
+- **"and" is the author's phrasing for simultaneous**, used five times, including the *same seven
+  types in the same order*: [Fury Elemental Form](../../vendor/steel-compendium/en/unified/md/feature/fury/level-7/elemental-form.md)
+  ("acid, cold, corruption, fire, lightning, poison, **and** sonic damage equal to your Might score"),
+  [Chaos Incarnate](../../vendor/steel-compendium/en/unified/md/feature/fury/level-10/chaos-incarnate.md),
+  [Elemental Absorption](../../vendor/steel-compendium/en/unified/md/feature/null/level-6/elemental-absorption.md),
+  and two entries that cannot be a player choice at all —
+  [the Mundane complication](../../vendor/steel-compendium/en/unified/md/complication/mundane.md) and
+  the Revenant trait [Tough but Withered](../../vendor/steel-compendium/en/unified/md/feature/trait/revenant/tough-but-withered.md).
+- **No counterexample.** The review found no place in the pin where an "or" enumeration of damage
+  types means all of them at once. The Elementalist's own three other uses of this seven-type list —
+  Hurl Element, Practical Magic and
+  [Grand Wyrding](../../vendor/steel-compendium/en/unified/md/feature/elementalist/level-9/grand-wyrding.md)
+  ("choose one of the following damage types") — are every one an explicit single choice.
+
+I verified each quoted line against the pin myself rather than relying on the review's summary. The
+counter-argument is recorded: the ward's flavour sentence says "a shield of **all** the elements …
+their **full** protective power". It is rejected because all four wards open with a non-mechanical
+flavour sentence in that slot, "full protective power" is not a defined term anywhere in the pin, and
+flavour cannot override a phrasing discipline demonstrated across eight texts with no exception.
+
+The review did surface a genuinely unresolved sub-question — *when* the damage type is chosen and
+whether it can change — which is recorded as [Q-CHAR-16](../rules-questions-for-user.md) and blocks
+nothing at level one.
 
 ### Signature abilities — choose 2 of 8
 
@@ -184,113 +248,216 @@ manual gameplay in this unit.
 
 ### Class skills — choose 3 from crafting or lore
 
-Twenty-two eligible skills: the ten crafting skills (Alchemy, Architecture, Blacksmithing,
-Carpentry, Cooking, Fletching, Forgery, Jewelry, Mechanics, Tailoring) and the twelve lore skills
-(Criminal Underworld, Culture, History, Magic, Monsters, Nature, Psionics, Religion, Rumors,
-Society, Strategy, Timescape). The existing row already draws from both pools and must keep doing
-so; only the `supportedInV001` list widens from three names to the full pool.
+Twenty-two eligible skills: the ten crafting skills (Alchemy, Architecture, Blacksmithing, Carpentry,
+Cooking, Fletching, Forgery, Jewelry, Mechanics, Tailoring) and the twelve lore skills (Criminal
+Underworld, Culture, History, Magic, Monsters, Nature, Psionics, Religion, Rumors, Society, Strategy,
+Timescape).
 
-Magic is in the lore group **and** is granted automatically by the class. Whether Forge filters
-the already-granted Magic out of the choose-three list is an observation to make during capture,
-not an assumption; record what the real editor does. Witness builds avoid selecting Magic so every
-chosen skill is an effective grant.
+**All 22 are already served and enabled today**, so V48 delivers no new skill option here. See
+[current supported state](#current-supported-state) for the composition evidence. The row keeps its
+`optionsFrom: ['pool.skills.crafting', 'pool.skills.lore']` pool; V48 must not touch it.
+
+Magic is in the lore group **and** is granted automatically by the class, so it is offered and
+enabled but produces an `invalid`/`duplicate-skill` diagnostic when chosen — correct under Q-CHAR-11,
+which settles that deliberately selecting an already-granted skill creates no unrestricted
+replacement. Witness builds avoid selecting Magic so every chosen skill is an effective grant.
+Whether the real Forge editor filters the already-granted Magic out of its choose-three list is an
+observation to make during capture, not an assumption.
 
 `class.elementalist.magic-replacement` must be preserved exactly as it is. V45's
 `extendSkillReplacements` strips every `replacesDuplicateSkill` row and regenerates them for all
-fixed skills, reusing this decision's id so saved revisions stay stable. Its hardcoded
-"Mage's Apprentice" label and career source are overwritten by that pass; removing or renaming the
-row would break existing saved builds.
+fixed skills, reusing this decision's id so saved revisions stay stable, and setting its supported
+set to all 57 skills. Its hardcoded "Mage's Apprentice" label and career source are overwritten by
+that pass. The replacement becomes available only when two automatic Magic grants are active —
+Elementalist plus the Mage's Apprentice career — so it is correctly unavailable for an Elementalist
+with any other career. Removing or renaming the row would break existing saved builds.
 
 ## Shared contract and evaluator gaps
 
-These require the integration owner. Each is a genuine blocker for a specific option; none can be
-worked around inside the owned module without changing shared behavior.
+Each finding below was checked against the actual consumer code, not inferred from the contract
+types. Two of them turned out to be narrower than an earlier draft of this document claimed, and one
+turned out to be more dangerous.
 
-### A. `AbilityModifier.field` admits only `'rolled-damage'`
+### A. `AbilityModifier.field` has zero runtime readers — do not widen it
 
 `shared/contracts/characterEvaluation.ts:194` types the field as the single literal
-`'rolled-damage'`. **Enchantment of Distance** (+2 ranged magic distance) and **Void: Acolyte of
-the Mystery** (+2 Magic/Ranged/Void distance) are permanent distance contributions with no
-representation. Forge models them with a distinct `createAbilityDistance` factory, confirming they
-are a different kind of contribution rather than a damage bonus.
+`'rolled-damage'`. **Enchantment of Distance** (+2 ranged magic distance) and **Void: Acolyte of the
+Mystery** (+2 Magic/Ranged/Void distance) are permanent distance contributions with no representation.
 
-Request: extend the field union with a distance value and define whether the amount applies to
-melee distance, ranged distance or both. Kit contributions already distinguish
-`meleeDistanceBonus` from `rangedDistanceBonus`; the new modifier must not silently diverge from
-that split. Inserting a distance bonus into `rolled-damage` would be incorrect.
+A consumer inventory establishes that widening the union would be **unsafe**. No consumer of
+`abilityModifiers` reads `field` at all:
 
-### B. `damageImmunities` is assigned, not merged
+- `convex/lib/resolve.ts:577-586` maps the **entire array** into
+  `ActorRollFacts.abilityDamageModifiers` with no filter and no `field` guard. The target contract
+  (`shared/contracts/rollResolution.ts:104-109`) has no `field` slot, so the discriminator is
+  silently dropped at the boundary.
+- `shared/resolve/index.ts:274-282` filters only on keywords and the named alternative, via
+  `matchesAbilityModifier` (`shared/evaluate/abilityModifiers.ts:13-25`), then sums `amount`
+  straight into `damage.rolledDamage`.
+- `convex/characters.ts:625-649` applies the same keyword-only gate for the sheet.
 
-`shared/evaluate/ancestries/polder.ts:51` sets `out.damageImmunities = [...]` for Polder's
-Corruption Immunity. `applyElementalistModifiers` runs later in `deriveProfiles`
-(`shared/evaluate/character.ts:1225`, after `applyPolderBaseline` at 1193). A Ward of Excellent
-Protection entry written the same way would **silently discard the Polder ancestry immunity** on
-exactly the Polder Elementalist build that is our existing reference.
+Repo-wide, the only `\.field ===` reads are on *complication* permanent modifiers and Devil ancestry
+effects — different types entirely. On `AbilityModifier`, `field` is write-only.
 
-The source resolves the gameplay question: "If multiple damage immunities apply to a source of
-damage, only the immunity with the highest value applies"
-([Damage Immunity](../../vendor/steel-compendium/en/unified/md/rule/damage/damage-immunity.md)).
-Both grants are therefore legitimately retained in the build with their own provenance, and the
-highest applies at play time. Request a shared append/merge helper for `damageImmunities` and
-`damageWeaknesses`, plus a presentation decision for two entries of the same damage type. A
-contrasting test — Polder Corruption Immunity plus Ward of Excellent Protection (corruption) —
-belongs in this unit regardless of who writes the helper.
+A `{ field: 'ranged-distance', amount: 2, keywords: ['Magic', 'Ranged'] }` entry added today would
+therefore give every Magic+Ranged ability **+2 automatic rolled damage**, write that damage to the
+target's Stamina, and print it to the player under the literal heading "Rolled damage bonuses"
+(`web/character-sheet/ability-card.tsx:89-100`). Nothing would flag it: there is no type error,
+because the field is dropped before any runtime check.
 
-### C. Class-feature contributions to Stamina, speed, stability and disengage
+**Recommendation: a separate narrow field**, e.g.
+`abilityDistanceModifiers?: { id; label?; amount; keywords: string[]; provenance }[]` on
+`DerivedBaseline`, leaving `AbilityModifier` untouched. Supporting evidence: `matchesAbilityModifier`
+already takes a structural `{ keywords, alternative? }`, so the eligibility helper is reusable with no
+change; and there is no numeric distance pipeline to plug into today — `rollResolution.ts` and
+`shared/resolve/index.ts` contain no distance handling, ability distance is carried only as printed
+frontmatter text, and even the existing `KitContributions.meleeDistanceBonus`/`rangedDistanceBonus`
+have no consumer that applies them to a rendered or resolved distance. Widening `field` buys no reuse
+and only adds the hazard. If it were widened anyway, it would need explicit
+`field === 'rolled-damage'` filters at `resolve.ts:579` **and** `characters.ts:637` plus a
+discriminator on the roll contract — three coordinated edits whose omission fails silently.
 
-`shared/evaluate/classes/profile.ts:79` **sets** `staminaMaximum` to the profile's
-`startingStamina` for a `kit: 'none'` class, and derives `recoveryValue` and `windedValue` from it
-immediately afterwards. Enchantment of Permanence (+6 Stamina, +1 stability) and Enchantment of
-Battle (conditional +3 Stamina) must add **after** that assignment, and the two derived values
-must be recomputed from the final Stamina, not from 18.
+No Convex schema change is needed for either option: baselines are stored as `v.any()`
+(`convex/characterTables.ts:129,183,185`), so stored blobs are validator-opaque and older baselines
+simply lack the new key.
 
-Similarly, `character.ts:1196` sets `out.disengage = dv(1, …)` in the no-kit branch and
-`applyPolderDisengage` adds to it afterwards. Enchantment of Celerity's +1 speed and +1 disengage
-need an equivalent, ordered contribution point.
+### B. Highest-wins is already implemented; the hazard is clobbering at the producer
 
-Request: a defined phase for class-feature vital contributions that runs after the class profile
-and after ancestry baselines, with the dependent recoveries/winded recomputation handled once.
-This is the shared-phase change the [module handoff](../../shared/content/character-options.md)
-reserves to the integration owner.
+An earlier draft asked for max semantics. They already exist and are already correct.
+`shared/resolve/index.ts:301-313` (`highest()`) iterates the entries and keeps
+`if (entry.value > best) best = entry.value`, and `:326-331` applies weakness first, then immunity.
+That matches the pinned rule
+([Damage Immunity](../../vendor/steel-compendium/en/unified/md/rule/damage/damage-immunity.md)):
+"If multiple damage immunities apply to a source of damage, only the immunity with the highest value
+applies." Multiple same-type entries resolve correctly today.
 
-### D. Enchantment of Battle is conditional in the source and unconditional in Forge
+The real defect risk is at the **producer**. `shared/evaluate/ancestries/polder.ts:50-68` performs a
+bare `out.damageImmunities = [...]`, called from `character.ts:1193`; `applyElementalistModifiers`
+runs later **in the same method** at `character.ts:1225`. A ward producer written in the same
+bare-assignment style would silently delete Polder's corruption immunity on a Polder Elementalist —
+our own reference build — with no type error and no diagnostic.
 
-The Compendium gates both numbers: "**While you wear light armor,** you gain a +3 bonus to
-Stamina" and "**While you wield a light weapon,** you gain a +1 damage bonus with weapon
-abilities." Forge applies them unconditionally —
-`createBonus({ field: FeatureField.Stamina, valuePerEchelon: 3 })` and
-`createAbilityDamage({ keywords: [Weapon], value: 1 })` — with the condition surviving only in the
-description prose, alongside a `createProficiency` entry for light armor and light weapons.
+A correct merge already exists inline at `shared/evaluate/character.ts:992-1005`, in the
+supporting-complications loop: `list = (out[field] ??= [])`, find by `damageType`, `Math.max` the
+value, concatenate provenance. It is safe today only because `deriveProfiles` runs before
+`deriveSupportingBenefits` (`character.ts:825-826`).
 
-Salient follows the Compendium. Consequence: a same-build Enchantment of Battle witness will show
-Forge Stamina 3 higher than ours, and that difference needs a recorded source-backed explanation
-rather than a silent adjustment. This is the one option in the unit where an exact numeric match
-with Forge is **expected to fail for a source-backed reason**.
+**Recommendation:** extract that merge into a shared helper and route both Polder and the new ward
+through it, rather than adding a second bare assignment or relying on `highest()` to clean up at
+resolution time. Emit damage types lowercase — `highest()` compares with case-sensitive `===`, and
+incoming ability damage types are lowercased at parse (`shared/resolve/index.ts:166-167`).
 
-Compounding it, Salient has no equipment or treasure model at level one, so "wearing light armor"
-is not a state the build can currently hold. The proposed treatment is to record both bonuses as
-conditional contributions valued at 0 with their full condition text readable, and to state
-plainly that the condition cannot yet be satisfied — an explicit recorded limitation, not a
-silent default. The alternative — recording +3 unconditionally to match Forge — contradicts the
-source and is rejected. Flagging for the lead: this is a presentation/contract decision with a
-visible numeric consequence, and it needs the integration owner's agreement before implementation.
+Answering the two cases raised in review:
+
+- **Polder corruption 3 (level + 2) plus ward corruption at Reason 2** — one merged entry valued
+  **3**, retaining both provenance chains so the sheet can show that two sources grant corruption
+  immunity and the higher applies. Not two rows, and not 5. Presenting two rows would imply two
+  independent immunities, which the rule contradicts; `web/wizard/supporting-components.tsx:209-216`
+  renders one row per array entry with no dedup, so merging at the producer is what keeps the panel
+  truthful.
+- **Different types**, e.g. Polder corruption 3 plus ward fire 2 — two entries, both active,
+  independent of each other. `highest()` matches per damage type, so they never interact.
+
+Three existing test shapes constrain the merge and must keep passing:
+`tests/character-v25-evaluator.test.ts:112-115` deep-equals `[['corruption', 3]]`;
+`tests/character-v32-evaluator.test.ts:281-285` reads `damageImmunities[0]` positionally, so it is
+order-sensitive; and `tests/fixtures/v25-bethell.json:142-144` stores
+`"damageImmunities": {"corruption": 3}` keyed by type, a shape that cannot express duplicates at all.
+Merging at the producer keeps all three valid; appending would break the first and make the second
+depend on insertion order.
+
+**Pre-existing defect found while tracing this, outside V48's scope and reported to the integration
+owner rather than fixed here:** `damageTargetFacts` in `convex/lib/resolve.ts:634-641` populates
+`immunities` from the hero baseline but never reads `baseline.damageWeaknesses`, although
+`DamageTargetFacts.weaknesses` exists and the foe branch populates it. **Hero damage weaknesses are
+currently inert in automatic damage application.** Relatedly, the complication sentinel
+`weakness.allDamage` (`shared/content/supporting-complications.ts:244`) yields damage type
+`allDamage`, which never equals the `all-damage` sentinel `highest()` matches — dormant only because
+hero weaknesses are never passed in. Both matter to V46, whose Devil Wings grant is a conditional
+weakness.
+
+### C. Class-feature vitals: the mechanism exists but is reachable only from complications
+
+An earlier draft asked for a new phase. That was overstated. `deriveSupportingBenefits`
+(`character.ts:920-1045`) already adds to a `numericFields` list —
+`['staminaMaximum', 'recoveriesMaximum', 'speed', 'stability']` — by appending to the existing value
+and concatenating provenance, and already recomputes `recoveryValue` and `windedValue` from the
+**final** Stamina when Stamina changed (`character.ts:1012-1040`). It runs after `deriveProfiles`,
+so it correctly lands after `profile.ts:79-93` sets the no-kit `staminaMaximum`.
+
+There is also an exact precedent for the echelon scaling both enchantments need. The
+`'Elemental Inside'` complication (`shared/content/supporting-complications.ts:281-288`) uses
+`value: '3 * echelon'` with the quote "You gain a +3 bonus to Stamina at 1st level, then again at
+4th, 7th, and 10th levels" — the same sentence shape as Enchantment of Battle. `amountOf` resolves
+it as `3 * Math.ceil(level / 3)` (`character.ts:929`), which matches the source echelon boundaries
+1-3 / 4-6 / 7-9 / 10
+([Echelons of Play](../../vendor/steel-compendium/en/unified/md/rule/general/echelon.md)).
+Enchantment of Permanence is therefore `'6 * echelon'` and Enchantment of Battle `'3 * echelon'`,
+both reducing to the printed base at level one.
+
+What is actually missing is narrow:
+
+1. The loop is hard-wired to the complication path — it reads `COMPLICATION_EFFECTS` and stamps
+   `decisionId: 'complication.choice'` on every provenance entry. A class-feature-sourced modifier
+   needs a way in that carries its own decision id and source path.
+2. `disengage` is **not** in `numericFields`, so Enchantment of Celerity's +1 Disengage has nowhere
+   to land. `character.ts:1196` sets `out.disengage` in the no-kit branch and `applyPolderDisengage`
+   adds to it afterwards, so the ordering point exists; only the field entry is missing.
+3. The recompute guard at `character.ts:1013-1014` triggers on complication modifiers only; it must
+   also trigger when a class feature changed Stamina.
+
+**Recommendation:** generalise the existing loop to accept sourced modifiers from a class-feature
+contributor and add `disengage` to `numericFields`. No new framework, and existing provenance and
+results are preserved by construction because the same code path produces them.
+
+### D. Enchantment of Battle: record the source amounts with their condition, not zero
+
+An earlier draft of this document proposed recording Enchantment of Battle's bonuses as amount **0**
+because Salient has no equipment model. **That was wrong and is withdrawn.** Treating an unrecorded
+condition as false is exactly the silent default this project forbids, and it would have
+manufactured a false mismatch against Forge.
+
+The source gates both numbers: "**While you wear light armor,** you gain a +3 bonus to Stamina" and
+"**While you wield a light weapon,** you gain a +1 damage bonus with weapon abilities, including free
+strikes," plus "You can use light armor treasures and light weapon treasures." Forge encodes them
+unconditionally — `createBonus({ field: Stamina, valuePerEchelon: 3 })`,
+`createAbilityDamage({ keywords: [Weapon], value: 1 })` and a `createProficiency` entry — with the
+condition surviving only in prose.
+
+**Correct treatment:** record the **source amounts** (+3 Stamina at echelon 1, +1 weapon damage) as
+conditional contributions carrying their full condition text and an explicit *activation unknown*
+state, because Salient does not yet model whether the hero wears light armor. The amounts are known
+and recorded; what is unknown is recorded as unknown. The `SupportingChoice` contract already carries
+a `condition?: string`, and `convex/characters.ts:625-649` already supports a per-modifier
+`condition` string that the sheet renders (`ability-card.tsx:96`), so the ability-damage half has an
+existing presentation path.
+
+**Forge comparison:** the reference witness must state the condition assumption explicitly and
+compare under the **same** assumption. Assuming light armor worn, Forge's +3 and our +3 agree and
+there is no mismatch. The difference is Forge assuming the condition met, not a rules disagreement,
+and it must not be reported as an unexplained discrepancy in either direction. Salient lacking an
+equipment fact does not by itself excuse a numeric difference.
+
+This needs a shared representation for a conditional permanent contribution with unknown activation.
+**Coordinate with V46 before inventing a second one** — the Devil's Wings grant needs exactly the
+same shape for its conditional damage weakness, and its preparation already records that the current
+baseline has unconditional `damageWeaknesses` entries but no conditional field.
 
 ### E. Specialization grants are asymmetric
 
 Earth and Fire grant an ability as their 1st-level specialization feature; Green and Void grant a
-non-ability feature, and Void's additionally carries the Shared Void Sense ability. The option
-grant lists are therefore 3, 3, 3 and 4 entries. Any test or comparison helper that assumes a
-fixed grant count per specialization will be wrong for Void.
+non-ability feature, and Void's additionally carries the Shared Void Sense ability. The option grant
+lists are therefore 3, 3, 3 and 4 entries. Any test or comparison helper that assumes a fixed grant
+count per specialization will be wrong for Void.
 
 ### F. Parent-change removal
 
 Changing specialization must remove the previous acolyte modifier, feature and triggered action;
-changing enchantment must remove its Stamina/speed/stability/distance/damage contribution;
-changing ward must remove the immunity entry **and** its nested damage-type selection. A stale
-nested damage type whose parent ward is no longer selected is not an active grant. This is the
-established V45 rule — "An option must cease contributing when its parent choice is no longer
-available" — and the nested ward choice is the first level-one class option where a *nested*
-selection has to be dropped with its parent.
+changing enchantment must remove its Stamina/speed/stability/distance/damage contribution; changing
+ward must remove the immunity entry **and** its nested damage-type selection. A stale nested damage
+type whose parent ward is no longer selected is not an active grant. This is the established V45
+rule, and the nested ward choice is the first level-one class option where a *nested* selection has
+to be dropped with its parent.
 
 ### G. Forge naming differences
 
@@ -303,12 +470,10 @@ Compendium is the authority; the comparison helper needs normalization for:
 | The Green Within, the Green Without | The Green Within, The Green Without |
 | No More Than a Breeze | No More than a Breeze |
 | Void: Acolyte of the Mystery | Acolyte of the Void |
-| Earth: Acolyte of Earth | Earth: Acolyte of Earth |
 | Fire: Acolyte of Fire | Acolyte of Fire |
 
 Forge's own acolyte prefixing is inconsistent across the four specializations. These are label
-differences only; no mechanical difference is implied, and none should be treated as a source
-discrepancy requiring explanation beyond this table.
+differences only; no mechanical difference is implied.
 
 ## Proposed same-build reference matrix
 
@@ -321,17 +486,23 @@ Viscous Fire); 3-essence `elementalist-ability-10` (The Flesh, a Crucible); 5-es
 `elementalist-ability-13` (Conflagration); class skills Alchemy, Blacksmithing, History. That is
 exactly the currently enabled path, and it must be preserved byte-identically as build 1.
 
-Coverage is driven by the widest independent dimension. Specializations need 4 builds,
-enchantments 5, signature abilities 4 (two per build), each heroic pool 4, and the 22 class skills
-8 builds at three per build. Wards need 3 builds for the non-nested wards plus 7 builds that all
-select Ward of Excellent Protection, one per damage type — **10 builds**, which sets the minimum.
-Dimensions combine freely because no level-one Elementalist option excludes another.
+Coverage is driven by the widest independent dimension **among the 29 newly delivered options**.
+The class skills and the Magic replacement are excluded: they are already served today, so they are
+reused shared coverage rather than new options, and build 1 already witnesses three of them.
+Specializations need 4 builds, enchantments 5, signature abilities 4 (two per build), and each heroic
+pool 4. Wards need 3 builds for the non-nested wards plus 7 that all select Ward of Excellent
+Protection, one per damage type — **10 builds**, which sets the minimum. Dimensions combine freely
+because no level-one Elementalist option excludes another.
 
 Ancestry is held at **Polder** with Bethell's exact existing ancestry selections across all ten
-builds, so that class contributions are isolated. This is the class unit; the ancestry contrast
-builds the reference procedure asks for belong to the Polder and Dwarf ancestry units. If V46
-Devil merges before V48 implementation, add one Devil Elementalist build as a cross-family check
-rather than re-cutting the matrix.
+builds, so class contributions are isolated. This is the class unit; the ancestry contrast builds the
+reference procedure asks for belong to the Polder and Dwarf ancestry units. If V46 Devil merges
+before V48 implementation, add one Devil Elementalist build as a cross-family check rather than
+re-cutting the matrix.
+
+Class skills still vary across the builds below. That is deliberate but is **not** coverage of new
+options: it exercises the already-served pool against the new class grants and gives the duplicate
+and de-duplication paths something to bite on. It is not counted toward the unit's option ledger.
 
 | # | Specialization | Enchantment | Ward (nested type) | Signature ×2 | 3-essence | 5-essence | Class skills ×3 |
 | ---: | --- | --- | --- | --- | --- | --- | --- |
@@ -346,8 +517,7 @@ rather than re-cutting the matrix.
 | 9 | Fire | Distance | Nature's Affection | Bifurcated Incineration, Grasp of Beyond | Behold the Mystery | Test of Rain | Cooking, Jewelry, Strategy |
 | 10 | Earth | Permanence | Surprising Reactivity | Unquiet Ground, Viscous Fire | Ripples in the Earth | Instantaneous Excavation | Carpentry, Monsters, Timescape |
 
-Builds 1–8 cover all 22 class skills exactly once across 24 slots, with builds 9 and 10 reusing
-already-covered skills. All four specializations appear at least twice. Every enchantment, every
+All four specializations appear at least twice. Every enchantment, every
 ward, all seven ward damage types, all eight signature abilities and all four options in each
 heroic pool appear at least once.
 
@@ -410,27 +580,48 @@ adapters. Any change to Fury, Devil or Polder behavior beyond the shared merge r
 
 ## Open questions
 
-None requiring a user ruling. The Ward of Excellent Protection reading is recorded above as a
-labelled interpretation with its alternative, grounded in source text plus Forge structure, for the
-rules reviewer. The Enchantment of Battle representation (finding D) is an engineering decision
-needing the integration owner's agreement, not a rules question. If the rules reviewer rejects the
-ward interpretation, that becomes a source ambiguity for
-[the question queue](../rules-questions-for-user.md) and the ward's seven witness builds pause
-while the rest of the unit continues.
+[Q-CHAR-16](../rules-questions-for-user.md) — when Ward of Excellent Protection's damage type is
+chosen and whether it can change. Raised by this preparation from the independent rules review.
+**It blocks nothing at level one**: the build-time choice is identical under the two plausible
+readings, and only respite reselection, already out of scope here, depends on the answer.
+
+The ward's one-type-of-seven reading is no longer an open interpretation; the corpus resolves it, as
+recorded above. The Enchantment of Battle representation (finding D) is an engineering decision
+needing the integration owner's agreement, not a rules question.
 
 ## Work log
 
 2026-09-19: claimed V48 preparation on `slice/V48` in `/srv/presidium/projects/salient/opus-elementalist`,
-cut from main `453dd1e`, per Chords assignment 218 from the integration lead. Read the pinned
-Compendium class chapter, all level-one feature and ability entries, the book-specific clean text
-for the authoritative option lists, the crafting and lore skill groups, the damage-immunity rule,
-and the pinned Forge class and four specialization definitions. Inspected the existing content
-module, evaluator, support registry, evaluation contract and the retained Bethell reference export.
+cut from main `453dd1e`, per Chords assignment 218. Read the pinned Compendium class chapter, all
+level-one feature and ability entries, the book-specific clean text for the authoritative option
+lists, the crafting and lore skill groups, the damage-immunity and echelon rules, and the pinned
+Forge class and four specialization definitions. Inspected the existing content module, evaluator,
+support registry, evaluation contract and the retained Bethell reference export.
+
+2026-09-19, after integration-lead review (Chords 224): corrected four things this document got
+wrong, rather than defending the draft. (1) The claim that only three class skills were supported was
+read from stale raw module metadata; `supporting-backgrounds.ts:1548-1555` widens the served set and
+all 22 are already enabled, so V48 delivers 29 new options rather than the 48 an earlier count
+implied, and the skills dimension leaves the coverage ledger. (2) Gap A was resolved on consumer
+evidence in favour of a separate narrow distance field, because `AbilityModifier.field` has no
+runtime reader and widening it would silently add distance to automatic damage. (3) Gap B was
+narrowed: highest-wins is already implemented at `shared/resolve/index.ts:301-313`, the real risk is
+producer clobbering, and a correct merge already exists inline for complications. (4) Gap C was
+narrowed: the vitals mechanism and an echelon-scaling precedent already exist and are reachable only
+from the complication path. The Enchantment of Battle amount-0 proposal was withdrawn as a silent
+default. The ward interpretation was re-established from corpus evidence after the original
+Forge-structure and balance justification was correctly rejected as not being rules authority.
+
+Bounded independent work was delegated to three Anthropic subagents under the delegation authorized
+in `CLAUDE.md#character-track-scope`: a Compendium-only ward rules review explicitly barred from
+Forge, from Salient implementation code and from online sources; a consumer inventory of
+`abilityModifiers` and `damageImmunities`; and an assembled-definition audit. Each load-bearing claim
+was re-verified directly against the checkout before being written here.
 
 No application, evaluator, contract or vendor file was changed; no option is enabled; no reference
-has been captured and no verification has been run. Vendor submodules were not initialized in this
+has been captured and no verification has been run. Vendor submodules were left uninitialized in this
 worktree — all source reading used the canonical checkout's existing pinned trees, read-only. No
 dependency, build, server or browser workload ran anywhere, and nothing ran on CT114.
 
-Implementation remains gated on the V46 Devil pilot verdict and on the integration owner's
-response to shared gaps A, B, C and D.
+Implementation remains gated on the V46 Devil pilot verdict and on the integration owner's decisions
+for gaps A, B, C and D.

@@ -340,4 +340,4 @@ records the handoff; it does not certify A09 or create an implementation commit.
 
 | Id | Slice | Status | Owner |
 | --- | --- | --- | --- |
-| V48 | [Elementalist level one](V48-elementalist-level-one.md) | Preparation in progress — source inventory, coverage matrix and dependency findings recorded on `slice/V48`; no option enabled, no reference captured, no verification run. Implementation gated on the V46 pilot verdict and on shared contract/phase decisions requested from the integration owner | Opus implementer `88b6a7e6`, slice/V48 |
+| V48 | [Elementalist level one](V48-elementalist-level-one.md) | Preparation corrected after lead review — 29 newly delivered options confirmed against assembled definitions, ward reading re-established from Compendium corpus, gaps A–D resolved or narrowed on consumer evidence, Q-CHAR-16 raised. No option enabled, no reference captured, no verification run. Implementation gated on the V46 pilot verdict and on integration-owner decisions | Opus implementer `88b6a7e6`, slice/V48 |
