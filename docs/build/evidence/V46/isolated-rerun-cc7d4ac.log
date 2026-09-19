@@ -1,0 +1,13 @@
+ Container salient-characters-dev-2389e144b9dd-job-ece3357d Creating 
+ Container salient-characters-dev-2389e144b9dd-job-ece3357d Created 
+
+Running 5 tests using 1 worker
+
+[1/5] tests/browser/closeout.spec.ts:21:1 › closeout awards once, is shared with observers, and paused session closure offers Void
+[2/5] tests/browser/combat.spec.ts:31:1 › Director starts combat; a player takes and ends a turn; the round advances
+[3/5] tests/browser/table-audit.spec.ts:40:1 › three table contexts, palette, console and live CLI share persisted operations
+[4/5] tests/browser/v21-campaign.spec.ts:23:1 › campaign home: header actions, player tiles, copy, join requests, foe chips, log filter
+[5/5] tests/browser/wizard.spec.ts:23:1 › wizard, admission review and the three sheet audiences
+  5 passed (7.3m)
+
+[exited with code 0]

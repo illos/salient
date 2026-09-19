@@ -1,0 +1,21 @@
+# V46 remote-workflow guard, verified against a harmless fake downstream
+# V46_GUARD_TARGET=docs/build/evidence/V46/tooling/fake-presidium-dev.sh (runs no workload)
+# Real parser: argparse.ArgumentParser(prog='presidium-dev'), allow_abbrev default True,
+# so --e / --en / --env are one option and the last occurrence wins.
+
+run build -- pnpm exec vitest run                    => exit=64  v46-guard: refusing 'run build -- pnpm exec vitest run': first argument is 'run', not --env.
+run build --env characters -- pnpm exec vitest run   => exit=64  v46-guard: refusing 'run build --env characters -- pnpm exec vitest run': first argument is 'run', not --env.
+run build -- echo --env characters                   => exit=64  v46-guard: refusing 'run build -- echo --env characters': first argument is 'run', not --env.
+--env main status                                    => exit=64  v46-guard: refusing --env 'main': this worktree may only target 'characters'.
+status --env characters                              => exit=64  v46-guard: refusing 'status --env characters': first argument is 'status', not --env.
+--env characters                                     => exit=0   fake-presidium-dev received: --env characters
+--env characters status                              => exit=0   fake-presidium-dev received: --env characters status
+--env characters run build -- pnpm check             => exit=0   fake-presidium-dev received: --env characters run build -- pnpm check
+--env characters run build --env main -- pnpm check  => exit=64  v46-guard: refusing a later environment flag '--env': argparse reads --e, --en and --env as the same option, and the last one wins.
+--env characters --env main run build                => exit=64  v46-guard: refusing a later environment flag '--env': argparse reads --e, --en and --env as the same option, and the last one wins.
+--env characters --en main run build                 => exit=64  v46-guard: refusing a later environment flag '--en': argparse reads --e, --en and --env as the same option, and the last one wins.
+--env characters --e main run build                  => exit=64  v46-guard: refusing a later environment flag '--e': argparse reads --e, --en and --env as the same option, and the last one wins.
+--env characters --env=main run build                => exit=64  v46-guard: refusing a later environment flag '--env=main': argparse reads --e, --en and --env as the same option, and the last one wins.
+--env characters --en=main run build                 => exit=64  v46-guard: refusing a later environment flag '--en=main': argparse reads --e, --en and --env as the same option, and the last one wins.
+--env characters --e=main run build                  => exit=64  v46-guard: refusing a later environment flag '--e=main': argparse reads --e, --en and --env as the same option, and the last one wins.
+--env characters run build -- echo --en main         => exit=64  v46-guard: refusing a later environment flag '--en': argparse reads --e, --en and --env as the same option, and the last one wins.

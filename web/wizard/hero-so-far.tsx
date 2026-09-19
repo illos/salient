@@ -15,7 +15,7 @@ import { RuleLink } from '../rules/link';
 import type { RuleReference } from '../rules/reference';
 import type { EvaluationResult, PartialBaseline } from '../../shared/contracts/characterEvaluation';
 import { decisionLabel, readableGuidance } from './presentation';
-import { SupportingBuildFacts } from './supporting-components';
+import { ConditionalBuildFacts, SupportingBuildFacts } from './supporting-components';
 
 const CHARACTERISTICS = [
   ['M', 'Mgt'],
@@ -144,6 +144,7 @@ export function HeroSoFar({
         <Row label="Abilities" value={names(b.abilities)} />
       </div>
       <SupportingBuildFacts baseline={b} />
+      <ConditionalBuildFacts baseline={b} />
       <div>
         <p className="caps mb-2 text-muted-foreground">Skills</p>
         {b.skills?.length ? (

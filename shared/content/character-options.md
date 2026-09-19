@@ -62,7 +62,10 @@ Fury's subclass, characteristics, vitals and resource contributions retain the o
 provenance and ordering. The shared class-profile pass preserves that Fury path; do not replace
 it with generic profile arithmetic without checking every source/contribution difference.
 Devil movement, saving-throw threshold, no-kit stability and trait assembly remain separate
-contributions. Polder baseline/disengage and Elementalist modifiers likewise retain their
+contributions. V46 adds one more, `applyDevilConditionalEffects`, and it deliberately runs **after**
+`deriveProfiles` rather than at the ancestry phase: it reads the characteristics, and for any class
+whose characteristics come from the shared class profile those are only set there. A later unit that
+needs a characteristic-dependent ancestry value has the same constraint. Polder baseline/disengage and Elementalist modifiers likewise retain their
 positions relative to shared kit and background effects. Coordinate shared phase/interface
 changes with the integration owner. An option must cease contributing when its parent choice
 is no longer available; stale saved selections are not active grants.

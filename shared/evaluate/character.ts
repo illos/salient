@@ -75,6 +75,7 @@ import {
   applyDevilMovement,
   applyDevilSavingThrow,
   applyDevilNoKit,
+  applyDevilConditionalEffects,
   appendDevilTraits,
 } from './ancestries/devil.ts';
 import { applyPolderBaseline, applyPolderDisengage } from './ancestries/polder.ts';
@@ -826,6 +827,10 @@ class Evaluation {
     this.deriveSupportingBenefits(out);
     this.citeSupportingKit(out);
 
+    // Wings and Barbed Tail read the characteristics, which the shared class profile supplies in
+    // deriveProfiles; deriving them earlier would silently omit them for profile classes.
+    applyDevilConditionalEffects(this, out);
+
     // 1.15 Granted content, in definition order per group.
     out.skills = this.skills();
     out.languages = this.languages();
@@ -1168,9 +1173,15 @@ class Evaluation {
 
   /** Source of the granting rule remains distinct from the readable entry's source path. */
   private grantProvenance(decision: Decision, grant: OptionGrant): Provenance {
+    // `single` is undefined for a list-shaped decision, so a grant carried by one selected option
+    // of a multi/points choice would record no selection at all. Recover it from the option that
+    // actually owns this grant (V46: the devil's purchased traits are a points decision).
+    const selection =
+      this.single(decision.id) ??
+      decision.options?.find(option => option.grants?.includes(grant))?.value;
     return {
       decisionId: decision.id,
-      ...(this.single(decision.id) ? { selection: this.single(decision.id) } : {}),
+      ...(selection ? { selection } : {}),
       source: this.own(decision),
       ...(grant.note ? { note: grant.note } : {}),
     };

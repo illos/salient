@@ -1,0 +1,52 @@
+# CT114 runtime conditions during the cc7d4ac full browser suite, sampled 20:04:05 UTC.
+# Recorded as observed conditions. No causal claim is made here about the test failures.
+
+$ uptime; docker stats --no-stream; nproc
+ 20:04:22 up 2 days, 20:34,  2 users,  load average: 3.62, 2.60, 2.96
+
+salient-characters-dev-2389e144b9dd-job-5ac02eb4	167.93%	913MiB / 2GiB
+salient-characters-dev-2389e144b9dd-web-1	10.79%	1.292GiB / 2GiB
+salient-characters-dev-2389e144b9dd-backend-1	10.82%	1.874GiB / 3GiB
+salient-dev-b90776c53141-web-1	0.00%	797.3MiB / 2GiB
+salient-dev-b90776c53141-backend-1	0.06%	1.613GiB / 3GiB
+salient-foes-library-dev-ad0e3f1c9d24-web-1	0.00%	766.2MiB / 2GiB
+salient-foes-library-dev-ad0e3f1c9d24-backend-1	0.07%	297.8MiB / 3GiB
+salient-foes-dev-40d531b6ad5e-web-1	0.00%	646.2MiB / 2GiB
+salient-foes-dev-40d531b6ad5e-backend-1	0.05%	344.2MiB / 3GiB
+salient-ui-dev-5363f12d852c-web-1	0.00%	497.8MiB / 2GiB
+salient-ui-dev-5363f12d852c-backend-1	0.12%	520MiB / 3GiB
+
+nproc: 4
+
+# Convex function-timeout lines observed at the 1s limit, by run:
+#   c715f60 run: 19:22:10  Q(foes:catalog)      (container since replaced; see browser/c715f60-failures/)
+#   cc7d4ac run: 20:02:51  Q(events:list)
+#                20:03:54  Q(targets:drafts)
+# Three different queries, none of them a surface this slice changes.
+
+# ENVIRONMENT CHANGE DURING THIS RUN, recorded for timing, NOT as a remedy.
+# At 20:08 UTC the integration lead stopped the retired `foes` preview environment
+# (`presidium-dev --env foes stop`, exit 0), after its owning slice was released. Its
+# backend-data, cache, dependency and tool volumes and its source and artifact directories were
+# retained. The shared `main`, `characters`, `foes-library` and `ui` environments were left up.
+#
+# So the sample above, taken at 20:04:05, covers five concurrent environments, and the remainder
+# of the suite ran with four. This is a capacity change that happened mid-run. It is recorded so
+# that anyone reading the results knows the conditions were not constant across the run. It is
+# NOT evidence that it fixed, caused or affected any timeout, and no such claim is made.
+#
+# Checked rather than assumed, from the mtimes of
+# /srv/dev/salient/characters/artifacts/browser-final/*/error-context.md, which Playwright writes
+# when a test fails:
+#
+#   20:03:19  closeout.spec.ts:21        OK button in startCombat       before the stop
+#   20:04:09  combat.spec.ts:31          Take turn                      before the stop
+#   20:06:02  table-audit.spec.ts:40     Campaigns heading at register  before the stop
+#   20:07:12  v21-campaign.spec.ts:23    Campaigns heading at register  before the stop
+#   20:20:30  wizard.spec.ts:23          Take turn                      AFTER the stop
+#
+# So the run's failures span the capacity change: four before it and one twelve minutes after it.
+# That is the whole of what the timing shows. It does not establish that the stop made no
+# difference, and it does not establish that it made one; a single post-stop failure is not a
+# measurement of anything. It is recorded so nobody reads this run as having been taken under
+# constant conditions.

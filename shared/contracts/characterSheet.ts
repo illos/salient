@@ -52,12 +52,12 @@ export interface SheetAbility extends Omit<GrantedAbility, 'provenance'> {
     condition?: string;
   }[];
   /** The source sentence that granted the ability (its provenance). */
-  grantedBy: { decisionId: string; selection?: string; quote: string; path: string };
+  grantedBy: { decisionId: string; selection?: string; quote: string; path: string; note?: string };
 }
 
 export interface SheetFeature extends Omit<GrantedFeature, 'provenance'> {
   content: SheetContent | null;
-  grantedBy: { decisionId: string; selection?: string; quote: string; path: string };
+  grantedBy: { decisionId: string; selection?: string; quote: string; path: string; note?: string };
 }
 
 export interface CommonAction {

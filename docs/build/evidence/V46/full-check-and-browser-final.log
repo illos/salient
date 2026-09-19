@@ -1,0 +1,613 @@
+===== RUNTIME SOURCE IDENTITY =====
+{
+  "project": "salient",
+  "environment": "characters",
+  "installation": "39ebd4ec-3fc4-417a-bcc2-a4666d5e53d3",
+  "compose": "salient-characters-dev-2389e144b9dd",
+  "source": {
+    "submodules": [
+      {
+        "path": "vendor/steel-compendium",
+        "url": "https://github.com/SteelCompendium/data-unified.git",
+        "gitlink": "fb83a789da8f0327a389c277a0c790b1648d5810",
+        "initialized": true,
+        "commit": "fb83a789da8f0327a389c277a0c790b1648d5810",
+        "dirty": false
+      },
+      {
+        "path": "vendor/forge-steel",
+        "url": "https://github.com/andyaiken/forgesteel.git",
+        "gitlink": "5a846aadb623a9855a023e9403bb887a956c341f",
+        "initialized": true,
+        "commit": "5a846aadb623a9855a023e9403bb887a956c341f",
+        "dirty": false
+      }
+    ],
+    "checkout": "/srv/presidium/projects/salient/opus-characters",
+    "identity": "d94a13318fd1b10571704cf5ecf64516e664b55a1a7c7a4c3a658bdfef654718",
+    "commit": "cc7d4acbe8827467d02905fb08bd7a971b1db78a",
+    "dirty": false
+  },
+  "phase": "running",
+  "updated": 1789847803,
+  "lastJob": {
+    "container": "salient-characters-dev-2389e144b9dd-job-aeb4807e",
+    "service": "install",
+    "started": 1789847803,
+    "exitCode": 0
+  },
+  "routes": {
+    "web": {
+      "name": "salient-characters-dev-aa988a1a3752",
+      "identity": "{\"endpoint\":\"web\",\"environment\":\"characters\",\"installation\":\"39ebd4ec-3fc4-417a-bcc2-a4666d5e53d3\",\"managedBy\":\"presidium-dev-v1\",\"project\":\"salient\"}",
+      "port": 32858,
+      "url": "https://salient-characters-dev-aa988a1a3752.tail41404c.ts.net",
+      "phase": "https-verified-from-host"
+    }
+  }
+}
+NAME                                            IMAGE                                                                                           COMMAND                  SERVICE   CREATED          STATUS                    PORTS
+salient-characters-dev-2389e144b9dd-backend-1   node:24.13.0-bookworm@sha256:1de022d8459f896fff2e7b865823699dc7a8d5567507e8b87b14a7442e07f206   "docker-entrypoint.s…"   backend   20 seconds ago   Up 19 seconds (healthy)   
+salient-characters-dev-2389e144b9dd-web-1       node:24.13.0-bookworm@sha256:1de022d8459f896fff2e7b865823699dc7a8d5567507e8b87b14a7442e07f206   "docker-entrypoint.s…"   web       20 seconds ago   Up 8 seconds              127.0.0.1:32858->5180/tcp
+salient-characters-dev-2389e144b9dd-web-1	128.10%	838.3MiB / 2GiB
+salient-characters-dev-2389e144b9dd-backend-1	4.05%	1.126GiB / 3GiB
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/loop4       79G   39G   36G  52% /
+===== PNPM CHECK =====
+ Container salient-characters-dev-2389e144b9dd-job-e87f95d3 Creating 
+ Container salient-characters-dev-2389e144b9dd-job-e87f95d3 Created 
+$ pnpm lint && pnpm check:engine && pnpm check:app && pnpm check-links && pnpm check-vendor && pnpm content:check && pnpm supporting:check && pnpm foes:check && pnpm build
+$ eslint . && prettier --check .
+Checking formatting...
+All matched files use Prettier code style!
+$ tsc --noEmit && vitest run --project engine
+
+ RUN  v4.1.11 /app
+
+ ✓  engine  tests/fury-decisions.test.ts (5 tests) 385ms
+   ✓ R01 checks 2-3: every option value, grant and quoted count/budget sentence is verbatim in its cited source  359ms
+ ✓  engine  tests/supporting-coverage.test.ts (101 tests) 393ms
+ ✓  engine  tests/character-v25-evaluator.test.ts (8 tests) 309ms
+ ✓  engine  tests/character-v45-reference.test.ts (7 tests) 299ms
+ ✓  engine  tests/character-v46-devil.test.ts (16 tests) 215ms
+ ✓  engine  tests/cli.test.ts (1 test) 211ms
+ ✓  engine  tests/supporting-complications.test.ts (21 tests) 196ms
+ ✓  engine  tests/supporting-backgrounds.test.ts (46 tests) 149ms
+ ✓  engine  tests/character-v32-evaluator.test.ts (9 tests) 139ms
+ ✓  engine  tests/acceptance.test.ts (3 tests) 99ms
+ ✓  engine  tests/character-v46-forge.test.ts (16 tests) 92ms
+ ✓  engine  tests/parser.test.ts (8 tests) 77ms
+ ✓  engine  tests/live-state-initialization.test.ts (4 tests) 82ms
+ ✓  engine  tests/character-v45-foundation.test.ts (3 tests) 58ms
+ ✓  engine  tests/character-derived-values.test.ts (4 tests) 54ms
+ ✓  engine  tests/history.test.ts (3 tests) 47ms
+ ✓  engine  tests/character-evaluator.test.ts (8 tests) 48ms
+ ✓  engine  tests/core-conditions.test.ts (11 tests) 28ms
+ ✓  engine  tests/character-creation-rulings.test.ts (6 tests) 19ms
+ ✓  engine  tests/engine.test.ts (13 tests) 15ms
+ ✓  engine  tests/resolve.test.ts (19 tests) 13ms
+ ✓  engine  tests/v25-build-roll-contributions.test.ts (4 tests) 4ms
+
+ Test Files  22 passed (22)
+      Tests  316 passed (316)
+   Start at  19:58:01
+   Duration  6.30s (transform 455ms, setup 0ms, import 1.32s, tests 2.93s, environment 2ms)
+
+$ tsc -p tsconfig.web.json && vitest run --project app --project scripts
+
+ RUN  v4.1.11 /app
+
+ ✓  app  tests/app/abilities.test.ts (17 tests) 2827ms
+     ✓ acceptance 1 and 2: 10.1 free strike through /ability use; retry returns the same result with no second roll or damage  1229ms
+ ✓  app  tests/app/history.test.ts (14 tests) 1583ms
+ ✓  app  tests/app/combat.test.ts (19 tests) 1543ms
+     ✓ acceptance 1: the setup card is a Director draft that follows the rosters; Cancel leaves no encounter, snapshot or lock  559ms
+ ✓  app  tests/app/character-progression.test.ts (13 tests) 1115ms
+   ✓ Fury level-up persists, retries once and preserves every compatible live value  510ms
+ ✓  app  tests/app/admission.test.ts (11 tests) 1060ms
+     ✓ acceptance 3: a player submission is not effective until approval; withdrawal and decline leave it unchanged  558ms
+ ✓  app  tests/app/closeout-session.test.ts (6 tests) 1064ms
+     ✓ missing Void choice, unauthorized closure and pause with a Void choice leave state and history untouched  625ms
+ ✓  app  tests/app/v001-walkthrough.test.ts (1 test) 986ms
+   ✓ A09: admitted hero → real combat → correction/history → closeout → next session → paused Void keep/reset  985ms
+ ✓  app  tests/app/closeout.test.ts (7 tests) 979ms
+     ✓ ends structure without synthetic boundaries/dice; closes cards, supports rewind/redo, rejects turns and attacks  566ms
+stderr | tests/app/account-email.test.ts > Better Auth recovery with Cloudflare mail > real routes queue canonical mail, reset persisted credentials, revoke sessions and refuse reuse
+2026-09-19T19:58:32.306Z ERROR [Better Auth]: Reset Password: User not found { email: 'missing@example.test' }
+
+stderr | tests/app/account-email.test.ts > Better Auth recovery with Cloudflare mail > real routes queue canonical mail, reset persisted credentials, revoke sessions and refuse reuse
+2026-09-19T19:58:32.467Z ERROR [Better Auth]: Invalid password
+
+stderr | tests/app/account-email.test.ts > Better Auth recovery with Cloudflare mail > expired tokens and untrusted redirects are refused
+2026-09-19T19:58:32.670Z ERROR [Better Auth]: Invalid redirectURL: https://attacker.example/reset
+
+stderr | tests/app/account-email.test.ts > Better Auth recovery with Cloudflare mail > database request limits reject a fourth request across separate auth instances
+2026-09-19T19:58:32.676Z ERROR [Better Auth]: Reset Password: User not found { email: 'missing@example.test' }
+
+stderr | tests/app/account-email.test.ts > Better Auth recovery with Cloudflare mail > database request limits reject a fourth request across separate auth instances
+2026-09-19T19:58:32.680Z ERROR [Better Auth]: Reset Password: User not found { email: 'missing@example.test' }
+
+stderr | tests/app/account-email.test.ts > Better Auth recovery with Cloudflare mail > database request limits reject a fourth request across separate auth instances
+2026-09-19T19:58:32.685Z ERROR [Better Auth]: Reset Password: User not found { email: 'missing@example.test' }
+
+stderr | tests/app/account-email.test.ts > Better Auth recovery with Cloudflare mail > unconfigured deployments expose no recovery capability and do not queue mail
+2026-09-19T19:58:32.691Z ERROR [Better Auth]: Reset password isn't enabled.Please pass an emailAndPassword.sendResetPassword function in your auth config!
+
+ ✓  app  tests/app/account-email.test.ts (9 tests) 892ms
+     ✓ real routes queue canonical mail, reset persisted credentials, revoke sessions and refuse reuse  735ms
+ ✓  app  tests/app/characterSecrets.test.ts (5 tests) 853ms
+   ✓ only the campaign Director can read/write the inheritance; public revisions, sheets and events disclose no item  531ms
+ ✓  app  tests/app/characterDirectorSetup.test.ts (7 tests) 826ms
+   ✓ player submits owner-complete inputs, but admission waits atomically for the private Director choice  484ms
+ ✓  app  tests/app/history-audit.test.ts (5 tests) 850ms
+     ✓ admission is separate; targeting preparation does not consume undo and is cleared by it  555ms
+ ✓  app  tests/app/audience.test.ts (8 tests) 826ms
+     ✓ difficulty projection preserves public skill text containing result-like punctuation: Lore; hard: winter  528ms
+ ✓  app  tests/app/table.test.ts (6 tests) 745ms
+     ✓ acceptance 1 and 2: authority matrix across Director, player and observer  504ms
+ ✓  app  tests/app/character-review-queue.test.ts (2 tests) 738ms
+   ✓ an owner sees a new pending submission after 205 withdrawn reviews from same owner  672ms
+ ✓  app  tests/app/a05-review-regressions.test.ts (3 tests) 701ms
+   ✓ committed combat checks Ferocity affordability during roll  561ms
+ ✓  app  tests/app/registry.test.ts (7 tests) 709ms
+     ✓ acceptance 1: the same /table roll from two submitters yields events of identical shape with server dice  509ms
+ ✓  app  tests/app/characters.test.ts (11 tests) 693ms
+     ✓ create/reopen persists authored fields and isolates private drafts across users  447ms
+ ✓  app  tests/app/table-performance.test.ts (5 tests) 689ms
+ ✓  app  tests/app/foes.test.ts (5 tests) 638ms
+     ✓ Director loads independent sourced foes; peers see every foe through the selected health projection  484ms
+ ✓  app  tests/app/foe-operations.test.ts (2 tests) 629ms
+   ✓ foe buttons/API/commands share retries, source snapshots and journaled creation/removal  563ms
+ ✓  app  tests/app/interactions.test.ts (3 tests) 605ms
+     ✓ acceptance 5: opened by a short command, labeled in the log, answered headlessly, resolved  521ms
+ ✓  app  tests/app/access-sessions.test.ts (8 tests) 578ms
+ ✓  app  tests/app/character-rulings.test.ts (2 tests) 566ms
+   ✓ Q-CHAR-10 shared evaluation, persisted draft and admission allow two of three ancestry points  517ms
+ ✓  app  tests/app/setup-local.test.ts (6 tests) 577ms
+ ✓  app  tests/app/characterChoiceOrigins.test.ts (2 tests) 579ms
+   ✓ immutable revisions retain the future choice through advancement, edits and restore  569ms
+ ✓  app  tests/app/closeout-audit.test.ts (1 test) 559ms
+   ✓ normal cleanup clears a retained foe temporary pool once, with a private persisted journal  558ms
+ ✓  app  tests/app/content.test.ts (3 tests) 571ms
+     ✓ reseed loads every manifest entry; queries return the Goblin Warrior source verbatim  470ms
+ ✓  app  tests/app/independent-review.test.ts (4 tests) 517ms
+   ✓ independent: persisted session deletion revokes already issued identity across all private surfaces  449ms
+ ✓  app  tests/app/journal.test.ts (5 tests) 494ms
+     ✓ concurrent appends to one campaign get distinct consecutive sequence numbers  310ms
+ ✓  app  tests/app/elementalist-character.test.ts (4 tests) 420ms
+ ✓  app  tests/app/history-interaction-regressions.test.ts (8 tests) 361ms
+ ✓  app  tests/app/dice.test.ts (6 tests) 331ms
+     ✓ same commandId returns the identical accepted roll; a new id draws new values  307ms
+ ✓  app  tests/app/parse.test.ts (97 tests) 16ms
+ ✓  app  tests/app/engine-adapter.test.ts (1 test) 6ms
+ ✓  app  tests/app/command-identities.test.ts (2 tests) 3ms
+ ✓  scripts  tests/scripts/rules.test.ts (9 tests) 78980ms
+   ✓ prebuilt index ranks every unique exact title first, supports prefixes, typos and filters  4214ms
+   ✓ regenerates identical articles, metadata and search from the same pin  36766ms
+ ✓  scripts  tests/scripts/foes.test.ts (25 tests) 26469ms
+     ✓ regenerates twice byte-for-byte and retains exact pinned input  25774ms
+ ✓  scripts  tests/scripts/core-presentation.test.ts (7 tests) 13676ms
+     ✓ projects all immutable Foe edition objects without editing their source HTML  1355ms
+   ✓ covers every Core glyph family through the production projection and React semantics  12204ms
+ ✓  scripts  tests/scripts/build-content.test.ts (22 tests) 1882ms
+     ✓ detects a hand-edited generation date 9999-99-99 independently  589ms
+     ✓ detects a hand-edited generation date 2020-01-01 independently  592ms
+ ✓  scripts  tests/scripts/reference-delivery.test.ts (1 test) 1410ms
+   ✓ foe delivery covers every object and preserves search after serialization  1409ms
+ ✓  scripts  tests/scripts/check-commit.test.ts (14 tests) 300ms
+ ✓  scripts  tests/scripts/app-output.test.ts (1 test) 205ms
+ ✓  scripts  tests/scripts/foes-library.test.ts (4 tests) 48ms
+ ✓  scripts  tests/scripts/pinned-source.test.ts (1 test) 45ms
+ ✓  scripts  tests/scripts/glyphs.test.ts (4 tests) 43ms
+ ✓  scripts  tests/scripts/check-links.test.ts (4 tests) 9ms
+
+ Test Files  47 passed (47)
+      Tests  407 passed (407)
+   Start at  19:58:18
+   Duration  159.70s (transform 1.45s, setup 0ms, import 5.08s, tests 150.19s, environment 4ms)
+
+$ node scripts/check-links.ts
+Checked 269 Markdown files: no broken relative links or anchors.
+$ node scripts/check-vendor.ts
+vendor/ matches the pinned submodule commits (2 submodules).
+$ node scripts/build-content.ts --check
+shared/content/compendium matches the clean pinned Compendium (483 entries, 10 excluded, revision fb83a789da8f).
+$ node scripts/check-supporting-inventory.ts
+V37 inventory verified: 18 careers/108 incidents, 13 culture aspects, 47 core perks, 57 skills+5 groups, 42 languages, 25 kits, 100 complications; 289 exact source records checked.
+$ node scripts/ingest-foes.ts --check
+Foes: 438 stat blocks, 2006 features; edition bf262edf546e91e1540cc17489915f18c4873ddd8bd8e225b20f3441e3f74f30; verified
+$ pnpm rules:ingest && tsc -p tsconfig.web.json && vite build && node scripts/check-web-budget.ts
+$ node scripts/ingest-rules.ts && node scripts/build-foes-assets.ts
+Ingested 2614 entries, 26 categories from fb83a789da8f. No unresolved links.
+Foe delivery: 2507 entries; version ab2c43b79669b916
+vite v8.3.0 building client environment for production...
+transforming...
+✓ 2861 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                                         1.92 kB │ gzip:   0.76 kB
+dist/.vite/manifest.json                                               10.59 kB │ gzip:   1.51 kB
+dist/assets/search.worker-Bi7Y7SQU.js                                  18.32 kB
+dist/assets/search.worker-k8EMhjsh.js                                  19.13 kB
+dist/assets/schibsted-grotesk-latin-ext-wght-normal-hsMS0n0O.woff2     20.92 kB
+dist/assets/DrawSteelGlyphs-Regular-Bxmll151.otf                       21.63 kB
+dist/assets/schibsted-grotesk-latin-wght-normal-Bb8VGrTG.woff2         46.75 kB
+dist/assets/reference-C1jW4vvI.css                                      0.75 kB │ gzip:   0.39 kB
+dist/assets/foes-BGgFncNM.css                                           3.96 kB │ gzip:   1.16 kB
+dist/assets/rules-6fkgoGTZ.css                                         12.26 kB │ gzip:   2.86 kB
+dist/assets/index-DhQgL1Qs.css                                         90.12 kB │ gzip:  16.37 kB
+dist/assets/arrow-left-2SZjxN2W.js                                      0.19 kB │ gzip:   0.17 kB
+dist/assets/external-link-BnffAPVo.js                                   0.27 kB │ gzip:   0.21 kB
+dist/assets/useNavigate-BhLc6pKf.js                                     0.31 kB │ gzip:   0.23 kB
+dist/assets/pill-D-biTKKB.js                                            0.50 kB │ gzip:   0.33 kB
+dist/assets/preview-BErTnpPD.js                                         0.96 kB │ gzip:   0.57 kB
+dist/assets/worker-client-BLect5SJ.js                                   1.22 kB │ gzip:   0.74 kB
+dist/assets/composite-D3Fn7Vkj.js                                       2.94 kB │ gzip:   1.14 kB
+dist/assets/x-D0KqTHUP.js                                               3.23 kB │ gzip:   1.57 kB
+dist/assets/useStore-CuFll-SH.js                                        3.26 kB │ gzip:   1.51 kB
+dist/assets/event-links-DZL-G60q.js                                     3.47 kB │ gzip:   1.53 kB
+dist/assets/preview-kdrUHVnd.js                                         3.67 kB │ gzip:   1.58 kB
+dist/assets/password-recovery-Dpz428v4.js                               3.76 kB │ gzip:   1.48 kB
+dist/assets/article-BENAqpd5.js                                         4.50 kB │ gzip:   1.97 kB
+dist/assets/characters-CW-Ft7_k.js                                      7.99 kB │ gzip:   2.63 kB
+dist/assets/with-selector-D-Vjxtnh.js                                  10.92 kB │ gzip:   4.10 kB
+dist/assets/foes-B-RtHTid.js                                           12.31 kB │ gzip:   4.41 kB
+dist/assets/rules-BQn26kwk.js                                          13.45 kB │ gzip:   4.39 kB
+dist/assets/progression-Cs2Iecl5.js                                    14.72 kB │ gzip:   5.23 kB
+dist/assets/overlay-card-Cz-kh9tW.js                                   18.12 kB │ gzip:   6.89 kB
+dist/assets/campaigns-B0R7UL3M.js                                      30.11 kB │ gzip:   7.99 kB
+dist/assets/auth-client-BbzxrGAW.js                                    30.33 kB │ gzip:  11.46 kB
+dist/assets/reference-H2Y_y5m0.js                                      32.32 kB │ gzip:  11.03 kB
+dist/assets/createBaseUIEventDetails-ELM1N8LF.js                       34.84 kB │ gzip:  14.32 kB
+dist/assets/character-sheet-DKaWrR0O.js                                47.31 kB │ gzip:  12.36 kB
+dist/assets/table-CPmPAU2g.js                                          76.65 kB │ gzip:  20.50 kB
+dist/assets/ui-W_vUS40d.js                                             82.91 kB │ gzip:  24.33 kB
+dist/assets/wizard-CloSxp9W.js                                        111.44 kB │ gzip:  27.56 kB
+dist/assets/index-B6SpY4MC.js                                         321.40 kB │ gzip: 103.73 kB
+dist/assets/supporting-components-BBqXn2D-.js                       1,015.96 kB │ gzip: 216.55 kB
+
+✓ built in 3.54s
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+[PLUGIN_TIMINGS] Plugin hooks ran for 3.4s of this 3.5s build (96%).
+The slowest hooks, timed inside each callback (the wait before a callback starts is excluded, the time it awaits is included):
+  - vite:css transform (82%, 2.9s, 6 calls)
+Additional hook time came from the hooks below and from hooks under 1s.
+2 hooks are listed without a time. Their calls overlapped, so the time inside one call includes work from other calls. To find their cost, profile the build with `node --cpu-prof`:
+  - @tailwindcss/vite:generate:build transform (6 calls)
+  - vite:worker-import-meta-url transform (2 calls)
+See https://rolldown.rs/reference/InputOptions.checks#plugintimings for more details.
+
+{
+  "initial": {
+    "raw": 490191,
+    "gzip": 160910
+  },
+  "assets": [
+    "assets/index-B6SpY4MC.js",
+    "assets/with-selector-D-Vjxtnh.js",
+    "assets/ui-W_vUS40d.js",
+    "assets/createBaseUIEventDetails-ELM1N8LF.js",
+    "assets/x-D0KqTHUP.js",
+    "assets/useStore-CuFll-SH.js",
+    "assets/useNavigate-BhLc6pKf.js",
+    "assets/auth-client-BbzxrGAW.js",
+    "assets/composite-D3Fn7Vkj.js"
+  ],
+  "rules": {
+    "catalog": {
+      "raw": 982599,
+      "gzip": 112848
+    },
+    "index": {
+      "raw": 5463389,
+      "gzip": 1411557
+    },
+    "largestContinuation": 135780,
+    "largestInitialArticle": 415705
+  },
+  "foes": {
+    "catalog": {
+      "raw": 877715,
+      "gzip": 101309
+    },
+    "index": {
+      "raw": 1484171,
+      "gzip": 373816
+    },
+    "largestDetail": 55297
+  }
+}
+===== FULL BROWSER SUITE =====
+ Container salient-characters-dev-2389e144b9dd-job-5ac02eb4 Creating 
+ Container salient-characters-dev-2389e144b9dd-job-5ac02eb4 Created 
+
+Running 56 tests using 1 worker
+
+[1/56] tests/browser/campaign-sharing.spec.ts:20:1 › visible share codes support joining and rotate with links without losing requests or members
+[2/56] tests/browser/closeout.spec.ts:21:1 › closeout awards once, is shared with observers, and paused session closure offers Void
+  1) tests/browser/closeout.spec.ts:21:1 › closeout awards once, is shared with observers, and paused session closure offers Void 
+
+    TimeoutError: locator.click: Timeout 30000ms exceeded.
+    Call log:
+      - waiting for getByRole('button', { name: 'OK', exact: true })
+
+
+      87 |     const startCombat = async () => {
+      88 |       await director.getByRole('button', { name: 'Start combat', exact: true }).click();
+    > 89 |       await director.getByRole('button', { name: 'OK', exact: true }).click();
+         |                                                                       ^
+      90 |       await director.getByRole('button', { name: 'Roll initiative (d10)', exact: true }).click();
+      91 |       await director.getByRole('button', { name: 'Heroes first', exact: true }).click();
+      92 |       await expect(
+        at startCombat (/app/tests/browser/closeout.spec.ts:89:71)
+        at /app/tests/browser/closeout.spec.ts:96:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../artifacts/browser-final/closeout-closeout-awards-o-d20ac-session-closure-offers-Void/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../artifacts/browser-final/closeout-closeout-awards-o-d20ac-session-closure-offers-Void/test-failed-2.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../artifacts/browser-final/closeout-closeout-awards-o-d20ac-session-closure-offers-Void/test-failed-3.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../artifacts/browser-final/closeout-closeout-awards-o-d20ac-session-closure-offers-Void/error-context.md
+
+    attachment #5: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../artifacts/browser-final/closeout-closeout-awards-o-d20ac-session-closure-offers-Void/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../artifacts/browser-final/closeout-closeout-awards-o-d20ac-session-closure-offers-Void/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[3/56] tests/browser/combat.spec.ts:31:1 › Director starts combat; a player takes and ends a turn; the round advances
+  2) tests/browser/combat.spec.ts:31:1 › Director starts combat; a player takes and ends a turn; the round advances 
+
+    TimeoutError: locator.click: Timeout 15000ms exceeded.
+    Call log:
+      - waiting for locator('li').filter({ has: getByText('Thorn 5c993dcb', { exact: true }) }).getByRole('button', { name: 'Take turn', exact: true }).first()
+
+
+      110 |       .locator('li')
+      111 |       .filter({ has: playerA.getByText(`Thorn ${stamp}`, { exact: true }) });
+    > 112 |     await thornRowA.getByRole('button', { name: 'Take turn', exact: true }).first().click();
+          |                                                                                     ^
+      113 |     await expect(
+      114 |       playerA.locator('li[aria-current="true"]').filter({ hasText: `Thorn ${stamp}` }),
+      115 |     ).toHaveCount(2);
+        at /app/tests/browser/combat.spec.ts:112:85
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../artifacts/browser-final/combat-Director-starts-com-32898-s-a-turn-the-round-advances/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../artifacts/browser-final/combat-Director-starts-com-32898-s-a-turn-the-round-advances/test-failed-2.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../artifacts/browser-final/combat-Director-starts-com-32898-s-a-turn-the-round-advances/test-failed-3.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../artifacts/browser-final/combat-Director-starts-com-32898-s-a-turn-the-round-advances/error-context.md
+
+    attachment #5: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../artifacts/browser-final/combat-Director-starts-com-32898-s-a-turn-the-round-advances/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../artifacts/browser-final/combat-Director-starts-com-32898-s-a-turn-the-round-advances/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[4/56] tests/browser/foes-library.spec.ts:4:1 › foe browsing, composed filters, URL persistence, sorting and empty recovery
+[5/56] tests/browser/foes-library.spec.ts:48:1 › light and dark, mobile, enlarged text and keyboard search
+[6/56] tests/browser/foes-library.spec.ts:96:1 › full catalog bands, pagination, sourcebooks, Malice and related rules
+[7/56] tests/browser/foes.spec.ts:3:1 › public foes search, independent cards, navigation, dismissal and themes
+[8/56] tests/browser/foes.spec.ts:71:1 › second-echelon references preserve independent features and correct Malice navigation
+[9/56] tests/browser/hosting.spec.ts:3:1 › direct SPA routes and reloads load their assets without browser errors
+[10/56] tests/browser/journey.spec.ts:16:1 › accounts, invitation approval, session lifecycle, private draft persistence and reconnect
+[11/56] tests/browser/reference-cache.spec.ts:3:1 › Workers serves immutable versioned content and revalidates current manifests
+[12/56] tests/browser/reference-performance.spec.ts:4:1 › public navigation keeps its document and fetches only requested reference content
+[13/56] tests/browser/reference-performance.spec.ts:64:1 › failed detail downloads retry without losing the list or navigation
+[14/56] tests/browser/reference-performance.spec.ts:79:1 › catalog failure preserves shared navigation and supports retry
+[15/56] tests/browser/reference-performance.spec.ts:96:1 › article failure is local and section links stay below the shared headers
+[16/56] tests/browser/reference-performance.spec.ts:116:1 › a cleared search cannot resurrect delayed results
+[17/56] tests/browser/reference-performance.spec.ts:145:1 › a failed search index retries
+[18/56] tests/browser/reference-performance.spec.ts:159:1 › large chapter opening stays usable while later sections are delayed and retryable
+[19/56] tests/browser/rule-popup.spec.ts:5:1 › rule cards preserve the wizard, navigate references, scroll and dismiss accessibly
+[20/56] tests/browser/rules.spec.ts:4:1 › public rules search, readable articles, original sources and browser history
+[21/56] tests/browser/rules.spec.ts:34:1 › chapter contents, cross-references, topic filters and mobile navigation
+[22/56] tests/browser/table-audit.spec.ts:40:1 › three table contexts, palette, console and live CLI share persisted operations
+  3) tests/browser/table-audit.spec.ts:40:1 › three table contexts, palette, console and live CLI share persisted operations 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('heading', { name: 'Campaigns', exact: true })
+    Expected: visible
+    Timeout: 15000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByRole('heading', { name: 'Campaigns', exact: true }) with timeout 15000ms
+      - waiting for getByRole('heading', { name: 'Campaigns', exact: true })
+
+
+      35 |   await page.getByLabel('Password', { exact: true }).fill(password);
+      36 |   await page.getByRole('button', { name: 'Create account', exact: true }).click();
+    > 37 |   await expect(page.getByRole('heading', { name: 'Campaigns', exact: true })).toBeVisible();
+         |                                                                               ^
+      38 | }
+      39 |
+      40 | test('three table contexts, palette, console and live CLI share persisted operations', async ({
+        at register (/app/tests/browser/table-audit.spec.ts:37:79)
+        at /app/tests/browser/table-audit.spec.ts:64:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../artifacts/browser-final/table-audit-three-table-co-9d727--share-persisted-operations/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../artifacts/browser-final/table-audit-three-table-co-9d727--share-persisted-operations/test-failed-2.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../artifacts/browser-final/table-audit-three-table-co-9d727--share-persisted-operations/test-failed-3.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../artifacts/browser-final/table-audit-three-table-co-9d727--share-persisted-operations/error-context.md
+
+    attachment #5: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../artifacts/browser-final/table-audit-three-table-co-9d727--share-persisted-operations/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../artifacts/browser-final/table-audit-three-table-co-9d727--share-persisted-operations/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[23/56] tests/browser/table-performance.spec.ts:6:1 › table opens without per-card detail reads, then drills in and preserves undo/redo
+[24/56] tests/browser/theme.spec.ts:27:1 › light, dark and system preference switch without reload and persist across reload
+[25/56] tests/browser/theme.spec.ts:68:1 › prefers-reduced-motion disables transitions
+[26/56] tests/browser/theme.spec.ts:83:1 › reference screenshots: login, campaign home and character list in light and dark
+[27/56] tests/browser/v21-campaign.spec.ts:23:1 › campaign home: header actions, player tiles, copy, join requests, foe chips, log filter
+  4) tests/browser/v21-campaign.spec.ts:23:1 › campaign home: header actions, player tiles, copy, join requests, foe chips, log filter 
+
+    Error: expect(locator).toBeVisible() failed
+
+    Locator: getByRole('heading', { name: 'Campaigns', exact: true })
+    Expected: visible
+    Timeout: 15000ms
+    Error: element(s) not found
+
+    Call log:
+      - Expect "toBeVisible" getByRole('heading', { name: 'Campaigns', exact: true }) with timeout 15000ms
+      - waiting for getByRole('heading', { name: 'Campaigns', exact: true })
+
+
+       at v21-fixtures.ts:28
+
+      26 |   await page.getByLabel('Password', { exact: true }).fill(PASSWORD);
+      27 |   await page.getByRole('button', { name: 'Create account', exact: true }).click();
+    > 28 |   await expect(page.getByRole('heading', { name: 'Campaigns', exact: true })).toBeVisible();
+         |                                                                               ^
+      29 | }
+      30 |
+      31 | export interface TableFixture {
+        at register (/app/tests/browser/v21-fixtures.ts:28:79)
+        at /app/tests/browser/v21-campaign.spec.ts:85:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../artifacts/browser-final/v21-campaign-campaign-home-df85d-quests-foe-chips-log-filter/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../artifacts/browser-final/v21-campaign-campaign-home-df85d-quests-foe-chips-log-filter/test-failed-2.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../artifacts/browser-final/v21-campaign-campaign-home-df85d-quests-foe-chips-log-filter/test-failed-3.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../artifacts/browser-final/v21-campaign-campaign-home-df85d-quests-foe-chips-log-filter/error-context.md
+
+    attachment #5: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../artifacts/browser-final/v21-campaign-campaign-home-df85d-quests-foe-chips-log-filter/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../artifacts/browser-final/v21-campaign-campaign-home-df85d-quests-foe-chips-log-filter/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[28/56] tests/browser/v21-log.spec.ts:26:1 › log feed: dice chips, markers, ROLLS filter, history icon pair, command line
+[29/56] tests/browser/v21-log.spec.ts:193:1 › initiative bar: a segment per turn entry, the current one marked, Groups for the Director
+[30/56] tests/browser/v21-rosters.spec.ts:18:1 › director rosters: compact cards, drill-in, settings pop-up, audience boundary
+[31/56] tests/browser/v21-sheet.spec.ts:52:1 › standalone sheet: band, columns, Roll test, Catch Breath, Director edit, peer, compact
+[32/56] tests/browser/v21-shell.spec.ts:77:3 › session shell in FreePlay: no site nav, no page scroll, independent panes, pinned command line
+[33/56] tests/browser/v21-shell.spec.ts:77:3 › session shell in combat: no site nav, no page scroll, independent panes, pinned command line
+[34/56] tests/browser/v21-wizard.spec.ts:17:1 › wizard frame: header, rail, choice rows, persistence, independent scrolling
+[35/56] tests/browser/v25-elementalist.spec.ts:8:1 › corrected Forge Bethell: complete wizard, reload, review and sourced sheet
+[36/56] tests/browser/v32-progression.spec.ts:29:1 › Fury advancement preserves live state; source-complete sheet and reviewed history restoration
+[37/56] tests/browser/v33-design.spec.ts:9:1 › Core stat blocks, automatic glyph accessibility and plain-text fallback
+[38/56] tests/browser/v33-design.spec.ts:147:1 › a missing font leaves readable text rather than ASCII font codes
+[39/56] tests/browser/v34-core-content.spec.ts:6:1 › live Rules and Foes share Core typography, automatic semantics and accessible navigation
+[40/56] tests/browser/v34-core-content.spec.ts:80:1 › live content retains readable text when the glyph font cannot load
+[41/56] tests/browser/v34-core-content.spec.ts:90:1 › hero and Director sheets use full Core content while live stats and audience stay separate
+[42/56] tests/browser/v35-full-foes.spec.ts:9:1 › all core definitions render their complete feature lists through the public consumer
+[43/56] tests/browser/v37-supporting-choices.spec.ts:11:1 › supporting choices show complete sources, prune dependent targets and persist reviewed mechanics
+[44/56] tests/browser/v37-supporting-choices.spec.ts:175:1 › Strange Inheritance lets the Director save a private sourced item without exposing it to the owner
+[45/56] tests/browser/v38-library-navigation.spec.ts:5:1 › primary navigation exposes independent Rules and Foes libraries
+[46/56] tests/browser/v40-unsaved-wizard.spec.ts:8:1 › unsaved wizard creates nothing until first explicit save, then edits the same character
+[47/56] tests/browser/v42-primary-choice.spec.ts:8:1 › primary choices collapse, edit without loss, prune on replacement and reopen saved
+[48/56] tests/browser/v46-devil-persistence.spec.ts:97:1 › V46: all thirteen counterpart builds save and read back through shared operations
+[49/56] tests/browser/v46-devil-persistence.spec.ts:186:1 › V46: changing a purchased trait or the ancestry removes its grants across a reload
+[50/56] tests/browser/v46-devil-persistence.spec.ts:302:1 › V46: a flying devil advances to Berserker Fury two with live state and history intact
+[51/56] tests/browser/v46-devil.spec.ts:13:1 › V46 Devil level one: every trait and skill offered, flight build saved and read back
+[52/56] tests/browser/wizard.spec.ts:23:1 › wizard, admission review and the three sheet audiences
+  5) tests/browser/wizard.spec.ts:23:1 › wizard, admission review and the three sheet audiences ────
+
+    TimeoutError: locator.click: Timeout 15000ms exceeded.
+    Call log:
+      - waiting for getByRole('button', { name: 'Take turn', exact: true }).first()
+
+
+       at acceptance-extension.ts:56
+
+      54 |   await director.getByRole('button', { name: 'Roll initiative (d10)', exact: true }).click();
+      55 |   await director.getByRole('button', { name: 'Heroes first', exact: true }).click();
+    > 56 |   await player.getByRole('button', { name: 'Take turn', exact: true }).first().click();
+         |                                                                                ^
+      57 |   const current = await query('encounters:current');
+      58 |   expect(current.activeTurn.actor.id).toBe(heroId);
+      59 |
+        at tableJourney (/app/tests/browser/acceptance-extension.ts:56:80)
+        at /app/tests/browser/wizard.spec.ts:206:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../artifacts/browser-final/wizard-wizard-admission-review-and-the-three-sheet-audiences/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../artifacts/browser-final/wizard-wizard-admission-review-and-the-three-sheet-audiences/test-failed-2.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #3: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../artifacts/browser-final/wizard-wizard-admission-review-and-the-three-sheet-audiences/test-failed-3.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../artifacts/browser-final/wizard-wizard-admission-review-and-the-three-sheet-audiences/error-context.md
+
+    attachment #5: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../artifacts/browser-final/wizard-wizard-admission-review-and-the-three-sheet-audiences/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../artifacts/browser-final/wizard-wizard-admission-review-and-the-three-sheet-audiences/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+[53/56] tests/browser/password-recovery.spec.ts:18:1 › forgot-password response and missing/invalid reset links are clear
+[54/56] tests/browser/password-recovery.spec.ts:54:1 › real reset preserves account access, clears old session, and rejects token reuse
+[55/56] tests/browser/reference-streaming.spec.ts:7:3 › late chapter anchors stay visible as preceding content streams in
+[56/56] tests/browser/reference-streaming.spec.ts:7:3 › late chapter anchors respect reader scrolling as preceding content streams in
+  5 failed
+    tests/browser/closeout.spec.ts:21:1 › closeout awards once, is shared with observers, and paused session closure offers Void 
+    tests/browser/combat.spec.ts:31:1 › Director starts combat; a player takes and ends a turn; the round advances 
+    tests/browser/table-audit.spec.ts:40:1 › three table contexts, palette, console and live CLI share persisted operations 
+    tests/browser/v21-campaign.spec.ts:23:1 › campaign home: header actions, player tiles, copy, join requests, foe chips, log filter 
+    tests/browser/wizard.spec.ts:23:1 › wizard, admission review and the three sheet audiences ─────
+  3 skipped
+  48 passed (18.6m)
+
+
+[exited with code 1]

@@ -98,6 +98,9 @@ export function projectForgeReference(hero: ForgeHero) {
     'Skill Choice',
     'Language Choice',
     'Language',
+    // V46: Wings nests one of these under a Multiple Features wrapper. It carries no selection and
+    // grants no statistic; the mode name is compared separately, from the feature's own data.
+    'Movement Mode',
   ]);
   const subclasses = hero.class.subclasses.filter(branch => branch.selected);
   const add = (feature: ForgeFeature) => {
@@ -167,6 +170,11 @@ export function projectForgeReference(hero: ForgeHero) {
       .filter(feature => feature.type === type)
       .flatMap(feature => chosenNames[feature.id] ?? []);
   return {
+    movementModes: sortedNames(
+      active
+        .filter(feature => feature.type === 'Movement Mode')
+        .map(feature => String((feature.data as { mode?: string } | undefined)?.mode ?? '')),
+    ),
     level: hero.class.level,
     ancestry: referenceName(hero.ancestry.name),
     class: referenceName(hero.class.name),

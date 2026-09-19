@@ -616,6 +616,9 @@ function grantedBy(provenance: Provenance) {
     ...(provenance.selection ? { selection: provenance.selection } : {}),
     quote: provenance.source.quote,
     path: provenance.source.path,
+    // V46: a grant may record that its effect is readable only and resolved at the table. The
+    // sheet must not drop that, or a manually resolved grant looks like an automated one.
+    ...(provenance.note ? { note: provenance.note } : {}),
   };
 }
 async function contentFor(ctx: ReadCtx, sourcePath: string) {

@@ -2,13 +2,23 @@
 /** V45 extraction: preserve existing source contributions and their phase/order. */
 import type { DerivationContext, SelectedKit } from '../derivation.ts';
 import type {
+  ConditionalEffect,
   DerivedValue,
+  GrantedMovementMode,
   Provenance,
   PartialBaseline,
   GrantedFeature,
 } from '../../contracts/characterEvaluation.ts';
 import { SENTENCES } from '../sources.ts';
-import { TRAIT_EFFECTS, KIT_BONUSES_HEADING, KITS_PATH, KITS_TABLE_HEADING } from '../sources.ts';
+import {
+  TRAIT_EFFECTS,
+  WINGS_WEAKNESS_SENTENCE,
+  UNTYPED_DAMAGE_WEAKNESS,
+  FLY_RULE,
+  KIT_BONUSES_HEADING,
+  KITS_PATH,
+  KITS_TABLE_HEADING,
+} from '../sources.ts';
 
 export function applyDevilMovement(
   ctx: DerivationContext,
@@ -144,6 +154,116 @@ export function applyDevilNoKit(
   }
 }
 
+/**
+ * V46: Wings' flight and the conditional amounts Wings and Barbed Tail calculate. This runs after
+ * the class characteristics exist, because both amounts read them; `applyDevilMovement` is too
+ * early for any class whose characteristics come from the shared class profile.
+ */
+export function applyDevilConditionalEffects(ctx: DerivationContext, out: PartialBaseline) {
+  if (!ctx.available.has('ancestry.devil.purchased-traits')) return;
+  const traits = (ctx.list('ancestry.devil.purchased-traits') ?? []).filter(
+    (trait): trait is string => trait !== null,
+  );
+  if (!traits.length) return;
+  const p = (entry: Provenance) => ctx.provenance(entry);
+  const selected = (
+    name: string,
+    sentence: Parameters<DerivationContext['sentence']>[0],
+    extra: Partial<Provenance> = {},
+  ) =>
+    p({
+      decisionId: 'ancestry.devil.purchased-traits',
+      selection: name,
+      source: ctx.sentence(sentence),
+      ...extra,
+    });
+  const modes: GrantedMovementMode[] = [];
+  const conditional: ConditionalEffect[] = [];
+
+  if (traits.includes('Barbed Tail')) {
+    // "extra damage ... equal to your highest characteristic score": a build amount, applied by
+    // the table only when the player uses the once-per-round option.
+    const characteristics = Object.values(out.characteristics ?? {});
+    if (characteristics.length) {
+      const highest = characteristics.reduce((best, entry) =>
+        entry.value > best.value ? entry : best,
+      );
+      conditional.push({
+        feature: 'Barbed Tail',
+        effect: 'extra-strike-damage',
+        condition: TRAIT_EFFECTS['Barbed Tail']!.sentence.quote,
+        sourcePath: TRAIT_EFFECTS['Barbed Tail']!.sentence.path,
+        amount: {
+          value: highest.value,
+          provenance: [
+            selected('Barbed Tail', TRAIT_EFFECTS['Barbed Tail']!.sentence, {
+              operation: 'set',
+              amount: highest.value,
+            }),
+            ...highest.provenance,
+          ],
+        },
+      });
+    }
+  }
+
+  if (traits.includes('Wings')) {
+    const wings = TRAIT_EFFECTS['Wings']!.sentence;
+    modes.push({
+      mode: 'Fly',
+      sourcePath: wings.path,
+      ruleSourcePath: FLY_RULE.path,
+      condition: 'While using your wings to fly',
+      provenance: selected('Wings', wings),
+    });
+    const might = out.characteristics?.M;
+    if (might) {
+      // "a number of rounds equal to your Might score (minimum 1 round)".
+      const rounds = Math.max(1, might.value);
+      conditional.push({
+        feature: 'Wings',
+        effect: 'rounds-aloft',
+        // The whole sentence, so the recorded amount reads as the maximum before falling rather
+        // than as elapsed play state.
+        condition: wings.quote,
+        sourcePath: wings.path,
+        amount: {
+          value: rounds,
+          provenance: [
+            selected('Wings', wings, { operation: 'set', amount: rounds }),
+            ...might.provenance,
+          ],
+        },
+      });
+    }
+    // "at 3rd level or lower": inert at every level this build supports, and it keeps a later
+    // level unit from inheriting the weakness without verifying that level.
+    if (ctx.level <= 3)
+      conditional.push({
+        feature: 'Wings',
+        effect: 'damage-weakness',
+        condition: WINGS_WEAKNESS_SENTENCE.quote,
+        sourcePath: WINGS_WEAKNESS_SENTENCE.path,
+        // Wings names no damage type, and the damage-weakness rule makes an untyped weakness
+        // apply to damage of any type. `all-damage` is the literal the resolution contract
+        // documents for that case (shared/contracts/rollResolution.ts DamageModifierEntry);
+        // the older `damageWeaknesses` list spells it `allDamage`, which this field does not copy.
+        damageType: 'all-damage',
+        amount: {
+          value: 5,
+          provenance: [
+            selected('Wings', WINGS_WEAKNESS_SENTENCE, { operation: 'set', amount: 5 }),
+            selected('Wings', UNTYPED_DAMAGE_WEAKNESS),
+          ],
+        },
+      });
+  }
+
+  if (modes.length) out.movementModes = [...(out.movementModes ?? []), ...modes];
+  if (conditional.length)
+    out.conditionalEffects = [...(out.conditionalEffects ?? []), ...conditional];
+}
+
 export function appendDevilTraits(ctx: DerivationContext, out: GrantedFeature[]) {
   const signature = ctx.decisions.get('ancestry.devil.signature-trait');
   if (signature && ctx.available.has(signature.id))
@@ -176,7 +296,7 @@ export function appendDevilTraits(ctx: DerivationContext, out: GrantedFeature[])
           selection: name,
           source: ctx.own(purchased),
         }),
-        ...(effect ? { affects: [effect.field] } : {}),
+        ...(effect?.field ? { affects: [effect.field] } : {}),
       });
     }
 }

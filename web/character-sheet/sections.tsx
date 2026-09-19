@@ -13,7 +13,7 @@ import { Chip } from '../components/chip';
 import { StatBox } from '../components/stat-box';
 import { RuleLink } from '../rules/link';
 import { CoreSource } from '../components/core-content';
-import { SupportingBuildFacts } from '../wizard/supporting-components';
+import { ConditionalBuildFacts, SupportingBuildFacts } from '../wizard/supporting-components';
 import { SecretInheritance } from './secret-inheritance';
 import type { Id } from '../../convex/_generated/dataModel';
 
@@ -88,6 +88,14 @@ export function RuledRow({
   );
 }
 
+/** The verbatim source restrictions on the granted movement modes, for the stat row's title. */
+function movementConditions(modes: NonNullable<PartialBaseline['movementModes']>): string {
+  return modes
+    .map(mode => mode.condition)
+    .filter((condition): condition is string => !!condition)
+    .join(' ');
+}
+
 export function StatsList({
   partial,
   xp,
@@ -102,6 +110,22 @@ export function StatsList({
     ['Speed', pending(partial?.speed?.value)],
     ['Stability', pending(partial?.stability?.value)],
     ['Disengage', pending(partial?.disengage?.value)],
+    ...(partial?.movementModes?.length
+      ? ([
+          [
+            'Movement',
+            // A bare mode name beside Speed would read as "fly" in the speed entry, which the
+            // movement rule makes unconditional. Mark the ones the source gates, and carry the
+            // verbatim condition; the full text is in the conditional section below.
+            <span key="movement" title={movementConditions(partial.movementModes)}>
+              {partial.movementModes.map(mode => mode.mode).join(', ')}
+              {partial.movementModes.some(mode => mode.condition) ? (
+                <span className="ml-2 text-xs font-normal text-muted-foreground">conditional</span>
+              ) : null}
+            </span>,
+          ],
+        ] as [string, React.ReactNode][])
+      : []),
     [
       'Potency',
       partial?.potency
@@ -339,6 +363,11 @@ export function DetailsRows({
       <li className="py-3">
         <SupportingBuildFacts baseline={partial} />
       </li>
+      {partial?.movementModes?.length || partial?.conditionalEffects?.length ? (
+        <li className="py-3">
+          <ConditionalBuildFacts baseline={partial} />
+        </li>
+      ) : null}
       {(sheet.audience === 'director' || sheet.viewer.role === 'director') &&
         sheet.build &&
         sheet.build.label !== 'draft' &&

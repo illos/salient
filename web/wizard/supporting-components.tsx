@@ -184,6 +184,66 @@ export function IncidentText({ career, name }: { career?: string; name: string }
   );
 }
 
+/**
+ * V46: movement modes and conditional amounts. These are deliberately not folded into the
+ * unconditional immunity/weakness rows above: every entry states the source condition, and
+ * nothing here is applied automatically at the table.
+ */
+export function ConditionalBuildFacts({ baseline }: { baseline: PartialBaseline | null }) {
+  const modes = baseline?.movementModes ?? [];
+  const effects = baseline?.conditionalEffects ?? [];
+  if (!modes.length && !effects.length) return null;
+  const label = (effect: NonNullable<PartialBaseline['conditionalEffects']>[number]) =>
+    ({
+      'rounds-aloft': `${effect.feature}: maximum rounds aloft`,
+      'damage-weakness': `${effect.feature}: damage weakness${
+        effect.damageType && effect.damageType !== 'all-damage' ? ` (${effect.damageType})` : ''
+      }`,
+      'extra-strike-damage': `${effect.feature}: extra strike damage`,
+    })[effect.effect];
+  return (
+    <section className="space-y-3 text-sm" aria-label="Conditional grants">
+      <h4 className="caps m-0 text-muted-foreground">Movement and conditional effects</h4>
+      <p className="m-0 text-muted-foreground">
+        These apply only in the situation the source describes, and are resolved at the table.
+      </p>
+      <dl className="m-0 space-y-3">
+        {modes.map(mode => (
+          <div key={`mode:${mode.mode}:${mode.sourcePath}`}>
+            <dt className="flex items-center gap-1 font-semibold">
+              {mode.mode}
+              <RuleLink sourcePath={mode.sourcePath} label={mode.mode} />
+            </dt>
+            <dd className="m-0">
+              <span className="inline-flex items-center gap-1">
+                Movement mode
+                {mode.ruleSourcePath && (
+                  <RuleLink sourcePath={mode.ruleSourcePath} label={`${mode.mode} movement rule`} />
+                )}
+              </span>
+              {mode.condition && (
+                <p className="mt-1 mb-0 text-muted-foreground">{mode.condition}</p>
+              )}
+            </dd>
+          </div>
+        ))}
+        {effects.map(effect => (
+          <div key={`effect:${effect.feature}:${effect.effect}`}>
+            <dt className="flex items-center gap-1 font-semibold">
+              {label(effect)}
+              <RuleLink sourcePath={effect.sourcePath} label={effect.feature} />
+            </dt>
+            <dd className="m-0">
+              {effect.amount.value}
+              <p className="mt-1 mb-0 text-muted-foreground">{effect.condition}</p>
+            </dd>
+          </div>
+        ))}
+      </dl>
+    </section>
+  );
+}
+
 /** Shared evaluation supplies these facts; this view never recalculates or spends a grant. */
 export function SupportingBuildFacts({ baseline }: { baseline: PartialBaseline | null }) {
   if (!baseline) return null;
