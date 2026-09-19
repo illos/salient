@@ -1,6 +1,8 @@
 # V52: pace browser-suite account creation to the product's own sign-up limit
 
-**Status: partially verified; full-suite result is the integration lead's to record.**
+**Status: NOT verified. `pnpm check` and a focused four-spec run pass; the whole-suite run was
+aborted when the backend was OOM-killed mid-run, with seven consecutive failures at the collapse and
+eight positions never reached.**
 `pnpm check` passes and a focused four-spec run passes, both on `0987595`. What those do **not**
 establish is in [the evidence README](evidence/V52/README.md#focused-specs--two-attempts-and-the-first-one-failed):
 the three previously-refused specs already passed in isolation without any pacing, so a focused

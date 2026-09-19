@@ -1,8 +1,9 @@
 # V52 evidence
 
-Candidate `0987595628c548dea2a5e14d014ce2a65bb8ed17` on `slice/V52`, verified in CT114's isolated
-`characters` environment. **This file records what was run and what was lost. It does not claim the
-slice is verified, and it does not claim pacing fixed anything.**
+Candidate `0987595628c548dea2a5e14d014ce2a65bb8ed17` on `slice/V52`, exercised in CT114's isolated
+`characters` environment. **The slice is not verified.** `pnpm check` passes and a focused four-spec
+run passes; the whole-suite run was **aborted on a backend OOM kill** and proves nothing either way.
+This file records what was run, what failed, and what was lost.
 
 Runtime orchestration passed to the integration lead partway through this sequence
 (Chords 486, 493, 499). The full-suite result and its closure are theirs; what follows is only what
@@ -92,36 +93,77 @@ and the two must not be conflated.
 - No application code differs from the V46 base: `git diff` over `convex shared web src scripts
   public runtime` is empty.
 
-## Full suite — terminated, not completed
+## Full suite — ABORTED on a backend OOM kill. Not a result, and not a pass.
 
 `presidium-dev --env characters run browser -- pnpm exec playwright test --workers=1`, started
-2026-09-19T22:14:24Z. **It exited 143 (SIGTERM) at position 48 of 56**, about eighteen minutes into
-a fifty-five minute allowance, so it was stopped externally rather than timing out. No end stamp was
-written to `/artifacts/v52-full-end.txt`, which is itself the marker that it never reached its own
-end. **This is not a result and must not be read as one.** Positions 49–56 never ran; those include
-three of the four V46 journeys, `password-recovery` and `reference-streaming`, so nothing can be
-said about them.
+2026-09-19T22:14:24Z, **exited 143 at position 48 of 56 when the integration lead stopped it**,
+because by then the backend it was testing no longer existed. No end stamp was written.
 
-Two failures were recorded before termination, both at 22:29:
+**The backend was OOM-killed.** The lead's snapshot (`v52-full-oom-state-2243.txt` in
+`review-reports-20260919/`) records `State.OOMKilled=true`, cgroup `memory.events` `oom 2` /
+`oom_kill 1` against a `memory.max` of 3 GiB, no Convex backend process, and connection refused on
+localhost:3210. **Docker still reported the container healthy**, which is a stale marker rather than
+a live check — an earlier draft of this file repeated that "healthy, up 40 minutes" reading as if it
+meant the service was up. It did not, and the exact OOM instant was not retained.
 
-1. `v32-progression.spec.ts:29` — `Error: Command failed: pnpm app query characters:sheet`,
-   `fetch failed`.
-2. `v34-core-content.spec.ts:90` — the `Campaigns` heading assertion, the same shape as the
-   registration refusals. **But it is not the same failure.** `v34` registers through `createTable`
-   in `v21-fixtures`, which *is* the paced helper, so a paced registration failed — and its
-   accessibility snapshot reads `alert: Unable to sign in. Please try again.`, which is
-   `web/router.tsx`'s generic fallback when the auth error carries no message. It is **not**
-   `Too many requests. Please try again later.`, the 429 body seen in V43, V45 and V46.
+**Seven cases failed, not two.** An earlier draft said two; that was read from a mid-run poll rather
+than the finished log. From the retained stdout, in order:
 
-The backend capture for 22:29:00–22:30:09 holds 85 records, **none with an error field and no 429**.
-The slowest are auth HTTP — `GET /api/auth/*` at 3.52 s and `POST /api/auth/*` at 2.66 s, both
-uncached, against sub-second norms elsewhere in the file. That is a correlation in one window and no
-cause is claimed from it.
+| # | Spec |
+| --- | --- |
+| 1 | `v32-progression.spec.ts:29` |
+| 2 | `v34-core-content.spec.ts:90` |
+| 3 | `v37-supporting-choices.spec.ts:11` |
+| 4 | `v37-supporting-choices.spec.ts:175` |
+| 5 | `v38-library-navigation.spec.ts:5` |
+| 6 | `v40-unsaved-wizard.spec.ts:8` |
+| 7 | `v42-primary-choice.spec.ts:8` |
 
-What the partial run supports, and only this: `table-audit` at position 22 and `v21-campaign` at 27
-both passed, which is where V46 failed them, and the rate-limit refusal was not reproduced in the 48
-positions that ran. It does not establish that pacing is why, for the reason given above — those
-specs also pass unpaced in isolation, and this run did not finish.
+They are consecutive and they begin at the collapse, which is what a dead backend looks like from
+the browser: `v32` reports `fetch failed` from the CLI query, and `v34` shows
+`alert: Unable to sign in. Please try again.` — `web/router.tsx`'s fallback when the auth error
+carries no message. **None of them is the `Too many requests. Please try again later.` body** seen
+in V43, V45 and V46, so none is the rate-limit refusal this slice addresses.
+
+### The backend capture, with its timestamp semantics stated
+
+10365 records, retained by the lead as `v52-full-opus-backend.jsonl` with its `.err`.
+
+**`executionTimestamp` is when the function executed, and the stream is not ordered by it.** An
+earlier draft quoted "last 22:28:45" alongside a count for 22:29 and was internally contradictory
+for exactly that reason: 22:28:45.347 is the last record *in file order*, not the latest execution.
+Computed across all rows:
+
+- earliest `executionTimestamp` **22:12:11.928** — before the tail was attached at 22:14:21, so the
+  capture includes backfill;
+- latest `executionTimestamp` **22:29:23.178**, which matches the lead's independent finding that
+  backend logs stop around 22:29:23.
+
+The tail then retried six times and gave up with `Failed to fetch logs`. So three independent
+clients — the Playwright CLI helper, the browser's auth call, and this capture — lost the backend in
+the same window.
+
+### This capture was part of the problem
+
+The lead found several CLI log processes occupying the backend container's cgroup, including this
+thread's logger. After terminating three logger leaves at 22:43:16, cgroup usage fell from about
+**772.5 MB to 305.7 MB**. Against a 3 GiB limit that is material observer overhead and it is not the
+sole cause, but a diagnostic capture that contributes to the failure it is capturing is a real
+defect in how this was set up, and duplicate captures were running because two threads instrumented
+the same container.
+
+Raw bundle: `v52-full-aborted-0987595.tar.gz`, SHA-256
+`acca6f4430ad6660ed51ebf1e754a1d155bcafd3807331b4d52c3171d63fe0b9`, with full stdout
+`v52-full-0987595.log`, all under `review-reports-20260919/`.
+
+### What the aborted run does and does not support
+
+Positions 1–47 ran before the collapse, and within them `table-audit` at 22 and `v21-campaign` at 27
+both passed — the two positions where V46 failed them on registration. The rate-limit refusal was
+not reproduced in any position that ran against a live backend.
+
+That is **not** evidence that pacing is why. Those specs also pass unpaced in isolation, the run
+never finished, and eight positions never ran at all. **No PASS is claimed for this slice.**
 
 ## Process failures in this sequence, recorded rather than smoothed over
 
@@ -133,5 +175,14 @@ specs also pass unpaced in isolation, and this run did not finish.
    yet started" and then as an interruption, when it was running and had genuinely failed.
 3. **An auxiliary capture was not preflighted in its real container.** The `convex logs` child was
    assumed to work in the browser container; one exec would have shown it could not.
+4. **The capture was then added without checking who else was already capturing, or what it cost.**
+   Two threads instrumented the same container, and the resident memory of those log processes was
+   a measurable fraction of the limit the backend was killed against. A diagnostic must be budgeted
+   against the thing it is observing.
+5. **Results were reported from partial views.** "Two failures" came from a mid-run poll and the
+   real number is seven; "healthy, up 40 minutes" came from a Docker marker that was stale while
+   the process behind it was gone; a log "last timestamp" was quoted from file order while the same
+   paragraph counted a later minute. Each was avoidable by reading the finished artifact instead of
+   the convenient one.
 
 These are the same lessons now recorded in `docs/agent-orchestration.md` (main `cf7c24a`).
