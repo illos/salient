@@ -33,6 +33,7 @@ Use one owner and separate worktree per active unit. Send the following through 
 
 ```text
 Unit and outcome:
+User-authorized queue and the lead's authority to assign its next unit:
 Owning slice/specs and source pins:
 Stable thread ID, worktree, branch and starting commit:
 Owned files; shared changes requiring coordination:
@@ -45,6 +46,16 @@ Dependencies, release condition and independent work while waiting:
 Keep actual state in the slice work log and `docs/build/STATUS.md`, not a second orchestration tracker.
 Assign enough independent work to occupy the workers; adding threads does not remove shared-file,
 review or runtime bottlenecks. One owner serializes shared-contract changes and main delivery.
+
+Define queue authority explicitly in the worker's initial user kickoff when batching is intended.
+A narrow assignment to one class can leave the worker treating the next ancestry as new scope,
+even when the lead's own task covers both. A wake resumes authority; it does not supply it. During
+this trial, one worker declined a new unit on that reading while another started its next unit;
+this was not a blanket transport rejection. Clarify the worker's actual scope rather than inferring
+permission from another worker's behavior, and continue useful work within the existing assignment.
+The user subsequently instructed the fleet directly to accept the lead's scope changes; both
+preparation workers confirmed that authorization and began their next units. Preserve that
+authorization across handoffs rather than requesting it again for each queued unit.
 
 All Salient installs, typechecks, tests, builds, servers and browsers run on CT114 under the
 [remote runbook](remote-development.md). Record the named environment in every workload command.
