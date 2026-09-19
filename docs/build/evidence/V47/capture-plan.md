@@ -55,8 +55,13 @@ and record the version difference when comparing against those older artifacts.
 
 ## What the script does, and what it must not do
 
-A reusable capture script drives the served editor with Playwright, one build per invocation, taking
-the build's choice map as input. It must:
+The script now exists: [`capture/forge-capture.mjs`](capture/forge-capture.mjs), with the five
+builds as data in [`capture/builds.json`](capture/builds.json) and the export projection in
+[`capture/normalize.mjs`](capture/normalize.mjs). See [the capture README](capture/README.md). It
+has never been executed, and its Forge selectors were derived from the pinned source rather than
+from the running application, so expect corrections on the first real run and record them.
+
+It drives the served editor with Playwright, one build per invocation, and must:
 
 1. Create the hero through the editor UI: ancestry, culture, career, class, subclass, kit, abilities,
    skills and details, following the same order a person would.
@@ -77,7 +82,8 @@ happens in the UI.
 ## Per-build inputs
 
 The five builds and their complete choice maps are in
-[the reference builds](reference-builds.md). Each capture run takes one build id and produces:
+[the reference builds](reference-builds.md), and as data in
+[`capture/builds.json`](capture/builds.json). Each capture run takes one build id and produces:
 
 ```text
 docs/build/evidence/V47/forge/<build-id>/
