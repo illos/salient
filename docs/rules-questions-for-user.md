@@ -886,28 +886,31 @@ No user approval is implied by this classification.
   later talent unit will meet it.
 - **Answer:** (user fills in)
 
-### Q-CHAR-20: Three narrow Dwarf trait boundaries the pin leaves open
+### Q-CHAR-20: Two narrow Stand Tough boundaries the pin leaves open
 
 - **Status:** open
 - **Raised by:** V50 Dwarf level-one preparation, 2026-09-19
 - **Where:** `vendor/steel-compendium/en/unified/md/feature/trait/dwarf/stand-tough.md`;
-  `vendor/steel-compendium/en/unified/md/feature/trait/dwarf/dwarf-traits.md`;
-  `vendor/steel-compendium/en/unified/md/rule/character/characteristic.md`;
-  `vendor/steel-compendium/en/unified/md/chapter/ancestries.md`
-- **Conflict or gap:** Three small boundaries, grouped because each is one sentence and none blocks
-  level-one work. (i) Stand Tough's edge applies to Might tests "called for to resist environmental
-  effects or a creature's traits or abilities"; "environmental effect" is used in several places in
-  the pin but never defined, so whether a Might test to swim against a mighty current qualifies is
-  unclear. (ii) Characteristic scores "run from −5 to +5"; if a dwarf has Might +5 and Stand Tough,
-  is the potency-resisting value 6, or clamped to 5? The trait says "treated as 1 higher" with no
-  cap, and the stated range describes scores rather than treated-as values. (iii) The budget text
-  says "You have 3 ancestry points to spend" and the only stated prohibition is exceeding it, so it
-  is unclear whether underspending is permitted.
-- **Options:** For (iii): A: allow underspend with a warning. B: require the full three points.
+  `vendor/steel-compendium/en/unified/md/rule/character/characteristic.md`
+- **Conflict or gap:** Two small boundaries on one trait, grouped because each is a single sentence
+  and neither blocks level-one editor support. (i) Stand Tough's edge applies to Might tests "called
+  for to resist environmental effects or a creature's traits or abilities"; "environmental effect"
+  is used in several places in the pin but never defined, so whether a Might test to swim against a
+  mighty current qualifies is unclear. (ii) Characteristic scores "run from −5 to +5"; if a dwarf
+  has Might +5 and Stand Tough, is the potency-resisting value 6, or clamped to 5? The trait says
+  "treated as 1 higher" with no cap, and the stated range describes scores rather than treated-as
+  values.
+- **Options:** For (ii): A: no clamp, the treated-as value is 6. B: clamp to 5.
 - **Recommendation:** (i) treat the edge as table-adjudicated and record the trigger verbatim rather
-  than encoding an inclusion list. (ii) do not clamp, since the range is stated for scores and the
-  trait states no cap; assert the behaviour in a test either way once ruled. (iii) A, allow
-  underspend with a warning, since the source forbids only overspending.
-- **Blocked until answered:** nothing. (i) is manual regardless. (ii) is unreachable at level one
-  with the reference builds, whose Might is −1. (iii) affects only a validation message.
+  than encoding an inclusion list. (ii) A, no clamp, since the range is stated for scores and the
+  trait states no cap; assert the behaviour in a test once ruled either way.
+- **Blocked until answered:** nothing. (i) is manual regardless of the answer. (ii) is unreachable in
+  this unit's reference builds, whose Might is −1 or 2.
 - **Answer:** (user fills in)
+
+**Withdrawn from this entry:** a third sub-question asked whether a dwarf may underspend the three
+ancestry points. That is **already settled** by
+[Q-CHAR-10](#q-char-10-can-a-complete-character-intentionally-leave-ancestry-points-unspent):
+permit unspent points with a warning, without a separate acknowledgement; unspent points alone do
+not block completion, and overspending remains invalid. V50 follows that existing policy and does
+not reopen it.

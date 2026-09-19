@@ -52,7 +52,7 @@ which the pinned source does not establish.
 | [`tests/fixtures/v50-dwarf/choice-maps.json`](../../tests/fixtures/v50-dwarf/choice-maps.json) | **Written.** Machine-readable D1–D3 selections, constant selections, derived expectations with their source citations, the Stand Tough cases, illegal and ancestry-change cases, and the coverage ledger |
 | [`scripts/capture-v50-forge.ts`](../../scripts/capture-v50-forge.ts) | **Authored, not executed.** Drives the pinned Forge application to build and export the three counterparts, following the capture mode V46 established |
 | `tests/fixtures/v50-dwarf/` | Three raw `.ds-hero` exports, sheets, `counterparts.json` with hashes and editor warnings. **None captured yet** |
-| `tests/character-v50-dwarf.test.ts` | Per-build comparison, the Stand Tough discriminating cases, ancestry-change removal, budget and duplicate cases |
+| `tests/character-v50-dwarf.test.ts` | Per-build comparison, the Stand Tough cases, the **Might-highest regression** (Dwarf Berserker Fury, acceptance check 3a), ancestry-change removal, budget and duplicate cases |
 | `tests/browser/v50-dwarf.spec.ts` | Wizard journey, source display, sheet rendering, persisted readback |
 | `docs/build/V50-dwarf-level-one.md`, `docs/research/dwarf-level-one-preparation.md` | This document and its research |
 | `docs/build/STATUS.md` | This unit's row only |
@@ -176,13 +176,21 @@ Unit-specific additions:
    every **Might-based damage or power-roll expression** unchanged. These are the only assertions in
    this build that distinguish scoped potency resistance from a global Might increment.
 
-   Note a second limitation, so it is not mistaken for coverage: asserting the hero's **own**
-   weak/average/strong potency values is *also* non-discriminating here. Those derive from the
-   highest characteristic score, which is 2 (Reason and Intuition) in the constant selections, and a
-   Might of −1 becoming 0 does not change the highest. To make that assertion discriminating, a
-   build in which Might **is** the highest characteristic is required, which the held-constant
-   Bethell array cannot provide. Either add such a build outside the Forge-counterpart set or record
-   that own-potency preservation is untested in this unit.
+   Note a second limitation: asserting the hero's **own** weak/average/strong potency values is
+   *also* non-discriminating in the three counterpart builds. Those derive from the highest
+   characteristic score, which is 2 (Reason and Intuition) in the constant selections, and a Might of
+   −1 becoming 0 does not change the highest. Check 3a closes that gap.
+3a. **The Might-highest regression.** A focused non-Forge evaluator case: **Dwarf + Berserker Fury 1
+   with Stand Tough**, using the level-one Fury array `M 2, A 2, R 0, I 1, P 0`
+   (`tests/fixtures/v25-fury.json`). Expectations derived from the source, not from running the
+   evaluator: the potency-resist value is **3**, the Might characteristic stays **2**, and the hero's
+   own potency values stay **weak 0 / average 1 / strong 2**, because the highest characteristic
+   score is still 2.
+
+   This is the case that catches the wrong implementation. A global `+1` to Might makes it 3, which
+   becomes strictly the highest, so the hero's own potency values would shift to **weak 1 / average 2
+   / strong 3** and the assertion fails. It is an evaluator regression only — **not** a fourth
+   mandatory capture, and the three counterpart builds still carry the option ledger.
 4. A four-point combination (Great Fortitude plus Spark Off Your Skin) is refused; a three-point
    combination is accepted; the same trait cannot be taken twice.
 5. Changing ancestry from Polder to Dwarf removes Shadowmeld, Small!, corruption immunity, the
@@ -225,8 +233,13 @@ Q-CHAR-19 and Q-CHAR-20 are recorded there too. **They are gameplay and adjudica
 editor-support questions**, and are deliberately kept separate from this unit's scope: whether Great
 Fortitude prevents a hero self-applying weakened as an ability cost; what counts as an
 "environmental effect" for Stand Tough's edge; whether a Might +5 dwarf's potency-resist value is 6
-or clamps at 5; and whether underspending the three ancestry points is permitted. None blocks
-level-one editor support, and none licenses adding automation this unit was not asked for.
+or clamps at 5; and whether a Might +5 dwarf's potency-resist value clamps. None blocks level-one editor support,
+and none licenses adding automation this unit was not asked for.
+
+**Underspending the three ancestry points is not an open question.** It is already settled by
+Q-CHAR-10 — permit unspent points with a warning, without a separate acknowledgement; unspent points
+alone do not block completion, and overspending remains invalid. An earlier draft of this unit
+wrongly reopened it. V50 follows the existing policy.
 
 ## Capture status
 

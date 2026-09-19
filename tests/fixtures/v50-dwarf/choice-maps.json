@@ -11,10 +11,19 @@
     "export": "tests/fixtures/v45-reference/Bethell-corrected-export.ds-hero",
     "role": "Polder counterpart held constant except for ancestry",
     "verifiedBaseline": {
-      "size": "1S", "speed": 5, "stability": 0, "disengage": 2,
-      "staminaMaximum": 18, "recoveryValue": 6, "windedValue": 9,
-      "damageImmunities": { "corruption": 3 },
-      "conditionImmunities": ["frightened"]
+      "size": "1S",
+      "speed": 5,
+      "stability": 0,
+      "disengage": 2,
+      "staminaMaximum": 18,
+      "recoveryValue": 6,
+      "windedValue": 9,
+      "damageImmunities": {
+        "corruption": 3
+      },
+      "conditionImmunities": [
+        "frightened"
+      ]
     }
   },
   "constantSelections": {
@@ -27,19 +36,36 @@
     "culture.upbringing": "Creative",
     "culture.upbringing.skill": "Tailoring",
     "career.choice": "Mage's Apprentice",
-    "career.mages-apprentice.skills": ["Monsters", "Timescape"],
-    "career.mages-apprentice.languages": ["The First Language"],
+    "career.mages-apprentice.skills": [
+      "Monsters",
+      "Timescape"
+    ],
+    "career.mages-apprentice.languages": [
+      "The First Language"
+    ],
     "career.mages-apprentice.perk": "Arcane Trick",
     "career.mages-apprentice.inciting-incident": "Forgotten Memories",
     "class.choice": "Elementalist",
     "class.elementalist.characteristic-array": "2, 1, 1, −1",
-    "class.elementalist.array-assignment": { "Might": -1, "Agility": 1, "Intuition": 2, "Presence": 1 },
-    "class.elementalist.skills": ["Alchemy", "Blacksmithing", "History"],
+    "class.elementalist.array-assignment": {
+      "Might": -1,
+      "Agility": 1,
+      "Intuition": 2,
+      "Presence": 1
+    },
+    "class.elementalist.skills": [
+      "Alchemy",
+      "Blacksmithing",
+      "History"
+    ],
     "class.elementalist.magic-replacement": "Empathize",
     "class.elementalist.specialization": "Fire",
     "class.elementalist.enchantment": "Enchantment of Destruction",
     "class.elementalist.ward": "Ward of Delightful Consequences",
-    "class.elementalist.signature-abilities": ["Bifurcated Incineration", "Viscous Fire"],
+    "class.elementalist.signature-abilities": [
+      "Bifurcated Incineration",
+      "Viscous Fire"
+    ],
     "class.elementalist.ability-3": "The Flesh, a Crucible",
     "class.elementalist.ability-5": "Conflagration"
   },
@@ -52,15 +78,41 @@
   "builds": [
     {
       "id": "D1",
-      "selections": { "ancestry.choice": "Dwarf", "ancestry.dwarf.purchased-traits": ["Grounded", "Stand Tough", "Stone Singer"] },
-      "points": { "spent": 3, "budget": 3 },
-      "covers": ["Grounded", "Stand Tough", "Stone Singer"],
+      "selections": {
+        "ancestry.choice": "Dwarf",
+        "ancestry.dwarf.purchased-traits": [
+          "Grounded",
+          "Stand Tough",
+          "Stone Singer"
+        ]
+      },
+      "points": {
+        "spent": 3,
+        "budget": 3
+      },
+      "covers": [
+        "Grounded",
+        "Stand Tough",
+        "Stone Singer"
+      ],
       "expected": {
-        "size": "1M", "speed": 5, "stability": 1, "disengage": 1,
-        "staminaMaximum": 18, "recoveryValue": 6, "windedValue": 9,
-        "damageImmunities": {}, "conditionImmunities": [],
+        "size": "1M",
+        "speed": 5,
+        "stability": 1,
+        "disengage": 1,
+        "staminaMaximum": 18,
+        "recoveryValue": 6,
+        "windedValue": 9,
+        "damageImmunities": {},
+        "conditionImmunities": [],
         "potencyResistMight": 0,
-        "characteristics": { "Might": -1, "Agility": 1, "Reason": 2, "Intuition": 2, "Presence": 1 }
+        "characteristics": {
+          "Might": -1,
+          "Agility": 1,
+          "Reason": 2,
+          "Intuition": 2,
+          "Presence": 1
+        }
       },
       "expectationSources": {
         "size": "rule/character/speed.md — default 1M, no dwarf override",
@@ -71,15 +123,40 @@
     },
     {
       "id": "D2",
-      "selections": { "ancestry.choice": "Dwarf", "ancestry.dwarf.purchased-traits": ["Great Fortitude", "Stone Singer"] },
-      "points": { "spent": 3, "budget": 3 },
-      "covers": ["Great Fortitude"],
+      "selections": {
+        "ancestry.choice": "Dwarf",
+        "ancestry.dwarf.purchased-traits": [
+          "Great Fortitude",
+          "Stone Singer"
+        ]
+      },
+      "points": {
+        "spent": 3,
+        "budget": 3
+      },
+      "covers": [
+        "Great Fortitude"
+      ],
       "expected": {
-        "size": "1M", "speed": 5, "stability": 0, "disengage": 1,
-        "staminaMaximum": 18, "recoveryValue": 6, "windedValue": 9,
-        "damageImmunities": {}, "conditionImmunities": ["weakened"],
+        "size": "1M",
+        "speed": 5,
+        "stability": 0,
+        "disengage": 1,
+        "staminaMaximum": 18,
+        "recoveryValue": 6,
+        "windedValue": 9,
+        "damageImmunities": {},
+        "conditionImmunities": [
+          "weakened"
+        ],
         "potencyResistMight": null,
-        "characteristics": { "Might": -1, "Agility": 1, "Reason": 2, "Intuition": 2, "Presence": 1 }
+        "characteristics": {
+          "Might": -1,
+          "Agility": 1,
+          "Reason": 2,
+          "Intuition": 2,
+          "Presence": 1
+        }
       },
       "expectationSources": {
         "conditionImmunities": "feature/trait/dwarf/great-fortitude.md — you can't be made weakened; same shape as Polder Fearless/frightened"
@@ -87,16 +164,39 @@
     },
     {
       "id": "D3",
-      "selections": { "ancestry.choice": "Dwarf", "ancestry.dwarf.purchased-traits": ["Spark Off Your Skin", "Grounded"] },
-      "points": { "spent": 3, "budget": 3 },
-      "covers": ["Spark Off Your Skin"],
+      "selections": {
+        "ancestry.choice": "Dwarf",
+        "ancestry.dwarf.purchased-traits": [
+          "Spark Off Your Skin",
+          "Grounded"
+        ]
+      },
+      "points": {
+        "spent": 3,
+        "budget": 3
+      },
+      "covers": [
+        "Spark Off Your Skin"
+      ],
       "isPrintedQuickBuild": true,
       "expected": {
-        "size": "1M", "speed": 5, "stability": 1, "disengage": 1,
-        "staminaMaximum": 24, "recoveryValue": 8, "windedValue": 12,
-        "damageImmunities": {}, "conditionImmunities": [],
+        "size": "1M",
+        "speed": 5,
+        "stability": 1,
+        "disengage": 1,
+        "staminaMaximum": 24,
+        "recoveryValue": 8,
+        "windedValue": 12,
+        "damageImmunities": {},
+        "conditionImmunities": [],
         "potencyResistMight": null,
-        "characteristics": { "Might": -1, "Agility": 1, "Reason": 2, "Intuition": 2, "Presence": 1 }
+        "characteristics": {
+          "Might": -1,
+          "Agility": 1,
+          "Reason": 2,
+          "Intuition": 2,
+          "Presence": 1
+        }
       },
       "expectationSources": {
         "staminaMaximum": "feature/trait/dwarf/spark-off-your-skin.md — +6 at level one, over the Elementalist base 18",
@@ -110,34 +210,120 @@
     "heroMight": -1,
     "potencyResistValue": 0,
     "cases": [
-      { "potency": "M < -1", "affected": false },
-      { "potency": "M < 0",  "affected": false },
-      { "potency": "M < 1",  "affected": true },
-      { "potency": "M < 2",  "affected": true }
+      {
+        "potency": "M < -1",
+        "affected": false
+      },
+      {
+        "potency": "M < 0",
+        "affected": false
+      },
+      {
+        "potency": "M < 1",
+        "affected": true
+      },
+      {
+        "potency": "M < 2",
+        "affected": true
+      }
     ],
     "discriminatingAssertions": [
       "characteristics.Might remains -1, not 0",
       "any Might-based damage or power-roll expression is unchanged"
     ],
-    "knownNonDiscriminating": "Own weak/average/strong potency values derive from the highest characteristic score, which is 2 here; Might -1 becoming 0 does not change it. A build where Might is the highest characteristic would be required, which the held-constant array cannot provide."
+    "knownNonDiscriminating": "Own weak/average/strong potency values derive from the highest characteristic score, which is 2 here; Might -1 becoming 0 does not change it. A build where Might is the highest characteristic would be required, which the held-constant array cannot provide.",
+    "mightHighestRegression": {
+      "$comment": "Non-Forge evaluator regression that IS discriminating. Not a fourth capture.",
+      "build": "Dwarf + Berserker Fury 1 with Stand Tough",
+      "characteristics": {
+        "Might": 2,
+        "Agility": 2,
+        "Reason": 0,
+        "Intuition": 1,
+        "Presence": 0
+      },
+      "characteristicsSource": "tests/fixtures/v25-fury.json — an actual level-one Fury array",
+      "expected": {
+        "potencyResistMight": 3,
+        "mightCharacteristic": 2,
+        "ownPotency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "ownPotencySource": "rule/character/potency.md — derived from the highest characteristic score, which is 2"
+      },
+      "wrongImplementationWouldProduce": {
+        "mightCharacteristic": 3,
+        "ownPotency": {
+          "weak": 1,
+          "average": 2,
+          "strong": 3
+        },
+        "note": "A global +1 makes Might strictly the highest at 3, shifting own potency. This is the assertion that fails."
+      }
+    }
   },
   "illegalCases": [
-    { "selection": ["Great Fortitude", "Spark Off Your Skin"], "points": 4, "expect": "refused — exceeds the 3-point budget" },
-    { "selection": ["Grounded", "Grounded"], "expect": "refused — a trait cannot be taken twice (see Q-CHAR-20 (iii) for underspend, which is a separate question)" }
+    {
+      "selection": [
+        "Great Fortitude",
+        "Spark Off Your Skin"
+      ],
+      "points": 4,
+      "expect": "refused — exceeds the 3-point budget"
+    },
+    {
+      "selection": [
+        "Grounded",
+        "Grounded"
+      ],
+      "expect": "refused — a trait cannot be taken twice (see Q-CHAR-20 (iii) for underspend, which is a separate question)"
+    }
   ],
   "ancestryChangeCase": {
-    "from": "Polder", "to": "Dwarf",
-    "expectRemoved": ["Shadowmeld", "Small!", "Corruption Immunity", "Graceful Retreat", "Fearless", "damageImmunities.corruption", "conditionImmunities.frightened", "the Graceful Retreat disengage bonus"],
-    "expectPreserved": ["culture", "career", "class", "all class grants", "skills", "languages", "perks", "authored details"],
-    "expectChanged": { "size": "1S -> 1M", "disengage": "2 -> 1" }
+    "from": "Polder",
+    "to": "Dwarf",
+    "expectRemoved": [
+      "Shadowmeld",
+      "Small!",
+      "Corruption Immunity",
+      "Graceful Retreat",
+      "Fearless",
+      "damageImmunities.corruption",
+      "conditionImmunities.frightened",
+      "the Graceful Retreat disengage bonus"
+    ],
+    "expectPreserved": [
+      "culture",
+      "career",
+      "class",
+      "all class grants",
+      "skills",
+      "languages",
+      "perks",
+      "authored details"
+    ],
+    "expectChanged": {
+      "size": "1S -> 1M",
+      "disengage": "2 -> 1"
+    }
   },
   "coverageLedger": {
-    "purchasedTraits": { "total": 5, "covered": 5, "status": "complete across D1-D3" },
+    "purchasedTraits": {
+      "total": 5,
+      "covered": 5,
+      "status": "complete across D1-D3"
+    },
     "runicCarvingRunes": {
       "total": 3,
       "covered": 0,
       "status": "INCOMPLETE — blocked on Q-CHAR-18",
       "note": "While the rune's timing is unresolved, no same-build rune counterpart is certified. The capability is granted and readable; that is not coverage of the three rune options."
+    },
+    "unspentPoints": {
+      "status": "settled, not a question",
+      "policy": "Q-CHAR-10 — permit unspent points with a warning, no separate acknowledgement; overspending remains invalid"
     }
   }
 }
