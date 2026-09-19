@@ -118,14 +118,58 @@ disjoint modules. Source research and reference capture may start earlier. Each 
 as its own full verification passes, rather than waiting for the whole wave; 1F is an additional
 combined audit. One integration owner serializes shared-file changes and main/runtime updates.
 
-Next wave: Conduit level one and Tactician level one as separate units, then independently scoped
-Fury, Elementalist and Conduit level-two units. These exercise nested domains, two-kit composition
-and transitions beyond the existing Berserker path. Exact order follows researched dependencies.
-Continue other ancestries in separate units, with nested/former-ancestry cases such as Revenant
-scheduled when their required ancestry choices are implemented. Complete the other classes,
-including Beastheart and Summoner once their concrete editor dependencies are available, and
-advance through levels 2–3, 4–6, 7–9 and 10, always one class/level per commit. This later sequence
-is planning, not a claim that those classes or levels are supported.
+### Current execution: Opus pilot, then every level-one unit
+
+**User-confirmed execution update, 2026-09-19:** the existing Opus session implements one unit,
+the integration lead reviews its work, and only then may it batch through every ancestry and
+class at level one. Meaningful mistakes or poor code quality must be reported to the user.
+If the trial meets the quality standard, the lead releases the remaining queue without asking
+for routine permission again. This replaces the earlier recommendation to interleave new
+level-two class units before completing level-one coverage; higher levels remain the later target.
+
+Opus implementer: Chords thread `dd05330e-f441-46de-8d3f-c7cff85e8505` (Character Wizard Development).
+Review/integration lead: `9e5c707a-6f45-44d3-8705-2b85efba2f7d` (Assess Parallel Character Options).
+The first trial is **V46 Devil level one**, using the existing
+[source preparation](../research/devil-level-one-preparation.md). Opus owns implementation,
+necessary narrowly scoped shared support, fixtures, real Forge captures and verification evidence.
+The lead does not write the trial implementation and assesses the submitted result independently.
+The existing fresh rules-review requirement remains. The trial must not be merged or expanded
+into another unit before the lead's verdict. Record the actual findings and their severity;
+routine formatting corrections alone do not establish poor implementation quality.
+
+The trial assessment covers source correctness and all option branches, appropriate shared
+contracts and module ownership, readable maintainable code, meaningful independent tests,
+saved-state/parent-change behavior, complete authentic counterpart evidence, truthful verification
+claims, and preservation of existing level-two/editor/live-state boundaries. Material errors in
+any of these areas hold batch release while the lead reports the evidence to the user and has
+Opus repair the trial. Do not silently repair substantive mistakes and then report a clean trial.
+A passing trial is permission to continue the queue, not permission to skip later per-unit review.
+
+The level-one queue has **23 units: twelve core ancestries and eleven included classes**.
+Allocate new slice IDs only as a unit starts. The following is the scheduling queue, not another
+completion tracker; actual assignment, review and merge states remain in `STATUS.md`.
+
+| Order | Units, each at level one in its own commit | Scheduling reason |
+| --- | --- | --- |
+| Trial | Devil | Existing source preparation and partial path; conditional movement and ancestry ability grants provide a meaningful quality trial. |
+| Initial continuation | Polder; Dwarf; Fury; Elementalist | Complete the previously planned first wave and perform its combined audit before continuing. |
+| Remaining ancestries | Dragon Knight; Hakaan; High Elf; Human; Memonek; Orc; Time Raider; Wode Elf; Revenant | Cover all remaining core ancestries; Revenant follows the ancestry options required by its former-life choices. |
+| Remaining core classes | Conduit; Tactician; Censor; Null; Shadow; Talent; Troubadour | Every eligible subclass, nested choice and level-one grant belongs in its class unit; dependency findings may reorder units. |
+| Included supplemental classes | Beastheart; Summoner | Include companion/portfolio editor dependencies and retain supplemental provenance. No live creature-control expansion is implied. |
+| Completion audit | Integrated level-one coverage across all 23 units | Audit option ledgers, meaningful cross-family interactions, existing progression compatibility, saved builds and all retained reference differences. |
+
+After a successful trial, Opus works through these units without requiring a new user instruction
+for each one. It hands each complete unit to the lead for independent review, full verification
+and shared-main delivery. Keep ancestry/class commits separate; do not accumulate one bulk commit
+or merge unchecked units. When a concrete source/reference dependency blocks one unit, record it
+and continue independently ready units within the released queue. Do not mark a blocked unit
+complete or infer permission to waive its verification. Broader work remains paused if findings
+show a recurring quality problem that invalidates the trial decision; report the evidence.
+
+The lead coordinates CT114 heavy jobs and serializes main integration/runtime changes. Opus uses
+its own worktree and the named isolated `characters` slot; shared main remains the user's playable
+app. Local shared merges remain authorized under the existing directive. Remote Git pushes and
+hosted publication are separate actions and are not granted by this execution update.
 
 ### Forge Steel comparison artifacts
 
@@ -240,3 +284,9 @@ validation after the initially empty worktree vendor directories caused missing-
 application tests, builds or browsers were run for this documentation-only change. Integration
 requires no backend/content/frontend update or live feature check because executable files and
 runtime behavior are unchanged. Implementation units and their audits remain pending.
+
+2026-09-19: user started an Opus session and assigned it every level-one ancestry/class, with a
+single implementation-and-review trial before batch release. Sent Chords handoff 192 for V46
+Devil level one and coordination update 193. Current main `88d1e61` includes the verified V45
+foundation. Recorded the 23-unit queue and quality-reporting gate above. Trial implementation,
+quality verdict and batch release are pending; no additional options are certified by this plan.

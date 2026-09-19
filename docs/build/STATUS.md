@@ -316,7 +316,7 @@ records the handoff; it does not certify A09 or create an implementation commit.
 
 | Id | Slice | Status | Owner |
 | --- | --- | --- | --- |
-| V44 | [Character option delivery plan](V44-character-option-delivery.md) | Plan recorded; V45 foundation audited/merged/live, five level-one option units and combined first-wave audit pending. User authorized per-ancestry/class/level commits, same-build Forge verification and incremental verified merges. | Character integration lead with ancestry/class implementers |
+| V44 | [Character option delivery plan](V44-character-option-delivery.md) | V45 foundation audited/merged/live. Opus V46 Devil level-one trial assigned; lead review gates batch release across all 12 core ancestries and 11 classes at level one. Per-unit commits, same-build Forge verification and verified incremental merges remain required. | Character integration lead with ancestry/class implementers |
 
 ## V41 — reference loading and shared navigation
 
