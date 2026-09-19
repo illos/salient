@@ -311,3 +311,9 @@ records the handoff; it does not certify A09 or create an implementation commit.
 | Id | Slice | Status | Owner |
 | --- | --- | --- | --- |
 | V42 | [Primary wizard choice summary](V42-primary-choice-summary.md) | Complete — merged/live `45426dc`; 674 tests, six isolated journeys, two shared checks and independent review; broader Fury timeout limitation recorded | Character wizard thread |
+
+## V44 character option delivery — 2026-09-19
+
+| Id | Slice | Status | Owner |
+| --- | --- | --- | --- |
+| V44 | [Character option delivery plan](V44-character-option-delivery.md) | Plan recorded; foundation, five level-one option units and full audits pending. User authorized per-ancestry/class/level commits, same-build Forge verification and incremental verified merges. | Character integration lead with ancestry/class implementers |

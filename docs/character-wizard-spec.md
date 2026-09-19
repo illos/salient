@@ -864,6 +864,19 @@ for independent work. Deferred research recommendations are not user rulings.
 
 ## 13. Proposed delivery sequence
 
+**Delivery policy confirmed, 2026-09-19:** expand through coordinated ancestry, class and shared
+integration tracks. Each ancestry or class at an individual level gets its own implementation
+commit, with matching Forge Steel builds, a full audit after the initial work and incremental merges
+only after full verification. Existing merge completion includes updating and verifying the shared app.
+The implementation plan interprets these units as all applicable options/branches at that level,
+keeps shared prerequisites separate, and adds audits after both foundation and first-batch work.
+It uses later ancestry commits where sourced behavior changes and recorded carry-forward checks
+for unchanged levels rather than empty commits. These are delivery choices, not additional user rulings.
+See the [current delivery plan](build/V44-character-option-delivery.md) and
+[reference procedure](build/character-verification.md#per-option-delivery-gate).
+This is authorization for bounded post-prototype editor expansion; the older prototype sequence
+below remains historical and does not restrict this assignment.
+
 **Implementation authorized, 2026-09-16:** [V25](build/V25-two-class-wizard.md) delivers a shared
 wizard/evaluator for the existing Fury and the complete supported Bethell Polder Elementalist
 reference path, including its required ancestry/background choices. Verify every trait, feature,

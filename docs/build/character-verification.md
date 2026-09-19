@@ -128,6 +128,37 @@ useful class findings for the parser, engine and UI tracks: timing, grant recipi
 dependencies, verified cases and unresolved questions. Do not generalize a single example or
 case-specific user ruling into an unverified class-wide rule.
 
+## Per-option delivery gate
+
+**Confirmed by the user, 2026-09-19.** Deliver each ancestry or class at an individual level in
+its own implementation commit, compare options with Forge Steel counterparts of the same build,
+run a full audit after the initial work, and merge each commit once full verification passes.
+The [initial delivery plan](V44-character-option-delivery.md) defines the engineering scope of each
+unit as all applicable branches/options, keeps shared prerequisites separate, uses carry-forward
+checks for unchanged ancestry levels, and schedules foundation plus first-batch audits. Those are
+implementation choices under the confirmed policy, not separately confirmed product rulings.
+
+Maintain an option-to-fixture ledger: every delivered selectable option appears in at least one
+legal completed Forge Steel counterpart with the same build in Salient. Cover nested selections,
+automatic grants and derived values as well as displayed option names. Use multiple counterparts
+for mutually exclusive choices and meaningful interactions; a full Cartesian product is unnecessary.
+Retain portable raw exports, readable Forge evidence, exact selections, versions and independently
+source-derived expectations. Historical examples count only for the behavior their retained evidence
+actually proves; an inspected export or a Salient-only fixture is not a parity pass.
+
+Unexplained mismatches block verification. Source-backed Forge differences require a recorded
+explanation and independent review. If Forge cannot represent the same source-legal build, record
+the precise limitation and closest comparison, mark exact counterpart coverage incomplete, and
+resolve that gap before claiming the unit fully verified. Never silently waive counterpart coverage.
+
+Before merging each implementation commit, complete full repository and browser checks on the
+integration candidate, persisted readbacks, independent implementation/rules reviews and the
+existing commit gate. Then update and verify the actual shared development app under the standing
+merge-completion procedure. Run a full independent audit after the initial shared foundation and
+again across the first integrated option batch, including cross-option interactions and regressions.
+This user authorization covers incremental verified merges; no further routine merge permission
+is required. Failing required checks remain blockers, including unresolved runtime timeouts.
+
 ## Existing examples and format research
 
 - [Actual live Elementalist export inspection](../forge-steel-interchange.md#live-export-inspection--2026-09-15)
