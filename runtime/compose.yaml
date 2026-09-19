@@ -64,11 +64,20 @@ services:
       - ${DEV_CONFIG:?provided by presidium-dev}:/runtime-config:ro
       - ${DEV_ARTIFACTS}:/artifacts
     command: [node, runtime/backend.mjs]
+    # The ready marker alone survives the Rust backend's death; see runtime/healthcheck.mjs.
+    # Absolute path so the probe does not depend on the exec's working directory.
+    # start_period covers backend.mjs's own bounded startup (120s endpoint wait, then 180s push
+    # wait): failures inside it leave the container `starting`, exactly as the former 60 retries did,
+    # so `web`'s service_healthy gate is unchanged. Note the cost of that: a backend that dies inside
+    # the start period is reported `starting`, never `unhealthy`, for the rest of it.
+    # After the start period, 5 consecutive failures is under a minute of a backend that cannot name
+    # itself. The former 60 retries would have taken five minutes.
     healthcheck:
-      test: [CMD, node, -e, "require('fs').accessSync('/tmp/backend-ready')"]
+      test: [CMD, node, /app/runtime/healthcheck.mjs]
       interval: 5s
       timeout: 3s
-      retries: 60
+      retries: 5
+      start_period: 300s
     stop_grace_period: 30s
 
   web:

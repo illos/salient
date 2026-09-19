@@ -335,3 +335,9 @@ records the handoff; it does not certify A09 or create an implementation commit.
 | Id | Slice | Status | Owner |
 | --- | --- | --- | --- |
 | V45 | [Character option foundation](V45-character-option-foundation.md) | Complete — merged/live `ebe66e2`; 691 tests, 5,584 exact comparisons, 49 applicable browser successes and two shared checks; both audits pass; initial timeout/retry limits retained; no new options enabled | Character integration lead and subagents |
+
+## V55 backend health — 2026-09-19
+
+| Id | Slice | Status | Owner |
+| --- | --- | --- | --- |
+| V55 | [Backend health](V55-backend-health.md) | In review — `slice/V55` in `/srv/presidium/projects/salient/opus-health` from `cf7c24a`; live-endpoint healthcheck behind the startup ready marker, ten tests. Verified locally by throwaway harnesses running the script as Compose does; `pnpm check`, eslint, prettier, tsc and every Compose/Docker claim are unverified, and the CT114 unit run plus the kill-the-backend regression are pending and owned by root | Opus infrastructure, slice/V55 |
