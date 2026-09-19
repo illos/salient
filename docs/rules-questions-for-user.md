@@ -829,70 +829,45 @@ No user approval is implied by this classification.
   does not enable unrelated supplements/homebrew or claim implemented table support. Forge Steel
   remains a structural and import/export reference; Compendium remains rules authority.
 
-### Q-CHAR-16: When is Ward of Excellent Protection's damage type chosen, and can it change?
+### Q-CHAR-16: When is Ward of Excellent Protection's damage type chosen? — WITHDRAWN
 
-- **Status:** open
-- **Raised by:** V48 Elementalist level-one preparation, 2026-09-19
-- **Where:** [character specification](character-wizard-spec.md#3-decision-system);
-  `vendor/steel-compendium/en/unified/md/feature/elementalist/level-1/ward-of-excellent-protection.md`;
-  `vendor/steel-compendium/en/unified/md/feature/elementalist/level-1/elementalist-ward.md`;
-  `vendor/steel-compendium/en/unified/md/rule/damage/damage-immunity.md`;
-  corroborating: `vendor/steel-compendium/en/unified/md/feature/conduit/level-7/natures-bounty.md`
-- **Conflict or gap:** An independent Compendium-only review concluded that the ward grants immunity
-  equal to Reason to **one** damage type from acid, cold, corruption, fire, lightning, poison or
-  sonic, because Conduit and Censor Nature's Bounty use the identical "or" clause and disambiguate
-  it with "choosing a different damage immunity each time", while five other entries use "and" for
-  the simultaneous reading. That is a **labelled interpretation**, strongly grounded in the corpus
-  but not stated outright by the ward's own text, and it is the implementation's working assumption
-  rather than a settled fact. Separately, and regardless of how many types are granted, the pin does
-  not settle *when* the type is
-  chosen. The owning feature permits changing **which ward** you have by a complex ritual as a
-  respite activity, and says nothing about the damage type inside a ward. The pinned Compendium
-  does not state the timing anywhere.
-- **Options:** A: chosen once during character creation and then fixed. B: chosen at the same
-  respite ritual that already permits swapping wards, so it moves with the ward. C: chosen anew
-  each time the immunity would apply.
-- **Recommendation:** B. It is the nearest stated analogue in the owning feature, and it keeps the
-  selection an explicit recorded build choice rather than a hidden play-time decision. C has no
-  support in the pinned text. (An earlier draft also argued C would make the ward's value
-  "unbounded in practice"; that was a balance argument, not rules authority, and it is not even
-  accurate for an immunity sized by the Reason score. It is withdrawn.) If the user prefers A, the
-  wizard behavior is unchanged and only the later respite workflow differs.
-- **Blocked until answered:** nothing blocking under A or B, where the level-one build choice is
-  identical and only respite reselection — already out of V48's scope — differs. **Answer C would
-  invalidate V48's design**: if the type is chosen afresh each time the immunity applies, there is
-  no build-time damage-type decision at all, and the nested decision plus its seven witness builds
-  would be wrong. V48 proceeds on the A-or-B assumption and records it as an assumption. No default
-  is silently applied to anything the user can see at level one.
-- **Answer:** (user fills in)
+- **Status:** withdrawn 2026-09-19, not a user question. Resolved for level one by a labelled
+  interpretation recorded in [the V48 slice](build/V48-elementalist-level-one.md). The id is
+  preserved so the history is traceable; no user ruling is required.
+- **Why withdrawn:** the level-one behaviour is settled by the source. The ward grants immunity equal
+  to Reason to **one** chosen damage type, and the type is fixed when the ward is selected, which at
+  level one is character creation. `feature/elementalist/level-1/elementalist-ward.md` makes the ward
+  itself a build selection ("Choose one of the following wards"), and the Compendium states a
+  non-build selection moment every time it means one — `hurl-element.md` "When you make this strike,
+  choose the damage type", `grand-wyrding.md` "when you have 5 or more Victories, choose one",
+  `wyrmplate.md` "You can change your damage immunity type when you finish a respite". The ward
+  states no such moment, so the selection sits with its parent choice.
+- **Residual uncertainty, recorded not defaulted:** whether a character keeping the same ward may
+  re-pick the type during the complex respite ritual that changes wards. The pin does not say. That
+  is **out of V48's scope** — respite reselection is not level-one behaviour — and V48 asserts
+  nothing about it either way.
 
-### Q-CHAR-17: Do two sourced distance increases stack on the same ability?
+### Q-CHAR-17: Do two sourced distance increases stack on the same ability? — WITHDRAWN
 
-- **Status:** open
-- **Raised by:** V48 Elementalist level-one preparation, 2026-09-19
-- **Where:** [character specification](character-wizard-spec.md#3-decision-system);
-  `vendor/steel-compendium/en/unified/md/feature/elementalist/level-1/enchantment-of-distance.md`;
-  `vendor/steel-compendium/en/unified/md/feature/elementalist/level-1/void-acolyte-of-the-mystery.md`;
-  `vendor/steel-compendium/en/unified/md/rule/dice/bonuses-and-penalties.md`;
-  `vendor/steel-compendium/en/unified/md/rule/combat/distance.md`
-- **Conflict or gap:** A Void elementalist who also takes Enchantment of Distance has two sourced
-  distance increases that both reach an ability with the Magic, Ranged and Void keywords: the
-  enchantment's "+2 bonus to the distance of your ranged magic abilities" and the acolyte benefit's
-  "the distance of all your abilities that have the Magic, Ranged, and Void keywords increases by 2
-  squares". The pin does not say whether they combine. The Bonuses and Penalties rule says bonuses
-  "always add together", but every sentence of it is scoped to power rolls, and the acolyte benefit
-  is not even phrased as a bonus. The Distance rule does contain one non-stacking sentence — only
-  one Cloak and Dagger bonus applies to an ability with both Melee and Ranged keywords. **That
-  sentence is about weapon damage bonuses, not distance** — it concerns the kit's melee and ranged
-  *damage* bonuses and merely happens to sit on the Distance page. So the pin states no stacking
-  rule for distance in either direction.
-- **Options:** A: both apply, total +4. B: only the larger applies, total +2. C: they are distinct
-  effects that the Director adjudicates per ability.
-- **Recommendation:** A, on the grounds that the two effects come from independent sources and the
-  pin states no general non-stacking rule for distance. This is a recommendation, not a derivation;
-  an earlier draft of the V48 plan asserted +4 as a derived expectation and that assertion has been
-  withdrawn as unsupported.
-- **Blocked until answered:** nothing. V48 records two independent contributions with separate
-  provenance, which is correct under every option, and its reference builds witness each at +2 in
-  isolation. Only a combined displayed distance figure depends on the ruling.
-- **Answer:** (user fills in)
+- **Status:** withdrawn 2026-09-19, not a user question. Resolved by a labelled interpretation
+  recorded in [the V48 reference plan](research/v48-elementalist-reference-plan.md). The id is
+  preserved; no user ruling is required.
+- **Why withdrawn:** the interpretation is **+4** — both increases apply, recorded as two
+  contributions with separate provenance. The source names its non-stacking cases explicitly and
+  names none for distance: `rule/damage/damage-immunity.md` (highest applies),
+  `rule/damage/damage-weakness.md`, `chapter/classes.md` for repeats of the same ability and for
+  duplicated game effects. `chapter/kits.md` has a dedicated Distance Bonus section whose only
+  stated limitation is that a distance bonus does not increase an area of effect.
+- **Correction to an earlier draft:** it claimed "the pin states no stacking rule for distance in
+  either direction". That is wrong in the combining direction. `chapter/classes.md` §Stacking Unique
+  Effects says "The unique effects of different abilities are combined—effectively stacking on top
+  of each other—if their durations and targets overlap." Two different features are not the same
+  ability.
+- **Honest limit on that citation:** §Stacking Unique Effects sits in the Abilities section and is
+  written about *abilities* with overlapping durations and targets, not as a universal
+  feature-bonus theorem; and the "bonuses and penalties always add together" sentence in
+  `rule/dice/bonuses-and-penalties.md` sits in a paragraph framed around power rolls. Neither is
+  being treated as a global rule, and neither is required to be: the interpretation rests on the
+  combining default plus the absence of any stated distance exception. No sentence in the pin
+  literally addresses two feature-granted distance increases, which is why this is labelled an
+  interpretation rather than a derivation.

@@ -180,8 +180,7 @@ enchantment and ward by performing a complex ritual as a respite activity." Resp
 **The "or" in Ward of Excellent Protection is a selection of one damage type, not simultaneous
 immunity to all seven.** An earlier draft of this document justified that reading from Forge's
 seven-way encoding plus a balance argument. Both were invalid — a third-party tool's structure is not
-rules authority, and balance reasoning is not source text. The reading was re-established by an
-independent Compendium-only review, and the corpus evidence is decisive:
+rules authority, and balance reasoning is not source text. The corpus evidence is what establishes it:
 
 - **The disambiguated twin.** Conduit and Censor *Nature's Bounty*
   ([conduit](../../vendor/steel-compendium/en/unified/md/feature/conduit/level-7/natures-bounty.md),
@@ -207,11 +206,16 @@ I verified each quoted line against the pin myself rather than relying on the re
 counter-argument is recorded: the ward's flavour sentence says "a shield of **all** the elements …
 their **full** protective power". It is rejected because all four wards open with a non-mechanical
 flavour sentence in that slot, "full protective power" is not a defined term anywhere in the pin, and
-flavour cannot override a phrasing discipline demonstrated across eight texts with no exception.
+flavour cannot override a phrasing discipline the corpus keeps without exception. Stated precisely:
+five entries use the "and" form for a simultaneous immunity grant, of which **three** use the
+identical seven-type list (Fury Elemental Form, Chaos Incarnate, Null Elemental Absorption) and two
+use shorter lists (Revenant Tough but Withered, the Mundane complication). An earlier draft said
+"eight texts", a number that was not derivable from any stated grouping.
 
-The review did surface a genuinely unresolved sub-question — *when* the damage type is chosen and
-whether it can change — which is recorded as [Q-CHAR-16](../rules-questions-for-user.md) and blocks
-nothing at level one.
+The timing of the damage-type choice is settled for level one and recorded under
+[the interpretations below](#ward-of-excellent-protection--one-damage-type-chosen-with-the-ward-was-q-char-16):
+the type is fixed when the ward is selected. Only respite re-picking while keeping the same ward
+remains unstated in the pin, and that is out of this unit's scope.
 
 ### Signature abilities — choose 2 of 8
 
@@ -646,24 +650,74 @@ drop threshold. Respite reselection of enchantment and ward. Triggered-action ex
 armor and treasure modelling beyond recording Enchantment of Battle's conditions. Import/export
 adapters. Any change to Fury, Devil or Polder behavior beyond the shared merge required by gap B.
 
-## Open questions
+## Recorded interpretations
 
-[Q-CHAR-16](../rules-questions-for-user.md) — when Ward of Excellent Protection's damage type is
-chosen and whether it can change. Raised by this preparation from the independent rules review.
-**It blocks nothing at level one**: the build-time choice is identical under the two plausible
-readings, and only respite reselection, already out of scope here, depends on the answer.
+Both questions this unit raised are **withdrawn**; neither is a user question. Each is resolved by a
+labelled interpretation, recorded here in the owning document with its citations. The ids are
+preserved in [the questions file](../rules-questions-for-user.md) so the history stays traceable.
 
-[Q-CHAR-17](../rules-questions-for-user.md) — whether Void's Acolyte of the Mystery and Enchantment
-of Distance stack on an ability with the Magic, Ranged and Void keywords. An earlier draft asserted
-+4 as a derived expectation; that was a guess dressed as a derivation and is withdrawn. **It blocks
-nothing**: gap A's recommendation records two independent contributions with their own provenance,
-builds 8 and 9 witness each at +2 in isolation, and no level-one implementation decision needs a
-combined number.
+### Ward of Excellent Protection — one damage type, chosen with the ward (was Q-CHAR-16)
 
-The ward's one-type-of-seven reading remains a **labelled interpretation**, strongly grounded in the
-corpus as recorded above but not stated outright by the ward's own text. It needs the independent
-rules reviewer's verdict before the implementation commit, not merely this document's reasoning. The Enchantment of Battle representation (finding D) is an engineering decision
-needing the integration owner's agreement, not a rules question.
+**Interpretation, grounded and labelled.** The ward grants immunity equal to the Reason score to
+**one** chosen damage type, and the type is fixed when the ward is selected — at level one, that is
+character creation.
+
+For *one type*: Conduit and Censor Nature's Bounty
+([conduit](../../vendor/steel-compendium/en/unified/md/feature/conduit/level-7/natures-bounty.md),
+[censor](../../vendor/steel-compendium/en/unified/md/feature/censor/level-7/natures-bounty.md))
+carry byte-identical text using the same seven-type "or" list for an immunity grant and disambiguate
+it — "You can choose this benefit twice, choosing a different damage immunity each time." A benefit
+granting all seven could not be meaningfully chosen twice. The duplication across two classes is
+what makes this corpus-wide rather than a one-off.
+[Damage Immunity](../../vendor/steel-compendium/en/unified/md/rule/damage/damage-immunity.md) adds
+that an immunity instance carries one type: "expressed as '[damage type] immunity.'" Where the
+corpus means simultaneous immunity to a whole list it writes "and" — five entries do, of which
+**three** use the identical seven-type list (Fury Elemental Form, Chaos Incarnate, Null Elemental
+Absorption) and two use shorter lists (Revenant Tough but Withered, the Mundane complication).
+
+For *timing*: the Compendium states a non-build selection moment every time it means one — Hurl
+Element "When you make this strike, choose the damage type", Grand Wyrding "when you have 5 or more
+Victories, choose one", Wyrmplate "You can change your damage immunity type when you finish a
+respite". The ward states no moment, and its owning feature makes the ward itself a build selection:
+"Choose one of the following wards."
+
+Alternatives considered. "Chosen afresh each time the immunity applies" is not merely unsupported
+but contradicted: that is the construction Null's Elemental Absorption uses, written with "and" plus
+"against the triggering damage", and the ward uses neither.
+
+**Residual uncertainty, recorded and not defaulted:** whether a character keeping the same ward may
+re-pick the type during the complex respite ritual that changes wards. The pin does not say. It is
+**out of this unit's scope** — respite reselection is not level-one behaviour — and V48 asserts
+nothing about it.
+
+### Two distance increases combine for +4 (was Q-CHAR-17)
+
+**Interpretation, grounded and labelled.** A Void elementalist who also takes Enchantment of
+Distance has both increases apply: **+4** squares on an ability with the Magic, Ranged and Void
+keywords, recorded as two contributions with separate provenance.
+
+The source names its non-stacking cases explicitly and names none for distance — damage immunity
+(highest applies), damage weakness, repeats of the same ability, and duplicated game effects.
+[Kits](../../vendor/steel-compendium/en/unified/md/chapter/kits.md) has a dedicated Distance Bonus
+section whose only stated limitation is that a distance bonus does not increase an area of effect.
+In the combining direction, [Classes](../../vendor/steel-compendium/en/unified/md/chapter/classes.md)
+§Stacking Unique Effects says "The unique effects of different abilities are combined—effectively
+stacking on top of each other—if their durations and targets overlap", and two different features
+are not the same ability.
+
+**Two honest limits on that grounding, neither waved away.** §Stacking Unique Effects sits in the
+Abilities section and is written about abilities with overlapping durations and targets, not as a
+universal feature-bonus theorem; and the "bonuses and penalties always add together" sentence sits
+in a paragraph framed around power rolls. Neither is treated here as a global rule, and the
+interpretation does not need one: it rests on the combining default plus the absence of any stated
+distance exception. No sentence in the pin literally addresses two feature-granted distance
+increases.
+
+An earlier draft of this unit asserted that "the pin states no stacking rule for distance in either
+direction". That was wrong in the combining direction and is corrected above. A still earlier draft
+treated the Cloak and Dagger sentence as a distance non-stacking rule; it governs weapon damage
+bonuses and exists to illustrate that an ability never has both the Melee and Ranged keywords, so it
+is doubly inapplicable here.
 
 ## Work log
 

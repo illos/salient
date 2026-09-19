@@ -158,42 +158,21 @@ string on the sheet is presentation only and does not gate that path.
 The third clause — "You can use light armor treasures and light weapon treasures" — is a capability
 with no amount. It is a readable feature grant, not a `ConditionalEffect`.
 
-### Build 4 — the one stacking question, now an open rules question
+### Build 4 — two distance contributions, combining to +4
 
-Build 4 selects Void (+2 distance on Magic+Ranged+Void) **and** Enchantment of Distance (+2 distance
-on ranged magic). A Magic+Ranged+Void ability qualifies for both.
+Build 4 selects Void (+2 distance on Magic+Ranged+Void) **and** Enchantment of Distance (+2 on
+ranged magic). A Magic+Ranged+Void ability qualifies for both.
 
-An earlier draft recorded **+4** as a derived expectation. **Withdrawn.** The pin does not resolve
-it, and the grounds offered were weaker than the label suggested:
+**Expected: +4**, as a labelled interpretation, recorded as two contributions with separate
+provenance. The grounding and its two honest limits are in
+[the slice document](../build/V48-elementalist-level-one.md#two-distance-increases-combine-for-4-was-q-char-17):
+the source names its non-stacking cases explicitly and names none for distance, and the combining
+direction has support in the Classes chapter's Stacking Unique Effects — while neither that text nor
+the bonuses-and-penalties paragraph is being treated as an unqualified global theorem.
 
-- [Bonuses and Penalties](../../vendor/steel-compendium/en/unified/md/rule/dice/bonuses-and-penalties.md)
-  says bonuses "always add together", but every sentence of it is scoped to **power rolls**, not
-  distance.
-- Worse, it does not lexically reach one of the two effects. Enchantment of Distance says "+2
-  **bonus** to the distance"; Acolyte of the Mystery says the distance "**increases by 2 squares**"
-  and links no bonus rule at all.
-- The nearest thing to a non-stacking rule sits on the
-  [Distance](../../vendor/steel-compendium/en/unified/md/rule/combat/distance.md) page but is not
-  about distance: "the Cloak and Dagger kit, which has a **weapon damage bonus** to melee abilities
-  and a **weapon damage bonus** to ranged abilities, only one bonus at a time applies to an ability
-  with both the Melee and Ranged keywords." That governs weapon damage bonuses for mode-exclusive
-  alternatives; it merely lives on the Distance page. A second draft of this document called it a
-  "distance-scoped non-stacking sentence", which was inaccurate and is corrected here. The honest
-  statement is the original one: the pin states no stacking rule for distance either way.
-
-Recorded as [Q-CHAR-17](../rules-questions-for-user.md) and **blocking nothing**. The build records
-two independent distance contributions, each with its own provenance, which is what gap A's
-recommended representation produces anyway. Build 9 witnesses Distance without Void and build 8
-witnesses Void without Distance, both at +2, so each input is independently established.
-
-**Ledger limitation, to be carried explicitly and not quietly dropped.** Displaying two separate
-contributions is an honest partial representation, but it is not the same as establishing the
-effective combined distance. **Build 4 must therefore not be labelled a fully verified counterpart
-for the Void-plus-Distance combination while Q-CHAR-17 is open.** Its two individual contributions
-are verified; its combined effective value is *not verified*, and the option ledger records that in
-those words. Enchantment of Distance and Acolyte of the Mystery each remain fully covered as
-individual options through builds 9 and 8, which carry no such limitation, so the unit's 29-option
-coverage does not depend on build 4's combination being resolved.
+This was an open question (Q-CHAR-17) in earlier drafts and is now withdrawn; no user ruling is
+required. Builds 9 and 8 still witness each contribution at +2 in isolation, so the two inputs are
+independently established as well as their combination.
 
 ## Enchantment of Battle's kit exclusion — recorded, not enforced
 
