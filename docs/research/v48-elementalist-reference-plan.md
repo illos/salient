@@ -119,7 +119,13 @@ Sense, Subtle Relocation); the other three grant three each.
 
 **Build 4 is the immunity-merge case.** Its ward type is corruption, which collides with Polder's
 Corruption Immunity 3. Expected result: a **single** `damageImmunities` entry, `corruption` valued
-**3**, retaining both provenance chains. Not two entries, and not 5 —
+**3**, retaining both provenance chains.
+
+**The value alone is not discriminating here and must not be the only assertion.** Corruption is the
+one damage type whose ward grant (Reason 2) is masked by Polder's 3, so an implementation that
+dropped the ward contribution entirely would still produce 3 and pass a value check. Build 4's
+expectation must additionally assert that the merged entry's provenance contains **both** an
+`ancestry.polder.purchased-traits` entry and a `class.elementalist.ward` entry. Not two entries, and not 5 —
 [Damage Immunity](../../vendor/steel-compendium/en/unified/md/rule/damage/damage-immunity.md) states
 that only the highest value applies. Builds 2, 3, 5, 6, 7 and 8 each expect **two** independent
 entries: Polder corruption 3 plus the chosen type at 2.
@@ -152,23 +158,33 @@ string on the sheet is presentation only and does not gate that path.
 The third clause — "You can use light armor treasures and light weapon treasures" — is a capability
 with no amount. It is a readable feature grant, not a `ConditionalEffect`.
 
-### Build 4 — the one stacking question
+### Build 4 — the one stacking question, now an open rules question
 
 Build 4 selects Void (+2 distance on Magic+Ranged+Void) **and** Enchantment of Distance (+2 distance
 on ranged magic). A Magic+Ranged+Void ability qualifies for both.
 
-**Expected: +4**, labelled an interpretation. Grounds: they are two independently sourced increases
-and the pin contains no non-stacking rule for distance;
-[Bonuses and Penalties](../../vendor/steel-compendium/en/unified/md/rule/dice/bonuses-and-penalties.md)
-states "bonuses and penalties always add together", although its own text is scoped to power rolls,
-so applying it to distance is an extension rather than a direct citation. **Alternative considered:**
-only the larger applies, as with damage immunity — rejected because the immunity rule states its
-own exception explicitly and no equivalent text exists for distance.
+An earlier draft recorded **+4** as a derived expectation. **Withdrawn.** The pin does not resolve
+it, and the grounds offered were weaker than the label suggested:
 
-The matrix isolates both inputs so this does not contaminate the rest: build 9 has Distance without
-Void (expect +2) and build 8 has Void without Distance (expect +2). Only the combined value in
-build 4 depends on the reading. If the independent rules reviewer rejects +4, only build 4's
-combined expectation changes; no other build and no implementation decision is affected.
+- [Bonuses and Penalties](../../vendor/steel-compendium/en/unified/md/rule/dice/bonuses-and-penalties.md)
+  says bonuses "always add together", but every sentence of it is scoped to **power rolls**, not
+  distance.
+- Worse, it does not lexically reach one of the two effects. Enchantment of Distance says "+2
+  **bonus** to the distance"; Acolyte of the Mystery says the distance "**increases by 2 squares**"
+  and links no bonus rule at all.
+- The earlier draft also asserted flatly that "the pin contains no non-stacking rule for distance".
+  That overstates. [Distance](../../vendor/steel-compendium/en/unified/md/rule/combat/distance.md)
+  contains one: "if you have the Cloak and Dagger kit, which has a weapon damage bonus to melee
+  abilities and a weapon damage bonus to ranged abilities, **only one bonus at a time applies** to an
+  ability with both the Melee and Ranged keywords." It does **not** govern build 4 — the two
+  Elementalist increases are not mode-exclusive alternatives — but a distance-scoped non-stacking
+  sentence does exist, so absence cannot be asserted.
+
+Recorded as [Q-CHAR-17](../rules-questions-for-user.md) and **blocking nothing**. The build records
+two independent distance contributions, each with its own provenance, which is what gap A's
+recommended representation produces anyway. Build 9 witnesses Distance without Void and build 8
+witnesses Void without Distance, both at +2, so each input is independently established. Only a
+combined displayed figure would depend on the ruling.
 
 ## Enchantment of Battle's kit exclusion — recorded, not enforced
 
@@ -205,6 +221,7 @@ Normalization required before comparison, all label-only, no mechanical effect:
 | No More Than a Breeze | No More than a Breeze |
 | Void: Acolyte of the Mystery | Acolyte of the Void |
 | Fire: Acolyte of Fire | Acolyte of Fire |
+| Green: Acolyte of the Green | Acolyte of the Green |
 
 Forge feature shapes the helper must newly recognize, beyond what V45 supports:
 
@@ -212,8 +229,9 @@ Forge feature shapes the helper must newly recognize, beyond what V45 supports:
   sub-options (`elementalist-1-8ba`…`bg`), each a `createDamageModifier` with
   `createCharacteristic({ characteristics: [Reason], modifierType: Immunity })`. The selected
   sub-option is the ward's damage type; the unselected six are catalog, not grants.
-- `createMultiple` for Enchantment of Battle and Enchantment of Permanence, whose child features
-  carry the actual `Stamina`/`Speed`/`Disengage`/`Stability` bonuses and a `createProficiency`.
+- `createMultiple` for Enchantment of Battle, Enchantment of Celerity and Enchantment of
+  Permanence, whose child features carry the actual bonuses: `Stamina` and a `createProficiency`
+  for Battle, `Speed` and `Disengage` for Celerity, `Stamina` and `Stability` for Permanence.
 - `createAbilityDistance` for Enchantment of Distance and Void's acolyte — a shape with no Salient
   counterpart until the new distance contribution exists.
 - `createSurgeGain` for Ward of Delightful Consequences.
@@ -222,11 +240,30 @@ Forge feature shapes the helper must newly recognize, beyond what V45 supports:
 Two expected, source-backed comparison differences to record rather than resolve:
 
 1. **Enchantment of Battle Stamina.** Forge applies `valuePerEchelon: 3` unconditionally; the source
-   gates it on wearing light armor. The witness must state the condition assumption and compare both
-   builders under the same one. Assuming light armor worn, both give +3 and agree. Salient's
-   baseline Stamina of 18 is correct for an unstated equipment state and is not a mismatch.
-2. **Enchantment of Battle weapon damage.** Same shape: Forge's unconditional `Weapon`-keyword +1
-   against our conditional record.
+   gates it on wearing light armor.
+
+   **An unchanged base Stamina of 18 does not by itself certify a worn-light-armor counterpart.**
+   If the witness states the assumption "light armor worn", the comparison must evaluate our
+   conditional amount *under that assumption* and show 21 against Forge's 21. Reporting 18 against
+   21 and calling the difference explained would be a vacuous comparison: it compares two different
+   equipment states and then excuses the gap with our own missing fact. That is precisely what the
+   per-option delivery gate forbids.
+
+   This means the comparison needs a way to resolve a `ConditionalEffect` under a stated condition
+   assumption — a read-side projection for the ledger only, never a change to
+   `staminaMaximum` and never anything automatic. Two candidate shapes, for the integration owner:
+   evaluate the ledger's expected totals from `conditionalEffects` in the comparison helper, or add
+   an explicitly-labelled derived "with stated conditions met" projection that no resolution path
+   reads. The first is narrower and is the recommendation.
+
+   The alternative is to declare exact counterpart coverage for Enchantment of Battle **incomplete**
+   and record the precise limitation, per
+   [character-verification.md](../build/character-verification.md#per-option-delivery-gate). That is
+   an acceptable honest outcome, but it must be stated as incomplete rather than dressed as a pass.
+
+2. **Enchantment of Battle weapon damage.** Same shape and the same requirement: Forge's
+   unconditional `Weapon`-keyword +1 against our conditional record, compared under a stated
+   wielding assumption or else marked incomplete.
 
 ## Capture plan
 

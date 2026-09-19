@@ -59,8 +59,9 @@ the unified entries.
 
 Throughout, `feature/elementalist/level-1/<slug>.md` is the feature wrapper (it carries a
 `subclass:` frontmatter key) and `feature/ability/elementalist/level-1/<slug>.md` is the ability
-stat block. Motivate Earth and Return to Formlessness exist at both paths; the specialization
-table links the ability path. The existing module already follows this split and must keep it.
+stat block. Motivate Earth, Return to Formlessness, Hurl Element and Practical Magic all
+exist at both paths. The specialization table links the ability path, while the existing content
+module grants Hurl Element and Practical Magic from the feature path; preserve each as it stands. The existing module already follows this split and must keep it.
 
 ## Current supported state
 
@@ -76,7 +77,7 @@ choices, not their classes, subclasses or abilities." `class.elementalist.skills
 widened; `class.elementalist.skill.magic` is `automatic` and is skipped.
 
 Crucially, `supportedInV001` does **not** produce options. `basePoolOf`
-(`shared/evaluate/structure.ts:182-198`) returns `decision.options` when present, otherwise the
+(`shared/evaluate/structure.ts:183-199`) returns `decision.options` when present, otherwise the
 `optionsFrom` pools; `isSupported` (`structure.ts:341-347`) only marks a value as offered-or-not.
 An unsupported value is rendered disabled as "— not offered yet"
 (`web/wizard/index.tsx:142-151`) and, if selected headlessly, is kept and flagged `unsupported`
@@ -366,8 +367,9 @@ order-sensitive; and `tests/fixtures/v25-bethell.json:142-144` stores
 Merging at the producer keeps all three valid; appending would break the first and make the second
 depend on insertion order.
 
-**Pre-existing defect found while tracing this, outside V48's scope and reported to the integration
-owner rather than fixed here:** `damageTargetFacts` in `convex/lib/resolve.ts:634-641` populates
+**Pre-existing defect found while tracing this. Outside V48's scope and not fixed here; recorded in
+this document and in this unit's STATUS row so it is tracked in the checkout rather than only in a
+Chords message, and handed to V46 whose Wings grant depends on it:** `damageTargetFacts` in `convex/lib/resolve.ts:634-641` populates
 `immunities` from the hero baseline but never reads `baseline.damageWeaknesses`, although
 `DamageTargetFacts.weaknesses` exists and the foe branch populates it. **Hero damage weaknesses are
 currently inert in automatic damage application.** Relatedly, the complication sentinel
@@ -405,6 +407,14 @@ What is actually missing is narrow:
    adds to it afterwards, so the ordering point exists; only the field entry is missing.
 3. The recompute guard at `character.ts:1013-1014` triggers on complication modifiers only; it must
    also trigger when a class feature changed Stamina.
+4. **`amountOf` recognises a closed literal vocabulary and silently skips anything else.**
+   `character.ts:925-934` matches exactly `'3 * echelon'`, `'level'`, `'level - 1'` and
+   `'highest characteristic'`; anything else returns `undefined`, and `character.ts:966` then does
+   `if (amount === undefined) continue`. **`'6 * echelon'` is not in that vocabulary**, so
+   Enchantment of Permanence's +6 Stamina would evaluate to nothing, with no diagnostic and no type
+   error, and the build would report Stamina 18 instead of 24. Either add the literal or express
+   echelon multipliers numerically. This is exactly the silent-default failure the project forbids,
+   and an earlier draft of this document missed it while calling the echelon precedent "exact".
 
 **Recommendation:** generalise the existing loop to accept sourced modifiers from a class-feature
 contributor and add `disengage` to `numericFields`. No new framework, and existing provenance and
@@ -431,8 +441,16 @@ separate from `abilityModifiers`, which damage resolution applies automatically,
 `damageWeaknesses`, which is displayed as always in effect: nothing reads this list to change a roll
 or a pool."
 
-**Smallest extension:** add two members to the existing `effect` union. No new field, no new
-interface, no consumer change.
+**Smallest extension:** add two members to the existing `effect` union, **plus their two label
+entries** in `ConditionalBuildFacts` (`web/wizard/supporting-components.tsx`, reused by
+`web/character-sheet/sections.tsx`), which keys an exhaustive record literal on every union member
+and indexes it with `effect.effect`. Omitting the labels is a type error — loud, not silent, but it
+is a consumer change and an earlier draft wrongly claimed there was none. No new field, no new
+interface, and no evaluator or damage-resolution consumer changes.
+
+`amount` is `DerivedValue<number>`, so each entry carries provenance as well as the number: the
+decision id `class.elementalist.enchantment`, the selection, and the sourced sentence from
+`enchantment-of-battle.md`.
 
 | `effect` member | Feature | Verbatim condition | Amount at level one |
 | --- | --- | --- | ---: |
@@ -480,9 +498,12 @@ Compendium is the authority; the comparison helper needs normalization for:
 | No More Than a Breeze | No More than a Breeze |
 | Void: Acolyte of the Mystery | Acolyte of the Void |
 | Fire: Acolyte of Fire | Acolyte of Fire |
+| Green: Acolyte of the Green | Acolyte of the Green |
 
-Forge's own acolyte prefixing is inconsistent across the four specializations. These are label
-differences only; no mechanical difference is implied.
+Earth is the only acolyte whose name matches exactly (`Earth: Acolyte of Earth`); Forge drops the
+specialization prefix for the other three. These are label differences only; no mechanical
+difference is implied. An earlier draft omitted the Green row, which would have produced a false
+mismatch on builds 3 and 7.
 
 ## Proposed same-build reference matrix
 
@@ -541,15 +562,17 @@ heroic pool appear at least once.
 Independent checks each build must carry, derived from the Compendium before our evaluator runs:
 
 - Build 1: unchanged Bethell values; Stamina 18, no speed/stability change.
-- Builds 2, 7: speed 6 → 7 and Disengage 1 → 2 from Celerity, on top of Polder's baseline.
+- Builds 2, 7: speed **5 → 6** and Disengage **2 → 3** from Celerity. Polder's baseline is speed 5,
+  and its disengage of 2 already includes Graceful Retreat's +1 over the no-kit base of 1.
 - Builds 3, 8: Enchantment of Battle Stamina **unchanged at 18** with the light-armor condition
   recorded and unsatisfied; expect and explain the Forge +3 difference.
 - Builds 5, 10: Stamina 18 → 24, stability +1, recovery value and winded value recomputed from 24.
 - Builds 4, 9: +2 distance on ranged magic abilities; build 4 stacks Enchantment of Distance with
   Void's Acolyte of the Mystery — confirm from the source whether the two independent +2 bonuses
   both apply to a Magic/Ranged/Void ability before asserting a combined value.
-- Builds 2–8: `damageImmunities` carries the chosen type at the Reason score (2), **alongside**
-  Polder's corruption immunity; build 4's corruption case exercises the two-entry path directly.
+- Builds 2, 3, 5, 6, 7, 8: `damageImmunities` carries the chosen type at the Reason score (2)
+  **alongside** Polder's corruption immunity — two independent entries. Build 4 is the opposite
+  case: its corruption ward **merges** with Polder's corruption 3 into one entry valued 3.
 - Build 4: four specialization grants, not three.
 
 ## Deliverables
@@ -561,7 +584,7 @@ Independent checks each build must carry, derived from the Compendium before our
 | Shared contracts/phases | **Requested from the integration owner**, not written here: gaps A, B, C and the D representation decision |
 | [`docs/research/v48-elementalist-reference-plan.md`](../research/v48-elementalist-reference-plan.md) | The ten legal choice maps, derived source expectations, normalized comparison design and capture plan |
 | `tests/fixtures/v48-elementalist/` | Ten raw `.ds-hero` exports, readable sheets, capture metadata, hashes, normalized selections, independently derived expectations |
-| `tests/character-v48-elementalist.test.ts` | Per-build comparison, parent-change removal, nested-choice removal, budget/count and duplicate-skill cases |
+| `tests/character-v48-elementalist.test.ts` | Per-build comparison, parent-change removal, nested-choice removal, budget/count and duplicate-skill cases. Plus one **non-Forge evaluator case** the ten builds cannot cover: all ten fix `complication | none`, so a class-sourced Stamina change combined with a complication-sourced one is unwitnessed, and that is exactly the recompute-guard ordering hazard gap C names. Add Permanence plus the `Elemental Inside` complication and assert Stamina 27, recovery value 9, winded 13 |
 | `tests/browser/v48-elementalist.spec.ts` | Wizard journeys, source display, sheet rendering, persisted readback |
 | `docs/build/V48-elementalist-level-one.md` | This document, advanced through implementation and evidence |
 | `docs/build/STATUS.md` | This unit's row only |
@@ -571,16 +594,22 @@ Independent checks each build must carry, derived from the Compendium before our
 The eight gates in
 [V44](V44-character-option-delivery.md#acceptance-checks) apply unchanged. Unit-specific additions:
 
-1. Every one of the 22 class skills, 4 specializations, 5 enchantments, 4 wards, 7 ward damage
-   types, 8 signature abilities and 8 heroic abilities appears in at least one completed
-   same-build Forge counterpart, per the ledger above.
+1. Every one of the 4 specializations, 5 enchantments, 4 wards, 7 ward damage types, 8 signature
+   abilities and 8 heroic abilities — the 29 options V48 newly delivers — appears in at least one
+   completed same-build Forge counterpart, per the ledger above. The 22 class skills are **not** in
+   this gate: they are carry-forward coverage already served since V25/V37. Three of them
+   (Tailoring, Monsters, Timescape) are fixed by the constant culture and career selections, and
+   **Magic can never appear in a legal completed counterpart at all** — it is a fixed class grant,
+   so selecting it produces the `duplicate-skill` diagnostic and the build never reaches complete.
 2. Choosing a second signature ability beyond two, or a class skill outside crafting/lore, is
    refused; the ward damage type is unavailable unless Ward of Excellent Protection is selected.
 3. Changing specialization, enchantment or ward removes every prior contribution including the
    nested ward damage type, and preserves unrelated ancestry, career, background and authored
    details.
-4. A Polder Elementalist with Ward of Excellent Protection (corruption) retains **both** immunity
-   entries with distinct provenance; neither overwrites the other.
+4. A Polder Elementalist with Ward of Excellent Protection (corruption) produces a **single**
+   corruption immunity entry valued 3, whose provenance retains **both** the Polder trait and the
+   ward. Neither source's provenance is dropped, and the value is the higher of the two, not their
+   sum. Builds 2, 3, 5, 6, 7 and 8 exercise the two-entry path with distinct damage types.
 5. Bethell's build 1 values are byte-identical to the existing reference before and after the
    change, including provenance ordering.
 6. Existing Fury level-one and Berserker level-two behavior, and Fury 1→2 advancement, are
@@ -603,8 +632,16 @@ chosen and whether it can change. Raised by this preparation from the independen
 **It blocks nothing at level one**: the build-time choice is identical under the two plausible
 readings, and only respite reselection, already out of scope here, depends on the answer.
 
-The ward's one-type-of-seven reading is no longer an open interpretation; the corpus resolves it, as
-recorded above. The Enchantment of Battle representation (finding D) is an engineering decision
+[Q-CHAR-17](../rules-questions-for-user.md) — whether Void's Acolyte of the Mystery and Enchantment
+of Distance stack on an ability with the Magic, Ranged and Void keywords. An earlier draft asserted
++4 as a derived expectation; that was a guess dressed as a derivation and is withdrawn. **It blocks
+nothing**: gap A's recommendation records two independent contributions with their own provenance,
+builds 8 and 9 witness each at +2 in isolation, and no level-one implementation decision needs a
+combined number.
+
+The ward's one-type-of-seven reading remains a **labelled interpretation**, strongly grounded in the
+corpus as recorded above but not stated outright by the ward's own text. It needs the independent
+rules reviewer's verdict before the implementation commit, not merely this document's reasoning. The Enchantment of Battle representation (finding D) is an engineering decision
 needing the integration owner's agreement, not a rules question.
 
 ## Work log

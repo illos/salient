@@ -858,3 +858,32 @@ No user approval is implied by this classification.
   identical under A and B. Only respite reselection, which is already out of V48's scope, depends
   on this answer. No default is silently applied to anything the user can see at level one.
 - **Answer:** (user fills in)
+
+### Q-CHAR-17: Do two sourced distance increases stack on the same ability?
+
+- **Status:** open
+- **Raised by:** V48 Elementalist level-one preparation, 2026-09-19
+- **Where:** [character specification](character-wizard-spec.md#3-decision-system);
+  `vendor/steel-compendium/en/unified/md/feature/elementalist/level-1/enchantment-of-distance.md`;
+  `vendor/steel-compendium/en/unified/md/feature/elementalist/level-1/void-acolyte-of-the-mystery.md`;
+  `vendor/steel-compendium/en/unified/md/rule/dice/bonuses-and-penalties.md`;
+  `vendor/steel-compendium/en/unified/md/rule/combat/distance.md`
+- **Conflict or gap:** A Void elementalist who also takes Enchantment of Distance has two sourced
+  distance increases that both reach an ability with the Magic, Ranged and Void keywords: the
+  enchantment's "+2 bonus to the distance of your ranged magic abilities" and the acolyte benefit's
+  "the distance of all your abilities that have the Magic, Ranged, and Void keywords increases by 2
+  squares". The pin does not say whether they combine. The Bonuses and Penalties rule says bonuses
+  "always add together", but every sentence of it is scoped to power rolls, and the acolyte benefit
+  is not even phrased as a bonus. The Distance rule does contain one non-stacking sentence — only
+  one Cloak and Dagger bonus applies to an ability with both Melee and Ranged keywords — but that
+  governs mode-exclusive alternatives, which these are not.
+- **Options:** A: both apply, total +4. B: only the larger applies, total +2. C: they are distinct
+  effects that the Director adjudicates per ability.
+- **Recommendation:** A, on the grounds that the two effects come from independent sources and the
+  pin states no general non-stacking rule for distance. This is a recommendation, not a derivation;
+  an earlier draft of the V48 plan asserted +4 as a derived expectation and that assertion has been
+  withdrawn as unsupported.
+- **Blocked until answered:** nothing. V48 records two independent contributions with separate
+  provenance, which is correct under every option, and its reference builds witness each at +2 in
+  isolation. Only a combined displayed distance figure depends on the ruling.
+- **Answer:** (user fills in)
