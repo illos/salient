@@ -1,5 +1,8 @@
 # V44: Character option delivery plan
 
+**Paused and quarantined by the user, 2026-09-19.** This pre-pilot plan is retained as historical
+context, not an active assignment. See [the quarantine record](../quarantine/opus-pilot-20260919.md).
+
 | Field | Value |
 | --- | --- |
 | Family | V |
@@ -118,71 +121,14 @@ disjoint modules. Source research and reference capture may start earlier. Each 
 as its own full verification passes, rather than waiting for the whole wave; 1F is an additional
 combined audit. One integration owner serializes shared-file changes and main/runtime updates.
 
-### Current execution: Opus pilot, then every level-one unit
-
-**User-confirmed execution update, 2026-09-19:** the existing Opus session implements one unit,
-the integration lead reviews its work, and only then may it batch through every ancestry and
-class at level one. Meaningful mistakes or poor code quality must be reported to the user.
-If the trial meets the quality standard, the lead releases the remaining queue without asking
-for routine permission again. This replaces the earlier recommendation to interleave new
-level-two class units before completing level-one coverage; higher levels remain the later target.
-
-Opus implementer: Chords thread `dd05330e-f441-46de-8d3f-c7cff85e8505` (Character Wizard Development).
-Review/integration lead: `9e5c707a-6f45-44d3-8705-2b85efba2f7d` (Assess Parallel Character Options).
-The first trial is **V46 Devil level one**, using the existing
-[source preparation](../research/devil-level-one-preparation.md). Opus owns implementation,
-necessary narrowly scoped shared support, fixtures, real Forge captures and verification evidence.
-The lead does not write the trial implementation and assesses the submitted result independently.
-The existing fresh rules-review requirement remains. The trial must not be merged or expanded
-into another unit before the lead's verdict. Record the actual findings and their severity;
-routine formatting corrections alone do not establish poor implementation quality.
-
-The trial assessment covers source correctness and all option branches, appropriate shared
-contracts and module ownership, readable maintainable code, meaningful independent tests,
-saved-state/parent-change behavior, complete authentic counterpart evidence, truthful verification
-claims, and preservation of existing level-two/editor/live-state boundaries. Material errors in
-any of these areas hold batch release while the lead reports the evidence to the user and has
-Opus repair the trial. Do not silently repair substantive mistakes and then report a clean trial.
-A passing trial is permission to continue the queue, not permission to skip later per-unit review.
-
-**User resource-allocation clarification, 2026-09-19:** the objective is to use substantial
-remaining Anthropic subscription capacity before its reset in approximately twelve hours,
-producing more verified work with less ChatGPT token spend than Astra implementing the queue.
-Opus owns research, implementation, fixtures, captures, verification and repairs. Use Anthropic
-subagents where available for independent preparation and fresh reviews; the lead performs
-targeted milestone review and integration rather than duplicating implementation or continuously
-inspecting unfinished edits. Bundle handoffs with the exact diff, verification output, counterpart
-coverage, known gaps and substantive repair history. Report meaningful mistakes, fix them under
-supervision, and assess the repaired result without pretending the original trial was clean.
-While the pilot is verified, Opus may prepare source inventories, independent expectations and
-reference plans for later units. Their implementation still waits for the pilot verdict. Review,
-source, per-unit commit and merge gates are unchanged; token availability does not waive them.
-
-The level-one queue has **23 units: twelve core ancestries and eleven included classes**.
-Allocate new slice IDs only as a unit starts. The following is the scheduling queue, not another
-completion tracker; actual assignment, review and merge states remain in `STATUS.md`.
-
-| Order | Units, each at level one in its own commit | Scheduling reason |
-| --- | --- | --- |
-| Trial | Devil | Existing source preparation and partial path; conditional movement and ancestry ability grants provide a meaningful quality trial. |
-| Initial continuation | Polder; Dwarf; Fury; Elementalist | Complete the previously planned first wave and perform its combined audit before continuing. |
-| Remaining ancestries | Dragon Knight; Hakaan; High Elf; Human; Memonek; Orc; Time Raider; Wode Elf; Revenant | Cover all remaining core ancestries; Revenant follows the ancestry options required by its former-life choices. |
-| Remaining core classes | Conduit; Tactician; Censor; Null; Shadow; Talent; Troubadour | Every eligible subclass, nested choice and level-one grant belongs in its class unit; dependency findings may reorder units. |
-| Included supplemental classes | Beastheart; Summoner | Include companion/portfolio editor dependencies and retain supplemental provenance. No live creature-control expansion is implied. |
-| Completion audit | Integrated level-one coverage across all 23 units | Audit option ledgers, meaningful cross-family interactions, existing progression compatibility, saved builds and all retained reference differences. |
-
-After a successful trial, Opus works through these units without requiring a new user instruction
-for each one. It hands each complete unit to the lead for independent review, full verification
-and shared-main delivery. Keep ancestry/class commits separate; do not accumulate one bulk commit
-or merge unchecked units. When a concrete source/reference dependency blocks one unit, record it
-and continue independently ready units within the released queue. Do not mark a blocked unit
-complete or infer permission to waive its verification. Broader work remains paused if findings
-show a recurring quality problem that invalidates the trial decision; report the evidence.
-
-The lead coordinates CT114 heavy jobs and serializes main integration/runtime changes. Opus uses
-its own worktree and the named isolated `characters` slot; shared main remains the user's playable
-app. Local shared merges remain authorized under the existing directive. Remote Git pushes and
-hosted publication are separate actions and are not granted by this execution update.
+Next wave: Conduit level one and Tactician level one as separate units, then independently scoped
+Fury, Elementalist and Conduit level-two units. These exercise nested domains, two-kit composition
+and transitions beyond the existing Berserker path. Exact order follows researched dependencies.
+Continue other ancestries in separate units, with nested/former-ancestry cases such as Revenant
+scheduled when their required ancestry choices are implemented. Complete the other classes,
+including Beastheart and Summoner once their concrete editor dependencies are available, and
+advance through levels 2–3, 4–6, 7–9 and 10, always one class/level per commit. This later sequence
+is planning, not a claim that those classes or levels are supported.
 
 ### Forge Steel comparison artifacts
 
@@ -297,71 +243,3 @@ validation after the initially empty worktree vendor directories caused missing-
 application tests, builds or browsers were run for this documentation-only change. Integration
 requires no backend/content/frontend update or live feature check because executable files and
 runtime behavior are unchanged. Implementation units and their audits remain pending.
-
-2026-09-19: user started an Opus session and assigned it every level-one ancestry/class, with a
-single implementation-and-review trial before batch release. Sent Chords handoff 192 for V46
-Devil level one and coordination update 193. Current main `88d1e61` includes the verified V45
-foundation. Recorded the 23-unit queue and quality-reporting gate above. Trial implementation,
-quality verdict and batch release are pending; no additional options are certified by this plan.
-
-2026-09-19: Opus acknowledged V46 and proposed pinned Forge UI capture on CT114. Lead accepted
-that repeatable mode under the same-build requirement (Chords 195–196), with real editor/export
-evidence and explicit local-versus-public-site labeling; clarified the reference procedure.
-Shared contract proposal and implementation remain under review. No batch release or pilot
-quality verdict is implied by accepting the capture approach.
-
-2026-09-19: user requested a short reusable orchestration document while the three Opus assignments
-continue. Added the [working guide](../agent-orchestration.md), linked from the build process. It
-records ownership, milestone handoffs, independent reviews, explicit CT114 environment guards,
-Chords delivery versus wake behavior, and evaluation of useful output against coordinator effort.
-The pilot and measured efficiency remain unproven; no additional option support is certified.
-Documentation only, with no runtime impact.
-
-2026-09-19: user installed Chords 0.3.0 with direct `wake: true` handoffs. Updated the orchestration
-guide to replace the earlier blanket no-wake limitation with its actual lifecycle, retry and
-wake-chain limits. Direct requests 240/241 for authorized Fury/Elementalist preparation were
-accepted and both Claude sessions subsequently reported running; Devil was already running.
-This records observed startup, not completed work or a comprehensive live-provider test. The
-separate Presidium repository's uncommitted Chords source was not modified or committed here.
-
-2026-09-19: user requested fleet check-ins about every ten minutes to catch stalled work. Recorded
-the active-session cadence in the orchestration guide. First check read V46 verification progress,
-V47 completed preparation and V48 reference planning; assigned independent Polder V49 and Dwarf
-V50 preparation while pilot verification continues. This is coordination, not additional playable
-coverage or a persistent scheduler. No runtime impact.
-
-2026-09-19: recorded the reviewed [level-one source interpretations](../character-wizard-spec.md#level-one-source-interpretations)
-for the Elementalist ward/distance choices and Dwarf Runic Carving. Draft Q-CHAR-16/17/18 were
-withdrawn through source interpretation, not user rulings. The
-[fresh source re-review](evidence/V44/level-one-interpretations-review.md) passed after citation,
-alternatives and scope corrections; its explicitly assessed Behold the Mystery example and general
-area-rule links were included with the optional wording refinements. Implementation, real
-counterpart captures and per-unit verification remain pending. Documentation only; no runtime update.
-
-2026-09-19: added observed verification and lifecycle lessons to the orchestration guide: actual
-uploaded source versus checkout identity, preserving artifacts before runtime replacement, scoped
-supplements without rewriting failed suite results, and checking the inbox before ending a busy
-turn. A missed runtime-release handoff and the six-wakes-per-hour limit delayed V51; the lead
-recorded its next eligible resume time rather than bypassing the limit. V46 implementation/evidence
-review has a scoped pass, but full-suite instability and remaining reviews still block integration.
-Documentation only; no runtime change or batch release.
-
-2026-09-19: recorded further observed orchestration failures and safeguards: buffered wrappers hid
-the actual remote stage; completed job containers could not supply lost logs; an auxiliary CLI
-failed in the browser container despite the browser itself working; and queued Chords ownership
-changes were not read before another stage began. The guide now requires per-attempt persistent
-output and exit status, capture preflight, and inbox checks at each job boundary. The lead adopted
-the existing V52 full-suite job after its own launch was rejected as busy, rather than claiming
-two running suites or a successful replacement. No verification gate or batch release changed.
-Documentation only; no runtime update.
-
-2026-09-19: the V52 full browser attempt on source `0987595` was stopped after the isolated
-backend became unavailable. The retained output has seven failure blocks and an exit of 143 at
-test position 48 of 56; this is not a full pass. The backend cgroup recorded an OOM kill while
-its marker-only health check continued reporting healthy. Three diagnostic log followers shared
-the backend memory limit, including one started by the lead; their contribution is a plausible
-factor, not an established sole cause. Evidence was archived before the followers were stopped
-and the same isolated backend was recovered. V55 owns the live-health correction. The
-orchestration guide now includes diagnostic resource accounting and evidence preservation after
-backend failure. Main application code is unchanged; character integration and batch release
-remain gated on successful verification. Documentation only; no shared runtime update.

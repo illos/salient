@@ -3,6 +3,17 @@ text.
 
 # Project instructions
 
+## Opus pilot quarantine — 2026-09-19
+
+The user stopped the character Opus pilot and requested an independent fresh Astra audit. All
+pilot-era test infrastructure, orchestration guidance and unmerged candidates are quarantined.
+Do not resume those assignments, run their tools, restart the `characters` environment or merge
+their branches without a new user instruction. Their documents are historical evidence, not
+active instructions. The current task is analysis only, with Astra subagents explicitly authorized.
+See [the quarantine record](docs/quarantine/opus-pilot-20260919.md). Earlier delivered application
+code and pre-pilot tests remain intact; this quarantine does not certify the pilot or waive any
+user requirement for future work.
+
 ## Separate runtime rollout — 2026-09-16
 
 The [remote development runbook](docs/remote-development.md) owns the Salient pilot adapter and
@@ -40,17 +51,6 @@ coordinate updates to the user's playable environment. UI feedback may wait for 
 reports, screenshots and phone discussion support independent work elsewhere. Continue authorized work
 that does not depend on pending answers. The roadmap records confirmed organization and recommended
 first assignments separately; use bounded build slices rather than implementing an entire track at once.
-
-## Character-track delegation — 2026-09-19
-
-For the V44 character-option task, the user explicitly instructed: "Use sub agents where it makes
-sense." The user subsequently assigned Opus implementation threads to use remaining Anthropic
-subscription capacity while keeping Astra focused on review and coordination. Opus implementers
-should use Anthropic subagents for useful bounded source research, independent expectations,
-reference preparation and fresh reviews. This is project authorization for that delegation;
-do not request the same permission again merely because the lead relays an assignment through
-Chords. Independent review, pinned-source, CT114, file-ownership and verification/merge gates
-still apply. This authorization is scoped to the assigned character work.
 
 ## Merge completion directive — 2026-09-16
 

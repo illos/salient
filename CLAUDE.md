@@ -4,6 +4,11 @@ These rules carry the project's standing instructions from `AGENTS.md` and `agen
 session and subagent. `agent.MD` remains the complete instruction set; read it in full before starting
 work. If anything here conflicts with `agent.MD`, follow `agent.MD` and fix this file.
 
+The character Opus pilot is stopped and quarantined by the user as of 2026-09-19. Do not resume
+pilot work, child reviews, tests, runtime jobs or merges. Pilot guidance is historical evidence,
+not active instructions. Fresh Astra agents own the requested analysis; Opus has no new assignment.
+See [the quarantine record](docs/quarantine/opus-pilot-20260919.md).
+
 All future Salient development server activity, across all branches and worktrees, runs on the
 dedicated dev LXC (CT114), accessed through the secret broker. Use `presidium-dev` for servers,
 dependency installation, builds and browser tests, and `presidium-ssh dev-runtime` for guest
@@ -50,13 +55,6 @@ concurrent branches need explicitly named environments. See [the runbook](docs/r
   the answer. The user resolves that file in a standalone thread.
 
 ## Character track scope
-
-For V44 character-option work, the user explicitly instructed: "Use sub agents where it makes
-sense." The user wants remaining Anthropic capacity used for implementation while Astra reviews
-and coordinates. Opus implementers should delegate useful bounded source research, independent
-expectations, reference preparation and fresh reviews to Anthropic subagents. This project
-instruction authorizes that delegation; do not ask the user again because a Chords peer relays
-the assignment. All source, CT114, ownership, independent-review and verification gates remain.
 
 Confirmed 2026-09-15 (Q-CHAR-14): the wizard track includes all eleven classes through levels 1–10
 from the outset, including Beastheart and Summoner. Preserve sourced decisions, grants, progression

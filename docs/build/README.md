@@ -1,14 +1,15 @@
 # Build plan, review and commitment process
 
+The character Opus pilot's added procedures and infrastructure are
+[quarantined by the user](../quarantine/opus-pilot-20260919.md). Do not execute that workflow or
+treat its documents as current authority. The independent audit is an analysis task, not a new
+implementation slice requiring application builds or browser verification.
+
 Status: process adopted 2026-09-14 for the v0.01 build and the V1 slices that follow. This document
 owns *how* work is assigned, reviewed and committed. The specifications under `docs/` own *what* is
 built. `docs/development-process.md` records the earlier principles this process implements; where the
 two differ, this document owns the operational procedure. The confirmed post-v0.01
 [five-track roadmap](../v1-roadmap.md) owns workstream boundaries and user-feedback cadence.
-
-For coordinating a lead with several implementation threads, use the short
-[orchestration guide](../agent-orchestration.md). It supplements the requirements here with assignment,
-handoff, capacity-allocation and Chords liveness practices.
 
 Read `CLAUDE.md` and `agent.MD` before anything else. Then read this file, then your slice document.
 For new post-v0.01 work, use [the track kickoff](../kickoff-development-track.md).

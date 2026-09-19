@@ -708,52 +708,6 @@ matching can suggest mappings but cannot silently resolve ambiguity. Keep offici
 customizations, and unmapped homebrew distinguishable. Source updates are deliberate, never automatic during
 startup/build, and must not silently rewrite recorded history.
 
-### Level-one source interpretations
-
-Recorded 2026-09-19 during V48/V50 preparation, after independent source review. These are labelled
-implementation interpretations of the Compendium pin above. Draft questions Q-CHAR-16, Q-CHAR-17
-and Q-CHAR-18 were withdrawn on that basis; they are not user rulings or verification results.
-
-- **Ward of Excellent Protection:** choose one of its seven damage types when selecting the ward;
-  the immunity equals the hero's Reason score. At level one this is a creation choice. The owning
-  [Elementalist Ward](../vendor/steel-compendium/en/unified/md/feature/elementalist/level-1/elementalist-ward.md)
-  grants the ward selection, and
-  [Ward of Excellent Protection](../vendor/steel-compendium/en/unified/md/feature/elementalist/level-1/ward-of-excellent-protection.md)
-  supplies the immunity. The same seven-type wording in Nature's Bounty for
-  [Conduits](../vendor/steel-compendium/en/unified/md/feature/conduit/level-7/natures-bounty.md) and
-  [Censors](../vendor/steel-compendium/en/unified/md/feature/censor/level-7/natures-bounty.md)
-  explicitly distinguishes choosing another immunity; see also
-  [damage immunity](../vendor/steel-compendium/en/unified/md/rule/damage/damage-immunity.md).
-  The pin does not explicitly time the damage-type choice: treating it as part of taking the ward
-  supplies the selected protection. A choice afresh on each hit was considered and rejected; unlike
-  [Hurl Element](../vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-1/hurl-element.md),
-  the ward gives no instruction to choose at each use. The owning feature permits changing wards
-  through a complex ritual as a respite activity. Whether that ritual can change the type while
-  keeping the same ward remains unstated and outside this level-one interpretation.
-- **Elementalist distance:** apply both sourced increases when an ability meets both sets of
-  conditions. [Enchantment of Distance](../vendor/steel-compendium/en/unified/md/feature/elementalist/level-1/enchantment-of-distance.md)
-  and [Void Acolyte of the Mystery](../vendor/steel-compendium/en/unified/md/feature/elementalist/level-1/void-acolyte-of-the-mystery.md)
-  therefore contribute +2 each, for +4 squares to the ranged reach of an ability with the Magic,
-  Ranged and Void keywords. Applying only the larger increase was considered and rejected because
-  these distinct feature texts each supply an applicable increase without a stated exclusion.
-  Retain their separate provenance and applicability conditions. This interpretation addresses
-  ranged reach; area-size expansion is outside its scope. The
-  Kits chapter's [Distance Bonus section](../vendor/steel-compendium/en/unified/md/chapter/kits.md#distance-bonus)
-  expressly says a distance bonus does not increase an ability's area of effect.
-  The general [area rules](../vendor/steel-compendium/en/unified/md/rule/combat/area-of-effect.md)
-  define "within X" as placement distance, while the
-  [cube rule](../vendor/steel-compendium/en/unified/md/rule/combat/cube.md) defines "X cube" as side
-  length. Thus [Behold the Mystery](../vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-1/behold-the-mystery.md)
-  becomes "3 cube within 14" with both increases; its cube remains size 3.
-- **Dwarf Runic Carving:** a complete level-one build need not have an active rune. Do not require
-  or silently default a rune during creation. The
-  [trait](../vendor/steel-compendium/en/unified/md/feature/trait/dwarf/runic-carving.md)
-  grants the capability to carve one with ten uninterrupted minutes of work and expressly permits
-  removing a rune with the same activity. A mandatory creation rune was considered and rejected:
-  the trait grants this activity, without placing a rune on the hero at creation. Keep Detection, Light
-  and Voice, Detection's chosen creature/object type, and changing/removing runes readable as sourced
-  manual play activities. Rune-bearing states have not been verified by this note.
-
 ### Required import
 
 Required for the fuller product; implementation is explicitly deferred beyond v0.01. The architecture above

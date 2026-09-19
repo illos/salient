@@ -316,7 +316,7 @@ records the handoff; it does not certify A09 or create an implementation commit.
 
 | Id | Slice | Status | Owner |
 | --- | --- | --- | --- |
-| V44 | [Character option delivery plan](V44-character-option-delivery.md) | V45 foundation audited/merged/live. Opus V46 Devil level-one trial assigned; lead review gates batch release across all 12 core ancestries and 11 classes at level one. Per-unit commits, same-build Forge verification and verified incremental merges remain required. | Character integration lead with ancestry/class implementers |
+| V44 | [Character option delivery plan](V44-character-option-delivery.md) | Paused; Opus pilot infrastructure and procedures quarantined by user. V45 foundation remains delivered. Zero pilot option units merged. Fresh Astra analysis only; see [quarantine](../quarantine/opus-pilot-20260919.md). | Character integration lead |
 
 ## V41 — reference loading and shared navigation
 

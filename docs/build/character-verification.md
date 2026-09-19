@@ -60,18 +60,6 @@ test data is available to the normal checkout. Do not depend on the live website
 The website may be newer than our pinned source. Record differences explicitly; generating a
 reference character never authorizes an automatic dependency update.
 
-**Capture-mode clarification, 2026-09-19:** the same-build counterpart requirement may also use
-the real Forge Steel web application served from the repository's pinned source on CT114. This
-is an implementation choice for repeatable reference verification, not a waiver of counterpart
-coverage or a claim of parity with the current public website. Run dependencies, builds, servers
-and browsers through the approved remote workflow; preserve the vendored checkout and its pin.
-Record the local target, source commit/version, real editor completion state, unmodified exports
-from the application's export path, and rendered sheet/feature evidence. Reusing an authentic
-export through the application's import UI is allowed; perform and verify the relevant option
-changes and completion choices through the editor. Programmatically fabricating reference exports
-or injecting selections into storage instead of the editor is not equivalent capture evidence.
-Independent source expectations, option ledgers and Salient persisted readback remain required.
-
 ## 3. Establish the expected build independently
 
 Separate embedded definitions, actual selections, automatic grants and live state. A level-one
