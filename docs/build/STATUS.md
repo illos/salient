@@ -13,8 +13,8 @@ One active job across all hosts, including setup/build/cleanup. On resume, recon
 row with actual processes before dispatch. Keep terminal evidence in the slice work log and prune
 completed rows only after the requester has the result through a direct `wake: true` Chords return.
 
-Updated 2026-09-20 15:45 UTC: shared-main V87/V02 live proof passed against the verified `4d6d299`
-CT114 deployment and its result wake was accepted. Repaired V88 `a07dd27` passed and its result wake was accepted;
+Updated 2026-09-20 15:45 UTC: V88 review repair `c220cbc` is running focused and full local gates.
+Shared-main V87/V02 live proof passed against the verified `4d6d299` CT114 deployment and its result wake was accepted. Repaired V88 `a07dd27` passed and its result wake was accepted;
 its two runtime jobs were cancelled before setup and await new reviewed candidate jobs. The rebased V87 pre-merge integration check passed and its result wake
 was accepted. All five bounded V85/V86 hosted cohorts previously passed and their result wake was
 accepted by WIZARD.2. V75's direct return remains retained because its settled requester rejected delivery.
@@ -24,6 +24,7 @@ initial host inventory and user-authorized retirement of old development servers
 
 | Job / Chords message | Requester | Exact source / checks and inputs | State / host / target | Result / evidence |
 | --- | --- | --- | --- | --- |
+| `test-V88-c220cbc-5-review-repair` / 902 | ENGINE `2b1ba081-4040-4665-9ea2-22364db707f4`; copy ENGINE2 `3498baf0-e8d9-442b-a704-f24f7e595b30` | frozen `c220cbc7ee3e20b9b96ac12ca3681c398a4bdc27`; combat-end source-linked unscheduling log plus Wode correction/undo/redo fixtures; focused four-file gate then `CI=true pnpm check` | **Running**: local pure/`convex-test`; no stack, deployment, upload or browser | artifacts: `/srv/presidium/projects/salient/test-artifacts/V88-c220cbc-20260920T154526Z` |
 | `test-V88-a07dd27-4-v72-regressions` / 894 | ENGINE `2b1ba081-4040-4665-9ea2-22364db707f4`; copy ENGINE2 `3498baf0-e8d9-442b-a704-f24f7e595b30` | frozen `a07dd279cb5dc98f92d231d4c9fae52812a7a7f7`; named `engine-live` V72 main and adapted runners with dice helper | **Cancelled before setup** by ENGINE message 897; superseded by required implementation-review fix | no execution, artifacts or environment change; consolidated direct cancellation 899, wake accepted |
 | `test-V88-a07dd27-3-headless` / 890 | ENGINE `2b1ba081-4040-4665-9ea2-22364db707f4`; copy ENGINE2 `3498baf0-e8d9-442b-a704-f24f7e595b30` | frozen `a07dd279cb5dc98f92d231d4c9fae52812a7a7f7`; isolated real BetterAuth/API V88 runner with exact app source/URL guard, committed content seed and retained disposable data | **Cancelled before setup** by ENGINE message 897; superseded by required implementation-review fix | no execution, artifacts or environment change; consolidated direct cancellation 899, wake accepted |
 | `test-V87-main-4d6d299-live-1` / 887 | FOES2 `f8589dc3-76c4-4527-8d87-b4c9d13fd9d8` | deployed main `4d6d299`; shared CT114 V02 9-scenario runner plus bounded authenticated content/foe readback against reseeded 1151-entry app | **Passed**: V02 9/9; authenticated 1151-entry/438-stat-block/source/name/ability readback passed on attempt 2; no deploy/upload/build | [Evidence](evidence/V87/tester-job-main-4d6d299-live.md); artifacts: `/srv/presidium/projects/salient/test-artifacts/V87-main-4d6d299-20260920T154031Z`; direct result 901, wake accepted |
