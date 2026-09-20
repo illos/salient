@@ -54,6 +54,78 @@ try {
   assert.equal(row.text, readFileSync(row.sourcePath, 'utf8'));
   assert.deepEqual(row.features, JSON.parse(readFileSync(row.jsonPath, 'utf8')).features);
   assert.ok(row.features.some(feature => feature.name === 'Razor Claws'));
+  const campaignId = await actor.mutation<string>('campaigns:create', {
+    name: `V87 ${runId}`,
+    commandId: `${runId}-campaign`,
+  });
+  const definitions = await actor.query<{ definitionId: string }[]>('foes:definitions', {
+    campaignId,
+  });
+  assert.equal(definitions.length, 438);
+  assert.ok(definitions.some(entry => entry.definitionId === id));
+  await actor.mutation('sessions:start', {
+    campaignId,
+    selectedPlayerIds: [],
+    commandId: `${runId}-session`,
+  });
+  const ghoulId = await actor.mutation<string>('foes:add', {
+    campaignId,
+    definitionId: id,
+    commandId: `${runId}-ghoul`,
+  });
+  const victimId = await actor.mutation<string>('foes:add', {
+    campaignId,
+    definitionId: 'mcdm.monsters.v1/monster.goblin.statblock/goblin-warrior',
+    commandId: `${runId}-victim`,
+  });
+  const loaded = await actor.query<{ sourceSnapshot: string }>('foes:detail', {
+    campaignId,
+    foeId: ghoulId,
+  });
+  assert.equal(JSON.parse(loaded.sourceSnapshot).text, row.text);
+  const sheet = await actor.query<{ abilities: { name: string; text: string }[] }>(
+    'abilities:sheet',
+    { campaignId, actor: { kind: 'foe', id: ghoulId, name: 'Ghoul' } },
+  );
+  assert.ok(
+    sheet.abilities.some(a => a.name === 'Leap' && a.text.includes('jumps up to 3 squares')),
+  );
+  const claws = sheet.abilities.find(a => a.name === 'Razor Claws');
+  assert.ok(claws && row.text.includes(claws.text));
+  const command = (text: string, suffix: string) =>
+    actor.mutation<{ eventId: string }>('commands:submit', {
+      campaignId,
+      text,
+      commandId: `${runId}-${suffix}`,
+    });
+  const used = await command(
+    `@{foe:${ghoulId}} /ability use ability="Razor Claws" targets=[@{foe:${victimId}}]`,
+    'claws',
+  );
+  const results = await actor.query<
+    {
+      execution: { mode: string };
+      dice: { d10a: number; d10b: number };
+      targets: { outcome: { tier: number; damage: { rolledDamage: number } } }[];
+    }[]
+  >('abilities:results', { campaignId, eventIds: [used.eventId] });
+  const result = results[0]!;
+  assert.equal(result.execution.mode, 'compiled');
+  // Pinned Ghoul: Power Roll +2; tiers deal 3/4/5 flat damage. Bleeding remains manual.
+  const total = result.dice.d10a + result.dice.d10b + 2;
+  const tier = total <= 11 ? 1 : total <= 16 ? 2 : 3;
+  const damage = [3, 4, 5][tier - 1]!;
+  assert.equal(result.targets[0]!.outcome.tier, tier);
+  assert.equal(result.targets[0]!.outcome.damage.rolledDamage, damage);
+  const stamina = async () =>
+    (
+      await actor.query<{ rows: { id: string; stamina: number }[] }>('foes:list', { campaignId })
+    ).rows.find(f => f.id === victimId)!.stamina;
+  assert.equal(await stamina(), 15 - damage);
+  await command('/history undo', 'undo');
+  assert.equal(await stamina(), 15);
+  await command('/history redo', 'redo');
+  assert.equal(await stamina(), 15 - damage);
   const anonymous = new ConvexHttpClient(target, { logger: false });
   await assert.rejects(
     anonymous.query(makeFunctionReference<'query'>('content:get'), { id }),
@@ -74,12 +146,23 @@ try {
       textSha256: createHash('sha256').update(row.text).digest('hex'),
       features: row.features.map(f => f.name),
     },
+    liveAbility: {
+      name: 'Razor Claws',
+      dice: result.dice,
+      tier,
+      damage,
+      staminaAfter: await stamina(),
+      undoRedo: 'pass',
+    },
     checks: [
       'manifest readback',
       '438 statblocks',
       'non-goblin source exact',
       'embedded features exact',
       'anonymous denied',
+      '438 table definitions',
+      'non-goblin load and ability sheet',
+      'Razor Claws compiled damage and undo/redo',
     ],
     status: 'pass',
   };

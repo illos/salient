@@ -3,7 +3,8 @@
     "modules": 115,
     "sourceBytes": 4147554,
     "sourceMapBytes": 2415204,
-    "gzipSourceBytes": 811356
+    "gzipSourceBytes": 811356,
+    "commit": "c1b52cb10631ad6490f5a99e700ae8a6e8275cf1"
   },
   "candidate": {
     "modules": 112,
@@ -16,5 +17,18 @@
     "sourceBytes": 4020227,
     "sourceMapBytes": 921663,
     "gzipSourceBytes": 386798
+  },
+  "integrated": {
+    "commit": "6836d1d54558aabfaacc1952784a0cfdb77874a9",
+    "modules": 115,
+    "sourceBytes": 8236169,
+    "sourceMapBytes": 3401814,
+    "gzipSourceBytes": 1218240
+  },
+  "integratedDelta": {
+    "modules": 0,
+    "sourceBytes": 4088615,
+    "sourceMapBytes": 986610,
+    "gzipSourceBytes": 406884
   }
 }
