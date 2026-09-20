@@ -1,3 +1,4 @@
+import { ancestryAbilities, ancestryAbilitySource } from '../../shared/evaluate/ancestryAbilities';
 // SPDX-License-Identifier: GPL-3.0-only
 /**
  * Adapter between the application's records and the pure R04 engine (shared/resolve/index.ts):
@@ -490,13 +491,36 @@ export async function abilitiesFor(
   const granted: AbilityDefinition[] = [];
   if (actor.kind === 'character') {
     const baseline = records.character ? baselineOf(records.character.derivedBaseline) : null;
-    for (const grant of baseline?.abilities ?? []) {
+    for (const grant of ancestryAbilities(
+      baseline?.traits ?? [],
+      baseline?.abilities ?? [],
+      records.character?.activeRune?.kind ?? null,
+    )) {
       const contentId = manifest.entries.find(
         e => e.sourcePath === `vendor/steel-compendium/${grant.sourcePath}`,
       )?.id;
       if (!contentId) continue;
       const entry = await findContent(ctx, contentId);
       if (!entry) continue;
+      const traitAbility = ancestryAbilitySource(grant);
+      if (traitAbility) {
+        granted.push(
+          build({
+            abilityId: `${entry.contentId}/${slug(grant.name)}`,
+            name: grant.name,
+            contentId: entry.contentId,
+            source: sourceOf(entry),
+            text: entry.text,
+            usage: traitAbility.actionType,
+            keywords: [],
+            distance: '',
+            target: '',
+            effects: [{ label: 'Effect', text: traitAbility.quote }],
+            kitBonusesIncluded: false,
+          }),
+        );
+        continue;
+      }
       granted.push(
         grant.kind === 'kit-signature'
           ? abilityFromKit(entry, grant.name)

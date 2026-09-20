@@ -1,3 +1,4 @@
+import { ancestryAbilities, ancestryAbilitySource } from '../shared/evaluate/ancestryAbilities';
 // SPDX-License-Identifier: GPL-3.0-only
 /**
  * Owned characters: drafts, the shared evaluation read, the audience-projected sheet read, review
@@ -440,6 +441,20 @@ export const save = mutation({
       authored: fields,
       revision,
       draftRevisionId: revisionId,
+      ...(!character.campaignId &&
+      character.activeRune?.kind &&
+      !(evaluation.baseline ?? evaluation.partial)?.traits?.some(
+        trait => trait.name === 'Runic Carving',
+      )
+        ? {
+            activeRune: {
+              ...character.activeRune,
+              kind: null,
+              version: character.activeRune.version + 1,
+              updatedAt: Date.now(),
+            },
+          }
+        : {}),
       staleFullEditRevisionId: null,
     });
     if (!character.campaignId && character.effectiveRevisionId && evaluation.status === 'complete')
@@ -630,7 +645,17 @@ async function abilityView(
   const row = await contentFor(ctx, ability.sourcePath);
   // A kit's signature ability is carried by the kit entry, whose frontmatter prints no ability
   // metadata: it groups as "other" and the table reads its action type from the text.
-  const metadata = row && row.kind === 'ability' ? metadataOf(row) : { keywords: [] };
+  const traitAbility = ancestryAbilitySource(ability);
+  const metadata = traitAbility
+    ? {
+        keywords: [],
+        actionType: traitAbility.actionType,
+        ...(traitAbility.trigger ? { trigger: traitAbility.trigger } : {}),
+        effects: [{ label: 'Effect', text: traitAbility.quote }],
+      }
+    : row && row.kind === 'ability'
+      ? metadataOf(row)
+      : { keywords: [] };
   const { provenance, ...rest } = ability;
   const facts = { name: ability.name, keywords: metadata.keywords };
   const buildModifiers = metadata.roll
@@ -665,7 +690,7 @@ async function abilityView(
               }
             : null;
         })(),
-    group: groupOf(metadata.actionType),
+    group: traitAbility?.group ?? groupOf(metadata.actionType),
     metadata,
     ...(buildModifiers.length ? { buildModifiers } : {}),
     grantedBy: grantedBy(provenance),
@@ -831,7 +856,11 @@ export const sheet = query({
           }
         : null,
       abilities: await Promise.all(
-        (granted?.abilities ?? []).map(a => abilityView(ctx, a, granted?.abilityModifiers)),
+        ancestryAbilities(
+          granted?.traits ?? [],
+          granted?.abilities ?? [],
+          character.activeRune?.kind ?? null,
+        ).map(a => abilityView(ctx, a, granted?.abilityModifiers)),
       ),
       features: await Promise.all(
         [...(granted?.traits ?? []), ...(granted?.features ?? []), ...(granted?.perks ?? [])].map(

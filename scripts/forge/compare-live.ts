@@ -168,7 +168,18 @@ try {
         names(baseline.languages.map(l => l.name)),
         names(witness.forge.languages),
       );
-      compare('abilities', names(sheet.abilities.map(a => a.name)), names(witness.forge.abilities));
+      // Compendium-reviewed activations Forge retains only as trait text. They are additional
+      // Salient actions, not missing Forge grants. Preserve the distinction in the report.
+      const textOnlyActions = [
+        ...(witness.ancestry === 'Dwarf' ? ['Runic Carving: Carve, Change, or Remove Rune'] : []),
+        ...(witness.ancestry === 'Orc' ? ['Relentless'] : []),
+        ...['Stone Singer', 'Doomsight'].filter(name => witness.purchasedTraits.includes(name)),
+      ];
+      compare(
+        'abilities',
+        names(sheet.abilities.map(a => a.name)),
+        names([...witness.forge.abilities, ...textOnlyActions]),
+      );
       compare(
         'conditionImmunities',
         names((baseline.conditionImmunities ?? []).map(c => c.condition.toLowerCase())),
@@ -204,6 +215,7 @@ try {
         characterId,
         status: mismatches.length ? 'fail' : 'pass',
         mismatches,
+        compendiumActionsBeyondForge: textOnlyActions,
       });
       if (mismatches.length) process.exitCode = 1;
     } catch (error) {

@@ -55,6 +55,7 @@ must be separately recorded; this branch has performed neither.
 
 | Id | Slice | Depends on | Status | Owner |
 | --- | --- | --- | --- | --- |
+| V74 | [Trait-granted abilities and active Dwarf runes](V74-trait-granted-abilities.md) | V69/V73 candidate | In progress — trait ability grants, source gate and persisted rune selection | WIZARD, slice/V74 |
 | V73 | [Headless Forge character counterparts](V73-forge-headless-counterparts.md) | V69 verified candidate | In review — Node calibration passes; saved API 24/31 match, seven ability-list discrepancies retained; no browsers | WIZARD, slice/V73 |
 | V24 | [Character wizard assessment and delivery proposal](V24-character-wizard-assessment.md) | A09; assesses A02/V21 | Assessment complete; V25 implementation verified | Codex, character wizard thread |
 | V25 | [Shared Fury/Bethell wizard](V25-two-class-wizard.md) | A09, R01–R03, S01, A01; V24 docs | Merged and live verified — `4cb3f1f`, closeout `a3a144f`; 433 tests, both character journeys and table audit pass | Codex character team |

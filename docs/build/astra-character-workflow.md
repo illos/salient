@@ -32,9 +32,16 @@ cases, shared dependencies and next handoff. Use the existing slice document and
 Allocate a new slice ID; never reuse the abandoned pilot's IDs or branches.
 
 Each unit must cover all eligible choices at its level, prerequisites, budgets, grants, permanent
-values and readable manual effects. Keep gameplay automation outside this editor task. Preserve
-existing saved decisions, progression, privacy and live-state behavior. A shared primitive needed
-by multiple units is a separate focused change owned by the lead, not duplicate implementations.
+values and readable manual effects. Apply the project-wide
+[trait-granted ability gate](README.md#trait-granted-ability-completion-gate) to every implemented
+trait/feature: inspect embedded and conditional actions, retain the trait, and build its granted
+actions in the UI list and shared CLI/API route. A description-only implementation is incomplete.
+Include the choice or play-state operation needed to expose conditional grants; do not turn a
+changeable state such as the active dwarf rune into a permanent wizard choice. Distinguish new
+actions from modifiers to existing actions and preserve sourced timing/manual-resolution limits.
+Full gameplay effect automation remains outside this editor task. Preserve existing saved
+decisions, progression, privacy and live-state behavior. A shared primitive needed by multiple
+units is a separate focused change owned by the lead, not duplicate implementations.
 
 Use only main, pre-pilot project evidence and the pinned Compendium/Forge sources. Do not read or
 reuse pilot branches, ledgers, tests, captures or interpretations. Derive expected results before
@@ -57,6 +64,8 @@ existing browser passes are not programmatic proof.
 
 During implementation, run focused checks for the changed mechanism: choices/budgets, grants and
 derived values, parent replacement, persisted save/reload and applicable history/live-state cases.
+Prove that conditional actions appear only for their granting choices/states, that replacement or
+removal revokes old grants, and that state changes persist without resetting unrelated values.
 Reuse the existing test runners and pre-pilot helpers. Do not create a new test framework, limiter
 replica, diagnostic service or logging pipeline to complete a unit.
 
@@ -81,10 +90,14 @@ full per-option coverage and review gates still apply.
 
 ## Runtime and failure handling
 
-All installs, servers, builds and browser tests run on CT114 through the existing broker. Use a new
-explicitly named environment for the restart; do not reuse the stopped `characters` slot or its
-anonymous deployment/data. Preserve the user's shared main environment and its data. Follow the
-[remote runbook](../remote-development.md); do not copy pilot wrappers or patch the broker ad hoc.
+Local and remote CT114 are both valid test environments; use whichever is free and suitable.
+Do not wait for a remote slot when the same proof can run locally. Coordinate workloads per host
+and environment, reuse compatible running environments, and explicitly name concurrent isolated
+environments. Preserve the shared playable app and existing data; never reuse the stopped
+`characters` environment or its anonymous deployment/data. Record the actual source, runner
+location and application target. Use the existing broker for CT114 and follow the
+[environment-selection runbook](../remote-development.md#choosing-a-test-environment); do not copy
+pilot wrappers or patch the broker ad hoc. The browser moratorium applies everywhere.
 
 One owner controls a runtime job and any capture until its result is handed back. Before the first
 candidate, establish the actual current-main baseline in that clean environment. A failed baseline

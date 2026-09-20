@@ -132,6 +132,16 @@ export const characterTables = {
     /** The campaign the character is attached to: set by admission, one at a time. */
     campaignId: v.union(v.id('campaigns'), v.null()),
     combatLocked: v.boolean(),
+    /** Runic Carving is play state, independent of build choices and live resources. */
+    activeRune: v.optional(
+      v.object({
+        kind: v.union(v.literal('Detection'), v.literal('Light'), v.literal('Voice'), v.null()),
+        version: v.number(),
+        updatedAt: v.number(),
+        updatedById: v.id('users'),
+        sourcePath: v.string(),
+      }),
+    ),
     /** Campaign-entry XP threshold, distinct from awarded campaign XP. Legacy level-one rows use 0. */
     entryLevelXpOffset: v.optional(v.number()),
     /** Invalidates a preserved legacy full-edit draft without rewriting its historical snapshot. */

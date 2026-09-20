@@ -1,3 +1,4 @@
+import { ancestryAbilities } from './ancestryAbilities';
 // SPDX-License-Identifier: GPL-3.0-only
 /**
  * The R02 character evaluator: pure, deterministic, client-independent. Input is the R01 decision
@@ -836,7 +837,7 @@ class Evaluation {
     out.traits = this.traits();
     out.features = this.features();
     out.perks = this.perks();
-    out.abilities = this.abilities();
+    out.abilities = ancestryAbilities(out.traits, this.abilities());
     this.deriveSupportingChoices(out);
     out.uncertainties = UNCERTAINTY_ORDER.filter(id => this.uncertainties.has(id));
     return out;

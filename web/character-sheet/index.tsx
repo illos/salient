@@ -39,6 +39,7 @@ import {
   StatsList,
   pending,
 } from './sections';
+import { RunicCarving } from './runic-carving';
 import { StaminaBlock } from './stamina-block';
 
 const GROUPS: [SheetAbility['group'], string][] = [
@@ -254,6 +255,10 @@ function Abilities({ sheet, compact }: { sheet: HeroSheet; compact?: boolean }) 
       compact={compact}
       id="sheet-abilities"
     >
+      {sheet.features.some(feature => feature.name === 'Runic Carving') &&
+        (sheet.build?.label === 'effective' || (sheet.audience === 'owner' && !sheet.campaign)) && (
+          <RunicCarving characterId={sheet.id as Id<'characters'>} />
+        )}
       {sheet.build?.status === 'incomplete' && (
         <p className="m-0 mb-2 text-xs text-muted-foreground">
           The build is incomplete; abilities its missing choices would grant are absent.

@@ -13,6 +13,7 @@ import type * as abilityTables from "../abilityTables.js";
 import type * as accountEmail from "../accountEmail.js";
 import type * as auth from "../auth.js";
 import type * as campaigns from "../campaigns.js";
+import type * as characterRunes from "../characterRunes.js";
 import type * as characterSecrets from "../characterSecrets.js";
 import type * as characterTables from "../characterTables.js";
 import type * as characters from "../characters.js";
@@ -75,6 +76,7 @@ declare const fullApi: ApiFromModules<{
   accountEmail: typeof accountEmail;
   auth: typeof auth;
   campaigns: typeof campaigns;
+  characterRunes: typeof characterRunes;
   characterSecrets: typeof characterSecrets;
   characterTables: typeof characterTables;
   characters: typeof characters;

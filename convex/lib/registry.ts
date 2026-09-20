@@ -30,6 +30,7 @@ import { command } from './commands';
 import { rollDice } from './dice';
 import { appendEvent } from './events';
 import type { JournalScope } from './journal';
+import { runeOperation } from './runeOperations';
 import { tableOperations } from './tableOperations';
 import { foeOperations } from './foeOperations';
 import { combatOperations } from './combatOperations';
@@ -427,6 +428,7 @@ export function registeredOperations(): OperationDefinition[] {
     ...historyOperations,
     ...abilityOperations,
     ...characterOperations,
+    runeOperation,
   ]);
 }
 

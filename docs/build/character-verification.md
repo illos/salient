@@ -90,6 +90,11 @@ Steel code to understand factory defaults, ordering, dependencies and serializat
 
 - Choice eligibility, counts, budgets, prerequisites and nested selections.
 - Automatic, selected and conditional grants, their recipients, and the levels where they apply.
+- Every implemented trait/feature's explicit or embedded action grants, including dependent
+  selections and play state. Distinguish granted actions from passive modifiers; preserve the
+  granting trait and source timing. Apply the project-wide
+  [trait-granted ability gate](README.md#trait-granted-ability-completion-gate), even when Forge
+  omits an action or represents it differently.
 - Characteristics, Stamina/Recoveries, movement values, skills/languages, features and abilities.
 - Kit/enchantment/other contributions already included in printed ability values.
 - Companion or summon definitions and their derived grants, separately from live creatures.
@@ -108,6 +113,14 @@ Compare choices, grant membership and derived values with both the captured Forg
 independently established source expectations. Record explicit mappings where the apps use
 different identifiers; a similarly named option is not proof of the same selection. Check readable
 feature/ability content and distinguish permanent build calculations from manually resolved gameplay effects.
+
+For trait-granted actions, verify the action-list entries as well as the retained trait text.
+Exercise the supported operation for changing any granting play state, such as the active dwarf
+rune, and independently read back the state and resulting sheet. Prove grant, replacement and
+revocation, absence when ineligible, and preservation of unrelated build/live values. An unselected
+nested state does not cover its granted action. Keep these cases in the existing option coverage
+and evidence rather than adding a parallel checklist. Independent review must check source-based
+action coverage; agreement with Forge alone cannot establish completeness.
 
 Exercise the relevant negative/change cases: incomplete drafts, illegal options, parent changes,
 removed grants, duplicate entitlements or deferred selections. Verify existing campaign review,

@@ -3,6 +3,7 @@
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import type { ScenarioContext, Actor } from './character-client.ts';
+import { runTraitAbilities } from './trait-abilities.ts';
 import { runLifecycle } from './character-lifecycle.ts';
 import type { DraftSelection } from '../../shared/characterDraft.ts';
 import type { DecisionDefinitions } from '../../shared/evaluate/definitions.ts';
@@ -101,6 +102,7 @@ export async function runScenarios(context: ScenarioContext) {
   if (!discovered || !discovery) {
     skip('wizard choices and saved-state cases', 'Decision discovery prerequisite failed.');
     await runLifecycle(context);
+    await runTraitAbilities(context);
     return;
   }
   const definitions = discovery;
@@ -504,4 +506,5 @@ export async function runScenarios(context: ScenarioContext) {
     );
   } else skip('wizard saved-state boundaries', 'Devil creation prerequisite failed.');
   await runLifecycle(context);
+  await runTraitAbilities(context);
 }

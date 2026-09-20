@@ -149,6 +149,16 @@ export async function activateRevision(
   const patch: Partial<Doc<'characters'>> = {
     effectiveRevisionId: revision._id,
     derivedBaseline: baseline,
+    ...(character.activeRune?.kind && !baseline.traits.some(trait => trait.name === 'Runic Carving')
+      ? {
+          activeRune: {
+            ...character.activeRune,
+            kind: null,
+            version: character.activeRune.version + 1,
+            updatedAt: Date.now(),
+          },
+        }
+      : {}),
     campaignId,
   };
   if (character.campaignId !== campaignId)
@@ -240,6 +250,16 @@ export async function activateUnattachedRevision(
   await ctx.db.patch(character._id, {
     effectiveRevisionId: revision._id,
     derivedBaseline: baseline,
+    ...(character.activeRune?.kind && !baseline.traits.some(trait => trait.name === 'Runic Carving')
+      ? {
+          activeRune: {
+            ...character.activeRune,
+            kind: null,
+            version: character.activeRune.version + 1,
+            updatedAt: Date.now(),
+          },
+        }
+      : {}),
     ...(character.liveState && reconciliation
       ? {
           liveState: {
