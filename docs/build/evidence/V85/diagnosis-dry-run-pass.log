@@ -1,0 +1,24 @@
+▌ Deploying code to deployment:
+▌ [Development] jim-pringle:salient:dev/jim-pringle (dev) (dashboard: https://dashboard.convex.dev/t/jim-pringle/salient/different-bat-943)
+▌ └─ https://different-bat-943.convex.cloud
+- Deploying to https://different-bat-943.convex.cloud... [dry run]
+
+[36mA minor update is available for Convex[39m [2m(1.45.0 → 1.46.0)[22m
+[2mChangelog:[22m [4mhttps://github.com/get-convex/convex-js/blob/main/CHANGELOG.md#changelog[24m
+Convex AI files are not installed. Run npx convex ai-files install to get started or npx convex ai-files disable to hide this message.
+✔ No indexes are deleted by this push
+Uploading functions to Convex...
+Generating TypeScript bindings...
+Command would write file: /srv/presidium/projects/salient/code/.worktrees/supporting-actions/convex/_generated/api.d.ts
+Running TypeScript...
+Pushing code to your Convex deployment...
+Schema validation complete.
+Downloading current deployment state...
+Diffing local code and deployment state...
+✔ Remote config would be overwritten with the following changes:
+  Change the server's version for Node.js actions:
+  
+Finalizing push...
+✔ Would have deployed Convex functions to https://different-bat-943.convex.cloud
+
+Exit: 0
