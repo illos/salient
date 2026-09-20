@@ -273,6 +273,21 @@ export const results = query({
         if (!aliases.has(actor.id))
           aliases.set(actor.id, await resolveHistoricalId(ctx, args.campaignId, actor.id));
     }
+    // Historical effects retain original target IDs, while controller authority follows the
+    // current restored character. Never infer authority from the acting ability's controller.
+    const controlledTargetIds = new Set<string>();
+    if (!director && context.role === 'player') {
+      for (const row of rows) {
+        for (const { target } of row.targets) {
+          if (target.kind !== 'character' || controlledTargetIds.has(target.id)) continue;
+          const currentId = aliases.get(target.id) ?? target.id;
+          const characterId = ctx.db.normalizeId('characters', currentId);
+          const character = characterId ? await ctx.db.get(characterId) : null;
+          if (character?.campaignId === args.campaignId && character.ownerId === user._id)
+            controlledTargetIds.add(target.id);
+        }
+      }
+    }
     return rows.map(row => ({
       id: row._id,
       eventId: row.eventId,
@@ -287,6 +302,7 @@ export const results = query({
               new Set(row.targets.filter(t => t.target.kind === 'foe').map(t => t.target.id)),
               director,
               numerical,
+              controlledTargetIds,
             ),
           }
         : {}),

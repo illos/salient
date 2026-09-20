@@ -225,11 +225,11 @@ describe('V67 source-backed compiled nodes and manual boundaries', () => {
     const result = compileAbility(name === 'Bury the Point' ? warrior(name) : hero(name));
     expect(result.execution).toBe('supported');
     result.tiers.forEach((tier, i) => {
-      expect(tier.map(n => n.kind)).toEqual(['damage', 'unsupported']);
-      const remainder = tier.find(n => n.kind === 'unsupported');
+      expect(tier.map(n => n.kind)).toEqual(['damage', 'condition']);
+      const remainder = tier.find(n => n.kind === 'condition');
       expect(remainder?.clause).toContain(thresholds[i]);
       expect(remainder?.clause).toContain('save ends');
-      expect(remainder?.shape).toContain('potency:');
+      expect(remainder?.duration).toBe('save-ends');
     });
   });
 
@@ -401,14 +401,14 @@ describe('V67 source-backed pure outcome examples', () => {
     });
   });
 
-  it('BP2 calculates one 2-Malice cost and damage while leaving the potency clause manual', () => {
+  it('BP2 calculates one 2-Malice cost and damage while requesting missing potency facts', () => {
     const facts = gToH();
     facts.resourcePool = { resource: 'malice', current: 2, legalFloor: 0 };
     const result = resolved(compileAbility(warrior('Bury the Point')), facts);
     expect(result.roll.cost).toMatchObject({ amount: 2, before: 2, after: 0 });
     expect(result.roll.damageApplications[0]?.staminaAfter).toBe(24);
-    expect(result.effects.map(e => e.kind)).toEqual(['damage', 'unsupported']);
-    expect(result.effects[1]).toMatchObject({ status: 'manual', dependency: 'after-damage' });
+    expect(result.effects.map(e => e.kind)).toEqual(['damage', 'condition']);
+    expect(result.effects[1]).toMatchObject({ status: 'fact-needed', characteristic: 'M' });
     expect(result.effects[1]?.clause).toContain('M < 1');
     facts.resourcePool.current = 1;
     const blocked = resolveCompiledAbility(compileAbility(warrior('Bury the Point')), facts);
@@ -439,7 +439,7 @@ describe('V67 source-backed pure outcome examples', () => {
       if (allowance !== undefined)
         expect(result.effects[1]).toMatchObject({ kind: 'push', sizeBonus: 0, allowance });
       else {
-        expect(result.effects[1]).toMatchObject({ kind: 'unsupported', status: 'manual' });
+        expect(result.effects[1]).toMatchObject({ kind: 'condition', status: 'fact-needed' });
         expect(result.effects[1]?.clause).toContain('R < AVERAGE');
       }
     },
@@ -491,5 +491,170 @@ describe('V67 support report reproducibility', () => {
     const second = compiledSupportReport(inputs);
     expect(JSON.stringify(second, null, 2)).toBe(JSON.stringify(first, null, 2));
     expect(renderCompiledSupport(second)).toBe(renderCompiledSupport(first));
+  });
+});
+
+// V88 source-derived truth tables: M < printed 0/1/2, never <=.
+describe('V88 bounded potency conditions', () => {
+  it.each([
+    [2, ['resisted', 'resisted', 'resisted']],
+    [0, ['resisted', 'applied', 'applied']],
+    [-1, ['applied', 'applied', 'applied']],
+  ] as const)('Bury the Point against Might %s', (might, statuses) => {
+    const definition = compileAbility(warrior('Bury the Point'));
+    for (const [index, dice] of (
+      [
+        { d10a: 4, d10b: 5 },
+        { d10a: 6, d10b: 6 },
+        { d10a: 8, d10b: 8 },
+      ] as const
+    ).entries()) {
+      const facts = gToH();
+      facts.dice = dice;
+      facts.resourcePool = { resource: 'malice', current: 2, legalFloor: 0 };
+      facts.conditionFacts = {
+        targets: [{ targetId: 'H', kind: 'hero', characteristics: { M: might } }],
+      };
+      const outcome = resolved(definition, facts);
+      expect(outcome.effects[1]).toMatchObject({
+        kind: 'condition',
+        status: statuses[index],
+        threshold: index,
+        thresholdSource: { kind: 'printed', value: index },
+        targetScore: might,
+        condition: 'bleeding',
+        duration: 'save-ends',
+        requirements: [],
+      });
+    }
+  });
+
+  it('RAY1 uses evaluated Reason potency even with higher Intuition', () => {
+    const definition = compileAbility(hero('Ray of Agonizing Self-Reflection'));
+    const facts = hToG();
+    facts.actor.characteristics = { M: 0, A: 0, R: 2, I: 3, P: 0 };
+    facts.conditionFacts = {
+      targets: [{ targetId: 'G', kind: 'foe', characteristics: { R: 1 } }],
+      potency: { characteristic: 'R', weak: 0, average: 1, strong: 2 },
+    };
+    for (const [index, dice] of (
+      [
+        { d10a: 4, d10b: 5 },
+        { d10a: 6, d10b: 6 },
+        { d10a: 8, d10b: 8 },
+      ] as const
+    ).entries()) {
+      facts.dice = dice;
+      const outcome = resolved(definition, facts);
+      expect(outcome.effects[1]).toMatchObject({
+        kind: 'condition',
+        threshold: index,
+        potencyCharacteristic: 'R',
+        status: index === 2 ? 'applied' : 'resisted',
+      });
+      if (index === 1) expect(outcome.roll.damageApplications[0]?.incoming).toBe(6);
+    }
+    delete facts.conditionFacts.potency;
+    expect(resolved(definition, facts).effects[1]).toMatchObject({
+      status: 'fact-needed',
+      requirements: ['actor.potency.strong'],
+    });
+  });
+
+  it('WD3 keeps class-named potency independent of Might or Agility roll and damage choices', () => {
+    const definition = compileAbility(hero('The Wode Defends'));
+    for (const selected of ['M', 'A'] as const) {
+      const facts = hToG();
+      facts.actor.characteristics = { M: 2, A: 3, R: 2, I: 0, P: 0 };
+      facts.selectedCharacteristic = selected;
+      facts.selectedDamageCharacteristic = selected;
+      facts.dice = { d10a: 6, d10b: 6 };
+      facts.conditionFacts = {
+        targets: [{ targetId: 'G', kind: 'foe', characteristics: { A: 0 } }],
+        potency: { characteristic: 'R', weak: 0, average: 1, strong: 2 },
+      };
+      const average = resolved(definition, facts);
+      expect(average.roll.targets[0]).toMatchObject({
+        tier: 2,
+        damage: { rolledDamage: selected === 'M' ? 5 : 6 },
+      });
+      expect(average.effects[1]).toMatchObject({
+        kind: 'condition',
+        status: 'applied',
+        characteristic: 'A',
+        condition: 'slowed',
+        threshold: 1,
+        thresholdSource: { kind: 'potency', tier: 'average' },
+        potencyCharacteristic: 'R',
+      });
+      facts.dice = { d10a: 8, d10b: 8 };
+      const strong = resolved(definition, facts);
+      expect(strong.roll.targets[0]).toMatchObject({
+        tier: 3,
+        damage: { rolledDamage: selected === 'M' ? 7 : 8 },
+      });
+      expect(strong.effects[1]).toMatchObject({
+        kind: 'condition',
+        status: 'applied',
+        condition: 'restrained',
+        threshold: 2,
+        thresholdSource: { kind: 'potency', tier: 'strong' },
+        potencyCharacteristic: 'R',
+      });
+    }
+  });
+
+  it.each(['hero', 'foe', 'object', 'squad'] as const)(
+    'missing or excluded %s scores stay fact-needed',
+    kind => {
+      const facts = gToH();
+      facts.resourcePool = { resource: 'malice', current: 2, legalFloor: 0 };
+      facts.conditionFacts = {
+        targets: [
+          {
+            targetId: 'H',
+            kind,
+            ...(kind === 'object' || kind === 'squad' ? { characteristics: { M: -1 } } : {}),
+          },
+        ],
+      };
+      const effect = resolved(compileAbility(warrior('Bury the Point')), facts).effects[1];
+      expect(effect).toMatchObject({ kind: 'condition', status: 'fact-needed' });
+      expect(effect).not.toHaveProperty('targetScore');
+      if (effect?.kind === 'condition')
+        expect(effect.requirements).toContain('target:H.characteristics.M');
+    },
+  );
+
+  it.each([
+    'M < 1 prone',
+    'A < 2 grabbed',
+    'R < 1 slowed (EoT)',
+    "A < STRONG, prone and can't stand (save ends)",
+    'push 1; M < 1 bleeding (save ends)',
+    'M < 1 bleeding (save ends) then shift 1',
+    'M < 1 bleeding (save ends); push 1',
+  ])('keeps unsafe remainder %s unsupported', remainder => {
+    const input = warrior('Bury the Point');
+    input.blocks = input.blocks.map(block =>
+      block.kind === 'roll'
+        ? {
+            ...block,
+            tiers: block.tiers.map(text => `${text.split(';')[0]}; ${remainder}`) as [
+              string,
+              string,
+              string,
+            ],
+          }
+        : block,
+    );
+    input.markdown = input.markdown.replace(
+      /(^.*(?:≤11|12-16|17\+).*?;)[^\n]+/gm,
+      `$1 ${remainder}`,
+    );
+    const definition = compileAbility(input);
+    expect(definition.execution).toBe('manual');
+    expect(definition.tiers.flat().some(node => node.kind === 'condition')).toBe(false);
+    expect(definition.diagnostics.some(d => d.code === 'unsafe-tier-remainder')).toBe(true);
   });
 });

@@ -699,7 +699,8 @@ export function renderMarkdown(report: Report): string {
     'Classification is a read-only text check against the bounded grammar in',
     '[V26 section 1](../../../V26-compiled-ability-effects.md#1-source-to-compiled-definition):',
     'one power roll with three tiers; each tier a supported damage expression, optionally followed by',
-    '`push N`; the bounded post-damage potency remainder counts as a remainder. Nothing here is a',
+    '`push N`; the bounded post-damage potency remainder counts as a remainder. V88 bounds exactly',
+    'one core condition `(save ends)` as the second and final damage-tier clause. Nothing here is a',
     'gameplay migration, a support claim or evidence that any ability executes correctly.',
     '',
     `Content hash: \`${report.contentHash ?? 'n/a'}\`. Foe catalog edition: \`${report.foesEdition}\`. Source revision: \`${report.sourceRevision}\`.`,
@@ -707,7 +708,7 @@ export function renderMarkdown(report: Report): string {
   );
   lines.push('## Totals per corpus', '');
   lines.push(
-    '| Corpus | Total | COMPILES | COMPILES_WITH_REMAINDER | of which within V26 bounded remainder | NO_MATCH |',
+    '| Corpus | Total | COMPILES | COMPILES_WITH_REMAINDER | of which within V88 bounded remainder | NO_MATCH |',
   );
   lines.push('| --- | ---: | ---: | ---: | ---: | ---: |');
   for (const c of corpora) {
@@ -730,7 +731,7 @@ export function renderMarkdown(report: Report): string {
   lines.push('## What the bounded V26 grammar buys', '');
   const b = report.buys;
   lines.push(
-    `- Foe abilities: ${b.foe.compiles + b.foe.withRemainder} of ${b.foe.total} (${pct(b.foe.compiles + b.foe.withRemainder, b.foe.total)}) have tiers the grammar compiles: ${b.foe.compiles} fully (${pct(b.foe.compiles, b.foe.total)}), ${b.foe.withRemainder} with a typed remainder (${pct(b.foe.withRemainder, b.foe.total)}), of which ${b.foe.withinV26Bounded} (${pct(b.foe.withinV26Bounded, b.foe.total)}) are within V26's bounded potency remainder. ${b.foe.noMatch} (${pct(b.foe.noMatch, b.foe.total)}) do not match.`,
+    `- Foe abilities: ${b.foe.compiles + b.foe.withRemainder} of ${b.foe.total} (${pct(b.foe.compiles + b.foe.withRemainder, b.foe.total)}) have tiers the grammar compiles: ${b.foe.compiles} fully (${pct(b.foe.compiles, b.foe.total)}), ${b.foe.withRemainder} with a typed remainder (${pct(b.foe.withRemainder, b.foe.total)}), of which ${b.foe.withinV26Bounded} (${pct(b.foe.withinV26Bounded, b.foe.total)}) are within V88's bounded potency remainder. ${b.foe.noMatch} (${pct(b.foe.noMatch, b.foe.total)}) do not match.`,
     `- Hero abilities (standalone + kit signatures + own-text grants): ${b.hero.compiles + b.hero.withRemainder} of ${b.hero.total} (${pct(b.hero.compiles + b.hero.withRemainder, b.hero.total)}) compile: ${b.hero.compiles} fully (${pct(b.hero.compiles, b.hero.total)}), ${b.hero.withRemainder} with a typed remainder (${pct(b.hero.withRemainder, b.hero.total)}), of which ${b.hero.withinV26Bounded} (${pct(b.hero.withinV26Bounded, b.hero.total)}) are within the bounded potency remainder. ${b.hero.noMatch} (${pct(b.hero.noMatch, b.hero.total)}) do not match.`,
     '',
     'A compiled tier means the damage expression and optional push are recognized; V26 runtime',

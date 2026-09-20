@@ -27,6 +27,44 @@ export const conditionsValidator = v.object({
   taunted: v.boolean(),
   weakened: v.boolean(),
 });
+export const conditionInstanceValidator = v.object({
+  id: v.string(),
+  condition: v.union(
+    ...(
+      [
+        'bleeding',
+        'dazed',
+        'frightened',
+        'grabbed',
+        'prone',
+        'restrained',
+        'slowed',
+        'taunted',
+        'weakened',
+      ] as const
+    ).map(value => v.literal(value)),
+  ),
+  duration: v.literal('save-ends'),
+  sourceUseEventId: v.string(),
+  abilityName: v.string(),
+  actorLabel: v.string(),
+  sourcePath: v.string(),
+  status: v.union(v.literal('active'), v.literal('ended')),
+  registrationId: v.optional(v.string()),
+  lastSave: v.optional(
+    v.object({
+      roll: v.number(),
+      success: v.boolean(),
+      boundaryEventId: v.string(),
+      threshold: v.number(),
+      thresholdSource: v.union(
+        v.object({ kind: v.literal('hero-baseline'), provenance: v.array(v.any()) }),
+        v.object({ kind: v.literal('printed'), sourcePath: v.string() }),
+      ),
+    }),
+  ),
+  endedReason: v.optional(v.string()),
+});
 /**
  * A hero's live play values (shared/contracts/liveState.ts HeroLiveState plus LiveStateOrigin).
  * Written once by first admission from the effective build's baseline (R03 section 2.1) and then
@@ -41,6 +79,8 @@ export const heroLiveValidator = v.object({
   victories: v.number(),
   xp: v.number(),
   conditions: conditionsValidator,
+  manualConditions: v.optional(conditionsValidator),
+  conditionInstances: v.optional(v.array(conditionInstanceValidator)),
   origin: v.object({
     kind: v.literal('first-admission'),
     buildRevisionId: v.id('characterRevisions'),

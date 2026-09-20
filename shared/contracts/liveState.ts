@@ -18,6 +18,7 @@
  * operations, each of which appends a history event (shared/contracts/history.ts).
  */
 
+import type { Provenance } from './characterEvaluation.ts';
 import type { CampaignId } from './history.ts';
 
 /**
@@ -39,6 +40,30 @@ export type ConditionId =
 
 /** One on/off toggle per core condition (docs/table-spec.md#v001-manual-condition-tracking). */
 export type ConditionToggles = Record<ConditionId, boolean>;
+
+export type SavingThrowSource =
+  { kind: 'hero-baseline'; provenance: Provenance[] } | { kind: 'printed'; sourcePath: string };
+
+/** V88 source-linked save-ends effect; ended instances retain save evidence for corrections. */
+export interface ConditionInstance {
+  id: string;
+  condition: ConditionId;
+  duration: 'save-ends';
+  sourceUseEventId: string;
+  abilityName: string;
+  actorLabel: string;
+  sourcePath: string;
+  status: 'active' | 'ended';
+  registrationId?: string;
+  lastSave?: {
+    roll: number;
+    success: boolean;
+    boundaryEventId: string;
+    threshold: number;
+    thresholdSource: SavingThrowSource;
+  };
+  endedReason?: string;
+}
 
 /** Every toggle off: the first-admission state of a hero and the loaded state of a foe. */
 export type NoConditions = Record<ConditionId, false>;
@@ -73,6 +98,8 @@ export interface HeroLiveState {
   /** Campaign value; nothing in v0.01 changes it (respite and advancement are V01/V08). */
   xp: number;
   conditions: ConditionToggles;
+  manualConditions?: ConditionToggles;
+  conditionInstances?: ConditionInstance[];
 }
 
 /**
@@ -100,6 +127,8 @@ export interface FoeLiveState {
   stamina: number;
   temporaryStamina: number;
   conditions: ConditionToggles;
+  manualConditions?: ConditionToggles;
+  conditionInstances?: ConditionInstance[];
 }
 
 /** The loaded-foe values: printed Stamina, no temporary Stamina, every toggle off. */

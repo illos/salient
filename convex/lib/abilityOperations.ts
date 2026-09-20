@@ -30,7 +30,13 @@ import {
   type CompiledAbilityInput,
 } from '../../shared/resolve/compiledOutcome';
 import { effectOccurrences, type CompiledResult } from '../../shared/contracts/compiledResult';
-import { movementFacts } from './compiledResults';
+import { movementFacts, conditionFacts } from './compiledResults';
+import {
+  applyConditionInstance,
+  endConditionInstance,
+  hasRolledConditionSave,
+} from './conditionInstances';
+import { appendEvent } from './events';
 import type { Doc, Id } from '../_generated/dataModel';
 import type { MutationCtx } from '../_generated/server';
 import type { BoundActor, CommandEnvelope, Reference } from '../../shared/commands/envelope';
@@ -806,6 +812,71 @@ function sourceFor(ability: AbilityDefinition) {
   };
 }
 
+/** Conditions follow all damage and retain the original use identity through corrections. */
+async function commitConditions(
+  ctx: MutationCtx,
+  scope: JournalScope,
+  occurrences: import('../../shared/contracts/compiledResult').EffectOccurrence[],
+  targets: TargetRecord[],
+  source: { eventId: Id<'events'>; abilityName: string; actorLabel: string; sourcePath: string },
+  encounterId: Id<'encounters'> | null,
+  originalTargetId?: string,
+) {
+  const cause = (await ctx.db.get(scope.eventId))!;
+  for (const occurrence of occurrences) {
+    const effect = occurrence.effect;
+    if (effect.kind !== 'condition') continue;
+    const target = targets.find(
+      t =>
+        t.actor.id === effect.targetId ||
+        (originalTargetId === effect.targetId && targets.length === 1),
+    );
+    if (!target) throw new ConvexError('Condition target is unavailable.');
+    let schedule = '';
+    if (effect.status === 'applied') {
+      if (target.actor.kind === 'squad' || target.squad)
+        throw new ConvexError('Squad potency conditions require manual resolution.');
+      const instance = await applyConditionInstance(
+        ctx,
+        scope,
+        { kind: target.actor.kind, id: target.actor.id },
+        {
+          id: occurrence.id,
+          condition: effect.condition,
+          sourceUseEventId: source.eventId,
+          abilityName: source.abilityName,
+          actorLabel: source.actorLabel,
+          sourcePath: source.sourcePath,
+        },
+        encounterId ?? undefined,
+      );
+      schedule = instance.registrationId
+        ? ' Save scheduled at each target turn end.'
+        : ' Save is unscheduled outside a committed encounter; resolve it manually.';
+    }
+    // Never publish the target score through event descriptions/payloads, even for hero targets.
+    await appendEvent(ctx, {
+      campaignId: scope.campaignId,
+      sessionId: cause.sessionId,
+      encounterId: cause.encounterId,
+      origin: 'engine',
+      commandId: cause.commandId,
+      causeEventId: scope.eventId,
+      kind: 'condition.potency',
+      description: `${source.actorLabel}'s ${source.abilityName}: ${target.actor.name}, ${plainText(effect.clause)} — ${effect.status}.${schedule} Condition consequences remain manual.`,
+      payload: {
+        sourceUseEventId: source.eventId,
+        occurrence: occurrence.id,
+        condition: effect.condition,
+        duration: effect.duration,
+        status: effect.status,
+        target: target.actor,
+        sourcePath: source.sourcePath,
+      },
+    });
+  }
+}
+
 const abilityUse: OperationDefinition = {
   id: 'ability.use',
   family: 'ability',
@@ -1214,6 +1285,7 @@ const abilityUse: OperationDefinition = {
       ...(!compiledDefinition && ability.effects ? { effectClauses: ability.effects } : {}),
       ...(compiledDefinition
         ? {
+            conditionFacts: conditionFacts(records, targets),
             movement: {
               actor: movementFacts(records),
               targets: targets.map(t => ({ ...movementFacts(t), targetId: t.actor.id })),
@@ -1304,6 +1376,21 @@ const abilityUse: OperationDefinition = {
           if (p.applied) await writeDamage(mctx, scope, record, p.applied);
         }
         await commitSquadPlans(mctx, scope, squadPlans);
+        // Post-damage conditions share the same journal and command as their original use.
+        if (compiledOutcome?.kind === 'resolved')
+          await commitConditions(
+            mctx,
+            scope,
+            effectOccurrences(scope.eventId, scope.eventId, compiledOutcome.effects),
+            targets,
+            {
+              eventId: scope.eventId,
+              abilityName: ability.name,
+              actorLabel: actor!.name,
+              sourcePath: ability.source.path,
+            },
+            allowance.encounterId,
+          );
         // 3. The effective record for corrections and dispositions.
         await journalInsert(mctx, scope, 'abilityResults', {
           campaignId: scope.campaignId,
@@ -1411,6 +1498,16 @@ const abilityCorrect: OperationDefinition = {
     const { event, result } = await resultByEvent(ctx, context, String(args.event));
     // A06 window check: latest unit on the branch; acting player within their undo window; Director
     // always subject to the sequential-rewind rule for older events.
+    if (result.compiled) {
+      for (const target of result.targets) {
+        if (target.target.kind === 'squad') continue;
+        const id = await resolveHistoricalId(ctx, context.campaign._id, target.target.id);
+        if (await hasRolledConditionSave(ctx, { kind: target.target.kind, id }, event._id))
+          throw new ConvexError(
+            'A saving throw has already been rolled for this ability condition; rewind the save before correcting the ability. Recorded saves are never replayed.',
+          );
+      }
+    }
     await assertCorrectionAllowed(ctx, event._id, context.user);
     const edges = integer(args.edges, 'edges', 0);
     const banes = integer(args.banes, 'banes', 0);
@@ -1494,6 +1591,10 @@ const abilityCorrect: OperationDefinition = {
       : undefined;
     if (correctedCompiled && correctedCompiled.kind !== 'resolved')
       throw new ConvexError('The saved compiled result cannot be corrected safely.');
+    if (correctedCompiled?.kind === 'resolved') {
+      const outcome = correctedCompiled.roll.targets.find(t => t.targetId === entry.target.id);
+      if (outcome) correction.after = outcome;
+    }
     const name = targetRecord.actor.name;
     const stamina =
       'facts' in facts && correction.damageAfter
@@ -1559,6 +1660,36 @@ const abilityCorrect: OperationDefinition = {
             temporaryStaminaAfter:
               facts.facts.temporaryStamina + correction.temporaryStaminaReconciliationDelta,
           });
+        if (savedCompiled && correctedCompiled?.kind === 'resolved') {
+          for (const occurrence of savedCompiled.effects) {
+            if (
+              occurrence.effect.kind !== 'condition' ||
+              occurrence.effect.targetId !== entry.target.id
+            )
+              continue;
+            await endConditionInstance(
+              mctx,
+              scope,
+              targetRecord.actor as { kind: 'character' | 'foe'; id: string },
+              occurrence.id,
+              'ability correction',
+            );
+          }
+          await commitConditions(
+            mctx,
+            scope,
+            effectOccurrences(event._id, scope.eventId, correctedCompiled.effects),
+            [targetRecord],
+            {
+              eventId: event._id,
+              abilityName: result.abilityName,
+              actorLabel: result.actor.name,
+              sourcePath: savedCompiled.definition.source.path,
+            },
+            result.encounterId,
+            entry.target.id,
+          );
+        }
       },
     };
   },
@@ -1624,6 +1755,14 @@ const abilityResolved: OperationDefinition = {
           'Give one current effect occurrence; stale or ambiguous effects cannot be marked.',
         );
       const occurrence = candidates[0]!;
+      if (
+        occurrence.effect.kind === 'condition' &&
+        occurrence.effect.status !== 'fact-needed' &&
+        occurrence.effect.status !== 'manual'
+      )
+        throw new ConvexError(
+          'An applied or resisted condition occurrence cannot be resolved manually.',
+        );
       if (clause && plainText(clause) !== plainText(occurrence.effect.clause))
         throw new ConvexError('The clause does not match that occurrence.');
       if (occurrence.revision !== compiled.revision || occurrence.useEventId !== event._id)

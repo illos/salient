@@ -1,15 +1,15 @@
 {
   "generator": "scripts/audit-ability-grammar.ts v1",
-  "contentHash": "sha256:64a08e925f76657409df983b706d2599edcb499457e9b21325d65ee7268c10d8",
+  "contentHash": "sha256:65beca9bf41771ceee44fe4b706d570ba94fc5aa32556bba98ca47c01e30e41f",
   "foesEdition": "bf262edf546e91e1540cc17489915f18c4873ddd8bd8e225b20f3441e3f74f30",
   "sourceRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
   "totals": {
     "hero-standalone": {
       "COMPILES": 8,
-      "COMPILES_WITH_REMAINDER": 22,
-      "NO_MATCH": 22,
-      "total": 52,
-      "withinV26Bounded": 1
+      "COMPILES_WITH_REMAINDER": 23,
+      "NO_MATCH": 26,
+      "total": 57,
+      "withinV26Bounded": 2
     },
     "kit-signature": {
       "COMPILES": 2,
@@ -21,8 +21,8 @@
     "granted": {
       "COMPILES": 1,
       "COMPILES_WITH_REMAINDER": 2,
-      "NO_MATCH": 12,
-      "total": 15,
+      "NO_MATCH": 32,
+      "total": 35,
       "withinV26Bounded": 0
     },
     "foe-ability": {
@@ -30,7 +30,7 @@
       "COMPILES_WITH_REMAINDER": 566,
       "NO_MATCH": 572,
       "total": 1158,
-      "withinV26Bounded": 14
+      "withinV26Bounded": 29
     },
     "malice": {
       "COMPILES": 0,
@@ -41,10 +41,10 @@
     }
   },
   "grants": {
-    "total": 132,
-    "resolvedToStandalone": 54,
+    "total": 297,
+    "resolvedToStandalone": 100,
     "resolvedToKit": 42,
-    "ownText": 36,
+    "ownText": 155,
     "unresolved": []
   },
   "entries": [
@@ -470,7 +470,45 @@
         "withinV26Bounded": false,
         "targetShape": "area"
       },
-      "availability": "not-granted"
+      "grants": [
+        {
+          "name": "Draconian Pride",
+          "sourcePath": "en/unified/md/feature/ability/dragon-knight/draconian-pride.md",
+          "decisionId": "ancestry.dragon-knight.purchased-traits",
+          "level": 1,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Draconian Pride supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Draconian Pride",
+          "sourcePath": "en/unified/md/feature/ability/dragon-knight/draconian-pride.md",
+          "decisionId": "ancestry.revenant.dragon-knight.purchased-traits",
+          "level": 1,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Draconian Pride supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Draconian Pride",
+          "sourcePath": "en/unified/md/feature/ability/dragon-knight/draconian-pride.md",
+          "decisionId": "ancestry.dragon-knight.purchased-traits",
+          "level": 2,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Draconian Pride supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Draconian Pride",
+          "sourcePath": "en/unified/md/feature/ability/dragon-knight/draconian-pride.md",
+          "decisionId": "ancestry.revenant.dragon-knight.purchased-traits",
+          "level": 2,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Draconian Pride supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
     },
     {
       "corpus": "hero-standalone",
@@ -518,7 +556,45 @@
         "withinV26Bounded": false,
         "targetShape": "area"
       },
-      "availability": "not-granted"
+      "grants": [
+        {
+          "name": "Dragon Breath",
+          "sourcePath": "en/unified/md/feature/ability/dragon-knight/dragon-breath.md",
+          "decisionId": "ancestry.dragon-knight.purchased-traits",
+          "level": 1,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Dragon Breath supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Dragon Breath",
+          "sourcePath": "en/unified/md/feature/ability/dragon-knight/dragon-breath.md",
+          "decisionId": "ancestry.revenant.dragon-knight.purchased-traits",
+          "level": 1,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Dragon Breath supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Dragon Breath",
+          "sourcePath": "en/unified/md/feature/ability/dragon-knight/dragon-breath.md",
+          "decisionId": "ancestry.dragon-knight.purchased-traits",
+          "level": 2,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Dragon Breath supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Dragon Breath",
+          "sourcePath": "en/unified/md/feature/ability/dragon-knight/dragon-breath.md",
+          "decisionId": "ancestry.revenant.dragon-knight.purchased-traits",
+          "level": 2,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Dragon Breath supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
     },
     {
       "corpus": "hero-standalone",
@@ -3086,6 +3162,646 @@
           "grantKind": "ancestry-ability",
           "selectable": "selectable",
           "detail": "automatic grant; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.revenant/detonate-sigil",
+      "name": "Detonate Sigil",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/revenant/detonate-sigil.md",
+      "usage": "Main action",
+      "target": "One creature bearing your sigil",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "roll-expression-outside-grammar",
+        "diagnostics": [
+          {
+            "type": "roll-expression",
+            "shape": "roll:power roll + reason, intuition, or presence",
+            "text": "Power Roll + Reason, Intuition, or Presence",
+            "locator": "roll:1"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "The sigil disappears from the creature.",
+            "locator": "section:1"
+          },
+          {
+            "type": "slide",
+            "shape": "slide N",
+            "text": "slide 1",
+            "locator": "tier1"
+          },
+          {
+            "type": "tier-damage",
+            "shape": "tier:N + r, i, or p damage",
+            "text": "3 + R, I, or P damage",
+            "locator": "tier1"
+          },
+          {
+            "type": "slide",
+            "shape": "slide N",
+            "text": "slide 2",
+            "locator": "tier2"
+          },
+          {
+            "type": "tier-damage",
+            "shape": "tier:N + r, i, or p damage",
+            "text": "5 + R, I, or P damage",
+            "locator": "tier2"
+          },
+          {
+            "type": "slide",
+            "shape": "slide N",
+            "text": "slide 3",
+            "locator": "tier3"
+          },
+          {
+            "type": "tier-damage",
+            "shape": "tier:N + r, i, or p damage",
+            "text": "7 + R, I, or P damage",
+            "locator": "tier3"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "unknown"
+      },
+      "grants": [
+        {
+          "name": "Detonate Sigil",
+          "sourcePath": "en/unified/md/feature/ability/revenant/detonate-sigil.md",
+          "decisionId": "ancestry.revenant.devil.purchased-traits",
+          "level": 1,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Vengeance Mark supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Detonate Sigil",
+          "sourcePath": "en/unified/md/feature/ability/revenant/detonate-sigil.md",
+          "decisionId": "ancestry.revenant.dragon-knight.purchased-traits",
+          "level": 1,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Vengeance Mark supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Detonate Sigil",
+          "sourcePath": "en/unified/md/feature/ability/revenant/detonate-sigil.md",
+          "decisionId": "ancestry.revenant.dwarf.purchased-traits",
+          "level": 1,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Vengeance Mark supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Detonate Sigil",
+          "sourcePath": "en/unified/md/feature/ability/revenant/detonate-sigil.md",
+          "decisionId": "ancestry.revenant.hakaan.purchased-traits",
+          "level": 1,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Vengeance Mark supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Detonate Sigil",
+          "sourcePath": "en/unified/md/feature/ability/revenant/detonate-sigil.md",
+          "decisionId": "ancestry.revenant.high-elf.purchased-traits",
+          "level": 1,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Vengeance Mark supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Detonate Sigil",
+          "sourcePath": "en/unified/md/feature/ability/revenant/detonate-sigil.md",
+          "decisionId": "ancestry.revenant.human.purchased-traits",
+          "level": 1,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Vengeance Mark supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Detonate Sigil",
+          "sourcePath": "en/unified/md/feature/ability/revenant/detonate-sigil.md",
+          "decisionId": "ancestry.revenant.memonek.purchased-traits",
+          "level": 1,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Vengeance Mark supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Detonate Sigil",
+          "sourcePath": "en/unified/md/feature/ability/revenant/detonate-sigil.md",
+          "decisionId": "ancestry.revenant.orc.purchased-traits",
+          "level": 1,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Vengeance Mark supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Detonate Sigil",
+          "sourcePath": "en/unified/md/feature/ability/revenant/detonate-sigil.md",
+          "decisionId": "ancestry.revenant.polder.purchased-traits",
+          "level": 1,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Vengeance Mark supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Detonate Sigil",
+          "sourcePath": "en/unified/md/feature/ability/revenant/detonate-sigil.md",
+          "decisionId": "ancestry.revenant.time-raider.purchased-traits",
+          "level": 1,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Vengeance Mark supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Detonate Sigil",
+          "sourcePath": "en/unified/md/feature/ability/revenant/detonate-sigil.md",
+          "decisionId": "ancestry.revenant.wode-elf.purchased-traits",
+          "level": 1,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Vengeance Mark supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Detonate Sigil",
+          "sourcePath": "en/unified/md/feature/ability/revenant/detonate-sigil.md",
+          "decisionId": "ancestry.revenant.devil.purchased-traits",
+          "level": 2,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Vengeance Mark supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Detonate Sigil",
+          "sourcePath": "en/unified/md/feature/ability/revenant/detonate-sigil.md",
+          "decisionId": "ancestry.revenant.dragon-knight.purchased-traits",
+          "level": 2,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Vengeance Mark supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Detonate Sigil",
+          "sourcePath": "en/unified/md/feature/ability/revenant/detonate-sigil.md",
+          "decisionId": "ancestry.revenant.dwarf.purchased-traits",
+          "level": 2,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Vengeance Mark supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Detonate Sigil",
+          "sourcePath": "en/unified/md/feature/ability/revenant/detonate-sigil.md",
+          "decisionId": "ancestry.revenant.hakaan.purchased-traits",
+          "level": 2,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Vengeance Mark supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Detonate Sigil",
+          "sourcePath": "en/unified/md/feature/ability/revenant/detonate-sigil.md",
+          "decisionId": "ancestry.revenant.high-elf.purchased-traits",
+          "level": 2,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Vengeance Mark supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Detonate Sigil",
+          "sourcePath": "en/unified/md/feature/ability/revenant/detonate-sigil.md",
+          "decisionId": "ancestry.revenant.human.purchased-traits",
+          "level": 2,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Vengeance Mark supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Detonate Sigil",
+          "sourcePath": "en/unified/md/feature/ability/revenant/detonate-sigil.md",
+          "decisionId": "ancestry.revenant.memonek.purchased-traits",
+          "level": 2,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Vengeance Mark supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Detonate Sigil",
+          "sourcePath": "en/unified/md/feature/ability/revenant/detonate-sigil.md",
+          "decisionId": "ancestry.revenant.orc.purchased-traits",
+          "level": 2,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Vengeance Mark supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Detonate Sigil",
+          "sourcePath": "en/unified/md/feature/ability/revenant/detonate-sigil.md",
+          "decisionId": "ancestry.revenant.polder.purchased-traits",
+          "level": 2,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Vengeance Mark supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Detonate Sigil",
+          "sourcePath": "en/unified/md/feature/ability/revenant/detonate-sigil.md",
+          "decisionId": "ancestry.revenant.time-raider.purchased-traits",
+          "level": 2,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Vengeance Mark supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Detonate Sigil",
+          "sourcePath": "en/unified/md/feature/ability/revenant/detonate-sigil.md",
+          "decisionId": "ancestry.revenant.wode-elf.purchased-traits",
+          "level": 2,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Vengeance Mark supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.time-raider/concussive-slam",
+      "name": "Concussive Slam",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/time-raider/concussive-slam.md",
+      "usage": "Main action",
+      "target": "One creature or object",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "roll-expression-outside-grammar",
+        "diagnostics": [
+          {
+            "type": "roll-expression",
+            "shape": "roll:power roll + reason, intuition, or presence",
+            "text": "Power Roll + Reason, Intuition, or Presence",
+            "locator": "roll:1"
+          },
+          {
+            "type": "tier-damage",
+            "shape": "tier:N + r, i, or p damage",
+            "text": "2 + R, I, or P damage",
+            "locator": "tier1"
+          },
+          {
+            "type": "push-with-extra",
+            "shape": "push N (not directly after damage)",
+            "text": "push 1",
+            "locator": "tier2"
+          },
+          {
+            "type": "tier-damage",
+            "shape": "tier:N + r, i, or p damage",
+            "text": "5 + R, I, or P damage",
+            "locator": "tier2"
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:M < SYM prone",
+            "text": "M < STRONG, prone",
+            "locator": "tier3",
+            "bounded": false
+          },
+          {
+            "type": "push-with-extra",
+            "shape": "push N (not directly after damage)",
+            "text": "push 2",
+            "locator": "tier3"
+          },
+          {
+            "type": "tier-damage",
+            "shape": "tier:N + r, i, or p damage",
+            "text": "7 + R, I, or P damage",
+            "locator": "tier3"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Concussive Slam",
+          "sourcePath": "en/unified/md/feature/ability/time-raider/concussive-slam.md",
+          "decisionId": "ancestry.revenant.time-raider.psionic-gift.ability",
+          "level": 1,
+          "grantKind": "ancestry-ability",
+          "selectable": "unknown",
+          "detail": "grant of option Concussive Slam supportedInV001=true; chain unknown"
+        },
+        {
+          "name": "Concussive Slam",
+          "sourcePath": "en/unified/md/feature/ability/time-raider/concussive-slam.md",
+          "decisionId": "ancestry.time-raider.psionic-gift.ability",
+          "level": 1,
+          "grantKind": "ancestry-ability",
+          "selectable": "unknown",
+          "detail": "grant of option Concussive Slam supportedInV001=true; chain unknown"
+        },
+        {
+          "name": "Concussive Slam",
+          "sourcePath": "en/unified/md/feature/ability/time-raider/concussive-slam.md",
+          "decisionId": "ancestry.revenant.time-raider.psionic-gift.ability",
+          "level": 2,
+          "grantKind": "ancestry-ability",
+          "selectable": "unknown",
+          "detail": "grant of option Concussive Slam supportedInV001=true; chain unknown"
+        },
+        {
+          "name": "Concussive Slam",
+          "sourcePath": "en/unified/md/feature/ability/time-raider/concussive-slam.md",
+          "decisionId": "ancestry.time-raider.psionic-gift.ability",
+          "level": 2,
+          "grantKind": "ancestry-ability",
+          "selectable": "unknown",
+          "detail": "grant of option Concussive Slam supportedInV001=true; chain unknown"
+        }
+      ],
+      "availability": "unknown"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.time-raider/minor-acceleration",
+      "name": "Minor Acceleration",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/time-raider/minor-acceleration.md",
+      "usage": "Maneuver",
+      "target": "Self or one ally",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "The target gains a bonus to speed equal to your Reason, Intuition, or Presence score (your choice) until the start of your next turn.",
+            "locator": "section:0"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "unknown"
+      },
+      "grants": [
+        {
+          "name": "Minor Acceleration",
+          "sourcePath": "en/unified/md/feature/ability/time-raider/minor-acceleration.md",
+          "decisionId": "ancestry.revenant.time-raider.psionic-gift.ability",
+          "level": 1,
+          "grantKind": "ancestry-ability",
+          "selectable": "unknown",
+          "detail": "grant of option Minor Acceleration supportedInV001=true; chain unknown"
+        },
+        {
+          "name": "Minor Acceleration",
+          "sourcePath": "en/unified/md/feature/ability/time-raider/minor-acceleration.md",
+          "decisionId": "ancestry.time-raider.psionic-gift.ability",
+          "level": 1,
+          "grantKind": "ancestry-ability",
+          "selectable": "unknown",
+          "detail": "grant of option Minor Acceleration supportedInV001=true; chain unknown"
+        },
+        {
+          "name": "Minor Acceleration",
+          "sourcePath": "en/unified/md/feature/ability/time-raider/minor-acceleration.md",
+          "decisionId": "ancestry.revenant.time-raider.psionic-gift.ability",
+          "level": 2,
+          "grantKind": "ancestry-ability",
+          "selectable": "unknown",
+          "detail": "grant of option Minor Acceleration supportedInV001=true; chain unknown"
+        },
+        {
+          "name": "Minor Acceleration",
+          "sourcePath": "en/unified/md/feature/ability/time-raider/minor-acceleration.md",
+          "decisionId": "ancestry.time-raider.psionic-gift.ability",
+          "level": 2,
+          "grantKind": "ancestry-ability",
+          "selectable": "unknown",
+          "detail": "grant of option Minor Acceleration supportedInV001=true; chain unknown"
+        }
+      ],
+      "availability": "unknown"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.time-raider/psionic-bolt",
+      "name": "Psionic Bolt",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/time-raider/psionic-bolt.md",
+      "usage": "Main action",
+      "target": "One creature or object",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "roll-expression-outside-grammar",
+        "diagnostics": [
+          {
+            "type": "roll-expression",
+            "shape": "roll:power roll + reason, intuition, or presence",
+            "text": "Power Roll + Reason, Intuition, or Presence",
+            "locator": "roll:1"
+          },
+          {
+            "type": "slide",
+            "shape": "slide N",
+            "text": "slide 1",
+            "locator": "tier1"
+          },
+          {
+            "type": "tier-damage",
+            "shape": "tier:N + r, i, or p psychic damage",
+            "text": "2 + R, I, or P psychic damage",
+            "locator": "tier1"
+          },
+          {
+            "type": "slide",
+            "shape": "slide N",
+            "text": "slide 2",
+            "locator": "tier2"
+          },
+          {
+            "type": "tier-damage",
+            "shape": "tier:N + r, i, or p psychic damage",
+            "text": "5 + R, I, or P psychic damage",
+            "locator": "tier2"
+          },
+          {
+            "type": "slide",
+            "shape": "slide N",
+            "text": "slide 3",
+            "locator": "tier3"
+          },
+          {
+            "type": "tier-damage",
+            "shape": "tier:N + r, i, or p psychic damage",
+            "text": "7 + R, I, or P psychic damage",
+            "locator": "tier3"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Psionic Bolt",
+          "sourcePath": "en/unified/md/feature/ability/time-raider/psionic-bolt.md",
+          "decisionId": "ancestry.revenant.time-raider.psionic-gift.ability",
+          "level": 1,
+          "grantKind": "ancestry-ability",
+          "selectable": "unknown",
+          "detail": "grant of option Psionic Bolt supportedInV001=true; chain unknown"
+        },
+        {
+          "name": "Psionic Bolt",
+          "sourcePath": "en/unified/md/feature/ability/time-raider/psionic-bolt.md",
+          "decisionId": "ancestry.time-raider.psionic-gift.ability",
+          "level": 1,
+          "grantKind": "ancestry-ability",
+          "selectable": "unknown",
+          "detail": "grant of option Psionic Bolt supportedInV001=true; chain unknown"
+        },
+        {
+          "name": "Psionic Bolt",
+          "sourcePath": "en/unified/md/feature/ability/time-raider/psionic-bolt.md",
+          "decisionId": "ancestry.revenant.time-raider.psionic-gift.ability",
+          "level": 2,
+          "grantKind": "ancestry-ability",
+          "selectable": "unknown",
+          "detail": "grant of option Psionic Bolt supportedInV001=true; chain unknown"
+        },
+        {
+          "name": "Psionic Bolt",
+          "sourcePath": "en/unified/md/feature/ability/time-raider/psionic-bolt.md",
+          "decisionId": "ancestry.time-raider.psionic-gift.ability",
+          "level": 2,
+          "grantKind": "ancestry-ability",
+          "selectable": "unknown",
+          "detail": "grant of option Psionic Bolt supportedInV001=true; chain unknown"
+        }
+      ],
+      "availability": "unknown"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.wode-elf/the-wode-defends",
+      "name": "The Wode Defends",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/wode-elf/the-wode-defends.md",
+      "usage": "Main action",
+      "target": "One creature",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "M",
+            "A"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "plusChoice",
+              "constant": 2,
+              "choices": [
+                "M",
+                "A"
+              ]
+            }
+          },
+          {
+            "damage": {
+              "kind": "plusChoice",
+              "constant": 3,
+              "choices": [
+                "M",
+                "A"
+              ]
+            }
+          },
+          {
+            "damage": {
+              "kind": "plusChoice",
+              "constant": 5,
+              "choices": [
+                "M",
+                "A"
+              ]
+            }
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "potency-condition",
+            "shape": "potency:A < SYM slowed (save ends)",
+            "text": "A < WEAK, slowed (save ends)",
+            "locator": "tier1",
+            "bounded": true
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:A < SYM slowed (save ends)",
+            "text": "A < AVERAGE, slowed (save ends)",
+            "locator": "tier2",
+            "bounded": true
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:A < SYM restrained (save ends)",
+            "text": "A < STRONG, restrained (save ends)",
+            "locator": "tier3",
+            "bounded": true
+          }
+        ],
+        "withinV26Bounded": true,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "The Wode Defends",
+          "sourcePath": "en/unified/md/feature/ability/wode-elf/the-wode-defends.md",
+          "decisionId": "ancestry.revenant.wode-elf.purchased-traits",
+          "level": 1,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option The Wode Defends supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "The Wode Defends",
+          "sourcePath": "en/unified/md/feature/ability/wode-elf/the-wode-defends.md",
+          "decisionId": "ancestry.wode-elf.purchased-traits",
+          "level": 1,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option The Wode Defends supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "The Wode Defends",
+          "sourcePath": "en/unified/md/feature/ability/wode-elf/the-wode-defends.md",
+          "decisionId": "ancestry.revenant.wode-elf.purchased-traits",
+          "level": 2,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option The Wode Defends supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "The Wode Defends",
+          "sourcePath": "en/unified/md/feature/ability/wode-elf/the-wode-defends.md",
+          "decisionId": "ancestry.wode-elf.purchased-traits",
+          "level": 2,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option The Wode Defends supportedInV001=true; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -5852,6 +6568,770 @@
     },
     {
       "corpus": "granted",
+      "id": "mcdm.heroes.v1/perk/area-of-expertise/area-of-expertise-inspect-object",
+      "name": "Area of Expertise: Inspect Object",
+      "parentName": "Area of Expertise",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/perk/area-of-expertise.md",
+      "usage": "",
+      "target": "",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "unknown"
+      },
+      "grants": [
+        {
+          "name": "Area of Expertise: Inspect Object",
+          "sourcePath": "en/unified/md/perk/area-of-expertise.md",
+          "decisionId": "career.artisan.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Area of Expertise supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Area of Expertise: Inspect Object",
+          "sourcePath": "en/unified/md/perk/area-of-expertise.md",
+          "decisionId": "career.artisan.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Area of Expertise supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Area of Expertise: Inspect Object",
+          "sourcePath": "en/unified/md/perk/area-of-expertise.md",
+          "decisionId": "class.fury.level-2.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Area of Expertise supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "granted",
+      "id": "mcdm.heroes.v1/perk/creature-sense/creature-sense",
+      "name": "Creature Sense",
+      "parentName": "Creature Sense",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/perk/creature-sense.md",
+      "usage": "",
+      "target": "",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "unknown"
+      },
+      "grants": [
+        {
+          "name": "Creature Sense",
+          "sourcePath": "en/unified/md/perk/creature-sense.md",
+          "decisionId": "career.disciple.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Creature Sense supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Creature Sense",
+          "sourcePath": "en/unified/md/perk/creature-sense.md",
+          "decisionId": "career.mages-apprentice.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Creature Sense supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Creature Sense",
+          "sourcePath": "en/unified/md/perk/creature-sense.md",
+          "decisionId": "career.disciple.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Creature Sense supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Creature Sense",
+          "sourcePath": "en/unified/md/perk/creature-sense.md",
+          "decisionId": "career.mages-apprentice.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Creature Sense supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "granted",
+      "id": "mcdm.heroes.v1/perk/criminal-contacts/criminal-contacts",
+      "name": "Criminal Contacts",
+      "parentName": "Criminal Contacts",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/perk/criminal-contacts.md",
+      "usage": "",
+      "target": "",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "unknown"
+      },
+      "grants": [
+        {
+          "name": "Criminal Contacts",
+          "sourcePath": "en/unified/md/perk/criminal-contacts.md",
+          "decisionId": "career.agent.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Criminal Contacts supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Criminal Contacts",
+          "sourcePath": "en/unified/md/perk/criminal-contacts.md",
+          "decisionId": "career.criminal.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Criminal Contacts supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Criminal Contacts",
+          "sourcePath": "en/unified/md/perk/criminal-contacts.md",
+          "decisionId": "career.agent.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Criminal Contacts supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Criminal Contacts",
+          "sourcePath": "en/unified/md/perk/criminal-contacts.md",
+          "decisionId": "career.criminal.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Criminal Contacts supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Criminal Contacts",
+          "sourcePath": "en/unified/md/perk/criminal-contacts.md",
+          "decisionId": "class.fury.level-2.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Criminal Contacts supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "granted",
+      "id": "mcdm.heroes.v1/perk/eidetic-memory/eidetic-memory-memorize-text",
+      "name": "Eidetic Memory: Memorize Text",
+      "parentName": "Eidetic Memory",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/perk/eidetic-memory.md",
+      "usage": "",
+      "target": "",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "unknown"
+      },
+      "grants": [
+        {
+          "name": "Eidetic Memory: Memorize Text",
+          "sourcePath": "en/unified/md/perk/eidetic-memory.md",
+          "decisionId": "career.aristocrat.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Eidetic Memory supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Eidetic Memory: Memorize Text",
+          "sourcePath": "en/unified/md/perk/eidetic-memory.md",
+          "decisionId": "career.sage.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Eidetic Memory supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Eidetic Memory: Memorize Text",
+          "sourcePath": "en/unified/md/perk/eidetic-memory.md",
+          "decisionId": "career.aristocrat.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Eidetic Memory supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Eidetic Memory: Memorize Text",
+          "sourcePath": "en/unified/md/perk/eidetic-memory.md",
+          "decisionId": "career.sage.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Eidetic Memory supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "granted",
+      "id": "mcdm.heroes.v1/perk/engrossing-monologue/engrossing-monologue",
+      "name": "Engrossing Monologue",
+      "parentName": "Engrossing Monologue",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/perk/engrossing-monologue.md",
+      "usage": "",
+      "target": "",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "unknown"
+      },
+      "grants": [
+        {
+          "name": "Engrossing Monologue",
+          "sourcePath": "en/unified/md/perk/engrossing-monologue.md",
+          "decisionId": "career.beggar.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Engrossing Monologue supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Engrossing Monologue",
+          "sourcePath": "en/unified/md/perk/engrossing-monologue.md",
+          "decisionId": "career.performer.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Engrossing Monologue supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Engrossing Monologue",
+          "sourcePath": "en/unified/md/perk/engrossing-monologue.md",
+          "decisionId": "career.politician.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Engrossing Monologue supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Engrossing Monologue",
+          "sourcePath": "en/unified/md/perk/engrossing-monologue.md",
+          "decisionId": "career.beggar.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Engrossing Monologue supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Engrossing Monologue",
+          "sourcePath": "en/unified/md/perk/engrossing-monologue.md",
+          "decisionId": "career.performer.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Engrossing Monologue supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Engrossing Monologue",
+          "sourcePath": "en/unified/md/perk/engrossing-monologue.md",
+          "decisionId": "career.politician.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Engrossing Monologue supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "granted",
+      "id": "mcdm.heroes.v1/perk/familiar/familiar-restore",
+      "name": "Familiar: Restore",
+      "parentName": "Familiar",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/perk/familiar.md",
+      "usage": "",
+      "target": "",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "unknown"
+      },
+      "grants": [
+        {
+          "name": "Familiar: Restore",
+          "sourcePath": "en/unified/md/perk/familiar.md",
+          "decisionId": "career.disciple.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Familiar supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Familiar: Restore",
+          "sourcePath": "en/unified/md/perk/familiar.md",
+          "decisionId": "career.mages-apprentice.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Familiar supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Familiar: Restore",
+          "sourcePath": "en/unified/md/perk/familiar.md",
+          "decisionId": "career.disciple.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Familiar supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Familiar: Restore",
+          "sourcePath": "en/unified/md/perk/familiar.md",
+          "decisionId": "career.mages-apprentice.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Familiar supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "granted",
+      "id": "mcdm.heroes.v1/perk/forgettable-face/forgettable-face",
+      "name": "Forgettable Face",
+      "parentName": "Forgettable Face",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/perk/forgettable-face.md",
+      "usage": "",
+      "target": "",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "unknown"
+      },
+      "grants": [
+        {
+          "name": "Forgettable Face",
+          "sourcePath": "en/unified/md/perk/forgettable-face.md",
+          "decisionId": "career.agent.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Forgettable Face supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Forgettable Face",
+          "sourcePath": "en/unified/md/perk/forgettable-face.md",
+          "decisionId": "career.criminal.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Forgettable Face supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Forgettable Face",
+          "sourcePath": "en/unified/md/perk/forgettable-face.md",
+          "decisionId": "career.agent.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Forgettable Face supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Forgettable Face",
+          "sourcePath": "en/unified/md/perk/forgettable-face.md",
+          "decisionId": "career.criminal.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Forgettable Face supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Forgettable Face",
+          "sourcePath": "en/unified/md/perk/forgettable-face.md",
+          "decisionId": "class.fury.level-2.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Forgettable Face supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "granted",
+      "id": "mcdm.heroes.v1/perk/friend-catapult/friend-catapult",
+      "name": "Friend Catapult",
+      "parentName": "Friend Catapult",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/perk/friend-catapult.md",
+      "usage": "",
+      "target": "",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "unknown"
+      },
+      "grants": [
+        {
+          "name": "Friend Catapult",
+          "sourcePath": "en/unified/md/perk/friend-catapult.md",
+          "decisionId": "career.explorer.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Friend Catapult supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Friend Catapult",
+          "sourcePath": "en/unified/md/perk/friend-catapult.md",
+          "decisionId": "career.farmer.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Friend Catapult supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Friend Catapult",
+          "sourcePath": "en/unified/md/perk/friend-catapult.md",
+          "decisionId": "career.gladiator.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Friend Catapult supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Friend Catapult",
+          "sourcePath": "en/unified/md/perk/friend-catapult.md",
+          "decisionId": "career.laborer.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Friend Catapult supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Friend Catapult",
+          "sourcePath": "en/unified/md/perk/friend-catapult.md",
+          "decisionId": "career.sailor.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Friend Catapult supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Friend Catapult",
+          "sourcePath": "en/unified/md/perk/friend-catapult.md",
+          "decisionId": "career.soldier.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Friend Catapult supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Friend Catapult",
+          "sourcePath": "en/unified/md/perk/friend-catapult.md",
+          "decisionId": "career.warden.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Friend Catapult supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Friend Catapult",
+          "sourcePath": "en/unified/md/perk/friend-catapult.md",
+          "decisionId": "career.watch-officer.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Friend Catapult supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Friend Catapult",
+          "sourcePath": "en/unified/md/perk/friend-catapult.md",
+          "decisionId": "career.explorer.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Friend Catapult supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Friend Catapult",
+          "sourcePath": "en/unified/md/perk/friend-catapult.md",
+          "decisionId": "career.farmer.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Friend Catapult supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Friend Catapult",
+          "sourcePath": "en/unified/md/perk/friend-catapult.md",
+          "decisionId": "career.gladiator.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Friend Catapult supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Friend Catapult",
+          "sourcePath": "en/unified/md/perk/friend-catapult.md",
+          "decisionId": "career.laborer.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Friend Catapult supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Friend Catapult",
+          "sourcePath": "en/unified/md/perk/friend-catapult.md",
+          "decisionId": "career.sailor.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Friend Catapult supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Friend Catapult",
+          "sourcePath": "en/unified/md/perk/friend-catapult.md",
+          "decisionId": "career.soldier.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Friend Catapult supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Friend Catapult",
+          "sourcePath": "en/unified/md/perk/friend-catapult.md",
+          "decisionId": "career.warden.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Friend Catapult supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Friend Catapult",
+          "sourcePath": "en/unified/md/perk/friend-catapult.md",
+          "decisionId": "career.watch-officer.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Friend Catapult supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Friend Catapult",
+          "sourcePath": "en/unified/md/perk/friend-catapult.md",
+          "decisionId": "class.fury.level-2.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Friend Catapult supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "granted",
+      "id": "mcdm.heroes.v1/perk/gum-up-the-works/gum-up-the-works",
+      "name": "Gum Up the Works",
+      "parentName": "Gum Up the Works",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/perk/gum-up-the-works.md",
+      "usage": "",
+      "target": "",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "unknown"
+      },
+      "grants": [
+        {
+          "name": "Gum Up the Works",
+          "sourcePath": "en/unified/md/perk/gum-up-the-works.md",
+          "decisionId": "career.agent.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Gum Up the Works supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Gum Up the Works",
+          "sourcePath": "en/unified/md/perk/gum-up-the-works.md",
+          "decisionId": "career.criminal.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Gum Up the Works supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Gum Up the Works",
+          "sourcePath": "en/unified/md/perk/gum-up-the-works.md",
+          "decisionId": "career.agent.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Gum Up the Works supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Gum Up the Works",
+          "sourcePath": "en/unified/md/perk/gum-up-the-works.md",
+          "decisionId": "career.criminal.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Gum Up the Works supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Gum Up the Works",
+          "sourcePath": "en/unified/md/perk/gum-up-the-works.md",
+          "decisionId": "class.fury.level-2.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Gum Up the Works supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "granted",
+      "id": "mcdm.heroes.v1/perk/improvisation-creation/improvisation-creation",
+      "name": "Improvisation Creation",
+      "parentName": "Improvisation Creation",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/perk/improvisation-creation.md",
+      "usage": "",
+      "target": "",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "unknown"
+      },
+      "grants": [
+        {
+          "name": "Improvisation Creation",
+          "sourcePath": "en/unified/md/perk/improvisation-creation.md",
+          "decisionId": "career.artisan.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Improvisation Creation supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Improvisation Creation",
+          "sourcePath": "en/unified/md/perk/improvisation-creation.md",
+          "decisionId": "career.artisan.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Improvisation Creation supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Improvisation Creation",
+          "sourcePath": "en/unified/md/perk/improvisation-creation.md",
+          "decisionId": "class.fury.level-2.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Improvisation Creation supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "granted",
       "id": "mcdm.heroes.v1/perk/invisible-force/invisible-force",
       "name": "Invisible Force",
       "parentName": "Invisible Force",
@@ -5920,6 +7400,407 @@
     },
     {
       "corpus": "granted",
+      "id": "mcdm.heroes.v1/perk/ive-got-you/i-ve-got-you",
+      "name": "I've Got You!",
+      "parentName": "I've Got You!",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/perk/ive-got-you.md",
+      "usage": "",
+      "target": "",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "unknown"
+      },
+      "grants": [
+        {
+          "name": "I've Got You!",
+          "sourcePath": "en/unified/md/perk/ive-got-you.md",
+          "decisionId": "career.explorer.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option I've Got You! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "I've Got You!",
+          "sourcePath": "en/unified/md/perk/ive-got-you.md",
+          "decisionId": "career.farmer.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option I've Got You! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "I've Got You!",
+          "sourcePath": "en/unified/md/perk/ive-got-you.md",
+          "decisionId": "career.gladiator.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option I've Got You! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "I've Got You!",
+          "sourcePath": "en/unified/md/perk/ive-got-you.md",
+          "decisionId": "career.laborer.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option I've Got You! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "I've Got You!",
+          "sourcePath": "en/unified/md/perk/ive-got-you.md",
+          "decisionId": "career.sailor.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option I've Got You! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "I've Got You!",
+          "sourcePath": "en/unified/md/perk/ive-got-you.md",
+          "decisionId": "career.soldier.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option I've Got You! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "I've Got You!",
+          "sourcePath": "en/unified/md/perk/ive-got-you.md",
+          "decisionId": "career.warden.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option I've Got You! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "I've Got You!",
+          "sourcePath": "en/unified/md/perk/ive-got-you.md",
+          "decisionId": "career.watch-officer.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option I've Got You! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "I've Got You!",
+          "sourcePath": "en/unified/md/perk/ive-got-you.md",
+          "decisionId": "career.explorer.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option I've Got You! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "I've Got You!",
+          "sourcePath": "en/unified/md/perk/ive-got-you.md",
+          "decisionId": "career.farmer.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option I've Got You! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "I've Got You!",
+          "sourcePath": "en/unified/md/perk/ive-got-you.md",
+          "decisionId": "career.gladiator.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option I've Got You! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "I've Got You!",
+          "sourcePath": "en/unified/md/perk/ive-got-you.md",
+          "decisionId": "career.laborer.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option I've Got You! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "I've Got You!",
+          "sourcePath": "en/unified/md/perk/ive-got-you.md",
+          "decisionId": "career.sailor.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option I've Got You! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "I've Got You!",
+          "sourcePath": "en/unified/md/perk/ive-got-you.md",
+          "decisionId": "career.soldier.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option I've Got You! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "I've Got You!",
+          "sourcePath": "en/unified/md/perk/ive-got-you.md",
+          "decisionId": "career.warden.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option I've Got You! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "I've Got You!",
+          "sourcePath": "en/unified/md/perk/ive-got-you.md",
+          "decisionId": "career.watch-officer.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option I've Got You! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "I've Got You!",
+          "sourcePath": "en/unified/md/perk/ive-got-you.md",
+          "decisionId": "class.fury.level-2.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option I've Got You! supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "granted",
+      "id": "mcdm.heroes.v1/perk/ive-read-about-this-place/i-ve-read-about-this-place",
+      "name": "I've Read About This Place",
+      "parentName": "I've Read About This Place",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/perk/ive-read-about-this-place.md",
+      "usage": "",
+      "target": "",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "unknown"
+      },
+      "grants": [
+        {
+          "name": "I've Read About This Place",
+          "sourcePath": "en/unified/md/perk/ive-read-about-this-place.md",
+          "decisionId": "career.aristocrat.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option I've Read About This Place supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "I've Read About This Place",
+          "sourcePath": "en/unified/md/perk/ive-read-about-this-place.md",
+          "decisionId": "career.sage.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option I've Read About This Place supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "I've Read About This Place",
+          "sourcePath": "en/unified/md/perk/ive-read-about-this-place.md",
+          "decisionId": "career.aristocrat.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option I've Read About This Place supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "I've Read About This Place",
+          "sourcePath": "en/unified/md/perk/ive-read-about-this-place.md",
+          "decisionId": "career.sage.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option I've Read About This Place supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "granted",
+      "id": "mcdm.heroes.v1/perk/lie-detector/lie-detector",
+      "name": "Lie Detector",
+      "parentName": "Lie Detector",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/perk/lie-detector.md",
+      "usage": "",
+      "target": "",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "unknown"
+      },
+      "grants": [
+        {
+          "name": "Lie Detector",
+          "sourcePath": "en/unified/md/perk/lie-detector.md",
+          "decisionId": "career.beggar.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Lie Detector supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Lie Detector",
+          "sourcePath": "en/unified/md/perk/lie-detector.md",
+          "decisionId": "career.performer.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Lie Detector supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Lie Detector",
+          "sourcePath": "en/unified/md/perk/lie-detector.md",
+          "decisionId": "career.politician.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Lie Detector supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Lie Detector",
+          "sourcePath": "en/unified/md/perk/lie-detector.md",
+          "decisionId": "career.beggar.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Lie Detector supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Lie Detector",
+          "sourcePath": "en/unified/md/perk/lie-detector.md",
+          "decisionId": "career.performer.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Lie Detector supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Lie Detector",
+          "sourcePath": "en/unified/md/perk/lie-detector.md",
+          "decisionId": "career.politician.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Lie Detector supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "granted",
+      "id": "mcdm.heroes.v1/perk/open-book/open-book",
+      "name": "Open Book",
+      "parentName": "Open Book",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/perk/open-book.md",
+      "usage": "",
+      "target": "",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "unknown"
+      },
+      "grants": [
+        {
+          "name": "Open Book",
+          "sourcePath": "en/unified/md/perk/open-book.md",
+          "decisionId": "career.beggar.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Open Book supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Open Book",
+          "sourcePath": "en/unified/md/perk/open-book.md",
+          "decisionId": "career.performer.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Open Book supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Open Book",
+          "sourcePath": "en/unified/md/perk/open-book.md",
+          "decisionId": "career.politician.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Open Book supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Open Book",
+          "sourcePath": "en/unified/md/perk/open-book.md",
+          "decisionId": "career.beggar.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Open Book supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Open Book",
+          "sourcePath": "en/unified/md/perk/open-book.md",
+          "decisionId": "career.performer.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Open Book supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Open Book",
+          "sourcePath": "en/unified/md/perk/open-book.md",
+          "decisionId": "career.politician.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Open Book supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "granted",
       "id": "mcdm.heroes.v1/perk/psychic-whisper/psychic-whisper",
       "name": "Psychic Whisper",
       "parentName": "Psychic Whisper",
@@ -5982,6 +7863,396 @@
           "grantKind": "perk-ability",
           "selectable": "selectable",
           "detail": "grant of option Psychic Whisper supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "granted",
+      "id": "mcdm.heroes.v1/perk/ritualist/ritualist",
+      "name": "Ritualist",
+      "parentName": "Ritualist",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/perk/ritualist.md",
+      "usage": "",
+      "target": "",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "unknown"
+      },
+      "grants": [
+        {
+          "name": "Ritualist",
+          "sourcePath": "en/unified/md/perk/ritualist.md",
+          "decisionId": "career.disciple.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Ritualist supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Ritualist",
+          "sourcePath": "en/unified/md/perk/ritualist.md",
+          "decisionId": "career.mages-apprentice.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Ritualist supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Ritualist",
+          "sourcePath": "en/unified/md/perk/ritualist.md",
+          "decisionId": "career.disciple.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Ritualist supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Ritualist",
+          "sourcePath": "en/unified/md/perk/ritualist.md",
+          "decisionId": "career.mages-apprentice.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Ritualist supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "granted",
+      "id": "mcdm.heroes.v1/perk/slipped-lead/slipped-lead-escape-bonds",
+      "name": "Slipped Lead: Escape Bonds",
+      "parentName": "Slipped Lead",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/perk/slipped-lead.md",
+      "usage": "",
+      "target": "",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "unknown"
+      },
+      "grants": [
+        {
+          "name": "Slipped Lead: Escape Bonds",
+          "sourcePath": "en/unified/md/perk/slipped-lead.md",
+          "decisionId": "career.agent.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Slipped Lead supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Slipped Lead: Escape Bonds",
+          "sourcePath": "en/unified/md/perk/slipped-lead.md",
+          "decisionId": "career.criminal.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Slipped Lead supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Slipped Lead: Escape Bonds",
+          "sourcePath": "en/unified/md/perk/slipped-lead.md",
+          "decisionId": "career.agent.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Slipped Lead supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Slipped Lead: Escape Bonds",
+          "sourcePath": "en/unified/md/perk/slipped-lead.md",
+          "decisionId": "career.criminal.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Slipped Lead supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Slipped Lead: Escape Bonds",
+          "sourcePath": "en/unified/md/perk/slipped-lead.md",
+          "decisionId": "class.fury.level-2.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Slipped Lead supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "granted",
+      "id": "mcdm.heroes.v1/perk/so-tell-me/so-tell-me",
+      "name": "So Tell Me...",
+      "parentName": "So Tell Me...",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/perk/so-tell-me.md",
+      "usage": "",
+      "target": "",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "unknown"
+      },
+      "grants": [
+        {
+          "name": "So Tell Me...",
+          "sourcePath": "en/unified/md/perk/so-tell-me.md",
+          "decisionId": "career.beggar.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option So Tell Me... supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "So Tell Me...",
+          "sourcePath": "en/unified/md/perk/so-tell-me.md",
+          "decisionId": "career.performer.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option So Tell Me... supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "So Tell Me...",
+          "sourcePath": "en/unified/md/perk/so-tell-me.md",
+          "decisionId": "career.politician.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option So Tell Me... supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "So Tell Me...",
+          "sourcePath": "en/unified/md/perk/so-tell-me.md",
+          "decisionId": "career.beggar.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option So Tell Me... supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "So Tell Me...",
+          "sourcePath": "en/unified/md/perk/so-tell-me.md",
+          "decisionId": "career.performer.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option So Tell Me... supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "So Tell Me...",
+          "sourcePath": "en/unified/md/perk/so-tell-me.md",
+          "decisionId": "career.politician.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option So Tell Me... supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "granted",
+      "id": "mcdm.heroes.v1/perk/thingspeaker/thingspeaker",
+      "name": "Thingspeaker",
+      "parentName": "Thingspeaker",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/perk/thingspeaker.md",
+      "usage": "",
+      "target": "",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "unknown"
+      },
+      "grants": [
+        {
+          "name": "Thingspeaker",
+          "sourcePath": "en/unified/md/perk/thingspeaker.md",
+          "decisionId": "career.disciple.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Thingspeaker supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Thingspeaker",
+          "sourcePath": "en/unified/md/perk/thingspeaker.md",
+          "decisionId": "career.mages-apprentice.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Thingspeaker supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Thingspeaker",
+          "sourcePath": "en/unified/md/perk/thingspeaker.md",
+          "decisionId": "career.disciple.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Thingspeaker supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Thingspeaker",
+          "sourcePath": "en/unified/md/perk/thingspeaker.md",
+          "decisionId": "career.mages-apprentice.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Thingspeaker supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "granted",
+      "id": "mcdm.heroes.v1/perk/traveling-artisan/traveling-artisan",
+      "name": "Traveling Artisan",
+      "parentName": "Traveling Artisan",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/perk/traveling-artisan.md",
+      "usage": "",
+      "target": "",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "unknown"
+      },
+      "grants": [
+        {
+          "name": "Traveling Artisan",
+          "sourcePath": "en/unified/md/perk/traveling-artisan.md",
+          "decisionId": "career.artisan.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Traveling Artisan supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Traveling Artisan",
+          "sourcePath": "en/unified/md/perk/traveling-artisan.md",
+          "decisionId": "career.artisan.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Traveling Artisan supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Traveling Artisan",
+          "sourcePath": "en/unified/md/perk/traveling-artisan.md",
+          "decisionId": "class.fury.level-2.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Traveling Artisan supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "granted",
+      "id": "mcdm.heroes.v1/perk/traveling-sage/traveling-sage",
+      "name": "Traveling Sage",
+      "parentName": "Traveling Sage",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/perk/traveling-sage.md",
+      "usage": "",
+      "target": "",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "unknown"
+      },
+      "grants": [
+        {
+          "name": "Traveling Sage",
+          "sourcePath": "en/unified/md/perk/traveling-sage.md",
+          "decisionId": "career.aristocrat.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Traveling Sage supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Traveling Sage",
+          "sourcePath": "en/unified/md/perk/traveling-sage.md",
+          "decisionId": "career.sage.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Traveling Sage supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Traveling Sage",
+          "sourcePath": "en/unified/md/perk/traveling-sage.md",
+          "decisionId": "career.aristocrat.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Traveling Sage supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Traveling Sage",
+          "sourcePath": "en/unified/md/perk/traveling-sage.md",
+          "decisionId": "career.sage.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Traveling Sage supportedInV001=true; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -6272,21 +8543,21 @@
             "shape": "potency:A < N weakened (save ends)",
             "text": "A < 4 weakened (save ends)",
             "locator": "tier1",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:A < N weakened (save ends)",
             "text": "A < 5 weakened (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:A < N weakened (save ends)",
             "text": "A < 6 weakened (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
         "withinV26Bounded": false,
@@ -6920,21 +9191,21 @@
             "shape": "potency:A < N dazed (save ends)",
             "text": "A < 1 dazed (save ends)",
             "locator": "tier1",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:A < N dazed (save ends)",
             "text": "A < 2 dazed (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:A < N dazed (save ends)",
             "text": "A < 3 dazed (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
         "withinV26Bounded": false,
@@ -8190,24 +10461,24 @@
             "shape": "potency:M < N weakened (save ends)",
             "text": "M < 1 weakened (save ends)",
             "locator": "tier1",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:M < N weakened (save ends)",
             "text": "M < 2 weakened (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:M < N weakened (save ends)",
             "text": "M < 3 weakened (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
-        "withinV26Bounded": false,
+        "withinV26Bounded": true,
         "targetShape": "area"
       }
     },
@@ -8496,21 +10767,21 @@
             "shape": "potency:A < N weakened (save ends)",
             "text": "A < 2 weakened (save ends)",
             "locator": "tier1",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:A < N weakened (save ends)",
             "text": "A < 3 weakened (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:A < N weakened (save ends)",
             "text": "A < 4 weakened (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
         "withinV26Bounded": false,
@@ -8782,7 +11053,7 @@
             "shape": "potency:M < N bleeding (save ends)",
             "text": "M < 4 bleeding (save ends)",
             "locator": "tier3",
-            "bounded": true
+            "bounded": false
           }
         ],
         "withinV26Bounded": false,
@@ -9009,7 +11280,7 @@
             "shape": "potency:M < N weakened (save ends)",
             "text": "M < 0 weakened (save ends)",
             "locator": "tier1",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
@@ -9249,14 +11520,14 @@
             "shape": "potency:R < N dazed (save ends)",
             "text": "R < 0 dazed (save ends)",
             "locator": "tier1",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:R < N dazed (save ends)",
             "text": "R < 1 dazed (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
@@ -9331,7 +11602,7 @@
             "shape": "potency:A < N bleeding (save ends)",
             "text": "A < 3 bleeding (save ends)",
             "locator": "tier3",
-            "bounded": true
+            "bounded": false
           },
           {
             "type": "potency-condition",
@@ -9477,7 +11748,7 @@
             "shape": "potency:M < N dazed (save ends)",
             "text": "M < 1 dazed (save ends)",
             "locator": "tier1",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
@@ -11116,17 +13387,17 @@
             "shape": "potency:I < N frightened (save ends)",
             "text": "I < 2 frightened (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:I < N frightened (save ends)",
             "text": "I < 3 frightened (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
-        "withinV26Bounded": false,
+        "withinV26Bounded": true,
         "targetShape": "area"
       }
     },
@@ -11466,21 +13737,21 @@
             "shape": "potency:R < N weakened (save ends)",
             "text": "R < 4 weakened (save ends)",
             "locator": "tier1",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:R < N weakened (save ends)",
             "text": "R < 5 weakened (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:R < N weakened (save ends)",
             "text": "R < 6 weakened (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
         "withinV26Bounded": false,
@@ -11887,21 +14158,21 @@
             "shape": "potency:A < N restrained (save ends)",
             "text": "A < 4 restrained (save ends)",
             "locator": "tier1",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:A < N restrained (save ends)",
             "text": "A < 5 restrained (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:A < N restrained (save ends)",
             "text": "A < 6 restrained (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
         "withinV26Bounded": false,
@@ -12031,14 +14302,14 @@
             "shape": "potency:P < N weakened (save ends)",
             "text": "P < 1 weakened (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:P < N weakened (save ends)",
             "text": "P < 2 weakened (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
         "withinV26Bounded": false,
@@ -13134,7 +15405,7 @@
             "shape": "potency:I < N dazed (save ends)",
             "text": "I < 3 dazed (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
         "withinV26Bounded": false,
@@ -13252,7 +15523,7 @@
             "shape": "potency:M < N restrained (save ends)",
             "text": "M < 3 restrained (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
         "withinV26Bounded": false,
@@ -13346,21 +15617,21 @@
             "shape": "potency:A < N restrained (save ends)",
             "text": "A < 2 restrained (save ends)",
             "locator": "tier1",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:A < N restrained (save ends)",
             "text": "A < 3 restrained (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:A < N restrained (save ends)",
             "text": "A < 4 restrained (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
         "withinV26Bounded": false,
@@ -13543,21 +15814,21 @@
             "shape": "potency:R < N weakened (save ends)",
             "text": "R < 2 weakened (save ends)",
             "locator": "tier1",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:R < N weakened (save ends)",
             "text": "R < 3 weakened (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:R < N weakened (save ends)",
             "text": "R < 4 weakened (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
         "withinV26Bounded": false,
@@ -13761,21 +16032,21 @@
             "shape": "potency:I < N dazed (save ends)",
             "text": "I < 1 dazed (save ends)",
             "locator": "tier1",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:I < N dazed (save ends)",
             "text": "I < 2 dazed (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:I < N dazed (save ends)",
             "text": "I < 3 dazed (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
         "withinV26Bounded": false,
@@ -14065,7 +16336,7 @@
             "shape": "potency:M < N frightened (save ends)",
             "text": "M < 4 frightened (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
         "withinV26Bounded": false,
@@ -14779,21 +17050,21 @@
             "shape": "potency:P < N dazed (save ends)",
             "text": "P < 4 dazed (save ends)",
             "locator": "tier1",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:P < N dazed (save ends)",
             "text": "P < 5 dazed (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:P < N dazed (save ends)",
             "text": "P < 6 dazed (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
         "withinV26Bounded": false,
@@ -14935,21 +17206,21 @@
             "shape": "potency:R < N weakened (save ends)",
             "text": "R < 4 weakened (save ends)",
             "locator": "tier1",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:R < N weakened (save ends)",
             "text": "R < 5 weakened (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:R < N weakened (save ends)",
             "text": "R < 6 weakened (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
         "withinV26Bounded": false,
@@ -15075,21 +17346,21 @@
             "shape": "potency:I < N dazed (save ends)",
             "text": "I < 3 dazed (save ends)",
             "locator": "tier1",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:I < N dazed (save ends)",
             "text": "I < 4 dazed (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:I < N dazed (save ends)",
             "text": "I < 5 dazed (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
         "withinV26Bounded": false,
@@ -15152,21 +17423,21 @@
             "shape": "potency:R < N restrained (save ends)",
             "text": "R < 3 restrained (save ends)",
             "locator": "tier1",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:R < N restrained (save ends)",
             "text": "R < 4 restrained (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:R < N restrained (save ends)",
             "text": "R < 5 restrained (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
         "withinV26Bounded": false,
@@ -15611,21 +17882,21 @@
             "shape": "potency:I < N frightened (save ends)",
             "text": "I < 1 frightened (save ends)",
             "locator": "tier1",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:I < N frightened (save ends)",
             "text": "I < 1 frightened (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:I < N frightened (save ends)",
             "text": "I < 1 frightened (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
         "withinV26Bounded": false,
@@ -16481,7 +18752,7 @@
             "shape": "potency:R < N dazed (save ends)",
             "text": "R < 3 dazed (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
         "withinV26Bounded": false,
@@ -16873,7 +19144,7 @@
             "shape": "potency:A < N weakened (save ends)",
             "text": "A < 2 weakened (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
@@ -17208,21 +19479,21 @@
             "shape": "potency:M < N dazed (save ends)",
             "text": "M < 1 dazed (save ends)",
             "locator": "tier1",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:M < N dazed (save ends)",
             "text": "M < 2 dazed (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:M < N dazed (save ends)",
             "text": "M < 3 dazed (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
         "withinV26Bounded": false,
@@ -17501,24 +19772,24 @@
             "shape": "potency:M < N dazed (save ends)",
             "text": "M < 1 dazed (save ends)",
             "locator": "tier1",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:M < N dazed (save ends)",
             "text": "M < 2 dazed (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:M < N dazed (save ends)",
             "text": "M < 3 dazed (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
-        "withinV26Bounded": false,
+        "withinV26Bounded": true,
         "targetShape": "area"
       }
     },
@@ -17656,21 +19927,21 @@
             "shape": "potency:M < N weakened (save ends)",
             "text": "M < 1 weakened (save ends)",
             "locator": "tier1",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:M < N weakened (save ends)",
             "text": "M < 2 weakened (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:M < N weakened (save ends)",
             "text": "M < 3 weakened (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
         "withinV26Bounded": false,
@@ -18178,24 +20449,24 @@
             "shape": "potency:I < N frightened (save ends)",
             "text": "I < 2 frightened (save ends)",
             "locator": "tier1",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:I < N frightened (save ends)",
             "text": "I < 3 frightened (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:I < N frightened (save ends)",
             "text": "I < 4 frightened (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
-        "withinV26Bounded": false,
+        "withinV26Bounded": true,
         "targetShape": "area"
       }
     },
@@ -18731,21 +21002,21 @@
             "shape": "potency:P < N frightened (save ends)",
             "text": "P < 4 frightened (save ends)",
             "locator": "tier1",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:P < N frightened (save ends)",
             "text": "P < 5 frightened (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:P < N frightened (save ends)",
             "text": "P < 6 frightened (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
         "withinV26Bounded": false,
@@ -18802,21 +21073,21 @@
             "shape": "potency:A < N weakened (save ends)",
             "text": "A < 4 weakened (save ends)",
             "locator": "tier1",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:A < N weakened (save ends)",
             "text": "A < 5 weakened (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:A < N weakened (save ends)",
             "text": "A < 6 weakened (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
         "withinV26Bounded": false,
@@ -19584,24 +21855,24 @@
             "shape": "potency:A < N restrained (save ends)",
             "text": "A < 1 restrained (save ends)",
             "locator": "tier1",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:A < N restrained (save ends)",
             "text": "A < 2 restrained (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:A < N restrained (save ends)",
             "text": "A < 3 restrained (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
-        "withinV26Bounded": false,
+        "withinV26Bounded": true,
         "targetShape": "area"
       }
     },
@@ -20087,21 +22358,21 @@
             "shape": "potency:I < N dazed (save ends)",
             "text": "I < 0 dazed (save ends)",
             "locator": "tier1",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:I < N dazed (save ends)",
             "text": "I < 1 dazed (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:I < N dazed (save ends)",
             "text": "I < 2 dazed (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
         "withinV26Bounded": false,
@@ -21042,7 +23313,7 @@
             "shape": "potency:M < N restrained (save ends)",
             "text": "M < 2 restrained (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
         "withinV26Bounded": false,
@@ -21732,14 +24003,14 @@
             "shape": "potency:M < N restrained (save ends)",
             "text": "M < 1 restrained (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:M < N restrained (save ends)",
             "text": "M < 2 restrained (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
         "withinV26Bounded": false,
@@ -22242,7 +24513,7 @@
             "shape": "potency:R < N bleeding (save ends)",
             "text": "R < 1 bleeding (save ends)",
             "locator": "tier3",
-            "bounded": true
+            "bounded": false
           }
         ],
         "withinV26Bounded": false,
@@ -22340,7 +24611,7 @@
             "shape": "potency:R < N restrained (save ends)",
             "text": "R < 2 restrained (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
         "withinV26Bounded": false,
@@ -22572,21 +24843,21 @@
             "shape": "potency:R < N dazed (save ends)",
             "text": "R < 1 dazed (save ends)",
             "locator": "tier1",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:R < N dazed (save ends)",
             "text": "R < 2 dazed (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:R < N dazed (save ends)",
             "text": "R < 3 dazed (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
         "withinV26Bounded": false,
@@ -22741,14 +25012,14 @@
             "shape": "potency:I < N weakened (save ends)",
             "text": "I < 1 weakened (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:I < N weakened (save ends)",
             "text": "I < 2 weakened (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
         "withinV26Bounded": false,
@@ -23155,24 +25426,24 @@
             "shape": "potency:M < N weakened (save ends)",
             "text": "M < 1 weakened (save ends)",
             "locator": "tier1",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:M < N weakened (save ends)",
             "text": "M < 2 weakened (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:M < N weakened (save ends)",
             "text": "M < 3 weakened (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
-        "withinV26Bounded": false,
+        "withinV26Bounded": true,
         "targetShape": "area"
       }
     },
@@ -24347,14 +26618,14 @@
             "shape": "potency:I < N dazed (save ends)",
             "text": "I < 2 dazed (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:I < N dazed (save ends)",
             "text": "I < 3 dazed (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
         "withinV26Bounded": false,
@@ -24712,14 +26983,14 @@
             "shape": "potency:I < N restrained (save ends)",
             "text": "I < 1 restrained (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:I < N restrained (save ends)",
             "text": "I < 2 restrained (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
         "withinV26Bounded": false,
@@ -24810,14 +27081,14 @@
             "shape": "potency:P < N weakened (save ends)",
             "text": "P < 1 weakened (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:P < N bleeding (save ends)",
             "text": "P < 1 bleeding (save ends)",
             "locator": "tier3",
-            "bounded": true
+            "bounded": false
           },
           {
             "type": "unknown",
@@ -25139,7 +27410,7 @@
             "shape": "potency:A < N restrained (save ends)",
             "text": "A < 2 restrained (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
         "withinV26Bounded": false,
@@ -25483,21 +27754,21 @@
             "shape": "potency:M < N restrained (save ends)",
             "text": "M < 1 restrained (save ends)",
             "locator": "tier1",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:M < N restrained (save ends)",
             "text": "M < 2 restrained (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:M < N restrained (save ends)",
             "text": "M < 3 restrained (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
         "withinV26Bounded": false,
@@ -26368,14 +28639,14 @@
             "shape": "potency:A < N restrained (save ends)",
             "text": "A < 2 restrained (save ends)",
             "locator": "tier1",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:A < N restrained (save ends)",
             "text": "A < 3 restrained (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
@@ -27642,14 +29913,14 @@
             "shape": "potency:R < N weakened (save ends)",
             "text": "R < 3 weakened (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:R < N weakened (save ends)",
             "text": "R < 4 weakened (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
         "withinV26Bounded": false,
@@ -28191,21 +30462,21 @@
             "shape": "potency:I < N dazed (save ends)",
             "text": "I < 2 dazed (save ends)",
             "locator": "tier1",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:I < N dazed (save ends)",
             "text": "I < 3 dazed (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:I < N dazed (save ends)",
             "text": "I < 4 dazed (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
         "withinV26Bounded": false,
@@ -29316,24 +31587,24 @@
             "shape": "potency:A < N restrained (save ends)",
             "text": "A < 0 restrained (save ends)",
             "locator": "tier1",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:A < N restrained (save ends)",
             "text": "A < 1 restrained (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:A < N restrained (save ends)",
             "text": "A < 2 restrained (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
-        "withinV26Bounded": false,
+        "withinV26Bounded": true,
         "targetShape": "multi"
       }
     },
@@ -29428,24 +31699,24 @@
             "shape": "potency:I < N weakened (save ends)",
             "text": "I < 0 weakened (save ends)",
             "locator": "tier1",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:I < N weakened (save ends)",
             "text": "I < 1 weakened (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:I < N weakened (save ends)",
             "text": "I < 2 weakened (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
-        "withinV26Bounded": false,
+        "withinV26Bounded": true,
         "targetShape": "single"
       }
     },
@@ -30386,7 +32657,7 @@
             "shape": "potency:M < N weakened (save ends)",
             "text": "M < 2 weakened (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
         "withinV26Bounded": false,
@@ -31090,21 +33361,21 @@
             "shape": "potency:A < N weakened (save ends)",
             "text": "A < 1 weakened (save ends)",
             "locator": "tier1",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:A < N weakened (save ends)",
             "text": "A < 2 weakened (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:A < N weakened (save ends)",
             "text": "A < 3 weakened (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
         "withinV26Bounded": false,
@@ -31299,24 +33570,24 @@
             "shape": "potency:A < N weakened (save ends)",
             "text": "A < 1 weakened (save ends)",
             "locator": "tier1",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:A < N weakened (save ends)",
             "text": "A < 2 weakened (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:A < N weakened (save ends)",
             "text": "A < 3 weakened (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
-        "withinV26Bounded": false,
+        "withinV26Bounded": true,
         "targetShape": "multi"
       }
     },
@@ -32444,17 +34715,17 @@
             "shape": "potency:P < N restrained (save ends)",
             "text": "P < 2 restrained (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:P < N restrained (save ends)",
             "text": "P < 3 restrained (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
-        "withinV26Bounded": false,
+        "withinV26Bounded": true,
         "targetShape": "single"
       }
     },
@@ -32669,21 +34940,21 @@
             "shape": "potency:M < N weakened (save ends)",
             "text": "M < 1 weakened (save ends)",
             "locator": "tier1",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:M < N weakened (save ends)",
             "text": "M < 2 weakened (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:M < N weakened (save ends)",
             "text": "M < 3 weakened (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
         "withinV26Bounded": false,
@@ -32832,21 +35103,21 @@
             "shape": "potency:M < N weakened (save ends)",
             "text": "M < 1 weakened (save ends)",
             "locator": "tier1",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:M < N weakened (save ends)",
             "text": "M < 2 weakened (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:M < N weakened (save ends)",
             "text": "M < 3 weakened (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
         "withinV26Bounded": false,
@@ -33779,7 +36050,7 @@
             "shape": "potency:I < N weakened (save ends)",
             "text": "I < 2 weakened (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
         "withinV26Bounded": false,
@@ -34514,21 +36785,21 @@
             "shape": "potency:P < N weakened (save ends)",
             "text": "P < 3 weakened (save ends)",
             "locator": "tier1",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:P < N weakened (save ends)",
             "text": "P < 4 weakened (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:P < N weakened (save ends)",
             "text": "P < 5 weakened (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
         "withinV26Bounded": false,
@@ -34945,21 +37216,21 @@
             "shape": "potency:M < N weakened (save ends)",
             "text": "M < 1 weakened (save ends)",
             "locator": "tier1",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:M < N weakened (save ends)",
             "text": "M < 1 weakened (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:M < N weakened (save ends)",
             "text": "M < 1 weakened (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
         "withinV26Bounded": false,
@@ -35494,14 +37765,14 @@
             "shape": "potency:M < N restrained (save ends)",
             "text": "M < 1 restrained (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:M < N restrained (save ends)",
             "text": "M < 2 restrained (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
         "withinV26Bounded": false,
@@ -35717,21 +37988,21 @@
             "shape": "potency:A < N dazed (save ends)",
             "text": "A < 0 dazed (save ends)",
             "locator": "tier1",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:A < N dazed (save ends)",
             "text": "A < 1 dazed (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:A < N restrained (save ends)",
             "text": "A < 2 restrained (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
         "withinV26Bounded": false,
@@ -36077,21 +38348,21 @@
             "shape": "potency:A < N frightened (save ends)",
             "text": "A < 4 frightened (save ends)",
             "locator": "tier1",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:A < N frightened (save ends)",
             "text": "A < 5 frightened (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:A < N frightened (save ends)",
             "text": "A < 6 frightened (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
         "withinV26Bounded": false,
@@ -36749,24 +39020,24 @@
             "shape": "potency:A < N restrained (save ends)",
             "text": "A < 0 restrained (save ends)",
             "locator": "tier1",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:A < N restrained (save ends)",
             "text": "A < 1 restrained (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:A < N restrained (save ends)",
             "text": "A < 2 restrained (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
-        "withinV26Bounded": false,
+        "withinV26Bounded": true,
         "targetShape": "single"
       }
     },
@@ -36916,21 +39187,21 @@
             "shape": "potency:M < N dazed (save ends)",
             "text": "M < 1 dazed (save ends)",
             "locator": "tier1",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:M < N dazed (save ends)",
             "text": "M < 2 dazed (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:M < N dazed (save ends)",
             "text": "M < 3 dazed (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
         "withinV26Bounded": false,
@@ -37412,21 +39683,21 @@
             "shape": "potency:M < N weakened (save ends)",
             "text": "M < 0 weakened (save ends)",
             "locator": "tier1",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:M < N weakened (save ends)",
             "text": "M < 1 weakened (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:M < N weakened (save ends)",
             "text": "M < 2 weakened (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
         "withinV26Bounded": false,
@@ -38578,21 +40849,21 @@
             "shape": "potency:P < N weakened (save ends)",
             "text": "P < 3 weakened (save ends)",
             "locator": "tier1",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:P < N weakened (save ends)",
             "text": "P < 4 weakened (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:P < N weakened (save ends)",
             "text": "P < 5 weakened (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
         "withinV26Bounded": false,
@@ -38764,21 +41035,21 @@
             "shape": "potency:I < N dazed (save ends)",
             "text": "I < 0 dazed (save ends)",
             "locator": "tier1",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:I < N dazed (save ends)",
             "text": "I < 1 dazed (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:I < N dazed (save ends)",
             "text": "I < 2 dazed (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
         "withinV26Bounded": false,
@@ -40094,21 +42365,21 @@
             "shape": "potency:P < N frightened (save ends)",
             "text": "P < 2 frightened (save ends)",
             "locator": "tier1",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:P < N frightened (save ends)",
             "text": "P < 3 frightened (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:P < N frightened (save ends)",
             "text": "P < 4 frightened (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
         "withinV26Bounded": false,
@@ -40872,7 +43143,7 @@
             "shape": "potency:I < N dazed (save ends)",
             "text": "I < 1 dazed (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "condition",
@@ -41067,10 +43338,10 @@
             "shape": "potency:P < N weakened (save ends)",
             "text": "P < 2 weakened (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
-        "withinV26Bounded": false,
+        "withinV26Bounded": true,
         "targetShape": "single"
       }
     },
@@ -41503,21 +43774,21 @@
             "shape": "potency:M < N restrained (save ends)",
             "text": "M < 0 restrained (save ends)",
             "locator": "tier1",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:M < N restrained (save ends)",
             "text": "M < 1 restrained (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:M < N restrained (save ends)",
             "text": "M < 2 restrained (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
         "withinV26Bounded": false,
@@ -45102,21 +47373,21 @@
             "shape": "potency:M < N weakened (save ends)",
             "text": "M < 0 weakened (save ends)",
             "locator": "tier1",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:M < N weakened (save ends)",
             "text": "M < 1 weakened (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:M < N weakened (save ends)",
             "text": "M < 2 weakened (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
         "withinV26Bounded": false,
@@ -45747,7 +48018,7 @@
             "shape": "potency:R < N dazed (save ends)",
             "text": "R < 2 dazed (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
@@ -46016,21 +48287,21 @@
             "shape": "potency:M < N weakened (save ends)",
             "text": "M < 1 weakened (save ends)",
             "locator": "tier1",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:M < N weakened (save ends)",
             "text": "M < 2 weakened (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:M < N weakened (save ends)",
             "text": "M < 3 weakened (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
         "withinV26Bounded": false,
@@ -46129,14 +48400,14 @@
             "shape": "potency:R < N dazed (save ends)",
             "text": "R < 1 dazed (save ends)",
             "locator": "tier1",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:R < N dazed (save ends)",
             "text": "R < 2 dazed (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
@@ -46697,14 +48968,14 @@
             "shape": "potency:R < N dazed (save ends)",
             "text": "R < 2 dazed (save ends)",
             "locator": "tier1",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:R < N dazed (save ends)",
             "text": "R < 3 dazed (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
@@ -46944,21 +49215,21 @@
             "shape": "potency:M < N weakened (save ends)",
             "text": "M < 2 weakened (save ends)",
             "locator": "tier1",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:M < N weakened (save ends)",
             "text": "M < 3 weakened (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:M < N weakened (save ends)",
             "text": "M < 4 weakened (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
         "withinV26Bounded": false,
@@ -47194,7 +49465,7 @@
             "shape": "potency:R < N dazed (save ends)",
             "text": "R < 2 dazed (save ends)",
             "locator": "tier1",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
@@ -47899,21 +50170,21 @@
             "shape": "potency:M < N weakened (save ends)",
             "text": "M < 3 weakened (save ends)",
             "locator": "tier1",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:M < N weakened (save ends)",
             "text": "M < 4 weakened (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:M < N weakened (save ends)",
             "text": "M < 5 weakened (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
         "withinV26Bounded": false,
@@ -48259,24 +50530,24 @@
             "shape": "potency:M < N dazed (save ends)",
             "text": "M < 2 dazed (save ends)",
             "locator": "tier1",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:M < N dazed (save ends)",
             "text": "M < 3 dazed (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:M < N dazed (save ends)",
             "text": "M < 4 dazed (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
-        "withinV26Bounded": false,
+        "withinV26Bounded": true,
         "targetShape": "area"
       }
     },
@@ -48636,7 +50907,7 @@
             "shape": "potency:R < N weakened (save ends)",
             "text": "R < 2 weakened (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
         "withinV26Bounded": false,
@@ -49101,14 +51372,14 @@
             "shape": "potency:M < N dazed (save ends)",
             "text": "M < 1 dazed (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:M < N dazed (save ends)",
             "text": "M < 2 dazed (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
         "withinV26Bounded": false,
@@ -49691,21 +51962,21 @@
             "shape": "potency:M < N weakened (save ends)",
             "text": "M < 1 weakened (save ends)",
             "locator": "tier1",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:M < N weakened (save ends)",
             "text": "M < 2 weakened (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:M < N weakened (save ends)",
             "text": "M < 3 weakened (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
         "withinV26Bounded": false,
@@ -51066,21 +53337,21 @@
             "shape": "potency:P < N weakened (save ends)",
             "text": "P < 0 weakened (save ends)",
             "locator": "tier1",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:P < N weakened (save ends)",
             "text": "P < 1 weakened (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:P < N weakened (save ends)",
             "text": "P < 2 weakened (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
         "withinV26Bounded": false,
@@ -51359,14 +53630,14 @@
             "shape": "potency:M < N weakened (save ends)",
             "text": "M < 1 weakened (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:M < N dazed (save ends)",
             "text": "M < 2 dazed (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
         "withinV26Bounded": false,
@@ -51423,14 +53694,14 @@
             "shape": "potency:I < N frightened (save ends)",
             "text": "I < 2 frightened (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:I < N frightened (save ends)",
             "text": "I < 3 frightened (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
         "withinV26Bounded": false,
@@ -51996,14 +54267,14 @@
             "shape": "potency:I < N frightened (save ends)",
             "text": "I < 2 frightened (save ends)",
             "locator": "tier1",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:I < N frightened (save ends)",
             "text": "I < 3 frightened (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
@@ -52182,21 +54453,21 @@
             "shape": "potency:I < N frightened (save ends)",
             "text": "I < 2 frightened (save ends)",
             "locator": "tier1",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:I < N frightened (save ends)",
             "text": "I < 3 frightened (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:I < N frightened (save ends)",
             "text": "I < 4 frightened (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
         "withinV26Bounded": false,
@@ -52663,21 +54934,21 @@
             "shape": "potency:I < N frightened (save ends)",
             "text": "I < 2 frightened (save ends)",
             "locator": "tier1",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:I < N frightened (save ends)",
             "text": "I < 3 frightened (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:I < N frightened (save ends)",
             "text": "I < 4 frightened (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
         "withinV26Bounded": false,
@@ -53865,21 +56136,21 @@
             "shape": "potency:I < N frightened (save ends)",
             "text": "I < 3 frightened (save ends)",
             "locator": "tier1",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:I < N frightened (save ends)",
             "text": "I < 4 frightened (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:I < N frightened (save ends)",
             "text": "I < 5 frightened (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
         "withinV26Bounded": false,
@@ -54032,7 +56303,7 @@
             "shape": "potency:P < N slowed (save ends)",
             "text": "P < 5 slowed (save ends)",
             "locator": "tier3",
-            "bounded": true
+            "bounded": false
           },
           {
             "type": "shift",
@@ -54177,14 +56448,14 @@
             "shape": "potency:M < N weakened (save ends)",
             "text": "M < 2 weakened (save ends)",
             "locator": "tier1",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:M < N weakened (save ends)",
             "text": "M < 3 weakened (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
@@ -55025,14 +57296,14 @@
             "shape": "potency:I < N dazed (save ends)",
             "text": "I < 4 dazed (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:I < N dazed (save ends)",
             "text": "I < 5 dazed (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
         "withinV26Bounded": false,
@@ -57049,21 +59320,21 @@
             "shape": "potency:I < N frightened (save ends)",
             "text": "I < 0 frightened (save ends)",
             "locator": "tier1",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:I < N frightened (save ends)",
             "text": "I < 1 frightened (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:I < N frightened (save ends)",
             "text": "I < 2 frightened (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
         "withinV26Bounded": false,
@@ -57740,7 +60011,7 @@
             "shape": "potency:I < N frightened (save ends)",
             "text": "I < 3 frightened (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
         "withinV26Bounded": false,
@@ -58476,7 +60747,7 @@
             "shape": "potency:A < N restrained (save ends)",
             "text": "A < 3 restrained (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
         "withinV26Bounded": false,
@@ -58682,7 +60953,7 @@
             "shape": "potency:M < N weakened (save ends)",
             "text": "M < 3 weakened (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
         "withinV26Bounded": false,
@@ -62003,21 +64274,21 @@
             "shape": "potency:M < N weakened (save ends)",
             "text": "M < 1 weakened (save ends)",
             "locator": "tier1",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:M < N weakened (save ends)",
             "text": "M < 2 weakened (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:M < N weakened (save ends)",
             "text": "M < 3 weakened (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
         "withinV26Bounded": false,
@@ -62524,17 +64795,17 @@
             "shape": "potency:M < N weakened (save ends)",
             "text": "M < 3 weakened (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:M < N weakened (save ends)",
             "text": "M < 4 weakened (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
-        "withinV26Bounded": false,
+        "withinV26Bounded": true,
         "targetShape": "area"
       }
     },
@@ -62726,24 +64997,24 @@
             "shape": "potency:R < N dazed (save ends)",
             "text": "R < 2 dazed (save ends)",
             "locator": "tier1",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:R < N dazed (save ends)",
             "text": "R < 3 dazed (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:R < N dazed (save ends)",
             "text": "R < 4 dazed (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
-        "withinV26Bounded": false,
+        "withinV26Bounded": true,
         "targetShape": "multi"
       }
     },
@@ -63223,21 +65494,21 @@
             "shape": "potency:R < N frightened (save ends)",
             "text": "R < 1 frightened (save ends)",
             "locator": "tier1",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:R < N frightened (save ends)",
             "text": "R < 2 frightened (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:R < N frightened (save ends)",
             "text": "R < 3 frightened (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
         "withinV26Bounded": false,
@@ -63374,7 +65645,7 @@
             "shape": "potency:A < N restrained (save ends)",
             "text": "A < 2 restrained (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
         "withinV26Bounded": false,
@@ -63825,14 +66096,14 @@
             "shape": "potency:P < N frightened (save ends)",
             "text": "P < 4 frightened (save ends)",
             "locator": "tier2",
-            "bounded": false
+            "bounded": true
           },
           {
             "type": "potency-condition",
             "shape": "potency:P < N frightened (save ends)",
             "text": "P < 5 frightened (save ends)",
             "locator": "tier3",
-            "bounded": false
+            "bounded": true
           }
         ],
         "withinV26Bounded": false,
@@ -63844,8 +66115,8 @@
     {
       "shape": "effect-paragraph:effect",
       "type": "effect-paragraph",
-      "count": 1016,
-      "abilities": 1003,
+      "count": 1018,
+      "abilities": 1005,
       "examples": [
         "complication:Corrupted Mentor/corrupt-spirit",
         "complication:Dragon Dreams/dragon-breath",
@@ -63855,8 +66126,8 @@
     {
       "shape": "no-power-roll",
       "type": "no-power-roll",
-      "count": 518,
-      "abilities": 518,
+      "count": 539,
+      "abilities": 539,
       "examples": [
         "complication:Corrupted Mentor/corrupt-spirit",
         "complication:Grounded/motivate-earth",
@@ -63888,12 +66159,12 @@
     {
       "shape": "slide N",
       "type": "slide",
-      "count": 74,
-      "abilities": 29,
+      "count": 80,
+      "abilities": 31,
       "examples": [
         "mcdm.heroes.v1/feature.ability.fury.level-1/out-of-the-way",
-        "mcdm.heroes.v1/kit/pugilist/let-s-dance",
-        "mcdm.heroes.v1/kit/stick-and-robe/where-i-want-you"
+        "mcdm.heroes.v1/feature.ability.revenant/detonate-sigil",
+        "mcdm.heroes.v1/feature.ability.time-raider/psionic-bolt"
       ]
     },
     {
@@ -64403,6 +66674,17 @@
       ]
     },
     {
+      "shape": "push N (not directly after damage)",
+      "type": "push-with-extra",
+      "count": 7,
+      "abilities": 3,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.time-raider/concussive-slam",
+        "salient:foe-feature:63692344-f9b6-4528-a660-43bd25d254eb",
+        "salient:foe-feature:8a0771db-4bd6-4032-a8b5-341764403917"
+      ]
+    },
+    {
       "shape": "envelope:structured-markdown-mismatch",
       "type": "unknown",
       "count": 6,
@@ -64411,6 +66693,17 @@
         "salient:foe-feature:08b75627-ded0-4e55-a034-6a2f6c7d35ea",
         "salient:foe-feature:0ee6dd1c-8d53-4033-a8c3-879ac28b430e",
         "salient:foe-feature:737424d8-c4b9-460b-8b5c-cae12afa95d5"
+      ]
+    },
+    {
+      "shape": "potency:A < SYM slowed (save ends)",
+      "type": "potency-condition",
+      "count": 6,
+      "abilities": 3,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.fury.level-1/hit-and-run",
+        "mcdm.heroes.v1/feature.ability.wode-elf/the-wode-defends",
+        "mcdm.heroes.v1/kit/ranger/hamstring-shot"
       ]
     },
     {
@@ -64485,6 +66778,16 @@
       ]
     },
     {
+      "shape": "tier:N + r, i, or p damage",
+      "type": "tier-damage",
+      "count": 6,
+      "abilities": 2,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.revenant/detonate-sigil",
+        "mcdm.heroes.v1/feature.ability.time-raider/concussive-slam"
+      ]
+    },
+    {
       "shape": "tier:N corruption or fire damage",
       "type": "tier-damage",
       "count": 6,
@@ -64547,16 +66850,6 @@
       ]
     },
     {
-      "shape": "push N (not directly after damage)",
-      "type": "push-with-extra",
-      "count": 5,
-      "abilities": 2,
-      "examples": [
-        "salient:foe-feature:63692344-f9b6-4528-a660-43bd25d254eb",
-        "salient:foe-feature:8a0771db-4bd6-4032-a8b5-341764403917"
-      ]
-    },
-    {
       "shape": "tier:N damage, N corruption damage",
       "type": "tier-damage",
       "count": 5,
@@ -64577,6 +66870,17 @@
       ]
     },
     {
+      "shape": "potency:M < SYM prone",
+      "type": "potency-condition",
+      "count": 4,
+      "abilities": 4,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.elementalist.level-1/ripples-in-the-earth",
+        "mcdm.heroes.v1/feature.ability.time-raider/concussive-slam",
+        "mcdm.heroes.v1/kit/sword-and-board/shield-bash"
+      ]
+    },
+    {
       "shape": "potency:R < N dazed and slowed (save ends)",
       "type": "potency-condition",
       "count": 4,
@@ -64585,16 +66889,6 @@
         "salient:foe-feature:1b30593e-c891-429b-961f-f28232d408ee",
         "salient:foe-feature:80663ae8-7b28-495c-8923-760fcfd561c5",
         "salient:foe-feature:a27b1a6a-ae3a-4714-9fe6-93d121c18554"
-      ]
-    },
-    {
-      "shape": "potency:A < SYM slowed (save ends)",
-      "type": "potency-condition",
-      "count": 4,
-      "abilities": 2,
-      "examples": [
-        "mcdm.heroes.v1/feature.ability.fury.level-1/hit-and-run",
-        "mcdm.heroes.v1/kit/ranger/hamstring-shot"
       ]
     },
     {
@@ -64658,17 +66952,6 @@
       ]
     },
     {
-      "shape": "potency:M < SYM prone",
-      "type": "potency-condition",
-      "count": 3,
-      "abilities": 3,
-      "examples": [
-        "mcdm.heroes.v1/feature.ability.elementalist.level-1/ripples-in-the-earth",
-        "mcdm.heroes.v1/kit/sword-and-board/shield-bash",
-        "salient:foe-feature:c866f65d-ecd2-4b2c-aff2-265d730397c0"
-      ]
-    },
-    {
       "shape": "resource-spend:spend N essence",
       "type": "resource-spend",
       "count": 3,
@@ -64721,6 +67004,17 @@
         "mcdm.heroes.v1/kit/battlemind/unmooring",
         "mcdm.heroes.v1/kit/spellsword/leaping-lightning",
         "mcdm.heroes.v1/kit/warrior-priest/weakening-brand"
+      ]
+    },
+    {
+      "shape": "roll:power roll + reason, intuition, or presence",
+      "type": "roll-expression",
+      "count": 3,
+      "abilities": 3,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.revenant/detonate-sigil",
+        "mcdm.heroes.v1/feature.ability.time-raider/concussive-slam",
+        "mcdm.heroes.v1/feature.ability.time-raider/psionic-bolt"
       ]
     },
     {
@@ -65265,6 +67559,15 @@
       "abilities": 1,
       "examples": [
         "mcdm.heroes.v1/kit/spellsword/leaping-lightning"
+      ]
+    },
+    {
+      "shape": "tier:N + r, i, or p psychic damage",
+      "type": "tier-damage",
+      "count": 3,
+      "abilities": 1,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.time-raider/psionic-bolt"
       ]
     },
     {
@@ -66228,6 +68531,15 @@
       "abilities": 1,
       "examples": [
         "mcdm.heroes.v1/kit/retiarius/net-and-stab"
+      ]
+    },
+    {
+      "shape": "potency:A < SYM restrained (save ends)",
+      "type": "potency-condition",
+      "count": 1,
+      "abilities": 1,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.wode-elf/the-wode-defends"
       ]
     },
     {
@@ -67522,15 +69834,15 @@
       "total": 1158,
       "compiles": 20,
       "withRemainder": 566,
-      "withinV26Bounded": 14,
+      "withinV26Bounded": 29,
       "noMatch": 572
     },
     "hero": {
-      "total": 92,
+      "total": 117,
       "compiles": 11,
-      "withRemainder": 43,
-      "withinV26Bounded": 2,
-      "noMatch": 38
+      "withRemainder": 44,
+      "withinV26Bounded": 3,
+      "noMatch": 62
     }
   }
 }
