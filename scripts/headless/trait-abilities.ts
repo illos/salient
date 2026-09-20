@@ -145,6 +145,16 @@ export async function runTraitAbilities({
         selectedPlayerIds: [request.userId],
         commandId: crypto.randomUUID(),
       });
+      const recipientId = await director.mutation<string>('characters:create', {
+        commandId: crypto.randomUUID(),
+        authored: { name: `Rune recipient ${runId}`, appearance: '', biography: '', notes: '' },
+        selections,
+      });
+      await director.mutation('characters:submit', {
+        characterId: recipientId,
+        campaignId,
+        commandId: crypto.randomUUID(),
+      });
       const current = await player.query<RuneState>('characterRunes:current', { characterId });
       await player.mutation('characterRunes:setActiveRune', {
         characterId,
@@ -183,7 +193,10 @@ export async function runTraitAbilities({
         campaignId,
         operation: 'ability.use',
         actor: { refKind: 'character', id: characterId },
-        arguments: { ability: 'Runic Carving: Voice' },
+        arguments: {
+          ability: 'Runic Carving: Voice',
+          targets: [{ refKind: 'character', id: recipientId }],
+        },
         commandId: crypto.randomUUID(),
       });
       const after = await player.query<Saved>('characters:get', { characterId });
