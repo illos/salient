@@ -1,3 +1,5 @@
+import { startingRewardItems } from '../content/starting-reward-items.ts';
+import { complicationAbilities } from './complicationAbilities.ts';
 import { perkAbilities } from './perkAbilities.ts';
 import { applyRevenantBaseline, applyRevenantDisengage } from './ancestries/revenant.ts';
 import { applyTimeRaiderBaseline } from './ancestries/time-raider.ts';
@@ -342,7 +344,12 @@ class Evaluation {
           (!decision.ownedPool &&
             !decision.selectedPool &&
             !decision.abilityPool &&
-            !decision.options?.some(option => option.requiresFeature)) ||
+            !decision.options?.some(
+              option =>
+                option.requiresFeature ||
+                option.excludesFeatures?.length ||
+                option.excludedWhen?.length,
+            )) ||
           !this.valid.has(decision.id)
         )
           continue;
@@ -844,8 +851,13 @@ class Evaluation {
     out.traits = this.traits();
     out.features = this.features();
     out.perks = this.perks();
-    out.abilities = perkAbilities(out.perks, ancestryAbilities(out.traits, this.abilities()));
+    out.abilities = complicationAbilities(
+      out.features,
+      perkAbilities(out.perks, ancestryAbilities(out.traits, this.abilities())),
+    );
     this.deriveSupportingChoices(out);
+    const items = startingRewardItems(out.features ?? [], out.initialItems);
+    if (items.length) out.initialItems = items;
     out.uncertainties = UNCERTAINTY_ORDER.filter(id => this.uncertainties.has(id));
     return out;
   }

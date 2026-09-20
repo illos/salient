@@ -8,17 +8,54 @@ Currently reachable compiled: 13; unchanged reachable compatibility: 1222; struc
 
 | Ability | Population | Pure execution | Live boundary | Diagnostics |
 | --- | --- | --- | --- | --- |
+| Advanced Studies: Study Notebook | granted | manual | legacy-compatibility | grammar, extra-roll-or-tiers, source-header, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary, action-type |
+| Animal Form | granted | manual | legacy-compatibility | grammar, source-header, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary, action-type |
+| Bereaved: Ask the Spirit | granted | manual | legacy-compatibility | grammar, source-header, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary, action-type |
+| Consuming Interest: Study Lore | granted | manual | legacy-compatibility | grammar, source-header, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary, action-type |
 | Corrupt Spirit | granted | manual | legacy-compatibility | grammar, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary |
+| Crash Landed: Activate Power Pack | granted | manual | legacy-compatibility | grammar, source-header, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary, action-type |
+| Crash Landed: Deactivate Power Pack | granted | manual | legacy-compatibility | grammar, source-header, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary, action-type |
+| Cult Victim: Pass Through Matter | granted | manual | legacy-compatibility | grammar, source-header, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary, action-type |
+| Curse of Stone: Stone Appearance | granted | manual | legacy-compatibility | grammar, source-header, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary, action-type |
+| Draconian Guard | granted | manual | legacy-compatibility | grammar, source-header, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary, action-type |
 | Draconian Pride | granted | manual | legacy-compatibility | unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary |
 | Dragon Breath | granted | manual | legacy-compatibility | unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary |
+| Remember Your Oath | granted | manual | legacy-compatibility | grammar, source-header, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary, action-type |
+| Evanesceria: Absent from Reality | granted | manual | legacy-compatibility | grammar, source-header, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary, action-type |
+| Famous Relative: Summon Relative | granted | manual | legacy-compatibility | grammar, source-header, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary, action-type |
+| Feytouched: Accept Fey Power | granted | manual | legacy-compatibility | grammar, source-header, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary, action-type |
+| Forbidden Romance: Request Favor | granted | manual | legacy-compatibility | grammar, source-header, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary, action-type |
+| Getting Too Old for This: Use Advanced Ability | granted | manual | legacy-compatibility | grammar, source-header, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary, action-type |
+| Gnoll-Mauled: Retaliate | granted | manual | legacy-compatibility | grammar, source-header, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary, action-type |
 | Motivate Earth | granted | manual | legacy-compatibility | grammar, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary |
+| Guilty Conscience: Stay Alive | granted | manual | legacy-compatibility | grammar, source-header, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary, action-type |
+| Hawk Rider: Dismiss Hawk | granted | manual | legacy-compatibility | grammar, source-header, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary, action-type |
+| Hawk Rider: Restore Hawk | granted | manual | legacy-compatibility | grammar, source-header, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary, action-type |
+| Hawk Rider: Summon Hawk | granted | manual | legacy-compatibility | grammar, source-header, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary, action-type |
+| Host Body: Transfer Host | granted | manual | legacy-compatibility | grammar, source-header, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary, action-type |
+| Hunted: Lay Low | granted | manual | legacy-compatibility | grammar, source-header, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary, action-type |
+| Loner: Choose Respite Skill | granted | manual | legacy-compatibility | grammar, source-header, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary, action-type |
 | Share Head | granted | manual | legacy-compatibility | grammar, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary |
+| Master Chef: Prepare Meal | granted | manual | legacy-compatibility | grammar, source-header, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary, action-type |
 | Contact Spirits | granted | manual | legacy-compatibility | grammar, unsafe-tier-remainder, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary |
 | Stone Eyes | granted | manual | legacy-compatibility | unaccounted-paragraph, manual-section, compatibility-boundary |
+| Preacher: Convert Follower | granted | manual | legacy-compatibility | grammar, source-header, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary, action-type |
+| Prisoner of the Synlirii: Telepathy | granted | manual | legacy-compatibility | grammar, source-header, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary, action-type |
 | Psychic Blast | granted | manual | legacy-compatibility | grammar, unsafe-tier-remainder, source-title, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary |
+| Psychic Blast: Forced Eruption | granted | manual | legacy-compatibility | grammar, unsafe-tier-remainder, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary |
 | Telekinetic Grasp | granted | manual | legacy-compatibility | grammar, unsafe-tier-remainder, unaccounted-paragraph, manual-section, compatibility-boundary |
+| Telekinetic Grasp: Ranged Free Strike | granted | manual | legacy-compatibility | grammar, unsafe-tier-remainder, unaccounted-paragraph, manual-section, compatibility-boundary |
+| Secret Identity: Resume Secret Identity | granted | manual | legacy-compatibility | grammar, source-header, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary, action-type |
+| Secret Identity: Resume True Identity | granted | manual | legacy-compatibility | grammar, source-header, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary, action-type |
+| Self-Taught: Forgo Heroic Resource | granted | manual | legacy-compatibility | grammar, source-header, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary, action-type |
+| Shared Spirit: Determine Controller | granted | manual | legacy-compatibility | grammar, source-header, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary, action-type |
+| Silent Sentinel: Telepathy | granted | manual | legacy-compatibility | grammar, source-header, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary, action-type |
+| Stolen Face: Change Face | granted | manual | legacy-compatibility | grammar, source-header, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary, action-type |
 | Issue Order | granted | manual | legacy-compatibility | grammar, unaccounted-paragraph, manual-section, compatibility-boundary |
+| Waking Dreams: Receive Vision | granted | manual | legacy-compatibility | grammar, source-header, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary, action-type |
 | Posthumous Retirement | granted | manual | legacy-compatibility | grammar, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary |
+| War Dog Collar: Reset Collar | granted | manual | legacy-compatibility | grammar, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary |
+| War of Assassins: Call in Favor | granted | manual | legacy-compatibility | grammar, source-header, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary, action-type |
 | Rogue Wave | granted | manual | legacy-compatibility | grammar, unsafe-tier-remainder, unaccounted-paragraph, manual-section, compatibility-boundary |
 | Rotting Fist | foe-ability | manual | legacy-compatibility | unsafe-tier-remainder, target-boundary |
 | Stolen Vitality | foe-ability | manual | legacy-compatibility | grammar, manual-section |
