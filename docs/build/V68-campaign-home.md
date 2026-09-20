@@ -210,3 +210,13 @@ session screen slice inherits it. The CT114 `pnpm check` log remains on the envi
 Local (Presidium, now a permitted peer test environment per the user's 03:30 UTC rule): eslint,
 prettier, tsc pass; `tests/app/campaign-home.test.ts` (6) and `access-sessions.test.ts` pass.
 CT114 rerun of the full check and the headless proof follows in the next free window.
+
+### 2026-09-20 — CT114 rerun after review fixes
+
+Environment `campaign-home` resynced to `ed83dff` ("Convex functions ready" 03:39:06 UTC).
+`scripts/v68-headless.ts`: 8/8 steps pass in 13.3 s (run `v68-mu99p51j`), now including
+`campaigns.regenerateShareCode` (check 6) and `sessions.setPlayers` after the interim start
+(check 8). Full `pnpm check`: exit 0, 284 engine and 425 app/scripts tests (six in
+`campaign-home.test.ts`), build. Both logs are in `evidence/V68/`. Environment stopped, data kept.
+The headless table above stands with these additions: check 4 is now proven by the six-session
+test; check 7's level is proven at level 2 through the advancement route.

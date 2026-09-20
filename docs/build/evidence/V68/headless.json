@@ -1,9 +1,9 @@
 {
   "slice": "V68",
-  "run": "v68-mu9934tu",
+  "run": "v68-mu99p51j",
   "target": "http://backend:3210",
-  "startedAt": "2026-09-20T03:22:18.546Z",
-  "elapsedMs": 12832,
+  "startedAt": "2026-09-20T03:39:25.256Z",
+  "elapsedMs": 13283,
   "passed": 8,
   "failed": 0,
   "steps": [
@@ -11,12 +11,12 @@
       "step": "campaign projection has no campaign-level role tags and counts sessions",
       "ok": true,
       "evidence": {
-        "campaignId": "jh72bw70ev3wdhg7t5ygs8gsax8erktz",
+        "campaignId": "jh7d3797kargvwavb6gqxrgm4d8est0q",
         "members": [
           {
             "displayName": "Director",
             "heroes": [],
-            "userId": "p979bv1dxvbxjd2afb1vaptyf58erag4"
+            "userId": "p97ex7zxb7d7snm6xsk1qym6bx8er7tv"
           }
         ],
         "sessionCount": 0
@@ -30,7 +30,8 @@
           "Director",
           "Player"
         ],
-        "pending": 1
+        "pending": 1,
+        "shareCodeChanged": true
       }
     },
     {
@@ -38,7 +39,7 @@
       "ok": true,
       "evidence": {
         "online": [
-          "p97e01fwt2by674cfbxb0dkng98err78"
+          "p97fpyegsh1ztsrg08egr1sas98erad6"
         ],
         "afterLeave": []
       }
@@ -71,17 +72,16 @@
       "ok": true,
       "evidence": {
         "session": {
-          "campaignId": "jh72bw70ev3wdhg7t5ygs8gsax8erktz",
+          "campaignId": "jh7d3797kargvwavb6gqxrgm4d8est0q",
           "closedAt": null,
           "encounter": null,
-          "id": "nn77e3q8hj9vy64pr3j083wsn18era1w",
+          "id": "nn702v62epkkhdk8sjj4h21fwd8erake",
           "number": 1,
-          "revision": 0,
+          "revision": 1,
           "selectedPlayerIds": [
-            "p979bv1dxvbxjd2afb1vaptyf58erag4",
-            "p97e01fwt2by674cfbxb0dkng98err78"
+            "p97fpyegsh1ztsrg08egr1sas98erad6"
           ],
-          "startedAt": 1789874549635,
+          "startedAt": 1789875576663,
           "status": "running",
           "title": "Blackcastle, revisited"
         }
@@ -92,22 +92,22 @@
       "ok": true,
       "evidence": {
         "closed": {
-          "campaignId": "jh72bw70ev3wdhg7t5ygs8gsax8erktz",
-          "closedAt": 1789874550040,
+          "campaignId": "jh7d3797kargvwavb6gqxrgm4d8est0q",
+          "closedAt": 1789875577219,
           "encounter": null,
-          "id": "nn77e3q8hj9vy64pr3j083wsn18era1w",
+          "id": "nn702v62epkkhdk8sjj4h21fwd8erake",
           "number": 1,
-          "revision": 1,
+          "revision": 2,
           "selectedPlayerIds": [
-            "p979bv1dxvbxjd2afb1vaptyf58erag4",
-            "p97e01fwt2by674cfbxb0dkng98err78"
+            "p97fpyegsh1ztsrg08egr1sas98erad6"
           ],
-          "startedAt": 1789874549635,
+          "startedAt": 1789875576663,
           "status": "closed",
           "title": "Closed and renamed"
         },
         "recapKinds": [
           "session.closed",
+          "session.players",
           "session.started"
         ],
         "sessionCount": 1
@@ -119,7 +119,7 @@
       "evidence": {
         "heroes": [
           {
-            "id": "k571h4nakqqkyczsxgrx6afhd58esrfc",
+            "id": "k571addkthwt5a90kebfpva9718eswmj",
             "level": 1,
             "name": "Thorn"
           }
