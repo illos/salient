@@ -2,9 +2,9 @@
 
 Structural support, current grant/loading availability and live execution are separate. Source drift never silently falls back; historical results are never recompiled on read.
 
-Source: `fb83a789da8f0327a389c277a0c790b1648d5810`; content: `sha256:ea1f6a2cf1d3c8a30f5fa40aef52fdadc25aa97900648485c9fe5957a50cf43b`.
+Source: `fb83a789da8f0327a389c277a0c790b1648d5810`; content: `sha256:b4e0d992e181c9bac991ca9487600fabeb1ce20a130781dc38128cdba0fa5035`.
 
-Currently reachable compiled: 14; unchanged reachable compatibility: 1277; structurally supported but unavailable: 2.
+Currently reachable compiled: 15; unchanged reachable compatibility: 1289; structurally supported but unavailable: 2.
 
 | Ability | Population | Pure execution | Live boundary | Diagnostics |
 | --- | --- | --- | --- | --- |
@@ -152,6 +152,19 @@ Currently reachable compiled: 14; unchanged reachable compatibility: 1277; struc
 | Teamwork Has Its Place | hero-standalone | manual | legacy-compatibility | manual-section |
 | Two Throats at Once | hero-standalone | manual | legacy-compatibility | target-boundary |
 | You Were Watching the Wrong One | hero-standalone | manual | legacy-compatibility | manual-section |
+| Advanced Tactics | hero-standalone | manual | legacy-compatibility | grammar, manual-section, action-type |
+| Battle Cry | hero-standalone | manual | legacy-compatibility | grammar, unsafe-tier-remainder, target-boundary |
+| Concussive Strike | hero-standalone | supported | compiled |  |
+| Hammer and Anvil | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder, manual-section |
+| Inspiring Strike | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder |
+| Mark | hero-standalone | manual | legacy-compatibility | grammar, source-block-mismatch, unaccounted-paragraph, manual-section |
+| Mind Game | hero-standalone | manual | legacy-compatibility | manual-section |
+| Now! | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Overwatch | hero-standalone | manual | legacy-compatibility | grammar, manual-section, action-type |
+| Parry | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary, action-type |
+| Squad! Forward! | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| "Strike Now!" | hero-standalone | manual | legacy-compatibility | grammar, manual-section |
+| This Is What We Planned For | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Concussive Slam | hero-standalone | manual | not-reachable | grammar, unsafe-tier-remainder, empty-clause |
 | Minor Acceleration | hero-standalone | manual | not-reachable | grammar, manual-section, target-boundary |
 | Psionic Bolt | hero-standalone | manual | not-reachable | grammar, unsafe-tier-remainder |
