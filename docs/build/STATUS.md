@@ -404,7 +404,7 @@ blocker; do not record a browser result as pending acceptance. The
 
 | Id | Unit | Candidate | Verification / next action |
 | --- | --- | --- | --- |
-| V65 | [Character headless routes and verification](V65-character-headless.md) | `c0fe8b1` + evidence `6af5dc9`, pushed `origin/slice/V65`; backend deployed to cloud dev, not merged | 712 unit/backend/script tests pass; app TS7022 blocker; remote headless 14 pass / 1 assertion fail / 7 dependency skips in 45.472s; no fixes, retries or browsers; incomplete |
+| V65 | [Programmatic character verification](V65-character-headless.md) | `slice/V65`, `.worktrees/character-headless`; discovery/transition routes, shared UI transition and browser-independent runner | Backend fix published `b1f50c8`; original 712 unit/backend/script tests pass; type error resolved; all 22 remote headless scenarios pass in 73.547s, zero skips; no browser; ancestry acceptance/main integration separate |
 
 Discovery and shared choice-transition routes are implemented on the candidate and live backend.
 The UI refactor remains unpublished because the app TypeScript check failed; the hosted frontend

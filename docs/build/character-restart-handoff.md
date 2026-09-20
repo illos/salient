@@ -1,8 +1,17 @@
 # Fresh-session handoff: restart character development with Astra
 
-Status: implementation resumed after this handoff was staged. The original staging session changed
-documentation only; [STATUS.md](STATUS.md#astra-delivery-and-verification-queue--2026-09-20) records
-the current candidate commits, verification queue and unresolved blocker.
+Status: checkpointed and paused at the user's request on 2026-09-20. Character implementation
+is preserved on `slice/V65` at `acc3df1` (pushed); application changes are not merged into main.
+Both verification blockers are fixed. All 22 remote authenticated headless scenarios passed in
+73.547 seconds, with zero failures/skips; the normal application build also passed.
+See [V65 results and evidence](V65-character-headless.md#authorized-blocker-repair--2026-09-20).
+
+The active checkout is `.worktrees/character-headless`. Backend `b1f50c8` is deployed to development
+`different-bat-943`; the hosted frontend remains source `1e7896c`, Worker
+`b9cc5ebb-54a1-4176-bc05-d99051b3cf1e`, at <https://salient-dev.rdxx.workers.dev>.
+The backend fix exempts only public signing-key discovery from auth rate limiting; login/reset
+limits remain intact. Temporary deployment credentials were removed and our runtime jobs ended.
+The CT114 heavy window was released to the engine thread; coordinate before starting more work.
 
 ## Read first
 
@@ -19,13 +28,16 @@ into later class levels. Existing Berserker level-two support must remain workin
 ## Verification order — current requirement
 
 Apply the [app-wide headless completion gate](README.md#programmatic-headless-completion-gate).
-First prove each candidate through browser-independent authenticated CLI/API journeys and persisted
-readback; then compare browser findings on matching code. Current Devil/Polder/Dwarf/Human browser
-results do not establish this proof. Keep headless proof pending until it actually passes. Browser
-testing remains required until the documented comparison supports moving redundant coverage later.
-Do not resume the old browser-debugging loop as a substitute for this next verification step.
-Use the [current end-to-end route/proof audit](V24-character-wizard-assessment.md#current-headless-route-audit--2026-09-20)
-to target missing evidence and the discovery/change-choice route gaps.
+V65 now proves the supported character routes through real authenticated public APIs, including
+Devil/Polder/Dwarf/Human creation, choice changes, review/privacy, private inheritance, Fury 1→2,
+history/restoration, stale review and combat locks. This is sampled workflow proof, not certification
+of every rules option. The original 712 engine/app/script tests passed; the entire `pnpm check`
+was not repeated after the two fixes. Targeted lint/types, the normal build and documentation links passed.
+
+The [browser testing moratorium](README.md#browser-testing-moratorium--2026-09-20) is absolute:
+no browser/Playwright/headless-Chromium testing until V66 repair is implemented. V66 is not started
+and needs the user's go. Missing browser runs are not blockers; record future visual scenarios
+in the [browser coverage backlog](browser-coverage-backlog.md). Do not restart browser debugging.
 
 ## Starting point
 
@@ -51,22 +63,19 @@ Compendium pin: `fb83a789da8f0327a389c277a0c790b1648d5810`.
 Forge pin: `5a846aadb623a9855a023e9403bb887a956c341f`.
 Read rules only from the pinned Compendium; do not research Draw Steel on the web.
 
-## First implementation session
+## Resume from this checkpoint
 
-- Check main/worktrees, `STATUS.md` and Chords. Confirm no overlapping ownership. Keep Opus stopped.
-- Assign fresh Astra implementers Devil level one and Polder level one, using separate new branches
-  and slice IDs. Start at V57/V58 only if those numbers are still unused; V46–V56 are retired pilot IDs.
-  Both units start from main and derive their code, tests and expectations again.
-- The lead owns shared composition/evaluation contracts and the first runtime baseline. Reserve an
-  explicitly named clean CT114 environment such as `character-restart`, after checking it is unused.
-  Do not start a stack for each subagent. Coordinate heavy jobs and capture with one runtime owner.
-- Establish current-main checks in that environment, then test each finished integration candidate.
-  If baseline faults block verification, assign a bounded repair while independent implementation
-  continues. Do not release a failed merge or freeze unrelated coding behind it.
-- Justify each test by the concrete failure it catches and its added coverage. Reuse adequate
-  existing tests; remove redundant or implementation-mirroring assertions during review.
-- Follow the workflow through reviews, full candidate verification, individual commits, main merge
-  and shared-app verification. Then take the next independent unit from V44.
+- Wait for the user to resume implementation. Read main instructions, this handoff, V65 and
+  `STATUS.md`; check Chords and checkout ownership before changing shared files.
+- Preserve `slice/V65` and its evidence. Do not rebuild Devil/Polder/Dwarf/Human from scratch or
+  repeat passing verification without a relevant change. Broader ancestry acceptance and main
+  integration remain outstanding; inspect their recorded reviews before claiming completion.
+- Prepare any integration candidate against current main, retaining peer engine/UI work. Follow
+  the normal review/headless gates and shared-app update procedure when integration is authorized.
+  The deployed backend and older frontend intentionally have different source revisions above.
+- Use remote CT114 for workloads and the existing hosted development target for live verification.
+  Keep verification bounded: diagnose concrete failures, report blockers, and pause rather than
+  enter another prolonged test-repair loop. Every test needs a meaningful failure and added coverage.
 
 The old `characters` environment is stopped and contains abandoned candidate state. Leave it stopped.
 All old Opus branches/worktrees, test fixtures, source ledgers, captures, diagnostics and helpers are
@@ -75,11 +84,7 @@ for accountability; there is no salvage queue.
 
 ## Suggested fresh-session kickoff
 
-> Continue character development from current main using docs/build/character-restart-handoff.md
-> and docs/build/astra-character-workflow.md. The entire Opus pilot is abandoned and must not be
-> reused. Use fresh Astra subagents for independent Devil and Polder level-one implementations.
-> Keep full verification before each merge, but allow independent coding while runtime or review
-> work is pending. Complete one ancestry/class/level per commit and update the shared app after
-> verified merges. Start with the existing pre-pilot foundation; do not build a new orchestration
-> system. Every test must justify its existence; reject redundant or implementation-mirroring
-> assertions. Report concrete delivered behavior and blockers.
+> Resume from the 2026-09-20 character checkpoint in this handoff. Candidate `slice/V65` at
+> `acc3df1` has all 22 remote headless scenarios and the normal build passing. Preserve that work;
+> inspect outstanding ancestry review/integration requirements before choosing the next bounded
+> slice. Keep the browser moratorium and abandoned-Opus prohibition in force.

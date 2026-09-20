@@ -109,8 +109,10 @@ fixture limitations and deployment logs. Earlier Worker versions in slice record
 
 The hosted frontend was subsequently published from V62 `1e7896c`, Worker
 `b9cc5ebb-54a1-4176-bc05-d99051b3cf1e`, with Devil/Polder/Dwarf/Human candidates.
-V65 backend `c0fe8b1` now adds authenticated wizard discovery/choice transitions to the same cloud
-development target. Backend deployment type/schema checks passed; content and accounts were not
-reset. V65 frontend publication is blocked by a verification-script TypeScript error, so the V62
-frontend remains live. The [V65 evidence](build/V65-character-headless.md#one-pass-result--2026-09-20)
-records the once-only headless run (14 pass, 1 fail, 7 blocked), remaining proof and cleanup.
+V65 backend `b1f50c8` adds authenticated wizard discovery/choice transitions and fixes rate limiting
+of public auth signing-key discovery on the same cloud development target. Backend type/schema
+checks passed; content and accounts were not reset. Both recorded verification blockers are fixed:
+all 22 remote headless scenarios and the normal application build pass. The frontend remains V62;
+the backend repair did not require frontend publication. See [V65 evidence](build/V65-character-headless.md#authorized-blocker-repair--2026-09-20).
+The candidate is pushed on `slice/V65` at `acc3df1`, not merged into main. Character work is
+checkpointed at the user's request; no browser tests were run under the current moratorium.
