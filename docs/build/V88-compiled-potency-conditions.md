@@ -536,6 +536,8 @@ ENGINE explicitly handed frozen reviewed source `8d43dfb63230b3783cf559b259e29c3
 to DEPLOY after TESTER's final closeout certificate at
 `evidence/V88/tester-job-8d43dfb-seeded-closeout.md`. DEPLOY fast-forwarded its isolated
 `integration/V88` branch, then rebased the complete nine-commit V88 series without conflicts onto
-current main `dd8e3ea`. The rebased executable parent is `2600c37`; newer main changes were the
-retained TESTER/DEPLOY documentation and certificate records. Main, GitHub and cloud remain
-unchanged until TESTER certifies the exact integrated branch head.
+current main `ce3b6b6`. The current rebased executable parent is `d7e47c0`; newer main changes were
+the retained TESTER/DEPLOY documentation and certificate records. The first integrated gate passed
+all executable/full checks but rejected the former staging commit for a missing `Reviewed-By:`
+trailer. Metadata-only repair `12fac42` adds the authentic seeded implementation review verdict.
+Main, GitHub and cloud remain unchanged until TESTER certifies the repaired integrated branch head.
