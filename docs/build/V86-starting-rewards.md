@@ -1,9 +1,10 @@
 # V86: Starting reward fulfillment
 
 Status: application `86e9d2e` is deployed to the hosted demo, not merged. TESTER passed all
-864 checks and backend/frontend deployment. Hosted API acceptance has 30 passes and five cases
-pending after the aggregate runner exhausted its fixed budget. The new runner offers independent
-remaining cohorts with unchanged limits; TESTER owns their execution. See [evidence](evidence/V85/README.md).
+864 checks and backend/frontend deployment. Hosted acceptance now passes across the retained
+30 successes and five bounded cohorts, covering 35 distinct scenarios; this is not a single
+successful 35/35 run. Main integration and shared CT114 delivery remain pending.
+See [evidence](evidence/V85/README.md#acceptance-return--2026-09-20).
 
 ## In scope
 

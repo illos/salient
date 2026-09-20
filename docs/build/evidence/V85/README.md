@@ -1,5 +1,26 @@
 # V85/V86 character supporting completion evidence
 
+## Acceptance return — 2026-09-20
+
+Hosted acceptance **passed across retained and resumed runs**. TESTER return 866 and main
+evidence commit `7a8c156` record all five remaining original scenarios passing on runner
+`331a5b9` against unchanged deployed application `86e9d2e`: culture 72.257s, complication
+choices 57.849s, complication table 27.594s, starting rewards 12.636s, starting items 51.887s.
+The combined manifest verifies 35 distinct scenario names with the retained 30 successes.
+This is not one successful 35/35 run; the original aggregate timeout is retained.
+
+The deadline regression, lint, formatting, links and invalid-cohort pre-auth refusal passed.
+No redeploy, build, upload, configure, seed, reset, browser or server startup was needed.
+All cohorts reported successful cleanup; existing data was retained. Evidence is on main at
+`docs/build/evidence/V85/tester-job-331a5b9.md`; artifacts and `combined-coverage.json` are in
+`/srv/presidium/projects/salient/test-artifacts/V85-V86-331a5b9-20260920T1513Z`.
+
+Main integration and shared CT114 delivery remain pending, coordinated after FOES2's V87 slot.
+All manual/deferred gameplay boundaries remain unchanged. Pending statements below describe
+the historical checkpoints and are superseded by this acceptance return.
+
+## Previous checkpoint
+
 Status: source `86e9d2e` is deployed to the hosted cloud demo, still unmerged into main.
 TESTER passed the full 864-test check and both deployment gates. Hosted API acceptance is
 **30 passed, 5 incomplete**: culture exhausted the shared 240-second runner budget; the four
