@@ -292,10 +292,10 @@ no printed Malice cost. V88 automates ordinary creatures only; condition consequ
 
 | Ability | Exact source below unified `md/` | Designed | Built | Headless playtested | Evidence |
 | --- | --- | --- | --- | --- | --- |
-| Bola Knock | `monster/lizardfolk/statblock/lizardfolk-bloodeye.md` | BK1–BK3 | existing structural support, V87 reachable | pending addendum | [Design](evidence/V88/seeded-inventory-design.md) |
-| Eye Flash | `monster/hobgoblin/statblock/hobgoblin-redglare.md` | EF1–EF3 | existing structural support, V87 reachable | pending addendum | [Design](evidence/V88/seeded-inventory-design.md) |
-| Power Chord | `monster/orc/statblock/orc-godcaller.md` | PC1–PC3 | existing structural support, V87 reachable | pending addendum | [Design](evidence/V88/seeded-inventory-design.md) |
-| Razor Claws | `monster/undead/1st-echelon/statblock/ghoul.md` | RC1–RC3 | existing structural support, V87 reachable | pending addendum | [Design](evidence/V88/seeded-inventory-design.md) |
+| Bola Knock | `monster/lizardfolk/statblock/lizardfolk-bloodeye.md` | BK1–BK3 | yes, V87 reachable | passed at `21ec7ca` | [Design](evidence/V88/seeded-inventory-design.md); [live proof](evidence/V88/tester-job-21ec7ca-seeded-headless.md) |
+| Eye Flash | `monster/hobgoblin/statblock/hobgoblin-redglare.md` | EF1–EF3 | yes, V87 reachable | passed at `21ec7ca` | [Design](evidence/V88/seeded-inventory-design.md); [live proof](evidence/V88/tester-job-21ec7ca-seeded-headless.md) |
+| Power Chord | `monster/orc/statblock/orc-godcaller.md` | PC1–PC3 | yes, V87 reachable | passed at `21ec7ca` | [Design](evidence/V88/seeded-inventory-design.md); [live proof](evidence/V88/tester-job-21ec7ca-seeded-headless.md) |
+| Razor Claws | `monster/undead/1st-echelon/statblock/ghoul.md` | RC1–RC3 | yes, V87 reachable | passed at `21ec7ca` | [Design](evidence/V88/seeded-inventory-design.md); [live proof](evidence/V88/tester-job-21ec7ca-seeded-headless.md) |
 
 Bola Knock rolls +2 at ranged 5 (Ranged/Strike/Weapon): tier damage 5/7/9, then
 `A < 0/1/2 restrained (save ends)`. Agility 0 resists tier 1 and is affected at tiers 2/3;
@@ -503,3 +503,29 @@ cell makes damage manual under the existing loader. Use pinned Goblin Monarch P3
 the fully resolved equality case; retain Redglare as an explicit missing-damage-completion
 negative case. Original failure certificate is retained. No production or runner change;
 focused/full gates and dependent real headless are resubmitted on the repaired candidate.
+
+### 2026-09-20 — Seeded full and public gates passed
+
+Frozen `21ec7cadcdc4a7abe04d5116cdad4d3bcd6f8b3c` passed TESTER job12: focused
+6/6 potency and 3/3 report; full 352 engine and 571 app/scripts, 377 links, content/vendor/
+report gates and build budgets. Job13 then passed 91 real public readback groups in
+247.618 seconds, including the original 25 unpositioned groups and all four new abilities'
+applied/resisted, correction, source-save/history/manual-off cases plus PC/RC tier2 absence.
+The helper completed exactly ten disclosed requests; no outcome rows were imported. Its
+unrelated-row check saw zero such rows in this fresh isolated database, so this run does
+not prove preservation with a populated unrelated campaign. TESTER stopped helper/backend
+and verified free ports, retaining 26 MB play data. Certificates are copied unchanged into
+[evidence/V88](evidence/V88/README.md). Independent addendum reviews follow before handoff;
+main/cloud integration remains DEPLOY-owned.
+
+### 2026-09-20 — Seeded independent reviews passed
+
+[Implementation review](reviews/V88-seeded-implementation-review.md) passed, then the separate
+[pinned-source rules review](reviews/V88-seeded-rules-review.md) passed at `21ec7ca`. Both
+reviewers checked actual retained readback in addition to certificates. No blocking findings
+remain; the isolated helper's empty unrelated-data coverage and inherited retention limit are
+explicitly retained. Code, tests, runner, helper and generated reports remain byte-identical to
+the tested candidate. The owner closes documentation and replaces pending commit trailers
+with these authentic verdicts before requesting TESTER's final link/metadata/byte-identity gate.
+The final reviewed branch is handed to DEPLOY for integration; it is not merged or published
+by the engine owner.
