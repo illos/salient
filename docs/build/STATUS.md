@@ -11,7 +11,7 @@ All test jobs go to **TESTER**, Chords thread `46c30412-6e29-44dc-b30b-08ffe22bd
 acknowledging submissions; implementers continue using their existing slice rows and work logs.
 One active job across all hosts, including setup/build/cleanup. On resume, reconcile any running
 row with actual processes before dispatch. Keep terminal evidence in the slice work log and prune
-completed rows after the requester has the result.
+completed rows only after the requester has the result through a direct `wake: true` Chords return.
 
 Updated 2026-09-20 14:15 UTC: one blocked submission; no test workload is running from this thread.
 The [adoption and cleanup record](audits/2026-09-20-testing-coordinator-adoption.md) records the

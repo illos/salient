@@ -72,6 +72,16 @@ unavailable, the durable job waits for the next coordinator turn; do not create 
    of abandoned pilot/rollback data. Return `passed`, `failed`, `blocked` or `cancelled` with exact
    commands, source, runner, app target, duration, evidence paths and cleanup state. Record results
    in the slice's existing work log/evidence and close its queue row. Do not create a second slice tracker.
+7. **Every job return must wake its requester.** Send a direct Chords update to the recorded reply
+   thread with `wake: true` for `passed`, `failed`, `blocked` and `cancelled` outcomes, including
+   jobs kicked back for source repairs before execution. Use one stable return `message_key` and
+   identical content if the wake call must be retried; inspect `wake.status` separately from message
+   storage. `accepted` means only that T3 accepted the turn request. If Chords refuses the wake
+   because this turn itself was Chords-started, or skips it because the requester is busy/cooling
+   down, retain the direct message and retry the **same** key/content with `wake: true` on the first
+   eligible coordinator turn. Never substitute a passive broadcast or invent a new key to bypass
+   the wake lifecycle. Record the wake result in the queue/evidence so an unwoken return remains
+   visible until delivery is attempted successfully.
 
 The installed `presidium-dev up` still uploads a complete source snapshot and starts services;
 `run` uses the last uploaded tree and does **not** sync edits. Compression/exclusion/delta changes
