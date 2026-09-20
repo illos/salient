@@ -465,4 +465,4 @@ passing evidence.
 
 | Slice | Document | Status | Owner | Branch |
 | --- | --- | --- | --- | --- |
-| V87 | [Core library seeding](V87-foes-library-seeding.md) | Verified: 880 tests, live API and independent round 3 pass; branch handoff ready, not merged | Foes coordination | slice/V87, .worktrees/foes-seeding; tested code 104f4b0; TESTER evidence and final headless gate in slice work log |
+| V87 | [Core library seeding](V87-foes-library-seeding.md) | Complete — merged and live 2026-09-20: main `4d6d299`; integrated TESTER check (880 tests) and shared-main live check pass; shared CT114 main reseeded to 1151 entries with play data retained | Foes coordination (built), Fable (integrated) | slice/V87 retired; evidence in the slice work log and `evidence/V87` |

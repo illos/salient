@@ -96,3 +96,27 @@ and zero current memory PSI. These are host measurements, not isolate heap or pr
 were not captured. The backend was stopped, ports freed, and retained data preserved. The runner
 wrote its report to the tracked evidence path; this docs-only closeout preserves that generated
 report unchanged. No application code changed after the tested source.
+
+## Merge and shared rollout — 2026-09-20
+
+Integrated by the foes thread (Fable) under the user's instruction to make every core stat block
+addable. The reviewed handoff `1489cc4` was rebased onto main (`46f171e`, then docs-only `4b113c7`)
+with no tree change against the tested `104f4b0` apart from its docs closeout; the authentic
+`Reviewed-By: v87_independent_review (pass, 2026-09-20)` trailer was applied to every commit and
+`check-commit --merge` passed. TESTER job `test-V87-e092215-1` passed the integrated focused set
+(47 tests) and the full `pnpm check` (880 tests, build, budget) on the exact rebased commit
+([record](evidence/V87/tester-job-e092215.md)). Main fast-forwarded to `4d6d299`.
+
+Shared playable target: CT114 `main` slot, Compose `salient-dev-b90776c53141`,
+`https://salient-dev-fc4f48cb09a0.tail41404c.ts.net`. `presidium-dev up` from the clean canonical
+checkout at `4d6d299`; "Convex functions ready" 15:33:20 UTC. Content reseed through the recorded
+compose exec of the `content:reseed` action inside that backend: 595 → 1151 entries, hash
+`609aed9b…`, 4 seconds, no reset, play data retained. TESTER job `test-V87-main-4d6d299-live-1`
+passed against that deployment: the V02 squad journey 9/9 and the authenticated public-API
+readback (1151 entries at the exact hash, 438 stat blocks, Ghoul text byte-equal to source, 438
+foe definitions including "Xorannox the Tyract: Compulsion Eye", the eyestalk loaded with the
+prefixed instance name over an unchanged printed snapshot, Ghoul Razor Claws with source text)
+([record](evidence/V87/tester-job-main-4d6d299-live.md)). Merge complete; no browser run under
+the moratorium. Follow-ups recorded above (summary projection for `foes.definitions`, cold-start
+memory measurement, same-hash manifest handling) remain open.
+
