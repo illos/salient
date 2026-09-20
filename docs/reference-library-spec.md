@@ -169,4 +169,5 @@ User-confirmed: the reference library pages carry a plain title and nothing else
 content. `/rules` shows `Rules`; `/foes` shows `Foes library`. No marketing hero, kicker or
 tagline. Salient is built from the Steel Compendium and does not present itself as the
 Compendium, so no page identifies the app as "The Draw Steel Compendium"; per-entry source
-links and the attribution footer keep naming Steel Compendium as the source.
+links and the attribution footer keep naming Steel Compendium as the source. The rules sidebar
+heading reads `Chapters`, not `Compendium`, for the same reason.

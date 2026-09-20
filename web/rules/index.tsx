@@ -97,7 +97,7 @@ function Sidebar({
     >
       <div className="rules-sidebar-heading">
         <BookOpen size={17} />
-        <span>Compendium</span>
+        <span>Chapters</span>
       </div>
       <Link
         to="/rules"
