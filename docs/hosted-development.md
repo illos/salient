@@ -124,3 +124,9 @@ because backend deployment did not succeed. No API acceptance run, content resee
 configuration change or infrastructure repair followed. This is separate from the earlier CT114
 isolated startup timeout. [V85/V86 evidence](build/evidence/V85/README.md#hosted-cloud-demo-attempt)
 retains the logs and remaining gate; do not claim this candidate is deployed.
+
+Further [investigation](build/evidence/V85/deployment-diagnosis.md) confirmed two source-level
+deployment blockers: mixed import attributes for the same manifest JSON and runtime authentication
+reached through the schema's starting-reward validator import. Temporary corrections passed the
+Convex deployment dry run, then were restored. Applying those corrections and running actual
+hosted API acceptance remain pending; no infrastructure repair is indicated.

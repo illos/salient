@@ -1,0 +1,25 @@
+▌ Deploying code to deployment:
+▌ [Development] jim-pringle:salient:dev/jim-pringle (dev) (dashboard: https://dashboard.convex.dev/t/jim-pringle/salient/different-bat-943)
+▌ └─ https://different-bat-943.convex.cloud
+- Deploying to https://different-bat-943.convex.cloud... [dry run]
+
+[36mA minor update is available for Convex[39m [2m(1.45.0 → 1.46.0)[22m
+[2mChangelog:[22m [4mhttps://github.com/get-convex/convex-js/blob/main/CHANGELOG.md#changelog[24m
+Convex AI files are not installed. Run npx convex ai-files install to get started or npx convex ai-files disable to hide this message.
+✖ Error: Unable to start push to https://different-bat-943.convex.cloud
+CRASH_DIAGNOSTIC invalid filesystem or env vars Error
+    at OneoffContextImpl.crash (/srv/presidium/projects/salient/code/.worktrees/supporting-actions/node_modules/.pnpm/convex@1.45.0_react@19.3.0/node_modules/convex/dist/cli.bundle.cjs:124603:79)
+    at _ThrowingFetchError.handle (/srv/presidium/projects/salient/code/.worktrees/supporting-actions/node_modules/.pnpm/convex@1.45.0_react@19.3.0/node_modules/convex/dist/cli.bundle.cjs:64598:26)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async logAndHandleFetchError (/srv/presidium/projects/salient/code/.worktrees/supporting-actions/node_modules/.pnpm/convex@1.45.0_react@19.3.0/node_modules/convex/dist/cli.bundle.cjs:63823:12)
+    at async handlePushConfigError (/srv/presidium/projects/salient/code/.worktrees/supporting-actions/node_modules/.pnpm/convex@1.45.0_react@19.3.0/node_modules/convex/dist/cli.bundle.cjs:65973:10)
+    at async pushCode (/srv/presidium/projects/salient/code/.worktrees/supporting-actions/node_modules/.pnpm/convex@1.45.0_react@19.3.0/node_modules/convex/dist/cli.bundle.cjs:115747:12)
+    at async evaluatePush (/srv/presidium/projects/salient/code/.worktrees/supporting-actions/node_modules/.pnpm/convex@1.45.0_react@19.3.0/node_modules/convex/dist/cli.bundle.cjs:115704:20)
+    at async checkForLargeIndexDeletion (/srv/presidium/projects/salient/code/.worktrees/supporting-actions/node_modules/.pnpm/convex@1.45.0_react@19.3.0/node_modules/convex/dist/cli.bundle.cjs:119644:43)
+    at async _Span.enterAsync (/srv/presidium/projects/salient/code/.worktrees/supporting-actions/node_modules/.pnpm/convex@1.45.0_react@19.3.0/node_modules/convex/dist/cli.bundle.cjs:119570:14)
+    at async startComponentsPushAndCodegen (/srv/presidium/projects/salient/code/.worktrees/supporting-actions/node_modules/.pnpm/convex@1.45.0_react@19.3.0/node_modules/convex/dist/cli.bundle.cjs:120033:5)
+✖ Error fetching POST  https://different-bat-943.convex.cloud/api/deploy2/evaluate_push 400 Bad Request: NoImportModuleInSchema: Hit an error while pushing:
+Hit an error while evaluating your schema:
+convex:/schema.js:2:7: Can't import _deps/5GCWYXST.js while evaluating schema
+
+Exit: 1
