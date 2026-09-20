@@ -343,6 +343,25 @@
     overscroll-behavior: contain;
     padding: 0.75rem 1.5rem 1.5rem;
   }
+  /* Flush body: content that prints its own title fills the panel edge to edge (a Core stat
+     block's title band runs to the rounded corners), and the controls float over it. */
+  .overlay-card-scroll-flush {
+    padding: 0;
+  }
+  .overlay-card-floating {
+    position: absolute;
+    z-index: 1;
+    top: 0.75rem;
+    right: 0.75rem;
+    left: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    pointer-events: none;
+  }
+  .overlay-card-floating > * {
+    pointer-events: auto;
+  }
   /* Transient failure notices, above every other layer (web/toast.tsx, V29 item 2). The bottom
      offset clears the table's pinned command line so a toast never covers a control. */
   .toast-viewport {

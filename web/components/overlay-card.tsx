@@ -29,6 +29,18 @@ export interface OverlayCardContentProps {
   bodyClassName?: string;
   /** Remount the scroll body when this changes so it starts at the top. */
   bodyKey?: string;
+  /**
+   * Full-bleed body for content that prints its own title, such as a Core stat block: the card
+   * fills the panel edge to edge, the header's title and eyebrow are not drawn (the title stays
+   * as the dialog's accessible name), and Back and Close float over the top corners.
+   */
+  flush?: boolean;
+  /**
+   * Keep the header and its eyebrow, but do not draw the title: for content that prints its own
+   * name (a Core ability or trait card) without a band to run to the panel edges. The title
+   * remains the dialog's accessible name.
+   */
+  hideTitle?: boolean;
 }
 
 export function OverlayCardContent({
@@ -41,25 +53,42 @@ export function OverlayCardContent({
   backdropClassName,
   bodyClassName,
   bodyKey,
+  flush,
+  hideTitle,
 }: OverlayCardContentProps) {
+  const close = (
+    <DialogPrimitive.Close className="rulebook-link overlay-card-close" aria-label={closeLabel}>
+      <XIcon size={18} />
+    </DialogPrimitive.Close>
+  );
   return (
     <DialogPrimitive.Portal>
       <DialogPrimitive.Backdrop className={cn('overlay-card-backdrop', backdropClassName)} />
       <DialogPrimitive.Popup className={cn('overlay-card', className)} aria-describedby={undefined}>
-        <header className="overlay-card-header">
-          {leading}
-          <div>
-            {eyebrow && <p className="text-sm text-muted-foreground">{eyebrow}</p>}
-            <DialogPrimitive.Title className="overlay-card-title">{title}</DialogPrimitive.Title>
-          </div>
-          <DialogPrimitive.Close
-            className="rulebook-link overlay-card-close"
-            aria-label={closeLabel}
-          >
-            <XIcon size={18} />
-          </DialogPrimitive.Close>
-        </header>
-        <div className={cn('overlay-card-scroll', bodyClassName)} key={bodyKey}>
+        {flush ? (
+          <>
+            <DialogPrimitive.Title className="sr-only">{title}</DialogPrimitive.Title>
+            <div className="overlay-card-floating">
+              {leading}
+              {close}
+            </div>
+          </>
+        ) : (
+          <header className="overlay-card-header">
+            {leading}
+            <div>
+              {eyebrow && <p className="text-sm text-muted-foreground">{eyebrow}</p>}
+              <DialogPrimitive.Title className={hideTitle ? 'sr-only' : 'overlay-card-title'}>
+                {title}
+              </DialogPrimitive.Title>
+            </div>
+            {close}
+          </header>
+        )}
+        <div
+          className={cn('overlay-card-scroll', flush && 'overlay-card-scroll-flush', bodyClassName)}
+          key={bodyKey}
+        >
           {children}
         </div>
       </DialogPrimitive.Popup>

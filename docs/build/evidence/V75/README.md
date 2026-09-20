@@ -32,7 +32,12 @@ checks in [its slice document](../../V75-quiet-theme.md#acceptance-checks).
 | `15-table-player-turn-dark.png` | Session table, player, round 1: turn tracker, acting hero outline, dice chips in the log |
 | `16-table-combat-light.png` | The same table in the light theme |
 | `18-rules-dark.png`, `19-foes-dark.png` | Rules and Foes library chrome: search inset, segmented tabs, tonal filters, results panel |
-| `20-foe-statblock-dark.png` | A Core stat block in the overlay panel: the preserved presentation (accent title band, serif body, bold labels, glyph tier badges) inside Quiet chrome |
+| `20-foe-statblock-dark.png`, `20-foe-statblock-light.png` | A minion stat block filling its pop-up: no duplicated header, the printed title band running to the panel edges |
+| `21-statblock-full-dark.png` | A full stat block with its ability cards in the same flush pop-up |
+| `22-statblock-feature-dark.png` | An ability opened from that stat block: not a flush card, so it keeps the slim header with Back and the source-reference line, and its name is printed once |
+
+The stat-block pop-up images were re-captured on 2026-09-20 after the user asked for the
+duplicated title and the padding around the card to go.
 
 ## What they show about the preserved subsystems
 

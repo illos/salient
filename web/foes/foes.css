@@ -319,3 +319,13 @@
     display: inline;
   }
 }
+
+/* A stat block filling an overlay panel edge to edge (web/components/overlay-card.tsx, `flush`):
+   the printed blocks keep a comfortable side padding at the panel edge, and the title band's
+   level/role line clears the floating close control. The Core `.ds-*` rules are unchanged. */
+.foe-statblock-flush > * {
+  padding-inline: 1rem;
+}
+.foe-statblock-flush .ds-monster-title {
+  padding-right: 3.5rem;
+}

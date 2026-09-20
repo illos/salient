@@ -261,3 +261,27 @@ except the character sheet and table images, which the fix does not touch.
 
 The local stack remains available for further captures at `127.0.0.1:5180` (backend `3210`);
 its data is disposable and nothing outside this worktree was touched.
+
+### 2026-09-20 — user correction: stat-block pop-ups fill their panel
+
+The user, looking at the foe stat-block capture: the monster's name was printed twice (once by
+the panel header, once by the printed title band) and the card sat inside the panel's padding.
+
+`OverlayCardContent` gains two presentation options. `flush` is for content that prints its own
+title band: the body loses its padding so the card runs to the panel's rounded edges, the header
+is not drawn, and Back and Close float over the top corners; the title stays as the dialog's
+accessible name (`sr-only`), so the dialog keeps the same accessible name and heading it had.
+`hideTitle` keeps the header, its eyebrow and its controls but drops the title line, for content
+that prints its own name without a band to bleed.
+
+In the foes reference, `flush` applies only when the object is a `statblock`; an ability, trait
+or Malice card uses `hideTitle` (it prints its own name, but has no band, and floating controls
+would collide with its own action line). A rule opened inside the same card is unchanged: the
+article does not print its name, so it still needs the header title. Two scoped rules in
+`web/foes/foes.css` give the flush stat block a comfortable side padding at the panel edge and
+keep the printed level/role line clear of the floating close control; the Core `.ds-*` rules
+themselves remain unchanged.
+
+Verified: full `CI=true pnpm check` exit 0 (310 engine, 481 app/scripts tests, links, vendor,
+content, build) and fresh captures of a minion stat block in both themes, a full stat block with
+ability cards, and an ability opened from it, in [the evidence directory](evidence/V75/README.md).
