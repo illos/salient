@@ -73,3 +73,6 @@ The original failing full-check log, focused logs, exit codes, timestamps, both 
 and all comparisons remain in the artifact directory. The next candidate should update the two
 superseded assertions, repair the archived-correction ordering, and submit a new job key. The
 dependent real-headless job should remain gated on a green rerun.
+
+The failed return was sent directly to ENGINE as Chords message 880; its wake was accepted. A
+quiet copy was sent to ENGINE2 as message 881.
