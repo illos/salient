@@ -39,6 +39,8 @@ export function failureDetails(error: unknown) {
     operation?: string;
     assertion?: string;
     location?: string;
+    rejection?: { reason: string; operation?: string };
+    operator?: string;
     actual?: number | boolean | null;
     expected?: number | boolean | null;
   } = { reason: failureCode(error) };
@@ -48,9 +50,16 @@ export function failureDetails(error: unknown) {
       generatedMessage?: boolean;
       actual?: unknown;
       expected?: unknown;
+      operator?: string;
     };
     // Only a repository-controlled scenario filename and line, never the raw stack/payload.
     result.location = assertion.stack?.match(/character-(?:lifecycle|scenarios)\.ts:\d+:\d+/)?.[0];
+    result.operator = assertion.operator;
+    if (assertion.actual instanceof Error)
+      result.rejection = {
+        reason: failureCode(assertion.actual),
+        operation: failedOperations.get(assertion.actual),
+      };
     // Only explicitly supplied scenario labels; never serialize generated assertion payloads.
     if (
       assertion.generatedMessage === false &&
@@ -74,7 +83,9 @@ export function failureCode(error: unknown): string {
     if (error.message === 'headless-target-validation-failed') return 'target-validation-failed';
     if (error.message === 'headless-session-cleanup-failed') return 'session-cleanup-failed';
     if (error.name === 'AssertionError') return 'assertion-failed';
-    if (/429|too many requests/i.test(error.message)) return 'rate-limited';
+    if (/Could not fetch JWKS/.test(error.message) && /HTTP 429\b/.test(error.message))
+      return 'auth-key-discovery-rate-limited';
+    if (/\b429\b|too many requests/i.test(error.message)) return 'rate-limited';
     if (/timed out|timeout/i.test(error.message)) return 'backend-or-network-timeout';
   }
   return 'operation-failed';

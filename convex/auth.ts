@@ -42,6 +42,9 @@ export const createAuth = (ctx: GenericCtx<DataModel>) => {
       enabled: true,
       storage: 'database',
       customRules: {
+        // Convex fetches these public verification keys while authenticating API calls.
+        // Throttling key discovery rejects valid sessions before app authorization runs.
+        '/convex/jwks': false,
         '/request-password-reset': { window: 60, max: 3 },
         '/reset-password': { window: 60, max: 5 },
       },
