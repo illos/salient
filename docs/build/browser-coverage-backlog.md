@@ -33,3 +33,4 @@ Rules:
 | 2026-09-20 | V68 | RECAP drill-in replaces the list, shows the read-only notice and the session's log, Back returns | new | later | headless: recap `events.list` step | |
 | 2026-09-20 | V68 | Chat pane: composer sends on Enter, list scrolls to the newest message, second client sees it live | new | later | headless: chat step | |
 | 2026-09-20 | V68 | Presence dot turns green for a second connected client and grey after it leaves | new | later | headless: presence step | |
+| 2026-09-20 | V74 | Trait-granted action cards preserve source conditions; Dwarf rune control and refreshed maneuver display agree after change and undo/redo | new | later | `scripts/headless/trait-abilities.ts` and ancestry/rune app tests | |

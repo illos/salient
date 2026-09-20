@@ -1,4 +1,3 @@
-import { ancestryAbilities } from './ancestryAbilities';
 // SPDX-License-Identifier: GPL-3.0-only
 /**
  * The R02 character evaluator: pure, deterministic, client-independent. Input is the R01 decision
@@ -15,6 +14,7 @@ import { ancestryAbilities } from './ancestryAbilities';
  * formula cannot be derived because a term is missing (no kit chosen), the value is absent from the
  * partial, never a displayed zero. Provisional defaults carry their open question id.
  */
+import { ancestryAbilities } from './ancestryAbilities.ts';
 import { assignmentError } from './assignment.ts';
 import { isAvailable, poolOf, poolValues } from './structure.ts';
 import { CAREER_BENEFITS } from '../content/supporting-backgrounds.ts';

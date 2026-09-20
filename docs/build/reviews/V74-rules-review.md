@@ -45,9 +45,9 @@ Relentless, moving stone, tracking detection targets, switching light state or t
 recipients. Their conditions remain explicit source instructions. Persisted active-rune kind
 and its grants are the implemented rune state.
 
-The rune mutation rejects a redundant same-kind assignment. Changing the recipient of a Voice
-rune remains a manual ten-minute rune change with no modeled recipient field; it must not be
-described as an automated recipient change. The outside-combat restriction is the application's
+The rune mutation permits recarving the same rune kind after ten uninterrupted minutes, including
+a Voice rune when changing its recipient. The recipient remains manually resolved with no modeled
+recipient field; recarving must not be described as an automated recipient change. The outside-combat restriction is the application's
 bounded way of requiring the acknowledged ten uninterrupted minutes, not an additional quoted
 Compendium rule.
 

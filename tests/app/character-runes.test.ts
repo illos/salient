@@ -190,6 +190,28 @@ test('rune changes require the source trait, authorization, time acknowledgement
     }),
   ).rejects.toThrow(/build changed/);
   expect(await f.player.client.mutation(api.characterRunes.setActiveRune, privateArgs)).toBe(1);
+  // Losing the granting trait must erase play-state selection, not merely hide its maneuver.
+  // Returning to Dwarf must not resurrect the old rune without another carving operation.
+  for (const [step, selections] of [heroFixtureSelections(), dwarfSelections()].entries()) {
+    const character = await f.player.client.query(api.characters.get, { characterId: privateId });
+    await f.player.client.mutation(api.characters.save, {
+      characterId: privateId,
+      commandId: `change-private-ancestry-${step}`,
+      expectedRevision: character.revision,
+      authored: character.authored,
+      selections,
+    });
+    expect((await f.t.run(ctx => ctx.db.get(privateId)))!.activeRune).toMatchObject({
+      kind: null,
+      version: 2,
+    });
+  }
+  expect(
+    await f.player.client.query(api.characterRunes.current, { characterId: privateId }),
+  ).toMatchObject({ rune: null, version: 2 });
+  const returned = await f.player.client.query(api.characters.sheet, { characterId: privateId });
+  if (returned.audience === 'peer') throw new Error('Expected owner sheet');
+  expect(returned.abilities.some(a => a.name === 'Runic Carving: Detection')).toBe(false);
 });
 
 // Catches a logged rune change that cannot be undone (or leaves its granted maneuver stale).
