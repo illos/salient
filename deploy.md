@@ -78,9 +78,20 @@ these captures are not a restore backup. Private evidence:
 TESTER's [post-backend comparison](docs/build/evidence/V85/tester-job-a0a700a-preservation.md)
 passed: all 5972 captured rows identical, no additions/removals/changes; manifest remains 567
 entries at `sha256:aaf7c027a421e6059448e019271111877f208b577b756f5e79645c3d497ed26e`.
-No live test fixtures have been added. A later reseed needs its own preservation comparison.
+No live test fixtures have been added. The initially planned repeat comparison is superseded below.
+
+User clarification (20:03 UTC): repeated protected-row fingerprint captures are excessive for
+this development build. Skip the additional baseline/comparison and retain targeted hosted
+behavior checks. The earlier preservation evidence remains historical evidence, not a recurring
+release requirement. Preserve existing play data through the normal scoped content refresh.
+
+The user updated the broker-granted key, but the existing session's retry still received
+`deployment:functions:runInternalActions` denial before the content action executed. Retry log:
+`/srv/presidium/projects/salient/test-artifacts/release-4f3fe13-20260920/content-a0a700a-key-refresh.log`.
+Temporary remote credentials were removed again. A fresh broker session is the next step;
+backend, content and frontend state remain as recorded above.
 
 Resume with a scoped development key authorized for the internal reseed action, verify
 the uploaded release identity/build stamp, reseed the committed snapshot, publish the frontend,
-complete preserved-data and targeted live checks through TESTER, then commit/push the release.
+complete targeted live checks through TESTER, then commit/push the release.
 Do not roll back to code lacking starting-reward or condition-instance validators.
