@@ -15,6 +15,9 @@ test('V72 availability follows current grants and loading, not catalog presence'
       .map(e => e.name)
       .sort(),
   ).toEqual([
+    // V02 widened public loading to every seeded stat block (goblin and dwarf families), so the
+    // Worg's Bite is now reachable through /foe add; the Ghoul remains unseeded.
+    'Bite',
     'Brutal Slam',
     'Bury the Point',
     'Melee Weapon Free Strike',
@@ -27,7 +30,7 @@ test('V72 availability follows current grants and loading, not catalog presence'
       .filter(e => e.execution === 'supported' && e.live === 'not-reachable')
       .map(e => e.name)
       .sort(),
-  ).toEqual(['Bite', 'Meteoric Introduction', 'Ray of Agonizing Self-Reflection', 'Razor Claws']);
+  ).toEqual(['Meteoric Introduction', 'Ray of Agonizing Self-Reflection', 'Razor Claws']);
 });
 
 // Pinned Ghoul and Worg source: fixed +2 roll, constant 3/4/5 damage. No Agility damage bonus.
