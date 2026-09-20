@@ -5,8 +5,11 @@
 // the member-hero projection. Each test names the failure it catches; the UI is not exercised.
 import { afterEach, describe, expect, test, vi } from 'vitest';
 import { api } from '../../convex/_generated/api';
+import type { Id } from '../../convex/_generated/dataModel';
 import * as chatModule from '../../convex/chat';
 import { ONLINE_WINDOW_MS } from '../../convex/presence';
+import { getDefinitions } from '../../shared/content/character-decisions';
+import { draftSelectionsFrom } from '../../shared/evaluate/draft';
 import { account, admit, admitHero, backend, storedEvents, table } from './fixtures/table';
 
 afterEach(() => vi.useRealTimers());
@@ -167,27 +170,124 @@ describe('V68 campaign home operations', () => {
   });
 
   test('campaign members carry their admitted heroes with the effective level; unadmitted ones are absent', async () => {
-    // Fails if a submitted-but-unapproved hero is listed, if a hero appears under the wrong member,
-    // or if the level is not read from the effective revision.
+    // Fails if a created-but-never-admitted hero is listed, if a hero appears under the wrong
+    // member, or if the level is not read from the effective revision: Thorn levels up through the
+    // V32 advancement route, so a projection that ignored the revision would still say 1.
     const t = backend();
     const f = await table(t, { session: false });
     const guest = await account(t, 'Guest');
     await admit(t, f.director, guest, f.campaignId);
-    // Submitted, never approved: attached to no campaign.
+    // Created, never submitted or approved: attached to no campaign.
     await guest.client.mutation(api.characters.create, {
       commandId: 'create-pending',
       authored: { name: 'Pending', appearance: '', biography: '', notes: '' },
     });
     const ownHero = await admitHero(t, f.director, f.director, f.campaignId, 'Mora');
+    // Fixture XP so the sourced level-2 threshold is met; the level-up itself is the real route.
+    await t.run(async ctx => {
+      const character = (await ctx.db.get(f.thornId))!;
+      await ctx.db.patch(character._id, { liveState: { ...character.liveState!, xp: 16 } });
+    });
+    const progression = await f.player.client.query(api.characters.progression, {
+      characterId: f.thornId,
+    });
+    const base = {
+      characterId: f.thornId,
+      expectedRevision: progression.revision,
+      expectedBaseRevisionId: progression.baseRevisionId!,
+    };
+    const version = await f.player.client.mutation(api.characters.saveAdvancement, {
+      ...base,
+      commandId: 'prepare-level-two',
+      expectedDraftVersion: progression.draft?.version ?? 0,
+      selections: draftSelectionsFrom(
+        {
+          'class.fury.level-2.perk': 'Danger Sense',
+          'class.fury.level-2.aspect-ability': 'Wrecking Ball',
+        },
+        getDefinitions(2),
+      ),
+    });
+    await f.player.client.mutation(api.characters.finalizeAdvancement, {
+      ...base,
+      expectedDraftVersion: version,
+      duringRespite: true,
+      commandId: 'finalize-level-two',
+    });
     const campaign = await f.observer.client.query(api.campaigns.get, { campaignId: f.campaignId });
     const byName = Object.fromEntries(
       campaign.members.map(m => [m.displayName, m.heroes.map(h => [h.id, h.name, h.level])]),
     );
     expect(byName).toEqual({
       Director: [[ownHero, 'Mora', 1]],
-      Player: [[f.thornId, 'Thorn', 1]],
+      Player: [[f.thornId, 'Thorn', 2]],
       Observer: [],
       Guest: [],
     });
+  });
+
+  test('six closed sessions number from the oldest and a recap reads only its own session', async () => {
+    // Fails if numbering counts from the newest or shifts as sessions close, if a closed session
+    // loses its players or close time, or if the recap log leaks other sessions' events.
+    const t = backend();
+    const f = await table(t, { session: false });
+    const ids: Id<'sessions'>[] = [];
+    for (let n = 1; n <= 6; n++) {
+      const players = n % 2 ? [f.player.profile.userId] : [f.observer.profile.userId];
+      const id = await f.director.client.mutation(api.sessions.start, {
+        campaignId: f.campaignId,
+        selectedPlayerIds: players,
+        commandId: `start-session-${n}`,
+      });
+      await f.director.client.mutation(api.sessions.transition, {
+        sessionId: id,
+        expectedRevision: 0,
+        action: 'close',
+        commandId: `close-session-${n}`,
+      });
+      ids.push(id);
+    }
+    const sessions = await f.observer.client.query(api.sessions.list, { campaignId: f.campaignId });
+    expect(sessions.map(s => [s.number, s.id, s.status, s.selectedPlayerIds.length])).toEqual(
+      [6, 5, 4, 3, 2, 1].map(n => [n, ids[n - 1], 'closed', 1]),
+    );
+    expect(sessions.every(s => s.closedAt !== null && s.closedAt >= s.startedAt)).toBe(true);
+    const third = ids[2]!;
+    const recap = await f.observer.client.query(api.events.list, {
+      campaignId: f.campaignId,
+      sessionId: third,
+    });
+    expect(recap.events.map(e => [e.kind, e.sessionId])).toEqual([
+      ['session.closed', third],
+      ['session.started', third],
+    ]);
+    const all = await f.observer.client.query(api.events.list, { campaignId: f.campaignId });
+    expect(all.events.filter(e => e.sessionId !== null).length).toBe(12);
+  });
+
+  test('chat pages of 50 never lose or repeat a message, even when sends share a millisecond', async () => {
+    // Fails if paging by createdAt skips a message at a page boundary, if the page is not oldest
+    // first, or if the cursor never ends.
+    vi.useFakeTimers({ toFake: ['Date'] });
+    vi.setSystemTime(new Date('2026-09-20T12:00:00Z'));
+    const t = backend();
+    const f = await table(t, { session: false });
+    for (let n = 1; n <= 52; n++)
+      await f.player.client.mutation(api.chat.send, {
+        campaignId: f.campaignId,
+        text: `message ${n}`,
+        commandId: `chat-send-${n}`,
+      });
+    const first = await f.director.client.query(api.chat.list, { campaignId: f.campaignId });
+    expect(first.messages.map(m => m.text)).toEqual(
+      Array.from({ length: 50 }, (_, i) => `message ${i + 3}`),
+    );
+    expect(first.nextBefore).not.toBeNull();
+    const second = await f.director.client.query(api.chat.list, {
+      campaignId: f.campaignId,
+      before: first.nextBefore!,
+    });
+    expect(second.messages.map(m => m.text)).toEqual(['message 1', 'message 2']);
+    expect(second.nextBefore).toBeNull();
   });
 });

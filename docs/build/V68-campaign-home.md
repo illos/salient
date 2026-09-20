@@ -182,3 +182,31 @@ Headless proof (`node scripts/v68-headless.ts`, evidence in [`evidence/V68`](evi
 Elapsed 12.8 s; no fixture or infrastructure failures in the final run. The first run failed before
 any step on a Node ESM import-extension error in the script itself (fixed in `136f7e2`), not a
 product defect.
+
+### 2026-09-20 — independent review round 1: changes required, addressed
+
+Reviewer (fresh Fable subagent, static review of `1f65278..f5eddbf`): **changes required**.
+Blocking findings and repairs:
+
+1. Hero-level assertion could not fail (both heroes level 1 and `campaigns.get` defaulted to 1).
+   Repaired: the projection lists only characters with an effective revision and takes the level
+   from it, with no default; the test levels Thorn to 2 through the real V32 advancement route
+   (`characters.saveAdvancement` / `finalizeAdvancement`, fixture XP only) and expects `2`.
+2. Acceptance check 4 unproven. Repaired: new test closes six sessions and asserts numbering
+   `6..1` from the oldest with players and close times, and that `events.list` for the third
+   session returns only that session's two events.
+3. `chat.list` paging could skip a message sharing the boundary millisecond. Repaired: `chat.send`
+   keeps `createdAt` strictly increasing per campaign (mutations are serialized), and a test sends
+   52 messages under a frozen clock and reads both pages back with no loss or repeat.
+
+Non-blocking findings addressed: `web/command-input.tsx` deleted (no importers); untitled rows now
+show the number only; the stale "detach" comment corrected; the pending-hero test comment fixed;
+the headless script now also proves Replace code (`campaigns.regenerateShareCode`) and roster
+adjustment after the interim start (`sessions.setPlayers`). Known bound recorded: `sessions.list`,
+`number` and `sessionCount` cover the newest 50 sessions (the existing `take(50)` page); the
+session screen slice inherits it. The CT114 `pnpm check` log remains on the environment volume
+(`/artifacts/v68/check.log`); the exit file and summary are in the evidence README.
+
+Local (Presidium, now a permitted peer test environment per the user's 03:30 UTC rule): eslint,
+prettier, tsc pass; `tests/app/campaign-home.test.ts` (6) and `access-sessions.test.ts` pass.
+CT114 rerun of the full check and the headless proof follows in the next free window.

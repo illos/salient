@@ -169,9 +169,19 @@ try {
       'player is a member',
     );
     expect(after.pendingRequests.length === 1, 'guest still pending');
+    // The pop-up's Replace control: the link and code shown come from shareCode, and rotating it
+    // changes both while the pending request survives.
+    await director.client.mutation(api.campaigns.regenerateShareCode, {
+      campaignId,
+      commandId: `${run}-rotate`,
+    });
+    const rotated = await director.client.query(api.campaigns.get, { campaignId });
+    expect(!!rotated.shareCode && rotated.shareCode !== shareCode, 'share code replaced');
+    expect(rotated.pendingRequests.length === 1, 'pending request survives rotation');
     return {
       members: after.members.map(m => m.displayName),
       pending: after.pendingRequests.length,
+      shareCodeChanged: rotated.shareCode !== shareCode,
     };
   });
 
@@ -280,7 +290,19 @@ try {
       });
       sessions = await player.client.query(api.sessions.list, { campaignId });
       expect(sessions[0]!.title === 'Blackcastle, revisited', 'title changed');
-      return { session: sessions[0] };
+      // The Director still adjusts the interim all-members roster through sessions.setPlayers.
+      await director.client.mutation(api.sessions.setPlayers, {
+        sessionId,
+        expectedRevision: sessions[0]!.revision,
+        selectedPlayerIds: [player.userId],
+        commandId: `${run}-players`,
+      });
+      const adjusted = (await player.client.query(api.sessions.list, { campaignId }))[0]!;
+      expect(
+        adjusted.selectedPlayerIds.length === 1 && adjusted.selectedPlayerIds[0] === player.userId,
+        'roster adjusted after start',
+      );
+      return { session: adjusted };
     },
   );
 

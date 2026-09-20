@@ -129,14 +129,9 @@ export function SessionHistory({
                   <TitleEditor session={session} onDone={() => setEditing(null)} />
                 ) : (
                   <>
-                    <span
-                      className={cn(
-                        'truncate text-sm',
-                        session.title ? 'font-semibold' : 'text-muted-foreground',
-                      )}
-                    >
-                      {session.title ?? 'Untitled'}
-                    </span>
+                    {session.title && (
+                      <span className="truncate text-sm font-semibold">{session.title}</span>
+                    )}
                     {director && (
                       <Button
                         variant="ghost"

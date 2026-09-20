@@ -114,24 +114,29 @@ export const get = query({
       .query('memberships')
       .withIndex('by_campaign_user', q => q.eq('campaignId', campaignId))
       .take(100);
-    // Attached characters are admitted ones: admission sets campaignId, decline/detach clears it.
+    // Attached characters are admitted ones: admission activates a revision and sets campaignId;
+    // a declined submission never gains one. The level is the effective revision's; a character
+    // without an effective revision is not admitted and is not listed (no default level).
     const characters = await ctx.db
       .query('characters')
       .withIndex('by_campaign', q => q.eq('campaignId', campaignId))
       .take(100);
-    const heroes = await Promise.all(
-      characters.map(async character => {
-        const effective = character.effectiveRevisionId
-          ? await ctx.db.get(character.effectiveRevisionId)
-          : null;
-        return {
-          id: character._id,
-          ownerId: character.ownerId,
-          name: character.authored.name,
-          level: effective ? revisionLevel(effective) : 1,
-        };
-      }),
-    );
+    const heroes = (
+      await Promise.all(
+        characters.map(async character => {
+          const effective = character.effectiveRevisionId
+            ? await ctx.db.get(character.effectiveRevisionId)
+            : null;
+          if (!effective) return null;
+          return {
+            id: character._id,
+            ownerId: character.ownerId,
+            name: character.authored.name,
+            level: revisionLevel(effective),
+          };
+        }),
+      )
+    ).filter(hero => hero !== null);
     const members = await Promise.all(
       memberships.map(async m => ({
         userId: m.userId,

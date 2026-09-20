@@ -35,12 +35,21 @@ export const send = mutation({
     if (text.length === 0) throw new ConvexError('Write a message first.');
     if (text.length > MAX_TEXT)
       throw new ConvexError(`Messages are limited to ${MAX_TEXT} characters.`);
+    // `list` pages with `createdAt < before`; keep createdAt strictly increasing per campaign so a
+    // page boundary can never fall between two messages sent in the same millisecond. Mutations
+    // are serialized, so reading the latest row here is exact.
+    const latest = await ctx.db
+      .query('chatMessages')
+      .withIndex('by_campaign_created', q => q.eq('campaignId', args.campaignId))
+      .order('desc')
+      .first();
+    const createdAt = Math.max(Date.now(), (latest?.createdAt ?? 0) + 1);
     const id = await ctx.db.insert('chatMessages', {
       campaignId: args.campaignId,
       authorId: user._id,
       authorName: user.displayName,
       text,
-      createdAt: Date.now(),
+      createdAt,
     });
     await receipt.save(id);
     return id;
