@@ -52,3 +52,6 @@ preserved in [its coordinator record](tester-job-c220cbc.md).
 
 This verifies the exact submitted source. V87 merged into main after the candidate branch was cut;
 any subsequent rebase or integration candidate requires its own appropriate gate.
+
+The passing return was sent directly to ENGINE as Chords message 913; its wake was accepted. A
+quiet copy was sent to ENGINE2 as message 914.
