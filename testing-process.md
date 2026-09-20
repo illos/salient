@@ -38,8 +38,10 @@ unavailable, the durable job waits for the next coordinator turn; do not create 
 ## Coordinator procedure
 
 1. Read Chords updates and record accepted jobs in the existing
-   [status tracker queue](docs/build/STATUS.md#test-execution-queue) before acknowledging them.
-   Reply with `queued`, then `running` with job ID, source, host and target before execution.
+   [status tracker queue](docs/build/STATUS.md#test-execution-queue) before acknowledging them
+   (or in the durable local job record while DEPLOY holds the integration slot; see below).
+   Use one queue row per job. Send one quiet receipt with job ID, source, host and target;
+   use `running` immediately when capacity is available, otherwise `queued`.
    Use FIFO among runnable jobs; explain dependency or urgent-job reordering. A blocked job
    releases the queue for the next runnable job. On resume, read the queue and inspect actual
    processes before starting anything; an acknowledged message alone is not a durable work plan.
@@ -52,7 +54,12 @@ unavailable, the durable job waits for the next coordinator turn; do not create 
    a local pass does not prove another deployed build. Run pure checks locally without an app
    stack, or run a local CLI against the required remote API when possible. Execute focused checks
    first, retaining required integration gates such as `pnpm check` when applicable. Avoid repeated
-   full checks after documentation-only changes.
+   full checks after documentation-only changes. Compare with the last tested source before choosing
+   commands: reuse results only when relevant source, fixtures, dependencies, configuration and target
+   are unchanged. Metadata-only repairs need identity and metadata checks; documentation edits need
+   relevant link/hygiene checks. After a source or fixture repair, run the affected focused checks
+   first, then one required full integration gate. Do not repeat unrelated focused suites, builds or
+   deployment dry runs without a changed input or unresolved failure.
 4. Transfer only missing inputs. For an already-correct remote app, send API requests and fixture
    data; no app upload/build is needed. If remote runner files are needed, use a compressed,
    allowlisted bundle in an isolated job directory, with required imports and dependency versions.
@@ -71,7 +78,8 @@ unavailable, the durable job waits for the next coordinator turn; do not create 
    shared playable app available. No global pruning, volume deletion, shared-app reset or reuse
    of abandoned pilot/rollback data. Return `passed`, `failed`, `blocked` or `cancelled` with exact
    commands, source, runner, app target, duration, evidence paths and cleanup state. Record results
-   in the slice's existing work log/evidence and close its queue row. Do not create a second slice tracker.
+   in one concise terminal certificate in the slice's existing evidence and update its queue row.
+   Link prior results rather than copying them. Do not create a second slice tracker.
 7. **Every job return must wake its requester.** Send a direct Chords update to the recorded reply
    thread with `wake: true` for `passed`, `failed`, `blocked` and `cancelled` outcomes, including
    jobs kicked back for source repairs before execution. Use one stable return `message_key` and
@@ -91,6 +99,35 @@ unavailable, the durable job waits for the next coordinator turn; do not create 
    gate before promotion and the exact-revision live gate after publication when DEPLOY submits
    those jobs. Do not call a cloud revision stable until both target-specific gates and the release
    record are complete.
+
+## Keep a reusable foundation
+
+Use the last green integrated certificate as the baseline; retain its exact source, dependency
+pins and target. New work should submit the changed behavior, relevant inputs and a focused
+regression command. Reuse unchanged evidence under step 3, then run one required integration
+gate before promotion. A local suite pass is not proof of a different live deployment.
+
+Every new or touched test must name a plausible failure it catches that existing coverage misses.
+Apply the [test value policy](docs/build/README.md#test-value): remove duplicate, obsolete and
+implementation-mirroring assertions; share expensive read-only setup; use the smallest fixture and
+cheapest test level that still detects the failure. Preserve independent expected results and
+permission, persistence and integration checks. Explain reductions in the existing slice handoff,
+without a new justification ledger or test-count target. A failing test needs diagnosis before
+repair or removal. Removing bloat is part of completion, not a separate backlog obligation.
+
+## Keep coordination small
+
+Persist the queue entry and raw attempt outputs for recovery, but batch routine queue, certificate
+and delivery updates into one terminal commit where possible. Do not create separate Git commits
+for every acknowledgement or progress transition. Send one terminal wake message to the requester;
+send additional progress messages only for a material finding, blocker or changed plan. A result
+certificate is not itself a new testing job.
+
+When DEPLOY holds the integration slot, keep pending queue updates in the durable local artifact directory
+and hand over the terminal documentation patch for inclusion. Do not advance shared main merely
+to record testing progress: this causes avoidable rebases and repeated identity checks. The queue
+and certificate remain the authoritative project records; reconcile them with the retained artifacts before
+resuming after an interruption.
 
 The installed `presidium-dev up` still uploads a complete source snapshot and starts services;
 `run` uses the last uploaded tree and does **not** sync edits. Compression/exclusion/delta changes

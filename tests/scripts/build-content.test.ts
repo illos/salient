@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
-import { describe, expect, test } from 'vitest';
+import { beforeAll, describe, expect, test } from 'vitest';
 import { execFileSync } from 'node:child_process';
 import { mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
@@ -113,37 +113,43 @@ describe('frontmatter parser', () => {
 });
 
 describe('committed snapshot', () => {
+  let snapshot: ReturnType<typeof buildSnapshot>;
+  beforeAll(() => {
+    snapshot = buildSnapshot(root);
+  });
   test('regenerates byte-for-byte from the clean pinned Compendium (pnpm content:check)', () => {
-    const snapshot = buildSnapshot(root);
     expect(compareSnapshot(snapshot, root)).toEqual([]);
   });
   test('detects a hand edit to a generated file', () => {
-    const snapshot = buildSnapshot(root);
-    snapshot.files.set('condition.json', `${snapshot.files.get('condition.json')}\n`);
-    expect(compareSnapshot(snapshot, root)).toEqual(['condition.json: differs.']);
+    const edited = { ...snapshot, files: new Map(snapshot.files) };
+    edited.files.set('condition.json', `${edited.files.get('condition.json')}\n`);
+    expect(compareSnapshot(edited, root)).toEqual(['condition.json: differs.']);
   });
-  test.each(['9999-99-99', '2020-01-01'])(
-    'detects a hand-edited generation date %s independently',
-    date => {
-      const temporaryRoot = mkdtempSync(join(tmpdir(), 'salient-content-'));
-      try {
-        const snapshot = buildSnapshot(root);
-        writeSnapshot(snapshot, temporaryRoot);
-        const edited = { ...snapshot.manifest, generatedAt: date };
-        writeFileSync(
-          join(temporaryRoot, OUTPUT_DIR, 'manifest.json'),
-          `${JSON.stringify(edited, null, 2)}\n`,
-        );
-        const regenerated = buildSnapshot(root);
-        expect(regenerated.manifest.generatedAt).toBe(
-          new Date(snapshot.manifest.compendium.committedAt).toISOString().slice(0, 10),
-        );
-        expect(compareSnapshot(regenerated, temporaryRoot)).toEqual(['manifest.json: differs.']);
-      } finally {
-        rmSync(temporaryRoot, { recursive: true, force: true });
-      }
-    },
-  );
+  test('uses the pinned commit date and detects a valid but incorrect generation date', () => {
+    const committedAt = execFileSync('git', ['log', '-1', '--format=%cI', 'HEAD'], {
+      cwd: vendor,
+      encoding: 'utf8',
+    }).trim();
+    expect(snapshot.manifest.generatedAt).toBe(new Date(committedAt).toISOString().slice(0, 10));
+    const temporaryRoot = mkdtempSync(join(tmpdir(), 'salient-content-'));
+    try {
+      // Byte comparison has no date parser: one incorrect date exercises that failure mode.
+      // Only the manifest is needed here; full snapshot freshness is checked above.
+      const manifestOnly = {
+        ...snapshot,
+        files: new Map([['manifest.json', snapshot.files.get('manifest.json')!]]),
+      };
+      writeSnapshot(manifestOnly, temporaryRoot);
+      const edited = { ...snapshot.manifest, generatedAt: '2020-01-01' };
+      writeFileSync(
+        join(temporaryRoot, OUTPUT_DIR, 'manifest.json'),
+        `${JSON.stringify(edited, null, 2)}\n`,
+      );
+      expect(compareSnapshot(manifestOnly, temporaryRoot)).toEqual(['manifest.json: differs.']);
+    } finally {
+      rmSync(temporaryRoot, { recursive: true, force: true });
+    }
+  });
   test('manifest revision equals the submodule commit and the superproject pin', () => {
     const head = execFileSync('git', ['-C', vendor, 'rev-parse', 'HEAD'], {
       encoding: 'utf8',
@@ -211,7 +217,6 @@ describe('verbatim text and traceable fields', () => {
             `${id}.${key} value`,
           ).toEqual(twin[key]);
       }
-      expect(JSON.parse(readPinnedSource(root, found.jsonPath)).name).toBe(found.name);
     },
   );
 

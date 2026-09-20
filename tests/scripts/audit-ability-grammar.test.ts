@@ -237,8 +237,8 @@ it('produces byte-identical JSON and Markdown across two full runs', () => {
   expect(first.totals['foe-ability'].total).toBe(1158);
 });
 
-// The committed pre-V88 report was stale by 25 grants. Compare existing rows by stable identity,
-// and name those additions separately. The exact changed clauses remain reviewable in the fixture.
+// The pre-V88 report lacked 25 perk grants; V85 integration adds 37 reviewed complication grants.
+// List both sets explicitly while preserving every original classification hash and clause change.
 it('V88 changes only the exact bounded flags, preserving every other prior classification byte', () => {
   const fixture = JSON.parse(
     readFileSync(new URL('../fixtures/v88-audit-baseline.json', import.meta.url), 'utf8'),
