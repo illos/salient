@@ -293,6 +293,13 @@ function projectChecked(hero: Hero) {
       if (!canonical || canonical.type !== FeatureType.Choice)
         throw new Error(`Pinned ancestry purchase definition missing: ${feature.id}`);
       const ids = feature.data.selected.map(entry => entry.id);
+      const effectiveIds = feature.data.selected.map(entry =>
+        entry.type === FeatureType.AncestryFeatureChoice
+          ? (entry.data.selected?.id ?? entry.id)
+          : entry.id,
+      );
+      if (new Set(effectiveIds).size !== effectiveIds.length)
+        outstandingChoices.push(problem(feature, 'Duplicate underlying ancestry purchase'));
       if (new Set(ids).size !== ids.length)
         outstandingChoices.push(problem(feature, 'Duplicate ancestry purchase'));
       // Pinned ConfigChoice (choice.tsx) exposes former paid options directly; it does not

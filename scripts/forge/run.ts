@@ -135,6 +135,29 @@ for (const kind of ['duplicate-former', 'foreign-former'] as const) {
   else purchase.data.selected[0]!.id = 'devil-feature-1';
   assert.equal(project(hero).complete, false, `${kind} must not certify complete`);
 }
+// Catches one borrowed trait purchased twice through the two valid Forge serialization forms.
+{
+  const hero = structuredClone(
+    witnesses.find(
+      w =>
+        w.ancestry === 'Revenant' &&
+        w.selections['ancestry.revenant.former-life'] === 'Dwarf' &&
+        w.purchasedTraits.includes('Grounded'),
+    )!.hero,
+  );
+  const purchase = hero.ancestry!.features.find(
+    f => f.type === FeatureType.Choice && f.data.count === 'ancestry',
+  );
+  assert.ok(purchase?.type === FeatureType.Choice);
+  const wrapper = purchase.data.selected.find(f => f.type === FeatureType.AncestryFeatureChoice);
+  assert.ok(wrapper?.type === FeatureType.AncestryFeatureChoice && wrapper.data.selected);
+  purchase.data.selected = [wrapper, structuredClone(wrapper.data.selected)];
+  assert.equal(
+    project(hero).complete,
+    false,
+    'Mixed-form duplicate borrowed trait must not certify complete',
+  );
+}
 writeFileSync(join(output, 'counterparts.json'), JSON.stringify(witnesses, null, 2) + '\n');
 const incomplete = witnesses
   .filter(w => !w.forge.complete)

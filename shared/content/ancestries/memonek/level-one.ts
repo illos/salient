@@ -17,10 +17,15 @@ export const levelOneDecisions: Decision[] = [
     'Memonek',
     trait('fall-lightly'),
     'Whenever you fall, you reduce the distance of the fall by 2 squares.',
-    [
-      grant('ancestry-signature-trait', 'Fall Lightly', trait('fall-lightly')),
-      grant('ancestry-signature-trait', 'Lightweight', trait('lightweight')),
-    ],
+    [grant('ancestry-signature-trait', 'Fall Lightly', trait('fall-lightly'))],
+  ),
+  auto(
+    'ancestry.memonek.lightweight',
+    'ancestry.choice',
+    'Memonek',
+    trait('lightweight'),
+    'Whenever another creature attempts to force move you, you treat your size as one size smaller than it is.',
+    [grant('ancestry-signature-trait', 'Lightweight', trait('lightweight'))],
   ),
   choice(
     'ancestry.memonek.purchased-traits',

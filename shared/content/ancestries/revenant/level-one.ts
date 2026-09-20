@@ -27,15 +27,20 @@ export const levelOneDecisions: Decision[] = [
     "Choose the ancestry you were before you died. Your size is that ancestry's size and your speed is 5.",
   ),
   auto(
+    'ancestry.revenant.former-life-trait',
+    'ancestry.choice',
+    'Revenant',
+    trait('former-life'),
+    "Choose the ancestry you were before you died. Your size is that ancestry's size and your speed is 5.",
+    [grant('ancestry-signature-trait', 'Former Life', trait('former-life'))],
+  ),
+  auto(
     'ancestry.revenant.signature-trait',
     'ancestry.choice',
     'Revenant',
     trait('tough-but-withered'),
     'Your undead body grants you immunity to cold, corruption, lightning, and poison damage equal to your level, but you have fire weakness 5.',
-    [
-      grant('ancestry-signature-trait', 'Former Life', trait('former-life')),
-      grant('ancestry-signature-trait', 'Tough But Withered', trait('tough-but-withered')),
-    ],
+    [grant('ancestry-signature-trait', 'Tough But Withered', trait('tough-but-withered'))],
   ),
   choice(
     'ancestry.revenant.former-life',

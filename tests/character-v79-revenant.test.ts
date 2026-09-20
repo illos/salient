@@ -35,7 +35,7 @@ const evaluate = (selections: Record<string, SelectionValue>) =>
     },
     definitions,
   );
-// Catches losing former size, accidentally inheriting a signature, and using the wrong size-dependent budget.
+// Catches losing former size, inherited signature leakage, wrong budgets, and attributing Former Life to Tough But Withered.
 test('V79 Former Life gives only size; small Revenants have the additional ancestry point', () => {
   for (const [former, size, traits] of [
     ['Hakaan', '1L', ['Bloodless']],
@@ -45,6 +45,12 @@ test('V79 Former Life gives only size; small Revenants have the additional ances
     const result = evaluate(build(former, [...traits]));
     assert.equal(result.status, 'complete');
     const hero = result.baseline!;
+    const formerLife = hero.traits.find(t => t.name === 'Former Life')!;
+    assert.equal(
+      formerLife.provenance.source.path,
+      'en/unified/md/feature/trait/revenant/former-life.md',
+    );
+    assert.ok(formerLife.provenance.source.quote.includes('Choose the ancestry'));
     assert.equal(hero.size.value, size);
     assert.equal(hero.speed.value, 5);
     assert.deepEqual(

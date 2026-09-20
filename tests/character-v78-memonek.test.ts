@@ -27,7 +27,7 @@ function evaluate(selections: ReturnType<typeof build>) {
     definitions,
   );
 }
-// Catches omitting the second signature or applying Lightweight's conditional size reduction permanently.
+// Catches omitting/misattributing the second signature or applying its conditional size reduction permanently.
 test('V78 Memonek quick build has both signatures, base speed seven, and slowed immunity', () => {
   const result = evaluate(build(['Lightning Nimbleness', 'Nonstop']));
   assert.equal(result.status, 'complete');
@@ -35,6 +35,12 @@ test('V78 Memonek quick build has both signatures, base speed seven, and slowed 
   assert.equal(hero.size.value, '1M');
   assert.equal(hero.speed.value, 7);
   assert.equal(hero.stability.value, 2);
+  const lightweight = hero.traits.find(t => t.name === 'Lightweight')!;
+  assert.equal(
+    lightweight.provenance.source.path,
+    'en/unified/md/feature/trait/memonek/lightweight.md',
+  );
+  assert.match(lightweight.provenance.source.quote, /force move you/);
   assert.deepEqual(hero.traits.map(t => t.name).sort(), [
     'Fall Lightly',
     'Lightning Nimbleness',
