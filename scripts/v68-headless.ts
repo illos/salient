@@ -15,11 +15,11 @@ import { dirname } from 'node:path';
 import { ConvexHttpClient } from 'convex/browser';
 import { createAuthClient } from 'better-auth/client';
 import { convexClient, crossDomainClient } from '@convex-dev/better-auth/client/plugins';
-import { api } from '../convex/_generated/api';
-import type { Id } from '../convex/_generated/dataModel';
-import type { EvaluationInput } from '../shared/contracts/characterEvaluation';
-import type { DecisionDefinitions } from '../shared/evaluate/definitions';
-import { draftSelectionsFrom } from '../shared/evaluate/draft';
+import { api } from '../convex/_generated/api.js';
+import type { Id } from '../convex/_generated/dataModel.js';
+import type { EvaluationInput } from '../shared/contracts/characterEvaluation.ts';
+import type { DecisionDefinitions } from '../shared/evaluate/definitions.ts';
+import { draftSelectionsFrom } from '../shared/evaluate/draft.ts';
 
 function required(name: string): string {
   const value = process.env[name];
