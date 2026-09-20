@@ -1,9 +1,9 @@
 # V85: Complication grants and dependencies
 
-Status: implemented on `slice/V85` at `b15fc59` plus import correction `faa9b1e`;
-not merged. Full local checks pass (864 tests and production build). Live API acceptance is
-blocked: isolated CT114 startup failed, and the subsequent hosted cloud deploy exited 1 before
-reporting upload success. The API suite did not start on either target.
+Status: application `86e9d2e` is deployed to the hosted demo, not merged. TESTER passed all
+864 checks and backend/frontend deployment. Hosted API acceptance has 30 passes and five cases
+pending after the aggregate runner exhausted its fixed budget. The new runner offers independent
+remaining cohorts with unchanged limits; TESTER owns their execution. See [evidence](evidence/V85/README.md).
 
 ## In scope
 

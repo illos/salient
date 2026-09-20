@@ -1,6 +1,8 @@
 # V85/V86 deployment failure diagnosis
 
-Status: causes confirmed on source `c3cf992`, 2026-09-20. Two temporary changes together pass
+Status: resolved in application `86e9d2e`; TESTER passed full checks and actual hosted deployment.
+The current API acceptance blocker is the aggregate runner budget; see [remaining proof](README.md#remaining-hosted-proof).
+Causes originally confirmed on source `c3cf992`, 2026-09-20. Two temporary changes together pass
 Convex deployment dry run. Application changes were restored after the experiment. The permanent correction now uses the
 standalone validator and removes the shared helper’s JSON dependency entirely; TESTER owns
 verification of the new committed candidate. No actual publication or API acceptance run is claimed. This investigation did not change CT114 main.

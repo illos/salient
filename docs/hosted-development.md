@@ -109,27 +109,16 @@ fixture limitations and deployment logs. Earlier Worker versions in slice record
 
 ## Character deployment checkpoint — 2026-09-20
 
-The latest recorded successful hosted character deployment is V82 source
-`8d5559fc87f18f4ed4112f4effc2cafaa3809739`, Worker `ff4da11e-6772-4e3c-bdd4-afd2fc88b000`,
-with 567 reference entries, retained play data, and 28/28 hosted API scenarios passing.
-See [V82 evidence](build/evidence/V82/README.md). Later V83/V84 delivery updated CT114 main;
-that did not update this separate hosted demo.
+TESTER deployed source `86e9d2ed3b82a5d027f631f677975f040439f472` to both hosted components;
+Worker version `bb430814-0366-43a3-882a-bd69f81cc811`. Full repository checks (864 tests), Convex
+dry-run/deployment validation and hosted frontend build/publication passed. Existing play data
+and 567 reference entries were retained. No configure/reseed/reset or browser commands were run.
+The earlier bundling/schema defects are resolved; their [diagnosis](build/evidence/V85/deployment-diagnosis.md)
+remains historical evidence.
 
-The user explicitly requested V85/V86 verification on this hosted demo. Deployment of candidate
-`b161a7bb375e28c5777801c65553559289d270f8` from a local runner reached the correct development
-target but the Convex CLI exited 1 before reporting a successful upload, without an underlying
-error message. Two bounded diagnostic repeats confirmed normal exit 1 and its `flushAndExit`
-call site; neither explains the cause. The hosted frontend build passed but was not published
-because backend deployment did not succeed. No API acceptance run, content reseed, data reset,
-configuration change or infrastructure repair followed. This is separate from the earlier CT114
-isolated startup timeout. [V85/V86 evidence](build/evidence/V85/README.md#hosted-cloud-demo-attempt)
-retains the logs and remaining gate; do not claim this candidate is deployed.
-
-Further [investigation](build/evidence/V85/deployment-diagnosis.md) confirmed two source-level
-deployment blockers: mixed import attributes for the same manifest JSON and runtime authentication
-reached through the schema's starting-reward validator import. Temporary corrections passed the
-Convex deployment dry run, then were restored. The permanent equivalent correction is now
-prepared for TESTER, who owns all checks and actual hosted API acceptance. TESTER caught a
-NodeNext JSON-import typecheck failure in `b08ebcd`; the replacement removes that shared JSON
-import and passes the revision from the existing backend callers. No successful publication is
-claimed; no infrastructure repair is indicated.
+Hosted API acceptance is incomplete: first30 scenarios passed, culture exhausted the runner’s
+shared240-second execution budget, and four V85/V86 scenarios never started. Bounded server logs
+showed no server timeout. TESTER owns the replacement runner’s five independent remaining cohorts,
+with unchanged limits/assertions and the existing deployed application. No new deployment is needed
+for runner-only changes. See [current evidence](build/evidence/V85/README.md#remaining-hosted-proof).
+Do not claim full acceptance or main integration from successful deployment alone.

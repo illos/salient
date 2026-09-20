@@ -80,6 +80,7 @@ export function failureCode(error: unknown): string {
   if (error instanceof Error) {
     if (error.message === 'headless-request-timeout') return 'request-timeout';
     if (error.message === 'headless-deadline') return 'run-deadline';
+    if (error.message === 'headless-cohort-validation-failed') return 'cohort-validation-failed';
     if (error.message === 'headless-target-validation-failed') return 'target-validation-failed';
     if (error.message === 'headless-session-cleanup-failed') return 'session-cleanup-failed';
     if (error.name === 'AssertionError') return 'assertion-failed';
@@ -91,13 +92,17 @@ export function failureCode(error: unknown): string {
   return 'operation-failed';
 }
 
-export async function bounded<T>(operation: Promise<T>, milliseconds = 15_000): Promise<T> {
+export async function bounded<T>(
+  operation: Promise<T>,
+  milliseconds = 15_000,
+  timeoutMessage: 'headless-request-timeout' | 'headless-deadline' = 'headless-request-timeout',
+): Promise<T> {
   let timer: ReturnType<typeof setTimeout> | undefined;
   try {
     return await Promise.race([
       operation,
       new Promise<never>((_resolve, reject) => {
-        timer = setTimeout(() => reject(new Error('headless-request-timeout')), milliseconds);
+        timer = setTimeout(() => reject(new Error(timeoutMessage)), milliseconds);
       }),
     ]);
   } finally {
