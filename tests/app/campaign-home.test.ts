@@ -183,7 +183,8 @@ describe('V68 campaign home operations', () => {
       authored: { name: 'Pending', appearance: '', biography: '', notes: '' },
     });
     const ownHero = await admitHero(t, f.director, f.director, f.campaignId, 'Mora');
-    // Fixture XP so the sourced level-2 threshold is met; the level-up itself is the real route.
+    // Fixture XP so the advancement route accepts a level-up (the same fixture value the V32
+    // progression test uses); the expected level comes from the level-2 definitions, not from XP.
     await t.run(async ctx => {
       const character = (await ctx.db.get(f.thornId))!;
       await ctx.db.patch(character._id, { liveState: { ...character.liveState!, xp: 16 } });

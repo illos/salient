@@ -178,6 +178,8 @@ Headless proof (`node scripts/v68-headless.ts`, evidence in [`evidence/V68`](evi
 | Closing updates `sessionCount`/`lastPlayedAt`, closed session accepts a title, RECAP reads that session's log | `sessions.transition`, `campaigns.get`, `events.list` with `sessionId` | step 6 | pass | pending |
 | Hero admission from the pop-up lists the hero under its owner with level 1; unapproved hero absent; pending applicant cannot read the campaign | `characters.create/save/submit`, `characters.reviews`, `characters.approve`, `campaigns.get` | step 7 | pass | pending |
 | Foe management remains reachable headlessly after leaving the campaign home | `foes.list` | step 8 | pass | pending |
+| Replace code and link from the pop-up changes the share code and keeps pending requests | `campaigns.regenerateShareCode`, `campaigns.get` | step 2 (rerun `v68-mu99p51j`) | pass | pending |
+| The Director narrows the interim all-members roster after start | `sessions.setPlayers`, `sessions.list` | step 5 (rerun `v68-mu99p51j`) | pass | pending |
 
 Elapsed 12.8 s; no fixture or infrastructure failures in the final run. The first run failed before
 any step on a Node ESM import-extension error in the script itself (fixed in `136f7e2`), not a
@@ -220,3 +222,15 @@ Environment `campaign-home` resynced to `ed83dff` ("Convex functions ready" 03:3
 `campaign-home.test.ts`), build. Both logs are in `evidence/V68/`. Environment stopped, data kept.
 The headless table above stands with these additions: check 4 is now proven by the six-session
 test; check 7's level is proven at level 2 through the advancement route.
+
+### 2026-09-20 — independent review round 2: pass; branch handoff
+
+Reviewer verdict **pass** ([review record](reviews/V68-implementation-review.md)). All ten
+acceptance checks proven headlessly or by code reading; browser scenarios stay in the backlog under
+the moratorium. `Reviewed-By: v68_review (pass, 2026-09-20)` added to the branch commits.
+
+Handoff state: **committed on `slice/V68`, not merged.** Main integration, the shared CT114 `main`
+runtime update and the live changed-feature check follow the user's merge request under the merge
+completion directive. Runtime impact when merged: additive schema (three new tables/fields, no
+migration), new `presence` and `chat` modules, changed `sessions` and `campaigns` projections, and
+the rebuilt campaign home; existing play data is compatible.
