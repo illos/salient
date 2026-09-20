@@ -73,7 +73,7 @@ reuse the ID and unchanged arguments when retrying a command. For example, `sess
 
 - [Build plan and process](docs/build/README.md): slice-based build, review and commit process, with
   [status tracking](docs/build/STATUS.md) and one document per slice. Agents start here after
-  [`CLAUDE.md`](CLAUDE.md).
+  [`AGENTS.md`](AGENTS.md).
 - [Questions for the user](docs/rules-questions-for-user.md): the only channel from build threads to the
   user for rules and product decisions; resolved in a standalone thread.
 - [Development track kickoff](docs/kickoff-development-track.md): current ready-to-paste implementation
@@ -138,7 +138,7 @@ reuse the ID and unchanged arguments when retrying a command. For example, `sess
   and adopt updates.
 - [Compendium navigation](docs/compendium-navigation.md): quick rules lookups, cross-references, and
   sourcebook fallbacks for agents.
-- [Project instructions](agent.MD)
+- [Project instructions](AGENTS.md)
 - [Engine architecture](docs/engine-architecture.md): confirmed intent, proposed contracts, and unresolved
   decisions.
 - [Rules language](docs/rules-language.md): stat-block parsing, reusable mechanics, homebrew, and the first

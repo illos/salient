@@ -4,7 +4,7 @@ The user assigned all Salient testing to **TESTER** (Chords thread
 `46c30412-6e29-44dc-b30b-08ffe22bd0e3`), sequentially across hosts, and then explicitly authorized
 tearing down old development servers and making the agent instructions durable in Git.
 The [testing process](../../../testing-process.md) and
-[existing status tracker queue](../STATUS.md#test-execution-queue) implement that decision.
+[existing status tracker queue](../../../testing-process.md) implement that decision.
 
 ## Actual inventory and cleanup
 

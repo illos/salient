@@ -7,9 +7,9 @@
  *   node scripts/check-commit.ts [--merge] --range <a>..<b>   every commit in the range, newest first
  *
  * Without --merge, `Reviewed-By:` is optional: the hook runs before an independent review can exist.
- * With --merge (the lead's pre-merge check), `Reviewed-By:` is required for code commits.
- * `Rules-Review: required (pending)` is accepted without --merge (the slice awaits its rules review)
- * and rejected with it.
+ * With --merge (the pre-merge check), `Reviewed-By:` with a pass verdict is required on the tip commit
+ * of the range when the range touches code; earlier commits in the range need none.
+ * `Verified:` and `Rules-Review:` are optional; `Rules-Review: required (pending)` is rejected with --merge.
  * Range checks exclude the fixed history before the commit-format contract was adopted.
  * Explicit --rev and staged-message checks remain strict.
  * Spec anchors resolve against the staged tree for the hook, or the commit's own tree for --rev/--range.
@@ -47,8 +47,10 @@ export interface CommitContext {
   readFile: (path: string) => string | undefined;
   /** Paths the commit touches, used for the code-commit and vendor rules. */
   touched: string[];
-  /** Require `Reviewed-By:` on code commits (lead's pre-merge run). */
+  /** Pre-merge run: `Reviewed-By:` required on the tip commit, pending rules reviews rejected. */
   merge: boolean;
+  /** False for commits below the tip of a `--range` check, which need no `Reviewed-By:`. */
+  tip?: boolean;
 }
 
 export function isCodePath(path: string): boolean {
@@ -145,35 +147,27 @@ export function validateMessage(raw: string, context: CommitContext): string[] {
   const codeCommit =
     context.touched.some(isCodePath) || (type !== undefined && type !== 'docs' && type !== 'chore');
   const verified = one('Verified');
-  if (codeCommit && !verified)
-    failures.push(
-      'Missing "Verified:" trailer listing the commands and scenarios actually run (required for commits that touch code).',
-    );
-  else if (verified !== undefined && !verified) failures.push('"Verified:" is empty.');
+  if (verified !== undefined && !verified) failures.push('"Verified:" is empty.');
 
   const reviewed = one('Reviewed-By');
   if (reviewed !== undefined && !VERDICT.test(reviewed))
     failures.push('"Reviewed-By:" must read "<reviewer label> (<verdict>, YYYY-MM-DD)".');
-  if (context.merge && codeCommit) {
+  if (context.merge && context.tip !== false && codeCommit) {
     if (reviewed === undefined)
       failures.push(
-        'Missing "Reviewed-By:" trailer; code commits need an independent review before merging to main.',
+        'Missing "Reviewed-By:" trailer; the tip commit of a merged range needs an independent review.',
       );
     else if (!/\(pass, /.test(reviewed))
       failures.push('"Reviewed-By:" verdict must be "pass" before merging to main.');
   }
 
   const rules = one('Rules-Review');
-  if (rules === undefined)
-    failures.push(
-      'Missing "Rules-Review:" trailer ("not required" is an explicit value, not an omission).',
-    );
-  else if (rules === 'required (pending)') {
+  if (rules === 'required (pending)') {
     if (context.merge)
       failures.push(
         '"Rules-Review: required (pending)" must be replaced by the rules reviewer\'s verdict before merging to main.',
       );
-  } else if (rules !== 'not required' && !VERDICT.test(rules))
+  } else if (rules !== undefined && rules !== 'not required' && !VERDICT.test(rules))
     failures.push(
       '"Rules-Review:" must be "not required", "required (pending)" or "<reviewer label> (<verdict>, YYYY-MM-DD)".',
     );
@@ -205,13 +199,13 @@ function stagedContext(merge: boolean): CommitContext {
   const touched = git(['diff', '--cached', '--name-only']).split('\n').filter(Boolean);
   return { sliceIds, readFile, touched, merge };
 }
-function revisionContext(rev: string, merge: boolean): CommitContext {
+function revisionContext(rev: string, merge: boolean, tip = true): CommitContext {
   const readFile = treeReader(`${rev}:`);
   const status = readFile('docs/build/STATUS.md') ?? '';
   const touched = git(['diff-tree', '--no-commit-id', '--name-only', '-r', '--root', rev])
     .split('\n')
     .filter(Boolean);
-  return { sliceIds: sliceIdsFrom(status), readFile, touched, merge };
+  return { sliceIds: sliceIdsFrom(status), readFile, touched, merge, tip };
 }
 
 function report(label: string, failures: string[]): boolean {
@@ -239,11 +233,14 @@ if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.ur
       .filter(Boolean);
     console.log(`Checking ${range}; excluding history through pre-format ${PRE_FORMAT_HISTORY}.`);
     if (!commits.length) console.log(`No post-adoption commits in ${range}.`);
-    for (const commit of commits) {
+    commits.forEach((commit, index) => {
       const message = git(['log', '-1', '--format=%B', commit]);
       ok =
-        report(commit.slice(0, 12), validateMessage(message, revisionContext(commit, merge))) && ok;
-    }
+        report(
+          commit.slice(0, 12),
+          validateMessage(message, revisionContext(commit, merge, index === 0)),
+        ) && ok;
+    });
   } else if (revIndex !== -1) {
     const rev = args[revIndex + 1];
     if (!rev) throw new Error('--rev needs a commit.');

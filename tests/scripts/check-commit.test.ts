@@ -150,7 +150,7 @@ describe('check-commit', () => {
       'Spec: file "docs/missing.md" does not exist in the tree being committed.',
     ]);
   });
-  test('validates type, slice id, scope match and Rules-Review presence', () => {
+  test('validates type, slice id, scope match and Rules-Review format', () => {
     expect(validateMessage(good.replace('feat(A05)', 'wip(A05)'), context())[0]).toMatch(
       /Unknown type "wip"/,
     );
@@ -158,9 +158,7 @@ describe('check-commit', () => {
       'Slice: "A99" is not an id in docs/build/STATUS.md (or "none").',
       'Subject scope "(A05)" does not match "Slice: A99".',
     ]);
-    expect(validateMessage(without('Rules-Review:'), context())).toEqual([
-      'Missing "Rules-Review:" trailer ("not required" is an explicit value, not an omission).',
-    ]);
+    expect(validateMessage(without('Rules-Review:'), context())).toEqual([]);
     expect(
       validateMessage(
         good.replace('Rules-Review: not required', 'Rules-Review: skipped'),
@@ -179,18 +177,19 @@ describe('check-commit', () => {
     const message = good.replace('feat(A05)', 'docs(none)').replace('Slice: A05', 'Slice: none');
     expect(validateMessage(message, context({ touched: ['docs/x.md'] }))).toEqual([]);
   });
-  test('Verified is required for code commits, not for docs commits touching no code', () => {
-    expect(validateMessage(without('Verified:'), context())[0]).toMatch(/Missing "Verified:"/);
-    const docs = without('Verified:').replace('feat(A05)', 'docs(A05)');
-    expect(validateMessage(docs, context({ touched: ['docs/table-spec.md'] }))).toEqual([]);
-    expect(validateMessage(docs, context({ touched: ['web/ui.tsx'] }))[0]).toMatch(
-      /Missing "Verified:"/,
-    );
+  test('Verified is optional but must not be empty', () => {
+    expect(validateMessage(without('Verified:'), context())).toEqual([]);
+    expect(validateMessage(good.replace('Verified: pnpm check', 'Verified:'), context())).toEqual([
+      '"Verified:" is empty.',
+    ]);
   });
-  test('Reviewed-By is optional in the hook and required with --merge for code commits', () => {
+  test('Reviewed-By is optional in the hook and required with --merge on the tip code commit', () => {
     expect(validateMessage(without('Reviewed-By:'), context())).toEqual([]);
     expect(validateMessage(without('Reviewed-By:'), context({ merge: true }))[0]).toMatch(
       /Missing "Reviewed-By:"/,
+    );
+    expect(validateMessage(without('Reviewed-By:'), context({ merge: true, tip: false }))).toEqual(
+      [],
     );
     const chore = without('Reviewed-By:').replace('feat(A05)', 'chore(A05)');
     expect(validateMessage(chore, context({ merge: true, touched: ['docs/a.md'] }))).toEqual([]);

@@ -27,7 +27,7 @@ and attribution remain separate from application code.
 
 Attribution belongs in [THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md) naming MCDM Productions, the
 CC BY-SA 4.0 licence with its URL, the version string and the sha256. `FontLicense.txt` ships alongside
-the font. This font is the one sanctioned exception to the rule in [CLAUDE.md](../CLAUDE.md) against
+the font. This font is the one sanctioned exception to the rule in [AGENTS.md](../AGENTS.md) against
 copying game artwork into application assets, and it is sanctioned only because its own licence grants
 redistribution.
 
@@ -263,7 +263,7 @@ not claim to have fixed those consumers. Source-to-render coverage is the gate f
 
 ## 9. Recorded uncertainties
 
-Per [CLAUDE.md](../CLAUDE.md), these are recorded rather than defaulted.
+Per [AGENTS.md](../AGENTS.md), these are recorded rather than defaulted.
 
 1. **Tier end-cap alternates.** Nine codepoints (`¼ Á á ½ É é ¾ Í í`) duplicate the three tier pills with
    different end caps. Neither chart distinguishes them and the books use `!` `@` `#`. Proposal: ignore

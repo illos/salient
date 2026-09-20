@@ -204,7 +204,7 @@ engineering choices and carry working flows through persistence and verification
 an unresolved product decision materially affects the work. Keep progressing on independent work while a
 rules or combat question is being resolved in the dedicated thread.
 
-Start with [project instructions](../agent.MD) and [`CLAUDE.md`](../CLAUDE.md), the [v0.01 scope](pre-alpha-design-gaps.md),
+Start with [project instructions](../AGENTS.md) and [`AGENTS.md`](../AGENTS.md), the [v0.01 scope](pre-alpha-design-gaps.md),
 [tech stack](v1-tech-stack-spec.md), [accounts/access](accounts-and-access-spec.md),
 [table](table-spec.md), [character wizard](character-wizard-spec.md), and
 [data architecture](data-architecture-spec.md). The [V1 index](v1-spec-checkpoint.md) locates fuller-product

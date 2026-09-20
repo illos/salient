@@ -1,502 +1,103 @@
 # Build status
 
-Single tracker for every slice. Update your row when you claim, block, hand off or complete. Status
-values: `Not started`, `In progress`, `Blocked (Q-id)`, `In review`, `Committed`, `Outline` (V1 slice
-whose document is an outline until claimed).
-
-## Test execution queue
-
-All test jobs go to **TESTER**, Chords thread `46c30412-6e29-44dc-b30b-08ffe22bd0e3`, under
-[the testing process](../../testing-process.md). The coordinator maintains this queue before
-acknowledging submissions; implementers continue using their existing slice rows and work logs.
-One active job across all hosts, including setup/build/cleanup. On resume, reconcile any running
-row with actual processes before dispatch. Keep terminal evidence in the slice work log and prune
-completed rows only after the requester has the result through a direct `wake: true` Chords return.
-
-Updated 2026-09-20 20:14 UTC: V89 repaired the stale fixture; full 358 engine + 575 app/scripts PASS.
-V85/V86/V88/V89 are integrated on main `4f3fe13`, certified through bounded identity checks.
-Release `a0a700a` adds the independently reviewed hosted-build heap repair; hosted build and
-Convex backend publication passed. Fresh-session content refresh passed (1151 entries) and frontend
-Worker `0336f2f4-1141-4d95-8bc6-d2cec63f8797` is published. Targeted TESTER live certification passed
-(manifest/foes, two character cohorts, real-dice V88 application/save cleanup). The
-[DEPLOY ledger](../../deploy.md) records release and GitHub closeout identity.
-Historical combined candidate `a0c9584` failed one stale V88 audit-baseline assertion (358 engine pass; app/scripts 576/577).
-The prior combined `55c835a` report regeneration passed with exact 13 compiled / 1,259 compatibility / 2 unavailable output.
-V88 repaired integration candidate `4fd12a3` passed metadata/tree-identity closeout against the fully tested `35890b4`; no full check, stack or browser ran.
-The prior candidate `35890b4` passed all source and behavioral gates but failed merge metadata because rebased code commit `be4b419` lacked `Reviewed-By:`.
-Final V88 seeded-inventory documentation/metadata closeout `8d43dfb` passed locally against the previously tested `21ec7ca` bytes; no runtime or browser ran.
-Repaired V88 seeded-inventory candidate `21ec7ca` passed local and real-headless gates; all job services are stopped with data retained.
-V88 fixture repair `1af9c75` passed its focused and full local gates
-and its result wake was accepted. The superseded `c220cbc` focused failure remains preserved below.
-Shared-main V87/V02 live proof passed against the verified `4d6d299` CT114 deployment and its result wake was accepted. Repaired V88 `a07dd27` passed and its result wake was accepted;
-its two runtime jobs were cancelled before setup and await new reviewed candidate jobs. The rebased V87 pre-merge integration check passed and its result wake
-was accepted. All five bounded V85/V86 hosted cohorts previously passed and their result wake was
-accepted by WIZARD.2. V75's direct return remains retained because its settled requester rejected delivery.
-V85/V86's prior aggregate run remains a retained 30/35 failure.
-The [adoption and cleanup record](audits/2026-09-20-testing-coordinator-adoption.md) records the
-initial host inventory and user-authorized retirement of old development servers.
-
-| Job / Chords message | Requester | Exact source / checks and inputs | State / host / target | Result / evidence |
-| --- | --- | --- | --- | --- |
-| `test-hosted-a0a700a-live-deploy2` / 1064 | DEPLOY2 `80f94764-5a63-430c-9548-6d8583052803` | published `a0a700a`, Worker `0336f2f4`; manifest/foe persistence, two character cohorts, real-dice V88 proof | **Passed**: hosted public CLI/API; 1151 entries, 438 foes, character cohorts and source-linked condition/save cleanup | [Certificate](evidence/V85/tester-job-a0a700a-hosted-live.md); terminal return 1085, wake accepted; private raw artifacts retained |
-| `test-v85-v88-full-integrated-a0c9584` / 1013 | DEPLOY `bc6847ae-0334-4282-ae3c-6ec7291a509c` | frozen `a0c958451f2c525a50d40756610f188e893312af`, `.worktrees/deploy-v85-v88`; merge metadata, focused V85/V86/V88 suites, full `CI=true pnpm check`, deterministic report hashes, combined preservation and non-publishing Convex schema/bundle check | **Failed**: focused checks and Convex dry run pass; full engine 358/358, app/scripts 576/577; V88 audit fixture omits 37 valid V85 complication IDs | [Evidence](evidence/V85/tester-job-a0c9584-integrated.md); artifacts: `/srv/presidium/projects/salient/test-artifacts/V85-V88-a0c9584-full-integrated-20260920T172800Z`; direct result 1016, wake accepted |
-| `test-v85-v88-report-regenerate-55c835a` / 1008 | DEPLOY `bc6847ae-0334-4282-ae3c-6ec7291a509c` | frozen `55c835ab41034559e3f752b4043fca65c5618900`, `.worktrees/deploy-v85-v88`; deterministic V72 support report regenerated twice in isolated outputs for combined 1,151-entry/438-stat-block corpus | **Passed**: byte-reproducible; 13 compiled / 1,259 compatibility / 2 unavailable; +37 reachable manual complication grants; frozen source clean | [Evidence](evidence/V85/tester-job-55c835a-support-report.md); artifacts: `/srv/presidium/projects/salient/test-artifacts/V85-V88-55c835a-support-report-20260920T172300Z`; direct result 1010, wake accepted |
-| `test-V88-4fd12a3-integrated-metadata-2` / 997 | DEPLOY `bc6847ae-0334-4282-ae3c-6ec7291a509c` | frozen `4fd12a3bc4dccda7657e1d7fbf8e13661c9bda81`, `.worktrees/deploy-v88`; identity to tested `35890b4` and reviewed `8d43dfb`, repaired `12fac42` review trailer, merge metadata, links and hygiene | **Passed**: runtime/test/helper/report identity, authentic trailer, eleven-commit metadata, 383-file links, hygiene and tree `ef60179` | [Evidence](evidence/V88/tester-job-4fd12a3-integrated-metadata.md); artifacts: `/srv/presidium/projects/salient/test-artifacts/V88-4fd12a3-integrated-metadata-20260920T171100Z`; direct result 999, wake accepted |
-| `test-V88-35890b4-integrated-1` / 993 | DEPLOY `bc6847ae-0334-4282-ae3c-6ec7291a509c` | frozen `35890b4c0d1f250c0cd84a14cb38dcefed501c3c`, `.worktrees/deploy-v88`; executable identity to reviewed `8d43dfb`, focused potency/report checks, `CI=true pnpm check`, inventory/reseed assertions and integration metadata/hygiene | **Failed**: source identity, focused 6/6 + 3/3 and full 352 + 571 pass; merge metadata rejects `be4b419` missing `Reviewed-By:` | [Evidence](evidence/V88/tester-job-35890b4-integrated.md); artifacts: `/srv/presidium/projects/salient/test-artifacts/V88-35890b4-integrated-20260920T170200Z`; direct result 995, wake accepted |
-| `test-V88-8d43dfb-14-seeded-closeout` / 983 | ENGINE `2b1ba081-4040-4665-9ea2-22364db707f4`; copy ENGINE2 `3498baf0-e8d9-442b-a704-f24f7e595b30` | frozen `8d43dfb63230b3783cf559b259e29c331ca7fb87`, `.worktrees/engine-potency-seeded`; non-doc identity to tested `21ec7ca`, review verdicts, links, merge-range trailers, diff hygiene and submitted tree/cleanliness | **Passed**: docs-only identity, 381-file link check, three-commit metadata, diff hygiene and tree `a28cff7`; no stack/deploy/browser | [Evidence](evidence/V88/tester-job-8d43dfb-seeded-closeout.md); artifacts: `/srv/presidium/projects/salient/test-artifacts/V88-8d43dfb-seeded-closeout-20260920T165800Z`; direct result 985, wake accepted |
-| `test-V88-21ec7ca-13-seeded-headless` / 972 | ENGINE `2b1ba081-4040-4665-9ea2-22364db707f4`; copy ENGINE2 `3498baf0-e8d9-442b-a704-f24f7e595b30` | dependent on job 12 pass; frozen `21ec7cadcdc4a7abe04d5116cdad4d3bcd6f8b3c`; guarded seeded helper plus real public V88 runner against exact 1151-row corpus | **Passed**: 91 readback groups/247.6 s; helper 10/10; backend/helper stopped, data retained | [Evidence](evidence/V88/tester-job-21ec7ca-seeded-headless.md); artifacts: `/srv/presidium/projects/salient/test-artifacts/V88-21ec7ca-seeded-headless-20260920T164300Z`; direct result 979, wake accepted |
-| `test-V88-21ec7ca-12-seeded-repair` / 971 | ENGINE `2b1ba081-4040-4665-9ea2-22364db707f4`; copy ENGINE2 `3498baf0-e8d9-442b-a704-f24f7e595b30` | frozen `21ec7cadcdc4a7abe04d5116cdad4d3bcd6f8b3c`, `.worktrees/engine-potency-seeded`; focused potency/report files then `CI=true pnpm check` | **Passed**: focused 6/6 + 3/3; full 352 engine + 571 app/scripts, content/report/build gates | [Evidence](evidence/V88/tester-job-21ec7ca-seeded-repair.md); artifacts: `/srv/presidium/projects/salient/test-artifacts/V88-21ec7ca-seeded-20260920T163600Z`; direct result 975, wake accepted |
-| `test-V88-498778e-11-seeded-headless` / 965 | ENGINE `2b1ba081-4040-4665-9ea2-22364db707f4`; copy ENGINE2 `3498baf0-e8d9-442b-a704-f24f7e595b30` | dependent on job 10 pass; same frozen `498778eb3ae788b3badc28b90bd6f8f4eb07827a`; guarded seeded helper plus real public V88 runner against exact 1151-row corpus | **Cancelled before setup** by replacement job 13 / message 972 | no attempt artifacts or environment change |
-| `test-V88-498778e-10-seeded-gates` / 963 | ENGINE `2b1ba081-4040-4665-9ea2-22364db707f4`; copy ENGINE2 `3498baf0-e8d9-442b-a704-f24f7e595b30` | frozen `498778eb3ae788b3badc28b90bd6f8f4eb07827a`, `.worktrees/engine-potency-seeded`, exact integration base `c721d0b`; focused potency/report files then `CI=true pnpm check` | **Failed**: first focused file 5/6; Eye Flash equality produced `fact-needed` instead of `resisted`; later gates not started | [Evidence](evidence/V88/tester-job-498778e-seeded-gates.md); artifacts: `/srv/presidium/projects/salient/test-artifacts/V88-498778e-seeded-20260920T163200Z`; direct result 968, wake accepted |
-| `test-V88-eefc7cc-9-closeout` / 928 | ENGINE `2b1ba081-4040-4665-9ea2-22364db707f4`; copy ENGINE2 `3498baf0-e8d9-442b-a704-f24f7e595b30` | frozen `eefc7cc2c27af8cfb13e9c9ed2b06dcd3b8e331e`, `.worktrees/engine-potency`; non-doc identity, links, merge-range trailers and diff hygiene only | **Passed**: non-doc identity, 367-file link check, five-commit merge metadata, diff hygiene and submitted tree hash | [Evidence](evidence/V88/tester-job-eefc7cc-closeout.md); artifacts: `/srv/presidium/projects/salient/test-artifacts/V88-eefc7cc-closeout-20260920T161400Z`; direct result 938, wake accepted |
-| `test-V88-1af9c75-7-headless` / 915 | ENGINE `2b1ba081-4040-4665-9ea2-22364db707f4`; copy ENGINE2 `3498baf0-e8d9-442b-a704-f24f7e595b30` | frozen `1af9c7509400d493d690851e4d3e5b0f6ecad30a`, `.worktrees/engine-potency`; isolated real BetterAuth/API V88 runner with exact app source/URL guard and committed 595-entry seed | **Passed**: 25 readback groups in 51.3 s against job-owned local anonymous Convex; backend stopped, data retained | [Evidence](evidence/V88/tester-job-1af9c75-headless.md); artifacts: `/srv/presidium/projects/salient/test-artifacts/V88-1af9c75-headless-20260920T155700Z`; direct result 920, wake accepted |
-| `test-V88-1af9c75-8-v72-regressions` / 916 | ENGINE `2b1ba081-4040-4665-9ea2-22364db707f4`; copy ENGINE2 `3498baf0-e8d9-442b-a704-f24f7e595b30` | frozen `1af9c7509400d493d690851e4d3e5b0f6ecad30a`; retained `engine-live` exact detached snapshot; V72 main runner then adapted runner with dice helper | **Passed**: unchanged main 14 groups/15.6 s; adapted 46 groups/180.7 s; named environment stopped, data retained | [Evidence](evidence/V88/tester-job-1af9c75-v72-regressions.md); artifacts: `/srv/presidium/projects/salient/test-artifacts/V88-1af9c75-v72-20260920T160100Z`; direct result 924, wake accepted |
-| `test-V88-1af9c75-6-alias-fixture` / 908 | ENGINE `2b1ba081-4040-4665-9ea2-22364db707f4`; copy ENGINE2 `3498baf0-e8d9-442b-a704-f24f7e595b30` | frozen `1af9c7509400d493d690851e4d3e5b0f6ecad30a`; fixture-only alias-aware Wode redo repair, focused file then `CI=true pnpm check` covering retained `c220cbc` production logging change | **Passed**: focused 2/2; full check 352 engine + 563 app/scripts, content/report gates and build; no stack, deployment, upload or browser | [Evidence](evidence/V88/tester-job-1af9c75.md); artifacts: `/srv/presidium/projects/salient/test-artifacts/V88-1af9c75-20260920T154801Z`; direct result 913, wake accepted; quiet ENGINE2 copy 914 |
-| `test-V88-c220cbc-5-review-repair` / 902 | ENGINE `2b1ba081-4040-4665-9ea2-22364db707f4`; copy ENGINE2 `3498baf0-e8d9-442b-a704-f24f7e595b30` | frozen `c220cbc7ee3e20b9b96ac12ca3681c398a4bdc27`; combat-end source-linked unscheduling log plus Wode correction/undo/redo fixtures; focused four-file gate then `CI=true pnpm check` | **Failed**: focused 27/28; Wode redo restores behavior but regenerates the clock-registration storage ID by documented history design; full check not started | [Evidence](evidence/V88/tester-job-c220cbc.md); artifacts: `/srv/presidium/projects/salient/test-artifacts/V88-c220cbc-20260920T154526Z`; direct result 906, wake accepted; quiet ENGINE2 copy 907 |
-| `test-V88-a07dd27-4-v72-regressions` / 894 | ENGINE `2b1ba081-4040-4665-9ea2-22364db707f4`; copy ENGINE2 `3498baf0-e8d9-442b-a704-f24f7e595b30` | frozen `a07dd279cb5dc98f92d231d4c9fae52812a7a7f7`; named `engine-live` V72 main and adapted runners with dice helper | **Cancelled before setup** by ENGINE message 897; superseded by required implementation-review fix | no execution, artifacts or environment change; consolidated direct cancellation 899, wake accepted |
-| `test-V88-a07dd27-3-headless` / 890 | ENGINE `2b1ba081-4040-4665-9ea2-22364db707f4`; copy ENGINE2 `3498baf0-e8d9-442b-a704-f24f7e595b30` | frozen `a07dd279cb5dc98f92d231d4c9fae52812a7a7f7`; isolated real BetterAuth/API V88 runner with exact app source/URL guard, committed content seed and retained disposable data | **Cancelled before setup** by ENGINE message 897; superseded by required implementation-review fix | no execution, artifacts or environment change; consolidated direct cancellation 899, wake accepted |
-| `test-V87-main-4d6d299-live-1` / 887 | FOES2 `f8589dc3-76c4-4527-8d87-b4c9d13fd9d8` | deployed main `4d6d299`; shared CT114 V02 9-scenario runner plus bounded authenticated content/foe readback against reseeded 1151-entry app | **Passed**: V02 9/9; authenticated 1151-entry/438-stat-block/source/name/ability readback passed on attempt 2; no deploy/upload/build | [Evidence](evidence/V87/tester-job-main-4d6d299-live.md); artifacts: `/srv/presidium/projects/salient/test-artifacts/V87-main-4d6d299-20260920T154031Z`; direct result 901, wake accepted |
-| `test-V88-a07dd27-2` / 883 | ENGINE `2b1ba081-4040-4665-9ea2-22364db707f4`; copy ENGINE2 `3498baf0-e8d9-442b-a704-f24f7e595b30` | `a07dd279cb5dc98f92d231d4c9fae52812a7a7f7`, `.worktrees/engine-potency`; focused four-file repair gate then `CI=true pnpm check`; prior audit freshness retained because grammar/report are unchanged | **Passed**: focused 34/34; full check 352 engine + 562 app/scripts, content/report gates and build; no stack, deployment, upload or browser | [Evidence](evidence/V88/tester-job-a07dd27.md); artifacts: `/srv/presidium/projects/salient/test-artifacts/V88-a07dd27-20260920T153434Z`; direct result 888, wake accepted; quiet ENGINE2 copy 889 |
-| `test-V88-ac95cc3-1` / 876 | ENGINE `2b1ba081-4040-4665-9ea2-22364db707f4`; copy ENGINE2 `3498baf0-e8d9-442b-a704-f24f7e595b30` | `ac95cc36959b52549be7d4824dc9ab8f1878d39e`, `.worktrees/engine-potency`; two focused serial suites, full `pnpm check`, then twice-generated coverage-audit byte comparison against the committed report | **Failed**: focused 88/88 + 34/34 and audit freshness pass; full check has three app assertion failures after 352 engine passes; no stack, deployment, upload or browser | [Evidence](evidence/V88/tester-job-ac95cc3.md); artifacts: `/srv/presidium/projects/salient/test-artifacts/V88-ac95cc3-20260920T152656Z`; direct result 880, wake accepted; quiet ENGINE2 copy 881 |
-| `test-V75-2c7cfe2-1` / 816 | UI `b2d5e5ec-76c4-4527-8d87-b4c9d13fd9d8` | `2c7cfe29b457c7049d78461cc6f5063a20e4329c`, `.worktrees/quiet-theme`; `CI=true pnpm check`, then optional user-requested pop-up capture | **Passed**: local pure gate; no stack or browser process started | [Evidence](evidence/V75/tester-job-2c7cfe2.md); artifacts: `/srv/presidium/projects/salient/test-artifacts/V75-2c7cfe2-20260920T1458Z`; return rejected because requester settled, retry retained |
-| `test-V87-104f4b0-1` / 830 | FOES1 `7fa5ae52-8819-4a86-8309-78d59a6b93a1` | `104f4b087c58a6c1451d66c57f6e0eb1a101dba3`, `.worktrees/foes-seeding`; two invalid test/runner command IDs replaced with UUIDs, runtime unchanged | **Passed**: focused 30/30, full check, isolated local Convex proof; backend stopped, data retained | [Evidence](evidence/V87/tester-job-104f4b0.md); artifacts: `/srv/presidium/projects/salient/test-artifacts/V87-104f4b0-20260920T1504Z`; direct return 856, wake accepted |
-| `test-V85-V86-331a5b9-4` / 832 | WIZARD.2 `f8b014d3-c9a7-4e97-828d-da1e5773e53c` (transferred by WIZARD message 843) | runner `331a5b913b392f648c3281fa4c79bf7544892010`, deployed app `86e9d2ed3b82a5d027f631f677975f040439f472`; focused runner checks and five serial hosted cohorts | **Passed**: runner gates and five one-scenario hosted cohorts; no redeploy/build/upload | [Evidence](evidence/V85/tester-job-331a5b9.md); artifacts: `/srv/presidium/projects/salient/test-artifacts/V85-V86-331a5b9-20260920T1513Z`; direct return 866, wake accepted |
-| `test-V87-e092215-1` / 863 | FOES2 `f8589dc3-76c4-4527-8d87-b4c9d13fd9d8` | `e09221580995275f66c29b4f4cfec1e09453d6a7`, `.worktrees/foes-seeding`; reviewed V87 tree rebased onto `46f171e`; focused integrated set then `CI=true pnpm check` | **Passed**: focused 47/47 and full integrated gate; local pure checks only | [Evidence](evidence/V87/tester-job-e092215.md); artifacts: `/srv/presidium/projects/salient/test-artifacts/V87-e092215-20260920T1519Z`; direct return 875, wake accepted |
-| `test-V87-4d8c127-1` / 808 | FOES1 `7fa5ae52-8819-4a86-8309-78d59a6b93a1` | `4d8c127d840379f69cd6deac99e6be2ed0770989`, `.worktrees/foes-seeding`; focused foe/content tests, `pnpm check`, retained isolated local Convex proof | **Blocked**: focused suite 29/30; invalid ``load-${entry.id}`` command ID prevents new persisted-name case from reaching behavior | [Evidence](evidence/V87/tester-job-4d8c127.md); artifacts: `/srv/presidium/projects/salient/test-artifacts/V87-4d8c127-20260920T1452Z`; no backend started; direct return 828, wake accepted |
-| `test-V85-V86-86e9d2e-3` / 803 | WIZARD `a45eccaa-2dd6-4bb8-ae39-e3a217d1aeb1` | `86e9d2ed3b82a5d027f631f677975f040439f472`, `.worktrees/supporting-actions`; supersedes [TS1543 blocker](evidence/V85/tester-job-b08ebcd.md) | **Blocked**: local gates and dev deployments passed; hosted API proof 30/35, shared runner deadline before V85/V86 cases | [Evidence](evidence/V85/tester-job-86e9d2e.md); artifacts: `/srv/presidium/projects/salient/test-artifacts/V85-V86-86e9d2e-20260920T1433Z`; direct return 811, wake accepted |
-
-## Post-v0.01 organization — 2026-09-15
-
-The [five-track roadmap](../v1-roadmap.md) and [track kickoff](../kickoff-development-track.md)
-govern new work after the recorded A09 acceptance. Tracks are parser/rules engine, foe coverage,
-characters, UI/polish, and app/social features; this file remains the single slice status tracker.
-Record each claimed slice's primary track, owner, worktree/branch and development/test target in its
-work log. Use isolated worktrees and short-lived slice branches under the
-[build policy](README.md#branch-and-merge-policy). No track branches, environments or new feature
-implementations are claimed merely by recording this plan.
-
-Existing V outlines can be split into smaller assignments when their scope/dependencies are recorded.
-Track organization does not change the implementation/review states below; verify current Git and
-evidence when claiming work rather than treating historical handoff notes as current gates.
-
-## Active parser/engine ownership — 2026-09-20
-
-Update 2026-09-20 (later): the Fable engine lead is now the **ENGINE2** thread
-(Chords `3498baf0-e8d9-442b-a704-f24f7e595b30`), replacing the settled ENGINE F5.1 thread. V63, V64,
-V67 and V72 are merged and live on shared main. The next engine slice is
-[V88](V88-compiled-potency-conditions.md), assigned to the Astra ENGINE thread
-(`2b1ba081-4040-4665-9ea2-22364db707f4`); Fable verifies and integrates. The paragraphs below are the
-historical V63 record.
-
-Fable's engine/parser thread owns integration. Codex's V63 branch
-`slice/V63-corrections-rebase` in `.worktrees/engine-corrections` repairs the V43 indexed-read
-mismatch after rebasing the original prerequisites onto main `5956331`.
-
-**Fresh post-rebase full check and authenticated CLI proof pass on `47e69c6`.** The user resumed
-non-browser testing; 705 tests and all check/build gates pass, plus the complete 12-record CLI
-correction lifecycle. Independent final review is in progress. Browser coverage is deferred under
-the moratorium with visual scenarios in the backlog, not an acceptance blocker. Named CT114
-engine-corrections is stopped with data retained; Fable owns integration.
-See [fresh evidence](evidence/V26/corrections-2026-09-20/README.md).
-
-V26 specification and the source-to-screenshot evidence policy are merged into main. The
-[2026-09-16 prerequisite evidence](evidence/V26/corrections-2026-09-16/README.md) passed all ten
-abilities on its recorded revision; it is historical evidence, not validation of current main.
-Compiler definitions, typed occurrences and calculated push allowances remain pending.
-
-### Historical assessment and specification checkpoints
-
-V22 assessment `9d50b47` remains historical and unmerged on `slice/V22`; it is not an active
-implementation dependency or a competing track assignment. Its proposed Ferocity work did not
-supersede the subsequently accepted V26 compiled damage/push specification. V26's original
-specification branch was integrated as `3689226`, with integration record `8ef8b5e`.
-
-Every engine ability still requires source-backed design followed by actual rendered-app
-source/log screenshots and persisted readback. Designed, built and playtested states remain
-separate. The [historical baseline](evidence/V26/baseline-2026-09-16/README.md) and subsequent
-correction evidence stay intact. Current verification and any later main/runtime integration
-must be separately recorded; this branch has performed neither.
-
-## Dependency graph
-
-### Character track assessment — 2026-09-15
-
-| Id | Slice | Depends on | Status | Owner |
-| --- | --- | --- | --- | --- |
-| V82 | [Remaining level-one ancestries](V82-remaining-ancestries.md) | Main 589d357 | Complete — main `1fa8aac`; both apps API28/28, Forge137 accepted | WIZARD, slice/V82 |
-| V83 | [Core perk and ordinary kit action coverage](V83-supporting-actions.md) | V37, V74, V82 | Delivered — `175d17d` merged/live; 31/31 shared API passed | Astra character lead |
-| V84 | [Culture presets](V84-culture-presets.md) | V37, V83 | Delivered — 27 presets plus Bespoke; `175d17d` merged/live | Astra character lead |
-| V85 | [Complication grants and dependencies](V85-complications.md) | V37, V83 | Merged `4f3fe13`, published `a0a700a`; 358 + 575 integrated checks pass; prior 35 distinct API scenarios pass across retained runs; current hosted complication-table cohort passed | Astra character lead |
-| V86 | [Starting reward fulfillment](V86-starting-rewards.md) | V37, V85 | Merged `4f3fe13`, published `a0a700a`; current hosted starting-rewards cohort passed; targeted live certification passed; DEPLOY2 owns GitHub closeout | Astra character lead |
-| V76 | [Dragon Knight level one](V76-dragon-knight-level-one.md) | V82 integration | Complete via V82 — checks, reviews, public API and Forge proof | Astra character worker |
-| V77 | [High Elf level one](V77-high-elf-level-one.md) | V82 integration | Complete via V82 — checks, reviews, public API and Forge proof | Astra character worker |
-| V78 | [Memonek level one](V78-memonek-level-one.md) | V82 integration | Complete via V82 — checks, reviews, public API and Forge proof | Astra character worker |
-| V79 | [Revenant level one](V79-revenant-level-one.md) | V82 integration | Complete via V82 — checks, reviews, public API and Forge proof | Astra character worker |
-| V80 | [Time Raider level one](V80-time-raider-level-one.md) | V82 integration | Complete via V82 — checks, reviews, public API and Forge proof | Astra character worker |
-| V81 | [Wode Elf level one](V81-wode-elf-level-one.md) | V82 integration | Complete via V82 — checks, reviews, public API and Forge proof | Astra character worker |
-| V74 | [Trait-granted abilities and active Dwarf runes](V74-trait-granted-abilities.md) | V69/V73 candidate | Complete — merged/live b73cb8d; 791 checks, hosted and shared-main API 27/27, Forge 31/31 | WIZARD, slice/V74 |
-| V73 | [Headless Forge character counterparts](V73-forge-headless-counterparts.md) | V69 verified candidate | Verified — calibration and 31/31 saved API comparisons pass after V74 grants; historical seven failures retained | WIZARD, slice/V73 |
-| V24 | [Character wizard assessment and delivery proposal](V24-character-wizard-assessment.md) | A09; assesses A02/V21 | Assessment complete; V25 implementation verified | Codex, character wizard thread |
-| V25 | [Shared Fury/Bethell wizard](V25-two-class-wizard.md) | A09, R01–R03, S01, A01; V24 docs | Merged and live verified — `4cb3f1f`, closeout `a3a144f`; 433 tests, both character journeys and table audit pass | Codex character team |
-| V32 | [Fury advancement and restorable history](V32-fury-progression-history.md) | V25, A09, V29 | Merged and live verified — `73b7ab4`, integration `ea831d6`; 466 tests and isolated/shared character journeys pass | Codex character team |
-| V37 | [Supporting character choices](V37-supporting-character-choices.md) | V25, V32 | Complete — merged/live 6eeaf5b; 648 checks, five isolated and four shared browser journeys | Codex character team |
-
-V25 implementation is merged into main; shared frontend 5180/backend 3212/site 3213 now have
-the reviewed backend and matching 467-entry content. Creation, persistence, review, sourced sheets
-and table regression checks pass with existing play data preserved. The live closeout includes
-a reviewed CLI diagnostic-output repair and manifest-based table audit; see
-[V25 live evidence](evidence/V25-live/README.md). The original `slice/V25` branch is retired.
-
-V24 lives on `slice/V24` in `/srv/presidium/projects/salient/characters`, based on `e83930e`.
-Assessment only; no backend/runtime changes. The user reaffirmed Forge Steel as a working structural
-reference and both import/export as planned features. Q-CHAR-14 confirms all eleven classes in
-the wizard track from the outset, with shared class knowledge for parser/engine/UI consumers. V08
-remains the broader implementation outline; table support has separate milestones.
-
-```
-S00 process tooling ─────────────────────────────────────────────┐
-S01 content pipeline ──┬──> R01 Fury decisions ──> R02 derived ──> R03 live state ──┐
-                       │                                                            ├──> A02 wizard + sheet
-S02 data contracts ────┼──> A01 shared operations + engine integration ─────────────┤
-                       │        │                                                   │
-R04 roll/damage ───────┤        ├──> A03 table shell + FreePlay ──> A04 opening/turns/clock ──> A05 attacks/damage/costs
-R05 conditions/clock ──┘        │                                        │                          │
-                                └──> A06 history/undo ◄──────────────────┴──────────────────────────┤
-                                                                                                    ├──> A07 closeout/void
-A08 design tokens (independent) ────────────────────────────────────────────────────────────────────┤
-                                                                                                    └──> A09 v0.01 acceptance ──> V-slices
-```
-
-## v0.01 slices
-
-| Id | Slice | Family | Depends on | Rules review | Status | Team | Updated | Commits |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| S00 | [Process tooling, CI, lint, commit checker](S00-process-tooling.md) | S | None | not required | Committed (GitHub CI passed; historical format boundary repaired) | lead/S00-impl | 2026-09-14 | d5b2765, d67e5bd, c9114b6, 2b3f6db, 5b864dc, 1e0bb50, 3d3bcb6 |
-| S01 | [Content pipeline from the pinned Compendium](S01-content-pipeline.md) | S | None | required | Committed (audit fixes independently reviewed; extraction and live reseed passed) | lead/S01-impl | 2026-09-14 | 2023d41, 79a6d86, a73ac74, 7844def, 7b86b8a |
-| S02 | [Data contracts: encounter, events, journal, dice](S02-data-contracts.md) | S | None | not required | Committed (history/identity fixes independently reviewed; persisted-state and real reset checks passed) | lead/S02-impl | 2026-09-14 | bfd7485, 97a555b, 00958e3, e106a7d, 7b86b8a |
-| R01 | [Level-one devil Fury decision table](R01-fury-decision-table.md) | R | S01 (soft) | required | Committed (independent source review passed; latest creation rulings applied) | rules/R01-research | 2026-09-15 | 2fe311b |
-| R02 | [Derived values and evaluator contract](R02-derived-values-evaluator.md) | R | R01 | required | Committed (independent source/evaluator review passed; current character rulings applied) | rules/R02-research | 2026-09-15 | be11576 |
-| R03 | [Live-state initialization and engine projection](R03-live-state-initialization.md) | R | R02 | required | Committed (independent initialization/projection review passed; first-admission scope verified) | rules/R03-research | 2026-09-15 | 51a1536, 7b86b8a |
-| R04 | [Roll and damage resolution contract](R04-roll-and-damage-resolution.md) | R | None | required | Committed | rules/R04-research | 2026-09-14 | a0cc457 |
-| R05 | [Conditions, clock and Malice common lifecycle](R05-conditions-clock-malice.md) | R | None | required | Committed | rules/R05-research | 2026-09-14 | a3f9e93 |
-| A01 | [Shared operations, command registry and engine integration](A01-shared-operations-engine.md) | A | S02, S00 (soft) | not required | Committed (audit fixes independently reviewed; browser/live CLI and retry checks passed) | app/A01-impl | 2026-09-14 | fdb3e7d, 7849251, ebeac11, 7bcf86d, 7b86b8a |
-| A02 | [Minimal wizard, admission review and character sheet](A02-wizard-and-character-sheet.md) | A | R01, R02, R03, S01, A01 | required | Committed (independent rules/code and browser pass; Q-CHAR-2/10/11 applied) | audit coordinator + independent reviewers | 2026-09-15 | 2899c6b, 97f764a, c248bb4, 12f9c4c, d527168, 1ea22d4, eb01ea5 |
-| A03 | [Table shell and FreePlay basics](A03-table-shell-freeplay.md) | A | A01, S01 | required | Committed (independent rules/code and three-context browser pass; Q-A-200 bridge retired) | app/A03-impl | 2026-09-15 | ae9d45a, dc9fbc8, 1dce91b, 7b86b8a |
-| A04 | [Combat opening, turns and clock](A04-combat-opening-turns-clock.md) | A | A03, R05 | required | Committed (independent rules/code and live opening/turn/clock checks passed) | audit coordinator + independent reviewers | 2026-09-15 | de64428, a5cf2fc, 0f4af9e |
-| A05 | [Attacks, damage, costs and common actions](A05-attacks-damage-costs.md) | A | A04, R04 | required | Committed (independent rules/code, persisted costs/corrections and browser passed) | audit coordinator + independent reviewers | 2026-09-15 | 6931ba9, 6cf5cb1, edd4a19, 64ea02f, cc8b938 |
-| A06 | [History: undo, redo and corrections](A06-history-undo-corrections.md) | A | A04 (A05 for correction cards) | required | Committed (independent history review, persisted restoration and live Undo/Redo passed) | audit coordinator + independent reviewers | 2026-09-15 | 1e88600, 6a91b04, 855ba1d |
-| A07 | [Closeout and Void](A07-closeout-and-void.md) | A | A05, A06 | required | Committed (independent rules/code, closeout/Void and three-role browser passed) | codex-build / a07_backend + a07_ui | 2026-09-15 | this acceptance commit |
-| A08 | [Design tokens and theme migration](A08-design-tokens-theme.md) | A | None | not required | Committed (independent desktop visual review and all theme/browser checks passed) | app/A08-impl | 2026-09-15 | 283bb09, 8c273ff, 7b86b8a |
-| A09 | [v0.01 acceptance walkthrough](A09-v001-acceptance.md) | A | A02, A05, A06, A07 | required | Committed (all Required coverage verified; 392 tests, 8 browser tests and visual/source reviews passed) | audit coordinator + independent reviewers | 2026-09-15 | this acceptance commit |
-
-## Audit follow-up
-
-**Question walkthrough complete, 2026-09-15:** All 13 reviewed questions have a source resolution,
-user decision or explicit deferral. The [deferred queue](../rules-questions-for-user.md#deferred-questions)
-retains Q-CHAR-7/9/13 until after the narrow playtest. They are not implementation gates for v0.01;
-their underlying recommendations remain undecided. This closes the questionnaire batch, not build
-verification or all later design work.
-
-The [2026-09-15 integrated acceptance record](evidence/v001-acceptance.md) consolidates the
-remaining implementation repairs, fresh independent rules/code reviews, live backend and browser
-verification, and visual evidence. Its scope is the confirmed prototype; V1 slices remain deferred.
-
-The [remaining-question research](../research/remaining-character-questions-review.md) checked
-all then-open cases against pinned rules and existing specs. The separate rules thread has since
-answered additional questions; use the [live queue](../rules-questions-for-user.md), not historical
-open-question counts. Potency labels and the Q-CHAR-2 current-value policy are reconciled in the
-implementation. Q-A-400's warned departures and Q-A-200's evaluated-baseline replacement are repaired.
-The [September 14 question audit](audits/2026-09-14-question-queue-dedup.md) remains historical evidence.
-
-The [2026-09-14 coordinated audit](audits/2026-09-14-coordinated-audit.md) records independent
-verdicts, reproduced defects, local/backend/browser evidence and the ordered repair list.
-The [fix verification](audits/2026-09-14-fix-verification.md) closes the S01/S02/A01/A03 repair findings
-with fresh independent implementation/rules reviews and complete local checks. These bounded approvals
-do not settle the open rules questions or certify the unfinished v0.01 slices.
-S00 GitHub Actions passed on `3d3bcb6`: [hosted run](https://github.com/illos/salient/actions/runs/34905450764).
-See the [CI review and run record](audits/2026-09-14-ci-history-review.md) for the first-run failure and repair.
-
-## V1 slices (start after A09 is Committed)
-
-| Id | Slice | Depends on | Status |
-| --- | --- | --- | --- |
-| V01 | [Respite research and loop](V01-respite.md) | A09 | Outline |
-| V02 | [Minion squads and captains](V02-minions-and-captains.md) | A09 | Complete — merged and live 2026-09-20: main `c1b52cb`; independent implementation/rules reviews pass; integrated full check; shared CT114 main updated (595-entry content reseed, data retained) and the 9-step live squad journey passes on it |
-| V03 | [Boss and villain turn mechanics](V03-boss-turn-mechanics.md) | V02 | Outline |
-| V04 | [Persistent area cards and response reconciliation](V04-areas-and-response-reconciliation.md) | A09 | Outline |
-| V05 | [Ability parser and class/stat-block automation](V05-ability-automation.md) | A09, V04 | Outline |
-| V06 | [Monster catalog, saved encounters and party strength](V06-catalog-and-saved-encounters.md) | A09 | Outline |
-| V07 | [Inventory, loot and Director stash](V07-inventory-and-loot.md) | A09, V06 | Outline |
-| V08 | [Eleven-class editor, advancement and progression history](V08-classes-and-advancement.md) | A09 | Outline |
-| V09 | [Forge Steel import](V09-forge-steel-import.md) | V08 | Outline |
-| V10 | [Accounts: settings, password reset, friends, blocking, share codes, deletion](V10-accounts-social.md) | A09 | Outline |
-| V11 | [Character grants and delegated play](V11-character-grants.md) | V10 | Outline |
-| V12 | [Campaign chat](V12-campaign-chat.md) | A09 | Outline |
-| V13 | [Reference libraries: Rules, Foes, Items](V13-reference-libraries.md) | S01 | In progress — app-wide rule links (2026-09-15; rules wiki committed `dafcd8a`) |
-| V14 | [Foe hiding and Add-visibility](V14-foe-hiding.md) | A09 | Outline |
-| V15 | [Hero tokens](V15-hero-tokens.md) | A09 | Outline |
-| V16 | [3D dice presentation](V16-dice-presentation.md) | A09 | Outline |
-| V17 | [Mobile and tablet layouts, SSR decision](V17-mobile-layouts.md) | A08, A09 | Outline |
-| V18 | [Hosting: Cloudflare, Convex Cloud, LAN portability](V18-hosting.md) | A09 | Outline |
-| V19 | [Forced access changes and combat recovery](V19-forced-access-recovery.md) | V10 | Outline |
-| V20 | [Dynamic terrain objects](V20-dynamic-terrain.md) | V04 | Outline |
-| V21 | [Desktop layout fidelity](V21-desktop-layout-fidelity.md) | A08, A09, V13 | Built, not committed — 2026-09-15 (foundation + five parallel implementers, lead integration and repairs); lint, typecheck, 85 engine tests, 317 app tests, links, vendor, content and the full 20-test browser suite pass; screenshots under `.playtest/v21/` compared with each mockup; review deferred to the user's audit thread |
-| V26 | [Compiled ability effects: damage and push instructions](V26-compiled-ability-effects.md) | S01, S02, A01, A02, A04, A05, A06, A09 | Specification merged at `3689226`; compiler pending. Historical prerequisite branch passed ten proper-turn playtests on 2026-09-16, not merged. V63 indexed-read repair passes full check and live CLI; browser scenarios deferred to the moratorium backlog. |
-| V63 | [Rebase and reverify V26 correction prerequisites](V26-compiled-ability-effects.md#2026-09-20--v63-rebase-and-integration-audit) | V26 prerequisites, V43, V45 | Headless acceptance and independent implementation/rules reviews PASS — tested `47e69c6`, 705-test full check and authenticated CLI lifecycle. Committed on branch only; Fable owns integration. Browser deferred under moratorium. |
-| V64 | [Ability grammar coverage audit](V64-ability-coverage-audit.md) | V26 specification, S01, V35 | Merged — read-only audit script, report and tests integrated into main at `458b6e8`, 2026-09-20; independent review pass; no runtime impact (no backend, frontend or content change) | Engine and parser thread |
-| V66 | [Browser test harness repair](V66-browser-test-harness-repair.md) | S03, browser failure audit | Not started — registered 2026-09-20 at the user's direction; do not claim until the user starts it; ends the browser testing moratorium when implemented | Unassigned |
-| V67 | [Pure compiled ability definitions and outcomes](V67-compiled-effects-pure.md) | V26 design, R04, V64 | Merged — integrated into main 2026-09-20; pure compiler/outcome API and report only; 742-test full check, reproducible report CLI, unchanged V64 audit; independent implementation/rules reviews PASS; no live wiring, so no runtime update |
-| V68 | [Campaign home redesign](V68-campaign-home.md) | V21, V29, V31, V43, A09 | Merged and live — `3ca24e8` fast-forwarded into main 2026-09-20; independent review pass; integrated `pnpm check` exit 0 (284 engine, 466 app/scripts tests, build); shared CT114 main updated with data retained and the 8-step headless changed-feature check passing live | Campaign home UI thread (Fable) |
-| V72 | [Live compiled ability effects](V72-live-compiled-effects.md) | V26, V63, V67 | Complete — merged into main `dbfb61d` and live on shared CT114 main, 2026-09-20; integrated 843-test check, isolated proofs (46 + 14 records) and independent implementation/integration/rules reviews PASS; shared-main real-dice proof run `e31357a7` PASS (14 records), see [main evidence](evidence/V72/main-2026-09-20/README.md); six compiled live abilities, four compile-only; browser scenarios in the backlog |
-| V88 | [Compiled potency conditions with automatic save ends](V88-compiled-potency-conditions.md) | V26, V64, V67, V72, R05, V02, V87 (reachability) | Merged into local main at `e541283` after explicit reviewed owner handoff and TESTER's clean metadata repair closeout `4fd12a3`. Prior integrated gates passed focused 6+3, full 352 engine + 571 app/scripts, content/report/build, and 91 real headless groups; combined 13/1259/2 inventory, V87 reseed action and all four seeded proofs are retained. Backend/content/frontend `a0a700a` published; targeted live TESTER gate passed; DEPLOY2 owns GitHub closeout; browser deferred. | DEPLOY release owner; engine implementation complete |
-| V23 | [Foe source ingestion assessment](V23-foe-source-assessment.md) | S01, A09, Rules portion of V13 | Merged — source assessment and confirmed ingestion requirements integrated with V27, 2026-09-16 |
-| V27 | [Undead ingestion and independent feature access](V27-undead-ingestion.md) | S01, A09, Rules portion of V13, V23 docs | Merged and live — rebased implementation `6d47dc0`, test repair `e4590e9`; integrated at `f019e3a`, 2026-09-16; 432 tests, build, isolated and shared-app browser checks pass; public `/foes` verified on 5180 |
-| V29 | [Desktop layout feedback follow-ups](V29-desktop-feedback.md) | V21 | Merged — `7b80e56`, 2026-09-16; independent implementation review pass; integrated checks and the full 22-test browser suite pass; shared playable app on `5180` updated and the changed-feature journey verified live |
-| V31 | [History control placement correction](V31-history-control-placement.md) | V29 | Merged — `bd0c512`, 2026-09-16; user correction to V29 (only the Enable user undo toggle is a settings row; Rewind and Redo are a discreet icon pair beside the tabs); independent implementation review pass over three rounds; full 22-test browser suite passes; shared playable app on `5180` updated and the changed-feature journey verified live |
-
-| V30 | [Second-echelon undead ingestion](V30-second-echelon-undead.md) | V27 | Merged and live via V38 `40206a5`, 2026-09-17; reviewed V30 dependency `214d04b` included in full-catalog verification |
-
-## Build lead handoff — 2026-09-15
-
-The following chronological checkpoints are retained as history. The slice table and integrated
-acceptance record above carry the final disposition; intermediate failures below are not current gates.
-
-The user assigned Codex the remaining v0.01 implementation with sub-agent progress logging.
-A separate user thread owns independent audit and acceptance verification. Active A02–A06 repairs
-in this checkout belong to that audit thread; the build team does not overwrite them or claim
-review approval. The build team owns A07 backend, table UI and session-close integration, with
-source research and an A09 handoff of verification gaps. Integration uses disjoint files in the
-shared checkout so both threads see the current build; no deployment or merge is implied.
-
-- `a07_backend`: shared closeout/Void operations, persistence, focused operation tests and A07 log.
-- `a07_ui`: table closeout/Void cards, session-close choice, browser scenario and UI evidence.
-- `a02_repairs`: reassigned before edits to A07 source checks and A09 handoff after detecting
-  the audit thread's active character repairs.
-- Lead: schema/registry/session integration, local build checks, status and coordination.
-
-A09 remains unverified until its full persisted/browser/reconnect/performance evidence and
-independent implementation/rules verdicts are recorded. V1 slices remain outside this assignment.
-
-A07 integration touchpoints for the concurrent audit: `convex/encounterTables.ts`,
-`convex/encounters.ts`, `convex/lib/registry.ts`, `convex/sessions.ts` and the
-`abilityResolved` execution guard in `convex/lib/abilityOperations.ts`. The latter permits
-current-closeout manual clause continuations while preserving ordinary correction windows.
-`combat.ended` and Victory confirmation remain sequentially undoable before final archive:
-only Finish cleanup/Void make the irreversible boundary in the owning table spec.
-
-Build integration checkpoint: local anonymous Convex bundle analysis now passes after making registry
-assembly lazy (`registeredOperations()`), avoiding its runtime circular-import failure.
-Focused registry/history/session suites passed; A07 backend/browser checks are still in progress.
-The first full check stopped at the active A05 test's unused `BRUTAL_SLAM`; the next typecheck
-reported unknown-payload assertions in the audit-owned `tests/app/audience.test.ts`. These are
-reported for the concurrent audit to reconcile; A07 is not yet handed off as passing.
-
-Audit integration note: `abilityResolved` now calls A06's shared `assertManualResolutionAllowed`,
-which permits directly linked consecutive clauses and current-closeout continuations while retaining
-branch/archive/session checks. A05 owns this operation and its query until its independent review;
-please do not reintroduce a separate `cleanupContinuation` guard. Audience payload typing is repaired.
-
-Build acknowledgment: retained the audit-owned `assertManualResolutionAllowed` integration;
-no additional guard will be introduced. Local schema/functions are now actually synced (00:18:50),
-after the authorized pre-alpha app-table reset and 403-entry content reseed. The A07 browser run
-is active; please coordinate further local syncs to avoid replacing APIs during that run.
-Engine check passes 79 tests. Latest app typecheck is blocked by the new audit test
-`tests/app/history-audit.test.ts:131`: `initiativeGroups` has no `entryIds` field; entries reference
-groups via their `groupId`. Audit owns repair of that relationship assertion.
-
-Browser coordination: A07 now reaches End combat, but concurrent load caused one-second local
-Better Auth lookup timeouts in `table:roster` and `closeout:current` for player/observer. Build lead
-has stopped heavy full-suite runs until the three-role browser retry finishes; please avoid
-concurrent backend sync/reset or heavy test runs during this short retry. UI also removes the
-unneeded closeout subscription before the closeout phase. Requests: `3c06d0f59cde92d6`,
-`2fd4c08684b871e0`. This failure is recorded, not treated as a passing browser check.
-
-Audit verification checkpoint: the combined `pnpm check` passed at 00:24 UTC (79 engine + 301
-app/tooling tests, types/lint/links/vendor/content/build). History test's invalid group field is
-repaired and current integration regressions pass. Independent A04/A05/A06/A07 reports are in
-`audits/2026-09-15-*`; new Q-CHAR-2 activation repair is in progress. A07 browser process has
-finished; audit now owns the next local sync and complete browser/visual acceptance pass.
-Please leave final deployment/test coordination and combined acceptance commit to this audit.
-
-Build-to-audit coordination acknowledgment: read the passing combined-check checkpoint and A07
-review, including the source-backed retained-foe temporary Stamina repair. Audit owns final local
-sync, full browser/visual acceptance and the combined commit. One A07 browser retry is still active
-(the preceding failure was a Resume/navigation test race, now fixed); the UI sub-agent will finish
-this current run and perform no further retries. Build lead is doing no further backend sync or
-heavy checks. Final run result will be appended here and in the A07 work log.
-
-### A07 build hand-back
-
-Implementation is complete and the [independent backend/source review](audits/2026-09-15-A07-review.md)
-passes, including the audit's retained-foe cleanup repair. The audit coordinator recorded a passing
-full check (79 engine + 301 app/tooling tests). The final build-team browser run completed its gameplay
-assertions through paused session close, then exited 1 in browser-context teardown because a trace file
-in the shared `test-results/.playwright-artifacts-0/` directory disappeared (ENOENT). This is **not a
-certified browser pass**. Audit owns a rerun with an isolated output directory, for example
-`pnpm exec playwright test tests/browser/closeout.spec.ts --output .playtest/a07-audit-results`,
-plus final live sync, A09 acceptance and the combined commit. No build-team browser process remains.
-
-Screenshots: `.playtest/a07/closeout-director.png`, `closeout-player.png`, `closeout-observer.png`,
-and `paused-reset.png`. Detailed implementation, source and validation evidence is in the
-[A07 work log](A07-closeout-and-void.md#work-log). No milestone completion or commit is self-attested.
-
-### User checkpoint — 2026-09-15
-
-The user checkpointed this build thread after the v0.01 implementation handoff. Build work is
-paused here. Implementation and sub-agent evidence are recorded above and in the slice work logs;
-A02–A07 and A09 retain their tracked review states. The separate audit thread owns remaining
-browser/visual verification, final acceptance, deployment coordination and the combined commit.
-
-On resumption, read this tracker and the latest audit reports before making changes. Incorporate
-new audit findings without restarting completed slices or expanding into V1. This checkpoint
-records the handoff; it does not certify A09 or create an implementation commit.
-
-## Development infrastructure — 2026-09-16
-
-| Id | Slice | Depends on | Status | Owner |
-| --- | --- | --- | --- | --- |
-| S03 | [Remote development adapter](S03-remote-development.md) | External dev-host V1 helpers and enrollment | Merged through `d663c15`; main data migrated, local workloads stopped and reboot recovery passed; provider/human checks pending | Voltar infrastructure thread |
-| S04 | [Hosted development environment](S04-hosted-development.md) | S03, V38 | Complete — `4ba33d9` merged into main; hosted dev live; 663 tests, five hosted browser scenarios and independent review pass; private data preserved | Deploy thread, hosting worktree |
-
-## V33 UI design — 2026-09-17
-
-| Id | Slice | Status | Owner |
-| --- | --- | --- | --- |
-| V33 | [Core stat blocks and automatic glyph semantics](V33-core-stat-block-design.md) | Complete — `bc773c1` merged into main with V34; approved design and shared glyph contract | Codex, UI worktree |
-
-## V34 UI rollout — 2026-09-17
-
-| Slice | Outcome | Status | Owner |
-| --- | --- | --- | --- |
-| V34 | [Sitewide Core presentation](V34-sitewide-core-presentation.md) | Complete — `e3ae838` merged into main and live on shared CT114 main; 444 tests, 7 UI browser tests and 3 shared-main scenarios pass; independent review pass | Codex, UI worktree |
-
-## V35 full core ingestion — 2026-09-17
-
-| Slice | Outcome | Status | Owner |
-| --- | --- | --- | --- |
-| V35 | [Full core stat-block ingestion](V35-full-core-ingestion.md) | Merged and live via V38 `40206a5`; full 438-statblock catalog and retained source reviews; 663 integrated tests and shared exhaustive browser verification pass | Codex, foes-full worktree |
-
-## V36 Foes library — 2026-09-17
-
-| Id | Slice | Dependencies | Status |
-| --- | --- | --- | --- |
-| V36 | [Foes library browsing UI](V36-foes-library.md) | V34, V35 | Merged and live via V38 `40206a5`; reviewed library plus new primary navigation, 12 isolated and 5 shared browser scenarios pass |
-
-## Current integration
-
-| Id | Slice | Status | Owner |
-| --- | --- | --- | --- |
-| V38 | [Foes integration and top-level navigation](V38-foes-integration-navigation.md) | Complete — merged/live `40206a5`; separate Rules/Foes links, 663 tests, 12 isolated and 5 shared browser scenarios pass | Integration lead |
-
-## V39 account email — 2026-09-17
-
-| Id | Slice | Status | Owner |
-| --- | --- | --- | --- |
-| V39 | [Account email and password recovery](V39-account-email.md) | Merged/live `62ca7b9` — reviewed implementation, 672 tests; 2 hosted recovery scenarios and shared-main journey pass; Cloudflare test message received, confirmed by user | Deploy thread, hosting worktree |
-
-## V40 unsaved wizard entry — 2026-09-19
-
-| Id | Slice | Status | Owner |
-| --- | --- | --- | --- |
-| V40 | [Unsaved wizard entry](V40-unsaved-wizard.md) | Complete — merged/live `af69671`; 674 tests, nine isolated browser journeys, two shared browser checks and independent review pass | Character wizard thread |
-
-## V42 primary wizard choice summary — 2026-09-19
-
-| Id | Slice | Status | Owner |
-| --- | --- | --- | --- |
-| V42 | [Primary wizard choice summary](V42-primary-choice-summary.md) | Complete — merged/live `45426dc`; 674 tests, six isolated journeys, two shared checks and independent review; broader Fury timeout limitation recorded | Character wizard thread |
-
-## V44 character option delivery — 2026-09-19
-
-| Id | Slice | Status | Owner |
-| --- | --- | --- | --- |
-| V44 | [Character option delivery plan](V44-character-option-delivery.md) | In progress — resumed 2026-09-20; [workflow](astra-character-workflow.md). Opus pilot [abandoned without reuse](../decisions/2026-09-19-opus-pilot-dead-end.md); zero pilot option units delivered. V45 remains delivered. | Character integration lead |
-
-## V41 — reference loading and shared navigation
-
-| Slice | Assignment | Status | Owner |
-| --- | --- | --- | --- |
-| V41 | [Reference performance](V41-reference-performance.md) | Complete — merged `bc74ddd`, shared development verified at `087a709`; lazy reference delivery/navigation, checks and independent review pass; hosted source `944a46a` published (see V43 evidence) | Codex performance, slice/V41 |
-
-## V43 — table loading and history reads
-
-| Slice | Assignment | Status | Owner |
-| --- | --- | --- | --- |
-| V43 | [Table performance](V43-table-performance.md) | Complete — merged/live `087a709`; 680 check tests plus added lifecycle regression, browser journeys, independent review and three shared checks pass; hosted source `944a46a` published, CI 681 and 16 distinct live browser checks pass | Codex performance, slice/V43 |
-
-## V45 character option foundation — 2026-09-19
-
-| Id | Slice | Status | Owner |
-| --- | --- | --- | --- |
-| V45 | [Character option foundation](V45-character-option-foundation.md) | Complete — merged/live `ebe66e2`; 691 tests, 5,584 exact comparisons, 49 applicable browser successes and two shared checks; both audits pass; initial timeout/retry limits retained; no new options enabled | Character integration lead and subagents |
-
-V46–V56 are retired Opus pilot IDs, not pending assignments. Allocate fresh IDs for replacement work.
-
-## Astra delivery and verification queue — 2026-09-20
-
-The first six ancestries merged through V74 `b73cb8d`, including trait-granted actions and active
-Dwarf rune state. V82 completes implementation and hosted acceptance for the remaining six:
-full checks, independent reviews, 28 public API scenarios and 137 source-adjudicated Forge
-comparisons. Main integration `1fa8aac` and both application updates pass; shared-main API proof is 28/28.
-See [V82](V82-remaining-ancestries.md).
-No Opus material was reused.
-
-| Id | Unit | Implementation | Verification |
-| --- | --- | --- | --- |
-| V57 | [Devil level one](V44-character-option-delivery.md) | Merged via V74 | All 13 Forge witnesses, live API and independent review pass |
-| V58 | [Polder level one](V44-character-option-delivery.md) | Merged via V74 | Both Forge witnesses, live API and independent review pass |
-| V59 | [Closeout verification blocker](V59-closeout-timeout.md) | Historical investigation `4c990eb` | Browser investigation stopped under moratorium; not a character completion gate |
-| V60 | [Dwarf level one](V44-character-option-delivery.md) | Merged via V74 | Three Forge witnesses plus persisted rune/history proof pass |
-| V61 | [Human level one](V44-character-option-delivery.md) | Merged via V74 | Three Forge witnesses, live API and independent review pass |
-
-Use a free suitable local or remote test environment and coordinate shared workloads. Browser
-tests remain prohibited. The stopped `characters` and `character-restart` environments stay
-stopped. User-approved programmatic Forge counterparts replace website capture for this proof;
-bounded comparison limits, including Orc Artisan target representation, remain explicit.
-[V82 evidence](evidence/V82/README.md) owns current results; V62/V65/V69/V74 records remain history.
-
-
-## Browser testing moratorium — 2026-09-20
-
-User decision: all browser (Playwright) testing is deprecated for the time being, across every
-track, branch, worktree, private environment and the hosted target, until
-[V66](V66-browser-test-harness-repair.md) is implemented. Verification moves to headless CLI/API
-routes under the [headless completion gate](README.md#programmatic-headless-completion-gate).
-Threads log the UI scenarios they would have checked in the
-[browser coverage backlog](browser-coverage-backlog.md) for a later pass. Do not run
-`pnpm test:browser` or `presidium-dev run browser`; do not treat a missing browser run as a
-blocker; do not record a browser result as pending acceptance. The
-[audit](audits/2026-09-20-browser-testing-failures.md) records why.
-
-## V65 programmatic character verification — 2026-09-20
-
-| Id | Unit | Candidate | Verification / next action |
-| --- | --- | --- | --- |
-| V65 | [Programmatic character verification](V65-character-headless.md) | `slice/V65`, `.worktrees/character-headless`; discovery/transition routes, shared UI transition and browser-independent runner | Backend fix published `b1f50c8`; original 712 unit/backend/script tests pass; type error resolved; all 22 remote headless scenarios pass in 73.547s, zero skips; no browser; ancestry acceptance/main integration separate |
-
-Discovery and shared choice-transition routes, including their UI integration, are merged through
-V74 and published. Both original blockers are fixed; the original 22-scenario proof is retained.
-V74 extends and re-verifies that coverage; no browser test is required
-or permitted during the moratorium. See [V65](V65-character-headless.md) for retained failed and
-passing evidence.
-
-
-## Character coverage continuation — 2026-09-20
-
-| Id | Slice | Status | Owner |
-| --- | --- | --- | --- |
-| V69 | [Current-main character integration and headless coverage](V69-character-coverage.md) | Complete via V74; preserved V65 candidate; V74 integration verifies 791 checks, 27 live API scenarios and 31 Forge counterparts; merged/live b73cb8d; shared-main API 27/27 | Astra lead |
-| V70 | [Hakaan level one](V70-hakaan-level-one.md) | Complete via V74; all choices implemented; V74 full checks, live API and Forge counterparts pass; merged/live b73cb8d; shared-main API 27/27 | Astra Hakaan implementer |
-| V71 | [Orc level one](V71-orc-level-one.md) | Complete via V74; all choices including Artisan implemented; V74 full checks/live API pass; Forge comparisons pass within documented Artisan boundary; merged/live b73cb8d; shared-main API 27/27 | Astra Orc implementer |
-
-## Foes content follow-up — 2026-09-20
-
-| Slice | Document | Status | Owner | Branch |
-| --- | --- | --- | --- | --- |
-| V87 | [Core library seeding](V87-foes-library-seeding.md) | Complete — merged and live 2026-09-20: main `4d6d299`; integrated TESTER check (880 tests) and shared-main live check pass; shared CT114 main reseeded to 1151 entries with play data retained | Foes coordination (built), Fable (integrated) | slice/V87 retired; evidence in the slice work log and `evidence/V87` |
-
-## Test foundation — 2026-09-20
-
-| Id | Slice | Status | Owner |
-| --- | --- | --- | --- |
-| V89 | [Reusable test foundation](V89-test-foundation.md) | Merged on main `4f3fe13`; focused/full gates pass (358 + 575), reused by certified identity; WIZARD.2 independent review PASS; combined release live gate passed | TESTER, slice/V89 |
+One row per slice. Status is one of `Registered`, `In progress`, `Committed on branch`, `Merged`,
+`Blocked (Q-id)` or `Historical`. Details live in the slice document's work log and in Chords; do not
+add narrative here. V46–V56 were the abandoned Opus pilot and are retired ids.
+
+| Id | Slice | Status |
+| --- | --- | --- |
+| S00 | [Process tooling, CI, lint, commit checker](S00-process-tooling.md) | Merged |
+| S01 | [Content pipeline from the pinned Compendium](S01-content-pipeline.md) | Merged |
+| S02 | [Data contracts: encounter, events, journal, dice](S02-data-contracts.md) | Merged |
+| S03 | [Remote development adapter](S03-remote-development.md) | Merged |
+| S04 | [Hosted development environment](S04-hosted-development.md) | Merged |
+| R01 | [Level-one devil Fury decision table](R01-fury-decision-table.md) | Merged |
+| R02 | [Derived values and evaluator contract](R02-derived-values-evaluator.md) | Merged |
+| R03 | [Live-state initialization and engine projection](R03-live-state-initialization.md) | Merged |
+| R04 | [Roll and damage resolution contract](R04-roll-and-damage-resolution.md) | Merged |
+| R05 | [Conditions, clock and Malice common lifecycle](R05-conditions-clock-malice.md) | Merged |
+| A01 | [Shared operations, command registry and engine integration](A01-shared-operations-engine.md) | Merged |
+| A02 | [Minimal wizard, admission review and character sheet](A02-wizard-and-character-sheet.md) | Merged |
+| A03 | [Table shell and FreePlay basics](A03-table-shell-freeplay.md) | Merged |
+| A04 | [Combat opening, turns and clock](A04-combat-opening-turns-clock.md) | Merged |
+| A05 | [Attacks, damage, costs and common actions](A05-attacks-damage-costs.md) | Merged |
+| A06 | [History: undo, redo and corrections](A06-history-undo-corrections.md) | Merged |
+| A07 | [Closeout and Void](A07-closeout-and-void.md) | Merged |
+| A08 | [Design tokens and theme migration](A08-design-tokens-theme.md) | Merged |
+| A09 | [v0.01 acceptance walkthrough](A09-v001-acceptance.md) | Merged |
+| V01 | [Respite research and loop](V01-respite.md) | Registered |
+| V02 | [Minion squads and captains](V02-minions-and-captains.md) | Merged |
+| V03 | [Boss and villain turn mechanics](V03-boss-turn-mechanics.md) | Registered |
+| V04 | [Persistent area cards and response reconciliation](V04-areas-and-response-reconciliation.md) | Registered |
+| V05 | [Ability parser and class/stat-block automation](V05-ability-automation.md) | Registered |
+| V06 | [Monster catalog, saved encounters and party strength](V06-catalog-and-saved-encounters.md) | Registered |
+| V07 | [Inventory, loot and Director stash](V07-inventory-and-loot.md) | Registered |
+| V08 | [Eleven-class editor, advancement and progression history](V08-classes-and-advancement.md) | Registered |
+| V09 | [Forge Steel import](V09-forge-steel-import.md) | Registered |
+| V10 | [Accounts: settings, password reset, friends, blocking, share codes, deletion](V10-accounts-social.md) | Registered |
+| V11 | [Character grants and delegated play](V11-character-grants.md) | Registered |
+| V12 | [Campaign chat](V12-campaign-chat.md) | Registered |
+| V13 | [Reference libraries: Rules, Foes, Items](V13-reference-libraries.md) | In progress |
+| V14 | [Foe hiding and Add-visibility](V14-foe-hiding.md) | Registered |
+| V15 | [Hero tokens](V15-hero-tokens.md) | Registered |
+| V16 | [3D dice presentation](V16-dice-presentation.md) | Registered |
+| V17 | [Mobile and tablet layouts, SSR decision](V17-mobile-layouts.md) | Registered |
+| V18 | [Hosting: Cloudflare, Convex Cloud, LAN portability](V18-hosting.md) | Registered |
+| V19 | [Forced access changes and combat recovery](V19-forced-access-recovery.md) | Registered |
+| V20 | [Dynamic terrain objects](V20-dynamic-terrain.md) | Registered |
+| V21 | [Desktop layout fidelity](V21-desktop-layout-fidelity.md) | Merged |
+| V23 | [Foe source ingestion assessment](V23-foe-source-assessment.md) | Merged (with V27) |
+| V24 | [Character wizard assessment and delivery proposal](V24-character-wizard-assessment.md) | Historical (assessment) |
+| V25 | [Shared Fury/Bethell wizard](V25-two-class-wizard.md) | Merged |
+| V26 | [Compiled ability effects: damage and push instructions](V26-compiled-ability-effects.md) | Specification merged; implemented by V67 and V72 |
+| V27 | [Undead ingestion and independent feature access](V27-undead-ingestion.md) | Merged |
+| V29 | [Desktop layout feedback follow-ups](V29-desktop-feedback.md) | Merged |
+| V30 | [Second-echelon undead ingestion](V30-second-echelon-undead.md) | Merged |
+| V31 | [History control placement correction](V31-history-control-placement.md) | Merged |
+| V32 | [Fury advancement and restorable history](V32-fury-progression-history.md) | Merged |
+| V33 | [Core stat blocks and automatic glyph semantics](V33-core-stat-block-design.md) | Merged |
+| V34 | [Sitewide Core presentation](V34-sitewide-core-presentation.md) | Merged |
+| V35 | [Full core stat-block ingestion](V35-full-core-ingestion.md) | Merged |
+| V36 | [Foes library browsing UI](V36-foes-library.md) | Merged |
+| V37 | [Supporting character choices](V37-supporting-character-choices.md) | Merged |
+| V38 | [Foes integration and top-level navigation](V38-foes-integration-navigation.md) | Merged |
+| V39 | [Account email and password recovery](V39-account-email.md) | Merged |
+| V40 | [Unsaved wizard entry](V40-unsaved-wizard.md) | Merged |
+| V41 | [Reference performance](V41-reference-performance.md) | Merged |
+| V42 | [Primary wizard choice summary](V42-primary-choice-summary.md) | Merged |
+| V43 | [Table performance](V43-table-performance.md) | Merged |
+| V44 | [Character option delivery plan](V44-character-option-delivery.md) | In progress |
+| V45 | [Character option foundation](V45-character-option-foundation.md) | Merged |
+| V57 | [Devil level one](V44-character-option-delivery.md) | Merged |
+| V58 | [Polder level one](V44-character-option-delivery.md) | Merged |
+| V59 | [Closeout verification blocker](V59-closeout-timeout.md) | Historical |
+| V60 | [Dwarf level one](V44-character-option-delivery.md) | Merged |
+| V61 | [Human level one](V44-character-option-delivery.md) | Merged |
+| V63 | [Rebase and reverify V26 correction prerequisites](V26-compiled-ability-effects.md) | Merged |
+| V64 | [Ability grammar coverage audit](V64-ability-coverage-audit.md) | Merged |
+| V65 | [Programmatic character verification](V65-character-headless.md) | Merged (via V74) |
+| V66 | [Browser test harness repair](V66-browser-test-harness-repair.md) | Registered, not started; ends the browser moratorium |
+| V67 | [Pure compiled ability definitions and outcomes](V67-compiled-effects-pure.md) | Merged |
+| V68 | [Campaign home redesign](V68-campaign-home.md) | Merged |
+| V69 | [Current-main character integration and headless coverage](V69-character-coverage.md) | Merged |
+| V70 | [Hakaan level one](V70-hakaan-level-one.md) | Merged |
+| V71 | [Orc level one](V71-orc-level-one.md) | Merged |
+| V72 | [Live compiled ability effects](V72-live-compiled-effects.md) | Merged |
+| V73 | [Headless Forge character counterparts](V73-forge-headless-counterparts.md) | Merged (via V74) |
+| V74 | [Trait-granted abilities and active Dwarf runes](V74-trait-granted-abilities.md) | Merged |
+| V76 | [Dragon Knight level one](V76-dragon-knight-level-one.md) | Merged |
+| V77 | [High Elf level one](V77-high-elf-level-one.md) | Merged |
+| V78 | [Memonek level one](V78-memonek-level-one.md) | Merged |
+| V79 | [Revenant level one](V79-revenant-level-one.md) | Merged |
+| V80 | [Time Raider level one](V80-time-raider-level-one.md) | Merged |
+| V81 | [Wode Elf level one](V81-wode-elf-level-one.md) | Merged |
+| V82 | [Remaining level-one ancestries](V82-remaining-ancestries.md) | Merged |
+| V83 | [Core perk and ordinary kit action coverage](V83-supporting-actions.md) | Merged |
+| V84 | [Culture presets](V84-culture-presets.md) | Merged |
+| V85 | [Complication grants and dependencies](V85-complications.md) | Merged and published (`a0a700a`) |
+| V86 | [Starting reward fulfillment](V86-starting-rewards.md) | Merged and published (`a0a700a`) |
+| V87 | [Core library seeding](V87-foes-library-seeding.md) | Merged |
+| V88 | [Compiled potency conditions with automatic save ends](V88-compiled-potency-conditions.md) | Merged and published (`a0a700a`) |
+| V89 | [Reusable test foundation](V89-test-foundation.md) | Merged |
+| V90 | [Check pipeline speed](V90-check-pipeline-speed.md) | Committed on branch `slice/V90` (`.worktrees/check-speed`, `f55764d`); TESTER pass; awaiting review and DEPLOY2 hand-off |
+| V91 | [Process trim](V91-process-trim.md) | In progress |

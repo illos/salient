@@ -12,7 +12,7 @@ the printed originals.
   [THIRD_PARTY_NOTICES.md](../../../../THIRD_PARTY_NOTICES.md).
 - Page scans are design reference only. Do not transcribe rules text out of them; the pinned
   Compendium at `vendor/steel-compendium` remains the only permitted rules source, per
-  [CLAUDE.md](../../../../CLAUDE.md).
+  [AGENTS.md](../../../../AGENTS.md).
 - Cite pages by book and page number in slice documents so the reference survives the files.
 
 ## Contents

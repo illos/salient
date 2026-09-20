@@ -1,44 +1,47 @@
-You are never to use the multiple-choice question widget, ever under any circumstances; ask questions in plain
-text.
+# Instruction archive — 2026-09-20
 
-# Project instructions
+Historical. On 2026-09-20 the user replaced the accumulated `agent.MD`, `CLAUDE.md` and process
+documents with a single lean [`AGENTS.md`](../../AGENTS.md) and a short
+[build process](../build/README.md). This file preserves the previous `agent.MD` text so dated
+directives, product-intent paragraphs and their links remain findable. Nothing here is a current
+instruction; where it conflicts with `AGENTS.md` or a spec, those win.
 
-All feature work follows the [programmatic headless completion gate](docs/build/README.md#programmatic-headless-completion-gate):
+All feature work follows the [programmatic headless completion gate](../build/README.md#programmatic-headless-completion-gate):
 prove the supported CLI/API route before browser acceptance. No feature is complete without it.
 
 Every implemented trait or feature must be checked against the pinned Compendium for granted
 abilities, including actions embedded in prose or dependent on choices/play state. Build those
 actions in the appropriate UI list and shared CLI/API route, retain the granting trait, and prove
 conditional availability and persisted changes. Trait text alone is not completion. Follow the
-[trait-granted ability gate](docs/build/README.md#trait-granted-ability-completion-gate).
+[trait-granted ability gate](../build/README.md#trait-granted-ability-completion-gate).
 
 ## Browser testing moratorium — 2026-09-20
 
 The user deprecated all browser (Playwright) testing for the time being, site-wide, until
-[V66 browser test harness repair](docs/build/V66-browser-test-harness-repair.md) is implemented.
+[V66 browser test harness repair](../build/V66-browser-test-harness-repair.md) is implemented.
 V66 is registered but not started; do not claim it without the user's go. Verification is
-headless CLI/API only under the [gate](docs/build/README.md#programmatic-headless-completion-gate);
+headless CLI/API only under the [gate](../build/README.md#programmatic-headless-completion-gate);
 a missing browser run is not a blocker. Log would-be browser scenarios in the
-[browser coverage backlog](docs/build/browser-coverage-backlog.md) for a later pass. Headless
+[browser coverage backlog](../build/browser-coverage-backlog.md) for a later pass. Headless
 tests prove the app at the logical level; browser tests are only the final visual spot check that
-the UI is not badly broken. Read [the moratorium](docs/build/README.md#browser-testing-moratorium--2026-09-20)
-and [the audit](docs/build/audits/2026-09-20-browser-testing-failures.md).
+the UI is not badly broken. Read [the moratorium](../build/README.md#browser-testing-moratorium--2026-09-20)
+and [the audit](../build/audits/2026-09-20-browser-testing-failures.md).
 
 ## Character restart — 2026-09-19
 
 The user permanently abandoned the entire Opus pilot. Its code, tests, fixtures, research and
-processes must not be reused. See [the dead-end decision](docs/decisions/2026-09-19-opus-pilot-dead-end.md).
+processes must not be reused. See [the dead-end decision](../decisions/2026-09-19-opus-pilot-dead-end.md).
 Keep the Opus fleet and old `characters` environment stopped. Earlier delivered code and the V45
-foundation remain intact. The replacement [Astra workflow](docs/build/astra-character-workflow.md)
-and [fresh-session handoff](docs/build/character-restart-handoff.md) are staged; staging does not
+foundation remain intact. The replacement [Astra workflow](../build/astra-character-workflow.md)
+and [fresh-session handoff](../build/character-restart-handoff.md) are staged; staging does not
 restart implementation. Future character work uses fresh Astra subagents and current main.
 Every test must justify its existence through a concrete failure it catches and coverage it adds;
 reject implementation-mirroring assertions, redundant tests and test-count targets. Apply the
-[test value policy](docs/build/README.md#test-value) in implementation and review.
+[test value policy](../build/README.md#test-value) in implementation and review.
 
 ## Separate runtime rollout — 2026-09-16
 
-The [remote development runbook](docs/remote-development.md) owns the Salient pilot adapter and
+The [remote development runbook](../remote-development.md) owns the Salient pilot adapter and
 cutover status. Main data is now on CT114 with matching record/credential fingerprints, and the
 identified superseded local processes are stopped. Isolated validation passed 433 check-suite
 tests and all 22 real HTTPS browser tests. Main also passed reboot recovery with the same HTTPS
@@ -46,12 +49,12 @@ URL, data and credentials. The actual Salient provider-session broker check pass
 `presidium-ssh dev-runtime id` and `presidium-dev status` both succeeded. Human existing-account
 sign-in remains pending.
 
-All test execution goes through the designated coordinator under [the testing process](testing-process.md).
+All test execution goes through the designated coordinator under [the testing process](../../testing-process.md).
 Submit small reproducible jobs through Chords; do not launch independent test runs or test stacks.
 The coordinator runs one job at a time, choosing a suitable local or CT114 environment after checking
 capacity. Preserve existing data and record source, runner and application target. The browser
 moratorium applies everywhere. Use `presidium-dev` and `presidium-ssh dev-runtime` for CT114;
-see [the runbook](docs/remote-development.md#choosing-a-test-environment).
+see [the runbook](../remote-development.md#choosing-a-test-environment).
 
 This user decision (2026-09-20) supersedes the former remote-only restriction for test workloads,
 including the builds, dependencies and isolated services needed to run them. It does not relocate
@@ -63,9 +66,9 @@ provider or revive abandoned pilot environments or protected rollback copies.
 
 The user confirmed five development tracks: parser/rules engine, foe coverage, characters
 (wizard/sheets/progression), UI/polish, and app/social features. Read the
-[durable roadmap](docs/v1-roadmap.md), [track kickoff](docs/kickoff-development-track.md), and
-[build process](docs/build/README.md) before new implementation. The
-[acceptance record](docs/build/evidence/v001-acceptance.md) closes the recorded prototype scope;
+[durable roadmap](../v1-roadmap.md), [track kickoff](../kickoff-development-track.md), and
+[build process](../build/README.md) before new implementation. The
+[acceptance record](../build/evidence/v001-acceptance.md) closes the recorded prototype scope;
 older instructions below to finish the shared-basics walkthrough describe that milestone, not a global
 ban on assigned post-prototype mechanics. V1 exclusions and unresolved product/rules decisions still apply.
 
@@ -85,7 +88,7 @@ content and frontend. This is standing authorization for those routine developme
 ask for a second deployment confirmation. Verify the actual target and the changed behavior in the
 running app before reporting the merge complete. Keep ownership coordinated through Chords.
 
-Follow [the merge completion procedure](docs/build/README.md#merge-completion-includes-the-playable-app).
+Follow [the merge completion procedure](../build/README.md#merge-completion-includes-the-playable-app).
 A successful Git merge with a pending or failed runtime update is incomplete; record the blocker and
 continue the authorized work. Preserve existing play data where compatible. This directive does not
 choose a new hosting target or authorize external publication/production deployment. Documentation-only
@@ -102,29 +105,29 @@ can override this default.
 - v0.01 scope review concluded, 2026-09-14: the user is satisfied with the current shared-basics
   scope and wants the building agent to ask concrete questions as they arise during implementation.
   This supersedes the earlier instruction to keep a continuous specification questionnaire flowing.
-  Use [the pre-alpha checkpoint](docs/pre-alpha-design-gaps.md) and [build handoff](docs/web-app-build-handoff.md).
+  Use [the pre-alpha checkpoint](../pre-alpha-design-gaps.md) and [build handoff](../web-app-build-handoff.md).
   Make routine engineering decisions and research ordinary rules in the pinned source. Ask only when
   a concrete unresolved behavior materially affects the build, one plain-text question with a
   recommendation. Record the answer in the owning spec. Do not reopen settled scope or broaden into
   class/monster-specific feature work. This completes scope review, not implementation, verification
   or all fuller V1 design.
 - The discussion has resumed with a rules-review workflow accepted for trial and confirmed rules-adaptation
-  philosophy. Read [the principles](docs/rules-adaptation-principles.md) and
-  [the development process](docs/development-process.md). The user selected a dedicated rules/combat thread
+  philosophy. Read [the principles](../rules-adaptation-principles.md) and
+  [the development process](../development-process.md). The user selected a dedicated rules/combat thread
   to work with them and a separate thread to read the specs, build and review the ordinary web app. Follow
-  [the build handoff](docs/web-app-build-handoff.md); independent app work can proceed while combat contracts
+  [the build handoff](../web-app-build-handoff.md); independent app work can proceed while combat contracts
   are designed. General warn-without-blocking policy is settled, with the confirmed insufficient-resource
   exception: unaffordable abilities cannot execute. Do not start another thread merely by
   recording this handoff or invent unresolved combat behavior to finish an app screen.
 - Rules-research recommendations and the user's rulings remain separate records. Rulings apply only to their
   original cases, with no automatic precedent. Explicit case-specific product choices may depart from the
   design guidelines for taste; do not count those choices as researcher errors or generalize them. See
-  [the skill design](docs/rules-skills-design.md#confirmed-isolated-decisions-no-automatic-precedent).
+  [the skill design](../rules-skills-design.md#confirmed-isolated-decisions-no-automatic-precedent).
 
 ## Current specification checkpoint
 
-Read [the pre-alpha clarification queue](docs/pre-alpha-design-gaps.md) and
-[the v1 checkpoint](docs/v1-spec-checkpoint.md) before resuming product exploration. The immediate target is a
+Read [the pre-alpha clarification queue](../pre-alpha-design-gaps.md) and
+[the v1 checkpoint](../v1-spec-checkpoint.md) before resuming product exploration. The immediate target is a
 v0.01 pre-alpha architectural foundation; complete subsystem coverage is not automatically a milestone gate.
 The first journey is campaign creation/invitation, session start, one foe and a level-one hero loaded, and
 basic combat action economy with a visible game log. Character entry uses a minimal level-one devil Fury
@@ -141,7 +144,7 @@ the confirmed G4 shared systems, common Malice lifecycle, persistent numeric edi
 log entries, Stamina/winded, ordinary-foe Slain status and history. The minimal wizard and sourced
 build/initial-state contracts remain separate requirements. Next is a common-operation acceptance
 walkthrough through shared UI/headless paths, with actual persisted state and history. See
-[the current runtime scope](docs/pre-alpha-design-gaps.md#game-basics-first--current-runtime-scope).
+[the current runtime scope](../pre-alpha-design-gaps.md#game-basics-first--current-runtime-scope).
 Foe hiding is deferred beyond v0.01: all loaded foes are visible, with no hide/reveal or Add visibility
 controls. Full stat blocks remain Director-only; health display and Malice visibility remain separate.
 The fuller V1 hidden-foe design below is future scope; audit F2 is closed for the prototype.
@@ -160,8 +163,8 @@ is required. Packaging, runtime placement and integration still need engineering
 language decision is not deployment authorization.
 Later parser/engine feature work builds on that foundation; do not reopen settled scope or silently
 automate deferred mechanics to finish a screen.
-Use [table decisions and remaining contracts](docs/table-spec.md#8-continue-exploring) and
-[rules status](docs/workstream-rules-status.md). Initiative groups cover both sides; playable retainers and
+Use [table decisions and remaining contracts](../table-spec.md#8-continue-exploring) and
+[rules status](../workstream-rules-status.md). Initiative groups cover both sides; playable retainers and
 friendly monsters are deferred beyond V1, with an extension path preserved. Readable core references remain
 separate from playable support.
 
@@ -176,14 +179,14 @@ works independently of a digital battle map. There are no native-app plans. Conv
 the engine uses TypeScript unless a concrete reason to change emerges; runtime placement remains a separate decision. The UI is being developed in another
 thread; do not claim that work is implemented in this checkout without evidence.
 
-The [pre-alpha checkpoint](docs/pre-alpha-design-gaps.md) controls immediate milestone scope; the
-[v1 checkpoint](docs/v1-spec-checkpoint.md) indexes the fuller product. Requirements below for deferred features
+The [pre-alpha checkpoint](../pre-alpha-design-gaps.md) controls immediate milestone scope; the
+[v1 checkpoint](../v1-spec-checkpoint.md) indexes the fuller product. Requirements below for deferred features
 remain future design, not prototype gates. Primary specifications retain detailed authority:
-[table](docs/table-spec.md), [access](docs/accounts-and-access-spec.md),
-[characters](docs/character-wizard-spec.md), [inventory](docs/inventory-spec.md),
-[catalog](docs/monster-catalog-spec.md), [references](docs/reference-library-spec.md),
-[data](docs/data-architecture-spec.md), and [tech stack](docs/v1-tech-stack-spec.md). Keep those documents current
-rather than accumulating duplicate decisions here. The original [gap review](docs/v1-spec-review.md) is historical.
+[table](../table-spec.md), [access](../accounts-and-access-spec.md),
+[characters](../character-wizard-spec.md), [inventory](../inventory-spec.md),
+[catalog](../monster-catalog-spec.md), [references](../reference-library-spec.md),
+[data](../data-architecture-spec.md), and [tech stack](../v1-tech-stack-spec.md). Keep those documents current
+rather than accumulating duplicate decisions here. The original [gap review](../v1-spec-review.md) is historical.
 
 ### V1 scope
 
@@ -265,7 +268,7 @@ moves only the selected turn entry, leaving other entries for that actor where t
 directly from the selected model; it is not a separate unresolved product decision. The earlier repeated
 mixed-group activation proposal is superseded.
 
-Current creature checkpoint: [minion contracts](docs/table-spec.md#minion-squads-and-captain-state)
+Current creature checkpoint: [minion contracts](../table-spec.md#minion-squads-and-captain-state)
 select one squad entry, default four, plus/minus count 1–8, captain additional to eight, and proportional
 EV from the printed quantity. No manual live split/merge. Minion identities, current pool and shared-turn
 participation are distinct: captain-bonus loss causes no casualties, replacement bonus gain revives no
@@ -273,7 +276,7 @@ one, and later non-area pool exhaustion defeats remaining ordinary members subje
 Area damage cannot kill outside its area. Personal extra captain turns do not refresh the squad.
 The clock owns scheduled turn effects and dispatches global work once per actual turn, not per shared
 participant; personal effects/saves remain individual. Remaining numeric and source cases are listed in
-[the table queue](docs/table-spec.md#8-continue-exploring), not grounds to reopen those rulings.
+[the table queue](../table-spec.md#8-continue-exploring), not grounds to reopen those rulings.
 
 ### Characters, privacy and inventory
 
@@ -329,13 +332,13 @@ Forced combat recovery remains unresolved, not grounds to defer access invalidat
 
 ### Engine and history intent
 
-Follow [rules adaptation principles](docs/rules-adaptation-principles.md): automate faithfully, show the
+Follow [rules adaptation principles](../rules-adaptation-principles.md): automate faithfully, show the
 source and actual work, and trust the table. Game-rule conflicts warn players and Directors without blocking
 eligible play or requiring routine Director preapproval, except that an ability whose resource cost cannot
 be paid must be blocked (confirmed 2026-09-13). Check source-legal affordability, including waivers and
 permitted negative resources, in shared execution for players and Director invocations. Fixed applicable
 costs are deducted automatically on execution; optional pre-resolution spending uses a choice card unless
-already supplied. See [ability costs](docs/table-spec.md#ability-costs-and-optional-spending).
+already supplied. See [ability costs](../table-spec.md#ability-costs-and-optional-spending).
 The Director has final game-adjudication authority;
 mechanical inputs and effects support recorded manual adjustments. The standalone damage/collision/fall
 tool is deliberately out of scope, not a missing feature. Director fine-tuning uses eligible result
@@ -357,12 +360,12 @@ only table actions. Verify rule interpretation and actual persisted state applic
 Completion requires a passing authenticated application journey with no browser setup or session;
 engine unit tests, direct database writes and headless Chromium cannot substitute for this proof.
 Run headless verification before browser acceptance and record the additional defects browser tests
-find, following the [build completion gate](docs/build/README.md#programmatic-headless-completion-gate).
+find, following the [build completion gate](../build/README.md#programmatic-headless-completion-gate).
 Only a completed comparison showing no additional gaps justifies moving redundant browser tests to
 a later step. Keep distinct UI checks and existing acceptance requirements until that decision is
 recorded. The table UI may evolve independently and must not gate the headless workflow.
 
-The user confirmed the [registered-action and action-card contract](docs/table-spec.md#confirmed-action-and-log-contract)
+The user confirmed the [registered-action and action-card contract](../table-spec.md#confirmed-action-and-log-contract)
 as table policy. Every table UI button has a registered action accessible in the command palette. Buttons,
 slash commands, game-log controls and action cards use the same shared operations with headless access.
 All table activity receives discrete ordered log entries; user-initiated operations carry actual user attribution
@@ -370,7 +373,7 @@ separately from acting-character identity. Mid-operation input/adjudication and 
 at the table surface as user-aware action cards. Preserve existing privacy audiences and lifecycle boundaries.
 The user explicitly scoped this pattern to the table, not the rest of the app. Table UI must follow this contract,
 without inventing unresolved mechanics or implying that the registry/cards are already implemented.
-Use the [formal command design](docs/table-command-spec.md) and its rules/grammar research for integration.
+Use the [formal command design](../table-command-spec.md) and its rules/grammar research for integration.
 Guided cards can collect complex options from a short command; table-state actions are also registered.
 The human syntax baseline is accepted: optional `@Character`, `/family verb`, and named arguments, with
 quoted names and target lists. Detailed operation/API schemas remain proposed; research coverage does not
@@ -399,18 +402,18 @@ Formal Director test-request UI/commands and their response modes/lifecycle are 
 now. This is a deliberate scope choice, not a missing spec gap; do not add the workflow without a new
 user decision. The Director asks verbally; players roll tests directly. Specific actions can still supply linked
 test steps. Show recorded workings/total and calculate outcomes only when difficulty or source outcome
-context is known; otherwise the Director interprets. See [tests](docs/table-spec.md#freeplay-baseline-and-combat-transition).
+context is known; otherwise the Director interprets. See [tests](../table-spec.md#freeplay-baseline-and-combat-transition).
 
 Standing prompt policy confirmed 2026-09-13: still-valid combat action-card response opportunities stay active
 through the gap after End turn and close at the start of the next individual turn. This supersedes
 triggering-turn-end closure and combat-test round-end expiry, and includes prompts created at turn end.
 Persistent effects retain their own lifetimes; required unresolved work still blocks dependent progression.
-FreePlay has no artificial individual-turn boundary; source-specific cards keep applicable lifetimes. See [prompt windows](docs/table-spec.md#inline-interaction-cards-in-the-game-log).
+FreePlay has no artificial individual-turn boundary; source-specific cards keep applicable lifetimes. See [prompt windows](../table-spec.md#inline-interaction-cards-in-the-game-log).
 
 Confirmed FreePlay carryover: earlier actions do not consume the new encounter's action economy.
 Damage/resource state carries forward under source-defined combat-start rules; do not replay the action,
 import it as a first turn or automatically refund its costs. See
-[the combat transition](docs/table-spec.md#freeplay-baseline-and-combat-transition).
+[the combat transition](../table-spec.md#freeplay-baseline-and-combat-transition).
 
 Confirmed encounter closeout: provide formal Director closeout UI. Explicit End combat closes unused
 optional combat responses and ends structured turn play. Do not synthesize a final turn/group/round
@@ -423,7 +426,7 @@ wrap-up then returns to FreePlay. The Director grants the Victory amount and rec
 the editable initial value 1 (allowing 0) is not an automatic award. Record confirmed grants once.
 Finish cleanup, or Void after applying keep/reset, archives the encounter: gameplay undo cannot reopen it or cross that completed boundary,
 and archived events cannot be edited. Current-state adjustments remain new recorded actions.
-See [closeout](docs/table-spec.md#formal-encounter-closeout).
+See [closeout](../table-spec.md#formal-encounter-closeout).
 
 Confirmed early closure: committing an unrelated new ability passes that character's earlier unused
 optional triggered-action opportunity; preparation/refused activation does not. Preserve response chains,
@@ -432,7 +435,7 @@ action or spends the resources granted by a hit, that hit's response window also
 Parry. This is existing precedent; prompt ownership does not exempt the response. Next-turn start is the outer
 deadline. Precise causal resource-grant timing is an explicit player-value priority: all spending, feature,
 usage-limit and history logic must respect when each grant becomes available, including during retrospective
-responses. See [resource bookkeeping](docs/table-spec.md#ability-costs-and-optional-spending).
+responses. See [resource bookkeeping](../table-spec.md#ability-costs-and-optional-spending).
 
 The game log records initial values, modifier inputs/outputs and resulting state changes. Corrections and
 undo append new entries without rewriting the original; future interpretation/undo uses the effective
@@ -447,7 +450,7 @@ Standing clock policy explicitly confirmed by the user: at a boundary, resolve d
 with save-ends rolls last. Include all applicable save-ends effects applied before the final save phase
 begins, unless their source specifies otherwise. This is an explicit standing app policy, not an inferred
 precedent from a case ruling; preserve source timing and special save replacements. See
-[the game-clock contract](docs/table-spec.md#game-clock-and-scheduled-rules-work).
+[the game-clock contract](../table-spec.md#game-clock-and-scheduled-rules-work).
 
 Players sequentially undo their character's uninterrupted latest actions only to the nearest seam,
 with combat turn start/FreePlay-stretch start as outer limits. Another character's committed action closes
@@ -471,37 +474,37 @@ evidence; they do not prove semantics. Prefer meaningful examples and executable
 ## Development approach
 
 - `CLAUDE.md` restates the standing rules from this file for Claude sessions; keep the two consistent.
-  Build work is organized as slices under [`docs/build/`](docs/build/README.md) with a single status
+  Build work is organized as slices under [`docs/build/`](../build/README.md) with a single status
   tracker; commits reference owning spec sections with `Spec:` trailers. Rules or product questions
-  that need the user go to [`docs/rules-questions-for-user.md`](docs/rules-questions-for-user.md), not
+  that need the user go to [`docs/rules-questions-for-user.md`](../rules-questions-for-user.md), not
   to a build thread.
 - During pre-alpha foundation work, development data is disposable and the priority is the latest live,
   playable app. Reset/reseed may replace migrations across breaking development updates. Separate branch
   development comes once there is a working app to protect. Follow
-  [the development policy](docs/development-process.md#confirmed-pre-alpha-development-policy); normal runtime
+  [the development policy](../development-process.md#confirmed-pre-alpha-development-policy); normal runtime
   persistence and deliberate vendored-source updates remain in force.
-- Use [the dice roller specification](docs/dice-roller-spec.md) for optional 3D presentation of accepted
+- Use [the dice roller specification](../dice-roller-spec.md) for optional 3D presentation of accepted
   shared/CLI results. Visual physics never determines gameplay values; the animation technique remains
   proposed.
-- Use [the data architecture](docs/data-architecture-spec.md) for current state, shared content, journals,
+- Use [the data architecture](../data-architecture-spec.md) for current state, shared content, journals,
   session archives and future statistics. Its concrete schemas/storage contracts remain proposed.
-- The general [pack architecture](docs/data-architecture-spec.md#31-common-pack-contract--proposed) supports
+- The general [pack architecture](../data-architecture-spec.md#31-common-pack-contract--proposed) supports
   portable official/community/private content, but v1 enables only eligible core sources. Disabling a pack
   preserves existing characters' use of and advancement within content they already have. Release pinning,
   precise progression/source permissions and private-pack sharing remain proposed/open. Keep engine releases
   distinct from content releases; compatibility ranges and runtime retention are not settled.
 
-- Use [the accounts and access specification](docs/accounts-and-access-spec.md) for the detailed access
+- Use [the accounts and access specification](../accounts-and-access-spec.md) for the detailed access
   contract. **Better Auth is selected** through its Convex integration; the prior Convex Auth preference is
   superseded. Cloudflare Email Service is selected for password reset (V39, sender
   `salient@blackgate.studio`); hosted recovery is live and browser-verified, with delivery-test inbox
   receipt confirmed by the user. Future LAN recovery remains pending. Preserve the distinction
   between confirmed requirements, proposed implementation contracts and unresolved policy. Specification work
   is not backend/deployment authorization.
-- Use [the v1 tech stack](docs/v1-tech-stack-spec.md) for recommended frontend libraries, table realtime and
+- Use [the v1 tech stack](../v1-tech-stack-spec.md) for recommended frontend libraries, table realtime and
   sustained-session performance, optional SSR, and Cloudflare/Convex hosting with future LAN portability.
   Retain its distinction between confirmed choices and recommended defaults; the engine runtime stays open.
-- Use [the character wizard specification](docs/character-wizard-spec.md) as the primary implementation
+- Use [the character wizard specification](../character-wizard-spec.md) as the primary implementation
   reference for creation, advancement, full edits, progression history, campaign review, and interchange. It
   distinguishes confirmed requirements, proposed implementation contracts, and remaining decisions. Keep it
   current when character requirements change; foundation/research notes remain supporting evidence.
@@ -511,33 +514,33 @@ evidence; they do not prove semantics. Prefer meaningful examples and executable
   owning active Director's logged changes; pending full edits leave the effective campaign build unchanged.
   Scoped level-ups are not review gated. The user makes choices; the Director approves a revision, not
   replacement choices. See
-  [wizard modes and review](docs/character-wizard.md#wizard-modes-and-campaign-review). This is a
+  [wizard modes and review](../character-wizard.md#wizard-modes-and-campaign-review). This is a
   user-requested product workflow, distinct from development-time approval processes.
 - Project-authored application code is GPLv3 (`GPL-3.0-only`); see `LICENSE` and `THIRD_PARTY_NOTICES.md` for
   the distinction from upstream software, game content, and artwork.
 - Forge Steel is a pinned Git submodule at `vendor/forge-steel`. Keep it unmodified and do not advance its pin
   automatically. For the character workstream, use its progression/choice structure as a reference while
   keeping Steel Compendium as the intended rules-content source. Our UI and character model
-  remain independent design decisions. See [wizard foundation](docs/character-wizard.md) and
-  [dependency guide](docs/forge-steel.md).
+  remain independent design decisions. See [wizard foundation](../character-wizard.md) and
+  [dependency guide](../forge-steel.md).
 - Preserve the ability to import Forge Steel hero data files when designing our character model; exporting
   compatible files is also desired. Treat this as an interchange adapter, not a requirement to adopt Forge
-  Steel's internal model. See [file-format research](docs/forge-steel-interchange.md) for nested selections,
+  Steel's internal model. See [file-format research](../forge-steel-interchange.md) for nested selections,
   runtime state, and import refresh behavior that can affect round trips.
 - Character model direction: a decision matrix/tree supplies the build, supplemented by authored
   descriptions/flavor and inventory, with a derived stats/abilities layer and changeable play values. Keep the
   derived baseline distinct from current resources, conditions, and adjustments so recalculation does not
   reset play state. The proposed dependency-graph representation and remaining state decisions are recorded in
-  [wizard foundation](docs/character-wizard.md#character-model-direction).
+  [wizard foundation](../character-wizard.md#character-model-direction).
 - Character progression needs its own restorable history, like the game log: restore any previous recorded
   decision point (for example level-7 Shadow back to their level-3 build), including the choices and stats
   derived from them, while retaining present inventory. This is not a whole-character or encounter rewind. See
-  [progression rollback](docs/character-wizard.md#progression-history-and-rollback); live-resource
+  [progression rollback](../character-wizard.md#progression-history-and-rollback); live-resource
   reconciliation and new choices after rollback remain open.
 - Steel Compendium is a pinned Git submodule at `vendor/steel-compendium`. Keep upstream files unmodified;
-  consult [the dependency guide](docs/steel-compendium.md) to inspect or adopt updates. Do not automatically
+  consult [the dependency guide](../steel-compendium.md) to inspect or adopt updates. Do not automatically
   advance the pin during builds or startup.
-- Use [the Compendium navigation guide](docs/compendium-navigation.md) to find definitions, follow rule
+- Use [the Compendium navigation guide](../compendium-navigation.md) to find definitions, follow rule
   references, and recover sourcebook context before implementing mechanics.
 - Establish a clear, durable development process suitable for sustained agent-driven work.
 - Keep requirements, architectural decisions, rules sources, and acceptance criteria in the project so later
