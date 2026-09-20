@@ -21,11 +21,12 @@ Verify headlessly; a missing browser run is not a blocker. Log would-be browser 
 [browser coverage backlog](docs/build/browser-coverage-backlog.md). See
 [the moratorium](docs/build/README.md#browser-testing-moratorium--2026-09-20).
 
-All future Salient development server activity, across all branches and worktrees, runs on the
-dedicated dev LXC (CT114), accessed through the secret broker. Use `presidium-dev` for servers,
-dependency installation, builds and browser tests, and `presidium-ssh dev-runtime` for guest
-administration. Do not start these workloads on Presidium. Reuse the shared `main` environment;
-concurrent branches need explicitly named environments. See [the runbook](docs/remote-development.md).
+Local and remote (CT114) are both valid test environments. Use whichever is free and suitable
+for the required test; do not wait for a remote slot when the same proof can run locally.
+Coordinate workloads per host/environment, preserve existing data, and record the actual source,
+runner location and application target with results. The browser moratorium applies everywhere.
+Use `presidium-dev` and `presidium-ssh dev-runtime` for CT114. See
+[the runbook](docs/remote-development.md#choosing-a-test-environment).
 
 ## Post-v0.01 development checkpoint — 2026-09-15
 

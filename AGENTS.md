@@ -2,8 +2,9 @@ You are never to use the multiple-choice question widget, ever under any circums
 
 Read and follow [agent.MD](agent.MD) for this project's instructions.
 
-All future Salient development server activity, across all branches and worktrees, runs on the
-dedicated dev LXC (CT114), accessed through the secret broker. Use `presidium-dev` for servers,
-dependency installation, builds and browser tests, and `presidium-ssh dev-runtime` for guest
-administration. Do not start these workloads on Presidium. Reuse the shared `main` environment;
-concurrent branches need explicitly named environments. See [the runbook](docs/remote-development.md).
+Local and remote (CT114) are both valid test environments. Use whichever is free and suitable
+for the required test; do not wait for a remote slot when the same proof can run locally.
+Coordinate workloads per host/environment, preserve existing data, and record the actual source,
+runner location and application target with results. The browser moratorium applies everywhere.
+Use `presidium-dev` and `presidium-ssh dev-runtime` for CT114. See
+[the runbook](docs/remote-development.md#choosing-a-test-environment).

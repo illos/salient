@@ -322,6 +322,17 @@ boundaries, and do not re-prove persisted values there that a CLI readback alrea
 [browser testing failure audit](audits/2026-09-20-browser-testing-failures.md) records the causes
 of repeated browser failures and the accepted direction for fixing them.
 
+## Test environment selection
+
+Local and remote CT114 are both valid test environments. Use whichever is free and suitable for
+the required proof; do not block on a remote slot when an available local environment can run it.
+Coordinate capacity per host and ownership per environment. Record the source revision, runner
+location, application target, command and result. Preserve existing environment data and the shared
+playable target. Builds, dependencies and isolated services needed for local tests are permitted;
+no abandoned pilot environment or rollback copy may be reused. Follow the
+[environment-selection runbook](../remote-development.md#choosing-a-test-environment).
+The browser moratorium below applies equally to local and remote environments.
+
 ## Browser testing moratorium — 2026-09-20
 
 User decision, 2026-09-20: **all browser testing is deprecated for the time being**, until
