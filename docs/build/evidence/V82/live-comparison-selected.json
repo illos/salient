@@ -1,0 +1,47 @@
+{
+  "runId": "62355d6e-6037-4148-829c-f786ed571df8",
+  "source": "4175178f44e79a33dc548f40832c2de7136f7c8e",
+  "cohort": "all",
+  "requestedWitnesses": [
+    "memonek-1",
+    "revenant-memonek-4",
+    "memonek-2"
+  ],
+  "totalCounterparts": 137,
+  "selectedCounterparts": 3,
+  "target": "https://different-bat-943.convex.cloud",
+  "elapsedMs": 7106,
+  "results": [
+    {
+      "id": "memonek-1",
+      "characterId": "k572g1hk3pc8kbss8w2z6efxf98es6fz",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": [],
+      "forgeConditionImmunities": [],
+      "compendiumConditionImmunitiesBeyondForge": [
+        "surprised"
+      ]
+    },
+    {
+      "id": "memonek-2",
+      "characterId": "k57f77bffs45s1sjpsksj8ymex8er89e",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": [],
+      "forgeConditionImmunities": [],
+      "compendiumConditionImmunitiesBeyondForge": []
+    },
+    {
+      "id": "revenant-memonek-4",
+      "characterId": "k57c7dr0mv5xwpvvz9gafw1xrs8esdgj",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": [],
+      "forgeConditionImmunities": [],
+      "compendiumConditionImmunitiesBeyondForge": [
+        "surprised"
+      ]
+    }
+  ]
+}

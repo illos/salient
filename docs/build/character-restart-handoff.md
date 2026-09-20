@@ -1,7 +1,6 @@
 # Character wizard restart handoff
 
-Status: all twelve level-one ancestry implementations are on `slice/V82`; remote acceptance is
-running before main integration. Six previously completed ancestries (Devil, Polder, Dwarf,
+Status: all twelve level-one ancestry implementations are on `slice/V82`; hosted acceptance passed; main/shared-app delivery is in progress. Six previously completed ancestries (Devil, Polder, Dwarf,
 Human, Hakaan, Orc) are joined by Dragon Knight, High Elf, Memonek, Revenant, Time Raider and
 Wode Elf. [V82](V82-remaining-ancestries.md) owns this delivery.
 
@@ -20,7 +19,9 @@ play state with undo/redo; Revenant borrowed traits retain their original source
 Full checks on `3ddb81b` passed 333 engine and 483 app/scripts tests, lint, types, pinned sources,
 content, links and build. Review corrections in `8d5559f` passed all engine tests, 11 affected app
 tests, lint and web types. Independent implementation and fresh pinned-source reviews pass.
-The calibrated Forge generator produces 137 complete counterparts; saved API comparison is pending.
+Hosted API passes 28/28. The calibrated Forge generator produces 137 complete counterparts;
+135 saved comparisons match directly and two pass with the independently reviewed Unphased
+source difference. A targeted three-case recheck passed.
 See [V82 evidence](evidence/V82/README.md) for final live results and source/target identities.
 
 Completion is level-one ancestry wizard support: choices, budgets, prerequisites, traits, granted

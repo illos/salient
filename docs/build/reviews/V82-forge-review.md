@@ -3,7 +3,8 @@
 Reviewer: independent Astra worker; 2026-09-20. Formal review of the integration working tree
 based on `3ddb81bd121facfe3abc9a49a525babc37ef3f52`. This review covers `scripts/forge/`,
 not the reviewer's own ancestry/headless implementation. Refreshed after the required full check and
-the lead's corrected-adapter runtime results; live application comparison remains pending.
+the lead's corrected-adapter runtime results. The live discrepancy correction is reviewed below;
+its targeted runtime rerun remains pending.
 
 ## Verdict
 
@@ -12,7 +13,7 @@ duplicates, and a focused negative probe covers that exact case. Existing outer 
 payload checks remain intact. No defect found in generated legal witness selections or use of upstream
 calculations. The corrected generator reports 137 complete counterparts, successful calibration and
 passing negative probes, including the mixed duplicate regression. This approves the adapter; it
-does not pre-approve the pending live application comparison cohorts.
+does not pre-approve pending targeted runtime results for the source-qualified Unphased correction.
 
 ## Verification considered
 
@@ -22,8 +23,12 @@ also passed lint, typechecks, 333 engine tests and 11 affected app tests on CT11
 Forge generator completed with calibration passing and all 137 counterparts complete, including the
 new mixed-representation duplicate rejection. No additional reviewer runtime was needed.
 
-Live authenticated comparisons of both cohorts remain an acceptance gate for ancestry delivery.
-Their pending status does not indicate a failure of the adapter review.
+The retained initial live reports cover all 137 counterparts: 55 non-Revenant and 82 Revenant.
+Independent inspection confirms 135 passed; only `memonek-1` and `revenant-memonek-4` differ, each
+solely because Salient exposes surprised immunity while Forge's typed projection returns none.
+Original failures remain retained in `live-comparison-non-revenant-initial.json` and
+`live-comparison-revenant-initial.json`. The source-qualified correction and its targeted runtime
+rerun remain distinct from those original results.
 
 ## Source and coverage
 
@@ -68,3 +73,32 @@ which Forge stores only in prose are reported as additions, not silently filtere
 Technical Size/Speed/Damage Modifier containers are separated from named traits, while numeric values
 are independently compared. Cohort splitting preserves the full witness set under the existing
 bounded timeout. This review does not certify pending live comparison results or browser behavior.
+
+## Unphased comparison correction — independent rereview
+
+PASS for the narrow code/rules correction. Pinned Compendium
+`en/unified/md/feature/trait/memonek/unphased.md` expressly prevents surprise. Pinned Forge's
+`src/data/ancestries/memonek.ts` stores Unphased with `FactoryLogic.feature.create`, as prose;
+`HeroLogic.getConditionImmunities` reads only typed `ConditionImmunity` features. This explains the
+two observed differences without changing the correct application behavior or Forge's raw output.
+
+The comparator adds only `surprised`, only when Unphased was purchased by Memonek or by a Revenant
+whose selected former ancestry is Memonek. It independently requires the granted trait's exact
+Compendium source path and the immunity's matching provenance. The report labels the addition as
+`compendiumConditionImmunitiesBeyondForge`. Other immunity entries remain subject to exact comparison;
+there is no blanket filter, suppression or inferred allowance for unrelated ancestry differences.
+
+The optional witness filter requires unique, syntactically bounded exact IDs and proves every ID
+exists in the selected cohort before authentication. Empty, duplicate, unknown and wrong-cohort
+selections fail. A hash suffix separates targeted reports and raw Salient readbacks from the initial
+cohort artifacts. No application code or reference calculations change. The targeted three-witness
+rerun and delta verification are pending when this review is recorded; a code-review PASS is not a
+claim that those runtime checks have passed.
+
+
+## Lead acceptance record
+
+Hosted public API passed 28/28 on application `8d5559f`. All 137 live Forge witnesses were run;
+135 matched directly and two source-reviewed Unphased differences passed targeted recheck with
+one negative control on comparator `4175178`. See [retained evidence](../evidence/V82/README.md).
+This closes the live prerequisite noted in the scoped review; it does not expand its review scope.

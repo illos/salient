@@ -106,3 +106,11 @@ is authored by this reviewer and therefore requires another reviewer's independe
 approval; it is not covered by review B's independent verdict. Retain the original
 failure evidence and run focused affected/control witnesses under distinct report
 and saved-readback filenames. No application source change is warranted.
+
+
+## Lead acceptance record
+
+Hosted public API passed 28/28 on application `8d5559f`. All 137 live Forge witnesses were run;
+135 matched directly and two source-reviewed Unphased differences passed targeted recheck with
+one negative control on comparator `4175178`. See [retained evidence](../evidence/V82/README.md).
+This closes the live prerequisite noted in the scoped review; it does not expand its review scope.

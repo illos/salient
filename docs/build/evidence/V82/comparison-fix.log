@@ -1,0 +1,11 @@
+[90mscripts/forge/compare-live.ts[39m 118ms (unchanged)
+$ eslint . && prettier --check .
+Checking formatting...
+All matched files use Prettier code style!
+$ node scripts/check-links.ts
+docs/build/character-restart-handoff.md:24 evidence/V82/README.md — missing file docs/build/evidence/V82/README.md
+docs/build/reviews/V82-ancestry-review-a.md:60 ../evidence/V82/check.log — missing file docs/build/evidence/V82/check.log
+docs/build/reviews/V82-ancestry-review-b.md:74 ../evidence/V82/check.log — missing file docs/build/evidence/V82/check.log
+docs/build/reviews/V82-forge-review.md:19 ../evidence/V82/check.log — missing file docs/build/evidence/V82/check.log
+4 broken link(s) in 330 Markdown files.
+[ELIFECYCLE] Command failed with exit code 1.

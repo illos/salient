@@ -1,6 +1,7 @@
 # V82 — Complete the remaining level-one ancestries
 
-Status: In progress, `slice/V82`, `.worktrees/remaining-ancestries`, starting at main `589d357`.
+Status: implementation and hosted acceptance complete; main/shared-app delivery in progress.
+Candidate branch `slice/V82`, `.worktrees/remaining-ancestries`, starting at main `589d357`.
 User authorized all remaining wizard ancestries on 2026-09-20: Dragon Knight (V76), High Elf (V77),
 Memonek (V78), Revenant (V79), Time Raider (V80), Wode Elf (V81).
 
@@ -32,7 +33,8 @@ Review corrections in `8d5559f` separate Memonek Lightweight and Revenant Former
 provenance and reject duplicate effective borrowed traits in the Forge adapter. Delta checks
 passed all 333 engine tests, 11 affected app tests, lint and web types. Independent implementation
 and fresh pinned-source reviews pass. Hosted public API acceptance passes 28/28 scenarios in
-110.688 seconds; Forge comparison is in progress.
+110.688 seconds. Forge acceptance covers all 137 witnesses: 135 direct matches and two
+source-reviewed Unphased differences; the affected cases and a control pass the targeted recheck.
 
 The calibrated pinned Forge generator produces 137 complete counterparts: 55 non-Revenant and
 82 Revenant, including all former ancestries and eligible borrowed traits. Live comparisons run
