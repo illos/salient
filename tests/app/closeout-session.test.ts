@@ -18,7 +18,7 @@ const submit = (f: Fixture, text: string) =>
 
 async function prepare(t: Backend) {
   const f = await table(t);
-  await t.mutation(internal.content.reseed, {});
+  await t.action(internal.content.reseed, {});
   const foeId = await f.director.client.mutation(api.foes.add, {
     campaignId: f.campaignId,
     definitionId: GOBLIN_WARRIOR_ID,

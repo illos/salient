@@ -7,7 +7,7 @@ import { correctionWindow } from '../../convex/lib/history';
 
 async function fixture() {
   const t = backend();
-  await t.mutation(internal.content.reseed, {});
+  await t.action(internal.content.reseed, {});
   return { t, ...(await table(t)) };
 }
 

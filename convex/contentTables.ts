@@ -2,8 +2,8 @@
 import { defineTable } from 'convex/server';
 import { v } from 'convex/values';
 
-// Mirror of shared/content/compendium/** (see shared/content/README.md). Rows are replaced wholesale
-// by content.reseed under the disposable-data policy; nothing edits them in place.
+// Mirror of shared/content/compendium/** (see shared/content/README.md). Rows are upserted in bounded batches
+// by content.reseed; the manifest is published only after pruning and counting the completed snapshot.
 export const contentTables = {
   content: defineTable({
     // Source-qualified SCC id, e.g. mcdm.monsters.v1/monster.goblin.statblock/goblin-warrior.

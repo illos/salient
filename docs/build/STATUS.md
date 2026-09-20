@@ -417,3 +417,9 @@ passing evidence.
 | V69 | [Current-main character integration and headless coverage](V69-character-coverage.md) | Complete via V74; preserved V65 candidate; V74 integration verifies 791 checks, 27 live API scenarios and 31 Forge counterparts; merged/live b73cb8d; shared-main API 27/27 | Astra lead |
 | V70 | [Hakaan level one](V70-hakaan-level-one.md) | Complete via V74; all choices implemented; V74 full checks, live API and Forge counterparts pass; merged/live b73cb8d; shared-main API 27/27 | Astra Hakaan implementer |
 | V71 | [Orc level one](V71-orc-level-one.md) | Complete via V74; all choices including Artisan implemented; V74 full checks/live API pass; Forge comparisons pass within documented Artisan boundary; merged/live b73cb8d; shared-main API 27/27 | Astra Orc implementer |
+
+## Foes content follow-up — 2026-09-20
+
+| Slice | Document | Status | Owner | Branch |
+| --- | --- | --- | --- | --- |
+| V87 | [Core library seeding](V87-foes-library-seeding.md) | In progress | Foes coordination | slice/V87, .worktrees/foes-seeding; isolated local proof planned |

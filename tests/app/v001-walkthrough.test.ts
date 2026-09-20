@@ -40,7 +40,7 @@ test('A09: admitted hero → real combat → correction/history → closeout →
   // selected-player session, then creates, saves, submits and approves the actual R02 hero build.
   const f = await table(t);
   const { campaignId, director, player, observer, thornId } = f;
-  await t.mutation(internal.content.reseed, {});
+  await t.action(internal.content.reseed, {});
   let sequence = 0;
   const cid = () => `walkthrough-${++sequence}`;
   const command = (who: typeof player, text: string, commandId = cid()) =>

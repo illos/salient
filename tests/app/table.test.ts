@@ -187,7 +187,7 @@ describe('A03 table operations', () => {
   test('acceptance 4: /hero recover against R04 example 10.9 (recovery value 10, cap at 30)', async () => {
     const t = backend();
     const { player, campaignId, thornId } = await table(t);
-    await t.mutation(internal.content.reseed, {});
+    await t.action(internal.content.reseed, {});
     // Maximum 30 and Recoveries 10 come from the admitted fixture build (R02 4.1); the current
     // values are written directly to keep the arithmetic case isolated.
     const admitted = (await t.run(ctx => ctx.db.get(thornId)))!.liveState!;

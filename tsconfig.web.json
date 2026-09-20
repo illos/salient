@@ -36,6 +36,7 @@
     "scripts/v02-headless.ts",
     "scripts/v72-headless.ts",
     "scripts/v72-headless-main.ts",
+    "scripts/v87-headless.ts",
     "scripts/report-live-compiled-abilities.ts",
     "scripts/setup-local.ts",
     "scripts/build-content.ts",

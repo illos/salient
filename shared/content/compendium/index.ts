@@ -18,6 +18,7 @@ import cultureJson from './culture.json';
 import featureJson from './feature.json';
 import featureblockJson from './featureblock.json';
 import kitJson from './kit.json';
+import monsterJson from './monster.json';
 import perkJson from './perk.json';
 import ruleJson from './rule.json';
 import skillJson from './skill.json';
@@ -39,6 +40,7 @@ export const byKind: Record<string, ContentEntry[]> = {
   'feature': typed(featureJson),
   'featureblock': typed(featureblockJson),
   'kit': typed(kitJson),
+  'monster': typed(monsterJson),
   'perk': typed(perkJson),
   'rule': typed(ruleJson),
   'skill': typed(skillJson),

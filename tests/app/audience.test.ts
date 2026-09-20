@@ -296,7 +296,7 @@ describe('table audience boundaries', () => {
   test('Recovery persists complete pinned Catch Breath and Recovery source text and exposes both to observers', async () => {
     const t = backend();
     const { player, observer, campaignId, thornId } = await table(t);
-    await t.mutation(internal.content.reseed, {});
+    await t.action(internal.content.reseed, {});
     await t.run(async ctx =>
       ctx.db.patch(thornId, {
         liveState: { ...(await ctx.db.get(thornId))!.liveState!, stamina: 22, recoveries: 10 },

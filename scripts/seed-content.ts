@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: GPL-3.0-only
 /**
  * Loads shared/content/compendium into this checkout's local development deployment by running the
- * internal `content:reseed` mutation. Development data is disposable (pre-alpha policy): the mutation
- * replaces every content row. Refuses anything but a local deployment, like setup-local.ts.
+ * internal `content:reseed` action. Bounded transactions upsert reference rows, prune stale entries,
+ * then publish the completed manifest; interrupted seeds can be rerun. Refuses anything but a local deployment, like setup-local.ts.
  */
 import { readFileSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';

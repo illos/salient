@@ -29,7 +29,7 @@ const submit = (client: Client, campaignId: Id<'campaigns'>, text: string, comma
 /** Director, two selected players with one hero each, an observer, a running session, one foe. */
 async function historyTable(t: Backend) {
   // Catch Breath reads the content snapshot (S01); a fresh test deployment has none until reseeded.
-  await t.mutation(internal.content.reseed, {});
+  await t.action(internal.content.reseed, {});
   const director = await account(t, 'Director');
   const player = await account(t, 'Player');
   const second = await account(t, 'Second');

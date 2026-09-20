@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-only
 import { ConvexError, v } from 'convex/values';
-import { internalMutation, query } from './_generated/server';
+import { internalAction, internalMutation, query } from './_generated/server';
+import { internal } from './_generated/api';
 import type { Doc } from './_generated/dataModel';
 import { requireUser, type ReadCtx } from './lib/access';
 import { entries, manifest } from '../shared/content/compendium/index';
@@ -116,40 +117,120 @@ export const status = query({
   },
 });
 
-/**
- * Replaces every content row with the bundled snapshot. Development data is disposable (pre-alpha
- * policy), so this deletes and reinserts rather than migrating. Run through `pnpm content:seed`.
- */
-export const reseed = internalMutation({
-  args: {},
-  returns: v.object({ revision: v.string(), entryCount: v.number() }),
-  handler: async ctx => {
-    for (const row of await ctx.db.query('content').take(5000)) await ctx.db.delete(row._id);
-    for (const row of await ctx.db.query('contentManifest').take(10)) await ctx.db.delete(row._id);
-    const revision = manifest.compendium.revision;
-    for (const entry of entries)
-      await ctx.db.insert('content', {
+// Bound each transaction by rows and serialized payload. Existing rows are replaced in place so
+// a interrupted seed retains references and can be safely rerun. The manifest is absent until done.
+const BATCH_ROWS = 32;
+const BATCH_BYTES = 512 * 1024;
+const currentIds = new Set(entries.map(entry => entry.id));
+function requireSnapshot(contentHash: string) {
+  if (contentHash !== manifest.contentHash)
+    throw new ConvexError('Content changed during seeding; rerun content:seed.');
+}
+
+export const seedBatch = internalMutation({
+  args: { offset: v.number(), contentHash: v.string() },
+  returns: v.number(),
+  handler: async (ctx, { offset, contentHash }) => {
+    requireSnapshot(contentHash);
+    if (!Number.isSafeInteger(offset) || offset < 0 || offset > entries.length)
+      throw new ConvexError('Invalid content batch offset.');
+    if (offset === 0) {
+      for (const row of await ctx.db.query('contentManifest').take(10))
+        await ctx.db.delete(row._id);
+    }
+    let next = offset;
+    let bytes = 0;
+    while (next < entries.length && next - offset < BATCH_ROWS) {
+      const entry = entries[next];
+      const row = {
         contentId: entry.id,
         kind: entry.kind,
         name: entry.name,
         sourcePath: entry.sourcePath,
         selection: entry.selection,
-        revision,
+        revision: manifest.compendium.revision,
         text: entry.text,
         structured: entry.structured,
-        jsonPath: entry.jsonPath,
-        ...(entry.features !== undefined ? { features: entry.features } : {}),
-      });
+        ...(entry.jsonPath === undefined ? {} : { jsonPath: entry.jsonPath }),
+        ...(entry.features === undefined ? {} : { features: entry.features }),
+      };
+      const size = new TextEncoder().encode(JSON.stringify(row)).length;
+      if (size > BATCH_BYTES)
+        throw new ConvexError(`Content entry exceeds seed batch limit: ${entry.id}`);
+      if (bytes + size > BATCH_BYTES) break;
+      const existing = await findContent(ctx, entry.id);
+      if (existing) await ctx.db.replace(existing._id, row);
+      else await ctx.db.insert('content', row);
+      bytes += size;
+      next++;
+    }
+    return next;
+  },
+});
+
+export const pruneBatch = internalMutation({
+  args: { cursor: v.union(v.string(), v.null()), contentHash: v.string() },
+  returns: v.object({ cursor: v.string(), done: v.boolean(), retained: v.number() }),
+  handler: async (ctx, { cursor, contentHash }) => {
+    requireSnapshot(contentHash);
+    const page = await ctx.db.query('content').order('asc').paginate({
+      cursor,
+      numItems: BATCH_ROWS,
+      maximumBytesRead: BATCH_BYTES,
+    });
+    let retained = 0;
+    for (const row of page.page) {
+      if (!currentIds.has(row.contentId)) await ctx.db.delete(row._id);
+      else retained++;
+    }
+    return { cursor: page.continueCursor, done: page.isDone, retained };
+  },
+});
+
+export const finishSeed = internalMutation({
+  args: { contentHash: v.string(), entryCount: v.number() },
+  returns: v.null(),
+  handler: async (ctx, { contentHash, entryCount }) => {
+    requireSnapshot(contentHash);
+    if (entryCount !== entries.length)
+      throw new ConvexError('Content count mismatch; rerun content:seed.');
+    for (const row of await ctx.db.query('contentManifest').take(10)) await ctx.db.delete(row._id);
     await ctx.db.insert('contentManifest', {
-      revision,
+      revision: manifest.compendium.revision,
       tag: manifest.compendium.tag,
       committedAt: manifest.compendium.committedAt,
       generatorVersion: manifest.generator.version,
       generatedAt: manifest.generatedAt,
-      contentHash: manifest.contentHash,
-      entryCount: entries.length,
+      contentHash,
+      entryCount,
       seededAt: Date.now(),
     });
-    return { revision, entryCount: entries.length };
+    return null;
+  },
+});
+
+/** Internal administrator entry point; batches reference rows only, never application play data. */
+export const reseed = internalAction({
+  args: {},
+  returns: v.object({ revision: v.string(), entryCount: v.number() }),
+  handler: async (ctx): Promise<{ revision: string; entryCount: number }> => {
+    const contentHash = manifest.contentHash;
+    let offset = 0;
+    do {
+      offset = await ctx.runMutation(internal.content.seedBatch, { offset, contentHash });
+    } while (offset < entries.length);
+    let cursor: string | null = null;
+    let entryCount = 0;
+    for (;;) {
+      const page: { cursor: string; done: boolean; retained: number } = await ctx.runMutation(
+        internal.content.pruneBatch,
+        { cursor, contentHash },
+      );
+      entryCount += page.retained;
+      if (page.done) break;
+      cursor = page.cursor;
+    }
+    await ctx.runMutation(internal.content.finishSeed, { contentHash, entryCount });
+    return { revision: manifest.compendium.revision, entryCount };
   },
 });

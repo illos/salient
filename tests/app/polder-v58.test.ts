@@ -14,7 +14,7 @@ import { backend, table, admitHero } from './fixtures/table';
 test('Polder-movement traits survive save/readback with readable effects and replacement preserves live state', async () => {
   const t = backend();
   const { player, director, campaignId } = await table(t, { session: false });
-  await t.mutation(internal.content.reseed, {});
+  await t.action(internal.content.reseed, {});
   const selected = {
     ...reference.selections,
     'ancestry.polder.purchased-traits': ['Nimblestep', 'Polder Geist', 'Reactive Tumble'],

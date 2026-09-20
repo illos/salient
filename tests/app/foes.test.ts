@@ -51,7 +51,7 @@ async function setup() {
   await expect(director.client.query(api.foes.catalog, { campaignId })).rejects.toThrow(
     'content:seed',
   );
-  await t.mutation(internal.content.reseed, {});
+  await t.action(internal.content.reseed, {});
   const catalog = await director.client.query(api.foes.catalog, { campaignId });
   return { t, director, player, outsider, campaignId, catalog };
 }

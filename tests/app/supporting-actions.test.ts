@@ -13,7 +13,7 @@ import {
 
 async function context(): Promise<ScenarioContext> {
   const t = backend();
-  await t.mutation(internal.content.reseed, {});
+  await t.action(internal.content.reseed, {});
   const actors = {} as ScenarioContext['actors'];
   for (const role of ['director', 'player', 'peer'] as const) {
     const { client } = await account(t, `Supporting${role}`);

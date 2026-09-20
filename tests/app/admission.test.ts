@@ -330,7 +330,7 @@ describe('A02 admission', () => {
   test('acceptance 5 and 6: audiences of the sheet read, owner notes absent from Director and peer payloads, verbatim ability text', async () => {
     const t = backend();
     const { director, player, observer, campaignId, thornId } = await table(t);
-    await t.mutation(internal.content.reseed, {});
+    await t.action(internal.content.reseed, {});
     const owner = (await player.client.query(api.characters.sheet, {
       characterId: thornId,
     })) as HeroSheet;

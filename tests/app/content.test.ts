@@ -5,6 +5,7 @@ import { convexTest } from 'convex-test';
 import betterAuthTest from '@convex-dev/better-auth/test';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
+import { abilitiesFromStatBlock } from '../../convex/lib/resolve';
 import schema from '../../convex/schema';
 import { api, components, internal } from '../../convex/_generated/api';
 
@@ -58,11 +59,40 @@ async function setup() {
   return { t, reader };
 }
 describe('shared content snapshot', () => {
+  test('an interrupted seed resumes without changing existing ids or unrelated data', async () => {
+    const { t, reader } = await setup();
+    await t.action(internal.content.reseed, {});
+    const before = await t.run(ctx => ctx.db.query('content').take(5000));
+    const userBefore = await t.run(ctx => ctx.db.query('users').collect());
+    await t.mutation(internal.content.seedBatch, { offset: 0, contentHash: manifest.contentHash });
+    expect(await reader.query(api.content.status, {})).toBeNull();
+    expect(await reader.query(api.content.get, { id: GOBLIN_WARRIOR })).not.toBeNull();
+    await expect(
+      t.mutation(internal.content.seedBatch, { offset: 32, contentHash: 'stale-build' }),
+    ).rejects.toThrow('Content changed');
+    await t.action(internal.content.reseed, {});
+    const after = await t.run(ctx => ctx.db.query('content').take(5000));
+    expect(after.map(row => row._id)).toEqual(before.map(row => row._id));
+    expect(await t.run(ctx => ctx.db.query('users').collect())).toEqual(userBefore);
+    expect((await reader.query(api.content.status, {}))!.entryCount).toBe(manifest.entryCount);
+    const id = 'mcdm.monsters.v1/monster.undead.1st-echelon.statblock/ghoul';
+    const ghoul = await reader.query(api.content.get, { id });
+    const jsonPath =
+      'vendor/steel-compendium/en/unified/json/monster/undead/1st-echelon/statblock/ghoul.json';
+    expect(ghoul!.text).toBe(
+      readPinnedSource(root, jsonPath.replace('/json/', '/md/').replace('.json', '.md')),
+    );
+    expect(ghoul!.features).toEqual(JSON.parse(readPinnedSource(root, jsonPath)).features);
+    expect(abilitiesFromStatBlock({ ...ghoul!, contentId: ghoul!.id }).map(a => a.name)).toContain(
+      'Razor Claws',
+    );
+  });
+
   test('reseed loads every manifest entry; queries return the Goblin Warrior source verbatim', async () => {
     const { t, reader } = await setup();
     expect(await reader.query(api.content.status, {})).toBeNull();
     expect(await reader.query(api.content.get, { id: GOBLIN_WARRIOR })).toBeNull();
-    const result = await t.mutation(internal.content.reseed, {});
+    const result = await t.action(internal.content.reseed, {});
     expect(result).toEqual({
       revision: manifest.compendium.revision,
       entryCount: manifest.entryCount,
@@ -108,7 +138,7 @@ describe('shared content snapshot', () => {
 
   test('list returns the nine condition entries by kind, without their text', async () => {
     const { t, reader } = await setup();
-    await t.mutation(internal.content.reseed, {});
+    await t.action(internal.content.reseed, {});
     const conditions = await reader.query(api.content.list, { kind: 'condition' });
     // vendor/steel-compendium/en/unified/md/_index/condition.md: "Total: 9".
     expect(conditions.map(row => row.name)).toEqual([
@@ -128,7 +158,7 @@ describe('shared content snapshot', () => {
 
   test('reseed replaces rows instead of accumulating them, and reads require sign-in', async () => {
     const { t, reader } = await setup();
-    await t.mutation(internal.content.reseed, {});
+    await t.action(internal.content.reseed, {});
     await t.run(ctx =>
       ctx.db.insert('content', {
         contentId: 'stale/entry',
@@ -141,7 +171,7 @@ describe('shared content snapshot', () => {
         structured: {},
       }),
     );
-    await t.mutation(internal.content.reseed, {});
+    await t.action(internal.content.reseed, {});
     const rows = await t.run(ctx => ctx.db.query('content').take(5000));
     expect(rows).toHaveLength(manifest.entryCount);
     expect(rows.some(row => row.contentId === 'stale/entry')).toBe(false);

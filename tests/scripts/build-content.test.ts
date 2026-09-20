@@ -187,24 +187,6 @@ function sample<T>(list: T[], count: number, seed: number): T[] {
   return picked;
 }
 
-/** A frontmatter line states the value: plain, single-quoted (with '' doubling) or double-quoted. */
-function frontmatterStates(frontmatter: string, value: unknown): boolean {
-  if (typeof value === 'string')
-    return (
-      frontmatter.includes(value) ||
-      frontmatter.includes(value.replace(/'/g, "''")) ||
-      frontmatter.includes(JSON.stringify(value))
-    );
-  if (typeof value === 'number' || typeof value === 'boolean')
-    return new RegExp(`: ${value}$`, 'm').test(frontmatter);
-  if (value === null) return true;
-  if (Array.isArray(value))
-    return value.every(item => frontmatterStates(frontmatter, item)) || frontmatter.includes('[]');
-  return Object.values(value as Record<string, unknown>).every(item =>
-    frontmatterStates(frontmatter, item),
-  );
-}
-
 describe('verbatim text and traceable fields', () => {
   const sampled = sample(manifest.entries, 10, 20260914);
   test.each(sampled.map(row => [row.id, row.sourcePath]))(
@@ -215,15 +197,17 @@ describe('verbatim text and traceable fields', () => {
       expect(found.text).toBe(raw);
       const { frontmatter } = splitFrontmatter(raw);
       expect(frontmatter).toMatch(/^name:/m);
-      expect(frontmatterStates(frontmatter, found.name)).toBe(true);
+      const twin = JSON.parse(readPinnedSource(root, found.jsonPath));
+      expect(twin.name).toBe(found.name);
       expect(frontmatter).toContain(`scc: ${found.id}`);
       expect(frontmatter).toContain(`type: ${found.kind}`);
       for (const [key, value] of Object.entries(found.structured)) {
         expect(frontmatter, `${id} states ${key}`).toMatch(new RegExp(`^${key}:`, 'm'));
-        // Feature blocks (Malice pages) carry nested YAML records with block scalars that this
-        // scalar matcher cannot restate; their verbatim text is already asserted byte-exact above.
-        if (key === 'features' && Array.isArray(value)) continue;
-        expect(frontmatterStates(frontmatter, value), `${id}.${key} value`).toBe(true);
+        if (Object.hasOwn(twin, key))
+          expect(
+            Array.isArray(value) && value.length === 0 && twin[key] === null ? null : value,
+            `${id}.${key} value`,
+          ).toEqual(twin[key]);
       }
       expect(JSON.parse(readPinnedSource(root, found.jsonPath)).name).toBe(found.name);
     },
@@ -300,4 +284,20 @@ describe('verbatim text and traceable fields', () => {
       expect(found.features).toBeUndefined();
     }
   });
+});
+
+// Full-core ingestion must not silently lose a monster body, embedded feature or source boundary.
+test('all 438 core monster stat blocks retain exact Markdown and JSON features', () => {
+  const statblocks = entriesIn('statblock.json');
+  expect(statblocks).toHaveLength(438); // docs/research/foe-catalog-audit-2026-09-15.json
+  for (const row of statblocks) {
+    expect(['mcdm.monsters.v1', 'mcdm.heroes.v1']).toContain(row.id.split('/')[0]);
+    expect(row.text).toBe(readFileSync(join(root, row.sourcePath), 'utf8'));
+    const twin = JSON.parse(readFileSync(join(root, row.jsonPath!), 'utf8'));
+    expect(row.features ?? []).toEqual(twin.features ?? []);
+  }
+  const lich = entry('mcdm.monsters.v1/monster.lich/lich-malice');
+  expect(lich.text).toBe(readPinnedSource(root, lich.sourcePath));
+  const twin = JSON.parse(readPinnedSource(root, lich.jsonPath!));
+  expect(lich.structured.features).toEqual(twin.features);
 });

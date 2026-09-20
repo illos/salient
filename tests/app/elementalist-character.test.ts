@@ -26,7 +26,7 @@ const authored = {
 test('Bethell saves, reloads and supplies complete sourced features, abilities and independent source totals', async () => {
   const t = backend();
   const { player, director, observer, campaignId } = await table(t, { session: false });
-  await t.mutation(internal.content.reseed, {});
+  await t.action(internal.content.reseed, {});
   const id = await admitHero(t, player, director, campaignId, 'Bethell', selections());
   const saved = await player.client.query(api.characters.get, { characterId: id });
   const evaluated = saved.evaluation as EvaluationResult;

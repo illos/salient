@@ -32,8 +32,9 @@ import type {
   ManifestSelection,
 } from '../shared/contracts/content.ts';
 import { parseFrontmatter, splitFrontmatter, type FrontmatterValue } from './lib/frontmatter.ts';
+import { parseDocument } from 'yaml';
 
-export const GENERATOR_VERSION = '1.0.3';
+export const GENERATOR_VERSION = '1.0.4';
 export const SCHEMA_VERSION = 's01.1';
 export const SUBMODULE_PATH = 'vendor/steel-compendium';
 export const OUTPUT_DIR = 'shared/content/compendium';
@@ -56,27 +57,17 @@ export const SELECTIONS: ManifestSelection[] = [
       'docs/build/V37-supporting-character-choices.md: full source for supporting character choices; ancestry/class availability remains separately restricted.',
   },
   {
-    id: 'goblin-family',
+    id: 'core-monsters',
     description:
-      'Every goblin stat block (ordinary goblins and the Spinecleaver/Sniper/Runner minions V02 squads use), with the goblin group Malice features the directory holds.',
-    paths: ['monster/goblin'],
+      'Core monster stat blocks, embedded features and group Malice from the pinned corpus.',
+    paths: [
+      'monster',
+      'rule/monster/squad.md',
+      'rule/monster/captain.md',
+      'rule/organization/minion.md',
+    ],
     basis:
-      'docs/build/V02-minions-and-captains.md#inputs-and-dependencies: minion stat blocks come from the S01 pipeline; docs/monster-catalog-spec.md#features-and-supporting-rules: group Malice must be discoverable alongside the stat block.',
-  },
-  {
-    id: 'dwarf-family',
-    description:
-      'Every dwarf stat block and the dwarf Malice features: the Axethrower is the table spec’s worked example of a captain Stamina benefit, which V02 proves on real data.',
-    paths: ['monster/dwarf'],
-    basis:
-      'docs/table-spec.md#minion-squads-and-captain-state: the 2026-09-20 worked example uses four Dwarf Axethrowers (Stamina 7, +2 with captain).',
-  },
-  {
-    id: 'squad-rules',
-    description:
-      'The minion organization, squad and captain rule pages that V02 squad operations cite as supporting sources in the game log.',
-    paths: ['rule/organization/minion.md', 'rule/monster/squad.md', 'rule/monster/captain.md'],
-    basis: 'docs/table-spec.md#minion-squads-and-captain-state',
+      'docs/monster-catalog-spec.md#features-and-supporting-rules: retain source text and embedded abilities for every core monster.',
   },
   {
     id: 'devil-ancestry',
@@ -321,7 +312,13 @@ function loadFile(root: string, relativePath: string, selection: string): Loaded
   const { frontmatter } = splitFrontmatter(text);
   let fields: Record<string, FrontmatterValue>;
   try {
-    fields = parseFrontmatter(frontmatter);
+    // Full monster frontmatter includes literal block scalars (for example Lich Malice).
+    // Keep strict duplicate-key/error handling and cross-check every field against its JSON twin.
+    const document = parseDocument(frontmatter, { uniqueKeys: true });
+    if (document.errors.length) throw document.errors[0];
+    fields = document.toJS({ maxAliasCount: 0 }) as Record<string, FrontmatterValue>;
+    if (!fields || Array.isArray(fields) || typeof fields !== 'object')
+      throw new Error('Frontmatter must be a mapping.');
   } catch (error) {
     throw new Error(`${relativePath}: ${(error as Error).message}`);
   }

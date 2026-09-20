@@ -8,7 +8,7 @@ test.each(['roll', 'choice'])(
   async phase => {
     const t = backend();
     const { director, player, campaignId, thornId } = await table(t);
-    await t.mutation(internal.content.reseed, {});
+    await t.action(internal.content.reseed, {});
     const goblin = await director.client.mutation(api.foes.add, {
       campaignId,
       definitionId: 'mcdm.monsters.v1/monster.goblin.statblock/goblin-warrior',
@@ -47,7 +47,7 @@ test.each(['roll', 'choice'])(
 test('real Malice costs and affordability refusals hide pools from both peer audiences', async () => {
   const t = backend();
   const { director, player, observer, campaignId } = await table(t);
-  await t.mutation(internal.content.reseed, {});
+  await t.action(internal.content.reseed, {});
   const goblin = await director.client.mutation(api.foes.add, {
     campaignId,
     definitionId: 'mcdm.monsters.v1/monster.goblin.statblock/goblin-warrior',
