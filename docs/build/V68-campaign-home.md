@@ -134,3 +134,15 @@ None raised. Assumptions recorded above for user review: the START SESSION inter
   environment limit unrelated to this slice; the CT114 full check is the authoritative baseline.
 - Assumption under review: START SESSION selects every current member (the session screen that owns
   selection is a later slice).
+
+### 2026-09-20 — incident: codegen touched the hosted dev deployment
+
+At 02:50 UTC `pnpm exec convex codegen` was run on Presidium in the slice worktree to refresh
+`convex/_generated` after adding `convex/presence.ts` and `convex/chat.ts`. The worktree has no
+`.env.local`, but the thread's shell environment carries an ambient `CONVEX_DEPLOY_KEY`, and with
+the Better Auth component present the Convex CLI's codegen performs a dry-run start push against
+that deployment (`dev:different-bat-943`). That staged the two new indexes on hosted without
+finishing a push; no functions, content or data changed there. The WIZARD thread's V69 hosted
+deployment at 03:04 UTC removed the staged indexes, which was correct, and nothing needed preserving.
+Lesson recorded: no Convex CLI command runs on Presidium; codegen and every other CLI step run on
+CT114 through `presidium-dev`, where no cloud credential is present.
