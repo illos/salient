@@ -1,0 +1,109 @@
+{
+  "run": "v02-mu9v1dwg",
+  "startedAt": "2026-09-20T13:36:48.544Z",
+  "elapsedMs": 9808,
+  "backend": "http://backend:3210",
+  "passed": true,
+  "steps": [
+    {
+      "step": "table: player admitted, session started, hero Thorn admitted through the wizard route",
+      "ok": true,
+      "evidence": {
+        "campaignId": "j576em2y5qhsd67sy0np21axg18esha0",
+        "thornId": "k578xat4zhcj9jnd5mj2er05618es7b8"
+      }
+    },
+    {
+      "step": "squad add: four Spinecleavers persist one squad, four minion identities, pool 20, EV 3; minions refuse /foe add",
+      "ok": true,
+      "evidence": {
+        "squadId": "ph79c7rh6t9shjgwgz7gzsgm2n8esfyk",
+        "members": [
+          "Goblin Spinecleaver 1",
+          "Goblin Spinecleaver 2",
+          "Goblin Spinecleaver 3",
+          "Goblin Spinecleaver 4"
+        ],
+        "ev": {
+          "amount": 3,
+          "derived": 3,
+          "printed": "3 for four minions",
+          "quantity": 4
+        },
+        "peerHealth": {
+          "fraction": 1,
+          "mode": "bar"
+        }
+      }
+    },
+    {
+      "step": "combat: one squad turn entry, its shared turn fires one turn-start boundary with all four participants",
+      "ok": true,
+      "evidence": {
+        "entries": 3,
+        "participants": 4
+      }
+    },
+    {
+      "step": "squad act: one roll, two minions on Thorn add free strike 2, one on the warrior; damage read back from the recorded tier",
+      "ok": true,
+      "evidence": {
+        "tiers": [
+          1,
+          1
+        ],
+        "thornStamina": 26,
+        "warriorStamina": 13
+      }
+    },
+    {
+      "step": "ladder: Brutal Slam on a minion reduces the pool and derives casualties from the printed steps; owed choices are named by the attacker",
+      "ok": true,
+      "evidence": {
+        "tier": 2,
+        "damage": 8,
+        "pool": 12,
+        "deaths": 1,
+        "named": [],
+        "living": 3
+      }
+    },
+    {
+      "step": "history: undoing the Brutal Slam restores the pool and the dropped minions exactly",
+      "ok": true,
+      "evidence": {
+        "pool": 20,
+        "living": 4
+      }
+    },
+    {
+      "step": "Free Strike Together: two minions on Thorn apply one 4-damage strike",
+      "ok": true,
+      "evidence": {
+        "thornStamina": 22
+      }
+    },
+    {
+      "step": "captain: two Axethrowers with the warrior as captain pool 18 at step 9; detaching reverts to 14 at step 7 with no casualty",
+      "ok": true,
+      "evidence": {
+        "pool": {
+          "carried": 0,
+          "mode": "director",
+          "pool": 14,
+          "poolMax": 14,
+          "step": 7
+        },
+        "living": 2
+      }
+    },
+    {
+      "step": "removal: single minions are refused; the squad is removed as a unit",
+      "ok": true,
+      "evidence": {
+        "squads": 1,
+        "foes": 3
+      }
+    }
+  ]
+}

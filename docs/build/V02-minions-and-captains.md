@@ -208,3 +208,26 @@ in its own thread), pruning `squads.memberIds` after cleanup (V06 decides), corr
 squad pool damage, once-per-squad immunity/weakness once minion modifiers are parsed, compiled push
 through the coordinated attack, and the browser scenarios in the backlog.
 
+## Merge and shared rollout — 2026-09-20
+
+User requested the merge. `slice/V02` was rebased onto main `ad8bdbe` (V83/V84 included; conflicts
+in the debit signature, the browser backlog rows and the V72 support report, which was regenerated
+on the rebased tree: reachable compiled 7, compatibility 123, unavailable 3), the integrated
+`pnpm check` passed every stage including the build, `check-commit --merge --range main..slice/V02`
+passed, and main fast-forwarded to `c1b52cb`.
+
+Shared playable target: CT114 `main` slot, Compose `salient-dev-b90776c53141`, frontend
+`https://salient-dev-fc4f48cb09a0.tail41404c.ts.net`, anonymous local backend inside the Compose
+network (`backend:3210`, site `3211`). `presidium-dev up` from the canonical checkout at `c1b52cb`
+(clean) rebuilt web and backend; "Convex functions ready" 13:35:54 UTC with the additive `squads`
+table and `foes.squadId`. Content reseed through the recorded compose exec of `content:reseed`
+inside that backend: manifest 567 entries (hash `aaf7c0…`) → 595 entries
+(hash `65beca9b…`), revision unchanged; no reset, existing play data retained.
+
+Live changed-feature check: `scripts/v02-headless.ts` from the build service against that backend,
+run `v02-mu9v1dwg`, 9/9 steps, exit 0, 9808 ms, disposable accounts and campaign only
+([report](evidence/V02/main-headless.json), [log](evidence/V02/main-headless.log)). Squad add and
+projections, the shared turn, the coordinated attack, the ladder with the casualty card, rewind,
+Free Strike Together, captain benefit and loss, and removal all read back as expected on the shared
+app. No browser run (moratorium); visual scenarios remain in the backlog. Merge complete.
+

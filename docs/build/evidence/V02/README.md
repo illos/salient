@@ -23,3 +23,11 @@ sequencing only (the casualty answer is its own undo unit and must be rewound be
 the free strike must pick living minions), fixed in the script.
 
 Accounts are disposable (`<run>-<role>@headless.invalid`). Full local checks are in the V02 work log.
+
+## Shared main — merge completion
+
+- `main-headless.json`, `main-headless.log` — the same script against the shared CT114 `main`
+  app after the merge (source `c1b52cb`, backend `http://backend:3210` inside the Compose
+  network, content 595 entries): run `v02-mu9v1dwg`, 9 steps passed, 9808 ms, exit 0.
+  Disposable accounts and campaign only; no reset or seed of play data.
+

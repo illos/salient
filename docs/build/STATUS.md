@@ -151,7 +151,7 @@ See the [CI review and run record](audits/2026-09-14-ci-history-review.md) for t
 | Id | Slice | Depends on | Status |
 | --- | --- | --- | --- |
 | V01 | [Respite research and loop](V01-respite.md) | A09 | Outline |
-| V02 | [Minion squads and captains](V02-minions-and-captains.md) | A09 | Reviewed on branch, awaiting merge — `slice/V02` (`.worktrees/minions`) at `b903692` plus this closeout, 2026-09-20; full `pnpm check`, 9-step headless proof and independent implementation/rules reviews pass; not merged, shared runtime untouched |
+| V02 | [Minion squads and captains](V02-minions-and-captains.md) | A09 | Complete — merged and live 2026-09-20: main `c1b52cb`; independent implementation/rules reviews pass; integrated full check; shared CT114 main updated (595-entry content reseed, data retained) and the 9-step live squad journey passes on it |
 | V03 | [Boss and villain turn mechanics](V03-boss-turn-mechanics.md) | V02 | Outline |
 | V04 | [Persistent area cards and response reconciliation](V04-areas-and-response-reconciliation.md) | A09 | Outline |
 | V05 | [Ability parser and class/stat-block automation](V05-ability-automation.md) | A09, V04 | Outline |
