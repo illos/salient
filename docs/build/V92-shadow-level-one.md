@@ -115,3 +115,20 @@ any other class. Spec sections: `docs/character-wizard-spec.md#3-decision-system
   branch `slice/V92` from main `0352664`. Design above; WIZARD.2 (`f8b014d3`) owns source inventory
   verification, independent expected values, Forge witnesses and the rules review; the lead owns the
   shared changes, the content module, tests and integration handoff. TESTER runs the check.
+- 2026-09-20: built. Commits on `slice/V92`: `4032f4d` shared evaluator (`dependsOnAny`, kit-required
+  vitals, insight resource), `76e7e37` + `9f287bb` content module and registration (rules review by
+  WIZARD.2: pass, `docs/build/audits/V92-shadow-rules-review.md`; source inventory
+  `docs/build/audits/V92-shadow-source-inventory.md`), `9c35cd4` ledger and Forge Shadow family,
+  `ce2c8a0` tests and headless journey. Authoring checks run locally: tsc (root and web), eslint,
+  prettier, `vitest run tests/character-v92-shadow.test.ts` 4/4, `vitest run --project app
+  tests/app/shadow-character.test.ts` 1/1, kit-parent and regression files 136/136. All four ledger
+  witnesses match the evaluator field by field. TESTER job `test-V92-ce2c8a0-1` submitted (full
+  check, Forge counterparts, headless cohort).
+- Decisions and residue: ability grants carry the ability file as source with no quote (the
+  "You have the following ability." sentence lives in the feature stubs); the Elementalist module
+  has the older quoting and is left for a separate fix. Hesitation Is Weakness and Clever Trick show
+  their 1 Insight cost from the ability source metadata, not as a baseline `cost` (grants carry no
+  cost quote; same as every granted ability today). A Mage's Apprentice Shadow of Black Ash gets the
+  duplicate-Magic replacement through the Elementalist-named legacy decision id
+  `class.elementalist.magic-replacement`, which fires for any second Magic source; renaming it is a
+  separate compatibility change. Insight gains, edge discounts and ability effects stay manual.

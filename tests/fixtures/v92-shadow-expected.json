@@ -19,17 +19,11 @@
         "career.choice": "Soldier",
         "career.soldier.skill.exploration": "Endurance",
         "career.soldier.skill.intrigue": "Alertness",
-        "career.soldier.languages": [
-          "Kalliak",
-          "Vaslorian"
-        ],
+        "career.soldier.languages": ["Kalliak", "Vaslorian"],
         "career.soldier.perk": "Teamwork",
         "career.soldier.inciting-incident": "Sole Survivor",
         "ancestry.choice": "Human",
-        "ancestry.human.purchased-traits": [
-          "Determination",
-          "Can't Take Hold"
-        ],
+        "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
         "class.choice": "Shadow",
         "class.shadow.characteristic-array": "2, 2, −1, −1",
         "class.shadow.array-assignment": {
@@ -100,17 +94,8 @@
           "Sneak",
           "Swim"
         ],
-        "languages": [
-          "Anjali",
-          "Caelian",
-          "Kalliak",
-          "Vaslorian"
-        ],
-        "traits": [
-          "Detect the Supernatural",
-          "Determination",
-          "Can't Take Hold"
-        ],
+        "languages": ["Anjali", "Caelian", "Kalliak", "Vaslorian"],
+        "traits": ["Detect the Supernatural", "Determination", "Can't Take Hold"],
         "features": [
           "Culture edge",
           "Shadow College",
@@ -120,9 +105,7 @@
           "Kit",
           "Shadow Abilities"
         ],
-        "perks": [
-          "Teamwork"
-        ],
+        "perks": ["Teamwork"],
         "abilities": [
           "Detect the Supernatural",
           "Determination",
@@ -166,17 +149,11 @@
         "career.choice": "Soldier",
         "career.soldier.skill.exploration": "Endurance",
         "career.soldier.skill.intrigue": "Alertness",
-        "career.soldier.languages": [
-          "Kalliak",
-          "Vaslorian"
-        ],
+        "career.soldier.languages": ["Kalliak", "Vaslorian"],
         "career.soldier.perk": "Teamwork",
         "career.soldier.inciting-incident": "Sole Survivor",
         "ancestry.choice": "Human",
-        "ancestry.human.purchased-traits": [
-          "Determination",
-          "Can't Take Hold"
-        ],
+        "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
         "class.choice": "Shadow",
         "class.shadow.characteristic-array": "2, 1, 1, −1",
         "class.shadow.array-assignment": {
@@ -247,17 +224,8 @@
           "Sneak",
           "Swim"
         ],
-        "languages": [
-          "Anjali",
-          "Caelian",
-          "Kalliak",
-          "Vaslorian"
-        ],
-        "traits": [
-          "Detect the Supernatural",
-          "Determination",
-          "Can't Take Hold"
-        ],
+        "languages": ["Anjali", "Caelian", "Kalliak", "Vaslorian"],
+        "traits": ["Detect the Supernatural", "Determination", "Can't Take Hold"],
         "features": [
           "Culture edge",
           "Shadow College",
@@ -268,9 +236,7 @@
           "Shadow Abilities",
           "Smoke Bomb"
         ],
-        "perks": [
-          "Teamwork"
-        ],
+        "perks": ["Teamwork"],
         "abilities": [
           "Detect the Supernatural",
           "Determination",
@@ -314,17 +280,11 @@
         "career.choice": "Soldier",
         "career.soldier.skill.exploration": "Endurance",
         "career.soldier.skill.intrigue": "Alertness",
-        "career.soldier.languages": [
-          "Kalliak",
-          "Vaslorian"
-        ],
+        "career.soldier.languages": ["Kalliak", "Vaslorian"],
         "career.soldier.perk": "Teamwork",
         "career.soldier.inciting-incident": "Sole Survivor",
         "ancestry.choice": "Human",
-        "ancestry.human.purchased-traits": [
-          "Determination",
-          "Can't Take Hold"
-        ],
+        "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
         "class.choice": "Shadow",
         "class.shadow.characteristic-array": "2, 1, 0, 0",
         "class.shadow.array-assignment": {
@@ -395,17 +355,8 @@
           "Sneak",
           "Swim"
         ],
-        "languages": [
-          "Anjali",
-          "Caelian",
-          "Kalliak",
-          "Vaslorian"
-        ],
-        "traits": [
-          "Detect the Supernatural",
-          "Determination",
-          "Can't Take Hold"
-        ],
+        "languages": ["Anjali", "Caelian", "Kalliak", "Vaslorian"],
+        "traits": ["Detect the Supernatural", "Determination", "Can't Take Hold"],
         "features": [
           "Culture edge",
           "Shadow College",
@@ -415,9 +366,7 @@
           "Kit",
           "Shadow Abilities"
         ],
-        "perks": [
-          "Teamwork"
-        ],
+        "perks": ["Teamwork"],
         "abilities": [
           "Detect the Supernatural",
           "Determination",
@@ -461,17 +410,11 @@
         "career.choice": "Soldier",
         "career.soldier.skill.exploration": "Endurance",
         "career.soldier.skill.intrigue": "Alertness",
-        "career.soldier.languages": [
-          "Kalliak",
-          "Vaslorian"
-        ],
+        "career.soldier.languages": ["Kalliak", "Vaslorian"],
         "career.soldier.perk": "Teamwork",
         "career.soldier.inciting-incident": "Sole Survivor",
         "ancestry.choice": "Human",
-        "ancestry.human.purchased-traits": [
-          "Determination",
-          "Can't Take Hold"
-        ],
+        "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
         "class.choice": "Shadow",
         "class.shadow.characteristic-array": "1, 1, 1, 0",
         "class.shadow.array-assignment": {
@@ -542,17 +485,8 @@
           "Sneak",
           "Swim"
         ],
-        "languages": [
-          "Anjali",
-          "Caelian",
-          "Kalliak",
-          "Vaslorian"
-        ],
-        "traits": [
-          "Detect the Supernatural",
-          "Determination",
-          "Can't Take Hold"
-        ],
+        "languages": ["Anjali", "Caelian", "Kalliak", "Vaslorian"],
+        "traits": ["Detect the Supernatural", "Determination", "Can't Take Hold"],
         "features": [
           "Culture edge",
           "Shadow College",
@@ -562,9 +496,7 @@
           "Kit",
           "Shadow Abilities"
         ],
-        "perks": [
-          "Teamwork"
-        ],
+        "perks": ["Teamwork"],
         "abilities": [
           "Detect the Supernatural",
           "Determination",
