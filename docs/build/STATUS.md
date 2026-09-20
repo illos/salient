@@ -19,7 +19,7 @@ initial host inventory and user-authorized retirement of old development servers
 
 | Job / Chords message | Requester | Exact source / checks and inputs | State / host / target | Result / evidence |
 | --- | --- | --- | --- | --- |
-| `test-V85-V86-854a5dd-1` / 793 | WIZARD `a45eccaa-2dd6-4bb8-ae39-e3a217d1aeb1` | `854a5dd470dc8f9b5dbe050b1da5db50bc1fba45`, `.worktrees/supporting-actions`; [job details](evidence/V85/tester-job-854a5dd.md) | **Blocked**: WIZARD must supply corrected candidate; planned local runner → hosted dev `different-bat-943` | No tests/deploy run; two known deployment source blockers retained; queue slot free |
+| `test-V85-V86-854a5dd-1` / 793 | WIZARD `a45eccaa-2dd6-4bb8-ae39-e3a217d1aeb1` | `854a5dd470dc8f9b5dbe050b1da5db50bc1fba45`, `.worktrees/supporting-actions`; [job details](evidence/V85/tester-job-854a5dd.md) | **Blocked**: WIZARD must supply corrected candidate; planned local runner → hosted dev `different-bat-943` | No tests/deploy run; return wake 796 accepted; queue slot free |
 
 ## Post-v0.01 organization — 2026-09-15
 

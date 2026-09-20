@@ -67,3 +67,13 @@ No CT114 source upload or old-stack restart is needed for a local CLI calling th
 WIZARD reports no remaining owned jobs and the isolated `supporting-actions` stack stopped.
 Recheck capacity when the corrected candidate arrives. Return results through Chords without
 waking peers from an automated turn, and update the existing status queue.
+
+## Return delivery
+
+The initial blocked return, Chords message 794, was stored without a wake. After the user made
+requester wakes mandatory, attempting to add `wake: true` to that immutable message key was refused
+because it changed the recorded message content. TESTER sent corrective direct message **796** with
+stable key `test-V85-V86-854a5dd-1-blocked-wake-1` and `wake: true`. Chords reported
+`wake.status: accepted` (`turn_request_accepted`). This means T3 accepted a turn request; it does
+not claim that WIZARD started or completed the repair. Future job returns include the wake on their
+first send, so retries can reuse the identical key and content.
