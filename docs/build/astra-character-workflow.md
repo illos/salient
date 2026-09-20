@@ -1,8 +1,7 @@
 # Astra character delivery
 
-Status: staged on 2026-09-19 at the user's request. The Opus pilot is
-[abandoned without reuse](../decisions/2026-09-19-opus-pilot-dead-end.md). Implementation has not
-restarted. This document owns the replacement character workflow; [V44](V44-character-option-delivery.md)
+Status: implementation resumed at the user's request; verification queued separately on 2026-09-20. The Opus pilot is
+[abandoned without reuse](../decisions/2026-09-19-opus-pilot-dead-end.md). Fresh implementation is underway. This document owns the replacement character workflow; [V44](V44-character-option-delivery.md)
 owns its delivery scope, and [the build process](README.md) retains project-wide review and merge rules.
 
 ## Ownership and parallel work
@@ -19,8 +18,10 @@ not a separate worker scheduling system. Never invent a sender identity to resol
 
 Only shared-file edits, use of a shared runtime slot, and merges are serialized. Unit implementation
 continues while another unit waits for review or runtime verification. A failed merge gate blocks
-that merge, not unrelated coding. Keep at most two unmerged option units active initially; finish
-or resolve those before opening a backlog of additional partially implemented units.
+that merge, not unrelated coding. The initial two-unit limit was expanded by the user on 2026-09-20: keep Devil/Polder in the
+verification queue, assign a subagent the closeout blocker, and implement two further ancestries
+(Dwarf/Human) concurrently. Finish this bounded batch before adding more units. Failed required
+verification still blocks its merge; it must not block independent development.
 
 ## Unit contract
 
