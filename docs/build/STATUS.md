@@ -13,14 +13,15 @@ One active job across all hosts, including setup/build/cleanup. On resume, recon
 row with actual processes before dispatch. Keep terminal evidence in the slice work log and prune
 completed rows only after the requester has the result through a direct `wake: true` Chords return.
 
-Updated 2026-09-20 14:51 UTC: the third V85/V86 candidate passed all local and deployment gates,
-then exhausted the hosted runner's shared 240-second budget after 30/35 scenarios. The four V85/V86
-scenarios did not run, so the job is blocked pending a bounded proof that can complete them.
+Updated 2026-09-20 14:53 UTC: V87 is the active serial job after the third V85/V86 candidate was
+returned blocked. V85/V86 passed all local and deployment gates, then exhausted the hosted runner's
+shared 240-second budget after 30/35 scenarios; its four acceptance scenarios did not run.
 The [adoption and cleanup record](audits/2026-09-20-testing-coordinator-adoption.md) records the
 initial host inventory and user-authorized retirement of old development servers.
 
 | Job / Chords message | Requester | Exact source / checks and inputs | State / host / target | Result / evidence |
 | --- | --- | --- | --- | --- |
+| `test-V87-4d8c127-1` / 808 | FOES1 `7fa5ae52-8819-4a86-8309-78d59a6b93a1` | `4d8c127d840379f69cd6deac99e6be2ed0770989`, `.worktrees/foes-seeding`; focused foe/content tests, `pnpm check`, retained isolated local Convex proof | **Running**: local Presidium; isolated anonymous Convex cloud 3260/site 3261 after pure gates | Pending; record cold first-call catalog latency and available runtime-memory evidence, stop backend and retain data |
 | `test-V85-V86-86e9d2e-3` / 803 | WIZARD `a45eccaa-2dd6-4bb8-ae39-e3a217d1aeb1` | `86e9d2ed3b82a5d027f631f677975f040439f472`, `.worktrees/supporting-actions`; supersedes [TS1543 blocker](evidence/V85/tester-job-b08ebcd.md) | **Blocked**: local gates and dev deployments passed; hosted API proof 30/35, shared runner deadline before V85/V86 cases | [Evidence](evidence/V85/tester-job-86e9d2e.md); artifacts: `/srv/presidium/projects/salient/test-artifacts/V85-V86-86e9d2e-20260920T1433Z`; direct return 811, wake accepted |
 
 ## Post-v0.01 organization — 2026-09-15
