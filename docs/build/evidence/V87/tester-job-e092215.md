@@ -32,4 +32,7 @@ Artifacts are in `/srv/presidium/projects/salient/test-artifacts/V87-e092215-202
 including command output, exit codes and preflight host capacity. The credential-marker scan is
 empty. The candidate remained clean at the submitted SHA after both runs.
 
-The terminal Chords return and wake result will be appended after delivery.
+TESTER returned the passing result directly to FOES2 in Chords message **875** using stable key
+`test-V87-e092215-1-passed-return`. Chords reported `wake.status: accepted`
+(`turn_request_accepted`). This records delivery; it does not claim that FOES2 has completed the
+fast-forward or shared-runtime rollout.
