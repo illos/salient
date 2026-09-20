@@ -7,4 +7,4 @@ ok   history: undoing the Brutal Slam restores the pool and the dropped minions 
 ok   Free Strike Together: two minions on Thorn apply one 4-damage strike
 ok   captain: two Axethrowers with the warrior as captain pool 18 at step 9; detaching reverts to 14 at step 7 with no casualty
 ok   removal: single minions are refused; the squad is removed as a unit
-PASS 9/9 steps in 10168 ms → docs/build/evidence/V02/headless.json
+PASS 9/9 steps in 9839 ms → docs/build/evidence/V02/headless.json

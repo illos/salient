@@ -439,7 +439,10 @@ try {
   await step(
     'captain: two Axethrowers with the warrior as captain pool 18 at step 9; detaching reverts to 14 at step 7 with no casualty',
     async () => {
-      if (warriorStamina <= 0) return { skipped: 'warrior already at 0 Stamina' };
+      expect(
+        warriorStamina > 0,
+        'the warrior must be standing to captain (a dead warrior would skip this step)',
+      );
       await submit(
         director,
         campaignId,

@@ -1,7 +1,7 @@
 {
-  "run": "v02-mu9n5vkg",
-  "startedAt": "2026-09-20T09:56:21.136Z",
-  "elapsedMs": 10168,
+  "run": "v02-mu9nsur3",
+  "startedAt": "2026-09-20T10:14:13.167Z",
+  "elapsedMs": 9839,
   "backend": "http://127.0.0.1:3250",
   "passed": true,
   "steps": [
@@ -9,15 +9,15 @@
       "step": "table: player admitted, session started, hero Thorn admitted through the wizard route",
       "ok": true,
       "evidence": {
-        "campaignId": "jh76132xd4wxphck9qv3b3pxen8er55c",
-        "thornId": "k57chftej30aa4wmcdbtyfjrn98erffh"
+        "campaignId": "jh71v8hga87ecddkhcx60z81v98ese2j",
+        "thornId": "k57297ecgbkm2dhhtgpsvs3pgh8erfc6"
       }
     },
     {
       "step": "squad add: four Spinecleavers persist one squad, four minion identities, pool 20, EV 3; minions refuse /foe add",
       "ok": true,
       "evidence": {
-        "squadId": "nx70qbtc4xwges56s3115d98sn8erdjx",
+        "squadId": "nx78dr8eg70jnbyx5scxav0wpd8erfez",
         "members": [
           "Goblin Spinecleaver 1",
           "Goblin Spinecleaver 2",
@@ -60,9 +60,9 @@
       "step": "ladder: Brutal Slam on a minion reduces the pool and derives casualties from the printed steps; owed choices are named by the attacker",
       "ok": true,
       "evidence": {
-        "tier": 1,
-        "damage": 5,
-        "pool": 15,
+        "tier": 2,
+        "damage": 8,
+        "pool": 12,
         "deaths": 1,
         "named": [],
         "living": 3

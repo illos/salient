@@ -37,6 +37,7 @@ import { requireContent } from '../content';
 import { journalPatch } from './journal';
 import { run, type OperationDefinition, type Outcome, type TableContext } from './registry';
 import {
+  assertNoPendingCasualties,
   dropMembers,
   loadSquad,
   poolState,
@@ -495,6 +496,7 @@ function adjustOperation(field: AdjustableField): OperationDefinition {
             `${actor!.name} is a squad with a shared Stamina pool; ${field.label} does not apply to minions.`,
           );
         const squad = await loadSquad(ctx, context.campaign._id, actor!.id as Id<'squads'>);
+        assertNoPendingCasualties(squad);
         const state = poolState(squad, await squadMembers(ctx, squad));
         const outcome = manual(squad.name, squad.pool, value, {
           kind: 'squad',

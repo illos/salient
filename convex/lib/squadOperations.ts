@@ -60,6 +60,7 @@ import {
 import {
   applyCaptainGain,
   applyCaptainLoss,
+  assertNoPendingCasualties,
   captainOf,
   commitSquadPlans,
   describeSquadPlans,
@@ -98,6 +99,13 @@ function integer(value: unknown, name: string, min?: number, max?: number): numb
 async function squadOf(ctx: MutationCtx, context: TableContext, actor: BoundActor | null) {
   if (actor?.kind !== 'squad') throw new ConvexError('Name the squad as the @actor (@{squad:id}).');
   return loadSquad(ctx, context.campaign._id, actor.id as Id<'squads'>);
+}
+
+/** The squad for operations that change its pool, participation or captain: owed casualties first. */
+async function settledSquadOf(ctx: MutationCtx, context: TableContext, actor: BoundActor | null) {
+  const squad = await squadOf(ctx, context, actor);
+  assertNoPendingCasualties(squad);
+  return squad;
 }
 
 function structuredOf(entry: Pick<Doc<'content'>, 'structured'>) {
@@ -342,7 +350,7 @@ const squadCaptain: OperationDefinition = {
   actor: 'required',
   execute: async (ctx, { context, actor, args }) => {
     await requireNotPaused(ctx, context.campaign);
-    const squad = await squadOf(ctx, context, actor);
+    const squad = await settledSquadOf(ctx, context, actor);
     const turns = await currentRound(ctx, context);
     const previous = await captainOf(ctx, squad);
     if (typeof args.captain === 'string') {
@@ -452,7 +460,7 @@ const squadParticipation: OperationDefinition = {
   session: 'running',
   actor: 'required',
   execute: async (ctx, { context, actor, args }) => {
-    const squad = await squadOf(ctx, context, actor);
+    const squad = await settledSquadOf(ctx, context, actor);
     const member = await bindTarget(ctx, context, args.member as Reference, null);
     if (!member.foe || member.foe.squadId !== squad._id)
       throw new ConvexError(`${member.actor.name} is not a member of ${squad.name}.`);
@@ -594,7 +602,7 @@ function isSignature(snapshot: ReturnType<typeof foeSnapshot>, ability: AbilityD
 }
 
 async function squadContext(ctx: MutationCtx, context: TableContext, actor: BoundActor | null) {
-  const squad = await squadOf(ctx, context, actor);
+  const squad = await settledSquadOf(ctx, context, actor);
   const members = await squadMembers(ctx, squad);
   const living = members.filter(isLiving);
   if (!living.length) throw new ConvexError(`${squad.name} has no living minions.`);
@@ -780,7 +788,9 @@ const squadAct: OperationDefinition = {
     const participantData = participants.map(p => ({ id: p._id, name: p.name }));
     const commitUses = async (mctx: MutationCtx, scope: JournalScope, critical: boolean) => {
       for (const a of allowances) {
-        await recordUse(mctx, scope, a.allowance, a.actor, actionType, ability.name, a.tracking);
+        await recordUse(mctx, scope, a.allowance, a.actor, actionType, ability.name, a.tracking, {
+          shared: true,
+        });
         if (critical && a.allowance.inCombat && a.allowance.encounterId)
           await journalInsert(mctx, scope, 'actionOpportunities', {
             campaignId: scope.campaignId,

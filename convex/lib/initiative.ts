@@ -517,6 +517,24 @@ export async function onCaptainAttached(
   const encounter = await committedEncounter(ctx, campaign);
   if (!encounter || !encounter.phase) return [];
   const round = encounter.round ?? 0;
+  // A captain attached while taking its own turn finishes that turn first (current-monster rule).
+  if (encounter.activeTurnId) {
+    const turn = await ctx.db.get(encounter.activeTurnId);
+    if (turn && turn.actor.kind === 'foe' && turn.actor.id === captainId) {
+      await dispatchBoundary(
+        ctx,
+        scope,
+        encounter._id,
+        { kind: 'turn-end', round: turn.round, turn: await turnRef(ctx, turn) },
+        turn.actor.name,
+      );
+      await journalPatch(ctx, scope, 'turns', turn._id, {
+        status: 'ended',
+        endedEventId: scope.eventId,
+      });
+      await journalPatch(ctx, scope, 'encounters', encounter._id, { activeTurnId: null });
+    }
+  }
   const entries = await ctx.db
     .query('turnEntries')
     .withIndex('by_encounter', q => q.eq('encounterId', encounter._id))

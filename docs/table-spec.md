@@ -2032,9 +2032,17 @@ the turn's participants, so global every-turn work fires once. Registered operat
 damage, or Grab/Knockback/Hide/Search together) and `squad.free-strike` (Free Strike Together).
 Automated With Captain forms are `+N bonus to Stamina`, `+N damage bonus to strikes`, `Gain an
 edge on strikes` and `Have a double edge on strikes`; every other printed benefit is shown as text
-for manual play. Interpretations recorded here: the captain's strike damage bonus applies once per
-target of the coordinated signature attack (one ability instance) and once per minion in Free Strike
-Together (each is its own free strike); a dead captain edited back above zero is not re-attached.
+for manual play. Interpretations recorded here, both from `chapter/monster-basics.md`: in the
+coordinated signature attack each target "is affected by only one instance of the ability" (Squad
+Action), so a captain's strike damage bonus applies once per target; the alternative considered,
+once per contributing minion, would add the bonus to the free-strike contributions the source
+describes as extra damage rather than strikes. In Free Strike Together "the damage from each
+minion's free strike is added together" (Free Strike Together), so each minion's own strike carries
+the bonus before the sum; the alternative, once on the merged strike, would deny the benefit the
+captain rule grants to "each minion". A minion that uses a Strike ability on its own while a
+captain with a strike benefit is attached is pointed to `/squad act` with itself as the only
+participant, where the benefit applies; its lone free strike carries the bonus directly. A dead
+captain edited back above zero is not re-attached.
 Known limits: post-roll corrections that would change squad pool damage are refused in V02 (rewind
 or adjust the pool instead); minion immunities and weaknesses printed as anything but `-` still
 leave damage manual, so the once-per-squad modifier rule has no automated case yet; compiled push

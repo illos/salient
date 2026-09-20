@@ -218,7 +218,6 @@ function AddFoe({
           </Button>
           <span className="tabular-nums" aria-live="polite">
             {count} minion{count === 1 ? '' : 's'}
-            {selected.stamina !== null ? ` · pool ${count * selected.stamina}` : ''}
           </span>
           <Button
             type="button"

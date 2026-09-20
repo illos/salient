@@ -163,3 +163,28 @@ minions cannot be winded. Elapsed wall time for the whole build on 2026-09-20: a
 No browser run (moratorium); the visual scenarios are in
 [the backlog](browser-coverage-backlog.md).
 
+Acceptance check 6 deviation: no persisted encounter summary exists yet (EV belongs to V06), so the
+proportional EV is stored on the squad row and read back through `table.roster`; the 2.25 case is
+proven there. Trait-granted ability gate: the seeded minion traits were checked against the pinned
+stat blocks; Crafty (Spinecleaver, Sniper, Runner) is passive, the Sniper signature's conditional
+edge is a modifier, and the dwarf minion Effect clauses grant no separate action, so no
+trait-granted action is missing; the traits remain readable in the sheet.
+
+### 2026-09-20 — independent review round 1: changes required, addressed
+
+Reviewer (fresh read-only Fable subagent, static review of `main..9e4a54d` plus the two test files
+rerun): implementation **changes required**, rules **pass**. Repairs: new damage, captain changes,
+participation, squad actions and pool edits are refused while a squad owes a casualty choice (the
+pool and living count could otherwise diverge); a lone minion's free strike carries the captain's
+strike damage bonus and its individual Strike ability use is pointed to `/squad act` with one
+participant while a strike benefit is attached; a squad maneuver taken together no longer marks its
+participants as having acted alone; a captain attached while taking its own turn finishes that turn
+first; the headless captain step fails rather than skips when the warrior is dead; the add controls
+no longer preview pool arithmetic; the two interpretations carry their alternatives and citations;
+the trait gate and the acceptance-6 deviation are recorded above.
+Rerun after the repairs: `tests/squad.test.ts` 13/13, `tests/app/squads.test.ts` 10/10 (new: owed
+casualties refused until named; lone free strike 2 + 1 with a captain; individual Axe pointed to the
+squad action; Grab together leaves the individual record), `abilities`, `closeout-session` and
+`history` suites pass (49 tests together); headless proof 9/9 again (run `v02-mu9nsur3`,
+9839 ms). Review round 2 requested.
+

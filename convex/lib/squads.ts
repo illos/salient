@@ -54,8 +54,33 @@ export async function squadMembers(ctx: ReadCtx, squad: Doc<'squads'>): Promise<
   return rows;
 }
 
+/**
+ * An owed casualty choice must be answered before the pool changes again, or the pool and the
+ * living count diverge (review finding, 2026-09-20). Damage, captain changes, participation and
+ * squad actions refuse until the card or /squad casualties names the minions.
+ */
+export function assertNoPendingCasualties(squad: Doc<'squads'>): void {
+  if (squad.pending)
+    throw new ConvexError(
+      `${squad.name} still owes ${squad.pending.count} ${squad.pending.count === 1 ? 'casualty' : 'casualties'} from the last hit; name ${squad.pending.count === 1 ? 'it' : 'them'} first (the casualty card or /squad casualties).`,
+    );
+}
+
 /** A minion lives while its row holds its printed Stamina; the ladder writes 0 when it drops. */
 export const isLiving = (foe: Doc<'foes'>) => foe.live.stamina > 0;
+
+/** The pool state without the members an owed casualty choice will drop (kept last in order). */
+function withoutOwed(state: SquadPoolState, squad: Doc<'squads'>): SquadPoolState {
+  const owed = squad.pending?.count ?? 0;
+  if (!owed) return state;
+  const candidates = new Set(squad.pending!.candidates as string[]);
+  const survivors = state.living.filter(id => !candidates.has(id));
+  const doomed = state.living.filter(id => candidates.has(id));
+  return {
+    ...state,
+    living: [...survivors, ...doomed.slice(0, Math.max(0, doomed.length - owed))],
+  };
+}
 
 export function poolState(squad: Doc<'squads'>, members: Doc<'foes'>[]): SquadPoolState {
   return {
@@ -164,7 +189,8 @@ export async function applyCaptainLoss(
   round: number | null,
 ): Promise<{ change: CaptainStaminaChange | null; casualties: string[] }> {
   const members = await squadMembers(ctx, squad);
-  const state = poolState(squad, members);
+  // Minions already owed as casualties are dead in rules terms: they neither carry nor lose the benefit.
+  const state = withoutOwed(poolState(squad, members), squad);
   const bonus = squad.captainBenefit?.stamina ?? 0;
   const change = bonus ? applyCaptainStamina(state, -bonus) : null;
   await writePool(ctx, scope, squad, change?.state ?? state, {
@@ -183,7 +209,7 @@ export async function applyCaptainGain(
   captainId: Id<'foes'>,
 ): Promise<CaptainStaminaChange | null> {
   const members = await squadMembers(ctx, squad);
-  const state = poolState(squad, members);
+  const state = withoutOwed(poolState(squad, members), squad);
   const bonus = squad.captainBenefit?.stamina ?? 0;
   const change = bonus ? applyCaptainStamina(state, bonus) : null;
   await writePool(ctx, scope, squad, change?.state ?? state, {
@@ -226,6 +252,7 @@ export async function planSquadDamage(
   }
   const plans: SquadPlan[] = [];
   for (const { squad, hits: squadHits } of bySquad.values()) {
+    assertNoPendingCasualties(squad);
     const members = await squadMembers(ctx, squad);
     const names = Object.fromEntries(members.map(m => [m._id, m.name]));
     const result = applySquadDamage(
@@ -342,6 +369,21 @@ export function minionApplication<T extends { windedBefore: boolean; windedAfter
   return application && record.squad
     ? { ...application, windedBefore: false, windedAfter: false }
     : application;
+}
+
+/**
+ * The printed With Captain strike benefit in force for a squad member: present while a living
+ * captain is attached and the benefit has an automated strike form (Captain Benefits).
+ */
+export async function activeStrikeBenefit(
+  ctx: ReadCtx,
+  squad: Doc<'squads'> | undefined,
+): Promise<{ text: string; strikeDamage: number; strikeEdges: number } | null> {
+  if (!squad?.captainId || !squad.captainBenefit) return null;
+  const captain = await ctx.db.get(squad.captainId);
+  if (!captain || captain.live.stamina <= 0) return null;
+  const { text, strikeDamage, strikeEdges } = squad.captainBenefit;
+  return strikeDamage || strikeEdges ? { text, strikeDamage, strikeEdges } : null;
 }
 
 export function squadActor(squad: Pick<Doc<'squads'>, '_id' | 'name'>): BoundActor {

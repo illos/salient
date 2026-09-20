@@ -480,6 +480,70 @@ describe('V02 minion squads', () => {
     expect(await stamina(t, w2)).toBe(-5);
   });
 
+  test('owed casualties block new pool changes until named; a lone minion free strike carries the captain bonus and its own Axe use is pointed to the squad action', async () => {
+    const t = backend();
+    const f = await arena(t);
+    const squad = await addSquad(f, SPINECLEAVER, 4);
+    const [m1, m2, m3, m4] = squad.members as Id<'foes'>[];
+    const w = await addWarrior(f);
+    await startCombat(f);
+    const slam = await brutalSlam(t, f, foeRef(m1!), [9, 9]); // 15: m1 drops, two nearest owed
+    expect((await squadRow(t, squad.id)).pending?.count).toBe(2);
+    // Review finding 1: damage, captain changes, participation and pool edits wait for the answer.
+    await expect(spearCharge(t, f, w, m4!, [1, 1])).rejects.toThrow('still owes 2 casualties');
+    await expect(
+      submit(
+        f.director.client,
+        f.campaignId,
+        `${squadRef(squad.id)} /squad captain captain=${foeRef(w)}`,
+      ),
+    ).rejects.toThrow('still owes');
+    await expect(
+      submit(f.director.client, f.campaignId, `${squadRef(squad.id)} /adjust stamina value=4`),
+    ).rejects.toThrow('still owes');
+    expect(await squadRow(t, squad.id)).toMatchObject({ pool: 5, pending: { count: 2 } });
+    await f.player.client.mutation(api.commands.submit, {
+      campaignId: f.campaignId,
+      text: `/card respond card=@{interaction:${slam.interactionId}} answer={"casualties": [${foeRef(m2!)}, ${foeRef(m3!)}]}`,
+      commandId: cid('card'),
+    });
+    await spearCharge(t, f, w, m4!, [1, 1]); // 3 damage now lands: pool 5 → 2
+    expect(await squadRow(t, squad.id)).toMatchObject({ pool: 2, pending: null });
+    // Review finding 2: with a captain (+1 damage bonus to strikes) a lone free strike deals 2 + 1;
+    // the minion's own Axe use is routed to /squad act with one participant.
+    await submit(
+      f.director.client,
+      f.campaignId,
+      `${squadRef(squad.id)} /squad captain captain=${foeRef(w)}`,
+      'captain',
+    );
+    const before = await heroStamina(t, f.thornId);
+    const strike = await submit(
+      f.director.client,
+      f.campaignId,
+      `${foeRef(m4!)} /ability use ability="Free Strike" targets=[@Thorn]`,
+      'fs',
+    );
+    expect((await eventOf(t, f, strike.eventId)).description).toContain('With Captain');
+    expect(await heroStamina(t, f.thornId)).toBe(before - 3);
+    await expect(
+      submit(
+        f.director.client,
+        f.campaignId,
+        `${foeRef(m4!)} /ability use ability="Axe" targets=[@Thorn]`,
+      ),
+    ).rejects.toThrow('/squad act');
+    // Grab has no Strike keyword: a lone Grab still resolves individually.
+    await atDice(t, f.campaignId, [7, 6]);
+    const grab = await submit(
+      f.director.client,
+      f.campaignId,
+      `${foeRef(m4!)} /ability use ability=Grab targets=[@Thorn]`,
+      'grab',
+    );
+    expect((await eventOf(t, f, grab.eventId)).kind).toBe('ability.use');
+  });
+
   test('Free Strike Together: four minions free strike Thorn as one 8-damage strike', async () => {
     const t = backend();
     const f = await arena(t);
@@ -552,6 +616,15 @@ describe('V02 minion squads', () => {
       f.campaignId,
       `${foeRef(squad.members[0]!)} /ability use ability=Grab targets=[@Thorn]`,
       'grab',
+    );
+    expect((await squadRow(t, squad.id)).participation.individual).toEqual([squad.members[0]]);
+    // A maneuver taken together is not an individual maneuver: the shared Grab leaves the record.
+    await atDice(t, f.campaignId, [7, 6]);
+    await submit(
+      f.director.client,
+      f.campaignId,
+      `${squadRef(squad.id)} /squad act ability="Grab" assignments=[{"target": @Thorn, "minions": [${foeRef(squad.members[1]!)}]}]`,
+      'grab-together',
     );
     expect((await squadRow(t, squad.id)).participation.individual).toEqual([squad.members[0]]);
     await atDice(t, f.campaignId, [7, 6]);

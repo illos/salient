@@ -77,6 +77,7 @@ import {
 import { requireContent } from '../content';
 import { baselineOf, requireHeroLive, type HeroLive } from './characterBuild';
 import {
+  activeStrikeBenefit,
   commitSquadPlans,
   describeSquadPlans,
   minionApplication,
@@ -677,6 +678,7 @@ export async function recordUse(
   actionType: string,
   label: string,
   plan: TrackingPlan,
+  options: { shared?: boolean } = {},
 ) {
   if (!allowance.inCombat || !allowance.encounterId) return;
   const opportunityId = plan.opportunity?._id ?? null;
@@ -698,7 +700,7 @@ export async function recordUse(
     });
   // V02 Minion Maneuvers: a minion taking an individual maneuver cannot also join the squad's
   // main action or maneuver this turn; note it on the squad's participation record.
-  if (actor.kind === 'foe' && actionType === 'maneuver' && allowance.turnId) {
+  if (actor.kind === 'foe' && actionType === 'maneuver' && allowance.turnId && !options.shared) {
     const foe = await ctx.db.get(actor.id as Id<'foes'>);
     const squad = foe?.squadId ? await ctx.db.get(foe.squadId) : null;
     if (
@@ -1061,17 +1063,22 @@ const abilityUse: OperationDefinition = {
     }
 
     // ---- Director-controlled creature free strike (R04 4.4): no roll.
+    // V02 Captain Benefits: a squad member's own strikes carry the attached captain's printed
+    // strike bonus. A free strike takes it directly; a rolled Strike ability goes through the
+    // coordinated action with one participant, where edges and damage are applied uniformly.
+    const strikeBenefit = records.squad ? await activeStrikeBenefit(ctx, records.squad) : null;
     if (ability.kind === 'creature-free-strike') {
       const target = targets[0]!;
       const facts = damageTargetFacts(target);
       const supporting = [await supportingSource(ctx, CREATURE_FREE_STRIKE_RULE_ID)];
+      const strikeValue = ability.freeStrikeValue! + (strikeBenefit?.strikeDamage ?? 0);
       const application = minionApplication(
         target,
         'facts' in facts
           ? resolveCreatureFreeStrike(
               {
                 actorId: actor!.id,
-                freeStrikeValue: ability.freeStrikeValue!,
+                freeStrikeValue: strikeValue,
                 targetId: target.actor.id,
               },
               facts.facts,
@@ -1089,11 +1096,16 @@ const abilityUse: OperationDefinition = {
         : `${ability.freeStrikeValue} damage to ${target.actor.name} not applied`;
       return {
         kind: 'ability.use',
-        description: `${actor!.name} makes a free strike on ${target.actor.name} (no roll; Free Strike ${ability.freeStrikeValue}): ${damageText}.${strikePlans.length ? ` ${describeSquadPlans(strikePlans)}` : ''}${warnings.length ? ` ${warnings.join(' ')}` : ''}`,
+        description: `${actor!.name} makes a free strike on ${target.actor.name} (no roll; Free Strike ${ability.freeStrikeValue}${strikeBenefit?.strikeDamage ? ` + ${strikeBenefit.strikeDamage} With Captain: ${strikeBenefit.text}` : ''}): ${damageText}.${strikePlans.length ? ` ${describeSquadPlans(strikePlans)}` : ''}${warnings.length ? ` ${warnings.join(' ')}` : ''}`,
         ...(strikeCard ? { interaction: strikeCard } : {}),
         data: {
           ability: abilityData,
-          freeStrike: { value: ability.freeStrikeValue, target: target.actor },
+          freeStrike: {
+            value: strikeValue,
+            printed: ability.freeStrikeValue,
+            ...(strikeBenefit ? { captainBonus: strikeBenefit.strikeDamage } : {}),
+            target: target.actor,
+          },
           damage: [
             {
               target: target.actor,
@@ -1120,6 +1132,10 @@ const abilityUse: OperationDefinition = {
       };
     }
 
+    if (strikeBenefit && ability.keywords.some(k => /strike/i.test(plainText(k))))
+      throw new ConvexError(
+        `${actor!.name} is a squad minion with a captain (With Captain: ${strikeBenefit.text}); use @{squad:${records.squad!._id}} /squad act ability="${ability.name}" with ${actor!.name} as the only participant so the benefit applies.`,
+      );
     // ---- Rolled ability (R04 sections 1, 2, 4, 6, 9).
     const compiledDefinition =
       ability.compilation?.mode === 'compiled' ? ability.compilation.definition : undefined;
