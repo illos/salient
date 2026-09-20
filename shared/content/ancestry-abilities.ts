@@ -1,3 +1,8 @@
+import { revenantAbilities } from './ancestries/revenant/abilities.ts';
+import { timeRaiderAbilities } from './ancestries/time-raider/abilities.ts';
+import { abilities as dragonKnightAbilities } from './ancestries/dragon-knight/abilities.ts';
+import { abilities as highElfAbilities } from './ancestries/high-elf/abilities.ts';
+import { memonekAbilities } from './ancestries/memonek/abilities.ts';
 // SPDX-License-Identifier: GPL-3.0-only
 /** Ancestry traits also expose their granted actions. Source text, not automation.
  * Authority: pinned Steel Compendium fb83a789da8f0327a389c277a0c790b1648d5810.
@@ -19,6 +24,11 @@ export interface AncestryAbilitySource {
 }
 
 export const ANCESTRY_ABILITIES: AncestryAbilitySource[] = [
+  ...revenantAbilities,
+  ...timeRaiderAbilities,
+  ...dragonKnightAbilities,
+  ...highElfAbilities,
+  ...memonekAbilities,
   {
     name: 'Glowing Eyes',
     ancestry: 'Devil',

@@ -1,0 +1,173 @@
+Target: dev (different-bat-943); frontend https://salient-dev.rdxx.workers.dev; operation backend
+▌ Deploying code to deployment:
+▌ [Development] jim-pringle:salient:dev/jim-pringle (dev) (dashboard: https://dashboard.convex.dev/t/jim-pringle/salient/different-bat-943)
+▌ └─ https://different-bat-943.convex.cloud
+- Deploying to https://different-bat-943.convex.cloud...
+
+[36mA minor update is available for Convex[39m [2m(1.45.0 → 1.46.0)[22m
+[2mChangelog:[22m [4mhttps://github.com/get-convex/convex-js/blob/main/CHANGELOG.md#changelog[24m
+Convex AI files are not installed. Run npx convex ai-files install to get started or npx convex ai-files disable to hide this message.
+✔ No indexes are deleted by this push
+Uploading functions to Convex...
+Generating TypeScript bindings...
+Running TypeScript...
+Pushing code to your Convex deployment...
+Schema validation complete.
+Finalizing push...
+✔ Deployed Convex functions to https://different-bat-943.convex.cloud
+Target: dev (different-bat-943); frontend https://salient-dev.rdxx.workers.dev; operation seed
+{
+  "entryCount": 567,
+  "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+}
+Target: dev (different-bat-943); frontend https://salient-dev.rdxx.workers.dev; operation build
+$ pnpm rules:ingest && tsc -p tsconfig.web.json && vite build && node scripts/check-web-budget.ts
+$ node scripts/ingest-rules.ts && node scripts/build-foes-assets.ts
+Ingested 2614 entries, 26 categories from fb83a789da8f. No unresolved links.
+Foe delivery: 2507 entries; version ab2c43b79669b916
+[36mvite v8.3.0 [32mbuilding client environment for production...[36m[39m
+transforming...
+✓ 2870 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                                         1.92 kB │ gzip:   0.76 kB
+dist/.vite/manifest.json                                               11.21 kB │ gzip:   1.58 kB
+dist/assets/search.worker-Bi7Y7SQU.js                                  18.32 kB
+dist/assets/search.worker-k8EMhjsh.js                                  19.13 kB
+dist/assets/schibsted-grotesk-latin-ext-wght-normal-hsMS0n0O.woff2     20.92 kB
+dist/assets/DrawSteelGlyphs-Regular-Bxmll151.otf                       21.63 kB
+dist/assets/schibsted-grotesk-latin-wght-normal-Bb8VGrTG.woff2         46.75 kB
+dist/assets/reference-C1jW4vvI.css                                      0.75 kB │ gzip:   0.39 kB
+dist/assets/foes-BGgFncNM.css                                           3.96 kB │ gzip:   1.16 kB
+dist/assets/rules-6fkgoGTZ.css                                         12.26 kB │ gzip:   2.86 kB
+dist/assets/index-CQJDASgc.css                                         91.23 kB │ gzip:  16.56 kB
+dist/assets/arrow-left-2SZjxN2W.js                                      0.19 kB │ gzip:   0.17 kB
+dist/assets/external-link-BnffAPVo.js                                   0.27 kB │ gzip:   0.21 kB
+dist/assets/useNavigate-BhLc6pKf.js                                     0.31 kB │ gzip:   0.23 kB
+dist/assets/pill-D-biTKKB.js                                            0.50 kB │ gzip:   0.33 kB
+dist/assets/preview-DDCIYdaR.js                                         0.96 kB │ gzip:   0.57 kB
+dist/assets/worker-client-BLect5SJ.js                                   1.22 kB │ gzip:   0.74 kB
+dist/assets/content-CoqgTreo.js                                         1.55 kB │ gzip:   0.75 kB
+dist/assets/event-links-WomBRRcH.js                                     2.02 kB │ gzip:   1.00 kB
+dist/assets/composite-D3Fn7Vkj.js                                       2.94 kB │ gzip:   1.14 kB
+dist/assets/article-Bj_Lf0gi.js                                         3.08 kB │ gzip:   1.47 kB
+dist/assets/x-D0KqTHUP.js                                               3.23 kB │ gzip:   1.57 kB
+dist/assets/useStore-CuFll-SH.js                                        3.26 kB │ gzip:   1.51 kB
+dist/assets/preview-CZdgIQ0b.js                                         3.71 kB │ gzip:   1.59 kB
+dist/assets/password-recovery-BB0TFX1j.js                               3.76 kB │ gzip:   1.48 kB
+dist/assets/link-C4BMJDHo.js                                            4.35 kB │ gzip:   2.01 kB
+dist/assets/characters-CMP-Um-4.js                                      7.97 kB │ gzip:   2.62 kB
+dist/assets/with-selector-D-Vjxtnh.js                                  10.92 kB │ gzip:   4.10 kB
+dist/assets/foes-dyjM5CJn.js                                           12.34 kB │ gzip:   4.42 kB
+dist/assets/rules-41vyqRwz.js                                          13.49 kB │ gzip:   4.40 kB
+dist/assets/progression-CCW8-H0K.js                                    14.66 kB │ gzip:   5.20 kB
+dist/assets/overlay-card-CzNJ9vpX.js                                   18.12 kB │ gzip:   6.88 kB
+dist/assets/campaigns-DlEgHox-.js                                      28.63 kB │ gzip:   7.89 kB
+dist/assets/auth-client-BKXM8YsY.js                                    30.35 kB │ gzip:  11.48 kB
+dist/assets/reference-DFWHVow1.js                                      32.32 kB │ gzip:  11.03 kB
+dist/assets/createBaseUIEventDetails-ELM1N8LF.js                       34.84 kB │ gzip:  14.32 kB
+dist/assets/character-sheet-toG4TKuX.js                                48.37 kB │ gzip:  12.64 kB
+dist/assets/table-BmjySpWQ.js                                          78.07 kB │ gzip:  20.84 kB
+dist/assets/ui-W_vUS40d.js                                             82.91 kB │ gzip:  24.33 kB
+dist/assets/wizard-D6PdjuzF.js                                        125.38 kB │ gzip:  31.08 kB
+dist/assets/index-Bhi1huxY.js                                         321.00 kB │ gzip: 103.62 kB
+dist/assets/supporting-components-DoQ7uyzv.js                       1,031.80 kB │ gzip: 216.87 kB
+
+[32m✓ built in 3.46s[39m
+[33m[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.[39m
+[33m[33m[PLUGIN_TIMINGS] [0mPlugin hooks ran for 3.3s of this 3.5s build (96%).
+3 hooks are listed without a time. Their calls overlapped, so the time inside one call includes work from other calls. To find their cost, profile the build with `node --cpu-prof`:
+  - @tailwindcss/vite:generate:build transform (6 calls)
+  - vite:css transform (6 calls)
+  - vite:worker-import-meta-url transform (2 calls)
+See https://rolldown.rs/reference/InputOptions.checks#plugintimings for more details.
+[39m
+{
+  "initial": {
+    "raw": 489808,
+    "gzip": 160816
+  },
+  "assets": [
+    "assets/index-Bhi1huxY.js",
+    "assets/with-selector-D-Vjxtnh.js",
+    "assets/ui-W_vUS40d.js",
+    "assets/createBaseUIEventDetails-ELM1N8LF.js",
+    "assets/x-D0KqTHUP.js",
+    "assets/useStore-CuFll-SH.js",
+    "assets/useNavigate-BhLc6pKf.js",
+    "assets/auth-client-BKXM8YsY.js",
+    "assets/composite-D3Fn7Vkj.js"
+  ],
+  "rules": {
+    "catalog": {
+      "raw": 982599,
+      "gzip": 112848
+    },
+    "index": {
+      "raw": 5463389,
+      "gzip": 1411557
+    },
+    "largestContinuation": 135780,
+    "largestInitialArticle": 415705
+  },
+  "foes": {
+    "catalog": {
+      "raw": 877715,
+      "gzip": 101309
+    },
+    "index": {
+      "raw": 1484171,
+      "gzip": 373816
+    },
+    "largestDetail": 55297
+  }
+}
+Target: dev (different-bat-943); frontend https://salient-dev.rdxx.workers.dev; operation frontend
+Progress: resolved 1, reused 0, downloaded 0, added 0
+Progress: resolved 59, reused 0, downloaded 14, added 0
+Packages: +35
++++++++++++++++++++++++++++++++++++
+Progress: resolved 91, reused 0, downloaded 35, added 33
+Progress: resolved 91, reused 0, downloaded 36, added 33
+Progress: resolved 91, reused 0, downloaded 38, added 35, done
+
+ ⛅️ wrangler 4.134.0
+────────────────────
+🌀 Building list of assets...
+✨ Read 3297 files from the assets directory /app/dist
+🌀 Starting asset upload...
+🌀 Found 20 new or modified static assets to upload. Proceeding with upload...
++ /assets/preview-DDCIYdaR.js
++ /assets/article-Bj_Lf0gi.js
++ /assets/link-C4BMJDHo.js
++ /assets/foes-dyjM5CJn.js
++ /assets/overlay-card-CzNJ9vpX.js
++ /assets/character-sheet-toG4TKuX.js
++ /assets/index-Bhi1huxY.js
++ /index.html
++ /assets/preview-CZdgIQ0b.js
++ /assets/characters-CMP-Um-4.js
++ /assets/rules-41vyqRwz.js
++ /assets/campaigns-DlEgHox-.js
++ /assets/table-BmjySpWQ.js
++ /assets/supporting-components-DoQ7uyzv.js
++ /assets/event-links-WomBRRcH.js
++ /assets/password-recovery-BB0TFX1j.js
++ /.vite/manifest.json
++ /assets/progression-CCW8-H0K.js
++ /assets/reference-DFWHVow1.js
++ /assets/wizard-D6PdjuzF.js
+Uploaded 6 of 20 assets
+Uploaded 13 of 20 assets
+Uploaded 20 of 20 assets
+✨ Success! Uploaded 20 files (3266 already uploaded) (1.85 sec)
+
+Total Upload: 0.44 KiB / gzip: 0.31 KiB
+Uploaded salient-dev (5.18 sec)
+Deployed salient-dev triggers (0.56 sec)
+  https://salient-dev.rdxx.workers.dev
+Current Version ID: ff4da11e-6772-4e3c-bdd4-afd2fc88b000

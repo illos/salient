@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-only
 /** Saved public-API comparisons; consumes independently executed Forge output. No browser. */
 import assert from 'node:assert/strict';
+import { createHash } from 'node:crypto';
 import { readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { createActor, failureDetails, type ActorSession } from '../headless/character-client.ts';
@@ -30,12 +31,30 @@ type Counterpart = {
     abilities: string[];
     conditionImmunities: string[];
     damageImmunities: { damageType: string; value: number }[];
+    damageWeaknesses: { damageType: string; value: number }[];
     ancestryFeatures: string[];
   };
 };
 const output = process.env.SALIENT_FORGE_OUTPUT;
 if (!output || process.env.SALIENT_HEADLESS_TARGET !== 'https://different-bat-943.convex.cloud')
   throw new Error('headless-target-validation-failed');
+const cohort = process.env.SALIENT_FORGE_COHORT ?? 'all';
+assert.ok(['all', 'non-revenant', 'revenant'].includes(cohort), 'Unknown Forge cohort');
+const witnessFilter = process.env.SALIENT_FORGE_WITNESSES;
+const requestedWitnesses = witnessFilter === undefined ? null : witnessFilter.split(',');
+if (requestedWitnesses)
+  assert.ok(
+    requestedWitnesses.length > 0 &&
+      requestedWitnesses.every(id => /^[a-z0-9-]+$/.test(id)) &&
+      new Set(requestedWitnesses).size === requestedWitnesses.length,
+    'Witness filter requires unique exact IDs',
+  );
+const selectionSuffix = requestedWitnesses
+  ? `-selected-${createHash('sha256').update(requestedWitnesses.join(',')).digest('hex').slice(0, 12)}`
+  : '';
+const reportName = `live-comparison${cohort === 'all' ? '' : `-${cohort}`}${selectionSuffix}.json`;
+let totalCounterparts = 0;
+let selectedCounterparts = 0;
 const sessions: ActorSession[] = [];
 const results: unknown[] = [];
 const runId = crypto.randomUUID();
@@ -44,11 +63,15 @@ const source = process.env.SALIENT_HEADLESS_SOURCE;
 assert.ok(source && /^[a-f0-9]{40}$/.test(source), 'Provide actual adapter source commit');
 const report = () =>
   writeFileSync(
-    join(output, 'live-comparison.json'),
+    join(output, reportName),
     JSON.stringify(
       {
         runId,
         source,
+        cohort,
+        requestedWitnesses,
+        totalCounterparts,
+        selectedCounterparts,
         target: process.env.SALIENT_HEADLESS_TARGET,
         elapsedMs: Date.now() - started,
         results,
@@ -71,9 +94,23 @@ const names = (values: string[]) =>
 const values = (selections: DraftSelection[]) =>
   Object.fromEntries(selections.map(s => [s.decisionId, s.value]));
 try {
-  const counterparts = JSON.parse(
+  const allCounterparts = JSON.parse(
     readFileSync(join(output, 'counterparts.json'), 'utf8'),
   ) as Counterpart[];
+  totalCounterparts = allCounterparts.length;
+  const counterparts = allCounterparts.filter(
+    w =>
+      (cohort === 'all' ||
+        (cohort === 'revenant' ? w.ancestry === 'Revenant' : w.ancestry !== 'Revenant')) &&
+      (!requestedWitnesses || requestedWitnesses.includes(w.id)),
+  );
+  if (requestedWitnesses)
+    assert.deepEqual(
+      counterparts.map(w => w.id).sort(),
+      [...requestedWitnesses].sort(),
+      'Unknown witness ID or witness outside selected cohort',
+    );
+  selectedCounterparts = counterparts.length;
   assert.ok(
     counterparts.length > 0 && counterparts.every(w => w.forge.complete),
     'Forge completion prerequisite',
@@ -135,7 +172,7 @@ try {
       const sheet = await actor.query<HeroSheet>('characters:sheet', { characterId });
       // Retain real readbacks even when a comparison fails.
       writeFileSync(
-        join(output, `${witness.id}-salient.json`),
+        join(output, `${witness.id}-salient${selectionSuffix}.json`),
         JSON.stringify({ characterId, saved, sheet }, null, 2) + '\n',
       );
       assert.equal(saved.status, 'complete', 'Saved counterpart completeness');
@@ -174,27 +211,60 @@ try {
         ...(witness.ancestry === 'Dwarf' ? ['Runic Carving: Carve, Change, or Remove Rune'] : []),
         ...(witness.ancestry === 'Orc' ? ['Relentless'] : []),
         ...['Stone Singer', 'Doomsight'].filter(name => witness.purchasedTraits.includes(name)),
+        ...(witness.purchasedTraits.includes('Vengeance Mark')
+          ? ['Vengeance Mark', 'Vengeance Mark: Remove Sigil']
+          : []),
       ];
       compare(
         'abilities',
         names(sheet.abilities.map(a => a.name)),
         names([...witness.forge.abilities, ...textOnlyActions]),
       );
+      // Unphased's source forbids surprise, but pinned Forge stores this exact trait as
+      // generic prose (memonek.ts:57-61), outside getConditionImmunities' typed projection.
+      // This is a Compendium expectation, explicitly not an independently calculated Forge value.
+      const compendiumConditionImmunitiesBeyondForge: string[] = [];
+      if (
+        witness.purchasedTraits.includes('Unphased') &&
+        (witness.ancestry === 'Memonek' ||
+          (witness.ancestry === 'Revenant' &&
+            witness.selections['ancestry.revenant.former-life'] === 'Memonek'))
+      ) {
+        const sourcePath = 'en/unified/md/feature/trait/memonek/unphased.md';
+        assert.ok(
+          baseline.traits.some(t => t.name === 'Unphased' && t.sourcePath === sourcePath),
+          'Unphased requires its actual Compendium granting trait',
+        );
+        const immunity = baseline.conditionImmunities?.find(
+          c => c.condition.toLowerCase() === 'surprised',
+        );
+        assert.equal(
+          immunity?.provenance.source.path,
+          sourcePath,
+          'Unphased surprise immunity must retain its granting source',
+        );
+        if (!witness.forge.conditionImmunities.some(c => c.toLowerCase() === 'surprised'))
+          compendiumConditionImmunitiesBeyondForge.push('surprised');
+      }
       compare(
         'conditionImmunities',
         names((baseline.conditionImmunities ?? []).map(c => c.condition.toLowerCase())),
-        names(witness.forge.conditionImmunities.map(c => c.toLowerCase())),
+        names([
+          ...witness.forge.conditionImmunities.map(c => c.toLowerCase()),
+          ...compendiumConditionImmunitiesBeyondForge,
+        ]),
       );
-      compare(
-        'damageImmunities',
-        (baseline.damageImmunities ?? [])
-          .map(d => ({ damageType: d.damageType.toLowerCase(), value: d.value.value }))
-          .sort((a, b) => a.damageType.localeCompare(b.damageType)),
-        witness.forge.damageImmunities,
-      );
+      for (const field of ['damageImmunities', 'damageWeaknesses'] as const)
+        compare(
+          field,
+          (baseline[field] ?? [])
+            .map(d => ({ damageType: d.damageType.toLowerCase(), value: d.value.value }))
+            .sort((a, b) => a.damageType.localeCompare(b.damageType)),
+          [...witness.forge[field]].sort((a, b) => a.damageType.localeCompare(b.damageType)),
+        );
       // Forge also names technical Size/Speed/skill-choice features; retain all in evidence.
       // Compare the actual named signature/purchased traits separately from those containers.
-      const technical = new Set(['Size', 'Speed']);
+      const technical = new Set(['Size', 'Speed', 'Damage Modifier']);
       const salientTraits = names(baseline.traits.map(t => t.name));
       const forgeTraits = names(
         witness.forge.ancestryFeatures.filter(name => !technical.has(name)),
@@ -216,6 +286,8 @@ try {
         status: mismatches.length ? 'fail' : 'pass',
         mismatches,
         compendiumActionsBeyondForge: textOnlyActions,
+        forgeConditionImmunities: witness.forge.conditionImmunities,
+        compendiumConditionImmunitiesBeyondForge,
       });
       if (mismatches.length) process.exitCode = 1;
     } catch (error) {
@@ -245,7 +317,7 @@ console.log(
   JSON.stringify({
     runId,
     cases: results.length,
-    report: join(output, 'live-comparison.json'),
+    report: join(output, reportName),
     failed: process.exitCode === 1,
   }),
 );

@@ -101,6 +101,36 @@ export const SELECTIONS: ManifestSelection[] = [
       'feature/fury/level-1/beast-shape.md: "You can use and gain the benefits of a stormwight kit (see Stormwight Kits)".',
   },
   {
+    id: 'dragon-knight-ancestry',
+    description: 'dragon-knight complete level-one ancestry traits and granted abilities for V76.',
+    paths: ['ancestry/dragon-knight.md'],
+  },
+  {
+    id: 'high-elf-ancestry',
+    description: 'high-elf complete level-one ancestry traits and granted abilities for V77.',
+    paths: ['ancestry/high-elf.md', 'feature/trait/high-elf'],
+  },
+  {
+    id: 'memonek-ancestry',
+    description: 'memonek complete level-one ancestry traits and granted abilities for V78.',
+    paths: ['ancestry/memonek.md', 'feature/trait/memonek'],
+  },
+  {
+    id: 'revenant-ancestry',
+    description: 'revenant complete level-one ancestry traits and granted abilities for V79.',
+    paths: ['ancestry/revenant.md', 'feature/trait/revenant', 'feature/ability/revenant'],
+  },
+  {
+    id: 'time-raider-ancestry',
+    description: 'time-raider complete level-one ancestry traits and granted abilities for V80.',
+    paths: ['ancestry/time-raider.md', 'feature/trait/time-raider', 'feature/ability/time-raider'],
+  },
+  {
+    id: 'wode-elf-ancestry',
+    description: 'wode-elf complete level-one ancestry traits and granted abilities for V81.',
+    paths: ['ancestry/wode-elf.md', 'feature/trait/wode-elf', 'feature/ability/wode-elf'],
+  },
+  {
     id: 'dwarf-ancestry',
     description: 'Dwarf ancestry and complete level-one traits for V60.',
     paths: ['ancestry/dwarf.md', 'feature/trait/dwarf'],

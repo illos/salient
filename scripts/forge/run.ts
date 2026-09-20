@@ -87,6 +87,77 @@ for (const kind of negatives) {
   if (kind === 'foreign') choice.data.selected[0]!.id = 'not-a-pinned-ancestry-option';
   assert.equal(project(hero).complete, false, `${kind} purchase must not certify complete`);
 }
+// Catches nested state being mistaken for altered source payload, and malformed state accepted as complete.
+for (const kind of ['missing-child', 'altered-payload'] as const) {
+  const hero = structuredClone(
+    witnesses.find(w => w.ancestry === 'Time Raider' && w.purchasedTraits.includes('Psionic Gift'))!
+      .hero,
+  );
+  const purchase = hero.ancestry!.features.find(
+    f => f.type === FeatureType.Choice && f.data.count === 'ancestry',
+  );
+  assert.ok(purchase?.type === FeatureType.Choice);
+  const child = purchase.data.selected.find(f => f.type === FeatureType.Choice);
+  assert.ok(child?.type === FeatureType.Choice);
+  if (kind === 'missing-child') child.data.selected = [];
+  else child.data.selected[0]!.description = 'Forged source text';
+  assert.equal(project(hero).complete, false, `${kind} must not certify complete`);
+}
+// Catches a foreign/signature trait masquerading as Previous Life, or a modified former ancestry.
+for (const kind of ['missing-borrowed', 'foreign-borrowed', 'altered-former'] as const) {
+  const hero = structuredClone(witnesses.find(w => w.id.startsWith('revenant-devil-2'))!.hero);
+  const purchase = hero.ancestry!.features.find(
+    f => f.type === FeatureType.Choice && f.data.count === 'ancestry',
+  );
+  assert.ok(purchase?.type === FeatureType.Choice);
+  const borrowed = purchase.data.selected.find(f => f.type === FeatureType.AncestryFeatureChoice);
+  assert.ok(borrowed?.type === FeatureType.AncestryFeatureChoice);
+  if (kind === 'missing-borrowed') borrowed.data.selected = null;
+  if (kind === 'foreign-borrowed') borrowed.data.selected!.id = 'not-an-eligible-purchased-trait';
+  if (kind === 'altered-former') {
+    const former = hero.ancestry!.features.find(f => f.type === FeatureType.AncestryChoice);
+    assert.ok(former?.type === FeatureType.AncestryChoice);
+    former.data.selected!.ancestryPoints = 99;
+  }
+  assert.equal(project(hero).complete, false, `${kind} must not certify complete`);
+}
+// Catches source-invalid duplicate or foreign direct purchases accepted through Forge's expanded former pool.
+for (const kind of ['duplicate-former', 'foreign-former'] as const) {
+  const hero = structuredClone(
+    witnesses.find(w => w.id === 'revenant-polder-repeated-one-point')!.hero,
+  );
+  const purchase = hero.ancestry!.features.find(
+    f => f.type === FeatureType.Choice && f.data.count === 'ancestry',
+  );
+  assert.ok(purchase?.type === FeatureType.Choice);
+  if (kind === 'duplicate-former')
+    purchase.data.selected[1] = structuredClone(purchase.data.selected[0]!);
+  else purchase.data.selected[0]!.id = 'devil-feature-1';
+  assert.equal(project(hero).complete, false, `${kind} must not certify complete`);
+}
+// Catches one borrowed trait purchased twice through the two valid Forge serialization forms.
+{
+  const hero = structuredClone(
+    witnesses.find(
+      w =>
+        w.ancestry === 'Revenant' &&
+        w.selections['ancestry.revenant.former-life'] === 'Dwarf' &&
+        w.purchasedTraits.includes('Grounded'),
+    )!.hero,
+  );
+  const purchase = hero.ancestry!.features.find(
+    f => f.type === FeatureType.Choice && f.data.count === 'ancestry',
+  );
+  assert.ok(purchase?.type === FeatureType.Choice);
+  const wrapper = purchase.data.selected.find(f => f.type === FeatureType.AncestryFeatureChoice);
+  assert.ok(wrapper?.type === FeatureType.AncestryFeatureChoice && wrapper.data.selected);
+  purchase.data.selected = [wrapper, structuredClone(wrapper.data.selected)];
+  assert.equal(
+    project(hero).complete,
+    false,
+    'Mixed-form duplicate borrowed trait must not certify complete',
+  );
+}
 writeFileSync(join(output, 'counterparts.json'), JSON.stringify(witnesses, null, 2) + '\n');
 const incomplete = witnesses
   .filter(w => !w.forge.complete)

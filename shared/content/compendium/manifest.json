@@ -11,8 +11,8 @@
     "version": "1.0.3"
   },
   "generatedAt": "2026-09-08",
-  "contentHash": "sha256:80252de5258036586fcfa9bee826b4cc94361502e26584fd9ffa3b43e63729ef",
-  "entryCount": 515,
+  "contentHash": "sha256:aaf7c027a421e6059448e019271111877f208b577b756f5e79645c3d497ed26e",
+  "entryCount": 567,
   "selections": [
     {
       "id": "supporting-character-choices",
@@ -67,6 +67,56 @@
         "feature/fury/vuken"
       ],
       "basis": "feature/fury/level-1/beast-shape.md: \"You can use and gain the benefits of a stormwight kit (see Stormwight Kits)\"."
+    },
+    {
+      "id": "dragon-knight-ancestry",
+      "description": "dragon-knight complete level-one ancestry traits and granted abilities for V76.",
+      "paths": [
+        "ancestry/dragon-knight.md"
+      ]
+    },
+    {
+      "id": "high-elf-ancestry",
+      "description": "high-elf complete level-one ancestry traits and granted abilities for V77.",
+      "paths": [
+        "ancestry/high-elf.md",
+        "feature/trait/high-elf"
+      ]
+    },
+    {
+      "id": "memonek-ancestry",
+      "description": "memonek complete level-one ancestry traits and granted abilities for V78.",
+      "paths": [
+        "ancestry/memonek.md",
+        "feature/trait/memonek"
+      ]
+    },
+    {
+      "id": "revenant-ancestry",
+      "description": "revenant complete level-one ancestry traits and granted abilities for V79.",
+      "paths": [
+        "ancestry/revenant.md",
+        "feature/trait/revenant",
+        "feature/ability/revenant"
+      ]
+    },
+    {
+      "id": "time-raider-ancestry",
+      "description": "time-raider complete level-one ancestry traits and granted abilities for V80.",
+      "paths": [
+        "ancestry/time-raider.md",
+        "feature/trait/time-raider",
+        "feature/ability/time-raider"
+      ]
+    },
+    {
+      "id": "wode-elf-ancestry",
+      "description": "wode-elf complete level-one ancestry traits and granted abilities for V81.",
+      "paths": [
+        "ancestry/wode-elf.md",
+        "feature/trait/wode-elf",
+        "feature/ability/wode-elf"
+      ]
     },
     {
       "id": "dwarf-ancestry",
@@ -612,11 +662,59 @@
       "file": "ability.json"
     },
     {
+      "id": "mcdm.heroes.v1/feature.ability.revenant/detonate-sigil",
+      "kind": "ability",
+      "name": "Detonate Sigil",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/revenant/detonate-sigil.md",
+      "selection": "revenant-ancestry",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.time-raider/concussive-slam",
+      "kind": "ability",
+      "name": "Concussive Slam",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/time-raider/concussive-slam.md",
+      "selection": "time-raider-ancestry",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.time-raider/minor-acceleration",
+      "kind": "ability",
+      "name": "Minor Acceleration",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/time-raider/minor-acceleration.md",
+      "selection": "time-raider-ancestry",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.time-raider/psionic-bolt",
+      "kind": "ability",
+      "name": "Psionic Bolt",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/time-raider/psionic-bolt.md",
+      "selection": "time-raider-ancestry",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.wode-elf/the-wode-defends",
+      "kind": "ability",
+      "name": "The Wode Defends",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/wode-elf/the-wode-defends.md",
+      "selection": "wode-elf-ancestry",
+      "file": "ability.json"
+    },
+    {
       "id": "mcdm.heroes.v1/ancestry/devil",
       "kind": "ancestry",
       "name": "Devil",
       "sourcePath": "vendor/steel-compendium/en/unified/md/ancestry/devil.md",
       "selection": "devil-ancestry",
+      "file": "ancestry.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/ancestry/dragon-knight",
+      "kind": "ancestry",
+      "name": "Dragon Knight",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/ancestry/dragon-knight.md",
+      "selection": "dragon-knight-ancestry",
       "file": "ancestry.json"
     },
     {
@@ -636,11 +734,27 @@
       "file": "ancestry.json"
     },
     {
+      "id": "mcdm.heroes.v1/ancestry/high-elf",
+      "kind": "ancestry",
+      "name": "High Elf",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/ancestry/high-elf.md",
+      "selection": "high-elf-ancestry",
+      "file": "ancestry.json"
+    },
+    {
       "id": "mcdm.heroes.v1/ancestry/human",
       "kind": "ancestry",
       "name": "Human",
       "sourcePath": "vendor/steel-compendium/en/unified/md/ancestry/human.md",
       "selection": "human-ancestry",
+      "file": "ancestry.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/ancestry/memonek",
+      "kind": "ancestry",
+      "name": "Memonek",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/ancestry/memonek.md",
+      "selection": "memonek-ancestry",
       "file": "ancestry.json"
     },
     {
@@ -657,6 +771,30 @@
       "name": "Polder",
       "sourcePath": "vendor/steel-compendium/en/unified/md/ancestry/polder.md",
       "selection": "polder-ancestry",
+      "file": "ancestry.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/ancestry/revenant",
+      "kind": "ancestry",
+      "name": "Revenant",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/ancestry/revenant.md",
+      "selection": "revenant-ancestry",
+      "file": "ancestry.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/ancestry/time-raider",
+      "kind": "ancestry",
+      "name": "Time Raider",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/ancestry/time-raider.md",
+      "selection": "time-raider-ancestry",
+      "file": "ancestry.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/ancestry/wode-elf",
+      "kind": "ancestry",
+      "name": "Wode Elf",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/ancestry/wode-elf.md",
+      "selection": "wode-elf-ancestry",
       "file": "ancestry.json"
     },
     {
@@ -4132,6 +4270,70 @@
       "file": "trait.json"
     },
     {
+      "id": "mcdm.heroes.v1/feature.trait.high-elf/glamor-of-terror",
+      "kind": "trait",
+      "name": "Glamor of Terror",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/high-elf/glamor-of-terror.md",
+      "selection": "high-elf-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.high-elf/graceful-retreat",
+      "kind": "trait",
+      "name": "Graceful Retreat",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/high-elf/graceful-retreat.md",
+      "selection": "high-elf-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.high-elf/high-elf-glamor",
+      "kind": "trait",
+      "name": "Signature Trait: High Elf Glamor",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/high-elf/high-elf-glamor.md",
+      "selection": "high-elf-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.high-elf/high-elf-traits",
+      "kind": "trait",
+      "name": "High Elf Traits",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/high-elf/high-elf-traits.md",
+      "selection": "high-elf-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.high-elf/high-senses",
+      "kind": "trait",
+      "name": "High Senses",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/high-elf/high-senses.md",
+      "selection": "high-elf-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.high-elf/otherworldly-grace",
+      "kind": "trait",
+      "name": "Otherworldly Grace",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/high-elf/otherworldly-grace.md",
+      "selection": "high-elf-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.high-elf/revisit-memory",
+      "kind": "trait",
+      "name": "Revisit Memory",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/high-elf/revisit-memory.md",
+      "selection": "high-elf-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.high-elf/unstoppable-mind",
+      "kind": "trait",
+      "name": "Unstoppable Mind",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/high-elf/unstoppable-mind.md",
+      "selection": "high-elf-ancestry",
+      "file": "trait.json"
+    },
+    {
       "id": "mcdm.heroes.v1/feature.trait.human/cant-take-hold",
       "kind": "trait",
       "name": "Can't Take Hold",
@@ -4185,6 +4387,86 @@
       "name": "Staying Power",
       "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/human/staying-power.md",
       "selection": "human-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.memonek/fall-lightly",
+      "kind": "trait",
+      "name": "Signature Trait: Fall Lightly",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/memonek/fall-lightly.md",
+      "selection": "memonek-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.memonek/i-am-law",
+      "kind": "trait",
+      "name": "I Am Law",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/memonek/i-am-law.md",
+      "selection": "memonek-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.memonek/keeper-of-order",
+      "kind": "trait",
+      "name": "Keeper of Order",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/memonek/keeper-of-order.md",
+      "selection": "memonek-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.memonek/lightning-nimbleness",
+      "kind": "trait",
+      "name": "Lightning Nimbleness",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/memonek/lightning-nimbleness.md",
+      "selection": "memonek-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.memonek/lightweight",
+      "kind": "trait",
+      "name": "Signature Trait: Lightweight",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/memonek/lightweight.md",
+      "selection": "memonek-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.memonek/memonek-traits",
+      "kind": "trait",
+      "name": "Memonek Traits",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/memonek/memonek-traits.md",
+      "selection": "memonek-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.memonek/nonstop",
+      "kind": "trait",
+      "name": "Nonstop",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/memonek/nonstop.md",
+      "selection": "memonek-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.memonek/systematic-mind",
+      "kind": "trait",
+      "name": "Systematic Mind",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/memonek/systematic-mind.md",
+      "selection": "memonek-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.memonek/unphased",
+      "kind": "trait",
+      "name": "Unphased",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/memonek/unphased.md",
+      "selection": "memonek-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.memonek/useful-emotion",
+      "kind": "trait",
+      "name": "Useful Emotion",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/memonek/useful-emotion.md",
+      "selection": "memonek-ancestry",
       "file": "trait.json"
     },
     {
@@ -4313,6 +4595,190 @@
       "name": "Signature Trait: Small!",
       "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/polder/small.md",
       "selection": "polder-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.revenant/bloodless",
+      "kind": "trait",
+      "name": "Bloodless",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/revenant/bloodless.md",
+      "selection": "revenant-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.revenant/former-life",
+      "kind": "trait",
+      "name": "Signature Trait: Former Life",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/revenant/former-life.md",
+      "selection": "revenant-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.revenant/previous-life-1-point",
+      "kind": "trait",
+      "name": "Previous Life: 1 Point",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/revenant/previous-life-1-point.md",
+      "selection": "revenant-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.revenant/previous-life-2-points",
+      "kind": "trait",
+      "name": "Previous Life: 2 Points",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/revenant/previous-life-2-points.md",
+      "selection": "revenant-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.revenant/revenant-traits",
+      "kind": "trait",
+      "name": "Revenant Traits",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/revenant/revenant-traits.md",
+      "selection": "revenant-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.revenant/tough-but-withered",
+      "kind": "trait",
+      "name": "Signature Trait: Tough But Withered",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/revenant/tough-but-withered.md",
+      "selection": "revenant-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.revenant/undead-influence",
+      "kind": "trait",
+      "name": "Undead Influence",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/revenant/undead-influence.md",
+      "selection": "revenant-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.revenant/vengeance-mark",
+      "kind": "trait",
+      "name": "Vengeance Mark",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/revenant/vengeance-mark.md",
+      "selection": "revenant-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.time-raider/beyondsight",
+      "kind": "trait",
+      "name": "Beyondsight",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/time-raider/beyondsight.md",
+      "selection": "time-raider-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.time-raider/foresight",
+      "kind": "trait",
+      "name": "Foresight",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/time-raider/foresight.md",
+      "selection": "time-raider-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.time-raider/four-armed-athletics",
+      "kind": "trait",
+      "name": "Four-Armed Athletics",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/time-raider/four-armed-athletics.md",
+      "selection": "time-raider-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.time-raider/four-armed-martial-arts",
+      "kind": "trait",
+      "name": "Four-Armed Martial Arts",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/time-raider/four-armed-martial-arts.md",
+      "selection": "time-raider-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.time-raider/psionic-gift",
+      "kind": "trait",
+      "name": "Psionic Gift",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/time-raider/psionic-gift.md",
+      "selection": "time-raider-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.time-raider/psychic-scar",
+      "kind": "trait",
+      "name": "Signature Trait: Psychic Scar",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/time-raider/psychic-scar.md",
+      "selection": "time-raider-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.time-raider/time-raider-traits",
+      "kind": "trait",
+      "name": "Time Raider Traits",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/time-raider/time-raider-traits.md",
+      "selection": "time-raider-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.wode-elf/forest-walk",
+      "kind": "trait",
+      "name": "Forest Walk",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/wode-elf/forest-walk.md",
+      "selection": "wode-elf-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.wode-elf/otherworldly-grace",
+      "kind": "trait",
+      "name": "Otherworldly Grace",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/wode-elf/otherworldly-grace.md",
+      "selection": "wode-elf-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.wode-elf/quick-and-brutal",
+      "kind": "trait",
+      "name": "Quick and Brutal",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/wode-elf/quick-and-brutal.md",
+      "selection": "wode-elf-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.wode-elf/revisit-memory",
+      "kind": "trait",
+      "name": "Revisit Memory",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/wode-elf/revisit-memory.md",
+      "selection": "wode-elf-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.wode-elf/swift",
+      "kind": "trait",
+      "name": "Swift",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/wode-elf/swift.md",
+      "selection": "wode-elf-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.wode-elf/the-wode-defends",
+      "kind": "trait",
+      "name": "The Wode Defends",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/wode-elf/the-wode-defends.md",
+      "selection": "wode-elf-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.wode-elf/wode-elf-glamor",
+      "kind": "trait",
+      "name": "Signature Trait: Wode Elf Glamor",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/wode-elf/wode-elf-glamor.md",
+      "selection": "wode-elf-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.wode-elf/wode-elf-traits",
+      "kind": "trait",
+      "name": "Wode Elf Traits",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/wode-elf/wode-elf-traits.md",
+      "selection": "wode-elf-ancestry",
       "file": "trait.json"
     }
   ],

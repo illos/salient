@@ -1,0 +1,600 @@
+{
+  "runId": "be517e81-2dbc-4630-ad95-42de52b998c2",
+  "source": "8d5559fc87f18f4ed4112f4effc2cafaa3809739",
+  "cohort": "revenant",
+  "totalCounterparts": 137,
+  "selectedCounterparts": 82,
+  "target": "https://different-bat-943.convex.cloud",
+  "elapsedMs": 130830,
+  "results": [
+    {
+      "id": "revenant-devil-1",
+      "characterId": "k57b7bqktedb88hpccc13809qd8esr58",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-devil-2",
+      "characterId": "k575fwt2rf7qc0g0k7adp4rr6h8err4q",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-devil-3",
+      "characterId": "k572scz04y3pemaa0kw30nytx98espat",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-devil-4",
+      "characterId": "k574ngbavpb5c9dg67yy6shp458er16a",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-devil-5",
+      "characterId": "k57dqs4mr90ykqh50dc4n8xwys8erqxz",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-devil-6",
+      "characterId": "k57argtfhbd9wqcfyqj2bmvywx8es1dp",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-devil-7",
+      "characterId": "k577q2jz9d109f97d33xgqdg8d8ermv3",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-devil-8",
+      "characterId": "k5717qnnrx3ah21ve1hdq1xmyx8er81t",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-polder-1",
+      "characterId": "k57f0xvt8cz19y64d1bt1dtkj58erkyk",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-polder-2",
+      "characterId": "k5729v94a4v7xtpgwzsf5yqky18esfrt",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-polder-3",
+      "characterId": "k579cfhhc0qpeakfc3nnmw11jn8es0hm",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-polder-4",
+      "characterId": "k5714x84gzacfs2bst03pc1vtn8esj1z",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-polder-5",
+      "characterId": "k57em47fbwcs18bzss9sccp2bh8eretx",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-polder-6",
+      "characterId": "k57e1w08x9s2fb26g1tr15rzjd8erbkc",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-polder-7",
+      "characterId": "k571sn9g2gad2xr517rbzth1198es1mz",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-dwarf-1",
+      "characterId": "k57fbhgmdnffj8hdy8dk85w0z18esnfb",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-dwarf-2",
+      "characterId": "k57erf147yhp1a9vehf6cea14x8ervm8",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-dwarf-3",
+      "characterId": "k57by4ys5g4d4myy1zxjvm4t4x8eskb5",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-dwarf-4",
+      "characterId": "k571wykr4c3dmqz5nf5avj0akh8er2gj",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": [
+        "Stone Singer"
+      ]
+    },
+    {
+      "id": "revenant-dwarf-5",
+      "characterId": "k572y2yt564t6e7v8nnfstv1818esxjk",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-dwarf-6",
+      "characterId": "k571gjtzh29cgycw6f7prz09298esrdg",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-human-1",
+      "characterId": "k57dd2hwhe6ydwygzrk4h6j0g98erj67",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-human-2",
+      "characterId": "k57779cc7qs8a1h66p066ydnxd8esp15",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-human-3",
+      "characterId": "k57f6cywrwhrkb3bfvqwhrdpp58erb27",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-human-4",
+      "characterId": "k5712j5fzr0e5g355p1rvvw8vs8esgnf",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-human-5",
+      "characterId": "k576w9z0qqfxwcxe4z62k22cq18es6tt",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-human-6",
+      "characterId": "k570b72d7g1vzvnp8vhpynx0fx8esgfc",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-human-7",
+      "characterId": "k5762dr7a6hgzq5y8rmwdk72vd8er7ev",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": [
+        "Vengeance Mark",
+        "Vengeance Mark: Remove Sigil"
+      ]
+    },
+    {
+      "id": "revenant-hakaan-1",
+      "characterId": "k57aa2nxcz2ha3n5pycq31q2yx8es8r7",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-hakaan-2",
+      "characterId": "k576bgy5attg1ksjgfxveqcggd8esgca",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-hakaan-3",
+      "characterId": "k575cfr75h68s5v0k3q1208fr18er89e",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-hakaan-4",
+      "characterId": "k57f54rveyrkrps0cjj6x6v3bx8erx9c",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-hakaan-5",
+      "characterId": "k57a2gdhy8p6v10t2szch7gzhh8es11c",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-hakaan-6",
+      "characterId": "k57deje3bw2yba5dn8hvepe4rn8er2gk",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": [
+        "Doomsight"
+      ]
+    },
+    {
+      "id": "revenant-orc-1",
+      "characterId": "k57dtk5x69pm4214gryab7ns1h8esr7p",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-orc-2",
+      "characterId": "k570p0x1hv4sezt4ajrh1p8wbs8estsy",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-orc-3",
+      "characterId": "k571jn9mg3g9j0vgget8xvn2658esdws",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-orc-4",
+      "characterId": "k57exap3zwpaavfg7v21wb0vj98es966",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-orc-5",
+      "characterId": "k570f8ba6gpsh5a5kfwz2bcgj58espyf",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-orc-6",
+      "characterId": "k57bm19pvaxn7jjt4s3mk42y2n8esq9e",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-orc-7",
+      "characterId": "k57c2dhjhfemh12m2161cm4yv18er35s",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-orc-8",
+      "characterId": "k570xw9ht1y3menavbfhnxk29s8erdga",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-orc-9",
+      "characterId": "k570fad3vy04zar1kvx2867tb98esy1r",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-orc-10",
+      "characterId": "k572f8cg1wc448x1wg9acf3q9x8erhkj",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-dragon-knight-1",
+      "characterId": "k57629aa2etgndt3e6rbya51pd8er6tw",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-dragon-knight-2",
+      "characterId": "k576ynxszg1bstgxgqn5yscrhx8esfcj",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-dragon-knight-3",
+      "characterId": "k570wr9yt0hbxzggpkg3asvtzs8erdh0",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-dragon-knight-4",
+      "characterId": "k5783b1j3np47x516hps9m0whn8es49h",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-dragon-knight-5",
+      "characterId": "k570nf3xkd2spbxeb0t8zshatx8esg6z",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-dragon-knight-6",
+      "characterId": "k5769svxgew3b7dngmny9vv45x8esgwx",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-high-elf-1",
+      "characterId": "k5728kwwdb9b9vtpq72kyjjabd8er4w7",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-high-elf-2",
+      "characterId": "k575c0ga1dtygry6h54n0z0vns8erzb6",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-high-elf-3",
+      "characterId": "k574pk968dd13ch64xe20hm8g98erpq7",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-high-elf-4",
+      "characterId": "k570k8edewqba89hsss3fz3w4n8erpph",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-high-elf-5",
+      "characterId": "k57e9qk0w7fe1xa8hs3qmajnp18es7r0",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-high-elf-6",
+      "characterId": "k577cy7mhcmtk46x7a9eee425n8ertdy",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-high-elf-7",
+      "characterId": "k571vk82eprpanvva8543vx90h8es9bf",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-memonek-1",
+      "characterId": "k574vbz5vbswfye5adzzgwb36s8erag1",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-memonek-2",
+      "characterId": "k577d9g87p27vhz0t96wyc27ed8er11y",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-memonek-3",
+      "characterId": "k570y37xdvhpksb3w7pazebct58esbvp",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-memonek-4",
+      "characterId": "k57fcnpx3t42rd2dvymfr0njb98erc6v",
+      "status": "fail",
+      "mismatches": [
+        {
+          "field": "conditionImmunities",
+          "actual": [
+            "surprised"
+          ],
+          "expected": []
+        }
+      ],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-memonek-5",
+      "characterId": "k571bp0wcw6mab299arj3csan18esyrz",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-memonek-6",
+      "characterId": "k57a9tfbscsqhj740jt8gz68858es0kq",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-memonek-7",
+      "characterId": "k576186ramk4dhqaz90rtv9c0n8esmm2",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-memonek-8",
+      "characterId": "k571qnbm779kgrmtv5kw8a92g58es5vq",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-time-raider-1",
+      "characterId": "k574k0jtz0j74ptvh7cz1rkcsx8esyz3",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-time-raider-2",
+      "characterId": "k5711309t7df9dkphx9rr8ny7n8er7gz",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-time-raider-3",
+      "characterId": "k57a7wz2y4hs7j1my0xprr4njn8erqxk",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-time-raider-4",
+      "characterId": "k574h6qj05x7thknnzf6y2ktvn8er1rg",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-time-raider-5",
+      "characterId": "k5790hyd0xa3ek8t9c4f910rp58ern5y",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-time-raider-6",
+      "characterId": "k5776rn73sq3zbd9157k2x6q9d8esqxt",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-time-raider-7",
+      "characterId": "k57fz1g5tx7wry8c3rc8hcfag18eszbt",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-time-raider-8",
+      "characterId": "k574dv26w3trrayw8bvbmavmjn8eraat",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-time-raider-9",
+      "characterId": "k5788519ha3t8s6eb1rrxgszzh8er84r",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-wode-elf-1",
+      "characterId": "k575vqh6y6haj2cpwrres3wecx8essat",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-wode-elf-2",
+      "characterId": "k57afm4210rhkh8sqad2jet59n8es5ng",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-wode-elf-3",
+      "characterId": "k57e5kpr9j2ygka3nmg2v6teqx8es5nx",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-wode-elf-4",
+      "characterId": "k57f296jz3vzc9qe91sj1fdg518erwya",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-wode-elf-5",
+      "characterId": "k57018r5hm6rz5y0dt30dntky18erqvc",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-wode-elf-6",
+      "characterId": "k57ds1fqmz69c6cxg8zjgkk7th8esb6w",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-wode-elf-7",
+      "characterId": "k5787d1c0aj2zrvpgsf7dzfys58esmhx",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "revenant-polder-repeated-one-point",
+      "characterId": "k579xjhj8bt5fv89sjt3wy1xxd8es7pn",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    }
+  ]
+}

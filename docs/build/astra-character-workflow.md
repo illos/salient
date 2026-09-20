@@ -1,15 +1,21 @@
 # Astra character delivery
 
-Status: implementation resumed at the user's request; verification queued separately on 2026-09-20. The Opus pilot is
-[abandoned without reuse](../decisions/2026-09-19-opus-pilot-dead-end.md). Fresh implementation is underway. This document owns the replacement character workflow; [V44](V44-character-option-delivery.md)
-owns its delivery scope, and [the build process](README.md) retains project-wide review and merge rules.
+Status: the six initial level-one ancestries are delivered through V74. The user has authorized
+[the remaining six-ancestry batch, V76–V82](V82-remaining-ancestries.md); implementation and
+runtime acceptance are in progress. The Opus pilot remains
+[abandoned without reuse](../decisions/2026-09-19-opus-pilot-dead-end.md). This document owns
+the replacement character workflow; [V44](V44-character-option-delivery.md) owns its delivery
+scope, and [the build process](README.md) retains project-wide review and merge rules.
 
 ## Ownership and parallel work
 
-Use an Astra lead and native Astra subagents. One implementer owns one ancestry/level or class/level
-unit in a new worktree from current main. Start with two independent units, Devil level one and
-Polder level one; neither depends on the other's merge. Use the remaining agent capacity for an
-independent review or a concrete shared/runtime blocker. Do not resurrect the external Opus fleet.
+Use an Astra lead and native Astra subagents. One implementer owns one ancestry/level or
+class/level unit in a separate worktree from current main. The current authorized batch is
+Dragon Knight (V76), High Elf (V77), Memonek (V78), Revenant (V79), Time Raider (V80), and
+Wode Elf (V81), integrated under V82. Implementers can take a second independent unit after
+handing off their first candidate; preserve separate logical commits and unit ownership.
+Use available agent capacity for independent review or a concrete shared/runtime blocker.
+Do not resurrect the external Opus fleet.
 
 The lead owns shared-file integration, runtime scheduling and delivery. Implementers own their
 unit through source research, code, focused tests and correction of review findings. Native
@@ -17,13 +23,14 @@ collaboration carries assignments and results; Chords coordinates with other pro
 not a separate worker scheduling system. Never invent a sender identity to resolve a mapping error.
 
 Only shared-file edits, use of a shared runtime slot, and merges are serialized. Unit implementation
-continues while another unit waits for review or runtime verification. A failed merge gate blocks
-that merge, not unrelated coding. The initial two-unit limit was expanded by the user on 2026-09-20: keep Devil/Polder in the
-verification queue, assign a subagent the closeout blocker, and implement two further ancestries
-(Dwarf/Human) concurrently. The initial batch now has passing remote headless proof. On 2026-09-20 the user authorized
-current-main integration and the next pair, Hakaan (V70) and Orc (V71); reference acceptance remains
-explicitly separate. Finish this bounded pair before adding more units. Failed required
-verification still blocks its merge; it must not block independent development.
+continues while another unit waits for review or runtime verification. A failed required gate blocks
+that unit's merge, not independent development. The previous pair limits applied to the initial
+Devil/Polder, Dwarf/Human, and Hakaan/Orc delivery; the user's remaining-ancestries request
+supersedes those limits for this batch. Revenant's Previous Life depends on the other ancestry
+purchase definitions, so the lead integrates that shared dependency after the unit modules are
+available. Finish this bounded level-one batch before expanding into a new class or level.
+Implementation, reference verification, live application acceptance, and delivery remain separate
+statuses; none becomes complete merely because its candidate is written.
 
 ## Unit contract
 

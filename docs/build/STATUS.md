@@ -55,6 +55,13 @@ must be separately recorded; this branch has performed neither.
 
 | Id | Slice | Depends on | Status | Owner |
 | --- | --- | --- | --- | --- |
+| V82 | [Remaining level-one ancestries](V82-remaining-ancestries.md) | Main 589d357 | Accepted — all twelve ancestries; main/shared-app delivery in progress | WIZARD, slice/V82 |
+| V76 | [Dragon Knight level one](V76-dragon-knight-level-one.md) | V82 integration | Accepted via V82 — checks, reviews, public API and Forge proof | Astra character worker |
+| V77 | [High Elf level one](V77-high-elf-level-one.md) | V82 integration | Accepted via V82 — checks, reviews, public API and Forge proof | Astra character worker |
+| V78 | [Memonek level one](V78-memonek-level-one.md) | V82 integration | Accepted via V82 — checks, reviews, public API and Forge proof | Astra character worker |
+| V79 | [Revenant level one](V79-revenant-level-one.md) | V82 integration | Accepted via V82 — checks, reviews, public API and Forge proof | Astra character worker |
+| V80 | [Time Raider level one](V80-time-raider-level-one.md) | V82 integration | Accepted via V82 — checks, reviews, public API and Forge proof | Astra character worker |
+| V81 | [Wode Elf level one](V81-wode-elf-level-one.md) | V82 integration | Accepted via V82 — checks, reviews, public API and Forge proof | Astra character worker |
 | V74 | [Trait-granted abilities and active Dwarf runes](V74-trait-granted-abilities.md) | V69/V73 candidate | Complete — merged/live b73cb8d; 791 checks, hosted and shared-main API 27/27, Forge 31/31 | WIZARD, slice/V74 |
 | V73 | [Headless Forge character counterparts](V73-forge-headless-counterparts.md) | V69 verified candidate | Verified — calibration and 31/31 saved API comparisons pass after V74 grants; historical seven failures retained | WIZARD, slice/V73 |
 | V24 | [Character wizard assessment and delivery proposal](V24-character-wizard-assessment.md) | A09; assesses A02/V21 | Assessment complete; V25 implementation verified | Codex, character wizard thread |
@@ -353,9 +360,10 @@ V46–V56 are retired Opus pilot IDs, not pending assignments. Allocate fresh ID
 
 ## Astra delivery and verification queue — 2026-09-20
 
-The six-ancestry candidate is merged into main through `b73cb8d`. V74 supplies the missing
-trait-granted actions and active Dwarf rune state. Full checks, independent reviews, 27 hosted
-headless journeys and 31 Forge comparisons pass; shared-main API proof also passes 27/27.
+The first six ancestries merged through V74 `b73cb8d`, including trait-granted actions and active
+Dwarf rune state. V82 completes implementation and hosted acceptance for the remaining six:
+full checks, independent reviews, 28 public API scenarios and 137 source-adjudicated Forge
+comparisons. Main/shared-app delivery remains tracked in [V82](V82-remaining-ancestries.md).
 No Opus material was reused.
 
 | Id | Unit | Implementation | Verification |
@@ -370,7 +378,7 @@ Use a free suitable local or remote test environment and coordinate shared workl
 tests remain prohibited. The stopped `characters` and `character-restart` environments stay
 stopped. User-approved programmatic Forge counterparts replace website capture for this proof;
 bounded comparison limits, including Orc Artisan target representation, remain explicit.
-[V74 evidence](evidence/V74/README.md) owns current results; V62/V65/V69 records remain history.
+[V82 evidence](evidence/V82/README.md) owns current results; V62/V65/V69/V74 records remain history.
 
 
 ## Browser testing moratorium — 2026-09-20

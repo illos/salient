@@ -1,8 +1,14 @@
+import { createRevenantDecisions } from './ancestries/revenant/level-one.ts';
+import { levelOneDecisions as timeRaiderDecisions } from './ancestries/time-raider/level-one.ts';
+import { levelOneDecisions as wodeElfDecisions } from './ancestries/wode-elf/level-one.ts';
 // SPDX-License-Identifier: GPL-3.0-only
 /** Compose independently owned level-one content with stable R01 shared decisions. */
 import fury from './fury-level-one-decisions.json' with { type: 'json' };
 import type { Decision, DecisionDefinitions } from '../evaluate/definitions.ts';
 import { auto, choice, grant, option, path } from './decision-builders.ts';
+import { levelOneDecisions as dragonKnightDecisions } from './ancestries/dragon-knight/level-one.ts';
+import { levelOneDecisions as highElfDecisions } from './ancestries/high-elf/level-one.ts';
+import { levelOneDecisions as memonekDecisions } from './ancestries/memonek/level-one.ts';
 import { levelOneDecisions as devilDecisions } from './ancestries/devil/level-one.ts';
 import { levelOneDecisions as dwarfDecisions } from './ancestries/dwarf/level-one.ts';
 import { levelOneDecisions as hakaanDecisions } from './ancestries/hakaan/level-one.ts';
@@ -44,7 +50,19 @@ const replaceFamily = (stepId: string, prefix: string, rows: Decision[]) => {
 replaceFamily('step.ancestry', 'ancestry.devil.', devilDecisions);
 replaceFamily('step.class', 'class.fury.', furyDecisions);
 
-allow('ancestry.choice', ['Polder', 'Dwarf', 'Human', 'Hakaan', 'Orc']);
+allow('ancestry.choice', [
+  'Polder',
+  'Dwarf',
+  'Human',
+  'Hakaan',
+  'Orc',
+  'Dragon Knight',
+  'High Elf',
+  'Memonek',
+  'Time Raider',
+  'Wode Elf',
+  'Revenant',
+]);
 allow('career.choice', ["Mage's Apprentice"]);
 allow('class.choice', ['Elementalist']);
 allow('culture.environment', ['Urban']);
@@ -63,6 +81,15 @@ append('step.ancestry', structuredClone(dwarfDecisions));
 append('step.ancestry', structuredClone(humanDecisions));
 append('step.ancestry', structuredClone(hakaanDecisions));
 append('step.ancestry', structuredClone(orcDecisions));
+append('step.ancestry', structuredClone(dragonKnightDecisions));
+append('step.ancestry', structuredClone(highElfDecisions));
+append('step.ancestry', structuredClone(memonekDecisions));
+append('step.ancestry', structuredClone(timeRaiderDecisions));
+append('step.ancestry', structuredClone(wodeElfDecisions));
+append(
+  'step.ancestry',
+  createRevenantDecisions(definitions.steps.find(step => step.id === 'step.ancestry')!.decisions),
+);
 const spokenPools = ['pool.languages.by-ancestry', 'pool.languages.vaslorian-human'];
 const spoken = [...new Set(spokenPools.flatMap(id => definitions.pools[id]!.values))].filter(
   name => name !== 'Caelian',
