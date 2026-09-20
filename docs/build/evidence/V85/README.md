@@ -5,7 +5,8 @@ Status: candidate `b15fc59`, followed by import-only correction `faa9b1e`, commi
 user-requested hosted cloud deployment exited 1 before reporting a successful upload. No live
 scenarios ran. [Further investigation](deployment-diagnosis.md) identified inconsistent JSON
 import attributes and a schema-to-runtime import dependency. Both temporary corrections together
-pass deployment dry run; they have not been applied or published. The hosted attempt below is history.
+passed deployment dry run; the permanent correction is now prepared for TESTER verification,
+with no new deployment or API acceptance claimed. The hosted attempt below is history.
 
 ## Implemented scope
 

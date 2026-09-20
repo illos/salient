@@ -128,5 +128,6 @@ retains the logs and remaining gate; do not claim this candidate is deployed.
 Further [investigation](build/evidence/V85/deployment-diagnosis.md) confirmed two source-level
 deployment blockers: mixed import attributes for the same manifest JSON and runtime authentication
 reached through the schema's starting-reward validator import. Temporary corrections passed the
-Convex deployment dry run, then were restored. Applying those corrections and running actual
-hosted API acceptance remain pending; no infrastructure repair is indicated.
+Convex deployment dry run, then were restored. The permanent equivalent correction is now
+prepared for TESTER, who owns all checks and actual hosted API acceptance. No successful
+publication is claimed; no infrastructure repair is indicated.

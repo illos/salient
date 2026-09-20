@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-only
 import { defineTable } from 'convex/server';
 import { v } from 'convex/values';
-import { startingRewardsValidator } from './lib/startingRewards';
+import { startingRewardsValidator } from './startingRewardValidators';
 
 export const authoredValidator = v.object({
   name: v.string(),

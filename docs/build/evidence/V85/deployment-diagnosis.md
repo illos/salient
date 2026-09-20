@@ -1,8 +1,9 @@
 # V85/V86 deployment failure diagnosis
 
 Status: causes confirmed on source `c3cf992`, 2026-09-20. Two temporary changes together pass
-Convex deployment dry run. Application changes were restored after the experiment; no actual
-publication or API acceptance run is claimed. This investigation did not change CT114 main.
+Convex deployment dry run. Application changes were restored after the experiment. The permanent correction now uses the
+same consistent manifest import and standalone validator; TESTER owns verification of the new
+committed candidate. No actual publication or API acceptance run is claimed. This investigation did not change CT114 main.
 
 ## First failure: inconsistent JSON import attributes
 
@@ -54,10 +55,18 @@ build targets the frontend. Neither exercises this Convex deployment metadata/sc
 The identified causes explain the hosted failure. The earlier CT114 startup may share the same
 bundling problem, but that environment was not rerun, so its cause is not independently confirmed.
 
-## Next bounded work
+## Permanent correction and next verification
 
-Apply the two demonstrated source changes, verify relevant Node-runner/shared tests as well as
-the Convex deployment route, then complete the already-requested hosted deployment and existing
-35-scenario authenticated API suite. No CLI upgrade, timeout increase, infrastructure repair,
-content reseed or data reset is required by the evidence. Do not repeat the source audits or
-claim API acceptance from this dry run.
+The permanent correction removes the manifest import attribute in
+`shared/evaluate/startingItemAbilities.ts` to match the existing imports. It moves the validator
+unchanged to `convex/startingRewardValidators.ts`, importing only `convex/values`, and updates
+`characterTables.ts` and `characterRewards.ts` to use it. Runtime authorization and reward
+initialization logic remain in `lib/startingRewards.ts`; its now-unused `v` import is removed.
+
+Per the new project testing process, WIZARD submits the corrected committed candidate to TESTER
+with a new job key superseding `test-V85-V86-854a5dd-1`. No new checks, builds, dry runs or tests
+were executed by WIZARD for this permanent change. The earlier passing temporary dry run is
+historical diagnostic evidence, not verification of this candidate. TESTER owns the focused
+checks, required integration checks, actual hosted deployment and 35-scenario API proof.
+No CLI upgrade, timeout increase, infrastructure repair, content reseed or data reset is needed
+by the diagnosed fixes. Do not repeat the source audits or claim acceptance from a dry run.
