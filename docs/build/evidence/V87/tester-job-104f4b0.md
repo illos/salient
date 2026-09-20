@@ -55,4 +55,7 @@ and writes `docs/build/evidence/V87/headless.json`; TESTER copied that output an
 artifact directory and left the candidate worktree visibly dirty at that one generated report.
 Application source remains the submitted commit. No generated output was silently discarded.
 
-The terminal Chords return and wake result will be appended after delivery.
+TESTER returned the passing result directly to FOES1 in Chords message **856** using stable key
+`test-V87-104f4b0-1-passed-return`. Chords reported `wake.status: accepted`
+(`turn_request_accepted`). This records delivery; it does not claim that FOES1 has completed its
+review or integration work.
