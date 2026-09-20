@@ -1,0 +1,74 @@
+
+[1m[30m[46m RUN [49m[39m[22m [36mv4.1.11 [39m[90m/app[39m
+
+ [31m❯[39m [30m[43m app [49m[39m tests/app/abilities.test.ts [2m([22m[2m19 tests[22m[2m | [22m[31m2 failed[39m[2m | [22m[33m17 skipped[39m[2m)[22m[33m 1446[2mms[22m[39m
+     [2m[90m↓[39m[22m acceptance 1 and 2: 10.1 free strike through /ability use; retry returns the same result with no second roll or damage
+     [2m[90m↓[39m[22m acceptance 1: 10.2, 10.3 and 10.13 reproduce through the operation (kit bonus at tier 3, winded at 2, Brutal Slam rows, push recorded verbatim)
+     [2m[90m↓[39m[22m acceptance 2: draft flow — per-target edge entered, ability selected, target toggled auto-fires once with the edge recorded; the draft clears
+     [2m[90m↓[39m[22m acceptance 3 and 4: 10.6 Thunder Roar on three Goblin Warriors with different counts; Ferocity 6 → 1 in the same command unit; 10.11 blocked with Ferocity 2
+     [2m[90m↓[39m[22m acceptance 5: natural 20 logs a critical, applies tier 3 and offers an extra main action; a second main action consumes it; a third warns
+     [2m[90m↓[39m[22m acceptance 6: Spear Charge tier 3 (5 damage) against 3 temporary Stamina and 20 Stamina leaves 0 and 18 in one event; the creature free strike takes temporary Stamina first (10.14)
+     [2m[90m↓[39m[22m acceptance 7: reducing the foe to 0 shows Slain in the roster and the encounter remains open; a Malice ability debits the shared pool
+     [2m[90m↓[39m[22m acceptance 8: an unsupported clause appears verbatim; Director Resolved at table records the disposition without changing state and cannot be recorded twice
+[31m     [31m×[31m acceptance 9: 10.10 post-roll Add bane changes tier and damage with the same dice as a linked correction; the original event is unchanged and linked corrections continue without rewind[39m[33m 1337[2mms[22m[39m
+     [2m[90m↓[39m[22m consecutive corrections across targets preserve other results and cost, and cannot cross a different corrected roll
+[31m     [31m×[31m linked ability corrections preserve disposition, later-action and settings boundaries[39m[32m 107[2mms[22m[39m
+     [2m[90m↓[39m[22m Catch Breath in combat is a maneuver with action tracking (10.9); FreePlay use spends no maneuver; Aid Attack is recorded with its text and a maneuver warning
+     [2m[90m↓[39m[22m FreePlay: Ferocity cost waived outside combat with no debit; second use warns; no action tracking rows
+     [2m[90m↓[39m[22m every A05 operation is registered and discoverable
+     [2m[90m↓[39m[22m admitted baseline supplies all seven abilities and kit facts; obsolete supplied facts cannot override it
+     [2m[90m↓[39m[22m effect-only Make Peace pays its printed 5 Ferocity once; insufficient resource blocks both roles and no unique effect executes
+     [2m[90m↓[39m[22m independent damage choice persists through selection and correction; resetting choice and changing ability clears it
+     [2m[90m↓[39m[22m unknown immunity is manual and source snapshot governs foe attacks after catalog changes
+   [2m[90m↓[39m[22m effective results hide foe temporary pools from peers even with numerical health enabled
+
+[31m⎯⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 2 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m [30m[43m app [49m[39m tests/app/abilities.test.ts[2m > [22mA05 attacks, damage, costs and common actions[2m > [22macceptance 9: 10.10 post-roll Add bane changes tier and damage with the same dice as a linked correction; the original event is unchanged and linked corrections continue without rewind
+[31m[1mAssertionError[22m: one correction: player: expected { read: false, mutation: true } to deeply equal { read: true, mutation: true }[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[2m  {[22m
+[2m    "mutation": true,[22m
+[32m-   "read": true,[39m
+[31m+   "read": false,[39m
+[2m  }[22m
+
+[36m [2m❯[22m correctionParity tests/app/abilities.test.ts:[2m102:98[22m[39m
+    [90m100|[39m     })[33m;[39m
+    [90m101|[39m     // Assert each side against the contract, not just against each ot…
+    [90m102|[39m     expect({ read: result.mayCorrect, mutation: authoritative.correcti…
+    [90m   |[39m                                                                                                  [31m^[39m
+    [90m103|[39m       read[33m:[39m expected[role][33m,[39m mutation[33m:[39m expected[role][33m,[39m
+    [90m104|[39m     })[33m;[39m
+[90m [2m❯[22m tests/app/abilities.test.ts:[2m939:5[22m[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m [30m[43m app [49m[39m tests/app/abilities.test.ts[2m > [22mA05 attacks, damage, costs and common actions[2m > [22mlinked ability corrections preserve disposition, later-action and settings boundaries
+[31m[1mAssertionError[22m: expected false to be true // Object.is equality[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- true[39m
+[31m+ false[39m
+
+[36m [2m❯[22m tests/app/abilities.test.ts:[2m1119:31[22m[39m
+    [90m1117|[39m     [34mexpect[39m(([35mawait[39m [34mfoeRow[39m(t[33m,[39m goblin))[33m.[39mlive[33m.[39mstamina)[33m.[39m[34mtoBe[39m([34m10[39m)[33m;[39m
+    [90m1118|[39m     const result = (await director.client.query(api.abilities.results,…
+    [90m1119|[39m     [34mexpect[39m(result[33m.[39mmayResolve)[33m.[39m[34mtoBe[39m([35mtrue[39m)[33m;[39m
+    [90m   |[39m                               [31m^[39m
+    [90m1120|[39m     [35mawait[39m director[33m.[39mclient[33m.[39m[34mmutation[39m(api[33m.[39mcommands[33m.[39minvoke[33m,[39m {
+    [90m1121|[39m       campaignId[33m,[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[31m2 failed[39m[22m[2m | [22m[33m17 skipped[39m[90m (19)[39m
+[2m   Start at [22m 01:37:51
+[2m   Duration [22m 1.88s[2m (transform 923ms, setup 0ms, import 315ms, tests 1.45s, environment 0ms)[22m
+

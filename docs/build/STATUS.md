@@ -26,10 +26,11 @@ reverification of the existing V26 consecutive-correction prerequisites, on
 The three historical commits apply cleanly as `5787f84`, `36e2400` and `44b23ba`; their preserved
 review trailers refer to 2026-09-16, not fresh rebase acceptance.
 
-**Reverification is blocked by a static V43 integration finding:** the authoritative mutation
+**Reverification is in progress following a static V43 integration finding:** the authoritative mutation
 allows consecutive linked corrections, but the indexed passive result query still rejects them
 once the original ability is no longer the branch top. The same mismatch affects manual resolution
-after correction. No new passing check or browser result is claimed. No runtime has been started.
+after correction. Fable authorized the bounded read-path repair and CT114 harness adapter in Chords message 569.
+No new passing check or browser result is claimed. No runtime has been started.
 See the [rebase work log](V26-compiled-ability-effects.md#2026-09-20--v63-rebase-and-integration-audit).
 
 V26 specification and the source-to-screenshot evidence policy are merged into main. The
@@ -161,8 +162,8 @@ See the [CI review and run record](audits/2026-09-14-ci-history-review.md) for t
 | V19 | [Forced access changes and combat recovery](V19-forced-access-recovery.md) | V10 | Outline |
 | V20 | [Dynamic terrain objects](V20-dynamic-terrain.md) | V04 | Outline |
 | V21 | [Desktop layout fidelity](V21-desktop-layout-fidelity.md) | A08, A09, V13 | Built, not committed — 2026-09-15 (foundation + five parallel implementers, lead integration and repairs); lint, typecheck, 85 engine tests, 317 app tests, links, vendor, content and the full 20-test browser suite pass; screenshots under `.playtest/v21/` compared with each mockup; review deferred to the user's audit thread |
-| V26 | [Compiled ability effects: damage and push instructions](V26-compiled-ability-effects.md) | S01, S02, A01, A02, A04, A05, A06, A09 | Specification merged at `3689226`; compiler pending. Historical prerequisite branch passed ten proper-turn playtests on 2026-09-16, not merged. Current rebase V63 has a blocking indexed-read incompatibility; fresh verification pending. |
-| V63 | [Rebase and reverify V26 correction prerequisites](V26-compiled-ability-effects.md#2026-09-20--v63-rebase-and-integration-audit) | V26 prerequisites, V43, V45 | Blocked — clean cherry-picks at `44b23ba`; independent static review confirms correction/manual read-window mismatch. No fresh check/browser run or runtime changes; Fable owns integration. |
+| V26 | [Compiled ability effects: damage and push instructions](V26-compiled-ability-effects.md) | S01, S02, A01, A02, A04, A05, A06, A09 | Specification merged at `3689226`; compiler pending. Historical prerequisite branch passed ten proper-turn playtests on 2026-09-16, not merged. Current rebase V63 is repairing the indexed-read incompatibility; fresh verification pending. |
+| V63 | [Rebase and reverify V26 correction prerequisites](V26-compiled-ability-effects.md#2026-09-20--v63-rebase-and-integration-audit) | V26 prerequisites, V43, V45 | In progress — clean cherry-picks at `44b23ba`; Fable assigned repair of the independently confirmed correction/manual read-window mismatch. No fresh check/browser run or runtime changes; Fable owns integration. |
 | V64 | [Ability grammar coverage audit](V64-ability-coverage-audit.md) | V26 specification, S01, V35 | Merged — read-only audit script, report and tests integrated into main at `458b6e8`, 2026-09-20; independent review pass; no runtime impact (no backend, frontend or content change) | Engine and parser thread |
 | V66 | [Browser test harness repair](V66-browser-test-harness-repair.md) | S03, browser failure audit | Not started — registered 2026-09-20 at the user's direction; do not claim until the user starts it; ends the browser testing moratorium when implemented | Unassigned |
 | V68 | [Campaign home redesign](V68-campaign-home.md) | V21, V29, V31, V43, A09 | In progress — claimed 2026-09-20 on `slice/V68` (`code/.worktrees/campaign-home`) from main `2f5544f`; builds the user's V2 simplified campaign-home mockup: owner/Director badges, connected presence, optional session titles, session history with RECAP, light campaign chat, Manage players pop-up; isolated CT114 env `campaign-home`; headless-only verification | Campaign home UI thread (Fable) |

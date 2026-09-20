@@ -6,38 +6,55 @@ import { test, expect, type Page } from '@playwright/test';
 import { ConvexHttpClient } from 'convex/browser';
 import { makeFunctionReference } from 'convex/server';
 import { createHash } from 'node:crypto';
-import { execFile } from 'node:child_process';
-import { promisify, parseEnv } from 'node:util';
-import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { parseEnv } from 'node:util';
+import { existsSync, mkdirSync, readFileSync, renameSync, writeFileSync } from 'node:fs';
 import { createTable } from './v21-fixtures';
 import { definitions } from '../../shared/content/level-one-decisions';
 import { draftSelectionsFrom } from '../../shared/evaluate/draft';
 import reference from '../fixtures/v25-bethell.json' with { type: 'json' };
+import manifest from '../../shared/content/compendium/manifest.json' with { type: 'json' };
 
-const output = '.playtest/v26/corrections-evidence';
-const exec = promisify(execFile);
+// Fresh run directories preserve prior evidence, including failures.
+const diceRoot = '/artifacts/v26-dice';
+const backend = 'http://backend:3210';
+let activeDiceDirectory: string | undefined;
+test.afterEach(() => {
+  // Also release the helper if account/table setup fails before the evidence try/finally.
+  if (activeDiceDirectory) writeFileSync(`${activeDiceDirectory}/done`, 'done');
+  activeDiceDirectory = undefined;
+});
 
-// Only the fresh, task-owned local runtime may be reseeded. Never run against shared port 3212.
+// Browser containers have no backend volume. Verify their supplied source/route identity;
+// the companion helper separately verifies the existing backend before each dice import.
 function checkTarget() {
+  const metadata = JSON.parse(readFileSync('/runtime-source.json', 'utf8'));
   const env = parseEnv(readFileSync('.env.local', 'utf8'));
-  expect(env.VITE_CONVEX_URL).toBe('http://127.0.0.1:3234');
-  expect(env.VITE_CONVEX_SITE_URL).toBe('http://127.0.0.1:3235');
-  expect(env.CONVEX_DEPLOYMENT).toBe('anonymous:anonymous-agent');
-  if (process.env.CONVEX_DEPLOYMENT)
-    expect(process.env.CONVEX_DEPLOYMENT).toBe(env.CONVEX_DEPLOYMENT);
-  expect(process.env.SALIENT_TEST_URL).toBe('http://127.0.0.1:5184');
+  expect(process.env.DEV_WEB_URL).toMatch(
+    /^https:\/\/salient-engine-corrections-dev-[a-f0-9]{12}\.tail41404c\.ts\.net$/,
+  );
+  expect(process.env.SALIENT_V26_RUNTIME_URL).toBe(process.env.DEV_WEB_URL);
+  expect(process.env.SALIENT_TEST_URL).toBe(process.env.DEV_WEB_URL);
+  expect(process.env.VITE_SITE_URL).toBe(process.env.DEV_WEB_URL);
+  expect(process.env.VITE_CONVEX_URL).toBe(backend);
+  expect(process.env.VITE_CONVEX_SITE_URL).toBe('http://backend:3211');
+  expect(env.CONVEX_DEPLOYMENT).toMatch(/^anonymous:anonymous-[a-z0-9-]+$/);
+  expect(process.env.CONVEX_DEPLOYMENT).toBeUndefined();
   for (const key of [
     'CONVEX_DEPLOY_KEY',
     'CONVEX_DEPLOYMENT_TOKEN',
     'CONVEX_SELF_HOSTED_URL',
     'CONVEX_SELF_HOSTED_ADMIN_KEY',
   ]) {
-    expect(process.env[key]).toBeUndefined();
-    expect(env[key]).toBeUndefined();
+    expect(process.env[key] === undefined, `Injected ${key} refused`).toBe(true);
+    expect(env[key] === undefined, `${key} refused`).toBe(true);
   }
-  const local = JSON.parse(readFileSync('.convex/local/default/config.json', 'utf8'));
-  expect(local.ports).toEqual({ cloud: 3234, site: 3235 });
-  expect(local.deploymentName).toBe('anonymous-agent');
+  expect(metadata.checkout).toBe(
+    '/srv/presidium/projects/salient/code/.worktrees/engine-corrections',
+  );
+  expect(metadata.identity).toBe(createHash('sha256').update(metadata.checkout).digest('hex'));
+  expect(metadata.commit).toMatch(/^[a-f0-9]{40}$/);
+  expect(typeof metadata.dirty).toBe('boolean');
+  return metadata;
 }
 
 function seedFor(a: number, b: number) {
@@ -64,7 +81,18 @@ test('V26 real-app regression: consecutive corrections and ten abilities on prop
 }) => {
   test.skip(process.env.SALIENT_V26_BASELINE !== '1', 'Opt-in isolated evidence run only');
   test.setTimeout(600_000);
-  const testedRevision = (await exec('git', ['rev-parse', 'HEAD'])).stdout.trim();
+  const source = checkTarget();
+  const testedRevision = source.commit;
+  const runId = crypto.randomUUID();
+  const output = `.playtest/v26/corrections-evidence/${runId}`;
+  const helper = JSON.parse(readFileSync(`${diceRoot}/ready.json`, 'utf8'));
+  expect(helper.frontend).toBe(process.env.DEV_WEB_URL);
+  expect(helper.id).toMatch(/^[a-f0-9-]{36}$/);
+  expect(Number.isFinite(helper.startedAt)).toBe(true);
+  expect(Date.now() - helper.startedAt).toBeGreaterThanOrEqual(0);
+  expect(Date.now() - helper.startedAt).toBeLessThan(600_000);
+  const diceDir = `${diceRoot}/${helper.id}`;
+  activeDiceDirectory = diceDir;
   const testScriptSha256 = createHash('sha256')
     .update(readFileSync('tests/browser/v26-baseline.spec.ts'))
     .digest('hex');
@@ -97,7 +125,7 @@ test('V26 real-app regression: consecutive corrections and ten abilities on prop
       if (!response.ok) throw new Error(`Application token request failed: ${response.status}`);
       return ((await response.json()) as { token: string }).token;
     });
-    const client = new ConvexHttpClient('http://127.0.0.1:3234');
+    const client = new ConvexHttpClient(backend);
     client.setAuth(token);
     return client;
   };
@@ -122,10 +150,18 @@ test('V26 real-app regression: consecutive corrections and ten abilities on prop
           runtimeHistorySha256: createHash('sha256')
             .update(readFileSync('convex/lib/history.ts'))
             .digest('hex'),
+          runtimeHistoryReadSha256: createHash('sha256')
+            .update(readFileSync('convex/lib/historyRead.ts'))
+            .digest('hex'),
+          diceHelperSha256: createHash('sha256')
+            .update(readFileSync('tests/browser/v26-dice-import.mjs'))
+            .digest('hex'),
           testScriptSha256,
-          sourcePin: 'fb83a789da8f0327a389c277a0c790b1648d5810',
-          frontend: 'http://127.0.0.1:5184',
-          backend: 'http://127.0.0.1:3234',
+          sourcePin: manifest.compendium.revision,
+          source,
+          runId,
+          frontend: process.env.DEV_WEB_URL,
+          backend,
           campaignId,
           heroId,
           method:
@@ -155,20 +191,13 @@ test('V26 real-app regression: consecutive corrections and ten abilities on prop
   };
   const dice = async (a: number, b: number) => {
     checkTarget();
-    const path = '.playtest/v26/dice-state.jsonl';
-    writeFileSync(path, JSON.stringify({ campaignId, seed: seedFor(a, b), counter: 0 }) + '\n');
-    await exec('pnpm', [
-      'exec',
-      'convex',
-      'import',
-      '--table',
-      'diceStates',
-      '--replace',
-      '--yes',
-      path,
-      '--env-file',
-      '.env.local',
-    ]);
+    const id = crypto.randomUUID();
+    const request = `${diceDir}/${id}.request.json`;
+    writeFileSync(`${request}.tmp`, JSON.stringify({ campaignId, seed: seedFor(a, b) }));
+    renameSync(`${request}.tmp`, request);
+    const response = `${diceDir}/${id}.response.json`;
+    await expect.poll(() => existsSync(response)).toBe(true);
+    expect(JSON.parse(readFileSync(response, 'utf8'))).toEqual({ ok: true });
   };
   const entry = (event: Json, page = director) =>
     page.locator(`[data-log-feed] li[data-sequence="${event.sequence}"]`);
@@ -189,7 +218,9 @@ test('V26 real-app regression: consecutive corrections and ten abilities on prop
   };
   try {
     const content = await query('content:status', {});
-    expect(content.entryCount).toBe(467);
+    expect(content.entryCount).toBe(manifest.entryCount);
+    expect(content.revision).toBe(manifest.compendium.revision);
+    expect(content.contentHash).toBe(manifest.contentHash);
     records.push({ case: 'setup-content', content });
     const authored = { name: 'V26 Bethell', appearance: '', biography: '', notes: '' };
     const elementalist = await mutation(

@@ -765,3 +765,24 @@ stopped while coordinating a browser window. No failed/partial run counts as com
   it passed once initialization finished. No dependency installation, build or browser ran on
   Presidium. V62 requested continued serialization of CT114 heavy work; no environment or
   workload was started, so no runtime cleanup/data deletion is needed.
+
+
+### 2026-09-20 — V63 indexed-read repair and CT114 verification
+
+Fable extended the assignment in Chords message 569 to repair the indexed read path, assert
+read/mutation parity and adapt the historical browser harness for the named CT114 environment.
+The preceding static blocker review remains an accurate record of the unmodified rebase.
+
+Plan: follow existing `historyUnits.previousBranch` pointers only through the same ability's
+correction/disposition suffix, reuse the authoritative correction policy with that prepared
+scope, and retain V43's bounded session reads. No index/schema migration or mutation-policy
+change is needed. Extend the existing correction lifecycle tests with independently expected
+read and mutation booleans; demonstrate the mismatch before applying the repair. Adapt only
+runtime transport/target identity and the current content manifest in the browser harness;
+keep ability cases, arithmetic assertions, timeouts and historical artifacts intact.
+
+All dependency installation, formatting, tests, builds and browser workloads use named CT114
+`engine-corrections`. V62's hosted browser work owns the heavy window until its explicit release.
+Only this new environment's nonsecret pinned backend executable/checksum have been provisioned;
+no shared environment, runtime credentials or data were copied. Full check, browser evidence
+and final independent review remain pending.

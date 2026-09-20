@@ -14,6 +14,7 @@ import { describe, expect, test } from 'vitest';
 import { api, internal } from '../../convex/_generated/api';
 import type { Doc, Id } from '../../convex/_generated/dataModel';
 import { generate } from '../../convex/lib/dice';
+import { correctionWindow } from '../../convex/lib/history';
 import { fromHex } from '../../convex/lib/sha256';
 import { admitHero, backend, storedEvents, table, type Backend } from './fixtures/table';
 
@@ -74,6 +75,49 @@ function data<T>(event: Doc<'events'>): T {
 }
 async function rolls(t: Backend) {
   return t.run(ctx => ctx.db.query('rolls').take(100));
+}
+
+/** Prevents V43's indexed card controls diverging from the authoritative correction policy. */
+async function correctionParity(
+  t: Backend,
+  fixture: Pick<Fixture, 'director' | 'player' | 'campaignId'>,
+  eventId: Id<'events'>,
+  stage: string,
+  expected: { player: boolean; director: boolean; manual: boolean },
+) {
+  for (const role of ['player', 'director'] as const) {
+    const account = fixture[role];
+    const result = (
+      await account.client.query(api.abilities.results, {
+        campaignId: fixture.campaignId,
+        eventIds: [eventId],
+      })
+    )[0]!;
+    const authoritative = await t.run(async ctx => {
+      const user = (await ctx.db.get(account.profile.userId))!;
+      return {
+        correction: (await correctionWindow(ctx, eventId, user)).allowed,
+        manual:
+          role === 'director' && (await correctionWindow(ctx, eventId, user, 'manual')).allowed,
+      };
+    });
+    // Assert each side against the contract, not just against each other (two wrong answers agree).
+    expect(
+      { read: result.mayCorrect, mutation: authoritative.correction },
+      `${stage}: ${role}`,
+    ).toEqual({
+      read: expected[role],
+      mutation: expected[role],
+    });
+    if (role === 'director')
+      expect(
+        { read: result.mayResolve, mutation: authoritative.manual },
+        `${stage}: manual`,
+      ).toEqual({
+        read: expected.manual,
+        mutation: expected.manual,
+      });
+  }
 }
 
 /**
@@ -877,6 +921,13 @@ describe('A05 attacks, damage, costs and common actions', () => {
       `@Thorn /ability use ability="Melee Weapon Free Strike" targets=[@{foe:${goblin}}]`,
       cid('strike'),
     );
+    const parity = (stage: string, playerAllowed = true) =>
+      correctionParity(t, { director, player, campaignId }, used.eventId, stage, {
+        player: playerAllowed,
+        director: true,
+        manual: true,
+      });
+    await parity('original');
     const original = await eventById(t, campaignId, used.eventId);
     expect(
       data<{ result: { targets: { total: number; tier: number }[] } }>(original).result.targets[0],
@@ -898,6 +949,7 @@ describe('A05 attacks, damage, costs and common actions', () => {
       `/ability correct event="${used.eventId}" target=@{foe:${goblin}} edges=0 banes=1`,
       cid('correct'),
     );
+    await parity('one correction');
     const correction = await eventById(t, campaignId, corrected.eventId);
     expect(correction.kind).toBe('correction.ability');
     expect(correction.causeEventId).toBe(used.eventId);
@@ -935,6 +987,7 @@ describe('A05 attacks, damage, costs and common actions', () => {
       `/ability correct event="${used.eventId}" target=@{foe:${goblin}} edges=0 banes=0`,
       restoreId,
     );
+    await parity('two corrections');
     expect((await foeRow(t, goblin)).live.stamina).toBe(8);
     expect(
       await submit(
@@ -949,8 +1002,10 @@ describe('A05 attacks, damage, costs and common actions', () => {
       correctionEventIds: [corrected.eventId, restored.eventId],
     });
     await submit(player.client, campaignId, '/history undo', cid('undo-correction'));
+    await parity('undo second correction');
     expect((await foeRow(t, goblin)).live.stamina).toBe(11);
     await submit(player.client, campaignId, '/history redo', cid('redo-correction'));
+    await parity('redo second correction');
     expect((await foeRow(t, goblin)).live.stamina).toBe(8);
     expect(await eventById(t, campaignId, used.eventId)).toEqual(original);
     expect(await rolls(t)).toHaveLength(rollsBefore);
@@ -961,6 +1016,7 @@ describe('A05 attacks, damage, costs and common actions', () => {
       `/ability correct event="${used.eventId}" target=@{foe:${goblin}} edges=0 banes=1`,
       cid('director-correct'),
     );
+    await parity('Director correction closes player window', false);
     expect((await player.client.query(api.abilities.results, { campaignId }))[0]!.mayCorrect).toBe(
       false,
     );
@@ -1055,6 +1111,12 @@ describe('A05 attacks, damage, costs and common actions', () => {
       `@Thorn /ability use ability="Brutal Slam" targets=[@{foe:${goblin}}]`,
       cid('slam'),
     );
+    const parity = (stage: string, manual: boolean) =>
+      correctionParity(t, { director, player, campaignId }, used.eventId, stage, {
+        player: false,
+        director: false,
+        manual,
+      });
     const correct = (client: Client, banes: number) =>
       submit(
         client,
@@ -1083,11 +1145,13 @@ describe('A05 attacks, damage, costs and common actions', () => {
     expect(
       (await director.client.query(api.abilities.results, { campaignId }))[0]!.mayCorrect,
     ).toBe(false);
+    await parity('manual disposition closes correction but permits disposition', true);
     await expect(correct(director.client, 0)).rejects.toThrow('rewind');
     await submit(director.client, campaignId, '/history rewind', cid('undo-disposition'));
     await correct(director.client, 0);
     expect((await foeRow(t, goblin)).live.stamina).toBe(7);
     await submit(player.client, campaignId, '@Thorn /turn end', cid('end'));
+    await parity('unrelated turn end closes all windows', false);
     await expect(correct(director.client, 1)).rejects.toThrow('rewind');
     await submit(director.client, campaignId, '/history rewind', cid('rewind-end'));
     expect(
@@ -1100,6 +1164,7 @@ describe('A05 attacks, damage, costs and common actions', () => {
       cid('later-adjustment'),
     );
     await expect(correct(director.client, 1)).rejects.toThrow('rewind');
+    await parity('unrelated adjustment closes all windows', false);
     expect((await foeRow(t, goblin)).live.stamina).toBe(12);
   });
 
