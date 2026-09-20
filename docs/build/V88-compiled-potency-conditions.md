@@ -412,3 +412,34 @@ clock rows and aliases their references. The fixture now compares every other li
 the same condition occurrence/source/status, and the replacement registration's active status,
 timing, work, source, affected ids and encounter. Roll rows remain byte-equal. No application code
 changed for this test repair; the failed attempt remains in TESTER evidence on main `4cee09c`.
+
+### 2026-09-20 — All execution gates and implementation review passed
+
+Exact candidate `1af9c7509400d493d690851e4d3e5b0f6ecad30a` passed the full check and
+real V88 proof (25 readback groups on a local anonymous backend), plus the unchanged V72 main runner
+(14 groups) and adapted V72 runner (46 groups) on CT114 `engine-live`. TESTER certificates and actual
+case outcomes are collected in [evidence/V88/README.md](evidence/V88/README.md). No browser ran.
+Independent implementation review now passes all 13 checks; separate pinned-source rules review is
+in progress. This evidence covers the pre-V87 branch only; lead-owned integration must verify its
+resulting content/API/report changes.
+
+After TESTER stopped `engine-live` and its helper, the clean detached legacy worktree was removed.
+Its four ignored local `.playtest` files were copied and byte-verified under
+`/srv/presidium/projects/salient/test-artifacts/engine-live-retired-20260920/playtest` first.
+The merged V72 branch had already been deleted. CT114 volumes/data and coordinator artifacts remain
+retained; no environment was started during retirement. The active V88 worktree remains available.
+
+Rules-review clarification: the pinned frightened and taunted conditions replace a prior
+different-source instance. That source replacement is a manual condition consequence under V88's
+existing exclusion; no ability in the V88 live inventory inflicts either condition. Supporting the
+condition id in the bounded grammar does not claim automation of its consequences.
+
+### 2026-09-20 — Reviewed branch handoff
+
+Independent implementation reviewer `v88_implementation_review` and independent pinned-source
+rules reviewer `v88_rules_review` both pass the verified `1af9c75` application, with all 13
+acceptance checks verified. No blocking finding or user decision remains. Their reports are under
+`docs/build/reviews/`; all attempt certificates, actual live case results and boundaries are linked
+from the V88 evidence README. Final closure adds documentation and authentic review trailers only;
+application and runner bytes remain those tested. ENGINE2 owns rebase/integration and shared-main
+rollout. This handoff does not merge or claim the later V87-integrated result has passed.
