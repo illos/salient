@@ -180,12 +180,44 @@ export interface GrantedAbility {
     | 'perk';
   sourcePath: string;
   /** Fixed heroic-resource cost from the source, if any. */
-  cost?: { resource: 'ferocity' | 'essence' | 'insight'; amount: number };
+  cost?: { resource: HeroicResourceName; amount: number };
   /** Source adjustments are recorded separately from the unaltered ability source text. */
   costAdjustments?: { decisionId: string; amount: number; minimum: number; sourcePath: string }[];
   /** True for the kit's own signature ability: its damage and distance already include the kit bonuses. */
   kitBonusesIncluded: boolean;
+  /**
+   * Field Arsenal: this kit signature includes a bonus its kit lost to the other kit. The source's
+   * arithmetic (printed − subtract + add) is recorded for the reader; rolls do not apply it yet.
+   */
+  kitBonusReplacements?: KitBonusReplacement[];
   provenance: Provenance;
+}
+
+/** The heroic resources of the supported classes (each class feature names its own). */
+export type HeroicResourceName = 'ferocity' | 'essence' | 'insight' | 'focus';
+
+/** A bonus column of the Kits table (chapter/kits.md); Field Arsenal resolves each one once. */
+export type KitBenefit =
+  | 'stamina'
+  | 'speed'
+  | 'stability'
+  | 'disengage'
+  | 'meleeDamage'
+  | 'rangedDamage'
+  | 'meleeDistance'
+  | 'rangedDistance';
+
+export interface KitBonusReplacement {
+  benefit: KitBenefit;
+  /** The kit whose signature ability printed the subtracted bonus. */
+  fromKit: string;
+  /** The kit whose bonus the hero takes for this benefit. */
+  toKit: string;
+  subtract: number | [number, number, number];
+  add: number | [number, number, number];
+  /** The arsenal decision that chose the winning kit. */
+  decisionId: string;
+  sourcePath: string;
 }
 
 /** A permanent sourced bonus. All required keywords must match; conditions remain explicit. */
@@ -258,7 +290,7 @@ export interface DerivedBaseline {
     strong: DerivedValue<number>;
   };
   heroicResource: {
-    name: DerivedValue<'ferocity' | 'essence' | 'insight'>;
+    name: DerivedValue<HeroicResourceName>;
     /** Value at creation; in-combat generation is manual in v0.01 (docs/fury-goblin-automation.md). */
     startingValue: DerivedValue<number>;
   };
@@ -269,6 +301,8 @@ export interface DerivedBaseline {
   /** One-time career reward; project allocation/spending is recorded separately. */
   projectPoints?: DerivedValue<number>;
   kit: KitContributions | null;
+  /** Field Arsenal only: each kit's printed contributions; `kit` holds the resolved arsenal. */
+  kits?: KitContributions[];
   skills: GrantedSkill[];
   languages: GrantedLanguage[];
   traits: GrantedFeature[];

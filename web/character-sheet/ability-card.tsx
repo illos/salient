@@ -59,6 +59,10 @@ export function abilitySummary(ability: SheetAbility): string | null {
   return null;
 }
 
+const tuple = (value: number | [number, number, number]) =>
+  Array.isArray(value) ? value.map(n => `+${n}`).join('/') : `+${value}`;
+const readableBenefit = (benefit: string) => benefit.replace(/([A-Z])/g, ' $1').toLowerCase();
+
 export function AbilityCard({ ability, compact }: { ability: SheetAbility; compact?: boolean }) {
   const tags = abilityTags(ability).filter(tag => tag.kind === 'result' || tag.kind === 'accent');
   return (
@@ -86,6 +90,14 @@ export function AbilityCard({ ability, compact }: { ability: SheetAbility; compa
       {ability.kitBonusesIncluded && (
         <p className="text-sm text-muted-foreground">Kit bonuses included</p>
       )}
+      {ability.kitBonusReplacements?.map(replacement => (
+        <p key={replacement.benefit} className="text-sm">
+          Field Arsenal: the printed {readableBenefit(replacement.benefit)} bonus{' '}
+          {tuple(replacement.subtract)} from {replacement.fromKit} is replaced by{' '}
+          {tuple(replacement.add)} from {replacement.toKit}; adjust this ability by hand.{' '}
+          <RuleLink sourcePath={replacement.sourcePath} label="Field Arsenal" />
+        </p>
+      ))}
       {ability.buildModifiers?.length ? (
         <div className="flex flex-col gap-1 text-sm text-muted-foreground">
           <span>Printed tiers shown above. Rolled damage bonuses:</span>

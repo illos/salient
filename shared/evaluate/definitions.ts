@@ -5,7 +5,11 @@
  * Owning document: docs/fury-level-one-decisions.md ("Schema note for the JSON").
  */
 
-import type { CharacterChoiceOrigins } from '../contracts/characterEvaluation.ts';
+import type {
+  CharacterChoiceOrigins,
+  HeroicResourceName,
+  KitBenefit,
+} from '../contracts/characterEvaluation.ts';
 
 export interface SourcedQuote {
   source: string;
@@ -95,6 +99,12 @@ export interface Decision {
   };
   /** This replacement exists only when this many fixed sources grant the named skill. */
   duplicateFixedSkill?: { skill: string; occurrence: number };
+  /**
+   * Field Arsenal: this decision chooses which of the two kits supplies the named benefit. It is
+   * available only while `kit.choice` and the second kit both grant that benefit with different
+   * printed values; its options are the two chosen kits.
+   */
+  overlapBenefit?: KitBenefit;
   /** Some source budgets require an exact expenditure, unlike ordinary ancestry warnings. */
   exactBudget?: boolean;
   options?: DecisionOption[];
@@ -149,7 +159,7 @@ export interface ClassProfile {
   startingStamina: number;
   recoveries: number;
   potencyCharacteristic: 'M' | 'A' | 'R' | 'I' | 'P';
-  resource: 'ferocity' | 'essence' | 'insight';
+  resource: HeroicResourceName;
   resourceSource: string;
   resourceQuote: string;
   resourceOutsideCombatQuote: string;
