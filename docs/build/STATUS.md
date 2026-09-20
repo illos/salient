@@ -4,6 +4,22 @@ Single tracker for every slice. Update your row when you claim, block, hand off 
 values: `Not started`, `In progress`, `Blocked (Q-id)`, `In review`, `Committed`, `Outline` (V1 slice
 whose document is an outline until claimed).
 
+## Test execution queue
+
+All test jobs go to **TESTER**, Chords thread `46c30412-6e29-44dc-b30b-08ffe22bd0e3`, under
+[the testing process](../../testing-process.md). The coordinator maintains this queue before
+acknowledging submissions; implementers continue using their existing slice rows and work logs.
+One active job across all hosts, including setup/build/cleanup. On resume, reconcile any running
+row with actual processes before dispatch. Keep terminal evidence in the slice work log and prune
+completed rows after the requester has the result.
+
+No submitted jobs at adoption, 2026-09-20 14:06 UTC. No test workload is running from this thread.
+The [adoption and cleanup record](audits/2026-09-20-testing-coordinator-adoption.md) records the
+initial host inventory and user-authorized retirement of old development servers.
+
+| Job / Chords message | Requester | Exact source / checks and inputs | State / host / target | Result / evidence |
+| --- | --- | --- | --- | --- |
+
 ## Post-v0.01 organization — 2026-09-15
 
 The [five-track roadmap](../v1-roadmap.md) and [track kickoff](../kickoff-development-track.md)

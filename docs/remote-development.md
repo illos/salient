@@ -3,7 +3,8 @@
 Status: merged through `d663c15`; main development data migrated to CT114 on 2026-09-16 with
 matching record fingerprints and credentials. The identified superseded local processes are
 stopped; the original data and protected backup remain available for operator rollback. Heavy
-development commands now belong on the dedicated guest. The isolated pilot passed 433 check-suite
+development commands moved to the dedicated guest at that checkpoint; current test placement
+follows the coordinator policy below. The isolated pilot passed 433 check-suite
 tests and all 22 HTTPS browser tests. Main passed explicit restart after reboot with unchanged
 data/credentials and the same HTTPS URL. Real Salient provider-session broker verification passed
 on 2026-09-16; see the [session checkpoint](build/S03-remote-development.md#salient-provider-access-checkpoint--2026-09-16).
@@ -12,16 +13,18 @@ on 2026-09-16; see the [session checkpoint](build/S03-remote-development.md#sali
 
 ## Choosing a test environment
 
-User decision, 2026-09-20: local and remote CT114 are peer test environments. **Use whichever is
-free and suitable.** Do not wait in a global remote queue if equivalent verification can run on
-an available local environment. This replaces the previous ban on local test workloads, including
-necessary dependency installation, builds and isolated test services.
+User decision, 2026-09-20: the [testing coordinator](../testing-process.md) owns a single
+sequential queue for all Salient tests and their setup/builds. Send jobs there; do not independently
+start tests or stacks. This replaces the earlier permission for parallel jobs on different hosts.
+Local and remote CT114 remain peer test environments: the coordinator uses whichever is free and
+suitable, without waiting specifically for CT114 when local execution can provide equivalent proof.
 
-Coordinate capacity and ownership per host/environment; serialize conflicting or heavy workloads
-on the same constrained host, rather than blocking all testing across hosts. Reuse compatible
-running environments or use explicitly named isolated ones. Check toolchain, resources and target
-compatibility before choosing; free capacity alone does not make evidence equivalent. If no
-suitable environment is available, record the blocker and continue independent development.
+Before each job, inspect both hosts' resource usage and active claims. Reuse compatible running
+environments and dependencies; transfer only missing test inputs, and avoid a full app upload or
+build when an existing matching target suffices. The installed helper still requires `up` for source
+replacement; `run` does not sync. The testing guide distinguishes current capabilities from pending
+infrastructure optimizations. If no suitable capacity is available, queue verification while
+independent development continues.
 
 Record the source revision, runner host, application URL/environment, command, elapsed time and
 result. A local runner may test the hosted app through its API; its location does not change the

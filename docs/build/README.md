@@ -62,7 +62,8 @@ The dependency graph is in `STATUS.md`. A slice may start when every dependency 
    which dependencies are real and which are stubbed with a clearly named development fixture.
 4. **Implement** in a worktree branch named `slice/<id>` (for example `slice/A05`). Keep game rules out
    of UI components. Every table control goes through a registered shared operation.
-5. **Verify.** Run focused checks and `pnpm check`, then pass the
+5. **Verify.** Submit focused checks and required `pnpm check` runs to the
+   [testing coordinator](../../testing-process.md), then pass the
    [programmatic headless gate](#programmatic-headless-completion-gate) before browser acceptance.
    Run the slice's remaining acceptance checks. Read persisted state back through
    the application; a mutation response is not evidence. Record commands and output in the work log.
@@ -354,14 +355,14 @@ of repeated browser failures and the accepted direction for fixing them.
 
 ## Test environment selection
 
-Local and remote CT114 are both valid test environments. Use whichever is free and suitable for
-the required proof; do not block on a remote slot when an available local environment can run it.
-Coordinate capacity per host and ownership per environment. Record the source revision, runner
-location, application target, command and result. Preserve existing environment data and the shared
-playable target. Builds, dependencies and isolated services needed for local tests are permitted;
-no abandoned pilot environment or rollback copy may be reused. Follow the
-[environment-selection runbook](../remote-development.md#choosing-a-test-environment).
-The browser moratorium below applies equally to local and remote environments.
+User decision, 2026-09-20: the [testing coordinator](../../testing-process.md) owns all test
+execution, with one active job across all hosts. Submit checks and required builds through Chords;
+independent implementation and review can continue while verification queues. This supersedes
+independent concurrent testing across hosts. Local and remote CT114 remain valid environments;
+the coordinator chooses whichever is free and suitable after checking capacity and target identity.
+Preserve existing data and the shared playable app; record source, runner, target and results.
+Follow the [environment-selection runbook](../remote-development.md#choosing-a-test-environment).
+The browser moratorium below applies everywhere.
 
 ## Browser testing moratorium — 2026-09-20
 

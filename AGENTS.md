@@ -8,9 +8,9 @@ actions in the appropriate UI list and shared CLI/API route, retain the granting
 conditional availability and persisted changes. Trait text alone is not completion. Follow the
 [trait-granted ability gate](docs/build/README.md#trait-granted-ability-completion-gate).
 
-Local and remote (CT114) are both valid test environments. Use whichever is free and suitable
-for the required test; do not wait for a remote slot when the same proof can run locally.
-Coordinate workloads per host/environment, preserve existing data, and record the actual source,
-runner location and application target with results. The browser moratorium applies everywhere.
-Use `presidium-dev` and `presidium-ssh dev-runtime` for CT114. See
-[the runbook](docs/remote-development.md#choosing-a-test-environment).
+All test execution goes through the designated coordinator under [the testing process](testing-process.md).
+Submit small reproducible jobs through Chords; do not launch independent test runs or test stacks.
+The coordinator runs one job at a time, choosing a suitable local or CT114 environment after checking
+capacity. Preserve existing data and record source, runner and application target. The browser
+moratorium applies everywhere. Use `presidium-dev` and `presidium-ssh dev-runtime` for CT114;
+see [the runbook](docs/remote-development.md#choosing-a-test-environment).
