@@ -13,7 +13,8 @@ One active job across all hosts, including setup/build/cleanup. On resume, recon
 row with actual processes before dispatch. Keep terminal evidence in the slice work log and prune
 completed rows only after the requester has the result through a direct `wake: true` Chords return.
 
-Updated 2026-09-20 16:49 UTC: repaired V88 seeded-inventory candidate `21ec7ca` passed local and real-headless gates; all job services are stopped with data retained.
+Updated 2026-09-20 16:58 UTC: final V88 seeded-inventory documentation/metadata closeout `8d43dfb` is running locally against the previously tested `21ec7ca` bytes; no runtime or browser is involved.
+Repaired V88 seeded-inventory candidate `21ec7ca` passed local and real-headless gates; all job services are stopped with data retained.
 V88 fixture repair `1af9c75` passed its focused and full local gates
 and its result wake was accepted. The superseded `c220cbc` focused failure remains preserved below.
 Shared-main V87/V02 live proof passed against the verified `4d6d299` CT114 deployment and its result wake was accepted. Repaired V88 `a07dd27` passed and its result wake was accepted;
@@ -26,6 +27,7 @@ initial host inventory and user-authorized retirement of old development servers
 
 | Job / Chords message | Requester | Exact source / checks and inputs | State / host / target | Result / evidence |
 | --- | --- | --- | --- | --- |
+| `test-V88-8d43dfb-14-seeded-closeout` / 983 | ENGINE `2b1ba081-4040-4665-9ea2-22364db707f4`; copy ENGINE2 `3498baf0-e8d9-442b-a704-f24f7e595b30` | frozen `8d43dfb63230b3783cf559b259e29c331ca7fb87`, `.worktrees/engine-potency-seeded`; non-doc identity to tested `21ec7ca`, review verdicts, links, merge-range trailers, diff hygiene and submitted tree/cleanliness | **Running locally**: documentation/metadata-only closeout; no stack, deployment or browser | awaiting unique closeout evidence and direct wake return |
 | `test-V88-21ec7ca-13-seeded-headless` / 972 | ENGINE `2b1ba081-4040-4665-9ea2-22364db707f4`; copy ENGINE2 `3498baf0-e8d9-442b-a704-f24f7e595b30` | dependent on job 12 pass; frozen `21ec7cadcdc4a7abe04d5116cdad4d3bcd6f8b3c`; guarded seeded helper plus real public V88 runner against exact 1151-row corpus | **Passed**: 91 readback groups/247.6 s; helper 10/10; backend/helper stopped, data retained | [Evidence](evidence/V88/tester-job-21ec7ca-seeded-headless.md); artifacts: `/srv/presidium/projects/salient/test-artifacts/V88-21ec7ca-seeded-headless-20260920T164300Z`; direct result 979, wake accepted |
 | `test-V88-21ec7ca-12-seeded-repair` / 971 | ENGINE `2b1ba081-4040-4665-9ea2-22364db707f4`; copy ENGINE2 `3498baf0-e8d9-442b-a704-f24f7e595b30` | frozen `21ec7cadcdc4a7abe04d5116cdad4d3bcd6f8b3c`, `.worktrees/engine-potency-seeded`; focused potency/report files then `CI=true pnpm check` | **Passed**: focused 6/6 + 3/3; full 352 engine + 571 app/scripts, content/report/build gates | [Evidence](evidence/V88/tester-job-21ec7ca-seeded-repair.md); artifacts: `/srv/presidium/projects/salient/test-artifacts/V88-21ec7ca-seeded-20260920T163600Z`; direct result 975, wake accepted |
 | `test-V88-498778e-11-seeded-headless` / 965 | ENGINE `2b1ba081-4040-4665-9ea2-22364db707f4`; copy ENGINE2 `3498baf0-e8d9-442b-a704-f24f7e595b30` | dependent on job 10 pass; same frozen `498778eb3ae788b3badc28b90bd6f8f4eb07827a`; guarded seeded helper plus real public V88 runner against exact 1151-row corpus | **Cancelled before setup** by replacement job 13 / message 972 | no attempt artifacts or environment change |
