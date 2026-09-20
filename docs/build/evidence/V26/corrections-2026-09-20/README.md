@@ -1,6 +1,6 @@
 # V63 correction prerequisite verification — 2026-09-20
 
-**Pre-pause full check and live CLI proof pass. Browser coverage is deferred under the moratorium, not an acceptance blocker.**
+**Fresh post-rebase full check and live CLI proof pass on `47e69c6`. Browser coverage is deferred under the moratorium.**
 No merge or shared-runtime update is claimed. All eleven V26 compiler checks remain pending.
 
 ## Tested source and target
@@ -82,3 +82,23 @@ Would-be visible scenarios are in [the backlog](../../../browser-coverage-backlo
 Fable requested refreshed headless/full-check verification and final review. This thread's direct
 user testing pause remains in effect until clarified; no test or service was started during the
 rebase. Do not mistake that separate pause for a browser acceptance requirement.
+
+## Resumed headless verification — 2026-09-20
+
+The user explicitly resumed ordinary development and all non-browser verification. Browser testing
+remains paused until further notice. On clean rebased candidate `47e69c6753c7c0f7eba22d361a1a3598f26f0155`:
+
+- [Fresh full check](v63-rebased-check-output.txt), [exit 0](v63-rebased-check-exit.txt):
+  **705 tests** (284 engine, 421 app/scripts), lint/format/types, links/pins/content checks and build.
+- [Fresh authenticated CLI readback](v63-rebased-headless-readback.json),
+  [exit 0](v63-rebased-headless-exit.txt): complete, 12 records, same correction/permission lifecycle
+  described above. Accepted dice retained; one disclosed dice fixture import. No browser setup.
+- [Actual tested source](v63-rebased-source.json) and [file hashes](v63-rebased-files.sha256)
+  distinguish this run from the earlier `a843c1a` evidence. Source base is main `2f5544f`.
+- Full check and CLI ran serially on named CT114 `engine-corrections`; jobs/helper exited and
+  backend/web stopped with data retained. Shared, hosted and character runtimes were untouched.
+
+The historical browser failure and prior acceptance language above remain diagnostic history.
+They do not block this headless acceptance and no browser run was repeated.
+
+Independent [final implementation and pinned-source rules review](../../../reviews/V63-headless-final-review.md) both PASS. Final history cleanup changes commit metadata and documentation only; reviewed application file hashes remain unchanged. Committed on branch only; Fable owns main/runtime integration.

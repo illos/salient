@@ -823,3 +823,14 @@ to the [backlog](browser-coverage-backlog.md), using its `spot` priority vocabul
 Historical blocked-review language above describes the gate before the moratorium, not the
 current browser requirement. Refreshed CLI/full-check verification and final review are held
 by this thread's direct user testing pause until clarified; no runtime/test command was started.
+
+### 2026-09-20 — Resumed headless acceptance
+
+User explicitly resumed normal work and non-browser verification. Clean candidate `47e69c6`
+on main `2f5544f` passed a fresh CT114 full check (705 tests and every gate/build) and real
+BetterAuth/CLI correction lifecycle (12 records, complete, exit 0). Exact source metadata,
+file hashes, full output and public readback are in the
+[fresh evidence](evidence/V26/corrections-2026-09-20/README.md#resumed-headless-verification--2026-09-20).
+Named engine-corrections services stopped afterward with data retained. Browser scenarios remain
+in the backlog under the moratorium; no browser execution or new acceptance dependency.
+Independent final implementation and pinned-source rules review both [PASS](reviews/V63-headless-final-review.md). This accepts only the correction prerequisite, not the broader V26 compiler. Fable owns integration into main and the shared runtime.

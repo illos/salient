@@ -1,0 +1,4 @@
+8c52992a1bd5c1d1387445f646cc56c3cb28d62dd508ed60af2d0fb59211ec68  convex/lib/history.ts
+e4075fcc6acca4c3a017cbba642231c584a122e4c25ec064775f6362fabae80a  convex/lib/historyRead.ts
+08a865ec1c1d0e9b11760036de17528ac0484450933910a2511dd6b20a9e997c  tests/app/abilities.test.ts
+e89148dc2bf6e8355e3734f2be379ea5db69daad77b27eddea426d0ccda48362  scripts/v63-headless.ts

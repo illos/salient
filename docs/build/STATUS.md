@@ -24,13 +24,12 @@ Fable's engine/parser thread owns integration. Codex's V63 branch
 `slice/V63-corrections-rebase` in `.worktrees/engine-corrections` repairs the V43 indexed-read
 mismatch after rebasing the original prerequisites onto main `5956331`.
 
-**Browser coverage deferred under the moratorium; pre-pause full check and live CLI proof pass.** Candidate `a843c1a` passes
-693 tests and the real authenticated correction lifecycle. The browser journey failed during
-campaign setup with a backend one-second execution timeout, before ability cases. No timeout
-or assertion was weakened. Fable received the second blocker; named CT114 `engine-corrections`
-is stopped with data retained and its heavy window released to V65. No main/shared runtime change.
-See [fresh evidence](evidence/V26/corrections-2026-09-20/README.md) and the
-[work log](V26-compiled-ability-effects.md#2026-09-20--v63-indexed-read-repair-and-ct114-verification).
+**Fresh post-rebase full check and authenticated CLI proof pass on `47e69c6`.** The user resumed
+non-browser testing; 705 tests and all check/build gates pass, plus the complete 12-record CLI
+correction lifecycle. Independent final review is in progress. Browser coverage is deferred under
+the moratorium with visual scenarios in the backlog, not an acceptance blocker. Named CT114
+engine-corrections is stopped with data retained; Fable owns integration.
+See [fresh evidence](evidence/V26/corrections-2026-09-20/README.md).
 
 V26 specification and the source-to-screenshot evidence policy are merged into main. The
 [2026-09-16 prerequisite evidence](evidence/V26/corrections-2026-09-16/README.md) passed all ten
@@ -162,7 +161,7 @@ See the [CI review and run record](audits/2026-09-14-ci-history-review.md) for t
 | V20 | [Dynamic terrain objects](V20-dynamic-terrain.md) | V04 | Outline |
 | V21 | [Desktop layout fidelity](V21-desktop-layout-fidelity.md) | A08, A09, V13 | Built, not committed — 2026-09-15 (foundation + five parallel implementers, lead integration and repairs); lint, typecheck, 85 engine tests, 317 app tests, links, vendor, content and the full 20-test browser suite pass; screenshots under `.playtest/v21/` compared with each mockup; review deferred to the user's audit thread |
 | V26 | [Compiled ability effects: damage and push instructions](V26-compiled-ability-effects.md) | S01, S02, A01, A02, A04, A05, A06, A09 | Specification merged at `3689226`; compiler pending. Historical prerequisite branch passed ten proper-turn playtests on 2026-09-16, not merged. V63 indexed-read repair passes full check and live CLI; browser scenarios deferred to the moratorium backlog. |
-| V63 | [Rebase and reverify V26 correction prerequisites](V26-compiled-ability-effects.md#2026-09-20--v63-rebase-and-integration-audit) | V26 prerequisites, V43, V45 | Rebased onto `2f5544f`; pre-pause candidate `a843c1a` passes 693 tests and live CLI. Browser coverage deferred, not an acceptance gate. Refreshed headless verification held by direct user testing pause; Fable owns integration. |
+| V63 | [Rebase and reverify V26 correction prerequisites](V26-compiled-ability-effects.md#2026-09-20--v63-rebase-and-integration-audit) | V26 prerequisites, V43, V45 | Headless acceptance and independent implementation/rules reviews PASS — tested `47e69c6`, 705-test full check and authenticated CLI lifecycle. Committed on branch only; Fable owns integration. Browser deferred under moratorium. |
 | V64 | [Ability grammar coverage audit](V64-ability-coverage-audit.md) | V26 specification, S01, V35 | Merged — read-only audit script, report and tests integrated into main at `458b6e8`, 2026-09-20; independent review pass; no runtime impact (no backend, frontend or content change) | Engine and parser thread |
 | V66 | [Browser test harness repair](V66-browser-test-harness-repair.md) | S03, browser failure audit | Not started — registered 2026-09-20 at the user's direction; do not claim until the user starts it; ends the browser testing moratorium when implemented | Unassigned |
 | V68 | [Campaign home redesign](V68-campaign-home.md) | V21, V29, V31, V43, A09 | In progress — claimed 2026-09-20 on `slice/V68` (`code/.worktrees/campaign-home`) from main `2f5544f`; builds the user's V2 simplified campaign-home mockup: owner/Director badges, connected presence, optional session titles, session history with RECAP, light campaign chat, Manage players pop-up; isolated CT114 env `campaign-home`; headless-only verification | Campaign home UI thread (Fable) |
