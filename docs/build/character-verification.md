@@ -1,8 +1,10 @@
 # Character verification with Forge Steel examples
 
 **Confirmed by the user, 2026-09-15.** Use characters built and exported from Forge Steel as
-concrete comparison examples for wizard development. Verify their choices, grants and calculated
-values against the pinned Steel Compendium before adopting them as expected results.
+concrete comparison examples for wizard development. **Updated with user approval, 2026-09-20:**
+retained authentic exports or reproducibly constructed characters using pinned Forge Steel code
+and definitions satisfy the reference requirement without a browser. Verify their choices, grants
+and calculated values against the pinned Steel Compendium before adopting them as expected results.
 
 This procedure applies to the eleven-class character track. It supplements the existing slice
 checks and independent reviews in [the build process](README.md#verification-baseline). Keep
@@ -41,24 +43,41 @@ not an already completed or verified fixture.
 
 ## 2. Build and capture the reference
 
-Complete the target choices in the Forge Steel website. Export the `.ds-hero` data and retain a
-readable sheet or screenshots of the values being compared. Record any intentionally deferred
-choices; an incomplete build can test draft behavior but is not a completed-character target.
+Use either a retained authentic Forge Steel export or a reproducible programmatic counterpart
+constructed with the pinned Forge Steel factories, definitions and selection/calculation logic.
+A website capture is not required. Browser work remains suspended under the
+[moratorium](README.md#browser-testing-moratorium--2026-09-20); retained website evidence may be
+reused only for the behavior it actually proves, and never from the abandoned Opus pilot.
+
+For programmatic counterparts, calibrate the adapter against retained genuine exports before
+using its generated witnesses as proof. Execute Forge's own completeness and calculation paths;
+validate allowed options, prerequisites, selection counts, point budgets and nested choices.
+Do not assume that assigning selections to an object makes a legal completed character. An adapter
+may translate exact selections and normalize output, but must not replace Forge's game calculations
+or selection semantics with mocks, replicas or hand-authored expected Forge stats. Unsupported
+semantics must fail closed and identify the unproved scope rather than silently skip a check.
+
+Retain the raw export or generated Forge character, the reproducible input selections and command,
+and captured Forge output with a readable JSON comparison report. The report must expose the
+completeness result and the choices, grants and derived values actually compared. Record any
+intentionally deferred choices; an incomplete build can test draft behavior but is not a
+completed-character target.
 
 Alongside the example, record:
 
-- Capture date, website/version observed and enabled sourcebook IDs.
-- Target ancestry/class/subclass/level and relevant selections.
-- Exact export location and fingerprint, plus the readable evidence location.
-- Our pinned Compendium and Forge Steel source revisions.
+- Capture/run date, Forge source revision or observed website version, and enabled sourcebook IDs.
+- Target ancestry/class/subclass/level and exact selections, including nested choices.
+- Raw artifact location and fingerprint, plus readable output and comparison evidence locations.
+- Pinned Compendium and Forge Steel revisions, adapter revision and calibration evidence.
+- Unsupported semantics, omitted comparisons and any source/version differences.
 
-Retain the raw export unchanged. Store normalized selections, expected results and source citations
-with the automated fixture when implementing it. Local ignored `.playtest/` artifacts are useful
-inspection evidence, but are not a portable test fixture: record that limitation until the required
-test data is available to the normal checkout. Do not depend on the live website during routine CI.
+Retain original exports unchanged. Store normalized selections, independently source-derived
+expectations and citations with the automated fixture. Local ignored `.playtest/` artifacts are
+useful inspection evidence, but are not portable test fixtures: record that limitation until the
+required data is available to the normal checkout. Do not depend on the live website during routine CI.
 
-The website may be newer than our pinned source. Record differences explicitly; generating a
-reference character never authorizes an automatic dependency update.
+A retained website export may be newer than our pinned source. Record differences explicitly;
+generating or calibrating a counterpart never authorizes an automatic dependency update.
 
 ## 3. Establish the expected build independently
 
@@ -81,12 +100,14 @@ pin, record the difference and investigate it. Correct our implementation when t
 the correction; preserve an explained source/version difference when the reference differs. An
 unresolved mismatch is not a parity pass. Use the existing question process for material ambiguity.
 
-## 4. Recreate and verify in our editor
+## 4. Recreate and verify through Salient
 
-Enter the same supported choices through the wizard and equivalent shared headless operations.
-Save, reload and read the persisted build back. Compare choices, grant membership and derived
-values with the independently established expectations. Check readable feature/ability content
-and distinguish permanent build calculations from manually resolved gameplay effects.
+Enter the exact same supported choices through Salient's authenticated CLI/API operations shared
+with the wizard. Save and read the persisted build and evaluated sheet back through the API.
+Compare choices, grant membership and derived values with both the captured Forge result and the
+independently established source expectations. Record explicit mappings where the apps use
+different identifiers; a similarly named option is not proof of the same selection. Check readable
+feature/ability content and distinguish permanent build calculations from manually resolved gameplay effects.
 
 Exercise the relevant negative/change cases: incomplete drafts, illegal options, parent changes,
 removed grants, duplicate entitlements or deferred selections. Verify existing campaign review,
@@ -101,8 +122,9 @@ rules review; agreement with Forge Steel does not replace it.
 
 ## 5. Verify advancement and later interchange
 
-For progression, retain completed exports before and after a chosen transition. Complete each
-level's choices and record the expected added, removed and changed grants and values. Verify our
+For progression, retain completed exports or programmatically constructed Forge counterparts
+before and after a chosen transition. Complete each level's choices and record the expected added,
+removed and changed grants and values. Verify our
 scoped level-up and history restoration against those observations, including retained inventory
 and the confirmed live-value policy. A high-level export alone does not establish earlier choices.
 
@@ -144,9 +166,11 @@ Maintain an option-to-fixture ledger: every delivered selectable option appears 
 legal completed Forge Steel counterpart with the same build in Salient. Cover nested selections,
 automatic grants and derived values as well as displayed option names. Use multiple counterparts
 for mutually exclusive choices and meaningful interactions; a full Cartesian product is unnecessary.
-Retain portable raw exports, readable Forge evidence, exact selections, versions and independently
-source-derived expectations. Historical examples count only for the behavior their retained evidence
-actually proves; an inspected export or a Salient-only fixture is not a parity pass.
+Retain portable raw exports or reproducible generated Forge characters, readable Forge output and
+comparison reports, exact selections, versions and independently source-derived expectations.
+Programmatic counterparts must meet the calibration and completeness requirements above; this
+changes the evidence route, not the per-option coverage or independent rules-review gate. Historical
+examples count only for the behavior their retained evidence actually proves; an inspected export or a Salient-only fixture is not a parity pass.
 
 Unexplained mismatches block verification. Source-backed Forge differences require a recorded
 explanation and independent review. If Forge cannot represent the same source-legal build, record

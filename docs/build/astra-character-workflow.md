@@ -51,7 +51,9 @@ Before browser acceptance, pass the app-wide
 [programmatic headless gate](README.md#programmatic-headless-completion-gate). Each ancestry/class
 journey must create, choose, save and read back/evaluate through supported CLI/API operations
 without a browser session or UI setup. Include affected review/history boundaries. Record the
-headless result first, then browser-only discoveries; existing browser passes are not this proof.
+headless result first. Browser testing remains under the moratorium; log would-be scenarios in
+the browser backlog. After browser testing resumes, record any additional gaps it finds separately;
+existing browser passes are not programmatic proof.
 
 During implementation, run focused checks for the changed mechanism: choices/budgets, grants and
 derived values, parent replacement, persisted save/reload and applicable history/live-state cases.
@@ -61,10 +63,21 @@ replica, diagnostic service or logging pipeline to complete a unit.
 Keep a compact option-to-witness table. Every newly supported option must be checked against a
 legal completed Forge build with the same choices in Salient. Combine compatible options and reuse
 valid pre-pilot counterparts where they actually cover unchanged behavior; never use pilot exports.
-Retain authentic exports, readable evidence and observed Salient readbacks. Source expectations
-remain independent of both implementations. Explain discrepancies; do not label a gap a pass.
-Follow [the reference procedure](character-verification.md). UI walkthroughs cover meaningful user
-journeys; pure tables cover mechanical variations without multiplying redundant browser assertions.
+Use retained authentic exports or reproducible counterparts constructed with pinned Forge code
+and definitions, as approved by the user on 2026-09-20. Calibrate the programmatic adapter against
+retained genuine exports, execute Forge's own completeness and calculation logic, and validate
+allowed options, counts, budgets, prerequisites and nested choices. Do not mock selection/game
+logic or hand-author expected Forge stats. Unsupported adapter semantics fail closed with explicit
+scope gaps.
+
+Retain raw Forge characters, exact selections, versioned reproduction inputs, captured Forge output
+and a readable JSON comparison report against saved Salient API readbacks. Compare grants and
+derived values as well as selection completeness. Source expectations remain independent of both
+implementations; the pinned Compendium resolves disagreements. Explain discrepancies and obtain
+independent rules review; do not label a gap a pass. Follow
+[the reference procedure](character-verification.md). No website capture or browser test is required
+for this comparison, and the browser moratorium remains unchanged. The option-to-witness ledger,
+full per-option coverage and review gates still apply.
 
 ## Runtime and failure handling
 

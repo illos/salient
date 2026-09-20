@@ -55,6 +55,7 @@ must be separately recorded; this branch has performed neither.
 
 | Id | Slice | Depends on | Status | Owner |
 | --- | --- | --- | --- | --- |
+| V73 | [Headless Forge character counterparts](V73-forge-headless-counterparts.md) | V69 verified candidate | In progress — pinned Forge Node calibration, then saved API comparisons; no browsers | WIZARD, slice/V73 |
 | V24 | [Character wizard assessment and delivery proposal](V24-character-wizard-assessment.md) | A09; assesses A02/V21 | Assessment complete; V25 implementation verified | Codex, character wizard thread |
 | V25 | [Shared Fury/Bethell wizard](V25-two-class-wizard.md) | A09, R01–R03, S01, A01; V24 docs | Merged and live verified — `4cb3f1f`, closeout `a3a144f`; 433 tests, both character journeys and table audit pass | Codex character team |
 | V32 | [Fury advancement and restorable history](V32-fury-progression-history.md) | V25, A09, V29 | Merged and live verified — `73b7ab4`, integration `ea831d6`; 466 tests and isolated/shared character journeys pass | Codex character team |
