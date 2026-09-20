@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-only
 import { STARTING_ITEM_ABILITIES } from '../content/starting-item-abilities.ts';
-import manifest from '../content/compendium/manifest.json' with { type: 'json' };
+import manifest from '../content/compendium/manifest.json';
 import type { StartingRewards } from '../contracts/startingRewards.ts';
 import type { GrantedAbility } from '../contracts/characterEvaluation.ts';
 

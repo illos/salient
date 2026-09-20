@@ -2,14 +2,11 @@
 /** V86: authenticated read and explicit one-time initialization of a legacy starting award. */
 import { ConvexError, v } from 'convex/values';
 import { mutation, query } from './_generated/server';
+import { startingRewardsValidator } from './startingRewardValidators';
 import { requireUser } from './lib/access';
 import { requireEditable } from './lib/characterBuild';
 import { command } from './lib/commands';
-import {
-  requireStartingRewardsAccess,
-  startingRewardsFromOrigin,
-  startingRewardsValidator,
-} from './lib/startingRewards';
+import { requireStartingRewardsAccess, startingRewardsFromOrigin } from './lib/startingRewards';
 import type { StartingRewards } from '../shared/contracts/startingRewards';
 import type { Id } from './_generated/dataModel';
 

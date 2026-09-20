@@ -37,8 +37,9 @@ deploy CLI exited 1 before reporting upload success; two diagnostic repeats expo
 The hosted frontend build passed, but publication and the 35-scenario API run did not proceed.
 The [subsequent diagnosis](evidence/V85/deployment-diagnosis.md) confirmed mixed manifest JSON
 import attributes and a schema import of runtime authentication. Two temporary corrections passed
-the deployment dry run and were restored. Next apply those demonstrated corrections, deploy the
-candidate to the selected test environment and run the existing API suite. Do not repeat source
+the deployment dry run and were restored. The permanent equivalent correction is now prepared
+for TESTER under the new testing process; TESTER owns all checks/builds/deployment verification.
+The next gate is the corrected committed candidate followed by the hosted 35-scenario API suite. Do not repeat source
 audits, expand class scope or enter another verification repair loop. Earth + Grounded's duplicate
 range benefit still lacks a complete public character witness because Earth specialization is unsupported.
 
