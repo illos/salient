@@ -529,3 +529,13 @@ the tested candidate. The owner closes documentation and replaces pending commit
 with these authentic verdicts before requesting TESTER's final link/metadata/byte-identity gate.
 The final reviewed branch is handed to DEPLOY for integration; it is not merged or published
 by the engine owner.
+
+### 2026-09-20 — DEPLOY current-main integration staged
+
+ENGINE explicitly handed frozen reviewed source `8d43dfb63230b3783cf559b259e29c331ca7fb87`
+to DEPLOY after TESTER's final closeout certificate at
+`evidence/V88/tester-job-8d43dfb-seeded-closeout.md`. DEPLOY fast-forwarded its isolated
+`integration/V88` branch, then rebased the complete nine-commit V88 series without conflicts onto
+current main `dd8e3ea`. The rebased executable parent is `2600c37`; newer main changes were the
+retained TESTER/DEPLOY documentation and certificate records. Main, GitHub and cloud remain
+unchanged until TESTER certifies the exact integrated branch head.
