@@ -142,6 +142,17 @@ do not merge it into an existing same-name squad. Saved preparation preserves ea
 relationships. No manual split/merge or damaged-squad refill is implied by the add control. Each minion
 still retains an identity and target reticle inside the shared squad turn.
 
+Confirmed table loading scope, 2026-09-20: every core stat block in the seeded library is addable
+from the table, including those with no printed organization: Xorannox the Tyract's six eyestalk
+stat blocks (Compulsion Eye, Demolition, Mover Eye, Necrotic Eye, Toxic Eye, Zapper Eye), the
+Noncombatant block, the Elementalist's Source of Earth summon and the retainer stat blocks. Nothing
+is filtered out of the picker; missing source facts stay visible as blank. Stat blocks that the source
+prints under a named parent monster (the same `monster/<family>/statblock/` directory as a stat block
+named for that family, with no organization of their own) carry the parent's printed name in the add
+control and in the loaded instance name, for example "Xorannox the Tyract: Compulsion Eye", so they
+are searchable by the boss's name. This is a display and naming rule over source facts; the printed
+stat block text is unchanged.
+
 Confirmed minion EV calculation, 2026-09-13: derive EV proportionally from the given source numbers:
 `selected minion count × printed EV ÷ printed creature quantity`. Preserve the original EV and quantity;
 for EV 3 per four minions, six minions contribute EV 4.5. Do not round the count up to a purchase pack
