@@ -95,7 +95,10 @@ rate-limit bypasses or disabled assertions merely to make verification pass.
    findings; reviewers revisit the affected changes. Do not rebuild unchanged evidence solely
    because a new reviewer reads it. Keep verification-pending distinct from acceptance-pass.
 3. Prepare the integration candidate on current main. Run full `pnpm check`, pass programmatic headless application
-   journeys, then run the required full browser suite on CT114 and record its incremental findings. A previous run may satisfy this gate only when it covers the identical
+   journeys. The full browser suite step is suspended under the
+   [browser testing moratorium](README.md#browser-testing-moratorium--2026-09-20) of 2026-09-20:
+   log the browser scenarios in the [backlog](browser-coverage-backlog.md) instead. When the
+   moratorium is lifted, a previous run may satisfy this gate only when it covers the identical
    relevant code, tests and configuration; document that equivalence. Do not require duplicate
    branch and integration full runs when their tested trees are identical.
 4. A required failure or incomplete Forge comparison blocks merge. Passing an isolated rerun does

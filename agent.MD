@@ -6,6 +6,18 @@ text.
 All feature work follows the [programmatic headless completion gate](docs/build/README.md#programmatic-headless-completion-gate):
 prove the supported CLI/API route before browser acceptance. No feature is complete without it.
 
+## Browser testing moratorium — 2026-09-20
+
+The user deprecated all browser (Playwright) testing for the time being, site-wide, until
+[V66 browser test harness repair](docs/build/V66-browser-test-harness-repair.md) is implemented.
+V66 is registered but not started; do not claim it without the user's go. Verification is
+headless CLI/API only under the [gate](docs/build/README.md#programmatic-headless-completion-gate);
+a missing browser run is not a blocker. Log would-be browser scenarios in the
+[browser coverage backlog](docs/build/browser-coverage-backlog.md) for a later pass. Headless
+tests prove the app at the logical level; browser tests are only the final visual spot check that
+the UI is not badly broken. Read [the moratorium](docs/build/README.md#browser-testing-moratorium--2026-09-20)
+and [the audit](docs/build/audits/2026-09-20-browser-testing-failures.md).
+
 ## Character restart — 2026-09-19
 
 The user permanently abandoned the entire Opus pilot. Its code, tests, fixtures, research and

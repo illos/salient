@@ -261,10 +261,10 @@ character examples to the checks below; it does not replace source review or per
 content snapshot regenerates byte-for-byte from the clean pin; it replaced `pnpm foes:source`) and
 `pnpm build`.
 The programmatic headless completion gate below applies to every feature track, not only `A` slices.
-`pnpm check` alone does not prove that gate. Browser tests (`pnpm test:browser`) currently remain
-required for slices that change UI flows, after headless verification; use the recorded private or
-hosted development target. Reuse adequate existing coverage and add tests only when they meet the
-test value policy. The commit checker runs
+`pnpm check` alone does not prove that gate. Browser tests (`pnpm test:browser`) are under the
+[moratorium below](#browser-testing-moratorium--2026-09-20) and must not be run until V66 lands;
+log would-be browser scenarios in the [browser coverage backlog](browser-coverage-backlog.md).
+Reuse adequate existing coverage and add tests only when they meet the test value policy. The commit checker runs
 in the `commit-msg` hook and in CI (`.github/workflows/check.yml`),
 not inside `pnpm check`, so a clean checkout of any commit passes `pnpm check` regardless of its
 history. `pnpm format` applies Prettier (print width 100).
@@ -286,11 +286,13 @@ Required build/acceptance order:
    be required. Exercise the same supported operations as the UI, then independently read back
    persisted state. Cover the meaningful permissions, validation, history and live-state boundaries
    affected by the change. Disclose fixtures; never inject the result being claimed as proof.
-3. Fix headless failures and retain before/after evidence before running corresponding browser
-   acceptance. Compare browser results against the headless findings on the same relevant source,
-   content and configuration. Record any necessary differences between the two environments.
-4. Review both results before marking the feature complete. Missing, skipped or failed headless
-   proof blocks acceptance. Reviewers reject UI-only implementations and unsupported parity claims.
+3. Fix headless failures and retain before/after evidence. During the moratorium below, log the
+   corresponding browser scenarios in the backlog instead of running them. When browser testing
+   resumes, compare browser results against the headless findings on the same relevant source,
+   content and configuration, and record any necessary differences between the two environments.
+4. Review the headless result before marking the feature complete. Missing, skipped or failed
+   headless proof blocks acceptance. Reviewers reject UI-only implementations and unsupported
+   parity claims. A missing browser run is not a blocker while the moratorium is in force.
 
 Record this in the existing slice work log, not a second tracker:
 
@@ -312,6 +314,39 @@ record the scope, results and rationale and move redundant browser regression to
 or release step. Browser checks that establish distinct UI behavior remain explicit. Until that
 comparison is complete, existing required browser and ability screenshot gates remain in force.
 Do not silently remove failing tests or infer app-wide redundancy from one small journey.
+
+User clarification, 2026-09-20: headless CLI/API journeys are what prove the app works at the
+logical level. Browser tests are the final visual spot check that the actual UI is not badly
+broken. Scope browser coverage to layout, focus, dialogs, routing transitions, theme and error
+boundaries, and do not re-prove persisted values there that a CLI readback already proves. The
+[browser testing failure audit](audits/2026-09-20-browser-testing-failures.md) records the causes
+of repeated browser failures and the accepted direction for fixing them.
+
+## Browser testing moratorium — 2026-09-20
+
+User decision, 2026-09-20: **all browser testing is deprecated for the time being**, until
+[V66 browser test harness repair](V66-browser-test-harness-repair.md) is implemented. This is
+site-wide: every track, every branch and worktree, every private CT114 environment and the hosted
+target. Verification moves to the headless routes above. Concretely:
+
+- Do not run `pnpm test:browser`, `presidium-dev run browser`, or any Playwright config. Do not
+  run headless Chromium as a substitute; it is browser testing.
+- A slice is complete when its headless proof passes and review passes. A missing browser run is
+  not a blocker, is not "pending", and must not be listed as an open acceptance item.
+- Each slice appends the UI scenarios it would have checked to the
+  [browser coverage backlog](browser-coverage-backlog.md), with the existing spec name and a
+  priority, so the coverage is run in a later pass once the harness is repaired.
+- Existing browser specs stay in the tree unchanged; do not delete, skip-mark or rewrite them
+  outside V66. Do not add new browser specs; write the backlog row instead.
+- Screenshots the user asks for are still allowed as a manual capture on the recorded target;
+  they are evidence for the user, not acceptance.
+- Reviewers reject a handoff that cites a browser run as proof or blocks on the absence of one.
+
+The [browser testing failure audit](audits/2026-09-20-browser-testing-failures.md) records why: of
+43 failed or retried runs since 2026-09-15, five found product defects; the rest were host
+contention tripping the 1 s function limit, a shared sign-in rate limit, stale selectors in
+monolithic journeys, and rerun-until-green behavior. V66 lifts the moratorium by updating this
+section with the commit hash and triaging the backlog.
 
 This is a mandatory build/review completion step. The current `pnpm check` and CI do not automatically
 execute live authenticated CLI journeys; do not describe them as enforcing this gate. Use the

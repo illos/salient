@@ -156,6 +156,7 @@ See the [CI review and run record](audits/2026-09-14-ci-history-review.md) for t
 | V21 | [Desktop layout fidelity](V21-desktop-layout-fidelity.md) | A08, A09, V13 | Built, not committed — 2026-09-15 (foundation + five parallel implementers, lead integration and repairs); lint, typecheck, 85 engine tests, 317 app tests, links, vendor, content and the full 20-test browser suite pass; screenshots under `.playtest/v21/` compared with each mockup; review deferred to the user's audit thread |
 | V26 | [Compiled ability effects: damage and push instructions](V26-compiled-ability-effects.md) | S01, S02, A01, A02, A04, A05, A06, A09 | Ready — specification merged into main at `3689226`, 2026-09-16; independent design and rules review pass; 10 live designs including Viscous Fire; 3 compile-only comparisons; implementation and screenshot evidence pending; documentation-only integration needs no runtime update |
 | V64 | [Ability grammar coverage audit](V64-ability-coverage-audit.md) | V26 specification, S01, V35 | Merged — read-only audit script, report and tests integrated into main at `458b6e8`, 2026-09-20; independent review pass; no runtime impact (no backend, frontend or content change) | Engine and parser thread |
+| V66 | [Browser test harness repair](V66-browser-test-harness-repair.md) | S03, browser failure audit | Not started — registered 2026-09-20 at the user's direction; do not claim until the user starts it; ends the browser testing moratorium when implemented | Unassigned |
 | V23 | [Foe source ingestion assessment](V23-foe-source-assessment.md) | S01, A09, Rules portion of V13 | Merged — source assessment and confirmed ingestion requirements integrated with V27, 2026-09-16 |
 | V27 | [Undead ingestion and independent feature access](V27-undead-ingestion.md) | S01, A09, Rules portion of V13, V23 docs | Merged and live — rebased implementation `6d47dc0`, test repair `e4590e9`; integrated at `f019e3a`, 2026-09-16; 432 tests, build, isolated and shared-app browser checks pass; public `/foes` verified on 5180 |
 | V29 | [Desktop layout feedback follow-ups](V29-desktop-feedback.md) | V21 | Merged — `7b80e56`, 2026-09-16; independent implementation review pass; integrated checks and the full 22-test browser suite pass; shared playable app on `5180` updated and the changed-feature journey verified live |
@@ -386,6 +387,18 @@ Further browser debugging is paused. No background verification job is running, 
 window is released to V63. The named `character-restart` runtime remains stopped with data retained.
 This doctrine/status update changes documentation only and needs no runtime update.
 
+
+## Browser testing moratorium — 2026-09-20
+
+User decision: all browser (Playwright) testing is deprecated for the time being, across every
+track, branch, worktree, private environment and the hosted target, until
+[V66](V66-browser-test-harness-repair.md) is implemented. Verification moves to headless CLI/API
+routes under the [headless completion gate](README.md#programmatic-headless-completion-gate).
+Threads log the UI scenarios they would have checked in the
+[browser coverage backlog](browser-coverage-backlog.md) for a later pass. Do not run
+`pnpm test:browser` or `presidium-dev run browser`; do not treat a missing browser run as a
+blocker; do not record a browser result as pending acceptance. The
+[audit](audits/2026-09-20-browser-testing-failures.md) records why.
 
 ## V65 programmatic character verification — 2026-09-20
 

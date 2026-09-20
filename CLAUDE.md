@@ -15,6 +15,11 @@ authenticated headless application proof before browser acceptance, with no brow
 Record the browser's additional findings before demoting redundant browser coverage to a later step.
 Engine tests and headless Chromium do not satisfy the
 [headless completion gate](docs/build/README.md#programmatic-headless-completion-gate).
+Browser testing moratorium, 2026-09-20: do not run any browser or Playwright test until
+[V66](docs/build/V66-browser-test-harness-repair.md) is implemented (registered, not started).
+Verify headlessly; a missing browser run is not a blocker. Log would-be browser scenarios in the
+[browser coverage backlog](docs/build/browser-coverage-backlog.md). See
+[the moratorium](docs/build/README.md#browser-testing-moratorium--2026-09-20).
 
 All future Salient development server activity, across all branches and worktrees, runs on the
 dedicated dev LXC (CT114), accessed through the secret broker. Use `presidium-dev` for servers,

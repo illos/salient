@@ -93,7 +93,9 @@ removed grants, duplicate entitlements or deferred selections. Verify existing c
 ownership and combat-lock behavior where the slice touches it. Draft evaluation must not reset
 live resources, spawn summons or repeat one-time grants.
 
-Run the owning slice's required evaluator, persistence, browser and repository checks. A mutation
+Run the owning slice's required evaluator, persistence and repository checks; browser checks are
+suspended under the [moratorium](README.md#browser-testing-moratorium--2026-09-20) and logged in
+the [backlog](browser-coverage-backlog.md) instead. A mutation
 response alone is not proof of saved behavior. Mechanical changes still require independent
 rules review; agreement with Forge Steel does not replace it.
 
@@ -151,7 +153,8 @@ explanation and independent review. If Forge cannot represent the same source-le
 the precise limitation and closest comparison, mark exact counterpart coverage incomplete, and
 resolve that gap before claiming the unit fully verified. Never silently waive counterpart coverage.
 
-Before merging each implementation commit, complete full repository and browser checks on the
+Before merging each implementation commit, complete full repository checks (and browser checks
+once the moratorium is lifted) on the
 integration candidate, persisted readbacks, independent implementation/rules reviews and the
 existing commit gate. Then update and verify the actual shared development app under the standing
 merge-completion procedure. Run a full independent audit after the initial shared foundation and
