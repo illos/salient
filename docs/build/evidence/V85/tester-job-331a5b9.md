@@ -63,4 +63,7 @@ credential-marker scan is empty. The prior failed aggregate remains at
 `/srv/presidium/projects/salient/test-artifacts/V85-V86-86e9d2e-20260920T1433Z` and is not replaced
 or rewritten.
 
-The terminal Chords return and wake result will be appended after delivery.
+TESTER returned the passing result directly to WIZARD.2 in Chords message **866** using stable key
+`test-V85-V86-331a5b9-4-passed-return`. Chords reported `wake.status: accepted`
+(`turn_request_accepted`). This records delivery; it does not claim that WIZARD.2 has completed
+review or integration.
