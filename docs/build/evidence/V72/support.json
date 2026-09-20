@@ -6,9 +6,9 @@
   "scope": "Structural support, current grant/loading availability and live execution are separate. Source drift never silently falls back; historical results are never recompiled on read.",
   "totals": {
     "granted": {
-      "total": 15,
+      "total": 35,
       "supported": 0,
-      "manual": 15
+      "manual": 35
     },
     "foe-ability": {
       "total": 1158,
@@ -14581,6 +14581,1090 @@
       "movementFacts": "No compiled push."
     },
     {
+      "id": "mcdm.heroes.v1/perk/area-of-expertise/area-of-expertise-inspect-object",
+      "name": "Area of Expertise: Inspect Object",
+      "context": {
+        "corpus": "granted",
+        "parentName": "Area of Expertise",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/perk/area-of-expertise/area-of-expertise-inspect-object",
+        "path": "vendor/steel-compendium/en/unified/md/perk/area-of-expertise.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "source-header",
+          "locator": "markdown:table",
+          "clause": "",
+          "message": "Only the matching keyword/action and distance/target header rows are presentation scaffolding."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "",
+          "message": "Only the designed single-target envelope is eligible."
+        },
+        {
+          "code": "compatibility-boundary",
+          "locator": "envelope",
+          "clause": "granted",
+          "message": "This source population retains its existing compatibility path; compilation grants no new execution."
+        },
+        {
+          "code": "action-type",
+          "locator": "header:usage",
+          "clause": "",
+          "message": "Unrecognized action type."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Area of Expertise: Inspect Object",
+          "sourcePath": "en/unified/md/perk/area-of-expertise.md",
+          "decisionId": "career.artisan.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Area of Expertise supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Area of Expertise: Inspect Object",
+          "sourcePath": "en/unified/md/perk/area-of-expertise.md",
+          "decisionId": "career.artisan.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Area of Expertise supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Area of Expertise: Inspect Object",
+          "sourcePath": "en/unified/md/perk/area-of-expertise.md",
+          "decisionId": "class.fury.level-2.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Area of Expertise supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/perk/creature-sense/creature-sense",
+      "name": "Creature Sense",
+      "context": {
+        "corpus": "granted",
+        "parentName": "Creature Sense",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/perk/creature-sense/creature-sense",
+        "path": "vendor/steel-compendium/en/unified/md/perk/creature-sense.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "source-header",
+          "locator": "markdown:table",
+          "clause": "",
+          "message": "Only the matching keyword/action and distance/target header rows are presentation scaffolding."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "",
+          "message": "Only the designed single-target envelope is eligible."
+        },
+        {
+          "code": "compatibility-boundary",
+          "locator": "envelope",
+          "clause": "granted",
+          "message": "This source population retains its existing compatibility path; compilation grants no new execution."
+        },
+        {
+          "code": "action-type",
+          "locator": "header:usage",
+          "clause": "",
+          "message": "Unrecognized action type."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Creature Sense",
+          "sourcePath": "en/unified/md/perk/creature-sense.md",
+          "decisionId": "career.disciple.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Creature Sense supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Creature Sense",
+          "sourcePath": "en/unified/md/perk/creature-sense.md",
+          "decisionId": "career.mages-apprentice.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Creature Sense supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Creature Sense",
+          "sourcePath": "en/unified/md/perk/creature-sense.md",
+          "decisionId": "career.disciple.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Creature Sense supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Creature Sense",
+          "sourcePath": "en/unified/md/perk/creature-sense.md",
+          "decisionId": "career.mages-apprentice.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Creature Sense supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/perk/criminal-contacts/criminal-contacts",
+      "name": "Criminal Contacts",
+      "context": {
+        "corpus": "granted",
+        "parentName": "Criminal Contacts",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/perk/criminal-contacts/criminal-contacts",
+        "path": "vendor/steel-compendium/en/unified/md/perk/criminal-contacts.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "source-header",
+          "locator": "markdown:table",
+          "clause": "",
+          "message": "Only the matching keyword/action and distance/target header rows are presentation scaffolding."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "",
+          "message": "Only the designed single-target envelope is eligible."
+        },
+        {
+          "code": "compatibility-boundary",
+          "locator": "envelope",
+          "clause": "granted",
+          "message": "This source population retains its existing compatibility path; compilation grants no new execution."
+        },
+        {
+          "code": "action-type",
+          "locator": "header:usage",
+          "clause": "",
+          "message": "Unrecognized action type."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Criminal Contacts",
+          "sourcePath": "en/unified/md/perk/criminal-contacts.md",
+          "decisionId": "career.agent.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Criminal Contacts supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Criminal Contacts",
+          "sourcePath": "en/unified/md/perk/criminal-contacts.md",
+          "decisionId": "career.criminal.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Criminal Contacts supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Criminal Contacts",
+          "sourcePath": "en/unified/md/perk/criminal-contacts.md",
+          "decisionId": "career.agent.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Criminal Contacts supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Criminal Contacts",
+          "sourcePath": "en/unified/md/perk/criminal-contacts.md",
+          "decisionId": "career.criminal.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Criminal Contacts supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Criminal Contacts",
+          "sourcePath": "en/unified/md/perk/criminal-contacts.md",
+          "decisionId": "class.fury.level-2.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Criminal Contacts supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/perk/eidetic-memory/eidetic-memory-memorize-text",
+      "name": "Eidetic Memory: Memorize Text",
+      "context": {
+        "corpus": "granted",
+        "parentName": "Eidetic Memory",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/perk/eidetic-memory/eidetic-memory-memorize-text",
+        "path": "vendor/steel-compendium/en/unified/md/perk/eidetic-memory.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "source-header",
+          "locator": "markdown:table",
+          "clause": "",
+          "message": "Only the matching keyword/action and distance/target header rows are presentation scaffolding."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "",
+          "message": "Only the designed single-target envelope is eligible."
+        },
+        {
+          "code": "compatibility-boundary",
+          "locator": "envelope",
+          "clause": "granted",
+          "message": "This source population retains its existing compatibility path; compilation grants no new execution."
+        },
+        {
+          "code": "action-type",
+          "locator": "header:usage",
+          "clause": "",
+          "message": "Unrecognized action type."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Eidetic Memory: Memorize Text",
+          "sourcePath": "en/unified/md/perk/eidetic-memory.md",
+          "decisionId": "career.aristocrat.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Eidetic Memory supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Eidetic Memory: Memorize Text",
+          "sourcePath": "en/unified/md/perk/eidetic-memory.md",
+          "decisionId": "career.sage.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Eidetic Memory supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Eidetic Memory: Memorize Text",
+          "sourcePath": "en/unified/md/perk/eidetic-memory.md",
+          "decisionId": "career.aristocrat.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Eidetic Memory supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Eidetic Memory: Memorize Text",
+          "sourcePath": "en/unified/md/perk/eidetic-memory.md",
+          "decisionId": "career.sage.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Eidetic Memory supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/perk/engrossing-monologue/engrossing-monologue",
+      "name": "Engrossing Monologue",
+      "context": {
+        "corpus": "granted",
+        "parentName": "Engrossing Monologue",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/perk/engrossing-monologue/engrossing-monologue",
+        "path": "vendor/steel-compendium/en/unified/md/perk/engrossing-monologue.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "source-header",
+          "locator": "markdown:table",
+          "clause": "",
+          "message": "Only the matching keyword/action and distance/target header rows are presentation scaffolding."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "",
+          "message": "Only the designed single-target envelope is eligible."
+        },
+        {
+          "code": "compatibility-boundary",
+          "locator": "envelope",
+          "clause": "granted",
+          "message": "This source population retains its existing compatibility path; compilation grants no new execution."
+        },
+        {
+          "code": "action-type",
+          "locator": "header:usage",
+          "clause": "",
+          "message": "Unrecognized action type."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Engrossing Monologue",
+          "sourcePath": "en/unified/md/perk/engrossing-monologue.md",
+          "decisionId": "career.beggar.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Engrossing Monologue supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Engrossing Monologue",
+          "sourcePath": "en/unified/md/perk/engrossing-monologue.md",
+          "decisionId": "career.performer.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Engrossing Monologue supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Engrossing Monologue",
+          "sourcePath": "en/unified/md/perk/engrossing-monologue.md",
+          "decisionId": "career.politician.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Engrossing Monologue supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Engrossing Monologue",
+          "sourcePath": "en/unified/md/perk/engrossing-monologue.md",
+          "decisionId": "career.beggar.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Engrossing Monologue supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Engrossing Monologue",
+          "sourcePath": "en/unified/md/perk/engrossing-monologue.md",
+          "decisionId": "career.performer.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Engrossing Monologue supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Engrossing Monologue",
+          "sourcePath": "en/unified/md/perk/engrossing-monologue.md",
+          "decisionId": "career.politician.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Engrossing Monologue supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/perk/familiar/familiar-restore",
+      "name": "Familiar: Restore",
+      "context": {
+        "corpus": "granted",
+        "parentName": "Familiar",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/perk/familiar/familiar-restore",
+        "path": "vendor/steel-compendium/en/unified/md/perk/familiar.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "source-header",
+          "locator": "markdown:table",
+          "clause": "",
+          "message": "Only the matching keyword/action and distance/target header rows are presentation scaffolding."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "",
+          "message": "Only the designed single-target envelope is eligible."
+        },
+        {
+          "code": "compatibility-boundary",
+          "locator": "envelope",
+          "clause": "granted",
+          "message": "This source population retains its existing compatibility path; compilation grants no new execution."
+        },
+        {
+          "code": "action-type",
+          "locator": "header:usage",
+          "clause": "",
+          "message": "Unrecognized action type."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Familiar: Restore",
+          "sourcePath": "en/unified/md/perk/familiar.md",
+          "decisionId": "career.disciple.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Familiar supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Familiar: Restore",
+          "sourcePath": "en/unified/md/perk/familiar.md",
+          "decisionId": "career.mages-apprentice.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Familiar supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Familiar: Restore",
+          "sourcePath": "en/unified/md/perk/familiar.md",
+          "decisionId": "career.disciple.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Familiar supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Familiar: Restore",
+          "sourcePath": "en/unified/md/perk/familiar.md",
+          "decisionId": "career.mages-apprentice.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Familiar supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/perk/forgettable-face/forgettable-face",
+      "name": "Forgettable Face",
+      "context": {
+        "corpus": "granted",
+        "parentName": "Forgettable Face",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/perk/forgettable-face/forgettable-face",
+        "path": "vendor/steel-compendium/en/unified/md/perk/forgettable-face.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "source-header",
+          "locator": "markdown:table",
+          "clause": "",
+          "message": "Only the matching keyword/action and distance/target header rows are presentation scaffolding."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "",
+          "message": "Only the designed single-target envelope is eligible."
+        },
+        {
+          "code": "compatibility-boundary",
+          "locator": "envelope",
+          "clause": "granted",
+          "message": "This source population retains its existing compatibility path; compilation grants no new execution."
+        },
+        {
+          "code": "action-type",
+          "locator": "header:usage",
+          "clause": "",
+          "message": "Unrecognized action type."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Forgettable Face",
+          "sourcePath": "en/unified/md/perk/forgettable-face.md",
+          "decisionId": "career.agent.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Forgettable Face supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Forgettable Face",
+          "sourcePath": "en/unified/md/perk/forgettable-face.md",
+          "decisionId": "career.criminal.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Forgettable Face supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Forgettable Face",
+          "sourcePath": "en/unified/md/perk/forgettable-face.md",
+          "decisionId": "career.agent.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Forgettable Face supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Forgettable Face",
+          "sourcePath": "en/unified/md/perk/forgettable-face.md",
+          "decisionId": "career.criminal.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Forgettable Face supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Forgettable Face",
+          "sourcePath": "en/unified/md/perk/forgettable-face.md",
+          "decisionId": "class.fury.level-2.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Forgettable Face supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/perk/friend-catapult/friend-catapult",
+      "name": "Friend Catapult",
+      "context": {
+        "corpus": "granted",
+        "parentName": "Friend Catapult",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/perk/friend-catapult/friend-catapult",
+        "path": "vendor/steel-compendium/en/unified/md/perk/friend-catapult.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "source-header",
+          "locator": "markdown:table",
+          "clause": "",
+          "message": "Only the matching keyword/action and distance/target header rows are presentation scaffolding."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "",
+          "message": "Only the designed single-target envelope is eligible."
+        },
+        {
+          "code": "compatibility-boundary",
+          "locator": "envelope",
+          "clause": "granted",
+          "message": "This source population retains its existing compatibility path; compilation grants no new execution."
+        },
+        {
+          "code": "action-type",
+          "locator": "header:usage",
+          "clause": "",
+          "message": "Unrecognized action type."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Friend Catapult",
+          "sourcePath": "en/unified/md/perk/friend-catapult.md",
+          "decisionId": "career.explorer.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Friend Catapult supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Friend Catapult",
+          "sourcePath": "en/unified/md/perk/friend-catapult.md",
+          "decisionId": "career.farmer.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Friend Catapult supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Friend Catapult",
+          "sourcePath": "en/unified/md/perk/friend-catapult.md",
+          "decisionId": "career.gladiator.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Friend Catapult supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Friend Catapult",
+          "sourcePath": "en/unified/md/perk/friend-catapult.md",
+          "decisionId": "career.laborer.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Friend Catapult supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Friend Catapult",
+          "sourcePath": "en/unified/md/perk/friend-catapult.md",
+          "decisionId": "career.sailor.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Friend Catapult supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Friend Catapult",
+          "sourcePath": "en/unified/md/perk/friend-catapult.md",
+          "decisionId": "career.soldier.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Friend Catapult supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Friend Catapult",
+          "sourcePath": "en/unified/md/perk/friend-catapult.md",
+          "decisionId": "career.warden.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Friend Catapult supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Friend Catapult",
+          "sourcePath": "en/unified/md/perk/friend-catapult.md",
+          "decisionId": "career.watch-officer.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Friend Catapult supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Friend Catapult",
+          "sourcePath": "en/unified/md/perk/friend-catapult.md",
+          "decisionId": "career.explorer.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Friend Catapult supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Friend Catapult",
+          "sourcePath": "en/unified/md/perk/friend-catapult.md",
+          "decisionId": "career.farmer.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Friend Catapult supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Friend Catapult",
+          "sourcePath": "en/unified/md/perk/friend-catapult.md",
+          "decisionId": "career.gladiator.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Friend Catapult supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Friend Catapult",
+          "sourcePath": "en/unified/md/perk/friend-catapult.md",
+          "decisionId": "career.laborer.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Friend Catapult supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Friend Catapult",
+          "sourcePath": "en/unified/md/perk/friend-catapult.md",
+          "decisionId": "career.sailor.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Friend Catapult supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Friend Catapult",
+          "sourcePath": "en/unified/md/perk/friend-catapult.md",
+          "decisionId": "career.soldier.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Friend Catapult supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Friend Catapult",
+          "sourcePath": "en/unified/md/perk/friend-catapult.md",
+          "decisionId": "career.warden.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Friend Catapult supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Friend Catapult",
+          "sourcePath": "en/unified/md/perk/friend-catapult.md",
+          "decisionId": "career.watch-officer.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Friend Catapult supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Friend Catapult",
+          "sourcePath": "en/unified/md/perk/friend-catapult.md",
+          "decisionId": "class.fury.level-2.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Friend Catapult supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/perk/gum-up-the-works/gum-up-the-works",
+      "name": "Gum Up the Works",
+      "context": {
+        "corpus": "granted",
+        "parentName": "Gum Up the Works",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/perk/gum-up-the-works/gum-up-the-works",
+        "path": "vendor/steel-compendium/en/unified/md/perk/gum-up-the-works.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "source-header",
+          "locator": "markdown:table",
+          "clause": "",
+          "message": "Only the matching keyword/action and distance/target header rows are presentation scaffolding."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "",
+          "message": "Only the designed single-target envelope is eligible."
+        },
+        {
+          "code": "compatibility-boundary",
+          "locator": "envelope",
+          "clause": "granted",
+          "message": "This source population retains its existing compatibility path; compilation grants no new execution."
+        },
+        {
+          "code": "action-type",
+          "locator": "header:usage",
+          "clause": "",
+          "message": "Unrecognized action type."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Gum Up the Works",
+          "sourcePath": "en/unified/md/perk/gum-up-the-works.md",
+          "decisionId": "career.agent.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Gum Up the Works supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Gum Up the Works",
+          "sourcePath": "en/unified/md/perk/gum-up-the-works.md",
+          "decisionId": "career.criminal.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Gum Up the Works supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Gum Up the Works",
+          "sourcePath": "en/unified/md/perk/gum-up-the-works.md",
+          "decisionId": "career.agent.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Gum Up the Works supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Gum Up the Works",
+          "sourcePath": "en/unified/md/perk/gum-up-the-works.md",
+          "decisionId": "career.criminal.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Gum Up the Works supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Gum Up the Works",
+          "sourcePath": "en/unified/md/perk/gum-up-the-works.md",
+          "decisionId": "class.fury.level-2.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Gum Up the Works supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/perk/improvisation-creation/improvisation-creation",
+      "name": "Improvisation Creation",
+      "context": {
+        "corpus": "granted",
+        "parentName": "Improvisation Creation",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/perk/improvisation-creation/improvisation-creation",
+        "path": "vendor/steel-compendium/en/unified/md/perk/improvisation-creation.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "source-header",
+          "locator": "markdown:table",
+          "clause": "",
+          "message": "Only the matching keyword/action and distance/target header rows are presentation scaffolding."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "",
+          "message": "Only the designed single-target envelope is eligible."
+        },
+        {
+          "code": "compatibility-boundary",
+          "locator": "envelope",
+          "clause": "granted",
+          "message": "This source population retains its existing compatibility path; compilation grants no new execution."
+        },
+        {
+          "code": "action-type",
+          "locator": "header:usage",
+          "clause": "",
+          "message": "Unrecognized action type."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Improvisation Creation",
+          "sourcePath": "en/unified/md/perk/improvisation-creation.md",
+          "decisionId": "career.artisan.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Improvisation Creation supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Improvisation Creation",
+          "sourcePath": "en/unified/md/perk/improvisation-creation.md",
+          "decisionId": "career.artisan.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Improvisation Creation supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Improvisation Creation",
+          "sourcePath": "en/unified/md/perk/improvisation-creation.md",
+          "decisionId": "class.fury.level-2.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Improvisation Creation supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
       "id": "mcdm.heroes.v1/perk/invisible-force/invisible-force",
       "name": "Invisible Force",
       "context": {
@@ -14712,6 +15796,535 @@
       "movementFacts": "No compiled push."
     },
     {
+      "id": "mcdm.heroes.v1/perk/ive-got-you/i-ve-got-you",
+      "name": "I've Got You!",
+      "context": {
+        "corpus": "granted",
+        "parentName": "I've Got You!",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/perk/ive-got-you/i-ve-got-you",
+        "path": "vendor/steel-compendium/en/unified/md/perk/ive-got-you.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "source-header",
+          "locator": "markdown:table",
+          "clause": "",
+          "message": "Only the matching keyword/action and distance/target header rows are presentation scaffolding."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "",
+          "message": "Only the designed single-target envelope is eligible."
+        },
+        {
+          "code": "compatibility-boundary",
+          "locator": "envelope",
+          "clause": "granted",
+          "message": "This source population retains its existing compatibility path; compilation grants no new execution."
+        },
+        {
+          "code": "action-type",
+          "locator": "header:usage",
+          "clause": "",
+          "message": "Unrecognized action type."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "I've Got You!",
+          "sourcePath": "en/unified/md/perk/ive-got-you.md",
+          "decisionId": "career.explorer.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option I've Got You! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "I've Got You!",
+          "sourcePath": "en/unified/md/perk/ive-got-you.md",
+          "decisionId": "career.farmer.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option I've Got You! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "I've Got You!",
+          "sourcePath": "en/unified/md/perk/ive-got-you.md",
+          "decisionId": "career.gladiator.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option I've Got You! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "I've Got You!",
+          "sourcePath": "en/unified/md/perk/ive-got-you.md",
+          "decisionId": "career.laborer.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option I've Got You! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "I've Got You!",
+          "sourcePath": "en/unified/md/perk/ive-got-you.md",
+          "decisionId": "career.sailor.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option I've Got You! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "I've Got You!",
+          "sourcePath": "en/unified/md/perk/ive-got-you.md",
+          "decisionId": "career.soldier.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option I've Got You! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "I've Got You!",
+          "sourcePath": "en/unified/md/perk/ive-got-you.md",
+          "decisionId": "career.warden.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option I've Got You! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "I've Got You!",
+          "sourcePath": "en/unified/md/perk/ive-got-you.md",
+          "decisionId": "career.watch-officer.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option I've Got You! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "I've Got You!",
+          "sourcePath": "en/unified/md/perk/ive-got-you.md",
+          "decisionId": "career.explorer.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option I've Got You! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "I've Got You!",
+          "sourcePath": "en/unified/md/perk/ive-got-you.md",
+          "decisionId": "career.farmer.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option I've Got You! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "I've Got You!",
+          "sourcePath": "en/unified/md/perk/ive-got-you.md",
+          "decisionId": "career.gladiator.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option I've Got You! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "I've Got You!",
+          "sourcePath": "en/unified/md/perk/ive-got-you.md",
+          "decisionId": "career.laborer.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option I've Got You! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "I've Got You!",
+          "sourcePath": "en/unified/md/perk/ive-got-you.md",
+          "decisionId": "career.sailor.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option I've Got You! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "I've Got You!",
+          "sourcePath": "en/unified/md/perk/ive-got-you.md",
+          "decisionId": "career.soldier.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option I've Got You! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "I've Got You!",
+          "sourcePath": "en/unified/md/perk/ive-got-you.md",
+          "decisionId": "career.warden.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option I've Got You! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "I've Got You!",
+          "sourcePath": "en/unified/md/perk/ive-got-you.md",
+          "decisionId": "career.watch-officer.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option I've Got You! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "I've Got You!",
+          "sourcePath": "en/unified/md/perk/ive-got-you.md",
+          "decisionId": "class.fury.level-2.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option I've Got You! supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/perk/ive-read-about-this-place/i-ve-read-about-this-place",
+      "name": "I've Read About This Place",
+      "context": {
+        "corpus": "granted",
+        "parentName": "I've Read About This Place",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/perk/ive-read-about-this-place/i-ve-read-about-this-place",
+        "path": "vendor/steel-compendium/en/unified/md/perk/ive-read-about-this-place.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "source-header",
+          "locator": "markdown:table",
+          "clause": "",
+          "message": "Only the matching keyword/action and distance/target header rows are presentation scaffolding."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "",
+          "message": "Only the designed single-target envelope is eligible."
+        },
+        {
+          "code": "compatibility-boundary",
+          "locator": "envelope",
+          "clause": "granted",
+          "message": "This source population retains its existing compatibility path; compilation grants no new execution."
+        },
+        {
+          "code": "action-type",
+          "locator": "header:usage",
+          "clause": "",
+          "message": "Unrecognized action type."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "I've Read About This Place",
+          "sourcePath": "en/unified/md/perk/ive-read-about-this-place.md",
+          "decisionId": "career.aristocrat.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option I've Read About This Place supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "I've Read About This Place",
+          "sourcePath": "en/unified/md/perk/ive-read-about-this-place.md",
+          "decisionId": "career.sage.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option I've Read About This Place supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "I've Read About This Place",
+          "sourcePath": "en/unified/md/perk/ive-read-about-this-place.md",
+          "decisionId": "career.aristocrat.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option I've Read About This Place supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "I've Read About This Place",
+          "sourcePath": "en/unified/md/perk/ive-read-about-this-place.md",
+          "decisionId": "career.sage.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option I've Read About This Place supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/perk/lie-detector/lie-detector",
+      "name": "Lie Detector",
+      "context": {
+        "corpus": "granted",
+        "parentName": "Lie Detector",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/perk/lie-detector/lie-detector",
+        "path": "vendor/steel-compendium/en/unified/md/perk/lie-detector.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "source-header",
+          "locator": "markdown:table",
+          "clause": "",
+          "message": "Only the matching keyword/action and distance/target header rows are presentation scaffolding."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "",
+          "message": "Only the designed single-target envelope is eligible."
+        },
+        {
+          "code": "compatibility-boundary",
+          "locator": "envelope",
+          "clause": "granted",
+          "message": "This source population retains its existing compatibility path; compilation grants no new execution."
+        },
+        {
+          "code": "action-type",
+          "locator": "header:usage",
+          "clause": "",
+          "message": "Unrecognized action type."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Lie Detector",
+          "sourcePath": "en/unified/md/perk/lie-detector.md",
+          "decisionId": "career.beggar.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Lie Detector supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Lie Detector",
+          "sourcePath": "en/unified/md/perk/lie-detector.md",
+          "decisionId": "career.performer.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Lie Detector supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Lie Detector",
+          "sourcePath": "en/unified/md/perk/lie-detector.md",
+          "decisionId": "career.politician.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Lie Detector supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Lie Detector",
+          "sourcePath": "en/unified/md/perk/lie-detector.md",
+          "decisionId": "career.beggar.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Lie Detector supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Lie Detector",
+          "sourcePath": "en/unified/md/perk/lie-detector.md",
+          "decisionId": "career.performer.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Lie Detector supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Lie Detector",
+          "sourcePath": "en/unified/md/perk/lie-detector.md",
+          "decisionId": "career.politician.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Lie Detector supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/perk/open-book/open-book",
+      "name": "Open Book",
+      "context": {
+        "corpus": "granted",
+        "parentName": "Open Book",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/perk/open-book/open-book",
+        "path": "vendor/steel-compendium/en/unified/md/perk/open-book.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "source-header",
+          "locator": "markdown:table",
+          "clause": "",
+          "message": "Only the matching keyword/action and distance/target header rows are presentation scaffolding."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "",
+          "message": "Only the designed single-target envelope is eligible."
+        },
+        {
+          "code": "compatibility-boundary",
+          "locator": "envelope",
+          "clause": "granted",
+          "message": "This source population retains its existing compatibility path; compilation grants no new execution."
+        },
+        {
+          "code": "action-type",
+          "locator": "header:usage",
+          "clause": "",
+          "message": "Unrecognized action type."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Open Book",
+          "sourcePath": "en/unified/md/perk/open-book.md",
+          "decisionId": "career.beggar.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Open Book supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Open Book",
+          "sourcePath": "en/unified/md/perk/open-book.md",
+          "decisionId": "career.performer.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Open Book supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Open Book",
+          "sourcePath": "en/unified/md/perk/open-book.md",
+          "decisionId": "career.politician.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Open Book supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Open Book",
+          "sourcePath": "en/unified/md/perk/open-book.md",
+          "decisionId": "career.beggar.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Open Book supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Open Book",
+          "sourcePath": "en/unified/md/perk/open-book.md",
+          "decisionId": "career.performer.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Open Book supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Open Book",
+          "sourcePath": "en/unified/md/perk/open-book.md",
+          "decisionId": "career.politician.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Open Book supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
       "id": "mcdm.heroes.v1/perk/psychic-whisper/psychic-whisper",
       "name": "Psychic Whisper",
       "context": {
@@ -14838,6 +16451,588 @@
           "grantKind": "perk-ability",
           "selectable": "selectable",
           "detail": "grant of option Psychic Whisper supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/perk/ritualist/ritualist",
+      "name": "Ritualist",
+      "context": {
+        "corpus": "granted",
+        "parentName": "Ritualist",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/perk/ritualist/ritualist",
+        "path": "vendor/steel-compendium/en/unified/md/perk/ritualist.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "source-header",
+          "locator": "markdown:table",
+          "clause": "",
+          "message": "Only the matching keyword/action and distance/target header rows are presentation scaffolding."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "",
+          "message": "Only the designed single-target envelope is eligible."
+        },
+        {
+          "code": "compatibility-boundary",
+          "locator": "envelope",
+          "clause": "granted",
+          "message": "This source population retains its existing compatibility path; compilation grants no new execution."
+        },
+        {
+          "code": "action-type",
+          "locator": "header:usage",
+          "clause": "",
+          "message": "Unrecognized action type."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Ritualist",
+          "sourcePath": "en/unified/md/perk/ritualist.md",
+          "decisionId": "career.disciple.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Ritualist supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Ritualist",
+          "sourcePath": "en/unified/md/perk/ritualist.md",
+          "decisionId": "career.mages-apprentice.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Ritualist supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Ritualist",
+          "sourcePath": "en/unified/md/perk/ritualist.md",
+          "decisionId": "career.disciple.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Ritualist supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Ritualist",
+          "sourcePath": "en/unified/md/perk/ritualist.md",
+          "decisionId": "career.mages-apprentice.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Ritualist supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/perk/slipped-lead/slipped-lead-escape-bonds",
+      "name": "Slipped Lead: Escape Bonds",
+      "context": {
+        "corpus": "granted",
+        "parentName": "Slipped Lead",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/perk/slipped-lead/slipped-lead-escape-bonds",
+        "path": "vendor/steel-compendium/en/unified/md/perk/slipped-lead.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "source-header",
+          "locator": "markdown:table",
+          "clause": "",
+          "message": "Only the matching keyword/action and distance/target header rows are presentation scaffolding."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "",
+          "message": "Only the designed single-target envelope is eligible."
+        },
+        {
+          "code": "compatibility-boundary",
+          "locator": "envelope",
+          "clause": "granted",
+          "message": "This source population retains its existing compatibility path; compilation grants no new execution."
+        },
+        {
+          "code": "action-type",
+          "locator": "header:usage",
+          "clause": "",
+          "message": "Unrecognized action type."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Slipped Lead: Escape Bonds",
+          "sourcePath": "en/unified/md/perk/slipped-lead.md",
+          "decisionId": "career.agent.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Slipped Lead supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Slipped Lead: Escape Bonds",
+          "sourcePath": "en/unified/md/perk/slipped-lead.md",
+          "decisionId": "career.criminal.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Slipped Lead supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Slipped Lead: Escape Bonds",
+          "sourcePath": "en/unified/md/perk/slipped-lead.md",
+          "decisionId": "career.agent.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Slipped Lead supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Slipped Lead: Escape Bonds",
+          "sourcePath": "en/unified/md/perk/slipped-lead.md",
+          "decisionId": "career.criminal.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Slipped Lead supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Slipped Lead: Escape Bonds",
+          "sourcePath": "en/unified/md/perk/slipped-lead.md",
+          "decisionId": "class.fury.level-2.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Slipped Lead supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/perk/so-tell-me/so-tell-me",
+      "name": "So Tell Me...",
+      "context": {
+        "corpus": "granted",
+        "parentName": "So Tell Me...",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/perk/so-tell-me/so-tell-me",
+        "path": "vendor/steel-compendium/en/unified/md/perk/so-tell-me.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "source-header",
+          "locator": "markdown:table",
+          "clause": "",
+          "message": "Only the matching keyword/action and distance/target header rows are presentation scaffolding."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "",
+          "message": "Only the designed single-target envelope is eligible."
+        },
+        {
+          "code": "compatibility-boundary",
+          "locator": "envelope",
+          "clause": "granted",
+          "message": "This source population retains its existing compatibility path; compilation grants no new execution."
+        },
+        {
+          "code": "action-type",
+          "locator": "header:usage",
+          "clause": "",
+          "message": "Unrecognized action type."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "So Tell Me...",
+          "sourcePath": "en/unified/md/perk/so-tell-me.md",
+          "decisionId": "career.beggar.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option So Tell Me... supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "So Tell Me...",
+          "sourcePath": "en/unified/md/perk/so-tell-me.md",
+          "decisionId": "career.performer.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option So Tell Me... supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "So Tell Me...",
+          "sourcePath": "en/unified/md/perk/so-tell-me.md",
+          "decisionId": "career.politician.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option So Tell Me... supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "So Tell Me...",
+          "sourcePath": "en/unified/md/perk/so-tell-me.md",
+          "decisionId": "career.beggar.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option So Tell Me... supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "So Tell Me...",
+          "sourcePath": "en/unified/md/perk/so-tell-me.md",
+          "decisionId": "career.performer.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option So Tell Me... supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "So Tell Me...",
+          "sourcePath": "en/unified/md/perk/so-tell-me.md",
+          "decisionId": "career.politician.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option So Tell Me... supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/perk/thingspeaker/thingspeaker",
+      "name": "Thingspeaker",
+      "context": {
+        "corpus": "granted",
+        "parentName": "Thingspeaker",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/perk/thingspeaker/thingspeaker",
+        "path": "vendor/steel-compendium/en/unified/md/perk/thingspeaker.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "source-header",
+          "locator": "markdown:table",
+          "clause": "",
+          "message": "Only the matching keyword/action and distance/target header rows are presentation scaffolding."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "",
+          "message": "Only the designed single-target envelope is eligible."
+        },
+        {
+          "code": "compatibility-boundary",
+          "locator": "envelope",
+          "clause": "granted",
+          "message": "This source population retains its existing compatibility path; compilation grants no new execution."
+        },
+        {
+          "code": "action-type",
+          "locator": "header:usage",
+          "clause": "",
+          "message": "Unrecognized action type."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Thingspeaker",
+          "sourcePath": "en/unified/md/perk/thingspeaker.md",
+          "decisionId": "career.disciple.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Thingspeaker supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Thingspeaker",
+          "sourcePath": "en/unified/md/perk/thingspeaker.md",
+          "decisionId": "career.mages-apprentice.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Thingspeaker supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Thingspeaker",
+          "sourcePath": "en/unified/md/perk/thingspeaker.md",
+          "decisionId": "career.disciple.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Thingspeaker supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Thingspeaker",
+          "sourcePath": "en/unified/md/perk/thingspeaker.md",
+          "decisionId": "career.mages-apprentice.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Thingspeaker supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/perk/traveling-artisan/traveling-artisan",
+      "name": "Traveling Artisan",
+      "context": {
+        "corpus": "granted",
+        "parentName": "Traveling Artisan",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/perk/traveling-artisan/traveling-artisan",
+        "path": "vendor/steel-compendium/en/unified/md/perk/traveling-artisan.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "source-header",
+          "locator": "markdown:table",
+          "clause": "",
+          "message": "Only the matching keyword/action and distance/target header rows are presentation scaffolding."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "",
+          "message": "Only the designed single-target envelope is eligible."
+        },
+        {
+          "code": "compatibility-boundary",
+          "locator": "envelope",
+          "clause": "granted",
+          "message": "This source population retains its existing compatibility path; compilation grants no new execution."
+        },
+        {
+          "code": "action-type",
+          "locator": "header:usage",
+          "clause": "",
+          "message": "Unrecognized action type."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Traveling Artisan",
+          "sourcePath": "en/unified/md/perk/traveling-artisan.md",
+          "decisionId": "career.artisan.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Traveling Artisan supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Traveling Artisan",
+          "sourcePath": "en/unified/md/perk/traveling-artisan.md",
+          "decisionId": "career.artisan.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Traveling Artisan supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Traveling Artisan",
+          "sourcePath": "en/unified/md/perk/traveling-artisan.md",
+          "decisionId": "class.fury.level-2.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Traveling Artisan supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/perk/traveling-sage/traveling-sage",
+      "name": "Traveling Sage",
+      "context": {
+        "corpus": "granted",
+        "parentName": "Traveling Sage",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/perk/traveling-sage/traveling-sage",
+        "path": "vendor/steel-compendium/en/unified/md/perk/traveling-sage.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "source-header",
+          "locator": "markdown:table",
+          "clause": "",
+          "message": "Only the matching keyword/action and distance/target header rows are presentation scaffolding."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "",
+          "message": "Only the designed single-target envelope is eligible."
+        },
+        {
+          "code": "compatibility-boundary",
+          "locator": "envelope",
+          "clause": "granted",
+          "message": "This source population retains its existing compatibility path; compilation grants no new execution."
+        },
+        {
+          "code": "action-type",
+          "locator": "header:usage",
+          "clause": "",
+          "message": "Unrecognized action type."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Traveling Sage",
+          "sourcePath": "en/unified/md/perk/traveling-sage.md",
+          "decisionId": "career.aristocrat.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Traveling Sage supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Traveling Sage",
+          "sourcePath": "en/unified/md/perk/traveling-sage.md",
+          "decisionId": "career.sage.perk",
+          "level": 1,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Traveling Sage supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Traveling Sage",
+          "sourcePath": "en/unified/md/perk/traveling-sage.md",
+          "decisionId": "career.aristocrat.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Traveling Sage supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Traveling Sage",
+          "sourcePath": "en/unified/md/perk/traveling-sage.md",
+          "decisionId": "career.sage.perk",
+          "level": 2,
+          "grantKind": "perk-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Traveling Sage supportedInV001=true; chain selectable"
         }
       ],
       "movementFacts": "No compiled push."
@@ -157273,7 +159468,7 @@
   ],
   "liveCounts": {
     "compiled": 6,
-    "compatibility": 53,
+    "compatibility": 73,
     "compiledButUnavailable": 4
   }
 }

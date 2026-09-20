@@ -1,21 +1,20 @@
 # Astra character delivery
 
-Status: the six initial level-one ancestries are delivered through V74. The user has authorized
-[the remaining six-ancestry batch, V76–V82](V82-remaining-ancestries.md); implementation, independent reviews and hosted headless/Forge acceptance have passed.
-The batch is merged/live as `1fa8aac`, with both apps passing public API acceptance. The Opus pilot remains
-[abandoned without reuse](../decisions/2026-09-19-opus-pilot-dead-end.md). This document owns
-the replacement character workflow; [V44](V44-character-option-delivery.md) owns its delivery
+Status: all twelve level-one ancestries are delivered through [V82](V82-remaining-ancestries.md).
+The current bounded portion is [V83 core perk/ordinary kit action coverage](V83-supporting-actions.md)
+and the user-requested [V84 culture presets](V84-culture-presets.md). Code, isolated API proof and independent reviews
+are complete; shared-app delivery remains pending. Complications and starting
+rewards follow as separate portions; class expansion is not part of this batch.
+The Opus pilot remains [abandoned without reuse](../decisions/2026-09-19-opus-pilot-dead-end.md).
+This document owns the replacement workflow; [V44](V44-character-option-delivery.md) owns delivery
 scope, and [the build process](README.md) retains project-wide review and merge rules.
 
 ## Ownership and parallel work
 
-Use an Astra lead and native Astra subagents. One implementer owns one ancestry/level or
-class/level unit in a separate worktree from current main. The current authorized batch is
-Dragon Knight (V76), High Elf (V77), Memonek (V78), Revenant (V79), Time Raider (V80), and
-Wode Elf (V81), integrated under V82. Implementers can take a second independent unit after
-handing off their first candidate; preserve separate logical commits and unit ownership.
-Use available agent capacity for independent review or a concrete shared/runtime blocker.
-Do not resurrect the external Opus fleet.
+Use an Astra lead and native Astra subagents. Give each implementer a bounded ancestry/level,
+class/level or supporting-feature unit in a worktree from current main. Preserve separate logical
+commits and unit ownership. Use available agent capacity for independent review or a concrete
+shared/runtime blocker. Do not resurrect the external Opus fleet.
 
 The lead owns shared-file integration, runtime scheduling and delivery. Implementers own their
 unit through source research, code, focused tests and correction of review findings. Native
@@ -24,13 +23,9 @@ not a separate worker scheduling system. Never invent a sender identity to resol
 
 Only shared-file edits, use of a shared runtime slot, and merges are serialized. Unit implementation
 continues while another unit waits for review or runtime verification. A failed required gate blocks
-that unit's merge, not independent development. The previous pair limits applied to the initial
-Devil/Polder, Dwarf/Human, and Hakaan/Orc delivery; the user's remaining-ancestries request
-supersedes those limits for this batch. Revenant's Previous Life depends on the other ancestry
-purchase definitions, so the lead integrates that shared dependency after the unit modules are
-available. Finish this bounded level-one batch before expanding into a new class or level.
-Implementation, reference verification, live application acceptance, and delivery remain separate
-statuses; none becomes complete merely because its candidate is written.
+that unit's merge, not independent development. Finish the current bounded portion before expanding
+into a new class or level. Implementation, reference verification, live application acceptance and
+delivery remain separate statuses; none becomes complete merely because its candidate is written.
 
 ## Unit contract
 

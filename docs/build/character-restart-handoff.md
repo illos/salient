@@ -1,17 +1,26 @@
 # Character wizard restart handoff
 
-Status: all twelve level-one ancestries are complete for the wizard, merged into main as
-`1fa8aac`. Hosted and shared-main apps are updated, with 28/28 public-API scenarios passing on each. Six previously completed ancestries (Devil, Polder, Dwarf,
-Human, Hakaan, Orc) are joined by Dragon Knight, High Elf, Memonek, Revenant, Time Raider and
-Wode Elf. [V82](V82-remaining-ancestries.md) owns this delivery.
+Status: all twelve level-one ancestries are delivered through [V82](V82-remaining-ancestries.md).
+The next supporting portion is built on `slice/V83`: [perk/kit actions](V83-supporting-actions.md)
+and [culture presets](V84-culture-presets.md). Integrated source `e39ce7e` passes 31/31 isolated
+public-API scenarios. All repository check stages and independent implementation/source reviews passed.
+Shared-main delivery remains pending.
 
 ## Current source and running app
 
-Hosted development: <https://salient-dev.rdxx.workers.dev>, backend `dev:different-bat-943`.
-Application source `8d5559f`, Worker `ff4da11e-6772-4e3c-bdd4-afd2fc88b000`, 567 reference entries.
-Shared main runs `1fa8aac` at <https://salient-dev-fc4f48cb09a0.tail41404c.ts.net>.
-Its application code matches the hosted candidate; comparator/evidence changes are also in main.
-Preserve independent engine/UI peer work; V75 theme remains on its own unmerged branch.
+The character candidate is in `.worktrees/supporting-actions`, based on ENGINE V72 `dbfb61d`.
+Its isolated CT114 environment is `supporting-actions`, running clean `e39ce7e` at
+<https://salient-supporting-actions-dev-fc2fb66104e0.tail41404c.ts.net>. The runtime metadata and
+raw report's explicit source-label correction are in [V83 evidence](evidence/V83/README.md).
+ENGINE currently owns shared-main rollout; check Chords before updating it. Preserve all peer work.
+The prior V82 hosted ancestry deployment is historical evidence, not a claim it runs this candidate.
+
+V83 exposes 24 actions/activities from 23 core perks and corrects all 21 ordinary kit signatures'
+action metadata. Familiar restoration pays one Recovery without healing and has undo/redo.
+Lie Detector remains blocked on the unimplemented HeroToken pool; contextual effects remain manual.
+V84 adds 11 ancestral and 16 professional presets, independent of hero ancestry, plus editable
+Bespoke culture. No new culture rules or grants are introduced; players still select their skills.
+Next bounded work is the complication grant/dependency audit, then starting-reward fulfillment.
 
 Every implemented trait must be checked for granted abilities, including prose and conditional
 grants. Traits remain on the sheet alongside their actions. Dwarf active rune remains persisted
@@ -19,7 +28,7 @@ play state with undo/redo; Revenant borrowed traits retain their original source
 
 ## Verified scope and limits
 
-Full checks on `3ddb81b` passed 333 engine and 483 app/scripts tests, lint, types, pinned sources,
+Historical V82 checks on `3ddb81b` passed 333 engine and 483 app/scripts tests, lint, types, pinned sources,
 content, links and build. Review corrections in `8d5559f` passed all engine tests, 11 affected app
 tests, lint and web types. Independent implementation and fresh pinned-source reviews pass.
 Hosted API passes 28/28. The calibrated Forge generator produces 137 complete counterparts;

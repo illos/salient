@@ -1,0 +1,48 @@
+$ pnpm lint && pnpm check:engine && pnpm check:app && pnpm check-links && pnpm check-vendor && pnpm content:check && pnpm supporting:check && pnpm foes:check && pnpm compiled:check && pnpm build
+$ eslint . && prettier --check .
+Checking formatting...
+All matched files use Prettier code style!
+$ tsc --noEmit && vitest run --project engine
+
+ RUN  v4.1.11 /srv/presidium/projects/salient/code/.worktrees/supporting-actions
+
+
+ Test Files  34 passed (34)
+      Tests  339 passed (339)
+   Start at  08:55:39
+   Duration  10.42s (transform 709ms, setup 0ms, import 2.79s, tests 4.13s, environment 3ms)
+
+$ tsc -p tsconfig.web.json && vitest run --project app --project scripts
+
+ RUN  v4.1.11 /srv/presidium/projects/salient/code/.worktrees/supporting-actions
+
+
+ Test Files  62 passed (62)
+      Tests  514 passed (514)
+   Start at  08:55:59
+   Duration  168.09s (transform 1.85s, setup 0ms, import 7.33s, tests 155.08s, environment 5ms)
+
+$ node scripts/check-links.ts
+Checked 345 Markdown files: no broken relative links or anchors.
+$ node scripts/check-vendor.ts
+vendor/ matches the pinned submodule commits (2 submodules).
+$ node scripts/build-content.ts --check
+shared/content/compendium matches the clean pinned Compendium (567 entries, 10 excluded, revision fb83a789da8f).
+$ node scripts/check-supporting-inventory.ts
+V37 inventory verified: 18 careers/108 incidents, 13 culture aspects, 47 core perks, 57 skills+5 groups, 42 languages, 25 kits, 100 complications; 289 exact source records checked.
+$ node scripts/ingest-foes.ts --check
+Foes: 438 stat blocks, 2006 features; edition bf262edf546e91e1540cc17489915f18c4873ddd8bd8e225b20f3441e3f74f30; verified
+$ node scripts/report-live-compiled-abilities.ts --check
+file:///srv/presidium/projects/salient/code/.worktrees/supporting-actions/scripts/report-live-compiled-abilities.ts:101
+        throw new Error(
+              ^
+
+Error: Stale V72 report json; regenerate and inspect changed live eligibility before migration.
+    at file:///srv/presidium/projects/salient/code/.worktrees/supporting-actions/scripts/report-live-compiled-abilities.ts:101:15
+    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)
+    at async node:internal/modules/esm/loader:643:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)
+
+Node.js v24.18.0
+[ELIFECYCLE] Command failed with exit code 1.
+[ELIFECYCLE] Command failed with exit code 1.

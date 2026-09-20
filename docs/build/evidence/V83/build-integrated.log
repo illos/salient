@@ -1,0 +1,98 @@
+$ pnpm rules:ingest && tsc -p tsconfig.web.json && vite build && node scripts/check-web-budget.ts
+$ node scripts/ingest-rules.ts && node scripts/build-foes-assets.ts
+Ingested 2614 entries, 26 categories from fb83a789da8f. No unresolved links.
+Foe delivery: 2507 entries; version ab2c43b79669b916
+vite v8.3.0 building client environment for production...
+transforming...
+✓ 2873 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                                         1.92 kB │ gzip:   0.75 kB
+dist/.vite/manifest.json                                               11.21 kB │ gzip:   1.57 kB
+dist/assets/search.worker-Bi7Y7SQU.js                                  18.32 kB
+dist/assets/search.worker-k8EMhjsh.js                                  19.13 kB
+dist/assets/schibsted-grotesk-latin-ext-wght-normal-hsMS0n0O.woff2     20.92 kB
+dist/assets/DrawSteelGlyphs-Regular-Bxmll151.otf                       21.63 kB
+dist/assets/schibsted-grotesk-latin-wght-normal-Bb8VGrTG.woff2         46.75 kB
+dist/assets/reference-C1jW4vvI.css                                      0.75 kB │ gzip:   0.39 kB
+dist/assets/foes-BGgFncNM.css                                           3.96 kB │ gzip:   1.16 kB
+dist/assets/rules-6fkgoGTZ.css                                         12.26 kB │ gzip:   2.86 kB
+dist/assets/index-CdpehB-8.css                                         91.20 kB │ gzip:  16.55 kB
+dist/assets/arrow-left-2SZjxN2W.js                                      0.19 kB │ gzip:   0.17 kB
+dist/assets/external-link-BnffAPVo.js                                   0.27 kB │ gzip:   0.21 kB
+dist/assets/useNavigate-BhLc6pKf.js                                     0.31 kB │ gzip:   0.23 kB
+dist/assets/pill-D-biTKKB.js                                            0.50 kB │ gzip:   0.33 kB
+dist/assets/preview-COCmVlmM.js                                         0.96 kB │ gzip:   0.57 kB
+dist/assets/worker-client-BLect5SJ.js                                   1.22 kB │ gzip:   0.74 kB
+dist/assets/content-CoqgTreo.js                                         1.55 kB │ gzip:   0.75 kB
+dist/assets/event-links-BLq5M-q_.js                                     2.02 kB │ gzip:   1.00 kB
+dist/assets/composite-D3Fn7Vkj.js                                       2.94 kB │ gzip:   1.14 kB
+dist/assets/article-DWCntJUJ.js                                         3.08 kB │ gzip:   1.47 kB
+dist/assets/x-D0KqTHUP.js                                               3.23 kB │ gzip:   1.57 kB
+dist/assets/useStore-CuFll-SH.js                                        3.26 kB │ gzip:   1.51 kB
+dist/assets/preview-DhboclG7.js                                         3.71 kB │ gzip:   1.59 kB
+dist/assets/password-recovery-NAe_dZWC.js                               3.76 kB │ gzip:   1.48 kB
+dist/assets/link-Dk6NuEHI.js                                            4.35 kB │ gzip:   2.00 kB
+dist/assets/characters-CPXVHEQe.js                                      7.97 kB │ gzip:   2.62 kB
+dist/assets/with-selector-D-Vjxtnh.js                                  10.92 kB │ gzip:   4.10 kB
+dist/assets/foes-C9x7aTDa.js                                           12.34 kB │ gzip:   4.42 kB
+dist/assets/rules-Bgx5ZuRj.js                                          13.49 kB │ gzip:   4.40 kB
+dist/assets/progression-B_Q5N2qr.js                                    14.66 kB │ gzip:   5.20 kB
+dist/assets/overlay-card-CtDr7Dkw.js                                   18.12 kB │ gzip:   6.88 kB
+dist/assets/campaigns-BEKlGPo4.js                                      28.63 kB │ gzip:   7.90 kB
+dist/assets/auth-client--4M-rdhO.js                                    30.32 kB │ gzip:  11.45 kB
+dist/assets/reference-C1UrubMw.js                                      32.32 kB │ gzip:  11.03 kB
+dist/assets/createBaseUIEventDetails-ELM1N8LF.js                       34.84 kB │ gzip:  14.32 kB
+dist/assets/character-sheet-BEgyn6fV.js                                48.37 kB │ gzip:  12.64 kB
+dist/assets/table-Cfr8IGIv.js                                          81.72 kB │ gzip:  21.75 kB
+dist/assets/ui-W_vUS40d.js                                             82.91 kB │ gzip:  24.33 kB
+dist/assets/wizard-D92nkeDC.js                                        131.28 kB │ gzip:  32.41 kB
+dist/assets/index-CbFCe9Tz.js                                         321.44 kB │ gzip: 103.75 kB
+dist/assets/supporting-components-C4yOG3MB.js                       1,052.79 kB │ gzip: 222.52 kB
+
+✓ built in 3.62s
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+{
+  "initial": {
+    "raw": 490210,
+    "gzip": 160924
+  },
+  "assets": [
+    "assets/index-CbFCe9Tz.js",
+    "assets/with-selector-D-Vjxtnh.js",
+    "assets/ui-W_vUS40d.js",
+    "assets/createBaseUIEventDetails-ELM1N8LF.js",
+    "assets/x-D0KqTHUP.js",
+    "assets/useStore-CuFll-SH.js",
+    "assets/useNavigate-BhLc6pKf.js",
+    "assets/auth-client--4M-rdhO.js",
+    "assets/composite-D3Fn7Vkj.js"
+  ],
+  "rules": {
+    "catalog": {
+      "raw": 982599,
+      "gzip": 112848
+    },
+    "index": {
+      "raw": 5463389,
+      "gzip": 1411557
+    },
+    "largestContinuation": 135780,
+    "largestInitialArticle": 415705
+  },
+  "foes": {
+    "catalog": {
+      "raw": 877715,
+      "gzip": 101309
+    },
+    "index": {
+      "raw": 1484171,
+      "gzip": 373816
+    },
+    "largestDetail": 55297
+  }
+}

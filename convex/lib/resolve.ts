@@ -1,3 +1,8 @@
+import { perkAbilities, perkAbilitySource } from '../../shared/evaluate/perkAbilities';
+import {
+  extractEmbeddedAbility,
+  type EmbeddedAbilityMetadata,
+} from '../../shared/resolve/embeddedAbility';
 import { ancestryAbilities, ancestryAbilitySource } from '../../shared/evaluate/ancestryAbilities';
 // SPDX-License-Identifier: GPL-3.0-only
 /**
@@ -273,44 +278,23 @@ export function abilityFromEntry(
 
 /** A kit's own named signature, extracted only from its printed section; unknown text stays manual. */
 function abilityFromKit(entry: Doc<'content'>, name: string): AbilityDefinition {
-  const marker = `###### ${name}\n`;
-  const offset = entry.text.indexOf(marker);
-  const section = offset < 0 ? entry.text : entry.text.slice(offset).split(/\n#{1,6} /)[0]!;
-  const lines = section.split('\n');
-  const tableRows = lines.filter(line => line.startsWith('|')).map(plainText);
-  const header = tableRows[0]?.split('|').map(v => v.trim()) ?? [];
-  const targetRow =
-    tableRows
-      .find(line => line.includes('🎯'))
-      ?.split('|')
-      .map(v => v.trim()) ?? [];
-  const roll = lines
-    .map(plainText)
-    .find(line => line.startsWith('Power Roll + '))
-    ?.replace(/:$/, '');
-  const tiers = ['≤11', '12-16', '17+'].map(label => {
-    const line = lines.find(l => plainText(l).startsWith(`- ${label}:`));
-    return line ? line.replace(/^[- ]*\*\*[^*]+\*\*\s*/, '') : '';
-  });
-  const effects = lines
-    .filter(line => line.startsWith('**Effect:**'))
-    .map(line => ({ label: 'Effect', text: line.slice('**Effect:**'.length).trim() }));
+  const section = extractEmbeddedAbility(entry.text, name);
+  const metadata: Partial<EmbeddedAbilityMetadata> & { keywords: string[] } = section.ok
+    ? section.metadata
+    : { keywords: [] };
   return build({
     compilation: compileLiveKit(entry, name),
     abilityId: `${entry.contentId}/${slug(name)}`,
     name,
     contentId: entry.contentId,
     source: sourceOf(entry),
-    text: section,
-    usage: header[2] ?? '',
-    keywords: (header[1] ?? '')
-      .split(',')
-      .map(v => v.trim())
-      .filter(Boolean),
-    distance: (targetRow[1] ?? '').replace(/^📏\s*/, ''),
-    target: (targetRow[2] ?? '').replace(/^🎯\s*/, ''),
-    ...(roll ? { roll, tiers: tiers as [string, string, string] } : {}),
-    effects,
+    text: section.ok ? section.text : entry.text,
+    usage: metadata.actionType ?? '',
+    keywords: metadata.keywords,
+    distance: metadata.distance ?? '',
+    target: metadata.target ?? '',
+    ...(metadata.roll ? { roll: metadata.roll, tiers: metadata.tiers } : {}),
+    ...(metadata.effects ? { effects: metadata.effects } : {}),
     kitBonusesIncluded: true,
   });
 }
@@ -507,10 +491,13 @@ export async function abilitiesFor(
   const granted: AbilityDefinition[] = [];
   if (actor.kind === 'character') {
     const baseline = records.character ? baselineOf(records.character.derivedBaseline) : null;
-    for (const grant of ancestryAbilities(
-      baseline?.traits ?? [],
-      baseline?.abilities ?? [],
-      records.character?.activeRune?.kind ?? null,
+    for (const grant of perkAbilities(
+      baseline?.perks ?? [],
+      ancestryAbilities(
+        baseline?.traits ?? [],
+        baseline?.abilities ?? [],
+        records.character?.activeRune?.kind ?? null,
+      ),
     )) {
       const contentId = manifest.entries.find(
         e => e.sourcePath === `vendor/steel-compendium/${grant.sourcePath}`,
@@ -518,7 +505,30 @@ export async function abilitiesFor(
       if (!contentId) continue;
       const entry = await findContent(ctx, contentId);
       if (!entry) continue;
-      const traitAbility = ancestryAbilitySource(grant);
+      const perkSource = perkAbilitySource(grant);
+      if (perkSource?.embedded) {
+        const parsed = extractEmbeddedAbility(entry.text, grant.name);
+        const metadata: Partial<EmbeddedAbilityMetadata> & { keywords: string[] } = parsed.ok
+          ? parsed.metadata
+          : { keywords: [] };
+        granted.push(
+          build({
+            abilityId: `${entry.contentId}/${slug(grant.name)}`,
+            name: grant.name,
+            contentId: entry.contentId,
+            source: sourceOf(entry),
+            text: parsed.ok ? parsed.text : entry.text,
+            usage: metadata.actionType ?? '',
+            keywords: metadata.keywords,
+            distance: metadata.distance ?? '',
+            target: metadata.target ?? '',
+            ...(metadata.effects ? { effects: metadata.effects } : {}),
+            kitBonusesIncluded: false,
+          }),
+        );
+        continue;
+      }
+      const traitAbility = ancestryAbilitySource(grant) ?? perkSource;
       if (traitAbility) {
         granted.push(
           build({
@@ -528,6 +538,7 @@ export async function abilitiesFor(
             source: sourceOf(entry),
             text: entry.text,
             usage: traitAbility.actionType,
+            ...(perkSource?.cost ? { cost: perkSource.cost } : {}),
             keywords: [],
             distance: '',
             target: '',

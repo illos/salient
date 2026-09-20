@@ -1,0 +1,58 @@
+$ pnpm lint && pnpm check:engine && pnpm check:app && pnpm check-links && pnpm check-vendor && pnpm content:check && pnpm supporting:check && pnpm foes:check && pnpm build
+$ eslint . && prettier --check .
+Checking formatting...
+All matched files use Prettier code style!
+$ tsc --noEmit && vitest run --project engine
+
+ RUN  v4.1.11 /srv/presidium/projects/salient/code/.worktrees/supporting-actions
+
+
+ Test Files  34 passed (34)
+      Tests  339 passed (339)
+   Start at  08:46:37
+   Duration  10.19s (transform 583ms, setup 0ms, import 2.80s, tests 3.90s, environment 3ms)
+
+$ tsc -p tsconfig.web.json && vitest run --project app --project scripts
+
+ RUN  v4.1.11 /srv/presidium/projects/salient/code/.worktrees/supporting-actions
+
+ ❯ |app| tests/app/admission.test.ts (11 tests | 1 failed) 1076ms
+     × acceptance 5 and 6: audiences of the sheet read, owner notes absent from Director and peer payloads, verbatim ability text 85ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |app| tests/app/admission.test.ts > A02 admission > acceptance 5 and 6: audiences of the sheet read, owner notes absent from Director and peer payloads, verbatim ability text
+AssertionError: expected [ 'main', 'main', 'main', …(4) ] to deeply equal [ 'main', 'main', 'main', …(4) ]
+
+- Expected
++ Received
+
+  [
+    "main",
+    "main",
+    "main",
+    "triggered",
+-   "other",
++   "main",
+    "main",
+    "main",
+  ]
+
+ ❯ tests/app/admission.test.ts:377:47
+    375|       );
+    376|     }
+    377|     expect(owner.abilities.map(a => a.group)).toEqual([
+       |                                               ^
+    378|       'main',
+    379|       'main',
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 56 passed (57)
+      Tests  1 failed | 485 passed (486)
+   Start at  08:46:59
+   Duration  167.14s (transform 1.74s, setup 0ms, import 6.81s, tests 154.82s, environment 5ms)
+
+[ELIFECYCLE] Command failed with exit code 1.
+[ELIFECYCLE] Command failed with exit code 1.

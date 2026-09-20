@@ -4,7 +4,7 @@ Structural support, current grant/loading availability and live execution are se
 
 Source: `fb83a789da8f0327a389c277a0c790b1648d5810`; content: `sha256:aaf7c027a421e6059448e019271111877f208b577b756f5e79645c3d497ed26e`.
 
-Currently reachable compiled: 6; unchanged reachable compatibility: 53; structurally supported but unavailable: 4.
+Currently reachable compiled: 6; unchanged reachable compatibility: 73; structurally supported but unavailable: 4.
 
 | Ability | Population | Pure execution | Live boundary | Diagnostics |
 | --- | --- | --- | --- | --- |
@@ -126,8 +126,28 @@ Currently reachable compiled: 6; unchanged reachable compatibility: 53; structur
 | Weakening Brand | kit-signature | manual | legacy-compatibility | grammar, unsafe-tier-remainder, unaccounted-paragraph, manual-section, compatibility-boundary |
 | Extension of My Arm | kit-signature | manual | legacy-compatibility | unsafe-tier-remainder, unaccounted-paragraph, manual-section, compatibility-boundary |
 | Arcane Trick | granted | manual | legacy-compatibility | grammar, source-header, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary, action-type |
+| Area of Expertise: Inspect Object | granted | manual | legacy-compatibility | grammar, source-header, target-boundary, compatibility-boundary, action-type |
+| Creature Sense | granted | manual | legacy-compatibility | grammar, source-header, target-boundary, compatibility-boundary, action-type |
+| Criminal Contacts | granted | manual | legacy-compatibility | grammar, source-header, target-boundary, compatibility-boundary, action-type |
+| Eidetic Memory: Memorize Text | granted | manual | legacy-compatibility | grammar, source-header, target-boundary, compatibility-boundary, action-type |
+| Engrossing Monologue | granted | manual | legacy-compatibility | grammar, source-header, target-boundary, compatibility-boundary, action-type |
+| Familiar: Restore | granted | manual | legacy-compatibility | grammar, source-header, target-boundary, compatibility-boundary, action-type |
+| Forgettable Face | granted | manual | legacy-compatibility | grammar, source-header, target-boundary, compatibility-boundary, action-type |
+| Friend Catapult | granted | manual | legacy-compatibility | grammar, source-header, target-boundary, compatibility-boundary, action-type |
+| Gum Up the Works | granted | manual | legacy-compatibility | grammar, source-header, target-boundary, compatibility-boundary, action-type |
+| Improvisation Creation | granted | manual | legacy-compatibility | grammar, source-header, target-boundary, compatibility-boundary, action-type |
 | Invisible Force | granted | manual | legacy-compatibility | grammar, source-header, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary, action-type |
+| I've Got You! | granted | manual | legacy-compatibility | grammar, source-header, target-boundary, compatibility-boundary, action-type |
+| I've Read About This Place | granted | manual | legacy-compatibility | grammar, source-header, target-boundary, compatibility-boundary, action-type |
+| Lie Detector | granted | manual | legacy-compatibility | grammar, source-header, target-boundary, compatibility-boundary, action-type |
+| Open Book | granted | manual | legacy-compatibility | grammar, source-header, target-boundary, compatibility-boundary, action-type |
 | Psychic Whisper | granted | manual | legacy-compatibility | grammar, source-header, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary, action-type |
+| Ritualist | granted | manual | legacy-compatibility | grammar, source-header, target-boundary, compatibility-boundary, action-type |
+| Slipped Lead: Escape Bonds | granted | manual | legacy-compatibility | grammar, source-header, target-boundary, compatibility-boundary, action-type |
+| So Tell Me... | granted | manual | legacy-compatibility | grammar, source-header, target-boundary, compatibility-boundary, action-type |
+| Thingspeaker | granted | manual | legacy-compatibility | grammar, source-header, target-boundary, compatibility-boundary, action-type |
+| Traveling Artisan | granted | manual | legacy-compatibility | grammar, source-header, target-boundary, compatibility-boundary, action-type |
+| Traveling Sage | granted | manual | legacy-compatibility | grammar, source-header, target-boundary, compatibility-boundary, action-type |
 | Shadow Chains | foe-ability | manual | not-reachable | unsafe-tier-remainder, target-boundary |
 | Portal to the Void | foe-ability | manual | not-reachable | grammar, unsafe-tier-remainder, manual-section, target-boundary |
 | Drill Press | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section, target-boundary |

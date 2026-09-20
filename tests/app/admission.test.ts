@@ -379,7 +379,7 @@ describe('A02 admission', () => {
       'main',
       'main',
       'triggered',
-      'other',
+      'main', // Pain for Pain is the kit's printed main-action signature.
       'main',
       'main',
     ]);

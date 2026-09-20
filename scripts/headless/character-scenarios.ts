@@ -1,3 +1,5 @@
+import { runCulturePresets } from './culture-presets.ts';
+import { runSupportingActions } from './supporting-actions.ts';
 // SPDX-License-Identifier: GPL-3.0-only
 /** Live public-operation proof. Expected mechanics come from the pinned V25/V60/V61/V70/V71 witnesses. */
 import assert from 'node:assert/strict';
@@ -509,4 +511,6 @@ export async function runScenarios(context: ScenarioContext) {
   await runLifecycle(context);
   await runTraitAbilities(context);
   await runRemainingAncestries(context);
+  await runSupportingActions(context);
+  await runCulturePresets(context);
 }

@@ -323,6 +323,13 @@ values and controls retain their behavior.
   v0.01 wizard does not present the optional complication step; heroes are created without a complication.
   Complications return with fuller creation coverage (V08). See
   [the questions record](rules-questions-for-user.md#q-char-1-must-the-v001-wizard-present-the-optional-complication-step).
+- Confirmed 2026-09-20: culture offers the book's 11 ancestral and 16 professional presets,
+  independently of the hero's ancestry, plus Bespoke. A preset fills environment, organization,
+  upbringing and any printed language default; players still choose the associated skills.
+  All defaults remain editable through the shared wizard/API transition. Modifying a printed
+  default marks the culture Bespoke without clearing its other choices. Professional cultures
+  leave language freely selectable. Existing saved cultures need no preset or migration. See
+  [V84](build/V84-culture-presets.md) for source tables and naming discrepancies.
 - The main wizard provides access to all levels and their applicable options; it is not limited to level 1 or
   the currently unlocked level-up prompts.
 - Available options and resulting grants depend on previous choices and progression. The model must handle

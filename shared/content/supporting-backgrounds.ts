@@ -1,3 +1,4 @@
+import { PERK_ABILITIES } from './perk-abilities.ts';
 // SPDX-License-Identifier: GPL-3.0-only
 /** V37 core background choices. Audited source: docs/research/v37-backgrounds.{json,md}.
  * Compendium fb83a789da8f0327a389c277a0c790b1648d5810 is the rules authority.
@@ -1510,9 +1511,11 @@ const option = (value: string, source: string): DecisionOption => ({
 });
 const perkOption = (perk: (typeof CORE_PERKS)[number]): DecisionOption => ({
   ...option(perk.name, perk.source),
-  ...(['Arcane Trick', 'Invisible Force', 'Psychic Whisper'].includes(perk.name)
-    ? { grants: [{ kind: 'perk-ability', value: perk.name, source: perk.source }] }
-    : {}),
+  grants: PERK_ABILITIES.filter(source => source.perk === perk.name).map(source => ({
+    kind: 'perk-ability',
+    value: source.name,
+    source: source.sourcePath,
+  })),
 });
 
 /** Mutates a fresh definition object once, after any level-specific perk sources are appended. */

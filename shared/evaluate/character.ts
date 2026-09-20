@@ -1,3 +1,4 @@
+import { perkAbilities } from './perkAbilities.ts';
 import { applyRevenantBaseline, applyRevenantDisengage } from './ancestries/revenant.ts';
 import { applyTimeRaiderBaseline } from './ancestries/time-raider.ts';
 import { applyWodeElfBaseline } from './ancestries/wode-elf.ts';
@@ -843,7 +844,7 @@ class Evaluation {
     out.traits = this.traits();
     out.features = this.features();
     out.perks = this.perks();
-    out.abilities = ancestryAbilities(out.traits, this.abilities());
+    out.abilities = perkAbilities(out.perks, ancestryAbilities(out.traits, this.abilities()));
     this.deriveSupportingChoices(out);
     out.uncertainties = UNCERTAINTY_ORDER.filter(id => this.uncertainties.has(id));
     return out;

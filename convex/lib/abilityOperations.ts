@@ -679,6 +679,10 @@ function poolFor(records: ActorRecords, context: TableContext, resource: string)
     if (resource !== 'malice') return undefined;
     return { resource, current: context.campaign.malice ?? 0, legalFloor: 0 };
   }
+  if (resource === 'recovery') {
+    const current = records.character?.liveState?.recoveries;
+    return typeof current === 'number' ? { resource, current, legalFloor: 0 } : undefined;
+  }
   const pool = records.character?.liveState?.heroicResource;
   if (!pool || pool.name === null || pool.current === null) return undefined;
   if (pool.name.toLowerCase() !== resource) return undefined;
@@ -691,6 +695,7 @@ async function debit(
   records: ActorRecords,
   context: TableContext,
   after: number,
+  resource: string,
 ) {
   if (records.actor.kind === 'foe') {
     await journalPatch(ctx, scope, 'campaigns', context.campaign._id, { malice: after });
@@ -699,7 +704,10 @@ async function debit(
   const character = (await ctx.db.get(records.character!._id))!;
   const live: HeroLive = requireHeroLive(character);
   await journalPatch(ctx, scope, 'characters', character._id, {
-    liveState: { ...live, heroicResource: { ...live.heroicResource, current: after } },
+    liveState:
+      resource === 'recovery'
+        ? { ...live, recoveries: after }
+        : { ...live, heroicResource: { ...live.heroicResource, current: after } },
   });
 }
 
@@ -994,7 +1002,8 @@ const abilityUse: OperationDefinition = {
           source,
         },
         commit: async (mctx, scope) => {
-          if (cost && !cost.waived) await debit(mctx, scope, records, context, cost.after);
+          if (cost && !cost.waived)
+            await debit(mctx, scope, records, context, cost.after, cost.resource);
           if (ability.actionType)
             await recordUse(mctx, scope, allowance, actor!, type, ability.name, tracking);
           await clear(mctx);
@@ -1195,7 +1204,7 @@ const abilityUse: OperationDefinition = {
       commit: async (mctx, scope) => {
         // 1. Debit the fixed cost once, before any effect.
         if (result.cost && !result.cost.waived)
-          await debit(mctx, scope, records, context, result.cost.after);
+          await debit(mctx, scope, records, context, result.cost.after, result.cost.resource);
         // 2. Damage to every target in target order (R04 4.5).
         for (const p of perTarget) {
           const record = targets.find(t => sameActor(t.actor, p.target))!;

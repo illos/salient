@@ -1,0 +1,43 @@
+$ pnpm lint && pnpm check:engine && pnpm check:app && pnpm check-links && pnpm check-vendor && pnpm content:check && pnpm supporting:check && pnpm foes:check && pnpm build
+$ eslint . && prettier --check .
+Checking formatting...
+All matched files use Prettier code style!
+$ tsc --noEmit && vitest run --project engine
+
+ RUN  v4.1.11 /srv/presidium/projects/salient/code/.worktrees/supporting-actions
+
+
+ Test Files  34 passed (34)
+      Tests  339 passed (339)
+   Start at  08:50:33
+   Duration  9.17s (transform 578ms, setup 0ms, import 2.44s, tests 3.56s, environment 3ms)
+
+$ tsc -p tsconfig.web.json && vitest run --project app --project scripts
+
+ RUN  v4.1.11 /srv/presidium/projects/salient/code/.worktrees/supporting-actions
+
+
+ Test Files  57 passed (57)
+      Tests  486 passed (486)
+   Start at  08:50:52
+   Duration  163.82s (transform 1.88s, setup 0ms, import 6.66s, tests 151.73s, environment 4ms)
+
+$ node scripts/check-links.ts
+Checked 337 Markdown files: no broken relative links or anchors.
+$ node scripts/check-vendor.ts
+vendor/ matches the pinned submodule commits (2 submodules).
+$ node scripts/build-content.ts --check
+shared/content/compendium matches the clean pinned Compendium (567 entries, 10 excluded, revision fb83a789da8f).
+$ node scripts/check-supporting-inventory.ts
+V37 inventory verified: 18 careers/108 incidents, 13 culture aspects, 47 core perks, 57 skills+5 groups, 42 languages, 25 kits, 100 complications; 289 exact source records checked.
+$ node scripts/ingest-foes.ts --check
+Foes: 438 stat blocks, 2006 features; edition bf262edf546e91e1540cc17489915f18c4873ddd8bd8e225b20f3441e3f74f30; verified
+$ pnpm rules:ingest && tsc -p tsconfig.web.json && vite build && node scripts/check-web-budget.ts
+$ node scripts/ingest-rules.ts && node scripts/build-foes-assets.ts
+Ingested 2614 entries, 26 categories from fb83a789da8f. No unresolved links.
+Foe delivery: 2507 entries; version ab2c43b79669b916
+tests/app/perk-legacy.test.ts(52,16): error TS2339: Property 'abilities' does not exist on type 'CharacterSheet'.
+  Property 'abilities' does not exist on type 'PeerSheet'.
+tests/app/perk-legacy.test.ts(52,31): error TS7006: Parameter 'a' implicitly has an 'any' type.
+[ELIFECYCLE] Command failed with exit code 2.
+[ELIFECYCLE] Command failed with exit code 2.

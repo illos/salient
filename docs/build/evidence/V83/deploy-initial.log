@@ -1,0 +1,190 @@
+ Volume salient-supporting-actions-dev-d21ad518e747_tools Creating 
+ Volume salient-supporting-actions-dev-d21ad518e747_tools Creating 
+ Network salient-supporting-actions-dev-d21ad518e747_default Creating 
+ Network salient-supporting-actions-dev-d21ad518e747_default Creating 
+ Volume salient-supporting-actions-dev-d21ad518e747_dependencies Creating 
+ Volume salient-supporting-actions-dev-d21ad518e747_dependencies Creating 
+ Volume salient-supporting-actions-dev-d21ad518e747_tools Created 
+ Volume salient-supporting-actions-dev-d21ad518e747_tools Created 
+ Volume salient-supporting-actions-dev-d21ad518e747_dependencies Created 
+ Volume salient-supporting-actions-dev-d21ad518e747_dependencies Created 
+ Network salient-supporting-actions-dev-d21ad518e747_default Created 
+ Network salient-supporting-actions-dev-d21ad518e747_default Created 
+ Container salient-supporting-actions-dev-d21ad518e747-job-81722864 Creating 
+ Container salient-supporting-actions-dev-d21ad518e747-job-81722864 Created 
+
+added 1 package in 5s
+? Verifying lockfile against supply-chain policies (682 entries)...
+✓ Lockfile passes supply-chain policies (682 entries in 5.8s)
+Lockfile is up to date, resolution step is skipped
+Progress: resolved 1, reused 0, downloaded 0, added 0
+Packages: +611
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Progress: resolved 611, reused 0, downloaded 39, added 23
+Progress: resolved 611, reused 0, downloaded 98, added 65
+Progress: resolved 611, reused 0, downloaded 204, added 200
+Progress: resolved 611, reused 0, downloaded 288, added 270
+Progress: resolved 611, reused 0, downloaded 377, added 324
+Progress: resolved 611, reused 0, downloaded 584, added 583
+Progress: resolved 611, reused 0, downloaded 611, added 609
+Progress: resolved 611, reused 0, downloaded 611, added 611, done
+.../esbuild@0.27.0/node_modules/esbuild postinstall$ node install.js
+.../esbuild@0.27.0/node_modules/esbuild postinstall: Done
+
+dependencies:
++ @base-ui/react 1.8.0
++ @convex-dev/better-auth 0.12.5
++ @tanstack/react-router 1.170.34
++ better-auth 1.6.15
++ class-variance-authority 0.7.1
++ cn 0.3.0
++ convex 1.45.0
++ lucide-react 1.45.0
++ mdast-util-to-string 4.0.0
++ minisearch 7.2.0
++ react 19.3.0
++ react-dom 19.3.0
++ rehype-raw 7.0.0
++ rehype-sanitize 6.0.0
++ rehype-stringify 10.0.1
++ remark-gfm 4.0.1
++ remark-parse 11.0.0
++ remark-rehype 11.1.2
++ unified 11.0.5
++ unist-util-visit 5.1.0
++ yaml 2.9.1
+
+devDependencies:
++ @convex-dev/eslint-plugin 4.0.0
++ @eslint/js 10.0.1
++ @fontsource-variable/schibsted-grotesk 5.3.0
++ @playwright/test 1.63.0
++ @tailwindcss/vite 4.3.3
++ @types/hast 3.0.5
++ @types/mdast 4.0.4
++ @types/node 24.13.4
++ @types/react 19.3.0
++ @types/react-dom 19.3.0
++ @vitejs/plugin-react 6.1.1
++ convex-test 0.0.57
++ eslint 10.10.0
++ eslint-plugin-react-hooks 7.1.1
++ globals 17.12.0
++ prettier 3.9.6
++ shadcn 4.21.0
++ simple-git-hooks 2.14.0
++ tailwindcss 4.3.3
++ tw-animate-css 1.4.0
++ typescript 5.9.3
++ typescript-eslint 8.70.0
++ vite 8.3.0
++ vitest 4.1.11
+
+. prepare$ simple-git-hooks
+. prepare: [INFO] No `.git` root folder found, skipping
+. prepare: [INFO] No `.git` root folder found, skipping
+. prepare: [INFO] No `.git` root folder found, skipping
+. prepare: [INFO] No `.git` root folder found, skipping
+. prepare: [INFO] No `.git` root folder found, skipping
+. prepare: [INFO] No `.git` root folder found, skipping
+. prepare: [INFO] No `.git` root folder found, skipping
+. prepare: [INFO] No `.git` root folder found, skipping
+. prepare: [INFO] No `.git` root folder found, skipping
+. prepare: [INFO] No `.git` root folder found, skipping
+. prepare: [INFO] No `.git` root folder found, skipping
+. prepare: [INFO] No `.git` root folder found, skipping
+. prepare: [INFO] No `.git` root folder found, skipping
+. prepare: [INFO] No `.git` root folder found, skipping
+. prepare: [INFO] No `.git` root folder found, skipping
+. prepare: [INFO] No `.git` root folder found, skipping
+. prepare: [INFO] No `.git` root folder found, skipping
+. prepare: [INFO] No `.git` root folder found, skipping
+. prepare: [INFO] No `.git` root folder found, skipping
+. prepare: [INFO] No `.git` root folder found, skipping
+. prepare: [INFO] No `.git` root folder found, skipping
+. prepare: [INFO] No `.git` root folder found, skipping
+. prepare: [INFO] No `.git` root folder found, skipping
+. prepare: [INFO] No `.git` root folder found, skipping
+. prepare: [INFO] No `.git` root folder found, skipping
+. prepare: [INFO] No `.git` root folder found, skipping
+. prepare: [INFO] No `.git` root folder found, skipping
+. prepare: [INFO] No `.git` root folder found, skipping
+. prepare: Done
+Done in 14.6s using pnpm v11.5.3
+Pinned Convex CLI compatibility patch installed (instance secret via environment).
+Remote synthetic Git snapshot created; original source identity remains in runtime state.
+$ node scripts/ingest-rules.ts && node scripts/build-foes-assets.ts
+Ingested 2614 entries, 26 categories from fb83a789da8f. No unresolved links.
+Foe delivery: 2507 entries; version ab2c43b79669b916
+ Volume salient-supporting-actions-dev-d21ad518e747_backend-data Creating 
+ Volume salient-supporting-actions-dev-d21ad518e747_backend-data Creating 
+ Volume salient-supporting-actions-dev-d21ad518e747_backend-cache Creating 
+ Volume salient-supporting-actions-dev-d21ad518e747_backend-cache Creating 
+ Volume salient-supporting-actions-dev-d21ad518e747_backend-data Created 
+ Volume salient-supporting-actions-dev-d21ad518e747_backend-data Created 
+ Volume salient-supporting-actions-dev-d21ad518e747_backend-cache Created 
+ Volume salient-supporting-actions-dev-d21ad518e747_backend-cache Created 
+ Container salient-supporting-actions-dev-d21ad518e747-backend-1 Creating 
+ Container salient-supporting-actions-dev-d21ad518e747-backend-1 Created 
+ Container salient-supporting-actions-dev-d21ad518e747-web-1 Creating 
+ Container salient-supporting-actions-dev-d21ad518e747-web-1 Created 
+ Container salient-supporting-actions-dev-d21ad518e747-backend-1 Starting 
+ Container salient-supporting-actions-dev-d21ad518e747-backend-1 Started 
+ Container salient-supporting-actions-dev-d21ad518e747-backend-1 Waiting 
+ Container salient-supporting-actions-dev-d21ad518e747-backend-1 Healthy 
+ Container salient-supporting-actions-dev-d21ad518e747-web-1 Starting 
+ Container salient-supporting-actions-dev-d21ad518e747-web-1 Started 
+{
+  "project": "salient",
+  "environment": "supporting-actions",
+  "installation": "39ebd4ec-3fc4-417a-bcc2-a4666d5e53d3",
+  "compose": "salient-supporting-actions-dev-d21ad518e747",
+  "source": {
+    "submodules": [
+      {
+        "path": "vendor/steel-compendium",
+        "url": "https://github.com/SteelCompendium/data-unified.git",
+        "gitlink": "fb83a789da8f0327a389c277a0c790b1648d5810",
+        "initialized": true,
+        "commit": "fb83a789da8f0327a389c277a0c790b1648d5810",
+        "dirty": false
+      },
+      {
+        "path": "vendor/forge-steel",
+        "url": "https://github.com/andyaiken/forgesteel.git",
+        "gitlink": "5a846aadb623a9855a023e9403bb887a956c341f",
+        "initialized": true,
+        "commit": "5a846aadb623a9855a023e9403bb887a956c341f",
+        "dirty": false
+      }
+    ],
+    "checkout": "/srv/presidium/projects/salient/code/.worktrees/supporting-actions",
+    "identity": "588e3217b9999d7cdb73fb6e6245efc90999a771e5537f28d10537e905bc7957",
+    "commit": "2a8844e59bff30786f82edc64eca3edd1be7339f",
+    "dirty": false
+  },
+  "phase": "running",
+  "updated": 1789894057,
+  "lastJob": {
+    "container": "salient-supporting-actions-dev-d21ad518e747-job-81722864",
+    "service": "install",
+    "started": 1789894057,
+    "exitCode": 0
+  },
+  "routes": {
+    "web": {
+      "name": "salient-supporting-actions-dev-fc2fb66104e0",
+      "identity": "{\"endpoint\":\"web\",\"environment\":\"supporting-actions\",\"installation\":\"39ebd4ec-3fc4-417a-bcc2-a4666d5e53d3\",\"managedBy\":\"presidium-dev-v1\",\"project\":\"salient\"}",
+      "port": 32898,
+      "url": "https://salient-supporting-actions-dev-fc2fb66104e0.tail41404c.ts.net",
+      "phase": "https-verified-from-host"
+    }
+  }
+}
+NAME                                                    IMAGE                                                                                           COMMAND                  SERVICE   CREATED          STATUS                    PORTS
+salient-supporting-actions-dev-d21ad518e747-backend-1   node:24.13.0-bookworm@sha256:1de022d8459f896fff2e7b865823699dc7a8d5567507e8b87b14a7442e07f206   "docker-entrypoint.s…"   backend   50 seconds ago   Up 50 seconds (healthy)   
+salient-supporting-actions-dev-d21ad518e747-web-1       node:24.13.0-bookworm@sha256:1de022d8459f896fff2e7b865823699dc7a8d5567507e8b87b14a7442e07f206   "docker-entrypoint.s…"   web       50 seconds ago   Up 40 seconds             127.0.0.1:32898->5180/tcp
+salient-supporting-actions-dev-d21ad518e747-web-1	200.10%	1.291GiB / 2GiB
+salient-supporting-actions-dev-d21ad518e747-backend-1	0.10%	907.5MiB / 3GiB
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/loop4       79G   51G   24G  69% /

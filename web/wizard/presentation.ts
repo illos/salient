@@ -14,6 +14,7 @@ export const DECISION_LABELS: Record<string, string> = {
   'ancestry.devil.silver-tongue-skill': 'Silver Tongue skill',
   'ancestry.devil.purchased-traits': 'Choose ancestry traits',
   'culture.name': 'Culture name',
+  'culture.preset': 'Culture',
   'culture.caelian': 'Common language',
   'culture.language': 'Additional language',
   'culture.environment': 'Environment',
@@ -169,7 +170,7 @@ export function stepExcerpt(step: Step): string | undefined {
 /** The decision whose selected value the step rail shows at the right of the step row. */
 const PRIMARY_DECISIONS: Record<string, string> = {
   'step.ancestry': 'ancestry.choice',
-  'step.culture': 'culture.name',
+  'step.culture': 'culture.preset',
   'step.career': 'career.choice',
   'step.class': 'class.choice',
   'step.kit': 'kit.choice',
