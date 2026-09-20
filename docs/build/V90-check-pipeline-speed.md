@@ -114,4 +114,9 @@ None.
 - 2026-09-20 — TESTER job submitted on the user's instruction as Chords handoff
   `test-V90-<candidate>-1` to TESTER `46c30412-6e29-44dc-b30b-08ffe22bd0e3`: acceptance checks 1–4
   (5 optional), the frozen commit, base `42baf9c`, and a request to record per-stage durations and
-  peak memory for the 3-worker comparison. Result pending.
+  peak memory for the 3-worker comparison.
+- 2026-09-20 — TESTER `test-V90-f55764d-1` PASS (Chords 1094): serial full check 282 s, app/scripts
+  vitest 210.4 s versus the 258.9 s baseline; three workers 93.3 s with 2.9 GiB combined RSS and no
+  memory pressure; lint 17.1 s cold, 3.0 s cached. Certificate under
+  `test-artifacts/V90-f55764d-timing/`. TESTER adopts opt-in three local workers (see
+  `testing-process.md`). Rebased into `slice/V91` and merged with it.

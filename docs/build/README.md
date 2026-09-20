@@ -81,8 +81,8 @@ Co-Authored-By: <agent> <email>
 - `Slice:` names a `STATUS.md` id, or `none`.
 - `Spec:` lines name the owning spec sections; required for `feat`, `fix`, `rules` and `content`.
   Anchors must resolve to a heading in the file at that commit.
-- `Reviewed-By:` with a `pass` verdict is required on the tip commit of a merged range that touches
-  code, not on every commit. `Verified:` and `Rules-Review:` are optional; a rules review that
+- `Reviewed-By:` with a `pass` verdict is required on the tip commit of a merged range when any
+  commit in the range touches code, not on every commit. `Verified:` and `Rules-Review:` are optional; a rules review that
   happened records its verdict in `Rules-Review:`.
 - A commit never modifies `vendor/`, and never adds a rule, formula, threshold or grant that its
   `Spec:` sections and the Compendium do not state.

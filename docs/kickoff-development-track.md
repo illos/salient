@@ -15,7 +15,7 @@ ask only when an unresolved product choice or pinned-source ambiguity materially
 
 ## Establish the assignment and current state
 
-Read `AGENTS.md`, `agent.MD`, `CLAUDE.md`, `docs/v1-roadmap.md`, `docs/build/README.md`,
+Read `AGENTS.md`, `AGENTS.md`, `AGENTS.md`, `docs/v1-roadmap.md`, `docs/build/README.md`,
 `docs/build/STATUS.md`, and the assigned slice and its owning specs. The repository's shared main
 checkout is `/srv/presidium/projects/salient/code`; implementation belongs in your own worktree.
 Read `docs/build/evidence/v001-acceptance.md` for the accepted prototype and inspect the current code,

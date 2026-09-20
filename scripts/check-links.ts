@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: GPL-3.0-only
 /**
- * Validates every relative link and anchor in docs/**\/*.md, README.md, AGENTS.md and testing-process.md.
+ * Validates every relative link and anchor in docs/**\/*.md, README.md, AGENTS.md, CLAUDE.md and testing-process.md.
  * Exits non-zero listing each broken link as `file:line target — reason`.
  */
 import { readFile, readdir, stat } from 'node:fs/promises';
@@ -78,7 +78,9 @@ export async function checkFile(path: string, repoRoot = root): Promise<BrokenLi
 
 export async function checkAll(repoRoot = root): Promise<{ files: number; broken: BrokenLink[] }> {
   const files = [
-    ...['README.md', 'AGENTS.md', 'testing-process.md'].map(name => join(repoRoot, name)),
+    ...['README.md', 'AGENTS.md', 'CLAUDE.md', 'testing-process.md'].map(name =>
+      join(repoRoot, name),
+    ),
     ...(await markdownFiles(join(repoRoot, 'docs'))),
   ].filter(path => !path.split(sep).includes('node_modules'));
   const broken: BrokenLink[] = [];

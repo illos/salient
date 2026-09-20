@@ -8,7 +8,7 @@
  *
  * Without --merge, `Reviewed-By:` is optional: the hook runs before an independent review can exist.
  * With --merge (the pre-merge check), `Reviewed-By:` with a pass verdict is required on the tip commit
- * of the range when the range touches code; earlier commits in the range need none.
+ * of the range when any commit in the range touches code; earlier commits need none.
  * `Verified:` and `Rules-Review:` are optional; `Rules-Review: required (pending)` is rejected with --merge.
  * Range checks exclude the fixed history before the commit-format contract was adopted.
  * Explicit --rev and staged-message checks remain strict.
@@ -199,13 +199,15 @@ function stagedContext(merge: boolean): CommitContext {
   const touched = git(['diff', '--cached', '--name-only']).split('\n').filter(Boolean);
   return { sliceIds, readFile, touched, merge };
 }
+function touchedBy(rev: string): string[] {
+  return git(['diff-tree', '--no-commit-id', '--name-only', '-r', '--root', rev])
+    .split('\n')
+    .filter(Boolean);
+}
 function revisionContext(rev: string, merge: boolean, tip = true): CommitContext {
   const readFile = treeReader(`${rev}:`);
   const status = readFile('docs/build/STATUS.md') ?? '';
-  const touched = git(['diff-tree', '--no-commit-id', '--name-only', '-r', '--root', rev])
-    .split('\n')
-    .filter(Boolean);
-  return { sliceIds: sliceIdsFrom(status), readFile, touched, merge, tip };
+  return { sliceIds: sliceIdsFrom(status), readFile, touched: touchedBy(rev), merge, tip };
 }
 
 function report(label: string, failures: string[]): boolean {
@@ -233,13 +235,19 @@ if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.ur
       .filter(Boolean);
     console.log(`Checking ${range}; excluding history through pre-format ${PRE_FORMAT_HISTORY}.`);
     if (!commits.length) console.log(`No post-adoption commits in ${range}.`);
+    // The tip commit answers for the whole range: a trailing docs commit cannot hide code commits
+    // below it from the pre-merge review requirement.
+    const rangeTouched = new Set<string>();
     commits.forEach((commit, index) => {
       const message = git(['log', '-1', '--format=%B', commit]);
-      ok =
-        report(
-          commit.slice(0, 12),
-          validateMessage(message, revisionContext(commit, merge, index === 0)),
-        ) && ok;
+      const context = revisionContext(commit, merge, index === 0);
+      if (index === 0) {
+        for (const other of commits.slice(1)) {
+          for (const path of touchedBy(other)) rangeTouched.add(path);
+        }
+        context.touched = [...new Set([...context.touched, ...rangeTouched])];
+      }
+      ok = report(commit.slice(0, 12), validateMessage(message, context)) && ok;
     });
   } else if (revIndex !== -1) {
     const rev = args[revIndex + 1];

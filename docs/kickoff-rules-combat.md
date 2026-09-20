@@ -24,7 +24,7 @@ behavior that thread can integrate. Work toward the connected v0.01 journey, not
 
 ## Read first and establish current state
 
-Read `AGENTS.md`, `agent.MD`, `CLAUDE.md`, `docs/build/README.md`, `docs/pre-alpha-design-gaps.md`, `docs/v1-spec-checkpoint.md`,
+Read `AGENTS.md`, `AGENTS.md`, `AGENTS.md`, `docs/build/README.md`, `docs/pre-alpha-design-gaps.md`, `docs/v1-spec-checkpoint.md`,
 `docs/rules-adaptation-principles.md`, `docs/development-process.md`, `docs/rules-skills-design.md`,
 `docs/compendium-navigation.md`, and `docs/web-app-build-handoff.md`.
 

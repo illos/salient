@@ -78,7 +78,7 @@ levels are separate work. Preserve the existing Fury 1→2 path.
 
 ## Resume constraints
 
-Read `agent.MD`, [Astra workflow](astra-character-workflow.md), [V44 scope](V44-character-option-delivery.md)
+Read `AGENTS.md`, [Astra workflow](astra-character-workflow.md), [V44 scope](V44-character-option-delivery.md)
 and the relevant character specification. Check Chords/current main before claiming another unit.
 Use a free suitable test environment under the current runbook and active user instructions.
 

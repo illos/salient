@@ -25,8 +25,9 @@ the build process in `docs/build/README.md`, test execution in `testing-process.
 - Rules resolution stays out of UI components. Every table control is a registered shared operation
   usable from the UI, the command palette, slash commands and headless calls. Every UI capability has
   a supported programmatic CLI/API route.
-- No deployment to Convex Cloud or Cloudflare, GitHub push, or external publication without an
-  explicit user instruction in the current thread. The Presidium shell carries an ambient
+- DEPLOY2's promotion of merged main to the cloud dev deployment and GitHub is standing
+  authorization; any other deployment, push or external publication needs an explicit user
+  instruction in the current thread. The Presidium shell carries an ambient
   `CONVEX_DEPLOY_KEY`; run Convex CLI commands with `env -u CONVEX_DEPLOY_KEY` or on CT114.
 - Development data is disposable. Reset and reseed instead of migrating. Do not fingerprint, snapshot
   or preservation-check records for a dev build. Do not reset another thread's environment or the

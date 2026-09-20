@@ -85,6 +85,7 @@ add narrative here. V46–V56 were the abandoned Opus pilot and are retired ids.
 | V72 | [Live compiled ability effects](V72-live-compiled-effects.md) | Merged |
 | V73 | [Headless Forge character counterparts](V73-forge-headless-counterparts.md) | Merged (via V74) |
 | V74 | [Trait-granted abilities and active Dwarf runes](V74-trait-granted-abilities.md) | Merged |
+| V75 | [Quiet design language theme](../design-tokens.md) | Committed on branch `slice/V75` (`.worktrees/quiet-theme`), unmerged pending the user's look |
 | V76 | [Dragon Knight level one](V76-dragon-knight-level-one.md) | Merged |
 | V77 | [High Elf level one](V77-high-elf-level-one.md) | Merged |
 | V78 | [Memonek level one](V78-memonek-level-one.md) | Merged |
@@ -99,5 +100,5 @@ add narrative here. V46–V56 were the abandoned Opus pilot and are retired ids.
 | V87 | [Core library seeding](V87-foes-library-seeding.md) | Merged |
 | V88 | [Compiled potency conditions with automatic save ends](V88-compiled-potency-conditions.md) | Merged and published (`a0a700a`) |
 | V89 | [Reusable test foundation](V89-test-foundation.md) | Merged |
-| V90 | [Check pipeline speed](V90-check-pipeline-speed.md) | Committed on branch `slice/V90` (`.worktrees/check-speed`, `f55764d`); TESTER pass; awaiting review and DEPLOY2 hand-off |
-| V91 | [Process trim](V91-process-trim.md) | In progress |
+| V90 | [Check pipeline speed](V90-check-pipeline-speed.md) | Merged (with V91); TESTER pass on `f55764d` |
+| V91 | [Process trim](V91-process-trim.md) | Merged |

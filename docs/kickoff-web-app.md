@@ -16,7 +16,7 @@ the product or a request to build every fuller-V1 feature.
 
 ## Read first and establish current state
 
-Read `AGENTS.md`, `agent.MD`, `CLAUDE.md`, `docs/build/README.md` and your assigned slice under
+Read `AGENTS.md`, `AGENTS.md`, `AGENTS.md`, `docs/build/README.md` and your assigned slice under
 `docs/build/`, `docs/web-app-build-handoff.md`, `docs/pre-alpha-design-gaps.md`,
 `docs/v1-spec-checkpoint.md`, `docs/v1-tech-stack-spec.md`, `docs/development-process.md`, and
 `docs/rules-adaptation-principles.md`.
