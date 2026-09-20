@@ -1,8 +1,8 @@
 # Astra character delivery
 
 Status: the six initial level-one ancestries are delivered through V74. The user has authorized
-[the remaining six-ancestry batch, V76–V82](V82-remaining-ancestries.md); implementation and
-runtime acceptance are in progress. The Opus pilot remains
+[the remaining six-ancestry batch, V76–V82](V82-remaining-ancestries.md); implementation, independent reviews and hosted headless/Forge acceptance have passed.
+The batch is merged/live as `1fa8aac`, with both apps passing public API acceptance. The Opus pilot remains
 [abandoned without reuse](../decisions/2026-09-19-opus-pilot-dead-end.md). This document owns
 the replacement character workflow; [V44](V44-character-option-delivery.md) owns its delivery
 scope, and [the build process](README.md) retains project-wide review and merge rules.

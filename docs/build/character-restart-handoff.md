@@ -1,6 +1,7 @@
 # Character wizard restart handoff
 
-Status: all twelve level-one ancestry implementations are on `slice/V82`; hosted acceptance passed; main/shared-app delivery is in progress. Six previously completed ancestries (Devil, Polder, Dwarf,
+Status: all twelve level-one ancestries are complete for the wizard, merged into main as
+`1fa8aac`. Hosted and shared-main apps are updated, with 28/28 public-API scenarios passing on each. Six previously completed ancestries (Devil, Polder, Dwarf,
 Human, Hakaan, Orc) are joined by Dragon Knight, High Elf, Memonek, Revenant, Time Raider and
 Wode Elf. [V82](V82-remaining-ancestries.md) owns this delivery.
 
@@ -8,7 +9,9 @@ Wode Elf. [V82](V82-remaining-ancestries.md) owns this delivery.
 
 Hosted development: <https://salient-dev.rdxx.workers.dev>, backend `dev:different-bat-943`.
 Application source `8d5559f`, Worker `ff4da11e-6772-4e3c-bdd4-afd2fc88b000`, 567 reference entries.
-Main remains `589d357` until acceptance completes. Preserve independent engine/UI peer work.
+Shared main runs `1fa8aac` at <https://salient-dev-fc4f48cb09a0.tail41404c.ts.net>.
+Its application code matches the hosted candidate; comparator/evidence changes are also in main.
+Preserve independent engine/UI peer work; V75 theme remains on its own unmerged branch.
 
 Every implemented trait must be checked for granted abilities, including prose and conditional
 grants. Traits remain on the sheet alongside their actions. Dwarf active rune remains persisted

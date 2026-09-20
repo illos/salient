@@ -1,6 +1,7 @@
 # V82 — Complete the remaining level-one ancestries
 
-Status: implementation and hosted acceptance complete; main/shared-app delivery in progress.
+Status: complete — merged into main as `1fa8aac`; hosted and shared-main apps updated and
+public-API verified (28/28 each). [Retained evidence](evidence/V82/README.md).
 Candidate branch `slice/V82`, `.worktrees/remaining-ancestries`, starting at main `589d357`.
 User authorized all remaining wizard ancestries on 2026-09-20: Dragon Knight (V76), High Elf (V77),
 Memonek (V78), Revenant (V79), Time Raider (V80), Wode Elf (V81).

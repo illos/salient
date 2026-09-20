@@ -1,6 +1,6 @@
 # V80 — Time Raider level one
 
-Status: implemented in [V82](V82-remaining-ancestries.md); focused/full checks, independent reviews, hosted API proof and Forge acceptance pass. Main/shared-app delivery is tracked in V82.
+Status: complete and merged/live as `1fa8aac` through [V82](V82-remaining-ancestries.md); focused/full checks, independent reviews, hosted API proof and Forge acceptance pass. Hosted and shared-main API acceptance pass.
 Branch `slice/V80`; unit owns new content/evaluator/tests. Shared registration belongs to the lead.
 
 ## Source and behavior

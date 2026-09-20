@@ -43,6 +43,14 @@ retained unmodified. `comparison-fix.log` shows passing lint/types and an initia
 because untracked evidence was omitted from the transfer; after staging/sync, `pnpm check-links`
 passed 331 documents. This was an artifact-transfer issue, not an application failure.
 
-Shared-main rollout and API proof are pending. No browser tests ran. Verification is bounded to
+Squashed integration `1fa8aac004d3557f9a5bbec062370ff416e1fa88` is merged into main.
+The commit gate passed; candidate history remains on `slice/V82`. Application/evaluator/headless
+source is byte-identical to deployed `8d5559f`; subsequent changes only affect the comparator/docs.
+Shared main on CT114 runs this integration at
+`https://salient-dev-fc4f48cb09a0.tail41404c.ts.net`, Compose `salient-dev-b90776c53141`.
+Reference reseed passed with 567 entries and unchanged pinned revision. Shared-main authenticated
+API proof passed **28/28 in 32.546 seconds**, retained in `main-headless.json`; `main-runtime.json`
+records actual source/target. The runner label `character-headless` is an allowlist label; the
+actual environment is the existing shared `main` stack. Temporary hosted credentials were removed. No browser tests ran. Verification is bounded to
 wizard completeness and source/action projection; manual gameplay and class coverage limits remain
 in the slice and current handoff.

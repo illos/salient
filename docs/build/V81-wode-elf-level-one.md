@@ -1,6 +1,6 @@
 # V81 — Wode Elf level one
 
-Status: implemented in [V82](V82-remaining-ancestries.md); focused/full checks, independent reviews, hosted API proof and Forge acceptance pass. Main/shared-app delivery is tracked in V82.
+Status: complete and merged/live as `1fa8aac` through [V82](V82-remaining-ancestries.md); focused/full checks, independent reviews, hosted API proof and Forge acceptance pass. Hosted and shared-main API acceptance pass.
 Branch: `slice/V81`. Owned files: `shared/content/ancestries/wode-elf/`,
 `shared/evaluate/ancestries/wode-elf.ts`, and `tests/character-v81-wode-elf.test.ts`.
 
