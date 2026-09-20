@@ -10,8 +10,9 @@ test-results/
 playwright-report/
 public/rules-data/
 
-# Package caches are runtime state, never selected application source.
+# Package and lint caches are runtime state, never selected application source.
 .pnpm-store/
+.cache/
 .wrangler/
 
 # Local Core-book reference scans and upstream archives.

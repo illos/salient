@@ -14,6 +14,7 @@ export default tseslint.config(
       'vendor/',
       'convex/_generated/',
       'test-results/',
+      '.cache/',
       'playwright-report/',
       '.playtest/',
       '.wrangler/',

@@ -8,7 +8,7 @@
     "node": ">=24.12.0"
   },
   "scripts": {
-    "check": "pnpm lint && pnpm check:engine && pnpm check:app && pnpm check-links && pnpm check-vendor && pnpm content:check && pnpm supporting:check && pnpm foes:check && pnpm compiled:check && pnpm build",
+    "check": "pnpm lint && pnpm check:engine && pnpm rules:ingest && pnpm check:app && pnpm check-links && pnpm check-vendor && pnpm content:check && pnpm supporting:check && pnpm foes:check && pnpm compiled:check && pnpm build:web",
     "test": "vitest run --project engine",
     "play": "node src/cli.ts",
     "demo": "node src/cli.ts demo",
@@ -19,7 +19,8 @@
     "audit:abilities": "node scripts/audit-ability-grammar.ts",
     "dev": "pnpm rules:ingest && vite --host 0.0.0.0",
     "dev:backend": "convex dev",
-    "build": "pnpm rules:ingest && tsc -p tsconfig.web.json && vite build && node scripts/check-web-budget.ts",
+    "build": "pnpm rules:ingest && tsc -p tsconfig.web.json && pnpm build:web",
+    "build:web": "vite build && node scripts/check-web-budget.ts",
     "check:engine": "tsc --noEmit && vitest run --project engine",
     "check:app": "tsc -p tsconfig.web.json && vitest run --project app --project scripts",
     "test:app": "vitest run --project app",
@@ -31,7 +32,7 @@
     "content:seed": "node scripts/seed-content.ts",
     "setup:local": "node scripts/setup-local.ts",
     "prepare": "simple-git-hooks",
-    "lint": "eslint . && prettier --check .",
+    "lint": "eslint . --cache --cache-location .cache/eslint/ --cache-strategy content && prettier --check . --cache --cache-location .cache/prettier --cache-strategy content",
     "format": "prettier --write .",
     "check-links": "node scripts/check-links.ts",
     "check-vendor": "node scripts/check-vendor.ts",

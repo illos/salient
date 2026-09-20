@@ -4,7 +4,9 @@ import { defineConfig } from 'vitest/config';
 // from their imports; the app project holds the convex-test suites; scripts covers the process tooling.
 export default defineConfig({
   test: {
-    // Keep simultaneous workers within the dedicated CT114 job memory budget.
+    // One worker fits the dedicated CT114 job memory budget; runtime/compose.yaml pins the same value
+    // through VITEST_MAX_WORKERS. That variable overrides this setting, so a host with spare memory can
+    // run e.g. `VITEST_MAX_WORKERS=3 pnpm check:app` without a code change.
     maxWorkers: 1,
     projects: [
       { test: { name: 'engine', include: ['tests/*.test.ts'], environment: 'node' } },

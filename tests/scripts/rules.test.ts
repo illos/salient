@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
+import { readFileSync } from 'node:fs';
 import { beforeAll, describe, expect, it, test } from 'vitest';
 import { articleParts, buildRules, plainText, renderArticle } from '../../scripts/ingest-rules';
 import MiniSearch from 'minisearch';
@@ -127,9 +128,30 @@ test('prebuilt index ranks every unique exact title first, supports prefixes, ty
     expect(built.catalog.entries.find(e => e.id === result.id)?.book).toBe('monsters');
 }, 120_000);
 
-test('regenerates identical articles, metadata and search from the same pin', () => {
-  expect(buildRules().outputs).toEqual(built.outputs);
-}, 120_000);
+test('matches the rules data that pnpm rules:ingest wrote from the same pin, byte for byte', () => {
+  // The CLI generated public/rules-data in a separate process. Equality with this process's build
+  // proves the pipeline is deterministic and the served data is current, without a second in-process
+  // build (about 30 s). `pnpm check` runs the ingest before this project for that reason.
+  const generated = new URL('../../public/rules-data/', import.meta.url);
+  for (const [path, text] of built.outputs) {
+    let written: string;
+    try {
+      written = readFileSync(new URL(path, generated), 'utf8');
+    } catch {
+      throw new Error(
+        `public/rules-data/${path} is missing; run pnpm rules:ingest before this suite.`,
+      );
+    }
+    if (written !== text) {
+      let at = 0;
+      while (at < text.length && written[at] === text[at]) at++;
+      throw new Error(
+        `public/rules-data/${path} differs from a fresh build at offset ${at}: ` +
+          `written ${JSON.stringify(written.slice(at, at + 80))}, built ${JSON.stringify(text.slice(at, at + 80))}`,
+      );
+    }
+  }
+});
 
 function verify(reference: RuleReference) {
   const target = resolveRule(built.catalog, reference);
