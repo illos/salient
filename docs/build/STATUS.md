@@ -102,4 +102,4 @@ add narrative here. V46–V56 were the abandoned Opus pilot and are retired ids.
 | V89 | [Reusable test foundation](V89-test-foundation.md) | Merged |
 | V90 | [Check pipeline speed](V90-check-pipeline-speed.md) | Merged (with V91); TESTER pass on `f55764d` |
 | V91 | [Process trim](V91-process-trim.md) | Merged |
-| V92 | [Shadow level one](V92-shadow-level-one.md) | In progress (`slice/V92`, `.worktrees/class-shadow`) |
+| V92 | [Shadow level one](V92-shadow-level-one.md) | Reviewed and tested on `2b46094`; handed to DEPLOY2 |

@@ -151,3 +151,93 @@ All from `/srv/presidium/projects/salient/code/.worktrees/class-shadow` at tip `
 | Ad-hoc evaluator probes (Shadow with/without kit, Fury Berserker with/without kit, Stormwight pool, Elementalist) via `evaluateCharacter`/`isAvailable`/`poolOf` | values reported in sections 1, 2 and 4 |
 
 No pnpm scripts were run. No source file was edited.
+
+## Test commits review (2026-09-20)
+
+Reviewer: Fable fresh-context reviewer. Scope: `9f287bb..2b46094` (`9c35cd4` ledger and Forge
+tooling, `ce2c8a0` tests, `0bd2263` docs and ledger formatting, `4d6be66` artifact regeneration,
+`ea28420` Eviscerate proof, `2b46094` docs). Read-only apart from this section.
+
+**Verdict: pass.**
+
+### 1. Expected values trace to the ledger or the pinned Compendium
+
+- `tests/character-v92-shadow.test.ts` reads every number and list from
+  `tests/fixtures/v92-shadow-expected.json` (lines 9, 18-22, 43-75); the only literals are the
+  Insight costs 3 and 5 (lines 77-86, `feature/shadow/level-1/shadow-abilities.md` "costs 3 insight"
+  / "costs 5 insight"), the college triggered-action table (lines 87-92,
+  `feature/shadow/level-1/college-triggered-action.md`) and the `kit.md` quote (lines 144-145,
+  verbatim). No evaluator output is consulted.
+- `tests/app/shadow-character.test.ts` uses witness 1 (lines 14, 31-39, 57-58); the kit bonus
+  `[1,1,1]` (lines 60-67) is `kit/cloak-and-dagger.md` "Melee Damage Bonus: +1/+1/+1", "Ranged
+  Damage Bonus: +1/+1/+1". Harlequin swap expectations (Lie, I'm No Threat, Clever Trick) match
+  `shadow-college.md`, `1st-level-college-features.md`, `college-triggered-action.md`.
+- `tests/app/potency-conditions.test.ts:592-598` (Eviscerate): `feature/ability/shadow/level-1/
+  eviscerate.md` gives `cost: 3 Insight`, tiers `4/6/10 + A damage; A < WEAK/AVERAGE/STRONG,
+  bleeding (save ends)`, target "One creature". Witness 1 has A 2, potency 0/1/2 (`class/shadow.md`
+  A−2 / A−1 / A). Foe scores read from `shared/content/foes/catalog.json`: dwarf-warden `agility: 0`,
+  goblin-warrior `agility: 2`. Dice: 4+4+2 = 10 (≤11, tier 1), 6+6+2 = 14 (12-16), 8+8+2 = 18 (17+).
+  Damage 4/6/10 + 2 + kit 1 = 7/9/13; Insight 9 → 6 → 3 → 0. All consistent with the source.
+- Ledger spot checks against the kit files, independently of the evaluator:
+  - Witness 4 (Panther, `kit/panther.md`): Stamina 18 + 6 per echelon = 24; stability 0 + 1 = 1;
+    disengage 1 (no disengage bonus); speed 5 + 1 = 6; recovery 24/3 = 8; winded 12. Matches.
+  - Witness 2 (Sniper, `kit/sniper.md`): speed 5 + 1 = 6; Stamina 18 (no Stamina bonus);
+    disengage 1 + 1 = 2. Matches.
+  - Witness 1 (Cloak and Dagger): Stamina 18 + 3 = 21, speed 5 + 2 = 7, disengage 2, winded 10.
+    Witness 3 (Swashbuckler, `kit/swashbuckler.md`): Stamina 21, speed 5 + 3 = 8, disengage 2. Match.
+  - Base speed 5 / stability 0 / size 1M from `rule/character/speed.md` ("Unless otherwise noted
+    ... size 1M and has speed 5 and stability 0"); disengage 1 from
+    `feature/common/move-actions/disengage.md`; potency 0/1/2 for A 2 from `class/shadow.md`.
+- `0bd2263` reformatted the ledger: parsed JSON before and after is byte-identical when
+  re-serialised (checked), so no value changed.
+
+### 2. Redundancy and failure naming
+
+Each test carries a comment naming the failure it catches (engine test lines 36-37, 96-97,
+148-149, 180-181; app test lines 19-21; Eviscerate lines 592-598). The college replacement is
+exercised at the engine level (`pruneUnavailable` removed list), the persisted app level
+(`characterWizard.transition` + `characters.save` + sheet readback) and the headless gate; these are
+different layers, not duplicates. Observation, not blocking:
+`tests/app/shadow-character.test.ts:62-67` calls `actorRollFacts` from `convex/lib/resolve` directly
+on the persisted document rather than through a public query; the kit bonus is independently proven
+through the public `/ability use` route in the Eviscerate test (`kitBonus: 1`, line 669).
+
+### 3. Regenerated artifacts are additive
+
+`git show 4d6be66 --stat`: report.json +6640/−, support.json +2000/−, report.md, support.md,
+`v88-audit-baseline.json` +19. Name and id set diff before/after for
+`docs/build/evidence/V26/coverage-audit-2026-09-20/report.json` (55 names added, 0 removed, 0 ids
+removed) and `docs/build/evidence/V72/support.json` (18 names added, 0 removed, 0 ids removed).
+The 1542 removed lines are re-serialised summary tables, the content hash, aggregate counts and
+reordered existing entries; no per-ability row is removed from `report.md` or `support.md`.
+`v88-audit-baseline.json` adds the 19 `hero-standalone|...feature.ability.shadow.level-1/*` ids and
+removes none. `tests/scripts/live-compiled-report.test.ts:23-24` adds Eviscerate to the reachable
+list with a comment.
+
+### 4. Forge normalisation cannot mask a different ability
+
+`scripts/forge/shadow-witnesses.ts:16-21` and `scripts/forge/run-shadow.ts:19-28` apply only:
+curly → straight apostrophe, NFD decomposition with combining-mark strip, lowercase. Across the 626
+distinct `name:` values in `vendor/steel-compendium/en/unified/md/feature/ability/**` and `kit/*`
+the normalised keys have zero collisions, so two genuinely different abilities cannot compare
+equal. `shadow-witnesses.ts:76-81` additionally requires the matching Forge ability to carry the
+same `cost` for the decision slot.
+
+### 5. Headless scenario
+
+`scripts/headless/character-scenarios.ts:253-326` uses `characterWizard:discover`,
+`characters:create`, `characters:sheet`, `characterWizard:transition`, `characters:save` and the
+runner's `saved()` readback only; it asserts persisted values (vitals, Insight resource and start
+value, ability costs, source-bearing ability text, college skill and grants after the saved
+replacement, kit retained). No internal function or direct table access.
+
+### Commands run (tip `2b46094`)
+
+| Command | Result |
+| --- | --- |
+| `node_modules/.bin/vitest run tests/character-v92-shadow.test.ts` | 1 file, 4 tests passed, 0 failed (593 ms) |
+| `node_modules/.bin/vitest run --project app tests/app/shadow-character.test.ts tests/app/potency-conditions.test.ts` | 2 files, 8 tests passed, 0 failed (11.31 s) |
+| `node_modules/.bin/vitest run --project scripts tests/scripts/audit-ability-grammar.test.ts tests/scripts/live-compiled-report.test.ts` | 2 files, 25 tests passed, 0 failed (2.28 s) |
+| Ad-hoc name/id set diffs on the two regenerated JSON reports, normalisation collision check over Compendium ability and kit names, JSON equality of the ledger across `0bd2263` | as reported above |
+
+No pnpm scripts were run. No source or test file was edited.

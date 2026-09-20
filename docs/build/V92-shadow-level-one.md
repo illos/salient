@@ -142,3 +142,9 @@ any other class. Spec sections: `docs/character-wizard-spec.md#3-decision-system
   Melee-or-Ranged weapon ability regardless of the distance used (no melee/ranged mode argument);
   invisible for Cloak and Dagger (+1 both), wrong for a Sniper Shadow using Eviscerate at ranged 5.
   Pre-existing, outside this slice; recorded for the engine track.
+- 2026-09-20: TESTER `test-V92-2b46094-1` PASS: `CI=true pnpm check` exit 0 in 165 s (367 engine +
+  577 app/scripts tests), Forge Shadow counterparts on CT114 4/4 exit 0, local headless character
+  suite 36/36 exit 0 in 137 s including the Shadow scenario; artifacts
+  `/srv/presidium/projects/salient/test-artifacts/V92-2b46094`. Implementation review pass (content
+  and evaluator on `9f287bb`, test commits on `2b46094`) in `docs/build/reviews/V92-implementation-review.md`;
+  rules review pass. Handed to DEPLOY2 for main integration and the dev promotion.
