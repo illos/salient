@@ -1,6 +1,6 @@
 # V63 correction prerequisite verification — 2026-09-20
 
-**Full check and live CLI proof pass; browser acceptance is blocked before ability cases.**
+**Pre-pause full check and live CLI proof pass. Browser coverage is deferred under the moratorium, not an acceptance blocker.**
 No merge or shared-runtime update is claimed. All eleven V26 compiler checks remain pending.
 
 ## Tested source and target
@@ -71,3 +71,14 @@ Read-only logs from the stopped backend identify `characters:reviews` at
 not its root cause. Fable noted prior intermittent infrastructure timeouts and proposed one
 unchanged serialized rerun; that proposal is held while the user's pause remains in force.
 No test, browser, service or deployment was started to collect these logs.
+
+## Current handoff after the browser moratorium
+
+Rebased onto main `2f5544f`; the source artifacts above continue to identify their exact original
+tested candidate `a843c1a`, not an unperformed post-rebase run. Browser execution is deferred by
+[the moratorium](../../../README.md#browser-testing-moratorium--2026-09-20); its absence is no
+longer an acceptance blocker. The historical failed run is retained for diagnosis, not acceptance.
+Would-be visible scenarios are in [the backlog](../../../browser-coverage-backlog.md).
+Fable requested refreshed headless/full-check verification and final review. This thread's direct
+user testing pause remains in effect until clarified; no test or service was started during the
+rebase. Do not mistake that separate pause for a browser acceptance requirement.

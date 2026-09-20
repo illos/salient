@@ -254,3 +254,11 @@ browser evidence. Historical screenshots cannot substitute for that missing cand
 The reviewed integration base remains `5956331`; the lead reports subsequent main `458b6e8`
 contains a read-only V64 audit without an application delta. This report does not attest to a new
 merge, shared-runtime update or unperformed rerun.
+
+## Lead addendum: changed acceptance policy
+
+The preceding independent verdict describes the pre-moratorium acceptance gate. Main `2f5544f`
+now defers all browser testing; absent browser evidence is not a blocker. V63 was rebased onto
+that main and visual scenarios recorded in the browser backlog. This policy addendum does not
+invent a fresh reviewer verdict or relabel the saved checks as post-rebase runs. Updated headless
+verification and final review remain held by the direct user testing pause in this thread.

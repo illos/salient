@@ -811,3 +811,15 @@ After the user paused testing, read-only stopped-backend logs identified `charac
 at `2026-09-20T01:50:02.754170801Z` as the failing query; `table:roster` also logged 873 ms.
 Fable's proposed single unchanged rerun is held under the user pause. Non-test documentation,
 review and peer handoff continue. This identifies a query, not a confirmed root cause.
+
+### 2026-09-20 — Moratorium handoff update
+
+Rebased V63 onto main `2f5544f`, preserving main's V64 audit and V66 browser-harness registration.
+Only STATUS rows conflicted; application changes replayed cleanly. Prior test/readback artifacts
+retain the exact pre-rebase identity and are not relabeled as fresh proof. Under the new
+[browser moratorium](README.md#browser-testing-moratorium--2026-09-20), a missing browser run
+is no longer an acceptance blocker. Added correction controls and ten-ability visual scenarios
+to the [backlog](browser-coverage-backlog.md), using its `spot` priority vocabulary.
+Historical blocked-review language above describes the gate before the moratorium, not the
+current browser requirement. Refreshed CLI/full-check verification and final review are held
+by this thread's direct user testing pause until clarified; no runtime/test command was started.
