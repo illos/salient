@@ -313,10 +313,10 @@ const slug = (value: string) =>
 
 /** The blockquote block of one stat-block feature, byte-exact (R03 AbilityProjection.text). */
 function statBlockFeatureText(text: string, name: string): string {
-  const starts = [...text.matchAll(/^> [^\s*|>-]+ \*\*[^*\n]+\*\*[ \t]*$/gm)];
+  const starts = [...text.matchAll(/^>[ \t]+[^\s*|>-]+[ \t]+\*\*[^*\n]+\*\*[ \t]*$/gm)];
   const index = starts.findIndex(match => {
     const title = plainText(match[0]).replace(/^[^\p{L}\p{N}]+/u, '');
-    return title === name || title.startsWith(`${name} (`);
+    return title === name || (title.startsWith(name) && /^[ \t]+\(/.test(title.slice(name.length)));
   });
   if (index < 0) return '';
   const start = starts[index]!.index!;
