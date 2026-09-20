@@ -1,63 +1,54 @@
 # Character wizard restart handoff
 
-Status: the next bounded batch is implemented and live headless verified on 2026-09-20.
-Hakaan and Orc join Devil, Polder, Dwarf and Human. Application changes remain on `slice/V69`
-in `.worktrees/character-coverage`; they are not merged into main. The remaining acceptance
-blocker is the authentic Forge-reference requirement, which currently requires browser capture.
-Do not silently waive it or resume browser activity.
+Status: six implemented level-one ancestries and trait-granted actions are merged into main
+through `b73cb8d` on 2026-09-20. Devil, Polder, Dwarf, Human, Hakaan and Orc have passing
+headless character journeys and bounded Forge comparisons. V74 shared-main rollout and its 27-scenario public-API proof pass.
+See [V74 evidence](evidence/V74/README.md).
 
 ## Current source and running app
 
-Backend and frontend source: `ab0f2fd875155d929f5efed201b14d96a821f4f7`.
-Hosted development: <https://salient-dev.rdxx.workers.dev>, backend `dev:different-bat-943`,
-Worker `7830be2c-15d9-4c6f-8634-25c0edf55988`; 515-entry content snapshot.
-The candidate preserves V65 and main through V63 `b6109b0`. Main's later V67 pure compiler
-is not in this candidate and has no deployed-runtime effect. Preserve peer changes when integrating.
+[V74](V74-trait-granted-abilities.md) closes the missing trait-action grants found by the
+[V73 comparison](V73-forge-headless-counterparts.md). The project-wide completion gate now requires
+checking every implemented trait for granted abilities, including prose and conditional grants.
+Traits remain on the sheet alongside their actions. Dwarf active rune is persisted play state;
+changing it grants only the applicable maneuver and participates in table undo/redo.
 
-V65 at `acc3df1` remains preserved in `.worktrees/character-headless`; do not rebuild it.
-Its original 22-scenario passing proof and repaired auth-key/type errors remain historical evidence.
-The current [V69 record](V69-character-coverage.md) owns the new batch and coverage inventory.
+Hosted development: <https://salient-dev.rdxx.workers.dev>, backend `dev:different-bat-943`.
+Application source `f28ed6c`; test-only `a2a10df` supplies the live Voice recipient.
+Worker `135e58f0-2918-49fb-9806-e70c8c42ce74`; existing 515-entry content preserved.
+Main contains current peer work through V68 and V67. V72 engine work remains independent;
+preserve its adapters and V74's ancestry projection when integrating.
 
-## Verified and pending
+## Verified scope and limits
 
-- Full remote `pnpm check`: 737 tests plus lint, types, source/content validation and build pass.
-- Live authenticated headless suite: all 26 scenarios pass in 82.857 seconds, zero failures/skips.
-- All new Hakaan/Orc purchases have saved readback witnesses; Artisan targets persist without
-  granting skills and disappear after parent replacement. Hakaan replacement removes size/immunity.
-- Existing six-ancestry creation, privacy, admission/review, private inheritance, Fury advancement,
-  history/restoration, stale edits and combat locks pass. This is sampled workflow proof.
-- Independent implementation and fresh pinned-source reviews pass for all six ancestry candidates.
-- Genuine Forge option comparisons remain incomplete for Devil, Dwarf, Human, Hakaan and Orc.
-  Polder retains its prior authentic counterpart. Twelve Devil skill choices still have evaluator
-  coverage without individual live witnesses. No full rules-combination certification is claimed.
+- Full checks pass: 310 engine and 481 app/scripts tests, lint, types, pinned sources and build.
+- Hosted authenticated public API: 27/27 scenarios pass, including rune persistence, permissions,
+  stale/retry handling, campaign grants, undo/redo and manual Voice use.
+- Forge: two authentic calibrations and 31/31 saved counterpart comparisons pass. All seven prior
+  missing-ability discrepancies are resolved; original failures remain in the evidence.
+- Independent implementation and pinned-source reviews pass. All 40 ancestry traits were checked;
+  12 actions are sourced in the new catalog, including rune carving and three conditional maneuvers.
+- Gameplay effects remain manually resolved. This does not automate damage, conditions, Voice
+  recipients, detection, light effects, Doomsight approval or long-duration trait effects.
+- Forge comparison is bounded to the constructed level-one families. Orc Artisan targets lack
+  structured Forge counterparts; Salient persistence/no-extra-skill proof covers that explicit gap.
+  Ability-name parity is not combat-mechanics parity or exhaustive rules-combination certification.
 
-[Evidence and reviews](evidence/V69/README.md) retain both the initial new assertion typing failure
-and the successful corrected full check. No timeout was raised and the live suite ran once.
-All our jobs ended, temporary deployment credentials were removed, and the CT114 heavy window
-was released to peers. Hosted private services, `character-restart` and the old `characters`
-environment remain stopped. Coordinate a new window before any further workload.
+See [V74 evidence](evidence/V74/README.md) for actual commits, targets, failures and successful runs.
+V69/V65 evidence remains historical; do not rebuild those candidates or repeat passing checks
+without a relevant change. Visual scenarios remain in the browser coverage backlog.
 
-## Resume constraints and next decision
+## Resume constraints
 
-Read `agent.MD`, [Astra workflow](astra-character-workflow.md), [V44 scope](V44-character-option-delivery.md),
-[V69](V69-character-coverage.md), and the relevant character specification before continuing.
-Check Chords and current main first. Do not repeat passing verification without a relevant change.
+Read `agent.MD`, [Astra workflow](astra-character-workflow.md), [V44 scope](V44-character-option-delivery.md)
+and the relevant character specification. Check Chords and current main before claiming the next
+bounded unit. Use a free suitable local or remote environment under the current runbook.
 
-The user permanently abandoned the entire [Opus pilot](../decisions/2026-09-19-opus-pilot-dead-end.md).
-No code, tests, fixtures, captures, research or processes from that pilot may be reused. Use native
-Astra agents and current main for subsequent bounded units. Every test must catch a meaningful
-failure and add coverage; reject redundant or implementation-mirroring tests.
-
-The [browser moratorium](README.md#browser-testing-moratorium--2026-09-20) remains absolute until
-V66 repair is implemented. V66 has not started and requires the user's go. No browser, Playwright
-or headless Chromium testing; visual scenarios belong in the browser backlog. All workloads run
-on CT114, live character proof through authenticated public CLI/API routes on hosted development.
-
-Before main integration, resolve the conflict between the existing authentic website-export gate
-and the moratorium with the user. A source/rules pass does not itself waive Forge evidence. Once
-that policy is settled, prepare the reviewed candidate against then-current main and complete the
-normal integration and playable-app checks, preserving peer work. Do not start a third new ancestry
-merely to avoid closing this batch. Remaining ancestry/class gaps are listed in V69.
+The [Opus pilot](../decisions/2026-09-19-opus-pilot-dead-end.md) is permanently abandoned without
+reuse. Use fresh native agents; every test must catch a meaningful failure and add coverage.
+The [browser moratorium](README.md#browser-testing-moratorium--2026-09-20) remains in effect until
+V66 is authorized and implemented. Programmatic Forge counterparts are approved; website capture
+is not required. No browser, Playwright or headless Chromium tests.
 
 Compendium pin: `fb83a789da8f0327a389c277a0c790b1648d5810`.
-Forge pin: `5a846aadb623a9855a023e9403bb887a956c341f`. Read rules only from the pinned Compendium.
+Forge pin: `5a846aadb623a9855a023e9403bb887a956c341f`. Read game rules only from pinned Compendium.

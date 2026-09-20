@@ -55,7 +55,7 @@ must be separately recorded; this branch has performed neither.
 
 | Id | Slice | Depends on | Status | Owner |
 | --- | --- | --- | --- | --- |
-| V74 | [Trait-granted abilities and active Dwarf runes](V74-trait-granted-abilities.md) | V69/V73 candidate | Verified — 791 checks, live API 27/27 and Forge 31/31; main/shared-app integration in progress | WIZARD, slice/V74 |
+| V74 | [Trait-granted abilities and active Dwarf runes](V74-trait-granted-abilities.md) | V69/V73 candidate | Complete — merged/live b73cb8d; 791 checks, hosted and shared-main API 27/27, Forge 31/31 | WIZARD, slice/V74 |
 | V73 | [Headless Forge character counterparts](V73-forge-headless-counterparts.md) | V69 verified candidate | Verified — calibration and 31/31 saved API comparisons pass after V74 grants; historical seven failures retained | WIZARD, slice/V73 |
 | V24 | [Character wizard assessment and delivery proposal](V24-character-wizard-assessment.md) | A09; assesses A02/V21 | Assessment complete; V25 implementation verified | Codex, character wizard thread |
 | V25 | [Shared Fury/Bethell wizard](V25-two-class-wizard.md) | A09, R01–R03, S01, A01; V24 docs | Merged and live verified — `4cb3f1f`, closeout `a3a144f`; 433 tests, both character journeys and table audit pass | Codex character team |
@@ -353,28 +353,24 @@ V46–V56 are retired Opus pilot IDs, not pending assignments. Allocate fresh ID
 
 ## Astra delivery and verification queue — 2026-09-20
 
-The initial four ancestry candidates are preserved in the V69 current-main integration candidate.
-V65 proved authenticated creation, choices, persistence and lifecycle operations on hosted dev.
-The user authorized the next bounded pair, Hakaan and Orc, on 2026-09-20. Verification gates
-merges, not independent implementation. No Opus material may be reused.
+The six-ancestry candidate is merged into main through `b73cb8d`. V74 supplies the missing
+trait-granted actions and active Dwarf rune state. Full checks, independent reviews, 27 hosted
+headless journeys and 31 Forge comparisons pass; shared-main API proof also passes 27/27.
+No Opus material was reused.
 
-| Id | Unit | Implementation | Verification / next action |
+| Id | Unit | Implementation | Verification |
 | --- | --- | --- | --- |
-| V57 | [Devil level one](V44-character-option-delivery.md) | Candidate `ae773b0`, preserved in V69 | Live headless journey passes; twelve newly enabled Silver Tongue counterparts and final reviews remain |
-| V58 | [Polder level one](V44-character-option-delivery.md) | Candidate `2291b29`, preserved in V69 | Live headless and retained authentic Forge comparison pass; integration checks/final reviews remain |
+| V57 | [Devil level one](V44-character-option-delivery.md) | Merged via V74 | All 13 Forge witnesses, live API and independent review pass |
+| V58 | [Polder level one](V44-character-option-delivery.md) | Merged via V74 | Both Forge witnesses, live API and independent review pass |
 | V59 | [Closeout verification blocker](V59-closeout-timeout.md) | Historical investigation `4c990eb` | Browser investigation stopped under moratorium; not a character completion gate |
-| V60 | [Dwarf level one](V44-character-option-delivery.md) | Candidate `99f3358`, preserved in V69 | Full branch checks and live headless witnesses pass; three Forge counterparts and final reviews remain |
-| V61 | [Human level one](V44-character-option-delivery.md) | Candidate `dbc0818`, preserved in V69 | Full branch checks and live headless witnesses pass; three Forge counterparts and final reviews remain |
+| V60 | [Dwarf level one](V44-character-option-delivery.md) | Merged via V74 | Three Forge witnesses plus persisted rune/history proof pass |
+| V61 | [Human level one](V44-character-option-delivery.md) | Merged via V74 | Three Forge witnesses, live API and independent review pass |
 
-Lead owns shared character wiring and the named CT114 `hosted` verification environment; heavy
-jobs are coordinated with peers. Browser tests remain prohibited. The stopped `characters` and
-`character-restart` environments stay stopped. No ancestry candidate is yet fully accepted or
-merged. Authentic Forge comparison is a separate recorded gate; new website captures cannot run
-during the moratorium and fabricated exports cannot replace them.
-
-V62 frontend source `1e7896c` and V65 backend source `b1f50c8` are the last published character
-checkpoint. V65's 22 passing headless scenarios are sampled workflow proof, not exhaustive rules
-certification. V69 carries forward this evidence and adds verification for its changed code.
+Use a free suitable local or remote test environment and coordinate shared workloads. Browser
+tests remain prohibited. The stopped `characters` and `character-restart` environments stay
+stopped. User-approved programmatic Forge counterparts replace website capture for this proof;
+bounded comparison limits, including Orc Artisan target representation, remain explicit.
+[V74 evidence](evidence/V74/README.md) owns current results; V62/V65/V69 records remain history.
 
 
 ## Browser testing moratorium — 2026-09-20
@@ -395,9 +391,9 @@ blocker; do not record a browser result as pending acceptance. The
 | --- | --- | --- | --- |
 | V65 | [Programmatic character verification](V65-character-headless.md) | `slice/V65`, `.worktrees/character-headless`; discovery/transition routes, shared UI transition and browser-independent runner | Backend fix published `b1f50c8`; original 712 unit/backend/script tests pass; type error resolved; all 22 remote headless scenarios pass in 73.547s, zero skips; no browser; ancestry acceptance/main integration separate |
 
-Discovery and shared choice-transition routes are implemented on the candidate and live backend.
-Both original blockers are fixed; all 22 live scenarios and the normal build passed. The UI refactor
-has not yet been published. V69 resumes integration and extends coverage; no browser test is required
+Discovery and shared choice-transition routes, including their UI integration, are merged through
+V74 and published. Both original blockers are fixed; the original 22-scenario proof is retained.
+V74 extends and re-verifies that coverage; no browser test is required
 or permitted during the moratorium. See [V65](V65-character-headless.md) for retained failed and
 passing evidence.
 
@@ -406,6 +402,6 @@ passing evidence.
 
 | Id | Slice | Status | Owner |
 | --- | --- | --- | --- |
-| V69 | [Current-main character integration and headless coverage](V69-character-coverage.md) | In progress on `slice/V69`, `.worktrees/character-coverage`; preserved V65 candidate; V74 integration verifies 791 checks, 27 live API scenarios and 31 Forge counterparts; final shared-main update in progress | Astra lead |
-| V70 | [Hakaan level one](V70-hakaan-level-one.md) | In progress on `slice/V70`, `.worktrees/astra-hakaan`; all choices implemented; V74 full checks, live API and Forge counterparts pass; shared-main integration in progress | Astra Hakaan implementer |
-| V71 | [Orc level one](V71-orc-level-one.md) | In progress on `slice/V71`, `.worktrees/astra-orc`; all choices including Artisan implemented; V74 full checks/live API pass; Forge comparisons pass within documented Artisan boundary; shared-main integration in progress | Astra Orc implementer |
+| V69 | [Current-main character integration and headless coverage](V69-character-coverage.md) | Complete via V74; preserved V65 candidate; V74 integration verifies 791 checks, 27 live API scenarios and 31 Forge counterparts; merged/live b73cb8d; shared-main API 27/27 | Astra lead |
+| V70 | [Hakaan level one](V70-hakaan-level-one.md) | Complete via V74; all choices implemented; V74 full checks, live API and Forge counterparts pass; merged/live b73cb8d; shared-main API 27/27 | Astra Hakaan implementer |
+| V71 | [Orc level one](V71-orc-level-one.md) | Complete via V74; all choices including Artisan implemented; V74 full checks/live API pass; Forge comparisons pass within documented Artisan boundary; merged/live b73cb8d; shared-main API 27/27 | Astra Orc implementer |

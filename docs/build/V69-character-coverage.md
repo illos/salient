@@ -1,6 +1,6 @@
 # V69: Character integration and coverage continuation
 
-Status: implemented, reviewed and live headless verified; main merge blocked on authentic Forge counterparts. Primary track: characters. User resumed on 2026-09-20.
+Status: merged into main through V74 `b73cb8d`; full checks, reviews, hosted API 27/27 and Forge 31/31 pass. Shared-main rollout and 27/27 API proof pass; see [V74 evidence](evidence/V74/README.md). Primary track: characters. User resumed on 2026-09-20.
 Rules review: required for ancestry changes; no new mechanics in V65 integration.
 
 ## Scope and ownership

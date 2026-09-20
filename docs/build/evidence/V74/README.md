@@ -44,5 +44,14 @@ standalone persistence, all rune replacements/removal, duplicate/stale/unauthori
 campaign sheet/table grants, owner undo/redo, and manual Voice use against an admitted recipient.
 All existing character creation, progression, review/privacy and resource-preservation journeys pass.
 
-No browser run or automated gameplay-effect certification is claimed. Shared-main deployment
-verification is recorded separately after integration.
+No browser run or automated gameplay-effect certification is claimed. Main fast-forwarded to `b73cb8d`, then CT114 shared main was updated at the existing URL
+`https://salient-dev-fc4f48cb09a0.tail41404c.ts.net`. The first main run exposed its older reference
+content snapshot (`main-headless-old-content.json`); loading the pinned 515-entry content snapshot
+corrected that rollout omission without changing characters or campaign data. The subsequent
+shared-main authenticated run passes **27/27**, exit 0 in 27.484 seconds (`main-headless.json`).
+Runner and application are both CT114 main; `http://backend:3210` is its internal backend URL.
+
+Main integration uses the same application tree as the passing fullcheck and hosted proof;
+subsequent changes are generated type declarations, the reviewed target fixture, and documentation.
+Final canonical-checkout links pass; the sparse worktree's separate link attempt lacked vendor
+files and was not a content failure. No duplicate full build was needed for documentation.

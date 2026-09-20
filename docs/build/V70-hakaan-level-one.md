@@ -1,8 +1,8 @@
 # V70 — Hakaan level one
 
-Status: Hakaan candidate implemented, independently reviewed and live headless verified in V69.
-Full 737-test check and all 26 live scenarios pass. Authentic Forge counterparts remain pending;
-not merged into main. See [V69 evidence](evidence/V69/README.md).
+Status: Hakaan merged into main through V74 `b73cb8d`. Full checks, independent reviews,
+hosted API and Forge counterparts pass within the documented comparison scope.
+See [V74 evidence](evidence/V74/README.md) for current delivery and source limits.
 
 ## Scope and source expectations
 

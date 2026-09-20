@@ -1,6 +1,7 @@
 # V74 — Trait-granted abilities and active Dwarf runes
 
-Status: Verified candidate; main/shared-app integration in progress. Character track, WIZARD; `slice/V74`.
+Status: Complete — merged into main and deployed to hosted/shared development apps at `b73cb8d`.
+Character track, WIZARD; shared-main public API proof also passes 27/27.
 Starts from current main `e5c1cd8` plus the verified character candidate and V73 comparison tooling.
 Uses whichever suitable local or remote test environment is free; no browsers.
 

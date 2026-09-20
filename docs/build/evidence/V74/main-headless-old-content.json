@@ -1,0 +1,191 @@
+{
+  "runId": "def8e72f-21c2-4602-984d-084ae827b659",
+  "target": "http://backend:3210",
+  "source": "b73cb8d2bcad54e4b8a2c5e39329464df1a5f6f0",
+  "elapsedMs": 22478,
+  "results": [
+    {
+      "name": "discover decisions and preview without creating a character",
+      "status": "pass",
+      "elapsedMs": 316
+    },
+    {
+      "name": "Devil: complete creation, exact first-save retry and fresh persisted sheet",
+      "status": "pass",
+      "elapsedMs": 535
+    },
+    {
+      "name": "Polder: complete creation, exact first-save retry and fresh persisted sheet",
+      "status": "pass",
+      "elapsedMs": 559
+    },
+    {
+      "name": "Dwarf: complete creation, exact first-save retry and fresh persisted sheet",
+      "status": "fail",
+      "elapsedMs": 551,
+      "reason": "assertion-failed",
+      "location": "character-scenarios.ts:182:18",
+      "operator": "==",
+      "assertion": "Missing source-bearing trait Grounded",
+      "actual": null,
+      "expected": true
+    },
+    {
+      "name": "Human: complete creation, exact first-save retry and fresh persisted sheet",
+      "status": "fail",
+      "elapsedMs": 533,
+      "reason": "assertion-failed",
+      "location": "character-scenarios.ts:182:18",
+      "operator": "==",
+      "assertion": "Missing source-bearing trait Perseverance",
+      "actual": null,
+      "expected": true
+    },
+    {
+      "name": "Hakaan: complete creation, exact first-save retry and fresh persisted sheet",
+      "status": "fail",
+      "elapsedMs": 534,
+      "reason": "assertion-failed",
+      "location": "character-scenarios.ts:182:18",
+      "operator": "==",
+      "assertion": "Missing source-bearing trait Great Fortitude",
+      "actual": null,
+      "expected": true
+    },
+    {
+      "name": "Orc: complete creation, exact first-save retry and fresh persisted sheet",
+      "status": "fail",
+      "elapsedMs": 538,
+      "reason": "assertion-failed",
+      "location": "character-scenarios.ts:182:18",
+      "operator": "==",
+      "assertion": "Missing source-bearing trait Grounded",
+      "actual": null,
+      "expected": true
+    },
+    {
+      "name": "Hakaan: remaining purchase witnesses persist through the public route",
+      "status": "fail",
+      "elapsedMs": 456,
+      "reason": "assertion-failed",
+      "location": "character-scenarios.ts:312:20",
+      "operator": "==",
+      "assertion": "Missing source-bearing trait Doomsight",
+      "expected": true
+    },
+    {
+      "name": "Orc: remaining purchase witnesses persist through the public route",
+      "status": "fail",
+      "elapsedMs": 455,
+      "reason": "assertion-failed",
+      "location": "character-scenarios.ts:312:20",
+      "operator": "==",
+      "assertion": "Missing source-bearing trait Bloodfire Rush",
+      "expected": true
+    },
+    {
+      "name": "Devil: remaining purchase witnesses persist through the public route",
+      "status": "pass",
+      "elapsedMs": 1347
+    },
+    {
+      "name": "Polder: remaining purchase witnesses persist through the public route",
+      "status": "pass",
+      "elapsedMs": 489
+    },
+    {
+      "name": "Dwarf: remaining purchase witnesses persist through the public route",
+      "status": "fail",
+      "elapsedMs": 446,
+      "reason": "assertion-failed",
+      "location": "character-scenarios.ts:312:20",
+      "operator": "==",
+      "assertion": "Missing source-bearing trait Great Fortitude",
+      "expected": true
+    },
+    {
+      "name": "Human: remaining purchase witnesses persist through the public route",
+      "status": "fail",
+      "elapsedMs": 506,
+      "reason": "assertion-failed",
+      "location": "character-scenarios.ts:312:20",
+      "operator": "==",
+      "assertion": "Missing source-bearing trait Determination",
+      "expected": true
+    },
+    {
+      "name": "private draft, source discovery and transition reject another owner",
+      "status": "pass",
+      "elapsedMs": 240
+    },
+    {
+      "name": "parent replacement clears dependent choices and persists unrelated details",
+      "status": "pass",
+      "elapsedMs": 459
+    },
+    {
+      "name": "culture, kit and complication transitions preserve saved authored fields",
+      "status": "pass",
+      "elapsedMs": 499
+    },
+    {
+      "name": "incomplete and over-budget previews cannot be mistaken for complete builds",
+      "status": "pass",
+      "elapsedMs": 339
+    },
+    {
+      "name": "array replacement clears assignment; named assignment and stale-save guards use public operations",
+      "status": "pass",
+      "elapsedMs": 550
+    },
+    {
+      "name": "lifecycle: admission and audience privacy",
+      "status": "pass",
+      "elapsedMs": 2659
+    },
+    {
+      "name": "lifecycle: private inheritance",
+      "status": "pass",
+      "elapsedMs": 1462
+    },
+    {
+      "name": "lifecycle: Fury progression preserves live values",
+      "status": "pass",
+      "elapsedMs": 1390
+    },
+    {
+      "name": "lifecycle: paginated history and reviewed restoration",
+      "status": "pass",
+      "elapsedMs": 1036
+    },
+    {
+      "name": "lifecycle: owning Director activation and inheritance",
+      "status": "pass",
+      "elapsedMs": 1699
+    },
+    {
+      "name": "lifecycle: foreign history and owner-only restoration",
+      "status": "pass",
+      "elapsedMs": 938
+    },
+    {
+      "name": "lifecycle: full-edit stale review and preserved live state",
+      "status": "pass",
+      "elapsedMs": 879
+    },
+    {
+      "name": "lifecycle: combat edit lock",
+      "status": "pass",
+      "elapsedMs": 660
+    },
+    {
+      "name": "trait actions and rune grants persist without editing build or resources",
+      "status": "fail",
+      "elapsedMs": 1064,
+      "reason": "assertion-failed",
+      "location": "character-scenarios.ts:509:3",
+      "operator": "==",
+      "expected": true
+    }
+  ]
+}
