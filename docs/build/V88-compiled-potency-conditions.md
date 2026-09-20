@@ -541,3 +541,9 @@ the retained TESTER/DEPLOY documentation and certificate records. The first inte
 all executable/full checks but rejected the former staging commit for a missing `Reviewed-By:`
 trailer. Metadata-only repair `12fac42` adds the authentic seeded implementation review verdict.
 Main, GitHub and cloud remain unchanged until TESTER certifies the repaired integrated branch head.
+
+TESTER then passed metadata/tree closeout `4fd12a3`: runtime, tests, helper and report bytes match
+the fully tested integration; all eleven commits pass the merge gate, links and hygiene. DEPLOY
+rebased over the retained certificate records without changing executable bytes and fast-forwarded
+local main to `e541283`. Cloud publication, its live target proof and the GitHub push remain the
+release steps; they are not claimed by this Git integration record.
