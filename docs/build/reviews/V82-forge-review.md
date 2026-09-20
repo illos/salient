@@ -1,15 +1,29 @@
 # V82 Forge adapter review
 
-Reviewer: independent Astra worker; 2026-09-20. Static review of the integration working tree
+Reviewer: independent Astra worker; 2026-09-20. Formal review of the integration working tree
 based on `3ddb81bd121facfe3abc9a49a525babc37ef3f52`. This review covers `scripts/forge/`,
-not the reviewer's own ancestry/headless implementation. Runtime results remain separately required.
+not the reviewer's own ancestry/headless implementation. Refreshed after the required full check and
+the lead's corrected-adapter runtime results; live application comparison remains pending.
 
 ## Verdict
 
-Static review PASS after correction: effective purchased-feature IDs now reject mixed wrapper/direct
+Formal Forge adapter review PASS after correction: effective purchased-feature IDs now reject mixed wrapper/direct
 duplicates, and a focused negative probe covers that exact case. Existing outer membership and pinned
 payload checks remain intact. No defect found in generated legal witness selections or use of upstream
-calculations. The lead must still record runtime results for the corrected adapter.
+calculations. The corrected generator reports 137 complete counterparts, successful calibration and
+passing negative probes, including the mixed duplicate regression. This approves the adapter; it
+does not pre-approve the pending live application comparison cohorts.
+
+## Verification considered
+
+The retained [full check log](../evidence/V82/check.log) shows 333 engine tests and 483 app/script tests
+passing, followed by successful content/vendor checks and build. The lead reports the correction delta
+also passed lint, typechecks, 333 engine tests and 11 affected app tests on CT114. The actual pinned
+Forge generator completed with calibration passing and all 137 counterparts complete, including the
+new mixed-representation duplicate rejection. No additional reviewer runtime was needed.
+
+Live authenticated comparisons of both cohorts remain an acceptance gate for ancestry delivery.
+Their pending status does not indicate a failure of the adapter review.
 
 ## Source and coverage
 
@@ -53,4 +67,4 @@ abilities, condition immunity, damage immunity/weakness and named traits. Explic
 which Forge stores only in prose are reported as additions, not silently filtered discrepancies.
 Technical Size/Speed/Damage Modifier containers are separated from named traits, while numeric values
 are independently compared. Cohort splitting preserves the full witness set under the existing
-bounded timeout. This review does not certify runtime pass counts or browser behavior.
+bounded timeout. This review does not certify pending live comparison results or browser behavior.

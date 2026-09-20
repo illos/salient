@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-only
 /** Saved public-API comparisons; consumes independently executed Forge output. No browser. */
 import assert from 'node:assert/strict';
+import { createHash } from 'node:crypto';
 import { readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { createActor, failureDetails, type ActorSession } from '../headless/character-client.ts';
@@ -39,7 +40,19 @@ if (!output || process.env.SALIENT_HEADLESS_TARGET !== 'https://different-bat-94
   throw new Error('headless-target-validation-failed');
 const cohort = process.env.SALIENT_FORGE_COHORT ?? 'all';
 assert.ok(['all', 'non-revenant', 'revenant'].includes(cohort), 'Unknown Forge cohort');
-const reportName = cohort === 'all' ? 'live-comparison.json' : `live-comparison-${cohort}.json`;
+const witnessFilter = process.env.SALIENT_FORGE_WITNESSES;
+const requestedWitnesses = witnessFilter === undefined ? null : witnessFilter.split(',');
+if (requestedWitnesses)
+  assert.ok(
+    requestedWitnesses.length > 0 &&
+      requestedWitnesses.every(id => /^[a-z0-9-]+$/.test(id)) &&
+      new Set(requestedWitnesses).size === requestedWitnesses.length,
+    'Witness filter requires unique exact IDs',
+  );
+const selectionSuffix = requestedWitnesses
+  ? `-selected-${createHash('sha256').update(requestedWitnesses.join(',')).digest('hex').slice(0, 12)}`
+  : '';
+const reportName = `live-comparison${cohort === 'all' ? '' : `-${cohort}`}${selectionSuffix}.json`;
 let totalCounterparts = 0;
 let selectedCounterparts = 0;
 const sessions: ActorSession[] = [];
@@ -56,6 +69,7 @@ const report = () =>
         runId,
         source,
         cohort,
+        requestedWitnesses,
         totalCounterparts,
         selectedCounterparts,
         target: process.env.SALIENT_HEADLESS_TARGET,
@@ -86,9 +100,16 @@ try {
   totalCounterparts = allCounterparts.length;
   const counterparts = allCounterparts.filter(
     w =>
-      cohort === 'all' ||
-      (cohort === 'revenant' ? w.ancestry === 'Revenant' : w.ancestry !== 'Revenant'),
+      (cohort === 'all' ||
+        (cohort === 'revenant' ? w.ancestry === 'Revenant' : w.ancestry !== 'Revenant')) &&
+      (!requestedWitnesses || requestedWitnesses.includes(w.id)),
   );
+  if (requestedWitnesses)
+    assert.deepEqual(
+      counterparts.map(w => w.id).sort(),
+      [...requestedWitnesses].sort(),
+      'Unknown witness ID or witness outside selected cohort',
+    );
   selectedCounterparts = counterparts.length;
   assert.ok(
     counterparts.length > 0 && counterparts.every(w => w.forge.complete),
@@ -151,7 +172,7 @@ try {
       const sheet = await actor.query<HeroSheet>('characters:sheet', { characterId });
       // Retain real readbacks even when a comparison fails.
       writeFileSync(
-        join(output, `${witness.id}-salient.json`),
+        join(output, `${witness.id}-salient${selectionSuffix}.json`),
         JSON.stringify({ characterId, saved, sheet }, null, 2) + '\n',
       );
       assert.equal(saved.status, 'complete', 'Saved counterpart completeness');
@@ -199,10 +220,39 @@ try {
         names(sheet.abilities.map(a => a.name)),
         names([...witness.forge.abilities, ...textOnlyActions]),
       );
+      // Unphased's source forbids surprise, but pinned Forge stores this exact trait as
+      // generic prose (memonek.ts:57-61), outside getConditionImmunities' typed projection.
+      // This is a Compendium expectation, explicitly not an independently calculated Forge value.
+      const compendiumConditionImmunitiesBeyondForge: string[] = [];
+      if (
+        witness.purchasedTraits.includes('Unphased') &&
+        (witness.ancestry === 'Memonek' ||
+          (witness.ancestry === 'Revenant' &&
+            witness.selections['ancestry.revenant.former-life'] === 'Memonek'))
+      ) {
+        const sourcePath = 'en/unified/md/feature/trait/memonek/unphased.md';
+        assert.ok(
+          baseline.traits.some(t => t.name === 'Unphased' && t.sourcePath === sourcePath),
+          'Unphased requires its actual Compendium granting trait',
+        );
+        const immunity = baseline.conditionImmunities?.find(
+          c => c.condition.toLowerCase() === 'surprised',
+        );
+        assert.equal(
+          immunity?.provenance.source.path,
+          sourcePath,
+          'Unphased surprise immunity must retain its granting source',
+        );
+        if (!witness.forge.conditionImmunities.some(c => c.toLowerCase() === 'surprised'))
+          compendiumConditionImmunitiesBeyondForge.push('surprised');
+      }
       compare(
         'conditionImmunities',
         names((baseline.conditionImmunities ?? []).map(c => c.condition.toLowerCase())),
-        names(witness.forge.conditionImmunities.map(c => c.toLowerCase())),
+        names([
+          ...witness.forge.conditionImmunities.map(c => c.toLowerCase()),
+          ...compendiumConditionImmunitiesBeyondForge,
+        ]),
       );
       for (const field of ['damageImmunities', 'damageWeaknesses'] as const)
         compare(
@@ -236,6 +286,8 @@ try {
         status: mismatches.length ? 'fail' : 'pass',
         mismatches,
         compendiumActionsBeyondForge: textOnlyActions,
+        forgeConditionImmunities: witness.forge.conditionImmunities,
+        compendiumConditionImmunitiesBeyondForge,
       });
       if (mismatches.length) process.exitCode = 1;
     } catch (error) {

@@ -1,13 +1,14 @@
-# V82 independent consultation A
+# V82 independent implementation and rules review A
 
 Reviewer: Astra remaining-Revenant/Wode implementer, independently reviewing the
 Dragon Knight (V76), High Elf (V77), Memonek (V78), and Time Raider (V80) units.
-2026-09-20. This is an early static implementation/source consultation, not final
-acceptance before integrated full checks and authenticated reference proof.
+2026-09-20. Formal scoped implementation review followed by a fresh pinned-source
+rules review after the integrated full check. Live application acceptance remains pending.
 
 ## Result
 
-No blocking implementation or source findings in these four unit modules. The
+**Implementation: PASS. Rules: PASS for the four scoped units.** No blocking
+implementation or source findings remain in these four unit modules. The
 review covered their decisions, derivation functions, prose-action catalogs, focused
 tests and specs in the V82 integration tree. Reviewed against freshly read pinned
 Compendium `fb83a789da8f0327a389c277a0c790b1648d5810` trait entries under
@@ -29,7 +30,9 @@ expiry. Glamor, High Senses and Revisit Memory modify tests, without fictitious 
 or characteristic grants.
 
 Memonek correctly has **both** Fall Lightly and Lightweight and four ancestry
-points. Lightweight does not permanently shrink size. Lightning Nimbleness sets
+points. The post-check provenance correction separates Lightweight into its own
+automatic decision with the actual Lightweight path/quote; the existing focused
+test now verifies that evidence rather than attributing it to Fall Lightly. Lightweight does not permanently shrink size. Lightning Nimbleness sets
 speed 7 before kit bonuses; Nonstop/Unphased grant the correct condition immunities.
 Keeper of Order is a free triggered action with its once-per-round restriction and
 all four permitted edge/bane adjustments. Useful Emotion is a combat-start resource
@@ -43,7 +46,7 @@ correctly sourced to its embedded paragraph in the ancestry traits entry. Four-a
 traits modify tests and existing maneuvers, rather than granting skills or inventing
 extra permanent movement.
 
-## Test value and remaining evidence
+## Validation and test value
 
 The focused tests catch concrete failures: signature omission, conditional values
 mistakenly made permanent, wrong point budgets, missing granted actions, absent or
@@ -53,11 +56,24 @@ these are not implementation-mirroring assertion inventories. No test was identi
 as redundant enough to remove. Tests do not substitute for saved API proof or Forge
 comparisons; the integration lead owns those and their actual run evidence.
 
-This consultation excludes the reviewer's own Revenant/Wode code and does not
-certify shared ingestion, authenticated permissions, persistence, final content
-counts, Forge adapter behavior or production effects. Formal implementation and
-fresh rules acceptance must cite the completed integration checks and comparison
-results rather than promote this pre-check consultation alone.
+The integration lead's full `pnpm check` exited 0 at `3ddb81b`, with retained
+[check output](../evidence/V82/check.log): **333 engine tests and 483 app/scripts
+tests passed**, across 32 and 56 test files respectively. I inspected that log,
+then re-reviewed the integrated decision/action registration, evaluator hooks and
+the narrowly changed Memonek provenance code. The latter correction follows the
+full run and still needs the lead's targeted revalidation; unchanged build/index
+checks need not be repeated merely for a new reviewer.
+
+After implementation review, I freshly reread all 33 source files in the four
+trait directories (including the embedded Time Raider Unstoppable Mind) against
+the final unit behavior. The source classifications and action timings above
+remain correct. No additional source ambiguity was found.
+
+This review excludes my own Revenant/Wode implementation and does not certify
+authenticated permissions, persistence, live Forge comparison results or combat
+automation. Final delivery remains conditional on the post-check correction
+validation and authenticated application/reference proof recorded by the lead.
+Passing this scoped review does not turn those pending acceptance gates into passes.
 
 ## Forge representation finding
 

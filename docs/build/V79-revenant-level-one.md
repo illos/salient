@@ -1,6 +1,6 @@
 # V79 — Revenant level one
 
-Status: implementation candidate; integrated verification and independent reviews pending.
+Status: implemented in [V82](V82-remaining-ancestries.md); focused/full checks, independent reviews and hosted API proof pass. Forge live comparison and main delivery pending.
 Branch `slice/V79`. Owns `shared/content/ancestries/revenant/`,
 `shared/evaluate/ancestries/revenant.ts`, `tests/character-v79-revenant.test.ts`.
 

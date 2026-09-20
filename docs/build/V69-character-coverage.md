@@ -51,19 +51,15 @@ See [evidence](evidence/V69/README.md), [implementation review](reviews/V69-impl
 [new ancestry rules review](reviews/V70-V71-rules-review.md), and
 [preserved ancestry rules review](reviews/V57-V61-rules-review.md).
 
-## Coverage inventory and remaining work
+## Coverage inventory and subsequent delivery
 
-Devil, Polder, Dwarf, Human, Hakaan and Orc have sourced level-one editor support and live headless
-witnesses. The next ancestry gaps are Dragon Knight, High Elf, Memonek, Revenant, Time Raider and
-Wode Elf. Class coverage remains the existing partial Fury/Elementalist paths; this batch does not
-certify all eleven classes or levels. Keep the existing Fury 1→2 path working.
+V69 introduced Hakaan and Orc alongside Devil, Polder, Dwarf and Human. V73/V74 subsequently
+closed the reference and trait-action gaps: all 31 saved Forge counterparts and 27 hosted/shared-main
+API journeys passed, and the candidate merged into main. The user approved programmatically
+constructed counterparts from pinned Forge code; website capture is no longer required.
 
-Known proof limits: twelve newly enabled Devil interpersonal choices have focused evaluator coverage
-but not individual live counterparts. Generic lifecycle coverage is sampled, not every build
-combination. Authentic Forge option coverage remains missing for Devil, Dwarf, Human, Hakaan and
-Orc; Polder retains its prior authentic comparison. The current reference procedure requires website
-capture, which cannot run under the absolute browser moratorium. Do not fabricate exports or waive
-that gate silently. Discuss a temporary reference/merge policy with the user before main integration.
-
-All workload jobs ended; temporary credentials removed; CT114 heavy window released to peers.
-The source candidate remains on `slice/V69`; no main application merge is claimed.
+[V82](V82-remaining-ancestries.md) owns the remaining six ancestries: Dragon Knight, High Elf,
+Memonek, Revenant, Time Raider and Wode Elf. Consult that slice and the
+[current handoff](character-restart-handoff.md) for delivery status. Class coverage remains the
+existing partial Fury/Elementalist paths; ancestry completion does not certify all eleven classes
+or levels. Generic lifecycle coverage is sampled, not every build combination.

@@ -26,7 +26,31 @@ Bound live runs; stop on infrastructure blockers, preserve failures and do not i
 
 ## Progress
 
-- Source audit and isolated unit implementation started. Revenant former-life/borrowed traits are
-  the shared dependency; integrate after the other five new ancestry definitions are available.
-- Lead owns `shared/content/level-one-decisions.ts`, `shared/evaluate/character.ts`, action catalog,
-  Compendium build selection, Forge adapter, headless integration and final records.
+All six units are implemented and integrated on `slice/V82`. Candidate `3ddb81b` passed the full
+CT114 check (333 engine plus 483 app/scripts tests, types, lint, content, links and build).
+Review corrections in `8d5559f` separate Memonek Lightweight and Revenant Former Life source
+provenance and reject duplicate effective borrowed traits in the Forge adapter. Delta checks
+passed all 333 engine tests, 11 affected app tests, lint and web types. Independent implementation
+and fresh pinned-source reviews pass. Hosted public API acceptance passes 28/28 scenarios in
+110.688 seconds; Forge comparison is in progress.
+
+The calibrated pinned Forge generator produces 137 complete counterparts: 55 non-Revenant and
+82 Revenant, including all former ancestries and eligible borrowed traits. Live comparisons run
+as two bounded cohorts to respect the existing account character limit and runner deadline.
+No timeout was increased.
+
+## Source and automation boundaries
+
+Revenant inherits former ancestry size, not its signature traits. Borrowed Prismatic Scales is
+unavailable because the pinned source requires Wyrmplate, which Former Life does not grant.
+Dragon Knight includes the initial Wyrmplate choice; automated respite changes remain outside
+wizard scope. Memonek retains both Fall Lightly and Lightweight despite incomplete source metadata.
+
+Granted actions are present with their source text and supported manual-use routes. Psionic Bolt's
+multi-characteristic roll remains manual under the current engine parser; its source tiers and
+roll expression are preserved. This delivery does not claim new combat/respite automation.
+
+Unphased is a documented Forge representation difference: both sources say the character cannot
+be surprised, but Forge stores this as generic prose, not structured condition immunity. Salient
+retains the sourced immunity. The comparator must preserve raw Forge output and report this narrow
+Compendium-derived expectation explicitly, only for native/borrowed Unphased with matching source.

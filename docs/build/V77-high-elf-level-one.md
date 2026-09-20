@@ -1,6 +1,6 @@
 # V77: High Elf level one
 
-Status: implementation candidate; integrated checks, saved API proof, Forge comparison and independent reviews pending. Branch `slice/V77`. No browser work.
+Status: implemented in [V82](V82-remaining-ancestries.md); focused/full checks, independent reviews and hosted API proof pass. Forge live comparison and main delivery pending.
 
 ## Scope and source
 

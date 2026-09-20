@@ -1,0 +1,148 @@
+{
+  "runId": "45157387-f3e5-4119-bbaa-27dbfe44fcb8",
+  "target": "https://different-bat-943.convex.cloud",
+  "source": "8d5559fc87f18f4ed4112f4effc2cafaa3809739",
+  "elapsedMs": 110688,
+  "results": [
+    {
+      "name": "discover decisions and preview without creating a character",
+      "status": "pass",
+      "elapsedMs": 1447
+    },
+    {
+      "name": "Devil: complete creation, exact first-save retry and fresh persisted sheet",
+      "status": "pass",
+      "elapsedMs": 2014
+    },
+    {
+      "name": "Polder: complete creation, exact first-save retry and fresh persisted sheet",
+      "status": "pass",
+      "elapsedMs": 1812
+    },
+    {
+      "name": "Dwarf: complete creation, exact first-save retry and fresh persisted sheet",
+      "status": "pass",
+      "elapsedMs": 2017
+    },
+    {
+      "name": "Human: complete creation, exact first-save retry and fresh persisted sheet",
+      "status": "pass",
+      "elapsedMs": 2950
+    },
+    {
+      "name": "Hakaan: complete creation, exact first-save retry and fresh persisted sheet",
+      "status": "pass",
+      "elapsedMs": 3406
+    },
+    {
+      "name": "Orc: complete creation, exact first-save retry and fresh persisted sheet",
+      "status": "pass",
+      "elapsedMs": 1836
+    },
+    {
+      "name": "Hakaan: remaining purchase witnesses persist through the public route",
+      "status": "pass",
+      "elapsedMs": 3324
+    },
+    {
+      "name": "Orc: remaining purchase witnesses persist through the public route",
+      "status": "pass",
+      "elapsedMs": 4457
+    },
+    {
+      "name": "Devil: remaining purchase witnesses persist through the public route",
+      "status": "pass",
+      "elapsedMs": 4188
+    },
+    {
+      "name": "Polder: remaining purchase witnesses persist through the public route",
+      "status": "pass",
+      "elapsedMs": 1440
+    },
+    {
+      "name": "Dwarf: remaining purchase witnesses persist through the public route",
+      "status": "pass",
+      "elapsedMs": 3082
+    },
+    {
+      "name": "Human: remaining purchase witnesses persist through the public route",
+      "status": "pass",
+      "elapsedMs": 2806
+    },
+    {
+      "name": "private draft, source discovery and transition reject another owner",
+      "status": "pass",
+      "elapsedMs": 766
+    },
+    {
+      "name": "parent replacement clears dependent choices and persists unrelated details",
+      "status": "pass",
+      "elapsedMs": 1757
+    },
+    {
+      "name": "culture, kit and complication transitions preserve saved authored fields",
+      "status": "pass",
+      "elapsedMs": 1824
+    },
+    {
+      "name": "incomplete and over-budget previews cannot be mistaken for complete builds",
+      "status": "pass",
+      "elapsedMs": 962
+    },
+    {
+      "name": "array replacement clears assignment; named assignment and stale-save guards use public operations",
+      "status": "pass",
+      "elapsedMs": 2024
+    },
+    {
+      "name": "lifecycle: admission and audience privacy",
+      "status": "pass",
+      "elapsedMs": 8750
+    },
+    {
+      "name": "lifecycle: private inheritance",
+      "status": "pass",
+      "elapsedMs": 4854
+    },
+    {
+      "name": "lifecycle: Fury progression preserves live values",
+      "status": "pass",
+      "elapsedMs": 4385
+    },
+    {
+      "name": "lifecycle: paginated history and reviewed restoration",
+      "status": "pass",
+      "elapsedMs": 3561
+    },
+    {
+      "name": "lifecycle: owning Director activation and inheritance",
+      "status": "pass",
+      "elapsedMs": 5977
+    },
+    {
+      "name": "lifecycle: foreign history and owner-only restoration",
+      "status": "pass",
+      "elapsedMs": 3200
+    },
+    {
+      "name": "lifecycle: full-edit stale review and preserved live state",
+      "status": "pass",
+      "elapsedMs": 3090
+    },
+    {
+      "name": "lifecycle: combat edit lock",
+      "status": "pass",
+      "elapsedMs": 2327
+    },
+    {
+      "name": "trait actions and rune grants persist without editing build or resources",
+      "status": "pass",
+      "elapsedMs": 15296
+    },
+    {
+      "name": "remaining ancestry wizard choices persist with sourced traits, actions, and parent replacement",
+      "status": "pass",
+      "elapsedMs": 12659
+    }
+  ]
+}

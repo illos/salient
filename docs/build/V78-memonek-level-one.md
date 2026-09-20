@@ -1,6 +1,6 @@
 # V78 — Memonek level one
 
-Implementation candidate; focused, authenticated headless and Forge verification owned by the integration lead.
+Status: implemented in [V82](V82-remaining-ancestries.md); focused/full checks, independent reviews and hosted API proof pass. Forge live comparison and main delivery pending.
 Branch `slice/V78`; new content/evaluator/test files belong to this unit. Shared registration belongs to the lead.
 
 ## Source and behavior

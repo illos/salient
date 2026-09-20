@@ -1,0 +1,427 @@
+{
+  "runId": "cb5655fa-5c60-420d-a0f6-b4437fa66c9c",
+  "source": "8d5559fc87f18f4ed4112f4effc2cafaa3809739",
+  "cohort": "non-revenant",
+  "totalCounterparts": 137,
+  "selectedCounterparts": 55,
+  "target": "https://different-bat-943.convex.cloud",
+  "elapsedMs": 89284,
+  "results": [
+    {
+      "id": "devil-1",
+      "characterId": "k57cayh0wy6dgpr3f7a3j3dahn8esxb8",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "devil-2",
+      "characterId": "k57fqvm43t54jnnkae4hdrt2en8er5pf",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "devil-3",
+      "characterId": "k57b6m90xbe7wg76q4twct5r058es1h7",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "devil-4",
+      "characterId": "k577pby5zqpxqe672dt463y8zh8erwzn",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "devil-5",
+      "characterId": "k575b1ewtmmeajpe94q5kq1v8n8eszzg",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "devil-6",
+      "characterId": "k57b8w498g6fj4zxw626czzrms8er4bs",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "devil-7",
+      "characterId": "k577ynesbxb9991qas0n2sx4jx8erzm8",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "devil-8",
+      "characterId": "k572tw7tyqchgs4bqkg5a2kenn8es9f7",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "devil-9",
+      "characterId": "k574kbc943bbt2edcn450fm2jn8erz80",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "devil-10",
+      "characterId": "k5791w7atsznv753tmdezngr198ern50",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "devil-11",
+      "characterId": "k57bzwcpgxq7jb9j21b2mzfchx8esfgx",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "devil-12",
+      "characterId": "k57c9yryxd9c755vb40yer4r018es20h",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "devil-13",
+      "characterId": "k575c9cgeg2c8wpn0efhsdnqn18es16k",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "polder-1",
+      "characterId": "k570d5tq2r20y5qhc3jsxaf29x8er13r",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "polder-2",
+      "characterId": "k578z53ewydt2xeexa83f5fvfh8esnx9",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "dwarf-1",
+      "characterId": "k5731ex06e3f6qd8n12nsw4ten8es9yd",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": [
+        "Runic Carving: Carve, Change, or Remove Rune"
+      ]
+    },
+    {
+      "id": "dwarf-2",
+      "characterId": "k57f4ydn94swh3zepddfgzmnnx8esjzk",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": [
+        "Runic Carving: Carve, Change, or Remove Rune"
+      ]
+    },
+    {
+      "id": "dwarf-3",
+      "characterId": "k5739ecce0n57fdp9websfp0nn8erkmx",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": [
+        "Runic Carving: Carve, Change, or Remove Rune",
+        "Stone Singer"
+      ]
+    },
+    {
+      "id": "human-1",
+      "characterId": "k57b5xt75qhmhv8j9dz4mh5mjs8er2tc",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "human-2",
+      "characterId": "k57d94tfp273kw8dpy6txdbhvs8erh13",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "human-3",
+      "characterId": "k57a1wqcpb1zbc8vpm9zbkc1px8es69s",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "hakaan-1",
+      "characterId": "k5762j5zaw1n5k79mxbr9bp2nx8es3d0",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "hakaan-2",
+      "characterId": "k571fx6ycdajfrmqph4ettp77s8esf1x",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": [
+        "Doomsight"
+      ]
+    },
+    {
+      "id": "hakaan-3",
+      "characterId": "k57b5a3m7zxmt0b7cjbnzjyknn8es1c0",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "orc-1",
+      "characterId": "k57ef64nabwnpjmxj8njka1v6d8esg52",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": [
+        "Relentless"
+      ]
+    },
+    {
+      "id": "orc-2",
+      "characterId": "k570s7m96cvczbpg31pe6efc1n8es98p",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": [
+        "Relentless"
+      ]
+    },
+    {
+      "id": "orc-3",
+      "characterId": "k5734y163s0tdqd9frhtvr3yc98es33g",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": [
+        "Relentless"
+      ]
+    },
+    {
+      "id": "orc-4",
+      "characterId": "k579ksf2a7397xx1c2v1k6xhxh8erb7q",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": [
+        "Relentless"
+      ]
+    },
+    {
+      "id": "orc-5",
+      "characterId": "k57805w17gm3ksy8xm9n1pkmh58esbpa",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": [
+        "Relentless"
+      ]
+    },
+    {
+      "id": "orc-6",
+      "characterId": "k574qgjwjm1vfessymxevm44bd8es6kg",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": [
+        "Relentless"
+      ]
+    },
+    {
+      "id": "orc-7",
+      "characterId": "k57346qrf1m3ta5g5p0wbbgngd8er5es",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": [
+        "Relentless"
+      ]
+    },
+    {
+      "id": "dragon-knight-1",
+      "characterId": "k575759wkf9rbx6845vapj9gv58es2nn",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "dragon-knight-2",
+      "characterId": "k571whynqjmbz3pe3hh5wz6ge98erxjt",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "dragon-knight-3",
+      "characterId": "k573ny639r626kjzhcwx374cps8esdf3",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "dragon-knight-4",
+      "characterId": "k578xz0xt13ttncb5yxdad03b98esff8",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "dragon-knight-5",
+      "characterId": "k57dwc3gnbzdgz86k4rqh9s83d8esm2s",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "dragon-knight-6",
+      "characterId": "k57cmf03pyfnz9vqn518nzxvhn8esesk",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "dragon-knight-7",
+      "characterId": "k5785ckm7esm2wazx0z99vx9e58es3ax",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "dragon-knight-8",
+      "characterId": "k5768kd77r3xec905gatadt7xh8ere76",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "high-elf-1",
+      "characterId": "k575zyk7qn94nemmhrvs13n1w98esw0c",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "high-elf-2",
+      "characterId": "k5700d1jw1hfxmvdmbg0h45ecn8erdjg",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "high-elf-3",
+      "characterId": "k572b7s8tmncdbsp4zsnqnmnfd8er526",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "high-elf-4",
+      "characterId": "k57fqv41vx6xmxyaxn63gp500h8erfsb",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "memonek-1",
+      "characterId": "k57dkjc35w17yey8kmzdqeq2hs8espyk",
+      "status": "fail",
+      "mismatches": [
+        {
+          "field": "conditionImmunities",
+          "actual": [
+            "surprised"
+          ],
+          "expected": []
+        }
+      ],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "memonek-2",
+      "characterId": "k57fwqfafxhv245cn3gaytwkns8es6q0",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "memonek-3",
+      "characterId": "k57ea96b4wvw56f9tfnz13xzmx8erf3k",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "time-raider-1",
+      "characterId": "k57ct7pdaa1ybec9zpvjn5h0nh8er5yb",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "time-raider-2",
+      "characterId": "k5799a4e7ebx1hpaesekwzsxts8esgph",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "time-raider-3",
+      "characterId": "k57fk1wabaa9dv3v7ncp2xpv3x8erzxm",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "time-raider-4",
+      "characterId": "k574e7em0tqktphd7zb4hpnx418est49",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "time-raider-5",
+      "characterId": "k576jjq2whv1amr1cwmej4btkn8er6z2",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "time-raider-6",
+      "characterId": "k57ajz4tjhxgcmkhtwdw0saz318erj15",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "wode-elf-1",
+      "characterId": "k576pc2jtbe2y2mhqtkyy11g5d8erev4",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "wode-elf-2",
+      "characterId": "k57at5gtfhat36vk7ewmkpbtc58erw9k",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    },
+    {
+      "id": "wode-elf-3",
+      "characterId": "k572khhn0dg5fd8vmb47n6qfnn8estry",
+      "status": "pass",
+      "mismatches": [],
+      "compendiumActionsBeyondForge": []
+    }
+  ]
+}
