@@ -319,3 +319,35 @@ here on this thread runs only authoring checks (prettier, eslint, tsc) and submi
 was stopped by the coordinator under the user's cleanup authorization, data retained. The capture
 script for the pop-ups is `.playtest/v75/capture-popups.mjs` in the worktree (ignored; readable
 by the coordinator), which needs only the public Rules and Foes routes.
+
+### 2026-09-20 — user approval, third rebase, handoff to DEPLOY2
+
+**Decision.** The user, having seen the captures, approved the Quiet theme and asked for it to be
+merged. The revert path stays as recorded: the V75 commits are a contiguous presentation-only
+range on top of main, so reverting them as a unit restores Classic.
+
+**Third rebase.** Main advanced another 120 commits (V85/V86 complications and starting rewards,
+V88 compiled potency conditions, V89, the V90/V91 process trim, V92 Shadow) while the branch
+waited: `slice/V75` is now rebased onto main `c56f6fb`, then onto `5881bf1` (V93, docs, CI and a
+lint override for its CommonJS helpers; no conflicts). Conflicts at `c56f6fb`: the STATUS table (main's
+one-row-per-slice table taken, its V75 row kept), appended browser-backlog rows (both kept), and
+the condition-badge call sites in `web/character-sheet/controls.tsx`, `web/table/foe-sheet.tsx`
+and `web/table/squad-sheet.tsx`, where V88's condition-source `instances` props are kept and only
+the label class changes. Commit `6f0f441` re-skins the one new screen piece, the V86 starting
+rewards panel, onto the same treatment as its Notes neighbour (card on the full sheet, sub inset
+with a muted label on the compact sheet, muted terms over medium tabular values); the compact mount
+passes a presentation-only flag. The V88 condition-source lines render as main wrote them (their
+`text-xs` is already floored at 13px by the token scale). Authoring checks on the rebased tree:
+`CI=true pnpm exec tsc -p tsconfig.web.json`, `eslint web`, `prettier --check`, `check-links`
+(411 files) pass; `check-commit --merge` passes once the review trailer is on the tip; acceptance
+greps 2–5 return nothing; the string-set diff against main shows only JSX line reflow; no test or
+non-presentation file differs. A fresh-context review of the rebase delta (conflict resolutions,
+the starting rewards re-skin, the untouched V88 condition-source lines) returned `pass` with no
+blocking findings; its interdiff found the previously reviewed patch byte-identical in
+`targeting.tsx`, `director-pane.tsx`, `foes.tsx` and `wizard/index.tsx`.
+
+**Handoff.** Integrated `CI=true pnpm check` on the rebased tip is submitted to the testing
+coordinator; the tip is then handed to DEPLOY2 for the fast-forward, the cloud dev promotion and
+the smoke check. The pop-up captures listed as pending in the evidence index were not taken (the
+coordinator recorded the optional capture as skipped); the user approved from the captures on
+file.

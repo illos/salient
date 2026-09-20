@@ -39,8 +39,9 @@ checks in [its slice document](../../V75-quiet-theme.md#acceptance-checks).
 The stat-block pop-up images were re-captured on 2026-09-20 after the user asked for the
 duplicated title and the padding around the card to go. The later single-control-row change
 (one navigation pill beside Close, no eyebrow, book line at the bottom of rule pop-ups) and the
-second rebase are not yet pictured here: those captures run through the testing coordinator with
-`.playtest/v75/capture-popups.mjs` (worktree, ignored) and will be added when they return.
+second and third rebases are not pictured here: the testing coordinator recorded that optional
+capture as skipped, and the user approved the design from the images above on 2026-09-20. The
+capture script `.playtest/v75/capture-popups.mjs` (worktree, ignored) remains for a later pass.
 
 ## What they show about the preserved subsystems
 
