@@ -87,7 +87,14 @@ export const current = query({
         );
         if (result.compiled) {
           for (const occurrence of (result.compiled as CompiledResult).effects) {
-            if (occurrence.effect.kind === 'damage' || occurrence.disposition) continue;
+            if (
+              occurrence.effect.kind === 'damage' ||
+              occurrence.disposition ||
+              (occurrence.effect.kind === 'condition' &&
+                occurrence.effect.status !== 'fact-needed' &&
+                occurrence.effect.status !== 'manual')
+            )
+              continue;
             const target = targets.find(target => target.target.id === occurrence.effect.targetId);
             // Compiled effects are target-bound; do not turn a missing target into a global choice.
             if (!target) continue;

@@ -557,25 +557,30 @@ try {
   assert.equal(health(await roster(), heroId), 29);
   assert.equal((await roster()).heroes.find((h: Json) => h.id === heroId).live.temporaryStamina, 0);
   const bury = await play('BP2', 'Bury the Point', G[0], [H], [6], { malice: 2 });
-  const remainder = bury.r.compiled.effects.find((o: Json) => o.effect.kind === 'unsupported');
+  const remainder = bury.r.compiled.effects.find((o: Json) => o.effect.kind === 'condition');
+  assert.equal(remainder.effect.status, 'resisted');
   assert.match(remainder.effect.clause, /M < 1/);
   assert.match(remainder.effect.clause, /bleeding/);
   await correct(dc, bury.id, H, 2);
   const correctedBury = await result(bury.id);
   const correctedRemainder = correctedBury.compiled.effects.find(
-    (o: Json) => o.effect.kind === 'unsupported',
+    (o: Json) => o.effect.kind === 'condition',
   );
+  assert.equal(correctedRemainder.effect.status, 'resisted');
   assert.match(correctedRemainder.effect.clause, /M < 0/);
   assert.notEqual(correctedRemainder.id, remainder.id);
   assert.equal(health(await roster(), heroId), 25);
   assert.equal((await roster()).malice, 0);
   await assert.rejects(() => resolve(dc, bury.id, H, remainder.id));
+  const beforeCorrectedDisposition = await roster();
+  await assert.rejects(() => resolve(dc, bury.id, H, correctedRemainder.id), /applied or resisted/);
+  assert.deepEqual(await roster(), beforeCorrectedDisposition);
   await command(dc, '/history rewind');
   assert.deepEqual((await result(bury.id)).compiled, bury.r.compiled);
   const beforeBuryDisposition = await roster();
-  await resolve(dc, bury.id, H, remainder.id);
+  await assert.rejects(() => resolve(dc, bury.id, H, remainder.id), /applied or resisted/);
   assert.deepEqual(await roster(), beforeBuryDisposition);
-  await capture('BP5-disposition-after-correction-rewind', bury.id);
+  await capture('BP5-disposition-refused-after-rewind', bury.id);
   const block = async (
     id: string,
     ability: string,

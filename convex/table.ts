@@ -32,6 +32,17 @@ function projectFoe(foe: Doc<'foes'>, director: boolean, mode: 'bar' | 'numerica
     /** Ordinary foe at 0 or lower (R03 label; R04 6.4); a dropped minion also reads 0. */
     slain: foe.live.stamina <= 0,
     conditions: foe.live.conditions ?? noConditions(),
+    conditionInstances: (foe.live.conditionInstances ?? [])
+      .filter(instance => instance.status === 'active')
+      .map(({ id, condition, status, duration, abilityName, actorLabel, sourcePath }) => ({
+        id,
+        condition,
+        status: status as 'active',
+        duration,
+        abilityName,
+        actorLabel,
+        sourcePath,
+      })),
     health,
     summary: director ? foeSummary(foe.sourceSnapshot) : null,
     ...(foe.squadId ? { squadId: foe.squadId } : {}),
@@ -161,6 +172,17 @@ export const roster = query({
         name: v.string(),
         slain: v.boolean(),
         conditions: conditionsValidator,
+        conditionInstances: v.array(
+          v.object({
+            id: v.string(),
+            condition: v.string(),
+            status: v.literal('active'),
+            duration: v.literal('save-ends'),
+            abilityName: v.string(),
+            actorLabel: v.string(),
+            sourcePath: v.string(),
+          }),
+        ),
         health: foeHealthValidator,
         summary: v.union(
           v.null(),

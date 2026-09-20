@@ -376,7 +376,9 @@ export function CompiledEffects({
                   ? 'Manual effect'
                   : effect.kind === 'push'
                     ? 'Push'
-                    : 'Damage'}
+                    : effect.kind === 'condition'
+                      ? 'Condition'
+                      : 'Damage'}
               </strong>
               <Badge variant="outline">
                 {effect.kind === 'damage'
@@ -385,9 +387,17 @@ export function CompiledEffects({
                     : 'Damage not applied'
                   : occurrence.disposition
                     ? 'Resolved at table'
-                    : effect.kind === 'push'
-                      ? 'Outstanding instruction'
-                      : 'Unresolved'}
+                    : effect.kind === 'condition'
+                      ? effect.status === 'applied'
+                        ? 'Applied condition'
+                        : effect.status === 'resisted'
+                          ? 'Resisted'
+                          : effect.status === 'fact-needed'
+                            ? 'Facts needed'
+                            : 'Manual condition'
+                      : effect.kind === 'push'
+                        ? 'Outstanding instruction'
+                        : 'Unresolved'}
               </Badge>
             </span>
             <span className="[overflow-wrap:anywhere]">
@@ -413,6 +423,31 @@ export function CompiledEffects({
                 {!!effect.requirements.length && (
                   <span>Needed: {effect.requirements.join('; ')}.</span>
                 )}
+              </>
+            )}
+            {effect.kind === 'condition' && (
+              <>
+                <span>
+                  {effect.condition} (save ends) · {effect.characteristic} &lt;{' '}
+                  {effect.thresholdSource.kind === 'printed'
+                    ? effect.thresholdSource.value
+                    : effect.thresholdSource.tier}
+                  {effect.thresholdSource.kind === 'potency' && effect.threshold !== undefined
+                    ? ` (potency ${effect.threshold})`
+                    : ''}
+                  .
+                </span>
+                {effect.targetScore !== undefined && (
+                  <span>
+                    Target {effect.characteristic}: {effect.targetScore}.
+                  </span>
+                )}
+                {!!effect.requirements.length && (
+                  <span>Needed: {effect.requirements.join('; ')}.</span>
+                )}
+                <span className="text-muted-foreground">
+                  Condition consequences and potency adjustments remain manual.
+                </span>
               </>
             )}
             {effect.kind === 'push' && (
@@ -453,14 +488,20 @@ export function CompiledEffects({
             {occurrence.disposition?.note && (
               <span className="text-muted-foreground">{occurrence.disposition.note}</span>
             )}
-            {effect.kind !== 'damage' && !occurrence.disposition && target && mayResolve && (
-              <Command
-                campaignId={campaignId}
-                text={`/ability resolved event="${eventId}" occurrence=${JSON.stringify(occurrence.id)} target=${ref(target)}`}
-                label="Resolved at table"
-                variant="ghost"
-              />
-            )}
+            {effect.kind !== 'damage' &&
+              (effect.kind !== 'condition' ||
+                effect.status === 'fact-needed' ||
+                effect.status === 'manual') &&
+              !occurrence.disposition &&
+              target &&
+              mayResolve && (
+                <Command
+                  campaignId={campaignId}
+                  text={`/ability resolved event="${eventId}" occurrence=${JSON.stringify(occurrence.id)} target=${ref(target)}`}
+                  label="Resolved at table"
+                  variant="ghost"
+                />
+              )}
           </li>
         );
       })}

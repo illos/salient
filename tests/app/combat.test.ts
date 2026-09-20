@@ -983,7 +983,7 @@ describe('A04 combat opening, turns and clock', () => {
       e => e.causeEventId === endBoundary._id,
     )!;
     expect(saveFiring.kind).toBe('clock.unsupported');
-    expect(saveFiring.description).toContain('Q-TS-1');
+    expect(saveFiring.description).toContain('no active supported condition instance');
     expect((saveFiring.payload as { phase: string }).phase).toBe('saves');
     expect((await t.run(ctx => ctx.db.query('rolls').take(10))).length).toBe(rollsBefore);
     // The unsupported save changed no toggle: the admitted hero's conditions stay all off (A02).

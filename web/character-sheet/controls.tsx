@@ -1,3 +1,4 @@
+import { ConditionSources, type ConditionSource } from '../condition-sources';
 // SPDX-License-Identifier: GPL-3.0-only
 /**
  * Sheet controls that submit registered operations as slash text through `commands.submit`: the
@@ -203,17 +204,26 @@ export function ConditionToggles({
 }
 
 /** Active conditions as ink-filled chips; shown in the header so they survive body scrolling. */
-export function ActiveConditionBadges({ conditions }: { conditions: Record<string, boolean> }) {
+export function ActiveConditionBadges({
+  conditions,
+  instances,
+}: {
+  conditions: Record<string, boolean>;
+  instances?: readonly ConditionSource[];
+}) {
   const active = CONDITIONS.filter(c => conditions[c.id]);
   if (!active.length) return null;
   return (
     <span className="flex flex-wrap items-center gap-1" aria-label="Active conditions">
       {active.map(c => (
-        <span key={c.id} className="inline-flex items-center">
-          <Chip kind="result" caps>
-            {c.name}
-          </Chip>
-          <RuleLink id={`mcdm.heroes.v1/condition/${c.id}`} label={c.name} />
+        <span key={c.id} className="inline-flex flex-col gap-1">
+          <span className="inline-flex items-center">
+            <Chip kind="result" caps>
+              {c.name}
+            </Chip>
+            <RuleLink id={`mcdm.heroes.v1/condition/${c.id}`} label={c.name} />
+          </span>
+          <ConditionSources condition={c.id} instances={instances} />
         </span>
       ))}
     </span>

@@ -7,7 +7,8 @@ import type {
   DamageBreakdown,
   TierDamageText,
 } from '../contracts/rollResolution.ts';
-import type { CompiledAbility, CompiledNode, PushNode } from './compileAbility.ts';
+import type { CompiledAbility, CompiledNode, PushNode, ConditionNode } from './compileAbility.ts';
+import type { Characteristic } from './abilityGrammar.ts';
 import { plainText, resolveAbilityRoll, type AbilityRollInput } from './index.ts';
 
 /** Absence is unknown. `none` asserts coverage of this category for forced movement. */
@@ -24,6 +25,14 @@ export interface MovementFacts {
 }
 
 export interface CompiledAbilityInput extends Omit<AbilityRollInput, 'ability'> {
+  conditionFacts?: {
+    targets: {
+      targetId: string;
+      kind: 'hero' | 'foe' | 'object' | 'squad';
+      characteristics?: Partial<Record<Characteristic, number>>;
+    }[];
+    potency?: { characteristic: Characteristic; weak: number; average: number; strong: number };
+  };
   movement?: {
     actor: MovementFacts;
     targets: (MovementFacts & { targetId: string })[];
@@ -64,6 +73,68 @@ export interface CompiledPushOutcome extends EffectIdentity {
   rulePaths: string[];
 }
 
+export interface CompiledConditionOutcome extends EffectIdentity {
+  kind: 'condition';
+  status: 'applied' | 'resisted' | 'fact-needed' | 'manual';
+  after: string;
+  characteristic: Characteristic;
+  threshold?: number;
+  thresholdSource: ConditionNode['threshold'];
+  potencyCharacteristic?: Characteristic;
+  targetScore?: number;
+  condition: ConditionNode['condition'];
+  duration: 'save-ends';
+  requirements: string[];
+}
+
+function conditionOutcome(
+  node: ConditionNode,
+  targetId: string,
+  input: CompiledAbilityInput,
+  damageComplete: boolean,
+): CompiledConditionOutcome {
+  const requirements: string[] = [];
+  const target = input.conditionFacts?.targets.find(fact => fact.targetId === targetId);
+  const potency = input.conditionFacts?.potency;
+  const rawThreshold =
+    node.threshold.kind === 'printed' ? node.threshold.value : potency?.[node.threshold.tier];
+  const threshold = Number.isSafeInteger(rawThreshold) ? rawThreshold : undefined;
+  if (threshold === undefined)
+    requirements.push(
+      `actor.potency.${node.threshold.kind === 'potency' ? node.threshold.tier : 'printed'}`,
+    );
+  const eligible = target?.kind === 'hero' || target?.kind === 'foe';
+  if (!eligible) requirements.push(`target:${targetId}.evaluatedCreatureCharacteristics`);
+  const rawScore = eligible ? target.characteristics?.[node.characteristic] : undefined;
+  const targetScore = Number.isSafeInteger(rawScore) ? rawScore : undefined;
+  if (targetScore === undefined)
+    requirements.push(`target:${targetId}.characteristics.${node.characteristic}`);
+  if (!damageComplete) requirements.push(`damage:${node.after}.completion`);
+  return {
+    kind: 'condition',
+    nodeId: node.id,
+    targetId,
+    locator: node.locator,
+    clause: node.clause,
+    after: node.after,
+    characteristic: node.characteristic,
+    thresholdSource: node.threshold,
+    ...(threshold !== undefined ? { threshold } : {}),
+    ...(targetScore !== undefined ? { targetScore } : {}),
+    ...(node.threshold.kind === 'potency' && potency
+      ? { potencyCharacteristic: potency.characteristic }
+      : {}),
+    condition: node.condition,
+    duration: node.duration,
+    requirements,
+    status: requirements.length
+      ? 'fact-needed'
+      : targetScore! < threshold!
+        ? 'applied'
+        : 'resisted',
+  };
+}
+
 export interface CompiledManualOutcome extends EffectIdentity {
   kind: 'unsupported';
   status: 'manual';
@@ -72,7 +143,7 @@ export interface CompiledManualOutcome extends EffectIdentity {
 }
 
 export type CompiledEffectOutcome =
-  CompiledDamageOutcome | CompiledPushOutcome | CompiledManualOutcome;
+  CompiledDamageOutcome | CompiledPushOutcome | CompiledConditionOutcome | CompiledManualOutcome;
 
 export type CompiledAbilityOutcome =
   | { kind: 'manual'; definition: CompiledAbility; reason: string; effects: [] }
@@ -216,6 +287,16 @@ export function resolveCompiledAbility(
     definition.tiers.some(
       nodes =>
         nodes.filter(node => node.kind === 'damage').length !== 1 ||
+        nodes.some(
+          (node, index) =>
+            node.kind === 'condition' &&
+            (nodes.length !== 2 ||
+              index !== 1 ||
+              nodes[0]?.kind !== 'damage' ||
+              nodes[0].id !== node.after ||
+              node.duration !== 'save-ends' ||
+              (node.threshold.kind === 'printed' && !Number.isSafeInteger(node.threshold.value))),
+        ) ||
         nodes.some(node => node.kind === 'unsupported' && node.dependency !== 'after-damage') ||
         nodes.some(
           node =>
@@ -282,6 +363,8 @@ export function resolveCompiledAbility(
           ...(application ? { application } : {}),
           requirements: application ? [] : ['Supported damage and complete target damage facts'],
         });
+      } else if (node.kind === 'condition') {
+        remainder.push(conditionOutcome(node, target.targetId, input, !!application));
       } else if (node.kind === 'push') {
         remainder.push(pushOutcome(node, target.targetId, definition, input, !!application));
       } else {

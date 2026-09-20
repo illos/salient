@@ -99,7 +99,13 @@ function FoeCard({
       actor={{ kind: 'foe', id: foe.id, name: foe.name }}
       subtitle={director ? foeRoleLine(foe.summary, { compact: true }) || undefined : undefined}
       health={foeCardHealth(foe)}
-      badges={<ConditionBadges conditions={foe.conditions} readable={false} />}
+      badges={
+        <ConditionBadges
+          conditions={foe.conditions}
+          instances={foe.conditionInstances}
+          readable={false}
+        />
+      }
       state={state}
       mayTarget={mayTarget && running}
       aside={

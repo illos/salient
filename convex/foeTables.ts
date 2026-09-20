@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-only
 import { defineTable } from 'convex/server';
 import { v } from 'convex/values';
-import { conditionsValidator } from './characterTables';
+import { conditionsValidator, conditionInstanceValidator } from './characterTables';
 
 export const foeTables = {
   foes: defineTable({
@@ -16,6 +16,8 @@ export const foeTables = {
       stamina: v.number(),
       temporaryStamina: v.number(),
       conditions: v.optional(conditionsValidator),
+      manualConditions: v.optional(conditionsValidator),
+      conditionInstances: v.optional(v.array(conditionInstanceValidator)),
     }),
     /**
      * V02: set on a minion that belongs to a squad. Its `live.stamina` is the printed per-member

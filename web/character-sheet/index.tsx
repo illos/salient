@@ -419,7 +419,12 @@ export function HeroSheetView({ sheet, compact }: { sheet: HeroSheet; compact?: 
             rollFor={rollFor}
             onRollFor={setRollFor}
           >
-            {live && <ActiveConditionBadges conditions={live.conditions} />}
+            {live && (
+              <ActiveConditionBadges
+                conditions={live.conditions}
+                instances={live.conditionInstances}
+              />
+            )}
           </SheetHeader>
           {activation}
           {stamina}
@@ -464,7 +469,12 @@ export function HeroSheetView({ sheet, compact }: { sheet: HeroSheet; compact?: 
     <article className="flex flex-col gap-8" aria-label={`${sheet.name} character sheet`}>
       <div className="flex flex-col gap-4">
         <SheetHeader sheet={sheet} partial={partial} rollFor={rollFor} onRollFor={setRollFor}>
-          {live && <ActiveConditionBadges conditions={live.conditions} />}
+          {live && (
+            <ActiveConditionBadges
+              conditions={live.conditions}
+              instances={live.conditionInstances}
+            />
+          )}
         </SheetHeader>
         {activation}
         {rollTest}

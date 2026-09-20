@@ -83,7 +83,10 @@ async function saved(t: Backend, event: Id<'events'>) {
 async function read(client: Client, campaignId: Id<'campaigns'>, event: Id<'events'>) {
   return (await client.query(api.abilities.results, { campaignId, eventIds: [event] }))[0]!;
 }
-function effect(result: CompiledResult | PublicCompiledResult, kind: 'push' | 'unsupported') {
+function effect(
+  result: CompiledResult | PublicCompiledResult,
+  kind: 'push' | 'unsupported' | 'condition',
+) {
   const occurrence = result.effects.find(o => o.effect.kind === kind);
   if (!occurrence) throw new Error(`Missing ${kind}`);
   return occurrence;
@@ -254,7 +257,7 @@ describe('V72 persisted compiled effects', () => {
     ).toBeUndefined();
   });
 
-  test('BP2/5: correction replaces potency occurrence; disposition pays or applies nothing and schedules no save', async () => {
+  test('BP2/5: correction replaces potency occurrence; resisted conditions refuse disposition and schedule no save', async () => {
     const t = backend();
     const f = await setup(t);
     await command(f.player.client, f.campaignId, '@Thorn /turn end');
@@ -268,7 +271,8 @@ describe('V72 persisted compiled effects', () => {
     );
     const initial = await saved(t, used.eventId);
     expect(initial.targets[0]!.outcome).toMatchObject({ tier: 2, damage: { rolledDamage: 6 } });
-    const potency = effect(initial.compiled as CompiledResult, 'unsupported');
+    const potency = effect(initial.compiled as CompiledResult, 'condition');
+    expect(potency.effect).toMatchObject({ kind: 'condition', status: 'resisted' });
     expect(potency.effect.clause).toContain('M < 1');
     expect((await t.run(ctx => ctx.db.get(f.campaignId)))!.malice).toBe(0);
     const heroBefore = (await t.run(ctx => ctx.db.get(f.thornId)))!.liveState;
@@ -280,9 +284,10 @@ describe('V72 persisted compiled effects', () => {
     );
     const current = await saved(t, used.eventId);
     expect(current.dice).toEqual({ d10a: 7, d10b: 7 });
-    const currentPotency = effect(current.compiled as CompiledResult, 'unsupported');
+    const currentPotency = effect(current.compiled as CompiledResult, 'condition');
     expect(currentPotency.id).not.toBe(potency.id);
     expect(currentPotency.revision).toBe(corrected.eventId);
+    expect(currentPotency.effect).toMatchObject({ kind: 'condition', status: 'resisted' });
     expect(currentPotency.effect.clause).toContain('M < 0');
     await expect(
       resolve(f.director.client, f.campaignId, used.eventId, potency.id, f.thornId, 'character'),
@@ -291,14 +296,16 @@ describe('V72 persisted compiled effects', () => {
     expect(heroCorrected!.stamina).toBe(25);
     const rollCount = (await t.run(ctx => ctx.db.query('rolls').take(100))).length;
     const scheduled = await t.run(ctx => ctx.db.query('clockRegistrations').take(100));
-    await resolve(
-      f.director.client,
-      f.campaignId,
-      used.eventId,
-      currentPotency.id,
-      f.thornId,
-      'character',
-    );
+    await expect(
+      resolve(
+        f.director.client,
+        f.campaignId,
+        used.eventId,
+        currentPotency.id,
+        f.thornId,
+        'character',
+      ),
+    ).rejects.toThrow(/applied|resisted|disposition/);
     expect((await t.run(ctx => ctx.db.get(f.thornId)))!.liveState).toEqual(heroCorrected);
     expect((await t.run(ctx => ctx.db.get(f.campaignId)))!.malice).toBe(0);
     expect((await t.run(ctx => ctx.db.query('rolls').take(100))).length).toBe(rollCount);
@@ -307,6 +314,19 @@ describe('V72 persisted compiled effects', () => {
     expect(JSON.stringify(publicCompiled)).not.toContain('Crafty');
     expect(JSON.stringify(publicCompiled)).not.toContain('Spear Charge');
     expect(publicCompiled).not.toHaveProperty('inputs');
+    await command(f.director.client, f.campaignId, '/history rewind');
+    expect((await saved(t, used.eventId)).compiled).toEqual(initial.compiled);
+    const heroRestored = (await t.run(ctx => ctx.db.get(f.thornId)))!.liveState;
+    const scheduledRestored = await t.run(ctx => ctx.db.query('clockRegistrations').take(100));
+    await expect(
+      resolve(f.director.client, f.campaignId, used.eventId, potency.id, f.thornId, 'character'),
+    ).rejects.toThrow(/applied|resisted|disposition/);
+    expect((await t.run(ctx => ctx.db.get(f.thornId)))!.liveState).toEqual(heroRestored);
+    expect((await t.run(ctx => ctx.db.get(f.campaignId)))!.malice).toBe(0);
+    expect((await t.run(ctx => ctx.db.query('rolls').take(100))).length).toBe(rollCount);
+    expect(await t.run(ctx => ctx.db.query('clockRegistrations').take(100))).toEqual(
+      scheduledRestored,
+    );
   });
   test('restored foe aliases keep occurrence identity and accept the current target without disclosing health', async () => {
     const t = backend();
@@ -466,13 +486,35 @@ describe('V72 persisted compiled effects', () => {
     );
     const row = await saved(t, used.eventId);
     const compiled = structuredClone(row.compiled) as CompiledResult;
-    const first = effect(compiled, 'unsupported');
-    const node = compiled.definition.tiers[1]!.find(
+    const first = effect(compiled, 'condition');
+    const nodeIndex = compiled.definition.tiers[1]!.findIndex(
       candidate => candidate.id === first.effect.nodeId,
-    )!;
+    );
+    const originalNode = compiled.definition.tiers[1]![nodeIndex]!;
+    const node = {
+      id: originalNode.id,
+      locator: originalNode.locator,
+      clause: originalNode.clause,
+      kind: 'unsupported' as const,
+      shape: 'fixture:manual-clause',
+      reason: 'Synthetic occurrence-storage fixture',
+      dependency: 'after-damage' as const,
+    };
+    compiled.definition.tiers[1]![nodeIndex] = node;
+    first.effect = {
+      nodeId: node.id,
+      locator: node.locator,
+      clause: node.clause,
+      targetId: first.effect.targetId,
+      kind: 'unsupported',
+      status: 'manual',
+      reason: node.reason,
+      dependency: node.dependency,
+    };
     // Test-only occurrence-storage contract fixture. This synthetic second node is NOT a claim
     // that Bury the Point prints repeated clauses or that this source shape is live-eligible.
-    // A real public use supplies the authority/history context; only its saved effect list is extended.
+    // A real public use supplies the authority/history context. Its condition remainder is explicitly
+    // replaced with a synthetic manual node before duplicating the saved effect list.
     const secondNode = {
       ...node,
       id: `${compiled.definition.id}#fixture:repeated-clause:1`,

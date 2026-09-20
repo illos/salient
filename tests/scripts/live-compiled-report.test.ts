@@ -20,9 +20,11 @@ test('V72 availability follows current grants and loading, not catalog presence'
     'Bite',
     'Brutal Slam',
     'Bury the Point',
+    'Eye of Surlach',
     'Melee Weapon Free Strike',
     'Ranged Weapon Free Strike',
     'Spear Charge',
+    'The Wode Defends',
     'Viscous Fire',
   ]);
   expect(
@@ -30,7 +32,14 @@ test('V72 availability follows current grants and loading, not catalog presence'
       .filter(e => e.execution === 'supported' && e.live === 'not-reachable')
       .map(e => e.name)
       .sort(),
-  ).toEqual(['Meteoric Introduction', 'Ray of Agonizing Self-Reflection', 'Razor Claws']);
+  ).toEqual([
+    'Bola Knock',
+    'Eye Flash',
+    'Meteoric Introduction',
+    'Power Chord',
+    'Ray of Agonizing Self-Reflection',
+    'Razor Claws',
+  ]);
 });
 
 // Pinned Ghoul and Worg source: fixed +2 roll, constant 3/4/5 damage. No Agility damage bonus.
@@ -78,7 +87,7 @@ test.each([
       });
       expect(outcome.roll.damageApplications[0]).toMatchObject({ staminaAfter: 30 - damage });
       expect(outcome.effects.filter(e => e.kind === 'push')).toEqual([]);
-      const manual = outcome.effects.filter(e => e.kind === 'unsupported');
+      const manual = outcome.effects.filter(e => e.kind === 'condition');
       expect(manual).toHaveLength(name === 'Razor Claws' && tier === 3 ? 1 : 0);
       if (manual.length) expect(manual[0]!.clause).toMatch(/M < 2 .*bleeding.*save ends/);
     }

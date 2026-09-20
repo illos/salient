@@ -10,9 +10,8 @@
  * docs/table-command-spec.md#clock-driven-operations, docs/conditions-and-clock.md#2-clock-contract
  * (sections 2.2 boundaries, 2.3 order of due work, 2.4 producers) and #3-malice-common-lifecycle.
  *
- * Q-TS-1 (answered 2026-09-14): no save-ends roll is automatic in v0.01. The save phase exists here as
- * the registration hook the contract describes; nothing registers a `saving-throw` item, and if one
- * ever appears without a V1 producer it is recorded as unsupported, never rolled.
+ * V88 supplies the V1 producer for source-linked save-ends instances. Unknown producers remain
+ * unsupported; manual toggles alone never schedule a save.
  */
 import { ConvexError } from 'convex/values';
 import type { Doc, Id } from '../_generated/dataModel';
@@ -28,6 +27,15 @@ import type {
   WorkSource,
 } from '../../shared/contracts/clock';
 import { appendEvent } from './events';
+import { rollDice } from './dice';
+import { baselineOf } from './characterBuild';
+import type { SavingThrowSource } from '../../shared/contracts/liveState';
+import {
+  findConditionInstance,
+  recordConditionSave,
+  unscheduleConditionInstance,
+} from './conditionInstances';
+import type { DieResult } from '../../shared/contracts/history';
 import { journalInsert, journalPatch, type JournalScope } from './journal';
 
 export type Registration = Doc<'clockRegistrations'>;
@@ -81,7 +89,11 @@ export function isDue(timing: TimingClause, event: BoundaryEvent): boolean {
     case 'every-turn':
       return event.kind === timing.boundary && event.turn !== undefined;
     case 'creature-turn':
-      return event.kind === timing.boundary && event.turn?.creatureId === timing.creatureId;
+      return (
+        event.kind === timing.boundary &&
+        (event.turn?.creatureId === timing.creatureId ||
+          event.turn?.participantIds.includes(timing.creatureId) === true)
+      );
     case 'end-of-next-turn':
       // rule/combat/end-of-turn.md: the end of the affected creature's current turn if imposed during
       // it, else the end of its next turn. Either way the first `turn-end` of that creature after
@@ -223,7 +235,14 @@ async function fireMalice(
 async function fire(
   ctx: MutationCtx,
   firing: FiringContext,
-): Promise<{ kind: string; description: string; payload?: unknown; unsupported?: string }> {
+): Promise<{
+  kind: string;
+  description: string;
+  payload?: unknown;
+  unsupported?: string;
+  dice?: DieResult[];
+  save?: { roll: number; success: boolean };
+}> {
   const work = firing.registration.work as ScheduledWorkKind;
   switch (work.kind) {
     case 'malice':
@@ -238,13 +257,63 @@ async function fire(
         };
       return handler(ctx, firing);
     }
-    case 'saving-throw':
-      // Q-TS-1: no automatic save in v0.01. The hook exists; nothing may roll here.
+    case 'saving-throw': {
+      const found = await findConditionInstance(ctx, work.creatureId, work.effectInstanceId);
+      if (
+        !found ||
+        found.campaignId !== firing.encounter.campaignId ||
+        found.instance.status !== 'active' ||
+        found.instance.registrationId !== firing.registration._id
+      )
+        return {
+          kind: 'clock.unsupported',
+          description: `${firing.registration.source.label}: no active supported condition instance; resolve manually.`,
+          unsupported: 'no active supported condition instance',
+        };
+      const accepted = await rollDice(
+        ctx,
+        firing.encounter.campaignId,
+        `save_${firing.boundaryEventId}_${firing.registration._id}`,
+        [{ id: 'save', sides: 10 }],
+        null,
+      );
+      const roll = accepted.dice[0]!.value;
+      const hero =
+        found.target.kind === 'character'
+          ? await ctx.db.get(found.target.id as Id<'characters'>)
+          : null;
+      const evaluated = baselineOf(hero?.derivedBaseline)?.savingThrowThreshold;
+      const threshold = evaluated && Number.isFinite(evaluated.value) ? evaluated.value : 6;
+      const thresholdSource: SavingThrowSource =
+        evaluated && Number.isFinite(evaluated.value)
+          ? { kind: 'hero-baseline', provenance: evaluated.provenance }
+          : {
+              kind: 'printed',
+              sourcePath: 'vendor/steel-compendium/en/unified/md/rule/general/saving-throw.md',
+            };
+      const success = roll >= threshold;
+      await recordConditionSave(ctx, firing.scope, found.target, found.instance.id, {
+        roll,
+        success,
+        boundaryEventId: firing.boundaryEventId,
+        threshold,
+        thresholdSource,
+      });
       return {
-        kind: 'clock.unsupported',
-        description: `${firing.registration.source.label}: a save is due, but automatic saves are not active in v0.01 (Q-TS-1); roll it through the dice controls and toggle the condition manually.`,
-        unsupported: 'automatic saving throws are not active in v0.01 (Q-TS-1)',
+        kind: 'clock.saving-throw',
+        description: `${firing.registration.source.label}: saving throw ${roll} (needs ${threshold}+) — ${success ? 'success; effect ends.' : 'failure; effect remains. Hero-token follow-up remains manual.'}`,
+        payload: {
+          effectInstanceId: found.instance.id,
+          creatureId: work.creatureId,
+          roll,
+          success,
+          threshold,
+          thresholdSource,
+        },
+        dice: accepted.dice,
+        save: { roll, success },
       };
+    }
     default:
       return {
         kind: 'clock.unsupported',
@@ -278,7 +347,8 @@ async function activeRegistrations(ctx: MutationCtx, encounterId: Id<'encounters
   const rows = await ctx.db
     .query('clockRegistrations')
     .withIndex('by_encounter', q => q.eq('encounterId', encounterId))
-    .take(1000);
+    .take(1001);
+  if (rows.length > 1000) throw new ConvexError('Too many clock registrations to dispatch safely.');
   return rows.filter(row => row.status === 'active');
 }
 
@@ -359,6 +429,7 @@ export async function dispatchBoundary(
       causeEventId: boundaryEventId,
       kind: result.kind,
       description: result.description,
+      ...(result.dice ? { dice: result.dice } : {}),
       payload: {
         registrationId: registration._id,
         enqueueSeq: registration.enqueueSeq,
@@ -374,7 +445,9 @@ export async function dispatchBoundary(
       logEntryId,
       outcome: result.unsupported
         ? { status: 'unsupported', reason: result.unsupported }
-        : { status: 'applied' },
+        : result.save
+          ? { status: 'save', ...result.save }
+          : { status: 'applied' },
     });
     if (isOneShot(registration.timing as TimingClause))
       await retireWork(ctx, scope, registration._id);
@@ -387,5 +460,18 @@ export async function dispatchBoundary(
     .filter(row => (row.work as ScheduledWorkKind).kind === 'saving-throw')
     .filter(row => isDue(row.timing as TimingClause, event));
   for (const registration of saves) await fireOne(registration, 'saves');
+  if (event.kind === 'combat-end') {
+    for (const registration of await activeRegistrations(ctx, encounterId)) {
+      const work = registration.work as ScheduledWorkKind;
+      if (work.kind !== 'saving-throw') continue;
+      const found = await findConditionInstance(ctx, work.creatureId, work.effectInstanceId);
+      if (
+        found &&
+        found.campaignId === scope.campaignId &&
+        found.instance.registrationId === registration._id
+      )
+        await unscheduleConditionInstance(ctx, scope, found.target, found.instance.id);
+    }
+  }
   return { event, records };
 }

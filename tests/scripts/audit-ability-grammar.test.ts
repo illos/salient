@@ -4,6 +4,9 @@
  * node values are read from the pinned source text quoted in each test, never from running the
  * classifier. Each test names the concrete misclassification it catches.
  */
+import { createHash } from 'node:crypto';
+import { readFileSync } from 'node:fs';
+import { conditionExpression } from '../../shared/resolve/abilityGrammar.ts';
 import { describe, expect, it } from 'vitest';
 import {
   audit,
@@ -232,4 +235,85 @@ it('produces byte-identical JSON and Markdown across two full runs', () => {
   expect(JSON.stringify(second)).toBe(JSON.stringify(first));
   expect(renderMarkdown(second)).toBe(renderMarkdown(first));
   expect(first.totals['foe-ability'].total).toBe(1158);
+});
+
+// The committed pre-V88 report was stale by 25 grants. Compare existing rows by stable identity,
+// and name those additions separately. The exact changed clauses remain reviewable in the fixture.
+it('V88 changes only the exact bounded flags, preserving every other prior classification byte', () => {
+  const fixture = JSON.parse(
+    readFileSync(new URL('../fixtures/v88-audit-baseline.json', import.meta.url), 'utf8'),
+  ) as {
+    addedIds: string[];
+    rows: Record<
+      string,
+      {
+        hash: string;
+        withinBefore?: boolean;
+        changes?: { index: number; text: string; before: boolean; after: boolean }[];
+      }
+    >;
+  };
+  const canonical = (value: unknown): unknown =>
+    Array.isArray(value)
+      ? value.map(canonical)
+      : value && typeof value === 'object'
+        ? Object.fromEntries(
+            Object.entries(value)
+              .sort(([a], [b]) => (a < b ? -1 : a > b ? 1 : 0))
+              .map(([key, item]) => [key, canonical(item)]),
+          )
+        : value;
+  const report = audit();
+  expect(
+    report.entries
+      .filter(entry => !fixture.rows[`${entry.corpus}|${entry.id}`])
+      .map(entry => `${entry.corpus}|${entry.id}`)
+      .sort(),
+  ).toEqual(fixture.addedIds);
+  let promotions = 0;
+  let demotions = 0;
+  for (const [key, baseline] of Object.entries(fixture.rows)) {
+    const entry = report.entries.find(row => `${row.corpus}|${row.id}` === key);
+    expect(entry, key).toBeDefined();
+    const classification = structuredClone(entry!.classification);
+    for (const change of baseline.changes ?? []) {
+      const diagnostic = classification.diagnostics[change.index]!;
+      expect(diagnostic, key).toMatchObject({
+        type: 'potency-condition',
+        text: change.text,
+        bounded: change.after,
+      });
+      expect(conditionExpression(diagnostic.text), key).toBeDefined();
+      if (change.after) promotions++;
+      else demotions++;
+      diagnostic.bounded = change.before;
+    }
+    if (baseline.withinBefore !== undefined)
+      classification.withinV26Bounded = baseline.withinBefore;
+    expect(
+      createHash('sha256')
+        .update(JSON.stringify(canonical(classification)))
+        .digest('hex'),
+      key,
+    ).toBe(baseline.hash);
+  }
+  expect({ promotions, demotions }).toEqual({ promotions: 235, demotions: 5 });
+});
+
+it.each([
+  'bleeding',
+  'dazed',
+  'frightened',
+  'grabbed',
+  'prone',
+  'restrained',
+  'slowed',
+  'taunted',
+  'weakened',
+])('V88 bounds core %s, including signed potency', condition => {
+  expect(conditionExpression(`M < -1, ${condition} (save ends)`)).toMatchObject({
+    characteristic: 'M',
+    threshold: { kind: 'printed', value: -1 },
+    condition,
+  });
 });

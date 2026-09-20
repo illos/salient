@@ -76,11 +76,15 @@ general condition engine and it does not automate any condition's consequences.
   instance is recorded with no registration and the log says the save is unscheduled.
 - **Automatic saving throw.** Replace the Q-TS-1 stub for `saving-throw` work in
   `convex/lib/clock.ts` with the V1 producer for ability-sourced instances: draw one d10 from the
-  campaign dice stream (`convex/lib/dice.ts`), record the die on the clock event, end the instance on
-  6 or higher (retire the registration; turn the toggle off unless a manual toggle or another instance
-  of the same condition remains), keep it on a lower roll, and describe both outcomes in the log with
-  the instance's source. The failed-save hero-token follow-up stays manual and is named as such in the
-  failure line; no token pool exists.
+  campaign dice stream (`convex/lib/dice.ts`), record the die on the clock event, end the instance
+  when the die meets the creature's saving-throw threshold (retire the registration; turn the toggle
+  off unless a manual toggle or another instance of the same condition remains), keep it on a lower
+  roll, and describe both outcomes in the log with the instance's source. The threshold is the printed
+  6 for foes and for any creature without an evaluated build; for an admitted hero it is the already
+  evaluated `DerivedBaseline.savingThrowThreshold` (default 6, lowered by evaluated traits such as
+  Otherworldly Grace with their recorded provenance). Record the threshold used and its source on the
+  clock outcome. No new trait parsing, no foe trait automation. The failed-save hero-token follow-up
+  stays manual and is named as such in the failure line; no token pool exists.
 - **Manual controls stay coherent.** `condition.off` on a creature with active instances of that
   condition ends those instances and retires their registrations, logging which sources ended.
   `condition.on` remains a manual toggle and is not confused with an instance.
@@ -179,10 +183,13 @@ general condition engine and it does not automate any condition's consequences.
    instance, toggle unchanged, no registration, log states resisted; the hero's score is visible to
    the Director and to that hero's controller only.
 7. **Automatic save.** Ending the affected hero's turn rolls one d10 from the campaign stream and
-   logs it. With a die of 6 or more the instance ends, the registration retires and the toggle is
-   off; with 5 or less the instance and registration remain and the failure line names the manual
-   hero-token follow-up. Both branches are proven with disclosed dice-stream positioning in
-   `tests/app` and at least one branch with real dice in the headless proof.
+   logs it with the threshold used and its source. With a die at or above the threshold the instance
+   ends, the registration retires and the toggle is off; below it the instance and registration
+   remain and the failure line names the manual hero-token follow-up. Both branches are proven with
+   disclosed dice-stream positioning in `tests/app` and at least one branch with real dice in the
+   headless proof. A pure or persisted case with an evaluated hero whose threshold is 5 shows a die
+   of 5 succeeding for that hero and failing for a foe at the printed 6; the source of each threshold
+   is read back.
 8. **Undo and redo.** Undoing the turn end restores the instance, registration and toggle exactly;
    redo reapplies the recorded save without a new roll.
 9. **Manual coherence.** `condition.off bleeding` on a hero with an active instance ends the
@@ -196,10 +203,16 @@ general condition engine and it does not automate any condition's consequences.
     leaves legacy compatibility only by being added to the inventory below with its own design and
     live cases; its cost and all three tiers come from the source, and its applied and resisted
     branches are proven live.
-12. **Regression.** The V72 proof runners (`scripts/v72-headless.ts` isolated and
-    `scripts/v72-headless-main.ts` occurrence-aware linked corrections) still pass unchanged; the six
-    V72 compiled abilities produce identical damage and push results; manual toggles, R05 condition
-    tests and the Malice lifecycle are unchanged.
+12. **Regression.** `scripts/v72-headless-main.ts` (Brutal Slam linked corrections) passes
+    unchanged. `scripts/v72-headless.ts` keeps every damage, push, cost, blocking, permission,
+    correction-identity and history assertion unchanged, and only its Bury the Point remainder
+    assertions change, because V88 changes that behavior by design: the BP2 occurrence is
+    `condition` with status `resisted` (H has Might 2, `M < 1`), the corrected occurrence keeps a
+    distinct id and reads `M < 0` still `resisted`, and `ability.resolved` on it is refused before
+    and after `/history rewind` with the roster unchanged. The historical BP5 disposition case is
+    superseded, not deleted from Git history. The six V72 compiled abilities produce identical damage
+    and push results; manual toggles, R05 condition tests and the Malice lifecycle are unchanged.
+    Record the adapted assertions in the V88 evidence; the V72 evidence stays historical.
 13. **Reports.** `pnpm check` passes including report freshness; the V72 support report shows
     Bury the Point and Eye of Surlach compiled with no diagnostics and the library-wide bounded
     potency abilities as compiled-but-unavailable until V87 seeds them.
@@ -216,6 +229,7 @@ backlog. Per-ability designs live in this file's appendix below and are extended
 | Bury the Point (Goblin Warrior) | `monster/goblin/statblock/goblin-warrior.md`, Bury the Point | Cases BP6–BP10 below | pending | pending | pending |
 | Eye of Surlach (Goblin Cursespitter) | `monster/goblin/statblock/goblin-cursespitter.md`, Eye of Surlach | pending (implementer, same shape as BP6–BP10) | pending | pending | pending |
 | Ray of Agonizing Self-Reflection (Elementalist) | `feature/ability/elementalist/level-1/ray-of-agonizing-self-reflection.md` | Case RAY1 below (compile-only) | pending | not reachable (no grant) | pending |
+| The Wode Defends (Wode Elf ancestry, V82 grant) | `feature/ability/wode-elf/the-wode-defends.md` | Cases WD1–WD3 below; implementer completes | pending | pending (live symbolic potency) | pending |
 | Shadow Chains (Goblin Assassin) | `monster/goblin/statblock/goblin-assassin.md` | Compatibility only: three creatures | unchanged | unchanged | regression proof |
 | Brutal Slam, Viscous Fire, Melee and Ranged Weapon Free Strike, Spear Charge | V26 designs | unchanged | unchanged | V72 runners rerun | regression proof |
 
@@ -231,7 +245,7 @@ Saving throw: d10 at the end of each of the target's turns, 6 or higher ends the
 | --- | --- | --- |
 | BP6 **live** | G → H (Might 2); Malice 2; tier 2 | Damage 6 applied; `2 < 1` false: resisted; no instance, no registration; log shows inequality and "resisted"; H's score visible only to Director and H's controller. |
 | BP7 **live** | G → E (an evaluated hero whose Might is below the selected tier's value); Malice 2 | Damage per tier; inequality true: bleeding instance on E with source G/Bury the Point, toggle on, `saving-throw` registration at each of E's turn ends. |
-| BP8 **live continuation of BP7** | E's End turn | One d10 drawn from the campaign stream and logged. ≥ 6: instance ends, registration retired, toggle off. ≤ 5: instance stays; failure line names the manual hero-token follow-up. Undo restores exactly; redo reapplies the recorded die. |
+| BP8 **live continuation of BP7** | E's End turn | One d10 drawn from the campaign stream and logged with evaluated threshold/source. Die ≥ threshold: instance ends, registration retired, toggle off. Die < threshold: instance stays; failure line names the manual hero-token follow-up. Undo restores exactly; redo reapplies the recorded die. |
 | BP9 | Player correction of BP6 to tier 3 (`M < 2`) with Might 2 | Still resisted (2 is not less than 2); no instance. Correction of BP7 to a resisting tier ends the instance and retires the registration. |
 | BP10 | Correction of BP7 after BP8 rolled a save | Refused with the recorded reason; instance, registration, toggle and log unchanged. |
 
@@ -246,6 +260,36 @@ Reason (class Basics; Q-CHAR-12).
 | Case | Inputs | Expected |
 | --- | --- | --- |
 | RAY1 | Actor Reason 2 (potencies 0/1/2), target Reason 1, accepted dice giving tier 2 | Damage 4 + 2 = 6 corruption; threshold `average` = 1; `1 < 1` false: resisted. Tier 3 against the same target: threshold 2, applied. Target Reason unknown: `fact-needed`. |
+
+### The Wode Defends, live symbolic potency cases
+
+Source: Wode Elf ancestry ability, main action, Magic/Ranged/Strike, ranged 10, one creature,
+Power Roll + Might or Agility: tier 1 `2 + M or A damage; A < WEAK, slowed (save ends)`, tier 2
+`3 + M or A damage; A < AVERAGE, slowed (save ends)`, tier 3
+`5 + M or A damage; A < STRONG, restrained (save ends)`. The roll and damage characteristic choice
+is the existing free-strike-style independent choice. The potency values are the hero's class-named
+potency characteristic (`rule/character/potency.md`; Q-CHAR-12), not the rolled Might or Agility.
+The target resists with Agility. Tier 3 applies a different condition from tiers 1 and 2; each tier
+carries its own node.
+
+| Case | Inputs | Expected |
+| --- | --- | --- |
+| WD1 **live** | A Wode Elf hero W with an evaluated build (record its class, potency characteristic score and potencies weak/average/strong); target foe with printed Agility that resists the selected tier | Damage per the chosen characteristic; threshold shown as the resolved number with its symbolic origin; `resisted`; no instance; the foe's Agility appears only in the Director audience. |
+| WD2 **live** | Same hero against a foe whose printed Agility is below the selected tier's value | Instance applied (`slowed` at tiers 1–2, `restrained` at tier 3) with source W/The Wode Defends, toggle on, `saving-throw` registration at each of the foe's turn ends; the foe's End turn rolls the save from the campaign stream. |
+| WD3 | Pure: potencies derived from the class-named characteristic when another characteristic is higher; Agility-based potency letter unaffected by the Might/Agility roll choice | Thresholds equal weak/average/strong of the class-named score; changing the roll characteristic does not change the threshold. |
+
+The implementer derives the concrete hero and foe scores from the fixture's evaluated build and a
+seeded stat block before running, records them in the design, and uses no name-based special case.
+
+### Audit corpus drift
+
+The committed V64 audit was generated before the V82 ancestry content landed, so the corpus differs
+from current content. V88 compares the current baseline grammar against the changed grammar on the
+same current corpus and records the earlier content drift separately in the evidence, so the "only
+bounded potency rows moved" claim in check 1 is made against a like-for-like corpus. The stricter
+second-and-last-clause rule also demotes clauses the V26 audit labeled bounded although a third
+clause followed them; list those demotions beside the promotions in the evidence. Correct labeling
+wins over preserving an unsafe baseline label, and a demoted clause stays Unsupported at runtime.
 
 ## Rules research
 
@@ -285,3 +329,51 @@ Registered by the Fable ENGINE2 thread as the next engine slice after V72. Assig
 ENGINE thread (Chords `2b1ba081-4040-4665-9ea2-22364db707f4`) for implementation on
 `slice/V88` in `.worktrees/engine-potency` from current main. Fable verifies independently and owns
 integration and the shared-main update. All gate runs go to TESTER; browser testing remains paused.
+
+### 2026-09-20 — Acceptance check 12 clarified
+
+Astra ENGINE reported (Chords 854) that `scripts/v72-headless.ts` asserts the Bury the Point
+remainder as `unsupported` and disposes it (BP5), which V88 changes by design. Check 12 now says
+so: the main runner stays unchanged; the isolated runner keeps every other assertion and adapts only
+the Bury the Point remainder/disposition assertions to `condition`/`resisted` plus refused
+disposition. Confirmed by the ENGINE2 lead; no other scope change.
+
+### 2026-09-20 — The Wode Defends added to the live inventory
+
+Astra ENGINE's structural report (Chords 858) found The Wode Defends, granted since V82, inside the
+V88 grammar. Confirmed: it joins the live inventory with its own design (WD1–WD3) as the first live
+hero symbolic-potency ability; Ray stays compile-only. Live compiled total becomes nine (V72's seven
+plus Eye of Surlach and The Wode Defends); compiled-but-unavailable six. The audit comparison runs on
+the same current corpus with prior content drift recorded separately.
+
+### 2026-09-20 — Saving-throw threshold and audit demotions clarified
+
+Astra ENGINE (Chords 864) noted that `DerivedBaseline.savingThrowThreshold` already exists with
+trait provenance (for example Otherworldly Grace lowers it to 5) and that a fixed 6 would regress an
+evaluated hero once saves become automatic. Confirmed: admitted heroes use their evaluated threshold,
+foes and unevaluated creatures use the printed 6, the threshold and its source are recorded on the
+clock outcome, and no new trait parsing is added. Also confirmed that the stricter clause-position
+rule may demote clauses the V26 audit mislabeled as bounded; demotions are listed beside promotions.
+
+### 2026-09-20 — Implementation candidate, verification pending
+
+Worktree `.worktrees/engine-potency`, branch `slice/V88`, source base `a9c874c`.
+The compiler, persisted use/correction lifecycle, source-instance presentation and automatic clock
+producer are implemented. Original evaluated potency facts are saved with the compiled result;
+corrections reuse them. Unknown target characteristics remain unknown instead of inheriting the
+legacy foe roller's zero defaults. Public event descriptions/payloads omit target scores; query
+projection grants them only to the Director and the target hero's controller.
+
+Saving throws read the existing evaluated hero threshold and provenance, with printed 6 for foes.
+Manual toggles and multiple source instances are tracked separately; ending combat unschedules
+active instances without inventing a final turn. Retained save records make later correction refuse.
+History restores journaled condition/registration state without replaying dice. No trait actions,
+grants, loading paths, condition consequences, potency adjustments or browser automation were added.
+
+The focused integration fixture discloses its Might-0 baseline override and dice positioning; it
+exercises both correction directions and exact save restoration. The live runner uses legally
+created heroes and ordinary campaign dice. The V72 assertion adaptations are documented in
+[evidence/V88/v72-adaptation.md](evidence/V88/v72-adaptation.md); historical V72 capture evidence is
+unchanged. Report artifacts are regenerated by authoring commands; freshness gates, persisted tests,
+full check and actual headless execution remain TESTER work. Authoring TypeScript/lint/format checks
+are not claimed as completed acceptance.

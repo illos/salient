@@ -143,7 +143,13 @@ export function SquadCard({
             campaignId={campaignId}
             actor={{ kind: 'foe', id: foe.id, name: foe.name }}
             health={null}
-            badges={<ConditionBadges conditions={foe.conditions} readable={false} />}
+            badges={
+              <ConditionBadges
+                conditions={foe.conditions}
+                instances={foe.conditionInstances}
+                readable={false}
+              />
+            }
             state={foe.slain ? 'slain' : 'idle'}
             mayTarget={mayTarget && running && !foe.slain}
             onOpen={director && onOpenMember ? () => onOpenMember(foe) : undefined}
@@ -717,7 +723,11 @@ export function SquadSheet({
                   {foe.name}
                 </button>
                 {foe.slain && <span className="caps text-muted-foreground">Slain</span>}
-                <ConditionBadges conditions={foe.conditions} readable={false} />
+                <ConditionBadges
+                  conditions={foe.conditions}
+                  instances={foe.conditionInstances}
+                  readable={false}
+                />
                 {alone && <Badge variant="outline">acted alone this turn</Badge>}
                 {out && <Badge variant="outline">sitting out</Badge>}
                 {running && !foe.slain && (

@@ -9,6 +9,9 @@ import type {
 import {
   blocksFromMarkdown,
   classify,
+  conditionExpression,
+  type Characteristic,
+  type ConditionThreshold,
   damageExpression,
   plain,
   readMarkdownItems,
@@ -38,6 +41,14 @@ export interface DamageNode extends NodeSource {
   damageType?: string;
   kitBonusesIncluded: boolean;
 }
+export interface ConditionNode extends NodeSource {
+  kind: 'condition';
+  characteristic: Characteristic;
+  threshold: ConditionThreshold;
+  condition: import('../contracts/liveState.ts').ConditionId;
+  duration: 'save-ends';
+  after: string;
+}
 export interface PushNode extends NodeSource {
   kind: 'push';
   distance: number;
@@ -49,7 +60,7 @@ export interface UnsupportedNode extends NodeSource {
   reason: string;
   dependency: 'after-damage' | 'unknown';
 }
-export type CompiledNode = DamageNode | PushNode | UnsupportedNode;
+export type CompiledNode = DamageNode | PushNode | ConditionNode | UnsupportedNode;
 export interface CompileDiagnostic {
   code: string;
   message: string;
@@ -199,7 +210,8 @@ export function compileAbility(input: CompileEnvelope): CompiledAbility {
     block.tiers.forEach((text, tierIndex) => {
       const nodes = tiers[tierIndex]!;
       const tierLocator = `${locator}:tier${tierIndex + 1}`;
-      text.split(';').forEach((raw, ordinal) => {
+      const clauses = text.split(';');
+      clauses.forEach((raw, ordinal) => {
         const clause = raw.trim();
         if (!clause) {
           diagnose('empty-clause', tierLocator, raw, 'A missing clause cannot be interpreted.');
@@ -232,10 +244,22 @@ export function compileAbility(input: CompileEnvelope): CompiledAbility {
           });
           return;
         }
+        const condition = conditionExpression(clause);
+        if (ordinal === 1 && clauses.length === 2 && previous?.kind === 'damage' && condition) {
+          nodes.push({
+            ...sourceNode(envelope, tierLocator, ordinal, clause),
+            kind: 'condition',
+            ...condition,
+            duration: 'save-ends',
+            after: previous.id,
+          });
+          return;
+        }
         const typed = typeTierClause(
           clause,
           tierLocator,
           ordinal === 1 && previous?.kind === 'damage',
+          clauses.length === 2,
         );
         const bounded = typed?.type === 'potency-condition' && typed.bounded === true;
         nodes.push(
