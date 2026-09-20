@@ -11,8 +11,8 @@
     "version": "1.0.3"
   },
   "generatedAt": "2026-09-08",
-  "contentHash": "sha256:64a08e925f76657409df983b706d2599edcb499457e9b21325d65ee7268c10d8",
-  "entryCount": 483,
+  "contentHash": "sha256:060792377ef6001b06644e92d51f03f2a9ab373f99f625d6ddb5712da6fcbbcc",
+  "entryCount": 491,
   "selections": [
     {
       "id": "supporting-character-choices",
@@ -67,6 +67,14 @@
         "feature/fury/vuken"
       ],
       "basis": "feature/fury/level-1/beast-shape.md: \"You can use and gain the benefits of a stormwight kit (see Stormwight Kits)\"."
+    },
+    {
+      "id": "dwarf-ancestry",
+      "description": "Dwarf ancestry and complete level-one traits for V60.",
+      "paths": [
+        "ancestry/dwarf.md",
+        "feature/trait/dwarf"
+      ]
     },
     {
       "id": "polder-ancestry",
@@ -585,6 +593,14 @@
       "name": "Devil",
       "sourcePath": "vendor/steel-compendium/en/unified/md/ancestry/devil.md",
       "selection": "devil-ancestry",
+      "file": "ancestry.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/ancestry/dwarf",
+      "kind": "ancestry",
+      "name": "Dwarf",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/ancestry/dwarf.md",
+      "selection": "dwarf-ancestry",
       "file": "ancestry.json"
     },
     {
@@ -3953,6 +3969,62 @@
       "name": "Signature Trait: Wyrmplate",
       "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/dragon-knight/wyrmplate.md",
       "selection": "supporting-character-choices",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.dwarf/dwarf-traits",
+      "kind": "trait",
+      "name": "Dwarf Traits",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/dwarf/dwarf-traits.md",
+      "selection": "dwarf-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.dwarf/great-fortitude",
+      "kind": "trait",
+      "name": "Great Fortitude",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/dwarf/great-fortitude.md",
+      "selection": "dwarf-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.dwarf/grounded",
+      "kind": "trait",
+      "name": "Grounded",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/dwarf/grounded.md",
+      "selection": "dwarf-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.dwarf/runic-carving",
+      "kind": "trait",
+      "name": "Signature Trait: Runic Carving",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/dwarf/runic-carving.md",
+      "selection": "dwarf-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.dwarf/spark-off-your-skin",
+      "kind": "trait",
+      "name": "Spark Off Your Skin",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/dwarf/spark-off-your-skin.md",
+      "selection": "dwarf-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.dwarf/stand-tough",
+      "kind": "trait",
+      "name": "Stand Tough",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/dwarf/stand-tough.md",
+      "selection": "dwarf-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.dwarf/stone-singer",
+      "kind": "trait",
+      "name": "Stone Singer",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/dwarf/stone-singer.md",
+      "selection": "dwarf-ancestry",
       "file": "trait.json"
     },
     {
