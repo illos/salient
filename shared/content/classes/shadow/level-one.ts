@@ -77,7 +77,7 @@ export function getLevelOneDecisions(pools: DecisionDefinitions['pools']): Decis
       'Shadow',
       shadow,
       'You start with an Agility of 2',
-      [grant('characteristic', 'Agility 2')],
+      [grant('characteristic', 'Agility 2', shadow)],
     ),
     choice(
       'class.shadow.characteristic-array',
@@ -109,6 +109,7 @@ export function getLevelOneDecisions(pools: DecisionDefinitions['pools']): Decis
         grant(
           'potency',
           'Weak Potency: Agility − 2; Average Potency: Agility − 1; Strong Potency: Agility',
+          shadow,
         ),
       ],
     ),
