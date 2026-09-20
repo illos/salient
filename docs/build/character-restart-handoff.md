@@ -32,8 +32,11 @@ The retained CT114 `supporting-actions` deployment of `b15fc59` failed its exist
 function-push readiness guard while “Preparing Convex functions.” No live API scenarios started.
 The environment was stopped with its data retained; no retry, timeout increase or infrastructure
 repair was attempted. Shared main is unchanged. [V85/V86 evidence](evidence/V85/README.md)
-contains the logs, precise identities and remaining dependencies. Resume with a usable isolated
-deployment of the current candidate and the existing 35-scenario API suite. Do not repeat source
+contains the logs, precise identities and remaining dependencies. The user then requested the separate hosted cloud demo (`salient-dev.rdxx.workers.dev`). Its
+deploy CLI exited 1 before reporting upload success; two diagnostic repeats exposed no root cause.
+The hosted frontend build passed, but publication and the 35-scenario API run did not proceed.
+Resume with a successful deployment of the current candidate to the selected test environment
+and the existing API suite. Do not repeat source
 audits, expand class scope or enter another verification repair loop. Earth + Grounded's duplicate
 range benefit still lacks a complete public character witness because Earth specialization is unsupported.
 
