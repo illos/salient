@@ -4,7 +4,7 @@ Structural support, current grant/loading availability and live execution are se
 
 Source: `fb83a789da8f0327a389c277a0c790b1648d5810`; content: `sha256:609aed9b6d4bbb4d08676bfcc080333f48fbb9c64d9c952971f82001bef100ca`.
 
-Currently reachable compiled: 13; unchanged reachable compatibility: 1222; structurally supported but unavailable: 2.
+Currently reachable compiled: 13; unchanged reachable compatibility: 1259; structurally supported but unavailable: 2.
 
 | Ability | Population | Pure execution | Live boundary | Diagnostics |
 | --- | --- | --- | --- | --- |
