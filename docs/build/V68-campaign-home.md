@@ -157,3 +157,28 @@ resolved to the parent repository and overwrote the shared `remote.origin.url` i
 and reported it. Restored to `https://github.com/illos/salient.git` at 03:15 UTC; no push had
 succeeded to the wrong remote. Lesson: never run `git -C <path>` against a directory that is not
 yet a repository; check `git -C <path> rev-parse --show-toplevel` first.
+
+### 2026-09-20 — CT114 verification
+
+Isolated environment `campaign-home` (`presidium-dev --env campaign-home up` from the slice
+worktree; source `136f7e2`; backend and web healthy, "Convex functions ready" 03:21:53 UTC).
+Full `pnpm check` on the environment: exit 0 (lint; 284 engine tests; 423 app and scripts tests
+including `tests/app/campaign-home.test.ts`; 278 Markdown files linked; vendor pins; content,
+supporting and foes checks; production build). Environment stopped afterwards, volumes retained.
+
+Headless proof (`node scripts/v68-headless.ts`, evidence in [`evidence/V68`](evidence/V68/README.md)):
+
+| Capability / scenario | CLI/API entry point | Headless command, source, target and persisted evidence | Headless result | Browser result and additional gap |
+| --- | --- | --- | --- | --- |
+| Campaign projection carries members with heroes, session count and last played; no role tags | `campaigns.get` | step 1, `evidence/V68/headless.json`, exit 0 | pass | pending (moratorium; backlog rows logged) |
+| Join requests reviewed from the pop-up | `campaigns.requestJoin`, `campaigns.approveRequest` | step 2 | pass | pending |
+| Presence: heartbeat lists a member, non-member refused, leave removes | `presence.heartbeat`, `presence.list`, `presence.leave` | step 3 (expiry after 90 s covered by `tests/app/campaign-home.test.ts`) | pass | pending |
+| Chat: member-only, blank refused, retry returns the same id, no game-log entry, undo window unchanged | `chat.send`, `chat.list`, `events.list`, `history.status` | step 4 | pass | pending |
+| Start session selecting every member (interim), title on start, player title refused, Director retitle | `sessions.start`, `sessions.setTitle`, `sessions.list` | step 5 | pass | pending |
+| Closing updates `sessionCount`/`lastPlayedAt`, closed session accepts a title, RECAP reads that session's log | `sessions.transition`, `campaigns.get`, `events.list` with `sessionId` | step 6 | pass | pending |
+| Hero admission from the pop-up lists the hero under its owner with level 1; unapproved hero absent; pending applicant cannot read the campaign | `characters.create/save/submit`, `characters.reviews`, `characters.approve`, `campaigns.get` | step 7 | pass | pending |
+| Foe management remains reachable headlessly after leaving the campaign home | `foes.list` | step 8 | pass | pending |
+
+Elapsed 12.8 s; no fixture or infrastructure failures in the final run. The first run failed before
+any step on a Node ESM import-extension error in the script itself (fixed in `136f7e2`), not a
+product defect.
