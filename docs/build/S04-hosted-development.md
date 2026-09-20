@@ -122,3 +122,15 @@ Existing cloud data, auth settings and content were retained; no reset, reseed o
 was performed. GitHub CI passed all 681 tests and the complete check suite.
 See [hosted deployment evidence](evidence/V43/hosted/README.md) for live verification and limitations.
 This supersedes the earlier unpublished status; the shared CT114 runtime was not changed by this publication.
+
+## Integrated publication — 2026-09-20
+
+Executable source `a0a700af77740879e214c064876e277219f0f441` is now published to both
+Convex `dev:different-bat-943` and Worker `salient-dev`, version
+`0336f2f4-1141-4d95-8bc6-d2cec63f8797`. The content-only reseed loaded the committed 1151 entries.
+The initial scoped-key denial was resolved by the successor DEPLOY2 session; no play-data reset
+or backend repeat was needed. Temporary credentials were removed.
+TESTER's [live certificate](evidence/V85/tester-job-a0a700a-hosted-live.md) passes the exact manifest,
+438-foe catalog and Ghoul persistence, two character cohorts and real-dice V88 condition/save
+cleanup. The [deployment ledger](../../deploy.md) records GitHub closeout identity.
+Browser verification remains suspended under the project moratorium.

@@ -74,3 +74,11 @@ Subsequent closeout changes are documentation/metadata only; tested file hashes 
 This is committed-on-branch evidence, not merged or published. DEPLOY owns integration; reuse
 this full result when relevant integrated inputs are unchanged, checking identity and merge
 metadata. The existing cloud release still requires its separately submitted live verification.
+
+## Main integration
+
+DEPLOY integrated the reviewed candidate at `4f3fe13df73e9bf2914e085df72a00f185b79d6c`.
+The [integrated identity certificate](evidence/V85/tester-job-4f3fe13-integrated.md) reuses the
+full 358 + 575 pass after proving unchanged executable/test/configuration inputs.
+The later separately reviewed build-only heap adjustment is `a0a700a`; hosted build passed.
+Current cloud release and live verification state are recorded in the [deployment ledger](../../deploy.md).

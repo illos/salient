@@ -1,7 +1,9 @@
 # Deployment
 
-DEPLOY owns integration of finished branches into `main`, final release commits, the verified push
-of `main` to GitHub, and promotion of the integrated revision to the live stable cloud environment.
+DEPLOY2 (Chords `80f94764-5a63-430c-9548-6d8583052803`, succeeding DEPLOY
+`bc6847ae-0334-4282-ae3c-6ec7291a509c` on 2026-09-20) owns integration of finished branches into `main`,
+final release commits, the verified push of `main` to GitHub, and promotion of the integrated
+revision to the live stable cloud environment.
 TESTER owns all pre-release and post-release test execution under
 [testing-process.md](testing-process.md).
 
@@ -47,9 +49,9 @@ standing role unless the user explicitly includes it.
 
 | Job | Candidate | State | Next gate |
 | --- | --- | --- | --- |
-| Stable-cloud reconciliation | `main` release source `a0a700a` | Partial publication; blocked on scoped-key permission | backend published; content action denied (`deployment:functions:runInternalActions`); previous frontend retained; live gate and GitHub push pending |
-| V85/V86 | owner `64972e6`, integrated `4f3fe13` | Merged; included in published backend | resume content/frontend publication and live TESTER gate |
-| V88 | integrated with V85/V86 at `4f3fe13` | Merged; included in published backend | committed inventory 13/1259/2 requires 1151-entry content refresh before live certification |
+| Stable-cloud reconciliation | `main` release source `a0a700a` | Published; targeted live checks passed | documentation closeout and verified GitHub push; exact closeout SHA in DEPLOY2 completion message |
+| V85/V86 | owner `64972e6`, integrated `4f3fe13` | Merged and published; targeted live checks passed | release closeout |
+| V88 | integrated with V85/V86 at `4f3fe13` | Merged and published; targeted live checks passed | 1151 entries, inventory 13/1259/2; release closeout |
 | V89 | owner `dff62e8`, integrated `4f3fe13` | Merged; full 358+575 PASS reused by identity | build-only heap repair `a0a700a` independently reviewed and hosted build passed |
 | V75 | `slice/V75` at `2c7cfe2` | Not release-ready | user visual decision and refreshed handoff |
 
@@ -95,3 +97,28 @@ Resume with a scoped development key authorized for the internal reseed action, 
 the uploaded release identity/build stamp, reseed the committed snapshot, publish the frontend,
 complete targeted live checks through TESTER, then commit/push the release.
 Do not roll back to code lacking starting-reward or condition-instance validators.
+
+### Publication resumed — 2026-09-20 20:06 UTC
+
+User-requested ownership transferred to DEPLOY2. The fresh session's scoped development key
+successfully ran the existing content-only reseed: 1151 entries at pinned revision
+`fb83a789da8f0327a389c277a0c790b1648d5810`. No backend repeat, build, upload of source,
+auth reconfiguration or play-data reset was needed. The retained build passed the task's exact
+asset-stamp guard and published as Worker `0336f2f4-1141-4d95-8bc6-d2cec63f8797`.
+Backend and frontend executable source remains `a0a700af77740879e214c064876e277219f0f441`.
+
+Temporary CT114 credentials were removed after publication; private helper services remain stopped.
+Logs in the release artifact directory above: `content-a0a700a-deploy2.log` and
+`frontend-a0a700a-deploy2.log`. TESTER job `test-hosted-a0a700a-live-deploy2` (Chords 1064)
+passed authenticated content/foe readback, two bounded character cohorts and the dedicated public
+real-dice V88 proof. V90 and V75 are excluded.
+
+The [live certificate](docs/build/evidence/V85/tester-job-a0a700a-hosted-live.md) records the
+exact manifest hash, 438-entry foe catalog and persisted Ghoul, starting rewards and complication
+cohorts, and Eye Flash application/save cleanup. Natural attack dice 4+7 produced tier 2,
+14 corruption damage and restrained; the target's actual save 7 succeeded against 6 and removed
+the source-linked condition. Session closure and signout passed. Wider rule/privacy/history
+coverage remains the retained integrated and isolated evidence; no full suite was repeated.
+
+This release record is documentation-only after executable `a0a700a`. DEPLOY2 records the exact
+closeout commit and verified `origin/main` SHA in its Chords completion announcement after push.

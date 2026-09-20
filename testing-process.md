@@ -91,8 +91,8 @@ unavailable, the durable job waits for the next coordinator turn; do not create 
    the wake lifecycle. Record the wake result in the queue/evidence so an unwoken return remains
    visible until delivery is attempted successfully.
 8. **Keep deployment handoff ownership explicit.** Return the clean result to the requesting
-   implementation thread first. TESTER may also send DEPLOY thread
-   `bc6847ae-0334-4282-ae3c-6ec7291a509c` an informational copy with the exact source SHA and
+   implementation thread first. TESTER may also send DEPLOY2 thread
+   `80f94764-5a63-430c-9548-6d8583052803` an informational copy with the exact source SHA and
    certificate paths, but that copy does not authorize integration. The owning implementation
    thread must explicitly hand the completed frozen work to DEPLOY. DEPLOY then owns integration
    into current main and cloud publication. TESTER owns the small reproducible integrated-main

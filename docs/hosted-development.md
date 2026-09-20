@@ -109,14 +109,21 @@ fixture limitations and deployment logs. Earlier Worker versions in slice record
 
 ## Current partial release — 2026-09-20
 
-Backend source `a0a700af77740879e214c064876e277219f0f441` is published after schema validation.
-It integrates V85/V86/V88/V89 and the reviewed build-only Node heap increase to 1536 MiB.
-The hosted frontend build passed, but publication is held: `content:reseed` was denied because
-the scoped key lacks `deployment:functions:runInternalActions`. The prior frontend below remains.
-Content was 567 entries before the denied action; the release requires the committed 1151 entries.
-The integrated suite passed 358 engine + 575 app/scripts; target-specific live certification and
-GitHub push remain pending. See the [deployment ledger](../deploy.md) for evidence and resumption.
-Temporary CT114 credentials are removed and private hosted helper services stopped.
+The initial partial publication is now resolved.
+
+Backend and frontend source `a0a700af77740879e214c064876e277219f0f441` are published.
+This integrates V85/V86/V87/V88/V89 and the reviewed build-only Node heap increase to 1536 MiB.
+Backend schema validation and the hosted build passed. An initial scoped-key denial prevented
+content/frontend publication; DEPLOY2's fresh credential session resolved it at 20:06 UTC.
+The content-only reseed loaded 1151 entries; the retained stamped frontend build published as
+Worker `0336f2f4-1141-4d95-8bc6-d2cec63f8797`. Existing play data was not reset.
+
+The integrated suite passed 358 engine + 575 app/scripts. Targeted live certification passed:
+1151-entry manifest, 438 foe definitions and persisted Ghoul, starting rewards, complication table,
+and real-dice Eye Flash condition/save cleanup. See the
+[live certificate](build/evidence/V85/tester-job-a0a700a-hosted-live.md) and
+[deployment ledger](../deploy.md) for executable versus documentation/GitHub closeout identity.
+Temporary CT114 credentials are removed and private hosted helper services remain stopped.
 
 ## Previous character deployment — 2026-09-20
 
