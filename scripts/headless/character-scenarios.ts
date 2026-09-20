@@ -325,6 +325,103 @@ export async function runScenarios(context: ScenarioContext) {
       'Smoke Bomb granted',
     );
   });
+  await run(
+    'Tactician: complete creation, Focus sheet, two kit signatures and saved doctrine replacement',
+    async () => {
+      // Ledger witness 1 (tests/fixtures/v94-tactician-expected.json): Insurgent, Shining Armor + Sniper.
+      const witness = (
+        JSON.parse(readFileSync('tests/fixtures/v94-tactician-expected.json', 'utf8')) as {
+          witnesses: {
+            selections: Record<string, SelectionValue>;
+            expected: Record<string, unknown>;
+          }[];
+        }
+      ).witnesses[0]!;
+      const preview = await player.query<Discovery>('characterWizard:discover', {
+        selections: input(definitions, witness.selections),
+      });
+      assert.equal(preview.evaluation.status, 'complete');
+      const id = await player.mutation<string>('characters:create', {
+        commandId: commandId(),
+        authored: { ...authored, name: `Tactician ${runId}` },
+        selections: preview.selections,
+      });
+      const readback = await saved(player, id);
+      assert.equal(readback.status, 'complete');
+      const sheet = await player.query<HeroSheet>('characters:sheet', { characterId: id });
+      assert.ok(sheet.build?.baseline);
+      for (const key of ['staminaMaximum', 'speed', 'stability', 'disengage'] as const)
+        assert.equal(sheet.build.baseline[key].value, witness.expected[key], `Tactician ${key}`);
+      assert.equal(sheet.build.baseline.heroicResource.name.value, 'focus');
+      assert.equal(sheet.build.baseline.heroicResource.startingValue.value, 0);
+      assert.deepEqual(
+        sheet.build.baseline.kits?.map(kit => kit.name.value),
+        witness.expected.kits,
+        'Field Arsenal kits',
+      );
+      const ability = (name: string) => sheet.abilities.find(entry => entry.name === name);
+      for (const [decisionId, amount] of [
+        ['class.tactician.ability-3', 3],
+        ['class.tactician.ability-5', 5],
+      ] as const) {
+        const name = witness.selections[decisionId] as string;
+        assert.deepEqual(ability(name)?.cost, { resource: 'focus', amount }, name);
+      }
+      for (const name of [
+        'Mark',
+        '"Strike Now!"',
+        'Advanced Tactics',
+        'Protective Attack',
+        'Patient Shot',
+      ])
+        assert.ok(ability(name)?.content?.text.trim(), `Missing source-bearing ability ${name}`);
+      assert.equal(sheet.abilities.filter(entry => entry.kind === 'kit-signature').length, 2);
+      const before = sheet.build.baseline.skills.map(skill => skill.name);
+      assert.ok(before.includes('Lead') && before.includes('Hide'), 'Lead and the doctrine skill');
+      // Saved doctrine replacement through the same transition operation the wizard uses; the
+      // Insurgent's intrigue skill is not a Vanguard (interpersonal) option and is chosen again.
+      const doctrine = await player.query<Transition>('characterWizard:transition', {
+        characterId: id,
+        selections: readback.selections,
+        decisionId: 'class.tactician.doctrine',
+        value: 'Vanguard',
+      });
+      assert.deepEqual(doctrine.removed, ['class.tactician.doctrine-skill']);
+      const changed = await player.query<Transition>('characterWizard:transition', {
+        characterId: id,
+        selections: doctrine.selections,
+        decisionId: 'class.tactician.doctrine-skill',
+        value: 'Persuade',
+      });
+      assert.deepEqual(changed.removed, []);
+      await player.mutation('characters:save', {
+        characterId: id,
+        commandId: commandId(),
+        expectedRevision: readback.revision,
+        authored: readback.authored,
+        selections: changed.selections,
+      });
+      const after = await saved(player, id);
+      assert.equal(after.status, 'complete');
+      assert.equal(values(after.selections)['class.tactician.doctrine'], 'Vanguard');
+      assert.equal(values(after.selections)['kit.choice'], witness.selections['kit.choice']);
+      assert.equal(
+        values(after.selections)['class.tactician.second-kit'],
+        witness.selections['class.tactician.second-kit'],
+      );
+      const updated = await player.query<HeroSheet>('characters:sheet', { characterId: id });
+      const skills = updated.build?.baseline?.skills.map(skill => skill.name) ?? [];
+      assert.ok(skills.includes('Persuade') && !skills.includes('Hide'), 'Doctrine skill replaced');
+      const abilities = updated.abilities.map(entry => entry.name);
+      assert.ok(!abilities.includes('Advanced Tactics'), 'Advanced Tactics revoked');
+      assert.ok(abilities.includes('Parry'), 'Parry granted');
+      assert.ok(
+        updated.features.some(feature => feature.name === 'Commanding Presence') &&
+          !updated.features.some(feature => feature.name === 'Covert Operations'),
+        'Doctrine feature replaced',
+      );
+    },
+  );
   const extraTraits: [string, string[][]][] = [
     [
       'Hakaan',
