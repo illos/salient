@@ -60,12 +60,14 @@ references; the existing source pins and game-content records are unchanged.
 
 ## Verification and recovery
 
-Run checks/builds and Playwright only on CT114. Browser tests set both `SALIENT_TEST_URL` and `VITE_SITE_URL` to the Worker URL,
-and `VITE_CONVEX_URL` / `VITE_CONVEX_SITE_URL` to the matching cloud URLs for CLI readback.
+The hosted demo is a test environment alongside local and CT114, not production. Use a free
+suitable runner on either host; record the runner separately from the application target.
+The browser moratorium applies here too. Programmatic API tests set `VITE_SITE_URL` to the
+Worker URL and `VITE_CONVEX_URL` / `VITE_CONVEX_SITE_URL` to the matching cloud URLs.
 The headless helper sends `VITE_SITE_URL` as its authentication Origin; inheriting the CT114 preview
 value causes an expected “Invalid origin” rejection from hosted auth. Use fresh
-test users; do not reset private main. Verify sign-out/in as well as signup, reload saved deep links,
-and observe real-time changes across separate browser contexts.
+test users and preserve existing data. Prove saved behavior through authenticated public API
+routes; retain visual/deep-link browser scenarios in the browser coverage backlog.
 
 Record source commit, Worker version, backend/content status and test evidence in
 [S04](build/S04-hosted-development.md). For a failed initial deployment, retain the existing private
@@ -105,16 +107,20 @@ See [the release evidence](build/evidence/V43/hosted/README.md) for browser resu
 fixture limitations and deployment logs. Earlier Worker versions in slice records are historical.
 
 
-## Current character candidate — 2026-09-20
+## Character deployment checkpoint — 2026-09-20
 
-V69 source `ab0f2fd875155d929f5efed201b14d96a821f4f7` is published to both backend and frontend,
-Worker `7830be2c-15d9-4c6f-8634-25c0edf55988`. Its 515-entry content includes Hakaan and Orc
-alongside the four previous ancestry candidates. Normal backend type/schema checks, the full
-737-test repository check, hosted build, and all 26 authenticated headless scenarios pass.
-No browser test ran; play data was retained. Temporary deployment credentials were removed.
+The latest recorded successful hosted character deployment is V82 source
+`8d5559fc87f18f4ed4112f4effc2cafaa3809739`, Worker `ff4da11e-6772-4e3c-bdd4-afd2fc88b000`,
+with 567 reference entries, retained play data, and 28/28 hosted API scenarios passing.
+See [V82 evidence](build/evidence/V82/README.md). Later V83/V84 delivery updated CT114 main;
+that did not update this separate hosted demo.
 
-The candidate includes V65 discovery/transition and public auth-key discovery fix, plus main's
-V63 history corrections. It remains on `slice/V69`, not merged into main: authentic Forge
-counterparts are the recorded acceptance blocker. See [V69 evidence](build/evidence/V69/README.md)
-and the [current handoff](build/character-restart-handoff.md). Earlier V62/V65 source and Worker
-identities in their evidence records are historical.
+The user explicitly requested V85/V86 verification on this hosted demo. Deployment of candidate
+`b161a7bb375e28c5777801c65553559289d270f8` from a local runner reached the correct development
+target but the Convex CLI exited 1 before reporting a successful upload, without an underlying
+error message. Two bounded diagnostic repeats confirmed normal exit 1 and its `flushAndExit`
+call site; neither explains the cause. The hosted frontend build passed but was not published
+because backend deployment did not succeed. No API acceptance run, content reseed, data reset,
+configuration change or infrastructure repair followed. This is separate from the earlier CT114
+isolated startup timeout. [V85/V86 evidence](build/evidence/V85/README.md#hosted-cloud-demo-attempt)
+retains the logs and remaining gate; do not claim this candidate is deployed.

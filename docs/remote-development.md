@@ -12,7 +12,9 @@ on 2026-09-16; see the [session checkpoint](build/S03-remote-development.md#sali
 
 ## Choosing a test environment
 
-User decision, 2026-09-20: local and remote CT114 are peer test environments. **Use whichever is
+User decision, 2026-09-20: local, remote CT114, and the [hosted cloud demo](hosted-development.md)
+are peer test environments. The hosted demo at `https://salient-dev.rdxx.workers.dev` uses Convex
+`dev:different-bat-943`; it is not production and is distinct from CT114 main. **Use whichever is
 free and suitable.** Do not wait in a global remote queue if equivalent verification can run on
 an available local environment. This replaces the previous ban on local test workloads, including
 necessary dependency installation, builds and isolated test services.

@@ -26,7 +26,9 @@ Verify headlessly; a missing browser run is not a blocker. Log would-be browser 
 [browser coverage backlog](docs/build/browser-coverage-backlog.md). See
 [the moratorium](docs/build/README.md#browser-testing-moratorium--2026-09-20).
 
-Local and remote (CT114) are both valid test environments. Use whichever is free and suitable
+Local, remote CT114, and the hosted cloud demo (`https://salient-dev.rdxx.workers.dev`,
+Convex `dev:different-bat-943`) are all valid test environments. The hosted demo is not production
+and is distinct from CT114 main. Use whichever is free and suitable
 for the required test; do not wait for a remote slot when the same proof can run locally.
 Coordinate workloads per host/environment, preserve existing data, and record the actual source,
 runner location and application target with results. The browser moratorium applies everywhere.
