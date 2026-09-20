@@ -116,3 +116,17 @@ The first rehearsal caught a runner-only `might` versus `M` baseline key error b
 the fix uses the typed baseline and preserves the failed artifact. Browser testing remains paused.
 
 Renewed [independent integration review](reviews/V72-integration-review.md) passed the rebase and both actual readbacks. The isolated runtime is stopped with data retained. The integration lead owns fast-forwarding main, updating the shared runtime and the final main-target proof.
+
+### 2026-09-20 — merged into main and verified on shared main
+
+- Integrating lead fast-forwarded main to `dbfb61d` (clean, no conflicts; `convex/schema.ts` and the V74
+  ancestry `abilitiesFor` adapter unchanged; commit gate, whitespace and 338-file link checks pass).
+- `presidium-dev up` synchronized the shared CT114 main slot from the clean canonical checkout:
+  source `dbfb61d`, dirty=false, Convex functions ready 08:52:39 UTC, web and auth HTTP 200; existing
+  data and the 567-entry reference content retained, no reset or seed.
+- Live changed-feature check: the real-dice occurrence-aware runner `scripts/v72-headless-main.ts`
+  against shared main, run `e31357a7`, exit 0, 14 records through use, two linked player corrections,
+  undo/redo, Director correction, manual disposition, rewind and turn-end refusals; see
+  [the main evidence](evidence/V72/main-2026-09-20/README.md). Compiled damage and push subtotal
+  persisted with named outstanding movement coverage; no allowance fabricated.
+- Merge completion directive satisfied: Git integration, runtime update and live check recorded.
