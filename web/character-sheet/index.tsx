@@ -469,7 +469,11 @@ export function HeroSheetView({ sheet, compact }: { sheet: HeroSheet; compact?: 
               </div>
               <DetailsRows sheet={sheet} partial={partial} />
               {(sheet.audience === 'owner' || sheet.campaign) && (
-                <StartingRewardsPanel characterId={sheet.id} combatLocked={sheet.combatLocked} />
+                <StartingRewardsPanel
+                  characterId={sheet.id}
+                  combatLocked={sheet.combatLocked}
+                  compact
+                />
               )}
               {sheet.audience === 'owner' && <NotesBox notes={sheet.authored.notes} compact />}
             </div>

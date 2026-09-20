@@ -5,13 +5,17 @@ import type { Id } from '../../convex/_generated/dataModel';
 import { Button } from '../components/ui/button';
 import { useCommand } from '../ui';
 import { RuleLink } from '../rules/link';
+import { cn } from 'cn';
 
 export function StartingRewardsPanel({
   characterId,
   combatLocked,
+  compact,
 }: {
   characterId: string;
   combatLocked: boolean;
+  /** Inside another panel (the compact sheet): no panel surface of its own. */
+  compact?: boolean;
 }) {
   const data = useQuery(api.characterRewards.get, { characterId: characterId as Id<'characters'> });
   const initialize = useMutation(api.characterRewards.initialize);
@@ -19,27 +23,35 @@ export function StartingRewardsPanel({
   if (!data) return null;
   const rewards = data.rewards;
   return (
-    <section className="space-y-3 text-sm" aria-label="Starting rewards">
-      <h3 className="caps m-0">Starting rewards</h3>
+    <section
+      className={cn(
+        'flex flex-col text-sm',
+        compact ? 'gap-1 rounded-md bg-muted p-4' : 'gap-3 rounded-lg bg-card p-6',
+      )}
+      aria-label="Starting rewards"
+    >
+      <h3 className={cn('m-0', compact ? 'text-sm text-muted-foreground' : 'text-xl font-medium')}>
+        Starting rewards
+      </h3>
       {rewards ? (
         <>
-          <dl className="grid grid-cols-3 gap-2">
+          <dl className="m-0 grid grid-cols-3 gap-2 text-base">
             <div>
-              <dt>Wealth</dt>
-              <dd className="m-0 font-bold">{rewards.wealth}</dd>
+              <dt className="text-sm text-muted-foreground">Wealth</dt>
+              <dd className="m-0 font-medium tabular-nums">{rewards.wealth}</dd>
             </div>
             <div>
-              <dt>Renown</dt>
-              <dd className="m-0 font-bold">{rewards.renown}</dd>
+              <dt className="text-sm text-muted-foreground">Renown</dt>
+              <dd className="m-0 font-medium tabular-nums">{rewards.renown}</dd>
             </div>
             <div>
-              <dt>Project points</dt>
-              <dd className="m-0 font-bold">{rewards.projectPoints}</dd>
+              <dt className="text-sm text-muted-foreground">Project points</dt>
+              <dd className="m-0 font-medium tabular-nums">{rewards.projectPoints}</dd>
             </div>
           </dl>
           {rewards.items.map(item => (
             <div key={item.id}>
-              <strong>{item.name}</strong> ·{' '}
+              <strong className="font-medium">{item.name}</strong> ·{' '}
               {item.state === 'pending-Director' ? 'Identity held by the Director' : item.state}
               <div>
                 <RuleLink sourcePath={item.sourcePath} label="Source" />
