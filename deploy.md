@@ -1,8 +1,9 @@
 # Deployment
 
-DEPLOY owns integration of finished branches into `main` and promotion of the exact integrated
-revision to the live stable cloud environment. TESTER owns all pre-release and post-release test
-execution under [testing-process.md](testing-process.md).
+DEPLOY owns integration of finished branches into `main`, final release commits, the verified push
+of `main` to GitHub, and promotion of the integrated revision to the live stable cloud environment.
+TESTER owns all pre-release and post-release test execution under
+[testing-process.md](testing-process.md).
 
 ## Stable target
 
@@ -31,13 +32,16 @@ partially updated target is not stable.
 4. After a pass, DEPLOY publishes affected components with the hosted runbook, records the backend
    revision, content hash/count, Worker version and preserved-data result, then asks TESTER to verify
    the live target.
-5. A release closes only after the live pass and Chords announcement. On failure, keep the last
-   compatible frontend available, do not reset data, and record whether Git integration or any
-   runtime component advanced.
+5. After the live pass, DEPLOY commits the release record, pushes the certified `main` lineage to
+   GitHub, verifies `origin/main`, and announces the result through Chords. Record the executable
+   deployment SHA separately from a later documentation-only closeout SHA.
+6. A release closes only after the live pass, verified GitHub push and Chords announcement. On
+   failure, keep the last compatible frontend available, do not reset data, and record whether Git
+   integration, the Git remote or any runtime component advanced.
 
 Cloud publication is serialized. Documentation-only integrations record why no runtime update is
-needed. Pushing the Git remote, changing domains/accounts/plans or introducing production secrets is
-separate from this standing role unless the user explicitly includes it.
+needed. Changing domains/accounts/plans or introducing production secrets is separate from this
+standing role unless the user explicitly includes it.
 
 ## Job ledger
 
