@@ -4,8 +4,9 @@ import assert from 'node:assert/strict';
 import { execFile, execFileSync } from 'node:child_process';
 import { promisify } from 'node:util';
 import { createHash, randomUUID } from 'node:crypto';
-import { existsSync, readFileSync, mkdirSync, writeFileSync } from 'node:fs';
+import { existsSync, readFileSync, mkdirSync, writeFileSync, renameSync } from 'node:fs';
 import { parseEnv } from 'node:util';
+import { setTimeout as sleep } from 'node:timers/promises';
 import { ConvexHttpClient } from 'convex/browser';
 import { getFunctionName, type FunctionArgs, type FunctionReference } from 'convex/server';
 import { api } from '../convex/_generated/api.js';
@@ -34,11 +35,12 @@ function checkTarget() {
   const url = new URL(expectedUrl);
   const local = ['localhost', '127.0.0.1', '[::1]'].includes(url.hostname);
   assert.ok(
-    local || /^salient-engine-potency-dev-[a-f0-9]+\.tail41404c\.ts\.net$/.test(url.hostname),
+    local ||
+      /^salient-engine-potency(?:-seeded)?-dev-[a-f0-9]+\.tail41404c\.ts\.net$/.test(url.hostname),
   );
   assert.equal(process.env.DEV_WEB_URL, expectedUrl);
   assert.equal(process.env.VITE_SITE_URL, expectedUrl);
-  const checkout = '/srv/presidium/projects/salient/code/.worktrees/engine-potency';
+  const checkout = '/srv/presidium/projects/salient/code/.worktrees/engine-potency-seeded';
   const source = existsSync('/runtime-source.json')
     ? JSON.parse(readFileSync('/runtime-source.json', 'utf8'))
     : {
@@ -84,8 +86,10 @@ const logins: ReturnType<typeof createAuthClient>[] = [];
 let passed = false;
 let stage = 'setup';
 let operation = 'target-check-complete';
+let diceDirectory: string | undefined;
 const sourcePaths = [
   'scripts/v88-headless.ts',
+  'scripts/v88-seeded-dice-import.mjs',
   'scripts/app.ts',
   'shared/content/compendium/manifest.json',
   'shared/content/character-evaluation-examples.json',
@@ -120,7 +124,7 @@ const evidence = () =>
         sourcePin: manifest.compendium.revision,
         sourceBytes: Object.fromEntries(sourcePaths.map(path => [path, hash(path)])),
         method:
-          'Real BetterAuth, registered scripts/app.ts commands, public persisted readback, real campaign dice. No database import or fabricated gameplay rows. Two edges ensure tier >=2; expected arithmetic uses pinned printed values, never resolver output.',
+          'Real BetterAuth, registered scripts/app.ts commands, public persisted readback, real campaign dice. Original V88 cases use unpositioned campaign randomness. Added V87-reachable cases disclose bounded diceStates positioning preserving unrelated rows; no generated outcome/gameplay-row imports. Expected arithmetic uses pinned printed values, never resolver output.',
         coverageLimits:
           'One real save branch per applied instance; deterministic both-branch saves and correction flips are independently covered by persisted tests. Correction flip witness depends on accepted natural dice, and its applicability is recorded without rerolling.',
         passed,
@@ -253,6 +257,20 @@ try {
   const H = await hero('V88 Fury', furyChoices);
   const E = await hero('V88 Elementalist', elementalistChoices);
   const W = await hero('V88 Wode', wodeChoices);
+  const N = await hero('V88 Seeded Agile Target', {
+    ...elementalistChoices,
+    'class.elementalist.array-assignment': { Might: 0, Agility: 0, Intuition: 2, Presence: 1 },
+  });
+  const P = await hero('V88 Seeded Presence Target', {
+    ...furyChoices,
+    'class.fury.characteristic-array': '2, −1, −1',
+    'class.fury.array-assignment': { Intuition: -1, Reason: -1, Presence: 2 },
+  });
+  assert.equal(N.baseline.characteristics.A.value, 0);
+  assert.equal(N.baseline.characteristics.M.value, 0);
+  assert.equal(P.baseline.characteristics.P.value, 2);
+  assert.equal(H.baseline.characteristics.A.value, 2);
+  assert.equal(H.baseline.characteristics.P.value, 0);
   assert.equal(H.baseline.characteristics.M.value, 2);
   assert.equal(H.baseline.characteristics.I.value, 0);
   assert.equal(E.baseline.characteristics.M.value, 0);
@@ -280,6 +298,10 @@ try {
   const G = await foe('Goblin Warrior');
   const C = await foe('Goblin Cursespitter');
   const D = await foe('Dwarf Warden');
+  const B = await foe('Lizardfolk Bloodeye');
+  const F = await foe('Hobgoblin Redglare');
+  const O = await foe('Orc Godcaller');
+  const R = await foe('Ghoul');
   const goblinSource = await query(dc, api.foes.detail, { campaignId, foeId: G.id });
   const dwarfSource = await query(dc, api.foes.detail, { campaignId, foeId: D.id });
   assert.equal(Number(JSON.parse(goblinSource.sourceSnapshot).structured.agility), 2);
@@ -288,8 +310,8 @@ try {
     case: 'setup',
     campaignId,
     content,
-    heroes: [H, E, W],
-    foes: [G, C, D],
+    heroes: [H, E, W, N, P],
+    foes: [G, C, D, B, F, O, R],
     goblinSource,
     dwarfSource,
   });
@@ -617,6 +639,327 @@ try {
   await use('WD1-resisted', 'The Wode Defends', W, G, 2, 'resisted');
   const wode = await use('WD2-applied', 'The Wode Defends', W, D, 0, 'applied');
   await save('WD2-foe-save', D, wode);
+  // V87 reachability addendum. No dice positioning occurs before this boundary.
+  stage = 'seeded-addendum-helper-guard';
+  const diceRoot = process.env.SALIENT_V88_DICE_DIR ?? '/artifacts/v88-seeded-dice';
+  const ready = JSON.parse(readFileSync(`${diceRoot}/ready.json`, 'utf8'));
+  assert.match(ready.id, /^[a-f0-9-]{36}$/);
+  assert.equal(ready.frontend, process.env.DEV_WEB_URL);
+  assert.equal(ready.commit, source.commit);
+  assert.ok(Date.now() - ready.startedAt < 1_200_000);
+  diceDirectory = `${diceRoot}/${ready.id}`;
+  const seedFor = (a: number, b: number) => {
+    for (let n = 0; n < 100_000; n++) {
+      const seed = createHash('sha256').update(`V88 seeded reachability fixture ${n}`).digest();
+      const values = [0, 1].map(counter => {
+        const input = Buffer.alloc(40);
+        seed.copy(input);
+        input.writeBigUInt64BE(BigInt(counter), 32);
+        return createHash('sha256').update(input).digest().readUInt32BE(0);
+      });
+      if (values.every((value, i) => value < 4_294_967_290 && (value % 10) + 1 === [a, b][i]))
+        return seed.toString('hex');
+    }
+    throw new Error('No bounded fixture seed');
+  };
+  const positionDice = async (a: number, b: number) => {
+    checkTarget();
+    const requestId = randomUUID();
+    const request = `${diceDirectory}/${requestId}.request.json`;
+    const seed = seedFor(a, b);
+    writeFileSync(`${request}.tmp`, JSON.stringify({ campaignId, seed }), { mode: 0o600 });
+    renameSync(`${request}.tmp`, request);
+    const response = request.replace('.request.json', '.response.json');
+    const deadline = Date.now() + 30_000;
+    while (!existsSync(response) && Date.now() < deadline) await sleep(100);
+    assert.ok(existsSync(response), 'Seeded dice helper did not finish');
+    const imported = JSON.parse(readFileSync(response, 'utf8'));
+    assert.equal(imported.ok, true);
+    records.push({
+      case: 'disclosed-dice-position',
+      requestId,
+      campaignId,
+      faces: [a, b],
+      seed,
+      imported,
+    });
+    evidence();
+  };
+  type SeededAbility = {
+    name: string;
+    actor: Json;
+    sourcePath: string;
+    bonus: number;
+    damage: [number, number, number];
+    characteristic: 'A' | 'P' | 'M';
+    thresholds: [number | null, number | null, number | null];
+    conditions: [string | null, string | null, string | null];
+  };
+  const seededAbilities: SeededAbility[] = [
+    {
+      name: 'Bola Knock',
+      actor: B,
+      sourcePath: 'monster/lizardfolk/statblock/lizardfolk-bloodeye.md',
+      bonus: 2,
+      damage: [5, 7, 9],
+      characteristic: 'A',
+      thresholds: [0, 1, 2],
+      conditions: ['restrained', 'restrained', 'restrained'],
+    },
+    {
+      name: 'Eye Flash',
+      actor: F,
+      sourcePath: 'monster/hobgoblin/statblock/hobgoblin-redglare.md',
+      bonus: 3,
+      damage: [9, 14, 17],
+      characteristic: 'P',
+      thresholds: [1, 2, 3],
+      conditions: ['slowed', 'restrained', 'restrained'],
+    },
+    {
+      name: 'Power Chord',
+      actor: O,
+      sourcePath: 'monster/orc/statblock/orc-godcaller.md',
+      bonus: 2,
+      damage: [5, 7, 9],
+      characteristic: 'P',
+      thresholds: [null, null, 2],
+      conditions: [null, null, 'weakened'],
+    },
+    {
+      name: 'Razor Claws',
+      actor: R,
+      sourcePath: 'monster/undead/1st-echelon/statblock/ghoul.md',
+      bonus: 2,
+      damage: [3, 4, 5],
+      characteristic: 'M',
+      thresholds: [null, null, 2],
+      conditions: [null, null, 'bleeding'],
+    },
+  ];
+  for (const ability of seededAbilities) {
+    const sheet = await query(dc, api.abilities.sheet, { campaignId, actor: ability.actor });
+    const action = sheet.abilities.find((a: Json) => a.name === ability.name);
+    assert.ok(action && action.kind === 'rolled');
+    assert.equal(action.fixedCost, null);
+    assert.equal(action.unknownCost, null);
+    assert.equal(action.tiers.length, 3);
+    const source = await query(dc, api.foes.detail, { campaignId, foeId: ability.actor.id });
+    assert.ok(source.sourceSnapshot.includes(ability.name));
+    records.push({
+      case: 'seeded-action-availability',
+      ability: ability.name,
+      action,
+      sheet,
+      source,
+      scope:
+        'Only the named compiled ability is covered; parent traits and other actions retain their existing manual/compatibility behavior.',
+    });
+  }
+  evidence();
+  const verifySeeded = async (
+    label: string,
+    ability: SeededAbility,
+    target: Json,
+    eventId: string,
+    startingStamina: number,
+    malice: number,
+    faces: [number, number],
+    edges: number,
+    banes = 0,
+  ) => {
+    const observed = await capture(label, eventId);
+    const r = await result(eventId);
+    assert.deepEqual(r.dice, { d10a: faces[0], d10b: faces[1] });
+    const tier = expectedTier(r, ability.bonus, edges, banes);
+    const damage = ability.damage[tier - 1]!;
+    const threshold = ability.thresholds[tier - 1];
+    const condition = ability.conditions[tier - 1];
+    const score = target.baseline.characteristics[ability.characteristic].value;
+    assert.equal(r.targets[0].outcome.tier, tier);
+    assert.equal(r.targets[0].outcome.damage.rolledDamage, damage);
+    assert.equal(r.targets[0].applied.afterImmunity, damage);
+    assert.equal(live(observed.roster, target).stamina, startingStamina - damage);
+    assert.equal(observed.roster.malice, malice);
+    const conditions = r.compiled.effects.filter((o: Json) => o.effect.kind === 'condition');
+    const instances = (live(observed.roster, target).conditionInstances ?? []).filter(
+      (i: Json) => i.sourceUseEventId === eventId && i.status === 'active',
+    );
+    let found: Json;
+    if (threshold === null) {
+      assert.deepEqual(conditions, []);
+      assert.deepEqual(instances, []);
+    } else {
+      assert.equal(conditions.length, 1);
+      found = conditions[0];
+      const status = score < threshold! ? 'applied' : 'resisted';
+      assert.equal(found.effect.status, status);
+      assert.equal(found.effect.threshold, threshold);
+      assert.equal(found.effect.targetScore, score);
+      assert.equal(found.effect.characteristic, ability.characteristic);
+      assert.equal(found.effect.condition, condition);
+      assert.equal(found.effect.duration, 'save-ends');
+      assert.equal(found.useEventId, eventId);
+      assert.ok(r.compiled.definition.source.path.endsWith(ability.sourcePath));
+      assert.equal(instances.length, status === 'applied' ? 1 : 0);
+      if (status === 'applied') {
+        assert.equal(instances[0].id, found.id);
+        assert.equal(instances[0].abilityName, ability.name);
+        assert.ok(instances[0].registrationId);
+        assert.ok(instances[0].sourcePath.endsWith(ability.sourcePath));
+      }
+      for (const [client, expectedScore] of [
+        [pc, score],
+        [oc, undefined],
+      ] as const) {
+        const projected = occurrence(await result(eventId, client));
+        assert.equal(projected.effect.targetScore, expectedScore);
+        assert.equal(projected.effect.status, status);
+        assert.equal(projected.effect.threshold, threshold);
+        assert.equal(projected.effect.clause, found.effect.clause);
+      }
+      await refuseDisposition(eventId, target);
+    }
+    // These targets are clean before each use; a correction must remove an obsolete tier condition.
+    for (const name of ['restrained', 'slowed', 'weakened', 'bleeding']) {
+      assert.equal(
+        live(observed.roster, target).conditions[name],
+        Boolean(found && found.effect.status === 'applied' && name === condition),
+      );
+    }
+    records.push({
+      case: `${label}-expected`,
+      sourcePath: ability.sourcePath,
+      faces,
+      tier,
+      damage,
+      score,
+      threshold,
+      condition,
+      malice,
+    });
+    evidence();
+    return { eventId, occurrenceId: found?.id, condition: condition ?? '', tier, r };
+  };
+  const seededUse = async (
+    label: string,
+    ability: SeededAbility,
+    target: Json,
+    faces: [number, number],
+    edges = 0,
+  ) => {
+    await freshTurn(ability.actor);
+    await command(dc, `${ref(target)} /adjust stamina value=50`);
+    await command(dc, `${ref(target)} /adjust temporary-stamina value=0`);
+    const before = await roster();
+    await positionDice(...faces);
+    const used = await command(
+      dc,
+      `${ref(ability.actor)} /ability use ability=${JSON.stringify(ability.name)} targets=[${ref(target)}] edges=${edges}`,
+    );
+    assert.ok(used.eventId);
+    return {
+      result: await verifySeeded(
+        label,
+        ability,
+        target,
+        used.eventId,
+        50,
+        before.malice,
+        faces,
+        edges,
+      ),
+      malice: before.malice,
+    };
+  };
+  const seededCorrect = async (
+    label: string,
+    ability: SeededAbility,
+    target: Json,
+    eventId: string,
+    malice: number,
+    edges: number,
+    banes: number,
+  ) => {
+    const old = await result(eventId);
+    await command(
+      dc,
+      `/ability correct event=${JSON.stringify(eventId)} target=${ref(target)} edges=${edges} banes=${banes}`,
+    );
+    const current = await verifySeeded(
+      label,
+      ability,
+      target,
+      eventId,
+      50,
+      malice,
+      [6, 6],
+      edges,
+      banes,
+    );
+    assert.deepEqual(current.r.dice, old.dice);
+    return current;
+  };
+  for (const [index, ability] of seededAbilities.entries()) {
+    const prefix = ['BK', 'EF', 'PC', 'RC'][index]!;
+    const applyingTarget = index === 0 || index === 3 ? N : H;
+    const resistingTarget = index === 0 || index === 3 ? H : P;
+    const edges = index >= 2 ? 2 : 0;
+    const applied = await seededUse(`${prefix}1-applied`, ability, applyingTarget, [6, 6], edges);
+    assert.equal(occurrence(applied.result.r).effect.status, 'applied');
+    const low = await seededCorrect(
+      `${prefix}3-correction-tier1`,
+      ability,
+      applyingTarget,
+      applied.result.eventId,
+      applied.malice,
+      0,
+      2,
+    );
+    assert.equal(low.tier, 1);
+    if (index >= 2) {
+      const middle = await seededCorrect(
+        `${prefix}3-correction-tier2`,
+        ability,
+        applyingTarget,
+        applied.result.eventId,
+        applied.malice,
+        0,
+        0,
+      );
+      assert.equal(middle.tier, 2);
+    }
+    const restored = await seededCorrect(
+      `${prefix}3-correction-restored`,
+      ability,
+      applyingTarget,
+      applied.result.eventId,
+      applied.malice,
+      index === 1 ? 2 : edges,
+      0,
+    );
+    assert.equal(occurrence(restored.r).effect.status, 'applied');
+    assert.notEqual(restored.occurrenceId, applied.result.occurrenceId);
+    await save(`${prefix}4-source-save`, applyingTarget, restored);
+    // Eye's equality boundary is P2 at tier2; the other three resist at tier3.
+    const resisted = await seededUse(
+      `${prefix}2-resisted`,
+      ability,
+      resistingTarget,
+      index === 1 ? [6, 6] : [8, 8],
+    );
+    assert.equal(occurrence(resisted.result.r).effect.status, 'resisted');
+    if (index >= 2) {
+      const middle = await seededUse(
+        `${prefix}5-tier2-no-condition`,
+        ability,
+        applyingTarget,
+        [6, 6],
+      );
+      assert.equal(middle.result.tier, 2);
+      assert.equal(middle.result.occurrenceId, undefined);
+    }
+  }
   await capture('complete');
   passed = true;
   stage = 'complete';
@@ -642,6 +985,7 @@ try {
   process.exitCode = 1;
   console.error(`V88 headless proof failed at ${stage}; inspect sanitized readback ${output}`);
 } finally {
+  if (diceDirectory) writeFileSync(`${diceDirectory}/done`, 'done');
   for (const login of logins) {
     try {
       assert.ok(!(await login.signOut()).error);

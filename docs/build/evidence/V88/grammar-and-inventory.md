@@ -90,7 +90,7 @@ Paths below are exact report provenance. Hero paths are repository-relative; foe
 `en/books/monsters/` are relative to `vendor/steel-compendium/`. Their unified research equivalents
 are under `vendor/steel-compendium/en/unified/md/monster/` with the same family/statblock suffix.
 
-### Nine reachable entries
+### Thirteen reachable entries
 
 | Ability | Exact source path | V88 change |
 | --- | --- | --- |
@@ -182,21 +182,30 @@ potency resolution is recorded at `docs/rules-questions-for-user.md#q-char-12`.
   fixed roll +3, no printed cost. Tiers **9/14/17 corruption** damage then **P < 1/2/3**;
   condition is **slowed/restrained/restrained**, save ends. Target Presence 1 resists tier 1
   and is restrained at tiers 2/3; equality at Presence 2 resists tier 2. Its single bounded
-  condition per tier removes the old unsafe-remainder diagnostic. This is report/compiler
-  structural support, not a claimed backend playtest; no Redglare is newly loadable.
+  condition per tier removes the old unsafe-remainder diagnostic. V87 now makes the Redglare loadable; the seeded-inventory addendum records its applied,
+  resisted and changed-condition proof.
 - **Bola Knock:** Lizardfolk Bloodeye signature main action, ranged 5, one creature or object,
   fixed roll +2, no printed cost. Tiers **5/7/9** damage then **A < 0/1/2 restrained (save ends)**.
   Target Agility 0 resists/applies/applies; target Agility 2 resists all tiers. Only the bounded
   strike is compiled. Reptilian Escape grants a separate response involving tail loss and
   shifting; that parent trait is retained as source context, not executed or newly granted.
-  No live Bloodeye or trait-completion claim is made by this report.
+  V87 now makes the Bloodeye loadable; its bounded strike receives live proof in the
+  seeded-inventory addendum. No Reptilian Escape trait-completion claim is made.
 - **Power Chord:** Orc Godcaller signature main action, melee 1 or ranged 10, one creature or
   object, fixed roll +2, no printed cost. Tiers **5/7/9 sonic** damage; only tier 3 adds
   **P < 2 weakened (save ends)**. Presence 1 is affected and Presence 2 resists at tier 3;
   tiers 1/2 have no condition. Cadenza, Rallying Ostinato and Relentless remain separate
-  source mechanics with no new automation or loading claim.
+  source mechanics with no new automation. V87 supplies the Godcaller loading path;
+  the seeded-inventory addendum proves only the bounded Power Chord tiers.
 
 Meteoric Introduction's existing compile-only damage/push design is unchanged. V87's foe-library
 seeding activates the four rows identified above, so the current-main integration must satisfy their
 trait-granted ability and live proof gates. This report adds no grant and does not claim automation
 of any separate parent-trait consequence.
+
+## Seeded inventory proof addendum
+
+The owner addendum starts at DEPLOY integration `c721d0b`, preserving the 1151-entry corpus and
+internal reseed action. [Exact designs and cases](seeded-inventory-design.md) cover all four
+newly reachable entries. The preceding pre-V87 certificates remain historical; new proof must
+name its own integrated source/target. No production rule, grant or loading path is added.

@@ -120,8 +120,8 @@ general condition engine and it does not automate any condition's consequences.
   a failed save, and any Malice or resource behavior beyond what V72 already pays.
 - Multi-target and area envelopes, squads and minions as targets, objects as targets. These are
   `fact-needed` or compatibility paths and must say so.
-- New grants, foe loading or wizard changes. Reachability comes only from what V02 already loads;
-  V87 library seeding widens it later without changes here.
+- New grants, foe loading or wizard changes. Reachability comes from existing V02/V87 loading. The seeded-inventory addendum proves
+  four newly reachable bounded abilities without changing those loading paths.
 - Any browser or Playwright run (moratorium). Log would-be visual scenarios in
   `docs/build/browser-coverage-backlog.md`.
 
@@ -227,10 +227,10 @@ backlog. Per-ability designs live in this file's appendix below and are extended
 
 | Ability | Source | Designed | Built | Headless playtested | Evidence |
 | --- | --- | --- | --- | --- | --- |
-| Bury the Point (Goblin Warrior) | `monster/goblin/statblock/goblin-warrior.md`, Bury the Point | Cases BP6–BP10 below | pending | pending | pending |
-| Eye of Surlach (Goblin Cursespitter) | `monster/goblin/statblock/goblin-cursespitter.md`, Eye of Surlach | pending (implementer, same shape as BP6–BP10) | pending | pending | pending |
-| Ray of Agonizing Self-Reflection (Elementalist) | `feature/ability/elementalist/level-1/ray-of-agonizing-self-reflection.md` | Case RAY1 below (compile-only) | pending | not reachable (no grant) | pending |
-| The Wode Defends (Wode Elf ancestry, V82 grant) | `feature/ability/wode-elf/the-wode-defends.md` | Cases WD1–WD3 below; implementer completes | pending | pending (live symbolic potency) | pending |
+| Bury the Point (Goblin Warrior) | `monster/goblin/statblock/goblin-warrior.md`, Bury the Point | Cases BP6–BP10 below | yes | passed at `1af9c75` | [V88 live certificate](evidence/V88/tester-job-1af9c75-headless.md) |
+| Eye of Surlach (Goblin Cursespitter) | `monster/goblin/statblock/goblin-cursespitter.md`, Eye of Surlach | Source design and EYE1–EYE3 | yes | passed at `1af9c75` | [V88 live certificate](evidence/V88/tester-job-1af9c75-headless.md) |
+| Ray of Agonizing Self-Reflection (Elementalist) | `feature/ability/elementalist/level-1/ray-of-agonizing-self-reflection.md` | Case RAY1 below (compile-only) | pure compiler verified | not reachable (no grant) | [Full gate](evidence/V88/tester-job-1af9c75.md) |
+| The Wode Defends (Wode Elf ancestry, V82 grant) | `feature/ability/wode-elf/the-wode-defends.md` | Cases WD1–WD3 below | yes | passed at `1af9c75` | [V88 live certificate](evidence/V88/tester-job-1af9c75-headless.md) |
 | Shadow Chains (Goblin Assassin) | `monster/goblin/statblock/goblin-assassin.md` | Compatibility only: three creatures | unchanged | unchanged | regression proof |
 | Brutal Slam, Viscous Fire, Melee and Ranged Weapon Free Strike, Spear Charge | V26 designs | unchanged | unchanged | V72 runners rerun | regression proof |
 
@@ -281,6 +281,39 @@ carries its own node.
 
 The implementer derives the concrete hero and foe scores from the fixture's evaluated build and a
 seeded stat block before running, records them in the design, and uses no name-based special case.
+
+### V87 seeded-inventory addendum
+
+DEPLOY integration `c721d0b` makes four previously compile-only abilities reachable. Their
+production behavior already follows the reviewed structural compiler; the addendum adds proof,
+not new mechanics. [Detailed fixtures/cases](evidence/V88/seeded-inventory-design.md) derive expected
+values from the same pinned source. All four are signature main actions, one creature or object,
+no printed Malice cost. V88 automates ordinary creatures only; condition consequences stay manual.
+
+| Ability | Exact source below unified `md/` | Designed | Built | Headless playtested | Evidence |
+| --- | --- | --- | --- | --- | --- |
+| Bola Knock | `monster/lizardfolk/statblock/lizardfolk-bloodeye.md` | BK1–BK3 | existing structural support, V87 reachable | pending addendum | [Design](evidence/V88/seeded-inventory-design.md) |
+| Eye Flash | `monster/hobgoblin/statblock/hobgoblin-redglare.md` | EF1–EF3 | existing structural support, V87 reachable | pending addendum | [Design](evidence/V88/seeded-inventory-design.md) |
+| Power Chord | `monster/orc/statblock/orc-godcaller.md` | PC1–PC3 | existing structural support, V87 reachable | pending addendum | [Design](evidence/V88/seeded-inventory-design.md) |
+| Razor Claws | `monster/undead/1st-echelon/statblock/ghoul.md` | RC1–RC3 | existing structural support, V87 reachable | pending addendum | [Design](evidence/V88/seeded-inventory-design.md) |
+
+Bola Knock rolls +2 at ranged 5 (Ranged/Strike/Weapon): tier damage 5/7/9, then
+`A < 0/1/2 restrained (save ends)`. Agility 0 resists tier 1 and is affected at tiers 2/3;
+Agility 2 resists every tier, including equality at tier 3.
+
+Eye Flash rolls +3 at ranged 10 (Magic/Ranged/Strike): 9/14/17 corruption damage, then
+`P < 1 slowed`, `P < 2 restrained`, `P < 3 restrained`, all save ends. Presence 0 is affected
+at every tier; Presence 2 resists tier 2 by equality. A correction between tiers 1 and 2/3
+replaces slowed with restrained or vice versa, rather than retaining both source conditions.
+
+Power Chord rolls +2 at melee 1 or ranged 10 (Magic/Melee/Ranged/Strike): 5/7/9 sonic damage.
+Only tier 3 adds `P < 2 weakened (save ends)`: Presence 0 is affected and Presence 2 resists.
+Tiers 1/2 have no condition node; a correction down from tier 3 retires its condition/schedule.
+
+Razor Claws rolls +2 at melee 1 (Charge/Melee/Strike/Weapon): 3/4/5 damage. Only tier 3 adds
+`M < 2 bleeding (save ends)`: Might 0 or 1 is affected and Might 2 resists. Tiers 1/2 have no
+condition node. Ghoul Leap/Arise/Hunger and the other parent stat blocks' distinct traits/abilities
+retain their own manual/compatibility boundaries; none is newly granted or automated here.
 
 ### Audit corpus drift
 
@@ -444,3 +477,20 @@ acceptance checks verified. No blocking finding or user decision remains. Their 
 from the V88 evidence README. Final closure adds documentation and authentic review trailers only;
 application and runner bytes remain those tested. ENGINE2 owns rebase/integration and shared-main
 rollout. This handoff does not merge or claim the later V87-integrated result has passed.
+
+### 2026-09-20 — Seeded inventory owner follow-up
+
+ENGINE2 955/960 and DEPLOY 956 assign the post-V87 proof on `slice/V88-seeded-inventory`,
+`.worktrees/engine-potency-seeded`, from frozen `c721d0b48802be806e1c0f4eab4d9d98bf93c9a7`.
+The corrected base inherits the reseed action and 13/1222/2 report. Owner adds four ability-specific
+persisted/live proof groups, then TESTER gates and independent review addenda before an explicit
+handoff to DEPLOY. Main/cloud are untouched; the completed pre-V87 handoff remains intact.
+
+The addendum authorship now includes four parameterized persisted ability cases (all tiers,
+equality resistance, correction/history and audience checks), plus the public runner extension
+and bounded, disclosed campaign-dice positioning helper. Original headless cases remain before
+positioning begins. Source-derived fixtures and exact coordinator procedure are recorded in
+[evidence/V88/seeded-inventory-design.md](evidence/V88/seeded-inventory-design.md) and
+[evidence/V88/seeded-headless-plan.md](evidence/V88/seeded-headless-plan.md). Local authoring
+TypeScript, scoped ESLint and Prettier pass. TESTER focused/full/live gates and independent
+addendum reviews remain pending; no test stack or browser was launched by the owner.
