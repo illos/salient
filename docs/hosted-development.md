@@ -107,7 +107,18 @@ See [the release evidence](build/evidence/V43/hosted/README.md) for browser resu
 fixture limitations and deployment logs. Earlier Worker versions in slice records are historical.
 
 
-## Character deployment checkpoint — 2026-09-20
+## Current partial release — 2026-09-20
+
+Backend source `a0a700af77740879e214c064876e277219f0f441` is published after schema validation.
+It integrates V85/V86/V88/V89 and the reviewed build-only Node heap increase to 1536 MiB.
+The hosted frontend build passed, but publication is held: `content:reseed` was denied because
+the scoped key lacks `deployment:functions:runInternalActions`. The prior frontend below remains.
+Content was 567 entries before the denied action; the release requires the committed 1151 entries.
+The integrated suite passed 358 engine + 575 app/scripts; target-specific live certification and
+GitHub push remain pending. See the [deployment ledger](../deploy.md) for evidence and resumption.
+Temporary CT114 credentials are removed and private hosted helper services stopped.
+
+## Previous character deployment — 2026-09-20
 
 TESTER deployed source `86e9d2ed3b82a5d027f631f677975f040439f472` to both hosted components;
 Worker version `bb430814-0366-43a3-882a-bd69f81cc811`. Full repository checks (864 tests), Convex
@@ -116,9 +127,7 @@ and 567 reference entries were retained. No configure/reseed/reset or browser co
 The earlier bundling/schema defects are resolved; their [diagnosis](build/evidence/V85/deployment-diagnosis.md)
 remains historical evidence.
 
-Hosted API acceptance is incomplete: first30 scenarios passed, culture exhausted the runner’s
-shared240-second execution budget, and four V85/V86 scenarios never started. Bounded server logs
-showed no server timeout. TESTER owns the replacement runner’s five independent remaining cohorts,
-with unchanged limits/assertions and the existing deployed application. No new deployment is needed
-for runner-only changes. See [current evidence](build/evidence/V85/README.md#remaining-hosted-proof).
-Do not claim full acceptance or main integration from successful deployment alone.
+Hosted API acceptance later passed the five remaining bounded cohorts (TESTER return 866),
+covering 35 distinct scenarios with the retained first 30 successes. The original aggregate
+timeout remains recorded; this is not a single successful 35-scenario run. See
+[acceptance evidence](build/evidence/V85/README.md#acceptance-return--2026-09-20).

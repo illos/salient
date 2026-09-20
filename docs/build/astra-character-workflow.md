@@ -3,14 +3,13 @@
 Status: all twelve level-one ancestries are delivered through [V82](V82-remaining-ancestries.md).
 [V83 perk/ordinary kit actions](V83-supporting-actions.md) and [V84 culture presets](V84-culture-presets.md)
 are merged/live as `175d17d`, with independent reviews and 31/31 API scenarios passing on isolated
-and shared-main CT114. The current bounded portion is [V85 complications](V85-complications.md)
-and [V86 starting rewards](V86-starting-rewards.md), implemented on `slice/V85` at `faa9b1e`.
-Full local checks pass (864 tests and production build). The isolated CT114 function push hit its
-existing readiness guard before live API testing; the environment is stopped with data retained.
-The subsequent user-requested hosted cloud demo deployment exited 1 before reporting upload
-success; two bounded diagnostic repeats did not reveal its cause. These portions remain unmerged
-and await live acceptance. No further retries or infrastructure repair are underway. [Evidence](evidence/V85/README.md) owns the blocker and resume boundary;
-class expansion is not part of this batch.
+and shared-main CT114. [V85 complications](V85-complications.md) and
+[V86 starting rewards](V86-starting-rewards.md) passed their hosted acceptance and were integrated
+with V88/V89 on main `4f3fe13`. The combined full gate passed 358 engine + 575 app/scripts.
+DEPLOY published backend `a0a700a`; content refresh is blocked on the scoped key's internal-action
+permission, with frontend/live release verification still pending. The [deployment ledger](../../deploy.md)
+owns the current release boundary; [feature evidence](evidence/V85/README.md) retains earlier attempts.
+Class expansion is not part of this batch.
 The Opus pilot remains [abandoned without reuse](../decisions/2026-09-19-opus-pilot-dead-end.md).
 This document owns the replacement workflow; [V44](V44-character-option-delivery.md) owns delivery
 scope, and [the build process](README.md) retains project-wide review and merge rules.

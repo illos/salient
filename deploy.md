@@ -47,11 +47,40 @@ standing role unless the user explicitly includes it.
 
 | Job | Candidate | State | Next gate |
 | --- | --- | --- | --- |
-| Stable-cloud reconciliation | current `main` and existing hosted candidate | In progress | identify the exact hosted revisions; do not call the target stable until an integrated-main live pass |
-| V85/V86 | `slice/V85` at `64972e6` | Awaiting owner handoff | rebase onto current main, rerun the affected integrated gates through TESTER |
-| V88 | integrated on `main` at `e541283` | Git integrated; cloud pending | publish the exact main release to the stable cloud target, obtain TESTER live pass, then push and verify `origin/main` |
+| Stable-cloud reconciliation | `main` release source `a0a700a` | Partial publication; blocked on scoped-key permission | backend published; content action denied (`deployment:functions:runInternalActions`); previous frontend retained; live gate and GitHub push pending |
+| V85/V86 | owner `64972e6`, integrated `4f3fe13` | Merged; included in published backend | resume content/frontend publication and live TESTER gate |
+| V88 | integrated with V85/V86 at `4f3fe13` | Merged; included in published backend | committed inventory 13/1259/2 requires 1151-entry content refresh before live certification |
+| V89 | owner `dff62e8`, integrated `4f3fe13` | Merged; full 358+575 PASS reused by identity | build-only heap repair `a0a700a` independently reviewed and hosted build passed |
 | V75 | `slice/V75` at `2c7cfe2` | Not release-ready | user visual decision and refreshed handoff |
 
 Update this ledger at handoff, integration, publication, verification and rollback boundaries. The
 canonical feature/test detail remains in [docs/build/STATUS.md](docs/build/STATUS.md); this file tracks
 only deployment ownership and release state.
+
+### Partial release — 2026-09-20 19:52 UTC
+
+TESTER's [integrated certificate](docs/build/evidence/V85/tester-job-4f3fe13-integrated.md)
+permits reuse of V89's complete passing gate. `a0a700a` adds only the reviewed hosted-build
+heap adjustment (768 to 1536 MiB for build only); the corrected hosted build passed in the
+existing 2 GiB container. Exact clean source was uploaded to CT114 `hosted`.
+
+Convex backend publication passed schema validation. The subsequent `content:reseed` action
+was refused because the scoped key lacks `deployment:functions:runInternalActions`.
+No permission workaround or data reset was attempted. Frontend publication was held;
+Worker `bb430814-0366-43a3-882a-bd69f81cc811` remains the previous release.
+The temporary credential file was removed; private hosted services are stopped with data retained.
+
+Release logs: `/srv/presidium/projects/salient/test-artifacts/release-4f3fe13-20260920`.
+TESTER captured 5551 application rows and 421 auth rows before publication for a non-atomic
+fingerprint comparison. An atomic export was unavailable (`deployment:backups:create` denied);
+these captures are not a restore backup. Private evidence:
+`/srv/presidium/projects/salient/test-artifacts/cloud-preservation-4f3fe13`.
+TESTER's [post-backend comparison](docs/build/evidence/V85/tester-job-a0a700a-preservation.md)
+passed: all 5972 captured rows identical, no additions/removals/changes; manifest remains 567
+entries at `sha256:aaf7c027a421e6059448e019271111877f208b577b756f5e79645c3d497ed26e`.
+No live test fixtures have been added. A later reseed needs its own preservation comparison.
+
+Resume with a scoped development key authorized for the internal reseed action, verify
+the uploaded release identity/build stamp, reseed the committed snapshot, publish the frontend,
+complete preserved-data and targeted live checks through TESTER, then commit/push the release.
+Do not roll back to code lacking starting-reward or condition-instance validators.

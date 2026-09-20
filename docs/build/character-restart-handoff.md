@@ -3,8 +3,10 @@
 Status: all twelve level-one ancestries are delivered through [V82](V82-remaining-ancestries.md).
 [V83 perk/kit actions](V83-supporting-actions.md) and [V84 culture presets](V84-culture-presets.md)
 were merged and verified through 31/31 API scenarios. [V85 complications](V85-complications.md)
-and [V86 starting rewards](V86-starting-rewards.md) are built on `slice/V85` and deployed to the
-hosted cloud demo as `86e9d2e`. Hosted acceptance now passes; main integration remains pending.
+and [V86 starting rewards](V86-starting-rewards.md) passed hosted acceptance and are now integrated
+with V88/V89 on main `4f3fe13`. Backend release `a0a700a` is published; content refresh is blocked
+on the deployment key's internal-action permission. Frontend and live certification remain pending;
+the [DEPLOY ledger](../../deploy.md) is authoritative for the current partial release.
 
 ## Latest acceptance return and ownership
 
@@ -15,12 +17,12 @@ this is not one successful 35/35 run. Preserve the original timeout evidence. Se
 [acceptance return](evidence/V85/README.md#acceptance-return--2026-09-20) and main evidence
 commit `7a8c156`, `docs/build/evidence/V85/tester-job-331a5b9.md`.
 
-No app changes or redeployment were needed. Main integration and shared CT114 delivery wait for
-FOES2's V87 integration slot. Preserve newer main instructions, squads, V87 reseed action and
-TESTER records when integrating this older branch. Subsequent verification belongs to TESTER.
+No app changes or redeployment were needed for that acceptance return. DEPLOY subsequently
+integrated the frozen owner handoff while retaining newer instructions, squads, V87's reseed action,
+V88 conditions and TESTER records. Subsequent live release verification belongs to TESTER.
 The pending acceptance statements below are retained checkpoint history, superseded by this return.
 
-## Current source and running app
+## Historical source and running app before integration
 
 Hosted target: <https://salient-dev.rdxx.workers.dev>, Convex `dev:different-bat-943`, Worker
 `bb430814-0366-43a3-882a-bd69f81cc811`. TESTER passed the full864 repository checks, Convex

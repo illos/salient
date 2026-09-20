@@ -13,7 +13,13 @@ One active job across all hosts, including setup/build/cleanup. On resume, recon
 row with actual processes before dispatch. Keep terminal evidence in the slice work log and prune
 completed rows only after the requester has the result through a direct `wake: true` Chords return.
 
-Updated 2026-09-20 17:35 UTC: combined V85–V88 candidate `a0c9584` passed focused, metadata, downstream build/content and Convex dry-run gates but failed full CI at one stale V88 audit-baseline assertion (358 engine pass; app/scripts 576/577).
+Updated 2026-09-20 19:52 UTC: V89 repaired the stale fixture; full 358 engine + 575 app/scripts PASS.
+V85/V86/V88/V89 are integrated on main `4f3fe13`, certified through bounded identity checks.
+Release `a0a700a` adds the independently reviewed hosted-build heap repair; hosted build and
+Convex backend publication passed. Content refresh is blocked by missing scoped-key permission
+`deployment:functions:runInternalActions`. Previous frontend retained; live certification and GitHub
+push pending. [DEPLOY ledger](../../deploy.md) records the partial release and recovery boundary.
+Historical combined candidate `a0c9584` failed one stale V88 audit-baseline assertion (358 engine pass; app/scripts 576/577).
 The prior combined `55c835a` report regeneration passed with exact 13 compiled / 1,259 compatibility / 2 unavailable output.
 V88 repaired integration candidate `4fd12a3` passed metadata/tree-identity closeout against the fully tested `35890b4`; no full check, stack or browser ran.
 The prior candidate `35890b4` passed all source and behavioral gates but failed merge metadata because rebased code commit `be4b419` lacked `Reviewed-By:`.
