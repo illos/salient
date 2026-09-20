@@ -176,6 +176,7 @@ export interface GrantedAbility {
     | 'ancestry'
     | 'class'
     | 'complication'
+    | 'item'
     | 'perk';
   sourcePath: string;
   /** Fixed heroic-resource cost from the source, if any. */
@@ -282,6 +283,7 @@ export interface DerivedBaseline {
     name: string;
     sourcePath: string;
     state: 'possessed' | 'broken' | 'absent' | 'pending-Director';
+    projectSource?: string;
     condition?: string;
   }[];
   renownMaximum?: DerivedValue<number>;

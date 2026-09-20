@@ -1,7 +1,13 @@
 // SPDX-License-Identifier: GPL-3.0-only
-/** V37 exact pinned ability text. Embedded complication abilities retain their parent source.
+/** Source-bound complication abilities and prose activities (V37/V85).
+ * V85 prose operations retain literal timing; unspecified timing is not a combat action.
+ * Labels qualifying unnamed prose operations are app labels.
+ * V37 exact pinned ability text. Embedded complication abilities retain their parent source.
  * Declaring a source grant does not execute it or activate a conditional trait.
  */
+import complicationSource from './compendium/complication.json' with { type: 'json' };
+import { abilities as dragonKnightProseAbilities } from './ancestries/dragon-knight/abilities.ts';
+
 export interface ComplicationAbilitySource {
   complication: string;
   name: string;
@@ -11,8 +17,198 @@ export interface ComplicationAbilitySource {
   availability: { decision: string; value: string };
   selectedTrait?: { decision: string; value: string };
   condition?: string;
+  /** Present for prose operations; structured abilities use their embedded table. */
+  actionType?: string;
+  trigger?: string;
+  cost?: string;
 }
+/** Preserve the complete pinned body, including costs, drawbacks and exceptions. */
+function prose(
+  complication: string,
+  name: string,
+  actionType: string,
+  metadata: Pick<ComplicationAbilitySource, 'condition' | 'trigger' | 'cost'> = {},
+): ComplicationAbilitySource {
+  const source = complicationSource.find(entry => entry.name === complication);
+  if (!source) throw new Error(`Missing complication source: ${complication}`);
+  return {
+    complication,
+    name,
+    actionType,
+    sourcePath: source.sourcePath.replace('vendor/steel-compendium/', ''),
+    text: source.text.split('---').slice(2).join('---').trim(),
+    kind: 'complication',
+    availability: { decision: 'complication.choice', value: complication },
+    ...metadata,
+  };
+}
+
 export const COMPLICATION_ABILITIES: ComplicationAbilitySource[] = [
+  prose('Advanced Studies', 'Advanced Studies: Study Notebook', 'Respite activity', {
+    condition:
+      'Resolve the highest-characteristic test and its temporary class-ability grant or hostile demon manually.',
+  }),
+  prose('Animal Form', 'Animal Form', 'Maneuver', {
+    condition:
+      'Use the specific recorded size-1T animal. Transformation and movement restrictions are resolved manually.',
+  }),
+  prose('Bereaved', 'Bereaved: Ask the Spirit', 'Special', {
+    condition:
+      'The Director must identify a particularly good course of action before spending the hero token; otherwise no token is spent.',
+    cost: '1 HeroToken',
+  }),
+  prose('Consuming Interest', 'Consuming Interest: Study Lore', 'Downtime project', {
+    condition:
+      'Up to three completions for the chosen lore skill, each with a different project source; goals 120, 150, 180. Project progress and benefits are manual.',
+  }),
+  prose('Crash Landed', 'Crash Landed: Activate Power Pack', 'Maneuver', {
+    condition:
+      'Choose cold, fire, lightning, or sonic on activation. The selected type replaces damage from damage-dealing abilities until deactivated; resolve manually.',
+  }),
+  prose('Crash Landed', 'Crash Landed: Deactivate Power Pack', 'Maneuver', {
+    condition: 'Your power pack is active; resolve its deactivation manually.',
+  }),
+  prose('Cult Victim', 'Cult Victim: Pass Through Matter', 'During movement', {
+    condition:
+      'Once per turn, move through solid matter at most 1 square thick. Ending your turn inside forces you back to the entry space and deals 5 irreducible damage; resolve manually.',
+  }),
+  prose('Psychic Eruption', 'Psychic Blast: Forced Eruption', 'Free triggered action', {
+    trigger: 'Whenever you become bleeding, frightened, or weakened.',
+    condition:
+      'The complication requires this use when the trigger occurs. Spend all current Heroic Resource; resolve the power roll and damage manually.',
+    cost: 'All Heroic Resource',
+  }),
+  prose('Rogue Talent', 'Telekinetic Grasp: Ranged Free Strike', 'Ranged free strike', {
+    condition:
+      'Use Telekinetic Grasp as a ranged free strike when entitled to make one; resolve the power roll and push or pull manually.',
+  }),
+  prose('Curse of Stone', 'Curse of Stone: Stone Appearance', 'Free maneuver', {
+    condition:
+      'You appear to be a mundane statue while you remain unmoving; resolve appearance manually.',
+  }),
+  prose('Evanesceria', 'Evanesceria: Absent from Reality', 'Start of combat round', {
+    trigger: 'At the start of any combat round.',
+    condition:
+      'Roll a d10; disappear on 6+, returning when you take your turn. After attempting, earn at least 1 Victory before attempting again. Resolve manually.',
+  }),
+  prose('Famous Relative', 'Famous Relative: Summon Relative', 'Maneuver', {
+    condition:
+      'Use the magic jewelry; once summoned, gain a level before summoning again. Relative statistics, duration, lost Victories and diverted Renown are manual.',
+  }),
+  prose('Feytouched', 'Feytouched: Accept Fey Power', 'Start of combat encounter', {
+    trigger: 'At the start of each combat encounter.',
+    condition:
+      'If chosen, gain 1 additional Heroic Resource and the Director gains 3 Malice; resolve both together manually.',
+  }),
+  prose('Forbidden Romance', 'Forbidden Romance: Request Favor', 'Special', {
+    condition:
+      'Ask the betrothed secretly; available aid is constrained and determined with the Director.',
+  }),
+  prose(
+    'Getting Too Old for This',
+    'Getting Too Old for This: Use Advanced Ability',
+    'On your turn',
+    {
+      condition:
+        'Choose a heroic ability learnable one level higher, meet all other prerequisites and pay its cost. After use, earn at least 2 Victories before using again. Selection, cost and use remain manual.',
+    },
+  ),
+  prose('Gnoll-Mauled', 'Gnoll-Mauled: Retaliate', 'Triggered action', {
+    trigger: 'Whenever an ally within 5 squares is reduced to 0 Stamina.',
+    condition:
+      'Move up to your speed and make a free strike; resolve the movement and strike manually.',
+  }),
+  prose('Guilty Conscience', 'Guilty Conscience: Stay Alive', 'Free triggered action', {
+    trigger: 'When your Stamina reaches the negative of your winded value.',
+    cost: '1 Recovery',
+    condition:
+      'The Recovery expenditure is recorded; its Stamina restoration must be resolved manually.',
+  }),
+  prose('Hawk Rider', 'Hawk Rider: Summon Hawk', '1 uninterrupted minute', {
+    condition:
+      'You are outside a building or other structure. Only you can ride the hawk; summon and mount state are manual.',
+  }),
+  prose('Hawk Rider', 'Hawk Rider: Dismiss Hawk', 'No action', {
+    condition: 'Your hawk is present; resolve dismissal manually.',
+  }),
+  prose('Hawk Rider', 'Hawk Rider: Restore Hawk', 'Respite activity', {
+    condition: 'Your hawk is damaged or dead; restore them to full Stamina manually.',
+  }),
+  prose('Host Body', 'Host Body: Transfer Host', 'Main action', {
+    condition:
+      'Current host alive or dead no more than 24 hours; dead humanoid of a playable ancestry within 10 squares. Resolve ancestry replacement, old-host death, 1 Stamina and optional Recovery manually.',
+  }),
+  prose('Hunted', 'Hunted: Lay Low', 'Respite activity', {
+    condition:
+      'One or more creatures are pursuing you. They lose your party location and restart their search; resolve manually.',
+  }),
+  prose('Loner', 'Loner: Choose Respite Skill', 'End of respite', {
+    trigger: 'When you finish a respite.',
+    condition:
+      'Choose a skill you do not have; it lasts until the end of your next respite. Skill configuration remains manual.',
+  }),
+  prose('Master Chef', 'Master Chef: Prepare Meal', '1 uninterrupted hour', {
+    condition:
+      'After finishing a respite or waking from a night’s sleep, with ingredients and cooking tools; up to ten creatures. Each meal benefit may be used once within 24 hours; resolve manually.',
+  }),
+  prose('Preacher', 'Preacher: Convert Follower', 'Respite activity', {
+    condition:
+      'Director sets Presence test difficulty and follower type. After a successful conversion, gain a level before trying again; failure consequences remain manual.',
+  }),
+  prose('Prisoner of the Synlirii', 'Prisoner of the Synlirii: Telepathy', 'Special', {
+    condition:
+      'Creature within 10 squares, shared language, both aware of each other. The target may reply; voiceless talkers within 1 mile can overhear. Resolve communication manually.',
+  }),
+  prose('Secret Identity', 'Secret Identity: Resume True Identity', 'Special', {
+    condition:
+      'Treat Wealth and Renown as 2 higher while in true identity; daily discovery chance increases by 20 percent cumulatively while hunted. Resolve manually.',
+  }),
+  prose('Secret Identity', 'Secret Identity: Resume Secret Identity', 'Special', {
+    condition:
+      'After 1 day in secret identity, the cumulative discovery chance resets. Resolve manually.',
+  }),
+  prose('Self-Taught', 'Self-Taught: Forgo Heroic Resource', 'Start of your turn', {
+    trigger: 'At the start of each of your turns during combat.',
+    condition:
+      'Forgo gaining Heroic Resource until the start of your next turn in exchange for a highest-characteristic strike damage bonus over that period. Resolve manually.',
+  }),
+  prose('Shared Spirit', 'Shared Spirit: Determine Controller', 'Start of day', {
+    condition:
+      'Roll a d6 (1–4 self, 5–6 spirit), or choose if on good terms; only the controller’s exclusive skill set applies. Controller and skills remain manual.',
+  }),
+  prose('Silent Sentinel', 'Silent Sentinel: Telepathy', 'Special', {
+    condition:
+      'Share a language and observe each other; recipient may respond telepathically. Resolve communication manually.',
+  }),
+  prose('Stolen Face', 'Stolen Face: Change Face', '5 uninterrupted minutes', {
+    condition:
+      'Resemble a previously observed creature of your ancestry or restore your face; hair and nonfacial features do not change. Resolve appearance manually.',
+  }),
+  prose('Waking Dreams', 'Waking Dreams: Receive Vision', 'During respite', {
+    trigger: 'Whenever you take a respite.',
+    condition:
+      'Make a Reason test; tier 1 loses 1 Recovery after the respite, higher tiers receive visions. Resolve manually.',
+  }),
+  prose('War Dog Collar', 'War Dog Collar: Reset Collar', '1 uninterrupted minute outside combat', {
+    condition:
+      'Reset after using Posthumous Retirement before that ability can be used again; resolve the reset manually.',
+  }),
+  prose('War of Assassins', 'War of Assassins: Call in Favor', 'Special', {
+    condition:
+      'At most three favors; the request must be reasonable and within the faction’s power. Resolve favor and uses manually.',
+  }),
+  ...dragonKnightProseAbilities.map((source): ComplicationAbilitySource => ({
+    complication: 'Dragon Dreams',
+    name: source.name,
+    sourcePath: source.sourcePath,
+    text: source.quote,
+    actionType: source.actionType,
+    ...(source.trigger ? { trigger: source.trigger } : {}),
+    kind: 'complication',
+    availability: { decision: 'complication.choice', value: 'Dragon Dreams' },
+    selectedTrait: { decision: 'complication.dragon-dreams.traits', value: source.trait },
+    condition: '5 or more Victories',
+  })),
   {
     complication: 'Corrupted Mentor',
     name: 'Corrupt Spirit',
@@ -71,6 +267,7 @@ export const COMPLICATION_ABILITIES: ComplicationAbilitySource[] = [
   {
     complication: 'Psychic Eruption',
     name: 'Psychic Blast',
+    cost: 'All Heroic Resource',
     sourcePath: 'en/unified/md/complication/psychic-eruption.md',
     text: '###### Psychic Blast (Special Heroic Resource Cost)\n\n*Psionic energy [bursts](scc.v1:mcdm.heroes.v1/rule.combat/burst) from your body in an iridescent shimmer.*\n\n| **Area, Psionic** |                  **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|-------------------|---------------------------------:|\n| **📏 3 [burst](scc.v1:mcdm.heroes.v1/rule.combat/burst)**    | **🎯 Each creature in the area** |\n\n**Effect:** Using this ability costs all your [Heroic Resource](scc.v1:mcdm.heroes.v1/rule.resource/heroic-resource).\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + Your Highest [Characteristic](scc.v1:mcdm.heroes.v1/rule.character/characteristic) Score:**\n\n- **≤11:** 1 psychic damage for each [Heroic Resource](scc.v1:mcdm.heroes.v1/rule.resource/heroic-resource) you spend, to a maximum equal to your level\n- **12-16:** 1 psychic damage for each [Heroic Resource](scc.v1:mcdm.heroes.v1/rule.resource/heroic-resource) you spend, to a maximum equal to your level + your highest [characteristic](scc.v1:mcdm.heroes.v1/rule.character/characteristic)\n- **17+:** 1 psychic damage for each [Heroic Resource](scc.v1:mcdm.heroes.v1/rule.resource/heroic-resource) you spend',
     kind: 'heroic',
