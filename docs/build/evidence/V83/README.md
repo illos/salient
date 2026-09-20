@@ -1,6 +1,6 @@
 # V83/V84 supporting actions and culture evidence
 
-Status: initial and V72-integrated isolated API acceptance passed; all repository check stages passed; independent reviews passed; main delivery pending.
+Status: merged and live on shared CT114 main as `175d17d`; isolated and shared API acceptance passed.
 
 ## Scope
 
@@ -104,5 +104,28 @@ no expanded full-character Forge parity is claimed.
 
 [Fresh source and proof review](../../reviews/V83-V84-source-review.md) and
 [independent implementation review](../../reviews/V83-V84-implementation-review.md) separate
-source/code verdicts and pass the bounded integrated acceptance. Main integration remains pending
-while ENGINE owns its current shared-app rollout.
+source/code verdicts and pass the bounded integrated acceptance. Both reviews preceded integration.
+
+## Shared-main delivery
+
+Merged as `175d17d4e4d1e2838e6d9fb796942ce2fda14925` after ENGINE released its completed
+V72 rollout. The rebase onto V72's docs-only `f4c0a92` changed no application, tests or configuration
+from verified `e39ce7e`; only documentation, review evidence and generated report data differ.
+The reviewed commit passed `check-commit --merge`.
+
+`presidium-dev up` updated backend and frontend in shared CT114 environment `main`, compose
+`salient-dev-b90776c53141`, at <https://salient-dev-fc4f48cb09a0.tail41404c.ts.net>.
+[Runtime metadata](runtime-main.json) confirms the exact clean merged source;
+[deployment log](deploy-main.log) records healthy backend and web. Existing play data and the
+567 reference records were retained; no reset or seed.
+
+The same public runner executed inside this main environment's build job, using the main origin
+and `SALIENT_HEADLESS_SOURCE` read directly from `git rev-parse HEAD`.
+[Raw shared-main report](headless-main.json): **31/31 pass in 74.587 seconds**,
+run `06fffc2c-b330-4056-b270-b6bfcd4d112a`, exit0. This verifies deployed saved cultures, grants and the
+affected table operations, with no browser testing.
+
+The isolated `supporting-actions` stack is stopped with data retained; shared main stays running.
+Both environments used the same pinned sources. Next work is the complication grant/dependency
+audit, then starting rewards. Lie Detector's HeroToken dependency and manual gameplay limits above
+remain explicit; delivery does not claim all level-one supporting gameplay automated.

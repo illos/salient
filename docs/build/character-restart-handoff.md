@@ -1,19 +1,19 @@
 # Character wizard restart handoff
 
 Status: all twelve level-one ancestries are delivered through [V82](V82-remaining-ancestries.md).
-The next supporting portion is built on `slice/V83`: [perk/kit actions](V83-supporting-actions.md)
-and [culture presets](V84-culture-presets.md). Integrated source `e39ce7e` passes 31/31 isolated
-public-API scenarios. All repository check stages and independent implementation/source reviews passed.
-Shared-main delivery remains pending.
+The supporting portion is delivered as `175d17d`: [perk/kit actions](V83-supporting-actions.md)
+and [culture presets](V84-culture-presets.md). All repository check stages and independent
+implementation/source reviews passed; both isolated and shared-main API suites passed 31/31.
 
 ## Current source and running app
 
-The character candidate is in `.worktrees/supporting-actions`, based on ENGINE V72 `dbfb61d`.
-Its isolated CT114 environment is `supporting-actions`, running clean `e39ce7e` at
-<https://salient-supporting-actions-dev-fc2fb66104e0.tail41404c.ts.net>. The runtime metadata and
-raw report's explicit source-label correction are in [V83 evidence](evidence/V83/README.md).
-ENGINE currently owns shared-main rollout; check Chords before updating it. Preserve all peer work.
-The prior V82 hosted ancestry deployment is historical evidence, not a claim it runs this candidate.
+Shared main runs clean `175d17d4e4d1e2838e6d9fb796942ce2fda14925` at
+<https://salient-dev-fc4f48cb09a0.tail41404c.ts.net>, including ENGINE V72. Existing data and
+567 references were preserved. The isolated `supporting-actions` CT114 stack is stopped with
+its data retained. [V83 evidence](evidence/V83/README.md) owns current check/review/live records,
+including the isolated raw report's explicit source-label correction and accurate main report.
+The prior V82 hosted ancestry deployment is historical evidence, not the current character app.
+Preserve peer engine/UI work and coordinate the next runtime use through Chords.
 
 V83 exposes 24 actions/activities from 23 core perks and corrects all 21 ordinary kit signatures'
 action metadata. Familiar restoration pays one Recovery without healing and has undo/redo.

@@ -8,7 +8,7 @@
 | Rules review | required |
 | Depends on | V37, shared wizard transition API |
 | Unblocks | Level-one culture selection parity |
-| Status | Implemented; all 27 presets API verified; reviewed; main delivery pending |
+| Status | Delivered — `175d17d`; all 27 presets shared-main API verified |
 
 ## Goal
 
@@ -176,8 +176,9 @@ None. The UI category “Professional” follows Forge's organization; the actua
 
 ## Current acceptance
 
-The V72-integrated candidate `e39ce7e` passes all 31 public API journeys on isolated CT114,
-including saved supporting grants and every culture preset. See [retained evidence](evidence/V83/README.md)
-for actual runtime identity, checks, independent reviews and explicit capability limits.
-No browser testing ran. All repository check stages, independent implementation review and fresh source/proof review
-passed. Main/shared-app delivery remains pending.
+Merged and live as `175d17d`. All repository check stages, independent implementation and fresh
+source/proof reviews passed. Isolated CT114 and shared-main API verification each passed all 31
+journeys, including saved supporting grants and every culture preset. See
+[retained evidence](evidence/V83/README.md) for actual source/runner/target identities, check logs,
+reviews and explicit capability limits. No browser testing ran; isolated services are stopped
+with data retained. Complications and starting rewards are separate next portions.

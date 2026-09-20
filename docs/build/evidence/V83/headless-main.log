@@ -1,0 +1,165 @@
+ Container salient-dev-b90776c53141-job-17d86fc0 Creating 
+ Container salient-dev-b90776c53141-job-17d86fc0 Created 
+{
+  "runId": "06fffc2c-b330-4056-b270-b6bfcd4d112a",
+  "target": "http://backend:3210",
+  "source": "175d17d4e4d1e2838e6d9fb796942ce2fda14925",
+  "elapsedMs": 74587,
+  "results": [
+    {
+      "name": "discover decisions and preview without creating a character",
+      "status": "pass",
+      "elapsedMs": 302
+    },
+    {
+      "name": "Devil: complete creation, exact first-save retry and fresh persisted sheet",
+      "status": "pass",
+      "elapsedMs": 599
+    },
+    {
+      "name": "Polder: complete creation, exact first-save retry and fresh persisted sheet",
+      "status": "pass",
+      "elapsedMs": 571
+    },
+    {
+      "name": "Dwarf: complete creation, exact first-save retry and fresh persisted sheet",
+      "status": "pass",
+      "elapsedMs": 605
+    },
+    {
+      "name": "Human: complete creation, exact first-save retry and fresh persisted sheet",
+      "status": "pass",
+      "elapsedMs": 636
+    },
+    {
+      "name": "Hakaan: complete creation, exact first-save retry and fresh persisted sheet",
+      "status": "pass",
+      "elapsedMs": 1096
+    },
+    {
+      "name": "Orc: complete creation, exact first-save retry and fresh persisted sheet",
+      "status": "pass",
+      "elapsedMs": 585
+    },
+    {
+      "name": "Hakaan: remaining purchase witnesses persist through the public route",
+      "status": "pass",
+      "elapsedMs": 1065
+    },
+    {
+      "name": "Orc: remaining purchase witnesses persist through the public route",
+      "status": "pass",
+      "elapsedMs": 1388
+    },
+    {
+      "name": "Devil: remaining purchase witnesses persist through the public route",
+      "status": "pass",
+      "elapsedMs": 1423
+    },
+    {
+      "name": "Polder: remaining purchase witnesses persist through the public route",
+      "status": "pass",
+      "elapsedMs": 530
+    },
+    {
+      "name": "Dwarf: remaining purchase witnesses persist through the public route",
+      "status": "pass",
+      "elapsedMs": 1009
+    },
+    {
+      "name": "Human: remaining purchase witnesses persist through the public route",
+      "status": "pass",
+      "elapsedMs": 1027
+    },
+    {
+      "name": "private draft, source discovery and transition reject another owner",
+      "status": "pass",
+      "elapsedMs": 255
+    },
+    {
+      "name": "parent replacement clears dependent choices and persists unrelated details",
+      "status": "pass",
+      "elapsedMs": 581
+    },
+    {
+      "name": "culture, kit and complication transitions preserve saved authored fields",
+      "status": "pass",
+      "elapsedMs": 611
+    },
+    {
+      "name": "incomplete and over-budget previews cannot be mistaken for complete builds",
+      "status": "pass",
+      "elapsedMs": 389
+    },
+    {
+      "name": "array replacement clears assignment; named assignment and stale-save guards use public operations",
+      "status": "pass",
+      "elapsedMs": 617
+    },
+    {
+      "name": "lifecycle: admission and audience privacy",
+      "status": "pass",
+      "elapsedMs": 2830
+    },
+    {
+      "name": "lifecycle: private inheritance",
+      "status": "pass",
+      "elapsedMs": 1573
+    },
+    {
+      "name": "lifecycle: Fury progression preserves live values",
+      "status": "pass",
+      "elapsedMs": 1496
+    },
+    {
+      "name": "lifecycle: paginated history and reviewed restoration",
+      "status": "pass",
+      "elapsedMs": 1156
+    },
+    {
+      "name": "lifecycle: owning Director activation and inheritance",
+      "status": "pass",
+      "elapsedMs": 1791
+    },
+    {
+      "name": "lifecycle: foreign history and owner-only restoration",
+      "status": "pass",
+      "elapsedMs": 985
+    },
+    {
+      "name": "lifecycle: full-edit stale review and preserved live state",
+      "status": "pass",
+      "elapsedMs": 956
+    },
+    {
+      "name": "lifecycle: combat edit lock",
+      "status": "pass",
+      "elapsedMs": 730
+    },
+    {
+      "name": "trait actions and rune grants persist without editing build or resources",
+      "status": "pass",
+      "elapsedMs": 4615
+    },
+    {
+      "name": "remaining ancestry wizard choices persist with sourced traits, actions, and parent replacement",
+      "status": "pass",
+      "elapsedMs": 4038
+    },
+    {
+      "name": "supporting choices: persisted perk grants and all ordinary kit signatures",
+      "status": "pass",
+      "elapsedMs": 13872
+    },
+    {
+      "name": "supporting actions: manual use, Recovery debit, undo and reviewed replacement",
+      "status": "pass",
+      "elapsedMs": 5634
+    },
+    {
+      "name": "culture presets: all book defaults persist independently of ancestry and remain customizable",
+      "status": "pass",
+      "elapsedMs": 20192
+    }
+  ]
+}
