@@ -1,6 +1,8 @@
 # Fresh-session handoff: restart character development with Astra
 
-Status: ready to hand off. This session staged documentation only; it did not restart development.
+Status: implementation resumed after this handoff was staged. The original staging session changed
+documentation only; [STATUS.md](STATUS.md#astra-delivery-and-verification-queue--2026-09-20) records
+the current candidate commits, verification queue and unresolved blocker.
 
 ## Read first
 

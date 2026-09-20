@@ -348,11 +348,26 @@ merges, not development. No pilot inputs may be reused. All runtime work remains
 | --- | --- | --- | --- |
 | V57 | [Devil level one](V44-character-option-delivery.md) | Candidate `ae773b0`, `slice/V57` | Queued: focused checks, persisted browser/Forge witnesses, full gates and reviews |
 | V58 | [Polder level one](V44-character-option-delivery.md) | Candidate `2291b29`, `slice/V58-integration` | 694 checks, new browser and same-build Forge pass; queue rules review and full regression after V59; not merged |
-| V59 | [Closeout verification blocker](astra-character-workflow.md#runtime-and-failure-handling) | Investigation complete, `slice/V59` | Unchanged-main actual-game closeout passed; intermittent cause unresolved; no speculative code change |
-| V60 | [Dwarf level one](V44-character-option-delivery.md) | In progress, `slice/V60` | Source-backed implementation, then focused checks and Forge/browser queue |
-| V61 | [Human level one](V44-character-option-delivery.md) | In progress, `slice/V61` | Source-backed implementation, then focused checks and Forge/browser queue |
+| V59 | [Closeout verification blocker](V59-closeout-timeout.md) | Investigation recorded on main `4c990eb` | Unchanged-main actual-game closeout passed; intermittent cause unresolved; no speculative code change |
+| V60 | [Dwarf level one](V44-character-option-delivery.md) | Candidate `99f3358`, `slice/V60` | All five purchases/signature implemented; six focused tests and full 697-test check pass; actual browser/Forge and final reviews queued |
+| V61 | [Human level one](V44-character-option-delivery.md) | Candidate `dbc0818`, `slice/V61` | All five purchases/signature implemented; four focused tests and full 695-test check pass; actual browser/Forge and final reviews queued |
 
-Lead owns shared ancestry composition/evaluation wiring and this queue. V59 temporarily owns
-`character-restart`; source replacement and heavy jobs remain serialized. The shared main app and
+Lead owns shared ancestry composition/evaluation wiring, this queue and the named CT114
+`character-restart` environment; source replacement and heavy jobs remain serialized. The shared main app and
 old stopped `characters` environment are untouched. V57/V58 evidence is retained in their branches;
 no ancestry unit is yet fully accepted or merged. Stop expanding this batch after Dwarf and Human.
+
+Dwarf/Human candidates include generated readable source content and preliminary independent static
+reviews with no defects found. Their slice documents, option-to-witness tables and check logs are
+in `docs/build/V60-dwarf-level-one.md`, `docs/build/V61-human-level-one.md`, and their respective
+`docs/build/evidence/V60` / `V61` directories on those branches. Full checks are engine/app/content
+checks, not actual-game browser acceptance. Required browser/Forge checks and formal reviews stay
+queued; no ancestry application change has been merged into main.
+
+Next verification: complete Devil’s focused and same-build witnesses; execute Dwarf/Human’s compact
+browser/Forge witness tables; resolve the recorded full-browser blocker and complete the required
+candidate regression before individual merges. Do not repeat a full suite solely hoping for green.
+The named `character-restart` runtime was stopped after Human checks on 2026-09-20, with data and
+artifacts retained. No background verification job is running. V59 evidence is merged as docs only;
+its unchanged-main browser pass does not clear V58’s failed full run. Main app needs no update for
+these documentation-only progress commits.

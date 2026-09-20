@@ -3,7 +3,8 @@
 The entire character Opus pilot is [abandoned without reuse](../decisions/2026-09-19-opus-pilot-dead-end.md).
 The replacement [Astra character workflow](astra-character-workflow.md) owns character-specific
 sequencing under this project's review and merge requirements. Its [fresh-session handoff](character-restart-handoff.md)
-is staged; implementation has not restarted.
+records the starting baseline; implementation resumed at the user’s request. See
+[the current queue](STATUS.md#astra-delivery-and-verification-queue--2026-09-20).
 
 Status: process adopted 2026-09-14 for the v0.01 build and the V1 slices that follow. This document
 owns *how* work is assigned, reviewed and committed. The specifications under `docs/` own *what* is
