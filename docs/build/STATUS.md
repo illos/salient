@@ -348,7 +348,7 @@ merges, not development. No pilot inputs may be reused. All runtime work remains
 | --- | --- | --- | --- |
 | V57 | [Devil level one](V44-character-option-delivery.md) | Candidate `ae773b0`, `slice/V57` | Queued: focused checks, persisted browser/Forge witnesses, full gates and reviews |
 | V58 | [Polder level one](V44-character-option-delivery.md) | Candidate `2291b29`, `slice/V58-integration` | 694 checks, new browser and same-build Forge pass; queue rules review and full regression after V59; not merged |
-| V59 | [Closeout verification blocker](astra-character-workflow.md#runtime-and-failure-handling) | In progress, `slice/V59` | Identify and repair observed `targets:drafts` timeout; focused reproduction first |
+| V59 | [Closeout verification blocker](astra-character-workflow.md#runtime-and-failure-handling) | Investigation complete, `slice/V59` | Unchanged-main actual-game closeout passed; intermittent cause unresolved; no speculative code change |
 | V60 | [Dwarf level one](V44-character-option-delivery.md) | In progress, `slice/V60` | Source-backed implementation, then focused checks and Forge/browser queue |
 | V61 | [Human level one](V44-character-option-delivery.md) | In progress, `slice/V61` | Source-backed implementation, then focused checks and Forge/browser queue |
 
