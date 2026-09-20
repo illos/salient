@@ -1,0 +1,7 @@
+ Container salient-character-restart-dev-a92aeb36adc3-job-496ad360 Creating
+ Container salient-character-restart-dev-a92aeb36adc3-job-496ad360 Created
+
+Running 1 test using 1 worker
+
+[1/1] tests/browser/closeout.spec.ts:21:1 › closeout awards once, is shared with observers, and paused session closure offers Void
+  1 passed (1.3m)

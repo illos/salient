@@ -1,0 +1,87 @@
+ Container salient-character-restart-dev-a92aeb36adc3-web-1 Stopping
+ Container salient-character-restart-dev-a92aeb36adc3-web-1 Stopped
+ Container salient-character-restart-dev-a92aeb36adc3-web-1 Removing
+ Container salient-character-restart-dev-a92aeb36adc3-web-1 Removed
+ Container salient-character-restart-dev-a92aeb36adc3-backend-1 Stopping
+ Container salient-character-restart-dev-a92aeb36adc3-backend-1 Stopped
+ Container salient-character-restart-dev-a92aeb36adc3-backend-1 Removing
+ Container salient-character-restart-dev-a92aeb36adc3-backend-1 Removed
+ Network salient-character-restart-dev-a92aeb36adc3_default Removing
+ Network salient-character-restart-dev-a92aeb36adc3_default Removed
+ Network salient-character-restart-dev-a92aeb36adc3_default Creating
+ Network salient-character-restart-dev-a92aeb36adc3_default Creating
+ Network salient-character-restart-dev-a92aeb36adc3_default Created
+ Network salient-character-restart-dev-a92aeb36adc3_default Created
+ Container salient-character-restart-dev-a92aeb36adc3-job-215b7eb0 Creating
+ Container salient-character-restart-dev-a92aeb36adc3-job-215b7eb0 Created
+Already up to date
+Done in 424ms using pnpm v11.5.3
+Pinned Convex CLI compatibility patch installed (instance secret via environment).
+Remote synthetic Git snapshot created; original source identity remains in runtime state.
+$ node scripts/ingest-rules.ts && node scripts/build-foes-assets.ts
+Ingested 2614 entries, 26 categories from fb83a789da8f. No unresolved links.
+Foe delivery: 2507 entries; version ab2c43b79669b916
+ Container salient-character-restart-dev-a92aeb36adc3-backend-1 Creating
+ Container salient-character-restart-dev-a92aeb36adc3-backend-1 Created
+ Container salient-character-restart-dev-a92aeb36adc3-web-1 Creating
+ Container salient-character-restart-dev-a92aeb36adc3-web-1 Created
+ Container salient-character-restart-dev-a92aeb36adc3-backend-1 Starting
+ Container salient-character-restart-dev-a92aeb36adc3-backend-1 Started
+ Container salient-character-restart-dev-a92aeb36adc3-backend-1 Waiting
+ Container salient-character-restart-dev-a92aeb36adc3-backend-1 Healthy
+ Container salient-character-restart-dev-a92aeb36adc3-web-1 Starting
+ Container salient-character-restart-dev-a92aeb36adc3-web-1 Started
+{
+  "project": "salient",
+  "environment": "character-restart",
+  "installation": "39ebd4ec-3fc4-417a-bcc2-a4666d5e53d3",
+  "compose": "salient-character-restart-dev-a92aeb36adc3",
+  "source": {
+    "submodules": [
+      {
+        "path": "vendor/steel-compendium",
+        "url": "https://github.com/SteelCompendium/data-unified.git",
+        "gitlink": "fb83a789da8f0327a389c277a0c790b1648d5810",
+        "initialized": false,
+        "commit": "fb83a789da8f0327a389c277a0c790b1648d5810",
+        "dirty": false
+      },
+      {
+        "path": "vendor/forge-steel",
+        "url": "https://github.com/andyaiken/forgesteel.git",
+        "gitlink": "5a846aadb623a9855a023e9403bb887a956c341f",
+        "initialized": false,
+        "commit": "5a846aadb623a9855a023e9403bb887a956c341f",
+        "dirty": false
+      }
+    ],
+    "checkout": "/srv/presidium/projects/salient/code/.worktrees/astra-closeout",
+    "identity": "c8dde250601a323d3464f50dd8d5393ff83aec58deca0fac08a956ae652ad797",
+    "commit": "6459c8dc490c444d4a77a5d819dddda6881fa78c",
+    "dirty": true
+  },
+  "phase": "running",
+  "updated": 1789862905,
+  "lastJob": {
+    "container": "salient-character-restart-dev-a92aeb36adc3-job-215b7eb0",
+    "service": "install",
+    "started": 1789862905,
+    "exitCode": 0
+  },
+  "routes": {
+    "web": {
+      "name": "salient-character-restart-dev-42506aaf617e",
+      "identity": "{\"endpoint\":\"web\",\"environment\":\"character-restart\",\"installation\":\"39ebd4ec-3fc4-417a-bcc2-a4666d5e53d3\",\"managedBy\":\"presidium-dev-v1\",\"project\":\"salient\"}",
+      "port": 32873,
+      "url": "https://salient-character-restart-dev-42506aaf617e.tail41404c.ts.net",
+      "phase": "https-verified-from-host"
+    }
+  }
+}
+NAME                                                   IMAGE                                                                                           COMMAND                  SERVICE   CREATED          STATUS                    PORTS
+salient-character-restart-dev-a92aeb36adc3-backend-1   node:24.13.0-bookworm@sha256:1de022d8459f896fff2e7b865823699dc7a8d5567507e8b87b14a7442e07f206   "docker-entrypoint.s…"   backend   16 seconds ago   Up 16 seconds (healthy)
+salient-character-restart-dev-a92aeb36adc3-web-1       node:24.13.0-bookworm@sha256:1de022d8459f896fff2e7b865823699dc7a8d5567507e8b87b14a7442e07f206   "docker-entrypoint.s…"   web       16 seconds ago   Up 5 seconds              127.0.0.1:32873->5180/tcp
+salient-character-restart-dev-a92aeb36adc3-web-1	133.77%	724.6MiB / 2GiB
+salient-character-restart-dev-a92aeb36adc3-backend-1	0.55%	652MiB / 3GiB
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/loop4       79G   41G   34G  55% /

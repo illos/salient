@@ -316,7 +316,7 @@ records the handoff; it does not certify A09 or create an implementation commit.
 
 | Id | Slice | Status | Owner |
 | --- | --- | --- | --- |
-| V44 | [Character option delivery plan](V44-character-option-delivery.md) | Staged for a fresh Astra session; [handoff](character-restart-handoff.md). Opus pilot [abandoned without reuse](../decisions/2026-09-19-opus-pilot-dead-end.md); zero pilot option units delivered. V45 remains delivered. | Character integration lead |
+| V44 | [Character option delivery plan](V44-character-option-delivery.md) | In progress — resumed 2026-09-20; [workflow](astra-character-workflow.md). Opus pilot [abandoned without reuse](../decisions/2026-09-19-opus-pilot-dead-end.md); zero pilot option units delivered. V45 remains delivered. | Character integration lead |
 
 ## V41 — reference loading and shared navigation
 
@@ -337,3 +337,22 @@ records the handoff; it does not certify A09 or create an implementation commit.
 | V45 | [Character option foundation](V45-character-option-foundation.md) | Complete — merged/live `ebe66e2`; 691 tests, 5,584 exact comparisons, 49 applicable browser successes and two shared checks; both audits pass; initial timeout/retry limits retained; no new options enabled | Character integration lead and subagents |
 
 V46–V56 are retired Opus pilot IDs, not pending assignments. Allocate fresh IDs for replacement work.
+
+## Astra delivery and verification queue — 2026-09-20
+
+User directed continued independent development while verification blockers are repaired. This
+explicitly expands the initial two-unit queue to four ancestry candidates; verification still gates
+merges, not development. No pilot inputs may be reused. All runtime work remains on CT114.
+
+| Id | Unit | Implementation | Verification / next action |
+| --- | --- | --- | --- |
+| V57 | [Devil level one](V44-character-option-delivery.md) | Candidate `ae773b0`, `slice/V57` | Queued: focused checks, persisted browser/Forge witnesses, full gates and reviews |
+| V58 | [Polder level one](V44-character-option-delivery.md) | Candidate `2291b29`, `slice/V58-integration` | 694 checks, new browser and same-build Forge pass; queue rules review and full regression after V59; not merged |
+| V59 | [Closeout verification blocker](astra-character-workflow.md#runtime-and-failure-handling) | Investigation complete, `slice/V59` | Unchanged-main actual-game closeout passed; intermittent cause unresolved; no speculative code change |
+| V60 | [Dwarf level one](V44-character-option-delivery.md) | In progress, `slice/V60` | Source-backed implementation, then focused checks and Forge/browser queue |
+| V61 | [Human level one](V44-character-option-delivery.md) | In progress, `slice/V61` | Source-backed implementation, then focused checks and Forge/browser queue |
+
+Lead owns shared ancestry composition/evaluation wiring and this queue. V59 temporarily owns
+`character-restart`; source replacement and heavy jobs remain serialized. The shared main app and
+old stopped `characters` environment are untouched. V57/V58 evidence is retained in their branches;
+no ancestry unit is yet fully accepted or merged. Stop expanding this batch after Dwarf and Human.
