@@ -87,6 +87,7 @@ function AddFoe({ campaignId }: { campaignId: Id<'campaigns'> }) {
               <option key={d.definitionId} value={d.definitionId}>
                 {d.name}
                 {d.organization ? ` · ${d.organization}` : ''}
+                {d.level !== null ? ` L${d.level}` : ''}
               </option>
             ))}
           </select>

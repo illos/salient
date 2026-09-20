@@ -9,6 +9,7 @@ import { projectFoeHealth, foeHealthValidator, settingsOf } from './lib/audience
 
 import { GOBLIN_WARRIOR_ID, settings, scopedFoe, snapshotOf } from './lib/foeSource';
 import { invoke } from './lib/registry';
+import { foeDisplayName } from './lib/foeNames';
 
 export { GOBLIN_WARRIOR_ID } from './lib/foeSource';
 
@@ -106,7 +107,7 @@ export const definitions = query({
         const level = s.level;
         return {
           definitionId: row.contentId,
-          name: row.name,
+          name: foeDisplayName(row),
           organization: text(s.organization),
           role: text(s.role),
           level: typeof level === 'number' || typeof level === 'string' ? level : null,
@@ -114,7 +115,7 @@ export const definitions = query({
           stamina: /^\d+$/.test(String(s.stamina)) ? Number(s.stamina) : null,
           withCaptain: text(s.with_captain),
           // The source directory names the monster family (monster/goblin/statblock/…).
-          group: /\/monster\/([^/]+)\/statblock\//.exec(row.sourcePath)?.[1] ?? null,
+          group: /\/md\/monster\/([^/]+)\//.exec(row.sourcePath)?.[1] ?? null,
         };
       })
       .sort((a, b) => a.name.localeCompare(b.name));

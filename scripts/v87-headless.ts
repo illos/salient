@@ -58,9 +58,14 @@ try {
     name: `V87 ${runId}`,
     commandId: `${runId}-campaign`,
   });
-  const definitions = await actor.query<{ definitionId: string }[]>('foes:definitions', {
-    campaignId,
-  });
+  const definitionsStarted = Date.now();
+  const definitions = await actor.query<{ definitionId: string; name: string }[]>(
+    'foes:definitions',
+    {
+      campaignId,
+    },
+  );
+  const definitionsMs = Date.now() - definitionsStarted;
   assert.equal(definitions.length, 438);
   assert.ok(definitions.some(entry => entry.definitionId === id));
   await actor.mutation('sessions:start', {
@@ -68,6 +73,58 @@ try {
     selectedPlayerIds: [],
     commandId: `${runId}-session`,
   });
+  const blocks = JSON.parse(readFileSync('shared/content/compendium/statblock.json', 'utf8')) as {
+    id: string;
+    name: string;
+    text: string;
+    sourcePath: string;
+  }[];
+  const witnesses = [['Compulsion Eye', 'Xorannox the Tyract: Compulsion Eye']];
+  const headingChecks: string[] = [];
+  // Cover each repaired source heading through the persisted API sheet.
+  for (const [name, ability] of [
+    ['Angulotl Hopper', 'Leapfrog'],
+    ['Gnoll Gnasher', 'Gnash'],
+    ['Human Warrior', 'Chop'],
+    ['The Nameless', 'Baneful Blade'],
+    ['Rival Null', 'Inertial Flow'],
+  ]) {
+    const entry = blocks.find(
+      row =>
+        row.name === name &&
+        (name === 'Rival Null'
+          ? row.sourcePath.includes('3rd-echelon')
+          : row.sourcePath.includes('retainer')),
+    );
+    assert.ok(entry, `Missing source ${name}`);
+    const foeId = await actor.mutation<string>('foes:add', {
+      campaignId,
+      definitionId: entry.id,
+      commandId: `${runId}-heading-${name}`,
+    });
+    const abilitySheet = await actor.query<{ abilities: { name: string; text: string }[] }>(
+      'abilities:sheet',
+      { campaignId, actor: { kind: 'foe', id: foeId, name } },
+    );
+    const found = abilitySheet.abilities.find(row => row.name === ability);
+    assert.ok(found?.text.trim() && entry.text.includes(found.text), `${name}: ${ability}`);
+    headingChecks.push(`${name}: ${ability}`);
+  }
+  for (const [printedName, displayName] of witnesses) {
+    const entry = blocks.find(row => row.name === printedName)!;
+    assert.equal(definitions.find(row => row.definitionId === entry.id)?.name, displayName);
+    const foeId = await actor.mutation<string>('foes:add', {
+      campaignId,
+      definitionId: entry.id,
+      commandId: `${runId}-eye`,
+    });
+    const detail = await actor.query<{ name: string; sourceSnapshot: string }>('foes:detail', {
+      campaignId,
+      foeId,
+    });
+    assert.equal(detail.name, displayName);
+    assert.equal(JSON.parse(detail.sourceSnapshot).text, entry.text);
+  }
   const ghoulId = await actor.mutation<string>('foes:add', {
     campaignId,
     definitionId: id,
@@ -141,6 +198,8 @@ try {
     contentHash: status.contentHash,
     entryCount: status.entryCount,
     statblocks: catalog.length,
+    definitionsMs,
+    headingChecks,
     readback: {
       id,
       textSha256: createHash('sha256').update(row.text).digest('hex'),
@@ -161,6 +220,8 @@ try {
       'embedded features exact',
       'anonymous denied',
       '438 table definitions',
+      'five repaired source headings through persisted ability sheets',
+      'parent name in picker and persisted instance; source unchanged',
       'non-goblin load and ability sheet',
       'Razor Claws compiled damage and undo/redo',
     ],

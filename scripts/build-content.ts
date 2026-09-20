@@ -32,7 +32,6 @@ import type {
   ManifestSelection,
 } from '../shared/contracts/content.ts';
 import { parseFrontmatter, splitFrontmatter, type FrontmatterValue } from './lib/frontmatter.ts';
-import { parseDocument } from 'yaml';
 
 export const GENERATOR_VERSION = '1.0.4';
 export const SCHEMA_VERSION = 's01.1';
@@ -312,13 +311,7 @@ function loadFile(root: string, relativePath: string, selection: string): Loaded
   const { frontmatter } = splitFrontmatter(text);
   let fields: Record<string, FrontmatterValue>;
   try {
-    // Full monster frontmatter includes literal block scalars (for example Lich Malice).
-    // Keep strict duplicate-key/error handling and cross-check every field against its JSON twin.
-    const document = parseDocument(frontmatter, { uniqueKeys: true });
-    if (document.errors.length) throw document.errors[0];
-    fields = document.toJS({ maxAliasCount: 0 }) as Record<string, FrontmatterValue>;
-    if (!fields || Array.isArray(fields) || typeof fields !== 'object')
-      throw new Error('Frontmatter must be a mapping.');
+    fields = parseFrontmatter(frontmatter);
   } catch (error) {
     throw new Error(`${relativePath}: ${(error as Error).message}`);
   }

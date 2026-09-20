@@ -54,6 +54,7 @@ import type * as lib_dice from "../lib/dice.js";
 import type * as lib_encounters from "../lib/encounters.js";
 import type * as lib_engine from "../lib/engine.js";
 import type * as lib_events from "../lib/events.js";
+import type * as lib_foeNames from "../lib/foeNames.js";
 import type * as lib_foeOperations from "../lib/foeOperations.js";
 import type * as lib_foeSource from "../lib/foeSource.js";
 import type * as lib_history from "../lib/history.js";
@@ -128,6 +129,7 @@ declare const fullApi: ApiFromModules<{
   "lib/encounters": typeof lib_encounters;
   "lib/engine": typeof lib_engine;
   "lib/events": typeof lib_events;
+  "lib/foeNames": typeof lib_foeNames;
   "lib/foeOperations": typeof lib_foeOperations;
   "lib/foeSource": typeof lib_foeSource;
   "lib/history": typeof lib_history;

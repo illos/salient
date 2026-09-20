@@ -75,9 +75,9 @@ strips the Markdown links itself; the snapshot keeps them.
 
 `convex/contentTables.ts` defines `content` (one row per entry, indexed by `contentId` and `kind`)
 and `contentManifest` (one row). `convex/content.ts` exposes `get`, `list` and `status` queries to
-signed-in users, and the internal `reseed` mutation that replaces every row from the bundled
-snapshot, including JSON provenance and optional structured stat-block features. Existing rows may
-omit these fields until reseeded. `pnpm content:seed` runs it against the local development deployment
-only; development
-data is disposable, so a changed snapshot is reseeded, never migrated. `convex/foes.ts` reads the
-Goblin Warrior through this table; a fresh deployment reports "not loaded" until it is seeded.
+signed-in users, and the internal `reseed` action. It upserts the bundled snapshot in bounded
+transactions, preserving existing content row ids, JSON provenance, embedded features and unrelated
+play data. It prunes obsolete content and publishes the manifest after completion. The catalog is
+not an atomic swap: interrupted runs leave status null until a successful retry.
+`pnpm content:seed` targets the local development deployment only. The foes picker reads all seeded
+core stat blocks; a fresh deployment reports "not loaded" until seeding finishes.

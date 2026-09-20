@@ -3,6 +3,7 @@ import { describe, expect, test } from 'vitest';
 import { convexTest } from 'convex-test';
 import betterAuthTest from '@convex-dev/better-auth/test';
 import schema from '../../convex/schema';
+import statblocks from '../../shared/content/compendium/statblock.json';
 import { api, components, internal } from '../../convex/_generated/api';
 
 const modules = import.meta.glob('../../convex/**/*.ts');
@@ -343,4 +344,49 @@ describe('persistent campaign foes', () => {
     );
     expect(foeEvents.find(event => event.commandId === 'combat-remove')?.sessionId).toBe(sessionId);
   });
+});
+
+// Expectations come from the pinned corpus (also byte-checked by build-content.test), not a
+// browser catalog: only Xorannox's six organization-less sibling blocks have a parent.
+test('source-derived parent names reach the picker and persisted shared foe operation', async () => {
+  const { director, campaignId } = await setup();
+  await director.client.mutation(api.sessions.start, {
+    campaignId,
+    selectedPlayerIds: [],
+    commandId: 'parent-name-session',
+  });
+  const definitions = await director.client.query(api.foes.definitions, { campaignId });
+  const eyes = statblocks.filter(
+    row =>
+      row.sourcePath.includes('/monster/xorannox-the-tyract/statblock/') &&
+      !('organization' in row.structured),
+  );
+  expect(eyes.map(row => row.name).sort()).toEqual([
+    'Compulsion Eye',
+    'Demolition',
+    'Mover Eye',
+    'Necrotic Eye',
+    'Toxic Eye',
+    'Zapper Eye',
+  ]);
+  for (const entry of eyes) {
+    const name = `Xorannox the Tyract: ${entry.name}`;
+    expect(definitions.find(row => row.definitionId === entry.id)?.name).toBe(name);
+    const foeId = await director.client.mutation(api.foes.add, {
+      campaignId,
+      definitionId: entry.id,
+      commandId: `load-${entry.id}`,
+    });
+    const detail = await director.client.query(api.foes.detail, { campaignId, foeId });
+    expect(detail.name).toBe(name);
+    const snapshot = JSON.parse(detail.sourceSnapshot);
+    expect(snapshot.name).toBe(entry.name);
+    expect(snapshot.text).toBe(entry.text);
+  }
+  for (const name of ['Noncombatant', 'Source of Earth']) {
+    const entry = statblocks.find(row => row.name === name)!;
+    expect(definitions.find(row => row.definitionId === entry.id)?.name).toBe(name);
+  }
+  const nested = statblocks.find(row => row.name === 'Ghoul')!;
+  expect(definitions.find(row => row.definitionId === nested.id)?.group).toBe('undead');
 });

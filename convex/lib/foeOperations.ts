@@ -2,6 +2,7 @@
 // Table buttons, API wrappers and slash commands use the same authorized roster operations.
 // Spec: docs/table-spec.md#confirmed-action-and-log-contract and #foes-roster.
 import { ConvexError, v } from 'convex/values';
+import { foeDisplayName } from './foeNames';
 import type { OperationDefinition } from './registry';
 import { journalDelete, journalInsert } from './journal';
 import { onFoeAdded, onFoeRemoved } from './initiative';
@@ -40,6 +41,7 @@ const add: OperationDefinition = {
       throw new ConvexError(
         `${entry.name} is a Minion stat block: add it as a squad with /squad add definition="${entry.contentId}" count=4.`,
       );
+    const name = foeDisplayName(entry);
     const maxStamina = printedStamina(entry);
     const existing = await ctx.db
       .query('foes')
@@ -50,12 +52,12 @@ const add: OperationDefinition = {
     const visible = (await settings(ctx, context.campaign._id))?.addVisible ?? false;
     return {
       kind: 'foe-added',
-      description: `${entry.name} added to the foes roster.`,
+      description: `${name} added to the foes roster.`,
       data: { definitionId: entry.contentId },
       commit: async (writer, scope) => {
         const foeId = await journalInsert(writer, scope, 'foes', {
           campaignId: context.campaign._id,
-          name: entry.name,
+          name,
           visible,
           sourceSnapshot: snapshotOf(entry),
           maxStamina,
@@ -63,7 +65,7 @@ const add: OperationDefinition = {
         });
         // A04: during committed combat the newcomer joins in a new bottom group with a turn this round
         // (docs/table-spec.md#mid-combat-additions-and-regrouping).
-        await onFoeAdded(writer, scope, context.campaign, { id: foeId, name: entry.name });
+        await onFoeAdded(writer, scope, context.campaign, { id: foeId, name });
       },
     };
   },

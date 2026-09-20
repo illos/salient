@@ -100,12 +100,14 @@ describe('frontmatter parser', () => {
       stamina: '15',
     });
   });
-  test('refuses constructs it does not know instead of guessing', () => {
-    expect(() => parseFrontmatter('text: |\n  block')).toThrow('unsupported YAML indicator');
-    expect(() => parseFrontmatter('text: a: b')).toThrow('mapping indicator');
-    expect(() => parseFrontmatter('a: 1\na: 2')).toThrow('duplicate key');
-    expect(() => parseFrontmatter('\tx: 1')).toThrow('tabs');
-    expect(() => parseFrontmatter('list:\n    - a\n  b: 1')).toThrow();
+  test('accepts literal blocks and refuses duplicate keys, aliases and non-mappings', () => {
+    expect(parseFrontmatter('text: |-\n  block')).toEqual({ text: 'block' });
+    expect(() => parseFrontmatter('a: 1\na: 2')).toThrow();
+    expect(() => parseFrontmatter('a: &value hello\nb: *value')).toThrow();
+    expect(() => parseFrontmatter('- one\n- two')).toThrow('mapping');
+    expect(() => parseFrontmatter('plain scalar')).toThrow('mapping');
+    expect(() => parseFrontmatter('')).toThrow('mapping');
+    expect(() => parseFrontmatter('text: a: b')).toThrow();
     expect(() => splitFrontmatter('no frontmatter')).toThrow('no YAML frontmatter');
   });
 });

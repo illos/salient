@@ -14,7 +14,7 @@ The snapshot is the first instance of the versioned content package recommended 
 source revision, generator version and entry list; per entry the verbatim source file, its printed frontmatter
 values unrenamed, and for the stat block the JSON twin's `features` record. It records; it does not derive a
 baseline. [convex/contentTables.ts](../convex/contentTables.ts) mirrors it into a `content` table that
-[convex/content.ts](../convex/content.ts) exposes by id and kind, reseeded wholesale by `pnpm content:seed`.
+[convex/content.ts](../convex/content.ts) exposes by id and kind, refreshed by the bounded internal `reseed` action through `pnpm content:seed`, preserving row ids and play data.
 [convex/foes.ts](../convex/foes.ts) reads the Goblin Warrior through that table (the only app-level projection
 is the printed `stamina: "15"` becoming the instance's maximum Stamina; a non-integer printed value is refused,
 not defaulted) and [convex/foeTables.ts](../convex/foeTables.ts) provides Director-only add/remove/detail, a

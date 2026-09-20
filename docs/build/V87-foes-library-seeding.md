@@ -15,13 +15,14 @@ Seed every eligible core monster stat block and its verbatim embedded features i
 
 ## Spec references
 
+- `docs/monster-catalog-spec.md#user-visible-flow`
 - `docs/monster-catalog-spec.md#features-and-supporting-rules`
 - `docs/monster-catalog-spec.md#confirmed-ingestion-requirements--2026-09-15`
 - `docs/build/README.md#programmatic-headless-completion-gate`
 
 ## Scope and dependencies
 
-Widen S01 selection to monster/ and the minion/squad/captain rules. Preserve the existing core sourcebook filter, ids, source text and JSON features. Batch reference seeding without deleting application data. Preserve current shared ability extraction. Do not edit V02-owned foe operations, catalog queries or UI. Full creature automation, gameplay trait implementation and shared-main rollout are outside this branch handoff.
+Widen S01 selection to monster/ and the minion/squad/captain rules. Preserve the existing core sourcebook filter, ids, source text and JSON features. Batch reference seeding without deleting application data. Preserve current shared ability extraction. The Fable review handoff extends scope to source-derived parent names in foe operations and picker labels, nested-family grouping and level labels. Full creature automation, gameplay trait implementation and shared-main rollout are outside this branch handoff.
 
 ## Acceptance checks
 
@@ -48,3 +49,27 @@ Pinned Compendium monster corpus at fb83a789da8f0327a389c277a0c790b1648d5810. Pr
 - Integrated candidate `6836d1d` rebases onto V02 main `7e1c088`; selection conflicts keep the core superset, generated V72 inventory now reports eight reachable compiled abilities (Ghoul Razor Claws added). All required checks PASS: 352 engine + 526 app/scripts, every source/build gate. Public isolated API proof run 77ea078c passes in 4.722 s, including Director definitions, Ghoul load/sheet, actual Razor Claws damage and undo/redo. See [evidence](evidence/V87/README.md).
 - Readability audit found five existing heading-spacing gaps among 1,158 embedded ability records. Prepared and tested the narrow repair separately as `029ea29` on slice/V87-heading-fix to leave Fable's review candidate stable. Corpus regression fails against original parser, passes after repair; web typecheck passes. Repair integration and final independent acceptance remain pending. Core corpus includes 21 retainer entries and 8 without organization; no retainer-specific play/progression support is implemented.
 - Fable accepted independent review (Chords 775). Status is **In review**, branch only; no main Git/runtime rollout. Final handoff must incorporate the heading fix and reviewer findings, then verify the final delta. Existing local deployment data is retained.
+
+## Round 1 repairs and final verification handoff
+
+Rebased over main `618fadd`; heading repair integrated as `b4f463c`. YAML parsing now shares one
+implementation with explicit duplicate-key, alias and non-mapping rejection coverage. The table
+catalog derives parent labels from the source manifest: Xorannox's six eyestalks carry his name in
+picker labels and saved instances, without rewriting source snapshots. Noncombatant, Source of Earth
+and retainers remain loadable. Family grouping handles echelon subdirectories; both picker surfaces
+show levels to distinguish Rival copies. This is catalog naming, not new game mechanics.
+
+The optional same-hash manifest deletion and corrupt duplicate-row recovery notes are deferred:
+status intentionally stays null during maintenance, and the indexed unique-content invariant still
+refuses corrupt duplicate rows. Existing retry/preservation tests cover supported states. Whole-catalog
+summary projection and cold-start memory remain rollout considerations; TESTER is asked to record
+isolated first-call latency and available runtime memory evidence before any shared rollout.
+
+All new verification is assigned to TESTER under [the testing process](../../testing-process.md).
+Earlier 878-test results apply to `6836d1d`, not this final repair candidate. Round 2 and the final
+committed-source full check/live proof are pending; this branch is neither accepted nor merged.
+
+| Capability / scenario | CLI/API entry point | Headless command, source, target and persisted evidence | Headless result | Browser result and additional gap |
+| --- | --- | --- | --- | --- |
+| Complete core catalog, load Ghoul and use Razor Claws with undo/redo | content.status/list/get; foes.definitions/add/detail; abilities.sheet; commands.submit | `SALIENT_V87_TARGET=http://127.0.0.1:3260 node scripts/v87-headless.ts`; prior source `6836d1d`, isolated local3260; [report](evidence/V87/headless.json), exit0, 4.722s, stamina15→12→15→12 | Prior pass; final committed candidate pending TESTER | Deferred by moratorium; picker readability remains visual backlog |
+| Five source-heading repairs and parent-prefixed loaded eyestalk | foes.definitions/add/detail; abilities.sheet | Same committed runner extended with persisted heading/parent witnesses; source and target recorded by runner | Pending TESTER | Deferred; layout and label readability remain visual backlog |

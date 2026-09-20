@@ -49,3 +49,8 @@ A separate whole-corpus read audit found 5 blank action texts in the pre-repair 
 before applying it here. Its new corpus regression passes after repair, fails on the restored
 original parser (exit 1), and web typecheck passes. The source text itself is never rewritten.
 No final V87 acceptance or merge is claimed while review and repair integration remain pending.
+
+Round 1 follow-up: `029ea29` is now integrated after rebase as `b4f463c`. The branch also contains
+parent-name/group/level fixes and strict shared YAML parser coverage. The final candidate must be
+verified by TESTER and independently reviewed again. Existing reports above retain their original
+source identity and are not final-candidate proof.
