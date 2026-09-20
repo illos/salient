@@ -52,3 +52,6 @@ The earlier failed logs and audit comparisons remain preserved in
 [the superseded attempt](tester-job-ac95cc3.md).
 
 The dependent real-headless proof is a separate job and was not run here.
+
+The passing return was sent directly to ENGINE as Chords message 888; its wake was accepted. A
+quiet copy was sent to ENGINE2 as message 889.
