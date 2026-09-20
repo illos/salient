@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-only
 /** V86: the one-time starting award, independent of later build edits and inventory policy. */
-import type { DerivedBaseline, DerivedValue } from './characterEvaluation';
-import { startingRewardItems } from '../content/starting-reward-items';
+import type { DerivedBaseline, DerivedValue } from './characterEvaluation.ts';
+import { startingRewardItems } from '../content/starting-reward-items.ts';
 
 export interface StartingRewardItem {
   /** Stable within this award, even if a later build selects a different item. */
