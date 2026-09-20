@@ -989,10 +989,12 @@ function Wizard({ character }: { character: WizardCharacter }) {
                     (Boolean(character.id) || confirmedEmptyChoices.has(primary.id))
                   }
                   noneLabel={
-                    primary.optional ||
-                    (primary.shape.type === 'single' && primary.shape.noneAllowed)
-                      ? `No ${stepName(step).toLowerCase()}`
-                      : undefined
+                    primary.id === 'culture.preset'
+                      ? 'Bespoke culture'
+                      : primary.optional ||
+                          (primary.shape.type === 'single' && primary.shape.noneAllowed)
+                        ? `No ${stepName(step).toLowerCase()}`
+                        : undefined
                   }
                   reference={
                     selectedSource ? (

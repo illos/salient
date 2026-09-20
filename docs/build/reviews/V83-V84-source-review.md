@@ -92,5 +92,39 @@ and Bespoke behavior still require the finished candidate's headless evidence.
 
 ## Formal acceptance evidence
 
-Pending the lead's completed full check, public-API report and independent implementation review.
-No remaining source-semantic blocker identified in this consultation.
+**Independent proof review passes for the bounded V83/V84 scope.** Read the assertions in
+`scripts/headless/supporting-actions.ts`, `scripts/headless/culture-presets.ts`, the culture
+transition tests and `tests/app/perk-legacy.test.ts`, and inspected the lead's live report
+`/tmp/v83-v84-headless.json`. The report records source
+`2a8844e59bff30786f82edc64eca3edd1be7339f`, target `http://backend:3210`, run
+`ab82d584-a97d-441d-82fc-4b1f31fa3d34`: **31/31 pass in 80.865 seconds**. Runner/environment
+identity must accompany the retained delivery artifact; the internal URL alone does not identify
+the host. This reviewer did not execute or author those proofs.
+
+The new public-route scenarios establish:
+
+- Saved readbacks for every one of the 24 perk action entries, with retained feature, provenance,
+  exact multiplicity, grouping and removal on replacement; all 21 kit signatures are successively
+  saved and projected with only the current signature, main-action metadata and printed tiers.
+- Familiar's recorded manual use with one persisted Recovery debit and unchanged other live state,
+  zero-Recovery refusal, exact undo/redo, free respite alternative, foreign-caller refusal and
+  effective versus pending grants across Director approval. Creature Sense and Arcane Trick add
+  prose versus embedded table witnesses; Lie Detector proves the unsupported pool blocks use
+  without live-state changes.
+- All 27 culture defaults are obtained independently from the book tables and compared with
+  actual saved choices on a human. Existing ancestry purchases, authored details and live values
+  remain unchanged; professional rows preserve the chosen language. A modified Dwarf environment
+  persists as Bespoke with its name and unaffected organization skill retained. Foreign transition
+  access is refused. Focused transition assertions separately distinguish retained legal children
+  from pruned invalid children and cover each editable default.
+
+These witnesses exercise behavior rather than repeating an application catalog. The legacy perk
+fixture's direct database patch is appropriately limited to representing a pre-V83 stored build
+whose retained Familiar perk has no extracted abilities. Both public read projections recover the
+action and its cost without rewriting that stored baseline; new-build persistence is proved by
+the separate public-route scenario. This catches a distinct backward-compatibility failure.
+
+The evidence does **not** claim every perk's manual effect executed, every kit's combat effect
+automated, or all temporal/spatial conditions enforced. That is the same bounded scope reviewed
+above. No additional redundant run is required by this review. Formal acceptance still awaits the
+lead's final full-check result and completed independent implementation review.
