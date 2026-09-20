@@ -1,0 +1,5 @@
+backend-1  | 9/20/2026, 3:16:48 AM [CONVEX Q(abilities:sheet)] ArgumentValidationError: Object is missing the required field `name`. Consider wrapping the field validator in `v.optional(...)` if this is expected.
+backend-1  | Path: .actor
+backend-1  | Object: {id: "k571qtqjan3vz9swnrcby7xad58er3xa", kind: "character"}
+backend-1  | Validator: v.object({id: v.string(), kind: v.union(v.literal("character"), v.literal("foe")), name: v.string()})
+backend-1  | 

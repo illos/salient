@@ -1,0 +1,54 @@
+{
+  "runId": "1ec1619e-d856-43b8-bb5f-bb1e5b7c8020",
+  "startedAt": "2026-09-20T03:16:44.419Z",
+  "recordedAt": "2026-09-20T03:16:48.435Z",
+  "elapsedMs": 4016,
+  "source": {
+    "submodules": [
+      {
+        "path": "vendor/steel-compendium",
+        "url": "https://github.com/SteelCompendium/data-unified.git",
+        "gitlink": "fb83a789da8f0327a389c277a0c790b1648d5810",
+        "initialized": true,
+        "commit": "fb83a789da8f0327a389c277a0c790b1648d5810",
+        "dirty": false
+      },
+      {
+        "path": "vendor/forge-steel",
+        "url": "https://github.com/andyaiken/forgesteel.git",
+        "gitlink": "5a846aadb623a9855a023e9403bb887a956c341f",
+        "initialized": true,
+        "commit": "5a846aadb623a9855a023e9403bb887a956c341f",
+        "dirty": false
+      }
+    ],
+    "checkout": "/srv/presidium/projects/salient/code",
+    "identity": "ff99c9f507ebb2dfebd4ca7c25f824165fdcece115413e30e9f0f76cc22c6df9",
+    "commit": "a9a0e5d6f943fbf44720234a023ab2f4f8ff6e9e",
+    "dirty": false
+  },
+  "frontend": "https://salient-dev-fc4f48cb09a0.tail41404c.ts.net",
+  "backend": "http://backend:3210",
+  "sourcePin": "fb83a789da8f0327a389c277a0c790b1648d5810",
+  "scriptSha256": "6dbb5e82162521d1fc30f22f9af5dc08ba78727cedf5eb0eb3701126ab1d1346",
+  "runtimeHistorySha256": "8c52992a1bd5c1d1387445f646cc56c3cb28d62dd508ed60af2d0fb59211ec68",
+  "runtimeHistoryReadSha256": "e4075fcc6acca4c3a017cbba642231c584a122e4c25ec064775f6362fabae80a",
+  "sourceBytes": {
+    "scripts/v63-headless-main.ts": "6dbb5e82162521d1fc30f22f9af5dc08ba78727cedf5eb0eb3701126ab1d1346",
+    "scripts/app.ts": "982758f0503363db26812810ffa4229c9f3aeba8d2005824db04578a8cf39e2d",
+    "shared/resolve/index.ts": "5f4ab6041b4fbdb807f4d8047a3e5ee5e18edd9028e24b0ccd4172ff80243e64",
+    "shared/content/compendium/manifest.json": "16df90095acfd7b747d77c8740912cd1c25a03727d2dd88b4e8bb33436af6a0e",
+    "shared/content/character-evaluation-examples.json": "8fd35adc37ce502d1cd89b61ec6666b05baf62d4f36fb9aace0b7b7ff9c61495",
+    "shared/content/fury-level-one-decisions.json": "7c59c68024bcec1e7d6738dcca58fe2e16edad82325165b076fb148667264bc2",
+    "convex/abilities.ts": "d08d73ce3d12b20933269b3595e37a501f6d533ecab0f7b7f295368e67482bbb",
+    "convex/lib/abilityOperations.ts": "05b86ff0918e484fd66453f2d3d3b1af0a79d84aa9d9de4a81c3cb13a49338a2",
+    "convex/lib/resolve.ts": "41e95e51d2ac8374f1a25fb360d376e3b26cea85a8be9f1a1611c999fb09a6cf",
+    "convex/lib/history.ts": "8c52992a1bd5c1d1387445f646cc56c3cb28d62dd508ed60af2d0fb59211ec68",
+    "convex/lib/historyRead.ts": "e4075fcc6acca4c3a017cbba642231c584a122e4c25ec064775f6362fabae80a",
+    "convex/lib/historyIndex.ts": "6ecfa798c5b6f999fab0b4c5a82399b429f5f67f717fd6867548901a19299f26"
+  },
+  "method": "Real BetterAuth HTTP, scripts/app.ts commands and authenticated public Convex readback; real random accepted dice; no browser, database import, reset or gameplay row seeding",
+  "passed": false,
+  "stage": "@{character:k571qtqjan3vz9swnrcby7xad58er3xa} /turn take",
+  "records": []
+}

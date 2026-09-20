@@ -882,3 +882,25 @@ stopped isolated environment; [readiness evidence](evidence/V26/main-corrections
 records the exact overlay and checked bytes. The branch was rebased onto main `9675634`. Fable
 requires clean main integration and source sync before actual execution. Shared-main acceptance
 remains pending that run; browser backlog scenarios stay deferred.
+
+### 2026-09-20 — Main runner argument-contract repair
+
+The first shared-main attempt failed before ability use because `abilities:sheet` requires an
+actor name and the runner supplied only kind/id. Both prior static reviews missed that field.
+The original `makeFunctionReference` wrapper accepted `Json` arguments, so web TypeScript could
+not detect the mismatch. The [failed trial](evidence/V26/main-corrections-2026-09-20/README.md#first-main-attempt--failed-before-ability-use)
+is retained; no application correction defect is inferred from it.
+
+The runner now calls generated `api` references with `FunctionArgs`-typed generic wrappers,
+supplies the required actor name, and records setup identities plus the active public operation
+before the ability fact query. Planned CT114 verification includes removing that name from a
+temporary copy to demonstrate a compiler rejection, restoring the reviewed source, and passing
+formatter/lint/type checks before clean main integration and one corrected run. There is no
+unchanged retry, dice import, reset, new mechanics or browser execution. UI owns CT114 meanwhile.
+
+Corrected scoped verification passed on CT114: valid generated-API calls compile, and temporarily
+omitting `actor.name` produces TS2741 before any runtime execution. The positive file was restored
+byte-for-byte; formatter/lint/web types and source hashes pass. The [contract-check evidence](evidence/V26/main-corrections-2026-09-20/README.md#corrected-runner-contract-checks)
+retains the actual diagnostic and both exit statuses. The renewed [readiness review](reviews/V63-main-proof-review.md) is PASS; clean main
+integration precedes the corrected live proof. CT114 is released; Fable's Chords wake is currently
+hourly-limited, so no integration or runtime acceptance is inferred from the stored handoff.
