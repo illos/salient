@@ -132,3 +132,13 @@ any other class. Spec sections: `docs/character-wizard-spec.md#3-decision-system
   duplicate-Magic replacement through the Elementalist-named legacy decision id
   `class.elementalist.magic-replacement`, which fires for any second Magic source; renaming it is a
   separate compatibility change. Insight gains, edge discounts and ability effects stay manual.
+- 2026-09-20: TESTER `test-V92-ce2c8a0-1` and `-0bd2263-1` failed on artifacts, not behaviour:
+  ledger formatting; the V64 grammar audit baseline and the V72 live compiled report had to be
+  regenerated for the 19 new hero abilities (`4d6be66`); Forge's "Coup de Grâce" spelling broke the
+  counterpart lookup (normalised). Eviscerate compiles under the V88 potency grammar and is now in
+  the reachable inventory with a persisted proof (`tests/app/potency-conditions.test.ts`). The
+  Presidium `vendor/forge-steel` copy is sparse, so Forge counterparts run on CT114 only.
+- Residue found by the proof: `shared/resolve` applies a kit's melee damage bonus to any
+  Melee-or-Ranged weapon ability regardless of the distance used (no melee/ranged mode argument);
+  invisible for Cloak and Dagger (+1 both), wrong for a Sniper Shadow using Eviscerate at ranged 5.
+  Pre-existing, outside this slice; recorded for the engine track.
