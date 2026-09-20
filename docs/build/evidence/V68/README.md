@@ -14,3 +14,5 @@ network; the first round at `136f7e2` had the same results before the review-fix
   foes checks, production build; `exit 0`.
 
 Accounts are disposable (`<run>-<role>@headless.invalid`) and were signed out at the end.
+- `main-headless.json` — the same proof run against the shared CT114 main app after the merge
+  (source `3ca24e8`): 8 steps passed, disposable accounts and campaign only.

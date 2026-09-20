@@ -234,3 +234,24 @@ runtime update and the live changed-feature check follow the user's merge reques
 completion directive. Runtime impact when merged: additive schema (three new tables/fields, no
 migration), new `presence` and `chat` modules, changed `sessions` and `campaigns` projections, and
 the rebuilt campaign home; existing play data is compatible.
+
+### 2026-09-20 — merge complete: main and shared playable app
+
+User requested the merge ("merge to main so I can preview it there"). Completed merge:
+
+- **Git:** main fast-forwarded to `3ca24e8` (branch base `e5c1cd8` was current main; no rebase or
+  conflicts). `check-commit --merge` passes; every code commit carries `Reviewed-By: v68_review`.
+- **Integrated check:** full `pnpm check` on the integrated tree in the isolated `campaign-home`
+  environment: exit 0 (284 engine tests, 466 app/scripts tests, 302-file link check, build).
+- **Shared playable target:** the default CT114 `main` slot, Compose `salient-dev-b90776c53141`,
+  `https://salient-dev-fc4f48cb09a0.tail41404c.ts.net`, updated with `presidium-dev up` from the
+  canonical checkout: source `3ca24e8`, "Convex functions ready" 04:06:36 UTC, install job exit 0,
+  additive schema applied, existing data retained (no reset or seed). Web and `/api/auth/ok` both
+  HTTP 200 from Presidium.
+- **Live changed-feature check:** `scripts/v68-headless.ts` against shared main: 8/8 steps pass
+  (`evidence/V68/main-headless.json`) using disposable accounts and a disposable campaign named
+  `Headless <run>`; the user's existing campaigns were not touched.
+- Isolated `campaign-home` environment stopped, data retained. `slice/V68` retired after this
+  closeout commit; the worktree stays for the next UI slice.
+- Browser verification remains pending under the moratorium (backlog rows logged); the user will
+  view the page on shared main.
