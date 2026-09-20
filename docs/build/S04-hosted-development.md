@@ -134,3 +134,7 @@ TESTER's [live certificate](evidence/V85/tester-job-a0a700a-hosted-live.md) pass
 438-foe catalog and Ghoul persistence, two character cohorts and real-dice V88 condition/save
 cleanup. The [deployment ledger](../../deploy.md) records GitHub closeout identity.
 Browser verification remains suspended under the project moratorium.
+
+- 2026-09-20 V92: published executable `81b7931` to Convex `dev:different-bat-943` and
+  Worker `f6951468-0bfe-49bd-b0ab-1ec9628334fc`; 1182 committed content entries reseeded.
+  See the [V92 work log](V92-shadow-level-one.md#work-log) for its single hosted smoke result.

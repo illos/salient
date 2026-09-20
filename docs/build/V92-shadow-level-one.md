@@ -148,3 +148,13 @@ any other class. Spec sections: `docs/character-wizard-spec.md#3-decision-system
   `/srv/presidium/projects/salient/test-artifacts/V92-2b46094`. Implementation review pass (content
   and evaluator on `9f287bb`, test commits on `2b46094`) in `docs/build/reviews/V92-implementation-review.md`;
   rules review pass. Handed to DEPLOY2 for main integration and the dev promotion.
+
+- 2026-09-20: DEPLOY2 fast-forwarded main to `81b7931` and published the backend/frontend to
+  `dev:different-bat-943` / `https://salient-dev.rdxx.workers.dev`, Worker
+  `f6951468-0bfe-49bd-b0ab-1ec9628334fc`. Content reseed: 1182 entries. Hosted build and
+  publication exit 0; logs `/srv/presidium/projects/salient/test-artifacts/V92-release-81b7931`.
+  TESTER `test-V92-81b7931-hosted-smoke` passed exit 0 in 6.24 s: public Shadow create, persisted
+  Insight/abilities, saved college replacement and signout. Readbacks and initial dependency
+  setup failure retained in `/srv/presidium/projects/salient/test-artifacts/V92-hosted-81b7931`.
+  Temporary hosted credentials removed and private helper services stopped. Release closeout
+  changes are documentation-only; executable source remains `81b7931`.

@@ -13,8 +13,7 @@ TESTER owns all pre-release and post-release test execution under
 - Backend: Convex `dev:different-bat-943`
 - Procedure and credential handling: [docs/hosted-development.md](docs/hosted-development.md)
 - The browser moratorium applies. Release proof uses the supported authenticated CLI/API routes.
-- Existing play data is preserved. Content is reseeded only when the release requires the pinned
-  snapshot; schema compatibility is checked before backend publication or rollback.
+- Reseed the committed content when required; development data is disposable under `AGENTS.md`.
 
 The cloud target is stable only when its backend, content and frontend are recorded against one
 exact integrated `main` revision and TESTER has passed the live checks. A branch-only candidate or a
@@ -22,33 +21,23 @@ partially updated target is not stable.
 
 ## Promotion gate
 
-1. The implementation thread submits its frozen candidate to TESTER. TESTER returns the result to
-   that requester. After a clean return, the implementation thread sends DEPLOY the finished commit
-   with review verdicts, TESTER evidence, dependencies, affected runtime components, data/content
-   actions and rollback constraints. TESTER copies are informational; the owner's explicit handoff
-   makes the candidate eligible for integration.
-2. DEPLOY rebases or merges onto current `main`, resolves overlap with the owners, and records the
-   exact integrated commit. No unreviewed repair is folded into a release.
-3. DEPLOY submits that commit to TESTER for the smallest sufficient integrated release gate. TESTER
-   returns that result to DEPLOY through Chords; DEPLOY does not run tests or test stacks.
-4. After a pass, DEPLOY publishes affected components with the hosted runbook, records the backend
-   revision, content hash/count, Worker version and preserved-data result, then asks TESTER to verify
-   the live target.
-5. After the live pass, DEPLOY commits the release record, pushes the certified `main` lineage to
-   GitHub, verifies `origin/main`, and announces the result through Chords. Record the executable
-   deployment SHA separately from a later documentation-only closeout SHA.
-6. A release closes only after the live pass, verified GitHub push and Chords announcement. On
-   failure, keep the last compatible frontend available, do not reset data, and record whether Git
-   integration, the Git remote or any runtime component advanced.
+1. The owner hands off the reviewed tip after TESTER's full check and applicable headless proof pass.
+2. DEPLOY2 fast-forwards `main` and publishes affected backend, content and frontend components.
+   Reuse passing checks for unchanged inputs; do not add a pre-promotion or exact-revision test gate.
+3. TESTER runs one targeted hosted smoke check of the changed feature.
+4. DEPLOY2 records the runtime source and Worker version, commits the release closeout, pushes
+   `main`, verifies the remote SHA and sends the completion handoff.
 
-Cloud publication is serialized. Documentation-only integrations record why no runtime update is
-needed. Changing domains/accounts/plans or introducing production secrets is separate from this
-standing role unless the user explicitly includes it.
+Development data is disposable. Do not fingerprint, snapshot or preservation-check records.
+Coordinate before resetting another thread's environment or the user's shared app. Routine content
+reseed uses the hosted task. Cloud publication is serialized; documentation-only changes need no
+runtime update. Domains, accounts and paid plans remain separate from standing release authority.
 
 ## Job ledger
 
 | Job | Candidate | State | Next gate |
 | --- | --- | --- | --- |
+| V92 | `81b7931` | Merged and published; 1182 entries; hosted Shadow smoke passed | documentation closeout SHA and verified GitHub push recorded in completion handoff |
 | Stable-cloud reconciliation | `main` release source `a0a700a` | Published; targeted live checks passed | documentation closeout and verified GitHub push; exact closeout SHA in DEPLOY2 completion message |
 | V85/V86 | owner `64972e6`, integrated `4f3fe13` | Merged and published; targeted live checks passed | release closeout |
 | V88 | integrated with V85/V86 at `4f3fe13` | Merged and published; targeted live checks passed | 1151 entries, inventory 13/1259/2; release closeout |
@@ -122,3 +111,16 @@ coverage remains the retained integrated and isolated evidence; no full suite wa
 
 This release record is documentation-only after executable `a0a700a`. DEPLOY2 records the exact
 closeout commit and verified `origin/main` SHA in its Chords completion announcement after push.
+
+### V92 publication — 2026-09-20
+
+Main fast-forwarded to reviewed `81b79316dbf11e18d44f3feab6e7f1d3b49f5d22`.
+TESTER's existing `2b46094` pass covers unchanged application code: 367 engine + 577 app/script
+tests, four Forge counterparts and 36 headless scenarios. Backend publication, content reseed
+and hosted frontend build/publish passed. Worker: `f6951468-0bfe-49bd-b0ab-1ec9628334fc`.
+Content: 1182 entries, `sha256:ea1f6a2cf1d3c8a30f5fa40aef52fdadc25aa97900648485c9fe5957a50cf43b`.
+Logs: `/srv/presidium/projects/salient/test-artifacts/V92-release-81b7931`.
+Temporary credentials removed; private hosted helper services stopped.
+TESTER smoke `test-V92-81b7931-hosted-smoke` passed in 6.24 s (Chords 1134): persisted Shadow
+Insight/abilities and college replacement, with signout. Raw result:
+`/srv/presidium/projects/salient/test-artifacts/V92-hosted-81b7931`.

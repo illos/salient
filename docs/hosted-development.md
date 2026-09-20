@@ -107,6 +107,14 @@ See [the release evidence](build/evidence/V43/hosted/README.md) for browser resu
 fixture limitations and deployment logs. Earlier Worker versions in slice records are historical.
 
 
+## Current release — V92 Shadow level one
+
+Backend/frontend source `81b79316dbf11e18d44f3feab6e7f1d3b49f5d22` published on 2026-09-20.
+Worker `f6951468-0bfe-49bd-b0ab-1ec9628334fc`; content reseeded to 1182 entries with hash
+`sha256:ea1f6a2cf1d3c8a30f5fa40aef52fdadc25aa97900648485c9fe5957a50cf43b`.
+The [V92 work log](build/V92-shadow-level-one.md#work-log) records verification and the
+[deployment ledger](../deploy.md) records publication.
+
 ## Current partial release — 2026-09-20
 
 The initial partial publication is now resolved.
