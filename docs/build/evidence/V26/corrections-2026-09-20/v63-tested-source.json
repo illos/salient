@@ -1,0 +1,24 @@
+{
+  "submodules": [
+    {
+      "path": "vendor/steel-compendium",
+      "url": "https://github.com/SteelCompendium/data-unified.git",
+      "gitlink": "fb83a789da8f0327a389c277a0c790b1648d5810",
+      "initialized": true,
+      "commit": "fb83a789da8f0327a389c277a0c790b1648d5810",
+      "dirty": false
+    },
+    {
+      "path": "vendor/forge-steel",
+      "url": "https://github.com/andyaiken/forgesteel.git",
+      "gitlink": "5a846aadb623a9855a023e9403bb887a956c341f",
+      "initialized": true,
+      "commit": "5a846aadb623a9855a023e9403bb887a956c341f",
+      "dirty": false
+    }
+  ],
+  "checkout": "/srv/presidium/projects/salient/code/.worktrees/engine-corrections",
+  "identity": "5aad17a65ca7dd4bf42992db40b157de6c04676818760e9006261f7db58722f9",
+  "commit": "a843c1a7472c7e6c8638214473f08f35eb1cff42",
+  "dirty": false
+}

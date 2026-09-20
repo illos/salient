@@ -1,0 +1,2 @@
+2026-09-20T01:50:02.754170801Z 9/20/2026, 1:50:02 AM [CONVEX Q(characters:reviews)] Function execution timed out (maximum duration: 1s)
+2026-09-20T01:50:02.771487032Z 9/20/2026, 1:50:02 AM [CONVEX Q(table:roster)] [WARN] Function execution took a long time. (maximum duration: 1s, actual duration: 873.094232ms).

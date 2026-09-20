@@ -2,6 +2,11 @@
 
 Date: 2026-09-20. Reviewer: independent Codex static-review subagent.
 
+**Current checkpoint:** the combined `5956331..a843c1a` code review below finds the initial
+blocker repaired, with no new blocking code finding. Fresh CLI evidence passes review, but
+the browser journey failed during setup before abilities. Overall acceptance remains blocked.
+The initial blocker record and intermediate review checkpoints are preserved below.
+
 **Verdict: changes required.** This is a bounded, static blocker review of
 `44b23babdc58d31feb3739066a9118281e2c7284`, comprising historical V26 commits replayed
 onto main `0f47e89`. It is not a formal passing implementation review: current full
@@ -112,3 +117,140 @@ Any subsequent verification must use CT114 through the documented development to
 Chords `whoami`, `list_threads` and `check_updates` returned “Ambiguous provider session;
 cannot select a Chords project”; the lead was informed for coordination. Only this review file
 was authored by the reviewer; concurrent lead edits were preserved.
+
+## Follow-up combined review of a843c1a
+
+Reviewed candidate `a843c1a7472c7e6c8638214473f08f35eb1cff42` against integrated base
+`5956331`, including the historical mutation change, indexed-read repair, regression tests,
+CT114 browser adapter, dice-import helper, and real CLI proof script. This follow-up does not
+replace the historical evidence or claim execution by the reviewer.
+
+**Conditional verdict: code/source review satisfactory; live acceptance pending.** The original
+blocking finding is resolved in the reviewed code. No additional blocking code or bounded-source
+finding was identified. This is not yet a formal overall `pass` or permission to claim V26
+compiler completion.
+
+### Repair and regression evidence
+
+`convex/lib/historyRead.ts:83-123` follows `historyUnits.previousBranch` only while the current
+suffix consists of corrections or dispositions linked to the requested ability. It refuses
+inactive entries, missing predecessors, other sessions and nondecreasing sequences. A different
+roll, adjustment or turn event ends the walk. The prepared scope retains the session/encounter
+floor and chronological units, then `historyRead.ts:164-174` delegates eligibility to the same
+`correctionWindow` used by mutations. This preserves original-unit ownership/floor checks,
+Director correction seams, and the distinction between correction and manual-disposition windows.
+Undo/redo uses the existing active branch pointers; it does not collapse or rewrite journal units.
+The ordinary indexed read, catch-up refusal and closeout exception remain intact.
+
+The helper caches the prepared suffix for both modes within one result projection. Its cost is
+linear in the uninterrupted same-ability suffix, not constant in that suffix length; unrelated
+historical cards stop immediately and no complete session replay was added. No hard constant
+read bound or large-suffix benchmark is claimed by this review. No schema/index migration is
+introduced.
+
+The [retained red output](../evidence/V26/corrections-2026-09-20/red-output.txt) shows the two
+expected failures: player read eligibility false while mutation eligibility is true after one
+correction, and Director manual eligibility false after linked corrections. The
+[green output](../evidence/V26/corrections-2026-09-20/green-output.txt) records both selected
+tests passing after repair. These files were inspected, not rerun by the reviewer.
+
+`tests/app/abilities.test.ts:80-119` supplies explicit expected booleans to both read and
+authoritative checks; agreement alone cannot pass with two false answers. The existing lifecycle
+tests now cover original/one/two corrections, undo/redo, Director seams, manual disposition,
+turn end and unrelated adjustment. Their existing saved-health, retained-dice, retry, immutable
+event and cross-target assertions continue to protect behavior. These additions directly catch
+the observed integration failure and reuse existing scenarios rather than adding test-count cases.
+
+The lead reports full CT114 `pnpm check` passing on this candidate, with 693 engine/app/scripts
+tests and lint, type, content and build gates. That is an implementer-reported result at this
+review checkpoint; a durable current check-output artifact was not yet present in the reviewed
+evidence directory. This reviewer ran no tests, builds, installs or runtime workloads.
+
+### Browser/helper and CLI inspection
+
+The browser adapter retains the ten ability cases, source-derived expected damage, actual turn
+transitions, cost assertions, retained-dice corrections and 600-second timeout. It substitutes
+the named CT114 route and runtime-source identity, checks the current manifest against served
+content, and stores hashes for both history modules, the runner and the dice helper. Screenshots
+and public authenticated readbacks go into a fresh per-run directory. Ordinary runs remain opt-in.
+Authentication tokens remain in memory. The submitting command waits for its UI acknowledgment.
+
+`tests/browser/v26-dice-import.mjs` executes the Convex import in the existing named backend,
+with anonymous deployment/config/port checks and an exclusive helper lock. It accepts only one
+campaign per helper lifetime, validates the seed/request shape, restricts imports to `diceStates`,
+and limits its lifetime/request count. CLI output and configuration are not exported. The
+`--replace` import replaces that table, so this remains a disposable, isolated-environment fixture;
+it must not be described as a production-safe campaign-scoped seed operation.
+
+`scripts/v63-headless.ts` creates real authenticated accounts and an admitted hero through public
+operations, runs table commands through the actual `scripts/app.ts` child process with the token
+in its environment, and reads public roster/results/history/events back independently. Expected
+Stamina, permissions and dice are asserted after each lifecycle step. It covers manual disposition
+after linked corrections, rewinding that disposition, Director closure of player corrections and
+unrelated-turn denial. It records source identity and file hashes, preserves earlier readbacks,
+marks failures without serializing transport exceptions, and signs out its created sessions.
+The fixture inputs are existing V25-era integrated files, not abandoned Opus pilot artifacts.
+
+The browser's BS8 manual-disposition case uses a fresh uncorrected Brutal Slam. Therefore its
+screenshot alone cannot prove manual resolution after correction; that part of the contract is
+covered by the app tests and the pending CLI lifecycle. Final evidence must make this distinction
+clear. Neither static script inspection nor the historical screenshots establishes that either
+new live script has passed.
+
+### Source and acceptance checkpoint
+
+The preceding pinned-source Brutal Slam/Thunder Roar calculations remain valid; neither their
+source pin nor arithmetic was changed by the repair. The shared handler alters correction
+eligibility, not damage rules. Compiler occurrences, calculated movement, unique triggers and
+manual riders remain outside this prerequisite patch.
+
+| Prerequisite | Follow-up status |
+| --- | --- |
+| 1. Consecutive corrections, reconciliation, undo/redo and retry | Code review satisfactory; focused red/green evidence inspected. Fresh rendered controls and persisted live lifecycle pending review. |
+| 2. Director continuations and authority/history boundaries | Code review satisfactory; explicit positive/negative lifecycle coverage inspected. Live CLI evidence pending. |
+| 3. Manual disposition after corrections and rewind boundary | Code review satisfactory; focused regression proof inspected. Corrected-card live CLI evidence pending. |
+| 4. Ten proper-turn probes with source screenshots and readback | Not verified on the candidate; root is executing the browser journey. |
+| 5. Full checks and independent/source review | Full check reported passing by lead; bounded code/source review complete. Durable current check artifact and live evidence review still required for final overall pass. |
+
+Chords remains unavailable to this subagent with the same ambiguous-session error; the lead
+received the findings directly. No application source or runtime was changed by this reviewer.
+
+## Final evidence checkpoint: browser acceptance blocked
+
+**Final bounded verdict: code/source/headless review satisfactory; overall acceptance blocked
+by the incomplete browser journey. No full PASS.** No further runtime work was performed by
+this reviewer. The following fresh artifacts were inspected after the preceding checkpoint:
+
+- [Full check output](../evidence/V26/corrections-2026-09-20/v63-check-output.txt) and
+  [exit status](../evidence/V26/corrections-2026-09-20/v63-check-exit.txt): 284 engine plus
+  409 app/scripts tests pass, with exit 0 through the repository checks and build.
+- [Tested source identity](../evidence/V26/corrections-2026-09-20/v63-tested-source.json)
+  records clean candidate `a843c1a` and unchanged clean vendor pins.
+- [Headless readback](../evidence/V26/corrections-2026-09-20/v63-headless-readback.json)
+  records `passed: true`, `stage: complete`, the setup and eleven gameplay snapshots;
+  [headless exit status](../evidence/V26/corrections-2026-09-20/v63-headless-exit.txt) is 0.
+  Its script, history, history-read and helper hashes match the files independently read in
+  this review. All snapshots retain dice 7+7. Stamina progresses 7, 7, 10, 7, 10 through
+  original/one bane/two banes/undo/redo. Manual disposition preserves Stamina 10, creates one
+  disposition, closes correction permissions and leaves manual eligibility. Rewind removes
+  that disposition and restores correction eligibility. Director correction restores Stamina 7
+  and closes only the player's correction permission. Turn end closes all three permissions;
+  the refused follow-up snapshots preserve recorded damage and disposition state.
+- [Browser output](../evidence/V26/corrections-2026-09-20/v63-browser-output.txt) and
+  [exit status](../evidence/V26/corrections-2026-09-20/v63-browser-exit.txt) report failure
+  during `createTable`, waiting for Add foe at `tests/browser/v21-fixtures.ts:86`.
+  The retained error context displays the backend's maximum-execution-time error. The run
+  did not reach the ability journey, so it supplies neither a fresh mechanical failure nor
+  passing rendered correction/ten-ability evidence. The lead stopped the isolated environment
+  and reported the blocker; no retry or application repair is claimed here.
+
+The first three prerequisite contracts now have satisfactory static review, meaningful regression
+coverage and fresh real CLI persisted evidence, including manual disposition after corrections.
+Their rendered-control proof and prerequisite 4's ten proper-turn screenshots remain unverified
+on this candidate. Prerequisite 5's full-check artifact and bounded source review are verified
+from evidence, but the complete implementation acceptance gate cannot pass without the required
+browser evidence. Historical screenshots cannot substitute for that missing candidate run.
+
+The reviewed integration base remains `5956331`; the lead reports subsequent main `458b6e8`
+contains a read-only V64 audit without an application delta. This report does not attest to a new
+merge, shared-runtime update or unperformed rerun.

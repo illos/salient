@@ -773,16 +773,41 @@ Fable extended the assignment in Chords message 569 to repair the indexed read p
 read/mutation parity and adapt the historical browser harness for the named CT114 environment.
 The preceding static blocker review remains an accurate record of the unmodified rebase.
 
-Plan: follow existing `historyUnits.previousBranch` pointers only through the same ability's
-correction/disposition suffix, reuse the authoritative correction policy with that prepared
-scope, and retain V43's bounded session reads. No index/schema migration or mutation-policy
-change is needed. Extend the existing correction lifecycle tests with independently expected
-read and mutation booleans; demonstrate the mismatch before applying the repair. Adapt only
-runtime transport/target identity and the current content manifest in the browser harness;
-keep ability cases, arithmetic assertions, timeouts and historical artifacts intact.
+Implemented a walk of existing `historyUnits.previousBranch` pointers through only the same
+ability's correction/disposition suffix, then reuse of authoritative correction policy with that
+prepared scope. Reads scale with that suffix, not all session history. No index/schema migration
+or mutation-policy change. Existing lifecycle tests now compare read/mutation booleans against
+explicit expectations. Two cases fail before repair and pass afterward.
 
-All dependency installation, formatting, tests, builds and browser workloads use named CT114
-`engine-corrections`. V62's hosted browser work owns the heavy window until its explicit release.
-Only this new environment's nonsecret pinned backend executable/checksum have been provisioned;
-no shared environment, runtime credentials or data were copied. Full check, browser evidence
-and final independent review remain pending.
+Rebased onto main `5956331` before runtime proof, incorporating the headless completion doctrine.
+Candidate `a843c1a` is the exact clean tested snapshot. CT114 `engine-corrections` alone hosted
+installs/formatting/checks/build/live proof. Full `pnpm check` passes 284 engine +409 app/scripts
+tests and all other gates. Live BetterAuth/public setup plus `scripts/app.ts command` gameplay
+passes the entire correction lifecycle with persisted readback before browser acceptance.
+See [fresh evidence and exact hashes](evidence/V26/corrections-2026-09-20/README.md).
+
+| Capability | CLI/API proof | Incremental browser coverage |
+| --- | --- | --- |
+| Consecutive corrections, undo/redo | Passed, retained dice and exact health | Repeated visible controls/clicks pending |
+| Manual disposition after correction | Passed, permissions and rewind | Historical BS8 browser case uses a fresh uncorrected roll |
+| Director seam and unrelated turn | Passed, rejected mutations preserve state | Rendered availability pending |
+| Ten ability proper-turn/source/log cases | Not the scope of the correction CLI | Fresh journey blocked before abilities |
+| Reload and presentation | Persisted API state passed | Fresh reload/screenshots pending |
+
+The browser failed during `createTable`, before Add foe: Director campaign page showed a backend
+function execution timeout (maximum one second). No mechanics or test assertion was altered;
+no retry was attempted under the stop/report directive. Fable received blocker 587 with an
+accepted wake request, which does not establish that the peer started work. Failure screenshot,
+page snapshot and logs are retained; authentication-bearing trace is outside Git. Fresh ten-ability
+browser acceptance remains incomplete. Independent review distinguishes code/source/headless
+verification from that blocked acceptance gate.
+
+Both one-shot jobs and dice helpers exited; named backend/web stopped with data retained.
+Heavy window released to V65 through Chords588. Shared/main/character/hosted runtimes were not
+changed. Later main V64 adds a read-only audit; this candidate remains based on `5956331` and is
+committed on branch only. All eleven compiler acceptance checks remain pending.
+
+After the user paused testing, read-only stopped-backend logs identified `characters:reviews`
+at `2026-09-20T01:50:02.754170801Z` as the failing query; `table:roster` also logged 873 ms.
+Fable's proposed single unchanged rerun is held under the user pause. Non-test documentation,
+review and peer handoff continue. This identifies a query, not a confirmed root cause.
