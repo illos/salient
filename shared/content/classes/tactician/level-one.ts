@@ -67,18 +67,12 @@ export const classProfile: ClassProfile = {
  */
 const doctrine = (
   value: string,
-  group: string,
   doctrineFeature: { name: string; slug: string },
   triggered: { name: string; slug: string },
 ) =>
   option(value, feature('tactical-doctrine'), {
     grants: [
-      grant(
-        'class-feature',
-        doctrineFeature.name,
-        feature(doctrineFeature.slug),
-        `You gain a skill from the ${group} skill group.`,
-      ),
+      grant('class-feature', doctrineFeature.name, feature(doctrineFeature.slug)),
       grant('aspect-ability', triggered.name, ability(triggered.slug)),
     ],
   });
@@ -251,19 +245,16 @@ export function getLevelOneDecisions(pools: DecisionDefinitions['pools']): Decis
       [
         doctrine(
           'Insurgent',
-          'intrigue',
           { name: 'Covert Operations', slug: 'covert-operations' },
           { name: 'Advanced Tactics', slug: 'advanced-tactics' },
         ),
         doctrine(
           'Mastermind',
-          'lore',
           { name: 'Studied Commander', slug: 'studied-commander' },
           { name: 'Overwatch', slug: 'overwatch' },
         ),
         doctrine(
           'Vanguard',
-          'interpersonal',
           { name: 'Commanding Presence', slug: 'commanding-presence' },
           { name: 'Parry', slug: 'parry' },
         ),
@@ -275,7 +266,7 @@ export function getLevelOneDecisions(pools: DecisionDefinitions['pools']): Decis
             'Your tactical doctrine grants you a feature, as shown on the 1st-Level Doctrine Features table.',
         },
         triggeredRule: { source: feature('doctrine-triggered-action'), quote: triggeredQuote },
-        note: 'Studied Commander includes a once-per-encounter respite Reason test and Mark carries 1-Focus free triggered benefits; both stay readable text within their entries (no respite or mark automation in V94).',
+        note: 'Studied Commander grants a conditioned Reason-test respite activity. Mark grants a paid free trigger and free retarget. These actions are listed and recorded through the shared route; narrative effects and trigger adjudication remain manual.',
       },
     ),
     {

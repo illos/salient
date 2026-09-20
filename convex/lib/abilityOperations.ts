@@ -1022,7 +1022,7 @@ const abilityUse: OperationDefinition = {
           : undefined;
     if (cost?.waived)
       warnings.push(
-        'The outside-combat Ferocity reuse restriction is checked manually from the Ferocity source; no reuse limit or resource lifecycle is automated.',
+        `The outside-combat ${cost.resource} reuse restriction is checked manually from its class source; no reuse limit or resource lifecycle is automated.`,
       );
 
     // ---- Catch Breath (R04 section 7): a maneuver in combat, the same operation in FreePlay.

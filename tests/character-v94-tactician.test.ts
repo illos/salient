@@ -104,8 +104,19 @@ test('V94 every ledger witness evaluates complete with the source-derived baseli
       for (const [benefit, value] of Object.entries(printed))
         assert.deepEqual(actual[benefit], value, label(`${kit.name.value} printed ${benefit}`));
     }
-    for (const key of ['skills', 'languages', 'traits', 'features', 'perks', 'abilities'] as const)
+    for (const key of ['skills', 'languages', 'traits', 'features', 'perks'] as const)
       assert.deepEqual(names(hero[key]), sorted(expected[key]), label(key));
+    // Mark's full body grants two free triggers; Studied Commander grants its respite activity.
+    assert.deepEqual(
+      names(hero.abilities),
+      sorted([
+        ...expected.abilities,
+        'Mark: Trigger',
+        'Mark: Retarget',
+        ...(expected.subclass === 'Mastermind' ? ['Studied Commander: Prepare'] : []),
+      ]),
+      label('abilities'),
+    );
     const ability = (name: string) => hero.abilities.find(entry => entry.name === name)!;
     assert.deepEqual(
       ability(witness.selections['class.tactician.ability-3'] as string).cost,
@@ -351,4 +362,66 @@ test('V94 replacing class Tactician clears both kits and its decisions; the Shad
   );
   assert.equal(shadow.selections['kit.choice'], 'Shining Armor');
   assert.ok(shadow.removed.includes('class.tactician.second-kit'));
+});
+
+// chapter/kits.md, Damage Bonuses / Distance Bonus / Kit Signature Ability: bonuses apply to
+// every matching Weapon ability, including a signature whose own kit grants no distance bonus.
+// kit/mountain.md prints Pain for Pain at Melee 1; kit/whirlwind.md grants melee distance +1.
+test('V94 a second kit extends a qualifying signature even without overlapping distance bonuses', () => {
+  const result = evaluate({
+    ...shiningSniper.selections,
+    'kit.choice': 'Mountain',
+    'class.tactician.second-kit': 'Whirlwind',
+    'class.tactician.arsenal.meleeDamage': 'Mountain',
+  });
+  assert.equal(result.status, 'complete', JSON.stringify(result.diagnostics));
+  const pain = result.baseline!.abilities.find(a => a.name === 'Pain for Pain')!;
+  const distance = pain.kitBonusReplacements?.find(r => r.benefit === 'meleeDistance');
+  assert.deepEqual(distance, {
+    benefit: 'meleeDistance',
+    fromKit: 'Mountain',
+    toKit: 'Whirlwind',
+    subtract: 0,
+    add: 1,
+    decisionId: 'class.tactician.second-kit',
+    sourcePath: 'en/unified/md/feature/tactician/level-1/field-arsenal.md',
+  });
+  // The printed Melee 1 becomes 1 - 0 + 1 = 2, not an unchanged Melee 1.
+  assert.equal(1 - Number(distance!.subtract) + Number(distance!.add), 2);
+  // Shining Armor's signature is Melee/Weapon; Sniper's is Ranged/Weapon. Neither gains
+  // the other mode's damage or distance despite their merged arsenal containing both modes.
+  const separateModes = evaluate(shiningSniper.selections).baseline!;
+  for (const ability of separateModes.abilities.filter(a => a.kind === 'kit-signature'))
+    assert.deepEqual(ability.kitBonusReplacements ?? [], []);
+});
+
+// feature/trait/devil/beast-legs.md gives speed 6; kit/whirlwind.md gives speed +3;
+// kit/mountain.md gives stability +2. Field Arsenal supplies both regardless of kit order.
+test('V94 Devil movement uses resolved arsenal benefits from either kit', () => {
+  for (const [first, second] of [
+    ['Mountain', 'Whirlwind'],
+    ['Whirlwind', 'Mountain'],
+  ]) {
+    const selections: Selections = {
+      ...shiningSniper.selections,
+      'ancestry.choice': 'Devil',
+      'ancestry.devil.silver-tongue-skill': 'Persuade',
+      'ancestry.devil.purchased-traits': ['Beast Legs', 'Impressive Horns'],
+      'kit.choice': first!,
+      'class.tactician.second-kit': second!,
+      'class.tactician.arsenal.meleeDamage': 'Mountain',
+    };
+    delete selections['ancestry.human.purchased-traits'];
+    const result = evaluate(selections);
+    assert.equal(result.status, 'complete', JSON.stringify(result.diagnostics));
+    assert.equal(result.baseline!.speed.value, 9);
+    assert.equal(result.baseline!.stability.value, 2);
+    for (const field of ['speed', 'stability'] as const)
+      assert.ok(
+        result.baseline![field].provenance.some(
+          p => p.source.path === 'en/unified/md/feature/tactician/level-1/field-arsenal.md',
+        ),
+        JSON.stringify({ field, provenance: result.baseline![field].provenance }),
+      );
+  }
 });

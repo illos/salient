@@ -1,4 +1,5 @@
 import { startingRewardItems } from '../content/starting-reward-items.ts';
+import { tacticianAbilities } from './tacticianAbilities.ts';
 import { complicationAbilities } from './complicationAbilities.ts';
 import { perkAbilities } from './perkAbilities.ts';
 import { applyRevenantBaseline, applyRevenantDisengage } from './ancestries/revenant.ts';
@@ -919,6 +920,7 @@ class Evaluation {
       out.features,
       perkAbilities(out.perks, ancestryAbilities(out.traits, this.abilities())),
     );
+    out.abilities = tacticianAbilities(out.features, out.abilities);
     this.deriveSupportingChoices(out);
     const items = startingRewardItems(out.features ?? [], out.initialItems);
     if (items.length) out.initialItems = items;

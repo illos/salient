@@ -29,7 +29,7 @@ Mechanical claims, each cited to those files:
 - Tactical Doctrine (`tactical-doctrine.md`): subclass; each doctrine grants a skill chosen from a
   group: Insurgent → intrigue, Mastermind → lore, Vanguard → interpersonal.
 - Doctrine feature (`1st-level-doctrine-feature.md`): Covert Operations / Studied Commander /
-  Commanding Presence. All three are prose features with no new discrete action.
+  Commanding Presence. Studied Commander also grants a conditioned Reason-test respite activity, exposed as Studied Commander: Prepare; its outcomes remain manual.
 - Doctrine triggered action (`doctrine-triggered-action.md`): Advanced Tactics / Overwatch / Parry,
   each free of base cost with an optional Spend 1 Focus effect.
 - Focus (`focus.md`): heroic resource named focus; starting value 0 at creation; outside combat
@@ -152,14 +152,25 @@ and above, any other class. Spec sections: `docs/character-wizard-spec.md#3-deci
   tests/app/potency-conditions.test.ts` 9/9, every `tests/character-*.test.ts` file 112/112, the
   two report tests 25/25. All four ledger witnesses match the evaluator field by field on the first
   evaluation, including the resolved arsenal, both kits' printed bonuses and the replacement records.
-- Decisions and interpretations: equal printed values on an overlapping benefit are taken once with
-  no choice offered (interpretation; the source says "one or the other" and the values are the
-  same; provenance cites both kits and the Field Arsenal sentence with the note). Replacement records
-  are emitted only for benefits both kits grant where the signature's kit lost the choice (the
-  source's Battle Grace example); a benefit only the other kit grants is not added to a signature
-  that prints none of it (interpretation; alternative: apply the other kit's bonus to every weapon
-  signature; left for the rules review). `baseline.kit.name` is "First and Second" for a two-kit
-  hero; `baseline.kits[0]` is `kit.choice`. The kit-signature `kitBonusesIncluded` flag stays true,
-  so rolls do not apply replacements: engine-track residue, visible on the sheet as a manual
-  adjustment. A Devil Tactician's speed and stability still read the first kit only
-  (`applyDevilMovement` predates the arsenal); no Devil witness exists, recorded for the ancestry track.
+- Final interpretations: equal printed values on an overlapping benefit are taken once with no
+  redundant choice, explicitly labelled in provenance and citing both kits. The earlier proposal
+  to adjust only overlapped bonuses was rejected by rules review: Kits Damage Bonuses and Distance
+  Bonus apply to every qualifying weapon ability. Signature records now include resolved-minus-
+  printed adjustments even when the originating kit printed no bonus, filtered by actual signature
+  keywords. The complete damage tuple is selected. Rolls retain printed signature values; the
+  source-correct replacement is visible for manual application. Devil speed/stability now consume
+  the resolved arsenal with ancestry base/trait contributions retained.
+- Ownership transferred by user to WIZARD.2 after the lead hit its usage limit. Original frozen
+  05a591d review findings are retained in audits/V94-tactician-rules-review.md. The prior TESTER
+  job1195 was cancelled; its observed372 engine successes are non-certifying because repair edits
+  overlapped the running worktree before the freeze notice arrived. No Forge/headless run occurred.
+- Repairs add explicit Mark: Trigger (fixed1 Focus), Mark: Retarget, and Studied Commander: Prepare
+  actions to both the sheet and shared ability.use route. Full source text, timing and manual
+  conditions remain visible. Invocation persists an ability.recorded event; Mark payment uses the
+  current Focus pool in combat. Mark state, chosen narrative benefits, preparation test and its
+  outcome, prerequisite adjudication, reuse limits and resource lifecycle remain manual. These
+  records do not certify that a trigger occurred or that a respite was completed.
+- Authoring repair checks: root/web typechecks pass; focused V94 engine7/7 and app2/2 pass; targeted
+  lint/format pass. New bounded cohort SALIENT_HEADLESS_COHORT=tactician covers four saved source-
+  ledger builds, manual-action records, Focus payment/block, and doctrine/action revocation. Full
+  TESTER gate, pinned Forge execution and independent final review are pending.

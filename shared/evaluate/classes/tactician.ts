@@ -55,6 +55,35 @@ const SIGNATURE_BENEFITS: KitBenefit[] = [
   'rangedDistance',
 ];
 
+// Source: each named kit's Signature Ability keyword row under en/unified/md/kit/.
+// All ordinary signatures below have Weapon; classify their actual Melee/Ranged keywords,
+// rather than inferring applicability from the originating kit's nonzero bonuses.
+const SIGNATURE_MODES: Record<string, readonly string[]> = {
+  'Arcane Archer': ['ranged'],
+  Battlemind: ['melee'],
+  'Cloak and Dagger': ['melee', 'ranged'],
+  'Dual Wielder': ['melee'],
+  Guisarmier: ['melee'],
+  'Martial Artist': ['melee'],
+  Mountain: ['melee'],
+  Panther: ['melee'],
+  Pugilist: ['melee'],
+  Raider: ['melee', 'ranged'],
+  Ranger: ['ranged'],
+  'Rapid-Fire': ['ranged'],
+  Retiarius: ['melee'],
+  'Shining Armor': ['melee'],
+  Sniper: ['ranged'],
+  Spellsword: ['melee'],
+  'Stick and Robe': ['melee'],
+  Swashbuckler: ['melee'],
+  'Sword and Board': ['melee'],
+  'Warrior Priest': ['melee'],
+  Whirlwind: ['melee'],
+};
+const appliesToSignature = (kit: SelectedKit, benefit: KitBenefit) =>
+  SIGNATURE_MODES[kit.name]?.some(mode => benefit.startsWith(mode)) ?? false;
+
 type Printed = number | [number, number, number];
 
 /** The kit's printed value for a benefit; an omitted bonus is 0 (R02 1.14). */
@@ -170,7 +199,7 @@ export function resolveArsenal(
       extra = [
         ...(second.contributions[field] as DerivedValue<unknown>).provenance,
         p({
-          decisionId: second.kit.decisionId,
+          decisionId: 'class.tactician.features',
           source: ctx.sentence(FIELD_ARSENAL.sameBenefit),
           note: `${first.kit.name} and ${second.kit.name} print the same ${benefit} bonus; taken once (interpretation: no choice is needed between equal values)`,
         }),
@@ -191,25 +220,33 @@ export function resolveArsenal(
           note: `${benefit}: ${winner.kit.name} chosen over ${(winner === first ? second : first).kit.name}`,
         }),
       ];
-      const loser = winner === first ? second : first;
-      if (SIGNATURE_BENEFITS.includes(benefit))
-        replacements[loser.kit.name]!.push({
-          benefit,
-          fromKit: loser.kit.name,
-          toKit: winner.kit.name,
-          subtract: printedBenefit(loser.kit.s, benefit),
-          add: printedBenefit(winner.kit.s, benefit),
-          decisionId,
-          sourcePath: FIELD_ARSENAL_PATH,
-        });
     } else if (grantedBy.length === 1) {
       extra = [
         p({
-          decisionId: winner.kit.decisionId,
+          decisionId: 'class.tactician.features',
+          selection: winner.kit.name,
           source: ctx.sentence(FIELD_ARSENAL.twoKits),
           note: `${benefit} bonus supplied by ${winner.kit.name} alone`,
         }),
       ];
+    }
+    // chapter/kits.md, Damage Bonuses and Distance Bonus: any qualifying Weapon ability
+    // receives the resolved bonus, including a signature whose own kit supplied zero.
+    if (SIGNATURE_BENEFITS.includes(benefit)) {
+      for (const side of sides) {
+        const subtract = printedBenefit(side.kit.s, benefit);
+        const add = printedBenefit(winner.kit.s, benefit);
+        if (!appliesToSignature(side.kit, benefit) || same(subtract, add)) continue;
+        replacements[side.kit.name]!.push({
+          benefit,
+          fromKit: side.kit.name,
+          toKit: winner.kit.name,
+          subtract,
+          add,
+          decisionId: overlap === 'differs' ? arsenalDecisionId(benefit) : winner.kit.decisionId,
+          sourcePath: FIELD_ARSENAL_PATH,
+        });
+      }
     }
     winners[benefit] = winner;
     const source = winner.contributions[field] as DerivedValue<unknown>;

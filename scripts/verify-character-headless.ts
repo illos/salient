@@ -9,6 +9,7 @@ import {
   type ActorSession,
   type ScenarioContext,
 } from './headless/character-client.ts';
+import { runTactician } from './headless/tactician.ts';
 import { runScenarios } from './headless/character-scenarios.ts';
 import { runCulturePresets } from './headless/culture-presets.ts';
 import { runComplicationChoices, runComplicationTable } from './headless/complication-actions.ts';
@@ -18,6 +19,7 @@ import { runStartingItems } from './headless/starting-items.ts';
 // Each selected cohort invokes the original scenario, including all assertions and setup.
 const cohorts = {
   all: runScenarios,
+  tactician: runTactician,
   culture: runCulturePresets,
   'complication-choices': runComplicationChoices,
   'complication-table': runComplicationTable,

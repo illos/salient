@@ -110,3 +110,75 @@ test('Tactician saves, reads back the ledger sheet with Focus costs and arsenal 
   expect(features).toContain('Commanding Presence');
   expect(features).not.toContain('Covert Operations');
 });
+
+// Embedded source actions must survive both projections and the shared operation route. Manual
+// effects stay manual, but fixed Focus payment and the action's source event must persist.
+test('embedded Tactician actions record source outcomes and pay Mark Focus through ability.use', async () => {
+  const t = backend();
+  const f = await table(t);
+  await t.action(internal.content.reseed, {});
+  const mastermind = ledger.witnesses[1]!;
+  const characterId = await admitHero(
+    t,
+    f.player,
+    f.director,
+    f.campaignId,
+    'Planner',
+    draftSelectionsFrom(mastermind.selections as EvaluationInput['selections'], definitions),
+  );
+  const actor = { refKind: 'character' as const, id: characterId };
+  const sheet = await f.player.client.query(api.characters.sheet, { characterId });
+  if (sheet.audience === 'peer') throw new Error('Expected owner sheet');
+  for (const name of ['Mark: Trigger', 'Mark: Retarget', 'Studied Commander: Prepare']) {
+    const action = sheet.abilities.find(entry => entry.name === name);
+    expect(action?.activationCondition).toBeTruthy();
+    expect(action?.metadata.effects?.[0]?.text).toContain(
+      name.startsWith('Mark:') ? "You can't gain more than one benefit" : '24 hours',
+    );
+  }
+  const invoke = (commandId: string, ability: string) =>
+    f.player.client.mutation(api.commands.invoke, {
+      campaignId: f.campaignId,
+      commandId: commandId.replace(/[^A-Za-z0-9_-]/g, '-'),
+      operation: 'ability.use',
+      actor,
+      arguments: { ability, targets: [actor] },
+    });
+  for (const name of ['Mark: Retarget', 'Studied Commander: Prepare']) {
+    const result = await invoke(`record-${name}`, name);
+    const stored = (await t.run(ctx => ctx.db.get(result.eventId)))!;
+    expect(stored.kind).toBe('ability.recorded');
+    expect(stored.payload.data).toMatchObject({ manual: true, ability: { name } });
+  }
+  for (const operation of ['combat.start', 'combat.commit'])
+    await f.director.client.mutation(api.commands.invoke, {
+      campaignId: f.campaignId,
+      commandId: operation.replaceAll('.', '-'),
+      operation,
+      arguments: {},
+    });
+  await f.director.client.mutation(api.commands.invoke, {
+    campaignId: f.campaignId,
+    commandId: 'give-focus',
+    operation: 'adjust.heroic-resource',
+    actor,
+    arguments: { value: 2 },
+  });
+  const used = await invoke('paid-mark-trigger', 'Mark: Trigger');
+  const event = (await t.run(ctx => ctx.db.get(used.eventId)))!;
+  expect(event.kind).toBe('ability.recorded');
+  expect(event.payload.data).toMatchObject({
+    manual: true,
+    cost: { resource: 'focus', amount: 1, before: 2, after: 1 },
+  });
+  const persisted = await f.player.client.query(api.characters.get, { characterId });
+  expect(persisted.liveState?.heroicResource).toEqual({ name: 'focus', current: 1 });
+  const tableSheet = await f.player.client.query(api.abilities.sheet, {
+    campaignId: f.campaignId,
+    actor: { kind: 'character', id: characterId, name: 'Planner' },
+  });
+  expect(tableSheet.abilities.find(entry => entry.name === 'Mark: Trigger')?.fixedCost).toEqual({
+    resource: 'focus',
+    amount: 1,
+  });
+});

@@ -46,7 +46,13 @@ export function applyDevilMovement(
         );
       }
     }
-    if (kit) {
+    const arsenal = out.kits?.length === 2 ? out.kit : undefined;
+    if (arsenal) {
+      speed += arsenal.speedBonus.value;
+      speedProvenance.push(
+        ...arsenal.speedBonus.provenance.map(entry => ({ ...entry, operation: 'add' as const })),
+      );
+    } else if (kit) {
       speed += kit.s.speedBonus;
       speedProvenance.push(
         p({
@@ -63,7 +69,15 @@ export function applyDevilMovement(
       );
     }
     out.speed = dv(speed, speedProvenance);
-    if (kit) {
+    if (arsenal) {
+      out.stability = dv(Math.max(0, arsenal.stabilityBonus.value), [
+        base(0),
+        ...arsenal.stabilityBonus.provenance.map(entry => ({
+          ...entry,
+          operation: 'add' as const,
+        })),
+      ]);
+    } else if (kit) {
       const bonus = kit.s.stabilityBonus;
       out.stability = dv(Math.max(0, 0 + (bonus?.amount ?? 0)), [
         base(0),
