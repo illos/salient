@@ -176,10 +176,10 @@ export async function runScenarios(context: ScenarioContext) {
           `ancestry.${ancestry.toLowerCase()}.purchased-traits`
         ] as string[]) {
           const feature = sheet.features.find(item => item.name === trait);
-          assert.ok(feature?.content?.text.trim(), `Missing source-bearing trait ${trait}`);
-          assert.ok(
-            feature.content.sourcePath.includes(`/feature/trait/${ancestry.toLowerCase()}/`),
-          );
+          const content = feature?.content;
+          assert.ok(content, `Missing source-bearing trait ${trait}`);
+          assert.ok(content.text.trim(), `Empty source-bearing trait ${trait}`);
+          assert.ok(content.sourcePath.includes(`/feature/trait/${ancestry.toLowerCase()}/`));
         }
         if (ancestry === 'Hakaan' || ancestry === 'Orc') {
           // Catches missing permanent immunity and signature source in the deployed projection.
