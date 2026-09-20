@@ -95,7 +95,10 @@ export function HeroSoFar({
             key={key}
             compact
             inset
-            emphasis={b.characteristics?.[key] !== undefined}
+            // An assigned characteristic steps up a tone rather than taking the accent: every
+            // tile is assigned once the class step is done, so a ring here would spend the
+            // accent on decoration (docs/design-mockups/quiet/README.md, accent budget).
+            className={b.characteristics?.[key] !== undefined ? 'bg-placeholder' : undefined}
             value={b.characteristics ? b.characteristics[key].value : '–'}
             label={label}
           />

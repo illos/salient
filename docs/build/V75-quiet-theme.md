@@ -239,3 +239,25 @@ merging this branch or reverting its commits as a unit after a merge. Suggested 
 user views the theme (an isolated CT114 environment from this worktree, or a merge under the
 standing directive when they ask for it), then decides. Preview URL work needs the CT114 heavy
 window and is not started here. Browser spot checks stay in the backlog under the moratorium.
+
+### 2026-09-20 — screenshots for the user, and one accent-budget fix
+
+The user asked to see the design. Captured manually under the moratorium's carve-out for
+user-requested screenshots (not a browser test, not acceptance evidence): an isolated local
+stack from this worktree, a fresh anonymous Convex backend with its own state, seeded content,
+and disposable data created through the app's own UI and operations. Method, target and the
+twelve images are in [the evidence directory](evidence/V75/README.md).
+
+Reviewing the captures found one real defect, now fixed: in the wizard's "hero so far" column,
+`StatBox emphasis` marked every characteristic that had a value, so after the class step all
+five tiles carried an accent ring. An assigned characteristic now steps up a tone
+(`sub` → `ph`) instead, leaving the accent on the selected option, the current step, the live
+status dot and the primary button. The character sheet header keeps the accent ring, where it
+marks one pressed tile at a time.
+
+Verified after the fix: `pnpm exec tsc -p tsconfig.web.json`, `pnpm exec eslint`, and
+`pnpm exec prettier` on the changed file all pass; the captures above are from the fixed tree
+except the character sheet and table images, which the fix does not touch.
+
+The local stack remains available for further captures at `127.0.0.1:5180` (backend `3210`);
+its data is disposable and nothing outside this worktree was touched.
