@@ -29,6 +29,7 @@
     "scripts/check-links.ts",
     "scripts/app.ts",
     "scripts/v63-headless.ts",
+    "scripts/v63-headless-main.ts",
     "scripts/setup-local.ts",
     "scripts/build-content.ts",
     "scripts/ingest-rules.ts",

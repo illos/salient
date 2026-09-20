@@ -834,3 +834,51 @@ file hashes, full output and public readback are in the
 Named engine-corrections services stopped afterward with data retained. Browser scenarios remain
 in the backlog under the moratorium; no browser execution or new acceptance dependency.
 Independent final implementation and pinned-source rules review both [PASS](reviews/V63-headless-final-review.md). This accepts only the correction prerequisite, not the broader V26 compiler. Fable owns integration into main and the shared runtime.
+
+
+### 2026-09-20 — Shared-main correction proof runner (prepared)
+
+Added `scripts/v63-headless-main.ts` on `slice/V63-main-proof`, based on main `b6109b0`,
+for the integration owner's coordinated CT114 main window. This is a separate opt-in runner;
+`scripts/v63-headless.ts` and its isolated dice helper remain unchanged. No application code
+changes. The runner requires main's source checkout metadata, exact shared HTTPS origin
+`https://salient-dev-fc4f48cb09a0.tail41404c.ts.net`, anonymous deployment and container endpoints.
+The intended command, **not yet executed**, is:
+
+```sh
+presidium-dev --env main run build -- env SALIENT_V63_MAIN_HEADLESS=1 node scripts/v63-headless-main.ts
+```
+
+The reviewed script must first be available in the coordinated main source snapshot. Do not
+replace the shared slot from this worktree or run during another track's heavy window.
+Real BetterAuth HTTP registration creates disposable Director/player accounts; public mutations
+create their campaign, approved legacy level-one Fury, Goblin Warrior, session and encounter.
+The pre-existing V45 example/decision files supply supported public character selections.
+No abandoned Opus files, browser sessions, database imports, reset, seed or dice helper are used.
+Disposable proof records remain for inspection; authentication sessions are signed out.
+
+Real random dice are accepted once and retained. Pre-use public sheet tiers, character baseline
+and roster health feed the shared R04 `resolveAbilityRoll` with those accepted dice to derive
+expected tier, damage and Stamina for each correction. This validates persisted correction/history
+parity with R04; it is not a new independent verification of R04 arithmetic. Brutal Slam's absent
+fixed cost is asserted, so random starting Ferocity never requires a resource grant. The runner
+preserves hero live state, allows source-derived tier-three Slain outcomes, and does not reroll
+for convenient tiers. Some rolls legitimately have equal damage under different bane counts.
+
+The lifecycle covers use, player correction, a second linked correction, undo/redo, Director
+correction closing the player window, rejected player correction, manual disposition, rejected
+correction until disposition rewind, and unrelated turn end closing the window. Every captured
+step independently reads results for both roles, Director roster, both history controls and public
+events; assertions include both roles' `mayCorrect`/`mayResolve`, original dice, expected damage,
+linked correction IDs and history targets. Player `mayResolve` remains false by contract.
+
+Output is `/artifacts/v63-headless-main-readback.json`; prior output is renamed rather than lost.
+It records timestamps, elapsed time, actual source metadata, content pin, relevant source-byte
+SHA-256 manifest, public readbacks and failure stage without credentials or transport exceptions.
+CLI JWTs are passed only through child environment variables. The artifact is public game-state
+proof, not an authentication trace. Static inspection found no unsupported setup/lifecycle path.
+CT114 formatting, scoped ESLint and full web TypeScript check passed for the runner/config in the
+stopped isolated environment; [readiness evidence](evidence/V26/main-corrections-2026-09-20/README.md)
+records the exact overlay and checked bytes. The branch was rebased onto main `9675634`. Fable
+requires clean main integration and source sync before actual execution. Shared-main acceptance
+remains pending that run; browser backlog scenarios stay deferred.
