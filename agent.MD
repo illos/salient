@@ -6,6 +6,12 @@ text.
 All feature work follows the [programmatic headless completion gate](docs/build/README.md#programmatic-headless-completion-gate):
 prove the supported CLI/API route before browser acceptance. No feature is complete without it.
 
+Every implemented trait or feature must be checked against the pinned Compendium for granted
+abilities, including actions embedded in prose or dependent on choices/play state. Build those
+actions in the appropriate UI list and shared CLI/API route, retain the granting trait, and prove
+conditional availability and persisted changes. Trait text alone is not completion. Follow the
+[trait-granted ability gate](docs/build/README.md#trait-granted-ability-completion-gate).
+
 ## Browser testing moratorium — 2026-09-20
 
 The user deprecated all browser (Playwright) testing for the time being, site-wide, until

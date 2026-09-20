@@ -15,6 +15,11 @@ authenticated headless application proof before browser acceptance, with no brow
 Record the browser's additional findings before demoting redundant browser coverage to a later step.
 Engine tests and headless Chromium do not satisfy the
 [headless completion gate](docs/build/README.md#programmatic-headless-completion-gate).
+Every implemented trait or feature must be checked against the pinned Compendium for granted
+abilities, including actions embedded in prose or dependent on choices/play state. Build those
+actions in the appropriate UI list and shared CLI/API route, retain the granting trait, and prove
+conditional availability and persisted changes. Trait text alone is not completion. Follow the
+[trait-granted ability gate](docs/build/README.md#trait-granted-ability-completion-gate).
 Browser testing moratorium, 2026-09-20: do not run any browser or Playwright test until
 [V66](docs/build/V66-browser-test-harness-repair.md) is implemented (registered, not started).
 Verify headlessly; a missing browser run is not a blocker. Log would-be browser scenarios in the
