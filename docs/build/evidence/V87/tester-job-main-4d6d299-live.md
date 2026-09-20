@@ -62,3 +62,5 @@ fail. No campaign was created in that attempt. The second attempt changed only t
 The disposable account signed out; disposable campaign and foes remain retained as requested.
 Both one-off build containers exited and were removed. The shared playable web/backend pair remains
 healthy and running with existing data untouched.
+
+The passing return was sent directly to FOES2 as Chords message 901; its wake was accepted.
