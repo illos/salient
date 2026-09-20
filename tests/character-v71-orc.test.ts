@@ -58,7 +58,10 @@ test('V71 Orc quick build stacks Grounded with kit and no-kit bases without infl
 test('V71 Nonstop grants slowed immunity while Bloodfire Rush remains conditional', () => {
   const result = evaluate(build(['Nonstop', 'Bloodfire Rush']));
   assert.equal(result.status, 'complete');
-  assert.deepEqual(result.baseline!.conditionImmunities?.map(i => i.condition), ['slowed']);
+  assert.deepEqual(
+    result.baseline!.conditionImmunities?.map(i => i.condition),
+    ['slowed'],
+  );
   assert.equal(result.baseline!.speed.value, 5);
   assert.equal(result.baseline!.stability.value, 2);
   for (const [name, phrase] of [

@@ -42,11 +42,12 @@ Create each independently in pinned Forge `5a846aadb623a9855a023e9403bb887a956c3
 Use identical names, all selections, optional language vacancy, no complication, and no permanent
 rune choice. Retain authentic Forge exports/readable sheets and Salient saved/reloaded readbacks.
 Capture source text for Detection/Light/Voice and Stand Tough/Stone Singer in the actual UI.
-A is the browser journey: create, save, reload, inspect health/stability and rule cards. B/C can
-reuse that persistence journey while comparing their observed saved builds. No captures yet.
+V65 proves A/B/C creation, saved readbacks and trait membership through public APIs. V69 strengthens
+readable-source checks. Authentic Forge counterparts remain uncaptured; browser display scenarios
+are deferred under the moratorium.
 
 Shared wiring and generated corpus are included: 491 entries, including Dwarf ancestry and every
-trait source. Remaining: browser regression and actual same-build Forge comparisons; final independent
+trait source. Remaining: actual same-build Forge comparisons; final independent
 implementation/rules review; verified integration and shared-app update.
 
 ## Check evidence — 2026-09-20
@@ -59,7 +60,7 @@ match the checked tree. Later additions are documentation and evidence only.
 - `pnpm content:build` and targeted Prettier: [log](evidence/V60/checks/generate.log), [exit 0](evidence/V60/checks/generate.exit).
 - `pnpm exec tsc --noEmit && pnpm exec vitest run --project engine tests/character-v60-dwarf.test.ts`: [log](evidence/V60/checks/focused.log), [exit 0](evidence/V60/checks/focused.exit).
 - `pnpm check`: [log](evidence/V60/checks/check.log), [exit 0](evidence/V60/checks/check.exit).
-- [Independent preliminary review](reviews/V60-dwarf-review.md) found no static defect; final acceptance awaits external/browser evidence.
+- [Independent preliminary review](reviews/V60-dwarf-review.md) found no static defect; final acceptance awaits authentic Forge evidence and final reviews.
 
 Committed logs strip ANSI colors and trailing whitespace only. Original bytes retained in
 `/srv/presidium/projects/salient/character-restart-evidence/v60-checks.tar.gz`.

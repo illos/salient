@@ -350,50 +350,28 @@ V46–V56 are retired Opus pilot IDs, not pending assignments. Allocate fresh ID
 
 ## Astra delivery and verification queue — 2026-09-20
 
-User directed continued independent development while verification blockers are repaired. This
-explicitly expands the initial two-unit queue to four ancestry candidates; verification still gates
-merges, not development. No pilot inputs may be reused. All runtime work remains on CT114.
+The initial four ancestry candidates are preserved in the V69 current-main integration candidate.
+V65 proved authenticated creation, choices, persistence and lifecycle operations on hosted dev.
+The user authorized the next bounded pair, Hakaan and Orc, on 2026-09-20. Verification gates
+merges, not independent implementation. No Opus material may be reused.
 
 | Id | Unit | Implementation | Verification / next action |
 | --- | --- | --- | --- |
-| V57 | [Devil level one](V44-character-option-delivery.md) | Candidate `ae773b0`, `slice/V57` | Hosted browser pass; standalone headless proof, Forge comparison and final gates/reviews pending |
-| V58 | [Polder level one](V44-character-option-delivery.md) | Candidate `2291b29`, `slice/V58-integration` | 694 checks, browser and same-build Forge pass; standalone headless proof and final gates/reviews pending; not merged |
-| V59 | [Closeout verification blocker](V59-closeout-timeout.md) | Investigation recorded on main `4c990eb` | Unchanged-main actual-game closeout passed; intermittent cause unresolved; no speculative code change |
-| V60 | [Dwarf level one](V44-character-option-delivery.md) | Candidate `99f3358`, `slice/V60` | All five purchases/signature implemented; six focused tests and full 697-test check pass; hosted browser pass; standalone headless proof, Forge and final reviews pending |
-| V61 | [Human level one](V44-character-option-delivery.md) | Candidate `dbc0818`, `slice/V61` | All five purchases/signature implemented; four focused tests and full 695-test check pass; hosted browser pass; standalone headless proof, Forge and final reviews pending |
+| V57 | [Devil level one](V57-devil-level-one.md) | Candidate `ae773b0`, preserved in V69 | Live headless journey passes; twelve newly enabled Silver Tongue counterparts and final reviews remain |
+| V58 | [Polder level one](V58-polder-level-one.md) | Candidate `2291b29`, preserved in V69 | Live headless and retained authentic Forge comparison pass; integration checks/final reviews remain |
+| V59 | [Closeout verification blocker](V59-closeout-timeout.md) | Historical investigation `4c990eb` | Browser investigation stopped under moratorium; not a character completion gate |
+| V60 | [Dwarf level one](V60-dwarf-level-one.md) | Candidate `99f3358`, preserved in V69 | Full branch checks and live headless witnesses pass; three Forge counterparts and final reviews remain |
+| V61 | [Human level one](V61-human-level-one.md) | Candidate `dbc0818`, preserved in V69 | Full branch checks and live headless witnesses pass; three Forge counterparts and final reviews remain |
 
-Lead owns shared ancestry composition/evaluation wiring, this queue and the named CT114
-`character-restart` environment; source replacement and heavy jobs remain serialized. The shared main app and
-old stopped `characters` environment are untouched. V57/V58 evidence is retained in their branches;
-no ancestry unit is yet fully accepted or merged. Stop expanding this batch after Dwarf and Human.
+Lead owns shared character wiring and the named CT114 `hosted` verification environment; heavy
+jobs are coordinated with peers. Browser tests remain prohibited. The stopped `characters` and
+`character-restart` environments stay stopped. No ancestry candidate is yet fully accepted or
+merged. Authentic Forge comparison is a separate recorded gate; new website captures cannot run
+during the moratorium and fabricated exports cannot replace them.
 
-Dwarf/Human candidates include generated readable source content and preliminary independent static
-reviews with no defects found. Their slice documents, option-to-witness tables and check logs are
-in `docs/build/V60-dwarf-level-one.md`, `docs/build/V61-human-level-one.md`, and their respective
-`docs/build/evidence/V60` / `V61` directories on those branches. Full checks are engine/app/content
-checks, not actual-game browser acceptance. Required browser/Forge checks and formal reviews stay
-queued; no ancestry application change has been merged into main.
-
-The [current wizard audit](V24-character-wizard-assessment.md#current-headless-route-audit--2026-09-20)
-maps supported routes, backend coverage and missing standalone proof. Discovery and change-choice
-semantics need a demonstrated programmatic route; other major flows have public endpoints but lack
-a complete browser-independent live journey.
-
-Next verification follows the app-wide
-[headless completion gate](README.md#programmatic-headless-completion-gate): prove authenticated
-create/choose/save/evaluate/readback through supported CLI/API routes without browser setup for
-V57/V58/V60/V61. These proofs are pending; engine checks and hosted browser passes do not satisfy
-them. Then compare additional browser findings on matching code before deciding whether redundant
-browser coverage belongs later. Forge comparisons and formal reviews remain required before merges.
-
-V62 published combined candidate `1e7896c` on `origin/slice/V62` to hosted dev, with user authorization;
-no ancestry code is merged into main. Closeout and all four ancestry browser journeys passed there,
-with 50 distinct browser cases passing overall. An older wizard journey remains unresolved; three
-fixture-gated tests skipped and two design mockups are not published. Detailed V62 notes/test fixes
-remain uncommitted in `.worktrees/astra-hosted`; they are not accepted verification evidence yet.
-Further browser debugging is paused. No background verification job is running, and the CT114 heavy
-window is released to V63. The named `character-restart` runtime remains stopped with data retained.
-This doctrine/status update changes documentation only and needs no runtime update.
+V62 frontend source `1e7896c` and V65 backend source `b1f50c8` are the last published character
+checkpoint. V65's 22 passing headless scenarios are sampled workflow proof, not exhaustive rules
+certification. V69 carries forward this evidence and adds verification for its changed code.
 
 
 ## Browser testing moratorium — 2026-09-20
@@ -415,11 +393,11 @@ blocker; do not record a browser result as pending acceptance. The
 | V65 | [Programmatic character verification](V65-character-headless.md) | `slice/V65`, `.worktrees/character-headless`; discovery/transition routes, shared UI transition and browser-independent runner | Backend fix published `b1f50c8`; original 712 unit/backend/script tests pass; type error resolved; all 22 remote headless scenarios pass in 73.547s, zero skips; no browser; ancestry acceptance/main integration separate |
 
 Discovery and shared choice-transition routes are implemented on the candidate and live backend.
-The UI refactor remains unpublished because the app TypeScript check failed; the hosted frontend
-remains V62 `1e7896c`. Admission/privacy assertion failure blocks the remaining lifecycle proof.
-The preceding audit/queue describes the starting gaps; use V65's actual evidence for current proof.
-All V65 jobs ended and its temporary deployment credentials were removed. No browser demotion or
-ancestry acceptance is claimed. User instruction is to record blockers without implementing fixes.
+Both original blockers are fixed; all 22 live scenarios and the normal build passed. The UI refactor
+has not yet been published. V69 resumes integration and extends coverage; no browser test is required
+or permitted during the moratorium. See [V65](V65-character-headless.md) for retained failed and
+passing evidence.
+
 
 ## Character coverage continuation — 2026-09-20
 

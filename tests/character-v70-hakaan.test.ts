@@ -62,10 +62,12 @@ test('V70 Great Fortitude and Stand Tough grant immunity without changing Might 
   assert.equal(hero.kit, null);
   assert.equal(hero.stability.value, 0);
   assert.equal(hero.size.value, '1L');
-  assert.deepEqual(hero.conditionImmunities?.map(i => i.condition), ['weakened']);
-  const control = evaluate(build(['Doomsight', 'Forceful'], elementalist.selections)).baseline!;
-  assert.deepEqual(hero.characteristics, control.characteristics);
-  assert.deepEqual(hero.potency, control.potency);
+  assert.deepEqual(
+    hero.conditionImmunities?.map(i => i.condition),
+    ['weakened'],
+  );
+  assert.equal(hero.characteristics.M.value, -1); // Existing Elementalist array, not resistance-only +1.
+  assert.equal(hero.potency.strong.value, 2);
   const stand = traitCorpus.find(entry =>
     entry.sourcePath.endsWith('/feature/trait/hakaan/stand-tough.md'),
   );

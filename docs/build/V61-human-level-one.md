@@ -1,6 +1,8 @@
 # V61: Human level one
 
-Status: candidate implemented; focused/full CT114 checks passed; actual browser/Forge acceptance queued. No merge or live-app claim.
+Status: candidate implemented; focused/full CT114 checks and V65 live headless witnesses passed.
+Authentic Forge counterparts and final reviews remain pending; no main merge claimed. Browser
+testing is prohibited under the site-wide moratorium.
 Rules review: required.
 
 Spec: [V44 delivery](V44-character-option-delivery.md),
@@ -27,7 +29,7 @@ four-point purchase acceptance/benefit leakage; stale recovery/signature benefit
 These add Human-specific semantic coverage to existing generic persistence and wizard tests.
 No implementation-mirroring or count-target tests. Runtime results are recorded below.
 
-## Queued actual-game and Forge witnesses
+## Headless proof and remaining Forge witnesses
 
 Use pinned Forge `5a846aadb623a9855a023e9403bb887a956c341f`. Independently create matching
 legal builds there and in Salient; retain genuine exports, saved/reloaded readbacks and source cards.
@@ -40,13 +42,12 @@ Keep class, background, languages and every other selection identical between to
 | B | Determination + Can't Take Hold | Same build, recoveries 8, no permanent condition immunity; readable maneuver ending one condition. |
 | C | Perseverance + Resist the Unnatural + Can't Take Hold | Same build, recoveries 8, no damage immunity; readable triggered-action limitation. |
 
-A anchors the actual browser wizard create/save/reload journey. Inspect Detect the Supernatural
-and purchased rule cards; B/C comparisons cover the remaining choices without redundant full
-browser permutations. Add a persistence regression only if the actual journey exposes a distinct
-failure generic saved-draft coverage does not catch.
+V65 proves A/B/C creation, saved readbacks and trait membership through public APIs. V69 strengthens
+readable-source checks. Authentic Forge counterparts remain uncaptured. Future visual checks belong
+to the browser backlog; browser tests are prohibited during the moratorium.
 
-Generated corpus and focused/full CT114 checks passed. Remaining acceptance: actual-game browser path and
-full regression, independent implementation and fresh rules review, all three authentic Forge
+Generated corpus and focused/full CT114 checks passed. Remaining acceptance: integration checks,
+independent implementation and fresh rules review, all three authentic Forge
 comparisons, then verified integration and shared playable environment update.
 
 ## Check evidence — 2026-09-20
@@ -59,7 +60,7 @@ production/tests match the checked tree. Later additions are documentation and e
 - `pnpm content:build` and targeted Prettier: [log](evidence/V61/checks/generate.log), [exit 0](evidence/V61/checks/generate.exit).
 - `pnpm exec tsc --noEmit && pnpm exec vitest run --project engine tests/character-v61-human.test.ts`: [log](evidence/V61/checks/focused.log), [exit 0](evidence/V61/checks/focused.exit); four focused cases pass.
 - `pnpm check`: [log](evidence/V61/checks/check.log), [exit 0](evidence/V61/checks/check.exit); 695 tests, lint, types, source-content validation and build pass.
-- [Independent preliminary review](reviews/V61-human-review.md) found no static defect; final acceptance awaits external/browser evidence.
+- [Independent preliminary review](reviews/V61-human-review.md) found no static defect; final acceptance awaits authentic Forge evidence and final reviews.
 
 Committed logs strip ANSI colors and trailing whitespace only. Original bytes retained in
 `/srv/presidium/projects/salient/character-restart-evidence/v61-checks.tar.gz`.

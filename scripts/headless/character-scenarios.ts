@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
-/** Live public-operation proof. Expected mechanics come from the pinned V25/V60/V61 witnesses. */
+/** Live public-operation proof. Expected mechanics come from the pinned V25/V60/V61/V70/V71 witnesses. */
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import type { ScenarioContext, Actor } from './character-client.ts';
@@ -108,7 +108,7 @@ export async function runScenarios(context: ScenarioContext) {
   const elementalist = readFixture('v25-bethell');
   let baseId: string | undefined;
   let baseChoices: DraftSelection[] = [];
-  for (const ancestry of ['Devil', 'Polder', 'Dwarf', 'Human']) {
+  for (const ancestry of ['Devil', 'Polder', 'Dwarf', 'Human', 'Hakaan', 'Orc']) {
     await run(
       `${ancestry}: complete creation, exact first-save retry and fresh persisted sheet`,
       async () => {
@@ -117,14 +117,18 @@ export async function runScenarios(context: ScenarioContext) {
           ...fixture.selections,
           'connections.notes': 'Met the other heroes at a bridge.',
         };
-        if (ancestry === 'Dwarf' || ancestry === 'Human') {
+        if (['Dwarf', 'Human', 'Hakaan', 'Orc'].includes(ancestry)) {
           for (const key of Object.keys(choices))
             if (key.startsWith('ancestry.')) delete choices[key];
           choices['ancestry.choice'] = ancestry;
-          choices[`ancestry.${ancestry.toLowerCase()}.purchased-traits`] =
-            ancestry === 'Dwarf'
-              ? ['Grounded', 'Spark Off Your Skin']
-              : ['Perseverance', 'Staying Power'];
+          choices[`ancestry.${ancestry.toLowerCase()}.purchased-traits`] = (
+            {
+              Dwarf: ['Grounded', 'Spark Off Your Skin'],
+              Human: ['Perseverance', 'Staying Power'],
+              Hakaan: ['Great Fortitude', 'Stand Tough'],
+              Orc: ['Grounded', 'Nonstop'],
+            } as Record<string, string[]>
+          )[ancestry]!;
         }
         const selections = input(definitions, choices);
         const preview = await player.query<Discovery>('characterWizard:discover', { selections });
@@ -149,20 +153,88 @@ export async function runScenarios(context: ScenarioContext) {
             ? { staminaMaximum: 36, recoveryValue: 12, windedValue: 18, stability: 3 }
             : ancestry === 'Human'
               ? { staminaMaximum: 18, recoveriesMaximum: 10, recoveryValue: 6, windedValue: 9 }
-              : Object.fromEntries(
-                  ['staminaMaximum', 'recoveriesMaximum', 'recoveryValue', 'speed'].map(key => [
-                    key,
-                    fixture.expected[key],
-                  ]),
-                );
+              : ancestry === 'Hakaan' || ancestry === 'Orc'
+                ? {
+                    staminaMaximum: 30,
+                    recoveryValue: 10,
+                    windedValue: 15,
+                    speed: 5,
+                    size: ancestry === 'Hakaan' ? '1L' : '1M',
+                    stability: ancestry === 'Orc' ? 3 : 2,
+                  }
+                : Object.fromEntries(
+                    ['staminaMaximum', 'recoveriesMaximum', 'recoveryValue', 'speed'].map(key => [
+                      key,
+                      fixture.expected[key],
+                    ]),
+                  );
         for (const [key, value] of Object.entries(expected)) {
           const actual: unknown = sheet.build.baseline[key as keyof typeof sheet.build.baseline];
           assert.equal((actual as { value: unknown }).value, value, `${ancestry} ${key}`);
+        }
+        for (const trait of choices[
+          `ancestry.${ancestry.toLowerCase()}.purchased-traits`
+        ] as string[]) {
+          const feature = sheet.features.find(item => item.name === trait);
+          assert.ok(feature?.content?.text.trim(), `Missing source-bearing trait ${trait}`);
+          assert.ok(
+            feature.content.sourcePath.includes(`/feature/trait/${ancestry.toLowerCase()}/`),
+          );
+        }
+        if (ancestry === 'Hakaan' || ancestry === 'Orc') {
+          // Catches missing permanent immunity and signature source in the deployed projection.
+          assert.deepEqual(
+            sheet.build.baseline.conditionImmunities?.map(item => item.condition),
+            [ancestry === 'Hakaan' ? 'weakened' : 'slowed'],
+          );
+          const signature = sheet.features.find(
+            feature => feature.name === (ancestry === 'Hakaan' ? 'Big!' : 'Relentless'),
+          );
+          assert.ok(signature?.content?.text.trim(), `${ancestry} signature source missing`);
         }
         assert.ok(sheet.abilities.some(a => a.name === 'Melee Weapon Free Strike'));
         assert.ok(sheet.abilities.some(a => a.name === 'Ranged Weapon Free Strike'));
         for (const ability of sheet.abilities)
           assert.ok(ability.content, `Missing source ${ability.name}`);
+        if (ancestry === 'Hakaan') {
+          // Proves saved parent replacement removes Big! and immunity, not just an in-memory preview.
+          let changed = await player.query<Transition>('characterWizard:transition', {
+            characterId: id,
+            selections: readback.selections,
+            decisionId: 'ancestry.choice',
+            value: 'Polder',
+          });
+          assert.ok(changed.removed.includes('ancestry.hakaan.purchased-traits'));
+          changed = await player.query<Transition>('characterWizard:transition', {
+            characterId: id,
+            selections: changed.selections,
+            decisionId: 'ancestry.polder.purchased-traits',
+            value: ['Corruption Immunity', 'Fearless', 'Graceful Retreat'],
+          });
+          await player.mutation('characters:save', {
+            characterId: id,
+            commandId: commandId(),
+            expectedRevision: readback.revision,
+            authored: readback.authored,
+            selections: changed.selections,
+          });
+          const after = await saved(player, id);
+          assert.equal(after.status, 'complete');
+          assert.ok(
+            !after.selections.some(selection =>
+              selection.decisionId.startsWith('ancestry.hakaan.'),
+            ),
+          );
+          assert.deepEqual(after.authored, readback.authored);
+          const updated = await player.query<HeroSheet>('characters:sheet', { characterId: id });
+          assert.equal(updated.build?.baseline?.size.value, '1S');
+          assert.ok(
+            !updated.build?.baseline?.conditionImmunities?.some(
+              item => item.condition === 'weakened',
+            ),
+          );
+          assert.ok(!updated.features.some(feature => feature.name === 'Big!'));
+        }
         if (ancestry === 'Devil') {
           baseId = id;
           baseChoices = readback.selections;
@@ -171,6 +243,20 @@ export async function runScenarios(context: ScenarioContext) {
     );
   }
   const extraTraits: [string, string[][]][] = [
+    [
+      'Hakaan',
+      [
+        ['Doomsight', 'Forceful'],
+        ['All Is a Feather', 'Forceful', 'Stand Tough'],
+      ],
+    ],
+    [
+      'Orc',
+      [
+        ['Bloodfire Rush', 'Glowing Recovery'],
+        ['Bloodfire Rush', 'Grounded', 'Passionate Artisan'],
+      ],
+    ],
     [
       'Devil',
       [['Wings'], ['Prehensile Tail', 'Beast Legs'], ['Barbed Tail', 'Glowing Eyes', 'Hellsight']],
@@ -204,6 +290,8 @@ export async function runScenarios(context: ScenarioContext) {
           if (ancestry === 'Devil') choices['ancestry.devil.silver-tongue-skill'] = 'Persuade';
           const key = `ancestry.${ancestry.toLowerCase()}.purchased-traits`;
           choices[key] = traits;
+          if (traits.includes('Passionate Artisan'))
+            choices['ancestry.orc.passionate-artisan.skills'] = ['Blacksmithing', 'Tailoring'];
           const result = await player.query<Discovery>('characterWizard:discover', {
             selections: input(definitions, choices),
           });
@@ -217,11 +305,49 @@ export async function runScenarios(context: ScenarioContext) {
           assert.equal(readback.status, 'complete');
           assert.deepEqual(values(readback.selections)[key], traits);
           const sheet = await player.query<HeroSheet>('characters:sheet', { characterId: id });
-          for (const trait of traits)
-            assert.ok(
-              sheet.features.some(feature => feature.name === trait),
-              `Missing source-bearing trait ${trait}`,
+          for (const trait of traits) {
+            const feature = sheet.features.find(feature => feature.name === trait);
+            assert.ok(feature?.content?.text.trim(), `Missing source-bearing trait ${trait}`);
+          }
+          if (ancestry === 'Hakaan' || ancestry === 'Orc') {
+            assert.ok(sheet.build?.baseline);
+            assert.equal(sheet.build.baseline.speed.value, 5, 'Conditional speed stays manual');
+            assert.deepEqual(sheet.build.baseline.conditionImmunities ?? [], []);
+          }
+          if (traits.includes('Passionate Artisan')) {
+            // These are project targets, not free skill grants. Save then remove their parent
+            // through the same transition operation used by the wizard and read back again.
+            const targetId = 'ancestry.orc.passionate-artisan.skills';
+            assert.deepEqual(values(readback.selections)[targetId], ['Blacksmithing', 'Tailoring']);
+            assert.equal(
+              sheet.build!.baseline!.skills.filter(skill => skill.name === 'Blacksmithing').length,
+              1,
             );
+            assert.ok(!sheet.build!.baseline!.skills.some(skill => skill.name === 'Tailoring'));
+            const changed = await player.query<Transition>('characterWizard:transition', {
+              characterId: id,
+              selections: readback.selections,
+              decisionId: key,
+              value: ['Grounded', 'Nonstop'],
+            });
+            assert.ok(changed.removed.includes(targetId));
+            await player.mutation('characters:save', {
+              characterId: id,
+              commandId: commandId(),
+              expectedRevision: readback.revision,
+              authored: readback.authored,
+              selections: changed.selections,
+            });
+            const after = await saved(player, id);
+            assert.equal(values(after.selections)[targetId], undefined);
+            const updatedSheet = await player.query<HeroSheet>('characters:sheet', {
+              characterId: id,
+            });
+            assert.ok(
+              !updatedSheet.features.some(feature => feature.name === 'Passionate Artisan'),
+            );
+            assert.equal(updatedSheet.build?.baseline?.stability.value, 3);
+          }
         }
       },
     );

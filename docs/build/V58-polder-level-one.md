@@ -61,7 +61,8 @@ No shared contract change, stub, evaluator rewrite or new backend behavior is ne
    query again and see old purchased traits removed and Disengage 2, with live state unchanged.
 4. Forge counterpart uses exactly the same supported choices; retain an authentic export and
    readable sheet, then save/reload in Salient. Record observed comparisons, not evaluator predictions.
-5. Run focused tests, `pnpm check` and the required full browser suite on CT114. Existing V25
+5. Run focused tests, `pnpm check` and authenticated headless proof on CT114. Browser tests
+   are prohibited during the site-wide moratorium. Existing V25
    ancestry switching, V32 progression/history and character privacy tests supply unchanged-path
    coverage. Obtain independent implementation then rules review before integration; verify the
    shared playable app afterward.

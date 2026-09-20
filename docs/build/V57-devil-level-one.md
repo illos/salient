@@ -56,12 +56,12 @@ Compendium pin `fb83a789da8f0327a389c277a0c790b1648d5810`; Forge pin
    costs four and fails the budget. Run the same evaluator test.
 3. Change a Devil with Wings/Barbed Tail/Lie to Polder: prune both Devil selections, remove its
    traits/skill, retain Mountain and unrelated choices. Run the same evaluator test.
-4. Browser chooses Read Person/Wings/Barbed Tail, opens readable Wings limitations, saves, reads
-   persisted selections through `characters:get`, reloads and sees the same choices. Run
-   `pnpm test:browser tests/browser/v57-devil.spec.ts`; retain `.playtest/v57` artifacts.
+4. Prove choices, readable Wings limitations and persisted readback through the public character
+   APIs. V65 supplies sampled Devil proof; newly enabled skill counterparts remain pending. Visual
+   wizard checks are deferred under the browser moratorium.
 5. Every new option has a legal complete Forge build with identical Salient choices and actual
    persisted Salient readback. The witness plan below is pending capture, not a parity claim.
-6. Full `pnpm check`, full browser suite, independent implementation review, fresh rules review,
+6. Full `pnpm check`, headless application proof, independent implementation review, fresh rules review,
    and shared-app update/changed-feature verification pass before delivery.
 
 ## Ability design and playtest evidence

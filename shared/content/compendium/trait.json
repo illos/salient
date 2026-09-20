@@ -306,6 +306,95 @@
     }
   },
   {
+    "id": "mcdm.heroes.v1/feature.trait.hakaan/all-is-a-feather",
+    "kind": "trait",
+    "name": "All Is a Feather",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/hakaan/all-is-a-feather.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/hakaan/all-is-a-feather.json",
+    "selection": "hakaan-ancestry",
+    "text": "---\nancestry: hakaan\ncost: 1 Point\nname: All Is a Feather\nscc: mcdm.heroes.v1/feature.trait.hakaan/all-is-a-feather\ntype: trait\n---\n\nYou are exceptionally strong. You gain an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on [tests](scc.v1:mcdm.heroes.v1/rule.test/test) made to lift and haul heavy objects.\n",
+    "structured": {
+      "ancestry": "hakaan",
+      "cost": "1 Point"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.hakaan/big",
+    "kind": "trait",
+    "name": "Signature Trait: Big!",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/hakaan/big.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/hakaan/big.json",
+    "selection": "hakaan-ancestry",
+    "text": "---\nancestry: hakaan\nname: 'Signature Trait: Big!'\nscc: mcdm.heroes.v1/feature.trait.hakaan/big\ntype: trait\n---\n\nYour stature reflects your giant forebears. Your [size](scc.v1:mcdm.heroes.v1/rule.character/size) is 1L.\n",
+    "structured": {
+      "ancestry": "hakaan"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.hakaan/doomsight",
+    "kind": "trait",
+    "name": "Doomsight",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/hakaan/doomsight.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/hakaan/doomsight.json",
+    "selection": "hakaan-ancestry",
+    "text": "---\nancestry: hakaan\ncost: 2 Points\nname: Doomsight\nscc: mcdm.heroes.v1/feature.trait.hakaan/doomsight\ntype: trait\n---\n\nWorking with your Director, you can predetermine an encounter in which you will die. When that encounter begins, you become doomed. While doomed, you automatically obtain a tier 3 outcome on [tests](scc.v1:mcdm.heroes.v1/rule.test/test) and [ability rolls](scc.v1:mcdm.heroes.v1/rule.dice/ability-roll), and you don't die no matter how low your [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) falls. You then die immediately at the end of the encounter, and can't be returned to life by any means.\n\nIf you don't predetermine your death encounter, you can choose to become doomed while you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying) with the Director's approval (no action required). Doing so should be reserved for encounters in which you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying) as a result of suitable heroism, such as making a last stand against a boss or saving civilians, or when the consequences of your actions have finally caught up to you—not because you're playing a one-shot and have nothing to lose, Hacaarl.\n\nAdditionally, when your [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) reaches the negative of your [winded](scc.v1:mcdm.heroes.v1/rule.health/winded) value and you are not doomed, you turn to rubble instead of experiencing death. You are unaware of your surroundings in this state, and you can't regain [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) or have this effect undone in any way. After 12 hours, you regain [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) equal to your [recovery value](scc.v1:mcdm.heroes.v1/rule.health/recoveries).\n",
+    "structured": {
+      "ancestry": "hakaan",
+      "cost": "2 Points"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.hakaan/forceful",
+    "kind": "trait",
+    "name": "Forceful",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/hakaan/forceful.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/hakaan/forceful.json",
+    "selection": "hakaan-ancestry",
+    "text": "---\nancestry: hakaan\ncost: 1 Point\nname: Forceful\nscc: mcdm.heroes.v1/feature.trait.hakaan/forceful\ntype: trait\n---\n\nWhenever you [force move](scc.v1:mcdm.heroes.v1/movement/forced-movement) a creature or object, the [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) gains a +1 [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties).\n",
+    "structured": {
+      "ancestry": "hakaan",
+      "cost": "1 Point"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.hakaan/great-fortitude",
+    "kind": "trait",
+    "name": "Great Fortitude",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/hakaan/great-fortitude.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/hakaan/great-fortitude.json",
+    "selection": "hakaan-ancestry",
+    "text": "---\nancestry: hakaan\ncost: 2 Points\nname: Great Fortitude\nscc: mcdm.heroes.v1/feature.trait.hakaan/great-fortitude\ntype: trait\n---\n\nYour hearty constitution prevents you from losing strength. You can't be made [weakened](scc.v1:mcdm.heroes.v1/condition/weakened).\n",
+    "structured": {
+      "ancestry": "hakaan",
+      "cost": "2 Points"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.hakaan/hakaan-traits",
+    "kind": "trait",
+    "name": "Hakaan Traits",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/hakaan/hakaan-traits.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/hakaan/hakaan-traits.json",
+    "selection": "hakaan-ancestry",
+    "text": "---\nancestry: hakaan\nname: Hakaan Traits\nscc: mcdm.heroes.v1/feature.trait.hakaan/hakaan-traits\ntype: trait\n---\n\n[Hakaan](scc.v1:mcdm.heroes.v1/ancestry/hakaan) heroes have access to the following traits.\n\n#### Purchased Hakaan Traits\n\nYou have 3 ancestry points to spend on the following traits. (*Quick Build:* Doomsight, Forceful.)\n",
+    "structured": {
+      "ancestry": "hakaan"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.hakaan/stand-tough",
+    "kind": "trait",
+    "name": "Stand Tough",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/hakaan/stand-tough.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/hakaan/stand-tough.json",
+    "selection": "hakaan-ancestry",
+    "text": "---\nancestry: hakaan\ncost: 1 Point\nname: Stand Tough\nscc: mcdm.heroes.v1/feature.trait.hakaan/stand-tough\ntype: trait\n---\n\nYour body is made to withstand the blows of your enemies. Your [Might](scc.v1:mcdm.heroes.v1/rule.character/might) score is treated as 1 higher for the purpose of resisting [potencies](scc.v1:mcdm.heroes.v1/rule.character/potency), and you gain an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on [Might](scc.v1:mcdm.heroes.v1/rule.character/might) [tests](scc.v1:mcdm.heroes.v1/rule.test/test) when called for to resist environmental effects or a creature's traits or abilities.\n",
+    "structured": {
+      "ancestry": "hakaan",
+      "cost": "1 Point"
+    }
+  },
+  {
     "id": "mcdm.heroes.v1/feature.trait.human/cant-take-hold",
     "kind": "trait",
     "name": "Can't Take Hold",
@@ -392,6 +481,95 @@
     "structured": {
       "ancestry": "human",
       "cost": "2 Points"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.orc/bloodfire-rush",
+    "kind": "trait",
+    "name": "Bloodfire Rush",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/orc/bloodfire-rush.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/orc/bloodfire-rush.json",
+    "selection": "orc-ancestry",
+    "text": "---\nancestry: orc\ncost: 1 Point\nname: Bloodfire Rush\nscc: mcdm.heroes.v1/feature.trait.orc/bloodfire-rush\ntype: trait\n---\n\nThe magic coursing through your veins makes you run faster in the heat of battle. The first time in any [combat round](scc.v1:mcdm.heroes.v1/rule.combat/combat-round) that you take damage, you gain a +2 [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) to [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) until the end of the round.\n",
+    "structured": {
+      "ancestry": "orc",
+      "cost": "1 Point"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.orc/glowing-recovery",
+    "kind": "trait",
+    "name": "Glowing Recovery",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/orc/glowing-recovery.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/orc/glowing-recovery.json",
+    "selection": "orc-ancestry",
+    "text": "---\nancestry: orc\ncost: 2 Points\nname: Glowing Recovery\nscc: mcdm.heroes.v1/feature.trait.orc/glowing-recovery\ntype: trait\n---\n\nYour bloodfire allows you to regain your strength quicker than others. Whenever you use the [Catch Breath](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/catch-breath) maneuver, you can spend as many [Recoveries](scc.v1:mcdm.heroes.v1/rule.health/recoveries) as you like.\n",
+    "structured": {
+      "ancestry": "orc",
+      "cost": "2 Points"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.orc/grounded",
+    "kind": "trait",
+    "name": "Grounded",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/orc/grounded.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/orc/grounded.json",
+    "selection": "orc-ancestry",
+    "text": "---\nancestry: orc\ncost: 1 Point\nname: Grounded\nscc: mcdm.heroes.v1/feature.trait.orc/grounded\ntype: trait\n---\n\nThe magic in your blood makes it difficult for others to move you. You have a +1 [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) to [stability](scc.v1:mcdm.heroes.v1/rule.character/stability).\n",
+    "structured": {
+      "ancestry": "orc",
+      "cost": "1 Point"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.orc/nonstop",
+    "kind": "trait",
+    "name": "Nonstop",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/orc/nonstop.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/orc/nonstop.json",
+    "selection": "orc-ancestry",
+    "text": "---\nancestry: orc\ncost: 2 Points\nname: Nonstop\nscc: mcdm.heroes.v1/feature.trait.orc/nonstop\ntype: trait\n---\n\nYour bloodfire supplies you with a constant rush of adrenaline. You can't be made [slowed](scc.v1:mcdm.heroes.v1/condition/slowed).\n",
+    "structured": {
+      "ancestry": "orc",
+      "cost": "2 Points"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.orc/orc-traits",
+    "kind": "trait",
+    "name": "Orc Traits",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/orc/orc-traits.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/orc/orc-traits.json",
+    "selection": "orc-ancestry",
+    "text": "---\nancestry: orc\nname: Orc Traits\nscc: mcdm.heroes.v1/feature.trait.orc/orc-traits\ntype: trait\n---\n\n[Orc](scc.v1:mcdm.heroes.v1/ancestry/orc) heroes have access to the following traits.\n\n#### Purchased Orc Traits\n\nYou have 3 ancestry points to spend on the following traits. (*Quick Build:* Glowing [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries), Grounded.)\n",
+    "structured": {
+      "ancestry": "orc"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.orc/passionate-artisan",
+    "kind": "trait",
+    "name": "Passionate Artisan",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/orc/passionate-artisan.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/orc/passionate-artisan.json",
+    "selection": "orc-ancestry",
+    "text": "---\nancestry: orc\ncost: 1 Point\nname: Passionate Artisan\nscc: mcdm.heroes.v1/feature.trait.orc/passionate-artisan\ntype: trait\n---\n\nWhen you are stirred by a passion for creation, your bloodfire allows you to work longer and harder. When you gain your initial skills from your career, culture, class, or other source, choose two skills from the [crafting skill group](scc.v1:mcdm.heroes.v1/skill.group/crafting), whether you have those skills or not. Whenever you make a [project roll](scc.v1:mcdm.heroes.v1/rule.downtime/project-roll) for a [crafting project](scc.v1:mcdm.heroes.v1/rule.downtime/crafting-project) that uses these skills, you gain a +2 [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) to the roll.\n",
+    "structured": {
+      "ancestry": "orc",
+      "cost": "1 Point"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.orc/relentless",
+    "kind": "trait",
+    "name": "Signature Trait: Relentless",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/orc/relentless.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/orc/relentless.json",
+    "selection": "orc-ancestry",
+    "text": "---\nancestry: orc\nname: 'Signature Trait: Relentless'\nscc: mcdm.heroes.v1/feature.trait.orc/relentless\ntype: trait\n---\n\nWhenever a creature deals damage to you that leaves you [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), you can make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against any creature. If the creature is reduced to 0 [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) by your [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), you can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries).\n",
+    "structured": {
+      "ancestry": "orc"
     }
   },
   {

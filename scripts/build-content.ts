@@ -106,6 +106,16 @@ export const SELECTIONS: ManifestSelection[] = [
     paths: ['ancestry/dwarf.md', 'feature/trait/dwarf'],
   },
   {
+    id: 'hakaan-ancestry',
+    description: 'Hakaan ancestry and complete level-one traits for V70.',
+    paths: ['ancestry/hakaan.md', 'feature/trait/hakaan'],
+  },
+  {
+    id: 'orc-ancestry',
+    description: 'Orc ancestry and complete level-one traits for V71.',
+    paths: ['ancestry/orc.md', 'feature/trait/orc'],
+  },
+  {
     id: 'human-ancestry',
     description: 'Human ancestry and complete level-one traits for V61.',
     paths: ['ancestry/human.md', 'feature/trait/human'],

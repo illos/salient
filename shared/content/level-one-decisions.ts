@@ -5,6 +5,8 @@ import type { Decision, DecisionDefinitions } from '../evaluate/definitions.ts';
 import { auto, choice, grant, option, path } from './decision-builders.ts';
 import { levelOneDecisions as devilDecisions } from './ancestries/devil/level-one.ts';
 import { levelOneDecisions as dwarfDecisions } from './ancestries/dwarf/level-one.ts';
+import { levelOneDecisions as hakaanDecisions } from './ancestries/hakaan/level-one.ts';
+import { levelOneDecisions as orcDecisions } from './ancestries/orc/level-one.ts';
 import { levelOneDecisions as humanDecisions } from './ancestries/human/level-one.ts';
 import { levelOneDecisions as polderDecisions } from './ancestries/polder/level-one.ts';
 import {
@@ -42,7 +44,7 @@ const replaceFamily = (stepId: string, prefix: string, rows: Decision[]) => {
 replaceFamily('step.ancestry', 'ancestry.devil.', devilDecisions);
 replaceFamily('step.class', 'class.fury.', furyDecisions);
 
-allow('ancestry.choice', ['Polder', 'Dwarf', 'Human']);
+allow('ancestry.choice', ['Polder', 'Dwarf', 'Human', 'Hakaan', 'Orc']);
 allow('career.choice', ["Mage's Apprentice"]);
 allow('class.choice', ['Elementalist']);
 allow('culture.environment', ['Urban']);
@@ -59,6 +61,8 @@ definitions.classProfiles = structuredClone({
 append('step.ancestry', structuredClone(polderDecisions));
 append('step.ancestry', structuredClone(dwarfDecisions));
 append('step.ancestry', structuredClone(humanDecisions));
+append('step.ancestry', structuredClone(hakaanDecisions));
+append('step.ancestry', structuredClone(orcDecisions));
 const spokenPools = ['pool.languages.by-ancestry', 'pool.languages.vaslorian-human'];
 const spoken = [...new Set(spokenPools.flatMap(id => definitions.pools[id]!.values))].filter(
   name => name !== 'Caelian',

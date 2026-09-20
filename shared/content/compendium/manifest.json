@@ -11,8 +11,8 @@
     "version": "1.0.3"
   },
   "generatedAt": "2026-09-08",
-  "contentHash": "sha256:3a48768ee32934eef167337434c83a16e8a71b65ac160dc8c7994565bc00f7e3",
-  "entryCount": 499,
+  "contentHash": "sha256:80252de5258036586fcfa9bee826b4cc94361502e26584fd9ffa3b43e63729ef",
+  "entryCount": 515,
   "selections": [
     {
       "id": "supporting-character-choices",
@@ -74,6 +74,22 @@
       "paths": [
         "ancestry/dwarf.md",
         "feature/trait/dwarf"
+      ]
+    },
+    {
+      "id": "hakaan-ancestry",
+      "description": "Hakaan ancestry and complete level-one traits for V70.",
+      "paths": [
+        "ancestry/hakaan.md",
+        "feature/trait/hakaan"
+      ]
+    },
+    {
+      "id": "orc-ancestry",
+      "description": "Orc ancestry and complete level-one traits for V71.",
+      "paths": [
+        "ancestry/orc.md",
+        "feature/trait/orc"
       ]
     },
     {
@@ -612,11 +628,27 @@
       "file": "ancestry.json"
     },
     {
+      "id": "mcdm.heroes.v1/ancestry/hakaan",
+      "kind": "ancestry",
+      "name": "Hakaan",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/ancestry/hakaan.md",
+      "selection": "hakaan-ancestry",
+      "file": "ancestry.json"
+    },
+    {
       "id": "mcdm.heroes.v1/ancestry/human",
       "kind": "ancestry",
       "name": "Human",
       "sourcePath": "vendor/steel-compendium/en/unified/md/ancestry/human.md",
       "selection": "human-ancestry",
+      "file": "ancestry.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/ancestry/orc",
+      "kind": "ancestry",
+      "name": "Orc",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/ancestry/orc.md",
+      "selection": "orc-ancestry",
       "file": "ancestry.json"
     },
     {
@@ -4044,6 +4076,62 @@
       "file": "trait.json"
     },
     {
+      "id": "mcdm.heroes.v1/feature.trait.hakaan/all-is-a-feather",
+      "kind": "trait",
+      "name": "All Is a Feather",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/hakaan/all-is-a-feather.md",
+      "selection": "hakaan-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.hakaan/big",
+      "kind": "trait",
+      "name": "Signature Trait: Big!",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/hakaan/big.md",
+      "selection": "hakaan-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.hakaan/doomsight",
+      "kind": "trait",
+      "name": "Doomsight",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/hakaan/doomsight.md",
+      "selection": "hakaan-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.hakaan/forceful",
+      "kind": "trait",
+      "name": "Forceful",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/hakaan/forceful.md",
+      "selection": "hakaan-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.hakaan/great-fortitude",
+      "kind": "trait",
+      "name": "Great Fortitude",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/hakaan/great-fortitude.md",
+      "selection": "hakaan-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.hakaan/hakaan-traits",
+      "kind": "trait",
+      "name": "Hakaan Traits",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/hakaan/hakaan-traits.md",
+      "selection": "hakaan-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.hakaan/stand-tough",
+      "kind": "trait",
+      "name": "Stand Tough",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/hakaan/stand-tough.md",
+      "selection": "hakaan-ancestry",
+      "file": "trait.json"
+    },
+    {
       "id": "mcdm.heroes.v1/feature.trait.human/cant-take-hold",
       "kind": "trait",
       "name": "Can't Take Hold",
@@ -4097,6 +4185,62 @@
       "name": "Staying Power",
       "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/human/staying-power.md",
       "selection": "human-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.orc/bloodfire-rush",
+      "kind": "trait",
+      "name": "Bloodfire Rush",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/orc/bloodfire-rush.md",
+      "selection": "orc-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.orc/glowing-recovery",
+      "kind": "trait",
+      "name": "Glowing Recovery",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/orc/glowing-recovery.md",
+      "selection": "orc-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.orc/grounded",
+      "kind": "trait",
+      "name": "Grounded",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/orc/grounded.md",
+      "selection": "orc-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.orc/nonstop",
+      "kind": "trait",
+      "name": "Nonstop",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/orc/nonstop.md",
+      "selection": "orc-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.orc/orc-traits",
+      "kind": "trait",
+      "name": "Orc Traits",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/orc/orc-traits.md",
+      "selection": "orc-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.orc/passionate-artisan",
+      "kind": "trait",
+      "name": "Passionate Artisan",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/orc/passionate-artisan.md",
+      "selection": "orc-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.orc/relentless",
+      "kind": "trait",
+      "name": "Signature Trait: Relentless",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/orc/relentless.md",
+      "selection": "orc-ancestry",
       "file": "trait.json"
     },
     {

@@ -1,12 +1,13 @@
 # Fresh-session handoff: restart character development with Astra
 
-Status: checkpointed and paused at the user's request on 2026-09-20. Character implementation
+Status: resumed at the user's request on 2026-09-20 in V69, with Hakaan (V70) and Orc (V71) as the next bounded pair. Character implementation
 is preserved on `slice/V65` at `acc3df1` (pushed); application changes are not merged into main.
 Both verification blockers are fixed. All 22 remote authenticated headless scenarios passed in
 73.547 seconds, with zero failures/skips; the normal application build also passed.
 See [V65 results and evidence](V65-character-headless.md#authorized-blocker-repair--2026-09-20).
 
-The active checkout is `.worktrees/character-headless`. Backend `b1f50c8` is deployed to development
+The preserved checkpoint is `.worktrees/character-headless`; active integration is
+`.worktrees/character-coverage` on `slice/V69`, based on current main with V65 carried forward. Backend `b1f50c8` is deployed to development
 `different-bat-943`; the hosted frontend remains source `1e7896c`, Worker
 `b9cc5ebb-54a1-4176-bc05-d99051b3cf1e`, at <https://salient-dev.rdxx.workers.dev>.
 The backend fix exempts only public signing-key discovery from auth rate limiting; login/reset
@@ -65,7 +66,7 @@ Read rules only from the pinned Compendium; do not research Draw Steel on the we
 
 ## Resume from this checkpoint
 
-- Wait for the user to resume implementation. Read main instructions, this handoff, V65 and
+- Implementation has resumed under V69. Read main instructions, this handoff, V65 and
   `STATUS.md`; check Chords and checkout ownership before changing shared files.
 - Preserve `slice/V65` and its evidence. Do not rebuild Devil/Polder/Dwarf/Human from scratch or
   repeat passing verification without a relevant change. Broader ancestry acceptance and main
