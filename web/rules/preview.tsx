@@ -24,8 +24,8 @@ export default function RulePreview({
       bodyClassName="rule-preview-scroll"
       bodyKey={`${current.entry.id}#${current.section ?? ''}`}
       closeLabel="Close rule"
-      eyebrow={`Draw Steel: ${catalog.books.find(b => b.id === current.entry.book)?.name}`}
       title={current.entry.name}
+      footer={`Draw Steel: ${catalog.books.find(b => b.id === current.entry.book)?.name}`}
       leading={
         history.length > 1 ? (
           <button

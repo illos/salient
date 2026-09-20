@@ -16,6 +16,7 @@ export function FoeView({
   onFollow,
   onRule,
   flush,
+  hideParent,
 }: {
   catalog: FoeDetail;
   entries: FoesCatalog;
@@ -24,8 +25,10 @@ export function FoeView({
   onRule?: (path: string) => void;
   /** The stat block fills an overlay panel edge to edge; everything else keeps the panel padding. */
   flush?: boolean;
+  /** The pop-up shows the parent control in its own header row; do not repeat it here. */
+  hideParent?: boolean;
 }) {
-  const parent = pack.objects.find(o => o.id === object.parentId);
+  const parent = hideParent ? undefined : pack.objects.find(o => o.id === object.parentId);
   return (
     <article>
       {parent && (
@@ -147,25 +150,50 @@ export default function FoePreview({
   // and rules opened inside the same card keep the ordinary header: they have no band to run to
   // the edges, and their own controls would collide with floating ones.
   const statBlock = Boolean(object && pack) && object?.kind === 'statblock';
+  // One navigation control beside Close. "From <parent>" returns to the parent card: it pops the
+  // history when the parent is the previous card, and opens the parent when the card was reached
+  // directly. "Back" appears only when the previous card is something other than the parent.
+  const parent = object?.parentId ? pack?.objects.find(o => o.id === object.parentId) : undefined;
+  const previous = history.at(-2);
+  const previousIsParent =
+    previous !== undefined &&
+    'foe' in previous &&
+    parent !== undefined &&
+    previous.foe === parent.id;
+  const pill =
+    'inline-flex h-8 items-center rounded-full bg-muted px-3 text-sm text-muted-foreground hover:bg-accent hover:text-foreground';
+  const navigation = (
+    <>
+      {history.length > 1 && !previousIsParent && (
+        <button className={pill} onClick={() => setHistory(h => h.slice(0, -1))}>
+          Back
+        </button>
+      )}
+      {parent && (
+        <button
+          className={pill}
+          onClick={() =>
+            setHistory(h => (previousIsParent ? h.slice(0, -1) : [...h, { foe: parent.id }]))
+          }
+        >
+          From {parent.name}
+        </button>
+      )}
+    </>
+  );
+  const book = entry && catalog ? catalog.books.find(b => b.id === entry.book)?.name : undefined;
   return (
     <OverlayCardContent
       title={summary?.object.name ?? entry?.name ?? 'Rule reference'}
-      eyebrow={`${summary?.band ?? 'Rules'} · source reference`}
       closeLabel="Close foe reference"
       bodyKey={JSON.stringify(current)}
       flush={statBlock}
       // An ability, trait or Malice card prints its own name; only a rule needs the header title.
       hideTitle={Boolean(object && pack)}
-      leading={
-        history.length > 1 ? (
-          <button
-            className="inline-flex h-8 items-center rounded-full bg-muted px-3 text-sm text-muted-foreground hover:bg-accent hover:text-foreground"
-            onClick={() => setHistory(h => h.slice(0, -1))}
-          >
-            Back
-          </button>
-        ) : undefined
-      }
+      leading={navigation}
+      // Source references sit at the bottom of a card: a foe card prints its own source footer;
+      // a rule opened here gets its book line below the article.
+      footer={entry && !object ? `Draw Steel: ${book ?? 'Rules'}` : undefined}
     >
       <div
         onClick={event => {
@@ -192,6 +220,7 @@ export default function FoePreview({
             entries={entries}
             object={object}
             flush={statBlock}
+            hideParent
             onFollow={foe => setHistory(h => [...h, { foe }])}
             onRule={path => setHistory(h => [...h, { path }])}
           />

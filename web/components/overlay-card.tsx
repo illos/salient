@@ -41,6 +41,8 @@ export interface OverlayCardContentProps {
    * remains the dialog's accessible name.
    */
   hideTitle?: boolean;
+  /** Content rendered after the body, at the bottom of the card: the source reference line. */
+  footer?: React.ReactNode;
 }
 
 export function OverlayCardContent({
@@ -55,6 +57,7 @@ export function OverlayCardContent({
   bodyKey,
   flush,
   hideTitle,
+  footer,
 }: OverlayCardContentProps) {
   const close = (
     <DialogPrimitive.Close className="rulebook-link overlay-card-close" aria-label={closeLabel}>
@@ -74,7 +77,12 @@ export function OverlayCardContent({
             </div>
           </>
         ) : (
-          <header className="overlay-card-header">
+          <header
+            className={cn(
+              'overlay-card-header',
+              hideTitle && !eyebrow && 'overlay-card-header-slim',
+            )}
+          >
             {leading}
             <div>
               {eyebrow && <p className="text-sm text-muted-foreground">{eyebrow}</p>}
@@ -90,6 +98,7 @@ export function OverlayCardContent({
           key={bodyKey}
         >
           {children}
+          {footer && <div className="overlay-card-footer">{footer}</div>}
         </div>
       </DialogPrimitive.Popup>
     </DialogPrimitive.Portal>

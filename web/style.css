@@ -337,6 +337,25 @@
   .overlay-card-close {
     margin-left: auto;
   }
+  /* Only controls in the header (the content prints its own title): one slim row. */
+  .overlay-card-header-slim {
+    padding: 0.75rem 0.75rem 0;
+  }
+  .overlay-card-header-slim > div:empty,
+  .overlay-card-header-slim > div:has(> .sr-only:only-child) {
+    display: none;
+  }
+  /* The source reference line at the bottom of a card. */
+  .overlay-card-footer {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    font-size: var(--text-sm);
+    color: var(--muted-foreground);
+  }
+  .overlay-card-scroll-flush .overlay-card-footer {
+    padding-inline: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
   .overlay-card-scroll {
     min-height: 0;
     overflow: auto;
