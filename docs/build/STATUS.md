@@ -21,7 +21,7 @@ initial host inventory and user-authorized retirement of old development servers
 
 | Job / Chords message | Requester | Exact source / checks and inputs | State / host / target | Result / evidence |
 | --- | --- | --- | --- | --- |
-| `test-V85-V86-86e9d2e-3` / 803 | WIZARD `a45eccaa-2dd6-4bb8-ae39-e3a217d1aeb1` | `86e9d2ed3b82a5d027f631f677975f040439f472`, `.worktrees/supporting-actions`; supersedes [TS1543 blocker](evidence/V85/tester-job-b08ebcd.md) | **Blocked**: local gates and dev deployments passed; hosted API proof 30/35, shared runner deadline before V85/V86 cases | [Evidence](evidence/V85/tester-job-86e9d2e.md); artifacts: `/srv/presidium/projects/salient/test-artifacts/V85-V86-86e9d2e-20260920T1433Z`; direct wake return pending |
+| `test-V85-V86-86e9d2e-3` / 803 | WIZARD `a45eccaa-2dd6-4bb8-ae39-e3a217d1aeb1` | `86e9d2ed3b82a5d027f631f677975f040439f472`, `.worktrees/supporting-actions`; supersedes [TS1543 blocker](evidence/V85/tester-job-b08ebcd.md) | **Blocked**: local gates and dev deployments passed; hosted API proof 30/35, shared runner deadline before V85/V86 cases | [Evidence](evidence/V85/tester-job-86e9d2e.md); artifacts: `/srv/presidium/projects/salient/test-artifacts/V85-V86-86e9d2e-20260920T1433Z`; direct return 811, wake accepted |
 
 ## Post-v0.01 organization — 2026-09-15
 

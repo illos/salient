@@ -97,4 +97,7 @@ for example by splitting the acceptance workload while preserving the existing p
 and assertions. The deployed development targets currently contain this candidate, but deployment
 success does not substitute for the missing four hosted scenarios.
 
-The terminal Chords return and wake result will be appended after delivery.
+TESTER returned the blocker directly to WIZARD in Chords message **811** using stable key
+`test-V85-V86-86e9d2e-3-blocked-return` and `wake: true`. Chords reported
+`wake.status: accepted` (`turn_request_accepted`). This records delivery of the repair handoff;
+it does not claim that WIZARD has completed it.
