@@ -1,11 +1,13 @@
 // SPDX-License-Identifier: GPL-3.0-only
 import { STARTING_ITEM_ABILITIES } from '../content/starting-item-abilities.ts';
-import manifest from '../content/compendium/manifest.json';
 import type { StartingRewards } from '../contracts/startingRewards.ts';
 import type { GrantedAbility } from '../contracts/characterEvaluation.ts';
 
 /** Possessions are persistent play data. A draft entitlement never grants a usable item action. */
-export function startingItemAbilities(rewards: StartingRewards | undefined): GrantedAbility[] {
+export function startingItemAbilities(
+  rewards: StartingRewards | undefined,
+  compendiumRevision: string,
+): GrantedAbility[] {
   return STARTING_ITEM_ABILITIES.flatMap(source => {
     const item = rewards?.items.find(
       item =>
@@ -27,7 +29,7 @@ export function startingItemAbilities(rewards: StartingRewards | undefined): Gra
           source: {
             path: source.sourcePath,
             quote: source.quote,
-            revision: manifest.compendium.revision,
+            revision: compendiumRevision,
           },
         },
       },

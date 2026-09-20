@@ -533,7 +533,7 @@ export async function abilitiesFor(
   if (actor.kind === 'character') {
     const baseline = records.character ? baselineOf(records.character.derivedBaseline) : null;
     for (const grant of [
-      ...startingItemAbilities(records.character?.startingRewards),
+      ...startingItemAbilities(records.character?.startingRewards, manifest.compendium.revision),
       ...complicationAbilities(
         baseline?.features ?? [],
         perkAbilities(

@@ -2,8 +2,8 @@
 
 Status: causes confirmed on source `c3cf992`, 2026-09-20. Two temporary changes together pass
 Convex deployment dry run. Application changes were restored after the experiment. The permanent correction now uses the
-same consistent manifest import and standalone validator; TESTER owns verification of the new
-committed candidate. No actual publication or API acceptance run is claimed. This investigation did not change CT114 main.
+standalone validator and removes the shared helper’s JSON dependency entirely; TESTER owns
+verification of the new committed candidate. No actual publication or API acceptance run is claimed. This investigation did not change CT114 main.
 
 ## First failure: inconsistent JSON import attributes
 
@@ -55,18 +55,25 @@ build targets the frontend. Neither exercises this Convex deployment metadata/sc
 The identified causes explain the hosted failure. The earlier CT114 startup may share the same
 bundling problem, but that environment was not rerun, so its cause is not independently confirmed.
 
-## Permanent correction and next verification
+## Permanent correction and TESTER return
 
-The permanent correction removes the manifest import attribute in
-`shared/evaluate/startingItemAbilities.ts` to match the existing imports. It moves the validator
-unchanged to `convex/startingRewardValidators.ts`, importing only `convex/values`, and updates
-`characterTables.ts` and `characterRewards.ts` to use it. Runtime authorization and reward
-initialization logic remain in `lib/startingRewards.ts`; its now-unused `v` import is removed.
+Candidate `b08ebcd` applied the consistent attribute-free manifest import and extracted the
+unchanged validator to `convex/startingRewardValidators.ts`. TESTER’s focused engine6/app5 checks
+passed, but integrated `pnpm check` failed at NodeNext typechecking with TS1543: the shared helper’s
+JSON import requires an import attribute. The earlier dry-run used Convex’s separate typecheck;
+it did not prove the repository’s NodeNext check. No deployment or API suite was run on `b08ebcd`.
+TESTER retains the report on main at `docs/build/evidence/V85/tester-job-b08ebcd.md`, and raw
+artifacts at `/srv/presidium/projects/salient/test-artifacts/V85-V86-b08ebcd-20260920T1428Z`.
 
-Per the new project testing process, WIZARD submits the corrected committed candidate to TESTER
-with a new job key superseding `test-V85-V86-854a5dd-1`. No new checks, builds, dry runs or tests
-were executed by WIZARD for this permanent change. The earlier passing temporary dry run is
-historical diagnostic evidence, not verification of this candidate. TESTER owns the focused
-checks, required integration checks, actual hosted deployment and 35-scenario API proof.
-No CLI upgrade, timeout increase, infrastructure repair, content reseed or data reset is needed
-by the diagnosed fixes. Do not repeat the source audits or claim acceptance from a dry run.
+The replacement correction removes the JSON import from `startingItemAbilities.ts` entirely.
+The helper now requires `compendiumRevision: string`; its two existing backend callers,
+`convex/characters.ts` and `convex/lib/resolve.ts`, pass `manifest.compendium.revision` from their
+existing imports. This preserves source provenance without duplicating a pin, importing the full
+content barrel into the helper, changing TypeScript settings, or patching Convex tooling.
+The pure schema validator extraction remains intact; runtime authorization/reward logic is unchanged.
+
+WIZARD submits a new frozen commit/job superseding `test-V85-V86-b08ebcd-2`. No new checks,
+builds, dry runs or tests were executed by WIZARD. TESTER owns the focused checks, the integrated
+repository check, deployment validation and hosted 35-scenario API proof. Neither static review
+nor the earlier temporary dry run substitutes for those distinct gates. No timeout increase,
+infrastructure repair, content reseed or data reset is indicated by this source correction.

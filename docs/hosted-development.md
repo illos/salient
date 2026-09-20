@@ -129,5 +129,7 @@ Further [investigation](build/evidence/V85/deployment-diagnosis.md) confirmed tw
 deployment blockers: mixed import attributes for the same manifest JSON and runtime authentication
 reached through the schema's starting-reward validator import. Temporary corrections passed the
 Convex deployment dry run, then were restored. The permanent equivalent correction is now
-prepared for TESTER, who owns all checks and actual hosted API acceptance. No successful
-publication is claimed; no infrastructure repair is indicated.
+prepared for TESTER, who owns all checks and actual hosted API acceptance. TESTER caught a
+NodeNext JSON-import typecheck failure in `b08ebcd`; the replacement removes that shared JSON
+import and passes the revision from the existing backend callers. No successful publication is
+claimed; no infrastructure repair is indicated.
