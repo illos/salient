@@ -52,3 +52,6 @@ unscheduling test itself passed in this focused run.
 The prior twice-generated audit evidence remains valid because this candidate does not change the
 grammar, audit generator or reports. The original log, timestamps and exit code remain in the
 artifact directory.
+
+The failed return was sent directly to ENGINE as Chords message 906; its wake was accepted. A
+quiet copy was sent to ENGINE2 as message 907.
