@@ -1,0 +1,29 @@
+▌ Deploying code to deployment:
+▌ [Development] jim-pringle:salient:dev/jim-pringle (dev) (dashboard: https://dashboard.convex.dev/t/jim-pringle/salient/different-bat-943)
+▌ └─ https://different-bat-943.convex.cloud
+- Deploying to https://different-bat-943.convex.cloud... [dry run]
+
+BUNDLE_DIAGNOSTIC Error: ENOENT: no such file or directory, stat '/srv/presidium/projects/salient/code/.worktrees/supporting-actions/shared/content/compendium/manifest.json with { type: 'json' }'
+    at Object.statSync (node:fs:1734:25)
+    at NodeFs.stat (/srv/presidium/projects/salient/code/.worktrees/supporting-actions/node_modules/.pnpm/convex@1.45.0_react@19.3.0/node_modules/convex/dist/cli.bundle.cjs:43235:34)
+    at doEsbuild (/srv/presidium/projects/salient/code/.worktrees/supporting-actions/node_modules/.pnpm/convex@1.45.0_react@19.3.0/node_modules/convex/dist/cli.bundle.cjs:65151:25)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async bundle (/srv/presidium/projects/salient/code/.worktrees/supporting-actions/node_modules/.pnpm/convex@1.45.0_react@19.3.0/node_modules/convex/dist/cli.bundle.cjs:65214:18)
+    at async bundleImplementations (/srv/presidium/projects/salient/code/.worktrees/supporting-actions/node_modules/.pnpm/convex@1.45.0_react@19.3.0/node_modules/convex/dist/cli.bundle.cjs:116546:26)
+    at async _Span.enterAsync (/srv/presidium/projects/salient/code/.worktrees/supporting-actions/node_modules/.pnpm/convex@1.45.0_react@19.3.0/node_modules/convex/dist/cli.bundle.cjs:119570:14)
+    at async startComponentsPushAndCodegen (/srv/presidium/projects/salient/code/.worktrees/supporting-actions/node_modules/.pnpm/convex@1.45.0_react@19.3.0/node_modules/convex/dist/cli.bundle.cjs:119952:59)
+    at async _Span.enterAsync (/srv/presidium/projects/salient/code/.worktrees/supporting-actions/node_modules/.pnpm/convex@1.45.0_react@19.3.0/node_modules/convex/dist/cli.bundle.cjs:119570:14)
+    at async runComponentsPush (/srv/presidium/projects/salient/code/.worktrees/supporting-actions/node_modules/.pnpm/convex@1.45.0_react@19.3.0/node_modules/convex/dist/cli.bundle.cjs:120145:30)
+CRASH_DIAGNOSTIC invalid filesystem data Error
+    at OneoffContextImpl.crash (/srv/presidium/projects/salient/code/.worktrees/supporting-actions/node_modules/.pnpm/convex@1.45.0_react@19.3.0/node_modules/convex/dist/cli.bundle.cjs:124603:79)
+    at doEsbuild (/srv/presidium/projects/salient/code/.worktrees/supporting-actions/node_modules/.pnpm/convex@1.45.0_react@19.3.0/node_modules/convex/dist/cli.bundle.cjs:65185:22)
+    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at async bundle (/srv/presidium/projects/salient/code/.worktrees/supporting-actions/node_modules/.pnpm/convex@1.45.0_react@19.3.0/node_modules/convex/dist/cli.bundle.cjs:65214:18)
+    at async bundleImplementations (/srv/presidium/projects/salient/code/.worktrees/supporting-actions/node_modules/.pnpm/convex@1.45.0_react@19.3.0/node_modules/convex/dist/cli.bundle.cjs:116546:26)
+    at async _Span.enterAsync (/srv/presidium/projects/salient/code/.worktrees/supporting-actions/node_modules/.pnpm/convex@1.45.0_react@19.3.0/node_modules/convex/dist/cli.bundle.cjs:119570:14)
+    at async startComponentsPushAndCodegen (/srv/presidium/projects/salient/code/.worktrees/supporting-actions/node_modules/.pnpm/convex@1.45.0_react@19.3.0/node_modules/convex/dist/cli.bundle.cjs:119952:59)
+    at async _Span.enterAsync (/srv/presidium/projects/salient/code/.worktrees/supporting-actions/node_modules/.pnpm/convex@1.45.0_react@19.3.0/node_modules/convex/dist/cli.bundle.cjs:119570:14)
+    at async runComponentsPush (/srv/presidium/projects/salient/code/.worktrees/supporting-actions/node_modules/.pnpm/convex@1.45.0_react@19.3.0/node_modules/convex/dist/cli.bundle.cjs:120145:30)
+    at async runPush (/srv/presidium/projects/salient/code/.worktrees/supporting-actions/node_modules/.pnpm/convex@1.45.0_react@19.3.0/node_modules/convex/dist/cli.bundle.cjs:119819:3)
+
+Exit: 1

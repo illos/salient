@@ -3,7 +3,9 @@
 Status: candidate `b15fc59`, followed by import-only correction `faa9b1e`, committed on
 `slice/V85`; not merged. Full local checks passed. Live API acceptance remains blocked: the initial CT114 isolated startup failed, and the later
 user-requested hosted cloud deployment exited 1 before reporting a successful upload. No live
-scenarios ran. See the [hosted attempt](#hosted-cloud-demo-attempt) for the latest result.
+scenarios ran. [Further investigation](deployment-diagnosis.md) identified inconsistent JSON
+import attributes and a schema-to-runtime import dependency. Both temporary corrections together
+pass deployment dry run; they have not been applied or published. The hosted attempt below is history.
 
 ## Implemented scope
 
@@ -103,9 +105,9 @@ scoped key was verified as `dev:different-bat-943` before deployment.
 [First attempt](hosted-deploy.log). One diagnostic repeat added child exit/signal reporting:
 [normal exit 1, no signal](hosted-deploy-diagnostic.log). A final diagnostic repeat added
 Node `--trace-exit`: [trace](hosted-deploy-trace.log) identifies Convex CLI `flushAndExit`,
-without an underlying error. No further retries or infrastructure fixes. This is not a
-remote startup timeout and does not establish whether the application code or deployment tooling
-caused the failure. No successful backend deployment is claimed.
+without an underlying error. No further retries or infrastructure fixes. This was not a
+remote startup timeout. The later [diagnosis](deployment-diagnosis.md) identifies the two causes
+and a passing dry-run experiment. No successful backend deployment is claimed.
 
 The [hosted frontend build](hosted-build.log) passed (exit 0); frontend publication was withheld
 because the paired backend update failed. The 35-scenario candidate API acceptance suite did not

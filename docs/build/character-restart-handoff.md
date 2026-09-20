@@ -35,8 +35,10 @@ repair was attempted. Shared main is unchanged. [V85/V86 evidence](evidence/V85/
 contains the logs, precise identities and remaining dependencies. The user then requested the separate hosted cloud demo (`salient-dev.rdxx.workers.dev`). Its
 deploy CLI exited 1 before reporting upload success; two diagnostic repeats exposed no root cause.
 The hosted frontend build passed, but publication and the 35-scenario API run did not proceed.
-Resume with a successful deployment of the current candidate to the selected test environment
-and the existing API suite. Do not repeat source
+The [subsequent diagnosis](evidence/V85/deployment-diagnosis.md) confirmed mixed manifest JSON
+import attributes and a schema import of runtime authentication. Two temporary corrections passed
+the deployment dry run and were restored. Next apply those demonstrated corrections, deploy the
+candidate to the selected test environment and run the existing API suite. Do not repeat source
 audits, expand class scope or enter another verification repair loop. Earth + Grounded's duplicate
 range benefit still lacks a complete public character witness because Earth specialization is unsupported.
 
