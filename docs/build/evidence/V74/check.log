@@ -1,0 +1,286 @@
+$ pnpm lint && pnpm check:engine && pnpm check:app && pnpm check-links && pnpm check-vendor && pnpm content:check && pnpm supporting:check && pnpm foes:check && pnpm build
+$ eslint . && prettier --check .
+Checking formatting...
+All matched files use Prettier code style!
+$ tsc --noEmit && vitest run --project engine
+
+[1m[30m[46m RUN [49m[39m[22m [36mv4.1.11 [39m[90m/app[39m
+
+ [32m✓[39m [30m[46m engine [49m[39m tests/supporting-coverage.test.ts [2m([22m[2m101 tests[22m[2m)[22m[33m 401[2mms[22m[39m
+ [32m✓[39m [30m[46m engine [49m[39m tests/fury-decisions.test.ts [2m([22m[2m5 tests[22m[2m)[22m[33m 384[2mms[22m[39m
+   [33m[2m✓[22m[39m R01 checks 2-3: every option value, grant and quoted count/budget sentence is verbatim in its cited source [33m 354[2mms[22m[39m
+ [32m✓[39m [30m[46m engine [49m[39m tests/character-v25-evaluator.test.ts [2m([22m[2m8 tests[22m[2m)[22m[33m 316[2mms[22m[39m
+ [32m✓[39m [30m[46m engine [49m[39m tests/character-v45-reference.test.ts [2m([22m[2m7 tests[22m[2m)[22m[33m 308[2mms[22m[39m
+ [32m✓[39m [30m[46m engine [49m[39m tests/cli.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 204[2mms[22m[39m
+ [32m✓[39m [30m[46m engine [49m[39m tests/supporting-complications.test.ts [2m([22m[2m21 tests[22m[2m)[22m[32m 203[2mms[22m[39m
+ [32m✓[39m [30m[46m engine [49m[39m tests/character-v32-evaluator.test.ts [2m([22m[2m9 tests[22m[2m)[22m[32m 149[2mms[22m[39m
+ [32m✓[39m [30m[46m engine [49m[39m tests/supporting-backgrounds.test.ts [2m([22m[2m46 tests[22m[2m)[22m[32m 150[2mms[22m[39m
+ [32m✓[39m [30m[46m engine [49m[39m tests/acceptance.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 94[2mms[22m[39m
+ [32m✓[39m [30m[46m engine [49m[39m tests/parser.test.ts [2m([22m[2m8 tests[22m[2m)[22m[32m 85[2mms[22m[39m
+ [32m✓[39m [30m[46m engine [49m[39m tests/live-state-initialization.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 81[2mms[22m[39m
+ [32m✓[39m [30m[46m engine [49m[39m tests/character-v57-devil.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 69[2mms[22m[39m
+ [32m✓[39m [30m[46m engine [49m[39m tests/character-v71-orc.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 52[2mms[22m[39m
+ [32m✓[39m [30m[46m engine [49m[39m tests/character-v45-foundation.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 60[2mms[22m[39m
+ [32m✓[39m [30m[46m engine [49m[39m tests/character-derived-values.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 55[2mms[22m[39m
+ [32m✓[39m [30m[46m engine [49m[39m tests/history.test.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 45[2mms[22m[39m
+ [32m✓[39m [30m[46m engine [49m[39m tests/character-evaluator.test.ts [2m([22m[2m8 tests[22m[2m)[22m[32m 40[2mms[22m[39m
+ [32m✓[39m [30m[46m engine [49m[39m tests/character-v60-dwarf.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 39[2mms[22m[39m
+ [32m✓[39m [30m[46m engine [49m[39m tests/character-v61-human.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 37[2mms[22m[39m
+ [32m✓[39m [30m[46m engine [49m[39m tests/character-v70-hakaan.test.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 33[2mms[22m[39m
+ [32m✓[39m [30m[46m engine [49m[39m tests/core-conditions.test.ts [2m([22m[2m11 tests[22m[2m)[22m[32m 30[2mms[22m[39m
+ [32m✓[39m [30m[46m engine [49m[39m tests/character-creation-rulings.test.ts [2m([22m[2m6 tests[22m[2m)[22m[32m 21[2mms[22m[39m
+ [32m✓[39m [30m[46m engine [49m[39m tests/engine.test.ts [2m([22m[2m13 tests[22m[2m)[22m[32m 16[2mms[22m[39m
+ [32m✓[39m [30m[46m engine [49m[39m tests/resolve.test.ts [2m([22m[2m19 tests[22m[2m)[22m[32m 17[2mms[22m[39m
+ [32m✓[39m [30m[46m engine [49m[39m tests/character-v58-polder.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 10[2mms[22m[39m
+ [32m✓[39m [30m[46m engine [49m[39m tests/v25-build-roll-contributions.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m26 passed[39m[22m[90m (26)[39m
+[2m      Tests [22m [1m[32m310 passed[39m[22m[90m (310)[39m
+[2m   Start at [22m 04:19:54
+[2m   Duration [22m 6.98s[2m (transform 481ms, setup 0ms, import 1.65s, tests 2.90s, environment 2ms)[22m
+
+$ tsc -p tsconfig.web.json && vitest run --project app --project scripts
+
+[1m[30m[46m RUN [49m[39m[22m [36mv4.1.11 [39m[90m/app[39m
+
+ [32m✓[39m [30m[43m app [49m[39m tests/app/abilities.test.ts [2m([22m[2m19 tests[22m[2m)[22m[33m 3219[2mms[22m[39m
+     [33m[2m✓[22m[39m acceptance 1 and 2: 10.1 free strike through /ability use; retry returns the same result with no second roll or damage [33m 1258[2mms[22m[39m
+ [32m✓[39m [30m[43m app [49m[39m tests/app/history.test.ts [2m([22m[2m14 tests[22m[2m)[22m[33m 1594[2mms[22m[39m
+ [32m✓[39m [30m[43m app [49m[39m tests/app/combat.test.ts [2m([22m[2m19 tests[22m[2m)[22m[33m 1565[2mms[22m[39m
+     [33m[2m✓[22m[39m acceptance 1: the setup card is a Director draft that follows the rosters; Cancel leaves no encounter, snapshot or lock [33m 574[2mms[22m[39m
+ [32m✓[39m [30m[43m app [49m[39m tests/app/character-progression.test.ts [2m([22m[2m13 tests[22m[2m)[22m[33m 1112[2mms[22m[39m
+   [33m[2m✓[22m[39m Fury level-up persists, retries once and preserves every compatible live value [33m 517[2mms[22m[39m
+ [32m✓[39m [30m[43m app [49m[39m tests/app/admission.test.ts [2m([22m[2m11 tests[22m[2m)[22m[33m 1060[2mms[22m[39m
+     [33m[2m✓[22m[39m acceptance 3: a player submission is not effective until approval; withdrawal and decline leave it unchanged [33m 567[2mms[22m[39m
+ [32m✓[39m [30m[43m app [49m[39m tests/app/closeout-session.test.ts [2m([22m[2m6 tests[22m[2m)[22m[33m 1055[2mms[22m[39m
+     [33m[2m✓[22m[39m missing Void choice, unauthorized closure and pause with a Void choice leave state and history untouched [33m 612[2mms[22m[39m
+ [32m✓[39m [30m[43m app [49m[39m tests/app/closeout.test.ts [2m([22m[2m7 tests[22m[2m)[22m[33m 1000[2mms[22m[39m
+     [33m[2m✓[22m[39m ends structure without synthetic boundaries/dice; closes cards, supports rewind/redo, rejects turns and attacks [33m 577[2mms[22m[39m
+ [32m✓[39m [30m[43m app [49m[39m tests/app/v001-walkthrough.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 1039[2mms[22m[39m
+   [33m[2m✓[22m[39m A09: admitted hero → real combat → correction/history → closeout → next session → paused Void keep/reset [33m 1038[2mms[22m[39m
+ [32m✓[39m [30m[43m app [49m[39m tests/app/characterSecrets.test.ts [2m([22m[2m5 tests[22m[2m)[22m[33m 862[2mms[22m[39m
+   [33m[2m✓[22m[39m only the campaign Director can read/write the inheritance; public revisions, sheets and events disclose no item [33m 547[2mms[22m[39m
+ [32m✓[39m [30m[43m app [49m[39m tests/app/characterDirectorSetup.test.ts [2m([22m[2m7 tests[22m[2m)[22m[33m 825[2mms[22m[39m
+   [33m[2m✓[22m[39m player submits owner-complete inputs, but admission waits atomically for the private Director choice [33m 487[2mms[22m[39m
+ [32m✓[39m [30m[43m app [49m[39m tests/app/character-runes.test.ts [2m([22m[2m3 tests[22m[2m)[22m[33m 734[2mms[22m[39m
+   [33m[2m✓[22m[39m rune switching and removal preserve resources and builds with one attributed event per command [33m 547[2mms[22m[39m
+[90mstderr[2m | tests/app/account-email.test.ts[2m > [22m[2mBetter Auth recovery with Cloudflare mail[2m > [22m[2mreal routes queue canonical mail, reset persisted credentials, revoke sessions and refuse reuse
+[22m[39m2026-09-20T04:20:29.898Z ERROR [Better Auth]: Reset Password: User not found { email: [32m'missing@example.test'[39m }
+
+[90mstderr[2m | tests/app/account-email.test.ts[2m > [22m[2mBetter Auth recovery with Cloudflare mail[2m > [22m[2mreal routes queue canonical mail, reset persisted credentials, revoke sessions and refuse reuse
+[22m[39m2026-09-20T04:20:30.060Z ERROR [Better Auth]: Invalid password
+
+[90mstderr[2m | tests/app/account-email.test.ts[2m > [22m[2mBetter Auth recovery with Cloudflare mail[2m > [22m[2mexpired tokens and untrusted redirects are refused
+[22m[39m2026-09-20T04:20:30.260Z ERROR [Better Auth]: Invalid redirectURL: https://attacker.example/reset
+
+[90mstderr[2m | tests/app/account-email.test.ts[2m > [22m[2mBetter Auth recovery with Cloudflare mail[2m > [22m[2mdatabase request limits reject a fourth request across separate auth instances
+[22m[39m2026-09-20T04:20:30.265Z ERROR [Better Auth]: Reset Password: User not found { email: [32m'missing@example.test'[39m }
+
+[90mstderr[2m | tests/app/account-email.test.ts[2m > [22m[2mBetter Auth recovery with Cloudflare mail[2m > [22m[2mdatabase request limits reject a fourth request across separate auth instances
+[22m[39m2026-09-20T04:20:30.270Z ERROR [Better Auth]: Reset Password: User not found { email: [32m'missing@example.test'[39m }
+
+[90mstderr[2m | tests/app/account-email.test.ts[2m > [22m[2mBetter Auth recovery with Cloudflare mail[2m > [22m[2mdatabase request limits reject a fourth request across separate auth instances
+[22m[39m2026-09-20T04:20:30.274Z ERROR [Better Auth]: Reset Password: User not found { email: [32m'missing@example.test'[39m }
+
+[90mstderr[2m | tests/app/account-email.test.ts[2m > [22m[2mBetter Auth recovery with Cloudflare mail[2m > [22m[2munconfigured deployments expose no recovery capability and do not queue mail
+[22m[39m2026-09-20T04:20:30.280Z ERROR [Better Auth]: Reset password isn't enabled.Please pass an emailAndPassword.sendResetPassword function in your auth config!
+
+ [32m✓[39m [30m[43m app [49m[39m tests/app/account-email.test.ts [2m([22m[2m9 tests[22m[2m)[22m[33m 916[2mms[22m[39m
+     [33m[2m✓[22m[39m real routes queue canonical mail, reset persisted credentials, revoke sessions and refuse reuse [33m 763[2mms[22m[39m
+ [32m✓[39m [30m[43m app [49m[39m tests/app/history-audit.test.ts [2m([22m[2m5 tests[22m[2m)[22m[33m 873[2mms[22m[39m
+     [33m[2m✓[22m[39m admission is separate; targeting preparation does not consume undo and is cleared by it [33m 567[2mms[22m[39m
+ [32m✓[39m [30m[43m app [49m[39m tests/app/audience.test.ts [2m([22m[2m8 tests[22m[2m)[22m[33m 835[2mms[22m[39m
+     [33m[2m✓[22m[39m difficulty projection preserves public skill text containing result-like punctuation: Lore; hard: winter [33m 513[2mms[22m[39m
+ [32m✓[39m [30m[43m app [49m[39m tests/app/table.test.ts [2m([22m[2m6 tests[22m[2m)[22m[33m 770[2mms[22m[39m
+     [33m[2m✓[22m[39m acceptance 1 and 2: authority matrix across Director, player and observer [33m 527[2mms[22m[39m
+ [32m✓[39m [30m[43m app [49m[39m tests/app/characters.test.ts [2m([22m[2m11 tests[22m[2m)[22m[33m 724[2mms[22m[39m
+     [33m[2m✓[22m[39m create/reopen persists authored fields and isolates private drafts across users [33m 464[2mms[22m[39m
+ [32m✓[39m [30m[43m app [49m[39m tests/app/registry.test.ts [2m([22m[2m7 tests[22m[2m)[22m[33m 705[2mms[22m[39m
+     [33m[2m✓[22m[39m acceptance 1: the same /table roll from two submitters yields events of identical shape with server dice [33m 500[2mms[22m[39m
+ [32m✓[39m [30m[43m app [49m[39m tests/app/character-review-queue.test.ts [2m([22m[2m2 tests[22m[2m)[22m[33m 733[2mms[22m[39m
+   [33m[2m✓[22m[39m an owner sees a new pending submission after 205 withdrawn reviews from same owner [33m 671[2mms[22m[39m
+ [32m✓[39m [30m[43m app [49m[39m tests/app/a05-review-regressions.test.ts [2m([22m[2m3 tests[22m[2m)[22m[33m 747[2mms[22m[39m
+   [33m[2m✓[22m[39m committed combat checks Ferocity affordability during roll [33m 596[2mms[22m[39m
+ [32m✓[39m [30m[43m app [49m[39m tests/app/table-performance.test.ts [2m([22m[2m5 tests[22m[2m)[22m[33m 712[2mms[22m[39m
+ [32m✓[39m [30m[43m app [49m[39m tests/app/character-wizard-route.test.ts [2m([22m[2m5 tests[22m[2m)[22m[33m 680[2mms[22m[39m
+   [33m[2m✓[22m[39m headless discovery scopes dependent choices and canonicalizes supplied provenance [33m 460[2mms[22m[39m
+ [32m✓[39m [30m[43m app [49m[39m tests/app/foes.test.ts [2m([22m[2m5 tests[22m[2m)[22m[33m 669[2mms[22m[39m
+     [33m[2m✓[22m[39m Director loads independent sourced foes; peers see every foe through the selected health projection [33m 521[2mms[22m[39m
+ [32m✓[39m [30m[43m app [49m[39m tests/app/polder-v58.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 615[2mms[22m[39m
+   [33m[2m✓[22m[39m Polder-movement traits survive save/readback with readable effects and replacement preserves live state [33m 614[2mms[22m[39m
+ [32m✓[39m [30m[43m app [49m[39m tests/app/access-sessions.test.ts [2m([22m[2m8 tests[22m[2m)[22m[33m 602[2mms[22m[39m
+     [33m[2m✓[22m[39m verified sessions map to stable profiles and anonymous/expired sessions cannot operate [33m 367[2mms[22m[39m
+ [32m✓[39m [30m[43m app [49m[39m tests/app/campaign-home.test.ts [2m([22m[2m6 tests[22m[2m)[22m[33m 461[2mms[22m[39m
+ [32m✓[39m [30m[43m app [49m[39m tests/app/interactions.test.ts [2m([22m[2m3 tests[22m[2m)[22m[33m 616[2mms[22m[39m
+     [33m[2m✓[22m[39m acceptance 5: opened by a short command, labeled in the log, answered headlessly, resolved [33m 530[2mms[22m[39m
+ [32m✓[39m [30m[43m app [49m[39m tests/app/setup-local.test.ts [2m([22m[2m6 tests[22m[2m)[22m[33m 564[2mms[22m[39m
+ [32m✓[39m [30m[43m app [49m[39m tests/app/content.test.ts [2m([22m[2m3 tests[22m[2m)[22m[33m 529[2mms[22m[39m
+     [33m[2m✓[22m[39m reseed loads every manifest entry; queries return the Goblin Warrior source verbatim [33m 440[2mms[22m[39m
+ [32m✓[39m [30m[43m app [49m[39m tests/app/independent-review.test.ts [2m([22m[2m4 tests[22m[2m)[22m[33m 527[2mms[22m[39m
+   [33m[2m✓[22m[39m independent: persisted session deletion revokes already issued identity across all private surfaces [33m 463[2mms[22m[39m
+ [32m✓[39m [30m[43m app [49m[39m tests/app/journal.test.ts [2m([22m[2m5 tests[22m[2m)[22m[33m 509[2mms[22m[39m
+     [33m[2m✓[22m[39m concurrent appends to one campaign get distinct consecutive sequence numbers [33m 371[2mms[22m[39m
+ [32m✓[39m [30m[43m app [49m[39m tests/app/elementalist-character.test.ts [2m([22m[2m4 tests[22m[2m)[22m[33m 420[2mms[22m[39m
+ [32m✓[39m [30m[43m app [49m[39m tests/app/history-interaction-regressions.test.ts [2m([22m[2m8 tests[22m[2m)[22m[33m 364[2mms[22m[39m
+ [32m✓[39m [30m[43m app [49m[39m tests/app/dice.test.ts [2m([22m[2m6 tests[22m[2m)[22m[33m 393[2mms[22m[39m
+     [33m[2m✓[22m[39m same commandId returns the identical accepted roll; a new id draws new values [33m 373[2mms[22m[39m
+ [32m✓[39m [30m[43m app [49m[39m tests/app/ancestry-abilities.test.ts [2m([22m[2m2 tests[22m[2m)[22m[33m 702[2mms[22m[39m
+   [33m[2m✓[22m[39m saved traits expose all audited actions with source and correct grouping [33m 617[2mms[22m[39m
+ [32m✓[39m [30m[43m app [49m[39m tests/app/foe-operations.test.ts [2m([22m[2m2 tests[22m[2m)[22m[33m 592[2mms[22m[39m
+   [33m[2m✓[22m[39m foe buttons/API/commands share retries, source snapshots and journaled creation/removal [33m 526[2mms[22m[39m
+ [32m✓[39m [30m[43m app [49m[39m tests/app/ancestry-ability-sources.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 5[2mms[22m[39m
+ [32m✓[39m [30m[43m app [49m[39m tests/app/character-rulings.test.ts [2m([22m[2m2 tests[22m[2m)[22m[33m 583[2mms[22m[39m
+   [33m[2m✓[22m[39m Q-CHAR-10 shared evaluation, persisted draft and admission allow two of three ancestry points [33m 532[2mms[22m[39m
+ [32m✓[39m [30m[43m app [49m[39m tests/app/characterChoiceOrigins.test.ts [2m([22m[2m2 tests[22m[2m)[22m[33m 582[2mms[22m[39m
+   [33m[2m✓[22m[39m immutable revisions retain the future choice through advancement, edits and restore [33m 572[2mms[22m[39m
+ [32m✓[39m [30m[43m app [49m[39m tests/app/closeout-audit.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 568[2mms[22m[39m
+   [33m[2m✓[22m[39m normal cleanup clears a retained foe temporary pool once, with a private persisted journal [33m 567[2mms[22m[39m
+ [32m✓[39m [30m[43m app [49m[39m tests/app/parse.test.ts [2m([22m[2m97 tests[22m[2m)[22m[32m 16[2mms[22m[39m
+ [32m✓[39m [30m[43m app [49m[39m tests/app/engine-adapter.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 6[2mms[22m[39m
+ [32m✓[39m [30m[43m app [49m[39m tests/app/command-identities.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32m✓[39m [30m[46m scripts [49m[39m tests/scripts/foes.test.ts [2m([22m[2m25 tests[22m[2m)[22m[33m 27728[2mms[22m[39m
+     [33m[2m✓[22m[39m regenerates twice byte-for-byte and retains exact pinned input [33m 27043[2mms[22m[39m
+ [32m✓[39m [30m[46m scripts [49m[39m tests/scripts/compiled-ability.test.ts [2m([22m[2m39 tests[22m[2m)[22m[33m 677[2mms[22m[39m
+     [33m[2m✓[22m[39m renders byte-identical JSON and Markdown from two generations of the same inputs [33m 482[2mms[22m[39m
+ [32m✓[39m [30m[46m scripts [49m[39m tests/scripts/rules.test.ts [2m([22m[2m9 tests[22m[2m)[22m[33m 73047[2mms[22m[39m
+   [33m[2m✓[22m[39m prebuilt index ranks every unique exact title first, supports prefixes, typos and filters [33m 4244[2mms[22m[39m
+   [33m[2m✓[22m[39m regenerates identical articles, metadata and search from the same pin [33m 34586[2mms[22m[39m
+ [32m✓[39m [30m[46m scripts [49m[39m tests/scripts/core-presentation.test.ts [2m([22m[2m7 tests[22m[2m)[22m[33m 15092[2mms[22m[39m
+     [33m[2m✓[22m[39m projects all immutable Foe edition objects without editing their source HTML [33m 1460[2mms[22m[39m
+   [33m[2m✓[22m[39m covers every Core glyph family through the production projection and React semantics [33m 13485[2mms[22m[39m
+ [32m✓[39m [30m[46m scripts [49m[39m tests/scripts/build-content.test.ts [2m([22m[2m22 tests[22m[2m)[22m[33m 1567[2mms[22m[39m
+     [33m[2m✓[22m[39m detects a hand-edited generation date 9999-99-99 independently [33m 455[2mms[22m[39m
+     [33m[2m✓[22m[39m detects a hand-edited generation date 2020-01-01 independently [33m 467[2mms[22m[39m
+ [32m✓[39m [30m[46m scripts [49m[39m tests/scripts/reference-delivery.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 1418[2mms[22m[39m
+   [33m[2m✓[22m[39m foe delivery covers every object and preserves search after serialization [33m 1417[2mms[22m[39m
+ [32m✓[39m [30m[46m scripts [49m[39m tests/scripts/audit-ability-grammar.test.ts [2m([22m[2m12 tests[22m[2m)[22m[33m 376[2mms[22m[39m
+   [33m[2m✓[22m[39m produces byte-identical JSON and Markdown across two full runs [33m 367[2mms[22m[39m
+ [32m✓[39m [30m[46m scripts [49m[39m tests/scripts/check-commit.test.ts [2m([22m[2m14 tests[22m[2m)[22m[32m 286[2mms[22m[39m
+ [32m✓[39m [30m[46m scripts [49m[39m tests/scripts/app-output.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 208[2mms[22m[39m
+ [32m✓[39m [30m[46m scripts [49m[39m tests/scripts/foes-library.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 46[2mms[22m[39m
+ [32m✓[39m [30m[46m scripts [49m[39m tests/scripts/pinned-source.test.ts [2m([22m[2m1 test[22m[2m)[22m[32m 45[2mms[22m[39m
+ [32m✓[39m [30m[46m scripts [49m[39m tests/scripts/glyphs.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 41[2mms[22m[39m
+ [32m✓[39m [30m[46m scripts [49m[39m tests/scripts/check-links.test.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 8[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m55 passed[39m[22m[90m (55)[39m
+[2m      Tests [22m [1m[32m481 passed[39m[22m[90m (481)[39m
+[2m   Start at [22m 04:20:12
+[2m   Duration [22m 163.28s[2m (transform 1.74s, setup 0ms, import 6.53s, tests 151.63s, environment 4ms)[22m
+
+$ node scripts/check-links.ts
+Checked 319 Markdown files: no broken relative links or anchors.
+$ node scripts/check-vendor.ts
+vendor/ matches the pinned submodule commits (2 submodules).
+$ node scripts/build-content.ts --check
+shared/content/compendium matches the clean pinned Compendium (515 entries, 10 excluded, revision fb83a789da8f).
+$ node scripts/check-supporting-inventory.ts
+V37 inventory verified: 18 careers/108 incidents, 13 culture aspects, 47 core perks, 57 skills+5 groups, 42 languages, 25 kits, 100 complications; 289 exact source records checked.
+$ node scripts/ingest-foes.ts --check
+Foes: 438 stat blocks, 2006 features; edition bf262edf546e91e1540cc17489915f18c4873ddd8bd8e225b20f3441e3f74f30; verified
+$ pnpm rules:ingest && tsc -p tsconfig.web.json && vite build && node scripts/check-web-budget.ts
+$ node scripts/ingest-rules.ts && node scripts/build-foes-assets.ts
+Ingested 2614 entries, 26 categories from fb83a789da8f. No unresolved links.
+Foe delivery: 2507 entries; version ab2c43b79669b916
+[36mvite v8.3.0 [32mbuilding client environment for production...[36m[39m
+transforming...
+✓ 2864 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                                         1.92 kB │ gzip:   0.75 kB
+dist/.vite/manifest.json                                               11.21 kB │ gzip:   1.58 kB
+dist/assets/search.worker-Bi7Y7SQU.js                                  18.32 kB
+dist/assets/search.worker-k8EMhjsh.js                                  19.13 kB
+dist/assets/schibsted-grotesk-latin-ext-wght-normal-hsMS0n0O.woff2     20.92 kB
+dist/assets/DrawSteelGlyphs-Regular-Bxmll151.otf                       21.63 kB
+dist/assets/schibsted-grotesk-latin-wght-normal-Bb8VGrTG.woff2         46.75 kB
+dist/assets/reference-C1jW4vvI.css                                      0.75 kB │ gzip:   0.39 kB
+dist/assets/foes-BGgFncNM.css                                           3.96 kB │ gzip:   1.16 kB
+dist/assets/rules-6fkgoGTZ.css                                         12.26 kB │ gzip:   2.86 kB
+dist/assets/index-CQJDASgc.css                                         91.23 kB │ gzip:  16.56 kB
+dist/assets/arrow-left-2SZjxN2W.js                                      0.19 kB │ gzip:   0.17 kB
+dist/assets/external-link-BnffAPVo.js                                   0.27 kB │ gzip:   0.21 kB
+dist/assets/useNavigate-BhLc6pKf.js                                     0.31 kB │ gzip:   0.23 kB
+dist/assets/pill-D-biTKKB.js                                            0.50 kB │ gzip:   0.33 kB
+dist/assets/preview-tnxgIm1f.js                                         0.96 kB │ gzip:   0.57 kB
+dist/assets/worker-client-BLect5SJ.js                                   1.22 kB │ gzip:   0.74 kB
+dist/assets/content-CoqgTreo.js                                         1.55 kB │ gzip:   0.75 kB
+dist/assets/event-links-Dy9RwqAE.js                                     2.02 kB │ gzip:   1.00 kB
+dist/assets/composite-D3Fn7Vkj.js                                       2.94 kB │ gzip:   1.14 kB
+dist/assets/article-BEFIXy1E.js                                         3.08 kB │ gzip:   1.47 kB
+dist/assets/x-D0KqTHUP.js                                               3.23 kB │ gzip:   1.57 kB
+dist/assets/useStore-CuFll-SH.js                                        3.26 kB │ gzip:   1.51 kB
+dist/assets/preview-C3wJeJXA.js                                         3.71 kB │ gzip:   1.59 kB
+dist/assets/password-recovery-DWT1FR4J.js                               3.76 kB │ gzip:   1.48 kB
+dist/assets/link-M2WXBLUU.js                                            4.35 kB │ gzip:   2.00 kB
+dist/assets/characters-OrddME1C.js                                      7.97 kB │ gzip:   2.62 kB
+dist/assets/with-selector-D-Vjxtnh.js                                  10.92 kB │ gzip:   4.10 kB
+dist/assets/foes-C6bS20df.js                                           12.34 kB │ gzip:   4.42 kB
+dist/assets/rules-CGuHYva2.js                                          13.49 kB │ gzip:   4.40 kB
+dist/assets/progression-FEroPlZB.js                                    14.66 kB │ gzip:   5.20 kB
+dist/assets/overlay-card-BmznL7Eg.js                                   18.12 kB │ gzip:   6.88 kB
+dist/assets/campaigns-CD2D1Sv4.js                                      28.63 kB │ gzip:   7.90 kB
+dist/assets/auth-client-BbzxrGAW.js                                    30.33 kB │ gzip:  11.46 kB
+dist/assets/reference-Dl6Ulwm4.js                                      32.32 kB │ gzip:  11.03 kB
+dist/assets/createBaseUIEventDetails-ELM1N8LF.js                       34.84 kB │ gzip:  14.32 kB
+dist/assets/character-sheet-BFMZWLyC.js                                48.37 kB │ gzip:  12.64 kB
+dist/assets/table-Dxgj2jJ2.js                                          78.07 kB │ gzip:  20.85 kB
+dist/assets/ui-W_vUS40d.js                                             82.91 kB │ gzip:  24.33 kB
+dist/assets/wizard-B6ZvrebT.js                                        114.95 kB │ gzip:  28.45 kB
+dist/assets/index-C-EtJP4t.js                                         321.49 kB │ gzip: 103.77 kB
+dist/assets/supporting-components-ZwYL1N58.js                       1,018.42 kB │ gzip: 215.51 kB
+
+[32m✓ built in 3.96s[39m
+[33m[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.[39m
+[33m[33m[PLUGIN_TIMINGS] [0mPlugin hooks ran for 3.8s of this 3.9s build (96%).
+The slowest hooks, timed inside each callback (the wait before a callback starts is excluded, the time it awaits is included):
+  - vite:css transform (82%, 3.2s, 6 calls)
+Additional hook time came from the hooks below and from hooks under 1s.
+2 hooks are listed without a time. Their calls overlapped, so the time inside one call includes work from other calls. To find their cost, profile the build with `node --cpu-prof`:
+  - @tailwindcss/vite:generate:build transform (6 calls)
+  - vite:worker-import-meta-url transform (2 calls)
+See https://rolldown.rs/reference/InputOptions.checks#plugintimings for more details.
+[39m
+{
+  "initial": {
+    "raw": 490277,
+    "gzip": 160947
+  },
+  "assets": [
+    "assets/index-C-EtJP4t.js",
+    "assets/with-selector-D-Vjxtnh.js",
+    "assets/ui-W_vUS40d.js",
+    "assets/createBaseUIEventDetails-ELM1N8LF.js",
+    "assets/x-D0KqTHUP.js",
+    "assets/useStore-CuFll-SH.js",
+    "assets/useNavigate-BhLc6pKf.js",
+    "assets/auth-client-BbzxrGAW.js",
+    "assets/composite-D3Fn7Vkj.js"
+  ],
+  "rules": {
+    "catalog": {
+      "raw": 982599,
+      "gzip": 112848
+    },
+    "index": {
+      "raw": 5463389,
+      "gzip": 1411557
+    },
+    "largestContinuation": 135780,
+    "largestInitialArticle": 415705
+  },
+  "foes": {
+    "catalog": {
+      "raw": 877715,
+      "gzip": 101309
+    },
+    "index": {
+      "raw": 1484171,
+      "gzip": 373816
+    },
+    "largestDetail": 55297
+  }
+}

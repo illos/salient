@@ -1,6 +1,6 @@
 # V74 — Trait-granted abilities and active Dwarf runes
 
-Status: In progress. Character track, WIZARD; `slice/V74` in `.worktrees/forge-headless`.
+Status: Verified candidate; main/shared-app integration in progress. Character track, WIZARD; `slice/V74`.
 Starts from current main `e5c1cd8` plus the verified character candidate and V73 comparison tooling.
 Uses whichever suitable local or remote test environment is free; no browsers.
 
@@ -37,3 +37,9 @@ Root owns shared evaluator/projection integration and verification. Native Astra
 sourced action catalog, rune persistence/control and doctrine; independent review follows the
 integrated candidate. Engine V72 owns combat compiler/execution; coordinate the narrow ancestry
 projection change in `convex/lib/resolve.ts` without changing its engine semantics.
+
+## Results
+
+Full checks pass: 791 tests and production build. Independent implementation and rules reviews
+pass. Hosted authenticated API journeys pass 27/27; saved Forge comparisons pass 31/31, resolving
+all seven prior missing-ability discrepancies. See [retained evidence](evidence/V74/README.md).

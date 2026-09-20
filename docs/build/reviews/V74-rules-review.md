@@ -1,6 +1,8 @@
 # V74 independent pinned-rules review
 
-2026-09-20. **PASS for the sourced action catalog and conditional rune grants.**
+2026-09-20. **Formal source review PASS** at candidate
+`f28ed6c9d632e6a49ba4d0a834133248d01b9cb8` for the sourced action catalog, conditional rune
+grants and project trait-granted ability doctrine.
 This is a source review, not a runtime acceptance result or certification of automated effects.
 
 Reviewed `shared/content/ancestry-abilities.ts`, `shared/evaluate/ancestryAbilities.ts`, the
@@ -9,6 +11,10 @@ ancestry action audit, sheet/table projections and the rune mutation. Independen
 canonical checkout's `vendor/steel-compendium/en/unified/md/feature/trait/` directories.
 The repository gitlink identifies Compendium `fb83a789da8f0327a389c277a0c790b1648d5810`.
 No Forge behavior was treated as rules authority. No tests or browsers were run for this review.
+The formal refresh reread the current evaluator, catalog, `convex/lib/runeOperations.ts`, public
+rune wrapper and the doctrine in `AGENTS.md`, `agent.MD`, `CLAUDE.md` and the build README.
+The reported full check and separate implementation review do not substitute for this source
+comparison or for the pending authenticated runtime acceptance.
 
 ## Findings
 
@@ -47,9 +53,16 @@ and its grants are the implemented rune state.
 
 The rune mutation permits recarving the same rune kind after ten uninterrupted minutes, including
 a Voice rune when changing its recipient. The recipient remains manually resolved with no modeled
-recipient field; recarving must not be described as an automated recipient change. The outside-combat restriction is the application's
-bounded way of requiring the acknowledged ten uninterrupted minutes, not an additional quoted
-Compendium rule.
+recipient field; recarving must not be described as an automated recipient change. The
+outside-combat restriction is the application's bounded way of requiring the acknowledged ten
+uninterrupted minutes, not an additional quoted Compendium rule.
+
+The project doctrine matches the user's requirement: every implemented trait or feature is
+checked, including prose and dependent grants; the originating trait remains; shared UI/API
+actions and saved conditional-grant proof are required. It distinguishes new actions from
+modifiers and passive effects and explicitly separates manual resolution from automation.
+The entry instructions consistently link the detailed build gate. No doctrine correction is
+required by this source review.
 
 Runtime acceptance still needs the planned authenticated persisted-grant proof, stale and
 unauthorized mutation refusal, trait-loss handling and undo/redo verification. No source-text

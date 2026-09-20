@@ -55,8 +55,8 @@ must be separately recorded; this branch has performed neither.
 
 | Id | Slice | Depends on | Status | Owner |
 | --- | --- | --- | --- | --- |
-| V74 | [Trait-granted abilities and active Dwarf runes](V74-trait-granted-abilities.md) | V69/V73 candidate | In progress — trait ability grants, source gate and persisted rune selection | WIZARD, slice/V74 |
-| V73 | [Headless Forge character counterparts](V73-forge-headless-counterparts.md) | V69 verified candidate | In review — Node calibration passes; saved API 24/31 match, seven ability-list discrepancies retained; no browsers | WIZARD, slice/V73 |
+| V74 | [Trait-granted abilities and active Dwarf runes](V74-trait-granted-abilities.md) | V69/V73 candidate | Verified — 791 checks, live API 27/27 and Forge 31/31; main/shared-app integration in progress | WIZARD, slice/V74 |
+| V73 | [Headless Forge character counterparts](V73-forge-headless-counterparts.md) | V69 verified candidate | Verified — calibration and 31/31 saved API comparisons pass after V74 grants; historical seven failures retained | WIZARD, slice/V73 |
 | V24 | [Character wizard assessment and delivery proposal](V24-character-wizard-assessment.md) | A09; assesses A02/V21 | Assessment complete; V25 implementation verified | Codex, character wizard thread |
 | V25 | [Shared Fury/Bethell wizard](V25-two-class-wizard.md) | A09, R01–R03, S01, A01; V24 docs | Merged and live verified — `4cb3f1f`, closeout `a3a144f`; 433 tests, both character journeys and table audit pass | Codex character team |
 | V32 | [Fury advancement and restorable history](V32-fury-progression-history.md) | V25, A09, V29 | Merged and live verified — `73b7ab4`, integration `ea831d6`; 466 tests and isolated/shared character journeys pass | Codex character team |
@@ -406,6 +406,6 @@ passing evidence.
 
 | Id | Slice | Status | Owner |
 | --- | --- | --- | --- |
-| V69 | [Current-main character integration and headless coverage](V69-character-coverage.md) | In progress on `slice/V69`, `.worktrees/character-coverage`; preserved V65 candidate; 737 checks and 26 live API scenarios pass; deployed `ab0f2fd`; code/rules reviews pass; Forge acceptance blocks main merge | Astra lead |
-| V70 | [Hakaan level one](V70-hakaan-level-one.md) | In progress on `slice/V70`, `.worktrees/astra-hakaan`; all choices implemented, focused/full checks and live witnesses pass; Forge counterparts pending | Astra Hakaan implementer |
-| V71 | [Orc level one](V71-orc-level-one.md) | In progress on `slice/V71`, `.worktrees/astra-orc`; all choices including Artisan implemented, focused/full checks and live witnesses pass; Forge counterparts pending | Astra Orc implementer |
+| V69 | [Current-main character integration and headless coverage](V69-character-coverage.md) | In progress on `slice/V69`, `.worktrees/character-coverage`; preserved V65 candidate; V74 integration verifies 791 checks, 27 live API scenarios and 31 Forge counterparts; final shared-main update in progress | Astra lead |
+| V70 | [Hakaan level one](V70-hakaan-level-one.md) | In progress on `slice/V70`, `.worktrees/astra-hakaan`; all choices implemented; V74 full checks, live API and Forge counterparts pass; shared-main integration in progress | Astra Hakaan implementer |
+| V71 | [Orc level one](V71-orc-level-one.md) | In progress on `slice/V71`, `.worktrees/astra-orc`; all choices including Artisan implemented; V74 full checks/live API pass; Forge comparisons pass within documented Artisan boundary; shared-main integration in progress | Astra Orc implementer |

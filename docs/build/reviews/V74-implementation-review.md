@@ -1,14 +1,22 @@
-# V74 trait-granted actions: early implementation review
+# V74 trait-granted actions: implementation review
 
-Reviewer: Astra `v74_doctrine`, 2026-09-20. Candidate: uncommitted V74 changes over
-`638bb1209b2f490ab7499c93e10f69337ce8e973` in `slice/V74`.
+Reviewer: Astra `v74_doctrine`, 2026-09-20. Candidate:
+`f28ed6c9d632e6a49ba4d0a834133248d01b9cb8` application source in `slice/V74`, including main
+through `9252b8f`; test-only follow-up `a2a10dfc2e37e373c920ed42cf5fe48a6f1f1f49` also inspected.
 
-**Early source verdict: no outstanding blocking findings in the inspected changes. Formal
-implementation acceptance remains pending full repository checks and authenticated application
-proof.** This is a bounded source consultation, not a formal passing review or merge verdict.
-The reviewer authored the accompanying doctrine changes but did not implement the application or
-tests. That documentation is not independently approved by this review. No runtime or browser
-workload was run by the reviewer.
+**Implementation verdict: pass; no outstanding blocking code or test-value findings. The retained
+authenticated application and Forge comparison evidence now also pass.** This is not a delivery or
+main-merge verdict. The reviewer authored the accompanying doctrine changes
+but did not implement the application or tests. That documentation is not independently approved
+by this review. No runtime or browser workload was run by the reviewer.
+
+Inspected the retained CT114 hosted [full check log](../evidence/V74/check.log): engine 310 tests,
+app/scripts 481 tests, lint/formatting, typechecks, links, vendor/source checks and production build
+passed. The lead reports exit 0; the log reaches the successful build and asset report. The initial
+import failure is retained separately and is not treated as passing. The full-check snapshot has
+the candidate's runtime source; the later commit adds ancestry-loss test assertions and docs. The
+reviewer inspected those assertions; the lead reports their local focused run passing. This is
+inspected execution evidence, not an independent rerun.
 
 ## Scope and findings
 
@@ -44,11 +52,39 @@ controller, combat, version, build and completed-time checks remain in the share
 The focused rune test source covers persisted grant switching/removal without resetting builds or
 resources; stale/duplicate commands, authorization and invalid-time/build rejection; and public
 owner undo/redo plus Director rewind/redo, including same-kind recarving. These target distinct
-failures rather than duplicate implementation assertions. The lead reports three focused tests
-passing; this reviewer has not independently rerun or inspected a retained execution artifact for
-that report.
+failures rather than duplicate implementation assertions. The added
+ancestry-loss assertions exercise private Dwarf→Devil→Dwarf saves through the public mutation and
+confirm that the old active rune and its maneuver do not return. This adds meaningful coverage of
+a persistent-state leak rather than testing the same grant projection twice.
 
-Full checks, retained authenticated CLI/API evidence, and the fresh independent rules review
-remain required. No browser run is required or authorized under the moratorium. Obtain final
-independent acceptance after those gates pass; this early consultation must not be used as a
-passing `Reviewed-By` trailer.
+The Forge comparison now separately records `compendiumActionsBeyondForge`: Runic Carving's
+carving activity, Relentless, and selected Stone Singer/Doomsight activations. This explicit,
+source-reviewed list augments the expected action set without removing or ignoring any Forge
+ability. All actual sheet actions are still compared for exact membership; unexpected additions
+or missing existing Forge grants still fail. Conditional rune maneuvers remain covered by the
+separate saved-state journey rather than falsely claimed by witnesses with no active rune.
+
+Read the [independent rules verdict](V74-rules-review.md), which passes the sourced catalog and
+conditional grants while explicitly limiting effects to manual resolution. The new authenticated
+headless scenario uses supported creation, rune mutation/readback, campaign admission, registered
+action, and undo/redo routes without direct database writes. The first live run passed 26 existing
+scenarios; the new scenario reached its final ability invocation but omitted the operation's
+mandatory target. Follow-up `a2a10df` creates and admits a Director-owned recipient through the
+public character operations and supplies that character to the Voice invocation. This repairs the
+test setup without changing application code or weakening assertions. Inspected the corrected
+[authenticated headless report](../evidence/V74/headless.json): all 27 scenarios pass in 99.553
+seconds, source `a2a10df`, against hosted `different-bat-943`; the lead reports exit 0. The new
+trait/rune scenario passes, including persisted grant changes, unauthorized/stale refusal,
+registered action exposure/use and undo/redo. This closes the pending authenticated proof gate.
+The earlier failed scenario remains a failed attempt, not an erased or retroactive pass.
+
+Inspected the retained [Forge comparison](../evidence/V74/live-comparison.json): all 31 saved
+character comparisons pass with no mismatches in 52.772 seconds, against hosted
+`different-bat-943`, application source `f28ed6c`. The explicit Compendium-only action additions
+remain visible in each applicable result. This closes the refreshed Forge comparison gate for the
+recorded witnesses, not the separate active-rune application journey.
+
+No browser run is required or authorized under the moratorium. The implementation review may be
+used for the implementation-review gate. The retained evidence satisfies the inspected live
+application acceptance scope; final integration and shared-app delivery remain the lead's separately
+recorded responsibility.

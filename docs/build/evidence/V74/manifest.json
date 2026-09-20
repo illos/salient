@@ -1,0 +1,13 @@
+{
+  "README.md": "caaa18ee43f49005bafc6fdbb1660c31966a1811d35423e1b28266dcf6241afe",
+  "bundle-inputs.json": "aac1eef39475bbd54e1b9c7ca798a074324aa80e5a98b4ec551bfd5733c391f3",
+  "calibration.json": "e644c55dd10847d5681f2521851d9508c43a05c5606d4b3cef9bee0a7c2a79f6",
+  "characters.tar.gz": "4ac7024e7ce4ecdfc53723ca11000e048ef8df3813d0e75445d32cd7d73e107d",
+  "check-initial-import-failure.log": "423612bb7dc92c8062613a69b0a7e07eb118d3037f4a6a560a7eaa8d5aa09fef",
+  "check.log": "01adf016777540eabbaf5061232b70e6c557191580595306975d0239ff6b9245",
+  "frontend.log": "c74b0032f17e182fa701f78256ec66ef54b95d616d95c9d1c11f77aca1545517",
+  "headless-missing-target.json": "2a47b359c65d8addec9b5e30d46380465d147fed42fac6e0ca7cbcc294a899f1",
+  "headless.json": "8cd744c6cdf401d0e7e9db8a41108c646ceee214c7cda521190ad73b038bc853",
+  "live-comparison.json": "0bb35e3c1ec3b456a1e8eaa0e6bfda7dfbccbc1717ab85cd3ecfb5d71633206a",
+  "summary.json": "b8ebf7d5f37c9ae14d65cd6589131bc644b2948f9069004715838375697c7256"
+}

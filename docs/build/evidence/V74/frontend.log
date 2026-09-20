@@ -1,0 +1,48 @@
+Target: dev (different-bat-943); frontend https://salient-dev.rdxx.workers.dev; operation frontend
+Progress: resolved 1, reused 0, downloaded 0, added 0
+Progress: resolved 47, reused 0, downloaded 13, added 0
+Packages: +35
++++++++++++++++++++++++++++++++++++
+Progress: resolved 91, reused 0, downloaded 36, added 33
+Progress: resolved 91, reused 0, downloaded 37, added 34
+Progress: resolved 91, reused 0, downloaded 38, added 34
+Progress: resolved 91, reused 0, downloaded 38, added 35, done
+
+ ⛅️ wrangler 4.134.0
+────────────────────
+🌀 Building list of assets...
+✨ Read 3297 files from the assets directory /app/dist
+🌀 Starting asset upload...
+🌀 Found 22 new or modified static assets to upload. Proceeding with upload...
++ /assets/preview-CK_x69xD.js
++ /assets/event-links-OrPenKVL.js
++ /assets/password-recovery-BCSN4YBf.js
++ /.vite/manifest.json
++ /assets/progression-Bo0GDT1X.js
++ /assets/reference-v7uvUgn7.js
++ /assets/index-CQJDASgc.css
++ /assets/supporting-components-BtJ-8VBR.js
++ /assets/content-CoqgTreo.js
++ /assets/article-Dt8c006s.js
++ /assets/link-D_kUDcZ6.js
++ /assets/foes-Byp0hnI7.js
++ /assets/overlay-card-BSrL0Es3.js
++ /assets/character-sheet-zjhZLgvJ.js
++ /assets/wizard-BuGvZuPq.js
++ /index.html
++ /assets/preview-CR48N-kE.js
++ /assets/characters-CyQHYWKf.js
++ /assets/rules-CBkzsvk6.js
++ /assets/campaigns-BHkr-SnB.js
++ /assets/table-BXV2-pAe.js
++ /assets/index-or4nE35_.js
+Uploaded 7 of 22 assets
+Uploaded 14 of 22 assets
+Uploaded 22 of 22 assets
+✨ Success! Uploaded 22 files (3264 already uploaded) (1.66 sec)
+
+Total Upload: 0.44 KiB / gzip: 0.31 KiB
+Uploaded salient-dev (4.90 sec)
+Deployed salient-dev triggers (0.48 sec)
+  https://salient-dev.rdxx.workers.dev
+Current Version ID: 135e58f0-2918-49fb-9806-e70c8c42ce74

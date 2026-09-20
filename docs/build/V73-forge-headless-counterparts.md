@@ -39,3 +39,6 @@ target pair. Record that boundary explicitly.
   Runtime proof passes. Saved public API comparison: 24/31 pass, seven ability-list discrepancies;
   all compared numeric and choice-persistence fields match. See [evidence](evidence/V73/README.md)
   and [independent review](reviews/V73-headless-forge-review.md). No application fixes made.
+
+- V74 resolves the sourced action omissions: [31/31 refreshed comparisons pass](evidence/V74/README.md).
+  The original 24/31 report remains historical evidence; comparator scope limits remain in force.
