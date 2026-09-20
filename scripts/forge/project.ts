@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
-/** Bounded projection for the six ancestry/Fury/Elementalist witnesses, not a general importer. */
+/** Bounded projection for declared ancestry and level-one class witnesses, not a general importer. */
 import { AbilityData } from '@/data/ability-data';
 import { core } from '@/data/sourcebooks/official/core';
 import { orden } from '@/data/sourcebooks/official/orden';
@@ -77,7 +77,7 @@ function projectChecked(hero: Hero) {
       'Time Raider',
       'Elf (wode)',
     ].includes(hero.ancestry.name) ||
-    !['Fury', 'Elementalist'].includes(hero.class.name) ||
+    !['Fury', 'Elementalist', 'Shadow'].includes(hero.class.name) ||
     hero.class.level !== 1
   )
     throw new Error('Forge projection supports only declared level-one witness families');

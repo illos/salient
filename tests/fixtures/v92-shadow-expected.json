@@ -1,0 +1,997 @@
+{
+  "schemaVersion": "v92-independent-1",
+  "compendiumRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+  "sourceRoot": "vendor/steel-compendium",
+  "method": "Expected values authored from pinned Compendium; v25-fury.json used only to preserve background selections. No evaluator output or evaluator source consulted. Citations in ledger apply to all witnesses unless tied to a particular kit/college/ability.",
+  "baselineContext": "Level one, no complication, no active ability effects, no combat, zero Victories. Harlequin I’m No Threat temporary disengage bonus is not active. Human conditional forced-movement reduction does not add stability. Feature and ability lists describe granted rules capabilities, not general common maneuvers.",
+  "witnesses": [
+    {
+      "id": "v92-shadow-1",
+      "selections": {
+        "culture.name": "wilderness mercenary commune",
+        "culture.language": "Anjali",
+        "culture.environment": "Wilderness",
+        "culture.environment.skill": "Swim",
+        "culture.organization": "Communal",
+        "culture.organization.skill": "Blacksmithing",
+        "culture.upbringing": "Martial",
+        "culture.upbringing.skill": "Intimidate",
+        "career.choice": "Soldier",
+        "career.soldier.skill.exploration": "Endurance",
+        "career.soldier.skill.intrigue": "Alertness",
+        "career.soldier.languages": [
+          "Kalliak",
+          "Vaslorian"
+        ],
+        "career.soldier.perk": "Teamwork",
+        "career.soldier.inciting-incident": "Sole Survivor",
+        "ancestry.choice": "Human",
+        "ancestry.human.purchased-traits": [
+          "Determination",
+          "Can't Take Hold"
+        ],
+        "class.choice": "Shadow",
+        "class.shadow.characteristic-array": "2, 2, −1, −1",
+        "class.shadow.array-assignment": {
+          "Might": 2,
+          "Reason": 2,
+          "Intuition": -1,
+          "Presence": -1
+        },
+        "class.shadow.skills": [
+          "Criminal Underworld",
+          "Climb",
+          "Search",
+          "Pick Lock",
+          "Pick Pocket"
+        ],
+        "class.shadow.college": "Black Ash",
+        "class.shadow.signature-ability": "Gasping in Pain",
+        "class.shadow.ability-3": "Disorienting Strike",
+        "class.shadow.ability-5": "Coup de Grace",
+        "kit.choice": "Cloak and Dagger",
+        "details.name": "V92 Shadow 1"
+      },
+      "expected": {
+        "level": 1,
+        "ancestry": "Human",
+        "class": "Shadow",
+        "subclass": "Black Ash",
+        "career": "Soldier",
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": 2,
+          "I": -1,
+          "P": -1
+        },
+        "staminaMaximum": 21,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 7,
+        "windedValue": 10,
+        "speed": 7,
+        "stability": 0,
+        "size": "1M",
+        "disengage": 2,
+        "potencyCharacteristic": "A",
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "heroicResource": "insight",
+        "heroicResourceCurrent": 0,
+        "victories": 0,
+        "renown": 1,
+        "wealth": 1,
+        "kit": "Cloak and Dagger",
+        "skills": [
+          "Alertness",
+          "Blacksmithing",
+          "Climb",
+          "Criminal Underworld",
+          "Endurance",
+          "Hide",
+          "Intimidate",
+          "Magic",
+          "Pick Lock",
+          "Pick Pocket",
+          "Search",
+          "Sneak",
+          "Swim"
+        ],
+        "languages": [
+          "Anjali",
+          "Caelian",
+          "Kalliak",
+          "Vaslorian"
+        ],
+        "traits": [
+          "Detect the Supernatural",
+          "Determination",
+          "Can't Take Hold"
+        ],
+        "features": [
+          "Culture edge",
+          "Shadow College",
+          "Insight",
+          "College Features",
+          "College Triggered Action",
+          "Kit",
+          "Shadow Abilities"
+        ],
+        "perks": [
+          "Teamwork"
+        ],
+        "abilities": [
+          "Detect the Supernatural",
+          "Determination",
+          "Gasping in Pain",
+          "Disorienting Strike",
+          "Coup de Grace",
+          "Hesitation Is Weakness",
+          "Black Ash Teleport",
+          "In All This Confusion",
+          "Fade",
+          "Melee Weapon Free Strike",
+          "Ranged Weapon Free Strike"
+        ]
+      },
+      "derivation": {
+        "characteristics": "Shadow Basics: assign array to M,R,I,P in listed order; A fixed 2.",
+        "staminaMaximum": "18 + 3 × 1 = 21",
+        "recoveriesMaximum": "Shadow 8; selected human traits do not add Recoveries.",
+        "recoveryValue": "floor(21 / 3) = 7",
+        "windedValue": "floor(21 / 2) = 10",
+        "speed": "5 + 2 = 7",
+        "stability": "0 + 0 = 0",
+        "disengage": "1 + 1 = 2",
+        "potency": "A2 gives 0/1/2.",
+        "skills": "5 background + 2 fixed Shadow + 1 college + 5 class choices = 13 distinct.",
+        "features": "All level-one advancement feature headings; college maneuvers are in abilities; Smoke Bomb is a Hide modifier.",
+        "abilities": "2 Human maneuvers + 3 class selections + Hesitation Is Weakness + 2 college actions + 1 kit signature + 2 free strikes = 11."
+      }
+    },
+    {
+      "id": "v92-shadow-2",
+      "selections": {
+        "culture.name": "wilderness mercenary commune",
+        "culture.language": "Anjali",
+        "culture.environment": "Wilderness",
+        "culture.environment.skill": "Swim",
+        "culture.organization": "Communal",
+        "culture.organization.skill": "Blacksmithing",
+        "culture.upbringing": "Martial",
+        "culture.upbringing.skill": "Intimidate",
+        "career.choice": "Soldier",
+        "career.soldier.skill.exploration": "Endurance",
+        "career.soldier.skill.intrigue": "Alertness",
+        "career.soldier.languages": [
+          "Kalliak",
+          "Vaslorian"
+        ],
+        "career.soldier.perk": "Teamwork",
+        "career.soldier.inciting-incident": "Sole Survivor",
+        "ancestry.choice": "Human",
+        "ancestry.human.purchased-traits": [
+          "Determination",
+          "Can't Take Hold"
+        ],
+        "class.choice": "Shadow",
+        "class.shadow.characteristic-array": "2, 1, 1, −1",
+        "class.shadow.array-assignment": {
+          "Might": 2,
+          "Reason": 1,
+          "Intuition": 1,
+          "Presence": -1
+        },
+        "class.shadow.skills": [
+          "Criminal Underworld",
+          "Climb",
+          "Search",
+          "Pick Lock",
+          "Pick Pocket"
+        ],
+        "class.shadow.college": "Caustic Alchemy",
+        "class.shadow.signature-ability": "I Work Better Alone",
+        "class.shadow.ability-3": "Eviscerate",
+        "class.shadow.ability-5": "One Hundred Throats",
+        "kit.choice": "Sniper",
+        "details.name": "V92 Shadow 2"
+      },
+      "expected": {
+        "level": 1,
+        "ancestry": "Human",
+        "class": "Shadow",
+        "subclass": "Caustic Alchemy",
+        "career": "Soldier",
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": 1,
+          "I": 1,
+          "P": -1
+        },
+        "staminaMaximum": 18,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 6,
+        "windedValue": 9,
+        "speed": 6,
+        "stability": 0,
+        "size": "1M",
+        "disengage": 2,
+        "potencyCharacteristic": "A",
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "heroicResource": "insight",
+        "heroicResourceCurrent": 0,
+        "victories": 0,
+        "renown": 1,
+        "wealth": 1,
+        "kit": "Sniper",
+        "skills": [
+          "Alchemy",
+          "Alertness",
+          "Blacksmithing",
+          "Climb",
+          "Criminal Underworld",
+          "Endurance",
+          "Hide",
+          "Intimidate",
+          "Pick Lock",
+          "Pick Pocket",
+          "Search",
+          "Sneak",
+          "Swim"
+        ],
+        "languages": [
+          "Anjali",
+          "Caelian",
+          "Kalliak",
+          "Vaslorian"
+        ],
+        "traits": [
+          "Detect the Supernatural",
+          "Determination",
+          "Can't Take Hold"
+        ],
+        "features": [
+          "Culture edge",
+          "Shadow College",
+          "Insight",
+          "College Features",
+          "College Triggered Action",
+          "Kit",
+          "Shadow Abilities",
+          "Smoke Bomb"
+        ],
+        "perks": [
+          "Teamwork"
+        ],
+        "abilities": [
+          "Detect the Supernatural",
+          "Determination",
+          "I Work Better Alone",
+          "Eviscerate",
+          "One Hundred Throats",
+          "Hesitation Is Weakness",
+          "Coat the Blade",
+          "Defensive Roll",
+          "Patient Shot",
+          "Melee Weapon Free Strike",
+          "Ranged Weapon Free Strike"
+        ]
+      },
+      "derivation": {
+        "characteristics": "Shadow Basics: assign array to M,R,I,P in listed order; A fixed 2.",
+        "staminaMaximum": "18 + 0 × 1 = 18",
+        "recoveriesMaximum": "Shadow 8; selected human traits do not add Recoveries.",
+        "recoveryValue": "floor(18 / 3) = 6",
+        "windedValue": "floor(18 / 2) = 9",
+        "speed": "5 + 1 = 6",
+        "stability": "0 + 0 = 0",
+        "disengage": "1 + 1 = 2",
+        "potency": "A2 gives 0/1/2.",
+        "skills": "5 background + 2 fixed Shadow + 1 college + 5 class choices = 13 distinct.",
+        "features": "All level-one advancement feature headings; college maneuvers are in abilities; Smoke Bomb is a Hide modifier.",
+        "abilities": "2 Human maneuvers + 3 class selections + Hesitation Is Weakness + 2 college actions + 1 kit signature + 2 free strikes = 11."
+      }
+    },
+    {
+      "id": "v92-shadow-3",
+      "selections": {
+        "culture.name": "wilderness mercenary commune",
+        "culture.language": "Anjali",
+        "culture.environment": "Wilderness",
+        "culture.environment.skill": "Swim",
+        "culture.organization": "Communal",
+        "culture.organization.skill": "Blacksmithing",
+        "culture.upbringing": "Martial",
+        "culture.upbringing.skill": "Intimidate",
+        "career.choice": "Soldier",
+        "career.soldier.skill.exploration": "Endurance",
+        "career.soldier.skill.intrigue": "Alertness",
+        "career.soldier.languages": [
+          "Kalliak",
+          "Vaslorian"
+        ],
+        "career.soldier.perk": "Teamwork",
+        "career.soldier.inciting-incident": "Sole Survivor",
+        "ancestry.choice": "Human",
+        "ancestry.human.purchased-traits": [
+          "Determination",
+          "Can't Take Hold"
+        ],
+        "class.choice": "Shadow",
+        "class.shadow.characteristic-array": "2, 1, 0, 0",
+        "class.shadow.array-assignment": {
+          "Might": 2,
+          "Reason": 1,
+          "Intuition": 0,
+          "Presence": 0
+        },
+        "class.shadow.skills": [
+          "Criminal Underworld",
+          "Climb",
+          "Search",
+          "Pick Lock",
+          "Pick Pocket"
+        ],
+        "class.shadow.college": "Harlequin Mask",
+        "class.shadow.signature-ability": "Teamwork Has Its Place",
+        "class.shadow.ability-3": "Get In Get Out",
+        "class.shadow.ability-5": "Setup",
+        "kit.choice": "Swashbuckler",
+        "details.name": "V92 Shadow 3"
+      },
+      "expected": {
+        "level": 1,
+        "ancestry": "Human",
+        "class": "Shadow",
+        "subclass": "Harlequin Mask",
+        "career": "Soldier",
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": 1,
+          "I": 0,
+          "P": 0
+        },
+        "staminaMaximum": 21,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 7,
+        "windedValue": 10,
+        "speed": 8,
+        "stability": 0,
+        "size": "1M",
+        "disengage": 2,
+        "potencyCharacteristic": "A",
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "heroicResource": "insight",
+        "heroicResourceCurrent": 0,
+        "victories": 0,
+        "renown": 1,
+        "wealth": 1,
+        "kit": "Swashbuckler",
+        "skills": [
+          "Alertness",
+          "Blacksmithing",
+          "Climb",
+          "Criminal Underworld",
+          "Endurance",
+          "Hide",
+          "Intimidate",
+          "Lie",
+          "Pick Lock",
+          "Pick Pocket",
+          "Search",
+          "Sneak",
+          "Swim"
+        ],
+        "languages": [
+          "Anjali",
+          "Caelian",
+          "Kalliak",
+          "Vaslorian"
+        ],
+        "traits": [
+          "Detect the Supernatural",
+          "Determination",
+          "Can't Take Hold"
+        ],
+        "features": [
+          "Culture edge",
+          "Shadow College",
+          "Insight",
+          "College Features",
+          "College Triggered Action",
+          "Kit",
+          "Shadow Abilities"
+        ],
+        "perks": [
+          "Teamwork"
+        ],
+        "abilities": [
+          "Detect the Supernatural",
+          "Determination",
+          "Teamwork Has Its Place",
+          "Get In Get Out",
+          "Setup",
+          "Hesitation Is Weakness",
+          "I'm No Threat",
+          "Clever Trick",
+          "Fancy Footwork",
+          "Melee Weapon Free Strike",
+          "Ranged Weapon Free Strike"
+        ]
+      },
+      "derivation": {
+        "characteristics": "Shadow Basics: assign array to M,R,I,P in listed order; A fixed 2.",
+        "staminaMaximum": "18 + 3 × 1 = 21",
+        "recoveriesMaximum": "Shadow 8; selected human traits do not add Recoveries.",
+        "recoveryValue": "floor(21 / 3) = 7",
+        "windedValue": "floor(21 / 2) = 10",
+        "speed": "5 + 3 = 8",
+        "stability": "0 + 0 = 0",
+        "disengage": "1 + 1 = 2",
+        "potency": "A2 gives 0/1/2.",
+        "skills": "5 background + 2 fixed Shadow + 1 college + 5 class choices = 13 distinct.",
+        "features": "All level-one advancement feature headings; college maneuvers are in abilities; Smoke Bomb is a Hide modifier.",
+        "abilities": "2 Human maneuvers + 3 class selections + Hesitation Is Weakness + 2 college actions + 1 kit signature + 2 free strikes = 11."
+      }
+    },
+    {
+      "id": "v92-shadow-4",
+      "selections": {
+        "culture.name": "wilderness mercenary commune",
+        "culture.language": "Anjali",
+        "culture.environment": "Wilderness",
+        "culture.environment.skill": "Swim",
+        "culture.organization": "Communal",
+        "culture.organization.skill": "Blacksmithing",
+        "culture.upbringing": "Martial",
+        "culture.upbringing.skill": "Intimidate",
+        "career.choice": "Soldier",
+        "career.soldier.skill.exploration": "Endurance",
+        "career.soldier.skill.intrigue": "Alertness",
+        "career.soldier.languages": [
+          "Kalliak",
+          "Vaslorian"
+        ],
+        "career.soldier.perk": "Teamwork",
+        "career.soldier.inciting-incident": "Sole Survivor",
+        "ancestry.choice": "Human",
+        "ancestry.human.purchased-traits": [
+          "Determination",
+          "Can't Take Hold"
+        ],
+        "class.choice": "Shadow",
+        "class.shadow.characteristic-array": "1, 1, 1, 0",
+        "class.shadow.array-assignment": {
+          "Might": 1,
+          "Reason": 1,
+          "Intuition": 1,
+          "Presence": 0
+        },
+        "class.shadow.skills": [
+          "Criminal Underworld",
+          "Climb",
+          "Search",
+          "Pick Lock",
+          "Pick Pocket"
+        ],
+        "class.shadow.college": "Black Ash",
+        "class.shadow.signature-ability": "You Were Watching the Wrong One",
+        "class.shadow.ability-3": "Two Throats at Once",
+        "class.shadow.ability-5": "Shadowstrike",
+        "kit.choice": "Panther",
+        "details.name": "V92 Shadow 4"
+      },
+      "expected": {
+        "level": 1,
+        "ancestry": "Human",
+        "class": "Shadow",
+        "subclass": "Black Ash",
+        "career": "Soldier",
+        "characteristics": {
+          "M": 1,
+          "A": 2,
+          "R": 1,
+          "I": 1,
+          "P": 0
+        },
+        "staminaMaximum": 24,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 8,
+        "windedValue": 12,
+        "speed": 6,
+        "stability": 1,
+        "size": "1M",
+        "disengage": 1,
+        "potencyCharacteristic": "A",
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "heroicResource": "insight",
+        "heroicResourceCurrent": 0,
+        "victories": 0,
+        "renown": 1,
+        "wealth": 1,
+        "kit": "Panther",
+        "skills": [
+          "Alertness",
+          "Blacksmithing",
+          "Climb",
+          "Criminal Underworld",
+          "Endurance",
+          "Hide",
+          "Intimidate",
+          "Magic",
+          "Pick Lock",
+          "Pick Pocket",
+          "Search",
+          "Sneak",
+          "Swim"
+        ],
+        "languages": [
+          "Anjali",
+          "Caelian",
+          "Kalliak",
+          "Vaslorian"
+        ],
+        "traits": [
+          "Detect the Supernatural",
+          "Determination",
+          "Can't Take Hold"
+        ],
+        "features": [
+          "Culture edge",
+          "Shadow College",
+          "Insight",
+          "College Features",
+          "College Triggered Action",
+          "Kit",
+          "Shadow Abilities"
+        ],
+        "perks": [
+          "Teamwork"
+        ],
+        "abilities": [
+          "Detect the Supernatural",
+          "Determination",
+          "You Were Watching the Wrong One",
+          "Two Throats at Once",
+          "Shadowstrike",
+          "Hesitation Is Weakness",
+          "Black Ash Teleport",
+          "In All This Confusion",
+          "Devastating Rush",
+          "Melee Weapon Free Strike",
+          "Ranged Weapon Free Strike"
+        ]
+      },
+      "derivation": {
+        "characteristics": "Shadow Basics: assign array to M,R,I,P in listed order; A fixed 2.",
+        "staminaMaximum": "18 + 6 × 1 = 24",
+        "recoveriesMaximum": "Shadow 8; selected human traits do not add Recoveries.",
+        "recoveryValue": "floor(24 / 3) = 8",
+        "windedValue": "floor(24 / 2) = 12",
+        "speed": "5 + 1 = 6",
+        "stability": "0 + 1 = 1",
+        "disengage": "1 + 0 = 1",
+        "potency": "A2 gives 0/1/2.",
+        "skills": "5 background + 2 fixed Shadow + 1 college + 5 class choices = 13 distinct.",
+        "features": "All level-one advancement feature headings; college maneuvers are in abilities; Smoke Bomb is a Hide modifier.",
+        "abilities": "2 Human maneuvers + 3 class selections + Hesitation Is Weakness + 2 college actions + 1 kit signature + 2 free strikes = 11."
+      }
+    }
+  ],
+  "ledger": [
+    {
+      "sourcePath": "en/unified/md/class/shadow.md",
+      "section": "Basics; Shadow Advancement Table",
+      "sourceSha256": "56580ec226be25bb0ab882578ee9bc76be82e469f7e5198e0b8a86752f68758e",
+      "claim": "Agility 2; remaining four characteristics use one listed array; Stamina 18, Recoveries 8, potency A-2/A-1/A. Hide and Sneak plus five eligible skills. Level-one features and Hesitation Is Weakness."
+    },
+    {
+      "sourcePath": "en/unified/md/ancestry/human.md",
+      "section": "Signature trait",
+      "sourceSha256": "2c2192ca1fd0d5df6a1d9f4a832842c1f65cd4bf8b163c4f01ab04364e8c61aa",
+      "claim": "Detect the Supernatural is the signature trait and provides its maneuver."
+    },
+    {
+      "sourcePath": "en/unified/md/feature/trait/human/human-traits.md",
+      "section": "Purchased Human Traits",
+      "sourceSha256": "433213af978ff6b04fb4ccd7fe46d92841d8c4d8e37dd5cfa4523894c5afcc4a",
+      "claim": "Three ancestry points."
+    },
+    {
+      "sourcePath": "en/unified/md/feature/trait/human/determination.md",
+      "section": "Trait",
+      "sourceSha256": "9c9b3caa6ddd8f0cf952e249dfd84377a178bbd0e6c84e3b48ed9785624eada8",
+      "claim": "Costs 2 points; maneuver ends one frightened, slowed or weakened condition. No passive numeric bonus."
+    },
+    {
+      "sourcePath": "en/unified/md/feature/trait/human/cant-take-hold.md",
+      "section": "Trait",
+      "sourceSha256": "38329e075c92df1feb5838aeb0410fe339edbb569ef2ec9a42713d12fddc4e90",
+      "claim": "Costs 1 point; conditional magical/psionic terrain and forced-movement benefit, not baseline stability."
+    },
+    {
+      "sourcePath": "en/unified/md/feature/trait/human/detect-the-supernatural.md",
+      "section": "Signature Trait",
+      "sourceSha256": "507b4b87c46632454dff842088f8973ea65fcf854613758a1c57bf2c7aad0ca1",
+      "claim": "Maneuver detects specified supernatural objects/creatures within 5; granted in every witness."
+    },
+    {
+      "sourcePath": "en/unified/md/rule/character/speed.md",
+      "section": "Starting Size and Speed",
+      "sourceSha256": "ac435b9ab73fd3f594d3c304205e2d2937ed8b4726ca91e4f667e7486d7dfa6b",
+      "claim": "Default size 1M, speed 5, stability 0."
+    },
+    {
+      "sourcePath": "en/unified/md/rule/health/recoveries.md",
+      "section": "Recoveries and Recovery Value",
+      "sourceSha256": "2fe8aec0bbb138d3442ed3d8d3628911c20dd7ee9366f0dbdadc645b294e0fb9",
+      "claim": "Recovery value is floor(Stamina maximum / 3)."
+    },
+    {
+      "sourcePath": "en/unified/md/rule/health/winded.md",
+      "section": "Winded",
+      "sourceSha256": "36cda2160d1b684e17feaa3ca8e04d453a01106554c1cbd3b0a51a53dc8885ee",
+      "claim": "Winded value is half Stamina maximum."
+    },
+    {
+      "sourcePath": "en/unified/md/rule/general/always-round-down.md",
+      "section": "Always Round Down",
+      "sourceSha256": "1e4cd0537a4759ae6d2cc5cb0b2e4280b59bb1d3d8d20386b71da8d582e14783",
+      "claim": "Halving odd numbers rounds down; Stamina 21 gives winded 10."
+    },
+    {
+      "sourcePath": "en/unified/md/rule/general/echelon.md",
+      "section": "1st Echelon (1st to 3rd Level)",
+      "sourceSha256": "fac3cc3050d9a364e7132fad67db7640b4d5a6e5152c5bfa277f1a50798580f3",
+      "claim": "Level one multiplies per-echelon kit Stamina by one."
+    },
+    {
+      "sourcePath": "en/unified/md/feature/common/move-actions/disengage.md",
+      "section": "Disengage",
+      "sourceSha256": "54e4e50bbdece67a328baef4b64c2908391e323d223be9146c441e52379bfaba",
+      "claim": "Baseline disengage shifts 1 square."
+    },
+    {
+      "sourcePath": "en/unified/md/feature/shadow/level-1/kit.md",
+      "section": "Kit",
+      "sourceSha256": "9b4e449b9157b5157548a7cb32c2919856849687829dfffbc3ec1ad0bb05c791",
+      "claim": "Shadow can use and gain a kit; all four chosen kits are ordinary kits."
+    },
+    {
+      "sourcePath": "en/unified/md/feature/shadow/level-1/shadow-college.md",
+      "section": "College options",
+      "sourceSha256": "3017fd152b29242469dab6db79a1822d89de6dcf074ba0bfee42fae30945148f",
+      "claim": "Black Ash grants Magic; Caustic Alchemy grants Alchemy; Harlequin Mask grants Lie."
+    },
+    {
+      "sourcePath": "en/unified/md/feature/shadow/level-1/1st-level-college-features.md",
+      "section": "1st-Level College Features Table",
+      "sourceSha256": "b1c5110d3c410db1def73e76e13c3675cb33dd7314227ccd46f8f88c2fe8f0f5",
+      "claim": "Black Ash Teleport; Coat the Blade and Smoke Bomb; I’m No Threat respectively."
+    },
+    {
+      "sourcePath": "en/unified/md/feature/shadow/level-1/college-triggered-action.md",
+      "section": "College Triggered Actions Table",
+      "sourceSha256": "d14a178994030f4cbe37f775347e5a5e6f418ff5e65322bc0e7aff38f6d16994",
+      "claim": "In All This Confusion; Defensive Roll; Clever Trick respectively."
+    },
+    {
+      "sourcePath": "en/unified/md/feature/shadow/level-1/shadow-abilities.md",
+      "section": "Signature Ability; 3-Insight Ability; 5-Insight Ability",
+      "sourceSha256": "bc435a726c5a6b9ce465243944906ba23f48a9852e33175a5f3d9a0e6965fbd3",
+      "claim": "Choose one ability from each tier."
+    },
+    {
+      "sourcePath": "en/unified/md/feature/shadow/level-1/insight.md",
+      "section": "Insight in Combat; Insight Outside of Combat",
+      "sourceSha256": "8a25d06101e924b373031af7a0dd1af3a3da1a4ddfdf6077ba99f24205296c49",
+      "claim": "Resource insight; no insight gained outside combat, encounter begins with Victories, remaining insight lost at end; creation at zero Victories/zero insight. Cost reductions and resource lifecycle remain contextual."
+    },
+    {
+      "sourcePath": "en/unified/md/feature/shadow/level-1/smoke-bomb.md",
+      "section": "Feature",
+      "sourceSha256": "8aee0329068962c5cec68a14762631956777282ad37c1fb759876b5acc0e1dd0",
+      "claim": "Caustic Alchemy modifies Hide; shift Agility (2), conditionally automatically hidden. Not an additional separate action."
+    },
+    {
+      "sourcePath": "en/unified/md/culture/wilderness.md",
+      "section": "Skill Options",
+      "sourceSha256": "abf043490386079307336784b12e2a27566f0f75aec673a47f166a06ea1537a6",
+      "claim": "Swim is chosen from exploration."
+    },
+    {
+      "sourcePath": "en/unified/md/culture/communal.md",
+      "section": "Skill Options",
+      "sourceSha256": "16e32193ef1ef573ffec18ee521c928cefddd715595a399a3319f67f8683a2f8",
+      "claim": "Blacksmithing is chosen from crafting."
+    },
+    {
+      "sourcePath": "en/unified/md/culture/martial.md",
+      "section": "Skill Options",
+      "sourceSha256": "c10f166df482e7393cb7afc6d8527d7ac019dedde2af2518754e703e8a446102",
+      "claim": "Intimidate is explicitly allowed."
+    },
+    {
+      "sourcePath": "en/unified/md/career/soldier.md",
+      "section": "Career benefits; Inciting Incident",
+      "sourceSha256": "d340f1ec1e748550447d19e46677f4a7e9a8a2e051cddd0ee50e961911f12959",
+      "claim": "Endurance exploration, Alertness intrigue, two languages Kalliak and Vaslorian, Teamwork exploration perk, +1 Renown; Sole Survivor selected."
+    },
+    {
+      "sourcePath": "en/unified/md/perk/teamwork.md",
+      "section": "Perk",
+      "sourceSha256": "5d91951185e0e1b4a6a92910850206b51064f1a910209b3bbe9a649cfcb34859",
+      "claim": "First turn of montage permits both test and assist; no baseline statistic adjustment."
+    },
+    {
+      "sourcePath": "en/unified/md/chapter/making-a-hero.md",
+      "section": "7. Add Free Strikes",
+      "sourceSha256": "9ee2dbccc874a9fae9c3aa814e802112d2330f98730681b3b32c1d305e252c87",
+      "claim": "Every hero gains Melee Weapon Free Strike and Ranged Weapon Free Strike."
+    },
+    {
+      "sourcePath": "en/unified/md/rule/resource/wealth.md",
+      "section": "Wealth",
+      "sourceSha256": "9d662cec851de19a09c65cc2d3db0e797647ec6934d9229fe6051d85c58169b9",
+      "claim": "Starting Wealth 1; Soldier adds none."
+    },
+    {
+      "sourcePath": "en/unified/md/rule/resource/renown.md",
+      "section": "Renown",
+      "sourceSha256": "ad1b4918655fcc7e51d5c0daa1aa04619e5f11df59f4a9d870583162b3f7fb3c",
+      "claim": "Starting Renown 0 plus Soldier 1 gives 1."
+    },
+    {
+      "sourcePath": "en/books/heroes/clean/Draw Steel Heroes.md",
+      "section": "Background: Culture benefits and Languages; Languages by Ancestry; Vaslorian Human Languages Table",
+      "sourceSha256": "784677631b216450a738c1ce1aa33686816105cf20e683768d6a518e0cbd0d01",
+      "claim": "Caelian plus chosen culture language Anjali; culture lore/interaction edge. Soldier grants two chosen languages Kalliak and Vaslorian. Language is not restricted to the associated ancestry."
+    },
+    {
+      "sourcePath": "en/unified/md/skill/lore/criminal-underworld.md",
+      "section": "Skill identity and group",
+      "sourceSha256": "4ec9db6723635f1c95bd7f5ba1f7356c29432066c023ffd165e25f139fbf9e53",
+      "claim": "Confirms skill identity and pool; five class choices are distinct from all fixed, college and background skills."
+    },
+    {
+      "sourcePath": "en/unified/md/skill/exploration/climb.md",
+      "section": "Skill identity and group",
+      "sourceSha256": "a821115996819bbb4b95104d6a285068bddf08684177679fc787d90053e1214a",
+      "claim": "Confirms skill identity and pool; five class choices are distinct from all fixed, college and background skills."
+    },
+    {
+      "sourcePath": "en/unified/md/skill/intrigue/search.md",
+      "section": "Skill identity and group",
+      "sourceSha256": "4f39549fbb725461189e83285727131cd87ab4d29811aebee89c3c82f3b454b4",
+      "claim": "Confirms skill identity and pool; five class choices are distinct from all fixed, college and background skills."
+    },
+    {
+      "sourcePath": "en/unified/md/skill/intrigue/pick-lock.md",
+      "section": "Skill identity and group",
+      "sourceSha256": "ccff1450575f086b21675e9c5793b12fe85fb0240d24dfb4fbf01451f6c21878",
+      "claim": "Confirms skill identity and pool; five class choices are distinct from all fixed, college and background skills."
+    },
+    {
+      "sourcePath": "en/unified/md/skill/intrigue/pick-pocket.md",
+      "section": "Skill identity and group",
+      "sourceSha256": "068b4e436d64656d02de0beea0be239dde4152005b88e3c398b160e77469728f",
+      "claim": "Confirms skill identity and pool; five class choices are distinct from all fixed, college and background skills."
+    },
+    {
+      "sourcePath": "en/unified/md/skill/intrigue/hide.md",
+      "section": "Skill identity and group",
+      "sourceSha256": "7bc242c1ffd3c5343f5c58c5c8b232ceb38b9e406e6c0f815a795a1070754d50",
+      "claim": "Confirms skill identity and pool; five class choices are distinct from all fixed, college and background skills."
+    },
+    {
+      "sourcePath": "en/unified/md/skill/intrigue/sneak.md",
+      "section": "Skill identity and group",
+      "sourceSha256": "6cb4be6e7b2d98a6f12bbc4165896eaaa2d24e2d158f019c72e6059a4a6326ef",
+      "claim": "Confirms skill identity and pool; five class choices are distinct from all fixed, college and background skills."
+    },
+    {
+      "sourcePath": "en/unified/md/skill/exploration/swim.md",
+      "section": "Skill identity and group",
+      "sourceSha256": "d5d4da74811a500502a805014ac9725063bc51c0f45733c7917725eaa23624f7",
+      "claim": "Confirms skill identity and pool; five class choices are distinct from all fixed, college and background skills."
+    },
+    {
+      "sourcePath": "en/unified/md/skill/crafting/blacksmithing.md",
+      "section": "Skill identity and group",
+      "sourceSha256": "1ff007d9fe2eec6a622bd351ed90258720a1777c89f6409da95818d7c6453318",
+      "claim": "Confirms skill identity and pool; five class choices are distinct from all fixed, college and background skills."
+    },
+    {
+      "sourcePath": "en/unified/md/skill/interpersonal/intimidate.md",
+      "section": "Skill identity and group",
+      "sourceSha256": "4c26564b73fa5e613d35252cff388d7c623cd49788e63c9b3f4baca4c469a177",
+      "claim": "Confirms skill identity and pool; five class choices are distinct from all fixed, college and background skills."
+    },
+    {
+      "sourcePath": "en/unified/md/skill/exploration/endurance.md",
+      "section": "Skill identity and group",
+      "sourceSha256": "f4c47293f868b76b25f1af84a68f263fee2d73bb2fa3470795a1e69bf8c438d3",
+      "claim": "Confirms skill identity and pool; five class choices are distinct from all fixed, college and background skills."
+    },
+    {
+      "sourcePath": "en/unified/md/skill/intrigue/alertness.md",
+      "section": "Skill identity and group",
+      "sourceSha256": "714c6458e1aaa81a8bd74f593c87f08c9b4633f5d747190db3e821ff977edb6f",
+      "claim": "Confirms skill identity and pool; five class choices are distinct from all fixed, college and background skills."
+    },
+    {
+      "sourcePath": "en/unified/md/skill/lore/magic.md",
+      "section": "Skill identity and group",
+      "sourceSha256": "22f8d345e0eacf1f9c053f28dde3429f01ae4162bde518a8d2032b358dfdcc4e",
+      "claim": "Confirms skill identity and pool; five class choices are distinct from all fixed, college and background skills."
+    },
+    {
+      "sourcePath": "en/unified/md/skill/crafting/alchemy.md",
+      "section": "Skill identity and group",
+      "sourceSha256": "f3b85108bd1676178de6ebd3f88b816367e5c52127dbf5b8b9f23facbae4e144",
+      "claim": "Confirms skill identity and pool; five class choices are distinct from all fixed, college and background skills."
+    },
+    {
+      "sourcePath": "en/unified/md/skill/interpersonal/lie.md",
+      "section": "Skill identity and group",
+      "sourceSha256": "295bb1ee4c3c2df0c90b932ef69937c6f29b58b9fcf4e981b8084fc6538c7e68",
+      "claim": "Confirms skill identity and pool; five class choices are distinct from all fixed, college and background skills."
+    },
+    {
+      "sourcePath": "en/unified/md/kit/cloak-and-dagger.md",
+      "section": "Kit Bonuses; Signature Ability",
+      "sourceSha256": "a12702f91b0be983e269d4290497aff944761347d6846b9492f9e978c95dc846",
+      "claim": "Stamina bonus 3; speed bonus 2; stability bonus 0; disengage bonus 1; signature Fade."
+    },
+    {
+      "sourcePath": "en/unified/md/kit/sniper.md",
+      "section": "Kit Bonuses; Signature Ability",
+      "sourceSha256": "d52d966ce3487270b83d062b3596f2a04974be66f57808ffc837807812fe4857",
+      "claim": "Stamina bonus 0; speed bonus 1; stability bonus 0; disengage bonus 1; signature Patient Shot."
+    },
+    {
+      "sourcePath": "en/unified/md/kit/swashbuckler.md",
+      "section": "Kit Bonuses; Signature Ability",
+      "sourceSha256": "351feb5e85b6237deb955c6d5d70f4a34d10da690acf627a6a52e55a8fb2a8fd",
+      "claim": "Stamina bonus 3; speed bonus 3; stability bonus 0; disengage bonus 1; signature Fancy Footwork."
+    },
+    {
+      "sourcePath": "en/unified/md/kit/panther.md",
+      "section": "Kit Bonuses; Signature Ability",
+      "sourceSha256": "699d0a4f154daba08e4ebc0b70fce663668853b753e27b5e7b5d1431a3c76f90",
+      "claim": "Stamina bonus 6; speed bonus 1; stability bonus 1; disengage bonus 0; signature Devastating Rush."
+    },
+    {
+      "sourcePath": "en/unified/md/feature/ability/shadow/level-1/black-ash-teleport.md",
+      "section": "Ability header and effect",
+      "sourceSha256": "da3b305667996b278b8f3c6b1af89510e24c5d8d58346753703ff33ec3feb1ed",
+      "claim": "College-granted action; costs and optional spends remain as source text."
+    },
+    {
+      "sourcePath": "en/unified/md/feature/ability/shadow/level-1/clever-trick.md",
+      "section": "Ability header and effect",
+      "sourceSha256": "94595834941470428d762fcb224a24854b49c98c3f8e52f4b4c304911b92d60d",
+      "claim": "College-granted action; costs and optional spends remain as source text."
+    },
+    {
+      "sourcePath": "en/unified/md/feature/ability/shadow/level-1/coat-the-blade.md",
+      "section": "Ability header and effect",
+      "sourceSha256": "3ba01e2fcb53831aec8f1b700e2d050a361aa087e657265b8675259fdca9cd9d",
+      "claim": "College-granted action; costs and optional spends remain as source text."
+    },
+    {
+      "sourcePath": "en/unified/md/feature/ability/shadow/level-1/coup-de-grace.md",
+      "section": "Ability header and effect",
+      "sourceSha256": "b851de60145fee2dd41d065f39872b1bb187851d9913b5ee0becb7729ad7ee3b",
+      "claim": "5 Insight; selected heroic ability."
+    },
+    {
+      "sourcePath": "en/unified/md/feature/ability/shadow/level-1/defensive-roll.md",
+      "section": "Ability header and effect",
+      "sourceSha256": "e12a8758a50a5048d7bb1e4fe956fc797bb5e50ce3581b495f2c28a0f47b51f0",
+      "claim": "College-granted action; costs and optional spends remain as source text."
+    },
+    {
+      "sourcePath": "en/unified/md/feature/ability/shadow/level-1/disorienting-strike.md",
+      "section": "Ability header and effect",
+      "sourceSha256": "59076b70c6c0d131eb81502ce8d037b7b64f1679edbe50fc7d00d2ad0189e979",
+      "claim": "3 Insight; selected heroic ability."
+    },
+    {
+      "sourcePath": "en/unified/md/feature/ability/shadow/level-1/eviscerate.md",
+      "section": "Ability header and effect",
+      "sourceSha256": "347769725493fdc1d7a84c215fc9b88b4ce75eb6b8d7a0a33ff1da8d539501b4",
+      "claim": "3 Insight; selected heroic ability."
+    },
+    {
+      "sourcePath": "en/unified/md/feature/ability/shadow/level-1/gasping-in-pain.md",
+      "section": "Ability header and effect",
+      "sourceSha256": "1d6ef2c1ab318a20d64f2769a04afa54451c81d08734c4da3e570260e76ba784",
+      "claim": "At-will signature choice."
+    },
+    {
+      "sourcePath": "en/unified/md/feature/ability/shadow/level-1/get-in-get-out.md",
+      "section": "Ability header and effect",
+      "sourceSha256": "1f5b38075406de4710d4173de312d6669055507858b4119c5410b46ee1f6dcf2",
+      "claim": "3 Insight; selected heroic ability."
+    },
+    {
+      "sourcePath": "en/unified/md/feature/ability/shadow/level-1/hesitation-is-weakness.md",
+      "section": "Ability header and effect",
+      "sourceSha256": "a79673d7481db88feea9ac4d48b08b0f75e1b25e3c5825917baf29fbbe33092a",
+      "claim": "1 Insight free triggered action granted to all Shadows."
+    },
+    {
+      "sourcePath": "en/unified/md/feature/ability/shadow/level-1/i-work-better-alone.md",
+      "section": "Ability header and effect",
+      "sourceSha256": "75183f286eefb63b973fa0cd9666c1a835b3277f7225ee73322a10ace0f530c9",
+      "claim": "At-will signature choice."
+    },
+    {
+      "sourcePath": "en/unified/md/feature/ability/shadow/level-1/im-no-threat.md",
+      "section": "Ability header and effect",
+      "sourceSha256": "ca333464b0dcec14f40f3b8730f53624c46ab58cb93be90b2de5fef366e713a1",
+      "claim": "College-granted action; costs and optional spends remain as source text."
+    },
+    {
+      "sourcePath": "en/unified/md/feature/ability/shadow/level-1/in-all-this-confusion.md",
+      "section": "Ability header and effect",
+      "sourceSha256": "406f2ff385b38fcff72b92cdb331bfd9e3165b68145beee044bf380c9bb53440",
+      "claim": "College-granted action; costs and optional spends remain as source text."
+    },
+    {
+      "sourcePath": "en/unified/md/feature/ability/shadow/level-1/one-hundred-throats.md",
+      "section": "Ability header and effect",
+      "sourceSha256": "36790270decf03ad8ee443a3d103152a2de1c909bb11de3318dc6b95a20b2af5",
+      "claim": "5 Insight; selected heroic ability."
+    },
+    {
+      "sourcePath": "en/unified/md/feature/ability/shadow/level-1/setup.md",
+      "section": "Ability header and effect",
+      "sourceSha256": "3408a0a4d7103da6c086ab6732f7db305fd7ebad435fb597ae86c9df26112e23",
+      "claim": "5 Insight; selected heroic ability."
+    },
+    {
+      "sourcePath": "en/unified/md/feature/ability/shadow/level-1/shadowstrike.md",
+      "section": "Ability header and effect",
+      "sourceSha256": "f5fafc6aba01c0a7502b06457cb6102599d7b5c2ee279ec33d61552c43ef4984",
+      "claim": "5 Insight; selected heroic ability."
+    },
+    {
+      "sourcePath": "en/unified/md/feature/ability/shadow/level-1/teamwork-has-its-place.md",
+      "section": "Ability header and effect",
+      "sourceSha256": "cb3587787962d00a39087dffd8ec45f2b7c5e2cfb497ed5fb9db6ad2846f4c03",
+      "claim": "At-will signature choice."
+    },
+    {
+      "sourcePath": "en/unified/md/feature/ability/shadow/level-1/two-throats-at-once.md",
+      "section": "Ability header and effect",
+      "sourceSha256": "d1e7e1164cc44baef36c7eb77f4f943f9d556e173d2ddc5f9277dc37e6f2f7df",
+      "claim": "3 Insight; selected heroic ability."
+    },
+    {
+      "sourcePath": "en/unified/md/feature/ability/shadow/level-1/you-were-watching-the-wrong-one.md",
+      "section": "Ability header and effect",
+      "sourceSha256": "0a09cd55fb5056cec97e0aefbafc4cfbe6b7416013ce410937caf14c42af37ae",
+      "claim": "At-will signature choice."
+    }
+  ],
+  "backgroundAdjustment": "Fill the formerly deferred Soldier language with Kalliak; retain Vaslorian and culture language Anjali. Both Soldier language slots are selected."
+}

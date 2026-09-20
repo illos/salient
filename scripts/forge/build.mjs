@@ -15,10 +15,12 @@ const convexRequire = createRequire(require.resolve('convex/server'));
 const { build } = convexRequire('esbuild');
 const output = process.env.SALIENT_FORGE_OUTPUT;
 if (!output) throw new Error('Set SALIENT_FORGE_OUTPUT to a retained artifact directory');
+const family = process.env.SALIENT_FORGE_FAMILY ?? 'ancestry';
+if (!['ancestry', 'shadow'].includes(family)) throw new Error('Unknown Forge witness family');
 mkdirSync(output, { recursive: true });
 const blocked = new Set(['dompurify', 'modern-screenshot', 'html2canvas', 'jspdf', 'marked']);
 const result = await build({
-  entryPoints: ['scripts/forge/run.ts'],
+  entryPoints: [family === 'shadow' ? 'scripts/forge/run-shadow.ts' : 'scripts/forge/run.ts'],
   outfile: resolve(output, 'forge-run.mjs'),
   bundle: true,
   platform: 'node',
