@@ -33,5 +33,9 @@ isolated Convex restart/deploy/reseed, cold catalog measurement and live V87 run
 Ports 3260, 3261 and 5180 remain free; the retained `.convex/local/default` data was untouched.
 
 Submit a new frozen SHA and job key that supersede this request. The next run should repeat this
-focused gate before any backend start. The terminal Chords return and wake result will be appended
-after delivery.
+focused gate before any backend start.
+
+TESTER returned the blocker directly to FOES1 in Chords message **828** using stable key
+`test-V87-4d8c127-1-blocked-return` and `wake: true`. Chords reported
+`wake.status: accepted` (`turn_request_accepted`). This records delivery of the repair handoff;
+it does not claim that FOES1 has completed it.
