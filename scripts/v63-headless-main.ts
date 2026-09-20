@@ -7,7 +7,8 @@ import { createHash, randomUUID } from 'node:crypto';
 import { existsSync, readFileSync, renameSync, writeFileSync } from 'node:fs';
 import { parseEnv } from 'node:util';
 import { ConvexHttpClient } from 'convex/browser';
-import { makeFunctionReference } from 'convex/server';
+import { getFunctionName, type FunctionArgs, type FunctionReference } from 'convex/server';
+import { api } from '../convex/_generated/api.js';
 import { createAuthClient } from 'better-auth/client';
 import { convexClient, crossDomainClient } from '@convex-dev/better-auth/client/plugins';
 import { parseTierText, resolveAbilityRoll } from '../shared/resolve/index.ts';
@@ -60,6 +61,7 @@ const records: Json[] = [];
 const logins: ReturnType<typeof createAuthClient>[] = [];
 let passed = false;
 let stage = 'setup';
+let operation = 'target-check-complete';
 const evidence = () =>
   writeFileSync(
     output,
@@ -96,16 +98,30 @@ const evidence = () =>
           'Real BetterAuth HTTP, scripts/app.ts commands and authenticated public Convex readback; real random accepted dice; no browser, database import, reset or gameplay row seeding',
         passed,
         stage,
+        operation,
         records,
       },
       null,
       2,
     ),
   );
-const query = (client: ConvexHttpClient, name: string, args: Json = {}): Promise<Json> =>
-  client.query(makeFunctionReference<'query'>(name), args);
-const mutation = (client: ConvexHttpClient, name: string, args: Json = {}): Promise<Json> =>
-  client.mutation(makeFunctionReference<'mutation'>(name), args);
+// Generated function references enforce required API arguments before a live run.
+const query = <Q extends FunctionReference<'query'>>(
+  client: ConvexHttpClient,
+  reference: Q,
+  args: FunctionArgs<Q>,
+): Promise<Json> => {
+  operation = `query:${getFunctionName(reference)}`;
+  return client.query(reference, args);
+};
+const mutation = <M extends FunctionReference<'mutation'>>(
+  client: ConvexHttpClient,
+  reference: M,
+  args: FunctionArgs<M>,
+): Promise<Json> => {
+  operation = `mutation:${getFunctionName(reference)}`;
+  return client.mutation(reference, args);
+};
 async function account(role: string) {
   stage = `register-${role}`;
   const storage = new Map<string, string>();
@@ -136,7 +152,7 @@ async function account(role: string) {
   const client = new ConvexHttpClient('http://backend:3210', { logger: false });
   client.setAuth(jwt.data.token);
   tokens.set(client, jwt.data.token);
-  const profile = await mutation(client, 'auth:ensureProfile');
+  const profile = await mutation(client, api.auth.ensureProfile, {});
   return { client, profile };
 }
 try {
@@ -144,24 +160,24 @@ try {
   const player = await account('player');
   const dc = director.client;
   const pc = player.client;
-  const content = await query(dc, 'content:status');
+  const content = await query(dc, api.content.status, {});
   assert.equal(content.entryCount, manifest.entryCount);
   assert.equal(content.contentHash, manifest.contentHash);
   assert.equal(content.revision, manifest.compendium.revision);
   stage = 'public-campaign-and-character-setup';
-  const campaignId = await mutation(dc, 'campaigns:create', {
+  const campaignId = await mutation(dc, api.campaigns.create, {
     commandId: randomUUID(),
     name: `V63 main proof ${runId}`,
   });
-  const campaign = await query(dc, 'campaigns:get', { campaignId });
-  await mutation(pc, 'campaigns:requestJoin', {
+  const campaign = await query(dc, api.campaigns.get, { campaignId });
+  await mutation(pc, api.campaigns.requestJoin, {
     commandId: randomUUID(),
     shareCode: campaign.shareCode,
   });
-  const joined = await query(dc, 'campaigns:get', { campaignId });
+  const joined = await query(dc, api.campaigns.get, { campaignId });
   const request = joined.pendingRequests.find((row: Json) => row.userId === player.profile.userId);
   assert.ok(request);
-  await mutation(dc, 'campaigns:approveRequest', {
+  await mutation(dc, api.campaigns.approveRequest, {
     commandId: randomUUID(),
     requestId: request.id,
   });
@@ -172,8 +188,8 @@ try {
     readFileSync('shared/content/fury-level-one-decisions.json', 'utf8'),
   ) as DecisionDefinitions;
   const authored = { name: 'V63 Thorn', appearance: '', biography: '', notes: '' };
-  const heroId = await mutation(pc, 'characters:create', { commandId: randomUUID(), authored });
-  await mutation(pc, 'characters:save', {
+  const heroId = await mutation(pc, api.characters.create, { commandId: randomUUID(), authored });
+  await mutation(pc, api.characters.save, {
     commandId: randomUUID(),
     characterId: heroId,
     expectedRevision: 1,
@@ -183,26 +199,27 @@ try {
       definitions,
     ),
   });
-  await mutation(pc, 'characters:submit', {
+  await mutation(pc, api.characters.submit, {
     commandId: randomUUID(),
     characterId: heroId,
     campaignId,
   });
-  await mutation(dc, 'characters:approve', { commandId: randomUUID(), characterId: heroId });
-  const catalog = await query(dc, 'foes:catalog', { campaignId });
+  await mutation(dc, api.characters.approve, { commandId: randomUUID(), characterId: heroId });
+  const catalog = await query(dc, api.foes.catalog, { campaignId });
   assert.equal(catalog.name, 'Goblin Warrior');
-  const foeId = await mutation(dc, 'foes:add', {
+  const foeId = await mutation(dc, api.foes.add, {
     commandId: randomUUID(),
     campaignId,
     definitionId: catalog.definitionId,
   });
-  await mutation(dc, 'sessions:start', {
+  await mutation(dc, api.sessions.start, {
     commandId: randomUUID(),
     campaignId,
     selectedPlayerIds: [player.profile.userId],
   });
   const command = async (client: ConvexHttpClient, text: string) => {
     stage = text;
+    operation = 'scripts/app.ts command';
     // Exercise the supported CLI itself; keep its authenticated token in the child environment.
     const response = await exec(
       process.execPath,
@@ -219,11 +236,14 @@ try {
   await command(pc, '/combat roll');
   await command(dc, '/combat first side=heroes');
   await command(pc, `${H} /turn take`);
-  const before = await query(dc, 'table:roster', { campaignId });
-  const character = await query(pc, 'characters:get', { characterId: heroId });
-  const sheet = await query(pc, 'abilities:sheet', {
+  stage = 'pre-use-facts';
+  records.push({ case: 'setup-identity', campaignId, heroId, foeId });
+  evidence();
+  const before = await query(dc, api.table.roster, { campaignId });
+  const character = await query(pc, api.characters.get, { characterId: heroId });
+  const sheet = await query(pc, api.abilities.sheet, {
     campaignId,
-    actor: { kind: 'character', id: heroId },
+    actor: { kind: 'character', id: heroId, name: authored.name },
   });
   const ability = sheet.abilities.find((row: Json) => row.name === 'Brutal Slam');
   assert.ok(ability && ability.kind === 'rolled');
@@ -286,7 +306,7 @@ try {
   const eventId = used.eventId;
   assert.ok(eventId);
   const result = async (client: ConvexHttpClient) =>
-    (await query(client, 'abilities:results', { campaignId, eventIds: [eventId] }))[0];
+    (await query(client, api.abilities.results, { campaignId, eventIds: [eventId] }))[0];
   const first = await result(dc);
   assert.ok(first);
   const dice = first.dice;
@@ -316,12 +336,12 @@ try {
     correctionIds: string[],
   ) => {
     stage = name;
-    const roster = await query(dc, 'table:roster', { campaignId });
+    const roster = await query(dc, api.table.roster, { campaignId });
     const playerResult = await result(pc);
     const directorResult = await result(dc);
-    const playerHistory = await query(pc, 'history:status', { campaignId });
-    const directorHistory = await query(dc, 'history:status', { campaignId });
-    const events = (await query(dc, 'events:list', { campaignId })).events;
+    const playerHistory = await query(pc, api.history.status, { campaignId });
+    const directorHistory = await query(dc, api.history.status, { campaignId });
+    const events = (await query(dc, api.events.list, { campaignId })).events;
     const calculation = expected(banes);
     records.push({
       case: name,

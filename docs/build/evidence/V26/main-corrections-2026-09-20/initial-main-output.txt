@@ -1,0 +1,1 @@
+V63 headless proof failed at @{character:k571qtqjan3vz9swnrcby7xad58er3xa} /turn take; inspect sanitized readback
