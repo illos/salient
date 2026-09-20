@@ -146,3 +146,14 @@ finishing a push; no functions, content or data changed there. The WIZARD thread
 deployment at 03:04 UTC removed the staged indexes, which was correct, and nothing needed preserving.
 Lesson recorded: no Convex CLI command runs on Presidium; codegen and every other CLI step run on
 CT114 through `presidium-dev`, where no cloud credential is present.
+
+### 2026-09-20 — incident: shared origin URL re-pointed
+
+While initialising the vendor submodules in the slice worktree (GitHub unreachable from
+Presidium, so `vendor/forge-steel` stayed an empty directory after the failed clone),
+`git -C vendor/forge-steel remote set-url origin https://github.com/andyaiken/forgesteel.git`
+resolved to the parent repository and overwrote the shared `remote.origin.url` in `.git/config`
+(root checkout and every worktree). The WIZARD thread's candidate push failed with 403 at 03:14 UTC
+and reported it. Restored to `https://github.com/illos/salient.git` at 03:15 UTC; no push had
+succeeded to the wrong remote. Lesson: never run `git -C <path>` against a directory that is not
+yet a repository; check `git -C <path> rev-parse --show-toplevel` first.
