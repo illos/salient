@@ -57,7 +57,7 @@ must be separately recorded; this branch has performed neither.
 | --- | --- | --- | --- | --- |
 | V82 | [Remaining level-one ancestries](V82-remaining-ancestries.md) | Main 589d357 | In progress — six ancestry units; headless/Forge acceptance | WIZARD, slice/V82 |
 | V76 | Dragon Knight level one | V82 integration | In progress — sourced wizard choices, traits and abilities | Astra character worker |
-| V77 | High Elf level one | V82 integration | In progress — sourced wizard choices, traits and abilities | Astra character worker |
+| V77 | [High Elf level one](V77-high-elf-level-one.md) | V82 integration | In progress — sourced wizard choices, traits and abilities | Astra character worker |
 | V78 | Memonek level one | V82 integration | In progress — sourced wizard choices, traits and abilities | Astra character worker |
 | V79 | Revenant level one | V82 integration | In progress — sourced wizard choices, traits and abilities | Astra character worker |
 | V80 | Time Raider level one | V82 integration | In progress — sourced wizard choices, traits and abilities | Astra character worker |
