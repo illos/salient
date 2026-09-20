@@ -255,3 +255,20 @@ User requested the merge ("merge to main so I can preview it there"). Completed 
   closeout commit; the worktree stays for the next UI slice.
 - Browser verification remains pending under the moratorium (backlog rows logged); the user will
   view the page on shared main.
+
+### 2026-09-20 — user checkpoint
+
+The user viewed the merged campaign home on shared main (`3ca24e8`) and said it looks good; the
+thread is paused here. No open defects reported.
+
+Resume prompt for the next UI slice:
+
+- Next surfaces in the user's list follow the campaign home; the **session screen** (roster,
+  player selection, selected characters, running-session controls) is the natural next slice and
+  removes the START SESSION all-members interim recorded above.
+- Open items carried by this slice: recap abstraction (log + chat + Director notes), the
+  game-log/chat hybrid inside the session with roll results, presence on the table roster,
+  `tests/browser/v21-campaign.spec.ts` rewrite when V66 ends the moratorium, and the 50-session
+  bound on `sessions.list`/`number`/`sessionCount`.
+- Working setup: worktree `code/.worktrees/campaign-home` (detached at `334c32d`, reusable for the
+  next slice branch), isolated CT114 env `campaign-home` (stopped, config and data retained).
