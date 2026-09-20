@@ -250,6 +250,81 @@ export async function runScenarios(context: ScenarioContext) {
       },
     );
   }
+  await run('Shadow: complete creation, Insight sheet and saved college replacement', async () => {
+    // Ledger witness 1 (tests/fixtures/v92-shadow-expected.json): Black Ash, Cloak and Dagger.
+    const witness = (
+      JSON.parse(readFileSync('tests/fixtures/v92-shadow-expected.json', 'utf8')) as {
+        witnesses: {
+          selections: Record<string, SelectionValue>;
+          expected: Record<string, unknown>;
+        }[];
+      }
+    ).witnesses[0]!;
+    const preview = await player.query<Discovery>('characterWizard:discover', {
+      selections: input(definitions, witness.selections),
+    });
+    assert.equal(preview.evaluation.status, 'complete');
+    const id = await player.mutation<string>('characters:create', {
+      commandId: commandId(),
+      authored: { ...authored, name: `Shadow ${runId}` },
+      selections: preview.selections,
+    });
+    const readback = await saved(player, id);
+    assert.equal(readback.status, 'complete');
+    const sheet = await player.query<HeroSheet>('characters:sheet', { characterId: id });
+    assert.ok(sheet.build?.baseline);
+    for (const key of ['staminaMaximum', 'speed', 'disengage'] as const)
+      assert.equal(sheet.build.baseline[key].value, witness.expected[key], `Shadow ${key}`);
+    assert.equal(sheet.build.baseline.heroicResource.name.value, 'insight');
+    assert.equal(sheet.build.baseline.heroicResource.startingValue.value, 0);
+    const ability = (name: string) => sheet.abilities.find(entry => entry.name === name);
+    for (const [decisionId, amount] of [
+      ['class.shadow.ability-3', 3],
+      ['class.shadow.ability-5', 5],
+    ] as const) {
+      const name = witness.selections[decisionId] as string;
+      assert.deepEqual(ability(name)?.cost, { resource: 'insight', amount }, name);
+    }
+    for (const name of [
+      'Hesitation Is Weakness',
+      'Black Ash Teleport',
+      'In All This Confusion',
+      'Fade',
+    ])
+      assert.ok(ability(name)?.content?.text.trim(), `Missing source-bearing ability ${name}`);
+    assert.ok(sheet.build.baseline.skills.some(skill => skill.name === 'Magic'));
+    // Saved college replacement through the same transition operation the wizard uses.
+    const changed = await player.query<Transition>('characterWizard:transition', {
+      characterId: id,
+      selections: readback.selections,
+      decisionId: 'class.shadow.college',
+      value: 'Caustic Alchemy',
+    });
+    assert.deepEqual(changed.removed, []);
+    await player.mutation('characters:save', {
+      characterId: id,
+      commandId: commandId(),
+      expectedRevision: readback.revision,
+      authored: readback.authored,
+      selections: changed.selections,
+    });
+    const after = await saved(player, id);
+    assert.equal(after.status, 'complete');
+    assert.equal(values(after.selections)['class.shadow.college'], 'Caustic Alchemy');
+    assert.equal(values(after.selections)['kit.choice'], witness.selections['kit.choice']);
+    const updated = await player.query<HeroSheet>('characters:sheet', { characterId: id });
+    const skills = updated.build?.baseline?.skills.map(skill => skill.name) ?? [];
+    assert.ok(skills.includes('Alchemy') && !skills.includes('Magic'), 'College skill replaced');
+    const abilities = updated.abilities.map(entry => entry.name);
+    for (const gone of ['Black Ash Teleport', 'In All This Confusion'])
+      assert.ok(!abilities.includes(gone), `${gone} revoked`);
+    for (const added of ['Coat the Blade', 'Defensive Roll'])
+      assert.ok(abilities.includes(added), `${added} granted`);
+    assert.ok(
+      updated.features.some(feature => feature.name === 'Smoke Bomb'),
+      'Smoke Bomb granted',
+    );
+  });
   const extraTraits: [string, string[][]][] = [
     [
       'Hakaan',
