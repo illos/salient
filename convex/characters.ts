@@ -887,7 +887,7 @@ export const sheet = query({
         : null,
       abilities: await Promise.all(
         [
-          ...startingItemAbilities(character.startingRewards),
+          ...startingItemAbilities(character.startingRewards, manifest.compendium.revision),
           ...complicationAbilities(
             granted?.features ?? [],
             perkAbilities(

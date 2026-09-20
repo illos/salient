@@ -39,7 +39,10 @@ The [subsequent diagnosis](evidence/V85/deployment-diagnosis.md) confirmed mixed
 import attributes and a schema import of runtime authentication. Two temporary corrections passed
 the deployment dry run and were restored. The permanent equivalent correction is now prepared
 for TESTER under the new testing process; TESTER owns all checks/builds/deployment verification.
-The next gate is the corrected committed candidate followed by the hosted 35-scenario API suite. Do not repeat source
+TESTER returned `b08ebcd` after focused6/app5 passed but NodeNext rejected the attribute-free
+JSON import. The replacement passes the manifest revision from the helper’s existing backend
+callers and removes its JSON import entirely. The next gate is TESTER’s full check and actual
+hosted deployment followed by the 35-scenario API suite. Do not repeat source
 audits, expand class scope or enter another verification repair loop. Earth + Grounded's duplicate
 range benefit still lacks a complete public character witness because Earth specialization is unsupported.
 
