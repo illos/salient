@@ -103,4 +103,4 @@ add narrative here. V46–V56 were the abandoned Opus pilot and are retired ids.
 | V90 | [Check pipeline speed](V90-check-pipeline-speed.md) | Merged (with V91); TESTER pass on `f55764d` |
 | V91 | [Process trim](V91-process-trim.md) | Merged |
 | V92 | [Shadow level one](V92-shadow-level-one.md) | Merged (`81b7931`), cloud published; TESTER full pass on `2b46094`, hosted Shadow smoke pass |
-| V93 | [CI reuse and failure events](V93-ci-failure-events.md) | In progress |
+| V93 | [CI reuse and failure events](V93-ci-failure-events.md) | Merged (`a5a23ec`); targeted gate and real event delivery pass |

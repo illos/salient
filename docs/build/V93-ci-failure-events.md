@@ -36,3 +36,15 @@ include the failing run and commit and reach a durable notification destination.
 - TESTER1145: focused notifier 6/6 and workflow YAML/security wiring passed on `eafbbf9`.
 - Review1146 fixes: manual fallback executes notifier regression tests; commit checking uses
   `HEAD^..HEAD` on main and the build guide distinguishes local/promotion/manual gates.
+
+- Independent WIZARD review1149 passed; TESTER1150 passed the followup YAML, shell/range and
+  documentation checks, reusing the unchanged 6/6 notifier result. Merged and pushed `a5a23ec`.
+- TESTER1153 verified real event delivery with one bounded evidence capture:
+  [intentional failure](https://github.com/illos/salient/actions/runs/35543366336) produced
+  [issue #1](https://github.com/illos/salient/issues/1), assigned to and mentioning `illos`;
+  [successful probe](https://github.com/illos/salient/actions/runs/35543367443) skipped notification
+  and created no issue. No full check started. Evidence retained at
+  `/srv/presidium/projects/salient/test-artifacts/V93-a5a23ec-delivery`.
+- Probe issue cleanup returned HTTP403 (`Resource not accessible by personal access token`).
+  The clearly labeled delivery-probe issue remains open; delivery itself passed. Email/inbox
+  receipt and T3 wake are not claimed. No cloud runtime deployment was needed.
