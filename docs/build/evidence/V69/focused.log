@@ -1,0 +1,23 @@
+$ node scripts/build-content.ts
+Generated shared/content/compendium (515 entries, 10 excluded, revision fb83a789da8f, generatedAt 2026-09-08).
+scripts/build-content.ts 130ms (unchanged)
+scripts/headless/character-scenarios.ts 63ms
+shared/content/level-one-decisions.ts 13ms (unchanged)
+shared/evaluate/character.ts 191ms (unchanged)
+shared/content/ancestries/hakaan/level-one.ts 5ms (unchanged)
+shared/content/ancestries/orc/level-one.ts 3ms (unchanged)
+shared/evaluate/ancestries/hakaan.ts 4ms (unchanged)
+shared/evaluate/ancestries/orc.ts 4ms (unchanged)
+tests/character-v70-hakaan.test.ts 12ms
+tests/character-v71-orc.test.ts 27ms
+
+ RUN  v4.1.11 /app
+
+ ✓  engine  tests/character-v71-orc.test.ts (6 tests) 54ms
+ ✓  engine  tests/character-v70-hakaan.test.ts (5 tests) 38ms
+
+ Test Files  2 passed (2)
+      Tests  11 passed (11)
+   Start at  02:57:15
+   Duration  813ms (transform 351ms, setup 0ms, import 513ms, tests 92ms, environment 0ms)
+

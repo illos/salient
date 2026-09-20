@@ -1,0 +1,46 @@
+$ pnpm lint && pnpm check:engine && pnpm check:app && pnpm check-links && pnpm check-vendor && pnpm content:check && pnpm supporting:check && pnpm foes:check && pnpm build
+$ eslint . && prettier --check .
+Checking formatting...
+All matched files use Prettier code style!
+$ tsc --noEmit && vitest run --project engine
+
+ RUN  v4.1.11 /app
+
+ ✓  engine  tests/supporting-coverage.test.ts (101 tests) 404ms
+ ✓  engine  tests/fury-decisions.test.ts (5 tests) 380ms
+   ✓ R01 checks 2-3: every option value, grant and quoted count/budget sentence is verbatim in its cited source  361ms
+ ✓  engine  tests/character-v25-evaluator.test.ts (8 tests) 325ms
+ ✓  engine  tests/character-v45-reference.test.ts (7 tests) 307ms
+ ✓  engine  tests/cli.test.ts (1 test) 218ms
+ ✓  engine  tests/supporting-complications.test.ts (21 tests) 211ms
+ ✓  engine  tests/supporting-backgrounds.test.ts (46 tests) 148ms
+ ✓  engine  tests/character-v32-evaluator.test.ts (9 tests) 150ms
+ ✓  engine  tests/acceptance.test.ts (3 tests) 101ms
+ ✓  engine  tests/parser.test.ts (8 tests) 85ms
+ ✓  engine  tests/live-state-initialization.test.ts (4 tests) 84ms
+ ✓  engine  tests/character-v57-devil.test.ts (3 tests) 61ms
+ ✓  engine  tests/character-v45-foundation.test.ts (3 tests) 63ms
+ ✓  engine  tests/character-v71-orc.test.ts (6 tests) 58ms
+ ✓  engine  tests/character-derived-values.test.ts (4 tests) 55ms
+ ✓  engine  tests/history.test.ts (3 tests) 49ms
+ ✓  engine  tests/character-evaluator.test.ts (8 tests) 42ms
+ ✓  engine  tests/character-v61-human.test.ts (4 tests) 36ms
+ ✓  engine  tests/character-v70-hakaan.test.ts (5 tests) 33ms
+ ✓  engine  tests/character-v60-dwarf.test.ts (6 tests) 37ms
+ ✓  engine  tests/core-conditions.test.ts (11 tests) 25ms
+ ✓  engine  tests/character-creation-rulings.test.ts (6 tests) 22ms
+ ✓  engine  tests/engine.test.ts (13 tests) 16ms
+ ✓  engine  tests/resolve.test.ts (19 tests) 14ms
+ ✓  engine  tests/character-v58-polder.test.ts (2 tests) 10ms
+ ✓  engine  tests/v25-build-roll-contributions.test.ts (4 tests) 4ms
+
+ Test Files  26 passed (26)
+      Tests  310 passed (310)
+   Start at  02:57:47
+   Duration  7.06s (transform 478ms, setup 0ms, import 1.66s, tests 2.94s, environment 2ms)
+
+$ tsc -p tsconfig.web.json && vitest run --project app --project scripts
+scripts/headless/character-scenarios.ts(181,13): error TS18048: 'feature' is possibly 'undefined'.
+scripts/headless/character-scenarios.ts(181,13): error TS18047: 'feature.content' is possibly 'null'.
+[ELIFECYCLE] Command failed with exit code 2.
+[ELIFECYCLE] Command failed with exit code 2.

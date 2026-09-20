@@ -1,8 +1,8 @@
 # V70 — Hakaan level one
 
-Status: implemented on `slice/V70`; integration, remote checks, headless witnesses and independent
-reviews pending. This unit is not delivered. The lead owns runtime and shared registration.
-No browser runs are permitted under the [moratorium](README.md#browser-testing-moratorium--2026-09-20).
+Status: Hakaan candidate implemented, independently reviewed and live headless verified in V69.
+Full 737-test check and all 26 live scenarios pass. Authentic Forge counterparts remain pending;
+not merged into main. See [V69 evidence](evidence/V69/README.md).
 
 ## Scope and source expectations
 

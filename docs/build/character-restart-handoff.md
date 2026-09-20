@@ -1,91 +1,63 @@
-# Fresh-session handoff: restart character development with Astra
+# Character wizard restart handoff
 
-Status: resumed at the user's request on 2026-09-20 in V69, with Hakaan (V70) and Orc (V71) as the next bounded pair. Character implementation
-is preserved on `slice/V65` at `acc3df1` (pushed); application changes are not merged into main.
-Both verification blockers are fixed. All 22 remote authenticated headless scenarios passed in
-73.547 seconds, with zero failures/skips; the normal application build also passed.
-See [V65 results and evidence](V65-character-headless.md#authorized-blocker-repair--2026-09-20).
+Status: the next bounded batch is implemented and live headless verified on 2026-09-20.
+Hakaan and Orc join Devil, Polder, Dwarf and Human. Application changes remain on `slice/V69`
+in `.worktrees/character-coverage`; they are not merged into main. The remaining acceptance
+blocker is the authentic Forge-reference requirement, which currently requires browser capture.
+Do not silently waive it or resume browser activity.
 
-The preserved checkpoint is `.worktrees/character-headless`; active integration is
-`.worktrees/character-coverage` on `slice/V69`, based on current main with V65 carried forward. Backend `b1f50c8` is deployed to development
-`different-bat-943`; the hosted frontend remains source `1e7896c`, Worker
-`b9cc5ebb-54a1-4176-bc05-d99051b3cf1e`, at <https://salient-dev.rdxx.workers.dev>.
-The backend fix exempts only public signing-key discovery from auth rate limiting; login/reset
-limits remain intact. Temporary deployment credentials were removed and our runtime jobs ended.
-The CT114 heavy window was released to the engine thread; coordinate before starting more work.
+## Current source and running app
 
-## Read first
+Backend and frontend source: `ab0f2fd875155d929f5efed201b14d96a821f4f7`.
+Hosted development: <https://salient-dev.rdxx.workers.dev>, backend `dev:different-bat-943`,
+Worker `7830be2c-15d9-4c6f-8634-25c0edf55988`; 515-entry content snapshot.
+The candidate preserves V65 and main through V63 `b6109b0`. Main's later V67 pure compiler
+is not in this candidate and has no deployed-runtime effect. Preserve peer changes when integrating.
 
-1. `agent.MD` and [the dead-end decision](../decisions/2026-09-19-opus-pilot-dead-end.md).
-2. [Astra workflow](astra-character-workflow.md) and [V44 scope](V44-character-option-delivery.md).
-3. Relevant character specification sections, the existing reference procedure and remote runbook
-   linked from those documents. Then read the actual current modules before assigning files.
+V65 at `acc3df1` remains preserved in `.worktrees/character-headless`; do not rebuild it.
+Its original 22-scenario passing proof and repaired auth-key/type errors remain historical evidence.
+The current [V69 record](V69-character-coverage.md) owns the new batch and coverage inventory.
 
-The user's requirements remain: every ancestry and included class through level ten, each
-ancestry/class/level as its own logical commit, same-build Forge verification, an initial combined
-audit, and verified incremental merges. Complete level-one coverage before expanding the new queue
-into later class levels. Existing Berserker level-two support must remain working.
+## Verified and pending
 
-## Verification order — current requirement
+- Full remote `pnpm check`: 737 tests plus lint, types, source/content validation and build pass.
+- Live authenticated headless suite: all 26 scenarios pass in 82.857 seconds, zero failures/skips.
+- All new Hakaan/Orc purchases have saved readback witnesses; Artisan targets persist without
+  granting skills and disappear after parent replacement. Hakaan replacement removes size/immunity.
+- Existing six-ancestry creation, privacy, admission/review, private inheritance, Fury advancement,
+  history/restoration, stale edits and combat locks pass. This is sampled workflow proof.
+- Independent implementation and fresh pinned-source reviews pass for all six ancestry candidates.
+- Genuine Forge option comparisons remain incomplete for Devil, Dwarf, Human, Hakaan and Orc.
+  Polder retains its prior authentic counterpart. Twelve Devil skill choices still have evaluator
+  coverage without individual live witnesses. No full rules-combination certification is claimed.
 
-Apply the [app-wide headless completion gate](README.md#programmatic-headless-completion-gate).
-V65 now proves the supported character routes through real authenticated public APIs, including
-Devil/Polder/Dwarf/Human creation, choice changes, review/privacy, private inheritance, Fury 1→2,
-history/restoration, stale review and combat locks. This is sampled workflow proof, not certification
-of every rules option. The original 712 engine/app/script tests passed; the entire `pnpm check`
-was not repeated after the two fixes. Targeted lint/types, the normal build and documentation links passed.
+[Evidence and reviews](evidence/V69/README.md) retain both the initial new assertion typing failure
+and the successful corrected full check. No timeout was raised and the live suite ran once.
+All our jobs ended, temporary deployment credentials were removed, and the CT114 heavy window
+was released to peers. Hosted private services, `character-restart` and the old `characters`
+environment remain stopped. Coordinate a new window before any further workload.
 
-The [browser testing moratorium](README.md#browser-testing-moratorium--2026-09-20) is absolute:
-no browser/Playwright/headless-Chromium testing until V66 repair is implemented. V66 is not started
-and needs the user's go. Missing browser runs are not blockers; record future visual scenarios
-in the [browser coverage backlog](browser-coverage-backlog.md). Do not restart browser debugging.
+## Resume constraints and next decision
 
-## Starting point
+Read `agent.MD`, [Astra workflow](astra-character-workflow.md), [V44 scope](V44-character-option-delivery.md),
+[V69](V69-character-coverage.md), and the relevant character specification before continuing.
+Check Chords and current main first. Do not repeat passing verification without a relevant change.
 
-Use a new branch/worktree from current main. Do not reset to an old commit: main contains this
-handoff and the permanent rejection of the pilot. Its application, tests, runtime, dependency and
-source-pin trees match pre-pilot `88d1e61793939feedf37ec88181e128fd721364e` when this handoff was
-staged. Check for later legitimate changes before relying on that statement.
+The user permanently abandoned the entire [Opus pilot](../decisions/2026-09-19-opus-pilot-dead-end.md).
+No code, tests, fixtures, captures, research or processes from that pilot may be reused. Use native
+Astra agents and current main for subsequent bounded units. Every test must catch a meaningful
+failure and add coverage; reject redundant or implementation-mirroring tests.
 
-Already delivered: partial Devil/Berserker Fury and Polder/Fire Elementalist paths; Fury 1→2 and
-history/restoration; V37 supporting choices; V40/V42 wizard presentation; V45 modular foundation.
-The foundation is not a task to rebuild. None of these partial paths certifies all options.
+The [browser moratorium](README.md#browser-testing-moratorium--2026-09-20) remains absolute until
+V66 repair is implemented. V66 has not started and requires the user's go. No browser, Playwright
+or headless Chromium testing; visual scenarios belong in the browser backlog. All workloads run
+on CT114, live character proof through authenticated public CLI/API routes on hosted development.
 
-Useful starting files:
-
-- `shared/content/ancestries/devil/level-one.ts`, `shared/content/ancestries/polder/level-one.ts`.
-- `shared/content/classes/fury/level-one.ts`, `shared/content/classes/fury/level-two.ts`.
-- `shared/content/classes/elementalist/level-one.ts`.
-- `shared/content/character-decisions.ts`, `shared/content/character-support.ts`.
-- `shared/evaluate/character.ts` and the ancestry/class files under `shared/evaluate/`.
-- `shared/contracts/characterEvaluation.ts`, `shared/contracts/characterSheet.ts`.
+Before main integration, resolve the conflict between the existing authentic website-export gate
+and the moratorium with the user. A source/rules pass does not itself waive Forge evidence. Once
+that policy is settled, prepare the reviewed candidate against then-current main and complete the
+normal integration and playable-app checks, preserving peer work. Do not start a third new ancestry
+merely to avoid closing this batch. Remaining ancestry/class gaps are listed in V69.
 
 Compendium pin: `fb83a789da8f0327a389c277a0c790b1648d5810`.
-Forge pin: `5a846aadb623a9855a023e9403bb887a956c341f`.
-Read rules only from the pinned Compendium; do not research Draw Steel on the web.
-
-## Resume from this checkpoint
-
-- Implementation has resumed under V69. Read main instructions, this handoff, V65 and
-  `STATUS.md`; check Chords and checkout ownership before changing shared files.
-- Preserve `slice/V65` and its evidence. Do not rebuild Devil/Polder/Dwarf/Human from scratch or
-  repeat passing verification without a relevant change. Broader ancestry acceptance and main
-  integration remain outstanding; inspect their recorded reviews before claiming completion.
-- Prepare any integration candidate against current main, retaining peer engine/UI work. Follow
-  the normal review/headless gates and shared-app update procedure when integration is authorized.
-  The deployed backend and older frontend intentionally have different source revisions above.
-- Use remote CT114 for workloads and the existing hosted development target for live verification.
-  Keep verification bounded: diagnose concrete failures, report blockers, and pause rather than
-  enter another prolonged test-repair loop. Every test needs a meaningful failure and added coverage.
-
-The old `characters` environment is stopped and contains abandoned candidate state. Leave it stopped.
-All old Opus branches/worktrees, test fixtures, source ledgers, captures, diagnostics and helpers are
-rejected inputs. Do not inspect them to speed up the rewrite. Historical cold archives are solely
-for accountability; there is no salvage queue.
-
-## Suggested fresh-session kickoff
-
-> Resume from the 2026-09-20 character checkpoint in this handoff. Candidate `slice/V65` at
-> `acc3df1` has all 22 remote headless scenarios and the normal build passing. Preserve that work;
-> inspect outstanding ancestry review/integration requirements before choosing the next bounded
-> slice. Keep the browser moratorium and abandoned-Opus prohibition in force.
+Forge pin: `5a846aadb623a9855a023e9403bb887a956c341f`. Read rules only from the pinned Compendium.

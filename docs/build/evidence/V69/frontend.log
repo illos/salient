@@ -1,0 +1,47 @@
+Target: dev (different-bat-943); frontend https://salient-dev.rdxx.workers.dev; operation frontend
+Progress: resolved 1, reused 0, downloaded 0, added 0
+Progress: resolved 39, reused 0, downloaded 9, added 0
+Packages: +35
++++++++++++++++++++++++++++++++++++
+Progress: resolved 91, reused 0, downloaded 31, added 0
+Progress: resolved 91, reused 0, downloaded 36, added 33
+Progress: resolved 91, reused 0, downloaded 37, added 34
+Progress: resolved 91, reused 0, downloaded 38, added 34
+Progress: resolved 91, reused 0, downloaded 38, added 35, done
+
+ ⛅️ wrangler 4.134.0
+────────────────────
+🌀 Building list of assets...
+✨ Read 3295 files from the assets directory /app/dist
+🌀 Starting asset upload...
+🌀 Found 20 new or modified static assets to upload. Proceeding with upload...
++ /assets/preview-DS5UqxHD.js
++ /assets/preview-P4rQ5rPs.js
++ /assets/characters-BVuIZ6ol.js
++ /assets/rules-4a3PuGwc.js
++ /assets/campaigns-TiyoisVF.js
++ /assets/table-C9NYnt4L.js
++ /assets/index-9-fuwH4w.js
++ /index.html
++ /assets/password-recovery-bPLyvNvw.js
++ /.vite/manifest.json
++ /assets/progression-Btqath93.js
++ /assets/reference-B45Ty9nO.js
++ /assets/index-DKXY2IJH.css
++ /assets/supporting-components-BVB0Y6eJ.js
++ /assets/event-links-3eXMRPoY.js
++ /assets/article-BUPLdEPY.js
++ /assets/foes-FVJNjohD.js
++ /assets/overlay-card-CHoN4xEC.js
++ /assets/character-sheet-o6nX-0RA.js
++ /assets/wizard-HyCGV_vO.js
+Uploaded 6 of 20 assets
+Uploaded 13 of 20 assets
+Uploaded 20 of 20 assets
+✨ Success! Uploaded 20 files (3264 already uploaded) (2.16 sec)
+
+Total Upload: 0.44 KiB / gzip: 0.31 KiB
+Uploaded salient-dev (5.54 sec)
+Deployed salient-dev triggers (0.49 sec)
+  https://salient-dev.rdxx.workers.dev
+Current Version ID: 7830be2c-15d9-4c6f-8634-25c0edf55988

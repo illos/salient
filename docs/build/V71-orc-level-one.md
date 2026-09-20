@@ -1,7 +1,8 @@
 # V71: Orc level one
 
-Status: candidate implemented; remote verification and independent reviews pending. Not merged or
-accepted. Browser tests are suspended under the site-wide moratorium. Rules review: required.
+Status: Orc candidate implemented, independently reviewed and live headless verified in V69.
+Full 737-test check and all 26 live scenarios pass. Authentic Forge counterparts remain pending;
+not merged into main. See [V69 evidence](evidence/V69/README.md).
 
 Spec: [decision system](../character-wizard-spec.md#3-decision-system),
 [shared operations](../character-wizard-spec.md#9-shared-operations-and-reliability),
