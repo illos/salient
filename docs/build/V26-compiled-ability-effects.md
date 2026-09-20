@@ -715,3 +715,53 @@ stopped while coordinating a browser window. No failed/partial run counts as com
 - These are the five bounded prerequisite checks. All eleven V26 compiler acceptance checks,
   compiled definitions/occurrences and calculated push allowances remain pending. This branch has
   not changed main or the shared playable runtime; any later merge must follow runtime integration.
+
+
+### 2026-09-20 — V63 rebase and integration audit
+
+- Fable assigned a bounded prerequisite rebase/reverification; Fable retains main integration,
+  shared-runtime update and final verification. Worktree `.worktrees/engine-corrections`, branch
+  `slice/V63-corrections-rebase`, base main `0f47e8951dbf3da47039130e7334d2a0afd831eb`.
+  Named CT114 `engine-corrections` is the planned isolated local-anonymous target; no environment
+  has been provisioned or started. Character V62 owns hosted verification; heavy work was held
+  while requesting a coordinated window. No shared or cloud runtime changes.
+- Cherry-picked original `5e010ac`, `f69843b`, `37ec53f` cleanly as `5787f84`, `36e2400`,
+  `44b23ba`. Original authorship and Spec/Reviewed-By trailers remain intact. Those reviews and
+  verification statements predate this rebase and cannot establish current acceptance.
+- The full mutation path remains correct in isolation: `correctionWindow` loads complete ordered
+  session events through `loadHistory` and `walkHistory`. The effective branch excludes undone and
+  abandoned units; only an uninterrupted suffix of `correction.ability` heads linked by both
+  `causeEventId` and `payload.data.originalEventId` to the same `ability.use` permits continuation.
+  Player ownership/Director seams are checked for each suffix entry, then the original unit's
+  floor/ownership is checked with only the temporary validation view truncated. Recorded undo
+  units and redo history are not collapsed.
+- **Blocking V43 integration finding:** `abilities.results` now uses `loadReadCorrectionWindows`
+  from `convex/lib/historyRead.ts`, independently of that authoritative helper. `readHistory`
+  reads only branch top, redo top and redo-clearing unit. Its correction path compares the original
+  ability unit with the newer correction branch top and refuses it. Thus the UI's `mayCorrect`
+  becomes false after the first correction even though the mutation permits the next one.
+  `historyIndex.ts` assigns `continuationOf` only to `ability.resolved-at-table`, so its manual
+  window also fails to recognize a correction suffix. This is a semantic incompatibility despite
+  the conflict-free cherry-pick, not a claim of a browser-observed failure.
+- Existing rebased `tests/app/abilities.test.ts` assertions at the first correction's
+  `mayCorrect: true`, the second player's result, and manual disposition after linked corrections
+  already target the mismatch. No redundant tests or speculative application repair added.
+  Reported the blocker through Chords message 566; stopped before runtime verification under the
+  assignment's stop/report instruction. Independent static review **changes required**, `v63_blocker_review`; see
+  [the rebase review](reviews/V26-corrections-rebase-review.md). It confirms both read-window
+  defects and the bounded Brutal Slam/Thunder Roar source arithmetic. Fresh full-check,
+  ten-ability journey and formal passing review remain unperformed.
+- The old opt-in browser harness also requires an explicit CT114 adapter before it can run:
+  fixed local ports 3234/3235/5184, backend-only `.convex` config/import access, literal 467-entry
+  content expectation and synthetic remote Git identity are incompatible with the current runtime.
+  No guard, assertion, timeout or target restriction was weakened. Any adapter must preserve the
+  exact mechanical scenarios and record the actual source revision separately from remote snapshot.
+- Compiler implementation, new abilities, source pins and 2026-09-16 evidence remain unchanged.
+  No merge-readiness or re-verification PASS is claimed.
+
+- Final lightweight checks: documentation links (273 Markdown files), whitespace, and the actual
+  branch commit merge gate pass. Both vendor checkouts are initialized at the unchanged pins.
+  An initial link check ran before Forge checkout completed and reported missing vendor paths;
+  it passed once initialization finished. No dependency installation, build or browser ran on
+  Presidium. V62 requested continued serialization of CT114 heavy work; no environment or
+  workload was started, so no runtime cleanup/data deletion is needed.

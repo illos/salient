@@ -18,41 +18,37 @@ Existing V outlines can be split into smaller assignments when their scope/depen
 Track organization does not change the implementation/review states below; verify current Git and
 evidence when claiming work rather than treating historical handoff notes as current gates.
 
-## Active parser/engine ownership — 2026-09-16
+## Active parser/engine ownership — 2026-09-20
 
-V26 specification is merged. Prerequisite correction/turn-setup fixes are in progress on
-`slice/V26-corrections`, based on main `f7137dc` plus baseline evidence. Compiler implementation
-has not started. User-requested real-app baseline tests
-now cover all ten currently available abilities with [source/log screenshots and saved readback](evidence/V26/baseline-2026-09-16/README.md).
-Baseline damage/cost/history checks passed; V26 compiled effects/push arithmetic and full acceptance
-remain pending. Evidence work is on short-lived `slice/V26-playtest` in
-`/srv/presidium/projects/salient/engine-parser-spec`, tested revision `f019e3a`, isolated frontend 5184 /
-backend 3234 / site 3235. No shared playable target change. See the [slice work log](V26-compiled-ability-effects.md#2026-09-16--real-app-baseline-playtests).
+Fable's engine/parser thread owns integration. Codex is assigned bounded V63 rebase and
+reverification of the existing V26 consecutive-correction prerequisites, on
+`slice/V63-corrections-rebase` in `.worktrees/engine-corrections`, based on main `0f47e89`.
+The three historical commits apply cleanly as `5787f84`, `36e2400` and `44b23ba`; their preserved
+review trailers refer to 2026-09-16, not fresh rebase acceptance.
+
+**Reverification is blocked by a static V43 integration finding:** the authoritative mutation
+allows consecutive linked corrections, but the indexed passive result query still rejects them
+once the original ability is no longer the branch top. The same mismatch affects manual resolution
+after correction. No new passing check or browser result is claimed. No runtime has been started.
+See the [rebase work log](V26-compiled-ability-effects.md#2026-09-20--v63-rebase-and-integration-audit).
+
+V26 specification and the source-to-screenshot evidence policy are merged into main. The
+[2026-09-16 prerequisite evidence](evidence/V26/corrections-2026-09-16/README.md) passed all ten
+abilities on its recorded revision; it is historical evidence, not validation of current main.
+Compiler definitions, typed occurrences and calculated push allowances remain pending.
 
 ### Historical assessment and specification checkpoints
 
-Codex owns the parser/rules-engine track in the user's engine/parser thread. Initial assessment
-V22 is on `slice/V22` in `/srv/presidium/projects/salient/engine-parser`, based on `e83930e`.
-Assessment committed as `9d50b47` with independent review pass and 402 passing baseline tests;
-lead integration is pending. Its slice document and verification live in that worktree. Recommended
-first implementation: source-linked Fury turn-start Ferocity through the existing clock/history.
-Assessment only: no backend or shared playable environment changes. Coordinate engine/clock/history
-contract edits with this owner.
+V22 assessment `9d50b47` remains historical and unmerged on `slice/V22`; it is not an active
+implementation dependency or a competing track assignment. Its proposed Ferocity work did not
+supersede the subsequently accepted V26 compiled damage/push specification. V26's original
+specification branch was integrated as `3689226`, with integration record `8ef8b5e`.
 
-On 2026-09-16 the user requested the first slice spec optimized for parser/engine viability.
-V26 specification work is on `slice/V26` in `/srv/presidium/projects/salient/engine-parser-spec`.
-The current proposed priority is compiled damage/push effects through shared resolution, ahead of
-the bookkeeping-focused Ferocity slice. Specification committed as `9949aba`; independent design
-and pinned-source rules reviews pass. Final serial full check passes 402 tests and build.
-Implementation has not started; lead integration is pending. The V26 work log records the earlier
-Rules-library timeout and the existing closeout test's timestamp-substring false positive.
-
-User-confirmed workflow, 2026-09-16: every engine ability requires a source-backed design, then a
-real in-app playtest with screenshot evidence correlating game-log results to the source. V26
-amendment `80d1f97` records the standing gate in its build process, slice template and per-ability
-inventory; independent amendment review and documentation checks pass. Designed, built and
-playtested states must remain visible separately. No V26 implementation or screenshots exist yet;
-these commits remain pending lead integration from `slice/V26`.
+Every engine ability still requires source-backed design followed by actual rendered-app
+source/log screenshots and persisted readback. Designed, built and playtested states remain
+separate. The [historical baseline](evidence/V26/baseline-2026-09-16/README.md) and subsequent
+correction evidence stay intact. Current verification and any later main/runtime integration
+must be separately recorded; this branch has performed neither.
 
 ## Dependency graph
 
@@ -165,7 +161,8 @@ See the [CI review and run record](audits/2026-09-14-ci-history-review.md) for t
 | V19 | [Forced access changes and combat recovery](V19-forced-access-recovery.md) | V10 | Outline |
 | V20 | [Dynamic terrain objects](V20-dynamic-terrain.md) | V04 | Outline |
 | V21 | [Desktop layout fidelity](V21-desktop-layout-fidelity.md) | A08, A09, V13 | Built, not committed — 2026-09-15 (foundation + five parallel implementers, lead integration and repairs); lint, typecheck, 85 engine tests, 317 app tests, links, vendor, content and the full 20-test browser suite pass; screenshots under `.playtest/v21/` compared with each mockup; review deferred to the user's audit thread |
-| V26 | [Compiled ability effects: damage and push instructions](V26-compiled-ability-effects.md) | S01, S02, A01, A02, A04, A05, A06, A09 | Prerequisite fixes verified on `slice/V26-corrections`, not merged — consecutive corrections and [all ten proper-turn playtests](evidence/V26/corrections-2026-09-16/README.md) pass, independent final review passes; compiler implementation pending; specification merged into main at `3689226`, 2026-09-16; independent design and rules review pass; 10 live designs including Viscous Fire; 3 compile-only comparisons; implementation pending; [ten-ability baseline screenshots and readback](evidence/V26/baseline-2026-09-16/README.md) captured on `slice/V26-playtest`, not V26 acceptance; specification integration needs no runtime update |
+| V26 | [Compiled ability effects: damage and push instructions](V26-compiled-ability-effects.md) | S01, S02, A01, A02, A04, A05, A06, A09 | Specification merged at `3689226`; compiler pending. Historical prerequisite branch passed ten proper-turn playtests on 2026-09-16, not merged. Current rebase V63 has a blocking indexed-read incompatibility; fresh verification pending. |
+| V63 | [Rebase and reverify V26 correction prerequisites](V26-compiled-ability-effects.md#2026-09-20--v63-rebase-and-integration-audit) | V26 prerequisites, V43, V45 | Blocked — clean cherry-picks at `44b23ba`; independent static review confirms correction/manual read-window mismatch. No fresh check/browser run or runtime changes; Fable owns integration. |
 | V64 | [Ability grammar coverage audit](V64-ability-coverage-audit.md) | V26 specification, S01, V35 | Merged — read-only audit script, report and tests integrated into main at `458b6e8`, 2026-09-20; independent review pass; no runtime impact (no backend, frontend or content change) | Engine and parser thread |
 | V66 | [Browser test harness repair](V66-browser-test-harness-repair.md) | S03, browser failure audit | Not started — registered 2026-09-20 at the user's direction; do not claim until the user starts it; ends the browser testing moratorium when implemented | Unassigned |
 | V68 | [Campaign home redesign](V68-campaign-home.md) | V21, V29, V31, V43, A09 | In progress — claimed 2026-09-20 on `slice/V68` (`code/.worktrees/campaign-home`) from main `2f5544f`; builds the user's V2 simplified campaign-home mockup: owner/Director badges, connected presence, optional session titles, session history with RECAP, light campaign chat, Manage players pop-up; isolated CT114 env `campaign-home`; headless-only verification | Campaign home UI thread (Fable) |
