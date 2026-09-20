@@ -405,3 +405,10 @@ The initially queued real-headless jobs were cancelled before setup (TESTER 899)
 account was created. The revised candidate needs coordinator gates before review closes and before
 replacement live jobs. Review also records the existing 1000-retained-instance safeguard as a
 nonblocking limit: no archival route is supplied by V88; it must not be described as implemented.
+
+The `c220cbc` focused gate passed 27/28, including the unscheduling log, but exposed an invalid
+physical-ID equality assertion in the new Wode redo fixture. Existing history recreates inserted
+clock rows and aliases their references. The fixture now compares every other live-state field,
+the same condition occurrence/source/status, and the replacement registration's active status,
+timing, work, source, affected ids and encounter. Roll rows remain byte-equal. No application code
+changed for this test repair; the failed attempt remains in TESTER evidence on main `4cee09c`.

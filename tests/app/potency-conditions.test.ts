@@ -241,11 +241,41 @@ test('player Wode correction flips potency and replaces slowed with tier-three r
   expect(await active()).toMatchObject([{ condition: 'restrained' }]);
   expect((await live()).conditions).toMatchObject({ slowed: false, restrained: true });
   const tierThree = await live();
+  const scheduled = tierThree.conditionInstances!.find(instance => instance.status === 'active')!;
+  const registration = (await t.run(ctx =>
+    ctx.db.get(scheduled.registrationId as Id<'clockRegistrations'>),
+  ))!;
   const rolls = await t.run(ctx => ctx.db.query('rolls').take(100));
   await command('/history undo', true);
   expect(await active()).toMatchObject([{ condition: 'slowed' }]);
   await command('/history redo', true);
-  expect(await live()).toEqual(tierThree);
-  expect(await t.run(ctx => ctx.db.query('rolls').take(100))).toEqual(rolls);
+  const restored = await live();
+  // History recreates inserted rows with fresh physical IDs; occurrence identity is unchanged.
+  const withoutRegistrationIds = (state: typeof tierThree) => ({
+    ...state,
+    conditionInstances: state.conditionInstances!.map(({ registrationId, ...instance }) => {
+      void registrationId;
+      return instance;
+    }),
+  });
+  expect(withoutRegistrationIds(restored)).toEqual(withoutRegistrationIds(tierThree));
+  const restoredInstance = restored.conditionInstances!.find(
+    instance => instance.id === scheduled.id,
+  )!;
+  expect(restoredInstance.registrationId).toBeTruthy();
+  const restoredRegistration = (await t.run(ctx =>
+    ctx.db.get(restoredInstance.registrationId as Id<'clockRegistrations'>),
+  ))!;
+  expect(restoredRegistration).toMatchObject({
+    status: 'active',
+    timing: registration.timing,
+    work: registration.work,
+    source: registration.source,
+    affectedIds: registration.affectedIds,
+    encounterId: registration.encounterId,
+  });
+  expect(JSON.stringify(await t.run(ctx => ctx.db.query('rolls').take(100)))).toBe(
+    JSON.stringify(rolls),
+  );
   expect(tierThree.stamina).toBe(original.stamina - 2);
 });
