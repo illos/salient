@@ -269,6 +269,36 @@ in the `commit-msg` hook and in CI (`.github/workflows/check.yml`),
 not inside `pnpm check`, so a clean checkout of any commit passes `pnpm check` regardless of its
 history. `pnpm format` applies Prettier (print width 100).
 
+## Trait-granted ability completion gate
+
+User requirement, 2026-09-20: inspect every implemented trait or feature against the pinned
+Compendium for abilities and other usable actions it grants, including actions embedded in prose
+or nested choices. This applies across the project, not only ancestry traits. A trait is not
+complete merely because its description appears on the sheet: its granted actions must be built
+and exposed through the appropriate UI action list and supported CLI/API route. Retain the
+originating trait and its source text alongside the granted actions.
+
+For each trait in the delivered scope, establish whether it grants an action, modifies an existing
+action, or has no action grant. Follow references and dependent selections; a trait's content type
+is not evidence that it grants no ability. Record the outcome in the existing slice or coverage
+notes, with source references and any unresolved gap. Do not invent actions or timing for passive
+modifiers, long activities or effects whose source does not assign an action type. Full effect
+automation remains a separate scope: granted actions must be accessible with accurate source text
+and explicit manual resolution where needed.
+
+Conditional grants must follow the actual granting choice or play state. Build the supported
+operation for changing that state when it is needed to access the grant, including nested states
+such as an active dwarf rune. Keep it distinct from permanent build choices. Prove through saved
+API readbacks that eligible actions appear, ineligible actions are absent, changing or removing
+the granting choice/state updates the action list, and unrelated build/live state is preserved.
+Cover meaningful persistence and validation boundaries through the same shared operations as the
+UI; an evaluator-only test or matching Forge ability list is insufficient.
+
+Independent implementation and rules review must check this coverage before acceptance. Missing
+usable grants block completion even when trait text and calculated stats are correct. Use the
+existing headless evidence and test-value policy below; no separate framework or test quota is
+required. Browser verification remains subject to the moratorium.
+
 ## Programmatic headless completion gate
 
 User requirement, 2026-09-20: every capability offered through the UI must also be available
