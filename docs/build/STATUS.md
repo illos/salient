@@ -412,3 +412,9 @@ remains V62 `1e7896c`. Admission/privacy assertion failure blocks the remaining 
 The preceding audit/queue describes the starting gaps; use V65's actual evidence for current proof.
 All V65 jobs ended and its temporary deployment credentials were removed. No browser demotion or
 ancestry acceptance is claimed. User instruction is to record blockers without implementing fixes.
+
+## V70 Hakaan level one — 2026-09-20
+
+| Slice | Scope | State |
+| --- | --- | --- |
+| V70 | [Hakaan level one](V70-hakaan-level-one.md) | Implemented on `slice/V70`; shared integration, remote headless proof and reviews pending |
