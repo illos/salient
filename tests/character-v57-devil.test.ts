@@ -28,8 +28,19 @@ test('V57 Silver Tongue offers and grants every interpersonal skill without bypa
     .flatMap(step => step.decisions)
     .find(row => row.id === 'ancestry.devil.silver-tongue-skill')!;
   for (const skill of [
-    'Brag', 'Empathize', 'Flirt', 'Gamble', 'Handle Animals', 'Interrogate', 'Intimidate',
-    'Lead', 'Lie', 'Music', 'Perform', 'Persuade', 'Read Person',
+    'Brag',
+    'Empathize',
+    'Flirt',
+    'Gamble',
+    'Handle Animals',
+    'Interrogate',
+    'Intimidate',
+    'Lead',
+    'Lie',
+    'Music',
+    'Perform',
+    'Persuade',
+    'Read Person',
   ]) {
     const choices = selections();
     choices['culture.upbringing.skill'] = 'Ride'; // Legal Martial choice, avoids Intimidate collision.
@@ -42,7 +53,11 @@ test('V57 Silver Tongue offers and grants every interpersonal skill without bypa
   }
   const collision = evaluate({ ...selections(), [decision.id]: 'Intimidate' });
   assert.equal(collision.status, 'invalid');
-  assert.ok(Object.values(collision.diagnostics).flat().some(row => row.code === 'duplicate-skill'));
+  assert.ok(
+    Object.values(collision.diagnostics)
+      .flat()
+      .some(row => row.code === 'duplicate-skill'),
+  );
 });
 
 // Costs and effects were read from the seven devil trait entries before evaluator execution.
@@ -57,7 +72,10 @@ test('V57 legal Devil purchases grant all traits and retain only unconditional n
     const result = evaluate({ ...selections(), 'ancestry.devil.purchased-traits': [...traits] });
     assert.equal(result.status, 'complete', JSON.stringify(result.diagnostics));
     const baseline = result.baseline!;
-    assert.deepEqual(baseline.traits.map(row => row.name).sort(), ['Silver Tongue', ...traits].sort());
+    assert.deepEqual(
+      baseline.traits.map(row => row.name).sort(),
+      ['Silver Tongue', ...traits].sort(),
+    );
     assert.equal(baseline.speed.value, speed);
     assert.equal(baseline.savingThrowThreshold.value, save);
     assert.equal(baseline.size.value, '1M');
@@ -65,10 +83,15 @@ test('V57 legal Devil purchases grant all traits and retain only unconditional n
     assert.equal(baseline.damageWeaknesses?.length ?? 0, 0); // Wings only while flying.
   }
   const overspent = evaluate({
-    ...selections(), 'ancestry.devil.purchased-traits': ['Wings', 'Prehensile Tail'],
+    ...selections(),
+    'ancestry.devil.purchased-traits': ['Wings', 'Prehensile Tail'],
   });
   assert.equal(overspent.status, 'invalid');
-  assert.ok(overspent.diagnostics['ancestry.devil.purchased-traits'].some(row => row.code === 'budget-exceeded'));
+  assert.ok(
+    overspent.diagnostics['ancestry.devil.purchased-traits'].some(
+      row => row.code === 'budget-exceeded',
+    ),
+  );
 });
 
 // Extends existing parent-pruning coverage to the newly enabled manual grants and skill branch.
@@ -81,10 +104,17 @@ test('V57 ancestry replacement removes new Devil grants and preserves unrelated 
     'ancestry.polder.purchased-traits': ['Corruption Immunity', 'Graceful Retreat'],
   };
   const pruned = pruneUnavailable(choices, definitions);
-  assert.deepEqual(pruned.removed.sort(), ['ancestry.devil.purchased-traits', 'ancestry.devil.silver-tongue-skill']);
+  assert.deepEqual(pruned.removed.sort(), [
+    'ancestry.devil.purchased-traits',
+    'ancestry.devil.silver-tongue-skill',
+  ]);
   assert.equal(pruned.selections['kit.choice'], 'Mountain');
   const result = evaluate(pruned.selections);
   assert.equal(result.status, 'complete', JSON.stringify(result.diagnostics));
-  assert.ok(!result.baseline!.traits.some(row => ['Silver Tongue', 'Wings', 'Barbed Tail'].includes(row.name)));
+  assert.ok(
+    !result.baseline!.traits.some(row =>
+      ['Silver Tongue', 'Wings', 'Barbed Tail'].includes(row.name),
+    ),
+  );
   assert.ok(!result.baseline!.skills.some(row => row.name === 'Lie'));
 });

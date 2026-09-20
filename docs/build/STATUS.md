@@ -371,3 +371,9 @@ The named `character-restart` runtime was stopped after Human checks on 2026-09-
 artifacts retained. No background verification job is running. V59 evidence is merged as docs only;
 its unchanged-main browser pass does not clear V58’s failed full run. Main app needs no update for
 these documentation-only progress commits.
+
+## V62 hosted verification — 2026-09-20
+
+| Id | Unit | Implementation | Verification / next action |
+| --- | --- | --- | --- |
+| V62 | [Hosted ancestry verification](V62-hosted-ancestry-verification.md) | Integration in progress, `slice/V62` | User-authorized hosted publication and actual-game tests of all four ancestry candidates; preserve data; cloud dev `different-bat-943` and Worker `salient-dev` |

@@ -11,8 +11,8 @@
     "version": "1.0.3"
   },
   "generatedAt": "2026-09-08",
-  "contentHash": "sha256:060792377ef6001b06644e92d51f03f2a9ab373f99f625d6ddb5712da6fcbbcc",
-  "entryCount": 491,
+  "contentHash": "sha256:3a48768ee32934eef167337434c83a16e8a71b65ac160dc8c7994565bc00f7e3",
+  "entryCount": 499,
   "selections": [
     {
       "id": "supporting-character-choices",
@@ -74,6 +74,14 @@
       "paths": [
         "ancestry/dwarf.md",
         "feature/trait/dwarf"
+      ]
+    },
+    {
+      "id": "human-ancestry",
+      "description": "Human ancestry and complete level-one traits for V61.",
+      "paths": [
+        "ancestry/human.md",
+        "feature/trait/human"
       ]
     },
     {
@@ -601,6 +609,14 @@
       "name": "Dwarf",
       "sourcePath": "vendor/steel-compendium/en/unified/md/ancestry/dwarf.md",
       "selection": "dwarf-ancestry",
+      "file": "ancestry.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/ancestry/human",
+      "kind": "ancestry",
+      "name": "Human",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/ancestry/human.md",
+      "selection": "human-ancestry",
       "file": "ancestry.json"
     },
     {
@@ -4025,6 +4041,62 @@
       "name": "Stone Singer",
       "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/dwarf/stone-singer.md",
       "selection": "dwarf-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.human/cant-take-hold",
+      "kind": "trait",
+      "name": "Can't Take Hold",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/human/cant-take-hold.md",
+      "selection": "human-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.human/detect-the-supernatural",
+      "kind": "trait",
+      "name": "Signature Trait: Detect the Supernatural",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/human/detect-the-supernatural.md",
+      "selection": "human-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.human/determination",
+      "kind": "trait",
+      "name": "Determination",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/human/determination.md",
+      "selection": "human-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.human/human-traits",
+      "kind": "trait",
+      "name": "Human Traits",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/human/human-traits.md",
+      "selection": "human-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.human/perseverance",
+      "kind": "trait",
+      "name": "Perseverance",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/human/perseverance.md",
+      "selection": "human-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.human/resist-the-unnatural",
+      "kind": "trait",
+      "name": "Resist the Unnatural",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/human/resist-the-unnatural.md",
+      "selection": "human-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.human/staying-power",
+      "kind": "trait",
+      "name": "Staying Power",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/human/staying-power.md",
+      "selection": "human-ancestry",
       "file": "trait.json"
     },
     {
