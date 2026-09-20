@@ -20,7 +20,9 @@ Only shared-file edits, use of a shared runtime slot, and merges are serialized.
 continues while another unit waits for review or runtime verification. A failed merge gate blocks
 that merge, not unrelated coding. The initial two-unit limit was expanded by the user on 2026-09-20: keep Devil/Polder in the
 verification queue, assign a subagent the closeout blocker, and implement two further ancestries
-(Dwarf/Human) concurrently. Finish this bounded batch before adding more units. Failed required
+(Dwarf/Human) concurrently. The initial batch now has passing remote headless proof. On 2026-09-20 the user authorized
+current-main integration and the next pair, Hakaan (V70) and Orc (V71); reference acceptance remains
+explicitly separate. Finish this bounded pair before adding more units. Failed required
 verification still blocks its merge; it must not block independent development.
 
 ## Unit contract

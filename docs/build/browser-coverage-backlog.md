@@ -26,3 +26,4 @@ Rules:
 | 2026-09-20 | V45 | Two password-recovery scenarios and the Workers immutable-cache scenario skipped (fixtures absent) | `password-recovery.spec.ts`, `reference-cache.spec.ts` | later | V39 backend tests | |
 | 2026-09-20 | V63 | Consecutive correction controls stay visible; Undo/Redo and Director/manual boundaries display correctly | `tests/browser/v26-baseline.spec.ts` | spot | [CLI lifecycle and pre-pause checks](evidence/V26/corrections-2026-09-20/README.md) | |
 | 2026-09-20 | V26/V63 | Ten-ability source dialogs, log cards and reloaded table display remain readable through proper-turn navigation | `tests/browser/v26-baseline.spec.ts` | spot | [Correction CLI proof](evidence/V26/corrections-2026-09-20/v63-headless-readback.json); broader arithmetic in existing app suites | |
+| 2026-09-20 | V70/V71 | Hakaan/Orc choice labels, conditional Artisan selector and trait source dialogs display correctly | new | later | V69 authenticated character runner | |

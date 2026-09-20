@@ -105,14 +105,16 @@ See [the release evidence](build/evidence/V43/hosted/README.md) for browser resu
 fixture limitations and deployment logs. Earlier Worker versions in slice records are historical.
 
 
-## Character verification backend — 2026-09-20
+## Current character candidate — 2026-09-20
 
-The hosted frontend was subsequently published from V62 `1e7896c`, Worker
-`b9cc5ebb-54a1-4176-bc05-d99051b3cf1e`, with Devil/Polder/Dwarf/Human candidates.
-V65 backend `b1f50c8` adds authenticated wizard discovery/choice transitions and fixes rate limiting
-of public auth signing-key discovery on the same cloud development target. Backend type/schema
-checks passed; content and accounts were not reset. Both recorded verification blockers are fixed:
-all 22 remote headless scenarios and the normal application build pass. The frontend remains V62;
-the backend repair did not require frontend publication. See [V65 evidence](build/V65-character-headless.md#authorized-blocker-repair--2026-09-20).
-The candidate is pushed on `slice/V65` at `acc3df1`, not merged into main. Character work is
-checkpointed at the user's request; no browser tests were run under the current moratorium.
+V69 source `ab0f2fd875155d929f5efed201b14d96a821f4f7` is published to both backend and frontend,
+Worker `7830be2c-15d9-4c6f-8634-25c0edf55988`. Its 515-entry content includes Hakaan and Orc
+alongside the four previous ancestry candidates. Normal backend type/schema checks, the full
+737-test repository check, hosted build, and all 26 authenticated headless scenarios pass.
+No browser test ran; play data was retained. Temporary deployment credentials were removed.
+
+The candidate includes V65 discovery/transition and public auth-key discovery fix, plus main's
+V63 history corrections. It remains on `slice/V69`, not merged into main: authentic Forge
+counterparts are the recorded acceptance blocker. See [V69 evidence](build/evidence/V69/README.md)
+and the [current handoff](build/character-restart-handoff.md). Earlier V62/V65 source and Worker
+identities in their evidence records are historical.
