@@ -33,7 +33,9 @@ Mechanical claims, each cited to those files:
 - Doctrine triggered action (`doctrine-triggered-action.md`): Advanced Tactics / Overwatch / Parry,
   each free of base cost with an optional Spend 1 Focus effect.
 - Focus (`focus.md`): heroic resource named focus; starting value 0 at creation; outside combat
-  abilities that cost focus are used without spending it, once per Victory or respite.
+  an ability or effect that costs focus is used without spending it, and that same ability or
+  effect is then locked outside combat until the hero earns 1 or more Victories or finishes a
+  respite (wording confirmed by WIZARD.2, message 1185).
 - Mark (`mark.md` + `feature/ability/.../mark.md`) and "Strike Now!" (`strike-now.md`): class
   abilities granted to every Tactician (maneuver; main action with Spend 5 Focus).
 - Tactician Abilities (`tactician-abilities.md`, `5-focus-ability.md`): one 3-Focus (Battle Cry,
@@ -67,8 +69,8 @@ Design (decision ids are stable once merged):
 | `class.tactician.doctrine-skill` | single, `dependsOn` doctrine, `optionsByParent` Insurgent → intrigue, Mastermind → lore, Vanguard → interpersonal | the doctrine's granted skill |
 | `class.tactician.ability-3`, `class.tactician.ability-5` | single | options carry `abilityKind: 'heroic'` and `costQuote` (`cost: 3 Focus`, `cost: 5 Focus`) |
 | `kit.choice` | existing | gains a Tactician parent sourced from `field-arsenal.md` over `pool.kits.standard` |
-| `class.tactician.second-kit` | single from `pool.kits.standard`, available for Tactician | must differ from `kit.choice` (`duplicate-kit` diagnostic) |
-| `class.tactician.arsenal.<benefit>` (eight decisions) | single, options = the two chosen kits | available only when both kits grant that benefit with different values |
+| `class.tactician.second-kit` (kit step) | single from `pool.kits.standard`, available for Tactician, `dependsOn` `kit.choice` | `selectedPool` excludes the first kit, so the same kit twice is `value-not-in-pool` |
+| `class.tactician.arsenal.<benefit>` (kit step, eight decisions: `stamina`, `speed`, `stability`, `disengage`, `meleeDamage`, `rangedDamage`, `meleeDistance`, `rangedDistance`) | single, options = the two chosen kits, `overlapBenefit` | available only when both kits grant that benefit with different printed values |
 
 Class profile: `fixedCharacteristics { Might: 2, Reason: 2 }`, `potencyCharacteristic 'R'`,
 `resource 'focus'`, `kit: 'required'`, subclass decision `class.tactician.doctrine`.
@@ -132,3 +134,32 @@ and above, any other class. Spec sections: `docs/character-wizard-spec.md#3-deci
   verification (`docs/build/audits/V94-tactician-source-inventory.md`), the independent expected
   values, Forge witnesses (`scripts/forge/tactician-witnesses.ts`) and the rules review; the lead owns
   the shared changes, the content module, tests and integration handoff. TESTER runs the check.
+- 2026-09-20: WIZARD.2 committed the source inventory (`docs/build/audits/V94-tactician-source-inventory.md`),
+  the four-witness ledger and the Forge adapter (`4a07162`; commands and expected Forge differences in
+  `docs/build/audits/V94-forge-witnesses.md`). Corrections taken from the inventory: the Focus
+  outside-combat wording (above); Studied Commander's respite Reason test and Mark's 1-Focus free
+  triggered benefits and free retarget are embedded actions, delivered as verbatim text inside their
+  granted entries and recorded here as trait-granted-action residue (no respite or mark route in
+  V94; respite is V01); signature replacement records cover distance as well as damage.
+- 2026-09-20: built. Commits on `slice/V94`: `90051c5` shared evaluator (second kit, arsenal merge,
+  `overlapBenefit` availability, both kit signatures with `kitBonusReplacements`, focus resource,
+  sheet note on the ability card), `6f08c63` content module, registration, labels, ingest selection
+  and regenerated Compendium content, `aab1ff0` tests and headless journey, `d8a8ae3` regenerated
+  V64/V72 reports (13 Tactician entries added; Concussive Strike compiles and joins the reachable
+  inventory with a persisted proof in `tests/app/potency-conditions.test.ts`). Authoring checks run
+  locally: tsc (root and web), eslint and prettier over the tree, `vitest run
+  tests/character-v94-tactician.test.ts` 5/5, `vitest run --project app tests/app/tactician-character.test.ts
+  tests/app/potency-conditions.test.ts` 9/9, every `tests/character-*.test.ts` file 112/112, the
+  two report tests 25/25. All four ledger witnesses match the evaluator field by field on the first
+  evaluation, including the resolved arsenal, both kits' printed bonuses and the replacement records.
+- Decisions and interpretations: equal printed values on an overlapping benefit are taken once with
+  no choice offered (interpretation; the source says "one or the other" and the values are the
+  same; provenance cites both kits and the Field Arsenal sentence with the note). Replacement records
+  are emitted only for benefits both kits grant where the signature's kit lost the choice (the
+  source's Battle Grace example); a benefit only the other kit grants is not added to a signature
+  that prints none of it (interpretation; alternative: apply the other kit's bonus to every weapon
+  signature; left for the rules review). `baseline.kit.name` is "First and Second" for a two-kit
+  hero; `baseline.kits[0]` is `kit.choice`. The kit-signature `kitBonusesIncluded` flag stays true,
+  so rolls do not apply replacements: engine-track residue, visible on the sheet as a manual
+  adjustment. A Devil Tactician's speed and stability still read the first kit only
+  (`applyDevilMovement` predates the arsenal); no Devil witness exists, recorded for the ancestry track.
