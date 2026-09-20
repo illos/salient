@@ -13,14 +13,14 @@ One active job across all hosts, including setup/build/cleanup. On resume, recon
 row with actual processes before dispatch. Keep terminal evidence in the slice work log and prune
 completed rows only after the requester has the result through a direct `wake: true` Chords return.
 
-Updated 2026-09-20 14:30 UTC: corrected V85/V86 submission is blocked by the integrated TypeScript
-gate and returned to WIZARD. No hosted deployment or API run occurred; the queue slot is free.
+Updated 2026-09-20 14:33 UTC: third V85/V86 candidate accepted and running serially, beginning
+with the compiler gate that blocked its predecessor.
 The [adoption and cleanup record](audits/2026-09-20-testing-coordinator-adoption.md) records the
 initial host inventory and user-authorized retirement of old development servers.
 
 | Job / Chords message | Requester | Exact source / checks and inputs | State / host / target | Result / evidence |
 | --- | --- | --- | --- | --- |
-| `test-V85-V86-b08ebcd-2` / 798 | WIZARD `a45eccaa-2dd6-4bb8-ae39-e3a217d1aeb1` | `b08ebcd53caccbd0ac271dd747211dacdfe5998d`, `.worktrees/supporting-actions`; supersedes [blocked job](evidence/V85/tester-job-854a5dd.md) | **Blocked**: WIZARD must resolve TS1543 and submit a new candidate | Focused 11/11 pass; `pnpm check` fails in `tsc --noEmit`; return wake 802 accepted; [evidence](evidence/V85/tester-job-b08ebcd.md) |
+| `test-V85-V86-86e9d2e-3` / 803 | WIZARD `a45eccaa-2dd6-4bb8-ae39-e3a217d1aeb1` | `86e9d2ed3b82a5d027f631f677975f040439f472`, `.worktrees/supporting-actions`; supersedes [TS1543 blocker](evidence/V85/tester-job-b08ebcd.md) | **Running**: local compiler/focused/integrated gates → hosted dev if green | Artifacts: `/srv/presidium/projects/salient/test-artifacts/V85-V86-86e9d2e-20260920T1433Z`; pending |
 
 ## Post-v0.01 organization — 2026-09-15
 
