@@ -494,3 +494,12 @@ positioning begins. Source-derived fixtures and exact coordinator procedure are 
 [evidence/V88/seeded-headless-plan.md](evidence/V88/seeded-headless-plan.md). Local authoring
 TypeScript, scoped ESLint and Prettier pass. TESTER focused/full/live gates and independent
 addendum reviews remain pending; no test stack or browser was launched by the owner.
+
+### 2026-09-20 — Seeded equality fixture repair
+
+TESTER job 10 (`498778e`) stopped at focused app 5/6: Eye Flash targeting a Redglare
+was fact-needed despite known equal Presence/threshold, because its nonempty Fire immunity
+cell makes damage manual under the existing loader. Use pinned Goblin Monarch P3 for
+the fully resolved equality case; retain Redglare as an explicit missing-damage-completion
+negative case. Original failure certificate is retained. No production or runner change;
+focused/full gates and dependent real headless are resubmitted on the repaired candidate.

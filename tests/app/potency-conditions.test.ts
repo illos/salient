@@ -301,7 +301,7 @@ const seededPotencyCases = [
     name: 'Eye Flash',
     actor: 'hobgoblin/hobgoblin-redglare',
     weak: 'dwarf/dwarf-warden',
-    strong: 'hobgoblin/hobgoblin-redglare',
+    strong: 'goblin/goblin-monarch',
     characteristic: 'P',
     weakScore: 0,
     strongScore: 3,
@@ -564,5 +564,26 @@ test.each(seededPotencyCases)(
     expect(await active(strong)).toEqual([]);
     expect(await registrations(strong)).toEqual([]);
     expect((await t.run(ctx => ctx.db.get(f.campaignId)))!.malice).toBe(5);
+    if (spec.name === 'Eye Flash') {
+      // Printed nonempty immunity cells still need manual damage facts, even for another type.
+      // Preserve the original Redglare boundary instead of treating known P3 as sufficient.
+      const manualTarget = await add(spec.actor);
+      const manualBefore = await live(manualTarget);
+      await position(t, f.campaignId, [8, 8]);
+      const manualUse = await command(
+        `${actorRef} /ability use ability="${spec.name}" targets=[@{foe:${manualTarget}}]`,
+      );
+      const manual = conditions((await read(manualUse.eventId)).compiled as PublicCompiledResult);
+      expect(manual).toHaveLength(1);
+      expect(manual[0]!.effect).toMatchObject({
+        status: 'fact-needed',
+        threshold: 3,
+        targetScore: 3,
+        requirements: [expect.stringMatching(/^damage:.*\.completion$/)],
+      });
+      expect((await live(manualTarget)).stamina).toBe(manualBefore.stamina);
+      expect(await active(manualTarget)).toEqual([]);
+      expect(await registrations(manualTarget)).toEqual([]);
+    }
   },
 );
