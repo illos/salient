@@ -56,7 +56,7 @@ zeroes everything.
 Contrast (sRGB relative luminance, text pairs): `ink` on `card` 12.6:1 dark / 13.8:1 light;
 `muted` on `card` 4.8:1 dark / 4.6:1 light; `muted` on `bg` 5.3:1 dark / 4.1:1 light; `muted`
 on `sub` 4.3:1 dark / 3.8:1 light; white on `accent` 6.3:1; `accent` as text on the dark
-surfaces 2.2–2.9:1 (cost pills, Malice, "Acting"; the same tone Classic used) and 5.5:1 on the
+surfaces 2.2–2.9:1 (cost pills, Malice, "Acting"; the same tone Classic used) and 5.8:1 on the
 light ground. The `muted`-on-`sub` and light `muted`-on-`bg` pairs sit below the spec's own
 4.5:1 line; the values are the user's and are recorded, not adjusted. Focus: `--ring` is accent
 in light and ink (`#d2cfc9`, chosen) in dark, where accent would sit near 2.5:1. These are spot

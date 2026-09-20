@@ -221,3 +221,21 @@ removed; the light `muted`-on-`bg` figure corrected to 4.07:1 and accent-as-text
 contrast notes; the login heading level change recorded as the second exception; a backlog note
 that the hero portrait row now carries a `progressbar` per hero. Deferred: `bg-sub`/`bg-ph`/
 `border-line` aliases stay (documented vocabulary).
+
+### 2026-09-20 — review round 2: pass; branch handoff
+
+Round 2 on `7cd4313`: **pass**. Every round-1 finding reproduced as fixed; Tailwind 4.3.3
+confirmed to register the `in-*` variant the reticle uses; contrast figures recomputed and
+agree (light accent-as-text corrected to 5.8:1 here). Second full `CI=true pnpm check` on the
+fixed tree: exit 0 in 237 s, 310 engine and 481 app/scripts tests, build CSS 75.69 kB
+(15.20 kB gzip). Reviewer trailer `Reviewed-By: v75_implementation_review (pass, 2026-09-20)`
+added to the slice commits; `node scripts/check-commit.ts --merge --range main..slice/V75`
+passes.
+
+**Handoff, not a merge.** `slice/V75` in `code/.worktrees/quiet-theme` is rebased onto main
+`589d357` and clean. Nothing has been merged or deployed; the shared playable app still serves
+Classic. The user asked for a clean base so the design can be reverted: reverting is either not
+merging this branch or reverting its commits as a unit after a merge. Suggested next step: the
+user views the theme (an isolated CT114 environment from this worktree, or a merge under the
+standing directive when they ask for it), then decides. Preview URL work needs the CT114 heavy
+window and is not started here. Browser spot checks stay in the backlog under the moratorium.
