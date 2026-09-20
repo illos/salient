@@ -34,6 +34,7 @@ export function SlashButton({
   disabled,
   variant = 'outline',
   title,
+  className,
 }: {
   campaignId: Id<'campaigns'>;
   text: string;
@@ -41,6 +42,8 @@ export function SlashButton({
   disabled?: boolean;
   variant?: 'outline' | 'ghost' | 'default';
   title?: string;
+  /** Presentation only: `bg-placeholder` when the button sits inside a `sub` inset. */
+  className?: string;
 }) {
   const submit = useMutation(api.commands.submit);
   const command = useCommand();
@@ -50,6 +53,7 @@ export function SlashButton({
         type="button"
         variant={variant}
         size="sm"
+        className={className}
         disabled={disabled || command.pending}
         title={title ?? text}
         onClick={() =>
@@ -76,6 +80,7 @@ export function AdjustControl({
   label,
   current,
   disabled,
+  inset,
 }: {
   campaignId: Id<'campaigns'>;
   characterId: string;
@@ -83,6 +88,8 @@ export function AdjustControl({
   label: string;
   current: number;
   disabled?: boolean;
+  /** Presentation only: the control sits inside a `sub` inset, so its input steps up to `ph`. */
+  inset?: boolean;
 }) {
   const submit = useMutation(api.commands.submit);
   const command = useCommand();
@@ -121,7 +128,7 @@ export function AdjustControl({
       <span className="flex items-center gap-1">
         <Input
           aria-label={`New ${label}`}
-          className="h-7 w-20"
+          className={cn('h-8 w-20', inset && 'bg-placeholder')}
           inputMode="numeric"
           value={value}
           onChange={event => setValue(event.target.value)}
@@ -140,8 +147,9 @@ export function AdjustControl({
 
 /**
  * One labeled on/off toggle per core condition, each a `/condition on|off` submission, styled as
- * the mockup's chips (filled when active). The native checkbox keeps its label for tests and
- * assistive technology; the chip is its visible form.
+ * 999px pills (docs/design-mockups/quiet/README.md, conditions): idle `sub`, hover `ph`, the
+ * selected condition filled accent. The native checkbox keeps its label for tests and assistive
+ * technology; the pill is its visible form.
  */
 export function ConditionToggles({
   campaignId,
@@ -160,9 +168,9 @@ export function ConditionToggles({
   const command = useCommand();
   const disabled = !canToggle || !campaignId || command.pending;
   return (
-    <div className="flex flex-col gap-2">
-      {reason && <p className="m-0 text-xs text-muted-foreground">{reason}</p>}
-      <ul className="m-0 flex list-none flex-wrap gap-1.5 p-0" aria-label="Condition toggles">
+    <div className="flex flex-col gap-3">
+      {reason && <p className="m-0 text-sm text-muted-foreground">{reason}</p>}
+      <ul className="m-0 flex list-none flex-wrap gap-2 p-0" aria-label="Condition toggles">
         {CONDITIONS.map(condition => {
           const on = conditions[condition.id] ?? false;
           const text = `${actorRef(characterId)} /condition ${on ? 'off' : 'on'} name=${condition.id}`;
@@ -170,11 +178,11 @@ export function ConditionToggles({
             <li key={condition.id} className="inline-flex items-center">
               <label
                 className={cn(
-                  'caps inline-flex h-6 cursor-pointer items-center rounded-(--chip-radius) border-(length:--chip-border) px-1.5 transition-colors has-focus-visible:ring-3 has-focus-visible:ring-ring/50',
+                  'inline-flex h-8 cursor-pointer items-center rounded-full px-3 text-sm transition-colors duration-(--motion-fast) has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-ring',
                   on
-                    ? 'border-foreground bg-foreground text-background'
-                    : 'border-input text-foreground hover:bg-muted',
-                  disabled && 'cursor-default opacity-60',
+                    ? 'bg-primary text-primary-foreground'
+                    : 'bg-muted text-foreground hover:bg-accent',
+                  disabled && 'cursor-default opacity-40',
                 )}
                 title={canToggle ? text : undefined}
               >
@@ -203,7 +211,7 @@ export function ConditionToggles({
   );
 }
 
-/** Active conditions as ink-filled chips; shown in the header so they survive body scrolling. */
+/** Active conditions as tonal ink chips; shown in the header so they survive body scrolling. */
 export function ActiveConditionBadges({
   conditions,
   instances,
@@ -235,19 +243,23 @@ export function CatchBreathButton({
   campaignId,
   characterId,
   disabled,
+  className,
 }: {
   campaignId: Id<'campaigns'>;
   characterId: string;
   disabled: boolean;
+  /** Presentation only: the 44px full-width `sub` button of the Stamina panel. */
+  className?: string;
 }) {
   const invoke = useMutation(api.commands.invoke);
   const command = useCommand();
   return (
-    <span className="inline-flex flex-col">
+    <span className="flex flex-col">
       <Button
         type="button"
         size="sm"
         variant="outline"
+        className={className}
         disabled={disabled || command.pending}
         onClick={() =>
           void command.run(

@@ -18,7 +18,7 @@ const url =
 const root = createRoot(document.getElementById('root')!);
 if (!url && !/^\/(?:rules|foes)(?:\/|$)/.test(window.location.pathname)) {
   root.render(
-    <main className="flex min-h-screen flex-col items-center justify-center gap-3 bg-card p-16 text-center">
+    <main className="flex min-h-screen flex-col items-center justify-center gap-3 bg-background p-16 text-center">
       <h1>Salient</h1>
       <p>Connect a development backend to open your table.</p>
       <p className="text-muted-foreground">

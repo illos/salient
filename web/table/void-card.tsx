@@ -4,7 +4,6 @@ import { useMutation } from 'convex/react';
 import { api } from '../../convex/_generated/api';
 import type { Id } from '../../convex/_generated/dataModel';
 import { Button } from '../components/ui/button';
-import { Card, CardContent } from '../components/ui/card';
 import { SectionHeading, useCommand } from '../ui';
 
 export function VoidCard({
@@ -51,12 +50,12 @@ export function VoidCard({
       });
   };
   return (
-    <Card>
-      <CardContent className="flex flex-col gap-3">
+    <div className="rounded-md bg-muted p-5">
+      <div className="flex flex-col gap-3">
         <SectionHeading className="mb-0">
           {session ? 'End session · Void active combat' : 'Void combat'}
         </SectionHeading>
-        <p className="text-sm">
+        <p className="text-base">
           Choose the state to keep before archiving this encounter. Void skips rewards and normal
           cleanup.
         </p>
@@ -80,7 +79,7 @@ export function VoidCard({
             Cancel
           </Button>
         </div>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 }

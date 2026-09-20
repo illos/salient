@@ -88,7 +88,7 @@ type LoadedCharacter = FunctionReturnType<typeof api.characters.get>;
 function Diagnostics({ list }: { list: Diagnostic[] | undefined }) {
   if (!list?.length) return null;
   return (
-    <ul className="m-0 list-none p-0 text-xs">
+    <ul className="m-0 list-none p-0 text-sm">
       {list.map((d, i) => (
         <li
           key={i}
@@ -362,7 +362,7 @@ export function DecisionEditor({
     control = (
       <div className="flex flex-col gap-1.5">
         {pool.parent && (
-          <span className="text-xs text-muted-foreground">
+          <span className="text-sm text-muted-foreground">
             {pool.parentValue}
             <RuleLink sourcePath={pool.parent.source} label={pool.parentValue ?? 'Culture skill'} />
           </span>
@@ -379,7 +379,7 @@ export function DecisionEditor({
             <RuleLink sourcePath={decision.optionSources[value]} label={value} />
           )}
         </div>
-        <span className="text-xs text-muted-foreground">{pool.values.length} options</span>
+        <span className="text-sm text-muted-foreground">{pool.values.length} options</span>
       </div>
     );
   } else if (shape.type === 'multi') {
@@ -413,7 +413,7 @@ export function DecisionEditor({
             }}
           />
         ))}
-        <span className="text-xs text-muted-foreground">
+        <span className="text-sm text-muted-foreground">
           {shape.count} slots{shape.deferrable ? '; a slot may stay open' : ''} ·{' '}
           {pool.values.length} options
         </span>
@@ -456,7 +456,7 @@ export function DecisionEditor({
               />
             ))}
         </ChoiceList>
-        <span className="text-xs text-muted-foreground">
+        <span className="text-sm text-muted-foreground">
           {total} of {shape.budget} points spent
           {decision.exactBudget ? ' · spend exactly this budget' : ''}
           {decision.supportedSetInV001
@@ -608,7 +608,7 @@ function AssignmentEditor({
         or choose it by name.
       </p>
       <div className="flex items-center gap-3">
-        <span className="caps text-muted-foreground">Remaining values</span>
+        <span className="text-sm text-muted-foreground">Remaining values</span>
         <div aria-label="Remaining characteristic values" className="flex gap-2">
           {remaining.map((amount, index) => (
             <span
@@ -619,7 +619,7 @@ function AssignmentEditor({
                 event.dataTransfer.setData('application/json', JSON.stringify({ value: amount }))
               }
               data-testid={`array-value-${index}`}
-              className="inline-flex size-9 cursor-grab items-center justify-center rounded-md border border-rule-strong bg-background text-base font-bold tabular-nums shadow-hard"
+              className="inline-flex size-10 cursor-grab items-center justify-center rounded-md bg-muted text-base font-medium tabular-nums transition-colors duration-(--motion-fast) hover:bg-accent"
             >
               {amount}
             </span>
@@ -637,15 +637,15 @@ function AssignmentEditor({
             aria-label={`${target} (fixed)`}
             className="flex flex-col items-center gap-1"
           >
-            <StatBox compact emphasis value={score} label={target.slice(0, 3)} />
-            <span className="caps text-muted-foreground">Fixed</span>
+            <StatBox compact inset emphasis value={score} label={target.slice(0, 3)} />
+            <span className="text-sm text-muted-foreground">Fixed</span>
           </span>
         ))}
         {targets.map(target => (
           <label
             key={target}
             data-testid={`assignment-${target}`}
-            className={`flex flex-col items-center gap-1 rounded-md border border-dashed px-3 py-2 text-sm ${current[target] === undefined ? 'border-input' : 'border-rule-strong bg-muted'}`}
+            className="flex flex-col items-center gap-1 rounded-md bg-muted px-3 py-2 text-sm"
             onDragOver={event => event.preventDefault()}
             onDrop={event => {
               event.preventDefault();
@@ -662,7 +662,11 @@ function AssignmentEditor({
           >
             <span
               draggable={current[target] !== undefined}
-              className="caps text-muted-foreground"
+              className={
+                current[target] === undefined
+                  ? 'text-sm text-muted-foreground'
+                  : 'text-sm font-medium text-foreground'
+              }
               onDragStart={event =>
                 event.dataTransfer.setData(
                   'application/json',
@@ -928,8 +932,8 @@ function Wizard({ character }: { character: WizardCharacter }) {
         onSaveDraft={() => void persist(false)}
         onExit={() => void exit()}
       />
-      <div className="grid min-h-0 grid-cols-[280px_minmax(0,1fr)_330px]">
-        <div className="min-h-0 border-r border-rule-strong">
+      <div className="grid min-h-0 grid-cols-[280px_minmax(0,1fr)_330px] gap-(--page-gap) px-(--page-gap) pb-(--page-gap)">
+        <div className="min-h-0">
           <StepRail
             steps={railSteps}
             currentIndex={stepIndex}
@@ -937,8 +941,8 @@ function Wizard({ character }: { character: WizardCharacter }) {
             onSelect={goTo}
           />
         </div>
-        <section className="flex min-h-0 flex-col" aria-label="Current step">
-          <div className="min-h-0 flex-1 overflow-y-auto px-10 pt-8 pb-8" data-wizard-pane="centre">
+        <section className="flex min-h-0 flex-col rounded-lg bg-card" aria-label="Current step">
+          <div className="min-h-0 flex-1 overflow-y-auto p-6" data-wizard-pane="centre">
             {!character.id && (
               <Notice className="mb-4">
                 Unsaved character. Save draft to keep your choices. Exiting or reloading before
@@ -946,7 +950,7 @@ function Wizard({ character }: { character: WizardCharacter }) {
               </Notice>
             )}
             {nameRequired && (
-              <p role="alert" className="mb-4 text-sm text-destructive">
+              <p role="alert" className="mb-4 text-base text-destructive">
                 Enter a name in Details before saving your character.
               </p>
             )}
@@ -959,6 +963,7 @@ function Wizard({ character }: { character: WizardCharacter }) {
                     type="checkbox"
                     checked={reconciled}
                     onChange={event => setReconciled(event.target.checked)}
+                    className="size-[18px] shrink-0 cursor-pointer appearance-none rounded-[5px] bg-placeholder transition-colors duration-(--motion-fast) outline-none checked:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
                   />
                   I reviewed this draft against the current effective build.
                 </label>
@@ -973,7 +978,7 @@ function Wizard({ character }: { character: WizardCharacter }) {
               <Notice className="mb-4">Character editing is locked during combat.</Notice>
             )}
             {saved && (
-              <p role="status" className="mb-4 text-sm text-success">
+              <p role="status" className="mb-4 text-base text-success">
                 Draft saved (revision {expectedRevision}).
               </p>
             )}
@@ -989,7 +994,7 @@ function Wizard({ character }: { character: WizardCharacter }) {
               optional={step.optional}
             />
             {step.id === 'step.kit' && evaluation?.partial?.kit === null && (
-              <p className="text-sm text-muted-foreground">
+              <p className="text-base text-muted-foreground">
                 This build has no kit. Its class features supply its starting statistics and
                 abilities.
               </p>
@@ -1059,7 +1064,7 @@ function Wizard({ character }: { character: WizardCharacter }) {
             onFinish={() => void persist(true)}
           />
         </section>
-        <div className="min-h-0 border-l border-rule-strong">
+        <div className="min-h-0">
           <HeroSoFar
             evaluation={evaluation}
             heroName={authored.name}

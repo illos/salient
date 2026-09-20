@@ -47,7 +47,7 @@
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 0.5rem 1rem;
-  background: linear-gradient(var(--accent), var(--background));
+  background: linear-gradient(var(--accent), var(--card));
   border-top: 3px solid var(--primary);
   border-bottom: 1px solid var(--rule-strong);
   padding: 0.75rem 0.5rem;
@@ -145,7 +145,7 @@
   width: 9px;
   height: 9px;
   transform: rotate(45deg);
-  background: var(--background);
+  background: var(--card);
   border-right: 1px solid var(--rule-strong);
   border-bottom: 1px solid var(--rule-strong);
 }

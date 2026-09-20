@@ -80,7 +80,7 @@ export function PlayersSection({
             <span className="flex items-center gap-4">
               <Button
                 variant="link"
-                className="caps text-muted-foreground"
+                className="text-sm text-muted-foreground"
                 onClick={() => onManage('requests')}
                 data-testid="join-request-count"
               >
@@ -91,14 +91,14 @@ export function PlayersSection({
               </Button>
               <Button
                 variant="link"
-                className="caps text-foreground"
+                className="text-sm text-foreground"
                 onClick={() => onManage('admissions')}
               >
                 Manage players
               </Button>
             </span>
           ) : (
-            <Link to="/characters" className="normal-case tracking-normal">
+            <Link to="/characters" className="text-sm">
               Your characters →
             </Link>
           )
@@ -106,7 +106,7 @@ export function PlayersSection({
       >
         <span className="flex items-baseline gap-3">
           <span id="players-heading">Players</span>
-          <span className="eyebrow mb-0">
+          <span className="text-sm text-muted-foreground">
             {members.length} {members.length === 1 ? 'member' : 'members'} · {heroes}{' '}
             {heroes === 1 ? 'character' : 'characters'}
           </span>
@@ -122,17 +122,14 @@ export function PlayersSection({
               key={m.userId}
               data-testid="member-card"
               data-online={connected ? 'true' : 'false'}
-              className={cn(
-                'flex min-h-48 flex-col gap-3 rounded-md border p-4',
-                own ? 'border-rule-strong bg-muted' : 'border-input bg-background',
-              )}
+              className="flex min-h-48 flex-col gap-3 rounded-lg bg-card p-5"
             >
-              <div className="rule-soft flex items-start gap-3 pb-3">
+              <div className="flex items-start gap-3">
                 <span aria-hidden>
                   <Disc name={m.displayName} variant={own ? 'ink' : 'grey'} />
                 </span>
                 <span className="flex min-w-0 flex-1 flex-col gap-1">
-                  <span className="truncate text-sm font-bold">{m.displayName}</span>
+                  <span className="truncate text-base font-medium">{m.displayName}</span>
                   <span className="flex flex-wrap gap-1">
                     {owner && <Badge variant="outline">Owner</Badge>}
                     {/* The owner is the Director until delegation exists (access spec). */}
@@ -150,7 +147,7 @@ export function PlayersSection({
                 />
               </div>
               {m.heroes.length === 0 ? (
-                <p className="m-0 text-xs text-muted-foreground">No characters yet.</p>
+                <p className="m-0 text-sm text-muted-foreground">No characters yet.</p>
               ) : (
                 <ul className="m-0 flex list-none flex-col gap-2 p-0">
                   {m.heroes.map(hero => (
@@ -158,18 +155,20 @@ export function PlayersSection({
                       <Link
                         to="/characters/$characterId"
                         params={{ characterId: hero.id }}
-                        className="flex h-10 items-center gap-2 rounded-md border border-input bg-card px-2 text-sm transition-colors duration-(--motion-fast) hover:bg-accent hover:no-underline"
+                        className="flex h-10 items-center gap-2 rounded-md bg-muted px-2.5 text-sm transition-colors duration-(--motion-fast) hover:bg-accent hover:no-underline"
                       >
-                        <span aria-hidden className="size-5 shrink-0 rounded-sm bg-placeholder" />
-                        <span className="min-w-0 flex-1 truncate font-semibold">{hero.name}</span>
-                        <span className="caps text-muted-foreground">LV {hero.level}</span>
+                        <span aria-hidden className="size-5 shrink-0 rounded-full bg-placeholder" />
+                        <span className="min-w-0 flex-1 truncate font-medium">{hero.name}</span>
+                        <span className="text-sm text-muted-foreground tabular-nums">
+                          LV {hero.level}
+                        </span>
                       </Link>
                     </li>
                   ))}
                 </ul>
               )}
               {own && ownPending.length > 0 && (
-                <p className="m-0 text-xs text-muted-foreground" data-testid="own-submissions">
+                <p className="m-0 text-sm text-muted-foreground" data-testid="own-submissions">
                   Awaiting Director review: {ownPending.map(r => r.characterName).join(', ')}
                 </p>
               )}

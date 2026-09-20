@@ -1,8 +1,9 @@
 // SPDX-License-Identifier: GPL-3.0-only
 /**
- * The wizard header (character-wizard-class.png; V21 item 10): wordmark, thin rule, the caps
- * NEW HERO / EDIT HERO context, the hero name in grey, SAVE DRAFT and EXIT at the right, then the
- * user menu. It replaces the site nav on the wizard route (web/router.tsx, `isWizardRoute`).
+ * The wizard header (V21 item 10; Quiet, docs/design-mockups/quiet/README.md): the 64px session
+ * header without a rule or divider — wordmark, the sentence-case New hero / Edit hero context in
+ * ink, the hero name in muted, Save draft (tonal) and Exit (bare) at the right, then the user
+ * menu. It replaces the site nav on the wizard route (web/router.tsx, `isWizardRoute`).
  * The buttons call back into the wizard; nothing here saves or navigates on its own.
  */
 import { Link } from '@tanstack/react-router';
@@ -29,12 +30,11 @@ export function WizardHeader({
 }) {
   const viewer = useQuery(api.auth.viewer);
   return (
-    <header className="flex h-(--session-header-height) items-center gap-5 border-b border-rule-strong bg-background px-(--pane-padding-x)">
-      <Link to="/" className="text-2xl font-bold tracking-tight hover:no-underline">
+    <header className="flex h-(--session-header-height) items-center gap-5 bg-background px-(--pane-padding-x)">
+      <Link to="/" className="text-lg font-wordmark hover:no-underline">
         Salient
       </Link>
-      <span aria-hidden className="h-7 w-px bg-rule-strong" />
-      <span className="caps text-foreground">{editing ? 'Edit hero' : 'New hero'}</span>
+      <span className="text-base text-foreground">{editing ? 'Edit hero' : 'New hero'}</span>
       <h1 className="m-0 truncate text-base font-normal text-muted-foreground">
         {heroName || 'Unnamed hero'}
       </h1>

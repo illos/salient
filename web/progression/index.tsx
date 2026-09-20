@@ -68,6 +68,9 @@ function selectionMap(items: DraftSelection[]): Selections {
   return Object.fromEntries(items.map(item => [item.decisionId, item.value as SelectionValue]));
 }
 
+/** The Quiet panel each progression section sits in; its previews are `sub` insets. */
+const PANEL = 'rounded-lg bg-card p-6';
+
 /** A preview displays recorded or proposed maxima, never current gameplay resources. */
 function BuildPreview({ evaluation, name }: { evaluation?: EvaluationResult; name: string }) {
   const baseline = evaluation?.baseline ?? evaluation?.partial;
@@ -93,7 +96,7 @@ function BuildPreview({ evaluation, name }: { evaluation?: EvaluationResult; nam
     ...(baseline?.abilities ?? []),
   ];
   return (
-    <div className="rounded-md border p-4">
+    <div className="rounded-md bg-muted p-4">
       <HeroSoFar
         evaluation={evaluation}
         heroName={name}
@@ -101,11 +104,11 @@ function BuildPreview({ evaluation, name }: { evaluation?: EvaluationResult; nam
         sourceExcerpt={readableRuleText(source.quote)}
       />
       {grants.length > 0 && (
-        <div className="mt-4 border-t pt-4">
+        <div className="mt-4 border-t border-border pt-4">
           <h3 className="text-base">Grant sources</h3>
           <ul className="mt-2 flex list-none flex-wrap gap-3 p-0">
             {grants.map((grant, i) => (
-              <li key={`${grant.name}-${i}`} className="flex items-center gap-2 text-sm">
+              <li key={`${grant.name}-${i}`} className="flex items-center gap-2 text-base">
                 <span>{grant.name}</span>
                 <RuleLink sourcePath={grant.sourcePath} label={grant.name} />
               </li>
@@ -180,13 +183,13 @@ function AdvancementEditor({
       }
     : null;
   return (
-    <section aria-label="Level advancement" className="flex flex-col gap-4">
+    <section aria-label="Level advancement" className={`${PANEL} flex flex-col gap-4`}>
       <h2>Advance Fury to level 2</h2>
-      <p className="m-0 text-sm">
+      <p className="m-0 text-base">
         Keep your earlier choices and add this level’s grants. Advancement takes place during a
         respite; this action does not heal or refill resources and needs no Director approval.
       </p>
-      <p className="m-0 text-sm">
+      <p className="m-0 text-base">
         Campaign XP: {progression.xp}; entry-level credit: {progression.entryLevelXpOffset}. Level 2
         requires {progression.requiredXp} cumulative XP.
       </p>
@@ -196,7 +199,7 @@ function AdvancementEditor({
         <Notice role="status">
           The character or advancement draft changed. Your local choices are still shown. Reload the
           latest build before saving or advancing.
-          <Button variant="outline" className="ml-3" onClick={reload}>
+          <Button variant="outline" className="ml-3 bg-placeholder" onClick={reload}>
             Reload latest build
           </Button>
         </Notice>
@@ -262,7 +265,7 @@ function AdvancementEditor({
             >
               Save advancement draft
             </Button>
-            <label className="flex items-start gap-2 text-sm">
+            <label className="flex items-start gap-2 text-base">
               <input
                 type="checkbox"
                 checked={duringRespite}
@@ -303,7 +306,7 @@ function AdvancementEditor({
             )}
           </div>
           <div>
-            <p className="text-sm text-muted-foreground">
+            <p className="mt-0 text-sm text-muted-foreground">
               Proposed level-two build. Current resources are unchanged.
             </p>
             <BuildPreview evaluation={evaluation} name={character.authored.name} />
@@ -369,9 +372,9 @@ function BuildHistory({
     (selected.expectedRevision !== character.revision ||
       selected.expectedEffectiveRevisionId !== character.effectiveRevisionId);
   return (
-    <section aria-label="Build history" className="mt-10 flex flex-col gap-4 border-t pt-6">
+    <section aria-label="Build history" className={`${PANEL} mt-4 flex flex-col gap-4`}>
       <h2>Build history</h2>
-      <p className="m-0 text-sm">
+      <p className="m-0 text-base">
         Browse recorded builds without changing the active sheet or current resources. Later history
         is retained when you restore.
       </p>
@@ -397,7 +400,7 @@ function BuildHistory({
                 {entry.isEffective ? ' · Active' : ''}
                 {entry.isDraft ? ' · Draft' : ''}
               </Button>
-              <span className="ml-3 text-xs text-muted-foreground">
+              <span className="ml-3 text-sm text-muted-foreground">
                 {new Date(entry.createdAt).toLocaleString()}
               </span>
             </li>
@@ -416,7 +419,7 @@ function BuildHistory({
       {message && <Notice role="status">{message}</Notice>}
       {selected && !snapshot && <Loading>Loading recorded build…</Loading>}
       {snapshot && (
-        <div className="grid items-start gap-6 lg:grid-cols-2">
+        <div className="grid items-start gap-6 border-t border-border pt-6 lg:grid-cols-2">
           <div className="flex flex-col gap-4">
             <h3>
               Recorded revision {snapshot.entry.revision} · Level {snapshot.entry.level}
@@ -427,19 +430,19 @@ function BuildHistory({
             </Notice>
             {character && (
               <>
-                <p className="m-0 text-sm">
+                <p className="m-0 text-base">
                   {snapshot.entry.status !== 'complete'
                     ? 'Restoring this unfinished build creates a new private draft. It does not submit for review or replace the active build. Continue its choices in Edit.'
                     : character.campaignId
                       ? 'Restoring creates a new build and submits it for Director review. Your active build changes only after approval. A Director restoring their own character is approved automatically.'
                       : 'Restoring creates and activates a new recorded build. Later history, present inventory and authored details are retained.'}
                 </p>
-                <p className="m-0 text-sm">
+                <p className="m-0 text-base">
                   Current Stamina and Recoveries are retained up to the restored maxima; this does
                   not heal or refill resources.
                 </p>
                 {snapshot.activationPreview && (
-                  <ul className="m-0 list-none p-0 text-sm" aria-label="Restore resource preview">
+                  <ul className="m-0 list-none p-0 text-base" aria-label="Restore resource preview">
                     {snapshot.activationPreview.changes.map(change => (
                       <li key={change.field}>
                         {change.field}: {change.currentBefore}/{change.maximumBefore ?? '—'} →{' '}
@@ -495,11 +498,11 @@ function BuildHistory({
               </>
             )}
             <details>
-              <summary className="cursor-pointer text-sm">Recorded choices</summary>
-              <dl className="mt-3 space-y-3 text-sm">
+              <summary className="cursor-pointer text-base">Recorded choices</summary>
+              <dl className="mt-3 space-y-3 text-base">
                 {snapshot.selections.map(selection => (
                   <div key={selection.decisionId}>
-                    <dt className="font-semibold">{decisionLabel(selection.decisionId)}</dt>
+                    <dt className="font-medium">{decisionLabel(selection.decisionId)}</dt>
                     <dd className="m-0 break-words">
                       {typeof selection.value === 'string'
                         ? selection.value
@@ -569,7 +572,11 @@ export function ProgressionPage({ characterId }: { characterId: Id<'characters'>
     <div className="space-y-6">
       <header className="flex items-center justify-between gap-4">
         <h1>{sheet.name} · Progression</h1>
-        <Link to="/characters/$characterId" params={{ characterId }}>
+        <Link
+          to="/characters/$characterId"
+          params={{ characterId }}
+          className="text-sm text-muted-foreground hover:text-foreground"
+        >
           Back to character sheet
         </Link>
       </header>

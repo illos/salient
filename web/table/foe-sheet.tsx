@@ -111,7 +111,7 @@ export function AdjustAction({
   );
 }
 
-/** Active conditions as small caps badges; `readable` adds the rulebook icon (not inside a card button). */
+/** Active conditions as small tonal badges; `readable` adds the rulebook icon (not inside a card button). */
 export function ConditionBadges({
   conditions,
   readable = true,
@@ -150,8 +150,8 @@ export function ConditionControls({
   const submit = useMutation(api.commands.submit);
   const command = useCommand();
   return (
-    <label className="flex items-center gap-2 text-xs">
-      <span className="caps text-muted-foreground">Condition</span>
+    <label className="flex items-center gap-2 text-sm">
+      <span className="text-sm text-muted-foreground">Condition</span>
       <select
         className="native-select"
         value=""
@@ -258,9 +258,9 @@ export function FoeSheet({
             <h3 className={`m-0 truncate ${foe.slain ? 'text-muted-foreground' : ''}`}>
               {foe.name}
             </h3>
-            {foe.slain && <span className="caps text-muted-foreground">Slain</span>}
+            {foe.slain && <span className="text-sm text-muted-foreground">Slain</span>}
           </div>
-          <p className="caps m-0 text-muted-foreground">
+          <p className="m-0 text-sm text-muted-foreground">
             {source ? foeRoleLine(source.structured) || 'Monster' : 'Loading source…'}
           </p>
         </div>
@@ -268,7 +268,7 @@ export function FoeSheet({
           <TargetReticle
             campaignId={campaignId}
             target={{ kind: 'foe', id: foe.id, name: foe.name }}
-            className="pt-2.5"
+            className="pt-2"
           />
         )}
       </header>
@@ -288,7 +288,7 @@ export function FoeSheet({
               label={`${foe.name} health`}
               className="min-w-0 flex-1"
             />
-            <span className="shrink-0 text-sm font-semibold tabular-nums">
+            <span className="shrink-0 text-base font-medium tabular-nums">
               {health.stamina} / {health.maxStamina}
             </span>
             {running && (
@@ -301,7 +301,7 @@ export function FoeSheet({
               />
             )}
           </div>
-          <p className="caps m-0 text-muted-foreground">
+          <p className={`m-0 text-sm ${health.winded ? 'text-primary' : 'text-muted-foreground'}`}>
             Stamina
             {health.temporaryStamina ? ` · +${health.temporaryStamina} temporary` : ''}
             {health.winded ? ' · Winded' : ''}
@@ -309,7 +309,7 @@ export function FoeSheet({
         </div>
       )}
       <div className="rule-soft flex flex-col gap-2 pb-3">
-        <span className="caps text-muted-foreground">Conditions</span>
+        <span className="text-sm text-muted-foreground">Conditions</span>
         <ConditionBadges conditions={foe.conditions} instances={foe.conditionInstances} />
         {running && (
           <ConditionControls campaignId={campaignId} actor={actor} conditions={foe.conditions} />
@@ -317,7 +317,7 @@ export function FoeSheet({
       </div>
       {running && abilitiesAllowed && (
         <div className="flex flex-col gap-2">
-          <span className="caps text-muted-foreground">Abilities</span>
+          <span className="text-sm text-muted-foreground">Abilities</span>
           <AbilityPanel
             campaignId={campaignId}
             actor={{ kind: 'foe', id: foe.id, name: foe.name }}
@@ -325,11 +325,11 @@ export function FoeSheet({
           />
         </div>
       )}
-      <div className="rule-soft flex items-center gap-2 pb-3 text-sm">
-        <span className="caps text-muted-foreground">Stat block</span>
+      <div className="rule-soft flex items-center gap-2 pb-3 text-base">
+        <span className="text-sm text-muted-foreground">Stat block</span>
         {source ? (
           <span className="flex items-center gap-1">
-            <span className="font-semibold">{source.name}</span>
+            <span className="font-medium">{source.name}</span>
             <RuleLink id={source.id} sourcePath={source.sourcePath} label={source.name} />
           </span>
         ) : (

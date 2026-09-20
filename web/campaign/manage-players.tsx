@@ -59,7 +59,7 @@ function CopyField({
   const { copied, copy } = useCopy(value);
   return (
     <div className="flex flex-col gap-1.5">
-      <label htmlFor={id} className="caps text-muted-foreground">
+      <label htmlFor={id} className="text-sm text-muted-foreground">
         {label}
       </label>
       <div className="flex items-stretch gap-2">
@@ -102,7 +102,7 @@ function Section({
 }) {
   return (
     <section id={`manage-${id}`} aria-labelledby={`manage-${id}-heading`} className="py-5">
-      <p className="caps mb-3 text-muted-foreground">
+      <p className="mb-3 text-sm text-muted-foreground">
         <span id={`manage-${id}-heading`}>{title}</span>
         {count !== undefined && count > 0 && <span className="ml-2 text-primary">{count}</span>}
       </p>

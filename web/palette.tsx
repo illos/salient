@@ -18,8 +18,8 @@ export function Palette({
 }) {
   const operations = useQuery(api.commands.list, { campaignId });
   return (
-    <details className="rule-soft border-t pt-3">
-      <summary className="caps cursor-pointer text-sm">
+    <details className="pt-3">
+      <summary className="cursor-pointer text-sm">
         Command palette{operations ? ` (${operations.length})` : ''}
       </summary>
       {operations === undefined ? (

@@ -1,16 +1,17 @@
 // SPDX-License-Identifier: GPL-3.0-only
 /**
- * The combat ring-portrait row in the Heroes pane (combat-table-light.png, combat-table-dark.png;
- * docs/table-spec.md#confirmed-combat-layout, 2026-09-15 decision): one 60px ring disc per hero
- * in the encounter, the ring turning brick red with an ACTING caption on the hero whose turn it
- * is, and a small numeric badge with the hero's Heroic Resource when the projection carries it
- * (the Director and that hero's owner; peers never receive it, docs/table-spec.md
- * #party-sheets-and-resource-visibility). Clicking a ring selects that hero's sheet.
- * Presentation only: nothing here submits a command or decides a rule; whose turn it is and who
- * is Slain come from the encounter projection.
+ * The combat portrait row in the Heroes pane (docs/design-mockups/quiet/README.md, heroes pane;
+ * docs/table-spec.md#confirmed-combat-layout, 2026-09-15 decision): one 48px disc per hero in
+ * the encounter with a thin Stamina bar beneath it, the acting hero outlined in accent with an
+ * `Acting` caption, and a small tonal count with the hero's Heroic Resource when the projection
+ * carries it (the Director and that hero's owner; peers never receive it, docs/table-spec.md
+ * #party-sheets-and-resource-visibility). Clicking a disc selects that hero's sheet.
+ * Presentation only: nothing here submits a command or decides a rule; whose turn it is, who is
+ * Slain and every Stamina value come from the projections.
  */
 import type { Id } from '../../convex/_generated/dataModel';
 import { Disc } from '../components/disc';
+import { HealthBar } from '../components/health-bar';
 import type { Hero } from './heroes-pane';
 import type { Encounter } from './setup-card';
 
@@ -80,17 +81,27 @@ export function HeroRingRow({
                 name={hero.name}
                 variant="ring"
                 filled={isActing || selected}
+                acting={isActing}
                 badge={badge}
                 caption={isActing ? 'Acting' : slain ? 'Slain' : away ? 'Away' : undefined}
+                footer={
+                  hero.live &&
+                  hero.live.stamina !== null &&
+                  hero.facts?.staminaMax !== undefined &&
+                  hero.facts.staminaMax !== null ? (
+                    <HealthBar
+                      thin
+                      tone="hero"
+                      value={hero.live.stamina}
+                      max={hero.facts.staminaMax}
+                      low={hero.facts.windedValue ?? undefined}
+                      label={`${hero.name} Stamina`}
+                      className="w-12"
+                    />
+                  ) : undefined
+                }
                 muted={slain || away}
                 label={label}
-                className={
-                  isActing
-                    ? '[&>span:first-child>span:first-child]:border-primary'
-                    : selected
-                      ? '[&>span:first-child>span:first-child]:border-foreground [&_.caps]:text-muted-foreground'
-                      : '[&_.caps]:text-muted-foreground'
-                }
               />
             </button>
           </li>

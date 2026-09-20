@@ -148,12 +148,22 @@ export function GameLog({
       {(result.nextBefore !== null || before !== undefined) && (
         <div className="flex items-center justify-center gap-2 py-2">
           {result.nextBefore !== null && (
-            <Button variant="outline" size="xs" onClick={() => setBefore(result.nextBefore!)}>
+            <Button
+              variant="outline"
+              size="xs"
+              className="rounded-full"
+              onClick={() => setBefore(result.nextBefore!)}
+            >
               Older activity
             </Button>
           )}
           {before !== undefined && (
-            <Button variant="outline" size="xs" onClick={() => setBefore(undefined)}>
+            <Button
+              variant="outline"
+              size="xs"
+              className="rounded-full"
+              onClick={() => setBefore(undefined)}
+            >
               Latest activity
             </Button>
           )}
@@ -185,7 +195,7 @@ export function GameLog({
   );
 }
 
-/** A brick-red caps status at the top right of an interactive card (`AWAITING INPUT`). */
+/** A muted 13px status at the top right of an interactive card (`Awaiting input`). */
 export function Callout({
   status,
   children,
@@ -196,13 +206,9 @@ export function Callout({
   className?: string;
 }) {
   return (
-    <div
-      className={`relative [&_.eyebrow]:text-primary ${className ?? ''}`}
-      data-callout
-      data-status={status}
-    >
+    <div className={`relative ${className ?? ''}`} data-callout data-status={status}>
       {status && (
-        <span className="caps pointer-events-none absolute top-5 right-5 z-1 text-primary">
+        <span className="pointer-events-none absolute top-5 right-5 z-1 text-sm text-muted-foreground">
           {status}
         </span>
       )}
@@ -242,14 +248,20 @@ function LogTabs({
   rulesOpen: boolean;
   onRules: () => void;
 }) {
+  // The Quiet segmented control (the `inset` track of web/components/ui/tabs.tsx) drawn on the
+  // existing tablist markup so the tabs' roles, handlers and focus order stay as they were.
   const item = (selected: boolean) =>
-    `caps relative -mb-px h-9 border-0 border-b-2 bg-transparent px-1 transition-colors duration-(--motion-fast) ${
+    `relative inline-flex h-full cursor-pointer items-center justify-center rounded-full border-0 px-3.5 text-sm font-medium whitespace-nowrap transition-colors duration-(--motion-fast) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring ${
       selected
-        ? 'border-b-primary text-foreground'
-        : 'border-b-transparent text-muted-foreground hover:text-foreground'
+        ? 'bg-accent text-foreground'
+        : 'bg-transparent text-muted-foreground hover:text-foreground'
     }`;
   return (
-    <div className="flex items-end justify-center gap-7" role="tablist" aria-label="Log">
+    <div
+      className="inline-flex h-10 items-center justify-center rounded-full bg-muted p-1"
+      role="tablist"
+      aria-label="Log"
+    >
       <h2 className="sr-only">Game log</h2>
       <button
         type="button"
@@ -346,14 +358,14 @@ function RulesCard({ open, onOpenChange }: { open: boolean; onOpenChange: (o: bo
               href="/rules"
               target="_blank"
               rel="noopener"
-              className="ml-2 inline-flex items-center gap-1 font-semibold"
+              className="ml-2 inline-flex items-center gap-1 font-medium"
             >
               Open the library <ExternalLinkIcon size={13} aria-hidden />
             </a>
           </p>
           {catalog.books.map(book => (
             <section key={book.id} aria-label={book.name}>
-              <h3 className="rule-strong mb-2 pb-1 text-lg">{book.name}</h3>
+              <h3 className="mb-2 text-lg">{book.name}</h3>
               <ol className="m-0 grid list-none grid-cols-1 gap-x-6 gap-y-1 p-0 sm:grid-cols-2">
                 {catalog.entries
                   .filter(e => e.kind === 'chapter' && e.book === book.id)
@@ -362,7 +374,7 @@ function RulesCard({ open, onOpenChange }: { open: boolean; onOpenChange: (o: bo
                     <li key={chapter.id} className="m-0 p-0">
                       <button
                         type="button"
-                        className="w-full border-0 bg-transparent px-0 py-1 text-left text-sm hover:text-primary hover:underline"
+                        className="w-full cursor-pointer border-0 bg-transparent px-0 py-1 text-left text-base hover:underline"
                         onClick={() => setHistory([{ entry: chapter }])}
                       >
                         {chapter.name}
@@ -407,7 +419,7 @@ export function LogPane({
   );
   return (
     <div className="flex min-h-full flex-col" data-log-pane>
-      <div className="sticky -top-(--pane-padding-y) z-10 -mx-(--pane-padding-x) -mt-(--pane-padding-y) flex flex-col gap-3 bg-background px-(--pane-padding-x) pt-(--pane-padding-y) pb-3">
+      <div className="sticky -top-(--pane-padding-y) z-10 -mx-(--pane-padding-x) -mt-(--pane-padding-y) flex flex-col gap-3 bg-card px-(--pane-padding-x) pt-(--pane-padding-y) pb-3">
         {encounter && encounter.status === 'committed' && encounter.phase === 'turns' && (
           <InitiativeBar
             campaignId={campaignId}
@@ -418,10 +430,9 @@ export function LogPane({
           />
         )}
         {/* V31 item 2: three columns keep the tabs centred while reserving space for Rewind and
-            Redo at the right edge of the same row, so they never overlap ROLLS as the pane
-            narrows or the page is zoomed. The rule under the row belongs to this wrapper, not to
-            the tablist, so it still spans the full width. */}
-        <div className="rule-strong grid grid-cols-[1fr_auto_1fr] items-end">
+            Redo at the right edge of the same row, so they never overlap Rolls as the pane
+            narrows or the page is zoomed. */}
+        <div className="grid grid-cols-[1fr_auto_1fr] items-center">
           <span aria-hidden />
           <LogTabs
             tab={tab}
@@ -430,7 +441,7 @@ export function LogPane({
             onRules={() => setRulesOpen(true)}
           />
           {running && roster?.role !== 'observer' ? (
-            <HistoryControls campaignId={campaignId} className="justify-self-end pb-1" />
+            <HistoryControls campaignId={campaignId} className="justify-self-end" />
           ) : (
             <span aria-hidden />
           )}

@@ -45,7 +45,7 @@ function SettingRow({
   return (
     <li className="rule-soft flex items-center justify-between gap-6 py-4 last:border-b-0">
       <span className="flex min-w-0 flex-col gap-0.5">
-        <span className="text-base font-bold">{label}</span>
+        <span className="text-base font-medium">{label}</span>
         <span className="text-sm text-muted-foreground">{description}</span>
       </span>
       <span className="shrink-0">{children}</span>
@@ -53,7 +53,7 @@ function SettingRow({
   );
 }
 
-/** Three-chip segmented control; the current mode is filled ink and not resubmittable. */
+/** Three-tab segmented control on a `sub` track; the current mode is the `ph` pill in ink and not resubmittable. */
 function HealthDisplayControl({
   campaignId,
   current,
@@ -68,7 +68,7 @@ function HealthDisplayControl({
       <span
         role="group"
         aria-label="Monster health display"
-        className="inline-flex overflow-hidden rounded-md border border-rule-strong"
+        className="inline-flex h-9 items-center rounded-full bg-muted p-1"
       >
         {MODES.map(({ mode, label }) => {
           const text = `/campaign health-display mode=${mode}`;
@@ -87,8 +87,8 @@ function HealthDisplayControl({
                 )
               }
               className={cn(
-                'caps h-8 cursor-pointer border-0 border-l border-rule-strong bg-background px-3 text-foreground transition-colors duration-(--motion-fast) first:border-l-0 hover:bg-muted disabled:cursor-default',
-                active && 'bg-foreground text-background hover:bg-foreground disabled:opacity-100',
+                'h-7 cursor-pointer rounded-full border-0 bg-transparent px-3 text-sm font-medium text-muted-foreground transition-colors duration-(--motion-fast) hover:text-foreground disabled:cursor-default disabled:opacity-40',
+                active && 'bg-accent text-foreground disabled:opacity-100',
               )}
             >
               {label}
@@ -131,15 +131,15 @@ function SettingSwitch({
           )
         }
         className={cn(
-          'relative inline-flex h-5 w-9 shrink-0 cursor-pointer items-center rounded-full border-0 p-0 transition-colors duration-(--motion-fast) disabled:opacity-50',
-          checked ? 'bg-foreground' : 'bg-input',
+          'relative inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full border-0 p-0 transition-colors duration-(--motion-fast) disabled:opacity-40',
+          checked ? 'bg-primary' : 'bg-placeholder',
         )}
       >
         <span
           aria-hidden
           className={cn(
-            'absolute top-0.5 size-4 rounded-full bg-background transition-[left] duration-(--motion-fast)',
-            checked ? 'left-[18px]' : 'left-0.5',
+            'absolute top-0.5 size-5 rounded-full transition-[left] duration-(--motion-fast)',
+            checked ? 'left-[22px] bg-primary-foreground' : 'left-0.5 bg-foreground',
           )}
         />
       </button>

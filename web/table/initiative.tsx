@@ -89,8 +89,8 @@ function MoveControl({
   const submit = useMutation(api.commands.submit);
   const command = useCommand();
   return (
-    <label className="flex items-center gap-1 text-xs">
-      <span className="caps text-muted-foreground">Move to</span>
+    <label className="flex items-center gap-1 text-sm">
+      <span className="text-sm text-muted-foreground">Move to</span>
       <select
         className="native-select"
         value=""
@@ -139,14 +139,14 @@ function EntryRow({
 }) {
   return (
     <li
-      className={`flex flex-wrap items-center justify-between gap-2 py-1 text-sm ${
+      className={`flex flex-wrap items-center justify-between gap-2 py-1.5 text-base ${
         entry.spent && !entry.active ? 'text-muted-foreground' : ''
-      } ${entry.active ? 'font-semibold' : ''}`}
+      } ${entry.active ? 'font-medium' : ''}`}
       aria-current={entry.active ? 'true' : undefined}
     >
       <span className="flex flex-wrap items-center gap-2">
         <span className={entry.slain ? 'line-through' : ''}>{entry.actor.name}</span>
-        {entry.active && <Badge>Acting</Badge>}
+        {entry.active && <Badge variant="accent">Acting</Badge>}
         {entry.spent && !entry.active && <Badge variant="outline">Acted</Badge>}
         {entry.surprised && <Badge variant="outline">Surprised</Badge>}
         {entry.slain && <Badge variant="outline">Slain</Badge>}
@@ -199,7 +199,7 @@ export function InitiativeGroups({
   return (
     <div className="flex flex-col gap-4" data-initiative-groups>
       {encounter.startingSide && (
-        <p className="m-0 text-xs text-muted-foreground">
+        <p className="m-0 text-sm text-muted-foreground">
           {sideName(encounter.startingSide)} went first in round 1 and go first in every round.
           {director && ' Move to changes only the selected turn entry.'}
         </p>
@@ -207,22 +207,18 @@ export function InitiativeGroups({
       <div className="grid grid-cols-1 gap-x-6 gap-y-4 @lg:grid-cols-2">
         {(['heroes', 'director'] as const).map(side => (
           <div key={side}>
-            <h3 className="caps rule-strong mb-2 pb-1 text-muted-foreground">{sideName(side)}</h3>
+            <h3 className="mb-2 text-sm font-normal text-muted-foreground">{sideName(side)}</h3>
             {encounter.groups
               .filter(g => g.side === side)
               .map(group => (
                 <div
                   key={group.id}
-                  className={`rule-soft mb-2 border-l-2 pl-2 ${
-                    group.active
-                      ? 'border-l-primary'
-                      : group.completed
-                        ? 'border-l-rule-strong text-muted-foreground'
-                        : 'border-l-transparent'
+                  className={`mb-2 rounded-md px-3 py-2 ${
+                    group.active ? 'bg-muted' : group.completed ? 'text-muted-foreground' : ''
                   }`}
                   data-group-order={group.order}
                 >
-                  <p className="caps m-0 text-muted-foreground">
+                  <p className="m-0 text-sm text-muted-foreground">
                     Group {group.order}
                     {group.active ? ' · active' : group.completed ? ' · finished' : ''}
                   </p>
@@ -240,7 +236,7 @@ export function InitiativeGroups({
                       />
                     ))}
                     {group.entries.length === 0 && (
-                      <li className="text-xs text-muted-foreground">Empty</li>
+                      <li className="text-sm text-muted-foreground">Empty</li>
                     )}
                   </ul>
                 </div>

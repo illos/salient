@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: GPL-3.0-only
 /**
- * The command line pinned to the bottom of the log pane (session-free-play-director.png,
- * combat-table-*.png): one input with the brick-red `/` prefix, a 1px ink border and no shadow,
- * Enter submits the slash text through `commands.submit` exactly as the A01 console did, and the
+ * The command line pinned to the bottom of the log pane (docs/design-mockups/quiet/README.md,
+ * table screen): a 48px `sub` inset with the muted `/` prefix and no border or top rule, Enter
+ * submits the slash text through `commands.submit` exactly as the A01 console did, and the
  * palette control at the right of the input opens web/palette.tsx (unchanged) above it. Up and
  * Down step through the last few commands this viewer submitted in this browser session (client
  * memory only). Errors show above the input inside the footer. No parsing or rules live here.
@@ -53,14 +53,11 @@ export function CommandLine({
     setText(next === history.length ? draft.current : history[next]!);
   };
   return (
-    <div
-      className="border-t border-rule-strong bg-background px-(--pane-padding-x) pt-3 pb-4"
-      data-command-line
-    >
+    <div className="bg-card px-(--pane-padding-x) pt-3 pb-5" data-command-line>
       {paletteOpen && (
         <div
           ref={palette}
-          className="mb-3 max-h-[50vh] overflow-y-auto border border-rule-strong bg-background p-3 text-sm"
+          className="mb-3 max-h-[50vh] overflow-y-auto rounded-md bg-popover p-3 text-sm shadow-[0_16px_48px_rgb(0_0_0/0.35)]"
         >
           <Palette
             campaignId={campaignId}
@@ -110,19 +107,19 @@ export function CommandLine({
         }}
       >
         {last && (
-          <Notice role="status" className="text-xs">
+          <Notice role="status" className="text-sm">
             Recorded: {last}
           </Notice>
         )}
-        <div className="flex h-12 items-center gap-2 border border-rule-strong bg-background px-3 shadow-none focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-ring">
-          <span aria-hidden className="text-lg font-semibold text-primary">
+        <div className="flex h-12 items-center gap-3 rounded-md bg-muted px-4 transition-colors duration-(--motion-fast) focus-within:bg-accent">
+          <span aria-hidden className="text-base text-muted-foreground">
             /
           </span>
           <input
             ref={input}
             name="command"
             aria-label="Slash command"
-            className="h-full min-w-0 flex-1 bg-transparent text-sm outline-none placeholder:text-muted-foreground"
+            className="h-full min-w-0 flex-1 border-0 bg-transparent text-base text-foreground caret-primary outline-none placeholder:text-muted-foreground disabled:opacity-40"
             value={text}
             onChange={e => {
               setText(e.target.value);

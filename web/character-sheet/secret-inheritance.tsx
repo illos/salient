@@ -39,23 +39,26 @@ function InheritanceEditor({
     base.build !== inheritance.buildRevisionId ||
     inheritance.version > version;
   return (
-    <section className="mt-4 space-y-3 rounded-md border p-4" aria-label="Private inheritance">
-      <h4 className="m-0 font-semibold">Strange Inheritance · Director only</h4>
-      <p className="m-0 text-sm">
+    <section
+      className="mt-4 space-y-3 rounded-md bg-muted p-4 text-base"
+      aria-label="Private inheritance"
+    >
+      <h4 className="m-0 text-base font-medium">Strange Inheritance · Director only</h4>
+      <p className="m-0 text-base">
         Privately choose one second-echelon trinket. The hero’s build and shared history do not
         reveal its identity or powers.
       </p>
-      <p className="m-0 text-sm">
+      <p className="m-0 text-base">
         Editing the {inheritance.view} build, revision {inheritance.buildRevision}.
       </p>
       {inheritance.view === 'draft' && (
-        <p className="m-0 text-sm">
+        <p className="m-0 text-base">
           Save this private setup before submitting your own hero to the campaign you direct.
         </p>
       )}
       <select
         aria-label="Private inherited trinket"
-        className="native-select max-w-full"
+        className="native-select max-w-full bg-placeholder"
         value={name}
         disabled={command.pending || stale || inheritance.combatLocked}
         onChange={event => {
@@ -71,9 +74,13 @@ function InheritanceEditor({
         ))}
       </select>
       {stale && (
-        <Notice>The character or private choice changed. Reload this page before saving.</Notice>
+        <Notice className="bg-placeholder">
+          The character or private choice changed. Reload this page before saving.
+        </Notice>
       )}
-      {inheritance.combatLocked && <Notice>Character choices are locked during combat.</Notice>}
+      {inheritance.combatLocked && (
+        <Notice className="bg-placeholder">Character choices are locked during combat.</Notice>
+      )}
       <Button
         disabled={!name || stale || inheritance.combatLocked || command.pending}
         onClick={async () => {
@@ -98,7 +105,7 @@ function InheritanceEditor({
         Save private inheritance
       </Button>
       {saved && (
-        <p role="status" className="text-sm">
+        <p role="status" className="text-base">
           Private inheritance saved.
         </p>
       )}

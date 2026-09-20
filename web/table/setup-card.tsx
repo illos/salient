@@ -15,7 +15,6 @@ import type { Id } from '../../convex/_generated/dataModel';
 import type { FunctionReturnType } from 'convex/server';
 import { Badge } from '../components/ui/badge';
 import { Button } from '../components/ui/button';
-import { Card, CardContent } from '../components/ui/card';
 import { SectionHeading, useCommand } from '../ui';
 
 export type Encounter = NonNullable<FunctionReturnType<typeof api.encounters.current>>;
@@ -69,7 +68,7 @@ export function CommandButton({
         // Pointer events stay on so the tooltip opens, so the hover background has to be turned
         // off explicitly or an inert control lights up as though it were live.
         className={
-          icon ? 'aria-disabled:opacity-50 [&[aria-disabled=true]:hover]:bg-transparent' : undefined
+          icon ? 'aria-disabled:opacity-40 [&[aria-disabled=true]:hover]:bg-transparent' : undefined
         }
         title={tooltip}
         onClick={() => {
@@ -117,39 +116,41 @@ function ParticipantRow({
     : participant.groupKey;
   const ownGroup = participant.groupKey === participant.key;
   return (
-    <li className={`flex flex-col gap-1 py-2 text-sm ${participant.included ? '' : 'opacity-50'}`}>
+    <li
+      className={`flex flex-col gap-1.5 py-2 text-base ${participant.included ? '' : 'opacity-40'}`}
+    >
       <div className="flex flex-wrap items-center gap-2">
-        <strong>{participant.actor.name}</strong>
+        <strong className="font-medium">{participant.actor.name}</strong>
         {participant.surprised && <Badge variant="outline">Surprised</Badge>}
         {!participant.included && <Badge variant="outline">Not in this combat</Badge>}
         {!ownGroup && <Badge variant="outline">Group {groupName}</Badge>}
       </div>
       {editable && (
-        <div className="flex flex-wrap items-center gap-3 text-xs">
-          <label className="flex items-center gap-1">
+        <div className="flex flex-wrap items-center gap-3 text-sm">
+          <label className="flex items-center gap-1.5">
             <input
               type="checkbox"
-              className="size-4 accent-secondary"
+              className="size-[18px] accent-primary"
               checked={participant.included}
               disabled={command.pending}
               onChange={e => change(`included=${e.target.checked}`)}
             />
             Included
           </label>
-          <label className="flex items-center gap-1">
+          <label className="flex items-center gap-1.5">
             <input
               type="checkbox"
-              className="size-4 accent-secondary"
+              className="size-[18px] accent-primary"
               checked={participant.surprised}
               disabled={command.pending || !participant.included}
               onChange={e => change(`surprised=${e.target.checked}`)}
             />
             Surprised
           </label>
-          <label className="flex items-center gap-1">
+          <label className="flex items-center gap-1.5">
             Group
             <input
-              className="w-24 rounded-md border border-rule-strong bg-background px-1 py-0.5"
+              className="h-7 w-24 rounded-md border-0 bg-placeholder px-2 text-sm text-foreground caret-primary outline-none disabled:opacity-40"
               defaultValue={ownGroup ? '' : groupName}
               placeholder="own"
               disabled={command.pending || !participant.included}
@@ -245,8 +246,8 @@ export function CombatSetupCard({
   const heroes = encounter.participants.filter(p => p.side === 'heroes');
   const foes = encounter.participants.filter(p => p.side === 'director');
   return (
-    <Card>
-      <CardContent className="flex flex-col gap-4">
+    <div className="rounded-md bg-muted p-5">
+      <div className="flex flex-col gap-4">
         <SectionHeading
           aside={
             phase === 'setup'
@@ -292,7 +293,7 @@ export function CombatSetupCard({
         )}
         {phase === 'roll' && (
           <>
-            <p className="text-sm">
+            <p className="text-base">
               Both sides have an unsurprised creature. Any active player or the Director rolls the
               shared d10: on 6 or higher the players choose who goes first; otherwise the Director
               decides.
@@ -311,7 +312,7 @@ export function CombatSetupCard({
         )}
         {phase === 'choice' && (
           <>
-            <p className="text-sm">
+            <p className="text-base">
               {encounter.opening?.roll
                 ? `${encounter.opening.roll.rolledByName} rolled ${encounter.opening.roll.value}: ${
                     encounter.opening.roll.entitlement === 'players'
@@ -345,7 +346,7 @@ export function CombatSetupCard({
             )}
           </>
         )}
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 }

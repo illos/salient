@@ -26,7 +26,7 @@ export function FoeView({
     <article>
       {parent && (
         <button
-          className="text-sm font-medium text-primary underline underline-offset-4 mb-4"
+          className="inline-flex h-8 items-center rounded-full bg-muted px-3 text-sm text-muted-foreground hover:bg-accent hover:text-foreground mb-4"
           onClick={() => onFollow(parent.id)}
         >
           From {parent.name}
@@ -38,7 +38,7 @@ export function FoeView({
         return (
           <section key={id} className="my-5 border-t border-border pt-4">
             <button
-              className="text-sm font-medium text-primary underline underline-offset-4 mb-2"
+              className="inline-flex h-8 items-center rounded-full bg-muted px-3 text-sm text-muted-foreground hover:bg-accent hover:text-foreground mb-2"
               onClick={() => onFollow(id)}
             >
               Open {feature.name}
@@ -50,7 +50,7 @@ export function FoeView({
       {object.supportingIds.map(id => (
         <button
           key={id}
-          className="text-sm font-medium text-primary underline underline-offset-4 mt-4"
+          className="inline-flex h-8 items-center rounded-full bg-muted px-3 text-sm text-muted-foreground hover:bg-accent hover:text-foreground mt-4 mr-2"
           onClick={() => onFollow(id)}
         >
           {entries.entries.find(e => e.object.id === id)?.object.name ?? 'Related reference'}
@@ -88,7 +88,7 @@ export function FoeView({
           {d}
         </p>
       ))}
-      <footer className="mt-6 border-t border-border pt-4 text-sm text-muted-foreground">
+      <footer className="mt-6 pt-4 text-sm text-muted-foreground">
         <a href={`https://steelcompendium.io/v2/scc/${object.source.scc}/`}>
           View source on Steel Compendium
         </a>
@@ -140,7 +140,7 @@ export default function FoePreview({
       leading={
         history.length > 1 ? (
           <button
-            className="text-sm font-medium text-primary underline underline-offset-4"
+            className="inline-flex h-8 items-center rounded-full bg-muted px-3 text-sm text-muted-foreground hover:bg-accent hover:text-foreground"
             onClick={() => setHistory(h => h.slice(0, -1))}
           >
             Back

@@ -244,6 +244,11 @@
   a {
     @apply text-foreground underline-offset-4 hover:underline;
   }
+  /* Weights cap at 500 everywhere except the preserved Core content, which keeps its printed bold. */
+  strong:not(.ds-content *, .rules-prose *),
+  b:not(.ds-content *, .rules-prose *) {
+    font-weight: 500;
+  }
   button,
   input,
   textarea,

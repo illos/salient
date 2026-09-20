@@ -6,7 +6,6 @@ import type { FunctionReturnType } from 'convex/server';
 import { api } from '../../convex/_generated/api';
 import type { Id } from '../../convex/_generated/dataModel';
 import { Button } from '../components/ui/button';
-import { Card, CardContent } from '../components/ui/card';
 import { SectionHeading, useCommand } from '../ui';
 import { RuleLink } from '../rules/link';
 import { readableRuleText } from '../rules/reference';
@@ -25,9 +24,12 @@ function CleanupChoices({
   mayManage: boolean;
 }) {
   return choices.map((choice, index) => (
-    <div key={`${choice.eventId}:${index}`} className="rule-soft mt-2 border-l-2 pl-3 text-sm">
+    <div
+      key={`${choice.eventId}:${index}`}
+      className="mt-2 flex flex-col gap-1 border-t border-border pt-2 text-base"
+    >
       <p>
-        <strong>
+        <strong className="font-medium">
           {choice.actor.name} · {choice.abilityName}
           <RuleLink id={choice.abilityId} label={choice.abilityName} />
         </strong>
@@ -60,7 +62,7 @@ function VictoryAward({
   const [recipients, setRecipients] = useState<string[]>([]);
   if (closeout.victory.confirmed)
     return (
-      <p className="text-sm" role="status">
+      <p className="text-base" role="status">
         Victory award confirmed: {closeout.victory.amount} to{' '}
         {closeout.heroes
           .filter(hero => closeout.victory.recipients.includes(hero.id))
@@ -78,15 +80,15 @@ function VictoryAward({
   const valid = amount.trim() !== '' && Number.isSafeInteger(Number(amount)) && Number(amount) >= 0;
   return (
     <fieldset disabled={command.pending} className="flex flex-col gap-3">
-      <legend className="mb-2 font-semibold">Victory award</legend>
+      <legend className="mb-2 font-medium">Victory award</legend>
       <p className="text-sm text-muted-foreground">
         Choose the source-earned amount and eligible recipients. The initial value awards nothing
         until confirmed; choose 0 when no Victory is earned.
       </p>
-      <label className="flex items-center gap-2 text-sm">
+      <label className="flex items-center gap-2 text-base">
         Victories to award
         <input
-          className="w-20 rounded border border-input bg-background px-2 py-1"
+          className="h-8 w-20 rounded-md border-0 bg-placeholder px-2 text-sm text-foreground caret-primary tabular-nums outline-none"
           type="number"
           min={0}
           step={1}
@@ -95,9 +97,10 @@ function VictoryAward({
         />
       </label>
       {closeout.heroes.map(hero => (
-        <label key={hero.id} className="flex items-center gap-2 text-sm">
+        <label key={hero.id} className="flex items-center gap-2 text-base">
           <input
             type="checkbox"
+            className="size-[18px] accent-primary"
             checked={recipients.includes(hero.id)}
             onChange={event =>
               setRecipients(current =>
@@ -139,8 +142,8 @@ export function CloseoutCard({ campaignId }: { campaignId: Id<'campaigns'> }) {
   const closeout = useQuery(api.closeout.current, { campaignId });
   if (!closeout || closeout.phase !== 'closeout') return null;
   return (
-    <Card>
-      <CardContent className="flex flex-col gap-4">
+    <div className="rounded-md bg-muted p-5">
+      <div className="flex flex-col gap-4">
         <SectionHeading className="mb-0">Combat closeout</SectionHeading>
         <p className="text-sm text-muted-foreground">
           Structured turns have ended. Review each hero’s remaining choices before the Director
@@ -157,7 +160,7 @@ export function CloseoutCard({ campaignId }: { campaignId: Id<'campaigns'> }) {
           );
           return (
             <section key={hero.id} aria-label={`Cleanup for ${hero.name}`}>
-              <h3 className="text-sm font-semibold">{hero.name}</h3>
+              <h3 className="text-base font-medium">{hero.name}</h3>
               {choices.length === 0 && (
                 <p className="text-sm text-muted-foreground">
                   No pending cleanup options. Spend nothing.
@@ -191,7 +194,7 @@ export function CloseoutCard({ campaignId }: { campaignId: Id<'campaigns'> }) {
             disabled={!closeout.mayFinish}
           />
         )}
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 }

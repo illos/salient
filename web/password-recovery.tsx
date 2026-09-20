@@ -10,14 +10,20 @@ import { ErrorNotice, Field, Loading } from './ui';
 
 function RecoveryPage({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <main className="flex min-h-screen items-center justify-center bg-background p-8">
-      <section className="w-full max-w-md space-y-6">
-        <span className="text-2xl font-bold tracking-tight">Salient</span>
-        <h1 className="rule-strong pb-3 text-2xl">{title}</h1>
-        {children}
-        <Link to="/login" search={{ next: '/' }}>
-          Back to sign in
-        </Link>
+    <main className="relative flex min-h-screen flex-col bg-background px-10 py-8">
+      <span className="text-lg font-wordmark">Salient</span>
+      <section className="flex flex-1 items-center justify-center py-16">
+        <div className="w-full max-w-[360px]">
+          <h1 className="text-3xl">{title}</h1>
+          <div className="mt-8 flex flex-col gap-5">{children}</div>
+          <Link
+            to="/login"
+            search={{ next: '/' }}
+            className="mt-6 inline-block text-base text-muted-foreground hover:text-foreground"
+          >
+            Back to sign in
+          </Link>
+        </div>
       </section>
     </main>
   );
@@ -41,7 +47,7 @@ export function ForgotPassword() {
         </p>
       ) : (
         <form
-          className="flex flex-col gap-4"
+          className="flex flex-col gap-5"
           onSubmit={async event => {
             event.preventDefault();
             if (pending) return;
@@ -67,12 +73,14 @@ export function ForgotPassword() {
             }
           }}
         >
-          <p>Enter the email address you use to sign in.</p>
+          <p className="text-base text-muted-foreground">
+            Enter the email address you use to sign in.
+          </p>
           <Field label="Email">
-            <Input name="email" type="email" autoComplete="email" required />
+            <Input name="email" type="email" autoComplete="email" required className="h-12" />
           </Field>
           <ErrorNotice error={error} />
-          <Button type="submit" disabled={pending}>
+          <Button type="submit" size="lg" className="w-full" disabled={pending}>
             {pending ? 'Please wait…' : 'Send reset link'}
           </Button>
         </form>
@@ -96,7 +104,7 @@ export function ResetPassword({ token, invalid }: { token?: string; invalid: boo
         </p>
       ) : (
         <form
-          className="flex flex-col gap-4"
+          className="flex flex-col gap-5"
           onSubmit={async event => {
             event.preventDefault();
             if (pending) return;
@@ -140,6 +148,7 @@ export function ResetPassword({ token, invalid }: { token?: string; invalid: boo
               minLength={8}
               maxLength={128}
               required
+              className="h-12"
             />
           </Field>
           <Field label="Confirm new password">
@@ -150,11 +159,12 @@ export function ResetPassword({ token, invalid }: { token?: string; invalid: boo
               minLength={8}
               maxLength={128}
               required
+              className="h-12"
             />
           </Field>
           <ErrorNotice error={error} />
           {error && <Link to="/forgot-password">Request a new link</Link>}
-          <Button type="submit" disabled={pending}>
+          <Button type="submit" size="lg" className="w-full" disabled={pending}>
             {pending ? 'Please wait…' : 'Reset password'}
           </Button>
         </form>

@@ -1,10 +1,11 @@
 // SPDX-License-Identifier: GPL-3.0-only
 /**
- * One game-log entry in the mockup feed presentation (session-free-play-director.png,
- * combat-table-*.png; docs/build/V21-desktop-layout-fidelity.md item 5): a small disc at the
- * left (ink for the viewer's own creature, red for a foe, grey otherwise), the actor's name in
- * bold with the time at the right, the recorded description in grey beneath, dice as chips with
- * the total filled and the tier in brick red, and the history affordance as a small ghost button:
+ * One game-log entry in the Quiet feed presentation (docs/design-mockups/quiet/README.md, table
+ * screen; docs/build/V21-desktop-layout-fidelity.md item 5): a 32px disc at the left (ink for
+ * the viewer's own creature, accent for a foe, grey otherwise), the actor's name at 500 with the
+ * time at the right, the recorded description in muted beneath, dice as `sub` pills with the
+ * total in ink and the tier in accent, entries separated by air, and the history affordance as a
+ * small ghost button:
  * Undo / Rewind on the entry the viewer's undo would act on, and Redo on the undone entry their
  * redo would restore (V29 item 1 gave Redo the same inline placement Undo already had, so a
  * player keeps both after the Director's toolbar moved into the settings pop-up). Session and
@@ -229,7 +230,7 @@ export function LogEntry({
   if (marker)
     return (
       <li
-        className={undone ? 'opacity-60' : undefined}
+        className={undone ? 'opacity-40' : undefined}
         data-disposition={event.disposition}
         data-sequence={event.sequence}
         data-kind={event.kind}
@@ -247,7 +248,7 @@ export function LogEntry({
   const chips = diceChipsOf(event);
   return (
     <li
-      className={`group/entry flex items-start gap-3 py-2.5 ${undone ? 'text-muted-foreground' : ''}`}
+      className={`group/entry flex items-start gap-3 py-3 ${undone ? 'text-muted-foreground' : ''}`}
       data-disposition={event.disposition}
       data-sequence={event.sequence}
       data-kind={event.kind}
@@ -264,13 +265,13 @@ export function LogEntry({
       <div className="flex min-w-0 flex-1 flex-col gap-1">
         <div className="flex items-baseline gap-2">
           <span
-            className={`min-w-0 truncate text-sm font-bold ${undone ? 'line-through' : ''}`}
+            className={`min-w-0 truncate text-base font-medium ${undone ? 'line-through' : ''}`}
             title={attribution}
           >
             {name}
           </span>
           {event.disposition !== 'applied' && (
-            <Chip caps kind="plain" className="h-5 text-muted-foreground">
+            <Chip kind="plain" className="h-5">
               {event.disposition === 'undone'
                 ? 'Undone'
                 : event.disposition === 'redone'
@@ -301,7 +302,7 @@ export function LogEntry({
               </span>
             )}
             <time
-              className="text-xs text-muted-foreground tabular-nums"
+              className="text-sm text-muted-foreground tabular-nums"
               dateTime={new Date(event.createdAt).toISOString()}
               title={title}
             >
@@ -309,9 +310,9 @@ export function LogEntry({
             </time>
           </span>
         </div>
-        {/* The recorded description stays in a <strong> for the audit locators; visually grey. */}
+        {/* The recorded description stays in a <strong> for the audit locators; visually muted. */}
         <strong
-          className={`text-sm leading-5 font-normal text-muted-foreground [overflow-wrap:anywhere] ${
+          className={`text-base font-normal text-muted-foreground [overflow-wrap:anywhere] ${
             undone ? 'line-through' : ''
           }`}
         >

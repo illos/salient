@@ -46,20 +46,20 @@ export function ChatPane({
   return (
     <section
       aria-labelledby="chat-heading"
-      className="flex flex-col rounded-md border border-rule-strong bg-card"
+      className="flex flex-col rounded-lg bg-card"
       data-testid="table-chat"
     >
-      <div className="rule-soft flex items-baseline justify-between px-5 py-4">
-        <h2 id="chat-heading" className="text-2xl">
+      <div className="flex items-baseline justify-between px-6 pt-6 pb-3">
+        <h2 id="chat-heading" className="text-xl">
           Table chat
         </h2>
-        <span className="eyebrow mb-0" data-testid="online-count">
+        <span className="text-sm text-muted-foreground" data-testid="online-count">
           {onlineCount} online
         </span>
       </div>
       <div
         ref={scroller}
-        className="flex max-h-[420px] min-h-[280px] flex-col overflow-y-auto bg-muted/40 px-5 py-4"
+        className="flex max-h-[420px] min-h-[280px] flex-col overflow-y-auto px-6 py-3"
       >
         {!page ? (
           <Loading>Loading the chat…</Loading>
@@ -70,14 +70,14 @@ export function ChatPane({
                 {page.nextBefore !== null && (
                   <Button
                     variant="link"
-                    className="text-xs"
+                    className="text-sm"
                     onClick={() => setBefore(page.nextBefore ?? undefined)}
                   >
                     Older messages
                   </Button>
                 )}
                 {before !== undefined && (
-                  <Button variant="link" className="text-xs" onClick={() => setBefore(undefined)}>
+                  <Button variant="link" className="text-sm" onClick={() => setBefore(undefined)}>
                     Latest messages
                   </Button>
                 )}
@@ -96,12 +96,12 @@ export function ChatPane({
                       </span>
                       <span className="flex min-w-0 flex-1 flex-col">
                         <span className="flex items-baseline gap-2">
-                          <span className="text-xs font-bold">{m.authorName}</span>
-                          <span className="text-2xs text-muted-foreground">
+                          <span className="text-sm font-medium">{m.authorName}</span>
+                          <span className="text-sm text-muted-foreground">
                             {relativeTime(m.createdAt, now)}
                           </span>
                         </span>
-                        <span className={cn('text-sm break-words whitespace-pre-wrap')}>
+                        <span className={cn('text-base break-words whitespace-pre-wrap')}>
                           {m.text}
                         </span>
                       </span>
@@ -114,7 +114,7 @@ export function ChatPane({
         )}
       </div>
       <form
-        className="rule-soft flex items-stretch gap-2 border-t px-5 py-4"
+        className="flex items-stretch gap-2 px-6 pt-3 pb-6"
         onSubmit={e => {
           e.preventDefault();
           const message = text.trim();
@@ -142,9 +142,8 @@ export function ChatPane({
         />
         <Button
           type="submit"
-          variant="secondary"
-          size="icon-lg"
-          className="size-10"
+          variant="ghost"
+          size="icon"
           aria-label="Send"
           disabled={command.pending || text.trim().length === 0}
         >

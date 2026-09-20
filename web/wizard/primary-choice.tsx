@@ -52,9 +52,9 @@ export function PrimaryChoice({
     </div>
   ) : (
     <>
-      <section className="rule-soft py-5" aria-label={`Selected ${label.toLowerCase()}`}>
+      <section className="py-5" aria-label={`Selected ${label.toLowerCase()}`}>
         <div className="flex flex-wrap items-center gap-3">
-          <h3 className="m-0 text-xl font-bold">{selected ?? noneLabel}</h3>
+          <h3 className="m-0 text-xl font-medium">{selected ?? noneLabel}</h3>
           {reference}
           <Button
             ref={edit}

@@ -103,7 +103,7 @@ export function CampaignHeader({
       ? 'No sessions yet'
       : `Session ${sessionCount}${lastPlayedAt ? ` · last played ${relativeTime(lastPlayedAt, now)}` : ''}`;
   return (
-    <header className="rule-strong mb-8 pb-5">
+    <header className="mb-8 pb-5">
       <Link to="/" className="mb-4 inline-block text-sm text-muted-foreground">
         ← Campaigns
       </Link>
@@ -160,7 +160,7 @@ function StartSessionAction({
           {members.map(m => (
             <li
               key={m.userId}
-              className="flex h-10 items-center gap-2 rounded-md border border-input px-3 text-sm font-semibold"
+              className="flex h-10 items-center gap-2 rounded-full bg-muted py-1 pr-3.5 pl-1 text-sm font-medium"
             >
               <span aria-hidden>
                 <Disc name={m.displayName} size="sm" />

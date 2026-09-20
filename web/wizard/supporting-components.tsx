@@ -73,7 +73,7 @@ export function CatalogSelect({
           </option>
         ))}
       </select>
-      <span className="text-xs text-muted-foreground">
+      <span className="text-sm text-muted-foreground">
         {matches.length} of {values.length} options match
       </span>
     </div>
@@ -85,9 +85,9 @@ export function SelectedRuleSource({ sourcePath, name }: { sourcePath: string; n
   const target = catalog ? resolveRule(catalog, { sourcePath }) : undefined;
   const [followed, setFollowed] = useState<{ entry: RuleSummary; section?: string }>();
   return (
-    <section className="mt-3 min-w-0 rounded-md border p-4" aria-label={`${name} full text`}>
+    <section className="mt-3 min-w-0 rounded-md bg-muted p-4" aria-label={`${name} full text`}>
       <div className="mb-3 flex items-center justify-between gap-3">
-        <h4 className="m-0 text-base font-semibold">{name}</h4>
+        <h4 className="m-0 text-base font-medium">{name}</h4>
         <RuleLink sourcePath={sourcePath} label={name} />
       </div>
       {!catalog ? (
@@ -131,10 +131,10 @@ export function SelectedSkillSource({ name }: { name: string }) {
   if (!sourcePath) return null;
   return (
     <details
-      className="rounded-md border p-3 text-sm"
+      className="rounded-md bg-muted p-3 text-base"
       onToggle={event => setOpen(event.currentTarget.open)}
     >
-      <summary className="cursor-pointer font-semibold">{name} · skill description</summary>
+      <summary className="cursor-pointer font-medium">{name} · skill description</summary>
       {open && <SelectedRuleSource name={name} sourcePath={sourcePath} />}
     </details>
   );
@@ -145,9 +145,12 @@ export function SelectedLanguageSource({ name }: { name: string }) {
   const language = SUPPORTING_LANGUAGES[name];
   if (!language) return null;
   return (
-    <section className="space-y-2 rounded-md border p-3 text-sm" aria-label={`${name} language`}>
+    <section
+      className="space-y-2 rounded-md bg-muted p-3 text-base"
+      aria-label={`${name} language`}
+    >
       <div className="flex items-center gap-2">
-        <h4 className="m-0 text-sm font-semibold">
+        <h4 className="m-0 text-base font-medium">
           {name} · {language.type} language
         </h4>
         <RuleLink id={language.source.scc} label={`${name} language`} />
@@ -158,7 +161,7 @@ export function SelectedLanguageSource({ name }: { name: string }) {
             .filter(([field, value]) => field !== 'language' && value)
             .map(([field, value]) => (
               <div key={field}>
-                <dt className="inline font-semibold">{readableLabel(field)}: </dt>
+                <dt className="inline font-medium">{readableLabel(field)}: </dt>
                 <dd className="m-0 inline">{value}</dd>
               </div>
             ))}
@@ -174,9 +177,9 @@ export function IncidentText({ career, name }: { career?: string; name: string }
   const incident = career ? CAREER_INCIDENTS[career]?.find(item => item.name === name) : undefined;
   if (!incident) return null;
   return (
-    <section className="mt-3 rounded-md border p-4" aria-label={`${name} full text`}>
+    <section className="mt-3 rounded-md bg-muted p-4" aria-label={`${name} full text`}>
       <div className="mb-3 flex items-center justify-between gap-3">
-        <h4 className="m-0 text-base font-semibold">{incident.name}</h4>
+        <h4 className="m-0 text-base font-medium">{incident.name}</h4>
         <RuleLink sourcePath={incident.source} label={incident.name} />
       </div>
       <CoreSource source={incident.text} />
@@ -221,18 +224,20 @@ export function SupportingBuildFacts({ baseline }: { baseline: PartialBaseline |
   ];
   if (!choices.length && !items.length && !rows.length) return null;
   return (
-    <section className="space-y-3 text-sm" aria-label="Supporting build choices">
-      <h4 className="caps m-0 text-muted-foreground">Supporting choices and grants</h4>
+    <section className="space-y-3 text-base" aria-label="Supporting build choices">
+      <h4 className="m-0 text-sm font-normal text-muted-foreground">
+        Supporting choices and grants
+      </h4>
       <dl className="m-0 space-y-3">
         {rows.map(row => (
           <div key={`${row.label}:${row.value}`}>
-            <dt className="font-semibold">{readableLabel(row.label)}</dt>
+            <dt className="text-sm text-muted-foreground">{readableLabel(row.label)}</dt>
             <dd className="m-0">{row.value}</dd>
           </div>
         ))}
         {choices.map(choice => (
           <div key={`${choice.decisionId}:${choice.label}`}>
-            <dt className="flex items-center gap-1 font-semibold">
+            <dt className="flex items-center gap-1 text-sm text-muted-foreground">
               {readableLabel(choice.label)}
               <RuleLink sourcePath={choice.sourcePath} label={readableLabel(choice.label)} />
             </dt>
@@ -248,7 +253,7 @@ export function SupportingBuildFacts({ baseline }: { baseline: PartialBaseline |
         ))}
         {items.map(item => (
           <div key={`${item.decisionId}:${item.name}`}>
-            <dt className="flex items-center gap-1 font-semibold">
+            <dt className="flex items-center gap-1 text-sm text-muted-foreground">
               {item.state === 'pending-Director' ? 'Director-selected starting item' : item.name}
               <RuleLink sourcePath={item.sourcePath} label="Starting item grant" />
             </dt>

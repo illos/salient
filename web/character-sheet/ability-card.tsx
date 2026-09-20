@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: GPL-3.0-only
 /** Core-style printed ability cards. Full source and glyphs are presentation only;
- * build damage modifiers remain separate and the rulebook control opens the complete reference. */
+ * build damage modifiers remain separate and the rulebook control opens the complete reference.
+ * The printed card (`ds-hero-ability`, web/components/core-content.css) is a preserved subsystem
+ * (docs/design-mockups/quiet/README.md#preserved-subsystems); only the chrome around it is Quiet. */
 import { cn } from 'cn';
 import type { SheetAbility } from '../../shared/contracts/characterSheet';
 import type { ChipKind } from '../components/chip';
@@ -57,15 +59,13 @@ export function abilitySummary(ability: SheetAbility): string | null {
   return null;
 }
 
-const CARD = 'flex flex-col gap-2 rounded-md border';
-
 export function AbilityCard({ ability, compact }: { ability: SheetAbility; compact?: boolean }) {
   const tags = abilityTags(ability).filter(tag => tag.kind === 'result' || tag.kind === 'accent');
   return (
     <li className={cn('ds-hero-ability', compact && 'text-sm')} data-ability-kind={ability.kind}>
       <header>
         <strong>{ability.name}</strong>
-        <span className="flex items-center gap-2 text-sm">
+        <span className="flex items-center gap-2 text-sm text-muted-foreground">
           {tags.map(tag => (
             <span key={tag.text}>{tag.text}</span>
           ))}
@@ -77,17 +77,17 @@ export function AbilityCard({ ability, compact }: { ability: SheetAbility; compa
       )}
       <CoreSource source={abilitySource(ability)} />
       {ability.costAdjustments?.map(adjustment => (
-        <p key={adjustment.decisionId} className="text-xs">
+        <p key={adjustment.decisionId} className="text-sm">
           Cost adjustment: {adjustment.amount > 0 ? '+' : ''}
           {adjustment.amount} (minimum {adjustment.minimum}).{' '}
           <RuleLink sourcePath={adjustment.sourcePath} label="Cost adjustment" />
         </p>
       ))}
       {ability.kitBonusesIncluded && (
-        <p className="text-xs text-muted-foreground">Kit bonuses included</p>
+        <p className="text-sm text-muted-foreground">Kit bonuses included</p>
       )}
       {ability.buildModifiers?.length ? (
-        <div className="flex flex-col gap-1 text-xs text-muted-foreground">
+        <div className="flex flex-col gap-1 text-sm text-muted-foreground">
           <span>Printed tiers shown above. Rolled damage bonuses:</span>
           {ability.buildModifiers.map((modifier, index) => (
             <span key={index}>
@@ -102,7 +102,7 @@ export function AbilityCard({ ability, compact }: { ability: SheetAbility; compa
   );
 }
 
-/** A readable common action: a lighter card, no use control (its operation lives in the log). */
+/** A readable common action: a `sub` inset row, no use control (its operation lives in the log). */
 export function CommonActionCard({
   name,
   id,
@@ -115,13 +115,12 @@ export function CommonActionCard({
   return (
     <li
       className={cn(
-        CARD,
-        'flex-row items-center justify-between border-border bg-muted/60',
-        compact ? 'px-3 py-2' : 'px-4 py-2.5',
+        'flex items-center justify-between gap-2 rounded-md bg-muted',
+        compact ? 'min-h-10 px-3 py-2' : 'min-h-11 px-4 py-2.5',
       )}
     >
-      <span className="text-sm">{name}</span>
-      <span className="flex items-center gap-1 text-xs text-muted-foreground">
+      <span className="text-base">{name}</span>
+      <span className="flex items-center gap-1 text-sm text-muted-foreground">
         Common action
         <RuleLink id={id} label={name} />
       </span>

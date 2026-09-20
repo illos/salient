@@ -1,18 +1,17 @@
 import { Glyph } from '../components/glyph';
 // SPDX-License-Identifier: GPL-3.0-only
 /**
- * The sheet's header band from character-sheet.png: disc with initials, the name, a row of caps
- * chips (ancestry, class · subclass, level, kit, campaign), the build status badge and the five
- * characteristic boxes at the right over a hard rule. Selecting a characteristic box opens the
- * shared Roll test flow with that characteristic preselected; nothing rolls until Roll
- * (docs/character-sheet-spec.md#layout-and-content). The compact variant is the same band in the
- * heroes pane: a smaller disc and the boxes in one row.
+ * The sheet's header band (docs/design-mockups/quiet/README.md, identity header): disc with
+ * initials, the name, one muted identity line (ancestry · class · subclass · level · kit ·
+ * campaign), the build status badges and the five characteristic tiles at the right. Selecting a
+ * characteristic tile opens the shared Roll test flow with that characteristic preselected;
+ * nothing rolls until Roll (docs/character-sheet-spec.md#layout-and-content). The compact variant
+ * is the same band in the heroes pane: a smaller disc and the tiles in one row as `sub` insets.
  */
 import { cn } from 'cn';
 import type { HeroSheet } from '../../shared/contracts/characterSheet';
 import type { DerivedBaseline, PartialBaseline } from '../../shared/contracts/characterEvaluation';
 import { Badge } from '../components/ui/badge';
-import { Chip } from '../components/chip';
 import { Disc } from '../components/disc';
 import { StatBox } from '../components/stat-box';
 import { pending } from './sections';
@@ -50,7 +49,7 @@ export function SheetHeader({
   /** The characteristic whose Roll test entry is open, if any. */
   rollFor: CharacteristicKey | null;
   onRollFor: (key: CharacteristicKey | null) => void;
-  /** Rendered under the chips (active condition badges in the compact header). */
+  /** Rendered under the identity line (active condition badges in the compact header). */
   children?: React.ReactNode;
 }) {
   const Name = compact ? 'h3' : 'h1';
@@ -70,7 +69,7 @@ export function SheetHeader({
   return (
     <header
       className={cn(
-        'rule-strong flex flex-wrap items-start justify-between',
+        'flex flex-wrap items-start justify-between',
         compact ? 'gap-x-4 gap-y-3 pb-3' : 'gap-x-8 gap-y-4 pb-6',
       )}
     >
@@ -88,9 +87,9 @@ export function SheetHeader({
           variant={sheet.audience === 'owner' ? 'ink' : 'grey'}
           label={`${sheet.name} portrait`}
         />
-        <div className={cn('flex min-w-0 flex-col', compact ? 'gap-1.5' : 'gap-3')}>
+        <div className={cn('flex min-w-0 flex-col', compact ? 'gap-1.5' : 'gap-2')}>
           <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-            <Name className={cn('m-0 truncate', compact ? 'text-lg' : 'text-3xl')}>
+            <Name className={cn('m-0 truncate font-medium', compact ? 'text-lg' : 'text-3xl')}>
               {sheet.name}
             </Name>
             <span className="flex flex-wrap items-center gap-1">
@@ -106,14 +105,21 @@ export function SheetHeader({
               {sheet.combatLocked && <Badge variant="outline">Combat lock</Badge>}
             </span>
           </div>
-          <div className="flex flex-wrap items-center gap-1.5" aria-label="Identity">
+          {/* One muted line; a CSS middle dot separates the items so no text changes. */}
+          <div
+            className={cn(
+              "flex flex-wrap items-center gap-x-2 gap-y-0.5 text-muted-foreground [&>*+*]:before:mr-2 [&>*+*]:before:content-['·']",
+              compact ? 'text-sm' : 'text-base',
+            )}
+            aria-label="Identity"
+          >
             {chips.map(chip => (
-              <Chip key={chip.key} caps kind={chip.filled ? 'result' : 'plain'}>
+              <span key={chip.key} className={cn(chip.filled && 'text-foreground')}>
                 {chip.text}
-              </Chip>
+              </span>
             ))}
             {!compact && (
-              <span className="ml-1 text-xs text-muted-foreground">
+              <span>
                 {partial?.career?.value ?? 'Career pending'} · owned by {sheet.ownerName}
               </span>
             )}
@@ -133,7 +139,7 @@ export function SheetHeader({
             <button
               key={key}
               type="button"
-              className="group/stat rounded-md outline-none focus-visible:ring-3 focus-visible:ring-ring/50"
+              className="group/stat rounded-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
               aria-pressed={open}
               aria-label={`${name} ${value}`}
               title={`Open the Roll test flow with ${name} selected`}
@@ -151,9 +157,10 @@ export function SheetHeader({
                 }
                 compact={compact}
                 emphasis={open}
+                inset={compact}
                 className={cn(
-                  'transition-colors group-hover/stat:bg-muted',
-                  !compact && 'h-20 min-w-[84px]',
+                  'transition-colors',
+                  compact ? 'group-hover/stat:bg-accent' : 'group-hover/stat:bg-muted',
                 )}
               />
             </button>

@@ -94,7 +94,7 @@ export function SessionHistory({
       <section aria-labelledby="session-history-heading">
         <SectionHeading
           aside={
-            <Button variant="link" className="caps" onClick={() => setRecap(null)}>
+            <Button variant="link" className="text-sm" onClick={() => setRecap(null)}>
               ← All sessions
             </Button>
           }
@@ -119,18 +119,18 @@ export function SessionHistory({
               key={session.id}
               data-testid="session-row"
               className={cn(
-                'rule-soft flex items-center gap-4 py-4',
-                !all && index === FIRST_PAGE - 1 && closed.length > FIRST_PAGE && 'opacity-60',
+                'flex items-center gap-4 py-4',
+                !all && index === FIRST_PAGE - 1 && closed.length > FIRST_PAGE && 'opacity-40',
               )}
             >
-              <span className="w-24 shrink-0 text-lg font-bold">Session {session.number}</span>
+              <span className="w-24 shrink-0 text-lg font-medium">Session {session.number}</span>
               <span className="flex min-w-0 flex-1 items-center gap-2">
                 {editing === session.id ? (
                   <TitleEditor session={session} onDone={() => setEditing(null)} />
                 ) : (
                   <>
                     {session.title && (
-                      <span className="truncate text-sm font-semibold">{session.title}</span>
+                      <span className="truncate text-base font-medium">{session.title}</span>
                     )}
                     {director && (
                       <Button
@@ -193,7 +193,7 @@ function SessionLog({
       ) : (
         <ol className="m-0 list-none p-0">
           {result.events.map((event, index) => (
-            <li key={event.id} className="rule-soft flex items-start gap-4 py-3 text-sm">
+            <li key={event.id} className="flex items-start gap-4 py-3">
               <span
                 aria-hidden
                 className={cn(
@@ -205,11 +205,11 @@ function SessionLog({
                 <strong>{readableRuleText(event.description)}</strong>
                 <EventRuleLinks payload={event.payload} />
                 {event.dice && (
-                  <small className="mt-0.5 block text-xs text-muted-foreground">
+                  <small className="mt-0.5 block text-sm text-muted-foreground">
                     Dice: {event.dice.map(die => `d${die.sides}=${die.value}`).join(' ')}
                   </small>
                 )}
-                <small className="mt-0.5 block text-xs text-muted-foreground">
+                <small className="mt-0.5 block text-sm text-muted-foreground">
                   {event.actorName ?? (event.origin === 'clock' ? 'Game clock' : 'Engine')} ·{' '}
                   {new Date(event.createdAt).toLocaleString()}
                 </small>

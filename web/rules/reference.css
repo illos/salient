@@ -14,19 +14,22 @@
   height: 1.75rem;
   vertical-align: middle;
   color: var(--muted-foreground);
-  border-radius: 0.25rem;
+  background: var(--muted);
+  border: 0;
+  border-radius: 999px;
   flex-shrink: 0;
+  transition: background var(--motion-fast);
 }
 .rulebook-link:hover {
   color: var(--foreground);
-  background: var(--muted);
+  background: var(--placeholder);
 }
 .rulebook-link:focus-visible {
   outline: 2px solid var(--ring);
   outline-offset: 2px;
 }
 .rulebook-link[aria-disabled='true'] {
-  opacity: 0.45;
+  opacity: 0.4;
 }
 /* The card frame lives in web/style.css (.overlay-card-*); these classes only scope the prose. */
 .rule-preview {

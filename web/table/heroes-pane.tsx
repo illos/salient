@@ -85,8 +85,8 @@ function HeroCard({
               : undefined
           }
         >
-          <span className="caps text-muted-foreground">Recoveries</span>
-          <span className="text-xs font-semibold tabular-nums">
+          <span className="text-sm text-muted-foreground">Recoveries</span>
+          <span className="text-sm font-medium tabular-nums">
             {live.recoveries}
             {facts?.recoveriesMax !== null && facts?.recoveriesMax !== undefined
               ? ` / ${facts.recoveriesMax}`
@@ -96,20 +96,16 @@ function HeroCard({
       )}
       {full && (
         <>
-          <Chip
-            kind="accent"
-            caps
-            title={`${full.heroicResource.name} ${full.heroicResource.current}`}
-          >
+          <Chip kind="accent" title={`${full.heroicResource.name} ${full.heroicResource.current}`}>
             {full.heroicResource.name} {full.heroicResource.current}
           </Chip>
-          <Chip caps>Surges {full.surges}</Chip>
-          <Chip caps>Victories {full.victories}</Chip>
+          <Chip>Surges {full.surges}</Chip>
+          <Chip>Victories {full.victories}</Chip>
         </>
       )}
     </>
   ) : (
-    <span className="text-xs text-muted-foreground">
+    <span className="text-sm text-muted-foreground">
       No live values: admission initializes them.
     </span>
   );
@@ -279,10 +275,10 @@ export function HeroesPane({
               </ul>
               {hero.id === selectedId && !collapsed && (
                 <section
-                  className="flex flex-col gap-3 rounded-md border border-rule-strong bg-card px-5 py-4 shadow-hard"
+                  className="flex flex-col gap-3 border-t border-border pt-4"
                   aria-label="Selected sheet"
                 >
-                  <span className="caps text-muted-foreground">Selected sheet</span>
+                  <span className="text-sm text-muted-foreground">Selected sheet</span>
                   <CharacterSheet key={hero.id} characterId={hero.id} compact />
                   {/* The ability Use controls and their target flow stay with the selected hero:
                       the sheet's cards are readable presentation, the panel is the operation. */}
@@ -299,9 +295,9 @@ export function HeroesPane({
           ))}
           {others.length > 0 && (
             <div className="flex flex-col gap-1">
-              <div className="rule-soft flex items-baseline justify-between pb-1">
-                <span className="caps text-muted-foreground">Party</span>
-                <span className="caps text-muted-foreground">{others.length}</span>
+              <div className="flex items-baseline justify-between pb-1">
+                <span className="text-sm text-muted-foreground">Party</span>
+                <span className="text-sm text-muted-foreground tabular-nums">{others.length}</span>
               </div>
               <ul className="m-0 list-none p-0">{others.map(hero => card(hero))}</ul>
             </div>

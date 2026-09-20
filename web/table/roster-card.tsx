@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: GPL-3.0-only
 /**
- * RosterCard: the compact roster row from the V1 mockups (combat-table-light.png foe rows,
- * session-free-play-director.png party rows), used for foes and heroes alike in the Director's
- * view and for the party roster in the player's view. Disc, name, caps subtitle, thick health bar,
- * resource chips, the target reticle at the right edge, and the acting / spent / Slain states.
+ * RosterCard: the compact roster row (docs/design-mockups/quiet/README.md, table screen foe rows),
+ * used for foes and heroes alike in the Director's view and for the party roster in the player's
+ * view. Tonal 44px disc, name, muted subtitle, 4px health bar, resource chips, the target control
+ * at the right edge, and the acting / spent / Slain states; rows are separated by air, not rules.
  *
  * Presentation only. The reticle submits the same `/target toggle` text as TargetControls
  * (web/table/targeting.tsx) and the edge/bane inputs submit the same `/target modifier` text;
@@ -47,8 +47,9 @@ export function turnStateOf(
 }
 
 /**
- * The circular target reticle (about 24px, ink stroke; filled while this viewer has the creature
- * selected; a red ring while another user has it selected). Same operation as TargetControls.
+ * The round target control (28px tonal disc; filled accent while this viewer has the creature
+ * selected; an accent outline while another user has it selected). Same operation as
+ * TargetControls.
  */
 export function TargetReticle({
   campaignId,
@@ -80,12 +81,12 @@ export function TargetReticle({
           )
         }
         className={cn(
-          'roster-reticle inline-flex size-6 shrink-0 items-center justify-center rounded-full border-2 border-foreground bg-transparent p-0 transition-colors duration-(--motion-fast) disabled:opacity-50',
-          selected && 'bg-foreground',
-          others.length > 0 && 'ring-2 ring-primary ring-offset-2 ring-offset-background',
+          'roster-reticle inline-flex size-7 shrink-0 cursor-pointer items-center justify-center rounded-full border-0 bg-muted p-0 transition-colors duration-(--motion-fast) hover:bg-accent disabled:opacity-40',
+          selected && 'bg-primary hover:bg-primary/90',
+          others.length > 0 && 'outline-2 outline-offset-2 outline-primary',
         )}
       >
-        {selected && <span aria-hidden className="size-2 rounded-full bg-background" />}
+        {selected && <span aria-hidden className="size-2 rounded-full bg-primary-foreground" />}
       </button>
       {others.length > 0 && (
         <span className="sr-only">
@@ -131,14 +132,15 @@ export function TargetModifiers({
         }
       });
   };
-  const field = 'h-6 w-10 rounded-(--chip-radius) border border-input bg-background px-1 text-xs';
+  const field =
+    'h-7 w-12 rounded-full border-0 bg-muted px-2 text-sm text-foreground caret-primary tabular-nums outline-none transition-colors duration-(--motion-fast) focus-visible:bg-accent';
   return (
-    <div className="flex flex-wrap items-center gap-x-3 gap-y-1 py-1.5 pl-14 text-xs">
+    <div className="flex flex-wrap items-center gap-x-3 gap-y-1 py-1.5 pl-14 text-sm">
       {selected && (
         <>
-          <span className="caps text-primary">Targeted</span>
+          <span className="text-sm text-primary">Targeted</span>
           <label className="flex items-center gap-1">
-            <span className="caps text-muted-foreground">Edges</span>
+            <span className="text-sm text-muted-foreground">Edges</span>
             <input
               className={field}
               type="number"
@@ -150,7 +152,7 @@ export function TargetModifiers({
             />
           </label>
           <label className="flex items-center gap-1">
-            <span className="caps text-muted-foreground">Banes</span>
+            <span className="text-sm text-muted-foreground">Banes</span>
             <input
               className={field}
               type="number"
@@ -164,7 +166,7 @@ export function TargetModifiers({
         </>
       )}
       {others.map(o => (
-        <span key={o.userName} className="caps text-muted-foreground">
+        <span key={o.userName} className="text-sm text-muted-foreground">
           Targeted by {o.userName}
           {o.actor ? ` (${o.actor.name})` : ''}
         </span>
@@ -193,7 +195,7 @@ export type CardHealth =
 export interface RosterCardProps {
   campaignId: Id<'campaigns'>;
   actor: RosterActor;
-  /** Caps line at the right of the name: `Fury · Level 1`, `Harrier · Level 1`, or the owner. */
+  /** Muted line at the right of the name: `Fury · Level 1`, `Harrier · Level 1`, or the owner. */
   subtitle?: string;
   /** Ink disc for the viewer's own or the acting creature; grey otherwise. */
   discVariant?: 'ink' | 'grey';
@@ -242,26 +244,29 @@ export function RosterCard({
         muted={state === 'slain' || state === 'away'}
       />
       <span className="flex min-w-0 flex-1 flex-col gap-1">
-        {/* The name keeps the room: the caps line at the right yields first in a narrow pane,
+        {/* The name keeps the room: the muted line at the right yields first in a narrow pane,
             because a truncating name beside a non-shrinking sibling collapses to nothing. */}
         <span className="flex items-baseline justify-between gap-x-3">
           <strong
-            className={cn('min-w-0 flex-1 truncate', state === 'slain' && 'text-muted-foreground')}
+            className={cn(
+              'min-w-0 flex-1 truncate font-medium',
+              state === 'slain' && 'text-muted-foreground',
+            )}
           >
             {actor.name}
           </strong>
           {state === 'acting' ? (
-            <span className="caps shrink-0 text-primary">Acting</span>
+            <span className="shrink-0 text-sm text-primary">Acting</span>
           ) : (
             subtitle && (
-              <span className="caps max-w-[55%] truncate text-muted-foreground">{subtitle}</span>
+              <span className="max-w-[55%] truncate text-sm text-muted-foreground">{subtitle}</span>
             )
           )}
         </span>
         {state === 'slain' ? (
-          <span className="caps text-muted-foreground">Slain</span>
+          <span className="text-sm text-muted-foreground">Slain</span>
         ) : state === 'away' ? (
-          <span className="caps text-muted-foreground">Away</span>
+          <span className="text-sm text-muted-foreground">Away</span>
         ) : (
           <CardHealthView health={health} />
         )}
@@ -275,8 +280,8 @@ export function RosterCard({
   return (
     <li
       className={cn(
-        'rule-soft relative flex flex-col',
-        state === 'acting' && 'roster-card-acting bg-primary/5 dark:bg-accent',
+        'relative flex flex-col',
+        state === 'acting' && 'roster-card-acting rounded-md bg-muted',
         className,
       )}
       data-roster-card
@@ -285,10 +290,7 @@ export function RosterCard({
       data-state={state}
       aria-current={current ? 'true' : undefined}
     >
-      {state === 'acting' && (
-        <span aria-hidden className="absolute inset-y-0 left-0 w-0.5 bg-primary" />
-      )}
-      <div className={cn('flex items-start gap-3 py-3 pr-1 pl-3', dimmed && 'opacity-60')}>
+      <div className={cn('flex items-start gap-3 py-3 pr-2 pl-3', dimmed && 'opacity-40')}>
         {onOpen ? (
           <button
             type="button"
@@ -302,7 +304,7 @@ export function RosterCard({
           <span className="flex min-w-0 flex-1 items-start gap-3">{body}</span>
         )}
         {mayTarget && (
-          <span className="flex shrink-0 flex-col items-end self-stretch pt-2.5">
+          <span className="flex shrink-0 flex-col items-end self-stretch pt-2">
             <TargetReticle campaignId={campaignId} target={actor} />
           </span>
         )}
@@ -311,7 +313,7 @@ export function RosterCard({
           as its label and squeezes the creature's name out of a 424px pane. */}
       {aside && (
         <div
-          className={cn('flex flex-wrap justify-end gap-2 pr-1 pb-3 pl-3', dimmed && 'opacity-60')}
+          className={cn('flex flex-wrap justify-end gap-2 pr-2 pb-3 pl-3', dimmed && 'opacity-40')}
         >
           {aside}
         </div>
@@ -323,10 +325,12 @@ export function RosterCard({
 
 function CardHealthView({ health }: { health: CardHealth }) {
   if (!health) return null;
-  if (health.kind === 'text') return <span className="text-xs tabular-nums">{health.text}</span>;
+  if (health.kind === 'text') return <span className="text-sm tabular-nums">{health.text}</span>;
   if (health.kind === 'winded')
     return (
-      <span className="caps text-muted-foreground">{health.winded ? 'Winded' : 'Not winded'}</span>
+      <span className="text-sm text-muted-foreground">
+        {health.winded ? 'Winded' : 'Not winded'}
+      </span>
     );
   return (
     <span className="flex items-center gap-3">
@@ -336,10 +340,10 @@ function CardHealthView({ health }: { health: CardHealth }) {
         tone={health.tone}
         low={health.low}
         label={health.label}
-        className="min-w-0 flex-1"
+        className="h-1 min-w-0 flex-1"
       />
       {health.text && (
-        <span className="shrink-0 text-xs font-semibold tabular-nums">
+        <span className="shrink-0 text-sm font-medium tabular-nums">
           {health.text}
           {health.temporary ? (
             <span className="ml-1 font-normal text-muted-foreground">+{health.temporary} temp</span>

@@ -23,7 +23,7 @@ export function CampaignsPage() {
   const navigate = useNavigate();
   return (
     <>
-      <div className="rule-strong mb-8 pb-5">
+      <div className="mb-8 pb-5">
         <Eyebrow>Your adventures</Eyebrow>
         <h1>Campaigns</h1>
         <p className="mt-1 text-muted-foreground">
@@ -39,18 +39,18 @@ export function CampaignsPage() {
             {campaigns === undefined ? (
               <Loading />
             ) : campaigns.length === 0 ? (
-              <div className="rounded-md border border-dashed border-input px-6 py-10 text-center">
+              <div className="rounded-md bg-muted px-6 py-10 text-center">
                 <h3>Your first adventure awaits</h3>
                 <p className="mt-1 text-muted-foreground">
                   Create a campaign, or use an invitation from your Director.
                 </p>
               </div>
             ) : (
-              <ul className="m-0 list-none p-0">
+              <ul className="m-0 flex list-none flex-col gap-3 p-0">
                 {campaigns.map(c => (
-                  <li key={c.id} className="rule-soft">
+                  <li key={c.id}>
                     <Link
-                      className="flex items-center gap-4 py-4 transition-colors duration-(--motion-fast) hover:bg-muted hover:no-underline"
+                      className="flex items-center gap-4 rounded-lg bg-card p-6 transition-colors duration-(--motion-fast) hover:bg-muted hover:no-underline"
                       to="/campaigns/$campaignId"
                       params={{ campaignId: c.id }}
                     >
@@ -63,14 +63,14 @@ export function CampaignsPage() {
                         }
                       />
                       <span className="flex-1">
-                        <span className="block text-lg font-bold">{c.name}</span>
+                        <span className="block text-lg font-medium">{c.name}</span>
                         <span className="block text-sm text-muted-foreground">
                           {c.activeSessionId
                             ? 'Session in progress'
                             : 'Ready for your next session'}
                         </span>
                       </span>
-                      <span className="caps text-muted-foreground">Open →</span>
+                      <span className="text-sm text-muted-foreground">Open →</span>
                     </Link>
                   </li>
                 ))}
@@ -80,15 +80,17 @@ export function CampaignsPage() {
           {requests && requests.length > 0 && (
             <div>
               <SectionHeading>Your join requests</SectionHeading>
-              {requests.map(r => (
-                <div key={r.id} className="rule-soft flex items-center justify-between gap-3 py-3">
-                  <span>{r.campaignName}</span>
-                  <span className="flex items-center gap-3">
-                    <Badge variant="outline">{r.status}</Badge>
-                    {r.status === 'pending' && <WithdrawRequest requestId={r.id} />}
-                  </span>
-                </div>
-              ))}
+              <div className="divide-y divide-border rounded-lg bg-card px-6 py-3">
+                {requests.map(r => (
+                  <div key={r.id} className="flex items-center justify-between gap-3 py-3">
+                    <span>{r.campaignName}</span>
+                    <span className="flex items-center gap-3">
+                      <Badge variant="outline">{r.status}</Badge>
+                      {r.status === 'pending' && <WithdrawRequest requestId={r.id} />}
+                    </span>
+                  </div>
+                ))}
+              </div>
             </div>
           )}
         </section>

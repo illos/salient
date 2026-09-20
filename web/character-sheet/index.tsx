@@ -1,13 +1,14 @@
 import { StartingRewardsPanel } from './starting-rewards';
 // SPDX-License-Identifier: GPL-3.0-only
 /**
- * The character sheet (docs/character-sheet-spec.md), laid out after character-sheet.png (V21):
- * the header band (disc, name, chips, characteristic boxes), then three columns on the
- * standalone page — Stamina block, Stats, Skills and Conditions at the left; Abilities as cards in
- * the centre; Kit, Features, Languages, Details and Notes at the right — or one column in the
- * table's heroes pane with the header and Stamina block sticky above the scrolling body. Every
- * value comes from the audience-projected `characters.sheet` read, and every control submits a
- * registered operation. Nothing here computes a game value.
+ * The character sheet (docs/character-sheet-spec.md) in the Quiet layout
+ * (docs/design-mockups/quiet/README.md, character sheet): the header band (disc, name, identity
+ * line, characteristic tiles), then three columns of `card` panels on the standalone page —
+ * Stamina, Stats, Skills and Conditions at the left; Abilities in the centre; Kit, Features,
+ * Languages, Details and Notes at the right — or one column in the table's heroes pane with the
+ * header and Stamina block sticky above the scrolling body. Every value comes from the
+ * audience-projected `characters.sheet` read, and every control submits a registered operation.
+ * Nothing here computes a game value.
  */
 import { useState } from 'react';
 import { useMutation, useQuery } from 'convex/react';
@@ -79,26 +80,29 @@ function TurnState({
     }
   }
   return (
-    <div className="flex items-center justify-between gap-2 text-sm">
-      <span className="caps text-muted-foreground">Turn state</span>
-      <span className="font-bold">{label}</span>
+    <div className="flex items-center justify-between gap-2 text-base">
+      <span className="text-muted-foreground">Turn state</span>
+      <span className="font-medium">{label}</span>
     </div>
   );
 }
 
 /** Peers see Stamina and Recoveries only; no Heroic Resource reaches this payload. */
-function PeerCard({ sheet }: { sheet: PeerSheet }) {
+function PeerCard({ sheet, compact }: { sheet: PeerSheet; compact?: boolean }) {
   const max = sheet.maxima?.staminaMaximum;
   return (
     <div
-      className="flex flex-col gap-2 rounded-md border border-rule-strong bg-card p-4 shadow-hard"
+      className={cn(
+        'flex flex-col gap-3',
+        compact ? 'rounded-md bg-muted p-4' : 'rounded-lg bg-card p-6',
+      )}
       data-sheet-peer
     >
       <div className="flex items-center gap-3">
         <Disc name={sheet.name} size="md" />
         <div className="flex min-w-0 flex-1 flex-col">
-          <strong className="truncate text-base">{sheet.name}</strong>
-          <span className="caps text-muted-foreground">{sheet.ownerName}</span>
+          <strong className="truncate text-base font-medium">{sheet.name}</strong>
+          <span className="text-sm text-muted-foreground">{sheet.ownerName}</span>
         </div>
       </div>
       {sheet.live && max !== undefined && (
@@ -109,16 +113,16 @@ function PeerCard({ sheet }: { sheet: PeerSheet }) {
           label={`${sheet.name} Stamina`}
         />
       )}
-      <dl className="m-0 grid grid-cols-2 gap-x-3 text-sm">
+      <dl className="m-0 grid grid-cols-2 gap-x-3 text-base">
         <div className="flex flex-col">
-          <dt className="caps text-muted-foreground">Stamina</dt>
-          <dd className="m-0 font-bold tabular-nums">
+          <dt className="text-sm text-muted-foreground">Stamina</dt>
+          <dd className="m-0 font-medium tabular-nums">
             {sheet.live ? `${sheet.live.stamina} / ${pending(max)}` : '—'}
           </dd>
         </div>
         <div className="flex flex-col items-end text-right">
-          <dt className="caps text-muted-foreground">Recoveries</dt>
-          <dd className="m-0 font-bold tabular-nums">
+          <dt className="text-sm text-muted-foreground">Recoveries</dt>
+          <dd className="m-0 font-medium tabular-nums">
             {sheet.live
               ? `${sheet.live.recoveries} / ${pending(sheet.maxima?.recoveriesMaximum)}`
               : '—'}
@@ -162,9 +166,11 @@ function RollTest({
   ].filter(Boolean);
   const text = parts.join(' ');
   const name = CHARACTERISTICS.find(([key]) => key === characteristic)?.[1] ?? characteristic;
+  // The form is a `sub` inset, so its controls step up to `ph`.
+  const select = 'native-select h-8 bg-placeholder';
   return (
     <form
-      className="flex flex-wrap items-end gap-2 rounded-md border border-rule-strong bg-background p-3 text-xs shadow-hard"
+      className="flex flex-wrap items-end gap-3 rounded-md bg-muted p-4 text-sm"
       aria-label="Roll test"
       onSubmit={event => {
         event.preventDefault();
@@ -174,11 +180,11 @@ function RollTest({
         );
       }}
     >
-      <span className="caps mr-1 self-center text-foreground">Roll test</span>
+      <span className="mr-1 self-center text-base font-medium text-foreground">Roll test</span>
       <label className="flex flex-col gap-1">
-        <span className="caps text-muted-foreground">Characteristic</span>
+        <span className="text-sm text-muted-foreground">Characteristic</span>
         <select
-          className="native-select"
+          className={select}
           aria-label="Test characteristic"
           value={characteristic}
           onChange={e => onCharacteristic(e.target.value as CharacteristicKey)}
@@ -191,8 +197,8 @@ function RollTest({
         </select>
       </label>
       <label className="flex flex-col gap-1">
-        <span className="caps text-muted-foreground">Skill</span>
-        <select className="native-select" value={skill} onChange={e => setSkill(e.target.value)}>
+        <span className="text-sm text-muted-foreground">Skill</span>
+        <select className={select} value={skill} onChange={e => setSkill(e.target.value)}>
           <option value="">None</option>
           {skills.map(s => (
             <option key={s} value={s}>
@@ -202,30 +208,26 @@ function RollTest({
         </select>
       </label>
       <label className="flex flex-col gap-1">
-        <span className="caps text-muted-foreground">Edges</span>
+        <span className="text-sm text-muted-foreground">Edges</span>
         <Input
-          className="h-8 w-14"
+          className="h-8 w-14 bg-placeholder"
           inputMode="numeric"
           value={edges}
           onChange={e => setEdges(e.target.value)}
         />
       </label>
       <label className="flex flex-col gap-1">
-        <span className="caps text-muted-foreground">Banes</span>
+        <span className="text-sm text-muted-foreground">Banes</span>
         <Input
-          className="h-8 w-14"
+          className="h-8 w-14 bg-placeholder"
           inputMode="numeric"
           value={banes}
           onChange={e => setBanes(e.target.value)}
         />
       </label>
       <label className="flex flex-col gap-1">
-        <span className="caps text-muted-foreground">Difficulty</span>
-        <select
-          className="native-select"
-          value={difficulty}
-          onChange={e => setDifficulty(e.target.value)}
-        >
+        <span className="text-sm text-muted-foreground">Difficulty</span>
+        <select className={select} value={difficulty} onChange={e => setDifficulty(e.target.value)}>
           <option value="">Director interprets</option>
           <option value="easy">easy</option>
           <option value="medium">medium</option>
@@ -254,6 +256,7 @@ function Abilities({ sheet, compact }: { sheet: HeroSheet; compact?: boolean }) 
       title="Abilities"
       aside={`${sheet.abilities.length} granted`}
       compact={compact}
+      bare
       id="sheet-abilities"
     >
       {sheet.features.some(feature => feature.name === 'Runic Carving') &&
@@ -261,14 +264,19 @@ function Abilities({ sheet, compact }: { sheet: HeroSheet; compact?: boolean }) 
           <RunicCarving characterId={sheet.id as Id<'characters'>} />
         )}
       {sheet.build?.status === 'incomplete' && (
-        <p className="m-0 mb-2 text-xs text-muted-foreground">
+        <p className="m-0 mb-3 text-sm text-muted-foreground">
           The build is incomplete; abilities its missing choices would grant are absent.
         </p>
       )}
-      <div className={cn('flex flex-col', compact ? 'gap-3' : 'gap-5')}>
+      {/* On the standalone page each group is a `card` panel around its printed Core cards; in
+          the heroes pane (already a panel) the groups sit on the pane surface. */}
+      <div className={cn('flex flex-col', compact ? 'gap-5' : 'gap-4')}>
         {groups.map(group => (
-          <div key={group.group} className="flex flex-col gap-2">
-            <h4 className="caps m-0 text-muted-foreground">{group.title}</h4>
+          <div
+            key={group.group}
+            className={cn('flex flex-col gap-3', !compact && 'rounded-lg bg-card p-6')}
+          >
+            <h4 className="m-0 text-sm font-normal text-muted-foreground">{group.title}</h4>
             <ul className="m-0 flex list-none flex-col gap-2 p-0" aria-label={group.title}>
               {group.abilities.map(ability => (
                 <AbilityCard
@@ -332,7 +340,7 @@ function Conditions({
           }
         />
       ) : (
-        <p className="m-0 text-sm text-muted-foreground">No live record yet.</p>
+        <p className="m-0 text-base text-muted-foreground">No live record yet.</p>
       )}
     </SheetSection>
   );
@@ -378,7 +386,7 @@ export function HeroSheetView({ sheet, compact }: { sheet: HeroSheet; compact?: 
         onClose={() => setRollFor(null)}
       />
     ) : (
-      <p className="m-0 text-xs text-muted-foreground" role="status">
+      <p className="m-0 text-sm text-muted-foreground" role="status">
         Tests are rolled at the table of an attached campaign.
       </p>
     ));
@@ -387,6 +395,7 @@ export function HeroSheetView({ sheet, compact }: { sheet: HeroSheet; compact?: 
       type="button"
       size="sm"
       variant="outline"
+      className={compact ? 'bg-placeholder' : undefined}
       aria-expanded={rollFor !== null}
       onClick={() => setRollFor(rollFor ? null : 'M')}
     >
@@ -407,10 +416,10 @@ export function HeroSheetView({ sheet, compact }: { sheet: HeroSheet; compact?: 
   if (compact) {
     return (
       <article className="flex flex-col gap-3" aria-label={`${sheet.name} character sheet`}>
-        {/* The hard rule marks where the pinned identity ends and the scrolling body begins;
-            without it a card passing underneath reads as clipped. */}
+        {/* The pinned identity takes the pane's own surface so a card passing underneath is
+            hidden rather than read as clipped. */}
         <div
-          className="rule-strong sticky top-0 z-10 -mx-1 flex flex-col gap-3 bg-background px-1 pb-3"
+          className="sticky top-0 z-10 -mx-1 flex flex-col gap-3 bg-card px-1 pb-3"
           data-sheet-sticky
         >
           <SheetHeader
@@ -431,7 +440,7 @@ export function HeroSheetView({ sheet, compact }: { sheet: HeroSheet; compact?: 
           {stamina}
           {rollTest}
         </div>
-        <div className="flex flex-col gap-5" data-sheet-body>
+        <div className="flex flex-col gap-6" data-sheet-body>
           <Abilities sheet={sheet} compact />
           <Conditions sheet={sheet} campaignId={campaignId} canAct={canAct} compact />
           <SheetSection
@@ -449,13 +458,13 @@ export function HeroSheetView({ sheet, compact }: { sheet: HeroSheet; compact?: 
             <StatsList partial={partial} xp={live?.xp ?? null} compact />
           </SheetSection>
           <SheetSection title="Details" compact id="sheet-details">
-            <div className="flex flex-col gap-3">
-              <div className="flex flex-col gap-1.5">
-                <span className="caps text-muted-foreground">Skills</span>
+            <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-2">
+                <span className="text-sm text-muted-foreground">Skills</span>
                 <SkillChips partial={partial} />
               </div>
               <div className="flex flex-col gap-1.5">
-                <span className="caps text-muted-foreground">Languages</span>
+                <span className="text-sm text-muted-foreground">Languages</span>
                 <LanguageChips partial={partial} />
               </div>
               <DetailsRows sheet={sheet} partial={partial} />
@@ -470,7 +479,7 @@ export function HeroSheetView({ sheet, compact }: { sheet: HeroSheet; compact?: 
     );
   }
   return (
-    <article className="flex flex-col gap-8" aria-label={`${sheet.name} character sheet`}>
+    <article className="flex flex-col gap-6" aria-label={`${sheet.name} character sheet`}>
       <div className="flex flex-col gap-4">
         <SheetHeader sheet={sheet} partial={partial} rollFor={rollFor} onRollFor={setRollFor}>
           {live && (
@@ -484,10 +493,10 @@ export function HeroSheetView({ sheet, compact }: { sheet: HeroSheet; compact?: 
         {rollTest}
       </div>
       <div
-        className="grid grid-cols-[340px_minmax(0,1fr)_360px] items-start gap-8"
+        className="grid grid-cols-[340px_minmax(0,1fr)_360px] items-start gap-4"
         data-sheet-columns
       >
-        <div className="flex flex-col gap-8">
+        <div className="flex flex-col gap-4">
           {stamina}
           <SheetSection title="Stats" id="sheet-stats">
             <StatsList partial={partial} xp={live?.xp ?? null} />
@@ -498,7 +507,7 @@ export function HeroSheetView({ sheet, compact }: { sheet: HeroSheet; compact?: 
           <Conditions sheet={sheet} campaignId={campaignId} canAct={canAct} />
         </div>
         <Abilities sheet={sheet} />
-        <div className="flex flex-col gap-8">
+        <div className="flex flex-col gap-4">
           {partial?.kit && (
             <SheetSection title={`Kit · ${partial.kit.name.value}`} id="sheet-kit">
               <KitBoxes kit={partial.kit} />
@@ -520,7 +529,7 @@ export function HeroSheetView({ sheet, compact }: { sheet: HeroSheet; compact?: 
           <SheetSection title="Details" id="sheet-details">
             <DetailsRows sheet={sheet} partial={partial} />
             {partial?.uncertainties?.length ? (
-              <p className="mt-2 text-xs text-muted-foreground">
+              <p className="mt-3 text-sm text-muted-foreground">
                 Some character details still need a rules decision. Review this build with your
                 Director.
               </p>
@@ -547,6 +556,6 @@ export function CharacterSheet({
   const sheet = useQuery(api.characters.sheet, { characterId, ...(view ? { view } : {}) }) as
     SheetPayload | undefined;
   if (!sheet) return <Loading>Loading the sheet…</Loading>;
-  if (sheet.audience === 'peer') return <PeerCard sheet={sheet} />;
+  if (sheet.audience === 'peer') return <PeerCard sheet={sheet} compact={compact} />;
   return <HeroSheetView sheet={sheet} compact={compact} />;
 }

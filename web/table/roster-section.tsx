@@ -66,16 +66,16 @@ export function RosterSection({
   if (!selected) return <div ref={root}>{children(open)}</div>;
   return (
     <div ref={root} className="flex flex-col gap-4">
-      <div className="roster-back-row rule-soft sticky -top-(--pane-padding-y) z-10 -mx-(--pane-padding-x) flex items-center gap-3 bg-background px-(--pane-padding-x) py-2">
+      <div className="roster-back-row sticky -top-(--pane-padding-y) z-10 -mx-(--pane-padding-x) flex items-center gap-3 bg-card px-(--pane-padding-x) py-2">
         <button
           type="button"
           onClick={back}
-          className="caps inline-flex h-7 cursor-pointer items-center gap-1 rounded-md border-0 bg-transparent px-1 text-foreground hover:bg-muted"
+          className="inline-flex h-8 cursor-pointer items-center gap-1 rounded-full border-0 bg-muted pr-3 pl-2 text-sm text-foreground transition-colors duration-(--motion-fast) hover:bg-accent"
         >
           <ChevronLeftIcon size={14} aria-hidden />
           {label}
         </button>
-        <span className="truncate text-sm font-bold">{selected.name}</span>
+        <span className="truncate text-base font-medium">{selected.name}</span>
       </div>
       <div key={selected.id}>{renderDetail(selected.id)}</div>
     </div>

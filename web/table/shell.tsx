@@ -3,8 +3,9 @@
  * The session shell (docs/table-spec.md#confirmed-combat-layout, 2026-09-15 decision; audit
  * finding 1): a full-viewport frame that replaces the site nav with the session header (wordmark,
  * campaign name, session number and elapsed time, status pill, PAUSE / RESUME and END, the user
- * menu) over three edge-to-edge panes separated by full-height rules, each scrolling on its own.
- * Widths come from the layout tokens in web/style.css (424 / flex / 424; heroes 566 in combat).
+ * menu) over three `card` panels on the page ground with 16px gaps (Quiet, docs/design-mockups/
+ * quiet/README.md, table screen), each scrolling on its own. Widths come from the layout tokens in
+ * web/style.css (424 / flex / 424; heroes 566 in combat).
  *
  * PAUSE / RESUME / END submit `sessions.transition` exactly as the campaign page does; ending a
  * session with committed combat opens the same VoidCard keep/reset choice. Nothing here resolves
@@ -72,6 +73,7 @@ function SessionControls({
       <Button
         variant="outline"
         size="sm"
+        className="rounded-full px-4"
         disabled={command.pending}
         onClick={() =>
           void command.run(
@@ -94,6 +96,7 @@ function SessionControls({
       <Button
         variant="outline"
         size="sm"
+        className="rounded-full px-4"
         disabled={command.pending}
         onClick={() => {
           if (encounter?.status === 'committed') {
@@ -156,21 +159,20 @@ export function SessionHeader({
   const status = sessionStatusText(roster, encounter);
   const live = roster.session?.status === 'running';
   return (
-    <header className="flex h-(--session-header-height) items-center gap-5 border-b border-rule-strong bg-background px-(--pane-padding-x)">
-      <Link to="/" className="text-2xl font-bold tracking-tight hover:no-underline">
+    <header className="flex h-(--session-header-height) items-center gap-5 bg-background px-(--pane-padding-x)">
+      <Link to="/" className="text-lg font-wordmark tracking-normal hover:no-underline">
         Salient
       </Link>
-      <span aria-hidden className="h-7 w-px bg-rule-strong" />
       <Link
         to="/campaigns/$campaignId"
         params={{ campaignId }}
-        className="truncate text-base font-semibold hover:no-underline"
+        className="truncate text-base font-medium hover:no-underline"
         title="Back to the campaign"
       >
         {campaignName}
       </Link>
       {number !== null && (
-        <span className="text-sm text-muted-foreground">
+        <span className="text-base text-muted-foreground">
           Session {number}
           {elapsed ? ` · ${elapsed}` : ''}
         </span>
@@ -189,8 +191,9 @@ export function SessionHeader({
 }
 
 /**
- * The three panes. Each child is placed directly in a scrolling column (no card wrappers);
- * `centerFooter` is pinned under the centre column's scroll area (the command line).
+ * The three panes. Each child is placed directly in a scrolling `card` panel (`.session-pane` in
+ * web/style.css; no further card wrappers); `centerFooter` is pinned under the centre panel's
+ * scroll area (the command line).
  */
 export function SessionPanes({
   combat,

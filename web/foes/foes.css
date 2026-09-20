@@ -1,4 +1,9 @@
 /* SPDX-License-Identifier: GPL-3.0-only */
+/*
+ * Foes library chrome in the Quiet language (docs/design-mockups/quiet/README.md, V75): the kind
+ * tabs are a segmented control, filters are `sub` insets, results sit in one card panel with
+ * hairlines between peer rows. Stat blocks inside the card keep the Core presentation.
+ */
 .foes-app .rules-topbar {
   gap: 24px;
 }
@@ -10,7 +15,7 @@
   align-items: center;
   gap: 8px;
   white-space: nowrap;
-  font-size: 12px;
+  font-size: 13px;
 }
 .foes-sidebar button {
   width: 100%;
@@ -28,23 +33,34 @@
 .foes-intro p {
   font-size: 14px;
 }
+/* Segmented control on the page ground: `card` track, active tab a `sub` pill in ink. */
 .foes-kind-tabs {
-  display: flex;
+  display: inline-flex;
   flex-wrap: wrap;
-  gap: 5px 20px;
-  border-bottom: 1px solid var(--border);
+  gap: 4px;
+  padding: 4px;
+  background: var(--card);
+  border-radius: 999px;
   margin-bottom: 24px;
 }
 .foes-kind-tabs button {
-  padding: 12px 2px;
-  border-bottom: 2px solid transparent;
+  height: 32px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 999px;
   font-size: 13px;
+  text-transform: none;
+  letter-spacing: 0;
   color: var(--muted-foreground);
+  transition: background var(--motion-fast);
+}
+.foes-kind-tabs button:hover {
+  color: var(--foreground);
 }
 .foes-kind-tabs button[aria-pressed='true'] {
-  border-color: var(--primary);
-  color: var(--primary);
-  font-weight: 650;
+  background: var(--muted);
+  color: var(--foreground);
+  font-weight: 500;
 }
 .foes-filters {
   display: grid;
@@ -54,22 +70,28 @@
 .foes-filters label {
   display: flex;
   flex-direction: column;
-  gap: 7px;
-  font-size: 11px;
-  font-weight: 550;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 400;
   color: var(--muted-foreground);
   min-width: 0;
 }
 .foes-filters select,
 .foes-results-toolbar select {
-  border: 1px solid var(--input);
-  background: var(--background);
+  border: 0;
+  background: var(--muted);
   color: var(--foreground);
-  border-radius: 5px;
-  padding: 9px 10px;
+  border-radius: var(--radius-control);
+  height: 40px;
+  padding: 0 28px 0 12px;
   min-width: 0;
-  font-size: 12px;
+  font-size: 13px;
   max-width: 100%;
+  transition: background var(--motion-fast);
+}
+.foes-filters select:hover,
+.foes-results-toolbar select:hover {
+  background: var(--placeholder);
 }
 .foes-active-filters {
   display: flex;
@@ -81,16 +103,28 @@
   display: inline-flex;
   gap: 8px;
   align-items: center;
-  padding: 5px 9px;
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  font-size: 11px;
+  min-height: 32px;
+  padding: 4px 12px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--muted);
+  color: var(--muted-foreground);
+  font-size: 13px;
   overflow-wrap: anywhere;
   text-align: left;
+  transition: background var(--motion-fast);
+}
+.foes-active-filters button:hover {
+  background: var(--placeholder);
+  color: var(--foreground);
 }
 .foes-active-filters .foes-clear {
-  border: none;
-  color: var(--primary);
+  background: transparent;
+  color: var(--muted-foreground);
+}
+.foes-active-filters .foes-clear:hover {
+  background: transparent;
+  color: var(--foreground);
 }
 .foes-results-toolbar {
   display: flex;
@@ -98,7 +132,7 @@
   align-items: center;
   gap: 12px;
   margin: 28px 0 16px;
-  font-size: 12px;
+  font-size: 13px;
   color: var(--muted-foreground);
 }
 .foes-results-toolbar label {
@@ -106,8 +140,11 @@
   align-items: center;
   gap: 8px;
 }
+/* One card panel; hairlines only between peer rows. */
 .foes-results {
-  border-bottom: 1px solid var(--border);
+  background: var(--card);
+  border-radius: var(--radius-panel);
+  padding: 8px;
 }
 .foes-result {
   display: grid;
@@ -115,49 +152,66 @@
   width: 100%;
   align-items: center;
   gap: 20px;
-  padding: 20px 12px;
-  border-top: 1px solid var(--border);
+  padding: 18px 16px;
+  border-radius: var(--radius-control);
   text-align: left;
-  transition: background 150ms;
+  transition: background var(--motion-fast);
+}
+.foes-result + .foes-result {
+  border-top: 1px solid var(--border);
 }
 .foes-result:hover {
-  background: var(--card);
+  background: var(--muted);
 }
 .foes-result-identity {
   min-width: 0;
 }
 .foes-result-name {
   display: block;
-  font-size: 19px;
-  font-weight: 600;
-  letter-spacing: -0.02em;
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: 0;
   margin: 4px 0;
 }
 .foes-result-keywords {
   display: block;
-  font-size: 11px;
+  font-size: 13px;
   color: var(--muted-foreground);
 }
 .foes-result-level {
-  color: var(--primary);
+  color: var(--foreground);
   font-size: 20px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
 }
 .foes-result-role,
 .foes-result-ev {
-  font-size: 12px;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
 }
 .foes-result small {
   display: block;
   color: var(--muted-foreground);
-  font-size: 10px;
+  font-size: 13px;
   font-weight: 400;
 }
 .foes-result > svg {
   color: var(--muted-foreground);
 }
 .foes-reset {
-  color: var(--primary);
-  text-decoration: underline;
+  display: inline-flex;
+  align-items: center;
+  height: 36px;
+  padding: 0 14px;
+  border-radius: 999px;
+  background: var(--muted);
+  color: var(--foreground);
+  text-decoration: none;
+  font-size: 13px;
+  transition: background var(--motion-fast);
+}
+.foes-reset:hover {
+  background: var(--placeholder);
 }
 @media (max-width: 1050px) {
   .foes-result {
@@ -190,17 +244,17 @@
     margin-right: auto;
   }
   .foes-rules-link {
-    font-size: 11px;
+    font-size: 13px;
   }
   .foes-filters {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 12px;
   }
   .foes-kind-tabs {
-    gap: 2px 16px;
+    gap: 4px;
   }
   .foes-result {
-    padding: 17px 0;
+    padding: 16px 12px;
     grid-template-columns: minmax(0, 1fr) 32px 70px;
     gap: 12px;
   }
@@ -219,24 +273,26 @@
   overflow-wrap: anywhere;
 }
 .foes-related-rules {
-  margin-top: 24px;
-  padding-top: 18px;
-  border-top: 1px solid var(--border);
+  margin-top: 28px;
+  padding-top: 0;
 }
 .foes-related-rules h3 {
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 500;
   margin-bottom: 10px;
 }
 .foes-related-rules a {
   display: block;
-  color: var(--primary);
+  color: var(--foreground);
   padding: 8px 0;
   font-size: 14px;
 }
+.foes-related-rules a:hover {
+  color: var(--primary);
+}
 .foes-related-rules small {
   display: block;
-  font-size: 11px;
+  font-size: 13px;
   color: var(--muted-foreground);
 }
 @media (max-width: 760px) {

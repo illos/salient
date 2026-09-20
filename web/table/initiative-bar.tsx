@@ -1,13 +1,14 @@
 // SPDX-License-Identifier: GPL-3.0-only
 /**
- * The segmented initiative bar (combat-table-light.png, combat-table-dark.png; docs/build/
- * V21-desktop-layout-fidelity.md item 7; docs/table-spec.md#confirmed-combat-layout 2026-09-15
- * decision): under the caps eyebrow `ROUND n · HEROES ACTING`, one slim rounded segment per turn
- * entry on each side, grouped by initiative group (a wider gap and a thin bracket under groups
- * of more than one entry), brick red when spent, grey when unspent, the entry in progress ringed
- * in red, surprised entries hatched, Slain entries dimmed, caps side labels beneath. Hovering or
- * focusing a segment names the creature; clicking a segment the viewer may act for submits the
- * same `/turn take` the list submits. GROUPS (Director) opens the regroup list beneath the bar.
+ * The segmented initiative bar (docs/design-mockups/quiet/README.md, table screen turn tracker;
+ * docs/build/V21-desktop-layout-fidelity.md item 7; docs/table-spec.md#confirmed-combat-layout
+ * 2026-09-15 decision): under the muted line `Round n · Heroes acting`, one 4px rounded segment
+ * per turn entry on each side, grouped by initiative group (a wider gap and a thin bracket under
+ * groups of more than one entry), `ph` when acted, `sub` when waiting, accent for the entry in
+ * progress (no outline), surprised entries hatched, Slain entries dimmed, muted side labels
+ * beneath. Hovering or focusing a segment names the creature; clicking a segment the viewer may
+ * act for submits the same `/turn take` the list submits. Groups (Director) opens the regroup
+ * list beneath the bar.
  *
  * Presentation only: round, side, spent, surprised, Slain and control facts come from the
  * encounter projection; nothing here resolves a rule.
@@ -75,12 +76,12 @@ function Segment({
   }${actionable ? ' · Take turn' : ''}`;
   const text = `${ref(entry.actor)} /turn take entry="${entry.id}"`;
   const fill = entry.active
-    ? 'bg-primary/50'
+    ? 'bg-primary'
     : entry.slain
-      ? 'bg-border'
+      ? 'bg-muted'
       : entry.spent
-        ? 'bg-primary'
-        : 'bg-placeholder';
+        ? 'bg-placeholder'
+        : 'bg-muted';
   return (
     <li
       className="m-0 min-w-0 flex-1 list-none p-0"
@@ -114,16 +115,14 @@ function Segment({
         <span className="sr-only">{entry.actor.name}</span>
         <span
           aria-hidden
-          className={`block h-(--bar-thickness) w-full rounded-full transition-colors duration-(--motion-fast) ${fill} ${
-            entry.active ? 'ring-2 ring-primary ring-offset-2 ring-offset-background' : ''
-          } ${entry.slain ? 'opacity-50' : ''} ${
-            actionable ? 'group-hover/segment:bg-foreground' : ''
-          }`}
+          className={`block h-1 w-full rounded-full transition-colors duration-(--motion-fast) ${fill} ${
+            entry.slain ? 'opacity-40' : ''
+          } ${actionable ? 'group-hover/segment:bg-foreground' : ''}`}
           style={
             entry.surprised && !entry.slain
               ? {
                   backgroundImage:
-                    'repeating-linear-gradient(135deg, transparent 0 3px, var(--background) 3px 5px)',
+                    'repeating-linear-gradient(135deg, transparent 0 3px, var(--card) 3px 5px)',
                 }
               : undefined
           }
@@ -178,18 +177,18 @@ function Side({
             ))}
             {group.entries.length === 0 && (
               <li
-                className="m-0 h-(--bar-thickness) flex-1 list-none rounded-full border border-dashed border-input p-0"
+                className="m-0 h-1 flex-1 list-none rounded-full bg-muted p-0 opacity-40"
                 title={`Group ${group.order} · empty`}
               />
             )}
           </ol>
         ))}
         {groups.length === 0 && (
-          <span className="text-xs text-muted-foreground">Nobody on this side.</span>
+          <span className="text-sm text-muted-foreground">Nobody on this side.</span>
         )}
       </div>
       <span
-        className={`caps text-center ${
+        className={`text-center text-sm ${
           encounter.activeSide === side ? 'text-foreground' : 'text-muted-foreground'
         }`}
       >
@@ -227,7 +226,7 @@ export function InitiativeBar({
           creature's name) truncates instead of running under the button. */}
       <div className="flex items-center gap-2">
         <p
-          className="caps m-0 min-w-0 flex-1 truncate text-center text-muted-foreground"
+          className="m-0 min-w-0 flex-1 truncate text-center text-sm text-muted-foreground"
           role="status"
           aria-live="polite"
           title={`${eyebrow}${encounter.activeTurn ? ` · ${encounter.activeTurn.actor.name}` : ''}`}
@@ -240,7 +239,7 @@ export function InitiativeBar({
             type="button"
             variant="ghost"
             size="xs"
-            className="shrink-0 text-2xs"
+            className="shrink-0 rounded-full"
             aria-expanded={groupsOpen}
             aria-controls="initiative-groups"
             title="Regroup turn entries"
@@ -267,7 +266,7 @@ export function InitiativeBar({
         />
       </div>
       {director && groupsOpen && (
-        <div id="initiative-groups" className="rule-soft pt-2 pb-3">
+        <div id="initiative-groups" className="border-t border-border pt-3 pb-1">
           <InitiativeGroups
             campaignId={campaignId}
             encounter={encounter}

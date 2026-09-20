@@ -49,7 +49,7 @@ export function OverlayCardContent({
         <header className="overlay-card-header">
           {leading}
           <div>
-            {eyebrow && <p className="text-xs text-muted-foreground">{eyebrow}</p>}
+            {eyebrow && <p className="text-sm text-muted-foreground">{eyebrow}</p>}
             <DialogPrimitive.Title className="overlay-card-title">{title}</DialogPrimitive.Title>
           </div>
           <DialogPrimitive.Close

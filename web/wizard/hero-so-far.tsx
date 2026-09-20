@@ -1,10 +1,11 @@
 // SPDX-License-Identifier: GPL-3.0-only
 /**
- * The "Your hero so far" column (character-wizard-class.png; V21 item 10): disc and identity
- * line, five compact characteristic boxes, ruled rows of derived values, skill chips, the
- * outstanding list and the SOURCE TEXT callout for the current step. Every value is read from
- * the shared `characters.evaluate` result; nothing here derives one. A value the evaluator has
- * not produced yet reads "Pending" (the model does not say which later step supplies it).
+ * The "Your hero so far" column (V21 item 10; Quiet, docs/design-mockups/quiet/README.md): a
+ * `card` panel with the disc and identity line, five compact characteristic tiles, derived-value
+ * rows split by hairlines, skill pills, the outstanding list and the Source text inset for the
+ * current step. Every value is read from the shared `characters.evaluate` result; nothing here
+ * derives one. A value the evaluator has not produced yet reads "Pending" (the model does not say
+ * which later step supplies it).
  */
 import { Chip } from '../components/chip';
 import { Disc } from '../components/disc';
@@ -28,9 +29,9 @@ const CHARACTERISTICS = [
 function Row({ label, value }: { label: string; value: React.ReactNode }) {
   const pending = value === undefined || value === null || value === '';
   return (
-    <div className="rule-soft flex items-baseline justify-between gap-4 py-2 text-sm">
-      <span>{label}</span>
-      <span className={pending ? 'text-muted-foreground' : 'text-right font-semibold tabular-nums'}>
+    <div className="flex items-baseline justify-between gap-4 py-2 text-base">
+      <span className="text-sm text-muted-foreground">{label}</span>
+      <span className={pending ? 'text-muted-foreground' : 'text-right font-medium tabular-nums'}>
         {pending ? 'Pending' : value}
       </span>
     </div>
@@ -69,10 +70,10 @@ export function HeroSoFar({
     <aside
       aria-label="Hero so far"
       data-wizard-pane="summary"
-      className="flex h-full min-h-0 flex-col gap-4 overflow-y-auto px-(--pane-padding-x) py-(--pane-padding-y)"
+      className="flex h-full min-h-0 flex-col gap-5 overflow-y-auto rounded-lg bg-card p-5"
     >
       <div className="flex items-center justify-between gap-3">
-        <p className="eyebrow mb-0">Your hero so far</p>
+        <p className="m-0 text-lg font-medium">Your hero so far</p>
         {evaluation ? (
           <Pill filled={evaluation.status === 'complete'}>{evaluation.status}</Pill>
         ) : (
@@ -82,7 +83,7 @@ export function HeroSoFar({
       <div className="flex items-center gap-4">
         <Disc name={heroName || 'Unnamed hero'} variant="grey" size="md" />
         <div className="min-w-0">
-          <p className="m-0 truncate font-semibold">{heroName || 'Unnamed hero'}</p>
+          <p className="m-0 truncate text-base font-medium">{heroName || 'Unnamed hero'}</p>
           <p className="m-0 truncate text-sm text-muted-foreground">
             {identity.length ? identity.join(' · ') : 'Ancestry and class to come'}
           </p>
@@ -93,13 +94,14 @@ export function HeroSoFar({
           <StatBox
             key={key}
             compact
+            inset
             emphasis={b.characteristics?.[key] !== undefined}
             value={b.characteristics ? b.characteristics[key].value : '–'}
             label={label}
           />
         ))}
       </div>
-      <div>
+      <div className="divide-y divide-border">
         <Row label="Stamina" value={show(b.staminaMaximum)} />
         <Row
           label="Recoveries"
@@ -145,7 +147,7 @@ export function HeroSoFar({
       </div>
       <SupportingBuildFacts baseline={b} />
       <div>
-        <p className="caps mb-2 text-muted-foreground">Skills</p>
+        <p className="mb-2 text-sm text-muted-foreground">Skills</p>
         {b.skills?.length ? (
           <ul className="m-0 flex list-none flex-wrap gap-1.5 p-0" aria-label="Skills">
             {b.skills.map(skill => (
@@ -160,11 +162,11 @@ export function HeroSoFar({
       </div>
       {problems.length > 0 && (
         <div>
-          <p className="caps mb-1 text-muted-foreground">Outstanding</p>
-          <ul className="m-0 list-none p-0 text-xs">
+          <p className="mb-1 text-sm text-muted-foreground">Outstanding</p>
+          <ul className="m-0 list-none p-0 text-sm">
             {problems.map((d, i) => (
               <li key={i} className="py-0.5">
-                <span className="font-semibold">{decisionLabel(d.decisionId)}</span>:{' '}
+                <span className="font-medium">{decisionLabel(d.decisionId)}</span>:{' '}
                 {readableGuidance(d.message)}
               </li>
             ))}
@@ -172,21 +174,18 @@ export function HeroSoFar({
         </div>
       )}
       {b.uncertainties?.length ? (
-        <p className="m-0 text-xs text-muted-foreground">
+        <p className="m-0 text-sm text-muted-foreground">
           Some character details still need a rules decision. Review them with your Director.
         </p>
       ) : null}
-      <div
-        className="mt-auto flex flex-col gap-2 rounded-md border border-primary p-4"
-        aria-label="Source text"
-      >
+      <div className="mt-auto flex flex-col gap-2 rounded-md bg-muted p-4" aria-label="Source text">
         <div className="flex items-center justify-between gap-2">
-          <span className="caps text-primary">Source text</span>
+          <span className="text-sm text-muted-foreground">Source text</span>
           <RuleLink {...sourceReference} />
         </div>
         {sourceExcerpt && (
-          <p className="m-0 text-sm text-muted-foreground">
-            {sourceExcerpt} <span className="text-xs">— {sourceReference.label}</span>
+          <p className="m-0 text-base text-muted-foreground">
+            {sourceExcerpt} <span className="text-sm">— {sourceReference.label}</span>
           </p>
         )}
       </div>

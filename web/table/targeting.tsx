@@ -38,6 +38,10 @@ const key = (actor: { kind: string; id: string }) => `${actor.kind}:${actor.id}`
 // Operational clauses stay readable; complete references open in the rule card.
 const summaryText = readableRuleText;
 
+/** The small edge / bane count field: a 999px `sub` inset with the accent caret (Quiet). */
+const MODIFIER_FIELD =
+  'h-7 w-12 rounded-full border-0 bg-muted px-2 text-sm text-foreground caret-primary tabular-nums outline-none transition-colors duration-(--motion-fast) focus-visible:bg-accent';
+
 /** A button that submits one slash command through the shared path. */
 function Command({
   campaignId,
@@ -119,7 +123,7 @@ export function TargetControls({
       });
   };
   return (
-    <div className="flex flex-wrap items-center gap-2 text-xs">
+    <div className="flex flex-wrap items-center gap-2 text-sm">
       {mayTarget && (
         <Command
           campaignId={campaignId}
@@ -131,9 +135,9 @@ export function TargetControls({
       )}
       {mayTarget && (
         <label className="flex items-center gap-1">
-          <span className="caps text-muted-foreground">Edges</span>
+          <span className="text-sm text-muted-foreground">Edges</span>
           <input
-            className="w-10 rounded border px-1"
+            className={MODIFIER_FIELD}
             type="number"
             min={0}
             value={edges ?? String(counts.edges)}
@@ -141,9 +145,9 @@ export function TargetControls({
             onBlur={() => edges !== null && setCounts()}
             aria-label={`Edges against ${target.name}`}
           />
-          <span className="caps text-muted-foreground">Banes</span>
+          <span className="text-sm text-muted-foreground">Banes</span>
           <input
-            className="w-10 rounded border px-1"
+            className={MODIFIER_FIELD}
             type="number"
             min={0}
             value={banes ?? String(counts.banes)}
@@ -175,10 +179,10 @@ function AbilityRow({
   pending: boolean;
 }) {
   return (
-    <li className="rule-soft flex flex-col gap-1 py-2">
+    <li className="rule-soft flex flex-col gap-1 py-2.5 last:border-b-0">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <span>
-          <strong>{ability.name}</strong>
+          <strong className="font-medium">{ability.name}</strong>
           {ability.fixedCost && (
             <Badge variant="outline" className="ml-2">
               {ability.fixedCost.amount} {ability.fixedCost.resource}
@@ -222,9 +226,9 @@ export function AbilityPanel({
   const pending = draft?.abilityId ? sheet.abilities.find(a => a.id === draft.abilityId) : null;
   const allowance = sheet.allowance;
   return (
-    <div className="flex flex-col gap-2 text-sm">
+    <div className="flex flex-col gap-2 text-base">
       {allowance.inCombat && (
-        <p className="text-xs text-muted-foreground">
+        <p className="text-sm text-muted-foreground">
           {allowance.onTurn ? 'Taking their turn' : 'Not their turn'} · main action{' '}
           {allowance.mainUsed >= 1 ? 'spent' : 'available'} · maneuver{' '}
           {allowance.maneuverUsed >= 1 ? 'spent' : 'available'}
@@ -234,11 +238,12 @@ export function AbilityPanel({
           <span>(advisory: grayed actions still execute with a warning)</span>
         </p>
       )}
-      {sheet.missingFacts && <p className="text-xs text-destructive">{sheet.missingFacts}</p>}
+      {sheet.missingFacts && <p className="text-sm text-destructive">{sheet.missingFacts}</p>}
       {pending && (
-        <div className="rule-soft flex flex-wrap items-center gap-2 border-l-2 border-primary pl-2 text-xs">
+        <div className="flex flex-wrap items-center gap-2 rounded-md bg-muted p-3 text-sm">
           <span>
-            Pending: <strong>{pending.name}</strong> · {draft!.targets.length} target
+            Pending: <strong className="font-medium">{pending.name}</strong> ·{' '}
+            {draft!.targets.length} target
             {draft!.targets.length === 1 ? '' : 's'}
             {draft!.targets.length ? `: ${draft!.targets.map(t => t.name).join(', ')}` : ''}
             {pending.targetShape.kind === 'multi' ? ` (up to ${pending.targetShape.max})` : ''}
@@ -246,7 +251,7 @@ export function AbilityPanel({
           </span>
           {pending.permittedCharacteristics.length > 1 && (
             <label className="flex items-center gap-1">
-              <span className="caps text-muted-foreground">Roll with</span>
+              <span className="text-sm text-muted-foreground">Roll with</span>
               <select
                 className="native-select"
                 value={draft!.characteristic ?? ''}
@@ -270,7 +275,7 @@ export function AbilityPanel({
           )}
           {pending.permittedDamageCharacteristics.length > 1 && (
             <label className="flex items-center gap-1">
-              <span className="caps text-muted-foreground">Damage with</span>
+              <span className="text-sm text-muted-foreground">Damage with</span>
               <select
                 className="native-select"
                 aria-label="Damage characteristic"
@@ -532,7 +537,7 @@ export function AbilityCard({
     | { mode: 'compiled' | 'legacy-compatibility' | 'manual'; diagnostics: CompileDiagnostic[] }
     | undefined;
   return (
-    <div className="mt-2 flex flex-col gap-2 border-l-2 border-rule-strong pl-3 text-xs">
+    <div className="mt-2 flex flex-col gap-2 rounded-md bg-muted p-4 text-sm">
       <span className="text-muted-foreground">
         Dice {result.dice.d10a} + {result.dice.d10b}
         {result.selectedCharacteristic
@@ -565,8 +570,8 @@ export function AbilityCard({
         return (
           <div key={key(target)} className="flex flex-col gap-1">
             <span>
-              <strong>{target.name}</strong>: {t.edges} edge, {t.banes} bane → total {outcome.total}
-              , tier {outcome.tier}
+              <strong className="font-medium">{target.name}</strong>: {t.edges} edge, {t.banes} bane
+              → total {outcome.total}, tier {outcome.tier}
               {outcome.uncertainty ? ` (${outcome.uncertainty})` : ''}
               {outcome.damage
                 ? applied

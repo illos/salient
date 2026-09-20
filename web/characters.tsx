@@ -23,11 +23,11 @@ export function CharactersPage() {
   const characters = useQuery(api.characters.listMine);
   return (
     <>
-      <div className="rule-strong mb-8 pb-5">
+      <div className="mb-8">
         <Eyebrow>Your heroes</Eyebrow>
         <h1>Your characters</h1>
       </div>
-      <div className="grid grid-cols-[minmax(0,1fr)_420px] items-start gap-8">
+      <div className="grid grid-cols-[minmax(0,1fr)_420px] items-start gap-4">
         <section>
           <SectionHeading aside={characters ? `${characters.length} total` : undefined}>
             Characters
@@ -35,20 +35,20 @@ export function CharactersPage() {
           {characters === undefined ? (
             <Loading>Loading characters…</Loading>
           ) : characters.length === 0 ? (
-            <p className="text-sm text-muted-foreground">
+            <p className="m-0 rounded-md bg-muted p-4 text-base text-muted-foreground">
               No characters yet. Explore the wizard and save when you’re ready.
             </p>
           ) : (
-            <ul className="m-0 list-none p-0">
+            <ul className="m-0 flex list-none flex-col gap-4 p-0">
               {characters.map(character => (
                 <li
                   key={character.id}
-                  className="rule-soft flex items-center justify-between gap-4 py-3"
+                  className="flex items-center justify-between gap-4 rounded-lg bg-card p-6"
                 >
                   <Link
                     to="/characters/$characterId"
                     params={{ characterId: character.id }}
-                    className="text-lg font-bold"
+                    className="text-lg font-medium"
                   >
                     {character.name}
                   </Link>
@@ -72,12 +72,12 @@ export function CharactersPage() {
         <Card>
           <CardContent className="flex flex-col gap-4">
             <h2>Start a character</h2>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-base text-muted-foreground">
               The wizard supports level-one Devil Fury and Polder Elementalist builds through Making
               a Hero. Supported choices are enabled; additional options remain visible for
               reference.
             </p>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-base text-muted-foreground">
               Choose a name in the Details step. Your character is created only when you save.
             </p>
             <Link
@@ -137,10 +137,10 @@ function SubmitControls({ characterId }: { characterId: Id<'characters'> }) {
     <div className="flex flex-col items-end gap-2">
       <div className="flex flex-wrap items-center justify-end gap-2">
         {!character.campaignId && !pending && (
-          <label className="flex items-center gap-2 text-xs">
-            <span className="caps text-muted-foreground">Campaign</span>
+          <label className="flex items-center gap-2 text-sm">
+            <span className="text-muted-foreground">Campaign</span>
             <select
-              className="native-select h-7"
+              className="native-select h-8"
               aria-label="Campaign to submit to"
               value={target ?? ''}
               onChange={event => setCampaignId(event.target.value)}
@@ -217,12 +217,12 @@ function SubmitControls({ characterId }: { characterId: Id<'characters'> }) {
         )}
       </div>
       {character.fullEditIsStale && (
-        <p className="text-xs text-muted-foreground">
+        <p className="text-sm text-muted-foreground">
           This draft predates the effective build. Open Edit to review and reconcile it.
         </p>
       )}
       {(character.pendingDirectorSetup || (needsPrivateSetup && !inheritance?.item)) && (
-        <p className="max-w-lg text-xs text-muted-foreground">
+        <p className="max-w-lg text-sm text-muted-foreground">
           {character.pendingDirectorSetup && <>{character.pendingDirectorSetup} </>}
           {needsPrivateSetup
             ? 'Your recorded character choices can be complete while private Director setup is still required. Save the inherited trinket below before submitting.'
@@ -248,7 +248,7 @@ function SubmitControls({ characterId }: { characterId: Id<'characters'> }) {
       ) : (
         character.review &&
         character.review.status !== 'pending' && (
-          <span className="text-xs text-muted-foreground">
+          <span className="text-sm text-muted-foreground">
             last submission: {character.review.status} ({character.review.campaignName})
           </span>
         )
@@ -267,17 +267,20 @@ export function CharacterPage({ characterId }: { characterId: Id<'characters'> }
   const hasEffective = sheet.audience !== 'peer' && sheet.build?.label === 'effective';
   return (
     <>
-      <Link to="/characters" className="mb-4 inline-block text-sm text-muted-foreground">
+      <Link
+        to="/characters"
+        className="mb-4 inline-block text-sm text-muted-foreground hover:text-foreground"
+      >
         ← Your characters
       </Link>
       <div className="mb-6 flex flex-wrap items-start justify-between gap-4">
         <Eyebrow className="mb-0 pt-1.5">{owner ? 'Your character' : 'Character sheet'}</Eyebrow>
         <div className="flex flex-wrap items-start justify-end gap-3">
           {mine && mine.length > 1 && (
-            <label className="flex items-center gap-2 text-xs">
-              <span className="caps text-muted-foreground">Hero</span>
+            <label className="flex items-center gap-2 text-sm">
+              <span className="text-muted-foreground">Hero</span>
               <select
-                className="native-select h-7"
+                className="native-select h-8"
                 aria-label="Switch hero"
                 value={mine.some(c => c.id === characterId) ? characterId : ''}
                 onChange={event =>
@@ -299,10 +302,10 @@ export function CharacterPage({ characterId }: { characterId: Id<'characters'> }
             </label>
           )}
           {owner && hasEffective && (
-            <label className="flex items-center gap-2 text-xs">
-              <span className="caps text-muted-foreground">View</span>
+            <label className="flex items-center gap-2 text-sm">
+              <span className="text-muted-foreground">View</span>
               <select
-                className="native-select h-7"
+                className="native-select h-8"
                 aria-label="Sheet view"
                 value={view}
                 onChange={event => setView(event.target.value as 'effective' | 'draft')}
@@ -316,7 +319,11 @@ export function CharacterPage({ characterId }: { characterId: Id<'characters'> }
             <Link
               to="/characters/$characterId/progression"
               params={{ characterId }}
-              className={buttonVariants({ variant: 'outline', size: 'sm' })}
+              className={buttonVariants({
+                variant: 'outline',
+                size: 'sm',
+                className: 'hover:no-underline',
+              })}
             >
               Progression
             </Link>
