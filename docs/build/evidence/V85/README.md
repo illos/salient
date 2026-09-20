@@ -5,8 +5,9 @@ Status: candidate `b15fc59`, followed by import-only correction `faa9b1e`, commi
 user-requested hosted cloud deployment exited 1 before reporting a successful upload. No live
 scenarios ran. [Further investigation](deployment-diagnosis.md) identified inconsistent JSON
 import attributes and a schema-to-runtime import dependency. Both temporary corrections together
-passed deployment dry run; the permanent correction is now prepared for TESTER verification,
-with no new deployment or API acceptance claimed. The hosted attempt below is history.
+passed deployment dry run. TESTER then caught a NodeNext typecheck conflict in `b08ebcd`;
+the replacement correction removes the shared helper’s JSON dependency and passes the revision
+from existing callers. New TESTER verification is pending; no deployment/API acceptance claimed. The hosted attempt below is history.
 
 ## Implemented scope
 
