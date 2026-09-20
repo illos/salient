@@ -67,6 +67,7 @@ import {
   isLiving,
   loadSquad,
   MINION_RULE_ID,
+  minionApplication,
   planSquadDamage,
   poolState,
   SQUAD_RULE_ID,
@@ -876,8 +877,10 @@ const squadAct: OperationDefinition = {
     warnings.push(...result.warnings);
     const perTarget = assignments.map((assignment, i) => {
       const outcome = result.targets[i]!;
-      const applied =
-        result.damageApplications.find(d => d.targetId === assignment.target.actor.id) ?? null;
+      const applied = minionApplication(
+        assignment.target,
+        result.damageApplications.find(d => d.targetId === assignment.target.actor.id) ?? null,
+      );
       return { assignment, outcome, applied };
     });
     const squadPlans = await planSquadDamage(
@@ -1018,13 +1021,15 @@ const squadFreeStrike: OperationDefinition = {
     const facts = damageTargetFacts(target);
     const warnings: string[] = [];
     if ('missing' in facts) warnings.push(facts.missing);
-    const application: DamageApplication | null =
+    const application: DamageApplication | null = minionApplication(
+      target,
       'facts' in facts
         ? resolveCreatureFreeStrike(
             { actorId: squad._id, freeStrikeValue: total, targetId: target.actor.id },
             facts.facts,
           )
-        : null;
+        : null,
+    );
     const squadPlans = application
       ? await planSquadDamage(ctx, [{ target, amount: application.staminaDelta }], false)
       : [];

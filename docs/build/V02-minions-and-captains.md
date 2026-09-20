@@ -115,3 +115,51 @@ participant-only critical; (4) Director pane squad card and shared-turn card; (5
 of the acceptance checks and the 2026-09-20 rulings, then an authenticated headless proof. Verification
 target: local convex-test plus a headless CLI run against an isolated backend; browser scenarios go to
 the backlog under the moratorium.
+
+### 2026-09-20 — built on the branch
+
+Commits on `slice/V02`: `1764813` (rulings and claim), `adbe679` (backend, content, tests),
+`3027990` (Director pane, campaign page add control, headless proof script). Backend: `squads`
+table plus member `foes` rows; pure ladder `shared/resolve/squad.ts`; operations `squad.add`,
+`squad.remove`, `squad.captain`, `squad.participation`, `squad.casualties`, `squad.act`,
+`squad.free-strike`; squad actor kind for the shared turn entry; damage routing from ability use
+and free strikes into the pool with the `squad-casualties` card; captain loss as a linked
+consequence; setup, snapshot, Void reset, cleanup and undo carry squads; `foe.add` loads any seeded
+stat block; the S01 selection gains `monster/goblin`, `monster/dwarf` and the squad, captain and
+minion rule pages (595 entries). Implementation notes and the two labeled interpretations are in
+[the table spec](../table-spec.md#minion-squads-and-captain-state) and
+[the command spec](../table-command-spec.md#minion-squad-additions-and-state).
+
+Local verification (Presidium, permitted peer environment; runner in `code/.worktrees/minions`):
+`pnpm exec tsc --noEmit`, `pnpm exec tsc -p tsconfig.web.json --noEmit`, `pnpm lint`,
+`pnpm content:build` and `pnpm content:check` (595 entries), `pnpm exec vitest run --project
+engine --project app --project scripts` (865 tests; the one failure was
+`tests/scripts/build-content.test.ts`'s frontmatter sampler drawing the Goblin Malice feature block
+after the manifest grew, a pre-existing matcher limit for nested YAML records, repaired to skip
+nested `features` and rerun 22/22), `tests/squad.test.ts` 13/13 (ladder, captain change, area cap,
+zero, EV, benefit text), `tests/app/squads.test.ts` 9/9 (acceptance 1–6 and the 2026-09-20
+rulings through the registered operations with server dice and persisted readback).
+
+| Capability / scenario | CLI/API entry point | Headless command, source, target and persisted evidence | Headless result | Browser result and additional gap |
+| --- | --- | --- | --- | --- |
+| Add a squad of N (1–8) with optional captain; one entry, N identities, pool N × Stamina, EV N × amount ÷ quantity; minions refuse `/foe add` | `squad.add`, `foe.definitions`, `table.roster` | `scripts/v02-headless.ts` step 2; `tests/app/squads.test.ts` acceptance 1 and 6 | pass | pending (moratorium; backlog rows logged) |
+| Shared turn: one squad entry, one turn-start firing with every living member as participant | `turn.take`, `encounters.current`, `events.list` | proof step 3; `tests/app/squads.test.ts` acceptance 5 | pass | pending |
+| Coordinated attack: one roll, up to three per target, extra minions add free strike damage, participant-only critical, captain strike bonus | `squad.act`, `abilities.results` | proof step 4; `tests/app/squads.test.ts` acceptance 2 | pass | pending |
+| Pool ladder: casualties from printed steps, nearest/directly-damaged choice through the card, survivors below the step, zero kills the squad | `ability.use`, `card.respond` / `squad.casualties` | proof step 5; `tests/app/squads.test.ts` acceptance 3 and ladder tests | pass | pending |
+| Undo restores the pool and dropped minions exactly | `history.rewind` | proof step 6; `tests/app/squads.test.ts` adjust/undo test | pass | pending |
+| Free Strike Together applies one summed strike | `squad.free-strike` | proof step 7; `tests/app/squads.test.ts` | pass | pending |
+| Captain Stamina benefit, loss without casualties, carried damage across the change, zero from a loss, replacement for survivors only | `squad.captain`, `foe.remove`, damage on the captain | proof step 8; `tests/app/squads.test.ts` acceptance 4 | pass | pending |
+| Area damage: per-member cap, in-area casualties only | `ability.use` (area) | `tests/app/squads.test.ts` area test | pass (convex-test) | pending |
+| Removal: single minions refused, squad removed as a unit, captain keeps an entry | `foe.remove`, `squad.remove` | proof step 9; `tests/app/squads.test.ts` | pass | pending |
+| Player projection: pool through the health display, no Director facts, casualty answers limited to the attacker | `table.roster`, `squad.casualties` | proof steps 2 and 5 | pass | pending |
+
+Headless proof (`scripts/v02-headless.ts`, [evidence](evidence/V02/README.md)): 9/9 steps pass in
+10168 ms (run `v02-mu9n5vkg`) on an isolated local anonymous backend at `http://127.0.0.1:3250`
+(CT114 unreachable at the time; local is a permitted peer environment). Real dice; the recorded
+tiers drive the expectations from the printed tables. The first two runs failed on script
+sequencing only (casualty answer rewound before the attack; living minions for the free strike), not
+on product behavior; the fix also removed a spurious "winded" label from minion damage text, since
+minions cannot be winded. Elapsed wall time for the whole build on 2026-09-20: about three hours.
+No browser run (moratorium); the visual scenarios are in
+[the backlog](browser-coverage-backlog.md).
+

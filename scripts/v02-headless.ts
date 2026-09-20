@@ -391,13 +391,19 @@ try {
   await step(
     'history: undoing the Brutal Slam restores the pool and the dropped minions exactly',
     async () => {
-      const list = await events();
-      const slam = [...list]
-        .reverse()
-        .find(e => e.kind === 'ability.use' && e.description.includes('Brutal Slam'))!;
-      // The turn end after it must be rewound first (sequential undo across the seam).
-      const undoable = [...list].reverse().find(e => e.kind === 'turn.end')!;
-      await submit(director, campaignId, `/history rewind event="${undoable.id}"`, 'rewind');
+      // Newest first by sequence: Thorn's End turn is rewound before the Brutal Slam it followed
+      // (sequential rewind across the seam).
+      const list = [...(await events())].sort((a, b) => b.sequence - a.sequence);
+      const slam = list.find(
+        e => e.kind === 'ability.use' && e.description.includes('Brutal Slam'),
+      )!;
+      // Every later unit first: Thorn's End turn and, when the card was answered, the casualty
+      // answer (its own undo unit); then the Brutal Slam itself.
+      const later = list.filter(
+        e => e.sequence > slam.sequence && ['turn.end', 'squad.casualties'].includes(e.kind),
+      );
+      for (const unit of later)
+        await submit(director, campaignId, `/history rewind event="${unit.id}"`, 'rewind');
       await submit(director, campaignId, `/history rewind event="${slam.id}"`, 'rewind');
       const squad = (await roster(director)).squads.find(s => s.id === squadId)!;
       expect(
@@ -412,10 +418,14 @@ try {
 
   await step('Free Strike Together: two minions on Thorn apply one 4-damage strike', async () => {
     const before = thornStamina;
+    const alive = (await roster(director)).foes
+      .filter(f => f.squadId === squadId && !f.slain)
+      .slice(0, 2);
+    expect(alive.length === 2, `two living minions, saw ${alive.length}`);
     const strike = await submit(
       director,
       campaignId,
-      `${squadRef(squadId)} /squad free-strike target=@Thorn minions=[${foeRef(members[0]!)}, ${foeRef(members[1]!)}]`,
+      `${squadRef(squadId)} /squad free-strike target=@Thorn minions=[${foeRef(alive[0]!.id)}, ${foeRef(alive[1]!.id)}]`,
       'fst',
     );
     const event = (await events()).find(e => e.id === strike.eventId)!;

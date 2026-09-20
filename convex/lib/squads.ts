@@ -334,6 +334,16 @@ export function squadCasualtyInteraction(
   };
 }
 
+/** Minions cannot be winded (Shared Low Stamina): a member's application never claims it. */
+export function minionApplication<T extends { windedBefore: boolean; windedAfter: boolean }>(
+  record: Pick<TargetRecord, 'squad'>,
+  application: T | null,
+): T | null {
+  return application && record.squad
+    ? { ...application, windedBefore: false, windedAfter: false }
+    : application;
+}
+
 export function squadActor(squad: Pick<Doc<'squads'>, '_id' | 'name'>): BoundActor {
   return { kind: 'squad', id: squad._id, name: squad.name };
 }

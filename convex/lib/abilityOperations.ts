@@ -79,6 +79,7 @@ import { baselineOf, requireHeroLive, type HeroLive } from './characterBuild';
 import {
   commitSquadPlans,
   describeSquadPlans,
+  minionApplication,
   planSquadDamage,
   squadCasualtyInteraction,
   squadPlanData,
@@ -1064,7 +1065,8 @@ const abilityUse: OperationDefinition = {
       const target = targets[0]!;
       const facts = damageTargetFacts(target);
       const supporting = [await supportingSource(ctx, CREATURE_FREE_STRIKE_RULE_ID)];
-      const application =
+      const application = minionApplication(
+        target,
         'facts' in facts
           ? resolveCreatureFreeStrike(
               {
@@ -1074,7 +1076,8 @@ const abilityUse: OperationDefinition = {
               },
               facts.facts,
             )
-          : null;
+          : null,
+      );
       if ('missing' in facts) warnings.push(facts.missing);
       // V02: a squad member's damage is one instance on its squad pool.
       const strikePlans = application
@@ -1218,7 +1221,10 @@ const abilityUse: OperationDefinition = {
     for (const t of targetFacts) if ('missing' in t.facts) warnings.push(t.facts.missing);
     const perTarget = targets.map((t, i) => {
       const outcome = result.targets[i]!;
-      const applied = result.damageApplications.find(d => d.targetId === t.actor.id) ?? null;
+      const applied = minionApplication(
+        t,
+        result.damageApplications.find(d => d.targetId === t.actor.id) ?? null,
+      );
       return { target: t.actor, edges: edges[i]!, banes: banes[i]!, outcome, applied };
     });
     const costText = result.cost

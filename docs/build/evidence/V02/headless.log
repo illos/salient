@@ -1,0 +1,10 @@
+ok   table: player admitted, session started, hero Thorn admitted through the wizard route
+ok   squad add: four Spinecleavers persist one squad, four minion identities, pool 20, EV 3; minions refuse /foe add
+ok   combat: one squad turn entry, its shared turn fires one turn-start boundary with all four participants
+ok   squad act: one roll, two minions on Thorn add free strike 2, one on the warrior; damage read back from the recorded tier
+ok   ladder: Brutal Slam on a minion reduces the pool and derives casualties from the printed steps; owed choices are named by the attacker
+ok   history: undoing the Brutal Slam restores the pool and the dropped minions exactly
+ok   Free Strike Together: two minions on Thorn apply one 4-damage strike
+ok   captain: two Axethrowers with the warrior as captain pool 18 at step 9; detaching reverts to 14 at step 7 with no casualty
+ok   removal: single minions are refused; the squad is removed as a unit
+PASS 9/9 steps in 10168 ms → docs/build/evidence/V02/headless.json
