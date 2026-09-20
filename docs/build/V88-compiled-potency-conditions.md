@@ -196,10 +196,16 @@ general condition engine and it does not automate any condition's consequences.
     leaves legacy compatibility only by being added to the inventory below with its own design and
     live cases; its cost and all three tiers come from the source, and its applied and resisted
     branches are proven live.
-12. **Regression.** The V72 proof runners (`scripts/v72-headless.ts` isolated and
-    `scripts/v72-headless-main.ts` occurrence-aware linked corrections) still pass unchanged; the six
-    V72 compiled abilities produce identical damage and push results; manual toggles, R05 condition
-    tests and the Malice lifecycle are unchanged.
+12. **Regression.** `scripts/v72-headless-main.ts` (Brutal Slam linked corrections) passes
+    unchanged. `scripts/v72-headless.ts` keeps every damage, push, cost, blocking, permission,
+    correction-identity and history assertion unchanged, and only its Bury the Point remainder
+    assertions change, because V88 changes that behavior by design: the BP2 occurrence is
+    `condition` with status `resisted` (H has Might 2, `M < 1`), the corrected occurrence keeps a
+    distinct id and reads `M < 0` still `resisted`, and `ability.resolved` on it is refused before
+    and after `/history rewind` with the roster unchanged. The historical BP5 disposition case is
+    superseded, not deleted from Git history. The six V72 compiled abilities produce identical damage
+    and push results; manual toggles, R05 condition tests and the Malice lifecycle are unchanged.
+    Record the adapted assertions in the V88 evidence; the V72 evidence stays historical.
 13. **Reports.** `pnpm check` passes including report freshness; the V72 support report shows
     Bury the Point and Eye of Surlach compiled with no diagnostics and the library-wide bounded
     potency abilities as compiled-but-unavailable until V87 seeds them.
@@ -285,3 +291,11 @@ Registered by the Fable ENGINE2 thread as the next engine slice after V72. Assig
 ENGINE thread (Chords `2b1ba081-4040-4665-9ea2-22364db707f4`) for implementation on
 `slice/V88` in `.worktrees/engine-potency` from current main. Fable verifies independently and owns
 integration and the shared-main update. All gate runs go to TESTER; browser testing remains paused.
+
+### 2026-09-20 — Acceptance check 12 clarified
+
+Astra ENGINE reported (Chords 854) that `scripts/v72-headless.ts` asserts the Bury the Point
+remainder as `unsupported` and disposes it (BP5), which V88 changes by design. Check 12 now says
+so: the main runner stays unchanged; the isolated runner keeps every other assertion and adapts only
+the Bury the Point remainder/disposition assertions to `condition`/`resisted` plus refused
+disposition. Confirmed by the ENGINE2 lead; no other scope change.
