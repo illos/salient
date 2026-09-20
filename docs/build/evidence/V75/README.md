@@ -37,7 +37,10 @@ checks in [its slice document](../../V75-quiet-theme.md#acceptance-checks).
 | `22-statblock-feature-dark.png` | An ability opened from that stat block: not a flush card, so it keeps the slim header with Back and the source-reference line, and its name is printed once |
 
 The stat-block pop-up images were re-captured on 2026-09-20 after the user asked for the
-duplicated title and the padding around the card to go.
+duplicated title and the padding around the card to go. The later single-control-row change
+(one navigation pill beside Close, no eyebrow, book line at the bottom of rule pop-ups) and the
+second rebase are not yet pictured here: those captures run through the testing coordinator with
+`.playtest/v75/capture-popups.mjs` (worktree, ignored) and will be added when they return.
 
 ## What they show about the preserved subsystems
 

@@ -101,7 +101,9 @@ All dependencies are merged in main `9252b8f`. Worktree `code/.worktrees/quiet-t
    `web/components/core-content.css` is the surface tone of the `.ds-monster-title` gradient end
    and the `.ds-hero-ability::after` notch (`var(--background)` → `var(--card)`, because Core
    content now sits on card panels); the `.ds-*` rules in `web/rules/rules.css` and
-   `web/foes/foes.css` and the `.rules-prose` rules are unchanged.
+   `web/foes/foes.css` and the `.rules-prose` rules are unchanged. The one addition is the scoped
+   `.foe-statblock-flush` rules in `foes.css` (side padding and a right inset on the title band
+   when a stat block fills a pop-up); no existing `.ds-*` declaration changes.
 8. Appearance preference behavior (`web/theme.ts`, `index.html` pre-paint script) is unchanged:
    light, dark and system still resolve to the `dark` class and `data-theme`.
 
