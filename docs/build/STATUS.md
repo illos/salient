@@ -364,6 +364,11 @@ in `docs/build/V60-dwarf-level-one.md`, `docs/build/V61-human-level-one.md`, and
 checks, not actual-game browser acceptance. Required browser/Forge checks and formal reviews stay
 queued; no ancestry application change has been merged into main.
 
+The [current wizard audit](V24-character-wizard-assessment.md#current-headless-route-audit--2026-09-20)
+maps supported routes, backend coverage and missing standalone proof. Discovery and change-choice
+semantics need a demonstrated programmatic route; other major flows have public endpoints but lack
+a complete browser-independent live journey.
+
 Next verification follows the app-wide
 [headless completion gate](README.md#programmatic-headless-completion-gate): prove authenticated
 create/choose/save/evaluate/readback through supported CLI/API routes without browser setup for
