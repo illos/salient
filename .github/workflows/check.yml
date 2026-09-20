@@ -1,8 +1,12 @@
 name: check
 
+# TESTER is the normal gate. Promotion pushes reuse that result.
+# Dispatch only when TESTER deliberately chooses a GitHub runner.
 on:
-  push:
-  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
   check:

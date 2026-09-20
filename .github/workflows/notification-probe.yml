@@ -1,0 +1,25 @@
+name: CI notification probe
+
+# TESTER may dispatch this bounded delivery probe; it never runs the app suite.
+on:
+  workflow_dispatch:
+    inputs:
+      outcome:
+        description: Intentional outcome for notification verification
+        type: choice
+        options: [failure, success]
+        default: failure
+
+permissions: {}
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 1
+    steps:
+      - name: Emit selected result
+        env:
+          PROBE_OUTCOME: ${{ inputs.outcome }}
+        run: |
+          echo "Intentional notification probe: $PROBE_OUTCOME"
+          test "$PROBE_OUTCOME" = success

@@ -30,3 +30,10 @@ Send a new key when the candidate changes. Do not edit a submitted worktree whil
 
 After a deployment, DEPLOY2 may request one targeted smoke check of the changed feature on the
 shared or hosted app. That is the whole live gate.
+
+## Promotion and GitHub
+
+TESTER's green gate is reused for unchanged code during promotion. Pushing main does not start a
+second full suite. The GitHub `check` workflow is an explicit `workflow_dispatch` fallback when
+TESTER chooses a GitHub runner; do not dispatch it after an already passing equivalent gate.
+Agents do not poll Actions or start run-watch loops after a release. Failures use event delivery.
