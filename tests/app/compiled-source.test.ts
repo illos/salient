@@ -48,7 +48,7 @@ describe('V72 selected source runtime adapters', () => {
     expect(
       definitions[1]!.compilation!.definition.tiers.every(
         nodes =>
-          nodes.length === 2 && nodes[0]!.kind === 'damage' && nodes[1]!.kind === 'unsupported',
+          nodes.length === 2 && nodes[0]!.kind === 'damage' && nodes[1]!.kind === 'condition',
       ),
     ).toBe(true);
   });
