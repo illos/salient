@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
-/** Existing level-one Devil content; stable R01 decision IDs and source wording. */
+/** Complete level-one Devil choices; stable R01 decision IDs and source wording. */
 import type { Decision } from '../../../evaluate/definitions.ts';
 
 export const levelOneDecisions = [
@@ -56,7 +56,21 @@ export const levelOneDecisions = [
     source: 'en/unified/md/feature/trait/devil/silver-tongue.md',
     quote: 'You have one skill of your choice from the interpersonal skill group',
     optionsFrom: 'pool.skills.interpersonal',
-    supportedInV001: ['Persuade'],
+    supportedInV001: [
+      'Brag',
+      'Empathize',
+      'Flirt',
+      'Gamble',
+      'Handle Animals',
+      'Interrogate',
+      'Intimidate',
+      'Lead',
+      'Lie',
+      'Music',
+      'Perform',
+      'Persuade',
+      'Read Person',
+    ],
     questions: [],
   },
   {
@@ -85,7 +99,7 @@ export const levelOneDecisions = [
         cost: 1,
         source: 'en/unified/md/feature/trait/devil/barbed-tail.md',
         costQuote: 'cost: 1 Point',
-        supportedInV001: false,
+        supportedInV001: true,
       },
       {
         id: 'trait.devil.beast-legs',
@@ -101,7 +115,7 @@ export const levelOneDecisions = [
         cost: 1,
         source: 'en/unified/md/feature/trait/devil/glowing-eyes.md',
         costQuote: 'cost: 1 Point',
-        supportedInV001: false,
+        supportedInV001: true,
       },
       {
         id: 'trait.devil.hellsight',
@@ -109,7 +123,7 @@ export const levelOneDecisions = [
         cost: 1,
         source: 'en/unified/md/feature/trait/devil/hellsight.md',
         costQuote: 'cost: 1 Point',
-        supportedInV001: false,
+        supportedInV001: true,
       },
       {
         id: 'trait.devil.impressive-horns',
@@ -125,7 +139,7 @@ export const levelOneDecisions = [
         cost: 2,
         source: 'en/unified/md/feature/trait/devil/prehensile-tail.md',
         costQuote: 'cost: 2 Points',
-        supportedInV001: false,
+        supportedInV001: true,
       },
       {
         id: 'trait.devil.wings',
@@ -133,10 +147,9 @@ export const levelOneDecisions = [
         cost: 2,
         source: 'en/unified/md/feature/trait/devil/wings.md',
         costQuote: 'cost: 2 Points',
-        supportedInV001: false,
+        supportedInV001: true,
       },
     ],
-    supportedSetInV001: ['Beast Legs', 'Impressive Horns'],
     questions: [],
   },
 ] as Decision[];

@@ -1,0 +1,12 @@
+{
+  "suite": "required full browser",
+  "result": "failed and interrupted",
+  "failure": "closeout.spec.ts:104; app Function execution timed out (maximum duration:1s)",
+  "stoppedBy": "lead under user anti-spiral instruction",
+  "container": "salient-character-restart-dev-a92aeb36adc3-job-e197dec1",
+  "observedContainerExitCode": 143,
+  "observedOOMKilled": false,
+  "completedCases": "campaign-sharing passed; closeout failed; combat started then interrupted",
+  "rawArchive": "/srv/presidium/projects/salient/character-restart-evidence/v58-paused-evidence.tar.gz",
+  "rawArchiveSha256": "a7b09ea774a3f936c22ae3c94537028cefd1516906e2f84d8866290f4268523f"
+}

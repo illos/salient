@@ -217,6 +217,184 @@
     }
   },
   {
+    "id": "mcdm.heroes.v1/feature.trait.dwarf/dwarf-traits",
+    "kind": "trait",
+    "name": "Dwarf Traits",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/dwarf/dwarf-traits.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/dwarf/dwarf-traits.json",
+    "selection": "dwarf-ancestry",
+    "text": "---\nancestry: dwarf\nname: Dwarf Traits\nscc: mcdm.heroes.v1/feature.trait.dwarf/dwarf-traits\ntype: trait\n---\n\n[Dwarf](scc.v1:mcdm.heroes.v1/ancestry/dwarf) heroes have access to the following traits.\n\n#### Purchased Dwarf Traits\n\nYou have 3 ancestry points to spend on the following traits. (*Quick Build:* Grounded, Spark Off Your Skin.)\n",
+    "structured": {
+      "ancestry": "dwarf"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.dwarf/great-fortitude",
+    "kind": "trait",
+    "name": "Great Fortitude",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/dwarf/great-fortitude.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/dwarf/great-fortitude.json",
+    "selection": "dwarf-ancestry",
+    "text": "---\nancestry: dwarf\ncost: 2 Points\nname: Great Fortitude\nscc: mcdm.heroes.v1/feature.trait.dwarf/great-fortitude\ntype: trait\n---\n\nYour hearty constitution prevents you from losing strength. You can't be made [weakened](scc.v1:mcdm.heroes.v1/condition/weakened).\n",
+    "structured": {
+      "ancestry": "dwarf",
+      "cost": "2 Points"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.dwarf/grounded",
+    "kind": "trait",
+    "name": "Grounded",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/dwarf/grounded.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/dwarf/grounded.json",
+    "selection": "dwarf-ancestry",
+    "text": "---\nancestry: dwarf\ncost: 1 Point\nname: Grounded\nscc: mcdm.heroes.v1/feature.trait.dwarf/grounded\ntype: trait\n---\n\nYour heavy stone body and connection to the earth make it difficult for others to move you. You have a +1 [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) to [stability](scc.v1:mcdm.heroes.v1/rule.character/stability).\n",
+    "structured": {
+      "ancestry": "dwarf",
+      "cost": "1 Point"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.dwarf/runic-carving",
+    "kind": "trait",
+    "name": "Signature Trait: Runic Carving",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/dwarf/runic-carving.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/dwarf/runic-carving.json",
+    "selection": "dwarf-ancestry",
+    "text": "---\nancestry: dwarf\nname: 'Signature Trait: Runic Carving'\nscc: mcdm.heroes.v1/feature.trait.dwarf/runic-carving\ntype: trait\n---\n\nYou can carve a rune onto your skin with 10 uninterrupted minutes of work, which is activated by the magic within your body. The rune you carve determines the benefit you receive, chosen from among the following:\n\n**Detection:** Pick a specific type of creature (such as goblins or [humans](scc.v1:mcdm.heroes.v1/ancestry/human)) or object (such as gems or potions). Your rune glows softly when you are within 20 squares of any creature or object of that type, even if you don't have [line of effect](scc.v1:mcdm.heroes.v1/rule.combat/line-of-effect) to the creature or object. You can change the type of creature or object as a maneuver.\n\n**Light:** Your skin sheds light for 10 squares. You can [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) this light on and off as a maneuver.\n\n**Voice:** As a maneuver, you can communicate telepathically with a willing creature you have met before and who is within 1 mile of you. You must know the creature's name, and they must speak and understand a language you know. You and the creature can respond to one another as if having a spoken conversation. You can communicate with a different creature by changing the rune.\n\nYou can have one rune active at a time, and can change or remove a rune with 10 uninterrupted minutes of work.\n",
+    "structured": {
+      "ancestry": "dwarf"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.dwarf/spark-off-your-skin",
+    "kind": "trait",
+    "name": "Spark Off Your Skin",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/dwarf/spark-off-your-skin.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/dwarf/spark-off-your-skin.json",
+    "selection": "dwarf-ancestry",
+    "text": "---\nancestry: dwarf\ncost: 2 Points\nname: Spark Off Your Skin\nscc: mcdm.heroes.v1/feature.trait.dwarf/spark-off-your-skin\ntype: trait\n---\n\nYour stone skin affords you potent protection. You have a +6 [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) to [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina), and that [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) increases by 6 at 4th, 7th, and 10th levels.\n",
+    "structured": {
+      "ancestry": "dwarf",
+      "cost": "2 Points"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.dwarf/stand-tough",
+    "kind": "trait",
+    "name": "Stand Tough",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/dwarf/stand-tough.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/dwarf/stand-tough.json",
+    "selection": "dwarf-ancestry",
+    "text": "---\nancestry: dwarf\ncost: 1 Point\nname: Stand Tough\nscc: mcdm.heroes.v1/feature.trait.dwarf/stand-tough\ntype: trait\n---\n\nYour body is made to withstand the blows of your enemies. Your [Might](scc.v1:mcdm.heroes.v1/rule.character/might) score is treated as 1 higher for the purpose of resisting [potencies](scc.v1:mcdm.heroes.v1/rule.character/potency), and you gain an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on [Might](scc.v1:mcdm.heroes.v1/rule.character/might) [tests](scc.v1:mcdm.heroes.v1/rule.test/test) when called for to resist environmental effects or a creature's traits or abilities.\n",
+    "structured": {
+      "ancestry": "dwarf",
+      "cost": "1 Point"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.dwarf/stone-singer",
+    "kind": "trait",
+    "name": "Stone Singer",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/dwarf/stone-singer.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/dwarf/stone-singer.json",
+    "selection": "dwarf-ancestry",
+    "text": "---\nancestry: dwarf\ncost: 1 Point\nname: Stone Singer\nscc: mcdm.heroes.v1/feature.trait.dwarf/stone-singer\ntype: trait\n---\n\nYou have a magic connection to the earth. When you spend 1 uninterrupted hour singing, you can reshape any unworked mundane stone within 3 squares. You can't destroy this stone, but you can move each square of it anywhere within 3 squares, piling it off to one side to dig a hole or building it up to create a wall.\n",
+    "structured": {
+      "ancestry": "dwarf",
+      "cost": "1 Point"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.human/cant-take-hold",
+    "kind": "trait",
+    "name": "Can't Take Hold",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/human/cant-take-hold.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/human/cant-take-hold.json",
+    "selection": "human-ancestry",
+    "text": "---\nancestry: human\ncost: 1 Point\nname: Can't Take Hold\nscc: mcdm.heroes.v1/feature.trait.human/cant-take-hold\ntype: trait\n---\n\nYour connection to the natural world allows you to resist certain [supernatural](scc.v1:mcdm.heroes.v1/rule.general/supernatural) effects. You ignore temporary [difficult terrain](scc.v1:mcdm.heroes.v1/movement/difficult-terrain) created by magic and psionic abilities. Additionally, when you are [force moved](scc.v1:mcdm.heroes.v1/movement/forced-movement) by a magic or psionic ability, you can reduce the [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) by 1.\n",
+    "structured": {
+      "ancestry": "human",
+      "cost": "1 Point"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.human/detect-the-supernatural",
+    "kind": "trait",
+    "name": "Signature Trait: Detect the Supernatural",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/human/detect-the-supernatural.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/human/detect-the-supernatural.json",
+    "selection": "human-ancestry",
+    "text": "---\nancestry: human\nname: 'Signature Trait: Detect the Supernatural'\nscc: mcdm.heroes.v1/feature.trait.human/detect-the-supernatural\ntype: trait\n---\n\nAs a maneuver, you can open your awareness to detect [supernatural](scc.v1:mcdm.heroes.v1/rule.general/supernatural) creatures and phenomena. Until the end of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), you know the location of any [supernatural](scc.v1:mcdm.heroes.v1/rule.general/supernatural) object, or any undead, construct, or creature from another world within 5 squares, even if you don't have [line of effect](scc.v1:mcdm.heroes.v1/rule.combat/line-of-effect) to that object or creature. You know if you're detecting an item or a creature, and you know the nature of any creature you detect.\n",
+    "structured": {
+      "ancestry": "human"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.human/determination",
+    "kind": "trait",
+    "name": "Determination",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/human/determination.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/human/determination.json",
+    "selection": "human-ancestry",
+    "text": "---\nancestry: human\ncost: 2 Points\nname: Determination\nscc: mcdm.heroes.v1/feature.trait.human/determination\ntype: trait\n---\n\nA tolerance for pain and distress allows you to push through difficult situations. If you are [frightened](scc.v1:mcdm.heroes.v1/condition/frightened), [slowed](scc.v1:mcdm.heroes.v1/condition/slowed), or [weakened](scc.v1:mcdm.heroes.v1/condition/weakened), you can use a maneuver to immediately end one of those [conditions](scc.v1:mcdm.heroes.v1/rule.combat/condition).\n",
+    "structured": {
+      "ancestry": "human",
+      "cost": "2 Points"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.human/human-traits",
+    "kind": "trait",
+    "name": "Human Traits",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/human/human-traits.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/human/human-traits.json",
+    "selection": "human-ancestry",
+    "text": "---\nancestry: human\nname: Human Traits\nscc: mcdm.heroes.v1/feature.trait.human/human-traits\ntype: trait\n---\n\n[Human](scc.v1:mcdm.heroes.v1/ancestry/human) heroes have access to the following traits.\n\n#### Purchased Human Traits\n\nYou have 3 ancestry points to spend on the following traits. (*Quick Build:* Perseverance, Staying Power.)\n",
+    "structured": {
+      "ancestry": "human"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.human/perseverance",
+    "kind": "trait",
+    "name": "Perseverance",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/human/perseverance.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/human/perseverance.json",
+    "selection": "human-ancestry",
+    "text": "---\nancestry: human\ncost: 1 Point\nname: Perseverance\nscc: mcdm.heroes.v1/feature.trait.human/perseverance\ntype: trait\n---\n\nGiving up is for other people. You gain an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on [tests](scc.v1:mcdm.heroes.v1/rule.test/test) made using the [Endurance](scc.v1:mcdm.heroes.v1/skill.exploration/endurance) skill. Additionally, when you are [slowed](scc.v1:mcdm.heroes.v1/condition/slowed), your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) is reduced to 3 instead of 2.\n",
+    "structured": {
+      "ancestry": "human",
+      "cost": "1 Point"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.human/resist-the-unnatural",
+    "kind": "trait",
+    "name": "Resist the Unnatural",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/human/resist-the-unnatural.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/human/resist-the-unnatural.json",
+    "selection": "human-ancestry",
+    "text": "---\nancestry: human\ncost: 1 Point\nname: Resist the Unnatural\nscc: mcdm.heroes.v1/feature.trait.human/resist-the-unnatural\ntype: trait\n---\n\nYour instinctive resilience protects you from injuries beyond the routine. Whenever you take damage that isn't untyped, you can use a [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) to take half the damage.\n",
+    "structured": {
+      "ancestry": "human",
+      "cost": "1 Point"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.human/staying-power",
+    "kind": "trait",
+    "name": "Staying Power",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/human/staying-power.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/human/staying-power.json",
+    "selection": "human-ancestry",
+    "text": "---\nancestry: human\ncost: 2 Points\nname: Staying Power\nscc: mcdm.heroes.v1/feature.trait.human/staying-power\ntype: trait\n---\n\nYour [human](scc.v1:mcdm.heroes.v1/ancestry/human) physiology allows you to fight, run, and stay awake longer than others. You increase your number of [Recoveries](scc.v1:mcdm.heroes.v1/rule.health/recoveries) by 2.\n",
+    "structured": {
+      "ancestry": "human",
+      "cost": "2 Points"
+    }
+  },
+  {
     "id": "mcdm.heroes.v1/feature.trait.polder/corruption-immunity",
     "kind": "trait",
     "name": "Corruption Immunity",

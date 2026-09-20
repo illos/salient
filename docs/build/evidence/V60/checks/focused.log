@@ -1,0 +1,9 @@
+
+ RUN  v4.1.11 /app
+
+ ✓  engine  tests/character-v60-dwarf.test.ts (6 tests) 35ms
+
+ Test Files  1 passed (1)
+      Tests  6 passed (6)
+   Start at  00:16:32
+   Duration  474ms (transform 266ms, setup 0ms, import 339ms, tests 35ms, environment 0ms)

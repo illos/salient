@@ -412,3 +412,11 @@ remains V62 `1e7896c`. Admission/privacy assertion failure blocks the remaining 
 The preceding audit/queue describes the starting gaps; use V65's actual evidence for current proof.
 All V65 jobs ended and its temporary deployment credentials were removed. No browser demotion or
 ancestry acceptance is claimed. User instruction is to record blockers without implementing fixes.
+
+## Character coverage continuation — 2026-09-20
+
+| Id | Slice | Status | Owner |
+| --- | --- | --- | --- |
+| V69 | [Current-main character integration and headless coverage](V69-character-coverage.md) | In progress on `slice/V69`, `.worktrees/character-coverage`; preserved V65 candidate; acceptance gaps audited before merge | Astra lead |
+| V70 | [Hakaan level one](V70-hakaan-level-one.md) | In progress on `slice/V70`, `.worktrees/astra-hakaan`; sourced choices, grants and headless witnesses | Astra Hakaan implementer |
+| V71 | [Orc level one](V71-orc-level-one.md) | In progress on `slice/V71`, `.worktrees/astra-orc`; sourced choices, grants and headless witnesses | Astra Orc implementer |

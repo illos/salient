@@ -1,37 +1,42 @@
 // SPDX-License-Identifier: GPL-3.0-only
 // Continue the actual wizard-created hero into the common table journey; no seeded hero shortcut.
 import { expect, type Page } from '@playwright/test';
-import { execFile } from 'node:child_process';
-import { promisify } from 'node:util';
+import { authenticatedFixtureCli } from './local-fixtures';
 import { writeFile } from 'node:fs/promises';
 
 export async function tableJourney(pages: Page[], campaignUrl: string, stamp: string) {
+  const actors = new Map<string, Awaited<ReturnType<typeof authenticatedFixtureCli>>>();
+  try {
+    // Reuse authenticated sessions on both Vite and the bundled hosted app. The hosted Worker
+    // does not expose source modules such as /web/auth-client.ts.
+    for (const role of ['director', 'player', 'observer'])
+      actors.set(
+        role,
+        await authenticatedFixtureCli({
+          email: `wizard-${role}-${stamp}@example.test`,
+          password: 'Test-only-salient-password-42',
+        }),
+      );
+    await runTableJourney(pages, campaignUrl, stamp, (role, ...args) => {
+      const actor = actors.get(role);
+      if (!actor) throw new Error(`Unknown fixture actor: ${role}`);
+      return actor.cli(...args);
+    });
+  } finally {
+    // Sequential acquisition above makes successful earlier sessions available for cleanup
+    // even if a later actor cannot sign in.
+    await Promise.all([...actors.values()].map(actor => actor.close()));
+  }
+}
+
+async function runTableJourney(
+  pages: Page[],
+  campaignUrl: string,
+  stamp: string,
+  cli: Awaited<ReturnType<typeof authenticatedFixtureCli>>['cli'],
+) {
   const [director, player, observer] = pages as [Page, Page, Page];
   const campaignId = campaignUrl.split('/').at(-1)!;
-  const tokens = Object.fromEntries(
-    await Promise.all(
-      pages.map(async (page, index) => [
-        ['director', 'player', 'observer'][index],
-        await page.evaluate(async () => {
-          const modulePath = '/web/auth-client.ts';
-          const { authClient } = await import(modulePath);
-          const result = await authClient.convex.token();
-          if (!result.data?.token) throw new Error('No authenticated browser token available');
-          return result.data.token as string;
-        }),
-      ]),
-    ),
-  );
-
-  const cli = async (role: string, ...args: string[]) => {
-    const output = await promisify(execFile)('pnpm', ['app', ...args], {
-      env: {
-        ...process.env,
-        SALIENT_AUTH_TOKEN: tokens[role],
-      },
-    });
-    return JSON.parse(output.stdout);
-  };
   const query = (name: string, role = 'director') =>
     cli(role, 'query', name, JSON.stringify({ campaignId }));
   const command = (text: string, role = 'director') =>

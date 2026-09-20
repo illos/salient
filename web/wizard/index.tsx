@@ -37,12 +37,12 @@ import {
   assignmentContext,
 } from '../../shared/evaluate/assignment';
 import { draftSelectionsFrom } from '../../shared/evaluate/draft';
+import { changeChoice } from '../../shared/evaluate/choiceTransition';
 import {
   indexDecisions,
   isAvailable,
   isSupported,
   poolOf,
-  pruneUnavailable,
   unavailableReason,
   type Selections,
 } from '../../shared/evaluate/structure';
@@ -759,13 +759,7 @@ function Wizard({ character }: { character: WizardCharacter }) {
     if (command.pending) return;
     setSaved(false);
     setDirty(true);
-    const next = { ...selections };
-    const assignment = assignmentContext(selections, definitions);
-    if (assignment?.arrayDecisionId === id && value !== selections[id])
-      delete next[assignment.decisionId];
-    if (value === undefined) delete next[id];
-    else next[id] = value;
-    const pruned = pruneUnavailable(next, definitions);
+    const pruned = changeChoice(selections, definitions, id, value);
     setSelections(pruned.selections);
     setCleared(pruned.removed.filter(removed => removed !== id));
   }
