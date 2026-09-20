@@ -331,8 +331,19 @@ Captain-bonus loss reduces the pool without casualties; replacement bonus gain a
 and does not revive members. Later non-area pool exhaustion defeats all remaining ordinary minions,
 subject to explicit source exceptions. Area casualties remain restricted to affected members. Record
 stat adjustments, damage and each casualty distinctly; do not infer an individual current Stamina or
-normalize living count from the pool. Unresolved arithmetic is listed in the table queue, not a new
-command or fallback formula.
+normalize living count from the pool. The remaining arithmetic was decided on 2026-09-20; see the
+owning contract.
+
+**Implementation note, 2026-09-20 (V02).** The squad family: `/squad add definition="<content id>"
+count=4 captain=@Name`; `@{squad:id} /squad remove`; `@{squad:id} /squad captain captain=@Name|none`;
+`@{squad:id} /squad participation member=@Minion participating=false`; `/squad casualties
+squad="<id>" casualties=[@Minion, …]` (also the `squad-casualties` card's continuation, answerable
+by the attacking user or the Director); `@{squad:id} /squad act ability="Grab"
+assignments=[{"target": @Thorn, "minions": [@Minion 1, @Minion 2], "edges": 0, "banes": 0}, …]`
+(ability omitted means the signature ability); `@{squad:id} /squad free-strike target=@Thorn
+minions=[@Minion 1, …]`. The squad is an actor (`@{squad:id}`, or its unique name) for turns, the pool
+adjustment (`/adjust stamina`) and these operations; it is never a target. `/foe add` refuses Minion
+stat blocks and `/foe remove` refuses single minions.
 
 ### Mid-combat group operations
 

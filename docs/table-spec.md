@@ -2017,6 +2017,30 @@ pool 36, step 9. A 10-damage hit leaves 26, kills one and carries 1. The captain
 carry 1. The next death lands after 6 more damage (pool 14), the next after 7 more (pool 7), and zero
 takes the last.
 
+**Implementation note, 2026-09-20 (V02).** A squad is a `squads` row (pool, step, carried damage,
+member ids in roster order, captain, parsed With Captain benefit, proportional EV, shared-turn
+participation, owed casualty choice) plus one `foes` row per minion carrying `squadId`; a minion's
+row holds its printed Stamina while it lives and 0 once the ladder drops it, so Slain labels, the
+round boundary and cleanup read minions like other foes. The ladder arithmetic is pure in
+`shared/resolve/squad.ts`; damage from any ability use, free strike or coordinated action on a
+minion is routed once per squad through it, area-aware from the ability's target shape. The squad
+is the actor of one turn entry (`squad` actor kind); its living members and attached captain are
+the turn's participants, so global every-turn work fires once. Registered operations: `squad.add`
+(count 1–8, optional captain), `squad.remove` (whole squad), `squad.captain` (attach or `none`),
+`squad.participation`, `squad.casualties` (the inline card's continuation, also direct),
+`squad.act` (signature attack with up to three contributors per target and free-strike extra
+damage, or Grab/Knockback/Hide/Search together) and `squad.free-strike` (Free Strike Together).
+Automated With Captain forms are `+N bonus to Stamina`, `+N damage bonus to strikes`, `Gain an
+edge on strikes` and `Have a double edge on strikes`; every other printed benefit is shown as text
+for manual play. Interpretations recorded here: the captain's strike damage bonus applies once per
+target of the coordinated signature attack (one ability instance) and once per minion in Free Strike
+Together (each is its own free strike); a dead captain edited back above zero is not re-attached.
+Known limits: post-roll corrections that would change squad pool damage are refused in V02 (rewind
+or adjust the pool instead); minion immunities and weaknesses printed as anything but `-` still
+leave damage manual, so the once-per-squad modifier rule has no automated case yet; compiled push
+effects are not routed through the coordinated attack, whose tier text records them for manual
+resolution.
+
 Global “every turn” effects fire once per shared squad/captain turn,
 not once per participant (confirmed 2026-09-13). A captain’s personal extra turn
 belongs only to the captain and does not refresh squad participation (confirmed 2026-09-13).

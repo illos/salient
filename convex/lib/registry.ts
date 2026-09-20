@@ -39,6 +39,7 @@ import { historyOperations } from './history';
 import { currentEncounter } from './encounters';
 import { abilityOperations } from './abilityOperations';
 import { characterOperations } from './characterOperations';
+import { squadOperations } from './squadOperations';
 import { closeInteraction, respondToInteraction } from './interactions';
 
 export type Role = 'director' | 'player' | 'observer';
@@ -423,6 +424,7 @@ export function registeredOperations(): OperationDefinition[] {
     cardClose,
     ...tableOperations,
     ...foeOperations,
+    ...squadOperations,
     ...combatOperations,
     ...closeoutOperations,
     ...historyOperations,
@@ -469,7 +471,7 @@ export async function run(
   const activeEncounter = context.session ? await currentEncounter(ctx, context.session) : null;
   if (
     activeEncounter?.phase === 'closeout' &&
-    ((['combat', 'turn', 'group', 'target'].includes(operation.family) &&
+    ((['combat', 'turn', 'group', 'target', 'squad'].includes(operation.family) &&
       !['combat.end', 'combat.victories', 'combat.finish', 'combat.void'].includes(operation.id)) ||
       ['ability.select', 'ability.use', 'ability.fire', 'hero.recover'].includes(operation.id))
   )

@@ -36,6 +36,15 @@ import { rollDice } from './dice';
 import { requireContent } from '../content';
 import { journalPatch } from './journal';
 import { run, type OperationDefinition, type Outcome, type TableContext } from './registry';
+import {
+  dropMembers,
+  loadSquad,
+  poolState,
+  recordCaptainLoss,
+  squadMembers,
+  squadOfCaptain,
+  writePool,
+} from './squads';
 import { currentEncounter } from './encounters';
 
 // ---------------------------------------------------------------------------------------------
@@ -478,10 +487,40 @@ function adjustOperation(field: AdjustableField): OperationDefinition {
           },
         };
       }
+      if (actor!.kind === 'squad') {
+        // V02: the Director edits the shared pool as a recorded adjudication; zero defeats the
+        // remaining minions (2026-09-20); minions cannot gain temporary Stamina.
+        if (field.verb !== 'stamina')
+          throw new ConvexError(
+            `${actor!.name} is a squad with a shared Stamina pool; ${field.label} does not apply to minions.`,
+          );
+        const squad = await loadSquad(ctx, context.campaign._id, actor!.id as Id<'squads'>);
+        const state = poolState(squad, await squadMembers(ctx, squad));
+        const outcome = manual(squad.name, squad.pool, value, {
+          kind: 'squad',
+          id: squad._id,
+        }) as Extract<Outcome, { kind: string }>;
+        return {
+          ...outcome,
+          description: `${outcome.description}${value === 0 && state.living.length ? ' The pool at zero defeats every remaining minion.' : ''}`,
+          commit: async (mctx, scope) => {
+            await writePool(mctx, scope, squad, {
+              ...state,
+              pool: value,
+              living: value === 0 ? [] : state.living,
+            });
+            if (value === 0) await dropMembers(mctx, scope, state.living);
+          },
+        };
+      }
       if (actor!.kind === 'foe') {
         if (field.scope === 'hero')
           throw new ConvexError(`${actor!.name} is a foe; foes have no ${field.label}.`);
         const foe = await loadFoe(ctx, context, actor!);
+        if (foe.squadId)
+          throw new ConvexError(
+            `${foe.name} is a squad minion: its Stamina is the squad's shared pool (adjust it with @{squad:${foe.squadId}} /adjust stamina).`,
+          );
         const key = field.verb === 'stamina' ? 'stamina' : 'temporaryStamina';
         const before = foe.live[key];
         const outcome = manual(foe.name, before, value, { kind: 'foe', id: foe._id });
@@ -491,6 +530,11 @@ function adjustOperation(field: AdjustableField): OperationDefinition {
             await journalPatch(mctx, scope, 'foes', foe._id, {
               live: { ...foe.live, [key]: value },
             });
+            // V02: a captain edited to 0 Stamina is lost to its squad (benefit reverts).
+            if (key === 'stamina' && value <= 0) {
+              const squad = await squadOfCaptain(mctx, foe._id);
+              if (squad) await recordCaptainLoss(mctx, scope, squad, 'slain');
+            }
           },
         };
       }

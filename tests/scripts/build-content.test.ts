@@ -220,6 +220,9 @@ describe('verbatim text and traceable fields', () => {
       expect(frontmatter).toContain(`type: ${found.kind}`);
       for (const [key, value] of Object.entries(found.structured)) {
         expect(frontmatter, `${id} states ${key}`).toMatch(new RegExp(`^${key}:`, 'm'));
+        // Feature blocks (Malice pages) carry nested YAML records with block scalars that this
+        // scalar matcher cannot restate; their verbatim text is already asserted byte-exact above.
+        if (key === 'features' && Array.isArray(value)) continue;
         expect(frontmatterStates(frontmatter, value), `${id}.${key} value`).toBe(true);
       }
       expect(JSON.parse(readPinnedSource(root, found.jsonPath)).name).toBe(found.name);

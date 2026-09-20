@@ -72,6 +72,54 @@ export const catalog = query({
     return { definitionId: entry.contentId, name: entry.name, sourceSnapshot: snapshotOf(entry) };
   },
 });
+/**
+ * Every seeded stat block the Director may load, with the printed facts the add control shows.
+ * V02: Minion stat blocks carry their printed per-member Stamina, EV wording and With Captain text so
+ * the squad add can show the pool it will create (docs/table-spec.md#minion-squads-and-captain-state).
+ */
+export const definitions = query({
+  args: { campaignId: v.id('campaigns') },
+  returns: v.array(
+    v.object({
+      definitionId: v.string(),
+      name: v.string(),
+      organization: v.union(v.string(), v.null()),
+      role: v.union(v.string(), v.null()),
+      level: v.union(v.number(), v.string(), v.null()),
+      ev: v.union(v.string(), v.null()),
+      stamina: v.union(v.number(), v.null()),
+      withCaptain: v.union(v.string(), v.null()),
+      group: v.union(v.string(), v.null()),
+    }),
+  ),
+  handler: async (ctx, args) => {
+    const user = await requireUser(ctx);
+    await requireDirector(ctx, args.campaignId, user._id);
+    const rows = await ctx.db
+      .query('content')
+      .withIndex('by_kind', q => q.eq('kind', 'statblock'))
+      .take(1000);
+    const text = (value: unknown) => (typeof value === 'string' && value ? value : null);
+    return rows
+      .map(row => {
+        const s = (row.structured ?? {}) as Record<string, unknown>;
+        const level = s.level;
+        return {
+          definitionId: row.contentId,
+          name: row.name,
+          organization: text(s.organization),
+          role: text(s.role),
+          level: typeof level === 'number' || typeof level === 'string' ? level : null,
+          ev: typeof s.ev === 'number' ? String(s.ev) : text(s.ev),
+          stamina: /^\d+$/.test(String(s.stamina)) ? Number(s.stamina) : null,
+          withCaptain: text(s.with_captain),
+          // The source directory names the monster family (monster/goblin/statblock/…).
+          group: /\/monster\/([^/]+)\/statblock\//.exec(row.sourcePath)?.[1] ?? null,
+        };
+      })
+      .sort((a, b) => a.name.localeCompare(b.name));
+  },
+});
 export const detail = query({
   args: { campaignId: v.id('campaigns'), foeId: v.id('foes') },
   returns: v.object({ name: v.string(), sourceSnapshot: v.string() }),

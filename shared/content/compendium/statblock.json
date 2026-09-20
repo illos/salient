@@ -1,11 +1,1934 @@
 [
   {
+    "id": "mcdm.monsters.v1/monster.dwarf.statblock/dwarf-axethrower",
+    "kind": "statblock",
+    "name": "Dwarf Axethrower",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/monster/dwarf/statblock/dwarf-axethrower.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/monster/dwarf/statblock/dwarf-axethrower.json",
+    "selection": "dwarf-family",
+    "text": "---\nagility: 0\nev: 3 for 4 minions\nfree_strike: 1\nintuition: 2\nkeywords:\n    - Dwarf\n    - Humanoid\nlevel: 1\nmight: 1\nname: Dwarf Axethrower\norganization: Minion\npresence: 0\nreason: 0\nrole: Defender\nscc: mcdm.monsters.v1/monster.dwarf.statblock/dwarf-axethrower\nsize: 1M\nspeed: 5\nstability: 2\nstamina: \"7\"\ntype: statblock\nwith_captain: +2 bonus to Stamina\n---\n\n|  Dwarf, Humanoid  |         -         |     Level 1      |             Minion Defender             |  EV 3 for 4 minions  |\n|:-----------------:|:-----------------:|:----------------:|:---------------------------------------:|:--------------------:|\n|  **1M**<br>Size   |  **5**<br>Speed   | **7**<br>Stamina |           **2**<br>Stability            | **1**<br>Free Strike |\n| **-**<br>Immunity | **-**<br>Movement |        -         | **+2 bonus to Stamina**<br>With Captain |  **-**<br>Weakness   |\n|  **+1**<br>Might  | **+0**<br>Agility | **+0**<br>Reason |           **+2**<br>Intuition           |  **+0**<br>Presence  |\n\n> ⚔️ **Whistling Axes (Signature Ability)**\n>\n> | **Melee, Ranged, Strike, Weapon** |                          **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n> |-----------------------------------|-----------------------------------------:|\n> | **📏 Melee 1 or ranged 5**        | **🎯 One creature or object per minion** |\n>\n> **Power Roll + 2:**\n>\n> - **≤11:** 1 damage\n> - **12-16:** 2 damage\n> - **17+:** 3 damage; one ally [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the target can make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike)\n>\n> **Effect:** The target can't use triggered actions until the start of the next round.\n",
+    "structured": {
+      "agility": 0,
+      "ev": "3 for 4 minions",
+      "free_strike": 1,
+      "intuition": 2,
+      "keywords": [
+        "Dwarf",
+        "Humanoid"
+      ],
+      "level": 1,
+      "might": 1,
+      "organization": "Minion",
+      "presence": 0,
+      "reason": 0,
+      "role": "Defender",
+      "size": "1M",
+      "speed": 5,
+      "stability": 2,
+      "stamina": "7",
+      "with_captain": "+2 bonus to Stamina"
+    },
+    "features": [
+      {
+        "ability_type": "Signature Ability",
+        "distance": "Melee 1 or ranged 5",
+        "effects": [
+          {
+            "roll": "Power Roll + 2",
+            "tier1": "1 damage",
+            "tier2": "2 damage",
+            "tier3": "3 damage; one ally [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the target can make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike)"
+          },
+          {
+            "effect": "The target can't use triggered actions until the start of the next round.",
+            "name": "Effect"
+          }
+        ],
+        "feature_type": "ability",
+        "icon": "⚔️",
+        "keywords": [
+          "Melee",
+          "Ranged",
+          "Strike",
+          "Weapon"
+        ],
+        "name": "Whistling Axes",
+        "target": "One creature or object per minion",
+        "type": "feature",
+        "usage": "Main action"
+      }
+    ]
+  },
+  {
+    "id": "mcdm.monsters.v1/monster.dwarf.statblock/dwarf-catchpole",
+    "kind": "statblock",
+    "name": "Dwarf Catchpole",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/monster/dwarf/statblock/dwarf-catchpole.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/monster/dwarf/statblock/dwarf-catchpole.json",
+    "selection": "dwarf-family",
+    "text": "---\nagility: 0\nev: 3 for 4 minions\nfree_strike: 2\nintuition: 0\nkeywords:\n    - Dwarf\n    - Humanoid\nlevel: 1\nmight: 2\nname: Dwarf Catchpole\norganization: Minion\npresence: 0\nreason: 0\nrole: Brute\nscc: mcdm.monsters.v1/monster.dwarf.statblock/dwarf-catchpole\nsize: 1M\nspeed: 5\nstability: 2\nstamina: \"7\"\ntype: statblock\nwith_captain: +2 bonus to Stamina\n---\n\n|  Dwarf, Humanoid  |         -         |     Level 1      |              Minion Brute               |  EV 3 for 4 minions  | \n|:-----------------:|:-----------------:|:----------------:|:---------------------------------------:|:--------------------:| \n|  **1M**<br>Size   |  **5**<br>Speed   | **7**<br>Stamina |           **2**<br>Stability            | **2**<br>Free Strike | \n| **-**<br>Immunity | **-**<br>Movement |        -         | **+2 bonus to Stamina**<br>With Captain |  **-**<br>Weakness   | \n|  **+2**<br>Might  | **+0**<br>Agility | **+0**<br>Reason |           **+0**<br>Intuition           |  **+0**<br>Presence  |\n\n> 🗡 **Maul (Signature Ability)**\n>\n> | **Charge, Melee, Strike, Weapon** |                          **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n> |-----------------------------------|-----------------------------------------:|\n> | **📏 Melee 1**                    | **🎯 One creature or object per minion** |\n>\n> **Power Roll + 2:**\n>\n> - **≤11:** 2 damage\n> - **12-16:** 4 damage\n> - **17+:** 5 damage; [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed) or [prone](scc.v1:mcdm.heroes.v1/condition/prone)\n>\n> **Effect:** If the target is [restrained](scc.v1:mcdm.heroes.v1/condition/restrained), they take an extra 2 damage.\n",
+    "structured": {
+      "agility": 0,
+      "ev": "3 for 4 minions",
+      "free_strike": 2,
+      "intuition": 0,
+      "keywords": [
+        "Dwarf",
+        "Humanoid"
+      ],
+      "level": 1,
+      "might": 2,
+      "organization": "Minion",
+      "presence": 0,
+      "reason": 0,
+      "role": "Brute",
+      "size": "1M",
+      "speed": 5,
+      "stability": 2,
+      "stamina": "7",
+      "with_captain": "+2 bonus to Stamina"
+    },
+    "features": [
+      {
+        "ability_type": "Signature Ability",
+        "distance": "Melee 1",
+        "effects": [
+          {
+            "roll": "Power Roll + 2",
+            "tier1": "2 damage",
+            "tier2": "4 damage",
+            "tier3": "5 damage; [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed) or [prone](scc.v1:mcdm.heroes.v1/condition/prone)"
+          },
+          {
+            "effect": "If the target is [restrained](scc.v1:mcdm.heroes.v1/condition/restrained), they take an extra 2 damage.",
+            "name": "Effect"
+          }
+        ],
+        "feature_type": "ability",
+        "icon": "🗡",
+        "keywords": [
+          "Charge",
+          "Melee",
+          "Strike",
+          "Weapon"
+        ],
+        "name": "Maul",
+        "target": "One creature or object per minion",
+        "type": "feature",
+        "usage": "Main action"
+      }
+    ]
+  },
+  {
+    "id": "mcdm.monsters.v1/monster.dwarf.statblock/dwarf-driver",
+    "kind": "statblock",
+    "name": "Dwarf Driver",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/monster/dwarf/statblock/dwarf-driver.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/monster/dwarf/statblock/dwarf-driver.json",
+    "selection": "dwarf-family",
+    "text": "---\nagility: 1\nev: 3 for 4 minions\nfree_strike: 1\nintuition: 0\nkeywords:\n    - Dwarf\n    - Humanoid\nlevel: 1\nmight: 2\nname: Dwarf Driver\norganization: Minion\npresence: 0\nreason: 0\nrole: Harrier\nscc: mcdm.monsters.v1/monster.dwarf.statblock/dwarf-driver\nsize: 1M\nspeed: 7\nstability: 1\nstamina: \"6\"\ntype: statblock\nwith_captain: +2 bonus to Stamina\n---\n\n|  Dwarf, Humanoid  |         -         |     Level 1      |             Minion Harrier              |  EV 3 for 4 minions  | \n|:-----------------:|:-----------------:|:----------------:|:---------------------------------------:|:--------------------:| \n|  **1M**<br>Size   |  **7**<br>Speed   | **6**<br>Stamina |           **1**<br>Stability            | **1**<br>Free Strike | \n| **-**<br>Immunity | **-**<br>Movement |        -         | **+2 bonus to Stamina**<br>With Captain |  **-**<br>Weakness   | \n|  **+2**<br>Might  | **+1**<br>Agility | **+0**<br>Reason |           **+0**<br>Intuition           |  **+0**<br>Presence  |\n\n> ⚔️ **Handaxes (Signature Ability)**\n>\n> | **Charge, Melee, Ranged, Strike, Weapon** |                          **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n> |-------------------------------------------|-----------------------------------------:|\n> | **📏 Melee 1 or ranged 5**                | **🎯 One creature or object per minion** |\n>\n> **Power Roll + 2:**\n>\n> - **≤11:** 1 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1\n> - **12-16:** 2 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2\n> - **17+:** 3 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 4\n>\n> **Effect:** A target [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) by a dwarf can be force moved by this ability. This forced movement doesn't end the [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) condition unless the Director determines otherwise.\n",
+    "structured": {
+      "agility": 1,
+      "ev": "3 for 4 minions",
+      "free_strike": 1,
+      "intuition": 0,
+      "keywords": [
+        "Dwarf",
+        "Humanoid"
+      ],
+      "level": 1,
+      "might": 2,
+      "organization": "Minion",
+      "presence": 0,
+      "reason": 0,
+      "role": "Harrier",
+      "size": "1M",
+      "speed": 7,
+      "stability": 1,
+      "stamina": "6",
+      "with_captain": "+2 bonus to Stamina"
+    },
+    "features": [
+      {
+        "ability_type": "Signature Ability",
+        "distance": "Melee 1 or ranged 5",
+        "effects": [
+          {
+            "roll": "Power Roll + 2",
+            "tier1": "1 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
+            "tier2": "2 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
+            "tier3": "3 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 4"
+          },
+          {
+            "effect": "A target [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) by a dwarf can be force moved by this ability. This forced movement doesn't end the [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) condition unless the Director determines otherwise.",
+            "name": "Effect"
+          }
+        ],
+        "feature_type": "ability",
+        "icon": "⚔️",
+        "keywords": [
+          "Charge",
+          "Melee",
+          "Ranged",
+          "Strike",
+          "Weapon"
+        ],
+        "name": "Handaxes",
+        "target": "One creature or object per minion",
+        "type": "feature",
+        "usage": "Main action"
+      }
+    ]
+  },
+  {
+    "id": "mcdm.monsters.v1/monster.dwarf.statblock/dwarf-gunner",
+    "kind": "statblock",
+    "name": "Dwarf Gunner",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/monster/dwarf/statblock/dwarf-gunner.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/monster/dwarf/statblock/dwarf-gunner.json",
+    "selection": "dwarf-family",
+    "text": "---\nagility: 2\nev: \"6\"\nfree_strike: 4\nintuition: 1\nkeywords:\n    - Dwarf\n    - Humanoid\nlevel: 1\nmight: 0\nname: Dwarf Gunner\norganization: Platoon\npresence: 0\nreason: 0\nrole: Artillery\nscc: mcdm.monsters.v1/monster.dwarf.statblock/dwarf-gunner\nsize: 1M\nspeed: 5\nstability: 1\nstamina: \"26\"\ntype: statblock\n---\n\n|  Dwarf, Humanoid  |         -         |      Level 1      |   Platoon Artillery   |         EV 6         | \n|:-----------------:|:-----------------:|:-----------------:|:---------------------:|:--------------------:| \n|  **1M**<br>Size   |  **5**<br>Speed   | **26**<br>Stamina |  **1**<br>Stability   | **4**<br>Free Strike | \n| **-**<br>Immunity | **-**<br>Movement |         -         | **-**<br>With Captain |  **-**<br>Weakness   | \n|  **+0**<br>Might  | **+2**<br>Agility | **+0**<br>Reason  |  **+1**<br>Intuition  |  **+0**<br>Presence  |\n\n> 🏹 **Portable Ballista (Signature Ability)**\n>\n> | **Ranged, Strike, Weapon** |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n> |----------------------------|------------------------------:|\n> | **📏 Ranged 10**           | **🎯 One creature or object** |\n>\n> **Power Roll + 2:**\n>\n> - **≤11:** 6 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1\n> - **12-16:** 9 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3\n> - **17+:** 12 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 5\n>\n> **Effect:** If the target is [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to an object or a wall after the power roll is resolved, they are [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) until the end of their next turn. A target [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) by a dwarf can be force moved by this ability. This forced movement doesn't end the [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) condition unless the Director determines otherwise.\n>\n> **5 [Malice](scc.v1:mcdm.monsters.v1/rule.monster/malice):** If the target is pushed into another creature, the target and the creature are each [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) until the end of their next turn.\n\n> 🏹 **Ensnaring Chains (5 [Malice](scc.v1:mcdm.monsters.v1/rule.monster/malice))**\n>\n> | **Ranged, Weapon** |                                     **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n> |--------------------|-------------------------------------------------:|\n> | **📏 Ranged 10**   | **🎯 One [prone](scc.v1:mcdm.heroes.v1/condition/prone), [restrained](scc.v1:mcdm.heroes.v1/condition/restrained), or [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) creature** |\n>\n> **Effect:** The gunner makes a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against the target, and the [prone](scc.v1:mcdm.heroes.v1/condition/prone), [restrained](scc.v1:mcdm.heroes.v1/condition/restrained), and [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) conditions on the target end. The target is then [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends).\n\n> ⭐️ **Split Shot**\n>\n> Whenever the gunner deals rolled damage to a target, one creature or object adjacent to the target takes 3 damage.\n",
+    "structured": {
+      "agility": 2,
+      "ev": "6",
+      "free_strike": 4,
+      "intuition": 1,
+      "keywords": [
+        "Dwarf",
+        "Humanoid"
+      ],
+      "level": 1,
+      "might": 0,
+      "organization": "Platoon",
+      "presence": 0,
+      "reason": 0,
+      "role": "Artillery",
+      "size": "1M",
+      "speed": 5,
+      "stability": 1,
+      "stamina": "26"
+    },
+    "features": [
+      {
+        "ability_type": "Signature Ability",
+        "distance": "Ranged 10",
+        "effects": [
+          {
+            "roll": "Power Roll + 2",
+            "tier1": "6 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
+            "tier2": "9 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3",
+            "tier3": "12 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 5"
+          },
+          {
+            "effect": "If the target is [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to an object or a wall after the power roll is resolved, they are [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) until the end of their next turn. A target [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) by a dwarf can be force moved by this ability. This forced movement doesn't end the [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) condition unless the Director determines otherwise.",
+            "name": "Effect"
+          },
+          {
+            "cost": "5 Malice",
+            "effect": "If the target is pushed into another creature, the target and the creature are each [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) until the end of their next turn."
+          }
+        ],
+        "feature_type": "ability",
+        "icon": "🏹",
+        "keywords": [
+          "Ranged",
+          "Strike",
+          "Weapon"
+        ],
+        "name": "Portable Ballista",
+        "target": "One creature or object",
+        "type": "feature",
+        "usage": "Main action"
+      },
+      {
+        "cost": "5 Malice",
+        "distance": "Ranged 10",
+        "effects": [
+          {
+            "effect": "The gunner makes a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against the target, and the [prone](scc.v1:mcdm.heroes.v1/condition/prone), [restrained](scc.v1:mcdm.heroes.v1/condition/restrained), and [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) conditions on the target end. The target is then [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends).",
+            "name": "Effect"
+          }
+        ],
+        "feature_type": "ability",
+        "icon": "🏹",
+        "keywords": [
+          "Ranged",
+          "Weapon"
+        ],
+        "name": "Ensnaring Chains",
+        "target": "One prone, restrained, or slowed creature",
+        "type": "feature",
+        "usage": "Maneuver"
+      },
+      {
+        "effects": [
+          {
+            "effect": "Whenever the gunner deals rolled damage to a target, one creature or object adjacent to the target takes 3 damage."
+          }
+        ],
+        "feature_type": "trait",
+        "icon": "⭐️",
+        "name": "Split Shot",
+        "type": "feature"
+      }
+    ]
+  },
+  {
+    "id": "mcdm.monsters.v1/monster.dwarf.statblock/dwarf-hunter",
+    "kind": "statblock",
+    "name": "Dwarf Hunter",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/monster/dwarf/statblock/dwarf-hunter.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/monster/dwarf/statblock/dwarf-hunter.json",
+    "selection": "dwarf-family",
+    "text": "---\nagility: 2\nev: 3 for 4 minions\nfree_strike: 1\nintuition: 0\nkeywords:\n    - Dwarf\n    - Humanoid\nlevel: 1\nmight: 1\nname: Dwarf Hunter\norganization: Minion\npresence: 0\nreason: 0\nrole: Support\nscc: mcdm.monsters.v1/monster.dwarf.statblock/dwarf-hunter\nsize: 1M\nspeed: 5\nstability: 1\nstamina: \"6\"\ntype: statblock\nwith_captain: +2 bonus to Stamina\n---\n\n|  Dwarf, Humanoid  |         -         |     Level 1      |             Minion Support              |  EV 3 for 4 minions  | \n|:-----------------:|:-----------------:|:----------------:|:---------------------------------------:|:--------------------:| \n|  **1M**<br>Size   |  **5**<br>Speed   | **6**<br>Stamina |           **1**<br>Stability            | **1**<br>Free Strike | \n| **-**<br>Immunity | **-**<br>Movement |        -         | **+2 bonus to Stamina**<br>With Captain |  **-**<br>Weakness   | \n|  **+1**<br>Might  | **+2**<br>Agility | **+0**<br>Reason |           **+0**<br>Intuition           |  **+0**<br>Presence  |\n\n> 🏹 **Snaring Javelin (Signature Ability)**\n>\n> | **Ranged, Strike, Weapon** |                          **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n> |----------------------------|-----------------------------------------:|\n> | **📏 Ranged 5**            | **🎯 One creature or object per minion** |\n>\n> **Power Roll + 2:**\n>\n> - **≤11:** 1 damage; [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1\n> - **12-16:** 2 damage; [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2\n> - **17+:** 3 damage; [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 4\n>\n> **Effect:** A target [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) by a dwarf can be force moved by this ability. This forced movement doesn't end the [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) condition unless the Director determines otherwise.\n",
+    "structured": {
+      "agility": 2,
+      "ev": "3 for 4 minions",
+      "free_strike": 1,
+      "intuition": 0,
+      "keywords": [
+        "Dwarf",
+        "Humanoid"
+      ],
+      "level": 1,
+      "might": 1,
+      "organization": "Minion",
+      "presence": 0,
+      "reason": 0,
+      "role": "Support",
+      "size": "1M",
+      "speed": 5,
+      "stability": 1,
+      "stamina": "6",
+      "with_captain": "+2 bonus to Stamina"
+    },
+    "features": [
+      {
+        "ability_type": "Signature Ability",
+        "distance": "Ranged 5",
+        "effects": [
+          {
+            "roll": "Power Roll + 2",
+            "tier1": "1 damage; [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
+            "tier2": "2 damage; [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
+            "tier3": "3 damage; [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) 4"
+          },
+          {
+            "effect": "A target [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) by a dwarf can be force moved by this ability. This forced movement doesn't end the [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) condition unless the Director determines otherwise.",
+            "name": "Effect"
+          }
+        ],
+        "feature_type": "ability",
+        "icon": "🏹",
+        "keywords": [
+          "Ranged",
+          "Strike",
+          "Weapon"
+        ],
+        "name": "Snaring Javelin",
+        "target": "One creature or object per minion",
+        "type": "feature",
+        "usage": "Main action"
+      }
+    ]
+  },
+  {
+    "id": "mcdm.monsters.v1/monster.dwarf.statblock/dwarf-launcher",
+    "kind": "statblock",
+    "name": "Dwarf Launcher",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/monster/dwarf/statblock/dwarf-launcher.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/monster/dwarf/statblock/dwarf-launcher.json",
+    "selection": "dwarf-family",
+    "text": "---\nagility: 0\nev: \"8\"\nfree_strike: 4\nintuition: 2\nkeywords:\n    - Dwarf\n    - Humanoid\nlevel: 1\nmight: 1\nname: Dwarf Launcher\norganization: Platoon\npresence: 0\nreason: 0\nrole: Hexer\nscc: mcdm.monsters.v1/monster.dwarf.statblock/dwarf-launcher\nsize: 1M\nspeed: 5\nstability: 3\nstamina: \"39\"\ntype: statblock\n---\n\n|  Dwarf, Humanoid  |         -         |      Level 1      |     Platoon Hexer     |         EV 8         | \n|:-----------------:|:-----------------:|:-----------------:|:---------------------:|:--------------------:| \n|  **1M**<br>Size   |  **5**<br>Speed   | **39**<br>Stamina |  **3**<br>Stability   | **4**<br>Free Strike | \n| **-**<br>Immunity | **-**<br>Movement |         -         | **-**<br>With Captain |  **-**<br>Weakness   | \n|  **+1**<br>Might  | **+0**<br>Agility | **+0**<br>Reason  |  **+2**<br>Intuition  |  **+0**<br>Presence  |\n\n> 🔳 **Concussive Grenade (Signature Ability)**\n>\n> | **Area, Ranged, Weapon** | **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n> |--------------------------|------------------------------:|\n> | **📏 3 cube within 5**   | **🎯 Each enemy in the area** |\n>\n> **Power Roll + 2:**\n>\n> - **≤11:** 3 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1\n> - **12-16:** 6 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3; M < 1 [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\n> - **17+:** 8 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3; M < 2 [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\n>\n> **Effect:** A target [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) by a dwarf can be force moved by this ability. This forced movement doesn't end the [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) condition unless the Director determines otherwise.\n\n> 🔳 **Sleep Grenade (3 [Malice](scc.v1:mcdm.monsters.v1/rule.monster/malice))**\n>\n> | **Ranged, Weapon**     |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n> |------------------------|------------------------------:| \n> | **📏 3 cube within 5** | **🎯 Each enemy in the area** |   \n>\n> **Power Roll + 2:**\n>\n> - **≤11:** 3 poison damage; I < 0 [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)\n> - **12-16:** 6 poison damage; I < 1 [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)\n> - **17+:** 8 poison damage; I < 2 [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)\n>\n> **Effect:** A target [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) this way treats their characteristic scores as 1 lower for the purpose of resisting [potencies](scc.v1:mcdm.heroes.v1/rule.character/potency).\n\n> ⭐️ **Indirect Fire**\n>\n> The launcher ignores concealment and cover, and doesn't need line of effect to use their abilities as long as a size 1 opening exists between the dwarf and the target.\n",
+    "structured": {
+      "agility": 0,
+      "ev": "8",
+      "free_strike": 4,
+      "intuition": 2,
+      "keywords": [
+        "Dwarf",
+        "Humanoid"
+      ],
+      "level": 1,
+      "might": 1,
+      "organization": "Platoon",
+      "presence": 0,
+      "reason": 0,
+      "role": "Hexer",
+      "size": "1M",
+      "speed": 5,
+      "stability": 3,
+      "stamina": "39"
+    },
+    "features": [
+      {
+        "ability_type": "Signature Ability",
+        "distance": "3 cube within 5",
+        "effects": [
+          {
+            "roll": "Power Roll + 2",
+            "tier1": "3 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
+            "tier2": "6 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3; M < 1 [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
+            "tier3": "8 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3; M < 2 [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)"
+          },
+          {
+            "effect": "A target [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) by a dwarf can be force moved by this ability. This forced movement doesn't end the [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) condition unless the Director determines otherwise.",
+            "name": "Effect"
+          }
+        ],
+        "feature_type": "ability",
+        "icon": "🔳",
+        "keywords": [
+          "Area",
+          "Ranged",
+          "Weapon"
+        ],
+        "name": "Concussive Grenade",
+        "target": "Each enemy in the area",
+        "type": "feature",
+        "usage": "Main action"
+      },
+      {
+        "cost": "3 Malice",
+        "distance": "3 cube within 5",
+        "effects": [
+          {
+            "roll": "Power Roll + 2",
+            "tier1": "3 poison damage; I < 0 [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
+            "tier2": "6 poison damage; I < 1 [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
+            "tier3": "8 poison damage; I < 2 [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)"
+          },
+          {
+            "effect": "A target [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) this way treats their characteristic scores as 1 lower for the purpose of resisting [potencies](scc.v1:mcdm.heroes.v1/rule.character/potency).",
+            "name": "Effect"
+          }
+        ],
+        "feature_type": "ability",
+        "icon": "🔳",
+        "keywords": [
+          "Ranged",
+          "Weapon"
+        ],
+        "name": "Sleep Grenade",
+        "target": "Each enemy in the area",
+        "type": "feature",
+        "usage": "Main action"
+      },
+      {
+        "effects": [
+          {
+            "effect": "The launcher ignores concealment and cover, and doesn't need line of effect to use their abilities as long as a size 1 opening exists between the dwarf and the target."
+          }
+        ],
+        "feature_type": "trait",
+        "icon": "⭐️",
+        "name": "Indirect Fire",
+        "type": "feature"
+      }
+    ]
+  },
+  {
+    "id": "mcdm.monsters.v1/monster.dwarf.statblock/dwarf-marauder",
+    "kind": "statblock",
+    "name": "Dwarf Marauder",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/monster/dwarf/statblock/dwarf-marauder.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/monster/dwarf/statblock/dwarf-marauder.json",
+    "selection": "dwarf-family",
+    "text": "---\nagility: 0\nev: \"20\"\nfree_strike: 5\nintuition: 1\nkeywords:\n    - Dwarf\n    - Humanoid\nlevel: 3\nmight: 3\nname: Dwarf Marauder\norganization: Leader\npresence: 0\nreason: 2\nscc: mcdm.monsters.v1/monster.dwarf.statblock/dwarf-marauder\nsize: 1M\nspeed: 5\nstability: 4\nstamina: \"132\"\ntype: statblock\n---\n\n|  Dwarf, Humanoid  |         -         |      Level 3       |        Leader         |        EV 20         | \n|:-----------------:|:-----------------:|:------------------:|:---------------------:|:--------------------:| \n|  **1M**<br>Size   |  **5**<br>Speed   | **132**<br>Stamina |  **4**<br>Stability   | **5**<br>Free Strike | \n| **-**<br>Immunity | **-**<br>Movement |         -          | **-**<br>With Captain |  **-**<br>Weakness   | \n|  **+3**<br>Might  | **+0**<br>Agility |  **+2**<br>Reason  |  **+1**<br>Intuition  |  **+0**<br>Presence  |\n\n> ⚔️ **Levitating Axes (Signature Ability)**\n>\n> | **Melee, Psionic, Ranged, Strike, Weapon** |                 **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n> |--------------------------------------------|--------------------------------:|\n> | **📏 Melee 1 or ranged 10**                | **🎯 Two creatures or objects** |\n>\n> **Power Roll + 3:**\n>\n> - **≤11:** 8 damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1\n> - **12-16:** 12 damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3\n> - **17+:** 15 damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 5\n>\n> **Effect:** A target [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) by a dwarf can be force moved by this ability. This forced movement doesn't end the [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) condition unless the Director determines otherwise.\n>\n> **3 [Malice](scc.v1:mcdm.monsters.v1/rule.monster/malice):** A target force moved [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to an ally of the marauder lord is [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) until the end of their next turn.\n\n> 🏹 **Magnetomancy**\n>\n> | **Psionic, Ranged** |                  **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n> |---------------------|------------------------------:|\n> | **📏 Ranged 10**    | **🎯 One creature or object** |\n>\n> **Effect:** The target vertical [slides](scc.v1:mcdm.heroes.v1/movement/forced-movement) up to 5 squares. A target [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) by a dwarf can be force moved by this ability. This forced movement doesn't end the [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) condition unless the Director determines otherwise.\n>\n> **5 [Malice](scc.v1:mcdm.monsters.v1/rule.monster/malice):** This ability takes the Area keyword and loses the Ranged keyword, its distance becomes a 10 burst, and it targets each [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) creature in the area.\n\n> ❗️ **Your Weapon Is Useless**\n>\n> | **Psionic, Ranged** |    **[Triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action)** |\n> |---------------------|------------------------:|\n> | **📏 Ranged 10**    | **🎯 Self or one ally** |\n>\n> **Trigger:** A creature makes a melee strike against the target.\n>\n> **Effect:** The target halves any damage from the strike and the triggering creature takes 4 damage.\n\n> ⭐️ **End Effect**\n>\n> At the end of each of their turns, the marauder lord can take 5 damage to end one effect on them that can be ended by a saving throw. This damage can't be reduced in any way.\n\n> ☠️ **Ajax Will Pay Well for These Specimens (Villain Action 1)**\n>\n> | **Area, Psionic, Ranged, Weapon** | **-** |\n> |-----------------------------------|------------------------------:|\n> | **📏 5 cube within 10**           | **🎯 Each enemy in the area** |\n>\n> **Effect:** The marauder lord uses Levitating Axes against each target, making one power roll against all targets.\n\n> ☠️ **Don't Let Them Escape! (Villain Action 2)**\n>\n> | **Area**       |                        **-** |\n> |----------------|-----------------------------:|\n> | **📏 5 burst** | **🎯 Each ally in the area** |\n>\n> **Effect:** Each target shifts up to their speed. The marauder lord then uses Levitating Axes.\n\n> ☠️ **Test Your Metal! (Villain Action 3)**\n>\n> | **Psionic, Ranged** |          **-** |\n> |---------------------|---------------:|\n> | **📏 Ranged 10**    | **🎯 Special** |\n>\n> **Effect:** The marauder lord creates three size 2 metal objects in unoccupied spaces within distance. Whenever the marauder lord uses Magnetomancy, they can additionally target one of these objects.\n",
+    "structured": {
+      "agility": 0,
+      "ev": "20",
+      "free_strike": 5,
+      "intuition": 1,
+      "keywords": [
+        "Dwarf",
+        "Humanoid"
+      ],
+      "level": 3,
+      "might": 3,
+      "organization": "Leader",
+      "presence": 0,
+      "reason": 2,
+      "size": "1M",
+      "speed": 5,
+      "stability": 4,
+      "stamina": "132"
+    },
+    "features": [
+      {
+        "ability_type": "Signature Ability",
+        "distance": "Melee 1 or ranged 10",
+        "effects": [
+          {
+            "roll": "Power Roll + 3",
+            "tier1": "8 damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
+            "tier2": "12 damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3",
+            "tier3": "15 damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 5"
+          },
+          {
+            "effect": "A target [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) by a dwarf can be force moved by this ability. This forced movement doesn't end the [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) condition unless the Director determines otherwise.",
+            "name": "Effect"
+          },
+          {
+            "cost": "3 Malice",
+            "effect": "A target force moved [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to an ally of the marauder lord is [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) until the end of their next turn."
+          }
+        ],
+        "feature_type": "ability",
+        "icon": "⚔️",
+        "keywords": [
+          "Melee",
+          "Psionic",
+          "Ranged",
+          "Strike",
+          "Weapon"
+        ],
+        "name": "Levitating Axes",
+        "target": "Two creatures or objects",
+        "type": "feature",
+        "usage": "Main action"
+      },
+      {
+        "distance": "Ranged 10",
+        "effects": [
+          {
+            "effect": "The target vertical [slides](scc.v1:mcdm.heroes.v1/movement/forced-movement) up to 5 squares. A target [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) by a dwarf can be force moved by this ability. This forced movement doesn't end the [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) condition unless the Director determines otherwise.",
+            "name": "Effect"
+          },
+          {
+            "cost": "5 Malice",
+            "effect": "This ability takes the Area keyword and loses the Ranged keyword, its distance becomes a 10 burst, and it targets each [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) creature in the area."
+          }
+        ],
+        "feature_type": "ability",
+        "icon": "🏹",
+        "keywords": [
+          "Psionic",
+          "Ranged"
+        ],
+        "name": "Magnetomancy",
+        "target": "One creature or object",
+        "type": "feature",
+        "usage": "Maneuver"
+      },
+      {
+        "distance": "Ranged 10",
+        "effects": [
+          {
+            "effect": "The target halves any damage from the strike and the triggering creature takes 4 damage.",
+            "name": "Effect"
+          }
+        ],
+        "feature_type": "ability",
+        "icon": "❗️",
+        "keywords": [
+          "Psionic",
+          "Ranged"
+        ],
+        "name": "Your Weapon Is Useless",
+        "target": "Self or one ally",
+        "trigger": "A creature makes a melee strike against the target.",
+        "type": "feature",
+        "usage": "Triggered action"
+      },
+      {
+        "effects": [
+          {
+            "effect": "At the end of each of their turns, the marauder lord can take 5 damage to end one effect on them that can be ended by a saving throw. This damage can't be reduced in any way."
+          }
+        ],
+        "feature_type": "trait",
+        "icon": "⭐️",
+        "name": "End Effect",
+        "type": "feature"
+      },
+      {
+        "cost": "Villain Action 1",
+        "distance": "5 cube within 10",
+        "effects": [
+          {
+            "effect": "The marauder lord uses Levitating Axes against each target, making one power roll against all targets.",
+            "name": "Effect"
+          }
+        ],
+        "feature_type": "ability",
+        "icon": "☠️",
+        "keywords": [
+          "Area",
+          "Psionic",
+          "Ranged",
+          "Weapon"
+        ],
+        "name": "Ajax Will Pay Well for These Specimens",
+        "target": "Each enemy in the area",
+        "type": "feature",
+        "usage": "-"
+      },
+      {
+        "cost": "Villain Action 2",
+        "distance": "5 burst",
+        "effects": [
+          {
+            "effect": "Each target shifts up to their speed. The marauder lord then uses Levitating Axes.",
+            "name": "Effect"
+          }
+        ],
+        "feature_type": "ability",
+        "icon": "☠️",
+        "keywords": [
+          "Area"
+        ],
+        "name": "Don't Let Them Escape!",
+        "target": "Each ally in the area",
+        "type": "feature",
+        "usage": "-"
+      },
+      {
+        "cost": "Villain Action 3",
+        "distance": "Ranged 10",
+        "effects": [
+          {
+            "effect": "The marauder lord creates three size 2 metal objects in unoccupied spaces within distance. Whenever the marauder lord uses Magnetomancy, they can additionally target one of these objects.",
+            "name": "Effect"
+          }
+        ],
+        "feature_type": "ability",
+        "icon": "☠️",
+        "keywords": [
+          "Psionic",
+          "Ranged"
+        ],
+        "name": "Test Your Metal!",
+        "target": "Special",
+        "type": "feature",
+        "usage": "-"
+      }
+    ]
+  },
+  {
+    "id": "mcdm.monsters.v1/monster.dwarf.statblock/dwarf-reel-winch",
+    "kind": "statblock",
+    "name": "Dwarf Reel Winch",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/monster/dwarf/statblock/dwarf-reel-winch.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/monster/dwarf/statblock/dwarf-reel-winch.json",
+    "selection": "dwarf-family",
+    "text": "---\nagility: 2\nev: \"6\"\nfree_strike: 3\nintuition: 1\nkeywords:\n    - Dwarf\n    - Humanoid\nlevel: 1\nmight: 0\nname: Dwarf Reel Winch\norganization: Platoon\npresence: 0\nreason: 0\nrole: Support\nscc: mcdm.monsters.v1/monster.dwarf.statblock/dwarf-reel-winch\nsize: 1M\nspeed: 5\nstability: 2\nstamina: \"36\"\ntype: statblock\n---\n\n|  Dwarf, Humanoid  |         -         |      Level 1      |    Platoon Support    |         EV 6         | \n|:-----------------:|:-----------------:|:-----------------:|:---------------------:|:--------------------:| \n|  **1M**<br>Size   |  **5**<br>Speed   | **36**<br>Stamina |  **2**<br>Stability   | **3**<br>Free Strike | \n| **-**<br>Immunity | **-**<br>Movement |         -         | **-**<br>With Captain |  **-**<br>Weakness   | \n|  **+0**<br>Might  | **+2**<br>Agility | **+0**<br>Reason  |  **+1**<br>Intuition  |  **+0**<br>Presence  |\n\n> 🏹 **Snaring Crossbow (Signature Ability)**\n>\n> | **Ranged, Strike, Weapon** |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n> |----------------------------|------------------------------:|\n> | **📏 Ranged 10**           | **🎯 One creature or object** |\n>\n> **Power Roll + 2:**\n>\n> - **≤11:** 5 damage; M < 0 [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\n> - **12-16:** 7 damage; M < 1 [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\n> - **17+:** 9 damage; M < 2 [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\n>\n> **Effect:** The target is [pulled](scc.v1:mcdm.heroes.v1/movement/forced-movement) up to 5 squares. A target [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) by a dwarf can be force moved by this ability. This forced movement doesn't end the [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) condition unless the Director determines otherwise.\n\n> 🏹 **Reel Them In (3 [Malice](scc.v1:mcdm.monsters.v1/rule.monster/malice))**\n>\n> | **Ranged, Weapon** |           **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n> |--------------------|-----------------------:|\n> | **📏 Ranged 10**   | **🎯 Three creatures** |\n>\n> **Effect:** The target is [pulled](scc.v1:mcdm.heroes.v1/movement/forced-movement) up to 8 squares. A [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) or [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) target can be pulled an additional 2 squares. A target [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) by a dwarf can be force moved by this ability. This forced movement doesn't end the [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) condition unless the Director determines otherwise.\n\n> ⭐️ **We Have a Quota!**\n>\n> If a target made [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) by the reel winch is already [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed) or [slowed](scc.v1:mcdm.heroes.v1/condition/slowed), the [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed) and [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) conditions end and the target is [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends).\n",
+    "structured": {
+      "agility": 2,
+      "ev": "6",
+      "free_strike": 3,
+      "intuition": 1,
+      "keywords": [
+        "Dwarf",
+        "Humanoid"
+      ],
+      "level": 1,
+      "might": 0,
+      "organization": "Platoon",
+      "presence": 0,
+      "reason": 0,
+      "role": "Support",
+      "size": "1M",
+      "speed": 5,
+      "stability": 2,
+      "stamina": "36"
+    },
+    "features": [
+      {
+        "ability_type": "Signature Ability",
+        "distance": "Ranged 10",
+        "effects": [
+          {
+            "roll": "Power Roll + 2",
+            "tier1": "5 damage; M < 0 [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
+            "tier2": "7 damage; M < 1 [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
+            "tier3": "9 damage; M < 2 [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)"
+          },
+          {
+            "effect": "The target is [pulled](scc.v1:mcdm.heroes.v1/movement/forced-movement) up to 5 squares. A target [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) by a dwarf can be force moved by this ability. This forced movement doesn't end the [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) condition unless the Director determines otherwise.",
+            "name": "Effect"
+          }
+        ],
+        "feature_type": "ability",
+        "icon": "🏹",
+        "keywords": [
+          "Ranged",
+          "Strike",
+          "Weapon"
+        ],
+        "name": "Snaring Crossbow",
+        "target": "One creature or object",
+        "type": "feature",
+        "usage": "Main action"
+      },
+      {
+        "cost": "3 Malice",
+        "distance": "Ranged 10",
+        "effects": [
+          {
+            "effect": "The target is [pulled](scc.v1:mcdm.heroes.v1/movement/forced-movement) up to 8 squares. A [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) or [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) target can be pulled an additional 2 squares. A target [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) by a dwarf can be force moved by this ability. This forced movement doesn't end the [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) condition unless the Director determines otherwise.",
+            "name": "Effect"
+          }
+        ],
+        "feature_type": "ability",
+        "icon": "🏹",
+        "keywords": [
+          "Ranged",
+          "Weapon"
+        ],
+        "name": "Reel Them In",
+        "target": "Three creatures",
+        "type": "feature",
+        "usage": "Maneuver"
+      },
+      {
+        "effects": [
+          {
+            "effect": "If a target made [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) by the reel winch is already [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed) or [slowed](scc.v1:mcdm.heroes.v1/condition/slowed), the [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed) and [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) conditions end and the target is [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)."
+          }
+        ],
+        "feature_type": "trait",
+        "icon": "⭐️",
+        "name": "We Have a Quota!",
+        "type": "feature"
+      }
+    ]
+  },
+  {
+    "id": "mcdm.monsters.v1/monster.dwarf.statblock/dwarf-shieldwall",
+    "kind": "statblock",
+    "name": "Dwarf Shieldwall",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/monster/dwarf/statblock/dwarf-shieldwall.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/monster/dwarf/statblock/dwarf-shieldwall.json",
+    "selection": "dwarf-family",
+    "text": "---\nagility: 0\nev: \"10\"\nfree_strike: 5\nintuition: 0\nkeywords:\n    - Dwarf\n    - Humanoid\nlevel: 3\nmight: 2\nname: Dwarf Shieldwall\norganization: Platoon\npresence: 1\nreason: 0\nrole: Defender\nscc: mcdm.monsters.v1/monster.dwarf.statblock/dwarf-shieldwall\nsize: 1M\nspeed: 5\nstability: 4\nstamina: \"72\"\ntype: statblock\n---\n\n|  Dwarf, Humanoid  |         -         |      Level 3      |   Platoon Defender    |        EV 10         | \n|:-----------------:|:-----------------:|:-----------------:|:---------------------:|:--------------------:| \n|  **1M**<br>Size   |  **5**<br>Speed   | **72**<br>Stamina |  **4**<br>Stability   | **5**<br>Free Strike | \n| **-**<br>Immunity | **-**<br>Movement |         -         | **-**<br>With Captain |  **-**<br>Weakness   | \n|  **+2**<br>Might  | **+0**<br>Agility | **+0**<br>Reason  |  **+0**<br>Intuition  |  **+1**<br>Presence  |\n\n> 🗡 **Wide Axe (Signature Ability)**\n>\n> | **Melee, Strike, Weapon** |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n> |---------------------------|------------------------------:|\n> | **📏 Melee 1**            | **🎯 One creature or object** |\n>\n> **Power Roll + 2:**\n>\n> - **≤11:** 7 damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1\n> - **12-16:** 10 damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1\n> - **17+:** 13 damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1\n>\n> **Effect:** The shieldwall can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) 1 square to remain [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the target. A target [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) by a dwarf can be force moved by this ability. This forced movement doesn't end the [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) condition unless the Director determines otherwise.\n>\n> **3 [Malice](scc.v1:mcdm.monsters.v1/rule.monster/malice):** This ability targets one additional target.\n\n> ❗️ **Intercepting Shield (1 [Malice](scc.v1:mcdm.monsters.v1/rule.monster/malice))**\n>\n> | **-**       | **[Triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action)** |\n> |-------------|---------------------:|\n> | **📏 Self** |          **🎯 Self** |\n>\n> **Trigger:** A creature makes a strike against an ally [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the shieldwall.\n>\n> **Effect:** The shieldwall becomes the target of the triggering strike and halves the damage.\n\n> ⭐️ **Call to the Wall**\n>\n> Whenever a creature deals damage to or takes damage from the shieldwall, the shieldwall can make that creature [taunted](scc.v1:mcdm.heroes.v1/condition/taunted) until the end of the creature's next turn.\n",
+    "structured": {
+      "agility": 0,
+      "ev": "10",
+      "free_strike": 5,
+      "intuition": 0,
+      "keywords": [
+        "Dwarf",
+        "Humanoid"
+      ],
+      "level": 3,
+      "might": 2,
+      "organization": "Platoon",
+      "presence": 1,
+      "reason": 0,
+      "role": "Defender",
+      "size": "1M",
+      "speed": 5,
+      "stability": 4,
+      "stamina": "72"
+    },
+    "features": [
+      {
+        "ability_type": "Signature Ability",
+        "distance": "Melee 1",
+        "effects": [
+          {
+            "roll": "Power Roll + 2",
+            "tier1": "7 damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
+            "tier2": "10 damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
+            "tier3": "13 damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1"
+          },
+          {
+            "effect": "The shieldwall can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) 1 square to remain [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the target. A target [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) by a dwarf can be force moved by this ability. This forced movement doesn't end the [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) condition unless the Director determines otherwise.",
+            "name": "Effect"
+          },
+          {
+            "cost": "3 Malice",
+            "effect": "This ability targets one additional target."
+          }
+        ],
+        "feature_type": "ability",
+        "icon": "🗡",
+        "keywords": [
+          "Melee",
+          "Strike",
+          "Weapon"
+        ],
+        "name": "Wide Axe",
+        "target": "One creature or object",
+        "type": "feature",
+        "usage": "Main action"
+      },
+      {
+        "cost": "1 Malice",
+        "distance": "Self",
+        "effects": [
+          {
+            "effect": "The shieldwall becomes the target of the triggering strike and halves the damage.",
+            "name": "Effect"
+          }
+        ],
+        "feature_type": "ability",
+        "icon": "❗️",
+        "keywords": null,
+        "name": "Intercepting Shield",
+        "target": "Self",
+        "trigger": "A creature makes a strike against an ally [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the shieldwall.",
+        "type": "feature",
+        "usage": "Triggered action"
+      },
+      {
+        "effects": [
+          {
+            "effect": "Whenever a creature deals damage to or takes damage from the shieldwall, the shieldwall can make that creature [taunted](scc.v1:mcdm.heroes.v1/condition/taunted) until the end of the creature's next turn."
+          }
+        ],
+        "feature_type": "trait",
+        "icon": "⭐️",
+        "name": "Call to the Wall",
+        "type": "feature"
+      }
+    ]
+  },
+  {
+    "id": "mcdm.monsters.v1/monster.dwarf.statblock/dwarf-stone-whisperer",
+    "kind": "statblock",
+    "name": "Dwarf Stone Whisperer",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/monster/dwarf/statblock/dwarf-stone-whisperer.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/monster/dwarf/statblock/dwarf-stone-whisperer.json",
+    "selection": "dwarf-family",
+    "text": "---\nagility: 0\nev: \"10\"\nfree_strike: 5\nintuition: 2\nkeywords:\n    - Dwarf\n    - Humanoid\nlevel: 3\nmight: 1\nmovement: Burrow\nname: Dwarf Stone Whisperer\norganization: Platoon\npresence: 0\nreason: 2\nrole: Controller\nscc: mcdm.monsters.v1/monster.dwarf.statblock/dwarf-stone-whisperer\nsize: 1M\nspeed: 5\nstability: 2\nstamina: \"52\"\ntype: statblock\n---\n\n|  Dwarf, Humanoid  |           -            |      Level 3      |  Platoon Controller   |        EV 10         | \n|:-----------------:|:----------------------:|:-----------------:|:---------------------:|:--------------------:| \n|  **1M**<br>Size   |     **5**<br>Speed     | **52**<br>Stamina |  **2**<br>Stability   | **5**<br>Free Strike | \n| **-**<br>Immunity | **Burrow**<br>Movement |         -         | **-**<br>With Captain |  **-**<br>Weakness   | \n|  **+1**<br>Might  |   **+0**<br>Agility    | **+2**<br>Reason  |  **+2**<br>Intuition  |  **+0**<br>Presence  |\n\n> 🔳 **Tile Slide (Signature Ability)**\n>\n> | **Area, Magic**        |                             **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n> |------------------------|--------------------------------------------:|\n> | **📏 2 cube within 1** | **🎯 Each creature and object in the area** |\n>\n> **Power Roll + 2:**\n>\n> - **≤11:** 5 damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1; M < 0 [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\n> - **12-16:** 8 damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3; M < 1 [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\n> - **17+:** 11 damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 5; M < 2 [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)\n>\n> **Effect:** A target [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) by a dwarf can be force moved by this ability. This forced movement doesn't end the [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) condition unless the Director determines otherwise.\n\n> 🔳 **Stone Wave (3 [Malice](scc.v1:mcdm.monsters.v1/rule.monster/malice))**\n>\n> | **Area, Magic, Ranged** |                  **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n> |-------------------------|------------------------------:|\n> | **📏 3 cube within 10** | **🎯 Each enemy in the area** |\n>\n> **Power Roll + 2:**\n>\n> - **≤11:** 4 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2; R < 1 [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\n> - **12-16:** 6 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3; R < 2 [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\n> - **17+:** 9 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3; R < 3 [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\n>\n> **Effect:** The area is [difficult terrain](scc.v1:mcdm.heroes.v1/movement/difficult-terrain) for enemies. A target [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) by a dwarf can be force moved by this ability. This forced movement doesn't end the [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) condition unless the Director determines otherwise.\n\n> ⭐️ **Stone Walker**\n>\n> Whenever the stone whisperer willingly moves, they can phase through up to 2 squares of stone as part of that movement. If they end their movement inside stone, they are shunted out into the space from which they entered it.\n",
+    "structured": {
+      "agility": 0,
+      "ev": "10",
+      "free_strike": 5,
+      "intuition": 2,
+      "keywords": [
+        "Dwarf",
+        "Humanoid"
+      ],
+      "level": 3,
+      "might": 1,
+      "movement": "Burrow",
+      "organization": "Platoon",
+      "presence": 0,
+      "reason": 2,
+      "role": "Controller",
+      "size": "1M",
+      "speed": 5,
+      "stability": 2,
+      "stamina": "52"
+    },
+    "features": [
+      {
+        "ability_type": "Signature Ability",
+        "distance": "2 cube within 1",
+        "effects": [
+          {
+            "roll": "Power Roll + 2",
+            "tier1": "5 damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1; M < 0 [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
+            "tier2": "8 damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3; M < 1 [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
+            "tier3": "11 damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 5; M < 2 [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)"
+          },
+          {
+            "effect": "A target [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) by a dwarf can be force moved by this ability. This forced movement doesn't end the [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) condition unless the Director determines otherwise.",
+            "name": "Effect"
+          }
+        ],
+        "feature_type": "ability",
+        "icon": "🔳",
+        "keywords": [
+          "Area",
+          "Magic"
+        ],
+        "name": "Tile Slide",
+        "target": "Each creature and object in the area",
+        "type": "feature",
+        "usage": "Main action"
+      },
+      {
+        "cost": "3 Malice",
+        "distance": "3 cube within 10",
+        "effects": [
+          {
+            "roll": "Power Roll + 2",
+            "tier1": "4 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2; R < 1 [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
+            "tier2": "6 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3; R < 2 [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
+            "tier3": "9 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3; R < 3 [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)"
+          },
+          {
+            "effect": "The area is [difficult terrain](scc.v1:mcdm.heroes.v1/movement/difficult-terrain) for enemies. A target [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) by a dwarf can be force moved by this ability. This forced movement doesn't end the [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) condition unless the Director determines otherwise.",
+            "name": "Effect"
+          }
+        ],
+        "feature_type": "ability",
+        "icon": "🔳",
+        "keywords": [
+          "Area",
+          "Magic",
+          "Ranged"
+        ],
+        "name": "Stone Wave",
+        "target": "Each enemy in the area",
+        "type": "feature",
+        "usage": "Maneuver"
+      },
+      {
+        "effects": [
+          {
+            "effect": "Whenever the stone whisperer willingly moves, they can phase through up to 2 squares of stone as part of that movement. If they end their movement inside stone, they are shunted out into the space from which they entered it."
+          }
+        ],
+        "feature_type": "trait",
+        "icon": "⭐️",
+        "name": "Stone Walker",
+        "type": "feature"
+      }
+    ]
+  },
+  {
+    "id": "mcdm.monsters.v1/monster.dwarf.statblock/dwarf-trapper",
+    "kind": "statblock",
+    "name": "Dwarf Trapper",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/monster/dwarf/statblock/dwarf-trapper.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/monster/dwarf/statblock/dwarf-trapper.json",
+    "selection": "dwarf-family",
+    "text": "---\nagility: 2\nev: \"6\"\nfree_strike: 3\nintuition: 1\nkeywords:\n    - Dwarf\n    - Humanoid\nlevel: 1\nmight: 0\nname: Dwarf Trapper\norganization: Platoon\npresence: 0\nreason: 0\nrole: Harrier\nscc: mcdm.monsters.v1/monster.dwarf.statblock/dwarf-trapper\nsize: 1M\nspeed: 7\nstability: 2\nstamina: \"36\"\ntype: statblock\n---\n\n|  Dwarf, Humanoid  |         -         |      Level 1      |    Platoon Harrier    |         EV 6         | \n|:-----------------:|:-----------------:|:-----------------:|:---------------------:|:--------------------:| \n|  **1M**<br>Size   |  **7**<br>Speed   | **36**<br>Stamina |  **2**<br>Stability   | **3**<br>Free Strike | \n| **-**<br>Immunity | **-**<br>Movement |         -         | **-**<br>With Captain |  **-**<br>Weakness   | \n|  **+0**<br>Might  | **+2**<br>Agility | **+0**<br>Reason  |  **+1**<br>Intuition  |  **+0**<br>Presence  |\n\n> ⚔️ **Concussive Bolts (Signature Ability)**\n>\n> | **Charge, Melee, Ranged, Strike, Weapon** |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n> |-------------------------------------------|------------------------------:|\n> | **📏 Melee 1 or ranged 10**               | **🎯 One creature or object** |\n>\n> **Power Roll + 2:**\n>\n> - **≤11:** 5 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2\n> - **12-16:** 7 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 4\n> - **17+:** 9 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 6\n>\n> **Effect:** A target [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) by a dwarf can be force moved by this ability. This forced movement doesn't end the [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) condition unless the Director determines otherwise.\n\n> 🔳 **Steam-Powered Snare (3 [Malice](scc.v1:mcdm.monsters.v1/rule.monster/malice))**\n>\n> | **Area, Ranged, Weapon** |                  **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n> |--------------------------|------------------------------:|\n> | **📏 3 cube within 5**   | **🎯 Each enemy in the area** |\n>\n> **Effect:** Each target makes a **Might test**.\n>\n> - **≤11:** 7 damage; [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (EoT)\n> - **12-16:** 5 damage; [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (EoT)\n> - **17+:** No effect.\n>\n> The snare remains until the end of the encounter. Any enemy who moves into the area for the first time in a round or starts their turn there must make the test.\n",
+    "structured": {
+      "agility": 2,
+      "ev": "6",
+      "free_strike": 3,
+      "intuition": 1,
+      "keywords": [
+        "Dwarf",
+        "Humanoid"
+      ],
+      "level": 1,
+      "might": 0,
+      "organization": "Platoon",
+      "presence": 0,
+      "reason": 0,
+      "role": "Harrier",
+      "size": "1M",
+      "speed": 7,
+      "stability": 2,
+      "stamina": "36"
+    },
+    "features": [
+      {
+        "ability_type": "Signature Ability",
+        "distance": "Melee 1 or ranged 10",
+        "effects": [
+          {
+            "roll": "Power Roll + 2",
+            "tier1": "5 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
+            "tier2": "7 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 4",
+            "tier3": "9 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 6"
+          },
+          {
+            "effect": "A target [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) by a dwarf can be force moved by this ability. This forced movement doesn't end the [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) condition unless the Director determines otherwise.",
+            "name": "Effect"
+          }
+        ],
+        "feature_type": "ability",
+        "icon": "⚔️",
+        "keywords": [
+          "Charge",
+          "Melee",
+          "Ranged",
+          "Strike",
+          "Weapon"
+        ],
+        "name": "Concussive Bolts",
+        "target": "One creature or object",
+        "type": "feature",
+        "usage": "Main action"
+      },
+      {
+        "cost": "3 Malice",
+        "distance": "3 cube within 5",
+        "effects": [
+          {
+            "effect": "Each target makes a **Might test**.",
+            "name": "Effect",
+            "tier1": "7 damage; [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (EoT)",
+            "tier2": "5 damage; [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (EoT)",
+            "tier3": "No effect."
+          },
+          {
+            "effect": "The snare remains until the end of the encounter. Any enemy who moves into the area for the first time in a round or starts their turn there must make the test."
+          }
+        ],
+        "feature_type": "ability",
+        "icon": "🔳",
+        "keywords": [
+          "Area",
+          "Ranged",
+          "Weapon"
+        ],
+        "name": "Steam-Powered Snare",
+        "target": "Each enemy in the area",
+        "type": "feature",
+        "usage": "Maneuver"
+      }
+    ]
+  },
+  {
+    "id": "mcdm.monsters.v1/monster.dwarf.statblock/dwarf-warden",
+    "kind": "statblock",
+    "name": "Dwarf Warden",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/monster/dwarf/statblock/dwarf-warden.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/monster/dwarf/statblock/dwarf-warden.json",
+    "selection": "dwarf-family",
+    "text": "---\nagility: 0\nev: \"8\"\nfree_strike: 5\nintuition: 1\nkeywords:\n    - Dwarf\n    - Humanoid\nlevel: 2\nmight: 2\nname: Dwarf Warden\norganization: Platoon\npresence: 0\nreason: 0\nrole: Brute\nscc: mcdm.monsters.v1/monster.dwarf.statblock/dwarf-warden\nsize: 1M\nspeed: 5\nstability: 3\nstamina: \"59\"\ntype: statblock\n---\n\n|  Dwarf, Humanoid  |         -         |      Level 2      |     Platoon Brute     |         EV 8         | \n|:-----------------:|:-----------------:|:-----------------:|:---------------------:|:--------------------:| \n|  **1M**<br>Size   |  **5**<br>Speed   | **59**<br>Stamina |  **3**<br>Stability   | **5**<br>Free Strike | \n| **-**<br>Immunity | **-**<br>Movement |         -         | **-**<br>With Captain |  **-**<br>Weakness   | \n|  **+2**<br>Might  | **+0**<br>Agility | **+0**<br>Reason  |  **+1**<br>Intuition  |  **+0**<br>Presence  |\n\n> 🗡 **Concussive Maul (Signature Ability)**\n>\n> | **Melee, Strike, Weapon** |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n> |---------------------------|------------------------------:|\n> | **📏 Melee 1**            | **🎯 One creature or object** |\n>\n> **Power Roll + 2:**\n>\n> - **≤11:** 7 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1\n> - **12-16:** 10 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3\n> - **17+:** 13 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 5; M < 2 [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)\n>\n> **Effect:** A target [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) by a dwarf can be force moved by this ability. This forced movement doesn't end the [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) condition unless the Director determines otherwise.\n\n> 🔳 **Concussive Shockwave (5 [Malice](scc.v1:mcdm.monsters.v1/rule.monster/malice))**\n>\n> | **Area, Weapon**       |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n> |------------------------|------------------------------:|\n> | **📏 3 cube within 1** | **🎯 Each enemy in the area** |\n>\n> **Power Roll + 2:**\n>\n> - **≤11:** 5 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2; A < 0 [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\n> - **12-16:** 8 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2; A < 1 [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\n> - **17+:** 11 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2; A < 2 [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\n>\n> **Effect:** A target [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) by a dwarf can be force moved by this ability. This forced movement doesn't end the [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) condition unless the Director determines otherwise.\n\n> ⭐️ **Escort the Prisoners**\n>\n> Whenever the warden moves, they can carry an [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) enemy as if the enemy were [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed) by them.\n",
+    "structured": {
+      "agility": 0,
+      "ev": "8",
+      "free_strike": 5,
+      "intuition": 1,
+      "keywords": [
+        "Dwarf",
+        "Humanoid"
+      ],
+      "level": 2,
+      "might": 2,
+      "organization": "Platoon",
+      "presence": 0,
+      "reason": 0,
+      "role": "Brute",
+      "size": "1M",
+      "speed": 5,
+      "stability": 3,
+      "stamina": "59"
+    },
+    "features": [
+      {
+        "ability_type": "Signature Ability",
+        "distance": "Melee 1",
+        "effects": [
+          {
+            "roll": "Power Roll + 2",
+            "tier1": "7 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
+            "tier2": "10 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3",
+            "tier3": "13 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 5; M < 2 [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)"
+          },
+          {
+            "effect": "A target [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) by a dwarf can be force moved by this ability. This forced movement doesn't end the [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) condition unless the Director determines otherwise.",
+            "name": "Effect"
+          }
+        ],
+        "feature_type": "ability",
+        "icon": "🗡",
+        "keywords": [
+          "Melee",
+          "Strike",
+          "Weapon"
+        ],
+        "name": "Concussive Maul",
+        "target": "One creature or object",
+        "type": "feature",
+        "usage": "Main action"
+      },
+      {
+        "cost": "5 Malice",
+        "distance": "3 cube within 1",
+        "effects": [
+          {
+            "roll": "Power Roll + 2",
+            "tier1": "5 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2; A < 0 [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
+            "tier2": "8 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2; A < 1 [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
+            "tier3": "11 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2; A < 2 [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)"
+          },
+          {
+            "effect": "A target [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) by a dwarf can be force moved by this ability. This forced movement doesn't end the [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) condition unless the Director determines otherwise.",
+            "name": "Effect"
+          }
+        ],
+        "feature_type": "ability",
+        "icon": "🔳",
+        "keywords": [
+          "Area",
+          "Weapon"
+        ],
+        "name": "Concussive Shockwave",
+        "target": "Each enemy in the area",
+        "type": "feature",
+        "usage": "Main action"
+      },
+      {
+        "effects": [
+          {
+            "effect": "Whenever the warden moves, they can carry an [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) enemy as if the enemy were [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed) by them."
+          }
+        ],
+        "feature_type": "trait",
+        "icon": "⭐️",
+        "name": "Escort the Prisoners",
+        "type": "feature"
+      }
+    ]
+  },
+  {
+    "id": "mcdm.monsters.v1/monster.dwarf.statblock/servitor-war-walker",
+    "kind": "statblock",
+    "name": "Servitor War Walker",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/monster/dwarf/statblock/servitor-war-walker.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/monster/dwarf/statblock/servitor-war-walker.json",
+    "selection": "dwarf-family",
+    "text": "---\nagility: 0\nev: \"12\"\nfree_strike: 4\nintuition: 0\nkeywords:\n    - Dwarf\n    - Humanoid\nlevel: 1\nmight: 2\nmovement: Climb\nname: Servitor War Walker\norganization: Elite\npresence: -2\nreason: -2\nrole: Mount\nscc: mcdm.monsters.v1/monster.dwarf.statblock/servitor-war-walker\nsize: \"3\"\nspeed: 8\nstability: 2\nstamina: \"60\"\ntype: statblock\n---\n\n|  Dwarf, Humanoid  |           -           |      Level 1      |      Elite Mount      |        EV 12         | \n|:-----------------:|:---------------------:|:-----------------:|:---------------------:|:--------------------:| \n|   **3**<br>Size   |    **8**<br>Speed     | **60**<br>Stamina |  **2**<br>Stability   | **4**<br>Free Strike | \n| **-**<br>Immunity | **Climb**<br>Movement |         -         | **-**<br>With Captain |  **-**<br>Weakness   | \n|  **+2**<br>Might  |   **+0**<br>Agility   | **-2**<br>Reason  |  **+0**<br>Intuition  |  **-2**<br>Presence  |\n\n> 🗡 **Grasping Claws (Signature Ability)**\n>\n> | **Charge, Melee, Strike, Weapon** |                 **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n> |-----------------------------------|--------------------------------:|\n> | **📏 Melee 2**                    | **🎯 Two creatures or objects** |\n>\n> **Power Roll + 2:**\n>\n> - **≤11:** 6 damage\n> - **12-16:** 9 damage\n> - **17+:** 12 damage; M < 2 [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)\n>\n> **Effect:** A target already [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) or [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) by this ability is [pulled](scc.v1:mcdm.heroes.v1/movement/forced-movement) up to 3 squares. A target [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) by a dwarf can be force moved by this ability. This forced movement doesn't end the [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) condition unless the Director determines otherwise.\n\n> ❇️ **Stunning Blast (3 [Malice](scc.v1:mcdm.monsters.v1/rule.monster/malice))**\n>\n> | **Area, Weapon** |                  **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n> |------------------|------------------------------:|\n> | **📏 3 burst**   | **🎯 Each enemy in the area** |\n>\n> **Power Roll + 2:**\n>\n> - **≤11:** 3 lightning damage; A < 0 [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\n> - **12-16:** 6 lightning damage; A < 1 [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\n> - **17+:** 7 lightning damage; A < 2 [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\n\n> ⭐️ **Cupola**\n>\n> While riding the war walker, three size 1 allies can occupy the same space. Creatures riding the war walker have cover.\n\n> ⭐️ **Mobile Prison Harness**\n>\n> Any [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) or [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) creature who comes [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the war walker is automatically [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends) and takes a bane on power rolls. A creature [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) this way moves with the war walker.\n",
+    "structured": {
+      "agility": 0,
+      "ev": "12",
+      "free_strike": 4,
+      "intuition": 0,
+      "keywords": [
+        "Dwarf",
+        "Humanoid"
+      ],
+      "level": 1,
+      "might": 2,
+      "movement": "Climb",
+      "organization": "Elite",
+      "presence": -2,
+      "reason": -2,
+      "role": "Mount",
+      "size": "3",
+      "speed": 8,
+      "stability": 2,
+      "stamina": "60"
+    },
+    "features": [
+      {
+        "ability_type": "Signature Ability",
+        "distance": "Melee 2",
+        "effects": [
+          {
+            "roll": "Power Roll + 2",
+            "tier1": "6 damage",
+            "tier2": "9 damage",
+            "tier3": "12 damage; M < 2 [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)"
+          },
+          {
+            "effect": "A target already [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) or [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) by this ability is [pulled](scc.v1:mcdm.heroes.v1/movement/forced-movement) up to 3 squares. A target [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) by a dwarf can be force moved by this ability. This forced movement doesn't end the [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) condition unless the Director determines otherwise.",
+            "name": "Effect"
+          }
+        ],
+        "feature_type": "ability",
+        "icon": "🗡",
+        "keywords": [
+          "Charge",
+          "Melee",
+          "Strike",
+          "Weapon"
+        ],
+        "name": "Grasping Claws",
+        "target": "Two creatures or objects",
+        "type": "feature",
+        "usage": "Main action"
+      },
+      {
+        "cost": "3 Malice",
+        "distance": "3 burst",
+        "effects": [
+          {
+            "roll": "Power Roll + 2",
+            "tier1": "3 lightning damage; A < 0 [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
+            "tier2": "6 lightning damage; A < 1 [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
+            "tier3": "7 lightning damage; A < 2 [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)"
+          }
+        ],
+        "feature_type": "ability",
+        "icon": "❇️",
+        "keywords": [
+          "Area",
+          "Weapon"
+        ],
+        "name": "Stunning Blast",
+        "target": "Each enemy in the area",
+        "type": "feature",
+        "usage": "Maneuver"
+      },
+      {
+        "effects": [
+          {
+            "effect": "While riding the war walker, three size 1 allies can occupy the same space. Creatures riding the war walker have cover."
+          }
+        ],
+        "feature_type": "trait",
+        "icon": "⭐️",
+        "name": "Cupola",
+        "type": "feature"
+      },
+      {
+        "effects": [
+          {
+            "effect": "Any [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) or [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) creature who comes [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the war walker is automatically [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends) and takes a bane on power rolls. A creature [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) this way moves with the war walker."
+          }
+        ],
+        "feature_type": "trait",
+        "icon": "⭐️",
+        "name": "Mobile Prison Harness",
+        "type": "feature"
+      }
+    ]
+  },
+  {
+    "id": "mcdm.monsters.v1/monster.goblin.statblock/goblin-assassin",
+    "kind": "statblock",
+    "name": "Goblin Assassin",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/monster/goblin/statblock/goblin-assassin.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/monster/goblin/statblock/goblin-assassin.json",
+    "selection": "goblin-family",
+    "text": "---\nagility: 2\nev: \"3\"\nfree_strike: 2\nintuition: 0\nkeywords:\n    - Goblin\n    - Humanoid\nlevel: 1\nmight: -2\nmovement: Climb\nname: Goblin Assassin\norganization: Horde\npresence: -2\nreason: 0\nrole: Ambusher\nscc: mcdm.monsters.v1/monster.goblin.statblock/goblin-assassin\nsize: 1S\nspeed: 6\nstability: 0\nstamina: \"15\"\ntype: statblock\n---\n\n| Goblin, Humanoid  |           -           |      Level 1      |    Horde Ambusher     |         EV 3         |\n|:-----------------:|:---------------------:|:-----------------:|:---------------------:|:--------------------:|\n|  **1S**<br>Size   |    **6**<br>Speed     | **15**<br>Stamina |  **0**<br>Stability   | **2**<br>Free Strike |\n| **-**<br>Immunity | **Climb**<br>Movement |         -         | **-**<br>With Captain |  **-**<br>Weakness   |\n|  **-2**<br>Might  |   **+2**<br>Agility   |  **0**<br>Reason  |  **0**<br>Intuition   |  **-2**<br>Presence  |\n\n> 🗡 **Sword Stab (Signature Ability)**\n>\n> | **Melee, Strike, Weapon** |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n> |---------------------------|------------------------------:|\n> | **📏 Melee 1**            | **🎯 One creature or object** |\n>\n> **Power Roll + 2:**\n>\n> - **≤11:** 4 damage\n> - **12-16:** 6 damage\n> - **17+:** 7 damage\n>\n> **Effect:** If this ability gains an edge or has a double edge, it deals an extra 2 damage.\n\n> 🏹 **Shadow Chains (3 [Malice](scc.v1:mcdm.monsters.v1/rule.monster/malice))**\n>\n> | **Magic, Ranged, Strike** |        **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n> |---------------------------|-----------------------:|\n> | **📏 Ranged 10**          | **🎯 Three creatures** |\n>\n> **Power Roll + 2:**\n>\n> - **≤11:** 2 corruption damage; A < 0 [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)\n> - **12-16:** 4 corruption damage; A < 1 [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)\n> - **17+:** 5 corruption damage; A < 2 [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)\n\n> ⭐️ **Crafty**\n>\n> The assassin doesn't provoke [opportunity attacks](scc.v1:mcdm.heroes.v1/rule.combat/opportunity-attack) by moving.\n\n> ⭐️ **Slip Away**\n>\n> The assassin can attempt to hide even while observed.\n",
+    "structured": {
+      "agility": 2,
+      "ev": "3",
+      "free_strike": 2,
+      "intuition": 0,
+      "keywords": [
+        "Goblin",
+        "Humanoid"
+      ],
+      "level": 1,
+      "might": -2,
+      "movement": "Climb",
+      "organization": "Horde",
+      "presence": -2,
+      "reason": 0,
+      "role": "Ambusher",
+      "size": "1S",
+      "speed": 6,
+      "stability": 0,
+      "stamina": "15"
+    },
+    "features": [
+      {
+        "ability_type": "Signature Ability",
+        "distance": "Melee 1",
+        "effects": [
+          {
+            "roll": "Power Roll + 2",
+            "tier1": "4 damage",
+            "tier2": "6 damage",
+            "tier3": "7 damage"
+          },
+          {
+            "effect": "If this ability gains an edge or has a double edge, it deals an extra 2 damage.",
+            "name": "Effect"
+          }
+        ],
+        "feature_type": "ability",
+        "icon": "🗡",
+        "keywords": [
+          "Melee",
+          "Strike",
+          "Weapon"
+        ],
+        "name": "Sword Stab",
+        "target": "One creature or object",
+        "type": "feature",
+        "usage": "Main action"
+      },
+      {
+        "cost": "3 Malice",
+        "distance": "Ranged 10",
+        "effects": [
+          {
+            "roll": "Power Roll + 2",
+            "tier1": "2 corruption damage; A < 0 [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
+            "tier2": "4 corruption damage; A < 1 [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
+            "tier3": "5 corruption damage; A < 2 [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)"
+          }
+        ],
+        "feature_type": "ability",
+        "icon": "🏹",
+        "keywords": [
+          "Magic",
+          "Ranged",
+          "Strike"
+        ],
+        "name": "Shadow Chains",
+        "target": "Three creatures",
+        "type": "feature",
+        "usage": "Main action"
+      },
+      {
+        "effects": [
+          {
+            "effect": "The assassin doesn't provoke [opportunity attacks](scc.v1:mcdm.heroes.v1/rule.combat/opportunity-attack) by moving."
+          }
+        ],
+        "feature_type": "trait",
+        "icon": "⭐️",
+        "name": "Crafty",
+        "type": "feature"
+      },
+      {
+        "effects": [
+          {
+            "effect": "The assassin can attempt to hide even while observed."
+          }
+        ],
+        "feature_type": "trait",
+        "icon": "⭐️",
+        "name": "Slip Away",
+        "type": "feature"
+      }
+    ]
+  },
+  {
+    "id": "mcdm.monsters.v1/monster.goblin.statblock/goblin-cursespitter",
+    "kind": "statblock",
+    "name": "Goblin Cursespitter",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/monster/goblin/statblock/goblin-cursespitter.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/monster/goblin/statblock/goblin-cursespitter.json",
+    "selection": "goblin-family",
+    "text": "---\nagility: 1\nev: \"3\"\nfree_strike: 1\nintuition: 2\nkeywords:\n    - Goblin\n    - Humanoid\nlevel: 1\nmight: -2\nmovement: Climb\nname: Goblin Cursespitter\norganization: Horde\npresence: 0\nreason: 0\nrole: Hexer\nscc: mcdm.monsters.v1/monster.goblin.statblock/goblin-cursespitter\nsize: 1S\nspeed: 5\nstability: 0\nstamina: \"10\"\ntype: statblock\n---\n\n| Goblin, Humanoid  |           -           |      Level 1      |      Horde Hexer      |         EV 3         |\n|:-----------------:|:---------------------:|:-----------------:|:---------------------:|:--------------------:|\n|  **1S**<br>Size   |    **5**<br>Speed     | **10**<br>Stamina |  **0**<br>Stability   | **1**<br>Free Strike |\n| **-**<br>Immunity | **Climb**<br>Movement |         -         | **-**<br>With Captain |  **-**<br>Weakness   |\n|  **-2**<br>Might  |   **+1**<br>Agility   |  **0**<br>Reason  |  **+2**<br>Intuition  |  **0**<br>Presence   |\n\n> 🏹 **Eye of Surlach (Signature Ability)**\n>\n> | **Magic, Ranged, Strike** |     **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n> |---------------------------|--------------------:|\n> | **📏 Ranged 15**          | **🎯 One creature** |\n>\n> **Power Roll + 2:**\n>\n> - **≤11:** 3 corruption damage; I < 0 [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)\n> - **12-16:** 4 corruption damage; I < 1 [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)\n> - **17+:** 5 corruption damage; I < 2 [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)\n\n> 🏹 **Dizzying Hex (1 [Malice](scc.v1:mcdm.monsters.v1/rule.monster/malice))**\n>\n> | **Magic, Ranged, Strike** |        **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n> |---------------------------|--------------------:|\n> | **📏 Ranged 10**          | **🎯 One creature** |\n>\n> **Power Roll + 2:**\n>\n> - **≤11:** I < 0 [prone](scc.v1:mcdm.heroes.v1/condition/prone)\n> - **12-16:** I < 1 [prone](scc.v1:mcdm.heroes.v1/condition/prone) and can't stand (EoT)\n> - **17+:** [Prone](scc.v1:mcdm.heroes.v1/condition/prone); I < 2 can't stand (save ends)\n\n> ⭐️ **Crafty**\n>\n> The cursespitter doesn't provoke [opportunity attacks](scc.v1:mcdm.heroes.v1/rule.combat/opportunity-attack) by moving.\n",
+    "structured": {
+      "agility": 1,
+      "ev": "3",
+      "free_strike": 1,
+      "intuition": 2,
+      "keywords": [
+        "Goblin",
+        "Humanoid"
+      ],
+      "level": 1,
+      "might": -2,
+      "movement": "Climb",
+      "organization": "Horde",
+      "presence": 0,
+      "reason": 0,
+      "role": "Hexer",
+      "size": "1S",
+      "speed": 5,
+      "stability": 0,
+      "stamina": "10"
+    },
+    "features": [
+      {
+        "ability_type": "Signature Ability",
+        "distance": "Ranged 15",
+        "effects": [
+          {
+            "roll": "Power Roll + 2",
+            "tier1": "3 corruption damage; I < 0 [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)",
+            "tier2": "4 corruption damage; I < 1 [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)",
+            "tier3": "5 corruption damage; I < 2 [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)"
+          }
+        ],
+        "feature_type": "ability",
+        "icon": "🏹",
+        "keywords": [
+          "Magic",
+          "Ranged",
+          "Strike"
+        ],
+        "name": "Eye of Surlach",
+        "target": "One creature",
+        "type": "feature",
+        "usage": "Main action"
+      },
+      {
+        "cost": "1 Malice",
+        "distance": "Ranged 10",
+        "effects": [
+          {
+            "roll": "Power Roll + 2",
+            "tier1": "I < 0 [prone](scc.v1:mcdm.heroes.v1/condition/prone)",
+            "tier2": "I < 1 [prone](scc.v1:mcdm.heroes.v1/condition/prone) and can't stand (EoT)",
+            "tier3": "[Prone](scc.v1:mcdm.heroes.v1/condition/prone); I < 2 can't stand (save ends)"
+          }
+        ],
+        "feature_type": "ability",
+        "icon": "🏹",
+        "keywords": [
+          "Magic",
+          "Ranged",
+          "Strike"
+        ],
+        "name": "Dizzying Hex",
+        "target": "One creature",
+        "type": "feature",
+        "usage": "Maneuver"
+      },
+      {
+        "effects": [
+          {
+            "effect": "The cursespitter doesn't provoke [opportunity attacks](scc.v1:mcdm.heroes.v1/rule.combat/opportunity-attack) by moving."
+          }
+        ],
+        "feature_type": "trait",
+        "icon": "⭐️",
+        "name": "Crafty",
+        "type": "feature"
+      }
+    ]
+  },
+  {
+    "id": "mcdm.monsters.v1/monster.goblin.statblock/goblin-monarch",
+    "kind": "statblock",
+    "name": "Goblin Monarch",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/monster/goblin/statblock/goblin-monarch.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/monster/goblin/statblock/goblin-monarch.json",
+    "selection": "goblin-family",
+    "text": "---\nagility: 3\nev: \"12\"\nfree_strike: 4\nintuition: 0\nkeywords:\n    - Goblin\n    - Humanoid\nlevel: 1\nmight: 0\nmovement: Climb\nname: Goblin Monarch\norganization: Leader\npresence: 3\nreason: 1\nscc: mcdm.monsters.v1/monster.goblin.statblock/goblin-monarch\nsize: 1S\nspeed: 6\nstability: 1\nstamina: \"80\"\ntype: statblock\n---\n\n| Goblin, Humanoid  |           -           |      Level 1      |        Leader         |        EV 12         |\n|:-----------------:|:---------------------:|:-----------------:|:---------------------:|:--------------------:|\n|  **1S**<br>Size   |    **6**<br>Speed     | **80**<br>Stamina |  **1**<br>Stability   | **4**<br>Free Strike |\n| **-**<br>Immunity | **Climb**<br>Movement |         -         | **-**<br>With Captain |  **-**<br>Weakness   |\n|  **0**<br>Might   |   **+3**<br>Agility   | **+1**<br>Reason  |  **0**<br>Intuition   |  **+3**<br>Presence  |\n\n> ⚔️ **Handaxe (Signature Ability)**\n>\n> | **Melee, Ranged, Strike, Weapon** |                 **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n> |-----------------------------------|--------------------------------:|\n> | **📏 Melee 1 or ranged 5**        | **🎯 Two creatures or objects** |\n>\n> **Power Roll + 3:**\n>\n> - **≤11:** 7 damage\n> - **12-16:** 10 damage\n> - **17+:** 13 damage\n>\n> **Effect:** One ally within 10 squares of the monarch can make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike).\n\n> 🏹 **Get in Here! (1 [Malice](scc.v1:mcdm.monsters.v1/rule.monster/malice))**\n>\n> | **Ranged**       |   **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n> |------------------|---------------:|\n> | **📏 Ranged 20** | **🎯 Special** |\n>\n> **Effect:** Two goblin runners appear in unoccupied spaces within distance.\n\n> ❗️ **Meat Shield**\n>\n> | **Melee**      | **[Triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action)** |\n> |----------------|---------------------:|\n> | **📏 Melee 1** |      **🎯 One ally** |\n>\n> **Trigger:** A creature targets the monarch with a strike.\n>\n> **Effect:** The ally is the target of the triggering strike instead.\n\n> ⭐️ **Crafty**\n>\n> The monarch doesn't provoke [opportunity attacks](scc.v1:mcdm.heroes.v1/rule.combat/opportunity-attack) by moving.\n\n> ⭐️ **[End Effect](scc.v1:mcdm.monsters.v1/rule.monster/end-effect)**\n>\n> At the end of each of their turns, the monarch can take 5 damage to end one effect on them that can be ended by a saving throw. This damage can't be reduced in any way.\n\n> ☠️ **What Are You Waiting For? ([Villain Action](scc.v1:mcdm.monsters.v1/rule.monster/villain-action) 1)**\n>\n> | **Area**        |                        **-** |\n> |-----------------|-----------------------------:|\n> | **📏 10 burst** | **🎯 Each ally in the area** |\n>\n> **Effect:** Each target can move up to their speed or make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike).\n\n> ☠️ **Focus Fire ([Villain Action](scc.v1:mcdm.monsters.v1/rule.monster/villain-action) 2)**\n>\n> | **Ranged**       |                      **-** |\n> |------------------|---------------------------:|\n> | **📏 Ranged 10** | **🎯 One enemy or object** |\n>\n> **Effect:** Each ally within 10 squares of the target can move up to their speed toward the target.\n\n> ☠️ **Kill! ([Villain Action](scc.v1:mcdm.monsters.v1/rule.monster/villain-action) 3)**\n>\n> | **-**          |          **-** |\n> |----------------|---------------:|\n> | **📏 Special** | **🎯 Special** |\n>\n> **Effect:** Each enemy in the encounter takes 2 damage for each goblin [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to them.\n",
+    "structured": {
+      "agility": 3,
+      "ev": "12",
+      "free_strike": 4,
+      "intuition": 0,
+      "keywords": [
+        "Goblin",
+        "Humanoid"
+      ],
+      "level": 1,
+      "might": 0,
+      "movement": "Climb",
+      "organization": "Leader",
+      "presence": 3,
+      "reason": 1,
+      "size": "1S",
+      "speed": 6,
+      "stability": 1,
+      "stamina": "80"
+    },
+    "features": [
+      {
+        "ability_type": "Signature Ability",
+        "distance": "Melee 1 or ranged 5",
+        "effects": [
+          {
+            "roll": "Power Roll + 3",
+            "tier1": "7 damage",
+            "tier2": "10 damage",
+            "tier3": "13 damage"
+          },
+          {
+            "effect": "One ally within 10 squares of the monarch can make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike).",
+            "name": "Effect"
+          }
+        ],
+        "feature_type": "ability",
+        "icon": "⚔️",
+        "keywords": [
+          "Melee",
+          "Ranged",
+          "Strike",
+          "Weapon"
+        ],
+        "name": "Handaxe",
+        "target": "Two creatures or objects",
+        "type": "feature",
+        "usage": "Main action"
+      },
+      {
+        "cost": "1 Malice",
+        "distance": "Ranged 20",
+        "effects": [
+          {
+            "effect": "Two goblin runners appear in unoccupied spaces within distance.",
+            "name": "Effect"
+          }
+        ],
+        "feature_type": "ability",
+        "icon": "🏹",
+        "keywords": [
+          "Ranged"
+        ],
+        "name": "Get in Here!",
+        "target": "Special",
+        "type": "feature",
+        "usage": "Maneuver"
+      },
+      {
+        "distance": "Melee 1",
+        "effects": [
+          {
+            "effect": "The ally is the target of the triggering strike instead.",
+            "name": "Effect"
+          }
+        ],
+        "feature_type": "ability",
+        "icon": "❗️",
+        "keywords": [
+          "Melee"
+        ],
+        "name": "Meat Shield",
+        "target": "One ally",
+        "trigger": "A creature targets the monarch with a strike.",
+        "type": "feature",
+        "usage": "Triggered action"
+      },
+      {
+        "effects": [
+          {
+            "effect": "The monarch doesn't provoke [opportunity attacks](scc.v1:mcdm.heroes.v1/rule.combat/opportunity-attack) by moving."
+          }
+        ],
+        "feature_type": "trait",
+        "icon": "⭐️",
+        "name": "Crafty",
+        "type": "feature"
+      },
+      {
+        "effects": [
+          {
+            "effect": "At the end of each of their turns, the monarch can take 5 damage to end one effect on them that can be ended by a saving throw. This damage can't be reduced in any way."
+          }
+        ],
+        "feature_type": "trait",
+        "icon": "⭐️",
+        "name": "End Effect",
+        "type": "feature"
+      },
+      {
+        "cost": "Villain Action 1",
+        "distance": "10 burst",
+        "effects": [
+          {
+            "effect": "Each target can move up to their speed or make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike).",
+            "name": "Effect"
+          }
+        ],
+        "feature_type": "ability",
+        "icon": "☠️",
+        "keywords": [
+          "Area"
+        ],
+        "name": "What Are You Waiting For?",
+        "target": "Each ally in the area",
+        "type": "feature",
+        "usage": "-"
+      },
+      {
+        "cost": "Villain Action 2",
+        "distance": "Ranged 10",
+        "effects": [
+          {
+            "effect": "Each ally within 10 squares of the target can move up to their speed toward the target.",
+            "name": "Effect"
+          }
+        ],
+        "feature_type": "ability",
+        "icon": "☠️",
+        "keywords": [
+          "Ranged"
+        ],
+        "name": "Focus Fire",
+        "target": "One enemy or object",
+        "type": "feature",
+        "usage": "-"
+      },
+      {
+        "cost": "Villain Action 3",
+        "distance": "Special",
+        "effects": [
+          {
+            "effect": "Each enemy in the encounter takes 2 damage for each goblin [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to them.",
+            "name": "Effect"
+          }
+        ],
+        "feature_type": "ability",
+        "icon": "☠️",
+        "keywords": null,
+        "name": "Kill!",
+        "target": "Special",
+        "type": "feature",
+        "usage": "-"
+      }
+    ]
+  },
+  {
+    "id": "mcdm.monsters.v1/monster.goblin.statblock/goblin-runner",
+    "kind": "statblock",
+    "name": "Goblin Runner",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/monster/goblin/statblock/goblin-runner.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/monster/goblin/statblock/goblin-runner.json",
+    "selection": "goblin-family",
+    "text": "---\nagility: 2\nev: 3 for four minions\nfree_strike: 1\nintuition: 0\nkeywords:\n    - Goblin\n    - Humanoid\nlevel: 1\nmight: -2\nmovement: Climb\nname: Goblin Runner\norganization: Minion\npresence: -1\nreason: 0\nrole: Harrier\nscc: mcdm.monsters.v1/monster.goblin.statblock/goblin-runner\nsize: 1S\nspeed: 6\nstability: 0\nstamina: \"4\"\ntype: statblock\nwith_captain: Gain an edge on strikes\n---\n\n| Goblin, Humanoid  |           -           |     Level 1      |               Minion Harrier                | EV 3 for four minions |\n|:-----------------:|:---------------------:|:----------------:|:-------------------------------------------:|:---------------------:|\n|  **1S**<br>Size   |    **6**<br>Speed     | **4**<br>Stamina |             **0**<br>Stability              | **1**<br>Free Strike  |\n| **-**<br>Immunity | **Climb**<br>Movement |        -         | **Gain an edge on strikes**<br>With Captain |   **-**<br>Weakness   |\n|  **-2**<br>Might  |   **+2**<br>Agility   | **0**<br>Reason  |             **0**<br>Intuition              |  **-1**<br>Presence   |\n\n> 🗡 **Club Charge (Signature Ability)**\n>\n> | **Charge, Melee, Strike, Weapon** |                          **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n> |-----------------------------------|-----------------------------------------:|\n> | **📏 Melee 1**                    | **🎯 One creature or object per minion** |\n>\n> **Power Roll + 2:**\n>\n> - **≤11:** 1 damage\n> - **12-16:** 2 damage\n> - **17+:** 3 damage\n\n> ⭐️ **Crafty**\n>\n> The runner doesn't provoke [opportunity attacks](scc.v1:mcdm.heroes.v1/rule.combat/opportunity-attack) by moving.\n",
+    "structured": {
+      "agility": 2,
+      "ev": "3 for four minions",
+      "free_strike": 1,
+      "intuition": 0,
+      "keywords": [
+        "Goblin",
+        "Humanoid"
+      ],
+      "level": 1,
+      "might": -2,
+      "movement": "Climb",
+      "organization": "Minion",
+      "presence": -1,
+      "reason": 0,
+      "role": "Harrier",
+      "size": "1S",
+      "speed": 6,
+      "stability": 0,
+      "stamina": "4",
+      "with_captain": "Gain an edge on strikes"
+    },
+    "features": [
+      {
+        "ability_type": "Signature Ability",
+        "distance": "Melee 1",
+        "effects": [
+          {
+            "roll": "Power Roll + 2",
+            "tier1": "1 damage",
+            "tier2": "2 damage",
+            "tier3": "3 damage"
+          }
+        ],
+        "feature_type": "ability",
+        "icon": "🗡",
+        "keywords": [
+          "Charge",
+          "Melee",
+          "Strike",
+          "Weapon"
+        ],
+        "name": "Club Charge",
+        "target": "One creature or object per minion",
+        "type": "feature",
+        "usage": "Main action"
+      },
+      {
+        "effects": [
+          {
+            "effect": "The runner doesn't provoke [opportunity attacks](scc.v1:mcdm.heroes.v1/rule.combat/opportunity-attack) by moving."
+          }
+        ],
+        "feature_type": "trait",
+        "icon": "⭐️",
+        "name": "Crafty",
+        "type": "feature"
+      }
+    ]
+  },
+  {
+    "id": "mcdm.monsters.v1/monster.goblin.statblock/goblin-sniper",
+    "kind": "statblock",
+    "name": "Goblin Sniper",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/monster/goblin/statblock/goblin-sniper.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/monster/goblin/statblock/goblin-sniper.json",
+    "selection": "goblin-family",
+    "text": "---\nagility: 2\nev: 3 for four minions\nfree_strike: 2\nintuition: 0\nkeywords:\n    - Goblin\n    - Humanoid\nlevel: 1\nmight: -2\nmovement: Climb\nname: Goblin Sniper\norganization: Minion\npresence: -1\nreason: 0\nrole: Artillery\nscc: mcdm.monsters.v1/monster.goblin.statblock/goblin-sniper\nsize: 1S\nspeed: 5\nstability: 0\nstamina: \"3\"\ntype: statblock\nwith_captain: +5 bonus to ranged distance\n---\n\n| Goblin, Humanoid  |           -           |     Level 1      |                Minion Artillery                 | EV 3 for four minions |\n|:-----------------:|:---------------------:|:----------------:|:-----------------------------------------------:|:---------------------:|\n|  **1S**<br>Size   |    **5**<br>Speed     | **3**<br>Stamina |               **0**<br>Stability                | **2**<br>Free Strike  |\n| **-**<br>Immunity | **Climb**<br>Movement |        -         | **+5 bonus to ranged distance**<br>With Captain |   **-**<br>Weakness   |\n|  **-2**<br>Might  |   **+2**<br>Agility   | **0**<br>Reason  |               **0**<br>Intuition                |  **-1**<br>Presence   |\n\n> 🏹 **Bow (Signature Ability)**\n>\n> | **Ranged, Strike, Weapon** |                          **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n> |----------------------------|-----------------------------------------:|\n> | **📏 Ranged 10**           | **🎯 One creature or object per minion** |\n>\n> **Power Roll + 2:**\n>\n> - **≤11:** 2 damage\n> - **12-16:** 4 damage\n> - **17+:** 5 damage\n>\n> **Effect:** If the sniper doesn't use a move action this turn, this ability gains an edge.\n\n> ⭐️ **Crafty**\n>\n> The sniper doesn't provoke [opportunity attacks](scc.v1:mcdm.heroes.v1/rule.combat/opportunity-attack) by moving.\n",
+    "structured": {
+      "agility": 2,
+      "ev": "3 for four minions",
+      "free_strike": 2,
+      "intuition": 0,
+      "keywords": [
+        "Goblin",
+        "Humanoid"
+      ],
+      "level": 1,
+      "might": -2,
+      "movement": "Climb",
+      "organization": "Minion",
+      "presence": -1,
+      "reason": 0,
+      "role": "Artillery",
+      "size": "1S",
+      "speed": 5,
+      "stability": 0,
+      "stamina": "3",
+      "with_captain": "+5 bonus to ranged distance"
+    },
+    "features": [
+      {
+        "ability_type": "Signature Ability",
+        "distance": "Ranged 10",
+        "effects": [
+          {
+            "roll": "Power Roll + 2",
+            "tier1": "2 damage",
+            "tier2": "4 damage",
+            "tier3": "5 damage"
+          },
+          {
+            "effect": "If the sniper doesn't use a move action this turn, this ability gains an edge.",
+            "name": "Effect"
+          }
+        ],
+        "feature_type": "ability",
+        "icon": "🏹",
+        "keywords": [
+          "Ranged",
+          "Strike",
+          "Weapon"
+        ],
+        "name": "Bow",
+        "target": "One creature or object per minion",
+        "type": "feature",
+        "usage": "Main action"
+      },
+      {
+        "effects": [
+          {
+            "effect": "The sniper doesn't provoke [opportunity attacks](scc.v1:mcdm.heroes.v1/rule.combat/opportunity-attack) by moving."
+          }
+        ],
+        "feature_type": "trait",
+        "icon": "⭐️",
+        "name": "Crafty",
+        "type": "feature"
+      }
+    ]
+  },
+  {
+    "id": "mcdm.monsters.v1/monster.goblin.statblock/goblin-spinecleaver",
+    "kind": "statblock",
+    "name": "Goblin Spinecleaver",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/monster/goblin/statblock/goblin-spinecleaver.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/monster/goblin/statblock/goblin-spinecleaver.json",
+    "selection": "goblin-family",
+    "text": "---\nagility: 0\nev: 3 for four minions\nfree_strike: 2\nintuition: 0\nkeywords:\n    - Goblin\n    - Humanoid\nlevel: 1\nmight: 2\nmovement: Climb\nname: Goblin Spinecleaver\norganization: Minion\npresence: -1\nreason: 0\nrole: Brute\nscc: mcdm.monsters.v1/monster.goblin.statblock/goblin-spinecleaver\nsize: 1S\nspeed: 5\nstability: 0\nstamina: \"5\"\ntype: statblock\nwith_captain: +1 damage bonus to strikes\n---\n\n| Goblin, Humanoid  |           -           |     Level 1      |                  Minion Brute                  | EV 3 for four minions |\n|:-----------------:|:---------------------:|:----------------:|:----------------------------------------------:|:---------------------:|\n|  **1S**<br>Size   |    **5**<br>Speed     | **5**<br>Stamina |               **0**<br>Stability               | **2**<br>Free Strike  |\n| **-**<br>Immunity | **Climb**<br>Movement |        -         | **+1 damage bonus to strikes**<br>With Captain |   **-**<br>Weakness   |\n|  **+2**<br>Might  |   **0**<br>Agility    | **0**<br>Reason  |               **0**<br>Intuition               |  **-1**<br>Presence   |\n\n> 🗡 **Axe (Signature Ability)**\n>\n> | **Melee, Strike, Weapon** |                          **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n> |---------------------------|-----------------------------------------:|\n> | **📏 Melee 1**            | **🎯 One creature or object per minion** |\n>\n> **Power Roll + 2:**\n>\n> - **≤11:** 2 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1\n> - **12-16:** 4 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3\n> - **17+:** 5 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 4\n\n> ⭐️ **Crafty**\n>\n> The spinecleaver doesn't provoke [opportunity attacks](scc.v1:mcdm.heroes.v1/rule.combat/opportunity-attack) by moving.\n",
+    "structured": {
+      "agility": 0,
+      "ev": "3 for four minions",
+      "free_strike": 2,
+      "intuition": 0,
+      "keywords": [
+        "Goblin",
+        "Humanoid"
+      ],
+      "level": 1,
+      "might": 2,
+      "movement": "Climb",
+      "organization": "Minion",
+      "presence": -1,
+      "reason": 0,
+      "role": "Brute",
+      "size": "1S",
+      "speed": 5,
+      "stability": 0,
+      "stamina": "5",
+      "with_captain": "+1 damage bonus to strikes"
+    },
+    "features": [
+      {
+        "ability_type": "Signature Ability",
+        "distance": "Melee 1",
+        "effects": [
+          {
+            "roll": "Power Roll + 2",
+            "tier1": "2 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
+            "tier2": "4 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3",
+            "tier3": "5 damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 4"
+          }
+        ],
+        "feature_type": "ability",
+        "icon": "🗡",
+        "keywords": [
+          "Melee",
+          "Strike",
+          "Weapon"
+        ],
+        "name": "Axe",
+        "target": "One creature or object per minion",
+        "type": "feature",
+        "usage": "Main action"
+      },
+      {
+        "effects": [
+          {
+            "effect": "The spinecleaver doesn't provoke [opportunity attacks](scc.v1:mcdm.heroes.v1/rule.combat/opportunity-attack) by moving."
+          }
+        ],
+        "feature_type": "trait",
+        "icon": "⭐️",
+        "name": "Crafty",
+        "type": "feature"
+      }
+    ]
+  },
+  {
+    "id": "mcdm.monsters.v1/monster.goblin.statblock/goblin-stinker",
+    "kind": "statblock",
+    "name": "Goblin Stinker",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/monster/goblin/statblock/goblin-stinker.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/monster/goblin/statblock/goblin-stinker.json",
+    "selection": "goblin-family",
+    "text": "---\nagility: 1\nev: \"3\"\nfree_strike: 1\nintuition: 0\nkeywords:\n    - Goblin\n    - Humanoid\nlevel: 1\nmight: -2\nmovement: Climb\nname: Goblin Stinker\norganization: Horde\npresence: 2\nreason: 0\nrole: Controller\nscc: mcdm.monsters.v1/monster.goblin.statblock/goblin-stinker\nsize: 1S\nspeed: 5\nstability: 0\nstamina: \"10\"\ntype: statblock\n---\n\n| Goblin, Humanoid  |           -           |      Level 1      |   Horde Controller    |         EV 3         |\n|:-----------------:|:---------------------:|:-----------------:|:---------------------:|:--------------------:|\n|  **1S**<br>Size   |    **5**<br>Speed     | **10**<br>Stamina |  **0**<br>Stability   | **1**<br>Free Strike |\n| **-**<br>Immunity | **Climb**<br>Movement |         -         | **-**<br>With Captain |  **-**<br>Weakness   |\n|  **-2**<br>Might  |   **+1**<br>Agility   |  **0**<br>Reason  |  **0**<br>Intuition   |  **+2**<br>Presence  |\n\n> 🔳 **Toxic Winds (Signature Ability)**\n>\n> | **Area, Magic, Ranged** |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n> |-------------------------|------------------------------:|\n> | **📏 3 cube within 15** | **🎯 Each enemy in the area** |\n>\n> **Power Roll + 2:**\n>\n> - **≤11:** 1 poison damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1\n> - **12-16:** 2 poison damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2\n> - **17+:** 3 poison damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3\n>\n> **1+ [Malice](scc.v1:mcdm.monsters.v1/rule.monster/malice):** For each [Malice](scc.v1:mcdm.monsters.v1/rule.monster/malice) spent, one target can be [force moved](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1 additional square.\n\n> 🔳 **Swamp Gas**\n>\n> | **Area, Magic, Ranged** |   **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n> |-------------------------|---------------:|\n> | **📏 3 cube within 10** | **🎯 Special** |\n>\n> **Effect:** The area is filled with a green haze that lasts until the start of the stinker's next turn or until the stinker is reduced to 0 [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina), and which can't be dispersed by wind. The area is [difficult terrain](scc.v1:mcdm.heroes.v1/movement/difficult-terrain) for non-goblins, and each non-goblin who moves in the area takes 2 poison damage for each square moved.\n\n> ⭐️ **Crafty**\n>\n> The stinker doesn't provoke [opportunity attacks](scc.v1:mcdm.heroes.v1/rule.combat/opportunity-attack) by moving.\n",
+    "structured": {
+      "agility": 1,
+      "ev": "3",
+      "free_strike": 1,
+      "intuition": 0,
+      "keywords": [
+        "Goblin",
+        "Humanoid"
+      ],
+      "level": 1,
+      "might": -2,
+      "movement": "Climb",
+      "organization": "Horde",
+      "presence": 2,
+      "reason": 0,
+      "role": "Controller",
+      "size": "1S",
+      "speed": 5,
+      "stability": 0,
+      "stamina": "10"
+    },
+    "features": [
+      {
+        "ability_type": "Signature Ability",
+        "distance": "3 cube within 15",
+        "effects": [
+          {
+            "roll": "Power Roll + 2",
+            "tier1": "1 poison damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
+            "tier2": "2 poison damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
+            "tier3": "3 poison damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3"
+          },
+          {
+            "cost": "1+ Malice",
+            "effect": "For each [Malice](scc.v1:mcdm.monsters.v1/rule.monster/malice) spent, one target can be [force moved](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1 additional square."
+          }
+        ],
+        "feature_type": "ability",
+        "icon": "🔳",
+        "keywords": [
+          "Area",
+          "Magic",
+          "Ranged"
+        ],
+        "name": "Toxic Winds",
+        "target": "Each enemy in the area",
+        "type": "feature",
+        "usage": "Main action"
+      },
+      {
+        "distance": "3 cube within 10",
+        "effects": [
+          {
+            "effect": "The area is filled with a green haze that lasts until the start of the stinker's next turn or until the stinker is reduced to 0 [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina), and which can't be dispersed by wind. The area is [difficult terrain](scc.v1:mcdm.heroes.v1/movement/difficult-terrain) for non-goblins, and each non-goblin who moves in the area takes 2 poison damage for each square moved.",
+            "name": "Effect"
+          }
+        ],
+        "feature_type": "ability",
+        "icon": "🔳",
+        "keywords": [
+          "Area",
+          "Magic",
+          "Ranged"
+        ],
+        "name": "Swamp Gas",
+        "target": "Special",
+        "type": "feature",
+        "usage": "Maneuver"
+      },
+      {
+        "effects": [
+          {
+            "effect": "The stinker doesn't provoke [opportunity attacks](scc.v1:mcdm.heroes.v1/rule.combat/opportunity-attack) by moving."
+          }
+        ],
+        "feature_type": "trait",
+        "icon": "⭐️",
+        "name": "Crafty",
+        "type": "feature"
+      }
+    ]
+  },
+  {
+    "id": "mcdm.monsters.v1/monster.goblin.statblock/goblin-underboss",
+    "kind": "statblock",
+    "name": "Goblin Underboss",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/monster/goblin/statblock/goblin-underboss.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/monster/goblin/statblock/goblin-underboss.json",
+    "selection": "goblin-family",
+    "text": "---\nagility: 2\nev: \"3\"\nfree_strike: 1\nintuition: 0\nkeywords:\n    - Goblin\n    - Humanoid\nlevel: 1\nmight: -1\nmovement: Climb\nname: Goblin Underboss\norganization: Horde\npresence: 1\nreason: 0\nrole: Support\nscc: mcdm.monsters.v1/monster.goblin.statblock/goblin-underboss\nsize: 1S\nspeed: 5\nstability: 0\nstamina: \"15\"\ntype: statblock\n---\n\n| Goblin, Humanoid  |           -           |      Level 1      |     Horde Support     |         EV 3         |\n|:-----------------:|:---------------------:|:-----------------:|:---------------------:|:--------------------:|\n|  **1S**<br>Size   |    **5**<br>Speed     | **15**<br>Stamina |  **0**<br>Stability   | **1**<br>Free Strike |\n| **-**<br>Immunity | **Climb**<br>Movement |         -         | **-**<br>With Captain |  **-**<br>Weakness   |\n|  **-1**<br>Might  |   **+2**<br>Agility   |  **0**<br>Reason  |  **0**<br>Intuition   |  **+1**<br>Presence  |\n\n> 🗡 **Swordplay (Signature Ability)**\n>\n> | **Melee, Strike, Weapon** |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n> |---------------------------|------------------------------:|\n> | **📏 Melee 1**            | **🎯 One creature or object** |\n>\n> **Power Roll + 2:**\n>\n> - **≤11:** 3 damage\n> - **12-16:** 4 damage\n> - **17+:** 5 damage\n>\n> **Effect:** One ally [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the target can make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against them.\n\n> ❇️ **Get Reckless!**\n>\n> | **Area**       |                 **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n> |----------------|-----------------------------:|\n> | **📏 5 burst** | **🎯 Each ally in the area** |\n>\n> **Effect:** Until the start of the underboss's next turn, each target gains an edge on strikes, and any strike made against a target gains an edge.\n>\n> **2 [Malice](scc.v1:mcdm.monsters.v1/rule.monster/malice):** Strikes made against targets no longer gain an edge.\n\n> ⭐️ **Crafty**\n>\n> The underboss doesn't provoke [opportunity attacks](scc.v1:mcdm.heroes.v1/rule.combat/opportunity-attack) by moving.\n",
+    "structured": {
+      "agility": 2,
+      "ev": "3",
+      "free_strike": 1,
+      "intuition": 0,
+      "keywords": [
+        "Goblin",
+        "Humanoid"
+      ],
+      "level": 1,
+      "might": -1,
+      "movement": "Climb",
+      "organization": "Horde",
+      "presence": 1,
+      "reason": 0,
+      "role": "Support",
+      "size": "1S",
+      "speed": 5,
+      "stability": 0,
+      "stamina": "15"
+    },
+    "features": [
+      {
+        "ability_type": "Signature Ability",
+        "distance": "Melee 1",
+        "effects": [
+          {
+            "roll": "Power Roll + 2",
+            "tier1": "3 damage",
+            "tier2": "4 damage",
+            "tier3": "5 damage"
+          },
+          {
+            "effect": "One ally [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the target can make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against them.",
+            "name": "Effect"
+          }
+        ],
+        "feature_type": "ability",
+        "icon": "🗡",
+        "keywords": [
+          "Melee",
+          "Strike",
+          "Weapon"
+        ],
+        "name": "Swordplay",
+        "target": "One creature or object",
+        "type": "feature",
+        "usage": "Main action"
+      },
+      {
+        "distance": "5 burst",
+        "effects": [
+          {
+            "effect": "Until the start of the underboss's next turn, each target gains an edge on strikes, and any strike made against a target gains an edge.",
+            "name": "Effect"
+          },
+          {
+            "cost": "2 Malice",
+            "effect": "Strikes made against targets no longer gain an edge."
+          }
+        ],
+        "feature_type": "ability",
+        "icon": "❇️",
+        "keywords": [
+          "Area"
+        ],
+        "name": "Get Reckless!",
+        "target": "Each ally in the area",
+        "type": "feature",
+        "usage": "Maneuver"
+      },
+      {
+        "effects": [
+          {
+            "effect": "The underboss doesn't provoke [opportunity attacks](scc.v1:mcdm.heroes.v1/rule.combat/opportunity-attack) by moving."
+          }
+        ],
+        "feature_type": "trait",
+        "icon": "⭐️",
+        "name": "Crafty",
+        "type": "feature"
+      }
+    ]
+  },
+  {
     "id": "mcdm.monsters.v1/monster.goblin.statblock/goblin-warrior",
     "kind": "statblock",
     "name": "Goblin Warrior",
     "sourcePath": "vendor/steel-compendium/en/unified/md/monster/goblin/statblock/goblin-warrior.md",
     "jsonPath": "vendor/steel-compendium/en/unified/json/monster/goblin/statblock/goblin-warrior.json",
-    "selection": "goblin-warrior",
+    "selection": "goblin-family",
     "text": "---\nagility: 2\nev: \"3\"\nfree_strike: 1\nintuition: 0\nkeywords:\n    - Goblin\n    - Humanoid\nlevel: 1\nmight: -2\nmovement: Climb\nname: Goblin Warrior\norganization: Horde\npresence: -1\nreason: 0\nrole: Harrier\nscc: mcdm.monsters.v1/monster.goblin.statblock/goblin-warrior\nsize: 1S\nspeed: 6\nstability: 0\nstamina: \"15\"\ntype: statblock\n---\n\n| Goblin, Humanoid  |           -           |      Level 1      |     Horde Harrier     |         EV 3         |\n|:-----------------:|:---------------------:|:-----------------:|:---------------------:|:--------------------:|\n|  **1S**<br>Size   |    **6**<br>Speed     | **15**<br>Stamina |  **0**<br>Stability   | **1**<br>Free Strike |\n| **-**<br>Immunity | **Climb**<br>Movement |         -         | **-**<br>With Captain |  **-**<br>Weakness   |\n|  **-2**<br>Might  |   **+2**<br>Agility   |  **0**<br>Reason  |  **0**<br>Intuition   |  **-1**<br>Presence  |\n\n> 🗡 **Spear Charge (Signature Ability)**\n>\n> | **Charge, Melee, Strike, Weapon** |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n> |-----------------------------------|------------------------------:|\n> | **📏 Melee 1**                    | **🎯 One creature or object** |\n>\n> **Power Roll + 2:**\n>\n> - **≤11:** 3 damage\n> - **12-16:** 4 damage\n> - **17+:** 5 damage\n\n> 🗡 **Bury the Point (2 [Malice](scc.v1:mcdm.monsters.v1/rule.monster/malice))**\n>\n> | **Melee, Strike, Weapon** |     **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n> |---------------------------|--------------------:|\n> | **📏 Melee 1**            | **🎯 One creature** |\n>\n> **Power Roll + 2:**\n>\n> - **≤11:** 5 damage; M < 0 [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) (save ends)\n> - **12-16:** 6 damage; M < 1 [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) (save ends)\n> - **17+:** 7 damage; M < 2 [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) (save ends)\n\n> ⭐️ **Crafty**\n>\n> The warrior doesn't provoke [opportunity attacks](scc.v1:mcdm.heroes.v1/rule.combat/opportunity-attack) by moving.\n",
     "structured": {
       "agility": 2,
@@ -85,6 +2008,322 @@
         "feature_type": "trait",
         "icon": "⭐️",
         "name": "Crafty",
+        "type": "feature"
+      }
+    ]
+  },
+  {
+    "id": "mcdm.monsters.v1/monster.goblin.statblock/skitterling",
+    "kind": "statblock",
+    "name": "Skitterling",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/monster/goblin/statblock/skitterling.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/monster/goblin/statblock/skitterling.json",
+    "selection": "goblin-family",
+    "text": "---\nagility: 2\nev: 3 for four minions\nfree_strike: 1\nintuition: 0\nkeywords:\n    - Animal\n    - Goblin\nlevel: 1\nmight: -5\nmovement: Fly\nname: Skitterling\norganization: Minion\npresence: -2\nreason: -4\nrole: Hexer\nscc: mcdm.monsters.v1/monster.goblin.statblock/skitterling\nsize: 1T\nspeed: 5\nstability: 0\nstamina: \"3\"\ntype: statblock\nwith_captain: +3 bonus to speed\n---\n\n|  Animal, Goblin   |          -          |     Level 1      |             Minion Hexer              | EV 3 for four minions |\n|:-----------------:|:-------------------:|:----------------:|:-------------------------------------:|:---------------------:|\n|  **1T**<br>Size   |   **5**<br>Speed    | **3**<br>Stamina |          **0**<br>Stability           | **1**<br>Free Strike  |\n| **-**<br>Immunity | **Fly**<br>Movement |        -         | **+3 bonus to speed**<br>With Captain |   **-**<br>Weakness   |\n|  **-5**<br>Might  |  **+2**<br>Agility  | **-4**<br>Reason |          **0**<br>Intuition           |  **-2**<br>Presence   |\n\n> 🗡 **Claws (Signature Ability)**\n>\n> | **Melee, Strike, Weapon** |                **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n> |---------------------------|-------------------------------:|\n> | **📏 Melee 1**            | **🎯 One creature per minion** |\n>\n> **Power Roll + 2:**\n>\n> - **≤11:** 1 poison damage\n> - **12-16:** 2 poison damage\n> - **17+:** 3 poison damage\n>\n> **Effect:** The target takes a bane on their next strike.\n",
+    "structured": {
+      "agility": 2,
+      "ev": "3 for four minions",
+      "free_strike": 1,
+      "intuition": 0,
+      "keywords": [
+        "Animal",
+        "Goblin"
+      ],
+      "level": 1,
+      "might": -5,
+      "movement": "Fly",
+      "organization": "Minion",
+      "presence": -2,
+      "reason": -4,
+      "role": "Hexer",
+      "size": "1T",
+      "speed": 5,
+      "stability": 0,
+      "stamina": "3",
+      "with_captain": "+3 bonus to speed"
+    },
+    "features": [
+      {
+        "ability_type": "Signature Ability",
+        "distance": "Melee 1",
+        "effects": [
+          {
+            "roll": "Power Roll + 2",
+            "tier1": "1 poison damage",
+            "tier2": "2 poison damage",
+            "tier3": "3 poison damage"
+          },
+          {
+            "effect": "The target takes a bane on their next strike.",
+            "name": "Effect"
+          }
+        ],
+        "feature_type": "ability",
+        "icon": "🗡",
+        "keywords": [
+          "Melee",
+          "Strike",
+          "Weapon"
+        ],
+        "name": "Claws",
+        "target": "One creature per minion",
+        "type": "feature",
+        "usage": "Main action"
+      }
+    ]
+  },
+  {
+    "id": "mcdm.monsters.v1/monster.goblin.statblock/war-spider",
+    "kind": "statblock",
+    "name": "War Spider",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/monster/goblin/statblock/war-spider.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/monster/goblin/statblock/war-spider.json",
+    "selection": "goblin-family",
+    "text": "---\nagility: 1\nev: \"12\"\nfree_strike: 4\nintuition: 0\nkeywords:\n    - Animal\n    - Goblin\nlevel: 1\nmight: 2\nmovement: Climb\nname: War Spider\norganization: Elite\npresence: -3\nreason: -4\nrole: Mount\nscc: mcdm.monsters.v1/monster.goblin.statblock/war-spider\nsize: \"3\"\nspeed: 7\nstability: 2\nstamina: \"60\"\ntype: statblock\n---\n\n|  Animal, Goblin   |           -           |      Level 1      |      Elite Mount      |        EV 12         |\n|:-----------------:|:---------------------:|:-----------------:|:---------------------:|:--------------------:|\n|   **3**<br>Size   |    **7**<br>Speed     | **60**<br>Stamina |  **2**<br>Stability   | **4**<br>Free Strike |\n| **-**<br>Immunity | **Climb**<br>Movement |         -         | **-**<br>With Captain |  **-**<br>Weakness   |\n|  **+2**<br>Might  |   **+1**<br>Agility   | **-4**<br>Reason  |  **0**<br>Intuition   |  **-3**<br>Presence  |\n\n> 🗡 **Bite (Signature Ability)**\n>\n> | **Melee, Strike, Weapon** |     **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n> |---------------------------|--------------------:|\n> | **📏 Melee 1**            | **🎯 One creature** |\n>\n> **Power Roll + 2:**\n>\n> - **≤11:** 7 poison damage\n> - **12-16:** 11 poison damage\n> - **17+:** 14 poison damage; M < 2 [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)\n>\n> **2 [Malice](scc.v1:mcdm.monsters.v1/rule.monster/malice):** For any tier outcome, if the target has M < 3, they are [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends).\n\n> 🗡 **Leg Blade**\n>\n> | **Melee, Strike, Weapon** |                 **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n> |---------------------------|--------------------------------:|\n> | **📏 Melee 1**            | **🎯 Two creatures or objects** |\n>\n> **Power Roll + 2:**\n>\n> - **≤11:** 6 damage\n> - **12-16:** 9 damage\n> - **17+:** 12 damage\n\n> 👤 **Trample (5 [Malice](scc.v1:mcdm.monsters.v1/rule.monster/malice))**\n>\n> | **-** | **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n> | --- | ---:|\n> | **📏 Self** | **🎯 Self** |\n>\n> **Effect:** The spider [shifts](scc.v1:mcdm.heroes.v1/movement/shifting) up to their speed and uses Leg Blade against each creature who comes [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to them during the shift. The spider makes one power roll against all targets.\n\n> 🔳 **Web**\n>\n> | **Area, Weapon**       |                     **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n> |------------------------|---------------------------------:|\n> | **📏 3 cube within 1** | **🎯 Each creature in the area** |\n>\n> **Power Roll + 2:**\n>\n> - **≤11:** A < 0 [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)\n> - **12-16:** A < 1 [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)\n> - **17+:** A < 2 [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)\n>\n> **Effect:** The area is [difficult terrain](scc.v1:mcdm.heroes.v1/movement/difficult-terrain) for enemies.\n\n> ❗️ **Skitter**\n>\n> | **-**       | **[Triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action)** |\n> |-------------|---------------------:|\n> | **📏 Self** |          **🎯 Self** |\n>\n> **Trigger:** The spider or any ally riding the spider takes damage.\n>\n> **Effect:** The damage is halved, and the spider [shifts](scc.v1:mcdm.heroes.v1/movement/shifting) up to 2 squares after the triggering effect resolves.\n\n> ⭐️ **Ride Launcher**\n>\n> Any ally who leaps off the back of the spider can jump up to 6 squares without making a test, and takes no damage if they fall during the jump. After any ally jumps, the first melee strike the make on the same turn gains an edge.\n\n> ⭐️ **Wide Back**\n>\n> While riding the spider, two size 1 allies can occupy the same space.\n",
+    "structured": {
+      "agility": 1,
+      "ev": "12",
+      "free_strike": 4,
+      "intuition": 0,
+      "keywords": [
+        "Animal",
+        "Goblin"
+      ],
+      "level": 1,
+      "might": 2,
+      "movement": "Climb",
+      "organization": "Elite",
+      "presence": -3,
+      "reason": -4,
+      "role": "Mount",
+      "size": "3",
+      "speed": 7,
+      "stability": 2,
+      "stamina": "60"
+    },
+    "features": [
+      {
+        "ability_type": "Signature Ability",
+        "distance": "Melee 1",
+        "effects": [
+          {
+            "roll": "Power Roll + 2",
+            "tier1": "7 poison damage",
+            "tier2": "11 poison damage",
+            "tier3": "14 poison damage; M < 2 [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)"
+          },
+          {
+            "cost": "2 Malice",
+            "effect": "For any tier outcome, if the target has M < 3, they are [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)."
+          }
+        ],
+        "feature_type": "ability",
+        "icon": "🗡",
+        "keywords": [
+          "Melee",
+          "Strike",
+          "Weapon"
+        ],
+        "name": "Bite",
+        "target": "One creature",
+        "type": "feature",
+        "usage": "Main action"
+      },
+      {
+        "distance": "Melee 1",
+        "effects": [
+          {
+            "roll": "Power Roll + 2",
+            "tier1": "6 damage",
+            "tier2": "9 damage",
+            "tier3": "12 damage"
+          }
+        ],
+        "feature_type": "ability",
+        "icon": "🗡",
+        "keywords": [
+          "Melee",
+          "Strike",
+          "Weapon"
+        ],
+        "name": "Leg Blade",
+        "target": "Two creatures or objects",
+        "type": "feature",
+        "usage": "Main action"
+      },
+      {
+        "cost": "5 Malice",
+        "distance": "Self",
+        "effects": [
+          {
+            "effect": "The spider [shifts](scc.v1:mcdm.heroes.v1/movement/shifting) up to their speed and uses Leg Blade against each creature who comes [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to them during the shift. The spider makes one power roll against all targets.",
+            "name": "Effect"
+          }
+        ],
+        "feature_type": "ability",
+        "icon": "👤",
+        "keywords": null,
+        "name": "Trample",
+        "target": "Self",
+        "type": "feature",
+        "usage": "Main action"
+      },
+      {
+        "distance": "3 cube within 1",
+        "effects": [
+          {
+            "roll": "Power Roll + 2",
+            "tier1": "A < 0 [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
+            "tier2": "A < 1 [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
+            "tier3": "A < 2 [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)"
+          },
+          {
+            "effect": "The area is [difficult terrain](scc.v1:mcdm.heroes.v1/movement/difficult-terrain) for enemies.",
+            "name": "Effect"
+          }
+        ],
+        "feature_type": "ability",
+        "icon": "🔳",
+        "keywords": [
+          "Area",
+          "Weapon"
+        ],
+        "name": "Web",
+        "target": "Each creature in the area",
+        "type": "feature",
+        "usage": "Maneuver"
+      },
+      {
+        "distance": "Self",
+        "effects": [
+          {
+            "effect": "The damage is halved, and the spider [shifts](scc.v1:mcdm.heroes.v1/movement/shifting) up to 2 squares after the triggering effect resolves.",
+            "name": "Effect"
+          }
+        ],
+        "feature_type": "ability",
+        "icon": "❗️",
+        "keywords": null,
+        "name": "Skitter",
+        "target": "Self",
+        "trigger": "The spider or any ally riding the spider takes damage.",
+        "type": "feature",
+        "usage": "Triggered action"
+      },
+      {
+        "effects": [
+          {
+            "effect": "Any ally who leaps off the back of the spider can jump up to 6 squares without making a test, and takes no damage if they fall during the jump. After any ally jumps, the first melee strike the make on the same turn gains an edge."
+          }
+        ],
+        "feature_type": "trait",
+        "icon": "⭐️",
+        "name": "Ride Launcher",
+        "type": "feature"
+      },
+      {
+        "effects": [
+          {
+            "effect": "While riding the spider, two size 1 allies can occupy the same space."
+          }
+        ],
+        "feature_type": "trait",
+        "icon": "⭐️",
+        "name": "Wide Back",
+        "type": "feature"
+      }
+    ]
+  },
+  {
+    "id": "mcdm.monsters.v1/monster.goblin.statblock/worg",
+    "kind": "statblock",
+    "name": "Worg",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/monster/goblin/statblock/worg.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/monster/goblin/statblock/worg.json",
+    "selection": "goblin-family",
+    "text": "---\nagility: 2\nev: \"3\"\nfree_strike: 1\nintuition: 0\nkeywords:\n    - Animal\n    - Goblin\nlevel: 1\nmight: 1\nname: Worg\norganization: Horde\npresence: -1\nreason: -1\nrole: Mount\nscc: mcdm.monsters.v1/monster.goblin.statblock/worg\nsize: 1L\nspeed: 5\nstability: 1\nstamina: \"15\"\ntype: statblock\n---\n\n|  Animal, Goblin   |         -         |      Level 1      |      Horde Mount      |         EV 3         |\n|:-----------------:|:-----------------:|:-----------------:|:---------------------:|:--------------------:|\n|  **1L**<br>Size   |  **5**<br>Speed   | **15**<br>Stamina |  **1**<br>Stability   | **1**<br>Free Strike |\n| **-**<br>Immunity | **-**<br>Movement |         -         | **-**<br>With Captain |  **-**<br>Weakness   |\n|  **+1**<br>Might  | **+2**<br>Agility | **-1**<br>Reason  |  **0**<br>Intuition   |  **-1**<br>Presence  |\n\n> 🗡 **Bite (Signature Ability)**\n>\n> | **Charge, Melee, Strike, Weapon** |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n> |-----------------------------------|------------------------------:|\n> | **📏 Melee 1**                    | **🎯 One creature or object** |\n>\n> **Power Roll + 2:**\n>\n> - **≤11:** 3 damage\n> - **12-16:** 4 damage\n> - **17+:** 5 damage\n\n> 👤 **Sprint (1 [Malice](scc.v1:mcdm.monsters.v1/rule.monster/malice))**\n>\n> | **-**       | **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n> |-------------|-------------:|\n> | **📏 Self** |  **🎯 Self** |\n>\n> **Effect:** The worg moves up to their speed.\n\n> ⭐️ **Mounted Charger**\n>\n> If a worg used as a mount charges, their rider gains an edge on melee strikes until the end of the rider's turn.\n\n> ⭐️ **Shared Craft**\n>\n> If the worg's rider has the Crafty trait, the worg also has that trait.\n",
+    "structured": {
+      "agility": 2,
+      "ev": "3",
+      "free_strike": 1,
+      "intuition": 0,
+      "keywords": [
+        "Animal",
+        "Goblin"
+      ],
+      "level": 1,
+      "might": 1,
+      "organization": "Horde",
+      "presence": -1,
+      "reason": -1,
+      "role": "Mount",
+      "size": "1L",
+      "speed": 5,
+      "stability": 1,
+      "stamina": "15"
+    },
+    "features": [
+      {
+        "ability_type": "Signature Ability",
+        "distance": "Melee 1",
+        "effects": [
+          {
+            "roll": "Power Roll + 2",
+            "tier1": "3 damage",
+            "tier2": "4 damage",
+            "tier3": "5 damage"
+          }
+        ],
+        "feature_type": "ability",
+        "icon": "🗡",
+        "keywords": [
+          "Charge",
+          "Melee",
+          "Strike",
+          "Weapon"
+        ],
+        "name": "Bite",
+        "target": "One creature or object",
+        "type": "feature",
+        "usage": "Main action"
+      },
+      {
+        "cost": "1 Malice",
+        "distance": "Self",
+        "effects": [
+          {
+            "effect": "The worg moves up to their speed.",
+            "name": "Effect"
+          }
+        ],
+        "feature_type": "ability",
+        "icon": "👤",
+        "keywords": null,
+        "name": "Sprint",
+        "target": "Self",
+        "type": "feature",
+        "usage": "Maneuver"
+      },
+      {
+        "effects": [
+          {
+            "effect": "If a worg used as a mount charges, their rider gains an edge on melee strikes until the end of the rider's turn."
+          }
+        ],
+        "feature_type": "trait",
+        "icon": "⭐️",
+        "name": "Mounted Charger",
+        "type": "feature"
+      },
+      {
+        "effects": [
+          {
+            "effect": "If the worg's rider has the Crafty trait, the worg also has that trait."
+          }
+        ],
+        "feature_type": "trait",
+        "icon": "⭐️",
+        "name": "Shared Craft",
         "type": "feature"
       }
     ]

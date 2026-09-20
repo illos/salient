@@ -2,8 +2,24 @@
 import { ConvexError } from 'convex/values';
 import type { Doc, Id } from '../_generated/dataModel';
 import type { ReadCtx } from './access';
+import { requireContent } from '../content';
 
+/** The v0.01 prototype's only stat block; still the default the legacy `foes.catalog` read names. */
 export const GOBLIN_WARRIOR_ID = 'mcdm.monsters.v1/monster.goblin.statblock/goblin-warrior';
+
+/** A seeded stat block by content id; other kinds of content are not loadable creatures. */
+export async function requireStatBlock(ctx: ReadCtx, contentId: string): Promise<Doc<'content'>> {
+  const entry = await requireContent(ctx, contentId);
+  if (entry.kind !== 'statblock')
+    throw new ConvexError(`${entry.name} is ${entry.kind} content, not a stat block.`);
+  return entry;
+}
+
+/** Printed organization ("Minion", "Horde", …) from the stat block frontmatter, or null. */
+export function organizationOf(entry: Pick<Doc<'content'>, 'structured'>): string | null {
+  const value: unknown = (entry.structured as Record<string, unknown> | null)?.organization;
+  return typeof value === 'string' && value ? value : null;
+}
 
 /** Keep the complete pinned source independent from the instance's changing play values. */
 export function snapshotOf(entry: Doc<'content'>): string {

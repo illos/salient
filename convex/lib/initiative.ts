@@ -28,12 +28,14 @@ import type { Side, TurnRef } from '../../shared/contracts/clock';
 import { dispatchBoundary } from './clock';
 import { committedEncounter } from './encounters';
 import { journalDelete, journalInsert, journalPatch, type JournalScope } from './journal';
+import { squadInBattle, squadParticipantIds } from './squads';
 
 export type Actor = Doc<'turnEntries'>['actor'];
 export type Group = Doc<'initiativeGroups'>;
 export type Entry = Doc<'turnEntries'>;
 
-export const sideOf = (actor: { kind: 'character' | 'foe' }): Side =>
+/** Heroes act on their side; foes and squads (V02) on the Director's. */
+export const sideOf = (actor: { kind: 'character' | 'foe' | 'squad' }): Side =>
   actor.kind === 'character' ? 'heroes' : 'director';
 export const otherSide = (side: Side): Side => (side === 'heroes' ? 'director' : 'heroes');
 export const actorKey = (actor: { kind: string; id: string }) => `${actor.kind}:${actor.id}`;
@@ -60,6 +62,11 @@ export async function loadInitiative(
   entries.sort((a, b) => a.order - b.order);
   const slain = new Set<string>();
   for (const entry of entries) {
+    if (entry.actor.kind === 'squad') {
+      // V02: a squad entry stays in the battle while a member lives or its captain stands.
+      if (!(await squadInBattle(ctx, entry.actor.id as Id<'squads'>))) slain.add(entry.actor.id);
+      continue;
+    }
     if (entry.actor.kind !== 'foe') continue;
     const foe = await ctx.db.get(entry.actor.id as Id<'foes'>);
     // Ordinary foe at 0 or lower is Slain (R03 label); a removed foe has no row and is not pending.
@@ -128,14 +135,18 @@ export async function createEntry(
   });
 }
 
-function turnRef(turn: Doc<'turns'>): TurnRef {
+/** V02: a squad's shared turn lists its living members and captain as participants; global work fires once. */
+async function turnRef(ctx: MutationCtx, turn: Doc<'turns'>): Promise<TurnRef> {
   return {
     turnId: turn._id,
     turnEntryId: turn.turnEntryId,
     groupId: turn.groupId,
     side: turn.side,
     creatureId: turn.actor.id,
-    participantIds: [turn.actor.id],
+    participantIds:
+      turn.actor.kind === 'squad'
+        ? await squadParticipantIds(ctx, turn.actor.id as Id<'squads'>)
+        : [turn.actor.id],
   };
 }
 
@@ -224,11 +235,16 @@ export async function startTurn(
     activeSide: encounter.activeGroupId ? encounter.activeSide : side,
   });
   const turn = (await ctx.db.get(turnId))!;
+  // V02: a fresh shared turn starts with every living member participating.
+  if (entry.actor.kind === 'squad')
+    await journalPatch(ctx, scope, 'squads', entry.actor.id as Id<'squads'>, {
+      participation: { turnId, optedOut: [], individual: [] },
+    });
   await dispatchBoundary(
     ctx,
     scope,
     encounterId,
-    { kind: 'turn-start', round, turn: turnRef(turn) },
+    { kind: 'turn-start', round, turn: await turnRef(ctx, turn) },
     entry.actor.name,
   );
   return { turnId, warnings };
@@ -246,7 +262,7 @@ export async function endTurn(
     ctx,
     scope,
     turn.encounterId,
-    { kind: 'turn-end', round: turn.round, turn: turnRef(turn) },
+    { kind: 'turn-end', round: turn.round, turn: await turnRef(ctx, turn) },
     turn.actor.name,
   );
   await journalPatch(ctx, scope, 'turns', turnId, { status: 'ended', endedEventId: scope.eventId });
@@ -372,7 +388,7 @@ export async function onFoeRemoved(
         ctx,
         scope,
         encounter._id,
-        { kind: 'turn-end', round: turn.round, turn: turnRef(turn) },
+        { kind: 'turn-end', round: turn.round, turn: await turnRef(ctx, turn) },
         turn.actor.name,
       );
       await journalPatch(ctx, scope, 'turns', turn._id, {
@@ -428,4 +444,122 @@ export async function moveEntry(
   });
   await settle(ctx, scope, encounter._id);
   return { groupId, created };
+}
+
+// ---------------------------------------------------------------------------------------------
+// V02 squad hooks (docs/table-spec.md#minion-squads-and-captain-state: one squad entry per
+// addition with a shared turn; the captain takes its turn at the same time as the squad).
+
+/** A squad added during committed combat joins in a new bottom group with a turn this round. */
+export async function onSquadAdded(
+  ctx: MutationCtx,
+  scope: JournalScope,
+  campaign: Doc<'campaigns'>,
+  squad: { id: Id<'squads'>; name: string },
+): Promise<void> {
+  const encounter = await committedEncounter(ctx, campaign);
+  if (!encounter || !encounter.phase) return;
+  const groupId = await createGroup(ctx, scope, encounter, 'director');
+  await createEntry(ctx, scope, encounter, groupId, {
+    kind: 'squad',
+    id: squad.id,
+    name: squad.name,
+  });
+}
+
+/** Removing a whole squad: its shared turn finishes first, then its entries leave initiative. */
+export async function onSquadRemoved(
+  ctx: MutationCtx,
+  scope: JournalScope,
+  campaign: Doc<'campaigns'>,
+  squadId: Id<'squads'>,
+): Promise<void> {
+  const encounter = await committedEncounter(ctx, campaign);
+  if (!encounter || !encounter.phase) return;
+  if (encounter.activeTurnId) {
+    const turn = await ctx.db.get(encounter.activeTurnId);
+    if (turn && turn.actor.kind === 'squad' && turn.actor.id === squadId) {
+      await dispatchBoundary(
+        ctx,
+        scope,
+        encounter._id,
+        { kind: 'turn-end', round: turn.round, turn: await turnRef(ctx, turn) },
+        turn.actor.name,
+      );
+      await journalPatch(ctx, scope, 'turns', turn._id, {
+        status: 'ended',
+        endedEventId: scope.eventId,
+      });
+      await journalPatch(ctx, scope, 'encounters', encounter._id, { activeTurnId: null });
+    }
+  }
+  const entries = await ctx.db
+    .query('turnEntries')
+    .withIndex('by_encounter', q => q.eq('encounterId', encounter._id))
+    .take(1000);
+  for (const entry of entries)
+    if (entry.actor.kind === 'squad' && entry.actor.id === squadId)
+      await journalDelete(ctx, scope, 'turnEntries', entry._id);
+  await settle(ctx, scope, encounter._id);
+}
+
+/**
+ * A captain attached during committed combat folds its own turn into the squad's shared turn:
+ * its separate entries leave initiative. Returns a warning when the two had different spent state.
+ */
+export async function onCaptainAttached(
+  ctx: MutationCtx,
+  scope: JournalScope,
+  campaign: Doc<'campaigns'>,
+  captainId: Id<'foes'>,
+  squadId: Id<'squads'>,
+): Promise<string[]> {
+  const encounter = await committedEncounter(ctx, campaign);
+  if (!encounter || !encounter.phase) return [];
+  const round = encounter.round ?? 0;
+  const entries = await ctx.db
+    .query('turnEntries')
+    .withIndex('by_encounter', q => q.eq('encounterId', encounter._id))
+    .take(1000);
+  const warnings: string[] = [];
+  const squadEntry = entries.find(e => e.actor.kind === 'squad' && e.actor.id === squadId);
+  for (const entry of entries)
+    if (entry.actor.kind === 'foe' && entry.actor.id === captainId) {
+      if (squadEntry && (entry.spentRound === round) !== (squadEntry.spentRound === round))
+        warnings.push(
+          `Rule warning: ${entry.actor.name} ${entry.spentRound === round ? 'has already acted' : 'has not acted'} this round while the squad ${squadEntry.spentRound === round ? 'has' : 'has not'}; the captain now shares the squad's turn (rule/monster/captain.md).`,
+        );
+      await journalDelete(ctx, scope, 'turnEntries', entry._id);
+    }
+  await settle(ctx, scope, encounter._id);
+  return warnings;
+}
+
+/**
+ * A living captain detached during committed combat gets its own turn entry back in a new bottom
+ * group, spent this round if the squad's entry already was.
+ */
+export async function onCaptainDetached(
+  ctx: MutationCtx,
+  scope: JournalScope,
+  campaign: Doc<'campaigns'>,
+  captain: { id: Id<'foes'>; name: string },
+  squadId: Id<'squads'>,
+): Promise<void> {
+  const encounter = await committedEncounter(ctx, campaign);
+  if (!encounter || !encounter.phase) return;
+  const entries = await ctx.db
+    .query('turnEntries')
+    .withIndex('by_encounter', q => q.eq('encounterId', encounter._id))
+    .take(1000);
+  if (entries.some(e => e.actor.kind === 'foe' && e.actor.id === captain.id)) return;
+  const squadEntry = entries.find(e => e.actor.kind === 'squad' && e.actor.id === squadId);
+  const groupId = await createGroup(ctx, scope, encounter, 'director');
+  const entryId = await createEntry(ctx, scope, encounter, groupId, {
+    kind: 'foe',
+    id: captain.id,
+    name: captain.name,
+  });
+  if (squadEntry?.spentRound !== null && squadEntry?.spentRound !== undefined)
+    await journalPatch(ctx, scope, 'turnEntries', entryId, { spentRound: squadEntry.spentRound });
 }

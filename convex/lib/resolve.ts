@@ -38,6 +38,7 @@ import { manifest } from '../../shared/content/compendium/index';
 import { parseTierText, plainText } from '../../shared/resolve/index';
 import { findContent, requireContent } from '../content';
 import { journalPatch, type JournalScope } from './journal';
+import { recordCaptainLoss, squadOfCaptain } from './squads';
 import { baselineOf, requireHeroLive, type HeroLive } from './characterBuild';
 import {
   compileLiveEntry,
@@ -56,6 +57,11 @@ export const DEFEND_ID = 'mcdm.heroes.v1/feature.common.main-actions/defend';
 export const AID_ATTACK_ID = 'mcdm.heroes.v1/feature.common.maneuvers/aid-attack';
 export const RECOVERIES_RULE_ID = 'mcdm.heroes.v1/rule.health/recoveries';
 export const CREATURE_FREE_STRIKE_RULE_ID = 'mcdm.monsters.v1/rule.monster/creature-free-strike';
+/** Common maneuvers every creature has; V02 minion squads use them together (Minion Maneuvers). */
+export const GRAB_ID = 'mcdm.heroes.v1/feature.ability.common/grab';
+export const KNOCKBACK_ID = 'mcdm.heroes.v1/feature.ability.common/knockback';
+export const HIDE_ID = 'mcdm.heroes.v1/feature.common.maneuvers/hide';
+export const SEARCH_ID = 'mcdm.heroes.v1/feature.common.maneuvers/search-for-hidden-creatures';
 
 export type TargetShape =
   | { kind: 'self' }
@@ -427,6 +433,32 @@ async function commonActions(ctx: ReadCtx, actor: BoundActor, foe?: Doc<'foes'>)
         freeStrikeValue: value,
       });
   }
+  if (actor.kind === 'foe') {
+    // Grab and Knockback roll Might; Hide and Search are recorded with their text (V02 adds them
+    // for foes so squads can use them together; their single-creature use is the ordinary path).
+    for (const id of [GRAB_ID, KNOCKBACK_ID]) {
+      const entry = await findContent(ctx, id);
+      if (entry) out.push(abilityFromEntry(entry));
+    }
+    for (const id of [HIDE_ID, SEARCH_ID]) {
+      const entry = await findContent(ctx, id);
+      if (entry)
+        out.push({
+          abilityId: entry.contentId,
+          name: entry.name,
+          kind: 'recorded',
+          contentId: entry.contentId,
+          source: sourceOf(entry),
+          text: entry.text,
+          usage: 'Maneuver',
+          actionType: 'maneuver',
+          distance: '',
+          target: 'Self',
+          keywords: [],
+          targetShape: { kind: 'self' },
+        });
+    }
+  }
   const catchBreath = await findContent(ctx, CATCH_BREATH_ID);
   if (catchBreath)
     out.push({
@@ -642,6 +674,8 @@ export interface TargetRecord {
   actor: BoundActor;
   character?: Doc<'characters'>;
   foe?: Doc<'foes'>;
+  /** V02: present when the foe is a squad member; damage then belongs to the squad pool. */
+  squad?: Doc<'squads'>;
 }
 
 /** Section 6 inputs, or the reason damage cannot be applied to this creature yet. */
@@ -655,6 +689,20 @@ export function damageTargetFacts(
     if (immunity.unparsed || weakness.unparsed)
       return {
         missing: `${record.foe.name}'s printed ${[immunity.unparsed, weakness.unparsed].filter(Boolean).join(' and ')} is not read by the app; damage is left for manual application.`,
+      };
+    // V02: a squad member's health is its squad pool; minions cannot hold temporary Stamina
+    // (chapter/monster-basics.md, Shared Low Stamina). Casualties come from the ladder, not here.
+    if (record.squad)
+      return {
+        facts: {
+          targetId: record.foe._id,
+          kind: 'foe',
+          stamina: record.squad.pool,
+          maxStamina: record.squad.poolMax,
+          temporaryStamina: 0,
+          immunities: immunity.entries,
+          weaknesses: weakness.entries,
+        },
       };
     return {
       facts: {
@@ -701,6 +749,8 @@ export async function writeDamage(
   target: TargetRecord,
   application: Pick<DamageApplication, 'staminaAfter' | 'temporaryStaminaAfter'>,
 ): Promise<void> {
+  // V02: squad members take damage through their squad's pool (convex/lib/squads.ts commits it).
+  if (target.squad) return;
   if (target.foe) {
     const current = (await ctx.db.get(target.foe._id))!;
     await journalPatch(ctx, scope, 'foes', current._id, {
@@ -710,6 +760,12 @@ export async function writeDamage(
         temporaryStamina: application.temporaryStaminaAfter,
       },
     });
+    // V02: a captain at 0 Stamina or lower is lost to its squad (benefit reverts, no casualties
+    // unless the pool reaches zero); recorded as a linked consequence of this damage.
+    if (application.staminaAfter <= 0 && current.live.stamina > 0) {
+      const squad = await squadOfCaptain(ctx, current._id);
+      if (squad) await recordCaptainLoss(ctx, scope, squad, 'slain');
+    }
     return;
   }
   const character = (await ctx.db.get(target.character!._id))!;

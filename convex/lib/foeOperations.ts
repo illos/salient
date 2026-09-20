@@ -3,13 +3,14 @@
 // Spec: docs/table-spec.md#confirmed-action-and-log-contract and #foes-roster.
 import { ConvexError, v } from 'convex/values';
 import type { OperationDefinition } from './registry';
-import { requireContent } from '../content';
 import { journalDelete, journalInsert } from './journal';
 import { onFoeAdded, onFoeRemoved } from './initiative';
+import { recordCaptainLoss, squadOfCaptain } from './squads';
 import {
-  GOBLIN_WARRIOR_ID,
+  organizationOf,
   printedStamina,
   requireNotPaused,
+  requireStatBlock,
   scopedFoe,
   settings,
   snapshotOf,
@@ -21,17 +22,24 @@ const add: OperationDefinition = {
   verb: 'add',
   title: 'Add foe',
   description:
-    'Load a foe from the catalog. Every loaded foe is visible; only the Director sees its full stat block.',
+    'Load an ordinary foe from any seeded stat block (Minion stat blocks are added as squads with /squad add). Every loaded foe is visible; only the Director sees its full stat block.',
   args: { definition: v.string() },
-  argDescriptions: { definition: 'The catalog definition id.' },
+  argDescriptions: {
+    definition:
+      'The stat block content id, e.g. mcdm.monsters.v1/monster.goblin.statblock/goblin-warrior.',
+  },
   roles: ['director'],
   session: 'unpaused',
   actor: 'none',
   execute: async (ctx, { context, args }) => {
     await requireNotPaused(ctx, context.campaign);
-    if (args.definition !== GOBLIN_WARRIOR_ID)
-      throw new ConvexError('This foe definition is not available in the prototype.');
-    const entry = await requireContent(ctx, GOBLIN_WARRIOR_ID);
+    // V02: any seeded stat block loads as an ordinary foe; Minion stat blocks form squads instead
+    // (docs/table-spec.md#minion-squads-and-captain-state: one squad entry per addition).
+    const entry = await requireStatBlock(ctx, String(args.definition));
+    if (organizationOf(entry) === 'Minion')
+      throw new ConvexError(
+        `${entry.name} is a Minion stat block: add it as a squad with /squad add definition="${entry.contentId}" count=4.`,
+      );
     const maxStamina = printedStamina(entry);
     const existing = await ctx.db
       .query('foes')
@@ -78,11 +86,20 @@ const remove: OperationDefinition = {
     const id = ctx.db.normalizeId('foes', actor.id);
     if (!id) throw new ConvexError('Foe unavailable.');
     const foe = await scopedFoe(ctx, context.campaign._id, id);
+    if (foe.squadId) {
+      const squad = await ctx.db.get(foe.squadId);
+      throw new ConvexError(
+        `${foe.name} is a minion of ${squad?.name ?? 'a squad'}: remove the whole squad with @{squad:${foe.squadId}} /squad remove, or let damage take it (2026-09-20).`,
+      );
+    }
+    const captained = await squadOfCaptain(ctx, foe._id);
     return {
       kind: 'foe-removed',
-      description: `${foe.name} removed from the foes roster.`,
-      data: { foeId: foe._id },
+      description: `${foe.name} removed from the foes roster${captained ? `; ${captained.name} loses its captain` : ''}.`,
+      data: { foeId: foe._id, captainOf: captained?._id ?? null },
       commit: async (writer, scope) => {
+        // V02: a removed captain is lost to its squad (benefit reverts; the minions keep acting).
+        if (captained) await recordCaptainLoss(writer, scope, captained, 'removed');
         // A04: an acting monster's turn finishes first; its entries leave initiative
         // (docs/table-spec.md#mid-combat-additions-and-regrouping, confirmed current-monster removal).
         await onFoeRemoved(writer, scope, context.campaign, foe._id);

@@ -279,6 +279,10 @@ export function resolveTarget(
         damage.buildBonuses = bonuses;
         damage.rolledDamage += bonuses.reduce((sum, bonus) => sum + bonus.amount, 0);
       }
+      if (inputs.extraDamage?.length) {
+        damage.extraDamage = inputs.extraDamage;
+        damage.rolledDamage += inputs.extraDamage.reduce((sum, bonus) => sum + bonus.amount, 0);
+      }
     }
     if (!damage) unresolvedClauses.unshift(plainText(tierText.text.split(';')[0]!));
   }

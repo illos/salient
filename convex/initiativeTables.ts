@@ -16,7 +16,8 @@ import { v } from 'convex/values';
 
 export const side = v.union(v.literal('heroes'), v.literal('director'));
 export const actorRef = v.object({
-  kind: v.union(v.literal('character'), v.literal('foe')),
+  /** `squad` (V02): a minion squad's shared turn entry; its members and captain are foes. */
+  kind: v.union(v.literal('character'), v.literal('foe'), v.literal('squad')),
   id: v.string(),
   name: v.string(),
 });

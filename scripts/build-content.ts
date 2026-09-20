@@ -56,12 +56,27 @@ export const SELECTIONS: ManifestSelection[] = [
       'docs/build/V37-supporting-character-choices.md: full source for supporting character choices; ancestry/class availability remains separately restricted.',
   },
   {
-    id: 'goblin-warrior',
+    id: 'goblin-family',
     description:
-      'Goblin Warrior stat block, with the goblin group Malice features the stat block directory holds.',
-    paths: ['monster/goblin/statblock/goblin-warrior.md', 'monster/goblin/goblin-malice.md'],
+      'Every goblin stat block (ordinary goblins and the Spinecleaver/Sniper/Runner minions V02 squads use), with the goblin group Malice features the directory holds.',
+    paths: ['monster/goblin'],
     basis:
-      'docs/monster-catalog-spec.md#features-and-supporting-rules: group Malice must be discoverable alongside the stat block.',
+      'docs/build/V02-minions-and-captains.md#inputs-and-dependencies: minion stat blocks come from the S01 pipeline; docs/monster-catalog-spec.md#features-and-supporting-rules: group Malice must be discoverable alongside the stat block.',
+  },
+  {
+    id: 'dwarf-family',
+    description:
+      'Every dwarf stat block and the dwarf Malice features: the Axethrower is the table spec’s worked example of a captain Stamina benefit, which V02 proves on real data.',
+    paths: ['monster/dwarf'],
+    basis:
+      'docs/table-spec.md#minion-squads-and-captain-state: the 2026-09-20 worked example uses four Dwarf Axethrowers (Stamina 7, +2 with captain).',
+  },
+  {
+    id: 'squad-rules',
+    description:
+      'The minion organization, squad and captain rule pages that V02 squad operations cite as supporting sources in the game log.',
+    paths: ['rule/organization/minion.md', 'rule/monster/squad.md', 'rule/monster/captain.md'],
+    basis: 'docs/table-spec.md#minion-squads-and-captain-state',
   },
   {
     id: 'devil-ancestry',

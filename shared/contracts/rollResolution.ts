@@ -43,6 +43,12 @@ export interface TargetRollInputs {
   banes: number;
   /** Labeled numeric bonuses/penalties, added before edges and banes; penalties negative. */
   bonuses?: LabeledBonus[];
+  /**
+   * Flat damage added to this target's rolled damage after the tier is known (V02: each additional
+   * squad minion adds its free strike value; an attached captain's printed strike damage bonus).
+   * Recorded on the breakdown; never changes the tier.
+   */
+  extraDamage?: LabeledBonus[];
 }
 
 export interface LabeledBonus {
@@ -170,6 +176,8 @@ export interface DamageBreakdown {
   kitBonus: number;
   /** Applied separately from kit bonuses; source tier text remains unchanged. */
   buildBonuses?: LabeledBonus[];
+  /** Per-target flat additions supplied by the caller (V02 squad contributors, captain benefit). */
+  extraDamage?: LabeledBonus[];
   rolledDamage: number;
   damageType?: string;
   /** Negative rolled damage is recorded, never applied as healing. */

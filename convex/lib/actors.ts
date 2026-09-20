@@ -45,9 +45,18 @@ export async function bindActor(
       const foe = id ? await ctx.db.get(id) : null;
       if (foe && foe.campaignId === context.campaign._id)
         candidates.push({ actor: { kind: 'foe', id: foe._id, name: foe.name }, ownerId: null });
+    } else if (reference.refKind === 'squad') {
+      // V02: the squad is the shared turn's actor; its members and captain remain the targets.
+      const id = ctx.db.normalizeId('squads', reference.id);
+      const squad = id ? await ctx.db.get(id) : null;
+      if (squad && squad.campaignId === context.campaign._id)
+        candidates.push({
+          actor: { kind: 'squad', id: squad._id, name: squad.name },
+          ownerId: null,
+        });
     } else
       throw new ConvexError(
-        `Unknown actor reference kind "${reference.refKind}"; use @{character:id} or @{foe:id}.`,
+        `Unknown actor reference kind "${reference.refKind}"; use @{character:id}, @{foe:id} or @{squad:id}.`,
       );
     if (!candidates.length) throw new ConvexError('That actor is not at this table.');
   } else {
@@ -68,11 +77,21 @@ export async function bindActor(
     for (const foe of foes)
       if (foe.name === reference.name)
         candidates.push({ actor: { kind: 'foe', id: foe._id, name: foe.name }, ownerId: null });
+    const squads = await ctx.db
+      .query('squads')
+      .withIndex('by_campaign', q => q.eq('campaignId', context.campaign._id))
+      .take(200);
+    for (const squad of squads)
+      if (squad.name === reference.name)
+        candidates.push({
+          actor: { kind: 'squad', id: squad._id, name: squad.name },
+          ownerId: null,
+        });
     if (!candidates.length)
       throw new ConvexError(`No character or foe named "${reference.name}" is at this table.`);
     if (candidates.length > 1)
       throw new ConvexError(
-        `Several actors are named "${reference.name}"; choose one with @{character:id} or @{foe:id}.`,
+        `Several actors are named "${reference.name}"; choose one with @{character:id}, @{foe:id} or @{squad:id}.`,
       );
   }
   const [candidate] = candidates;

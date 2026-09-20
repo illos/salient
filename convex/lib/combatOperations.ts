@@ -82,9 +82,19 @@ export async function effectiveDraft(
     .query('foes')
     .withIndex('by_campaign', q => q.eq('campaignId', campaignId))
     .take(200);
+  // V02: a squad is one participant with a shared turn; its minions and attached captain are not
+  // listed separately (docs/table-spec.md#minion-squads-and-captain-state).
+  const squads = await ctx.db
+    .query('squads')
+    .withIndex('by_campaign', q => q.eq('campaignId', campaignId))
+    .take(200);
+  const captains = new Set(squads.map(s => s.captainId).filter(Boolean) as string[]);
   const actors: Actor[] = [
     ...characters.map(c => ({ kind: 'character' as const, id: c._id, name: c.authored.name })),
-    ...foes.map(f => ({ kind: 'foe' as const, id: f._id, name: f.name })),
+    ...foes
+      .filter(f => !f.squadId && !captains.has(f._id))
+      .map(f => ({ kind: 'foe' as const, id: f._id, name: f.name })),
+    ...squads.map(s => ({ kind: 'squad' as const, id: s._id, name: s.name })),
   ];
   return actors.map(actor => {
     const key = actorKey(actor);
@@ -384,6 +394,17 @@ const combatCommit: OperationDefinition = {
           const { _id, _creationTime, ...rest } = foe;
           void _creationTime;
           (state.foes as Record<string, unknown>)[_id] = rest;
+        }
+        // V02: squads restore with their members (pool, step, carried damage, captain, participation).
+        const allSquads = await mctx.db
+          .query('squads')
+          .withIndex('by_campaign', q => q.eq('campaignId', context.campaign._id))
+          .take(200);
+        state.squads = {};
+        for (const squad of allSquads) {
+          const { _id, _creationTime, ...rest } = squad;
+          void _creationTime;
+          (state.squads as Record<string, unknown>)[_id] = rest;
         }
         (state.campaign as Record<string, unknown>).malice = context.campaign.malice ?? 0;
         const snapshotId = await mctx.db.insert('snapshots', {

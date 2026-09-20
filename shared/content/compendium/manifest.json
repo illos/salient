@@ -11,8 +11,8 @@
     "version": "1.0.3"
   },
   "generatedAt": "2026-09-08",
-  "contentHash": "sha256:aaf7c027a421e6059448e019271111877f208b577b756f5e79645c3d497ed26e",
-  "entryCount": 567,
+  "contentHash": "sha256:65beca9bf41771ceee44fe4b706d570ba94fc5aa32556bba98ca47c01e30e41f",
+  "entryCount": 595,
   "selections": [
     {
       "id": "supporting-character-choices",
@@ -24,13 +24,30 @@
       "basis": "docs/build/V37-supporting-character-choices.md: full source for supporting character choices; ancestry/class availability remains separately restricted."
     },
     {
-      "id": "goblin-warrior",
-      "description": "Goblin Warrior stat block, with the goblin group Malice features the stat block directory holds.",
+      "id": "goblin-family",
+      "description": "Every goblin stat block (ordinary goblins and the Spinecleaver/Sniper/Runner minions V02 squads use), with the goblin group Malice features the directory holds.",
       "paths": [
-        "monster/goblin/statblock/goblin-warrior.md",
-        "monster/goblin/goblin-malice.md"
+        "monster/goblin"
       ],
-      "basis": "docs/monster-catalog-spec.md#features-and-supporting-rules: group Malice must be discoverable alongside the stat block."
+      "basis": "docs/build/V02-minions-and-captains.md#inputs-and-dependencies: minion stat blocks come from the S01 pipeline; docs/monster-catalog-spec.md#features-and-supporting-rules: group Malice must be discoverable alongside the stat block."
+    },
+    {
+      "id": "dwarf-family",
+      "description": "Every dwarf stat block and the dwarf Malice features: the Axethrower is the table spec’s worked example of a captain Stamina benefit, which V02 proves on real data.",
+      "paths": [
+        "monster/dwarf"
+      ],
+      "basis": "docs/table-spec.md#minion-squads-and-captain-state: the 2026-09-20 worked example uses four Dwarf Axethrowers (Stamina 7, +2 with captain)."
+    },
+    {
+      "id": "squad-rules",
+      "description": "The minion organization, squad and captain rule pages that V02 squad operations cite as supporting sources in the game log.",
+      "paths": [
+        "rule/organization/minion.md",
+        "rule/monster/squad.md",
+        "rule/monster/captain.md"
+      ],
+      "basis": "docs/table-spec.md#minion-squads-and-captain-state"
     },
     {
       "id": "devil-ancestry",
@@ -2670,11 +2687,19 @@
       "file": "feature.json"
     },
     {
+      "id": "mcdm.monsters.v1/monster.dwarf/dwarf-malice",
+      "kind": "featureblock",
+      "name": "Dwarf Malice",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/monster/dwarf/dwarf-malice.md",
+      "selection": "dwarf-family",
+      "file": "featureblock.json"
+    },
+    {
       "id": "mcdm.monsters.v1/monster.goblin/goblin-malice",
       "kind": "featureblock",
       "name": "Goblin Malice",
       "sourcePath": "vendor/steel-compendium/en/unified/md/monster/goblin/goblin-malice.md",
-      "selection": "goblin-warrior",
+      "selection": "goblin-family",
       "file": "featureblock.json"
     },
     {
@@ -3494,6 +3519,14 @@
       "file": "rule.json"
     },
     {
+      "id": "mcdm.monsters.v1/rule.monster/captain",
+      "kind": "rule",
+      "name": "Attached Squad Captain",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/rule/monster/captain.md",
+      "selection": "squad-rules",
+      "file": "rule.json"
+    },
+    {
       "id": "mcdm.monsters.v1/rule.monster/creature-free-strike",
       "kind": "rule",
       "name": "Creature Free Strikes",
@@ -3515,6 +3548,22 @@
       "name": "Malice",
       "sourcePath": "vendor/steel-compendium/en/unified/md/rule/monster/malice.md",
       "selection": "rules-r04-r05",
+      "file": "rule.json"
+    },
+    {
+      "id": "mcdm.monsters.v1/rule.monster/squad",
+      "kind": "rule",
+      "name": "Organized as Squads",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/rule/monster/squad.md",
+      "selection": "squad-rules",
+      "file": "rule.json"
+    },
+    {
+      "id": "mcdm.monsters.v1/rule.organization/minion",
+      "kind": "rule",
+      "name": "Minion",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/rule/organization/minion.md",
+      "selection": "squad-rules",
       "file": "rule.json"
     },
     {
@@ -4014,11 +4063,203 @@
       "file": "skill-group.json"
     },
     {
+      "id": "mcdm.monsters.v1/monster.dwarf.statblock/dwarf-axethrower",
+      "kind": "statblock",
+      "name": "Dwarf Axethrower",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/monster/dwarf/statblock/dwarf-axethrower.md",
+      "selection": "dwarf-family",
+      "file": "statblock.json"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.dwarf.statblock/dwarf-catchpole",
+      "kind": "statblock",
+      "name": "Dwarf Catchpole",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/monster/dwarf/statblock/dwarf-catchpole.md",
+      "selection": "dwarf-family",
+      "file": "statblock.json"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.dwarf.statblock/dwarf-driver",
+      "kind": "statblock",
+      "name": "Dwarf Driver",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/monster/dwarf/statblock/dwarf-driver.md",
+      "selection": "dwarf-family",
+      "file": "statblock.json"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.dwarf.statblock/dwarf-gunner",
+      "kind": "statblock",
+      "name": "Dwarf Gunner",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/monster/dwarf/statblock/dwarf-gunner.md",
+      "selection": "dwarf-family",
+      "file": "statblock.json"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.dwarf.statblock/dwarf-hunter",
+      "kind": "statblock",
+      "name": "Dwarf Hunter",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/monster/dwarf/statblock/dwarf-hunter.md",
+      "selection": "dwarf-family",
+      "file": "statblock.json"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.dwarf.statblock/dwarf-launcher",
+      "kind": "statblock",
+      "name": "Dwarf Launcher",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/monster/dwarf/statblock/dwarf-launcher.md",
+      "selection": "dwarf-family",
+      "file": "statblock.json"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.dwarf.statblock/dwarf-marauder",
+      "kind": "statblock",
+      "name": "Dwarf Marauder",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/monster/dwarf/statblock/dwarf-marauder.md",
+      "selection": "dwarf-family",
+      "file": "statblock.json"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.dwarf.statblock/dwarf-reel-winch",
+      "kind": "statblock",
+      "name": "Dwarf Reel Winch",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/monster/dwarf/statblock/dwarf-reel-winch.md",
+      "selection": "dwarf-family",
+      "file": "statblock.json"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.dwarf.statblock/dwarf-shieldwall",
+      "kind": "statblock",
+      "name": "Dwarf Shieldwall",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/monster/dwarf/statblock/dwarf-shieldwall.md",
+      "selection": "dwarf-family",
+      "file": "statblock.json"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.dwarf.statblock/dwarf-stone-whisperer",
+      "kind": "statblock",
+      "name": "Dwarf Stone Whisperer",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/monster/dwarf/statblock/dwarf-stone-whisperer.md",
+      "selection": "dwarf-family",
+      "file": "statblock.json"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.dwarf.statblock/dwarf-trapper",
+      "kind": "statblock",
+      "name": "Dwarf Trapper",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/monster/dwarf/statblock/dwarf-trapper.md",
+      "selection": "dwarf-family",
+      "file": "statblock.json"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.dwarf.statblock/dwarf-warden",
+      "kind": "statblock",
+      "name": "Dwarf Warden",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/monster/dwarf/statblock/dwarf-warden.md",
+      "selection": "dwarf-family",
+      "file": "statblock.json"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.dwarf.statblock/servitor-war-walker",
+      "kind": "statblock",
+      "name": "Servitor War Walker",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/monster/dwarf/statblock/servitor-war-walker.md",
+      "selection": "dwarf-family",
+      "file": "statblock.json"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.goblin.statblock/goblin-assassin",
+      "kind": "statblock",
+      "name": "Goblin Assassin",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/monster/goblin/statblock/goblin-assassin.md",
+      "selection": "goblin-family",
+      "file": "statblock.json"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.goblin.statblock/goblin-cursespitter",
+      "kind": "statblock",
+      "name": "Goblin Cursespitter",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/monster/goblin/statblock/goblin-cursespitter.md",
+      "selection": "goblin-family",
+      "file": "statblock.json"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.goblin.statblock/goblin-monarch",
+      "kind": "statblock",
+      "name": "Goblin Monarch",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/monster/goblin/statblock/goblin-monarch.md",
+      "selection": "goblin-family",
+      "file": "statblock.json"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.goblin.statblock/goblin-runner",
+      "kind": "statblock",
+      "name": "Goblin Runner",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/monster/goblin/statblock/goblin-runner.md",
+      "selection": "goblin-family",
+      "file": "statblock.json"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.goblin.statblock/goblin-sniper",
+      "kind": "statblock",
+      "name": "Goblin Sniper",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/monster/goblin/statblock/goblin-sniper.md",
+      "selection": "goblin-family",
+      "file": "statblock.json"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.goblin.statblock/goblin-spinecleaver",
+      "kind": "statblock",
+      "name": "Goblin Spinecleaver",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/monster/goblin/statblock/goblin-spinecleaver.md",
+      "selection": "goblin-family",
+      "file": "statblock.json"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.goblin.statblock/goblin-stinker",
+      "kind": "statblock",
+      "name": "Goblin Stinker",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/monster/goblin/statblock/goblin-stinker.md",
+      "selection": "goblin-family",
+      "file": "statblock.json"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.goblin.statblock/goblin-underboss",
+      "kind": "statblock",
+      "name": "Goblin Underboss",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/monster/goblin/statblock/goblin-underboss.md",
+      "selection": "goblin-family",
+      "file": "statblock.json"
+    },
+    {
       "id": "mcdm.monsters.v1/monster.goblin.statblock/goblin-warrior",
       "kind": "statblock",
       "name": "Goblin Warrior",
       "sourcePath": "vendor/steel-compendium/en/unified/md/monster/goblin/statblock/goblin-warrior.md",
-      "selection": "goblin-warrior",
+      "selection": "goblin-family",
+      "file": "statblock.json"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.goblin.statblock/skitterling",
+      "kind": "statblock",
+      "name": "Skitterling",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/monster/goblin/statblock/skitterling.md",
+      "selection": "goblin-family",
+      "file": "statblock.json"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.goblin.statblock/war-spider",
+      "kind": "statblock",
+      "name": "War Spider",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/monster/goblin/statblock/war-spider.md",
+      "selection": "goblin-family",
+      "file": "statblock.json"
+    },
+    {
+      "id": "mcdm.monsters.v1/monster.goblin.statblock/worg",
+      "kind": "statblock",
+      "name": "Worg",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/monster/goblin/statblock/worg.md",
+      "selection": "goblin-family",
       "file": "statblock.json"
     },
     {

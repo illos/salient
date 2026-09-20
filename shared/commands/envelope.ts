@@ -49,9 +49,9 @@ export interface RecordedEnvelope extends CommandEnvelope {
   boundActor: BoundActor | null;
 }
 
-/** A live actor the envelope's `@Character` reference resolved to. */
+/** A live actor the envelope's `@Character` reference resolved to. `squad` (V02) is a minion squad's shared turn owner, never a target. */
 export interface BoundActor {
-  kind: 'character' | 'foe';
+  kind: 'character' | 'foe' | 'squad';
   id: string;
   name: string;
 }

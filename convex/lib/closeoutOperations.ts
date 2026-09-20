@@ -12,6 +12,7 @@ import { currentEncounter } from './encounters';
 import { appendEvent } from './events';
 import { dispatchBoundary } from './clock';
 import { journalDelete, journalInsert, journalPatch, type JournalScope } from './journal';
+import { squadMembers } from './squads';
 
 const SOURCE_ROOT = 'vendor/steel-compendium/en/unified/md/rule/';
 export type VoidMode = 'keep' | 'reset';
@@ -139,6 +140,8 @@ async function archive(
 type StartSnapshot = {
   characters: Record<string, Pick<Doc<'characters'>, 'liveState' | 'combatLocked'>>;
   foes: Record<string, Omit<Doc<'foes'>, '_id' | '_creationTime'>>;
+  /** V02; absent in snapshots taken before squads existed. */
+  squads?: Record<string, Omit<Doc<'squads'>, '_id' | '_creationTime'>>;
   campaign: { malice: number };
 };
 
@@ -197,6 +200,49 @@ async function restoreStart(ctx: MutationCtx, scope: JournalScope, encounter: Do
     .take(201);
   if (foes.length > 200) throw new ConvexError('Too many foes to reset safely.');
   for (const foe of foes) if (!keep.has(foe._id)) await journalDelete(ctx, scope, 'foes', foe._id);
+  // V02: squads after their members so recreated member ids resolve through the aliases.
+  const keepSquads = new Set<Id<'squads'>>();
+  for (const [recordedId, value] of Object.entries(state.squads ?? {})) {
+    const id = ctx.db.normalizeId('squads', resolve(recordedId));
+    const existing = id ? await ctx.db.get(id) : null;
+    if (existing && existing.campaignId !== encounter.campaignId)
+      throw new ConvexError('Snapshot squad belongs to another campaign.');
+    const mapped = {
+      ...value,
+      memberIds: value.memberIds.map(m => ctx.db.normalizeId('foes', resolve(m)) ?? m),
+      captainId: value.captainId
+        ? (ctx.db.normalizeId('foes', resolve(value.captainId)) ?? null)
+        : null,
+    };
+    if (existing) {
+      await journalPatch(ctx, scope, 'squads', existing._id, mapped);
+      keepSquads.add(existing._id);
+    } else {
+      const created = await journalInsert(ctx, scope, 'squads', mapped);
+      const formerId = resolve(recordedId);
+      const alias = aliases.find(a => a.formerId === formerId);
+      if (alias) await ctx.db.patch(alias._id, { currentId: created });
+      else
+        await ctx.db.insert('historyAliases', {
+          campaignId: encounter.campaignId,
+          formerId,
+          currentId: created,
+        });
+      keepSquads.add(created);
+      // Recreated members point at the recorded squad id; re-link them to the new row.
+      for (const memberId of mapped.memberIds) {
+        const member = await ctx.db.get(memberId as Id<'foes'>);
+        if (member && member.squadId !== created)
+          await journalPatch(ctx, scope, 'foes', member._id, { squadId: created });
+      }
+    }
+  }
+  const squads = await ctx.db
+    .query('squads')
+    .withIndex('by_campaign', q => q.eq('campaignId', encounter.campaignId))
+    .take(201);
+  for (const squad of squads)
+    if (!keepSquads.has(squad._id)) await journalDelete(ctx, scope, 'squads', squad._id);
   for (const [recordedId, value] of Object.entries(state.characters)) {
     const id = ctx.db.normalizeId('characters', recordedId);
     const hero = id ? await ctx.db.get(id) : null;
@@ -400,7 +446,7 @@ const finish: OperationDefinition = {
               encounter,
               'combat.foe-cleaned-up',
               `${foe.name}: defeated foe removed during cleanup.`,
-              { foeId: foe._id },
+              { foeId: foe._id, ...(foe.squadId ? { squadId: foe.squadId } : {}) },
             );
             await journalDelete(writer, child, 'foes', foe._id);
           } else if (foe.live.temporaryStamina !== 0) {
@@ -425,6 +471,25 @@ const finish: OperationDefinition = {
               live: { ...foe.live, temporaryStamina: 0 },
             });
           }
+        // V02: a squad whose minions are all gone leaves the roster with them; survivors keep
+        // their pool, carried damage and captain across encounters (no automatic healing).
+        const squads = await writer.db
+          .query('squads')
+          .withIndex('by_campaign', q => q.eq('campaignId', encounter.campaignId))
+          .take(200);
+        for (const squad of squads) {
+          const remaining = await squadMembers(writer, squad);
+          if (remaining.length) continue;
+          const child = await consequence(
+            writer,
+            scope,
+            encounter,
+            'combat.squad-cleaned-up',
+            `${squad.name}: defeated squad removed during cleanup.`,
+            { squadId: squad._id },
+          );
+          await journalDelete(writer, child, 'squads', squad._id);
+        }
         await archive(writer, scope, encounter, 'closed-out');
       },
     };

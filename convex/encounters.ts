@@ -12,11 +12,12 @@
  */
 import { v } from 'convex/values';
 import { query } from './_generated/server';
-import type { Doc } from './_generated/dataModel';
+import type { Doc, Id } from './_generated/dataModel';
 import { requireUser } from './lib/access';
 import { tableContext } from './lib/registry';
 import { currentEncounter } from './lib/encounters';
 import { effectiveDraft } from './lib/combatOperations';
+import { squadInBattle } from './lib/squads';
 import { actorRef, side } from './initiativeTables';
 
 export { combatOperations } from './lib/combatOperations';
@@ -165,7 +166,12 @@ export const current = query({
     const activeTurn = encounter.activeTurnId ? await ctx.db.get(encounter.activeTurnId) : null;
     const slain = new Map<string, boolean>();
     for (const row of entryRows) {
-      if (row.actor.kind !== 'foe' || slain.has(row.actor.id)) continue;
+      if (slain.has(row.actor.id)) continue;
+      if (row.actor.kind === 'squad') {
+        slain.set(row.actor.id, !(await squadInBattle(ctx, row.actor.id as Id<'squads'>)));
+        continue;
+      }
+      if (row.actor.kind !== 'foe') continue;
       const foe = await ctx.db.get(row.actor.id as Doc<'foes'>['_id']);
       slain.set(row.actor.id, !foe || foe.live.stamina <= 0);
     }

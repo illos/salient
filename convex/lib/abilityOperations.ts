@@ -77,6 +77,13 @@ import {
 import { requireContent } from '../content';
 import { baselineOf, requireHeroLive, type HeroLive } from './characterBuild';
 import {
+  commitSquadPlans,
+  describeSquadPlans,
+  planSquadDamage,
+  squadCasualtyInteraction,
+  squadPlanData,
+} from './squads';
+import {
   bindActor,
   run,
   type OperationDefinition,
@@ -98,6 +105,8 @@ export interface ActorRecords {
   actor: Actor;
   character?: Doc<'characters'>;
   foe?: Doc<'foes'>;
+  /** V02: the member's squad, when the foe is a minion in one. */
+  squad?: Doc<'squads'>;
   facts?: Doc<'heroRollFacts'> | null;
 }
 
@@ -112,10 +121,15 @@ export async function loadActorRecords(
       throw new ConvexError('That hero is not at this table.');
     return { actor, character, facts: await heroFacts(ctx, character._id) };
   }
+  if (actor.kind === 'squad')
+    throw new ConvexError(
+      `${actor.name} is a squad: it acts together through /squad act and /squad free-strike, and its minions and captain are targeted individually.`,
+    );
   const foe = await ctx.db.get(actor.id as Id<'foes'>);
   if (!foe || foe.campaignId !== context.campaign._id)
     throw new ConvexError('That foe is not at this table.');
-  return { actor, foe };
+  const squad = foe.squadId ? await ctx.db.get(foe.squadId) : null;
+  return { actor, foe, ...(squad ? { squad } : {}) };
 }
 
 /** Resolves a target reference to a live creature at the table. Targeting needs no control. */
@@ -582,12 +596,20 @@ export async function allowanceFor(
   if (encounter.phase !== 'turns')
     return { ...none, inCombat: true, encounterId: encounter._id, round: encounter.round ?? 0 };
   const active = encounter.activeTurnId ? await ctx.db.get(encounter.activeTurnId) : null;
-  const onTurn = !!active && sameActor(active.actor, actor);
+  let onTurn = !!active && sameActor(active.actor, actor);
+  // V02: a squad's shared turn is every living member's and the attached captain's turn.
+  if (!onTurn && active && active.actor.kind === 'squad' && actor.kind === 'foe') {
+    const foe = await ctx.db.get(actor.id as Id<'foes'>);
+    const squad = await ctx.db.get(active.actor.id as Id<'squads'>);
+    onTurn = !!foe && !!squad && (foe.squadId === squad._id || squad.captainId === foe._id);
+  }
   const uses = onTurn
-    ? await ctx.db
-        .query('actionUses')
-        .withIndex('by_turn', q => q.eq('turnId', active!._id))
-        .take(100)
+    ? (
+        await ctx.db
+          .query('actionUses')
+          .withIndex('by_turn', q => q.eq('turnId', active!._id))
+          .take(200)
+      ).filter(u => sameActor(u.actor, actor))
     : [];
   const opportunities = (
     await ctx.db
@@ -616,7 +638,11 @@ interface TrackingPlan {
 }
 
 /** Rule warnings for the action type against the advisory allowance; never a block. */
-function planTracking(allowance: Allowance, actor: Actor, actionType: string | null): TrackingPlan {
+export function planTracking(
+  allowance: Allowance,
+  actor: Actor,
+  actionType: string | null,
+): TrackingPlan {
   const warnings: string[] = [];
   let opportunity: Doc<'actionOpportunities'> | null = null;
   if (!allowance.inCombat || !actionType) return { warnings, opportunity: null };
@@ -642,7 +668,7 @@ function planTracking(allowance: Allowance, actor: Actor, actionType: string | n
   return { warnings, opportunity };
 }
 
-async function recordUse(
+export async function recordUse(
   ctx: MutationCtx,
   scope: JournalScope,
   allowance: Allowance,
@@ -669,6 +695,24 @@ async function recordUse(
       status: 'used',
       usedEventId: scope.eventId,
     });
+  // V02 Minion Maneuvers: a minion taking an individual maneuver cannot also join the squad's
+  // main action or maneuver this turn; note it on the squad's participation record.
+  if (actor.kind === 'foe' && actionType === 'maneuver' && allowance.turnId) {
+    const foe = await ctx.db.get(actor.id as Id<'foes'>);
+    const squad = foe?.squadId ? await ctx.db.get(foe.squadId) : null;
+    if (
+      foe &&
+      squad &&
+      squad.participation.turnId === allowance.turnId &&
+      !squad.participation.individual.includes(foe._id)
+    )
+      await journalPatch(ctx, scope, 'squads', squad._id, {
+        participation: {
+          ...squad.participation,
+          individual: [...squad.participation.individual, foe._id],
+        },
+      });
+  }
 }
 
 // ---------------------------------------------------------------------------------------------
@@ -711,14 +755,18 @@ async function debit(
   });
 }
 
-function describeRoll(result: AbilityRollResult): string {
+export function describeRoll(result: AbilityRollResult): string {
   const c = result.selectedCharacteristic
     ? `${result.characteristicValue >= 0 ? '+' : '−'} ${Math.abs(result.characteristicValue)} (${result.selectedCharacteristic})`
     : `${result.characteristicValue >= 0 ? '+' : '−'} ${Math.abs(result.characteristicValue)}`;
   return `2d10 = ${result.dice.d10a} + ${result.dice.d10b} (natural ${result.naturalRoll}) ${c}`;
 }
 
-function describeTarget(outcome: TargetRollOutcome, name: string, applied?: DamageApplication) {
+export function describeTarget(
+  outcome: TargetRollOutcome,
+  name: string,
+  applied?: DamageApplication,
+) {
   const eb = outcome.edgeBane;
   const mods = [
     eb.modifier ? `${eb.modifier > 0 ? '+' : '−'} 2 (${eb.modifier > 0 ? 'edge' : 'bane'})` : null,
@@ -1028,12 +1076,18 @@ const abilityUse: OperationDefinition = {
             )
           : null;
       if ('missing' in facts) warnings.push(facts.missing);
+      // V02: a squad member's damage is one instance on its squad pool.
+      const strikePlans = application
+        ? await planSquadDamage(ctx, [{ target, amount: application.staminaDelta }], false)
+        : [];
+      const strikeCard = squadCasualtyInteraction(strikePlans, envelope);
       const damageText = application
         ? `${application.afterImmunity} damage to ${target.actor.name}${application.absorbedByTemporaryStamina ? ` (${application.absorbedByTemporaryStamina} absorbed by temporary Stamina)` : ''}${application.slain ? '; Slain' : application.windedAfter ? '; winded' : ''}`
         : `${ability.freeStrikeValue} damage to ${target.actor.name} not applied`;
       return {
         kind: 'ability.use',
-        description: `${actor!.name} makes a free strike on ${target.actor.name} (no roll; Free Strike ${ability.freeStrikeValue}): ${damageText}.${warnings.length ? ` ${warnings.join(' ')}` : ''}`,
+        description: `${actor!.name} makes a free strike on ${target.actor.name} (no roll; Free Strike ${ability.freeStrikeValue}): ${damageText}.${strikePlans.length ? ` ${describeSquadPlans(strikePlans)}` : ''}${warnings.length ? ` ${warnings.join(' ')}` : ''}`,
+        ...(strikeCard ? { interaction: strikeCard } : {}),
         data: {
           ability: abilityData,
           freeStrike: { value: ability.freeStrikeValue, target: target.actor },
@@ -1050,11 +1104,13 @@ const abilityUse: OperationDefinition = {
             onTurn: allowance.onTurn,
             turnId: allowance.turnId,
           },
+          squads: squadPlanData(strikePlans),
           warnings,
           source: { ...source, supporting },
         },
         commit: async (mctx, scope) => {
           if (application) await writeDamage(mctx, scope, target, application);
+          await commitSquadPlans(mctx, scope, strikePlans);
           await recordUse(mctx, scope, allowance, actor!, 'main action', ability.name, tracking);
           await clear(mctx);
         },
@@ -1173,8 +1229,21 @@ const abilityUse: OperationDefinition = {
     const critText = result.criticalHit
       ? ' Critical hit (natural 19+ on a main action): an additional main action is available to the acting user; it is not taken automatically.'
       : '';
+    // V02: squad members' applications become one pool instance per squad (area-aware).
+    const squadPlans = await planSquadDamage(
+      ctx,
+      perTarget
+        .filter(p => p.applied)
+        .map(p => ({
+          target: targets.find(t => sameActor(t.actor, p.target))!,
+          amount: p.applied!.staminaDelta,
+        })),
+      ability.targetShape.kind === 'area',
+    );
+    const squadText = squadPlans.length ? ` ${describeSquadPlans(squadPlans)}` : '';
+    const squadCard = squadCasualtyInteraction(squadPlans, envelope);
     const describeUse = (payment: string) =>
-      `${actor!.name} uses ${ability.name} on ${targetNames}: ${describeRoll(result)}.${payment} ${perTarget.map(p => describeTarget(p.outcome, p.target.name, p.applied ?? undefined)).join(' ')}${critText}${result.manualResolutions?.length ? ` Recorded for manual resolution: ${result.manualResolutions.map(m => `"${m.sourceClause}"`).join(', ')}.` : ''}${warnings.length ? ` ${warnings.join(' ')}` : ''}`;
+      `${actor!.name} uses ${ability.name} on ${targetNames}: ${describeRoll(result)}.${payment} ${perTarget.map(p => describeTarget(p.outcome, p.target.name, p.applied ?? undefined)).join(' ')}${squadText}${critText}${result.manualResolutions?.length ? ` Recorded for manual resolution: ${result.manualResolutions.map(m => `"${m.sourceClause}"`).join(', ')}.` : ''}${warnings.length ? ` ${warnings.join(' ')}` : ''}`;
     return {
       kind: 'ability.use',
       description: describeUse(costText),
@@ -1198,18 +1267,21 @@ const abilityUse: OperationDefinition = {
           turnId: allowance.turnId,
           usedOpportunity: tracking.opportunity?._id ?? null,
         },
+        squads: squadPlanData(squadPlans),
         warnings,
         source,
       },
+      ...(squadCard ? { interaction: squadCard } : {}),
       commit: async (mctx, scope) => {
         // 1. Debit the fixed cost once, before any effect.
         if (result.cost && !result.cost.waived)
           await debit(mctx, scope, records, context, result.cost.after, result.cost.resource);
-        // 2. Damage to every target in target order (R04 4.5).
+        // 2. Damage to every target in target order (R04 4.5); squad pools once per squad.
         for (const p of perTarget) {
           const record = targets.find(t => sameActor(t.actor, p.target))!;
           if (p.applied) await writeDamage(mctx, scope, record, p.applied);
         }
+        await commitSquadPlans(mctx, scope, squadPlans);
         // 3. The effective record for corrections and dispositions.
         await journalInsert(mctx, scope, 'abilityResults', {
           campaignId: scope.campaignId,
@@ -1320,7 +1392,15 @@ const abilityCorrect: OperationDefinition = {
     await assertCorrectionAllowed(ctx, event._id, context.user);
     const edges = integer(args.edges, 'edges', 0);
     const banes = integer(args.banes, 'banes', 0);
+    if (result.actor.kind === 'squad')
+      throw new ConvexError(
+        'Corrections of a squad action are not supported in V02: rewind the use, or adjust the squad pool with /adjust stamina on the squad.',
+      );
     const targetRecord = await bindTarget(ctx, context, args.target as Reference, result.actor);
+    if (targetRecord.squad)
+      throw new ConvexError(
+        `${targetRecord.actor.name} is a squad minion: corrections that change squad pool damage are not supported in V02; rewind the use, or adjust the squad pool with /adjust stamina on the squad.`,
+      );
     const effectiveTargets = await Promise.all(
       result.targets.map(async t => ({
         ...t.target,
