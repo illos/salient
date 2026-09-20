@@ -41,7 +41,7 @@ P 0/P 2 targets. Hero scores remain Director/own-controller only; unrelated obse
 them. Source foe actors and their stat blocks are loaded through public V87 catalog/add routes.
 
 The persisted matrix below may use seeded ordinary foe targets to exercise the same mathematical
-boundaries: Dwarf Warden A 0/P 0/M 2 (Stamina 59), Hobgoblin Redglare P 3/M 0 (Stamina 70),
+boundaries: Dwarf Warden A 0/P 0/M 2 (Stamina 59), Goblin Monarch P 3/M 0 (Stamina 80),
 Lizardfolk Bloodeye P 0/M 1 (Stamina 20), Goblin Warrior A 2 (Stamina 15). Those scores remain
 Director-only. Use fresh targets or disclosed ordinary Stamina adjustments to avoid unrelated
 Slain/trait effects. No existing immunity applies to the chosen damage/target pair.
@@ -70,7 +70,7 @@ independent persisted and real-backend coverage. Reuse shared proven history/sav
 | BK2 | Bola, tier 3, evaluated H Agility 2 (persisted equivalent: Goblin Warrior) | 9 damage, equality resists A < 2, no condition or registration |
 | BK3 | Correct BK1 same dice to two banes (tier 1), then restore | 5 damage and A < 0 resisted; source instance ends/registration retires; restoring tier 2 creates current occurrence and schedule without charging Malice or rerolling |
 | EF1 | Eye Flash, tier 2, evaluated H Presence 0 (persisted equivalent: Dwarf Warden) | 14 corruption damage, P < 2 applied, restrained and scheduled save |
-| EF2 | Eye Flash, tier 2, evaluated P Presence 2; persisted tier 3 boundary may use separate Redglare P 3 | 14 corruption damage, equality resists P < 2; persisted tier 3: 17 corruption/P < 3 resisted. No condition/registration; Redglare Fire immunity irrelevant |
+| EF2 | Eye Flash, tier 2, evaluated P Presence 2; persisted tier 3 boundary may use Goblin Monarch P 3 | 14 corruption damage, equality resists P < 2; persisted tier 3: 17 corruption/P < 3 resisted. No condition/registration; Monarch has no printed immunity or weakness |
 | EF3 | Correct EF1 same dice to two banes, then two edges | Tier 1: 9 corruption/slowed; tier 3: 17 corruption/restrained. End prior source condition, only current condition active; source/correction identities retained |
 | PC1 | Power Chord, tier 3, evaluated H Presence 0 (persisted equivalent: Dwarf Warden) | 9 sonic damage, P < 2 applied, weakened and scheduled save |
 | PC2 | Power Chord, tier 3, evaluated P Presence 2 (persisted equivalent: Orc Godcaller) | 9 sonic damage, equality resists P < 2; no condition/registration |
@@ -101,3 +101,14 @@ record target identity and fixture positioning, preserve failures and data, and 
 required full check and the added real-headless proof. An independent implementation reviewer and
 separate pinned-source reviewer must approve the incremental change and its integrated evidence.
 No browser, main merge or cloud publication is performed by the engine owner.
+
+### First focused return: damage prerequisite fixture repaired
+
+TESTER job 10 at `498778e` passed five of six cases; Eye Flash against Redglare P3
+correctly remained fact-needed because `damageTargetFacts` treats every nonempty printed
+immunity/weakness cell as manual. The original claim that its Fire immunity was irrelevant
+to automation was wrong. The equality fixture now uses pinned Goblin Monarch P3, Stamina80,
+no immunity/weakness (`monster/goblin/statblock/goblin-monarch.md`). The Redglare case remains
+as a negative proof: known P3 and threshold3 cannot bypass missing damage completion; no
+Stamina change, condition instance or registration. No immunity parser or mechanics change.
+Live Eye Flash still targets the already designed evaluated heroes.
