@@ -49,7 +49,7 @@ standing role unless the user explicitly includes it.
 | --- | --- | --- | --- |
 | Stable-cloud reconciliation | current `main` and existing hosted candidate | In progress | identify the exact hosted revisions; do not call the target stable until an integrated-main live pass |
 | V85/V86 | `slice/V85` at `64972e6` | Awaiting owner handoff | rebase onto current main, rerun the affected integrated gates through TESTER |
-| V88 | `slice/V88` at `eefc7cc` | Awaiting TESTER closeout and owner handoff | establish final frozen SHA and integration order, then integrated gate |
+| V88 | `integration/V88` at `c721d0b` | Integration held | owner adds persisted/headless proof for four abilities made reachable by V87, obtains TESTER pass, then hands the reviewed addendum back to DEPLOY |
 | V75 | `slice/V75` at `2c7cfe2` | Not release-ready | user visual decision and refreshed handoff |
 
 Update this ledger at handoff, integration, publication, verification and rollback boundaries. The
