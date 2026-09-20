@@ -1,12 +1,13 @@
 # V65: Programmatic character verification
 
-Status: implementation committed on `slice/V65`; verification failed with recorded blockers. Rules review: not required for exposing
+Status: implementation and blocker fixes committed on `slice/V65`; both blockers resolved; all 22 remote headless scenarios pass. Rules review: not required for exposing
 existing choice/evaluation behavior; ancestry rules acceptance remains with V57/V58/V60/V61.
 
 This fills the supported-route and proof gaps in the
 [V24 audit](V24-character-wizard-assessment.md#current-headless-route-audit--2026-09-20).
-The user explicitly requires bounded verification: record blockers, do not implement fixes or rerun
-failed tests. No browser tests in this slice. Do not expand into auth/runtime repairs.
+The user requires bounded verification and subsequently authorized fixing both recorded blockers.
+The repair covers the script type error and the public auth-key rate limit identified below.
+Browser testing is prohibited by the project-wide moratorium; no browser run is a completion gate.
 
 ## Supported route
 
@@ -47,8 +48,8 @@ and peer accounts and obtains its own sessions; no browser setup/token or direct
 Every tested write uses a public authorized operation, followed by independent reads. Tests use
 source-audited V25 inputs and the V60/V61 expected values; discoveries supply real source metadata.
 
-One pass only: focused route tests and existing character/backend checks, then the live headless
-runner if the backend is available. Record compile/deploy/fixture/product failures separately.
+Use focused checks for changed mechanisms, then a bounded live headless pass. Repeat only when
+a concrete diagnosis or fix warrants it; do not retry failures blindly. Record compile/deploy/fixture/product failures separately.
 Run independent cases after a failed case when safe; dependent cases are explicit skips. The live
 runner has 15-second request bounds, a four-minute work budget and a hard stop below five minutes.
 A timeout can leave a remotely accepted operation: never retry it blindly. Cleanup revokes owned
@@ -64,10 +65,10 @@ own expected output. A passing sampled journey is not exhaustive rules coverage.
 The original audit's full parity map remains the scope ledger. Live scenarios include owner/Director/peer paths, owning-Director setup, combat locks,
 foreign-history refusal and stale-review handling. Dependency skips and any remaining unexercised
 boundaries are reported below. Existing backend coverage remains useful but cannot be relabeled
-live proof. Do not demote browser testing on the strength of these results alone.
+live proof. The subsequent project-wide browser moratorium supersedes the earlier comparison gate.
 
 
-## One-pass result — 2026-09-20
+## Initial verification — 2026-09-20
 
 Source `c0fe8b1054ec5d6a5db908b1b85163f5f7879889`, committed on `slice/V65`, not merged into main.
 The backend was deployed to cloud dev `different-bat-943` with normal Convex typechecking and schema
@@ -84,11 +85,11 @@ the V65 UI refactor was not published because the app TypeScript gate failed.
 | Live programmatic character verification | Exit 1; 14 pass, 1 fail, 7 dependency skips in 45.472 seconds |
 | Browser tests | Not run |
 
-**Blocker 1 — compile:** `scripts/headless/character-scenarios.ts:159` produces TS7022 for the
+**Original blocker 1 — compile:** `scripts/headless/character-scenarios.ts:159` produces TS7022 for the
 inferred `actual` variable. The standalone Node runner still executes using normal TypeScript
 stripping; this does not turn the failed build into a pass. No typecheck was disabled for deployment.
 
-**Blocker 2 — live assertion:** `lifecycle: admission and audience privacy` failed an assertion.
+**Original blocker 2 — live assertion:** `lifecycle: admission and audience privacy` failed an assertion.
 The report identifies the scenario but does not identify that assertion's source line or operands;
 no narrower root cause is claimed. The seven skipped cases are private inheritance, advancement,
 history/restoration, owning-Director activation/inheritance, foreign history/restore permissions,
@@ -103,6 +104,32 @@ assignment, retry and stale-write boundaries. Connections text round-trips in al
 cases. These are real authenticated public API calls against the remote backend, with no browser
 session/setup or database fixture injection.
 
-Per user instruction, **no fixes or reruns followed these failures**. Feature completion and browser
-demotion remain blocked. Runtime jobs ended and temporary deployment credentials were removed;
-cloud backend stays live for review. Logs and actual exit statuses are in [evidence/V65](evidence/V65/README.md).
+The initial pass stopped as instructed. The user then explicitly authorized both fixes. Original
+logs and actual exit statuses remain in [evidence/V65](evidence/V65/README.md); they have not been
+replaced with passing results.
+
+
+## Authorized blocker repair — 2026-09-20
+
+Commits `76591c9` and `b1f50c8` are on `slice/V65`, not merged into main. The numeric witness now
+uses an explicit `unknown` type without changing its assertions. Failure reports retain a safe
+scenario source location and nested rejection category/operation, without raw SDK payloads.
+
+The admission failure was not a demonstrated privacy leak: Convex rejected the peer query before
+app authorization because fetching `/api/auth/convex/jwks` returned HTTP 429 (`InvalidAuthHeader`).
+Isolating lifecycle verification passed admission/privacy, private inheritance, progression,
+reviewed restoration and owning-Director activation before later requests hit the same limit.
+The exact public `/convex/jwks` route is now exempt from BetterAuth rate limiting; sign-in, signup,
+token minting and password-reset protections retain their prior settings. The installed BetterAuth
+1.6.15 limiter and Convex plugin 0.12.5 source confirm the exact path and `false` rule semantics.
+No permission check, character rule, test expectation, schema or content was changed.
+
+Backend `b1f50c8` deployed to `dev:different-bat-943` with normal typechecking/schema validation.
+Independent scoped review passed. Browser testing remains prohibited. The frontend deployment
+remains V62 `1e7896c`; these blocker fixes require no frontend publication.
+
+The complete unchanged 22-scenario suite passed against that backend in **73.547 seconds**,
+exit 0, with zero failures or skips. This proves the previously blocked lifecycle routes as well as
+the four ancestry journeys. See [the final report](evidence/V65/fixed-headless.json). Targeted
+formatting, ESLint, app TypeScript and the normal `pnpm build` all passed (exit 0). Broader ancestry acceptance/main integration
+remain separate from these two repaired verification blockers.

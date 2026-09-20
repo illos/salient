@@ -1,0 +1,118 @@
+{
+  "runId": "21178c1a-6642-49ed-976a-87c884e8b2cf",
+  "target": "https://different-bat-943.convex.cloud",
+  "source": "b1f50c878d5b9ba1e7936257e0563b4c07f77b45",
+  "elapsedMs": 73547,
+  "results": [
+    {
+      "name": "discover decisions and preview without creating a character",
+      "status": "pass",
+      "elapsedMs": 1239
+    },
+    {
+      "name": "Devil: complete creation, exact first-save retry and fresh persisted sheet",
+      "status": "pass",
+      "elapsedMs": 1885
+    },
+    {
+      "name": "Polder: complete creation, exact first-save retry and fresh persisted sheet",
+      "status": "pass",
+      "elapsedMs": 1849
+    },
+    {
+      "name": "Dwarf: complete creation, exact first-save retry and fresh persisted sheet",
+      "status": "pass",
+      "elapsedMs": 1754
+    },
+    {
+      "name": "Human: complete creation, exact first-save retry and fresh persisted sheet",
+      "status": "pass",
+      "elapsedMs": 2132
+    },
+    {
+      "name": "Devil: remaining purchase witnesses persist through the public route",
+      "status": "pass",
+      "elapsedMs": 5878
+    },
+    {
+      "name": "Polder: remaining purchase witnesses persist through the public route",
+      "status": "pass",
+      "elapsedMs": 2215
+    },
+    {
+      "name": "Dwarf: remaining purchase witnesses persist through the public route",
+      "status": "pass",
+      "elapsedMs": 3180
+    },
+    {
+      "name": "Human: remaining purchase witnesses persist through the public route",
+      "status": "pass",
+      "elapsedMs": 3048
+    },
+    {
+      "name": "private draft, source discovery and transition reject another owner",
+      "status": "pass",
+      "elapsedMs": 768
+    },
+    {
+      "name": "parent replacement clears dependent choices and persists unrelated details",
+      "status": "pass",
+      "elapsedMs": 1926
+    },
+    {
+      "name": "culture, kit and complication transitions preserve saved authored fields",
+      "status": "pass",
+      "elapsedMs": 1930
+    },
+    {
+      "name": "incomplete and over-budget previews cannot be mistaken for complete builds",
+      "status": "pass",
+      "elapsedMs": 1192
+    },
+    {
+      "name": "array replacement clears assignment; named assignment and stale-save guards use public operations",
+      "status": "pass",
+      "elapsedMs": 2144
+    },
+    {
+      "name": "lifecycle: admission and audience privacy",
+      "status": "pass",
+      "elapsedMs": 8836
+    },
+    {
+      "name": "lifecycle: private inheritance",
+      "status": "pass",
+      "elapsedMs": 5191
+    },
+    {
+      "name": "lifecycle: Fury progression preserves live values",
+      "status": "pass",
+      "elapsedMs": 4556
+    },
+    {
+      "name": "lifecycle: paginated history and reviewed restoration",
+      "status": "pass",
+      "elapsedMs": 3954
+    },
+    {
+      "name": "lifecycle: owning Director activation and inheritance",
+      "status": "pass",
+      "elapsedMs": 5857
+    },
+    {
+      "name": "lifecycle: foreign history and owner-only restoration",
+      "status": "pass",
+      "elapsedMs": 3641
+    },
+    {
+      "name": "lifecycle: full-edit stale review and preserved live state",
+      "status": "pass",
+      "elapsedMs": 3375
+    },
+    {
+      "name": "lifecycle: combat edit lock",
+      "status": "pass",
+      "elapsedMs": 2465
+    }
+  ]
+}
