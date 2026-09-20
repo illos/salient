@@ -3,6 +3,9 @@ text.
 
 # Project instructions
 
+All feature work follows the [programmatic headless completion gate](docs/build/README.md#programmatic-headless-completion-gate):
+prove the supported CLI/API route before browser acceptance. No feature is complete without it.
+
 ## Character restart — 2026-09-19
 
 The user permanently abandoned the entire Opus pilot. Its code, tests, fixtures, research and
@@ -327,9 +330,16 @@ consume the same structured outcomes. A potential Minecraft-like game motivates 
 implementation task. Full spatial support must not require every client to have a digital map or invent
 missing spatial facts.
 
-Both engine and app game operations must work headlessly. CLI and UI use the same operations to load actors,
-run actions, inspect persisted changes and replay history. Verify rule interpretation and actual state
-application separately. The table UI will iterate substantially and must not gate the headless workflow.
+Every UI capability must be available through a supported programmatic CLI/API route using the same
+application operations. This applies across the app, including character creation and choices, not
+only table actions. Verify rule interpretation and actual persisted state application separately.
+Completion requires a passing authenticated application journey with no browser setup or session;
+engine unit tests, direct database writes and headless Chromium cannot substitute for this proof.
+Run headless verification before browser acceptance and record the additional defects browser tests
+find, following the [build completion gate](docs/build/README.md#programmatic-headless-completion-gate).
+Only a completed comparison showing no additional gaps justifies moving redundant browser tests to
+a later step. Keep distinct UI checks and existing acceptance requirements until that decision is
+recorded. The table UI may evolve independently and must not gate the headless workflow.
 
 The user confirmed the [registered-action and action-card contract](docs/table-spec.md#confirmed-action-and-log-contract)
 as table policy. Every table UI button has a registered action accessible in the command palette. Buttons,

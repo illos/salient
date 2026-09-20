@@ -62,7 +62,9 @@ The dependency graph is in `STATUS.md`. A slice may start when every dependency 
    which dependencies are real and which are stubbed with a clearly named development fixture.
 4. **Implement** in a worktree branch named `slice/<id>` (for example `slice/A05`). Keep game rules out
    of UI components. Every table control goes through a registered shared operation.
-5. **Verify.** Run the slice's acceptance checks and `pnpm check`. Read persisted state back through
+5. **Verify.** Run focused checks and `pnpm check`, then pass the
+   [programmatic headless gate](#programmatic-headless-completion-gate) before browser acceptance.
+   Run the slice's remaining acceptance checks. Read persisted state back through
    the application; a mutation response is not evidence. Record commands and output in the work log.
    For engine ability work, complete the per-ability design and in-app evidence gate below, even
    when no UI code changed.
@@ -258,12 +260,64 @@ character examples to the checks below; it does not replace source review or per
 (every `vendor/` submodule at its pinned commit and unmodified), `pnpm content:check` (S01: the generated
 content snapshot regenerates byte-for-byte from the clean pin; it replaced `pnpm foes:source`) and
 `pnpm build`.
-Browser tests (`pnpm test:browser`) are required for slices that change UI flows and need both dev
-servers running. For `A` slices, verify shared operations (convex-test) before UI tests; reuse adequate
-existing coverage and add tests only when they meet the test value policy. The commit checker runs
+The programmatic headless completion gate below applies to every feature track, not only `A` slices.
+`pnpm check` alone does not prove that gate. Browser tests (`pnpm test:browser`) currently remain
+required for slices that change UI flows, after headless verification; use the recorded private or
+hosted development target. Reuse adequate existing coverage and add tests only when they meet the
+test value policy. The commit checker runs
 in the `commit-msg` hook and in CI (`.github/workflows/check.yml`),
 not inside `pnpm check`, so a clean checkout of any commit passes `pnpm check` regardless of its
 history. `pnpm format` applies Prettier (print width 100).
+
+## Programmatic headless completion gate
+
+User requirement, 2026-09-20: every capability offered through the UI must also be available
+programmatically through the application's supported CLI/API and shared operations. A feature is
+**not complete** until that route has passing evidence. This applies app-wide to new and changed
+behavior, including the current unmerged character candidates. A headless Chromium run is browser
+testing; it does not satisfy this gate. Pure evaluator tests and direct database fixture writes do
+not prove an application route either.
+
+Required build/acceptance order:
+
+1. Run focused unit/shared-operation checks and the existing `pnpm check` baseline.
+2. Run a reproducible CLI/API-only application journey against the recorded development backend.
+   Authenticate programmatically as the relevant roles; no browser-created session or UI setup may
+   be required. Exercise the same supported operations as the UI, then independently read back
+   persisted state. Cover the meaningful permissions, validation, history and live-state boundaries
+   affected by the change. Disclose fixtures; never inject the result being claimed as proof.
+3. Fix headless failures and retain before/after evidence before running corresponding browser
+   acceptance. Compare browser results against the headless findings on the same relevant source,
+   content and configuration. Record any necessary differences between the two environments.
+4. Review both results before marking the feature complete. Missing, skipped or failed headless
+   proof blocks acceptance. Reviewers reject UI-only implementations and unsupported parity claims.
+
+Record this in the existing slice work log, not a second tracker:
+
+| Capability / scenario | CLI/API entry point | Headless command, source, target and persisted evidence | Headless result | Browser result and additional gap |
+| --- | --- | --- | --- | --- |
+| Describe the user outcome | Name the supported operation(s) | Link sanitized output and actual exit status | Pending / pass / fail | Pending / pass / fail; identify any new defect |
+
+Record elapsed time and distinguish product defects from fixture/infrastructure failures. Classify
+browser discoveries as already exposed headlessly, a missing headless scenario, or browser-specific
+behavior (rendering, interaction, accessibility, navigation or client session handling). Different
+error messages for the same defect are not additional coverage. A browser setup failure is not
+proof that the UI works, nor that browser testing adds no value. Do not count skipped cases as
+successful comparison. Visual behavior still needs browser evidence even when the underlying
+capability has a proven API route; document that distinction rather than inventing CLI equivalents
+of pixels or focus.
+
+Decision rule: once the paired comparison finds no additional gaps through browser testing,
+record the scope, results and rationale and move redundant browser regression to a later integration
+or release step. Browser checks that establish distinct UI behavior remain explicit. Until that
+comparison is complete, existing required browser and ability screenshot gates remain in force.
+Do not silently remove failing tests or infer app-wide redundancy from one small journey.
+
+This is a mandatory build/review completion step. The current `pnpm check` and CI do not automatically
+execute live authenticated CLI journeys; do not describe them as enforcing this gate. Use the
+existing CLI, runners and artifact paths to make each journey reproducible, then wire automation
+where it actually runs that proof. A script alias or checkbox without execution is insufficient.
+Historical green browser results do not retroactively satisfy headless proof.
 
 ## Test value
 

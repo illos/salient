@@ -10,6 +10,11 @@ See [the dead-end decision](docs/decisions/2026-09-19-opus-pilot-dead-end.md) an
 [Astra handoff](docs/build/character-restart-handoff.md). Keep the old `characters` environment stopped.
 Every test must justify its existence with a concrete failure and added coverage; reject redundant
 or implementation-mirroring tests. Follow [the test value policy](docs/build/README.md#test-value).
+Every UI capability must have a supported programmatic CLI/API route. Completion requires passing
+authenticated headless application proof before browser acceptance, with no browser setup dependency.
+Record the browser's additional findings before demoting redundant browser coverage to a later step.
+Engine tests and headless Chromium do not satisfy the
+[headless completion gate](docs/build/README.md#programmatic-headless-completion-gate).
 
 All future Salient development server activity, across all branches and worktrees, runs on the
 dedicated dev LXC (CT114), accessed through the secret broker. Use `presidium-dev` for servers,
