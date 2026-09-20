@@ -76,4 +76,9 @@ Candidate `Q-V-n` entries:
 
 ## Work log
 
-_Empty._
+- 2026-09-20 — A light version of this slice is built by [V68](V68-campaign-home.md) at the
+  user's direction: `chatMessages` table, `chat.send` and `chat.list` (members only, no edit or
+  delete, display-name snapshot, `commandId` retry identity, no game-log entry, no undo seam) and
+  the Table chat pane on the campaign home. Not covered there: the table pane, the 5,000-message
+  payload budget (check 5) and removal on campaign deletion (check 4, no deletion operation exists
+  yet). The user expects a longer-term game-log/chat hybrid inside the session; that is separate.

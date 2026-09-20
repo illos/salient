@@ -19,8 +19,25 @@ const sessionValue = v.object({
   encounter: v.union(v.object({ id: v.id('encounters'), status: encounterStatus }), v.null()),
   startedAt: v.number(),
   closedAt: v.union(v.number(), v.null()),
+  /** V68: the Director's optional title (docs/table-spec.md#reading-session-history); null when untitled. */
+  title: v.union(v.string(), v.null()),
+  /** Position from the campaign's oldest session, so the header and history read `Session n`. */
+  number: v.number(),
 });
-async function project(ctx: ReadCtx, s: Doc<'sessions'>) {
+const MAX_TITLE = 100;
+/** Oldest first, bounded like `list`; the position of `s` among them is its number. */
+async function sessionNumber(ctx: ReadCtx, s: Doc<'sessions'>, ordered?: Doc<'sessions'>[]) {
+  const sessions =
+    ordered ??
+    (await ctx.db
+      .query('sessions')
+      .withIndex('by_campaign', q => q.eq('campaignId', s.campaignId))
+      .order('desc')
+      .take(50));
+  const index = sessions.findIndex(row => row._id === s._id);
+  return index < 0 ? sessions.length + 1 : sessions.length - index;
+}
+async function project(ctx: ReadCtx, s: Doc<'sessions'>, ordered?: Doc<'sessions'>[]) {
   const encounter = await currentEncounter(ctx, s);
   return {
     id: s._id,
@@ -31,7 +48,16 @@ async function project(ctx: ReadCtx, s: Doc<'sessions'>) {
     encounter: encounter ? { id: encounter._id, status: encounter.status } : null,
     startedAt: s.startedAt,
     closedAt: s.closedAt,
+    title: s.title ?? null,
+    number: await sessionNumber(ctx, s, ordered),
   };
+}
+function normalizeTitle(title: string | undefined): string | undefined {
+  const trimmed = title?.trim() ?? '';
+  if (trimmed.length === 0) return undefined;
+  if (trimmed.length > MAX_TITLE)
+    throw new ConvexError(`Session titles are limited to ${MAX_TITLE} characters.`);
+  return trimmed;
 }
 async function validatePlayers(ctx: MutationCtx, campaignId: Id<'campaigns'>, ids: Id<'users'>[]) {
   if (ids.length > 24 || new Set(ids).size !== ids.length)
@@ -50,15 +76,12 @@ export const list = query({
   handler: async (ctx, { campaignId }) => {
     const user = await requireUser(ctx);
     await requireMember(ctx, campaignId, user._id);
-    return Promise.all(
-      (
-        await ctx.db
-          .query('sessions')
-          .withIndex('by_campaign', q => q.eq('campaignId', campaignId))
-          .order('desc')
-          .take(50)
-      ).map(s => project(ctx, s)),
-    );
+    const ordered = await ctx.db
+      .query('sessions')
+      .withIndex('by_campaign', q => q.eq('campaignId', campaignId))
+      .order('desc')
+      .take(50);
+    return Promise.all(ordered.map(s => project(ctx, s, ordered)));
   },
 });
 export const get = query({
@@ -76,6 +99,8 @@ export const start = mutation({
   args: {
     campaignId: v.id('campaigns'),
     selectedPlayerIds: v.array(v.id('users')),
+    /** V68 optional title; blank is untitled. */
+    title: v.optional(v.string()),
     commandId: v.string(),
   },
   returns: v.id('sessions'),
@@ -87,6 +112,7 @@ export const start = mutation({
     if (campaign.activeSessionId)
       throw new ConvexError('This campaign already has an active session, including pauses.');
     await validatePlayers(ctx, args.campaignId, args.selectedPlayerIds);
+    const title = normalizeTitle(args.title);
     const id = await ctx.db.insert('sessions', {
       campaignId: args.campaignId,
       status: 'running',
@@ -95,6 +121,7 @@ export const start = mutation({
       encounterId: null,
       startedAt: Date.now(),
       closedAt: null,
+      ...(title === undefined ? {} : { title }),
     });
     await ctx.db.patch(campaign._id, { activeSessionId: id });
     await appendEvent(ctx, {
@@ -216,6 +243,27 @@ export const setPlayers = mutation({
       kind: 'session.players',
       description: `Selected players: ${names.join(', ') || 'none'}.`,
     });
+    await receipt.save(null);
+    return null;
+  },
+});
+/**
+ * V68: the Director titles a session (docs/table-spec.md#reading-session-history). The title is
+ * campaign metadata, not session history, so it may be set on a closed session too; it bumps no
+ * revision and appends no event. Blank clears the title.
+ */
+export const setTitle = mutation({
+  args: { sessionId: v.id('sessions'), title: v.string(), commandId: v.string() },
+  returns: v.null(),
+  handler: async (ctx, args) => {
+    const user = await requireUser(ctx);
+    const session = await ctx.db.get(args.sessionId);
+    if (!session) throw new ConvexError('Session unavailable.');
+    await requireDirector(ctx, session.campaignId, user._id);
+    const receipt = await command(ctx, user._id, args.commandId, 'session.title', args);
+    if (receipt.previous) return null;
+    const title = normalizeTitle(args.title);
+    await ctx.db.patch(session._id, { title });
     await receipt.save(null);
     return null;
   },

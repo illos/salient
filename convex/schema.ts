@@ -63,7 +63,24 @@ export default defineSchema({
     encounterId: v.union(v.id('encounters'), v.null()),
     startedAt: v.number(),
     closedAt: v.union(v.number(), v.null()),
+    /** V68 optional Director-set title (docs/table-spec.md#reading-session-history); absent means untitled. */
+    title: v.optional(v.string()),
   }).index('by_campaign', ['campaignId']),
+  /** V68 connected-member presence (docs/table-spec.md#2-participation-and-presence): one row per member per campaign. */
+  presence: defineTable({
+    campaignId: v.id('campaigns'),
+    userId: v.id('users'),
+    lastSeenAt: v.number(),
+  }).index('by_campaign_user', ['campaignId', 'userId']),
+  /** V68 light campaign chat (docs/table-spec.md#game-log-and-chat-scope, docs/build/V12-campaign-chat.md). */
+  chatMessages: defineTable({
+    campaignId: v.id('campaigns'),
+    authorId: v.id('users'),
+    /** Display name at send time; retained after account deletion. */
+    authorName: v.string(),
+    text: v.string(),
+    createdAt: v.number(),
+  }).index('by_campaign_created', ['campaignId', 'createdAt']),
   // Shape documented in shared/contracts/history.ts (HistoryEvent). Written only by lib/events.ts.
   events: defineTable({
     campaignId: v.id('campaigns'),

@@ -1,0 +1,9 @@
+ok   campaign projection has no campaign-level role tags and counts sessions
+ok   join requests approved through the Manage players operations
+ok   presence: heartbeat lists a member, non-members are refused, leave removes
+ok   chat: member-only, validated, retry-safe, no game-log entry, no undo change
+ok   start session with every member (interim), title it, refuse a player title
+ok   closing the session updates history, header meta and the recap log
+ok   hero admission through the pop-up operations lists the hero with its level
+ok   foe management keeps its route off the campaign home
+{"passed":8,"failed":0,"report":"/artifacts/v68/headless.json"}

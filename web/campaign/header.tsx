@@ -1,20 +1,25 @@
 // SPDX-License-Identifier: GPL-3.0-only
 /**
- * Campaign home header (docs/design-mockups/v1/campaign-home.png; V21 item 11): back link,
- * eyebrow, campaign name, grey meta line, and at the right of the same row the role tag beside
- * the primary session action. START SESSION submits `sessions.start` with the player selection
- * held by the page; PAUSE / RESUME / END submit `sessions.transition` exactly as before. Ending a
- * session with committed combat opens the existing VoidCard (keep / reset) under the header rule.
- * Presentation only: no rules logic, no new operations.
+ * Campaign home header (docs/design-mockups/v2/campaign-home-simplified.png; V68): back link, the
+ * campaign name, the grey meta line `Session n · last played …`, and at the right INVITE PLAYERS
+ * beside START SESSION for the Director between sessions. With an active session the row keeps
+ * OPEN THE TABLE / PAUSE / RESUME / END, submitting `sessions.transition` exactly as before, and
+ * ending a session with committed combat opens the existing VoidCard (keep / reset).
+ *
+ * START SESSION has no roster on this page any more: the session screen that owns player selection
+ * is a later slice. Interim behavior recorded in docs/build/V68-campaign-home.md: the button opens a
+ * confirmation naming every current member, and `sessions.start` selects them all; the Director
+ * adjusts afterwards through `sessions.setPlayers`. Presentation only: no rules logic.
  */
 import { useEffect, useState } from 'react';
 import { Link } from '@tanstack/react-router';
 import { useMutation } from 'convex/react';
 import { api } from '../../convex/_generated/api';
 import type { Id } from '../../convex/_generated/dataModel';
-import { Badge } from '../components/ui/badge';
 import { Button, buttonVariants } from '../components/ui/button';
-import { Eyebrow, useCommand } from '../ui';
+import { OverlayCard } from '../components/overlay-card';
+import { Disc } from '../components/disc';
+import { useCommand } from '../ui';
 import { VoidCard } from '../table/void-card';
 
 export type Session = {
@@ -29,27 +34,24 @@ export type Session = {
   } | null;
   startedAt: number;
   closedAt: number | null;
+  title: string | null;
+  number: number;
 };
-export type Member = { userId: Id<'users'>; displayName: string };
-export type CampaignRole = 'Director' | 'Player' | 'Observer';
+export type Hero = { id: Id<'characters'>; name: string; level: number };
+export type Member = { userId: Id<'users'>; displayName: string; heroes: Hero[] };
 
-/** `3 days ago`, `2 hours ago`, `just now`; re-rendered every minute. */
-export function useRelativeTime(at: number | null | undefined): string | null {
-  const [now, setNow] = useState(() => Date.now());
-  useEffect(() => {
-    const timer = window.setInterval(() => setNow(Date.now()), 60_000);
-    return () => window.clearInterval(timer);
-  }, []);
-  if (at === null || at === undefined) return null;
+/** `3 days ago`, `2 hours ago`, `just now`; beyond a month, the calendar date. */
+export function relativeTime(at: number, now: number): string {
   const seconds = Math.max(0, Math.floor((now - at) / 1000));
   if (seconds < 60) return 'just now';
   const units: [number, string][] = [
-    [60 * 60 * 24 * 365, 'year'],
-    [60 * 60 * 24 * 30, 'month'],
+    [60 * 60 * 24 * 7, 'week'],
     [60 * 60 * 24, 'day'],
     [60 * 60, 'hour'],
     [60, 'minute'],
   ];
+  if (seconds >= 60 * 60 * 24 * 30)
+    return new Date(at).toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
   for (const [size, name] of units) {
     if (seconds >= size) {
       const count = Math.floor(seconds / size);
@@ -57,6 +59,16 @@ export function useRelativeTime(at: number | null | undefined): string | null {
     }
   }
   return 'just now';
+}
+
+/** The current time, re-rendered every minute so relative labels stay honest. */
+export function useNow(): number {
+  const [now, setNow] = useState(() => Date.now());
+  useEffect(() => {
+    const timer = window.setInterval(() => setNow(Date.now()), 60_000);
+    return () => window.clearInterval(timer);
+  }, []);
+  return now;
 }
 
 export function sessionStateText(active: Session | undefined): string {
@@ -67,24 +79,29 @@ export function sessionStateText(active: Session | undefined): string {
 export function CampaignHeader({
   campaignId,
   name,
-  memberCount,
-  role,
+  sessionCount,
+  lastPlayedAt,
   director,
   active,
-  lastPlayedAt,
-  selectedPlayerIds,
+  members,
+  onInvite,
 }: {
   campaignId: Id<'campaigns'>;
   name: string;
-  memberCount: number;
-  role: CampaignRole;
-  director: boolean;
-  active: Session | undefined;
+  sessionCount: number;
   /** `closedAt` of the most recent closed session, when one exists. */
   lastPlayedAt: number | null;
-  selectedPlayerIds: Id<'users'>[];
+  director: boolean;
+  active: Session | undefined;
+  members: Member[];
+  onInvite: () => void;
 }) {
-  const lastPlayed = useRelativeTime(lastPlayedAt);
+  const now = useNow();
+  const meta = active
+    ? `Session ${active.number} · ${sessionStateText(active).toLowerCase()}`
+    : sessionCount === 0
+      ? 'No sessions yet'
+      : `Session ${sessionCount}${lastPlayedAt ? ` · last played ${relativeTime(lastPlayedAt, now)}` : ''}`;
   return (
     <header className="rule-strong mb-8 pb-5">
       <Link to="/" className="mb-4 inline-block text-sm text-muted-foreground">
@@ -92,25 +109,21 @@ export function CampaignHeader({
       </Link>
       <div className="flex items-end justify-between gap-8">
         <div className="min-w-0">
-          <Eyebrow>{director ? 'Director’s workspace' : 'Your campaign'}</Eyebrow>
           <h1 className="truncate">{name}</h1>
-          <p className="mt-1 text-muted-foreground">
-            {memberCount} {memberCount === 1 ? 'member' : 'members'} · {sessionStateText(active)}
-            {lastPlayed ? ` · Last played ${lastPlayed}` : ''}
+          <p className="mt-1 text-muted-foreground" data-testid="campaign-meta">
+            {meta}
           </p>
         </div>
         <div className="flex shrink-0 items-center gap-3">
-          <Badge
-            variant={director ? 'default' : 'outline'}
-            className="h-9 border px-4 text-xs"
-            data-testid="role-tag"
-          >
-            {role}
-          </Badge>
           {active ? (
             <SessionActions campaignId={campaignId} session={active} director={director} />
           ) : director ? (
-            <StartSessionAction campaignId={campaignId} selectedPlayerIds={selectedPlayerIds} />
+            <>
+              <Button variant="outline" onClick={onInvite}>
+                Invite players
+              </Button>
+              <StartSessionAction campaignId={campaignId} members={members} />
+            </>
           ) : null}
         </div>
       </div>
@@ -120,27 +133,62 @@ export function CampaignHeader({
 
 function StartSessionAction({
   campaignId,
-  selectedPlayerIds,
+  members,
 }: {
   campaignId: Id<'campaigns'>;
-  selectedPlayerIds: Id<'users'>[];
+  members: Member[];
 }) {
   const start = useMutation(api.sessions.start);
   const command = useCommand();
+  const [open, setOpen] = useState(false);
+  const selectedPlayerIds = members.map(m => m.userId);
   return (
-    <div className="flex flex-col items-end gap-2">
-      <Button
-        disabled={command.pending}
-        onClick={() =>
-          void command.run(
-            commandId => start({ campaignId, selectedPlayerIds, commandId }),
-            JSON.stringify(['session.start', { campaignId, selectedPlayerIds }]),
-          )
-        }
+    <>
+      <Button onClick={() => setOpen(true)}>Start session</Button>
+      <OverlayCard
+        open={open}
+        onOpenChange={setOpen}
+        eyebrow="Start session"
+        title="Everyone plays"
+        className="max-w-xl"
       >
-        {command.pending ? 'Starting…' : 'Start session'}
-      </Button>
-    </div>
+        <p className="text-sm text-muted-foreground">
+          Every member joins as a player. You can change who plays from the table once the session
+          is running.
+        </p>
+        <ul className="m-0 my-4 flex list-none flex-wrap gap-2 p-0">
+          {members.map(m => (
+            <li
+              key={m.userId}
+              className="flex h-10 items-center gap-2 rounded-md border border-input px-3 text-sm font-semibold"
+            >
+              <span aria-hidden>
+                <Disc name={m.displayName} size="sm" />
+              </span>
+              {m.displayName}
+            </li>
+          ))}
+        </ul>
+        <div className="flex items-center gap-3">
+          <Button
+            disabled={command.pending}
+            onClick={() =>
+              void command
+                .run(
+                  commandId => start({ campaignId, selectedPlayerIds, commandId }),
+                  JSON.stringify(['session.start', { campaignId, selectedPlayerIds }]),
+                )
+                .then(ok => ok && setOpen(false))
+            }
+          >
+            {command.pending ? 'Starting…' : 'Start session'}
+          </Button>
+          <Button variant="outline" onClick={() => setOpen(false)}>
+            Cancel
+          </Button>
+        </div>
+      </OverlayCard>
+    </>
   );
 }
 

@@ -1,0 +1,137 @@
+{
+  "slice": "V68",
+  "run": "v68-mu9aoj5i",
+  "target": "http://backend:3210",
+  "startedAt": "2026-09-20T04:06:56.502Z",
+  "elapsedMs": 14517,
+  "passed": 8,
+  "failed": 0,
+  "steps": [
+    {
+      "step": "campaign projection has no campaign-level role tags and counts sessions",
+      "ok": true,
+      "evidence": {
+        "campaignId": "j575cst9kj3w4s66v3csdhsfp58er7nc",
+        "members": [
+          {
+            "displayName": "Director",
+            "heroes": [],
+            "userId": "jx71k35y0ava5f2jn1jyp3xgnx8ermqf"
+          }
+        ],
+        "sessionCount": 0
+      }
+    },
+    {
+      "step": "join requests approved through the Manage players operations",
+      "ok": true,
+      "evidence": {
+        "members": [
+          "Director",
+          "Player"
+        ],
+        "pending": 1,
+        "shareCodeChanged": true
+      }
+    },
+    {
+      "step": "presence: heartbeat lists a member, non-members are refused, leave removes",
+      "ok": true,
+      "evidence": {
+        "online": [
+          "jx724z15end5hjr4n4gz4cb9ps8essjv"
+        ],
+        "afterLeave": []
+      }
+    },
+    {
+      "step": "chat: member-only, validated, retry-safe, no game-log entry, no undo change",
+      "ok": true,
+      "evidence": {
+        "messages": [
+          [
+            "Player",
+            "Ready when you are"
+          ],
+          [
+            "Director",
+            "Starting now."
+          ]
+        ],
+        "eventsBefore": 2,
+        "eventsAfter": 2,
+        "undo": {
+          "available": false,
+          "reason": "History needs a running session.",
+          "target": null
+        }
+      }
+    },
+    {
+      "step": "start session with every member (interim), title it, refuse a player title",
+      "ok": true,
+      "evidence": {
+        "session": {
+          "campaignId": "j575cst9kj3w4s66v3csdhsfp58er7nc",
+          "closedAt": null,
+          "encounter": null,
+          "id": "js7cp23a8tacdh1dpgmmytszd58erbay",
+          "number": 1,
+          "revision": 1,
+          "selectedPlayerIds": [
+            "jx724z15end5hjr4n4gz4cb9ps8essjv"
+          ],
+          "startedAt": 1789877228407,
+          "status": "running",
+          "title": "Blackcastle, revisited"
+        }
+      }
+    },
+    {
+      "step": "closing the session updates history, header meta and the recap log",
+      "ok": true,
+      "evidence": {
+        "closed": {
+          "campaignId": "j575cst9kj3w4s66v3csdhsfp58er7nc",
+          "closedAt": 1789877229233,
+          "encounter": null,
+          "id": "js7cp23a8tacdh1dpgmmytszd58erbay",
+          "number": 1,
+          "revision": 2,
+          "selectedPlayerIds": [
+            "jx724z15end5hjr4n4gz4cb9ps8essjv"
+          ],
+          "startedAt": 1789877228407,
+          "status": "closed",
+          "title": "Closed and renamed"
+        },
+        "recapKinds": [
+          "session.closed",
+          "session.players",
+          "session.started"
+        ],
+        "sessionCount": 1
+      }
+    },
+    {
+      "step": "hero admission through the pop-up operations lists the hero with its level",
+      "ok": true,
+      "evidence": {
+        "heroes": [
+          {
+            "id": "k57dymb9fbs2ajcrahx4zxp9q98esh1c",
+            "level": 1,
+            "name": "Thorn"
+          }
+        ]
+      }
+    },
+    {
+      "step": "foe management keeps its route off the campaign home",
+      "ok": true,
+      "evidence": {
+        "rows": 0
+      }
+    }
+  ]
+}
