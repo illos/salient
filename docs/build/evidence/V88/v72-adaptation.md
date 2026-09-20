@@ -28,3 +28,12 @@ This is the narrow runner adjustment approved by the engine lead in Chords 855.
 No SC2 privacy assertion, other ability assertion, dice control, application route or environment
 guard changes. `scripts/v72-headless-main.ts` is unchanged. No test execution or runtime stack was
 started for this adaptation; verification belongs to the TESTER coordinator.
+
+The full check at `ac95cc3` found two further legacy assertions of the same Bury the Point
+shape: `tests/app/abilities.test.ts` expected the tier-1 bleeding clause in `unresolvedClauses`,
+and `tests/app/compiled-source.test.ts` expected its second nodes to be `unsupported`.
+These now expect an empty unresolved list and `condition` nodes respectively. Cost, damage,
+blocking and source privacy assertions remain unchanged. The archived-history failure in
+`v001-walkthrough.test.ts` identified a separate guard-order regression: archived encounters now
+receive the existing history refusal before any live condition lookup, and damage-only compiled
+results do not inspect condition targets. The original walkthrough assertion remains unchanged.

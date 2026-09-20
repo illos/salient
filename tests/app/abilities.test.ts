@@ -823,7 +823,7 @@ describe('A05 attacks, damage, costs and common actions', () => {
       cid('bury'),
     );
     const buryEvent = await eventById(t, campaignId, bury.eventId);
-    // Natural 6 + 2 = 8 → tier 1: "5 damage; M < 0 bleeding (save ends)" — the potency clause is unresolved.
+    // Natural 6 + 2 = 8 → tier 1: "5 damage; M < 0 bleeding (save ends)" — V88 compiles the potency clause.
     const result = data<{
       result: {
         cost: unknown;
@@ -838,9 +838,7 @@ describe('A05 attacks, damage, costs and common actions', () => {
       after: 1,
     });
     expect(result.targets[0]).toMatchObject({ total: 8, tier: 1 });
-    expect(result.targets[0]!.unresolvedClauses).toEqual([
-      'M < 0 [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) (save ends)',
-    ]);
+    expect(result.targets[0]!.unresolvedClauses).toEqual([]);
     expect((await t.run(ctx => ctx.db.get(campaignId)))!.malice).toBe(1);
     // Malice 1 < cost 2: blocked for the Director too.
     const blocked = await submit(
