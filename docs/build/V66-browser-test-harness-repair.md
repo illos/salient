@@ -108,3 +108,13 @@ None recorded. Capacity (CPU or environment cap) is the user's separate decision
 - 2026-09-20: registered by the browser-failure investigation thread at the user's direction after
   the audit; not started. The user simultaneously placed all browser testing under a moratorium
   until this slice is implemented.
+- 2026-09-20 checkpoint (investigation thread paused by the user). State: audit, V66 registration,
+  browser coverage backlog and site-wide moratorium are all on main at `8291277`; broadcast to
+  peers as Chords `browser-testing-moratorium-20260920`. No code, test, runtime or environment was
+  changed. Resume prompt: when the user says go, claim V66 in a fresh worktree with an explicitly
+  named CT114 environment, implement in-scope items 1 to 4 first (they also unblock the V65
+  headless run's sign-up limit), then item 5 with the infrastructure owner, then item 6. Two user
+  decisions remain open and are not blockers for starting: acceptance of the development-only
+  sign-in rate limit as configuration (recommended yes, recorded in the access spec), and CT114
+  capacity (recommended: cap running environments at two and stop idle stacks before adding CPU).
+  While paused, threads keep verifying headlessly and appending to the backlog.
