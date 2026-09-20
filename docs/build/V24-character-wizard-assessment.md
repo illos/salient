@@ -8,7 +8,7 @@
 | Rules review | Not required for this assessment; required for mechanical implementation |
 | Depends on | A09; assesses the integrated A02/V21 implementation |
 | Related outline | [V08](V08-classes-and-advancement.md) |
-| Status | Assessment complete; implementation sequence proposed |
+| Status | Current headless-route audit recorded 2026-09-20; original delivery proposal retained as historical context |
 
 ## Goal and scope
 
@@ -16,12 +16,105 @@ Evaluate what exists and recommend the next bounded work toward complete class s
 This is an assessment, not an implementation of V08 or an assertion of complete rules support.
 The user requested taking up the character wizard track, starting with this evaluation.
 
-Assessment baseline: `main` at `e83930e`, 2026-09-15. No character branch existed at assignment.
+Original assessment baseline: `main` at `e83930e`, 2026-09-15. No character branch existed at assignment.
 Created `slice/V24` in `/srv/presidium/projects/salient/characters` from that commit. The main
 checkout's uncommitted five-track instructions were read and followed, but were not copied or
 committed into this worktree. The parser and foe worktrees remain independent.
 
-## Scope clarification
+## Current headless-route audit — 2026-09-20
+
+This source/evidence audit applies the [headless completion gate](README.md#programmatic-headless-completion-gate)
+to the whole implemented character journey: unsaved creation, all wizard steps, saved editing,
+campaign review, sheet audiences, advancement and restoration. Reviewed main `b8eec27` and the
+published ancestry candidate `slice/V62` at `1e7896c`, including its uncommitted browser-fixture fixes.
+No runtime tests were executed for this audit. Existing tests are identified as coverage, not newly
+certified passes. Nothing from the abandoned pilot was inspected or reused.
+
+**Finding:** the principal persistence/review/progression operations are public and callable through
+`pnpm app query|mutation module:function JSON`. No UI-exclusive persistence endpoint was found in
+those flows. However, no retained, reproducible browser-independent authenticated journey was found
+that proves the whole supported wizard under the new gate. Existing backend tests provide substantial
+behavioral coverage; browser-created accounts, browser-issued tokens and later CLI readback do not
+turn a browser journey into standalone headless proof.
+
+### Concrete route and proof gaps
+
+1. **Choice discovery lacks a supported CLI/API operation.** The wizard imports `getDefinitions`,
+   `isAvailable`, `poolOf` and `isSupported` in process. `characters:evaluate` returns evaluation,
+   not the wizard's decision graph/available pools; `content:list` returns content summaries, not
+   that graph. A repository script can import the shared functions, so the logic is not inherently
+   browser-only. But an external CLI/API consumer must currently supply decision IDs, values and
+   source-bearing payloads without a demonstrated discovery workflow. Provide and prove that
+   supported route rather than hardcoding a completed fixture and calling it an interactive wizard.
+2. **Change-choice semantics are composed in the UI.** `web/wizard/index.tsx` clears the assignment
+   when its array changes and calls `pruneUnavailable` before saving; progression also prunes in
+   the client. `characters:save` accepts the supplied selection set, canonicalizes provenance and
+   evaluates it, but does not perform that general replacement/pruning transition. Its named
+   `assignment` argument is a real shared operation. There is no corresponding public general
+   change-choice operation reporting cleared choices. Prove a shared programmatic transition for
+   ancestry/class/career/culture/complication replacement; do not assume raw save behaves like a
+   UI click. The Elementalist backend test invokes pruning separately and does not persist/read
+   back that replacement, so its name overstates that particular portion of its coverage.
+3. **Standalone authentication and repeatable execution are unproved for the whole journey.**
+   `scripts/app.ts` can sign in with credentials or accept a token. Without a supplied token,
+   each invocation signs in and signs out. Prior browser runs exposed repeated-login throttling;
+   V62 helpers reuse browser sessions. A headless harness must acquire its own legitimate session,
+   reuse/refresh it as needed, and complete the journey without a browser. The CLI output regression
+   uses a mock HTTP server and synthetic token; it proves JSON framing, not authentication/parity.
+4. **The required completion gate is not yet automated.** `pnpm check` and CI run unit/backend/script
+   tests and builds, not a live authenticated character journey. There is no dedicated retained
+   wizard CLI acceptance runner in the inspected tree. The doctrine is mandatory, but a green CI
+   job alone cannot certify it.
+
+### End-to-end coverage map
+
+“Backend coverage” below means `convex-test` with test identities and, in some cases, direct fixture
+state setup. It is useful headless logic coverage, but not live authenticated CLI/API journey proof.
+All rows remain pending that complete proof; this does not mean all underlying behavior is untested.
+
+| User capability | Existing programmatic route / code | Existing evidence and remaining gap |
+| --- | --- | --- |
+| Think prompts; start without creating a record; preview; first explicit save; leave unsaved | `characters:evaluate`, `create`, `listMine`, `get` | `characters.test.ts` checks pure preview, atomic first save and retry. Prove no record before save and exactly one afterward through live CLI. Leaving unsaved is a client discard, not a required delete endpoint. |
+| Discover steps, supported options, dependencies and costs | Shared `getDefinitions`, structural helpers; no public discovery query found | Engine/structural tests exist. Missing demonstrated supported discovery route; source-content lists are insufficient. |
+| Ancestry purchases/signatures, budgets and replacement | `evaluate`, `create`, `save`; shared ancestry modules | Existing examples and V57/V58/V60/V61 engine tests; four hosted browser witnesses. No independent live headless witness covering each new option; replacement semantics need the shared transition above. |
+| Culture, languages, environment/organization/upbringing and skills | Same selection operations; supporting definitions | Supporting-background tests and backend examples cover portions. Prove dependent pools, duplicate replacements, optional/open choices and persisted parent changes. |
+| Career, grants, languages, perks and inciting incident | Same selection operations | Background/evaluator coverage and Fury/Elementalist examples; no standalone live journey showing career replacement and retained unrelated choices. |
+| Class, characteristic arrays/assignment, specialization and abilities | Same operations; `characters:save` with `assignment` | `characters.test.ts` and `elementalist-character.test.ts` compare named/direct assignment and reject fixed-score edits. Prove array reset, partial/repeated values, class replacement and sourced persisted results live. |
+| Kit/no-kit and free strikes | Same operations; `characters:sheet` | Evaluator and Elementalist/Fury backend examples. Prove kit changes, derived contributions and complete sourced free strikes from the saved sheet; free strikes are derived, not a separate edit action. |
+| Complications and dependent choices, including None | Same operations; supporting-complication definitions | Supporting tests, V37 browser and character backend coverage. Prove grants removed on replacement and future-choice origins retained through live operations. |
+| Private inherited item chosen by Director | `characterSecrets:inheritance`, `saveInheritance`; normal review operations | `characterSecrets.test.ts` and `characterDirectorSetup.test.ts` cover versions, privacy and activation. No live CLI-only multi-role proof, including owning Director and absence of the secret from owner/peer payloads. |
+| Details, private notes and connections | `create`/`save` authored fields and selection list; `get`/`sheet` | Backend authored/privacy tests. Prove name/appearance/biography/notes round trip distinctly from mechanical selections. Connections are an editable `connections.notes` selection, not an authored field. No explicit connection-text round-trip assertion was found in the inspected tests; include save/reopen and sheet display data. |
+| Edit/reopen; invalid/incomplete/unsupported drafts; stale writes and retries | `get`, `evaluate`, `save`, revision guards and command receipts | Strong `characters.test.ts` coverage. Prove command retry, competing save, canonical provenance and preservation of the prior effective/live build through authenticated transport. |
+| Submit, withdraw, decline, approve exact revision; owning-Director activation | `characters:submit`, `withdraw`, `reviews`, `decline`, `approve`; shared registered operations | `admission.test.ts`, review-queue and Director-setup tests. No complete standalone owner/Director/peer journey; include stale review and rejected-role paths. |
+| Effective/proposed sheet, source text, privacy and live state | `characters:sheet`, `get`; `content:get/list`; public rule assets; `commands:submit/invoke` | Backend sheet/audience and live-state tests; mixed browser/CLI evidence. Prove matching revision and independent source expectations, owner notes/secret redaction and live values surviving edits. Rule popup rendering remains separate browser coverage. |
+| Supported Fury advancement, draft resume and finalization | `characters:progression`, `saveAdvancement`, `evaluate` with progression context, `finalizeAdvancement` | `character-progression.test.ts` covers eligibility, races, lock and live-value preservation; setup sometimes patches live state directly. Prove an authenticated journey using public operations for XP/live changes, not injected final state. |
+| History pagination, immutable preview and restore | `characters:history`, `historySnapshot`, `restore` | Progression/choice-origin tests cover snapshot/privacy/review behavior. Prove live paginated readback, restoration review, incompatible-resource refusal and no unintended live-state reset. |
+
+Source locations: `scripts/app.ts`; `convex/characters.ts`; `convex/characterSecrets.ts`;
+`web/wizard/index.tsx`; `web/progression/index.tsx`; `shared/evaluate/structure.ts`;
+`shared/content/character-decisions.ts`; `tests/app/characters.test.ts`;
+`tests/app/elementalist-character.test.ts`; `tests/app/admission.test.ts`;
+`tests/app/character-progression.test.ts`; `tests/app/characterDirectorSetup.test.ts`;
+`tests/app/characterSecrets.test.ts`; `tests/scripts/app-output.test.ts`.
+
+### Bounded proof sequence
+
+1. Establish programmatic account/session setup and a minimal complete create → save → fresh-read
+   journey on the matching candidate. Keep authentication independent of browser fixtures.
+2. Prove decision discovery and replacement semantics, then use compact source-backed ancestry and
+   class witnesses through that route. Reuse meaningful engine tables for permutations.
+3. Extend the same journey across review/privacy, full edits, stale writes and live-state boundaries.
+4. Add the supported Fury progression/history branch and private Director setup. Wire the live
+   headless acceptance command into the recorded build process with real results and artifacts.
+5. Only after those pass, compare equivalent browser scenarios and record additional defects and
+   runtime. No completed paired comparison exists yet, so this audit does not justify browser demotion.
+
+Disabled/unimplemented classes and levels, import/export, and future attachment/duplication operations
+are product-scope gaps, not newly discovered UI-only routes. They must not be reported as supported
+because a generic CLI can call a function name. Visual layout, focus, drag interaction and source-card
+rendering still need browser checks; their underlying choices/state must first pass headless proof.
+
+## Historical scope clarification
 
 The user clarified that “all 10 classes” meant the **nine** core classes in the pinned Heroes
 [Classes chapter](../../vendor/steel-compendium/en/unified/md/chapter/classes.md): Censor, Conduit,
@@ -38,7 +131,7 @@ saved and restorable progression, and correct campaign review/live-state behavio
 has separate acceptance. A valid build can have manually resolved gameplay features, but a missing
 permanent build modifier cannot be hidden behind a manual-combat label.
 
-## What exists
+## Original baseline inventory — 2026-09-15
 
 | Area | Evidence in the baseline | Assessment |
 | --- | --- | --- |
@@ -55,7 +148,7 @@ The baseline is a real narrow implementation, not merely a mockup. Equally, disp
 alternatives is not support for those alternatives. V21 updated the presentation; it did not expand
 the underlying class coverage.
 
-## Changes needed before broad coverage
+## Original delivery recommendations — 2026-09-15
 
 1. **Make class and level real evaluator inputs.** `EvaluationInput.level`,
    `DerivedBaseline.level` and `HeroEntity.level` are literal `1`; the backend always evaluates

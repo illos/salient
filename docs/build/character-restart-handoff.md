@@ -24,6 +24,8 @@ readback; then compare browser findings on matching code. Current Devil/Polder/D
 results do not establish this proof. Keep headless proof pending until it actually passes. Browser
 testing remains required until the documented comparison supports moving redundant coverage later.
 Do not resume the old browser-debugging loop as a substitute for this next verification step.
+Use the [current end-to-end route/proof audit](V24-character-wizard-assessment.md#current-headless-route-audit--2026-09-20)
+to target missing evidence and the discovery/change-choice route gaps.
 
 ## Starting point
 
