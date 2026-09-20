@@ -389,3 +389,19 @@ damage-only results skip that lookup. The existing walkthrough remains unchanged
 failure evidence is retained on main at `ae12be6`, `evidence/V88/tester-job-ac95cc3.md`.
 A repaired candidate is submitted for focused regression checks and the full gate; no runtime
 or browser test has run, and independent review remains gated on the required check.
+
+### 2026-09-20 — Full check green and implementation review repairs
+
+TESTER `test-V88-a07dd27-2` passed the 34-test repair gate and complete `pnpm check`:
+352 engine tests, 562 app/scripts tests, link/vendor/content/supporting/foe/report gates and
+production build. Evidence is retained on main `07b8f5b`. Independent implementation review
+found a required combat-end log missing despite correct persisted unscheduling. Combat end now
+appends a public source-linked `condition.unscheduled` event naming the active condition and manual
+follow-up; it adds no save or expiration. The lifecycle test reads that message as an observer.
+A new legal Wode Elf player fixture also proves both correction directions and the tier-3 transition
+from slowed to restrained, including player undo/redo and no replacement dice.
+
+The initially queued real-headless jobs were cancelled before setup (TESTER 899); no environment or
+account was created. The revised candidate needs coordinator gates before review closes and before
+replacement live jobs. Review also records the existing 1000-retained-instance safeguard as a
+nonblocking limit: no archival route is supplied by V88; it must not be described as implemented.

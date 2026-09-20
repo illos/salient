@@ -469,8 +469,25 @@ export async function dispatchBoundary(
         found &&
         found.campaignId === scope.campaignId &&
         found.instance.registrationId === registration._id
-      )
+      ) {
         await unscheduleConditionInstance(ctx, scope, found.target, found.instance.id);
+        await appendEvent(ctx, {
+          campaignId: scope.campaignId,
+          sessionId: cause.sessionId,
+          encounterId,
+          origin: 'clock',
+          commandId: cause.commandId,
+          causeEventId: boundaryEventId,
+          kind: 'condition.unscheduled',
+          description: `${found.instance.actorLabel}'s ${found.instance.abilityName}: ${found.instance.condition} remains active after combat ends. Its saving throw is no longer scheduled; resolve it manually.`,
+          payload: {
+            effectInstanceId: found.instance.id,
+            sourceUseEventId: found.instance.sourceUseEventId,
+            creatureId: work.creatureId,
+            sourcePath: found.instance.sourcePath,
+          },
+        });
+      }
     }
   }
   return { event, records };

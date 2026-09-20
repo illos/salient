@@ -5,11 +5,15 @@
 import { expect, test } from 'vitest';
 import { api, internal } from '../../convex/_generated/api';
 import type { Id } from '../../convex/_generated/dataModel';
-import type { DerivedBaseline } from '../../shared/contracts/characterEvaluation';
+import type { DerivedBaseline, EvaluationInput } from '../../shared/contracts/characterEvaluation';
 import type { PublicCompiledResult } from '../../shared/contracts/compiledResult';
 import { generate } from '../../convex/lib/dice';
 import { fromHex } from '../../convex/lib/sha256';
-import { backend, table, type Backend } from './fixtures/table';
+import { backend, table, admitHero, type Backend } from './fixtures/table';
+
+import examples from '../../shared/content/character-evaluation-examples.json' with { type: 'json' };
+import { definitions } from '../../shared/content/level-one-decisions';
+import { draftSelectionsFrom } from '../../shared/evaluate/draft';
 
 let sequence = 0;
 async function position(t: Backend, campaignId: Id<'campaigns'>, faces: number[]) {
@@ -165,4 +169,83 @@ test('BP6–10: applied use, score privacy, correction flip, exact restoration a
   await command('/history redo');
   expect(await live()).toEqual(saved);
   expect(await t.run(ctx => ctx.db.query('rolls').take(100))).toEqual(rolls);
+});
+
+test('player Wode correction flips potency and replaces slowed with tier-three restrained', async () => {
+  const t = backend();
+  const f = await table(t);
+  await t.mutation(internal.content.reseed, {});
+  const choices: EvaluationInput['selections'] = { ...examples.examples.complete.input.selections };
+  for (const key of Object.keys(choices)) if (key.startsWith('ancestry.')) delete choices[key];
+  choices['ancestry.choice'] = 'Wode Elf';
+  choices['ancestry.wode-elf.purchased-traits'] = ['The Wode Defends', 'Forest Walk'];
+  choices['details.name'] = 'Willow';
+  const willow = await admitHero(
+    t,
+    f.player,
+    f.director,
+    f.campaignId,
+    'Willow',
+    draftSelectionsFrom(choices, definitions),
+  );
+  const foe = await f.director.client.mutation(api.foes.add, {
+    campaignId: f.campaignId,
+    definitionId: 'mcdm.monsters.v1/monster.dwarf.statblock/dwarf-warden',
+    commandId: `potency-${++sequence}`,
+  });
+  const command = (text: string, player = false) =>
+    (player ? f.player : f.director).client.mutation(api.commands.submit, {
+      campaignId: f.campaignId,
+      commandId: `potency-${++sequence}`,
+      text,
+    });
+  await command('/combat start');
+  await command('/combat commit');
+  await command('/combat roll', true);
+  await command('/combat first side=heroes');
+  await command(`@{character:${willow}} /turn take`, true);
+  await position(t, f.campaignId, [7, 7]);
+  const used = await command(
+    `@{character:${willow}} /ability use ability="The Wode Defends" targets=[@{foe:${foe}}] characteristic=M damage-characteristic=M`,
+    true,
+  );
+  const live = async () => (await t.run(ctx => ctx.db.get(foe)))!.live;
+  const read = async () =>
+    (
+      await f.player.client.query(api.abilities.results, {
+        campaignId: f.campaignId,
+        eventIds: [used.eventId],
+      })
+    )[0]!;
+  const active = async () =>
+    (await live()).conditionInstances!.filter(instance => instance.status === 'active');
+  expect(await active()).toMatchObject([{ condition: 'slowed', sourceUseEventId: used.eventId }]);
+  const original = await live();
+  const originalResult = await read();
+  const condition = (result: typeof originalResult) =>
+    (result.compiled as PublicCompiledResult).effects.find(o => o.effect.kind === 'condition')!;
+  expect(condition(originalResult).effect).toMatchObject({ status: 'applied', threshold: 1 });
+  expect(condition(originalResult).effect).not.toHaveProperty('targetScore');
+  const correct = (edges: number, banes: number) =>
+    command(
+      `/ability correct event="${used.eventId}" target=@{foe:${foe}} edges=${edges} banes=${banes}`,
+      true,
+    );
+  await correct(0, 2);
+  expect(condition(await read()).effect).toMatchObject({ status: 'resisted', threshold: 0 });
+  expect(await active()).toEqual([]);
+  expect((await live()).conditions!.slowed).toBe(false);
+  await correct(0, 0);
+  expect(await active()).toMatchObject([{ condition: 'slowed' }]);
+  await correct(2, 0);
+  expect(await active()).toMatchObject([{ condition: 'restrained' }]);
+  expect((await live()).conditions).toMatchObject({ slowed: false, restrained: true });
+  const tierThree = await live();
+  const rolls = await t.run(ctx => ctx.db.query('rolls').take(100));
+  await command('/history undo', true);
+  expect(await active()).toMatchObject([{ condition: 'slowed' }]);
+  await command('/history redo', true);
+  expect(await live()).toEqual(tierThree);
+  expect(await t.run(ctx => ctx.db.query('rolls').take(100))).toEqual(rolls);
+  expect(tierThree.stamina).toBe(original.stamina - 2);
 });
