@@ -168,7 +168,7 @@ async function battle(
   } = {},
 ) {
   const fixture = await table(t);
-  await t.mutation(internal.content.reseed, {});
+  await t.action(internal.content.reseed, {});
   await prepareHero(fixture, options);
   const calmId = options.makePeace
     ? await admitHero(t, fixture.player, fixture.director, fixture.campaignId, 'Calm')
@@ -1237,7 +1237,7 @@ describe('A05 attacks, damage, costs and common actions', () => {
   test('FreePlay: Ferocity cost waived outside combat with no debit; second use warns; no action tracking rows', async () => {
     const t = backend();
     const fixture = await table(t);
-    await t.mutation(internal.content.reseed, {});
+    await t.action(internal.content.reseed, {});
     await prepareHero(fixture, { ferocity: 2 });
     const goblin = await addGoblin(t, fixture);
     const { player, campaignId, thornId } = fixture;

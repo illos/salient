@@ -53,7 +53,7 @@ function choices(ancestry: string, traits: readonly string[]) {
 // source content, and absent play-time rune grants; adds every audited trait family.
 test('saved traits expose all audited actions with source and correct grouping', async () => {
   const t = backend();
-  await t.mutation(internal.content.reseed, {});
+  await t.action(internal.content.reseed, {});
   const owner = await account(t, 'TraitOwner');
   for (const [ancestry, traits, actions] of cases) {
     const characterId = await owner.client.mutation(api.characters.create, {
@@ -95,7 +95,7 @@ test('saved traits expose all audited actions with source and correct grouping',
 // after deployment. Existing stored trait provenance must be sufficient; no resource reset.
 test('old admitted traits gain table actions without editing their build', async () => {
   const t = backend();
-  await t.mutation(internal.content.reseed, {});
+  await t.action(internal.content.reseed, {});
   const f = await table(t);
   const characterId = await admitHero(
     t,

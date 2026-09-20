@@ -1,0 +1,20 @@
+{
+  "baseline": {
+    "modules": 115,
+    "sourceBytes": 4147554,
+    "sourceMapBytes": 2415204,
+    "gzipSourceBytes": 811356
+  },
+  "candidate": {
+    "modules": 112,
+    "sourceBytes": 8167781,
+    "sourceMapBytes": 3336867,
+    "gzipSourceBytes": 1198154
+  },
+  "delta": {
+    "modules": -3,
+    "sourceBytes": 4020227,
+    "sourceMapBytes": 921663,
+    "gzipSourceBytes": 386798
+  }
+}

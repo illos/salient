@@ -336,7 +336,7 @@ describe('A07 closeout and Void', () => {
   });
   test('pending source clauses remain optional during closeout; manual resolution is a continuation and archive refuses late resolution', async () => {
     const { t, f, foeId } = await fixture();
-    await t.mutation(internal.content.reseed, {});
+    await t.action(internal.content.reseed, {});
     await start(f);
     await submit(f, '@Thorn /turn take');
     // Position the shared stream at 7 + 7: with Thorn's Might 2, total 16 is printed tier 2.

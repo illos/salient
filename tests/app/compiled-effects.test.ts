@@ -53,7 +53,7 @@ async function dice(t: Backend, campaignId: Id<'campaigns'>) {
 
 async function setup(t: Backend) {
   const f = await table(t);
-  await t.mutation(internal.content.reseed, {});
+  await t.action(internal.content.reseed, {});
   await command(f.director.client, f.campaignId, '@Thorn /adjust stamina value=30');
   await command(f.director.client, f.campaignId, '@Thorn /adjust heroic-resource value=0');
   const goblins: Id<'foes'>[] = [];

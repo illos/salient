@@ -792,7 +792,7 @@ describe('A04 combat opening, turns and clock', () => {
     const t = backend();
     const fixture = await table(t);
     const { director, player, campaignId, sessionId } = fixture;
-    await t.mutation(internal.content.reseed, {});
+    await t.action(internal.content.reseed, {});
     const catalog = await director.client.query(api.foes.catalog, { campaignId });
     const goblin = await director.client.mutation(api.foes.add, {
       campaignId,

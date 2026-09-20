@@ -8,7 +8,7 @@ import { readPinnedSource } from '../helpers/pinned-source';
 test('foe buttons/API/commands share retries, source snapshots and journaled creation/removal', async () => {
   const t = backend();
   const { director, campaignId } = await table(t);
-  await t.mutation(internal.content.reseed, {});
+  await t.action(internal.content.reseed, {});
   const commandId = 'foe-shared-add-0001';
   const foeId = await director.client.mutation(api.foes.add, {
     campaignId,
@@ -85,7 +85,7 @@ test('foe buttons/API/commands share retries, source snapshots and journaled cre
 test('registered foe operations enforce Director authority, campaign scope and pause lock', async () => {
   const t = backend();
   const { director, player, observer, campaignId, sessionId } = await table(t);
-  await t.mutation(internal.content.reseed, {});
+  await t.action(internal.content.reseed, {});
   const operations = await director.client.query(api.commands.list, { campaignId });
   expect(operations.map(op => op.id)).toEqual(expect.arrayContaining(['foe.add', 'foe.remove']));
   for (const [index, caller] of [player, observer].entries()) {

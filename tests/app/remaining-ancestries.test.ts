@@ -22,7 +22,7 @@ function selections(ancestry: string, choices: Record<string, SelectionValue>) {
 // the effective table. Adds persisted sheet/table boundary coverage beyond pure evaluator witnesses.
 test('Time Raider native and prose actions project to table while draft edits preserve resources', async () => {
   const t = backend();
-  await t.mutation(internal.content.reseed, {});
+  await t.action(internal.content.reseed, {});
   const f = await table(t);
   const outsider = await account(t, 'AncestryOutsider');
   const characterId = await admitHero(
@@ -109,7 +109,7 @@ test('Time Raider native and prose actions project to table while draft edits pr
 // borrowed trait, and prevents former-life replacement from leaving its old ability behind.
 test('Revenant borrowed prose actions reach the effective table and disappear after former-life replacement', async () => {
   const t = backend();
-  await t.mutation(internal.content.reseed, {});
+  await t.action(internal.content.reseed, {});
   const f = await table(t);
   const characterId = await admitHero(
     t,

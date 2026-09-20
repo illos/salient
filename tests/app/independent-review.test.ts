@@ -133,7 +133,7 @@ test('independent: cyclic visibility intent after a lost reply applies the new c
     name: 'Campaign',
     commandId: 'review-toggle-campaign',
   });
-  await t.mutation(internal.content.reseed, {});
+  await t.action(internal.content.reseed, {});
   const catalog = await owner.client.query(api.foes.catalog, { campaignId });
   const foeId = await owner.client.mutation(api.foes.add, {
     campaignId,

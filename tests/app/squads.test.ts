@@ -60,7 +60,7 @@ async function atDice(t: Backend, campaignId: Id<'campaigns'>, faces: [number, n
 
 async function arena(t: Backend) {
   const fixture = await table(t);
-  await t.mutation(internal.content.reseed, {});
+  await t.action(internal.content.reseed, {});
   const { director, campaignId } = fixture;
   await submit(director.client, campaignId, '@Thorn /adjust stamina value=30', 'adj');
   await submit(director.client, campaignId, '@Thorn /adjust heroic-resource value=6', 'adj');

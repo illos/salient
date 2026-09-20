@@ -305,7 +305,7 @@
     "name": "Attached Squad Captain",
     "sourcePath": "vendor/steel-compendium/en/unified/md/rule/monster/captain.md",
     "jsonPath": "vendor/steel-compendium/en/unified/json/rule/monster/captain.json",
-    "selection": "squad-rules",
+    "selection": "core-monsters",
     "text": "---\nname: Attached Squad Captain\nscc: mcdm.monsters.v1/rule.monster/captain\ntype: rule\n---\n\nAny non-[Mount](scc.v1:mcdm.monsters.v1/rule.role/mount), non-minion creature, who speaks a language that a [squad](scc.v1:mcdm.monsters.v1/rule.monster/squad) of [minions](scc.v1:mcdm.monsters.v1/rule.organization/minion) can understand can be attached to that squad as a captain. Captains aren't necessarily strategic leaders with brilliant tactics. Sometimes they're just powerful creatures who bully, inspire, or have some supernatural influence that drives other creatures to action.\n\nA squad of minions can have only one captain, and a creature can't be captain to more than one squad of minions.\n\n##### Separate Actions and Stamina\n\nA [captain](scc.v1:mcdm.monsters.v1/rule.monster/captain) takes their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) at the same time as the minion members of their [squad](scc.v1:mcdm.monsters.v1/rule.monster/squad) but isn't limited in their action options as minions are. A captain's [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) isn't added to a minion squad's Stamina pool, and is tracked as for any other creature in combat.\n\n##### Captain Benefits\n\nWhile a minion [squad](scc.v1:mcdm.monsters.v1/rule.monster/squad) has a [captain](scc.v1:mcdm.monsters.v1/rule.monster/captain), each minion in the squad gains the benefits noted at the \"With Captain\" entry on their stat block. Usually, this benefit is either a damage boost, a bonus to [speed](scc.v1:mcdm.heroes.v1/rule.character/speed), or additional [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina).\n\n##### I Am the Captain Now\n\nIf a [squad](scc.v1:mcdm.monsters.v1/rule.monster/squad) of [minions](scc.v1:mcdm.monsters.v1/rule.organization/minion) loses their [captain](scc.v1:mcdm.monsters.v1/rule.monster/captain), a new allied creature can become that squad's captain at the start of the next [round](scc.v1:mcdm.heroes.v1/rule.combat/combat-round) (no action required).\n\n> **Stat Block Icons**\n> \n> The stat blocks in this book contain multiple different icons that allow quick scanning for just the right trait or ability for the situation. The following list provides examples of the most common icons you'll come across.\n> \n> - 📏 The **distance** of the ability\n> - 🎯 The **targets** or affected area of the ability\n> - ⭐️ A **trait** of the creature, often a feature that is always in effect\n> - 🗡 A **melee** ability\n> - 🏹 A **ranged** ability\n> - ⚔️ An ability that is **melee** or **ranged** (your choice)\n> - 👤 A **self** ability that only targets the user\n> - 🔳 A **cube**, **line**, or **wall** area ability\n> - ❇️ An **aura** or **burst** area ability\n> - 🌀 A **special** ability with a unique distance, often the entire encounter map\n> - ❗️ A **[triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action)**\n> - ☠️ A feature or ability specific to a [leader](scc.v1:mcdm.monsters.v1/rule.organization/leader) or [solo](scc.v1:mcdm.monsters.v1/rule.organization/solo) creature, such as **[villain actions](scc.v1:mcdm.monsters.v1/rule.monster/villain-action)**\n",
     "structured": {}
   },
@@ -345,7 +345,7 @@
     "name": "Organized as Squads",
     "sourcePath": "vendor/steel-compendium/en/unified/md/rule/monster/squad.md",
     "jsonPath": "vendor/steel-compendium/en/unified/json/rule/monster/squad.json",
-    "selection": "squad-rules",
+    "selection": "core-monsters",
     "text": "---\nname: Organized as Squads\nscc: mcdm.monsters.v1/rule.monster/squad\ntype: rule\n---\n\n[Minions](scc.v1:mcdm.monsters.v1/rule.organization/minion) with the same name (for instance, goblin sniper) can be organized into squads of up to eight creatures. All members of a minion squad act together on the same initiative, and can make squad attacks (see Acting Together below).\n",
     "structured": {}
   },
@@ -355,7 +355,7 @@
     "name": "Minion",
     "sourcePath": "vendor/steel-compendium/en/unified/md/rule/organization/minion.md",
     "jsonPath": "vendor/steel-compendium/en/unified/json/rule/organization/minion.json",
-    "selection": "squad-rules",
+    "selection": "core-monsters",
     "text": "---\nname: Minion\nscc: mcdm.monsters.v1/rule.organization/minion\ntype: rule\n---\n\nMinions are weaker enemies who are made to die fast and threaten heroes en masse. A battle with minions is one where the heroes are outnumbered and can experience the joy of cutting through fields of their enemies. Creatures organized as minions are meant to support monsters organized in other ways, and have a special set of rules for doing so (see Using Minions below).\n\nMinions die quickly! In fact, some might die before they have a chance to act. That's okay! It's why you build encounters with them four at a time.\n",
     "structured": {}
   }

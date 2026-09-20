@@ -1,0 +1,29 @@
+{
+  "runId": "6be61531-2e66-44cc-a1a2-6e978674e853",
+  "source": "ad8bdbeb566cadb046513ff04b6615d22afb8798",
+  "sourceDirty": "convex/_generated/api.d.ts\nconvex/content.ts\nconvex/contentTables.ts\ndocs/build/STATUS.md\ndocs/build/evidence/V72/support.json\ndocs/build/evidence/V72/support.md\nscripts/build-content.ts\nscripts/seed-content.ts\nshared/content/compendium/featureblock.json\nshared/content/compendium/index.ts\nshared/content/compendium/manifest.json\nshared/content/compendium/rule.json\nshared/content/compendium/statblock.json\ntests/app/a05-review-regressions.test.ts\ntests/app/abilities.test.ts\ntests/app/admission.test.ts\ntests/app/ancestry-abilities.test.ts\ntests/app/audience.test.ts\ntests/app/closeout-session.test.ts\ntests/app/closeout.test.ts\ntests/app/combat.test.ts\ntests/app/compiled-effects.test.ts\ntests/app/content.test.ts\ntests/app/elementalist-character.test.ts\ntests/app/foe-operations.test.ts\ntests/app/foes.test.ts\ntests/app/history-audit.test.ts\ntests/app/history.test.ts\ntests/app/independent-review.test.ts\ntests/app/journal.test.ts\ntests/app/perk-legacy.test.ts\ntests/app/polder-v58.test.ts\ntests/app/remaining-ancestries.test.ts\ntests/app/supporting-actions.test.ts\ntests/app/table.test.ts\ntests/app/v001-walkthrough.test.ts\ntests/scripts/build-content.test.ts",
+  "target": "http://127.0.0.1:3260",
+  "runner": "local Presidium",
+  "elapsedMs": 1374,
+  "contentHash": "sha256:609aed9b6d4bbb4d08676bfcc080333f48fbb9c64d9c952971f82001bef100ca",
+  "entryCount": 1151,
+  "statblocks": 438,
+  "readback": {
+    "id": "mcdm.monsters.v1/monster.undead.1st-echelon.statblock/ghoul",
+    "textSha256": "e2577516d6ad271fb46addc3e61640fa4f6d0cae8bd25a7b73808622f5a3c9dc",
+    "features": [
+      "Razor Claws",
+      "Leap",
+      "Arise",
+      "Hunger"
+    ]
+  },
+  "checks": [
+    "manifest readback",
+    "438 statblocks",
+    "non-goblin source exact",
+    "embedded features exact",
+    "anonymous denied"
+  ],
+  "status": "pass"
+}

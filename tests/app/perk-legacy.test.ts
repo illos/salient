@@ -11,7 +11,7 @@ import type { DerivedBaseline, SelectionValue } from '../../shared/contracts/cha
 // a pre-V83 stored baseline; new-build persistence is covered through public operations separately.
 test('legacy saved perks expose new actions on sheet and table without rewriting the stored build', async () => {
   const t = backend();
-  await t.mutation(internal.content.reseed, {});
+  await t.action(internal.content.reseed, {});
   const f = await table(t);
   const { selections } = JSON.parse(readFileSync('tests/fixtures/v25-fury.json', 'utf8')) as {
     selections: Record<string, SelectionValue>;
