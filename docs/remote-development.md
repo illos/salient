@@ -10,6 +10,26 @@ on 2026-09-16; see the [session checkpoint](build/S03-remote-development.md#sali
 **Human existing-account sign-in remains pending; full V1 acceptance is not claimed.** See the dated
 [migration evidence](build/S03-remote-development.md#main-data-cutover--2026-09-16).
 
+## Choosing a test environment
+
+User decision, 2026-09-20: local and remote CT114 are peer test environments. **Use whichever is
+free and suitable.** Do not wait in a global remote queue if equivalent verification can run on
+an available local environment. This replaces the previous ban on local test workloads, including
+necessary dependency installation, builds and isolated test services.
+
+Coordinate capacity and ownership per host/environment; serialize conflicting or heavy workloads
+on the same constrained host, rather than blocking all testing across hosts. Reuse compatible
+running environments or use explicitly named isolated ones. Check toolchain, resources and target
+compatibility before choosing; free capacity alone does not make evidence equivalent. If no
+suitable environment is available, record the blocker and continue independent development.
+
+Record the source revision, runner host, application URL/environment, command, elapsed time and
+result. A local runner may test the hosted app through its API; its location does not change the
+application target. A local test pass does not prove a different deployed build. Keep the shared
+playable app and existing data in place; do not restart abandoned pilot stacks or repurpose
+protected rollback copies. Browser testing remains prohibited everywhere under the
+[existing moratorium](build/README.md#browser-testing-moratorium--2026-09-20).
+
 ## Workflow
 
 From an enrolled Salient provider session in the selected worktree:
@@ -29,8 +49,9 @@ presidium-dev fetch generated/api.d.ts --output remote-api.d.ts
 presidium-dev stop
 ```
 
-Do not run dependency installers, `pnpm dev`, `pnpm dev:backend`, builds or headless browsers on
-Presidium. No provider-startup hook launches a stack. Deploy edits with another `up`.
+The commands above are the CT114 adapter, not a requirement to run every test remotely.
+Choose the environment under the policy above. No provider-startup hook launches a stack.
+Deploy edits to a selected remote environment with another `up`.
 The default `main` slot is shared and records its source worktree. Explicitly choose a distinct
 `--env` for a concurrently deployed branch; do not replace a peer's slot casually. Every environment
 has separate Convex data and dependencies. Follow the infrastructure helper's explicit replacement

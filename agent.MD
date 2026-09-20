@@ -40,15 +40,18 @@ URL, data and credentials. The actual Salient provider-session broker check pass
 `presidium-ssh dev-runtime id` and `presidium-dev status` both succeeded. Human existing-account
 sign-in remains pending.
 
-All future Salient development server activity, across all branches and worktrees, runs on the
-dedicated dev LXC (CT114), accessed through the secret broker. Use `presidium-dev` for dependency
-installation, backend/frontend, builds and browsers, and `presidium-ssh dev-runtime` for guest
-administration. Do not run those workloads on Presidium or start a stack automatically
-for every provider. Reuse the default main slot from its recorded checkout; different concurrent
-worktrees require explicitly named environments. Retrieve generated types/artifacts selectively.
-All enrolled agents share Docker access on the guest; names and helper checks are conventions,
-not hostile isolation. Preserve development data and the operator's rollback backup. Restarting
-the old local runtime is an explicit operator rollback action, never routine agent startup.
+Local and remote (CT114) are both valid test environments. Use whichever is free and suitable
+for the required test; do not wait for a remote slot when the same proof can run locally.
+Coordinate workloads per host/environment, preserve existing data, and record the actual source,
+runner location and application target with results. The browser moratorium applies everywhere.
+Use `presidium-dev` and `presidium-ssh dev-runtime` for CT114. See
+[the runbook](docs/remote-development.md#choosing-a-test-environment).
+
+This user decision (2026-09-20) supersedes the former remote-only restriction for test workloads,
+including the builds, dependencies and isolated services needed to run them. It does not relocate
+the shared playable app or authorize replacing its data. Reuse a compatible running environment;
+name concurrent isolated environments explicitly. Do not start a stack automatically for every
+provider or revive abandoned pilot environments or protected rollback copies.
 
 ## Post-v0.01 development checkpoint — 2026-09-15
 
