@@ -295,6 +295,16 @@ test('overlapping sources remain coherent through manual removal and combat-end 
   });
   expect(retainedLive.registrationId).toBeUndefined();
   expect(retainedLive.lastSave).toBeUndefined();
+  const publicEvents = await f.observer.client.query(api.events.list, { campaignId: f.campaignId });
+  const unscheduled = publicEvents.events.find(event => event.kind === 'condition.unscheduled');
+  expect(unscheduled?.description).toContain("Remaining goblin's Bury the Point");
+  expect(unscheduled?.description).toContain('saving throw is no longer scheduled');
+  expect(unscheduled?.payload).toMatchObject({
+    effectInstanceId: retained.id,
+    sourceUseEventId: retained.sourceUseEventId,
+    creatureId: f.thornId,
+  });
+
   expect(
     (await t.run(ctx => ctx.db.get(retained.registrationId as Id<'clockRegistrations'>)))!.status,
   ).toBe('retired');
