@@ -100,7 +100,7 @@ try {
     const foeId = await actor.mutation<string>('foes:add', {
       campaignId,
       definitionId: entry.id,
-      commandId: `${runId}-heading-${name}`,
+      commandId: crypto.randomUUID(),
     });
     const abilitySheet = await actor.query<{ abilities: { name: string; text: string }[] }>(
       'abilities:sheet',

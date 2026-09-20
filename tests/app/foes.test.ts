@@ -375,7 +375,7 @@ test('source-derived parent names reach the picker and persisted shared foe oper
     const foeId = await director.client.mutation(api.foes.add, {
       campaignId,
       definitionId: entry.id,
-      commandId: `load-${entry.id}`,
+      commandId: crypto.randomUUID(),
     });
     const detail = await director.client.query(api.foes.detail, { campaignId, foeId });
     expect(detail.name).toBe(name);
