@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
-/** Constant-size passive history windows over the derived index. Mutation validation stays authoritative. */
+/** Indexed passive history windows; ability continuations read only their linked suffix. */
 import { ConvexError } from 'convex/values';
 import type { Doc, Id } from '../_generated/dataModel';
 import type { ReadCtx } from './access';
@@ -8,6 +8,7 @@ import { currentEncounter } from './encounters';
 import { projectEvent, settingsOf } from './audience';
 import { historyCursor, historyUnit } from './historyIndex';
 import {
+  correctionWindow,
   directorWindow,
   playerWindow,
   walkHistory,
@@ -79,6 +80,48 @@ export async function loadReadCorrectionWindows(ctx: ReadCtx, context: TableCont
   const scope = context.session?.status === 'running' ? await readHistory(ctx, context) : null;
   const latest = scope?.walk.branch.at(-1);
   const latestIndex = latest ? await historyUnit(ctx, latest.head._id) : null;
+  const continuations = new Map<string, Promise<HistoryScope | null>>();
+  // The index already retains previousBranch through undo/redo. Follow only this ability's
+  // uninterrupted continuation suffix, stopping at the first unrelated unit (never replay a session).
+  async function continuationScope(event: Doc<'events'>): Promise<HistoryScope | null> {
+    if (!scope || !latest || event.kind !== 'ability.use' || latest.head._id === event._id)
+      return null;
+    const reversed = [];
+    let next = latest;
+    let indexed = latestIndex;
+    while (next.head._id !== event._id) {
+      const correction =
+        next.head.kind === 'correction.ability' &&
+        next.head.causeEventId === event._id &&
+        next.head.payload?.data?.originalEventId === event._id;
+      const disposition =
+        next.head.kind === 'ability.resolved-at-table' &&
+        next.head.payload?.data?.originalEventId === event._id;
+      if ((!correction && !disposition) || !indexed?.active || !indexed.previousBranch) return null;
+      reversed.push(next);
+      const previous = await ctx.db.get(indexed.previousBranch);
+      if (
+        !previous ||
+        previous.sessionId !== scope.session._id ||
+        previous.sequence >= next.head.sequence
+      )
+        return null;
+      next = projectUnit(previous, context);
+      indexed = await historyUnit(ctx, previous._id);
+    }
+    if (!indexed?.active || indexed.sessionId !== scope.session._id) return null;
+    const branch = [next, ...reversed.reverse()];
+    return {
+      ...scope,
+      events: branch.map(item => item.head),
+      walk: {
+        ...scope.walk,
+        branch,
+        units: new Map(branch.map(item => [item.head._id, item])),
+        unitOfEvent: new Map(branch.map(item => [item.head._id, item.head._id])),
+      },
+    };
+  }
   async function window(
     eventId: Id<'events'>,
     mode: 'correction' | 'manual' = 'correction',
@@ -118,6 +161,18 @@ export async function loadReadCorrectionWindows(ctx: ReadCtx, context: TableCont
         reason: `#${head.sequence} ${unit.head.description} is undone; redo it before correcting it.`,
         unit,
       };
+    if (event.kind === 'ability.use' && latest?.head._id !== event._id) {
+      let pending = continuations.get(event._id);
+      if (!pending) {
+        pending = continuationScope(event);
+        continuations.set(event._id, pending);
+      }
+      const linked = await pending;
+      // Share mutation policy for same-roll identity, player/Director seams, floor and manual
+      // disposition rules. The prepared scope prevents the authoritative helper loading a session.
+      if (linked)
+        return correctionWindow(ctx, eventId, context.user, mode, { context, scope: linked });
+    }
     if (mode === 'manual' && context.role === 'director' && head.sequence > scope.floorSequence) {
       const linkedOnly = latest?.head._id === head._id || latestIndex?.continuationOf === event._id;
       const cleanup =

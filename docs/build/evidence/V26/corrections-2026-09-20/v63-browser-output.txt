@@ -1,0 +1,44 @@
+
+Running 1 test using 1 worker
+
+[1/1] tests/browser/v26-baseline.spec.ts:79:1 › V26 real-app regression: consecutive corrections and ten abilities on proper turns
+  1) tests/browser/v26-baseline.spec.ts:79:1 › V26 real-app regression: consecutive corrections and ten abilities on proper turns 
+
+    TimeoutError: locator.click: Timeout 15000ms exceeded.
+    Call log:
+      - waiting for getByRole('button', { name: 'Add foe', exact: true })
+
+
+       at v21-fixtures.ts:86
+
+      84 |   await expect(player.getByRole('heading', { name: `Blackcastle ${stamp}` })).toBeVisible();
+      85 |   for (const count of [1, 2]) {
+    > 86 |     await director.getByRole('button', { name: 'Add foe', exact: true }).click();
+         |                                                                          ^
+      87 |     await expect(player.getByRole('progressbar', { name: 'Goblin Warrior Stamina' })).toHaveCount(
+      88 |       count,
+      89 |     );
+        at createTable (/app/tests/browser/v21-fixtures.ts:86:74)
+        at /app/tests/browser/v26-baseline.spec.ts:104:19
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../artifacts/v63-browser/v26-baseline-V26-real-app--5fe46-n-abilities-on-proper-turns/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../artifacts/v63-browser/v26-baseline-V26-real-app--5fe46-n-abilities-on-proper-turns/test-failed-2.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../artifacts/v63-browser/v26-baseline-V26-real-app--5fe46-n-abilities-on-proper-turns/error-context.md
+
+    attachment #4: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../artifacts/v63-browser/v26-baseline-V26-real-app--5fe46-n-abilities-on-proper-turns/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace ../artifacts/v63-browser/v26-baseline-V26-real-app--5fe46-n-abilities-on-proper-turns/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  1 failed
+    tests/browser/v26-baseline.spec.ts:79:1 › V26 real-app regression: consecutive corrections and ten abilities on proper turns 

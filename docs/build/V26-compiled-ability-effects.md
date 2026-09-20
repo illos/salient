@@ -352,21 +352,23 @@ specified; they remain engineering designs grounded in source, not new user rule
 The integrated-content audit additionally identified Meteoric Introduction, Viscous Fire and Ray of
 Agonizing Self-Reflection as matching the same grammar. Viscous Fire is additionally affected live;
 Meteoric and Ray remain compile-only because current wizard choices cannot grant them. These are
-included under the accepted affected-ability audit requirement. All live evidence is **pending**.
+included under the accepted affected-ability audit requirement. [Baseline evidence](evidence/V26/baseline-2026-09-16/README.md)
+now covers the ten available abilities. **V26 implementation acceptance remains pending**; existing
+manual results do not prove compiled behavior, and the baseline discloses turn-setup deviations.
 
 | Ability | Source / design | Designed | Built | In-app playtested / evidence |
 | --- | --- | --- | --- | --- |
-| Brutal Slam | [Source, design and BS1–BS8](V26-ability-designs.md#brutal-slam) | Complete | No | Pending; no screenshots. |
-| Spear Charge | [Source, design and SC1–SC4](V26-ability-designs.md#spear-charge) | Complete | No | Pending; no screenshots. |
-| Bury the Point | [Source, design and BP1–BP5](V26-ability-designs.md#bury-the-point) | Complete | No | Pending; no screenshots. |
-| Melee Free Strike | [Source, design and MF3](V26-ability-designs.md#melee-free-strike) | Complete | No V26 change | Pending; no screenshots. |
-| Ranged Free Strike | [Source, design and RF3](V26-ability-designs.md#ranged-free-strike) | Complete | No V26 change | Pending; no screenshots. |
-| Pain for Pain | [Source, design and PP3](V26-ability-designs.md#pain-for-pain) | Complete | Compatibility retained; unverified for V26 | Pending; no screenshots. |
-| Out of the Way! | [Source, design and OW2](V26-ability-designs.md#out-of-the-way) | Complete | Compatibility retained; unverified for V26 | Pending; no screenshots. |
-| Thunder Roar | [Source, design and TR1](V26-ability-designs.md#thunder-roar) | Complete | Compatibility retained; unverified for V26 | Pending; no screenshots. |
-| Lines of Force | [Source, design and LF1](V26-ability-designs.md#lines-of-force) | Complete | Compatibility retained; unverified for V26 | Pending; no screenshots. |
+| Brutal Slam | [Source, design and BS1–BS8](V26-ability-designs.md#brutal-slam) | Complete | No | [Baseline screenshots/readback](evidence/V26/baseline-2026-09-16/README.md); full V26 case pending. |
+| Spear Charge | [Source, design and SC1–SC4](V26-ability-designs.md#spear-charge) | Complete | No | [Baseline screenshots/readback](evidence/V26/baseline-2026-09-16/README.md); full V26 case pending. |
+| Bury the Point | [Source, design and BP1–BP5](V26-ability-designs.md#bury-the-point) | Complete | No | [Baseline screenshots/readback](evidence/V26/baseline-2026-09-16/README.md); full V26 case pending. |
+| Melee Free Strike | [Source, design and MF3](V26-ability-designs.md#melee-free-strike) | Complete | No V26 change | [Baseline screenshots/readback](evidence/V26/baseline-2026-09-16/README.md); full V26 case pending. |
+| Ranged Free Strike | [Source, design and RF3](V26-ability-designs.md#ranged-free-strike) | Complete | No V26 change | [Baseline screenshots/readback](evidence/V26/baseline-2026-09-16/README.md); full V26 case pending. |
+| Pain for Pain | [Source, design and PP3](V26-ability-designs.md#pain-for-pain) | Complete | Compatibility retained; unverified for V26 | [Baseline screenshots/readback](evidence/V26/baseline-2026-09-16/README.md); full V26 case pending. |
+| Out of the Way! | [Source, design and OW2](V26-ability-designs.md#out-of-the-way) | Complete | Compatibility retained; unverified for V26 | [Baseline screenshots/readback](evidence/V26/baseline-2026-09-16/README.md); full V26 case pending. |
+| Thunder Roar | [Source, design and TR1](V26-ability-designs.md#thunder-roar) | Complete | Compatibility retained; unverified for V26 | [Baseline screenshots/readback](evidence/V26/baseline-2026-09-16/README.md); full V26 case pending. |
+| Lines of Force | [Source, design and LF1](V26-ability-designs.md#lines-of-force) | Complete | Compatibility retained; unverified for V26 | [Baseline screenshots/readback](evidence/V26/baseline-2026-09-16/README.md); full V26 case pending. |
 | Meteoric Introduction | [Source and pure MI2](V26-ability-designs.md#compile-only-comparison-meteoric-introduction) | Complete for compilation | No V26 change | Deferred; no current live grant option. |
-| Viscous Fire | [Source, design and VF2](V26-ability-designs.md#additional-affected-ability-viscous-fire) | Complete | No V26 change | Pending; no screenshots. |
+| Viscous Fire | [Source, design and VF2](V26-ability-designs.md#additional-affected-ability-viscous-fire) | Complete | No V26 change | [Baseline screenshots/readback](evidence/V26/baseline-2026-09-16/README.md); full V26 case pending. |
 | Ray of Agonizing Self-Reflection | [Source and pure RA2](V26-ability-designs.md#compile-only-comparison-ray-of-agonizing-self-reflection) | Complete for compilation | No V26 change | Deferred; no current live grant option. |
 | Spinecleaver Axe | [Source and compile-only comparison](V26-ability-designs.md#compile-only-comparison-spinecleaver-axe) | Complete for compilation; live minion design deferred to V02 | No live implementation | Deferred; cannot count as built or playtested. |
 
@@ -382,8 +384,7 @@ Brutal Slam's first evidence must correlate its tier-2 source and size rule with
 adds screenshots of the corrected output and restoration. These are expected results for future
 playtests, not observations or screenshot proof from this specification turn.
 
-Keep the run record and screenshots under `docs/build/evidence/V26/` (to be created during actual
-playtesting), linked from each ability row, with tested revision, source pin, runtime identity,
+Keep the run record and screenshots under `docs/build/evidence/V26/`, linked from each ability row, with tested revision, source pin, runtime identity,
 event IDs, pass/fail and limitations. Reconcile the final inventory against adapter changes and the
 generated report before review; no ability may inherit a playtest pass from another ability merely
 because they share grammar. Reuse lower-level mechanics tests without duplicating them per ability.
@@ -617,3 +618,219 @@ code-baseline results retain their recorded scope; they do not verify future V26
   eleven implementation acceptance checks remain pending. Start implementation from then-current
   main in a fresh short-lived slice branch, repeat the content/grant audit and establish an isolated
   backend. The parser/engine track does not retain a permanent branch.
+
+
+### 2026-09-16 — real-app baseline playtests
+
+- User requested playtests. Created short-lived `slice/V26-playtest` in the existing clean worktree
+  `/srv/presidium/projects/salient/engine-parser-spec`. Actual tested code is `f019e3a` (main advanced
+  during branch creation); the run records the full revision and runner SHA rather than the earlier
+  intended `64dc658` baseline. Shared main, runtime and peer data were not changed.
+- Ran all ten currently selectable abilities through the rendered app on isolated frontend 5184,
+  anonymous backend 3234/site 3235. Added an opt-in browser evidence runner and retained paired source/log
+  screenshots, actual before/after readback, correction/manual-disposition/history proof. See the
+  [complete baseline report](evidence/V26/baseline-2026-09-16/README.md) for fixture setup, event IDs,
+  observed arithmetic, known missing behavior and honest case-coverage limits.
+- Baseline passed: supported damage, costs, affordability blocking, condition non-mutation and legacy
+  manual/history behavior. V26 is still unimplemented: no compiled format, occurrence identity or
+  calculated push allowance. Consecutive inline corrections are unavailable after the first; rewind
+  then a single two-bane correction verifies arithmetic but does not pass the designed BS7 sequence.
+- The baseline reused one turn with logged resets; repeated-action/off-turn warnings are visible.
+  Full designed legal-turn playtests remain required after implementation. No compile-only case,
+  new product behavior, backend schema/function or app source was added.
+- Early harness attempts exposed the correction limitation and Vite reloading on evidence writes;
+  preserved failures locally and disabled file watching only on this isolated frontend. Final browser
+  run passed in 2.8 minutes with no page errors. Full `pnpm check` passed: 97 engine + 335 app/scripts
+  tests, lint/types, links, vendor/content/foe checks and production build. An earlier full-check process
+  exited 143 during build; the complete rerun passed. Existing chunk-size build warning remains.
+- Evidence is on this branch, not merged into main. This test/documentation change needs no shared
+  runtime deployment. Independent baseline evidence and pinned-source rules review **pass**,
+  `v26_spec_review`: [baseline playtest review](reviews/V26-baseline-playtest-review.md).
+  All eleven V26 implementation acceptance checks remain pending.
+
+
+### 2026-09-16 — prerequisite correction and playtest fixes
+
+User accepted fixing consecutive corrections and proper-turn playtest setup before compiler work.
+Work is bounded to these prerequisites on `slice/V26-corrections`, in
+`/srv/presidium/projects/salient/engine-parser-spec`, based on integrated main `f7137dc` plus the
+rebased baseline evidence (`5e010ac`, formerly `aeed035`). Rebase resolved only STATUS.md while
+preserving V25/V27/V29 integrated records. Original baseline evidence remains historical and unchanged.
+
+Plan: update the shared correction-window helper used by the result query and mutation; preserve
+sequential undo units and player/Director seams; add focused saved-state regressions; replace the
+baseline runner's rewind workaround with consecutive player clicks and use actual turn transitions
+for all ten abilities. No compiler or movement implementation belongs to this prerequisite patch.
+Local anonymous backend 3234/site 3235 and frontend 5184 are isolated; shared playable data is untouched.
+
+Prerequisite acceptance:
+
+1. Two consecutive inline player corrections retain dice, reconcile damage once and leave the original
+   event intact. Player undo/redo restores each correction in sequence; retry remains idempotent.
+2. Director continuations work; Director corrections still close the player's window. Settings,
+   ownership, later actions/turns, manual dispositions and history boundaries remain enforced.
+3. Corrected cards permit the Director to mark manual clauses; the disposition is a subsequent
+   gameplay unit and blocks more correction until rewound.
+4. All ten live ability probes use proper fresh turns with no action/turn-order warnings, source/log
+   screenshots and saved readback. Manual movement/trigger limitations remain explicit.
+5. Full repository checks, independent implementation review and bounded source review pass.
+
+The existing A05 test explicitly expected a second correction to fail under the earlier strict
+interpretation. The user's accepted V26 recommendation clarifies directly linked corrections as
+continuations of the effective roll, while preserving individual undo and all unrelated-event seams.
+The table and command specs now state this distinction. Two new/updated regression cases failed
+before the fix and pass afterward; this is application correction policy, not a new Draw Steel rule.
+
+
+Verification checkpoint: full serial `pnpm check` passes **435 tests** (97 engine + 338 app/scripts)
+and build; the focused ability/history suite passes 38. Independent code/design review and subsequent
+bounded pinned-source review pass in [the prerequisite review](reviews/V26-corrections-review.md).
+Complete live prerequisite 4 remains pending. A partial run verified consecutive player clicks and
+undo/redo but stopped during later turn progression with a backend execution timeout under host memory
+pressure; a subsequent fixture setup failed to obtain its authentication token. All owned services are
+stopped while coordinating a browser window. No failed/partial run counts as complete live acceptance.
+
+
+### 2026-09-16 — prerequisite live verification completed
+
+- Correction implementation is committed at `f69843b` on `slice/V26-corrections`, not merged.
+  The subsequently reviewed test-only authentication adapter supports the production-built preview;
+  the final readback records both its runner hash and the unchanged history module hash.
+- The complete opt-in browser journey **passes in 6.5 minutes**. All ten abilities use fresh actor
+  turns, with 240 ordinary turn-transition events through round 11 and no action/turn-order warnings.
+  Consecutive player bane clicks, undo/redo, damage/costs, insufficient-resource blocking, manual
+  dispositions and reload persistence pass. Readback has 23 records and no page errors.
+- [Fresh evidence](evidence/V26/corrections-2026-09-16/README.md) contains 33 screenshots including
+  paired source dialogs and game-log outputs, saved state, full-check output and the final browser
+  result. Historical baseline and failed local attempts remain separate. The original baseline's
+  correction workaround and turn-setup limitations are now superseded by this evidence.
+- Host contention required serializing peer browser work. A later run reached Thunder Roar before
+  the preview process exited with signal 15; the complete unchanged rerun used a monitored terminal
+  session. No gameplay assertion or timeout was relaxed. All task-owned ports 3234/3235/5184 were
+  stopped after success, and the browser window was released to V32 through Chords.
+- Full checks remain 435 passing tests and build, with 38 focused history/ability tests; targeted
+  lint/types passed after the test-only authentication adapter. Documentation links and whitespace
+  pass. Independent final evidence review **passes**, completing all five prerequisite checks;
+  see [the prerequisite review](reviews/V26-corrections-review.md).
+- These are the five bounded prerequisite checks. All eleven V26 compiler acceptance checks,
+  compiled definitions/occurrences and calculated push allowances remain pending. This branch has
+  not changed main or the shared playable runtime; any later merge must follow runtime integration.
+
+
+### 2026-09-20 — V63 rebase and integration audit
+
+- Fable assigned a bounded prerequisite rebase/reverification; Fable retains main integration,
+  shared-runtime update and final verification. Worktree `.worktrees/engine-corrections`, branch
+  `slice/V63-corrections-rebase`, base main `0f47e8951dbf3da47039130e7334d2a0afd831eb`.
+  Named CT114 `engine-corrections` is the planned isolated local-anonymous target; no environment
+  has been provisioned or started. Character V62 owns hosted verification; heavy work was held
+  while requesting a coordinated window. No shared or cloud runtime changes.
+- Cherry-picked original `5e010ac`, `f69843b`, `37ec53f` cleanly as `5787f84`, `36e2400`,
+  `44b23ba`. Original authorship and Spec/Reviewed-By trailers remain intact. Those reviews and
+  verification statements predate this rebase and cannot establish current acceptance.
+- The full mutation path remains correct in isolation: `correctionWindow` loads complete ordered
+  session events through `loadHistory` and `walkHistory`. The effective branch excludes undone and
+  abandoned units; only an uninterrupted suffix of `correction.ability` heads linked by both
+  `causeEventId` and `payload.data.originalEventId` to the same `ability.use` permits continuation.
+  Player ownership/Director seams are checked for each suffix entry, then the original unit's
+  floor/ownership is checked with only the temporary validation view truncated. Recorded undo
+  units and redo history are not collapsed.
+- **Blocking V43 integration finding:** `abilities.results` now uses `loadReadCorrectionWindows`
+  from `convex/lib/historyRead.ts`, independently of that authoritative helper. `readHistory`
+  reads only branch top, redo top and redo-clearing unit. Its correction path compares the original
+  ability unit with the newer correction branch top and refuses it. Thus the UI's `mayCorrect`
+  becomes false after the first correction even though the mutation permits the next one.
+  `historyIndex.ts` assigns `continuationOf` only to `ability.resolved-at-table`, so its manual
+  window also fails to recognize a correction suffix. This is a semantic incompatibility despite
+  the conflict-free cherry-pick, not a claim of a browser-observed failure.
+- Existing rebased `tests/app/abilities.test.ts` assertions at the first correction's
+  `mayCorrect: true`, the second player's result, and manual disposition after linked corrections
+  already target the mismatch. No redundant tests or speculative application repair added.
+  Reported the blocker through Chords message 566; stopped before runtime verification under the
+  assignment's stop/report instruction. Independent static review **changes required**, `v63_blocker_review`; see
+  [the rebase review](reviews/V26-corrections-rebase-review.md). It confirms both read-window
+  defects and the bounded Brutal Slam/Thunder Roar source arithmetic. Fresh full-check,
+  ten-ability journey and formal passing review remain unperformed.
+- The old opt-in browser harness also requires an explicit CT114 adapter before it can run:
+  fixed local ports 3234/3235/5184, backend-only `.convex` config/import access, literal 467-entry
+  content expectation and synthetic remote Git identity are incompatible with the current runtime.
+  No guard, assertion, timeout or target restriction was weakened. Any adapter must preserve the
+  exact mechanical scenarios and record the actual source revision separately from remote snapshot.
+- Compiler implementation, new abilities, source pins and 2026-09-16 evidence remain unchanged.
+  No merge-readiness or re-verification PASS is claimed.
+
+- Final lightweight checks: documentation links (273 Markdown files), whitespace, and the actual
+  branch commit merge gate pass. Both vendor checkouts are initialized at the unchanged pins.
+  An initial link check ran before Forge checkout completed and reported missing vendor paths;
+  it passed once initialization finished. No dependency installation, build or browser ran on
+  Presidium. V62 requested continued serialization of CT114 heavy work; no environment or
+  workload was started, so no runtime cleanup/data deletion is needed.
+
+
+### 2026-09-20 — V63 indexed-read repair and CT114 verification
+
+Fable extended the assignment in Chords message 569 to repair the indexed read path, assert
+read/mutation parity and adapt the historical browser harness for the named CT114 environment.
+The preceding static blocker review remains an accurate record of the unmodified rebase.
+
+Implemented a walk of existing `historyUnits.previousBranch` pointers through only the same
+ability's correction/disposition suffix, then reuse of authoritative correction policy with that
+prepared scope. Reads scale with that suffix, not all session history. No index/schema migration
+or mutation-policy change. Existing lifecycle tests now compare read/mutation booleans against
+explicit expectations. Two cases fail before repair and pass afterward.
+
+Rebased onto main `5956331` before runtime proof, incorporating the headless completion doctrine.
+Candidate `a843c1a` is the exact clean tested snapshot. CT114 `engine-corrections` alone hosted
+installs/formatting/checks/build/live proof. Full `pnpm check` passes 284 engine +409 app/scripts
+tests and all other gates. Live BetterAuth/public setup plus `scripts/app.ts command` gameplay
+passes the entire correction lifecycle with persisted readback before browser acceptance.
+See [fresh evidence and exact hashes](evidence/V26/corrections-2026-09-20/README.md).
+
+| Capability | CLI/API proof | Incremental browser coverage |
+| --- | --- | --- |
+| Consecutive corrections, undo/redo | Passed, retained dice and exact health | Repeated visible controls/clicks pending |
+| Manual disposition after correction | Passed, permissions and rewind | Historical BS8 browser case uses a fresh uncorrected roll |
+| Director seam and unrelated turn | Passed, rejected mutations preserve state | Rendered availability pending |
+| Ten ability proper-turn/source/log cases | Not the scope of the correction CLI | Fresh journey blocked before abilities |
+| Reload and presentation | Persisted API state passed | Fresh reload/screenshots pending |
+
+The browser failed during `createTable`, before Add foe: Director campaign page showed a backend
+function execution timeout (maximum one second). No mechanics or test assertion was altered;
+no retry was attempted under the stop/report directive. Fable received blocker 587 with an
+accepted wake request, which does not establish that the peer started work. Failure screenshot,
+page snapshot and logs are retained; authentication-bearing trace is outside Git. Fresh ten-ability
+browser acceptance remains incomplete. Independent review distinguishes code/source/headless
+verification from that blocked acceptance gate.
+
+Both one-shot jobs and dice helpers exited; named backend/web stopped with data retained.
+Heavy window released to V65 through Chords588. Shared/main/character/hosted runtimes were not
+changed. Later main V64 adds a read-only audit; this candidate remains based on `5956331` and is
+committed on branch only. All eleven compiler acceptance checks remain pending.
+
+After the user paused testing, read-only stopped-backend logs identified `characters:reviews`
+at `2026-09-20T01:50:02.754170801Z` as the failing query; `table:roster` also logged 873 ms.
+Fable's proposed single unchanged rerun is held under the user pause. Non-test documentation,
+review and peer handoff continue. This identifies a query, not a confirmed root cause.
+
+### 2026-09-20 — Moratorium handoff update
+
+Rebased V63 onto main `2f5544f`, preserving main's V64 audit and V66 browser-harness registration.
+Only STATUS rows conflicted; application changes replayed cleanly. Prior test/readback artifacts
+retain the exact pre-rebase identity and are not relabeled as fresh proof. Under the new
+[browser moratorium](README.md#browser-testing-moratorium--2026-09-20), a missing browser run
+is no longer an acceptance blocker. Added correction controls and ten-ability visual scenarios
+to the [backlog](browser-coverage-backlog.md), using its `spot` priority vocabulary.
+Historical blocked-review language above describes the gate before the moratorium, not the
+current browser requirement. Refreshed CLI/full-check verification and final review are held
+by this thread's direct user testing pause until clarified; no runtime/test command was started.
+
+### 2026-09-20 — Resumed headless acceptance
+
+User explicitly resumed normal work and non-browser verification. Clean candidate `47e69c6`
+on main `2f5544f` passed a fresh CT114 full check (705 tests and every gate/build) and real
+BetterAuth/CLI correction lifecycle (12 records, complete, exit 0). Exact source metadata,
+file hashes, full output and public readback are in the
+[fresh evidence](evidence/V26/corrections-2026-09-20/README.md#resumed-headless-verification--2026-09-20).
+Named engine-corrections services stopped afterward with data retained. Browser scenarios remain
+in the backlog under the moratorium; no browser execution or new acceptance dependency.
+Independent final implementation and pinned-source rules review both [PASS](reviews/V63-headless-final-review.md). This accepts only the correction prerequisite, not the broader V26 compiler. Fable owns integration into main and the shared runtime.
