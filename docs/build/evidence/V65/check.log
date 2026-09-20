@@ -1,0 +1,43 @@
+$ pnpm lint && pnpm check:engine && pnpm check:app && pnpm check-links && pnpm check-vendor && pnpm content:check && pnpm supporting:check && pnpm foes:check && pnpm build
+$ eslint . && prettier --check .
+Checking formatting...
+All matched files use Prettier code style!
+$ tsc --noEmit && vitest run --project engine
+
+ RUN  v4.1.11 /app
+
+ ✓  engine  tests/supporting-coverage.test.ts (101 tests) 393ms
+ ✓  engine  tests/fury-decisions.test.ts (5 tests) 385ms
+   ✓ R01 checks 2-3: every option value, grant and quoted count/budget sentence is verbatim in its cited source  357ms
+ ✓  engine  tests/character-v25-evaluator.test.ts (8 tests) 320ms
+ ✓  engine  tests/character-v45-reference.test.ts (7 tests) 304ms
+ ✓  engine  tests/cli.test.ts (1 test) 217ms
+ ✓  engine  tests/supporting-complications.test.ts (21 tests) 195ms
+ ✓  engine  tests/supporting-backgrounds.test.ts (46 tests) 146ms
+ ✓  engine  tests/character-v32-evaluator.test.ts (9 tests) 144ms
+ ✓  engine  tests/acceptance.test.ts (3 tests) 101ms
+ ✓  engine  tests/parser.test.ts (8 tests) 83ms
+ ✓  engine  tests/live-state-initialization.test.ts (4 tests) 76ms
+ ✓  engine  tests/character-v57-devil.test.ts (3 tests) 64ms
+ ✓  engine  tests/character-v45-foundation.test.ts (3 tests) 56ms
+ ✓  engine  tests/character-derived-values.test.ts (4 tests) 53ms
+ ✓  engine  tests/history.test.ts (3 tests) 47ms
+ ✓  engine  tests/character-v61-human.test.ts (4 tests) 39ms
+ ✓  engine  tests/character-evaluator.test.ts (8 tests) 39ms
+ ✓  engine  tests/character-v60-dwarf.test.ts (6 tests) 36ms
+ ✓  engine  tests/core-conditions.test.ts (11 tests) 28ms
+ ✓  engine  tests/character-creation-rulings.test.ts (6 tests) 19ms
+ ✓  engine  tests/engine.test.ts (13 tests) 15ms
+ ✓  engine  tests/resolve.test.ts (19 tests) 13ms
+ ✓  engine  tests/character-v58-polder.test.ts (2 tests) 12ms
+ ✓  engine  tests/v25-build-roll-contributions.test.ts (4 tests) 4ms
+
+ Test Files  24 passed (24)
+      Tests  299 passed (299)
+   Start at  01:54:25
+   Duration  6.51s (transform 474ms, setup 0ms, import 1.48s, tests 2.79s, environment 2ms)
+
+$ tsc -p tsconfig.web.json && vitest run --project app --project scripts
+scripts/headless/character-scenarios.ts(159,17): error TS7022: 'actual' implicitly has type 'any' because it does not have a type annotation and is referenced directly or indirectly in its own initializer.
+[ELIFECYCLE] Command failed with exit code 2.
+[ELIFECYCLE] Command failed with exit code 2.

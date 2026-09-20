@@ -385,3 +385,17 @@ remain uncommitted in `.worktrees/astra-hosted`; they are not accepted verificat
 Further browser debugging is paused. No background verification job is running, and the CT114 heavy
 window is released to V63. The named `character-restart` runtime remains stopped with data retained.
 This doctrine/status update changes documentation only and needs no runtime update.
+
+
+## V65 programmatic character verification — 2026-09-20
+
+| Id | Unit | Candidate | Verification / next action |
+| --- | --- | --- | --- |
+| V65 | [Character headless routes and verification](V65-character-headless.md) | `c0fe8b1` + evidence `6af5dc9`, pushed `origin/slice/V65`; backend deployed to cloud dev, not merged | 712 unit/backend/script tests pass; app TS7022 blocker; remote headless 14 pass / 1 assertion fail / 7 dependency skips in 45.472s; no fixes, retries or browsers; incomplete |
+
+Discovery and shared choice-transition routes are implemented on the candidate and live backend.
+The UI refactor remains unpublished because the app TypeScript check failed; the hosted frontend
+remains V62 `1e7896c`. Admission/privacy assertion failure blocks the remaining lifecycle proof.
+The preceding audit/queue describes the starting gaps; use V65's actual evidence for current proof.
+All V65 jobs ended and its temporary deployment credentials were removed. No browser demotion or
+ancestry acceptance is claimed. User instruction is to record blockers without implementing fixes.

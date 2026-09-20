@@ -96,10 +96,21 @@ reset-link behavior was checked separately through the disposable account.
 See [V39](build/V39-account-email.md) for the validation record. Shared private main also has the code
 but keeps recovery unavailable because it has no email token.
 
-## Current release — 2026-09-19
+## Previous release — 2026-09-19
 
 Performance source `944a46ab7b05059d22d8403634867de56462e209` is published to the targets above.
 Worker version: `7e86903b-5f7c-46a8-8d68-540f8f21991f`. Convex deployment added bounded-history
 read indexes without deleting existing indexes or resetting data. GitHub CI passed 681 tests.
 See [the release evidence](build/evidence/V43/hosted/README.md) for browser results,
 fixture limitations and deployment logs. Earlier Worker versions in slice records are historical.
+
+
+## Character verification backend — 2026-09-20
+
+The hosted frontend was subsequently published from V62 `1e7896c`, Worker
+`b9cc5ebb-54a1-4176-bc05-d99051b3cf1e`, with Devil/Polder/Dwarf/Human candidates.
+V65 backend `c0fe8b1` now adds authenticated wizard discovery/choice transitions to the same cloud
+development target. Backend deployment type/schema checks passed; content and accounts were not
+reset. V65 frontend publication is blocked by a verification-script TypeScript error, so the V62
+frontend remains live. The [V65 evidence](build/V65-character-headless.md#one-pass-result--2026-09-20)
+records the once-only headless run (14 pass, 1 fail, 7 blocked), remaining proof and cleanup.
