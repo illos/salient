@@ -30,4 +30,7 @@ the job explicitly allowed it to be skipped when starting an exact-source app st
 non-acceptance screenshots was unjustified. The repository browser moratorium says a missing browser
 run is not pending acceptance work. No ports, processes or disposable app data require cleanup.
 
-The terminal Chords return and wake result will be appended after delivery.
+TESTER attempted the required direct terminal return to UI with stable key
+`test-V75-2c7cfe2-1-passed-return`, but Chords rejected it because the recipient thread was settled.
+The result remains retained for retry under the same key when an eligible UI recipient is available;
+no passive broadcast is being treated as delivery.
