@@ -31,7 +31,7 @@ Object.assign(env, {
   VITE_CONVEX_URL: cloud,
   VITE_CONVEX_SITE_URL: site,
   VITE_SITE_URL: origin,
-  NODE_OPTIONS: '--max-old-space-size=768',
+  NODE_OPTIONS: operation === 'build' ? '--max-old-space-size=1536' : '--max-old-space-size=768',
 });
 
 let credentials;
