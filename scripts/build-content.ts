@@ -101,6 +101,26 @@ export const SELECTIONS: ManifestSelection[] = [
       'feature/fury/level-1/beast-shape.md: "You can use and gain the benefits of a stormwight kit (see Stormwight Kits)".',
   },
   {
+    id: 'dwarf-ancestry',
+    description: 'Dwarf ancestry and complete level-one traits for V60.',
+    paths: ['ancestry/dwarf.md', 'feature/trait/dwarf'],
+  },
+  {
+    id: 'hakaan-ancestry',
+    description: 'Hakaan ancestry and complete level-one traits for V70.',
+    paths: ['ancestry/hakaan.md', 'feature/trait/hakaan'],
+  },
+  {
+    id: 'orc-ancestry',
+    description: 'Orc ancestry and complete level-one traits for V71.',
+    paths: ['ancestry/orc.md', 'feature/trait/orc'],
+  },
+  {
+    id: 'human-ancestry',
+    description: 'Human ancestry and complete level-one traits for V61.',
+    paths: ['ancestry/human.md', 'feature/trait/human'],
+  },
+  {
     id: 'polder-ancestry',
     description: 'Polder ancestry and its traits, for the V25 character wizard path.',
     paths: ['ancestry/polder.md', 'feature/trait/polder', 'feature/ability/polder'],

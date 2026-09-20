@@ -1,0 +1,43 @@
+// Ephemeral authentic website driver. Run only in coordinated CT114 browser container.
+const { createRequire } = require('node:module');
+const { chromium } = createRequire('/app/package.json')('@playwright/test');
+const fs = require('node:fs/promises');
+const path = require('node:path');
+const out = '/artifacts/astra-forge-capture';
+const witnesses = [{id:'v58-polder-new',file:'Bethell-corrected-export.ds-hero',traits:['Nimblestep','Polder Geist','Reactive Tumble']}];
+(async()=>{
+ await fs.mkdir(out,{recursive:true});
+ const browser=await chromium.launch({headless:true});
+ const context=await browser.newContext({viewport:{width:1600,height:1200},acceptDownloads:true});
+ const page=await context.newPage(); page.setDefaultTimeout(12000);
+ async function snap(id){await fs.writeFile(`${out}/${id}.txt`,await page.locator('body').innerText()); await page.screenshot({path:`${out}/${id}.png`,fullPage:true});}
+ try {
+  await page.goto('https://forgesteel.net/',{waitUntil:'domcontentloaded'});
+  await page.getByText('Go to your Heroes',{exact:true}).click();
+  for(const w of witnesses){
+   await page.getByText('Add',{exact:true}).click();
+   await page.locator('input[type=file]').setInputFiles(`/app/tests/fixtures/v45-reference/${w.file}`);
+   await page.getByText('Edit',{exact:true}).waitFor();
+   await snap(`${w.id}-imported`);
+   await page.getByText('Edit',{exact:true}).click();
+   await page.locator('.hero-edit-page').waitFor({state:'visible'});
+   await page.locator('.hero-edit-page .page-controls .page-button-title').filter({hasText:/^Ancestry$/}).click();
+   await page.locator('#ancestry-choices').waitFor();
+   const choices=page.locator('#ancestry-choices');
+   while(await choices.getByTitle('Remove',{exact:true}).count()) await choices.getByTitle('Remove',{exact:true}).first().click();
+   for(const trait of w.traits){
+    await choices.getByText('Choose an option',{exact:true}).click();
+    await page.locator('.feature-select-modal:visible .selectable-panel').filter({has:page.getByText(trait,{exact:true})}).click();
+   }
+   await snap(`${w.id}-choices`);
+   await page.getByText('Save Changes',{exact:true}).click();
+   await page.getByText('Export',{exact:true}).waitFor();
+   await snap(`${w.id}-sheet`);
+   await page.getByText('Export',{exact:true}).click();
+   const download=page.waitForEvent('download');
+   await page.getByText('Export as Data',{exact:true}).click();
+   await (await download).saveAs(`${out}/${w.id}.ds-hero`);
+   console.log('CAPTURED',w.id,page.url());
+  }
+ } catch(e){await snap('failure');throw e;} finally {await browser.close();}
+})().catch(e=>{console.error(e);process.exitCode=1;});

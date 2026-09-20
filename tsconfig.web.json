@@ -28,6 +28,8 @@
     "scripts/check-commit.ts",
     "scripts/check-links.ts",
     "scripts/app.ts",
+    "scripts/headless",
+    "scripts/verify-character-headless.ts",
     "scripts/v63-headless.ts",
     "scripts/v63-headless-main.ts",
     "scripts/setup-local.ts",

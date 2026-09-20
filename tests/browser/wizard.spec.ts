@@ -62,7 +62,7 @@ test('wizard, admission review and the three sheet audiences', async ({ browser 
       player!.getByLabel(label, { exact: true }).selectOption(value);
     // 2. Ancestry: the full pool is visible, unsupported ancestries are labeled and disabled.
     await step('2. Ancestry');
-    await expect(player!.getByLabel('Dwarf', { exact: true })).toBeDisabled();
+    await expect(player!.getByLabel('Dragon Knight', { exact: true })).toBeDisabled();
     await expect(player!.getByText('Not offered yet').first()).toBeVisible();
     await player!.getByLabel('Devil', { exact: true }).click();
     await pick('Silver Tongue skill', 'Persuade');

@@ -370,6 +370,13 @@ baseline is distinct from live values (R03). Q-CHAR-10 now permits completion wi
 [source research](research/remaining-character-questions-review.md#q-char-12) on 2026-09-15: use the
 class-named potency characteristic with specific overrides. A02 implements the evaluator against these types.
 
+**Implementation note — 2026-09-19 (V58):** Polder level-one creation exposes all six
+purchased traits under the existing four-point budget. Nimblestep, Polder Geist and Reactive
+Tumble now join the previously supported quick-build traits. Their conditional movement effects
+remain readable source for manual play; they add no permanent speed or Disengage bonus.
+Save, replacement and review continue through the existing character operations. See the
+[V58 acceptance record](build/V58-polder-level-one.md) for verification status.
+
 ## 4. Wizard flows
 
 **Confirmed Director-owned character path:** An active Director's own character admission and full edits are

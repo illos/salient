@@ -16,7 +16,8 @@ import type { CharacterSheet, HeroSheet } from '../../shared/contracts/character
 import type { BuildReconciliation } from '../../shared/contracts/liveState';
 import { getDefinitions } from '../../shared/content/character-decisions';
 import { draftSelectionsFrom } from '../../shared/evaluate/draft';
-import { pruneUnavailable, type Selections } from '../../shared/evaluate/structure';
+import type { Selections } from '../../shared/evaluate/structure';
+import { changeChoice } from '../../shared/evaluate/choiceTransition';
 import { DecisionEditor } from '../wizard';
 import { HeroSoFar } from '../wizard/hero-so-far';
 import { decisionLabel } from '../wizard/presentation';
@@ -225,13 +226,12 @@ function AdvancementEditor({
                   onSelect={(id, value) => {
                     if (blocked || !newIds.has(id)) return;
                     setChoices(previous => {
-                      const next = { ...previous };
-                      if (value === undefined) delete next[id];
-                      else next[id] = value;
-                      // Evaluate dependencies against the frozen build, but only edit this level's choices.
-                      const pruned = pruneUnavailable(
-                        { ...selectionMap(base.selections), ...next },
+                      // Change the scoped choice against the frozen build using the shared transition.
+                      const pruned = changeChoice(
+                        { ...selectionMap(base.selections), ...previous },
                         definitions,
+                        id,
+                        value,
                       );
                       return Object.fromEntries(
                         Object.entries(pruned.selections).filter(([key]) => newIds.has(key)),

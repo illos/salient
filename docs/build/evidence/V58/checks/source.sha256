@@ -1,0 +1,4 @@
+9298e16a91f52dee64b9f15e2fddb66c4d32c15d7c68cefb10a75d9450f16a26  shared/content/ancestries/polder/level-one.ts
+fbf37f3f8b27369eaf4ae4bbb982d2960765b2c61418c3f5e918b1a84a6eafa1  tests/character-v58-polder.test.ts
+057ee9355e301128e723a158eb99f6d8ed010a57b77160399fbf76d2a08404cc  tests/app/polder-v58.test.ts
+a6d19f7bd7bdf27f49252de7a98e17062d5fa363f2f6326f278d2f9106b3e641  tests/browser/v58-polder.spec.ts

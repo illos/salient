@@ -1,0 +1,5 @@
+$ node scripts/build-content.ts
+Generated shared/content/compendium (491 entries, 10 excluded, revision fb83a789da8f, generatedAt 2026-09-08).
+shared/content/ancestries/human/level-one.ts 81ms
+shared/evaluate/ancestries/human.ts 22ms
+tests/character-v61-human.test.ts 35ms

@@ -1,9 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-only
 // A07 browser acceptance source. Uses the same authenticated commands and persisted reads as the UI.
 import { expect, test, type Page } from '@playwright/test';
-import { execFile } from 'node:child_process';
-import { promisify } from 'node:util';
-import { seedLocalHero } from './local-fixtures';
+import { authenticatedFixtureCli, seedLocalHero } from './local-fixtures';
 
 test.use({ actionTimeout: 30_000 });
 
@@ -25,6 +23,7 @@ test('closeout awards once, is shared with observers, and paused session closure
   const contexts = await Promise.all(
     Array.from({ length: 3 }, () => browser.newContext({ viewport: { width: 1440, height: 960 } })),
   );
+  let session: Awaited<ReturnType<typeof authenticatedFixtureCli>> | undefined;
   try {
     const [director, player, observer] = await Promise.all(
       contexts.map(context => context.newPage()),
@@ -70,16 +69,8 @@ test('closeout awards once, is shared with observers, and paused session closure
       credentials('player'),
       credentials('director'),
     );
-    const cli = async (...args: string[]) => {
-      const result = await promisify(execFile)('pnpm', ['app', ...args], {
-        env: {
-          ...process.env,
-          SALIENT_EMAIL: credentials('director').email,
-          SALIENT_PASSWORD: password,
-        },
-      });
-      return JSON.parse(result.stdout);
-    };
+    session = await authenticatedFixtureCli(credentials('director'));
+    const cli = session.cli;
     const command = (text: string) => cli('command', text, '--campaign', campaignId);
     const roster = () => cli('query', 'table:roster', JSON.stringify({ campaignId }));
     await Promise.all([director, player, observer].map(page => page.goto(`${campaignUrl}/table`)));
@@ -188,6 +179,10 @@ test('closeout awards once, is shared with observers, and paused session closure
     expect(closed.session).toBeNull();
     expect(closed.heroes.find((hero: { id: string }) => hero.id === heroId).live.surges).toBe(2);
   } finally {
-    await Promise.all(contexts.map(context => context.close()));
+    try {
+      await session?.close();
+    } finally {
+      await Promise.all(contexts.map(context => context.close()));
+    }
   }
 });
