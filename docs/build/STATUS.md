@@ -151,7 +151,7 @@ See the [CI review and run record](audits/2026-09-14-ci-history-review.md) for t
 | Id | Slice | Depends on | Status |
 | --- | --- | --- | --- |
 | V01 | [Respite research and loop](V01-respite.md) | A09 | Outline |
-| V02 | [Minion squads and captains](V02-minions-and-captains.md) | A09 | Outline |
+| V02 | [Minion squads and captains](V02-minions-and-captains.md) | A09 | In progress — claimed 2026-09-20 by the foes thread (Fable), `slice/V02` in `.worktrees/minions`; user decisions on the open arithmetic recorded in the table spec |
 | V03 | [Boss and villain turn mechanics](V03-boss-turn-mechanics.md) | V02 | Outline |
 | V04 | [Persistent area cards and response reconciliation](V04-areas-and-response-reconciliation.md) | A09 | Outline |
 | V05 | [Ability parser and class/stat-block automation](V05-ability-automation.md) | A09, V04 | Outline |

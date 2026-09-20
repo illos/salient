@@ -427,6 +427,13 @@ The following issues remain bounded rather than silently decided:
 | A captain with multiple turns | Captain eligibility does not exclude Solos; some creatures get several full turns. | User ruling, 2026-09-13: personal extra turns belong only to the captain; squad participation does not refresh and attachment/benefits persist. The shared squad/captain entry is distinct from personal extra entries and follows existing legal entry selection. Explicit multi-recipient grants remain a separate source case. |
 | Troll and promotion exceptions | Explicit pool healing, delayed deaths, transformation, and revival exist. | Precise membership/current-value transactions and incomplete source values. |
 
+**Update, 2026-09-20:** the first four rows above were decided by the user in the V02 build thread
+(cumulative pool ladder with carried damage across captain changes; zero kills the squad from any
+cause; area damage on the same ladder with in-area casualties only; no administrative single-minion
+removal and the captain finishing a shared turn alone). The owning record is
+[the table contract](../table-spec.md#minion-squads-and-captain-state); this report keeps the
+original analysis unchanged.
+
 Wode Elf Guerrilla illustrates why captain timing deserves special attention: while acting as a captain,
 its Do Not Hesitate in the Wode can make itself and allies take immediate turns when its trigger is met.
 Its target text is broader than the attached squad. It should not be silently narrowed to that squad

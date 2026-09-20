@@ -1976,8 +1976,46 @@ increases the current pool by that bonus for each surviving minion; three surviv
 add 6 to the pool. Defeated members remain defeated and contribute nothing to the increase. This is a
 bonus adjustment, not revival or ordinary healing; it does not reset accumulated damage, participation
 or turn spending. Preserve casualty history and surviving identities.
-Non-exhausting damage thresholds after stat adjustment and damaged membership changes remain separate
-follow-ups.
+Non-exhausting damage thresholds after a stat adjustment were decided on 2026-09-20 (below);
+source-driven membership changes remain a separate follow-up.
+
+**User decisions, 2026-09-20 (V02 build thread).** These settle the arithmetic the 2026-09-13 rulings
+left open. The user answered them directly in the foes build thread; this section is the owning record.
+
+- *Casualty ladder.* Casualties come from the squad pool crossing step values, exactly as the pinned
+  Shared Low Stamina and Dropping One Minion rules describe (a squad "loses a minion when they take a
+  total of 5, 10, 15 … damage"). The step value is the member's printed Stamina plus any attached
+  captain's Stamina benefit. The app keeps a running total of damage since the last casualty; every hit
+  adds to it, and each time it reaches the current step value one minion dies and the total drops by
+  that value.
+- *Captain Stamina benefit.* Attaching a captain with a Stamina benefit raises the pool by the benefit
+  per living member and raises the step value by the benefit; losing the captain lowers both. Neither
+  change kills anyone by itself, and neither change touches the running total: carried damage survives
+  the adjustment (a 1-point carry at step 9 stays a 1-point carry at step 7). Consequence: when a loss
+  lowers the step below the carried total, the next hit of any size drops a minion immediately.
+- *Zero kills the squad.* Whenever the pool reaches zero every remaining member dies, whatever brought
+  it there: non-area damage, area damage drained through in-area members, or a captain loss whose
+  reversion takes the pool to zero or below. The pool is clamped at zero. This supersedes the edge of
+  the 2026-09-13 bonus-loss and area-only rulings at exactly zero; there is no separate pool floor.
+- *Area damage.* Area damage adds to the same pool ladder. Each affected member contributes at most one
+  step value to the pool loss (overflow above the step is discarded, regardless of modifiers, per the
+  2026-09-13 ceiling); a member whose own damage reaches the step dies; any further ladder casualties
+  from that hit are chosen only among in-area members. Outside-area members die only at zero.
+- *Leaving mid-turn.* A minion killed during the squad's shared turn changes nothing about the turn;
+  survivors and captain keep acting. A captain killed or removed mid-turn loses its benefit at once
+  (pool and step revert) and the minions finish the turn. When the last minion dies during the shared
+  turn and the captain survives, the turn continues as the captain's alone; once the captain has acted
+  and the last minion falls, the turn ends. Administrative removal of a single living minion is not
+  offered in V02: the Director removes the whole squad or lets damage do the work.
+- *Acting-together scope.* V02 builds the signature squad attack, the squad maneuvers (Grab, Hide,
+  Knockback and Search for Hidden Creatures together, with one roll and one instance per target where
+  the source rolls), Free Strike Together (simultaneous same-squad free strikes summed as one strike),
+  and the critical-hit extra main action for participating minions only.
+
+Worked example under these decisions (four Dwarf Axethrowers, Stamina 7, +2 Stamina with captain):
+pool 36, step 9. A 10-damage hit leaves 26, kills one and carries 1. The captain dies: pool 20, step 7,
+carry 1. The next death lands after 6 more damage (pool 14), the next after 7 more (pool 7), and zero
+takes the last.
 
 Global “every turn” effects fire once per shared squad/captain turn,
 not once per participant (confirmed 2026-09-13). A captain’s personal extra turn
@@ -3253,12 +3291,11 @@ superseded question and clarification; no special late-response dependency mecha
 ### Follow-ups when their scope is selected
 
 - **Minions:** the [entry, count, EV, shared-turn and Stamina contracts](#minion-squads-and-captain-state)
-  are selected. Remaining arithmetic is bounded: non-exhausting damage after a stat adjustment; the pool
-  floor if bonus loss reaches/passes zero; and area damage exhausting a pool while unaffected members
-  remain. Preserve the confirmed no-casualties-on-bonus-loss and no-outside-area-casualties rules; do not
-  invent a normalization or carryover algorithm to remove those questions. Other remaining cases are
-  mixed participant modifiers, explicit transformation/revival or multi-recipient turn grants, and exact
-  shared-turn handoff when a member/captain is removed. Manual live split/merge is excluded, not pending.
+  are selected. The remaining arithmetic (thresholds after a stat adjustment, the pool floor, area
+  exhaustion with unaffected survivors) and the mid-turn removal case were decided on 2026-09-20; see
+  [the user decisions](#minion-squads-and-captain-state). Other remaining cases are mixed participant
+  modifiers and explicit transformation/revival or multi-recipient turn grants. Manual live split/merge
+  is excluded, not pending.
   The shared squad/captain entry and personal extra entries must be clearly labeled; this does not
   require a new scheduling policy beyond existing entry selection and source timing. See [lifecycle evidence](research/minion-lifecycle.md) and
   [captain evidence](research/boss-and-captain-turn-review.md). These do not expand the ordinary-monster prototype.

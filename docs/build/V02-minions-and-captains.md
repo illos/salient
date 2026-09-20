@@ -30,13 +30,26 @@ leaves open; it does not touch ordinary-monster behavior delivered in v0.01.
 
 ## In scope
 
-- Add-squad operation: stat block, count 1–8 (default 4), optional captain, new independent entry per squad.
-- Squad turn entry that fires shared-turn work once and lets each member participate or opt out.
-- Individual member targeting; one roll for a coordinated attack with per-target allocation.
-- Shared Stamina pool: non-area damage exhausting the pool defeats remaining ordinary members; area damage limited to affected members; casualty selection via the existing inline spatial-input card.
-- Captain attachment: separate actions/Stamina, printed member bonuses applied while attached; bonus loss reduces pool without casualties, gain applies to survivors only.
-- Proportional EV from printed EV/quantity, fractions preserved.
-- Per-member conditions, saves and source-timed effects on shared timing.
+- Add-squad operation: any seeded Minion stat block, count 1–8 (default 4), optional captain, one
+  independent squad entry per addition; members are individual creatures with their own reticles.
+- Shared squad turn entry: one turn, one global clock firing, per-member participation (opt out),
+  captain acting on the same turn with its separate actions.
+- Coordinated signature attack: one roll, up to three participants per target, extra contributors add
+  their free strike value; critical hit offers the extra main action to participants only.
+- Squad maneuvers together: Grab, Knockback and Search for Hidden Creatures with one roll and one
+  instance per target; Hide recorded together.
+- Free Strike Together: simultaneous same-squad free strikes summed and applied as one strike.
+- Shared Stamina pool on the cumulative ladder the user decided on 2026-09-20 (carried damage across
+  captain changes; area damage in-area only, one step per affected member; zero kills the squad);
+  casualty identities chosen through an inline card when the rules leave a choice.
+- Captain attachment and loss: eligibility from the stat block (non-minion, non-Mount; language
+  warned, not checked), printed With Captain Stamina, strike-damage and edge benefits applied, other
+  benefits shown as text; loss reverts the pool and step without casualties, then zero kills.
+- Proportional EV from printed EV and quantity, fractions preserved, stored on the squad.
+- Per-member conditions; removal rules decided 2026-09-20 (squad removed as a unit; no single-minion
+  administrative removal; captain finishes a shared turn alone when the last minion falls).
+- Content: the goblin family (all goblin stat blocks and Malice) joins the seeded selection so squads
+  are proven on real Spinecleaver and Sniper data; the table's add control lists every seeded stat block.
 
 ## Out of scope
 
@@ -44,7 +57,10 @@ leaves open; it does not touch ordinary-monster behavior delivered in v0.01.
 - Captain personal extra turns and boss turn entries (V03).
 - Saved-encounter persistence of squads (V06) and minion-related hero-token grants (V15).
 - Troll and other source-specific pool healing/revival/transformation; record as manual (`docs/research/minion-lifecycle.md#10-troll-exceptions-to-ordinary-death-and-healing`).
-- Mixed per-participant edges/banes inside one shared attack: use partial-automation policy, no invented normalization.
+- Mixed per-participant edges/banes inside one shared attack: the coordinated roll takes one edge/bane
+  count per target; participant-specific modifiers are recorded as a warning, no invented normalization.
+- Library-wide seeding of every Monsters stat block (the follow-on foes slice; this slice widens the
+  selection to the goblin family only).
 
 ## Inputs and dependencies
 
@@ -79,14 +95,23 @@ Existing rulings that apply and must not be re-decided: one squad per entry with
 
 ## Open questions
 
-Candidate `Q-V-n` entries from `docs/table-spec.md#follow-ups-when-their-scope-is-selected` and `docs/research/minion-spec-review.md#bounded-unresolved-cases`:
-
-- Non-exhausting damage thresholds after a captain-bonus stat adjustment.
-- Pool floor when bonus loss reaches or passes zero.
-- Area damage exhausting the pool while unaffected members remain.
-- Differing participant modifiers inside one shared attack.
-- Shared-turn handoff when a member or captain is removed mid-turn.
+All five candidate questions were answered by the user in the foes build thread on 2026-09-20 and are
+recorded in `docs/table-spec.md#minion-squads-and-captain-state` ("User decisions, 2026-09-20") and the
+decision record: cumulative ladder with carried damage after a captain change; zero from any cause kills
+the squad (no separate pool floor); area damage on the same ladder with in-area casualties only; no
+administrative single-minion removal and the captain finishing a shared turn alone; build the full
+acting-together set. Mixed participant modifiers inside one shared attack remain out of scope.
 
 ## Work log
 
-_Empty._
+2026-09-20: claimed by the foes thread (Fable) after a gap review with the user; `slice/V02` in
+`.worktrees/minions` from main `dbfb61d` (V72 included). Plan: (1) widen the S01 selection to
+`monster/goblin` plus the squad/captain/minion rule pages, list every seeded stat block in the add
+control, and route Minion definitions to the squad add; (2) `squads` table plus member foe rows, squad
+actor kind for the shared turn entry, pure ladder arithmetic in `shared/resolve/squad.ts`, damage routing
+from ability use and free strikes into the pool, casualty card on the interactions row, captain
+attach/detach/loss, participation; (3) coordinated attack, squad maneuvers, Free Strike Together and the
+participant-only critical; (4) Director pane squad card and shared-turn card; (5) convex-test coverage
+of the acceptance checks and the 2026-09-20 rulings, then an authenticated headless proof. Verification
+target: local convex-test plus a headless CLI run against an isolated backend; browser scenarios go to
+the backlog under the moratorium.
