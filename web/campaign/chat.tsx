@@ -36,10 +36,12 @@ export function ChatPane({
   const send = useMutation(api.chat.send);
   const command = useCommand();
   const [text, setText] = useState('');
-  const bottom = useRef<HTMLDivElement>(null);
+  const scroller = useRef<HTMLDivElement>(null);
   const count = page?.messages.length ?? 0;
+  // Keep the newest message in view without scrolling the page itself.
   useEffect(() => {
-    if (before === undefined) bottom.current?.scrollIntoView({ block: 'end' });
+    const element = scroller.current;
+    if (element && before === undefined) element.scrollTop = element.scrollHeight;
   }, [count, before]);
   return (
     <section
@@ -55,7 +57,10 @@ export function ChatPane({
           {onlineCount} online
         </span>
       </div>
-      <div className="flex max-h-[420px] min-h-[280px] flex-col overflow-y-auto bg-muted/40 px-5 py-4">
+      <div
+        ref={scroller}
+        className="flex max-h-[420px] min-h-[280px] flex-col overflow-y-auto bg-muted/40 px-5 py-4"
+      >
         {!page ? (
           <Loading>Loading the chat…</Loading>
         ) : (
@@ -105,7 +110,6 @@ export function ChatPane({
                 })}
               </ol>
             )}
-            <div ref={bottom} />
           </>
         )}
       </div>
