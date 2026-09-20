@@ -38,6 +38,7 @@ export function failureDetails(error: unknown) {
     reason: string;
     operation?: string;
     assertion?: string;
+    location?: string;
     actual?: number | boolean | null;
     expected?: number | boolean | null;
   } = { reason: failureCode(error) };
@@ -48,6 +49,8 @@ export function failureDetails(error: unknown) {
       actual?: unknown;
       expected?: unknown;
     };
+    // Only a repository-controlled scenario filename and line, never the raw stack/payload.
+    result.location = assertion.stack?.match(/character-(?:lifecycle|scenarios)\.ts:\d+:\d+/)?.[0];
     // Only explicitly supplied scenario labels; never serialize generated assertion payloads.
     if (
       assertion.generatedMessage === false &&

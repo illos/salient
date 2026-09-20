@@ -156,7 +156,7 @@ export async function runScenarios(context: ScenarioContext) {
                   ]),
                 );
         for (const [key, value] of Object.entries(expected)) {
-          const actual = sheet.build.baseline[key as keyof typeof sheet.build.baseline];
+          const actual: unknown = sheet.build.baseline[key as keyof typeof sheet.build.baseline];
           assert.equal((actual as { value: unknown }).value, value, `${ancestry} ${key}`);
         }
         assert.ok(sheet.abilities.some(a => a.name === 'Melee Weapon Free Strike'));
