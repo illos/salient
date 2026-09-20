@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
-/** Live character acceptance against an explicitly selected isolated development target. */
+/** Live character acceptance against an explicitly selected development target and cohort. */
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { dirname } from 'node:path';
 import {
@@ -10,6 +10,21 @@ import {
   type ScenarioContext,
 } from './headless/character-client.ts';
 import { runScenarios } from './headless/character-scenarios.ts';
+import { runCulturePresets } from './headless/culture-presets.ts';
+import { runComplicationChoices, runComplicationTable } from './headless/complication-actions.ts';
+import { runStartingRewards } from './headless/starting-rewards.ts';
+import { runStartingItems } from './headless/starting-items.ts';
+
+// Each selected cohort invokes the original scenario, including all assertions and setup.
+const cohorts = {
+  all: runScenarios,
+  culture: runCulturePresets,
+  'complication-choices': runComplicationChoices,
+  'complication-table': runComplicationTable,
+  'starting-rewards': runStartingRewards,
+  'starting-items': runStartingItems,
+};
+const cohort = process.env.SALIENT_HEADLESS_COHORT ?? 'all';
 
 const started = Date.now();
 const runId = crypto.randomUUID();
@@ -24,6 +39,7 @@ let active = true;
 let finished = false;
 let target = 'unvalidated';
 const source = process.env.SALIENT_HEADLESS_SOURCE;
+const runnerSource = process.env.SALIENT_HEADLESS_RUNNER_SOURCE ?? source;
 const reportPath = process.env.SALIENT_HEADLESS_REPORT;
 function report() {
   if (finished) return;
@@ -33,6 +49,10 @@ function report() {
       {
         runId,
         target,
+        cohort,
+        coverage: cohort === 'all' ? 'full-suite' : 'selected-cohort',
+        runnerSource:
+          runnerSource && /^[a-f0-9]{40}$/.test(runnerSource) ? runnerSource : 'unvalidated',
         source: source && /^[a-f0-9]{40}$/.test(source) ? source : 'unvalidated',
         elapsedMs: Date.now() - started,
         results,
@@ -59,6 +79,8 @@ const hardStop = setTimeout(() => {
   process.exit(1);
 }, 295_000);
 try {
+  if (!Object.hasOwn(cohorts, cohort)) throw new Error('headless-cohort-validation-failed');
+  const runSelected = cohorts[cohort as keyof typeof cohorts];
   const url = process.env.VITE_CONVEX_URL;
   const siteUrl = process.env.VITE_CONVEX_SITE_URL;
   const origin = process.env.VITE_SITE_URL;
@@ -68,7 +90,9 @@ try {
     !siteUrl ||
     !origin ||
     !source ||
-    !/^[a-f0-9]{40}$/.test(source)
+    !/^[a-f0-9]{40}$/.test(source) ||
+    !runnerSource ||
+    !/^[a-f0-9]{40}$/.test(runnerSource)
   )
     throw new Error('headless-target-validation-failed');
   const endpoint = new URL(url);
@@ -103,7 +127,7 @@ try {
     const before = Date.now();
     try {
       if (!config.active()) throw new Error('headless-deadline');
-      await bounded(fn(), Math.max(1, deadline - Date.now()));
+      await bounded(fn(), Math.max(1, deadline - Date.now()), 'headless-deadline');
       results.push({ name, status: 'pass', elapsedMs: Date.now() - before });
       return true;
     } catch (error) {
@@ -131,9 +155,10 @@ try {
           results.push({ name, status: 'skip', elapsedMs: 0, reason });
         },
       };
-      await runScenarios(context);
+      await runSelected(context);
     })(),
     Math.max(1, deadline - Date.now()),
+    'headless-deadline',
   );
 } catch (error) {
   results.push({

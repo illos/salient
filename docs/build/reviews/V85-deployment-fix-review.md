@@ -36,3 +36,14 @@ The isolated schema validator remains unchanged and free of runtime auth depende
 No tests, builds or compiler checks were run by WIZARD or the reviewer. This static verdict does
 not certify typechecking: TESTER must pass the full repository compiler gate and Convex deployment
 validation before the hosted API suite can establish acceptance.
+
+## Bounded cohort runner review
+
+Independent native Astra reviewer `deployment_fix_review` inspected the runner diff against86e9d2e:
+static PASS, no blocking findings. All five selected cohorts call the unchanged scenario exports and
+construct independent fixtures from fresh actors/source inputs. Unknown/prototype cohort names are
+rejected; unset selection retains the full suite. Reports distinguish cohort scope and runner versus
+application source. Limits remain request15s/run240s/hard-stop295s, cleanup paths and assertions are
+unchanged, and the extra timeout argument only distinguishes the outer budget from a request timeout.
+The generated API delta retained from TESTER adds type/module-map entries only. No checks were run
+by this reviewer; compiler and hosted cohort acceptance remain TESTER’s responsibility.

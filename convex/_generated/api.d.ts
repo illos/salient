@@ -71,9 +71,11 @@ import type * as lib_runeOperations from "../lib/runeOperations.js";
 import type * as lib_sha256 from "../lib/sha256.js";
 import type * as lib_squadOperations from "../lib/squadOperations.js";
 import type * as lib_squads from "../lib/squads.js";
+import type * as lib_startingRewards from "../lib/startingRewards.js";
 import type * as lib_tableOperations from "../lib/tableOperations.js";
 import type * as presence from "../presence.js";
 import type * as sessions from "../sessions.js";
+import type * as startingRewardValidators from "../startingRewardValidators.js";
 import type * as table from "../table.js";
 import type * as targets from "../targets.js";
 
@@ -147,9 +149,11 @@ declare const fullApi: ApiFromModules<{
   "lib/sha256": typeof lib_sha256;
   "lib/squadOperations": typeof lib_squadOperations;
   "lib/squads": typeof lib_squads;
+  "lib/startingRewards": typeof lib_startingRewards;
   "lib/tableOperations": typeof lib_tableOperations;
   presence: typeof presence;
   sessions: typeof sessions;
+  startingRewardValidators: typeof startingRewardValidators;
   table: typeof table;
   targets: typeof targets;
 }>;
