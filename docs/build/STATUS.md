@@ -384,3 +384,9 @@ remain uncommitted in `.worktrees/astra-hosted`; they are not accepted verificat
 Further browser debugging is paused. No background verification job is running, and the CT114 heavy
 window is released to V63. The named `character-restart` runtime remains stopped with data retained.
 This doctrine/status update changes documentation only and needs no runtime update.
+
+## V65 programmatic character verification — 2026-09-20
+
+| Id | Unit | Implementation | Verification / next action |
+| --- | --- | --- | --- |
+| V65 | [Programmatic character verification](V65-character-headless.md) | `slice/V65`, `.worktrees/character-headless`; discovery/transition routes, shared UI transition and browser-independent runner | One bounded headless pass queued after V63 runtime window; record blockers without fixes or retries; no browser runs |
