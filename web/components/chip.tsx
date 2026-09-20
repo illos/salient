@@ -1,38 +1,37 @@
 // SPDX-License-Identifier: GPL-3.0-only
 /**
- * Chip and DiceChips: the bordered rectangular metadata chips (`2d10`, `+2`, `Test · Might`,
- * `HUMAN`, `KIT · PANTHER`) and the filled result chip (`16`, `14`) from the mockup log feed and
- * sheet header (session-free-play-director.png, combat-table-light.png, character-sheet.png).
- * `result` fills ink; `accent` is brick red, filled in dark (combat-table-dark.png result chip)
- * and outlined red text in light (`3 FEROCITY`, `Tier 2`).
+ * Chip and DiceChips: the small metadata pills of the log feed and sheet header (`2d10`, `+2`,
+ * `14`, `Signature`, `3 Ferocity`). Quiet renders every chip as a 999px `sub` pill in sentence
+ * case (docs/design-mockups/quiet/README.md, table screen): `plain` is muted text, `result` is
+ * ink, `accent` is accent text on the `sub` pill (the cost pill on an ability card) and
+ * `filled-accent` is the one filled accent pill (a live result or selected state).
  */
 import { cn } from 'cn';
 
 export type ChipKind = 'plain' | 'result' | 'accent' | 'filled-accent';
 
 const KIND: Record<ChipKind, string> = {
-  plain: 'border-input text-foreground',
-  result: 'border-foreground bg-foreground text-background',
-  accent: 'border-primary text-primary',
-  'filled-accent': 'border-primary bg-primary text-primary-foreground',
+  plain: 'bg-muted text-muted-foreground',
+  result: 'bg-muted font-medium text-foreground',
+  accent: 'bg-muted font-medium text-primary',
+  'filled-accent': 'bg-primary font-medium text-primary-foreground',
 };
 
 export interface ChipProps {
   kind?: ChipKind;
-  /** Uppercase compact metadata (`HUMAN`) instead of the default sentence-case value (`2d10`). */
+  /** Kept for call-site compatibility: Quiet chips are sentence case at 13px either way. */
   caps?: boolean;
   children: React.ReactNode;
   className?: string;
   title?: string;
 }
 
-export function Chip({ kind = 'plain', caps, children, className, title }: ChipProps) {
+export function Chip({ kind = 'plain', children, className, title }: ChipProps) {
   return (
     <span
       title={title}
       className={cn(
-        'inline-flex h-6 items-center rounded-(--chip-radius) border-(length:--chip-border) px-1.5 font-semibold whitespace-nowrap',
-        caps ? 'caps' : 'text-xs',
+        'inline-flex h-6 items-center rounded-full px-2.5 text-sm whitespace-nowrap tabular-nums',
         KIND[kind],
         className,
       )}

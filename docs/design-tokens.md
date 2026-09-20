@@ -1,16 +1,66 @@
 # Design tokens
 
-Status: delivered by build slice A08 (2026-09-14). This document owns the visual token set that
-`web/style.css` implements and that every `web/` component consumes. The style authority is
-[the V1 mockup README](design-mockups/v1/README.md): an achromatic white/grey or dark foundation, a
-muted brick-red accent, strong rules and borders, compact uppercase metadata and Schibsted Grotesk
-typography. Its departures list is binding; nothing here adds content, labels or behavior from the
-pictures. Finished polish is not a v0.01 gate (`agent.MD`, "For v0.01, focus on desktop").
+Status: delivered by build slice A08 (2026-09-14) and re-based on the Quiet design language by
+build slice [V75](build/V75-quiet-theme.md) (2026-09-20). This document owns the visual token set
+that `web/style.css` implements and that every `web/` component consumes. The style authority is
+now [the Quiet spec](design-mockups/quiet/README.md): tonal layering instead of rules and borders,
+sentence-case type at 13px or larger with weights capped at 500, one brick-red highlight spent on
+interaction, and soft 14px/8px/999px geometry. The earlier [V1 mockup README](design-mockups/v1/README.md)
+still owns layout, proportions and its departures list; nothing here adds content, labels or
+behavior from the pictures.
 
-Each value below is marked **measured** (sampled from the mockup PNGs with a headless Chromium canvas;
-anti-aliased 1px rules were read from the darkest pixel of the run) or **chosen** (a decision made in
-the build because the mockups do not define it; the mockup README states that exact values, the
-spacing scale, component sizes and breakpoints are a build deliverable).
+The Classic sections further down record the A08/V21 measurements for history. Where a value
+below differs from them, the Quiet value is the one `web/style.css` implements.
+
+## Quiet (V75)
+
+Every Quiet name maps onto an existing CSS variable so the shadcn primitives and the ~150
+`caps`/`eyebrow` call sites change without edits. Values are the spec's (**spec**) unless marked
+**chosen**.
+
+| Quiet token | Dark | Light | CSS variables | Tailwind utilities |
+| --- | --- | --- | --- | --- |
+| `bg` | `#121212` | `#f4f3f0` | `--background` | `bg-background` |
+| `card` | `#1a1a1a` | `#ffffff` | `--card`, `--popover`, `--sidebar` | `bg-card`, `bg-popover` |
+| `sub` | `#232323` | `#ebe9e4` | `--muted`, `--secondary`, `--input`, `--sidebar-accent` | `bg-muted`, `bg-sub`, `bg-secondary` |
+| `ph` | `#2c2c2c` | `#dcd9d3` | `--placeholder`, `--accent` (hover of `sub`) | `bg-placeholder`, `bg-ph`, `hover:bg-accent` |
+| `line` | `#222222` | `#e8e6e1` | `--border`, `--rule-strong` (legacy name, now a hairline) | `border-border`, `border-line`, `.rule-soft` |
+| `ink` | `#d2cfc9` | `#2b2926` | `--foreground`, `--card-foreground`, `--secondary-foreground`, `--accent-foreground` | `text-foreground` |
+| `muted` | `#8a877f` | `#7a766f` | `--muted-foreground` | `text-muted-foreground` |
+| `accent` | `#a63a3a` | `#a63a3a` | `--primary`, `--ring`, `--destructive` (light) | `bg-primary`, `text-primary`, `outline-ring` |
+| `onAccent` | `#ffffff` | `#ffffff` | `--primary-foreground` | `text-primary-foreground` |
+| destructive text (dark) | `#e07470` | — | `--destructive` | `text-destructive` (chosen, retained from the September 15 audit for readable errors on dark) |
+| success / warning | `#5f8f6a` / `#d9a45b` | `#5f8f6a` / `#8a5a1c` | `--success`, `--warning` | connection dot only (green is the spec's; warning chosen) |
+| hard shadow | none | none | `--shadow-hard-color: transparent`, `--shadow-hard: none` | `shadow-hard` renders nothing |
+
+Radius: `--radius-control` 8px (`rounded-md`, controls, inputs, tier rows, insets),
+`--radius-panel` 14px (`rounded-lg`/`rounded-xl`, panels, dialogs, overlay card), `rounded-sm`
+6px (menu items), `rounded-full` for pills, steppers, segmented tracks and icon buttons.
+`--chip-radius` is 999px with no border; `--pip-size` 6px; `--bar-thickness` 6px (3px on the
+hero portrait row); `--disc-ring` 48px with a 2px accent outline offset 3px for the acting hero.
+
+Type scale (`--text-*`, rem): `2xs`/`xs`/`sm` 13px (nothing under 13), `base` 14/22, `lg` 17/24,
+`xl` 20/26, `2xl` 24/28, `3xl` 30/36, `4xl` 40/40. Weights: the Tailwind tokens `medium`,
+`semibold`, `bold`, `extrabold` and `black` all resolve to 500; `font-wordmark` is 600 and is used
+only for the wordmark. `--tracking-caps` is 0 and `.caps`/`.eyebrow` render 13px sentence case
+with no transform. Headings are 500: h1 30px, h2 20px, h3 17px.
+
+Layout: `--session-header-height` 64px; the session panes are `card` panels with a 16px
+`--page-gap` between them and around them, 24px inside (`--pane-padding-x/y`); no pane rules.
+Motion: `--motion-fast` 150ms (background), `--motion-base` 200ms (chevrons, pops),
+`--motion-slow` 350ms (bar widths), easing `cubic-bezier(0.2, 0, 0, 1)`; reduced motion still
+zeroes everything.
+
+Contrast (sRGB relative luminance, text pairs): `ink` on `card` 12.6:1 dark / 13.8:1 light;
+`muted` on `card` 4.8:1 dark / 4.6:1 light; `muted` on `bg` 5.3:1 dark / 4.3:1 light; `muted`
+on `sub` 4.3:1 dark / 3.8:1 light; white on `accent` 6.3:1. The `muted`-on-`sub` pairs sit
+below the spec's own 4.5:1 line; the values are the user's and are recorded, not adjusted. These
+are spot checks, not an accessibility certification.
+
+Preserved subsystems (user guidance, 2026-09-20): the Draw Steel glyph font and the Core
+stat-block/rule-text presentation (`glyph.css`, `core-content.css`, the `.ds-*` rules) keep
+their literal weights, serif family, accent title band and rules; they consume the variables
+above and are otherwise untouched by V75.
 
 ## Implementation
 
@@ -28,7 +78,7 @@ spacing scale, component sizes and breakpoints are a build deliverable).
 - Acceptance check 1 (no raw hex in components) is checked with
   `grep -rnE "#[0-9a-fA-F]{3,8}\b" web --include=*.tsx --include=*.ts | grep -v web/style.css`.
 
-## Typography
+## Typography (Classic, A08 — superseded where Quiet differs)
 
 | Token | Value | Provenance |
 | --- | --- | --- |
@@ -40,7 +90,7 @@ spacing scale, component sizes and breakpoints are a build deliverable).
 | Uppercase metadata (`.caps`, `.eyebrow`) | 11px, weight 600, letter-spacing `0.12em`, uppercase | Size and tracking measured approximately (eyebrows are ~11px with ~1.3px tracking in the PNGs). |
 | Heading tracking | `tracking-tight` (−0.025em); login headline `tracking-tighter` | Chosen. |
 
-## Colour
+## Colour (Classic, A08 — superseded by the Quiet table above)
 
 Light foundation (`:root`):
 
@@ -89,7 +139,7 @@ background. These are text-pair spot checks, not a complete accessibility certif
 Dark destructive buttons use 10% tint normally and 15% on hover, giving approximately 5.17:1
 and 4.79:1 against the dark card surface. Primary-action color remains the measured brick red.
 
-## Rules, borders, radius and shadow
+## Rules, borders, radius and shadow (Classic, A08 — superseded by Quiet)
 
 | Token | Value | Provenance |
 | --- | --- | --- |
@@ -100,7 +150,7 @@ and 4.79:1 against the dark card surface. Primary-action color remains the measu
 | `--radius` | `0.125rem` (2px); `rounded-md` = 2px, `rounded-sm` = 1px, `rounded-lg` = 4px | Measured: buttons, cards and chips are square-cornered in the mockups; 2px keeps anti-aliasing clean. |
 | `shadow-hard` | `4px 4px 0 0 --shadow-hard-color` on cards | Measured (light cards). |
 
-## Spacing and layout
+## Spacing and layout (Classic, A08)
 
 | Token | Value | Provenance |
 | --- | --- | --- |
@@ -112,7 +162,7 @@ and 4.79:1 against the dark card surface. Primary-action color remains the measu
 | Control height | 36px default buttons and inputs, 28px small, 44px large (login) | Chosen. |
 | Minimum body width | 760px | Retained from the previous stylesheet; desktop first. |
 
-## Session shell and table primitives (V21)
+## Session shell and table primitives (V21 — Quiet changes the header height, pane rules, radii and pip/bar sizes)
 
 Added by build slice V21 (2026-09-15) for the desktop layout fidelity work. The mockup
 measurements come from the [design fidelity audit](build/audits/2026-09-15-v1-design-audit.md)

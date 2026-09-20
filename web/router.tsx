@@ -13,6 +13,7 @@ import {
 import { useConvex, useConvexAuth, useMutation, useQuery } from 'convex/react';
 import { api } from '../convex/_generated/api';
 import type { Id } from '../convex/_generated/dataModel';
+import { cn } from 'cn';
 import { authClient } from './auth-client';
 const ForgotPassword = lazy(() =>
   import('./password-recovery').then(module => ({ default: module.ForgotPassword })),
@@ -42,7 +43,7 @@ import { Button } from './components/ui/button';
 import { Card, CardContent } from './components/ui/card';
 import { Input } from './components/ui/input';
 import { SignOut, ThemeSwitch } from './components/session-user';
-import { ErrorNotice, Eyebrow, Field, Loading, errorMessage } from './ui';
+import { ErrorNotice, Field, Loading, errorMessage } from './ui';
 
 const RulesPage = lazy(() => import('./rules').then(module => ({ default: module.RulesPage })));
 
@@ -57,11 +58,15 @@ function ConnectionStatus() {
   );
   return (
     <span
-      className={online ? 'caps text-success' : 'caps text-warning'}
+      className={cn(
+        'inline-flex items-center gap-2 text-sm text-muted-foreground',
+        online ? '[&>span]:bg-success' : '[&>span]:bg-warning',
+      )}
       role="status"
       aria-live="polite"
     >
-      {online ? '● Connected' : '○ Reconnecting — changes may be pending'}
+      <span aria-hidden className="size-2 rounded-full" />
+      {online ? 'Connected' : 'Reconnecting — changes may be pending'}
     </span>
   );
 }
@@ -70,7 +75,7 @@ export { ThemeSwitch };
 
 function Wordmark() {
   return (
-    <Link to="/" className="text-2xl font-bold tracking-tight hover:no-underline">
+    <Link to="/" className="text-lg font-wordmark tracking-normal hover:no-underline">
       Salient
     </Link>
   );
@@ -78,12 +83,11 @@ function Wordmark() {
 
 function TopNav({ displayName }: { displayName?: string }) {
   const navItem =
-    'caps flex h-14 items-center border-b-2 border-transparent px-1 text-muted-foreground transition-colors duration-(--motion-fast) hover:text-foreground hover:no-underline data-[status=active]:border-primary data-[status=active]:text-foreground';
+    'flex h-16 items-center px-1 text-base text-muted-foreground transition-colors duration-(--motion-fast) hover:text-foreground hover:no-underline data-[status=active]:text-foreground';
   return (
-    <header className="site-nav rule-strong sticky top-0 z-40 bg-background">
-      <div className="site-nav-inner mx-auto flex max-w-[1460px] items-center gap-6 px-9">
+    <header className="site-nav sticky top-0 z-40 bg-background">
+      <div className="site-nav-inner mx-auto flex max-w-[1460px] items-center gap-8 px-9">
         <Wordmark />
-        <span aria-hidden className="h-6 w-px bg-rule-strong" />
         <nav aria-label="Primary" className="flex items-center gap-5">
           <Link to="/" activeOptions={{ exact: true }} className={navItem}>
             Campaigns
@@ -103,11 +107,15 @@ function TopNav({ displayName }: { displayName?: string }) {
           <ThemeSwitch />
           {displayName ? (
             <>
-              <span className="site-user-name text-sm">{displayName}</span>
+              <span className="site-user-name text-base text-muted-foreground">{displayName}</span>
               <SignOut />
             </>
           ) : (
-            <Link to="/login" search={{ next: '/' }}>
+            <Link
+              to="/login"
+              search={{ next: '/' }}
+              className="text-base text-muted-foreground hover:text-foreground"
+            >
               Sign in
             </Link>
           )}
@@ -202,7 +210,7 @@ function ProfileGate({ path }: { path: string }) {
         <PageOutlet />
       </main>
       <footer className="mx-auto w-full max-w-[1460px] px-9 pb-6">
-        <span className="eyebrow">v0.01 · pre-alpha</span>
+        <span className="text-sm text-muted-foreground">v0.01 · pre-alpha</span>
       </footer>
     </div>
   );
@@ -211,7 +219,7 @@ function ProfileGate({ path }: { path: string }) {
 /** Full-height centred page used outside the signed-in shell. */
 function CenteredPage({ children }: { children: React.ReactNode }) {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center gap-4 bg-card p-16">
+    <main className="flex min-h-screen flex-col items-center justify-center gap-4 bg-background p-16">
       {children}
     </main>
   );
@@ -247,35 +255,19 @@ function Login() {
   const [error, setError] = useState<string | null>(null);
   if (isAuthenticated) return <Navigate to={next as '/'} replace />;
   return (
-    <main className="grid min-h-screen grid-cols-2">
-      <section className="flex flex-col justify-between border-r border-rule-strong bg-card p-12">
-        <div className="flex items-center justify-between">
-          <span className="text-2xl font-bold tracking-tight">Salient</span>
-          <ThemeSwitch />
-        </div>
-        <div className="max-w-xl">
-          <h1 className="text-4xl font-bold tracking-tighter">
-            Every great story
-            <br />
-            starts at the table.
-          </h1>
-          <p className="mt-6 max-w-sm text-lg text-muted-foreground">
-            Bring your campaign, your characters and your next session together.
+    <main className="relative flex min-h-screen flex-col bg-background px-10 py-8">
+      <div className="flex items-center justify-between">
+        <span className="text-lg font-wordmark">Salient</span>
+        <ThemeSwitch />
+      </div>
+      <section className="flex flex-1 items-center justify-center py-16">
+        <div className="w-full max-w-[360px]">
+          <h1 className="text-3xl">{register ? 'Create your account' : 'Welcome back'}</h1>
+          <p className="mt-1 text-base text-muted-foreground">
+            {register ? 'A new seat at the table' : 'Return to your tables'}
           </p>
-        </div>
-        <div className="flex items-center justify-between">
-          <span className="eyebrow mb-0">Pre-alpha</span>
-          <span className="eyebrow mb-0">Desktop first</span>
-        </div>
-      </section>
-      <section className="flex items-center justify-center bg-background p-12">
-        <div className="w-full max-w-md">
-          <Eyebrow>{register ? 'A new seat at the table' : 'Return to your tables'}</Eyebrow>
-          <h2 className="rule-strong pb-3 text-2xl">
-            {register ? 'Create your account' : 'Welcome back'}
-          </h2>
           <form
-            className="mt-6 flex flex-col gap-4"
+            className="mt-8 flex flex-col gap-5"
             onSubmit={async event => {
               event.preventDefault();
               if (pending) return;
@@ -304,11 +296,17 @@ function Login() {
           >
             {register && (
               <Field label="Display name">
-                <Input name="name" autoComplete="nickname" required maxLength={80} />
+                <Input
+                  name="name"
+                  autoComplete="nickname"
+                  required
+                  maxLength={80}
+                  className="h-12"
+                />
               </Field>
             )}
             <Field label="Email">
-              <Input type="email" name="email" autoComplete="email" required />
+              <Input type="email" name="email" autoComplete="email" required className="h-12" />
             </Field>
             <Field label="Password">
               <Input
@@ -318,29 +316,43 @@ function Login() {
                 minLength={8}
                 maxLength={128}
                 required
+                className="h-12"
               />
             </Field>
             <ErrorNotice error={error} />
-            <Button type="submit" size="lg" className="w-full" disabled={pending || isLoading}>
-              {pending ? 'Please wait…' : register ? 'Create account' : 'Sign in'}
-            </Button>
-            <Button
-              type="button"
-              variant="outline"
-              size="lg"
-              className="w-full"
-              disabled={pending}
-              onClick={() => {
-                setRegister(!register);
-                setError(null);
-              }}
-            >
-              {register ? 'Already have an account? Sign in' : 'New here? Create an account'}
-            </Button>
-            {!register && recoveryAvailable && <Link to="/forgot-password">Forgot password?</Link>}
+            <div className="mt-1 flex flex-col gap-2.5">
+              <Button type="submit" size="lg" className="w-full" disabled={pending || isLoading}>
+                {pending ? 'Please wait…' : register ? 'Create account' : 'Sign in'}
+              </Button>
+              <Button
+                type="button"
+                variant="outline"
+                size="lg"
+                className="w-full"
+                disabled={pending}
+                onClick={() => {
+                  setRegister(!register);
+                  setError(null);
+                }}
+              >
+                {register ? 'Already have an account? Sign in' : 'New here? Create an account'}
+              </Button>
+            </div>
+            {!register && recoveryAvailable && (
+              <Link
+                to="/forgot-password"
+                className="text-base text-muted-foreground hover:text-foreground"
+              >
+                Forgot password?
+              </Link>
+            )}
           </form>
         </div>
       </section>
+      <div className="flex items-center gap-4 text-sm text-muted-foreground">
+        <span>Pre-alpha</span>
+        <span>Desktop first</span>
+      </div>
     </main>
   );
 }

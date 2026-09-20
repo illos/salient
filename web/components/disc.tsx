@@ -1,10 +1,12 @@
 // SPDX-License-Identifier: GPL-3.0-only
 /**
- * Disc: the circular portrait placeholder from every V1 mockup roster row, log entry, member row
- * and sheet header (docs/design-mockups/v1/README.md; audit finding 3). Initials on a neutral fill
- * until a portrait system exists. Ink for the viewer's own or the acting creature, grey for others,
- * red for a foe entry in the log, and the ring variant for the combat hero-resource portrait row
- * with its numeric badge and optional caps label (`ACTING`).
+ * Disc: the circular portrait placeholder in roster rows, log entries, member rows and the sheet
+ * header. Initials on a tonal fill until a portrait system exists. Ink for the viewer's own or
+ * the acting creature, `ph` grey for others, accent for a foe entry in the log. The `ring`
+ * variant is the combat hero-resource portrait (docs/design-mockups/quiet/README.md, heroes
+ * pane): a 48px circle with no conic ring or count badge; the acting hero gets a 2px accent
+ * outline offset 3px and a muted caption (`Acting`). The optional `badge` is kept as a small
+ * tonal count for callers that still pass one.
  */
 import { cn } from 'cn';
 
@@ -23,8 +25,8 @@ export function initialsOf(name: string): string {
 }
 
 const SIZE: Record<DiscSize, string> = {
-  sm: 'size-(--disc-sm) text-2xs',
-  md: 'size-(--disc-md) text-xs',
+  sm: 'size-(--disc-sm) text-sm',
+  md: 'size-(--disc-md) text-sm',
   lg: 'size-(--disc-lg) text-2xl',
 };
 const FILL: Record<Exclude<DiscVariant, 'ring'>, string> = {
@@ -37,14 +39,18 @@ export interface DiscProps {
   /** Name the initials come from. */
   name: string;
   variant?: DiscVariant;
-  /** sm ≈ 32px (log entries), md ≈ 44px (roster rows), lg ≈ 110px (sheet header). Ring discs are 60px. */
+  /** sm ≈ 32px (log entries), md ≈ 44px (roster rows), lg ≈ 110px (sheet header). Ring discs are 48px. */
   size?: DiscSize;
-  /** Ring variant: filled for the viewer's own or the acting hero. */
+  /** Ring variant: filled ink for the viewer's own hero; `acting` adds the accent outline. */
   filled?: boolean;
-  /** Ring variant: small numeric badge at the bottom right (heroic resource). */
+  /** Ring variant: the acting hero (accent outline, offset 3px). */
+  acting?: boolean;
+  /** Ring variant: small numeric count at the bottom right (heroic resource). */
   badge?: number | string;
-  /** Ring variant: caps label under the disc, e.g. `Acting`. */
+  /** Ring variant: muted caption under the disc, e.g. `Acting`. */
   caption?: string;
+  /** Ring variant: content rendered under the disc (the 3px stamina bar). */
+  footer?: React.ReactNode;
   /** Dim the disc (Slain, Away). */
   muted?: boolean;
   /**
@@ -61,8 +67,10 @@ export function Disc({
   variant = 'grey',
   size = 'md',
   filled = false,
+  acting = false,
   badge,
   caption,
+  footer,
   muted,
   label,
   className,
@@ -71,22 +79,16 @@ export function Disc({
   if (variant === 'ring') {
     return (
       <span
-        className={cn('inline-flex flex-col items-center gap-1', muted && 'opacity-50', className)}
+        className={cn('inline-flex flex-col items-center gap-2', muted && 'opacity-40', className)}
         {...(label ? { role: 'img', 'aria-label': label } : { 'aria-hidden': true })}
       >
         <span className="relative inline-block size-(--disc-ring)">
           <span
             aria-hidden
             className={cn(
-              'absolute inset-0 rounded-full border-(length:--disc-ring-stroke)',
-              filled ? 'border-primary' : 'border-border',
-            )}
-          />
-          <span
-            aria-hidden
-            className={cn(
-              'absolute inset-[5px] flex items-center justify-center rounded-full text-xs font-semibold',
+              'absolute inset-0 flex items-center justify-center rounded-full text-sm font-medium transition-colors duration-(--motion-fast)',
               filled ? FILL.ink : FILL.grey,
+              acting && 'outline-2 outline-offset-[3px] outline-primary',
             )}
           >
             {initials}
@@ -94,13 +96,14 @@ export function Disc({
           {badge !== undefined && (
             <span
               aria-hidden
-              className="absolute -right-1 -bottom-1 flex min-w-5 items-center justify-center rounded-full border border-background bg-background px-1 text-2xs font-bold text-foreground ring-1 ring-rule-strong"
+              className="absolute -right-1 -bottom-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-muted px-1 text-sm font-medium text-foreground tabular-nums"
             >
               {badge}
             </span>
           )}
         </span>
-        {caption && <span className="caps text-primary">{caption}</span>}
+        {footer}
+        {caption && <span className="text-sm text-muted-foreground">{caption}</span>}
       </span>
     );
   }
@@ -108,10 +111,10 @@ export function Disc({
     <span
       {...(label ? { role: 'img', 'aria-label': label } : { 'aria-hidden': true })}
       className={cn(
-        'inline-flex shrink-0 items-center justify-center rounded-full font-semibold select-none',
+        'inline-flex shrink-0 items-center justify-center rounded-full font-medium select-none',
         SIZE[size],
         FILL[variant],
-        muted && 'opacity-50',
+        muted && 'opacity-40',
         className,
       )}
     >

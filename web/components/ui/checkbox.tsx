@@ -4,12 +4,13 @@ import { Checkbox as CheckboxPrimitive } from '@base-ui/react/checkbox';
 import { cn } from 'cn';
 import { CheckIcon } from 'lucide-react';
 
+/** Quiet checkbox: an 18px rounded `sub` square; checked fills accent (prompt-card targets). */
 function Checkbox({ className, ...props }: CheckboxPrimitive.Root.Props) {
   return (
     <CheckboxPrimitive.Root
       data-slot="checkbox"
       className={cn(
-        'peer relative flex size-4 shrink-0 items-center justify-center rounded-sm border border-rule-strong bg-background transition-colors duration-(--motion-fast) outline-none group-has-disabled/field:opacity-50 group-has-[:focus-visible]/field-label:ring-0 group-has-[:focus-visible]/field-label:not-data-checked:border-input after:absolute after:-inset-x-3 after:-inset-y-2 focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 aria-invalid:aria-checked:border-primary dark:bg-input/30 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 data-checked:border-secondary data-checked:bg-secondary data-checked:text-secondary-foreground group-has-[:focus-visible]/field-label:data-checked:border-secondary dark:data-checked:bg-secondary',
+        'peer relative flex size-[18px] shrink-0 items-center justify-center rounded-[5px] border-0 bg-muted transition-colors duration-(--motion-fast) outline-none group-has-disabled/field:opacity-40 after:absolute after:-inset-x-3 after:-inset-y-2 hover:bg-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring disabled:cursor-not-allowed disabled:opacity-40 aria-invalid:outline-2 aria-invalid:outline-destructive data-checked:bg-primary data-checked:text-primary-foreground data-checked:hover:bg-primary/90',
         className,
       )}
       {...props}

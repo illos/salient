@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-only
 /**
- * PipRow: filled and empty squares for Recoveries from the sheet's Stamina block
- * (character-sheet.png: `RECOVERIES ■■■■■■■■□□`). Filled pips are ink; empty pips are outlined.
+ * PipRow: Recoveries as a row of 6px rounded pips (docs/design-mockups/quiet/README.md, stamina
+ * card). Filled pips are ink; empty pips are the `ph` tone. No outlines.
  */
 import { cn } from 'cn';
 
@@ -17,18 +17,14 @@ export function PipRow({ filled, total, label, className }: PipRowProps) {
   const count = Math.max(0, Math.floor(total));
   const on = Math.max(0, Math.min(count, Math.floor(filled)));
   return (
-    <span
-      role="img"
-      aria-label={label}
-      className={cn('inline-flex flex-wrap items-center gap-1', className)}
-    >
+    <span role="img" aria-label={label} className={cn('flex w-full items-center gap-1', className)}>
       {Array.from({ length: count }, (_, index) => (
         <span
           key={index}
           aria-hidden
           className={cn(
-            'inline-block size-(--pip-size) border border-rule-strong',
-            index < on ? 'bg-foreground' : 'bg-background',
+            'inline-block h-(--pip-size) min-w-(--pip-size) flex-1 rounded-full transition-colors duration-(--motion-fast)',
+            index < on ? 'bg-foreground' : 'bg-placeholder',
           )}
         />
       ))}

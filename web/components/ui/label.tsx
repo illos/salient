@@ -1,12 +1,13 @@
 import * as React from 'react';
 import { cn } from 'cn';
 
+/** Quiet label: 13px muted sentence case above or beside its value. */
 function Label({ className, ...props }: React.ComponentProps<'label'>) {
   return (
     <label
       data-slot="label"
       className={cn(
-        'flex items-center gap-2 text-2xs leading-none font-semibold tracking-caps text-muted-foreground uppercase select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50',
+        'flex items-center gap-2 text-sm leading-none font-normal text-muted-foreground select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-40 peer-disabled:cursor-not-allowed peer-disabled:opacity-40',
         className,
       )}
       {...props}

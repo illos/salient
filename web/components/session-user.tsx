@@ -2,8 +2,8 @@
 /**
  * The signed-in user's controls shared by the site nav and the session header: the appearance
  * switch (light / dark / system, stored locally by web/theme.ts until V10), Sign out, and the
- * session header's user Disc that opens both in a small menu (the mockups' name-and-avatar at the
- * right of the header; the account page itself is V10).
+ * session header's user Disc that opens both in a small menu (the account page itself is V10).
+ * Quiet: the switch is a 999px segmented control; the menu is a borderless `card` panel.
  */
 import { useEffect, useId, useRef, useState } from 'react';
 import { useNavigate } from '@tanstack/react-router';
@@ -19,7 +19,7 @@ import { Disc } from './disc';
 const THEME_LABELS: Record<Theme, string> = { light: 'Light', dark: 'Dark', system: 'System' };
 
 /** Light / dark / system appearance switch; the preference is stored locally (see web/theme.ts). */
-export function ThemeSwitch({ className }: { className?: string }) {
+export function ThemeSwitch({ className, inset }: { className?: string; inset?: boolean }) {
   const { theme, setTheme } = useTheme();
   return (
     <ToggleGroup
@@ -30,14 +30,18 @@ export function ThemeSwitch({ className }: { className?: string }) {
         if (typeof next === 'string' && THEMES.includes(next as Theme)) setTheme(next as Theme);
       }}
       spacing={0}
-      className={cn('rounded-md border border-rule-strong', className)}
+      className={cn(inset && 'data-[spacing=0]:bg-muted', className)}
     >
       {THEMES.map(option => (
         <ToggleGroupItem
           key={option}
           value={option}
           aria-label={THEME_LABELS[option]}
-          className="caps h-7 rounded-none px-2.5 text-muted-foreground hover:text-foreground data-pressed:bg-secondary data-pressed:text-secondary-foreground"
+          size="sm"
+          className={cn(
+            inset &&
+              'aria-pressed:bg-accent data-pressed:bg-accent data-[state=on]:bg-accent hover:bg-transparent',
+          )}
         >
           {THEME_LABELS[option]}
         </ToggleGroupItem>
@@ -98,25 +102,25 @@ export function UserMenu({ displayName }: { displayName: string }) {
     <div ref={root} className="relative">
       <button
         type="button"
-        className="flex items-center gap-3 rounded-full"
+        className="flex items-center gap-3 rounded-full text-muted-foreground transition-colors duration-(--motion-fast) hover:text-foreground"
         aria-label={`${displayName}: account menu`}
         aria-haspopup="true"
         aria-expanded={open}
         aria-controls={id}
         onClick={() => setOpen(o => !o)}
       >
-        <span className="text-sm">{displayName}</span>
-        <Disc name={displayName} variant="ink" size="sm" label="" />
+        <span className="text-base">{displayName}</span>
+        <Disc name={displayName} variant="grey" size="sm" label="" />
       </button>
       {open && (
         <div
           id={id}
           role="group"
           aria-label="Account"
-          className="absolute top-full right-0 z-50 mt-2 flex min-w-60 flex-col gap-3 border border-rule-strong bg-background p-4 shadow-hard"
+          className="absolute top-full right-0 z-50 mt-2 flex min-w-60 flex-col gap-3 rounded-lg bg-card p-5 shadow-[0_24px_80px_rgb(0_0_0/0.35)]"
         >
-          <span className="caps text-muted-foreground">Appearance</span>
-          <ThemeSwitch />
+          <span className="text-sm text-muted-foreground">Appearance</span>
+          <ThemeSwitch inset />
           <SignOut className="self-start" />
         </div>
       )}

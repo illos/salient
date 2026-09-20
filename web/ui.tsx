@@ -71,7 +71,7 @@ export function useCommand() {
 export function ErrorNotice({ error }: { error: string | null }) {
   return error ? (
     <p
-      className="rounded-md border border-destructive/40 bg-destructive/10 px-3 py-2 text-sm whitespace-pre-wrap text-destructive [overflow-wrap:anywhere]"
+      className="rounded-md bg-destructive/10 px-3.5 py-2.5 text-base whitespace-pre-wrap text-destructive [overflow-wrap:anywhere]"
       role="alert"
     >
       {error}
@@ -80,13 +80,13 @@ export function ErrorNotice({ error }: { error: string | null }) {
 }
 export function Loading({ children = 'Loading…' }: { children?: React.ReactNode }) {
   return (
-    <p className="text-sm text-muted-foreground" role="status">
+    <p className="text-base text-muted-foreground" role="status">
       {children}
     </p>
   );
 }
 
-/** A quiet informational notice on the surface tone. */
+/** An informational notice: a `sub` inset block, no border (Quiet). */
 export function Notice({
   children,
   role,
@@ -97,16 +97,13 @@ export function Notice({
   className?: string;
 }) {
   return (
-    <div
-      className={cn('border-l-2 border-rule-strong bg-muted px-3 py-2 text-sm', className)}
-      role={role}
-    >
+    <div className={cn('rounded-md bg-muted px-3.5 py-2.5 text-base', className)} role={role}>
       {children}
     </div>
   );
 }
 
-/** Compact uppercase metadata line above a heading. */
+/** A 13px muted sentence-case metadata line above a heading. */
 export function Eyebrow({
   children,
   className,
@@ -117,7 +114,7 @@ export function Eyebrow({
   return <p className={cn('eyebrow mb-1', className)}>{children}</p>;
 }
 
-/** A section heading with the mockups' hard rule beneath it and an optional trailing slot. */
+/** A section heading (20px/500) with an optional trailing metadata slot; no rule beneath (Quiet). */
 export function SectionHeading({
   children,
   aside,
@@ -130,19 +127,14 @@ export function SectionHeading({
   as?: 'h2' | 'h3';
 }) {
   return (
-    <div
-      className={cn(
-        'rule-strong mb-4 flex flex-wrap items-end justify-between gap-x-4 gap-y-1 pb-2',
-        className,
-      )}
-    >
+    <div className={cn('mb-4 flex flex-wrap items-end justify-between gap-x-4 gap-y-1', className)}>
       <Heading>{children}</Heading>
       {aside !== undefined && <span className="eyebrow mb-0">{aside}</span>}
     </div>
   );
 }
 
-/** A vertical form field: uppercase label above a control, hint below. */
+/** A vertical form field: 13px muted label above a control, hint below. */
 export function Field({
   label,
   hint,
@@ -156,7 +148,7 @@ export function Field({
 }) {
   return (
     <label className={cn('flex flex-col gap-1.5', className)}>
-      <span className="caps text-muted-foreground">{label}</span>
+      <span className="text-sm text-muted-foreground">{label}</span>
       {children}
       {hint && <span className="text-sm text-muted-foreground">{hint}</span>}
     </label>

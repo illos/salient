@@ -1,17 +1,17 @@
 // SPDX-License-Identifier: GPL-3.0-only
 /**
- * PaneHeading: the pane title with a trailing caps metadata slot whose value can be brick red
- * (`MALICE 7`, `VICTORIES 3`, session-free-play-director.png and combat-table-*.png) over a hard
- * rule. `SectionHeading` in web/ui.tsx renders a plain eyebrow aside and is left unchanged; this
- * heading adds the label/value split, the accent tone and an optional actions slot.
+ * PaneHeading: the panel title (`Foes`, `Heroes`, 20–22px/500) with a trailing metadata slot
+ * (`Malice 7`, `Victories 3`) whose label is muted and whose value is ink, or accent for a live
+ * value (docs/design-mockups/quiet/README.md, table screen). No rule beneath: air separates it
+ * from the panel body. `SectionHeading` in web/ui.tsx is the plain page variant.
  */
 import { cn } from 'cn';
 
 export interface PaneHeadingProps {
   children: React.ReactNode;
-  /** Caps label at the right, e.g. `Malice`. */
+  /** Label at the right, e.g. `Malice`. */
   asideLabel?: string;
-  /** Value after the label, e.g. `7`; brick red when `asideTone` is `accent`. */
+  /** Value after the label, e.g. `7`; accent when `asideTone` is `accent`. */
   asideValue?: React.ReactNode;
   asideTone?: 'default' | 'accent';
   /** Controls placed between the title and the aside (settings icon, Back). */
@@ -30,22 +30,17 @@ export function PaneHeading({
   className,
 }: PaneHeadingProps) {
   return (
-    <div
-      className={cn(
-        'rule-strong mb-4 flex items-end justify-between gap-x-4 gap-y-1 pb-2',
-        className,
-      )}
-    >
-      <Heading className="text-2xl">{children}</Heading>
+    <div className={cn('mb-5 flex items-end justify-between gap-x-4 gap-y-1', className)}>
+      <Heading className="text-xl font-medium">{children}</Heading>
       <span className="flex items-center gap-3">
         {actions}
         {(asideLabel !== undefined || asideValue !== undefined) && (
-          <span className="caps flex items-baseline gap-1.5 text-muted-foreground">
+          <span className="flex items-baseline gap-1.5 text-sm text-muted-foreground">
             {asideLabel}
             {asideValue !== undefined && (
               <span
                 className={cn(
-                  'text-xs font-bold',
+                  'text-base font-medium tabular-nums',
                   asideTone === 'accent' ? 'text-primary' : 'text-foreground',
                 )}
               >
