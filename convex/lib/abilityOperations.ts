@@ -1498,9 +1498,18 @@ const abilityCorrect: OperationDefinition = {
     const { event, result } = await resultByEvent(ctx, context, String(args.event));
     // A06 window check: latest unit on the branch; acting player within their undo window; Director
     // always subject to the sequential-rewind rule for older events.
-    if (result.compiled) {
+    // Archived encounters may have removed their foes. Preserve the history refusal before
+    // inspecting live condition state, while retaining the specific rolled-save reason in combat.
+    if (event.encounterId && (await ctx.db.get(event.encounterId))?.archivedAt != null)
+      await assertCorrectionAllowed(ctx, event._id, context.user);
+    const conditionTargetIds = new Set(
+      (result.compiled as CompiledResult | undefined)?.effects
+        .filter(occurrence => occurrence.effect.kind === 'condition')
+        .map(occurrence => occurrence.effect.targetId) ?? [],
+    );
+    if (conditionTargetIds.size) {
       for (const target of result.targets) {
-        if (target.target.kind === 'squad') continue;
+        if (target.target.kind === 'squad' || !conditionTargetIds.has(target.target.id)) continue;
         const id = await resolveHistoricalId(ctx, context.campaign._id, target.target.id);
         if (await hasRolledConditionSave(ctx, { kind: target.target.kind, id }, event._id))
           throw new ConvexError(
