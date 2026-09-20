@@ -45,6 +45,12 @@ Every test must meet the [test value policy](README.md#test-value): name the con
 catches and the coverage it adds. Reviewers remove redundant or implementation-mirroring tests;
 there is no test-count quota or separate test-justification bureaucracy.
 
+Before browser acceptance, pass the app-wide
+[programmatic headless gate](README.md#programmatic-headless-completion-gate). Each ancestry/class
+journey must create, choose, save and read back/evaluate through supported CLI/API operations
+without a browser session or UI setup. Include affected review/history boundaries. Record the
+headless result first, then browser-only discoveries; existing browser passes are not this proof.
+
 During implementation, run focused checks for the changed mechanism: choices/budgets, grants and
 derived values, parent replacement, persisted save/reload and applicable history/live-state cases.
 Reuse the existing test runners and pre-pilot helpers. Do not create a new test framework, limiter
@@ -88,8 +94,8 @@ rate-limit bypasses or disabled assertions merely to make verification pass.
 2. Obtain independent implementation review, followed by a fresh rules review. Repair concrete
    findings; reviewers revisit the affected changes. Do not rebuild unchanged evidence solely
    because a new reviewer reads it. Keep verification-pending distinct from acceptance-pass.
-3. Prepare the integration candidate on current main. Run full `pnpm check` and the required full
-   browser suite on CT114. A previous run may satisfy this gate only when it covers the identical
+3. Prepare the integration candidate on current main. Run full `pnpm check`, pass programmatic headless application
+   journeys, then run the required full browser suite on CT114 and record its incremental findings. A previous run may satisfy this gate only when it covers the identical
    relevant code, tests and configuration; document that equivalence. Do not require duplicate
    branch and integration full runs when their tested trees are identical.
 4. A required failure or incomplete Forge comparison blocks merge. Passing an isolated rerun does

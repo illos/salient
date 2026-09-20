@@ -346,11 +346,11 @@ merges, not development. No pilot inputs may be reused. All runtime work remains
 
 | Id | Unit | Implementation | Verification / next action |
 | --- | --- | --- | --- |
-| V57 | [Devil level one](V44-character-option-delivery.md) | Candidate `ae773b0`, `slice/V57` | Queued: focused checks, persisted browser/Forge witnesses, full gates and reviews |
-| V58 | [Polder level one](V44-character-option-delivery.md) | Candidate `2291b29`, `slice/V58-integration` | 694 checks, new browser and same-build Forge pass; queue rules review and full regression after V59; not merged |
+| V57 | [Devil level one](V44-character-option-delivery.md) | Candidate `ae773b0`, `slice/V57` | Hosted browser pass; standalone headless proof, Forge comparison and final gates/reviews pending |
+| V58 | [Polder level one](V44-character-option-delivery.md) | Candidate `2291b29`, `slice/V58-integration` | 694 checks, browser and same-build Forge pass; standalone headless proof and final gates/reviews pending; not merged |
 | V59 | [Closeout verification blocker](V59-closeout-timeout.md) | Investigation recorded on main `4c990eb` | Unchanged-main actual-game closeout passed; intermittent cause unresolved; no speculative code change |
-| V60 | [Dwarf level one](V44-character-option-delivery.md) | Candidate `99f3358`, `slice/V60` | All five purchases/signature implemented; six focused tests and full 697-test check pass; actual browser/Forge and final reviews queued |
-| V61 | [Human level one](V44-character-option-delivery.md) | Candidate `dbc0818`, `slice/V61` | All five purchases/signature implemented; four focused tests and full 695-test check pass; actual browser/Forge and final reviews queued |
+| V60 | [Dwarf level one](V44-character-option-delivery.md) | Candidate `99f3358`, `slice/V60` | All five purchases/signature implemented; six focused tests and full 697-test check pass; hosted browser pass; standalone headless proof, Forge and final reviews pending |
+| V61 | [Human level one](V44-character-option-delivery.md) | Candidate `dbc0818`, `slice/V61` | All five purchases/signature implemented; four focused tests and full 695-test check pass; hosted browser pass; standalone headless proof, Forge and final reviews pending |
 
 Lead owns shared ancestry composition/evaluation wiring, this queue and the named CT114
 `character-restart` environment; source replacement and heavy jobs remain serialized. The shared main app and
@@ -364,16 +364,18 @@ in `docs/build/V60-dwarf-level-one.md`, `docs/build/V61-human-level-one.md`, and
 checks, not actual-game browser acceptance. Required browser/Forge checks and formal reviews stay
 queued; no ancestry application change has been merged into main.
 
-Next verification: complete Devil’s focused and same-build witnesses; execute Dwarf/Human’s compact
-browser/Forge witness tables; resolve the recorded full-browser blocker and complete the required
-candidate regression before individual merges. Do not repeat a full suite solely hoping for green.
-The named `character-restart` runtime was stopped after Human checks on 2026-09-20, with data and
-artifacts retained. No background verification job is running. V59 evidence is merged as docs only;
-its unchanged-main browser pass does not clear V58’s failed full run. Main app needs no update for
-these documentation-only progress commits.
+Next verification follows the app-wide
+[headless completion gate](README.md#programmatic-headless-completion-gate): prove authenticated
+create/choose/save/evaluate/readback through supported CLI/API routes without browser setup for
+V57/V58/V60/V61. These proofs are pending; engine checks and hosted browser passes do not satisfy
+them. Then compare additional browser findings on matching code before deciding whether redundant
+browser coverage belongs later. Forge comparisons and formal reviews remain required before merges.
 
-## V62 hosted verification — 2026-09-20
-
-| Id | Unit | Implementation | Verification / next action |
-| --- | --- | --- | --- |
-| V62 | [Hosted ancestry verification](V62-hosted-ancestry-verification.md) | Integration in progress, `slice/V62` | User-authorized hosted publication and actual-game tests of all four ancestry candidates; preserve data; cloud dev `different-bat-943` and Worker `salient-dev` |
+V62 published combined candidate `1e7896c` on `origin/slice/V62` to hosted dev, with user authorization;
+no ancestry code is merged into main. Closeout and all four ancestry browser journeys passed there,
+with 50 distinct browser cases passing overall. An older wizard journey remains unresolved; three
+fixture-gated tests skipped and two design mockups are not published. Detailed V62 notes/test fixes
+remain uncommitted in `.worktrees/astra-hosted`; they are not accepted verification evidence yet.
+Further browser debugging is paused. No background verification job is running, and the CT114 heavy
+window is released to V63. The named `character-restart` runtime remains stopped with data retained.
+This doctrine/status update changes documentation only and needs no runtime update.

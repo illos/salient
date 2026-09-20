@@ -16,6 +16,15 @@ ancestry/class/level as its own logical commit, same-build Forge verification, a
 audit, and verified incremental merges. Complete level-one coverage before expanding the new queue
 into later class levels. Existing Berserker level-two support must remain working.
 
+## Verification order — current requirement
+
+Apply the [app-wide headless completion gate](README.md#programmatic-headless-completion-gate).
+First prove each candidate through browser-independent authenticated CLI/API journeys and persisted
+readback; then compare browser findings on matching code. Current Devil/Polder/Dwarf/Human browser
+results do not establish this proof. Keep headless proof pending until it actually passes. Browser
+testing remains required until the documented comparison supports moving redundant coverage later.
+Do not resume the old browser-debugging loop as a substitute for this next verification step.
+
 ## Starting point
 
 Use a new branch/worktree from current main. Do not reset to an old commit: main contains this
