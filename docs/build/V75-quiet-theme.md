@@ -351,3 +351,17 @@ coordinator; the tip is then handed to DEPLOY2 for the fast-forward, the cloud d
 the smoke check. The pop-up captures listed as pending in the evidence index were not taken (the
 coordinator recorded the optional capture as skipped); the user approved from the captures on
 file.
+
+### 2026-09-20 — hosted promotion
+
+TESTER `test-V75-c4ed53e-1` passed the full check (exit 0, 162 s). DEPLOY2 fast-forwarded main
+to the frozen reviewed `c4ed53e48c74f5783b876cd6a7c09fafe2f0795c` and reused that gate.
+The hosted build and frontend publication passed; Worker `31c58f6d-cfe2-4848-945e-908aa4104003`
+serves the Quiet theme at `https://salient-dev.rdxx.workers.dev`.
+Backend and content remain V92 (`81b7931`, 1182 entries); no backend publication or reseed.
+Temporary credentials removed; private hosted helpers stopped. Build/publication logs:
+`/srv/presidium/projects/salient/test-artifacts/V75-release-c4ed53e`.
+
+TESTER1179 hosted smoke passed in 1.27 s: public HTML, CSS and all three referenced fonts
+returned HTTP200 with exact hosted-build hashes; Quiet background/accent/Schibsted tokens were
+present. No browser run. Evidence: `/srv/presidium/projects/salient/test-artifacts/V75-hosted-c4ed53e`.

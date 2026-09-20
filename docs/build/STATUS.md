@@ -85,7 +85,7 @@ add narrative here. V46–V56 were the abandoned Opus pilot and are retired ids.
 | V72 | [Live compiled ability effects](V72-live-compiled-effects.md) | Merged |
 | V73 | [Headless Forge character counterparts](V73-forge-headless-counterparts.md) | Merged (via V74) |
 | V74 | [Trait-granted abilities and active Dwarf runes](V74-trait-granted-abilities.md) | Merged |
-| V75 | [Quiet design language theme](../design-tokens.md) | Committed on branch `slice/V75` (`.worktrees/quiet-theme`); user approved 2026-09-20, handed to DEPLOY2 |
+| V75 | [Quiet theme](V75-quiet-theme.md) | Merged (`c4ed53e`); full check pass; frontend published; hosted asset smoke pass |
 | V76 | [Dragon Knight level one](V76-dragon-knight-level-one.md) | Merged |
 | V77 | [High Elf level one](V77-high-elf-level-one.md) | Merged |
 | V78 | [Memonek level one](V78-memonek-level-one.md) | Merged |

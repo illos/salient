@@ -107,7 +107,14 @@ See [the release evidence](build/evidence/V43/hosted/README.md) for browser resu
 fixture limitations and deployment logs. Earlier Worker versions in slice records are historical.
 
 
-## Current release — V92 Shadow level one
+## Current frontend release — V75 Quiet theme
+
+Frontend source `c4ed53e48c74f5783b876cd6a7c09fafe2f0795c` published on 2026-09-20 as
+Worker `31c58f6d-cfe2-4848-945e-908aa4104003`. User-approved presentation changes only;
+backend and content remain at the V92 identities below. Hosted build passed; the full TESTER
+check was reused. See [V75](build/V75-quiet-theme.md) and the [deployment ledger](../deploy.md).
+
+## Current backend/content — V92 Shadow level one
 
 Backend/frontend source `81b79316dbf11e18d44f3feab6e7f1d3b49f5d22` published on 2026-09-20.
 Worker `f6951468-0bfe-49bd-b0ab-1ec9628334fc`; content reseeded to 1182 entries with hash

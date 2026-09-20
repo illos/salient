@@ -42,7 +42,7 @@ runtime update. Domains, accounts and paid plans remain separate from standing r
 | V85/V86 | owner `64972e6`, integrated `4f3fe13` | Merged and published; targeted live checks passed | release closeout |
 | V88 | integrated with V85/V86 at `4f3fe13` | Merged and published; targeted live checks passed | 1151 entries, inventory 13/1259/2; release closeout |
 | V89 | owner `dff62e8`, integrated `4f3fe13` | Merged; full 358+575 PASS reused by identity | build-only heap repair `a0a700a` independently reviewed and hosted build passed |
-| V75 | `slice/V75` at `2c7cfe2` | Not release-ready | user visual decision and refreshed handoff |
+| V75 | `c4ed53e` | Merged; frontend published | hosted asset smoke passed; closeout SHA in completion handoff |
 
 Update this ledger at handoff, integration, publication, verification and rollback boundaries. The
 canonical feature/test detail remains in [docs/build/STATUS.md](docs/build/STATUS.md); this file tracks
@@ -124,3 +124,16 @@ Temporary credentials removed; private hosted helper services stopped.
 TESTER smoke `test-V92-81b7931-hosted-smoke` passed in 6.24 s (Chords 1134): persisted Shadow
 Insight/abilities and college replacement, with signout. Raw result:
 `/srv/presidium/projects/salient/test-artifacts/V92-hosted-81b7931`.
+
+### V75 Quiet theme publication — 2026-09-20
+
+User-approved presentation changes merged at `c4ed53e48c74f5783b876cd6a7c09fafe2f0795c`.
+TESTER `test-V75-c4ed53e-1` full check passed (exit 0, 162 s); that result was reused on promotion.
+Hosted build and frontend publication passed. Worker: `31c58f6d-cfe2-4848-945e-908aa4104003`.
+Backend source remains `81b7931`; content remains the V92 1182-entry snapshot. No backend deploy
+or reseed was needed. Temporary credentials removed and private hosted helper services stopped.
+Logs: `/srv/presidium/projects/salient/test-artifacts/V75-release-c4ed53e`.
+
+TESTER1179 hosted smoke passed in 1.27 s: public HTML, CSS and all three referenced fonts
+returned HTTP200 with exact hosted-build hashes; Quiet background/accent/Schibsted tokens were
+present. No browser run. Evidence: `/srv/presidium/projects/salient/test-artifacts/V75-hosted-c4ed53e`.
