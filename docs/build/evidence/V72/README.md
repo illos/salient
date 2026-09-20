@@ -97,3 +97,10 @@ commit at execution time). `pnpm check` now checks this report against current s
 [independent pinned-source rules review](../../reviews/V72-rules-review.md) passed. The latter
 explicitly notes that BS6 uses supplied roll modifiers and manual condition coverage; automatic
 restrained edges or movement prohibition are not implemented by V72.
+
+
+## Commit identity and handoff
+
+The tested application bytes were committed as `ed564b35eb892c7a139244761e9db3cf4cc17063`
+on `slice/V72-live-compiled-effects`. Execution-time metadata remains dirty base `e5c1cd8`
+because no clean-commit run is claimed. This is a branch acceptance handoff, not main integration.

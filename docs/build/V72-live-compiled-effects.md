@@ -7,7 +7,7 @@
 | Owner type | Engine implementer with independent implementation and rules reviewers |
 | Rules review | required |
 | Depends on | V26 design, V63 correction history, V67 pure compiler |
-| Status | Headless acceptance and independent implementation/rules reviews PASS; branch handoff pending |
+| Status | Committed on branch `ed564b3`; acceptance and reviews PASS; Fable owns integration |
 
 ## Goal and boundaries
 
@@ -82,3 +82,19 @@ shared playable runtime update remain with Fable; this evidence accepts the isol
 Main advanced independently through V68 while this candidate was checked; the integration lead
 must check the integrated tree and update the shared app when merging. V74's ancestry-action
 projection touches `abilitiesFor`; V72's source adapter changes are confined to source constructors.
+
+
+### 2026-09-20 — Branch handoff
+
+Implementation/evidence commit: `ed564b35eb892c7a139244761e9db3cf4cc17063`.
+The committed application bytes match the tested candidate. The metadata retains the truthful
+dirty source identity at execution time. No main merge, push or shared-runtime change was done
+by this thread. Isolated `engine-live` is stopped and its data retained.
+
+Integration must preserve V68's intervening main changes and V74's separate ancestry-action
+projection in `abilitiesFor`. Expected overlap is shared documentation/status and the TypeScript
+include list. Run the integrated checks, then update backend/schema and frontend on the existing
+shared main and verify occurrence-aware results. No content reseed or data reset is needed.
+The historical V63 main proof runner assumes push is in legacy `unresolvedClauses`; after this
+migration use occurrence-aware verification rather than treating that historical harness as a
+current compiled-effects acceptance test. Browser testing remains paused.
