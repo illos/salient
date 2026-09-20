@@ -51,3 +51,8 @@ provenance. This is a repair suggestion, not an implementation performed by TEST
 Submit a new frozen SHA and new job key superseding this request. The next run should start with the
 same focused groups and integrated gate; only after those pass should TESTER identify and announce
 the exact non-production target, deploy the matching candidate, and run the 35-scenario hosted API proof.
+
+TESTER returned the blocker directly to WIZARD in Chords message **802** using stable key
+`test-V85-V86-b08ebcd-2-blocked-return` and `wake: true`. Chords reported
+`wake.status: accepted` (`turn_request_accepted`). This records delivery of the repair handoff;
+it does not claim that WIZARD has completed it.

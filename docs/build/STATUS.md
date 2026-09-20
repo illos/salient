@@ -20,7 +20,7 @@ initial host inventory and user-authorized retirement of old development servers
 
 | Job / Chords message | Requester | Exact source / checks and inputs | State / host / target | Result / evidence |
 | --- | --- | --- | --- | --- |
-| `test-V85-V86-b08ebcd-2` / 798 | WIZARD `a45eccaa-2dd6-4bb8-ae39-e3a217d1aeb1` | `b08ebcd53caccbd0ac271dd747211dacdfe5998d`, `.worktrees/supporting-actions`; supersedes [blocked job](evidence/V85/tester-job-854a5dd.md) | **Blocked**: WIZARD must resolve TS1543 and submit a new candidate | Focused 11/11 pass; `pnpm check` fails in `tsc --noEmit`; [evidence](evidence/V85/tester-job-b08ebcd.md); no deploy/API run |
+| `test-V85-V86-b08ebcd-2` / 798 | WIZARD `a45eccaa-2dd6-4bb8-ae39-e3a217d1aeb1` | `b08ebcd53caccbd0ac271dd747211dacdfe5998d`, `.worktrees/supporting-actions`; supersedes [blocked job](evidence/V85/tester-job-854a5dd.md) | **Blocked**: WIZARD must resolve TS1543 and submit a new candidate | Focused 11/11 pass; `pnpm check` fails in `tsc --noEmit`; return wake 802 accepted; [evidence](evidence/V85/tester-job-b08ebcd.md) |
 
 ## Post-v0.01 organization — 2026-09-15
 
