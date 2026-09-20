@@ -20,7 +20,22 @@ action metadata. Familiar restoration pays one Recovery without healing and has 
 Lie Detector remains blocked on the unimplemented HeroToken pool; contextual effects remain manual.
 V84 adds 11 ancestral and 16 professional presets, independent of hero ancestry, plus editable
 Bespoke culture. No new culture rules or grants are introduced; players still select their skills.
-Next bounded work is the complication grant/dependency audit, then starting-reward fulfillment.
+[V85 complication grants](V85-complications.md) and [V86 starting rewards](V86-starting-rewards.md)
+are built on `slice/V85` (`b15fc59` plus import correction `faa9b1e`), not merged. The complication
+audit covers all 100 entries and exposes 49 actions/activities, 37 newly added. Starting rewards
+persist once at admission, survive build changes/restoration and expose 20 manual actions from
+17 possessed treasures. All 12 first-echelon trinkets and 14 leveled weapons were audited.
+Full local `pnpm check` passes: 864 tests and production build. Independent source/static reviews
+pass within the documented manual boundary; deployed API acceptance remains blocked.
+
+The retained CT114 `supporting-actions` deployment of `b15fc59` failed its existing initial
+function-push readiness guard while “Preparing Convex functions.” No live API scenarios started.
+The environment was stopped with its data retained; no retry, timeout increase or infrastructure
+repair was attempted. Shared main is unchanged. [V85/V86 evidence](evidence/V85/README.md)
+contains the logs, precise identities and remaining dependencies. Resume with a usable isolated
+deployment of the current candidate and the existing 35-scenario API suite. Do not repeat source
+audits, expand class scope or enter another verification repair loop. Earth + Grounded's duplicate
+range benefit still lacks a complete public character witness because Earth specialization is unsupported.
 
 Every implemented trait must be checked for granted abilities, including prose and conditional
 grants. Traits remain on the sheet alongside their actions. Dwarf active rune remains persisted

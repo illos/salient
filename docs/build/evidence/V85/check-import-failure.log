@@ -1,0 +1,14 @@
+$ pnpm lint && pnpm check:engine && pnpm check:app && pnpm check-links && pnpm check-vendor && pnpm content:check && pnpm supporting:check && pnpm foes:check && pnpm compiled:check && pnpm build
+$ eslint . && prettier --check .
+Checking formatting...
+All matched files use Prettier code style!
+$ tsc --noEmit && vitest run --project engine
+shared/contracts/startingRewards.ts(3,52): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean './characterEvaluation.js'?
+shared/contracts/startingRewards.ts(4,37): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean '../content/starting-reward-items.js'?
+shared/contracts/startingRewards.ts(28,3): error TS2322: Type 'unknown[]' is not assignable to type 'string[]'.
+  Type 'unknown' is not assignable to type 'string'.
+shared/contracts/startingRewards.ts(28,44): error TS7006: Parameter 'entry' implicitly has an 'any' type.
+shared/contracts/startingRewards.ts(48,79): error TS7006: Parameter 'item' implicitly has an 'any' type.
+shared/contracts/startingRewards.ts(48,85): error TS7006: Parameter 'index' implicitly has an 'any' type.
+[ELIFECYCLE] Command failed with exit code 2.
+[ELIFECYCLE] Command failed with exit code 2.
