@@ -1,13 +1,36 @@
 # V85/V86 character supporting completion evidence
 
-Status: candidate `b15fc59`, followed by import-only correction `faa9b1e`, committed on
-`slice/V85`; not merged. Full local checks passed. Live API acceptance remains blocked: the initial CT114 isolated startup failed, and the later
-user-requested hosted cloud deployment exited 1 before reporting a successful upload. No live
-scenarios ran. [Further investigation](deployment-diagnosis.md) identified inconsistent JSON
-import attributes and a schema-to-runtime import dependency. Both temporary corrections together
-passed deployment dry run. TESTER then caught a NodeNext typecheck conflict in `b08ebcd`;
-the replacement correction removes the shared helper’s JSON dependency and passes the revision
-from existing callers. New TESTER verification is pending; no deployment/API acceptance claimed. The hosted attempt below is history.
+Status: source `86e9d2e` is deployed to the hosted cloud demo, still unmerged into main.
+TESTER passed the full 864-test check and both deployment gates. Hosted API acceptance is
+**30 passed, 5 incomplete**: culture exhausted the shared 240-second runner budget; the four
+V85/V86 scenarios received no remaining time. The replacement runner provides five independent
+cohorts using the same scenarios and unchanged deadlines. New TESTER execution is pending.
+
+Latest TESTER report is committed on main at `docs/build/evidence/V85/tester-job-86e9d2e.md`;
+raw artifacts: `/srv/presidium/projects/salient/test-artifacts/V85-V86-86e9d2e-20260920T1433Z`.
+Worker version `bb430814-0366-43a3-882a-bd69f81cc811`; Convex `dev:different-bat-943`.
+Earlier deployment failures below are retained history and have been resolved.
+
+## Remaining hosted proof
+
+Use `SALIENT_HEADLESS_COHORT` with one of `culture`, `complication-choices`,
+`complication-table`, `starting-rewards`, `starting-items`. Each invokes one existing complete
+scenario with its original setup, assertions and cleanup. Run them serially through TESTER;
+expect exactly one passing result in each. Default `all` preserves the original 35-scenario suite.
+Unknown cohort names fail before authentication instead of silently selecting an empty/full run.
+
+Set `SALIENT_HEADLESS_SOURCE=86e9d2ed3b82a5d027f631f677975f040439f472` to identify the deployed
+application and `SALIENT_HEADLESS_RUNNER_SOURCE` to the new committed runner SHA. Reports include
+both, the cohort and `coverage: selected-cohort`; a one-case pass is not a full-suite pass.
+The request15s, cohort/run240s and hard-stop295s deadlines are unchanged. Outer-budget exhaustion
+now reports `run-deadline`; individual request exhaustion remains `request-timeout`.
+A focused regression test distinguishes these causes and verifies timer cleanup; TESTER runs it.
+
+This candidate changes runner/tests/docs and retains only the generated API type-map delta from
+TESTER’s deployment. It does not change application behavior, so no app redeploy or source archive
+is needed. Retain the prior30 pass records, then combine the five new matching scenario results
+for full coverage on application86e9d2e. Preserve the original failed aggregate report and do not
+represent the combined results as a single successful 35-scenario run. No WIZARD tests were run.
 
 ## Implemented scope
 

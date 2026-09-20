@@ -1,50 +1,39 @@
 # Character wizard restart handoff
 
 Status: all twelve level-one ancestries are delivered through [V82](V82-remaining-ancestries.md).
-The supporting portion is delivered as `175d17d`: [perk/kit actions](V83-supporting-actions.md)
-and [culture presets](V84-culture-presets.md). All repository check stages and independent
-implementation/source reviews passed; both isolated and shared-main API suites passed 31/31.
+[V83 perk/kit actions](V83-supporting-actions.md) and [V84 culture presets](V84-culture-presets.md)
+were merged and verified through 31/31 API scenarios. [V85 complications](V85-complications.md)
+and [V86 starting rewards](V86-starting-rewards.md) are built on `slice/V85` and deployed to the
+hosted cloud demo as `86e9d2e`, but are not yet merged or fully accepted.
 
 ## Current source and running app
 
-Shared main runs clean `175d17d4e4d1e2838e6d9fb796942ce2fda14925` at
-<https://salient-dev-fc4f48cb09a0.tail41404c.ts.net>, including ENGINE V72. Existing data and
-567 references were preserved. The isolated `supporting-actions` CT114 stack is stopped with
-its data retained. [V83 evidence](evidence/V83/README.md) owns current check/review/live records,
-including the isolated raw report's explicit source-label correction and accurate main report.
-The prior V82 hosted ancestry deployment is historical evidence, not the current character app.
-Preserve peer engine/UI work and coordinate the next runtime use through Chords.
+Hosted target: <https://salient-dev.rdxx.workers.dev>, Convex `dev:different-bat-943`, Worker
+`bb430814-0366-43a3-882a-bd69f81cc811`. TESTER passed the full864 repository checks, Convex
+bundle/type/schema validation and backend/frontend deployment. Existing play data and567 reference
+entries were retained. This hosted demo is distinct from shared CT114 main; consult Chords before
+any changes to that peer-managed environment. The old isolated `supporting-actions` stack is stopped.
 
-V83 exposes 24 actions/activities from 23 core perks and corrects all 21 ordinary kit signatures'
-action metadata. Familiar restoration pays one Recovery without healing and has undo/redo.
-Lie Detector remains blocked on the unimplemented HeroToken pool; contextual effects remain manual.
-V84 adds 11 ancestral and 16 professional presets, independent of hero ancestry, plus editable
-Bespoke culture. No new culture rules or grants are introduced; players still select their skills.
-[V85 complication grants](V85-complications.md) and [V86 starting rewards](V86-starting-rewards.md)
-are built on `slice/V85` (`b15fc59` plus import correction `faa9b1e`), not merged. The complication
-audit covers all 100 entries and exposes 49 actions/activities, 37 newly added. Starting rewards
-persist once at admission, survive build changes/restoration and expose 20 manual actions from
-17 possessed treasures. All 12 first-echelon trinkets and 14 leveled weapons were audited.
-Full local `pnpm check` passes: 864 tests and production build. Independent source/static reviews
-pass within the documented manual boundary; deployed API acceptance remains blocked.
+The hosted API suite passed30 cases, then exhausted the shared240s budget during culture presets;
+four V85/V86 cases never started. Captured server logs did not show a server timeout. The new runner
+selects each of the five remaining original scenarios as a separate cohort without changing time
+limits/assertions. TESTER owns the focused runner checks and serial hosted cohort execution against
+application86e9d2e, recording the new runner SHA separately. No app redeployment is needed for this
+runner-only change. [Current evidence](evidence/V85/README.md#remaining-hosted-proof) owns the
+commands and limits. Retain the first30 passes and original failed aggregate report; combined
+coverage is not a single successful35-scenario run. Full acceptance remains pending.
 
-The retained CT114 `supporting-actions` deployment of `b15fc59` failed its existing initial
-function-push readiness guard while “Preparing Convex functions.” No live API scenarios started.
-The environment was stopped with its data retained; no retry, timeout increase or infrastructure
-repair was attempted. Shared main is unchanged. [V85/V86 evidence](evidence/V85/README.md)
-contains the logs, precise identities and remaining dependencies. The user then requested the separate hosted cloud demo (`salient-dev.rdxx.workers.dev`). Its
-deploy CLI exited 1 before reporting upload success; two diagnostic repeats exposed no root cause.
-The hosted frontend build passed, but publication and the 35-scenario API run did not proceed.
-The [subsequent diagnosis](evidence/V85/deployment-diagnosis.md) confirmed mixed manifest JSON
-import attributes and a schema import of runtime authentication. Two temporary corrections passed
-the deployment dry run and were restored. The permanent equivalent correction is now prepared
-for TESTER under the new testing process; TESTER owns all checks/builds/deployment verification.
-TESTER returned `b08ebcd` after focused6/app5 passed but NodeNext rejected the attribute-free
-JSON import. The replacement passes the manifest revision from the helper’s existing backend
-callers and removes its JSON import entirely. The next gate is TESTER’s full check and actual
-hosted deployment followed by the 35-scenario API suite. Do not repeat source
-audits, expand class scope or enter another verification repair loop. Earth + Grounded's duplicate
-range benefit still lacks a complete public character witness because Earth specialization is unsupported.
+V85 audits all100 complications and exposes49 actions/activities,37 newly added. V86 persists
+starting rewards once at admission, survives build changes/restoration and exposes20 manual actions
+from17 possessed treasures. All12 first-echelon trinkets and14 leveled weapons were audited.
+Earth + Grounded's duplicate range benefit still lacks a complete public character witness because
+Earth specialization is unsupported. Temporary learning, missing token pools and other manual
+runtime boundaries remain recorded in the source ledgers; class expansion is outside this batch.
+
+The [deployment diagnosis](evidence/V85/deployment-diagnosis.md) is resolved: the shared item helper
+now receives the manifest revision from existing backend callers, and its validator lives in a pure
+schema module. No JSON import conflict, runtime-auth schema dependency or typecheck blocker remains
+in the tested application86e9d2e. All future test execution goes through TESTER; no competing jobs.
 
 Every implemented trait must be checked for granted abilities, including prose and conditional
 grants. Traits remain on the sheet alongside their actions. Dwarf active rune remains persisted
