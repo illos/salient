@@ -17,10 +17,13 @@ test('V72 availability follows current grants and loading, not catalog presence'
   ).toEqual([
     // V87 seeds the full core corpus: both Worg Bite and Ghoul Razor Claws are reachable.
     'Bite',
+    'Bola Knock',
     'Brutal Slam',
     'Bury the Point',
+    'Eye Flash',
     'Eye of Surlach',
     'Melee Weapon Free Strike',
+    'Power Chord',
     'Ranged Weapon Free Strike',
     'Razor Claws',
     'Spear Charge',
@@ -33,10 +36,7 @@ test('V72 availability follows current grants and loading, not catalog presence'
       .map(e => e.name)
       .sort(),
   ).toEqual([
-    'Bola Knock',
-    'Eye Flash',
     'Meteoric Introduction',
-    'Power Chord',
     'Ray of Agonizing Self-Reflection',
   ]);
 });
