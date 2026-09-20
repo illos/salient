@@ -82,12 +82,15 @@ unavailable, the durable job waits for the next coordinator turn; do not create 
    eligible coordinator turn. Never substitute a passive broadcast or invent a new key to bypass
    the wake lifecycle. Record the wake result in the queue/evidence so an unwoken return remains
    visible until delivery is attempted successfully.
-8. **Route branch-ready and release-gate results to DEPLOY.** In addition to the requester return,
-   send a direct Chords update to DEPLOY thread `bc6847ae-0334-4282-ae3c-6ec7291a509c` with the
-   exact source SHA and certificate paths. DEPLOY owns integration into current main and cloud
-   publication. TESTER owns the small reproducible integrated-main gate before promotion and the
-   exact-revision live gate after publication when DEPLOY submits those jobs. Do not call a cloud
-   revision stable until both target-specific gates and the release record are complete.
+8. **Keep deployment handoff ownership explicit.** Return the clean result to the requesting
+   implementation thread first. TESTER may also send DEPLOY thread
+   `bc6847ae-0334-4282-ae3c-6ec7291a509c` an informational copy with the exact source SHA and
+   certificate paths, but that copy does not authorize integration. The owning implementation
+   thread must explicitly hand the completed frozen work to DEPLOY. DEPLOY then owns integration
+   into current main and cloud publication. TESTER owns the small reproducible integrated-main
+   gate before promotion and the exact-revision live gate after publication when DEPLOY submits
+   those jobs. Do not call a cloud revision stable until both target-specific gates and the release
+   record are complete.
 
 The installed `presidium-dev up` still uploads a complete source snapshot and starts services;
 `run` uses the last uploaded tree and does **not** sync edits. Compression/exclusion/delta changes
