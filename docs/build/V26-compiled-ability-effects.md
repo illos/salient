@@ -149,11 +149,12 @@ manual-clause storage/reads/operations; historical results never gain occurrence
 Named regression abilities test that boundary without converting every manual ability to a new format.
 
 This is structural eligibility, not rules dispatch by name. At the audited integrated snapshot the
-structurally matching set has eight abilities, but only six are currently selectable for live
+structurally matching set has ten abilities, but only six are currently selectable for live
 compiled execution: **Brutal Slam, Spear Charge, Bury the Point, Melee Weapon Free Strike,
 Ranged Weapon Free Strike and Viscous Fire**. Meteoric Introduction and Ray of Agonizing
 Self-Reflection match the grammar but lack a current wizard grant option; retain them as compile-only
-comparisons. The four named compatibility regressions bring the live-proof inventory to ten.
+comparisons. Ghoul Razor Claws and Worg Bite are also compile-only because the current public
+foe loader cannot load them. The four named compatibility regressions bring the live-proof inventory to ten.
 New qualifying content must be added to that inventory before its behavior changes; do not silently
 migrate it because a grammar check passes.
 
@@ -274,6 +275,12 @@ These are **future implementation acceptance checks**, not results from writing 
    Stamina 7, and printed push 2 plus size bonus 1 = allowance 3. Source text, calculations,
    identities and manual physical-movement scope appear in both headless result and log card.
    State that other Fury/Goblin traits and triggers remain manual.
+   **2026-09-20 V72 implementation scope:** live evaluated sizes/stability establish the printed
+   push plus size subtotal. Without complete movement coverage, this case reads subtotal 3 with
+   named missing condition/trait/modifier coverage, not a final allowance. No Director coverage
+   assertion input is added. Pure fixtures still prove complete allowances 2/3/5. Check 7 remains
+   unchanged. Browser screenshots/journeys are deferred under the user moratorium; persisted
+   public CLI/API readback is the current acceptance route.
 2. **Monster adapter and honest minion boundary.** Spear Charge yields the printed 3/4/5 damage
    expressions; Bury the Point retains each distinct potency/bleeding/save clause as unsupported
    post-damage work. Spinecleaver Axe tier 2 compiles to damage 4 then push 3, with full minion
@@ -326,7 +333,7 @@ These are **future implementation acceptance checks**, not results from writing 
     prerequisite must be explicit; do not expand the wizard or manufacture granted abilities. Preserve
     V25's evaluated Magic/Fire bonuses and target immunities, damage types, and unchanged optional
     spend/resource behavior. Compare generated eligibility and live grant availability with the
-    inventory of ten live abilities and three compile-only comparisons; any additional behavioral
+    inventory of ten live abilities and five compile-only comparisons (including unsupported minion Axe); any additional behavioral
     change requires its own completed design and live evidence.
 
 ## Ability design and playtest evidence
@@ -353,24 +360,26 @@ The integrated-content audit additionally identified Meteoric Introduction, Visc
 Agonizing Self-Reflection as matching the same grammar. Viscous Fire is additionally affected live;
 Meteoric and Ray remain compile-only because current wizard choices cannot grant them. These are
 included under the accepted affected-ability audit requirement. [Baseline evidence](evidence/V26/baseline-2026-09-16/README.md)
-now covers the ten available abilities. **V26 implementation acceptance remains pending**; existing
-manual results do not prove compiled behavior, and the baseline discloses turn-setup deviations.
+now covers the ten available abilities. **The later V72 branch has headless evidence below; integration remains pending.** The historical
+baseline alone did not prove compiled behavior and disclosed turn-setup deviations.
 
 | Ability | Source / design | Designed | Built | In-app playtested / evidence |
 | --- | --- | --- | --- | --- |
-| Brutal Slam | [Source, design and BS1–BS8](V26-ability-designs.md#brutal-slam) | Complete | No | [Baseline screenshots/readback](evidence/V26/baseline-2026-09-16/README.md); full V26 case pending. |
-| Spear Charge | [Source, design and SC1–SC4](V26-ability-designs.md#spear-charge) | Complete | No | [Baseline screenshots/readback](evidence/V26/baseline-2026-09-16/README.md); full V26 case pending. |
-| Bury the Point | [Source, design and BP1–BP5](V26-ability-designs.md#bury-the-point) | Complete | No | [Baseline screenshots/readback](evidence/V26/baseline-2026-09-16/README.md); full V26 case pending. |
-| Melee Free Strike | [Source, design and MF3](V26-ability-designs.md#melee-free-strike) | Complete | No V26 change | [Baseline screenshots/readback](evidence/V26/baseline-2026-09-16/README.md); full V26 case pending. |
-| Ranged Free Strike | [Source, design and RF3](V26-ability-designs.md#ranged-free-strike) | Complete | No V26 change | [Baseline screenshots/readback](evidence/V26/baseline-2026-09-16/README.md); full V26 case pending. |
-| Pain for Pain | [Source, design and PP3](V26-ability-designs.md#pain-for-pain) | Complete | Compatibility retained; unverified for V26 | [Baseline screenshots/readback](evidence/V26/baseline-2026-09-16/README.md); full V26 case pending. |
-| Out of the Way! | [Source, design and OW2](V26-ability-designs.md#out-of-the-way) | Complete | Compatibility retained; unverified for V26 | [Baseline screenshots/readback](evidence/V26/baseline-2026-09-16/README.md); full V26 case pending. |
-| Thunder Roar | [Source, design and TR1](V26-ability-designs.md#thunder-roar) | Complete | Compatibility retained; unverified for V26 | [Baseline screenshots/readback](evidence/V26/baseline-2026-09-16/README.md); full V26 case pending. |
-| Lines of Force | [Source, design and LF1](V26-ability-designs.md#lines-of-force) | Complete | Compatibility retained; unverified for V26 | [Baseline screenshots/readback](evidence/V26/baseline-2026-09-16/README.md); full V26 case pending. |
-| Meteoric Introduction | [Source and pure MI2](V26-ability-designs.md#compile-only-comparison-meteoric-introduction) | Complete for compilation | No V26 change | Deferred; no current live grant option. |
-| Viscous Fire | [Source, design and VF2](V26-ability-designs.md#additional-affected-ability-viscous-fire) | Complete | No V26 change | [Baseline screenshots/readback](evidence/V26/baseline-2026-09-16/README.md); full V26 case pending. |
-| Ray of Agonizing Self-Reflection | [Source and pure RA2](V26-ability-designs.md#compile-only-comparison-ray-of-agonizing-self-reflection) | Complete for compilation | No V26 change | Deferred; no current live grant option. |
-| Spinecleaver Axe | [Source and compile-only comparison](V26-ability-designs.md#compile-only-comparison-spinecleaver-axe) | Complete for compilation; live minion design deferred to V02 | No live implementation | Deferred; cannot count as built or playtested. |
+| Brutal Slam | [Source and BS1–BS8](V26-ability-designs.md#brutal-slam) | Complete | Compiled on V72 branch | [BS1/2/3/6/7/8 CLI; BS4/5 pure fixtures](evidence/V72/README.md#actual-public-proof); browser deferred. |
+| Spear Charge | [Source and SC1–SC4](V26-ability-designs.md#spear-charge) | Complete | Compiled on V72 branch | [SC1–SC4 CLI](evidence/V72/README.md#actual-public-proof); browser deferred. |
+| Bury the Point | [Source and BP1–BP5](V26-ability-designs.md#bury-the-point) | Complete | Compiled damage; potency remains manual | [BP2/4/5 CLI; remaining arithmetic pure](evidence/V72/README.md#actual-public-proof); browser deferred. |
+| Melee Free Strike | [Source and MF3](V26-ability-designs.md#melee-free-strike) | Complete | Compiled on V72 branch | [MF3 CLI](evidence/V72/README.md#actual-public-proof); browser deferred. |
+| Ranged Free Strike | [Source and RF3](V26-ability-designs.md#ranged-free-strike) | Complete | Compiled on V72 branch | [RF3 CLI](evidence/V72/README.md#actual-public-proof); browser deferred. |
+| Pain for Pain | [Source and PP3](V26-ability-designs.md#pain-for-pain) | Complete | Unchanged compatibility verified | [PP3 CLI](evidence/V72/README.md#actual-public-proof); browser deferred. |
+| Out of the Way! | [Source and OW2](V26-ability-designs.md#out-of-the-way) | Complete | Unchanged compatibility verified | [OW2 CLI and affordability refusal](evidence/V72/README.md#actual-public-proof); browser deferred. |
+| Thunder Roar | [Source and TR1](V26-ability-designs.md#thunder-roar) | Complete | Unchanged compatibility verified | [TR1 CLI and affordability refusal](evidence/V72/README.md#actual-public-proof); browser deferred. |
+| Lines of Force | [Source and LF1](V26-ability-designs.md#lines-of-force) | Complete | Manual compatibility verified | [LF1 CLI; no rolled outcome or state change](evidence/V72/README.md#actual-public-proof); browser deferred. |
+| Viscous Fire | [Source and VF2](V26-ability-designs.md#additional-affected-ability-viscous-fire) | Complete | Compiled on V72 branch | [VF2 CLI; immunity variants pure](evidence/V72/README.md#actual-public-proof); browser deferred. |
+| Meteoric Introduction | [Source and pure cases](V26-ability-designs.md#compile-only-comparison-meteoric-introduction) | Complete for compilation | Pure V67 compiler only | No live grant; no in-app claim. |
+| Ray of Agonizing Self-Reflection | [Source and pure cases](V26-ability-designs.md#compile-only-comparison-ray-of-agonizing-self-reflection) | Complete for compilation | Pure V67 compiler only | No live grant; no in-app claim. |
+| Ghoul Razor Claws | [Additional source cases](V26-ability-designs.md#v72-additional-discovered-compile-only-sources--2026-09-20) | Complete for compilation | Pure compiler only | No public loading path; no in-app claim. |
+| Worg Bite | [Additional source cases](V26-ability-designs.md#v72-additional-discovered-compile-only-sources--2026-09-20) | Complete for compilation | Pure compiler only | No public loading path; no in-app claim. |
+| Spinecleaver Axe | [Source and comparison](V26-ability-designs.md#compile-only-comparison-spinecleaver-axe) | Minion comparison only | No live implementation | Unsupported minion context; no in-app claim. |
 
 For each live case, show the ability being used through the rendered table, then the resulting
 source/result log card. Link the exact source clause and general-rule passages to a caption with
@@ -922,3 +931,21 @@ failed trial as well as the successful corrected run. The reviewer matched all 1
 hashes and inspected all 14 records. This closes the bounded V63 shared-main proof;
 it does not claim V26 compiled execution is live. Browser testing remains paused.
 This evidence-only handoff needs no runtime update; the integration lead owns its merge.
+### 2026-09-20 — V72 isolated headless implementation and evidence
+
+[V72](V72-live-compiled-effects.md) wires the V67 compiler through existing payment, damage,
+journal, correction and result paths. Six currently reachable abilities use compiled effects;
+unchanged complex/kit paths remain labeled compatibility. Saved occurrences bind original use,
+node, historical target and effective revision. Manual dispositions never execute movement,
+conditions or saves; correction preserves original dice/facts and undo/redo restores saved records.
+The closeout consumer also reads pending compiled occurrences, preserving optional continuation
+and archive limits. Only additive optional ability-result fields were added.
+
+The [isolated CT114 public proof](evidence/V72/README.md) passed all ten live abilities and
+correction/disposition/history/authority checks: 46 records, 167.278 seconds, exit 0, all 18 source
+hashes matched. Local full check passed 284 engine plus 486 app/script tests and build; the later
+repeated-clause persistence fixture passed separately with the eight-case suite. Actual report
+generations are byte-identical and current reachability is six compiled/four unavailable.
+The [implementation review](reviews/V72-implementation-review.md) and
+[pinned-source rules review](reviews/V72-rules-review.md) passed. The integration lead owns
+merge/runtime work; no main update is claimed here.

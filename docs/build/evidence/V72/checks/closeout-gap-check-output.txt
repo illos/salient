@@ -1,0 +1,65 @@
+$ pnpm lint && pnpm check:engine && pnpm check:app && pnpm check-links && pnpm check-vendor && pnpm content:check && pnpm supporting:check && pnpm foes:check && pnpm compiled:check && pnpm build
+$ eslint . && prettier --check .
+Checking formatting...
+All matched files use Prettier code style!
+$ tsc --noEmit && vitest run --project engine
+
+ RUN  v4.1.11 /srv/presidium/projects/salient/code/.worktrees/engine-live
+
+
+ Test Files  20 passed (20)
+      Tests  284 passed (284)
+   Start at  03:58:45
+   Duration  5.50s (transform 402ms, setup 0ms, import 1.08s, tests 2.66s, environment 1ms)
+
+$ tsc -p tsconfig.web.json && vitest run --project app --project scripts
+
+ RUN  v4.1.11 /srv/presidium/projects/salient/code/.worktrees/engine-live
+
+ ❯ |app| tests/app/closeout.test.ts (7 tests | 1 failed) 946ms
+     × pending source clauses remain optional during closeout; manual resolution is a continuation and archive refuses late resolution 84ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  |app| tests/app/closeout.test.ts > A07 closeout and Void > pending source clauses remain optional during closeout; manual resolution is a continuation and archive refuses late resolution
+AssertionError: expected [] to deep equally contain { …(6) }
+
+- Expected:
+{
+  "abilityId": "mcdm.heroes.v1/feature.ability.fury.level-1/brutal-slam",
+  "abilityName": "Brutal Slam",
+  "actor": {
+    "id": "0000000000000000010021characters",
+    "kind": "character",
+    "name": "Thorn",
+  },
+  "clause": "[push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
+  "eventId": "00000000000000000000010585events",
+  "target": {
+    "id": "0000000000000000000000010031foes",
+    "kind": "foe",
+    "name": "Goblin A",
+  },
+}
+
++ Received:
+[]
+
+ ❯ tests/app/closeout.test.ts:369:35
+    367|     // Printed tier 2: feature/ability/fury/level-1/brutal-slam.md, to…
+    368|     const clause = '[push](scc.v1:mcdm.heroes.v1/movement/forced-movem…
+    369|     expect(view!.optionalChoices).toContainEqual({
+       |                                   ^
+    370|       eventId: used.eventId,
+    371|       actor: { kind: 'character', id: f.thornId, name: 'Thorn' },
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 51 passed (52)
+      Tests  1 failed | 482 passed (483)
+   Start at  03:58:59
+   Duration  150.43s (transform 1.57s, setup 0ms, import 5.97s, tests 139.81s, environment 4ms)
+
+[ELIFECYCLE] Command failed with exit code 1.
+[ELIFECYCLE] Command failed with exit code 1.

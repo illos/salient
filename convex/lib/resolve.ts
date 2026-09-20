@@ -34,6 +34,12 @@ import { parseTierText, plainText } from '../../shared/resolve/index';
 import { findContent, requireContent } from '../content';
 import { journalPatch, type JournalScope } from './journal';
 import { baselineOf, requireHeroLive, type HeroLive } from './characterBuild';
+import {
+  compileLiveEntry,
+  compileLiveKit,
+  compileLiveFoeAbility,
+  type LiveCompilation,
+} from './compiledSource';
 
 export const MELEE_FREE_STRIKE_ID =
   'mcdm.heroes.v1/feature.ability.common/melee-weapon-free-strike';
@@ -84,6 +90,8 @@ export interface AbilityDefinition {
   unknownCost?: string;
   /** Present for `creature-free-strike`. */
   freeStrikeValue?: number;
+  /** V72 selected-source execution gate; never contains the whole foe stat block. */
+  compilation?: LiveCompilation;
 }
 
 const ACTION_TYPES: ActionType[] = [
@@ -246,6 +254,7 @@ export function abilityFromEntry(
   const s = entry.structured as Structured;
   const parsed = effectsOf(s.effects);
   return build({
+    compilation: compileLiveEntry(entry, entry.kind),
     abilityId: entry.contentId,
     name: entry.name,
     contentId: entry.contentId,
@@ -287,6 +296,7 @@ function abilityFromKit(entry: Doc<'content'>, name: string): AbilityDefinition 
     .filter(line => line.startsWith('**Effect:**'))
     .map(line => ({ label: 'Effect', text: line.slice('**Effect:**'.length).trim() }));
   return build({
+    compilation: compileLiveKit(entry, name),
     abilityId: `${entry.contentId}/${slug(name)}`,
     name,
     contentId: entry.contentId,
@@ -333,6 +343,12 @@ export function abilitiesFromStatBlock(entry: ContentSource): AbilityDefinition[
     const parsed = effectsOf(feature.effects);
     out.push(
       build({
+        compilation: compileLiveFoeAbility(
+          entry,
+          feature,
+          `${entry.contentId}/${slug(feature.name)}`,
+          statBlockFeatureText(entry.text, feature.name),
+        ),
         abilityId: `${entry.contentId}/${slug(feature.name)}`,
         name: feature.name,
         contentId: entry.contentId,

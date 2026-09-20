@@ -33,6 +33,8 @@
     "scripts/v63-headless.ts",
     "scripts/v63-headless-main.ts",
     "scripts/v68-headless.ts",
+    "scripts/v72-headless.ts",
+    "scripts/report-live-compiled-abilities.ts",
     "scripts/setup-local.ts",
     "scripts/build-content.ts",
     "scripts/ingest-rules.ts",

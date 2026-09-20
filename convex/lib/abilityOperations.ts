@@ -25,6 +25,12 @@
  * - docs/rules-adaptation-principles.md (warn without blocking except affordability; show full text)
  */
 import { ConvexError, v } from 'convex/values';
+import {
+  resolveCompiledAbility,
+  type CompiledAbilityInput,
+} from '../../shared/resolve/compiledOutcome';
+import { effectOccurrences, type CompiledResult } from '../../shared/contracts/compiledResult';
+import { movementFacts } from './compiledResults';
 import type { Doc, Id } from '../_generated/dataModel';
 import type { MutationCtx } from '../_generated/server';
 import type { BoundActor, CommandEnvelope, Reference } from '../../shared/commands/envelope';
@@ -39,6 +45,7 @@ import type {
 } from '../../shared/contracts/rollResolution';
 import {
   CHARACTERISTICS,
+  plainText,
   checkAffordability,
   correctTarget,
   resolveAbilityRoll,
@@ -815,7 +822,11 @@ const abilityUse: OperationDefinition = {
       await clearDraft(mctx, context);
     };
     const targetNames = targets.map(t => t.actor.name).join(', ');
+    const execution = ability.compilation
+      ? { mode: ability.compilation.mode, diagnostics: ability.compilation.diagnostics }
+      : undefined;
     const abilityData = {
+      ...(execution ? { execution } : {}),
       id: ability.abilityId,
       name: ability.name,
       kind: ability.kind,
@@ -830,6 +841,23 @@ const abilityUse: OperationDefinition = {
       ...(ability.tiers ? { tiers: ability.tiers } : {}),
       ...(ability.effects ? { effects: ability.effects } : {}),
     };
+
+    if (ability.compilation?.mode === 'manual') {
+      return {
+        kind: 'ability.recorded',
+        description: `${actor!.name} records ${ability.name} for manual resolution: source coverage is not safe for automatic payment, rolls or effects.`,
+        data: {
+          ability: abilityData,
+          manual: true,
+          source,
+          diagnostics: ability.compilation.diagnostics,
+          targets: targets.map(t => t.actor),
+        },
+        commit: async mctx => {
+          await clear(mctx);
+        },
+      };
+    }
 
     const costPool = ability.fixedCost
       ? poolFor(records, context, ability.fixedCost.resource)
@@ -1025,7 +1053,9 @@ const abilityUse: OperationDefinition = {
     }
 
     // ---- Rolled ability (R04 sections 1, 2, 4, 6, 9).
-    const metadata = ability.metadata!;
+    const compiledDefinition =
+      ability.compilation?.mode === 'compiled' ? ability.compilation.definition : undefined;
+    const metadata = compiledDefinition?.metadata ?? ability.metadata!;
     const actorFacts = actorRollFacts(actor!, records);
     let characteristic: Characteristic | undefined;
     if (args.characteristic !== undefined) {
@@ -1084,8 +1114,7 @@ const abilityUse: OperationDefinition = {
     );
     const [a, b] = accepted.dice;
     const targetFacts = targets.map(t => ({ record: t, facts: damageTargetFacts(t) }));
-    const response = resolveAbilityRoll({
-      ability: metadata,
+    const resolutionInput: CompiledAbilityInput = {
       actor: actorFacts,
       targets: targets.map((t, i) => ({
         targetId: t.actor.id,
@@ -1098,8 +1127,25 @@ const abilityUse: OperationDefinition = {
       ...(pool ? { resourcePool: pool } : {}),
       ...(characteristic ? { selectedCharacteristic: characteristic } : {}),
       ...(damageCharacteristic ? { selectedDamageCharacteristic: damageCharacteristic } : {}),
-      ...(ability.effects ? { effectClauses: ability.effects } : {}),
-    });
+      ...(!compiledDefinition && ability.effects ? { effectClauses: ability.effects } : {}),
+      ...(compiledDefinition
+        ? {
+            movement: {
+              actor: movementFacts(records),
+              targets: targets.map(t => ({ ...movementFacts(t), targetId: t.actor.id })),
+            },
+          }
+        : {}),
+    };
+    const compiledOutcome = compiledDefinition
+      ? resolveCompiledAbility(compiledDefinition, resolutionInput)
+      : undefined;
+    if (compiledOutcome && compiledOutcome.kind !== 'resolved')
+      throw new ConvexError('Compiled ability could not safely resolve.');
+    const response =
+      compiledOutcome?.kind === 'resolved'
+        ? compiledOutcome.roll
+        : resolveAbilityRoll({ ...resolutionInput, ability: metadata });
     if (response.kind !== 'resolved')
       throw new ConvexError('Affordability changed during resolution.');
     const result: AbilityRollResult = response;
@@ -1162,6 +1208,18 @@ const abilityUse: OperationDefinition = {
           encounterId: allowance.encounterId,
           actor: actor!,
           abilityId: ability.abilityId,
+          ...(execution ? { execution } : {}),
+          ...(compiledOutcome?.kind === 'resolved'
+            ? {
+                compiled: {
+                  version: 1,
+                  definition: compiledOutcome.definition,
+                  inputs: resolutionInput,
+                  revision: scope.eventId,
+                  effects: effectOccurrences(scope.eventId, scope.eventId, compiledOutcome.effects),
+                } satisfies CompiledResult,
+              }
+            : {}),
           resolutionInputs: {
             ability: metadata,
             actor: actorFacts,
@@ -1314,6 +1372,17 @@ const abilityCorrect: OperationDefinition = {
       edges,
       banes,
     );
+    const savedCompiled = result.compiled as CompiledResult | undefined;
+    const correctedCompiled = savedCompiled
+      ? resolveCompiledAbility(savedCompiled.definition, {
+          ...savedCompiled.inputs,
+          targets: savedCompiled.inputs.targets.map(t =>
+            t.targetId === entry.target.id ? { ...t, edges, banes } : t,
+          ),
+        })
+      : undefined;
+    if (correctedCompiled && correctedCompiled.kind !== 'resolved')
+      throw new ConvexError('The saved compiled result cannot be corrected safely.');
     const name = targetRecord.actor.name;
     const stamina =
       'facts' in facts && correction.damageAfter
@@ -1349,6 +1418,28 @@ const abilityCorrect: OperationDefinition = {
         );
         await journalPatch(mctx, scope, 'abilityResults', result._id, {
           targets,
+          ...(savedCompiled && correctedCompiled?.kind === 'resolved'
+            ? {
+                compiled: {
+                  ...savedCompiled,
+                  revision: scope.eventId,
+                  effects: effectOccurrences(
+                    event._id,
+                    scope.eventId,
+                    correctedCompiled.effects.map(effect => {
+                      if (effect.kind !== 'damage' || effect.targetId !== entry.target.id)
+                        return effect;
+                      const { application, ...rest } = effect;
+                      void application;
+                      return {
+                        ...rest,
+                        ...(correction.damageAfter ? { application: correction.damageAfter } : {}),
+                      };
+                    }),
+                  ),
+                } satisfies CompiledResult,
+              }
+            : {}),
           correctionEventIds: [...current.correctionEventIds, scope.eventId],
         });
         if ('facts' in facts && (applied || correction.damageAfter))
@@ -1374,13 +1465,15 @@ const abilityResolved: OperationDefinition = {
     'Director: record that one unresolved clause of a resolved ability use was handled manually at the table. Records the disposition and attribution without applying the clause, rerolling or changing any state; a clause can be marked once.',
   args: {
     event: v.string(),
-    clause: v.string(),
+    clause: v.optional(v.string()),
+    occurrence: v.optional(v.string()),
     target: v.optional(referenceValidator),
     note: v.optional(v.string()),
   },
   argDescriptions: {
     event: 'The id of the ability use event.',
-    clause: 'The unresolved clause, verbatim as shown on the card.',
+    clause: 'Legacy unresolved clause, or an unambiguous current compiled clause.',
+    occurrence: 'Exact current compiled effect occurrence id from the result query.',
     target: 'The target whose clause it is; omit for an ability-level Effect clause.',
     note: 'How it was resolved (free text, up to 500 characters).',
   },
@@ -1389,9 +1482,72 @@ const abilityResolved: OperationDefinition = {
   actor: 'none',
   execute: async (ctx, { context, args }) => {
     const { event, result } = await resultByEvent(ctx, context, String(args.event));
-    const clause = String(args.clause).trim();
+    const clause = args.clause === undefined ? '' : String(args.clause).trim();
     const note = args.note === undefined ? '' : String(args.note).trim();
     if (note.length > 500) throw new ConvexError('"note" is limited to 500 characters.');
+    const compiled = result.compiled as CompiledResult | undefined;
+    if (compiled) {
+      const requestedTarget =
+        args.target === undefined
+          ? null
+          : (await bindTarget(ctx, context, args.target as Reference, result.actor)).actor;
+      let originalTargetId: string | undefined;
+      if (requestedTarget) {
+        for (const t of result.targets) {
+          const effectiveId = await resolveHistoricalId(ctx, context.campaign._id, t.target.id);
+          if (t.target.kind === requestedTarget.kind && effectiveId === requestedTarget.id)
+            originalTargetId = t.target.id;
+        }
+        if (!originalTargetId) throw new ConvexError('That target was not part of this use.');
+      }
+      const candidates = compiled.effects.filter(
+        o =>
+          o.effect.kind !== 'damage' &&
+          (args.occurrence !== undefined
+            ? o.id === args.occurrence
+            : !!clause && plainText(o.effect.clause) === plainText(clause)) &&
+          (!originalTargetId || o.effect.targetId === originalTargetId),
+      );
+      if (candidates.length !== 1)
+        throw new ConvexError(
+          'Give one current effect occurrence; stale or ambiguous effects cannot be marked.',
+        );
+      const occurrence = candidates[0]!;
+      if (clause && plainText(clause) !== plainText(occurrence.effect.clause))
+        throw new ConvexError('The clause does not match that occurrence.');
+      if (occurrence.revision !== compiled.revision || occurrence.useEventId !== event._id)
+        throw new ConvexError('That occurrence is stale.');
+      if (occurrence.disposition)
+        throw new ConvexError('That occurrence is already resolved at table.');
+      await assertManualResolutionAllowed(ctx, event._id, context.user);
+      return {
+        kind: 'ability.resolved-at-table',
+        description: `Resolved at table by ${context.user.displayName}: "${occurrence.effect.clause}" from ${result.actor.name}'s ${result.abilityName}${note ? ` — ${note}` : ''}. No movement, damage, conditions or saves were applied.`,
+        causeEventId: event._id,
+        data: {
+          originalEventId: event._id,
+          occurrence: occurrence.id,
+          clause: occurrence.effect.clause,
+          target: requestedTarget,
+          note,
+        },
+        commit: async (mctx, scope) => {
+          await journalPatch(mctx, scope, 'abilityResults', result._id, {
+            compiled: {
+              ...compiled,
+              effects: compiled.effects.map(o =>
+                o.id === occurrence.id
+                  ? { ...o, disposition: { eventId: scope.eventId, note } }
+                  : o,
+              ),
+            },
+          });
+        },
+      };
+    }
+    if (args.occurrence !== undefined)
+      throw new ConvexError('This older result has no compiled occurrences.');
+    if (!clause) throw new ConvexError('Give a clause for this legacy result.');
     let targetActor: Actor | null = null;
     let index = -1;
     if (args.target !== undefined) {

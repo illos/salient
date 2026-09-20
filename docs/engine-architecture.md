@@ -554,3 +554,20 @@ contracts.
   upgrade timing, and whether campaigns can select retained engine versions.
 
 The user's spatial architecture is settled intent. These remaining details are not settled by this document.
+
+
+## V72 implementation boundary — 2026-09-20
+
+The [V72 branch](build/V72-live-compiled-effects.md) connects the V67 version-1 checked
+ability definition to the existing registered ability operations and journal. A saved result
+contains the selected definition, original inputs and ordered effect occurrences bound to
+original use event, node, historical target and effective correction event. Reads and history
+restoration use the saved records; they do not compile current content or replay effects.
+Private input snapshots are omitted from public projections, and foe health uses existing
+audience filtering. The public query and log card consume the same saved effect list.
+
+Movement is a calculation/instruction only. Current build/snapshot sizes and stability provide
+known inputs; absent coverage for conditions, traits and modifiers remains named missing work.
+A disposition preserves those gaps and records human completion without moving, dealing damage,
+applying a condition or scheduling a save. V72 changes no ordinary continuation/history policy.
+This records branch implementation scope, not completed integration or acceptance.

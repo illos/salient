@@ -317,3 +317,19 @@ Browser automation counts as in-app proof when it drives the real rendered contr
 isolated backend; disclose that method. Source screenshots alone, invented logs, mock UI and
 `convex-test` output do not satisfy this gate. Failures or missing artifacts keep that ability pending.
 Keep other gameplay unchanged and perform the final affected-ability audit before claiming completion.
+
+
+## V72 additional discovered compile-only sources — 2026-09-20
+
+The actual V67/V72 corpus has ten structurally supported entries, six currently reachable.
+In addition to Meteoric Introduction and Ray, these two cannot be loaded through the current
+public foe operation, which accepts only Goblin Warrior. Catalog presence is not live support.
+
+| Source at Compendium fb83a789 | Pure cases | Boundary |
+| --- | --- | --- |
+| `monster/undead/1st-echelon/statblock/ghoul.md`, Razor Claws | Dice 4+5, 7+7, 8+7 plus fixed 2 yield totals 11/16/17 and tiers 1/2/3; constant damage 3/4/5 leaves a 30-Stamina fixture at 27/26/25. Tier 3 retains M < 2 bleeding (save ends) as unsupported. | No Agility damage bonus; no Leap, Arise, Hunger, condition or save execution. |
+| `monster/goblin/statblock/worg.md`, Bite | Same fixed +2 and constant 3/4/5; same totals and fixture health; no remainder. | No Sprint, Mounted Charger or Shared Craft execution; no Worg instance or grant. |
+
+`tests/scripts/live-compiled-report.test.ts` covers these calculations and the six/four
+availability boundary. These are pure comparisons; no in-app playtest is claimed. Existing
+V26 live cases use public CLI/API evidence while the browser moratorium remains in force.

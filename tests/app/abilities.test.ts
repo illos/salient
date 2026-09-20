@@ -337,7 +337,7 @@ describe('A05 attacks, damage, costs and common actions', () => {
     ).rejects.toThrow();
   });
 
-  test('acceptance 1: 10.2, 10.3 and 10.13 reproduce through the operation (kit bonus at tier 3, winded at 2, Brutal Slam rows, push recorded verbatim)', async () => {
+  test('acceptance 1: 10.2, 10.3 and 10.13 reproduce through the operation (kit bonus at tier 3, winded at 2, Brutal Slam rows, push retained as a compiled occurrence)', async () => {
     const t = backend();
     const { player, campaignId, goblin } = await battle(t);
     const strike = async (ability: string, faces: [number, number]) => {
@@ -390,9 +390,16 @@ describe('A05 attacks, damage, costs and common actions', () => {
     expect(r.result.targets[0]).toMatchObject({ total: 11, tier: 1 });
     expect(r.result.targets[0]!.damage.rolledDamage).toBe(5);
     expect(r.stamina).toBe(10);
-    expect(r.result.targets[0]!.unresolvedClauses).toEqual([
-      '[push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1',
-    ]);
+    expect(r.result.targets[0]!.unresolvedClauses).toEqual([]);
+    const slamReadback = await player.client.query(api.abilities.results, {
+      campaignId,
+      eventIds: [r.event._id],
+    });
+    expect(slamReadback[0]!.compiled!.effects[1].effect).toMatchObject({
+      kind: 'push',
+      printed: 1,
+      subtotal: 2,
+    });
     r = await strike('Brutal Slam', [7, 7]);
     expect(r.result.targets[0]).toMatchObject({ total: 16, tier: 2 });
     expect(r.result.targets[0]!.damage.rolledDamage).toBe(8);
@@ -846,7 +853,7 @@ describe('A05 attacks, damage, costs and common actions', () => {
     expect((await t.run(ctx => ctx.db.get(campaignId)))!.malice).toBe(1);
   });
 
-  test('acceptance 8: an unsupported clause appears verbatim; Director Resolved at table records the disposition without changing state and cannot be recorded twice', async () => {
+  test('acceptance 8: an unambiguous legacy clause addresses the current compiled push without changing state or permitting duplicate disposition', async () => {
     const t = backend();
     const { director, player, campaignId, goblin } = await battle(t);
     await atDice(t, campaignId, [7, 7]);
@@ -858,7 +865,10 @@ describe('A05 attacks, damage, costs and common actions', () => {
     );
     const event = await eventById(t, campaignId, used.eventId);
     const clause = '[push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2';
-    expect(event.description).toContain(`unresolved: "${clause}"`);
+    const initial = (
+      await director.client.query(api.abilities.results, { campaignId, eventIds: [used.eventId] })
+    )[0]!;
+    expect(initial.compiled!.effects[1].effect).toMatchObject({ kind: 'push', clause });
     expect((await foeRow(t, goblin)).live.stamina).toBe(7);
     // A player cannot mark it; the Director can, once.
     await expect(
@@ -888,9 +898,11 @@ describe('A05 attacks, damage, costs and common actions', () => {
     );
     expect(changes.map(c => c.entityTable)).toEqual(['abilityResults']);
     const results = await director.client.query(api.abilities.results, { campaignId });
-    expect(results[0]!.targets[0]!.dispositions).toEqual([
-      { clause, eventId: resolved.eventId, note: 'pushed 2 squares on the mat' },
-    ]);
+    expect(results[0]!.compiled!.effects[1].disposition).toEqual({
+      eventId: resolved.eventId,
+      note: 'pushed 2 squares on the mat',
+    });
+    expect(results[0]!.targets[0]!.dispositions).toEqual([]);
     await expect(
       submit(
         director.client,
@@ -906,7 +918,7 @@ describe('A05 attacks, damage, costs and common actions', () => {
         `/ability resolved event="${used.eventId}" clause="push 9" target=@{foe:${goblin}}`,
         cid('wrong'),
       ),
-    ).rejects.toThrow('not an unresolved clause');
+    ).rejects.toThrow('current effect occurrence');
     // The original event is untouched.
     expect((await eventById(t, campaignId, used.eventId)).description).toBe(event.description);
   });
@@ -1139,7 +1151,7 @@ describe('A05 attacks, damage, costs and common actions', () => {
       arguments: {
         event: used.eventId,
         target: { refKind: 'foe', id: goblin },
-        clause: result.targets[0]!.outcome.unresolvedClauses[0],
+        occurrence: result.compiled!.effects[1].id,
       },
     });
     expect(

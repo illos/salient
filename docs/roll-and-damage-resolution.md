@@ -713,3 +713,18 @@ All under `vendor/steel-compendium/en/unified/md/` at `fb83a789da8f0327a389c277a
 `feature/ability/common/{melee-weapon-free-strike,ranged-weapon-free-strike}.md`;
 `feature/common/main-actions/free-strike.md`; `feature/common/maneuvers/catch-breath.md`;
 `kit/mountain.md`; `monster/goblin/statblock/goblin-warrior.md`.
+
+
+## V72 compiled result extension — 2026-09-20
+
+The [V72 branch](build/V72-live-compiled-effects.md) retains sections 1–4/6/9 arithmetic and the
+existing payment/damage journal path. For its checked single-target subset, section 4.5 now
+distinguishes damage, ordinary push calculation/instruction and unsupported post-damage clauses.
+The instruction never executes movement. A known printed-plus-size subtotal is not a final
+allowance while movement coverage is missing; stability reduction stays voluntary.
+
+Corrections use the original accepted dice and saved facts, reconcile damage once, and replace
+the effective effect occurrences with a new revision. Sequential undo/redo restores those exact
+records. Manual dispositions close correction until rewound and never apply the named effect.
+Older results retain their stored compatibility shape; no read performs a migration. This is
+branch implementation documentation; V72 owns the actual acceptance/integration record.

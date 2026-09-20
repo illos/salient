@@ -81,3 +81,21 @@ is damage plus a calculated push instruction; actual spatial movement remains ta
 requires full source retention, explicit unsupported dependencies, stable effect occurrences and
 persisted correction/undo evidence across hero and monster formats. It is a proposed implementation
 scope, not a claim that these effects are built or that a parsed ability is fully automated.
+
+
+## V72 live adapter boundary — 2026-09-20
+
+The [V72 branch](build/V72-live-compiled-effects.md) reuses V67's whole-envelope compiler for
+currently granted standalone and currently loadable ordinary-foe abilities. Its bounded grammar
+is one supported damage expression per tier, optionally ordinary integer push or the documented
+post-damage potency/bleeding/slowed remainder. Those potency clauses remain unsupported effects;
+no threshold, condition or save is executed. Extra sections, rolls and contradictions remain
+diagnostics. Kit signatures retain the existing compatibility adapter.
+
+An exact comparison with current bundled source body/projection/revision restricts unchanged
+A05 compatibility. Changed source is recorded for manual play without automatic payment, roll,
+effect or action use; it cannot silently fall back after a failed compile. This is a source
+comparison at the existing content boundary, not a per-ability approval registry. The generated
+[V72 report](build/evidence/V72/support.md) separates syntactic support from grant/loading
+availability and is checked by `pnpm check`. No homebrew authoring or new grants are introduced.
+Branch acceptance and integration remain tracked by V72.

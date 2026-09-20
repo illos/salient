@@ -1,0 +1,132 @@
+$ pnpm lint && pnpm check:engine && pnpm check:app && pnpm check-links && pnpm check-vendor && pnpm content:check && pnpm supporting:check && pnpm foes:check && pnpm compiled:check && pnpm build
+$ eslint . && prettier --check .
+Checking formatting...
+All matched files use Prettier code style!
+$ tsc --noEmit && vitest run --project engine
+
+ RUN  v4.1.11 /srv/presidium/projects/salient/code/.worktrees/engine-live
+
+
+ Test Files  20 passed (20)
+      Tests  284 passed (284)
+   Start at  04:03:25
+   Duration  5.86s (transform 400ms, setup 0ms, import 1.12s, tests 2.85s, environment 2ms)
+
+$ tsc -p tsconfig.web.json && vitest run --project app --project scripts
+
+ RUN  v4.1.11 /srv/presidium/projects/salient/code/.worktrees/engine-live
+
+
+ Test Files  53 passed (53)
+      Tests  486 passed (486)
+   Start at  04:03:40
+   Duration  159.92s (transform 1.66s, setup 0ms, import 6.29s, tests 148.56s, environment 4ms)
+
+$ node scripts/check-links.ts
+Checked 303 Markdown files: no broken relative links or anchors.
+$ node scripts/check-vendor.ts
+vendor/ matches the pinned submodule commits (2 submodules).
+$ node scripts/build-content.ts --check
+shared/content/compendium matches the clean pinned Compendium (483 entries, 10 excluded, revision fb83a789da8f).
+$ node scripts/check-supporting-inventory.ts
+V37 inventory verified: 18 careers/108 incidents, 13 culture aspects, 47 core perks, 57 skills+5 groups, 42 languages, 25 kits, 100 complications; 289 exact source records checked.
+$ node scripts/ingest-foes.ts --check
+Foes: 438 stat blocks, 2006 features; edition bf262edf546e91e1540cc17489915f18c4873ddd8bd8e225b20f3441e3f74f30; verified
+$ node scripts/report-live-compiled-abilities.ts --check
+V72 support report matches current source, grammar and grant/loading reachability.
+$ pnpm rules:ingest && tsc -p tsconfig.web.json && vite build && node scripts/check-web-budget.ts
+$ node scripts/ingest-rules.ts && node scripts/build-foes-assets.ts
+Ingested 2614 entries, 26 categories from fb83a789da8f. No unresolved links.
+Foe delivery: 2507 entries; version ab2c43b79669b916
+vite v8.3.0 building client environment for production...
+transforming...
+✓ 2861 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                                         1.92 kB │ gzip:   0.76 kB
+dist/.vite/manifest.json                                               10.59 kB │ gzip:   1.52 kB
+dist/assets/search.worker-Bi7Y7SQU.js                                  18.32 kB
+dist/assets/search.worker-k8EMhjsh.js                                  19.13 kB
+dist/assets/schibsted-grotesk-latin-ext-wght-normal-hsMS0n0O.woff2     20.92 kB
+dist/assets/DrawSteelGlyphs-Regular-Bxmll151.otf                       21.63 kB
+dist/assets/schibsted-grotesk-latin-wght-normal-Bb8VGrTG.woff2         46.75 kB
+dist/assets/reference-C1jW4vvI.css                                      0.75 kB │ gzip:   0.39 kB
+dist/assets/foes-BGgFncNM.css                                           3.96 kB │ gzip:   1.16 kB
+dist/assets/rules-6fkgoGTZ.css                                         12.26 kB │ gzip:   2.86 kB
+dist/assets/index-DKXY2IJH.css                                         90.16 kB │ gzip:  16.38 kB
+dist/assets/arrow-left-2SZjxN2W.js                                      0.19 kB │ gzip:   0.17 kB
+dist/assets/external-link-BnffAPVo.js                                   0.27 kB │ gzip:   0.21 kB
+dist/assets/useNavigate-BhLc6pKf.js                                     0.31 kB │ gzip:   0.23 kB
+dist/assets/pill-D-biTKKB.js                                            0.50 kB │ gzip:   0.33 kB
+dist/assets/preview-DnjG9LKn.js                                         0.96 kB │ gzip:   0.57 kB
+dist/assets/worker-client-BLect5SJ.js                                   1.22 kB │ gzip:   0.74 kB
+dist/assets/composite-D3Fn7Vkj.js                                       2.94 kB │ gzip:   1.14 kB
+dist/assets/x-D0KqTHUP.js                                               3.23 kB │ gzip:   1.57 kB
+dist/assets/useStore-CuFll-SH.js                                        3.26 kB │ gzip:   1.51 kB
+dist/assets/event-links-CGuZWXjC.js                                     3.47 kB │ gzip:   1.53 kB
+dist/assets/preview-Bvf7hM3y.js                                         3.67 kB │ gzip:   1.58 kB
+dist/assets/password-recovery-B0-9MFaH.js                               3.76 kB │ gzip:   1.48 kB
+dist/assets/article-BK00HO85.js                                         4.50 kB │ gzip:   1.97 kB
+dist/assets/characters--SDyJZqD.js                                      7.99 kB │ gzip:   2.63 kB
+dist/assets/with-selector-D-Vjxtnh.js                                  10.92 kB │ gzip:   4.10 kB
+dist/assets/foes-Df87wNf6.js                                           12.31 kB │ gzip:   4.41 kB
+dist/assets/rules-CfJXNRi0.js                                          13.45 kB │ gzip:   4.38 kB
+dist/assets/progression-BVhRlY4j.js                                    14.72 kB │ gzip:   5.23 kB
+dist/assets/overlay-card-CUVjFmob.js                                   18.12 kB │ gzip:   6.88 kB
+dist/assets/campaigns-BU5qZD-R.js                                      30.11 kB │ gzip:   7.98 kB
+dist/assets/auth-client--4M-rdhO.js                                    30.32 kB │ gzip:  11.45 kB
+dist/assets/reference-C2gmGmyV.js                                      32.32 kB │ gzip:  11.03 kB
+dist/assets/createBaseUIEventDetails-ELM1N8LF.js                       34.84 kB │ gzip:  14.32 kB
+dist/assets/character-sheet-BjGYkbZN.js                                46.69 kB │ gzip:  12.20 kB
+dist/assets/table-CV8vroxy.js                                          80.30 kB │ gzip:  21.42 kB
+dist/assets/ui-W_vUS40d.js                                             82.91 kB │ gzip:  24.33 kB
+dist/assets/wizard-BsTeGSen.js                                        110.65 kB │ gzip:  27.25 kB
+dist/assets/index-CIatiAcm.js                                         321.35 kB │ gzip: 103.72 kB
+dist/assets/supporting-components-CXTKEI1Z.js                       1,014.27 kB │ gzip: 216.23 kB
+
+✓ built in 3.00s
+[plugin builtin:vite-reporter] 
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+{
+  "initial": {
+    "raw": 490124,
+    "gzip": 160893
+  },
+  "assets": [
+    "assets/index-CIatiAcm.js",
+    "assets/with-selector-D-Vjxtnh.js",
+    "assets/ui-W_vUS40d.js",
+    "assets/createBaseUIEventDetails-ELM1N8LF.js",
+    "assets/x-D0KqTHUP.js",
+    "assets/useStore-CuFll-SH.js",
+    "assets/useNavigate-BhLc6pKf.js",
+    "assets/auth-client--4M-rdhO.js",
+    "assets/composite-D3Fn7Vkj.js"
+  ],
+  "rules": {
+    "catalog": {
+      "raw": 982599,
+      "gzip": 112848
+    },
+    "index": {
+      "raw": 5463389,
+      "gzip": 1411557
+    },
+    "largestContinuation": 135780,
+    "largestInitialArticle": 415705
+  },
+  "foes": {
+    "catalog": {
+      "raw": 877715,
+      "gzip": 101309
+    },
+    "index": {
+      "raw": 1484171,
+      "gzip": 373816
+    },
+    "largestDetail": 55297
+  }
+}

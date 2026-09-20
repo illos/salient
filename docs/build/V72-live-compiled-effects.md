@@ -1,0 +1,84 @@
+# V72: Live compiled ability effects
+
+| Field | Value |
+| --- | --- |
+| Family | V |
+| Milestone | V1 |
+| Owner type | Engine implementer with independent implementation and rules reviewers |
+| Rules review | required |
+| Depends on | V26 design, V63 correction history, V67 pure compiler |
+| Status | Headless acceptance and independent implementation/rules reviews PASS; branch handoff pending |
+
+## Goal and boundaries
+
+Connect V67's checked definitions to existing ability use, payment, damage, history and reads.
+Persist selected-ability snapshots and original facts, expose ordered effects and occurrence-aware
+manual dispositions, and restore recorded outcomes without replay. This is V26 build sequence
+steps 3–4, with its full headless acceptance and independent review gates.
+
+Existing grants/loading expose six structurally supported abilities: Brutal Slam, Viscous Fire,
+both weapon free strikes, Spear Charge and Bury the Point. Bury the Point's bleeding clauses
+remain unsupported post-damage work. Meteoric Introduction, Ray, Ghoul Razor Claws and Worg Bite
+are compile-only because current grant/loading paths do not expose them. Kit signatures and
+unchanged complex A05 abilities retain explicitly labeled compatibility behavior. Changed
+body/projection/revision cannot silently use that adapter. Eligibility is structural, not name dispatch.
+
+No new grants, foe loading, condition/potency execution, movement execution or Director fact-entry
+workflow. Only additive optional ability-result schema fields are planned. Parent stat-block
+context and other private facts must not enter public selected-ability evidence.
+
+## Owning specifications
+
+- [V26 source and migration boundary](V26-compiled-ability-effects.md#1-source-to-compiled-definition).
+- [V26 outcomes](V26-compiled-ability-effects.md#2-definition-to-outcome).
+- [V26 persistence and clients](V26-compiled-ability-effects.md#3-persisted-results-and-clients).
+- [Acceptance checks](V26-compiled-ability-effects.md#acceptance-checks) and
+  [source-derived ability cases](V26-ability-designs.md).
+- [Headless completion gate](README.md#programmatic-headless-completion-gate).
+
+## Work log
+
+### 2026-09-20 — Claim and implementation plan
+
+Primary track: parser/rules engine. Branch `slice/V72-live-compiled-effects`, worktree
+`.worktrees/engine-live`, base main `e5c1cd84bb5f08a2c1ee51279467ca4e692c6e0e`.
+V63's corrected shared-main proof passed with independent acceptance review; its evidence-only
+handoff is separate. V67 is already integrated. Pinned Compendium remains
+`fb83a789da8f0327a389c277a0c790b1648d5810`; abandoned Opus material is excluded.
+
+Plan: adapt complete source envelopes; add versioned result/occurrence contracts and conservative
+movement facts; wire existing registered operations and audience-filtered reads; render the same
+stored effect list; verify source arithmetic, persisted history/permissions and real public CLI
+journeys; regenerate deterministic support reports; obtain independent implementation and rules
+reviews. Consumers are existing table commands, abilities queries and log cards, not wizard flows.
+
+Files: `convex/lib/resolve.ts`, new source/result helpers, `convex/lib/abilityOperations.ts`,
+`convex/abilityTables.ts`, `convex/abilities.ts`, `shared/contracts`, `web/table/targeting.tsx`,
+headless proof/tests and report scripts. No replacement payment/damage/history subsystem.
+
+Test targets: local pinned Node/pnpm for pure and persisted tests; distinct CT114 `engine-live`
+for public authenticated CLI/backend proof. Its nonsecret backend binary is provisioned; no
+workload is started while UI owns CT114. Preserve all existing environments/data. Record actual
+source, runner host and target in evidence. All browser testing remains paused; would-be visual
+scenarios go to the existing backlog. No ability is claimed built/playtested yet.
+
+
+### 2026-09-20 — Verification and independent implementation review
+
+The complete [evidence record](evidence/V72/README.md) identifies local checks and the isolated
+CT114 source/runner/target. Full `pnpm check` passed: 284 engine tests, 486 app/script tests,
+source/content/report checks and production build. The subsequent repeated-clause contract fixture
+passed in the eight-case persisted suite without application changes. Initial import-extension
+and closeout-consumer failures are retained; both were fixed and rechecked.
+
+The real authenticated public CLI proof passed in 167.278 seconds with 46 records across six
+compiled abilities, four compatibility cases and permissions/correction/undo/redo. No browser ran.
+Original source hashes match; engine-live is stopped with data retained. Generated JSON/Markdown
+reports match two actual generations and normal `pnpm check` now enforces report freshness.
+
+[Independent implementation review](reviews/V72-implementation-review.md): PASS.
+[Independent pinned-source rules review](reviews/V72-rules-review.md): PASS. Integration and
+shared playable runtime update remain with Fable; this evidence accepts the isolated candidate.
+Main advanced independently through V68 while this candidate was checked; the integration lead
+must check the integrated tree and update the shared app when merging. V74's ancestry-action
+projection touches `abilitiesFor`; V72's source adapter changes are confined to source constructors.

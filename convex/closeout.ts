@@ -7,6 +7,8 @@ import { requireUser } from './lib/access';
 import { tableContext } from './lib/registry';
 import { currentEncounter } from './lib/encounters';
 import { closeoutHeroes } from './lib/closeoutOperations';
+import type { CompiledResult } from '../shared/contracts/compiledResult';
+import { resolveHistoricalId } from './lib/history';
 import { actorRef } from './initiativeTables';
 import type { AbilityRollResult, TargetRollOutcome } from '../shared/contracts/rollResolution';
 
@@ -33,6 +35,7 @@ export const current = query({
           actor: actorRef,
           target: v.union(actorRef, v.null()),
           clause: v.string(),
+          occurrence: v.optional(v.string()),
           abilityName: v.string(),
           abilityId: v.string(),
         }),
@@ -51,6 +54,7 @@ export const current = query({
       actor: Doc<'abilityResults'>['actor'];
       target: Doc<'abilityResults'>['actor'] | null;
       clause: string;
+      occurrence?: string;
       abilityName: string;
       abilityId: string;
     }[] = [];
@@ -68,13 +72,44 @@ export const current = query({
           .withIndex('by_event', q => q.eq('eventId', event._id))
           .unique();
         if (!result) continue;
-        for (const target of result.targets)
+        const actor = {
+          ...result.actor,
+          id: await resolveHistoricalId(ctx, campaignId, result.actor.id),
+        };
+        const targets = await Promise.all(
+          result.targets.map(async target => ({
+            ...target,
+            effectiveTarget: {
+              ...target.target,
+              id: await resolveHistoricalId(ctx, campaignId, target.target.id),
+            },
+          })),
+        );
+        if (result.compiled) {
+          for (const occurrence of (result.compiled as CompiledResult).effects) {
+            if (occurrence.effect.kind === 'damage' || occurrence.disposition) continue;
+            const target = targets.find(target => target.target.id === occurrence.effect.targetId);
+            // Compiled effects are target-bound; do not turn a missing target into a global choice.
+            if (!target) continue;
+            optionalChoices.push({
+              eventId: event._id,
+              actor,
+              target: target.effectiveTarget,
+              clause: occurrence.effect.clause,
+              occurrence: occurrence.id,
+              abilityName: result.abilityName,
+              abilityId: result.abilityId,
+            });
+          }
+          continue;
+        }
+        for (const target of targets)
           for (const clause of (target.outcome as TargetRollOutcome).unresolvedClauses ?? []) {
             if (!target.dispositions.some(d => d.clause === clause))
               optionalChoices.push({
                 eventId: event._id,
-                actor: result.actor,
-                target: target.target,
+                actor,
+                target: target.effectiveTarget,
                 clause,
                 abilityName: result.abilityName,
                 abilityId: result.abilityId,
@@ -86,7 +121,7 @@ export const current = query({
           if (!result.manualDispositions.some(d => d.clause === clause))
             optionalChoices.push({
               eventId: event._id,
-              actor: result.actor,
+              actor,
               target: null,
               clause,
               abilityName: result.abilityName,

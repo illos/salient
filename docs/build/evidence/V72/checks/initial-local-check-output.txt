@@ -1,0 +1,9 @@
+$ pnpm lint && pnpm check:engine && pnpm check:app && pnpm check-links && pnpm check-vendor && pnpm content:check && pnpm supporting:check && pnpm foes:check && pnpm compiled:check && pnpm build
+$ eslint . && prettier --check .
+Checking formatting...
+All matched files use Prettier code style!
+$ tsc --noEmit && vitest run --project engine
+shared/contracts/compiledResult.ts(3,38): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean '../resolve/compileAbility.js'?
+shared/contracts/compiledResult.ts(4,66): error TS2835: Relative import paths need explicit file extensions in ECMAScript imports when '--moduleResolution' is 'node16' or 'nodenext'. Did you mean '../resolve/compiledOutcome.js'?
+[ELIFECYCLE] Command failed with exit code 2.
+[ELIFECYCLE] Command failed with exit code 2.

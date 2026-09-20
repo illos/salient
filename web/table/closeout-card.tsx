@@ -39,7 +39,7 @@ function CleanupChoices({
       {mayManage && (
         <CommandButton
           campaignId={campaignId}
-          text={`/ability resolved event=${JSON.stringify(choice.eventId)} clause=${JSON.stringify(choice.clause)}${choice.target ? ` target=@{${choice.target.kind}:${choice.target.id}}` : ''}`}
+          text={`/ability resolved event=${JSON.stringify(choice.eventId)} ${choice.occurrence ? `occurrence=${JSON.stringify(choice.occurrence)}` : `clause=${JSON.stringify(choice.clause)}`}${choice.target ? ` target=@{${choice.target.kind}:${choice.target.id}}` : ''}`}
           label={`Resolved at table · ${choice.actor.name}`}
         />
       )}

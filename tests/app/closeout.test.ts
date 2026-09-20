@@ -366,7 +366,10 @@ describe('A07 closeout and Void', () => {
     const view = await f.director.client.query(api.closeout.current, { campaignId: f.campaignId });
     // Printed tier 2: feature/ability/fury/level-1/brutal-slam.md, total 12–16: push 2.
     const clause = '[push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2';
+    const pending = view!.optionalChoices.find(choice => choice.eventId === used.eventId)!;
+    expect(pending.occurrence).toEqual(expect.any(String));
     expect(view!.optionalChoices).toContainEqual({
+      occurrence: pending.occurrence,
       eventId: used.eventId,
       actor: { kind: 'character', id: f.thornId, name: 'Thorn' },
       target: { kind: 'foe', id: foeId, name: 'Goblin A' },
@@ -375,7 +378,11 @@ describe('A07 closeout and Void', () => {
       abilityId: 'mcdm.heroes.v1/feature.ability.fury.level-1/brutal-slam',
     });
     const before = await t.run(ctx => ctx.db.get(foeId));
-    const args = { event: used.eventId, clause, target: { refKind: 'foe', id: foeId } };
+    const args = {
+      event: used.eventId,
+      occurrence: pending.occurrence!,
+      target: { refKind: 'foe', id: foeId },
+    };
     await invoke(f, 'ability.resolved', args);
     expect(await t.run(ctx => ctx.db.get(foeId))).toEqual(before);
     expect(
@@ -384,6 +391,10 @@ describe('A07 closeout and Void', () => {
     ).not.toContainEqual(expect.objectContaining({ eventId: used.eventId, clause }));
     // Leave the clause unused at Finish: its history continuation must then hit the archive boundary.
     await submit(f, '/history rewind');
+    expect(
+      (await f.director.client.query(api.closeout.current, { campaignId: f.campaignId }))!
+        .optionalChoices,
+    ).toContainEqual(expect.objectContaining({ occurrence: pending.occurrence }));
     await invoke(f, 'combat.victories', { amount: 0, recipients: [] });
     await invoke(f, 'combat.finish');
     await expect(invoke(f, 'ability.resolved', args)).rejects.toThrow(/archived/);

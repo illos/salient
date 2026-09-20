@@ -1,0 +1,30 @@
+{
+  "runner": "local Presidium host",
+  "node": "v24.18.0",
+  "pnpm": "11.5.3",
+  "sourceHead": "e5c1cd84bb5f08a2c1ee51279467ca4e692c6e0e",
+  "sourceDirty": true,
+  "command": "pnpm check",
+  "result": "exit 0; 284 engine and 486 app/scripts tests, build and content/report checks pass",
+  "applicationTarget": "No external application; convex-test in memory plus static production build",
+  "sourceBytes": {
+    "convex/abilities.ts": "750f01b40f659cfe79c25c4f6de1dafe35aa6e1cbd38088adbdade42ba5ff050",
+    "convex/abilityTables.ts": "aa46a9891c3974c7078b294184635a21c1c126b11b774d08b50e6bd40a74924d",
+    "convex/closeout.ts": "8b0f23982195538b36054fa115e7b0aa9d13c6c819ab169372092e8e66d5a240",
+    "convex/lib/abilityOperations.ts": "71cf5191d43bf57a130bfb08b5057711496de68f90024dc0c14abc9217b8b5f0",
+    "convex/lib/resolve.ts": "7cd8c8d1936604311bdf17daf5a004a55f541ac856199b1104ce137c9ec3d253",
+    "convex/lib/compiledResults.ts": "5027b0a5f205973ee693acb6f4666fc0bc2193574bc8baf011c47eaed993c195",
+    "convex/lib/compiledSource.ts": "73cc6b5e53188dab88cfde8c004ad7877b7dca07e0449cffb73a9dc07591dc4c",
+    "shared/contracts/compiledResult.ts": "ca74709b6a4a2b074efe0b26a4c5d4dfb13cba4b30814c5c661093c680aab05f",
+    "shared/resolve/compileAbility.ts": "939518dadfcbda5879e5e4e4295090b3ebc5b212ef6ce8b16bbd8a54b7de350e",
+    "shared/resolve/compiledOutcome.ts": "2e00e90dd846f8ba71ef5d11be6a5f6ecc39a04317cfeeebdc73fbaee693491e",
+    "web/table/targeting.tsx": "23afc175b8a6d18f961c50f3e1c103d367e150bb53f355d0058697f6ccee47ae",
+    "web/table/closeout-card.tsx": "bf135cb1a2adc299edc8098ed232c8b845024b5632914a004204ca776c89d87d",
+    "scripts/v72-headless.ts": "4796e909b69786ceb60188f681f367a0e7ba5680d1fd649f50e436e04da6465b",
+    "scripts/v72-dice-import.mjs": "25277fb5838f813fc9573c76c3fbda6d0224d7dcbae1d0879fd1b4398c8400e9",
+    "scripts/report-live-compiled-abilities.ts": "d4edd6e7cc378e9c79e90c6e6568e14103b7829ac3e95ea857fc732f3a2ea423",
+    "package.json": "3c09066c0d86cba7c6b5e6b6ca81a8765c5f91f2ad004ccf00bae12f760848b4",
+    "tsconfig.web.json": "11c1013727c740d0b7969712653bbcb92912b0a809cddb22c703f9aac033ccc0"
+  },
+  "extraTest": "Duplicate-identical-occurrence fixture added afterward; separately checked without application source changes"
+}

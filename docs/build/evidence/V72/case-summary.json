@@ -1,0 +1,724 @@
+{
+  "derivedFrom": "v72-headless-readback.json",
+  "runId": "c89b4f0f-859c-46b4-b9ec-d2072e0e8816",
+  "cases": [
+    {
+      "case": "BS1",
+      "eventId": "kx79etze5mkr3wbh76s4grghnx8es99x",
+      "ability": "Brutal Slam",
+      "dice": {
+        "d10a": 4,
+        "d10b": 5
+      },
+      "targets": [
+        {
+          "name": "Goblin Warrior",
+          "tier": 1,
+          "damage": 5,
+          "staminaAfter": 10
+        }
+      ],
+      "effects": [
+        {
+          "kind": "damage",
+          "clause": "3 + M damage",
+          "subtotal": null,
+          "allowance": null,
+          "status": "calculated",
+          "resolved": false
+        },
+        {
+          "kind": "push",
+          "clause": "[push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
+          "subtotal": 2,
+          "allowance": null,
+          "status": "fact-needed",
+          "resolved": false
+        }
+      ]
+    },
+    {
+      "case": "BS2",
+      "eventId": "kx74d0xkdjwccgsnx6vs21ymms8esefc",
+      "ability": "Brutal Slam",
+      "dice": {
+        "d10a": 7,
+        "d10b": 7
+      },
+      "targets": [
+        {
+          "name": "Goblin Warrior",
+          "tier": 2,
+          "damage": 8,
+          "staminaAfter": 7
+        }
+      ],
+      "effects": [
+        {
+          "kind": "damage",
+          "clause": "6 + M damage",
+          "subtotal": null,
+          "allowance": null,
+          "status": "calculated",
+          "resolved": false
+        },
+        {
+          "kind": "push",
+          "clause": "[push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
+          "subtotal": 3,
+          "allowance": null,
+          "status": "fact-needed",
+          "resolved": false
+        }
+      ]
+    },
+    {
+      "case": "BS7-one-bane",
+      "eventId": "kx74d0xkdjwccgsnx6vs21ymms8esefc",
+      "ability": "Brutal Slam",
+      "dice": {
+        "d10a": 7,
+        "d10b": 7
+      },
+      "targets": [
+        {
+          "name": "Goblin Warrior",
+          "tier": 2,
+          "damage": 8,
+          "staminaAfter": 7
+        }
+      ],
+      "effects": [
+        {
+          "kind": "damage",
+          "clause": "6 + M damage",
+          "subtotal": null,
+          "allowance": null,
+          "status": "calculated",
+          "resolved": false
+        },
+        {
+          "kind": "push",
+          "clause": "[push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
+          "subtotal": 3,
+          "allowance": null,
+          "status": "fact-needed",
+          "resolved": false
+        }
+      ]
+    },
+    {
+      "case": "BS7-two-banes",
+      "eventId": "kx74d0xkdjwccgsnx6vs21ymms8esefc",
+      "ability": "Brutal Slam",
+      "dice": {
+        "d10a": 7,
+        "d10b": 7
+      },
+      "targets": [
+        {
+          "name": "Goblin Warrior",
+          "tier": 1,
+          "damage": 5,
+          "staminaAfter": 10
+        }
+      ],
+      "effects": [
+        {
+          "kind": "damage",
+          "clause": "3 + M damage",
+          "subtotal": null,
+          "allowance": null,
+          "status": "calculated",
+          "resolved": false
+        },
+        {
+          "kind": "push",
+          "clause": "[push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
+          "subtotal": 2,
+          "allowance": null,
+          "status": "fact-needed",
+          "resolved": false
+        }
+      ]
+    },
+    {
+      "case": "BS7-undo",
+      "eventId": "kx74d0xkdjwccgsnx6vs21ymms8esefc",
+      "ability": "Brutal Slam",
+      "dice": {
+        "d10a": 7,
+        "d10b": 7
+      },
+      "targets": [
+        {
+          "name": "Goblin Warrior",
+          "tier": 2,
+          "damage": 8,
+          "staminaAfter": 7
+        }
+      ],
+      "effects": [
+        {
+          "kind": "damage",
+          "clause": "6 + M damage",
+          "subtotal": null,
+          "allowance": null,
+          "status": "calculated",
+          "resolved": false
+        },
+        {
+          "kind": "push",
+          "clause": "[push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
+          "subtotal": 3,
+          "allowance": null,
+          "status": "fact-needed",
+          "resolved": false
+        }
+      ]
+    },
+    {
+      "case": "BS7-redo",
+      "eventId": "kx74d0xkdjwccgsnx6vs21ymms8esefc",
+      "ability": "Brutal Slam",
+      "dice": {
+        "d10a": 7,
+        "d10b": 7
+      },
+      "targets": [
+        {
+          "name": "Goblin Warrior",
+          "tier": 1,
+          "damage": 5,
+          "staminaAfter": 10
+        }
+      ],
+      "effects": [
+        {
+          "kind": "damage",
+          "clause": "3 + M damage",
+          "subtotal": null,
+          "allowance": null,
+          "status": "calculated",
+          "resolved": false
+        },
+        {
+          "kind": "push",
+          "clause": "[push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
+          "subtotal": 2,
+          "allowance": null,
+          "status": "fact-needed",
+          "resolved": false
+        }
+      ]
+    },
+    {
+      "case": "BS8-disposition",
+      "eventId": "kx74d0xkdjwccgsnx6vs21ymms8esefc",
+      "ability": "Brutal Slam",
+      "dice": {
+        "d10a": 7,
+        "d10b": 7
+      },
+      "targets": [
+        {
+          "name": "Goblin Warrior",
+          "tier": 2,
+          "damage": 8,
+          "staminaAfter": 7
+        }
+      ],
+      "effects": [
+        {
+          "kind": "damage",
+          "clause": "6 + M damage",
+          "subtotal": null,
+          "allowance": null,
+          "status": "calculated",
+          "resolved": false
+        },
+        {
+          "kind": "push",
+          "clause": "[push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
+          "subtotal": 3,
+          "allowance": null,
+          "status": "fact-needed",
+          "resolved": true
+        }
+      ]
+    },
+    {
+      "case": "BS8-restored",
+      "eventId": "kx74d0xkdjwccgsnx6vs21ymms8esefc",
+      "ability": "Brutal Slam",
+      "dice": {
+        "d10a": 7,
+        "d10b": 7
+      },
+      "targets": [
+        {
+          "name": "Goblin Warrior",
+          "tier": 2,
+          "damage": 8,
+          "staminaAfter": 7
+        }
+      ],
+      "effects": [
+        {
+          "kind": "damage",
+          "clause": "6 + M damage",
+          "subtotal": null,
+          "allowance": null,
+          "status": "calculated",
+          "resolved": false
+        },
+        {
+          "kind": "push",
+          "clause": "[push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
+          "subtotal": 3,
+          "allowance": null,
+          "status": "fact-needed",
+          "resolved": true
+        }
+      ]
+    },
+    {
+      "case": "BS8-unrelated-boundary",
+      "eventId": "kx74d0xkdjwccgsnx6vs21ymms8esefc",
+      "ability": "Brutal Slam",
+      "dice": {
+        "d10a": 7,
+        "d10b": 7
+      },
+      "targets": [
+        {
+          "name": "Goblin Warrior",
+          "tier": 2,
+          "damage": 8,
+          "staminaAfter": 7
+        }
+      ],
+      "effects": [
+        {
+          "kind": "damage",
+          "clause": "6 + M damage",
+          "subtotal": null,
+          "allowance": null,
+          "status": "calculated",
+          "resolved": false
+        },
+        {
+          "kind": "push",
+          "clause": "[push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
+          "subtotal": 3,
+          "allowance": null,
+          "status": "fact-needed",
+          "resolved": false
+        }
+      ]
+    },
+    {
+      "case": "BS3",
+      "eventId": "kx74dbh9mfh91212sz8psjcgt98erf53",
+      "ability": "Brutal Slam",
+      "dice": {
+        "d10a": 8,
+        "d10b": 7
+      },
+      "targets": [
+        {
+          "name": "Goblin Warrior",
+          "tier": 3,
+          "damage": 15,
+          "staminaAfter": 0
+        }
+      ],
+      "effects": [
+        {
+          "kind": "damage",
+          "clause": "9 + M damage",
+          "subtotal": null,
+          "allowance": null,
+          "status": "calculated",
+          "resolved": false
+        },
+        {
+          "kind": "push",
+          "clause": "[push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 4",
+          "subtotal": 5,
+          "allowance": null,
+          "status": "fact-needed",
+          "resolved": false
+        }
+      ]
+    },
+    {
+      "case": "BS6",
+      "eventId": "kx744df6c7a60b2dhvzbxgkgc58erwd4",
+      "ability": "Brutal Slam",
+      "dice": {
+        "d10a": 7,
+        "d10b": 7
+      },
+      "targets": [
+        {
+          "name": "Goblin Warrior",
+          "tier": 2,
+          "damage": 8,
+          "staminaAfter": 7
+        }
+      ],
+      "effects": [
+        {
+          "kind": "damage",
+          "clause": "6 + M damage",
+          "subtotal": null,
+          "allowance": null,
+          "status": "calculated",
+          "resolved": false
+        },
+        {
+          "kind": "push",
+          "clause": "[push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
+          "subtotal": 3,
+          "allowance": null,
+          "status": "manual",
+          "resolved": false
+        }
+      ]
+    },
+    {
+      "case": "SC1",
+      "eventId": "kx7cskv1xktckmn7m0pr7t4vj18esaha",
+      "ability": "Spear Charge",
+      "dice": {
+        "d10a": 4,
+        "d10b": 5
+      },
+      "targets": [
+        {
+          "name": "V72 Thorn",
+          "tier": 1,
+          "damage": 3,
+          "staminaAfter": 27
+        }
+      ],
+      "effects": [
+        {
+          "kind": "damage",
+          "clause": "3 damage",
+          "subtotal": null,
+          "allowance": null,
+          "status": "calculated",
+          "resolved": false
+        }
+      ]
+    },
+    {
+      "case": "SC2",
+      "eventId": "kx7268m8893sf90b7asfcznnz98esn16",
+      "ability": "Spear Charge",
+      "dice": {
+        "d10a": 7,
+        "d10b": 7
+      },
+      "targets": [
+        {
+          "name": "V72 Thorn",
+          "tier": 2,
+          "damage": 4,
+          "staminaAfter": 26
+        }
+      ],
+      "effects": [
+        {
+          "kind": "damage",
+          "clause": "4 damage",
+          "subtotal": null,
+          "allowance": null,
+          "status": "calculated",
+          "resolved": false
+        }
+      ]
+    },
+    {
+      "case": "SC3",
+      "eventId": "kx70etts0dy8djsxy2x9f929jh8esgvv",
+      "ability": "Spear Charge",
+      "dice": {
+        "d10a": 8,
+        "d10b": 7
+      },
+      "targets": [
+        {
+          "name": "V72 Thorn",
+          "tier": 3,
+          "damage": 5,
+          "staminaAfter": 25
+        }
+      ],
+      "effects": [
+        {
+          "kind": "damage",
+          "clause": "5 damage",
+          "subtotal": null,
+          "allowance": null,
+          "status": "calculated",
+          "resolved": false
+        }
+      ]
+    },
+    {
+      "case": "SC4",
+      "eventId": "kx7e4zfv3nyb65vzpay5r1ew8d8ermwt",
+      "ability": "Spear Charge",
+      "dice": {
+        "d10a": 7,
+        "d10b": 7
+      },
+      "targets": [
+        {
+          "name": "V72 Thorn",
+          "tier": 2,
+          "damage": 4,
+          "staminaAfter": 29
+        }
+      ],
+      "effects": [
+        {
+          "kind": "damage",
+          "clause": "4 damage",
+          "subtotal": null,
+          "allowance": null,
+          "status": "calculated",
+          "resolved": false
+        }
+      ]
+    },
+    {
+      "case": "BP2",
+      "eventId": "kx7e8c7kz6drr3btn0w8n826m18eshrq",
+      "ability": "Bury the Point",
+      "dice": {
+        "d10a": 7,
+        "d10b": 7
+      },
+      "targets": [
+        {
+          "name": "V72 Thorn",
+          "tier": 2,
+          "damage": 6,
+          "staminaAfter": 24
+        }
+      ],
+      "effects": [
+        {
+          "kind": "damage",
+          "clause": "6 damage",
+          "subtotal": null,
+          "allowance": null,
+          "status": "calculated",
+          "resolved": false
+        },
+        {
+          "kind": "unsupported",
+          "clause": "M < 1 [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) (save ends)",
+          "subtotal": null,
+          "allowance": null,
+          "status": "manual",
+          "resolved": false
+        }
+      ]
+    },
+    {
+      "case": "BP5-disposition-after-correction-rewind",
+      "eventId": "kx7e8c7kz6drr3btn0w8n826m18eshrq",
+      "ability": "Bury the Point",
+      "dice": {
+        "d10a": 7,
+        "d10b": 7
+      },
+      "targets": [
+        {
+          "name": "V72 Thorn",
+          "tier": 2,
+          "damage": 6,
+          "staminaAfter": 24
+        }
+      ],
+      "effects": [
+        {
+          "kind": "damage",
+          "clause": "6 damage",
+          "subtotal": null,
+          "allowance": null,
+          "status": "calculated",
+          "resolved": false
+        },
+        {
+          "kind": "unsupported",
+          "clause": "M < 1 [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) (save ends)",
+          "subtotal": null,
+          "allowance": null,
+          "status": "manual",
+          "resolved": true
+        }
+      ]
+    },
+    {
+      "case": "MF3",
+      "eventId": "kx788jwk43h1j5z9d5ng9vx0rh8esmdx",
+      "ability": "Melee Weapon Free Strike",
+      "dice": {
+        "d10a": 8,
+        "d10b": 7
+      },
+      "targets": [
+        {
+          "name": "Goblin Warrior",
+          "tier": 3,
+          "damage": 13,
+          "staminaAfter": 2
+        }
+      ],
+      "effects": [
+        {
+          "kind": "damage",
+          "clause": "7 + M or A damage",
+          "subtotal": null,
+          "allowance": null,
+          "status": "calculated",
+          "resolved": false
+        }
+      ]
+    },
+    {
+      "case": "RF3",
+      "eventId": "kx7bz0a6rhyczszxzrkxjwexrn8escyy",
+      "ability": "Ranged Weapon Free Strike",
+      "dice": {
+        "d10a": 8,
+        "d10b": 7
+      },
+      "targets": [
+        {
+          "name": "Goblin Warrior",
+          "tier": 3,
+          "damage": 8,
+          "staminaAfter": 7
+        }
+      ],
+      "effects": [
+        {
+          "kind": "damage",
+          "clause": "6 + M or A damage",
+          "subtotal": null,
+          "allowance": null,
+          "status": "calculated",
+          "resolved": false
+        }
+      ]
+    },
+    {
+      "case": "PP3",
+      "eventId": "kx7dyw4f5tre10twtt15vn019h8eryj2",
+      "ability": "Pain for Pain",
+      "dice": {
+        "d10a": 8,
+        "d10b": 7
+      },
+      "targets": [
+        {
+          "name": "Goblin Warrior",
+          "tier": 3,
+          "damage": 15,
+          "staminaAfter": 0
+        }
+      ],
+      "effects": []
+    },
+    {
+      "case": "OW2",
+      "eventId": "kx70dw7rs7a094gvzvkybxgych8es9zh",
+      "ability": "Out of the Way!",
+      "dice": {
+        "d10a": 7,
+        "d10b": 7
+      },
+      "targets": [
+        {
+          "name": "Goblin Warrior",
+          "tier": 2,
+          "damage": 7,
+          "staminaAfter": 8
+        }
+      ],
+      "effects": []
+    },
+    {
+      "case": "TR1",
+      "eventId": "kx71vt2zyjgvegsnqmz5ypf4rx8esbt0",
+      "ability": "Thunder Roar",
+      "dice": {
+        "d10a": 7,
+        "d10b": 6
+      },
+      "targets": [
+        {
+          "name": "Goblin Warrior",
+          "tier": 3,
+          "damage": 17,
+          "staminaAfter": -2
+        },
+        {
+          "name": "Goblin Warrior",
+          "tier": 1,
+          "damage": 6,
+          "staminaAfter": 9
+        },
+        {
+          "name": "Goblin Warrior",
+          "tier": 2,
+          "damage": 9,
+          "staminaAfter": 6
+        }
+      ],
+      "effects": []
+    },
+    {
+      "case": "VF2",
+      "eventId": "kx75yhhg36vw1pcb780cjfzvd58es67g",
+      "ability": "Viscous Fire",
+      "dice": {
+        "d10a": 7,
+        "d10b": 7
+      },
+      "targets": [
+        {
+          "name": "Goblin Warrior",
+          "tier": 2,
+          "damage": 9,
+          "staminaAfter": 6
+        }
+      ],
+      "effects": [
+        {
+          "kind": "damage",
+          "clause": "5 + R fire damage",
+          "subtotal": null,
+          "allowance": null,
+          "status": "calculated",
+          "resolved": false
+        },
+        {
+          "kind": "push",
+          "clause": "[push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3",
+          "subtotal": 3,
+          "allowance": null,
+          "status": "fact-needed",
+          "resolved": false
+        }
+      ]
+    }
+  ]
+}

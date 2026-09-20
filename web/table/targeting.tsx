@@ -13,6 +13,8 @@
  * #director-edits-to-inline-results, docs/table-command-spec.md#results-and-pending-interactions.
  */
 import { RuleLink } from '../rules/link';
+import type { PublicCompiledResult } from '../../shared/contracts/compiledResult';
+import type { CompileDiagnostic } from '../../shared/resolve/compileAbility';
 import { readableRuleText } from '../rules/reference';
 import { GlyphText } from '../components/core-content';
 import { useState } from 'react';
@@ -346,6 +348,126 @@ type Applied = {
   dying?: boolean;
 } | null;
 
+/** Displays saved calculations only; manual disposition never claims movement execution. */
+export function CompiledEffects({
+  campaignId,
+  eventId,
+  compiled,
+  targets,
+  mayResolve,
+}: {
+  campaignId: Id<'campaigns'>;
+  eventId: Id<'events'>;
+  compiled: PublicCompiledResult;
+  targets: { target: Actor; originalTargetId?: string }[];
+  mayResolve: boolean;
+}) {
+  return (
+    <ol className="m-0 flex list-none flex-col gap-2 p-0" aria-label="Recorded ability effects">
+      {compiled.effects.map(occurrence => {
+        const effect = occurrence.effect;
+        const target = targets.find(t => t.originalTargetId === effect.targetId)?.target;
+        return (
+          <li key={occurrence.id} className="flex flex-col gap-1 border-l border-rule-strong pl-2">
+            <span className="flex flex-wrap items-center gap-2">
+              <strong>
+                {target?.name ?? 'Original target'} ·{' '}
+                {effect.kind === 'unsupported'
+                  ? 'Manual effect'
+                  : effect.kind === 'push'
+                    ? 'Push'
+                    : 'Damage'}
+              </strong>
+              <Badge variant="outline">
+                {effect.kind === 'damage'
+                  ? effect.application
+                    ? 'Applied damage'
+                    : 'Damage not applied'
+                  : occurrence.disposition
+                    ? 'Resolved at table'
+                    : effect.kind === 'push'
+                      ? 'Outstanding instruction'
+                      : 'Unresolved'}
+              </Badge>
+            </span>
+            <span className="[overflow-wrap:anywhere]">
+              <GlyphText text={summaryText(effect.clause)} />
+            </span>
+            <span className="text-muted-foreground [overflow-wrap:anywhere]">
+              Source: {compiled.definition.source.path} · {effect.locator}
+            </span>
+            {effect.kind === 'damage' && (
+              <>
+                {effect.breakdown && (
+                  <span>
+                    Calculated damage {effect.breakdown.rolledDamage}
+                    {effect.breakdown.damageType ? ` (${effect.breakdown.damageType})` : ''}.
+                  </span>
+                )}
+                {effect.application && (
+                  <span>
+                    {effect.application.afterImmunity} damage applied;{' '}
+                    {effect.application.absorbedByTemporaryStamina} absorbed by temporary Stamina.
+                  </span>
+                )}
+                {!!effect.requirements.length && (
+                  <span>Needed: {effect.requirements.join('; ')}.</span>
+                )}
+              </>
+            )}
+            {effect.kind === 'push' && (
+              <>
+                <span>
+                  Printed push {effect.printed} + size bonus {effect.sizeBonus ?? 'unknown'}
+                  {effect.allowance !== undefined
+                    ? ` · Allowance ${effect.allowance} before optional stability reduction.`
+                    : effect.subtotal !== undefined
+                      ? ` · Subtotal ${effect.subtotal}; final allowance not established.`
+                      : ' · Final allowance not established.'}
+                </span>
+                <span>
+                  Optional stability reduction: {effect.stability ?? 'unknown'}. Physical movement
+                  remains manual.
+                </span>
+                {!!effect.requirements.length && (
+                  <span>Needed: {effect.requirements.join('; ')}.</span>
+                )}
+                {!!effect.manualReasons.length && (
+                  <span>Manual coverage: {effect.manualReasons.join('; ')}.</span>
+                )}
+                <span>{effect.instruction}</span>
+                <span className="text-muted-foreground">
+                  Manual scope: {effect.manualScope.join('; ')}.
+                </span>
+                <span className="text-muted-foreground [overflow-wrap:anywhere]">
+                  Rules: {effect.rulePaths.join('; ')}.
+                </span>
+              </>
+            )}
+            {effect.kind === 'unsupported' && (
+              <span>
+                Manual: {effect.reason} ·{' '}
+                {effect.dependency === 'after-damage' ? 'After damage' : 'Dependency unknown'}.
+              </span>
+            )}
+            {occurrence.disposition?.note && (
+              <span className="text-muted-foreground">{occurrence.disposition.note}</span>
+            )}
+            {effect.kind !== 'damage' && !occurrence.disposition && target && mayResolve && (
+              <Command
+                campaignId={campaignId}
+                text={`/ability resolved event="${eventId}" occurrence=${JSON.stringify(occurrence.id)} target=${ref(target)}`}
+                label="Resolved at table"
+                variant="ghost"
+              />
+            )}
+          </li>
+        );
+      })}
+    </ol>
+  );
+}
+
 /** The interactive card for one resolved ability use, rendered under its log entry. */
 export function AbilityCard({
   campaignId,
@@ -365,6 +487,9 @@ export function AbilityCard({
 }) {
   if (!result) return null;
   const mayCorrect = result.mayCorrect && running;
+  const execution = result.execution as
+    | { mode: 'compiled' | 'legacy-compatibility' | 'manual'; diagnostics: CompileDiagnostic[] }
+    | undefined;
   return (
     <div className="mt-2 flex flex-col gap-2 border-l-2 border-rule-strong pl-3 text-xs">
       <span className="text-muted-foreground">
@@ -376,6 +501,22 @@ export function AbilityCard({
           ? ` · ${result.correctionEventIds.length} correction${result.correctionEventIds.length === 1 ? '' : 's'} applied`
           : ''}
       </span>
+      {execution && (
+        <div className="flex flex-col gap-1 text-muted-foreground">
+          <span>
+            {execution.mode === 'legacy-compatibility'
+              ? 'Legacy compatibility: unchanged sourced ability; manual effects retain existing controls.'
+              : execution.mode === 'manual'
+                ? 'Manual ability: source is outside supported execution.'
+                : 'Recorded compiled effects'}
+          </span>
+          {execution.diagnostics.map((diagnostic, index) => (
+            <span key={`${diagnostic.code}:${diagnostic.locator}:${index}`}>
+              {diagnostic.message} · {diagnostic.locator}
+            </span>
+          ))}
+        </div>
+      )}
       {result.targets.map(t => {
         const outcome = t.outcome as Outcome;
         const applied = t.applied as Applied;
@@ -424,52 +565,63 @@ export function AbilityCard({
                 )}
               </span>
             )}
-            {outcome.unresolvedClauses.map(clause => {
-              const disposition = t.dispositions.find(d => d.clause === clause);
-              return (
-                <span key={clause} className="flex flex-wrap items-center gap-2">
-                  <Badge variant="outline">
-                    {disposition ? 'Resolved at table' : 'Unresolved'}
-                  </Badge>
-                  <span className="[overflow-wrap:anywhere]">
-                    <GlyphText text={summaryText(clause)} />
+            {!result.compiled &&
+              outcome.unresolvedClauses.map(clause => {
+                const disposition = t.dispositions.find(d => d.clause === clause);
+                return (
+                  <span key={clause} className="flex flex-wrap items-center gap-2">
+                    <Badge variant="outline">
+                      {disposition ? 'Resolved at table' : 'Unresolved'}
+                    </Badge>
+                    <span className="[overflow-wrap:anywhere]">
+                      <GlyphText text={summaryText(clause)} />
+                    </span>
+                    {disposition?.note && (
+                      <span className="text-muted-foreground">{disposition.note}</span>
+                    )}
+                    {director && running && result.mayResolve && !disposition && (
+                      <Command
+                        campaignId={campaignId}
+                        text={`/ability resolved event="${eventId}" target=${ref(target)} clause=${JSON.stringify(clause)}`}
+                        label="Resolved at table"
+                        variant="ghost"
+                      />
+                    )}
                   </span>
-                  {disposition?.note && (
-                    <span className="text-muted-foreground">{disposition.note}</span>
-                  )}
-                  {director && running && result.mayResolve && !disposition && (
-                    <Command
-                      campaignId={campaignId}
-                      text={`/ability resolved event="${eventId}" target=${ref(target)} clause=${JSON.stringify(clause)}`}
-                      label="Resolved at table"
-                      variant="ghost"
-                    />
-                  )}
-                </span>
-              );
-            })}
+                );
+              })}
           </div>
         );
       })}
-      {manualClauses.map(clause => {
-        const disposition = result.manualDispositions.find(d => d.clause === clause);
-        return (
-          <span key={clause} className="flex flex-wrap items-center gap-2">
-            <Badge variant="outline">{disposition ? 'Resolved at table' : 'Unresolved'}</Badge>
-            <span className="[overflow-wrap:anywhere]">
-              <GlyphText text={summaryText(clause)} />
+      {result.compiled && (
+        <CompiledEffects
+          campaignId={campaignId}
+          eventId={eventId}
+          compiled={result.compiled}
+          targets={result.targets}
+          mayResolve={director && running && result.mayResolve}
+        />
+      )}
+      {!result.compiled &&
+        manualClauses.map(clause => {
+          const disposition = result.manualDispositions.find(d => d.clause === clause);
+          return (
+            <span key={clause} className="flex flex-wrap items-center gap-2">
+              <Badge variant="outline">{disposition ? 'Resolved at table' : 'Unresolved'}</Badge>
+              <span className="[overflow-wrap:anywhere]">
+                <GlyphText text={summaryText(clause)} />
+              </span>
+              {director && running && result.mayResolve && !disposition && (
+                <Command
+                  campaignId={campaignId}
+                  text={`/ability resolved event="${eventId}" clause=${JSON.stringify(clause)}`}
+                  label="Resolved at table"
+                  variant="ghost"
+                />
+              )}
             </span>
-            {director && running && result.mayResolve && !disposition && (
-              <Command
-                campaignId={campaignId}
-                text={`/ability resolved event="${eventId}" clause=${JSON.stringify(clause)}`}
-                label="Resolved at table"
-                variant="ghost"
-              />
-            )}
-          </span>
-        );
-      })}
+          );
+        })}
     </div>
   );
 }

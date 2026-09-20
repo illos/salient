@@ -1,3 +1,5 @@
+import type { CompiledResult } from '../shared/contracts/compiledResult';
+import { publicCompiledResult } from './lib/compiledResults';
 // SPDX-License-Identifier: GPL-3.0-only
 /**
  * The ability read side for A05: the sheet's ability list for one actor from S01 metadata plus the
@@ -210,6 +212,8 @@ export const results = query({
       actor: actorRef,
       abilityId: v.string(),
       abilityName: v.string(),
+      compiled: v.optional(v.any()),
+      execution: v.optional(v.any()),
       dice: v.object({ d10a: v.number(), d10b: v.number() }),
       characteristicValue: v.number(),
       selectedCharacteristic: v.union(v.string(), v.null()),
@@ -221,6 +225,7 @@ export const results = query({
           outcome: v.any(),
           applied: v.any(),
           dispositions: v.array(disposition),
+          originalTargetId: v.optional(v.string()),
         }),
       ),
       manualDispositions: v.array(disposition),
@@ -274,12 +279,24 @@ export const results = query({
       actor: { ...row.actor, id: aliases.get(row.actor.id) ?? row.actor.id },
       abilityId: row.abilityId,
       abilityName: row.abilityName,
+      ...(row.execution ? { execution: row.execution } : {}),
+      ...(row.compiled
+        ? {
+            compiled: publicCompiledResult(
+              row.compiled as CompiledResult,
+              new Set(row.targets.filter(t => t.target.kind === 'foe').map(t => t.target.id)),
+              director,
+              numerical,
+            ),
+          }
+        : {}),
       dice: row.dice,
       characteristicValue: row.characteristicValue,
       selectedCharacteristic: row.selectedCharacteristic,
       targets: row.targets.map(t => ({
         ...t,
         target: { ...t.target, id: aliases.get(t.target.id) ?? t.target.id },
+        ...(row.compiled ? { originalTargetId: t.target.id } : {}),
         // Foe Stamina numbers follow the health-display setting for players and observers.
         applied:
           t.applied && t.target.kind === 'foe' && !director

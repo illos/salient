@@ -1,0 +1,5 @@
+node scripts/report-live-compiled-abilities.ts .playtest/v72-report-a => exit 0
+node scripts/report-live-compiled-abilities.ts .playtest/v72-report-b => exit 0
+json: both generated outputs match retained candidate artifact; SHA-256 44b66b5d2b2b22351a4501519de53e8103ddaf6117955f80f18c5b6d35a1c00f
+md: both generated outputs match retained candidate artifact; SHA-256 44a31b355784d9f8361842c6e4b7352e5fc2025ee60985b141b274c2dceb8825
+Local runner, base e5c1cd8 plus uncommitted V72, elapsed 1.034s. No application target/mutations.

@@ -107,6 +107,9 @@ export const abilityTables = {
     abilityName: v.string(),
     /** Original pure-resolution facts; corrections never recompute from subsequently edited builds. */
     resolutionInputs: v.optional(v.any()),
+    /** V72 versioned selected definition, original inputs and effective occurrences. */
+    compiled: v.optional(v.any()),
+    execution: v.optional(v.any()),
     dice: v.object({ d10a: v.number(), d10b: v.number() }),
     characteristicValue: v.number(),
     selectedCharacteristic: v.union(characteristic, v.null()),
