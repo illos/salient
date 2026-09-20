@@ -15,8 +15,8 @@ export function RunicCarving({ characterId }: { characterId: Id<'characters'> })
   const command = useCommand();
   if (!current) return null;
   return (
-    <section aria-label="Runic Carving" className="space-y-3 rounded-md border p-4">
-      <h4 className="font-semibold">Runic Carving</h4>
+    <section aria-label="Runic Carving" className="space-y-3 rounded-md bg-muted p-4">
+      <h4 className="font-medium">Runic Carving</h4>
       <p>Active rune: {current.rune ?? 'None'}. Only this rune grants its maneuver.</p>
       <p>
         Changing or removing a rune requires 10 uninterrupted minutes. Resolve its effects from the
@@ -24,7 +24,7 @@ export function RunicCarving({ characterId }: { characterId: Id<'characters'> })
       </p>
       <select
         aria-label="New rune"
-        className="native-select"
+        className="native-select bg-placeholder"
         value={choice}
         disabled={!current.canEdit || command.pending}
         onChange={event => {
