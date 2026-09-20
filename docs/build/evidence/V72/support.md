@@ -2,9 +2,9 @@
 
 Structural support, current grant/loading availability and live execution are separate. Source drift never silently falls back; historical results are never recompiled on read.
 
-Source: `fb83a789da8f0327a389c277a0c790b1648d5810`; content: `sha256:aaf7c027a421e6059448e019271111877f208b577b756f5e79645c3d497ed26e`.
+Source: `fb83a789da8f0327a389c277a0c790b1648d5810`; content: `sha256:65beca9bf41771ceee44fe4b706d570ba94fc5aa32556bba98ca47c01e30e41f`.
 
-Currently reachable compiled: 6; unchanged reachable compatibility: 73; structurally supported but unavailable: 4.
+Currently reachable compiled: 7; unchanged reachable compatibility: 123; structurally supported but unavailable: 3.
 
 | Ability | Population | Pure execution | Live boundary | Diagnostics |
 | --- | --- | --- | --- | --- |
@@ -148,11 +148,11 @@ Currently reachable compiled: 6; unchanged reachable compatibility: 73; structur
 | Thingspeaker | granted | manual | legacy-compatibility | grammar, source-header, target-boundary, compatibility-boundary, action-type |
 | Traveling Artisan | granted | manual | legacy-compatibility | grammar, source-header, target-boundary, compatibility-boundary, action-type |
 | Traveling Sage | granted | manual | legacy-compatibility | grammar, source-header, target-boundary, compatibility-boundary, action-type |
-| Shadow Chains | foe-ability | manual | not-reachable | unsafe-tier-remainder, target-boundary |
+| Shadow Chains | foe-ability | manual | legacy-compatibility | unsafe-tier-remainder, target-boundary |
 | Portal to the Void | foe-ability | manual | not-reachable | grammar, unsafe-tier-remainder, manual-section, target-boundary |
 | Drill Press | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section, target-boundary |
 | Bull Rush | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section, target-boundary |
-| Maul | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section, target-boundary |
+| Maul | foe-ability | manual | legacy-compatibility | unsafe-tier-remainder, manual-section, target-boundary |
 | Lightning Strike | foe-ability | manual | not-reachable | manual-section, target-boundary |
 | Syringe Crossbow | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section |
 | Heartstopper | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section |
@@ -181,7 +181,7 @@ Currently reachable compiled: 6; unchanged reachable compatibility: 73; structur
 | Tumbling Gore | foe-ability | manual | not-reachable | unsafe-tier-remainder, target-boundary |
 | Bound Ahead | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary |
 | Catcher | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary |
-| Intercepting Shield | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary |
+| Intercepting Shield | foe-ability | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Parting Gift | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary |
 | Erupt | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section, target-boundary |
 | Bone Dozer | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary |
@@ -192,9 +192,9 @@ Currently reachable compiled: 6; unchanged reachable compatibility: 73; structur
 | Imbue with Might | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary |
 | Overture | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary, action-type, cost |
 | Writhing Envelopment | malice | manual | not-reachable | unsafe-tier-remainder, manual-section, target-boundary, compatibility-boundary |
-| Snaring Crossbow | foe-ability | manual | not-reachable | manual-section |
+| Snaring Crossbow | foe-ability | manual | legacy-compatibility | manual-section |
 | Laser Lancet | foe-ability | manual | not-reachable | grammar, extra-roll-or-tiers, source-block-count, source-block-mismatch, unaccounted-paragraph, manual-section |
-| Whistling Axes | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section, target-boundary |
+| Whistling Axes | foe-ability | manual | legacy-compatibility | unsafe-tier-remainder, manual-section, target-boundary |
 | Chill of Death | foe-ability | manual | not-reachable | grammar, unsafe-tier-remainder |
 | Watch Your Six! | foe-ability | manual | not-reachable | grammar, manual-section |
 | Glaive Rush | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section |
@@ -225,7 +225,7 @@ Currently reachable compiled: 6; unchanged reachable compatibility: 73; structur
 | Gift From an Accursed Tome | malice | manual | not-reachable | unsafe-tier-remainder, manual-section, target-boundary, compatibility-boundary |
 | Activate Trap | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary |
 | Mind Blown | foe-ability | manual | not-reachable | manual-section, target-boundary |
-| Portable Ballista | foe-ability | manual | not-reachable | manual-section |
+| Portable Ballista | foe-ability | manual | legacy-compatibility | manual-section |
 | Unload Rocks | foe-ability | manual | not-reachable | grammar, extra-roll-or-tiers, unaccounted-paragraph, manual-section, target-boundary |
 | Mindpunk | foe-ability | manual | not-reachable | unsafe-tier-remainder, target-boundary |
 | Blazing Leap | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary |
@@ -252,7 +252,7 @@ Currently reachable compiled: 6; unchanged reachable compatibility: 73; structur
 | Corrupted Ash Daggers | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section |
 | Barb Launch | foe-ability | manual | not-reachable | manual-section, target-boundary |
 | Dive | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary |
-| What Are You Waiting For? | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary, action-type, cost |
+| What Are You Waiting For? | foe-ability | manual | legacy-compatibility | grammar, manual-section, target-boundary, action-type, cost |
 | Dual Targeting Shot | foe-ability | manual | not-reachable | manual-section, target-boundary |
 | Halberd | foe-ability | manual | not-reachable | manual-section, target-boundary |
 | Rise, My Minions | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary, cost |
@@ -289,7 +289,7 @@ Currently reachable compiled: 6; unchanged reachable compatibility: 73; structur
 | Swat the Fly | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary |
 | Blade Rake | foe-ability | manual | not-reachable | unsafe-tier-remainder, target-boundary |
 | Bilious Expulsion | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section, target-boundary |
-| Concussive Shockwave | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section, target-boundary |
+| Concussive Shockwave | foe-ability | manual | legacy-compatibility | unsafe-tier-remainder, manual-section, target-boundary |
 | Overgrowth | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary |
 | Catcher | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary |
 | Retaliatory Dive | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary |
@@ -320,9 +320,9 @@ Currently reachable compiled: 6; unchanged reachable compatibility: 73; structur
 | Harrying Claws | foe-ability | manual | not-reachable | grammar, unsafe-tier-remainder, target-boundary |
 | Petrifying Eye Beams | foe-ability | manual | not-reachable | grammar, unsafe-tier-remainder, manual-section, target-boundary |
 | Flyby Bite | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section, target-boundary |
-| Swamp Gas | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary |
+| Swamp Gas | foe-ability | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Justice Turns Its Gaze | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary |
-| Concussive Bolts | foe-ability | manual | not-reachable | manual-section |
+| Concussive Bolts | foe-ability | manual | legacy-compatibility | manual-section |
 | Concentrate All Fire on That Hero! | foe-ability | manual | not-reachable | grammar, manual-section |
 | Split Space | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary |
 | Command Saber | foe-ability | manual | not-reachable | manual-section |
@@ -350,7 +350,7 @@ Currently reachable compiled: 6; unchanged reachable compatibility: 73; structur
 | Cower! | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary |
 | Pneumatic Punch | foe-ability | manual | not-reachable | target-boundary |
 | Psionic Rifle Burst | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section |
-| Axe | foe-ability | manual | not-reachable | target-boundary |
+| Axe | foe-ability | manual | legacy-compatibility | target-boundary |
 | Combined Arms | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary, action-type, cost |
 | Boom Pilum! | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary, action-type, cost |
 | Accursed Bite | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section |
@@ -382,7 +382,7 @@ Currently reachable compiled: 6; unchanged reachable compatibility: 73; structur
 | Let Us Feast! | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary, action-type, cost |
 | Tail Spike | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section, target-boundary |
 | Ready Rodent | foe-ability | manual | not-reachable | grammar, manual-section |
-| Toxic Winds | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section, target-boundary |
+| Toxic Winds | foe-ability | manual | legacy-compatibility | unsafe-tier-remainder, manual-section, target-boundary |
 | In Our Sights | foe-ability | manual | not-reachable | grammar, manual-section |
 | Lash Out | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section |
 | Erupt | foe-ability | manual | not-reachable | grammar, extra-roll-or-tiers, unaccounted-paragraph, manual-section, target-boundary |
@@ -431,7 +431,7 @@ Currently reachable compiled: 6; unchanged reachable compatibility: 73; structur
 | Summon Elemental | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary |
 | Devilish Charm | foe-ability | manual | not-reachable | grammar, extra-roll-or-tiers, manual-section, target-boundary |
 | Buzz Off! | foe-ability | manual | not-reachable | grammar, unsafe-tier-remainder, manual-section, target-boundary, action-type, cost |
-| Tile Slide | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section, target-boundary |
+| Tile Slide | foe-ability | manual | legacy-compatibility | unsafe-tier-remainder, manual-section, target-boundary |
 | Tactical Reposition | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary |
 | Claw Swing | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section, target-boundary |
 | Soul Sword | foe-ability | manual | not-reachable | manual-section, target-boundary |
@@ -449,7 +449,7 @@ Currently reachable compiled: 6; unchanged reachable compatibility: 73; structur
 | Quick Blast | foe-ability | manual | not-reachable | manual-section |
 | Wild Ax | foe-ability | manual | not-reachable | manual-section |
 | Razor Bite | foe-ability | manual | not-reachable | manual-section |
-| Levitating Axes | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section, target-boundary |
+| Levitating Axes | foe-ability | manual | legacy-compatibility | unsafe-tier-remainder, manual-section, target-boundary |
 | Phantom Tail Swing | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section, target-boundary |
 | Ever-Ready Rodent | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary |
 | Posthumous Promotion | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary |
@@ -458,7 +458,7 @@ Currently reachable compiled: 6; unchanged reachable compatibility: 73; structur
 | Shieldbreaker Talisman | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary |
 | Neurotoxin Splash | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary |
 | Grasping Shadow | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary |
-| Reel Them In | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary |
+| Reel Them In | foe-ability | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Bloodletting Claws | foe-ability | manual | not-reachable | target-boundary |
 | Sunderbuss | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section, target-boundary |
 | Earth Pillar | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section, target-boundary |
@@ -479,7 +479,7 @@ Currently reachable compiled: 6; unchanged reachable compatibility: 73; structur
 | Turn Green | foe-ability | manual | not-reachable | grammar, unsafe-tier-remainder, manual-section, target-boundary, action-type, cost |
 | Rune-Signed Blade | foe-ability | manual | not-reachable | manual-section, target-boundary |
 | Cacophony | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section, target-boundary |
-| Sprint | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary |
+| Sprint | foe-ability | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Rondo of Rat | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary, action-type, cost |
 | Ensnarer Cannon | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section, target-boundary |
 | Baleful Swap | foe-ability | manual | not-reachable | grammar, manual-section |
@@ -567,7 +567,7 @@ Currently reachable compiled: 6; unchanged reachable compatibility: 73; structur
 | Vanish | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary |
 | Synlirii Grafts | foe-ability | manual | not-reachable | unsafe-tier-remainder, target-boundary |
 | Return to Perfection | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section, target-boundary, action-type, cost |
-| Ajax Will Pay Well for These Specimens | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary, action-type, cost |
+| Ajax Will Pay Well for These Specimens | foe-ability | manual | legacy-compatibility | grammar, manual-section, target-boundary, action-type, cost |
 | Final Warning Fissure | foe-ability | manual | not-reachable | grammar, extra-roll-or-tiers, manual-section, target-boundary, action-type, cost |
 | Gust of Wind | foe-ability | manual | not-reachable | grammar, unsafe-tier-remainder, manual-section, target-boundary |
 | Mark of Agony | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section |
@@ -609,7 +609,7 @@ Currently reachable compiled: 6; unchanged reachable compatibility: 73; structur
 | Writ of Execution | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section, target-boundary |
 | Spirit Form | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary |
 | Snack Attack | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary, action-type, cost |
-| Meat Shield | foe-ability | manual | not-reachable | grammar, manual-section |
+| Meat Shield | foe-ability | manual | legacy-compatibility | grammar, manual-section |
 | Concealed Dagger | foe-ability | manual | not-reachable | manual-section, target-boundary |
 | Tempting Offer | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary, cost |
 | Fountains Roar, Now Free From the Earth | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary, action-type, cost |
@@ -632,7 +632,7 @@ Currently reachable compiled: 6; unchanged reachable compatibility: 73; structur
 | Tower Shield Smash | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section |
 | Cosmic Tail Ray | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section, target-boundary |
 | Wings of Second Wind | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary, action-type, cost |
-| Your Weapon Is Useless | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary |
+| Your Weapon Is Useless | foe-ability | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Drag Through Hell | foe-ability | manual | not-reachable | grammar, manual-section |
 | Blade | foe-ability | manual | not-reachable | manual-section, target-boundary |
 | Haymaker | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section, target-boundary |
@@ -689,21 +689,21 @@ Currently reachable compiled: 6; unchanged reachable compatibility: 73; structur
 | Flashing Fangs | foe-ability | manual | not-reachable | grammar, extra-roll-or-tiers, source-block-count, source-block-mismatch, unaccounted-paragraph, manual-section |
 | Glory to the Legion | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary |
 | Petrifying Eye Beams | foe-ability | manual | not-reachable | grammar, unsafe-tier-remainder, manual-section, target-boundary |
-| Skitter | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary |
+| Skitter | foe-ability | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Ice Javelins | foe-ability | manual | not-reachable | manual-section, target-boundary |
 | Tether Down | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section, target-boundary |
-| Don't Let Them Escape! | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary, action-type, cost |
+| Don't Let Them Escape! | foe-ability | manual | legacy-compatibility | grammar, manual-section, target-boundary, action-type, cost |
 | Barbed Stinger | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section |
 | Encroaching Darkness | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary |
 | Awe of the Iron Crown | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary, action-type, cost |
 | Agony Wail | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section, target-boundary |
-| Get in Here! | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary |
+| Get in Here! | foe-ability | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Close In | foe-ability | manual | not-reachable | grammar, extra-roll-or-tiers, manual-section, target-boundary, action-type, cost |
 | I'll Cut A Path | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section, target-boundary |
 | Dine and Dash | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section, target-boundary |
 | Shadow Step | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary |
 | Phase Chant | foe-ability | manual | not-reachable | unsafe-tier-remainder, target-boundary |
-| Sleep Grenade | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section, target-boundary |
+| Sleep Grenade | foe-ability | manual | legacy-compatibility | unsafe-tier-remainder, manual-section, target-boundary |
 | Caustic Detonator | foe-ability | manual | not-reachable | extra-roll-or-tiers, manual-section |
 | Enemies in the Dark | foe-ability | manual | not-reachable | unsafe-tier-remainder, target-boundary |
 | Wild Slam | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section, target-boundary |
@@ -763,7 +763,7 @@ Currently reachable compiled: 6; unchanged reachable compatibility: 73; structur
 | Quick Strike | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary |
 | Trick Crossbow | foe-ability | manual | not-reachable | manual-section |
 | Consume | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary |
-| Bite | foe-ability | supported | not-reachable |  |
+| Bite | foe-ability | supported | compiled |  |
 | Fury Flail | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section |
 | Far Flung | foe-ability | manual | not-reachable | grammar, unsafe-tier-remainder, manual-section |
 | Ice Lob | foe-ability | manual | not-reachable | unsafe-tier-remainder, target-boundary |
@@ -775,11 +775,11 @@ Currently reachable compiled: 6; unchanged reachable compatibility: 73; structur
 | Sinkhole | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section, target-boundary |
 | Pain Unending | foe-ability | manual | not-reachable | manual-section |
 | Frenzied Deluge | foe-ability | manual | not-reachable | unsafe-tier-remainder, target-boundary, action-type, cost |
-| Kill! | foe-ability | manual | not-reachable | grammar, source-header, manual-section, target-boundary, action-type, cost |
+| Kill! | foe-ability | manual | legacy-compatibility | grammar, source-header, manual-section, target-boundary, action-type, cost |
 | Rallying Ostinato | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary |
-| Eye of Surlach | foe-ability | manual | not-reachable | unsafe-tier-remainder |
+| Eye of Surlach | foe-ability | manual | legacy-compatibility | unsafe-tier-remainder |
 | Handaxes | foe-ability | manual | not-reachable | manual-section, target-boundary |
-| Sword Stab | foe-ability | manual | not-reachable | manual-section |
+| Sword Stab | foe-ability | manual | legacy-compatibility | manual-section |
 | You Would Dare?! | foe-ability | manual | not-reachable | grammar, source-header, manual-section, target-boundary, action-type, cost |
 | Carving Dagger | foe-ability | manual | not-reachable | manual-section, target-boundary |
 | Heart of the Forge | foe-ability | manual | not-reachable | unsafe-tier-remainder, target-boundary, action-type, cost |
@@ -787,9 +787,9 @@ Currently reachable compiled: 6; unchanged reachable compatibility: 73; structur
 | Flash Swipe | foe-ability | manual | not-reachable | manual-section |
 | Pain Absorption | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary |
 | Fire Curse | foe-ability | manual | not-reachable | grammar, unsafe-tier-remainder, manual-section |
-| Handaxe | foe-ability | manual | not-reachable | manual-section, target-boundary |
+| Handaxe | foe-ability | manual | legacy-compatibility | manual-section, target-boundary |
 | Devour Soul | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary |
-| Club Charge | foe-ability | manual | not-reachable | target-boundary |
+| Club Charge | foe-ability | manual | legacy-compatibility | target-boundary |
 | Piercing Tails | foe-ability | manual | not-reachable | manual-section |
 | Castling | foe-ability | manual | not-reachable | grammar, manual-section |
 | Buss Buffe | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary |
@@ -804,7 +804,7 @@ Currently reachable compiled: 6; unchanged reachable compatibility: 73; structur
 | Acquired Taste | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary |
 | Psychic Pulse | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary, action-type, cost |
 | Shield Bash | foe-ability | manual | not-reachable | unsafe-tier-remainder |
-| Ensnaring Chains | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary |
+| Ensnaring Chains | foe-ability | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Shed Some Skin | foe-ability | manual | not-reachable | grammar, source-header, manual-section, target-boundary, action-type, cost |
 | Serrated Saber | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section |
 | Tail Bite | foe-ability | manual | not-reachable | manual-section, target-boundary |
@@ -838,7 +838,7 @@ Currently reachable compiled: 6; unchanged reachable compatibility: 73; structur
 | Tentacle | foe-ability | manual | not-reachable | unsafe-tier-remainder, target-boundary |
 | Cobblestone Shape | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary |
 | Ready Rodent | foe-ability | manual | not-reachable | grammar, manual-section |
-| Handaxes | foe-ability | manual | not-reachable | manual-section, target-boundary |
+| Handaxes | foe-ability | manual | legacy-compatibility | manual-section, target-boundary |
 | Skulls Abound | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary, action-type, cost |
 | Battlefield Control | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary |
 | Demonwarp Tears | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section, target-boundary |
@@ -854,8 +854,8 @@ Currently reachable compiled: 6; unchanged reachable compatibility: 73; structur
 | Horrifying Form | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section, target-boundary, action-type, cost |
 | Take the Opening | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary |
 | On My Mark! | foe-ability | manual | not-reachable | grammar, manual-section |
-| Web | foe-ability | manual | not-reachable | grammar, unsafe-tier-remainder, manual-section, target-boundary |
-| Trample | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary |
+| Web | foe-ability | manual | legacy-compatibility | grammar, unsafe-tier-remainder, manual-section, target-boundary |
+| Trample | foe-ability | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Retaliatory Strike | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary |
 | Spinning Spit | foe-ability | manual | not-reachable | target-boundary |
 | Snaking Entrails | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section |
@@ -863,7 +863,7 @@ Currently reachable compiled: 6; unchanged reachable compatibility: 73; structur
 | Meat Shield | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary |
 | Sacrifice | foe-ability | manual | not-reachable | grammar, extra-roll-or-tiers, source-block-mismatch, source-header, unaccounted-paragraph, manual-section, target-boundary, action-type, cost |
 | Kinetic Lane | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary |
-| Snaring Javelin | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section, target-boundary |
+| Snaring Javelin | foe-ability | manual | legacy-compatibility | unsafe-tier-remainder, manual-section, target-boundary |
 | Inertial Flow | foe-ability | manual | not-reachable | unsafe-tier-remainder, target-boundary |
 | Who's Hesitating? | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary |
 | Corrupted Ash Teleport | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary |
@@ -878,7 +878,7 @@ Currently reachable compiled: 6; unchanged reachable compatibility: 73; structur
 | Timely Intervention | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary |
 | Entangling Vines | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section, target-boundary |
 | Notched Axe | foe-ability | manual | not-reachable | grammar |
-| Leg Blade | foe-ability | manual | not-reachable | target-boundary |
+| Leg Blade | foe-ability | manual | legacy-compatibility | target-boundary |
 | Better Out Than In | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section, target-boundary, action-type, cost |
 | Wall Leap | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary |
 | Break Ground | foe-ability | manual | not-reachable | grammar, extra-roll-or-tiers, manual-section, target-boundary |
@@ -900,7 +900,7 @@ Currently reachable compiled: 6; unchanged reachable compatibility: 73; structur
 | Weakening Glare | malice | manual | not-reachable | unsafe-tier-remainder, compatibility-boundary |
 | Targeting Beam | foe-ability | manual | not-reachable | manual-section |
 | Armor of Corpses | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary |
-| Focus Fire | foe-ability | manual | not-reachable | grammar, manual-section, action-type, cost |
+| Focus Fire | foe-ability | manual | legacy-compatibility | grammar, manual-section, action-type, cost |
 | Forward Assault | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section, target-boundary |
 | Bat Form | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary, cost |
 | Armor of the Ancients | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary |
@@ -909,7 +909,7 @@ Currently reachable compiled: 6; unchanged reachable compatibility: 73; structur
 | Thunderstruck | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary |
 | Blistering Element | foe-ability | manual | not-reachable | manual-section, target-boundary |
 | Preserve and Protect | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section |
-| Steam-Powered Snare | foe-ability | manual | not-reachable | grammar, extra-roll-or-tiers, unaccounted-paragraph, manual-section, target-boundary |
+| Steam-Powered Snare | foe-ability | manual | legacy-compatibility | grammar, extra-roll-or-tiers, unaccounted-paragraph, manual-section, target-boundary |
 | Blade of the Gol King | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section, target-boundary |
 | Chorus of Destruction | foe-ability | manual | not-reachable | grammar, source-header, manual-section, target-boundary, action-type, cost |
 | Immortal Flare | foe-ability | manual | not-reachable | grammar, manual-section |
@@ -978,9 +978,9 @@ Currently reachable compiled: 6; unchanged reachable compatibility: 73; structur
 | Stabbity Stab | foe-ability | manual | not-reachable | grammar, manual-section |
 | Throw | foe-ability | manual | not-reachable | grammar, manual-section |
 | Elevate | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary |
-| Concussive Maul | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section |
+| Concussive Maul | foe-ability | manual | legacy-compatibility | unsafe-tier-remainder, manual-section |
 | Ashes to Ashes | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary |
-| Grasping Claws | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section, target-boundary |
+| Grasping Claws | foe-ability | manual | legacy-compatibility | unsafe-tier-remainder, manual-section, target-boundary |
 | Spittlesplash | foe-ability | manual | not-reachable | target-boundary |
 | Bead of Hell | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary |
 | Numb | foe-ability | manual | not-reachable | unsafe-tier-remainder |
@@ -989,13 +989,13 @@ Currently reachable compiled: 6; unchanged reachable compatibility: 73; structur
 | Forked Knife | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section |
 | Devolving Tentacles | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section, target-boundary |
 | Forge Hammer Tail Slam | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section, target-boundary |
-| Bite | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section |
+| Bite | foe-ability | manual | legacy-compatibility | unsafe-tier-remainder, manual-section |
 | Recall | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary |
 | Whip Frenzy | foe-ability | manual | not-reachable | unsafe-tier-remainder, target-boundary |
 | Killer Claws | foe-ability | manual | not-reachable | unsafe-tier-remainder |
 | Blightblade | foe-ability | manual | not-reachable | grammar, unsafe-tier-remainder, manual-section |
 | Boulder Bash | foe-ability | manual | not-reachable | action-type |
-| Magnetomancy | foe-ability | manual | not-reachable | grammar, manual-section |
+| Magnetomancy | foe-ability | manual | legacy-compatibility | grammar, manual-section |
 | Flame Wad | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section |
 | Dragon's Eruption | foe-ability | manual | not-reachable | unsafe-tier-remainder, target-boundary |
 | Trouser Cut | malice | manual | not-reachable | unsafe-tier-remainder, manual-section, compatibility-boundary |
@@ -1013,7 +1013,7 @@ Currently reachable compiled: 6; unchanged reachable compatibility: 73; structur
 | Dive Bomb | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section |
 | Alchemical Device | malice | manual | not-reachable | unsafe-tier-remainder, manual-section, target-boundary, compatibility-boundary |
 | Natural Weapon | foe-ability | manual | not-reachable | unsafe-tier-remainder, target-boundary |
-| Bow | foe-ability | manual | not-reachable | manual-section, target-boundary |
+| Bow | foe-ability | manual | legacy-compatibility | manual-section, target-boundary |
 | Sucker Punch | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section |
 | Viridescent Storm | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section, target-boundary |
 | Engulf | foe-ability | manual | not-reachable | grammar, manual-section |
@@ -1067,14 +1067,14 @@ Currently reachable compiled: 6; unchanged reachable compatibility: 73; structur
 | Raging Tempest | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section, target-boundary |
 | Lead From the Front | foe-ability | manual | not-reachable | grammar, source-header, manual-section, target-boundary, action-type, cost |
 | Engulf | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section |
-| Get Reckless! | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary |
+| Get Reckless! | foe-ability | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Choking Bolt | foe-ability | manual | not-reachable | manual-section |
 | Fog of War | foe-ability | manual | not-reachable | grammar, source-header, manual-section, target-boundary, action-type, cost |
 | I Can Throw My Blade and So Should You! | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary, action-type, cost |
 | Sputter | foe-ability | manual | not-reachable | grammar, unsafe-tier-remainder, manual-section, target-boundary |
 | Bully the Weak | foe-ability | manual | not-reachable | grammar, manual-section, action-type, cost |
 | Earth-Breaking Jump | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section, target-boundary |
-| Stone Wave | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section, target-boundary |
+| Stone Wave | foe-ability | manual | legacy-compatibility | unsafe-tier-remainder, manual-section, target-boundary |
 | Gravity Well | foe-ability | manual | not-reachable | grammar, extra-roll-or-tiers, unaccounted-paragraph, manual-section, target-boundary |
 | Heavy Longbow | foe-ability | manual | not-reachable | target-boundary |
 | Flamebelcher | foe-ability | manual | not-reachable | manual-section, target-boundary |
@@ -1123,7 +1123,7 @@ Currently reachable compiled: 6; unchanged reachable compatibility: 73; structur
 | Corrosive Claws | foe-ability | manual | not-reachable | unsafe-tier-remainder, target-boundary |
 | Mourning Cry | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section, target-boundary |
 | Lockdown | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary |
-| Claws | foe-ability | manual | not-reachable | manual-section, target-boundary |
+| Claws | foe-ability | manual | legacy-compatibility | manual-section, target-boundary |
 | Dagger Feint | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section |
 | Marble From a Great Sling | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section, target-boundary |
 | Summon the Onyx Tower | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary |
@@ -1141,7 +1141,7 @@ Currently reachable compiled: 6; unchanged reachable compatibility: 73; structur
 | Tail Sweep | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section, target-boundary |
 | Lion's Toss | foe-ability | manual | not-reachable | grammar, unsafe-tier-remainder |
 | You Didn't Pay Attention! | foe-ability | manual | not-reachable | grammar, manual-section |
-| Swordplay | foe-ability | manual | not-reachable | manual-section |
+| Swordplay | foe-ability | manual | legacy-compatibility | manual-section |
 | Brain Drain | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary |
 | Fuse-Iron Lance | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section |
 | Ready Rodent | foe-ability | manual | not-reachable | grammar, manual-section |
@@ -1221,7 +1221,7 @@ Currently reachable compiled: 6; unchanged reachable compatibility: 73; structur
 | Mourning Till Dusk | foe-ability | manual | not-reachable | grammar, unsafe-tier-remainder, manual-section, target-boundary |
 | Warp Touch | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section |
 | Vengeful Tusker | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary |
-| Wide Axe | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section |
+| Wide Axe | foe-ability | manual | legacy-compatibility | unsafe-tier-remainder, manual-section |
 | Infernal Injunction | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section, target-boundary |
 | Heat and Pressure | foe-ability | manual | not-reachable | grammar, extra-roll-or-tiers, manual-section, target-boundary |
 | Gladius | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section |
@@ -1229,7 +1229,7 @@ Currently reachable compiled: 6; unchanged reachable compatibility: 73; structur
 | Gloom Bolt | foe-ability | manual | not-reachable | target-boundary |
 | Pugio | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section, target-boundary |
 | Celestial Furor | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section, target-boundary |
-| Concussive Grenade | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section, target-boundary |
+| Concussive Grenade | foe-ability | manual | legacy-compatibility | unsafe-tier-remainder, manual-section, target-boundary |
 | Stomp | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section |
 | Bloody Whirlwind | foe-ability | manual | not-reachable | manual-section, target-boundary |
 | See Only Me | foe-ability | manual | not-reachable | grammar, extra-roll-or-tiers, manual-section, target-boundary, action-type, cost |
@@ -1264,13 +1264,13 @@ Currently reachable compiled: 6; unchanged reachable compatibility: 73; structur
 | Fuel the Fire | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary |
 | Violent Transformation | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section, target-boundary |
 | Bite | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section |
-| Test Your Metal! | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary, action-type, cost |
+| Test Your Metal! | foe-ability | manual | legacy-compatibility | grammar, manual-section, target-boundary, action-type, cost |
 | Throw | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary |
 | Trundle | foe-ability | manual | not-reachable | grammar, manual-section, target-boundary |
 | Fire Solo | foe-ability | manual | not-reachable | grammar, source-header, manual-section, target-boundary, action-type, cost |
 | Splitbow | foe-ability | manual | not-reachable | manual-section, target-boundary |
-| Dizzying Hex | foe-ability | manual | not-reachable | grammar, unsafe-tier-remainder |
-| Stunning Blast | foe-ability | manual | not-reachable | target-boundary |
+| Dizzying Hex | foe-ability | manual | legacy-compatibility | grammar, unsafe-tier-remainder |
+| Stunning Blast | foe-ability | manual | legacy-compatibility | target-boundary |
 | Devilish Suggestion | foe-ability | manual | not-reachable | grammar, extra-roll-or-tiers, unaccounted-paragraph, manual-section, target-boundary |
 | Talons | foe-ability | manual | not-reachable | unsafe-tier-remainder, manual-section |
 | Dweomer Plume | foe-ability | manual | not-reachable | unsafe-tier-remainder, target-boundary |

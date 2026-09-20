@@ -7,8 +7,17 @@ import { buildCorpus, readInputs, type AuditInputs } from './audit-ability-gramm
 import { compiledSupportReport } from './report-compiled-abilities.ts';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
-/** Current public loading boundary, not a rules dispatch or per-ability approval list. */
-const loadableFoe = 'mcdm.monsters.v1/monster.goblin.statblock/goblin-warrior';
+/**
+ * Current public loading boundary, not a rules dispatch or per-ability approval list: since V02
+ * every seeded stat block loads (ordinary foes through `foe.add`, minions through `squad.add`, whose
+ * members use abilities individually through the same ability operations).
+ */
+const manifest = JSON.parse(
+  readFileSync(join(root, 'shared/content/compendium/manifest.json'), 'utf8'),
+) as { entries: { id: string; kind: string }[] };
+const loadableFoes = new Set(
+  manifest.entries.filter(entry => entry.kind === 'statblock').map(entry => entry.id),
+);
 const commonActions = new Set([
   'mcdm.heroes.v1/feature.ability.common/melee-weapon-free-strike',
   'mcdm.heroes.v1/feature.ability.common/ranged-weapon-free-strike',
@@ -22,7 +31,7 @@ export function liveCompiledSupportReport(inputs: AuditInputs = readInputs()) {
     const reachable =
       (['hero-standalone', 'kit-signature', 'granted'].includes(entry.context.corpus) &&
         (commonActions.has(entry.id) || grants.some(g => g.selectable === 'selectable'))) ||
-      (entry.context.corpus === 'foe-ability' && entry.context.parent === loadableFoe);
+      (entry.context.corpus === 'foe-ability' && loadableFoes.has(entry.context.parent ?? ''));
     const boundary =
       entry.context.corpus === 'kit-signature'
         ? 'Unchanged kit signatures retain A05 compatibility.'
@@ -81,7 +90,10 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
   // Detect a changed loader boundary instead of silently retaining obsolete report availability.
   const loader = readFileSync(join(root, 'convex/lib/foeOperations.ts'), 'utf8');
   const source = readFileSync(join(root, 'convex/lib/foeSource.ts'), 'utf8');
-  if (!loader.includes('args.definition !== GOBLIN_WARRIOR_ID') || !source.includes(loadableFoe))
+  if (
+    !loader.includes('requireStatBlock(ctx, String(args.definition))') ||
+    !source.includes('export async function requireStatBlock')
+  )
     throw new Error(
       'Public foe loading boundary changed; update report reachability from that loader.',
     );

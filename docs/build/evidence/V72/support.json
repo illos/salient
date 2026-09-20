@@ -1,6 +1,6 @@
 {
   "generator": "V72/1",
-  "contentHash": "sha256:aaf7c027a421e6059448e019271111877f208b577b756f5e79645c3d497ed26e",
+  "contentHash": "sha256:65beca9bf41771ceee44fe4b706d570ba94fc5aa32556bba98ca47c01e30e41f",
   "sourceRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
   "foesEdition": "bf262edf546e91e1540cc17489915f18c4873ddd8bd8e225b20f3441e3f74f30",
   "scope": "Structural support, current grant/loading availability and live execution are separate. Source drift never silently falls back; historical results are never recompiled on read.",
@@ -17177,8 +17177,8 @@
           "message": "Only the designed single-target envelope is eligible."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [],
       "movementFacts": "No compiled push."
     },
@@ -17785,8 +17785,8 @@
           "message": "Only the designed single-target envelope is eligible."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [],
       "movementFacts": "No compiled push."
     },
@@ -21237,8 +21237,8 @@
           "message": "Only the designed single-target envelope is eligible."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [],
       "movementFacts": "No compiled push."
     },
@@ -22510,8 +22510,8 @@
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [],
       "movementFacts": "No compiled push."
     },
@@ -22828,8 +22828,8 @@
           "message": "Only the designed single-target envelope is eligible."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [],
       "movementFacts": "No compiled push."
     },
@@ -26773,8 +26773,8 @@
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [],
       "movementFacts": "Known precise sizes/stability; final movement coverage remains explicit missing/manual work."
     },
@@ -29857,8 +29857,8 @@
           "message": "Activation cost cannot be safely read."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [],
       "movementFacts": "No compiled push."
     },
@@ -34333,8 +34333,8 @@
           "message": "Only the designed single-target envelope is eligible."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [],
       "movementFacts": "Known precise sizes/stability; final movement coverage remains explicit missing/manual work."
     },
@@ -37884,8 +37884,8 @@
           "message": "Only the designed single-target envelope is eligible."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [],
       "movementFacts": "No compiled push."
     },
@@ -38099,8 +38099,8 @@
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [],
       "movementFacts": "Known precise sizes/stability; final movement coverage remains explicit missing/manual work."
     },
@@ -41509,8 +41509,8 @@
           "message": "Only the designed single-target envelope is eligible."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [],
       "movementFacts": "Known precise sizes/stability; final movement coverage remains explicit missing/manual work."
     },
@@ -45389,8 +45389,8 @@
           "message": "Only the designed single-target envelope is eligible."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [],
       "movementFacts": "No compiled push."
     },
@@ -51396,8 +51396,8 @@
           "message": "Only the designed single-target envelope is eligible."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [],
       "movementFacts": "No compiled push."
     },
@@ -53793,8 +53793,8 @@
           "message": "Only the designed single-target envelope is eligible."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [],
       "movementFacts": "No compiled push."
     },
@@ -54745,8 +54745,8 @@
           "message": "Only the designed single-target envelope is eligible."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [],
       "movementFacts": "No compiled push."
     },
@@ -57525,8 +57525,8 @@
           "message": "Only the designed single-target envelope is eligible."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [],
       "movementFacts": "No compiled push."
     },
@@ -68546,8 +68546,8 @@
           "message": "Activation cost cannot be safely read."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [],
       "movementFacts": "No compiled push."
     },
@@ -74030,8 +74030,8 @@
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [],
       "movementFacts": "No compiled push."
     },
@@ -76611,8 +76611,8 @@
           "message": "Only the designed single-target envelope is eligible."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [],
       "movementFacts": "No compiled push."
     },
@@ -83666,8 +83666,8 @@
           "message": "Only the designed single-target envelope is eligible."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [],
       "movementFacts": "No compiled push."
     },
@@ -84053,8 +84053,8 @@
           "message": "Activation cost cannot be safely read."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [],
       "movementFacts": "No compiled push."
     },
@@ -84647,8 +84647,8 @@
           "message": "Only the designed single-target envelope is eligible."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [],
       "movementFacts": "No compiled push."
     },
@@ -85445,8 +85445,8 @@
           "message": "Only the designed single-target envelope is eligible."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [],
       "movementFacts": "No compiled push."
     },
@@ -93098,8 +93098,8 @@
       ],
       "sections": [],
       "diagnostics": [],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
       "grants": [],
       "movementFacts": "No compiled push."
     },
@@ -94617,8 +94617,8 @@
           "message": "Activation cost cannot be safely read."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [],
       "movementFacts": "No compiled push."
     },
@@ -94838,8 +94838,8 @@
           "message": "The effect on damage, payment, targeting or order is not established."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [],
       "movementFacts": "No compiled push."
     },
@@ -95062,8 +95062,8 @@
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [],
       "movementFacts": "No compiled push."
     },
@@ -96048,8 +96048,8 @@
           "message": "Only the designed single-target envelope is eligible."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [],
       "movementFacts": "No compiled push."
     },
@@ -96248,8 +96248,8 @@
           "message": "Only the designed single-target envelope is eligible."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [],
       "movementFacts": "No compiled push."
     },
@@ -97994,8 +97994,8 @@
           "message": "Only the designed single-target envelope is eligible."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [],
       "movementFacts": "No compiled push."
     },
@@ -102259,8 +102259,8 @@
           "message": "Only the designed single-target envelope is eligible."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [],
       "movementFacts": "Known precise sizes/stability; final movement coverage remains explicit missing/manual work."
     },
@@ -104224,8 +104224,8 @@
           "message": "Only the designed single-target envelope is eligible."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [],
       "movementFacts": "No compiled push."
     },
@@ -104307,8 +104307,8 @@
           "message": "Only the designed single-target envelope is eligible."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [],
       "movementFacts": "No compiled push."
     },
@@ -105359,8 +105359,8 @@
           "message": "Only the designed single-target envelope is eligible."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [],
       "movementFacts": "No compiled push."
     },
@@ -107206,8 +107206,8 @@
           "message": "Only the designed single-target envelope is eligible."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [],
       "movementFacts": "No compiled push."
     },
@@ -110211,8 +110211,8 @@
           "message": "Activation cost cannot be safely read."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [],
       "movementFacts": "No compiled push."
     },
@@ -111331,8 +111331,8 @@
           "message": "Only the designed single-target envelope is eligible."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [],
       "movementFacts": "No compiled push."
     },
@@ -119588,8 +119588,8 @@
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [],
       "movementFacts": "Known precise sizes/stability; final movement coverage remains explicit missing/manual work."
     },
@@ -119800,8 +119800,8 @@
           "message": "Only the designed single-target envelope is eligible."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [],
       "movementFacts": "No compiled push."
     },
@@ -121051,8 +121051,8 @@
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [],
       "movementFacts": "No compiled push."
     },
@@ -121739,8 +121739,8 @@
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [],
       "movementFacts": "No compiled push."
     },
@@ -123976,8 +123976,8 @@
           "message": "Only the designed single-target envelope is eligible."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [],
       "movementFacts": "No compiled push."
     },
@@ -130885,8 +130885,8 @@
           "message": "Only the designed single-target envelope is eligible."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [],
       "movementFacts": "No compiled push."
     },
@@ -131786,8 +131786,8 @@
           "message": "Only the designed single-target envelope is eligible."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [],
       "movementFacts": "Known precise sizes/stability; final movement coverage remains explicit missing/manual work."
     },
@@ -138159,8 +138159,8 @@
           "message": "Only the designed single-target envelope is eligible."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [],
       "movementFacts": "No compiled push."
     },
@@ -140386,8 +140386,8 @@
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [],
       "movementFacts": "No compiled push."
     },
@@ -150066,8 +150066,8 @@
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [],
       "movementFacts": "No compiled push."
     },
@@ -151206,8 +151206,8 @@
           "message": "Only the designed single-target envelope is eligible."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [],
       "movementFacts": "Known precise sizes/stability; final movement coverage remains explicit missing/manual work."
     },
@@ -155461,8 +155461,8 @@
           "message": "Activation cost cannot be safely read."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [],
       "movementFacts": "No compiled push."
     },
@@ -155999,8 +155999,8 @@
           "message": "The effect on damage, payment, targeting or order is not established."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [],
       "movementFacts": "No compiled push."
     },
@@ -156126,8 +156126,8 @@
           "message": "Only the designed single-target envelope is eligible."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [],
       "movementFacts": "No compiled push."
     },
@@ -159467,8 +159467,8 @@
     }
   ],
   "liveCounts": {
-    "compiled": 6,
-    "compatibility": 73,
-    "compiledButUnavailable": 4
+    "compiled": 7,
+    "compatibility": 123,
+    "compiledButUnavailable": 3
   }
 }
