@@ -13,14 +13,14 @@ One active job across all hosts, including setup/build/cleanup. On resume, recon
 row with actual processes before dispatch. Keep terminal evidence in the slice work log and prune
 completed rows only after the requester has the result through a direct `wake: true` Chords return.
 
-Updated 2026-09-20 14:27 UTC: corrected V85/V86 submission accepted; capacity and target
-preflight is in progress before serial execution.
+Updated 2026-09-20 14:28 UTC: corrected V85/V86 submission is running serially. Local runs the
+pure checks; hosted dev identity is verified separately before any deployment.
 The [adoption and cleanup record](audits/2026-09-20-testing-coordinator-adoption.md) records the
 initial host inventory and user-authorized retirement of old development servers.
 
 | Job / Chords message | Requester | Exact source / checks and inputs | State / host / target | Result / evidence |
 | --- | --- | --- | --- | --- |
-| `test-V85-V86-b08ebcd-2` / 798 | WIZARD `a45eccaa-2dd6-4bb8-ae39-e3a217d1aeb1` | `b08ebcd53caccbd0ac271dd747211dacdfe5998d`, `.worktrees/supporting-actions`; supersedes [blocked job](evidence/V85/tester-job-854a5dd.md) | **Queued/preflight**: local checks/runner → hosted dev `different-bat-943` | Pending focused checks, integrated gate, deploy validation and 35-scenario API proof |
+| `test-V85-V86-b08ebcd-2` / 798 | WIZARD `a45eccaa-2dd6-4bb8-ae39-e3a217d1aeb1` | `b08ebcd53caccbd0ac271dd747211dacdfe5998d`, `.worktrees/supporting-actions`; supersedes [blocked job](evidence/V85/tester-job-854a5dd.md) | **Running**: local checks → hosted dev `different-bat-943` | Artifacts: `/srv/presidium/projects/salient/test-artifacts/V85-V86-b08ebcd-20260920T1428Z`; pending |
 
 ## Post-v0.01 organization — 2026-09-15
 
