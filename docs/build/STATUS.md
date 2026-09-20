@@ -13,13 +13,14 @@ One active job across all hosts, including setup/build/cleanup. On resume, recon
 row with actual processes before dispatch. Keep terminal evidence in the slice work log and prune
 completed rows only after the requester has the result through a direct `wake: true` Chords return.
 
-Updated 2026-09-20 14:15 UTC: one blocked submission; no test workload is running from this thread.
+Updated 2026-09-20 14:27 UTC: corrected V85/V86 submission accepted; capacity and target
+preflight is in progress before serial execution.
 The [adoption and cleanup record](audits/2026-09-20-testing-coordinator-adoption.md) records the
 initial host inventory and user-authorized retirement of old development servers.
 
 | Job / Chords message | Requester | Exact source / checks and inputs | State / host / target | Result / evidence |
 | --- | --- | --- | --- | --- |
-| `test-V85-V86-854a5dd-1` / 793 | WIZARD `a45eccaa-2dd6-4bb8-ae39-e3a217d1aeb1` | `854a5dd470dc8f9b5dbe050b1da5db50bc1fba45`, `.worktrees/supporting-actions`; [job details](evidence/V85/tester-job-854a5dd.md) | **Blocked**: WIZARD must supply corrected candidate; planned local runner → hosted dev `different-bat-943` | No tests/deploy run; return wake 796 accepted; queue slot free |
+| `test-V85-V86-b08ebcd-2` / 798 | WIZARD `a45eccaa-2dd6-4bb8-ae39-e3a217d1aeb1` | `b08ebcd53caccbd0ac271dd747211dacdfe5998d`, `.worktrees/supporting-actions`; supersedes [blocked job](evidence/V85/tester-job-854a5dd.md) | **Queued/preflight**: local checks/runner → hosted dev `different-bat-943` | Pending focused checks, integrated gate, deploy validation and 35-scenario API proof |
 
 ## Post-v0.01 organization — 2026-09-15
 
