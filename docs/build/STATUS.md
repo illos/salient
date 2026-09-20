@@ -44,6 +44,13 @@ evidence when claiming work rather than treating historical handoff notes as cur
 
 ## Active parser/engine ownership — 2026-09-20
 
+Update 2026-09-20 (later): the Fable engine lead is now the **ENGINE2** thread
+(Chords `3498baf0-e8d9-442b-a704-f24f7e595b30`), replacing the settled ENGINE F5.1 thread. V63, V64,
+V67 and V72 are merged and live on shared main. The next engine slice is
+[V88](V88-compiled-potency-conditions.md), assigned to the Astra ENGINE thread
+(`2b1ba081-4040-4665-9ea2-22364db707f4`); Fable verifies and integrates. The paragraphs below are the
+historical V63 record.
+
 Fable's engine/parser thread owns integration. Codex's V63 branch
 `slice/V63-corrections-rebase` in `.worktrees/engine-corrections` repairs the V43 indexed-read
 mismatch after rebasing the original prerequisites onto main `5956331`.
@@ -202,6 +209,7 @@ See the [CI review and run record](audits/2026-09-14-ci-history-review.md) for t
 | V67 | [Pure compiled ability definitions and outcomes](V67-compiled-effects-pure.md) | V26 design, R04, V64 | Merged — integrated into main 2026-09-20; pure compiler/outcome API and report only; 742-test full check, reproducible report CLI, unchanged V64 audit; independent implementation/rules reviews PASS; no live wiring, so no runtime update |
 | V68 | [Campaign home redesign](V68-campaign-home.md) | V21, V29, V31, V43, A09 | Merged and live — `3ca24e8` fast-forwarded into main 2026-09-20; independent review pass; integrated `pnpm check` exit 0 (284 engine, 466 app/scripts tests, build); shared CT114 main updated with data retained and the 8-step headless changed-feature check passing live | Campaign home UI thread (Fable) |
 | V72 | [Live compiled ability effects](V72-live-compiled-effects.md) | V26, V63, V67 | Complete — merged into main `dbfb61d` and live on shared CT114 main, 2026-09-20; integrated 843-test check, isolated proofs (46 + 14 records) and independent implementation/integration/rules reviews PASS; shared-main real-dice proof run `e31357a7` PASS (14 records), see [main evidence](evidence/V72/main-2026-09-20/README.md); six compiled live abilities, four compile-only; browser scenarios in the backlog |
+| V88 | [Compiled potency conditions with automatic save ends](V88-compiled-potency-conditions.md) | V26, V64, V67, V72, R05, V02 (boundary) | Assigned — registered 2026-09-20 by the Fable ENGINE2 thread; Astra ENGINE implements on `slice/V88` (`.worktrees/engine-potency`); bounded potency remainder becomes a compiled condition node with source-linked instances and automatic d10 save-ends at the target's turn end; Bury the Point live, Eye of Surlach added to the inventory, Ray compile-only; gates through TESTER; browser deferred | Engine and parser thread (Fable ENGINE2 lead, Astra ENGINE implementer) |
 | V23 | [Foe source ingestion assessment](V23-foe-source-assessment.md) | S01, A09, Rules portion of V13 | Merged — source assessment and confirmed ingestion requirements integrated with V27, 2026-09-16 |
 | V27 | [Undead ingestion and independent feature access](V27-undead-ingestion.md) | S01, A09, Rules portion of V13, V23 docs | Merged and live — rebased implementation `6d47dc0`, test repair `e4590e9`; integrated at `f019e3a`, 2026-09-16; 432 tests, build, isolated and shared-app browser checks pass; public `/foes` verified on 5180 |
 | V29 | [Desktop layout feedback follow-ups](V29-desktop-feedback.md) | V21 | Merged — `7b80e56`, 2026-09-16; independent implementation review pass; integrated checks and the full 22-test browser suite pass; shared playable app on `5180` updated and the changed-feature journey verified live |
