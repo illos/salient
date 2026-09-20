@@ -52,7 +52,7 @@ export function TablePage({ campaignId }: { campaignId: Id<'campaigns'> }) {
   // Explicit Take turn switches only this user's pane to the chosen hero (local state, never shared).
   const [viewedHeroId, setViewedHeroId] = useState<Id<'characters'> | null>(null);
   const running = roster?.session?.status === 'running' && encounter !== undefined;
-  const onTurnTaken = (actor: { kind: 'character' | 'foe'; id: string }) => {
+  const onTurnTaken = (actor: { kind: 'character' | 'foe' | 'squad'; id: string }) => {
     if (actor.kind === 'character') setViewedHeroId(actor.id as Id<'characters'>);
   };
   return (

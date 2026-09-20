@@ -27,7 +27,7 @@ import type { Encounter } from './setup-card';
 type Group = Encounter['groups'][number];
 type Entry = Group['entries'][number];
 
-function ref(actor: { kind: 'character' | 'foe'; id: string }) {
+function ref(actor: { kind: 'character' | 'foe' | 'squad'; id: string }) {
   return `@{${actor.kind}:${actor.id}}`;
 }
 
@@ -59,7 +59,7 @@ function Segment({
   group: Group;
   encounter: Encounter;
   running: boolean;
-  onTurnTaken: (actor: { kind: 'character' | 'foe'; id: string }) => void;
+  onTurnTaken: (actor: { kind: 'character' | 'foe' | 'squad'; id: string }) => void;
 }) {
   const submit = useMutation(api.commands.submit);
   const command = useCommand();
@@ -144,7 +144,7 @@ function Side({
   side: 'heroes' | 'director';
   encounter: Encounter;
   running: boolean;
-  onTurnTaken: (actor: { kind: 'character' | 'foe'; id: string }) => void;
+  onTurnTaken: (actor: { kind: 'character' | 'foe' | 'squad'; id: string }) => void;
 }) {
   const groups = encounter.groups.filter(g => g.side === side);
   const count = groups.reduce((n, g) => n + g.entries.length, 0);
@@ -210,7 +210,7 @@ export function InitiativeBar({
   encounter: Encounter;
   director: boolean;
   running: boolean;
-  onTurnTaken: (actor: { kind: 'character' | 'foe'; id: string }) => void;
+  onTurnTaken: (actor: { kind: 'character' | 'foe' | 'squad'; id: string }) => void;
 }) {
   const [groupsOpen, setGroupsOpen] = useState(false);
   if (encounter.status !== 'committed' || encounter.phase !== 'turns') return null;

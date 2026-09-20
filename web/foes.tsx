@@ -1,4 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
+import { useState } from 'react';
 import { useMutation, useQuery } from 'convex/react';
 import { api } from '../convex/_generated/api';
 import type { Id } from '../convex/_generated/dataModel';
@@ -60,35 +61,74 @@ function DirectorFoe({
 }
 function AddFoe({ campaignId }: { campaignId: Id<'campaigns'> }) {
   // foes.setDefaultVisible stays in code, dormant (Q-REC-1): every loaded foe is shown to all roles.
-  const source = useQuery(api.foes.catalog, { campaignId });
-  const add = useMutation(api.foes.add);
+  // V02: every seeded stat block; a Minion stat block adds a squad through the same operation the
+  // table uses (/squad add), with a count from 1 to 8.
+  const definitions = useQuery(api.foes.definitions, { campaignId });
+  const invoke = useMutation(api.commands.invoke);
   const addition = useCommand();
+  const [definitionId, setDefinitionId] = useState('');
+  const [count, setCount] = useState(4);
+  const selected =
+    definitions?.find(d => d.definitionId === definitionId) ??
+    definitions?.find(d => d.definitionId.endsWith('goblin-warrior')) ??
+    definitions?.[0];
+  const minion = selected?.organization === 'Minion';
   return (
     <div className="flex flex-col gap-3">
-      {source ? (
-        <>
-          <div className="flex items-center justify-between gap-3 border border-rule-strong bg-card px-3 py-2">
-            <span className="text-sm font-bold">
-              {source.name} <FoeReference sourceSnapshot={source.sourceSnapshot} />
-            </span>
-            <Button
-              type="button"
-              size="sm"
-              disabled={addition.pending}
-              onClick={() =>
-                void addition.run(
-                  commandId => add({ campaignId, definitionId: source.definitionId, commandId }),
-                  JSON.stringify(['foes.add', campaignId, source.definitionId]),
-                )
-              }
-            >
-              {addition.pending ? 'Adding…' : 'Add foe'}
-            </Button>
-          </div>
-        </>
+      {definitions && selected ? (
+        <div className="flex flex-wrap items-center justify-between gap-3 border border-rule-strong bg-card px-3 py-2">
+          <select
+            className="native-select min-w-0 flex-1"
+            aria-label="Foe to add"
+            value={selected.definitionId}
+            onChange={e => setDefinitionId(e.target.value)}
+          >
+            {definitions.map(d => (
+              <option key={d.definitionId} value={d.definitionId}>
+                {d.name}
+                {d.organization ? ` · ${d.organization}` : ''}
+              </option>
+            ))}
+          </select>
+          {minion && (
+            <label className="flex items-center gap-1 text-sm">
+              <span className="caps text-muted-foreground">Minions</span>
+              <input
+                className="w-12 rounded border px-1"
+                type="number"
+                min={1}
+                max={8}
+                value={count}
+                onChange={e => setCount(Math.max(1, Math.min(8, Number(e.target.value) || 1)))}
+                aria-label="Minions in the squad"
+              />
+            </label>
+          )}
+          <Button
+            type="button"
+            size="sm"
+            disabled={addition.pending}
+            onClick={() =>
+              void addition.run(
+                commandId =>
+                  invoke({
+                    campaignId,
+                    operation: minion ? 'squad.add' : 'foe.add',
+                    arguments: minion
+                      ? { definition: selected.definitionId, count }
+                      : { definition: selected.definitionId },
+                    commandId,
+                  }),
+                JSON.stringify(['foes.add', campaignId, selected.definitionId, count]),
+              )
+            }
+          >
+            {addition.pending ? 'Adding…' : minion ? 'Add squad' : 'Add foe'}
+          </Button>
+        </div>
       ) : (
         <p role="status" className="text-sm text-muted-foreground">
-          Loading available foe…
+          Loading available foes…
         </p>
       )}
     </div>

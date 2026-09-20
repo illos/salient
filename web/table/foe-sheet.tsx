@@ -32,7 +32,7 @@ export type Foe = Roster['foes'][number];
 
 const CONDITION_NAMES = (conditions as { conditions: { id: string; name: string }[] }).conditions;
 
-export function actorRef(kind: 'character' | 'foe', id: string) {
+export function actorRef(kind: 'character' | 'foe' | 'squad', id: string) {
   return `@{${kind}:${id}}`;
 }
 
@@ -224,12 +224,15 @@ export function FoeStatBlock({
 export function FoeSheet({
   campaignId,
   foe,
+  squadName,
   running,
   abilitiesAllowed,
   mayTarget,
 }: {
   campaignId: Id<'campaigns'>;
   foe: Foe;
+  /** V02: set for a squad minion; its Stamina is the squad's pool and it is removed with the squad. */
+  squadName?: string;
   running: boolean;
   abilitiesAllowed: boolean;
   mayTarget: boolean;
@@ -263,7 +266,13 @@ export function FoeSheet({
           />
         )}
       </header>
-      {health.mode === 'director' && (
+      {squadName && (
+        <p className="m-0 text-sm text-muted-foreground" data-squad-member-note>
+          Minion of <strong>{squadName}</strong>: damage goes to the squad's shared pool and the
+          squad card shows it; this minion leaves with its squad or when the pool drops it.
+        </p>
+      )}
+      {health.mode === 'director' && !squadName && (
         <div className="flex flex-col gap-1.5">
           <div className="flex items-center gap-3">
             <HealthBar
@@ -326,29 +335,31 @@ export function FoeSheet({
           <CoreSource source={source.text} title={source.name} />
         </section>
       )}
-      <div className="flex flex-col items-start gap-1">
-        <Button
-          type="button"
-          variant="ghost"
-          size="sm"
-          disabled={deletion.pending}
-          onClick={() =>
-            void deletion.run(
-              commandId =>
-                remove({
-                  campaignId,
-                  operation: 'foe.remove',
-                  actor: { refKind: 'foe', id: foe.id },
-                  arguments: {},
-                  commandId,
-                }),
-              JSON.stringify(['foes.remove', campaignId, foe.id]),
-            )
-          }
-        >
-          Remove
-        </Button>
-      </div>
+      {!squadName && (
+        <div className="flex flex-col items-start gap-1">
+          <Button
+            type="button"
+            variant="ghost"
+            size="sm"
+            disabled={deletion.pending}
+            onClick={() =>
+              void deletion.run(
+                commandId =>
+                  remove({
+                    campaignId,
+                    operation: 'foe.remove',
+                    actor: { refKind: 'foe', id: foe.id },
+                    arguments: {},
+                    commandId,
+                  }),
+                JSON.stringify(['foes.remove', campaignId, foe.id]),
+              )
+            }
+          >
+            Remove
+          </Button>
+        </div>
+      )}
     </article>
   );
 }

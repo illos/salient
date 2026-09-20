@@ -9,7 +9,7 @@
  * #monster-visibility-and-health-display, #confirmed-combat-layout (2026-09-15 decisions:
  * identical compact cards, drill-in, settings pop-up), #roster-targeting-controls.
  */
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useMutation, useQuery } from 'convex/react';
 import { PlusIcon, SettingsIcon } from 'lucide-react';
 import { api } from '../../convex/_generated/api';
@@ -32,6 +32,7 @@ import {
 import { RosterCard, turnStateOf, type CardHealth } from './roster-card';
 import { RosterSection } from './roster-section';
 import { SettingsPopup } from './settings-popup';
+import { SquadCard, SquadSheet } from './squad-sheet';
 
 export {
   AdjustAction,
@@ -116,46 +117,140 @@ function FoeCard({
   );
 }
 
-/** Input-like select plus an ink square button (session-free-play-director.png add row). */
-function AddFoe({ campaignId, running }: { campaignId: Id<'campaigns'>; running: boolean }) {
-  const catalog = useQuery(api.foes.catalog, { campaignId });
+/**
+ * The add control: every seeded stat block (V02), grouped by monster family. A Minion stat block
+ * adds a squad with a count from 1 to 8 (default 4) and an optional captain among the loaded
+ * non-minion foes; anything else adds an ordinary foe. Same operations as /foe add and /squad add.
+ */
+function AddFoe({
+  campaignId,
+  running,
+  roster,
+}: {
+  campaignId: Id<'campaigns'>;
+  running: boolean;
+  roster: Roster;
+}) {
+  const definitions = useQuery(api.foes.definitions, { campaignId });
   const add = useMutation(api.commands.invoke);
   const addition = useCommand();
-  if (!catalog) return null;
+  const [definitionId, setDefinitionId] = useState<string>('');
+  const [count, setCount] = useState(4);
+  const [captain, setCaptain] = useState<string>('');
+  if (!definitions) return null;
+  const selected =
+    definitions.find(d => d.definitionId === definitionId) ??
+    definitions.find(d => d.definitionId.endsWith('goblin-warrior')) ??
+    definitions[0];
+  if (!selected) return null;
+  const minion = selected.organization === 'Minion';
+  const groups = new Map<string, typeof definitions>();
+  for (const d of definitions) {
+    const key = d.group ?? 'other';
+    groups.set(key, [...(groups.get(key) ?? []), d]);
+  }
+  const captainIds = new Set(roster.squads.map(s => s.captain?.id).filter(Boolean) as string[]);
+  const captains = roster.foes.filter(
+    f => !f.squadId && !f.slain && !captainIds.has(f.id) && f.summary?.role !== 'Mount',
+  );
+  const submit = () =>
+    void addition.run(
+      commandId =>
+        add({
+          campaignId,
+          operation: minion ? 'squad.add' : 'foe.add',
+          arguments: minion
+            ? {
+                definition: selected.definitionId,
+                count,
+                ...(captain ? { captain: { refKind: 'foe', id: captain } } : {}),
+              }
+            : { definition: selected.definitionId },
+          commandId,
+        }),
+      JSON.stringify(['foes.add', campaignId, selected.definitionId, count, captain]),
+    );
   return (
     <div className="flex flex-col gap-1">
       <div className="flex items-stretch gap-2">
         <select
           className="native-select h-9 min-w-0 flex-1 bg-muted"
           aria-label="Foe to add"
-          value={catalog.definitionId}
-          onChange={() => undefined}
+          value={selected.definitionId}
+          onChange={e => setDefinitionId(e.target.value)}
         >
-          <option value={catalog.definitionId}>{catalog.name}</option>
+          {[...groups.entries()].map(([group, list]) => (
+            <optgroup key={group} label={group.replace(/-/g, ' ')}>
+              {list.map(d => (
+                <option key={d.definitionId} value={d.definitionId}>
+                  {d.name}
+                  {d.organization ? ` · ${d.organization}` : ''}
+                  {d.level !== null ? ` L${d.level}` : ''}
+                </option>
+              ))}
+            </optgroup>
+          ))}
         </select>
         <Button
           type="button"
           variant="secondary"
           size="icon-lg"
-          aria-label="Add foe"
-          title={`Add ${catalog.name}`}
+          aria-label={minion ? 'Add squad' : 'Add foe'}
+          title={minion ? `Add a squad of ${count} × ${selected.name}` : `Add ${selected.name}`}
           disabled={addition.pending || !running}
-          onClick={() =>
-            void addition.run(
-              commandId =>
-                add({
-                  campaignId,
-                  operation: 'foe.add',
-                  arguments: { definition: catalog.definitionId },
-                  commandId,
-                }),
-              JSON.stringify(['foes.add', campaignId, catalog.definitionId]),
-            )
-          }
+          onClick={submit}
         >
           <PlusIcon aria-hidden />
         </Button>
       </div>
+      {minion && (
+        <div className="flex flex-wrap items-center gap-2 text-xs" data-squad-add>
+          <span className="caps text-muted-foreground">Squad</span>
+          <Button
+            type="button"
+            size="sm"
+            variant="outline"
+            aria-label="Fewer minions"
+            disabled={count <= 1}
+            onClick={() => setCount(c => Math.max(1, c - 1))}
+          >
+            −
+          </Button>
+          <span className="tabular-nums" aria-live="polite">
+            {count} minion{count === 1 ? '' : 's'}
+            {selected.stamina !== null ? ` · pool ${count * selected.stamina}` : ''}
+          </span>
+          <Button
+            type="button"
+            size="sm"
+            variant="outline"
+            aria-label="More minions"
+            disabled={count >= 8}
+            onClick={() => setCount(c => Math.min(8, c + 1))}
+          >
+            +
+          </Button>
+          <label className="flex items-center gap-1">
+            <span className="caps text-muted-foreground">Captain</span>
+            <select
+              className="native-select"
+              value={captain}
+              onChange={e => setCaptain(e.target.value)}
+              aria-label="Captain for the new squad"
+            >
+              <option value="">None</option>
+              {captains.map(f => (
+                <option key={f.id} value={f.id}>
+                  {f.name}
+                </option>
+              ))}
+            </select>
+          </label>
+          {selected.withCaptain && (
+            <span className="text-muted-foreground">With Captain: {selected.withCaptain}</span>
+          )}
+        </div>
+      )}
     </div>
   );
 }
@@ -250,6 +345,7 @@ export function DirectorPane({
   const [voiding, setVoiding] = useState<Id<'encounters'> | null>(null);
   const [settingsOpen, setSettingsOpen] = useState(false);
   const foesById = new Map(roster.foes.map(foe => [foe.id as string, foe]));
+  const openDetail = useRef<((id: string, name: string) => void) | null>(null);
   return (
     <div className="flex flex-col gap-4">
       <PaneHeading
@@ -291,11 +387,26 @@ export function DirectorPane({
       <RosterSection
         label="Foes"
         renderDetail={id => {
+          const squad = roster.squads.find(s => s.id === id);
+          if (squad)
+            return (
+              <SquadSheet
+                campaignId={campaignId}
+                squad={squad}
+                members={roster.foes.filter(foe => foe.squadId === squad.id)}
+                roster={roster}
+                running={running}
+                onOpenMember={foe => openDetail.current?.(foe.id, foe.name)}
+              />
+            );
           const foe = foesById.get(id);
           return foe ? (
             <FoeSheet
               campaignId={campaignId}
               foe={foe}
+              squadName={
+                foe.squadId ? roster.squads.find(s => s.id === foe.squadId)?.name : undefined
+              }
               running={running}
               abilitiesAllowed={abilitiesAllowed}
               mayTarget={mayTarget && running}
@@ -305,56 +416,75 @@ export function DirectorPane({
           );
         }}
       >
-        {open => (
-          <div className="flex flex-col gap-4">
-            {director && <AddFoe campaignId={campaignId} running={running} />}
-            {director && running && !encounter && (
-              <EncounterReady campaignId={campaignId} foes={roster.foes} />
-            )}
-            {director && encounter?.status === 'committed' && (
-              <div className="flex flex-wrap items-center gap-2">
-                {running && encounter.phase !== 'closeout' && (
-                  <CommandButton
+        {open => {
+          openDetail.current = open;
+          return (
+            <div className="flex flex-col gap-4">
+              {director && <AddFoe campaignId={campaignId} running={running} roster={roster} />}
+              {director && running && !encounter && (
+                <EncounterReady campaignId={campaignId} foes={roster.foes} />
+              )}
+              {director && encounter?.status === 'committed' && (
+                <div className="flex flex-wrap items-center gap-2">
+                  {running && encounter.phase !== 'closeout' && (
+                    <CommandButton
+                      campaignId={campaignId}
+                      text={`/combat end encounter=${encounter.id}`}
+                      label="End combat"
+                      variant="default"
+                    />
+                  )}
+                  <Button variant="outline" size="sm" onClick={() => setVoiding(encounter.id)}>
+                    Void combat
+                  </Button>
+                  {voiding === encounter.id && (
+                    <VoidCard
+                      key={encounter.id}
+                      campaignId={campaignId}
+                      encounterId={encounter.id}
+                      paused={!running}
+                      onCancel={() => setVoiding(null)}
+                      onDone={() => setVoiding(null)}
+                    />
+                  )}
+                </div>
+              )}
+              {roster.foes.length === 0 && roster.squads.length === 0 && (
+                <p className="m-0 text-sm text-muted-foreground">No foes are loaded.</p>
+              )}
+              <ul className="m-0 list-none p-0">
+                {roster.squads.map(squad => (
+                  <SquadCard
+                    key={squad.id}
                     campaignId={campaignId}
-                    text={`/combat end encounter=${encounter.id}`}
-                    label="End combat"
-                    variant="default"
+                    squad={squad}
+                    members={roster.foes.filter(foe => foe.squadId === squad.id)}
+                    director={director}
+                    encounter={encounter}
+                    running={running}
+                    mayTarget={mayTarget}
+                    onOpen={director ? () => open(squad.id, squad.name) : undefined}
+                    onOpenMember={director ? foe => open(foe.id, foe.name) : undefined}
                   />
-                )}
-                <Button variant="outline" size="sm" onClick={() => setVoiding(encounter.id)}>
-                  Void combat
-                </Button>
-                {voiding === encounter.id && (
-                  <VoidCard
-                    key={encounter.id}
-                    campaignId={campaignId}
-                    encounterId={encounter.id}
-                    paused={!running}
-                    onCancel={() => setVoiding(null)}
-                    onDone={() => setVoiding(null)}
-                  />
-                )}
-              </div>
-            )}
-            {roster.foes.length === 0 && (
-              <p className="m-0 text-sm text-muted-foreground">No foes are loaded.</p>
-            )}
-            <ul className="m-0 list-none p-0">
-              {roster.foes.map(foe => (
-                <FoeCard
-                  key={foe.id}
-                  campaignId={campaignId}
-                  foe={foe}
-                  director={director}
-                  encounter={encounter}
-                  running={running}
-                  mayTarget={mayTarget}
-                  onOpen={director ? () => open(foe.id, foe.name) : undefined}
-                />
-              ))}
-            </ul>
-          </div>
-        )}
+                ))}
+                {roster.foes
+                  .filter(foe => !foe.squadId)
+                  .map(foe => (
+                    <FoeCard
+                      key={foe.id}
+                      campaignId={campaignId}
+                      foe={foe}
+                      director={director}
+                      encounter={encounter}
+                      running={running}
+                      mayTarget={mayTarget}
+                      onOpen={director ? () => open(foe.id, foe.name) : undefined}
+                    />
+                  ))}
+              </ul>
+            </div>
+          );
+        }}
       </RosterSection>
     </div>
   );

@@ -90,7 +90,7 @@ export function CommandButton({
   );
 }
 
-function ref(actor: { kind: 'character' | 'foe'; id: string }) {
+function ref(actor: { kind: 'character' | 'foe' | 'squad'; id: string }) {
   return `@{${actor.kind}:${actor.id}}`;
 }
 

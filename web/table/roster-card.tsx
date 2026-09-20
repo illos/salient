@@ -22,7 +22,7 @@ import { HealthBar } from '../components/health-bar';
 import { useCommand } from '../ui';
 import type { Encounter } from './setup-card';
 
-export type RosterActor = { kind: 'character' | 'foe'; id: string; name: string };
+export type RosterActor = { kind: 'character' | 'foe' | 'squad'; id: string; name: string };
 export type CardState = 'idle' | 'acting' | 'spent' | 'slain' | 'away';
 
 const ref = (actor: { kind: string; id: string }) => `@{${actor.kind}:${actor.id}}`;

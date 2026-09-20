@@ -26,7 +26,7 @@ import { Badge } from '../components/ui/badge';
 import { Button } from '../components/ui/button';
 import { useCommand } from '../ui';
 
-type Actor = { kind: 'character' | 'foe'; id: string; name: string };
+type Actor = { kind: 'character' | 'foe' | 'squad'; id: string; name: string };
 type Sheet = FunctionReturnType<typeof api.abilities.sheet>;
 type AbilityView = Sheet['abilities'][number];
 type Results = FunctionReturnType<typeof api.abilities.results>;

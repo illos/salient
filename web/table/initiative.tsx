@@ -25,7 +25,7 @@ import { CommandButton, type Encounter } from './setup-card';
 type Group = Encounter['groups'][number];
 type Entry = Group['entries'][number];
 
-function ref(actor: { kind: 'character' | 'foe'; id: string }) {
+function ref(actor: { kind: 'character' | 'foe' | 'squad'; id: string }) {
   return `@{${actor.kind}:${actor.id}}`;
 }
 
@@ -40,10 +40,10 @@ export function TurnControls({
 }: {
   campaignId: Id<'campaigns'>;
   encounter: Encounter;
-  actor: { kind: 'character' | 'foe'; id: string; name: string };
+  actor: { kind: 'character' | 'foe' | 'squad'; id: string; name: string };
   running: boolean;
   entryId?: string;
-  onTurnTaken?: (actor: { kind: 'character' | 'foe'; id: string }) => void;
+  onTurnTaken?: (actor: { kind: 'character' | 'foe' | 'squad'; id: string }) => void;
 }) {
   if (encounter.phase !== 'turns' || !running) return null;
   const entries = encounter.groups.flatMap(g => g.entries).filter(e => e.actor.id === actor.id);
@@ -135,7 +135,7 @@ function EntryRow({
   entry: Entry;
   director: boolean;
   running: boolean;
-  onTurnTaken: (actor: { kind: 'character' | 'foe'; id: string }) => void;
+  onTurnTaken: (actor: { kind: 'character' | 'foe' | 'squad'; id: string }) => void;
 }) {
   return (
     <li
@@ -193,7 +193,7 @@ export function InitiativeGroups({
   encounter: Encounter;
   director: boolean;
   running: boolean;
-  onTurnTaken: (actor: { kind: 'character' | 'foe'; id: string }) => void;
+  onTurnTaken: (actor: { kind: 'character' | 'foe' | 'squad'; id: string }) => void;
 }) {
   if (encounter.status !== 'committed') return null;
   return (

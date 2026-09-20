@@ -395,7 +395,7 @@ export function LogPane({
   roster: Roster | undefined;
   encounter: Encounter | null | undefined;
   running: boolean;
-  onTurnTaken: (actor: { kind: 'character' | 'foe'; id: string }) => void;
+  onTurnTaken: (actor: { kind: 'character' | 'foe' | 'squad'; id: string }) => void;
   children?: React.ReactNode;
 }) {
   const [tab, setTab] = useState<LogTab>('log');

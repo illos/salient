@@ -47,7 +47,7 @@ function HeroCard({
   mayAct: boolean;
   current: boolean;
   onOpen?: () => void;
-  onTurnTaken: (actor: { kind: 'character' | 'foe'; id: string }) => void;
+  onTurnTaken: (actor: { kind: 'character' | 'foe' | 'squad'; id: string }) => void;
 }) {
   const facts = hero.facts;
   const live = hero.live;
@@ -152,7 +152,7 @@ export function HeroesPane({
   roster: Roster;
   encounter: Encounter | null;
   viewedHeroId: Id<'characters'> | null;
-  onTurnTaken: (actor: { kind: 'character' | 'foe'; id: string }) => void;
+  onTurnTaken: (actor: { kind: 'character' | 'foe' | 'squad'; id: string }) => void;
 }) {
   const director = roster.role === 'director';
   const observer = roster.role === 'observer';

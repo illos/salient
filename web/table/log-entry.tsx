@@ -28,7 +28,8 @@ import { AbilityCard, manualClausesOf, type AbilityResult } from './targeting';
 
 export type LogEvent = FunctionReturnType<typeof api.events.list>['events'][number];
 
-type BoundActor = { kind?: 'character' | 'foe'; id?: string; name?: string } | null | undefined;
+type BoundActor =
+  { kind?: 'character' | 'foe' | 'squad'; id?: string; name?: string } | null | undefined;
 
 /** The creature the command was issued for, when the envelope bound one. */
 export function boundActorOf(payload: unknown): BoundActor {
