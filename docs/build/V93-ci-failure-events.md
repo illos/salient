@@ -1,5 +1,7 @@
 # V93: CI reuse and failure events
 
+**Rules review:** not applicable (CI infrastructure). **Depends on:** none.
+
 ## Goal
 
 Reuse TESTER's passing gate when promoting main and deliver failures through events instead of
@@ -30,3 +32,7 @@ include the failing run and commit and reach a durable notification destination.
   intentionally without executing the application suite.
 - References: [workflow events](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows),
   [workflow security](https://docs.github.com/en/actions/reference/security/secure-use).
+
+- TESTER1145: focused notifier 6/6 and workflow YAML/security wiring passed on `eafbbf9`.
+- Review1146 fixes: manual fallback executes notifier regression tests; commit checking uses
+  `HEAD^..HEAD` on main and the build guide distinguishes local/promotion/manual gates.

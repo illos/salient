@@ -61,8 +61,9 @@ proof of logic; the [failure audit](audits/2026-09-20-browser-testing-failures.m
 
 `pnpm check` runs lint, engine typecheck and tests, the rules ingest, app typecheck and tests, link,
 vendor, content, supporting, foes and compiled-report checks, and the web build. TESTER's run of it
-must pass before hand-off. The commit checker runs in the commit hook and GitHub Actions, not in
-`pnpm check`. `pnpm format` applies Prettier (print width 100).
+must pass before hand-off. The commit checker runs in the local commit hook and DEPLOY2’s merge gate, not in
+`pnpm check`. The manually dispatched GitHub check also checks branch commits (the tip on main);
+promotion pushes reuse TESTER’s gate without starting Actions. `pnpm format` applies Prettier (print width 100).
 
 ## Commit format
 
