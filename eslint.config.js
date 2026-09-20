@@ -37,6 +37,12 @@ export default tseslint.config(
     },
   },
   {
+    // GitHub's github-script loader and node:test helper use CommonJS.
+    files: ['.github/scripts/*.cjs'],
+    languageOptions: { sourceType: 'commonjs', globals: globals.node },
+    rules: { '@typescript-eslint/no-require-imports': 'off' },
+  },
+  {
     // The retained 2026-09-10 engine experiment validates untyped JSON with `any`; it is historical.
     files: ['src/**/*.ts'],
     rules: { '@typescript-eslint/no-explicit-any': 'off' },

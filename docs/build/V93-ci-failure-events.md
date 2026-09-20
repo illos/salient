@@ -48,3 +48,8 @@ include the failing run and commit and reach a durable notification destination.
 - Probe issue cleanup returned HTTP403 (`Resource not accessible by personal access token`).
   The clearly labeled delivery-probe issue remains open; delivery itself passed. Email/inbox
   receipt and T3 wake are not claimed. No cloud runtime deployment was needed.
+
+- TESTER1160 caught seven CommonJS lint errors during V75 integration. Added a scoped Node
+  CommonJS override for `.github/scripts/*.cjs`; application lint rules remain unchanged.
+- WIZARD1166 review passed. TESTER1167: `CI=true pnpm lint` passed (16.9s) on `ac29a43`,
+  covering repository ESLint and Prettier. Evidence: `test-artifacts/V93-ac29a43`.
