@@ -76,11 +76,15 @@ general condition engine and it does not automate any condition's consequences.
   instance is recorded with no registration and the log says the save is unscheduled.
 - **Automatic saving throw.** Replace the Q-TS-1 stub for `saving-throw` work in
   `convex/lib/clock.ts` with the V1 producer for ability-sourced instances: draw one d10 from the
-  campaign dice stream (`convex/lib/dice.ts`), record the die on the clock event, end the instance on
-  6 or higher (retire the registration; turn the toggle off unless a manual toggle or another instance
-  of the same condition remains), keep it on a lower roll, and describe both outcomes in the log with
-  the instance's source. The failed-save hero-token follow-up stays manual and is named as such in the
-  failure line; no token pool exists.
+  campaign dice stream (`convex/lib/dice.ts`), record the die on the clock event, end the instance
+  when the die meets the creature's saving-throw threshold (retire the registration; turn the toggle
+  off unless a manual toggle or another instance of the same condition remains), keep it on a lower
+  roll, and describe both outcomes in the log with the instance's source. The threshold is the printed
+  6 for foes and for any creature without an evaluated build; for an admitted hero it is the already
+  evaluated `DerivedBaseline.savingThrowThreshold` (default 6, lowered by evaluated traits such as
+  Otherworldly Grace with their recorded provenance). Record the threshold used and its source on the
+  clock outcome. No new trait parsing, no foe trait automation. The failed-save hero-token follow-up
+  stays manual and is named as such in the failure line; no token pool exists.
 - **Manual controls stay coherent.** `condition.off` on a creature with active instances of that
   condition ends those instances and retires their registrations, logging which sources ended.
   `condition.on` remains a manual toggle and is not confused with an instance.
@@ -179,10 +183,13 @@ general condition engine and it does not automate any condition's consequences.
    instance, toggle unchanged, no registration, log states resisted; the hero's score is visible to
    the Director and to that hero's controller only.
 7. **Automatic save.** Ending the affected hero's turn rolls one d10 from the campaign stream and
-   logs it. With a die of 6 or more the instance ends, the registration retires and the toggle is
-   off; with 5 or less the instance and registration remain and the failure line names the manual
-   hero-token follow-up. Both branches are proven with disclosed dice-stream positioning in
-   `tests/app` and at least one branch with real dice in the headless proof.
+   logs it with the threshold used and its source. With a die at or above the threshold the instance
+   ends, the registration retires and the toggle is off; below it the instance and registration
+   remain and the failure line names the manual hero-token follow-up. Both branches are proven with
+   disclosed dice-stream positioning in `tests/app` and at least one branch with real dice in the
+   headless proof. A pure or persisted case with an evaluated hero whose threshold is 5 shows a die
+   of 5 succeeding for that hero and failing for a foe at the printed 6; the source of each threshold
+   is read back.
 8. **Undo and redo.** Undoing the turn end restores the instance, registration and toggle exactly;
    redo reapplies the recorded save without a new roll.
 9. **Manual coherence.** `condition.off bleeding` on a hero with an active instance ends the
@@ -279,7 +286,10 @@ seeded stat block before running, records them in the design, and uses no name-b
 The committed V64 audit was generated before the V82 ancestry content landed, so the corpus differs
 from current content. V88 compares the current baseline grammar against the changed grammar on the
 same current corpus and records the earlier content drift separately in the evidence, so the "only
-bounded potency rows moved" claim in check 1 is made against a like-for-like corpus.
+bounded potency rows moved" claim in check 1 is made against a like-for-like corpus. The stricter
+second-and-last-clause rule also demotes clauses the V26 audit labeled bounded although a third
+clause followed them; list those demotions beside the promotions in the evidence. Correct labeling
+wins over preserving an unsafe baseline label, and a demoted clause stays Unsupported at runtime.
 
 ## Rules research
 
@@ -335,3 +345,12 @@ V88 grammar. Confirmed: it joins the live inventory with its own design (WD1–W
 hero symbolic-potency ability; Ray stays compile-only. Live compiled total becomes nine (V72's seven
 plus Eye of Surlach and The Wode Defends); compiled-but-unavailable six. The audit comparison runs on
 the same current corpus with prior content drift recorded separately.
+
+### 2026-09-20 — Saving-throw threshold and audit demotions clarified
+
+Astra ENGINE (Chords 864) noted that `DerivedBaseline.savingThrowThreshold` already exists with
+trait provenance (for example Otherworldly Grace lowers it to 5) and that a fixed 6 would regress an
+evaluated hero once saves become automatic. Confirmed: admitted heroes use their evaluated threshold,
+foes and unevaluated creatures use the printed 6, the threshold and its source are recorded on the
+clock outcome, and no new trait parsing is added. Also confirmed that the stricter clause-position
+rule may demote clauses the V26 audit mislabeled as bounded; demotions are listed beside promotions.
