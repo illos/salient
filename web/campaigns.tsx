@@ -24,11 +24,7 @@ export function CampaignsPage() {
   return (
     <>
       <div className="mb-8 pb-5">
-        <Eyebrow>Your adventures</Eyebrow>
         <h1>Campaigns</h1>
-        <p className="mt-1 text-muted-foreground">
-          Prepare a session. Gather your players. Make your story.
-        </p>
       </div>
       <div className="grid grid-cols-[minmax(0,1fr)_340px] items-start gap-8">
         <section className="flex flex-col gap-8">
@@ -97,10 +93,7 @@ export function CampaignsPage() {
         <aside className="flex flex-col gap-6">
           <Card>
             <CardContent className="flex flex-col gap-4">
-              <div>
-                <h2>Create a campaign</h2>
-                <p className="text-sm text-muted-foreground">You’ll be its Director.</p>
-              </div>
+              <h2>Create a campaign</h2>
               <form
                 className="flex flex-col gap-4"
                 onSubmit={async e => {
