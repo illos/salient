@@ -40,3 +40,6 @@ Rules:
 | 2026-09-20 | V72 | Compiled effect cards remain legible on desktop/mobile; source links, subtotal/missing-fact labels and occurrence buttons display correctly through correction/rewind | new | spot | [V72 headless plan and progress](V72-live-compiled-effects.md) | |
 | 2026-09-20 | V83 | Perk/kit action cards appear in the appropriate groups, keep source conditions/costs readable, and display manual activity timing without implying automated effects | `tests/browser/wizard.spec.ts` | later | V83 public supporting action/choice scenarios | |
 | 2026-09-20 | V84 | Culture selector groups ancestral/professional/bespoke choices; summaries, editable aspects and focus remain coherent after preset replacement or customization | `tests/browser/wizard.spec.ts` | later | V84 all27 public saved preset witnesses and shared-transition tests | |
+
+| V85 | Complication prose/alternate action cards, selected-trait conditions and eligibility messages | Shared API source matrix and table costs/Victory proof precede visual spot check | Deferred under moratorium |
+| V86 | Starting reward panel, legacy initialize control, pending Director review without private reward query, and item action cards | Owner/Director API, one-time award and item possession/action proof | Deferred under moratorium |

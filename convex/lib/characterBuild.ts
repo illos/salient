@@ -1,3 +1,4 @@
+import { makeStartingRewards } from '../../shared/contracts/startingRewards';
 // SPDX-License-Identifier: GPL-3.0-only
 /**
  * The application's entry to the R02 evaluator: the pinned R01 definitions and the conversion of a
@@ -166,6 +167,8 @@ export async function activateRevision(
   const firstAdmission = character.liveState === null;
   if (firstAdmission) {
     patch.liveState = initialHeroLive(baseline, revision._id, evaluation.evaluatedAgainst, now);
+    if (!character.startingRewards)
+      patch.startingRewards = makeStartingRewards(baseline, revision._id, now);
     patch.entryLevelXpOffset = ((revision.level ?? baseline.level.value) - 1) * 16;
   } else if (character.liveState) {
     const live = character.liveState;

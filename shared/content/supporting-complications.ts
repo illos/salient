@@ -3,6 +3,7 @@
  * Evidence: docs/research/v37-complications.md and .json. No Forge factory defaults are rules.
  */
 import complicationSource from './compendium/complication.json' with { type: 'json' };
+import { COMPLICATION_ABILITIES } from './supporting-complication-abilities.ts';
 import type { Decision, DecisionDefinitions, DecisionOption } from '../evaluate/definitions.ts';
 
 export interface ComplicationSelectionEffect {
@@ -998,11 +999,13 @@ export const COMPLICATION_EFFECTS: Record<string, ComplicationEffect> = Object.f
       fullText: record.text,
       fixedSkills: [],
       permanentModifiers: [],
-      grantedAbilities: [],
       conditionalText: '',
       initialStateIntents: [],
       selectionEffects: [],
       ...AUTHORED_EFFECTS[record.name],
+      grantedAbilities: COMPLICATION_ABILITIES.filter(
+        ability => ability.complication === record.name && !ability.selectedTrait,
+      ).map(ability => ability.name),
     },
   ]),
 );
@@ -4457,6 +4460,21 @@ export function extendComplicationDefinitions(defs: DecisionDefinitions): Decisi
     value: record.name,
     source: sourceFor(record.name),
     supportedInV001: true,
+    ...(record.name === 'Gnoll-Mauled'
+      ? {
+          excludesFeatures: ['Unstoppable Mind'],
+          unavailableReason: 'Cannot be taken by a hero who cannot be made dazed.',
+        }
+      : {}),
+    ...(record.name === 'Slight Case of Lycanthropy'
+      ? {
+          excludedWhen: [
+            { decision: 'class.choice', value: 'Fury' },
+            { decision: 'class.fury.aspect', value: 'Stormwight' },
+          ],
+          unavailableReason: 'Cannot be taken by a fury with the stormwight primordial aspect.',
+        }
+      : {}),
     grants: COMPLICATION_EFFECTS[record.name].fixedSkills.map(value => ({
       kind: 'skill',
       value,

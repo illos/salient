@@ -1,11 +1,26 @@
 # Campaign inventory and loot
 
 Version 0.19 — consolidated specification checkpoint, 2026-09-11. Specification only; no implementation
-(still true 2026-09-14: `convex/` has no inventory tables or operations).
+General inventory remains unimplemented. V86 adds the bounded starting-award record described below.
 
 This records confirmed inventory direction separately from proposed loot flows and unresolved mechanics.
 Related specifications: [table](table-spec.md), [characters](character-wizard-spec.md),
 [access](accounts-and-access-spec.md), and [data](data-architecture-spec.md).
+
+## Starting awards — V86
+
+Starting possessions and initial Wealth, Renown and project points are recorded once at first
+campaign admission, from the reviewed build. They are independent of subsequent build edits and
+restoration; those operations never mint another award. Existing admitted characters can explicitly
+initialize from their original admission revision through the same owner/Director API used by the
+sheet. Missing origin data blocks reconstruction rather than guessing from the latest career.
+
+Possessions retain source and identity. Broken treasures include their repair project source;
+absent artifacts and private inheritance placeholders remain unavailable. Fixed sourced possessions
+such as a power pack or map fragment need no invented catalog treasure. Possessed first-echelon
+trinkets and level-one weapons expose their granted manual actions, retaining wear/hold/use conditions.
+No automatic equipment modifiers, repairs, secret-trinket activation, project spending or general
+inventory transfer/stash workflow is implied. See [V86](build/V86-starting-rewards.md).
 
 ## Pre-alpha scope
 

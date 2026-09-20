@@ -206,7 +206,7 @@ export function poolOf(
   definitions: DecisionDefinitions,
 ): { values: string[]; parent?: OptionsByParentEntry; parentValue?: string } {
   let pool = basePoolOf(decision, selections, definitions);
-  if (decision.options?.some(option => option.requiresFeature)) {
+  if (decision.options?.some(option => option.requiresFeature || option.excludesFeatures?.length)) {
     const index = indexDecisions(definitions);
     const features = new Set<string>();
     for (const candidate of index.values()) {
@@ -220,15 +220,32 @@ export function poolOf(
               item => candidate.options?.find(option => option.value === item)?.grants ?? [],
             );
       for (const grant of grants) features.add(grant.value);
+      if (candidate.id.startsWith('ancestry.') && candidate.id.endsWith('.purchased-traits'))
+        for (const item of selected)
+          if (typeof item === 'string' && candidate.options?.some(option => option.value === item))
+            features.add(item);
     }
     pool = {
       ...pool,
       values: pool.values.filter(value => {
-        const required = decision.options?.find(option => option.value === value)?.requiresFeature;
-        return !required || features.has(required);
+        const option = decision.options?.find(option => option.value === value);
+        return (
+          (!option?.requiresFeature || features.has(option.requiresFeature)) &&
+          !option?.excludesFeatures?.some(feature => features.has(feature))
+        );
       }),
     };
   }
+  pool = {
+    ...pool,
+    values: pool.values.filter(value => {
+      const excluded = decision.options?.find(option => option.value === value)?.excludedWhen;
+      return (
+        !excluded?.length ||
+        !excluded.every(condition => selections[condition.decision] === condition.value)
+      );
+    }),
+  };
   if (decision.selectedPool) {
     const selected = selections[decision.selectedPool.decision];
     const values = Array.isArray(selected) ? selected : [selected];

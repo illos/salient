@@ -330,6 +330,12 @@ values and controls retain their behavior.
   default marks the culture Bespoke without clearing its other choices. Professional cultures
   leave language freely selectable. Existing saved cultures need no preset or migration. See
   [V84](build/V84-culture-presets.md) for source tables and naming discrepancies.
+- Starting rewards persist once from the complete, first-admitted build: Wealth, Renown,
+  project points and sourced initial possessions. Subsequent career/complication changes and
+  restoration retain that award without regranting it. The sheet and authenticated API share
+  this record; older characters initialize from their original admission revision. Broken,
+  absent and privately selected items keep their source restrictions. See
+  [starting awards](inventory-spec.md#starting-awards--v86).
 - The main wizard provides access to all levels and their applicable options; it is not limited to level 1 or
   the currently unlocked level-up prompts.
 - Available options and resulting grants depend on previous choices and progression. The model must handle

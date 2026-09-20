@@ -1,3 +1,12 @@
+import {
+  startingItemAbilities,
+  startingItemAbilitySource,
+} from '../../shared/evaluate/startingItemAbilities';
+import {
+  complicationAbilities,
+  complicationAbilitySource,
+  complicationAbilityMetadata,
+} from '../../shared/evaluate/complicationAbilities';
 import { perkAbilities, perkAbilitySource } from '../../shared/evaluate/perkAbilities';
 import {
   extractEmbeddedAbility,
@@ -491,14 +500,88 @@ export async function abilitiesFor(
   const granted: AbilityDefinition[] = [];
   if (actor.kind === 'character') {
     const baseline = records.character ? baselineOf(records.character.derivedBaseline) : null;
-    for (const grant of perkAbilities(
-      baseline?.perks ?? [],
-      ancestryAbilities(
-        baseline?.traits ?? [],
-        baseline?.abilities ?? [],
-        records.character?.activeRune?.kind ?? null,
+    for (const grant of [
+      ...startingItemAbilities(records.character?.startingRewards),
+      ...complicationAbilities(
+        baseline?.features ?? [],
+        perkAbilities(
+          baseline?.perks ?? [],
+          ancestryAbilities(
+            baseline?.traits ?? [],
+            baseline?.abilities ?? [],
+            records.character?.activeRune?.kind ?? null,
+          ),
+        ),
       ),
-    )) {
+    ]) {
+      const complicationSource = complicationAbilitySource(grant);
+      if (
+        complicationSource?.complication === 'Dragon Dreams' &&
+        (records.character?.liveState?.victories ?? 0) < 5
+      )
+        continue;
+      if (complicationSource?.sourcePath.includes('/feature/ability/')) {
+        const contentId = manifest.entries.find(
+          e => e.sourcePath === `vendor/steel-compendium/${grant.sourcePath}`,
+        )?.id;
+        const entry = contentId ? await findContent(ctx, contentId) : null;
+        if (entry) {
+          const definition = abilityFromEntry(entry, { kitBonusesIncluded: false });
+          if (grant.provenance.note === 'Grounded: also granted independently; ranged 5.')
+            definition.distance = 'Ranged 5';
+          granted.push(definition);
+          continue;
+        }
+      }
+      if (complicationSource) {
+        const metadata = complicationAbilityMetadata(complicationSource, grant);
+        const id = `complication:${complicationSource.complication}/${slug(grant.name)}`;
+        granted.push(
+          build({
+            abilityId: id,
+            contentId: id,
+            name: grant.name,
+            source: { path: grant.sourcePath, revision: grant.provenance.source.revision, id },
+            text: complicationSource.text,
+            usage: metadata.actionType ?? '',
+            keywords: metadata.keywords,
+            distance: metadata.distance ?? '',
+            target: metadata.target ?? '',
+            ...(metadata.cost
+              ? {
+                  cost:
+                    metadata.cost === 'All Heroic Resource'
+                      ? `${Math.max(0, records.character?.liveState?.heroicResource.current ?? 0)} ${records.character?.liveState?.heroicResource.name ?? 'HeroicResource'}`
+                      : metadata.cost,
+                }
+              : {}),
+            ...(metadata.effects ? { effects: metadata.effects } : {}),
+            kitBonusesIncluded: false,
+          }),
+        );
+        continue;
+      }
+      const itemSource = startingItemAbilitySource(grant);
+      if (itemSource) {
+        const id = `item:${slug(itemSource.item)}/${slug(grant.name)}`;
+        granted.push(
+          build({
+            abilityId: id,
+            contentId: id,
+            name: grant.name,
+            source: { path: grant.sourcePath, revision: grant.provenance.source.revision, id },
+            text: itemSource.quote,
+            usage: itemSource.actionType,
+            keywords: [],
+            distance: '',
+            target: '',
+            ...(itemSource.cost ? { cost: itemSource.cost } : {}),
+            effects: [{ label: 'Effect', text: itemSource.quote }],
+            kitBonusesIncluded: false,
+          }),
+        );
+        continue;
+      }
       const contentId = manifest.entries.find(
         e => e.sourcePath === `vendor/steel-compendium/${grant.sourcePath}`,
       )?.id;

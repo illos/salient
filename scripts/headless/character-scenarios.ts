@@ -1,3 +1,6 @@
+import { runComplicationActions } from './complication-actions.ts';
+import { runStartingItems } from './starting-items.ts';
+import { runStartingRewards } from './starting-rewards.ts';
 import { runCulturePresets } from './culture-presets.ts';
 import { runSupportingActions } from './supporting-actions.ts';
 // SPDX-License-Identifier: GPL-3.0-only
@@ -513,4 +516,7 @@ export async function runScenarios(context: ScenarioContext) {
   await runRemainingAncestries(context);
   await runSupportingActions(context);
   await runCulturePresets(context);
+  await runComplicationActions(context);
+  await runStartingRewards(context);
+  await runStartingItems(context);
 }

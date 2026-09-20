@@ -1,3 +1,12 @@
+import {
+  startingItemAbilities,
+  startingItemAbilitySource,
+} from '../shared/evaluate/startingItemAbilities';
+import {
+  complicationAbilities,
+  complicationAbilitySource,
+  complicationAbilityMetadata,
+} from '../shared/evaluate/complicationAbilities';
 import { perkAbilities, perkAbilitySource } from '../shared/evaluate/perkAbilities';
 import { extractEmbeddedAbility } from '../shared/resolve/embeddedAbility';
 import { ancestryAbilities, ancestryAbilitySource } from '../shared/evaluate/ancestryAbilities';
@@ -646,25 +655,29 @@ async function abilityView(
 ): Promise<SheetAbility> {
   const row = await contentFor(ctx, ability.sourcePath);
   const perkSource = perkAbilitySource(ability);
+  const itemSource = startingItemAbilitySource(ability);
+  const complicationSource = complicationAbilitySource(ability);
   const traitAbility =
-    ancestryAbilitySource(ability) ?? (perkSource?.embedded ? undefined : perkSource);
+    ancestryAbilitySource(ability) ?? itemSource ?? (perkSource?.embedded ? undefined : perkSource);
   const embedded =
     row && (ability.kind === 'kit-signature' || perkSource?.embedded)
       ? extractEmbeddedAbility(row.text, ability.name)
       : null;
-  const metadata = traitAbility
-    ? {
-        keywords: [],
-        actionType: traitAbility.actionType,
-        ...(traitAbility.trigger ? { trigger: traitAbility.trigger } : {}),
-        effects: [{ label: 'Effect', text: traitAbility.quote }],
-        ...(perkSource?.cost ? { cost: perkSource.cost } : {}),
-      }
-    : embedded?.ok
-      ? embedded.metadata
-      : row && row.kind === 'ability'
-        ? metadataOf(row)
-        : { keywords: [] };
+  const metadata = complicationSource
+    ? complicationAbilityMetadata(complicationSource, ability)
+    : traitAbility
+      ? {
+          keywords: [],
+          actionType: traitAbility.actionType,
+          ...(traitAbility.trigger ? { trigger: traitAbility.trigger } : {}),
+          effects: [{ label: 'Effect', text: traitAbility.quote }],
+          ...(perkSource?.cost ? { cost: perkSource.cost } : {}),
+        }
+      : embedded?.ok
+        ? embedded.metadata
+        : row && row.kind === 'ability'
+          ? metadataOf(row)
+          : { keywords: [] };
   const { provenance, ...rest } = ability;
   const facts = { name: ability.name, keywords: metadata.keywords };
   const buildModifiers = metadata.roll
@@ -683,22 +696,30 @@ async function abilityView(
     : [];
   return {
     ...rest,
-    content: row
-      ? contentView(row)
-      : (() => {
-          const source = COMPLICATION_ABILITIES.find(
-            source => source.name === ability.name && source.sourcePath === ability.sourcePath,
-          );
-          return source
-            ? {
-                id: `supporting/${ability.name}`,
-                name: ability.name,
-                text: source.text,
-                sourcePath: source.sourcePath,
-                revision: ability.provenance.source.revision,
-              }
-            : null;
-        })(),
+    content: itemSource
+      ? {
+          id: `starting-item/${ability.name}`,
+          name: ability.name,
+          text: itemSource.quote,
+          sourcePath: itemSource.sourcePath,
+          revision: ability.provenance.source.revision,
+        }
+      : row
+        ? contentView(row)
+        : (() => {
+            const source = COMPLICATION_ABILITIES.find(
+              source => source.name === ability.name && source.sourcePath === ability.sourcePath,
+            );
+            return source
+              ? {
+                  id: `supporting/${ability.name}`,
+                  name: ability.name,
+                  text: source.text,
+                  sourcePath: source.sourcePath,
+                  revision: ability.provenance.source.revision,
+                }
+              : null;
+          })(),
     group: groupOf(metadata.actionType),
     metadata,
     ...(buildModifiers.length ? { buildModifiers } : {}),
@@ -865,14 +886,20 @@ export const sheet = query({
           }
         : null,
       abilities: await Promise.all(
-        perkAbilities(
-          granted?.perks ?? [],
-          ancestryAbilities(
-            granted?.traits ?? [],
-            granted?.abilities ?? [],
-            character.activeRune?.kind ?? null,
+        [
+          ...startingItemAbilities(character.startingRewards),
+          ...complicationAbilities(
+            granted?.features ?? [],
+            perkAbilities(
+              granted?.perks ?? [],
+              ancestryAbilities(
+                granted?.traits ?? [],
+                granted?.abilities ?? [],
+                character.activeRune?.kind ?? null,
+              ),
+            ),
           ),
-        ).map(a => abilityView(ctx, a, granted?.abilityModifiers)),
+        ].map(a => abilityView(ctx, a, granted?.abilityModifiers)),
       ),
       features: await Promise.all(
         [...(granted?.traits ?? []), ...(granted?.features ?? []), ...(granted?.perks ?? [])].map(

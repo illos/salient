@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-only
 import { defineTable } from 'convex/server';
 import { v } from 'convex/values';
+import { startingRewardsValidator } from './lib/startingRewards';
 
 export const authoredValidator = v.object({
   name: v.string(),
@@ -132,6 +133,7 @@ export const characterTables = {
     /** The campaign the character is attached to: set by admission, one at a time. */
     campaignId: v.union(v.id('campaigns'), v.null()),
     combatLocked: v.boolean(),
+    startingRewards: v.optional(startingRewardsValidator),
     /** Runic Carving is play state, independent of build choices and live resources. */
     activeRune: v.optional(
       v.object({

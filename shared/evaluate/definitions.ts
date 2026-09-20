@@ -27,6 +27,8 @@ export interface DecisionOption {
   cost?: number;
   costQuote?: string;
   requiresFeature?: string;
+  excludesFeatures?: string[];
+  excludedWhen?: { decision: string; value: string }[];
   unavailableReason?: string;
   abilityKind?: 'signature' | 'heroic';
   supportedInV001: boolean;

@@ -1,3 +1,4 @@
+import { StartingRewardsPanel } from './starting-rewards';
 // SPDX-License-Identifier: GPL-3.0-only
 /**
  * The character sheet (docs/character-sheet-spec.md), laid out after character-sheet.png (V21):
@@ -453,6 +454,9 @@ export function HeroSheetView({ sheet, compact }: { sheet: HeroSheet; compact?: 
                 <LanguageChips partial={partial} />
               </div>
               <DetailsRows sheet={sheet} partial={partial} />
+              {(sheet.audience === 'owner' || sheet.campaign) && (
+                <StartingRewardsPanel characterId={sheet.id} combatLocked={sheet.combatLocked} />
+              )}
               {sheet.audience === 'owner' && <NotesBox notes={sheet.authored.notes} compact />}
             </div>
           </SheetSection>
@@ -500,6 +504,9 @@ export function HeroSheetView({ sheet, compact }: { sheet: HeroSheet; compact?: 
           <SheetSection title="Languages" id="sheet-languages">
             <LanguageChips partial={partial} />
           </SheetSection>
+          {(sheet.audience === 'owner' || sheet.campaign) && (
+            <StartingRewardsPanel characterId={sheet.id} combatLocked={sheet.combatLocked} />
+          )}
           <SheetSection title="Details" id="sheet-details">
             <DetailsRows sheet={sheet} partial={partial} />
             {partial?.uncertainties?.length ? (
