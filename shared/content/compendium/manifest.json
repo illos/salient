@@ -11,8 +11,8 @@
     "version": "1.0.4"
   },
   "generatedAt": "2026-09-08",
-  "contentHash": "sha256:ea1f6a2cf1d3c8a30f5fa40aef52fdadc25aa97900648485c9fe5957a50cf43b",
-  "entryCount": 1182,
+  "contentHash": "sha256:b4e0d992e181c9bac991ca9487600fabeb1ce20a130781dc38128cdba0fa5035",
+  "entryCount": 1209,
   "selections": [
     {
       "id": "supporting-character-choices",
@@ -180,6 +180,16 @@
         "feature/ability/shadow/level-1"
       ],
       "basis": "docs/build/V92-shadow-level-one.md#scope: complete level-one Shadow."
+    },
+    {
+      "id": "tactician-level-one",
+      "description": "Tactician class, level-one features and abilities (all three doctrines). Readable alternatives do not imply wizard or execution support.",
+      "paths": [
+        "class/tactician.md",
+        "feature/tactician/level-1",
+        "feature/ability/tactician/level-1"
+      ],
+      "basis": "docs/build/V94-tactician-level-one.md#scope: complete level-one Tactician."
     },
     {
       "id": "kits",
@@ -834,6 +844,110 @@
       "file": "ability.json"
     },
     {
+      "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/advanced-tactics",
+      "kind": "ability",
+      "name": "Advanced Tactics",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-1/advanced-tactics.md",
+      "selection": "tactician-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/battle-cry",
+      "kind": "ability",
+      "name": "Battle Cry",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-1/battle-cry.md",
+      "selection": "tactician-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/concussive-strike",
+      "kind": "ability",
+      "name": "Concussive Strike",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-1/concussive-strike.md",
+      "selection": "tactician-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/hammer-and-anvil",
+      "kind": "ability",
+      "name": "Hammer and Anvil",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-1/hammer-and-anvil.md",
+      "selection": "tactician-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/inspiring-strike",
+      "kind": "ability",
+      "name": "Inspiring Strike",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-1/inspiring-strike.md",
+      "selection": "tactician-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/mark",
+      "kind": "ability",
+      "name": "Mark",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-1/mark.md",
+      "selection": "tactician-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/mind-game",
+      "kind": "ability",
+      "name": "Mind Game",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-1/mind-game.md",
+      "selection": "tactician-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/now",
+      "kind": "ability",
+      "name": "Now!",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-1/now.md",
+      "selection": "tactician-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/overwatch",
+      "kind": "ability",
+      "name": "Overwatch",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-1/overwatch.md",
+      "selection": "tactician-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/parry",
+      "kind": "ability",
+      "name": "Parry",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-1/parry.md",
+      "selection": "tactician-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/squad-forward",
+      "kind": "ability",
+      "name": "Squad! Forward!",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-1/squad-forward.md",
+      "selection": "tactician-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/strike-now",
+      "kind": "ability",
+      "name": "\"Strike Now!\"",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-1/strike-now.md",
+      "selection": "tactician-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/this-is-what-we-planned-for",
+      "kind": "ability",
+      "name": "This Is What We Planned For",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-1/this-is-what-we-planned-for.md",
+      "selection": "tactician-level-one",
+      "file": "ability.json"
+    },
+    {
       "id": "mcdm.heroes.v1/feature.ability.time-raider/concussive-slam",
       "kind": "ability",
       "name": "Concussive Slam",
@@ -1135,6 +1249,14 @@
       "name": "Shadow",
       "sourcePath": "vendor/steel-compendium/en/unified/md/class/shadow.md",
       "selection": "shadow-level-one",
+      "file": "class.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/class/tactician",
+      "kind": "class",
+      "name": "Tactician",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/class/tactician.md",
+      "selection": "tactician-level-one",
       "file": "class.json"
     },
     {
@@ -2927,6 +3049,110 @@
       "name": "Smoke Bomb",
       "sourcePath": "vendor/steel-compendium/en/unified/md/feature/shadow/level-1/smoke-bomb.md",
       "selection": "shadow-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.tactician.level-1/1st-level-doctrine-feature",
+      "kind": "feature",
+      "name": "1st-Level Doctrine Feature",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/tactician/level-1/1st-level-doctrine-feature.md",
+      "selection": "tactician-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.tactician.level-1/5-focus-ability",
+      "kind": "feature",
+      "name": "5-Focus Ability",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/tactician/level-1/5-focus-ability.md",
+      "selection": "tactician-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.tactician.level-1/commanding-presence",
+      "kind": "feature",
+      "name": "Commanding Presence",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/tactician/level-1/commanding-presence.md",
+      "selection": "tactician-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.tactician.level-1/covert-operations",
+      "kind": "feature",
+      "name": "Covert Operations",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/tactician/level-1/covert-operations.md",
+      "selection": "tactician-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.tactician.level-1/doctrine-triggered-action",
+      "kind": "feature",
+      "name": "Doctrine Triggered Action",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/tactician/level-1/doctrine-triggered-action.md",
+      "selection": "tactician-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.tactician.level-1/field-arsenal",
+      "kind": "feature",
+      "name": "Field Arsenal",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/tactician/level-1/field-arsenal.md",
+      "selection": "tactician-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.tactician.level-1/focus",
+      "kind": "feature",
+      "name": "Focus",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/tactician/level-1/focus.md",
+      "selection": "tactician-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.tactician.level-1/kit-signature-ability",
+      "kind": "feature",
+      "name": "Kit Signature Ability",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/tactician/level-1/kit-signature-ability.md",
+      "selection": "tactician-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.tactician.level-1/mark",
+      "kind": "feature",
+      "name": "Mark",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/tactician/level-1/mark.md",
+      "selection": "tactician-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.tactician.level-1/strike-now",
+      "kind": "feature",
+      "name": "Strike Now",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/tactician/level-1/strike-now.md",
+      "selection": "tactician-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.tactician.level-1/studied-commander",
+      "kind": "feature",
+      "name": "Studied Commander",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/tactician/level-1/studied-commander.md",
+      "selection": "tactician-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.tactician.level-1/tactical-doctrine",
+      "kind": "feature",
+      "name": "Tactical Doctrine",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/tactician/level-1/tactical-doctrine.md",
+      "selection": "tactician-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.tactician.level-1/tactician-abilities",
+      "kind": "feature",
+      "name": "Tactician Abilities",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/tactician/level-1/tactician-abilities.md",
+      "selection": "tactician-level-one",
       "file": "feature.json"
     },
     {

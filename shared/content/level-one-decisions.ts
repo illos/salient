@@ -27,6 +27,11 @@ import {
   classProfile as shadowProfile,
   getLevelOneDecisions as shadowDecisions,
 } from './classes/shadow/level-one.ts';
+import {
+  classProfile as tacticianProfile,
+  getKitStepDecisions as tacticianKitDecisions,
+  getLevelOneDecisions as tacticianDecisions,
+} from './classes/tactician/level-one.ts';
 
 export const definitions: DecisionDefinitions = structuredClone(fury) as DecisionDefinitions;
 const all = () => definitions.steps.flatMap(step => step.decisions);
@@ -68,7 +73,7 @@ allow('ancestry.choice', [
   'Revenant',
 ]);
 allow('career.choice', ["Mage's Apprentice"]);
-allow('class.choice', ['Elementalist', 'Shadow']);
+allow('class.choice', ['Elementalist', 'Shadow', 'Tactician']);
 allow('culture.environment', ['Urban']);
 allow('culture.environment.skill', ['Alertness']);
 allow('culture.organization.skill', ['Gymnastics']);
@@ -79,9 +84,13 @@ definitions.classProfiles = structuredClone({
   Fury: furyProfile,
   Elementalist: elementalistProfile,
   Shadow: shadowProfile,
+  Tactician: tacticianProfile,
 });
 
-/** The Shadow's own Kit feature grants an ordinary kit; the Fury's aspects keep their entries. */
+/**
+ * The Shadow's own Kit feature grants an ordinary kit and the Tactician's Field Arsenal grants two;
+ * the Fury's aspects keep their entries.
+ */
 const kitChoice = decision('kit.choice');
 delete kitChoice.dependsOn;
 kitChoice.dependsOnAny = ['class.fury.aspect', 'class.choice'];
@@ -92,7 +101,14 @@ kitChoice.optionsByParent = {
     quote: 'You can use and gain the benefits of a kit.',
     optionsFrom: ['pool.kits.standard'],
   },
+  Tactician: {
+    source: path('feature/tactician/level-1/field-arsenal'),
+    quote:
+      'You can use and gain the benefits of two kits, including both their signature abilities.',
+    optionsFrom: ['pool.kits.standard'],
+  },
 };
+append('step.kit', tacticianKitDecisions(kitChoice.optionSources));
 
 append('step.ancestry', structuredClone(polderDecisions));
 append('step.ancestry', structuredClone(dwarfDecisions));
@@ -179,4 +195,5 @@ append('step.career', [
 ]);
 append('step.class', elementalistDecisions(definitions.pools));
 append('step.class', shadowDecisions(definitions.pools));
+append('step.class', tacticianDecisions(definitions.pools));
 export default definitions;

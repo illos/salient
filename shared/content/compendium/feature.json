@@ -1283,5 +1283,177 @@
       "level": "1",
       "subclass": "caustic-alchemy"
     }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.tactician.level-1/1st-level-doctrine-feature",
+    "kind": "feature",
+    "name": "1st-Level Doctrine Feature",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/tactician/level-1/1st-level-doctrine-feature.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/tactician/level-1/1st-level-doctrine-feature.json",
+    "selection": "tactician-level-one",
+    "text": "---\nclass: tactician\nlevel: \"1\"\nname: 1st-Level Doctrine Feature\nscc: mcdm.heroes.v1/feature.tactician.level-1/1st-level-doctrine-feature\ntype: feature\n---\n\nYour [tactical doctrine](scc.v1:mcdm.heroes.v1/feature.tactician.level-1/tactical-doctrine) grants you a feature, as shown on the 1st-Level Doctrine Features table.\n\n###### 1st-Level Doctrine Features Table\n\n| Doctrine   | Feature             |\n|------------|---------------------|\n| Insurgent  | [Covert Operations](scc.v1:mcdm.heroes.v1/feature.tactician.level-1/covert-operations)   |\n| Mastermind | [Studied Commander](scc.v1:mcdm.heroes.v1/feature.tactician.level-1/studied-commander)   |\n| Vanguard   | [Commanding Presence](scc.v1:mcdm.heroes.v1/feature.tactician.level-1/commanding-presence) |\n",
+    "structured": {
+      "class": "tactician",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.tactician.level-1/5-focus-ability",
+    "kind": "feature",
+    "name": "5-Focus Ability",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/tactician/level-1/5-focus-ability.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/tactician/level-1/5-focus-ability.json",
+    "selection": "tactician-level-one",
+    "text": "---\nclass: tactician\nlevel: \"1\"\nname: 5-Focus Ability\nscc: mcdm.heroes.v1/feature.tactician.level-1/5-focus-ability\ntype: feature\n---\n\nChoose one [heroic ability](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability) from the following options, each of which costs 5 focus to use. (*Quick Build:* [Hammer and Anvil](scc.v1:mcdm.heroes.v1/feature.ability.tactician.level-1/hammer-and-anvil).)\n",
+    "structured": {
+      "class": "tactician",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.tactician.level-1/commanding-presence",
+    "kind": "feature",
+    "name": "Commanding Presence",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/tactician/level-1/commanding-presence.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/tactician/level-1/commanding-presence.json",
+    "selection": "tactician-level-one",
+    "text": "---\nclass: tactician\nlevel: \"1\"\nname: Commanding Presence\nscc: mcdm.heroes.v1/feature.tactician.level-1/commanding-presence\nsubclass: vanguard\ntype: feature\n---\n\nYou command any room you walk into. While you are present during a negotiation, each hero with you treats their [Renown](scc.v1:mcdm.heroes.v1/rule.resource/renown) as 2 higher than usual. Additionally, each hero with you during a combat encounter has a double [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on [tests](scc.v1:mcdm.heroes.v1/rule.test/test) made to stop combat and start a negotiation.\n",
+    "structured": {
+      "class": "tactician",
+      "level": "1",
+      "subclass": "vanguard"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.tactician.level-1/covert-operations",
+    "kind": "feature",
+    "name": "Covert Operations",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/tactician/level-1/covert-operations.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/tactician/level-1/covert-operations.json",
+    "selection": "tactician-level-one",
+    "text": "---\nclass: tactician\nlevel: \"1\"\nname: Covert Operations\nscc: mcdm.heroes.v1/feature.tactician.level-1/covert-operations\nsubclass: insurgent\ntype: feature\n---\n\nWhile in your presence or working according to your plans, each of your allies gains an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on [tests](scc.v1:mcdm.heroes.v1/rule.test/test) using any skill from the [intrigue skill group](scc.v1:mcdm.heroes.v1/skill.group/intrigue). Additionally, you can use the [Lead](scc.v1:mcdm.heroes.v1/skill.interpersonal/lead) skill to assist another creature with any [test](scc.v1:mcdm.heroes.v1/rule.test/test) made using a skill from the [intrigue group](scc.v1:mcdm.heroes.v1/skill.group/intrigue).\n\nAt the Director's discretion, you and your allies can use skills from the [intrigue skill group](scc.v1:mcdm.heroes.v1/skill.group/intrigue) to attempt research or reconnaissance during a negotiation instead of outside of a negotiation.\n",
+    "structured": {
+      "class": "tactician",
+      "level": "1",
+      "subclass": "insurgent"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.tactician.level-1/doctrine-triggered-action",
+    "kind": "feature",
+    "name": "Doctrine Triggered Action",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/tactician/level-1/doctrine-triggered-action.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/tactician/level-1/doctrine-triggered-action.json",
+    "selection": "tactician-level-one",
+    "text": "---\nclass: tactician\nlevel: \"1\"\nname: Doctrine Triggered Action\nscc: mcdm.heroes.v1/feature.tactician.level-1/doctrine-triggered-action\ntype: feature\n---\n\nYour [tactical doctrine](scc.v1:mcdm.heroes.v1/feature.tactician.level-1/tactical-doctrine) grants you a [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action), as shown on the Doctrine [Triggered Actions](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) table.\n\n###### Doctrine Triggered Actions Table\n\n| Doctrine   | [Triggered Action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) |\n|------------|------------------|\n| Insurgent  | [Advanced Tactics](scc.v1:mcdm.heroes.v1/feature.ability.tactician.level-1/advanced-tactics) |\n| Mastermind | [Overwatch](scc.v1:mcdm.heroes.v1/feature.ability.tactician.level-1/overwatch)        |\n| Vanguard   | [Parry](scc.v1:mcdm.heroes.v1/feature.ability.tactician.level-1/parry)            |\n",
+    "structured": {
+      "class": "tactician",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.tactician.level-1/field-arsenal",
+    "kind": "feature",
+    "name": "Field Arsenal",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/tactician/level-1/field-arsenal.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/tactician/level-1/field-arsenal.json",
+    "selection": "tactician-level-one",
+    "text": "---\nclass: tactician\nlevel: \"1\"\nname: Field Arsenal\nscc: mcdm.heroes.v1/feature.tactician.level-1/field-arsenal\ntype: feature\n---\n\nYou have drilled with a broad array of arms and armor, and have developed techniques to optimize their use. You can use and gain the benefits of two kits, including both their [signature abilities](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability). Whenever you would choose or change one kit, you can choose or change your second kit as well. See Chapter 6: [Kits](scc.v1:mcdm.heroes.v1/chapter/kits) for more information. (*Quick Build:* [Shining Armor](scc.v1:mcdm.heroes.v1/kit/shining-armor), Sniper.)\n\nIf both kits grant you the same benefit, you take one or the other and can't change your choice until you finish a [respite](scc.v1:mcdm.heroes.v1/rule.resource/respite). (This usually means taking the higher of two [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties)es.)\n\nFor example, if you take the [Shining Armor](scc.v1:mcdm.heroes.v1/kit/shining-armor) and [Sniper](scc.v1:mcdm.heroes.v1/kit/sniper) kits, you gain the following benefits overall:\n\n- [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) [Bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties): +12 per [echelon](scc.v1:mcdm.heroes.v1/rule.general/echelon)\n- [Stability](scc.v1:mcdm.heroes.v1/rule.character/stability) [Bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties): +1\n- [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) Damage [Bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties): +2/+2/+2\n- [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) Damage [Bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties): +0/+0/+4\n- [Speed](scc.v1:mcdm.heroes.v1/rule.character/speed) [Bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties): +1\n- [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) [Distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) [Bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties): +10\n- Disengage [Bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties): +1\n- You can use the [Patient Shot](scc.v1:mcdm.heroes.v1/feature.ability.sniper/patient-shot) and [Protective Attack](scc.v1:mcdm.heroes.v1/feature.ability.shining-armor/protective-attack) [signature abilities](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability).\n\nKit [signature abilities](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability) have their kit's [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties)es already applied, which might require you to adjust the [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties)es of the [signature abilities](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability) you gain from a kit. For example, you might take the [Martial Artist](scc.v1:mcdm.heroes.v1/kit/martial-artist) kit, which gives a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) weapon damage [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) of +2/+2/+2, and the Mountain kit, which gives a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) weapon damage [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) of +0/+0/+4. If you choose to use the Mountain kit's damage [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties), then the [Battle Grace](scc.v1:mcdm.heroes.v1/feature.ability.martial-artist/battle-grace) [signature ability](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability) from the [Martial Artist](scc.v1:mcdm.heroes.v1/kit/martial-artist) kit loses the +2/+2/+2 [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) from that kit, reducing its usual 5/8/11 damage for its tier 1, tier 2, and tier 3 outcomes to 3/6/9. It then gains the +0/+0/+4 of the Mountain kit to deal 3/6/13 damage.\n",
+    "structured": {
+      "class": "tactician",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.tactician.level-1/focus",
+    "kind": "feature",
+    "name": "Focus",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/tactician/level-1/focus.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/tactician/level-1/focus.json",
+    "selection": "tactician-level-one",
+    "text": "---\nclass: tactician\nlevel: \"1\"\nname: Focus\nscc: mcdm.heroes.v1/feature.tactician.level-1/focus\ntype: feature\n---\n\nThe ring of steel panics others but brings order to your mind, granting you a [Heroic Resource](scc.v1:mcdm.heroes.v1/rule.resource/heroic-resource) called focus.\n\n##### Focus in Combat\n\nAt the start of a combat encounter or some other stressful situation tracked in [combat rounds](scc.v1:mcdm.heroes.v1/rule.combat/combat-round) (as determined by the Director), you gain focus equal to your [Victories](scc.v1:mcdm.heroes.v1/rule.resource/victories). At the start of each of your [turns](scc.v1:mcdm.heroes.v1/rule.combat/turn) during combat, you gain 2 focus.\n\nAdditionally, the first time each [combat round](scc.v1:mcdm.heroes.v1/rule.combat/combat-round) that you or any ally damages a creature marked by you (see Mark below), you gain 1 focus. The first time in a [combat round](scc.v1:mcdm.heroes.v1/rule.combat/combat-round) that any ally within 10 squares of you uses a [heroic ability](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability), you gain 1 focus.\n\nYou lose any remaining focus at the end of the encounter.\n\n##### Focus Outside of Combat\n\nThough you can't gain focus outside of combat, you can use your [heroic abilities](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability) and effects that cost focus without spending it. Whenever you use an ability or effect outside of combat that costs focus, you can't use that same ability or effect outside of combat again until you earn 1 or more [Victories](scc.v1:mcdm.heroes.v1/rule.resource/victories) or finish a [respite](scc.v1:mcdm.heroes.v1/rule.resource/respite).\n\nWhen you use an ability outside of combat that lets you spend unlimited focus on its effect, you can use it as if you had spent an amount of focus equal to your [Victories](scc.v1:mcdm.heroes.v1/rule.resource/victories). (Such abilities aren't part of the core rules for the [tactician](scc.v1:mcdm.heroes.v1/class/tactician), but they might appear in future products.)\n\n> **[Tactician Abilities](scc.v1:mcdm.heroes.v1/feature.tactician.level-1/tactician-abilities) Explained**\n>\n> Many of the [tactician's](scc.v1:mcdm.heroes.v1/class/tactician) abilities grant allies extra movement, damage, and actions. But what's happening in the fiction to allow this? The [tactician](scc.v1:mcdm.heroes.v1/class/tactician) is an incredible strategist and inspiring leader who is quick to give commands and inspiration that causes their allies to act. The [tactician](scc.v1:mcdm.heroes.v1/class/tactician) can quickly read the battlefield, analyze enemies, and then bark orders and encouragement that pushes their allies to greatness. Many of the names of the [tactician's](scc.v1:mcdm.heroes.v1/class/tactician) abilities are the actual commands they give their friends!\n",
+    "structured": {
+      "class": "tactician",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.tactician.level-1/kit-signature-ability",
+    "kind": "feature",
+    "name": "Kit Signature Ability",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/tactician/level-1/kit-signature-ability.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/tactician/level-1/kit-signature-ability.json",
+    "selection": "tactician-level-one",
+    "text": "---\nclass: tactician\nlevel: \"1\"\nname: Kit Signature Ability\nscc: mcdm.heroes.v1/feature.tactician.level-1/kit-signature-ability\ntype: feature\n---\n\nEach kit from your [Field Arsenal](scc.v1:mcdm.heroes.v1/feature.tactician.level-1/field-arsenal) feature grants you a [signature ability](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability). [Signature abilities](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability) can be used at will.\n",
+    "structured": {
+      "class": "tactician",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.tactician.level-1/mark",
+    "kind": "feature",
+    "name": "Mark",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/tactician/level-1/mark.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/tactician/level-1/mark.json",
+    "selection": "tactician-level-one",
+    "text": "---\nclass: tactician\nlevel: \"1\"\nname: Mark\nscc: mcdm.heroes.v1/feature.tactician.level-1/mark\ntype: feature\n---\n\nYou know how to focus the attention of your allies as you push them toward [victory](scc.v1:mcdm.heroes.v1/rule.resource/victories). You have the following ability.\n",
+    "structured": {
+      "class": "tactician",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.tactician.level-1/strike-now",
+    "kind": "feature",
+    "name": "Strike Now",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/tactician/level-1/strike-now.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/tactician/level-1/strike-now.json",
+    "selection": "tactician-level-one",
+    "text": "---\nclass: tactician\nlevel: \"1\"\nname: Strike Now\nscc: mcdm.heroes.v1/feature.tactician.level-1/strike-now\ntype: feature\n---\n\nYou have the following ability.\n",
+    "structured": {
+      "class": "tactician",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.tactician.level-1/studied-commander",
+    "kind": "feature",
+    "name": "Studied Commander",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/tactician/level-1/studied-commander.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/tactician/level-1/studied-commander.json",
+    "selection": "tactician-level-one",
+    "text": "---\nclass: tactician\nlevel: \"1\"\nname: Studied Commander\nscc: mcdm.heroes.v1/feature.tactician.level-1/studied-commander\nsubclass: mastermind\ntype: feature\n---\n\nYour encyclopedic knowledge of the history of battle lets you apply that knowledge to current challenges. While you are present, each hero with you treats the Discover Lore project related to a war or battle as one category cheaper. This makes projects seeking common lore free, but such projects still require a [respite](scc.v1:mcdm.heroes.v1/rule.resource/respite) activity to complete. (See Chapter 12: [Downtime Projects](scc.v1:mcdm.heroes.v1/chapter/downtime-projects) for more information.)\n\nAdditionally, if you have 24 hours or more before a combat encounter or negotiation, and you have one or more clues or rumors regarding the encounter or negotiation, you can make a [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) [test](scc.v1:mcdm.heroes.v1/rule.test/test) as a [respite](scc.v1:mcdm.heroes.v1/rule.resource/respite) activity. The following [test](scc.v1:mcdm.heroes.v1/rule.test/test) outcomes apply to a combat encounter:\n\n- **≤11:** The Director tells you the number of creatures in the encounter.\n- **12-16:** The Director tells you the number and level of the creatures in the encounter.\n- **17+:** The Director tells you the tier 2 outcome information, and when the encounter begins, all enemies are [surprised](scc.v1:mcdm.heroes.v1/rule.combat/surprised).\n\nThe following [test](scc.v1:mcdm.heroes.v1/rule.test/test) outcomes apply to a negotiation:\n\n- **≤11:** The Director gives you three motivations, one of which belongs to an [NPC](scc.v1:mcdm.heroes.v1/rule.general/npc) in the negotiation.\n- **12-16:** The Director gives you one motivation for an [NPC](scc.v1:mcdm.heroes.v1/rule.general/npc) in the negotiation.\n- **17+:** The Director tells you the tier 2 outcome information, and you and each of your allies gains an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on [tests](scc.v1:mcdm.heroes.v1/rule.test/test) made to influence [NPCs](scc.v1:mcdm.heroes.v1/rule.general/npc) during the negotiation.\n\nYou can make this [test](scc.v1:mcdm.heroes.v1/rule.test/test) only once for any encounter or negotiation.\n",
+    "structured": {
+      "class": "tactician",
+      "level": "1",
+      "subclass": "mastermind"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.tactician.level-1/tactical-doctrine",
+    "kind": "feature",
+    "name": "Tactical Doctrine",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/tactician/level-1/tactical-doctrine.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/tactician/level-1/tactical-doctrine.json",
+    "selection": "tactician-level-one",
+    "text": "---\nclass: tactician\nlevel: \"1\"\nname: Tactical Doctrine\nscc: mcdm.heroes.v1/feature.tactician.level-1/tactical-doctrine\ntype: feature\n---\n\nWarfare is as old as civilization—and perhaps even older. As battle became ever more complex, military leaders invented [tactical doctrine](scc.v1:mcdm.heroes.v1/feature.tactician.level-1/tactical-doctrine), outlining how combatants should be structured, used, and deployed. Doctrine can be learned at war colleges passing on ancient martial traditions, or directly through blood and sweat on the battlefield. Whatever path brought you to your mastery of historically proven tactics, you choose a [tactical doctrine](scc.v1:mcdm.heroes.v1/feature.tactician.level-1/tactical-doctrine) from the following options, each of which grants you a skill. (*Quick Build:* Vanguard and the [Intimidate](scc.v1:mcdm.heroes.v1/skill.interpersonal/intimidate) skill.)\n\n- **Insurgent:** Doing your duty, playing fair, and dying honorably in battle is your opponent's job. You'll do whatever it takes to keep your allies alive. You gain a skill from the [intrigue skill group](scc.v1:mcdm.heroes.v1/skill.group/intrigue).\n- **Mastermind:** You have an encyclopedic knowledge of warfare, viewing the battlefield as a game board and seeking [victory](scc.v1:mcdm.heroes.v1/rule.resource/victories) by thinking steps ahead of your opponents. You gain a skill from the [lore skill group](scc.v1:mcdm.heroes.v1/skill.group/lore).\n- **Vanguard:** You have learned the stratagems of ancient heroes, letting you lead from the front lines and seek [victory](scc.v1:mcdm.heroes.v1/rule.resource/victories) through sheer force of will and personality. You gain a skill from the [interpersonal skill group](scc.v1:mcdm.heroes.v1/skill.group/interpersonal).\n\nYour [tactical doctrine](scc.v1:mcdm.heroes.v1/feature.tactician.level-1/tactical-doctrine) is your [subclass](scc.v1:mcdm.heroes.v1/rule.general/subclass), and your choice of doctrine determines many of the features you'll gain as you gain new levels.\n",
+    "structured": {
+      "class": "tactician",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.tactician.level-1/tactician-abilities",
+    "kind": "feature",
+    "name": "Tactician Abilities",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/tactician/level-1/tactician-abilities.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/tactician/level-1/tactician-abilities.json",
+    "selection": "tactician-level-one",
+    "text": "---\nclass: tactician\nlevel: \"1\"\nname: Tactician Abilities\nscc: mcdm.heroes.v1/feature.tactician.level-1/tactician-abilities\ntype: feature\n---\n\nYou are a formidable combatant in your own right, but your greatest strength is the abilities you wield that let you shape control of the battlefield.\n\n##### Heroic Abilities\n\nYour [heroic abilities](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability) cover a range of combat tactics, all of which require focus to use.\n\n###### 3-Focus Ability\n\nChoose one [heroic ability](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability) from the following options, each of which costs 3 focus to use. (*Quick Build:* [Inspiring Strike](scc.v1:mcdm.heroes.v1/feature.ability.tactician.level-1/inspiring-strike).)\n",
+    "structured": {
+      "class": "tactician",
+      "level": "1"
+    }
   }
 ]
