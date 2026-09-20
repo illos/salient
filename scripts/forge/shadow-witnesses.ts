@@ -13,7 +13,12 @@ import type { Hero } from '@/models/hero';
 import type { ForgeWitness } from './ancestry-witnesses';
 
 type Input = { id: string; selections: Record<string, unknown> };
-const normalize = (name: string) => name.replaceAll('’', "'");
+const normalize = (name: string) =>
+  name
+    .replaceAll('’', "'")
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase();
 
 export function createShadowWitnesses(fixtureRoot = 'tests/fixtures'): ForgeWitness[] {
   const template = JSON.parse(

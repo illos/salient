@@ -1,6 +1,6 @@
 {
   "generator": "V72/1",
-  "contentHash": "sha256:609aed9b6d4bbb4d08676bfcc080333f48fbb9c64d9c952971f82001bef100ca",
+  "contentHash": "sha256:ea1f6a2cf1d3c8a30f5fa40aef52fdadc25aa97900648485c9fe5957a50cf43b",
   "sourceRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
   "foesEdition": "bf262edf546e91e1540cc17489915f18c4873ddd8bd8e225b20f3441e3f74f30",
   "scope": "Structural support, current grant/loading availability and live execution are separate. Source drift never silently falls back; historical results are never recompiled on read.",
@@ -16,9 +16,9 @@
       "manual": 1150
     },
     "hero-standalone": {
-      "total": 57,
-      "supported": 7,
-      "manual": 50
+      "total": 76,
+      "supported": 8,
+      "manual": 68
     },
     "kit-signature": {
       "total": 25,
@@ -15569,6 +15569,1994 @@
           "grantKind": "ancestry-ability",
           "selectable": "selectable",
           "detail": "grant of option Vengeance Mark supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/black-ash-teleport",
+      "name": "Black Ash Teleport",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/black-ash-teleport",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-1/black-ash-teleport.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/black-ash-teleport#block:0:0:0adf5ea2e56e0ba8",
+          "locator": "block:0:0",
+          "clause": "You [teleport](scc.v1:mcdm.heroes.v1/movement/teleport) up to 5 squares. If you have [concealment](scc.v1:mcdm.heroes.v1/rule.combat/concealment) or [cover](scc.v1:mcdm.heroes.v1/rule.combat/cover) at your destination, you can use the [Hide](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/hide) maneuver even if you are observed. If you successfully hide using this maneuver, you gain 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/black-ash-teleport#block:1:0:3a5a01b88bbcd1a9",
+          "locator": "block:1:0",
+          "clause": "You [teleport](scc.v1:mcdm.heroes.v1/movement/teleport) 1 additional square for each insight spent.",
+          "kind": "unsupported",
+          "shape": "resource-spend:spend N+ insight",
+          "reason": "resource-spend",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "You [teleport](scc.v1:mcdm.heroes.v1/movement/teleport) up to 5 squares. If you have [concealment](scc.v1:mcdm.heroes.v1/rule.combat/concealment) or [cover](scc.v1:mcdm.heroes.v1/rule.combat/cover) at your destination, you can use the [Hide](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/hide) maneuver even if you are observed. If you successfully hide using this maneuver, you gain 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "You [teleport](scc.v1:mcdm.heroes.v1/movement/teleport) 1 additional square for each insight spent.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Self",
+          "message": "Only the designed single-target envelope is eligible."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Black Ash Teleport",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-1/black-ash-teleport.md",
+          "decisionId": "class.shadow.college",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Black Ash supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Black Ash Teleport",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-1/black-ash-teleport.md",
+          "decisionId": "class.shadow.college",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Black Ash supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/clever-trick",
+      "name": "Clever Trick",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/clever-trick",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-1/clever-trick.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/clever-trick#block:0:0:6333633a8d13284f",
+          "locator": "block:0:0",
+          "clause": "An enemy targets you with a [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike).",
+          "kind": "unsupported",
+          "shape": "trigger",
+          "reason": "trigger",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/clever-trick#block:1:0:49a69d5650694341",
+          "locator": "block:1:0",
+          "clause": "Choose an enemy within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) of the triggering strike, including the enemy who targeted you. The [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) targets that enemy instead.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "An enemy targets you with a [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "Choose an enemy within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) of the triggering strike, including the enemy who targeted you. The [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) targets that enemy instead.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Self",
+          "message": "Only the designed single-target envelope is eligible."
+        },
+        {
+          "code": "action-type",
+          "locator": "header:usage",
+          "clause": "Triggered",
+          "message": "Unrecognized action type."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Clever Trick",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-1/clever-trick.md",
+          "decisionId": "class.shadow.college",
+          "level": 1,
+          "grantKind": "aspect-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Harlequin Mask supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Clever Trick",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-1/clever-trick.md",
+          "decisionId": "class.shadow.college",
+          "level": 2,
+          "grantKind": "aspect-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Harlequin Mask supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/coat-the-blade",
+      "name": "Coat the Blade",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/coat-the-blade",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-1/coat-the-blade.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/coat-the-blade#block:0:0:00837731235ca224",
+          "locator": "block:0:0",
+          "clause": "You gain 2 [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge). Additionally, whenever you use a [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge) before the end of the encounter, you can choose to have it deal poison damage.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/coat-the-blade#block:1:0:1baf86db78955e47",
+          "locator": "block:1:0",
+          "clause": "For each insight you spend, you gain 1 additional [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge).",
+          "kind": "unsupported",
+          "shape": "resource-spend:spend N+ insight",
+          "reason": "resource-spend",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "You gain 2 [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge). Additionally, whenever you use a [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge) before the end of the encounter, you can choose to have it deal poison damage.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "For each insight you spend, you gain 1 additional [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Self",
+          "message": "Only the designed single-target envelope is eligible."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Coat the Blade",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-1/coat-the-blade.md",
+          "decisionId": "class.shadow.college",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Caustic Alchemy supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Coat the Blade",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-1/coat-the-blade.md",
+          "decisionId": "class.shadow.college",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Caustic Alchemy supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/coup-de-grace",
+      "name": "Coup de Grace",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/coup-de-grace",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-1/coup-de-grace.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/coup-de-grace#block:0:tier1:0:6d2389b84263d6ba",
+            "locator": "block:0:tier1:0",
+            "clause": "2d6 + 7 + A damage",
+            "kind": "unsupported",
+            "shape": "NdN + N + a damage",
+            "reason": "unknown",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/coup-de-grace#block:0:tier2:0:4d468459c8241cb3",
+            "locator": "block:0:tier2:0",
+            "clause": "2d6 + 11 + A damage",
+            "kind": "unsupported",
+            "shape": "NdN + N + a damage",
+            "reason": "unknown",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/coup-de-grace#block:0:tier3:0:f0cdeb6f63bad3f4",
+            "locator": "block:0:tier3:0",
+            "clause": "2d6 + 16 + A damage",
+            "kind": "unsupported",
+            "shape": "NdN + N + a damage",
+            "reason": "unknown",
+            "dependency": "unknown"
+          }
+        ]
+      ],
+      "sections": [],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "tier1-damage-outside-grammar"
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier1:0",
+          "clause": "2d6 + 7 + A damage",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier2:0",
+          "clause": "2d6 + 11 + A damage",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier3:0",
+          "clause": "2d6 + 16 + A damage",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Coup de Grace",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-1/coup-de-grace.md",
+          "decisionId": "class.shadow.ability-5",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Coup de Grace supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Coup de Grace",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-1/coup-de-grace.md",
+          "decisionId": "class.shadow.ability-5",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Coup de Grace supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/defensive-roll",
+      "name": "Defensive Roll",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/defensive-roll",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-1/defensive-roll.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/defensive-roll#block:0:0:79192850615f3422",
+          "locator": "block:0:0",
+          "clause": "Another creature damages you.",
+          "kind": "unsupported",
+          "shape": "trigger",
+          "reason": "trigger",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/defensive-roll#block:1:0:facb3c5a50d2f7ba",
+          "locator": "block:1:0",
+          "clause": "You take half the triggering damage, then can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to 2 squares after the triggering effect resolves. If you end this [shift](scc.v1:mcdm.heroes.v1/movement/shifting) with [concealment](scc.v1:mcdm.heroes.v1/rule.combat/concealment) or [cover](scc.v1:mcdm.heroes.v1/rule.combat/cover), you can use the [Hide](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/hide) maneuver even if you are observed.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/defensive-roll#block:2:0:daa777f60a1b0bcd",
+          "locator": "block:2:0",
+          "clause": "The [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) of any effects associated with the damage are reduced by 1 for you.",
+          "kind": "unsupported",
+          "shape": "resource-spend:spend N insight",
+          "reason": "resource-spend",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "Another creature damages you.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "You take half the triggering damage, then can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to 2 squares after the triggering effect resolves. If you end this [shift](scc.v1:mcdm.heroes.v1/movement/shifting) with [concealment](scc.v1:mcdm.heroes.v1/rule.combat/concealment) or [cover](scc.v1:mcdm.heroes.v1/rule.combat/cover), you can use the [Hide](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/hide) maneuver even if you are observed.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:2:0",
+          "clause": "The [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) of any effects associated with the damage are reduced by 1 for you.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Self",
+          "message": "Only the designed single-target envelope is eligible."
+        },
+        {
+          "code": "action-type",
+          "locator": "header:usage",
+          "clause": "Triggered",
+          "message": "Unrecognized action type."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Defensive Roll",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-1/defensive-roll.md",
+          "decisionId": "class.shadow.college",
+          "level": 1,
+          "grantKind": "aspect-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Caustic Alchemy supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Defensive Roll",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-1/defensive-roll.md",
+          "decisionId": "class.shadow.college",
+          "level": 2,
+          "grantKind": "aspect-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Caustic Alchemy supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/disorienting-strike",
+      "name": "Disorienting Strike",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/disorienting-strike",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-1/disorienting-strike.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/disorienting-strike#block:0:tier1:0:ff347188e73e615a",
+            "locator": "block:0:tier1:0",
+            "clause": "4 + A damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 4,
+              "characteristic": "A"
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/disorienting-strike#block:0:tier1:1:e2f997b3a230ca13",
+            "locator": "block:0:tier1:1",
+            "clause": "[slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
+            "kind": "unsupported",
+            "shape": "slide N",
+            "reason": "slide",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/disorienting-strike#block:0:tier2:0:c242b54eeae60b04",
+            "locator": "block:0:tier2:0",
+            "clause": "6 + A damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 6,
+              "characteristic": "A"
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/disorienting-strike#block:0:tier2:1:e2f996b3a230c860",
+            "locator": "block:0:tier2:1",
+            "clause": "[slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3",
+            "kind": "unsupported",
+            "shape": "slide N",
+            "reason": "slide",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/disorienting-strike#block:0:tier3:0:4d2cc6daeb82879b",
+            "locator": "block:0:tier3:0",
+            "clause": "10 + A damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 10,
+              "characteristic": "A"
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/disorienting-strike#block:0:tier3:1:e2f99cb3a230d292",
+            "locator": "block:0:tier3:1",
+            "clause": "[slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 5",
+            "kind": "unsupported",
+            "shape": "slide N",
+            "reason": "slide",
+            "dependency": "unknown"
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/disorienting-strike#block:1:0:8ca9c76c399010e2",
+          "locator": "block:1:0",
+          "clause": "You can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) into any square the target leaves when you [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) them.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier1:1",
+          "clause": "[slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier2:1",
+          "clause": "[slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier3:1",
+          "clause": "[slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 5",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "You can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) into any square the target leaves when you [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) them.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Disorienting Strike",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-1/disorienting-strike.md",
+          "decisionId": "class.shadow.ability-3",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Disorienting Strike supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Disorienting Strike",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-1/disorienting-strike.md",
+          "decisionId": "class.shadow.ability-3",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Disorienting Strike supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/eviscerate",
+      "name": "Eviscerate",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/eviscerate",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-1/eviscerate.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "supported",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/eviscerate#block:0:tier1:0:ff347188e73e615a",
+            "locator": "block:0:tier1:0",
+            "clause": "4 + A damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 4,
+              "characteristic": "A"
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/eviscerate#block:0:tier1:1:73eb5f0a7e6ec8d8",
+            "locator": "block:0:tier1:1",
+            "clause": "A < WEAK, [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) (save ends)",
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "potency",
+              "tier": "weak"
+            },
+            "condition": "bleeding",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.shadow.level-1/eviscerate#block:0:tier1:0:ff347188e73e615a"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/eviscerate#block:0:tier2:0:c242b54eeae60b04",
+            "locator": "block:0:tier2:0",
+            "clause": "6 + A damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 6,
+              "characteristic": "A"
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/eviscerate#block:0:tier2:1:ad8e7d5d1129b12f",
+            "locator": "block:0:tier2:1",
+            "clause": "A < AVERAGE, [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) (save ends)",
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "potency",
+              "tier": "average"
+            },
+            "condition": "bleeding",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.shadow.level-1/eviscerate#block:0:tier2:0:c242b54eeae60b04"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/eviscerate#block:0:tier3:0:4d2cc6daeb82879b",
+            "locator": "block:0:tier3:0",
+            "clause": "10 + A damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 10,
+              "characteristic": "A"
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/eviscerate#block:0:tier3:1:c5413733575e1c8f",
+            "locator": "block:0:tier3:1",
+            "clause": "A < STRONG, [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) (save ends)",
+            "kind": "condition",
+            "characteristic": "A",
+            "threshold": {
+              "kind": "potency",
+              "tier": "strong"
+            },
+            "condition": "bleeding",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.shadow.level-1/eviscerate#block:0:tier3:0:4d2cc6daeb82879b"
+          }
+        ]
+      ],
+      "sections": [],
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
+      "grants": [
+        {
+          "name": "Eviscerate",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-1/eviscerate.md",
+          "decisionId": "class.shadow.ability-3",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Eviscerate supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Eviscerate",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-1/eviscerate.md",
+          "decisionId": "class.shadow.ability-3",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Eviscerate supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/gasping-in-pain",
+      "name": "Gasping in Pain",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/gasping-in-pain",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-1/gasping-in-pain.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/gasping-in-pain#block:0:tier1:0:f2375dd22924ce85",
+            "locator": "block:0:tier1:0",
+            "clause": "3 + A damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 3,
+              "characteristic": "A"
+            },
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/gasping-in-pain#block:0:tier2:0:7238ed4d4beac54f",
+            "locator": "block:0:tier2:0",
+            "clause": "5 + A damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 5,
+              "characteristic": "A"
+            },
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/gasping-in-pain#block:0:tier3:0:b3d3653192b48556",
+            "locator": "block:0:tier3:0",
+            "clause": "8 + A damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 8,
+              "characteristic": "A"
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/gasping-in-pain#block:0:tier3:1:1985cc60c20cb7b7",
+            "locator": "block:0:tier3:1",
+            "clause": "I < STRONG[, prone](scc.v1:mcdm.heroes.v1/condition/prone)",
+            "kind": "unsupported",
+            "shape": "potency:I < SYM prone",
+            "reason": "potency-condition",
+            "dependency": "unknown"
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/gasping-in-pain#block:1:0:38bc455ef6ca216e",
+          "locator": "block:1:0",
+          "clause": "One ally within 5 squares of the target gains 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier3:1",
+          "clause": "I < STRONG[, prone](scc.v1:mcdm.heroes.v1/condition/prone)",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "One ally within 5 squares of the target gains 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Gasping in Pain",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-1/gasping-in-pain.md",
+          "decisionId": "class.shadow.signature-ability",
+          "level": 1,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Gasping in Pain supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Gasping in Pain",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-1/gasping-in-pain.md",
+          "decisionId": "class.shadow.signature-ability",
+          "level": 2,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Gasping in Pain supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/get-in-get-out",
+      "name": "Get In Get Out",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/get-in-get-out",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-1/get-in-get-out.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/get-in-get-out#block:0:tier1:0:7238ed4d4beac54f",
+            "locator": "block:0:tier1:0",
+            "clause": "5 + A damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 5,
+              "characteristic": "A"
+            },
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/get-in-get-out#block:0:tier2:0:b3d3653192b48556",
+            "locator": "block:0:tier2:0",
+            "clause": "8 + A damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 8,
+              "characteristic": "A"
+            },
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/get-in-get-out#block:0:tier3:0:c690d0c54d874446",
+            "locator": "block:0:tier3:0",
+            "clause": "11 + A damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 11,
+              "characteristic": "A"
+            },
+            "kitBonusesIncluded": false
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/get-in-get-out#block:1:0:1f4f8e4bc2bb6539",
+          "locator": "block:1:0",
+          "clause": "You can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed), dividing that movement before or after your [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) as desired.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "You can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed), dividing that movement before or after your [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) as desired.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Get In Get Out",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-1/get-in-get-out.md",
+          "decisionId": "class.shadow.ability-3",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Get In Get Out supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Get In Get Out",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-1/get-in-get-out.md",
+          "decisionId": "class.shadow.ability-3",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Get In Get Out supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/hesitation-is-weakness",
+      "name": "Hesitation Is Weakness",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/hesitation-is-weakness",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-1/hesitation-is-weakness.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/hesitation-is-weakness#block:0:0:ba47b57635b23728",
+          "locator": "block:0:0",
+          "clause": "Another hero ends their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). That hero can't have used this ability to start their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
+          "kind": "unsupported",
+          "shape": "trigger",
+          "reason": "trigger",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/hesitation-is-weakness#block:1:0:04843726d5caf8a0",
+          "locator": "block:1:0",
+          "clause": "You take your [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) after the triggering hero.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "Another hero ends their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). That hero can't have used this ability to start their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "You take your [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) after the triggering hero.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Self",
+          "message": "Only the designed single-target envelope is eligible."
+        },
+        {
+          "code": "action-type",
+          "locator": "header:usage",
+          "clause": "Free triggered",
+          "message": "Unrecognized action type."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Hesitation Is Weakness",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-1/hesitation-is-weakness.md",
+          "decisionId": "class.shadow.features",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Hesitation Is Weakness",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-1/hesitation-is-weakness.md",
+          "decisionId": "class.shadow.features",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/i-work-better-alone",
+      "name": "I Work Better Alone",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/i-work-better-alone",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-1/i-work-better-alone.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/i-work-better-alone#block:0:tier1:0:f2375dd22924ce85",
+            "locator": "block:0:tier1:0",
+            "clause": "3 + A damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 3,
+              "characteristic": "A"
+            },
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/i-work-better-alone#block:0:tier2:0:c242b54eeae60b04",
+            "locator": "block:0:tier2:0",
+            "clause": "6 + A damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 6,
+              "characteristic": "A"
+            },
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/i-work-better-alone#block:0:tier3:0:59d6701840f609eb",
+            "locator": "block:0:tier3:0",
+            "clause": "9 + A damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 9,
+              "characteristic": "A"
+            },
+            "kitBonusesIncluded": false
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/i-work-better-alone#block:1:0:c08fc9b4700d22da",
+          "locator": "block:1:0",
+          "clause": "If the target has none of your allies [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to them, you gain 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge) before making the [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "If the target has none of your allies [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to them, you gain 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge) before making the [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "I Work Better Alone",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-1/i-work-better-alone.md",
+          "decisionId": "class.shadow.signature-ability",
+          "level": 1,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option I Work Better Alone supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "I Work Better Alone",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-1/i-work-better-alone.md",
+          "decisionId": "class.shadow.signature-ability",
+          "level": 2,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option I Work Better Alone supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/im-no-threat",
+      "name": "I'm No Threat",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/im-no-threat",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-1/im-no-threat.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/im-no-threat#block:0:0:da397a5c5ac44670",
+          "locator": "block:0:0",
+          "clause": "You envelop yourself in an illusion that makes you appear nonthreatening and harmless to your enemies. You might take on the appearance of a harmless animal of your [size](scc.v1:mcdm.heroes.v1/rule.character/size), such as a sheep or capybara, or you might appear as a less heroic and unarmed version of yourself. While this illusion lasts, your [strikes](scc.v1:mcdm.heroes.v1/rule.combat/strike) gain an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge), and when you take the [Disengage](scc.v1:mcdm.heroes.v1/feature.common.move-actions/disengage) move action, you gain a +1 [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) to the [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) you can [shift](scc.v1:mcdm.heroes.v1/movement/shifting).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/im-no-threat#block:1:0:c1cb76d0a7c679d3",
+          "locator": "block:1:0",
+          "clause": "Choose a creature whose [size](scc.v1:mcdm.heroes.v1/rule.character/size) is no more than 1 greater than yours and who is within 10 squares. This ability's illusion makes you appear as that creature. This illusion covers your entire body, including clothing and armor, and alters your voice to sound like that of the creature. You gain an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on [tests](scc.v1:mcdm.heroes.v1/rule.test/test) made to convince the creature's allies that you are the creature.",
+          "kind": "unsupported",
+          "shape": "resource-spend:spend N insight",
+          "reason": "resource-spend",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/im-no-threat#markdown:block:0:0:9dfa0d7d947b2ccd",
+          "locator": "markdown:block:0:0",
+          "clause": "Effect: You envelop yourself in an illusion that makes you appear nonthreatening and harmless to your enemies. You might take on the appearance of a harmless animal of your size, such as a sheep or capybara, or you might appear as a less heroic and unarmed version of yourself. While this illusion lasts, your strikes gain an edge, and when you take the Disengage move action, you gain a +1 bonus to the distance you can shift.\nThe illusion ends when you harm another creature, when you physically interact with a creature, when you use this ability again, or when you end the illusion (no action required). If you end this illusion by harming another creature, you gain 1 surge.",
+          "kind": "unsupported",
+          "shape": "source-block-mismatch",
+          "reason": "Printed mechanics differ from the structured projection.",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/im-no-threat#markdown:item:4:0:be6a01e8e570e117",
+          "locator": "markdown:item:4:0",
+          "clause": "The illusion ends when you harm another creature, when you physically interact with a creature, when you use this ability again, or when you end the illusion (no action required). If you end this illusion by harming another creature, you gain 1 surge.",
+          "kind": "unsupported",
+          "shape": "unaccounted-paragraph",
+          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "source-block-mismatch",
+          "locator": "markdown:block:0",
+          "clause": "Effect: You envelop yourself in an illusion that makes you appear nonthreatening and harmless to your enemies. You might take on the appearance of a harmless animal of your size, such as a sheep or capybara, or you might appear as a less heroic and unarmed version of yourself. While this illusion lasts, your strikes gain an edge, and when you take the Disengage move action, you gain a +1 bonus to the distance you can shift.\nThe illusion ends when you harm another creature, when you physically interact with a creature, when you use this ability again, or when you end the illusion (no action required). If you end this illusion by harming another creature, you gain 1 surge.",
+          "message": "Roll, tier, section content or order differs between the envelope and full source."
+        },
+        {
+          "code": "unaccounted-paragraph",
+          "locator": "markdown:item:4",
+          "clause": "The illusion ends when you harm another creature, when you physically interact with a creature, when you use this ability again, or when you end the illusion (no action required). If you end this illusion by harming another creature, you gain 1 surge.",
+          "message": "Printed mechanics cannot be ignored."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "You envelop yourself in an illusion that makes you appear nonthreatening and harmless to your enemies. You might take on the appearance of a harmless animal of your [size](scc.v1:mcdm.heroes.v1/rule.character/size), such as a sheep or capybara, or you might appear as a less heroic and unarmed version of yourself. While this illusion lasts, your [strikes](scc.v1:mcdm.heroes.v1/rule.combat/strike) gain an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge), and when you take the [Disengage](scc.v1:mcdm.heroes.v1/feature.common.move-actions/disengage) move action, you gain a +1 [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) to the [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) you can [shift](scc.v1:mcdm.heroes.v1/movement/shifting).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "Choose a creature whose [size](scc.v1:mcdm.heroes.v1/rule.character/size) is no more than 1 greater than yours and who is within 10 squares. This ability's illusion makes you appear as that creature. This illusion covers your entire body, including clothing and armor, and alters your voice to sound like that of the creature. You gain an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on [tests](scc.v1:mcdm.heroes.v1/rule.test/test) made to convince the creature's allies that you are the creature.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "markdown:block:0:0",
+          "clause": "Effect: You envelop yourself in an illusion that makes you appear nonthreatening and harmless to your enemies. You might take on the appearance of a harmless animal of your size, such as a sheep or capybara, or you might appear as a less heroic and unarmed version of yourself. While this illusion lasts, your strikes gain an edge, and when you take the Disengage move action, you gain a +1 bonus to the distance you can shift.\nThe illusion ends when you harm another creature, when you physically interact with a creature, when you use this ability again, or when you end the illusion (no action required). If you end this illusion by harming another creature, you gain 1 surge.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "markdown:item:4:0",
+          "clause": "The illusion ends when you harm another creature, when you physically interact with a creature, when you use this ability again, or when you end the illusion (no action required). If you end this illusion by harming another creature, you gain 1 surge.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Self",
+          "message": "Only the designed single-target envelope is eligible."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "I'm No Threat",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-1/im-no-threat.md",
+          "decisionId": "class.shadow.college",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Harlequin Mask supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "I'm No Threat",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-1/im-no-threat.md",
+          "decisionId": "class.shadow.college",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Harlequin Mask supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/in-all-this-confusion",
+      "name": "In All This Confusion",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/in-all-this-confusion",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-1/in-all-this-confusion.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/in-all-this-confusion#block:0:0:be3818a860174e7a",
+          "locator": "block:0:0",
+          "clause": "You take damage.",
+          "kind": "unsupported",
+          "shape": "trigger",
+          "reason": "trigger",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/in-all-this-confusion#block:1:0:24bf193b25b17a4a",
+          "locator": "block:1:0",
+          "clause": "You take half the damage, then can [teleport](scc.v1:mcdm.heroes.v1/movement/teleport) up to 4 squares after the triggering effect resolves.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/in-all-this-confusion#block:2:0:3a5a01b88bbcd1a9",
+          "locator": "block:2:0",
+          "clause": "You [teleport](scc.v1:mcdm.heroes.v1/movement/teleport) 1 additional square for each insight spent.",
+          "kind": "unsupported",
+          "shape": "resource-spend:spend N+ insight",
+          "reason": "resource-spend",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "You take damage.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "You take half the damage, then can [teleport](scc.v1:mcdm.heroes.v1/movement/teleport) up to 4 squares after the triggering effect resolves.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:2:0",
+          "clause": "You [teleport](scc.v1:mcdm.heroes.v1/movement/teleport) 1 additional square for each insight spent.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Self",
+          "message": "Only the designed single-target envelope is eligible."
+        },
+        {
+          "code": "action-type",
+          "locator": "header:usage",
+          "clause": "Triggered",
+          "message": "Unrecognized action type."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "In All This Confusion",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-1/in-all-this-confusion.md",
+          "decisionId": "class.shadow.college",
+          "level": 1,
+          "grantKind": "aspect-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Black Ash supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "In All This Confusion",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-1/in-all-this-confusion.md",
+          "decisionId": "class.shadow.college",
+          "level": 2,
+          "grantKind": "aspect-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Black Ash supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/one-hundred-throats",
+      "name": "One Hundred Throats",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/one-hundred-throats",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-1/one-hundred-throats.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/one-hundred-throats#block:1:tier1:0:c31afe8fa82fb263",
+            "locator": "block:1:tier1:0",
+            "clause": "3 damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 3
+            },
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/one-hundred-throats#block:1:tier2:0:65723ebe74a7200a",
+            "locator": "block:1:tier2:0",
+            "clause": "6 damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 6
+            },
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/one-hundred-throats#block:1:tier3:0:abbf0071bed5821d",
+            "locator": "block:1:tier3:0",
+            "clause": "9 damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 9
+            },
+            "kitBonusesIncluded": false
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/one-hundred-throats#block:0:0:0e3fc50e49711ef8",
+          "locator": "block:0:0",
+          "clause": "You [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) and make one [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) that targets up to three enemies who came [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to you during the move.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "You [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) and make one [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) that targets up to three enemies who came [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to you during the move.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Self",
+          "message": "Only the designed single-target envelope is eligible."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "One Hundred Throats",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-1/one-hundred-throats.md",
+          "decisionId": "class.shadow.ability-5",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option One Hundred Throats supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "One Hundred Throats",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-1/one-hundred-throats.md",
+          "decisionId": "class.shadow.ability-5",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option One Hundred Throats supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/setup",
+      "name": "Setup",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/setup",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-1/setup.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/setup#block:0:tier1:0:c242b54eeae60b04",
+            "locator": "block:0:tier1:0",
+            "clause": "6 + A damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 6,
+              "characteristic": "A"
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/setup#block:0:tier1:1:39a08d2ddf8d927f",
+            "locator": "block:0:tier1:1",
+            "clause": "R < WEAK, the target has [damage weakness](scc.v1:mcdm.heroes.v1/rule.damage/damage-weakness) 5 (save ends)",
+            "kind": "unsupported",
+            "shape": "potency:R < SYM the target has damage weakness N (save ends)",
+            "reason": "potency-condition",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/setup#block:0:tier2:0:59d6701840f609eb",
+            "locator": "block:0:tier2:0",
+            "clause": "9 + A damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 9,
+              "characteristic": "A"
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/setup#block:0:tier2:1:3573db6c137704b8",
+            "locator": "block:0:tier2:1",
+            "clause": "R < AVERAGE, the target has [damage weakness](scc.v1:mcdm.heroes.v1/rule.damage/damage-weakness) 5 (save ends)",
+            "kind": "unsupported",
+            "shape": "potency:R < SYM the target has damage weakness N (save ends)",
+            "reason": "potency-condition",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/setup#block:0:tier3:0:e667b4ddb44f1970",
+            "locator": "block:0:tier3:0",
+            "clause": "13 + A damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 13,
+              "characteristic": "A"
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/setup#block:0:tier3:1:c19f93f76423a49a",
+            "locator": "block:0:tier3:1",
+            "clause": "R < STRONG, the target has [damage weakness](scc.v1:mcdm.heroes.v1/rule.damage/damage-weakness) 5 (save ends)",
+            "kind": "unsupported",
+            "shape": "potency:R < SYM the target has damage weakness N (save ends)",
+            "reason": "potency-condition",
+            "dependency": "unknown"
+          }
+        ]
+      ],
+      "sections": [],
+      "diagnostics": [
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier1:1",
+          "clause": "R < WEAK, the target has [damage weakness](scc.v1:mcdm.heroes.v1/rule.damage/damage-weakness) 5 (save ends)",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier2:1",
+          "clause": "R < AVERAGE, the target has [damage weakness](scc.v1:mcdm.heroes.v1/rule.damage/damage-weakness) 5 (save ends)",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier3:1",
+          "clause": "R < STRONG, the target has [damage weakness](scc.v1:mcdm.heroes.v1/rule.damage/damage-weakness) 5 (save ends)",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Setup",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-1/setup.md",
+          "decisionId": "class.shadow.ability-5",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Setup supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Setup",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-1/setup.md",
+          "decisionId": "class.shadow.ability-5",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Setup supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/shadowstrike",
+      "name": "Shadowstrike",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/shadowstrike",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-1/shadowstrike.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/shadowstrike#block:0:0:fad383b137103c03",
+          "locator": "block:0:0",
+          "clause": "You use a [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) [signature ability](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability) twice.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "You use a [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) [signature ability](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability) twice.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Self",
+          "message": "Only the designed single-target envelope is eligible."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Shadowstrike",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-1/shadowstrike.md",
+          "decisionId": "class.shadow.ability-5",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Shadowstrike supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Shadowstrike",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-1/shadowstrike.md",
+          "decisionId": "class.shadow.ability-5",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Shadowstrike supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/teamwork-has-its-place",
+      "name": "Teamwork Has Its Place",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/teamwork-has-its-place",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-1/teamwork-has-its-place.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/teamwork-has-its-place#block:0:tier1:0:f2375dd22924ce85",
+            "locator": "block:0:tier1:0",
+            "clause": "3 + A damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 3,
+              "characteristic": "A"
+            },
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/teamwork-has-its-place#block:0:tier2:0:c242b54eeae60b04",
+            "locator": "block:0:tier2:0",
+            "clause": "6 + A damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 6,
+              "characteristic": "A"
+            },
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/teamwork-has-its-place#block:0:tier3:0:59d6701840f609eb",
+            "locator": "block:0:tier3:0",
+            "clause": "9 + A damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 9,
+              "characteristic": "A"
+            },
+            "kitBonusesIncluded": false
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/teamwork-has-its-place#block:1:0:12e807464c59a00c",
+          "locator": "block:1:0",
+          "clause": "If any ally is [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the target, you gain 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge) before making the [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "If any ally is [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the target, you gain 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge) before making the [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Teamwork Has Its Place",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-1/teamwork-has-its-place.md",
+          "decisionId": "class.shadow.signature-ability",
+          "level": 1,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Teamwork Has Its Place supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Teamwork Has Its Place",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-1/teamwork-has-its-place.md",
+          "decisionId": "class.shadow.signature-ability",
+          "level": 2,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Teamwork Has Its Place supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/two-throats-at-once",
+      "name": "Two Throats at Once",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/two-throats-at-once",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-1/two-throats-at-once.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/two-throats-at-once#block:0:tier1:0:2a44e212de1f4bf4",
+            "locator": "block:0:tier1:0",
+            "clause": "4 damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 4
+            },
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/two-throats-at-once#block:0:tier2:0:65723ebe74a7200a",
+            "locator": "block:0:tier2:0",
+            "clause": "6 damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 6
+            },
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/two-throats-at-once#block:0:tier3:0:9520cecd344e9a4d",
+            "locator": "block:0:tier3:0",
+            "clause": "10 damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 10
+            },
+            "kitBonusesIncluded": false
+          }
+        ]
+      ],
+      "sections": [],
+      "diagnostics": [
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Two creatures or objects",
+          "message": "Only the designed single-target envelope is eligible."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Two Throats at Once",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-1/two-throats-at-once.md",
+          "decisionId": "class.shadow.ability-3",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Two Throats at Once supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Two Throats at Once",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-1/two-throats-at-once.md",
+          "decisionId": "class.shadow.ability-3",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Two Throats at Once supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/you-were-watching-the-wrong-one",
+      "name": "You Were Watching the Wrong One",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/you-were-watching-the-wrong-one",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-1/you-were-watching-the-wrong-one.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/you-were-watching-the-wrong-one#block:0:tier1:0:f2375dd22924ce85",
+            "locator": "block:0:tier1:0",
+            "clause": "3 + A damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 3,
+              "characteristic": "A"
+            },
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/you-were-watching-the-wrong-one#block:0:tier2:0:7238ed4d4beac54f",
+            "locator": "block:0:tier2:0",
+            "clause": "5 + A damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 5,
+              "characteristic": "A"
+            },
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/you-were-watching-the-wrong-one#block:0:tier3:0:b3d3653192b48556",
+            "locator": "block:0:tier3:0",
+            "clause": "8 + A damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 8,
+              "characteristic": "A"
+            },
+            "kitBonusesIncluded": false
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/you-were-watching-the-wrong-one#block:1:0:12e37f9b82d2485b",
+          "locator": "block:1:0",
+          "clause": "As long as you have one or more allies within 5 squares of the target, you gain 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge). If you are [flanking](scc.v1:mcdm.heroes.v1/rule.combat/flanking) the target when you use this ability, choose one ally who is [flanking](scc.v1:mcdm.heroes.v1/rule.combat/flanking) with you. That ally also gains 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "As long as you have one or more allies within 5 squares of the target, you gain 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge). If you are [flanking](scc.v1:mcdm.heroes.v1/rule.combat/flanking) the target when you use this ability, choose one ally who is [flanking](scc.v1:mcdm.heroes.v1/rule.combat/flanking) with you. That ally also gains 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "You Were Watching the Wrong One",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-1/you-were-watching-the-wrong-one.md",
+          "decisionId": "class.shadow.signature-ability",
+          "level": 1,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option You Were Watching the Wrong One supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "You Were Watching the Wrong One",
+          "sourcePath": "en/unified/md/feature/ability/shadow/level-1/you-were-watching-the-wrong-one.md",
+          "decisionId": "class.shadow.signature-ability",
+          "level": 2,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option You Were Watching the Wrong One supportedInV001=true; chain selectable"
         }
       ],
       "movementFacts": "No compiled push."
@@ -165712,8 +167700,8 @@
     }
   ],
   "liveCounts": {
-    "compiled": 13,
-    "compatibility": 1259,
+    "compiled": 14,
+    "compatibility": 1277,
     "compiledButUnavailable": 2
   }
 }

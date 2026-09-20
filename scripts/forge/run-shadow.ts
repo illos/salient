@@ -16,7 +16,17 @@ const witnesses = createShadowWitnesses().map(witness => ({
   forge: project(witness.hero),
 }));
 writeFileSync(join(output, 'counterparts.json'), JSON.stringify(witnesses, null, 2) + '\n');
-const names = (values: string[]) => values.map(v => v.replaceAll('’', "'")).sort();
+/** Forge prints a few names with diacritics or title case (Coup de Grâce, Two Throats At Once). */
+const names = (values: string[]) =>
+  values
+    .map(v =>
+      v
+        .replaceAll('’', "'")
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .toLowerCase(),
+    )
+    .sort();
 const results = witnesses.map(witness => {
   const expected = ledger.witnesses.find(row => row.id === witness.id)!.expected;
   try {

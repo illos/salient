@@ -20,6 +20,8 @@ test('V72 availability follows current grants and loading, not catalog presence'
     'Bola Knock',
     'Brutal Slam',
     'Bury the Point',
+    // V92: the Shadow's 3-Insight Eviscerate is reachable through the class ability choice.
+    'Eviscerate',
     'Eye Flash',
     'Eye of Surlach',
     'Melee Weapon Free Strike',

@@ -8,24 +8,24 @@ one power roll with three tiers; each tier a supported damage expression, option
 one core condition `(save ends)` as the second and final damage-tier clause. Nothing here is a
 gameplay migration, a support claim or evidence that any ability executes correctly.
 
-Content hash: `sha256:609aed9b6d4bbb4d08676bfcc080333f48fbb9c64d9c952971f82001bef100ca`. Foe catalog edition: `bf262edf546e91e1540cc17489915f18c4873ddd8bd8e225b20f3441e3f74f30`. Source revision: `fb83a789da8f0327a389c277a0c790b1648d5810`.
+Content hash: `sha256:ea1f6a2cf1d3c8a30f5fa40aef52fdadc25aa97900648485c9fe5957a50cf43b`. Foe catalog edition: `bf262edf546e91e1540cc17489915f18c4873ddd8bd8e225b20f3441e3f74f30`. Source revision: `fb83a789da8f0327a389c277a0c790b1648d5810`.
 
 ## Totals per corpus
 
 | Corpus | Total | COMPILES | COMPILES_WITH_REMAINDER | of which within V88 bounded remainder | NO_MATCH |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| Hero standalone (`ability.json`) | 57 | 8 | 23 | 2 | 26 |
+| Hero standalone (`ability.json`) | 76 | 9 | 32 | 3 | 35 |
 | Kit signature (`kit.json`) | 25 | 2 | 19 | 1 | 4 |
-| Class/other grants with their own text | 35 | 1 | 2 | 0 | 32 |
+| Class/other grants with their own text | 72 | 1 | 2 | 0 | 69 |
 | Foe abilities (`foes/catalog.json`) | 1158 | 20 | 566 | 29 | 572 |
 | Malice features with a power roll | 14 | 0 | 13 | 0 | 1 |
 
-Wizard ability grants inspected: 297 (100 resolve to a standalone entry, 42 to a kit signature, 155 classified from their own embedded text, 0 unresolved).
+Wizard ability grants inspected: 409 (138 resolve to a standalone entry, 42 to a kit signature, 229 classified from their own embedded text, 0 unresolved).
 
 ## What the bounded V26 grammar buys
 
 - Foe abilities: 586 of 1158 (50.60%) have tiers the grammar compiles: 20 fully (1.73%), 566 with a typed remainder (48.88%), of which 29 (2.50%) are within V88's bounded potency remainder. 572 (49.40%) do not match.
-- Hero abilities (standalone + kit signatures + own-text grants): 55 of 117 (47.01%) compile: 11 fully (9.40%), 44 with a typed remainder (37.61%), of which 3 (2.56%) are within the bounded potency remainder. 62 (52.99%) do not match.
+- Hero abilities (standalone + kit signatures + own-text grants): 65 of 173 (37.57%) compile: 12 fully (6.94%), 53 with a typed remainder (30.64%), of which 4 (2.31%) are within the bounded potency remainder. 108 (62.43%) do not match.
 
 A compiled tier means the damage expression and optional push are recognized; V26 runtime
 eligibility additionally requires a single-target shape and no remainder. Target shapes of the
@@ -33,8 +33,8 @@ compiled entries:
 
 | Corpus | Category | single | multi | area | self | unknown |
 | --- | --- | ---: | ---: | ---: | ---: | ---: |
-| Hero standalone (`ability.json`) | COMPILES | 5 | 1 | 2 | 0 | 0 |
-| Hero standalone (`ability.json`) | COMPILES_WITH_REMAINDER | 14 | 0 | 7 | 1 | 1 |
+| Hero standalone (`ability.json`) | COMPILES | 5 | 2 | 2 | 0 | 0 |
+| Hero standalone (`ability.json`) | COMPILES_WITH_REMAINDER | 22 | 0 | 7 | 2 | 1 |
 | Kit signature (`kit.json`) | COMPILES | 0 | 2 | 0 | 0 | 0 |
 | Kit signature (`kit.json`) | COMPILES_WITH_REMAINDER | 17 | 1 | 1 | 0 | 0 |
 | Class/other grants with their own text | COMPILES | 0 | 0 | 1 | 0 | 0 |
@@ -99,6 +99,16 @@ Availability is derived from the composed wizard definitions (`getDefinitions(1)
 | hero-standalone | To the Death! | COMPILES_WITH_REMAINDER | — | single | not-selectable | class.fury.signature-ability@1:not-selectable, class.fury.signature-ability@2:not-selectable | effect-paragraph:effect |
 | hero-standalone | To the Uttermost End | COMPILES_WITH_REMAINDER | — | single | not-selectable | class.fury.ability-5@1:not-selectable, class.fury.ability-5@2:not-selectable | resource-spend:spend N+ ferocity |
 | hero-standalone | Your Entrails Are Your Extrails! | COMPILES_WITH_REMAINDER | — | single | not-selectable | class.fury.ability-3@1:not-selectable, class.fury.ability-3@2:not-selectable | effect-paragraph:effect; potency:M < SYM bleeding (save ends) |
+| hero-standalone | Disorienting Strike | COMPILES_WITH_REMAINDER | — | single | selectable | class.shadow.ability-3@1:selectable, class.shadow.ability-3@2:selectable | effect-paragraph:effect; slide N |
+| hero-standalone | Eviscerate | COMPILES_WITH_REMAINDER | yes | single | selectable | class.shadow.ability-3@1:selectable, class.shadow.ability-3@2:selectable | potency:A < SYM bleeding (save ends) |
+| hero-standalone | Gasping in Pain | COMPILES_WITH_REMAINDER | — | single | selectable | class.shadow.signature-ability@1:selectable, class.shadow.signature-ability@2:selectable | effect-paragraph:effect; potency:I < SYM prone |
+| hero-standalone | Get In Get Out | COMPILES_WITH_REMAINDER | — | single | selectable | class.shadow.ability-3@1:selectable, class.shadow.ability-3@2:selectable | effect-paragraph:effect |
+| hero-standalone | I Work Better Alone | COMPILES_WITH_REMAINDER | — | single | selectable | class.shadow.signature-ability@1:selectable, class.shadow.signature-ability@2:selectable | effect-paragraph:effect |
+| hero-standalone | One Hundred Throats | COMPILES_WITH_REMAINDER | — | self | selectable | class.shadow.ability-5@1:selectable, class.shadow.ability-5@2:selectable | effect-paragraph:effect |
+| hero-standalone | Setup | COMPILES_WITH_REMAINDER | — | single | selectable | class.shadow.ability-5@1:selectable, class.shadow.ability-5@2:selectable | potency:R < SYM the target has damage weakness N (save ends) |
+| hero-standalone | Teamwork Has Its Place | COMPILES_WITH_REMAINDER | — | single | selectable | class.shadow.signature-ability@1:selectable, class.shadow.signature-ability@2:selectable | effect-paragraph:effect |
+| hero-standalone | Two Throats at Once | COMPILES | — | multi | selectable | class.shadow.ability-3@1:selectable, class.shadow.ability-3@2:selectable | — |
+| hero-standalone | You Were Watching the Wrong One | COMPILES_WITH_REMAINDER | — | single | selectable | class.shadow.signature-ability@1:selectable, class.shadow.signature-ability@2:selectable | effect-paragraph:effect |
 | hero-standalone | The Wode Defends | COMPILES_WITH_REMAINDER | yes | single | selectable | ancestry.revenant.wode-elf.purchased-traits@1:selectable, ancestry.wode-elf.purchased-traits@1:selectable, ancestry.revenant.wode-elf.purchased-traits@2:selectable, ancestry.wode-elf.purchased-traits@2:selectable | potency:A < SYM slowed (save ends); potency:A < SYM restrained (save ends) |
 | kit-signature | Bear Claws | COMPILES_WITH_REMAINDER | — | single | not-granted | — | potency:M < SYM grabbed |
 | kit-signature | Fade | COMPILES_WITH_REMAINDER | — | single | selectable | kit.cloak and dagger.contributions@1:selectable, kit.cloak and dagger.contributions@2:selectable | you can shift N square; you can shift up to N squares |
@@ -152,6 +162,15 @@ Availability is derived from the composed wizard definitions (`getDefinitions(1)
 | hero-standalone | Wrecking Ball | tier1-damage-outside-grammar | selectable | effect-paragraph:effect; tier:push N |
 | hero-standalone | Shadowmeld | no-power-roll | selectable | no-power-roll; effect-paragraph:effect |
 | hero-standalone | Detonate Sigil | roll-expression-outside-grammar | selectable | roll:power roll + reason, intuition, or presence; effect-paragraph:effect; slide N; tier:N + r, i, or p damage |
+| hero-standalone | Black Ash Teleport | no-power-roll | selectable | no-power-roll; effect-paragraph:effect; resource-spend:spend N+ insight |
+| hero-standalone | Clever Trick | no-power-roll | selectable | no-power-roll; trigger; effect-paragraph:effect |
+| hero-standalone | Coat the Blade | no-power-roll | selectable | no-power-roll; effect-paragraph:effect; resource-spend:spend N+ insight |
+| hero-standalone | Coup de Grace | tier1-damage-outside-grammar | selectable | tier:NdN + N + a damage |
+| hero-standalone | Defensive Roll | no-power-roll | selectable | no-power-roll; trigger; effect-paragraph:effect; resource-spend:spend N insight |
+| hero-standalone | Hesitation Is Weakness | no-power-roll | selectable | no-power-roll; trigger; effect-paragraph:effect |
+| hero-standalone | I'm No Threat | no-power-roll | selectable | no-power-roll; effect-paragraph:effect; resource-spend:spend N insight |
+| hero-standalone | In All This Confusion | no-power-roll | selectable | no-power-roll; trigger; effect-paragraph:effect; resource-spend:spend N+ insight |
+| hero-standalone | Shadowstrike | no-power-roll | selectable | no-power-roll; effect-paragraph:effect |
 | hero-standalone | Concussive Slam | roll-expression-outside-grammar | unknown | roll:power roll + reason, intuition, or presence; tier:N + r, i, or p damage; push N (not directly after damage); potency:M < SYM prone |
 | hero-standalone | Minor Acceleration | no-power-roll | unknown | no-power-roll; effect-paragraph:effect |
 | hero-standalone | Psionic Bolt | roll-expression-outside-grammar | unknown | roll:power roll + reason, intuition, or presence; slide N; tier:N + r, i, or p psychic damage |
@@ -159,14 +178,51 @@ Availability is derived from the composed wizard definitions (`getDefinitions(1)
 | kit-signature | Unmooring | roll-expression-outside-grammar | selectable | roll:power roll + might, reason, intuition, or presence; effect-paragraph:effect; tier:N + m, r, i, or p damage |
 | kit-signature | Leaping Lightning | roll-expression-outside-grammar | selectable | roll:power roll + might, reason, intuition, or presence; effect-paragraph:effect; tier:N + m, r, i, or p lightning damage |
 | kit-signature | Weakening Brand | roll-expression-outside-grammar | selectable | roll:power roll + might, reason, intuition, or presence; effect-paragraph:effect; tier:N + m, r, i, or p holy damage |
+| granted | Advanced Studies: Study Notebook | tiers-without-power-roll | selectable | extra-table:tiers without a power roll; no-power-roll; unattached-paragraph |
+| granted | Animal Form | no-power-roll | selectable | no-power-roll; unattached-paragraph |
+| granted | Bereaved: Ask the Spirit | no-power-roll | selectable | no-power-roll; unattached-paragraph |
+| granted | Consuming Interest: Study Lore | no-power-roll | selectable | no-power-roll; unattached-paragraph |
 | granted | Corrupt Spirit | no-power-roll | selectable | no-power-roll; effect-paragraph:effect |
+| granted | Crash Landed: Activate Power Pack | no-power-roll | selectable | no-power-roll; unattached-paragraph |
+| granted | Crash Landed: Deactivate Power Pack | no-power-roll | selectable | no-power-roll; unattached-paragraph |
+| granted | Cult Victim: Pass Through Matter | no-power-roll | selectable | no-power-roll; unattached-paragraph |
+| granted | Curse of Stone: Stone Appearance | no-power-roll | selectable | no-power-roll; unattached-paragraph |
+| granted | Draconian Guard | no-power-roll | selectable | no-power-roll; unattached-paragraph |
+| granted | Remember Your Oath | no-power-roll | selectable | no-power-roll; unattached-paragraph |
+| granted | Evanesceria: Absent from Reality | no-power-roll | selectable | no-power-roll; unattached-paragraph |
+| granted | Famous Relative: Summon Relative | no-power-roll | selectable | no-power-roll; unattached-paragraph |
+| granted | Feytouched: Accept Fey Power | no-power-roll | selectable | no-power-roll; unattached-paragraph |
+| granted | Forbidden Romance: Request Favor | no-power-roll | selectable | no-power-roll; unattached-paragraph |
+| granted | Getting Too Old for This: Use Advanced Ability | no-power-roll | selectable | no-power-roll; unattached-paragraph |
+| granted | Gnoll-Mauled: Retaliate | no-power-roll | selectable | no-power-roll; unattached-paragraph; effect-paragraph:special |
 | granted | Motivate Earth | no-power-roll | selectable | no-power-roll; effect-paragraph:effect |
+| granted | Guilty Conscience: Stay Alive | no-power-roll | selectable | no-power-roll; unattached-paragraph |
+| granted | Hawk Rider: Dismiss Hawk | no-power-roll | selectable | no-power-roll; unattached-paragraph |
+| granted | Hawk Rider: Restore Hawk | no-power-roll | selectable | no-power-roll; unattached-paragraph |
+| granted | Hawk Rider: Summon Hawk | no-power-roll | selectable | no-power-roll; unattached-paragraph |
+| granted | Host Body: Transfer Host | no-power-roll | selectable | no-power-roll; unattached-paragraph |
+| granted | Hunted: Lay Low | no-power-roll | selectable | no-power-roll; unattached-paragraph |
+| granted | Loner: Choose Respite Skill | no-power-roll | selectable | no-power-roll; unattached-paragraph |
 | granted | Share Head | no-power-roll | selectable | no-power-roll; effect-paragraph:effect |
+| granted | Master Chef: Prepare Meal | no-power-roll | selectable | no-power-roll; unattached-paragraph |
 | granted | Contact Spirits | tier1-damage-outside-grammar | selectable | effect-paragraph:effect; tier:you take corruption damage equal to N + your level; tier:the spirit of anyone you know of who has died speaks to you, provided they are on the same world as you. you learn how they died and can ask them one question, which they can answer truthfully or untruthfully. the spirit knows everything they knew in life, and is aware of events that took place in their immediate surroundings since their death; tier:as tier N, but you can ask three questions |
+| granted | Preacher: Convert Follower | no-power-roll | selectable | no-power-roll; unattached-paragraph |
+| granted | Prisoner of the Synlirii: Telepathy | no-power-roll | selectable | no-power-roll; unattached-paragraph |
 | granted | Psychic Blast | roll-expression-outside-grammar | selectable | roll:power roll + your highest characteristic score; effect-paragraph:effect; tier:N psychic damage for each heroic resource you spend, to a maximum equal to your level; tier:N psychic damage for each heroic resource you spend, to a maximum equal to your level + your highest characteristic; tier:N psychic damage for each heroic resource you spend |
+| granted | Psychic Blast: Forced Eruption | roll-expression-outside-grammar | selectable | unattached-paragraph; roll:power roll + your highest characteristic score; effect-paragraph:effect; tier:N psychic damage for each heroic resource you spend, to a maximum equal to your level; tier:N psychic damage for each heroic resource you spend, to a maximum equal to your level + your highest characteristic; tier:N psychic damage for each heroic resource you spend |
 | granted | Telekinetic Grasp | roll-expression-outside-grammar | selectable | roll:power roll + might, intuition, or presence; tier:push or pull N |
+| granted | Telekinetic Grasp: Ranged Free Strike | roll-expression-outside-grammar | selectable | unattached-paragraph; roll:power roll + might, intuition, or presence; tier:push or pull N |
+| granted | Secret Identity: Resume Secret Identity | no-power-roll | selectable | no-power-roll; unattached-paragraph |
+| granted | Secret Identity: Resume True Identity | no-power-roll | selectable | no-power-roll; unattached-paragraph |
+| granted | Self-Taught: Forgo Heroic Resource | no-power-roll | selectable | no-power-roll; unattached-paragraph |
+| granted | Shared Spirit: Determine Controller | no-power-roll | selectable | no-power-roll; unattached-paragraph |
+| granted | Silent Sentinel: Telepathy | no-power-roll | selectable | no-power-roll; unattached-paragraph |
+| granted | Stolen Face: Change Face | no-power-roll | selectable | no-power-roll; unattached-paragraph |
 | granted | Issue Order | no-power-roll | selectable | no-power-roll; effect-paragraph:effect; effect-paragraph:special |
+| granted | Waking Dreams: Receive Vision | no-power-roll | selectable | no-power-roll; unattached-paragraph |
 | granted | Posthumous Retirement | no-power-roll | selectable | no-power-roll; effect-paragraph:effect |
+| granted | War Dog Collar: Reset Collar | no-power-roll | selectable | no-power-roll; unattached-paragraph; effect-paragraph:effect |
+| granted | War of Assassins: Call in Favor | no-power-roll | selectable | no-power-roll; unattached-paragraph |
 | granted | Rogue Wave | roll-expression-outside-grammar | selectable | roll:power roll + your highest characteristic score; effect-paragraph:effect; push or pull N |
 | granted | Arcane Trick | no-power-roll | selectable | no-power-roll; effect-paragraph:effect |
 | granted | Area of Expertise: Inspect Object | no-power-roll | selectable | no-power-roll |
@@ -196,28 +252,28 @@ Availability is derived from the composed wizard definitions (`getDefinitions(1)
 
 | # | Type | Shape | Clauses | Abilities | Examples |
 | ---: | --- | --- | ---: | ---: | --- |
-| 1 | effect-paragraph | effect-paragraph:effect | 1018 | 1005 | `complication:Corrupted Mentor/corrupt-spirit`, `complication:Dragon Dreams/dragon-breath`, `complication:Grounded/motivate-earth` |
-| 2 | no-power-roll | no-power-roll | 539 | 539 | `complication:Corrupted Mentor/corrupt-spirit`, `complication:Grounded/motivate-earth`, `complication:Lost Your Head/share-head` |
-| 3 | trigger | trigger | 179 | 179 | `foe-feature:9d1bd539-c732-4fba-95d1-ac7036cb89dc`, `mcdm.heroes.v1/feature.ability.elementalist.level-1/breath-of-dawn-remembered`, `mcdm.heroes.v1/feature.ability.elementalist.level-1/explosive-assistance` |
+| 1 | effect-paragraph | effect-paragraph:effect | 1035 | 1022 | `complication:Corrupted Mentor/corrupt-spirit`, `complication:Dragon Dreams/dragon-breath`, `complication:Grounded/motivate-earth` |
+| 2 | no-power-roll | no-power-roll | 582 | 582 | `complication:Advanced Studies/advanced-studies-study-notebook`, `complication:Animal Form/animal-form`, `complication:Bereaved/bereaved-ask-the-spirit` |
+| 3 | trigger | trigger | 183 | 183 | `foe-feature:9d1bd539-c732-4fba-95d1-ac7036cb89dc`, `mcdm.heroes.v1/feature.ability.elementalist.level-1/breath-of-dawn-remembered`, `mcdm.heroes.v1/feature.ability.elementalist.level-1/explosive-assistance` |
 | 4 | malice-spend | malice-spend:N malice | 140 | 137 | `foe-feature:41c25df0-9cac-4c76-ac45-db0e230ef462`, `foe-feature:d6f8849a-8c57-4736-9e20-b2dc2591c3ff`, `salient:foe-feature:00437fdf-4d82-497e-8aef-f12680d4dea5` |
-| 5 | slide | slide N | 80 | 31 | `mcdm.heroes.v1/feature.ability.fury.level-1/out-of-the-way`, `mcdm.heroes.v1/feature.ability.revenant/detonate-sigil`, `mcdm.heroes.v1/feature.ability.time-raider/psionic-bolt` |
-| 6 | potency-condition | potency:M < N bleeding (save ends) | 64 | 30 | `foe-feature:77cbca92-0a9e-40e8-b402-97d0b11eca24`, `foe-feature:a0cf5ff7-f923-4ce3-8e1a-07adc576dd2c`, `salient:foe-feature:1c921045-6bd1-4a1b-a794-c6f8dc63fb52` |
-| 7 | pull | pull N | 64 | 24 | `salient:foe-feature:065066fe-d557-4f82-94c4-01a38505d9b7`, `salient:foe-feature:17912a2b-0ae3-447f-9e8a-d1aed6e34054`, `salient:foe-feature:1df6ce7d-a081-43af-892d-7120279ea7e7` |
-| 8 | extra-table | extra-table:tiers without a power roll | 54 | 54 | `salient:foe-feature:08b75627-ded0-4e55-a034-6a2f6c7d35ea`, `salient:foe-feature:0ee6dd1c-8d53-4033-a8c3-879ac28b430e`, `salient:foe-feature:1077f2e2-291d-4bc4-ad34-24dd36325ac2` |
-| 9 | potency-condition | potency:M < N weakened (save ends) | 48 | 19 | `foe-feature:ac3d80c8-3f08-4a5c-ab2f-18509c6a8d0b`, `salient:foe-feature:00b57167-6032-448b-be46-c8436eef6426`, `salient:foe-feature:1f176e1b-a097-47a0-83ce-60655695bd3a` |
-| 10 | potency-condition | potency:A < N bleeding (save ends) | 44 | 25 | `salient:foe-feature:01bf9520-d963-4137-87da-6b525b0b1c4c`, `salient:foe-feature:065066fe-d557-4f82-94c4-01a38505d9b7`, `salient:foe-feature:082d8e1f-2ce5-4623-9d85-a7258d81c60d` |
-| 11 | potency-condition | potency:M < N slowed (save ends) | 44 | 19 | `foe-feature:8019fee0-215c-4367-8200-6b7a198c3c58`, `salient:foe-feature:08b43e09-f0f7-400b-a30d-65fd67b6a7be`, `salient:foe-feature:1d5aa30a-cb4e-4c75-b633-3a9143531fb2` |
-| 12 | condition | prone | 40 | 28 | `salient:foe-feature:00512dab-a7ce-499e-92be-d5270aeb17ce`, `salient:foe-feature:00676769-6a94-45ee-9632-cf449c746c29`, `salient:foe-feature:091545a3-1f51-424b-844d-518f79ee7106` |
-| 13 | potency-condition | potency:M < N prone | 40 | 18 | `salient:foe-feature:03e3e1d4-0ab0-4b6c-97e5-a496536f9c2e`, `salient:foe-feature:0f17ac0c-bc4f-46a8-81b8-e8b49c96dbfc`, `salient:foe-feature:25f4d46c-02c5-4178-aabc-45b4778757a4` |
-| 14 | effect-paragraph | effect-paragraph:special | 39 | 39 | `complication:Stripped of Rank/issue-order`, `salient:foe-feature:0f9e2dcf-c949-4a62-b76a-98cc9eef23bc`, `salient:foe-feature:11db3d80-a448-4c04-a9df-9ab11a325d3d` |
-| 15 | potency-condition | potency:A < N slowed (save ends) | 31 | 14 | `salient:foe-feature:1e16e43e-5f2b-48a9-9e2d-d2d307f8392e`, `salient:foe-feature:384202f9-ba09-4c42-bdf5-93ea4d0eaaeb`, `salient:foe-feature:3ae18f0b-3369-4e2b-9966-a0576e1df4d9` |
-| 16 | potency-condition | potency:I < N frightened (save ends) | 31 | 13 | `salient:foe-feature:00be6939-a8f4-429b-8329-90cbe37a5859`, `salient:foe-feature:049e1060-2d30-4f06-bccf-b48b72f90ab1`, `salient:foe-feature:0c82b794-9754-470a-b9ce-32b4511e9cd5` |
-| 17 | potency-condition | potency:I < N dazed (save ends) | 28 | 11 | `salient:foe-feature:28379230-7a51-4f89-b8b2-53b07dbc1154`, `salient:foe-feature:3964ef10-10fe-4d2b-8d01-7ef4fc05b962`, `salient:foe-feature:42ff9936-7937-464a-be42-979499736395` |
-| 18 | potency-condition | potency:A < N grabbed | 25 | 12 | `salient:foe-feature:08a4a758-ae3e-4f42-a57d-1a8e4f4a6880`, `salient:foe-feature:36454ca2-1178-487b-94bb-e5010d1ccf59`, `salient:foe-feature:3a54b3a7-c6b7-4e39-8e4d-761e010650c9` |
-| 19 | potency-condition | potency:A < N restrained (save ends) | 25 | 12 | `salient:foe-feature:003d77fe-6a8e-4074-8c91-96a50c77c5fb`, `salient:foe-feature:38b42d43-df0b-4a76-b424-ebb8dcda3e9d`, `salient:foe-feature:47396d85-c934-4cf0-805b-1330420e73b5` |
-| 20 | potency-condition | potency:M < N dazed (save ends) | 23 | 10 | `foe-feature:ac3d80c8-3f08-4a5c-ab2f-18509c6a8d0b`, `salient:foe-feature:01bf9520-d963-4137-87da-6b525b0b1c4c`, `salient:foe-feature:19cf3949-d026-43a6-9787-afe7890f0fc4` |
-| 21 | potency-condition | potency:M < N grabbed | 23 | 9 | `salient:foe-feature:05bbcbfc-275b-4d1e-837d-8db6500878fc`, `salient:foe-feature:3c6121dc-e556-4a07-b38e-6fa41550ab22`, `salient:foe-feature:4b969b6a-9975-4da9-9568-5b43f16d16aa` |
-| 22 | unknown | unattached-paragraph | 22 | 22 | `foe-feature:e98702c2-bf2c-41da-b686-89e0bd1c3931`, `salient:foe-feature:0d3ab7d7-70b8-4e4f-b410-73be9b73639e`, `salient:foe-feature:0ee6dd1c-8d53-4033-a8c3-879ac28b430e` |
+| 5 | unknown | unattached-paragraph | 130 | 59 | `complication:Advanced Studies/advanced-studies-study-notebook`, `complication:Animal Form/animal-form`, `complication:Bereaved/bereaved-ask-the-spirit` |
+| 6 | slide | slide N | 83 | 32 | `mcdm.heroes.v1/feature.ability.fury.level-1/out-of-the-way`, `mcdm.heroes.v1/feature.ability.revenant/detonate-sigil`, `mcdm.heroes.v1/feature.ability.shadow.level-1/disorienting-strike` |
+| 7 | potency-condition | potency:M < N bleeding (save ends) | 64 | 30 | `foe-feature:77cbca92-0a9e-40e8-b402-97d0b11eca24`, `foe-feature:a0cf5ff7-f923-4ce3-8e1a-07adc576dd2c`, `salient:foe-feature:1c921045-6bd1-4a1b-a794-c6f8dc63fb52` |
+| 8 | pull | pull N | 64 | 24 | `salient:foe-feature:065066fe-d557-4f82-94c4-01a38505d9b7`, `salient:foe-feature:17912a2b-0ae3-447f-9e8a-d1aed6e34054`, `salient:foe-feature:1df6ce7d-a081-43af-892d-7120279ea7e7` |
+| 9 | extra-table | extra-table:tiers without a power roll | 55 | 55 | `complication:Advanced Studies/advanced-studies-study-notebook`, `salient:foe-feature:08b75627-ded0-4e55-a034-6a2f6c7d35ea`, `salient:foe-feature:0ee6dd1c-8d53-4033-a8c3-879ac28b430e` |
+| 10 | potency-condition | potency:M < N weakened (save ends) | 48 | 19 | `foe-feature:ac3d80c8-3f08-4a5c-ab2f-18509c6a8d0b`, `salient:foe-feature:00b57167-6032-448b-be46-c8436eef6426`, `salient:foe-feature:1f176e1b-a097-47a0-83ce-60655695bd3a` |
+| 11 | potency-condition | potency:A < N bleeding (save ends) | 44 | 25 | `salient:foe-feature:01bf9520-d963-4137-87da-6b525b0b1c4c`, `salient:foe-feature:065066fe-d557-4f82-94c4-01a38505d9b7`, `salient:foe-feature:082d8e1f-2ce5-4623-9d85-a7258d81c60d` |
+| 12 | potency-condition | potency:M < N slowed (save ends) | 44 | 19 | `foe-feature:8019fee0-215c-4367-8200-6b7a198c3c58`, `salient:foe-feature:08b43e09-f0f7-400b-a30d-65fd67b6a7be`, `salient:foe-feature:1d5aa30a-cb4e-4c75-b633-3a9143531fb2` |
+| 13 | effect-paragraph | effect-paragraph:special | 40 | 40 | `complication:Gnoll-Mauled/gnoll-mauled-retaliate`, `complication:Stripped of Rank/issue-order`, `salient:foe-feature:0f9e2dcf-c949-4a62-b76a-98cc9eef23bc` |
+| 14 | condition | prone | 40 | 28 | `salient:foe-feature:00512dab-a7ce-499e-92be-d5270aeb17ce`, `salient:foe-feature:00676769-6a94-45ee-9632-cf449c746c29`, `salient:foe-feature:091545a3-1f51-424b-844d-518f79ee7106` |
+| 15 | potency-condition | potency:M < N prone | 40 | 18 | `salient:foe-feature:03e3e1d4-0ab0-4b6c-97e5-a496536f9c2e`, `salient:foe-feature:0f17ac0c-bc4f-46a8-81b8-e8b49c96dbfc`, `salient:foe-feature:25f4d46c-02c5-4178-aabc-45b4778757a4` |
+| 16 | potency-condition | potency:A < N slowed (save ends) | 31 | 14 | `salient:foe-feature:1e16e43e-5f2b-48a9-9e2d-d2d307f8392e`, `salient:foe-feature:384202f9-ba09-4c42-bdf5-93ea4d0eaaeb`, `salient:foe-feature:3ae18f0b-3369-4e2b-9966-a0576e1df4d9` |
+| 17 | potency-condition | potency:I < N frightened (save ends) | 31 | 13 | `salient:foe-feature:00be6939-a8f4-429b-8329-90cbe37a5859`, `salient:foe-feature:049e1060-2d30-4f06-bccf-b48b72f90ab1`, `salient:foe-feature:0c82b794-9754-470a-b9ce-32b4511e9cd5` |
+| 18 | potency-condition | potency:I < N dazed (save ends) | 28 | 11 | `salient:foe-feature:28379230-7a51-4f89-b8b2-53b07dbc1154`, `salient:foe-feature:3964ef10-10fe-4d2b-8d01-7ef4fc05b962`, `salient:foe-feature:42ff9936-7937-464a-be42-979499736395` |
+| 19 | potency-condition | potency:A < N grabbed | 25 | 12 | `salient:foe-feature:08a4a758-ae3e-4f42-a57d-1a8e4f4a6880`, `salient:foe-feature:36454ca2-1178-487b-94bb-e5010d1ccf59`, `salient:foe-feature:3a54b3a7-c6b7-4e39-8e4d-761e010650c9` |
+| 20 | potency-condition | potency:A < N restrained (save ends) | 25 | 12 | `salient:foe-feature:003d77fe-6a8e-4074-8c91-96a50c77c5fb`, `salient:foe-feature:38b42d43-df0b-4a76-b424-ebb8dcda3e9d`, `salient:foe-feature:47396d85-c934-4cf0-805b-1330420e73b5` |
+| 21 | potency-condition | potency:M < N dazed (save ends) | 23 | 10 | `foe-feature:ac3d80c8-3f08-4a5c-ab2f-18509c6a8d0b`, `salient:foe-feature:01bf9520-d963-4137-87da-6b525b0b1c4c`, `salient:foe-feature:19cf3949-d026-43a6-9787-afe7890f0fc4` |
+| 22 | potency-condition | potency:M < N grabbed | 23 | 9 | `salient:foe-feature:05bbcbfc-275b-4d1e-837d-8db6500878fc`, `salient:foe-feature:3c6121dc-e556-4a07-b38e-6fa41550ab22`, `salient:foe-feature:4b969b6a-9975-4da9-9568-5b43f16d16aa` |
 | 23 | tier-damage | tier:push N | 22 | 8 | `mcdm.heroes.v1/feature.ability.common/knockback`, `mcdm.heroes.v1/feature.ability.fury.level-2/wrecking-ball`, `salient:foe-feature:25b187f0-977f-42d6-918e-a86c7e8698d5` |
 | 24 | roll-expression | roll:power roll + highest characteristic | 20 | 20 | `salient:foe-feature:047c7929-7d37-4083-8817-40f7363da23f`, `salient:foe-feature:08262f07-e929-4223-9787-a05ea050db62`, `salient:foe-feature:08dd35a2-505e-4ab3-9eef-e0e9477f767d` |
 | 25 | condition | grabbed | 20 | 16 | `foe-feature:4e8a9923-53b2-4d4f-8a77-55ba4357e7ac`, `salient:foe-feature:0111b484-e533-47e2-859b-2c8041af5214`, `salient:foe-feature:33ca2918-cd88-454c-9eaa-abda315cffa6` |
@@ -241,21 +297,21 @@ Availability is derived from the composed wizard definitions (`getDefinitions(1)
 
 | Type | Clauses | Distinct shapes |
 | --- | ---: | ---: |
-| effect-paragraph | 1065 | 6 |
-| potency-condition | 930 | 177 |
-| no-power-roll | 539 | 1 |
-| tier-damage | 215 | 77 |
-| trigger | 179 | 1 |
+| effect-paragraph | 1083 | 6 |
+| potency-condition | 937 | 180 |
+| no-power-roll | 582 | 1 |
+| tier-damage | 224 | 78 |
+| unknown | 208 | 43 |
+| trigger | 183 | 1 |
 | malice-spend | 151 | 2 |
-| slide | 109 | 8 |
-| unknown | 100 | 43 |
+| slide | 112 | 8 |
 | condition | 97 | 14 |
 | pull | 70 | 3 |
-| extra-table | 55 | 2 |
+| extra-table | 56 | 2 |
 | shift | 40 | 24 |
-| roll-expression | 31 | 6 |
+| roll-expression | 33 | 6 |
 | push-with-extra | 28 | 11 |
-| resource-spend | 8 | 4 |
+| resource-spend | 13 | 6 |
 | extra-damage | 3 | 1 |
 | second-roll | 1 | 1 |
 
@@ -265,6 +321,114 @@ Structured record and Markdown disagree, or a paragraph sits outside any labeled
 
 | Corpus | Ability | Parent | Detail |
 | --- | --- | --- | --- |
+| granted | Advanced Studies: Study Notebook | Advanced Studies | unattached paragraph: You somehow obtained the notebook of a brilliant but eccentric member of your class. The knowledge held within those not |
+| granted | Advanced Studies: Study Notebook | Advanced Studies | unattached paragraph: Benefit and Drawback: As a respite activity, you can study the notebook. Make a test using your highest characteristic s |
+| granted | Animal Form | Animal Form | unattached paragraph: Due to a magical accident, your being has fused with that of a small, harmless animal. You turn into this animal when it |
+| granted | Animal Form | Animal Form | unattached paragraph: Benefit: As a maneuver, you take the form of a specific animal of size 1T. You retain all your other statistics aside fr |
+| granted | Animal Form | Animal Form | unattached paragraph: Unless you use this benefit again, you return to your true form at the start of your next turn. |
+| granted | Animal Form | Animal Form | unattached paragraph: Drawback: At the start of any turn while you are winded, the Director can spend 1 Malice to force you to take your anima |
+| granted | Bereaved: Ask the Spirit | Bereaved | unattached paragraph: The most important person to you—perhaps a family member, mentor, or lover—was killed. The only thing that keeps you goi |
+| granted | Bereaved: Ask the Spirit | Bereaved | unattached paragraph: Benefit: Whenever you don't know what to do, you can appeal to your loved one's spirit for help. You spend a hero token  |
+| granted | Bereaved: Ask the Spirit | Bereaved | unattached paragraph: Drawback: You have corruption weakness 5. |
+| granted | Consuming Interest: Study Lore | Consuming Interest | unattached paragraph: Ever since you were a kid, you've been obsessed with a certain topic. During your travels, you spend your free time glea |
+| granted | Consuming Interest: Study Lore | Consuming Interest | unattached paragraph: Benefit: You have one skill of your choice from the lore skill group, and you can use the Study Lore project (see below) |
+| granted | Consuming Interest: Study Lore | Consuming Interest | unattached paragraph: Drawback: You can't imagine ever being wrong on the topic of your obsession. Whenever you make a test to recall lore usi |
+| granted | Consuming Interest: Study Lore | Consuming Interest | unattached paragraph: Item Prerequisite: None |
+| granted | Consuming Interest: Study Lore | Consuming Interest | unattached paragraph: Project Source: A significant source of information on the topic of your obsession, such as a major library or a world-r |
+| granted | Consuming Interest: Study Lore | Consuming Interest | unattached paragraph: Project Roll Characteristic: Reason |
+| granted | Consuming Interest: Study Lore | Consuming Interest | unattached paragraph: Project Goal: 120, 150, 180 |
+| granted | Consuming Interest: Study Lore | Consuming Interest | unattached paragraph: Each time you complete this project, your knowledge of your chosen field expands, and the bonus to tests provided by you |
+| granted | Crash Landed: Activate Power Pack | Crash Landed | unattached paragraph: You used to flit around the stars in your own ship. But an ugly run-in with a pirate (or a pirate hunter) has left you m |
+| granted | Crash Landed: Activate Power Pack | Crash Landed | unattached paragraph: Benefit: You have the Timescape skill (from the lore skill group). Additionally, you have a power pack that you can acti |
+| granted | Crash Landed: Activate Power Pack | Crash Landed | unattached paragraph: Drawback: You take a bane on any test made to know about anything related to the world where you crash landed. |
+| granted | Crash Landed: Deactivate Power Pack | Crash Landed | unattached paragraph: You used to flit around the stars in your own ship. But an ugly run-in with a pirate (or a pirate hunter) has left you m |
+| granted | Crash Landed: Deactivate Power Pack | Crash Landed | unattached paragraph: Benefit: You have the Timescape skill (from the lore skill group). Additionally, you have a power pack that you can acti |
+| granted | Crash Landed: Deactivate Power Pack | Crash Landed | unattached paragraph: Drawback: You take a bane on any test made to know about anything related to the world where you crash landed. |
+| granted | Cult Victim: Pass Through Matter | Cult Victim | unattached paragraph: Cultists captured you while raiding your home, then began an unholy ritual to turn your body into an undead spirit. Thou |
+| granted | Cult Victim: Pass Through Matter | Cult Victim | unattached paragraph: Benefit: Once per turn, you can move through solid matter 1 square thick or less. If you end your turn inside solid matt |
+| granted | Cult Victim: Pass Through Matter | Cult Victim | unattached paragraph: Drawback: You have corruption weakness 5. |
+| granted | Curse of Stone: Stone Appearance | Curse of Stone | unattached paragraph: As a child, you met a creature who turns people to stone, such as a medusa. You escaped half petrified, avoiding the fat |
+| granted | Curse of Stone: Stone Appearance | Curse of Stone | unattached paragraph: Benefit: You have a +1 bonus to stability. Additionally, you can use a free maneuver to cause your body, gear, and any i |
+| granted | Curse of Stone: Stone Appearance | Curse of Stone | unattached paragraph: Drawback: You have sonic weakness 5. Additionally, while you are winded, you are dazed. |
+| granted | Draconian Guard | Dragon Dreams | unattached paragraph: Whenever you or an adjacent creature takes damage from a strike, you can use a triggered action to guard against the blo |
+| granted | Remember Your Oath | Dragon Dreams | unattached paragraph: As a maneuver, you can recite the following oath. Until the start of your next turn, whenever you make a saving throw, y |
+| granted | Evanesceria: Absent from Reality | Evanesceria | unattached paragraph: You have contracted a rare magical disease called evanesceria. From time to time, you're not quite yourself—or anyone el |
+| granted | Evanesceria: Absent from Reality | Evanesceria | unattached paragraph: Benefit: At the start of any combat round, you can attempt to absent yourself from reality by rolling a d10. On a 6 or h |
+| granted | Evanesceria: Absent from Reality | Evanesceria | unattached paragraph: Drawback: Whenever you start a respite activity, roll 2d10. If you roll a 1 on either die, you inadvertently absent your |
+| granted | Famous Relative: Summon Relative | Famous Relative | unattached paragraph: Sure, you're a promising young hero in your own right—but people always ask you about your famous relative. Will you equ |
+| granted | Famous Relative: Summon Relative | Famous Relative | unattached paragraph: Benefit: You have a piece of magic jewelry such as a signet ring. As a maneuver, you can use this item to summon your re |
+| granted | Famous Relative: Summon Relative | Famous Relative | unattached paragraph: Drawback: You earn no Victories from combat encounters or other challenges for which your relative was present. Addition |
+| granted | Feytouched: Accept Fey Power | Feytouched | unattached paragraph: Your birth was attended by faeries. A friendly fairy blessed you, granting you strength so you could defend yourself. In |
+| granted | Feytouched: Accept Fey Power | Feytouched | unattached paragraph: Benefit and Drawback: At the start of each combat encounter, you can choose to gain 1 additional Heroic Resource. If you |
+| granted | Forbidden Romance: Request Favor | Forbidden Romance | unattached paragraph: You are in love with someone powerful, but tragic circumstances mean you cannot be with them. Whether your lover is from |
+| granted | Forbidden Romance: Request Favor | Forbidden Romance | unattached paragraph: Benefit: You can secretly call on your betrothed for favors. Though they support you from afar, they might be constraine |
+| granted | Forbidden Romance: Request Favor | Forbidden Romance | unattached paragraph: Drawback: When your lover is in trouble, they might call on you for help. But if your relationship is discovered, the ci |
+| granted | Getting Too Old for This: Use Advanced Ability | Getting Too Old for This | unattached paragraph: You were once a renowned hero, but you've been living the last few years in blissful peace. Now you're coming out of ret |
+| granted | Getting Too Old for This: Use Advanced Ability | Getting Too Old for This | unattached paragraph: Benefit: On your turn, you can choose a heroic ability that you would be able to learn if you were one level higher. Pro |
+| granted | Getting Too Old for This: Use Advanced Ability | Getting Too Old for This | unattached paragraph: Drawback: While you are winded, you take a -2 penalty to speed. |
+| granted | Gnoll-Mauled: Retaliate | Gnoll-Mauled | unattached paragraph: As a child, you survived a gnoll attack. But that attack left you with a jagged scar and the occasional fit of bloodlust |
+| granted | Gnoll-Mauled: Retaliate | Gnoll-Mauled | unattached paragraph: Benefit: Whenever an ally within 5 squares is reduced to 0 Stamina, you can use a triggered action to move up to your sp |
+| granted | Gnoll-Mauled: Retaliate | Gnoll-Mauled | unattached paragraph: Drawback: While you are dazed, if you start your turn adjacent to one or more creatures, you must use your main action t |
+| granted | Guilty Conscience: Stay Alive | Guilty Conscience | unattached paragraph: The world is in trouble—and it's partly your fault. Maybe you helped a villain rise to power or inadvertently released a |
+| granted | Guilty Conscience: Stay Alive | Guilty Conscience | unattached paragraph: Benefit: You're determined to stay alive so you can set things right. When your Stamina reaches the negative of your win |
+| granted | Guilty Conscience: Stay Alive | Guilty Conscience | unattached paragraph: Drawback: Many people blame you for the evils you caused. They might be unfriendly or hostile to you—and you can underst |
+| granted | Hawk Rider: Dismiss Hawk | Hawk Rider | unattached paragraph: You travel with a giant hawk who you stole from the Hawklords (see Vasloria in Chapter 1: The Basics). You might once ha |
+| granted | Hawk Rider: Dismiss Hawk | Hawk Rider | unattached paragraph: Benefit: As long as you are not in a building or other structure, you can spend 1 uninterrupted minute to summon your gi |
+| granted | Hawk Rider: Dismiss Hawk | Hawk Rider | unattached paragraph: Drawback: People aware of the origin of your mount are afraid to interact with you, since they worry the Hawklords will  |
+| granted | Hawk Rider: Restore Hawk | Hawk Rider | unattached paragraph: You travel with a giant hawk who you stole from the Hawklords (see Vasloria in Chapter 1: The Basics). You might once ha |
+| granted | Hawk Rider: Restore Hawk | Hawk Rider | unattached paragraph: Benefit: As long as you are not in a building or other structure, you can spend 1 uninterrupted minute to summon your gi |
+| granted | Hawk Rider: Restore Hawk | Hawk Rider | unattached paragraph: Drawback: People aware of the origin of your mount are afraid to interact with you, since they worry the Hawklords will  |
+| granted | Hawk Rider: Summon Hawk | Hawk Rider | unattached paragraph: You travel with a giant hawk who you stole from the Hawklords (see Vasloria in Chapter 1: The Basics). You might once ha |
+| granted | Hawk Rider: Summon Hawk | Hawk Rider | unattached paragraph: Benefit: As long as you are not in a building or other structure, you can spend 1 uninterrupted minute to summon your gi |
+| granted | Hawk Rider: Summon Hawk | Hawk Rider | unattached paragraph: Drawback: People aware of the origin of your mount are afraid to interact with you, since they worry the Hawklords will  |
+| granted | Host Body: Transfer Host | Host Body | unattached paragraph: "Do not be alarmed! We are not the humanoid we appear to be. We are an intelligent fungal collective, using this body as |
+| granted | Host Body: Transfer Host | Host Body | unattached paragraph: Benefit: You are a sapient fungus who inhabits a humanoid body. Your host body follows all the usual rules for a charact |
+| granted | Host Body: Transfer Host | Host Body | unattached paragraph: Drawback: You have fire weakness 5. Additionally, you take a bane on any test made to read a humanoid creature's emotion |
+| granted | Hunted: Lay Low | Hunted | unattached paragraph: You have long stayed one step ahead of a pursuer—perhaps a bounty hunter determined to bring you to justice, a revenant, |
+| granted | Hunted: Lay Low | Hunted | unattached paragraph: Benefit: You have one skill of your choice from the intrigue skill group. Additionally, whenever one or more creatures a |
+| granted | Hunted: Lay Low | Hunted | unattached paragraph: Drawback: Each time you earn Renown, your pursuer learns your location. Unless you lay low or move to a new location, yo |
+| granted | Loner: Choose Respite Skill | Loner | unattached paragraph: You've always been a lone wolf. With no one else to lean on, you've picked up a million survival tricks. Which made it a |
+| granted | Loner: Choose Respite Skill | Loner | unattached paragraph: Benefit: When you finish a respite, choose a skill you don't have. You have that skill until the end of your next respit |
+| granted | Loner: Choose Respite Skill | Loner | unattached paragraph: Drawback: Now that you finally have people who care about you, you won't let anyone take them away! Whenever a creature  |
+| granted | Master Chef: Prepare Meal | Master Chef | unattached paragraph: Before you were a hero, you were a chef—and when you retire, you have big plans for your next restaurant or inn. In the  |
+| granted | Master Chef: Prepare Meal | Master Chef | unattached paragraph: Benefit: You have the Cooking skill (from the crafting skill group). Additionally, whenever you finish a respite or wake |
+| granted | Master Chef: Prepare Meal | Master Chef | unattached paragraph: Drawback: The first time each day you eat food you didn't prepare, you lose 2 Recoveries. |
+| granted | Preacher: Convert Follower | Preacher | unattached paragraph: When you were young, you almost died in an accident or attack, but a vision of a god or saint showed you the way to save |
+| granted | Preacher: Convert Follower | Preacher | unattached paragraph: Benefit: As a respite activity, you can attempt to convert members of a community to your cause. Make a Presence test wi |
+| granted | Preacher: Convert Follower | Preacher | unattached paragraph: Drawback: If you fail in your conversion attempt, one of your existing followers of the Director's choice (whether gaine |
+| granted | Prisoner of the Synlirii: Telepathy | Prisoner of the Synlirii | unattached paragraph: You were captured by the psionic beings known as voiceless talkers (see *Draw Steel: Monsters*). You escaped them, but y |
+| granted | Prisoner of the Synlirii: Telepathy | Prisoner of the Synlirii | unattached paragraph: Benefit: You can telepathically communicate with any creature within 10 squares of you if they share a language with you |
+| granted | Prisoner of the Synlirii: Telepathy | Prisoner of the Synlirii | unattached paragraph: Drawback: Any voiceless talker within 1 mile knows your location, and can overhear and understand your telepathic conver |
+| granted | Psychic Blast: Forced Eruption | Psychic Eruption | unattached paragraph: In times of stress, you get headaches. Psionic energy builds up in your mind until you feel as though your head might ex |
+| granted | Psychic Blast: Forced Eruption | Psychic Eruption | unattached paragraph: Benefit: You have the following heroic ability. |
+| granted | Psychic Blast: Forced Eruption | Psychic Eruption | unattached paragraph: Drawback: Whenever you become bleeding, frightened, or weakened, you must use Psychic Blast as a free triggered action. |
+| granted | Telekinetic Grasp: Ranged Free Strike | Rogue Talent | unattached paragraph: You are the only survivor of a cataclysmic psionic event—an experiment gone wrong, a voiceless talker attack, or some na |
+| granted | Telekinetic Grasp: Ranged Free Strike | Rogue Talent | unattached paragraph: Benefit: You have the following ability, which you can use as a ranged free strike. |
+| granted | Telekinetic Grasp: Ranged Free Strike | Rogue Talent | unattached paragraph: Drawback: You have psychic weakness 5. |
+| granted | Secret Identity: Resume Secret Identity | Secret Identity | unattached paragraph: You're secretly important—but it's not safe for your true identity to be known. Perhaps you're the witness to a crime or |
+| granted | Secret Identity: Resume Secret Identity | Secret Identity | unattached paragraph: Benefit: You have a skill of your choice from the intrigue skill group. Additionally, you can resume your true identity  |
+| granted | Secret Identity: Resume Secret Identity | Secret Identity | unattached paragraph: Drawback: Each time you resume your true identity while you are still hunted, you have a 20 percent cumulative chance ea |
+| granted | Secret Identity: Resume True Identity | Secret Identity | unattached paragraph: You're secretly important—but it's not safe for your true identity to be known. Perhaps you're the witness to a crime or |
+| granted | Secret Identity: Resume True Identity | Secret Identity | unattached paragraph: Benefit: You have a skill of your choice from the intrigue skill group. Additionally, you can resume your true identity  |
+| granted | Secret Identity: Resume True Identity | Secret Identity | unattached paragraph: Drawback: Each time you resume your true identity while you are still hunted, you have a 20 percent cumulative chance ea |
+| granted | Self-Taught: Forgo Heroic Resource | Self-Taught | unattached paragraph: While your peers were learning their trades in fancy schools, you honed your capabilities on the mean streets with nothi |
+| granted | Self-Taught: Forgo Heroic Resource | Self-Taught | unattached paragraph: Benefit and Drawback: At the start of each of your turns during combat, you can forgo gaining your Heroic Resource until |
+| granted | Shared Spirit: Determine Controller | Shared Spirit | unattached paragraph: A supernatural spirit occupies your body, with each of you controlling your body by turns. You and the spirit share the  |
+| granted | Shared Spirit: Determine Controller | Shared Spirit | unattached paragraph: Benefit and Drawback: At the start of each day, roll a d6. On a 1-4, you control your body. On a 5-6, the spirit does. A |
+| granted | Silent Sentinel: Telepathy | Silent Sentinel | unattached paragraph: You were trained by a group of spies, who psionically infused silence into your every step and enhanced your ability to  |
+| granted | Silent Sentinel: Telepathy | Silent Sentinel | unattached paragraph: Benefit: You have the Eavesdrop and Sneak skills from the intrigue skill group, plus one skill of your choice from the l |
+| granted | Silent Sentinel: Telepathy | Silent Sentinel | unattached paragraph: Drawback: You have sonic weakness 5. Additionally, whenever you take sonic damage, you are dazed until the end of your n |
+| granted | Stolen Face: Change Face | Stolen Face | unattached paragraph: An evil fairy cursed you, leaving you with a blank visage instead of a face. Although you're able to imitate other peopl |
+| granted | Stolen Face: Change Face | Stolen Face | unattached paragraph: Benefit: You can spend 5 uninterrupted minutes to rearrange your face to resemble the face of another creature of your a |
+| granted | Stolen Face: Change Face | Stolen Face | unattached paragraph: Drawback: Whenever you take damage, your face becomes blank, with no eyes, nose, mouth, or ears. This doesn't affect you |
+| granted | Waking Dreams: Receive Vision | Waking Dreams | unattached paragraph: You broke a magic amulet, immersing your mind in weird energy that granted you the power of premonition. However, you st |
+| granted | Waking Dreams: Receive Vision | Waking Dreams | unattached paragraph: Benefit: With a tier 2 outcome, you experience a vision of an event currently happening in your world. The vision lasts  |
+| granted | Waking Dreams: Receive Vision | Waking Dreams | unattached paragraph: Drawback: With a tier 1 outcome, you receive a painful vision that is fractal and inscrutable. When you finish the respi |
+| granted | War Dog Collar: Reset Collar | War Dog Collar | unattached paragraph: You wear a loyalty collar from one of Ajax's war dogs (see *Draw Steel: Monsters*). You've managed to rig the collar so  |
+| granted | War Dog Collar: Reset Collar | War Dog Collar | unattached paragraph: Benefit: Even if you are a war dog yourself, other war dogs can't use their Posthumous Promotion ability on you while yo |
+| granted | War of Assassins: Call in Favor | War of Assassins | unattached paragraph: Being in the wrong place at the wrong time saw you caught in the middle of a conflict between two warring assassins' gui |
+| granted | War of Assassins: Call in Favor | War of Assassins | unattached paragraph: Benefit: Having gained the favor of the faction you helped, you can call on its members three times for favors. If a fav |
+| granted | War of Assassins: Call in Favor | War of Assassins | unattached paragraph: Drawback: The faction you wronged hates you, and its members would love to see you pay for your transgression. |
 | foe-ability | Disarming Glare | Count Rhodar von Glauer | unattached paragraph: While a target is frightened this way, Rhodar ignores banes and double banes on abilities used against them. |
 | foe-ability | All Rise | Devil High Judge | unattached paragraph: While charmed this way, a creature treats the high judge as an ally, and the high judge can spend 1 Malice on their turn |
 | foe-ability | Devilish Suggestion | Devil High Judge | unattached paragraph: While charmed this way, a creature treats the high judge as an ally, and the high judge can spend 1 Malice on their turn |
@@ -304,12 +468,13 @@ Structured record and Markdown disagree, or a paragraph sits outside any labeled
 | foe-ability | tier1-damage-outside-grammar | 52 |
 | foe-ability | tier2-damage-outside-grammar | 4 |
 | foe-ability | tiers-without-power-roll | 52 |
-| granted | no-power-roll | 28 |
-| granted | roll-expression-outside-grammar | 3 |
+| granted | no-power-roll | 62 |
+| granted | roll-expression-outside-grammar | 5 |
 | granted | tier1-damage-outside-grammar | 1 |
-| hero-standalone | no-power-roll | 16 |
+| granted | tiers-without-power-roll | 1 |
+| hero-standalone | no-power-roll | 24 |
 | hero-standalone | roll-expression-outside-grammar | 4 |
-| hero-standalone | tier1-damage-outside-grammar | 6 |
+| hero-standalone | tier1-damage-outside-grammar | 7 |
 | kit-signature | roll-expression-outside-grammar | 4 |
 | malice | tier1-damage-outside-grammar | 1 |
 

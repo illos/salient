@@ -2,9 +2,9 @@
 
 Structural support, current grant/loading availability and live execution are separate. Source drift never silently falls back; historical results are never recompiled on read.
 
-Source: `fb83a789da8f0327a389c277a0c790b1648d5810`; content: `sha256:609aed9b6d4bbb4d08676bfcc080333f48fbb9c64d9c952971f82001bef100ca`.
+Source: `fb83a789da8f0327a389c277a0c790b1648d5810`; content: `sha256:ea1f6a2cf1d3c8a30f5fa40aef52fdadc25aa97900648485c9fe5957a50cf43b`.
 
-Currently reachable compiled: 13; unchanged reachable compatibility: 1259; structurally supported but unavailable: 2.
+Currently reachable compiled: 14; unchanged reachable compatibility: 1277; structurally supported but unavailable: 2.
 
 | Ability | Population | Pure execution | Live boundary | Diagnostics |
 | --- | --- | --- | --- | --- |
@@ -133,6 +133,25 @@ Currently reachable compiled: 13; unchanged reachable compatibility: 1259; struc
 | Wrecking Ball | hero-standalone | manual | legacy-compatibility | grammar, unsafe-tier-remainder, source-block-mismatch, unaccounted-paragraph, manual-section, target-boundary |
 | Shadowmeld | hero-standalone | manual | legacy-compatibility | grammar, source-block-mismatch, unaccounted-paragraph, manual-section, target-boundary |
 | Detonate Sigil | hero-standalone | manual | legacy-compatibility | grammar, unsafe-tier-remainder, manual-section, target-boundary |
+| Black Ash Teleport | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Clever Trick | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary, action-type |
+| Coat the Blade | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Coup de Grace | hero-standalone | manual | legacy-compatibility | grammar, unsafe-tier-remainder |
+| Defensive Roll | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary, action-type |
+| Disorienting Strike | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder, manual-section |
+| Eviscerate | hero-standalone | supported | compiled |  |
+| Gasping in Pain | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder, manual-section |
+| Get In Get Out | hero-standalone | manual | legacy-compatibility | manual-section |
+| Hesitation Is Weakness | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary, action-type |
+| I Work Better Alone | hero-standalone | manual | legacy-compatibility | manual-section |
+| I'm No Threat | hero-standalone | manual | legacy-compatibility | grammar, source-block-mismatch, unaccounted-paragraph, manual-section, target-boundary |
+| In All This Confusion | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary, action-type |
+| One Hundred Throats | hero-standalone | manual | legacy-compatibility | manual-section, target-boundary |
+| Setup | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder |
+| Shadowstrike | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Teamwork Has Its Place | hero-standalone | manual | legacy-compatibility | manual-section |
+| Two Throats at Once | hero-standalone | manual | legacy-compatibility | target-boundary |
+| You Were Watching the Wrong One | hero-standalone | manual | legacy-compatibility | manual-section |
 | Concussive Slam | hero-standalone | manual | not-reachable | grammar, unsafe-tier-remainder, empty-clause |
 | Minor Acceleration | hero-standalone | manual | not-reachable | grammar, manual-section, target-boundary |
 | Psionic Bolt | hero-standalone | manual | not-reachable | grammar, unsafe-tier-remainder |
