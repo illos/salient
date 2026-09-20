@@ -172,6 +172,13 @@ export const SELECTIONS: ManifestSelection[] = [
     basis: 'docs/build/V25-two-class-wizard.md#in-scope: complete sourced Bethell path.',
   },
   {
+    id: 'shadow-level-one',
+    description:
+      'Shadow class, level-one features and abilities (all three colleges). Readable alternatives do not imply wizard or execution support.',
+    paths: ['class/shadow.md', 'feature/shadow/level-1', 'feature/ability/shadow/level-1'],
+    basis: 'docs/build/V92-shadow-level-one.md#scope: complete level-one Shadow.',
+  },
+  {
     id: 'kits',
     description:
       'Every kit entry, with its printed kit_type. The source names furies among the classes that use kits and states no kit_type restriction for them in chapter/kits.md or class/fury.md; Q-R-103 confirms Berserker and Reaver use ordinary Chapter 6 kits while Stormwight uses its four aspect kits; the pipeline preserves source fields rather than inferring eligibility.',

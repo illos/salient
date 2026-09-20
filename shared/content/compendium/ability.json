@@ -1874,6 +1874,664 @@
     }
   },
   {
+    "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/black-ash-teleport",
+    "kind": "ability",
+    "name": "Black Ash Teleport",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-1/black-ash-teleport.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/shadow/level-1/black-ash-teleport.json",
+    "selection": "shadow-level-one",
+    "text": "---\naction_type: '[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: shadow\ndistance: Self\neffects:\n    - effect: You [teleport](scc.v1:mcdm.heroes.v1/movement/teleport) up to 5 squares. If you have [concealment](scc.v1:mcdm.heroes.v1/rule.combat/concealment) or [cover](scc.v1:mcdm.heroes.v1/rule.combat/cover) at your destination, you can use the [Hide](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/hide) maneuver even if you are observed. If you successfully hide using this maneuver, you gain 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge).\n      name: Effect\n    - cost: Spend 1+ Insight\n      effect: You [teleport](scc.v1:mcdm.heroes.v1/movement/teleport) 1 additional square for each insight spent.\nflavor: In a swirl of black ash, you step from one place to another.\nkeywords:\n    - Magic\nlevel: \"1\"\nname: Black Ash Teleport\nscc: mcdm.heroes.v1/feature.ability.shadow.level-1/black-ash-teleport\nsubclass: black-ash\ntarget: Self\ntype: ability\n---\n\n\n*In a swirl of black ash, you step from one place to another.*\n\n| **Magic**   | **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|-------------|-------------:|\n| **📏 Self** |  **🎯 Self** |\n\n**Effect:** You [teleport](scc.v1:mcdm.heroes.v1/movement/teleport) up to 5 squares. If you have [concealment](scc.v1:mcdm.heroes.v1/rule.combat/concealment) or [cover](scc.v1:mcdm.heroes.v1/rule.combat/cover) at your destination, you can use the [Hide](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/hide) maneuver even if you are observed. If you successfully hide using this maneuver, you gain 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge).\n\n**Spend 1+ Insight:** You [teleport](scc.v1:mcdm.heroes.v1/movement/teleport) 1 additional square for each insight spent.\n",
+    "structured": {
+      "action_type": "[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "shadow",
+      "distance": "Self",
+      "effects": [
+        {
+          "effect": "You [teleport](scc.v1:mcdm.heroes.v1/movement/teleport) up to 5 squares. If you have [concealment](scc.v1:mcdm.heroes.v1/rule.combat/concealment) or [cover](scc.v1:mcdm.heroes.v1/rule.combat/cover) at your destination, you can use the [Hide](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/hide) maneuver even if you are observed. If you successfully hide using this maneuver, you gain 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge).",
+          "name": "Effect"
+        },
+        {
+          "cost": "Spend 1+ Insight",
+          "effect": "You [teleport](scc.v1:mcdm.heroes.v1/movement/teleport) 1 additional square for each insight spent."
+        }
+      ],
+      "flavor": "In a swirl of black ash, you step from one place to another.",
+      "keywords": [
+        "Magic"
+      ],
+      "level": "1",
+      "subclass": "black-ash",
+      "target": "Self"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/clever-trick",
+    "kind": "ability",
+    "name": "Clever Trick",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-1/clever-trick.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/shadow/level-1/clever-trick.json",
+    "selection": "shadow-level-one",
+    "text": "---\naction_type: '[Triggered](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action)'\nclass: shadow\ncost: 1 Insight\ndistance: Self\neffects:\n    - effect: Choose an enemy within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) of the triggering strike, including the enemy who targeted you. The [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) targets that enemy instead.\n      name: Effect\nflavor: You sow a moment of confusion in combat, to your enemy's peril.\nkeywords:\n    - Magic\nlevel: \"1\"\nname: Clever Trick\nscc: mcdm.heroes.v1/feature.ability.shadow.level-1/clever-trick\nsubclass: harlequin-mask\nsubtype: triggered\ntarget: Self\ntrigger: An enemy targets you with a [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike).\ntype: ability\n---\n\n\n*You sow a moment of confusion in combat, to your enemy's peril.*\n\n| **Magic**   | **[Triggered](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action)** |\n|-------------|--------------:|\n| **📏 Self** |     **🎯 Self** |\n\n**Trigger:** An enemy targets you with a [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike).\n\n**Effect:** Choose an enemy within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) of the triggering strike, including the enemy who targeted you. The [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) targets that enemy instead.\n",
+    "structured": {
+      "action_type": "[Triggered](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action)",
+      "class": "shadow",
+      "cost": "1 Insight",
+      "distance": "Self",
+      "effects": [
+        {
+          "effect": "Choose an enemy within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) of the triggering strike, including the enemy who targeted you. The [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) targets that enemy instead.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "You sow a moment of confusion in combat, to your enemy's peril.",
+      "keywords": [
+        "Magic"
+      ],
+      "level": "1",
+      "subclass": "harlequin-mask",
+      "subtype": "triggered",
+      "target": "Self",
+      "trigger": "An enemy targets you with a [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)."
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/coat-the-blade",
+    "kind": "ability",
+    "name": "Coat the Blade",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-1/coat-the-blade.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/shadow/level-1/coat-the-blade.json",
+    "selection": "shadow-level-one",
+    "text": "---\naction_type: '[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: shadow\ndistance: Self\neffects:\n    - effect: You gain 2 [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge). Additionally, whenever you use a [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge) before the end of the encounter, you can choose to have it deal poison damage.\n      name: Effect\n    - cost: Spend 1+ Insight\n      effect: For each insight you spend, you gain 1 additional [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge).\nflavor: A little poison goes a long way.\nkeywords: []\nlevel: \"1\"\nname: Coat the Blade\nscc: mcdm.heroes.v1/feature.ability.shadow.level-1/coat-the-blade\nsubclass: caustic-alchemy\ntarget: Self\ntype: ability\n---\n\n\n*A little poison goes a long way.*\n\n| **-**       | **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|-------------|-------------:|\n| **📏 Self** |  **🎯 Self** |\n\n**Effect:** You gain 2 [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge). Additionally, whenever you use a [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge) before the end of the encounter, you can choose to have it deal poison damage.\n\n**Spend 1+ Insight:** For each insight you spend, you gain 1 additional [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge).\n",
+    "structured": {
+      "action_type": "[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "shadow",
+      "distance": "Self",
+      "effects": [
+        {
+          "effect": "You gain 2 [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge). Additionally, whenever you use a [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge) before the end of the encounter, you can choose to have it deal poison damage.",
+          "name": "Effect"
+        },
+        {
+          "cost": "Spend 1+ Insight",
+          "effect": "For each insight you spend, you gain 1 additional [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge)."
+        }
+      ],
+      "flavor": "A little poison goes a long way.",
+      "keywords": [],
+      "level": "1",
+      "subclass": "caustic-alchemy",
+      "target": "Self"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/coup-de-grace",
+    "kind": "ability",
+    "name": "Coup de Grace",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-1/coup-de-grace.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/shadow/level-1/coup-de-grace.json",
+    "selection": "shadow-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: shadow\ncost: 5 Insight\ndistance: '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1 or [ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 5'\neffects:\n    - roll: Power Roll + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)\n      tier1: 2d6 + 7 + A damage\n      tier2: 2d6 + 11 + A damage\n      tier3: 2d6 + 16 + A damage\nflavor: Your blade might be the last thing they see.\nkeywords:\n    - '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)'\n    - '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)'\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\n    - Weapon\nlevel: \"1\"\nname: Coup de Grace\npower_roll_characteristic: '[Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)'\nscc: mcdm.heroes.v1/feature.ability.shadow.level-1/coup-de-grace\ntarget: One creature\ntier1: 2d6 + 7 + A damage\ntier2: 2d6 + 11 + A damage\ntier3: 2d6 + 16 + A damage\ntype: ability\n---\n\n\n*Your blade might be the last thing they see.*\n\n| **[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee), [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged), [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), Weapon** |     **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|-----------------------------------|--------------------:|\n| **📏 [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1 or [ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 5**        | **🎯 One creature** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility):**\n\n- **≤11:** 2d6 + 7 + A damage\n- **12-16:** 2d6 + 11 + A damage\n- **17+:** 2d6 + 16 + A damage\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "shadow",
+      "cost": "5 Insight",
+      "distance": "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1 or [ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 5",
+      "effects": [
+        {
+          "roll": "Power Roll + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)",
+          "tier1": "2d6 + 7 + A damage",
+          "tier2": "2d6 + 11 + A damage",
+          "tier3": "2d6 + 16 + A damage"
+        }
+      ],
+      "flavor": "Your blade might be the last thing they see.",
+      "keywords": [
+        "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)",
+        "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)",
+        "Weapon"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)",
+      "target": "One creature",
+      "tier1": "2d6 + 7 + A damage",
+      "tier2": "2d6 + 11 + A damage",
+      "tier3": "2d6 + 16 + A damage"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/defensive-roll",
+    "kind": "ability",
+    "name": "Defensive Roll",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-1/defensive-roll.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/shadow/level-1/defensive-roll.json",
+    "selection": "shadow-level-one",
+    "text": "---\naction_type: '[Triggered](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action)'\nclass: shadow\ndistance: Self\neffects:\n    - effect: You take half the triggering damage, then can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to 2 squares after the triggering effect resolves. If you end this [shift](scc.v1:mcdm.heroes.v1/movement/shifting) with [concealment](scc.v1:mcdm.heroes.v1/rule.combat/concealment) or [cover](scc.v1:mcdm.heroes.v1/rule.combat/cover), you can use the [Hide](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/hide) maneuver even if you are observed.\n      name: Effect\n    - cost: Spend 1 Insight\n      effect: The [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) of any effects associated with the damage are reduced by 1 for you.\nflavor: When an enemy attacks, you roll with the impact to reduce the harm.\nkeywords: []\nlevel: \"1\"\nname: Defensive Roll\nscc: mcdm.heroes.v1/feature.ability.shadow.level-1/defensive-roll\nsubclass: caustic-alchemy\nsubtype: triggered\ntarget: Self\ntrigger: Another creature damages you.\ntype: ability\n---\n\n\n*When an enemy attacks, you roll with the impact to reduce the harm.*\n\n| **-**       | **[Triggered](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action)** |\n|-------------|--------------:|\n| **📏 Self** |   **🎯 Self** |\n\n**Trigger:** Another creature damages you.\n\n**Effect:** You take half the triggering damage, then can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to 2 squares after the triggering effect resolves. If you end this [shift](scc.v1:mcdm.heroes.v1/movement/shifting) with [concealment](scc.v1:mcdm.heroes.v1/rule.combat/concealment) or [cover](scc.v1:mcdm.heroes.v1/rule.combat/cover), you can use the [Hide](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/hide) maneuver even if you are observed.\n\n**Spend 1 Insight:** The [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) of any effects associated with the damage are reduced by 1 for you.\n",
+    "structured": {
+      "action_type": "[Triggered](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action)",
+      "class": "shadow",
+      "distance": "Self",
+      "effects": [
+        {
+          "effect": "You take half the triggering damage, then can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to 2 squares after the triggering effect resolves. If you end this [shift](scc.v1:mcdm.heroes.v1/movement/shifting) with [concealment](scc.v1:mcdm.heroes.v1/rule.combat/concealment) or [cover](scc.v1:mcdm.heroes.v1/rule.combat/cover), you can use the [Hide](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/hide) maneuver even if you are observed.",
+          "name": "Effect"
+        },
+        {
+          "cost": "Spend 1 Insight",
+          "effect": "The [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) of any effects associated with the damage are reduced by 1 for you."
+        }
+      ],
+      "flavor": "When an enemy attacks, you roll with the impact to reduce the harm.",
+      "keywords": [],
+      "level": "1",
+      "subclass": "caustic-alchemy",
+      "subtype": "triggered",
+      "target": "Self",
+      "trigger": "Another creature damages you."
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/disorienting-strike",
+    "kind": "ability",
+    "name": "Disorienting Strike",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-1/disorienting-strike.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/shadow/level-1/disorienting-strike.json",
+    "selection": "shadow-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: shadow\ncost: 3 Insight\ndistance: '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1'\neffects:\n    - roll: Power Roll + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)\n      tier1: 4 + A damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2\n      tier2: 6 + A damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3\n      tier3: 10 + A damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 5\n    - effect: You can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) into any square the target leaves when you [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) them.\n      name: Effect\nflavor: Your attack leaves them reeling, allowing you to follow up.\nkeywords:\n    - '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)'\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\n    - Weapon\nlevel: \"1\"\nname: Disorienting Strike\npower_roll_characteristic: '[Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)'\nscc: mcdm.heroes.v1/feature.ability.shadow.level-1/disorienting-strike\ntarget: One creature\ntier1: 4 + A damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2\ntier2: 6 + A damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3\ntier3: 10 + A damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 5\ntype: ability\n---\n\n\n*Your attack leaves them reeling, allowing you to follow up.*\n\n| **[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee), [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), Weapon** |     **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|---------------------------|--------------------:|\n| **📏 [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1**            | **🎯 One creature** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility):**\n\n- **≤11:** 4 + A damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2\n- **12-16:** 6 + A damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3\n- **17+:** 10 + A damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 5\n\n**Effect:** You can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) into any square the target leaves when you [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) them.\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "shadow",
+      "cost": "3 Insight",
+      "distance": "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1",
+      "effects": [
+        {
+          "roll": "Power Roll + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)",
+          "tier1": "4 + A damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
+          "tier2": "6 + A damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3",
+          "tier3": "10 + A damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 5"
+        },
+        {
+          "effect": "You can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) into any square the target leaves when you [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) them.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "Your attack leaves them reeling, allowing you to follow up.",
+      "keywords": [
+        "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)",
+        "Weapon"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)",
+      "target": "One creature",
+      "tier1": "4 + A damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
+      "tier2": "6 + A damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3",
+      "tier3": "10 + A damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 5"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/eviscerate",
+    "kind": "ability",
+    "name": "Eviscerate",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-1/eviscerate.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/shadow/level-1/eviscerate.json",
+    "selection": "shadow-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: shadow\ncost: 3 Insight\ndistance: '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1 or [ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 5'\neffects:\n    - roll: Power Roll + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)\n      tier1: 4 + A damage; A < WEAK, [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) (save ends)\n      tier2: 6 + A damage; A < AVERAGE, [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) (save ends)\n      tier3: 10 + A damage; A < STRONG, [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) (save ends)\nflavor: You leave your foe bleeding out after a devastating attack.\nkeywords:\n    - '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)'\n    - '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)'\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\n    - Weapon\nlevel: \"1\"\nname: Eviscerate\npower_roll_characteristic: '[Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)'\nscc: mcdm.heroes.v1/feature.ability.shadow.level-1/eviscerate\ntarget: One creature\ntier1: 4 + A damage; A < WEAK, [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) (save ends)\ntier2: 6 + A damage; A < AVERAGE, [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) (save ends)\ntier3: 10 + A damage; A < STRONG, [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) (save ends)\ntype: ability\n---\n\n\n*You leave your foe bleeding out after a devastating attack.*\n\n| **[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee), [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged), [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), Weapon** |     **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|-----------------------------------|--------------------:|\n| **📏 [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1 or [ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 5**        | **🎯 One creature** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility):**\n\n- **≤11:** 4 + A damage; A < WEAK, [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) (save ends)\n- **12-16:** 6 + A damage; A < AVERAGE, [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) (save ends)\n- **17+:** 10 + A damage; A < STRONG, [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) (save ends)\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "shadow",
+      "cost": "3 Insight",
+      "distance": "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1 or [ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 5",
+      "effects": [
+        {
+          "roll": "Power Roll + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)",
+          "tier1": "4 + A damage; A < WEAK, [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) (save ends)",
+          "tier2": "6 + A damage; A < AVERAGE, [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) (save ends)",
+          "tier3": "10 + A damage; A < STRONG, [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) (save ends)"
+        }
+      ],
+      "flavor": "You leave your foe bleeding out after a devastating attack.",
+      "keywords": [
+        "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)",
+        "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)",
+        "Weapon"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)",
+      "target": "One creature",
+      "tier1": "4 + A damage; A < WEAK, [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) (save ends)",
+      "tier2": "6 + A damage; A < AVERAGE, [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) (save ends)",
+      "tier3": "10 + A damage; A < STRONG, [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) (save ends)"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/gasping-in-pain",
+    "kind": "ability",
+    "name": "Gasping in Pain",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-1/gasping-in-pain.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/shadow/level-1/gasping-in-pain.json",
+    "selection": "shadow-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: shadow\ndistance: '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1'\neffects:\n    - roll: Power Roll + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)\n      tier1: 3 + A damage\n      tier2: 5 + A damage\n      tier3: 8 + A damage; I < STRONG[, prone](scc.v1:mcdm.heroes.v1/condition/prone)\n    - effect: One ally within 5 squares of the target gains 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge).\n      name: Effect\nflavor: Your precise strikes let your allies take advantage of a target's agony.\nkeywords:\n    - '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)'\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\n    - Weapon\nlevel: \"1\"\nname: Gasping in Pain\npower_roll_characteristic: '[Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)'\nscc: mcdm.heroes.v1/feature.ability.shadow.level-1/gasping-in-pain\nsubtype: signature\ntarget: One creature\ntier1: 3 + A damage\ntier2: 5 + A damage\ntier3: 8 + A damage; I < STRONG[, prone](scc.v1:mcdm.heroes.v1/condition/prone)\ntype: ability\n---\n\n\n*Your precise strikes let your allies take advantage of a target's agony.*\n\n| **[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee), [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), Weapon** |     **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|---------------------------|--------------------:|\n| **📏 [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1**            | **🎯 One creature** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility):**\n\n- **≤11:** 3 + A damage\n- **12-16:** 5 + A damage\n- **17+:** 8 + A damage; I < STRONG[, prone](scc.v1:mcdm.heroes.v1/condition/prone)\n\n**Effect:** One ally within 5 squares of the target gains 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge).\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "shadow",
+      "distance": "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1",
+      "effects": [
+        {
+          "roll": "Power Roll + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)",
+          "tier1": "3 + A damage",
+          "tier2": "5 + A damage",
+          "tier3": "8 + A damage; I < STRONG[, prone](scc.v1:mcdm.heroes.v1/condition/prone)"
+        },
+        {
+          "effect": "One ally within 5 squares of the target gains 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge).",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "Your precise strikes let your allies take advantage of a target's agony.",
+      "keywords": [
+        "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)",
+        "Weapon"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)",
+      "subtype": "signature",
+      "target": "One creature",
+      "tier1": "3 + A damage",
+      "tier2": "5 + A damage",
+      "tier3": "8 + A damage; I < STRONG[, prone](scc.v1:mcdm.heroes.v1/condition/prone)"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/get-in-get-out",
+    "kind": "ability",
+    "name": "Get In Get Out",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-1/get-in-get-out.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/shadow/level-1/get-in-get-out.json",
+    "selection": "shadow-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: shadow\ncost: 3 Insight\ndistance: '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1'\neffects:\n    - roll: Power Roll + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)\n      tier1: 5 + A damage\n      tier2: 8 + A damage\n      tier3: 11 + A damage\n    - effect: You can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed), dividing that movement before or after your [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) as desired.\n      name: Effect\nflavor: Move unexpectedly, strike fast, and be gone!\nkeywords:\n    - '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)'\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\n    - Weapon\nlevel: \"1\"\nname: Get In Get Out\npower_roll_characteristic: '[Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)'\nscc: mcdm.heroes.v1/feature.ability.shadow.level-1/get-in-get-out\ntarget: One creature\ntier1: 5 + A damage\ntier2: 8 + A damage\ntier3: 11 + A damage\ntype: ability\n---\n\n\n*Move unexpectedly, strike fast, and be gone!*\n\n| **[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee), [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), Weapon** |     **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|---------------------------|--------------------:|\n| **📏 [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1**            | **🎯 One creature** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility):**\n\n- **≤11:** 5 + A damage\n- **12-16:** 8 + A damage\n- **17+:** 11 + A damage\n\n**Effect:** You can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed), dividing that movement before or after your [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) as desired.\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "shadow",
+      "cost": "3 Insight",
+      "distance": "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1",
+      "effects": [
+        {
+          "roll": "Power Roll + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)",
+          "tier1": "5 + A damage",
+          "tier2": "8 + A damage",
+          "tier3": "11 + A damage"
+        },
+        {
+          "effect": "You can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed), dividing that movement before or after your [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) as desired.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "Move unexpectedly, strike fast, and be gone!",
+      "keywords": [
+        "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)",
+        "Weapon"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)",
+      "target": "One creature",
+      "tier1": "5 + A damage",
+      "tier2": "8 + A damage",
+      "tier3": "11 + A damage"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/hesitation-is-weakness",
+    "kind": "ability",
+    "name": "Hesitation Is Weakness",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-1/hesitation-is-weakness.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/shadow/level-1/hesitation-is-weakness.json",
+    "selection": "shadow-level-one",
+    "text": "---\naction_type: Free [triggered](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action)\nclass: shadow\ncost: 1 Insight\ndistance: Self\neffects:\n    - effect: You take your [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) after the triggering hero.\n      name: Effect\nflavor: Keep up the attack. Never give them a moment's grace.\nkeywords: []\nlevel: \"1\"\nname: Hesitation Is Weakness\nscc: mcdm.heroes.v1/feature.ability.shadow.level-1/hesitation-is-weakness\nsubtype: triggered\ntarget: Self\ntrigger: Another hero ends their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). That hero can't have used this ability to start their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).\ntype: ability\n---\n\n\n*Keep up the attack. Never give them a moment's grace.*\n\n| **-**       | **Free [triggered](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action)** |\n|-------------|-------------------:|\n| **📏 Self** |        **🎯 Self** |\n\n**Trigger:** Another hero ends their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). That hero can't have used this ability to start their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).\n\n**Effect:** You take your [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) after the triggering hero.\n",
+    "structured": {
+      "action_type": "Free [triggered](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action)",
+      "class": "shadow",
+      "cost": "1 Insight",
+      "distance": "Self",
+      "effects": [
+        {
+          "effect": "You take your [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) after the triggering hero.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "Keep up the attack. Never give them a moment's grace.",
+      "keywords": [],
+      "level": "1",
+      "subtype": "triggered",
+      "target": "Self",
+      "trigger": "Another hero ends their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). That hero can't have used this ability to start their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn)."
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/i-work-better-alone",
+    "kind": "ability",
+    "name": "I Work Better Alone",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-1/i-work-better-alone.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/shadow/level-1/i-work-better-alone.json",
+    "selection": "shadow-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: shadow\ndistance: '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1 or [ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 5'\neffects:\n    - roll: Power Roll + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)\n      tier1: 3 + A damage\n      tier2: 6 + A damage\n      tier3: 9 + A damage\n    - effect: If the target has none of your allies [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to them, you gain 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge) before making the [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll).\n      name: Effect\nflavor: '\"It''s better, just you and me. Isn''t it?\"'\nkeywords:\n    - '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)'\n    - '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)'\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\n    - Weapon\nlevel: \"1\"\nname: I Work Better Alone\npower_roll_characteristic: '[Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)'\nscc: mcdm.heroes.v1/feature.ability.shadow.level-1/i-work-better-alone\nsubtype: signature\ntarget: One creature\ntier1: 3 + A damage\ntier2: 6 + A damage\ntier3: 9 + A damage\ntype: ability\n---\n\n\n*\"It's better, just you and me. Isn't it?\"*\n\n| **[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee), [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged), [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), Weapon** |     **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|-----------------------------------|--------------------:|\n| **📏 [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1 or [ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 5**        | **🎯 One creature** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility):**\n\n- **≤11:** 3 + A damage\n- **12-16:** 6 + A damage\n- **17+:** 9 + A damage\n\n**Effect:** If the target has none of your allies [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to them, you gain 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge) before making the [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll).\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "shadow",
+      "distance": "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1 or [ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 5",
+      "effects": [
+        {
+          "roll": "Power Roll + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)",
+          "tier1": "3 + A damage",
+          "tier2": "6 + A damage",
+          "tier3": "9 + A damage"
+        },
+        {
+          "effect": "If the target has none of your allies [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to them, you gain 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge) before making the [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll).",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "\"It's better, just you and me. Isn't it?\"",
+      "keywords": [
+        "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)",
+        "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)",
+        "Weapon"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)",
+      "subtype": "signature",
+      "target": "One creature",
+      "tier1": "3 + A damage",
+      "tier2": "6 + A damage",
+      "tier3": "9 + A damage"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/im-no-threat",
+    "kind": "ability",
+    "name": "I'm No Threat",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-1/im-no-threat.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/shadow/level-1/im-no-threat.json",
+    "selection": "shadow-level-one",
+    "text": "---\naction_type: '[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: shadow\ndistance: Self\neffects:\n    - effect: You envelop yourself in an illusion that makes you appear nonthreatening and harmless to your enemies. You might take on the appearance of a harmless animal of your [size](scc.v1:mcdm.heroes.v1/rule.character/size), such as a sheep or capybara, or you might appear as a less heroic and unarmed version of yourself. While this illusion lasts, your [strikes](scc.v1:mcdm.heroes.v1/rule.combat/strike) gain an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge), and when you take the [Disengage](scc.v1:mcdm.heroes.v1/feature.common.move-actions/disengage) move action, you gain a +1 [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) to the [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) you can [shift](scc.v1:mcdm.heroes.v1/movement/shifting).\n      name: Effect\n    - cost: Spend 1 Insight\n      effect: Choose a creature whose [size](scc.v1:mcdm.heroes.v1/rule.character/size) is no more than 1 greater than yours and who is within 10 squares. This ability's illusion makes you appear as that creature. This illusion covers your entire body, including clothing and armor, and alters your voice to sound like that of the creature. You gain an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on [tests](scc.v1:mcdm.heroes.v1/rule.test/test) made to convince the creature's allies that you are the creature.\nflavor: Taking on an illusory countenance gives you an advantage on [subterfuge](scc.v1:mcdm.heroes.v1/feature.shadow.level-10/subterfuge).\nkeywords:\n    - Magic\nlevel: \"1\"\nname: I'm No Threat\nscc: mcdm.heroes.v1/feature.ability.shadow.level-1/im-no-threat\nsubclass: harlequin-mask\ntarget: Self\ntype: ability\n---\n\n\n*Taking on an illusory countenance gives you an advantage on [subterfuge](scc.v1:mcdm.heroes.v1/feature.shadow.level-10/subterfuge).*\n\n| **Magic**   | **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|-------------|-------------:|\n| **📏 Self** |    **🎯 Self** |\n\n**Effect:** You envelop yourself in an illusion that makes you appear nonthreatening and harmless to your enemies. You might take on the appearance of a harmless animal of your [size](scc.v1:mcdm.heroes.v1/rule.character/size), such as a sheep or capybara, or you might appear as a less heroic and unarmed version of yourself. While this illusion lasts, your [strikes](scc.v1:mcdm.heroes.v1/rule.combat/strike) gain an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge), and when you take the [Disengage](scc.v1:mcdm.heroes.v1/feature.common.move-actions/disengage) move action, you gain a +1 [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) to the [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) you can [shift](scc.v1:mcdm.heroes.v1/movement/shifting).\n\nThe illusion ends when you harm another creature, when you physically interact with a creature, when you use this ability again, or when you end the illusion (no action required). If you end this illusion by harming another creature, you gain 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge).\n\n**Spend 1 Insight:** Choose a creature whose [size](scc.v1:mcdm.heroes.v1/rule.character/size) is no more than 1 greater than yours and who is within 10 squares. This ability's illusion makes you appear as that creature. This illusion covers your entire body, including clothing and armor, and alters your voice to sound like that of the creature. You gain an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on [tests](scc.v1:mcdm.heroes.v1/rule.test/test) made to convince the creature's allies that you are the creature.\n",
+    "structured": {
+      "action_type": "[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "shadow",
+      "distance": "Self",
+      "effects": [
+        {
+          "effect": "You envelop yourself in an illusion that makes you appear nonthreatening and harmless to your enemies. You might take on the appearance of a harmless animal of your [size](scc.v1:mcdm.heroes.v1/rule.character/size), such as a sheep or capybara, or you might appear as a less heroic and unarmed version of yourself. While this illusion lasts, your [strikes](scc.v1:mcdm.heroes.v1/rule.combat/strike) gain an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge), and when you take the [Disengage](scc.v1:mcdm.heroes.v1/feature.common.move-actions/disengage) move action, you gain a +1 [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) to the [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) you can [shift](scc.v1:mcdm.heroes.v1/movement/shifting).",
+          "name": "Effect"
+        },
+        {
+          "cost": "Spend 1 Insight",
+          "effect": "Choose a creature whose [size](scc.v1:mcdm.heroes.v1/rule.character/size) is no more than 1 greater than yours and who is within 10 squares. This ability's illusion makes you appear as that creature. This illusion covers your entire body, including clothing and armor, and alters your voice to sound like that of the creature. You gain an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on [tests](scc.v1:mcdm.heroes.v1/rule.test/test) made to convince the creature's allies that you are the creature."
+        }
+      ],
+      "flavor": "Taking on an illusory countenance gives you an advantage on [subterfuge](scc.v1:mcdm.heroes.v1/feature.shadow.level-10/subterfuge).",
+      "keywords": [
+        "Magic"
+      ],
+      "level": "1",
+      "subclass": "harlequin-mask",
+      "target": "Self"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/in-all-this-confusion",
+    "kind": "ability",
+    "name": "In All This Confusion",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-1/in-all-this-confusion.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/shadow/level-1/in-all-this-confusion.json",
+    "selection": "shadow-level-one",
+    "text": "---\naction_type: '[Triggered](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action)'\nclass: shadow\ndistance: Self\neffects:\n    - effect: You take half the damage, then can [teleport](scc.v1:mcdm.heroes.v1/movement/teleport) up to 4 squares after the triggering effect resolves.\n      name: Effect\n    - cost: Spend 1+ Insight\n      effect: You [teleport](scc.v1:mcdm.heroes.v1/movement/teleport) 1 additional square for each insight spent.\nflavor: You vanish in a plume of black smoke to avoid danger.\nkeywords:\n    - Magic\nlevel: \"1\"\nname: In All This Confusion\nscc: mcdm.heroes.v1/feature.ability.shadow.level-1/in-all-this-confusion\nsubclass: black-ash\nsubtype: triggered\ntarget: Self\ntrigger: You take damage.\ntype: ability\n---\n\n\n*You vanish in a plume of black smoke to avoid danger.*\n\n| **Magic**   | **[Triggered](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action)** |\n|-------------|--------------:|\n| **📏 Self** |     **🎯 Self** |\n\n**Trigger:** You take damage.\n\n**Effect:** You take half the damage, then can [teleport](scc.v1:mcdm.heroes.v1/movement/teleport) up to 4 squares after the triggering effect resolves.\n\n**Spend 1+ Insight:** You [teleport](scc.v1:mcdm.heroes.v1/movement/teleport) 1 additional square for each insight spent.\n",
+    "structured": {
+      "action_type": "[Triggered](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action)",
+      "class": "shadow",
+      "distance": "Self",
+      "effects": [
+        {
+          "effect": "You take half the damage, then can [teleport](scc.v1:mcdm.heroes.v1/movement/teleport) up to 4 squares after the triggering effect resolves.",
+          "name": "Effect"
+        },
+        {
+          "cost": "Spend 1+ Insight",
+          "effect": "You [teleport](scc.v1:mcdm.heroes.v1/movement/teleport) 1 additional square for each insight spent."
+        }
+      ],
+      "flavor": "You vanish in a plume of black smoke to avoid danger.",
+      "keywords": [
+        "Magic"
+      ],
+      "level": "1",
+      "subclass": "black-ash",
+      "subtype": "triggered",
+      "target": "Self",
+      "trigger": "You take damage."
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/one-hundred-throats",
+    "kind": "ability",
+    "name": "One Hundred Throats",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-1/one-hundred-throats.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/shadow/level-1/one-hundred-throats.json",
+    "selection": "shadow-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: shadow\ncost: 5 Insight\ndistance: Self; see below\neffects:\n    - effect: You [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) and make one [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) that targets up to three enemies who came [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to you during the move.\n      name: Effect\n    - roll: Power Roll + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)\n      tier1: 3 damage\n      tier2: 6 damage\n      tier3: 9 damage\nflavor: As you move across the battlefield, every foe within reach feels your wrath.\nkeywords:\n    - '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)'\n    - Weapon\nlevel: \"1\"\nname: One Hundred Throats\npower_roll_characteristic: '[Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)'\nscc: mcdm.heroes.v1/feature.ability.shadow.level-1/one-hundred-throats\ntarget: Self\ntier1: 3 damage\ntier2: 6 damage\ntier3: 9 damage\ntype: ability\n---\n\n\n*As you move across the battlefield, every foe within reach feels your wrath.*\n\n| **[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee), Weapon**      | **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|------------------------|----------------:|\n| **📏 Self; see below** |     **🎯 Self** |\n\n**Effect:** You [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) and make one [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) that targets up to three enemies who came [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to you during the move.\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility):**\n\n- **≤11:** 3 damage\n- **12-16:** 6 damage\n- **17+:** 9 damage\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "shadow",
+      "cost": "5 Insight",
+      "distance": "Self; see below",
+      "effects": [
+        {
+          "effect": "You [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) and make one [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) that targets up to three enemies who came [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to you during the move.",
+          "name": "Effect"
+        },
+        {
+          "roll": "Power Roll + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)",
+          "tier1": "3 damage",
+          "tier2": "6 damage",
+          "tier3": "9 damage"
+        }
+      ],
+      "flavor": "As you move across the battlefield, every foe within reach feels your wrath.",
+      "keywords": [
+        "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)",
+        "Weapon"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)",
+      "target": "Self",
+      "tier1": "3 damage",
+      "tier2": "6 damage",
+      "tier3": "9 damage"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/setup",
+    "kind": "ability",
+    "name": "Setup",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-1/setup.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/shadow/level-1/setup.json",
+    "selection": "shadow-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: shadow\ncost: 5 Insight\ndistance: '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 5'\neffects:\n    - roll: Power Roll + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)\n      tier1: 6 + A damage; R < WEAK, the target has [damage weakness](scc.v1:mcdm.heroes.v1/rule.damage/damage-weakness) 5 (save ends)\n      tier2: 9 + A damage; R < AVERAGE, the target has [damage weakness](scc.v1:mcdm.heroes.v1/rule.damage/damage-weakness) 5 (save ends)\n      tier3: 13 + A damage; R < STRONG, the target has [damage weakness](scc.v1:mcdm.heroes.v1/rule.damage/damage-weakness) 5 (save ends)\nflavor: Your friends will thank you.\nkeywords:\n    - '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)'\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\n    - Weapon\nlevel: \"1\"\nname: Setup\npower_roll_characteristic: '[Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)'\nscc: mcdm.heroes.v1/feature.ability.shadow.level-1/setup\ntarget: One creature\ntier1: 6 + A damage; R < WEAK, the target has [damage weakness](scc.v1:mcdm.heroes.v1/rule.damage/damage-weakness) 5 (save ends)\ntier2: 9 + A damage; R < AVERAGE, the target has [damage weakness](scc.v1:mcdm.heroes.v1/rule.damage/damage-weakness) 5 (save ends)\ntier3: 13 + A damage; R < STRONG, the target has [damage weakness](scc.v1:mcdm.heroes.v1/rule.damage/damage-weakness) 5 (save ends)\ntype: ability\n---\n\n\n*Your friends will thank you.*\n\n| **[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged), [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), Weapon** |     **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|----------------------------|--------------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 5**            | **🎯 One creature** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility):**\n\n- **≤11:** 6 + A damage; R < WEAK, the target has [damage weakness](scc.v1:mcdm.heroes.v1/rule.damage/damage-weakness) 5 (save ends)\n- **12-16:** 9 + A damage; R < AVERAGE, the target has [damage weakness](scc.v1:mcdm.heroes.v1/rule.damage/damage-weakness) 5 (save ends)\n- **17+:** 13 + A damage; R < STRONG, the target has [damage weakness](scc.v1:mcdm.heroes.v1/rule.damage/damage-weakness) 5 (save ends)\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "shadow",
+      "cost": "5 Insight",
+      "distance": "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 5",
+      "effects": [
+        {
+          "roll": "Power Roll + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)",
+          "tier1": "6 + A damage; R < WEAK, the target has [damage weakness](scc.v1:mcdm.heroes.v1/rule.damage/damage-weakness) 5 (save ends)",
+          "tier2": "9 + A damage; R < AVERAGE, the target has [damage weakness](scc.v1:mcdm.heroes.v1/rule.damage/damage-weakness) 5 (save ends)",
+          "tier3": "13 + A damage; R < STRONG, the target has [damage weakness](scc.v1:mcdm.heroes.v1/rule.damage/damage-weakness) 5 (save ends)"
+        }
+      ],
+      "flavor": "Your friends will thank you.",
+      "keywords": [
+        "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)",
+        "Weapon"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)",
+      "target": "One creature",
+      "tier1": "6 + A damage; R < WEAK, the target has [damage weakness](scc.v1:mcdm.heroes.v1/rule.damage/damage-weakness) 5 (save ends)",
+      "tier2": "9 + A damage; R < AVERAGE, the target has [damage weakness](scc.v1:mcdm.heroes.v1/rule.damage/damage-weakness) 5 (save ends)",
+      "tier3": "13 + A damage; R < STRONG, the target has [damage weakness](scc.v1:mcdm.heroes.v1/rule.damage/damage-weakness) 5 (save ends)"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/shadowstrike",
+    "kind": "ability",
+    "name": "Shadowstrike",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-1/shadowstrike.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/shadow/level-1/shadowstrike.json",
+    "selection": "shadow-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: shadow\ncost: 5 Insight\ndistance: Self; see below\neffects:\n    - effect: You use a [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) [signature ability](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability) twice.\n      name: Effect\nflavor: They have no idea what the college taught you.\nkeywords:\n    - Magic\n    - '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)'\n    - '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)'\nlevel: \"1\"\nname: Shadowstrike\nscc: mcdm.heroes.v1/feature.ability.shadow.level-1/shadowstrike\ntarget: Self\ntype: ability\n---\n\n\n*They have no idea what the college taught you.*\n\n| **Magic, [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee), [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)** | **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|------------------------|----------------:|\n| **📏 Self; see below** |     **🎯 Self** |\n\n**Effect:** You use a [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) [signature ability](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability) twice.\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "shadow",
+      "cost": "5 Insight",
+      "distance": "Self; see below",
+      "effects": [
+        {
+          "effect": "You use a [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) [signature ability](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability) twice.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "They have no idea what the college taught you.",
+      "keywords": [
+        "Magic",
+        "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)",
+        "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)"
+      ],
+      "level": "1",
+      "target": "Self"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/teamwork-has-its-place",
+    "kind": "ability",
+    "name": "Teamwork Has Its Place",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-1/teamwork-has-its-place.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/shadow/level-1/teamwork-has-its-place.json",
+    "selection": "shadow-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: shadow\ndistance: '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1 or [ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 5'\neffects:\n    - roll: Power Roll + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)\n      tier1: 3 + A damage\n      tier2: 6 + A damage\n      tier3: 9 + A damage\n    - effect: If any ally is [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the target, you gain 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge) before making the [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll).\n      name: Effect\nflavor: You attack an enemy as an ally exposes their weakness.\nkeywords:\n    - '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)'\n    - '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)'\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\n    - Weapon\nlevel: \"1\"\nname: Teamwork Has Its Place\npower_roll_characteristic: '[Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)'\nscc: mcdm.heroes.v1/feature.ability.shadow.level-1/teamwork-has-its-place\nsubtype: signature\ntarget: One creature or object\ntier1: 3 + A damage\ntier2: 6 + A damage\ntier3: 9 + A damage\ntype: ability\n---\n\n\n*You attack an enemy as an ally exposes their weakness.*\n\n| **[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee), [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged), [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), Weapon** |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|-----------------------------------|------------------------------:|\n| **📏 [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1 or [ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 5**        | **🎯 One creature or object** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility):**\n\n- **≤11:** 3 + A damage\n- **12-16:** 6 + A damage\n- **17+:** 9 + A damage\n\n**Effect:** If any ally is [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the target, you gain 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge) before making the [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll).\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "shadow",
+      "distance": "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1 or [ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 5",
+      "effects": [
+        {
+          "roll": "Power Roll + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)",
+          "tier1": "3 + A damage",
+          "tier2": "6 + A damage",
+          "tier3": "9 + A damage"
+        },
+        {
+          "effect": "If any ally is [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the target, you gain 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge) before making the [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll).",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "You attack an enemy as an ally exposes their weakness.",
+      "keywords": [
+        "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)",
+        "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)",
+        "Weapon"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)",
+      "subtype": "signature",
+      "target": "One creature or object",
+      "tier1": "3 + A damage",
+      "tier2": "6 + A damage",
+      "tier3": "9 + A damage"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/two-throats-at-once",
+    "kind": "ability",
+    "name": "Two Throats at Once",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-1/two-throats-at-once.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/shadow/level-1/two-throats-at-once.json",
+    "selection": "shadow-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: shadow\ncost: 3 Insight\ndistance: '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1 or [ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 5'\neffects:\n    - roll: Power Roll + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)\n      tier1: 4 damage\n      tier2: 6 damage\n      tier3: 10 damage\nflavor: A bargain.\nkeywords:\n    - '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)'\n    - '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)'\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\n    - Weapon\nlevel: \"1\"\nname: Two Throats at Once\npower_roll_characteristic: '[Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)'\nscc: mcdm.heroes.v1/feature.ability.shadow.level-1/two-throats-at-once\ntarget: Two creatures or objects\ntier1: 4 damage\ntier2: 6 damage\ntier3: 10 damage\ntype: ability\n---\n\n\n*A bargain.*\n\n| **[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee), [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged), [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), Weapon** |                 **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|-----------------------------------|--------------------------------:|\n| **📏 [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1 or [ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 5**        | **🎯 Two creatures or objects** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility):**\n\n- **≤11:** 4 damage\n- **12-16:** 6 damage\n- **17+:** 10 damage\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "shadow",
+      "cost": "3 Insight",
+      "distance": "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1 or [ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 5",
+      "effects": [
+        {
+          "roll": "Power Roll + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)",
+          "tier1": "4 damage",
+          "tier2": "6 damage",
+          "tier3": "10 damage"
+        }
+      ],
+      "flavor": "A bargain.",
+      "keywords": [
+        "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)",
+        "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)",
+        "Weapon"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)",
+      "target": "Two creatures or objects",
+      "tier1": "4 damage",
+      "tier2": "6 damage",
+      "tier3": "10 damage"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/you-were-watching-the-wrong-one",
+    "kind": "ability",
+    "name": "You Were Watching the Wrong One",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-1/you-were-watching-the-wrong-one.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/shadow/level-1/you-were-watching-the-wrong-one.json",
+    "selection": "shadow-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: shadow\ndistance: '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1'\neffects:\n    - roll: Power Roll + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)\n      tier1: 3 + A damage\n      tier2: 5 + A damage\n      tier3: 8 + A damage\n    - effect: As long as you have one or more allies within 5 squares of the target, you gain 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge). If you are [flanking](scc.v1:mcdm.heroes.v1/rule.combat/flanking) the target when you use this ability, choose one ally who is [flanking](scc.v1:mcdm.heroes.v1/rule.combat/flanking) with you. That ally also gains 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge).\n      name: Effect\nflavor: They can't watch both of you at once.\nkeywords:\n    - '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)'\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\n    - Weapon\nlevel: \"1\"\nname: You Were Watching the Wrong One\npower_roll_characteristic: '[Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)'\nscc: mcdm.heroes.v1/feature.ability.shadow.level-1/you-were-watching-the-wrong-one\nsubtype: signature\ntarget: One creature\ntier1: 3 + A damage\ntier2: 5 + A damage\ntier3: 8 + A damage\ntype: ability\n---\n\n\n*They can't watch both of you at once.*\n\n| **[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee), [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), Weapon** |     **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|---------------------------|--------------------:|\n| **📏 [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1**            | **🎯 One creature** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility):**\n\n- **≤11:** 3 + A damage\n- **12-16:** 5 + A damage\n- **17+:** 8 + A damage\n\n**Effect:** As long as you have one or more allies within 5 squares of the target, you gain 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge). If you are [flanking](scc.v1:mcdm.heroes.v1/rule.combat/flanking) the target when you use this ability, choose one ally who is [flanking](scc.v1:mcdm.heroes.v1/rule.combat/flanking) with you. That ally also gains 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge).\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "shadow",
+      "distance": "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1",
+      "effects": [
+        {
+          "roll": "Power Roll + [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)",
+          "tier1": "3 + A damage",
+          "tier2": "5 + A damage",
+          "tier3": "8 + A damage"
+        },
+        {
+          "effect": "As long as you have one or more allies within 5 squares of the target, you gain 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge). If you are [flanking](scc.v1:mcdm.heroes.v1/rule.combat/flanking) the target when you use this ability, choose one ally who is [flanking](scc.v1:mcdm.heroes.v1/rule.combat/flanking) with you. That ally also gains 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge).",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "They can't watch both of you at once.",
+      "keywords": [
+        "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)",
+        "Weapon"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)",
+      "subtype": "signature",
+      "target": "One creature",
+      "tier1": "3 + A damage",
+      "tier2": "5 + A damage",
+      "tier3": "8 + A damage"
+    }
+  },
+  {
     "id": "mcdm.heroes.v1/feature.ability.time-raider/concussive-slam",
     "kind": "ability",
     "name": "Concussive Slam",

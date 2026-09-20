@@ -11,8 +11,8 @@
     "version": "1.0.4"
   },
   "generatedAt": "2026-09-08",
-  "contentHash": "sha256:609aed9b6d4bbb4d08676bfcc080333f48fbb9c64d9c952971f82001bef100ca",
-  "entryCount": 1151,
+  "contentHash": "sha256:ea1f6a2cf1d3c8a30f5fa40aef52fdadc25aa97900648485c9fe5957a50cf43b",
+  "entryCount": 1182,
   "selections": [
     {
       "id": "supporting-character-choices",
@@ -170,6 +170,16 @@
         "feature/ability/elementalist/level-1"
       ],
       "basis": "docs/build/V25-two-class-wizard.md#in-scope: complete sourced Bethell path."
+    },
+    {
+      "id": "shadow-level-one",
+      "description": "Shadow class, level-one features and abilities (all three colleges). Readable alternatives do not imply wizard or execution support.",
+      "paths": [
+        "class/shadow.md",
+        "feature/shadow/level-1",
+        "feature/ability/shadow/level-1"
+      ],
+      "basis": "docs/build/V92-shadow-level-one.md#scope: complete level-one Shadow."
     },
     {
       "id": "kits",
@@ -672,6 +682,158 @@
       "file": "ability.json"
     },
     {
+      "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/black-ash-teleport",
+      "kind": "ability",
+      "name": "Black Ash Teleport",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-1/black-ash-teleport.md",
+      "selection": "shadow-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/clever-trick",
+      "kind": "ability",
+      "name": "Clever Trick",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-1/clever-trick.md",
+      "selection": "shadow-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/coat-the-blade",
+      "kind": "ability",
+      "name": "Coat the Blade",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-1/coat-the-blade.md",
+      "selection": "shadow-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/coup-de-grace",
+      "kind": "ability",
+      "name": "Coup de Grace",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-1/coup-de-grace.md",
+      "selection": "shadow-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/defensive-roll",
+      "kind": "ability",
+      "name": "Defensive Roll",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-1/defensive-roll.md",
+      "selection": "shadow-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/disorienting-strike",
+      "kind": "ability",
+      "name": "Disorienting Strike",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-1/disorienting-strike.md",
+      "selection": "shadow-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/eviscerate",
+      "kind": "ability",
+      "name": "Eviscerate",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-1/eviscerate.md",
+      "selection": "shadow-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/gasping-in-pain",
+      "kind": "ability",
+      "name": "Gasping in Pain",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-1/gasping-in-pain.md",
+      "selection": "shadow-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/get-in-get-out",
+      "kind": "ability",
+      "name": "Get In Get Out",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-1/get-in-get-out.md",
+      "selection": "shadow-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/hesitation-is-weakness",
+      "kind": "ability",
+      "name": "Hesitation Is Weakness",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-1/hesitation-is-weakness.md",
+      "selection": "shadow-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/i-work-better-alone",
+      "kind": "ability",
+      "name": "I Work Better Alone",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-1/i-work-better-alone.md",
+      "selection": "shadow-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/im-no-threat",
+      "kind": "ability",
+      "name": "I'm No Threat",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-1/im-no-threat.md",
+      "selection": "shadow-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/in-all-this-confusion",
+      "kind": "ability",
+      "name": "In All This Confusion",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-1/in-all-this-confusion.md",
+      "selection": "shadow-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/one-hundred-throats",
+      "kind": "ability",
+      "name": "One Hundred Throats",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-1/one-hundred-throats.md",
+      "selection": "shadow-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/setup",
+      "kind": "ability",
+      "name": "Setup",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-1/setup.md",
+      "selection": "shadow-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/shadowstrike",
+      "kind": "ability",
+      "name": "Shadowstrike",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-1/shadowstrike.md",
+      "selection": "shadow-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/teamwork-has-its-place",
+      "kind": "ability",
+      "name": "Teamwork Has Its Place",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-1/teamwork-has-its-place.md",
+      "selection": "shadow-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/two-throats-at-once",
+      "kind": "ability",
+      "name": "Two Throats at Once",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-1/two-throats-at-once.md",
+      "selection": "shadow-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.shadow.level-1/you-were-watching-the-wrong-one",
+      "kind": "ability",
+      "name": "You Were Watching the Wrong One",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-1/you-were-watching-the-wrong-one.md",
+      "selection": "shadow-level-one",
+      "file": "ability.json"
+    },
+    {
       "id": "mcdm.heroes.v1/feature.ability.time-raider/concussive-slam",
       "kind": "ability",
       "name": "Concussive Slam",
@@ -965,6 +1127,14 @@
       "name": "Fury",
       "sourcePath": "vendor/steel-compendium/en/unified/md/class/fury.md",
       "selection": "fury-level-one",
+      "file": "class.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/class/shadow",
+      "kind": "class",
+      "name": "Shadow",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/class/shadow.md",
+      "selection": "shadow-level-one",
       "file": "class.json"
     },
     {
@@ -2669,6 +2839,94 @@
       "name": "Primordial Storm: Lightning Storm",
       "sourcePath": "vendor/steel-compendium/en/unified/md/feature/fury/vuken/primordial-storm-lightning-storm.md",
       "selection": "fury-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.shadow.level-1/1st-level-college-features",
+      "kind": "feature",
+      "name": "1st-Level College Features",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/shadow/level-1/1st-level-college-features.md",
+      "selection": "shadow-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.shadow.level-1/black-ash-teleport",
+      "kind": "feature",
+      "name": "Black Ash Teleport",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/shadow/level-1/black-ash-teleport.md",
+      "selection": "shadow-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.shadow.level-1/coat-the-blade",
+      "kind": "feature",
+      "name": "Coat the Blade",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/shadow/level-1/coat-the-blade.md",
+      "selection": "shadow-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.shadow.level-1/college-triggered-action",
+      "kind": "feature",
+      "name": "College Triggered Action",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/shadow/level-1/college-triggered-action.md",
+      "selection": "shadow-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.shadow.level-1/hesitation-is-weakness",
+      "kind": "feature",
+      "name": "Hesitation Is Weakness",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/shadow/level-1/hesitation-is-weakness.md",
+      "selection": "shadow-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.shadow.level-1/im-no-threat",
+      "kind": "feature",
+      "name": "I'm No Threat",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/shadow/level-1/im-no-threat.md",
+      "selection": "shadow-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.shadow.level-1/insight",
+      "kind": "feature",
+      "name": "Insight",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/shadow/level-1/insight.md",
+      "selection": "shadow-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.shadow.level-1/kit",
+      "kind": "feature",
+      "name": "Kit",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/shadow/level-1/kit.md",
+      "selection": "shadow-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.shadow.level-1/shadow-abilities",
+      "kind": "feature",
+      "name": "Shadow Abilities",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/shadow/level-1/shadow-abilities.md",
+      "selection": "shadow-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.shadow.level-1/shadow-college",
+      "kind": "feature",
+      "name": "Shadow College",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/shadow/level-1/shadow-college.md",
+      "selection": "shadow-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.shadow.level-1/smoke-bomb",
+      "kind": "feature",
+      "name": "Smoke Bomb",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/shadow/level-1/smoke-bomb.md",
+      "selection": "shadow-level-one",
       "file": "feature.json"
     },
     {

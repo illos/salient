@@ -23,6 +23,10 @@ import {
   classProfile as elementalistProfile,
   getLevelOneDecisions as elementalistDecisions,
 } from './classes/elementalist/level-one.ts';
+import {
+  classProfile as shadowProfile,
+  getLevelOneDecisions as shadowDecisions,
+} from './classes/shadow/level-one.ts';
 
 export const definitions: DecisionDefinitions = structuredClone(fury) as DecisionDefinitions;
 const all = () => definitions.steps.flatMap(step => step.decisions);
@@ -64,7 +68,7 @@ allow('ancestry.choice', [
   'Revenant',
 ]);
 allow('career.choice', ["Mage's Apprentice"]);
-allow('class.choice', ['Elementalist']);
+allow('class.choice', ['Elementalist', 'Shadow']);
 allow('culture.environment', ['Urban']);
 allow('culture.environment.skill', ['Alertness']);
 allow('culture.organization.skill', ['Gymnastics']);
@@ -74,7 +78,21 @@ allow('culture.upbringing.skill', ['Tailoring']);
 definitions.classProfiles = structuredClone({
   Fury: furyProfile,
   Elementalist: elementalistProfile,
+  Shadow: shadowProfile,
 });
+
+/** The Shadow's own Kit feature grants an ordinary kit; the Fury's aspects keep their entries. */
+const kitChoice = decision('kit.choice');
+delete kitChoice.dependsOn;
+kitChoice.dependsOnAny = ['class.fury.aspect', 'class.choice'];
+kitChoice.optionsByParent = {
+  ...kitChoice.optionsByParent,
+  Shadow: {
+    source: path('feature/shadow/level-1/kit'),
+    quote: 'You can use and gain the benefits of a kit.',
+    optionsFrom: ['pool.kits.standard'],
+  },
+};
 
 append('step.ancestry', structuredClone(polderDecisions));
 append('step.ancestry', structuredClone(dwarfDecisions));
@@ -160,4 +178,5 @@ append('step.career', [
   ),
 ]);
 append('step.class', elementalistDecisions(definitions.pools));
+append('step.class', shadowDecisions(definitions.pools));
 export default definitions;
