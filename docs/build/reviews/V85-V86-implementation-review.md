@@ -2,7 +2,7 @@
 
 Reviewer: delegated Astra agent, 2026-09-20. Reviewed the lead's evaluator, sheet, resolver, admission and starting-reward UI integration. Applied the `convex-reviewer` skill for authentication, validators, indexed reads and query behavior. This reviewer authored the starting-item action catalog; that catalog and its focused tests are excluded and reviewed independently by the complication agent. No tests or services were run for this review.
 
-Status: all five implementation findings resolved on readback. Implementation review passes within the documented manual boundary; starting-item API proof needs the event assertion described below.
+Status: implementation and proof-code review pass for candidate `b15fc5952dd1ca94dab9520398fa571c3573b22e`, within the documented manual boundary. Formal release acceptance remains blocked on deployed API evidence.
 
 ## Resolved findings
 
@@ -21,7 +21,7 @@ Status: all five implementation findings resolved on readback. Implementation re
 - Source pool exclusions feed both editor pool calculation and evaluator validation; direct submitted selections cannot bypass the two new source prohibitions merely by skipping the UI.
 - Existing sheet peer projection returns before full ability or reward payload construction. The dedicated reward API authenticates first and checks owner/current attached Director authority before reads or mutation receipt replay. Current app policy equates Director with campaign owner; this change does not invent delegation.
 - Legacy reward preparation uses the recorded first-admission revision, validates revision ownership and complete saved values, and never reads the latest career to regrant rewards. It enriches missing narrative metadata from saved origin features while retaining saved resource amounts.
-- The supported resource-debit path can handle Guilty Conscience's Recovery and reject unavailable hero-token payments. All-resource Psychic Blast still needs the correction and persisted proof above.
+- The supported resource-debit path can handle Guilty Conscience's Recovery and reject unavailable hero-token payments. Both Psychic Blast modes now expose the all-resource cost; the reviewed public witness explicitly checks the resulting pool and undo.
 
 These findings concern concrete current paths. This review does not claim automated item modifiers, equipment state, project spending, temporary learned abilities, cooldowns, companions or private-trinket activation. Their manual/deferred boundaries must remain visible. Separate public API proofs and full build checks are required before release.
 
@@ -29,4 +29,26 @@ These findings concern concrete current paths. This review does not claim automa
 
 Reviewed lead-authored `scripts/headless/starting-items.ts` without running it. The scenario exercises real authenticated create/submit/query routes for all 12 trinket and 14 weapon selections, verifies draft entitlements do not expose item actions, checks persisted possession states, compares the resulting action list against a separately enumerated source ledger and checks each readable excerpt against the pinned source. It also exercises a table item invocation and outsider rejection. This is distinct application coverage, not a duplicate of the source/timing unit tests.
 
-One important correction is required before the proof passes review: checking unchanged live state after Mask of the Many use does not distinguish successful manual recording from `ability.blocked`. Capture the returned event ID and require the persisted `ability.recorded` event, its manual flag, ability identity and source. The source pool's count-only check can also be strengthened with visited independently enumerated active item keys, preventing a missing action-bearing choice from silently reducing the matrix. The cleanup call must use `sessions:transition`'s existing `action: 'close'` argument, not `to: 'closed'`.
+The earlier false-positive gap is closed: the final witness captures the returned event ID, fetches its persisted `ability.recorded` event and checks the manual flag, expected ability identity and exact source path. A blocked operation can no longer pass merely because live state stayed unchanged. It also verifies every independently enumerated active item key was visited and uses the supported session `action: 'close'` cleanup. This proof-code review passes; it does not substitute for the lead’s actual run result.
+
+## Independent complication and reward proof review
+
+Reviewed `scripts/headless/complication-actions.ts`, `scripts/headless/starting-rewards.ts` and their application test adapters, authored by another agent. No duplicate test-only behavior was introduced: the adapters run the same public-operation scenarios used by the real API runner.
+
+The complication sheet matrix verifies grant retention, replacement removal, unique actions, source-readable content, independently transcribed prose timing and printed structured timing. Its catalog import supplies the case inventory, not expected timing or effect text; the independent all-row source audit supplies completeness review. The table witness adds behavior the sheet matrix cannot establish: paid Recovery, zero-pool block, exact undo/redo, actual all-resource debit for both Psychic Blast modes, owner/outsider boundaries, four/five-Victory gating and revocation, and retention of the supported rolled Dragon Breath route. Manual oath use checks the persisted event’s manual flag and unchanged live values.
+
+The starting-reward witness independently expects Artisan’s printed 1 Wealth, 0 Renown and 240 project points, then verifies Shattered Legacy’s broken Grand Scarab and repair-source entitlement. Owner and Director agree on the actual record; unauthorized queries and initialization fail. Reinitialization, approved career replacement and historical restoration retain the exact original award identities and amounts.
+
+The legacy-only fixture is justified because current public admissions already create the reward record. It publicly creates/adopts/changes a hero, removes only the newer reward field to simulate old storage, then tests initialization through the authenticated public mutation. The changed Aristocrat cannot replace the original Artisan reward. Stale/unauthorized requests, retry identity, exactly one revision increment, unchanged live state, absent unauthorized receipt and missing-origin refusal catch distinct real failure modes. The direct historical fixture is disclosed and is not presented as the live API proof.
+
+No further blocking proof-code issue was found. The final assertions passed the lead’s integrated local check; deployed API results remain blocked. No tests or services were started by this reviewer.
+
+## Lead verification record
+
+The lead's full `pnpm check` on `faa9b1e` passed: 345 engine plus 519 app/script tests
+(864 total), including final proof assertions, and the production build. This records the lead's
+run, not an additional reviewer execution. The isolated CT114 deployment of `b15fc59` failed
+its existing initial function-push readiness guard before any live API scenarios could start.
+No retry or infrastructure repair was attempted; the environment is stopped with data retained.
+[Evidence and logs](../evidence/V85/README.md) distinguish local proof from the blocked live gate.
+The static/source review verdict is unchanged; delivery acceptance is not granted.

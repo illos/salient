@@ -1,10 +1,15 @@
 # Astra character delivery
 
 Status: all twelve level-one ancestries are delivered through [V82](V82-remaining-ancestries.md).
-The current bounded portion is [V83 core perk/ordinary kit action coverage](V83-supporting-actions.md)
-and the user-requested [V84 culture presets](V84-culture-presets.md). Both are merged/live as `175d17d`, with independent reviews and 31/31 API scenarios passing
-on isolated and shared-main CT114. Complications and starting
-rewards follow as separate portions; class expansion is not part of this batch.
+[V83 perk/ordinary kit actions](V83-supporting-actions.md) and [V84 culture presets](V84-culture-presets.md)
+are merged/live as `175d17d`, with independent reviews and 31/31 API scenarios passing on isolated
+and shared-main CT114. The current bounded portion is [V85 complications](V85-complications.md)
+and [V86 starting rewards](V86-starting-rewards.md), implemented on `slice/V85` at `faa9b1e`.
+Full local checks pass (864 tests and production build). The isolated CT114 function push hit its
+existing readiness guard before live API testing; the environment is stopped with data retained.
+These portions remain unmerged and await live acceptance. No verification retries or infrastructure
+repair are underway. [Evidence](evidence/V85/README.md) owns the blocker and resume boundary;
+class expansion is not part of this batch.
 The Opus pilot remains [abandoned without reuse](../decisions/2026-09-19-opus-pilot-dead-end.md).
 This document owns the replacement workflow; [V44](V44-character-option-delivery.md) owns delivery
 scope, and [the build process](README.md) retains project-wide review and merge rules.

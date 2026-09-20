@@ -1,0 +1,19 @@
+CONVEX_AGENT_MODE=anonymous mode is in beta, functionality may change in the future.
+✔ Configured a local deployment for http://127.0.0.1:3210 and saved its:
+    client URL as VITE_CONVEX_URL
+    HTTP actions URL as VITE_CONVEX_SITE_URL
+ to .env.local
+
+Write your Convex functions in convex/
+Give us feedback at https://convex.dev/community or support@convex.dev
+View the Convex dashboard at http://127.0.0.1:6790/
+
+▌ Developing against deployment:
+▌ [Local] Port 3210 • No Convex account (run npx convex login to link to a project)
+▌ └─ http://127.0.0.1:3210
+- Preparing Convex functions...
+
+[36mA minor update is available for Convex[39m [2m(1.45.0 → 1.46.0)[22m
+[2mChangelog:[22m [4mhttps://github.com/get-convex/convex-js/blob/main/CHANGELOG.md#changelog[24m
+Convex AI files are not installed. Run npx convex ai-files install to get started or npx convex ai-files disable to hide this message.
+Initial Convex function push did not succeed; refusing readiness

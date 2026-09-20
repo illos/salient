@@ -1,0 +1,9 @@
+
+ RUN  v4.1.11 /srv/presidium/projects/salient/code/.worktrees/supporting-actions
+
+
+ Test Files  1 passed (1)
+      Tests  3 passed (3)
+   Start at  09:39:08
+   Duration  2.49s (transform 863ms, setup 0ms, import 644ms, tests 1.76s, environment 0ms)
+
