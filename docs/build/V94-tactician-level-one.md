@@ -174,3 +174,10 @@ and above, any other class. Spec sections: `docs/character-wizard-spec.md#3-deci
   lint/format pass. New bounded cohort SALIENT_HEADLESS_COHORT=tactician covers four saved source-
   ledger builds, manual-action records, Focus payment/block, and doctrine/action revocation. Full
   TESTER gate, pinned Forge execution and independent final review are pending.
+- TESTER message1208: exact code2f3f938 full CI=true pnpm check exit0 in170s
+  (374 engine +580 app/scripts =954), content/report/build gates included. Pinned Forge Tactician
+  counterparts4/4, exit0 in1.72s, retaining the explicitly documented max-Stamina/action-packaging
+  differences. Artifacts: /srv/presidium/projects/salient/test-artifacts/V94-2f3f938.
+  Isolated Convex preparation stalled twice; helpers stopped and the headless scenario never
+  started. DEPLOY2 receives the reviewed code for integration and the single bounded Tactician
+  cohort on the deployment target; live acceptance remains pending that persisted readback.
