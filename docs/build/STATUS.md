@@ -389,4 +389,4 @@ This doctrine/status update changes documentation only and needs no runtime upda
 
 | Id | Unit | Implementation | Verification / next action |
 | --- | --- | --- | --- |
-| V65 | [Programmatic character verification](V65-character-headless.md) | `slice/V65`, `.worktrees/character-headless`; discovery/transition routes, shared UI transition and browser-independent runner | One bounded headless pass queued after V63 runtime window; record blockers without fixes or retries; no browser runs |
+| V65 | [Programmatic character verification](V65-character-headless.md) | `slice/V65`, `.worktrees/character-headless`; discovery/transition routes, shared UI transition and browser-independent runner | Backend published `c0fe8b1`; 712 unit/backend/script tests pass, build type error; remote headless 14 pass / 1 fail / 7 blocked in 45.472s; no fixes/reruns/browser; not complete or merged |

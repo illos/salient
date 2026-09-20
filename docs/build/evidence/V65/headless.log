@@ -1,0 +1,128 @@
+$ node scripts/verify-character-headless.ts
+{
+  "runId": "8ada0964-f392-4da4-88d5-836ec9cec476",
+  "target": "https://different-bat-943.convex.cloud",
+  "source": "c0fe8b1054ec5d6a5db908b1b85163f5f7879889",
+  "elapsedMs": 45472,
+  "results": [
+    {
+      "name": "discover decisions and preview without creating a character",
+      "status": "pass",
+      "elapsedMs": 1556
+    },
+    {
+      "name": "Devil: complete creation, exact first-save retry and fresh persisted sheet",
+      "status": "pass",
+      "elapsedMs": 2252
+    },
+    {
+      "name": "Polder: complete creation, exact first-save retry and fresh persisted sheet",
+      "status": "pass",
+      "elapsedMs": 2211
+    },
+    {
+      "name": "Dwarf: complete creation, exact first-save retry and fresh persisted sheet",
+      "status": "pass",
+      "elapsedMs": 2071
+    },
+    {
+      "name": "Human: complete creation, exact first-save retry and fresh persisted sheet",
+      "status": "pass",
+      "elapsedMs": 2018
+    },
+    {
+      "name": "Devil: remaining purchase witnesses persist through the public route",
+      "status": "pass",
+      "elapsedMs": 5518
+    },
+    {
+      "name": "Polder: remaining purchase witnesses persist through the public route",
+      "status": "pass",
+      "elapsedMs": 1925
+    },
+    {
+      "name": "Dwarf: remaining purchase witnesses persist through the public route",
+      "status": "pass",
+      "elapsedMs": 3555
+    },
+    {
+      "name": "Human: remaining purchase witnesses persist through the public route",
+      "status": "pass",
+      "elapsedMs": 3698
+    },
+    {
+      "name": "private draft, source discovery and transition reject another owner",
+      "status": "pass",
+      "elapsedMs": 1071
+    },
+    {
+      "name": "parent replacement clears dependent choices and persists unrelated details",
+      "status": "pass",
+      "elapsedMs": 2272
+    },
+    {
+      "name": "culture, kit and complication transitions preserve saved authored fields",
+      "status": "pass",
+      "elapsedMs": 2391
+    },
+    {
+      "name": "incomplete and over-budget previews cannot be mistaken for complete builds",
+      "status": "pass",
+      "elapsedMs": 1290
+    },
+    {
+      "name": "array replacement clears assignment; named assignment and stale-save guards use public operations",
+      "status": "pass",
+      "elapsedMs": 2482
+    },
+    {
+      "name": "lifecycle: admission and audience privacy",
+      "status": "fail",
+      "elapsedMs": 6332,
+      "reason": "assertion-failed"
+    },
+    {
+      "name": "lifecycle: private inheritance",
+      "status": "skip",
+      "elapsedMs": 0,
+      "reason": "Campaign/admission prerequisite failed."
+    },
+    {
+      "name": "lifecycle: Fury progression preserves live values",
+      "status": "skip",
+      "elapsedMs": 0,
+      "reason": "Admitted Fury prerequisite failed."
+    },
+    {
+      "name": "lifecycle: paginated history and reviewed restoration",
+      "status": "skip",
+      "elapsedMs": 0,
+      "reason": "Completed level-two advancement prerequisite failed."
+    },
+    {
+      "name": "lifecycle: owning Director activation and inheritance",
+      "status": "skip",
+      "elapsedMs": 0,
+      "reason": "Campaign prerequisite failed."
+    },
+    {
+      "name": "lifecycle: foreign history and owner-only restoration",
+      "status": "skip",
+      "elapsedMs": 0,
+      "reason": "Admitted Fury prerequisite failed."
+    },
+    {
+      "name": "lifecycle: full-edit stale review and preserved live state",
+      "status": "skip",
+      "elapsedMs": 0,
+      "reason": "Admitted Fury prerequisite failed."
+    },
+    {
+      "name": "lifecycle: combat edit lock",
+      "status": "skip",
+      "elapsedMs": 0,
+      "reason": "Admitted Fury and running-session prerequisites failed."
+    }
+  ]
+}
+[ELIFECYCLE] Command failed with exit code 1.

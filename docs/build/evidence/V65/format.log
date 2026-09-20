@@ -1,0 +1,11 @@
+convex/characterWizard.ts 94ms
+shared/evaluate/choiceTransition.ts 7ms (unchanged)
+web/wizard/index.tsx 131ms (unchanged)
+web/progression/index.tsx 64ms
+scripts/headless/character-client.ts 20ms
+scripts/headless/character-lifecycle.ts 45ms
+scripts/headless/character-scenarios.ts 64ms
+scripts/verify-character-headless.ts 15ms
+tests/app/character-wizard-route.test.ts 14ms
+package.json 16ms (unchanged)
+tsconfig.web.json 2ms (unchanged)

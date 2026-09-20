@@ -1,0 +1,116 @@
+
+ RUN  v4.1.11 /app
+
+ ✓  app  tests/app/abilities.test.ts (17 tests) 2875ms
+     ✓ acceptance 1 and 2: 10.1 free strike through /ability use; retry returns the same result with no second roll or damage  1277ms
+ ✓  app  tests/app/history.test.ts (14 tests) 1560ms
+ ✓  app  tests/app/combat.test.ts (19 tests) 1560ms
+     ✓ acceptance 1: the setup card is a Director draft that follows the rosters; Cancel leaves no encounter, snapshot or lock  572ms
+ ✓  app  tests/app/closeout-session.test.ts (6 tests) 1059ms
+     ✓ missing Void choice, unauthorized closure and pause with a Void choice leave state and history untouched  615ms
+ ✓  app  tests/app/character-progression.test.ts (13 tests) 1112ms
+   ✓ Fury level-up persists, retries once and preserves every compatible live value  510ms
+ ✓  app  tests/app/admission.test.ts (11 tests) 1078ms
+     ✓ acceptance 3: a player submission is not effective until approval; withdrawal and decline leave it unchanged  558ms
+ ✓  app  tests/app/closeout.test.ts (7 tests) 999ms
+     ✓ ends structure without synthetic boundaries/dice; closes cards, supports rewind/redo, rejects turns and attacks  577ms
+ ✓  app  tests/app/v001-walkthrough.test.ts (1 test) 981ms
+   ✓ A09: admitted hero → real combat → correction/history → closeout → next session → paused Void keep/reset  980ms
+stderr | tests/app/account-email.test.ts > Better Auth recovery with Cloudflare mail > real routes queue canonical mail, reset persisted credentials, revoke sessions and refuse reuse
+2026-09-20T01:55:15.650Z ERROR [Better Auth]: Reset Password: User not found { email: 'missing@example.test' }
+
+stderr | tests/app/account-email.test.ts > Better Auth recovery with Cloudflare mail > real routes queue canonical mail, reset persisted credentials, revoke sessions and refuse reuse
+2026-09-20T01:55:15.817Z ERROR [Better Auth]: Invalid password
+
+stderr | tests/app/account-email.test.ts > Better Auth recovery with Cloudflare mail > expired tokens and untrusted redirects are refused
+2026-09-20T01:55:15.985Z ERROR [Better Auth]: Invalid redirectURL: https://attacker.example/reset
+
+stderr | tests/app/account-email.test.ts > Better Auth recovery with Cloudflare mail > database request limits reject a fourth request across separate auth instances
+2026-09-20T01:55:15.991Z ERROR [Better Auth]: Reset Password: User not found { email: 'missing@example.test' }
+
+stderr | tests/app/account-email.test.ts > Better Auth recovery with Cloudflare mail > database request limits reject a fourth request across separate auth instances
+2026-09-20T01:55:15.995Z ERROR [Better Auth]: Reset Password: User not found { email: 'missing@example.test' }
+
+stderr | tests/app/account-email.test.ts > Better Auth recovery with Cloudflare mail > database request limits reject a fourth request across separate auth instances
+2026-09-20T01:55:16.000Z ERROR [Better Auth]: Reset Password: User not found { email: 'missing@example.test' }
+
+stderr | tests/app/account-email.test.ts > Better Auth recovery with Cloudflare mail > unconfigured deployments expose no recovery capability and do not queue mail
+2026-09-20T01:55:16.006Z ERROR [Better Auth]: Reset password isn't enabled.Please pass an emailAndPassword.sendResetPassword function in your auth config!
+
+ ✓  app  tests/app/account-email.test.ts (9 tests) 872ms
+     ✓ real routes queue canonical mail, reset persisted credentials, revoke sessions and refuse reuse  751ms
+ ✓  app  tests/app/characterSecrets.test.ts (5 tests) 872ms
+   ✓ only the campaign Director can read/write the inheritance; public revisions, sheets and events disclose no item  548ms
+ ✓  app  tests/app/history-audit.test.ts (5 tests) 898ms
+     ✓ admission is separate; targeting preparation does not consume undo and is cleared by it  592ms
+ ✓  app  tests/app/audience.test.ts (8 tests) 833ms
+     ✓ difficulty projection preserves public skill text containing result-like punctuation: Lore; hard: winter  540ms
+ ✓  app  tests/app/characterDirectorSetup.test.ts (7 tests) 819ms
+   ✓ player submits owner-complete inputs, but admission waits atomically for the private Director choice  481ms
+ ✓  app  tests/app/table.test.ts (6 tests) 768ms
+     ✓ acceptance 1 and 2: authority matrix across Director, player and observer  526ms
+ ✓  app  tests/app/character-wizard-route.test.ts (5 tests) 660ms
+   ✓ headless discovery scopes dependent choices and canonicalizes supplied provenance  448ms
+ ✓  app  tests/app/character-review-queue.test.ts (2 tests) 745ms
+   ✓ an owner sees a new pending submission after 205 withdrawn reviews from same owner  667ms
+ ✓  app  tests/app/registry.test.ts (7 tests) 721ms
+     ✓ acceptance 1: the same /table roll from two submitters yields events of identical shape with server dice  504ms
+ ✓  app  tests/app/a05-review-regressions.test.ts (3 tests) 716ms
+   ✓ committed combat checks Ferocity affordability during roll  572ms
+ ✓  app  tests/app/characters.test.ts (11 tests) 721ms
+     ✓ create/reopen persists authored fields and isolates private drafts across users  469ms
+ ✓  app  tests/app/table-performance.test.ts (5 tests) 698ms
+ ✓  app  tests/app/foes.test.ts (5 tests) 645ms
+     ✓ Director loads independent sourced foes; peers see every foe through the selected health projection  501ms
+ ✓  app  tests/app/foe-operations.test.ts (2 tests) 607ms
+   ✓ foe buttons/API/commands share retries, source snapshots and journaled creation/removal  541ms
+ ✓  app  tests/app/interactions.test.ts (3 tests) 616ms
+     ✓ acceptance 5: opened by a short command, labeled in the log, answered headlessly, resolved  534ms
+ ✓  app  tests/app/access-sessions.test.ts (8 tests) 578ms
+ ✓  app  tests/app/polder-v58.test.ts (1 test) 586ms
+   ✓ Polder-movement traits survive save/readback with readable effects and replacement preserves live state  586ms
+ ✓  app  tests/app/characterChoiceOrigins.test.ts (2 tests) 576ms
+   ✓ immutable revisions retain the future choice through advancement, edits and restore  567ms
+ ✓  app  tests/app/character-rulings.test.ts (2 tests) 596ms
+   ✓ Q-CHAR-10 shared evaluation, persisted draft and admission allow two of three ancestry points  545ms
+ ✓  app  tests/app/setup-local.test.ts (6 tests) 570ms
+ ✓  app  tests/app/content.test.ts (3 tests) 544ms
+     ✓ reseed loads every manifest entry; queries return the Goblin Warrior source verbatim  450ms
+ ✓  app  tests/app/closeout-audit.test.ts (1 test) 593ms
+   ✓ normal cleanup clears a retained foe temporary pool once, with a private persisted journal  592ms
+ ✓  app  tests/app/independent-review.test.ts (4 tests) 545ms
+   ✓ independent: persisted session deletion revokes already issued identity across all private surfaces  456ms
+ ✓  app  tests/app/journal.test.ts (5 tests) 505ms
+     ✓ concurrent appends to one campaign get distinct consecutive sequence numbers  316ms
+ ✓  app  tests/app/elementalist-character.test.ts (4 tests) 423ms
+ ✓  app  tests/app/history-interaction-regressions.test.ts (8 tests) 357ms
+ ✓  app  tests/app/dice.test.ts (6 tests) 338ms
+     ✓ same commandId returns the identical accepted roll; a new id draws new values  312ms
+ ✓  app  tests/app/parse.test.ts (97 tests) 17ms
+ ✓  app  tests/app/engine-adapter.test.ts (1 test) 6ms
+ ✓  app  tests/app/command-identities.test.ts (2 tests) 3ms
+ ✓  scripts  tests/scripts/rules.test.ts (9 tests) 75103ms
+   ✓ prebuilt index ranks every unique exact title first, supports prefixes, typos and filters  4233ms
+   ✓ regenerates identical articles, metadata and search from the same pin  35418ms
+ ✓  scripts  tests/scripts/foes.test.ts (25 tests) 26093ms
+     ✓ regenerates twice byte-for-byte and retains exact pinned input  25427ms
+ ✓  scripts  tests/scripts/core-presentation.test.ts (7 tests) 15215ms
+     ✓ projects all immutable Foe edition objects without editing their source HTML  1463ms
+   ✓ covers every Core glyph family through the production projection and React semantics  13611ms
+ ✓  scripts  tests/scripts/build-content.test.ts (22 tests) 1501ms
+     ✓ detects a hand-edited generation date 9999-99-99 independently  465ms
+     ✓ detects a hand-edited generation date 2020-01-01 independently  434ms
+ ✓  scripts  tests/scripts/reference-delivery.test.ts (1 test) 1449ms
+   ✓ foe delivery covers every object and preserves search after serialization  1448ms
+ ✓  scripts  tests/scripts/check-commit.test.ts (14 tests) 286ms
+ ✓  scripts  tests/scripts/app-output.test.ts (1 test) 207ms
+ ✓  scripts  tests/scripts/foes-library.test.ts (4 tests) 47ms
+ ✓  scripts  tests/scripts/pinned-source.test.ts (1 test) 42ms
+ ✓  scripts  tests/scripts/glyphs.test.ts (4 tests) 42ms
+ ✓  scripts  tests/scripts/check-links.test.ts (4 tests) 8ms
+
+ Test Files  49 passed (49)
+      Tests  413 passed (413)
+   Start at  01:55:01
+   Duration  158.57s (transform 1.48s, setup 0ms, import 5.31s, tests 148.65s, environment 4ms)
+

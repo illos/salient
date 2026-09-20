@@ -1,6 +1,6 @@
 # V65: Programmatic character verification
 
-Status: implementation prepared; first verification pending. Rules review: not required for exposing
+Status: implementation committed on `slice/V65`; verification failed with recorded blockers. Rules review: not required for exposing
 existing choice/evaluation behavior; ancestry rules acceptance remains with V57/V58/V60/V61.
 
 This fills the supported-route and proof gaps in the
@@ -61,8 +61,48 @@ retry duplication, stale saves, improper review/privacy, private-grant activatio
 on advancement and incorrect restoration/history. They are not wrappers around the evaluator's
 own expected output. A passing sampled journey is not exhaustive rules coverage.
 
-The original audit's full parity map remains the scope ledger. Initial live scenarios cover the
-ordinary owner/Director/peer paths. Explicit remaining coverage gaps must be reported, including
-any owning-Director branch, combat lock, cross-character restore, private-write abuse or other
-boundary not exercised in this run. Existing backend coverage remains useful but cannot be relabeled
+The original audit's full parity map remains the scope ledger. Live scenarios include owner/Director/peer paths, owning-Director setup, combat locks,
+foreign-history refusal and stale-review handling. Dependency skips and any remaining unexercised
+boundaries are reported below. Existing backend coverage remains useful but cannot be relabeled
 live proof. Do not demote browser testing on the strength of these results alone.
+
+
+## One-pass result — 2026-09-20
+
+Source `c0fe8b1054ec5d6a5db908b1b85163f5f7879889`, committed on `slice/V65`, not merged into main.
+The backend was deployed to cloud dev `different-bat-943` with normal Convex typechecking and schema
+validation passing; no indexes deleted, no content reseed, no auth configuration change or data reset.
+Frontend remains V62 source `1e7896c`, Worker `b9cc5ebb-54a1-4176-bc05-d99051b3cf1e`:
+the V65 UI refactor was not published because the app TypeScript gate failed.
+
+| Check | Actual result |
+| --- | --- |
+| Lint/format and engine checks | Passed, 299 engine tests |
+| `pnpm check` | Exit 2 at app TypeScript; later stages did not run |
+| Independent app/script test command | Exit 0, 413 tests including all five new route tests; 158.57 seconds |
+| Cloud backend deployment | Exit 0; backend TypeScript and schema validation pass |
+| Live programmatic character verification | Exit 1; 14 pass, 1 fail, 7 dependency skips in 45.472 seconds |
+| Browser tests | Not run |
+
+**Blocker 1 — compile:** `scripts/headless/character-scenarios.ts:159` produces TS7022 for the
+inferred `actual` variable. The standalone Node runner still executes using normal TypeScript
+stripping; this does not turn the failed build into a pass. No typecheck was disabled for deployment.
+
+**Blocker 2 — live assertion:** `lifecycle: admission and audience privacy` failed an assertion.
+The report identifies the scenario but does not identify that assertion's source line or operands;
+no narrower root cause is claimed. The seven skipped cases are private inheritance, advancement,
+history/restoration, owning-Director activation/inheritance, foreign history/restore permissions,
+stale full-edit review, and combat edit locks. They are implemented scenarios, not proven behavior.
+The harness currently gates owning-Director work on the broader admission case; that dependency
+also limits independent coverage after a failure. This limitation is recorded, not repaired here.
+
+Passing live cases prove discovery without creation; complete saved/readback builds for Devil,
+Polder, Dwarf and Human; the remaining ancestry purchase witnesses; foreign-owner refusal; parent
+replacement; culture/kit/complication edits; incomplete/over-budget evaluation; and characteristic
+assignment, retry and stale-write boundaries. Connections text round-trips in all four creation
+cases. These are real authenticated public API calls against the remote backend, with no browser
+session/setup or database fixture injection.
+
+Per user instruction, **no fixes or reruns followed these failures**. Feature completion and browser
+demotion remain blocked. Runtime jobs ended and temporary deployment credentials were removed;
+cloud backend stays live for review. Logs and actual exit statuses are in [evidence/V65](evidence/V65/README.md).
