@@ -100,6 +100,21 @@ unavailable, the durable job waits for the next coordinator turn; do not create 
    those jobs. Do not call a cloud revision stable until both target-specific gates and the release
    record are complete.
 
+## Keep a reusable foundation
+
+Use the last green integrated certificate as the baseline; retain its exact source, dependency
+pins and target. New work should submit the changed behavior, relevant inputs and a focused
+regression command. Reuse unchanged evidence under step 3, then run one required integration
+gate before promotion. A local suite pass is not proof of a different live deployment.
+
+Every new or touched test must name a plausible failure it catches that existing coverage misses.
+Apply the [test value policy](docs/build/README.md#test-value): remove duplicate, obsolete and
+implementation-mirroring assertions; share expensive read-only setup; use the smallest fixture and
+cheapest test level that still detects the failure. Preserve independent expected results and
+permission, persistence and integration checks. Explain reductions in the existing slice handoff,
+without a new justification ledger or test-count target. A failing test needs diagnosis before
+repair or removal. Removing bloat is part of completion, not a separate backlog obligation.
+
 ## Keep coordination small
 
 Persist the queue entry and raw attempt outputs for recovery, but batch routine queue, certificate

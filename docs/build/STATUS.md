@@ -486,3 +486,9 @@ passing evidence.
 | Slice | Document | Status | Owner | Branch |
 | --- | --- | --- | --- | --- |
 | V87 | [Core library seeding](V87-foes-library-seeding.md) | Complete — merged and live 2026-09-20: main `4d6d299`; integrated TESTER check (880 tests) and shared-main live check pass; shared CT114 main reseeded to 1151 entries with play data retained | Foes coordination (built), Fable (integrated) | slice/V87 retired; evidence in the slice work log and `evidence/V87` |
+
+## Test foundation — 2026-09-20
+
+| Id | Slice | Status | Owner |
+| --- | --- | --- | --- |
+| V89 | [Reusable test foundation](V89-test-foundation.md) | Committed on slice/V89, not merged; focused/full gates pass (358 + 575); WIZARD.2 independent review PASS; ready for DEPLOY | TESTER, slice/V89 |

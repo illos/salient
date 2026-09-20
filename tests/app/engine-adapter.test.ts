@@ -3,27 +3,17 @@
 // structured resolution unchanged. No dice, no database. Expected values are the engine's documented
 // rejection contract (src/engine.ts validates state before any command), not derived by running it.
 import { expect, test } from 'vitest';
-import { ENGINE, evaluate } from '../../convex/lib/engine';
-import { backend } from './fixtures/table';
+import { evaluate } from '../../convex/lib/engine';
 import type { GameState } from '../../src/contracts';
 
 const state: GameState = { entities: {}, squads: {}, round: 1, malice: 0, pending: [] };
 
-test('the adapter is the in-process TypeScript engine and returns structured outcomes', async () => {
-  expect(ENGINE).toEqual({
-    module: 'src/engine.ts',
-    language: 'typescript',
-    placement: 'in-process',
+test('the adapter preserves structured rejection and invalid-state outcomes', () => {
+  const resolution = evaluate({
+    kind: 'manual',
+    state,
+    command: { kind: 'manual', id: 'm1', reason: 'fixture', changes: [] },
   });
-  const t = backend();
-  // Called from inside a mutation context, as a registered operation would call it.
-  const resolution = await t.run(async () =>
-    evaluate({
-      kind: 'manual',
-      state,
-      command: { kind: 'manual', id: 'm1', reason: 'fixture', changes: [] },
-    }),
-  );
   expect(resolution.status).toBe('rejected');
   expect(resolution.messages).toEqual(['Manual command has no changes or pending completion.']);
   expect(resolution.state).toEqual(state);

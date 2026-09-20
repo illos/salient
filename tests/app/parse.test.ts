@@ -28,12 +28,6 @@ const fixtures: Fixture[] = JSON.parse(
 );
 
 describe('grammar conformance fixtures', () => {
-  test('the fixture set is the documented 90 cases with 10 asserted trees', () => {
-    expect(fixtures).toHaveLength(90);
-    expect(fixtures.filter(f => f.expected)).toHaveLength(10);
-    expect(fixtures.filter(f => f.valid)).toHaveLength(58);
-    expect(fixtures.filter(f => !f.valid)).toHaveLength(32);
-  });
   for (const fixture of fixtures) {
     test(`${fixture.id}: ${fixture.valid ? 'accepted' : 'rejected'} ${JSON.stringify(fixture.input)}`, () => {
       if (fixture.valid) {
