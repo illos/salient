@@ -1,5 +1,51 @@
 # V63 shared-main proof runner review
 
+## Final bounded V63 shared-main acceptance verdict: PASS
+
+Date: 2026-09-20. Independent reviewer: `v63_main_proof_review`. The corrected runner
+now has successful real shared-main HTTP/CLI evidence on clean synced
+`e5c1cd84bb5f08a2c1ee51279467ca4e692c6e0e`. No blocking finding remains for this bounded
+consecutive-correction/history/read-permission prerequisite. This accepts neither the broader
+V26 compiler nor exhaustive mechanical/random-roll coverage. The earlier missed runner defect
+and failed first trial remain documented below.
+
+Inspected the actual [persisted readback](../evidence/V26/main-corrections-2026-09-20/v63-headless-main-readback.json),
+[output](../evidence/V26/main-corrections-2026-09-20/v63-headless-main-output.txt), and
+[exit 0](../evidence/V26/main-corrections-2026-09-20/v63-headless-main-exit.txt).
+Run `8fbe3f92-080a-44d9-b6af-afd37836f305` reports `passed: true`, `stage: complete`,
+12.256 seconds and 14 records (two setup records plus 12 lifecycle captures).
+Runner location was the CT114 main build container; the application target was the existing
+shared-main backend `http://backend:3210` with origin
+`https://salient-dev-fc4f48cb09a0.tail41404c.ts.net`. Source metadata records the canonical
+checkout, clean commit and unchanged clean vendor pins. All 12 source-byte hashes independently
+match the reviewed checkout, including corrected runner hash `61253b0…f38f9d`.
+
+Independent inspection of every captured state confirms:
+
+- Accepted real dice remain `1 + 10`; the entire original projected ability event remains
+  identical across captures. Corrections link to that event through both cause and payload IDs.
+- Goblin Stamina follows `7 → 10 → 10 → 10 → 10 → 7` through initial use, one bane, two
+  banes, undo, redo and Director restoration to zero banes. Equal damage for one/two banes
+  is legitimate for this roll. Temporary Stamina remains zero and Slain remains false.
+  Both roles' target outcomes and Director applied-damage records match expectations built
+  from the retained pre-use facts; this remains R04 persistence parity, not new rules proof.
+- Full hero live state stays identical to pre-use state, including zero Ferocity. There is no
+  resource grant needed to force the scenario. Exact correction IDs and undo/redo targets agree.
+- Both correction windows stay open through player corrections/undo/redo. The Director
+  correction closes the player window; the refused player correction changes no state.
+  Manual disposition closes the Director correction window, and its refused correction
+  changes no state. Rewind removes the disposition and restores only the Director window.
+- Unrelated turn end closes both correction windows and Director manual resolution. The
+  final refused Director correction preserves the result. Player `mayResolve` is false
+  throughout; Director `mayResolve` follows the expected policy window.
+
+Successful final evidence also means the runner's sign-out checks completed without marking
+failure. Disposable proof data remains in main; no reset, import, seed or deletion was used.
+The reviewer inspected artifacts only and ran no application workload. Browser testing remains
+deferred under the moratorium; its absence is not a blocker. Fable owns the completion record.
+
+## Review history
+
 Date: 2026-09-20. Independent reviewer: `v63_main_proof_review`.
 Initial reviewed candidate: `41f32eb12867b346a752479cadb6894977661551` on
 `slice/V63-main-proof`, rebased onto `9675634`, plus the formatter-produced runner
@@ -9,7 +55,7 @@ the integration lead added its `tsconfig.web.json` include. This reviewer owns o
 document and performed static reads, with no tests, builds, dependency installation,
 runtime changes or browser execution.
 
-## Current corrected runner implementation readiness verdict: PASS
+## Pre-execution corrected runner implementation readiness verdict: PASS
 
 The first live trial exposed a runner defect that the initial independent static review missed:
 the `abilities:sheet` actor argument lacked required `name`. The earlier readiness PASS below
@@ -116,21 +162,21 @@ required: no new mechanical formula or fixed expected damage is claimed. Shared 
 is explicitly an oracle for persistence/reconciliation parity, not independent verification
 of that same resolver. No online rules or abandoned Opus material was used.
 
-## Acceptance inventory
+## Final acceptance inventory
 
 | Check | Status | Evidence and limit |
 | --- | --- | --- |
 | Main target restricted before mutation | Verified statically | Explicit opt-in; canonical checkout plus SHA-256 identity; exact shared HTTPS origin and container endpoints; anonymous `.env.local` deployment; injected deployment/admin credentials refused. Runtime source commit and dirty state retained. |
 | Preserve existing main data | Verified statically | No reset, import, seed, dice-state helper or deletion. New accounts/campaign/hero/foe are made through public operations and remain for inspection. Sign-out removes authentication sessions only. |
-| Supported application route | Corrected statically and typechecked; fresh execution pending | Public setup and actual CLI route remain supported. The corrected generated-reference request passes TypeScript, and omission of the required sheet actor name now fails it. Live proof remains pending. |
+| Supported application route | Verified | Corrected generated-reference request passes TypeScript, omitted actor name fails it, and fresh shared-main public setup/CLI lifecycle completes. |
 | Expectations precede claimed output | Verified statically | Sheet tiers, character baseline and target health are read before use. Only the accepted random dice are read afterward. The resolver derives each expected corrected result from those original facts. |
-| Random-roll robustness | Verified statically; live not verified | No chosen roll or retry loop. Bane changes may preserve tier/damage. Critical/high rolls may Slay; persisted Slain is compared with the resolver and target binding permits correction of the retained foe. Signature cost absence is asserted. |
-| Both-role windows and live-state conservation | Verified statically; live not verified | Every capture compares player/Director `mayCorrect` and `mayResolve`, target Stamina/temporary Stamina/Slain, full hero live state, dice and target outcome. Player manual-resolution permission is always false. |
-| Linked correction/undo/redo and refusal boundaries | Verified statically; live not verified | Exact effective correction IDs; original ability dice; correction kind/cause/payload IDs; undo/redo targets; undone second correction; Director seam; disposition and rewind; unrelated turn end; readback after denied mutations. |
+| Random-roll robustness | Verified for actual accepted roll; other rolls inspected statically | Real 1+10 completes, including equal damage for one/two banes. No chosen roll/retry loop. Critical/high Slain behavior was not exercised in this run. Signature cost absence is asserted. |
+| Both-role windows and live-state conservation | Verified | Fresh shared-main captures confirm both roles' permissions, target health/Slain, unchanged full hero live state, retained dice and matching outcomes. |
+| Linked correction/undo/redo and refusal boundaries | Verified | Actual event links, correction IDs, undo/redo targets, Director seam, disposition/rewind and unrelated turn-end refusal match reviewed contracts. |
 | Credentials kept out of evidence | Verified statically | JWTs stay in memory/child environment. Passwords, auth responses and transport exceptions are not serialized. Artifact contains public game-state reads and hashes; failures report only stage. |
 | Existing isolated runner/guards/helper unchanged | Verified statically | Candidate does not edit `scripts/v63-headless.ts` or its dice import helper. |
 | Scoped runner formatting/lint/types | Corrected version verified | Fresh CT114 positive checks exit 0; missing-name negative probe exits 2 with TS2741; restored runner/config hashes match current reviewed files. |
-| Actual shared-main lifecycle | Not verified; runtime acceptance pending | Awaiting post-integration main execution evidence. Historical isolated proof is not relabeled as this runner's main proof. |
+| Actual shared-main lifecycle | Verified | Fresh clean e5c1cd8 run completes with exit 0 and separately inspected persisted evidence; source hashes match. |
 
 `mayResolve` is a policy/window boolean in the public query, not a count of unmarked
 clauses. Its expected true value immediately after marking one clause matches that API;

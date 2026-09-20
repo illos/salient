@@ -63,3 +63,37 @@ Clean main integration/sync and the corrected main proof remain pending; no retr
 
 Independent [corrected readiness review](../../../reviews/V63-main-proof-review.md) is PASS. This
 accepts the fixed runner for clean integration, not the still-pending shared-main runtime proof.
+
+## Corrected shared-main proof — passed
+
+The corrected runner executed once on CT114, against the existing shared main application at
+`https://salient-dev-fc4f48cb09a0.tail41404c.ts.net`. Both runner and application source were clean
+`e5c1cd84bb5f08a2c1ee51279467ca4e692c6e0e`. Command:
+
+```sh
+presidium-dev --env main run build -- env SALIENT_V63_MAIN_HEADLESS=1 node scripts/v63-headless-main.ts
+```
+
+[Actual public readback](v63-headless-main-readback.json), [output](v63-headless-main-output.txt)
+and [exit 0](v63-headless-main-exit.txt) record run `8fbe3f92-080a-44d9-b6af-afd37836f305`,
+`passed: true`, `stage: complete`, 12.256 seconds, 14 records including two setup records.
+Every source-byte hash embedded in the readback matches the reviewed local files.
+
+The real accepted dice were 1+10 throughout. The Might-2 Mountain hero dealt 8 damage initially
+(total 13, tier 2); one bane reduced total to 11/tier 1 and damage to 5. Two banes retained total
+13 but lowered the tier to 1, still 5 damage. Goblin Stamina therefore followed
+`7 → 10 → 10 → 10 → 10 → 7` through use, first correction, second correction, undo, redo and
+Director restoration. Equal one-/two-bane damage did not bypass linked-event/history checks.
+No repeat roll was requested to obtain a preferred result.
+
+Both-role permission checks passed at every step. Director correction closed player correction;
+manual disposition blocked further correction until rewind; turn end then closed both correction
+and Director resolution windows. Denied commands preserved the readback. Hero live state and
+accepted dice stayed unchanged. The runner uses shared R04 as a persistence-parity oracle; this
+is not a new independent proof of that resolver's mechanics.
+
+Sessions were signed out, the one-shot job exited, and existing shared main services/data remain.
+Disposable proof records are retained for inspection. No browser, reset, seed, database import or
+application-code change was performed by this proof. The independent
+[final acceptance review](../../../reviews/V63-main-proof-review.md) passed after inspecting
+all 14 records and matching all 12 source hashes.

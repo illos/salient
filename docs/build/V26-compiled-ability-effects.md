@@ -904,3 +904,21 @@ byte-for-byte; formatter/lint/web types and source hashes pass. The [contract-ch
 retains the actual diagnostic and both exit statuses. The renewed [readiness review](reviews/V63-main-proof-review.md) is PASS; clean main
 integration precedes the corrected live proof. CT114 is released; Fable's Chords wake is currently
 hourly-limited, so no integration or runtime acceptance is inferred from the stored handoff.
+
+
+### 2026-09-20 — Corrected shared-main correction proof accepted
+
+The corrected runner completed on clean shared main
+`e5c1cd84bb5f08a2c1ee51279467ca4e692c6e0e`: run
+`8fbe3f92-080a-44d9-b6af-afd37836f305`, exit 0, 12.256 seconds and 14 persisted
+readback records. Runner and application target were both CT114 main. Actual accepted
+dice 1+10 survived repeated corrections, undo, redo, Director correction and refusal
+boundaries; both-role reads agreed with mutation permissions. Existing services/data
+remain, disposable proof records are retained, and the one-shot job has exited.
+
+The [readback and exact scope](evidence/V26/main-corrections-2026-09-20/README.md#corrected-shared-main-proof--passed)
+and [independent acceptance review](reviews/V63-main-proof-review.md) preserve the first
+failed trial as well as the successful corrected run. The reviewer matched all 12 source
+hashes and inspected all 14 records. This closes the bounded V63 shared-main proof;
+it does not claim V26 compiled execution is live. Browser testing remains paused.
+This evidence-only handoff needs no runtime update; the integration lead owns its merge.
