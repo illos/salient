@@ -24,7 +24,57 @@ export function singleValue(selections: Selections, id: string): string | undefi
   return typeof value === 'string' ? value : undefined;
 }
 
-/** Availability under the raw selections: `availableWhen` holds and every `dependsOn` parent is available and chosen. */
+/** A `dependsOn`/`dependsOnAny` parent is satisfied when it is available and, for a choice, chosen from its options. */
+function parentSatisfied(
+  parentId: string,
+  selections: Selections,
+  decisions: Map<string, Decision>,
+  scanningFixedGrants: boolean,
+): boolean {
+  const parent = decisions.get(parentId);
+  if (!parent || !isAvailable(parent, selections, decisions, scanningFixedGrants)) return false;
+  if (parent.kind === 'choice' && selections[parentId] === undefined) return false;
+  if (
+    parent.kind === 'choice' &&
+    parent.shape.type === 'single' &&
+    parent.options &&
+    !parent.options.some(option => option.value === selections[parentId])
+  )
+    return false;
+  return true;
+}
+
+/**
+ * The parent whose chosen value governs a decision's `optionsByParent` pool, missing-choice sentence
+ * and pruning. `dependsOn` parents are all required, so its first entry is effective whatever its
+ * state. With `dependsOnAny` the effective parent is the first listed parent that is satisfied and,
+ * when `optionsByParent` exists, chosen with a value that has an entry; `undefined` when none
+ * qualifies, which makes the decision unavailable.
+ */
+export function effectiveParent(
+  decision: Decision,
+  selections: Selections,
+  decisions: Map<string, Decision>,
+  scanningFixedGrants = false,
+): { id: string; value?: string } | undefined {
+  if (decision.dependsOnAny?.length) {
+    for (const id of decision.dependsOnAny) {
+      if (!parentSatisfied(id, selections, decisions, scanningFixedGrants)) continue;
+      const value = singleValue(selections, id);
+      if (decision.optionsByParent && (value === undefined || !decision.optionsByParent[value]))
+        continue;
+      return { id, value };
+    }
+    return undefined;
+  }
+  const id = decision.dependsOn?.[0];
+  return id === undefined ? undefined : { id, value: singleValue(selections, id) };
+}
+
+/**
+ * Availability under the raw selections: `availableWhen` holds, every `dependsOn` parent is available
+ * and chosen, and (when `dependsOnAny` is set) an effective parent exists.
+ */
 export function isAvailable(
   decision: Decision,
   selections: Selections,
@@ -64,18 +114,13 @@ export function isAvailable(
     }
     if (count < occurrence) return false;
   }
-  for (const parentId of decision.dependsOn ?? []) {
-    const parent = decisions.get(parentId);
-    if (!parent || !isAvailable(parent, selections, decisions, scanningFixedGrants)) return false;
-    if (parent.kind === 'choice' && selections[parentId] === undefined) return false;
-    if (
-      parent.kind === 'choice' &&
-      parent.shape.type === 'single' &&
-      parent.options &&
-      !parent.options.some(option => option.value === selections[parentId])
-    )
-      return false;
-  }
+  for (const parentId of decision.dependsOn ?? [])
+    if (!parentSatisfied(parentId, selections, decisions, scanningFixedGrants)) return false;
+  if (
+    decision.dependsOnAny?.length &&
+    !effectiveParent(decision, selections, decisions, scanningFixedGrants)
+  )
+    return false;
   return true;
 }
 
@@ -159,7 +204,12 @@ export function unavailableReason(decision: Decision, decisions: Map<string, Dec
   if (decision.availableWhen)
     return `Available when ${decision.availableWhen.decision} is ${decision.availableWhen.value}.`;
   const parents = (decision.dependsOn ?? []).map(id => decisions.get(id)?.id ?? id);
-  return parents.length ? `Available after ${parents.join(', ')}.` : 'Not available.';
+  const alternatives = (decision.dependsOnAny ?? []).map(id => decisions.get(id)?.id ?? id);
+  const clauses = [
+    ...(parents.length ? [parents.join(', ')] : []),
+    ...(alternatives.length ? [`one of ${alternatives.join(', ')}`] : []),
+  ];
+  return clauses.length ? `Available after ${clauses.join(' and ')}.` : 'Not available.';
 }
 
 export function poolValues(
@@ -187,7 +237,7 @@ function basePoolOf(
 ): { values: string[]; parent?: OptionsByParentEntry; parentValue?: string } {
   if (decision.options) return { values: decision.options.map(option => option.value) };
   if (decision.optionsByParent) {
-    const parentValue = singleValue(selections, decision.dependsOn?.[0] ?? '');
+    const parentValue = effectiveParent(decision, selections, indexDecisions(definitions))?.value;
     const parent = parentValue ? decision.optionsByParent[parentValue] : undefined;
     if (!parent) return { values: [] };
     return {

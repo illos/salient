@@ -76,13 +76,23 @@ export function applyClassProfile(ctx: DerivationContext, out: PartialBaseline) 
           source: ctx.own(ctx.decisions.get(profile.subclassDecisionId)!),
         },
       ]);
+    const startingStamina = entry(`Starting Stamina at 1st Level: ${profile.startingStamina}`, {
+      operation: 'base',
+      amount: profile.startingStamina,
+    });
     if (profile.kit === 'none') {
       out.kit = null;
-      out.staminaMaximum = dv(profile.startingStamina, [
-        entry(`Starting Stamina at 1st Level: ${profile.startingStamina}`, {
-          operation: 'base',
-          amount: profile.startingStamina,
-        }),
+      out.staminaMaximum = dv(profile.startingStamina, [startingStamina]);
+    }
+    // Kit classes: Stamina = class starting Stamina + kit Stamina bonus × echelon (as applyFuryVitals).
+    // Without a kit the term is missing, so Stamina stays absent and the kit.choice diagnostic explains it.
+    if (profile.kit === 'required' && out.kit) {
+      out.staminaMaximum = dv(profile.startingStamina + out.kit.staminaBonusApplied.value, [
+        startingStamina,
+        ...out.kit.staminaBonusApplied.provenance.map(item => ({
+          ...item,
+          operation: 'add' as const,
+        })),
       ]);
     }
     out.recoveriesMaximum = dv(profile.recoveries, [

@@ -62,6 +62,13 @@ export interface Decision {
   /** Additional parent conditions, including choices in a purchased-trait list. */
   conditions?: { decision: string; value: string; includes?: boolean; not?: boolean }[];
   dependsOn?: string[];
+  /**
+   * Alternative parents (OR): the decision is available when at least one listed parent is available
+   * and chosen; when `optionsByParent` exists the chosen value must also have an entry there. The first
+   * satisfying parent is the effective parent that supplies the options pool, the missing-choice
+   * sentence and pruning. `dependsOn` keeps its AND meaning and combines with this list.
+   */
+  dependsOnAny?: string[];
   /** Optional selections (such as no complication) do not prevent a complete build. */
   optional?: boolean;
   /** Required narrative/Director input; ordinary authored flavor remains optional. */
@@ -142,7 +149,7 @@ export interface ClassProfile {
   startingStamina: number;
   recoveries: number;
   potencyCharacteristic: 'M' | 'A' | 'R' | 'I' | 'P';
-  resource: 'ferocity' | 'essence';
+  resource: 'ferocity' | 'essence' | 'insight';
   resourceSource: string;
   resourceQuote: string;
   resourceOutsideCombatQuote: string;

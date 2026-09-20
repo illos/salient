@@ -167,10 +167,26 @@ function belongsToOtherBranch(
     selections[condition.decision] !== condition.value
   )
     return true;
-  return (decision.dependsOn ?? []).some(parentId => {
+  const parentInOtherBranch = (parentId: string) => {
     const parent = decisions.get(parentId);
     return parent ? belongsToOtherBranch(parent, selections, decisions) : false;
-  });
+  };
+  if ((decision.dependsOn ?? []).some(parentInOtherBranch)) return true;
+  // Alternative parents: hidden only when none of them can lead here (each is in another branch or
+  // is chosen with a value that has no options entry, like a class without a kit).
+  const alternatives = decision.dependsOnAny ?? [];
+  return (
+    alternatives.length > 0 &&
+    alternatives.every(parentId => {
+      if (parentInOtherBranch(parentId)) return true;
+      const value = selections[parentId];
+      return (
+        decision.optionsByParent !== undefined &&
+        typeof value === 'string' &&
+        decision.optionsByParent[value] === undefined
+      );
+    })
+  );
 }
 
 export function DecisionEditor({

@@ -390,9 +390,17 @@ function resourceLabel(resource: string): string {
   return resource.charAt(0).toUpperCase() + resource.slice(1);
 }
 
+/** Class heroic resources whose cost is waived outside combat, with the source of that rule. */
+const OUTSIDE_COMBAT_WAIVER_SOURCES: Record<string, string> = {
+  essence: 'elementalist/level-1/essence',
+  ferocity: 'fury/level-1/ferocity',
+  insight: 'shadow/level-1/insight',
+};
+
 /**
- * Section 9: `affordable = fixedCost == none || waived || (pool − amount) >= legalFloor`. The Fury
- * Ferocity cost is waived outside combat; a prior outside-combat use is a warning, never a block.
+ * Section 9: `affordable = fixedCost == none || waived || (pool − amount) >= legalFloor`. The class
+ * heroic resource cost (ferocity, essence, insight) is waived outside combat; a prior outside-combat
+ * use is a warning, never a block.
  * A pool that is absent while a cost exists is an unresolved fact and is reported as blocked with
  * that reason (the contract permits no implicit waiver).
  */
@@ -402,15 +410,13 @@ export function checkAffordability(
   inCombat: boolean,
 ): Affordability {
   if (!fixedCost) return { kind: 'none' };
-  const waived =
-    ['ferocity', 'essence'].includes(fixedCost.resource) &&
-    pool?.resource === fixedCost.resource &&
-    !inCombat;
+  const waiverSource = OUTSIDE_COMBAT_WAIVER_SOURCES[fixedCost.resource];
+  const waived = waiverSource !== undefined && pool?.resource === fixedCost.resource && !inCombat;
   if (waived) {
     const warnings: string[] = [];
     if (pool?.usedOutsideCombatSinceLastVictoryOrRespite)
       warnings.push(
-        `Rule warning: this ability was already used outside combat since the last Victory or respite (feature/${fixedCost.resource === 'essence' ? 'elementalist/level-1/essence' : 'fury/level-1/ferocity'}.md).`,
+        `Rule warning: this ability was already used outside combat since the last Victory or respite (feature/${waiverSource}.md).`,
       );
     return { kind: 'waived', cost: fixedCost, pool: pool?.current ?? 0, warnings };
   }

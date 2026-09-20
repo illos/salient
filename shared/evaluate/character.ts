@@ -22,7 +22,7 @@ import { applyWodeElfBaseline } from './ancestries/wode-elf.ts';
  */
 import { ancestryAbilities } from './ancestryAbilities.ts';
 import { assignmentError } from './assignment.ts';
-import { isAvailable, poolOf, poolValues } from './structure.ts';
+import { effectiveParent, isAvailable, poolOf, poolValues } from './structure.ts';
 import { CAREER_BENEFITS } from '../content/supporting-backgrounds.ts';
 import { COMPLICATION_ABILITIES } from '../content/supporting-complication-abilities.ts';
 import { COMPLICATION_EFFECTS } from '../content/supporting-complications.ts';
@@ -119,7 +119,7 @@ function parseCost(costQuote: string | undefined): GrantedAbility['cost'] | unde
   const match = costQuote ? /^cost: (\d+) (\w+)$/.exec(costQuote) : null;
   if (!match) return undefined;
   const resource = match[2]!.toLowerCase();
-  if (resource !== 'ferocity' && resource !== 'essence') return undefined;
+  if (resource !== 'ferocity' && resource !== 'essence' && resource !== 'insight') return undefined;
   return { resource, amount: Number(match[1]) };
 }
 
@@ -221,7 +221,11 @@ class Evaluation {
   } {
     if (decision.options) return { values: decision.options.map(option => option.value) };
     if (decision.optionsByParent) {
-      const parentValue = this.single(decision.dependsOn?.[0] ?? '');
+      const parentValue = effectiveParent(
+        decision,
+        Object.fromEntries(this.valid),
+        this.decisions,
+      )?.value;
       const parent = parentValue ? decision.optionsByParent[parentValue] : undefined;
       if (!parent) return { values: [] };
       return {
@@ -379,7 +383,12 @@ class Evaluation {
     let message = `Required choice missing: ${decision.quote}`;
     let source = this.own(decision);
     if (decision.id === 'kit.choice') {
-      const aspect = this.single('class.fury.aspect');
+      // The effective parent (a Fury aspect or a class with its own kit entry) owns the sentence.
+      const aspect = effectiveParent(
+        decision,
+        Object.fromEntries(this.valid),
+        this.decisions,
+      )?.value;
       const parent = aspect ? decision.optionsByParent?.[aspect] : undefined;
       if (parent?.quote) source = this.sentence({ path: parent.source, quote: parent.quote });
       if (aspect === 'Berserker' || aspect === 'Reaver')

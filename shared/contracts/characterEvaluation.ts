@@ -180,7 +180,7 @@ export interface GrantedAbility {
     | 'perk';
   sourcePath: string;
   /** Fixed heroic-resource cost from the source, if any. */
-  cost?: { resource: 'ferocity' | 'essence'; amount: number };
+  cost?: { resource: 'ferocity' | 'essence' | 'insight'; amount: number };
   /** Source adjustments are recorded separately from the unaltered ability source text. */
   costAdjustments?: { decisionId: string; amount: number; minimum: number; sourcePath: string }[];
   /** True for the kit's own signature ability: its damage and distance already include the kit bonuses. */
@@ -258,7 +258,7 @@ export interface DerivedBaseline {
     strong: DerivedValue<number>;
   };
   heroicResource: {
-    name: DerivedValue<'ferocity' | 'essence'>;
+    name: DerivedValue<'ferocity' | 'essence' | 'insight'>;
     /** Value at creation; in-combat generation is manual in v0.01 (docs/fury-goblin-automation.md). */
     startingValue: DerivedValue<number>;
   };

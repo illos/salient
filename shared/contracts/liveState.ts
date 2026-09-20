@@ -113,7 +113,7 @@ export interface InitialHeroLiveState extends HeroLiveState {
   temporaryStamina: 0;
   /** Equals `DerivedBaseline.recoveriesMaximum.value`. */
   recoveries: number;
-  /** `name` and `current` equal `DerivedBaseline.heroicResource.name/startingValue` (Fury: ferocity, 0). */
+  /** `name` and `current` equal `DerivedBaseline.heroicResource.name/startingValue` (Fury: ferocity, Elementalist: essence, Shadow: insight; 0). */
   heroicResource: HeroicResourcePool;
   surges: 0;
   victories: 0;
