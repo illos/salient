@@ -2,7 +2,8 @@
 
 Status: implemented on `slice/V85` at `b15fc59` plus import correction `faa9b1e`;
 not merged. Full local checks pass (864 tests and production build). Live API acceptance is
-blocked by the isolated CT114 backend function-push readiness failure.
+blocked: isolated CT114 startup failed, and the subsequent hosted cloud deploy exited 1 before
+reporting upload success. The API suite did not start on either target.
 
 ## In scope
 

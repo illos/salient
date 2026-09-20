@@ -1,8 +1,9 @@
 # V85/V86 character supporting completion evidence
 
 Status: candidate `b15fc59`, followed by import-only correction `faa9b1e`, committed on
-`slice/V85`; not merged. Full local checks passed. Live API acceptance is blocked by the
-isolated backend startup failure; no live scenarios ran.
+`slice/V85`; not merged. Full local checks passed. Live API acceptance remains blocked: the initial CT114 isolated startup failed, and the later
+user-requested hosted cloud deployment exited 1 before reporting a successful upload. No live
+scenarios ran. See the [hosted attempt](#hosted-cloud-demo-attempt) for the latest result.
 
 ## Implemented scope
 
@@ -82,3 +83,32 @@ supporting extension; prior unchanged choice/ancestry comparisons remain histori
 [reward/item source review](../../reviews/V86-starting-rewards-review.md) separate authorship
 and independent review. Static/source and proof-code reviews pass within the stated boundaries. Full local checks pass;
 formal acceptance remains blocked on live API evidence.
+
+## Hosted cloud demo attempt
+
+The user clarified that the hosted app is another demo/test environment and explicitly requested
+testing there. Actual target: `dev:different-bat-943`,
+<https://different-bat-943.convex.cloud>, auth <https://different-bat-943.convex.site>,
+frontend <https://salient-dev.rdxx.workers.dev>. This is separate from CT114 main and
+`supporting-actions`. Candidate/runner source: `b161a7bb375e28c5777801c65553559289d270f8`,
+clean worktree. Runner: local Presidium, Node24.18.0/pnpm11.5.3, 2026-09-20 around 13:33–13:36 UTC.
+
+Used the existing `runtime/hosted.mjs` workflow through a temporary local adapter: credentials
+were read from the existing process environment instead of CT114's config mount, and the build
+stamp went to `/tmp` instead of `/artifacts`. No credential values were printed or written to
+source/artifacts. Status authenticated the exact cloud URL and returned 82 functions; the
+scoped key was verified as `dev:different-bat-943` before deployment.
+
+`node /tmp/v85-v86-hosted-runner.mjs backend` exited 1 before reporting upload success.
+[First attempt](hosted-deploy.log). One diagnostic repeat added child exit/signal reporting:
+[normal exit 1, no signal](hosted-deploy-diagnostic.log). A final diagnostic repeat added
+Node `--trace-exit`: [trace](hosted-deploy-trace.log) identifies Convex CLI `flushAndExit`,
+without an underlying error. No further retries or infrastructure fixes. This is not a
+remote startup timeout and does not establish whether the application code or deployment tooling
+caused the failure. No successful backend deployment is claimed.
+
+The [hosted frontend build](hosted-build.log) passed (exit 0); frontend publication was withheld
+because the paired backend update failed. The 35-scenario candidate API acceptance suite did not
+run against old hosted code. No configure, seed, data reset or browser commands were run.
+The CT114 main deployment owned by the minion thread was untouched. Git integration and
+formal acceptance remain pending.
