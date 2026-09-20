@@ -81,8 +81,10 @@ export function TargetReticle({
           )
         }
         className={cn(
-          'roster-reticle inline-flex size-7 shrink-0 cursor-pointer items-center justify-center rounded-full border-0 bg-muted p-0 transition-colors duration-(--motion-fast) hover:bg-accent disabled:opacity-40',
-          selected && 'bg-primary hover:bg-primary/90',
+          'roster-reticle inline-flex size-7 shrink-0 cursor-pointer items-center justify-center rounded-full border-0 p-0 transition-colors duration-(--motion-fast) disabled:opacity-40',
+          selected
+            ? 'bg-primary hover:bg-primary/90'
+            : 'bg-muted in-[.roster-card-acting]:bg-placeholder hover:bg-accent',
           others.length > 0 && 'outline-2 outline-offset-2 outline-primary',
         )}
       >

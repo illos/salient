@@ -240,7 +240,7 @@ export function AbilityPanel({
       )}
       {sheet.missingFacts && <p className="text-sm text-destructive">{sheet.missingFacts}</p>}
       {pending && (
-        <div className="flex flex-wrap items-center gap-2 rounded-md bg-muted p-3 text-sm">
+        <div className="inset-controls flex flex-wrap items-center gap-2 rounded-md bg-muted p-3 text-sm">
           <span>
             Pending: <strong className="font-medium">{pending.name}</strong> ·{' '}
             {draft!.targets.length} target
@@ -537,7 +537,7 @@ export function AbilityCard({
     | { mode: 'compiled' | 'legacy-compatibility' | 'manual'; diagnostics: CompileDiagnostic[] }
     | undefined;
   return (
-    <div className="mt-2 flex flex-col gap-2 rounded-md bg-muted p-4 text-sm">
+    <div className="inset-controls mt-2 flex flex-col gap-2 rounded-md bg-muted p-4 text-sm">
       <span className="text-muted-foreground">
         Dice {result.dice.d10a} + {result.dice.d10b}
         {result.selectedCharacteristic

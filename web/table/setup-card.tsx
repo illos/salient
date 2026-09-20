@@ -246,7 +246,7 @@ export function CombatSetupCard({
   const heroes = encounter.participants.filter(p => p.side === 'heroes');
   const foes = encounter.participants.filter(p => p.side === 'director');
   return (
-    <div className="rounded-md bg-muted p-5">
+    <div className="inset-controls rounded-md bg-muted p-5">
       <div className="flex flex-col gap-4">
         <SectionHeading
           aside={

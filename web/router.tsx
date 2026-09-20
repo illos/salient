@@ -13,7 +13,6 @@ import {
 import { useConvex, useConvexAuth, useMutation, useQuery } from 'convex/react';
 import { api } from '../convex/_generated/api';
 import type { Id } from '../convex/_generated/dataModel';
-import { cn } from 'cn';
 import { authClient } from './auth-client';
 const ForgotPassword = lazy(() =>
   import('./password-recovery').then(module => ({ default: module.ForgotPassword })),
@@ -58,15 +57,11 @@ function ConnectionStatus() {
   );
   return (
     <span
-      className={cn(
-        'inline-flex items-center gap-2 text-sm text-muted-foreground',
-        online ? '[&>span]:bg-success' : '[&>span]:bg-warning',
-      )}
+      className={online ? 'text-sm text-success' : 'text-sm text-warning'}
       role="status"
       aria-live="polite"
     >
-      <span aria-hidden className="size-2 rounded-full" />
-      {online ? 'Connected' : 'Reconnecting — changes may be pending'}
+      {online ? '● Connected' : '○ Reconnecting — changes may be pending'}
     </span>
   );
 }

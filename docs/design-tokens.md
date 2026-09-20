@@ -37,7 +37,9 @@ Radius: `--radius-control` 8px (`rounded-md`, controls, inputs, tier rows, inset
 `--radius-panel` 14px (`rounded-lg`/`rounded-xl`, panels, dialogs, overlay card), `rounded-sm`
 6px (menu items), `rounded-full` for pills, steppers, segmented tracks and icon buttons.
 `--chip-radius` is 999px with no border; `--pip-size` 6px; `--bar-thickness` 6px (3px on the
-hero portrait row); `--disc-ring` 48px with a 2px accent outline offset 3px for the acting hero.
+hero portrait row); `--disc-ring` 48px with a 2px accent outline offset 3px for the acting hero
+(`--disc-ring-stroke` is removed). Inside a `sub` inset the `.inset-controls` class (unlayered,
+`web/style.css`) steps native selects, tonal buttons and badges up to `ph`.
 
 Type scale (`--text-*`, rem): `2xs`/`xs`/`sm` 13px (nothing under 13), `base` 14/22, `lg` 17/24,
 `xl` 20/26, `2xl` 24/28, `3xl` 30/36, `4xl` 40/40. Weights: the Tailwind tokens `medium`,
@@ -52,10 +54,13 @@ Motion: `--motion-fast` 150ms (background), `--motion-base` 200ms (chevrons, pop
 zeroes everything.
 
 Contrast (sRGB relative luminance, text pairs): `ink` on `card` 12.6:1 dark / 13.8:1 light;
-`muted` on `card` 4.8:1 dark / 4.6:1 light; `muted` on `bg` 5.3:1 dark / 4.3:1 light; `muted`
-on `sub` 4.3:1 dark / 3.8:1 light; white on `accent` 6.3:1. The `muted`-on-`sub` pairs sit
-below the spec's own 4.5:1 line; the values are the user's and are recorded, not adjusted. These
-are spot checks, not an accessibility certification.
+`muted` on `card` 4.8:1 dark / 4.6:1 light; `muted` on `bg` 5.3:1 dark / 4.1:1 light; `muted`
+on `sub` 4.3:1 dark / 3.8:1 light; white on `accent` 6.3:1; `accent` as text on the dark
+surfaces 2.2–2.9:1 (cost pills, Malice, "Acting"; the same tone Classic used) and 5.5:1 on the
+light ground. The `muted`-on-`sub` and light `muted`-on-`bg` pairs sit below the spec's own
+4.5:1 line; the values are the user's and are recorded, not adjusted. Focus: `--ring` is accent
+in light and ink (`#d2cfc9`, chosen) in dark, where accent would sit near 2.5:1. These are spot
+checks, not an accessibility certification.
 
 Preserved subsystems (user guidance, 2026-09-20): the Draw Steel glyph font and the Core
 stat-block/rule-text presentation (`glyph.css`, `core-content.css`, the `.ds-*` rules) keep
@@ -180,7 +185,7 @@ classes (`.overlay-card*`) consume them. Primitives live under `web/components/`
 | Pane rules | 1px `--rule-strong`, full height, between panes and under the header | Measured. Panes have no card wrappers; cards are reserved for callouts. |
 | `--bar-thickness` | 6px | Measured (roster and sheet Stamina bars in the light mockups). |
 | `--disc-sm` / `--disc-md` / `--disc-lg` / `--disc-ring` | 32px / 44px / 110px / 60px | Measured approximately (log entries, roster rows, sheet header, ring portraits). |
-| `--disc-ring-stroke` | 3px | Measured approximately (ring portrait stroke). |
+| `--disc-ring-stroke` | 3px | Measured approximately (ring portrait stroke). Removed in V75: the acting hero uses a 2px accent outline. |
 | `--chip-radius` / `--chip-border` | 2px / 1px | Measured (square-cornered chips with a 1px `--input` border; result chips filled ink, accent chips brick red). |
 | `--pip-size` | 10px | Measured approximately (Recoveries squares). |
 | Status pill | `--primary` fill, 28px tall, caps label; feed marker pill outlined `--input`, fully rounded | Measured (header pill filled; `SESSION STARTED` pill outlined). |

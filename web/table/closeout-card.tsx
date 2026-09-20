@@ -142,7 +142,7 @@ export function CloseoutCard({ campaignId }: { campaignId: Id<'campaigns'> }) {
   const closeout = useQuery(api.closeout.current, { campaignId });
   if (!closeout || closeout.phase !== 'closeout') return null;
   return (
-    <div className="rounded-md bg-muted p-5">
+    <div className="inset-controls rounded-md bg-muted p-5">
       <div className="flex flex-col gap-4">
         <SectionHeading className="mb-0">Combat closeout</SectionHeading>
         <p className="text-sm text-muted-foreground">

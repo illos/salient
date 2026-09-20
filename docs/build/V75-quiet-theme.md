@@ -93,10 +93,15 @@ All dependencies are merged in main `9252b8f`. Worktree `code/.worktrees/quiet-t
    `font-[6-9]00` arbitrary weight in `web/**`.
 6. Diff review: no `.test.ts`/`.spec.ts` file changed; no file under `convex/`, `shared/`, `src/`,
    `scripts/` or `vendor/` changed; every JSX string literal, `data-testid`, `aria-label`, role
-   and title is unchanged (checked by diffing the extracted string sets before and after).
+   and title is unchanged (checked by diffing the extracted string sets before and after), with
+   two recorded exceptions: the login page's split-screen tagline is removed with the split
+   layout, and its form heading becomes the page's `h1` (it was an `h2` under the tagline).
 7. Preserved subsystems unchanged: `git diff main -- web/components/glyph.css
-   web/components/glyph.tsx web/components/core-content.css` is empty, and the `.ds-*` rules in
-   `web/rules/rules.css` and `web/foes/foes.css` are unchanged.
+   web/components/glyph.tsx web/components/core-content.tsx` is empty; the only change in
+   `web/components/core-content.css` is the surface tone of the `.ds-monster-title` gradient end
+   and the `.ds-hero-ability::after` notch (`var(--background)` → `var(--card)`, because Core
+   content now sits on card panels); the `.ds-*` rules in `web/rules/rules.css` and
+   `web/foes/foes.css` and the `.rules-prose` rules are unchanged.
 8. Appearance preference behavior (`web/theme.ts`, `index.html` pre-paint script) is unchanged:
    light, dark and system still resolve to the `dark` class and `data-theme`.
 
@@ -111,8 +116,11 @@ None.
 ## Open questions
 
 None recorded. Contrast note for the user (not a blocker, values are theirs): the spec's `muted`
-on `sub` measures about 4.3:1 dark and 3.8:1 light, below the spec's own 4.5:1 line; on `card`
-and `bg` it passes. The implementation uses the spec values as given.
+on `sub` measures about 4.3:1 dark and 3.8:1 light, and light `muted` on `bg` about 4.1:1, below
+the spec's own 4.5:1 line; on `card` it passes in both themes. Accent used as text (cost pills,
+Malice, "Acting") measures 2.2–2.9:1 on the dark surfaces, as it did in Classic. The
+implementation uses the spec values as given; the dark focus ring is ink rather than accent so
+keyboard focus stays visible.
 
 ## Programmatic headless completion gate
 
@@ -149,3 +157,67 @@ for the post-V66 pass; screenshots for the user are a manual capture on the reco
 - Verification plan: `pnpm check` locally on Presidium (a permitted peer test environment); the
   grep gates in the acceptance checks; a before/after diff of the extracted string literals.
   No browser runs (moratorium); backlog rows for the visual spot checks.
+
+### 2026-09-20 — built, rebased and verified (branch handoff pending review)
+
+Commits on `slice/V75` after rebasing onto main `589d357` (V74 merged during the slice):
+`9d8bac2` tokens and primitives, `aaee9cc` every screen, `5cb1f91` the V74 Runic Carving
+section. The rebase conflicted only on appended browser-backlog rows; both sides kept.
+
+Method as planned: the token pass in `web/style.css` (palette, radii 8/14/999, type floored at
+13px, Tailwind weight tokens capped at 500 plus a `strong`/`b` base rule outside the Core
+content, `caps`/`eyebrow` redefined, `rule-strong` drawing nothing, `shadow-hard: none`, the
+session panes as `card` panels), then the primitives, then five parallel class-level passes
+(table, character sheet/characters/progression, wizard, campaign/login recovery, Rules and Foes
+chrome) under one written brief: className-only edits, no strings, ARIA, test ids, handlers or
+tests; glyphs and `.ds-*`/`.rules-prose` untouched.
+
+Judgment calls recorded (mock versus live app):
+
+- The Core stat-block and ability presentation stays; the ability *group* wrapper is the Quiet
+  panel. Two Core rules that painted the page ground (`.ds-monster-title` gradient end and the
+  `.ds-hero-ability::after` notch) now use the card tone they sit on; nothing else in
+  `core-content.css` changed.
+- Information the pictures omit is kept and restyled tonally: the heroic-resource count on the
+  hero portrait row, the wizard rail step numbers, the campaign member badges, Victories in the
+  Stamina panel.
+- The log tab row keeps its own buttons (the Rules tab opens a dialog; the Tabs primitive would
+  change focus behavior); it is drawn as the segmented control.
+- Symmetric choices with no default ("Heroes first"/"Foes first", keep/restore state) keep two
+  primary buttons rather than biasing one.
+- The login page drops its split-screen tagline with the split layout the spec replaces; this is
+  the one string removal in the slice and the only string-set difference against main.
+- The Rules top bar stays 76px under the 64px site nav because several sticky offsets depend on it.
+- Native radio/checkbox inputs in the wizard and setup cards stay native (a primitive swap
+  changes the change contract) and are restyled with classes.
+
+Verification (Presidium local, worktree `code/.worktrees/quiet-theme`, source `5cb1f91`):
+
+| Check | Result |
+| --- | --- |
+| `CI=true pnpm check` (lint, engine, app/scripts, links, vendor, content, supporting, foes, build) | exit 0 in 244 s: 310 engine tests, 481 app/scripts tests, 322 Markdown files linked, 2 submodules at pin, CSS bundle 75.49 kB (15.13 kB gzip) |
+| Acceptance 2, raw hex in `web/**/*.ts(x)` | none |
+| Acceptance 3, `uppercase`, `tracking-caps`, `shadow-hard`, `rule-strong` utilities in `web/**/*.tsx` | none |
+| Acceptance 4–5, type floor and weight cap | `--text-*` minimum `0.8125rem`; no `text-[<13px]`; weight tokens 500, `font-wordmark` 600 only |
+| Acceptance 6, presentation only | `git diff main...HEAD --name-only` touches `web/**`, `index.html` and docs only; string-set diff of JSX text and ARIA/test-id attributes against main shows only the login tagline |
+| Acceptance 7, preserved subsystems | `glyph.css`, `glyph.tsx`, `core-content.tsx` unchanged; `core-content.css` differs in the two surface-tone lines above; no `.ds-*` line in the `rules.css`/`foes.css` diff |
+| Acceptance 8, appearance behavior | `web/theme.ts` unchanged; `index.html` differs only in the two theme-color metas |
+
+No browser run (moratorium); the visual spot checks are in the backlog. No runtime was
+updated: this is a branch handoff, not a merge.
+
+### 2026-09-20 — independent review round 1: changes required, addressed
+
+Verdict on `5cb1f91`: changes required. Blocking: (1) the connection-status text had lost its
+`●`/`○` prefixes (an unrecorded string change) — restored exactly; (2) acceptance check 7 said
+the `core-content.css` diff is empty when two surface-tone lines change, and the verification
+record was uncommitted — check reworded, record committed; (3) the roster target control was
+invisible on the acting row (`sub` on `sub`) — it steps up to `ph` there. Non-blocking items
+taken: dark focus ring changed from accent (2.2–2.9:1) to ink; an unlayered `.inset-controls`
+rule steps tonal selects, outline buttons and badges up to `ph` inside the initiative, targeting,
+setup and closeout insets; the emphasized characteristic tile (`aria-pressed`) gets an inset
+accent ring; the dead tooltip primitive is tonal; the unused `--disc-ring-stroke` token is
+removed; the light `muted`-on-`bg` figure corrected to 4.07:1 and accent-as-text added to the
+contrast notes; the login heading level change recorded as the second exception; a backlog note
+that the hero portrait row now carries a `progressbar` per hero. Deferred: `bg-sub`/`bg-ph`/
+`border-line` aliases stay (documented vocabulary).

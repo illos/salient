@@ -73,7 +73,6 @@
   --disc-md: 44px;
   --disc-lg: 110px;
   --disc-ring: 48px;
-  --disc-ring-stroke: 2px;
   --chip-radius: 999px;
   --chip-border: 0px;
   --pip-size: 6px;
@@ -103,7 +102,7 @@
   --destructive: #e07470;
   --border: #222222;
   --input: #232323;
-  --ring: #a63a3a;
+  --ring: #d2cfc9;
   --rule-strong: #222222;
   --placeholder: #2c2c2c;
   --shadow-hard-color: transparent;
@@ -444,6 +443,15 @@
     overscroll-behavior: contain;
     padding: var(--pane-padding-y) var(--pane-padding-x);
   }
+}
+
+/* Inside a `sub` inset, tonal controls step up to `ph` so they keep an edge (layering rule:
+   ground → panel → inset, no fourth layer). Unlayered so it wins over the utilities layer. */
+.inset-controls :is(.native-select, button.bg-muted, [data-slot='badge']:not(.bg-primary)) {
+  background-color: var(--placeholder);
+}
+.inset-controls :is(button.bg-muted:hover, [data-slot='badge']:not(.bg-primary):hover) {
+  background-color: var(--accent);
 }
 
 /* Reduced motion: every transition and animation completes immediately. */

@@ -25,6 +25,7 @@ export function StatBox({ value, label, compact, emphasis, inset, className }: S
       className={cn(
         'inline-flex flex-col items-center justify-center rounded-md text-foreground',
         inset || emphasis ? 'bg-muted' : 'bg-card',
+        emphasis && 'ring-1 ring-primary ring-inset',
         compact ? 'size-14 gap-0' : 'h-[68px] min-w-[84px] gap-0.5 px-3',
         className,
       )}
