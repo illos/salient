@@ -217,6 +217,95 @@
     }
   },
   {
+    "id": "mcdm.heroes.v1/feature.trait.human/cant-take-hold",
+    "kind": "trait",
+    "name": "Can't Take Hold",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/human/cant-take-hold.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/human/cant-take-hold.json",
+    "selection": "human-ancestry",
+    "text": "---\nancestry: human\ncost: 1 Point\nname: Can't Take Hold\nscc: mcdm.heroes.v1/feature.trait.human/cant-take-hold\ntype: trait\n---\n\nYour connection to the natural world allows you to resist certain [supernatural](scc.v1:mcdm.heroes.v1/rule.general/supernatural) effects. You ignore temporary [difficult terrain](scc.v1:mcdm.heroes.v1/movement/difficult-terrain) created by magic and psionic abilities. Additionally, when you are [force moved](scc.v1:mcdm.heroes.v1/movement/forced-movement) by a magic or psionic ability, you can reduce the [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) by 1.\n",
+    "structured": {
+      "ancestry": "human",
+      "cost": "1 Point"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.human/detect-the-supernatural",
+    "kind": "trait",
+    "name": "Signature Trait: Detect the Supernatural",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/human/detect-the-supernatural.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/human/detect-the-supernatural.json",
+    "selection": "human-ancestry",
+    "text": "---\nancestry: human\nname: 'Signature Trait: Detect the Supernatural'\nscc: mcdm.heroes.v1/feature.trait.human/detect-the-supernatural\ntype: trait\n---\n\nAs a maneuver, you can open your awareness to detect [supernatural](scc.v1:mcdm.heroes.v1/rule.general/supernatural) creatures and phenomena. Until the end of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), you know the location of any [supernatural](scc.v1:mcdm.heroes.v1/rule.general/supernatural) object, or any undead, construct, or creature from another world within 5 squares, even if you don't have [line of effect](scc.v1:mcdm.heroes.v1/rule.combat/line-of-effect) to that object or creature. You know if you're detecting an item or a creature, and you know the nature of any creature you detect.\n",
+    "structured": {
+      "ancestry": "human"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.human/determination",
+    "kind": "trait",
+    "name": "Determination",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/human/determination.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/human/determination.json",
+    "selection": "human-ancestry",
+    "text": "---\nancestry: human\ncost: 2 Points\nname: Determination\nscc: mcdm.heroes.v1/feature.trait.human/determination\ntype: trait\n---\n\nA tolerance for pain and distress allows you to push through difficult situations. If you are [frightened](scc.v1:mcdm.heroes.v1/condition/frightened), [slowed](scc.v1:mcdm.heroes.v1/condition/slowed), or [weakened](scc.v1:mcdm.heroes.v1/condition/weakened), you can use a maneuver to immediately end one of those [conditions](scc.v1:mcdm.heroes.v1/rule.combat/condition).\n",
+    "structured": {
+      "ancestry": "human",
+      "cost": "2 Points"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.human/human-traits",
+    "kind": "trait",
+    "name": "Human Traits",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/human/human-traits.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/human/human-traits.json",
+    "selection": "human-ancestry",
+    "text": "---\nancestry: human\nname: Human Traits\nscc: mcdm.heroes.v1/feature.trait.human/human-traits\ntype: trait\n---\n\n[Human](scc.v1:mcdm.heroes.v1/ancestry/human) heroes have access to the following traits.\n\n#### Purchased Human Traits\n\nYou have 3 ancestry points to spend on the following traits. (*Quick Build:* Perseverance, Staying Power.)\n",
+    "structured": {
+      "ancestry": "human"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.human/perseverance",
+    "kind": "trait",
+    "name": "Perseverance",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/human/perseverance.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/human/perseverance.json",
+    "selection": "human-ancestry",
+    "text": "---\nancestry: human\ncost: 1 Point\nname: Perseverance\nscc: mcdm.heroes.v1/feature.trait.human/perseverance\ntype: trait\n---\n\nGiving up is for other people. You gain an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on [tests](scc.v1:mcdm.heroes.v1/rule.test/test) made using the [Endurance](scc.v1:mcdm.heroes.v1/skill.exploration/endurance) skill. Additionally, when you are [slowed](scc.v1:mcdm.heroes.v1/condition/slowed), your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) is reduced to 3 instead of 2.\n",
+    "structured": {
+      "ancestry": "human",
+      "cost": "1 Point"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.human/resist-the-unnatural",
+    "kind": "trait",
+    "name": "Resist the Unnatural",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/human/resist-the-unnatural.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/human/resist-the-unnatural.json",
+    "selection": "human-ancestry",
+    "text": "---\nancestry: human\ncost: 1 Point\nname: Resist the Unnatural\nscc: mcdm.heroes.v1/feature.trait.human/resist-the-unnatural\ntype: trait\n---\n\nYour instinctive resilience protects you from injuries beyond the routine. Whenever you take damage that isn't untyped, you can use a [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) to take half the damage.\n",
+    "structured": {
+      "ancestry": "human",
+      "cost": "1 Point"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.human/staying-power",
+    "kind": "trait",
+    "name": "Staying Power",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/human/staying-power.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/human/staying-power.json",
+    "selection": "human-ancestry",
+    "text": "---\nancestry: human\ncost: 2 Points\nname: Staying Power\nscc: mcdm.heroes.v1/feature.trait.human/staying-power\ntype: trait\n---\n\nYour [human](scc.v1:mcdm.heroes.v1/ancestry/human) physiology allows you to fight, run, and stay awake longer than others. You increase your number of [Recoveries](scc.v1:mcdm.heroes.v1/rule.health/recoveries) by 2.\n",
+    "structured": {
+      "ancestry": "human",
+      "cost": "2 Points"
+    }
+  },
+  {
     "id": "mcdm.heroes.v1/feature.trait.polder/corruption-immunity",
     "kind": "trait",
     "name": "Corruption Immunity",

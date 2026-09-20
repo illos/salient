@@ -11,8 +11,8 @@
     "version": "1.0.3"
   },
   "generatedAt": "2026-09-08",
-  "contentHash": "sha256:64a08e925f76657409df983b706d2599edcb499457e9b21325d65ee7268c10d8",
-  "entryCount": 483,
+  "contentHash": "sha256:c7fc40918bc7c1c11646f9f6bac63831a660a6cb7763141100e31fef2358265f",
+  "entryCount": 491,
   "selections": [
     {
       "id": "supporting-character-choices",
@@ -67,6 +67,14 @@
         "feature/fury/vuken"
       ],
       "basis": "feature/fury/level-1/beast-shape.md: \"You can use and gain the benefits of a stormwight kit (see Stormwight Kits)\"."
+    },
+    {
+      "id": "human-ancestry",
+      "description": "Human ancestry and complete level-one traits for V61.",
+      "paths": [
+        "ancestry/human.md",
+        "feature/trait/human"
+      ]
     },
     {
       "id": "polder-ancestry",
@@ -585,6 +593,14 @@
       "name": "Devil",
       "sourcePath": "vendor/steel-compendium/en/unified/md/ancestry/devil.md",
       "selection": "devil-ancestry",
+      "file": "ancestry.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/ancestry/human",
+      "kind": "ancestry",
+      "name": "Human",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/ancestry/human.md",
+      "selection": "human-ancestry",
       "file": "ancestry.json"
     },
     {
@@ -3953,6 +3969,62 @@
       "name": "Signature Trait: Wyrmplate",
       "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/dragon-knight/wyrmplate.md",
       "selection": "supporting-character-choices",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.human/cant-take-hold",
+      "kind": "trait",
+      "name": "Can't Take Hold",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/human/cant-take-hold.md",
+      "selection": "human-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.human/detect-the-supernatural",
+      "kind": "trait",
+      "name": "Signature Trait: Detect the Supernatural",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/human/detect-the-supernatural.md",
+      "selection": "human-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.human/determination",
+      "kind": "trait",
+      "name": "Determination",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/human/determination.md",
+      "selection": "human-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.human/human-traits",
+      "kind": "trait",
+      "name": "Human Traits",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/human/human-traits.md",
+      "selection": "human-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.human/perseverance",
+      "kind": "trait",
+      "name": "Perseverance",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/human/perseverance.md",
+      "selection": "human-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.human/resist-the-unnatural",
+      "kind": "trait",
+      "name": "Resist the Unnatural",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/human/resist-the-unnatural.md",
+      "selection": "human-ancestry",
+      "file": "trait.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.trait.human/staying-power",
+      "kind": "trait",
+      "name": "Staying Power",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/human/staying-power.md",
+      "selection": "human-ancestry",
       "file": "trait.json"
     },
     {
