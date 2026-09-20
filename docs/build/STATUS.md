@@ -60,7 +60,7 @@ must be separately recorded; this branch has performed neither.
 | V77 | High Elf level one | V82 integration | In progress — sourced wizard choices, traits and abilities | Astra character worker |
 | V78 | Memonek level one | V82 integration | In progress — sourced wizard choices, traits and abilities | Astra character worker |
 | V79 | Revenant level one | V82 integration | In progress — sourced wizard choices, traits and abilities | Astra character worker |
-| V80 | Time Raider level one | V82 integration | In progress — sourced wizard choices, traits and abilities | Astra character worker |
+| V80 | [Time Raider level one](V80-time-raider-level-one.md) | V82 integration | In progress — sourced wizard choices, traits and abilities | Astra character worker |
 | V81 | Wode Elf level one | V82 integration | In progress — sourced wizard choices, traits and abilities | Astra character worker |
 | V74 | [Trait-granted abilities and active Dwarf runes](V74-trait-granted-abilities.md) | V69/V73 candidate | Complete — merged/live b73cb8d; 791 checks, hosted and shared-main API 27/27, Forge 31/31 | WIZARD, slice/V74 |
 | V73 | [Headless Forge character counterparts](V73-forge-headless-counterparts.md) | V69 verified candidate | Verified — calibration and 31/31 saved API comparisons pass after V74 grants; historical seven failures retained | WIZARD, slice/V73 |
