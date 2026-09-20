@@ -4,6 +4,7 @@ import type { Id } from './_generated/dataModel';
 import { requireUser, requireMember, requireOwner, checkMembershipCapacity } from './lib/access';
 import { command } from './lib/commands';
 import { appendEvent } from './lib/events';
+import { revisionLevel } from './lib/characterProgression';
 
 const summary = v.object({
   id: v.id('campaigns'),
@@ -11,7 +12,9 @@ const summary = v.object({
   ownerId: v.id('users'),
   activeSessionId: v.union(v.id('sessions'), v.null()),
 });
-const member = v.object({ userId: v.id('users'), displayName: v.string() });
+/** V68 campaign home card: the member's admitted heroes in this campaign, with the effective level. */
+const hero = v.object({ id: v.id('characters'), name: v.string(), level: v.number() });
+const member = v.object({ userId: v.id('users'), displayName: v.string(), heroes: v.array(hero) });
 const pending = v.object({
   id: v.id('joinRequests'),
   userId: v.id('users'),
@@ -100,6 +103,9 @@ export const get = query({
     shareCode: v.union(v.string(), v.null()),
     members: v.array(member),
     pendingRequests: v.array(pending),
+    /** V68 header meta: how many sessions exist and when the latest closed one ended. */
+    sessionCount: v.number(),
+    lastPlayedAt: v.union(v.number(), v.null()),
   }),
   handler: async (ctx, { campaignId }) => {
     const user = await requireUser(ctx);
@@ -108,12 +114,40 @@ export const get = query({
       .query('memberships')
       .withIndex('by_campaign_user', q => q.eq('campaignId', campaignId))
       .take(100);
+    // Attached characters are admitted ones: admission sets campaignId, decline/detach clears it.
+    const characters = await ctx.db
+      .query('characters')
+      .withIndex('by_campaign', q => q.eq('campaignId', campaignId))
+      .take(100);
+    const heroes = await Promise.all(
+      characters.map(async character => {
+        const effective = character.effectiveRevisionId
+          ? await ctx.db.get(character.effectiveRevisionId)
+          : null;
+        return {
+          id: character._id,
+          ownerId: character.ownerId,
+          name: character.authored.name,
+          level: effective ? revisionLevel(effective) : 1,
+        };
+      }),
+    );
     const members = await Promise.all(
       memberships.map(async m => ({
         userId: m.userId,
         displayName: (await ctx.db.get(m.userId))?.displayName ?? 'Former player',
+        heroes: heroes
+          .filter(h => h.ownerId === m.userId)
+          .map(({ id, name, level }) => ({ id, name, level })),
       })),
     );
+    const sessions = await ctx.db
+      .query('sessions')
+      .withIndex('by_campaign', q => q.eq('campaignId', campaignId))
+      .order('desc')
+      .take(50);
+    const lastPlayedAt =
+      sessions.find(s => s.status === 'closed' && s.closedAt !== null)?.closedAt ?? null;
     const requests =
       campaign.ownerId === user._id
         ? await ctx.db
@@ -138,6 +172,8 @@ export const get = query({
       shareCode: campaign.ownerId === user._id ? campaign.shareCode : null,
       members,
       pendingRequests,
+      sessionCount: sessions.length,
+      lastPlayedAt,
     };
   },
 });

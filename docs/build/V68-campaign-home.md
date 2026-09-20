@@ -109,3 +109,28 @@ None raised. Assumptions recorded above for user review: the START SESSION inter
 - Decisions from the user's mockup review recorded in `docs/design-mockups/v2/README.md`, `docs/accounts-and-access-spec.md#campaigns`, `docs/table-spec.md#2-participation-and-presence`, `#reading-session-history` and `#game-log-and-chat-scope`.
 - Plan: backend first (schema, presence, chat, session title, campaign projection) with `tests/app` coverage; then the page in the order header, players, session history with RECAP drill-in, chat pane, Manage players pop-up; then headless proof on the isolated `campaign-home` CT114 environment; then independent review; then lead integration and shared-main update.
 - Verification is headless only under the browser moratorium; browser scenarios are appended to the backlog.
+
+### 2026-09-20 — candidate built
+
+- Backend: additive schema (`sessions.title`, `presence`, `chatMessages`); `convex/presence.ts`
+  (`heartbeat`, `leave`, `list`; online window 90 s, heartbeat 30 s); `convex/chat.ts` (`send`,
+  `list`); `sessions.start` takes an optional title, new `sessions.setTitle` (Director, any status,
+  blank clears, 100 chars), `sessions.list`/`get` return `title` and `number`; `campaigns.get`
+  returns each member's admitted heroes with the effective revision's level, `sessionCount` and
+  `lastPlayedAt`. Generated API index refreshed with `convex codegen`.
+- Page: `web/campaigns.tsx` composes `campaign/header.tsx` (meta line, INVITE PLAYERS, START SESSION
+  with the all-members confirmation), `campaign/players.tsx` (cards, badges, presence hook),
+  `campaign/session-history.tsx` (rows, inline title editing, ALL n SESSIONS, RECAP drill-in over
+  `events.list`), `campaign/chat.tsx` and `campaign/manage-players.tsx` (invite fields, join
+  requests, hero admissions in the OverlayCard). Removed: `campaign/next-session.tsx`,
+  `members.tsx`, `foes-prepared.tsx`, `invite.tsx`, `activity.tsx`, `character-sheet/party.tsx` and
+  the command console disclosure. `tests/browser/v21-campaign.spec.ts` now asserts removed
+  elements; left untouched under the moratorium and logged in the backlog.
+- Tests: `tests/app/campaign-home.test.ts` (presence membership/expiry, titles and numbering, chat
+  boundaries, member heroes). Headless proof: `scripts/v68-headless.ts`.
+- Local checks on Presidium before the CT114 run (scoped, no servers): eslint + prettier pass, tsc
+  pass, `vitest --project app` 37 files pass; `--project scripts` fails only `tests/scripts/foes.test.ts`
+  (12 cases) because the sparse vendor checkout lacks the Compendium book JSON it reads, a Presidium
+  environment limit unrelated to this slice; the CT114 full check is the authoritative baseline.
+- Assumption under review: START SESSION selects every current member (the session screen that owns
+  selection is a later slice).

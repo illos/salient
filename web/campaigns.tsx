@@ -9,14 +9,11 @@ import { Button, buttonVariants } from './components/ui/button';
 import { Card, CardContent } from './components/ui/card';
 import { Input } from './components/ui/input';
 import { Eyebrow, Field, Loading, Notice, SectionHeading, useCommand } from './ui';
-import { PartyPanel } from './character-sheet/party';
-import { CommandConsole } from './command-input';
-import { CampaignHeader, type CampaignRole } from './campaign/header';
-import { NextSessionCard } from './campaign/next-session';
-import { ActivitySection } from './campaign/activity';
-import { InviteCard } from './campaign/invite';
-import { MembersSection } from './campaign/members';
-import { FoesPrepared } from './campaign/foes-prepared';
+import { CampaignHeader } from './campaign/header';
+import { PlayersSection, usePresence } from './campaign/players';
+import { SessionHistory } from './campaign/session-history';
+import { ChatPane } from './campaign/chat';
+import { ManagePlayersCard, type ManageSection } from './campaign/manage-players';
 
 export function CampaignsPage() {
   const campaigns = useQuery(api.campaigns.list);
@@ -251,70 +248,55 @@ export function CampaignPage({ campaignId }: { campaignId: Id<'campaigns'> }) {
   const campaign = useQuery(api.campaigns.get, { campaignId });
   const viewer = useQuery(api.auth.viewer);
   const sessions = useQuery(api.sessions.list, { campaignId });
-  // The next session's player selection lives here because START SESSION sits in the header
-  // while the tiles sit in the "Next session" card (campaign-home.png).
-  const [selected, setSelected] = useState<Id<'users'>[]>([]);
+  const online = usePresence(campaignId);
+  // The Manage players pop-up is shared by INVITE PLAYERS, MANAGE PLAYERS and the request count.
+  const [manage, setManage] = useState<ManageSection | null>(null);
   if (campaign === undefined || viewer === undefined || sessions === undefined) return <Loading />;
   if (!viewer) return null;
   const director = campaign.ownerId === viewer.userId;
   const active = sessions.find(s => s.id === campaign.activeSessionId);
-  const role: CampaignRole = director
-    ? 'Director'
-    : active?.selectedPlayerIds.includes(viewer.userId)
-      ? 'Player'
-      : 'Observer';
-  const lastClosed = sessions.find(s => s.status === 'closed' && s.closedAt !== null);
   return (
     <>
       <CampaignHeader
         campaignId={campaignId}
         name={campaign.name}
-        memberCount={campaign.members.length}
-        role={role}
+        sessionCount={campaign.sessionCount}
+        lastPlayedAt={campaign.lastPlayedAt}
         director={director}
         active={active}
-        lastPlayedAt={lastClosed?.closedAt ?? null}
-        selectedPlayerIds={selected}
+        members={campaign.members}
+        onInvite={() => setManage('invite')}
+      />
+      <PlayersSection
+        campaignId={campaignId}
+        members={campaign.members}
+        ownerId={campaign.ownerId}
+        viewerId={viewer.userId}
+        online={online}
+        director={director}
+        joinRequests={campaign.pendingRequests.length}
+        onManage={setManage}
       />
       <div className="grid grid-cols-[minmax(0,1fr)_380px] items-start gap-8">
-        <div className="flex flex-col gap-10">
-          <NextSessionCard
-            campaignId={campaignId}
-            active={active}
-            director={director}
-            members={campaign.members}
-            viewerId={viewer.userId}
-            selected={selected}
-            setSelected={setSelected}
-          />
-          {/* A02: admitted heroes and the admission review queue. */}
-          <PartyPanel campaignId={campaignId} director={director} />
-          <ActivitySection campaignId={campaignId} sessions={sessions} />
-          {/* The operations rule keeps the console on this page; the mockup has no card for it. */}
-          <details className="rule-soft border-t pt-3" data-testid="command-disclosure">
-            <summary className="caps cursor-pointer py-1 text-muted-foreground">Command</summary>
-            <div className="pt-4">
-              <CommandConsole campaignId={campaignId} sessionRevision={active?.revision} />
-            </div>
-          </details>
-        </div>
-        <aside className="flex flex-col gap-10">
-          {director && campaign.shareCode && (
-            <InviteCard
-              campaignId={campaignId}
-              shareCode={campaign.shareCode}
-              requests={campaign.pendingRequests}
-            />
-          )}
-          <MembersSection
-            members={campaign.members}
-            ownerId={campaign.ownerId}
-            viewerId={viewer.userId}
-            active={active}
-          />
-          <FoesPrepared campaignId={campaignId} director={director} />
-        </aside>
+        <SessionHistory
+          campaignId={campaignId}
+          sessions={sessions}
+          members={campaign.members}
+          director={director}
+        />
+        <ChatPane campaignId={campaignId} viewerId={viewer.userId} onlineCount={online.length} />
       </div>
+      {director && campaign.shareCode && (
+        <ManagePlayersCard
+          open={manage !== null}
+          section={manage ?? 'invite'}
+          onOpenChange={open => !open && setManage(null)}
+          campaignId={campaignId}
+          campaignName={campaign.name}
+          shareCode={campaign.shareCode}
+          requests={campaign.pendingRequests}
+        />
+      )}
     </>
   );
 }
