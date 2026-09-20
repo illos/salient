@@ -13,8 +13,8 @@ One active job across all hosts, including setup/build/cleanup. On resume, recon
 row with actual processes before dispatch. Keep terminal evidence in the slice work log and prune
 completed rows only after the requester has the result through a direct `wake: true` Chords return.
 
-Updated 2026-09-20 15:33 UTC: V88 `ac95cc3` is kicked back after three full-check app failures;
-its focused suites and twice-generated audit freshness gate pass. The rebased V87 pre-merge integration check passed and its result wake
+Updated 2026-09-20 15:34 UTC: repaired V88 `a07dd27` is running its focused and full local gates;
+the superseded `ac95cc3` attempt remains preserved below. The rebased V87 pre-merge integration check passed and its result wake
 was accepted. All five bounded V85/V86 hosted cohorts previously passed and their result wake was
 accepted by WIZARD.2. V75's direct return remains retained because its settled requester rejected delivery.
 V85/V86's prior aggregate run remains a retained 30/35 failure.
@@ -23,6 +23,7 @@ initial host inventory and user-authorized retirement of old development servers
 
 | Job / Chords message | Requester | Exact source / checks and inputs | State / host / target | Result / evidence |
 | --- | --- | --- | --- | --- |
+| `test-V88-a07dd27-2` / 883 | ENGINE `2b1ba081-4040-4665-9ea2-22364db707f4`; copy ENGINE2 `3498baf0-e8d9-442b-a704-f24f7e595b30` | `a07dd279cb5dc98f92d231d4c9fae52812a7a7f7`, `.worktrees/engine-potency`; focused four-file repair gate then `CI=true pnpm check`; prior audit freshness retained because grammar/report are unchanged | **Running**: local pure/`convex-test`; no stack, deployment, upload or browser | artifacts: `/srv/presidium/projects/salient/test-artifacts/V88-a07dd27-20260920T153434Z` |
 | `test-V88-ac95cc3-1` / 876 | ENGINE `2b1ba081-4040-4665-9ea2-22364db707f4`; copy ENGINE2 `3498baf0-e8d9-442b-a704-f24f7e595b30` | `ac95cc36959b52549be7d4824dc9ab8f1878d39e`, `.worktrees/engine-potency`; two focused serial suites, full `pnpm check`, then twice-generated coverage-audit byte comparison against the committed report | **Failed**: focused 88/88 + 34/34 and audit freshness pass; full check has three app assertion failures after 352 engine passes; no stack, deployment, upload or browser | [Evidence](evidence/V88/tester-job-ac95cc3.md); artifacts: `/srv/presidium/projects/salient/test-artifacts/V88-ac95cc3-20260920T152656Z`; direct result 880, wake accepted; quiet ENGINE2 copy 881 |
 | `test-V75-2c7cfe2-1` / 816 | UI `b2d5e5ec-76c4-4527-8d87-b4c9d13fd9d8` | `2c7cfe29b457c7049d78461cc6f5063a20e4329c`, `.worktrees/quiet-theme`; `CI=true pnpm check`, then optional user-requested pop-up capture | **Passed**: local pure gate; no stack or browser process started | [Evidence](evidence/V75/tester-job-2c7cfe2.md); artifacts: `/srv/presidium/projects/salient/test-artifacts/V75-2c7cfe2-20260920T1458Z`; return rejected because requester settled, retry retained |
 | `test-V87-104f4b0-1` / 830 | FOES1 `7fa5ae52-8819-4a86-8309-78d59a6b93a1` | `104f4b087c58a6c1451d66c57f6e0eb1a101dba3`, `.worktrees/foes-seeding`; two invalid test/runner command IDs replaced with UUIDs, runtime unchanged | **Passed**: focused 30/30, full check, isolated local Convex proof; backend stopped, data retained | [Evidence](evidence/V87/tester-job-104f4b0.md); artifacts: `/srv/presidium/projects/salient/test-artifacts/V87-104f4b0-20260920T1504Z`; direct return 856, wake accepted |
