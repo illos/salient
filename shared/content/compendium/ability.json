@@ -1834,5 +1834,172 @@
       "subtype": "signature",
       "target": "Self"
     }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.revenant/detonate-sigil",
+    "kind": "ability",
+    "name": "Detonate Sigil",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/revenant/detonate-sigil.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/revenant/detonate-sigil.json",
+    "selection": "revenant-ancestry",
+    "text": "---\naction_type: Main action\nancestry: revenant\ndistance: '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10'\neffects:\n    - roll: Power Roll + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason), [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition), or [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence)\n      tier1: 3 + R, I, or P damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1\n      tier2: 5 + R, I, or P damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2\n      tier3: 7 + R, I, or P damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3\n    - effect: The sigil disappears from the creature.\n      name: Effect\nflavor: A magic sigil you placed on a creature explodes with energy.\nkeywords:\n    - Magic\n    - '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)'\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\nname: Detonate Sigil\npower_roll_characteristic: '[Reason](scc.v1:mcdm.heroes.v1/rule.character/reason), [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition), or [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence)'\nscc: mcdm.heroes.v1/feature.ability.revenant/detonate-sigil\nsubtype: signature\ntarget: One creature bearing your sigil\ntier1: 3 + R, I, or P damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1\ntier2: 5 + R, I, or P damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2\ntier3: 7 + R, I, or P damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3\ntype: ability\n---\n\n*A magic sigil you placed on a creature explodes with energy.*\n\n| **Magic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged), [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)** |                        **Main action** |\n|---------------------------|---------------------------------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**          | **🎯 One creature bearing your sigil** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason), [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition), or [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence):**\n\n- **≤11:** 3 + R, I, or P damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1\n- **12-16:** 5 + R, I, or P damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2\n- **17+:** 7 + R, I, or P damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3\n\n**Effect:** The sigil disappears from the creature.\n",
+    "structured": {
+      "action_type": "Main action",
+      "ancestry": "revenant",
+      "distance": "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10",
+      "effects": [
+        {
+          "roll": "Power Roll + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason), [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition), or [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence)",
+          "tier1": "3 + R, I, or P damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
+          "tier2": "5 + R, I, or P damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
+          "tier3": "7 + R, I, or P damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3"
+        },
+        {
+          "effect": "The sigil disappears from the creature.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "A magic sigil you placed on a creature explodes with energy.",
+      "keywords": [
+        "Magic",
+        "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)"
+      ],
+      "power_roll_characteristic": "[Reason](scc.v1:mcdm.heroes.v1/rule.character/reason), [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition), or [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence)",
+      "subtype": "signature",
+      "target": "One creature bearing your sigil",
+      "tier1": "3 + R, I, or P damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
+      "tier2": "5 + R, I, or P damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
+      "tier3": "7 + R, I, or P damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.time-raider/concussive-slam",
+    "kind": "ability",
+    "name": "Concussive Slam",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/time-raider/concussive-slam.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/time-raider/concussive-slam.json",
+    "selection": "time-raider-ancestry",
+    "text": "---\naction_type: Main action\nancestry: time-raider\ndistance: '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10'\neffects:\n    - roll: Power Roll + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason), [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition), or [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence)\n      tier1: 2 + R, I, or P damage;\n      tier2: 5 + R, I, or P damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1\n      tier3: 7 + R, I, or P damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2; M < STRONG, [prone](scc.v1:mcdm.heroes.v1/condition/prone)\nflavor: You slam an invisible force down upon the target.\nkeywords:\n    - Psionic\n    - '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)'\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\nname: Concussive Slam\npower_roll_characteristic: '[Reason](scc.v1:mcdm.heroes.v1/rule.character/reason), [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition), or [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence)'\nscc: mcdm.heroes.v1/feature.ability.time-raider/concussive-slam\nsubtype: signature\ntarget: One creature or object\ntier1: 2 + R, I, or P damage;\ntier2: 5 + R, I, or P damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1\ntier3: 7 + R, I, or P damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2; M < STRONG, [prone](scc.v1:mcdm.heroes.v1/condition/prone)\ntype: ability\n---\n\n*You slam an invisible force down upon the target.*\n\n| **Psionic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged), [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)**  | Main action                   |\n|------------------------------|-------------------------------|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**             | **🎯 One creature or object** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason), [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition), or [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence):**\n\n- **≤11:** 2 + R, I, or P damage;\n- **12-16:** 5 + R, I, or P damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1\n- **17+:** 7 + R, I, or P damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2; M < STRONG, [prone](scc.v1:mcdm.heroes.v1/condition/prone)\n",
+    "structured": {
+      "action_type": "Main action",
+      "ancestry": "time-raider",
+      "distance": "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10",
+      "effects": [
+        {
+          "roll": "Power Roll + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason), [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition), or [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence)",
+          "tier1": "2 + R, I, or P damage;",
+          "tier2": "5 + R, I, or P damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
+          "tier3": "7 + R, I, or P damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2; M < STRONG, [prone](scc.v1:mcdm.heroes.v1/condition/prone)"
+        }
+      ],
+      "flavor": "You slam an invisible force down upon the target.",
+      "keywords": [
+        "Psionic",
+        "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)"
+      ],
+      "power_roll_characteristic": "[Reason](scc.v1:mcdm.heroes.v1/rule.character/reason), [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition), or [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence)",
+      "subtype": "signature",
+      "target": "One creature or object",
+      "tier1": "2 + R, I, or P damage;",
+      "tier2": "5 + R, I, or P damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
+      "tier3": "7 + R, I, or P damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2; M < STRONG, [prone](scc.v1:mcdm.heroes.v1/condition/prone)"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.time-raider/minor-acceleration",
+    "kind": "ability",
+    "name": "Minor Acceleration",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/time-raider/minor-acceleration.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/time-raider/minor-acceleration.json",
+    "selection": "time-raider-ancestry",
+    "text": "---\naction_type: Maneuver\nancestry: time-raider\ndistance: '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1'\neffects:\n    - effect: The target gains a [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) to [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) equal to your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason), [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition), or [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) score (your choice) until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).\n      name: Effect\nflavor: You fill yourself or an ally with a burst of [speed](scc.v1:mcdm.heroes.v1/rule.character/speed).\nkeywords:\n    - Psionic\n    - '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)'\nname: Minor Acceleration\nscc: mcdm.heroes.v1/feature.ability.time-raider/minor-acceleration\nsubtype: signature\ntarget: Self or one ally\ntype: ability\n---\n\n*You fill yourself or an ally with a burst of [speed](scc.v1:mcdm.heroes.v1/rule.character/speed).*\n\n| **Psionic, [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)** | Maneuver               |\n|-------------------|------------------------|\n| **📏 [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1**    | **🎯 Self or one ally** |\n\n**Effect:** The target gains a [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) to [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) equal to your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason), [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition), or [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) score (your choice) until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).\n",
+    "structured": {
+      "action_type": "Maneuver",
+      "ancestry": "time-raider",
+      "distance": "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1",
+      "effects": [
+        {
+          "effect": "The target gains a [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) to [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) equal to your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason), [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition), or [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) score (your choice) until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "You fill yourself or an ally with a burst of [speed](scc.v1:mcdm.heroes.v1/rule.character/speed).",
+      "keywords": [
+        "Psionic",
+        "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)"
+      ],
+      "subtype": "signature",
+      "target": "Self or one ally"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.time-raider/psionic-bolt",
+    "kind": "ability",
+    "name": "Psionic Bolt",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/time-raider/psionic-bolt.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/time-raider/psionic-bolt.json",
+    "selection": "time-raider-ancestry",
+    "text": "---\naction_type: Main action\nancestry: time-raider\ndistance: '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10'\neffects:\n    - roll: Power Roll + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason), [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition), or [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence)\n      tier1: 2 + R, I, or P psychic damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1\n      tier2: 5 + R, I, or P psychic damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2\n      tier3: 7 + R, I, or P psychic damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3\nflavor: You shoot forth a purple beam of psychic force that moves your target.\nkeywords:\n    - Psionic\n    - '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)'\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\nname: Psionic Bolt\npower_roll_characteristic: '[Reason](scc.v1:mcdm.heroes.v1/rule.character/reason), [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition), or [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence)'\nscc: mcdm.heroes.v1/feature.ability.time-raider/psionic-bolt\nsubtype: signature\ntarget: One creature or object\ntier1: 2 + R, I, or P psychic damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1\ntier2: 5 + R, I, or P psychic damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2\ntier3: 7 + R, I, or P psychic damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3\ntype: ability\n---\n\n*You shoot forth a purple beam of psychic force that moves your target.*\n\n| **Psionic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged), [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)**  | Main action                   |\n|------------------------------|-------------------------------|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**             | **🎯 One creature or object** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason), [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition), or [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence):**\n\n- **≤11:** 2 + R, I, or P psychic damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1\n- **12-16:** 5 + R, I, or P psychic damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2\n- **17+:** 7 + R, I, or P psychic damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3\n",
+    "structured": {
+      "action_type": "Main action",
+      "ancestry": "time-raider",
+      "distance": "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10",
+      "effects": [
+        {
+          "roll": "Power Roll + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason), [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition), or [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence)",
+          "tier1": "2 + R, I, or P psychic damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
+          "tier2": "5 + R, I, or P psychic damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
+          "tier3": "7 + R, I, or P psychic damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3"
+        }
+      ],
+      "flavor": "You shoot forth a purple beam of psychic force that moves your target.",
+      "keywords": [
+        "Psionic",
+        "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)"
+      ],
+      "power_roll_characteristic": "[Reason](scc.v1:mcdm.heroes.v1/rule.character/reason), [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition), or [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence)",
+      "subtype": "signature",
+      "target": "One creature or object",
+      "tier1": "2 + R, I, or P psychic damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
+      "tier2": "5 + R, I, or P psychic damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
+      "tier3": "7 + R, I, or P psychic damage; [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.wode-elf/the-wode-defends",
+    "kind": "ability",
+    "name": "The Wode Defends",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/wode-elf/the-wode-defends.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/wode-elf/the-wode-defends.json",
+    "selection": "wode-elf-ancestry",
+    "text": "---\naction_type: Main action\nancestry: wode-elf\ndistance: '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10'\neffects:\n    - roll: Power Roll + [Might](scc.v1:mcdm.heroes.v1/rule.character/might) or [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)\n      tier1: 2 + M or A damage; A < WEAK, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\n      tier2: 3 + M or A damage; A < AVERAGE, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\n      tier3: 5 + M or A damage; A < STRONG, [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)\nflavor: Thorny vines erupt from every surface and attempt to bind your foe.\nkeywords:\n    - Magic\n    - '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)'\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\nname: The Wode Defends\npower_roll_characteristic: '[Might](scc.v1:mcdm.heroes.v1/rule.character/might) or [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)'\nscc: mcdm.heroes.v1/feature.ability.wode-elf/the-wode-defends\nsubtype: signature\ntarget: One creature\ntier1: 2 + M or A damage; A < WEAK, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\ntier2: 3 + M or A damage; A < AVERAGE, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\ntier3: 5 + M or A damage; A < STRONG, [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)\ntype: ability\n---\n\n*Thorny vines erupt from every surface and attempt to bind your foe.*\n\n| **Magic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged), [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)** |               **Main action** |\n|---------------------------|------------------------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**          |           **🎯 One creature** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Might](scc.v1:mcdm.heroes.v1/rule.character/might) or [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility):**\n\n- **≤11:** 2 + M or A damage; A < WEAK, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\n- **12-16:** 3 + M or A damage; A < AVERAGE, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\n- **17+:** 5 + M or A damage; A < STRONG, [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)\n",
+    "structured": {
+      "action_type": "Main action",
+      "ancestry": "wode-elf",
+      "distance": "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10",
+      "effects": [
+        {
+          "roll": "Power Roll + [Might](scc.v1:mcdm.heroes.v1/rule.character/might) or [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)",
+          "tier1": "2 + M or A damage; A < WEAK, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
+          "tier2": "3 + M or A damage; A < AVERAGE, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
+          "tier3": "5 + M or A damage; A < STRONG, [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)"
+        }
+      ],
+      "flavor": "Thorny vines erupt from every surface and attempt to bind your foe.",
+      "keywords": [
+        "Magic",
+        "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)"
+      ],
+      "power_roll_characteristic": "[Might](scc.v1:mcdm.heroes.v1/rule.character/might) or [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility)",
+      "subtype": "signature",
+      "target": "One creature",
+      "tier1": "2 + M or A damage; A < WEAK, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
+      "tier2": "3 + M or A damage; A < AVERAGE, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
+      "tier3": "5 + M or A damage; A < STRONG, [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)"
+    }
   }
 ]

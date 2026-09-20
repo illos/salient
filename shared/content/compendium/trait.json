@@ -395,6 +395,108 @@
     }
   },
   {
+    "id": "mcdm.heroes.v1/feature.trait.high-elf/glamor-of-terror",
+    "kind": "trait",
+    "name": "Glamor of Terror",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/high-elf/glamor-of-terror.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/high-elf/glamor-of-terror.json",
+    "selection": "high-elf-ancestry",
+    "text": "---\nancestry: high-elf\ncost: 2 Points\nname: Glamor of Terror\nscc: mcdm.heroes.v1/feature.trait.high-elf/glamor-of-terror\ntype: trait\n---\n\nWhen a foe strikes, you reverse the magic of your glamor to instill fear into their heart. Whenever you take damage from a creature, you can use a [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) to make that creature [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) of you until the end of their next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).\n",
+    "structured": {
+      "ancestry": "high-elf",
+      "cost": "2 Points"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.high-elf/graceful-retreat",
+    "kind": "trait",
+    "name": "Graceful Retreat",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/high-elf/graceful-retreat.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/high-elf/graceful-retreat.json",
+    "selection": "high-elf-ancestry",
+    "text": "---\nancestry: high-elf\ncost: 1 Point\nname: Graceful Retreat\nscc: mcdm.heroes.v1/feature.trait.high-elf/graceful-retreat\ntype: trait\n---\n\nYou gain a +1 [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) to the [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) you can shift when you take the [Disengage](scc.v1:mcdm.heroes.v1/feature.common.move-actions/disengage) move action.\n",
+    "structured": {
+      "ancestry": "high-elf",
+      "cost": "1 Point"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.high-elf/high-elf-glamor",
+    "kind": "trait",
+    "name": "Signature Trait: High Elf Glamor",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/high-elf/high-elf-glamor.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/high-elf/high-elf-glamor.json",
+    "selection": "high-elf-ancestry",
+    "text": "---\nancestry: high-elf\nname: 'Signature Trait: High Elf Glamor'\nscc: mcdm.heroes.v1/feature.trait.high-elf/high-elf-glamor\ntype: trait\n---\n\nA magic glamor makes others perceive you as interesting and engaging, granting you an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) [tests](scc.v1:mcdm.heroes.v1/rule.test/test) using the [Flirt](scc.v1:mcdm.heroes.v1/skill.interpersonal/flirt) or [Persuade](scc.v1:mcdm.heroes.v1/skill.interpersonal/persuade) skills. This glamor makes you appear and sound slightly different to each creature you meet, since what is engaging to one might be different for another. However, you never appear to be anyone other than yourself.\n",
+    "structured": {
+      "ancestry": "high-elf"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.high-elf/high-elf-traits",
+    "kind": "trait",
+    "name": "High Elf Traits",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/high-elf/high-elf-traits.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/high-elf/high-elf-traits.json",
+    "selection": "high-elf-ancestry",
+    "text": "---\nancestry: high-elf\nname: High Elf Traits\nscc: mcdm.heroes.v1/feature.trait.high-elf/high-elf-traits\ntype: trait\n---\n\n[High elf](scc.v1:mcdm.heroes.v1/ancestry/high-elf) heroes have access to the following traits.\n\n#### Purchased High Elf Traits\n\nYou have 3 ancestry points to spend on the following traits. (*Quick Build:* High Senses, Otherworldly Grace.)\n",
+    "structured": {
+      "ancestry": "high-elf"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.high-elf/high-senses",
+    "kind": "trait",
+    "name": "High Senses",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/high-elf/high-senses.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/high-elf/high-senses.json",
+    "selection": "high-elf-ancestry",
+    "text": "---\nancestry: high-elf\ncost: 1 Point\nname: High Senses\nscc: mcdm.heroes.v1/feature.trait.high-elf/high-senses\ntype: trait\n---\n\nYour senses are especially keen and perceptive. You gain an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on [tests](scc.v1:mcdm.heroes.v1/rule.test/test) made to notice threats.\n",
+    "structured": {
+      "ancestry": "high-elf",
+      "cost": "1 Point"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.high-elf/otherworldly-grace",
+    "kind": "trait",
+    "name": "Otherworldly Grace",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/high-elf/otherworldly-grace.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/high-elf/otherworldly-grace.json",
+    "selection": "high-elf-ancestry",
+    "text": "---\nancestry: high-elf\ncost: 2 Points\nname: Otherworldly Grace\nscc: mcdm.heroes.v1/feature.trait.high-elf/otherworldly-grace\ntype: trait\n---\n\nYour elf body and mind can't be contained for long. Whenever you make a [saving throw](scc.v1:mcdm.heroes.v1/rule.general/saving-throw), you succeed on a roll of 5 or higher.\n",
+    "structured": {
+      "ancestry": "high-elf",
+      "cost": "2 Points"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.high-elf/revisit-memory",
+    "kind": "trait",
+    "name": "Revisit Memory",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/high-elf/revisit-memory.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/high-elf/revisit-memory.json",
+    "selection": "high-elf-ancestry",
+    "text": "---\nancestry: high-elf\ncost: 1 Point\nname: Revisit Memory\nscc: mcdm.heroes.v1/feature.trait.high-elf/revisit-memory\ntype: trait\n---\n\nAccessing memories is as easy as living in the present for you. You gain an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on [tests](scc.v1:mcdm.heroes.v1/rule.test/test) made to recall lore.\n",
+    "structured": {
+      "ancestry": "high-elf",
+      "cost": "1 Point"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.high-elf/unstoppable-mind",
+    "kind": "trait",
+    "name": "Unstoppable Mind",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/high-elf/unstoppable-mind.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/high-elf/unstoppable-mind.json",
+    "selection": "high-elf-ancestry",
+    "text": "---\nancestry: high-elf\ncost: 2 Points\nname: Unstoppable Mind\nscc: mcdm.heroes.v1/feature.trait.high-elf/unstoppable-mind\ntype: trait\n---\n\nYour mind allows you to maintain your focus in any situation. You can't be made [dazed](scc.v1:mcdm.heroes.v1/condition/dazed).\n",
+    "structured": {
+      "ancestry": "high-elf",
+      "cost": "2 Points"
+    }
+  },
+  {
     "id": "mcdm.heroes.v1/feature.trait.human/cant-take-hold",
     "kind": "trait",
     "name": "Can't Take Hold",
@@ -481,6 +583,133 @@
     "structured": {
       "ancestry": "human",
       "cost": "2 Points"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.memonek/fall-lightly",
+    "kind": "trait",
+    "name": "Signature Trait: Fall Lightly",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/memonek/fall-lightly.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/memonek/fall-lightly.json",
+    "selection": "memonek-ancestry",
+    "text": "---\nancestry: memonek\nname: 'Signature Trait: Fall Lightly'\nscc: mcdm.heroes.v1/feature.trait.memonek/fall-lightly\ntype: trait\n---\n\nYour silicone body is low in density. Whenever you fall, you reduce the [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) of the fall by 2 squares.\n",
+    "structured": {
+      "ancestry": "memonek"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.memonek/i-am-law",
+    "kind": "trait",
+    "name": "I Am Law",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/memonek/i-am-law.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/memonek/i-am-law.json",
+    "selection": "memonek-ancestry",
+    "text": "---\nancestry: memonek\ncost: 1 Point\nname: I Am Law\nscc: mcdm.heroes.v1/feature.trait.memonek/i-am-law\ntype: trait\n---\n\nYour lawful nature and quick reflexes mean you give no quarter to creatures trying to get past you. Enemies can't move through your space unless you allow them to do so.\n",
+    "structured": {
+      "ancestry": "memonek",
+      "cost": "1 Point"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.memonek/keeper-of-order",
+    "kind": "trait",
+    "name": "Keeper of Order",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/memonek/keeper-of-order.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/memonek/keeper-of-order.json",
+    "selection": "memonek-ancestry",
+    "text": "---\nancestry: memonek\ncost: 2 Points\nname: Keeper of Order\nscc: mcdm.heroes.v1/feature.trait.memonek/keeper-of-order\ntype: trait\n---\n\nYour connection to Axiom, the plane of Uttermost Law, allows you to manage chaos around you. Once per round when you or an [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) creature makes a [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll), you can use a free [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) to remove an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) or a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on the roll, to [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) a double [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) into an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge), or to [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) a double [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) into a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane).\n",
+    "structured": {
+      "ancestry": "memonek",
+      "cost": "2 Points"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.memonek/lightning-nimbleness",
+    "kind": "trait",
+    "name": "Lightning Nimbleness",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/memonek/lightning-nimbleness.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/memonek/lightning-nimbleness.json",
+    "selection": "memonek-ancestry",
+    "text": "---\nancestry: memonek\ncost: 2 Points\nname: Lightning Nimbleness\nscc: mcdm.heroes.v1/feature.trait.memonek/lightning-nimbleness\ntype: trait\n---\n\nYou can push your body to move at incredible [speeds](scc.v1:mcdm.heroes.v1/rule.character/speed). Your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) is 7.\n",
+    "structured": {
+      "ancestry": "memonek",
+      "cost": "2 Points"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.memonek/lightweight",
+    "kind": "trait",
+    "name": "Signature Trait: Lightweight",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/memonek/lightweight.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/memonek/lightweight.json",
+    "selection": "memonek-ancestry",
+    "text": "---\nancestry: memonek\nname: 'Signature Trait: Lightweight'\nscc: mcdm.heroes.v1/feature.trait.memonek/lightweight\ntype: trait\n---\n\nYour body is light for a creature of your height. Whenever another creature attempts to force move you, you treat your [size](scc.v1:mcdm.heroes.v1/rule.character/size) as one [size](scc.v1:mcdm.heroes.v1/rule.character/size) smaller than it is.\n",
+    "structured": {
+      "ancestry": "memonek"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.memonek/memonek-traits",
+    "kind": "trait",
+    "name": "Memonek Traits",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/memonek/memonek-traits.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/memonek/memonek-traits.json",
+    "selection": "memonek-ancestry",
+    "text": "---\nancestry: memonek\nname: Memonek Traits\nscc: mcdm.heroes.v1/feature.trait.memonek/memonek-traits\ntype: trait\n---\n\n[Memonek](scc.v1:mcdm.heroes.v1/ancestry/memonek) heroes have access to the following traits.\n\n#### Purchased Memonek Traits\n\nYou have 4 ancestry points to spend on the following traits. (*Quick Build:* Lightning Nimbleness, Nonstop.)\n",
+    "structured": {
+      "ancestry": "memonek"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.memonek/nonstop",
+    "kind": "trait",
+    "name": "Nonstop",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/memonek/nonstop.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/memonek/nonstop.json",
+    "selection": "memonek-ancestry",
+    "text": "---\nancestry: memonek\ncost: 2 Points\nname: Nonstop\nscc: mcdm.heroes.v1/feature.trait.memonek/nonstop\ntype: trait\n---\n\nYour connection to Axiom allows you to regulate your movement. You can't be made [slowed](scc.v1:mcdm.heroes.v1/condition/slowed).\n",
+    "structured": {
+      "ancestry": "memonek",
+      "cost": "2 Points"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.memonek/systematic-mind",
+    "kind": "trait",
+    "name": "Systematic Mind",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/memonek/systematic-mind.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/memonek/systematic-mind.json",
+    "selection": "memonek-ancestry",
+    "text": "---\nancestry: memonek\ncost: 1 Point\nname: Systematic Mind\nscc: mcdm.heroes.v1/feature.trait.memonek/systematic-mind\ntype: trait\n---\n\nYou gain an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on [tests](scc.v1:mcdm.heroes.v1/rule.test/test) made to parse schematics, maps, and other systematic documents that aren't inherently chaotic. In addition, you treat any language you don't know as if you know a related language.\n",
+    "structured": {
+      "ancestry": "memonek",
+      "cost": "1 Point"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.memonek/unphased",
+    "kind": "trait",
+    "name": "Unphased",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/memonek/unphased.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/memonek/unphased.json",
+    "selection": "memonek-ancestry",
+    "text": "---\nancestry: memonek\ncost: 1 Point\nname: Unphased\nscc: mcdm.heroes.v1/feature.trait.memonek/unphased\ntype: trait\n---\n\nYour ordered mind can't be caught off guard. You can't be made [surprised](scc.v1:mcdm.heroes.v1/rule.combat/surprised).\n",
+    "structured": {
+      "ancestry": "memonek",
+      "cost": "1 Point"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.memonek/useful-emotion",
+    "kind": "trait",
+    "name": "Useful Emotion",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/memonek/useful-emotion.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/memonek/useful-emotion.json",
+    "selection": "memonek-ancestry",
+    "text": "---\nancestry: memonek\ncost: 1 Point\nname: Useful Emotion\nscc: mcdm.heroes.v1/feature.trait.memonek/useful-emotion\ntype: trait\n---\n\nVelloparatha—the worldsickness—might hinder you, but you know how to [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) your pain into something your enemies feel. At the start of any combat, you gain 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge).\n",
+    "structured": {
+      "ancestry": "memonek",
+      "cost": "1 Point"
     }
   },
   {
@@ -684,6 +913,298 @@
     "text": "---\nancestry: polder\nname: 'Signature Trait: Small!'\nscc: mcdm.heroes.v1/feature.trait.polder/small\ntype: trait\n---\n\nYour diminutive stature lets you easily get out of—or into—trouble. Your [size](scc.v1:mcdm.heroes.v1/rule.character/size) is 1S.\n",
     "structured": {
       "ancestry": "polder"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.revenant/bloodless",
+    "kind": "trait",
+    "name": "Bloodless",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/revenant/bloodless.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/revenant/bloodless.json",
+    "selection": "revenant-ancestry",
+    "text": "---\nancestry: revenant\ncost: 2 Points\nname: Bloodless\nscc: mcdm.heroes.v1/feature.trait.revenant/bloodless\ntype: trait\n---\n\nFor you, an open wound is indistinguishable from a scratch. You can't be made [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) even while [dying](scc.v1:mcdm.heroes.v1/rule.health/dying).\n",
+    "structured": {
+      "ancestry": "revenant",
+      "cost": "2 Points"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.revenant/former-life",
+    "kind": "trait",
+    "name": "Signature Trait: Former Life",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/revenant/former-life.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/revenant/former-life.json",
+    "selection": "revenant-ancestry",
+    "text": "---\nancestry: revenant\nname: 'Signature Trait: Former Life'\nscc: mcdm.heroes.v1/feature.trait.revenant/former-life\ntype: trait\n---\n\nChoose the ancestry you were before you died. Your [size](scc.v1:mcdm.heroes.v1/rule.character/size) is that ancestry's [size](scc.v1:mcdm.heroes.v1/rule.character/size) and your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) is 5. Unless you select one of the Previous Life traits (see below), you don't receive any other ancestral traits from your original ancestry.\n",
+    "structured": {
+      "ancestry": "revenant"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.revenant/previous-life-1-point",
+    "kind": "trait",
+    "name": "Previous Life: 1 Point",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/revenant/previous-life-1-point.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/revenant/previous-life-1-point.json",
+    "selection": "revenant-ancestry",
+    "text": "---\nancestry: revenant\ncost: 1 Point\nname: 'Previous Life: 1 Point'\nscc: mcdm.heroes.v1/feature.trait.revenant/previous-life-1-point\ntype: trait\n---\n\nYou select a purchased trait that costs 1 ancestry point from your previous ancestry. You can take this trait multiple times, selecting a different 1 point trait from your previous ancestry each time.\n",
+    "structured": {
+      "ancestry": "revenant",
+      "cost": "1 Point"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.revenant/previous-life-2-points",
+    "kind": "trait",
+    "name": "Previous Life: 2 Points",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/revenant/previous-life-2-points.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/revenant/previous-life-2-points.json",
+    "selection": "revenant-ancestry",
+    "text": "---\nancestry: revenant\ncost: 2 Points\nname: 'Previous Life: 2 Points'\nscc: mcdm.heroes.v1/feature.trait.revenant/previous-life-2-points\ntype: trait\n---\n\nYou select a purchased trait that costs 2 ancestry points from your previous ancestry.\n",
+    "structured": {
+      "ancestry": "revenant",
+      "cost": "2 Points"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.revenant/revenant-traits",
+    "kind": "trait",
+    "name": "Revenant Traits",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/revenant/revenant-traits.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/revenant/revenant-traits.json",
+    "selection": "revenant-ancestry",
+    "text": "---\nancestry: revenant\nname: Revenant Traits\nscc: mcdm.heroes.v1/feature.trait.revenant/revenant-traits\ntype: trait\n---\n\n[Revenant](scc.v1:mcdm.heroes.v1/ancestry/revenant) heroes have access to the following traits.\n",
+    "structured": {
+      "ancestry": "revenant"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.revenant/tough-but-withered",
+    "kind": "trait",
+    "name": "Signature Trait: Tough But Withered",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/revenant/tough-but-withered.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/revenant/tough-but-withered.json",
+    "selection": "revenant-ancestry",
+    "text": "---\nancestry: revenant\nname: 'Signature Trait: Tough But Withered'\nscc: mcdm.heroes.v1/feature.trait.revenant/tough-but-withered\ntype: trait\n---\n\nYour undead body grants you immunity to cold, corruption, lightning, and poison damage equal to your level, but you have fire weakness 5. You can't suffocate, and you don't need to eat or drink to stay alive.\n\nAdditionally, when your [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) reaches the negative of your [winded](scc.v1:mcdm.heroes.v1/rule.health/winded) value, you become inert instead of [dying](scc.v1:mcdm.heroes.v1/rule.health/dying). You fall [prone](scc.v1:mcdm.heroes.v1/condition/prone) and can't stand. You continue to observe your surroundings, but you can't speak, take main actions, maneuvers, move actions, or [triggered actions](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action). While inert this way, if you take any fire damage, your body is destroyed and you die. Otherwise, after 12 hours, you regain [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) equal to your [recovery value](scc.v1:mcdm.heroes.v1/rule.health/recoveries).\n\n##### Purchased Revenant Traits\n\nYou have 2 ancestry points to spend on the following traits, or 3 ancestry points if your [size](scc.v1:mcdm.heroes.v1/rule.character/size) is 1S. (*Quick Build:* Bloodless, plus Undead Influence if [size](scc.v1:mcdm.heroes.v1/rule.character/size) 1S.)\n",
+    "structured": {
+      "ancestry": "revenant"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.revenant/undead-influence",
+    "kind": "trait",
+    "name": "Undead Influence",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/revenant/undead-influence.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/revenant/undead-influence.json",
+    "selection": "revenant-ancestry",
+    "text": "---\nancestry: revenant\ncost: 1 Point\nname: Undead Influence\nscc: mcdm.heroes.v1/feature.trait.revenant/undead-influence\ntype: trait\n---\n\nYour [supernatural](scc.v1:mcdm.heroes.v1/rule.general/supernatural) gifts allow you to influence other undead. You gain an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason), [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition), and [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) [tests](scc.v1:mcdm.heroes.v1/rule.test/test) made to interact with undead creatures.\n",
+    "structured": {
+      "ancestry": "revenant",
+      "cost": "1 Point"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.revenant/vengeance-mark",
+    "kind": "trait",
+    "name": "Vengeance Mark",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/revenant/vengeance-mark.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/revenant/vengeance-mark.json",
+    "selection": "revenant-ancestry",
+    "text": "---\nancestry: revenant\ncost: 2 Points\nname: Vengeance Mark\nscc: mcdm.heroes.v1/feature.trait.revenant/vengeance-mark\ntype: trait\n---\n\nAs a maneuver, you place a magic sigil on a creature within 10 squares. When you place a sigil, you decide where it appears on the creature's body, and whether the sigil is visible to only you or to all creatures.\n\nYou always know the direction to the exact location of a creature who bears one of your sigils and is on the same world. You can have a number of active sigils equal to your level, and can remove a sigil from a creature at will (no action required). If you already have the maximum number of sigils activated and you place a new one, your oldest sigil disappears with no other effect.\n\nAdditionally, you have the following [signature ability](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability). [Signature abilities](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability) can be used at will.\n",
+    "structured": {
+      "ancestry": "revenant",
+      "cost": "2 Points"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.time-raider/beyondsight",
+    "kind": "trait",
+    "name": "Beyondsight",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/time-raider/beyondsight.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/time-raider/beyondsight.json",
+    "selection": "time-raider-ancestry",
+    "text": "---\nancestry: time-raider\ncost: 1 Point\nname: Beyondsight\nscc: mcdm.heroes.v1/feature.trait.time-raider/beyondsight\ntype: trait\n---\n\nAs a maneuver, you can adjust your vision to allow you to see through mundane obstructions that are 1 square thick or less. While your vision is adjusted this way, you can't see the area within 1 square of you and you don't have [line of effect](scc.v1:mcdm.heroes.v1/rule.combat/line-of-effect) to any creature or object in that area. You can restore your usual vision as a maneuver.\n",
+    "structured": {
+      "ancestry": "time-raider",
+      "cost": "1 Point"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.time-raider/foresight",
+    "kind": "trait",
+    "name": "Foresight",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/time-raider/foresight.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/time-raider/foresight.json",
+    "selection": "time-raider-ancestry",
+    "text": "---\nancestry: time-raider\ncost: 1 Point\nname: Foresight\nscc: mcdm.heroes.v1/feature.trait.time-raider/foresight\ntype: trait\n---\n\nYour senses extend past mundane obscuration and the veil of the future alike. You automatically know the location of any creature with [concealment](scc.v1:mcdm.heroes.v1/rule.combat/concealment) who isn't hidden from you within 20, and you negate the usual [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on [strikes](scc.v1:mcdm.heroes.v1/rule.combat/strike) against such creatures. Additionally, whenever you are targeted by a [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), you can use a [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) to impose a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on the [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll).\n",
+    "structured": {
+      "ancestry": "time-raider",
+      "cost": "1 Point"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.time-raider/four-armed-athletics",
+    "kind": "trait",
+    "name": "Four-Armed Athletics",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/time-raider/four-armed-athletics.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/time-raider/four-armed-athletics.json",
+    "selection": "time-raider-ancestry",
+    "text": "---\nancestry: time-raider\ncost: 1 Point\nname: Four-Armed Athletics\nscc: mcdm.heroes.v1/feature.trait.time-raider/four-armed-athletics\ntype: trait\n---\n\nYour unique physiology enhances your movement. You gain an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on [tests](scc.v1:mcdm.heroes.v1/rule.test/test) that use the [Climb](scc.v1:mcdm.heroes.v1/skill.exploration/climb), [Gymnastics](scc.v1:mcdm.heroes.v1/skill.exploration/gymnastics), or [Swim](scc.v1:mcdm.heroes.v1/skill.exploration/swim) skills when you can use all your arms in the attempt.\n",
+    "structured": {
+      "ancestry": "time-raider",
+      "cost": "1 Point"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.time-raider/four-armed-martial-arts",
+    "kind": "trait",
+    "name": "Four-Armed Martial Arts",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/time-raider/four-armed-martial-arts.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/time-raider/four-armed-martial-arts.json",
+    "selection": "time-raider-ancestry",
+    "text": "---\nancestry: time-raider\ncost: 2 Points\nname: Four-Armed Martial Arts\nscc: mcdm.heroes.v1/feature.trait.time-raider/four-armed-martial-arts\ntype: trait\n---\n\nYour multiple arms let you take on multiple tasks at the same time. Whenever you use the [Grab](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/grab) or [Knockback](scc.v1:mcdm.heroes.v1/feature.common.maneuvers/knockback) maneuver against an [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) creature, you can target one additional [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) creature, using the same [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) for both targets. Additionally, you can have up to two creatures [grabbed](scc.v1:mcdm.heroes.v1/condition/grabbed) at a time.\n",
+    "structured": {
+      "ancestry": "time-raider",
+      "cost": "2 Points"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.time-raider/psionic-gift",
+    "kind": "trait",
+    "name": "Psionic Gift",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/time-raider/psionic-gift.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/time-raider/psionic-gift.json",
+    "selection": "time-raider-ancestry",
+    "text": "---\nancestry: time-raider\ncost: 2 Points\nname: Psionic Gift\nscc: mcdm.heroes.v1/feature.trait.time-raider/psionic-gift\ntype: trait\n---\n\nChoose one [signature ability](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability) from the following options. [Signature abilities](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability) can be used at will.\n",
+    "structured": {
+      "ancestry": "time-raider",
+      "cost": "2 Points"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.time-raider/psychic-scar",
+    "kind": "trait",
+    "name": "Signature Trait: Psychic Scar",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/time-raider/psychic-scar.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/time-raider/psychic-scar.json",
+    "selection": "time-raider-ancestry",
+    "text": "---\nancestry: time-raider\nname: 'Signature Trait: Psychic Scar'\nscc: mcdm.heroes.v1/feature.trait.time-raider/psychic-scar\ntype: trait\n---\n\nYour mind is a formidable layer of defense. You have psychic immunity equal to your level.\n",
+    "structured": {
+      "ancestry": "time-raider"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.time-raider/time-raider-traits",
+    "kind": "trait",
+    "name": "Time Raider Traits",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/time-raider/time-raider-traits.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/time-raider/time-raider-traits.json",
+    "selection": "time-raider-ancestry",
+    "text": "---\nancestry: time-raider\nname: Time Raider Traits\nscc: mcdm.heroes.v1/feature.trait.time-raider/time-raider-traits\ntype: trait\n---\n\n[Time raider](scc.v1:mcdm.heroes.v1/ancestry/time-raider) heroes have access to the following traits.\n\n#### Purchased Time Raider Traits\n\nYou have 3 ancestry points to spend on the following traits. (*Quick Build:* Beyondsight, Psionic Gift with [Psionic Bolt](scc.v1:mcdm.heroes.v1/feature.ability.time-raider/psionic-bolt).)\n\n##### Unstoppable Mind (2 Points)\n\nYour mind allows you to maintain your focus in any situation. You can't be made [dazed](scc.v1:mcdm.heroes.v1/condition/dazed).\n",
+    "structured": {
+      "ancestry": "time-raider"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.wode-elf/forest-walk",
+    "kind": "trait",
+    "name": "Forest Walk",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/wode-elf/forest-walk.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/wode-elf/forest-walk.json",
+    "selection": "wode-elf-ancestry",
+    "text": "---\nancestry: wode-elf\ncost: 1 Point\nname: Forest Walk\nscc: mcdm.heroes.v1/feature.trait.wode-elf/forest-walk\ntype: trait\n---\n\nYou can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) into and while within [difficult terrain](scc.v1:mcdm.heroes.v1/movement/difficult-terrain).\n",
+    "structured": {
+      "ancestry": "wode-elf",
+      "cost": "1 Point"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.wode-elf/otherworldly-grace",
+    "kind": "trait",
+    "name": "Otherworldly Grace",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/wode-elf/otherworldly-grace.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/wode-elf/otherworldly-grace.json",
+    "selection": "wode-elf-ancestry",
+    "text": "---\nancestry: wode-elf\ncost: 2 Points\nname: Otherworldly Grace\nscc: mcdm.heroes.v1/feature.trait.wode-elf/otherworldly-grace\ntype: trait\n---\n\nYour elf body and mind can't be contained for long. Whenever you make a [saving throw](scc.v1:mcdm.heroes.v1/rule.general/saving-throw), you succeed on a roll of 5 or higher.\n",
+    "structured": {
+      "ancestry": "wode-elf",
+      "cost": "2 Points"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.wode-elf/quick-and-brutal",
+    "kind": "trait",
+    "name": "Quick and Brutal",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/wode-elf/quick-and-brutal.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/wode-elf/quick-and-brutal.json",
+    "selection": "wode-elf-ancestry",
+    "text": "---\nancestry: wode-elf\ncost: 1 Point\nname: Quick and Brutal\nscc: mcdm.heroes.v1/feature.trait.wode-elf/quick-and-brutal\ntype: trait\n---\n\nWhenever you score a [critical hit](scc.v1:mcdm.heroes.v1/rule.combat/critical-hit), you can take an additional main action and an additional move action instead of just a main action.\n",
+    "structured": {
+      "ancestry": "wode-elf",
+      "cost": "1 Point"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.wode-elf/revisit-memory",
+    "kind": "trait",
+    "name": "Revisit Memory",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/wode-elf/revisit-memory.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/wode-elf/revisit-memory.json",
+    "selection": "wode-elf-ancestry",
+    "text": "---\nancestry: wode-elf\ncost: 1 Point\nname: Revisit Memory\nscc: mcdm.heroes.v1/feature.trait.wode-elf/revisit-memory\ntype: trait\n---\n\nAccessing memories is as easy as living in the present for you. You gain an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on [tests](scc.v1:mcdm.heroes.v1/rule.test/test) made to recall lore.\n",
+    "structured": {
+      "ancestry": "wode-elf",
+      "cost": "1 Point"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.wode-elf/swift",
+    "kind": "trait",
+    "name": "Swift",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/wode-elf/swift.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/wode-elf/swift.json",
+    "selection": "wode-elf-ancestry",
+    "text": "---\nancestry: wode-elf\ncost: 1 Point\nname: Swift\nscc: mcdm.heroes.v1/feature.trait.wode-elf/swift\ntype: trait\n---\n\nYou have [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) 6.\n",
+    "structured": {
+      "ancestry": "wode-elf",
+      "cost": "1 Point"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.wode-elf/the-wode-defends",
+    "kind": "trait",
+    "name": "The Wode Defends",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/wode-elf/the-wode-defends.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/wode-elf/the-wode-defends.json",
+    "selection": "wode-elf-ancestry",
+    "text": "---\nancestry: wode-elf\ncost: 2 Points\nname: The Wode Defends\nscc: mcdm.heroes.v1/feature.trait.wode-elf/the-wode-defends\ntype: trait\n---\n\nYou have the following [signature ability](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability). [Signature abilities](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability) can be used at will.\n",
+    "structured": {
+      "ancestry": "wode-elf",
+      "cost": "2 Points"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.wode-elf/wode-elf-glamor",
+    "kind": "trait",
+    "name": "Signature Trait: Wode Elf Glamor",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/wode-elf/wode-elf-glamor.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/wode-elf/wode-elf-glamor.json",
+    "selection": "wode-elf-ancestry",
+    "text": "---\nancestry: wode-elf\nname: 'Signature Trait: Wode Elf Glamor'\nscc: mcdm.heroes.v1/feature.trait.wode-elf/wode-elf-glamor\ntype: trait\n---\n\nYou can magically alter your appearance to better blend in with your surroundings. You gain an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on [tests](scc.v1:mcdm.heroes.v1/rule.test/test) made to hide and sneak, and [tests](scc.v1:mcdm.heroes.v1/rule.test/test) made to search for you while you are hidden take a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane).\n",
+    "structured": {
+      "ancestry": "wode-elf"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.trait.wode-elf/wode-elf-traits",
+    "kind": "trait",
+    "name": "Wode Elf Traits",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/trait/wode-elf/wode-elf-traits.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/trait/wode-elf/wode-elf-traits.json",
+    "selection": "wode-elf-ancestry",
+    "text": "---\nancestry: wode-elf\nname: Wode Elf Traits\nscc: mcdm.heroes.v1/feature.trait.wode-elf/wode-elf-traits\ntype: trait\n---\n\n[Wode elf](scc.v1:mcdm.heroes.v1/ancestry/wode-elf) heroes have access to the following traits.\n\n#### Purchased Wode Elf Traits\n\nYou have 3 ancestry points to spend on the following traits. (*Quick Build:* Swift, Otherworldly Grace.)\n",
+    "structured": {
+      "ancestry": "wode-elf"
     }
   }
 ]

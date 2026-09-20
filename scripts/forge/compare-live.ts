@@ -30,12 +30,18 @@ type Counterpart = {
     abilities: string[];
     conditionImmunities: string[];
     damageImmunities: { damageType: string; value: number }[];
+    damageWeaknesses: { damageType: string; value: number }[];
     ancestryFeatures: string[];
   };
 };
 const output = process.env.SALIENT_FORGE_OUTPUT;
 if (!output || process.env.SALIENT_HEADLESS_TARGET !== 'https://different-bat-943.convex.cloud')
   throw new Error('headless-target-validation-failed');
+const cohort = process.env.SALIENT_FORGE_COHORT ?? 'all';
+assert.ok(['all', 'non-revenant', 'revenant'].includes(cohort), 'Unknown Forge cohort');
+const reportName = cohort === 'all' ? 'live-comparison.json' : `live-comparison-${cohort}.json`;
+let totalCounterparts = 0;
+let selectedCounterparts = 0;
 const sessions: ActorSession[] = [];
 const results: unknown[] = [];
 const runId = crypto.randomUUID();
@@ -44,11 +50,14 @@ const source = process.env.SALIENT_HEADLESS_SOURCE;
 assert.ok(source && /^[a-f0-9]{40}$/.test(source), 'Provide actual adapter source commit');
 const report = () =>
   writeFileSync(
-    join(output, 'live-comparison.json'),
+    join(output, reportName),
     JSON.stringify(
       {
         runId,
         source,
+        cohort,
+        totalCounterparts,
+        selectedCounterparts,
         target: process.env.SALIENT_HEADLESS_TARGET,
         elapsedMs: Date.now() - started,
         results,
@@ -71,9 +80,16 @@ const names = (values: string[]) =>
 const values = (selections: DraftSelection[]) =>
   Object.fromEntries(selections.map(s => [s.decisionId, s.value]));
 try {
-  const counterparts = JSON.parse(
+  const allCounterparts = JSON.parse(
     readFileSync(join(output, 'counterparts.json'), 'utf8'),
   ) as Counterpart[];
+  totalCounterparts = allCounterparts.length;
+  const counterparts = allCounterparts.filter(
+    w =>
+      cohort === 'all' ||
+      (cohort === 'revenant' ? w.ancestry === 'Revenant' : w.ancestry !== 'Revenant'),
+  );
+  selectedCounterparts = counterparts.length;
   assert.ok(
     counterparts.length > 0 && counterparts.every(w => w.forge.complete),
     'Forge completion prerequisite',
@@ -174,6 +190,9 @@ try {
         ...(witness.ancestry === 'Dwarf' ? ['Runic Carving: Carve, Change, or Remove Rune'] : []),
         ...(witness.ancestry === 'Orc' ? ['Relentless'] : []),
         ...['Stone Singer', 'Doomsight'].filter(name => witness.purchasedTraits.includes(name)),
+        ...(witness.purchasedTraits.includes('Vengeance Mark')
+          ? ['Vengeance Mark', 'Vengeance Mark: Remove Sigil']
+          : []),
       ];
       compare(
         'abilities',
@@ -185,16 +204,17 @@ try {
         names((baseline.conditionImmunities ?? []).map(c => c.condition.toLowerCase())),
         names(witness.forge.conditionImmunities.map(c => c.toLowerCase())),
       );
-      compare(
-        'damageImmunities',
-        (baseline.damageImmunities ?? [])
-          .map(d => ({ damageType: d.damageType.toLowerCase(), value: d.value.value }))
-          .sort((a, b) => a.damageType.localeCompare(b.damageType)),
-        witness.forge.damageImmunities,
-      );
+      for (const field of ['damageImmunities', 'damageWeaknesses'] as const)
+        compare(
+          field,
+          (baseline[field] ?? [])
+            .map(d => ({ damageType: d.damageType.toLowerCase(), value: d.value.value }))
+            .sort((a, b) => a.damageType.localeCompare(b.damageType)),
+          [...witness.forge[field]].sort((a, b) => a.damageType.localeCompare(b.damageType)),
+        );
       // Forge also names technical Size/Speed/skill-choice features; retain all in evidence.
       // Compare the actual named signature/purchased traits separately from those containers.
-      const technical = new Set(['Size', 'Speed']);
+      const technical = new Set(['Size', 'Speed', 'Damage Modifier']);
       const salientTraits = names(baseline.traits.map(t => t.name));
       const forgeTraits = names(
         witness.forge.ancestryFeatures.filter(name => !technical.has(name)),
@@ -245,7 +265,7 @@ console.log(
   JSON.stringify({
     runId,
     cases: results.length,
-    report: join(output, 'live-comparison.json'),
+    report: join(output, reportName),
     failed: process.exitCode === 1,
   }),
 );

@@ -1,3 +1,6 @@
+import { applyRevenantBaseline, applyRevenantDisengage } from './ancestries/revenant.ts';
+import { applyTimeRaiderBaseline } from './ancestries/time-raider.ts';
+import { applyWodeElfBaseline } from './ancestries/wode-elf.ts';
 // SPDX-License-Identifier: GPL-3.0-only
 /**
  * The R02 character evaluator: pure, deterministic, client-independent. Input is the R01 decision
@@ -78,6 +81,9 @@ import {
   applyDevilNoKit,
   appendDevilTraits,
 } from './ancestries/devil.ts';
+import { applyDragonKnightBaseline } from './ancestries/dragon-knight.ts';
+import { applyHighElfBaseline, applyHighElfDisengage } from './ancestries/high-elf.ts';
+import { applyMemonekBaseline } from './ancestries/memonek.ts';
 import { applyDwarfBaseline } from './ancestries/dwarf.ts';
 import { applyHakaanBaseline } from './ancestries/hakaan.ts';
 import { applyOrcBaseline } from './ancestries/orc.ts';
@@ -1200,6 +1206,12 @@ class Evaluation {
     applyHumanBaseline(this, out, noKit);
     applyHakaanBaseline(this, out, noKit);
     applyOrcBaseline(this, out, noKit);
+    applyDragonKnightBaseline(this, out, noKit);
+    applyHighElfBaseline(this, out, noKit);
+    applyMemonekBaseline(this, out, noKit);
+    applyTimeRaiderBaseline(this, out, noKit);
+    applyWodeElfBaseline(this, out, noKit);
+    applyRevenantBaseline(this, out, noKit);
     if (noKit)
       out.disengage = dv(1, [
         sourced('free-strikes.grant', SENTENCES.disengage.path, SENTENCES.disengage.quote, {
@@ -1208,6 +1220,8 @@ class Evaluation {
         }),
       ]);
     applyPolderDisengage(this, out);
+    applyHighElfDisengage(this, out);
+    applyRevenantDisengage(this, out);
     if (this.available.has('career.mages-apprentice.renown')) {
       out.renown = dv(1, [
         sourced(

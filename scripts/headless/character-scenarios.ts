@@ -3,6 +3,7 @@
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import type { ScenarioContext, Actor } from './character-client.ts';
+import { runRemainingAncestries } from './remaining-ancestries.ts';
 import { runTraitAbilities } from './trait-abilities.ts';
 import { runLifecycle } from './character-lifecycle.ts';
 import type { DraftSelection } from '../../shared/characterDraft.ts';
@@ -507,4 +508,5 @@ export async function runScenarios(context: ScenarioContext) {
   } else skip('wizard saved-state boundaries', 'Devil creation prerequisite failed.');
   await runLifecycle(context);
   await runTraitAbilities(context);
+  await runRemainingAncestries(context);
 }

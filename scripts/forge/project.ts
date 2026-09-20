@@ -16,6 +16,8 @@ import type { Hero } from '@/models/hero';
 const sourcebooks = [core, orden];
 const supportedChoiceTypes = new Set<FeatureType>([
   FeatureType.Choice,
+  FeatureType.AncestryChoice,
+  FeatureType.AncestryFeatureChoice,
   FeatureType.SkillChoice,
   FeatureType.LanguageChoice,
   FeatureType.ClassAbility,
@@ -24,12 +26,17 @@ const supportedChoiceTypes = new Set<FeatureType>([
 ]);
 const names = (values: string[]) => [...new Set(values)].sort();
 const displayNames: Record<string, string> = {
+  'Elf (high)': 'High Elf',
+  'Elf (wode)': 'Wode Elf',
+  'Draconic Pride': 'Draconian Pride',
+  'Remember your Oath': 'Remember Your Oath',
   Perseverence: 'Perseverance',
   'All Is A Feather': 'All Is a Feather',
   'Free Strike (melee)': 'Melee Weapon Free Strike',
   'Free Strike (ranged)': 'Ranged Weapon Free Strike',
 };
-const displayName = (name: string) => displayNames[name] ?? name;
+const displayName = (name: string) =>
+  name.startsWith('Prismatic Scales (') ? 'Prismatic Scales' : (displayNames[name] ?? name);
 
 type ChoiceProblem = { id: string; name: string; type: string; reason: string };
 const problem = (feature: Feature, reason: string): ChoiceProblem => ({
@@ -39,11 +46,37 @@ const problem = (feature: Feature, reason: string): ChoiceProblem => ({
   reason,
 });
 
+/** Choice state may change; pinned rule payloads and eligible pools may not. */
+function canonicalPayload(feature: Feature): Feature {
+  const copy = structuredClone(feature);
+  if (copy.type === FeatureType.Choice) copy.data.selected = [];
+  if (copy.type === FeatureType.AncestryChoice || copy.type === FeatureType.AncestryFeatureChoice)
+    copy.data.selected = null;
+  if (copy.type === FeatureType.Multiple)
+    copy.data.features = copy.data.features.map(canonicalPayload);
+  return copy;
+}
+const samePayload = (selected: Feature, canonical: Feature) =>
+  isDeepStrictEqual(canonicalPayload(selected), canonicalPayload(canonical));
+
 function projectChecked(hero: Hero) {
   if (!hero.ancestry || !hero.culture || !hero.career || !hero.class)
     throw new Error('Forge counterpart lacks ancestry, culture, career or class');
   if (
-    !['Devil', 'Polder', 'Dwarf', 'Human', 'Hakaan', 'Orc'].includes(hero.ancestry.name) ||
+    ![
+      'Devil',
+      'Polder',
+      'Dwarf',
+      'Human',
+      'Hakaan',
+      'Orc',
+      'Dragon Knight',
+      'Elf (high)',
+      'Memonek',
+      'Revenant',
+      'Time Raider',
+      'Elf (wode)',
+    ].includes(hero.ancestry.name) ||
     !['Fury', 'Elementalist'].includes(hero.class.name) ||
     hero.class.level !== 1
   )
@@ -111,6 +144,57 @@ function projectChecked(hero: Hero) {
         outstandingChoices.push(problem(feature, 'Selected option outside eligible pool'));
     };
     switch (feature.type) {
+      case FeatureType.AncestryChoice: {
+        const selected = feature.data.selected;
+        const canonical = sourcebooks
+          .flatMap(book => book.ancestries)
+          .find(a => a.id === selected?.id);
+        if (
+          !selected ||
+          !canonical ||
+          canonical.name === 'Revenant' ||
+          !isDeepStrictEqual(selected, canonical)
+        )
+          outstandingChoices.push(
+            problem(feature, 'Former ancestry must be an unchanged eligible pinned ancestry'),
+          );
+        break;
+      }
+      case FeatureType.AncestryFeatureChoice: {
+        const former = HeroLogic.getFormerAncestries(hero);
+        const source = feature.data.source;
+        if (!source.former || source.current || source.customID || former.length !== 1) {
+          unsupportedChoices.push(
+            problem(feature, 'Only one former-ancestry purchased trait is supported'),
+          );
+          break;
+        }
+        const selected = feature.data.selected;
+        const canonical = sourcebooks
+          .flatMap(book => book.ancestries)
+          .find(a => a.id === former[0]!.id);
+        const options =
+          canonical?.features.flatMap(f =>
+            f.type === FeatureType.Choice && f.data.count === 'ancestry' ? f.data.options : [],
+          ) ?? [];
+        const option = options.find(
+          o => o.feature.id === selected?.id && o.value === feature.data.value,
+        );
+        if (
+          !selected ||
+          !option ||
+          selected.name.startsWith('Prismatic Scales (') ||
+          !samePayload(selected, option.feature)
+        )
+          outstandingChoices.push(
+            problem(
+              feature,
+              'Borrowed trait must be an eligible exact-cost pinned former-ancestry purchase',
+            ),
+          );
+        break;
+      }
+
       case FeatureType.SkillChoice:
         check(feature.data.selected, feature.data.count, [
           ...feature.data.options,
@@ -179,6 +263,15 @@ function projectChecked(hero: Hero) {
             feature.data.options.find(option => option.feature.id === id),
           );
           if (
+            feature.data.selected.some(
+              (selected, index) =>
+                options[index] && !samePayload(selected, options[index]!.feature),
+            )
+          )
+            outstandingChoices.push(
+              problem(feature, 'Nested choice payload differs from its pinned eligible option'),
+            );
+          if (
             new Set(ids).size !== ids.length ||
             options.some(option => !option) ||
             options.reduce((sum, option) => sum + (option?.value ?? 0), 0) !== feature.data.count
@@ -202,15 +295,34 @@ function projectChecked(hero: Hero) {
       const ids = feature.data.selected.map(entry => entry.id);
       if (new Set(ids).size !== ids.length)
         outstandingChoices.push(problem(feature, 'Duplicate ancestry purchase'));
-      const options = ids.map(id =>
-        canonical.data.options.find(option => option.feature.id === id),
-      );
+      // Pinned ConfigChoice (choice.tsx) exposes former paid options directly; it does not
+      // clone the one-point Previous Life wrapper for each purchase. Preserve strict source pools.
+      const eligible = [...canonical.data.options];
+      if (hero.ancestry.name === 'Revenant') {
+        const former = HeroLogic.getFormerAncestries(hero);
+        if (former.length === 1) {
+          const pinnedFormer = sourcebooks
+            .flatMap(book => book.ancestries)
+            .find(a => a.id === former[0]!.id);
+          eligible.push(
+            ...(
+              pinnedFormer?.features.flatMap(f =>
+                f.type === FeatureType.Choice && f.data.count === 'ancestry' ? f.data.options : [],
+              ) ?? []
+            ).filter(
+              o =>
+                (o.value === 1 || o.value === 2) &&
+                !o.feature.name.startsWith('Prismatic Scales ('),
+            ),
+          );
+        }
+      }
+      const options = ids.map(id => eligible.find(option => option.feature.id === id));
       if (options.some(option => !option))
         outstandingChoices.push(problem(feature, 'Purchase outside this pinned ancestry'));
       if (
         feature.data.selected.some(
-          (selected, index) =>
-            options[index] && !isDeepStrictEqual(selected, options[index]!.feature),
+          (selected, index) => options[index] && !samePayload(selected, options[index]!.feature),
         )
       )
         outstandingChoices.push(
@@ -269,10 +381,19 @@ function projectChecked(hero: Hero) {
     damageImmunities: HeroLogic.getDamageModifiers(hero)
       .filter(modifier => modifier.modifierType === DamageModifierType.Immunity)
       .map(modifier => ({ damageType: modifier.damageType.toLowerCase(), value: modifier.value })),
+    damageWeaknesses: HeroLogic.getDamageModifiers(hero)
+      .filter(modifier => modifier.modifierType === DamageModifierType.Weakness)
+      .map(modifier => ({ damageType: modifier.damageType.toLowerCase(), value: modifier.value })),
     ancestryFeatures: names(
       hero.ancestry.features.flatMap(feature =>
         feature.type === FeatureType.Choice && feature.data.count === 'ancestry'
-          ? feature.data.selected.map(selected => displayName(selected.name))
+          ? feature.data.selected.map(selected =>
+              displayName(
+                selected.type === FeatureType.AncestryFeatureChoice && selected.data.selected
+                  ? selected.data.selected.name
+                  : selected.name,
+              ),
+            )
           : [displayName(feature.name)],
       ),
     ),
