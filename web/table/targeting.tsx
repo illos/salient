@@ -373,7 +373,10 @@ export function CompiledEffects({
         const effect = occurrence.effect;
         const target = targets.find(t => t.originalTargetId === effect.targetId)?.target;
         return (
-          <li key={occurrence.id} className="flex flex-col gap-1 border-l border-rule-strong pl-2">
+          <li
+            key={occurrence.id}
+            className="flex flex-col gap-1 border-t border-border pt-2 first:border-t-0 first:pt-0"
+          >
             <span className="flex flex-wrap items-center gap-2">
               <strong>
                 {target?.name ?? 'Original target'} ·{' '}

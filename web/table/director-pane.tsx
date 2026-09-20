@@ -180,7 +180,7 @@ function AddFoe({
     <div className="flex flex-col gap-1">
       <div className="flex items-stretch gap-2">
         <select
-          className="native-select h-9 min-w-0 flex-1 bg-muted"
+          className="native-select min-w-0 flex-1"
           aria-label="Foe to add"
           value={selected.definitionId}
           onChange={e => setDefinitionId(e.target.value)}
@@ -200,7 +200,7 @@ function AddFoe({
         <Button
           type="button"
           variant="secondary"
-          size="icon-lg"
+          size="icon"
           aria-label={minion ? 'Add squad' : 'Add foe'}
           title={minion ? `Add a squad of ${count} × ${selected.name}` : `Add ${selected.name}`}
           disabled={addition.pending || !running}
@@ -210,11 +210,14 @@ function AddFoe({
         </Button>
       </div>
       {minion && (
-        <div className="flex flex-wrap items-center gap-2 text-xs" data-squad-add>
-          <span className="caps text-muted-foreground">Squad</span>
+        <div
+          className="inset-controls flex min-h-11 flex-wrap items-center gap-2 rounded-md bg-muted px-3 py-2 text-sm"
+          data-squad-add
+        >
+          <span className="text-sm text-muted-foreground">Squad</span>
           <Button
             type="button"
-            size="sm"
+            size="icon-sm"
             variant="outline"
             aria-label="Fewer minions"
             disabled={count <= 1}
@@ -227,7 +230,7 @@ function AddFoe({
           </span>
           <Button
             type="button"
-            size="sm"
+            size="icon-sm"
             variant="outline"
             aria-label="More minions"
             disabled={count >= 8}
@@ -236,9 +239,9 @@ function AddFoe({
             +
           </Button>
           <label className="flex items-center gap-1">
-            <span className="caps text-muted-foreground">Captain</span>
+            <span className="text-sm text-muted-foreground">Captain</span>
             <select
-              className="native-select"
+              className="native-select h-8"
               value={captain}
               onChange={e => setCaptain(e.target.value)}
               aria-label="Captain for the new squad"
@@ -265,19 +268,16 @@ function EncounterReady({ campaignId, foes }: { campaignId: Id<'campaigns'>; foe
   const counts = new Map<string, number>();
   for (const foe of foes) counts.set(foe.name, (counts.get(foe.name) ?? 0) + 1);
   return (
-    <section
-      className="flex flex-col gap-3 rounded-md border border-rule-strong bg-card px-5 py-4 shadow-hard"
-      aria-label="Encounter ready"
-    >
+    <section className="flex flex-col gap-3 rounded-md bg-muted p-5" aria-label="Encounter ready">
       <div className="flex items-baseline justify-between gap-3">
         <h3 className="m-0">Encounter ready</h3>
         {/* Encounter Value is V06: the slot stays empty rather than showing a zero. */}
-        <span className="caps text-muted-foreground" aria-hidden />
+        <span className="text-sm text-muted-foreground" aria-hidden />
       </div>
       {counts.size === 0 ? (
         <p className="m-0 text-sm text-muted-foreground">No foes are loaded.</p>
       ) : (
-        <ul className="m-0 flex list-none flex-col gap-1 p-0 text-sm">
+        <ul className="m-0 flex list-none flex-col gap-1 p-0 text-base">
           {[...counts.entries()].map(([name, count]) => (
             <li key={name} className="flex items-baseline justify-between gap-3">
               <span>{name}</span>
@@ -287,7 +287,7 @@ function EncounterReady({ campaignId, foes }: { campaignId: Id<'campaigns'>; foe
         </ul>
       )}
       {/* A04: opens the staged setup card; nothing is committed until OK. */}
-      <div className="flex flex-col pt-1 [&>span]:flex [&_button]:h-10 [&_button]:w-full [&_button]:text-xs">
+      <div className="flex flex-col pt-1 [&>span]:flex [&_button]:h-10 [&_button]:w-full [&_button]:text-base">
         <CommandButton
           campaignId={campaignId}
           text="/combat start"
@@ -313,7 +313,7 @@ function MaliceAside({
     <span className="inline-flex items-center gap-1">
       <button
         type="button"
-        className="cursor-pointer border-0 bg-transparent p-0 text-xs font-bold text-primary hover:underline"
+        className="cursor-pointer border-0 bg-transparent p-0 text-base font-medium text-primary tabular-nums hover:underline"
         aria-label={`Malice ${malice}: edit`}
         aria-expanded={editing}
         onClick={() => setEditing(open => !open)}
@@ -439,7 +439,12 @@ export function DirectorPane({
                       variant="default"
                     />
                   )}
-                  <Button variant="outline" size="sm" onClick={() => setVoiding(encounter.id)}>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="rounded-full px-4"
+                    onClick={() => setVoiding(encounter.id)}
+                  >
                     Void combat
                   </Button>
                   {voiding === encounter.id && (

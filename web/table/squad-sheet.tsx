@@ -31,6 +31,10 @@ type Reference = { refKind: 'foe' | 'character'; id: string };
 
 const SQUAD_MANEUVERS = ['Grab', 'Knockback', 'Hide', 'Search for Hidden Creatures'];
 
+/** The small edge / bane count field: a 999px `sub` inset with the accent caret (Quiet). */
+const MODIFIER_FIELD =
+  'h-7 w-12 rounded-full border-0 bg-muted px-2 text-sm text-foreground caret-primary tabular-nums outline-none transition-colors duration-(--motion-fast) focus-visible:bg-accent';
+
 /** Squad pool presentation for the viewer: the server decided the mode. */
 function squadHealth(squad: Squad): CardHealth {
   const health = squad.health;
@@ -197,12 +201,13 @@ function Picker({
 }) {
   return (
     <fieldset className="m-0 flex flex-col gap-1 border-0 p-0">
-      <legend className="caps text-muted-foreground">{label}</legend>
-      <div className="flex flex-wrap gap-2">
+      <legend className="text-sm text-muted-foreground">{label}</legend>
+      <div className="flex flex-wrap gap-x-3 gap-y-1.5">
         {options.map(option => (
-          <label key={option.id} className="flex items-center gap-1 text-xs">
+          <label key={option.id} className="flex items-center gap-1.5 text-sm">
             <input
               type="checkbox"
+              className="size-[18px] accent-primary"
               checked={selected.has(option.id)}
               disabled={disabled?.(option.id)}
               onChange={() => onToggle(option.id)}
@@ -237,7 +242,7 @@ export function CasualtyPicker({
   }));
   return (
     <section
-      className="flex flex-col gap-2 rounded-md border border-rule-strong bg-card px-3 py-2"
+      className="inset-controls flex flex-col gap-2 rounded-md bg-muted p-4"
       aria-label={`${squad.name} casualties`}
     >
       <p className="m-0 text-sm">
@@ -363,9 +368,9 @@ function SquadActionBuilder({
       .then(ok => ok && setAssignments([]));
   return (
     <section className="flex flex-col gap-2" aria-label={`${squad.name} squad action`}>
-      <span className="caps text-muted-foreground">Squad action</span>
-      <label className="flex items-center gap-2 text-xs">
-        <span className="caps text-muted-foreground">Ability</span>
+      <span className="text-sm text-muted-foreground">Squad action</span>
+      <label className="flex items-center gap-2 text-sm">
+        <span className="text-sm text-muted-foreground">Ability</span>
         <select
           className="native-select"
           value={ability}
@@ -382,9 +387,9 @@ function SquadActionBuilder({
           ))}
         </select>
       </label>
-      <div className="flex flex-col gap-2 rounded-md bg-muted/40 p-2">
-        <label className="flex items-center gap-2 text-xs">
-          <span className="caps text-muted-foreground">Target</span>
+      <div className="inset-controls flex flex-col gap-2 rounded-md bg-muted p-3">
+        <label className="flex items-center gap-2 text-sm">
+          <span className="text-sm text-muted-foreground">Target</span>
           <select
             className="native-select"
             value={targetKey}
@@ -430,15 +435,15 @@ function SquadActionBuilder({
         </div>
       </div>
       {assignments.length > 0 && (
-        <ul className="m-0 flex list-none flex-col gap-1 p-0 text-xs">
+        <ul className="m-0 flex list-none flex-col gap-1 p-0 text-sm">
           {assignments.map((a, index) => (
             <li key={a.target.key} className="flex flex-wrap items-center gap-2">
-              <strong>{a.target.name}</strong>
+              <strong className="font-medium">{a.target.name}</strong>
               <span>← {a.minions.map(m => m.name).join(', ')}</span>
               <label className="flex items-center gap-1">
-                <span className="caps text-muted-foreground">Edges</span>
+                <span className="text-sm text-muted-foreground">Edges</span>
                 <input
-                  className="w-10 rounded border px-1"
+                  className={MODIFIER_FIELD}
                   type="number"
                   min={0}
                   value={a.edges}
@@ -451,9 +456,9 @@ function SquadActionBuilder({
                   }
                   aria-label={`Edges against ${a.target.name}`}
                 />
-                <span className="caps text-muted-foreground">Banes</span>
+                <span className="text-sm text-muted-foreground">Banes</span>
                 <input
-                  className="w-10 rounded border px-1"
+                  className={MODIFIER_FIELD}
                   type="number"
                   min={0}
                   value={a.banes}
@@ -511,9 +516,9 @@ function FreeStrikeTogether({
   const target = targets.find(t => t.key === targetKey);
   return (
     <section className="flex flex-col gap-2" aria-label={`${squad.name} free strike together`}>
-      <span className="caps text-muted-foreground">Free Strike Together</span>
-      <label className="flex items-center gap-2 text-xs">
-        <span className="caps text-muted-foreground">Target</span>
+      <span className="text-sm text-muted-foreground">Free Strike Together</span>
+      <label className="flex items-center gap-2 text-sm">
+        <span className="text-sm text-muted-foreground">Target</span>
         <select
           className="native-select"
           value={targetKey}
@@ -594,7 +599,7 @@ export function SquadSheet({
         <Disc name={squad.name} size="md" muted={squad.living === 0} />
         <div className="flex min-w-0 flex-1 flex-col gap-0.5">
           <h3 className="m-0 truncate">{squad.name}</h3>
-          <p className="caps m-0 text-muted-foreground">
+          <p className="m-0 text-sm text-muted-foreground">
             {squad.living}/{squad.total} minions
             {summary
               ? ` · ${foeRoleLine({ level: summary.level, role: summary.role, organization: 'Minion' })}`
@@ -612,7 +617,7 @@ export function SquadSheet({
               label={`${squad.name} pool`}
               className="min-w-0 flex-1"
             />
-            <span className="shrink-0 text-sm font-semibold tabular-nums">
+            <span className="shrink-0 text-base font-medium tabular-nums">
               {health.pool} / {health.poolMax}
             </span>
             {running && (
@@ -625,7 +630,7 @@ export function SquadSheet({
               />
             )}
           </div>
-          <p className="caps m-0 text-muted-foreground">
+          <p className="m-0 text-sm text-muted-foreground">
             Shared pool · step {health.step}
             {facts.captainBenefit?.stamina && squad.captain
               ? ` (${facts.memberStamina} + ${facts.captainBenefit.stamina} captain)`
@@ -639,12 +644,12 @@ export function SquadSheet({
       )}
       {squad.pending && <CasualtyPicker campaignId={campaignId} squad={squad} members={members} />}
       <div className="rule-soft flex flex-col gap-2 pb-3">
-        <span className="caps text-muted-foreground">Captain</span>
-        <div className="flex flex-wrap items-center gap-2 text-sm">
+        <span className="text-sm text-muted-foreground">Captain</span>
+        <div className="flex flex-wrap items-center gap-2 text-base">
           {squad.captain ? (
             <>
               <span>
-                <strong>{squad.captain.name}</strong>
+                <strong className="font-medium">{squad.captain.name}</strong>
                 {squad.captain.slain ? ' (slain)' : ''}
                 {facts?.captainBenefit ? ` · With Captain: ${facts.captainBenefit.text}` : ''}
               </span>
@@ -701,28 +706,31 @@ export function SquadSheet({
           )}
         </div>
         {facts?.captainBenefit?.manual && (
-          <p className="m-0 text-xs text-muted-foreground">
+          <p className="m-0 text-sm text-muted-foreground">
             This benefit is shown for manual play; the app applies Stamina, strike damage and strike
             edge benefits only.
           </p>
         )}
       </div>
       <div className="rule-soft flex flex-col gap-2 pb-3">
-        <span className="caps text-muted-foreground">Minions</span>
-        <ul className="m-0 flex list-none flex-col gap-1 p-0 text-sm">
+        <span className="text-sm text-muted-foreground">Minions</span>
+        <ul className="m-0 flex list-none flex-col gap-1.5 p-0 text-base">
           {members.map(foe => {
             const out = facts?.participation.optedOut.includes(foe.id) ?? false;
             const alone = facts?.participation.individual.includes(foe.id) ?? false;
             return (
-              <li key={foe.id} className="flex flex-wrap items-center gap-2">
+              <li
+                key={foe.id}
+                className={`flex flex-wrap items-center gap-2 ${foe.slain ? 'opacity-40' : ''}`}
+              >
                 <button
                   type="button"
-                  className={`cursor-pointer border-0 bg-transparent p-0 text-left font-semibold hover:underline ${foe.slain ? 'text-muted-foreground' : ''}`}
+                  className={`cursor-pointer border-0 bg-transparent p-0 text-left font-medium hover:underline ${foe.slain ? 'text-muted-foreground' : ''}`}
                   onClick={() => onOpenMember(foe)}
                 >
                   {foe.name}
                 </button>
-                {foe.slain && <span className="caps text-muted-foreground">Slain</span>}
+                {foe.slain && <span className="text-sm text-muted-foreground">Slain</span>}
                 <ConditionBadges
                   conditions={foe.conditions}
                   instances={foe.conditionInstances}

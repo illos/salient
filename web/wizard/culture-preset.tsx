@@ -46,7 +46,7 @@ export function CulturePresetSelect({
         </optgroup>
       </select>
       {preset && (
-        <p className="m-0 text-sm">
+        <p className="m-0 text-base">
           {preset.environment} · {preset.organization} · {preset.upbringing}
           {preset.language ? ` · ${preset.language}` : ' · Choose a language below'}
         </p>

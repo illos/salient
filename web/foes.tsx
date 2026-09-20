@@ -76,7 +76,7 @@ function AddFoe({ campaignId }: { campaignId: Id<'campaigns'> }) {
   return (
     <div className="flex flex-col gap-3">
       {definitions && selected ? (
-        <div className="flex flex-wrap items-center justify-between gap-3 border border-rule-strong bg-card px-3 py-2">
+        <div className="inset-controls flex flex-wrap items-center justify-between gap-3 rounded-md bg-muted px-3.5 py-2.5">
           <select
             className="native-select min-w-0 flex-1"
             aria-label="Foe to add"
@@ -93,9 +93,9 @@ function AddFoe({ campaignId }: { campaignId: Id<'campaigns'> }) {
           </select>
           {minion && (
             <label className="flex items-center gap-1 text-sm">
-              <span className="caps text-muted-foreground">Minions</span>
+              <span className="text-sm text-muted-foreground">Minions</span>
               <input
-                className="w-12 rounded border px-1"
+                className="h-8 w-14 rounded-md border-0 bg-placeholder px-2 text-sm text-foreground caret-primary tabular-nums outline-none"
                 type="number"
                 min={1}
                 max={8}

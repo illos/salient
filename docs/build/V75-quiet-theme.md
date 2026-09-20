@@ -285,3 +285,35 @@ themselves remain unchanged.
 Verified: full `CI=true pnpm check` exit 0 (310 engine, 481 app/scripts tests, links, vendor,
 content, build) and fresh captures of a minion stat block in both themes, a full stat block with
 ability cards, and an ability opened from it, in [the evidence directory](evidence/V75/README.md).
+
+### 2026-09-20 — user corrections to the reference pop-ups, second rebase, testing process
+
+**User review of the pop-ups.** Three follow-ups from looking at the captures: ability cards had
+three rows above their printed title; Back and Close looked like the same thing; source references
+belong at the bottom of a card. Applied (commit "one control row on foe cards, sources at the
+bottom"): the foe reference draws one slim control row and no eyebrow. Back and Close are
+different actions (Back returns to the previous card inside the pop-up, Close dismisses it), but
+the redundancy was real: "From <parent>" and "Back" both led to the parent when the ability had
+been opened from its monster. Now one navigation pill sits beside Close: "From <parent>" returns
+to the parent card (popping history when the parent is the previous card, opening it when the
+card was reached directly), and "Back" appears only when the previous card is something other
+than the parent. The foe view no longer repeats the parent control in its body. The "source
+reference" eyebrow is gone; the foe card already prints its source footer, and a rule opened in
+the foe card or from the rules library shows its "Draw Steel: <book>" line as a footer below the
+article. No string was added; the dialog's accessible name is unchanged.
+
+**Second rebase.** Main advanced through V72 (live compiled effects), V83/V84 (perk actions,
+culture presets) and V02 (minion squads) while the branch waited: `slice/V75` is now rebased onto
+main `618fadd`. Conflicts: appended browser-backlog rows (both kept), and `web/foes.tsx` and
+`web/table/director-pane.tsx`, which V02 rewrote; main's versions were taken and are re-skinned
+in the following commit together with the new `web/table/squad-sheet.tsx` and
+`web/wizard/culture-preset.tsx` and the V72/V02/V84 additions inside `targeting.tsx`,
+`initiative-bar.tsx`, `foe-sheet.tsx` and `wizard/index.tsx`.
+
+**Testing process.** The user assigned all test execution to the testing coordinator
+(`testing-process.md`, thread `46c30412-6e29-44dc-b30b-08ffe22bd0e3`) during this slice. From
+here on this thread runs only authoring checks (prettier, eslint, tsc) and submits the full
+`pnpm check` and any capture job to the coordinator; the local capture stack used earlier today
+was stopped by the coordinator under the user's cleanup authorization, data retained. The capture
+script for the pop-ups is `.playtest/v75/capture-popups.mjs` in the worktree (ignored; readable
+by the coordinator), which needs only the public Rules and Foes routes.
