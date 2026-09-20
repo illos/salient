@@ -120,6 +120,11 @@ friendship and blocking controls.
   campaign membership. Remaining active-combat removal handling and invitation behavior still need definition.
 - Ownership/membership and play role are separate. A joined member defaults to player; the campaign owner
   defaults to active Director.
+- User decision (2026-09-20, campaign home): on campaign-level surfaces every member who is not the
+  active Director is presented as a **player**. Observer is a session-level state (a member not selected
+  for the current session) and is never shown as a campaign-level tag. The **owner** has a dedicated
+  badge, distinct from the **Director** badge; a member who is both shows both. Until active-Director
+  delegation is implemented the owner is always the Director, so both badges sit on the owner's card.
 - Exactly one Director is active at all times. The owner can promote a player to active Director, either for
   the current session if one is active, or until revoked.
 - Being Director does not prevent having campaign characters; a participant can have multiple characters.

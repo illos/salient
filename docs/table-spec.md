@@ -162,6 +162,15 @@ tower-roll requirements remain recorded in their own sections; this default does
 hidden results should be revealed or expose unrelated private character/account data. Reading history does not
 grant live gameplay authority or reopen a session.
 
+User decisions (2026-09-20, campaign home): a session has an **optional title** set by the Director; the
+campaign home lists sessions as `Session n · title` (number only when untitled), with the selected
+players and a relative date, and the header reads `Session n · last played …`. There is no session summary
+line. A **recap** is a later abstraction over the game log, party chat and Director notes; until it is
+designed, RECAP opens that session's game log, which every member may already read under the default
+above. Implementation note (V68): the title is campaign metadata, not session history, so the Director may
+set or change it on any session including a closed one; this is an interpretation of "closed sessions are
+permanently read-only" as applying to gameplay records, recorded here for review.
+
 ### Account deletion during play
 
 Account deletion also deletes that user's characters and saved encounters. In other users' retained campaigns,
@@ -240,6 +249,13 @@ Keep these concepts distinct:
 | Encounter combatants | The heroes/monsters selected for this encounter; session participation alone is not an initiative entry. |
 | Initiative group | Combat participants organized to act within the same side activation. Group membership is distinct from the player controlling each creature; see the initiative-group contract below. |
 | Online presence | Whether a participant is currently connected/active in the session through Convex-backed presence. Exact presence implementation and freshness thresholds remain open. |
+
+User decision (2026-09-20, campaign home): connected-member presence is built now, not deferred. The
+campaign home shows which members are currently connected (member cards and the chat header count), and
+the future session screen reuses the same record. Implementation note (V68): presence is a Convex-backed
+per-campaign heartbeat written by connected clients on campaign surfaces; a member counts as online while
+their last heartbeat is fresher than the recorded threshold, which the slice work log states. Presence
+grants nothing and changes no session state, exactly as the paragraph below requires.
 
 The roster shows who is playing and who is online. Connection status does not itself select a participant,
 grant character access, remove a participant, finish a turn, pause the table, or close the session. Authorized
@@ -565,6 +581,12 @@ Chat therefore cannot depend on an active session record. For v1, **campaign cha
 separate entities**. Their UI presentation is explicitly deferred. A later interface may merge chat with a
 curated game-log feed; that possibility does not merge their underlying records or lifetimes. Channel layout
 and historical presentation remain open.
+
+User decision (2026-09-20, campaign home): build a **very light campaign chat** now, on the campaign home,
+within the V12 contract (campaign-scoped, persistent, every member may read and write, no editing or
+deletion, no notifications, separate from the game log). The user expects a longer-term game-log/chat
+hybrid inside the session; that hybrid, including roll results shown in chat, is not part of the light
+chat and needs its own design. Chat writes create no game-log entry and no undo seam.
 
 The dice roller follows its existing spec: shared code generates/validates/records results, and the optional
 3D tray presents accepted values. A disabled or absent visual tray must not prevent play. Both CLI and UI

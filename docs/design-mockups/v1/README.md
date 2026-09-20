@@ -21,7 +21,8 @@ The images are not screenshots of implemented functionality and not a claim that
 
 - [Login](login.png)
 - [Account and preferences](account.png)
-- [Campaign home](campaign-home.png)
+- [Campaign home](campaign-home.png) — superseded for the campaign home by the
+  [V2 simplified campaign home](../v2/campaign-home-simplified.png) (user decisions 2026-09-20).
 - [Running session: Director free-play view](session-free-play-director.png)
 - [Character wizard: class step](character-wizard-class.png)
 - [Standalone character sheet](character-sheet.png)
@@ -43,7 +44,7 @@ this list is not confirmation that a depicted element is in scope.
 | `session-free-play-director.png` | Player-initiated **Respite requested** card with Later / Begin respite | Respite is a dedicated table mode that the Director starts and ends; its loop still needs rules research, and no player request flow is specified. The dedicated respite workflow is deferred beyond v0.01 ([mode](../../table-spec.md#respite-mode), [deferral](../../pre-alpha-design-gaps.md#respite-and-fictional-time--deferred-beyond-v001)). |
 | `session-free-play-director.png` | Director Party pane showing only one bar per hero | The Director's heroes pane lists each player's heroes with current Stamina, Recoveries and Heroic Resources ([layout](../../table-spec.md#confirmed-combat-layout)). |
 | `account.png` | **Session reminders** preference | There is no notification system in V1; all notifications are deferred beyond V1 ([product features](../../product-features.md#account-and-social-features)). |
-| `campaign-home.png` | **OBSERVER** (and **PLAYER**) member tags | Observer is not a membership role: a campaign observer is a current member not selected as a session player, and player status is per-session selection ([definitions](../../table-spec.md#3-table-surfaces), [access](../../accounts-and-access-spec.md)). Membership lists should not present these as standing roles. |
+| `campaign-home.png` | **OBSERVER** (and **PLAYER**) member tags | Observer is not a membership role: a campaign observer is a current member not selected as a session player, and player status is per-session selection ([definitions](../../table-spec.md#3-table-surfaces), [access](../../accounts-and-access-spec.md)). Membership lists should not present these as standing roles. Refined 2026-09-20: on the campaign home every non-Director member is a player, and the owner has a separate badge ([V2 decisions](../v2/README.md#campaign-home-user-decisions-2026-09-20)). |
 | `combat-table-light.png`, `combat-table-dark.png` | Director-only foe controls (add box, foe roster edits) and an unconditional Malice value combined with a player-style **Selected sheet** heroes pane | The pane contents are role-specific: players see revealed foes with the campaign health display and their own sheet plus a compact party roster; the Director sees foe controls and the players/heroes resource list. Show Malice is off by default and only the Director always sees the pool ([layout](../../table-spec.md#confirmed-combat-layout), [Malice](../../table-spec.md#malice-visibility)). |
 | `combat-table-light.png`, `combat-table-dark.png` | Initiative bar as flat per-side segments | Initiative is organized as groups containing actor-linked turn entries, one group per creature by default, with Director regrouping and distinct spent state per entry ([groups](../../table-spec.md#initiative-groups-confirmed-app-model)). The bar does not show groups or entries. |
 | `combat-table-light.png`, `combat-table-dark.png` | Fixed-bottom **Persistent area** card | Consistent with the fuller V1 design but deferred beyond v0.01 ([checklist](../../pre-alpha-design-gaps.md#v001-combat-acceptance-checklist)). |
