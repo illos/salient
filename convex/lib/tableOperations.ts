@@ -1,3 +1,4 @@
+import { setManualCondition } from './conditionInstances';
 // SPDX-License-Identifier: GPL-3.0-only
 /**
  * A03 FreePlay operations, registered in convex/lib/registry.ts and reachable from the palette,
@@ -55,7 +56,6 @@ export { CONDITION_IDS, noConditions } from './characterBuild';
 import {
   baselineOf,
   CONDITION_IDS,
-  noConditions,
   requireBaseline,
   requireHeroLive,
   type HeroLive,
@@ -346,13 +346,20 @@ function conditionOperation(on: boolean): OperationDefinition {
         const character = await loadCharacter(ctx, context, actor!);
         const live = requireHeroLive(character);
         const before = live.conditions[name];
-        if (before === on)
+        if (on ? (live.manualConditions?.[name] ?? before) : !before)
           throw new ConvexError(
             `${character.authored.name} is already ${on ? '' : 'not '}${name}.`,
           );
         return {
           kind,
-          description: `${character.authored.name} is ${on ? 'now' : 'no longer'} ${name}.`,
+          description: `${character.authored.name} is ${on ? 'now' : 'no longer'} ${name}.${
+            !on
+              ? (live.conditionInstances ?? [])
+                  .filter(instance => instance.status === 'active' && instance.condition === name)
+                  .map(instance => ` Ended ${instance.actorLabel}: ${instance.abilityName}.`)
+                  .join('')
+              : ''
+          }`,
           data: {
             creature: { kind: 'character', id: character._id },
             condition: name,
@@ -360,28 +367,33 @@ function conditionOperation(on: boolean): OperationDefinition {
             after: on,
           },
           commit: async (mctx, scope) => {
-            await journalPatch(mctx, scope, 'characters', character._id, {
-              liveState: { ...live, conditions: { ...live.conditions, [name]: on } },
-            });
+            await setManualCondition(
+              mctx,
+              scope,
+              { kind: 'character', id: character._id },
+              name,
+              on,
+            );
           },
         };
       }
       const foe = await loadFoe(ctx, context, actor!);
       const before = foe.live.conditions?.[name] ?? false;
-      if (before === on)
+      if (on ? (foe.live.manualConditions?.[name] ?? before) : !before)
         throw new ConvexError(`${foe.name} is already ${on ? '' : 'not '}${name}.`);
       return {
         kind,
-        description: `${foe.name} is ${on ? 'now' : 'no longer'} ${name}.`,
+        description: `${foe.name} is ${on ? 'now' : 'no longer'} ${name}.${
+          !on
+            ? (foe.live.conditionInstances ?? [])
+                .filter(instance => instance.status === 'active' && instance.condition === name)
+                .map(instance => ` Ended ${instance.actorLabel}: ${instance.abilityName}.`)
+                .join('')
+            : ''
+        }`,
         data: { creature: { kind: 'foe', id: foe._id }, condition: name, before, after: on },
         commit: async (mctx, scope) => {
-          // Loaded foes have no toggle record; the first toggle records the all-off state first.
-          const conditions = foe.live.conditions ?? noConditions();
-          if (!foe.live.conditions)
-            await journalPatch(mctx, scope, 'foes', foe._id, { live: { ...foe.live, conditions } });
-          await journalPatch(mctx, scope, 'foes', foe._id, {
-            live: { ...foe.live, conditions: { ...conditions, [name]: on } },
-          });
+          await setManualCondition(mctx, scope, { kind: 'foe', id: foe._id }, name, on);
         },
       };
     },

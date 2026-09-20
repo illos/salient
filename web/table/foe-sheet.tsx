@@ -1,3 +1,4 @@
+import { ConditionSources, type ConditionSource } from '../condition-sources';
 // SPDX-License-Identifier: GPL-3.0-only
 /**
  * FoeSheet: the Director's live stat block for one foe, shown by the Foes roster drill-in
@@ -114,19 +115,24 @@ export function AdjustAction({
 export function ConditionBadges({
   conditions,
   readable = true,
+  instances,
 }: {
   conditions: Record<string, boolean>;
   readable?: boolean;
+  instances?: readonly ConditionSource[];
 }) {
   const active = CONDITION_NAMES.filter(c => conditions[c.id]);
   if (!active.length) return null;
   return (
     <span className="flex flex-wrap gap-1">
       {active.map(c => (
-        <Badge key={c.id} variant="outline">
-          {c.name}
-          {readable && <RuleLink id={`mcdm.heroes.v1/condition/${c.id}`} label={c.name} />}
-        </Badge>
+        <span key={c.id} className="flex flex-col gap-1">
+          <Badge variant="outline">
+            {c.name}
+            {readable && <RuleLink id={`mcdm.heroes.v1/condition/${c.id}`} label={c.name} />}
+          </Badge>
+          <ConditionSources condition={c.id} instances={instances} />
+        </span>
       ))}
     </span>
   );
@@ -304,7 +310,7 @@ export function FoeSheet({
       )}
       <div className="rule-soft flex flex-col gap-2 pb-3">
         <span className="caps text-muted-foreground">Conditions</span>
-        <ConditionBadges conditions={foe.conditions} />
+        <ConditionBadges conditions={foe.conditions} instances={foe.conditionInstances} />
         {running && (
           <ConditionControls campaignId={campaignId} actor={actor} conditions={foe.conditions} />
         )}

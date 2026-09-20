@@ -7,6 +7,8 @@
  * Extracted from the V64 audit without changing its recognition or reconciliation semantics.
  * Readers retain every roll block, unlike the legacy resolver's first-roll adapter.
  */
+import type { ConditionId } from '../contracts/liveState.ts';
+
 // ---------------------------------------------------------------------------------------------
 // Text normalization (copied from shared/resolve/index.ts plainText; display markup only).
 
@@ -407,6 +409,33 @@ export function damageExpression(
 const CONDITIONS =
   'bleeding|dazed|frightened|grabbed|prone|restrained|slowed|taunted|weakened|wet|marked|transformed';
 
+export type ConditionThreshold =
+  { kind: 'printed'; value: number } | { kind: 'potency'; tier: 'weak' | 'average' | 'strong' };
+
+/** Exact V88 post-damage clause. Position is checked by the enclosing tier reader. */
+export function conditionExpression(clause: string):
+  | {
+      characteristic: Characteristic;
+      threshold: ConditionThreshold;
+      condition: ConditionId;
+    }
+  | undefined {
+  const match =
+    /^([MARIP]) < (-?\d+|WEAK|AVERAGE|STRONG),? (bleeding|dazed|frightened|grabbed|prone|restrained|slowed|taunted|weakened) \(save ends\)$/.exec(
+      plain(clause),
+    );
+  if (!match) return undefined;
+  const value = Number(match[2]);
+  if (/^-?\d+$/.test(match[2]!) && !Number.isSafeInteger(value)) return undefined;
+  return {
+    characteristic: match[1] as Characteristic,
+    threshold: /^-?\d+$/.test(match[2]!)
+      ? { kind: 'printed', value }
+      : { kind: 'potency', tier: match[2]!.toLowerCase() as 'weak' | 'average' | 'strong' },
+    condition: match[3] as ConditionId,
+  };
+}
+
 /** Normalized clause-shape key: lowercase, dice → NdN, integers → N, symbolic potency → SYM. */
 export function shapeOf(text: string): string {
   return plain(text)
@@ -429,13 +458,14 @@ export function typeTierClause(
   clause: string,
   locator: string,
   afterDamage: boolean,
+  lastClause = true,
 ): Diagnostic | null {
   const text = plain(clause).replace(/\.$/, '').trim();
   const lower = text.toLowerCase();
   const potency = /^([MARIP]) < (-?\d+|WEAK|AVERAGE|STRONG),? (.+)$/.exec(text);
   if (potency) {
     const rest = potency[3]!;
-    const bounded = afterDamage && /^(bleeding|slowed) \(save ends\)$/.test(rest);
+    const bounded = afterDamage && lastClause && conditionExpression(clause) !== undefined;
     return {
       type: 'potency-condition',
       shape: potencyShape(potency[1]!, potency[2]!, rest),
@@ -600,7 +630,7 @@ export function classify(envelope: Envelope): Classification {
         ...(damage.damageType ? { damageType: damage.damageType } : {}),
       };
       clauses.slice(1).forEach((clause, i) => {
-        const d = typeTierClause(clause, locator, i === 0);
+        const d = typeTierClause(clause, locator, i === 0, clauses.length === 2);
         if (d) diagnostics.push(d);
         else node.push = Number(/\d+/.exec(clause)![0]);
       });
