@@ -4,7 +4,21 @@ Status: all twelve level-one ancestries are delivered through [V82](V82-remainin
 [V83 perk/kit actions](V83-supporting-actions.md) and [V84 culture presets](V84-culture-presets.md)
 were merged and verified through 31/31 API scenarios. [V85 complications](V85-complications.md)
 and [V86 starting rewards](V86-starting-rewards.md) are built on `slice/V85` and deployed to the
-hosted cloud demo as `86e9d2e`, but are not yet merged or fully accepted.
+hosted cloud demo as `86e9d2e`. Hosted acceptance now passes; main integration remains pending.
+
+## Latest acceptance return and ownership
+
+WIZARD.2 `f8b014d3-c9a7-4e97-828d-da1e5773e53c` replaces settled WIZARD. TESTER return 866
+passed all five remaining original scenarios on runner `331a5b9` against unchanged app `86e9d2e`.
+Together with the retained 30 successes, the combined manifest proves 35 distinct scenario names;
+this is not one successful 35/35 run. Preserve the original timeout evidence. See the
+[acceptance return](evidence/V85/README.md#acceptance-return--2026-09-20) and main evidence
+commit `7a8c156`, `docs/build/evidence/V85/tester-job-331a5b9.md`.
+
+No app changes or redeployment were needed. Main integration and shared CT114 delivery wait for
+FOES2's V87 integration slot. Preserve newer main instructions, squads, V87 reseed action and
+TESTER records when integrating this older branch. Subsequent verification belongs to TESTER.
+The pending acceptance statements below are retained checkpoint history, superseded by this return.
 
 ## Current source and running app
 
