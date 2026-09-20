@@ -1,0 +1,299 @@
+// SPDX-License-Identifier: GPL-3.0-only
+/** V26 pure evaluation. Results describe calculations, never persisted or spatial changes. */
+import type {
+  AbilityRollBlocked,
+  AbilityRollResult,
+  DamageApplication,
+  DamageBreakdown,
+  TierDamageText,
+} from '../contracts/rollResolution.ts';
+import type { CompiledAbility, CompiledNode, PushNode } from './compileAbility.ts';
+import { plainText, resolveAbilityRoll, type AbilityRollInput } from './index.ts';
+
+/** Absence is unknown. `none` asserts coverage of this category for forced movement. */
+export type MovementCoverage = { kind: 'none' } | { kind: 'unhandled'; labels: string[] };
+
+export interface MovementFacts {
+  kind?: 'creature' | 'object';
+  /** Bare `1` does not distinguish 1T, 1S, 1M and 1L. */
+  size?: string;
+  stability?: number;
+  conditions?: MovementCoverage;
+  traits?: MovementCoverage;
+  modifiers?: MovementCoverage;
+}
+
+export interface CompiledAbilityInput extends Omit<AbilityRollInput, 'ability'> {
+  movement?: {
+    actor: MovementFacts;
+    targets: (MovementFacts & { targetId: string })[];
+  };
+}
+
+interface EffectIdentity {
+  /** Structural node/target identity only; persistence must add use and revision identities. */
+  nodeId: string;
+  targetId: string;
+  locator: CompiledNode['locator'];
+  clause: string;
+}
+
+export interface CompiledDamageOutcome extends EffectIdentity {
+  kind: 'damage';
+  status: 'calculated' | 'fact-needed' | 'manual';
+  breakdown?: DamageBreakdown;
+  application?: DamageApplication;
+  requirements: string[];
+}
+
+export interface CompiledPushOutcome extends EffectIdentity {
+  kind: 'push';
+  status: 'instruction' | 'fact-needed' | 'manual';
+  after: string;
+  printed: number;
+  sizeBonus?: number;
+  subtotal?: number;
+  /** Allowance before optional stability reduction; never an executed distance. */
+  allowance?: number;
+  stability?: number;
+  stabilityReduction: 'optional';
+  requirements: string[];
+  manualReasons: string[];
+  instruction: string;
+  manualScope: string[];
+  rulePaths: string[];
+}
+
+export interface CompiledManualOutcome extends EffectIdentity {
+  kind: 'unsupported';
+  status: 'manual';
+  reason: string;
+  dependency: 'after-damage' | 'unknown';
+}
+
+export type CompiledEffectOutcome =
+  CompiledDamageOutcome | CompiledPushOutcome | CompiledManualOutcome;
+
+export type CompiledAbilityOutcome =
+  | { kind: 'manual'; definition: CompiledAbility; reason: string; effects: [] }
+  | { kind: 'blocked'; definition: CompiledAbility; roll: AbilityRollBlocked; effects: [] }
+  | {
+      kind: 'resolved';
+      definition: CompiledAbility;
+      roll: AbilityRollResult;
+      /** All targets' damage precedes any post-damage effect. */
+      effects: CompiledEffectOutcome[];
+    };
+
+/** Pinned rule.character/size: 1T < 1S < 1M < 1L < 2 < ...; ambiguous sizes stay unknown. */
+function sizeRank(size: string | undefined): number | undefined {
+  if (size === undefined) return undefined;
+  const small = ['1T', '1S', '1M', '1L'].indexOf(size);
+  if (small >= 0) return small;
+  if (!/^[2-9]\d*$|^1\d+$/.test(size)) return undefined;
+  const squares = Number(size);
+  return Number.isSafeInteger(squares) && squares <= Number.MAX_SAFE_INTEGER - 2
+    ? squares + 2
+    : undefined;
+}
+
+function pushOutcome(
+  node: PushNode,
+  targetId: string,
+  definition: CompiledAbility,
+  input: CompiledAbilityInput,
+  damageComplete: boolean,
+): CompiledPushOutcome {
+  const requirements: string[] = [];
+  const manualReasons: string[] = [];
+  const actor = input.movement?.actor;
+  const target = input.movement?.targets.find(f => f.targetId === targetId);
+  const keywords = definition.metadata!.keywords.map(k => plainText(k).toLowerCase());
+  const qualifies = keywords.includes('melee') && keywords.includes('weapon');
+  let sizeBonus: number | undefined;
+  if (!qualifies) sizeBonus = 0;
+  else {
+    if (!actor?.kind) requirements.push('actor.kind');
+    if (!target?.kind) requirements.push(`target:${targetId}.kind`);
+    if (actor?.kind && target?.kind) {
+      if (actor.kind === 'object' || target.kind === 'object') sizeBonus = 0;
+      else {
+        const actorSize = sizeRank(actor.size);
+        const targetSize = sizeRank(target.size);
+        if (actorSize === undefined) requirements.push('actor.preciseSize');
+        if (targetSize === undefined) requirements.push(`target:${targetId}.preciseSize`);
+        if (actorSize !== undefined && targetSize !== undefined)
+          sizeBonus = actorSize > targetSize ? 1 : 0;
+      }
+    }
+  }
+  for (const [label, facts] of [
+    ['actor', actor],
+    [`target:${targetId}`, target],
+  ] as const) {
+    for (const category of ['conditions', 'traits', 'modifiers'] as const) {
+      const coverage = facts?.[category];
+      if (!coverage) requirements.push(`${label}.${category}`);
+      else if (coverage.kind === 'unhandled')
+        manualReasons.push(`${label}.${category}: ${coverage.labels.join(', ') || 'unevaluated'}`);
+    }
+  }
+  const stability = target?.stability;
+  if (stability === undefined || !Number.isSafeInteger(stability) || stability < 0)
+    requirements.push(`target:${targetId}.stability`);
+  if (!damageComplete) requirements.push(`damage:${node.after}.completion`);
+  const subtotal = sizeBonus === undefined ? undefined : node.distance + sizeBonus;
+  const status = manualReasons.length
+    ? 'manual'
+    : requirements.length
+      ? 'fact-needed'
+      : 'instruction';
+  return {
+    kind: 'push',
+    nodeId: node.id,
+    targetId,
+    locator: node.locator,
+    clause: node.clause,
+    status,
+    after: node.after,
+    printed: node.distance,
+    ...(sizeBonus !== undefined ? { sizeBonus } : {}),
+    ...(subtotal !== undefined ? { subtotal } : {}),
+    ...(status === 'instruction' ? { allowance: subtotal } : {}),
+    ...(stability !== undefined && Number.isSafeInteger(stability) && stability >= 0
+      ? { stability }
+      : {}),
+    stabilityReduction: 'optional',
+    requirements,
+    manualReasons,
+    instruction:
+      'Ordinary push: up to the allowance, including zero, in a straight line away from the source; each square must be farther away. No route or destination is established.',
+    manualScope: [
+      'Actual movement and voluntary stability reduction',
+      'Flying, vertical and slope exceptions',
+      'Paths, terrain, collisions and movement triggers',
+      'Death effects after forced movement',
+    ],
+    rulePaths: [
+      'movement/forced-movement.md',
+      'rule/character/size.md',
+      'rule/character/stability.md',
+    ],
+  };
+}
+
+/** Reuse the R04 resolver for roll, cost, kit/build modifiers, immunities and Stamina arithmetic. */
+export function resolveCompiledAbility(
+  definition: CompiledAbility,
+  input: CompiledAbilityInput,
+): CompiledAbilityOutcome {
+  if (definition.execution !== 'supported' || !definition.metadata)
+    return {
+      kind: 'manual',
+      definition,
+      reason: 'Compiled envelope is not executable.',
+      effects: [],
+    };
+  if (input.targets.length !== 1)
+    return {
+      kind: 'manual',
+      definition,
+      reason: 'Compiled execution requires exactly one target.',
+      effects: [],
+    };
+  if (input.effectClauses?.length)
+    return {
+      kind: 'manual',
+      definition,
+      reason: 'Additional effects require compilation with the source envelope.',
+      effects: [],
+    };
+  if (
+    definition.format !== 'salient.compiled-ability' ||
+    definition.version !== 1 ||
+    definition.tiers.length !== 3 ||
+    definition.sections.length ||
+    definition.tiers.some(
+      nodes =>
+        nodes.filter(node => node.kind === 'damage').length !== 1 ||
+        nodes.some(node => node.kind === 'unsupported' && node.dependency !== 'after-damage') ||
+        nodes.some(
+          node =>
+            node.kind === 'damage' &&
+            node.kitBonusesIncluded !== definition.metadata!.kitBonusesIncluded,
+        ) ||
+        nodes.some(
+          node =>
+            node.kind === 'push' &&
+            (!Number.isSafeInteger(node.distance) ||
+              node.distance < 0 ||
+              node.distance >= Number.MAX_SAFE_INTEGER ||
+              !nodes.some(prior => prior.kind === 'damage' && prior.id === node.after)),
+        ),
+    )
+  )
+    return {
+      kind: 'manual',
+      definition,
+      reason: 'Compiled structure is outside the supported envelope.',
+      effects: [],
+    };
+  if (
+    [input.dice.d10a, input.dice.d10b].some(die => !Number.isInteger(die) || die < 1 || die > 10) ||
+    input.targets.some(target =>
+      [target.edges, target.banes].some(count => !Number.isSafeInteger(count) || count < 0),
+    )
+  )
+    throw new Error('Accepted dice and edge/bane counts must be valid integers.');
+  const tiers = definition.tiers.map(nodes => {
+    const damage = nodes.find(node => node.kind === 'damage')!;
+    if (damage.kind !== 'damage') throw new Error('Missing compiled damage node.');
+    return {
+      text: nodes.map(node => node.clause).join('; '),
+      damage: damage.expression,
+      ...(damage.damageType ? { damageType: damage.damageType } : {}),
+      unresolvedClauses: nodes.filter(node => node.kind === 'unsupported').map(node => node.clause),
+    };
+  }) as [TierDamageText, TierDamageText, TierDamageText];
+  const roll = resolveAbilityRoll({ ...input, ability: { ...definition.metadata, tiers } });
+  if (roll.kind === 'blocked') return { kind: 'blocked', definition, roll, effects: [] };
+  const effects: CompiledEffectOutcome[] = [];
+  const remainder: CompiledEffectOutcome[] = [];
+  for (const target of roll.targets) {
+    const nodes = definition.tiers[target.tier - 1]!;
+    const application = roll.damageApplications.find(a => a.targetId === target.targetId);
+    for (const node of nodes) {
+      const identity = {
+        nodeId: node.id,
+        targetId: target.targetId,
+        locator: node.locator,
+        clause: node.clause,
+      };
+      if (node.kind === 'damage') {
+        effects.push({
+          ...identity,
+          kind: 'damage',
+          status: application
+            ? 'calculated'
+            : target.damage?.uncertainty
+              ? 'manual'
+              : 'fact-needed',
+          ...(target.damage ? { breakdown: target.damage } : {}),
+          ...(application ? { application } : {}),
+          requirements: application ? [] : ['Supported damage and complete target damage facts'],
+        });
+      } else if (node.kind === 'push') {
+        remainder.push(pushOutcome(node, target.targetId, definition, input, !!application));
+      } else {
+        remainder.push({
+          ...identity,
+          kind: 'unsupported',
+          status: 'manual',
+          reason: node.reason,
+          dependency: node.dependency,
+        });
+      }
+    }
+  }
+  return { kind: 'resolved', definition, roll, effects: [...effects, ...remainder] };
+}

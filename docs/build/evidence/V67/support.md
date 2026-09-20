@@ -1,0 +1,1280 @@
+# V67 pure compiler support
+
+Pure compilation only; no live execution migrated. Minions remain compile-only.
+
+Source: `fb83a789da8f0327a389c277a0c790b1648d5810`; content: `sha256:64a08e925f76657409df983b706d2599edcb499457e9b21325d65ee7268c10d8`.
+
+| Population | Discovered | Pure supported | Manual |
+| --- | --- | --- | --- |
+| granted | 15 | 0 | 15 |
+| foe-ability | 1158 | 4 | 1154 |
+| hero-standalone | 52 | 6 | 46 |
+| kit-signature | 25 | 0 | 25 |
+| malice | 14 | 0 | 14 |
+
+| Ability | Population | Pure execution | Diagnostics |
+| --- | --- | --- | --- |
+| Corrupt Spirit | granted | manual | grammar, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary |
+| Draconian Pride | granted | manual | unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary |
+| Dragon Breath | granted | manual | unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary |
+| Motivate Earth | granted | manual | grammar, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary |
+| Share Head | granted | manual | grammar, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary |
+| Contact Spirits | granted | manual | grammar, unsafe-tier-remainder, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary |
+| Stone Eyes | granted | manual | unaccounted-paragraph, manual-section, compatibility-boundary |
+| Psychic Blast | granted | manual | grammar, unsafe-tier-remainder, source-title, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary |
+| Telekinetic Grasp | granted | manual | grammar, unsafe-tier-remainder, unaccounted-paragraph, manual-section, compatibility-boundary |
+| Issue Order | granted | manual | grammar, unaccounted-paragraph, manual-section, compatibility-boundary |
+| Posthumous Retirement | granted | manual | grammar, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary |
+| Rogue Wave | granted | manual | grammar, unsafe-tier-remainder, unaccounted-paragraph, manual-section, compatibility-boundary |
+| Rotting Fist | foe-ability | manual | unsafe-tier-remainder, target-boundary |
+| Stolen Vitality | foe-ability | manual | grammar, manual-section |
+| Decaying Touch | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Clobber and Clutch | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Heat Death | foe-ability | manual | manual-section, target-boundary |
+| Leap | foe-ability | manual | grammar, manual-section, target-boundary |
+| Paranormal Activity | foe-ability | manual | grammar, manual-section, target-boundary, action-type, cost |
+| Hidden Movement | foe-ability | manual | grammar, manual-section, target-boundary |
+| Bone Spur | foe-ability | manual | manual-section, target-boundary |
+| Bone Bow | foe-ability | manual | manual-section, target-boundary |
+| Soulstealer Longsword | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Chilling Grasp | foe-ability | manual | unsafe-tier-remainder |
+| Spirited Away | foe-ability | manual | grammar, unsafe-tier-remainder, manual-section, target-boundary, action-type, cost |
+| Awful Wail | foe-ability | manual | manual-section, target-boundary, action-type, cost |
+| Shriek | foe-ability | manual | grammar, manual-section, target-boundary |
+| Razor Claws | foe-ability | supported |  |
+| Zombie Dust | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Fingernails | foe-ability | manual | manual-section, target-boundary |
+| Freezing Dark | foe-ability | manual | manual-section, target-boundary |
+| Life Drain | foe-ability | manual | unsafe-tier-remainder, target-boundary |
+| Haunt | foe-ability | manual | grammar, manual-section, target-boundary |
+| Shadow Jump | foe-ability | manual | grammar, unaccounted-paragraph, manual-section, target-boundary |
+| Bone Shards | foe-ability | manual | manual-section |
+| Claw Dirt | hero-standalone | manual | grammar, unsafe-tier-remainder, target-boundary |
+| Dragon's Fire | hero-standalone | manual | grammar, target-boundary |
+| Escape Grab | hero-standalone | manual | grammar, unsafe-tier-remainder, source-block-mismatch, unaccounted-paragraph, manual-section, target-boundary |
+| Grab | hero-standalone | manual | grammar, unsafe-tier-remainder, source-block-mismatch, unaccounted-paragraph, manual-section |
+| Knockback | hero-standalone | manual | grammar, unsafe-tier-remainder, manual-section |
+| Melee Weapon Free Strike | hero-standalone | supported |  |
+| Ranged Weapon Free Strike | hero-standalone | supported |  |
+| Draconian Pride | hero-standalone | manual | target-boundary |
+| Dragon Breath | hero-standalone | manual | manual-section, target-boundary |
+| Afflict a Bountiful Decay | hero-standalone | manual | manual-section |
+| Behold the Mystery | hero-standalone | manual | manual-section, target-boundary |
+| Bifurcated Incineration | hero-standalone | manual | target-boundary |
+| Breath of Dawn Remembered | hero-standalone | manual | grammar, manual-section, target-boundary, action-type |
+| Conflagration | hero-standalone | manual | manual-section, target-boundary |
+| Explosive Assistance | hero-standalone | manual | grammar, manual-section, target-boundary, action-type |
+| Grasp of Beyond | hero-standalone | manual | manual-section |
+| Hurl Element | hero-standalone | manual | manual-section |
+| Instantaneous Excavation | hero-standalone | manual | grammar, unsafe-tier-remainder, manual-section, target-boundary |
+| Invigorating Growth | hero-standalone | manual | manual-section |
+| Meteoric Introduction | hero-standalone | supported |  |
+| Motivate Earth | hero-standalone | manual | grammar, source-block-mismatch, unaccounted-paragraph, manual-section, target-boundary |
+| No More Than a Breeze | hero-standalone | manual | grammar, manual-section, target-boundary |
+| Practical Magic | hero-standalone | manual | grammar, source-block-mismatch, unaccounted-paragraph, manual-section, target-boundary |
+| Ray of Agonizing Self-Reflection | hero-standalone | supported |  |
+| Return to Formlessness | hero-standalone | manual | grammar, manual-section, target-boundary |
+| Ripples in the Earth | hero-standalone | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Shared Void Sense | hero-standalone | manual | grammar, manual-section, target-boundary |
+| Skin Like Castle Walls | hero-standalone | manual | grammar, manual-section, target-boundary, action-type |
+| Subtle Relocation | hero-standalone | manual | grammar, manual-section, target-boundary, action-type |
+| Test of Rain | hero-standalone | manual | manual-section, target-boundary |
+| The Flesh, a Crucible | hero-standalone | manual | manual-section |
+| The Green Within, the Green Without | hero-standalone | manual | manual-section |
+| Unquiet Ground | hero-standalone | manual | manual-section, target-boundary |
+| Viscous Fire | hero-standalone | supported |  |
+| Back! | hero-standalone | manual | target-boundary |
+| Blood for Blood! | hero-standalone | manual | unsafe-tier-remainder, manual-section |
+| Brutal Slam | hero-standalone | supported |  |
+| Furious Change | hero-standalone | manual | grammar, manual-section, target-boundary, action-type |
+| Hit and Run | hero-standalone | manual | manual-section |
+| Impaled! | hero-standalone | manual | unsafe-tier-remainder, target-boundary |
+| Lines of Force | hero-standalone | manual | grammar, manual-section, target-boundary, action-type |
+| Make Peace With Your God! | hero-standalone | manual | grammar, manual-section, target-boundary |
+| Out of the Way! | hero-standalone | manual | unsafe-tier-remainder, manual-section |
+| Thunder Roar | hero-standalone | manual | manual-section, target-boundary |
+| Tide of Death | hero-standalone | manual | manual-section, target-boundary |
+| To the Death! | hero-standalone | manual | manual-section |
+| To the Uttermost End | hero-standalone | manual | manual-section |
+| Unearthly Reflexes | hero-standalone | manual | grammar, manual-section, target-boundary, action-type |
+| Your Entrails Are Your Extrails! | hero-standalone | manual | manual-section |
+| Special Delivery | hero-standalone | manual | grammar, manual-section, target-boundary |
+| Wrecking Ball | hero-standalone | manual | grammar, unsafe-tier-remainder, source-block-mismatch, unaccounted-paragraph, manual-section, target-boundary |
+| Shadowmeld | hero-standalone | manual | grammar, source-block-mismatch, unaccounted-paragraph, manual-section, target-boundary |
+| Exploding Arrow | kit-signature | manual | grammar, unsafe-tier-remainder, unaccounted-paragraph, manual-section, compatibility-boundary |
+| Unmooring | kit-signature | manual | grammar, unsafe-tier-remainder, unaccounted-paragraph, manual-section, compatibility-boundary |
+| Bear Claws | kit-signature | manual | unsafe-tier-remainder, unaccounted-paragraph, manual-section, compatibility-boundary |
+| Fade | kit-signature | manual | unsafe-tier-remainder, unaccounted-paragraph, manual-section, compatibility-boundary |
+| Wing Buffet | kit-signature | manual | unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary |
+| Double Strike | kit-signature | manual | unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary |
+| Forward Thrust, Backward Smash | kit-signature | manual | unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary |
+| Battle Grace | kit-signature | manual | unsafe-tier-remainder, unaccounted-paragraph, manual-section, compatibility-boundary |
+| Pain for Pain | kit-signature | manual | unaccounted-paragraph, manual-section, compatibility-boundary |
+| Devastating Rush | kit-signature | manual | unaccounted-paragraph, manual-section, compatibility-boundary |
+| Let's Dance | kit-signature | manual | unsafe-tier-remainder, unaccounted-paragraph, manual-section, compatibility-boundary |
+| Driving Pounce | kit-signature | manual | unaccounted-paragraph, manual-section, compatibility-boundary |
+| Raider's Awe | kit-signature | manual | unaccounted-paragraph, manual-section, compatibility-boundary |
+| Hamstring Shot | kit-signature | manual | unaccounted-paragraph, manual-section, compatibility-boundary |
+| Two Shot | kit-signature | manual | unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary |
+| Net and Stab | kit-signature | manual | unsafe-tier-remainder, unaccounted-paragraph, manual-section, compatibility-boundary |
+| Protective Attack | kit-signature | manual | unaccounted-paragraph, manual-section, compatibility-boundary |
+| Patient Shot | kit-signature | manual | unaccounted-paragraph, manual-section, compatibility-boundary |
+| Leaping Lightning | kit-signature | manual | grammar, unsafe-tier-remainder, unaccounted-paragraph, manual-section, compatibility-boundary |
+| Where I Want You | kit-signature | manual | unsafe-tier-remainder, unaccounted-paragraph, manual-section, compatibility-boundary |
+| Fancy Footwork | kit-signature | manual | unaccounted-paragraph, manual-section, compatibility-boundary |
+| Shield Bash | kit-signature | manual | unsafe-tier-remainder, unaccounted-paragraph, manual-section, compatibility-boundary |
+| Unbalancing Attack | kit-signature | manual | unsafe-tier-remainder, unaccounted-paragraph, manual-section, compatibility-boundary |
+| Weakening Brand | kit-signature | manual | grammar, unsafe-tier-remainder, unaccounted-paragraph, manual-section, compatibility-boundary |
+| Extension of My Arm | kit-signature | manual | unsafe-tier-remainder, unaccounted-paragraph, manual-section, compatibility-boundary |
+| Arcane Trick | granted | manual | grammar, source-header, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary, action-type |
+| Invisible Force | granted | manual | grammar, source-header, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary, action-type |
+| Psychic Whisper | granted | manual | grammar, source-header, unaccounted-paragraph, manual-section, target-boundary, compatibility-boundary, action-type |
+| Shadow Chains | foe-ability | manual | unsafe-tier-remainder, target-boundary |
+| Portal to the Void | foe-ability | manual | grammar, unsafe-tier-remainder, manual-section, target-boundary |
+| Drill Press | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Bull Rush | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Maul | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Lightning Strike | foe-ability | manual | manual-section, target-boundary |
+| Syringe Crossbow | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Heartstopper | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Snapjaw | foe-ability | manual | unsafe-tier-remainder, target-boundary |
+| Covetous Bolts | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| The Silver Wolf's Final Stratagem | foe-ability | manual | grammar, manual-section, target-boundary, action-type, cost |
+| Manifold Blade | foe-ability | manual | manual-section, target-boundary |
+| Executioner's Swing | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Fairness Is a Human Concept | foe-ability | manual | grammar, manual-section, target-boundary |
+| Trundle | foe-ability | manual | grammar, manual-section, target-boundary |
+| Floor to Flesh | foe-ability | manual | grammar, unsafe-tier-remainder, manual-section, target-boundary |
+| Dissolve | foe-ability | manual | grammar, manual-section, target-boundary |
+| Gore | foe-ability | manual | target-boundary |
+| Hollow Grasp | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Stun | foe-ability | manual | unsafe-tier-remainder |
+| Food Frenzy | foe-ability | manual | grammar, manual-section, target-boundary |
+| Build Wall | foe-ability | manual | grammar, manual-section, target-boundary |
+| Stone Bone Storm | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Razor's Edge | foe-ability | manual | manual-section |
+| Dagger's Bite | foe-ability | manual | grammar |
+| Heartpiercer | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Bolt Launcher | foe-ability | manual | manual-section, target-boundary |
+| Daggers | foe-ability | manual | target-boundary |
+| Envenomed Steel | foe-ability | manual | grammar, manual-section, target-boundary |
+| Choking Grasp | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Tumbling Gore | foe-ability | manual | unsafe-tier-remainder, target-boundary |
+| Bound Ahead | foe-ability | manual | grammar, manual-section, target-boundary |
+| Catcher | foe-ability | manual | grammar, manual-section, target-boundary |
+| Intercepting Shield | foe-ability | manual | grammar, manual-section, target-boundary |
+| Parting Gift | foe-ability | manual | grammar, manual-section, target-boundary |
+| Erupt | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Bone Dozer | foe-ability | manual | grammar, manual-section, target-boundary |
+| Crescent Sweep | foe-ability | manual | manual-section |
+| Quick Shield | foe-ability | manual | grammar, manual-section, target-boundary |
+| Chop | foe-ability | manual | grammar, source-title, manual-section |
+| Golden Sickles | foe-ability | manual | manual-section |
+| Imbue with Might | foe-ability | manual | grammar, manual-section, target-boundary |
+| Overture | foe-ability | manual | grammar, manual-section, target-boundary, action-type, cost |
+| Writhing Envelopment | malice | manual | unsafe-tier-remainder, manual-section, target-boundary, compatibility-boundary |
+| Snaring Crossbow | foe-ability | manual | manual-section |
+| Laser Lancet | foe-ability | manual | grammar, extra-roll-or-tiers, source-block-count, source-block-mismatch, unaccounted-paragraph, manual-section |
+| Whistling Axes | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Chill of Death | foe-ability | manual | grammar, unsafe-tier-remainder |
+| Watch Your Six! | foe-ability | manual | grammar, manual-section |
+| Glaive Rush | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Ready Rodent | foe-ability | manual | grammar, manual-section |
+| Thunder of Heavens | foe-ability | manual | manual-section, target-boundary |
+| Put It Out! | foe-ability | manual | grammar, manual-section, target-boundary |
+| Trick of the Eye | foe-ability | manual | grammar, manual-section |
+| Draining Rake | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Verdant Rains | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Mind Jolt | foe-ability | manual | target-boundary |
+| Bite | foe-ability | manual | manual-section, target-boundary |
+| Soul Burn | foe-ability | manual | grammar, unsafe-tier-remainder, manual-section, target-boundary |
+| Crestfall | foe-ability | manual | grammar, unsafe-tier-remainder, target-boundary |
+| Gatling Bolt Gun | foe-ability | manual | target-boundary |
+| Firetail Pilum | foe-ability | manual | grammar, source-header, manual-section, target-boundary, action-type, cost |
+| Tongue Slap | foe-ability | manual | grammar, manual-section |
+| Twist Shape | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Scaleshatter Burst | malice | manual | manual-section, target-boundary, compatibility-boundary |
+| Enveloping Umbrage | foe-ability | manual | grammar, unsafe-tier-remainder, target-boundary, action-type, cost |
+| My Power Alone | foe-ability | manual | grammar, manual-section, target-boundary, action-type, cost |
+| You Come With Me | foe-ability | manual | grammar, unaccounted-paragraph, manual-section, target-boundary |
+| Flail and Blade | foe-ability | manual | manual-section, target-boundary |
+| Hrraaaaaagh! | foe-ability | manual | grammar, manual-section, target-boundary |
+| Instill Regret | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Rejuvenation | foe-ability | manual | grammar, extra-roll-or-tiers, source-block-count, source-block-mismatch, source-header, unaccounted-paragraph, manual-section, target-boundary, action-type |
+| Natural Weapon | foe-ability | manual | unsafe-tier-remainder, target-boundary |
+| Resonate Rune | foe-ability | manual | grammar, manual-section, target-boundary |
+| Gift From an Accursed Tome | malice | manual | unsafe-tier-remainder, manual-section, target-boundary, compatibility-boundary |
+| Activate Trap | foe-ability | manual | grammar, manual-section, target-boundary |
+| Mind Blown | foe-ability | manual | manual-section, target-boundary |
+| Portable Ballista | foe-ability | manual | manual-section |
+| Unload Rocks | foe-ability | manual | grammar, extra-roll-or-tiers, unaccounted-paragraph, manual-section, target-boundary |
+| Mindpunk | foe-ability | manual | unsafe-tier-remainder, target-boundary |
+| Blazing Leap | foe-ability | manual | grammar, manual-section, target-boundary |
+| Burning Kick | foe-ability | manual | unsafe-tier-remainder, target-boundary |
+| Back! | foe-ability | manual | grammar, manual-section, target-boundary, action-type, cost |
+| Convocation of Waves | foe-ability | manual | grammar, manual-section, target-boundary |
+| Agonizing Harmony | foe-ability | manual | manual-section, target-boundary |
+| Feast | foe-ability | manual | grammar, manual-section, target-boundary |
+| Malign Thicket | foe-ability | manual | grammar, source-header, manual-section, target-boundary, action-type, cost |
+| Fuse-Iron Knives | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Debilitating Poison | foe-ability | manual | grammar, source-header, manual-section, target-boundary, action-type, cost |
+| Posthumous Promotion | foe-ability | manual | grammar, manual-section, target-boundary |
+| Overcharge | foe-ability | manual | grammar, manual-section, target-boundary |
+| The Writhing Green | foe-ability | manual | unsafe-tier-remainder, target-boundary |
+| Crack the Earth | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Stoneshift | foe-ability | manual | grammar, manual-section, target-boundary |
+| Break Armor | foe-ability | manual | grammar, manual-section, target-boundary |
+| Command the Awakened | foe-ability | manual | grammar, manual-section, target-boundary |
+| Shadow Veil | foe-ability | manual | grammar, manual-section, target-boundary |
+| Ready Rodent | foe-ability | manual | grammar, manual-section |
+| Aetherweb | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Surging Power | foe-ability | manual | grammar, manual-section, target-boundary |
+| Windwalk | foe-ability | manual | grammar, manual-section, target-boundary |
+| Corrupted Ash Daggers | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Barb Launch | foe-ability | manual | manual-section, target-boundary |
+| Dive | foe-ability | manual | grammar, manual-section, target-boundary |
+| What Are You Waiting For? | foe-ability | manual | grammar, manual-section, target-boundary, action-type, cost |
+| Dual Targeting Shot | foe-ability | manual | manual-section, target-boundary |
+| Halberd | foe-ability | manual | manual-section, target-boundary |
+| Rise, My Minions | foe-ability | manual | grammar, manual-section, target-boundary, cost |
+| Retaliatory Strike | foe-ability | manual | grammar, manual-section, target-boundary |
+| Detonation | foe-ability | manual | grammar, manual-section, target-boundary |
+| The Voice | foe-ability | manual | grammar, manual-section, target-boundary |
+| Prickly Situation | foe-ability | manual | grammar, manual-section, target-boundary |
+| Glare of the Old Judgments | foe-ability | manual | grammar, unsafe-tier-remainder, manual-section |
+| Mug and Tear | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Ambuscade | foe-ability | manual | manual-section, target-boundary |
+| Absence of All Light | foe-ability | manual | grammar, source-header, manual-section, target-boundary, action-type, cost |
+| Horrible Bellow | foe-ability | manual | grammar, unsafe-tier-remainder, manual-section, target-boundary |
+| Wrecking Ball | foe-ability | manual | grammar, extra-roll-or-tiers, manual-section, target-boundary |
+| Convocation of Quartz | foe-ability | manual | grammar, manual-section, target-boundary |
+| Growing Longsword | foe-ability | manual | manual-section |
+| Repelling Psihander | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Posthumous Promotion | foe-ability | manual | grammar, manual-section, target-boundary |
+| No Matter the Cost | foe-ability | manual | manual-section, target-boundary, action-type, cost |
+| Plaguecaster | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| You Ain't Getting Away | foe-ability | manual | grammar, extra-roll-or-tiers, manual-section, target-boundary |
+| Blight Rain | foe-ability | manual | grammar, manual-section, target-boundary |
+| Panoptibeam | foe-ability | manual | grammar, manual-section, target-boundary, action-type, cost |
+| So Long and Goodnight | foe-ability | manual | grammar, manual-section, target-boundary, action-type, cost |
+| From the Shadows | foe-ability | manual | grammar, manual-section, target-boundary, action-type, cost |
+| Disarrange Thoughts | foe-ability | manual | unsafe-tier-remainder |
+| The Thriving Wilds | foe-ability | manual | unsafe-tier-remainder, target-boundary |
+| Burning Legion | foe-ability | manual | grammar, manual-section, target-boundary |
+| Bear Hug | foe-ability | manual | grammar, manual-section |
+| Noxious Bubble | foe-ability | manual | grammar, extra-roll-or-tiers, manual-section, target-boundary |
+| Phantom Pain | foe-ability | manual | grammar, manual-section, target-boundary, action-type, cost |
+| Stinging Ovipositor | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| The Depths Hunger | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Voracious Mastication | foe-ability | manual | manual-section, target-boundary |
+| Swat the Fly | foe-ability | manual | grammar, manual-section, target-boundary |
+| Blade Rake | foe-ability | manual | unsafe-tier-remainder, target-boundary |
+| Bilious Expulsion | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Concussive Shockwave | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Overgrowth | foe-ability | manual | grammar, manual-section, target-boundary |
+| Catcher | foe-ability | manual | grammar, manual-section, target-boundary |
+| Retaliatory Dive | foe-ability | manual | grammar, manual-section, target-boundary |
+| Sanguine Stimulants | foe-ability | manual | grammar, manual-section, target-boundary |
+| Poison Blow Dart | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Disemboweling Horns | foe-ability | manual | manual-section |
+| No. | foe-ability | manual | grammar, manual-section, target-boundary |
+| Psionic Slam | foe-ability | manual | grammar, unsafe-tier-remainder, manual-section |
+| Grasping Tendons | foe-ability | manual | grammar, manual-section, target-boundary |
+| Agonizing Stinger | foe-ability | manual | manual-section, target-boundary |
+| Despair Bolt | foe-ability | manual | manual-section, target-boundary |
+| Flame Jet | foe-ability | manual | grammar, manual-section, target-boundary |
+| The Earth Devours | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Adjudicator's Interdiction | foe-ability | manual | grammar, extra-roll-or-tiers, manual-section |
+| Houndcannon | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Gladius | foe-ability | manual | grammar, unsafe-tier-remainder |
+| Conductor of Combat | foe-ability | manual | grammar, manual-section, target-boundary, action-type, cost |
+| Death Blossom | foe-ability | manual | grammar, manual-section, target-boundary |
+| Haymaker Greataxe | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Kinetic Danse | foe-ability | manual | unsafe-tier-remainder, target-boundary |
+| Siegeworks | foe-ability | manual | grammar, manual-section, target-boundary |
+| Edacity | foe-ability | manual | grammar, manual-section, target-boundary, action-type, cost |
+| Air Raid! | foe-ability | manual | grammar, manual-section, target-boundary |
+| Invigorated March | foe-ability | manual | grammar, manual-section, target-boundary |
+| Thunderclap | foe-ability | manual | grammar, manual-section, target-boundary |
+| Ssstop and Lisssten | malice | manual | grammar, unsafe-tier-remainder, manual-section, target-boundary, compatibility-boundary |
+| Animal Rally | foe-ability | manual | grammar, manual-section |
+| Harrying Claws | foe-ability | manual | grammar, unsafe-tier-remainder, target-boundary |
+| Petrifying Eye Beams | foe-ability | manual | grammar, unsafe-tier-remainder, manual-section, target-boundary |
+| Flyby Bite | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Swamp Gas | foe-ability | manual | grammar, manual-section, target-boundary |
+| Justice Turns Its Gaze | foe-ability | manual | grammar, manual-section, target-boundary |
+| Concussive Bolts | foe-ability | manual | manual-section |
+| Concentrate All Fire on That Hero! | foe-ability | manual | grammar, manual-section |
+| Split Space | foe-ability | manual | grammar, manual-section, target-boundary |
+| Command Saber | foe-ability | manual | manual-section |
+| Telekinetic Beam | foe-ability | manual | unsafe-tier-remainder, target-boundary |
+| Natural Weapon | foe-ability | manual | target-boundary |
+| Eyes-On-Me-Shot | foe-ability | manual | manual-section, target-boundary |
+| Dissipate | foe-ability | manual | grammar, manual-section, target-boundary |
+| Heavy Arrow | foe-ability | manual | manual-section, target-boundary |
+| Cages of Wasting | foe-ability | manual | grammar, extra-roll-or-tiers, manual-section, target-boundary, action-type, cost |
+| Power Wing Buffet | foe-ability | manual | grammar, unsafe-tier-remainder, target-boundary |
+| Jumplance | foe-ability | manual | target-boundary |
+| Steely Skewer | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Throw | foe-ability | manual | grammar, manual-section |
+| Emergency Beacon | foe-ability | manual | grammar, manual-section, target-boundary |
+| Reverberating Blast | foe-ability | manual | unsafe-tier-remainder, target-boundary |
+| Tonguelash | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Swat the Fly | foe-ability | manual | grammar, manual-section, target-boundary |
+| Reactive Charm | foe-ability | manual | grammar, manual-section |
+| Whiptail | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Ready Rodent | foe-ability | manual | grammar, manual-section |
+| Eye Flash | foe-ability | manual | unsafe-tier-remainder |
+| Maw | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Wilting Visions | foe-ability | manual | manual-section |
+| Ruinous Temptation | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Cower! | foe-ability | manual | grammar, manual-section, target-boundary |
+| Pneumatic Punch | foe-ability | manual | target-boundary |
+| Psionic Rifle Burst | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Axe | foe-ability | manual | target-boundary |
+| Combined Arms | foe-ability | manual | grammar, manual-section, target-boundary, action-type, cost |
+| Boom Pilum! | foe-ability | manual | grammar, manual-section, target-boundary, action-type, cost |
+| Accursed Bite | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Petrify | foe-ability | manual | grammar, unsafe-tier-remainder, manual-section, target-boundary |
+| Magnetic Pull | foe-ability | manual | grammar, manual-section, target-boundary |
+| Chain Hook | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Deterring Sting | foe-ability | manual | grammar, manual-section, target-boundary |
+| Vivace Vivace! | foe-ability | manual | grammar, manual-section, target-boundary |
+| Castle Stone Shape | foe-ability | manual | grammar, manual-section, target-boundary |
+| Emergent Horrors | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Ready to Strike | foe-ability | manual | grammar, manual-section, target-boundary |
+| Chief's Command | foe-ability | manual | grammar, manual-section |
+| Control Synapses | foe-ability | manual | manual-section, target-boundary |
+| Armor-Piercing Shell | foe-ability | manual | grammar, manual-section |
+| You Next! | foe-ability | manual | grammar, manual-section |
+| Cry Havoc | malice | manual | unsafe-tier-remainder, manual-section, target-boundary, compatibility-boundary |
+| Bonesplitter's Cackletongue | foe-ability | manual | grammar, manual-section, target-boundary |
+| Lightning Beam | foe-ability | manual | manual-section, target-boundary |
+| Corpse Bomb | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Subdermal Shielding | foe-ability | manual | grammar, source-header, manual-section, target-boundary, action-type, cost |
+| Wode Sickness | foe-ability | manual | grammar, manual-section |
+| Expanding Doom | foe-ability | manual | grammar, manual-section, target-boundary |
+| A Hero Faces the Void | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Soulstorm | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Snackies for Sweeties | foe-ability | manual | extra-roll-or-tiers, manual-section, target-boundary, action-type, cost |
+| Fireball Volley | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Howl | foe-ability | manual | grammar, extra-roll-or-tiers, manual-section, target-boundary, action-type, cost |
+| Rotten Kick | foe-ability | manual | target-boundary |
+| Let Us Feast! | foe-ability | manual | grammar, manual-section, target-boundary, action-type, cost |
+| Tail Spike | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Ready Rodent | foe-ability | manual | grammar, manual-section |
+| Toxic Winds | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| In Our Sights | foe-ability | manual | grammar, manual-section |
+| Lash Out | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Erupt | foe-ability | manual | grammar, extra-roll-or-tiers, unaccounted-paragraph, manual-section, target-boundary |
+| Step and Swap | foe-ability | manual | grammar, manual-section |
+| Thermodynamic Flight | foe-ability | manual | grammar, manual-section, target-boundary |
+| Nimble Escape | foe-ability | manual | grammar, manual-section, target-boundary |
+| Wizard Ripper | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Thorny Scales | foe-ability | manual | grammar, manual-section, target-boundary |
+| For the Queen! | foe-ability | manual | grammar, manual-section, target-boundary |
+| Get Them, You Dolts! | foe-ability | manual | grammar, manual-section, target-boundary, cost |
+| Crush Underfoot | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Ripping Claws | foe-ability | manual | unsafe-tier-remainder, target-boundary |
+| Posthumous Promotion | foe-ability | manual | grammar, manual-section, target-boundary |
+| New Dawn | foe-ability | manual | grammar, manual-section, target-boundary, action-type, cost |
+| I'll Do This Myself | foe-ability | manual | grammar, source-header, manual-section, target-boundary, action-type, cost |
+| Hostile Acquisition | foe-ability | manual | grammar, manual-section, target-boundary, action-type, cost |
+| Thorned Armor | foe-ability | manual | grammar, source-header, manual-section, target-boundary, action-type, cost |
+| Houndblade | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Fires of Dracul | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary, action-type, cost |
+| Three-Tail Flail | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Noxious Bite | foe-ability | manual | manual-section, target-boundary |
+| Rapier and Dagger | foe-ability | manual | manual-section |
+| Flower of Frost | foe-ability | manual | grammar, extra-roll-or-tiers, manual-section, target-boundary |
+| Leaping Fury | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Where I End the Woods Begin | foe-ability | manual | grammar, manual-section, target-boundary |
+| Tooth! Tusk! Claw! | foe-ability | manual | manual-section |
+| Thunderous Slam | foe-ability | manual | manual-section, target-boundary |
+| Summer's Bolt | foe-ability | manual | grammar, manual-section |
+| Megaquake | malice | manual | unsafe-tier-remainder, manual-section, target-boundary, compatibility-boundary |
+| Posthumous Promotion | foe-ability | manual | grammar, manual-section, target-boundary |
+| Dirt Devil | foe-ability | manual | manual-section, target-boundary |
+| Smoke Bomb | foe-ability | manual | grammar, extra-roll-or-tiers, manual-section, target-boundary |
+| Buckler Bash | foe-ability | manual | unsafe-tier-remainder, target-boundary |
+| Burning Oil | foe-ability | manual | grammar, extra-roll-or-tiers, unaccounted-paragraph, manual-section, target-boundary |
+| Grasping Jaws | foe-ability | manual | unsafe-tier-remainder |
+| And the Sun Forsook Her Children | foe-ability | manual | grammar, extra-roll-or-tiers, manual-section, target-boundary, action-type, cost |
+| Prehensile Tongue | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Crossbow | foe-ability | manual | target-boundary |
+| Ashes to Ashes | foe-ability | manual | grammar, manual-section |
+| Wax Fling | foe-ability | manual | manual-section |
+| Frozen Retribution | foe-ability | manual | grammar, manual-section, target-boundary |
+| Claw Swipes | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Daggers | foe-ability | manual | manual-section, target-boundary |
+| Briar Bindings | foe-ability | manual | unsafe-tier-remainder, target-boundary, action-type, cost |
+| Lugged Spear | foe-ability | manual | manual-section, target-boundary |
+| Summon Elemental | foe-ability | manual | grammar, manual-section, target-boundary |
+| Devilish Charm | foe-ability | manual | grammar, extra-roll-or-tiers, manual-section, target-boundary |
+| Buzz Off! | foe-ability | manual | grammar, unsafe-tier-remainder, manual-section, target-boundary, action-type, cost |
+| Tile Slide | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Tactical Reposition | foe-ability | manual | grammar, manual-section, target-boundary |
+| Claw Swing | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Soul Sword | foe-ability | manual | manual-section, target-boundary |
+| Elemental Charge | foe-ability | manual | unsafe-tier-remainder |
+| Ripper Shrikegun | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Incapacitate | foe-ability | manual | unsafe-tier-remainder, target-boundary |
+| The World Consumes | foe-ability | manual | grammar, manual-section, target-boundary |
+| Soul Prism | foe-ability | manual | unsafe-tier-remainder, target-boundary |
+| Bloodshot | foe-ability | manual | unsafe-tier-remainder |
+| Vicious Pursuit | foe-ability | manual | manual-section |
+| Tongue Grab | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Soul Stinger | foe-ability | manual | unsafe-tier-remainder, target-boundary |
+| Stomp | foe-ability | manual | manual-section, target-boundary |
+| Claim Them for the Body Banks | foe-ability | manual | grammar, manual-section, target-boundary, action-type, cost |
+| Quick Blast | foe-ability | manual | manual-section |
+| Wild Ax | foe-ability | manual | manual-section |
+| Razor Bite | foe-ability | manual | manual-section |
+| Levitating Axes | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Phantom Tail Swing | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Ever-Ready Rodent | foe-ability | manual | grammar, manual-section, target-boundary |
+| Posthumous Promotion | foe-ability | manual | grammar, manual-section, target-boundary |
+| Deaden | foe-ability | manual | unsafe-tier-remainder |
+| Sinkhole | foe-ability | manual | grammar, source-header, manual-section, target-boundary, action-type, cost |
+| Shieldbreaker Talisman | foe-ability | manual | grammar, manual-section, target-boundary |
+| Neurotoxin Splash | foe-ability | manual | grammar, manual-section, target-boundary |
+| Grasping Shadow | foe-ability | manual | grammar, manual-section, target-boundary |
+| Reel Them In | foe-ability | manual | grammar, manual-section, target-boundary |
+| Bloodletting Claws | foe-ability | manual | target-boundary |
+| Sunderbuss | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Earth Pillar | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Houndgun and Houndblade | foe-ability | manual | manual-section, target-boundary |
+| Portal to the Sky | foe-ability | manual | grammar, manual-section |
+| Troll Roar | foe-ability | manual | grammar, unsafe-tier-remainder, target-boundary, cost |
+| Composting | foe-ability | manual | grammar, manual-section, target-boundary, action-type, cost |
+| Greatsword and Roar | foe-ability | manual | grammar, unsafe-tier-remainder, manual-section, target-boundary |
+| Bladestorm | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Umbral Hunger | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary, action-type, cost |
+| Elemental Discharge | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Leapfrog | foe-ability | manual | grammar, source-title, manual-section |
+| Leech | foe-ability | manual | grammar, manual-section, target-boundary |
+| En Garde | foe-ability | manual | manual-section, target-boundary |
+| You Activated My Trap! | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Acidic Stun | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Don't Turn Away | foe-ability | manual | grammar, manual-section, target-boundary |
+| Turn Green | foe-ability | manual | grammar, unsafe-tier-remainder, manual-section, target-boundary, action-type, cost |
+| Rune-Signed Blade | foe-ability | manual | manual-section, target-boundary |
+| Cacophony | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Sprint | foe-ability | manual | grammar, manual-section, target-boundary |
+| Rondo of Rat | foe-ability | manual | grammar, manual-section, target-boundary, action-type, cost |
+| Ensnarer Cannon | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Baleful Swap | foe-ability | manual | grammar, manual-section |
+| Greedy Hands | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Barbed Tongues | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Carnage's Cackletongue | foe-ability | manual | grammar, manual-section, target-boundary |
+| Exsanguinating Bite | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Fuse-Iron Rocket | foe-ability | manual | manual-section, target-boundary |
+| Make an Example of Them | foe-ability | manual | grammar, manual-section, action-type, cost |
+| Safeguard | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Flaming Punch | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Skeletal Eruption | foe-ability | manual | grammar, unsafe-tier-remainder, manual-section, target-boundary, action-type, cost |
+| Soul Flay | foe-ability | manual | manual-section, target-boundary |
+| Hag Wyrd | malice | manual | unsafe-tier-remainder, manual-section, target-boundary, compatibility-boundary |
+| Mass Petrify | foe-ability | manual | grammar, manual-section, target-boundary, action-type, cost |
+| Posthumous Promotion | foe-ability | manual | grammar, manual-section, target-boundary |
+| Blood For Blood | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Convocation of Squalls | foe-ability | manual | grammar, manual-section, target-boundary |
+| Gloom Dagger | foe-ability | manual | grammar, manual-section |
+| Jaws of the Void | foe-ability | manual | grammar, manual-section, target-boundary |
+| Burning Legion | foe-ability | manual | grammar, manual-section, target-boundary, action-type, cost |
+| Spear Charge | foe-ability | supported |  |
+| Oozing Transformation | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Roughed Up | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Artillery Enfilade | foe-ability | manual | manual-section, target-boundary |
+| I'm Not a Steed, You're Equipment | foe-ability | manual | grammar, manual-section, target-boundary, cost |
+| Tail Whip | foe-ability | manual | unsafe-tier-remainder, target-boundary |
+| Valiar Axe | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Corrosive Blade | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Blizzard Surge | foe-ability | manual | grammar, manual-section, target-boundary |
+| Grim Thrust | foe-ability | manual | manual-section, target-boundary |
+| Override | foe-ability | manual | manual-section, target-boundary |
+| Pilum | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Hammer and Anvil | foe-ability | manual | grammar, manual-section, target-boundary |
+| Swooping Torment | foe-ability | manual | grammar, manual-section, target-boundary |
+| The Wode Protects Us | foe-ability | manual | grammar, manual-section, target-boundary |
+| Shrikegun Shot | foe-ability | manual | manual-section, target-boundary |
+| Fiery Claws | foe-ability | manual | manual-section, target-boundary |
+| Fire Flail | foe-ability | manual | manual-section, target-boundary |
+| Lumber | foe-ability | manual | grammar, manual-section, target-boundary |
+| Kinetic Crush | foe-ability | manual | manual-section |
+| Spit | foe-ability | manual | target-boundary |
+| Muddle the Mind | foe-ability | manual | grammar, unsafe-tier-remainder |
+| Vault | foe-ability | manual | manual-section, target-boundary |
+| Optical Flare | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Longarm Shrikegun | foe-ability | manual | manual-section |
+| Mind Requital | foe-ability | manual | grammar, manual-section, target-boundary |
+| I Am Fire! I Am Death! | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary, action-type, cost |
+| Twin Flamebelchers | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Forward! | foe-ability | manual | grammar, manual-section, target-boundary, action-type, cost |
+| Sweeping Blade | foe-ability | manual | manual-section |
+| Stinging Departure | foe-ability | manual | grammar, manual-section, target-boundary |
+| Hypnotic Mane | foe-ability | manual | grammar, unsafe-tier-remainder, manual-section, target-boundary |
+| Wall of Roses | foe-ability | manual | grammar, manual-section, target-boundary |
+| Flamelash | foe-ability | manual | unsafe-tier-remainder, target-boundary |
+| Stick and Poke | foe-ability | manual | manual-section, target-boundary |
+| Vermilion Fangs | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Necrotic Form | foe-ability | manual | grammar, manual-section, target-boundary |
+| Carpe Quadratum | foe-ability | manual | grammar, manual-section |
+| Barbed Tail Swing | foe-ability | manual | manual-section, target-boundary |
+| Psionic Retribution | foe-ability | manual | grammar, manual-section, target-boundary |
+| Dark Longbow | foe-ability | manual | manual-section |
+| Do Not Hesitate in the Wode | foe-ability | manual | grammar, source-block-mismatch, manual-section, target-boundary |
+| Death Grip | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Toss | foe-ability | manual | grammar, manual-section |
+| Spear | foe-ability | manual | manual-section, target-boundary |
+| Many Maws | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Death Scythe | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Knife in the Dark | foe-ability | manual | manual-section |
+| Duskfall | foe-ability | manual | grammar, manual-section, target-boundary, cost |
+| Crushing Despair | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| The Chasm Engulfs | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Lay the Foundation | foe-ability | manual | grammar, extra-roll-or-tiers, manual-section, target-boundary |
+| Biokinetic Ballista | foe-ability | manual | manual-section, target-boundary |
+| The Forest's Embrace | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Sunder the Very Skies | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Convocation of Verdure | foe-ability | manual | grammar, manual-section, target-boundary |
+| Four Swords Swing | foe-ability | manual | unsafe-tier-remainder, target-boundary |
+| Nip | foe-ability | manual | unsafe-tier-remainder, target-boundary |
+| Posthumous Promotion | foe-ability | manual | grammar, manual-section, target-boundary |
+| Demonic Egress | foe-ability | manual | grammar, manual-section, target-boundary |
+| Form Up! | foe-ability | manual | grammar, manual-section, target-boundary, action-type, cost |
+| Grabby Hand | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Shatterstone | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Vanish | foe-ability | manual | grammar, manual-section, target-boundary |
+| Synlirii Grafts | foe-ability | manual | unsafe-tier-remainder, target-boundary |
+| Return to Perfection | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary, action-type, cost |
+| Ajax Will Pay Well for These Specimens | foe-ability | manual | grammar, manual-section, target-boundary, action-type, cost |
+| Final Warning Fissure | foe-ability | manual | grammar, extra-roll-or-tiers, manual-section, target-boundary, action-type, cost |
+| Gust of Wind | foe-ability | manual | grammar, unsafe-tier-remainder, manual-section, target-boundary |
+| Mark of Agony | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Slam Into Dirt | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Virulent Breath | foe-ability | manual | grammar, extra-roll-or-tiers, unaccounted-paragraph, manual-section, target-boundary |
+| Envious Imitation | foe-ability | manual | grammar, manual-section, target-boundary |
+| Polarize Aura | foe-ability | manual | grammar, unsafe-tier-remainder, manual-section, target-boundary |
+| Needle-Knife | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Mindshatter | foe-ability | manual | manual-section, target-boundary, action-type, cost |
+| Berserker Slash | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Mobile Mine Field | foe-ability | manual | grammar, manual-section, target-boundary, action-type, cost |
+| Turned Upside Down | foe-ability | manual | grammar, unsafe-tier-remainder, manual-section, target-boundary |
+| Advance! | foe-ability | manual | grammar, source-header, manual-section, target-boundary, action-type, cost |
+| Dolabra and Net | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Magic Siphon | foe-ability | manual | grammar, manual-section, target-boundary |
+| Pall of Nightmares | foe-ability | manual | manual-section, target-boundary, action-type, cost |
+| Seismic Slam | foe-ability | manual | unsafe-tier-remainder, target-boundary |
+| Lumina Mark | foe-ability | manual | manual-section |
+| Enough! | foe-ability | manual | grammar, manual-section, target-boundary |
+| Edge of the Law | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Drangolin Plume | foe-ability | manual | grammar, manual-section, target-boundary |
+| Thunder Rush | foe-ability | manual | manual-section, target-boundary |
+| Flaming Kick | foe-ability | manual | unsafe-tier-remainder |
+| Hard Light Field | foe-ability | manual | grammar, manual-section, target-boundary |
+| Foreseen Punishment | foe-ability | manual | grammar, manual-section, target-boundary |
+| The Natural Cycle | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Breach of Nihility | foe-ability | manual | grammar, manual-section, target-boundary |
+| Rotten Scraps | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Inspiring Strike | foe-ability | manual | manual-section, target-boundary |
+| Ready Rodent | foe-ability | manual | grammar, manual-section |
+| Fetid Wrappings | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Brutal Impact | foe-ability | manual | manual-section, target-boundary |
+| Flurry | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Stunning Surge | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Ready Rodent | foe-ability | manual | grammar, manual-section |
+| Hampering Roots | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Searing Grasp | foe-ability | manual | unsafe-tier-remainder, target-boundary |
+| Sanguineous Flourish | foe-ability | manual | grammar, unsafe-tier-remainder, manual-section, target-boundary |
+| Writ of Execution | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Spirit Form | foe-ability | manual | grammar, manual-section, target-boundary |
+| Snack Attack | foe-ability | manual | grammar, manual-section, target-boundary, action-type, cost |
+| Meat Shield | foe-ability | manual | grammar, manual-section |
+| Concealed Dagger | foe-ability | manual | manual-section, target-boundary |
+| Tempting Offer | foe-ability | manual | grammar, manual-section, target-boundary, cost |
+| Fountains Roar, Now Free From the Earth | foe-ability | manual | grammar, manual-section, target-boundary, action-type, cost |
+| Quickshot | foe-ability | manual | grammar, manual-section, target-boundary |
+| Vengeance for the Slain | foe-ability | manual | grammar, manual-section |
+| Guardian From Afar | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Sanguine Mist | foe-ability | manual | grammar, extra-roll-or-tiers, manual-section, target-boundary, action-type, cost |
+| Spinning Bone Blade | foe-ability | manual | manual-section, target-boundary |
+| Fight Me, Coward! | foe-ability | manual | grammar, manual-section |
+| Polish Stone Shape | foe-ability | manual | grammar, manual-section, target-boundary |
+| Aggressive Mimicry | foe-ability | manual | grammar, manual-section, target-boundary |
+| Send in the Second Wave | foe-ability | manual | grammar, manual-section, target-boundary, action-type, cost |
+| Rip and Tear | foe-ability | manual | target-boundary |
+| Flying Sawblade | foe-ability | manual | grammar, manual-section, target-boundary |
+| Call to Self-Sabotage | foe-ability | manual | grammar, unsafe-tier-remainder, manual-section, target-boundary |
+| Advance! | foe-ability | manual | grammar, manual-section, target-boundary, action-type, cost |
+| Moment of Brutality | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Spitfire | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Greed Is Good | foe-ability | manual | grammar, manual-section, target-boundary |
+| Tower Shield Smash | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Cosmic Tail Ray | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Wings of Second Wind | foe-ability | manual | grammar, manual-section, target-boundary, action-type, cost |
+| Your Weapon Is Useless | foe-ability | manual | grammar, manual-section, target-boundary |
+| Drag Through Hell | foe-ability | manual | grammar, manual-section |
+| Blade | foe-ability | manual | manual-section, target-boundary |
+| Haymaker | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Signum | foe-ability | manual | manual-section |
+| Full Wolf | foe-ability | manual | grammar, source-header, manual-section, target-boundary, action-type, cost |
+| Tracer Longbow | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Stalker's Afterimage | foe-ability | manual | grammar, manual-section, target-boundary |
+| Prismacore Cannon | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Longbow | foe-ability | manual | target-boundary |
+| Plague of Frogs | foe-ability | manual | grammar, manual-section, target-boundary, action-type, cost |
+| Headway | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Compulsion Beam | foe-ability | manual | grammar, unsafe-tier-remainder, manual-section |
+| Snap and Toss | foe-ability | manual | unsafe-tier-remainder, target-boundary |
+| I'll Cover You! | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Go. | foe-ability | manual | grammar, manual-section |
+| Grasping Tonguetacles | foe-ability | manual | unsafe-tier-remainder, target-boundary |
+| Wasn't Aiming For You | foe-ability | manual | grammar, manual-section, target-boundary |
+| Earth Breach | foe-ability | manual | grammar, manual-section, target-boundary, action-type, cost |
+| Tail Stinger | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Charging Chomp | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Snap, Crackle, Pop | foe-ability | manual | grammar, manual-section, target-boundary, action-type, cost |
+| Ice Dance | foe-ability | manual | grammar, manual-section, target-boundary |
+| Sandstorm | foe-ability | manual | grammar, extra-roll-or-tiers, manual-section, target-boundary |
+| Optical Collusion | foe-ability | manual | grammar, manual-section, target-boundary |
+| Chaotic Entrancing Harmony | foe-ability | manual | grammar, manual-section, target-boundary |
+| Summoner's Cackletongue | foe-ability | manual | grammar, manual-section, target-boundary |
+| Cadenza | foe-ability | manual | grammar, manual-section |
+| Lay Waste | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary, action-type, cost |
+| Iron Banner | foe-ability | manual | grammar, source-block-mismatch, unaccounted-paragraph, manual-section, target-boundary, cost |
+| Chain Shotput | foe-ability | manual | target-boundary |
+| Mace Lariat | foe-ability | manual | unsafe-tier-remainder, target-boundary |
+| Call to Victory | foe-ability | manual | manual-section, target-boundary |
+| Throw Fit | foe-ability | manual | unaccounted-paragraph, manual-section, target-boundary |
+| Overwatch | foe-ability | manual | grammar, manual-section, target-boundary |
+| Unhallowed Ground | foe-ability | manual | grammar, manual-section, target-boundary |
+| You Would Flounder Your Assault? | foe-ability | manual | grammar, manual-section, target-boundary |
+| Kick | malice | manual | unsafe-tier-remainder, target-boundary, compatibility-boundary |
+| Bomber Wasp Warfare | foe-ability | manual | target-boundary, action-type, cost |
+| Fuse-Iron Bomb | foe-ability | manual | manual-section, target-boundary |
+| Earth Bump | foe-ability | manual | manual-section, target-boundary |
+| Abyssal Strike | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Posthumous Promotion | foe-ability | manual | grammar, manual-section, target-boundary |
+| Splinter Dagger | foe-ability | manual | manual-section |
+| Investiture of Verdure | foe-ability | manual | grammar, manual-section, target-boundary |
+| Venomous Spit | foe-ability | manual | manual-section, target-boundary |
+| Roiling Fist | foe-ability | manual | grammar, extra-roll-or-tiers, manual-section, target-boundary |
+| Wodeblade | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Burning Aurora | foe-ability | manual | grammar, source-header, manual-section, target-boundary, action-type, cost |
+| Houndaxe | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Salt Wounds | foe-ability | manual | manual-section, target-boundary |
+| Breath Weapon | malice | manual | manual-section, target-boundary, compatibility-boundary |
+| Lava Pillar | foe-ability | manual | unsafe-tier-remainder, target-boundary |
+| Javelin and Bellow | foe-ability | manual | unsafe-tier-remainder, target-boundary |
+| Flashing Fangs | foe-ability | manual | grammar, extra-roll-or-tiers, source-block-count, source-block-mismatch, unaccounted-paragraph, manual-section |
+| Glory to the Legion | foe-ability | manual | grammar, manual-section, target-boundary |
+| Petrifying Eye Beams | foe-ability | manual | grammar, unsafe-tier-remainder, manual-section, target-boundary |
+| Skitter | foe-ability | manual | grammar, manual-section, target-boundary |
+| Ice Javelins | foe-ability | manual | manual-section, target-boundary |
+| Tether Down | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Don't Let Them Escape! | foe-ability | manual | grammar, manual-section, target-boundary, action-type, cost |
+| Barbed Stinger | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Encroaching Darkness | foe-ability | manual | grammar, manual-section, target-boundary |
+| Awe of the Iron Crown | foe-ability | manual | grammar, manual-section, target-boundary, action-type, cost |
+| Agony Wail | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Get in Here! | foe-ability | manual | grammar, manual-section, target-boundary |
+| Close In | foe-ability | manual | grammar, extra-roll-or-tiers, manual-section, target-boundary, action-type, cost |
+| I'll Cut A Path | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Dine and Dash | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Shadow Step | foe-ability | manual | grammar, manual-section, target-boundary |
+| Phase Chant | foe-ability | manual | unsafe-tier-remainder, target-boundary |
+| Sleep Grenade | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Caustic Detonator | foe-ability | manual | extra-roll-or-tiers, manual-section |
+| Enemies in the Dark | foe-ability | manual | unsafe-tier-remainder, target-boundary |
+| Wild Slam | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Four-Way Grasp | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| An Army From Blood | foe-ability | manual | grammar, manual-section, target-boundary |
+| Flail | foe-ability | manual | unsafe-tier-remainder, target-boundary |
+| Blazing Trail | foe-ability | manual | grammar, manual-section, target-boundary |
+| Primal Bay | foe-ability | manual | grammar, manual-section, target-boundary |
+| Hellfire | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Wink | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Brainstorm | foe-ability | manual | manual-section, target-boundary, action-type, cost |
+| Overwhelming Rend | foe-ability | manual | unsafe-tier-remainder, target-boundary |
+| Gore Horn | foe-ability | manual | manual-section, target-boundary |
+| We Will Won! | foe-ability | manual | grammar, manual-section, target-boundary, action-type, cost |
+| Feign Death | foe-ability | manual | grammar, manual-section, target-boundary |
+| Explosive Mote | foe-ability | manual | unsafe-tier-remainder, target-boundary |
+| Memory Thief | malice | manual | unsafe-tier-remainder, manual-section, compatibility-boundary |
+| Precognitive Shift | foe-ability | manual | grammar, manual-section, target-boundary |
+| Breaking Palm | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Spew Slide | foe-ability | manual | grammar, manual-section, target-boundary |
+| Bonebreaker | foe-ability | manual | manual-section, target-boundary |
+| Bright Bolt | foe-ability | manual | manual-section, target-boundary |
+| Reclamation | foe-ability | manual | unsafe-tier-remainder, target-boundary |
+| Verdict | foe-ability | manual | manual-section |
+| Psi-Sickle | foe-ability | manual | grammar, manual-section |
+| Labyrinth of Bone | foe-ability | manual | grammar, extra-roll-or-tiers, manual-section, target-boundary |
+| Snake Bites | foe-ability | manual | target-boundary |
+| Miner Inconvenience | foe-ability | manual | grammar, manual-section, target-boundary |
+| Destructive Rollout | foe-ability | manual | grammar, manual-section, target-boundary |
+| Tongue Pull | foe-ability | manual | grammar, manual-section, target-boundary |
+| Explosion | foe-ability | manual | unsafe-tier-remainder, target-boundary |
+| Horn Vault | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Release the Thralls | foe-ability | manual | grammar, manual-section, target-boundary, action-type, cost |
+| Flux Gnash | foe-ability | manual | grammar, unsafe-tier-remainder, manual-section |
+| No Escape | foe-ability | manual | grammar, unsafe-tier-remainder, extra-roll-or-tiers, source-block-count, source-block-mismatch, unaccounted-paragraph, manual-section, target-boundary, action-type, cost |
+| Warp Perceptions | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| You Will All Witness my Blade | foe-ability | manual | grammar, manual-section, target-boundary, action-type, cost |
+| Imbue with Power | foe-ability | manual | grammar, manual-section, target-boundary |
+| Jagged Stone Club | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Catcher | foe-ability | manual | grammar, manual-section, target-boundary |
+| Roar | foe-ability | manual | unsafe-tier-remainder, target-boundary |
+| Crash Through | foe-ability | manual | grammar, manual-section, target-boundary |
+| Steelfist | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Ram's Defiance | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Open the Oven | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary, action-type, cost |
+| Slushfall | foe-ability | manual | unsafe-tier-remainder, target-boundary |
+| Marauder's Cackletongue | foe-ability | manual | grammar, manual-section, target-boundary |
+| Dismissal with Prejudice | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Nimble Step | foe-ability | manual | unsafe-tier-remainder, target-boundary |
+| Convocation of Flames | foe-ability | manual | grammar, manual-section, target-boundary |
+| Scramble | foe-ability | manual | grammar, manual-section, target-boundary |
+| Bola Knock | foe-ability | manual | unsafe-tier-remainder |
+| Bloodstones | foe-ability | manual | grammar, manual-section, target-boundary |
+| Cut 'Em Low! | foe-ability | manual | manual-section, target-boundary |
+| Ravenous Overgrowth | foe-ability | manual | grammar, unsafe-tier-remainder, target-boundary, action-type, cost |
+| Bluster | foe-ability | manual | grammar, unsafe-tier-remainder, manual-section, target-boundary |
+| Quick Strike | foe-ability | manual | grammar, manual-section, target-boundary |
+| Trick Crossbow | foe-ability | manual | manual-section |
+| Consume | foe-ability | manual | grammar, manual-section, target-boundary |
+| Bite | foe-ability | supported |  |
+| Fury Flail | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Far Flung | foe-ability | manual | grammar, unsafe-tier-remainder, manual-section |
+| Ice Lob | foe-ability | manual | unsafe-tier-remainder, target-boundary |
+| Upchuck | malice | manual | unsafe-tier-remainder, manual-section, target-boundary, compatibility-boundary |
+| Repent! | foe-ability | manual | grammar, manual-section, target-boundary |
+| Power Chord | foe-ability | manual | unsafe-tier-remainder |
+| Galvanic Arc | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Fall Back! | foe-ability | manual | grammar, manual-section, target-boundary |
+| Sinkhole | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Pain Unending | foe-ability | manual | manual-section |
+| Frenzied Deluge | foe-ability | manual | unsafe-tier-remainder, target-boundary, action-type, cost |
+| Kill! | foe-ability | manual | grammar, source-header, manual-section, target-boundary, action-type, cost |
+| Rallying Ostinato | foe-ability | manual | grammar, manual-section, target-boundary |
+| Eye of Surlach | foe-ability | manual | unsafe-tier-remainder |
+| Handaxes | foe-ability | manual | manual-section, target-boundary |
+| Sword Stab | foe-ability | manual | manual-section |
+| You Would Dare?! | foe-ability | manual | grammar, source-header, manual-section, target-boundary, action-type, cost |
+| Carving Dagger | foe-ability | manual | manual-section, target-boundary |
+| Heart of the Forge | foe-ability | manual | unsafe-tier-remainder, target-boundary, action-type, cost |
+| King's Fissure | foe-ability | manual | grammar, extra-roll-or-tiers, manual-section, target-boundary, action-type, cost |
+| Flash Swipe | foe-ability | manual | manual-section |
+| Pain Absorption | foe-ability | manual | grammar, manual-section, target-boundary |
+| Fire Curse | foe-ability | manual | grammar, unsafe-tier-remainder, manual-section |
+| Handaxe | foe-ability | manual | manual-section, target-boundary |
+| Devour Soul | foe-ability | manual | grammar, manual-section, target-boundary |
+| Club Charge | foe-ability | manual | target-boundary |
+| Piercing Tails | foe-ability | manual | manual-section |
+| Castling | foe-ability | manual | grammar, manual-section |
+| Buss Buffe | foe-ability | manual | grammar, manual-section, target-boundary |
+| Dagger Dance | foe-ability | manual | manual-section, target-boundary |
+| Gore | foe-ability | manual | manual-section |
+| Posthumous Promotion | foe-ability | manual | grammar, manual-section, target-boundary |
+| Zweihander Swing | foe-ability | manual | manual-section, target-boundary |
+| Investiture of Gravity | foe-ability | manual | grammar, manual-section, target-boundary |
+| Rampage | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary, action-type, cost |
+| Sword Lunge | foe-ability | manual | unsafe-tier-remainder, target-boundary |
+| Psionic Intrusion | foe-ability | manual | target-boundary |
+| Acquired Taste | foe-ability | manual | grammar, manual-section, target-boundary |
+| Psychic Pulse | foe-ability | manual | grammar, manual-section, target-boundary, action-type, cost |
+| Shield Bash | foe-ability | manual | unsafe-tier-remainder |
+| Ensnaring Chains | foe-ability | manual | grammar, manual-section, target-boundary |
+| Shed Some Skin | foe-ability | manual | grammar, source-header, manual-section, target-boundary, action-type, cost |
+| Serrated Saber | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Tail Bite | foe-ability | manual | manual-section, target-boundary |
+| Caustic Paste Bomb | foe-ability | manual | manual-section, target-boundary |
+| Shield Bash | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Divine Vine | foe-ability | manual | grammar, unsafe-tier-remainder, manual-section |
+| Jaunt | foe-ability | manual | grammar, manual-section, target-boundary |
+| Cold Axe | foe-ability | manual | manual-section, target-boundary |
+| Hasta | foe-ability | manual | manual-section, target-boundary |
+| Kiss of Death | foe-ability | manual | grammar, manual-section, target-boundary |
+| Canis Shrikegun | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Caldera | foe-ability | manual | grammar, unsafe-tier-remainder, manual-section, target-boundary |
+| Swat | foe-ability | manual | grammar, manual-section, target-boundary |
+| Brace and Break | foe-ability | manual | grammar, manual-section, target-boundary |
+| Arise, My Children | foe-ability | manual | grammar, manual-section, target-boundary |
+| Lurching Swipe | foe-ability | manual | grammar |
+| Grasping Shadow | foe-ability | manual | grammar, unsafe-tier-remainder, target-boundary |
+| Mystic Battery | foe-ability | manual | grammar, manual-section, target-boundary |
+| Mindwipe | foe-ability | manual | grammar, manual-section |
+| Arms of Necrosis | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary, action-type, cost |
+| Heckle | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Time Is Money | foe-ability | manual | grammar, manual-section, target-boundary, action-type, cost |
+| Command From the Back | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Blazing Leap | foe-ability | manual | manual-section, target-boundary |
+| Nostalgic Wanderlust | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Hrraaaaaagh! | foe-ability | manual | grammar, manual-section, target-boundary |
+| Guardian Block | foe-ability | manual | grammar, manual-section, target-boundary |
+| Spinous Tail Swing | foe-ability | manual | manual-section, target-boundary |
+| Impale | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Ribcage Chomp | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Tentacle | foe-ability | manual | unsafe-tier-remainder, target-boundary |
+| Cobblestone Shape | foe-ability | manual | grammar, manual-section, target-boundary |
+| Ready Rodent | foe-ability | manual | grammar, manual-section |
+| Handaxes | foe-ability | manual | manual-section, target-boundary |
+| Skulls Abound | foe-ability | manual | grammar, manual-section, target-boundary, action-type, cost |
+| Battlefield Control | foe-ability | manual | grammar, manual-section, target-boundary |
+| Demonwarp Tears | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Heavy Crossbolt | foe-ability | manual | unsafe-tier-remainder |
+| Zephyr Feint | foe-ability | manual | grammar, manual-section, target-boundary |
+| Liquify | foe-ability | manual | grammar, manual-section, target-boundary |
+| Dusk Cleave | foe-ability | manual | manual-section |
+| Blowgun | foe-ability | manual | manual-section |
+| Shrapnel Whip | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Kneel, Peasant! | foe-ability | manual | grammar, unsafe-tier-remainder, manual-section |
+| Steal Time | foe-ability | manual | grammar, unsafe-tier-remainder, manual-section |
+| Predator's Alacrity | foe-ability | manual | grammar, manual-section, target-boundary, action-type, cost |
+| Horrifying Form | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary, action-type, cost |
+| Take the Opening | foe-ability | manual | grammar, manual-section, target-boundary |
+| On My Mark! | foe-ability | manual | grammar, manual-section |
+| Web | foe-ability | manual | grammar, unsafe-tier-remainder, manual-section, target-boundary |
+| Trample | foe-ability | manual | grammar, manual-section, target-boundary |
+| Retaliatory Strike | foe-ability | manual | grammar, manual-section, target-boundary |
+| Spinning Spit | foe-ability | manual | target-boundary |
+| Snaking Entrails | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Show Me Who You Are | foe-ability | manual | grammar, extra-roll-or-tiers, manual-section, target-boundary, action-type, cost |
+| Meat Shield | foe-ability | manual | grammar, manual-section, target-boundary |
+| Sacrifice | foe-ability | manual | grammar, extra-roll-or-tiers, source-block-mismatch, source-header, unaccounted-paragraph, manual-section, target-boundary, action-type, cost |
+| Kinetic Lane | foe-ability | manual | grammar, manual-section, target-boundary |
+| Snaring Javelin | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Inertial Flow | foe-ability | manual | unsafe-tier-remainder, target-boundary |
+| Who's Hesitating? | foe-ability | manual | grammar, manual-section, target-boundary |
+| Corrupted Ash Teleport | foe-ability | manual | grammar, manual-section, target-boundary |
+| Catcher | foe-ability | manual | grammar, manual-section, target-boundary |
+| Shield Warden | foe-ability | manual | grammar, unsafe-tier-remainder, manual-section, target-boundary |
+| Skitter | foe-ability | manual | grammar, manual-section, target-boundary |
+| Buck | foe-ability | manual | grammar, manual-section, target-boundary |
+| Blotting Bolt | foe-ability | manual | manual-section |
+| Twystrd | foe-ability | manual | grammar, unsafe-tier-remainder, manual-section, target-boundary |
+| Disorientate | foe-ability | manual | unsafe-tier-remainder |
+| Phoenix Wing King | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary, action-type, cost |
+| Timely Intervention | foe-ability | manual | grammar, manual-section, target-boundary |
+| Entangling Vines | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Notched Axe | foe-ability | manual | grammar |
+| Leg Blade | foe-ability | manual | target-boundary |
+| Better Out Than In | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary, action-type, cost |
+| Wall Leap | foe-ability | manual | grammar, manual-section, target-boundary |
+| Break Ground | foe-ability | manual | grammar, extra-roll-or-tiers, manual-section, target-boundary |
+| Deceptive Stratagem | foe-ability | manual | grammar, manual-section, action-type, cost |
+| Death Roll | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Quill Pushing | foe-ability | manual | manual-section, target-boundary |
+| Headlam Rampage | foe-ability | manual | unsafe-tier-remainder, target-boundary, action-type, cost |
+| Enter the Fray | foe-ability | manual | grammar, unsafe-tier-remainder, manual-section, target-boundary, action-type, cost |
+| Anyone Can Do That | foe-ability | manual | grammar, manual-section, target-boundary |
+| Slime Spew | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Bury the Point | foe-ability | supported |  |
+| Soulbind | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Soul Steal | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Carnivorous Bite | foe-ability | manual | manual-section |
+| Concealing Strike | foe-ability | manual | unsafe-tier-remainder, target-boundary |
+| Poison the Blade | foe-ability | manual | grammar, manual-section, target-boundary |
+| Shared Sickness | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Acid and Claws | foe-ability | manual | unsafe-tier-remainder, target-boundary, action-type, cost |
+| Weakening Glare | malice | manual | unsafe-tier-remainder, compatibility-boundary |
+| Targeting Beam | foe-ability | manual | manual-section |
+| Armor of Corpses | foe-ability | manual | grammar, manual-section, target-boundary |
+| Focus Fire | foe-ability | manual | grammar, manual-section, action-type, cost |
+| Forward Assault | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Bat Form | foe-ability | manual | grammar, manual-section, target-boundary, cost |
+| Armor of the Ancients | foe-ability | manual | grammar, manual-section, target-boundary |
+| Composite Bow | foe-ability | manual | manual-section, target-boundary |
+| Inspiring Swordplay | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Thunderstruck | foe-ability | manual | grammar, manual-section, target-boundary |
+| Blistering Element | foe-ability | manual | manual-section, target-boundary |
+| Preserve and Protect | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Steam-Powered Snare | foe-ability | manual | grammar, extra-roll-or-tiers, unaccounted-paragraph, manual-section, target-boundary |
+| Blade of the Gol King | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Chorus of Destruction | foe-ability | manual | grammar, source-header, manual-section, target-boundary, action-type, cost |
+| Immortal Flare | foe-ability | manual | grammar, manual-section |
+| Crag Burst | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Banded Dagger | foe-ability | manual | target-boundary |
+| Stay Back! | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Natural Weapon | foe-ability | manual | manual-section, target-boundary |
+| Blight Pus | foe-ability | manual | manual-section |
+| Redirected Charm | foe-ability | manual | grammar, manual-section |
+| My Spear, My Foe | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Over Here, Thanks | foe-ability | manual | grammar, manual-section |
+| Shield Smash | foe-ability | manual | manual-section, target-boundary |
+| Spirit Meld | foe-ability | manual | grammar, manual-section, target-boundary |
+| Haymaker | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Enchantments of War | foe-ability | manual | grammar, manual-section, target-boundary |
+| Hop and Chop | foe-ability | manual | manual-section, target-boundary |
+| Shoot! | foe-ability | manual | grammar, manual-section, target-boundary, action-type, cost |
+| Lop | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Solo Act | foe-ability | manual | grammar, manual-section, action-type, cost |
+| Devilish Charm | foe-ability | manual | grammar, extra-roll-or-tiers, manual-section, target-boundary |
+| Wyrd Warp | foe-ability | manual | grammar, manual-section, target-boundary |
+| Sneering Disregard | foe-ability | manual | grammar, manual-section, target-boundary |
+| Deepest Wounds | foe-ability | manual | grammar, extra-roll-or-tiers, manual-section, target-boundary, action-type, cost |
+| Laugh It Off | foe-ability | manual | grammar, manual-section, target-boundary |
+| Portal to the Mantle | foe-ability | manual | manual-section, target-boundary |
+| Cast Away All Hope | foe-ability | manual | grammar, manual-section, target-boundary, action-type, cost |
+| Punishing Flail | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Goring Horns | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Ripper Spear | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Courtesy Call | foe-ability | manual | grammar, manual-section |
+| Striking Afterimage | foe-ability | manual | grammar, manual-section, target-boundary |
+| Break Armor | foe-ability | manual | grammar, manual-section, target-boundary |
+| Shapeshifter | foe-ability | manual | grammar, manual-section, target-boundary |
+| Psionic Boom | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Blaster Volley | foe-ability | manual | unsafe-tier-remainder, target-boundary |
+| Chitin Bash | foe-ability | manual | target-boundary |
+| Stick to the Plan! | foe-ability | manual | grammar, manual-section, target-boundary, action-type, cost |
+| Still Your Tongue! | foe-ability | manual | grammar, manual-section, target-boundary |
+| Maw of the Abyss | foe-ability | manual | grammar, manual-section, target-boundary |
+| Clawed Kick | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Spitfire | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Grav Spike | foe-ability | manual | grammar, unsafe-tier-remainder, manual-section, target-boundary |
+| Unlimited Power! | foe-ability | manual | grammar, extra-roll-or-tiers, unaccounted-paragraph, manual-section, target-boundary, action-type, cost |
+| Swift Serration | foe-ability | manual | manual-section, target-boundary |
+| First Warning Quake | foe-ability | manual | grammar, extra-roll-or-tiers, manual-section, target-boundary, action-type, cost |
+| Poison Dart | foe-ability | manual | manual-section, target-boundary |
+| Hair Whip | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Hopeless Place | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| I've Learned Their Tricks | foe-ability | manual | grammar, manual-section, target-boundary, action-type, cost |
+| Swing | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Take Point! | foe-ability | manual | grammar, manual-section |
+| Tentacle Toss | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Lumina Assault | foe-ability | manual | manual-section |
+| Lightning Rod | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Vengeance of Rhöl | foe-ability | manual | grammar, manual-section, target-boundary |
+| Parry! | foe-ability | manual | grammar, manual-section, target-boundary |
+| All Rise | foe-ability | manual | grammar, extra-roll-or-tiers, unaccounted-paragraph, manual-section, target-boundary, action-type, cost |
+| Natural Weapon | foe-ability | manual | unsafe-tier-remainder, target-boundary |
+| Red Tide | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary, action-type, cost |
+| Challenge | foe-ability | manual | grammar, extra-roll-or-tiers, manual-section, action-type, cost |
+| Tongue Whip | foe-ability | manual | grammar, manual-section |
+| Rose Thorn Lash | foe-ability | manual | grammar, manual-section, target-boundary |
+| Reactive Rebuke | foe-ability | manual | grammar, manual-section, target-boundary |
+| Familial Reinforcements | foe-ability | manual | grammar, manual-section, target-boundary, action-type, cost |
+| Poison the Blade | foe-ability | manual | grammar, manual-section, target-boundary |
+| Stabbity Stab | foe-ability | manual | grammar, manual-section |
+| Throw | foe-ability | manual | grammar, manual-section |
+| Elevate | foe-ability | manual | grammar, manual-section, target-boundary |
+| Concussive Maul | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Ashes to Ashes | foe-ability | manual | grammar, manual-section, target-boundary |
+| Grasping Claws | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Spittlesplash | foe-ability | manual | target-boundary |
+| Bead of Hell | foe-ability | manual | grammar, manual-section, target-boundary |
+| Numb | foe-ability | manual | unsafe-tier-remainder |
+| Longshot | foe-ability | manual | grammar, manual-section |
+| Tentacle Grab | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Forked Knife | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Devolving Tentacles | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Forge Hammer Tail Slam | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Bite | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Recall | foe-ability | manual | grammar, manual-section, target-boundary |
+| Whip Frenzy | foe-ability | manual | unsafe-tier-remainder, target-boundary |
+| Killer Claws | foe-ability | manual | unsafe-tier-remainder |
+| Blightblade | foe-ability | manual | grammar, unsafe-tier-remainder, manual-section |
+| Boulder Bash | foe-ability | manual | action-type |
+| Magnetomancy | foe-ability | manual | grammar, manual-section |
+| Flame Wad | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Dragon's Eruption | foe-ability | manual | unsafe-tier-remainder, target-boundary |
+| Trouser Cut | malice | manual | unsafe-tier-remainder, manual-section, compatibility-boundary |
+| You! | foe-ability | manual | grammar, manual-section |
+| Necrotic Bolt | foe-ability | manual | manual-section, target-boundary |
+| Golden Scythe | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Valiar Cloak | foe-ability | manual | grammar, manual-section, target-boundary |
+| Heed My Decree | foe-ability | manual | grammar, manual-section, target-boundary, action-type, cost |
+| Compel the Jury | foe-ability | manual | grammar, unsafe-tier-remainder, manual-section, target-boundary |
+| Baneful Blade | foe-ability | manual | grammar, source-title, manual-section |
+| Kicking the Nest | foe-ability | manual | grammar, manual-section, target-boundary, action-type, cost |
+| Throw | foe-ability | manual | grammar, manual-section |
+| Voidlight Breath | foe-ability | manual | grammar, extra-roll-or-tiers, unaccounted-paragraph, manual-section, target-boundary, action-type, cost |
+| Suffusing Strike | foe-ability | manual | unsafe-tier-remainder |
+| Dive Bomb | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Alchemical Device | malice | manual | unsafe-tier-remainder, manual-section, target-boundary, compatibility-boundary |
+| Natural Weapon | foe-ability | manual | unsafe-tier-remainder, target-boundary |
+| Bow | foe-ability | manual | manual-section, target-boundary |
+| Sucker Punch | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Viridescent Storm | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Engulf | foe-ability | manual | grammar, manual-section |
+| Spear of the Damned | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Catcher | foe-ability | manual | grammar, manual-section, target-boundary |
+| Reflexive Instinct | foe-ability | manual | grammar, manual-section, target-boundary |
+| Sand Slam | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Litigation | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Lash Out | foe-ability | manual | grammar, manual-section, target-boundary |
+| Armageddon | foe-ability | manual | grammar, manual-section, target-boundary, action-type, cost |
+| What You Deserve | foe-ability | manual | grammar, unsafe-tier-remainder, manual-section, target-boundary, action-type, cost |
+| Precognitive Shift | foe-ability | manual | grammar, manual-section, target-boundary |
+| Misdirection | foe-ability | manual | grammar, manual-section, target-boundary |
+| Barbed Tongues | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| The Wode Protects Us | foe-ability | manual | grammar, manual-section, target-boundary |
+| Final Orders | foe-ability | manual | grammar, manual-section |
+| People Bowling | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Travel By Fire | foe-ability | manual | grammar, manual-section, target-boundary |
+| Tangled Nest | foe-ability | manual | grammar, unsafe-tier-remainder, target-boundary |
+| Agile Stride | foe-ability | manual | unsafe-tier-remainder, target-boundary |
+| Water Wing | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Fire and Brimstone | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Claw and Blade | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Impactful Arrival | foe-ability | manual | grammar, manual-section, target-boundary, action-type, cost |
+| Vine Lash | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Hill Quake | foe-ability | manual | grammar, extra-roll-or-tiers, manual-section, target-boundary |
+| Juke | foe-ability | manual | grammar, manual-section, target-boundary |
+| Are You Not Entertained?! | foe-ability | manual | grammar, manual-section, target-boundary, action-type, cost |
+| Damning Gaze | foe-ability | manual | manual-section, target-boundary |
+| Night Knife | foe-ability | manual | manual-section |
+| Corroding Breath | foe-ability | manual | grammar, extra-roll-or-tiers, unaccounted-paragraph, manual-section, target-boundary |
+| Hop To It | foe-ability | manual | grammar, manual-section, target-boundary |
+| Your Obsession With Me Betrays You | foe-ability | manual | grammar, manual-section, target-boundary |
+| Chainsaw Whip | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Arm and a Leg | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Gore | foe-ability | manual | grammar, unsafe-tier-remainder |
+| Portal to the Firing Line | foe-ability | manual | manual-section, target-boundary |
+| Clobberin' Club | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Serpent Wings | foe-ability | manual | grammar, source-header, manual-section, target-boundary, action-type, cost |
+| Retaliatory Strike | foe-ability | manual | grammar, manual-section, target-boundary |
+| Poisoned Dagger | foe-ability | manual | manual-section, target-boundary |
+| Roaring Gambit | foe-ability | manual | grammar, extra-roll-or-tiers, manual-section, target-boundary, action-type, cost |
+| Call Up From the Abyss | foe-ability | manual | grammar, manual-section, target-boundary, action-type, cost |
+| Inhale | foe-ability | manual | grammar, unsafe-tier-remainder, manual-section, target-boundary |
+| Quid Pro Quo | foe-ability | manual | grammar, manual-section, target-boundary |
+| Fifth Fist | foe-ability | manual | unsafe-tier-remainder, target-boundary |
+| Abyssal Protectors | foe-ability | manual | grammar, manual-section, target-boundary |
+| Summon Elemental | foe-ability | manual | grammar, manual-section, target-boundary |
+| Slag Spew | foe-ability | manual | grammar, extra-roll-or-tiers, unaccounted-paragraph, manual-section, target-boundary |
+| Acid Spew | foe-ability | manual | manual-section, target-boundary, action-type, cost |
+| Raging Tempest | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Lead From the Front | foe-ability | manual | grammar, source-header, manual-section, target-boundary, action-type, cost |
+| Engulf | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Get Reckless! | foe-ability | manual | grammar, manual-section, target-boundary |
+| Choking Bolt | foe-ability | manual | manual-section |
+| Fog of War | foe-ability | manual | grammar, source-header, manual-section, target-boundary, action-type, cost |
+| I Can Throw My Blade and So Should You! | foe-ability | manual | grammar, manual-section, target-boundary, action-type, cost |
+| Sputter | foe-ability | manual | grammar, unsafe-tier-remainder, manual-section, target-boundary |
+| Bully the Weak | foe-ability | manual | grammar, manual-section, action-type, cost |
+| Earth-Breaking Jump | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Stone Wave | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Gravity Well | foe-ability | manual | grammar, extra-roll-or-tiers, unaccounted-paragraph, manual-section, target-boundary |
+| Heavy Longbow | foe-ability | manual | target-boundary |
+| Flamebelcher | foe-ability | manual | manual-section, target-boundary |
+| Wing Buffet | foe-ability | manual | grammar, unsafe-tier-remainder, manual-section, target-boundary |
+| Savoring Bite | foe-ability | manual | manual-section, target-boundary |
+| Importunity | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Poison Fumes | foe-ability | manual | unsafe-tier-remainder, target-boundary |
+| Toxic Vapors | foe-ability | manual | unsafe-tier-remainder, target-boundary |
+| Baneful Blade | foe-ability | manual | unsafe-tier-remainder, target-boundary |
+| The Lay of Cor'thoroth | foe-ability | manual | grammar, manual-section, target-boundary |
+| Begone, Smallfolk! | foe-ability | manual | grammar, manual-section, target-boundary |
+| Archer's Cackletongue | foe-ability | manual | grammar, manual-section, target-boundary |
+| Overture of Destruction | foe-ability | manual | grammar, manual-section, target-boundary, action-type, cost |
+| Experimental Treasure | foe-ability | manual | grammar, unsafe-tier-remainder, manual-section, target-boundary |
+| Testudo! | foe-ability | manual | grammar, manual-section, target-boundary |
+| Highest Posthumous Promotion | foe-ability | manual | grammar, manual-section, target-boundary |
+| Piercing Trill | foe-ability | manual | manual-section |
+| Refulgent Beams | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Snare Bow | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Field Collapse | foe-ability | manual | grammar, manual-section, target-boundary |
+| Web Vial | foe-ability | manual | grammar, manual-section, target-boundary |
+| Sedating Stinger | foe-ability | manual | manual-section, target-boundary |
+| Focus Fire | foe-ability | manual | grammar, manual-section |
+| Ossuary Assault | foe-ability | manual | grammar, manual-section, target-boundary, action-type, cost |
+| Brutal Flail | foe-ability | manual | unsafe-tier-remainder, target-boundary |
+| Decree by the Jade Hand | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Disruption Beam | foe-ability | manual | unsafe-tier-remainder, target-boundary, action-type, cost |
+| Eager Claws | foe-ability | manual | unsafe-tier-remainder, target-boundary |
+| Pilium | foe-ability | manual | manual-section, target-boundary |
+| Spiked Maul | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Breath of Brume | foe-ability | manual | grammar, extra-roll-or-tiers, unaccounted-paragraph, manual-section, target-boundary |
+| Mudslide | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Impede | foe-ability | manual | grammar, manual-section, target-boundary |
+| Pounce | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Expunging Exhalation | foe-ability | manual | unsafe-tier-remainder, target-boundary |
+| Hook and Chain | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Rapier Flunge | foe-ability | manual | unsafe-tier-remainder, target-boundary |
+| It Is Day | foe-ability | manual | grammar, source-header, manual-section, target-boundary, action-type, cost |
+| Several Arms | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| A Hush of Ash | foe-ability | manual | manual-section, target-boundary |
+| Gnash | foe-ability | manual | grammar, source-title, manual-section |
+| Brawny Buffe | foe-ability | manual | grammar, manual-section, target-boundary |
+| Power Burst | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Tearing Recoil | foe-ability | manual | grammar, manual-section, target-boundary |
+| Violent Thrashing | foe-ability | manual | unsafe-tier-remainder, target-boundary |
+| Corrosive Claws | foe-ability | manual | unsafe-tier-remainder, target-boundary |
+| Mourning Cry | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Lockdown | foe-ability | manual | grammar, manual-section, target-boundary |
+| Claws | foe-ability | manual | manual-section, target-boundary |
+| Dagger Feint | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Marble From a Great Sling | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Summon the Onyx Tower | foe-ability | manual | grammar, manual-section, target-boundary |
+| Illusory Feint | foe-ability | manual | grammar, unsafe-tier-remainder, manual-section, target-boundary |
+| Infernal Pike | foe-ability | manual | manual-section, target-boundary |
+| Devilish Charm | foe-ability | manual | grammar, extra-roll-or-tiers, manual-section, target-boundary |
+| Necro Beam | foe-ability | manual | manual-section |
+| Lockjaw | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Facepalm and Head Slam | foe-ability | manual | grammar, manual-section, target-boundary |
+| Shadow Drag | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Construction Arm | foe-ability | manual | unsafe-tier-remainder |
+| But We Will Change Her Mind | foe-ability | manual | grammar, manual-section, target-boundary, action-type, cost |
+| Fearsome Bay | foe-ability | manual | grammar, unsafe-tier-remainder, manual-section, target-boundary |
+| Adaptability | foe-ability | manual | grammar, manual-section, target-boundary |
+| Tail Sweep | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Lion's Toss | foe-ability | manual | grammar, unsafe-tier-remainder |
+| You Didn't Pay Attention! | foe-ability | manual | grammar, manual-section |
+| Swordplay | foe-ability | manual | manual-section |
+| Brain Drain | foe-ability | manual | grammar, manual-section, target-boundary |
+| Fuse-Iron Lance | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Ready Rodent | foe-ability | manual | grammar, manual-section |
+| Clever Trick | foe-ability | manual | grammar, manual-section |
+| Conditioning Spear | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Flesh-Eater Knife | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Suppressing Volley | foe-ability | manual | grammar, manual-section, target-boundary, action-type, cost |
+| Morningstar and Javelin | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Lightning Bolt | foe-ability | manual | manual-section |
+| Is This What They Taught You? | foe-ability | manual | grammar, manual-section, target-boundary |
+| Jaws and Claws | foe-ability | manual | unsafe-tier-remainder, target-boundary |
+| Whip and Magic Longsword | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Acidic Anguish | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Visions in the Dark | foe-ability | manual | grammar, manual-section, target-boundary |
+| Sparkling Tail Whip | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Imbue with Power | foe-ability | manual | grammar, manual-section, target-boundary |
+| Arcane Telum | foe-ability | manual | manual-section, target-boundary |
+| Blood of the Abyss | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary, action-type, cost |
+| Skewer | foe-ability | manual | manual-section, target-boundary |
+| Exposed Crux | foe-ability | manual | grammar, manual-section, target-boundary, action-type, cost |
+| Infernal Decree | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Feeding Frenzy | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Assail and Serrate | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Spiteful Retort | foe-ability | manual | grammar, manual-section, target-boundary |
+| Tonguelash | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Adaptability | foe-ability | manual | grammar, manual-section, target-boundary |
+| Wild Swing | foe-ability | manual | target-boundary |
+| Cerebral Suplex | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Black Flame | foe-ability | manual | grammar, unsafe-tier-remainder |
+| Sun Lamp | foe-ability | manual | grammar, manual-section, target-boundary |
+| Strangle | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Acid Grasp | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Cornered Predator | foe-ability | manual | grammar, source-header, manual-section, target-boundary, action-type, cost |
+| Mark Targets | foe-ability | manual | manual-section, target-boundary |
+| Boot and Blade | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Devilish Charm | foe-ability | manual | grammar, extra-roll-or-tiers, manual-section, target-boundary |
+| Fissures of Darkness | foe-ability | manual | grammar, manual-section, target-boundary |
+| Stone Puppets | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary, action-type, cost |
+| Shutout | foe-ability | manual | grammar, manual-section, target-boundary |
+| Fold Space | foe-ability | manual | grammar, manual-section, target-boundary, action-type, cost |
+| Pitchfork Catapult | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Elemental Uproar | foe-ability | manual | grammar, manual-section, target-boundary |
+| Heavy Landing | foe-ability | manual | grammar, manual-section, target-boundary |
+| Crimson Embrace | foe-ability | manual | manual-section |
+| Poison the Blade | foe-ability | manual | grammar, manual-section, target-boundary |
+| Sea-Salted Wounds | foe-ability | manual | grammar, manual-section |
+| Tempo Changer | foe-ability | manual | grammar, unsafe-tier-remainder, manual-section, target-boundary |
+| Enflame | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Cackler's Cackletongue | foe-ability | manual | grammar, extra-roll-or-tiers, manual-section, target-boundary |
+| Ice Dance | foe-ability | manual | grammar, manual-section, target-boundary |
+| All Eyes, All Rise | foe-ability | manual | grammar, source-header, manual-section, target-boundary, action-type, cost |
+| I Thrive on Pain | foe-ability | manual | grammar, manual-section, target-boundary |
+| Precog Reflexes | foe-ability | manual | grammar, manual-section, target-boundary |
+| Thresher Thrasher | foe-ability | manual | grammar, manual-section, target-boundary, action-type, cost |
+| Blood Haze | foe-ability | manual | grammar, manual-section, target-boundary |
+| Is It Now or Is It Then? | foe-ability | manual | grammar, manual-section, target-boundary, action-type, cost |
+| Chroma Cloak | foe-ability | manual | grammar, unaccounted-paragraph, manual-section, target-boundary |
+| Running Cacophony | foe-ability | manual | grammar, manual-section, target-boundary, action-type, cost |
+| Dust Cloud | foe-ability | manual | grammar, manual-section, target-boundary |
+| Seismic Crush | foe-ability | manual | manual-section, target-boundary |
+| Earthwave | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Law and Order | foe-ability | manual | grammar, manual-section |
+| Circle and Strike | foe-ability | manual | grammar, manual-section, target-boundary |
+| Dagger Storm | foe-ability | manual | grammar, unaccounted-paragraph, manual-section, target-boundary |
+| Trumpeting Howl | foe-ability | manual | grammar, unsafe-tier-remainder, target-boundary, action-type, cost |
+| Awash | foe-ability | manual | unsafe-tier-remainder, target-boundary |
+| Buried in Sand | foe-ability | manual | unsafe-tier-remainder, target-boundary |
+| Shadow Cloak | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Let's Tussle | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Throw | foe-ability | manual | grammar, manual-section |
+| Dampening Grenade | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Fire Crossbow | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Gourmet Flesh | foe-ability | manual | grammar, manual-section, target-boundary |
+| Conflagration | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Pillar | foe-ability | manual | grammar, manual-section, target-boundary |
+| Kill Zone | foe-ability | manual | grammar, manual-section, target-boundary |
+| Mourning Till Dusk | foe-ability | manual | grammar, unsafe-tier-remainder, manual-section, target-boundary |
+| Warp Touch | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Vengeful Tusker | foe-ability | manual | grammar, manual-section, target-boundary |
+| Wide Axe | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Infernal Injunction | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Heat and Pressure | foe-ability | manual | grammar, extra-roll-or-tiers, manual-section, target-boundary |
+| Gladius | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| All to Cinders | foe-ability | manual | grammar, extra-roll-or-tiers, manual-section, target-boundary, action-type, cost |
+| Gloom Bolt | foe-ability | manual | target-boundary |
+| Pugio | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Celestial Furor | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Concussive Grenade | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Stomp | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Bloody Whirlwind | foe-ability | manual | manual-section, target-boundary |
+| See Only Me | foe-ability | manual | grammar, extra-roll-or-tiers, manual-section, target-boundary, action-type, cost |
+| Breathsnipe | foe-ability | manual | unsafe-tier-remainder |
+| Fuel for the Fire | foe-ability | manual | grammar, manual-section |
+| Rush | foe-ability | manual | grammar, manual-section, target-boundary |
+| Frightening Tones | foe-ability | manual | grammar, manual-section, target-boundary, action-type, cost |
+| Big Bite | foe-ability | manual | grammar, manual-section |
+| Pile Bunker Gauntlet | foe-ability | manual | unsafe-tier-remainder, target-boundary |
+| Hookclaw | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Throw | foe-ability | manual | grammar, manual-section |
+| Shocking Bolt | foe-ability | manual | manual-section |
+| Takeoff | foe-ability | manual | grammar, manual-section, target-boundary |
+| Call Abyssal Hyenas | foe-ability | manual | grammar, manual-section, target-boundary |
+| Red Mist Rising | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary, action-type, cost |
+| Gore | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Polarity Chaos | foe-ability | manual | grammar, extra-roll-or-tiers, source-header, manual-section, target-boundary, action-type, cost |
+| Souls of the Broken | foe-ability | manual | grammar, unsafe-tier-remainder, manual-section, target-boundary, action-type, cost |
+| Living Blaze | foe-ability | manual | manual-section, target-boundary |
+| Gatling Blaster | foe-ability | manual | manual-section, target-boundary |
+| Magnetic Trickery | foe-ability | manual | grammar, manual-section, target-boundary, action-type, cost |
+| Forced Gestation | foe-ability | manual | grammar, manual-section, target-boundary |
+| Vortex of Pain | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Lumina Arrow | foe-ability | manual | manual-section, target-boundary |
+| Hunting Leap | foe-ability | manual | grammar, manual-section |
+| Blazing Charge | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Club Swing | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Empyrean Boon | foe-ability | manual | grammar, manual-section, target-boundary |
+| Tractor Beam | foe-ability | manual | grammar, manual-section, target-boundary |
+| Toothful Thrashing | foe-ability | manual | unsafe-tier-remainder |
+| Disarming Glare | foe-ability | manual | grammar, extra-roll-or-tiers, unaccounted-paragraph, manual-section, target-boundary |
+| Fuel the Fire | foe-ability | manual | grammar, manual-section, target-boundary |
+| Violent Transformation | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Bite | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Test Your Metal! | foe-ability | manual | grammar, manual-section, target-boundary, action-type, cost |
+| Throw | foe-ability | manual | grammar, manual-section, target-boundary |
+| Trundle | foe-ability | manual | grammar, manual-section, target-boundary |
+| Fire Solo | foe-ability | manual | grammar, source-header, manual-section, target-boundary, action-type, cost |
+| Splitbow | foe-ability | manual | manual-section, target-boundary |
+| Dizzying Hex | foe-ability | manual | grammar, unsafe-tier-remainder |
+| Stunning Blast | foe-ability | manual | target-boundary |
+| Devilish Suggestion | foe-ability | manual | grammar, extra-roll-or-tiers, unaccounted-paragraph, manual-section, target-boundary |
+| Talons | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Dweomer Plume | foe-ability | manual | unsafe-tier-remainder, target-boundary |
+| Wall of Flesh | foe-ability | manual | grammar, manual-section, target-boundary |
+| Flurry of Bites | foe-ability | manual | target-boundary |
+| Land's Guardian | foe-ability | manual | grammar, extra-roll-or-tiers, source-header, manual-section, target-boundary, action-type, cost |
+| Horrid Wail | foe-ability | manual | unsafe-tier-remainder, manual-section, target-boundary |
+| Chilling Gravetouch | foe-ability | manual | manual-section |
+| Multiarm Strike | foe-ability | manual | manual-section |
+| Unbound Horrors | foe-ability | manual | unsafe-tier-remainder, target-boundary, action-type, cost |
+| Hollowbone Slug | foe-ability | manual | manual-section, target-boundary |
+| Blast of Mummy Dust | foe-ability | manual | grammar, manual-section, target-boundary |
+| Vampiric Celerity | foe-ability | manual | grammar, manual-section, target-boundary |
+| Summon My Guard | foe-ability | manual | grammar, manual-section, target-boundary |
+| Stolen Vitality | foe-ability | manual | grammar, manual-section, target-boundary |
+| Bone Carvers | foe-ability | manual | manual-section, target-boundary |
+| Rotten Smash | foe-ability | manual | unsafe-tier-remainder, target-boundary |
+| Accursed Slam | foe-ability | manual | manual-section, target-boundary |
+| Accursed Bindings | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Hidden Movement | foe-ability | manual | grammar, manual-section, target-boundary |
+| Exsanguinating Bite | foe-ability | manual | manual-section |
+| Eldritch Curse | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Knocking Heads | foe-ability | manual | grammar, manual-section, target-boundary |
+| Binding Curse | foe-ability | manual | unsafe-tier-remainder, manual-section |
+| Taste | foe-ability | manual | manual-section, target-boundary |
+| Plague of Flies | foe-ability | manual | manual-section, target-boundary, action-type, cost |
