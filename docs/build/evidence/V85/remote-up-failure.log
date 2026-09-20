@@ -1,0 +1,33 @@
+ Container salient-supporting-actions-dev-d21ad518e747-web-1 Stopping 
+ Container salient-supporting-actions-dev-d21ad518e747-web-1 Stopped 
+ Container salient-supporting-actions-dev-d21ad518e747-web-1 Removing 
+ Container salient-supporting-actions-dev-d21ad518e747-web-1 Removed 
+ Container salient-supporting-actions-dev-d21ad518e747-backend-1 Stopping 
+ Container salient-supporting-actions-dev-d21ad518e747-backend-1 Stopped 
+ Container salient-supporting-actions-dev-d21ad518e747-backend-1 Removing 
+ Container salient-supporting-actions-dev-d21ad518e747-backend-1 Removed 
+ Network salient-supporting-actions-dev-d21ad518e747_default Removing 
+ Network salient-supporting-actions-dev-d21ad518e747_default Removed 
+ Network salient-supporting-actions-dev-d21ad518e747_default Creating 
+ Network salient-supporting-actions-dev-d21ad518e747_default Creating 
+ Network salient-supporting-actions-dev-d21ad518e747_default Created 
+ Network salient-supporting-actions-dev-d21ad518e747_default Created 
+ Container salient-supporting-actions-dev-d21ad518e747-job-93c6083e Creating 
+ Container salient-supporting-actions-dev-d21ad518e747-job-93c6083e Created 
+Already up to date
+Done in 388ms using pnpm v11.5.3
+Pinned Convex CLI compatibility patch installed (instance secret via environment).
+Remote synthetic Git snapshot created; original source identity remains in runtime state.
+$ node scripts/ingest-rules.ts && node scripts/build-foes-assets.ts
+Ingested 2614 entries, 26 categories from fb83a789da8f. No unresolved links.
+Foe delivery: 2507 entries; version ab2c43b79669b916
+ Container salient-supporting-actions-dev-d21ad518e747-backend-1 Creating 
+ Container salient-supporting-actions-dev-d21ad518e747-backend-1 Created 
+ Container salient-supporting-actions-dev-d21ad518e747-web-1 Creating 
+ Container salient-supporting-actions-dev-d21ad518e747-web-1 Created 
+ Container salient-supporting-actions-dev-d21ad518e747-backend-1 Starting 
+ Container salient-supporting-actions-dev-d21ad518e747-backend-1 Started 
+ Container salient-supporting-actions-dev-d21ad518e747-backend-1 Waiting 
+ Container salient-supporting-actions-dev-d21ad518e747-backend-1 Error dependency backend failed to start
+dependency failed to start: container salient-supporting-actions-dev-d21ad518e747-backend-1 exited (1)
+presidium-dev: docker failed (exit 1); inspect environment logs

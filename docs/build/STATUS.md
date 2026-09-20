@@ -58,8 +58,8 @@ must be separately recorded; this branch has performed neither.
 | V82 | [Remaining level-one ancestries](V82-remaining-ancestries.md) | Main 589d357 | Complete — main `1fa8aac`; both apps API28/28, Forge137 accepted | WIZARD, slice/V82 |
 | V83 | [Core perk and ordinary kit action coverage](V83-supporting-actions.md) | V37, V74, V82 | Delivered — `175d17d` merged/live; 31/31 shared API passed | Astra character lead |
 | V84 | [Culture presets](V84-culture-presets.md) | V37, V83 | Delivered — 27 presets plus Bespoke; `175d17d` merged/live | Astra character lead |
-| V85 | [Complication grants and dependencies](V85-complications.md) | V37, V83 | In progress — source audit and missing shared grants | Astra character lead |
-| V86 | [Starting reward fulfillment](V86-starting-rewards.md) | V37, V85 | In progress — sourced initial possession/balance persistence | Astra character lead |
+| V85 | [Complication grants and dependencies](V85-complications.md) | V37, V83 | Built on branch — 864 local tests pass; live API blocked by backend startup; unmerged | Astra character lead |
+| V86 | [Starting reward fulfillment](V86-starting-rewards.md) | V37, V85 | Built on branch — one-time rewards and item actions; same live API blocker; unmerged | Astra character lead |
 | V76 | [Dragon Knight level one](V76-dragon-knight-level-one.md) | V82 integration | Complete via V82 — checks, reviews, public API and Forge proof | Astra character worker |
 | V77 | [High Elf level one](V77-high-elf-level-one.md) | V82 integration | Complete via V82 — checks, reviews, public API and Forge proof | Astra character worker |
 | V78 | [Memonek level one](V78-memonek-level-one.md) | V82 integration | Complete via V82 — checks, reviews, public API and Forge proof | Astra character worker |
