@@ -134,7 +134,7 @@ test('a cleared search cannot resurrect delayed results', async ({ page, context
   const response = page.waitForResponse(r => r.url().includes('/search-index.json'));
   release();
   await response;
-  await expect(page.getByRole('heading', { name: 'Find your next heroic moment.' })).toBeVisible();
+  await expect(page.getByRole('heading', { level: 1, name: 'Rules', exact: true })).toBeVisible();
   await expect(page.locator('.rules-result')).toHaveCount(0);
   await page.getByLabel('Search rules').fill('Surges');
   await expect(page.locator('.rules-result').first()).toContainText('Surges');

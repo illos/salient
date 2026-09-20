@@ -193,13 +193,7 @@ function FoesLibrary({ filters, catalog }: { filters: FoesFilters; catalog: Foes
         </aside>
         <main className="rules-main foes-main">
           <div className="rules-intro foes-intro">
-            <span className="rules-kicker">The Draw Steel Compendium</span>
             <h1>Foes library</h1>
-            <p>
-              Find the creatures for your next encounter.
-              <br />
-              Explore stat blocks, abilities, and the rules that bring them to life.
-            </p>
           </div>
           <div className="foes-kind-tabs" role="group" aria-label="Reference kind">
             {Object.entries({ ...kinds, all: 'All references' }).map(([kind, label]) => (

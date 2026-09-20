@@ -5,7 +5,7 @@ test('public rules search, readable articles, original sources and browser histo
   page,
 }) => {
   await page.goto('/rules');
-  await expect(page.getByRole('heading', { name: 'Find your next heroic moment.' })).toBeVisible();
+  await expect(page.getByRole('heading', { level: 1, name: 'Rules', exact: true })).toBeVisible();
   await page.getByRole('textbox', { name: 'Search rules' }).fill('winded');
   const result = page.locator('.rules-result').first();
   await expect(result).toContainText('Winded');

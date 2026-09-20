@@ -162,17 +162,7 @@ function Overview({ catalog }: { catalog: RulesCatalog }) {
   return (
     <>
       <div className="rules-intro">
-        <span className="rules-kicker">The Draw Steel Compendium</span>
-        <h1>
-          Find your next
-          <br />
-          heroic moment.
-        </h1>
-        <p>
-          Every rule, every option, every creature.
-          <br />
-          Explore the books or go straight to what you need.
-        </p>
+        <h1>Rules</h1>
       </div>
       <div className="rules-section-title">
         <h2>Start with the books</h2>

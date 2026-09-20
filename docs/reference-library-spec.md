@@ -162,3 +162,11 @@ User-confirmed after the hosted performance audit: Rules and Foes share the appl
 Page code is lazy loaded. Large reference libraries deliver compact listing metadata first and progressively fetch the required snippets/details; unrelated content must not block the page. Search indexes are generated at build time from the pinned common corpus, loaded off the main thread, and retained across reference navigation. Cache immutable content by version while revalidating the current manifest and app shell. Preserve relevance, source identities, attribution, deep links and complete supported reference coverage.
 
 Table query/history changes are separate from this reference delivery assignment.
+
+## Library page titles — 2026-09-20
+
+User-confirmed: the reference library pages carry a plain title and nothing else above their
+content. `/rules` shows `Rules`; `/foes` shows `Foes library`. No marketing hero, kicker or
+tagline. Salient is built from the Steel Compendium and does not present itself as the
+Compendium, so no page identifies the app as "The Draw Steel Compendium"; per-entry source
+links and the attribution footer keep naming Steel Compendium as the source.
