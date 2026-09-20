@@ -78,6 +78,7 @@ import {
   appendDevilTraits,
 } from './ancestries/devil.ts';
 import { applyDwarfBaseline } from './ancestries/dwarf.ts';
+import { applyHumanBaseline } from './ancestries/human.ts';
 import { applyPolderBaseline, applyPolderDisengage } from './ancestries/polder.ts';
 
 export const DEFINITIONS_SCHEMA_VERSION = 'r01.1';
@@ -1193,6 +1194,7 @@ class Evaluation {
     applyDevilNoKit(this, out, noKit);
     applyPolderBaseline(this, out, noKit);
     applyDwarfBaseline(this, out, noKit);
+    applyHumanBaseline(this, out, noKit);
     if (noKit)
       out.disengage = dv(1, [
         sourced('free-strikes.grant', SENTENCES.disengage.path, SENTENCES.disengage.quote, {

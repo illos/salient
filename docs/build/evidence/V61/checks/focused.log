@@ -1,0 +1,9 @@
+
+ RUN  v4.1.11 /app
+
+ ✓  engine  tests/character-v61-human.test.ts (4 tests) 36ms
+
+ Test Files  1 passed (1)
+      Tests  4 passed (4)
+   Start at  00:23:19
+   Duration  479ms (transform 275ms, setup 0ms, import 345ms, tests 36ms, environment 0ms)
