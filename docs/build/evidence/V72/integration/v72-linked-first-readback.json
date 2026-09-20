@@ -1,0 +1,80 @@
+{
+  "runId": "ec847b6d-0cad-4937-833c-3ea8f60315c7",
+  "startedAt": "2026-09-20T08:42:26.198Z",
+  "recordedAt": "2026-09-20T08:42:30.522Z",
+  "elapsedMs": 4323,
+  "source": {
+    "submodules": [
+      {
+        "path": "vendor/steel-compendium",
+        "url": "https://github.com/SteelCompendium/data-unified.git",
+        "gitlink": "fb83a789da8f0327a389c277a0c790b1648d5810",
+        "initialized": true,
+        "commit": "fb83a789da8f0327a389c277a0c790b1648d5810",
+        "dirty": false
+      },
+      {
+        "path": "vendor/forge-steel",
+        "url": "https://github.com/andyaiken/forgesteel.git",
+        "gitlink": "5a846aadb623a9855a023e9403bb887a956c341f",
+        "initialized": true,
+        "commit": "5a846aadb623a9855a023e9403bb887a956c341f",
+        "dirty": false
+      }
+    ],
+    "checkout": "/srv/presidium/projects/salient/code/.worktrees/engine-live",
+    "identity": "0cb1d386bdc3971843452c9f984cd2dfa2f490afcd24e9e02d5e4a95508d1a53",
+    "commit": "a68a047fc458f15b51ac8cd3391ed4e133405cfe",
+    "dirty": true
+  },
+  "target": "engine-live",
+  "runner": {
+    "location": "CT114 build container",
+    "cwd": "/app",
+    "node": "v24.13.0"
+  },
+  "expectedMethod": "Independent pinned Brutal Slam constants, public baseline and original dice; no compiler or resolver oracle. Natural 19/20 tier override uses confirmed R04 project contract. Real dice may keep all correction outcomes in one tier; deterministic tier coverage belongs to the isolated V72 proof.",
+  "sourceRules": [
+    "feature/ability/fury/level-1/brutal-slam.md",
+    "rule/dice/bane.md",
+    "rule/character/size.md",
+    "movement/forced-movement.md"
+  ],
+  "frontend": "https://salient-engine-live-dev-fcf42d994212.tail41404c.ts.net",
+  "backend": "http://backend:3210",
+  "sourcePin": "fb83a789da8f0327a389c277a0c790b1648d5810",
+  "scriptSha256": "05d8be2418359dea30a13ecffc5b4b2bd42be2a786834c2c33c1d8425ae50ea6",
+  "runtimeHistorySha256": "8c52992a1bd5c1d1387445f646cc56c3cb28d62dd508ed60af2d0fb59211ec68",
+  "runtimeHistoryReadSha256": "e4075fcc6acca4c3a017cbba642231c584a122e4c25ec064775f6362fabae80a",
+  "sourceBytes": {
+    "scripts/v72-headless-main.ts": "05d8be2418359dea30a13ecffc5b4b2bd42be2a786834c2c33c1d8425ae50ea6",
+    "scripts/app.ts": "982758f0503363db26812810ffa4229c9f3aeba8d2005824db04578a8cf39e2d",
+    "shared/resolve/index.ts": "5f4ab6041b4fbdb807f4d8047a3e5ee5e18edd9028e24b0ccd4172ff80243e64",
+    "shared/content/compendium/manifest.json": "8ba9a4bdfea415e3091012bc16c0783943ec31ff77178b1314bb426f56a1ba35",
+    "shared/content/character-evaluation-examples.json": "8fd35adc37ce502d1cd89b61ec6666b05baf62d4f36fb9aace0b7b7ff9c61495",
+    "shared/content/fury-level-one-decisions.json": "7c59c68024bcec1e7d6738dcca58fe2e16edad82325165b076fb148667264bc2",
+    "convex/abilities.ts": "750f01b40f659cfe79c25c4f6de1dafe35aa6e1cbd38088adbdade42ba5ff050",
+    "convex/lib/abilityOperations.ts": "71cf5191d43bf57a130bfb08b5057711496de68f90024dc0c14abc9217b8b5f0",
+    "convex/lib/resolve.ts": "4205c20a337fe3b744fe28e69790ae9266fca2c155d89b9e0cc2a97a852f14bb",
+    "convex/lib/compiledSource.ts": "73cc6b5e53188dab88cfde8c004ad7877b7dca07e0449cffb73a9dc07591dc4c",
+    "convex/lib/compiledResults.ts": "5027b0a5f205973ee693acb6f4666fc0bc2193574bc8baf011c47eaed993c195",
+    "shared/contracts/compiledResult.ts": "ca74709b6a4a2b074efe0b26a4c5d4dfb13cba4b30814c5c661093c680aab05f",
+    "shared/resolve/compileAbility.ts": "939518dadfcbda5879e5e4e4295090b3ebc5b212ef6ce8b16bbd8a54b7de350e",
+    "shared/resolve/compiledOutcome.ts": "2e00e90dd846f8ba71ef5d11be6a5f6ecc39a04317cfeeebdc73fbaee693491e",
+    "convex/lib/history.ts": "8c52992a1bd5c1d1387445f646cc56c3cb28d62dd508ed60af2d0fb59211ec68",
+    "convex/lib/historyRead.ts": "e4075fcc6acca4c3a017cbba642231c584a122e4c25ec064775f6362fabae80a",
+    "convex/lib/historyIndex.ts": "6ecfa798c5b6f999fab0b4c5a82399b429f5f67f717fd6867548901a19299f26"
+  },
+  "method": "Real BetterAuth HTTP, scripts/app.ts commands and authenticated public Convex readback; real random accepted dice; no browser, database import, reset or gameplay row seeding",
+  "passed": false,
+  "stage": "pre-use-facts",
+  "operation": "query:abilities:sheet",
+  "records": [
+    {
+      "case": "setup-identity",
+      "campaignId": "jh7bphr0q5awj28rd95w09rz4n8esy5w",
+      "heroId": "k57ec64542cwz5ehx5acdzaax18eshkf",
+      "foeId": "m57cy0dy4n58gzt2077ymaqfr58er1f6"
+    }
+  ]
+}

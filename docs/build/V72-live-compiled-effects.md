@@ -98,3 +98,21 @@ shared main and verify occurrence-aware results. No content reseed or data reset
 The historical V63 main proof runner assumes push is in legacy `unresolvedClauses`; after this
 migration use occurrence-aware verification rather than treating that historical harness as a
 current compiled-effects acceptance test. Browser testing remains paused.
+
+
+### 2026-09-20 — Integration preparation on current main
+
+Assignment 5 rebases V72 onto `42211f5`, preserving the V68 campaign schema/UI, V74 ancestry
+projection and V82 twelve-ancestry catalog. The refreshed support report retains exactly six live
+compiled abilities and four supported-but-unavailable entries. Four newly selectable ancestry
+abilities remain compatibility paths. No runtime arithmetic changed.
+
+The [integration evidence](evidence/V72/integration/README.md) records local full-check acceptance
+(333 engine and 510 app/script tests, build), the isolated reference-only catalog refresh and the
+repeated 46-record public proof and 14-record real-dice linked-correction proof (both passed). The new `scripts/v72-headless-main.ts` is an occurrence-aware
+adaptation of V63's linked-correction journey, with exact environment guards and real dice;
+it neither imports state nor refreshes content. The old runner remains historical evidence.
+The first rehearsal caught a runner-only `might` versus `M` baseline key error before ability use;
+the fix uses the typed baseline and preserves the failed artifact. Browser testing remains paused.
+
+Renewed [independent integration review](reviews/V72-integration-review.md) passed the rebase and both actual readbacks. The isolated runtime is stopped with data retained. The integration lead owns fast-forwarding main, updating the shared runtime and the final main-target proof.

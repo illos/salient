@@ -1,6 +1,6 @@
 {
   "generator": "V72/1",
-  "contentHash": "sha256:64a08e925f76657409df983b706d2599edcb499457e9b21325d65ee7268c10d8",
+  "contentHash": "sha256:aaf7c027a421e6059448e019271111877f208b577b756f5e79645c3d497ed26e",
   "sourceRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
   "foesEdition": "bf262edf546e91e1540cc17489915f18c4873ddd8bd8e225b20f3441e3f74f30",
   "scope": "Structural support, current grant/loading availability and live execution are separate. Source drift never silently falls back; historical results are never recompiled on read.",
@@ -16,9 +16,9 @@
       "manual": 1154
     },
     "hero-standalone": {
-      "total": 52,
+      "total": 57,
       "supported": 6,
-      "manual": 46
+      "manual": 51
     },
     "kit-signature": {
       "total": 25,
@@ -5163,9 +5163,46 @@
           "message": "Only the designed single-target envelope is eligible."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
-      "grants": [],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Draconian Pride",
+          "sourcePath": "en/unified/md/feature/ability/dragon-knight/draconian-pride.md",
+          "decisionId": "ancestry.dragon-knight.purchased-traits",
+          "level": 1,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Draconian Pride supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Draconian Pride",
+          "sourcePath": "en/unified/md/feature/ability/dragon-knight/draconian-pride.md",
+          "decisionId": "ancestry.revenant.dragon-knight.purchased-traits",
+          "level": 1,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Draconian Pride supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Draconian Pride",
+          "sourcePath": "en/unified/md/feature/ability/dragon-knight/draconian-pride.md",
+          "decisionId": "ancestry.dragon-knight.purchased-traits",
+          "level": 2,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Draconian Pride supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Draconian Pride",
+          "sourcePath": "en/unified/md/feature/ability/dragon-knight/draconian-pride.md",
+          "decisionId": "ancestry.revenant.dragon-knight.purchased-traits",
+          "level": 2,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Draconian Pride supportedInV001=true; chain selectable"
+        }
+      ],
       "movementFacts": "Known precise sizes/stability; final movement coverage remains explicit missing/manual work."
     },
     {
@@ -5247,9 +5284,46 @@
           "message": "Only the designed single-target envelope is eligible."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
-      "grants": [],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Dragon Breath",
+          "sourcePath": "en/unified/md/feature/ability/dragon-knight/dragon-breath.md",
+          "decisionId": "ancestry.dragon-knight.purchased-traits",
+          "level": 1,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Dragon Breath supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Dragon Breath",
+          "sourcePath": "en/unified/md/feature/ability/dragon-knight/dragon-breath.md",
+          "decisionId": "ancestry.revenant.dragon-knight.purchased-traits",
+          "level": 1,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Dragon Breath supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Dragon Breath",
+          "sourcePath": "en/unified/md/feature/ability/dragon-knight/dragon-breath.md",
+          "decisionId": "ancestry.dragon-knight.purchased-traits",
+          "level": 2,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Dragon Breath supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Dragon Breath",
+          "sourcePath": "en/unified/md/feature/ability/dragon-knight/dragon-breath.md",
+          "decisionId": "ancestry.revenant.dragon-knight.purchased-traits",
+          "level": 2,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Dragon Breath supportedInV001=true; chain selectable"
+        }
+      ],
       "movementFacts": "No compiled push."
     },
     {
@@ -9623,6 +9697,917 @@
           "grantKind": "ancestry-ability",
           "selectable": "selectable",
           "detail": "automatic grant; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.revenant/detonate-sigil",
+      "name": "Detonate Sigil",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.revenant/detonate-sigil",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/revenant/detonate-sigil.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.revenant/detonate-sigil#block:0:tier1:0:e908b004d7202192",
+            "locator": "block:0:tier1:0",
+            "clause": "3 + R, I, or P damage",
+            "kind": "unsupported",
+            "shape": "N + r, i, or p damage",
+            "reason": "unknown",
+            "dependency": "unknown"
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.revenant/detonate-sigil#block:0:tier1:1:e2f998b3a230cbc6",
+            "locator": "block:0:tier1:1",
+            "clause": "[slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
+            "kind": "unsupported",
+            "shape": "slide N",
+            "reason": "slide",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.revenant/detonate-sigil#block:0:tier2:0:cff0424f93f2e654",
+            "locator": "block:0:tier2:0",
+            "clause": "5 + R, I, or P damage",
+            "kind": "unsupported",
+            "shape": "N + r, i, or p damage",
+            "reason": "unknown",
+            "dependency": "unknown"
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.revenant/detonate-sigil#block:0:tier2:1:e2f997b3a230ca13",
+            "locator": "block:0:tier2:1",
+            "clause": "[slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
+            "kind": "unsupported",
+            "shape": "slide N",
+            "reason": "slide",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.revenant/detonate-sigil#block:0:tier3:0:c9bf0a6374d70c0e",
+            "locator": "block:0:tier3:0",
+            "clause": "7 + R, I, or P damage",
+            "kind": "unsupported",
+            "shape": "N + r, i, or p damage",
+            "reason": "unknown",
+            "dependency": "unknown"
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.revenant/detonate-sigil#block:0:tier3:1:e2f996b3a230c860",
+            "locator": "block:0:tier3:1",
+            "clause": "[slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3",
+            "kind": "unsupported",
+            "shape": "slide N",
+            "reason": "slide",
+            "dependency": "unknown"
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.revenant/detonate-sigil#block:1:0:946e840d45e3510c",
+          "locator": "block:1:0",
+          "clause": "The sigil disappears from the creature.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "roll-expression-outside-grammar"
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier1:0",
+          "clause": "3 + R, I, or P damage",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier1:1",
+          "clause": "[slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier2:0",
+          "clause": "5 + R, I, or P damage",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier2:1",
+          "clause": "[slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier3:0",
+          "clause": "7 + R, I, or P damage",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier3:1",
+          "clause": "[slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "The sigil disappears from the creature.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "One creature bearing your sigil",
+          "message": "Only the designed single-target envelope is eligible."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Detonate Sigil",
+          "sourcePath": "en/unified/md/feature/ability/revenant/detonate-sigil.md",
+          "decisionId": "ancestry.revenant.devil.purchased-traits",
+          "level": 1,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Vengeance Mark supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Detonate Sigil",
+          "sourcePath": "en/unified/md/feature/ability/revenant/detonate-sigil.md",
+          "decisionId": "ancestry.revenant.dragon-knight.purchased-traits",
+          "level": 1,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Vengeance Mark supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Detonate Sigil",
+          "sourcePath": "en/unified/md/feature/ability/revenant/detonate-sigil.md",
+          "decisionId": "ancestry.revenant.dwarf.purchased-traits",
+          "level": 1,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Vengeance Mark supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Detonate Sigil",
+          "sourcePath": "en/unified/md/feature/ability/revenant/detonate-sigil.md",
+          "decisionId": "ancestry.revenant.hakaan.purchased-traits",
+          "level": 1,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Vengeance Mark supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Detonate Sigil",
+          "sourcePath": "en/unified/md/feature/ability/revenant/detonate-sigil.md",
+          "decisionId": "ancestry.revenant.high-elf.purchased-traits",
+          "level": 1,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Vengeance Mark supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Detonate Sigil",
+          "sourcePath": "en/unified/md/feature/ability/revenant/detonate-sigil.md",
+          "decisionId": "ancestry.revenant.human.purchased-traits",
+          "level": 1,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Vengeance Mark supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Detonate Sigil",
+          "sourcePath": "en/unified/md/feature/ability/revenant/detonate-sigil.md",
+          "decisionId": "ancestry.revenant.memonek.purchased-traits",
+          "level": 1,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Vengeance Mark supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Detonate Sigil",
+          "sourcePath": "en/unified/md/feature/ability/revenant/detonate-sigil.md",
+          "decisionId": "ancestry.revenant.orc.purchased-traits",
+          "level": 1,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Vengeance Mark supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Detonate Sigil",
+          "sourcePath": "en/unified/md/feature/ability/revenant/detonate-sigil.md",
+          "decisionId": "ancestry.revenant.polder.purchased-traits",
+          "level": 1,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Vengeance Mark supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Detonate Sigil",
+          "sourcePath": "en/unified/md/feature/ability/revenant/detonate-sigil.md",
+          "decisionId": "ancestry.revenant.time-raider.purchased-traits",
+          "level": 1,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Vengeance Mark supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Detonate Sigil",
+          "sourcePath": "en/unified/md/feature/ability/revenant/detonate-sigil.md",
+          "decisionId": "ancestry.revenant.wode-elf.purchased-traits",
+          "level": 1,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Vengeance Mark supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Detonate Sigil",
+          "sourcePath": "en/unified/md/feature/ability/revenant/detonate-sigil.md",
+          "decisionId": "ancestry.revenant.devil.purchased-traits",
+          "level": 2,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Vengeance Mark supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Detonate Sigil",
+          "sourcePath": "en/unified/md/feature/ability/revenant/detonate-sigil.md",
+          "decisionId": "ancestry.revenant.dragon-knight.purchased-traits",
+          "level": 2,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Vengeance Mark supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Detonate Sigil",
+          "sourcePath": "en/unified/md/feature/ability/revenant/detonate-sigil.md",
+          "decisionId": "ancestry.revenant.dwarf.purchased-traits",
+          "level": 2,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Vengeance Mark supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Detonate Sigil",
+          "sourcePath": "en/unified/md/feature/ability/revenant/detonate-sigil.md",
+          "decisionId": "ancestry.revenant.hakaan.purchased-traits",
+          "level": 2,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Vengeance Mark supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Detonate Sigil",
+          "sourcePath": "en/unified/md/feature/ability/revenant/detonate-sigil.md",
+          "decisionId": "ancestry.revenant.high-elf.purchased-traits",
+          "level": 2,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Vengeance Mark supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Detonate Sigil",
+          "sourcePath": "en/unified/md/feature/ability/revenant/detonate-sigil.md",
+          "decisionId": "ancestry.revenant.human.purchased-traits",
+          "level": 2,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Vengeance Mark supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Detonate Sigil",
+          "sourcePath": "en/unified/md/feature/ability/revenant/detonate-sigil.md",
+          "decisionId": "ancestry.revenant.memonek.purchased-traits",
+          "level": 2,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Vengeance Mark supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Detonate Sigil",
+          "sourcePath": "en/unified/md/feature/ability/revenant/detonate-sigil.md",
+          "decisionId": "ancestry.revenant.orc.purchased-traits",
+          "level": 2,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Vengeance Mark supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Detonate Sigil",
+          "sourcePath": "en/unified/md/feature/ability/revenant/detonate-sigil.md",
+          "decisionId": "ancestry.revenant.polder.purchased-traits",
+          "level": 2,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Vengeance Mark supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Detonate Sigil",
+          "sourcePath": "en/unified/md/feature/ability/revenant/detonate-sigil.md",
+          "decisionId": "ancestry.revenant.time-raider.purchased-traits",
+          "level": 2,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Vengeance Mark supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Detonate Sigil",
+          "sourcePath": "en/unified/md/feature/ability/revenant/detonate-sigil.md",
+          "decisionId": "ancestry.revenant.wode-elf.purchased-traits",
+          "level": 2,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Vengeance Mark supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.time-raider/concussive-slam",
+      "name": "Concussive Slam",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.time-raider/concussive-slam",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/time-raider/concussive-slam.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.time-raider/concussive-slam#block:0:tier1:0:ea63483fc3b6f069",
+            "locator": "block:0:tier1:0",
+            "clause": "2 + R, I, or P damage",
+            "kind": "unsupported",
+            "shape": "N + r, i, or p damage",
+            "reason": "unknown",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.time-raider/concussive-slam#block:0:tier2:0:cff0424f93f2e654",
+            "locator": "block:0:tier2:0",
+            "clause": "5 + R, I, or P damage",
+            "kind": "unsupported",
+            "shape": "N + r, i, or p damage",
+            "reason": "unknown",
+            "dependency": "unknown"
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.time-raider/concussive-slam#block:0:tier2:1:4e92293619489c55",
+            "locator": "block:0:tier2:1",
+            "clause": "[push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
+            "kind": "unsupported",
+            "shape": "push N (not directly after damage)",
+            "reason": "push-with-extra",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.time-raider/concussive-slam#block:0:tier3:0:c9bf0a6374d70c0e",
+            "locator": "block:0:tier3:0",
+            "clause": "7 + R, I, or P damage",
+            "kind": "unsupported",
+            "shape": "N + r, i, or p damage",
+            "reason": "unknown",
+            "dependency": "unknown"
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.time-raider/concussive-slam#block:0:tier3:1:4e9226361948973c",
+            "locator": "block:0:tier3:1",
+            "clause": "[push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
+            "kind": "unsupported",
+            "shape": "push N (not directly after damage)",
+            "reason": "push-with-extra",
+            "dependency": "unknown"
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.time-raider/concussive-slam#block:0:tier3:2:f23973ad31d3b963",
+            "locator": "block:0:tier3:2",
+            "clause": "M < STRONG, [prone](scc.v1:mcdm.heroes.v1/condition/prone)",
+            "kind": "unsupported",
+            "shape": "potency:M < SYM prone",
+            "reason": "potency-condition",
+            "dependency": "unknown"
+          }
+        ]
+      ],
+      "sections": [],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "roll-expression-outside-grammar"
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier1:0",
+          "clause": "2 + R, I, or P damage",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "empty-clause",
+          "locator": "block:0:tier1",
+          "clause": "",
+          "message": "A missing clause cannot be interpreted."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier2:0",
+          "clause": "5 + R, I, or P damage",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier2:1",
+          "clause": "[push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier3:0",
+          "clause": "7 + R, I, or P damage",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier3:1",
+          "clause": "[push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier3:2",
+          "clause": "M < STRONG, [prone](scc.v1:mcdm.heroes.v1/condition/prone)",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        }
+      ],
+      "live": "not-reachable",
+      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "grants": [
+        {
+          "name": "Concussive Slam",
+          "sourcePath": "en/unified/md/feature/ability/time-raider/concussive-slam.md",
+          "decisionId": "ancestry.revenant.time-raider.psionic-gift.ability",
+          "level": 1,
+          "grantKind": "ancestry-ability",
+          "selectable": "unknown",
+          "detail": "grant of option Concussive Slam supportedInV001=true; chain unknown"
+        },
+        {
+          "name": "Concussive Slam",
+          "sourcePath": "en/unified/md/feature/ability/time-raider/concussive-slam.md",
+          "decisionId": "ancestry.time-raider.psionic-gift.ability",
+          "level": 1,
+          "grantKind": "ancestry-ability",
+          "selectable": "unknown",
+          "detail": "grant of option Concussive Slam supportedInV001=true; chain unknown"
+        },
+        {
+          "name": "Concussive Slam",
+          "sourcePath": "en/unified/md/feature/ability/time-raider/concussive-slam.md",
+          "decisionId": "ancestry.revenant.time-raider.psionic-gift.ability",
+          "level": 2,
+          "grantKind": "ancestry-ability",
+          "selectable": "unknown",
+          "detail": "grant of option Concussive Slam supportedInV001=true; chain unknown"
+        },
+        {
+          "name": "Concussive Slam",
+          "sourcePath": "en/unified/md/feature/ability/time-raider/concussive-slam.md",
+          "decisionId": "ancestry.time-raider.psionic-gift.ability",
+          "level": 2,
+          "grantKind": "ancestry-ability",
+          "selectable": "unknown",
+          "detail": "grant of option Concussive Slam supportedInV001=true; chain unknown"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.time-raider/minor-acceleration",
+      "name": "Minor Acceleration",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.time-raider/minor-acceleration",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/time-raider/minor-acceleration.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.time-raider/minor-acceleration#block:0:0:c0d0dba3701ff422",
+          "locator": "block:0:0",
+          "clause": "The target gains a [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) to [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) equal to your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason), [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition), or [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) score (your choice) until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "The target gains a [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) to [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) equal to your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason), [Intuition](scc.v1:mcdm.heroes.v1/rule.character/intuition), or [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) score (your choice) until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Self or one ally",
+          "message": "Only the designed single-target envelope is eligible."
+        }
+      ],
+      "live": "not-reachable",
+      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "grants": [
+        {
+          "name": "Minor Acceleration",
+          "sourcePath": "en/unified/md/feature/ability/time-raider/minor-acceleration.md",
+          "decisionId": "ancestry.revenant.time-raider.psionic-gift.ability",
+          "level": 1,
+          "grantKind": "ancestry-ability",
+          "selectable": "unknown",
+          "detail": "grant of option Minor Acceleration supportedInV001=true; chain unknown"
+        },
+        {
+          "name": "Minor Acceleration",
+          "sourcePath": "en/unified/md/feature/ability/time-raider/minor-acceleration.md",
+          "decisionId": "ancestry.time-raider.psionic-gift.ability",
+          "level": 1,
+          "grantKind": "ancestry-ability",
+          "selectable": "unknown",
+          "detail": "grant of option Minor Acceleration supportedInV001=true; chain unknown"
+        },
+        {
+          "name": "Minor Acceleration",
+          "sourcePath": "en/unified/md/feature/ability/time-raider/minor-acceleration.md",
+          "decisionId": "ancestry.revenant.time-raider.psionic-gift.ability",
+          "level": 2,
+          "grantKind": "ancestry-ability",
+          "selectable": "unknown",
+          "detail": "grant of option Minor Acceleration supportedInV001=true; chain unknown"
+        },
+        {
+          "name": "Minor Acceleration",
+          "sourcePath": "en/unified/md/feature/ability/time-raider/minor-acceleration.md",
+          "decisionId": "ancestry.time-raider.psionic-gift.ability",
+          "level": 2,
+          "grantKind": "ancestry-ability",
+          "selectable": "unknown",
+          "detail": "grant of option Minor Acceleration supportedInV001=true; chain unknown"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.time-raider/psionic-bolt",
+      "name": "Psionic Bolt",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.time-raider/psionic-bolt",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/time-raider/psionic-bolt.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.time-raider/psionic-bolt#block:0:tier1:0:76cfcbb3d245fa68",
+            "locator": "block:0:tier1:0",
+            "clause": "2 + R, I, or P psychic damage",
+            "kind": "unsupported",
+            "shape": "N + r, i, or p psychic damage",
+            "reason": "unknown",
+            "dependency": "unknown"
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.time-raider/psionic-bolt#block:0:tier1:1:e2f998b3a230cbc6",
+            "locator": "block:0:tier1:1",
+            "clause": "[slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
+            "kind": "unsupported",
+            "shape": "slide N",
+            "reason": "slide",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.time-raider/psionic-bolt#block:0:tier2:0:8296c2bdc74f1471",
+            "locator": "block:0:tier2:0",
+            "clause": "5 + R, I, or P psychic damage",
+            "kind": "unsupported",
+            "shape": "N + r, i, or p psychic damage",
+            "reason": "unknown",
+            "dependency": "unknown"
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.time-raider/psionic-bolt#block:0:tier2:1:e2f997b3a230ca13",
+            "locator": "block:0:tier2:1",
+            "clause": "[slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
+            "kind": "unsupported",
+            "shape": "slide N",
+            "reason": "slide",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.time-raider/psionic-bolt#block:0:tier3:0:92162561fee26a8f",
+            "locator": "block:0:tier3:0",
+            "clause": "7 + R, I, or P psychic damage",
+            "kind": "unsupported",
+            "shape": "N + r, i, or p psychic damage",
+            "reason": "unknown",
+            "dependency": "unknown"
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.time-raider/psionic-bolt#block:0:tier3:1:e2f996b3a230c860",
+            "locator": "block:0:tier3:1",
+            "clause": "[slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3",
+            "kind": "unsupported",
+            "shape": "slide N",
+            "reason": "slide",
+            "dependency": "unknown"
+          }
+        ]
+      ],
+      "sections": [],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "roll-expression-outside-grammar"
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier1:0",
+          "clause": "2 + R, I, or P psychic damage",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier1:1",
+          "clause": "[slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier2:0",
+          "clause": "5 + R, I, or P psychic damage",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier2:1",
+          "clause": "[slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier3:0",
+          "clause": "7 + R, I, or P psychic damage",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier3:1",
+          "clause": "[slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        }
+      ],
+      "live": "not-reachable",
+      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "grants": [
+        {
+          "name": "Psionic Bolt",
+          "sourcePath": "en/unified/md/feature/ability/time-raider/psionic-bolt.md",
+          "decisionId": "ancestry.revenant.time-raider.psionic-gift.ability",
+          "level": 1,
+          "grantKind": "ancestry-ability",
+          "selectable": "unknown",
+          "detail": "grant of option Psionic Bolt supportedInV001=true; chain unknown"
+        },
+        {
+          "name": "Psionic Bolt",
+          "sourcePath": "en/unified/md/feature/ability/time-raider/psionic-bolt.md",
+          "decisionId": "ancestry.time-raider.psionic-gift.ability",
+          "level": 1,
+          "grantKind": "ancestry-ability",
+          "selectable": "unknown",
+          "detail": "grant of option Psionic Bolt supportedInV001=true; chain unknown"
+        },
+        {
+          "name": "Psionic Bolt",
+          "sourcePath": "en/unified/md/feature/ability/time-raider/psionic-bolt.md",
+          "decisionId": "ancestry.revenant.time-raider.psionic-gift.ability",
+          "level": 2,
+          "grantKind": "ancestry-ability",
+          "selectable": "unknown",
+          "detail": "grant of option Psionic Bolt supportedInV001=true; chain unknown"
+        },
+        {
+          "name": "Psionic Bolt",
+          "sourcePath": "en/unified/md/feature/ability/time-raider/psionic-bolt.md",
+          "decisionId": "ancestry.time-raider.psionic-gift.ability",
+          "level": 2,
+          "grantKind": "ancestry-ability",
+          "selectable": "unknown",
+          "detail": "grant of option Psionic Bolt supportedInV001=true; chain unknown"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.wode-elf/the-wode-defends",
+      "name": "The Wode Defends",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.wode-elf/the-wode-defends",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/wode-elf/the-wode-defends.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.wode-elf/the-wode-defends#block:0:tier1:0:e99392d45987c97c",
+            "locator": "block:0:tier1:0",
+            "clause": "2 + M or A damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusChoice",
+              "constant": 2,
+              "choices": [
+                "M",
+                "A"
+              ]
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.wode-elf/the-wode-defends#block:0:tier1:1:19fdac153f4f00f8",
+            "locator": "block:0:tier1:1",
+            "clause": "A < WEAK, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
+            "kind": "unsupported",
+            "shape": "potency:A < SYM slowed (save ends)",
+            "reason": "potency-condition",
+            "dependency": "after-damage"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.wode-elf/the-wode-defends#block:0:tier2:0:55bcb5d648c8d1fb",
+            "locator": "block:0:tier2:0",
+            "clause": "3 + M or A damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusChoice",
+              "constant": 3,
+              "choices": [
+                "M",
+                "A"
+              ]
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.wode-elf/the-wode-defends#block:0:tier2:1:68447d359409c7cf",
+            "locator": "block:0:tier2:1",
+            "clause": "A < AVERAGE, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
+            "kind": "unsupported",
+            "shape": "potency:A < SYM slowed (save ends)",
+            "reason": "potency-condition",
+            "dependency": "after-damage"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.wode-elf/the-wode-defends#block:0:tier3:0:a7bce4e9cc38eec9",
+            "locator": "block:0:tier3:0",
+            "clause": "5 + M or A damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusChoice",
+              "constant": 5,
+              "choices": [
+                "M",
+                "A"
+              ]
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.wode-elf/the-wode-defends#block:0:tier3:1:1a0f7872e1e70883",
+            "locator": "block:0:tier3:1",
+            "clause": "A < STRONG, [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
+            "kind": "unsupported",
+            "shape": "potency:A < SYM restrained (save ends)",
+            "reason": "potency-condition",
+            "dependency": "unknown"
+          }
+        ]
+      ],
+      "sections": [],
+      "diagnostics": [
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier3:1",
+          "clause": "A < STRONG, [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "The Wode Defends",
+          "sourcePath": "en/unified/md/feature/ability/wode-elf/the-wode-defends.md",
+          "decisionId": "ancestry.revenant.wode-elf.purchased-traits",
+          "level": 1,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option The Wode Defends supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "The Wode Defends",
+          "sourcePath": "en/unified/md/feature/ability/wode-elf/the-wode-defends.md",
+          "decisionId": "ancestry.wode-elf.purchased-traits",
+          "level": 1,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option The Wode Defends supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "The Wode Defends",
+          "sourcePath": "en/unified/md/feature/ability/wode-elf/the-wode-defends.md",
+          "decisionId": "ancestry.revenant.wode-elf.purchased-traits",
+          "level": 2,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option The Wode Defends supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "The Wode Defends",
+          "sourcePath": "en/unified/md/feature/ability/wode-elf/the-wode-defends.md",
+          "decisionId": "ancestry.wode-elf.purchased-traits",
+          "level": 2,
+          "grantKind": "ancestry-ability",
+          "selectable": "selectable",
+          "detail": "grant of option The Wode Defends supportedInV001=true; chain selectable"
         }
       ],
       "movementFacts": "No compiled push."
@@ -156288,7 +157273,7 @@
   ],
   "liveCounts": {
     "compiled": 6,
-    "compatibility": 49,
+    "compatibility": 53,
     "compiledButUnavailable": 4
   }
 }

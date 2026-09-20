@@ -2,9 +2,9 @@
 
 Structural support, current grant/loading availability and live execution are separate. Source drift never silently falls back; historical results are never recompiled on read.
 
-Source: `fb83a789da8f0327a389c277a0c790b1648d5810`; content: `sha256:64a08e925f76657409df983b706d2599edcb499457e9b21325d65ee7268c10d8`.
+Source: `fb83a789da8f0327a389c277a0c790b1648d5810`; content: `sha256:aaf7c027a421e6059448e019271111877f208b577b756f5e79645c3d497ed26e`.
 
-Currently reachable compiled: 6; unchanged reachable compatibility: 49; structurally supported but unavailable: 4.
+Currently reachable compiled: 6; unchanged reachable compatibility: 53; structurally supported but unavailable: 4.
 
 | Ability | Population | Pure execution | Live boundary | Diagnostics |
 | --- | --- | --- | --- | --- |
@@ -50,8 +50,8 @@ Currently reachable compiled: 6; unchanged reachable compatibility: 49; structur
 | Knockback | hero-standalone | manual | not-reachable | grammar, unsafe-tier-remainder, manual-section |
 | Melee Weapon Free Strike | hero-standalone | supported | compiled |  |
 | Ranged Weapon Free Strike | hero-standalone | supported | compiled |  |
-| Draconian Pride | hero-standalone | manual | not-reachable | target-boundary |
-| Dragon Breath | hero-standalone | manual | not-reachable | manual-section, target-boundary |
+| Draconian Pride | hero-standalone | manual | legacy-compatibility | target-boundary |
+| Dragon Breath | hero-standalone | manual | legacy-compatibility | manual-section, target-boundary |
 | Afflict a Bountiful Decay | hero-standalone | manual | not-reachable | manual-section |
 | Behold the Mystery | hero-standalone | manual | not-reachable | manual-section, target-boundary |
 | Bifurcated Incineration | hero-standalone | manual | legacy-compatibility | target-boundary |
@@ -95,6 +95,11 @@ Currently reachable compiled: 6; unchanged reachable compatibility: 49; structur
 | Special Delivery | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Wrecking Ball | hero-standalone | manual | legacy-compatibility | grammar, unsafe-tier-remainder, source-block-mismatch, unaccounted-paragraph, manual-section, target-boundary |
 | Shadowmeld | hero-standalone | manual | legacy-compatibility | grammar, source-block-mismatch, unaccounted-paragraph, manual-section, target-boundary |
+| Detonate Sigil | hero-standalone | manual | legacy-compatibility | grammar, unsafe-tier-remainder, manual-section, target-boundary |
+| Concussive Slam | hero-standalone | manual | not-reachable | grammar, unsafe-tier-remainder, empty-clause |
+| Minor Acceleration | hero-standalone | manual | not-reachable | grammar, manual-section, target-boundary |
+| Psionic Bolt | hero-standalone | manual | not-reachable | grammar, unsafe-tier-remainder |
+| The Wode Defends | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder |
 | Exploding Arrow | kit-signature | manual | legacy-compatibility | grammar, unsafe-tier-remainder, unaccounted-paragraph, manual-section, compatibility-boundary |
 | Unmooring | kit-signature | manual | legacy-compatibility | grammar, unsafe-tier-remainder, unaccounted-paragraph, manual-section, compatibility-boundary |
 | Bear Claws | kit-signature | manual | not-reachable | unsafe-tier-remainder, unaccounted-paragraph, manual-section, compatibility-boundary |

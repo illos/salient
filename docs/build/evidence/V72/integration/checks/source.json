@@ -1,0 +1,28 @@
+{
+  "recordedAt": "2026-09-20T08:38:08.590220+00:00",
+  "sourceCheckout": "/srv/presidium/projects/salient/code/.worktrees/engine-live",
+  "commit": "a68a047fc458f15b51ac8cd3391ed4e133405cfe",
+  "dirty": true,
+  "runner": "Presidium local",
+  "applicationTarget": "none: unit tests use convex-test; CLI proof separate",
+  "sourceBytes": {
+    "convex/lib/resolve.ts": "4205c20a337fe3b744fe28e69790ae9266fca2c155d89b9e0cc2a97a852f14bb",
+    "convex/schema.ts": "3996eab62d89ed18ccb4c6bc6f1255bd69fc2ae25fc02fde1dc25500d9419142",
+    "convex/lib/compiledSource.ts": "73cc6b5e53188dab88cfde8c004ad7877b7dca07e0449cffb73a9dc07591dc4c",
+    "convex/lib/compiledResults.ts": "5027b0a5f205973ee693acb6f4666fc0bc2193574bc8baf011c47eaed993c195",
+    "convex/lib/abilityOperations.ts": "71cf5191d43bf57a130bfb08b5057711496de68f90024dc0c14abc9217b8b5f0",
+    "convex/abilities.ts": "750f01b40f659cfe79c25c4f6de1dafe35aa6e1cbd38088adbdade42ba5ff050",
+    "convex/closeout.ts": "8b0f23982195538b36054fa115e7b0aa9d13c6c819ab169372092e8e66d5a240",
+    "shared/contracts/compiledResult.ts": "ca74709b6a4a2b074efe0b26a4c5d4dfb13cba4b30814c5c661093c680aab05f",
+    "scripts/v72-headless.ts": "4796e909b69786ceb60188f681f367a0e7ba5680d1fd649f50e436e04da6465b",
+    "scripts/report-live-compiled-abilities.ts": "d4edd6e7cc378e9c79e90c6e6568e14103b7829ac3e95ea857fc732f3a2ea423",
+    "docs/build/evidence/V72/support.json": "5ecb01816f4aa3a32193aa3c63f00b2d397b189f22487afd277f8925030c93b6"
+  },
+  "command": "pnpm check",
+  "exitCode": 0,
+  "tests": {
+    "engine": 333,
+    "appAndScripts": 510
+  },
+  "note": "New shared-main runner was added after initial lint phase; final production-build TypeScript pass included it. Its targeted lint/format were checked separately. Follow-up runner corrections will receive a scoped check."
+}
