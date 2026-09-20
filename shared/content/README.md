@@ -68,7 +68,7 @@ strips the Markdown links itself; the snapshot keeps them.
 | `contentHash` | SHA-256 over everything except `generatedAt`. |
 | `selections` | The v0.01 entry list: what was asked for, which source paths were read, and the source statement that grounds the inclusion when it is not simply "the slice names this path". |
 | `entries` | One row per included entry (`id`, `kind`, `name`, `sourcePath`, `selection`, `file`). |
-| `excluded` | Files on a selected path that are not core content (`mcdm.beastheart.v1` perks) and the unified chapters the navigation guide identifies as supplemental (`chapter/perks.md`, `chapter/rewards.md`), each with the reason. |
+| `excluded` | Files on selected paths that are not core content (88 summoner monster files and 36 perks), plus the two supplemental unified chapters (`chapter/perks.md`, `chapter/rewards.md`), each with the reason. |
 | `gaps` | Content the slice asked for that the unified Markdown does not hold as entries at this revision (the language tables), with where it does exist. |
 
 ## Convex mirror

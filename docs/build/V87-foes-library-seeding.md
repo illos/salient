@@ -7,7 +7,7 @@
 | Owner type | App team, foes coordination |
 | Rules review | not required; source extraction, no new mechanical interpretation |
 | Depends on | S01; V02 is a soft integration dependency for the table picker |
-| Status | In progress on slice/V87 |
+| Status | Verified and independently reviewed; branch handoff ready, not merged |
 
 ## Goal
 
@@ -73,3 +73,26 @@ committed-source full check/live proof are pending; this branch is neither accep
 | --- | --- | --- | --- | --- |
 | Complete core catalog, load Ghoul and use Razor Claws with undo/redo | content.status/list/get; foes.definitions/add/detail; abilities.sheet; commands.submit | `SALIENT_V87_TARGET=http://127.0.0.1:3260 node scripts/v87-headless.ts`; prior source `6836d1d`, isolated local3260; [report](evidence/V87/headless.json), exit0, 4.722s, stamina15→12→15→12 | Prior pass; final committed candidate pending TESTER | Deferred by moratorium; picker readability remains visual backlog |
 | Five source-heading repairs and parent-prefixed loaded eyestalk | foes.definitions/add/detail; abilities.sheet | Same committed runner extended with persisted heading/parent witnesses; source and target recorded by runner | Pending TESTER | Deferred; layout and label readability remain visual backlog |
+
+## Final branch handoff — 2026-09-20
+
+TESTER verified exact source `104f4b087c58a6c1451d66c57f6e0eb1a101dba3`: focused 30/30,
+full `pnpm check` exit 0 (352 engine + 528 app/scripts = 880 tests, all source/build/budget gates).
+See [coordinator evidence](evidence/V87/tester-job-104f4b0.md). The earlier failed fixture-key
+attempt remains recorded in [its evidence](evidence/V87/tester-job-4d8c127.md); the repair uses
+independent UUIDs and changes no runtime behavior.
+
+Independent reviewer `v87_independent_review` passed round 3 (Fable Chords 840), conditional on
+this exact TESTER run passing; that condition is now satisfied. No rules review is required.
+The code is committed on `slice/V87`, not merged into main or deployed to the shared app.
+Fable owns the user's merge decision and subsequent integration/rollout.
+
+| Capability / scenario | CLI/API entry point | Headless command, source, target and persisted evidence | Headless result | Browser result and additional gap |
+| --- | --- | --- | --- | --- |
+| Core catalog, five repaired sheets, parent-prefixed eyestalk, Ghoul damage and undo/redo, anonymous refusal | content.status/list/get; foes.definitions/add/detail; abilities.sheet; commands.submit | `SALIENT_V87_TARGET=http://127.0.0.1:3260 node scripts/v87-headless.ts`; clean source `104f4b0`, isolated local3260; [report](evidence/V87/headless.json), run7dc9ef92, exit0, 3.978s; stamina15→11→15→11 | Pass, TESTER | Deferred by moratorium; picker/card visuals remain in browser backlog |
+
+First definitions load was 162ms. After backend readiness the host had 12,729MiB available memory
+and zero current memory PSI. These are host measurements, not isolate heap or process RSS; those
+were not captured. The backend was stopped, ports freed, and retained data preserved. The runner
+wrote its report to the tracked evidence path; this docs-only closeout preserves that generated
+report unchanged. No application code changed after the tested source.

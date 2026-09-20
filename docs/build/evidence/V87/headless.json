@@ -1,13 +1,21 @@
 {
-  "runId": "77ea078c-c971-4ad6-ae6b-52323e4927c3",
-  "source": "6836d1d54558aabfaacc1952784a0cfdb77874a9",
-  "sourceDirty": "scripts/v87-headless.ts",
+  "runId": "7dc9ef92-9699-4265-b33a-b97cc114356f",
+  "source": "104f4b087c58a6c1451d66c57f6e0eb1a101dba3",
+  "sourceDirty": null,
   "target": "http://127.0.0.1:3260",
   "runner": "local Presidium",
-  "elapsedMs": 4722,
+  "elapsedMs": 3978,
   "contentHash": "sha256:609aed9b6d4bbb4d08676bfcc080333f48fbb9c64d9c952971f82001bef100ca",
   "entryCount": 1151,
   "statblocks": 438,
+  "definitionsMs": 162,
+  "headingChecks": [
+    "Angulotl Hopper: Leapfrog",
+    "Gnoll Gnasher: Gnash",
+    "Human Warrior: Chop",
+    "The Nameless: Baneful Blade",
+    "Rival Null: Inertial Flow"
+  ],
   "readback": {
     "id": "mcdm.monsters.v1/monster.undead.1st-echelon.statblock/ghoul",
     "textSha256": "e2577516d6ad271fb46addc3e61640fa4f6d0cae8bd25a7b73808622f5a3c9dc",
@@ -21,12 +29,12 @@
   "liveAbility": {
     "name": "Razor Claws",
     "dice": {
-      "d10a": 2,
-      "d10b": 5
+      "d10a": 5,
+      "d10b": 8
     },
-    "tier": 1,
-    "damage": 3,
-    "staminaAfter": 12,
+    "tier": 2,
+    "damage": 4,
+    "staminaAfter": 11,
     "undoRedo": "pass"
   },
   "checks": [
@@ -36,6 +44,8 @@
     "embedded features exact",
     "anonymous denied",
     "438 table definitions",
+    "five repaired source headings through persisted ability sheets",
+    "parent name in picker and persisted instance; source unchanged",
     "non-goblin load and ability sheet",
     "Razor Claws compiled damage and undo/redo"
   ],

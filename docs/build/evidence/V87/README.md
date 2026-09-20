@@ -54,3 +54,13 @@ Round 1 follow-up: `029ea29` is now integrated after rebase as `b4f463c`. The br
 parent-name/group/level fixes and strict shared YAML parser coverage. The final candidate must be
 verified by TESTER and independently reviewed again. Existing reports above retain their original
 source identity and are not final-candidate proof.
+
+## Final accepted branch evidence
+
+The current `headless.json` is TESTER's clean-source `104f4b0` run7dc9ef92, exit0 in3.978s;
+earlier report descriptions above are historical. [Coordinator record](tester-job-104f4b0.md)
+contains the focused30/30 and full880-test check, source/build gates,162ms first definitions load,
+host memory limits, and stopped-backend/data-retention record. Independent round3 review passed
+(Fable Chords840, reviewer `v87_independent_review`); its required TESTER condition is satisfied.
+The branch is ready for Fable's merge decision. Nothing in this closeout changes runtime code or
+claims deployment to shared main.

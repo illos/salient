@@ -457,4 +457,4 @@ passing evidence.
 
 | Slice | Document | Status | Owner | Branch |
 | --- | --- | --- | --- | --- |
-| V87 | [Core library seeding](V87-foes-library-seeding.md) | Round 1 repaired; final committed check/API and round 2 pending | Foes coordination | slice/V87, .worktrees/foes-seeding; prior tested code 6836d1d; repair integrated b4f463c; headless gate in slice work log |
+| V87 | [Core library seeding](V87-foes-library-seeding.md) | Verified: 880 tests, live API and independent round 3 pass; branch handoff ready, not merged | Foes coordination | slice/V87, .worktrees/foes-seeding; tested code 104f4b0; TESTER evidence and final headless gate in slice work log |
