@@ -40,7 +40,7 @@ async function position(t: Backend, campaignId: Id<'campaigns'>, faces: number[]
 test('BP6–10: applied use, score privacy, correction flip, exact restoration and post-save refusal', async () => {
   const t = backend();
   const f = await table(t);
-  await t.mutation(internal.content.reseed, {});
+  await t.action(internal.content.reseed, {});
   await t.run(async ctx => {
     const hero = (await ctx.db.get(f.thornId))!;
     const baseline = hero.derivedBaseline as DerivedBaseline;
@@ -174,7 +174,7 @@ test('BP6–10: applied use, score privacy, correction flip, exact restoration a
 test('player Wode correction flips potency and replaces slowed with tier-three restrained', async () => {
   const t = backend();
   const f = await table(t);
-  await t.mutation(internal.content.reseed, {});
+  await t.action(internal.content.reseed, {});
   const choices: EvaluationInput['selections'] = { ...examples.examples.complete.input.selections };
   for (const key of Object.keys(choices)) if (key.startsWith('ancestry.')) delete choices[key];
   choices['ancestry.choice'] = 'Wode Elf';

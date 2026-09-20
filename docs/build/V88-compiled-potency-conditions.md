@@ -214,8 +214,9 @@ general condition engine and it does not automate any condition's consequences.
     and push results; manual toggles, R05 condition tests and the Malice lifecycle are unchanged.
     Record the adapted assertions in the V88 evidence; the V72 evidence stays historical.
 13. **Reports.** `pnpm check` passes including report freshness; the V72 support report shows
-    Bury the Point and Eye of Surlach compiled with no diagnostics and the library-wide bounded
-    potency abilities as compiled-but-unavailable until V87 seeds them.
+    Bury the Point and Eye of Surlach compiled with no diagnostics. On a post-V87 integration, the
+    newly reachable library-wide bounded potency abilities also require their source-backed live
+    proof gate before promotion.
 
 ## Ability design and playtest evidence
 

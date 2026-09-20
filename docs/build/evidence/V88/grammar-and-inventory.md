@@ -77,12 +77,14 @@ approved recording this correction in Chords 865.
 
 ## Compiled inventory
 
-The regenerated `docs/build/evidence/V72/support.json` reports **nine reachable compiled**,
-**121 compatibility**, and **six structurally supported but unavailable** entries. Reachability
+The current-main integration report regenerated after V87 reports **13 reachable compiled**,
+**1,222 compatibility**, and **two structurally supported but unavailable** entries. Reachability
 means the existing grant/loading paths can offer the ability; it is distinct from a claim that
-its new V88 lifecycle has passed backend proof. No grant, parent trait, character choice, content
-seed or foe-loading rule is introduced here. The Wode Defends was already granted by the ancestry
-work; its new compiled migration and live design were approved in Chords 861.
+its new V88 lifecycle has passed backend proof. V88 introduces no grant, parent trait, character
+choice, content seed or foe-loading rule. V87's full-core foe seeding makes Razor Claws, Eye Flash,
+Bola Knock and Power Chord reachable; their added current-main proof is an integration gate. The
+Wode Defends was already granted by the ancestry work; its new compiled migration and live design
+were approved in Chords 861.
 
 Paths below are exact report provenance. Hero paths are repository-relative; foe paths beginning
 `en/books/monsters/` are relative to `vendor/steel-compendium/`. Their unified research equivalents
@@ -99,19 +101,19 @@ are under `vendor/steel-compendium/en/unified/md/monster/` with the same family/
 | The Wode Defends | `vendor/steel-compendium/en/unified/md/feature/ability/wode-elf/the-wode-defends.md` | Moves compatibility to compiled; slowed/slowed/restrained conditions. |
 | Spear Charge | `en/books/monsters/md/monster/goblin/statblock/goblin-warrior.md` | Existing compiled damage/push behavior unchanged. |
 | Bite | `en/books/monsters/md/monster/goblin/statblock/worg.md` | Existing compiled damage/push behavior unchanged. |
+| Razor Claws | `en/books/monsters/md/monster/undead/1st-echelon/statblock/ghoul.md` | Existing pure-supported damage becomes live through V87; tier-three bleeding remainder now compiles. |
+| Eye Flash | `en/books/monsters/md/monster/hobgoblin/statblock/hobgoblin-redglare.md` | V87 makes the Redglare loadable; slowed/restrained/restrained conditions compile. |
+| Bola Knock | `en/books/monsters/md/monster/lizardfolk/statblock/lizardfolk-bloodeye.md` | V87 makes the Bloodeye loadable; all three restrained conditions compile. |
+| Power Chord | `en/books/monsters/md/monster/orc/statblock/orc-godcaller.md` | V87 makes the Godcaller loadable; tier-three weakened remainder now compiles. |
 | Eye of Surlach | `en/books/monsters/md/monster/goblin/statblock/goblin-cursespitter.md` | Moves compatibility to compiled; weakened conditions. |
 | Bury the Point | `en/books/monsters/md/monster/goblin/statblock/goblin-warrior.md` | Promotes the existing manual bleeding remainder to a condition node. |
 
-### Six unavailable entries
+### Two unavailable entries
 
 | Ability | Exact source path | V88 boundary |
 | --- | --- | --- |
-| Razor Claws | `en/books/monsters/md/monster/undead/1st-echelon/statblock/ghoul.md` | Existing pure-supported Ghoul ability; tier-three bleeding remainder now compiled. Ghoul is not seeded. |
 | Meteoric Introduction | `vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-1/meteoric-introduction.md` | Existing pure damage/push support unchanged; no live grant. |
 | Ray of Agonizing Self-Reflection | `vendor/steel-compendium/en/unified/md/feature/ability/elementalist/level-1/ray-of-agonizing-self-reflection.md` | Existing pure-supported ability; slowed remainders now compiled. No live grant. |
-| Eye Flash | `en/books/monsters/md/monster/hobgoblin/statblock/hobgoblin-redglare.md` | New pure support; Hobgoblin Redglare is not seeded. |
-| Bola Knock | `en/books/monsters/md/monster/lizardfolk/statblock/lizardfolk-bloodeye.md` | New pure support; Lizardfolk Bloodeye is not seeded. |
-| Power Chord | `en/books/monsters/md/monster/orc/statblock/orc-godcaller.md` | New pure support; Orc Godcaller is not seeded. |
 
 ## Source constraints and ability designs
 
@@ -194,6 +196,7 @@ potency resolution is recorded at `docs/rules-questions-for-user.md#q-char-12`.
   tiers 1/2 have no condition. Cadenza, Rallying Ostinato and Relentless remain separate
   source mechanics with no new automation or loading claim.
 
-Meteoric Introduction's existing compile-only damage/push design is unchanged. Future grants or
-foe-library seeding must satisfy their own trait-granted ability and live proof gates; this report
-neither adds those grants nor claims complete automation of a newly available parent stat block.
+Meteoric Introduction's existing compile-only damage/push design is unchanged. V87's foe-library
+seeding activates the four rows identified above, so the current-main integration must satisfy their
+trait-granted ability and live proof gates. This report adds no grant and does not claim automation
+of any separate parent-trait consequence.
