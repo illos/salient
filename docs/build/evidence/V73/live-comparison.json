@@ -1,0 +1,391 @@
+{
+  "runId": "1e7a7315-a565-461c-8506-294b4ed3f555",
+  "source": "51e7270fc4af491fc318422a40ce5479f4c638c8",
+  "target": "https://different-bat-943.convex.cloud",
+  "elapsedMs": 50168,
+  "results": [
+    {
+      "id": "devil-1",
+      "characterId": "k571wpm7qyza6j90byh7admf6h8er6n4",
+      "status": "pass",
+      "mismatches": []
+    },
+    {
+      "id": "devil-2",
+      "characterId": "k571mac3t20s3hp3748d05efbs8esbzj",
+      "status": "pass",
+      "mismatches": []
+    },
+    {
+      "id": "devil-3",
+      "characterId": "k57cw833rgrw51gp3jqyrsjjh18esfjd",
+      "status": "fail",
+      "mismatches": [
+        {
+          "field": "abilities",
+          "actual": [
+            "Brutal Slam",
+            "Lines of Force",
+            "Melee Weapon Free Strike",
+            "Out of the Way!",
+            "Pain for Pain",
+            "Ranged Weapon Free Strike",
+            "Thunder Roar"
+          ],
+          "expected": [
+            "Brutal Slam",
+            "Glowing Eyes",
+            "Lines of Force",
+            "Melee Weapon Free Strike",
+            "Out of the Way!",
+            "Pain for Pain",
+            "Ranged Weapon Free Strike",
+            "Thunder Roar"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "devil-4",
+      "characterId": "k572sj8bcjtgn5e98gd6spmejx8erv8v",
+      "status": "pass",
+      "mismatches": []
+    },
+    {
+      "id": "devil-5",
+      "characterId": "k5756db1g7gg686na9nbbq6rnn8ere3k",
+      "status": "pass",
+      "mismatches": []
+    },
+    {
+      "id": "devil-6",
+      "characterId": "k573e3a2b3kmyc4gr3vzm0mr2x8erp9r",
+      "status": "pass",
+      "mismatches": []
+    },
+    {
+      "id": "devil-7",
+      "characterId": "k57a892g2nc3v3gpq25ngjgmzs8es05k",
+      "status": "fail",
+      "mismatches": [
+        {
+          "field": "abilities",
+          "actual": [
+            "Brutal Slam",
+            "Lines of Force",
+            "Melee Weapon Free Strike",
+            "Out of the Way!",
+            "Pain for Pain",
+            "Ranged Weapon Free Strike",
+            "Thunder Roar"
+          ],
+          "expected": [
+            "Brutal Slam",
+            "Glowing Eyes",
+            "Lines of Force",
+            "Melee Weapon Free Strike",
+            "Out of the Way!",
+            "Pain for Pain",
+            "Ranged Weapon Free Strike",
+            "Thunder Roar"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "devil-8",
+      "characterId": "k571tpk0tph9t9qgxemkp9mq2x8eshwy",
+      "status": "pass",
+      "mismatches": []
+    },
+    {
+      "id": "devil-9",
+      "characterId": "k578haxfxhv7xyett9b8zcttm98er7qp",
+      "status": "pass",
+      "mismatches": []
+    },
+    {
+      "id": "devil-10",
+      "characterId": "k575c7cwzyxn2wsf0r0w7g5pvh8esyv3",
+      "status": "pass",
+      "mismatches": []
+    },
+    {
+      "id": "devil-11",
+      "characterId": "k579fa8de5y2ewc27hesbqf4318erzph",
+      "status": "fail",
+      "mismatches": [
+        {
+          "field": "abilities",
+          "actual": [
+            "Brutal Slam",
+            "Lines of Force",
+            "Melee Weapon Free Strike",
+            "Out of the Way!",
+            "Pain for Pain",
+            "Ranged Weapon Free Strike",
+            "Thunder Roar"
+          ],
+          "expected": [
+            "Brutal Slam",
+            "Glowing Eyes",
+            "Lines of Force",
+            "Melee Weapon Free Strike",
+            "Out of the Way!",
+            "Pain for Pain",
+            "Ranged Weapon Free Strike",
+            "Thunder Roar"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "devil-12",
+      "characterId": "k5737s44p238w56e1cgs1h4q4s8es8es",
+      "status": "pass",
+      "mismatches": []
+    },
+    {
+      "id": "devil-13",
+      "characterId": "k57be99x88pw0v4j39dgb48e9n8eskyw",
+      "status": "pass",
+      "mismatches": []
+    },
+    {
+      "id": "polder-1",
+      "characterId": "k57fazr9w84gd75ysvg515375n8er490",
+      "status": "pass",
+      "mismatches": []
+    },
+    {
+      "id": "polder-2",
+      "characterId": "k570saztmtsh3j6j7jqd3hn70n8er1dx",
+      "status": "fail",
+      "mismatches": [
+        {
+          "field": "abilities",
+          "actual": [
+            "Arcane Trick",
+            "Bifurcated Incineration",
+            "Conflagration",
+            "Explosive Assistance",
+            "Hurl Element",
+            "Melee Weapon Free Strike",
+            "Practical Magic",
+            "Ranged Weapon Free Strike",
+            "Return to Formlessness",
+            "Shadowmeld",
+            "The Flesh, a Crucible",
+            "Viscous Fire"
+          ],
+          "expected": [
+            "Arcane Trick",
+            "Bifurcated Incineration",
+            "Conflagration",
+            "Explosive Assistance",
+            "Hurl Element",
+            "Melee Weapon Free Strike",
+            "Practical Magic",
+            "Ranged Weapon Free Strike",
+            "Reactive Tumble",
+            "Return to Formlessness",
+            "Shadowmeld",
+            "The Flesh, a Crucible",
+            "Viscous Fire"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dwarf-1",
+      "characterId": "k575vj4t24evnw240k3gpbt90d8erktp",
+      "status": "pass",
+      "mismatches": []
+    },
+    {
+      "id": "dwarf-2",
+      "characterId": "k577mv7eby005v5a3crajndqb58eshsx",
+      "status": "pass",
+      "mismatches": []
+    },
+    {
+      "id": "dwarf-3",
+      "characterId": "k57f53tysk4vg4bjbjybd7r5ws8eran6",
+      "status": "pass",
+      "mismatches": []
+    },
+    {
+      "id": "human-1",
+      "characterId": "k57fgztax6vmvvjd725hm0wfd58ess71",
+      "status": "fail",
+      "mismatches": [
+        {
+          "field": "abilities",
+          "actual": [
+            "Arcane Trick",
+            "Bifurcated Incineration",
+            "Conflagration",
+            "Explosive Assistance",
+            "Hurl Element",
+            "Melee Weapon Free Strike",
+            "Practical Magic",
+            "Ranged Weapon Free Strike",
+            "Return to Formlessness",
+            "The Flesh, a Crucible",
+            "Viscous Fire"
+          ],
+          "expected": [
+            "Arcane Trick",
+            "Bifurcated Incineration",
+            "Conflagration",
+            "Detect the Supernatural",
+            "Explosive Assistance",
+            "Hurl Element",
+            "Melee Weapon Free Strike",
+            "Practical Magic",
+            "Ranged Weapon Free Strike",
+            "Return to Formlessness",
+            "The Flesh, a Crucible",
+            "Viscous Fire"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "human-2",
+      "characterId": "k57943vqztyzf6bs6cdbhx15b98erxwx",
+      "status": "fail",
+      "mismatches": [
+        {
+          "field": "abilities",
+          "actual": [
+            "Arcane Trick",
+            "Bifurcated Incineration",
+            "Conflagration",
+            "Explosive Assistance",
+            "Hurl Element",
+            "Melee Weapon Free Strike",
+            "Practical Magic",
+            "Ranged Weapon Free Strike",
+            "Return to Formlessness",
+            "The Flesh, a Crucible",
+            "Viscous Fire"
+          ],
+          "expected": [
+            "Arcane Trick",
+            "Bifurcated Incineration",
+            "Conflagration",
+            "Detect the Supernatural",
+            "Determination",
+            "Explosive Assistance",
+            "Hurl Element",
+            "Melee Weapon Free Strike",
+            "Practical Magic",
+            "Ranged Weapon Free Strike",
+            "Return to Formlessness",
+            "The Flesh, a Crucible",
+            "Viscous Fire"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "human-3",
+      "characterId": "k57fkmthpjpes843ex0rwmwq1s8esv82",
+      "status": "fail",
+      "mismatches": [
+        {
+          "field": "abilities",
+          "actual": [
+            "Arcane Trick",
+            "Bifurcated Incineration",
+            "Conflagration",
+            "Explosive Assistance",
+            "Hurl Element",
+            "Melee Weapon Free Strike",
+            "Practical Magic",
+            "Ranged Weapon Free Strike",
+            "Return to Formlessness",
+            "The Flesh, a Crucible",
+            "Viscous Fire"
+          ],
+          "expected": [
+            "Arcane Trick",
+            "Bifurcated Incineration",
+            "Conflagration",
+            "Detect the Supernatural",
+            "Explosive Assistance",
+            "Hurl Element",
+            "Melee Weapon Free Strike",
+            "Practical Magic",
+            "Ranged Weapon Free Strike",
+            "Resist the Unnatural",
+            "Return to Formlessness",
+            "The Flesh, a Crucible",
+            "Viscous Fire"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hakaan-1",
+      "characterId": "k572myyg23hpwsjb7dmf0adh4x8erfpm",
+      "status": "pass",
+      "mismatches": []
+    },
+    {
+      "id": "hakaan-2",
+      "characterId": "k578n4n7gt7kvzb6nb6pvt1vg58er8yn",
+      "status": "pass",
+      "mismatches": []
+    },
+    {
+      "id": "hakaan-3",
+      "characterId": "k57bx4hn2yeftq6gywfesdx7px8es6kr",
+      "status": "pass",
+      "mismatches": []
+    },
+    {
+      "id": "orc-1",
+      "characterId": "k57ffxzfbv4rw7afra9r4z9tm58erm09",
+      "status": "pass",
+      "mismatches": []
+    },
+    {
+      "id": "orc-2",
+      "characterId": "k572n22f5mvkhcjfwd870j23m58es455",
+      "status": "pass",
+      "mismatches": []
+    },
+    {
+      "id": "orc-3",
+      "characterId": "k5712qbcydjx8b998skpzp49mx8es8sn",
+      "status": "pass",
+      "mismatches": []
+    },
+    {
+      "id": "orc-4",
+      "characterId": "k5702j9hn5k4kdqp7x2qcy5a518esspt",
+      "status": "pass",
+      "mismatches": []
+    },
+    {
+      "id": "orc-5",
+      "characterId": "k5754hzhkr2e46aw3mggm2821d8er13p",
+      "status": "pass",
+      "mismatches": []
+    },
+    {
+      "id": "orc-6",
+      "characterId": "k576eegzqvfhjgpqqsehp878yh8ess4d",
+      "status": "pass",
+      "mismatches": []
+    },
+    {
+      "id": "orc-7",
+      "characterId": "k577zqk7f0k37k009ctp0q0x7d8er60n",
+      "status": "pass",
+      "mismatches": []
+    }
+  ]
+}

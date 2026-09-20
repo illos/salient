@@ -1,6 +1,6 @@
 # V73 — Headless Forge character counterparts
 
-Status: In progress. Character track, WIZARD; branch `slice/V73`, worktree
+Status: In review — browserless route proved; seven comparison discrepancies retained. Character track, WIZARD; branch `slice/V73`, worktree
 `.worktrees/forge-headless`. Runtime: CT114 `hosted`; comparison target is the existing
 hosted development app. No browser activity or application deployment is part of this slice.
 
@@ -12,7 +12,7 @@ with characters created and read back through Salient's authenticated public API
 inputs, outputs, calibration differences and failures. A discrepancy is evidence to investigate,
 not permission to change the implementation or silently weaken an assertion.
 
-The first gate is one bounded remote calibration. Stop and record a concrete blocker if the
+The first gate is one bounded calibration on an available suitable local or remote environment. Stop and record a concrete blocker if the
 adapter cannot execute; do not spend hours debugging infrastructure. Forge's browser-only
 presentation imports are guarded with throwing boundaries, while all game logic remains
 upstream. Unsupported choice semantics cannot count as independently verified.
@@ -36,4 +36,6 @@ target pair. Record that boundary explicitly.
   (merge `01454f8`); no abandoned pilot artifacts used.
 - User authorized programmatic Forge counterparts and coherent verification doctrine changes.
 - Source work produces 31 counterparts across Devil, Polder, Dwarf, Human, Hakaan and Orc.
-  Runtime proof and comparison results are pending.
+  Runtime proof passes. Saved public API comparison: 24/31 pass, seven ability-list discrepancies;
+  all compared numeric and choice-persistence fields match. See [evidence](evidence/V73/README.md)
+  and [independent review](reviews/V73-headless-forge-review.md). No application fixes made.
