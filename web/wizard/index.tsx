@@ -1,3 +1,4 @@
+import { CulturePresetSelect } from './culture-preset';
 // SPDX-License-Identifier: GPL-3.0-only
 /**
  * The shared level-one wizard: a decision flow over the supported class definitions
@@ -220,6 +221,13 @@ export function DecisionEditor({
     );
   let control: React.ReactNode = null;
   if (decision.kind === 'none') control = null;
+  else if (decision.id === 'culture.preset')
+    control = (
+      <CulturePresetSelect
+        value={typeof value === 'string' ? value : undefined}
+        onChange={value => onSelect(decision.id, value)}
+      />
+    );
   else if (decision.kind === 'automatic')
     control = (
       <ul className="m-0 list-none p-0 text-sm">

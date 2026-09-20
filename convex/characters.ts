@@ -1,3 +1,5 @@
+import { perkAbilities, perkAbilitySource } from '../shared/evaluate/perkAbilities';
+import { extractEmbeddedAbility } from '../shared/resolve/embeddedAbility';
 import { ancestryAbilities, ancestryAbilitySource } from '../shared/evaluate/ancestryAbilities';
 // SPDX-License-Identifier: GPL-3.0-only
 /**
@@ -643,19 +645,26 @@ async function abilityView(
   modifiers: AbilityModifier[] = [],
 ): Promise<SheetAbility> {
   const row = await contentFor(ctx, ability.sourcePath);
-  // A kit's signature ability is carried by the kit entry, whose frontmatter prints no ability
-  // metadata: it groups as "other" and the table reads its action type from the text.
-  const traitAbility = ancestryAbilitySource(ability);
+  const perkSource = perkAbilitySource(ability);
+  const traitAbility =
+    ancestryAbilitySource(ability) ?? (perkSource?.embedded ? undefined : perkSource);
+  const embedded =
+    row && (ability.kind === 'kit-signature' || perkSource?.embedded)
+      ? extractEmbeddedAbility(row.text, ability.name)
+      : null;
   const metadata = traitAbility
     ? {
         keywords: [],
         actionType: traitAbility.actionType,
         ...(traitAbility.trigger ? { trigger: traitAbility.trigger } : {}),
         effects: [{ label: 'Effect', text: traitAbility.quote }],
+        ...(perkSource?.cost ? { cost: perkSource.cost } : {}),
       }
-    : row && row.kind === 'ability'
-      ? metadataOf(row)
-      : { keywords: [] };
+    : embedded?.ok
+      ? embedded.metadata
+      : row && row.kind === 'ability'
+        ? metadataOf(row)
+        : { keywords: [] };
   const { provenance, ...rest } = ability;
   const facts = { name: ability.name, keywords: metadata.keywords };
   const buildModifiers = metadata.roll
@@ -690,7 +699,7 @@ async function abilityView(
               }
             : null;
         })(),
-    group: traitAbility?.group ?? groupOf(metadata.actionType),
+    group: groupOf(metadata.actionType),
     metadata,
     ...(buildModifiers.length ? { buildModifiers } : {}),
     grantedBy: grantedBy(provenance),
@@ -856,10 +865,13 @@ export const sheet = query({
           }
         : null,
       abilities: await Promise.all(
-        ancestryAbilities(
-          granted?.traits ?? [],
-          granted?.abilities ?? [],
-          character.activeRune?.kind ?? null,
+        perkAbilities(
+          granted?.perks ?? [],
+          ancestryAbilities(
+            granted?.traits ?? [],
+            granted?.abilities ?? [],
+            character.activeRune?.kind ?? null,
+          ),
         ).map(a => abilityView(ctx, a, granted?.abilityModifiers)),
       ),
       features: await Promise.all(

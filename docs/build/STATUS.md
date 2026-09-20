@@ -56,6 +56,8 @@ must be separately recorded; this branch has performed neither.
 | Id | Slice | Depends on | Status | Owner |
 | --- | --- | --- | --- | --- |
 | V82 | [Remaining level-one ancestries](V82-remaining-ancestries.md) | Main 589d357 | Complete — main `1fa8aac`; both apps API28/28, Forge137 accepted | WIZARD, slice/V82 |
+| V83 | [Core perk and ordinary kit action coverage](V83-supporting-actions.md) | V37, V74, V82 | In progress — source audit and confirmed grant fixes; not merged | Astra character lead |
+| V84 | [Culture presets](V84-culture-presets.md) | V37, V83 | In progress — ancestral/professional presets and bespoke path | Astra character lead |
 | V76 | [Dragon Knight level one](V76-dragon-knight-level-one.md) | V82 integration | Complete via V82 — checks, reviews, public API and Forge proof | Astra character worker |
 | V77 | [High Elf level one](V77-high-elf-level-one.md) | V82 integration | Complete via V82 — checks, reviews, public API and Forge proof | Astra character worker |
 | V78 | [Memonek level one](V78-memonek-level-one.md) | V82 integration | Complete via V82 — checks, reviews, public API and Forge proof | Astra character worker |

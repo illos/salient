@@ -1,3 +1,4 @@
+import { extendCultureDefinitions } from './culture-presets.ts';
 // SPDX-License-Identifier: GPL-3.0-only
 /** Level-qualified wizard content. Rules contract: docs/research/v32-fury-progression-contract.md. */
 import { extendBackgroundDefinitions } from './supporting-backgrounds.ts';
@@ -23,6 +24,7 @@ classStep.decisions.push(...structuredClone(levelTwoDecisions));
 for (const definitions of [levelOne, levelTwo]) {
   definitions.supportingChoicesVersion = 'v37';
   extendBackgroundDefinitions(definitions);
+  extendCultureDefinitions(definitions);
   extendComplicationDefinitions(definitions);
   for (const step of definitions.steps)
     for (const decision of step.decisions)
