@@ -79,3 +79,10 @@ accept targetLevel. This is full editing, not an XP-gated advancement operation.
 - ENGINE independently reviewed the rules and full implementation. Initial finding: invoke the
   three rolled ability alternatives as well as listing them; fixed in `71e665e`. Chords 1333
   confirms that finding resolved and no further code findings; final report review follows below.
+
+- ENGINE final independent review PASS at `72aa79c` (Chords 1338); both findings closed.
+  Recorded in [the independent audit](audits/V97-shadow-level-two-review.md). Handoff to DEPLOY2
+  reuses the accepted runtime tests; remaining commits contain only reports/review/closeout docs.
+- Experiment outcome: the level-two class content reused the existing class/college/perk model.
+  New shared work was target-level selection, creation persistence and pruning choices on a level
+  decrease. The main rules edge was Sticky Bomb's delayed roll. Guided progression remains deferred.
