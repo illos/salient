@@ -70,7 +70,7 @@ export function HeroSoFar({
     <aside
       aria-label="Hero so far"
       data-wizard-pane="summary"
-      className="flex h-full min-h-0 flex-col gap-5 overflow-y-auto rounded-lg bg-card p-5"
+      className="flex flex-col gap-5 rounded-lg bg-card p-5"
     >
       <div className="flex items-center justify-between gap-3">
         <p className="m-0 text-lg font-medium">Your hero so far</p>

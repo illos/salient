@@ -28,8 +28,12 @@ unchanged.
   the left of a header, its metadata at the right and its own rules text below, read from the
   already-loaded rules catalog; the control is screen-reader only.
 - docs/character-wizard-spec.md#confirmed-behavior (the 2026-09-21 amendment)
+- `web/wizard/index.tsx`, `header.tsx`, `rail.tsx`, `hero-so-far.tsx`: the wizard is one
+  scrolling document. The page scrolls, the header scrolls with it, and the two side panes stick
+  to the viewport, scrolling inside themselves only when taller than it.
 - Out of scope: the decision definitions (`presentedInV001` stays content data), the
-  `connections.notes` headless route and its sheet field, the centre and hero-so-far columns.
+  `connections.notes` headless route and its sheet field, the table's own `.session-shell`
+  full-viewport frame, which keeps its independently scrolling panes.
 - docs/character-wizard-spec.md#main-creation-and-editing
 
 ## Acceptance checks
@@ -86,3 +90,10 @@ unchanged.
   progress bar. Back is an arrow-only icon button (its accessible name and tooltip still say where
   it goes, since the rail names the steps); forward names the step it leads to and truncates in the
   narrow column; the last step keeps Save and close. The centre column is now only the step.
+- 2026-09-21: layout changed from three independently scrolling full-height columns to a scrolling
+  page with sticky side panes, on the user's instruction; the header scrolls too, so the panes
+  stick at one page gap from the top rather than under it. The panes keep a max height of the
+  viewport less two gaps with `overflow-y-auto`, so a long hero column still scrolls inside its
+  sticky box while a short rail shows no scrollbar. The centre column no longer scrolls
+  independently; `[data-wizard-pane="centre"]` remains on the same element, but the obsolete
+  browser assertion reads its scrollTop and will need rewriting against the document.

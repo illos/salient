@@ -78,7 +78,7 @@ export function StepRail({
   return (
     <nav
       aria-label="Steps"
-      className="flex h-full min-h-0 flex-col rounded-lg bg-card p-4"
+      className="flex flex-col rounded-lg bg-card p-4"
       data-wizard-pane="rail"
     >
       <div className="flex items-center gap-2">
@@ -88,7 +88,7 @@ export function StepRail({
       <p className="mt-1 mb-3 text-sm text-muted-foreground">
         Step {currentIndex + 1} of {steps.length}
       </p>
-      <ol className="-mx-2 m-0 flex min-h-0 flex-1 list-none flex-col overflow-y-auto p-0">
+      <ol className="-mx-2 m-0 flex list-none flex-col p-0">
         {steps.map((step, index) => {
           const current = index === currentIndex;
           return (

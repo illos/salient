@@ -105,6 +105,14 @@ const PRESET_FIXED_ASPECTS = new Set([
   'culture.organization',
   'culture.upbringing',
 ]);
+/**
+ * The side panes stick to the viewport while the page itself scrolls (V96): the wizard is one
+ * scrolling document rather than three independently scrolling columns, and the header scrolls
+ * away with it. A pane taller than the viewport scrolls inside its own sticky box; one that fits
+ * shows no scrollbar at all.
+ */
+const STICKY_PANE =
+  'sticky top-(--page-gap) max-h-[calc(100dvh_-_var(--page-gap)_*_2)] overflow-y-auto';
 /** The rail heading's reference: the whole Making a Hero chapter. */
 const BUILDER_REFERENCE = { id: 'mcdm.heroes.v1/chapter/making-a-hero', label: 'Making a Hero' };
 
@@ -982,10 +990,7 @@ function Wizard({ character }: { character: WizardCharacter }) {
   const previous = stepIndex > 0 ? PRESENTED[stepIndex - 1] : undefined;
   const next = stepIndex < PRESENTED.length - 1 ? PRESENTED[stepIndex + 1] : undefined;
   return (
-    <div
-      className="grid h-dvh grid-rows-[var(--session-header-height)_minmax(0,1fr)] overflow-hidden bg-background"
-      data-wizard-shell
-    >
+    <div className="min-h-dvh bg-background" data-wizard-shell>
       <WizardHeader
         heroName={authored.name}
         editing={Boolean(character.effectiveRevisionId)}
@@ -994,8 +999,8 @@ function Wizard({ character }: { character: WizardCharacter }) {
         onSaveDraft={() => void persist(false)}
         onExit={() => void exit()}
       />
-      <div className="grid min-h-0 grid-cols-[224px_minmax(0,1fr)_330px] gap-(--page-gap) px-(--page-gap) pb-(--page-gap)">
-        <div className="min-h-0">
+      <div className="grid grid-cols-[224px_minmax(0,1fr)_330px] items-start gap-(--page-gap) px-(--page-gap) pb-(--page-gap)">
+        <div className={STICKY_PANE}>
           <StepRail
             title="Character Builder"
             reference={BUILDER_REFERENCE}
@@ -1015,8 +1020,8 @@ function Wizard({ character }: { character: WizardCharacter }) {
             }
           />
         </div>
-        <section className="flex min-h-0 flex-col rounded-lg bg-card" aria-label="Current step">
-          <div className="min-h-0 flex-1 overflow-y-auto p-6" data-wizard-pane="centre">
+        <section className="rounded-lg bg-card" aria-label="Current step">
+          <div className="p-6" data-wizard-pane="centre">
             {!character.id && (
               <Notice className="mb-4">
                 Unsaved character. Save draft to keep your choices. Exiting or reloading before
@@ -1129,7 +1134,7 @@ function Wizard({ character }: { character: WizardCharacter }) {
             </fieldset>
           </div>
         </section>
-        <div className="min-h-0">
+        <div className={STICKY_PANE}>
           <HeroSoFar
             evaluation={evaluation}
             heroName={authored.name}
