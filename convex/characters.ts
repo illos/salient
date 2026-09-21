@@ -375,6 +375,13 @@ export const create = mutation({
       .query('characters')
       .withIndex('by_owner', q => q.eq('ownerId', user._id))
       .take(100);
+    // One working draft per owner (V96). Two tabs, or a retried create under a fresh command id,
+    // would otherwise leave hidden rows nobody can reach that still count against the limit.
+    // A mutation is a transaction, so this read-then-insert cannot interleave with another.
+    if (args.wizardDraft === true) {
+      const open = existing.find(character => character.wizardDraft === true);
+      if (open) return open._id;
+    }
     if (existing.length >= 100) throw new ConvexError('Prototype limit of 100 characters reached.');
     const selections = validatedSelections(args.selections ?? [], 1);
     const choiceOrigins = canonicalChoiceOrigins(selections, 1);

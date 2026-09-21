@@ -1,5 +1,6 @@
 import { CulturePresetSelect } from './culture-preset';
 import { KitChoice } from './kit-choice';
+import { createSaveQueue } from './save-queue';
 import { SECOND_KIT_DECISION } from '../../shared/evaluate/classes/tactician';
 // SPDX-License-Identifier: GPL-3.0-only
 /**
@@ -1122,7 +1123,6 @@ function Wizard({ character }: { character: WizardCharacter }) {
   // The step whose main chooser is deliberately reopened, and where to put focus after the
   // header and the chooser swap places. Lifted out of PrimaryChoice with V96, because the
   // chosen option now lives in the step header that this component owns.
-  const autosaving = useRef(false);
   const [editingStep, setEditingStep] = useState<string | null>(null);
   const [focusAfterChange, setFocusAfterChange] = useState(false);
   const chooserRef = useRef<HTMLDivElement>(null);
@@ -1150,10 +1150,15 @@ function Wizard({ character }: { character: WizardCharacter }) {
     setStepIndex(index);
     setReached(r => Math.max(r, index));
   }
+  /** Count the edit for the save queue and light the indicator. */
+  function recordEdit() {
+    queue.edit();
+    setDirty(true);
+  }
   function select(id: string, value: SelectionValue | undefined) {
     if (command.pending) return;
     setSaved(false);
-    setDirty(true);
+    recordEdit();
     const pruned = changeChoice(selections, definitions, id, value);
     setSelections(pruned.selections);
     setCleared(pruned.removed.filter(removed => removed !== id));
@@ -1165,7 +1170,7 @@ function Wizard({ character }: { character: WizardCharacter }) {
   function selectMany(entries: [string, SelectionValue | undefined][]) {
     if (command.pending) return;
     setSaved(false);
-    setDirty(true);
+    recordEdit();
     let working = selections;
     const removed: string[] = [];
     for (const [id, next] of entries) {
@@ -1179,96 +1184,133 @@ function Wizard({ character }: { character: WizardCharacter }) {
   function author(value: CharacterAuthored) {
     if (command.pending) return;
     setSaved(false);
-    setDirty(true);
+    recordEdit();
     setAuthored(value);
   }
   /**
-   * Keep the working draft on the server (V96). Runs quietly after every change, creating the
-   * character on the first one, and never lists it or demands a name. `characters.save` is the
-   * same revision operation the explicit save uses.
+   * Working-draft saving (V96, reworked after UI3's audit of 6b2c2bc).
+   *
+   * Every write goes through one serialized queue, so two saves never race on `expectedRevision`
+   * and an edit made while a save is in flight is still saved. The queue reads the editor through
+   * `snapshot`, so it always writes what the hero holds now rather than the state captured when
+   * the save was scheduled. The revision, the effective revision and the character's own id live
+   * in refs beside it: each save has to see what the last one acknowledged, which state updates
+   * are too late to provide.
    */
-  async function autosave() {
-    if (autosaving.current || command.pending || stale || character.combatLocked) return;
-    autosaving.current = true;
-    try {
-      if (!character.id) {
-        const id = await create({
-          commandId: crypto.randomUUID(),
-          authored,
-          selections: draft,
-          wizardDraft: true,
-        });
-        await navigate({
-          to: '/characters/$characterId/wizard',
-          params: { characterId: id },
-          replace: true,
-        });
-        return;
-      }
-      const revision = await save({
-        commandId: crypto.randomUUID(),
-        characterId: character.id,
-        expectedRevision,
-        expectedEffectiveRevisionId,
-        authored,
-        selections: draft,
-        targetLevel: character.level,
-      });
-      setExpectedRevision(revision);
-      setDirty(false);
-    } catch {
-      // A failed autosave leaves the editor dirty; the explicit save reports the reason.
-    } finally {
-      autosaving.current = false;
+  const snapshot = useRef({
+    authored,
+    draft,
+    level: character.level,
+    campaignId: character.campaignId,
+  });
+  useEffect(() => {
+    snapshot.current = {
+      authored,
+      draft,
+      level: character.level,
+      campaignId: character.campaignId,
+    };
+  });
+  const idRef = useRef(character.id);
+  const revisionRef = useRef(character.revision);
+  const effectiveRef = useRef(character.effectiveRevisionId);
+  /**
+   * A complete standalone save activates a new effective revision (convex/characters.ts), which
+   * would otherwise make this editor stale against its own write. Adopt the revision this save
+   * produced, and only that one: another tab's newer save must still make the editor stale.
+   */
+  async function reconcileEffective(revision: number) {
+    const id = idRef.current;
+    if (!id || snapshot.current.campaignId || !effectiveRef.current) return;
+    const current = await client.query(api.characters.get, { characterId: id });
+    if (current.revision === revision && !current.campaignId && current.draftIsEffective) {
+      effectiveRef.current = current.effectiveRevisionId;
+      setExpectedEffectiveRevisionId(current.effectiveRevisionId);
     }
+  }
+  // One queue for the life of this editor, created once: it owns the in-flight save and the edit
+  // counters, and everything it writes is read from the refs above at the moment of writing.
+  const [queue] = useState(createSaveQueue);
+  async function persistDraft() {
+    const { authored: fields, draft: selections, level } = snapshot.current;
+    if (!idRef.current) {
+      // Creating does not navigate: the route change would remount the editor and discard any
+      // edit made while the create was in flight. The draft is found again by its own query.
+      const id = await create({
+        commandId: crypto.randomUUID(),
+        authored: fields,
+        selections,
+        wizardDraft: true,
+      });
+      idRef.current = id;
+      revisionRef.current = 1;
+      setExpectedRevision(1);
+      return;
+    }
+    const revision = await save({
+      commandId: crypto.randomUUID(),
+      characterId: idRef.current,
+      expectedRevision: revisionRef.current,
+      expectedEffectiveRevisionId: effectiveRef.current,
+      authored: fields,
+      selections,
+      targetLevel: level,
+    });
+    revisionRef.current = revision;
+    setExpectedRevision(revision);
+    await reconcileEffective(revision);
+  }
+  /** Run the queue and report what it still owes; a failure leaves the work outstanding. */
+  async function drain() {
+    try {
+      await queue.run(persistDraft);
+    } catch {
+      // The explicit save reports the reason; the next edit or the flush retries.
+    }
+    setDirty(queue.outstanding());
+    return !queue.outstanding();
   }
   async function persist(close: boolean) {
     setSaved(false);
-    if (!authored.name.trim()) {
+    if (!snapshot.current.authored.name.trim()) {
       goTo(PRESENTED.findIndex(step => step.id === 'step.details'));
       setNameRequired(true);
       return;
     }
     setNameRequired(false);
-    let createdId: Id<'characters'> | undefined;
+    // The explicit save shares the queue: drain the working draft first so the listing save
+    // writes on top of every edit, then list the hero under one command id.
+    await drain();
     const ok = await command.run(
       async commandId => {
-        if (!character.id) {
-          createdId = await create({ commandId, authored, selections: draft });
+        const { authored: fields, draft: selections, level } = snapshot.current;
+        if (!idRef.current) {
+          idRef.current = await create({ commandId, authored: fields, selections });
+          revisionRef.current = 1;
+          setExpectedRevision(1);
           return;
         }
         const revision = await save({
           commandId,
-          characterId: character.id,
-          expectedRevision,
-          expectedEffectiveRevisionId,
-          authored,
-          selections: draft,
-          targetLevel: character.level,
+          characterId: idRef.current,
+          expectedRevision: revisionRef.current,
+          expectedEffectiveRevisionId: effectiveRef.current,
+          authored: fields,
+          selections,
+          targetLevel: level,
           list: true,
         });
+        revisionRef.current = revision;
         setExpectedRevision(revision);
-        // An already-effective standalone build follows its own complete saves. Accept only
-        // this acknowledged revision; another tab's newer save must still make this editor stale.
-        if (!character.campaignId && expectedEffectiveRevisionId) {
-          const current = await client.query(api.characters.get, { characterId: character.id });
-          if (current.revision === revision && !current.campaignId && current.draftIsEffective)
-            setExpectedEffectiveRevisionId(current.effectiveRevisionId);
-        }
+        await reconcileEffective(revision);
       },
-      JSON.stringify(['characters.save', character.id, expectedRevision, authored, draft]),
+      JSON.stringify(['characters.save', idRef.current, revisionRef.current, authored, draft]),
     );
     if (ok) {
       setSaved(true);
-      setDirty(false);
-      if (createdId) {
-        await navigate({
-          to: close ? '/characters/$characterId' : '/characters/$characterId/wizard',
-          params: { characterId: createdId },
-          replace: true,
-        });
-      } else if (close && character.id)
-        await navigate({ to: '/characters/$characterId', params: { characterId: character.id } });
+      setDirty(queue.outstanding());
+      if (close && idRef.current)
+        await navigate({ to: '/characters/$characterId', params: { characterId: idRef.current } });
     }
   }
   const problemsByStep = (s: Step) =>
@@ -1422,15 +1464,18 @@ function Wizard({ character }: { character: WizardCharacter }) {
           (Boolean(character.id) || confirmedEmptyChoices.has(primary.id))
         )));
   // One quiet write a short while after the last change, not one per keystroke or click.
-  const latestAutosave = useRef(autosave);
+  // Leaving the page must not drop the pending write: the draft's whole promise is that it
+  // survives leaving and reloading. Unmount cancels the timer, so flush there too.
+  const flush = useRef(drain);
   useEffect(() => {
-    latestAutosave.current = autosave;
+    flush.current = drain;
   });
   useEffect(() => {
-    if (!dirty) return;
-    const timer = setTimeout(() => void latestAutosave.current(), 800);
+    if (!dirty || command.pending || stale || character.combatLocked) return;
+    const timer = setTimeout(() => void flush.current(), 800);
     return () => clearTimeout(timer);
-  }, [dirty, selections, authored]);
+  }, [dirty, selections, authored, command.pending, stale, character.combatLocked]);
+  useEffect(() => () => void flush.current(), []);
   useEffect(() => {
     if (!focusAfterChange) return;
     const target = primaryExpanded ? chooserRef.current : editRef.current;
@@ -1897,12 +1942,14 @@ export function WizardPage({ characterId }: { characterId?: Id<'characters'> }) 
         <Loading>Opening the character builder…</Loading>
       </div>
     );
-  if (!resolved) return <Wizard key="new" character={unsavedCharacter} />;
-  if (character === undefined)
+  if (resolved && character === undefined)
     return (
       <div className="p-10">
         <Loading>Loading character…</Loading>
       </div>
     );
-  return <Wizard key={character.id} character={character} />;
+  // The key is the route, not the character: creating the working draft makes this character
+  // appear under an unchanged route, and remounting there would discard whatever the hero was
+  // edited to while the create was in flight (V96, after UI3's audit).
+  return <Wizard key={characterId ?? 'new'} character={character ?? unsavedCharacter} />;
 }

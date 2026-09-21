@@ -193,6 +193,30 @@ Features, Perks, Abilities — then the skills, then the outstanding list, each 
 decision's name and what it needs, with the count in the accent and one line saying they all need
 answering before the hero is finished. A missing value still reads "Pending".
 
+## UI3 audit of 6b2c2bc, and the fixes
+
+UI3 found four defects in the working-draft save path. All are fixed on this branch.
+
+- **P1, the save race.** Autosave cleared the dirty flag after awaiting, so an edit made during a
+  save was marked as already saved and lost; a second edit arriving mid-save was dropped outright;
+  and creating the character navigated, remounting the editor over any edit made meanwhile. Saves
+  now go through one serialized queue (`web/wizard/save-queue.ts`) that counts edits and records
+  which count a completed save covered, looping until they agree. Creating no longer navigates,
+  and the page keys the editor on the route rather than the character, so the draft appearing does
+  not remount it. Proof: `tests/app/wizard-save-queue.test.ts`, three cases including the delayed
+  edit and a failed save leaving the work outstanding.
+- **P1, leaving the page.** The debounce was cancelled on unmount, so navigating within 800 ms of
+  an edit lost it, against the draft's whole promise. The editor now flushes the queue on unmount,
+  and the explicit save drains the same queue before listing the hero, so the two cannot interleave.
+- **P1, the effective revision.** Autosave advanced `expectedRevision` but not
+  `expectedEffectiveRevisionId`, so a complete standalone build went stale against its own save.
+  Both paths now use one `reconcileEffective`, which adopts only the revision that save produced.
+- **P2, one draft per owner.** `create` did not enforce it, so two tabs could leave hidden rows
+  against the hundred-character limit. A wizard-draft create now returns the owner's open draft
+  instead of inserting another; the mutation is a transaction, so the read and the insert cannot
+  interleave. Proof: `tests/app/wizard-draft.test.ts`, two tabs with distinct command ids, and a
+  new draft allowed once the first is saved into the list.
+
 ## Flagged for audit: the Tactician's two kits
 
 **This slice changed how a character option is chosen, not only how it looks.** A Tactician takes
@@ -300,8 +324,8 @@ chosen; it needs its own slice and headless proof.
 ## Checkpoint, 2026-09-21
 
 Committed on `slice/V96` in `.worktrees/wizard-ui`, cut from main `1115380`. Not merged, not yet
-tested. Authoring checks on the branch tip: eslint and prettier over the tree, `tsc` for both
-projects, 418 Markdown links, vendor pins, and the four focused character suites (13 tests) pass.
+tested. UI3's audit findings are fixed above. Authoring checks on the branch tip: eslint and prettier over the tree, `tsc` for both
+projects, 418 Markdown links, vendor pins, and the five focused character suites (17 tests) pass.
 Handed to UI3 for audit, which routes to TESTER and DEPLOY2.
 
 Two things an auditor should read first: **Flagged for audit** above, on the Tactician's two-kit

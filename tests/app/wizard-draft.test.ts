@@ -79,3 +79,40 @@ test('creating a character outside the wizard still requires a name and is liste
   const listed = await owner.client.query(api.characters.listMine, {});
   expect(listed.map(character => character.name)).toEqual(['Listed']);
 });
+
+test('an owner keeps one working draft however many tabs ask for one', async () => {
+  const t = backend();
+  const owner = await account(t, 'TwoTabs');
+
+  // Two tabs, two command ids: the second must join the first draft rather than hide another.
+  const first = await owner.client.mutation(api.characters.create, {
+    commandId: 'wizard-draft-tab-one',
+    authored: blank,
+    wizardDraft: true,
+  });
+  const second = await owner.client.mutation(api.characters.create, {
+    commandId: 'wizard-draft-tab-two',
+    authored: blank,
+    wizardDraft: true,
+  });
+  expect(second).toEqual(first);
+  expect(await owner.client.query(api.characters.wizardDraft, {})).toEqual(first);
+  expect(await owner.client.query(api.characters.listMine, {})).toEqual([]);
+
+  // Once it is saved into the list it is no longer the working draft, so a new one may start.
+  await owner.client.mutation(api.characters.save, {
+    commandId: 'wizard-draft-tab-list',
+    characterId: first,
+    expectedRevision: 1,
+    authored: { ...blank, name: 'First hero' },
+    selections: heroFixtureSelections(),
+    list: true,
+  });
+  const third = await owner.client.mutation(api.characters.create, {
+    commandId: 'wizard-draft-tab-three',
+    authored: blank,
+    wizardDraft: true,
+  });
+  expect(third).not.toEqual(first);
+  expect(await owner.client.query(api.characters.wizardDraft, {})).toEqual(third);
+});
