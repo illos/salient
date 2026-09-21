@@ -111,3 +111,21 @@ unchanged.
   v0.01 scope line asks for the book's step names, so this is an explicit amendment rather than a
   drift: the override is one entry in a wizard-only map, the step's rulebook reference still
   resolves to "9. Determine Details", and the step description is still the source sentence.
+- 2026-09-21: refinements from the user's full-wizard mockup (attachment, 2026-09-21):
+  - Rail: completed percentage beside "Step n of m" with the accent progress bar under the
+    heading instead of at the foot; the current step row takes a `sub` fill; the outstanding
+    count reads as a plain muted number; the forward button is a pill; a hint line under the
+    navigation says what the step still owes and what comes next.
+  - Step header: the step name stays as a muted label beside the chosen option's name, and Edit
+    moves to the right of the header row.
+  - A base-statistics step reads Size, Speed and Stability back as tiles from the shared
+    evaluation, with the source sentence under a hairline. An automatic step that grants
+    something says "— granted" in its label and sets the granted name at reading size.
+  - A point-budget decision is its own panel: heading, "n of m points spent · k left", a dot per
+    point, Clear, then the option cards two across with a round state dot restored. The dot comes
+    back only here, where several cards are on at once; single-choice lists keep the ring alone.
+  - The step card gains a footer with what it still owes and the same forward move the rail has.
+  - Hero column: status reads as a dot and a word rather than a filled pill, and the traits taken
+    appear as their own chip inset.
+  The points left are counted from recorded selections and content costs, the same sum the panel
+  heading already made; no new rules resolution entered the UI.

@@ -18,6 +18,7 @@ export function StepTitle({
   reference,
   optional,
   action,
+  eyebrow,
 }: {
   title: string;
   description?: string;
@@ -25,14 +26,17 @@ export function StepTitle({
   optional?: boolean;
   /** Edit, once the step's main choice is made and the header carries it (V96). */
   action?: React.ReactNode;
+  /** The step this header belongs to, when its title is the chosen option's name instead. */
+  eyebrow?: string;
 }) {
   return (
     <div className="mb-4">
       <div className="flex items-center gap-3">
         <h2 className="m-0 text-3xl font-medium">{title}</h2>
+        {eyebrow && <span className="text-sm text-muted-foreground">{eyebrow}</span>}
         {reference}
         {optional && <span className="text-sm text-muted-foreground">Optional</span>}
-        {action}
+        {action && <span className="ml-auto">{action}</span>}
       </div>
       {description && <p className="mt-2 mb-0 text-base text-muted-foreground">{description}</p>}
     </div>
@@ -84,6 +88,12 @@ export interface ChoiceRowProps {
    * ancestry trait actually does, so the choice is made from the card, not the reference dialog.
    */
   body?: React.ReactNode;
+  /**
+   * Show a round state dot before the name. The mockup restores it for the point-budget cards,
+   * where several cards are on at once and a ring alone reads as ambiguous; single-choice lists
+   * keep the ring alone.
+   */
+  indicator?: boolean;
 }
 
 export function ChoiceRow({
@@ -97,6 +107,7 @@ export function ChoiceRow({
   meta,
   reference,
   body,
+  indicator,
 }: ChoiceRowProps) {
   return (
     <li>
@@ -120,6 +131,17 @@ export function ChoiceRow({
           className="sr-only"
         />
         <span className="flex items-baseline gap-2">
+          {indicator && (
+            <span
+              aria-hidden
+              className={cn(
+                'flex size-[18px] shrink-0 translate-y-0.5 items-center justify-center rounded-full text-xs',
+                checked ? 'bg-primary text-primary-foreground' : 'bg-placeholder',
+              )}
+            >
+              {checked ? '✓' : ''}
+            </span>
+          )}
           <span className="truncate text-lg font-medium">{name}</span>
           {reference}
           <span className="ml-auto flex items-baseline gap-2 pl-3 text-sm whitespace-nowrap text-muted-foreground">
@@ -133,8 +155,19 @@ export function ChoiceRow({
   );
 }
 
-export function ChoiceList({ children }: { children: React.ReactNode }) {
-  return <ul className="m-0 flex list-none flex-col gap-2 p-0">{children}</ul>;
+export function ChoiceList({ children, grid }: { children: React.ReactNode; grid?: boolean }) {
+  return (
+    <ul
+      className={cn(
+        'm-0 list-none p-0',
+        grid
+          ? 'grid grid-cols-[repeat(auto-fill,minmax(17rem,1fr))] items-start gap-2'
+          : 'flex flex-col gap-2',
+      )}
+    >
+      {children}
+    </ul>
+  );
 }
 
 /**
@@ -174,7 +207,7 @@ export function StepNav({
       {next ? (
         <Button
           type="button"
-          className="min-w-0 flex-1 justify-between gap-2"
+          className="min-w-0 flex-1 justify-between gap-2 rounded-full"
           title={`Continue to ${next}`}
           onClick={onNext}
         >
@@ -184,7 +217,7 @@ export function StepNav({
       ) : (
         <Button
           type="button"
-          className="min-w-0 flex-1"
+          className="min-w-0 flex-1 rounded-full"
           disabled={finishDisabled}
           onClick={onFinish}
         >

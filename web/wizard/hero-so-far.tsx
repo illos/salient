@@ -2,14 +2,15 @@
 /**
  * The "Your hero so far" column (V21 item 10; Quiet, docs/design-mockups/quiet/README.md): a
  * `card` panel with the disc and identity line, five compact characteristic tiles, derived-value
- * rows split by hairlines, skill pills, the outstanding list and the Source text inset for the
- * current step. Every value is read from the shared `characters.evaluate` result; nothing here
+ * rows split by hairlines, skill pills, the traits taken, the outstanding list and the Source
+ * text inset for the current step. The status reads as a dot and a word rather than a pill
+ * (V96 mockup), so the accent marks completeness rather than decorating a label. Every value is read from the shared `characters.evaluate` result; nothing here
  * derives one. A value the evaluator has not produced yet reads "Pending" (the model does not say
  * which later step supplies it).
  */
+import { cn } from 'cn';
 import { Chip } from '../components/chip';
 import { Disc } from '../components/disc';
-import { Pill } from '../components/pill';
 import { StatBox } from '../components/stat-box';
 import { Loading } from '../ui';
 import { RuleLink } from '../rules/link';
@@ -75,7 +76,16 @@ export function HeroSoFar({
       <div className="flex items-center justify-between gap-3">
         <p className="m-0 text-lg font-medium">Your hero so far</p>
         {evaluation ? (
-          <Pill filled={evaluation.status === 'complete'}>{evaluation.status}</Pill>
+          <span className="flex items-center gap-2 text-sm text-muted-foreground">
+            <span
+              aria-hidden
+              className={cn(
+                'size-2 rounded-full',
+                evaluation.status === 'complete' ? 'bg-primary' : 'bg-placeholder',
+              )}
+            />
+            {evaluation.status}
+          </span>
         ) : (
           <Loading>Evaluating…</Loading>
         )}
@@ -148,6 +158,18 @@ export function HeroSoFar({
         <Row label="Perks" value={names(b.perks)} />
         <Row label="Abilities" value={names(b.abilities)} />
       </div>
+      {b.traits?.length ? (
+        <div className="rounded-md bg-muted p-4">
+          <p className="mb-2 text-sm text-muted-foreground">Traits chosen</p>
+          <ul className="m-0 flex list-none flex-wrap gap-1.5 p-0" aria-label="Traits chosen">
+            {b.traits.map(trait => (
+              <li key={trait.name}>
+                <Chip>{trait.name}</Chip>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : null}
       <SupportingBuildFacts baseline={b} />
       <div>
         <p className="mb-2 text-sm text-muted-foreground">Skills</p>

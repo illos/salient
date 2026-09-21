@@ -30,6 +30,7 @@ import { findCulturePreset } from '../../shared/content/culture-presets';
 import type {
   Diagnostic,
   EvaluationResult,
+  PartialBaseline,
   SelectionValue,
 } from '../../shared/contracts/characterEvaluation';
 import type { Decision, DecisionDefinitions, Step } from '../../shared/evaluate/definitions';
@@ -68,6 +69,7 @@ import {
 import { WizardHeader } from './header';
 import { StepRail, type RailStep } from './rail';
 import { ChoiceList, ChoiceRow, ChoiceSection, StepNav, StepTitle } from './choice-list';
+import { cn } from 'cn';
 import { HeroSoFar } from './hero-so-far';
 import { PrimaryChoice } from './primary-choice';
 import {
@@ -231,6 +233,7 @@ export function DecisionEditor({
   onAuthored,
   diagnostics,
   lockedBy,
+  baseline,
 }: {
   definitions?: DecisionDefinitions;
   decision: Decision;
@@ -242,6 +245,8 @@ export function DecisionEditor({
   diagnostics: Diagnostic[] | undefined;
   /** Name of the preset that fixed this value: show it read-only and say what to do instead. */
   lockedBy?: string;
+  /** Evaluated values, for the automatic steps that read them back (base statistics). */
+  baseline?: PartialBaseline;
 }) {
   const decisions = useMemo(() => indexDecisions(definitions), [definitions]);
   // Shared cached catalog: the reference links on these same rows already hold it.
@@ -296,17 +301,45 @@ export function DecisionEditor({
     );
   else if (decision.kind === 'automatic')
     control = (
-      <ul className="m-0 list-none p-0 text-sm">
-        {!decision.grants?.length && decision.quote && <li>{readableRuleText(decision.quote)}</li>}
-        {(decision.grants ?? []).map((grant, i) => (
-          <li key={i} className="flex items-center gap-2 py-0.5">
-            {readableRuleText(grant.value)
-              .replace(/ \(derived in R02\)/g, '')
-              .replace(/manual in v0.01/g, 'resolved at the table')}
-            {grant.source && <RuleLink sourcePath={grant.source} label={grant.value} />}
-          </li>
-        ))}
-      </ul>
+      <div className="flex flex-col gap-3">
+        {/* The base-statistics step reads its three values back as tiles (V96 mockup). They come
+            from the shared evaluation, exactly as the hero column's do; nothing is derived here. */}
+        {decision.id.endsWith('.base-statistics') && baseline && (
+          <div className="grid grid-cols-3 gap-2">
+            {(
+              [
+                ['Size', baseline.size],
+                ['Speed', baseline.speed],
+                ['Stability', baseline.stability],
+              ] as const
+            ).map(([label, entry]) => (
+              <span key={label} className="flex flex-col gap-0.5 rounded-md bg-muted px-4 py-3">
+                <span className="text-2xl font-medium tabular-nums">
+                  {entry === undefined ? '—' : String(entry.value)}
+                </span>
+                <span className="text-sm text-muted-foreground">{label}</span>
+              </span>
+            ))}
+          </div>
+        )}
+        {(decision.grants ?? []).length > 0 && (
+          <ul className="m-0 list-none p-0">
+            {(decision.grants ?? []).map((grant, i) => (
+              <li key={i} className="flex items-center gap-2 py-0.5 text-lg font-medium">
+                {readableRuleText(grant.value)
+                  .replace(/ \(derived in R02\)/g, '')
+                  .replace(/manual in v0.01/g, 'resolved at the table')}
+                {grant.source && <RuleLink sourcePath={grant.source} label={grant.value} />}
+              </li>
+            ))}
+          </ul>
+        )}
+        {!decision.grants?.length && decision.quote && (
+          <p className="m-0 border-t border-border pt-3 text-sm text-muted-foreground">
+            {readableRuleText(decision.quote)}
+          </p>
+        )}
+      </div>
     );
   else if (decision.kind === 'authored') {
     const field = AUTHORED_FIELDS[decision.id];
@@ -476,15 +509,55 @@ export function DecisionEditor({
       (sum, name) => sum + (decision.options?.find(o => o.value === name)?.cost ?? 0),
       0,
     );
-    control = (
-      <div className="flex flex-col gap-2">
-        <ChoiceList>
+    // The point-budget decision is its own panel (V96 mockup): a heading that counts the budget,
+    // a dot per point, Clear, then the option cards two across.
+    return (
+      <section className="rounded-lg bg-card p-6" aria-label={label}>
+        <div className="flex flex-wrap items-start justify-between gap-x-4 gap-y-2">
+          <div className="min-w-0">
+            <h3 className="m-0 flex items-center gap-2 text-xl font-medium">
+              {label}
+              {reference}
+            </h3>
+            <p className="mt-1 mb-0 text-sm text-muted-foreground">
+              {total} of {shape.budget} points spent · {Math.max(0, shape.budget - total)} left
+              {decision.exactBudget ? ' · spend exactly this budget' : ''}
+              {decision.supportedSetInV001
+                ? ` · offered set: ${decision.supportedSetInV001.join(' + ')}`
+                : ''}
+            </p>
+          </div>
+          <div className="flex items-center gap-3">
+            <span className="flex items-center gap-1" aria-hidden>
+              {Array.from({ length: shape.budget }, (_, index) => (
+                <span
+                  key={index}
+                  className={cn(
+                    'size-2 rounded-full',
+                    index < total ? 'bg-primary' : 'bg-placeholder',
+                  )}
+                />
+              ))}
+            </span>
+            <Button
+              type="button"
+              variant="ghost"
+              size="sm"
+              disabled={chosen.length === 0}
+              onClick={() => onSelect(decision.id, undefined)}
+            >
+              Clear
+            </Button>
+          </div>
+        </div>
+        <ChoiceList grid>
           {(decision.options ?? [])
             .filter(option => pool.values.includes(option.value) || option.requiresFeature)
             .map(option => (
               <ChoiceRow
                 key={option.id}
                 type="checkbox"
+                indicator
                 name={option.value}
                 checked={chosen.includes(option.value)}
                 supported={option.supportedInV001 && pool.values.includes(option.value)}
@@ -511,14 +584,8 @@ export function DecisionEditor({
               />
             ))}
         </ChoiceList>
-        <span className="text-sm text-muted-foreground">
-          {total} of {shape.budget} points spent
-          {decision.exactBudget ? ' · spend exactly this budget' : ''}
-          {decision.supportedSetInV001
-            ? ` · offered set: ${decision.supportedSetInV001.join(' + ')}`
-            : ''}
-        </span>
-      </div>
+        <Diagnostics list={diagnostics} />
+      </section>
     );
   } else if (shape.type === 'assignment') {
     control = (
@@ -570,7 +637,12 @@ export function DecisionEditor({
         })
       : [];
   return (
-    <ChoiceSection label={label} reference={reference}>
+    <ChoiceSection
+      label={
+        decision.kind === 'automatic' && decision.grants?.length ? `${label} — granted` : label
+      }
+      reference={reference}
+    >
       {decision.decisionActor && decision.decisionActor !== 'owner' && (
         <p className="m-0 text-sm text-muted-foreground">
           {decision.id === 'complication.strange-inheritance.secretTrinket' ? (
@@ -1016,10 +1088,42 @@ function Wizard({ character }: { character: WizardCharacter }) {
       onAuthored={author}
       diagnostics={evaluation?.diagnostics[decision.id]}
       lockedBy={lockedByPreset(decision.id)}
+      baseline={evaluation?.baseline ?? evaluation?.partial}
     />
   );
   const previous = stepIndex > 0 ? PRESENTED[stepIndex - 1] : undefined;
   const next = stepIndex < PRESENTED.length - 1 ? PRESENTED[stepIndex + 1] : undefined;
+  // A point-budget decision is its own panel beside the step card (V96 mockup); everything else
+  // reads inside it. Both lists come from the same step in the same source order.
+  const isPanel = (decision: Decision) =>
+    decision !== primary && decision.shape.type === 'points' && !lockedByPreset(decision.id);
+  const dependent = primary
+    ? step.decisions.filter(decision => decision !== primary)
+    : step.decisions;
+  const inlineDecisions = dependent.filter(decision => !isPanel(decision));
+  const panelDecisions = primaryExpanded ? [] : dependent.filter(isPanel);
+  // What this step still owes, for the rail hint and the step footer. The budget and the costs
+  // are content; this only counts what is already recorded, as the panel heading does.
+  const stepProblems = step.decisions.reduce(
+    (n, d) =>
+      n + (evaluation?.diagnostics[d.id]?.filter(x => x.severity !== 'warning').length ?? 0),
+    0,
+  );
+  const stepFooterNote =
+    stepProblems > 0
+      ? `${stepProblems} choice${stepProblems === 1 ? '' : 's'} still to make.`
+      : next
+        ? 'This step is complete.'
+        : 'Name your hero in this step, then save.';
+  const pointsOwed = dependent.flatMap(decision => {
+    if (decision.shape.type !== 'points') return [];
+    const chosen = selections[decision.id];
+    const spent = (Array.isArray(chosen) ? chosen : [])
+      .filter((name): name is string => typeof name === 'string')
+      .reduce((sum, name) => sum + (decision.options?.find(o => o.value === name)?.cost ?? 0), 0);
+    const left = decision.shape.budget - spent;
+    return left > 0 ? [`${left} point${left === 1 ? '' : 's'} still unspent`] : [];
+  });
   return (
     <div className="min-h-dvh bg-background" data-wizard-shell>
       <WizardHeader
@@ -1038,6 +1142,13 @@ function Wizard({ character }: { character: WizardCharacter }) {
             steps={railSteps}
             currentIndex={stepIndex}
             onSelect={goTo}
+            hint={
+              pointsOwed.length
+                ? `${pointsOwed.join(' · ')}. ${next ? `${stepName(next)} comes next.` : ''}`
+                : next
+                  ? `${stepName(next)} comes next.`
+                  : undefined
+            }
             footer={
               <StepNav
                 previous={previous ? stepName(previous) : undefined}
@@ -1051,147 +1162,176 @@ function Wizard({ character }: { character: WizardCharacter }) {
             }
           />
         </div>
-        <section className="rounded-lg bg-card" aria-label="Current step">
-          <div className="p-6" data-wizard-pane="centre">
-            {!character.id && (
-              <Notice className="mb-4">
-                Unsaved character. Save draft to keep your choices. Exiting or reloading before
-                saving discards them.
-              </Notice>
-            )}
-            {nameRequired && (
-              <p role="alert" className="mb-4 text-base text-destructive">
-                Enter a name in Details before saving your character.
-              </p>
-            )}
-            {character.fullEditIsStale && (
-              <Notice className="mb-4">
-                Your effective build advanced after this draft was saved. Review its earlier choices
-                and level before saving a reconciled full edit. Saving does not activate it.
-                <label className="mt-2 flex items-center gap-2">
-                  <input
-                    type="checkbox"
-                    checked={reconciled}
-                    onChange={event => setReconciled(event.target.checked)}
-                    className="size-[18px] shrink-0 cursor-pointer appearance-none rounded-[5px] bg-placeholder transition-colors duration-(--motion-fast) outline-none checked:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
-                  />
-                  I reviewed this draft against the current effective build.
-                </label>
-              </Notice>
-            )}
-            {stale && (
-              <Notice className="mb-4">
-                A newer saved version exists. Reload the page before saving.
-              </Notice>
-            )}
-            {character.combatLocked && (
-              <Notice className="mb-4">Character editing is locked during combat.</Notice>
-            )}
-            {saved && (
-              <p role="status" className="mb-4 text-base text-success">
-                Draft saved (revision {expectedRevision}).
-              </p>
-            )}
-            {cleared.length > 0 && (
-              <Notice className="mb-4" role="status">
-                Cleared because a parent choice changed: {cleared.map(decisionLabel).join(', ')}.
-              </Notice>
-            )}
-            {/* A settled main choice speaks for its step: the option's name, its own rules text
+        <div className="flex min-w-0 flex-col gap-(--page-gap)">
+          <section className="rounded-lg bg-card" aria-label="Current step">
+            <div className="p-6" data-wizard-pane="centre">
+              {!character.id && (
+                <Notice className="mb-4">
+                  Unsaved character. Save draft to keep your choices. Exiting or reloading before
+                  saving discards them.
+                </Notice>
+              )}
+              {nameRequired && (
+                <p role="alert" className="mb-4 text-base text-destructive">
+                  Enter a name in Details before saving your character.
+                </p>
+              )}
+              {character.fullEditIsStale && (
+                <Notice className="mb-4">
+                  Your effective build advanced after this draft was saved. Review its earlier
+                  choices and level before saving a reconciled full edit. Saving does not activate
+                  it.
+                  <label className="mt-2 flex items-center gap-2">
+                    <input
+                      type="checkbox"
+                      checked={reconciled}
+                      onChange={event => setReconciled(event.target.checked)}
+                      className="size-[18px] shrink-0 cursor-pointer appearance-none rounded-[5px] bg-placeholder transition-colors duration-(--motion-fast) outline-none checked:bg-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+                    />
+                    I reviewed this draft against the current effective build.
+                  </label>
+                </Notice>
+              )}
+              {stale && (
+                <Notice className="mb-4">
+                  A newer saved version exists. Reload the page before saving.
+                </Notice>
+              )}
+              {character.combatLocked && (
+                <Notice className="mb-4">Character editing is locked during combat.</Notice>
+              )}
+              {saved && (
+                <p role="status" className="mb-4 text-base text-success">
+                  Draft saved (revision {expectedRevision}).
+                </p>
+              )}
+              {cleared.length > 0 && (
+                <Notice className="mb-4" role="status">
+                  Cleared because a parent choice changed: {cleared.map(decisionLabel).join(', ')}.
+                </Notice>
+              )}
+              {/* A settled main choice speaks for its step: the option's name, its own rules text
                 and its reference stand in for the step's, with Edit to reopen the chooser. */}
-            {primary && !primaryExpanded ? (
-              <StepTitle
-                title={selectedName ?? primaryNoneLabel ?? stepName(step)}
-                description={
-                  (selectedSource &&
-                    ruleExcerpt(catalog, { sourcePath: selectedSource, label: selectedName })) ||
-                  stepExcerpt(step)
-                }
-                reference={
-                  selectedSource ? (
-                    <RuleLink sourcePath={selectedSource} label={selectedName} />
-                  ) : (
-                    <RuleLink {...stepReference(step)} />
-                  )
-                }
-                optional={step.optional}
-                action={
-                  <Button
-                    ref={editRef}
-                    type="button"
-                    variant="outline"
-                    size="sm"
-                    disabled={command.pending}
-                    aria-label={`Edit ${stepName(step).toLowerCase()}`}
-                    onClick={() => {
-                      setFocusAfterChange(true);
-                      setEditingStep(step.id);
-                    }}
-                  >
-                    Edit
-                  </Button>
-                }
-              />
-            ) : (
-              <StepTitle
-                title={stepName(step)}
-                description={stepExcerpt(step)}
-                reference={<RuleLink {...stepReference(step)} />}
-                optional={step.optional}
-              />
-            )}
-            {primary && !primaryExpanded && (
-              <Diagnostics list={evaluation?.diagnostics[primary.id]} />
-            )}
-            {step.id === 'step.kit' && evaluation?.partial?.kit === null && (
-              <p className="text-base text-muted-foreground">
-                This build has no kit. Its class features supply its starting statistics and
-                abilities.
-              </p>
-            )}
-            <fieldset disabled={command.pending} className="contents">
-              {primary ? (
-                <PrimaryChoice
-                  key={step.id}
-                  label={stepName(step)}
-                  selected={selectedName}
-                  noneLabel={primaryNoneLabel}
-                  expanded={primaryExpanded}
-                  chooserRef={chooserRef}
-                  onKeep={value => {
-                    if (command.pending) return;
-                    if (value !== selections[primary.id]) select(primary.id, value);
-                    setConfirmedEmptyChoices(previous => {
-                      const next = new Set(previous);
-                      if (value === undefined) next.add(primary.id);
-                      else next.delete(primary.id);
-                      return next;
-                    });
-                    setFocusAfterChange(true);
-                    setEditingStep(null);
-                  }}
-                  renderChooser={choose => renderDecision(primary, (_id, value) => choose(value))}
-                >
-                  {step.decisions
-                    .filter(decision => decision !== primary)
-                    .map(decision => renderDecision(decision))}
-                </PrimaryChoice>
+              {primary && !primaryExpanded ? (
+                <StepTitle
+                  title={selectedName ?? primaryNoneLabel ?? stepName(step)}
+                  eyebrow={stepName(step)}
+                  description={
+                    (selectedSource &&
+                      ruleExcerpt(catalog, { sourcePath: selectedSource, label: selectedName })) ||
+                    stepExcerpt(step)
+                  }
+                  reference={
+                    selectedSource ? (
+                      <RuleLink sourcePath={selectedSource} label={selectedName} />
+                    ) : (
+                      <RuleLink {...stepReference(step)} />
+                    )
+                  }
+                  optional={step.optional}
+                  action={
+                    <Button
+                      ref={editRef}
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      disabled={command.pending}
+                      aria-label={`Edit ${stepName(step).toLowerCase()}`}
+                      onClick={() => {
+                        setFocusAfterChange(true);
+                        setEditingStep(step.id);
+                      }}
+                    >
+                      Edit
+                    </Button>
+                  }
+                />
               ) : (
-                step.decisions.map(decision => renderDecision(decision))
+                <StepTitle
+                  title={stepName(step)}
+                  description={stepExcerpt(step)}
+                  reference={<RuleLink {...stepReference(step)} />}
+                  optional={step.optional}
+                />
               )}
-              {step.id === 'step.details' && (
-                <Field label="Private notes" hint="Only you can read these notes." className="py-5">
-                  <Textarea
-                    maxLength={10000}
-                    className="max-w-2xl"
-                    value={authored.notes}
-                    onChange={event => author({ ...authored, notes: event.target.value })}
-                  />
-                </Field>
+              {primary && !primaryExpanded && (
+                <Diagnostics list={evaluation?.diagnostics[primary.id]} />
               )}
-            </fieldset>
+              {step.id === 'step.kit' && evaluation?.partial?.kit === null && (
+                <p className="text-base text-muted-foreground">
+                  This build has no kit. Its class features supply its starting statistics and
+                  abilities.
+                </p>
+              )}
+              <fieldset disabled={command.pending} className="contents">
+                {primary ? (
+                  <PrimaryChoice
+                    key={step.id}
+                    label={stepName(step)}
+                    selected={selectedName}
+                    noneLabel={primaryNoneLabel}
+                    expanded={primaryExpanded}
+                    chooserRef={chooserRef}
+                    onKeep={value => {
+                      if (command.pending) return;
+                      if (value !== selections[primary.id]) select(primary.id, value);
+                      setConfirmedEmptyChoices(previous => {
+                        const next = new Set(previous);
+                        if (value === undefined) next.add(primary.id);
+                        else next.delete(primary.id);
+                        return next;
+                      });
+                      setFocusAfterChange(true);
+                      setEditingStep(null);
+                    }}
+                    renderChooser={choose => renderDecision(primary, (_id, value) => choose(value))}
+                  >
+                    {inlineDecisions.map(decision => renderDecision(decision))}
+                  </PrimaryChoice>
+                ) : (
+                  inlineDecisions.map(decision => renderDecision(decision))
+                )}
+                {step.id === 'step.details' && (
+                  <Field
+                    label="Private notes"
+                    hint="Only you can read these notes."
+                    className="py-5"
+                  >
+                    <Textarea
+                      maxLength={10000}
+                      className="max-w-2xl"
+                      value={authored.notes}
+                      onChange={event => author({ ...authored, notes: event.target.value })}
+                    />
+                  </Field>
+                )}
+              </fieldset>
+            </div>
+          </section>
+          <fieldset disabled={command.pending} className="contents">
+            {panelDecisions.map(decision => renderDecision(decision))}
+          </fieldset>
+          {/* The step's own footer: what it still owes, and the same move the rail offers. */}
+          <div className="flex flex-wrap items-center justify-between gap-3 rounded-lg bg-card px-6 py-4">
+            <p className="m-0 text-sm text-muted-foreground">
+              {pointsOwed.length ? `${pointsOwed.join(' · ')}.` : stepFooterNote}
+            </p>
+            {next ? (
+              <Button type="button" className="rounded-full" onClick={() => goTo(stepIndex + 1)}>
+                Continue to {stepName(next)} <span aria-hidden>→</span>
+              </Button>
+            ) : (
+              <Button
+                type="button"
+                className="rounded-full"
+                disabled={!canSave}
+                onClick={() => void persist(true)}
+              >
+                {command.pending ? 'Saving…' : 'Save and close'}
+              </Button>
+            )}
           </div>
-        </section>
+        </div>
         <div className={STICKY_PANE}>
           <HeroSoFar
             evaluation={evaluation}

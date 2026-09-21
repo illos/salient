@@ -4,14 +4,14 @@
  * a `card` panel headed "Character Builder" with the Making a Hero reference, a muted "Step n
  * of m" line, one compact row per presented step — the tonal round badge carries the number and
  * takes the accent on the current step (a check mark once the step is done), then the step's
- * chosen value, falling back to the step name until it has one — and a rounded progress bar at
- * the bottom, with the step navigation under it. The rows are the same step buttons the wizard
+ * chosen value, falling back to the step name until it has one — with the completed percentage
+ * and its accent progress bar under the heading, and the step navigation and a hint line at the
+ * foot. The rows are the same step buttons the wizard
  * always had, and the accessible name
  * keeps the step it belongs to (`n. Step name: Chosen`) so the keyboard flow keeps working. The
  * steps come from the caller in presented order; nothing here knows how many there are.
  */
 import { cn } from 'cn';
-import { Badge } from '../components/ui/badge';
 import { RuleLink } from '../rules/link';
 import type { RuleReference } from '../rules/reference';
 
@@ -62,6 +62,7 @@ export function StepRail({
   currentIndex,
   onSelect,
   footer,
+  hint,
 }: {
   /** The heading above the steps. */
   title: string;
@@ -70,8 +71,10 @@ export function StepRail({
   steps: RailStep[];
   currentIndex: number;
   onSelect: (index: number) => void;
-  /** Step navigation, under the progress bar (V96). */
+  /** Step navigation, at the foot of the rail (V96). */
   footer?: React.ReactNode;
+  /** One line under the navigation: what this step still owes and what comes next. */
+  hint?: React.ReactNode;
 }) {
   const completed = steps.filter(step => step.done).length;
   const percent = steps.length ? Math.round((completed / steps.length) * 100) : 0;
@@ -85,9 +88,26 @@ export function StepRail({
         <h2 className="m-0 text-base font-medium">{title}</h2>
         <RuleLink {...reference} />
       </div>
-      <p className="mt-1 mb-3 text-sm text-muted-foreground">
-        Step {currentIndex + 1} of {steps.length}
-      </p>
+      <div className="mt-1 mb-2 flex items-baseline justify-between gap-2 text-sm text-muted-foreground">
+        <span>
+          Step {currentIndex + 1} of {steps.length}
+        </span>
+        <span className="tabular-nums">{percent}%</span>
+      </div>
+      <div
+        role="progressbar"
+        aria-label="Steps completed"
+        aria-valuemin={0}
+        aria-valuemax={steps.length}
+        aria-valuenow={completed}
+        aria-valuetext={`${completed} of ${steps.length} steps completed`}
+        className="mb-3 h-1 w-full overflow-hidden rounded-full bg-placeholder"
+      >
+        <div
+          className="h-full rounded-full bg-primary transition-[width] duration-(--motion-slow) ease-(--motion-ease)"
+          style={{ width: `${percent}%` }}
+        />
+      </div>
       <ol className="-mx-2 m-0 flex list-none flex-col p-0">
         {steps.map((step, index) => {
           const current = index === currentIndex;
@@ -107,7 +127,7 @@ export function StepRail({
                 className={cn(
                   'flex w-full items-center gap-2.5 rounded-md px-2 py-1.5 text-left text-sm transition-colors duration-(--motion-fast) hover:bg-muted',
                   current
-                    ? 'font-medium text-foreground'
+                    ? 'bg-muted font-medium text-foreground'
                     : step.done
                       ? 'text-foreground'
                       : 'text-muted-foreground',
@@ -120,31 +140,21 @@ export function StepRail({
                     count still shows, since a step can be decided and still owe sub-choices. */}
                 <span className="min-w-0 flex-1 truncate">{step.chosen ?? step.name}</span>
                 {step.problems > 0 && (
-                  <Badge variant="outline" aria-label={`${step.problems} to resolve`}>
+                  <span
+                    className="shrink-0 text-sm tabular-nums text-muted-foreground"
+                    aria-label={`${step.problems} to resolve`}
+                  >
                     {step.problems}
-                  </Badge>
+                  </span>
                 )}
               </button>
             </li>
           );
         })}
       </ol>
-      <div className="flex flex-col gap-3 pt-3">
-        <div
-          role="progressbar"
-          aria-label="Steps completed"
-          aria-valuemin={0}
-          aria-valuemax={steps.length}
-          aria-valuenow={completed}
-          aria-valuetext={`${completed} of ${steps.length} steps completed`}
-          className="h-1.5 w-full overflow-hidden rounded-full bg-placeholder"
-        >
-          <div
-            className="h-full rounded-full bg-foreground transition-[width] duration-(--motion-slow) ease-(--motion-ease)"
-            style={{ width: `${percent}%` }}
-          />
-        </div>
+      <div className="flex flex-col gap-2 pt-3">
         {footer}
+        {hint && <p className="m-0 text-sm text-balance text-muted-foreground">{hint}</p>}
       </div>
     </nav>
   );
