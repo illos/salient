@@ -33,3 +33,11 @@ then DEPLOY2 publication with accepted evidence reused.
 - TESTER resumed acceptance PASS `d1d451b`: **996 unique tests** across retained successful stages; audit and remaining content/link/vendor/compiled/build gates exit 0. This is resumed acceptance, not a new single full-suite run.
 - Isolated `SALIENT_HEADLESS_COHORT=elementalist node scripts/verify-character-headless.ts` exit 0 /79.0s: five builds and all 59 actions, each typed Hurl damage readback, Meteoric/Viscous source-linked pushes, Ray resisted/applied slowed with source instance and save registration. Backend stopped, ports free, data retained, checkout released.
 - Artifacts `/srv/presidium/projects/salient/test-artifacts/V104-d1d451b`; retained earlier runs above. Ready for DEPLOY2 publication reusing acceptance; no smoke or rerun requested.
+
+## Publication — 2026-09-21
+
+DEPLOY2 fast-forwarded reviewed `e064050` into main and published the backend, updated 1436-entry
+content snapshot and frontend. Backend/schema validation, hosted build and upload succeeded.
+Worker: `68918c7b-7875-45a3-bb7f-aefb97163a6f`. Accepted resumed 996-test gate and isolated
+five-build/59-action results were reused; no smoke test or test rerun. Release logs:
+`/srv/presidium/projects/salient/test-artifacts/V104-release-e064050`.

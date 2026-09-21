@@ -114,4 +114,4 @@ add narrative here. V46–V56 were the abandoned Opus pilot and are retired ids.
 | V101 | [Fury level one](V101-fury-level-one.md) | Merged (`e31335d`); cloud dev published; accepted TESTER results reused |
 | V102 | [Troubadour level one](V102-troubadour-level-one.md) | Merged (`0bb1ead`); cloud dev published; accepted TESTER results reused |
 | V103 | [Null level one](V103-null-level-one.md) | Merged (`983bcfa`); cloud dev published; accepted TESTER results reused |
-| V104 | [Elementalist level one](V104-elementalist-level-one.md) | Reviewed; TESTER accepted; ready for DEPLOY2 |
+| V104 | [Elementalist level one](V104-elementalist-level-one.md) | Merged (`e064050`); cloud dev published; accepted TESTER results reused |

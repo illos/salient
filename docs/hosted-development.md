@@ -113,7 +113,14 @@ See [the release evidence](build/evidence/V43/hosted/README.md) for browser resu
 fixture limitations and deployment logs. Earlier Worker versions in slice records are historical.
 
 
-## Current release — V103 Null level one
+## Current release — V104 Elementalist level one
+
+Backend/frontend source `e064050936c73c75da87b82f3830b127948f70c7` published on 2026-09-21 as
+Worker `68918c7b-7875-45a3-bb7f-aefb97163a6f`. Backend/schema validation, updated content reseed
+(1436 entries), hosted build and upload succeeded. Accepted TESTER results reused; no smoke test
+or rerun. See [V104](build/V104-elementalist-level-one.md) and the [ledger](../deploy.md).
+
+## Previous release — V103 Null level one
 
 Backend/frontend source `983bcfa930b070ce8375f8008966a0eea41c8c7a` published on 2026-09-21 as
 Worker `7d57b840-f22b-4dd3-bb6b-859147f92f71`. Backend/schema validation, content reseed (1436
