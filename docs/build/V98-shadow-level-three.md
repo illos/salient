@@ -68,3 +68,15 @@ Guided progression remains deferred.
   app/script cases passed. Updated that assertion to name levels 1/2/3 explicitly. Accepted stages
   are retained; only the changed audit file and remaining pipeline/headless steps are resubmitted.
   Artifacts: `/srv/presidium/projects/salient/test-artifacts/V98-cdbcb32`.
+- ENGINE confirmed the test-only delta through `aaeb20e` (Chords 1370): sentinel 4 is correct,
+  and checking kit grants at explicit levels 1/2/3 preserves the grammar assertions. No open findings.
+- TESTER final accepted gate (Chords 1371): `aaeb20e` audit file 22/22 plus all remaining
+  `pnpm check` steps passed in 23s. Together with retained `cdbcb32` stages, **974 distinct tests**
+  pass (379 engine + 595 app/scripts). This is a resumed gate, not one successful full-command run;
+  the original failed reports remain retained. All runtime/content is unchanged from `3482943`.
+- Authenticated isolated `SALIENT_HEADLESS_COHORT=shadow-level-three` exited 0 in 14.1s;
+  the one cohort result covers four Shadow builds, six distinct new action uses, level-edit readback,
+  paid-use blocking, and Pinning Shot applied/resisted persisted outcomes. A fifth Elementalist
+  fixture is the source-derived low-Agility condition target. Backend stopped; worktree clean.
+  Final artifacts: `/srv/presidium/projects/salient/test-artifacts/V98-aaeb20e`.
+- Ready for DEPLOY2 integration and cloud dev publication, reusing these accepted results.

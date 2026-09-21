@@ -18,3 +18,8 @@ compatibility and 2 compiled unavailable; prior classifications remain intact.
 
 No open rules/implementation findings. TESTER full and isolated journey results were pending when
 this review was returned. Authentic trailer: `Reviewed-By: ENGINE (pass, 2026-09-21)`.
+
+ENGINE's bounded follow-up through `aaeb20e` (Chords 1370) also passed the two unsupported-level
+sentinel corrections and the explicit levels 1/2/3 kit-grant audit. Runtime remained unchanged.
+TESTER subsequently accepted all 974 distinct test cases across retained/resumed gates and the
+isolated four-build/six-action journey (Chords 1371); see the slice work log for exact scope.
