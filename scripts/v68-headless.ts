@@ -140,7 +140,10 @@ try {
       expect(campaign.members[0]!.heroes.length === 0, 'no heroes yet');
       expect(campaign.sessionCount === 0 && campaign.lastPlayedAt === null, 'no sessions yet');
       const keys = Object.keys(campaign.members[0]!).sort();
-      expect(keys.join(',') === 'displayName,heroes,userId', `member keys ${keys.join(',')}`);
+      expect(
+        keys.join(',') === 'displayName,heroes,portraitUrl,userId',
+        `member keys ${keys.join(',')}`,
+      );
       return { campaignId, members: campaign.members, sessionCount: campaign.sessionCount };
     },
   );

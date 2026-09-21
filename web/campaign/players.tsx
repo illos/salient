@@ -126,7 +126,7 @@ export function PlayersSection({
             >
               <div className="flex items-start gap-3">
                 <span aria-hidden>
-                  <Disc name={m.displayName} variant={own ? 'ink' : 'grey'} />
+                  <Disc name={m.displayName} src={m.portraitUrl} variant={own ? 'ink' : 'grey'} />
                 </span>
                 <span className="flex min-w-0 flex-1 flex-col gap-1">
                   <span className="truncate text-base font-medium">{m.displayName}</span>

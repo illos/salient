@@ -16,9 +16,12 @@ export default defineSchema({
   ...initiativeTables,
   ...historyTables,
   ...abilityTables,
-  users: defineTable({ authId: v.string(), displayName: v.string() }).index('by_authId', [
-    'authId',
-  ]),
+  users: defineTable({
+    authId: v.string(),
+    displayName: v.string(),
+    /** V95 optional so existing profiles remain valid until a portrait is uploaded. */
+    portraitId: v.optional(v.id('_storage')),
+  }).index('by_authId', ['authId']),
   campaigns: defineTable({
     name: v.string(),
     ownerId: v.id('users'),
@@ -37,7 +40,9 @@ export default defineSchema({
     ),
     /** The shared Malice pool; absent means no pool has been recorded yet (read as 0). */
     malice: v.optional(v.number()),
-  }).index('by_shareCode', ['shareCode']),
+  })
+    .index('by_shareCode', ['shareCode'])
+    .index('by_owner', ['ownerId']),
   memberships: defineTable({ campaignId: v.id('campaigns'), userId: v.id('users') })
     .index('by_campaign_user', ['campaignId', 'userId'])
     .index('by_user', ['userId']),

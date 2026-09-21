@@ -14,7 +14,12 @@ const summary = v.object({
 });
 /** V68 campaign home card: the member's admitted heroes in this campaign, with the effective level. */
 const hero = v.object({ id: v.id('characters'), name: v.string(), level: v.number() });
-const member = v.object({ userId: v.id('users'), displayName: v.string(), heroes: v.array(hero) });
+const member = v.object({
+  userId: v.id('users'),
+  displayName: v.string(),
+  portraitUrl: v.union(v.string(), v.null()),
+  heroes: v.array(hero),
+});
 const pending = v.object({
   id: v.id('joinRequests'),
   userId: v.id('users'),
@@ -138,13 +143,17 @@ export const get = query({
       )
     ).filter(hero => hero !== null);
     const members = await Promise.all(
-      memberships.map(async m => ({
-        userId: m.userId,
-        displayName: (await ctx.db.get(m.userId))?.displayName ?? 'Former player',
-        heroes: heroes
-          .filter(h => h.ownerId === m.userId)
-          .map(({ id, name, level }) => ({ id, name, level })),
-      })),
+      memberships.map(async m => {
+        const profile = await ctx.db.get(m.userId);
+        return {
+          userId: m.userId,
+          displayName: profile?.displayName ?? 'Former player',
+          portraitUrl: profile?.portraitId ? await ctx.storage.getUrl(profile.portraitId) : null,
+          heroes: heroes
+            .filter(h => h.ownerId === m.userId)
+            .map(({ id, name, level }) => ({ id, name, level })),
+        };
+      }),
     );
     const sessions = await ctx.db
       .query('sessions')

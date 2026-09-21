@@ -38,6 +38,8 @@ const FILL: Record<Exclude<DiscVariant, 'ring'>, string> = {
 export interface DiscProps {
   /** Name the initials come from. */
   name: string;
+  /** Optional account portrait. Initials remain the fallback. */
+  src?: string | null;
   variant?: DiscVariant;
   /** sm ≈ 32px (log entries), md ≈ 44px (roster rows), lg ≈ 110px (sheet header). Ring discs are 48px. */
   size?: DiscSize;
@@ -64,6 +66,7 @@ export interface DiscProps {
 
 export function Disc({
   name,
+  src,
   variant = 'grey',
   size = 'md',
   filled = false,
@@ -118,7 +121,11 @@ export function Disc({
         className,
       )}
     >
-      <span aria-hidden>{initials}</span>
+      {src ? (
+        <img src={src} alt="" className="size-full rounded-full object-cover" />
+      ) : (
+        <span aria-hidden>{initials}</span>
+      )}
     </span>
   );
 }

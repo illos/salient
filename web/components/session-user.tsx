@@ -1,13 +1,15 @@
 // SPDX-License-Identifier: GPL-3.0-only
 /**
- * The signed-in user's controls shared by the site nav and the session header: the appearance
- * switch (light / dark / system, stored locally by web/theme.ts until V10), Sign out, and the
- * session header's user Disc that opens both in a small menu (the account page itself is V10).
- * Quiet: the switch is a 999px segmented control; the menu is a borderless `card` panel.
+ * The signed-in user's controls shared by the site nav, the session header, the login page and
+ * the account screen: the appearance switch (light / dark / system, stored locally by
+ * web/theme.ts), Sign out, and the header disc that opens the account screen (V95,
+ * docs/build/V95-account-screen.md). Quiet: the switch is a 999px segmented control.
  */
-import { useEffect, useId, useRef, useState } from 'react';
-import { useNavigate } from '@tanstack/react-router';
+import { useState } from 'react';
+import { Link, useNavigate } from '@tanstack/react-router';
+import { useQuery } from 'convex/react';
 import { cn } from 'cn';
+import { api } from '../../convex/_generated/api';
 import { authClient } from '../auth-client';
 import { THEMES, useTheme, type Theme } from '../theme';
 import { errorMessage } from '../ui';
@@ -78,52 +80,21 @@ export function SignOut({ className }: { className?: string }) {
   );
 }
 
-/** The header Disc; opens a small menu with the appearance switch and Sign out. */
-export function UserMenu({ displayName }: { displayName: string }) {
-  const [open, setOpen] = useState(false);
-  const root = useRef<HTMLDivElement>(null);
-  const id = useId();
-  useEffect(() => {
-    if (!open) return;
-    const onPointer = (event: PointerEvent) => {
-      if (!root.current?.contains(event.target as Node)) setOpen(false);
-    };
-    const onKey = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') setOpen(false);
-    };
-    document.addEventListener('pointerdown', onPointer);
-    document.addEventListener('keydown', onKey);
-    return () => {
-      document.removeEventListener('pointerdown', onPointer);
-      document.removeEventListener('keydown', onKey);
-    };
-  }, [open]);
+/** The header disc: the viewer's portrait or initials, opening the account screen. */
+export function AccountLink({ className }: { className?: string }) {
+  const viewer = useQuery(api.auth.viewer);
+  if (!viewer) return null;
   return (
-    <div ref={root} className="relative">
-      <button
-        type="button"
-        className="flex items-center gap-3 rounded-full text-muted-foreground transition-colors duration-(--motion-fast) hover:text-foreground"
-        aria-label={`${displayName}: account menu`}
-        aria-haspopup="true"
-        aria-expanded={open}
-        aria-controls={id}
-        onClick={() => setOpen(o => !o)}
-      >
-        <span className="text-base">{displayName}</span>
-        <Disc name={displayName} variant="grey" size="sm" label="" />
-      </button>
-      {open && (
-        <div
-          id={id}
-          role="group"
-          aria-label="Account"
-          className="absolute top-full right-0 z-50 mt-2 flex min-w-60 flex-col gap-3 rounded-lg bg-card p-5 shadow-[0_24px_80px_rgb(0_0_0/0.35)]"
-        >
-          <span className="text-sm text-muted-foreground">Appearance</span>
-          <ThemeSwitch inset />
-          <SignOut className="self-start" />
-        </div>
+    <Link
+      to="/account"
+      aria-label="Account"
+      title="Account"
+      className={cn(
+        'inline-flex rounded-full outline-none transition-opacity duration-(--motion-fast) hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring',
+        className,
       )}
-    </div>
+    >
+      <Disc name={viewer.displayName} src={viewer.portraitUrl} variant="grey" size="sm" label="" />
+    </Link>
   );
 }

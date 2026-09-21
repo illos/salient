@@ -19,7 +19,7 @@ import type { Id } from '../../convex/_generated/dataModel';
 import { Button } from '../components/ui/button';
 import { Pill } from '../components/pill';
 import { OverlayCard } from '../components/overlay-card';
-import { UserMenu } from '../components/session-user';
+import { AccountLink } from '../components/session-user';
 import { useCommand } from '../ui';
 import { VoidCard } from './void-card';
 import type { Roster } from './director-pane';
@@ -184,7 +184,7 @@ export function SessionHeader({
         {roster.role === 'director' && roster.session && (
           <SessionControls campaignId={campaignId} session={roster.session} encounter={encounter} />
         )}
-        <UserMenu displayName={roster.viewerName} />
+        <AccountLink />
       </div>
     </header>
   );

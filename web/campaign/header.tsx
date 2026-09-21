@@ -38,7 +38,12 @@ export type Session = {
   number: number;
 };
 export type Hero = { id: Id<'characters'>; name: string; level: number };
-export type Member = { userId: Id<'users'>; displayName: string; heroes: Hero[] };
+export type Member = {
+  userId: Id<'users'>;
+  displayName: string;
+  portraitUrl: string | null;
+  heroes: Hero[];
+};
 
 /** `3 days ago`, `2 hours ago`, `just now`; beyond a month, the calendar date. */
 export function relativeTime(at: number, now: number): string {

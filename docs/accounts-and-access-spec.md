@@ -1,6 +1,6 @@
 # Accounts, roles, ownership, and sharing
 
-Version: 0.7 — implementation-status text corrected, 2026-09-14 (0.6: Better Auth selected, 2026-09-11).
+Version: 0.8 — account-screen implementation status, 2026-09-20 (0.7: implementation-status text corrected, 2026-09-14).
 
 **Status:** the accounts, roles, ownership, sharing, and friendship discussion is captured for future
 implementation. **Confirmed requirements** record product decisions. **Proposals** make those requirements
@@ -23,7 +23,7 @@ later sections describe the fuller product; apply these confirmed prototype qual
 
 | Area | Included in v0.01 | Deferred beyond v0.01 |
 | --- | --- | --- |
-| Accounts | Basic sign-up, sign-in and sign-out | Profile editing, password recovery and account deletion |
+| Accounts | Sign-up/in/out, profile and credential editing, password recovery, devices and account deletion | Friends, blocking and personal share codes |
 | Campaign access | Campaign creation, invitations and membership through the established flow | Separate friends system, including discovery, requests and friendship management |
 | Director | Campaign creator serves as Director | Appointing another Director, including standing delegation and session-only appointments |
 | Character control | Players control their own admitted characters; Director can act for table characters | Player-to-player character-control sharing |
@@ -42,15 +42,17 @@ feature scope.
 Convex is the application backend and Better Auth the authentication library; both are installed and running
 in this checkout (verified 2026-09-14 against [package.json](../package.json), [convex/schema.ts](../convex/schema.ts),
 [convex/auth.ts](../convex/auth.ts), [convex/campaigns.ts](../convex/campaigns.ts) and
-[convex/sessions.ts](../convex/sessions.ts)). Implemented: email/password sign-up, sign-in and sign-out through
+[convex/sessions.ts](../convex/sessions.ts)). Implemented: email/password sign-up, sign-in, sign-out, recovery,
+password and email changes, signed-in device revocation, profile name and portrait editing, and account deletion through
 `@convex-dev/better-auth`, with an application `users` profile mapped to the auth identity; campaign creation;
 share-code join requests with owner approve/decline and requester withdraw; owner-only share-code regeneration;
 member listing; Director (campaign owner) session start/pause/resume/close and session-player selection;
 idempotent `commandId` retries; an attributed campaign event log; private character drafts; and Director-only
 foe loading. Tables: `users`, `campaigns`, `memberships`, `joinRequests`, `sessions`, `events`, `commands`,
-plus the character and foe tables. Not implemented: profile editing, password reset/recovery, account deletion,
-member kick/leave, friends, blocking, Director delegation or session-only appointments, character grants,
-campaign chat, and campaign deletion. `requireDirector` in `convex/lib/access.ts` currently resolves to the
+plus the character and foe tables. Not implemented: member kick/leave, friends, blocking, Director delegation
+or session-only appointments, character grants, and owner-initiated campaign deletion. Campaign chat is
+implemented; account deletion applies the confirmed campaign deletion policy to campaigns the account owns.
+`requireDirector` in `convex/lib/access.ts` currently resolves to the
 campaign owner; keep that seam for future delegation. The engine's `actorId` identifies a game entity, not an
 authenticated user, and [the local history implementation](../src/history.ts) is the retained headless
 experiment, not the application store. Engine validation of ability ownership is not user authorization. See
@@ -242,7 +244,8 @@ payloads to callers. Queued delivery is acceptance by the mail service, not proo
 [V39](build/V39-account-email.md) is merged and live on hosted development. Actual hosted browser
 checks passed password/session replacement, token reuse rejection and request limiting. Cloudflare
 accepted/queued a separate test message to the selected inbox, and the user confirmed receiving it.
-Authenticated credential-change/account-deletion flows and offline LAN recovery remain separate work.
+V95 adds authenticated profile, credential-change, device-revocation and account-deletion flows.
+Offline LAN recovery remains separate work.
 
 ### Proposed regular-account behavior
 

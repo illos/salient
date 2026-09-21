@@ -26,6 +26,7 @@
     "test:app": "vitest run --project app",
     "test:browser": "playwright test",
     "test:headless:character": "node scripts/verify-character-headless.ts",
+    "test:headless:account": "node scripts/v95-headless.ts",
     "app": "node scripts/app.ts",
     "content:build": "node scripts/build-content.ts",
     "content:check": "node scripts/build-content.ts --check",

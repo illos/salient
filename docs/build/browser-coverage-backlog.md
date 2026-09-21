@@ -53,3 +53,6 @@ Rules:
 | 2026-09-20 | V75 | Focus rings (2px accent, offset 2px) visible on every control kind: button, input, checkbox, tab, toggle, link; reduced-motion still zeroes transitions | `theme.spec.ts` | spot | none needed: presentation only | |
 | 2026-09-20 | V75 | Hero portrait row now renders a `progressbar` per hero under the disc; `journey.spec.ts` progressbar counts may need re-baselining after V66 | `journey.spec.ts` | later | none needed: presentation only | |
 | 2026-09-20 | V75 | Contrast spot check of `muted` text on `sub` insets (spec values measure below 4.5:1) on real screens; report to the user | new | later | design-tokens.md contrast notes | |
+| 2026-09-20 | V95 | Header and session-header connection/name/theme/sign-out chrome collapses to the status pip and portrait disc; the disc opens `/account` | new | spot | `tests/app/account.test.ts` profile and device API proof | |
+| 2026-09-20 | V95 | Account sidebar switches Profile, Security, Preferences and Delete account panels; portrait preview and theme selection update without layout shift | new | spot | `tests/app/account.test.ts`; `web/theme.ts` local persistence | |
+| 2026-09-20 | V95 | Account screen remains usable in light/dark and at narrow desktop widths; destructive copy and focus states remain clear | new | later | quiet static checks; authenticated route/API proof | |

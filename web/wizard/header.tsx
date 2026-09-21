@@ -10,7 +10,7 @@ import { Link } from '@tanstack/react-router';
 import { useQuery } from 'convex/react';
 import { api } from '../../convex/_generated/api';
 import { Button } from '../components/ui/button';
-import { UserMenu } from '../components/session-user';
+import { AccountLink } from '../components/session-user';
 
 export function WizardHeader({
   heroName,
@@ -45,7 +45,7 @@ export function WizardHeader({
         <Button type="button" variant="ghost" disabled={saving} onClick={onExit}>
           Exit
         </Button>
-        {viewer && <UserMenu displayName={viewer.displayName} />}
+        {viewer && <AccountLink />}
       </div>
     </header>
   );

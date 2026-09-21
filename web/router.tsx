@@ -37,11 +37,14 @@ const WizardPage = lazy(() => import('./wizard').then(module => ({ default: modu
 const ProgressionPage = lazy(() =>
   import('./progression').then(module => ({ default: module.ProgressionPage })),
 );
+const AccountPage = lazy(() =>
+  import('./account').then(module => ({ default: module.AccountPage })),
+);
 const TablePage = lazy(() => import('./table').then(module => ({ default: module.TablePage })));
 import { Button } from './components/ui/button';
 import { Card, CardContent } from './components/ui/card';
 import { Input } from './components/ui/input';
-import { SignOut, ThemeSwitch } from './components/session-user';
+import { AccountLink, ThemeSwitch } from './components/session-user';
 import { ErrorNotice, Field, Loading, errorMessage } from './ui';
 
 const RulesPage = lazy(() => import('./rules').then(module => ({ default: module.RulesPage })));
@@ -57,11 +60,18 @@ function ConnectionStatus() {
   );
   return (
     <span
-      className={online ? 'text-sm text-success' : 'text-sm text-warning'}
+      className="inline-flex items-center"
       role="status"
       aria-live="polite"
+      title={online ? 'Connected' : 'Reconnecting — changes may be pending'}
     >
-      {online ? '● Connected' : '○ Reconnecting — changes may be pending'}
+      <span
+        aria-hidden="true"
+        className={online ? 'size-2.5 rounded-full bg-success' : 'size-2.5 rounded-full bg-warning'}
+      />
+      <span className="sr-only">
+        {online ? 'Connected' : 'Reconnecting — changes may be pending'}
+      </span>
     </span>
   );
 }
@@ -76,7 +86,7 @@ function Wordmark() {
   );
 }
 
-function TopNav({ displayName }: { displayName?: string }) {
+function TopNav({ signedIn }: { signedIn: boolean }) {
   const navItem =
     'flex h-16 items-center px-1 text-base text-muted-foreground transition-colors duration-(--motion-fast) hover:text-foreground hover:no-underline data-[status=active]:text-foreground';
   return (
@@ -98,12 +108,10 @@ function TopNav({ displayName }: { displayName?: string }) {
           </Link>
         </nav>
         <div className="ml-auto flex items-center gap-4">
-          {displayName && <ConnectionStatus />}
-          <ThemeSwitch />
-          {displayName ? (
+          {signedIn ? (
             <>
-              <span className="site-user-name text-base text-muted-foreground">{displayName}</span>
-              <SignOut />
+              <ConnectionStatus />
+              <AccountLink />
             </>
           ) : (
             <Link
@@ -175,7 +183,7 @@ function ReferenceShell() {
   const viewer = useQuery(api.auth.viewer, isAuthenticated ? {} : 'skip');
   return (
     <div className="reference-shell" ref={shell}>
-      <TopNav displayName={viewer?.displayName} />
+      <TopNav signedIn={viewer !== null && viewer !== undefined} />
       <PageOutlet />
     </div>
   );
@@ -200,7 +208,7 @@ function ProfileGate({ path }: { path: string }) {
   if (isTableRoute(path) || isWizardRoute(path)) return <PageOutlet key={viewer.userId} />;
   return (
     <div className="flex min-h-screen flex-col" key={viewer.userId}>
-      <TopNav displayName={viewer.displayName} />
+      <TopNav signedIn />
       <main className="mx-auto w-full max-w-[1460px] flex-1 px-9 pt-8 pb-16">
         <PageOutlet />
       </main>
@@ -451,6 +459,16 @@ const progressionRoute = createRoute({
     <ProgressionPage characterId={progressionRoute.useParams().characterId as Id<'characters'>} />
   ),
 });
+const accountRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/account',
+  component: AccountPage,
+});
+const accountSectionRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/account/$section',
+  component: () => <AccountPage section={accountSectionRoute.useParams().section} />,
+});
 function rulesSearch(search: Record<string, unknown>): {
   q?: string;
   book?: string;
@@ -508,6 +526,8 @@ export const router = createRouter({
     characterRoute,
     wizardRoute,
     progressionRoute,
+    accountRoute,
+    accountSectionRoute,
     foesRoute,
     rulesRoute,
     rulesArticleRoute,

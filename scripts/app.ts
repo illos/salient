@@ -10,7 +10,7 @@ try {
   /* Explicit environment also works. */
 }
 const usage =
-  'Usage: pnpm app <query|mutation> <module:function> [JSON arguments]\n' +
+  'Usage: pnpm app <query|mutation|action> <module:function> [JSON arguments]\n' +
   '       pnpm app command "<slash text>" [--campaign <id>] [--command-id <id>]\n' +
   "       pnpm app respond <interactionId> '<JSON answer>' [--command-id <id>]\n" +
   'Authenticate with SALIENT_EMAIL and SALIENT_PASSWORD, or SALIENT_AUTH_TOKEN. The campaign comes\n' +
@@ -25,7 +25,7 @@ function option(name: string): string | undefined {
 }
 const campaignOption = option('--campaign') ?? process.env.SALIENT_CAMPAIGN_ID;
 const commandIdOption = option('--command-id') ?? process.env.SALIENT_COMMAND_ID;
-let kind: 'query' | 'mutation';
+let kind: 'query' | 'mutation' | 'action';
 let functionName: string;
 let args: unknown;
 const [verb, first, second] = argv;
@@ -54,7 +54,7 @@ if (verb === 'command') {
     answer: JSON.parse(second),
     commandId: commandIdOption ?? crypto.randomUUID(),
   };
-} else if ((verb === 'query' || verb === 'mutation') && first) {
+} else if ((verb === 'query' || verb === 'mutation' || verb === 'action') && first) {
   kind = verb;
   functionName = first;
   args = JSON.parse(second ?? '{}');
@@ -120,7 +120,9 @@ try {
   const result =
     kind === 'query'
       ? await client.query(ref as ReturnType<typeof makeFunctionReference<'query'>>, args)
-      : await client.mutation(ref as ReturnType<typeof makeFunctionReference<'mutation'>>, args);
+      : kind === 'mutation'
+        ? await client.mutation(ref as ReturnType<typeof makeFunctionReference<'mutation'>>, args)
+        : await client.action(ref as ReturnType<typeof makeFunctionReference<'action'>>, args);
   console.log(JSON.stringify(result, null, 2));
 } catch (error) {
   console.error(error instanceof Error ? error.message : 'Application command failed.');

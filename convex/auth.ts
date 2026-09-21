@@ -1,4 +1,4 @@
-import { createClient, type GenericCtx } from '@convex-dev/better-auth';
+import { createClient, type AuthFunctions, type GenericCtx } from '@convex-dev/better-auth';
 import { convex, crossDomain } from '@convex-dev/better-auth/plugins';
 import { betterAuth } from 'better-auth/minimal';
 import { v, ConvexError } from 'convex/values';
@@ -6,9 +6,25 @@ import { components, internal } from './_generated/api';
 import type { DataModel } from './_generated/dataModel';
 import { mutation, query } from './_generated/server';
 import authConfig from './auth.config';
+import { purgeAccount } from './lib/accountDeletion';
 import { passwordRecoveryEnabled, RESET_TOKEN_SECONDS } from './lib/accountEmail';
 
-export const authComponent = createClient<DataModel>(components.betterAuth);
+type AuthComponent = ReturnType<typeof createClient<DataModel>>;
+
+export const authComponent: AuthComponent = createClient<DataModel>(components.betterAuth, {
+  triggers: {
+    user: {
+      // The component invokes this inside the mutation that deletes its user row. App data is
+      // therefore removed (or a bounded continuation scheduled) as part of the same transition.
+      onDelete: async (ctx, user) => {
+        await purgeAccount(ctx, user._id);
+      },
+    },
+  },
+  // The cast breaks the generated API's auth-module type cycle; runtime references remain exact.
+  authFunctions: internal.auth as AuthFunctions,
+});
+export const { onCreate, onUpdate, onDelete } = authComponent.triggersApi();
 export const createAuth = (ctx: GenericCtx<DataModel>) => {
   const siteUrl = process.env.SITE_URL!;
   return betterAuth({
@@ -22,6 +38,10 @@ export const createAuth = (ctx: GenericCtx<DataModel>) => {
     ],
     database: authComponent.adapter(ctx),
     advanced: { disableOriginCheck: false },
+    user: {
+      changeEmail: { enabled: true, updateEmailWithoutVerification: true },
+      deleteUser: { enabled: true },
+    },
     emailAndPassword: {
       enabled: true,
       requireEmailVerification: false,
@@ -53,7 +73,11 @@ export const createAuth = (ctx: GenericCtx<DataModel>) => {
   });
 };
 
-const profile = v.object({ userId: v.id('users'), displayName: v.string() });
+const profile = v.object({
+  userId: v.id('users'),
+  displayName: v.string(),
+  portraitUrl: v.union(v.string(), v.null()),
+});
 export const viewer = query({
   args: {},
   returns: v.union(profile, v.null()),
@@ -64,7 +88,13 @@ export const viewer = query({
       .query('users')
       .withIndex('by_authId', q => q.eq('authId', auth._id))
       .unique();
-    return user ? { userId: user._id, displayName: user.displayName } : null;
+    return user
+      ? {
+          userId: user._id,
+          displayName: user.displayName,
+          portraitUrl: user.portraitId ? await ctx.storage.getUrl(user.portraitId) : null,
+        }
+      : null;
   },
 });
 export const ensureProfile = mutation({
@@ -77,10 +107,15 @@ export const ensureProfile = mutation({
       .query('users')
       .withIndex('by_authId', q => q.eq('authId', auth._id))
       .unique();
-    if (existing) return { userId: existing._id, displayName: existing.displayName };
+    if (existing)
+      return {
+        userId: existing._id,
+        displayName: existing.displayName,
+        portraitUrl: existing.portraitId ? await ctx.storage.getUrl(existing.portraitId) : null,
+      };
     const displayName = auth.name.trim().slice(0, 80) || 'Player';
     const userId = await ctx.db.insert('users', { authId: auth._id, displayName });
-    return { userId, displayName };
+    return { userId, displayName, portraitUrl: null };
   },
 });
 
