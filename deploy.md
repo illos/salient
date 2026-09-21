@@ -42,6 +42,7 @@ runtime update. Domains, accounts and paid plans remain separate from standing r
 
 | Job | Candidate | State | Next gate |
 | --- | --- | --- | --- |
+| V107 | `ca190a9` | Merged; backend/content/frontend published; accepted gates reused | complete |
 | V106 | `34a8b48` | Merged; backend/content/frontend published; accepted gates reused | complete |
 | V105 | `465814b` | Merged; backend/content/frontend published; accepted gates reused | complete |
 | V104 | `e064050` | Merged; backend/content/frontend published; accepted gates reused | complete |
@@ -299,3 +300,14 @@ upload succeeded. Worker `e0c83bf3-190c-466b-a623-5b2cc46bcc4d`.
 No smoke tests or test reruns. Temporary credentials removed; private hosted helpers stopped.
 Logs: `/srv/presidium/projects/salient/test-artifacts/V106-release-34a8b48`.
 Committed content snapshot hash: `sha256:69db8c6944325ab4762699e0203dabf65680208099453c75e5ec30d73e455ace`.
+
+### V107 Summoner level one publication — 2026-09-21
+
+Reviewed owner `ca190a99f9a0b895d394e1df7cbce464e7bc95ce` fast-forwarded into main.
+Accepted evidence reused from `405dd4d`: full 1002-test gate (217.4 s), and isolated
+twelve-build/144-manual-record cohort (178.5 s). Summoned-creature combat remains manual.
+Backend publication/schema validation, content reseed (1629 entries), hosted build and frontend
+upload succeeded. Worker `e8b28ff3-da63-418d-904a-75be2a543d03`.
+No smoke tests or test reruns. Temporary credentials removed; private hosted helpers stopped.
+Logs: `/srv/presidium/projects/salient/test-artifacts/V107-release-ca190a9`.
+Committed content snapshot hash: `sha256:9bcde574efb5facb4741f329a92879f31d5e49feedd0f31baa61e507522f3ec2`.

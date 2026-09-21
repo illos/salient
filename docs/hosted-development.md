@@ -113,7 +113,15 @@ See [the release evidence](build/evidence/V43/hosted/README.md) for browser resu
 fixture limitations and deployment logs. Earlier Worker versions in slice records are historical.
 
 
-## Current release — V106 Beastheart level one
+## Current release — V107 Summoner level one
+
+Backend/frontend source `ca190a99f9a0b895d394e1df7cbce464e7bc95ce` published on 2026-09-21 as
+Worker `e8b28ff3-da63-418d-904a-75be2a543d03`. Backend/schema validation, content reseed
+(1629 entries), hosted build and upload succeeded. Accepted TESTER results reused; no smoke test
+or rerun. Summoned-creature combat remains manual. See [V107](build/V107-summoner-level-one.md)
+and the [ledger](../deploy.md).
+
+## Previous release — V106 Beastheart level one
 
 Backend/frontend source `34a8b483ec71065e48aaa132c77acc796879c8e9` published on 2026-09-21 as
 Worker `e0c83bf3-190c-466b-a623-5b2cc46bcc4d`. Backend/schema validation, content reseed

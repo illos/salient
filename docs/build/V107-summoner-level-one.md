@@ -96,3 +96,12 @@ if a concrete repair is needed. Generator outputs are committed; freshness gates
   standing-authorized cloud dev target and pushes main, reusing these accepted checks.
   Required release builds/publication are sufficient; no rerun or smoke. No schema/dependency
   or environment configuration change. Runtime content is 1,629 entries.
+
+## Publication — 2026-09-21
+
+DEPLOY2 fast-forwarded reviewed `ca190a9` into main and published the backend, 1629-entry content
+snapshot and frontend. Backend/schema validation, hosted build and upload succeeded.
+Worker: `e8b28ff3-da63-418d-904a-75be2a543d03`. Accepted 1002-test gate and isolated
+twelve-build/144-manual-record results were reused; no smoke test or test rerun.
+Summoned-creature combat remains manual. Release logs:
+`/srv/presidium/projects/salient/test-artifacts/V107-release-ca190a9`.
