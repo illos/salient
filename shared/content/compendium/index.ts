@@ -7,7 +7,7 @@ import type { ContentEntry, ContentManifest } from '../../contracts/content';
 // the index-signature contract rejects; the generator has already validated every entry.
 const typed = (list: unknown): ContentEntry[] => list as ContentEntry[];
 import manifestJson from './manifest.json';
-import abilityJson from './ability.json';
+import abilityJson from './ability.json' with { type: 'json' };
 import ancestryJson from './ancestry.json';
 import careerJson from './career.json';
 import chapterJson from './chapter.json';
@@ -15,7 +15,7 @@ import classJson from './class.json';
 import complicationJson from './complication.json' with { type: 'json' };
 import conditionJson from './condition.json';
 import cultureJson from './culture.json';
-import featureJson from './feature.json';
+import featureJson from './feature.json' with { type: 'json' };
 import featureblockJson from './featureblock.json';
 import kitJson from './kit.json';
 import monsterJson from './monster.json';

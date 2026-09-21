@@ -181,3 +181,10 @@ and above, any other class. Spec sections: `docs/character-wizard-spec.md#3-deci
   Isolated Convex preparation stalled twice; helpers stopped and the headless scenario never
   started. DEPLOY2 receives the reviewed code for integration and the single bounded Tactician
   cohort on the deployment target; live acceptance remains pending that persisted readback.
+- 2026-09-21: CT114 reproduced the preparation stall on2f3f938. Found the recurring Convex1.45
+  mixed-JSON-import problem: the new shared catalog imported ability/feature JSON with attributes,
+  while the generated backend index omitted them. Generator fix e03400b aligns those imports;
+  TESTER content:build exit0/1.76s changed exactly those two generated import lines, leaving all1209
+  entries unchanged. Independent static review by delegated v94_final_review passes; runtime
+  preparation and the targeted headless retry will confirm the diagnosis. Existing954 and Forge4
+  results are retained for unchanged gameplay code; do not repeat those suites for import syntax.
