@@ -188,8 +188,8 @@ describe('V26 bounded grammar classifier on real entries', () => {
   // Source: feature/ability/elementalist/level-1/ray-of-agonizing-self-reflection.md — "2 + R
   // corruption damage; R < WEAK, slowed (save ends)" (4/AVERAGE, 6/STRONG). Catches a classifier
   // that rejects the symbolic threshold or the comma form, and a grant reader that reports a live
-  // grant the wizard does not offer (V26: compile-only).
-  it('Ray of Agonizing Self-Reflection keeps the symbolic potency remainder and has no wizard grant', () => {
+  // grant now selected by the complete level-one Elementalist (V104).
+  it('Ray of Agonizing Self-Reflection keeps the symbolic potency remainder and has the level-one wizard grant', () => {
     const e = envelope('hero-standalone', 'Ray of Agonizing Self-Reflection');
     const result = classify(e);
     expect(result.category).toBe('COMPILES_WITH_REMAINDER');
@@ -204,7 +204,12 @@ describe('V26 bounded grammar classifier on real entries', () => {
       'R < AVERAGE, slowed (save ends)',
       'R < STRONG, slowed (save ends)',
     ]);
-    expect(corpus.grantsByEnvelope.has(e.id)).toBe(false);
+    expect(
+      corpus.grantsByEnvelope
+        .get(e.id)
+        ?.filter(g => g.level === 1)
+        .map(g => [g.decisionId, g.selectable]),
+    ).toEqual([['class.elementalist.signature-abilities', 'selectable']]);
   });
 
   // V26 acceptance check 5: text outside the structured `effects`, or a Markdown tier that
