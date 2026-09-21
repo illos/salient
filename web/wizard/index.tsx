@@ -1129,6 +1129,7 @@ function Wizard({ character }: { character: WizardCharacter }) {
       chosen: recordedValue(primaryDecisionId(s)),
       problems,
       done,
+      passed: index < reached,
     };
   });
   const primary = step.decisions.find(

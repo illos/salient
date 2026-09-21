@@ -3,13 +3,13 @@
  * The wizard step rail (V21 item 10; Quiet, docs/design-mockups/quiet/README.md; V96 compaction):
  * a `card` panel headed "Character Builder" with the Making a Hero reference, a muted "Step n
  * of m" line, one compact row per presented step — the tonal round badge carries the number and
- * takes the accent on the current step (a check mark once the step is done), then the step's
- * chosen value, falling back to the step name until it has one — with the completed percentage
- * and its accent progress bar under the heading, and the step navigation and a hint line at the
- * foot. The rows are the same step buttons the wizard
- * always had, and the accessible name
- * keeps the step it belongs to (`n. Step name: Chosen`) so the keyboard flow keeps working. The
- * steps come from the caller in presented order; nothing here knows how many there are.
+ * takes the accent on the current step (a check mark once the step is done, an exclamation on a
+ * step the hero passed while it still owed a choice), then the step's chosen value, falling back
+ * to the step name until it has one — with the completed percentage and its accent progress bar
+ * under the heading, and the step navigation and a hint line at the foot. The rows are the same
+ * step buttons the wizard always had, and the accessible name keeps the step it belongs to
+ * (`n. Step name: Chosen`) so the keyboard flow keeps working. The steps come from the caller in
+ * presented order; nothing here knows how many there are.
  */
 import { cn } from 'cn';
 import { RuleLink } from '../rules/link';
@@ -27,16 +27,21 @@ export interface RailStep {
   problems: number;
   /** No outstanding problems and at least one recorded decision (or nothing to decide, once visited). */
   done: boolean;
+  /** The hero moved past this step: an outstanding choice here is something they left behind. */
+  passed: boolean;
 }
 
 function StepMarker({
   number,
   done,
   current,
+  unresolved,
 }: {
   number: number;
   done: boolean;
   current: boolean;
+  /** Passed, not current, and still owing a choice. */
+  unresolved: boolean;
 }) {
   return (
     <span
@@ -50,7 +55,7 @@ function StepMarker({
             : 'bg-muted text-muted-foreground',
       )}
     >
-      {done && !current ? '✓' : number}
+      {done && !current ? '✓' : unresolved ? '!' : number}
     </span>
   );
 }
@@ -134,7 +139,12 @@ export function StepRail({
                 )}
                 onClick={() => onSelect(index)}
               >
-                <StepMarker number={step.number} done={step.done} current={current} />
+                <StepMarker
+                  number={step.number}
+                  done={step.done}
+                  current={current}
+                  unresolved={!current && step.passed && step.problems > 0}
+                />
                 {/* Once a step is decided its value stands in for the step name (V96): the rail
                     reads back the hero rather than repeating the book's step list. The outstanding
                     count still shows, since a step can be decided and still owe sub-choices. */}
