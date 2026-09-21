@@ -1,3 +1,5 @@
+import { applyNullModifiers } from './classes/null.ts';
+import { nullAbilities } from './nullAbilities.ts';
 import { troubadourAbilities } from './troubadourAbilities.ts';
 import { furyAbilities } from './furyAbilities.ts';
 import { conduitAbilities } from './conduitAbilities.ts';
@@ -141,7 +143,8 @@ function parseCost(costQuote: string | undefined): GrantedAbility['cost'] | unde
     resource !== 'focus' &&
     resource !== 'wrath' &&
     resource !== 'piety' &&
-    resource !== 'drama'
+    resource !== 'drama' &&
+    resource !== 'discipline'
   )
     return undefined;
   return { resource, amount: Number(match[1]) };
@@ -937,6 +940,7 @@ class Evaluation {
       ),
     );
     out.abilities = troubadourAbilities(out.features, out.abilities);
+    out.abilities = nullAbilities(out.features, out.abilities);
     if (this.available.has('class.fury.action-options'))
       out.abilities = furyAbilities(out.features, out.abilities);
     this.deriveSupportingChoices(out);
@@ -1344,6 +1348,7 @@ class Evaluation {
     }
     applyElementalistModifiers(this, out);
     applyConduitModifiers(this, out);
+    applyNullModifiers(this, out);
   }
 
   private skillGroup(name: string): string {

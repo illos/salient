@@ -1,4 +1,8 @@
 import {
+  classProfile as nullProfile,
+  getLevelOneDecisions as nullDecisions,
+} from './classes/null/level-one.ts';
+import {
   classProfile as troubadourProfile,
   getLevelOneDecisions as troubadourDecisions,
 } from './classes/troubadour/level-one.ts';
@@ -87,7 +91,15 @@ allow('ancestry.choice', [
   'Revenant',
 ]);
 allow('career.choice', ["Mage's Apprentice"]);
-allow('class.choice', ['Elementalist', 'Shadow', 'Tactician', 'Censor', 'Conduit', 'Troubadour']);
+allow('class.choice', [
+  'Elementalist',
+  'Shadow',
+  'Tactician',
+  'Censor',
+  'Conduit',
+  'Troubadour',
+  'Null',
+]);
 allow('culture.environment', ['Urban']);
 allow('culture.environment.skill', ['Alertness']);
 allow('culture.organization.skill', ['Gymnastics']);
@@ -102,6 +114,7 @@ definitions.classProfiles = structuredClone({
   Censor: censorProfile,
   Conduit: conduitProfile,
   Troubadour: troubadourProfile,
+  Null: nullProfile,
 });
 
 /**
@@ -226,5 +239,6 @@ append('step.class', shadowDecisions(definitions.pools));
 append('step.class', censorDecisions(definitions.pools));
 append('step.class', conduitDecisions(definitions.pools));
 append('step.class', troubadourDecisions(definitions.pools));
+append('step.class', nullDecisions(definitions.pools));
 append('step.class', tacticianDecisions(definitions.pools));
 export default definitions;

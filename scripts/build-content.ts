@@ -186,6 +186,12 @@ export const SELECTIONS: ManifestSelection[] = [
     basis: 'docs/build/V97-shadow-level-two.md#scope: complete Shadow level-two build choices.',
   },
   {
+    id: 'null-level-one',
+    description: 'Null level-one traditions, augmentations and abilities.',
+    paths: ['class/null.md', 'feature/null/level-1', 'feature/ability/null/level-1'],
+    basis: 'docs/build/V103-null-level-one.md#scope: complete Null level-one options.',
+  },
+  {
     id: 'troubadour-level-one',
     description: 'Troubadour level-one class acts, routines and abilities.',
     paths: [

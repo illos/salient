@@ -1,3 +1,4 @@
+import { nullAbilitySource } from '../../shared/evaluate/nullAbilities';
 import { troubadourAbilitySource } from '../../shared/evaluate/troubadourAbilities';
 import { furyAbilitySource } from '../../shared/evaluate/furyAbilities';
 import { conduitAbilitySource } from '../../shared/evaluate/conduitAbilities';
@@ -567,18 +568,20 @@ export async function abilitiesFor(
         ),
       ),
     ]) {
+      const nullSource = nullAbilitySource(grant);
       const troubadourSource = troubadourAbilitySource(grant);
       const furySource = furyAbilitySource(grant);
       const conduitSource = conduitAbilitySource(grant);
       const censorSource = censorAbilitySource(grant);
       const tacticianSource =
+        nullSource ??
         troubadourSource ??
         furySource ??
         conduitSource ??
         censorSource ??
         tacticianAbilitySource(grant);
       if (tacticianSource) {
-        const id = `${troubadourSource ? 'troubadour' : furySource ? 'fury' : conduitSource ? 'conduit' : censorSource ? 'censor' : 'tactician'}:${slug(grant.name)}`;
+        const id = `${nullSource ? 'null' : troubadourSource ? 'troubadour' : furySource ? 'fury' : conduitSource ? 'conduit' : censorSource ? 'censor' : 'tactician'}:${slug(grant.name)}`;
         granted.push(
           build({
             abilityId: id,
