@@ -1410,7 +1410,10 @@ function Wizard({ character }: { character: WizardCharacter }) {
               ) : (
                 <StepTitle
                   title={stepName(step)}
-                  description={stepExcerpt(step)}
+                  // The culture chooser opens with its own sentence, so the step's would be a
+                  // second instruction above the same cards. Its source text stays on the hero
+                  // column's Source inset.
+                  description={primary?.id === 'culture.preset' ? undefined : stepExcerpt(step)}
                   reference={
                     <>
                       <RuleLink {...stepReference(step)} />
