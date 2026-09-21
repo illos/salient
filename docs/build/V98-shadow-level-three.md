@@ -80,3 +80,11 @@ Guided progression remains deferred.
   fixture is the source-derived low-Agility condition target. Backend stopped; worktree clean.
   Final artifacts: `/srv/presidium/projects/salient/test-artifacts/V98-aaeb20e`.
 - Ready for DEPLOY2 integration and cloud dev publication, reusing these accepted results.
+
+## Publication — 2026-09-21
+
+DEPLOY2 fast-forwarded reviewed `66a0f3d` into main and published the backend, 1228-entry content
+snapshot and frontend. Backend/schema validation, hosted build and upload succeeded. Worker:
+`185d6c0a-3965-4ea1-87da-f399259360f2`. Accepted resumed 974-test gate and isolated four-build/
+six-action results were reused; no smoke test or test rerun. Release logs:
+`/srv/presidium/projects/salient/test-artifacts/V98-release-66a0f3d`.

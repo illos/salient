@@ -113,7 +113,14 @@ See [the release evidence](build/evidence/V43/hosted/README.md) for browser resu
 fixture limitations and deployment logs. Earlier Worker versions in slice records are historical.
 
 
-## Current release — V97 Shadow level two
+## Current release — V98 Shadow level three
+
+Backend/frontend source `66a0f3d12ea8bb450cfda7c8375ba363fa718861` published on 2026-09-21 as
+Worker `185d6c0a-3965-4ea1-87da-f399259360f2`. Backend/schema validation, content reseed (1228
+entries), hosted build and upload succeeded. Accepted TESTER results reused; no smoke test or
+rerun. See [V98](build/V98-shadow-level-three.md) and the [ledger](../deploy.md).
+
+## Previous release — V97 Shadow level two
 
 Backend/frontend source `c3423f4ba6d4dd95aacc7f230a243e6a264748a9` published on 2026-09-21 as
 Worker `b25c3463-9fe2-4580-b0c6-dd3c55e9b76d`. Backend/schema validation, content reseed (1221
