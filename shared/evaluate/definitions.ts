@@ -40,6 +40,8 @@ export interface DecisionOption {
 }
 
 export interface OptionsByParentEntry {
+  /** Optional printed parent value when its name cannot be used as a backend object key. */
+  parentValue?: string;
   source: string;
   quote?: string;
   values?: string[];

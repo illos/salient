@@ -216,12 +216,20 @@ export async function runCensor({ actors: { director, peer }, run, runId }: Scen
             if (usedNames.has(name)) continue;
             usedNames.add(name);
             const action = sheets[i]!.abilities.find(a => a.name === name)!;
-            const cost = action.cost?.amount ?? 0;
             const rolled = w.rolledActions.find(a => a.name === name);
-            const targetId = targetIds[0]!;
+            const cost =
+              rolled?.cost ?? (ledger.embeddedWrathCosts as Record<string, number>)[name] ?? 0;
+            assert.deepEqual(
+              action.cost,
+              cost ? { resource: 'wrath', amount: cost } : undefined,
+              `${name} source cost`,
+            );
+            const targetId = ['Hands of the Maker', 'Faithful Friend'].includes(name)
+              ? id
+              : targetIds[0]!;
             const target = { refKind: 'character', id: targetId };
             await invoke(id, 'adjust.heroic-resource', { value: cost });
-            await invoke(targetId, 'adjust.stamina', { value: 18 });
+            await invoke(targetId, 'adjust.stamina', { value: name === 'Grave Speech' ? 0 : 18 });
             const before = await get(targetId);
             const used = await invoke(id, 'ability.use', { ability: name, targets: [target] });
             const persisted = await event(used.eventId);

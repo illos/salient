@@ -56,3 +56,10 @@ uses a Compendium-derived independent ledger rather than extending the existing 
   all 42 new action names, fixed-cost exhaustion, rolled damage/manual clauses, and both strict
   potency paths for Halt Miscreant! (P/slowed) and Repent! (I/dazed). Two legal Elementalist
   targets use the source 2/2/−1/−1 array to give I/P −1 or 2; applied paths read save registration.
+- TESTER `74b8f74` full gate exited 1 after 164s: 382 engine and 588 app/script tests passed;
+  nine API tests rejected the non-ASCII object key `Adûn`. Repaired portfolio storage to use ASCII
+  source-path keys plus printed `parentValue`; the shared evaluator and wizard use one lookup.
+  Unchanged accepted tests are retained. No backend or live cohort had started.
+- ENGINE R1 corrects Self targets for Hands of the Maker/Faithful Friend; Grave Speech uses a
+  zero-Stamina target. R2 independently records six embedded Wrath costs in the source ledger,
+  asserting sheet metadata and actual spend instead of deriving expected payment from the sheet.

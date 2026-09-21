@@ -120,8 +120,9 @@ export function getLevelOneDecisions(pools: DecisionDefinitions['pools']): Decis
     quote: 'After choosing your deity, pick one domain from their portfolio.',
     optionsByParent: Object.fromEntries(
       CENSOR_DEITIES.map(deity => [
-        deity.name,
+        deity.source,
         {
+          parentValue: deity.name,
           source: deity.source,
           quote: `Domains: ${deity.domains.join(', ')}`,
           values: [...deity.domains],

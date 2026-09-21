@@ -49,6 +49,7 @@ import { draftSelectionsFrom } from '../../shared/evaluate/draft';
 import { changeChoice } from '../../shared/evaluate/choiceTransition';
 import {
   indexDecisions,
+  parentOptions,
   isAvailable,
   isSupported,
   poolOf,
@@ -251,7 +252,7 @@ function belongsToOtherBranch(
       return (
         decision.optionsByParent !== undefined &&
         typeof value === 'string' &&
-        decision.optionsByParent[value] === undefined
+        parentOptions(decision, value) === undefined
       );
     })
   );

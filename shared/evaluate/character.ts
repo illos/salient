@@ -25,7 +25,7 @@ import { applyWodeElfBaseline } from './ancestries/wode-elf.ts';
  */
 import { ancestryAbilities } from './ancestryAbilities.ts';
 import { assignmentError } from './assignment.ts';
-import { effectiveParent, isAvailable, poolOf, poolValues } from './structure.ts';
+import { effectiveParent, parentOptions, isAvailable, poolOf, poolValues } from './structure.ts';
 import { CAREER_BENEFITS } from '../content/supporting-backgrounds.ts';
 import { COMPLICATION_ABILITIES } from '../content/supporting-complication-abilities.ts';
 import { COMPLICATION_EFFECTS } from '../content/supporting-complications.ts';
@@ -250,7 +250,7 @@ class Evaluation {
         Object.fromEntries(this.valid),
         this.decisions,
       )?.value;
-      const parent = parentValue ? decision.optionsByParent[parentValue] : undefined;
+      const parent = parentValue ? parentOptions(decision, parentValue) : undefined;
       if (!parent) return { values: [] };
       return {
         values: [...(parent.values ?? []), ...this.poolValues(parent.optionsFrom)],
@@ -413,7 +413,7 @@ class Evaluation {
         Object.fromEntries(this.valid),
         this.decisions,
       )?.value;
-      const parent = aspect ? decision.optionsByParent?.[aspect] : undefined;
+      const parent = aspect ? parentOptions(decision, aspect) : undefined;
       if (parent?.quote) source = this.sentence({ path: parent.source, quote: parent.quote });
       if (aspect === 'Berserker' || aspect === 'Reaver')
         message = `Required choice missing: the ${aspect} aspect grants the Kit feature, so a kit must be chosen before Stamina, stability, disengage and kit damage bonuses can be derived`;

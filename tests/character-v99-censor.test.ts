@@ -56,6 +56,17 @@ test('Censor level one: twelve domains retain independent stats, skills, actions
         hero.abilities.find(x => x.name === a.name)?.cost,
         a.cost ? { resource: 'wrath', amount: a.cost } : undefined,
       );
+    for (const name of w.classActions) {
+      const cost =
+        w.rolledActions.find(a => a.name === name)?.cost ??
+        (ledger.embeddedWrathCosts as Record<string, number>)[name] ??
+        0;
+      assert.deepEqual(
+        hero.abilities.find(a => a.name === name)?.cost,
+        cost ? { resource: 'wrath', amount: cost } : undefined,
+        `${name} source cost`,
+      );
+    }
     for (const a of hero.abilities.filter(x => x.name.startsWith('Judgment:'))) {
       assert.ok(a.activationCondition);
       assert.ok(a.provenance.source.quote);

@@ -1862,5 +1862,18 @@
         "feature/censor/level-1/sanctified-weapon.md"
       ]
     }
+  ],
+  "embeddedWrathCosts": {
+    "Judgment: Stop Shifting": 1,
+    "Judgment: Impose Bane": 1,
+    "Judgment: Reduce Potency": 1,
+    "Judgment: Taunt": 1,
+    "My Life for Yours: Cleanse": 1,
+    "Arrest: Redirect": 3
+  },
+  "embeddedCostCitations": [
+    "feature/ability/censor/level-1/judgment.md#Spend 1 Wrath",
+    "feature/ability/censor/level-1/my-life-for-yours.md#Spend 1 Wrath",
+    "feature/ability/censor/level-1/arrest.md#Effect"
   ]
 }

@@ -45,6 +45,14 @@ function parentSatisfied(
   return true;
 }
 
+/** Keep printed Unicode names in values; backend object keys may use stable ASCII IDs. */
+export function parentOptions(decision: Decision, value: string): OptionsByParentEntry | undefined {
+  return (
+    decision.optionsByParent?.[value] ??
+    Object.values(decision.optionsByParent ?? {}).find(entry => entry.parentValue === value)
+  );
+}
+
 /**
  * The parent whose chosen value governs a decision's `optionsByParent` pool, missing-choice sentence
  * and pruning. `dependsOn` parents are all required, so its first entry is effective whatever its
@@ -62,7 +70,7 @@ export function effectiveParent(
     for (const id of decision.dependsOnAny) {
       if (!parentSatisfied(id, selections, decisions, scanningFixedGrants)) continue;
       const value = singleValue(selections, id);
-      if (decision.optionsByParent && (value === undefined || !decision.optionsByParent[value]))
+      if (decision.optionsByParent && (value === undefined || !parentOptions(decision, value)))
         continue;
       return { id, value };
     }
@@ -255,7 +263,7 @@ function basePoolOf(
     };
   if (decision.optionsByParent) {
     const parentValue = effectiveParent(decision, selections, indexDecisions(definitions))?.value;
-    const parent = parentValue ? decision.optionsByParent[parentValue] : undefined;
+    const parent = parentValue ? parentOptions(decision, parentValue) : undefined;
     if (!parent) return { values: [] };
     return {
       values: [...(parent.values ?? []), ...poolValues(definitions, parent.optionsFrom)],
