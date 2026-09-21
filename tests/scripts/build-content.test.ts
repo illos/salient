@@ -120,6 +120,14 @@ describe('committed snapshot', () => {
   test('regenerates byte-for-byte from the clean pinned Compendium (pnpm content:check)', () => {
     expect(compareSnapshot(snapshot, root)).toEqual([]);
   });
+  test('shared kit JSON imports use the same attributes in the backend snapshot index', () => {
+    // V101: mixed esbuild metafile inputs make Convex 1.45 stall before registering functions.
+    // The NodeNext shared consumer and generated backend index must identify one JSON module.
+    const consumer = readFileSync(join(root, 'shared/content/classes/fury/abilities.ts'), 'utf8');
+    expect(consumer).toMatch(/kit\.json' with \{ type: 'json' \}/);
+    expect(snapshot.files.get('index.ts')).toMatch(/kit\.json' with \{ type: 'json' \}/);
+  });
+
   test('detects a hand edit to a generated file', () => {
     const edited = { ...snapshot, files: new Map(snapshot.files) };
     edited.files.set('condition.json', `${edited.files.get('condition.json')}\n`);

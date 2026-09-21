@@ -72,3 +72,11 @@ entries. The clean Heroes text supplies ability group membership. No Forge outpu
   source-embedded additions, their pinned source text and cost before comparing every historical
   R02 field unchanged. It never mutates returned state or the old fixture. Runtime remains unchanged.
   Artifacts: `/srv/presidium/projects/salient/test-artifacts/V101-c5334df`.
+
+- TESTER `aca62e3`: changed app files and remaining gates passed (38s); full coverage is 387 engine
+  plus 599 app/scripts = 986 accepted tests across resumed runs. The isolated backend then stalled
+  before function registration, so no live journey ran. New shared `kit.json` import has JSON
+  attributes while the generated backend index omitted them—the same Convex/esbuild metadata
+  mismatch previously diagnosed for other content categories. Added `kit` to the generator's
+  attributed categories and a regression check; only packaging changes, no game/content changes.
+  Artifacts: `/srv/presidium/projects/salient/test-artifacts/V101-aca62e3`.

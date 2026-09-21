@@ -534,7 +534,7 @@ function renderIndex(kinds: string[]): string {
     // identical: esbuild/Convex 1.45 cannot stat mixed-attribute metafile input names.
     ...kinds.map(
       kind =>
-        `import ${identifier(kind)}Json from './${kind}.json'${['ability', 'feature', 'complication'].includes(kind) ? " with { type: 'json' }" : ''};`,
+        `import ${identifier(kind)}Json from './${kind}.json'${['ability', 'feature', 'complication', 'kit'].includes(kind) ? " with { type: 'json' }" : ''};`,
     ),
     '',
     'export const manifest: ContentManifest = manifestJson;',
