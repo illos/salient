@@ -1434,13 +1434,13 @@ function Wizard({ character }: { character: WizardCharacter }) {
                       variant="outline"
                       size="sm"
                       disabled={command.pending}
-                      aria-label={`Edit ${stepName(step).toLowerCase()}`}
+                      aria-label={`Change ${stepName(step).toLowerCase()}`}
                       onClick={() => {
                         setFocusAfterChange(true);
                         setEditingStep(step.id);
                       }}
                     >
-                      Edit
+                      Change
                     </Button>
                   }
                 />

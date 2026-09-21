@@ -25,7 +25,7 @@ export function StepTitle({
   description?: string;
   reference: React.ReactNode;
   optional?: boolean;
-  /** Edit, once the step's main choice is made and the header carries it (V96). */
+  /** Change, once the step's main choice is made and the header carries it (V96). */
   action?: React.ReactNode;
   /** The step this header belongs to, when its title is the chosen option's name instead. */
   eyebrow?: string;

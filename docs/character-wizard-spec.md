@@ -468,9 +468,9 @@ character identity and existing revision, review and combat-lock protections.
 main catalog choice (Ancestry, Career, Class, Kit, and Complication) initially show that chooser.
 After selection, the step header itself carries the choice: the option's name replaces the step
 name, its own rules text replaces the step description, its reference replaces the step's, and
-Edit sits beside it. There is no separate summary line. Show the dependent
-choices beneath the summary. Edit reopens the main chooser and hides dependent controls; opening
-Edit alone does not alter the draft. The user can keep the current option or select a replacement.
+Change sits beside it. There is no separate summary line. Show the dependent
+choices beneath the summary. Change reopens the main chooser and hides dependent controls; opening
+it alone does not alter the draft. The user can keep the current option or select a replacement.
 Only replacement uses the existing dependency pruning. Revisited and saved selections start
 collapsed. Optional None can also be confirmed; Culture and Details retain their independent fields.
 Full source text remains available through the selected option's reference. This is presentation

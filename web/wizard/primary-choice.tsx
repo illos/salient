@@ -3,7 +3,7 @@
  * The step's one main catalog choice (Ancestry, Career, Class, Kit, Complication).
  *
  * V96: a made choice is reported by the step header itself, which takes the option's name, its
- * own rules text and its reference, with Edit beside it. So this renders only the chooser while
+ * own rules text and its reference, with Change beside it. So this renders only the chooser while
  * it is open, and only the dependent choices once it is closed. The caller owns the open state
  * and the focus move, because the header it belongs to is the caller's.
  *
