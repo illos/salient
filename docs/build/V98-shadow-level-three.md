@@ -63,3 +63,8 @@ Guided progression remains deferred.
   assertion also treated level 3 as globally unsupported. Updated that sentinel to 4; a repository
   search found no further unsupported-level-3 assertions. Artifacts:
   `/srv/presidium/projects/salient/test-artifacts/V98-b0c1ed5`. No backend had started.
+- TESTER `cdbcb32`: full run exited 1 at 148s with one stale report-audit expectation: Pain for
+  Pain had two level grant paths before V98 and now has three. All 379 engine and 594 other
+  app/script cases passed. Updated that assertion to name levels 1/2/3 explicitly. Accepted stages
+  are retained; only the changed audit file and remaining pipeline/headless steps are resubmitted.
+  Artifacts: `/srv/presidium/projects/salient/test-artifacts/V98-cdbcb32`.

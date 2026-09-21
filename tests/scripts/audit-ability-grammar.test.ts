@@ -175,9 +175,10 @@ describe('V26 bounded grammar classifier on real entries', () => {
       { kind: 'plusChoice', constant: 13, choices: ['M', 'A'] },
     ]);
     expect(result.diagnostics.map(d => d.type)).toEqual(['effect-paragraph']);
-    expect(corpus.grantsByEnvelope.get(e.id)?.map(g => g.selectable)).toEqual([
-      'selectable',
-      'selectable',
+    expect(corpus.grantsByEnvelope.get(e.id)?.map(g => [g.level, g.selectable])).toEqual([
+      [1, 'selectable'],
+      [2, 'selectable'],
+      [3, 'selectable'],
     ]);
   });
 
