@@ -214,5 +214,7 @@ chosen; it needs its own slice and headless proof.
 - 2026-09-21: the rail is two levels. The step the hero is inside lists its own choices beneath
   it, each with a dot showing whether it is recorded, and picking one scrolls to that choice in
   the centre column. The items are the same derived list the step's decided-over-presented count
-  uses, so the sub-menu and the count can never disagree, and every rendered decision now carries
-  an anchor id for the jump.
+  uses, so the sub-menu and the count can never disagree. Every rendered decision carries an
+  anchor id, and while a step's main choice is collapsed into the header the header answers to
+  that choice's anchor, since that is where the choice lives. Checked across every presented step
+  with a mid-build selection: no item names a decision without a rendered anchor.

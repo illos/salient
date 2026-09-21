@@ -1437,68 +1437,72 @@ function Wizard({ character }: { character: WizardCharacter }) {
                 </Notice>
               )}
               {/* A settled main choice speaks for its step: the option's name, its own rules text
-                and its reference stand in for the step's, with Edit to reopen the chooser. */}
-              {primary && !primaryExpanded ? (
-                <StepTitle
-                  title={selectedName ?? primaryNoneLabel ?? stepName(step)}
-                  eyebrow={stepName(step)}
-                  // Only the chosen option's own text. A culture is a table row combining aspects
-                  // and has no entry, so its header carries no paragraph; the aspect tiles below
-                  // hold the descriptions. Repeating the step's "choose a culture" line under the
-                  // culture you already chose says nothing.
-                  description={chosenText}
-                  reference={
-                    selectedSource && selectedSource !== primary.source ? (
-                      <RuleLink sourcePath={selectedSource} label={selectedName} />
-                    ) : (
-                      <RuleLink {...stepReference(step)} />
-                    )
-                  }
-                  more={
-                    chosenText && selectedSource ? (
-                      <RuleReadMore sourcePath={selectedSource} label={selectedName} />
-                    ) : undefined
-                  }
-                  optional={step.optional}
-                  action={
-                    <Button
-                      ref={editRef}
-                      type="button"
-                      variant="outline"
-                      size="sm"
-                      disabled={command.pending}
-                      aria-label={`Change ${stepName(step).toLowerCase()}`}
-                      onClick={() => {
-                        setFocusAfterChange(true);
-                        setEditingStep(step.id);
-                      }}
-                    >
-                      Change
-                    </Button>
-                  }
-                />
-              ) : (
-                <StepTitle
-                  title={stepName(step)}
-                  // The culture chooser opens with its own sentence, so the step's would be a
-                  // second instruction above the same cards. Its source text stays on the hero
-                  // column's Source inset.
-                  description={primary?.id === 'culture.preset' ? undefined : stepExcerpt(step)}
-                  reference={
-                    // Culture cites the Background chapter, which is the reference that matters
-                    // here; the Making a Hero step reference is already on the rail's heading.
-                    primary?.id === 'culture.preset' ? (
-                      <RuleLink {...decisionReference(primary, step)} />
-                    ) : (
-                      <RuleLink {...stepReference(step)} />
-                    )
-                  }
-                  optional={step.optional}
-                />
-              )}
-              {primary && !primaryExpanded && (
-                <Diagnostics list={evaluation?.diagnostics[primary.id]} />
-              )}
+                and its reference stand in for the step's, with Change to reopen the chooser. So
+                while it is collapsed the header is where that choice lives, and it answers to the
+                rail's jump for it. */}
+              <div id={primary && !primaryExpanded ? anchorId(primary.id) : undefined}>
+                {primary && !primaryExpanded ? (
+                  <StepTitle
+                    title={selectedName ?? primaryNoneLabel ?? stepName(step)}
+                    eyebrow={stepName(step)}
+                    // Only the chosen option's own text. A culture is a table row combining aspects
+                    // and has no entry, so its header carries no paragraph; the aspect tiles below
+                    // hold the descriptions. Repeating the step's "choose a culture" line under the
+                    // culture you already chose says nothing.
+                    description={chosenText}
+                    reference={
+                      selectedSource && selectedSource !== primary.source ? (
+                        <RuleLink sourcePath={selectedSource} label={selectedName} />
+                      ) : (
+                        <RuleLink {...stepReference(step)} />
+                      )
+                    }
+                    more={
+                      chosenText && selectedSource ? (
+                        <RuleReadMore sourcePath={selectedSource} label={selectedName} />
+                      ) : undefined
+                    }
+                    optional={step.optional}
+                    action={
+                      <Button
+                        ref={editRef}
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        disabled={command.pending}
+                        aria-label={`Change ${stepName(step).toLowerCase()}`}
+                        onClick={() => {
+                          setFocusAfterChange(true);
+                          setEditingStep(step.id);
+                        }}
+                      >
+                        Change
+                      </Button>
+                    }
+                  />
+                ) : (
+                  <StepTitle
+                    title={stepName(step)}
+                    // The culture chooser opens with its own sentence, so the step's would be a
+                    // second instruction above the same cards. Its source text stays on the hero
+                    // column's Source inset.
+                    description={primary?.id === 'culture.preset' ? undefined : stepExcerpt(step)}
+                    reference={
+                      // Culture cites the Background chapter, which is the reference that matters
+                      // here; the Making a Hero step reference is already on the rail's heading.
+                      primary?.id === 'culture.preset' ? (
+                        <RuleLink {...decisionReference(primary, step)} />
+                      ) : (
+                        <RuleLink {...stepReference(step)} />
+                      )
+                    }
+                    optional={step.optional}
+                  />
+                )}
+                {primary && !primaryExpanded && (
+                  <Diagnostics list={evaluation?.diagnostics[primary.id]} />
+                )}
+              </div>
               {step.id === 'step.kit' && evaluation?.partial?.kit === null && (
                 <p className="text-base text-muted-foreground">
                   This build has no kit. Its class features supply its starting statistics and
