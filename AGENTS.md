@@ -48,6 +48,10 @@ the build process in `docs/build/README.md`, test execution in `testing-process.
 - All test runs go through the TESTER thread under `testing-process.md`. Implementers run only
   authoring checks locally: lint, typecheck, the focused test file. DEPLOY2 integrates finished
   slices into main and promotes to the cloud dev deployment.
+- Deployment reuses accepted TESTER results. Do not rerun suites, headless journeys, smoke tests,
+  or live checks before or after promotion just because the commit, environment or release changed.
+  Deployment consists of required build/publication steps and recording their success. New tests
+  require an explicit user request or a concrete code change/failure needing targeted verification.
 - Report what was actually run, with output. A mutation response is not evidence; read persisted
   state back. Never claim something is implemented without evidence in the checkout.
 

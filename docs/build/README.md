@@ -17,7 +17,7 @@ direction; the previous procedures are archived in
    passages and replies in Chords with `pass` or the blocking findings. Rules slices also get a short
    written review under `audits/`.
 5. **Hand off** the commit to DEPLOY2. It fast-forwards `main`, updates the shared dev target and
-   smoke-checks the changed feature. Update your `STATUS.md` row to `Merged` when it tells you.
+   records successful publication, reusing accepted tests without a smoke test. Update your `STATUS.md` row to `Merged` when it tells you.
 
 ## Slice document template
 
@@ -119,7 +119,8 @@ app. Development data is disposable; do not reset another track's environment.
 ### Merge completion includes the playable app
 
 A merge is: fast-forward `main`, update the shared dev target's affected backend, content and
-frontend, smoke-check the changed feature there, and send one Chords message with the commit.
+frontend, record successful publication, and send one Chords message with the commit.
+Do not rerun accepted tests or add a smoke/live gate during promotion; see [the testing process](../../testing-process.md).
 Documentation-only changes need no runtime update. Cloud or external publication still needs an
 explicit user instruction.
 

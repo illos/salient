@@ -60,6 +60,12 @@ references; the existing source pins and game-content records are unchanged.
 
 ## Verification and recovery
 
+Deployment reuses accepted TESTER evidence. Do not run smoke tests, headless cohorts, manifest
+readbacks or asset checks before or after promotion solely to verify the new environment. Required
+build/publication commands and their successful results complete deployment verification. The
+headless configuration below applies only when an explicit user request, code change or observed
+failure warrants a targeted test; it is not a routine release step.
+
 The hosted demo is a test environment alongside local and CT114, not production. Use a free
 suitable runner on either host; record the runner separately from the application target.
 The browser moratorium applies here too. Programmatic API tests set `VITE_SITE_URL` to the

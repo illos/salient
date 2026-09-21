@@ -4,7 +4,7 @@ DEPLOY2 (Chords `80f94764-5a63-430c-9548-6d8583052803`, succeeding DEPLOY
 `bc6847ae-0334-4282-ae3c-6ec7291a509c` on 2026-09-20) owns integration of finished branches into `main`,
 final release commits, the verified push of `main` to GitHub, and promotion of the integrated
 revision to the live stable cloud environment.
-TESTER owns all pre-release and post-release test execution under
+TESTER owns feature acceptance test execution under
 [testing-process.md](testing-process.md).
 
 ## Stable target
@@ -12,11 +12,11 @@ TESTER owns all pre-release and post-release test execution under
 - Frontend: `https://salient-dev.rdxx.workers.dev` (`salient-dev` Cloudflare Worker)
 - Backend: Convex `dev:different-bat-943`
 - Procedure and credential handling: [docs/hosted-development.md](docs/hosted-development.md)
-- The browser moratorium applies. Release proof uses the supported authenticated CLI/API routes.
+- Reuse accepted TESTER evidence; deployment does not run smoke tests or other test gates.
 - Reseed the committed content when required; development data is disposable under `AGENTS.md`.
 
 The cloud target is stable only when its backend, content and frontend are recorded against one
-exact integrated `main` revision and TESTER has passed the live checks. A branch-only candidate or a
+exact integrated `main` revision and the required publication commands have succeeded. A branch-only candidate or a
 partially updated target is not stable.
 
 ## Promotion gate
@@ -24,9 +24,14 @@ partially updated target is not stable.
 1. The owner hands off the reviewed tip after TESTER's full check and applicable headless proof pass.
 2. DEPLOY2 fast-forwards `main` and publishes affected backend, content and frontend components.
    Reuse passing checks for unchanged inputs; do not add a pre-promotion or exact-revision test gate.
-3. TESTER runs one targeted hosted smoke check of the changed feature.
-4. DEPLOY2 records the runtime source and Worker version, commits the release closeout, pushes
+3. DEPLOY2 records the runtime source and Worker version, commits the release closeout, pushes
    `main`, verifies the remote SHA and sends the completion handoff.
+
+Do not rerun suites, headless journeys, smoke tests or live checks as part of promotion. Reuse the
+accepted feature gates even when the target environment or integration commit changes. New targeted
+verification requires an explicit user request or a concrete code change or observed failure.
+Required release builds and successful publication commands are sufficient deployment confirmation.
+Historical live-test records below are evidence of past releases, not current requirements.
 
 Development data is disposable. Do not fingerprint, snapshot or preservation-check records.
 Coordinate before resetting another thread's environment or the user's shared app. Routine content
@@ -84,7 +89,7 @@ backend, content and frontend state remain as recorded above.
 
 Resume with a scoped development key authorized for the internal reseed action, verify
 the uploaded release identity/build stamp, reseed the committed snapshot, publish the frontend,
-complete targeted live checks through TESTER, then commit/push the release.
+then commit/push the release (the former live-test requirement is superseded by the promotion policy above).
 Do not roll back to code lacking starting-reward or condition-instance validators.
 
 ### Publication resumed — 2026-09-20 20:06 UTC

@@ -28,8 +28,12 @@ Send a new key when the candidate changes. Do not edit a submitted worktree whil
 4. Do not fingerprint, snapshot or compare existing records; development data is disposable. Do not
    repeat a run for unchanged inputs. Stop services the job started; leave data in place.
 
-After a deployment, DEPLOY2 may request one targeted smoke check of the changed feature on the
-shared or hosted app. That is the whole live gate.
+Deployment has no smoke test or live-test gate. Reuse the accepted TESTER results; do not rerun
+suites, headless journeys, cohorts, manifest readbacks or asset smoke tests for promotion to another
+environment, a merge commit, a documentation change or a GitHub push. Do not create a new TESTER
+job just because deployment is happening. Only an explicit user request or a concrete code change
+or observed failure justifies targeted verification of the affected behavior. Required release
+builds, publication commands and recording their success are deployment work, not new test gates.
 
 ## Promotion and GitHub
 
