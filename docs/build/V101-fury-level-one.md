@@ -65,3 +65,10 @@ entries. The clean Heroes text supplies ability group membership. No Forge outpu
   (384 engine passes; no backend started). The two V101 embedded uses are now asserted as the exact
   delta before the legacy full-output comparison; the Forge comparison documents their representation
   inside parent abilities. No runtime change. Artifacts: `/srv/presidium/projects/salient/test-artifacts/V101-ddc7edf`.
+
+- TESTER `c5334df`: repaired engine files pass 15/15 and ingest passes. App/scripts reached
+  594 passes and five legacy-list/oracle failures across three app files (119s); no backend started.
+  Updated exact sheet lists and added a test-only comparison view that requires the two named
+  source-embedded additions, their pinned source text and cost before comparing every historical
+  R02 field unchanged. It never mutates returned state or the old fixture. Runtime remains unchanged.
+  Artifacts: `/srv/presidium/projects/salient/test-artifacts/V101-c5334df`.

@@ -308,6 +308,8 @@ describe('A05 attacks, damage, costs and common actions', () => {
       'Pain for Pain',
       'Melee Weapon Free Strike',
       'Ranged Weapon Free Strike',
+      'Out of the Way!: Follow',
+      'Lines of Force: Enhance',
       'Catch Breath',
       'Defend',
       'Aid Attack',

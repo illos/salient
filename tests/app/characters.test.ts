@@ -1,3 +1,4 @@
+import { legacyFuryExpectationView } from '../helpers/legacy-fury-expectation.ts';
 // SPDX-License-Identifier: GPL-3.0-only
 import { describe, expect, test } from 'vitest';
 import { convexTest } from 'convex-test';
@@ -279,8 +280,12 @@ describe('owned character drafts', () => {
         .unique(),
     );
     expect(revision!.status).toBe('complete');
-    expect(revision!.derivedBaseline).toEqual(examples.examples.complete!.expected.baseline);
-    expect(revision!.evaluation).toEqual(examples.examples.complete!.expected);
+    expect(legacyFuryExpectationView(revision!.derivedBaseline)).toEqual(
+      examples.examples.complete!.expected.baseline,
+    );
+    expect(legacyFuryExpectationView(revision!.evaluation)).toEqual(
+      examples.examples.complete!.expected,
+    );
     const baseline = revision!.derivedBaseline as DerivedBaseline;
     expect([
       baseline.staminaMaximum.value,
@@ -291,9 +296,9 @@ describe('owned character drafts', () => {
     expect(saved.liveState).toBeNull();
     expect(saved.effectiveRevisionId).toBeNull();
     // The shared evaluate operation returns the same result without writing anything.
-    expect(await alice.client.query(api.characters.evaluate, { selections })).toEqual(
-      examples.examples.complete!.expected,
-    );
+    expect(
+      legacyFuryExpectationView(await alice.client.query(api.characters.evaluate, { selections })),
+    ).toEqual(examples.examples.complete!.expected);
   });
 
   test('acceptance 2: no kit is incomplete naming kit.choice; over-budget traits is invalid', async () => {
@@ -301,13 +306,13 @@ describe('owned character drafts', () => {
     const incomplete = await alice.client.query(api.characters.evaluate, {
       selections: draftSelectionsFrom(examples.examples.incomplete!.input.selections, definitions),
     });
-    expect(incomplete).toEqual(examples.examples.incomplete!.expected);
+    expect(legacyFuryExpectationView(incomplete)).toEqual(examples.examples.incomplete!.expected);
     expect(incomplete.status).toBe('incomplete');
     expect(incomplete.diagnostics['kit.choice'][0].code).toBe('required-choice-missing');
     const invalid = await alice.client.query(api.characters.evaluate, {
       selections: draftSelectionsFrom(examples.examples.invalid!.input.selections, definitions),
     });
-    expect(invalid).toEqual(examples.examples.invalid!.expected);
+    expect(legacyFuryExpectationView(invalid)).toEqual(examples.examples.invalid!.expected);
     expect(invalid.status).toBe('invalid');
     // Persisted the same way: the revision carries the status and no baseline.
     const characterId = await alice.client.mutation(api.characters.create, {

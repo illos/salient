@@ -1,3 +1,4 @@
+import { legacyFuryExpectationView } from '../helpers/legacy-fury-expectation.ts';
 // SPDX-License-Identifier: GPL-3.0-only
 // A02 acceptance checks 3 to 7 at the shared-operation level: the admission authority matrix, R03
 // first-admission live values read back from the character row, draft-save isolation from live
@@ -175,7 +176,9 @@ describe('A02 admission', () => {
     expect(row.effectiveRevisionId).toBe(row.draftRevisionId);
     expect(row.campaignId).toBe(campaignId);
     // R02 section 4.1: the effective baseline is the complete example.
-    expect(row.derivedBaseline).toEqual(examples.examples.complete.expected.baseline);
+    expect(legacyFuryExpectationView(row.derivedBaseline)).toEqual(
+      examples.examples.complete.expected.baseline,
+    );
     // R03 section 2.1: first-admission values (Stamina 30, temp 0, Recoveries 10, ferocity 0,
     // surges 0, Victories 0, XP 0, nine toggles off).
     expect(row.liveState).toEqual({
@@ -358,7 +361,7 @@ describe('A02 admission', () => {
     await expect(
       outsider.client.query(api.characters.sheet, { characterId: thornId }),
     ).rejects.toThrow('Character unavailable');
-    // Acceptance 6: exactly the seven granted abilities (R02 4.1), each with the pinned file's text.
+    // R02 seven abilities plus V101 two embedded uses, each with the pinned source text.
     expect(owner.abilities.map(a => a.name)).toEqual([
       'Brutal Slam',
       'Out of the Way!',
@@ -367,6 +370,8 @@ describe('A02 admission', () => {
       'Pain for Pain',
       'Melee Weapon Free Strike',
       'Ranged Weapon Free Strike',
+      'Out of the Way!: Follow',
+      'Lines of Force: Enhance',
     ]);
     for (const ability of owner.abilities) {
       expect(ability.content).not.toBeNull();
@@ -382,6 +387,8 @@ describe('A02 admission', () => {
       'main', // Pain for Pain is the kit's printed main-action signature.
       'main',
       'main',
+      'other', // Source-timed embedded uses do not consume a second main action.
+      'other',
     ]);
     expect(owner.abilities[1]!.metadata.cost).toBe('3 Ferocity');
     // Features carry verbatim source text, including the readable chapter for Culture edge.
