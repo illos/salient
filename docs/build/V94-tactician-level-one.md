@@ -188,3 +188,13 @@ and above, any other class. Spec sections: `docs/character-wizard-spec.md#3-deci
   entries unchanged. Independent static review by delegated v94_final_review passes; runtime
   preparation and the targeted headless retry will confirm the diagnosis. Existing954 and Forge4
   results are retained for unchanged gameplay code; do not repeat those suites for import syntax.
+
+- 2026-09-21: final bounded retry passes on frozen71530ba. DEPLOY2 message1240 confirms
+  isolated CT114 preparation ready in10.81s, resolving the import-attribute stall. TESTER
+  message1241 reports content check, TypeScript and22 generator tests green; isolated content
+  seed1209; Tactician cohort exit0 in8.54s with all four persisted builds, arsenal choices,
+  manual-action recording/payment and doctrine revocation proven. Services stopped; data retained.
+  Artifacts: /srv/presidium/projects/salient/test-artifacts/V94-71530ba. Reuse the unchanged
+  gameplay gate954 and Forge4/4 from2f3f938. Independent rules/implementation review passes.
+  V94 acceptance is complete on the branch; DEPLOY2 integration and shared cloud promotion remain
+  pending. This closeout changes documentation only.
