@@ -330,7 +330,14 @@ values and controls retain their behavior.
   default marks the culture Bespoke without clearing its other choices. Professional cultures
   leave language freely selectable. Existing saved cultures need no preset or migration. See
   [V84](build/V84-culture-presets.md) for source tables and naming discrepancies.
-- **Amended 2026-09-21 (V96):** the wizard calls the "9. Determine Details" step **Finalize**. The
+- **Confirmed 2026-09-21 (V96):** the wizard shows the kit as a section of the class step, and only
+where the chosen class path actually grants one. A class that grants no kit never shows it; a
+class whose kit comes from a later choice, as the Fury's does from its aspect, shows it once that
+choice is made. This follows the kit decision's own dependencies rather than a list of classes, so
+a new class needs no wizard change. A step that asks a particular hero nothing counts as done once
+they pass it, so a kitless build still completes.
+
+**Amended 2026-09-21 (V96):** the wizard calls the "9. Determine Details" step **Finalize**. The
 step's reference still names and links the source step, and its description is still the source
 sentence; only the wizard's own label differs, because the step now closes out the build rather
 than only recording appearance and backstory.
