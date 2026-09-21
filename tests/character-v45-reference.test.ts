@@ -192,6 +192,13 @@ for (const example of examples)
               'Melee Weapon Free Strike',
               'Ranged Weapon Free Strike',
               // V101 provides separate UI/API uses; Forge retains them inside the parent ability.
+              'Hurl Element: Acid',
+              'Hurl Element: Cold',
+              'Hurl Element: Corruption',
+              'Hurl Element: Fire',
+              'Hurl Element: Lightning',
+              'Hurl Element: Poison',
+              'Hurl Element: Sonic',
               'Enchantment and Ward: Change',
               'Persistent Magic: Maintain',
               'Persistent Magic: End',

@@ -47,6 +47,10 @@ export function elementalistAbilities(
       },
     });
   }
+  for (const a of result)
+    if (a.name === 'Hurl Element' && a.provenance.decisionId.startsWith('class.elementalist.'))
+      a.activationCondition =
+        'Choose a typed Hurl Element action to roll and apply damage. This base entry records the choice manually.';
   return result.map(a =>
     a.name === 'Instantaneous Excavation' &&
     a.provenance.decisionId.startsWith('class.elementalist.')

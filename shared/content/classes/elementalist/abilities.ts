@@ -9,9 +9,18 @@ export interface ElementalistAction {
   actionType: string;
   activationCondition: string;
   cost?: number;
+  damageType?: string;
   trigger?: string;
 }
 export const ELEMENTALIST_ACTIONS: ElementalistAction[] = [
+  ...['acid', 'cold', 'corruption', 'fire', 'lightning', 'poison', 'sonic'].map(damageType => ({
+    name: `Hurl Element: ${damageType[0]!.toUpperCase()}${damageType.slice(1)}`,
+    parent: 'Hurl Element',
+    sourcePath: 'en/unified/md/feature/ability/elementalist/level-1/hurl-element.md',
+    actionType: 'Main action',
+    damageType,
+    activationCondition: `Choose ${damageType} for Hurl Element's damage. Uses the original Reason roll and source tiers; may be used as a ranged free strike.`,
+  })),
   {
     name: 'Enchantment and Ward: Change',
     parent: 'Enchantment',

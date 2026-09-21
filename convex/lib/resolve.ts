@@ -297,6 +297,8 @@ export function abilityFromEntry(
     '/feature/ability/troubadour/level-1/thunder-mother.md',
     // Separate rolls per eligible creature above each hole; generic shared dice cannot represent this.
     '/feature/ability/elementalist/level-1/instantaneous-excavation.md',
+    // A damage type is mandatory; source-typed grants below own its actual roll.
+    '/feature/ability/elementalist/level-1/hurl-element.md',
   ].some(path => entry.sourcePath.endsWith(path));
   return build({
     compilation: compileLiveEntry(entry, entry.kind),
@@ -585,6 +587,37 @@ export async function abilitiesFor(
         conduitSource ??
         censorSource ??
         tacticianAbilitySource(grant);
+      if (elementalistSource?.damageType) {
+        const contentId = manifest.entries.find(
+          e => e.sourcePath === `vendor/steel-compendium/${grant.sourcePath}`,
+        )?.id;
+        const entry = contentId ? await findContent(ctx, contentId) : null;
+        if (!entry) throw new ConvexError('Missing Hurl Element source.');
+        const structured = entry.structured as Structured;
+        const parsed = effectsOf(structured.effects);
+        const id = `elementalist:${slug(grant.name)}`;
+        const typed = build({
+          abilityId: id,
+          contentId: id,
+          name: grant.name,
+          source: sourceOf(entry),
+          text: elementalistSource.text,
+          usage: stringOf(structured.action_type),
+          distance: stringOf(structured.distance),
+          target: stringOf(structured.target),
+          keywords: stringsOf(structured.keywords),
+          roll: parsed.roll!,
+          tiers: parsed.tiers!.map(t =>
+            t.replace(/ damage/g, ` ${elementalistSource.damageType} damage`),
+          ) as [string, string, string],
+          effects: parsed.effects,
+          kitBonusesIncluded: false,
+        });
+        // Modifier's source exception names the original ability, not this choice's display label.
+        if (typed.metadata) typed.metadata.name = 'Hurl Element';
+        granted.push(typed);
+        continue;
+      }
       if (tacticianSource) {
         const id = `${elementalistSource ? 'elementalist' : nullSource ? 'null' : troubadourSource ? 'troubadour' : furySource ? 'fury' : conduitSource ? 'conduit' : censorSource ? 'censor' : 'tactician'}:${slug(grant.name)}`;
         granted.push(

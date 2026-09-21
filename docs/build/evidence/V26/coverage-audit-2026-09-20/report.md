@@ -8,7 +8,7 @@ one power roll with three tiers; each tier a supported damage expression, option
 one core condition `(save ends)` as the second and final damage-tier clause. Nothing here is a
 gameplay migration, a support claim or evidence that any ability executes correctly.
 
-Content hash: `sha256:81a631bfa49ba52e9f52ed5fbbd1ba3a571a1417339b22f0e74ef570ede97887`. Foe catalog edition: `bf262edf546e91e1540cc17489915f18c4873ddd8bd8e225b20f3441e3f74f30`. Source revision: `fb83a789da8f0327a389c277a0c790b1648d5810`.
+Content hash: `sha256:5d2ca9b833cc7595ce30490edb47feca2904e44f1e5e1ba2ab5bb7e8052b99b5`. Foe catalog edition: `bf262edf546e91e1540cc17489915f18c4873ddd8bd8e225b20f3441e3f74f30`. Source revision: `fb83a789da8f0327a389c277a0c790b1648d5810`.
 
 ## Totals per corpus
 
@@ -20,7 +20,7 @@ Content hash: `sha256:81a631bfa49ba52e9f52ed5fbbd1ba3a571a1417339b22f0e74ef570ed
 | Foe abilities (`foes/catalog.json`) | 1158 | 20 | 566 | 29 | 572 |
 | Malice features with a power roll | 14 | 0 | 13 | 0 | 1 |
 
-Wizard ability grants inspected: 945 (522 resolve to a standalone entry, 75 to a kit signature, 348 classified from their own embedded text, 0 unresolved).
+Wizard ability grants inspected: 996 (573 resolve to a standalone entry, 75 to a kit signature, 348 classified from their own embedded text, 0 unresolved).
 
 ## What the bounded V26 grammar buys
 
@@ -59,8 +59,8 @@ Expected categories are read from the V26 designs; a disagreement is a finding, 
 | Thunder Roar | COMPILES_WITH_REMAINDER | COMPILES_WITH_REMAINDER | yes | selectable | area, nearest-first Effect; push not an independent instruction |
 | Lines of Force | NO_MATCH | NO_MATCH | yes | selectable | no power roll; triggered action |
 | Viscous Fire | COMPILES | COMPILES | yes | selectable | fire damage + Reason then push |
-| Meteoric Introduction (compile-only) | COMPILES | COMPILES | yes | not-granted | damage + Reason then push; no live grant |
-| Ray of Agonizing Self-Reflection (compile-only) | COMPILES_WITH_REMAINDER | COMPILES_WITH_REMAINDER | yes | not-granted | symbolic potency/slowed/save remainder; no live grant |
+| Meteoric Introduction (compile-only) | COMPILES | COMPILES | yes | selectable | damage + Reason then push; no live grant |
+| Ray of Agonizing Self-Reflection (compile-only) | COMPILES_WITH_REMAINDER | COMPILES_WITH_REMAINDER | yes | selectable | symbolic potency/slowed/save remainder; no live grant |
 | Spinecleaver Axe (compile-only) | COMPILES | COMPILES | yes | — | damage then push; minion envelope retained outside execution |
 
 ## Hero abilities that compile (fully or with remainder)
@@ -99,20 +99,20 @@ Availability is derived from the composed wizard definitions (`getDefinitions(1)
 | hero-standalone | Wither | COMPILES_WITH_REMAINDER | — | single | selectable | class.conduit.signature-abilities@1:selectable, class.conduit.signature-abilities@2:selectable, class.conduit.signature-abilities@3:selectable | potency:P < SYM the target takes a bane on their next power roll |
 | hero-standalone | Draconian Pride | COMPILES | — | area | selectable | ancestry.dragon-knight.purchased-traits@1:selectable, ancestry.revenant.dragon-knight.purchased-traits@1:selectable, ancestry.dragon-knight.purchased-traits@2:selectable, ancestry.revenant.dragon-knight.purchased-traits@2:selectable, ancestry.dragon-knight.purchased-traits@3:selectable, ancestry.revenant.dragon-knight.purchased-traits@3:selectable | — |
 | hero-standalone | Dragon Breath | COMPILES_WITH_REMAINDER | — | area | selectable | ancestry.dragon-knight.purchased-traits@1:selectable, ancestry.revenant.dragon-knight.purchased-traits@1:selectable, ancestry.dragon-knight.purchased-traits@2:selectable, ancestry.revenant.dragon-knight.purchased-traits@2:selectable, ancestry.dragon-knight.purchased-traits@3:selectable, ancestry.revenant.dragon-knight.purchased-traits@3:selectable | effect-paragraph:effect |
-| hero-standalone | Afflict a Bountiful Decay | COMPILES_WITH_REMAINDER | — | single | not-granted | — | effect-paragraph:effect |
-| hero-standalone | Behold the Mystery | COMPILES_WITH_REMAINDER | — | area | not-granted | — | effect-paragraph:persistent N |
+| hero-standalone | Afflict a Bountiful Decay | COMPILES_WITH_REMAINDER | — | single | selectable | class.elementalist.signature-abilities@1:selectable, class.elementalist.signature-abilities@2:selectable, class.elementalist.signature-abilities@3:selectable | effect-paragraph:effect |
+| hero-standalone | Behold the Mystery | COMPILES_WITH_REMAINDER | — | area | selectable | class.elementalist.ability-3@1:selectable, class.elementalist.ability-3@2:selectable, class.elementalist.ability-3@3:selectable | effect-paragraph:persistent N |
 | hero-standalone | Bifurcated Incineration | COMPILES | — | multi | selectable | class.elementalist.signature-abilities@1:selectable, class.elementalist.signature-abilities@2:selectable, class.elementalist.signature-abilities@3:selectable | — |
 | hero-standalone | Conflagration | COMPILES_WITH_REMAINDER | — | area | selectable | class.elementalist.ability-5@1:selectable, class.elementalist.ability-5@2:selectable, class.elementalist.ability-5@3:selectable | effect-paragraph:persistent N |
-| hero-standalone | Grasp of Beyond | COMPILES_WITH_REMAINDER | — | single | not-granted | — | effect-paragraph:effect |
+| hero-standalone | Grasp of Beyond | COMPILES_WITH_REMAINDER | — | single | selectable | class.elementalist.signature-abilities@1:selectable, class.elementalist.signature-abilities@2:selectable, class.elementalist.signature-abilities@3:selectable | effect-paragraph:effect |
 | hero-standalone | Hurl Element | COMPILES_WITH_REMAINDER | — | single | selectable | class.elementalist.features@1:selectable, class.elementalist.features@2:selectable, class.elementalist.features@3:selectable | effect-paragraph:effect |
-| hero-standalone | Invigorating Growth | COMPILES_WITH_REMAINDER | — | single | not-granted | — | effect-paragraph:effect |
-| hero-standalone | Meteoric Introduction [V26: Meteoric Introduction (compile-only)] | COMPILES | — | single | not-granted | — | — |
-| hero-standalone | Ray of Agonizing Self-Reflection [V26: Ray of Agonizing Self-Reflection (compile-only)] | COMPILES_WITH_REMAINDER | yes | single | not-granted | — | potency:R < SYM slowed (save ends) |
-| hero-standalone | Ripples in the Earth | COMPILES_WITH_REMAINDER | — | area | not-granted | — | effect-paragraph:effect; potency:M < SYM prone |
-| hero-standalone | Test of Rain | COMPILES_WITH_REMAINDER | — | area | not-granted | — | effect-paragraph:effect |
+| hero-standalone | Invigorating Growth | COMPILES_WITH_REMAINDER | — | single | selectable | class.elementalist.ability-3@1:selectable, class.elementalist.ability-3@2:selectable, class.elementalist.ability-3@3:selectable | effect-paragraph:effect |
+| hero-standalone | Meteoric Introduction [V26: Meteoric Introduction (compile-only)] | COMPILES | — | single | selectable | class.elementalist.signature-abilities@1:selectable, class.elementalist.signature-abilities@2:selectable, class.elementalist.signature-abilities@3:selectable | — |
+| hero-standalone | Ray of Agonizing Self-Reflection [V26: Ray of Agonizing Self-Reflection (compile-only)] | COMPILES_WITH_REMAINDER | yes | single | selectable | class.elementalist.signature-abilities@1:selectable, class.elementalist.signature-abilities@2:selectable, class.elementalist.signature-abilities@3:selectable | potency:R < SYM slowed (save ends) |
+| hero-standalone | Ripples in the Earth | COMPILES_WITH_REMAINDER | — | area | selectable | class.elementalist.ability-3@1:selectable, class.elementalist.ability-3@2:selectable, class.elementalist.ability-3@3:selectable | effect-paragraph:effect; potency:M < SYM prone |
+| hero-standalone | Test of Rain | COMPILES_WITH_REMAINDER | — | area | selectable | class.elementalist.ability-5@1:selectable, class.elementalist.ability-5@2:selectable, class.elementalist.ability-5@3:selectable | effect-paragraph:effect |
 | hero-standalone | The Flesh, a Crucible | COMPILES_WITH_REMAINDER | — | single | selectable | class.elementalist.ability-3@1:selectable, class.elementalist.ability-3@2:selectable, class.elementalist.ability-3@3:selectable | effect-paragraph:persistent N |
-| hero-standalone | The Green Within, the Green Without | COMPILES_WITH_REMAINDER | — | single | not-granted | — | effect-paragraph:effect |
-| hero-standalone | Unquiet Ground | COMPILES_WITH_REMAINDER | — | area | not-granted | — | effect-paragraph:effect |
+| hero-standalone | The Green Within, the Green Without | COMPILES_WITH_REMAINDER | — | single | selectable | class.elementalist.signature-abilities@1:selectable, class.elementalist.signature-abilities@2:selectable, class.elementalist.signature-abilities@3:selectable | effect-paragraph:effect |
+| hero-standalone | Unquiet Ground | COMPILES_WITH_REMAINDER | — | area | selectable | class.elementalist.signature-abilities@1:selectable, class.elementalist.signature-abilities@2:selectable, class.elementalist.signature-abilities@3:selectable | effect-paragraph:effect |
 | hero-standalone | Viscous Fire [V26: Viscous Fire] | COMPILES | — | single | selectable | class.elementalist.signature-abilities@1:selectable, class.elementalist.signature-abilities@2:selectable, class.elementalist.signature-abilities@3:selectable | — |
 | hero-standalone | Back! | COMPILES | — | area | selectable | class.fury.ability-3@1:selectable, class.fury.ability-3@2:selectable, class.fury.ability-3@3:selectable | — |
 | hero-standalone | Blood for Blood! | COMPILES_WITH_REMAINDER | — | single | selectable | class.fury.ability-5@1:selectable, class.fury.ability-5@2:selectable, class.fury.ability-5@3:selectable | effect-paragraph:effect; potency:M < SYM bleeding and weakened (save ends) |
@@ -215,16 +215,16 @@ Availability is derived from the composed wizard definitions (`getDefinitions(1)
 | hero-standalone | Sermon of Grace | no-power-roll | selectable | no-power-roll; effect-paragraph:effect |
 | hero-standalone | Word of Guidance | no-power-roll | selectable | no-power-roll; trigger; effect-paragraph:effect; resource-spend:spend N piety |
 | hero-standalone | Word of Judgment | no-power-roll | selectable | no-power-roll; trigger; effect-paragraph:effect; resource-spend:spend N piety |
-| hero-standalone | Breath of Dawn Remembered | no-power-roll | not-granted | no-power-roll; trigger; effect-paragraph:effect; resource-spend:spend N+ essence |
+| hero-standalone | Breath of Dawn Remembered | no-power-roll | selectable | no-power-roll; trigger; effect-paragraph:effect; resource-spend:spend N+ essence |
 | hero-standalone | Explosive Assistance | no-power-roll | selectable | no-power-roll; trigger; effect-paragraph:effect; resource-spend:spend N essence |
-| hero-standalone | Instantaneous Excavation | tier1-damage-outside-grammar | not-granted | effect-paragraph:effect; effect-paragraph:persistent N; tier:the target can shift N square from the edge of the hole to the nearest unoccupied space of their choice; tier:the target falls into the hole; tier:the target falls into the hole and can't reduce the height of the fall |
-| hero-standalone | Motivate Earth | no-power-roll | not-granted | no-power-roll; effect-paragraph:effect |
-| hero-standalone | No More Than a Breeze | no-power-roll | not-granted | no-power-roll; effect-paragraph:effect; effect-paragraph:persistent N |
+| hero-standalone | Instantaneous Excavation | tier1-damage-outside-grammar | selectable | effect-paragraph:effect; effect-paragraph:persistent N; tier:the target can shift N square from the edge of the hole to the nearest unoccupied space of their choice; tier:the target falls into the hole; tier:the target falls into the hole and can't reduce the height of the fall |
+| hero-standalone | Motivate Earth | no-power-roll | selectable | no-power-roll; effect-paragraph:effect |
+| hero-standalone | No More Than a Breeze | no-power-roll | selectable | no-power-roll; effect-paragraph:effect; effect-paragraph:persistent N |
 | hero-standalone | Practical Magic | no-power-roll | selectable | no-power-roll; effect-paragraph:effect |
 | hero-standalone | Return to Formlessness | no-power-roll | selectable | no-power-roll; effect-paragraph:effect |
-| hero-standalone | Shared Void Sense | no-power-roll | not-granted | no-power-roll; effect-paragraph:effect |
-| hero-standalone | Skin Like Castle Walls | no-power-roll | not-granted | no-power-roll; trigger; effect-paragraph:effect; resource-spend:spend N essence |
-| hero-standalone | Subtle Relocation | no-power-roll | not-granted | no-power-roll; trigger; effect-paragraph:effect; resource-spend:spend N essence |
+| hero-standalone | Shared Void Sense | no-power-roll | selectable | no-power-roll; effect-paragraph:effect |
+| hero-standalone | Skin Like Castle Walls | no-power-roll | selectable | no-power-roll; trigger; effect-paragraph:effect; resource-spend:spend N essence |
+| hero-standalone | Subtle Relocation | no-power-roll | selectable | no-power-roll; trigger; effect-paragraph:effect; resource-spend:spend N essence |
 | hero-standalone | Furious Change | no-power-roll | selectable | no-power-roll; trigger; effect-paragraph:effect; resource-spend:spend N ferocity |
 | hero-standalone | Lines of Force | no-power-roll | selectable | no-power-roll; trigger; effect-paragraph:effect; resource-spend:spend N ferocity |
 | hero-standalone | Make Peace With Your God! | no-power-roll | selectable | no-power-roll; effect-paragraph:effect |

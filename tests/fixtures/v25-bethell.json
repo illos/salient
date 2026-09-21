@@ -147,7 +147,14 @@
       "Practical Magic: Additional Square",
       "Explosive Assistance: Enhance",
       "The Flesh, a Crucible: Persistent Effect",
-      "Conflagration: Persistent Effect"
+      "Conflagration: Persistent Effect",
+      "Hurl Element: Acid",
+      "Hurl Element: Cold",
+      "Hurl Element: Corruption",
+      "Hurl Element: Fire",
+      "Hurl Element: Lightning",
+      "Hurl Element: Poison",
+      "Hurl Element: Sonic"
     ],
     "damageImmunities": {
       "corruption": 3

@@ -52,7 +52,7 @@ const withoutResource = (state: Saved['liveState']) => {
 const cid = () => crypto.randomUUID();
 export async function runElementalist({ actors: { director, peer }, run, runId }: ScenarioContext) {
   await run(
-    'Elementalist: five specialization builds, pruning and fifty-two actions persist',
+    'Elementalist: five specialization builds, pruning and fifty-nine actions persist',
     async () => {
       const { definitions } = await director.query<{ definitions: DecisionDefinitions }>(
         'characterWizard:discover',
@@ -245,7 +245,6 @@ export async function runElementalist({ actors: { director, peer }, run, runId }
               await invoke(lowId, 'adjust.stamina', { value: 24 });
             const used = await invoke(id, 'ability.use', {
               ability: name,
-              ...(name === 'Hurl Element' ? { damageType: 'fire' } : {}),
               targets:
                 name === 'Bifurcated Incineration'
                   ? [target, { refKind: 'character', id: lowId }]
@@ -261,6 +260,8 @@ export async function runElementalist({ actors: { director, peer }, run, runId }
               const outcome = result.targets[0]!;
               const damage = rolled.damageByTier[outcome.tier - 1]!;
               assert.equal(outcome.damage?.rolledDamage ?? 0, damage, name);
+              if ('damageType' in rolled)
+                assert.equal(outcome.damage?.damageType, rolled.damageType);
               assert.equal(after.liveState?.stamina, before.liveState!.stamina - damage, name);
               if ('compiledCondition' in rolled) {
                 const readback = await director.query<{ compiled?: PublicCompiledResult }[]>(
@@ -323,7 +324,7 @@ export async function runElementalist({ actors: { director, peer }, run, runId }
             }
           }
         }
-        assert.equal(usedNames.size, 52, '25 source abilities and 27 embedded actions');
+        assert.equal(usedNames.size, 59, '25 source abilities and 34 typed/embedded actions');
         await invoke(lowId, 'adjust.stamina', { value: 24 });
         const applied = await invoke(ids[3]!, 'ability.use', {
           ability: 'Ray of Agonizing Self-Reflection',

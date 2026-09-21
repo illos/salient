@@ -2,7 +2,7 @@
   "schemaVersion": "v104-source-1",
   "compendiumRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
   "sourceRoot": "vendor/steel-compendium/en/unified/md",
-  "method": "Independent pinned source tables, ENGINE audit. Handwritten expectations; no evaluator output. Human Soldier background reused. Hurl chooses fire; Battle equipment remains manual, so no unconditional bonus.",
+  "method": "Independent pinned source tables, ENGINE audit. Handwritten expectations; no evaluator output. Human Soldier background reused. All seven Hurl damage types independently checked; Battle equipment remains manual, so no unconditional bonus.",
   "paidSourceCosts": {
     "Behold the Mystery": 3,
     "Invigorating Growth": 3,
@@ -135,7 +135,14 @@
           "The Flesh, a Crucible",
           "Conflagration",
           "The Flesh, a Crucible: Persistent Effect",
-          "Conflagration: Persistent Effect"
+          "Conflagration: Persistent Effect",
+          "Hurl Element: Acid",
+          "Hurl Element: Cold",
+          "Hurl Element: Corruption",
+          "Hurl Element: Fire",
+          "Hurl Element: Lightning",
+          "Hurl Element: Poison",
+          "Hurl Element: Sonic"
         ]
       },
       "classActions": [
@@ -156,15 +163,16 @@
         "The Flesh, a Crucible",
         "Conflagration",
         "The Flesh, a Crucible: Persistent Effect",
-        "Conflagration: Persistent Effect"
+        "Conflagration: Persistent Effect",
+        "Hurl Element: Acid",
+        "Hurl Element: Cold",
+        "Hurl Element: Corruption",
+        "Hurl Element: Fire",
+        "Hurl Element: Lightning",
+        "Hurl Element: Poison",
+        "Hurl Element: Sonic"
       ],
       "rolledActions": [
-        {
-          "name": "Hurl Element",
-          "damageByTier": [6, 8, 10],
-          "manualRemainder": "choose|damage type",
-          "source": "feature/ability/elementalist/level-1/hurl-element.md"
-        },
         {
           "name": "Bifurcated Incineration",
           "damageByTier": [4, 6, 8],
@@ -189,6 +197,55 @@
           "damageByTier": [6, 8, 12],
           "manualRemainder": "persistent|turn",
           "source": "feature/ability/elementalist/level-1/conflagration.md"
+        },
+        {
+          "name": "Hurl Element: Acid",
+          "damageByTier": [5, 7, 9],
+          "manualRemainder": "damage type|choose",
+          "damageType": "acid",
+          "source": "feature/ability/elementalist/level-1/hurl-element.md"
+        },
+        {
+          "name": "Hurl Element: Cold",
+          "damageByTier": [5, 7, 9],
+          "manualRemainder": "damage type|choose",
+          "damageType": "cold",
+          "source": "feature/ability/elementalist/level-1/hurl-element.md"
+        },
+        {
+          "name": "Hurl Element: Corruption",
+          "damageByTier": [5, 7, 9],
+          "manualRemainder": "damage type|choose",
+          "damageType": "corruption",
+          "source": "feature/ability/elementalist/level-1/hurl-element.md"
+        },
+        {
+          "name": "Hurl Element: Fire",
+          "damageByTier": [6, 8, 10],
+          "manualRemainder": "damage type|choose",
+          "damageType": "fire",
+          "source": "feature/ability/elementalist/level-1/hurl-element.md"
+        },
+        {
+          "name": "Hurl Element: Lightning",
+          "damageByTier": [5, 7, 9],
+          "manualRemainder": "damage type|choose",
+          "damageType": "lightning",
+          "source": "feature/ability/elementalist/level-1/hurl-element.md"
+        },
+        {
+          "name": "Hurl Element: Poison",
+          "damageByTier": [5, 7, 9],
+          "manualRemainder": "damage type|choose",
+          "damageType": "poison",
+          "source": "feature/ability/elementalist/level-1/hurl-element.md"
+        },
+        {
+          "name": "Hurl Element: Sonic",
+          "damageByTier": [5, 7, 9],
+          "manualRemainder": "damage type|choose",
+          "damageType": "sonic",
+          "source": "feature/ability/elementalist/level-1/hurl-element.md"
         }
       ],
       "citations": [
@@ -306,7 +363,14 @@
           "Ripples in the Earth",
           "Instantaneous Excavation",
           "Ripples in the Earth: Raise Pillar",
-          "Instantaneous Excavation: Persistent Effect"
+          "Instantaneous Excavation: Persistent Effect",
+          "Hurl Element: Acid",
+          "Hurl Element: Cold",
+          "Hurl Element: Corruption",
+          "Hurl Element: Fire",
+          "Hurl Element: Lightning",
+          "Hurl Element: Poison",
+          "Hurl Element: Sonic"
         ]
       },
       "classActions": [
@@ -328,15 +392,16 @@
         "Ripples in the Earth",
         "Instantaneous Excavation",
         "Ripples in the Earth: Raise Pillar",
-        "Instantaneous Excavation: Persistent Effect"
+        "Instantaneous Excavation: Persistent Effect",
+        "Hurl Element: Acid",
+        "Hurl Element: Cold",
+        "Hurl Element: Corruption",
+        "Hurl Element: Fire",
+        "Hurl Element: Lightning",
+        "Hurl Element: Poison",
+        "Hurl Element: Sonic"
       ],
       "rolledActions": [
-        {
-          "name": "Hurl Element",
-          "damageByTier": [4, 6, 8],
-          "manualRemainder": "choose|damage type",
-          "source": "feature/ability/elementalist/level-1/hurl-element.md"
-        },
         {
           "name": "Meteoric Introduction",
           "damageByTier": [5, 7, 10],
@@ -355,6 +420,55 @@
           "damageByTier": [3, 5, 8],
           "manualRemainder": "pillar|ground",
           "source": "feature/ability/elementalist/level-1/ripples-in-the-earth.md"
+        },
+        {
+          "name": "Hurl Element: Acid",
+          "damageByTier": [4, 6, 8],
+          "manualRemainder": "damage type|choose",
+          "damageType": "acid",
+          "source": "feature/ability/elementalist/level-1/hurl-element.md"
+        },
+        {
+          "name": "Hurl Element: Cold",
+          "damageByTier": [4, 6, 8],
+          "manualRemainder": "damage type|choose",
+          "damageType": "cold",
+          "source": "feature/ability/elementalist/level-1/hurl-element.md"
+        },
+        {
+          "name": "Hurl Element: Corruption",
+          "damageByTier": [4, 6, 8],
+          "manualRemainder": "damage type|choose",
+          "damageType": "corruption",
+          "source": "feature/ability/elementalist/level-1/hurl-element.md"
+        },
+        {
+          "name": "Hurl Element: Fire",
+          "damageByTier": [4, 6, 8],
+          "manualRemainder": "damage type|choose",
+          "damageType": "fire",
+          "source": "feature/ability/elementalist/level-1/hurl-element.md"
+        },
+        {
+          "name": "Hurl Element: Lightning",
+          "damageByTier": [4, 6, 8],
+          "manualRemainder": "damage type|choose",
+          "damageType": "lightning",
+          "source": "feature/ability/elementalist/level-1/hurl-element.md"
+        },
+        {
+          "name": "Hurl Element: Poison",
+          "damageByTier": [4, 6, 8],
+          "manualRemainder": "damage type|choose",
+          "damageType": "poison",
+          "source": "feature/ability/elementalist/level-1/hurl-element.md"
+        },
+        {
+          "name": "Hurl Element: Sonic",
+          "damageByTier": [4, 6, 8],
+          "manualRemainder": "damage type|choose",
+          "damageType": "sonic",
+          "source": "feature/ability/elementalist/level-1/hurl-element.md"
         }
       ],
       "citations": [
@@ -479,7 +593,14 @@
           "The Green Within, the Green Without: Slide",
           "Invigorating Growth: Remove Mushrooms",
           "Test of Rain: End Effect",
-          "Ward of Nature's Affection: Retaliate"
+          "Ward of Nature's Affection: Retaliate",
+          "Hurl Element: Acid",
+          "Hurl Element: Cold",
+          "Hurl Element: Corruption",
+          "Hurl Element: Fire",
+          "Hurl Element: Lightning",
+          "Hurl Element: Poison",
+          "Hurl Element: Sonic"
         ]
       },
       "classActions": [
@@ -504,15 +625,16 @@
         "The Green Within, the Green Without: Slide",
         "Invigorating Growth: Remove Mushrooms",
         "Test of Rain: End Effect",
-        "Ward of Nature's Affection: Retaliate"
+        "Ward of Nature's Affection: Retaliate",
+        "Hurl Element: Acid",
+        "Hurl Element: Cold",
+        "Hurl Element: Corruption",
+        "Hurl Element: Fire",
+        "Hurl Element: Lightning",
+        "Hurl Element: Poison",
+        "Hurl Element: Sonic"
       ],
       "rolledActions": [
-        {
-          "name": "Hurl Element",
-          "damageByTier": [4, 6, 8],
-          "manualRemainder": "choose|damage type",
-          "source": "feature/ability/elementalist/level-1/hurl-element.md"
-        },
         {
           "name": "Afflict a Bountiful Decay",
           "damageByTier": [4, 6, 8],
@@ -536,6 +658,55 @@
           "damageByTier": [4, 6, 10],
           "manualRemainder": "end|effect",
           "source": "feature/ability/elementalist/level-1/test-of-rain.md"
+        },
+        {
+          "name": "Hurl Element: Acid",
+          "damageByTier": [4, 6, 8],
+          "manualRemainder": "damage type|choose",
+          "damageType": "acid",
+          "source": "feature/ability/elementalist/level-1/hurl-element.md"
+        },
+        {
+          "name": "Hurl Element: Cold",
+          "damageByTier": [4, 6, 8],
+          "manualRemainder": "damage type|choose",
+          "damageType": "cold",
+          "source": "feature/ability/elementalist/level-1/hurl-element.md"
+        },
+        {
+          "name": "Hurl Element: Corruption",
+          "damageByTier": [4, 6, 8],
+          "manualRemainder": "damage type|choose",
+          "damageType": "corruption",
+          "source": "feature/ability/elementalist/level-1/hurl-element.md"
+        },
+        {
+          "name": "Hurl Element: Fire",
+          "damageByTier": [4, 6, 8],
+          "manualRemainder": "damage type|choose",
+          "damageType": "fire",
+          "source": "feature/ability/elementalist/level-1/hurl-element.md"
+        },
+        {
+          "name": "Hurl Element: Lightning",
+          "damageByTier": [4, 6, 8],
+          "manualRemainder": "damage type|choose",
+          "damageType": "lightning",
+          "source": "feature/ability/elementalist/level-1/hurl-element.md"
+        },
+        {
+          "name": "Hurl Element: Poison",
+          "damageByTier": [4, 6, 8],
+          "manualRemainder": "damage type|choose",
+          "damageType": "poison",
+          "source": "feature/ability/elementalist/level-1/hurl-element.md"
+        },
+        {
+          "name": "Hurl Element: Sonic",
+          "damageByTier": [4, 6, 8],
+          "manualRemainder": "damage type|choose",
+          "damageType": "sonic",
+          "source": "feature/ability/elementalist/level-1/hurl-element.md"
         }
       ],
       "citations": [
@@ -658,7 +829,14 @@
           "Grasp of Beyond: Teleport",
           "Behold the Mystery: Persistent Effect",
           "No More Than a Breeze: Persistent Effect",
-          "Ward of Surprising Reactivity: Retaliate"
+          "Ward of Surprising Reactivity: Retaliate",
+          "Hurl Element: Acid",
+          "Hurl Element: Cold",
+          "Hurl Element: Corruption",
+          "Hurl Element: Fire",
+          "Hurl Element: Lightning",
+          "Hurl Element: Poison",
+          "Hurl Element: Sonic"
         ]
       },
       "classActions": [
@@ -681,15 +859,16 @@
         "Grasp of Beyond: Teleport",
         "Behold the Mystery: Persistent Effect",
         "No More Than a Breeze: Persistent Effect",
-        "Ward of Surprising Reactivity: Retaliate"
+        "Ward of Surprising Reactivity: Retaliate",
+        "Hurl Element: Acid",
+        "Hurl Element: Cold",
+        "Hurl Element: Corruption",
+        "Hurl Element: Fire",
+        "Hurl Element: Lightning",
+        "Hurl Element: Poison",
+        "Hurl Element: Sonic"
       ],
       "rolledActions": [
-        {
-          "name": "Hurl Element",
-          "damageByTier": [4, 6, 8],
-          "manualRemainder": "choose|damage type",
-          "source": "feature/ability/elementalist/level-1/hurl-element.md"
-        },
         {
           "name": "Grasp of Beyond",
           "damageByTier": [5, 8, 11],
@@ -708,6 +887,55 @@
           "damageByTier": [2, 4, 6],
           "manualRemainder": "persistent|turn",
           "source": "feature/ability/elementalist/level-1/behold-the-mystery.md"
+        },
+        {
+          "name": "Hurl Element: Acid",
+          "damageByTier": [4, 6, 8],
+          "manualRemainder": "damage type|choose",
+          "damageType": "acid",
+          "source": "feature/ability/elementalist/level-1/hurl-element.md"
+        },
+        {
+          "name": "Hurl Element: Cold",
+          "damageByTier": [4, 6, 8],
+          "manualRemainder": "damage type|choose",
+          "damageType": "cold",
+          "source": "feature/ability/elementalist/level-1/hurl-element.md"
+        },
+        {
+          "name": "Hurl Element: Corruption",
+          "damageByTier": [4, 6, 8],
+          "manualRemainder": "damage type|choose",
+          "damageType": "corruption",
+          "source": "feature/ability/elementalist/level-1/hurl-element.md"
+        },
+        {
+          "name": "Hurl Element: Fire",
+          "damageByTier": [4, 6, 8],
+          "manualRemainder": "damage type|choose",
+          "damageType": "fire",
+          "source": "feature/ability/elementalist/level-1/hurl-element.md"
+        },
+        {
+          "name": "Hurl Element: Lightning",
+          "damageByTier": [4, 6, 8],
+          "manualRemainder": "damage type|choose",
+          "damageType": "lightning",
+          "source": "feature/ability/elementalist/level-1/hurl-element.md"
+        },
+        {
+          "name": "Hurl Element: Poison",
+          "damageByTier": [4, 6, 8],
+          "manualRemainder": "damage type|choose",
+          "damageType": "poison",
+          "source": "feature/ability/elementalist/level-1/hurl-element.md"
+        },
+        {
+          "name": "Hurl Element: Sonic",
+          "damageByTier": [4, 6, 8],
+          "manualRemainder": "damage type|choose",
+          "damageType": "sonic",
+          "source": "feature/ability/elementalist/level-1/hurl-element.md"
         }
       ],
       "citations": [
@@ -826,7 +1054,14 @@
           "No More Than a Breeze",
           "Grasp of Beyond: Teleport",
           "Behold the Mystery: Persistent Effect",
-          "No More Than a Breeze: Persistent Effect"
+          "No More Than a Breeze: Persistent Effect",
+          "Hurl Element: Acid",
+          "Hurl Element: Cold",
+          "Hurl Element: Corruption",
+          "Hurl Element: Fire",
+          "Hurl Element: Lightning",
+          "Hurl Element: Poison",
+          "Hurl Element: Sonic"
         ]
       },
       "classActions": [
@@ -849,15 +1084,16 @@
         "No More Than a Breeze",
         "Grasp of Beyond: Teleport",
         "Behold the Mystery: Persistent Effect",
-        "No More Than a Breeze: Persistent Effect"
+        "No More Than a Breeze: Persistent Effect",
+        "Hurl Element: Acid",
+        "Hurl Element: Cold",
+        "Hurl Element: Corruption",
+        "Hurl Element: Fire",
+        "Hurl Element: Lightning",
+        "Hurl Element: Poison",
+        "Hurl Element: Sonic"
       ],
       "rolledActions": [
-        {
-          "name": "Hurl Element",
-          "damageByTier": [4, 6, 8],
-          "manualRemainder": "choose|damage type",
-          "source": "feature/ability/elementalist/level-1/hurl-element.md"
-        },
         {
           "name": "Grasp of Beyond",
           "damageByTier": [5, 8, 11],
@@ -875,6 +1111,55 @@
           "damageByTier": [2, 4, 6],
           "manualRemainder": "persistent|turn",
           "source": "feature/ability/elementalist/level-1/behold-the-mystery.md"
+        },
+        {
+          "name": "Hurl Element: Acid",
+          "damageByTier": [4, 6, 8],
+          "manualRemainder": "damage type|choose",
+          "damageType": "acid",
+          "source": "feature/ability/elementalist/level-1/hurl-element.md"
+        },
+        {
+          "name": "Hurl Element: Cold",
+          "damageByTier": [4, 6, 8],
+          "manualRemainder": "damage type|choose",
+          "damageType": "cold",
+          "source": "feature/ability/elementalist/level-1/hurl-element.md"
+        },
+        {
+          "name": "Hurl Element: Corruption",
+          "damageByTier": [4, 6, 8],
+          "manualRemainder": "damage type|choose",
+          "damageType": "corruption",
+          "source": "feature/ability/elementalist/level-1/hurl-element.md"
+        },
+        {
+          "name": "Hurl Element: Fire",
+          "damageByTier": [4, 6, 8],
+          "manualRemainder": "damage type|choose",
+          "damageType": "fire",
+          "source": "feature/ability/elementalist/level-1/hurl-element.md"
+        },
+        {
+          "name": "Hurl Element: Lightning",
+          "damageByTier": [4, 6, 8],
+          "manualRemainder": "damage type|choose",
+          "damageType": "lightning",
+          "source": "feature/ability/elementalist/level-1/hurl-element.md"
+        },
+        {
+          "name": "Hurl Element: Poison",
+          "damageByTier": [4, 6, 8],
+          "manualRemainder": "damage type|choose",
+          "damageType": "poison",
+          "source": "feature/ability/elementalist/level-1/hurl-element.md"
+        },
+        {
+          "name": "Hurl Element: Sonic",
+          "damageByTier": [4, 6, 8],
+          "manualRemainder": "damage type|choose",
+          "damageType": "sonic",
+          "source": "feature/ability/elementalist/level-1/hurl-element.md"
         }
       ],
       "citations": [

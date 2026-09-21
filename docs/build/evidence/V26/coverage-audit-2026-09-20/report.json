@@ -1,6 +1,6 @@
 {
   "generator": "scripts/audit-ability-grammar.ts v1",
-  "contentHash": "sha256:81a631bfa49ba52e9f52ed5fbbd1ba3a571a1417339b22f0e74ef570ede97887",
+  "contentHash": "sha256:5d2ca9b833cc7595ce30490edb47feca2904e44f1e5e1ba2ab5bb7e8052b99b5",
   "foesEdition": "bf262edf546e91e1540cc17489915f18c4873ddd8bd8e225b20f3441e3f74f30",
   "sourceRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
   "totals": {
@@ -41,8 +41,8 @@
     }
   },
   "grants": {
-    "total": 945,
-    "resolvedToStandalone": 522,
+    "total": 996,
+    "resolvedToStandalone": 573,
     "resolvedToKit": 75,
     "ownText": 348,
     "unresolved": []
@@ -3959,7 +3959,36 @@
         "withinV26Bounded": false,
         "targetShape": "single"
       },
-      "availability": "not-granted"
+      "grants": [
+        {
+          "name": "Afflict a Bountiful Decay",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/afflict-a-bountiful-decay.md",
+          "decisionId": "class.elementalist.signature-abilities",
+          "level": 1,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Afflict a Bountiful Decay supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Afflict a Bountiful Decay",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/afflict-a-bountiful-decay.md",
+          "decisionId": "class.elementalist.signature-abilities",
+          "level": 2,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Afflict a Bountiful Decay supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Afflict a Bountiful Decay",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/afflict-a-bountiful-decay.md",
+          "decisionId": "class.elementalist.signature-abilities",
+          "level": 3,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Afflict a Bountiful Decay supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
     },
     {
       "corpus": "hero-standalone",
@@ -4010,7 +4039,36 @@
         "withinV26Bounded": false,
         "targetShape": "area"
       },
-      "availability": "not-granted"
+      "grants": [
+        {
+          "name": "Behold the Mystery",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/behold-the-mystery.md",
+          "decisionId": "class.elementalist.ability-3",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Behold the Mystery supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Behold the Mystery",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/behold-the-mystery.md",
+          "decisionId": "class.elementalist.ability-3",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Behold the Mystery supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Behold the Mystery",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/behold-the-mystery.md",
+          "decisionId": "class.elementalist.ability-3",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Behold the Mystery supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
     },
     {
       "corpus": "hero-standalone",
@@ -4123,7 +4181,36 @@
         "withinV26Bounded": false,
         "targetShape": "unknown"
       },
-      "availability": "not-granted"
+      "grants": [
+        {
+          "name": "Breath of Dawn Remembered",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/breath-of-dawn-remembered.md",
+          "decisionId": "class.elementalist.specialization",
+          "level": 1,
+          "grantKind": "aspect-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Green supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Breath of Dawn Remembered",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/breath-of-dawn-remembered.md",
+          "decisionId": "class.elementalist.specialization",
+          "level": 2,
+          "grantKind": "aspect-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Green supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Breath of Dawn Remembered",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/breath-of-dawn-remembered.md",
+          "decisionId": "class.elementalist.specialization",
+          "level": 3,
+          "grantKind": "aspect-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Green supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
     },
     {
       "corpus": "hero-standalone",
@@ -4326,7 +4413,36 @@
         "withinV26Bounded": false,
         "targetShape": "single"
       },
-      "availability": "not-granted"
+      "grants": [
+        {
+          "name": "Grasp of Beyond",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/grasp-of-beyond.md",
+          "decisionId": "class.elementalist.signature-abilities",
+          "level": 1,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Grasp of Beyond supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Grasp of Beyond",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/grasp-of-beyond.md",
+          "decisionId": "class.elementalist.signature-abilities",
+          "level": 2,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Grasp of Beyond supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Grasp of Beyond",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/grasp-of-beyond.md",
+          "decisionId": "class.elementalist.signature-abilities",
+          "level": 3,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Grasp of Beyond supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
     },
     {
       "corpus": "hero-standalone",
@@ -4458,7 +4574,36 @@
         "withinV26Bounded": false,
         "targetShape": "unknown"
       },
-      "availability": "not-granted"
+      "grants": [
+        {
+          "name": "Instantaneous Excavation",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/instantaneous-excavation.md",
+          "decisionId": "class.elementalist.ability-5",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Instantaneous Excavation supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Instantaneous Excavation",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/instantaneous-excavation.md",
+          "decisionId": "class.elementalist.ability-5",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Instantaneous Excavation supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Instantaneous Excavation",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/instantaneous-excavation.md",
+          "decisionId": "class.elementalist.ability-5",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Instantaneous Excavation supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
     },
     {
       "corpus": "hero-standalone",
@@ -4512,7 +4657,36 @@
         "withinV26Bounded": false,
         "targetShape": "single"
       },
-      "availability": "not-granted"
+      "grants": [
+        {
+          "name": "Invigorating Growth",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/invigorating-growth.md",
+          "decisionId": "class.elementalist.ability-3",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Invigorating Growth supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Invigorating Growth",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/invigorating-growth.md",
+          "decisionId": "class.elementalist.ability-3",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Invigorating Growth supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Invigorating Growth",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/invigorating-growth.md",
+          "decisionId": "class.elementalist.ability-3",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Invigorating Growth supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
     },
     {
       "corpus": "hero-standalone",
@@ -4558,7 +4732,36 @@
         "withinV26Bounded": false,
         "targetShape": "single"
       },
-      "availability": "not-granted",
+      "grants": [
+        {
+          "name": "Meteoric Introduction",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/meteoric-introduction.md",
+          "decisionId": "class.elementalist.signature-abilities",
+          "level": 1,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Meteoric Introduction supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Meteoric Introduction",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/meteoric-introduction.md",
+          "decisionId": "class.elementalist.signature-abilities",
+          "level": 2,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Meteoric Introduction supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Meteoric Introduction",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/meteoric-introduction.md",
+          "decisionId": "class.elementalist.signature-abilities",
+          "level": 3,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Meteoric Introduction supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable",
       "v26": {
         "label": "Meteoric Introduction (compile-only)",
         "expected": "COMPILES",
@@ -4592,7 +4795,36 @@
         "withinV26Bounded": false,
         "targetShape": "unknown"
       },
-      "availability": "not-granted"
+      "grants": [
+        {
+          "name": "Motivate Earth",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/motivate-earth.md",
+          "decisionId": "class.elementalist.specialization",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Earth supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Motivate Earth",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/motivate-earth.md",
+          "decisionId": "class.elementalist.specialization",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Earth supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Motivate Earth",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/motivate-earth.md",
+          "decisionId": "class.elementalist.specialization",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Earth supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
     },
     {
       "corpus": "hero-standalone",
@@ -4628,7 +4860,36 @@
         "withinV26Bounded": false,
         "targetShape": "unknown"
       },
-      "availability": "not-granted"
+      "grants": [
+        {
+          "name": "No More Than a Breeze",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/no-more-than-a-breeze.md",
+          "decisionId": "class.elementalist.ability-5",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option No More Than a Breeze supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "No More Than a Breeze",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/no-more-than-a-breeze.md",
+          "decisionId": "class.elementalist.ability-5",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option No More Than a Breeze supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "No More Than a Breeze",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/no-more-than-a-breeze.md",
+          "decisionId": "class.elementalist.ability-5",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option No More Than a Breeze supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
     },
     {
       "corpus": "hero-standalone",
@@ -4754,7 +5015,36 @@
         "withinV26Bounded": true,
         "targetShape": "single"
       },
-      "availability": "not-granted",
+      "grants": [
+        {
+          "name": "Ray of Agonizing Self-Reflection",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/ray-of-agonizing-self-reflection.md",
+          "decisionId": "class.elementalist.signature-abilities",
+          "level": 1,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Ray of Agonizing Self-Reflection supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Ray of Agonizing Self-Reflection",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/ray-of-agonizing-self-reflection.md",
+          "decisionId": "class.elementalist.signature-abilities",
+          "level": 2,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Ray of Agonizing Self-Reflection supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Ray of Agonizing Self-Reflection",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/ray-of-agonizing-self-reflection.md",
+          "decisionId": "class.elementalist.signature-abilities",
+          "level": 3,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Ray of Agonizing Self-Reflection supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable",
       "v26": {
         "label": "Ray of Agonizing Self-Reflection (compile-only)",
         "expected": "COMPILES_WITH_REMAINDER",
@@ -4872,7 +5162,36 @@
         "withinV26Bounded": false,
         "targetShape": "area"
       },
-      "availability": "not-granted"
+      "grants": [
+        {
+          "name": "Ripples in the Earth",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/ripples-in-the-earth.md",
+          "decisionId": "class.elementalist.ability-3",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Ripples in the Earth supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Ripples in the Earth",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/ripples-in-the-earth.md",
+          "decisionId": "class.elementalist.ability-3",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Ripples in the Earth supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Ripples in the Earth",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/ripples-in-the-earth.md",
+          "decisionId": "class.elementalist.ability-3",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Ripples in the Earth supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
     },
     {
       "corpus": "hero-standalone",
@@ -4901,7 +5220,36 @@
         "withinV26Bounded": false,
         "targetShape": "unknown"
       },
-      "availability": "not-granted"
+      "grants": [
+        {
+          "name": "Shared Void Sense",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/shared-void-sense.md",
+          "decisionId": "class.elementalist.specialization",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Void supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Shared Void Sense",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/shared-void-sense.md",
+          "decisionId": "class.elementalist.specialization",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Void supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Shared Void Sense",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/shared-void-sense.md",
+          "decisionId": "class.elementalist.specialization",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Void supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
     },
     {
       "corpus": "hero-standalone",
@@ -4942,7 +5290,36 @@
         "withinV26Bounded": false,
         "targetShape": "unknown"
       },
-      "availability": "not-granted"
+      "grants": [
+        {
+          "name": "Skin Like Castle Walls",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/skin-like-castle-walls.md",
+          "decisionId": "class.elementalist.specialization",
+          "level": 1,
+          "grantKind": "aspect-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Earth supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Skin Like Castle Walls",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/skin-like-castle-walls.md",
+          "decisionId": "class.elementalist.specialization",
+          "level": 2,
+          "grantKind": "aspect-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Earth supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Skin Like Castle Walls",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/skin-like-castle-walls.md",
+          "decisionId": "class.elementalist.specialization",
+          "level": 3,
+          "grantKind": "aspect-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Earth supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
     },
     {
       "corpus": "hero-standalone",
@@ -4983,7 +5360,36 @@
         "withinV26Bounded": false,
         "targetShape": "unknown"
       },
-      "availability": "not-granted"
+      "grants": [
+        {
+          "name": "Subtle Relocation",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/subtle-relocation.md",
+          "decisionId": "class.elementalist.specialization",
+          "level": 1,
+          "grantKind": "aspect-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Void supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Subtle Relocation",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/subtle-relocation.md",
+          "decisionId": "class.elementalist.specialization",
+          "level": 2,
+          "grantKind": "aspect-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Void supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Subtle Relocation",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/subtle-relocation.md",
+          "decisionId": "class.elementalist.specialization",
+          "level": 3,
+          "grantKind": "aspect-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Void supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
     },
     {
       "corpus": "hero-standalone",
@@ -5034,7 +5440,36 @@
         "withinV26Bounded": false,
         "targetShape": "area"
       },
-      "availability": "not-granted"
+      "grants": [
+        {
+          "name": "Test of Rain",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/test-of-rain.md",
+          "decisionId": "class.elementalist.ability-5",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Test of Rain supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Test of Rain",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/test-of-rain.md",
+          "decisionId": "class.elementalist.ability-5",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Test of Rain supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Test of Rain",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/test-of-rain.md",
+          "decisionId": "class.elementalist.ability-5",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Test of Rain supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
     },
     {
       "corpus": "hero-standalone",
@@ -5167,7 +5602,36 @@
         "withinV26Bounded": false,
         "targetShape": "single"
       },
-      "availability": "not-granted"
+      "grants": [
+        {
+          "name": "The Green Within, the Green Without",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/the-green-within-the-green-without.md",
+          "decisionId": "class.elementalist.signature-abilities",
+          "level": 1,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option The Green Within, the Green Without supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "The Green Within, the Green Without",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/the-green-within-the-green-without.md",
+          "decisionId": "class.elementalist.signature-abilities",
+          "level": 2,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option The Green Within, the Green Without supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "The Green Within, the Green Without",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/the-green-within-the-green-without.md",
+          "decisionId": "class.elementalist.signature-abilities",
+          "level": 3,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option The Green Within, the Green Without supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
     },
     {
       "corpus": "hero-standalone",
@@ -5214,7 +5678,36 @@
         "withinV26Bounded": false,
         "targetShape": "area"
       },
-      "availability": "not-granted"
+      "grants": [
+        {
+          "name": "Unquiet Ground",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/unquiet-ground.md",
+          "decisionId": "class.elementalist.signature-abilities",
+          "level": 1,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Unquiet Ground supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Unquiet Ground",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/unquiet-ground.md",
+          "decisionId": "class.elementalist.signature-abilities",
+          "level": 2,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Unquiet Ground supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Unquiet Ground",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/unquiet-ground.md",
+          "decisionId": "class.elementalist.signature-abilities",
+          "level": 3,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Unquiet Ground supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
     },
     {
       "corpus": "hero-standalone",
@@ -84128,7 +84621,7 @@
       "actual": "COMPILES",
       "agrees": true,
       "id": "mcdm.heroes.v1/feature.ability.elementalist.level-1/meteoric-introduction",
-      "availability": "not-granted",
+      "availability": "selectable",
       "note": "damage + Reason then push; no live grant"
     },
     {
@@ -84137,7 +84630,7 @@
       "actual": "COMPILES_WITH_REMAINDER",
       "agrees": true,
       "id": "mcdm.heroes.v1/feature.ability.elementalist.level-1/ray-of-agonizing-self-reflection",
-      "availability": "not-granted",
+      "availability": "selectable",
       "note": "symbolic potency/slowed/save remainder; no live grant"
     },
     {

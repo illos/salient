@@ -717,8 +717,9 @@ async function abilityView(
   const perkSource = perkAbilitySource(ability);
   const itemSource = startingItemAbilitySource(ability);
   const complicationSource = complicationAbilitySource(ability);
+  const elementalistSource = elementalistAbilitySource(ability);
   const tacticianSource =
-    elementalistAbilitySource(ability) ??
+    elementalistSource ??
     nullAbilitySource(ability) ??
     troubadourAbilitySource(ability) ??
     furyAbilitySource(ability) ??
@@ -734,29 +735,31 @@ async function abilityView(
     row && (ability.kind === 'kit-signature' || perkSource?.embedded)
       ? extractEmbeddedAbility(row.text, ability.name)
       : null;
-  const metadata = tacticianSource
-    ? {
-        keywords: [],
-        actionType: tacticianSource.actionType,
-        ...(tacticianSource.trigger ? { trigger: tacticianSource.trigger } : {}),
-        ...(tacticianSource.cost ? { cost: tacticianSource.cost } : {}),
-        effects: [{ label: 'Effect', text: tacticianSource.text }],
-      }
-    : complicationSource
-      ? complicationAbilityMetadata(complicationSource, ability)
-      : traitAbility
-        ? {
-            keywords: [],
-            actionType: traitAbility.actionType,
-            ...(traitAbility.trigger ? { trigger: traitAbility.trigger } : {}),
-            effects: [{ label: 'Effect', text: traitAbility.quote }],
-            ...(perkSource?.cost ? { cost: perkSource.cost } : {}),
-          }
-        : embedded?.ok
-          ? embedded.metadata
-          : row && row.kind === 'ability'
-            ? metadataOf(row)
-            : { keywords: [] };
+  const metadata = elementalistSource?.damageType
+    ? metadataOf(row)
+    : tacticianSource
+      ? {
+          keywords: [],
+          actionType: tacticianSource.actionType,
+          ...(tacticianSource.trigger ? { trigger: tacticianSource.trigger } : {}),
+          ...(tacticianSource.cost ? { cost: tacticianSource.cost } : {}),
+          effects: [{ label: 'Effect', text: tacticianSource.text }],
+        }
+      : complicationSource
+        ? complicationAbilityMetadata(complicationSource, ability)
+        : traitAbility
+          ? {
+              keywords: [],
+              actionType: traitAbility.actionType,
+              ...(traitAbility.trigger ? { trigger: traitAbility.trigger } : {}),
+              effects: [{ label: 'Effect', text: traitAbility.quote }],
+              ...(perkSource?.cost ? { cost: perkSource.cost } : {}),
+            }
+          : embedded?.ok
+            ? embedded.metadata
+            : row && row.kind === 'ability'
+              ? metadataOf(row)
+              : { keywords: [] };
   const { provenance, ...rest } = ability;
   const facts = { name: ability.name, keywords: metadata.keywords };
   const buildModifiers = metadata.roll

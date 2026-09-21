@@ -1,6 +1,6 @@
 {
   "generator": "V72/1",
-  "contentHash": "sha256:81a631bfa49ba52e9f52ed5fbbd1ba3a571a1417339b22f0e74ef570ede97887",
+  "contentHash": "sha256:5d2ca9b833cc7595ce30490edb47feca2904e44f1e5e1ba2ab5bb7e8052b99b5",
   "sourceRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
   "foesEdition": "bf262edf546e91e1540cc17489915f18c4873ddd8bd8e225b20f3441e3f74f30",
   "scope": "Structural support, current grant/loading availability and live execution are separate. Source drift never silently falls back; historical results are never recompiled on read.",
@@ -16393,9 +16393,37 @@
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
-      "grants": [],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Afflict a Bountiful Decay",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/afflict-a-bountiful-decay.md",
+          "decisionId": "class.elementalist.signature-abilities",
+          "level": 1,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Afflict a Bountiful Decay supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Afflict a Bountiful Decay",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/afflict-a-bountiful-decay.md",
+          "decisionId": "class.elementalist.signature-abilities",
+          "level": 2,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Afflict a Bountiful Decay supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Afflict a Bountiful Decay",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/afflict-a-bountiful-decay.md",
+          "decisionId": "class.elementalist.signature-abilities",
+          "level": 3,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Afflict a Bountiful Decay supportedInV001=true; chain selectable"
+        }
+      ],
       "movementFacts": "No compiled push."
     },
     {
@@ -16480,9 +16508,37 @@
           "message": "Only the designed single-target envelope is eligible."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
-      "grants": [],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Behold the Mystery",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/behold-the-mystery.md",
+          "decisionId": "class.elementalist.ability-3",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Behold the Mystery supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Behold the Mystery",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/behold-the-mystery.md",
+          "decisionId": "class.elementalist.ability-3",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Behold the Mystery supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Behold the Mystery",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/behold-the-mystery.md",
+          "decisionId": "class.elementalist.ability-3",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Behold the Mystery supportedInV001=true; chain selectable"
+        }
+      ],
       "movementFacts": "No compiled push."
     },
     {
@@ -16669,9 +16725,37 @@
           "message": "Unrecognized action type."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
-      "grants": [],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Breath of Dawn Remembered",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/breath-of-dawn-remembered.md",
+          "decisionId": "class.elementalist.specialization",
+          "level": 1,
+          "grantKind": "aspect-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Green supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Breath of Dawn Remembered",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/breath-of-dawn-remembered.md",
+          "decisionId": "class.elementalist.specialization",
+          "level": 2,
+          "grantKind": "aspect-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Green supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Breath of Dawn Remembered",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/breath-of-dawn-remembered.md",
+          "decisionId": "class.elementalist.specialization",
+          "level": 3,
+          "grantKind": "aspect-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Green supportedInV001=true; chain selectable"
+        }
+      ],
       "movementFacts": "No compiled push."
     },
     {
@@ -16986,9 +17070,37 @@
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
-      "grants": [],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Grasp of Beyond",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/grasp-of-beyond.md",
+          "decisionId": "class.elementalist.signature-abilities",
+          "level": 1,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Grasp of Beyond supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Grasp of Beyond",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/grasp-of-beyond.md",
+          "decisionId": "class.elementalist.signature-abilities",
+          "level": 2,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Grasp of Beyond supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Grasp of Beyond",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/grasp-of-beyond.md",
+          "decisionId": "class.elementalist.signature-abilities",
+          "level": 3,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Grasp of Beyond supportedInV001=true; chain selectable"
+        }
+      ],
       "movementFacts": "No compiled push."
     },
     {
@@ -17212,9 +17324,37 @@
           "message": "Only the designed single-target envelope is eligible."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
-      "grants": [],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Instantaneous Excavation",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/instantaneous-excavation.md",
+          "decisionId": "class.elementalist.ability-5",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Instantaneous Excavation supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Instantaneous Excavation",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/instantaneous-excavation.md",
+          "decisionId": "class.elementalist.ability-5",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Instantaneous Excavation supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Instantaneous Excavation",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/instantaneous-excavation.md",
+          "decisionId": "class.elementalist.ability-5",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Instantaneous Excavation supportedInV001=true; chain selectable"
+        }
+      ],
       "movementFacts": "No compiled push."
     },
     {
@@ -17296,9 +17436,37 @@
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
-      "grants": [],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Invigorating Growth",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/invigorating-growth.md",
+          "decisionId": "class.elementalist.ability-3",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Invigorating Growth supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Invigorating Growth",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/invigorating-growth.md",
+          "decisionId": "class.elementalist.ability-3",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Invigorating Growth supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Invigorating Growth",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/invigorating-growth.md",
+          "decisionId": "class.elementalist.ability-3",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Invigorating Growth supportedInV001=true; chain selectable"
+        }
+      ],
       "movementFacts": "No compiled push."
     },
     {
@@ -17384,9 +17552,37 @@
       ],
       "sections": [],
       "diagnostics": [],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
-      "grants": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
+      "grants": [
+        {
+          "name": "Meteoric Introduction",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/meteoric-introduction.md",
+          "decisionId": "class.elementalist.signature-abilities",
+          "level": 1,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Meteoric Introduction supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Meteoric Introduction",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/meteoric-introduction.md",
+          "decisionId": "class.elementalist.signature-abilities",
+          "level": 2,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Meteoric Introduction supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Meteoric Introduction",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/meteoric-introduction.md",
+          "decisionId": "class.elementalist.signature-abilities",
+          "level": 3,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Meteoric Introduction supportedInV001=true; chain selectable"
+        }
+      ],
       "movementFacts": "Known precise sizes/stability; final movement coverage remains explicit missing/manual work."
     },
     {
@@ -17480,9 +17676,37 @@
           "message": "Only the designed single-target envelope is eligible."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
-      "grants": [],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Motivate Earth",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/motivate-earth.md",
+          "decisionId": "class.elementalist.specialization",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Earth supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Motivate Earth",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/motivate-earth.md",
+          "decisionId": "class.elementalist.specialization",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Earth supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Motivate Earth",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/motivate-earth.md",
+          "decisionId": "class.elementalist.specialization",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Earth supportedInV001=true; chain selectable"
+        }
+      ],
       "movementFacts": "No compiled push."
     },
     {
@@ -17549,9 +17773,37 @@
           "message": "Only the designed single-target envelope is eligible."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
-      "grants": [],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "No More Than a Breeze",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/no-more-than-a-breeze.md",
+          "decisionId": "class.elementalist.ability-5",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option No More Than a Breeze supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "No More Than a Breeze",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/no-more-than-a-breeze.md",
+          "decisionId": "class.elementalist.ability-5",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option No More Than a Breeze supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "No More Than a Breeze",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/no-more-than-a-breeze.md",
+          "decisionId": "class.elementalist.ability-5",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option No More Than a Breeze supportedInV001=true; chain selectable"
+        }
+      ],
       "movementFacts": "No compiled push."
     },
     {
@@ -17824,9 +18076,37 @@
       ],
       "sections": [],
       "diagnostics": [],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
-      "grants": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
+      "grants": [
+        {
+          "name": "Ray of Agonizing Self-Reflection",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/ray-of-agonizing-self-reflection.md",
+          "decisionId": "class.elementalist.signature-abilities",
+          "level": 1,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Ray of Agonizing Self-Reflection supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Ray of Agonizing Self-Reflection",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/ray-of-agonizing-self-reflection.md",
+          "decisionId": "class.elementalist.signature-abilities",
+          "level": 2,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Ray of Agonizing Self-Reflection supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Ray of Agonizing Self-Reflection",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/ray-of-agonizing-self-reflection.md",
+          "decisionId": "class.elementalist.signature-abilities",
+          "level": 3,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Ray of Agonizing Self-Reflection supportedInV001=true; chain selectable"
+        }
+      ],
       "movementFacts": "No compiled push."
     },
     {
@@ -18005,9 +18285,37 @@
           "message": "Only the designed single-target envelope is eligible."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
-      "grants": [],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Ripples in the Earth",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/ripples-in-the-earth.md",
+          "decisionId": "class.elementalist.ability-3",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Ripples in the Earth supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Ripples in the Earth",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/ripples-in-the-earth.md",
+          "decisionId": "class.elementalist.ability-3",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Ripples in the Earth supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Ripples in the Earth",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/ripples-in-the-earth.md",
+          "decisionId": "class.elementalist.ability-3",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Ripples in the Earth supportedInV001=true; chain selectable"
+        }
+      ],
       "movementFacts": "No compiled push."
     },
     {
@@ -18059,9 +18367,37 @@
           "message": "Only the designed single-target envelope is eligible."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
-      "grants": [],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Shared Void Sense",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/shared-void-sense.md",
+          "decisionId": "class.elementalist.specialization",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Void supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Shared Void Sense",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/shared-void-sense.md",
+          "decisionId": "class.elementalist.specialization",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Void supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Shared Void Sense",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/shared-void-sense.md",
+          "decisionId": "class.elementalist.specialization",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Void supportedInV001=true; chain selectable"
+        }
+      ],
       "movementFacts": "No compiled push."
     },
     {
@@ -18149,9 +18485,37 @@
           "message": "Unrecognized action type."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
-      "grants": [],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Skin Like Castle Walls",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/skin-like-castle-walls.md",
+          "decisionId": "class.elementalist.specialization",
+          "level": 1,
+          "grantKind": "aspect-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Earth supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Skin Like Castle Walls",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/skin-like-castle-walls.md",
+          "decisionId": "class.elementalist.specialization",
+          "level": 2,
+          "grantKind": "aspect-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Earth supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Skin Like Castle Walls",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/skin-like-castle-walls.md",
+          "decisionId": "class.elementalist.specialization",
+          "level": 3,
+          "grantKind": "aspect-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Earth supportedInV001=true; chain selectable"
+        }
+      ],
       "movementFacts": "No compiled push."
     },
     {
@@ -18239,9 +18603,37 @@
           "message": "Unrecognized action type."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
-      "grants": [],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Subtle Relocation",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/subtle-relocation.md",
+          "decisionId": "class.elementalist.specialization",
+          "level": 1,
+          "grantKind": "aspect-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Void supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Subtle Relocation",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/subtle-relocation.md",
+          "decisionId": "class.elementalist.specialization",
+          "level": 2,
+          "grantKind": "aspect-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Void supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Subtle Relocation",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/subtle-relocation.md",
+          "decisionId": "class.elementalist.specialization",
+          "level": 3,
+          "grantKind": "aspect-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Void supportedInV001=true; chain selectable"
+        }
+      ],
       "movementFacts": "No compiled push."
     },
     {
@@ -18326,9 +18718,37 @@
           "message": "Only the designed single-target envelope is eligible."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
-      "grants": [],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Test of Rain",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/test-of-rain.md",
+          "decisionId": "class.elementalist.ability-5",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Test of Rain supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Test of Rain",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/test-of-rain.md",
+          "decisionId": "class.elementalist.ability-5",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Test of Rain supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Test of Rain",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/test-of-rain.md",
+          "decisionId": "class.elementalist.ability-5",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Test of Rain supportedInV001=true; chain selectable"
+        }
+      ],
       "movementFacts": "No compiled push."
     },
     {
@@ -18519,9 +18939,37 @@
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
-      "grants": [],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "The Green Within, the Green Without",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/the-green-within-the-green-without.md",
+          "decisionId": "class.elementalist.signature-abilities",
+          "level": 1,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option The Green Within, the Green Without supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "The Green Within, the Green Without",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/the-green-within-the-green-without.md",
+          "decisionId": "class.elementalist.signature-abilities",
+          "level": 2,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option The Green Within, the Green Without supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "The Green Within, the Green Without",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/the-green-within-the-green-without.md",
+          "decisionId": "class.elementalist.signature-abilities",
+          "level": 3,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option The Green Within, the Green Without supportedInV001=true; chain selectable"
+        }
+      ],
       "movementFacts": "No compiled push."
     },
     {
@@ -18603,9 +19051,37 @@
           "message": "Only the designed single-target envelope is eligible."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
-      "grants": [],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Unquiet Ground",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/unquiet-ground.md",
+          "decisionId": "class.elementalist.signature-abilities",
+          "level": 1,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Unquiet Ground supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Unquiet Ground",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/unquiet-ground.md",
+          "decisionId": "class.elementalist.signature-abilities",
+          "level": 2,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Unquiet Ground supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Unquiet Ground",
+          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/unquiet-ground.md",
+          "decisionId": "class.elementalist.signature-abilities",
+          "level": 3,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Unquiet Ground supportedInV001=true; chain selectable"
+        }
+      ],
       "movementFacts": "No compiled push."
     },
     {
@@ -182669,8 +183145,8 @@
     }
   ],
   "liveCounts": {
-    "compiled": 21,
-    "compatibility": 1395,
-    "compiledButUnavailable": 2
+    "compiled": 23,
+    "compatibility": 1410,
+    "compiledButUnavailable": 0
   }
 }
