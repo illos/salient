@@ -115,4 +115,12 @@ proves the scheduled continuation. The revised focused file passed all six tests
 2026-09-21: re-review found that pinned Better Auth itself applies a 100-row default to its
 unbounded list/revoke-other routes. The final repair follows explicit component cursors for reads
 and repeats a bounded mutation for revocation; a 102-session fixture proves neither path truncates.
-The candidate still requires final independent approval and a new TESTER gate.
+The seven focused account tests passed in 3.61 seconds, including that 102-session case. ENGINE's
+fresh-context review passed rebased candidate `d102db0`; together with Orchestrator's full-diff
+review, this closes every blocking finding.
+
+2026-09-21: TESTER passed rebased candidate `d102db0`: `CI=true pnpm check` completed 961 checks in
+169 seconds; isolated Convex push/codegen was ready in 2.9 seconds with no generated diff; and
+`pnpm test:headless:account` passed in 5.02 seconds, including the owned-campaign deletion
+readback. The backend was stopped and the tracked worktree was clean. Artifacts:
+`/srv/presidium/projects/salient/test-artifacts/V95-d102db0`.
