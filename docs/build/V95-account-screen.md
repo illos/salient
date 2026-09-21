@@ -124,3 +124,9 @@ review, this closes every blocking finding.
 `pnpm test:headless:account` passed in 5.02 seconds, including the owned-campaign deletion
 readback. The backend was stopped and the tracked worktree was clean. Artifacts:
 `/srv/presidium/projects/salient/test-artifacts/V95-d102db0`.
+
+2026-09-21: DEPLOY2 fast-forwarded reviewed tip `1115380` into main and published the backend
+and frontend successfully. Hosted build passed; Worker `72e2c950-8477-4c4a-895c-ed6b2c3026f1`.
+The accepted `d102db0` results were reused without smoke/live checks or test reruns. Content
+was unchanged, so no reseed was needed. Release logs:
+`/srv/presidium/projects/salient/test-artifacts/V95-release-1115380`.

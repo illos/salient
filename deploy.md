@@ -42,6 +42,7 @@ runtime update. Domains, accounts and paid plans remain separate from standing r
 
 | Job | Candidate | State | Next gate |
 | --- | --- | --- | --- |
+| V95 | `1115380` | Merged; backend/frontend published; accepted gates reused | complete |
 | V94 | `fcf13f1` | Merged and published; 1209 entries; accepted gates reused | complete; no deployment test gate |
 | V92 | `81b7931` | Merged and published; 1182 entries; hosted Shadow smoke passed | documentation closeout SHA and verified GitHub push recorded in completion handoff |
 | Stable-cloud reconciliation | `main` release source `a0a700a` | Published; targeted live checks passed | documentation closeout and verified GitHub push; exact closeout SHA in DEPLOY2 completion message |
@@ -156,3 +157,14 @@ Hosted build and frontend publication succeeded; Worker `c4b6b8f4-dd09-4706-934a
 The user removed the deployment smoke-test requirement in policy commit `c465eb6`; no post-deploy
 smoke, cohort, manifest readback or suite was run. Temporary credentials removed; private hosted
 helpers stopped. Logs: `/srv/presidium/projects/salient/test-artifacts/V94-release-fcf13f1`.
+
+### V95 account screen publication — 2026-09-21
+
+Reviewed owner tip `1115380d0411acae916a3c7a8936e46cad95f9da` fast-forwarded into main.
+Accepted TESTER results reused from unchanged runtime `d102db0`: full 961 checks, isolated
+Convex push/codegen and account headless journey. No tests rerun during deployment.
+Backend publication succeeded with the account indexes; hosted build and frontend publication
+succeeded. Worker `72e2c950-8477-4c4a-895c-ed6b2c3026f1` serves the account screen.
+Content remains the V94 snapshot (1209 entries); no reseed required. Temporary credentials
+removed and private hosted helpers stopped. No smoke/live test or automatic GitHub suite.
+Logs: `/srv/presidium/projects/salient/test-artifacts/V95-release-1115380`.
