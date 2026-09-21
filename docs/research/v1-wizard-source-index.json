@@ -2,7 +2,7 @@
   "purpose": "Source inventory only. Counts, metadata and advancement cells are not evaluated decision definitions, reviewed effects or implemented support.",
   "compendiumRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
   "forgeRevision": "5a846aadb623a9855a023e9403bb887a956c341f",
-  "scope": "Heroes book categories listed in categoryCounts. Core scope comes from the book-specific Git tree, not all unified records.",
+  "scope": "Heroes book categories listed in categoryCounts. Core scope comes from the book-specific Git tree, not all unified records. Class advancement also inventories Beastheart and Summoner under Q-CHAR-14, explicitly supplemental.",
   "categoryCounts": {
     "ancestry": 12,
     "career": 18,
@@ -18,6 +18,7 @@
   "classes": [
     {
       "slug": "censor",
+      "sourceScope": "core",
       "name": "Censor",
       "scc": "mcdm.heroes.v1/class/censor",
       "source": "vendor/steel-compendium/en/unified/md/class/censor.md",
@@ -195,6 +196,7 @@
     },
     {
       "slug": "conduit",
+      "sourceScope": "core",
       "name": "Conduit",
       "scc": "mcdm.heroes.v1/class/conduit",
       "source": "vendor/steel-compendium/en/unified/md/class/conduit.md",
@@ -361,6 +363,7 @@
     },
     {
       "slug": "elementalist",
+      "sourceScope": "core",
       "name": "Elementalist",
       "scc": "mcdm.heroes.v1/class/elementalist",
       "source": "vendor/steel-compendium/en/unified/md/class/elementalist.md",
@@ -533,6 +536,7 @@
     },
     {
       "slug": "fury",
+      "sourceScope": "core",
       "name": "Fury",
       "scc": "mcdm.heroes.v1/class/fury",
       "source": "vendor/steel-compendium/en/unified/md/class/fury.md",
@@ -713,6 +717,7 @@
     },
     {
       "slug": "null",
+      "sourceScope": "core",
       "name": "Null",
       "scc": "mcdm.heroes.v1/class/null",
       "source": "vendor/steel-compendium/en/unified/md/class/null.md",
@@ -896,6 +901,7 @@
     },
     {
       "slug": "shadow",
+      "sourceScope": "core",
       "name": "Shadow",
       "scc": "mcdm.heroes.v1/class/shadow",
       "source": "vendor/steel-compendium/en/unified/md/class/shadow.md",
@@ -1074,6 +1080,7 @@
     },
     {
       "slug": "tactician",
+      "sourceScope": "core",
       "name": "Tactician",
       "scc": "mcdm.heroes.v1/class/tactician",
       "source": "vendor/steel-compendium/en/unified/md/class/tactician.md",
@@ -1252,6 +1259,7 @@
     },
     {
       "slug": "talent",
+      "sourceScope": "core",
       "name": "Talent",
       "scc": "mcdm.heroes.v1/class/talent",
       "source": "vendor/steel-compendium/en/unified/md/class/talent.md",
@@ -1432,6 +1440,7 @@
     },
     {
       "slug": "troubadour",
+      "sourceScope": "core",
       "name": "Troubadour",
       "scc": "mcdm.heroes.v1/class/troubadour",
       "source": "vendor/steel-compendium/en/unified/md/class/troubadour.md",
@@ -1604,6 +1613,392 @@
             "mcdm.heroes.v1/feature.troubadour.level-10/greatest-of-all-time",
             "mcdm.heroes.v1/feature.troubadour.level-10/perk",
             "mcdm.heroes.v1/feature.troubadour.level-10/skill"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "beastheart",
+      "sourceScope": "supplemental (Q-CHAR-14)",
+      "name": "Beastheart",
+      "scc": "mcdm.beastheart.v1/class/beastheart",
+      "source": "vendor/steel-compendium/en/unified/md/class/beastheart.md",
+      "sourceBasics": {
+        "primary_characteristics": [
+          "Might",
+          "Intuition"
+        ],
+        "starting_stamina": 21,
+        "stamina_per_level": 12,
+        "recoveries": 12,
+        "weak_potency": "Might - 2",
+        "average_potency": "Might - 1",
+        "strong_potency": "Might",
+        "skills": [
+          "You gain the [Animal Handling](scc.v1:mcdm.heroes.v1/skill.interpersonal/handle-animals) skill. Then choose any two skills from the exploration or intrigue skill groups. (*Quick Build:* [Animal Handling](scc.v1:mcdm.heroes.v1/skill.interpersonal/handle-animals), [Navigate](scc.v1:mcdm.heroes.v1/skill.exploration/navigate), [Track](scc.v1:mcdm.heroes.v1/skill.intrigue/track).)"
+        ]
+      },
+      "forgeSource": "vendor/forge-steel/src/data/classes/beastheart/beastheart.ts",
+      "forgeSubclassCount": 1,
+      "forgeBranchReferences": [
+        {
+          "name": "Guardian",
+          "source": "vendor/forge-steel/src/data/classes/beastheart/guardian.ts"
+        },
+        {
+          "name": "Prowler",
+          "source": "vendor/forge-steel/src/data/classes/beastheart/prowler.ts"
+        },
+        {
+          "name": "Punisher",
+          "source": "vendor/forge-steel/src/data/classes/beastheart/punisher.ts"
+        },
+        {
+          "name": "Spark",
+          "source": "vendor/forge-steel/src/data/classes/beastheart/spark.ts"
+        }
+      ],
+      "advancement": [
+        {
+          "level": 1,
+          "sourceCells": [
+            "[Wild Nature](scc.v1:mcdm.beastheart.v1/feature.beastheart.level-1/wild-nature), [Companion](scc.v1:mcdm.beastheart.v1/feature.beastheart.level-1/companion), [Heart of the Beast](scc.v1:mcdm.beastheart.v1/feature.beastheart.level-1/heart-of-the-beast), [Feral Strike](scc.v1:mcdm.beastheart.v1/feature.ability.beastheart.level-1/feral-strike), [Ferocity](scc.v1:mcdm.beastheart.v1/feature.beastheart.level-1/ferocity), [Rampage](scc.v1:mcdm.beastheart.v1/feature.beastheart.level-1/rampage), [Wild Nature Maneuver](scc.v1:mcdm.beastheart.v1/feature.beastheart.level-1/wild-nature-maneuver), [Wild Nature Triggered Action](scc.v1:mcdm.beastheart.v1/feature.beastheart.level-1/wild-nature-triggered-action), [Kit](scc.v1:mcdm.beastheart.v1/feature.beastheart.level-1/kit), [Beastheart Abilities](scc.v1:mcdm.beastheart.v1/feature.beastheart.level-1/beastheart-abilities)",
+            "Signature, 3, 5",
+            "—"
+          ],
+          "references": [
+            "mcdm.beastheart.v1/feature.beastheart.level-1/wild-nature",
+            "mcdm.beastheart.v1/feature.beastheart.level-1/companion",
+            "mcdm.beastheart.v1/feature.beastheart.level-1/heart-of-the-beast",
+            "mcdm.beastheart.v1/feature.ability.beastheart.level-1/feral-strike",
+            "mcdm.beastheart.v1/feature.beastheart.level-1/ferocity",
+            "mcdm.beastheart.v1/feature.beastheart.level-1/rampage",
+            "mcdm.beastheart.v1/feature.beastheart.level-1/wild-nature-maneuver",
+            "mcdm.beastheart.v1/feature.beastheart.level-1/wild-nature-triggered-action",
+            "mcdm.beastheart.v1/feature.beastheart.level-1/kit",
+            "mcdm.beastheart.v1/feature.beastheart.level-1/beastheart-abilities"
+          ]
+        },
+        {
+          "level": 2,
+          "sourceCells": [
+            "[Perk](scc.v1:mcdm.beastheart.v1/feature.beastheart.level-2/perk), [Everyone’s Best Friend](scc.v1:mcdm.beastheart.v1/feature.beastheart.level-2/everyones-best-friend), [Wild Nature Feature](scc.v1:mcdm.beastheart.v1/feature.beastheart.level-2/2nd-level-wild-nature-feature), [Wild Nature Ability](scc.v1:mcdm.beastheart.v1/feature.beastheart.level-2/2nd-level-wild-nature-ability)",
+            "Signature, 3, 5",
+            "5"
+          ],
+          "references": [
+            "mcdm.beastheart.v1/feature.beastheart.level-2/perk",
+            "mcdm.beastheart.v1/feature.beastheart.level-2/everyones-best-friend",
+            "mcdm.beastheart.v1/feature.beastheart.level-2/2nd-level-wild-nature-feature",
+            "mcdm.beastheart.v1/feature.beastheart.level-2/2nd-level-wild-nature-ability"
+          ]
+        },
+        {
+          "level": 3,
+          "sourceCells": [
+            "[Companion Advancement Feature](scc.v1:mcdm.beastheart.v1/feature.beastheart.level-3/companion-advancement-feature), [7-Ferocity Ability](scc.v1:mcdm.beastheart.v1/feature.beastheart.level-3/7-ferocity-ability)",
+            "Signature, 3, 5, 7",
+            "5"
+          ],
+          "references": [
+            "mcdm.beastheart.v1/feature.beastheart.level-3/companion-advancement-feature",
+            "mcdm.beastheart.v1/feature.beastheart.level-3/7-ferocity-ability"
+          ]
+        },
+        {
+          "level": 4,
+          "sourceCells": [
+            "[Characteristic Increase](scc.v1:mcdm.beastheart.v1/feature.beastheart.level-4/characteristic-increase), [Perk](scc.v1:mcdm.beastheart.v1/feature.beastheart.level-4/perk), [Rampage Improvement](scc.v1:mcdm.beastheart.v1/feature.beastheart.level-4/rampage-improvement), [Skill](scc.v1:mcdm.beastheart.v1/feature.beastheart.level-4/skill), [Unleash the Beast](scc.v1:mcdm.beastheart.v1/feature.beastheart.level-4/unleash-the-beast)",
+            "Signature, 3, 5, 7",
+            "5"
+          ],
+          "references": [
+            "mcdm.beastheart.v1/feature.beastheart.level-4/characteristic-increase",
+            "mcdm.beastheart.v1/feature.beastheart.level-4/perk",
+            "mcdm.beastheart.v1/feature.beastheart.level-4/rampage-improvement",
+            "mcdm.beastheart.v1/feature.beastheart.level-4/skill",
+            "mcdm.beastheart.v1/feature.beastheart.level-4/unleash-the-beast"
+          ]
+        },
+        {
+          "level": 5,
+          "sourceCells": [
+            "[Wild Nature Feature](scc.v1:mcdm.beastheart.v1/feature.beastheart.level-5/5th-level-wild-nature-feature), [9-Ferocity Ability](scc.v1:mcdm.beastheart.v1/feature.beastheart.level-5/9-ferocity-ability)",
+            "Signature, 3, 5, 7, 9",
+            "5"
+          ],
+          "references": [
+            "mcdm.beastheart.v1/feature.beastheart.level-5/5th-level-wild-nature-feature",
+            "mcdm.beastheart.v1/feature.beastheart.level-5/9-ferocity-ability"
+          ]
+        },
+        {
+          "level": 6,
+          "sourceCells": [
+            "[Perk](scc.v1:mcdm.beastheart.v1/feature.beastheart.level-6/perk), [Become the Beast](scc.v1:mcdm.beastheart.v1/feature.beastheart.level-6/become-the-beast), [Wild Nature Ability](scc.v1:mcdm.beastheart.v1/feature.beastheart.level-6/6th-level-wild-nature-ability)",
+            "Signature, 3, 5, 7, 9",
+            "5, 9"
+          ],
+          "references": [
+            "mcdm.beastheart.v1/feature.beastheart.level-6/perk",
+            "mcdm.beastheart.v1/feature.beastheart.level-6/become-the-beast",
+            "mcdm.beastheart.v1/feature.beastheart.level-6/6th-level-wild-nature-ability"
+          ]
+        },
+        {
+          "level": 7,
+          "sourceCells": [
+            "[Characteristic Increase](scc.v1:mcdm.beastheart.v1/feature.beastheart.level-7/characteristic-increase), [Feral Heart](scc.v1:mcdm.beastheart.v1/feature.beastheart.level-7/feral-heart), [Rampage Improvement](scc.v1:mcdm.beastheart.v1/feature.beastheart.level-7/rampage-improvement), [Skill](scc.v1:mcdm.beastheart.v1/feature.beastheart.level-7/skill)",
+            "Signature, 3, 5, 7, 9",
+            "5, 9"
+          ],
+          "references": [
+            "mcdm.beastheart.v1/feature.beastheart.level-7/characteristic-increase",
+            "mcdm.beastheart.v1/feature.beastheart.level-7/feral-heart",
+            "mcdm.beastheart.v1/feature.beastheart.level-7/rampage-improvement",
+            "mcdm.beastheart.v1/feature.beastheart.level-7/skill"
+          ]
+        },
+        {
+          "level": 8,
+          "sourceCells": [
+            "[Wild Nature Feature](scc.v1:mcdm.beastheart.v1/feature.beastheart.level-8/8th-level-wild-nature-feature), [Perk](scc.v1:mcdm.beastheart.v1/feature.beastheart.level-8/perk), [11-Ferocity Ability](scc.v1:mcdm.beastheart.v1/feature.beastheart.level-8/11-ferocity-ability)",
+            "Signature, 3, 5, 7, 9, 11",
+            "5, 9"
+          ],
+          "references": [
+            "mcdm.beastheart.v1/feature.beastheart.level-8/8th-level-wild-nature-feature",
+            "mcdm.beastheart.v1/feature.beastheart.level-8/perk",
+            "mcdm.beastheart.v1/feature.beastheart.level-8/11-ferocity-ability"
+          ]
+        },
+        {
+          "level": 9,
+          "sourceCells": [
+            "[Avatar of the Green](scc.v1:mcdm.beastheart.v1/feature.beastheart.level-9/avatar-of-the-green), [Wild Nature Ability](scc.v1:mcdm.beastheart.v1/feature.beastheart.level-9/9th-level-wild-nature-ability)",
+            "Signature, 3, 5, 7, 9, 11",
+            "5, 9, 11"
+          ],
+          "references": [
+            "mcdm.beastheart.v1/feature.beastheart.level-9/avatar-of-the-green",
+            "mcdm.beastheart.v1/feature.beastheart.level-9/9th-level-wild-nature-ability"
+          ]
+        },
+        {
+          "level": 10,
+          "sourceCells": [
+            "[Characteristic Increase](scc.v1:mcdm.beastheart.v1/feature.beastheart.level-10/characteristic-increase), [Companion Advancement Feature](scc.v1:mcdm.beastheart.v1/feature.beastheart.level-10/companion-advancement-feature), [Final Evolution](scc.v1:mcdm.beastheart.v1/feature.beastheart.level-10/final-evolution), [Perk](scc.v1:mcdm.beastheart.v1/feature.beastheart.level-10/perk), [Ferox](scc.v1:mcdm.beastheart.v1/feature.beastheart.level-10/ferox), [Rampage Improvement](scc.v1:mcdm.beastheart.v1/feature.beastheart.level-10/rampage-improvement), [Skill](scc.v1:mcdm.beastheart.v1/feature.beastheart.level-10/skill)",
+            "Signature, 3, 5, 7, 9, 11",
+            "5, 9, 11"
+          ],
+          "references": [
+            "mcdm.beastheart.v1/feature.beastheart.level-10/characteristic-increase",
+            "mcdm.beastheart.v1/feature.beastheart.level-10/companion-advancement-feature",
+            "mcdm.beastheart.v1/feature.beastheart.level-10/final-evolution",
+            "mcdm.beastheart.v1/feature.beastheart.level-10/perk",
+            "mcdm.beastheart.v1/feature.beastheart.level-10/ferox",
+            "mcdm.beastheart.v1/feature.beastheart.level-10/rampage-improvement",
+            "mcdm.beastheart.v1/feature.beastheart.level-10/skill"
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "summoner",
+      "sourceScope": "supplemental (Q-CHAR-14)",
+      "name": "Summoner",
+      "scc": "mcdm.summoner.v1/class/summoner",
+      "source": "vendor/steel-compendium/en/unified/md/class/summoner.md",
+      "sourceBasics": {
+        "primary_characteristics": [
+          "Reason"
+        ],
+        "starting_stamina": 15,
+        "stamina_per_level": 6,
+        "recoveries": 8,
+        "weak_potency": "[Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) - 2",
+        "average_potency": "[Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) - 1",
+        "strong_potency": "[Reason](scc.v1:mcdm.heroes.v1/rule.character/reason)",
+        "skills": [
+          "You gain the [Magic](scc.v1:mcdm.heroes.v1/skill.lore/magic) and [Strategy](scc.v1:mcdm.heroes.v1/skill.lore/strategy) skills and can choose any two skills from the [intrigue](scc.v1:mcdm.heroes.v1/skill.group/intrigue) or [lore](scc.v1:mcdm.heroes.v1/skill.group/lore) skill groups. (*Quick Build:* [Eavesdrop](scc.v1:mcdm.heroes.v1/skill.intrigue/eavesdrop), [Magic](scc.v1:mcdm.heroes.v1/skill.lore/magic), [Monsters](scc.v1:mcdm.heroes.v1/skill.lore/monsters), [Strategy](scc.v1:mcdm.heroes.v1/skill.lore/strategy).)"
+        ]
+      },
+      "forgeSource": "vendor/forge-steel/src/data/classes/summoner/summoner.ts",
+      "forgeSubclassCount": 1,
+      "forgeBranchReferences": [
+        {
+          "name": "Circle of Blight",
+          "source": "vendor/forge-steel/src/data/classes/summoner/blight.ts"
+        },
+        {
+          "name": "Circle of Graves",
+          "source": "vendor/forge-steel/src/data/classes/summoner/graves.ts"
+        },
+        {
+          "name": "Circle of Spring",
+          "source": "vendor/forge-steel/src/data/classes/summoner/spring.ts"
+        },
+        {
+          "name": "Circle of Storms",
+          "source": "vendor/forge-steel/src/data/classes/summoner/storms.ts"
+        }
+      ],
+      "advancement": [
+        {
+          "level": 1,
+          "sourceCells": [
+            "[Minions](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minions), [Essence](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/essence), [Summoner Strike](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/summoner-strike), [Strike For Me](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/strike-for-me), [Minion Bridge](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/minion-bridge), [Formation](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/formation), [Quick Command](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/quick-command), [Summoner Abilities](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/summoner-abilities)",
+            "[Summoner Circle](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/summoner-circle), [Circle Features](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/1st-level-circle-features), [Portfolio](scc.v1:mcdm.summoner.v1/feature.summoner.level-1/portfolio)",
+            "1, 1, 3, 3",
+            "5"
+          ],
+          "references": [
+            "mcdm.summoner.v1/feature.summoner.level-1/minions",
+            "mcdm.summoner.v1/feature.summoner.level-1/essence",
+            "mcdm.summoner.v1/feature.summoner.level-1/summoner-strike",
+            "mcdm.summoner.v1/feature.summoner.level-1/strike-for-me",
+            "mcdm.summoner.v1/feature.summoner.level-1/minion-bridge",
+            "mcdm.summoner.v1/feature.summoner.level-1/formation",
+            "mcdm.summoner.v1/feature.summoner.level-1/quick-command",
+            "mcdm.summoner.v1/feature.summoner.level-1/summoner-abilities",
+            "mcdm.summoner.v1/feature.summoner.level-1/summoner-circle",
+            "mcdm.summoner.v1/feature.summoner.level-1/1st-level-circle-features",
+            "mcdm.summoner.v1/feature.summoner.level-1/portfolio"
+          ]
+        },
+        {
+          "level": 2,
+          "sourceCells": [
+            "[Perk](scc.v1:mcdm.summoner.v1/feature.summoner.level-2/perk)",
+            "[Summoner's Dominion](scc.v1:mcdm.summoner.v1/feature.summoner.level-2/summoners-dominion), [New Portfolio Minion](scc.v1:mcdm.summoner.v1/feature.summoner.level-2/new-portfolio-minion)",
+            "1, 1, 3, 3, 5",
+            "5"
+          ],
+          "references": [
+            "mcdm.summoner.v1/feature.summoner.level-2/perk",
+            "mcdm.summoner.v1/feature.summoner.level-2/summoners-dominion",
+            "mcdm.summoner.v1/feature.summoner.level-2/new-portfolio-minion"
+          ]
+        },
+        {
+          "level": 3,
+          "sourceCells": [
+            "[Summoner's Kit](scc.v1:mcdm.summoner.v1/feature.summoner.level-3/summoners-kit), [7-Essence Ability](scc.v1:mcdm.summoner.v1/feature.summoner.level-3/7-essence-ability)",
+            "—",
+            "1, 1, 3, 3, 5",
+            "5, 7"
+          ],
+          "references": [
+            "mcdm.summoner.v1/feature.summoner.level-3/summoners-kit",
+            "mcdm.summoner.v1/feature.summoner.level-3/7-essence-ability"
+          ]
+        },
+        {
+          "level": 4,
+          "sourceCells": [
+            "[Characteristic Increase](scc.v1:mcdm.summoner.v1/feature.summoner.level-4/characteristic-increase), [Minion Improvement](scc.v1:mcdm.summoner.v1/feature.summoner.level-4/minion-improvement), [Essence Salvage](scc.v1:mcdm.summoner.v1/feature.summoner.level-4/essence-salvage), [Minion Chain](scc.v1:mcdm.summoner.v1/feature.summoner.level-4/minion-chain), [Perk](scc.v1:mcdm.summoner.v1/feature.summoner.level-4/perk), [Skill](scc.v1:mcdm.summoner.v1/feature.summoner.level-4/skill)",
+            "—",
+            "1, 1, 3, 3, 5",
+            "5, 7"
+          ],
+          "references": [
+            "mcdm.summoner.v1/feature.summoner.level-4/characteristic-increase",
+            "mcdm.summoner.v1/feature.summoner.level-4/minion-improvement",
+            "mcdm.summoner.v1/feature.summoner.level-4/essence-salvage",
+            "mcdm.summoner.v1/feature.summoner.level-4/minion-chain",
+            "mcdm.summoner.v1/feature.summoner.level-4/perk",
+            "mcdm.summoner.v1/feature.summoner.level-4/skill"
+          ]
+        },
+        {
+          "level": 5,
+          "sourceCells": [
+            "—",
+            "[Circle Feature](scc.v1:mcdm.summoner.v1/feature.summoner.level-5/5th-level-circle-feature), [New Portfolio Minion](scc.v1:mcdm.summoner.v1/feature.summoner.level-5/new-portfolio-minion)",
+            "1, 1, 3, 3, 5, 7",
+            "5, 7"
+          ],
+          "references": [
+            "mcdm.summoner.v1/feature.summoner.level-5/5th-level-circle-feature",
+            "mcdm.summoner.v1/feature.summoner.level-5/new-portfolio-minion"
+          ]
+        },
+        {
+          "level": 6,
+          "sourceCells": [
+            "[Perk](scc.v1:mcdm.summoner.v1/feature.summoner.level-6/perk), [Minion Machinations](scc.v1:mcdm.summoner.v1/feature.summoner.level-6/minion-machinations), [Kit Improvement](scc.v1:mcdm.summoner.v1/feature.summoner.level-6/kit-improvement), [9-Essence Ability](scc.v1:mcdm.summoner.v1/feature.summoner.level-6/9-essence-ability)",
+            "[Return to the Source](scc.v1:mcdm.summoner.v1/feature.summoner.level-6/return-to-the-source)",
+            "1, 1, 3, 3, 5, 7",
+            "5, 7, 9"
+          ],
+          "references": [
+            "mcdm.summoner.v1/feature.summoner.level-6/perk",
+            "mcdm.summoner.v1/feature.summoner.level-6/minion-machinations",
+            "mcdm.summoner.v1/feature.summoner.level-6/kit-improvement",
+            "mcdm.summoner.v1/feature.summoner.level-6/9-essence-ability",
+            "mcdm.summoner.v1/feature.summoner.level-6/return-to-the-source"
+          ]
+        },
+        {
+          "level": 7,
+          "sourceCells": [
+            "[Characteristic Increase](scc.v1:mcdm.summoner.v1/feature.summoner.level-7/characteristic-increase), [Minion Improvement](scc.v1:mcdm.summoner.v1/feature.summoner.level-7/minion-improvement), [Font of Creation](scc.v1:mcdm.summoner.v1/feature.summoner.level-7/font-of-creation), [Their Life for Mine](scc.v1:mcdm.summoner.v1/feature.summoner.level-7/their-life-for-mine), [Skill](scc.v1:mcdm.summoner.v1/feature.summoner.level-7/skill)",
+            "—",
+            "1, 1, 3, 3, 5, 7",
+            "5, 7, 9"
+          ],
+          "references": [
+            "mcdm.summoner.v1/feature.summoner.level-7/characteristic-increase",
+            "mcdm.summoner.v1/feature.summoner.level-7/minion-improvement",
+            "mcdm.summoner.v1/feature.summoner.level-7/font-of-creation",
+            "mcdm.summoner.v1/feature.summoner.level-7/their-life-for-mine",
+            "mcdm.summoner.v1/feature.summoner.level-7/skill"
+          ]
+        },
+        {
+          "level": 8,
+          "sourceCells": [
+            "[Perk](scc.v1:mcdm.summoner.v1/feature.summoner.level-8/perk)",
+            "[Circle Feature](scc.v1:mcdm.summoner.v1/feature.summoner.level-8/8th-level-circle-feature), [Portfolio Champion](scc.v1:mcdm.summoner.v1/feature.summoner.level-8/portfolio-champion)",
+            "1, 1, 3, 3, 5, 7, 9",
+            "5, 7, 9"
+          ],
+          "references": [
+            "mcdm.summoner.v1/feature.summoner.level-8/perk",
+            "mcdm.summoner.v1/feature.summoner.level-8/8th-level-circle-feature",
+            "mcdm.summoner.v1/feature.summoner.level-8/portfolio-champion"
+          ]
+        },
+        {
+          "level": 9,
+          "sourceCells": [
+            "[Kit Improvement](scc.v1:mcdm.summoner.v1/feature.summoner.level-9/kit-improvement), [Steward of Two Worlds](scc.v1:mcdm.summoner.v1/feature.summoner.level-9/steward-of-two-worlds), [11-Essence Ability](scc.v1:mcdm.summoner.v1/feature.summoner.level-9/11-essence-ability)",
+            "—",
+            "1, 1, 3, 3, 5, 7, 9",
+            "5, 7, 9, 11"
+          ],
+          "references": [
+            "mcdm.summoner.v1/feature.summoner.level-9/kit-improvement",
+            "mcdm.summoner.v1/feature.summoner.level-9/steward-of-two-worlds",
+            "mcdm.summoner.v1/feature.summoner.level-9/11-essence-ability"
+          ]
+        },
+        {
+          "level": 10,
+          "sourceCells": [
+            "[Characteristic Increase](scc.v1:mcdm.summoner.v1/feature.summoner.level-10/characteristic-increase), [Minion Improvement](scc.v1:mcdm.summoner.v1/feature.summoner.level-10/minion-improvement), [Eidos](scc.v1:mcdm.summoner.v1/feature.summoner.level-10/eidos), [No Matter the Cost](scc.v1:mcdm.summoner.v1/feature.summoner.level-10/no-matter-the-cost), [Among Our Ranks](scc.v1:mcdm.summoner.v1/feature.summoner.level-10/among-our-ranks), [Perk](scc.v1:mcdm.summoner.v1/feature.summoner.level-10/perk), [Skill](scc.v1:mcdm.summoner.v1/feature.summoner.level-10/skill)",
+            "—",
+            "1, 1, 3, 3, 5, 7, 9",
+            "5, 7, 9, 11"
+          ],
+          "references": [
+            "mcdm.summoner.v1/feature.summoner.level-10/characteristic-increase",
+            "mcdm.summoner.v1/feature.summoner.level-10/minion-improvement",
+            "mcdm.summoner.v1/feature.summoner.level-10/eidos",
+            "mcdm.summoner.v1/feature.summoner.level-10/no-matter-the-cost",
+            "mcdm.summoner.v1/feature.summoner.level-10/among-our-ranks",
+            "mcdm.summoner.v1/feature.summoner.level-10/perk",
+            "mcdm.summoner.v1/feature.summoner.level-10/skill"
           ]
         }
       ]

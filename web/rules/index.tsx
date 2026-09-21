@@ -175,7 +175,9 @@ function Overview({ catalog }: { catalog: RulesCatalog }) {
             .sort((a, b) => (a.order ?? 0) - (b.order ?? 0))[0];
           return (
             <EntryLink key={book.id} entry={first} className={`rules-book rules-book-${book.id}`}>
-              <span className="rules-book-number">0{index + 1} / Core book</span>
+              <span className="rules-book-number">
+                0{index + 1} / {book.id === 'beastheart' ? 'Supplemental' : 'Core book'}
+              </span>
               <BookOpen size={30} strokeWidth={1.25} />
               <h3>{book.name}</h3>
               <p>{book.description}</p>

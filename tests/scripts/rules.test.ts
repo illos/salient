@@ -20,19 +20,25 @@ beforeAll(() => {
 }, 120_000);
 
 test('imports the complete core books with stable IDs and original-page metadata', () => {
-  expect(built.catalog.entries).toHaveLength(2614);
-  expect(built.catalog.entries.filter(e => e.kind === 'chapter')).toHaveLength(20);
-  const classes = built.catalog.entries.filter(e => e.kind === 'class');
+  const core = built.catalog.entries.filter(e => e.classification === 'core');
+  expect(core).toHaveLength(2614);
+  const supplemental = built.catalog.entries.filter(e => e.classification === 'supplemental');
+  expect(supplemental.length).toBeGreaterThan(0);
+  expect(supplemental.every(e => e.id.startsWith('mcdm.beastheart.v1/'))).toBe(true);
+  for (const entry of manifest.entries.filter(e => e.id.startsWith('mcdm.beastheart.v1/')))
+    expect(supplemental.some(e => e.id === entry.id)).toBe(true);
+  expect(core.filter(e => e.kind === 'chapter')).toHaveLength(20);
+  const classes = core.filter(e => e.kind === 'class');
   expect(classes).toHaveLength(9);
   expect(classes.some(e => /summoner|beastheart/i.test(e.name))).toBe(false);
   for (const entry of built.catalog.entries) {
     expect(entry.sourceUrl).toBe(`https://steelcompendium.io/v2/scc/${entry.id}/`);
-    expect(entry.sourcePath).toMatch(/^en\/books\/(heroes|monsters)\/md\//);
+    expect(entry.sourcePath).toMatch(/^en\/books\/(heroes|monsters|beastheart)\/md\//);
     expect(built.articles[entry.file]).toHaveLength(1);
     expect(built.articles[entry.file][0].id).toBe(entry.id);
   }
-  expect(new Set(built.catalog.entries.map(e => e.id)).size).toBe(2614);
-  expect(new Set(built.catalog.entries.map(e => e.path)).size).toBe(2614);
+  expect(new Set(built.catalog.entries.map(e => e.id)).size).toBe(built.catalog.entries.length);
+  expect(new Set(built.catalog.entries.map(e => e.path)).size).toBe(built.catalog.entries.length);
   const audit = JSON.parse(built.outputs.get('audit.json')!);
   expect(audit.unresolvedLinks).toEqual([]);
   expect(

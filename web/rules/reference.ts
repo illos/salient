@@ -14,7 +14,7 @@ export function sectionId(text: string): string {
 function relativeSource(path: string): string {
   return path
     .replace(/^vendor\/steel-compendium\//, '')
-    .replace(/^en\/(?:unified|books\/(?:heroes|monsters))\/md(?:-linked)?\//, '');
+    .replace(/^en\/(?:unified|books\/(?:heroes|monsters|beastheart))\/md(?:-linked)?\//, '');
 }
 
 const indexes = new WeakMap<

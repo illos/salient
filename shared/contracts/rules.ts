@@ -7,7 +7,7 @@ export interface RuleSummary {
   book: string;
   category: string;
   kind: string;
-  classification: 'core';
+  classification: 'core' | 'supplemental';
   order?: number;
   excerpt: string;
   excerptFile?: string;
