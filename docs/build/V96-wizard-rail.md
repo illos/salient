@@ -333,10 +333,20 @@ chosen; it needs its own slice and headless proof.
 
 ## Checkpoint, 2026-09-21
 
-Committed on `slice/V96` in `.worktrees/wizard-ui`, cut from main `1115380`. Not merged, not yet
-tested. UI3's audit findings are fixed above. Authoring checks on the branch tip: eslint and prettier over the tree, `tsc` for both
-projects, 418 Markdown links, vendor pins, and the five focused character suites (17 tests) pass.
-Handed to UI3 for audit, which routes to TESTER and DEPLOY2.
+UI3 owns `slice/V96` in `.worktrees/wizard-ui`; main publication closeout `bcc3f3e` is incorporated.
+Runtime fixes are committed at `71287a2`, independently reviewed PASS by WIZARD.2 on 2026-09-21.
+Authoring checks: both TypeScript projects exited 0; touched ESLint/Prettier checks exited 0;
+`node_modules/.bin/vitest run --project app tests/app/wizard-save-queue.test.ts
+tests/app/wizard-draft.test.ts` passed 7 tests in 2.52 s. Direct binaries avoid pnpm's attempted
+automatic reinstall through the shared node_modules link (that attempt aborted without installing).
+
+ENGINE's headless cohort is committed at `939a0a9` and wired as `wizard-draft` in
+`scripts/verify-character-headless.ts`. It exercises nameless create/resume, same-command retry,
+competing-create refusal, ownership isolation, explicit listing, Tactician primary-then-secondary
+grid transitions with overlap pruning and exclusions, and Fury/Shadow single-kit edits. Each save
+is followed by public-query readback. Full `CI=true pnpm check`, isolated schema/codegen push and
+`SALIENT_HEADLESS_COHORT=wizard-draft node scripts/verify-character-headless.ts` await TESTER.
+Browser scenarios remain in the backlog under the moratorium. Not yet merged or published.
 
 Two things an auditor should read first: **Flagged for audit** above, on the Tactician's two-kit
 grid, which is the one change that touches how a character option is chosen; and **Working

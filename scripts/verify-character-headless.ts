@@ -15,6 +15,7 @@ import { runCulturePresets } from './headless/culture-presets.ts';
 import { runComplicationChoices, runComplicationTable } from './headless/complication-actions.ts';
 import { runStartingRewards } from './headless/starting-rewards.ts';
 import { runStartingItems } from './headless/starting-items.ts';
+import { runWizardDraft } from './headless/wizard-draft.ts';
 
 // Each selected cohort invokes the original scenario, including all assertions and setup.
 const cohorts = {
@@ -25,6 +26,7 @@ const cohorts = {
   'complication-table': runComplicationTable,
   'starting-rewards': runStartingRewards,
   'starting-items': runStartingItems,
+  'wizard-draft': runWizardDraft,
 };
 const cohort = process.env.SALIENT_HEADLESS_COHORT ?? 'all';
 
