@@ -1,6 +1,6 @@
 {
   "compendiumRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
-  "derivation": "Independent source deltas from V98 source builds, not evaluator output. Shadow 18+6*(L-1); echelon2 multiplies kit Stamina by2, never damage. A becomes3, one other score+1 capped3. Potency1/2/3. Recovery floor(/3), winded floor(/2). All older options retained. Source tier damage plus A where printed and kit melee bonuses: Cloak1, Sniper0, Swashbuckler2. Timing-sensitive Into the Shadows/Puppet Strings record without premature damage; vials separate consumption. Exact all-tier conditions tested independently.",
+  "derivation": "Independent source deltas from V98 source builds, not evaluator output. Shadow 18+6*(L-1); echelon2 multiplies kit Stamina by2, never damage. A becomes3, one other score+1 capped3. Potency1/2/3. Recovery floor(/3), winded floor(/2). All older options retained. Source tier damage plus A where printed and kit melee bonuses: Cloak1, Sniper0, Swashbuckler2. Timing-sensitive Into the Shadows/Puppet Strings record without premature damage; vials separate consumption. New dazed and communication effects remain explicit manual remainders; no automatic condition application is claimed.",
   "sources": [
     "en/unified/md/class/shadow.md#Basics",
     "en/unified/md/feature/shadow/level-2/2nd-level-college-feature.md",
