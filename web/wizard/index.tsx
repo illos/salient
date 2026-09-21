@@ -950,8 +950,8 @@ function AssignmentEditor({
     <div className="flex flex-col gap-4">
       <p className="m-0 text-sm text-muted-foreground">
         {Object.keys(fixed).join(' and ')} {Object.keys(fixed).length === 1 ? 'is' : 'are'} fixed by{' '}
-        {String(selections['class.choice'])}. Place each remaining value in a blank characteristic,
-        or choose it by name.
+        {String(selections['class.choice'])}. Drag each remaining value onto a blank characteristic,
+        or drag a placed value from one characteristic to another.
       </p>
       <div className="flex items-center gap-3">
         <span className="text-sm text-muted-foreground">Remaining values</span>
@@ -1032,15 +1032,17 @@ function AssignmentEditor({
                   )}
                 />
               </span>
+              {/* No visible control: the tile is the whole interaction. The select stays for the
+                  keyboard and assistive technology, which cannot drag. */}
               <select
-                className="native-select h-8 w-14 px-2 text-sm"
+                className="sr-only"
                 aria-label={`Assign ${target}`}
                 value={placed ? String(score) : ''}
                 onChange={event =>
                   assign(target, event.target.value === '' ? null : Number(event.target.value))
                 }
               >
-                <option value="">–</option>
+                <option value="">Not assigned</option>
                 {[...new Set(array)].map(amount => (
                   <option
                     key={amount}
