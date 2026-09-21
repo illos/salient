@@ -34,3 +34,12 @@ Extend all Shadow colleges through target level six in the full build wizard and
 - TESTER accepted `542f452`: focused audit and all remaining gates passed, combining retained results for 1005 unique tests (402 engine +603 app/scripts). Isolated `SALIENT_HEADLESS_COHORT=shadow-level-six` exited0 in68.3s: eight core builds, two additional Spark admissions, all32 new uses, inherited damage and outside-combat waiver; level/college edits and state readback passed. Backend stopped, ports freed, checkout released clean. Artifacts `/srv/presidium/projects/salient/test-artifacts/V108-542f452`; earlier failed reports retained. This is resumed acceptance, not a claim of one uninterrupted full run.
 - [Independent source audit](audits/V108-shadow-source-audit.md) and [inherited-growth audit](audits/V108-inherited-growth-audit.md) retained. ENGINE bounded review passes `542f452`; production behavior unchanged from the reviewed provenance repair.
 - Frozen handoff to DEPLOY2: reuse these gates, run only required release build/publication, no smoke or suite reruns. No runtime configuration or schema migration needed.
+
+## Publication — 2026-09-21
+
+DEPLOY2 fast-forwarded reviewed `8744738` into main and published the backend, 1654-entry content
+snapshot and frontend. Backend/schema validation, hosted build and upload succeeded.
+Worker: `bcdeafc0-9b86-4fde-b3b4-c163b7a98a66`. Accepted resumed 1005-test gate and isolated
+32-new-use cohort results were reused; no smoke test or test rerun. Existing manual boundaries
+for forms, teleportation, potion consumption and conditions remain as recorded above. Release logs:
+`/srv/presidium/projects/salient/test-artifacts/V108-release-8744738`.

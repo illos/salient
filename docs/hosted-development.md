@@ -113,7 +113,14 @@ See [the release evidence](build/evidence/V43/hosted/README.md) for browser resu
 fixture limitations and deployment logs. Earlier Worker versions in slice records are historical.
 
 
-## Current release — V107 Summoner level one
+## Current release — V108 Shadow through level six
+
+Backend/frontend source `8744738c24003d2794f24cb5ef1637472665c26d` published on 2026-09-21 as
+Worker `bcdeafc0-9b86-4fde-b3b4-c163b7a98a66`. Backend/schema validation, content reseed
+(1654 entries), hosted build and upload succeeded. Accepted TESTER results reused; no smoke test
+or rerun. See [V108](build/V108-shadow-level-six.md) for manual boundaries and the [ledger](../deploy.md).
+
+## Previous release — V107 Summoner level one
 
 Backend/frontend source `ca190a99f9a0b895d394e1df7cbce464e7bc95ce` published on 2026-09-21 as
 Worker `e8b28ff3-da63-418d-904a-75be2a543d03`. Backend/schema validation, content reseed

@@ -42,6 +42,7 @@ runtime update. Domains, accounts and paid plans remain separate from standing r
 
 | Job | Candidate | State | Next gate |
 | --- | --- | --- | --- |
+| V108 | `8744738` | Merged; backend/content/frontend published; accepted gates reused | complete |
 | V107 | `ca190a9` | Merged; backend/content/frontend published; accepted gates reused | complete |
 | V106 | `34a8b48` | Merged; backend/content/frontend published; accepted gates reused | complete |
 | V105 | `465814b` | Merged; backend/content/frontend published; accepted gates reused | complete |
@@ -311,3 +312,14 @@ upload succeeded. Worker `e8b28ff3-da63-418d-904a-75be2a543d03`.
 No smoke tests or test reruns. Temporary credentials removed; private hosted helpers stopped.
 Logs: `/srv/presidium/projects/salient/test-artifacts/V107-release-ca190a9`.
 Committed content snapshot hash: `sha256:9bcde574efb5facb4741f329a92879f31d5e49feedd0f31baa61e507522f3ec2`.
+
+### V108 Shadow through level six publication — 2026-09-21
+
+Reviewed owner `8744738c24003d2794f24cb5ef1637472665c26d` fast-forwarded into main.
+Accepted evidence reused: 1005 unique tests across retained/resumed stages (not one uninterrupted
+full run), and isolated Shadow cohort at `542f452` (32 new uses, 68.3 s).
+Backend publication/schema validation, content reseed (1654 entries), hosted build and frontend
+upload succeeded. Worker `bcdeafc0-9b86-4fde-b3b4-c163b7a98a66`.
+No smoke tests or test reruns. Temporary credentials removed; private hosted helpers stopped.
+Logs: `/srv/presidium/projects/salient/test-artifacts/V108-release-8744738`.
+Committed content snapshot hash: `sha256:8cdc0bdbb893a3191b64b5557284a9a5ec30224b6263148c3cad74999909eacf`.
