@@ -1,3 +1,7 @@
+import {
+  classProfile as troubadourProfile,
+  getLevelOneDecisions as troubadourDecisions,
+} from './classes/troubadour/level-one.ts';
 import { stormwightKitDecisions } from './classes/fury/stormwight.ts';
 import {
   classProfile as conduitProfile,
@@ -83,7 +87,7 @@ allow('ancestry.choice', [
   'Revenant',
 ]);
 allow('career.choice', ["Mage's Apprentice"]);
-allow('class.choice', ['Elementalist', 'Shadow', 'Tactician', 'Censor', 'Conduit']);
+allow('class.choice', ['Elementalist', 'Shadow', 'Tactician', 'Censor', 'Conduit', 'Troubadour']);
 allow('culture.environment', ['Urban']);
 allow('culture.environment.skill', ['Alertness']);
 allow('culture.organization.skill', ['Gymnastics']);
@@ -97,6 +101,7 @@ definitions.classProfiles = structuredClone({
   Tactician: tacticianProfile,
   Censor: censorProfile,
   Conduit: conduitProfile,
+  Troubadour: troubadourProfile,
 });
 
 /**
@@ -110,6 +115,11 @@ kitChoice.optionsByParent = {
   ...kitChoice.optionsByParent,
   Shadow: {
     source: path('feature/shadow/level-1/kit'),
+    quote: 'You can use and gain the benefits of a kit.',
+    optionsFrom: ['pool.kits.standard'],
+  },
+  Troubadour: {
+    source: path('feature/troubadour/level-1/kit'),
     quote: 'You can use and gain the benefits of a kit.',
     optionsFrom: ['pool.kits.standard'],
   },
@@ -215,5 +225,6 @@ append('step.class', elementalistDecisions(definitions.pools));
 append('step.class', shadowDecisions(definitions.pools));
 append('step.class', censorDecisions(definitions.pools));
 append('step.class', conduitDecisions(definitions.pools));
+append('step.class', troubadourDecisions(definitions.pools));
 append('step.class', tacticianDecisions(definitions.pools));
 export default definitions;

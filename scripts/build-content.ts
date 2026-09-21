@@ -186,6 +186,16 @@ export const SELECTIONS: ManifestSelection[] = [
     basis: 'docs/build/V97-shadow-level-two.md#scope: complete Shadow level-two build choices.',
   },
   {
+    id: 'troubadour-level-one',
+    description: 'Troubadour level-one class acts, routines and abilities.',
+    paths: [
+      'class/troubadour.md',
+      'feature/troubadour/level-1',
+      'feature/ability/troubadour/level-1',
+    ],
+    basis: 'docs/build/V102-troubadour-level-one.md#scope: complete Troubadour level-one options.',
+  },
+  {
     id: 'conduit-level-one',
     description: 'Conduit level-one domains, prayers, wards and abilities.',
     paths: ['class/conduit.md', 'feature/conduit/level-1', 'feature/ability/conduit/level-1'],

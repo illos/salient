@@ -398,6 +398,7 @@ const OUTSIDE_COMBAT_WAIVER_SOURCES: Record<string, string> = {
   focus: 'tactician/level-1/focus',
   wrath: 'censor/level-1/wrath',
   piety: 'conduit/level-1/piety',
+  drama: 'troubadour/level-1/drama',
 };
 
 /**

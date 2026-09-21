@@ -1,3 +1,4 @@
+import { troubadourAbilitySource } from '../../shared/evaluate/troubadourAbilities';
 import { furyAbilitySource } from '../../shared/evaluate/furyAbilities';
 import { conduitAbilitySource } from '../../shared/evaluate/conduitAbilities';
 import { censorAbilitySource } from '../../shared/evaluate/censorAbilities';
@@ -288,6 +289,10 @@ export function abilityFromEntry(
   const manualRoll = [
     '/feature/ability/shadow/level-2/sticky-bomb.md',
     '/feature/ability/fury/level-1/tide-of-death.md',
+    // Upstage selects enemies passed during movement; never apply its roll to Self.
+    '/feature/ability/troubadour/level-1/upstage.md',
+    // Performance activation is not its optional end-round attack.
+    '/feature/ability/troubadour/level-1/thunder-mother.md',
   ].some(path => entry.sourcePath.endsWith(path));
   return build({
     compilation: compileLiveEntry(entry, entry.kind),
@@ -562,13 +567,18 @@ export async function abilitiesFor(
         ),
       ),
     ]) {
+      const troubadourSource = troubadourAbilitySource(grant);
       const furySource = furyAbilitySource(grant);
       const conduitSource = conduitAbilitySource(grant);
       const censorSource = censorAbilitySource(grant);
       const tacticianSource =
-        furySource ?? conduitSource ?? censorSource ?? tacticianAbilitySource(grant);
+        troubadourSource ??
+        furySource ??
+        conduitSource ??
+        censorSource ??
+        tacticianAbilitySource(grant);
       if (tacticianSource) {
-        const id = `${furySource ? 'fury' : conduitSource ? 'conduit' : censorSource ? 'censor' : 'tactician'}:${slug(grant.name)}`;
+        const id = `${troubadourSource ? 'troubadour' : furySource ? 'fury' : conduitSource ? 'conduit' : censorSource ? 'censor' : 'tactician'}:${slug(grant.name)}`;
         granted.push(
           build({
             abilityId: id,

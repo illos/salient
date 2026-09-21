@@ -1,3 +1,4 @@
+import { troubadourAbilitySource } from '../shared/evaluate/troubadourAbilities';
 import { furyAbilitySource } from '../shared/evaluate/furyAbilities';
 import { conduitAbilitySource } from '../shared/evaluate/conduitAbilities';
 import { censorAbilitySource } from '../shared/evaluate/censorAbilities';
@@ -715,6 +716,7 @@ async function abilityView(
   const itemSource = startingItemAbilitySource(ability);
   const complicationSource = complicationAbilitySource(ability);
   const tacticianSource =
+    troubadourAbilitySource(ability) ??
     furyAbilitySource(ability) ??
     conduitAbilitySource(ability) ??
     censorAbilitySource(ability) ??
