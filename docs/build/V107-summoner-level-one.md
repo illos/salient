@@ -39,7 +39,7 @@ TESTER owns generators, full check and isolated cohort. ENGINE independently rev
 
 ## Work log
 
-- Started from main `a0792cd`. ENGINE source audit requested. Runtime work in progress.
+- Started from main `a0792cd`. Source audit and independent review completed; acceptance below.
 
 - Authoring `38cb8e9`: both TypeScript projects and touched ESLint passed. TESTER generated
   content/audit/support/reference outputs (exit 0 each): 1,629 content entries, 2,840 readable
@@ -75,3 +75,24 @@ pruning/admission isolation, owner refusal, no ordinary free strikes or generic 
 Keep existing 15s request/240s run/295s hard stop. Backend must be stopped when finished. No shared
 cloud action or browser needed. Logs under test-artifacts/V107-<commit>. Reuse unchanged passed stages
 if a concrete repair is needed. Generator outputs are committed; freshness gates perform comparison.
+
+
+### Accepted result and frozen handoff
+
+- ENGINE static **PASS** on `405dd4d081aeda80c1e4443c3f1e49730aa4ebb7`;
+  [written review](audits/V107-summoner-rules-review.md). All findings closed. The review did not run tests.
+- TESTER message 1619: `CI=true pnpm check` **exit 0, 217.4s**; **1,002 tests (399 engine + 603
+  app/scripts)**, all content/reference/type/lint/link/vendor/support/build gates passed.
+- Isolated local Summoner cohort **exit 0, 178.5s**, one scenario passed: twelve saved/admitted
+  builds and **144 distinct manual action records**. Readback covers all 25 portfolio options,
+  costs/debit/blocked empty-resource, waiver, ownership, edit pruning/admission isolation,
+  free-strike replacement and generic Summoner foe-loading refusal. This proves records/payments,
+  not automated minion combat. Full/live inputs are the same tested commit above.
+- Artifacts: `/srv/presidium/projects/salient/test-artifacts/V107-405dd4d` (`full.log`, `full.json`,
+  `headless.log`, setup/backend/seed evidence). TESTER stopped backend; ports free, data retained,
+  clean checkout released. No browser, hosted test, reset of shared data or deployment smoke.
+- Frozen owner handoff: `slice/V107`, `.worktrees/class-summoner`; documentation closeout adds
+  only this acceptance, STATUS and the authentic review. DEPLOY2 integrates/publishes to the
+  standing-authorized cloud dev target and pushes main, reusing these accepted checks.
+  Required release builds/publication are sufficient; no rerun or smoke. No schema/dependency
+  or environment configuration change. Runtime content is 1,629 entries.
