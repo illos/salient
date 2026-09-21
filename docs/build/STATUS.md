@@ -119,3 +119,4 @@ add narrative here. V46–V56 were the abandoned Opus pilot and are retired ids.
 
 | V106 | [Beastheart level one and companion builds](V106-beastheart-level-one.md) | Merged (`34a8b48`); cloud dev published; accepted TESTER results reused |
 | V107 | [Summoner level one](V107-summoner-level-one.md) | Merged (`ca190a9`); cloud dev published; accepted TESTER results reused |
+| V108 | [Shadow through level six](V108-shadow-level-six.md) | In progress |

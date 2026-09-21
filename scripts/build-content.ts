@@ -248,6 +248,16 @@ export const SELECTIONS: ManifestSelection[] = [
     basis: 'docs/build/V99-censor-level-one.md#scope: complete Censor level-one choices.',
   },
   {
+    id: 'shadow-level-four-to-six',
+    description:
+      'Shadow levels four through six: characteristic increase, perks, skills, college features and abilities.',
+    paths: [4, 5, 6].flatMap(level => [
+      `feature/shadow/level-${level}`,
+      `feature/ability/shadow/level-${level}`,
+    ]),
+    basis: 'docs/build/V108-shadow-level-six.md#scope: cumulative Shadow through level six.',
+  },
+  {
     id: 'shadow-level-three',
     description: 'Shadow level-three Careful Observation and four 7-Insight alternatives.',
     paths: ['feature/shadow/level-3', 'feature/ability/shadow/level-3'],

@@ -742,7 +742,10 @@ class Evaluation {
       echelon: dv(echelon, [
         p({
           decisionId: 'class.level',
-          source: this.sentence(SENTENCES.echelon),
+          source: this.sentence({
+            ...SENTENCES.echelon,
+            quote: echelon === 2 ? '2nd Echelon (4th to 6th Level)' : SENTENCES.echelon.quote,
+          }),
           operation: 'set',
           amount: echelon,
         }),
@@ -753,7 +756,7 @@ class Evaluation {
           source: this.sentence(SENTENCES.kitStaminaRule),
           operation: 'set',
           amount: s.staminaBonusPerEchelon.amount * echelon,
-          note: `${s.staminaBonusPerEchelon.amount * echelon} at the 1st echelon`,
+          note: `${s.staminaBonusPerEchelon.amount * echelon} at echelon ${echelon}`,
         }),
       ]),
       speedBonus: dv(s.speedBonus, [table({ operation: 'set', amount: s.speedBonus })]),
@@ -796,7 +799,7 @@ class Evaluation {
         amount: this.level,
       }),
     ]);
-    const echelon = 1;
+    const echelon = Math.ceil(this.level / 3);
 
     const ancestry = this.single('ancestry.choice');
     if (ancestry)

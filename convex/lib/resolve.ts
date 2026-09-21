@@ -293,6 +293,9 @@ export function abilityFromEntry(
   // Until spatial targeting is supported, record the entire special effect without self-damage.
   const manualRoll = [
     '/feature/ability/shadow/level-2/sticky-bomb.md',
+    // Return next turn precedes this roll; target actions precede Puppet Strings damage.
+    '/feature/ability/shadow/level-5/into-the-shadows.md',
+    '/feature/ability/shadow/level-6/puppet-strings.md',
     '/feature/ability/fury/level-1/tide-of-death.md',
     // Upstage selects enemies passed during movement; never apply its roll to Self.
     '/feature/ability/troubadour/level-1/upstage.md',

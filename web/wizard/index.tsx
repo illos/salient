@@ -1673,8 +1673,10 @@ function Wizard({ initialCharacter }: { initialCharacter: WizardCharacter }) {
               Level 2 supports Shadow and Berserker Fury.
             </p>
           )}
-          {targetLevel === 3 && (
-            <p className="mb-4 text-sm text-muted-foreground">Level 3 supports Shadow.</p>
+          {targetLevel >= 3 && targetLevel <= 6 && (
+            <p className="mb-4 text-sm text-muted-foreground">
+              Level {targetLevel} supports Shadow.
+            </p>
           )}
           <StepRail
             title="Character Builder"

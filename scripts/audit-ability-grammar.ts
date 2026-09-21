@@ -463,7 +463,7 @@ export function buildCorpus(inputs: AuditInputs = readInputs()): Corpus_ {
   }
 
   // Wizard grants: resolve to the standalone/kit entry where possible; otherwise classify own text.
-  const grants = [1, 2, 3].flatMap(level => wizardGrants(getDefinitions(level), level));
+  const grants = [1, 2, 3, 4, 5, 6].flatMap(level => wizardGrants(getDefinitions(level), level));
   const perkByPath = new Map(inputs.perks.map(p => [strip(p.sourcePath), p]));
   let resolvedToStandalone = 0;
   let resolvedToKit = 0;

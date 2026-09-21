@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: GPL-3.0-only
 import type { GrantedAbility, GrantedFeature } from '../contracts/characterEvaluation.ts';
 
+import { SHADOW_LATER_ACTIONS } from '../content/classes/shadow/later-actions.ts';
+
 const dancerPath = 'en/unified/md/feature/ability/shadow/level-3/dancer.md';
 const sourcePath = 'en/unified/md/feature/shadow/level-2/friend.md';
 /** Source-timed uses of Friend!; neither effect is automatically adjudicated. */
@@ -12,6 +14,7 @@ export const SHADOW_ACTIONS: {
   activationCondition: string;
   trigger?: string;
 }[] = [
+  ...SHADOW_LATER_ACTIONS,
   {
     name: 'Dancer: Disengage',
     sourcePath: dancerPath,
@@ -54,10 +57,11 @@ export function shadowAbilities(
 ): GrantedAbility[] {
   const result = existing.filter(ability => !shadowAbilitySource(ability));
   for (const action of SHADOW_ACTIONS) {
-    const parent =
-      action.sourcePath === dancerPath
-        ? result.find(ability => ability.name === 'Dancer' && ability.sourcePath === dancerPath)
-        : features.find(feature => feature.name === 'Friend!' && feature.sourcePath === sourcePath);
+    const parent = action.sourcePath.includes('/feature/ability/')
+      ? result.find(
+          ability => ability.sourcePath === action.sourcePath && !shadowAbilitySource(ability),
+        )
+      : features.find(feature => feature.sourcePath === action.sourcePath);
     if (parent)
       result.push({
         name: action.name,
@@ -71,5 +75,24 @@ export function shadowAbilities(
         },
       });
   }
-  return result;
+  return result.map(ability => {
+    const instructions: Record<string, string> = {
+      'Into the Shadows':
+        'Pay now and remove both creatures; return at the start of your next turn, THEN roll and resolve printed damage manually. This initial record deals no damage.',
+      'Puppet Strings':
+        'Roll manually and compare Reason to potency. Each qualifying target acts BEFORE taking damage; choose its targets and preserve hidden/disguise. This initial record deals no damage.',
+      'One Vial Makes You Faster':
+        'Potion delivery and its roll do not automatically consume it. Associate the rolled tier with each potion, then resolve the printed alternative only on consumption; expiry and benefits remain manual.',
+    };
+    const condition = instructions[ability.name];
+    if (condition && ability.sourcePath.includes('/feature/ability/shadow/'))
+      return { ...ability, activationCondition: condition };
+    if (ability.name === 'Defensive Roll' && features.some(f => f.name === 'Volatile Reagents'))
+      return {
+        ...ability,
+        activationCondition:
+          'Volatile Reagents upgrades the shift to up to 5 squares, including vertically; fall without solid ground or flight. Retain all other Defensive Roll effects. Resolve manually.',
+      };
+    return ability;
+  });
 }

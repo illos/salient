@@ -11,6 +11,7 @@ import type { DecisionDefinitions } from '../evaluate/definitions.ts';
 import { levelTwoDecisions } from './classes/fury/level-two.ts';
 import { levelTwoDecisions as shadowLevelTwo } from './classes/shadow/level-two.ts';
 import { levelThreeDecisions as shadowLevelThree } from './classes/shadow/level-three.ts';
+import { shadowLaterDecisions } from './classes/shadow/level-four-to-six.ts';
 export { FURY_LEVEL_TWO_PERK_GROUPS } from './classes/fury/level-two.ts';
 
 const levelOne: DecisionDefinitions = structuredClone(legacyLevelOne);
@@ -31,7 +32,18 @@ thirdClassStep.decisions.find(decision => decision.id === 'class.level')!.grants
 ];
 thirdClassStep.decisions.push(...structuredClone(shadowLevelThree));
 
-for (const definitions of [levelOne, levelTwo, levelThree]) {
+const levels = [levelOne, levelTwo, levelThree];
+for (const level of [4, 5, 6]) {
+  const definitions = structuredClone(levels[level - 2]!);
+  definitions.level = level;
+  const step = definitions.steps.find(s => s.id === 'step.class')!;
+  step.decisions.find(d => d.id === 'class.level')!.grants = [
+    { kind: 'level', value: String(level) },
+  ];
+  step.decisions.push(...structuredClone(shadowLaterDecisions[level]!));
+  levels.push(definitions);
+}
+for (const definitions of levels) {
   definitions.supportingChoicesVersion = 'v37';
   extendBackgroundDefinitions(definitions);
   extendCultureDefinitions(definitions);
@@ -44,6 +56,13 @@ for (const definitions of [levelOne, levelTwo, levelThree]) {
           value: 'Raised by Beasts',
           not: true,
         });
+  const skill = definitions.steps
+    .flatMap(s => s.decisions)
+    .find(d => d.id === 'class.shadow.level-4.skill');
+  if (skill)
+    skill.supportedInV001 = (skill.optionsFrom as string[]).flatMap(
+      id => definitions.pools[id]?.values ?? [],
+    );
   extendSkillReplacements(definitions);
 }
 
@@ -52,14 +71,7 @@ export function getDefinitions(
   level: number,
   choiceOrigins?: CharacterChoiceOrigins,
 ): DecisionDefinitions {
-  const definitions =
-    level === 1
-      ? levelOne
-      : level === 2
-        ? levelTwo
-        : level === 3
-          ? levelThree
-          : { ...levelOne, level };
+  const definitions = levels[level - 1] ?? { ...levelOne, level };
   return choiceOrigins
     ? { ...definitions, choiceOrigins: structuredClone(choiceOrigins) }
     : definitions;

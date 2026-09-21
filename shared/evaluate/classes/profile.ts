@@ -67,6 +67,27 @@ export function applyClassProfile(ctx: DerivationContext, out: PartialBaseline) 
         }),
       ) as DerivedBaseline['characteristics'];
     }
+    const increase = ctx.decisions.get('class.shadow.level-4.agility');
+    if (increase && ctx.available.has(increase.id) && out.characteristics) {
+      out.characteristics.A = dv(3, [
+        ...out.characteristics.A.provenance,
+        sourced(increase.id, increase.source, increase.quote, { operation: 'set', amount: 3 }),
+      ]);
+      const selected = ctx.single('class.shadow.level-4.characteristic');
+      const key = (Object.keys(names) as Characteristic[]).find(k => names[k] === selected);
+      if (key && key !== 'A') {
+        const score = out.characteristics[key];
+        const amount = Math.min(1, Math.max(0, 3 - score.value));
+        score.value += amount;
+        score.provenance.push(
+          sourced('class.shadow.level-4.characteristic', increase.source, increase.quote, {
+            selection: selected,
+            operation: 'add',
+            amount,
+          }),
+        );
+      }
+    }
     const subclass = ctx.single(profile.subclassDecisionId);
     if (subclass)
       out.subclass = dv(subclass, [
@@ -95,7 +116,7 @@ export function applyClassProfile(ctx: DerivationContext, out: PartialBaseline) 
         })),
       ]);
     }
-    for (const level of [2, 3]) {
+    for (const level of [2, 3, 4, 5, 6]) {
       const growth = ctx.decisions.get(`class.shadow.level-${level}.stamina`);
       if (out.staminaMaximum && growth && ctx.available.has(growth.id)) {
         out.staminaMaximum.value += 6;

@@ -190,14 +190,16 @@ export function applyRevenantBaseline(
     const slug = option.source.replace('en/unified/md/feature/trait/', '').replace('.md', '');
     const effect = BORROWED[slug];
     if (!effect || effect.kind === 'disengage') continue;
+    const amount =
+      slug === 'dwarf/spark-off-your-skin' ? 6 * Math.ceil(ctx.level / 3) : effect.value;
     const p: Provenance = {
       decisionId: id,
       selection: name!,
       source: ctx.sentence({ path: option.source, quote: effect.quote }),
       operation: 'add',
-      ...(typeof effect.value === 'number' ? { amount: effect.value } : {}),
+      ...(typeof amount === 'number' ? { amount } : {}),
     };
-    const n = Number(effect.value);
+    const n = Number(amount);
     switch (effect.kind) {
       case 'speed':
         out.speed = {

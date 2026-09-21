@@ -472,7 +472,7 @@ export const save = mutation({
     const old = character.draftRevisionId ? await ctx.db.get(character.draftRevisionId) : null;
     const level = args.targetLevel ?? old?.level ?? 1;
     if (!isSupportedDefinitionLevel(level))
-      throw new ConvexError('Only levels 1, 2 and 3 are supported.');
+      throw new ConvexError('Only levels 1 through 6 are supported.');
     const definitions = getDefinitions(level);
     let selections = args.selections ?? old?.selections ?? [];
     selections = validatedSelections(selections, level);

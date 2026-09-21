@@ -11,6 +11,28 @@ interface SupportRequirement {
 /** Level one still validates individual class/ancestry/option support through its definitions. */
 export const CHARACTER_LEVEL_SUPPORT: Readonly<Record<number, readonly SupportRequirement[]>> = {
   1: [],
+  4: [
+    {
+      decisionId: 'class.choice',
+      value: 'Shadow',
+      message: 'Level 4 currently supports Shadow only.',
+    },
+  ],
+  5: [
+    {
+      decisionId: 'class.choice',
+      value: 'Shadow',
+      message: 'Level 5 currently supports Shadow only.',
+    },
+  ],
+  6: [
+    {
+      decisionId: 'class.choice',
+      value: 'Shadow',
+      message: 'Level 6 currently supports Shadow only.',
+    },
+  ],
+
   3: [
     {
       decisionId: 'class.choice',
@@ -44,7 +66,7 @@ export function characterSupportDiagnostics(
     return [
       {
         decisionId: 'class.level',
-        message: `Level ${level} has no supported character definitions; level two supports Shadow and Berserker Fury; level three supports Shadow.`,
+        message: `Level ${level} has no supported character definitions; level two supports Shadow and Berserker Fury; levels three through six support Shadow.`,
       },
     ];
   if (level === 2 && selections['class.choice'] === 'Shadow') return [];

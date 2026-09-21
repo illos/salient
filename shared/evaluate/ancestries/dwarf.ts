@@ -51,16 +51,17 @@ export function applyDwarfBaseline(
       provenance: purchased('Great Fortitude', 'great-fortitude', "You can't be made weakened."),
     });
   if (selected.includes('Spark Off Your Skin') && out.staminaMaximum) {
-    // Levels 1 and 2 are currently supported; both retain the level-one +6 grant.
+    // Printed +6 at first level, plus +6 at levels 4, 7 and 10.
+    const amount = 6 * Math.ceil(ctx.level / 3);
     out.staminaMaximum = {
-      value: out.staminaMaximum.value + 6,
+      value: out.staminaMaximum.value + amount,
       provenance: [
         ...out.staminaMaximum.provenance,
         purchased(
           'Spark Off Your Skin',
           'spark-off-your-skin',
           'You have a +6 bonus to Stamina, and that bonus increases by 6 at 4th, 7th, and 10th levels.',
-          6,
+          amount,
         ),
       ],
     };

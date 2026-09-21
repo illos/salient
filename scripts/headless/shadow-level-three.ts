@@ -154,7 +154,7 @@ export async function runShadowLevelThree({
         director.query('characterWizard:transitionLevel', {
           characterId,
           fromLevel: 3,
-          targetLevel: 4,
+          targetLevel: 7,
           selections: saved.selections,
         }),
         /Unsupported/,

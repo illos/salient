@@ -182,6 +182,9 @@ describe('V26 bounded grammar classifier on real entries', () => {
       [1, 'selectable'],
       [2, 'selectable'],
       [3, 'selectable'],
+      [4, 'selectable'],
+      [5, 'selectable'],
+      [6, 'selectable'],
     ]);
   });
 
