@@ -53,7 +53,7 @@ import { Input } from '../components/ui/input';
 import { Textarea } from '../components/ui/textarea';
 import { StatBox } from '../components/stat-box';
 import { ErrorNotice, Field, Loading, Notice, useCommand } from '../ui';
-import { RuleLink } from '../rules/link';
+import { RuleLink, RuleReadMore } from '../rules/link';
 import { readableRuleText, ruleExcerpt } from '../rules/reference';
 import { Button } from '../components/ui/button';
 import { useRulesCatalog } from '../rules/content';
@@ -341,9 +341,12 @@ export function DecisionEditor({
           </div>
         )}
         {shownGrants.length > 0 && (
-          <ul className="m-0 list-none p-0">
+          <ul className="m-0 flex list-none flex-col gap-2 p-0">
             {shownGrants.map((grant, i) => (
-              <li key={i} className="flex items-center gap-2 py-0.5 text-lg font-medium">
+              <li
+                key={i}
+                className="flex items-center gap-2 rounded-md bg-muted px-4 py-3.5 text-lg font-medium"
+              >
                 {readableRuleText(grant.value)
                   .replace(/ \(derived in R02\)/g, '')
                   .replace(/manual in v0.01/g, 'resolved at the table')}
@@ -1115,6 +1118,13 @@ function Wizard({ character }: { character: WizardCharacter }) {
       ? (selections['culture.preset'] as string)
       : undefined,
   );
+  const lockedAspectOrder = [
+    'culture.name',
+    'culture.language',
+    'culture.environment',
+    'culture.organization',
+    'culture.upbringing',
+  ];
   const lockedByPreset = (id: string): string | undefined => {
     if (!culturePreset) return undefined;
     if (id === 'culture.language') return culturePreset.language ? culturePreset.name : undefined;
@@ -1165,12 +1175,48 @@ function Wizard({ character }: { character: WizardCharacter }) {
   // A point-budget decision is its own panel beside the step card (V96 mockup); everything else
   // reads inside it. Both lists come from the same step in the same source order.
   const stepDecisionIndex = indexDecisions(definitions);
+  // What the chosen culture fixed, read back together (V96 mockup) rather than as one read-only
+  // section per decision each repeating the same explanation.
+  const lockedAspects = culturePreset
+    ? lockedAspectOrder.flatMap(id => {
+        if (!lockedByPreset(id)) return [];
+        const value = selections[id];
+        return typeof value === 'string' ? [{ id, label: decisionLabel(id), value }] : [];
+      })
+    : [];
+  const lockedIds = new Set(lockedAspects.map(aspect => aspect.id));
+  // The three culture skills are one decision to the player: one per aspect, chosen together.
+  const isCultureSkill = (decision: Decision) =>
+    /^culture\..+\.skill$/.test(decision.id) &&
+    isAvailable(decision, selections, stepDecisionIndex);
   const isPanel = (decision: Decision) =>
     decision !== primary && decision.shape.type === 'points' && !lockedByPreset(decision.id);
   const dependent = primary
     ? step.decisions.filter(decision => decision !== primary)
     : step.decisions;
-  const inlineDecisions = dependent.filter(decision => !isPanel(decision));
+  const cultureSkills = dependent.filter(isCultureSkill);
+  const lockedBlock = lockedAspects.length ? (
+    <section
+      className="flex flex-col gap-3 py-5"
+      aria-label={`Set by the ${culturePreset!.name} culture`}
+    >
+      <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 text-sm text-muted-foreground">
+        <span>Set by the {culturePreset!.name} culture</span>
+        <span>Choose Build your own to set these yourself</span>
+      </div>
+      <div className="grid grid-cols-[repeat(auto-fill,minmax(13rem,1fr))] gap-2">
+        {lockedAspects.map(aspect => (
+          <span key={aspect.id} className="flex flex-col gap-0.5 rounded-md bg-muted px-4 py-3">
+            <span className="text-lg font-medium">{aspect.value}</span>
+            <span className="text-sm text-muted-foreground">{aspect.label}</span>
+          </span>
+        ))}
+      </div>
+    </section>
+  ) : null;
+  const inlineDecisions = dependent.filter(
+    decision => !isPanel(decision) && !lockedIds.has(decision.id) && !isCultureSkill(decision),
+  );
   const panelDecisions = primaryExpanded ? [] : dependent.filter(isPanel);
   // What this step still owes, for the rail hint and the step footer. The budget and the costs
   // are content; this only counts what is already recorded, as the panel heading does.
@@ -1307,6 +1353,13 @@ function Wizard({ character }: { character: WizardCharacter }) {
                       <RuleLink {...stepReference(step)} />
                     )
                   }
+                  more={
+                    selectedSource && selectedSource !== primary.source ? (
+                      <RuleReadMore sourcePath={selectedSource} label={selectedName} />
+                    ) : (
+                      <RuleReadMore {...stepReference(step)} />
+                    )
+                  }
                   optional={step.optional}
                   action={
                     <Button
@@ -1365,10 +1418,14 @@ function Wizard({ character }: { character: WizardCharacter }) {
                     }}
                     renderChooser={choose => renderDecision(primary, (_id, value) => choose(value))}
                   >
+                    {lockedBlock}
                     {inlineDecisions.map(decision => renderDecision(decision))}
                   </PrimaryChoice>
                 ) : (
-                  inlineDecisions.map(decision => renderDecision(decision))
+                  <>
+                    {lockedBlock}
+                    {inlineDecisions.map(decision => renderDecision(decision))}
+                  </>
                 )}
                 {step.id === 'step.details' && (
                   <Field
@@ -1388,6 +1445,45 @@ function Wizard({ character }: { character: WizardCharacter }) {
             </div>
           </section>
           <fieldset disabled={command.pending} className="contents">
+            {cultureSkills.length > 0 && (
+              <section className="rounded-lg bg-card p-6" aria-label="Culture skills">
+                <div className="flex flex-wrap items-start justify-between gap-x-4 gap-y-2">
+                  <div className="min-w-0">
+                    <h3 className="m-0 text-xl font-medium">Culture skills</h3>
+                    <p className="mt-1 mb-0 text-sm text-muted-foreground">
+                      One skill from each aspect’s list of options.
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <span className="flex items-center gap-1" aria-hidden>
+                      {cultureSkills.map(decision => (
+                        <span
+                          key={decision.id}
+                          className={cn(
+                            'size-2 rounded-full',
+                            typeof selections[decision.id] === 'string'
+                              ? 'bg-primary'
+                              : 'bg-placeholder',
+                          )}
+                        />
+                      ))}
+                    </span>
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="sm"
+                      disabled={cultureSkills.every(d => selections[d.id] === undefined)}
+                      onClick={() => {
+                        for (const decision of cultureSkills) select(decision.id, undefined);
+                      }}
+                    >
+                      Clear
+                    </Button>
+                  </div>
+                </div>
+                {cultureSkills.map(decision => renderDecision(decision))}
+              </section>
+            )}
             {panelDecisions.map(decision => renderDecision(decision))}
           </fieldset>
           {/* The step's own footer: what it still owes, and the same move the rail offers. */}

@@ -143,6 +143,22 @@ unchanged.
   - A statistic the evaluator has not produced reads "Pending", the hero column's word, rather
     than an em dash.
 
+## Culture step
+
+From the user's culture mockup (attachment, 2026-09-21):
+
+- The aspects a preset fixes read back as one block of tiles, headed "Set by the <name> culture"
+  with "Choose Build your own to set these yourself" opposite, instead of one read-only section
+  per decision each repeating that sentence.
+- The step header offers Read more, a worded trigger for the same modal reader the rulebook icon
+  opens (`RuleReadMore`, `web/rules/link.tsx`), on whichever entry supplied its description.
+- The three culture skills are one panel, "Culture skills", with a dot per aspect and Clear,
+  beside the step card as the point-budget panel is.
+- A granted automatic step reads as a card rather than a bare line.
+
+Not from the mockup, and worth a later pass: its skill rows put the select beside a two-line
+label with the aspect and its option count, where these keep the ordinary decision layout.
+
 ## Working drafts
 
 The wizard no longer holds an unsaved character in the browser. `characters.create` takes

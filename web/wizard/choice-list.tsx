@@ -19,6 +19,7 @@ export function StepTitle({
   optional,
   action,
   eyebrow,
+  more,
 }: {
   title: string;
   description?: string;
@@ -28,6 +29,8 @@ export function StepTitle({
   action?: React.ReactNode;
   /** The step this header belongs to, when its title is the chosen option's name instead. */
   eyebrow?: string;
+  /** Read more: opens the entry the description came from (V96). */
+  more?: React.ReactNode;
 }) {
   return (
     <div className="mb-4">
@@ -39,6 +42,7 @@ export function StepTitle({
         {action && <span className="ml-auto">{action}</span>}
       </div>
       {description && <p className="mt-2 mb-0 text-base text-muted-foreground">{description}</p>}
+      {more && <div className="mt-3">{more}</div>}
     </div>
   );
 }
