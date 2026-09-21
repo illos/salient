@@ -86,11 +86,14 @@ type LoadedCharacter = FunctionReturnType<typeof api.characters.get>;
 
 /**
  * Source steps the wizard does not present (V96, docs/character-wizard-spec.md#main-creation-and-editing):
- * "1. Think" has nothing to record and its reference now sits on the rail heading; "10. Make
- * Connections" is left to the table. Presentation only: the evaluator still knows both steps and
- * the headless route still records `connections.notes`.
+ * "1. Think" has nothing to record and its reference now sits on the rail heading; "7. Add Free
+ * Strikes" grants the same two abilities to every hero and offers no choice, and they already read
+ * on the hero column and the sheet; "10. Make Connections" is left to the table. Presentation
+ * only: the evaluator still holds every step, `free-strikes.grant` still grants both abilities and
+ * still anchors the base Disengage and saving-throw provenance, and the headless route still
+ * records `connections.notes`.
  */
-const HIDDEN_STEPS = new Set(['step.think', 'step.connections']);
+const HIDDEN_STEPS = new Set(['step.think', 'step.free-strikes', 'step.connections']);
 /** The rail heading's reference: the whole Making a Hero chapter. */
 const BUILDER_REFERENCE = { id: 'mcdm.heroes.v1/chapter/making-a-hero', label: 'Making a Hero' };
 

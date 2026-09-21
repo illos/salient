@@ -454,10 +454,12 @@ state only: it does not save the character or change the decision/evaluation mod
 
 **Confirmed rail presentation, 2026-09-21 (V96):** the step rail is headed "Character Builder"
 with the Making a Hero chapter reference; the current step is marked by its accent number badge.
-The Think and Make Connections steps are not presented: Think records nothing, and connections
-are left to the table. The presented steps are numbered from one. This is presentation only: the
-decision content keeps both source steps, the evaluator treats them as before, and the headless
-route still records `connections.notes`.
+The Think, Add Free Strikes and Make Connections steps are not presented: Think records nothing,
+Add Free Strikes offers no choice and grants the same melee and ranged free strike to every hero
+(both already read on the hero column and the sheet), and connections are left to the table. The
+presented steps are numbered from one. This is presentation only: the decision content keeps all
+three source steps, `free-strikes.grant` still grants both abilities and still anchors the base
+Disengage and saving-throw provenance, and the headless route still records `connections.notes`.
 
 Proposed user flow: choose/create an owned character, establish a target level, work through the applicable
 decisions, add authored details, inspect the derived sheet and outstanding choices, then save or submit for
