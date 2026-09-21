@@ -133,11 +133,6 @@ export function isTableRoute(path: string): boolean {
   return /^\/campaigns\/[^/]+\/table\/?$/.test(path);
 }
 
-/** `/characters/:id/wizard` renders the wizard header (web/wizard/header.tsx) instead of the site nav. */
-export function isWizardRoute(path: string): boolean {
-  return /^\/characters\/[^/]+\/wizard\/?$/.test(path);
-}
-
 class PageBoundary extends Component<{ children: ReactNode }, { failed: boolean }> {
   state = { failed: false };
   static getDerivedStateFromError() {
@@ -204,8 +199,9 @@ function ProfileGate({ path }: { path: string }) {
         {error && <Button onClick={() => window.location.reload()}>Retry</Button>}
       </CenteredPage>
     );
-  // V21: the table and the wizard are full-viewport frames with their own headers; no site nav.
-  if (isTableRoute(path) || isWizardRoute(path)) return <PageOutlet key={viewer.userId} />;
+  // V21: the table is a full-viewport frame with its own header; no site nav. The wizard used to
+  // be one too, and takes the ordinary site chrome from V96.
+  if (isTableRoute(path)) return <PageOutlet key={viewer.userId} />;
   return (
     <div className="flex min-h-screen flex-col" key={viewer.userId}>
       <TopNav signedIn />

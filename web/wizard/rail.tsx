@@ -199,6 +199,7 @@ export function StepRail({
   onSelectItem,
   footer,
   hint,
+  save,
 }: {
   /** The heading above the steps. */
   title: string;
@@ -213,6 +214,8 @@ export function StepRail({
   footer?: React.ReactNode;
   /** One line under the navigation: what this step still owes and what comes next. */
   hint?: React.ReactNode;
+  /** Saving the hero, under the rail (V96). */
+  save?: React.ReactNode;
 }) {
   // Count the whole tree: a nested step is still a step of the build, and `currentIndex` is a
   // position in the presented sequence rather than in this list.
@@ -263,6 +266,7 @@ export function StepRail({
       <div className="flex flex-col gap-2 pt-3">
         {footer}
         {hint && <p className="m-0 text-sm text-balance text-muted-foreground">{hint}</p>}
+        {save}
       </div>
     </nav>
   );

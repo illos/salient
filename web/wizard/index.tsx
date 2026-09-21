@@ -69,7 +69,6 @@ import {
   stepName,
   stepReference,
 } from './presentation';
-import { WizardHeader } from './header';
 import { StepRail, type RailStep } from './rail';
 import {
   ChoiceList,
@@ -128,12 +127,11 @@ const PRESET_FIXED_ASPECTS = new Set([
 ]);
 /**
  * The side panes stick to the viewport while the page itself scrolls (V96): the wizard is one
- * scrolling document rather than three independently scrolling columns, and the header scrolls
+ * scrolling document rather than three independently scrolling columns, and the site nav scrolls
  * away with it. A pane taller than the viewport scrolls inside its own sticky box; one that fits
  * shows no scrollbar at all.
  */
-const STICKY_PANE =
-  'sticky top-(--page-gap) max-h-[calc(100dvh_-_var(--page-gap)_*_2)] overflow-y-auto';
+const STICKY_PANE = 'sticky top-8 max-h-[calc(100dvh_-_4rem)] overflow-y-auto';
 /**
  * Steps the rail nests under the step they depend on (V96). A kit is granted by the class, and
  * which kits are offered follows from it, so it reads as part of the class rather than beside it.
@@ -1273,15 +1271,6 @@ function Wizard({ character }: { character: WizardCharacter }) {
         await navigate({ to: '/characters/$characterId', params: { characterId: character.id } });
     }
   }
-  /** EXIT: the working draft is already saved, so leaving keeps it; a listed hero opens its page. */
-  async function exit() {
-    if (dirty && !character.wizardDraft && character.id && canSave) return persist(true);
-    if (!character.id || character.wizardDraft) {
-      await navigate({ to: '/characters' });
-      return;
-    }
-    await navigate({ to: '/characters/$characterId', params: { characterId: character.id } });
-  }
   const problemsByStep = (s: Step) =>
     s.decisions.reduce(
       (n, d) =>
@@ -1571,18 +1560,8 @@ function Wizard({ character }: { character: WizardCharacter }) {
     return left > 0 ? [`${left} point${left === 1 ? '' : 's'} still unspent`] : [];
   });
   return (
-    <div className="min-h-dvh bg-background" data-wizard-shell>
-      <WizardHeader
-        heroName={authored.name}
-        editing={Boolean(character.effectiveRevisionId)}
-        saving={command.pending}
-        canSave={canSave}
-        draft={character.wizardDraft || !character.id}
-        savingDraft={dirty}
-        onSaveDraft={() => void persist(false)}
-        onExit={() => void exit()}
-      />
-      <div className="grid grid-cols-[224px_minmax(0,1fr)_330px] items-start gap-(--page-gap) px-(--page-gap) pb-(--page-gap)">
+    <div data-wizard-shell>
+      <div className="grid grid-cols-[224px_minmax(0,1fr)_330px] items-start gap-(--page-gap)">
         <div className={STICKY_PANE}>
           <StepRail
             title="Character Builder"
@@ -1604,6 +1583,20 @@ function Wizard({ character }: { character: WizardCharacter }) {
                 : next
                   ? `${stepName(next)} comes next.`
                   : undefined
+            }
+            save={
+              <Button
+                type="button"
+                className="mt-1 rounded-full"
+                disabled={!canSave}
+                onClick={() => void persist(true)}
+              >
+                {command.pending
+                  ? 'Saving…'
+                  : character.wizardDraft || !character.id
+                    ? 'Save hero'
+                    : 'Save draft'}
+              </Button>
             }
             footer={
               <StepNav

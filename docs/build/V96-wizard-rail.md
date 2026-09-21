@@ -285,3 +285,8 @@ chosen; it needs its own slice and headless proof.
 - 2026-09-21: right pane regrouped from the user's mockup, see "Hero column" above. `Required
   choice missing:` now reads "Needs a selection" rather than "Make a selection to continue.", which
   also shortens the same guidance where it appears beside a decision in the centre column.
+- 2026-09-21: the wizard takes the site's own navigation instead of a header of its own. It is no
+  longer a full-viewport frame in `web/router.tsx`, so it renders inside the ordinary page column
+  with the top nav above it; `web/wizard/header.tsx` is deleted. Saving moved under the rail as a
+  single button, which saves and closes. Exit and the "Draft saved" line went with the header: the
+  nav leaves the page, and the draft is saved as you work either way.
