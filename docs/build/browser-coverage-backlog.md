@@ -88,3 +88,9 @@ Rules:
 ## V98: Shadow level three
 
 After V66: select level 3, inspect cumulative Shadow choices and 7-Insight alternatives; lower to 2 and confirm later choices disappear; resume the saved level-3 draft. API proof lives in the V98 cohort.
+
+## V99 Censor level one
+
+Visually check deity/domain portfolio filtering, custom deity name and four-domain selection,
+order/domain skill changes, and source-timed Censor actions on the sheet. Programmatic coverage
+uses the `censor` cohort; browser execution remains deferred under V66.

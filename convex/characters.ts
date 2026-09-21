@@ -1,3 +1,4 @@
+import { censorAbilitySource } from '../shared/evaluate/censorAbilities';
 import { shadowAbilitySource } from '../shared/evaluate/shadowAbilities';
 import { tacticianAbilities, tacticianAbilitySource } from '../shared/evaluate/tacticianAbilities';
 import {
@@ -711,7 +712,7 @@ async function abilityView(
   const perkSource = perkAbilitySource(ability);
   const itemSource = startingItemAbilitySource(ability);
   const complicationSource = complicationAbilitySource(ability);
-  const tacticianSource = tacticianAbilitySource(ability);
+  const tacticianSource = censorAbilitySource(ability) ?? tacticianAbilitySource(ability);
   const traitAbility =
     shadowAbilitySource(ability) ??
     ancestryAbilitySource(ability) ??

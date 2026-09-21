@@ -396,6 +396,7 @@ const OUTSIDE_COMBAT_WAIVER_SOURCES: Record<string, string> = {
   ferocity: 'fury/level-1/ferocity',
   insight: 'shadow/level-1/insight',
   focus: 'tactician/level-1/focus',
+  wrath: 'censor/level-1/wrath',
 };
 
 /**

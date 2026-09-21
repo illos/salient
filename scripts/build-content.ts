@@ -185,6 +185,19 @@ export const SELECTIONS: ManifestSelection[] = [
     basis: 'docs/build/V97-shadow-level-two.md#scope: complete Shadow level-two build choices.',
   },
   {
+    id: 'censor-level-one',
+    description:
+      'Censor class, all level-one orders, domains, abilities and pinned deity/saint portfolios.',
+    paths: [
+      'class/censor.md',
+      'feature/censor/level-1',
+      'feature/ability/censor/level-1',
+      'religion/god',
+      'religion/saint',
+    ],
+    basis: 'docs/build/V99-censor-level-one.md#scope: complete Censor level-one choices.',
+  },
+  {
     id: 'shadow-level-three',
     description: 'Shadow level-three Careful Observation and four 7-Insight alternatives.',
     paths: ['feature/shadow/level-3', 'feature/ability/shadow/level-3'],

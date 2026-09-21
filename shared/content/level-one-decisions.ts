@@ -33,6 +33,11 @@ import {
   getLevelOneDecisions as tacticianDecisions,
 } from './classes/tactician/level-one.ts';
 
+import {
+  classProfile as censorProfile,
+  getLevelOneDecisions as censorDecisions,
+} from './classes/censor/level-one.ts';
+
 export const definitions: DecisionDefinitions = structuredClone(fury) as DecisionDefinitions;
 const all = () => definitions.steps.flatMap(step => step.decisions);
 const decision = (id: string) => all().find(d => d.id === id)!;
@@ -73,7 +78,7 @@ allow('ancestry.choice', [
   'Revenant',
 ]);
 allow('career.choice', ["Mage's Apprentice"]);
-allow('class.choice', ['Elementalist', 'Shadow', 'Tactician']);
+allow('class.choice', ['Elementalist', 'Shadow', 'Tactician', 'Censor']);
 allow('culture.environment', ['Urban']);
 allow('culture.environment.skill', ['Alertness']);
 allow('culture.organization.skill', ['Gymnastics']);
@@ -85,6 +90,7 @@ definitions.classProfiles = structuredClone({
   Elementalist: elementalistProfile,
   Shadow: shadowProfile,
   Tactician: tacticianProfile,
+  Censor: censorProfile,
 });
 
 /**
@@ -98,6 +104,11 @@ kitChoice.optionsByParent = {
   ...kitChoice.optionsByParent,
   Shadow: {
     source: path('feature/shadow/level-1/kit'),
+    quote: 'You can use and gain the benefits of a kit.',
+    optionsFrom: ['pool.kits.standard'],
+  },
+  Censor: {
+    source: path('feature/censor/level-1/kit'),
     quote: 'You can use and gain the benefits of a kit.',
     optionsFrom: ['pool.kits.standard'],
   },
@@ -195,5 +206,6 @@ append('step.career', [
 ]);
 append('step.class', elementalistDecisions(definitions.pools));
 append('step.class', shadowDecisions(definitions.pools));
+append('step.class', censorDecisions(definitions.pools));
 append('step.class', tacticianDecisions(definitions.pools));
 export default definitions;

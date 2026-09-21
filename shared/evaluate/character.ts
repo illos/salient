@@ -1,6 +1,7 @@
 import { startingRewardItems } from '../content/starting-reward-items.ts';
 import { tacticianAbilities } from './tacticianAbilities.ts';
 import { complicationAbilities } from './complicationAbilities.ts';
+import { censorAbilities } from './censorAbilities.ts';
 import { shadowAbilities } from './shadowAbilities.ts';
 import { perkAbilities } from './perkAbilities.ts';
 import { applyRevenantBaseline, applyRevenantDisengage } from './ancestries/revenant.ts';
@@ -133,7 +134,8 @@ function parseCost(costQuote: string | undefined): GrantedAbility['cost'] | unde
     resource !== 'ferocity' &&
     resource !== 'essence' &&
     resource !== 'insight' &&
-    resource !== 'focus'
+    resource !== 'focus' &&
+    resource !== 'wrath'
   )
     return undefined;
   return { resource, amount: Number(match[1]) };
@@ -921,7 +923,10 @@ class Evaluation {
       out.features,
       perkAbilities(out.perks, ancestryAbilities(out.traits, this.abilities())),
     );
-    out.abilities = shadowAbilities(out.features, tacticianAbilities(out.features, out.abilities));
+    out.abilities = censorAbilities(
+      out.features,
+      shadowAbilities(out.features, tacticianAbilities(out.features, out.abilities)),
+    );
     this.deriveSupportingChoices(out);
     const items = startingRewardItems(out.features ?? [], out.initialItems);
     if (items.length) out.initialItems = items;
