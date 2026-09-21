@@ -1422,8 +1422,6 @@ function Wizard({ character }: { character: WizardCharacter }) {
                   <PrimaryChoice
                     key={step.id}
                     label={stepName(step)}
-                    selected={selectedName}
-                    noneLabel={primaryNoneLabel}
                     expanded={primaryExpanded}
                     chooserRef={chooserRef}
                     onKeep={value => {

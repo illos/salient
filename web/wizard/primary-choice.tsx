@@ -7,15 +7,15 @@
  * it is open, and only the dependent choices once it is closed. The caller owns the open state
  * and the focus move, because the header it belongs to is the caller's.
  *
+ * There is no confirm button above the list: choosing the option already selected closes the
+ * chooser and changes nothing, so a separate "Keep" repeated the cards below it.
+ *
  * Presentation only: opening the chooser never clears the existing draft.
  */
 import type { SelectionValue } from '../../shared/contracts/characterEvaluation';
-import { Button } from '../components/ui/button';
 
 export function PrimaryChoice({
   label,
-  selected,
-  noneLabel,
   expanded,
   chooserRef,
   onKeep,
@@ -23,12 +23,10 @@ export function PrimaryChoice({
   children,
 }: {
   label: string;
-  selected?: string;
-  noneLabel?: string;
   /** The chooser is open: either nothing is settled yet, or the caller pressed Edit. */
   expanded: boolean;
   chooserRef: React.RefObject<HTMLDivElement | null>;
-  /** Confirm the current option (or the optional none) without changing the draft. */
+  /** Record the option and close, whether or not it differs from the current one. */
   onKeep: (value: SelectionValue | undefined) => void;
   renderChooser: (select: (value: SelectionValue | undefined) => void) => React.ReactNode;
   children: React.ReactNode;
@@ -36,11 +34,6 @@ export function PrimaryChoice({
   if (!expanded) return <>{children}</>;
   return (
     <div ref={chooserRef} tabIndex={-1} role="group" aria-label={`Choose ${label.toLowerCase()}`}>
-      {(selected || noneLabel) && (
-        <Button type="button" variant="outline" className="mt-4" onClick={() => onKeep(selected)}>
-          {selected ? `Keep ${selected}` : `Use ${noneLabel!.toLowerCase()}`}
-        </Button>
-      )}
       {renderChooser(onKeep)}
     </div>
   );
