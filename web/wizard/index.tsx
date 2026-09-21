@@ -1292,12 +1292,16 @@ function Wizard({ character }: { character: WizardCharacter }) {
                   title={selectedName ?? primaryNoneLabel ?? stepName(step)}
                   eyebrow={stepName(step)}
                   description={
-                    (selectedSource &&
+                    // Only when the option has its own entry. Every culture preset cites the
+                    // Background chapter, which is the decision's own source, so its "text" would
+                    // be that chapter's opening and would read the same under every culture.
+                    (selectedSource !== primary.source &&
+                      selectedSource &&
                       ruleExcerpt(catalog, { sourcePath: selectedSource, label: selectedName })) ||
                     stepExcerpt(step)
                   }
                   reference={
-                    selectedSource ? (
+                    selectedSource && selectedSource !== primary.source ? (
                       <RuleLink sourcePath={selectedSource} label={selectedName} />
                     ) : (
                       <RuleLink {...stepReference(step)} />

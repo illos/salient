@@ -168,3 +168,7 @@ chosen; it needs its own slice and headless proof.
   leave draft only when finalized, and confirmed the draft is shown only inside the wizard,
   appearing in the list once saved. This reverses the V40 first-save behavior, which is recorded
   as an amendment in the spec rather than left as drift.
+- 2026-09-21: the step header only borrows an option's rules text when the option has its own
+  entry. Every culture preset cites the Background chapter, which is also the decision's own
+  source, so the header was showing that chapter's opening paragraph under every culture. When the
+  option's source is the decision's, the header keeps the step's name, text and reference.
