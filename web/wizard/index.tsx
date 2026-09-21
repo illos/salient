@@ -131,7 +131,7 @@ const PRESET_FIXED_ASPECTS = new Set([
  * away with it. A pane taller than the viewport scrolls inside its own sticky box; one that fits
  * shows no scrollbar at all.
  */
-const STICKY_PANE = 'sticky top-8 max-h-[calc(100dvh_-_4rem)] overflow-y-auto';
+const STICKY_PANE = 'sticky top-4 max-h-[calc(100dvh_-_2rem)] overflow-y-auto';
 /**
  * Steps the rail nests under the step they depend on (V96). A kit is granted by the class, and
  * which kits are offered follows from it, so it reads as part of the class rather than beside it.
@@ -1560,7 +1560,8 @@ function Wizard({ character }: { character: WizardCharacter }) {
     return left > 0 ? [`${left} point${left === 1 ? '' : 's'} still unspent`] : [];
   });
   return (
-    <div data-wizard-shell>
+    // The page column pads for prose; the wizard's panels carry their own, so pull back most of it.
+    <div className="-mt-6" data-wizard-shell>
       <div className="grid grid-cols-[224px_minmax(0,1fr)_330px] items-start gap-(--page-gap)">
         <div className={STICKY_PANE}>
           <StepRail
