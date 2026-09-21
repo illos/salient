@@ -2262,5 +2262,206 @@
       "class": "tactician",
       "level": "1"
     }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.troubadour.level-1/1st-level-class-act-features",
+    "kind": "feature",
+    "name": "1st-Level Class Act Features",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/troubadour/level-1/1st-level-class-act-features.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/troubadour/level-1/1st-level-class-act-features.json",
+    "selection": "troubadour-level-one",
+    "text": "---\nclass: troubadour\nlevel: \"1\"\nname: 1st-Level Class Act Features\nscc: mcdm.heroes.v1/feature.troubadour.level-1/1st-level-class-act-features\ntype: feature\n---\n\nYour [troubadour class act](scc.v1:mcdm.heroes.v1/feature.troubadour.level-1/troubadour-class-act) grants you two features, as shown on the 1st-Level Class Act Features table.\n\n###### 1st-Level Class Act Features Table\n\n| Class Act  | Features                           |\n|------------|------------------------------------|\n| Auteur     | Blocking, [Dramatic Monologue](scc.v1:mcdm.heroes.v1/feature.ability.troubadour.level-1/dramatic-monologue)       |\n| Duelist    | [Acrobatics](scc.v1:mcdm.heroes.v1/feature.ability.troubadour.level-1/acrobatics), [Star Power](scc.v1:mcdm.heroes.v1/feature.ability.troubadour.level-1/star-power)             |\n| Virtuoso   | [Power Chord](scc.v1:mcdm.heroes.v1/feature.ability.troubadour.level-1/power-chord), [Virtuoso Performances](scc.v1:mcdm.heroes.v1/feature.troubadour.level-1/virtuoso-performances) |\n",
+    "structured": {
+      "class": "troubadour",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.troubadour.level-1/acrobatics",
+    "kind": "feature",
+    "name": "Acrobatics",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/troubadour/level-1/acrobatics.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/troubadour/level-1/acrobatics.json",
+    "selection": "troubadour-level-one",
+    "text": "---\nclass: troubadour\nlevel: \"1\"\nname: Acrobatics\nscc: mcdm.heroes.v1/feature.troubadour.level-1/acrobatics\nsubclass: duelist\ntype: feature\n---\n\nYou have the following performance ability, which is usable with your [Routines](scc.v1:mcdm.heroes.v1/feature.troubadour.level-1/routines) feature.\n",
+    "structured": {
+      "class": "troubadour",
+      "level": "1",
+      "subclass": "duelist"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.troubadour.level-1/blocking",
+    "kind": "feature",
+    "name": "Blocking",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/troubadour/level-1/blocking.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/troubadour/level-1/blocking.json",
+    "selection": "troubadour-level-one",
+    "text": "---\nclass: troubadour\nlevel: \"1\"\nname: Blocking\nscc: mcdm.heroes.v1/feature.troubadour.level-1/blocking\nsubclass: auteur\ntype: feature\n---\n\nYou have the following performance ability, which is usable with your [Routines](scc.v1:mcdm.heroes.v1/feature.troubadour.level-1/routines) feature.\n",
+    "structured": {
+      "class": "troubadour",
+      "level": "1",
+      "subclass": "auteur"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.troubadour.level-1/class-act-triggered-action",
+    "kind": "feature",
+    "name": "Class Act Triggered Action",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/troubadour/level-1/class-act-triggered-action.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/troubadour/level-1/class-act-triggered-action.json",
+    "selection": "troubadour-level-one",
+    "text": "---\nclass: troubadour\nlevel: \"1\"\nname: Class Act Triggered Action\nscc: mcdm.heroes.v1/feature.troubadour.level-1/class-act-triggered-action\ntype: feature\n---\n\nYour [troubadour class act](scc.v1:mcdm.heroes.v1/feature.troubadour.level-1/troubadour-class-act) grants you a [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action), as shown on the Class Act [Triggered Actions](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) table.\n\n###### Class Act Triggered Action Table\n\n| Class Act | [Triggered Action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action)       |\n|-----------|------------------------|\n| Auteur    | [Turnabout Is Fair Play](scc.v1:mcdm.heroes.v1/feature.ability.troubadour.level-1/turnabout-is-fair-play) |\n| Duelist   | [Riposte](scc.v1:mcdm.heroes.v1/feature.ability.troubadour.level-1/riposte)                |\n| Virtuoso  | [Harmonize](scc.v1:mcdm.heroes.v1/feature.ability.troubadour.level-1/harmonize)              |\n",
+    "structured": {
+      "class": "troubadour",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.troubadour.level-1/drama",
+    "kind": "feature",
+    "name": "Drama",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/troubadour/level-1/drama.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/troubadour/level-1/drama.json",
+    "selection": "troubadour-level-one",
+    "text": "---\nclass: troubadour\nlevel: \"1\"\nname: Drama\nscc: mcdm.heroes.v1/feature.troubadour.level-1/drama\ntype: feature\n---\n\nDuring battles, you are fueled by the dynamic ups, downs, and upside downs of the fray, from which you derive a [Heroic Resource](scc.v1:mcdm.heroes.v1/rule.resource/heroic-resource) called drama.\n\n##### Drama in Combat\n\nAt the start of a combat encounter or some other stressful situation tracked in [combat rounds](scc.v1:mcdm.heroes.v1/rule.combat/combat-round) (as determined by the Director), you gain drama equal to your [Victories](scc.v1:mcdm.heroes.v1/rule.resource/victories). At the start of each of your [turns](scc.v1:mcdm.heroes.v1/rule.combat/turn) during combat, you gain 1d3 drama.\n\nAdditionally, you gain drama when certain events occur during a combat encounter:\n\n- The first time three or more heroes use an ability on the same [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), you gain 2 drama.\n- The first time any hero is made [winded](scc.v1:mcdm.heroes.v1/rule.health/winded) during the encounter, you gain 2 drama.\n- Whenever a creature within your [line of effect](scc.v1:mcdm.heroes.v1/rule.combat/line-of-effect) rolls a [natural 19 or 20](scc.v1:mcdm.heroes.v1/rule.dice/natural-19-20), you gain 3 drama.\n- When you or another hero dies, you gain 10 drama.\n\nWhen you are dead, you continue to gain drama during combat as long as your body is intact. If you have 30 drama during the encounter in which you died, you can come back to life with 1 [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) and 0 drama (no action required). If you are still dead after the encounter in which you died, you can't gain drama during future encounters.\n\nYou lose any remaining drama at the end of the encounter.\n\n##### Drama Outside of Combat\n\nThough you can't gain drama outside of combat, you can use your [heroic abilities](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability) and effects that cost drama without spending it. Whenever you use an ability or effect outside of combat that costs drama, you can't use that same ability or effect outside of combat again until you earn 1 or more [Victories](scc.v1:mcdm.heroes.v1/rule.resource/victories) or finish a [respite](scc.v1:mcdm.heroes.v1/rule.resource/respite).\n\nWhen you use an ability outside of combat that lets you spend unlimited drama on its effect, such as [Artful Flourish](scc.v1:mcdm.heroes.v1/feature.ability.troubadour.level-1/artful-flourish), you can use it as if you had spent an amount of drama equal to your [Victories](scc.v1:mcdm.heroes.v1/rule.resource/victories).\n\n> **The Auteur [Troubadour](scc.v1:mcdm.heroes.v1/class/troubadour)**\n>\n> Abilities like [Guest Star](scc.v1:mcdm.heroes.v1/feature.ability.troubadour.level-2/guest-star), [Missed Cue](scc.v1:mcdm.heroes.v1/feature.troubadour.level-3/missed-cue), and [Twist at the End](scc.v1:mcdm.heroes.v1/feature.ability.troubadour.level-2/twist-at-the-end) allow the auteur to rewrite bits of what happens in the battle by temporarily removing creatures from an encounter, bringing people back to life, or causing a new ally to appear. These abilities and features are no more powerful than any other, but they're narratively different from shooting rays of fire or swinging a sword.\n>\n> This is because, uniquely among all the [subclasses](scc.v1:mcdm.heroes.v1/rule.general/subclass) in *Draw Steel*, the auteur knows that the combat encounter playing out at your table is really a story being told sometime later, probably in a tavern.\n>\n> When the auteur uses these abilities, they are changing that story. They rewrite stories to make them more dramatic in the telling. What *actually* happened is a matter of some debate. Even the people who were there don't agree on exactly what took place. How people *remember* it is what's important!\n>\n> This is pretty weird, but also very fun. If it's too weird for you or your table, you could always interpret those abilities as a kind of magic. A school of conjuring that really does change the battlefield, which the auteur merely *flavors* as rewriting the story.\n",
+    "structured": {
+      "class": "troubadour",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.troubadour.level-1/dramatic-monologue",
+    "kind": "feature",
+    "name": "Dramatic Monologue",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/troubadour/level-1/dramatic-monologue.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/troubadour/level-1/dramatic-monologue.json",
+    "selection": "troubadour-level-one",
+    "text": "---\nclass: troubadour\nlevel: \"1\"\nname: Dramatic Monologue\nscc: mcdm.heroes.v1/feature.troubadour.level-1/dramatic-monologue\nsubclass: auteur\ntype: feature\n---\n\nYou have the following ability.\n",
+    "structured": {
+      "class": "troubadour",
+      "level": "1",
+      "subclass": "auteur"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.troubadour.level-1/kit",
+    "kind": "feature",
+    "name": "Kit",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/troubadour/level-1/kit.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/troubadour/level-1/kit.json",
+    "selection": "troubadour-level-one",
+    "text": "---\nclass: troubadour\nlevel: \"1\"\nname: Kit\nscc: mcdm.heroes.v1/feature.troubadour.level-1/kit\ntype: feature\n---\n\nYou can use and gain the benefits of a kit. See Chapter 6: [Kits](scc.v1:mcdm.heroes.v1/chapter/kits) for more information. (*Quick Build:* [Swashbuckler](scc.v1:mcdm.heroes.v1/kit/swashbuckler).)\n",
+    "structured": {
+      "class": "troubadour",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.troubadour.level-1/power-chord",
+    "kind": "feature",
+    "name": "Power Chord",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/troubadour/level-1/power-chord.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/troubadour/level-1/power-chord.json",
+    "selection": "troubadour-level-one",
+    "text": "---\nclass: troubadour\nlevel: \"1\"\nname: Power Chord\nscc: mcdm.heroes.v1/feature.troubadour.level-1/power-chord\nsubclass: virtuoso\ntype: feature\n---\n\nYou have the following ability.\n",
+    "structured": {
+      "class": "troubadour",
+      "level": "1",
+      "subclass": "virtuoso"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.troubadour.level-1/routines",
+    "kind": "feature",
+    "name": "Routines",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/troubadour/level-1/routines.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/troubadour/level-1/routines.json",
+    "selection": "troubadour-level-one",
+    "text": "---\nclass: troubadour\nlevel: \"1\"\nname: Routines\nscc: mcdm.heroes.v1/feature.troubadour.level-1/routines\ntype: feature\n---\n\nYou enter every battle with a set of performance abilities at the ready. Performances are magical presentations (such as songs, dances, poems, or gymnastic feats) that your allies can participate in. These abilities have the Performance keyword. At the start of each [combat round](scc.v1:mcdm.heroes.v1/rule.combat/combat-round), as long as you are not [dazed](scc.v1:mcdm.heroes.v1/condition/dazed), dead, or [surprised](scc.v1:mcdm.heroes.v1/rule.combat/surprised), you can either choose a new performance or maintain your current performance (no action required). Your performance lasts until you are unable to maintain it or until the end of the encounter.\n\nYou start off with the [Choreography](scc.v1:mcdm.heroes.v1/feature.ability.troubadour.level-1/choreography) and [Revitalizing Limerick](scc.v1:mcdm.heroes.v1/feature.ability.troubadour.level-1/revitalizing-limerick) performance abilities. Your choice of class act grants you additional performances.\n",
+    "structured": {
+      "class": "troubadour",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.troubadour.level-1/scene-partner",
+    "kind": "feature",
+    "name": "Scene Partner",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/troubadour/level-1/scene-partner.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/troubadour/level-1/scene-partner.json",
+    "selection": "troubadour-level-one",
+    "text": "---\nclass: troubadour\nlevel: \"1\"\nname: Scene Partner\nscc: mcdm.heroes.v1/feature.troubadour.level-1/scene-partner\ntype: feature\n---\n\nWhenever you obtain a success on a [test](scc.v1:mcdm.heroes.v1/rule.test/test) to interact with an [NPC](scc.v1:mcdm.heroes.v1/rule.general/npc) using a skill from the [interpersonal group](scc.v1:mcdm.heroes.v1/skill.group/interpersonal), you can form a bond with that [NPC](scc.v1:mcdm.heroes.v1/rule.general/npc). When you enter into a negotiation with a bonded [NPC](scc.v1:mcdm.heroes.v1/rule.general/npc), their patience increases by 1 (to a maximum of 5). Additionally, the first time during a negotiation that you personally make an argument that would increase a bonded [NPC](scc.v1:mcdm.heroes.v1/rule.general/npc)'s interest by 1, you instead increase their interest by 2 (to a maximum of 5).\n\nYou can have a number of bonds active equal to your level. When you form a bond with a new [NPC](scc.v1:mcdm.heroes.v1/rule.general/npc) that would exceed the limit, you must choose which of your active bonds to lose.\n",
+    "structured": {
+      "class": "troubadour",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.troubadour.level-1/signature-ability",
+    "kind": "feature",
+    "name": "Signature Ability",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/troubadour/level-1/signature-ability.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/troubadour/level-1/signature-ability.json",
+    "selection": "troubadour-level-one",
+    "text": "---\nclass: troubadour\nlevel: \"1\"\nname: Signature Ability\nscc: mcdm.heroes.v1/feature.troubadour.level-1/signature-ability\ntype: feature\n---\n\nChoose one [signature ability](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability) from the following options. [Signature abilities](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability) can be used at will. (*Quick Build:* [Witty Banter](scc.v1:mcdm.heroes.v1/feature.ability.troubadour.level-1/witty-banter).)\n\n##### Heroic Abilities\n\nYou master a range of [heroic abilities](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability), all of which cost drama to empower them.\n\n###### 3-Drama Ability\n\nChoose one [heroic ability](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability) from the following options, each of which costs 3 drama to use. (*Quick Build:* [Harsh Critic](scc.v1:mcdm.heroes.v1/feature.ability.troubadour.level-1/harsh-critic).)\n\n###### 5-Drama Ability\n\nChoose one [heroic ability](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability) from the following options, each of which costs 5 drama to use. (*Quick Build:* [Dramatic Reversal](scc.v1:mcdm.heroes.v1/feature.ability.troubadour.level-1/dramatic-reversal).)\n",
+    "structured": {
+      "class": "troubadour",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.troubadour.level-1/star-power",
+    "kind": "feature",
+    "name": "Star Power",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/troubadour/level-1/star-power.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/troubadour/level-1/star-power.json",
+    "selection": "troubadour-level-one",
+    "text": "---\nclass: troubadour\nlevel: \"1\"\nname: Star Power\nscc: mcdm.heroes.v1/feature.troubadour.level-1/star-power\nsubclass: duelist\ntype: feature\n---\n\nYou have the following ability.\n",
+    "structured": {
+      "class": "troubadour",
+      "level": "1",
+      "subclass": "duelist"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.troubadour.level-1/troubadour-abilities",
+    "kind": "feature",
+    "name": "Troubadour Abilities",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/troubadour/level-1/troubadour-abilities.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/troubadour/level-1/troubadour-abilities.json",
+    "selection": "troubadour-level-one",
+    "text": "---\nclass: troubadour\nlevel: \"1\"\nname: Troubadour Abilities\nscc: mcdm.heroes.v1/feature.troubadour.level-1/troubadour-abilities\ntype: feature\n---\n\nYour performance centers around maneuvering through the scene of battle, maintaining its momentum so that the story flows as dramatically as possible.\n",
+    "structured": {
+      "class": "troubadour",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.troubadour.level-1/troubadour-class-act",
+    "kind": "feature",
+    "name": "Troubadour Class Act",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/troubadour/level-1/troubadour-class-act.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/troubadour/level-1/troubadour-class-act.json",
+    "selection": "troubadour-level-one",
+    "text": "---\nclass: troubadour\nlevel: \"1\"\nname: Troubadour Class Act\nscc: mcdm.heroes.v1/feature.troubadour.level-1/troubadour-class-act\ntype: feature\n---\n\nPanache, melody, and depiction. Some [troubadours](scc.v1:mcdm.heroes.v1/class/troubadour) have it all, but everyone starts somewhere. Your [troubadour class act](scc.v1:mcdm.heroes.v1/feature.troubadour.level-1/troubadour-class-act) is your art form, summing up the manner in which the world becomes your stage. As you go about unearthing the drama of everyday life and strife, you choose a [troubadour class act](scc.v1:mcdm.heroes.v1/feature.troubadour.level-1/troubadour-class-act) from the following options, each of which grants you a skill. (*Quick Build:* Virtuoso.)\n\n- **Auteur:** You seek drama from story and recount, using your magic to manipulate the sequence of events unfolding before you. You have the [Brag](scc.v1:mcdm.heroes.v1/skill.interpersonal/brag) skill.\n- **Duelist:** Drama infuses your every movement done in tandem with another. You perform dances of death, putting trust in your opponent to return your passion in kind. You have the [Gymnastics](scc.v1:mcdm.heroes.v1/skill.exploration/gymnastics) skill.\n- **Virtuoso:** You find drama in music and song, weaving magic between vibrations and filling the audience with your pathos. You have the [Music](scc.v1:mcdm.heroes.v1/skill.interpersonal/music) skill and can play an instrument.\n\nYour [troubadour class act](scc.v1:mcdm.heroes.v1/feature.troubadour.level-1/troubadour-class-act) is your [subclass](scc.v1:mcdm.heroes.v1/rule.general/subclass), and your choice of class act determines many of the features you'll gain as you gain new levels.\n",
+    "structured": {
+      "class": "troubadour",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.troubadour.level-1/virtuoso-performances",
+    "kind": "feature",
+    "name": "Virtuoso Performances",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/troubadour/level-1/virtuoso-performances.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/troubadour/level-1/virtuoso-performances.json",
+    "selection": "troubadour-level-one",
+    "text": "---\nclass: troubadour\nlevel: \"1\"\nname: Virtuoso Performances\nscc: mcdm.heroes.v1/feature.troubadour.level-1/virtuoso-performances\nsubclass: virtuoso\ntype: feature\n---\n\nYou have the following performance abilities, which are usable with your [Routines](scc.v1:mcdm.heroes.v1/feature.troubadour.level-1/routines) feature.\n",
+    "structured": {
+      "class": "troubadour",
+      "level": "1",
+      "subclass": "virtuoso"
+    }
   }
 ]

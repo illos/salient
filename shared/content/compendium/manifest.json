@@ -11,8 +11,8 @@
     "version": "1.0.4"
   },
   "generatedAt": "2026-09-08",
-  "contentHash": "sha256:98b79a429d89d8e8e9ee14a8bacb928c14ef48fcc01bbe83f3fef1e709cfcbf8",
-  "entryCount": 1362,
+  "contentHash": "sha256:71c51714ee7ea4132cd14fdf6585bb945d656be91e20727320ef462cf4ab2095",
+  "entryCount": 1402,
   "selections": [
     {
       "id": "supporting-character-choices",
@@ -190,6 +190,16 @@
         "feature/ability/shadow/level-2"
       ],
       "basis": "docs/build/V97-shadow-level-two.md#scope: complete Shadow level-two build choices."
+    },
+    {
+      "id": "troubadour-level-one",
+      "description": "Troubadour level-one class acts, routines and abilities.",
+      "paths": [
+        "class/troubadour.md",
+        "feature/troubadour/level-1",
+        "feature/ability/troubadour/level-1"
+      ],
+      "basis": "docs/build/V102-troubadour-level-one.md#scope: complete Troubadour level-one options."
     },
     {
       "id": "conduit-level-one",
@@ -1429,6 +1439,198 @@
       "file": "ability.json"
     },
     {
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/acrobatics",
+      "kind": "ability",
+      "name": "Acrobatics",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/acrobatics.md",
+      "selection": "troubadour-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/artful-flourish",
+      "kind": "ability",
+      "name": "Artful Flourish",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/artful-flourish.md",
+      "selection": "troubadour-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/ballad-of-the-beast",
+      "kind": "ability",
+      "name": "\"Ballad of the Beast\"",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/ballad-of-the-beast.md",
+      "selection": "troubadour-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/blocking",
+      "kind": "ability",
+      "name": "Blocking",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/blocking.md",
+      "selection": "troubadour-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/choreography",
+      "kind": "ability",
+      "name": "Choreography",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/choreography.md",
+      "selection": "troubadour-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/cutting-sarcasm",
+      "kind": "ability",
+      "name": "Cutting Sarcasm",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/cutting-sarcasm.md",
+      "selection": "troubadour-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/dramatic-monologue",
+      "kind": "ability",
+      "name": "Dramatic Monologue",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/dramatic-monologue.md",
+      "selection": "troubadour-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/dramatic-reversal",
+      "kind": "ability",
+      "name": "Dramatic Reversal",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/dramatic-reversal.md",
+      "selection": "troubadour-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/fake-your-death",
+      "kind": "ability",
+      "name": "Fake Your Death",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/fake-your-death.md",
+      "selection": "troubadour-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/flip-the-script",
+      "kind": "ability",
+      "name": "Flip the Script",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/flip-the-script.md",
+      "selection": "troubadour-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/harmonize",
+      "kind": "ability",
+      "name": "Harmonize",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/harmonize.md",
+      "selection": "troubadour-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/harsh-critic",
+      "kind": "ability",
+      "name": "Harsh Critic",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/harsh-critic.md",
+      "selection": "troubadour-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/hypnotic-overtones",
+      "kind": "ability",
+      "name": "Hypnotic Overtones",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/hypnotic-overtones.md",
+      "selection": "troubadour-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/instigator",
+      "kind": "ability",
+      "name": "Instigator",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/instigator.md",
+      "selection": "troubadour-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/method-acting",
+      "kind": "ability",
+      "name": "Method Acting",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/method-acting.md",
+      "selection": "troubadour-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/power-chord",
+      "kind": "ability",
+      "name": "Power Chord",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/power-chord.md",
+      "selection": "troubadour-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/quick-rewrite",
+      "kind": "ability",
+      "name": "Quick Rewrite",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/quick-rewrite.md",
+      "selection": "troubadour-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/revitalizing-limerick",
+      "kind": "ability",
+      "name": "Revitalizing Limerick",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/revitalizing-limerick.md",
+      "selection": "troubadour-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/riposte",
+      "kind": "ability",
+      "name": "Riposte",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/riposte.md",
+      "selection": "troubadour-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/star-power",
+      "kind": "ability",
+      "name": "Star Power",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/star-power.md",
+      "selection": "troubadour-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/thunder-mother",
+      "kind": "ability",
+      "name": "\"Thunder Mother\"",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/thunder-mother.md",
+      "selection": "troubadour-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/turnabout-is-fair-play",
+      "kind": "ability",
+      "name": "Turnabout Is Fair Play",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/turnabout-is-fair-play.md",
+      "selection": "troubadour-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/upstage",
+      "kind": "ability",
+      "name": "Upstage",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/upstage.md",
+      "selection": "troubadour-level-one",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/witty-banter",
+      "kind": "ability",
+      "name": "Witty Banter",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/witty-banter.md",
+      "selection": "troubadour-level-one",
+      "file": "ability.json"
+    },
+    {
       "id": "mcdm.heroes.v1/feature.ability.wode-elf/the-wode-defends",
       "kind": "ability",
       "name": "The Wode Defends",
@@ -1730,6 +1932,14 @@
       "name": "Tactician",
       "sourcePath": "vendor/steel-compendium/en/unified/md/class/tactician.md",
       "selection": "tactician-level-one",
+      "file": "class.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/class/troubadour",
+      "kind": "class",
+      "name": "Troubadour",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/class/troubadour.md",
+      "selection": "troubadour-level-one",
       "file": "class.json"
     },
     {
@@ -4106,6 +4316,126 @@
       "name": "Tactician Abilities",
       "sourcePath": "vendor/steel-compendium/en/unified/md/feature/tactician/level-1/tactician-abilities.md",
       "selection": "tactician-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.troubadour.level-1/1st-level-class-act-features",
+      "kind": "feature",
+      "name": "1st-Level Class Act Features",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/troubadour/level-1/1st-level-class-act-features.md",
+      "selection": "troubadour-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.troubadour.level-1/acrobatics",
+      "kind": "feature",
+      "name": "Acrobatics",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/troubadour/level-1/acrobatics.md",
+      "selection": "troubadour-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.troubadour.level-1/blocking",
+      "kind": "feature",
+      "name": "Blocking",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/troubadour/level-1/blocking.md",
+      "selection": "troubadour-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.troubadour.level-1/class-act-triggered-action",
+      "kind": "feature",
+      "name": "Class Act Triggered Action",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/troubadour/level-1/class-act-triggered-action.md",
+      "selection": "troubadour-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.troubadour.level-1/drama",
+      "kind": "feature",
+      "name": "Drama",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/troubadour/level-1/drama.md",
+      "selection": "troubadour-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.troubadour.level-1/dramatic-monologue",
+      "kind": "feature",
+      "name": "Dramatic Monologue",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/troubadour/level-1/dramatic-monologue.md",
+      "selection": "troubadour-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.troubadour.level-1/kit",
+      "kind": "feature",
+      "name": "Kit",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/troubadour/level-1/kit.md",
+      "selection": "troubadour-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.troubadour.level-1/power-chord",
+      "kind": "feature",
+      "name": "Power Chord",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/troubadour/level-1/power-chord.md",
+      "selection": "troubadour-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.troubadour.level-1/routines",
+      "kind": "feature",
+      "name": "Routines",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/troubadour/level-1/routines.md",
+      "selection": "troubadour-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.troubadour.level-1/scene-partner",
+      "kind": "feature",
+      "name": "Scene Partner",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/troubadour/level-1/scene-partner.md",
+      "selection": "troubadour-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.troubadour.level-1/signature-ability",
+      "kind": "feature",
+      "name": "Signature Ability",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/troubadour/level-1/signature-ability.md",
+      "selection": "troubadour-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.troubadour.level-1/star-power",
+      "kind": "feature",
+      "name": "Star Power",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/troubadour/level-1/star-power.md",
+      "selection": "troubadour-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.troubadour.level-1/troubadour-abilities",
+      "kind": "feature",
+      "name": "Troubadour Abilities",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/troubadour/level-1/troubadour-abilities.md",
+      "selection": "troubadour-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.troubadour.level-1/troubadour-class-act",
+      "kind": "feature",
+      "name": "Troubadour Class Act",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/troubadour/level-1/troubadour-class-act.md",
+      "selection": "troubadour-level-one",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.troubadour.level-1/virtuoso-performances",
+      "kind": "feature",
+      "name": "Virtuoso Performances",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/troubadour/level-1/virtuoso-performances.md",
+      "selection": "troubadour-level-one",
       "file": "feature.json"
     },
     {

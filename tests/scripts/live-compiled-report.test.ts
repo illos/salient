@@ -23,6 +23,7 @@ test('V72 availability follows current grants and loading, not catalog presence'
     // V94: the Tactician's 3-Focus Concussive Strike is reachable through the class ability choice.
     'Concussive Strike',
     'Curse of Terror',
+    'Cutting Sarcasm',
     // V92: the Shadow's 3-Insight Eviscerate is reachable through the class ability choice.
     'Eviscerate',
     'Eye Flash',
@@ -158,6 +159,8 @@ test.each([
   ['Repent!', 'I', 'dazed', [7, 10, 13], 3, 'wrath'],
   // Conduit/level-1/curse-of-terror: I-derived potency, 6/9/13 + I holy, 5 Piety.
   ['Curse of Terror', 'I', 'frightened', [8, 11, 15], 5, 'piety'],
+  // Troubadour/level-1/cutting-sarcasm: P-derived bleeding, printed 2/5/7 + P psychic.
+  ['Cutting Sarcasm', 'P', 'bleeding', [4, 7, 9], 0, 'drama'],
 ] as const)(
   '%s retains each strict source threshold and resource cost',
   (name, characteristic, condition, damages, cost, resource) => {

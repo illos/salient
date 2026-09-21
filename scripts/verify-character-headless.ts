@@ -1,3 +1,4 @@
+import { runTroubadour } from './headless/troubadour.ts';
 // SPDX-License-Identifier: GPL-3.0-only
 /** Live character acceptance against an explicitly selected development target and cohort. */
 import { mkdirSync, writeFileSync } from 'node:fs';
@@ -25,6 +26,7 @@ import { runWizardDraft } from './headless/wizard-draft.ts';
 // Each selected cohort invokes the original scenario, including all assertions and setup.
 const cohorts = {
   fury: runFury,
+  troubadour: runTroubadour,
   censor: runCensor,
   conduit: runConduit,
   all: runScenarios,

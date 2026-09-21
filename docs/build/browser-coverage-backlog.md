@@ -105,3 +105,10 @@ source-timed manual actions. Shared API coverage is in the `conduit` cohort; bro
 After V66: choose each aspect; confirm ordinary versus four Stormwight kit cards, derived bonuses,
 animal/form rule cards and conditional actions. Edit Stormwight to Reaver and confirm stale kit/action
 cards disappear. Headless cohort `fury` owns saved-choice, cost and action-state proof.
+
+## V102 — Troubadour level one
+
+After the browser moratorium: select each class act, inspect both Virtuoso performances, verify
+ordinary-kit choices and skill exclusions, and reopen a saved build. Check Drama costs and optional
+action labels on the sheet, manual performance timing and Upstage Self text. Public-API proof is
+the Troubadour cohort; no browser test was run for V102.

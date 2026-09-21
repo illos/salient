@@ -1,15 +1,15 @@
 {
   "generator": "scripts/audit-ability-grammar.ts v1",
-  "contentHash": "sha256:98b79a429d89d8e8e9ee14a8bacb928c14ef48fcc01bbe83f3fef1e709cfcbf8",
+  "contentHash": "sha256:71c51714ee7ea4132cd14fdf6585bb945d656be91e20727320ef462cf4ab2095",
   "foesEdition": "bf262edf546e91e1540cc17489915f18c4873ddd8bd8e225b20f3441e3f74f30",
   "sourceRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
   "totals": {
     "hero-standalone": {
       "COMPILES": 10,
-      "COMPILES_WITH_REMAINDER": 67,
-      "NO_MATCH": 64,
-      "total": 141,
-      "withinV26Bounded": 8
+      "COMPILES_WITH_REMAINDER": 74,
+      "NO_MATCH": 81,
+      "total": 165,
+      "withinV26Bounded": 9
     },
     "kit-signature": {
       "COMPILES": 2,
@@ -41,8 +41,8 @@
     }
   },
   "grants": {
-    "total": 819,
-    "resolvedToStandalone": 396,
+    "total": 891,
+    "resolvedToStandalone": 468,
     "resolvedToKit": 75,
     "ownText": 348,
     "unresolved": []
@@ -10556,6 +10556,1785 @@
           "grantKind": "ancestry-ability",
           "selectable": "selectable",
           "detail": "grant of option Psionic Bolt supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/acrobatics",
+      "name": "Acrobatics",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/acrobatics.md",
+      "usage": "No action",
+      "target": "Self and each ally in the area",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "While this performance is active, each target who starts their turn in the area can automatically obtain a tier 3 outcome on one test made to jump, tumble, or climb as part of their movement before the end of their turn.",
+            "locator": "section:0"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "area"
+      },
+      "grants": [
+        {
+          "name": "Acrobatics",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/acrobatics.md",
+          "decisionId": "class.troubadour.class-act",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Duelist supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Acrobatics",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/acrobatics.md",
+          "decisionId": "class.troubadour.class-act",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Duelist supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Acrobatics",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/acrobatics.md",
+          "decisionId": "class.troubadour.class-act",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Duelist supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/artful-flourish",
+      "name": "Artful Flourish",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/artful-flourish.md",
+      "usage": "Main action",
+      "target": "Two creatures or objects",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "A"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "flat",
+              "constant": 2
+            }
+          },
+          {
+            "damage": {
+              "kind": "flat",
+              "constant": 5
+            }
+          },
+          {
+            "damage": {
+              "kind": "flat",
+              "constant": 7
+            }
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "You can shift up to 3 squares.",
+            "locator": "section:1"
+          },
+          {
+            "type": "resource-spend",
+            "shape": "resource-spend:spend N+ drama",
+            "text": "You can target one additional creature or object for every 2 drama spent.",
+            "locator": "section:2"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "multi"
+      },
+      "grants": [
+        {
+          "name": "Artful Flourish",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/artful-flourish.md",
+          "decisionId": "class.troubadour.signature-ability",
+          "level": 1,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Artful Flourish supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Artful Flourish",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/artful-flourish.md",
+          "decisionId": "class.troubadour.signature-ability",
+          "level": 2,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Artful Flourish supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Artful Flourish",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/artful-flourish.md",
+          "decisionId": "class.troubadour.signature-ability",
+          "level": 3,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Artful Flourish supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/ballad-of-the-beast",
+      "name": "\"Ballad of the Beast\"",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/ballad-of-the-beast.md",
+      "usage": "No action",
+      "target": "Self and each ally in the area",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "While this performance is active, each target who starts their turn in the area gains 1 surge.",
+            "locator": "section:0"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "area"
+      },
+      "grants": [
+        {
+          "name": "\"Ballad of the Beast\"",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/ballad-of-the-beast.md",
+          "decisionId": "class.troubadour.class-act",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Virtuoso supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "\"Ballad of the Beast\"",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/ballad-of-the-beast.md",
+          "decisionId": "class.troubadour.class-act",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Virtuoso supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "\"Ballad of the Beast\"",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/ballad-of-the-beast.md",
+          "decisionId": "class.troubadour.class-act",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Virtuoso supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/blocking",
+      "name": "Blocking",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/blocking.md",
+      "usage": "No action",
+      "target": "Each creature in the area",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "At the end of each of your turns while this performance is active, you can choose up to a number of targets equal to your Presence score and teleport those targets to unoccupied spaces in the area. A target can't be teleported in a way that would harm them (such as over a cliff), leave them dying, or result in them suffering a condition or other negative effect.",
+            "locator": "section:0"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "area"
+      },
+      "grants": [
+        {
+          "name": "Blocking",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/blocking.md",
+          "decisionId": "class.troubadour.class-act",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Auteur supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Blocking",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/blocking.md",
+          "decisionId": "class.troubadour.class-act",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Auteur supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Blocking",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/blocking.md",
+          "decisionId": "class.troubadour.class-act",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Auteur supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/choreography",
+      "name": "Choreography",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/choreography.md",
+      "usage": "No action",
+      "target": "Self and each ally in the area",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "While this performance is active, each target who starts their turn in the area gains a +2 bonus to speed until the end of their turn.",
+            "locator": "section:0"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "area"
+      },
+      "grants": [
+        {
+          "name": "Choreography",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/choreography.md",
+          "decisionId": "class.troubadour.features",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Choreography",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/choreography.md",
+          "decisionId": "class.troubadour.features",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Choreography",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/choreography.md",
+          "decisionId": "class.troubadour.features",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/cutting-sarcasm",
+      "name": "Cutting Sarcasm",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/cutting-sarcasm.md",
+      "usage": "Main action",
+      "target": "One creature",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "P"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 2,
+              "characteristic": "P"
+            },
+            "damageType": "psychic"
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 5,
+              "characteristic": "P"
+            },
+            "damageType": "psychic"
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 7,
+              "characteristic": "P"
+            },
+            "damageType": "psychic"
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "potency-condition",
+            "shape": "potency:P < SYM bleeding (save ends)",
+            "text": "P < WEAK, bleeding (save ends)",
+            "locator": "tier1",
+            "bounded": true
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:P < SYM bleeding (save ends)",
+            "text": "P < AVERAGE, bleeding (save ends)",
+            "locator": "tier2",
+            "bounded": true
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:P < SYM bleeding (save ends)",
+            "text": "P < STRONG, bleeding (save ends)",
+            "locator": "tier3",
+            "bounded": true
+          }
+        ],
+        "withinV26Bounded": true,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Cutting Sarcasm",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/cutting-sarcasm.md",
+          "decisionId": "class.troubadour.signature-ability",
+          "level": 1,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Cutting Sarcasm supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Cutting Sarcasm",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/cutting-sarcasm.md",
+          "decisionId": "class.troubadour.signature-ability",
+          "level": 2,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Cutting Sarcasm supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Cutting Sarcasm",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/cutting-sarcasm.md",
+          "decisionId": "class.troubadour.signature-ability",
+          "level": 3,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Cutting Sarcasm supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/dramatic-monologue",
+      "name": "Dramatic Monologue",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/dramatic-monologue.md",
+      "usage": "Maneuver",
+      "target": "Special",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "Choose one of the following effects:",
+            "locator": "section:0"
+          },
+          {
+            "type": "resource-spend",
+            "shape": "resource-spend:spend N drama",
+            "text": "You can choose two targets for the chosen effect.",
+            "locator": "section:1"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "unknown"
+      },
+      "grants": [
+        {
+          "name": "Dramatic Monologue",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/dramatic-monologue.md",
+          "decisionId": "class.troubadour.class-act",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Auteur supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Dramatic Monologue",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/dramatic-monologue.md",
+          "decisionId": "class.troubadour.class-act",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Auteur supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Dramatic Monologue",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/dramatic-monologue.md",
+          "decisionId": "class.troubadour.class-act",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Auteur supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/dramatic-reversal",
+      "name": "Dramatic Reversal",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/dramatic-reversal.md",
+      "usage": "Main action",
+      "target": "Self and each ally in the area",
+      "cost": "5 Drama",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "tier1-damage-outside-grammar",
+        "roll": {
+          "permitted": [
+            "P"
+          ]
+        },
+        "diagnostics": [
+          {
+            "type": "tier-damage",
+            "shape": "tier:the target can shift N square and make a free strike",
+            "text": "The target can shift 1 square and make a free strike",
+            "locator": "tier1"
+          },
+          {
+            "type": "tier-damage",
+            "shape": "tier:the target can shift up to N squares and make a free strike that gains an edge",
+            "text": "The target can shift up to 2 squares and make a free strike that gains an edge",
+            "locator": "tier2"
+          },
+          {
+            "type": "tier-damage",
+            "shape": "tier:the target can shift up to N squares and make a free strike that gains an edge, then can spend a recovery",
+            "text": "The target can shift up to 3 squares and make a free strike that gains an edge, then can spend a Recovery",
+            "locator": "tier3"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "area"
+      },
+      "grants": [
+        {
+          "name": "Dramatic Reversal",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/dramatic-reversal.md",
+          "decisionId": "class.troubadour.ability-5",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Dramatic Reversal supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Dramatic Reversal",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/dramatic-reversal.md",
+          "decisionId": "class.troubadour.ability-5",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Dramatic Reversal supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Dramatic Reversal",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/dramatic-reversal.md",
+          "decisionId": "class.troubadour.ability-5",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Dramatic Reversal supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/fake-your-death",
+      "name": "Fake Your Death",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/fake-your-death.md",
+      "usage": "Maneuver",
+      "target": "Self",
+      "cost": "5 Drama",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "You turn invisible and create a magical illusion of your corpse falling in your space. While you are invisible, you gain a +3 bonus to speed and you ignore difficult terrain. The illusion and your invisibility last until the end of your next turn, or until the illusion is interacted with, you take damage, or you use a main action or a maneuver.",
+            "locator": "section:0"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "self"
+      },
+      "grants": [
+        {
+          "name": "Fake Your Death",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/fake-your-death.md",
+          "decisionId": "class.troubadour.ability-5",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Fake Your Death supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Fake Your Death",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/fake-your-death.md",
+          "decisionId": "class.troubadour.ability-5",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Fake Your Death supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Fake Your Death",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/fake-your-death.md",
+          "decisionId": "class.troubadour.ability-5",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Fake Your Death supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/flip-the-script",
+      "name": "Flip the Script",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/flip-the-script.md",
+      "usage": "Main action",
+      "target": "Self and each ally in the area",
+      "cost": "5 Drama",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "Each target can teleport up to 5 squares. Any teleported target who was slowed is no longer slowed.",
+            "locator": "section:0"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "area"
+      },
+      "grants": [
+        {
+          "name": "Flip the Script",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/flip-the-script.md",
+          "decisionId": "class.troubadour.ability-5",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Flip the Script supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Flip the Script",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/flip-the-script.md",
+          "decisionId": "class.troubadour.ability-5",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Flip the Script supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Flip the Script",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/flip-the-script.md",
+          "decisionId": "class.troubadour.ability-5",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Flip the Script supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/harmonize",
+      "name": "Harmonize",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/harmonize.md",
+      "usage": "Triggered",
+      "target": "One ally",
+      "cost": "3 Drama",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "trigger",
+            "shape": "trigger",
+            "text": "The target uses an ability that targets only one enemy and costs 3 or fewer of their Heroic Resource.",
+            "locator": "section:0"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "The target can choose one additional target for the triggering ability. Any damage dealt to the additional target is sonic damage.",
+            "locator": "section:1"
+          },
+          {
+            "type": "resource-spend",
+            "shape": "resource-spend:spend N+ drama",
+            "text": "You can trigger this ability when a target uses an ability that has a Heroic Resource cost of 3 + each additional drama spent.",
+            "locator": "section:2"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Harmonize",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/harmonize.md",
+          "decisionId": "class.troubadour.class-act",
+          "level": 1,
+          "grantKind": "aspect-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Virtuoso supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Harmonize",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/harmonize.md",
+          "decisionId": "class.troubadour.class-act",
+          "level": 2,
+          "grantKind": "aspect-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Virtuoso supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Harmonize",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/harmonize.md",
+          "decisionId": "class.troubadour.class-act",
+          "level": 3,
+          "grantKind": "aspect-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Virtuoso supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/harsh-critic",
+      "name": "Harsh Critic",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/harsh-critic.md",
+      "usage": "Main action",
+      "target": "One creature or object",
+      "cost": "3 Drama",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "P"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 7,
+              "characteristic": "P"
+            },
+            "damageType": "sonic"
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 10,
+              "characteristic": "P"
+            },
+            "damageType": "sonic"
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 13,
+              "characteristic": "P"
+            },
+            "damageType": "sonic"
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "The first time the target uses an ability before the start of your next turn, any effects from the ability's tier outcomes other than damage are negated for all targets. Ability effects that always happen regardless of the power roll work as usual.",
+            "locator": "section:1"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Harsh Critic",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/harsh-critic.md",
+          "decisionId": "class.troubadour.ability-3",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Harsh Critic supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Harsh Critic",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/harsh-critic.md",
+          "decisionId": "class.troubadour.ability-3",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Harsh Critic supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Harsh Critic",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/harsh-critic.md",
+          "decisionId": "class.troubadour.ability-3",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Harsh Critic supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/hypnotic-overtones",
+      "name": "Hypnotic Overtones",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/hypnotic-overtones.md",
+      "usage": "Main action",
+      "target": "Each enemy in the area",
+      "cost": "3 Drama",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "tier1-damage-outside-grammar",
+        "roll": {
+          "permitted": [
+            "P"
+          ]
+        },
+        "diagnostics": [
+          {
+            "type": "resource-spend",
+            "shape": "resource-spend:spend N+ drama",
+            "text": "The size of the burst increases by 1 for every 2 drama spent.",
+            "locator": "section:1"
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:I < SYM dazed (save ends)",
+            "text": "I < WEAK, dazed (save ends)",
+            "locator": "tier1",
+            "bounded": false
+          },
+          {
+            "type": "tier-damage",
+            "shape": "tier:slide N",
+            "text": "Slide 1",
+            "locator": "tier1"
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:I < SYM dazed (save ends)",
+            "text": "I < AVERAGE, dazed (save ends)",
+            "locator": "tier2",
+            "bounded": false
+          },
+          {
+            "type": "tier-damage",
+            "shape": "tier:slide N",
+            "text": "Slide 1",
+            "locator": "tier2"
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:I < SYM dazed (save ends)",
+            "text": "I < STRONG, dazed (save ends)",
+            "locator": "tier3",
+            "bounded": false
+          },
+          {
+            "type": "tier-damage",
+            "shape": "tier:slide N",
+            "text": "Slide 2",
+            "locator": "tier3"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "area"
+      },
+      "grants": [
+        {
+          "name": "Hypnotic Overtones",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/hypnotic-overtones.md",
+          "decisionId": "class.troubadour.ability-3",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Hypnotic Overtones supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Hypnotic Overtones",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/hypnotic-overtones.md",
+          "decisionId": "class.troubadour.ability-3",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Hypnotic Overtones supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Hypnotic Overtones",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/hypnotic-overtones.md",
+          "decisionId": "class.troubadour.ability-3",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Hypnotic Overtones supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/instigator",
+      "name": "Instigator",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/instigator.md",
+      "usage": "Main action",
+      "target": "One creature",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "P"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 3,
+              "characteristic": "P"
+            }
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 6,
+              "characteristic": "P"
+            }
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 9,
+              "characteristic": "P"
+            }
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "The target is taunted by you or a willing ally adjacent to you until the end of the target's next turn.",
+            "locator": "section:1"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Instigator",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/instigator.md",
+          "decisionId": "class.troubadour.signature-ability",
+          "level": 1,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Instigator supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Instigator",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/instigator.md",
+          "decisionId": "class.troubadour.signature-ability",
+          "level": 2,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Instigator supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Instigator",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/instigator.md",
+          "decisionId": "class.troubadour.signature-ability",
+          "level": 3,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Instigator supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/method-acting",
+      "name": "Method Acting",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/method-acting.md",
+      "usage": "Main action",
+      "target": "One creature",
+      "cost": "5 Drama",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "A"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 6,
+              "characteristic": "A"
+            }
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 10,
+              "characteristic": "A"
+            }
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 14,
+              "characteristic": "A"
+            }
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "You can become bleeding (save ends) to deal an extra 5 corruption damage to the target.",
+            "locator": "section:1"
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:P < SYM weakened (save ends)",
+            "text": "P < WEAK, weakened (save ends)",
+            "locator": "tier1",
+            "bounded": true
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:P < SYM weakened (save ends)",
+            "text": "P < AVERAGE, weakened (save ends)",
+            "locator": "tier2",
+            "bounded": true
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:P < SYM weakened (save ends)",
+            "text": "P < STRONG, weakened (save ends)",
+            "locator": "tier3",
+            "bounded": true
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Method Acting",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/method-acting.md",
+          "decisionId": "class.troubadour.ability-5",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Method Acting supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Method Acting",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/method-acting.md",
+          "decisionId": "class.troubadour.ability-5",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Method Acting supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Method Acting",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/method-acting.md",
+          "decisionId": "class.troubadour.ability-5",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Method Acting supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/power-chord",
+      "name": "Power Chord",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/power-chord.md",
+      "usage": "Maneuver",
+      "target": "Each enemy in the area",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "tier1-damage-outside-grammar",
+        "roll": {
+          "permitted": [
+            "P"
+          ]
+        },
+        "diagnostics": [
+          {
+            "type": "tier-damage",
+            "shape": "tier:push N",
+            "text": "Push 1",
+            "locator": "tier1"
+          },
+          {
+            "type": "tier-damage",
+            "shape": "tier:push N",
+            "text": "Push 2",
+            "locator": "tier2"
+          },
+          {
+            "type": "tier-damage",
+            "shape": "tier:push N",
+            "text": "Push 3",
+            "locator": "tier3"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "area"
+      },
+      "grants": [
+        {
+          "name": "Power Chord",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/power-chord.md",
+          "decisionId": "class.troubadour.class-act",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Virtuoso supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Power Chord",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/power-chord.md",
+          "decisionId": "class.troubadour.class-act",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Virtuoso supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Power Chord",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/power-chord.md",
+          "decisionId": "class.troubadour.class-act",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Virtuoso supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/quick-rewrite",
+      "name": "Quick Rewrite",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/quick-rewrite.md",
+      "usage": "Main action",
+      "target": "Each enemy in the area",
+      "cost": "3 Drama",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "P"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "flat",
+              "constant": 4
+            }
+          },
+          {
+            "damage": {
+              "kind": "flat",
+              "constant": 5
+            }
+          },
+          {
+            "damage": {
+              "kind": "flat",
+              "constant": 6
+            }
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "The area is difficult terrain for enemies.",
+            "locator": "section:1"
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:P < SYM slowed (save ends)",
+            "text": "P < WEAK, slowed (save ends)",
+            "locator": "tier1",
+            "bounded": true
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:P < SYM slowed (save ends)",
+            "text": "P < AVERAGE, slowed (save ends)",
+            "locator": "tier2",
+            "bounded": true
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:P < SYM restrained (save ends)",
+            "text": "P < STRONG, restrained (save ends)",
+            "locator": "tier3",
+            "bounded": true
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "area"
+      },
+      "grants": [
+        {
+          "name": "Quick Rewrite",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/quick-rewrite.md",
+          "decisionId": "class.troubadour.ability-3",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Quick Rewrite supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Quick Rewrite",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/quick-rewrite.md",
+          "decisionId": "class.troubadour.ability-3",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Quick Rewrite supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Quick Rewrite",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/quick-rewrite.md",
+          "decisionId": "class.troubadour.ability-3",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Quick Rewrite supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/revitalizing-limerick",
+      "name": "Revitalizing Limerick",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/revitalizing-limerick.md",
+      "usage": "No action",
+      "target": "Self and each ally in the area",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "At the end of each of your turns while this performance is active, you can choose up to a number of targets equal to your Presence score. Each chosen target can spend a Recovery.",
+            "locator": "section:0"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "area"
+      },
+      "grants": [
+        {
+          "name": "Revitalizing Limerick",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/revitalizing-limerick.md",
+          "decisionId": "class.troubadour.features",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Revitalizing Limerick",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/revitalizing-limerick.md",
+          "decisionId": "class.troubadour.features",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Revitalizing Limerick",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/revitalizing-limerick.md",
+          "decisionId": "class.troubadour.features",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/riposte",
+      "name": "Riposte",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/riposte.md",
+      "usage": "Triggered",
+      "target": "Self or one ally",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "trigger",
+            "shape": "trigger",
+            "text": "The target takes damage from a melee strike.",
+            "locator": "section:0"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "The target makes a free strike against the creature who made the triggering strike.",
+            "locator": "section:1"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "unknown"
+      },
+      "grants": [
+        {
+          "name": "Riposte",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/riposte.md",
+          "decisionId": "class.troubadour.class-act",
+          "level": 1,
+          "grantKind": "aspect-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Duelist supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Riposte",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/riposte.md",
+          "decisionId": "class.troubadour.class-act",
+          "level": 2,
+          "grantKind": "aspect-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Duelist supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Riposte",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/riposte.md",
+          "decisionId": "class.troubadour.class-act",
+          "level": 3,
+          "grantKind": "aspect-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Duelist supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/star-power",
+      "name": "Star Power",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/star-power.md",
+      "usage": "Maneuver",
+      "target": "Self",
+      "cost": "1 Drama",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "You gain a +2 bonus to speed until the end of your turn. Additionally, the next power roll you make this turn can't have an outcome lower than tier 2.",
+            "locator": "section:0"
+          },
+          {
+            "type": "resource-spend",
+            "shape": "resource-spend:spend N drama",
+            "text": "You gain a +4 bonus to speed instead.",
+            "locator": "section:1"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "self"
+      },
+      "grants": [
+        {
+          "name": "Star Power",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/star-power.md",
+          "decisionId": "class.troubadour.class-act",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Duelist supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Star Power",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/star-power.md",
+          "decisionId": "class.troubadour.class-act",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Duelist supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Star Power",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/star-power.md",
+          "decisionId": "class.troubadour.class-act",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Duelist supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/thunder-mother",
+      "name": "\"Thunder Mother\"",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/thunder-mother.md",
+      "usage": "No action",
+      "target": "One creature",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "tier1-damage-outside-grammar",
+        "roll": {
+          "permitted": [
+            "P"
+          ]
+        },
+        "diagnostics": [
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "At the end of each combat round while this performance is active, you can make a power roll against the target that ignores cover. You can't target the same creature twice with this effect.",
+            "locator": "section:0"
+          },
+          {
+            "type": "tier-damage",
+            "shape": "tier:lightning damage equal to your level",
+            "text": "Lightning damage equal to your level",
+            "locator": "tier1"
+          },
+          {
+            "type": "tier-damage",
+            "shape": "tier:lightning damage equal to N + your level",
+            "text": "Lightning damage equal to 5 + your level",
+            "locator": "tier2"
+          },
+          {
+            "type": "tier-damage",
+            "shape": "tier:lightning damage equal to N + your level",
+            "text": "Lightning damage equal to 10 + your level",
+            "locator": "tier3"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "\"Thunder Mother\"",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/thunder-mother.md",
+          "decisionId": "class.troubadour.class-act",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Virtuoso supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "\"Thunder Mother\"",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/thunder-mother.md",
+          "decisionId": "class.troubadour.class-act",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Virtuoso supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "\"Thunder Mother\"",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/thunder-mother.md",
+          "decisionId": "class.troubadour.class-act",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Virtuoso supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/turnabout-is-fair-play",
+      "name": "Turnabout Is Fair Play",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/turnabout-is-fair-play.md",
+      "usage": "Triggered",
+      "target": "One creature",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "trigger",
+            "shape": "trigger",
+            "text": "The target makes an ability roll that has an edge, a double edge, a bane, or a double bane.",
+            "locator": "section:0"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "An edge on the triggering roll becomes a bane, or a double edge becomes an edge. A bane becomes an edge, or a double bane becomes a bane.",
+            "locator": "section:1"
+          },
+          {
+            "type": "resource-spend",
+            "shape": "resource-spend:spend N drama",
+            "text": "An edge on the triggering roll becomes a double bane, or a double edge is negated. A bane becomes a double edge, or a double bane is negated.",
+            "locator": "section:2"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Turnabout Is Fair Play",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/turnabout-is-fair-play.md",
+          "decisionId": "class.troubadour.class-act",
+          "level": 1,
+          "grantKind": "aspect-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Auteur supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Turnabout Is Fair Play",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/turnabout-is-fair-play.md",
+          "decisionId": "class.troubadour.class-act",
+          "level": 2,
+          "grantKind": "aspect-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Auteur supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Turnabout Is Fair Play",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/turnabout-is-fair-play.md",
+          "decisionId": "class.troubadour.class-act",
+          "level": 3,
+          "grantKind": "aspect-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Auteur supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/upstage",
+      "name": "Upstage",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/upstage.md",
+      "usage": "Maneuver",
+      "target": "Self",
+      "cost": "3 Drama",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "tier1-damage-outside-grammar",
+        "roll": {
+          "permitted": [
+            "A",
+            "P"
+          ]
+        },
+        "diagnostics": [
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "You shift up to your speed. You make one power roll that targets each enemy you move adjacent to during this shift.",
+            "locator": "section:0"
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:A < SYM prone",
+            "text": "A < WEAK, prone",
+            "locator": "tier1",
+            "bounded": false
+          },
+          {
+            "type": "tier-damage",
+            "shape": "tier:taunted (eot)",
+            "text": "Taunted (EoT)",
+            "locator": "tier1"
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:A < SYM prone",
+            "text": "A < AVERAGE, prone",
+            "locator": "tier2",
+            "bounded": false
+          },
+          {
+            "type": "tier-damage",
+            "shape": "tier:taunted (eot)",
+            "text": "Taunted (EoT)",
+            "locator": "tier2"
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:A < SYM prone and can't stand (eot)",
+            "text": "A < STRONG, prone and can't stand (EoT)",
+            "locator": "tier3",
+            "bounded": false
+          },
+          {
+            "type": "tier-damage",
+            "shape": "tier:taunted (eot)",
+            "text": "Taunted (EoT)",
+            "locator": "tier3"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "self"
+      },
+      "grants": [
+        {
+          "name": "Upstage",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/upstage.md",
+          "decisionId": "class.troubadour.ability-3",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Upstage supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Upstage",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/upstage.md",
+          "decisionId": "class.troubadour.ability-3",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Upstage supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Upstage",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/upstage.md",
+          "decisionId": "class.troubadour.ability-3",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Upstage supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/witty-banter",
+      "name": "Witty Banter",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/witty-banter.md",
+      "usage": "Main action",
+      "target": "One creature",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "P"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 4,
+              "characteristic": "P"
+            },
+            "damageType": "psychic"
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 5,
+              "characteristic": "P"
+            },
+            "damageType": "psychic"
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 7,
+              "characteristic": "P"
+            },
+            "damageType": "psychic"
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "One ally within 10 squares of you can end one effect on them that is ended by a saving throw or that ends at the end of their turn.",
+            "locator": "section:1"
+          },
+          {
+            "type": "resource-spend",
+            "shape": "resource-spend:spend N drama",
+            "text": "The chosen ally can spend a Recovery.",
+            "locator": "section:2"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Witty Banter",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/witty-banter.md",
+          "decisionId": "class.troubadour.signature-ability",
+          "level": 1,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Witty Banter supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Witty Banter",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/witty-banter.md",
+          "decisionId": "class.troubadour.signature-ability",
+          "level": 2,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Witty Banter supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Witty Banter",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/witty-banter.md",
+          "decisionId": "class.troubadour.signature-ability",
+          "level": 3,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Witty Banter supportedInV001=true; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -76694,8 +78473,8 @@
     {
       "shape": "effect-paragraph:effect",
       "type": "effect-paragraph",
-      "count": 1086,
-      "abilities": 1072,
+      "count": 1106,
+      "abilities": 1092,
       "examples": [
         "complication:Corrupted Mentor/corrupt-spirit",
         "complication:Dragon Dreams/dragon-breath",
@@ -76705,8 +78484,8 @@
     {
       "shape": "no-power-roll",
       "type": "no-power-roll",
-      "count": 608,
-      "abilities": 608,
+      "count": 620,
+      "abilities": 620,
       "examples": [
         "complication:Advanced Studies/advanced-studies-study-notebook",
         "complication:Animal Form/animal-form",
@@ -76716,8 +78495,8 @@
     {
       "shape": "trigger",
       "type": "trigger",
-      "count": 191,
-      "abilities": 191,
+      "count": 194,
+      "abilities": 194,
       "examples": [
         "foe-feature:9d1bd539-c732-4fba-95d1-ac7036cb89dc",
         "mcdm.heroes.v1/feature.ability.censor.level-1/my-life-for-yours",
@@ -76912,6 +78691,17 @@
       ]
     },
     {
+      "shape": "tier:push N",
+      "type": "tier-damage",
+      "count": 25,
+      "abilities": 9,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.common/knockback",
+        "mcdm.heroes.v1/feature.ability.fury.level-2/wrecking-ball",
+        "mcdm.heroes.v1/feature.ability.troubadour.level-1/power-chord"
+      ]
+    },
+    {
       "shape": "grabbed",
       "type": "condition",
       "count": 23,
@@ -76942,17 +78732,6 @@
         "salient:foe-feature:05bbcbfc-275b-4d1e-837d-8db6500878fc",
         "salient:foe-feature:3c6121dc-e556-4a07-b38e-6fa41550ab22",
         "salient:foe-feature:4b969b6a-9975-4da9-9568-5b43f16d16aa"
-      ]
-    },
-    {
-      "shape": "tier:push N",
-      "type": "tier-damage",
-      "count": 22,
-      "abilities": 8,
-      "examples": [
-        "mcdm.heroes.v1/feature.ability.common/knockback",
-        "mcdm.heroes.v1/feature.ability.fury.level-2/wrecking-ball",
-        "salient:foe-feature:25b187f0-977f-42d6-918e-a86c7e8698d5"
       ]
     },
     {
@@ -77011,6 +78790,17 @@
       ]
     },
     {
+      "shape": "tier:slide N",
+      "type": "tier-damage",
+      "count": 17,
+      "abilities": 6,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.shadow.level-2/machinations-of-sound",
+        "mcdm.heroes.v1/feature.ability.troubadour.level-1/hypnotic-overtones",
+        "salient:foe-feature:02360fbb-13e5-4b59-acc9-2635f9c991a8"
+      ]
+    },
+    {
       "shape": "potency:A < N weakened (save ends)",
       "type": "potency-condition",
       "count": 16,
@@ -77019,17 +78809,6 @@
         "salient:foe-feature:2d425f83-e132-4fe4-8732-5d4a414c914c",
         "salient:foe-feature:69149685-5481-4f4d-9f9f-47422ffa8a73",
         "salient:foe-feature:86f8a31b-28f4-45a7-94e6-3b131231a609"
-      ]
-    },
-    {
-      "shape": "tier:slide N",
-      "type": "tier-damage",
-      "count": 14,
-      "abilities": 5,
-      "examples": [
-        "mcdm.heroes.v1/feature.ability.shadow.level-2/machinations-of-sound",
-        "salient:foe-feature:02360fbb-13e5-4b59-acc9-2635f9c991a8",
-        "salient:foe-feature:2271ecf0-a797-415d-97d0-90150d9e23eb"
       ]
     },
     {
@@ -77253,6 +79032,17 @@
       ]
     },
     {
+      "shape": "potency:A < SYM prone",
+      "type": "potency-condition",
+      "count": 7,
+      "abilities": 3,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.conduit.level-1/judgments-hammer",
+        "mcdm.heroes.v1/feature.ability.troubadour.level-1/upstage",
+        "mcdm.heroes.v1/kit/vuken/unbalancing-attack"
+      ]
+    },
+    {
       "shape": "push N (not directly after damage)",
       "type": "push-with-extra",
       "count": 7,
@@ -77304,6 +79094,16 @@
       "examples": [
         "salient:foe-feature:1100d658-0c0a-4ddd-8422-319542a12ac9",
         "salient:foe-feature:bcd562cb-aa41-4d86-a418-811f80851230"
+      ]
+    },
+    {
+      "shape": "potency:I < SYM dazed (save ends)",
+      "type": "potency-condition",
+      "count": 6,
+      "abilities": 2,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.censor.level-1/repent",
+        "mcdm.heroes.v1/feature.ability.troubadour.level-1/hypnotic-overtones"
       ]
     },
     {
@@ -77439,16 +79239,6 @@
       ]
     },
     {
-      "shape": "potency:A < SYM prone",
-      "type": "potency-condition",
-      "count": 5,
-      "abilities": 2,
-      "examples": [
-        "mcdm.heroes.v1/feature.ability.conduit.level-1/judgments-hammer",
-        "mcdm.heroes.v1/kit/vuken/unbalancing-attack"
-      ]
-    },
-    {
       "shape": "potency:M < N slide N",
       "type": "potency-condition",
       "count": 5,
@@ -77456,6 +79246,16 @@
       "examples": [
         "salient:foe-feature:3560631e-6258-4701-be0b-382e5c0ac96b",
         "salient:foe-feature:7813b9fe-f665-4492-ad60-a0824ca8611f"
+      ]
+    },
+    {
+      "shape": "potency:P < SYM slowed (save ends)",
+      "type": "potency-condition",
+      "count": 5,
+      "abilities": 2,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.censor.level-1/halt-miscreant",
+        "mcdm.heroes.v1/feature.ability.troubadour.level-1/quick-rewrite"
       ]
     },
     {
@@ -77487,6 +79287,17 @@
         "mcdm.heroes.v1/feature.ability.elementalist.level-1/ripples-in-the-earth",
         "mcdm.heroes.v1/feature.ability.time-raider/concussive-slam",
         "mcdm.heroes.v1/kit/sword-and-board/shield-bash"
+      ]
+    },
+    {
+      "shape": "resource-spend:spend N drama",
+      "type": "resource-spend",
+      "count": 4,
+      "abilities": 4,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.troubadour.level-1/dramatic-monologue",
+        "mcdm.heroes.v1/feature.ability.troubadour.level-1/star-power",
+        "mcdm.heroes.v1/feature.ability.troubadour.level-1/turnabout-is-fair-play"
       ]
     },
     {
@@ -77622,6 +79433,17 @@
         "mcdm.heroes.v1/feature.ability.elementalist.level-1/explosive-assistance",
         "mcdm.heroes.v1/feature.ability.elementalist.level-1/skin-like-castle-walls",
         "mcdm.heroes.v1/feature.ability.elementalist.level-1/subtle-relocation"
+      ]
+    },
+    {
+      "shape": "resource-spend:spend N+ drama",
+      "type": "resource-spend",
+      "count": 3,
+      "abilities": 3,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.troubadour.level-1/artful-flourish",
+        "mcdm.heroes.v1/feature.ability.troubadour.level-1/harmonize",
+        "mcdm.heroes.v1/feature.ability.troubadour.level-1/hypnotic-overtones"
       ]
     },
     {
@@ -77907,15 +79729,6 @@
       ]
     },
     {
-      "shape": "potency:I < SYM dazed (save ends)",
-      "type": "potency-condition",
-      "count": 3,
-      "abilities": 1,
-      "examples": [
-        "mcdm.heroes.v1/feature.ability.censor.level-1/repent"
-      ]
-    },
-    {
       "shape": "potency:I < SYM frightened (save ends)",
       "type": "potency-condition",
       "count": 3,
@@ -78105,12 +79918,12 @@
       ]
     },
     {
-      "shape": "potency:P < SYM slowed (save ends)",
+      "shape": "potency:P < SYM bleeding (save ends)",
       "type": "potency-condition",
       "count": 3,
       "abilities": 1,
       "examples": [
-        "mcdm.heroes.v1/feature.ability.censor.level-1/halt-miscreant"
+        "mcdm.heroes.v1/feature.ability.troubadour.level-1/cutting-sarcasm"
       ]
     },
     {
@@ -78120,6 +79933,15 @@
       "abilities": 1,
       "examples": [
         "mcdm.heroes.v1/feature.ability.conduit.level-1/wither"
+      ]
+    },
+    {
+      "shape": "potency:P < SYM weakened (save ends)",
+      "type": "potency-condition",
+      "count": 3,
+      "abilities": 1,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.troubadour.level-1/method-acting"
       ]
     },
     {
@@ -78354,6 +80176,15 @@
       "abilities": 1,
       "examples": [
         "salient:foe-feature:a15abf38-3918-4a36-b82c-ac108069b612"
+      ]
+    },
+    {
+      "shape": "tier:taunted (eot)",
+      "type": "tier-damage",
+      "count": 3,
+      "abilities": 1,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.troubadour.level-1/upstage"
       ]
     },
     {
@@ -78966,6 +80797,15 @@
       ]
     },
     {
+      "shape": "tier:lightning damage equal to N + your level",
+      "type": "tier-damage",
+      "count": 2,
+      "abilities": 1,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.troubadour.level-1/thunder-mother"
+      ]
+    },
+    {
       "shape": "tier:N damage, N lightning damage",
       "type": "tier-damage",
       "count": 2,
@@ -79371,6 +81211,15 @@
       ]
     },
     {
+      "shape": "potency:A < SYM prone and can't stand (eot)",
+      "type": "potency-condition",
+      "count": 1,
+      "abilities": 1,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.troubadour.level-1/upstage"
+      ]
+    },
+    {
       "shape": "potency:A < SYM prone and can't stand (save ends)",
       "type": "potency-condition",
       "count": 1,
@@ -79656,6 +81505,15 @@
       "abilities": 1,
       "examples": [
         "salient:foe-feature:20d846b2-64de-4380-a924-ee2368a68175"
+      ]
+    },
+    {
+      "shape": "potency:P < SYM restrained (save ends)",
+      "type": "potency-condition",
+      "count": 1,
+      "abilities": 1,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.troubadour.level-1/quick-rewrite"
       ]
     },
     {
@@ -80235,6 +82093,15 @@
       ]
     },
     {
+      "shape": "tier:lightning damage equal to your level",
+      "type": "tier-damage",
+      "count": 1,
+      "abilities": 1,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.troubadour.level-1/thunder-mother"
+      ]
+    },
+    {
       "shape": "tier:N corruption damage, or if the target has p < N they are judged",
       "type": "tier-damage",
       "count": 1,
@@ -80379,12 +82246,39 @@
       ]
     },
     {
+      "shape": "tier:the target can shift N square and make a free strike",
+      "type": "tier-damage",
+      "count": 1,
+      "abilities": 1,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.troubadour.level-1/dramatic-reversal"
+      ]
+    },
+    {
       "shape": "tier:the target can shift N square from the edge of the hole to the nearest unoccupied space of their choice",
       "type": "tier-damage",
       "count": 1,
       "abilities": 1,
       "examples": [
         "mcdm.heroes.v1/feature.ability.elementalist.level-1/instantaneous-excavation"
+      ]
+    },
+    {
+      "shape": "tier:the target can shift up to N squares and make a free strike that gains an edge",
+      "type": "tier-damage",
+      "count": 1,
+      "abilities": 1,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.troubadour.level-1/dramatic-reversal"
+      ]
+    },
+    {
+      "shape": "tier:the target can shift up to N squares and make a free strike that gains an edge, then can spend a recovery",
+      "type": "tier-damage",
+      "count": 1,
+      "abilities": 1,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.troubadour.level-1/dramatic-reversal"
       ]
     },
     {
@@ -80711,11 +82605,11 @@
       "noMatch": 572
     },
     "hero": {
-      "total": 238,
+      "total": 262,
       "compiles": 13,
-      "withRemainder": 88,
-      "withinV26Bounded": 9,
-      "noMatch": 137
+      "withRemainder": 95,
+      "withinV26Bounded": 10,
+      "noMatch": 154
     }
   }
 }

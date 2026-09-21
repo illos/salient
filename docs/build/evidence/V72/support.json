@@ -1,6 +1,6 @@
 {
   "generator": "V72/1",
-  "contentHash": "sha256:98b79a429d89d8e8e9ee14a8bacb928c14ef48fcc01bbe83f3fef1e709cfcbf8",
+  "contentHash": "sha256:71c51714ee7ea4132cd14fdf6585bb945d656be91e20727320ef462cf4ab2095",
   "sourceRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
   "foesEdition": "bf262edf546e91e1540cc17489915f18c4873ddd8bd8e225b20f3441e3f74f30",
   "scope": "Structural support, current grant/loading availability and live execution are separate. Source drift never silently falls back; historical results are never recompiled on read.",
@@ -16,9 +16,9 @@
       "manual": 1150
     },
     "hero-standalone": {
-      "total": 141,
-      "supported": 13,
-      "manual": 128
+      "total": 165,
+      "supported": 14,
+      "manual": 151
     },
     "kit-signature": {
       "total": 25,
@@ -26854,6 +26854,2840 @@
           "grantKind": "ancestry-ability",
           "selectable": "selectable",
           "detail": "grant of option Psionic Bolt supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/acrobatics",
+      "name": "Acrobatics",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/acrobatics",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/acrobatics.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/acrobatics#block:0:0:11728709edbedd7e",
+          "locator": "block:0:0",
+          "clause": "While this performance is active, each target who starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) in the area can automatically obtain a tier 3 outcome on one [test](scc.v1:mcdm.heroes.v1/rule.test/test) made to jump, tumble, or climb as part of their movement before the end of their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "While this performance is active, each target who starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) in the area can automatically obtain a tier 3 outcome on one [test](scc.v1:mcdm.heroes.v1/rule.test/test) made to jump, tumble, or climb as part of their movement before the end of their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Self and each ally in the area",
+          "message": "Only the designed single-target envelope is eligible."
+        },
+        {
+          "code": "action-type",
+          "locator": "header:usage",
+          "clause": "No action",
+          "message": "Unrecognized action type."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Acrobatics",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/acrobatics.md",
+          "decisionId": "class.troubadour.class-act",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Duelist supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Acrobatics",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/acrobatics.md",
+          "decisionId": "class.troubadour.class-act",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Duelist supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Acrobatics",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/acrobatics.md",
+          "decisionId": "class.troubadour.class-act",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Duelist supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/artful-flourish",
+      "name": "Artful Flourish",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/artful-flourish",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/artful-flourish.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/artful-flourish#block:0:tier1:0:1adb725bfe833afe",
+            "locator": "block:0:tier1:0",
+            "clause": "2 damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 2
+            },
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/artful-flourish#block:0:tier2:0:4148a008d7858141",
+            "locator": "block:0:tier2:0",
+            "clause": "5 damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 5
+            },
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/artful-flourish#block:0:tier3:0:8882180d6b03536f",
+            "locator": "block:0:tier3:0",
+            "clause": "7 damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 7
+            },
+            "kitBonusesIncluded": false
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/artful-flourish#block:1:0:8f54460bef188ca5",
+          "locator": "block:1:0",
+          "clause": "You can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to 3 squares.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/artful-flourish#block:2:0:157fed464f7b24de",
+          "locator": "block:2:0",
+          "clause": "You can target one additional creature or object for every 2 drama spent.",
+          "kind": "unsupported",
+          "shape": "resource-spend:spend N+ drama",
+          "reason": "resource-spend",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "You can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to 3 squares.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:2:0",
+          "clause": "You can target one additional creature or object for every 2 drama spent.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Two creatures or objects",
+          "message": "Only the designed single-target envelope is eligible."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Artful Flourish",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/artful-flourish.md",
+          "decisionId": "class.troubadour.signature-ability",
+          "level": 1,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Artful Flourish supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Artful Flourish",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/artful-flourish.md",
+          "decisionId": "class.troubadour.signature-ability",
+          "level": 2,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Artful Flourish supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Artful Flourish",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/artful-flourish.md",
+          "decisionId": "class.troubadour.signature-ability",
+          "level": 3,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Artful Flourish supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/ballad-of-the-beast",
+      "name": "\"Ballad of the Beast\"",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/ballad-of-the-beast",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/ballad-of-the-beast.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/ballad-of-the-beast#block:0:0:376d0940a6db7c9f",
+          "locator": "block:0:0",
+          "clause": "While this performance is active, each target who starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) in the area gains 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "While this performance is active, each target who starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) in the area gains 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Self and each ally in the area",
+          "message": "Only the designed single-target envelope is eligible."
+        },
+        {
+          "code": "action-type",
+          "locator": "header:usage",
+          "clause": "No action",
+          "message": "Unrecognized action type."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "\"Ballad of the Beast\"",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/ballad-of-the-beast.md",
+          "decisionId": "class.troubadour.class-act",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Virtuoso supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "\"Ballad of the Beast\"",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/ballad-of-the-beast.md",
+          "decisionId": "class.troubadour.class-act",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Virtuoso supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "\"Ballad of the Beast\"",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/ballad-of-the-beast.md",
+          "decisionId": "class.troubadour.class-act",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Virtuoso supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/blocking",
+      "name": "Blocking",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/blocking",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/blocking.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/blocking#block:0:0:d05396cca7602176",
+          "locator": "block:0:0",
+          "clause": "At the end of each of your [turns](scc.v1:mcdm.heroes.v1/rule.combat/turn) while this performance is active, you can choose up to a number of targets equal to your [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) score and [teleport](scc.v1:mcdm.heroes.v1/movement/teleport) those targets to unoccupied spaces in the area. A target can't be [teleport](scc.v1:mcdm.heroes.v1/movement/teleport)ed in a way that would harm them (such as over a cliff), leave them [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), or result in them suffering a [condition](scc.v1:mcdm.heroes.v1/rule.combat/condition) or other negative effect.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "At the end of each of your [turns](scc.v1:mcdm.heroes.v1/rule.combat/turn) while this performance is active, you can choose up to a number of targets equal to your [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) score and [teleport](scc.v1:mcdm.heroes.v1/movement/teleport) those targets to unoccupied spaces in the area. A target can't be [teleport](scc.v1:mcdm.heroes.v1/movement/teleport)ed in a way that would harm them (such as over a cliff), leave them [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), or result in them suffering a [condition](scc.v1:mcdm.heroes.v1/rule.combat/condition) or other negative effect.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Each creature in the area",
+          "message": "Only the designed single-target envelope is eligible."
+        },
+        {
+          "code": "action-type",
+          "locator": "header:usage",
+          "clause": "No action",
+          "message": "Unrecognized action type."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Blocking",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/blocking.md",
+          "decisionId": "class.troubadour.class-act",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Auteur supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Blocking",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/blocking.md",
+          "decisionId": "class.troubadour.class-act",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Auteur supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Blocking",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/blocking.md",
+          "decisionId": "class.troubadour.class-act",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Auteur supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/choreography",
+      "name": "Choreography",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/choreography",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/choreography.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/choreography#block:0:0:40e81ec9ce507dea",
+          "locator": "block:0:0",
+          "clause": "While this performance is active, each target who starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) in the area gains a +2 [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) to [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) until the end of their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "While this performance is active, each target who starts their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) in the area gains a +2 [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) to [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) until the end of their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Self and each ally in the area",
+          "message": "Only the designed single-target envelope is eligible."
+        },
+        {
+          "code": "action-type",
+          "locator": "header:usage",
+          "clause": "No action",
+          "message": "Unrecognized action type."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Choreography",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/choreography.md",
+          "decisionId": "class.troubadour.features",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Choreography",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/choreography.md",
+          "decisionId": "class.troubadour.features",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Choreography",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/choreography.md",
+          "decisionId": "class.troubadour.features",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/cutting-sarcasm",
+      "name": "Cutting Sarcasm",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/cutting-sarcasm",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/cutting-sarcasm.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "supported",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/cutting-sarcasm#block:0:tier1:0:508875f0ec47b904",
+            "locator": "block:0:tier1:0",
+            "clause": "2 + P psychic damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 2,
+              "characteristic": "P"
+            },
+            "damageType": "psychic",
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/cutting-sarcasm#block:0:tier1:1:b11d0e25c2991959",
+            "locator": "block:0:tier1:1",
+            "clause": "P < WEAK, [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) (save ends)",
+            "kind": "condition",
+            "characteristic": "P",
+            "threshold": {
+              "kind": "potency",
+              "tier": "weak"
+            },
+            "condition": "bleeding",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.troubadour.level-1/cutting-sarcasm#block:0:tier1:0:508875f0ec47b904"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/cutting-sarcasm#block:0:tier2:0:37bde185ea521dbb",
+            "locator": "block:0:tier2:0",
+            "clause": "5 + P psychic damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 5,
+              "characteristic": "P"
+            },
+            "damageType": "psychic",
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/cutting-sarcasm#block:0:tier2:1:dd95c861fc46fecc",
+            "locator": "block:0:tier2:1",
+            "clause": "P < AVERAGE, [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) (save ends)",
+            "kind": "condition",
+            "characteristic": "P",
+            "threshold": {
+              "kind": "potency",
+              "tier": "average"
+            },
+            "condition": "bleeding",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.troubadour.level-1/cutting-sarcasm#block:0:tier2:0:37bde185ea521dbb"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/cutting-sarcasm#block:0:tier3:0:b31e13c1c6b9b7c1",
+            "locator": "block:0:tier3:0",
+            "clause": "7 + P psychic damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 7,
+              "characteristic": "P"
+            },
+            "damageType": "psychic",
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/cutting-sarcasm#block:0:tier3:1:e730812efd1951ca",
+            "locator": "block:0:tier3:1",
+            "clause": "P < STRONG, [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) (save ends)",
+            "kind": "condition",
+            "characteristic": "P",
+            "threshold": {
+              "kind": "potency",
+              "tier": "strong"
+            },
+            "condition": "bleeding",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.troubadour.level-1/cutting-sarcasm#block:0:tier3:0:b31e13c1c6b9b7c1"
+          }
+        ]
+      ],
+      "sections": [],
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
+      "grants": [
+        {
+          "name": "Cutting Sarcasm",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/cutting-sarcasm.md",
+          "decisionId": "class.troubadour.signature-ability",
+          "level": 1,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Cutting Sarcasm supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Cutting Sarcasm",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/cutting-sarcasm.md",
+          "decisionId": "class.troubadour.signature-ability",
+          "level": 2,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Cutting Sarcasm supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Cutting Sarcasm",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/cutting-sarcasm.md",
+          "decisionId": "class.troubadour.signature-ability",
+          "level": 3,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Cutting Sarcasm supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/dramatic-monologue",
+      "name": "Dramatic Monologue",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/dramatic-monologue",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/dramatic-monologue.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/dramatic-monologue#block:0:0:5a8f62fd3a16b373",
+          "locator": "block:0:0",
+          "clause": "Choose one of the following effects:",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/dramatic-monologue#block:1:0:3c8674d9d4c13852",
+          "locator": "block:1:0",
+          "clause": "You can choose two targets for the chosen effect.",
+          "kind": "unsupported",
+          "shape": "resource-spend:spend N drama",
+          "reason": "resource-spend",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/dramatic-monologue#markdown:block:0:0:549ad6da888e0891",
+          "locator": "markdown:block:0:0",
+          "clause": "Effect: Choose one of the following effects:\n- You orate a rousing tale of victory. One ally within distance gains an edge on the next power roll they make before the start of your next turn.\n- You weave a tale of high-stakes heroics. One ally within distance gains 1 surge.\n- You insult a foe where they're most vulnerable. One enemy within distance takes a bane on the next power roll they make before the end of their next turn.",
+          "kind": "unsupported",
+          "shape": "source-block-mismatch",
+          "reason": "Printed mechanics differ from the structured projection.",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/dramatic-monologue#markdown:item:4:0:49b92fb826e35d5e",
+          "locator": "markdown:item:4:0",
+          "clause": "- You orate a rousing tale of victory. One ally within distance gains an edge on the next power roll they make before the start of your next turn.",
+          "kind": "unsupported",
+          "shape": "unaccounted-paragraph",
+          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/dramatic-monologue#markdown:item:5:0:981e653f37e94b61",
+          "locator": "markdown:item:5:0",
+          "clause": "- You weave a tale of high-stakes heroics. One ally within distance gains 1 surge.",
+          "kind": "unsupported",
+          "shape": "unaccounted-paragraph",
+          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/dramatic-monologue#markdown:item:6:0:5edcc4ebaf829345",
+          "locator": "markdown:item:6:0",
+          "clause": "- You insult a foe where they're most vulnerable. One enemy within distance takes a bane on the next power roll they make before the end of their next turn.",
+          "kind": "unsupported",
+          "shape": "unaccounted-paragraph",
+          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "source-block-mismatch",
+          "locator": "markdown:block:0",
+          "clause": "Effect: Choose one of the following effects:\n- You orate a rousing tale of victory. One ally within distance gains an edge on the next power roll they make before the start of your next turn.\n- You weave a tale of high-stakes heroics. One ally within distance gains 1 surge.\n- You insult a foe where they're most vulnerable. One enemy within distance takes a bane on the next power roll they make before the end of their next turn.",
+          "message": "Roll, tier, section content or order differs between the envelope and full source."
+        },
+        {
+          "code": "unaccounted-paragraph",
+          "locator": "markdown:item:4",
+          "clause": "- You orate a rousing tale of victory. One ally within distance gains an edge on the next power roll they make before the start of your next turn.",
+          "message": "Printed mechanics cannot be ignored."
+        },
+        {
+          "code": "unaccounted-paragraph",
+          "locator": "markdown:item:5",
+          "clause": "- You weave a tale of high-stakes heroics. One ally within distance gains 1 surge.",
+          "message": "Printed mechanics cannot be ignored."
+        },
+        {
+          "code": "unaccounted-paragraph",
+          "locator": "markdown:item:6",
+          "clause": "- You insult a foe where they're most vulnerable. One enemy within distance takes a bane on the next power roll they make before the end of their next turn.",
+          "message": "Printed mechanics cannot be ignored."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "Choose one of the following effects:",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "You can choose two targets for the chosen effect.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "markdown:block:0:0",
+          "clause": "Effect: Choose one of the following effects:\n- You orate a rousing tale of victory. One ally within distance gains an edge on the next power roll they make before the start of your next turn.\n- You weave a tale of high-stakes heroics. One ally within distance gains 1 surge.\n- You insult a foe where they're most vulnerable. One enemy within distance takes a bane on the next power roll they make before the end of their next turn.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "markdown:item:4:0",
+          "clause": "- You orate a rousing tale of victory. One ally within distance gains an edge on the next power roll they make before the start of your next turn.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "markdown:item:5:0",
+          "clause": "- You weave a tale of high-stakes heroics. One ally within distance gains 1 surge.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "markdown:item:6:0",
+          "clause": "- You insult a foe where they're most vulnerable. One enemy within distance takes a bane on the next power roll they make before the end of their next turn.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Special",
+          "message": "Only the designed single-target envelope is eligible."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Dramatic Monologue",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/dramatic-monologue.md",
+          "decisionId": "class.troubadour.class-act",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Auteur supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Dramatic Monologue",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/dramatic-monologue.md",
+          "decisionId": "class.troubadour.class-act",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Auteur supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Dramatic Monologue",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/dramatic-monologue.md",
+          "decisionId": "class.troubadour.class-act",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Auteur supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/dramatic-reversal",
+      "name": "Dramatic Reversal",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/dramatic-reversal",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/dramatic-reversal.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/dramatic-reversal#block:0:tier1:0:31a407c261355c1b",
+            "locator": "block:0:tier1:0",
+            "clause": "The target can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) 1 square and make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike).",
+            "kind": "unsupported",
+            "shape": "the target can shift N square and make a free strike",
+            "reason": "shift",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/dramatic-reversal#block:0:tier2:0:4e8d241df417e3bb",
+            "locator": "block:0:tier2:0",
+            "clause": "The target can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to 2 squares and make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) that gains an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge).",
+            "kind": "unsupported",
+            "shape": "the target can shift up to N squares and make a free strike that gains an edge",
+            "reason": "shift",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/dramatic-reversal#block:0:tier3:0:b0addd7c12e3d27f",
+            "locator": "block:0:tier3:0",
+            "clause": "The target can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to 3 squares and make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) that gains an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge), then can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries).",
+            "kind": "unsupported",
+            "shape": "the target can shift up to N squares and make a free strike that gains an edge, then can spend a recovery",
+            "reason": "shift",
+            "dependency": "unknown"
+          }
+        ]
+      ],
+      "sections": [],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "tier1-damage-outside-grammar"
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier1:0",
+          "clause": "The target can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) 1 square and make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike).",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier2:0",
+          "clause": "The target can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to 2 squares and make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) that gains an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge).",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier3:0",
+          "clause": "The target can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to 3 squares and make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) that gains an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge), then can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries).",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Self and each ally in the area",
+          "message": "Only the designed single-target envelope is eligible."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Dramatic Reversal",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/dramatic-reversal.md",
+          "decisionId": "class.troubadour.ability-5",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Dramatic Reversal supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Dramatic Reversal",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/dramatic-reversal.md",
+          "decisionId": "class.troubadour.ability-5",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Dramatic Reversal supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Dramatic Reversal",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/dramatic-reversal.md",
+          "decisionId": "class.troubadour.ability-5",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Dramatic Reversal supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/fake-your-death",
+      "name": "Fake Your Death",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/fake-your-death",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/fake-your-death.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/fake-your-death#block:0:0:c756d7191ff976c8",
+          "locator": "block:0:0",
+          "clause": "You [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) invisible and create a magical illusion of your corpse falling in your space. While you are invisible, you gain a +3 [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) to [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) and you ignore [difficult terrain](scc.v1:mcdm.heroes.v1/movement/difficult-terrain). The illusion and your invisibility last until the end of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), or until the illusion is interacted with, you take damage, or you use a main action or a maneuver.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "You [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) invisible and create a magical illusion of your corpse falling in your space. While you are invisible, you gain a +3 [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) to [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) and you ignore [difficult terrain](scc.v1:mcdm.heroes.v1/movement/difficult-terrain). The illusion and your invisibility last until the end of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), or until the illusion is interacted with, you take damage, or you use a main action or a maneuver.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Self",
+          "message": "Only the designed single-target envelope is eligible."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Fake Your Death",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/fake-your-death.md",
+          "decisionId": "class.troubadour.ability-5",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Fake Your Death supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Fake Your Death",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/fake-your-death.md",
+          "decisionId": "class.troubadour.ability-5",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Fake Your Death supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Fake Your Death",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/fake-your-death.md",
+          "decisionId": "class.troubadour.ability-5",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Fake Your Death supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/flip-the-script",
+      "name": "Flip the Script",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/flip-the-script",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/flip-the-script.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/flip-the-script#block:0:0:1c5905f792e0f91b",
+          "locator": "block:0:0",
+          "clause": "Each target can [teleport](scc.v1:mcdm.heroes.v1/movement/teleport) up to 5 squares. Any [teleport](scc.v1:mcdm.heroes.v1/movement/teleport)ed target who was [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) is no longer [slowed](scc.v1:mcdm.heroes.v1/condition/slowed).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "Each target can [teleport](scc.v1:mcdm.heroes.v1/movement/teleport) up to 5 squares. Any [teleport](scc.v1:mcdm.heroes.v1/movement/teleport)ed target who was [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) is no longer [slowed](scc.v1:mcdm.heroes.v1/condition/slowed).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Self and each ally in the area",
+          "message": "Only the designed single-target envelope is eligible."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Flip the Script",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/flip-the-script.md",
+          "decisionId": "class.troubadour.ability-5",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Flip the Script supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Flip the Script",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/flip-the-script.md",
+          "decisionId": "class.troubadour.ability-5",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Flip the Script supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Flip the Script",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/flip-the-script.md",
+          "decisionId": "class.troubadour.ability-5",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Flip the Script supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/harmonize",
+      "name": "Harmonize",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/harmonize",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/harmonize.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/harmonize#block:0:0:225bbd65062fc65c",
+          "locator": "block:0:0",
+          "clause": "The target uses an ability that targets only one enemy and costs 3 or fewer of their [Heroic Resource](scc.v1:mcdm.heroes.v1/rule.resource/heroic-resource).",
+          "kind": "unsupported",
+          "shape": "trigger",
+          "reason": "trigger",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/harmonize#block:1:0:818bf31a7a572ac6",
+          "locator": "block:1:0",
+          "clause": "The target can choose one additional target for the triggering ability. Any damage dealt to the additional target is sonic damage.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/harmonize#block:2:0:4de4996d1c5f5184",
+          "locator": "block:2:0",
+          "clause": "You can trigger this ability when a target uses an ability that has a [Heroic Resource](scc.v1:mcdm.heroes.v1/rule.resource/heroic-resource) cost of 3 + each additional drama spent.",
+          "kind": "unsupported",
+          "shape": "resource-spend:spend N+ drama",
+          "reason": "resource-spend",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "The target uses an ability that targets only one enemy and costs 3 or fewer of their [Heroic Resource](scc.v1:mcdm.heroes.v1/rule.resource/heroic-resource).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "The target can choose one additional target for the triggering ability. Any damage dealt to the additional target is sonic damage.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:2:0",
+          "clause": "You can trigger this ability when a target uses an ability that has a [Heroic Resource](scc.v1:mcdm.heroes.v1/rule.resource/heroic-resource) cost of 3 + each additional drama spent.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "action-type",
+          "locator": "header:usage",
+          "clause": "Triggered",
+          "message": "Unrecognized action type."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Harmonize",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/harmonize.md",
+          "decisionId": "class.troubadour.class-act",
+          "level": 1,
+          "grantKind": "aspect-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Virtuoso supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Harmonize",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/harmonize.md",
+          "decisionId": "class.troubadour.class-act",
+          "level": 2,
+          "grantKind": "aspect-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Virtuoso supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Harmonize",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/harmonize.md",
+          "decisionId": "class.troubadour.class-act",
+          "level": 3,
+          "grantKind": "aspect-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Virtuoso supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/harsh-critic",
+      "name": "Harsh Critic",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/harsh-critic",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/harsh-critic.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/harsh-critic#block:0:tier1:0:22a8cd920f58651c",
+            "locator": "block:0:tier1:0",
+            "clause": "7 + P sonic damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 7,
+              "characteristic": "P"
+            },
+            "damageType": "sonic",
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/harsh-critic#block:0:tier2:0:a00deac3c06d5dae",
+            "locator": "block:0:tier2:0",
+            "clause": "10 + P sonic damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 10,
+              "characteristic": "P"
+            },
+            "damageType": "sonic",
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/harsh-critic#block:0:tier3:0:30da530ea0df9c01",
+            "locator": "block:0:tier3:0",
+            "clause": "13 + P sonic damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 13,
+              "characteristic": "P"
+            },
+            "damageType": "sonic",
+            "kitBonusesIncluded": false
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/harsh-critic#block:1:0:cc067307e8069571",
+          "locator": "block:1:0",
+          "clause": "The first time the target uses an ability before the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), any effects from the ability's [tier outcomes](scc.v1:mcdm.heroes.v1/rule.dice/tier-outcome) other than damage are negated for all targets. Ability effects that always happen regardless of the [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) work as usual.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "The first time the target uses an ability before the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), any effects from the ability's [tier outcomes](scc.v1:mcdm.heroes.v1/rule.dice/tier-outcome) other than damage are negated for all targets. Ability effects that always happen regardless of the [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) work as usual.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Harsh Critic",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/harsh-critic.md",
+          "decisionId": "class.troubadour.ability-3",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Harsh Critic supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Harsh Critic",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/harsh-critic.md",
+          "decisionId": "class.troubadour.ability-3",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Harsh Critic supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Harsh Critic",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/harsh-critic.md",
+          "decisionId": "class.troubadour.ability-3",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Harsh Critic supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/hypnotic-overtones",
+      "name": "Hypnotic Overtones",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/hypnotic-overtones",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/hypnotic-overtones.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/hypnotic-overtones#block:0:tier1:0:6f1140636660c726",
+            "locator": "block:0:tier1:0",
+            "clause": "[Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
+            "kind": "unsupported",
+            "shape": "slide N",
+            "reason": "slide",
+            "dependency": "unknown"
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/hypnotic-overtones#block:0:tier1:1:71c0828acfcc9d00",
+            "locator": "block:0:tier1:1",
+            "clause": "I < WEAK, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
+            "kind": "unsupported",
+            "shape": "potency:I < SYM dazed (save ends)",
+            "reason": "potency-condition",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/hypnotic-overtones#block:0:tier2:0:6f1140636660c726",
+            "locator": "block:0:tier2:0",
+            "clause": "[Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
+            "kind": "unsupported",
+            "shape": "slide N",
+            "reason": "slide",
+            "dependency": "unknown"
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/hypnotic-overtones#block:0:tier2:1:2415280207e88ef3",
+            "locator": "block:0:tier2:1",
+            "clause": "I < AVERAGE, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
+            "kind": "unsupported",
+            "shape": "potency:I < SYM dazed (save ends)",
+            "reason": "potency-condition",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/hypnotic-overtones#block:0:tier3:0:6f113f636660c573",
+            "locator": "block:0:tier3:0",
+            "clause": "[Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
+            "kind": "unsupported",
+            "shape": "slide N",
+            "reason": "slide",
+            "dependency": "unknown"
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/hypnotic-overtones#block:0:tier3:1:20c8f05ce821f263",
+            "locator": "block:0:tier3:1",
+            "clause": "I < STRONG, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
+            "kind": "unsupported",
+            "shape": "potency:I < SYM dazed (save ends)",
+            "reason": "potency-condition",
+            "dependency": "unknown"
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/hypnotic-overtones#block:1:0:54fe95215207811a",
+          "locator": "block:1:0",
+          "clause": "The size of the [burst](scc.v1:mcdm.heroes.v1/rule.combat/burst) increases by 1 for every 2 drama spent.",
+          "kind": "unsupported",
+          "shape": "resource-spend:spend N+ drama",
+          "reason": "resource-spend",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "tier1-damage-outside-grammar"
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier1:0",
+          "clause": "[Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier1:1",
+          "clause": "I < WEAK, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier2:0",
+          "clause": "[Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier2:1",
+          "clause": "I < AVERAGE, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier3:0",
+          "clause": "[Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier3:1",
+          "clause": "I < STRONG, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "The size of the [burst](scc.v1:mcdm.heroes.v1/rule.combat/burst) increases by 1 for every 2 drama spent.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Each enemy in the area",
+          "message": "Only the designed single-target envelope is eligible."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Hypnotic Overtones",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/hypnotic-overtones.md",
+          "decisionId": "class.troubadour.ability-3",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Hypnotic Overtones supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Hypnotic Overtones",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/hypnotic-overtones.md",
+          "decisionId": "class.troubadour.ability-3",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Hypnotic Overtones supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Hypnotic Overtones",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/hypnotic-overtones.md",
+          "decisionId": "class.troubadour.ability-3",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Hypnotic Overtones supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/instigator",
+      "name": "Instigator",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/instigator",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/instigator.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/instigator#block:0:tier1:0:ba62bdeed17f5618",
+            "locator": "block:0:tier1:0",
+            "clause": "3 + P damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 3,
+              "characteristic": "P"
+            },
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/instigator#block:0:tier2:0:213d863e4115b9e1",
+            "locator": "block:0:tier2:0",
+            "clause": "6 + P damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 6,
+              "characteristic": "P"
+            },
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/instigator#block:0:tier3:0:fd25f44b6b33a816",
+            "locator": "block:0:tier3:0",
+            "clause": "9 + P damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 9,
+              "characteristic": "P"
+            },
+            "kitBonusesIncluded": false
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/instigator#block:1:0:73f9c6763afe989f",
+          "locator": "block:1:0",
+          "clause": "The target is [taunted](scc.v1:mcdm.heroes.v1/condition/taunted) by you or a willing ally [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to you until the end of the target's next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "The target is [taunted](scc.v1:mcdm.heroes.v1/condition/taunted) by you or a willing ally [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to you until the end of the target's next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Instigator",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/instigator.md",
+          "decisionId": "class.troubadour.signature-ability",
+          "level": 1,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Instigator supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Instigator",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/instigator.md",
+          "decisionId": "class.troubadour.signature-ability",
+          "level": 2,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Instigator supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Instigator",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/instigator.md",
+          "decisionId": "class.troubadour.signature-ability",
+          "level": 3,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Instigator supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/method-acting",
+      "name": "Method Acting",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/method-acting",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/method-acting.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/method-acting#block:0:tier1:0:c242b54eeae60b04",
+            "locator": "block:0:tier1:0",
+            "clause": "6 + A damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 6,
+              "characteristic": "A"
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/method-acting#block:0:tier1:1:984c2fd4a9675529",
+            "locator": "block:0:tier1:1",
+            "clause": "P < WEAK, [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)",
+            "kind": "condition",
+            "characteristic": "P",
+            "threshold": {
+              "kind": "potency",
+              "tier": "weak"
+            },
+            "condition": "weakened",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.troubadour.level-1/method-acting#block:0:tier1:0:c242b54eeae60b04"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/method-acting#block:0:tier2:0:4d2cc6daeb82879b",
+            "locator": "block:0:tier2:0",
+            "clause": "10 + A damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 10,
+              "characteristic": "A"
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/method-acting#block:0:tier2:1:6e3a6f2531e6c464",
+            "locator": "block:0:tier2:1",
+            "clause": "P < AVERAGE, [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)",
+            "kind": "condition",
+            "characteristic": "P",
+            "threshold": {
+              "kind": "potency",
+              "tier": "average"
+            },
+            "condition": "weakened",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.troubadour.level-1/method-acting#block:0:tier2:0:4d2cc6daeb82879b"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/method-acting#block:0:tier3:0:4f757a98684bb787",
+            "locator": "block:0:tier3:0",
+            "clause": "14 + A damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 14,
+              "characteristic": "A"
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/method-acting#block:0:tier3:1:b214dc98484ff5fa",
+            "locator": "block:0:tier3:1",
+            "clause": "P < STRONG, [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)",
+            "kind": "condition",
+            "characteristic": "P",
+            "threshold": {
+              "kind": "potency",
+              "tier": "strong"
+            },
+            "condition": "weakened",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.troubadour.level-1/method-acting#block:0:tier3:0:4f757a98684bb787"
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/method-acting#block:1:0:e5229b27d2b2d883",
+          "locator": "block:1:0",
+          "clause": "You can become [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) (save ends) to deal an extra 5 corruption damage to the target.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "You can become [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) (save ends) to deal an extra 5 corruption damage to the target.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Method Acting",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/method-acting.md",
+          "decisionId": "class.troubadour.ability-5",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Method Acting supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Method Acting",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/method-acting.md",
+          "decisionId": "class.troubadour.ability-5",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Method Acting supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Method Acting",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/method-acting.md",
+          "decisionId": "class.troubadour.ability-5",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Method Acting supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/power-chord",
+      "name": "Power Chord",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/power-chord",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/power-chord.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/power-chord#block:0:tier1:0:81fdc35d679c0bb5",
+            "locator": "block:0:tier1:0",
+            "clause": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
+            "kind": "unsupported",
+            "shape": "push N (not directly after damage)",
+            "reason": "push-with-extra",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/power-chord#block:0:tier2:0:81fdc05d679c069c",
+            "locator": "block:0:tier2:0",
+            "clause": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
+            "kind": "unsupported",
+            "shape": "push N (not directly after damage)",
+            "reason": "push-with-extra",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/power-chord#block:0:tier3:0:81fdc15d679c084f",
+            "locator": "block:0:tier3:0",
+            "clause": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3",
+            "kind": "unsupported",
+            "shape": "push N (not directly after damage)",
+            "reason": "push-with-extra",
+            "dependency": "unknown"
+          }
+        ]
+      ],
+      "sections": [],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "tier1-damage-outside-grammar"
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier1:0",
+          "clause": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier2:0",
+          "clause": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier3:0",
+          "clause": "[Push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 3",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Each enemy in the area",
+          "message": "Only the designed single-target envelope is eligible."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Power Chord",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/power-chord.md",
+          "decisionId": "class.troubadour.class-act",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Virtuoso supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Power Chord",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/power-chord.md",
+          "decisionId": "class.troubadour.class-act",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Virtuoso supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Power Chord",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/power-chord.md",
+          "decisionId": "class.troubadour.class-act",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Virtuoso supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/quick-rewrite",
+      "name": "Quick Rewrite",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/quick-rewrite",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/quick-rewrite.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/quick-rewrite#block:0:tier1:0:2a44e212de1f4bf4",
+            "locator": "block:0:tier1:0",
+            "clause": "4 damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 4
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/quick-rewrite#block:0:tier1:1:e8db1fe3ed211821",
+            "locator": "block:0:tier1:1",
+            "clause": "P < WEAK, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
+            "kind": "condition",
+            "characteristic": "P",
+            "threshold": {
+              "kind": "potency",
+              "tier": "weak"
+            },
+            "condition": "slowed",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.troubadour.level-1/quick-rewrite#block:0:tier1:0:2a44e212de1f4bf4"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/quick-rewrite#block:0:tier2:0:4148a008d7858141",
+            "locator": "block:0:tier2:0",
+            "clause": "5 damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 5
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/quick-rewrite#block:0:tier2:1:3861e3e33a2c784c",
+            "locator": "block:0:tier2:1",
+            "clause": "P < AVERAGE, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
+            "kind": "condition",
+            "characteristic": "P",
+            "threshold": {
+              "kind": "potency",
+              "tier": "average"
+            },
+            "condition": "slowed",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.troubadour.level-1/quick-rewrite#block:0:tier2:0:4148a008d7858141"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/quick-rewrite#block:0:tier3:0:65723ebe74a7200a",
+            "locator": "block:0:tier3:0",
+            "clause": "6 damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "flat",
+              "constant": 6
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/quick-rewrite#block:0:tier3:1:3a020e41ac29a29e",
+            "locator": "block:0:tier3:1",
+            "clause": "P < STRONG, [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)",
+            "kind": "condition",
+            "characteristic": "P",
+            "threshold": {
+              "kind": "potency",
+              "tier": "strong"
+            },
+            "condition": "restrained",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.troubadour.level-1/quick-rewrite#block:0:tier3:0:65723ebe74a7200a"
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/quick-rewrite#block:1:0:5f06feb84f57cf21",
+          "locator": "block:1:0",
+          "clause": "The area is [difficult terrain](scc.v1:mcdm.heroes.v1/movement/difficult-terrain) for enemies.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "The area is [difficult terrain](scc.v1:mcdm.heroes.v1/movement/difficult-terrain) for enemies.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Each enemy in the area",
+          "message": "Only the designed single-target envelope is eligible."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Quick Rewrite",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/quick-rewrite.md",
+          "decisionId": "class.troubadour.ability-3",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Quick Rewrite supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Quick Rewrite",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/quick-rewrite.md",
+          "decisionId": "class.troubadour.ability-3",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Quick Rewrite supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Quick Rewrite",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/quick-rewrite.md",
+          "decisionId": "class.troubadour.ability-3",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Quick Rewrite supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/revitalizing-limerick",
+      "name": "Revitalizing Limerick",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/revitalizing-limerick",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/revitalizing-limerick.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/revitalizing-limerick#block:0:0:617228f643714450",
+          "locator": "block:0:0",
+          "clause": "At the end of each of your [turns](scc.v1:mcdm.heroes.v1/rule.combat/turn) while this performance is active, you can choose up to a number of targets equal to your [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) score. Each chosen target can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "At the end of each of your [turns](scc.v1:mcdm.heroes.v1/rule.combat/turn) while this performance is active, you can choose up to a number of targets equal to your [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) score. Each chosen target can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Self and each ally in the area",
+          "message": "Only the designed single-target envelope is eligible."
+        },
+        {
+          "code": "action-type",
+          "locator": "header:usage",
+          "clause": "No action",
+          "message": "Unrecognized action type."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Revitalizing Limerick",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/revitalizing-limerick.md",
+          "decisionId": "class.troubadour.features",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Revitalizing Limerick",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/revitalizing-limerick.md",
+          "decisionId": "class.troubadour.features",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Revitalizing Limerick",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/revitalizing-limerick.md",
+          "decisionId": "class.troubadour.features",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/riposte",
+      "name": "Riposte",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/riposte",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/riposte.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/riposte#block:0:0:8835edb6a6e84031",
+          "locator": "block:0:0",
+          "clause": "The target takes damage from a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike).",
+          "kind": "unsupported",
+          "shape": "trigger",
+          "reason": "trigger",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/riposte#block:1:0:aa4d260d1b94ced6",
+          "locator": "block:1:0",
+          "clause": "The target makes a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against the creature who made the triggering strike.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "The target takes damage from a [melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "The target makes a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against the creature who made the triggering strike.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Self or one ally",
+          "message": "Only the designed single-target envelope is eligible."
+        },
+        {
+          "code": "action-type",
+          "locator": "header:usage",
+          "clause": "Triggered",
+          "message": "Unrecognized action type."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Riposte",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/riposte.md",
+          "decisionId": "class.troubadour.class-act",
+          "level": 1,
+          "grantKind": "aspect-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Duelist supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Riposte",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/riposte.md",
+          "decisionId": "class.troubadour.class-act",
+          "level": 2,
+          "grantKind": "aspect-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Duelist supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Riposte",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/riposte.md",
+          "decisionId": "class.troubadour.class-act",
+          "level": 3,
+          "grantKind": "aspect-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Duelist supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/star-power",
+      "name": "Star Power",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/star-power",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/star-power.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/star-power#block:0:0:5b2b56a828b15e2c",
+          "locator": "block:0:0",
+          "clause": "You gain a +2 [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) to [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) until the end of your [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). Additionally, the next [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) you make this [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) can't have an outcome lower than tier 2.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/star-power#block:1:0:ba5b4f3ad5b7ce7a",
+          "locator": "block:1:0",
+          "clause": "You gain a +4 [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) to [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) instead.",
+          "kind": "unsupported",
+          "shape": "resource-spend:spend N drama",
+          "reason": "resource-spend",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "You gain a +2 [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) to [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) until the end of your [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). Additionally, the next [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) you make this [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) can't have an outcome lower than tier 2.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "You gain a +4 [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) to [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) instead.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Self",
+          "message": "Only the designed single-target envelope is eligible."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Star Power",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/star-power.md",
+          "decisionId": "class.troubadour.class-act",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Duelist supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Star Power",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/star-power.md",
+          "decisionId": "class.troubadour.class-act",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Duelist supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Star Power",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/star-power.md",
+          "decisionId": "class.troubadour.class-act",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Duelist supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/thunder-mother",
+      "name": "\"Thunder Mother\"",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/thunder-mother",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/thunder-mother.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/thunder-mother#block:1:tier1:0:963a34a8342fe144",
+            "locator": "block:1:tier1:0",
+            "clause": "Lightning damage equal to your level",
+            "kind": "unsupported",
+            "shape": "lightning damage equal to your level",
+            "reason": "unknown",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/thunder-mother#block:1:tier2:0:bedaf4608f28430e",
+            "locator": "block:1:tier2:0",
+            "clause": "Lightning damage equal to 5 + your level",
+            "kind": "unsupported",
+            "shape": "lightning damage equal to N + your level",
+            "reason": "unknown",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/thunder-mother#block:1:tier3:0:68e27df4828b3082",
+            "locator": "block:1:tier3:0",
+            "clause": "Lightning damage equal to 10 + your level",
+            "kind": "unsupported",
+            "shape": "lightning damage equal to N + your level",
+            "reason": "unknown",
+            "dependency": "unknown"
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/thunder-mother#block:0:0:4b255a6007ef58d0",
+          "locator": "block:0:0",
+          "clause": "At the end of each [combat round](scc.v1:mcdm.heroes.v1/rule.combat/combat-round) while this performance is active, you can make a [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) against the target that ignores [cover](scc.v1:mcdm.heroes.v1/rule.combat/cover). You can't target the same creature twice with this effect.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "tier1-damage-outside-grammar"
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:1:tier1:0",
+          "clause": "Lightning damage equal to your level",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:1:tier2:0",
+          "clause": "Lightning damage equal to 5 + your level",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:1:tier3:0",
+          "clause": "Lightning damage equal to 10 + your level",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "At the end of each [combat round](scc.v1:mcdm.heroes.v1/rule.combat/combat-round) while this performance is active, you can make a [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) against the target that ignores [cover](scc.v1:mcdm.heroes.v1/rule.combat/cover). You can't target the same creature twice with this effect.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "action-type",
+          "locator": "header:usage",
+          "clause": "No action",
+          "message": "Unrecognized action type."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "\"Thunder Mother\"",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/thunder-mother.md",
+          "decisionId": "class.troubadour.class-act",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Virtuoso supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "\"Thunder Mother\"",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/thunder-mother.md",
+          "decisionId": "class.troubadour.class-act",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Virtuoso supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "\"Thunder Mother\"",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/thunder-mother.md",
+          "decisionId": "class.troubadour.class-act",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Virtuoso supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/turnabout-is-fair-play",
+      "name": "Turnabout Is Fair Play",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/turnabout-is-fair-play",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/turnabout-is-fair-play.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/turnabout-is-fair-play#block:0:0:40d2048a6e4564be",
+          "locator": "block:0:0",
+          "clause": "The target makes an [ability roll](scc.v1:mcdm.heroes.v1/rule.dice/ability-roll) that has an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge), a double [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge), a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane), or a double [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane).",
+          "kind": "unsupported",
+          "shape": "trigger",
+          "reason": "trigger",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/turnabout-is-fair-play#block:1:0:27ff9db4a112607a",
+          "locator": "block:1:0",
+          "clause": "An [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on the triggering roll becomes a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane), or a double [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) becomes an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge). A [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) becomes an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge), or a double [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) becomes a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/turnabout-is-fair-play#block:2:0:87666efaa5eca0e6",
+          "locator": "block:2:0",
+          "clause": "An [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on the triggering roll becomes a double [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane), or a double [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) is negated. A [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) becomes a double [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge), or a double [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) is negated.",
+          "kind": "unsupported",
+          "shape": "resource-spend:spend N drama",
+          "reason": "resource-spend",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "The target makes an [ability roll](scc.v1:mcdm.heroes.v1/rule.dice/ability-roll) that has an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge), a double [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge), a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane), or a double [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "An [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on the triggering roll becomes a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane), or a double [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) becomes an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge). A [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) becomes an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge), or a double [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) becomes a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:2:0",
+          "clause": "An [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on the triggering roll becomes a double [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane), or a double [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) is negated. A [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) becomes a double [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge), or a double [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) is negated.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "action-type",
+          "locator": "header:usage",
+          "clause": "Triggered",
+          "message": "Unrecognized action type."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Turnabout Is Fair Play",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/turnabout-is-fair-play.md",
+          "decisionId": "class.troubadour.class-act",
+          "level": 1,
+          "grantKind": "aspect-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Auteur supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Turnabout Is Fair Play",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/turnabout-is-fair-play.md",
+          "decisionId": "class.troubadour.class-act",
+          "level": 2,
+          "grantKind": "aspect-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Auteur supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Turnabout Is Fair Play",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/turnabout-is-fair-play.md",
+          "decisionId": "class.troubadour.class-act",
+          "level": 3,
+          "grantKind": "aspect-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Auteur supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/upstage",
+      "name": "Upstage",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/upstage",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/upstage.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/upstage#block:1:tier1:0:6c02b7a67fcd0c5c",
+            "locator": "block:1:tier1:0",
+            "clause": "[Taunted](scc.v1:mcdm.heroes.v1/condition/taunted) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn))",
+            "kind": "unsupported",
+            "shape": "taunted (eot)",
+            "reason": "condition",
+            "dependency": "unknown"
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/upstage#block:1:tier1:1:6716cc47122267b4",
+            "locator": "block:1:tier1:1",
+            "clause": "A < WEAK[, prone](scc.v1:mcdm.heroes.v1/condition/prone)",
+            "kind": "unsupported",
+            "shape": "potency:A < SYM prone",
+            "reason": "potency-condition",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/upstage#block:1:tier2:0:6c02b7a67fcd0c5c",
+            "locator": "block:1:tier2:0",
+            "clause": "[Taunted](scc.v1:mcdm.heroes.v1/condition/taunted) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn))",
+            "kind": "unsupported",
+            "shape": "taunted (eot)",
+            "reason": "condition",
+            "dependency": "unknown"
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/upstage#block:1:tier2:1:0002d72827ab5aaf",
+            "locator": "block:1:tier2:1",
+            "clause": "A < AVERAGE[, prone](scc.v1:mcdm.heroes.v1/condition/prone)",
+            "kind": "unsupported",
+            "shape": "potency:A < SYM prone",
+            "reason": "potency-condition",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/upstage#block:1:tier3:0:6c02b7a67fcd0c5c",
+            "locator": "block:1:tier3:0",
+            "clause": "[Taunted](scc.v1:mcdm.heroes.v1/condition/taunted) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn))",
+            "kind": "unsupported",
+            "shape": "taunted (eot)",
+            "reason": "condition",
+            "dependency": "unknown"
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/upstage#block:1:tier3:1:8e104b0104ea59ec",
+            "locator": "block:1:tier3:1",
+            "clause": "A < STRONG, [prone and](scc.v1:mcdm.heroes.v1/condition/prone) can't stand ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn))",
+            "kind": "unsupported",
+            "shape": "potency:A < SYM prone and can't stand (eot)",
+            "reason": "potency-condition",
+            "dependency": "unknown"
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/upstage#block:0:0:710aa372bdff7b26",
+          "locator": "block:0:0",
+          "clause": "You [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed). You make one [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) that targets each enemy you move [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to during this [shift](scc.v1:mcdm.heroes.v1/movement/shifting).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "tier1-damage-outside-grammar"
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:1:tier1:0",
+          "clause": "[Taunted](scc.v1:mcdm.heroes.v1/condition/taunted) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn))",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:1:tier1:1",
+          "clause": "A < WEAK[, prone](scc.v1:mcdm.heroes.v1/condition/prone)",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:1:tier2:0",
+          "clause": "[Taunted](scc.v1:mcdm.heroes.v1/condition/taunted) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn))",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:1:tier2:1",
+          "clause": "A < AVERAGE[, prone](scc.v1:mcdm.heroes.v1/condition/prone)",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:1:tier3:0",
+          "clause": "[Taunted](scc.v1:mcdm.heroes.v1/condition/taunted) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn))",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:1:tier3:1",
+          "clause": "A < STRONG, [prone and](scc.v1:mcdm.heroes.v1/condition/prone) can't stand ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn))",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "You [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed). You make one [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) that targets each enemy you move [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to during this [shift](scc.v1:mcdm.heroes.v1/movement/shifting).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Self",
+          "message": "Only the designed single-target envelope is eligible."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Upstage",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/upstage.md",
+          "decisionId": "class.troubadour.ability-3",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Upstage supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Upstage",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/upstage.md",
+          "decisionId": "class.troubadour.ability-3",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Upstage supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Upstage",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/upstage.md",
+          "decisionId": "class.troubadour.ability-3",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Upstage supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/witty-banter",
+      "name": "Witty Banter",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/witty-banter",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/troubadour/level-1/witty-banter.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/witty-banter#block:0:tier1:0:424234df064294b2",
+            "locator": "block:0:tier1:0",
+            "clause": "4 + P psychic damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 4,
+              "characteristic": "P"
+            },
+            "damageType": "psychic",
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/witty-banter#block:0:tier2:0:37bde185ea521dbb",
+            "locator": "block:0:tier2:0",
+            "clause": "5 + P psychic damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 5,
+              "characteristic": "P"
+            },
+            "damageType": "psychic",
+            "kitBonusesIncluded": false
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/witty-banter#block:0:tier3:0:b31e13c1c6b9b7c1",
+            "locator": "block:0:tier3:0",
+            "clause": "7 + P psychic damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 7,
+              "characteristic": "P"
+            },
+            "damageType": "psychic",
+            "kitBonusesIncluded": false
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/witty-banter#block:1:0:152d05b3ed1c97c4",
+          "locator": "block:1:0",
+          "clause": "One ally within 10 squares of you can end one effect on them that is ended by a [saving throw](scc.v1:mcdm.heroes.v1/rule.general/saving-throw) or that ends at the end of their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.troubadour.level-1/witty-banter#block:2:0:f157f2ca3a72ef0a",
+          "locator": "block:2:0",
+          "clause": "The chosen ally can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries).",
+          "kind": "unsupported",
+          "shape": "resource-spend:spend N drama",
+          "reason": "resource-spend",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "One ally within 10 squares of you can end one effect on them that is ended by a [saving throw](scc.v1:mcdm.heroes.v1/rule.general/saving-throw) or that ends at the end of their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:2:0",
+          "clause": "The chosen ally can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Witty Banter",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/witty-banter.md",
+          "decisionId": "class.troubadour.signature-ability",
+          "level": 1,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Witty Banter supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Witty Banter",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/witty-banter.md",
+          "decisionId": "class.troubadour.signature-ability",
+          "level": 2,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Witty Banter supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Witty Banter",
+          "sourcePath": "en/unified/md/feature/ability/troubadour/level-1/witty-banter.md",
+          "decisionId": "class.troubadour.signature-ability",
+          "level": 3,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Witty Banter supportedInV001=true; chain selectable"
         }
       ],
       "movementFacts": "No compiled push."
@@ -177507,8 +180341,8 @@
     }
   ],
   "liveCounts": {
-    "compiled": 19,
-    "compatibility": 1355,
+    "compiled": 20,
+    "compatibility": 1378,
     "compiledButUnavailable": 2
   }
 }

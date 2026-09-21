@@ -2,9 +2,9 @@
 
 Structural support, current grant/loading availability and live execution are separate. Source drift never silently falls back; historical results are never recompiled on read.
 
-Source: `fb83a789da8f0327a389c277a0c790b1648d5810`; content: `sha256:98b79a429d89d8e8e9ee14a8bacb928c14ef48fcc01bbe83f3fef1e709cfcbf8`.
+Source: `fb83a789da8f0327a389c277a0c790b1648d5810`; content: `sha256:71c51714ee7ea4132cd14fdf6585bb945d656be91e20727320ef462cf4ab2095`.
 
-Currently reachable compiled: 19; unchanged reachable compatibility: 1355; structurally supported but unavailable: 2.
+Currently reachable compiled: 20; unchanged reachable compatibility: 1378; structurally supported but unavailable: 2.
 
 | Ability | Population | Pure execution | Live boundary | Diagnostics |
 | --- | --- | --- | --- | --- |
@@ -220,6 +220,30 @@ Currently reachable compiled: 19; unchanged reachable compatibility: 1355; struc
 | Concussive Slam | hero-standalone | manual | legacy-compatibility | grammar, unsafe-tier-remainder, empty-clause |
 | Minor Acceleration | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Psionic Bolt | hero-standalone | manual | legacy-compatibility | grammar, unsafe-tier-remainder |
+| Acrobatics | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary, action-type |
+| Artful Flourish | hero-standalone | manual | legacy-compatibility | manual-section, target-boundary |
+| "Ballad of the Beast" | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary, action-type |
+| Blocking | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary, action-type |
+| Choreography | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary, action-type |
+| Cutting Sarcasm | hero-standalone | supported | compiled |  |
+| Dramatic Monologue | hero-standalone | manual | legacy-compatibility | grammar, source-block-mismatch, unaccounted-paragraph, manual-section, target-boundary |
+| Dramatic Reversal | hero-standalone | manual | legacy-compatibility | grammar, unsafe-tier-remainder, target-boundary |
+| Fake Your Death | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Flip the Script | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Harmonize | hero-standalone | manual | legacy-compatibility | grammar, manual-section, action-type |
+| Harsh Critic | hero-standalone | manual | legacy-compatibility | manual-section |
+| Hypnotic Overtones | hero-standalone | manual | legacy-compatibility | grammar, unsafe-tier-remainder, manual-section, target-boundary |
+| Instigator | hero-standalone | manual | legacy-compatibility | manual-section |
+| Method Acting | hero-standalone | manual | legacy-compatibility | manual-section |
+| Power Chord | hero-standalone | manual | legacy-compatibility | grammar, unsafe-tier-remainder, target-boundary |
+| Quick Rewrite | hero-standalone | manual | legacy-compatibility | manual-section, target-boundary |
+| Revitalizing Limerick | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary, action-type |
+| Riposte | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary, action-type |
+| Star Power | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| "Thunder Mother" | hero-standalone | manual | legacy-compatibility | grammar, unsafe-tier-remainder, manual-section, action-type |
+| Turnabout Is Fair Play | hero-standalone | manual | legacy-compatibility | grammar, manual-section, action-type |
+| Upstage | hero-standalone | manual | legacy-compatibility | grammar, unsafe-tier-remainder, manual-section, target-boundary |
+| Witty Banter | hero-standalone | manual | legacy-compatibility | manual-section |
 | The Wode Defends | hero-standalone | supported | compiled |  |
 | Exploding Arrow | kit-signature | manual | legacy-compatibility | grammar, unsafe-tier-remainder, unaccounted-paragraph, manual-section, compatibility-boundary |
 | Unmooring | kit-signature | manual | legacy-compatibility | grammar, unsafe-tier-remainder, unaccounted-paragraph, manual-section, compatibility-boundary |
