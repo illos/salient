@@ -295,6 +295,8 @@ export function abilityFromEntry(
     '/feature/ability/troubadour/level-1/upstage.md',
     // Performance activation is not its optional end-round attack.
     '/feature/ability/troubadour/level-1/thunder-mother.md',
+    // Separate rolls per eligible creature above each hole; generic shared dice cannot represent this.
+    '/feature/ability/elementalist/level-1/instantaneous-excavation.md',
   ].some(path => entry.sourcePath.endsWith(path));
   return build({
     compilation: compileLiveEntry(entry, entry.kind),

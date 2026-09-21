@@ -53,7 +53,7 @@ export function applyElementalistModifiers(ctx: DerivationContext, out: PartialB
         provenance: [
           ...out.staminaMaximum.provenance,
           {
-            decisionId: 'class.elementalist.prayer',
+            decisionId: 'class.elementalist.enchantment',
             source: ctx.sentence(SENTENCES.recoveryValue),
             operation: 'floor-divide',
             amount: 3,
@@ -65,7 +65,7 @@ export function applyElementalistModifiers(ctx: DerivationContext, out: PartialB
         provenance: [
           ...out.staminaMaximum.provenance,
           {
-            decisionId: 'class.elementalist.prayer',
+            decisionId: 'class.elementalist.enchantment',
             source: ctx.sentence(SENTENCES.winded),
             operation: 'floor-divide',
             amount: 2,

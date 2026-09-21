@@ -170,7 +170,8 @@ export const SELECTIONS: ManifestSelection[] = [
       'feature/elementalist/level-1',
       'feature/ability/elementalist/level-1',
     ],
-    basis: 'docs/build/V25-two-class-wizard.md#in-scope: complete sourced Bethell path.',
+    basis:
+      'docs/build/V104-elementalist-level-one.md#scope: complete Elementalist level-one choices.',
   },
   {
     id: 'shadow-level-one',

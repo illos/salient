@@ -1,0 +1,922 @@
+{
+  "schemaVersion": "v104-source-1",
+  "compendiumRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+  "sourceRoot": "vendor/steel-compendium/en/unified/md",
+  "method": "Independent pinned source tables, ENGINE audit. Handwritten expectations; no evaluator output. Human Soldier background reused. Hurl chooses fire; Battle equipment remains manual, so no unconditional bonus.",
+  "paidSourceCosts": {
+    "Behold the Mystery": 3,
+    "Invigorating Growth": 3,
+    "Ripples in the Earth": 3,
+    "The Flesh, a Crucible": 3,
+    "Conflagration": 5,
+    "Instantaneous Excavation": 5,
+    "No More Than a Breeze": 5,
+    "Test of Rain": 5
+  },
+  "embeddedEssenceCosts": {
+    "Practical Magic: Additional Square": 1,
+    "Skin Like Castle Walls: Reduce Potency": 1,
+    "Explosive Assistance: Enhance": 1,
+    "Breath of Dawn Remembered: Additional Recovery": 1,
+    "Subtle Relocation: Enhance": 1
+  },
+  "selfTargets": [
+    "Practical Magic",
+    "Practical Magic: Teleport",
+    "Practical Magic: Additional Square",
+    "Enchantment and Ward: Change",
+    "Persistent Magic: Maintain",
+    "Persistent Magic: End"
+  ],
+  "witnesses": [
+    {
+      "id": "v104-1",
+      "selections": {
+        "culture.name": "wilderness mercenary commune",
+        "culture.language": "Anjali",
+        "culture.environment": "Wilderness",
+        "culture.environment.skill": "Swim",
+        "culture.organization": "Communal",
+        "culture.organization.skill": "Blacksmithing",
+        "culture.upbringing": "Martial",
+        "culture.upbringing.skill": "Intimidate",
+        "career.choice": "Soldier",
+        "career.soldier.skill.exploration": "Endurance",
+        "career.soldier.skill.intrigue": "Alertness",
+        "career.soldier.languages": ["Kalliak", "Vaslorian"],
+        "career.soldier.perk": "Teamwork",
+        "career.soldier.inciting-incident": "Sole Survivor",
+        "ancestry.choice": "Human",
+        "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
+        "details.name": "V104 Fire Destruction",
+        "class.choice": "Elementalist",
+        "class.elementalist.specialization": "Fire",
+        "class.elementalist.enchantment": "Enchantment of Destruction",
+        "class.elementalist.ward": "Ward of Delightful Consequences",
+        "class.elementalist.skills": ["Alchemy", "History", "Timescape"],
+        "class.elementalist.characteristic-array": "2, 2, \u22121, \u22121",
+        "class.elementalist.array-assignment": {
+          "Might": 2,
+          "Agility": 2,
+          "Intuition": -1,
+          "Presence": -1
+        },
+        "class.elementalist.signature-abilities": ["Bifurcated Incineration", "Viscous Fire"],
+        "class.elementalist.ability-3": "The Flesh, a Crucible",
+        "class.elementalist.ability-5": "Conflagration"
+      },
+      "expected": {
+        "level": 1,
+        "subclass": "Fire",
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": 2,
+          "I": -1,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "staminaMaximum": 18,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 6,
+        "windedValue": 9,
+        "speed": 5,
+        "stability": 0,
+        "disengage": 1,
+        "savingThrowThreshold": 6,
+        "skills": [
+          "Swim",
+          "Blacksmithing",
+          "Intimidate",
+          "Endurance",
+          "Alertness",
+          "Magic",
+          "Alchemy",
+          "History",
+          "Timescape"
+        ],
+        "features": [
+          "Culture edge",
+          "Elemental Specialization",
+          "Essence",
+          "Hurl Element",
+          "Persistent Magic",
+          "Practical Magic",
+          "Enchantment",
+          "Elementalist Ward",
+          "Elementalist Abilities",
+          "Fire: Acolyte of Fire",
+          "Enchantment of Destruction",
+          "Ward of Delightful Consequences"
+        ],
+        "abilities": [
+          "Detect the Supernatural",
+          "Determination",
+          "Melee Weapon Free Strike",
+          "Ranged Weapon Free Strike",
+          "Hurl Element",
+          "Practical Magic",
+          "Enchantment and Ward: Change",
+          "Persistent Magic: Maintain",
+          "Persistent Magic: End",
+          "Practical Magic: Knockback",
+          "Practical Magic: Elemental Damage",
+          "Practical Magic: Teleport",
+          "Practical Magic: Additional Square",
+          "Return to Formlessness",
+          "Explosive Assistance",
+          "Explosive Assistance: Enhance",
+          "Bifurcated Incineration",
+          "Viscous Fire",
+          "The Flesh, a Crucible",
+          "Conflagration",
+          "The Flesh, a Crucible: Persistent Effect",
+          "Conflagration: Persistent Effect"
+        ]
+      },
+      "classActions": [
+        "Hurl Element",
+        "Practical Magic",
+        "Enchantment and Ward: Change",
+        "Persistent Magic: Maintain",
+        "Persistent Magic: End",
+        "Practical Magic: Knockback",
+        "Practical Magic: Elemental Damage",
+        "Practical Magic: Teleport",
+        "Practical Magic: Additional Square",
+        "Return to Formlessness",
+        "Explosive Assistance",
+        "Explosive Assistance: Enhance",
+        "Bifurcated Incineration",
+        "Viscous Fire",
+        "The Flesh, a Crucible",
+        "Conflagration",
+        "The Flesh, a Crucible: Persistent Effect",
+        "Conflagration: Persistent Effect"
+      ],
+      "rolledActions": [
+        {
+          "name": "Hurl Element",
+          "damageByTier": [6, 8, 10],
+          "manualRemainder": "choose|damage type",
+          "source": "feature/ability/elementalist/level-1/hurl-element.md"
+        },
+        {
+          "name": "Bifurcated Incineration",
+          "damageByTier": [4, 6, 8],
+          "manualRemainder": "",
+          "source": "feature/ability/elementalist/level-1/bifurcated-incineration.md"
+        },
+        {
+          "name": "Viscous Fire",
+          "damageByTier": [6, 9, 11],
+          "manualRemainder": "",
+          "source": "feature/ability/elementalist/level-1/viscous-fire.md",
+          "pushByTier": [2, 3, 4]
+        },
+        {
+          "name": "The Flesh, a Crucible",
+          "damageByTier": [9, 12, 15],
+          "manualRemainder": "persistent|turn",
+          "source": "feature/ability/elementalist/level-1/the-flesh-a-crucible.md"
+        },
+        {
+          "name": "Conflagration",
+          "damageByTier": [6, 8, 12],
+          "manualRemainder": "persistent|turn",
+          "source": "feature/ability/elementalist/level-1/conflagration.md"
+        }
+      ],
+      "citations": [
+        "class/elementalist.md#Basics",
+        "feature/elementalist/level-1/elemental-specialization.md",
+        "feature/elementalist/level-1/enchantment-of-destruction.md",
+        "feature/elementalist/level-1/ward-of-delightful-consequences.md",
+        "feature/elementalist/level-1/elementalist-abilities.md"
+      ]
+    },
+    {
+      "id": "v104-2",
+      "selections": {
+        "culture.name": "wilderness mercenary commune",
+        "culture.language": "Anjali",
+        "culture.environment": "Wilderness",
+        "culture.environment.skill": "Swim",
+        "culture.organization": "Communal",
+        "culture.organization.skill": "Blacksmithing",
+        "culture.upbringing": "Martial",
+        "culture.upbringing.skill": "Intimidate",
+        "career.choice": "Soldier",
+        "career.soldier.skill.exploration": "Endurance",
+        "career.soldier.skill.intrigue": "Alertness",
+        "career.soldier.languages": ["Kalliak", "Vaslorian"],
+        "career.soldier.perk": "Teamwork",
+        "career.soldier.inciting-incident": "Sole Survivor",
+        "ancestry.choice": "Human",
+        "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
+        "details.name": "V104 Earth Permanence",
+        "class.choice": "Elementalist",
+        "class.elementalist.specialization": "Earth",
+        "class.elementalist.enchantment": "Enchantment of Permanence",
+        "class.elementalist.ward": "Ward of Excellent Protection",
+        "class.elementalist.skills": ["Alchemy", "History", "Timescape"],
+        "class.elementalist.characteristic-array": "2, 1, 1, \u22121",
+        "class.elementalist.array-assignment": {
+          "Might": 2,
+          "Agility": 1,
+          "Intuition": 1,
+          "Presence": -1
+        },
+        "class.elementalist.signature-abilities": ["Meteoric Introduction", "Unquiet Ground"],
+        "class.elementalist.ability-3": "Ripples in the Earth",
+        "class.elementalist.ability-5": "Instantaneous Excavation"
+      },
+      "expected": {
+        "level": 1,
+        "subclass": "Earth",
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 2,
+          "I": 1,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "staminaMaximum": 24,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 8,
+        "windedValue": 12,
+        "speed": 5,
+        "stability": 1,
+        "disengage": 1,
+        "savingThrowThreshold": 6,
+        "skills": [
+          "Swim",
+          "Blacksmithing",
+          "Intimidate",
+          "Endurance",
+          "Alertness",
+          "Magic",
+          "Alchemy",
+          "History",
+          "Timescape"
+        ],
+        "features": [
+          "Culture edge",
+          "Elemental Specialization",
+          "Essence",
+          "Hurl Element",
+          "Persistent Magic",
+          "Practical Magic",
+          "Enchantment",
+          "Elementalist Ward",
+          "Elementalist Abilities",
+          "Earth: Acolyte of Earth",
+          "Enchantment of Permanence",
+          "Ward of Excellent Protection"
+        ],
+        "abilities": [
+          "Detect the Supernatural",
+          "Determination",
+          "Melee Weapon Free Strike",
+          "Ranged Weapon Free Strike",
+          "Hurl Element",
+          "Practical Magic",
+          "Enchantment and Ward: Change",
+          "Persistent Magic: Maintain",
+          "Persistent Magic: End",
+          "Practical Magic: Knockback",
+          "Practical Magic: Elemental Damage",
+          "Practical Magic: Teleport",
+          "Practical Magic: Additional Square",
+          "Motivate Earth",
+          "Skin Like Castle Walls",
+          "Skin Like Castle Walls: Reduce Potency",
+          "Earth: Acolyte of Earth: Stability",
+          "Meteoric Introduction",
+          "Unquiet Ground",
+          "Ripples in the Earth",
+          "Instantaneous Excavation",
+          "Ripples in the Earth: Raise Pillar",
+          "Instantaneous Excavation: Persistent Effect"
+        ]
+      },
+      "classActions": [
+        "Hurl Element",
+        "Practical Magic",
+        "Enchantment and Ward: Change",
+        "Persistent Magic: Maintain",
+        "Persistent Magic: End",
+        "Practical Magic: Knockback",
+        "Practical Magic: Elemental Damage",
+        "Practical Magic: Teleport",
+        "Practical Magic: Additional Square",
+        "Motivate Earth",
+        "Skin Like Castle Walls",
+        "Skin Like Castle Walls: Reduce Potency",
+        "Earth: Acolyte of Earth: Stability",
+        "Meteoric Introduction",
+        "Unquiet Ground",
+        "Ripples in the Earth",
+        "Instantaneous Excavation",
+        "Ripples in the Earth: Raise Pillar",
+        "Instantaneous Excavation: Persistent Effect"
+      ],
+      "rolledActions": [
+        {
+          "name": "Hurl Element",
+          "damageByTier": [4, 6, 8],
+          "manualRemainder": "choose|damage type",
+          "source": "feature/ability/elementalist/level-1/hurl-element.md"
+        },
+        {
+          "name": "Meteoric Introduction",
+          "damageByTier": [5, 7, 10],
+          "manualRemainder": "",
+          "source": "feature/ability/elementalist/level-1/meteoric-introduction.md",
+          "pushByTier": [2, 3, 4]
+        },
+        {
+          "name": "Unquiet Ground",
+          "damageByTier": [2, 5, 7],
+          "manualRemainder": "difficult terrain",
+          "source": "feature/ability/elementalist/level-1/unquiet-ground.md"
+        },
+        {
+          "name": "Ripples in the Earth",
+          "damageByTier": [3, 5, 8],
+          "manualRemainder": "pillar|ground",
+          "source": "feature/ability/elementalist/level-1/ripples-in-the-earth.md"
+        }
+      ],
+      "citations": [
+        "class/elementalist.md#Basics",
+        "feature/elementalist/level-1/elemental-specialization.md",
+        "feature/elementalist/level-1/enchantment-of-permanence.md",
+        "feature/elementalist/level-1/ward-of-excellent-protection.md",
+        "feature/elementalist/level-1/elementalist-abilities.md"
+      ]
+    },
+    {
+      "id": "v104-3",
+      "selections": {
+        "culture.name": "wilderness mercenary commune",
+        "culture.language": "Anjali",
+        "culture.environment": "Wilderness",
+        "culture.environment.skill": "Swim",
+        "culture.organization": "Communal",
+        "culture.organization.skill": "Blacksmithing",
+        "culture.upbringing": "Martial",
+        "culture.upbringing.skill": "Intimidate",
+        "career.choice": "Soldier",
+        "career.soldier.skill.exploration": "Endurance",
+        "career.soldier.skill.intrigue": "Alertness",
+        "career.soldier.languages": ["Kalliak", "Vaslorian"],
+        "career.soldier.perk": "Teamwork",
+        "career.soldier.inciting-incident": "Sole Survivor",
+        "ancestry.choice": "Human",
+        "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
+        "details.name": "V104 Green Celerity",
+        "class.choice": "Elementalist",
+        "class.elementalist.specialization": "Green",
+        "class.elementalist.enchantment": "Enchantment of Celerity",
+        "class.elementalist.ward": "Ward of Nature's Affection",
+        "class.elementalist.skills": ["Alchemy", "History", "Timescape"],
+        "class.elementalist.characteristic-array": "2, 1, 0, 0",
+        "class.elementalist.array-assignment": {
+          "Might": 2,
+          "Agility": 1,
+          "Intuition": 0,
+          "Presence": 0
+        },
+        "class.elementalist.signature-abilities": [
+          "Afflict a Bountiful Decay",
+          "The Green Within, the Green Without"
+        ],
+        "class.elementalist.ability-3": "Invigorating Growth",
+        "class.elementalist.ability-5": "Test of Rain"
+      },
+      "expected": {
+        "level": 1,
+        "subclass": "Green",
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 2,
+          "I": 0,
+          "P": 0
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "staminaMaximum": 18,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 6,
+        "windedValue": 9,
+        "speed": 6,
+        "stability": 0,
+        "disengage": 2,
+        "savingThrowThreshold": 6,
+        "skills": [
+          "Swim",
+          "Blacksmithing",
+          "Intimidate",
+          "Endurance",
+          "Alertness",
+          "Magic",
+          "Alchemy",
+          "History",
+          "Timescape"
+        ],
+        "features": [
+          "Culture edge",
+          "Elemental Specialization",
+          "Essence",
+          "Hurl Element",
+          "Persistent Magic",
+          "Practical Magic",
+          "Enchantment",
+          "Elementalist Ward",
+          "Elementalist Abilities",
+          "Green: Acolyte of the Green",
+          "It Is the Soul Which Hears",
+          "Enchantment of Celerity",
+          "Ward of Nature's Affection"
+        ],
+        "abilities": [
+          "Detect the Supernatural",
+          "Determination",
+          "Melee Weapon Free Strike",
+          "Ranged Weapon Free Strike",
+          "Hurl Element",
+          "Practical Magic",
+          "Enchantment and Ward: Change",
+          "Persistent Magic: Maintain",
+          "Persistent Magic: End",
+          "Practical Magic: Knockback",
+          "Practical Magic: Elemental Damage",
+          "Practical Magic: Teleport",
+          "Practical Magic: Additional Square",
+          "Breath of Dawn Remembered",
+          "Breath of Dawn Remembered: Additional Recovery",
+          "Green: Acolyte of the Green: Temporary Stamina",
+          "It Is the Soul Which Hears: Communicate",
+          "Afflict a Bountiful Decay",
+          "The Green Within, the Green Without",
+          "Invigorating Growth",
+          "Test of Rain",
+          "Afflict a Bountiful Decay: End Effect",
+          "The Green Within, the Green Without: Slide",
+          "Invigorating Growth: Remove Mushrooms",
+          "Test of Rain: End Effect",
+          "Ward of Nature's Affection: Retaliate"
+        ]
+      },
+      "classActions": [
+        "Hurl Element",
+        "Practical Magic",
+        "Enchantment and Ward: Change",
+        "Persistent Magic: Maintain",
+        "Persistent Magic: End",
+        "Practical Magic: Knockback",
+        "Practical Magic: Elemental Damage",
+        "Practical Magic: Teleport",
+        "Practical Magic: Additional Square",
+        "Breath of Dawn Remembered",
+        "Breath of Dawn Remembered: Additional Recovery",
+        "Green: Acolyte of the Green: Temporary Stamina",
+        "It Is the Soul Which Hears: Communicate",
+        "Afflict a Bountiful Decay",
+        "The Green Within, the Green Without",
+        "Invigorating Growth",
+        "Test of Rain",
+        "Afflict a Bountiful Decay: End Effect",
+        "The Green Within, the Green Without: Slide",
+        "Invigorating Growth: Remove Mushrooms",
+        "Test of Rain: End Effect",
+        "Ward of Nature's Affection: Retaliate"
+      ],
+      "rolledActions": [
+        {
+          "name": "Hurl Element",
+          "damageByTier": [4, 6, 8],
+          "manualRemainder": "choose|damage type",
+          "source": "feature/ability/elementalist/level-1/hurl-element.md"
+        },
+        {
+          "name": "Afflict a Bountiful Decay",
+          "damageByTier": [4, 6, 8],
+          "manualRemainder": "effect|end",
+          "source": "feature/ability/elementalist/level-1/afflict-a-bountiful-decay.md"
+        },
+        {
+          "name": "The Green Within, the Green Without",
+          "damageByTier": [4, 7, 9],
+          "manualRemainder": "slide",
+          "source": "feature/ability/elementalist/level-1/the-green-within-the-green-without.md"
+        },
+        {
+          "name": "Invigorating Growth",
+          "damageByTier": [6, 9, 13],
+          "manualRemainder": "mushroom",
+          "source": "feature/ability/elementalist/level-1/invigorating-growth.md"
+        },
+        {
+          "name": "Test of Rain",
+          "damageByTier": [4, 6, 10],
+          "manualRemainder": "end|effect",
+          "source": "feature/ability/elementalist/level-1/test-of-rain.md"
+        }
+      ],
+      "citations": [
+        "class/elementalist.md#Basics",
+        "feature/elementalist/level-1/elemental-specialization.md",
+        "feature/elementalist/level-1/enchantment-of-celerity.md",
+        "feature/elementalist/level-1/ward-of-natures-affection.md",
+        "feature/elementalist/level-1/elementalist-abilities.md"
+      ]
+    },
+    {
+      "id": "v104-4",
+      "selections": {
+        "culture.name": "wilderness mercenary commune",
+        "culture.language": "Anjali",
+        "culture.environment": "Wilderness",
+        "culture.environment.skill": "Swim",
+        "culture.organization": "Communal",
+        "culture.organization.skill": "Blacksmithing",
+        "culture.upbringing": "Martial",
+        "culture.upbringing.skill": "Intimidate",
+        "career.choice": "Soldier",
+        "career.soldier.skill.exploration": "Endurance",
+        "career.soldier.skill.intrigue": "Alertness",
+        "career.soldier.languages": ["Kalliak", "Vaslorian"],
+        "career.soldier.perk": "Teamwork",
+        "career.soldier.inciting-incident": "Sole Survivor",
+        "ancestry.choice": "Human",
+        "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
+        "details.name": "V104 Void Distance",
+        "class.choice": "Elementalist",
+        "class.elementalist.specialization": "Void",
+        "class.elementalist.enchantment": "Enchantment of Distance",
+        "class.elementalist.ward": "Ward of Surprising Reactivity",
+        "class.elementalist.skills": ["Alchemy", "History", "Timescape"],
+        "class.elementalist.characteristic-array": "1, 1, 1, 0",
+        "class.elementalist.array-assignment": {
+          "Might": 1,
+          "Agility": 1,
+          "Intuition": 1,
+          "Presence": 0
+        },
+        "class.elementalist.signature-abilities": [
+          "Grasp of Beyond",
+          "Ray of Agonizing Self-Reflection"
+        ],
+        "class.elementalist.ability-3": "Behold the Mystery",
+        "class.elementalist.ability-5": "No More Than a Breeze"
+      },
+      "expected": {
+        "level": 1,
+        "subclass": "Void",
+        "characteristics": {
+          "M": 1,
+          "A": 1,
+          "R": 2,
+          "I": 1,
+          "P": 0
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "staminaMaximum": 18,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 6,
+        "windedValue": 9,
+        "speed": 5,
+        "stability": 0,
+        "disengage": 1,
+        "savingThrowThreshold": 6,
+        "skills": [
+          "Swim",
+          "Blacksmithing",
+          "Intimidate",
+          "Endurance",
+          "Alertness",
+          "Magic",
+          "Alchemy",
+          "History",
+          "Timescape"
+        ],
+        "features": [
+          "Culture edge",
+          "Elemental Specialization",
+          "Essence",
+          "Hurl Element",
+          "Persistent Magic",
+          "Practical Magic",
+          "Enchantment",
+          "Elementalist Ward",
+          "Elementalist Abilities",
+          "Void: Acolyte of the Mystery",
+          "A Beyonding of Vision",
+          "Enchantment of Distance",
+          "Ward of Surprising Reactivity"
+        ],
+        "abilities": [
+          "Detect the Supernatural",
+          "Determination",
+          "Melee Weapon Free Strike",
+          "Ranged Weapon Free Strike",
+          "Hurl Element",
+          "Practical Magic",
+          "Enchantment and Ward: Change",
+          "Persistent Magic: Maintain",
+          "Persistent Magic: End",
+          "Practical Magic: Knockback",
+          "Practical Magic: Elemental Damage",
+          "Practical Magic: Teleport",
+          "Practical Magic: Additional Square",
+          "Shared Void Sense",
+          "Subtle Relocation",
+          "Subtle Relocation: Enhance",
+          "Grasp of Beyond",
+          "Ray of Agonizing Self-Reflection",
+          "Behold the Mystery",
+          "No More Than a Breeze",
+          "Grasp of Beyond: Teleport",
+          "Behold the Mystery: Persistent Effect",
+          "No More Than a Breeze: Persistent Effect",
+          "Ward of Surprising Reactivity: Retaliate"
+        ]
+      },
+      "classActions": [
+        "Hurl Element",
+        "Practical Magic",
+        "Enchantment and Ward: Change",
+        "Persistent Magic: Maintain",
+        "Persistent Magic: End",
+        "Practical Magic: Knockback",
+        "Practical Magic: Elemental Damage",
+        "Practical Magic: Teleport",
+        "Practical Magic: Additional Square",
+        "Shared Void Sense",
+        "Subtle Relocation",
+        "Subtle Relocation: Enhance",
+        "Grasp of Beyond",
+        "Ray of Agonizing Self-Reflection",
+        "Behold the Mystery",
+        "No More Than a Breeze",
+        "Grasp of Beyond: Teleport",
+        "Behold the Mystery: Persistent Effect",
+        "No More Than a Breeze: Persistent Effect",
+        "Ward of Surprising Reactivity: Retaliate"
+      ],
+      "rolledActions": [
+        {
+          "name": "Hurl Element",
+          "damageByTier": [4, 6, 8],
+          "manualRemainder": "choose|damage type",
+          "source": "feature/ability/elementalist/level-1/hurl-element.md"
+        },
+        {
+          "name": "Grasp of Beyond",
+          "damageByTier": [5, 8, 11],
+          "manualRemainder": "teleport",
+          "source": "feature/ability/elementalist/level-1/grasp-of-beyond.md"
+        },
+        {
+          "name": "Ray of Agonizing Self-Reflection",
+          "damageByTier": [4, 6, 8],
+          "manualRemainder": "",
+          "source": "feature/ability/elementalist/level-1/ray-of-agonizing-self-reflection.md",
+          "compiledCondition": "slowed"
+        },
+        {
+          "name": "Behold the Mystery",
+          "damageByTier": [2, 4, 6],
+          "manualRemainder": "persistent|turn",
+          "source": "feature/ability/elementalist/level-1/behold-the-mystery.md"
+        }
+      ],
+      "citations": [
+        "class/elementalist.md#Basics",
+        "feature/elementalist/level-1/elemental-specialization.md",
+        "feature/elementalist/level-1/enchantment-of-distance.md",
+        "feature/elementalist/level-1/ward-of-surprising-reactivity.md",
+        "feature/elementalist/level-1/elementalist-abilities.md"
+      ]
+    },
+    {
+      "id": "v104-5",
+      "selections": {
+        "culture.name": "wilderness mercenary commune",
+        "culture.language": "Anjali",
+        "culture.environment": "Wilderness",
+        "culture.environment.skill": "Swim",
+        "culture.organization": "Communal",
+        "culture.organization.skill": "Blacksmithing",
+        "culture.upbringing": "Martial",
+        "culture.upbringing.skill": "Intimidate",
+        "career.choice": "Soldier",
+        "career.soldier.skill.exploration": "Endurance",
+        "career.soldier.skill.intrigue": "Alertness",
+        "career.soldier.languages": ["Kalliak", "Vaslorian"],
+        "career.soldier.perk": "Teamwork",
+        "career.soldier.inciting-incident": "Sole Survivor",
+        "ancestry.choice": "Human",
+        "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
+        "details.name": "V104 Earth Battle",
+        "class.choice": "Elementalist",
+        "class.elementalist.specialization": "Earth",
+        "class.elementalist.enchantment": "Enchantment of Battle",
+        "class.elementalist.ward": "Ward of Delightful Consequences",
+        "class.elementalist.skills": ["Alchemy", "History", "Timescape"],
+        "class.elementalist.characteristic-array": "2, 2, \u22121, \u22121",
+        "class.elementalist.array-assignment": {
+          "Might": 2,
+          "Agility": 2,
+          "Intuition": -1,
+          "Presence": -1
+        },
+        "class.elementalist.signature-abilities": ["Grasp of Beyond", "Unquiet Ground"],
+        "class.elementalist.ability-3": "Behold the Mystery",
+        "class.elementalist.ability-5": "No More Than a Breeze"
+      },
+      "expected": {
+        "level": 1,
+        "subclass": "Earth",
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": 2,
+          "I": -1,
+          "P": -1
+        },
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "staminaMaximum": 18,
+        "recoveriesMaximum": 8,
+        "recoveryValue": 6,
+        "windedValue": 9,
+        "speed": 5,
+        "stability": 0,
+        "disengage": 1,
+        "savingThrowThreshold": 6,
+        "skills": [
+          "Swim",
+          "Blacksmithing",
+          "Intimidate",
+          "Endurance",
+          "Alertness",
+          "Magic",
+          "Alchemy",
+          "History",
+          "Timescape"
+        ],
+        "features": [
+          "Culture edge",
+          "Elemental Specialization",
+          "Essence",
+          "Hurl Element",
+          "Persistent Magic",
+          "Practical Magic",
+          "Enchantment",
+          "Elementalist Ward",
+          "Elementalist Abilities",
+          "Earth: Acolyte of Earth",
+          "Enchantment of Battle",
+          "Ward of Delightful Consequences"
+        ],
+        "abilities": [
+          "Detect the Supernatural",
+          "Determination",
+          "Melee Weapon Free Strike",
+          "Ranged Weapon Free Strike",
+          "Hurl Element",
+          "Practical Magic",
+          "Enchantment and Ward: Change",
+          "Persistent Magic: Maintain",
+          "Persistent Magic: End",
+          "Practical Magic: Knockback",
+          "Practical Magic: Elemental Damage",
+          "Practical Magic: Teleport",
+          "Practical Magic: Additional Square",
+          "Motivate Earth",
+          "Skin Like Castle Walls",
+          "Skin Like Castle Walls: Reduce Potency",
+          "Earth: Acolyte of Earth: Stability",
+          "Grasp of Beyond",
+          "Unquiet Ground",
+          "Behold the Mystery",
+          "No More Than a Breeze",
+          "Grasp of Beyond: Teleport",
+          "Behold the Mystery: Persistent Effect",
+          "No More Than a Breeze: Persistent Effect"
+        ]
+      },
+      "classActions": [
+        "Hurl Element",
+        "Practical Magic",
+        "Enchantment and Ward: Change",
+        "Persistent Magic: Maintain",
+        "Persistent Magic: End",
+        "Practical Magic: Knockback",
+        "Practical Magic: Elemental Damage",
+        "Practical Magic: Teleport",
+        "Practical Magic: Additional Square",
+        "Motivate Earth",
+        "Skin Like Castle Walls",
+        "Skin Like Castle Walls: Reduce Potency",
+        "Earth: Acolyte of Earth: Stability",
+        "Grasp of Beyond",
+        "Unquiet Ground",
+        "Behold the Mystery",
+        "No More Than a Breeze",
+        "Grasp of Beyond: Teleport",
+        "Behold the Mystery: Persistent Effect",
+        "No More Than a Breeze: Persistent Effect"
+      ],
+      "rolledActions": [
+        {
+          "name": "Hurl Element",
+          "damageByTier": [4, 6, 8],
+          "manualRemainder": "choose|damage type",
+          "source": "feature/ability/elementalist/level-1/hurl-element.md"
+        },
+        {
+          "name": "Grasp of Beyond",
+          "damageByTier": [5, 8, 11],
+          "manualRemainder": "teleport",
+          "source": "feature/ability/elementalist/level-1/grasp-of-beyond.md"
+        },
+        {
+          "name": "Unquiet Ground",
+          "damageByTier": [2, 5, 7],
+          "manualRemainder": "difficult terrain",
+          "source": "feature/ability/elementalist/level-1/unquiet-ground.md"
+        },
+        {
+          "name": "Behold the Mystery",
+          "damageByTier": [2, 4, 6],
+          "manualRemainder": "persistent|turn",
+          "source": "feature/ability/elementalist/level-1/behold-the-mystery.md"
+        }
+      ],
+      "citations": [
+        "class/elementalist.md#Basics",
+        "feature/elementalist/level-1/elemental-specialization.md",
+        "feature/elementalist/level-1/enchantment-of-battle.md",
+        "feature/elementalist/level-1/ward-of-delightful-consequences.md",
+        "feature/elementalist/level-1/elementalist-abilities.md"
+      ]
+    }
+  ],
+  "lowReasonTarget": {
+    "culture.name": "wilderness mercenary commune",
+    "culture.language": "Anjali",
+    "culture.environment": "Wilderness",
+    "culture.environment.skill": "Swim",
+    "culture.organization": "Communal",
+    "culture.organization.skill": "Blacksmithing",
+    "culture.upbringing": "Martial",
+    "culture.upbringing.skill": "Intimidate",
+    "career.choice": "Soldier",
+    "career.soldier.skill.exploration": "Endurance",
+    "career.soldier.skill.intrigue": "Alertness",
+    "career.soldier.languages": ["Kalliak", "Vaslorian"],
+    "career.soldier.perk": "Teamwork",
+    "career.soldier.inciting-incident": "Sole Survivor",
+    "ancestry.choice": "Human",
+    "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
+    "details.name": "V103 Chronokinetic Force",
+    "class.choice": "Null",
+    "class.null.tradition": "Chronokinetic",
+    "class.null.augmentation": "Force Augmentation",
+    "class.null.characteristic-array": "2, \u22121, \u22121",
+    "class.null.array-assignment": {
+      "Might": 2,
+      "Reason": -1,
+      "Presence": -1
+    },
+    "class.null.skills": ["Read Person", "Timescape"],
+    "class.null.tradition-skill.chronokinetic": ["Monsters"],
+    "class.null.signature-abilities": ["Dance of Blows", "Faster Than the Eye"],
+    "class.null.ability-3": "Chronal Spike",
+    "class.null.ability-5": "A Squad Unto Myself"
+  }
+}

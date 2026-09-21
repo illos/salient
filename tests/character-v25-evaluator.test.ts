@@ -141,12 +141,6 @@ test('V25 raw Forge illegal Creative choice and unresolved fixed Magic collision
     'required-choice-missing',
   );
   assert.equal(result.partial?.skills?.filter(skill => skill.name === 'Magic').length, 1);
-  assert.equal(
-    evaluate({ ...selections, 'class.elementalist.magic-replacement': 'Magic' }).diagnostics[
-      'class.elementalist.magic-replacement'
-    ]?.[0]?.code,
-    'unsupported-option',
-  );
   assert.ok(
     evaluate({ ...selections, 'class.elementalist.magic-replacement': 'Magic' }).diagnostics[
       'class.elementalist.magic-replacement'

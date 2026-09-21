@@ -47,5 +47,14 @@ export function elementalistAbilities(
       },
     });
   }
-  return result;
+  return result.map(a =>
+    a.name === 'Instantaneous Excavation' &&
+    a.provenance.decisionId.startsWith('class.elementalist.')
+      ? {
+          ...a,
+          activationCondition:
+            'Open the source holes, then roll separately for each eligible creature above them. No critical hit: this is a maneuver. Geometry, separate rolls, falling and persistent upkeep remain manual.',
+        }
+      : a,
+  );
 }

@@ -114,3 +114,5 @@ action labels on the sheet, manual performance timing and Upstage Self text. Pub
 the Troubadour cohort; no browser test was run for V102.
 
 - V103: Null tradition/augmentation cards, two-signature selection, no kit section, sourced sheet actions and draft pruning. Browser runs deferred under moratorium; shared routes covered by Null cohort.
+
+- V104: Elementalist four specializations, five enchantments/four wards and two-of-eight signatures; edit pruning, source manual actions and persistent timing text. Headless proof owns behavior.

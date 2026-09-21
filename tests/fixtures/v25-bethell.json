@@ -137,7 +137,17 @@
       "The Flesh, a Crucible",
       "Conflagration",
       "Melee Weapon Free Strike",
-      "Ranged Weapon Free Strike"
+      "Ranged Weapon Free Strike",
+      "Enchantment and Ward: Change",
+      "Persistent Magic: Maintain",
+      "Persistent Magic: End",
+      "Practical Magic: Knockback",
+      "Practical Magic: Elemental Damage",
+      "Practical Magic: Teleport",
+      "Practical Magic: Additional Square",
+      "Explosive Assistance: Enhance",
+      "The Flesh, a Crucible: Persistent Effect",
+      "Conflagration: Persistent Effect"
     ],
     "damageImmunities": {
       "corruption": 3

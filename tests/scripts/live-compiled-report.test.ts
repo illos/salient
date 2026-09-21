@@ -30,10 +30,12 @@ test('V72 availability follows current grants and loading, not catalog presence'
     'Eye of Surlach',
     'Halt Miscreant!',
     'Melee Weapon Free Strike',
+    'Meteoric Introduction',
     'Pinning Shot',
     'Power Chord',
     'Pressure Points',
     'Ranged Weapon Free Strike',
+    'Ray of Agonizing Self-Reflection',
     'Razor Claws',
     'Repent!',
     'Spear Charge',
@@ -45,7 +47,7 @@ test('V72 availability follows current grants and loading, not catalog presence'
       .filter(e => e.execution === 'supported' && e.live === 'not-reachable')
       .map(e => e.name)
       .sort(),
-  ).toEqual(['Meteoric Introduction', 'Ray of Agonizing Self-Reflection']);
+  ).toEqual([]);
 });
 
 // Pinned Ghoul and Worg source: fixed +2 roll, constant 3/4/5 damage. No Agility damage bonus.
@@ -163,6 +165,7 @@ test.each([
   // Troubadour/level-1/cutting-sarcasm: P-derived bleeding, printed 2/5/7 + P psychic.
   ['Cutting Sarcasm', 'P', 'bleeding', [4, 7, 9], 0, 'drama'],
   // Null Pressure Points: A roll2, I-derived potency; target Agility, strict thresholds.
+  ['Ray of Agonizing Self-Reflection', 'R', 'slowed', [4, 6, 8], 0, 'essence'],
   ['Pressure Points', 'A', 'weakened', [6, 9, 11], 0, 'discipline'],
 ] as const)(
   '%s retains each strict source threshold and resource cost',
@@ -185,7 +188,7 @@ test.each([
             characteristics: {
               M: 2,
               A: resource === 'discipline' ? 2 : 1,
-              R: 1,
+              R: resource === 'essence' ? 2 : 1,
               I: ['piety', 'discipline'].includes(resource) ? 2 : -1,
               P: 2,
             },
@@ -207,7 +210,12 @@ test.each([
           ],
           conditionFacts: {
             potency: {
-              characteristic: ['piety', 'discipline'].includes(resource) ? 'I' : 'P',
+              characteristic:
+                resource === 'essence'
+                  ? 'R'
+                  : ['piety', 'discipline'].includes(resource)
+                    ? 'I'
+                    : 'P',
               weak: 0,
               average: 1,
               strong: 2,
