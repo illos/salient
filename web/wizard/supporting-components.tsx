@@ -124,20 +124,14 @@ export function SelectedRuleSource({ sourcePath, name }: { sourcePath: string; n
   );
 }
 
-/** Selected knowledge stays compact; opening a skill loads its complete individual article. */
+/**
+ * A selected skill's description, always open (V96): the disclosure it used to sit behind was a
+ * control the theme has nowhere else, and the text is short enough to simply read.
+ */
 export function SelectedSkillSource({ name }: { name: string }) {
-  const [open, setOpen] = useState(false);
   const sourcePath = skillSources.get(name);
   if (!sourcePath) return null;
-  return (
-    <details
-      className="rounded-md bg-muted p-3 text-base"
-      onToggle={event => setOpen(event.currentTarget.open)}
-    >
-      <summary className="cursor-pointer font-medium">{name} · skill description</summary>
-      {open && <SelectedRuleSource name={name} sourcePath={sourcePath} />}
-    </details>
-  );
+  return <SelectedRuleSource name={name} sourcePath={sourcePath} />;
 }
 
 /** Preserve every source table field and the language's complete individual usage text. */
