@@ -498,11 +498,11 @@ function renderIndex(kinds: string[]): string {
     '// the index-signature contract rejects; the generator has already validated every entry.',
     'const typed = (list: unknown): ContentEntry[] => list as ContentEntry[];',
     "import manifestJson from './manifest.json';",
-    // Shared NodeNext evaluation imports complications with JSON attributes. Keep this import
+    // Shared NodeNext evaluation imports these categories with JSON attributes. Keep each import
     // identical: esbuild/Convex 1.45 cannot stat mixed-attribute metafile input names.
     ...kinds.map(
       kind =>
-        `import ${identifier(kind)}Json from './${kind}.json'${kind === 'complication' ? " with { type: 'json' }" : ''};`,
+        `import ${identifier(kind)}Json from './${kind}.json'${['ability', 'feature', 'complication'].includes(kind) ? " with { type: 'json' }" : ''};`,
     ),
     '',
     'export const manifest: ContentManifest = manifestJson;',
