@@ -987,65 +987,75 @@ function AssignmentEditor({
             <span className="text-sm text-muted-foreground">Fixed</span>
           </span>
         ))}
-        {targets.map(target => (
-          <label
-            key={target}
-            data-testid={`assignment-${target}`}
-            className="flex flex-col items-center gap-1 rounded-md bg-muted px-3 py-2 text-sm"
-            onDragOver={event => event.preventDefault()}
-            onDrop={event => {
-              event.preventDefault();
-              try {
-                const dropped = JSON.parse(event.dataTransfer.getData('application/json')) as {
-                  value: number;
-                  fromTarget?: string;
-                };
-                assign(target, dropped.value, dropped.fromTarget);
-              } catch {
-                setError('Drop a characteristic value from this array.');
-              }
-            }}
-          >
-            <span
-              draggable={current[target] !== undefined}
-              className={
-                current[target] === undefined
-                  ? 'text-sm text-muted-foreground'
-                  : 'text-sm font-medium text-foreground'
-              }
-              onDragStart={event =>
-                event.dataTransfer.setData(
-                  'application/json',
-                  JSON.stringify({ value: current[target], fromTarget: target }),
-                )
-              }
+        {targets.map(target => {
+          const score = current[target];
+          const placed = score !== undefined;
+          return (
+            <label
+              key={target}
+              data-testid={`assignment-${target}`}
+              className="flex flex-col items-center gap-1"
+              onDragOver={event => event.preventDefault()}
+              onDrop={event => {
+                event.preventDefault();
+                try {
+                  const dropped = JSON.parse(event.dataTransfer.getData('application/json')) as {
+                    value: number;
+                    fromTarget?: string;
+                  };
+                  assign(target, dropped.value, dropped.fromTarget);
+                } catch {
+                  setError('Drop a characteristic value from this array.');
+                }
+              }}
             >
-              {target}
-              {current[target] === undefined ? '' : `: ${current[target]}`}
-            </span>
-            <select
-              className="native-select"
-              aria-label={`Assign ${target}`}
-              value={current[target] === undefined ? '' : String(current[target])}
-              onChange={event =>
-                assign(target, event.target.value === '' ? null : Number(event.target.value))
-              }
-            >
-              <option value="">Choose…</option>
-              {[...new Set(array)].map(amount => (
-                <option
-                  key={amount}
-                  value={String(amount)}
-                  disabled={
-                    assignmentError({ ...current, [target]: amount }, array, targets) !== null
-                  }
-                >
-                  {amount}
-                </option>
-              ))}
-            </select>
-          </label>
-        ))}
+              {/* A blank reads as the tile it will become: same size and label, a dashed edge
+                  and no number until a value lands in it (V96). */}
+              <span
+                draggable={placed}
+                onDragStart={event =>
+                  event.dataTransfer.setData(
+                    'application/json',
+                    JSON.stringify({ value: score, fromTarget: target }),
+                  )
+                }
+              >
+                <StatBox
+                  compact
+                  inset={placed}
+                  value={placed ? score : '—'}
+                  label={target.slice(0, 3)}
+                  className={cn(
+                    placed
+                      ? 'cursor-grab'
+                      : 'border border-dashed border-border bg-transparent text-muted-foreground',
+                  )}
+                />
+              </span>
+              <select
+                className="native-select h-8 w-14 px-2 text-sm"
+                aria-label={`Assign ${target}`}
+                value={placed ? String(score) : ''}
+                onChange={event =>
+                  assign(target, event.target.value === '' ? null : Number(event.target.value))
+                }
+              >
+                <option value="">–</option>
+                {[...new Set(array)].map(amount => (
+                  <option
+                    key={amount}
+                    value={String(amount)}
+                    disabled={
+                      assignmentError({ ...current, [target]: amount }, array, targets) !== null
+                    }
+                  >
+                    {amount}
+                  </option>
+                ))}
+              </select>
+            </label>
+          );
+        })}
       </div>
       <ErrorNotice error={error} />
     </div>
