@@ -41,3 +41,14 @@ Independent ENGINE review then DEPLOY2 publication reusing acceptance.
 - Authoring: both TypeScript projects and touched ESLint passed. Focused evaluator/report files:
   11 passing tests. Found and repaired empty skill options shadowing their source pools.
   Full/live acceptance has not yet run.
+- ENGINE final static PASS `17c0776`, recorded in [rules review](audits/V103-null-rules-review.md).
+  No blocking findings; reviewer ran no tests.
+- TESTER job `test-V103-17c0776-2`: `CI=true pnpm check` exit 0 / 197s,
+  **993 tests (391 engine + 602 app/scripts)** with all content/report/link/vendor/build gates.
+  Isolated `SALIENT_HEADLESS_COHORT=null node scripts/verify-character-headless.ts` exit 0 / 56.7s:
+  four builds and 39 distinct Null actions, plus ordinary free-strike Force exclusion.
+  Persisted applied/resisted Pressure Points, source-linked save registration, source costs and
+  manual target/actor state checks passed. Backend stopped, ports free, data retained, checkout clean.
+  Artifacts: `/srv/presidium/projects/salient/test-artifacts/V103-17c0776`.
+- Accepted runtime remains `17c0776`; closeout adds review/evidence only. Ready for DEPLOY2 to
+  integrate and publish, reusing accepted results. No repeat suite, smoke or live checks requested.
