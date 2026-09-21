@@ -153,8 +153,11 @@ From the user's culture mockup (attachment, 2026-09-21):
   that combines aspects, but each of the thirteen aspects does, so a tile carries that aspect's
   own text and opens it. Checked against the built catalog: all 81 aspect tiles across the 27
   presets resolve to text, none missing.
-- The step header offers Read more, a worded trigger for the same modal reader the rulebook icon
-  opens (`RuleReadMore`, `web/rules/link.tsx`), on whichever entry supplied its description.
+- The step header carries a paragraph and its Read more only when the chosen option has an entry
+  of its own. A culture has none, so its header is the name, the step label and Edit, with the
+  descriptions on the aspect tiles below; restating the step's "choose a culture" line under the
+  culture already chosen says nothing. Read more is a worded trigger for the same modal reader the
+  rulebook icon opens (`RuleReadMore`, `web/rules/link.tsx`).
 - The three culture skills are one panel, "Culture skills", with a dot per aspect and Clear,
   beside the step card as the point-budget panel is.
 - A granted automatic step reads as a card rather than a bare line.

@@ -1209,6 +1209,12 @@ function Wizard({ character }: { character: WizardCharacter }) {
     ? step.decisions.filter(decision => decision !== primary)
     : step.decisions;
   const cultureSkills = dependent.filter(isCultureSkill);
+  // The chosen option's own rules text, when the option has an entry of its own rather than
+  // citing the decision's shared source.
+  const chosenText =
+    selectedSource && selectedSource !== primary?.source
+      ? ruleExcerpt(catalog, { sourcePath: selectedSource, label: selectedName })
+      : undefined;
   const lockedBlock = lockedAspects.length ? (
     <section
       className="flex flex-col gap-3 py-5"
@@ -1357,15 +1363,11 @@ function Wizard({ character }: { character: WizardCharacter }) {
                 <StepTitle
                   title={selectedName ?? primaryNoneLabel ?? stepName(step)}
                   eyebrow={stepName(step)}
-                  description={
-                    // Only when the option has its own entry. Every culture preset cites the
-                    // Background chapter, which is the decision's own source, so its "text" would
-                    // be that chapter's opening and would read the same under every culture.
-                    (selectedSource !== primary.source &&
-                      selectedSource &&
-                      ruleExcerpt(catalog, { sourcePath: selectedSource, label: selectedName })) ||
-                    stepExcerpt(step)
-                  }
+                  // Only the chosen option's own text. A culture is a table row combining aspects
+                  // and has no entry, so its header carries no paragraph; the aspect tiles below
+                  // hold the descriptions. Repeating the step's "choose a culture" line under the
+                  // culture you already chose says nothing.
+                  description={chosenText}
                   reference={
                     selectedSource && selectedSource !== primary.source ? (
                       <RuleLink sourcePath={selectedSource} label={selectedName} />
@@ -1374,11 +1376,9 @@ function Wizard({ character }: { character: WizardCharacter }) {
                     )
                   }
                   more={
-                    selectedSource && selectedSource !== primary.source ? (
+                    chosenText && selectedSource ? (
                       <RuleReadMore sourcePath={selectedSource} label={selectedName} />
-                    ) : (
-                      <RuleReadMore {...stepReference(step)} />
-                    )
+                    ) : undefined
                   }
                   optional={step.optional}
                   action={
