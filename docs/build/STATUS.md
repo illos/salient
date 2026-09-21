@@ -106,3 +106,4 @@ add narrative here. V46–V56 were the abandoned Opus pilot and are retired ids.
 | V93 | [CI reuse and failure events](V93-ci-failure-events.md) | Merged (`a5a23ec`); targeted gate and real event delivery pass |
 | V94 | [Tactician level one](V94-tactician-level-one.md) | Merged (`fcf13f1`); cloud dev published; accepted TESTER gates reused |
 | V95 | [Account screen](V95-account-screen.md) | In progress |
+| V96 | [Character builder rail](V96-wizard-rail.md) | In progress |

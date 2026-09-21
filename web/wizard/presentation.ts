@@ -152,16 +152,6 @@ export function stepName(step: Step): string {
 }
 
 /**
- * The step's number in the source's hero-making sequence: "9. Determine Details" → 9. The rail
- * shows this rather than the step's position in the presented list, so the numbers match the book
- * and the gap left by a step this milestone does not offer (8. Complication) stays visible.
- */
-export function stepNumber(step: Step): number | null {
-  const match = /^(\d+)\./.exec(step.sourceStep);
-  return match ? Number(match[1]) : null;
-}
-
-/**
  * One-sentence excerpts from the pinned Compendium's step descriptions
  * (vendor/steel-compendium/en/unified/md/chapter/making-a-hero.md, "Step-by-Step Hero Making"),
  * quoted verbatim for the step description line and the SOURCE TEXT callout. Presentation only;

@@ -1,21 +1,24 @@
 // SPDX-License-Identifier: GPL-3.0-only
 /**
- * The wizard step rail (V21 item 10; Quiet, docs/design-mockups/quiet/README.md): a `card`
- * panel with a "Step n of m" label, one plain row per presented step — an 8px accent dot marks
- * the current step, a tonal round badge carries the number (a check mark once the step is done),
- * the step name, the chosen value in muted at the right — and a rounded progress bar at the
- * bottom. The rows are the same step buttons the wizard always had: the accessible name stays
- * `n. Step name` so existing tests and the keyboard flow keep working. The steps come from the
- * caller in source order; nothing here knows how many there are.
+ * The wizard step rail (V21 item 10; Quiet, docs/design-mockups/quiet/README.md; V96 compaction):
+ * a `card` panel headed "Character Builder" with the Making a Hero reference, a muted "Step n
+ * of m" line, one compact row per presented step — the tonal round badge carries the number and
+ * takes the accent on the current step (a check mark once the step is done), the step name, the
+ * chosen value in muted at the right — and a rounded progress bar at the bottom. The rows are the
+ * same step buttons the wizard always had: the accessible name stays `n. Step name` so the
+ * keyboard flow keeps working. The steps come from the caller in presented order; nothing here
+ * knows how many there are.
  */
 import { cn } from 'cn';
 import { Badge } from '../components/ui/badge';
+import { RuleLink } from '../rules/link';
+import type { RuleReference } from '../rules/reference';
 
 export interface RailStep {
   id: string;
   /** Source step name without its number, e.g. `Class`. */
   name: string;
-  /** The step's number in the source sequence; the presented list can skip one. */
+  /** The step's position in the presented sequence, starting at one. */
   number: number;
   /** Label of the step's primary decision when one is recorded. */
   chosen?: string;
@@ -38,8 +41,12 @@ function StepMarker({
     <span
       aria-hidden
       className={cn(
-        'flex size-6 shrink-0 items-center justify-center rounded-full bg-muted text-sm tabular-nums',
-        done || current ? 'text-foreground' : 'text-muted-foreground',
+        'flex size-6 shrink-0 items-center justify-center rounded-full text-sm tabular-nums transition-colors duration-(--motion-fast)',
+        current
+          ? 'bg-primary text-primary-foreground'
+          : done
+            ? 'bg-muted text-foreground'
+            : 'bg-muted text-muted-foreground',
       )}
     >
       {done && !current ? '✓' : number}
@@ -48,15 +55,18 @@ function StepMarker({
 }
 
 export function StepRail({
+  title,
+  reference,
   steps,
   currentIndex,
-  sourceTotal,
   onSelect,
 }: {
+  /** The heading above the steps. */
+  title: string;
+  /** The rulebook reference beside the heading. */
+  reference: RuleReference;
   steps: RailStep[];
   currentIndex: number;
-  /** Steps in the source sequence, which can exceed the steps this milestone presents. */
-  sourceTotal: number;
   onSelect: (index: number) => void;
 }) {
   const completed = steps.filter(step => step.done).length;
@@ -64,13 +74,17 @@ export function StepRail({
   return (
     <nav
       aria-label="Steps"
-      className="flex h-full min-h-0 flex-col rounded-lg bg-card p-5"
+      className="flex h-full min-h-0 flex-col rounded-lg bg-card p-4"
       data-wizard-pane="rail"
     >
-      <p className="mb-3 text-sm text-muted-foreground">
-        Step {steps[currentIndex]?.number ?? currentIndex + 1} of {sourceTotal}
+      <div className="flex items-center gap-2">
+        <h2 className="m-0 text-base font-medium">{title}</h2>
+        <RuleLink {...reference} />
+      </div>
+      <p className="mt-1 mb-3 text-sm text-muted-foreground">
+        Step {currentIndex + 1} of {steps.length}
       </p>
-      <ol className="-mx-3 m-0 flex min-h-0 flex-1 list-none flex-col overflow-y-auto p-0">
+      <ol className="-mx-2 m-0 flex min-h-0 flex-1 list-none flex-col overflow-y-auto p-0">
         {steps.map((step, index) => {
           const current = index === currentIndex;
           return (
@@ -81,7 +95,7 @@ export function StepRail({
                 aria-label={`${step.number}. ${step.name}`}
                 title={step.chosen ? `${step.name}: ${step.chosen}` : step.name}
                 className={cn(
-                  'flex w-full items-center gap-3 rounded-md px-3 py-2.5 text-left text-base transition-colors duration-(--motion-fast) hover:bg-muted',
+                  'flex w-full items-center gap-2.5 rounded-md px-2 py-1.5 text-left text-sm transition-colors duration-(--motion-fast) hover:bg-muted',
                   current
                     ? 'font-medium text-foreground'
                     : step.done
@@ -90,20 +104,12 @@ export function StepRail({
                 )}
                 onClick={() => onSelect(index)}
               >
-                <span
-                  aria-hidden
-                  className={cn(
-                    'size-2 shrink-0 rounded-full',
-                    current ? 'bg-primary' : 'bg-transparent',
-                  )}
-                />
                 <StepMarker number={step.number} done={step.done} current={current} />
                 <span className="min-w-0 flex-1 truncate">{step.name}</span>
                 {/* The chosen value and the outstanding count are both shown: a step can be
-                    decided and still owe sub-choices, and hiding the choice loses the mockup's
-                    right-aligned value. */}
+                    decided and still owe sub-choices. */}
                 {step.chosen && (
-                  <span className="max-w-[45%] truncate text-sm font-normal text-muted-foreground">
+                  <span className="max-w-[45%] truncate text-xs font-normal text-muted-foreground">
                     {step.chosen}
                   </span>
                 )}
@@ -117,7 +123,7 @@ export function StepRail({
           );
         })}
       </ol>
-      <div className="pt-4">
+      <div className="pt-3">
         <div
           role="progressbar"
           aria-label="Steps completed"

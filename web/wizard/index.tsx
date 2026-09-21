@@ -60,7 +60,6 @@ import {
   readableGuidance,
   stepExcerpt,
   stepName,
-  stepNumber,
   stepReference,
 } from './presentation';
 import { WizardHeader } from './header';
@@ -84,6 +83,16 @@ const AUTHORED_FIELDS: Record<string, keyof CharacterAuthored> = {
 };
 
 type LoadedCharacter = FunctionReturnType<typeof api.characters.get>;
+
+/**
+ * Source steps the wizard does not present (V96, docs/character-wizard-spec.md#main-creation-and-editing):
+ * "1. Think" has nothing to record and its reference now sits on the rail heading; "10. Make
+ * Connections" is left to the table. Presentation only: the evaluator still knows both steps and
+ * the headless route still records `connections.notes`.
+ */
+const HIDDEN_STEPS = new Set(['step.think', 'step.connections']);
+/** The rail heading's reference: the whole Making a Hero chapter. */
+const BUILDER_REFERENCE = { id: 'mcdm.heroes.v1/chapter/making-a-hero', label: 'Making a Hero' };
 
 function Diagnostics({ list }: { list: Diagnostic[] | undefined }) {
   if (!list?.length) return null;
@@ -739,7 +748,9 @@ function Wizard({ character }: { character: WizardCharacter }) {
     () => getDefinitions(character.level, character.choiceOrigins),
     [character.level, character.choiceOrigins],
   );
-  const PRESENTED = definitions.steps.filter(step => step.presentedInV001);
+  const PRESENTED = definitions.steps.filter(
+    step => step.presentedInV001 && !HIDDEN_STEPS.has(step.id),
+  );
   const navigate = useNavigate();
   const client = useConvex();
   const save = useMutation(api.characters.save);
@@ -879,7 +890,7 @@ function Wizard({ character }: { character: WizardCharacter }) {
     return {
       id: s.id,
       name: stepName(s),
-      number: stepNumber(s) ?? index + 1,
+      number: index + 1,
       chosen: recordedValue(primaryDecisionId(s)),
       problems,
       done,
@@ -932,12 +943,13 @@ function Wizard({ character }: { character: WizardCharacter }) {
         onSaveDraft={() => void persist(false)}
         onExit={() => void exit()}
       />
-      <div className="grid min-h-0 grid-cols-[280px_minmax(0,1fr)_330px] gap-(--page-gap) px-(--page-gap) pb-(--page-gap)">
+      <div className="grid min-h-0 grid-cols-[224px_minmax(0,1fr)_330px] gap-(--page-gap) px-(--page-gap) pb-(--page-gap)">
         <div className="min-h-0">
           <StepRail
+            title="Character Builder"
+            reference={BUILDER_REFERENCE}
             steps={railSteps}
             currentIndex={stepIndex}
-            sourceTotal={definitions.steps.length}
             onSelect={goTo}
           />
         </div>
