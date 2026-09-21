@@ -11,7 +11,7 @@
     "version": "1.0.4"
   },
   "generatedAt": "2026-09-08",
-  "contentHash": "sha256:261c9f04c1792f48c1e1c15eb7bc9171cd8347166b814260f020b591728a412d",
+  "contentHash": "sha256:7ffe0438ccb96263a43c2d3c8728737d387521af8d846b3cf9fbfd6bd4347d0a",
   "entryCount": 1483,
   "selections": [
     {
@@ -170,7 +170,7 @@
         "feature/elementalist/level-1",
         "feature/ability/elementalist/level-1"
       ],
-      "basis": "docs/build/V25-two-class-wizard.md#in-scope: complete sourced Bethell path."
+      "basis": "docs/build/V104-elementalist-level-one.md#scope: complete Elementalist level-one choices."
     },
     {
       "id": "shadow-level-one",
