@@ -14125,8 +14125,8 @@
           "message": "Only the designed single-target envelope is eligible."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [
         {
           "name": "Faithful Friend",
@@ -14134,8 +14134,8 @@
           "decisionId": "class.conduit.domain-feature.nature",
           "level": 1,
           "grantKind": "class-ability",
-          "selectable": "unknown",
-          "detail": "automatic grant; chain unknown"
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable; witness {\"class.conduit.deity\":\"Salorna\",\"class.choice\":\"Conduit\",\"class.conduit.domains\":[\"Nature\",\"Life\"],\"class.conduit.domain-feature\":\"Nature\"}"
         },
         {
           "name": "Faithful Friend",
@@ -14143,8 +14143,8 @@
           "decisionId": "class.conduit.domain-feature.nature",
           "level": 2,
           "grantKind": "class-ability",
-          "selectable": "unknown",
-          "detail": "automatic grant; chain unknown"
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable; witness {\"class.conduit.deity\":\"Salorna\",\"class.choice\":\"Conduit\",\"class.conduit.domains\":[\"Nature\",\"Life\"],\"class.conduit.domain-feature\":\"Nature\"}"
         },
         {
           "name": "Faithful Friend",
@@ -14152,8 +14152,8 @@
           "decisionId": "class.conduit.domain-feature.nature",
           "level": 3,
           "grantKind": "class-ability",
-          "selectable": "unknown",
-          "detail": "automatic grant; chain unknown"
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable; witness {\"class.conduit.deity\":\"Salorna\",\"class.choice\":\"Conduit\",\"class.conduit.domains\":[\"Nature\",\"Life\"],\"class.conduit.domain-feature\":\"Nature\"}"
         }
       ],
       "movementFacts": "No compiled push."
@@ -14289,8 +14289,8 @@
           "message": "Only the designed single-target envelope is eligible."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [
         {
           "name": "Grave Speech",
@@ -14298,8 +14298,8 @@
           "decisionId": "class.conduit.domain-feature.death",
           "level": 1,
           "grantKind": "class-ability",
-          "selectable": "unknown",
-          "detail": "automatic grant; chain unknown"
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable; witness {\"class.conduit.deity\":\"Cyrvis\",\"class.choice\":\"Conduit\",\"class.conduit.domains\":[\"Death\",\"Fate\"],\"class.conduit.domain-feature\":\"Death\"}"
         },
         {
           "name": "Grave Speech",
@@ -14307,8 +14307,8 @@
           "decisionId": "class.conduit.domain-feature.death",
           "level": 2,
           "grantKind": "class-ability",
-          "selectable": "unknown",
-          "detail": "automatic grant; chain unknown"
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable; witness {\"class.conduit.deity\":\"Cyrvis\",\"class.choice\":\"Conduit\",\"class.conduit.domains\":[\"Death\",\"Fate\"],\"class.conduit.domain-feature\":\"Death\"}"
         },
         {
           "name": "Grave Speech",
@@ -14316,8 +14316,8 @@
           "decisionId": "class.conduit.domain-feature.death",
           "level": 3,
           "grantKind": "class-ability",
-          "selectable": "unknown",
-          "detail": "automatic grant; chain unknown"
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable; witness {\"class.conduit.deity\":\"Cyrvis\",\"class.choice\":\"Conduit\",\"class.conduit.domains\":[\"Death\",\"Fate\"],\"class.conduit.domain-feature\":\"Death\"}"
         }
       ],
       "movementFacts": "No compiled push."
@@ -14371,8 +14371,8 @@
           "message": "Only the designed single-target envelope is eligible."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [
         {
           "name": "Hands of the Maker",
@@ -14380,8 +14380,8 @@
           "decisionId": "class.conduit.domain-feature.creation",
           "level": 1,
           "grantKind": "class-ability",
-          "selectable": "unknown",
-          "detail": "automatic grant; chain unknown"
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable; witness {\"class.conduit.deity\":\"Adûn\",\"class.choice\":\"Conduit\",\"class.conduit.domains\":[\"Creation\",\"Life\"],\"class.conduit.domain-feature\":\"Creation\"}"
         },
         {
           "name": "Hands of the Maker",
@@ -14389,8 +14389,8 @@
           "decisionId": "class.conduit.domain-feature.creation",
           "level": 2,
           "grantKind": "class-ability",
-          "selectable": "unknown",
-          "detail": "automatic grant; chain unknown"
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable; witness {\"class.conduit.deity\":\"Adûn\",\"class.choice\":\"Conduit\",\"class.conduit.domains\":[\"Creation\",\"Life\"],\"class.conduit.domain-feature\":\"Creation\"}"
         },
         {
           "name": "Hands of the Maker",
@@ -14398,8 +14398,8 @@
           "decisionId": "class.conduit.domain-feature.creation",
           "level": 3,
           "grantKind": "class-ability",
-          "selectable": "unknown",
-          "detail": "automatic grant; chain unknown"
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable; witness {\"class.conduit.deity\":\"Adûn\",\"class.choice\":\"Conduit\",\"class.conduit.domains\":[\"Creation\",\"Life\"],\"class.conduit.domain-feature\":\"Creation\"}"
         }
       ],
       "movementFacts": "No compiled push."
@@ -26412,8 +26412,8 @@
           "message": "The effect on damage, payment, targeting or order is not established."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [
         {
           "name": "Concussive Slam",
@@ -26421,8 +26421,8 @@
           "decisionId": "ancestry.revenant.time-raider.psionic-gift.ability",
           "level": 1,
           "grantKind": "ancestry-ability",
-          "selectable": "unknown",
-          "detail": "grant of option Concussive Slam supportedInV001=true; chain unknown"
+          "selectable": "selectable",
+          "detail": "grant of option Concussive Slam supportedInV001=true; chain selectable"
         },
         {
           "name": "Concussive Slam",
@@ -26430,8 +26430,8 @@
           "decisionId": "ancestry.time-raider.psionic-gift.ability",
           "level": 1,
           "grantKind": "ancestry-ability",
-          "selectable": "unknown",
-          "detail": "grant of option Concussive Slam supportedInV001=true; chain unknown"
+          "selectable": "selectable",
+          "detail": "grant of option Concussive Slam supportedInV001=true; chain selectable"
         },
         {
           "name": "Concussive Slam",
@@ -26439,8 +26439,8 @@
           "decisionId": "ancestry.revenant.time-raider.psionic-gift.ability",
           "level": 2,
           "grantKind": "ancestry-ability",
-          "selectable": "unknown",
-          "detail": "grant of option Concussive Slam supportedInV001=true; chain unknown"
+          "selectable": "selectable",
+          "detail": "grant of option Concussive Slam supportedInV001=true; chain selectable"
         },
         {
           "name": "Concussive Slam",
@@ -26448,8 +26448,8 @@
           "decisionId": "ancestry.time-raider.psionic-gift.ability",
           "level": 2,
           "grantKind": "ancestry-ability",
-          "selectable": "unknown",
-          "detail": "grant of option Concussive Slam supportedInV001=true; chain unknown"
+          "selectable": "selectable",
+          "detail": "grant of option Concussive Slam supportedInV001=true; chain selectable"
         },
         {
           "name": "Concussive Slam",
@@ -26457,8 +26457,8 @@
           "decisionId": "ancestry.revenant.time-raider.psionic-gift.ability",
           "level": 3,
           "grantKind": "ancestry-ability",
-          "selectable": "unknown",
-          "detail": "grant of option Concussive Slam supportedInV001=true; chain unknown"
+          "selectable": "selectable",
+          "detail": "grant of option Concussive Slam supportedInV001=true; chain selectable"
         },
         {
           "name": "Concussive Slam",
@@ -26466,8 +26466,8 @@
           "decisionId": "ancestry.time-raider.psionic-gift.ability",
           "level": 3,
           "grantKind": "ancestry-ability",
-          "selectable": "unknown",
-          "detail": "grant of option Concussive Slam supportedInV001=true; chain unknown"
+          "selectable": "selectable",
+          "detail": "grant of option Concussive Slam supportedInV001=true; chain selectable"
         }
       ],
       "movementFacts": "No compiled push."
@@ -26521,8 +26521,8 @@
           "message": "Only the designed single-target envelope is eligible."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [
         {
           "name": "Minor Acceleration",
@@ -26530,8 +26530,8 @@
           "decisionId": "ancestry.revenant.time-raider.psionic-gift.ability",
           "level": 1,
           "grantKind": "ancestry-ability",
-          "selectable": "unknown",
-          "detail": "grant of option Minor Acceleration supportedInV001=true; chain unknown"
+          "selectable": "selectable",
+          "detail": "grant of option Minor Acceleration supportedInV001=true; chain selectable"
         },
         {
           "name": "Minor Acceleration",
@@ -26539,8 +26539,8 @@
           "decisionId": "ancestry.time-raider.psionic-gift.ability",
           "level": 1,
           "grantKind": "ancestry-ability",
-          "selectable": "unknown",
-          "detail": "grant of option Minor Acceleration supportedInV001=true; chain unknown"
+          "selectable": "selectable",
+          "detail": "grant of option Minor Acceleration supportedInV001=true; chain selectable"
         },
         {
           "name": "Minor Acceleration",
@@ -26548,8 +26548,8 @@
           "decisionId": "ancestry.revenant.time-raider.psionic-gift.ability",
           "level": 2,
           "grantKind": "ancestry-ability",
-          "selectable": "unknown",
-          "detail": "grant of option Minor Acceleration supportedInV001=true; chain unknown"
+          "selectable": "selectable",
+          "detail": "grant of option Minor Acceleration supportedInV001=true; chain selectable"
         },
         {
           "name": "Minor Acceleration",
@@ -26557,8 +26557,8 @@
           "decisionId": "ancestry.time-raider.psionic-gift.ability",
           "level": 2,
           "grantKind": "ancestry-ability",
-          "selectable": "unknown",
-          "detail": "grant of option Minor Acceleration supportedInV001=true; chain unknown"
+          "selectable": "selectable",
+          "detail": "grant of option Minor Acceleration supportedInV001=true; chain selectable"
         },
         {
           "name": "Minor Acceleration",
@@ -26566,8 +26566,8 @@
           "decisionId": "ancestry.revenant.time-raider.psionic-gift.ability",
           "level": 3,
           "grantKind": "ancestry-ability",
-          "selectable": "unknown",
-          "detail": "grant of option Minor Acceleration supportedInV001=true; chain unknown"
+          "selectable": "selectable",
+          "detail": "grant of option Minor Acceleration supportedInV001=true; chain selectable"
         },
         {
           "name": "Minor Acceleration",
@@ -26575,8 +26575,8 @@
           "decisionId": "ancestry.time-raider.psionic-gift.ability",
           "level": 3,
           "grantKind": "ancestry-ability",
-          "selectable": "unknown",
-          "detail": "grant of option Minor Acceleration supportedInV001=true; chain unknown"
+          "selectable": "selectable",
+          "detail": "grant of option Minor Acceleration supportedInV001=true; chain selectable"
         }
       ],
       "movementFacts": "No compiled push."
@@ -26701,8 +26701,8 @@
           "message": "The effect on damage, payment, targeting or order is not established."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [
         {
           "name": "Psionic Bolt",
@@ -26710,8 +26710,8 @@
           "decisionId": "ancestry.revenant.time-raider.psionic-gift.ability",
           "level": 1,
           "grantKind": "ancestry-ability",
-          "selectable": "unknown",
-          "detail": "grant of option Psionic Bolt supportedInV001=true; chain unknown"
+          "selectable": "selectable",
+          "detail": "grant of option Psionic Bolt supportedInV001=true; chain selectable"
         },
         {
           "name": "Psionic Bolt",
@@ -26719,8 +26719,8 @@
           "decisionId": "ancestry.time-raider.psionic-gift.ability",
           "level": 1,
           "grantKind": "ancestry-ability",
-          "selectable": "unknown",
-          "detail": "grant of option Psionic Bolt supportedInV001=true; chain unknown"
+          "selectable": "selectable",
+          "detail": "grant of option Psionic Bolt supportedInV001=true; chain selectable"
         },
         {
           "name": "Psionic Bolt",
@@ -26728,8 +26728,8 @@
           "decisionId": "ancestry.revenant.time-raider.psionic-gift.ability",
           "level": 2,
           "grantKind": "ancestry-ability",
-          "selectable": "unknown",
-          "detail": "grant of option Psionic Bolt supportedInV001=true; chain unknown"
+          "selectable": "selectable",
+          "detail": "grant of option Psionic Bolt supportedInV001=true; chain selectable"
         },
         {
           "name": "Psionic Bolt",
@@ -26737,8 +26737,8 @@
           "decisionId": "ancestry.time-raider.psionic-gift.ability",
           "level": 2,
           "grantKind": "ancestry-ability",
-          "selectable": "unknown",
-          "detail": "grant of option Psionic Bolt supportedInV001=true; chain unknown"
+          "selectable": "selectable",
+          "detail": "grant of option Psionic Bolt supportedInV001=true; chain selectable"
         },
         {
           "name": "Psionic Bolt",
@@ -26746,8 +26746,8 @@
           "decisionId": "ancestry.revenant.time-raider.psionic-gift.ability",
           "level": 3,
           "grantKind": "ancestry-ability",
-          "selectable": "unknown",
-          "detail": "grant of option Psionic Bolt supportedInV001=true; chain unknown"
+          "selectable": "selectable",
+          "detail": "grant of option Psionic Bolt supportedInV001=true; chain selectable"
         },
         {
           "name": "Psionic Bolt",
@@ -26755,8 +26755,8 @@
           "decisionId": "ancestry.time-raider.psionic-gift.ability",
           "level": 3,
           "grantKind": "ancestry-ability",
-          "selectable": "unknown",
-          "detail": "grant of option Psionic Bolt supportedInV001=true; chain unknown"
+          "selectable": "selectable",
+          "detail": "grant of option Psionic Bolt supportedInV001=true; chain selectable"
         }
       ],
       "movementFacts": "No compiled push."
@@ -177299,7 +177299,7 @@
   ],
   "liveCounts": {
     "compiled": 19,
-    "compatibility": 1333,
+    "compatibility": 1339,
     "compiledButUnavailable": 2
   }
 }

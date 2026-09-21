@@ -59,3 +59,14 @@ Compendium rather than evaluator output. Guided progression is separate from thi
   Unknown/excluded/dynamic forms remain unknown. This repairs three reachable domain ability rows;
   it changes reporting only. Regression retains all original V88 rows/hashes and adds 23 explicit IDs.
 - Authoring: engine fixture 3/3; audit-focused 23/23. Full check/live evidence pending TESTER.
+
+- ENGINE static review PASS `ec9108a`: [rules review](audits/V100-conduit-rules-review.md).
+  Reviewer also confirmed the report correction for three existing Time Raider abilities: separate
+  dependency paths must not share a cycle marker. Final report: 19 compiled, 1339 compatibility,
+  2 structurally supported but unavailable; application dispatch is unchanged by reporting.
+- TESTER `ec9108a`: generators exit 0; full `CI=true pnpm check` exit 0, 984 tests, 197.484s.
+  Live Conduit cohort failed at the domain-edit fixture (11.8s): Protection requires Exploration,
+  but the scenario selected Empathize. Corrected to Navigate using the domain-feature table.
+  Retain full gates; retry only touched authoring checks and the Conduit cohort. Artifacts:
+  `/srv/presidium/projects/salient/test-artifacts/V100-ec9108a`.
+- Corrected source comment: Curse of Terror damage is holy. Numeric expectations and runtime unchanged.

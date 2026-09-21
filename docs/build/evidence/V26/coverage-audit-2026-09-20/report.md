@@ -186,10 +186,10 @@ Availability is derived from the composed wizard definitions (`getDefinitions(1)
 | hero-standalone | Grab | tier1-damage-outside-grammar | not-granted | effect-paragraph:effect; tier:no effect; tier:you can grab the target, but if you do, the target can make a melee free strike against you before they are grabbed; tier:the target is grabbed by you |
 | hero-standalone | Knockback | tier1-damage-outside-grammar | not-granted | effect-paragraph:effect; tier:push N |
 | hero-standalone | Faith Is Our Armor | tier1-damage-outside-grammar | selectable | effect-paragraph:effect; tier:the target gains N temporary stamina |
-| hero-standalone | Faithful Friend | no-power-roll | unknown | no-power-roll; effect-paragraph:effect |
+| hero-standalone | Faithful Friend | no-power-roll | selectable | no-power-roll; effect-paragraph:effect |
 | hero-standalone | Font of Wrath | no-power-roll | selectable | no-power-roll; effect-paragraph:effect |
-| hero-standalone | Grave Speech | no-power-roll | unknown | no-power-roll; effect-paragraph:effect |
-| hero-standalone | Hands of the Maker | no-power-roll | unknown | no-power-roll; effect-paragraph:effect |
+| hero-standalone | Grave Speech | no-power-roll | selectable | no-power-roll; effect-paragraph:effect |
+| hero-standalone | Hands of the Maker | no-power-roll | selectable | no-power-roll; effect-paragraph:effect |
 | hero-standalone | Healing Grace | no-power-roll | selectable | no-power-roll; effect-paragraph:effect; resource-spend:spend N+ piety |
 | hero-standalone | Sermon of Grace | no-power-roll | selectable | no-power-roll; effect-paragraph:effect |
 | hero-standalone | Word of Guidance | no-power-roll | selectable | no-power-roll; trigger; effect-paragraph:effect; resource-spend:spend N piety |
@@ -235,9 +235,9 @@ Availability is derived from the composed wizard definitions (`getDefinitions(1)
 | hero-standalone | Squad! Forward! | no-power-roll | selectable | no-power-roll; effect-paragraph:effect |
 | hero-standalone | "Strike Now!" | no-power-roll | selectable | no-power-roll; effect-paragraph:effect; resource-spend:spend N focus |
 | hero-standalone | This Is What We Planned For | no-power-roll | selectable | no-power-roll; effect-paragraph:effect |
-| hero-standalone | Concussive Slam | roll-expression-outside-grammar | unknown | roll:power roll + reason, intuition, or presence; tier:N + r, i, or p damage; push N (not directly after damage); potency:M < SYM prone |
-| hero-standalone | Minor Acceleration | no-power-roll | unknown | no-power-roll; effect-paragraph:effect |
-| hero-standalone | Psionic Bolt | roll-expression-outside-grammar | unknown | roll:power roll + reason, intuition, or presence; slide N; tier:N + r, i, or p psychic damage |
+| hero-standalone | Concussive Slam | roll-expression-outside-grammar | selectable | roll:power roll + reason, intuition, or presence; tier:N + r, i, or p damage; push N (not directly after damage); potency:M < SYM prone |
+| hero-standalone | Minor Acceleration | no-power-roll | selectable | no-power-roll; effect-paragraph:effect |
+| hero-standalone | Psionic Bolt | roll-expression-outside-grammar | selectable | roll:power roll + reason, intuition, or presence; slide N; tier:N + r, i, or p psychic damage |
 | kit-signature | Exploding Arrow | roll-expression-outside-grammar | selectable | roll:power roll + agility, reason, intuition, or presence; effect-paragraph:effect; tier:N + a, r, i, or p fire damage |
 | kit-signature | Unmooring | roll-expression-outside-grammar | selectable | roll:power roll + might, reason, intuition, or presence; effect-paragraph:effect; tier:N + m, r, i, or p damage |
 | kit-signature | Leaping Lightning | roll-expression-outside-grammar | selectable | roll:power roll + might, reason, intuition, or presence; effect-paragraph:effect; tier:N + m, r, i, or p lightning damage |

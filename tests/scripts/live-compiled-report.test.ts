@@ -156,7 +156,7 @@ test('Pinning Shot evaluates each source potency threshold strictly after tier d
 test.each([
   ['Halt Miscreant!', 'P', 'slowed', [4, 7, 9], 0, 'wrath'],
   ['Repent!', 'I', 'dazed', [7, 10, 13], 3, 'wrath'],
-  // Conduit/level-1/curse-of-terror: I-derived potency, 6/9/13 + I psychic, 5 Piety.
+  // Conduit/level-1/curse-of-terror: I-derived potency, 6/9/13 + I holy, 5 Piety.
   ['Curse of Terror', 'I', 'frightened', [8, 11, 15], 5, 'piety'],
 ] as const)(
   '%s retains each strict source threshold and resource cost',

@@ -4,7 +4,7 @@ Structural support, current grant/loading availability and live execution are se
 
 Source: `fb83a789da8f0327a389c277a0c790b1648d5810`; content: `sha256:c16feeda0b1bc2b9cd9f6c427016bef2e2f5d335dd7c1676f8f5804b9c83276b`.
 
-Currently reachable compiled: 19; unchanged reachable compatibility: 1333; structurally supported but unavailable: 2.
+Currently reachable compiled: 19; unchanged reachable compatibility: 1339; structurally supported but unavailable: 2.
 
 | Ability | Population | Pure execution | Live boundary | Diagnostics |
 | --- | --- | --- | --- | --- |
@@ -110,10 +110,10 @@ Currently reachable compiled: 19; unchanged reachable compatibility: 1333; struc
 | Curse of Terror | hero-standalone | supported | compiled |  |
 | Drain | hero-standalone | manual | legacy-compatibility | manual-section |
 | Faith Is Our Armor | hero-standalone | manual | legacy-compatibility | grammar, unsafe-tier-remainder, manual-section, target-boundary |
-| Faithful Friend | hero-standalone | manual | not-reachable | grammar, manual-section, target-boundary |
+| Faithful Friend | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Font of Wrath | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
-| Grave Speech | hero-standalone | manual | not-reachable | grammar, manual-section, target-boundary |
-| Hands of the Maker | hero-standalone | manual | not-reachable | grammar, manual-section, target-boundary |
+| Grave Speech | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Hands of the Maker | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Healing Grace | hero-standalone | manual | legacy-compatibility | grammar, source-block-mismatch, unaccounted-paragraph, manual-section, target-boundary |
 | Holy Lash | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder |
 | Judgment's Hammer | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder |
@@ -216,9 +216,9 @@ Currently reachable compiled: 19; unchanged reachable compatibility: 1333; struc
 | Squad! Forward! | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | "Strike Now!" | hero-standalone | manual | legacy-compatibility | grammar, manual-section |
 | This Is What We Planned For | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
-| Concussive Slam | hero-standalone | manual | not-reachable | grammar, unsafe-tier-remainder, empty-clause |
-| Minor Acceleration | hero-standalone | manual | not-reachable | grammar, manual-section, target-boundary |
-| Psionic Bolt | hero-standalone | manual | not-reachable | grammar, unsafe-tier-remainder |
+| Concussive Slam | hero-standalone | manual | legacy-compatibility | grammar, unsafe-tier-remainder, empty-clause |
+| Minor Acceleration | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Psionic Bolt | hero-standalone | manual | legacy-compatibility | grammar, unsafe-tier-remainder |
 | The Wode Defends | hero-standalone | supported | compiled |  |
 | Exploding Arrow | kit-signature | manual | legacy-compatibility | grammar, unsafe-tier-remainder, unaccounted-paragraph, manual-section, compatibility-boundary |
 | Unmooring | kit-signature | manual | legacy-compatibility | grammar, unsafe-tier-remainder, unaccounted-paragraph, manual-section, compatibility-boundary |

@@ -153,7 +153,7 @@ export async function runConduit({ actors: { director, peer }, run, runId }: Sce
         assert.ok(draft.abilities.some(a => a.name === name));
       await transition('class.conduit.domains', ['Life', 'Protection']);
       await transition('class.conduit.domain-feature', 'Protection');
-      saved = await transition('class.conduit.domain-skill', 'Empathize');
+      saved = await transition('class.conduit.domain-skill', 'Navigate');
       assert.equal(saved.evaluation.status, 'complete');
       saved = await transition('class.conduit.domains', ['Creation', 'Life']);
       assert.ok(!saved.selections.some(s => s.decisionId === 'class.conduit.domain-feature'));
