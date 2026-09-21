@@ -2,9 +2,9 @@
 
 Structural support, current grant/loading availability and live execution are separate. Source drift never silently falls back; historical results are never recompiled on read.
 
-Source: `fb83a789da8f0327a389c277a0c790b1648d5810`; content: `sha256:5d2ca9b833cc7595ce30490edb47feca2904e44f1e5e1ba2ab5bb7e8052b99b5`.
+Source: `fb83a789da8f0327a389c277a0c790b1648d5810`; content: `sha256:261c9f04c1792f48c1e1c15eb7bc9171cd8347166b814260f020b591728a412d`.
 
-Currently reachable compiled: 23; unchanged reachable compatibility: 1410; structurally supported but unavailable: 0.
+Currently reachable compiled: 21; unchanged reachable compatibility: 1418; structurally supported but unavailable: 2.
 
 | Ability | Population | Pure execution | Live boundary | Diagnostics |
 | --- | --- | --- | --- | --- |
@@ -129,30 +129,30 @@ Currently reachable compiled: 23; unchanged reachable compatibility: 1410; struc
 | Word of Judgment | hero-standalone | manual | legacy-compatibility | grammar, manual-section, action-type |
 | Draconian Pride | hero-standalone | manual | legacy-compatibility | target-boundary |
 | Dragon Breath | hero-standalone | manual | legacy-compatibility | manual-section, target-boundary |
-| Afflict a Bountiful Decay | hero-standalone | manual | legacy-compatibility | manual-section |
-| Behold the Mystery | hero-standalone | manual | legacy-compatibility | manual-section, target-boundary |
+| Afflict a Bountiful Decay | hero-standalone | manual | not-reachable | manual-section |
+| Behold the Mystery | hero-standalone | manual | not-reachable | manual-section, target-boundary |
 | Bifurcated Incineration | hero-standalone | manual | legacy-compatibility | target-boundary |
-| Breath of Dawn Remembered | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary, action-type |
+| Breath of Dawn Remembered | hero-standalone | manual | not-reachable | grammar, manual-section, target-boundary, action-type |
 | Conflagration | hero-standalone | manual | legacy-compatibility | manual-section, target-boundary |
 | Explosive Assistance | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary, action-type |
-| Grasp of Beyond | hero-standalone | manual | legacy-compatibility | manual-section |
+| Grasp of Beyond | hero-standalone | manual | not-reachable | manual-section |
 | Hurl Element | hero-standalone | manual | legacy-compatibility | manual-section |
-| Instantaneous Excavation | hero-standalone | manual | legacy-compatibility | grammar, unsafe-tier-remainder, manual-section, target-boundary |
-| Invigorating Growth | hero-standalone | manual | legacy-compatibility | manual-section |
-| Meteoric Introduction | hero-standalone | supported | compiled |  |
-| Motivate Earth | hero-standalone | manual | legacy-compatibility | grammar, source-block-mismatch, unaccounted-paragraph, manual-section, target-boundary |
-| No More Than a Breeze | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Instantaneous Excavation | hero-standalone | manual | not-reachable | grammar, unsafe-tier-remainder, manual-section, target-boundary |
+| Invigorating Growth | hero-standalone | manual | not-reachable | manual-section |
+| Meteoric Introduction | hero-standalone | supported | not-reachable |  |
+| Motivate Earth | hero-standalone | manual | not-reachable | grammar, source-block-mismatch, unaccounted-paragraph, manual-section, target-boundary |
+| No More Than a Breeze | hero-standalone | manual | not-reachable | grammar, manual-section, target-boundary |
 | Practical Magic | hero-standalone | manual | legacy-compatibility | grammar, source-block-mismatch, unaccounted-paragraph, manual-section, target-boundary |
-| Ray of Agonizing Self-Reflection | hero-standalone | supported | compiled |  |
+| Ray of Agonizing Self-Reflection | hero-standalone | supported | not-reachable |  |
 | Return to Formlessness | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
-| Ripples in the Earth | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder, manual-section, target-boundary |
-| Shared Void Sense | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
-| Skin Like Castle Walls | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary, action-type |
-| Subtle Relocation | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary, action-type |
-| Test of Rain | hero-standalone | manual | legacy-compatibility | manual-section, target-boundary |
+| Ripples in the Earth | hero-standalone | manual | not-reachable | unsafe-tier-remainder, manual-section, target-boundary |
+| Shared Void Sense | hero-standalone | manual | not-reachable | grammar, manual-section, target-boundary |
+| Skin Like Castle Walls | hero-standalone | manual | not-reachable | grammar, manual-section, target-boundary, action-type |
+| Subtle Relocation | hero-standalone | manual | not-reachable | grammar, manual-section, target-boundary, action-type |
+| Test of Rain | hero-standalone | manual | not-reachable | manual-section, target-boundary |
 | The Flesh, a Crucible | hero-standalone | manual | legacy-compatibility | manual-section |
-| The Green Within, the Green Without | hero-standalone | manual | legacy-compatibility | manual-section |
-| Unquiet Ground | hero-standalone | manual | legacy-compatibility | manual-section, target-boundary |
+| The Green Within, the Green Without | hero-standalone | manual | not-reachable | manual-section |
+| Unquiet Ground | hero-standalone | manual | not-reachable | manual-section, target-boundary |
 | Viscous Fire | hero-standalone | supported | compiled |  |
 | Back! | hero-standalone | manual | legacy-compatibility | target-boundary |
 | Blood for Blood! | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder, manual-section |
@@ -235,6 +235,29 @@ Currently reachable compiled: 23; unchanged reachable compatibility: 1410; struc
 | Squad! Forward! | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | "Strike Now!" | hero-standalone | manual | legacy-compatibility | grammar, manual-section |
 | This Is What We Planned For | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Accelerate | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Again | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary, action-type |
+| Awe | hero-standalone | manual | legacy-compatibility | manual-section |
+| Choke | hero-standalone | manual | legacy-compatibility | manual-section |
+| Entropic Bolt | hero-standalone | manual | legacy-compatibility | source-block-count, source-block-mismatch, unaccounted-paragraph, manual-section |
+| Feedback Loop | hero-standalone | manual | legacy-compatibility | grammar, manual-section, action-type |
+| Flashback | hero-standalone | manual | legacy-compatibility | grammar, source-block-count, source-block-mismatch, unaccounted-paragraph, manual-section, target-boundary |
+| Hoarfrost | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder, source-block-count, source-block-mismatch, unaccounted-paragraph, manual-section |
+| Incinerate | hero-standalone | manual | legacy-compatibility | source-block-count, source-block-mismatch, unaccounted-paragraph, manual-section, target-boundary |
+| Inertia Soak | hero-standalone | manual | legacy-compatibility | grammar, source-block-count, source-block-mismatch, unaccounted-paragraph, manual-section, target-boundary |
+| Iron | hero-standalone | manual | legacy-compatibility | grammar, source-block-count, source-block-mismatch, unaccounted-paragraph, manual-section, target-boundary |
+| Kinetic Grip | hero-standalone | manual | legacy-compatibility | grammar, unsafe-tier-remainder, source-block-count, source-block-mismatch, unaccounted-paragraph, manual-section |
+| Kinetic Pulse | hero-standalone | manual | legacy-compatibility | source-block-count, source-block-mismatch, unaccounted-paragraph, manual-section, target-boundary |
+| Materialize | hero-standalone | manual | legacy-compatibility | source-block-count, source-block-mismatch, unaccounted-paragraph, manual-section |
+| Mind Spike | hero-standalone | manual | legacy-compatibility | source-block-count, source-block-mismatch, unaccounted-paragraph, manual-section |
+| Minor Telekinesis | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Optic Blast | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder, source-block-count, source-block-mismatch, unaccounted-paragraph, manual-section |
+| Perfect Clarity | hero-standalone | manual | legacy-compatibility | grammar, source-block-count, source-block-mismatch, unaccounted-paragraph, manual-section, target-boundary |
+| Precognition | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Remote Assistance | hero-standalone | manual | legacy-compatibility | grammar, manual-section |
+| Repel | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary, action-type |
+| Smolder | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder, manual-section |
+| Spirit Sword | hero-standalone | manual | legacy-compatibility | source-block-count, source-block-mismatch, unaccounted-paragraph, manual-section |
 | Concussive Slam | hero-standalone | manual | legacy-compatibility | grammar, unsafe-tier-remainder, empty-clause |
 | Minor Acceleration | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
 | Psionic Bolt | hero-standalone | manual | legacy-compatibility | grammar, unsafe-tier-remainder |

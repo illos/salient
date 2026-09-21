@@ -1,4 +1,5 @@
 import { runElementalist } from './headless/elementalist.ts';
+import { runTalent } from './headless/talent.ts';
 import { runNull } from './headless/null.ts';
 import { runTroubadour } from './headless/troubadour.ts';
 // SPDX-License-Identifier: GPL-3.0-only
@@ -31,6 +32,7 @@ const cohorts = {
   troubadour: runTroubadour,
   null: runNull,
   elementalist: runElementalist,
+  talent: runTalent,
   censor: runCensor,
   conduit: runConduit,
   all: runScenarios,

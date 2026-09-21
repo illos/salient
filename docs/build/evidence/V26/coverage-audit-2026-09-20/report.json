@@ -1,14 +1,14 @@
 {
   "generator": "scripts/audit-ability-grammar.ts v1",
-  "contentHash": "sha256:5d2ca9b833cc7595ce30490edb47feca2904e44f1e5e1ba2ab5bb7e8052b99b5",
+  "contentHash": "sha256:261c9f04c1792f48c1e1c15eb7bc9171cd8347166b814260f020b591728a412d",
   "foesEdition": "bf262edf546e91e1540cc17489915f18c4873ddd8bd8e225b20f3441e3f74f30",
   "sourceRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
   "totals": {
     "hero-standalone": {
       "COMPILES": 10,
-      "COMPILES_WITH_REMAINDER": 88,
-      "NO_MATCH": 85,
-      "total": 183,
+      "COMPILES_WITH_REMAINDER": 99,
+      "NO_MATCH": 97,
+      "total": 206,
       "withinV26Bounded": 10
     },
     "kit-signature": {
@@ -41,8 +41,8 @@
     }
   },
   "grants": {
-    "total": 996,
-    "resolvedToStandalone": 573,
+    "total": 1014,
+    "resolvedToStandalone": 591,
     "resolvedToKit": 75,
     "ownText": 348,
     "unresolved": []
@@ -3959,36 +3959,7 @@
         "withinV26Bounded": false,
         "targetShape": "single"
       },
-      "grants": [
-        {
-          "name": "Afflict a Bountiful Decay",
-          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/afflict-a-bountiful-decay.md",
-          "decisionId": "class.elementalist.signature-abilities",
-          "level": 1,
-          "grantKind": "signature",
-          "selectable": "selectable",
-          "detail": "option Afflict a Bountiful Decay supportedInV001=true; chain selectable"
-        },
-        {
-          "name": "Afflict a Bountiful Decay",
-          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/afflict-a-bountiful-decay.md",
-          "decisionId": "class.elementalist.signature-abilities",
-          "level": 2,
-          "grantKind": "signature",
-          "selectable": "selectable",
-          "detail": "option Afflict a Bountiful Decay supportedInV001=true; chain selectable"
-        },
-        {
-          "name": "Afflict a Bountiful Decay",
-          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/afflict-a-bountiful-decay.md",
-          "decisionId": "class.elementalist.signature-abilities",
-          "level": 3,
-          "grantKind": "signature",
-          "selectable": "selectable",
-          "detail": "option Afflict a Bountiful Decay supportedInV001=true; chain selectable"
-        }
-      ],
-      "availability": "selectable"
+      "availability": "not-granted"
     },
     {
       "corpus": "hero-standalone",
@@ -4039,36 +4010,7 @@
         "withinV26Bounded": false,
         "targetShape": "area"
       },
-      "grants": [
-        {
-          "name": "Behold the Mystery",
-          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/behold-the-mystery.md",
-          "decisionId": "class.elementalist.ability-3",
-          "level": 1,
-          "grantKind": "heroic",
-          "selectable": "selectable",
-          "detail": "option Behold the Mystery supportedInV001=true; chain selectable"
-        },
-        {
-          "name": "Behold the Mystery",
-          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/behold-the-mystery.md",
-          "decisionId": "class.elementalist.ability-3",
-          "level": 2,
-          "grantKind": "heroic",
-          "selectable": "selectable",
-          "detail": "option Behold the Mystery supportedInV001=true; chain selectable"
-        },
-        {
-          "name": "Behold the Mystery",
-          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/behold-the-mystery.md",
-          "decisionId": "class.elementalist.ability-3",
-          "level": 3,
-          "grantKind": "heroic",
-          "selectable": "selectable",
-          "detail": "option Behold the Mystery supportedInV001=true; chain selectable"
-        }
-      ],
-      "availability": "selectable"
+      "availability": "not-granted"
     },
     {
       "corpus": "hero-standalone",
@@ -4181,36 +4123,7 @@
         "withinV26Bounded": false,
         "targetShape": "unknown"
       },
-      "grants": [
-        {
-          "name": "Breath of Dawn Remembered",
-          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/breath-of-dawn-remembered.md",
-          "decisionId": "class.elementalist.specialization",
-          "level": 1,
-          "grantKind": "aspect-ability",
-          "selectable": "selectable",
-          "detail": "grant of option Green supportedInV001=true; chain selectable"
-        },
-        {
-          "name": "Breath of Dawn Remembered",
-          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/breath-of-dawn-remembered.md",
-          "decisionId": "class.elementalist.specialization",
-          "level": 2,
-          "grantKind": "aspect-ability",
-          "selectable": "selectable",
-          "detail": "grant of option Green supportedInV001=true; chain selectable"
-        },
-        {
-          "name": "Breath of Dawn Remembered",
-          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/breath-of-dawn-remembered.md",
-          "decisionId": "class.elementalist.specialization",
-          "level": 3,
-          "grantKind": "aspect-ability",
-          "selectable": "selectable",
-          "detail": "grant of option Green supportedInV001=true; chain selectable"
-        }
-      ],
-      "availability": "selectable"
+      "availability": "not-granted"
     },
     {
       "corpus": "hero-standalone",
@@ -4413,36 +4326,7 @@
         "withinV26Bounded": false,
         "targetShape": "single"
       },
-      "grants": [
-        {
-          "name": "Grasp of Beyond",
-          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/grasp-of-beyond.md",
-          "decisionId": "class.elementalist.signature-abilities",
-          "level": 1,
-          "grantKind": "signature",
-          "selectable": "selectable",
-          "detail": "option Grasp of Beyond supportedInV001=true; chain selectable"
-        },
-        {
-          "name": "Grasp of Beyond",
-          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/grasp-of-beyond.md",
-          "decisionId": "class.elementalist.signature-abilities",
-          "level": 2,
-          "grantKind": "signature",
-          "selectable": "selectable",
-          "detail": "option Grasp of Beyond supportedInV001=true; chain selectable"
-        },
-        {
-          "name": "Grasp of Beyond",
-          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/grasp-of-beyond.md",
-          "decisionId": "class.elementalist.signature-abilities",
-          "level": 3,
-          "grantKind": "signature",
-          "selectable": "selectable",
-          "detail": "option Grasp of Beyond supportedInV001=true; chain selectable"
-        }
-      ],
-      "availability": "selectable"
+      "availability": "not-granted"
     },
     {
       "corpus": "hero-standalone",
@@ -4574,36 +4458,7 @@
         "withinV26Bounded": false,
         "targetShape": "unknown"
       },
-      "grants": [
-        {
-          "name": "Instantaneous Excavation",
-          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/instantaneous-excavation.md",
-          "decisionId": "class.elementalist.ability-5",
-          "level": 1,
-          "grantKind": "heroic",
-          "selectable": "selectable",
-          "detail": "option Instantaneous Excavation supportedInV001=true; chain selectable"
-        },
-        {
-          "name": "Instantaneous Excavation",
-          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/instantaneous-excavation.md",
-          "decisionId": "class.elementalist.ability-5",
-          "level": 2,
-          "grantKind": "heroic",
-          "selectable": "selectable",
-          "detail": "option Instantaneous Excavation supportedInV001=true; chain selectable"
-        },
-        {
-          "name": "Instantaneous Excavation",
-          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/instantaneous-excavation.md",
-          "decisionId": "class.elementalist.ability-5",
-          "level": 3,
-          "grantKind": "heroic",
-          "selectable": "selectable",
-          "detail": "option Instantaneous Excavation supportedInV001=true; chain selectable"
-        }
-      ],
-      "availability": "selectable"
+      "availability": "not-granted"
     },
     {
       "corpus": "hero-standalone",
@@ -4657,36 +4512,7 @@
         "withinV26Bounded": false,
         "targetShape": "single"
       },
-      "grants": [
-        {
-          "name": "Invigorating Growth",
-          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/invigorating-growth.md",
-          "decisionId": "class.elementalist.ability-3",
-          "level": 1,
-          "grantKind": "heroic",
-          "selectable": "selectable",
-          "detail": "option Invigorating Growth supportedInV001=true; chain selectable"
-        },
-        {
-          "name": "Invigorating Growth",
-          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/invigorating-growth.md",
-          "decisionId": "class.elementalist.ability-3",
-          "level": 2,
-          "grantKind": "heroic",
-          "selectable": "selectable",
-          "detail": "option Invigorating Growth supportedInV001=true; chain selectable"
-        },
-        {
-          "name": "Invigorating Growth",
-          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/invigorating-growth.md",
-          "decisionId": "class.elementalist.ability-3",
-          "level": 3,
-          "grantKind": "heroic",
-          "selectable": "selectable",
-          "detail": "option Invigorating Growth supportedInV001=true; chain selectable"
-        }
-      ],
-      "availability": "selectable"
+      "availability": "not-granted"
     },
     {
       "corpus": "hero-standalone",
@@ -4732,36 +4558,7 @@
         "withinV26Bounded": false,
         "targetShape": "single"
       },
-      "grants": [
-        {
-          "name": "Meteoric Introduction",
-          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/meteoric-introduction.md",
-          "decisionId": "class.elementalist.signature-abilities",
-          "level": 1,
-          "grantKind": "signature",
-          "selectable": "selectable",
-          "detail": "option Meteoric Introduction supportedInV001=true; chain selectable"
-        },
-        {
-          "name": "Meteoric Introduction",
-          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/meteoric-introduction.md",
-          "decisionId": "class.elementalist.signature-abilities",
-          "level": 2,
-          "grantKind": "signature",
-          "selectable": "selectable",
-          "detail": "option Meteoric Introduction supportedInV001=true; chain selectable"
-        },
-        {
-          "name": "Meteoric Introduction",
-          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/meteoric-introduction.md",
-          "decisionId": "class.elementalist.signature-abilities",
-          "level": 3,
-          "grantKind": "signature",
-          "selectable": "selectable",
-          "detail": "option Meteoric Introduction supportedInV001=true; chain selectable"
-        }
-      ],
-      "availability": "selectable",
+      "availability": "not-granted",
       "v26": {
         "label": "Meteoric Introduction (compile-only)",
         "expected": "COMPILES",
@@ -4795,36 +4592,7 @@
         "withinV26Bounded": false,
         "targetShape": "unknown"
       },
-      "grants": [
-        {
-          "name": "Motivate Earth",
-          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/motivate-earth.md",
-          "decisionId": "class.elementalist.specialization",
-          "level": 1,
-          "grantKind": "class-ability",
-          "selectable": "selectable",
-          "detail": "grant of option Earth supportedInV001=true; chain selectable"
-        },
-        {
-          "name": "Motivate Earth",
-          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/motivate-earth.md",
-          "decisionId": "class.elementalist.specialization",
-          "level": 2,
-          "grantKind": "class-ability",
-          "selectable": "selectable",
-          "detail": "grant of option Earth supportedInV001=true; chain selectable"
-        },
-        {
-          "name": "Motivate Earth",
-          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/motivate-earth.md",
-          "decisionId": "class.elementalist.specialization",
-          "level": 3,
-          "grantKind": "class-ability",
-          "selectable": "selectable",
-          "detail": "grant of option Earth supportedInV001=true; chain selectable"
-        }
-      ],
-      "availability": "selectable"
+      "availability": "not-granted"
     },
     {
       "corpus": "hero-standalone",
@@ -4860,36 +4628,7 @@
         "withinV26Bounded": false,
         "targetShape": "unknown"
       },
-      "grants": [
-        {
-          "name": "No More Than a Breeze",
-          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/no-more-than-a-breeze.md",
-          "decisionId": "class.elementalist.ability-5",
-          "level": 1,
-          "grantKind": "heroic",
-          "selectable": "selectable",
-          "detail": "option No More Than a Breeze supportedInV001=true; chain selectable"
-        },
-        {
-          "name": "No More Than a Breeze",
-          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/no-more-than-a-breeze.md",
-          "decisionId": "class.elementalist.ability-5",
-          "level": 2,
-          "grantKind": "heroic",
-          "selectable": "selectable",
-          "detail": "option No More Than a Breeze supportedInV001=true; chain selectable"
-        },
-        {
-          "name": "No More Than a Breeze",
-          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/no-more-than-a-breeze.md",
-          "decisionId": "class.elementalist.ability-5",
-          "level": 3,
-          "grantKind": "heroic",
-          "selectable": "selectable",
-          "detail": "option No More Than a Breeze supportedInV001=true; chain selectable"
-        }
-      ],
-      "availability": "selectable"
+      "availability": "not-granted"
     },
     {
       "corpus": "hero-standalone",
@@ -5015,36 +4754,7 @@
         "withinV26Bounded": true,
         "targetShape": "single"
       },
-      "grants": [
-        {
-          "name": "Ray of Agonizing Self-Reflection",
-          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/ray-of-agonizing-self-reflection.md",
-          "decisionId": "class.elementalist.signature-abilities",
-          "level": 1,
-          "grantKind": "signature",
-          "selectable": "selectable",
-          "detail": "option Ray of Agonizing Self-Reflection supportedInV001=true; chain selectable"
-        },
-        {
-          "name": "Ray of Agonizing Self-Reflection",
-          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/ray-of-agonizing-self-reflection.md",
-          "decisionId": "class.elementalist.signature-abilities",
-          "level": 2,
-          "grantKind": "signature",
-          "selectable": "selectable",
-          "detail": "option Ray of Agonizing Self-Reflection supportedInV001=true; chain selectable"
-        },
-        {
-          "name": "Ray of Agonizing Self-Reflection",
-          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/ray-of-agonizing-self-reflection.md",
-          "decisionId": "class.elementalist.signature-abilities",
-          "level": 3,
-          "grantKind": "signature",
-          "selectable": "selectable",
-          "detail": "option Ray of Agonizing Self-Reflection supportedInV001=true; chain selectable"
-        }
-      ],
-      "availability": "selectable",
+      "availability": "not-granted",
       "v26": {
         "label": "Ray of Agonizing Self-Reflection (compile-only)",
         "expected": "COMPILES_WITH_REMAINDER",
@@ -5162,36 +4872,7 @@
         "withinV26Bounded": false,
         "targetShape": "area"
       },
-      "grants": [
-        {
-          "name": "Ripples in the Earth",
-          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/ripples-in-the-earth.md",
-          "decisionId": "class.elementalist.ability-3",
-          "level": 1,
-          "grantKind": "heroic",
-          "selectable": "selectable",
-          "detail": "option Ripples in the Earth supportedInV001=true; chain selectable"
-        },
-        {
-          "name": "Ripples in the Earth",
-          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/ripples-in-the-earth.md",
-          "decisionId": "class.elementalist.ability-3",
-          "level": 2,
-          "grantKind": "heroic",
-          "selectable": "selectable",
-          "detail": "option Ripples in the Earth supportedInV001=true; chain selectable"
-        },
-        {
-          "name": "Ripples in the Earth",
-          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/ripples-in-the-earth.md",
-          "decisionId": "class.elementalist.ability-3",
-          "level": 3,
-          "grantKind": "heroic",
-          "selectable": "selectable",
-          "detail": "option Ripples in the Earth supportedInV001=true; chain selectable"
-        }
-      ],
-      "availability": "selectable"
+      "availability": "not-granted"
     },
     {
       "corpus": "hero-standalone",
@@ -5220,36 +4901,7 @@
         "withinV26Bounded": false,
         "targetShape": "unknown"
       },
-      "grants": [
-        {
-          "name": "Shared Void Sense",
-          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/shared-void-sense.md",
-          "decisionId": "class.elementalist.specialization",
-          "level": 1,
-          "grantKind": "class-ability",
-          "selectable": "selectable",
-          "detail": "grant of option Void supportedInV001=true; chain selectable"
-        },
-        {
-          "name": "Shared Void Sense",
-          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/shared-void-sense.md",
-          "decisionId": "class.elementalist.specialization",
-          "level": 2,
-          "grantKind": "class-ability",
-          "selectable": "selectable",
-          "detail": "grant of option Void supportedInV001=true; chain selectable"
-        },
-        {
-          "name": "Shared Void Sense",
-          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/shared-void-sense.md",
-          "decisionId": "class.elementalist.specialization",
-          "level": 3,
-          "grantKind": "class-ability",
-          "selectable": "selectable",
-          "detail": "grant of option Void supportedInV001=true; chain selectable"
-        }
-      ],
-      "availability": "selectable"
+      "availability": "not-granted"
     },
     {
       "corpus": "hero-standalone",
@@ -5290,36 +4942,7 @@
         "withinV26Bounded": false,
         "targetShape": "unknown"
       },
-      "grants": [
-        {
-          "name": "Skin Like Castle Walls",
-          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/skin-like-castle-walls.md",
-          "decisionId": "class.elementalist.specialization",
-          "level": 1,
-          "grantKind": "aspect-ability",
-          "selectable": "selectable",
-          "detail": "grant of option Earth supportedInV001=true; chain selectable"
-        },
-        {
-          "name": "Skin Like Castle Walls",
-          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/skin-like-castle-walls.md",
-          "decisionId": "class.elementalist.specialization",
-          "level": 2,
-          "grantKind": "aspect-ability",
-          "selectable": "selectable",
-          "detail": "grant of option Earth supportedInV001=true; chain selectable"
-        },
-        {
-          "name": "Skin Like Castle Walls",
-          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/skin-like-castle-walls.md",
-          "decisionId": "class.elementalist.specialization",
-          "level": 3,
-          "grantKind": "aspect-ability",
-          "selectable": "selectable",
-          "detail": "grant of option Earth supportedInV001=true; chain selectable"
-        }
-      ],
-      "availability": "selectable"
+      "availability": "not-granted"
     },
     {
       "corpus": "hero-standalone",
@@ -5360,36 +4983,7 @@
         "withinV26Bounded": false,
         "targetShape": "unknown"
       },
-      "grants": [
-        {
-          "name": "Subtle Relocation",
-          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/subtle-relocation.md",
-          "decisionId": "class.elementalist.specialization",
-          "level": 1,
-          "grantKind": "aspect-ability",
-          "selectable": "selectable",
-          "detail": "grant of option Void supportedInV001=true; chain selectable"
-        },
-        {
-          "name": "Subtle Relocation",
-          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/subtle-relocation.md",
-          "decisionId": "class.elementalist.specialization",
-          "level": 2,
-          "grantKind": "aspect-ability",
-          "selectable": "selectable",
-          "detail": "grant of option Void supportedInV001=true; chain selectable"
-        },
-        {
-          "name": "Subtle Relocation",
-          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/subtle-relocation.md",
-          "decisionId": "class.elementalist.specialization",
-          "level": 3,
-          "grantKind": "aspect-ability",
-          "selectable": "selectable",
-          "detail": "grant of option Void supportedInV001=true; chain selectable"
-        }
-      ],
-      "availability": "selectable"
+      "availability": "not-granted"
     },
     {
       "corpus": "hero-standalone",
@@ -5440,36 +5034,7 @@
         "withinV26Bounded": false,
         "targetShape": "area"
       },
-      "grants": [
-        {
-          "name": "Test of Rain",
-          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/test-of-rain.md",
-          "decisionId": "class.elementalist.ability-5",
-          "level": 1,
-          "grantKind": "heroic",
-          "selectable": "selectable",
-          "detail": "option Test of Rain supportedInV001=true; chain selectable"
-        },
-        {
-          "name": "Test of Rain",
-          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/test-of-rain.md",
-          "decisionId": "class.elementalist.ability-5",
-          "level": 2,
-          "grantKind": "heroic",
-          "selectable": "selectable",
-          "detail": "option Test of Rain supportedInV001=true; chain selectable"
-        },
-        {
-          "name": "Test of Rain",
-          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/test-of-rain.md",
-          "decisionId": "class.elementalist.ability-5",
-          "level": 3,
-          "grantKind": "heroic",
-          "selectable": "selectable",
-          "detail": "option Test of Rain supportedInV001=true; chain selectable"
-        }
-      ],
-      "availability": "selectable"
+      "availability": "not-granted"
     },
     {
       "corpus": "hero-standalone",
@@ -5602,36 +5167,7 @@
         "withinV26Bounded": false,
         "targetShape": "single"
       },
-      "grants": [
-        {
-          "name": "The Green Within, the Green Without",
-          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/the-green-within-the-green-without.md",
-          "decisionId": "class.elementalist.signature-abilities",
-          "level": 1,
-          "grantKind": "signature",
-          "selectable": "selectable",
-          "detail": "option The Green Within, the Green Without supportedInV001=true; chain selectable"
-        },
-        {
-          "name": "The Green Within, the Green Without",
-          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/the-green-within-the-green-without.md",
-          "decisionId": "class.elementalist.signature-abilities",
-          "level": 2,
-          "grantKind": "signature",
-          "selectable": "selectable",
-          "detail": "option The Green Within, the Green Without supportedInV001=true; chain selectable"
-        },
-        {
-          "name": "The Green Within, the Green Without",
-          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/the-green-within-the-green-without.md",
-          "decisionId": "class.elementalist.signature-abilities",
-          "level": 3,
-          "grantKind": "signature",
-          "selectable": "selectable",
-          "detail": "option The Green Within, the Green Without supportedInV001=true; chain selectable"
-        }
-      ],
-      "availability": "selectable"
+      "availability": "not-granted"
     },
     {
       "corpus": "hero-standalone",
@@ -5678,36 +5214,7 @@
         "withinV26Bounded": false,
         "targetShape": "area"
       },
-      "grants": [
-        {
-          "name": "Unquiet Ground",
-          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/unquiet-ground.md",
-          "decisionId": "class.elementalist.signature-abilities",
-          "level": 1,
-          "grantKind": "signature",
-          "selectable": "selectable",
-          "detail": "option Unquiet Ground supportedInV001=true; chain selectable"
-        },
-        {
-          "name": "Unquiet Ground",
-          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/unquiet-ground.md",
-          "decisionId": "class.elementalist.signature-abilities",
-          "level": 2,
-          "grantKind": "signature",
-          "selectable": "selectable",
-          "detail": "option Unquiet Ground supportedInV001=true; chain selectable"
-        },
-        {
-          "name": "Unquiet Ground",
-          "sourcePath": "en/unified/md/feature/ability/elementalist/level-1/unquiet-ground.md",
-          "decisionId": "class.elementalist.signature-abilities",
-          "level": 3,
-          "grantKind": "signature",
-          "selectable": "selectable",
-          "detail": "option Unquiet Ground supportedInV001=true; chain selectable"
-        }
-      ],
-      "availability": "selectable"
+      "availability": "not-granted"
     },
     {
       "corpus": "hero-standalone",
@@ -12222,6 +11729,1916 @@
           "grantKind": "heroic",
           "selectable": "selectable",
           "detail": "option This Is What We Planned For supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.talent.level-1/accelerate",
+      "name": "Accelerate",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-1/accelerate.md",
+      "usage": "Maneuver",
+      "target": "Self or one creature",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "The target shifts up to a number of squares equal to your Reason score.",
+            "locator": "section:0"
+          },
+          {
+            "type": "resource-spend",
+            "shape": "resource-spend:spend N clarity",
+            "text": "The target can use a maneuver.",
+            "locator": "section:1"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "unknown"
+      },
+      "grants": [
+        {
+          "name": "Accelerate",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-1/accelerate.md",
+          "decisionId": "class.talent.tradition",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Chronopathy supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Accelerate",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-1/accelerate.md",
+          "decisionId": "class.talent.tradition",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Chronopathy supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Accelerate",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-1/accelerate.md",
+          "decisionId": "class.talent.tradition",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Chronopathy supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.talent.level-1/again",
+      "name": "Again",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-1/again.md",
+      "usage": "Triggered",
+      "target": "Self or one creature",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "trigger",
+            "shape": "trigger",
+            "text": "The target makes an ability roll.",
+            "locator": "section:0"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "You can use this ability after seeing the result of the triggering roll. The target must reroll the power roll and use the new roll.",
+            "locator": "section:1"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "unknown"
+      },
+      "grants": [
+        {
+          "name": "Again",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-1/again.md",
+          "decisionId": "class.talent.tradition",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Chronopathy supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Again",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-1/again.md",
+          "decisionId": "class.talent.tradition",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Chronopathy supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Again",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-1/again.md",
+          "decisionId": "class.talent.tradition",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Chronopathy supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.talent.level-1/awe",
+      "name": "Awe",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-1/awe.md",
+      "usage": "Main action",
+      "target": "One creature",
+      "cost": "3 Clarity",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "P"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 3,
+              "characteristic": "P"
+            },
+            "damageType": "psychic"
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 6,
+              "characteristic": "P"
+            },
+            "damageType": "psychic"
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 9,
+              "characteristic": "P"
+            },
+            "damageType": "psychic"
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "If you target an ally, they gain temporary Stamina equal to three times your Presence score, and they can end one effect on them that is ended by a saving throw or that ends at the end of their turn. If you target an enemy, you make a power roll.",
+            "locator": "section:0"
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:I < SYM frightened (save ends)",
+            "text": "I < WEAK, frightened (save ends)",
+            "locator": "tier1",
+            "bounded": true
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:I < SYM frightened (save ends)",
+            "text": "I < AVERAGE, frightened (save ends)",
+            "locator": "tier2",
+            "bounded": true
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:I < SYM frightened (save ends)",
+            "text": "I < STRONG, frightened (save ends)",
+            "locator": "tier3",
+            "bounded": true
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Awe",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-1/awe.md",
+          "decisionId": "class.talent.ability-3",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Awe supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Awe",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-1/awe.md",
+          "decisionId": "class.talent.ability-3",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Awe supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Awe",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-1/awe.md",
+          "decisionId": "class.talent.ability-3",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Awe supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.talent.level-1/choke",
+      "name": "Choke",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-1/choke.md",
+      "usage": "Main action",
+      "target": "One creature",
+      "cost": "3 Clarity",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "R"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 3,
+              "characteristic": "R"
+            }
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 5,
+              "characteristic": "R"
+            }
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 8,
+              "characteristic": "R"
+            }
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "You can vertical pull the target up to 2 squares. If the target is made restrained by this ability, this forced movement ignores their stability.",
+            "locator": "section:1"
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:M < SYM slowed (save ends)",
+            "text": "M < WEAK, slowed (save ends)",
+            "locator": "tier1",
+            "bounded": true
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:M < SYM slowed (save ends)",
+            "text": "M < AVERAGE, slowed (save ends)",
+            "locator": "tier2",
+            "bounded": true
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:M < SYM restrained (save ends)",
+            "text": "M < STRONG, restrained (save ends)",
+            "locator": "tier3",
+            "bounded": true
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Choke",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-1/choke.md",
+          "decisionId": "class.talent.ability-3",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Choke supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Choke",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-1/choke.md",
+          "decisionId": "class.talent.ability-3",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Choke supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Choke",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-1/choke.md",
+          "decisionId": "class.talent.ability-3",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Choke supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.talent.level-1/entropic-bolt",
+      "name": "Entropic Bolt",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-1/entropic-bolt.md",
+      "usage": "Main action",
+      "target": "One creature or object",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "P"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 2,
+              "characteristic": "P"
+            },
+            "damageType": "corruption"
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 3,
+              "characteristic": "P"
+            },
+            "damageType": "corruption"
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 5,
+              "characteristic": "P"
+            },
+            "damageType": "corruption"
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "unknown",
+            "shape": "envelope:structured-markdown-mismatch",
+            "text": "markdown has 1 sections, structured has 2",
+            "locator": "markdown"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "The target takes an extra 1 corruption damage for each additional time they are targeted by this ability during the encounter.",
+            "locator": "section:1"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:strained",
+            "text": "You gain 1 clarity when you obtain a tier 2 or tier 3 outcome on the power roll.",
+            "locator": "section:2"
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:P < SYM slowed (save ends)",
+            "text": "P < WEAK, slowed (save ends)",
+            "locator": "tier1",
+            "bounded": true
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:P < SYM slowed (save ends)",
+            "text": "P < AVERAGE, slowed (save ends)",
+            "locator": "tier2",
+            "bounded": true
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:P < SYM slowed (save ends)",
+            "text": "P < STRONG, slowed (save ends)",
+            "locator": "tier3",
+            "bounded": true
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Entropic Bolt",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-1/entropic-bolt.md",
+          "decisionId": "class.talent.signature-abilities",
+          "level": 1,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Entropic Bolt supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Entropic Bolt",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-1/entropic-bolt.md",
+          "decisionId": "class.talent.signature-abilities",
+          "level": 2,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Entropic Bolt supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Entropic Bolt",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-1/entropic-bolt.md",
+          "decisionId": "class.talent.signature-abilities",
+          "level": 3,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Entropic Bolt supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.talent.level-1/feedback-loop",
+      "name": "Feedback Loop",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-1/feedback-loop.md",
+      "usage": "Triggered",
+      "target": "One creature",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "trigger",
+            "shape": "trigger",
+            "text": "The target deals damage to an ally.",
+            "locator": "section:0"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "The target takes psychic damage equal to half the triggering damage.",
+            "locator": "section:1"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Feedback Loop",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-1/feedback-loop.md",
+          "decisionId": "class.talent.tradition",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Telepathy supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Feedback Loop",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-1/feedback-loop.md",
+          "decisionId": "class.talent.tradition",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Telepathy supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Feedback Loop",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-1/feedback-loop.md",
+          "decisionId": "class.talent.tradition",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Telepathy supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.talent.level-1/flashback",
+      "name": "Flashback",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-1/flashback.md",
+      "usage": "Maneuver",
+      "target": "Self or one ally",
+      "cost": "5 Clarity",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "unknown",
+            "shape": "envelope:structured-markdown-mismatch",
+            "text": "markdown has 1 sections, structured has 2",
+            "locator": "markdown"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "The target uses an ability with a base Heroic Resource cost of 7 or lower that they've previously used this round, without needing to spend the base cost. Augmentations to the ability can be paid for as usual.",
+            "locator": "section:0"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:strained",
+            "text": "You take 1d6 damage and are slowed (save ends).",
+            "locator": "section:1"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "unknown"
+      },
+      "grants": [
+        {
+          "name": "Flashback",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-1/flashback.md",
+          "decisionId": "class.talent.ability-5",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Flashback supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Flashback",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-1/flashback.md",
+          "decisionId": "class.talent.ability-5",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Flashback supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Flashback",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-1/flashback.md",
+          "decisionId": "class.talent.ability-5",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Flashback supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.talent.level-1/hoarfrost",
+      "name": "Hoarfrost",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-1/hoarfrost.md",
+      "usage": "Main action",
+      "target": "One creature",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "R"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 2,
+              "characteristic": "R"
+            },
+            "damageType": "cold"
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 4,
+              "characteristic": "R"
+            },
+            "damageType": "cold"
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 6,
+              "characteristic": "R"
+            },
+            "damageType": "cold"
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "unknown",
+            "shape": "envelope:structured-markdown-mismatch",
+            "text": "markdown has 1 unattached paragraphs, structured has 0; markdown has 0 sections, structured has 1",
+            "locator": "markdown"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:strained",
+            "text": "You are slowed until the end of your next turn. Additionally, a target slowed by this ability is restrained instead.",
+            "locator": "section:1"
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:M < SYM slowed (eot)",
+            "text": "M < WEAK, slowed (EoT)",
+            "locator": "tier1",
+            "bounded": false
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:M < SYM slowed (eot)",
+            "text": "M < AVERAGE, slowed (EoT)",
+            "locator": "tier2",
+            "bounded": false
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:M < SYM slowed (eot)",
+            "text": "M < STRONG, slowed (EoT)",
+            "locator": "tier3",
+            "bounded": false
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Hoarfrost",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-1/hoarfrost.md",
+          "decisionId": "class.talent.signature-abilities",
+          "level": 1,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Hoarfrost supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Hoarfrost",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-1/hoarfrost.md",
+          "decisionId": "class.talent.signature-abilities",
+          "level": 2,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Hoarfrost supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Hoarfrost",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-1/hoarfrost.md",
+          "decisionId": "class.talent.signature-abilities",
+          "level": 3,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Hoarfrost supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.talent.level-1/incinerate",
+      "name": "Incinerate",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-1/incinerate.md",
+      "usage": "Main action",
+      "target": "Each enemy in the area",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "R"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "flat",
+              "constant": 2
+            },
+            "damageType": "fire"
+          },
+          {
+            "damage": {
+              "kind": "flat",
+              "constant": 4
+            },
+            "damageType": "fire"
+          },
+          {
+            "damage": {
+              "kind": "flat",
+              "constant": 6
+            },
+            "damageType": "fire"
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "unknown",
+            "shape": "envelope:structured-markdown-mismatch",
+            "text": "markdown has 1 sections, structured has 2",
+            "locator": "markdown"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "A column of fire remains in the area until the start of your next turn. Each enemy who enters the area for the first time in a combat round or starts their turn there takes 2 fire damage.",
+            "locator": "section:1"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:strained",
+            "text": "The size of the cube increases by 2, but the fire disappears at the end of your turn.",
+            "locator": "section:2"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "area"
+      },
+      "grants": [
+        {
+          "name": "Incinerate",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-1/incinerate.md",
+          "decisionId": "class.talent.signature-abilities",
+          "level": 1,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Incinerate supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Incinerate",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-1/incinerate.md",
+          "decisionId": "class.talent.signature-abilities",
+          "level": 2,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Incinerate supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Incinerate",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-1/incinerate.md",
+          "decisionId": "class.talent.signature-abilities",
+          "level": 3,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Incinerate supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.talent.level-1/inertia-soak",
+      "name": "Inertia Soak",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-1/inertia-soak.md",
+      "usage": "Maneuver",
+      "target": "Self or one ally",
+      "cost": "5 Clarity",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "unknown",
+            "shape": "envelope:structured-markdown-mismatch",
+            "text": "markdown has 1 sections, structured has 2",
+            "locator": "markdown"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "The target ignores difficult terrain and takes no damage from forced movement until the start of your next turn. Whenever the target enters a square while under this effect, they can push one adjacent creature up to a number of squares equal to your Reason score. When pushing an ally, the target can ignore that ally's stability. A creature can only be force moved this way once a turn.",
+            "locator": "section:0"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:strained",
+            "text": "You are weakened (save ends). While you are weakened this way, whenever you are force moved, the forced movement distance gains a +5 bonus.",
+            "locator": "section:1"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "unknown"
+      },
+      "grants": [
+        {
+          "name": "Inertia Soak",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-1/inertia-soak.md",
+          "decisionId": "class.talent.ability-5",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Inertia Soak supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Inertia Soak",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-1/inertia-soak.md",
+          "decisionId": "class.talent.ability-5",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Inertia Soak supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Inertia Soak",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-1/inertia-soak.md",
+          "decisionId": "class.talent.ability-5",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Inertia Soak supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.talent.level-1/iron",
+      "name": "Iron",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-1/iron.md",
+      "usage": "Maneuver",
+      "target": "Self or one ally",
+      "cost": "5 Clarity",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "unknown",
+            "shape": "envelope:structured-markdown-mismatch",
+            "text": "markdown has 1 sections, structured has 2",
+            "locator": "markdown"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "The target's stability increases by an amount equal to your Reason score, and they gain 10 temporary Stamina and 2 surges. This stability increase lasts until the target no longer has temporary Stamina from this ability.",
+            "locator": "section:0"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:strained",
+            "text": "You can't use maneuvers (save ends).",
+            "locator": "section:1"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "unknown"
+      },
+      "grants": [
+        {
+          "name": "Iron",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-1/iron.md",
+          "decisionId": "class.talent.ability-5",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Iron supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Iron",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-1/iron.md",
+          "decisionId": "class.talent.ability-5",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Iron supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Iron",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-1/iron.md",
+          "decisionId": "class.talent.ability-5",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Iron supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.talent.level-1/kinetic-grip",
+      "name": "Kinetic Grip",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-1/kinetic-grip.md",
+      "usage": "Main action",
+      "target": "One creature or object",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "tier1-damage-outside-grammar",
+        "roll": {
+          "permitted": [
+            "R"
+          ]
+        },
+        "diagnostics": [
+          {
+            "type": "unknown",
+            "shape": "envelope:structured-markdown-mismatch",
+            "text": "markdown has 1 unattached paragraphs, structured has 0; markdown has 0 sections, structured has 1",
+            "locator": "markdown"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:strained",
+            "text": "You must vertical push the target instead of sliding them.",
+            "locator": "section:1"
+          },
+          {
+            "type": "tier-damage",
+            "shape": "tier:slide N + r",
+            "text": "Slide 2 + R",
+            "locator": "tier1"
+          },
+          {
+            "type": "tier-damage",
+            "shape": "tier:slide N + r",
+            "text": "Slide 4 + R",
+            "locator": "tier2"
+          },
+          {
+            "type": "condition",
+            "shape": "prone",
+            "text": "prone",
+            "locator": "tier3"
+          },
+          {
+            "type": "tier-damage",
+            "shape": "tier:slide N + r",
+            "text": "Slide 6 + R",
+            "locator": "tier3"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Kinetic Grip",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-1/kinetic-grip.md",
+          "decisionId": "class.talent.signature-abilities",
+          "level": 1,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Kinetic Grip supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Kinetic Grip",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-1/kinetic-grip.md",
+          "decisionId": "class.talent.signature-abilities",
+          "level": 2,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Kinetic Grip supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Kinetic Grip",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-1/kinetic-grip.md",
+          "decisionId": "class.talent.signature-abilities",
+          "level": 3,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Kinetic Grip supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.talent.level-1/kinetic-pulse",
+      "name": "Kinetic Pulse",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-1/kinetic-pulse.md",
+      "usage": "Main action",
+      "target": "Each enemy in the area",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "R"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "flat",
+              "constant": 2
+            },
+            "damageType": "psychic"
+          },
+          {
+            "damage": {
+              "kind": "flat",
+              "constant": 5
+            },
+            "damageType": "psychic",
+            "push": 1
+          },
+          {
+            "damage": {
+              "kind": "flat",
+              "constant": 7
+            },
+            "damageType": "psychic",
+            "push": 2
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "unknown",
+            "shape": "envelope:structured-markdown-mismatch",
+            "text": "markdown has 1 unattached paragraphs, structured has 0; markdown has 0 sections, structured has 1",
+            "locator": "markdown"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:strained",
+            "text": "The size of the burst increases by 2, and you are bleeding until the start of your next turn.",
+            "locator": "section:1"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "area"
+      },
+      "grants": [
+        {
+          "name": "Kinetic Pulse",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-1/kinetic-pulse.md",
+          "decisionId": "class.talent.signature-abilities",
+          "level": 1,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Kinetic Pulse supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Kinetic Pulse",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-1/kinetic-pulse.md",
+          "decisionId": "class.talent.signature-abilities",
+          "level": 2,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Kinetic Pulse supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Kinetic Pulse",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-1/kinetic-pulse.md",
+          "decisionId": "class.talent.signature-abilities",
+          "level": 3,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Kinetic Pulse supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.talent.level-1/materialize",
+      "name": "Materialize",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-1/materialize.md",
+      "usage": "Main action",
+      "target": "One creature or object",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "R"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 3,
+              "characteristic": "R"
+            }
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 5,
+              "characteristic": "R"
+            }
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 8,
+              "characteristic": "R"
+            }
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "unknown",
+            "shape": "envelope:structured-markdown-mismatch",
+            "text": "markdown has 1 sections, structured has 2",
+            "locator": "markdown"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "A worthless size 1M object drops onto the target to deal the damage, then rolls into an adjacent unoccupied space of your choice. The object is made of wood, stone, or metal (your choice).",
+            "locator": "section:1"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:strained",
+            "text": "The object explodes after the damage is dealt, and each creature adjacent to the target takes damage equal to your Reason score. You also take damage equal to your Reason score that can't be reduced in any way.",
+            "locator": "section:2"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Materialize",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-1/materialize.md",
+          "decisionId": "class.talent.signature-abilities",
+          "level": 1,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Materialize supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Materialize",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-1/materialize.md",
+          "decisionId": "class.talent.signature-abilities",
+          "level": 2,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Materialize supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Materialize",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-1/materialize.md",
+          "decisionId": "class.talent.signature-abilities",
+          "level": 3,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Materialize supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.talent.level-1/mind-spike",
+      "name": "Mind Spike",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-1/mind-spike.md",
+      "usage": "Main action",
+      "target": "One creature",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "R"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 2,
+              "characteristic": "R"
+            },
+            "damageType": "psychic"
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 4,
+              "characteristic": "R"
+            },
+            "damageType": "psychic"
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 6,
+              "characteristic": "R"
+            },
+            "damageType": "psychic"
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "unknown",
+            "shape": "envelope:structured-markdown-mismatch",
+            "text": "markdown has 1 unattached paragraphs, structured has 0; markdown has 0 sections, structured has 1",
+            "locator": "markdown"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:strained",
+            "text": "The target takes an extra 2 psychic damage. You also take 2 psychic damage that can't be reduced in any way.",
+            "locator": "section:1"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Mind Spike",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-1/mind-spike.md",
+          "decisionId": "class.talent.features",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Mind Spike",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-1/mind-spike.md",
+          "decisionId": "class.talent.features",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Mind Spike",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-1/mind-spike.md",
+          "decisionId": "class.talent.features",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.talent.level-1/minor-telekinesis",
+      "name": "Minor Telekinesis",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-1/minor-telekinesis.md",
+      "usage": "Maneuver",
+      "target": "Self or one size 1 creature or object",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "You slide the target up to a number of squares equal to your Reason score.",
+            "locator": "section:0"
+          },
+          {
+            "type": "resource-spend",
+            "shape": "resource-spend:spend N+ clarity",
+            "text": "The size of the creature or object you can target increases by 1 for every 2 clarity spent.",
+            "locator": "section:1"
+          },
+          {
+            "type": "resource-spend",
+            "shape": "resource-spend:spend N clarity",
+            "text": "You can vertical slide the target.",
+            "locator": "section:2"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "unknown"
+      },
+      "grants": [
+        {
+          "name": "Minor Telekinesis",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-1/minor-telekinesis.md",
+          "decisionId": "class.talent.tradition",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Telekinesis supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Minor Telekinesis",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-1/minor-telekinesis.md",
+          "decisionId": "class.talent.tradition",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Telekinesis supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Minor Telekinesis",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-1/minor-telekinesis.md",
+          "decisionId": "class.talent.tradition",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Telekinesis supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.talent.level-1/optic-blast",
+      "name": "Optic Blast",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-1/optic-blast.md",
+      "usage": "Main action",
+      "target": "One creature or object",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "R"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 2,
+              "characteristic": "R"
+            }
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 4,
+              "characteristic": "R"
+            }
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 6,
+              "characteristic": "R"
+            }
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "unknown",
+            "shape": "envelope:structured-markdown-mismatch",
+            "text": "markdown has 1 sections, structured has 2",
+            "locator": "markdown"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "When targeting an object with a solid reflective surface or a creature carrying or wearing such an object (such as a mirror, an unpainted metal shield, or shiny metal plate armor), you can target one additional creature or object within 3 squares of the first target.",
+            "locator": "section:1"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:strained",
+            "text": "You gain 1 surge that you can use immediately, and you take damage equal to your Reason score that can't be reduced in any way.",
+            "locator": "section:2"
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:M < SYM prone",
+            "text": "M < WEAK, prone",
+            "locator": "tier1",
+            "bounded": false
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:M < SYM prone",
+            "text": "M < AVERAGE, prone",
+            "locator": "tier2",
+            "bounded": false
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:M < SYM prone",
+            "text": "M < STRONG, prone",
+            "locator": "tier3",
+            "bounded": false
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Optic Blast",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-1/optic-blast.md",
+          "decisionId": "class.talent.signature-abilities",
+          "level": 1,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Optic Blast supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Optic Blast",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-1/optic-blast.md",
+          "decisionId": "class.talent.signature-abilities",
+          "level": 2,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Optic Blast supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Optic Blast",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-1/optic-blast.md",
+          "decisionId": "class.talent.signature-abilities",
+          "level": 3,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Optic Blast supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.talent.level-1/perfect-clarity",
+      "name": "Perfect Clarity",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-1/perfect-clarity.md",
+      "usage": "Maneuver",
+      "target": "Self or one ally",
+      "cost": "5 Clarity",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "unknown",
+            "shape": "envelope:structured-markdown-mismatch",
+            "text": "markdown has 1 sections, structured has 2",
+            "locator": "markdown"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "Until the start of your next turn, the target gains a +3 bonus to speed, and they have a double edge on the next power roll they make. If the target obtains a tier 3 outcome on that roll, you gain 1 clarity.",
+            "locator": "section:0"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:strained",
+            "text": "You take 1d6 damage, and you can't use triggered actions (save ends).",
+            "locator": "section:1"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "unknown"
+      },
+      "grants": [
+        {
+          "name": "Perfect Clarity",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-1/perfect-clarity.md",
+          "decisionId": "class.talent.ability-5",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Perfect Clarity supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Perfect Clarity",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-1/perfect-clarity.md",
+          "decisionId": "class.talent.ability-5",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Perfect Clarity supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Perfect Clarity",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-1/perfect-clarity.md",
+          "decisionId": "class.talent.ability-5",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Perfect Clarity supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.talent.level-1/precognition",
+      "name": "Precognition",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-1/precognition.md",
+      "usage": "Main action",
+      "target": "Self or one ally",
+      "cost": "3 Clarity",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "Ability rolls made against the target take a bane until the start of your next turn. Whenever the target takes damage while under this effect, they can use a triggered action to make a free strike against the source of the damage.",
+            "locator": "section:0"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "unknown"
+      },
+      "grants": [
+        {
+          "name": "Precognition",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-1/precognition.md",
+          "decisionId": "class.talent.ability-3",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Precognition supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Precognition",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-1/precognition.md",
+          "decisionId": "class.talent.ability-3",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Precognition supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Precognition",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-1/precognition.md",
+          "decisionId": "class.talent.ability-3",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Precognition supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.talent.level-1/remote-assistance",
+      "name": "Remote Assistance",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-1/remote-assistance.md",
+      "usage": "Maneuver",
+      "target": "One creature or object",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "The next ability roll an ally makes against the target before the start of your next turn gains an edge.",
+            "locator": "section:0"
+          },
+          {
+            "type": "resource-spend",
+            "shape": "resource-spend:spend N clarity",
+            "text": "You target one additional creature or object.",
+            "locator": "section:1"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Remote Assistance",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-1/remote-assistance.md",
+          "decisionId": "class.talent.tradition",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Telepathy supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Remote Assistance",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-1/remote-assistance.md",
+          "decisionId": "class.talent.tradition",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Telepathy supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Remote Assistance",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-1/remote-assistance.md",
+          "decisionId": "class.talent.tradition",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Telepathy supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.talent.level-1/repel",
+      "name": "Repel",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-1/repel.md",
+      "usage": "Triggered",
+      "target": "Self or one ally",
+      "classification": {
+        "category": "NO_MATCH",
+        "reason": "no-power-roll",
+        "diagnostics": [
+          {
+            "type": "no-power-roll",
+            "shape": "no-power-roll",
+            "text": "",
+            "locator": "envelope"
+          },
+          {
+            "type": "trigger",
+            "shape": "trigger",
+            "text": "The target takes damage or is force moved.",
+            "locator": "section:0"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "The target takes half the triggering damage, or the distance of the triggering forced movement is reduced by a number of squares equal to your Reason score. If the target took damage and was force moved, you choose the effect. If the forced movement is reduced to 0 squares, the target can push the source of the forced movement a number of squares equal to your Reason score.",
+            "locator": "section:1"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "unknown"
+      },
+      "grants": [
+        {
+          "name": "Repel",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-1/repel.md",
+          "decisionId": "class.talent.tradition",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Telekinesis supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Repel",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-1/repel.md",
+          "decisionId": "class.talent.tradition",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Telekinesis supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Repel",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-1/repel.md",
+          "decisionId": "class.talent.tradition",
+          "level": 3,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Telekinesis supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.talent.level-1/smolder",
+      "name": "Smolder",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-1/smolder.md",
+      "usage": "Main action",
+      "target": "One creature",
+      "cost": "3 Clarity",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "R"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 3,
+              "characteristic": "R"
+            }
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 6,
+              "characteristic": "R"
+            }
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 9,
+              "characteristic": "R"
+            }
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "Choose the damage type and the weakness for this ability from one of the following: acid, corruption, or fire. The target takes damage before this ability imposes any weakness.",
+            "locator": "section:0"
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:R < SYM the target has weakness N (save ends)",
+            "text": "R < WEAK, the target has weakness 5 (save ends)",
+            "locator": "tier1",
+            "bounded": false
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:R < SYM the target has weakness N (save ends)",
+            "text": "R < AVERAGE, the target has weakness 5 (save ends)",
+            "locator": "tier2",
+            "bounded": false
+          },
+          {
+            "type": "potency-condition",
+            "shape": "potency:R < SYM the target has weakness equal to N + your reason score (save ends)",
+            "text": "R < STRONG, the target has weakness equal to 5 + your Reason score (save ends)",
+            "locator": "tier3",
+            "bounded": false
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Smolder",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-1/smolder.md",
+          "decisionId": "class.talent.ability-3",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Smolder supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Smolder",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-1/smolder.md",
+          "decisionId": "class.talent.ability-3",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Smolder supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Smolder",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-1/smolder.md",
+          "decisionId": "class.talent.ability-3",
+          "level": 3,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Smolder supportedInV001=true; chain selectable"
+        }
+      ],
+      "availability": "selectable"
+    },
+    {
+      "corpus": "hero-standalone",
+      "id": "mcdm.heroes.v1/feature.ability.talent.level-1/spirit-sword",
+      "name": "Spirit Sword",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-1/spirit-sword.md",
+      "usage": "Main action",
+      "target": "One creature or object",
+      "classification": {
+        "category": "COMPILES_WITH_REMAINDER",
+        "roll": {
+          "permitted": [
+            "P"
+          ]
+        },
+        "tiers": [
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 3,
+              "characteristic": "P"
+            }
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 6,
+              "characteristic": "P"
+            }
+          },
+          {
+            "damage": {
+              "kind": "plusCharacteristic",
+              "constant": 9,
+              "characteristic": "P"
+            }
+          }
+        ],
+        "diagnostics": [
+          {
+            "type": "unknown",
+            "shape": "envelope:structured-markdown-mismatch",
+            "text": "markdown has 1 sections, structured has 2",
+            "locator": "markdown"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:effect",
+            "text": "You gain 1 surge.",
+            "locator": "section:1"
+          },
+          {
+            "type": "effect-paragraph",
+            "shape": "effect-paragraph:strained",
+            "text": "The target takes an extra 3 damage. You also take 3 damage that can't be reduced in any way.",
+            "locator": "section:2"
+          }
+        ],
+        "withinV26Bounded": false,
+        "targetShape": "single"
+      },
+      "grants": [
+        {
+          "name": "Spirit Sword",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-1/spirit-sword.md",
+          "decisionId": "class.talent.signature-abilities",
+          "level": 1,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Spirit Sword supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Spirit Sword",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-1/spirit-sword.md",
+          "decisionId": "class.talent.signature-abilities",
+          "level": 2,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Spirit Sword supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Spirit Sword",
+          "sourcePath": "en/unified/md/feature/ability/talent/level-1/spirit-sword.md",
+          "decisionId": "class.talent.signature-abilities",
+          "level": 3,
+          "grantKind": "signature",
+          "selectable": "selectable",
+          "detail": "option Spirit Sword supportedInV001=true; chain selectable"
         }
       ],
       "availability": "selectable"
@@ -80455,8 +81872,8 @@
     {
       "shape": "effect-paragraph:effect",
       "type": "effect-paragraph",
-      "count": 1119,
-      "abilities": 1105,
+      "count": 1138,
+      "abilities": 1124,
       "examples": [
         "complication:Corrupted Mentor/corrupt-spirit",
         "complication:Dragon Dreams/dragon-breath",
@@ -80466,8 +81883,8 @@
     {
       "shape": "no-power-roll",
       "type": "no-power-roll",
-      "count": 623,
-      "abilities": 623,
+      "count": 634,
+      "abilities": 634,
       "examples": [
         "complication:Advanced Studies/advanced-studies-study-notebook",
         "complication:Animal Form/animal-form",
@@ -80477,8 +81894,8 @@
     {
       "shape": "trigger",
       "type": "trigger",
-      "count": 195,
-      "abilities": 195,
+      "count": 198,
+      "abilities": 198,
       "examples": [
         "foe-feature:9d1bd539-c732-4fba-95d1-ac7036cb89dc",
         "mcdm.heroes.v1/feature.ability.censor.level-1/my-life-for-yours",
@@ -80585,6 +82002,17 @@
       ]
     },
     {
+      "shape": "prone",
+      "type": "condition",
+      "count": 41,
+      "abilities": 29,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.talent.level-1/kinetic-grip",
+        "salient:foe-feature:00512dab-a7ce-499e-92be-d5270aeb17ce",
+        "salient:foe-feature:00676769-6a94-45ee-9632-cf449c746c29"
+      ]
+    },
+    {
       "shape": "effect-paragraph:special",
       "type": "effect-paragraph",
       "count": 40,
@@ -80593,17 +82021,6 @@
         "complication:Gnoll-Mauled/gnoll-mauled-retaliate",
         "complication:Stripped of Rank/issue-order",
         "salient:foe-feature:0f9e2dcf-c949-4a62-b76a-98cc9eef23bc"
-      ]
-    },
-    {
-      "shape": "prone",
-      "type": "condition",
-      "count": 40,
-      "abilities": 28,
-      "examples": [
-        "salient:foe-feature:00512dab-a7ce-499e-92be-d5270aeb17ce",
-        "salient:foe-feature:00676769-6a94-45ee-9632-cf449c746c29",
-        "salient:foe-feature:091545a3-1f51-424b-844d-518f79ee7106"
       ]
     },
     {
@@ -80739,6 +82156,17 @@
       ]
     },
     {
+      "shape": "envelope:structured-markdown-mismatch",
+      "type": "unknown",
+      "count": 19,
+      "abilities": 19,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.talent.level-1/entropic-bolt",
+        "mcdm.heroes.v1/feature.ability.talent.level-1/flashback",
+        "mcdm.heroes.v1/feature.ability.talent.level-1/hoarfrost"
+      ]
+    },
+    {
       "shape": "potency:M < N restrained (save ends)",
       "type": "potency-condition",
       "count": 19,
@@ -80791,6 +82219,17 @@
         "salient:foe-feature:2d425f83-e132-4fe4-8732-5d4a414c914c",
         "salient:foe-feature:69149685-5481-4f4d-9f9f-47422ffa8a73",
         "salient:foe-feature:86f8a31b-28f4-45a7-94e6-3b131231a609"
+      ]
+    },
+    {
+      "shape": "effect-paragraph:strained",
+      "type": "effect-paragraph",
+      "count": 13,
+      "abilities": 13,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.talent.level-1/entropic-bolt",
+        "mcdm.heroes.v1/feature.ability.talent.level-1/flashback",
+        "mcdm.heroes.v1/feature.ability.talent.level-1/hoarfrost"
       ]
     },
     {
@@ -80992,6 +82431,17 @@
       ]
     },
     {
+      "shape": "potency:P < SYM slowed (save ends)",
+      "type": "potency-condition",
+      "count": 8,
+      "abilities": 3,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.censor.level-1/halt-miscreant",
+        "mcdm.heroes.v1/feature.ability.talent.level-1/entropic-bolt",
+        "mcdm.heroes.v1/feature.ability.troubadour.level-1/quick-rewrite"
+      ]
+    },
+    {
       "shape": "tier:a < N restrained (save ends)",
       "type": "tier-damage",
       "count": 8,
@@ -81011,6 +82461,17 @@
         "salient:foe-feature:2802a213-e59c-4547-bbaa-dcc8b1dcc382",
         "salient:foe-feature:5772693a-4bbe-4eb2-8766-ed8e436f75cb",
         "salient:foe-feature:b1555580-d9da-4d76-9024-55b223e356db"
+      ]
+    },
+    {
+      "shape": "potency:M < SYM prone",
+      "type": "potency-condition",
+      "count": 7,
+      "abilities": 5,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.elementalist.level-1/ripples-in-the-earth",
+        "mcdm.heroes.v1/feature.ability.talent.level-1/optic-blast",
+        "mcdm.heroes.v1/feature.ability.time-raider/concussive-slam"
       ]
     },
     {
@@ -81047,17 +82508,6 @@
       ]
     },
     {
-      "shape": "envelope:structured-markdown-mismatch",
-      "type": "unknown",
-      "count": 6,
-      "abilities": 6,
-      "examples": [
-        "salient:foe-feature:08b75627-ded0-4e55-a034-6a2f6c7d35ea",
-        "salient:foe-feature:0ee6dd1c-8d53-4033-a8c3-879ac28b430e",
-        "salient:foe-feature:737424d8-c4b9-460b-8b5c-cae12afa95d5"
-      ]
-    },
-    {
       "shape": "potency:A < SYM slowed (save ends)",
       "type": "potency-condition",
       "count": 6,
@@ -81080,6 +82530,17 @@
       ]
     },
     {
+      "shape": "potency:M < SYM slowed (save ends)",
+      "type": "potency-condition",
+      "count": 6,
+      "abilities": 3,
+      "examples": [
+        "complication:Medusa Blood/stone-eyes",
+        "mcdm.heroes.v1/feature.ability.shadow.level-3/staggering-blow",
+        "mcdm.heroes.v1/feature.ability.talent.level-1/choke"
+      ]
+    },
+    {
       "shape": "potency:A < N N fire damage",
       "type": "potency-condition",
       "count": 6,
@@ -81097,6 +82558,16 @@
       "examples": [
         "mcdm.heroes.v1/feature.ability.censor.level-1/repent",
         "mcdm.heroes.v1/feature.ability.troubadour.level-1/hypnotic-overtones"
+      ]
+    },
+    {
+      "shape": "potency:I < SYM frightened (save ends)",
+      "type": "potency-condition",
+      "count": 6,
+      "abilities": 2,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.conduit.level-1/curse-of-terror",
+        "mcdm.heroes.v1/feature.ability.talent.level-1/awe"
       ]
     },
     {
@@ -81232,16 +82703,6 @@
       ]
     },
     {
-      "shape": "potency:P < SYM slowed (save ends)",
-      "type": "potency-condition",
-      "count": 5,
-      "abilities": 2,
-      "examples": [
-        "mcdm.heroes.v1/feature.ability.censor.level-1/halt-miscreant",
-        "mcdm.heroes.v1/feature.ability.troubadour.level-1/quick-rewrite"
-      ]
-    },
-    {
       "shape": "tier:N damage, N corruption damage",
       "type": "tier-damage",
       "count": 5,
@@ -81259,17 +82720,6 @@
       "examples": [
         "salient:foe-feature:20032b74-6b7b-4225-b830-aecb0ce3b6ab",
         "salient:foe-feature:42b8ab5c-f36a-4e58-a4ee-24447c5cee40"
-      ]
-    },
-    {
-      "shape": "potency:M < SYM prone",
-      "type": "potency-condition",
-      "count": 4,
-      "abilities": 4,
-      "examples": [
-        "mcdm.heroes.v1/feature.ability.elementalist.level-1/ripples-in-the-earth",
-        "mcdm.heroes.v1/feature.ability.time-raider/concussive-slam",
-        "mcdm.heroes.v1/kit/sword-and-board/shield-bash"
       ]
     },
     {
@@ -81368,16 +82818,6 @@
       ]
     },
     {
-      "shape": "potency:M < SYM slowed (save ends)",
-      "type": "potency-condition",
-      "count": 4,
-      "abilities": 2,
-      "examples": [
-        "complication:Medusa Blood/stone-eyes",
-        "mcdm.heroes.v1/feature.ability.shadow.level-3/staggering-blow"
-      ]
-    },
-    {
       "shape": "potency:R < N prone and can't stand (save ends)",
       "type": "potency-condition",
       "count": 4,
@@ -81405,6 +82845,17 @@
       "examples": [
         "salient:foe-feature:297e9164-7339-4813-bed1-0d1f1fd630c5",
         "salient:foe-feature:7aa62bc2-1cf0-42db-861b-4c755478bcfb"
+      ]
+    },
+    {
+      "shape": "resource-spend:spend N clarity",
+      "type": "resource-spend",
+      "count": 3,
+      "abilities": 3,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.talent.level-1/accelerate",
+        "mcdm.heroes.v1/feature.ability.talent.level-1/minor-telekinesis",
+        "mcdm.heroes.v1/feature.ability.talent.level-1/remote-assistance"
       ]
     },
     {
@@ -81739,15 +83190,6 @@
       ]
     },
     {
-      "shape": "potency:I < SYM frightened (save ends)",
-      "type": "potency-condition",
-      "count": 3,
-      "abilities": 1,
-      "examples": [
-        "mcdm.heroes.v1/feature.ability.conduit.level-1/curse-of-terror"
-      ]
-    },
-    {
       "shape": "potency:I < SYM the target goes out of phase (save ends)",
       "type": "potency-condition",
       "count": 3,
@@ -81862,6 +83304,15 @@
       "abilities": 1,
       "examples": [
         "mcdm.heroes.v1/feature.ability.tactician.level-1/concussive-strike"
+      ]
+    },
+    {
+      "shape": "potency:M < SYM slowed (eot)",
+      "type": "potency-condition",
+      "count": 3,
+      "abilities": 1,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.talent.level-1/hoarfrost"
       ]
     },
     {
@@ -82204,6 +83655,15 @@
       "abilities": 1,
       "examples": [
         "salient:foe-feature:a15abf38-3918-4a36-b82c-ac108069b612"
+      ]
+    },
+    {
+      "shape": "tier:slide N + r",
+      "type": "tier-damage",
+      "count": 3,
+      "abilities": 1,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.talent.level-1/kinetic-grip"
       ]
     },
     {
@@ -82687,6 +84147,15 @@
       "abilities": 1,
       "examples": [
         "salient:foe-feature:d1285ca6-fc9a-4bbf-9c30-69745c6394c1"
+      ]
+    },
+    {
+      "shape": "potency:R < SYM the target has weakness N (save ends)",
+      "type": "potency-condition",
+      "count": 2,
+      "abilities": 1,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.talent.level-1/smolder"
       ]
     },
     {
@@ -83536,6 +85005,15 @@
       ]
     },
     {
+      "shape": "potency:M < SYM restrained (save ends)",
+      "type": "potency-condition",
+      "count": 1,
+      "abilities": 1,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.talent.level-1/choke"
+      ]
+    },
+    {
       "shape": "potency:P < N the target loses N recovery and is bleeding (save ends)",
       "type": "potency-condition",
       "count": 1,
@@ -83680,6 +85158,15 @@
       ]
     },
     {
+      "shape": "potency:R < SYM the target has weakness equal to N + your reason score (save ends)",
+      "type": "potency-condition",
+      "count": 1,
+      "abilities": 1,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.talent.level-1/smolder"
+      ]
+    },
+    {
       "shape": "prone or m < N dazed (save ends)",
       "type": "condition",
       "count": 1,
@@ -83749,6 +85236,15 @@
       "abilities": 1,
       "examples": [
         "mcdm.heroes.v1/feature.ability.censor.level-1/my-life-for-yours"
+      ]
+    },
+    {
+      "shape": "resource-spend:spend N+ clarity",
+      "type": "resource-spend",
+      "count": 1,
+      "abilities": 1,
+      "examples": [
+        "mcdm.heroes.v1/feature.ability.talent.level-1/minor-telekinesis"
       ]
     },
     {
@@ -84621,7 +86117,7 @@
       "actual": "COMPILES",
       "agrees": true,
       "id": "mcdm.heroes.v1/feature.ability.elementalist.level-1/meteoric-introduction",
-      "availability": "selectable",
+      "availability": "not-granted",
       "note": "damage + Reason then push; no live grant"
     },
     {
@@ -84630,7 +86126,7 @@
       "actual": "COMPILES_WITH_REMAINDER",
       "agrees": true,
       "id": "mcdm.heroes.v1/feature.ability.elementalist.level-1/ray-of-agonizing-self-reflection",
-      "availability": "selectable",
+      "availability": "not-granted",
       "note": "symbolic potency/slowed/save remainder; no live grant"
     },
     {
@@ -84651,11 +86147,11 @@
       "noMatch": 572
     },
     "hero": {
-      "total": 280,
+      "total": 303,
       "compiles": 13,
-      "withRemainder": 109,
+      "withRemainder": 120,
       "withinV26Bounded": 11,
-      "noMatch": 158
+      "noMatch": 170
     }
   }
 }

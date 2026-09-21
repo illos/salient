@@ -2459,6 +2459,311 @@
     }
   },
   {
+    "id": "mcdm.heroes.v1/feature.talent.level-1/1st-level-tradition-features",
+    "kind": "feature",
+    "name": "1st-Level Tradition Features",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/talent/level-1/1st-level-tradition-features.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/talent/level-1/1st-level-tradition-features.json",
+    "selection": "talent-level-one",
+    "text": "---\nclass: talent\nlevel: \"1\"\nname: 1st-Level Tradition Features\nscc: mcdm.heroes.v1/feature.talent.level-1/1st-level-tradition-features\ntype: feature\n---\n\nYour [talent tradition](scc.v1:mcdm.heroes.v1/feature.talent.level-1/talent-tradition) grants you two features, as shown on the 1st-Level Tradition Features table.\n\n###### 1st-Level Tradition Features Table\n\n| Tradition   | Features                         |\n|-------------|----------------------------------|\n| Chronopathy | [Accelerate](scc.v1:mcdm.heroes.v1/feature.ability.talent.level-1/accelerate), Again                |\n| Telekinesis | [Minor Telekinesis](scc.v1:mcdm.heroes.v1/feature.ability.talent.level-1/minor-telekinesis), [Repel](scc.v1:mcdm.heroes.v1/feature.ability.talent.level-1/repel)         |\n| Telepathy   | [Feedback Loop](scc.v1:mcdm.heroes.v1/feature.ability.talent.level-1/feedback-loop), [Remote Assistance](scc.v1:mcdm.heroes.v1/feature.ability.talent.level-1/remote-assistance) |\n",
+    "structured": {
+      "class": "talent",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.talent.level-1/accelerate",
+    "kind": "feature",
+    "name": "Accelerate",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/talent/level-1/accelerate.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/talent/level-1/accelerate.json",
+    "selection": "talent-level-one",
+    "text": "---\nclass: talent\nlevel: \"1\"\nname: Accelerate\nscc: mcdm.heroes.v1/feature.talent.level-1/accelerate\nsubclass: chronopathy\ntype: feature\n---\n\nYou have the following ability.\n",
+    "structured": {
+      "class": "talent",
+      "level": "1",
+      "subclass": "chronopathy"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.talent.level-1/again",
+    "kind": "feature",
+    "name": "Again",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/talent/level-1/again.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/talent/level-1/again.json",
+    "selection": "talent-level-one",
+    "text": "---\nclass: talent\nlevel: \"1\"\nname: Again\nscc: mcdm.heroes.v1/feature.talent.level-1/again\nsubclass: chronopathy\ntype: feature\n---\n\nYou have the following ability.\n",
+    "structured": {
+      "class": "talent",
+      "level": "1",
+      "subclass": "chronopathy"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.talent.level-1/battle-augmentation",
+    "kind": "feature",
+    "name": "Battle Augmentation",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/talent/level-1/battle-augmentation.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/talent/level-1/battle-augmentation.json",
+    "selection": "talent-level-one",
+    "text": "---\nclass: talent\nlevel: \"1\"\nname: Battle Augmentation\nscc: mcdm.heroes.v1/feature.talent.level-1/battle-augmentation\ntype: feature\n---\n\nYou can wear light armor and wield light weapons effectively, even though you don't have a kit. While you wear light armor, you gain a +3 [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) to [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina), and that [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) increases by 3 at 4th, 7th, and 10th levels. While you wield a light weapon, you gain a +1 damage [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) with weapon abilities, including [free strikes](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike). You can use light armor treasures and light weapon treasures.\n\nIf you have a kit, you can't take this augmentation.\n",
+    "structured": {
+      "class": "talent",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.talent.level-1/clarity-and-strain",
+    "kind": "feature",
+    "name": "Clarity and Strain",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/talent/level-1/clarity-and-strain.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/talent/level-1/clarity-and-strain.json",
+    "selection": "talent-level-one",
+    "text": "---\nclass: talent\nlevel: \"1\"\nname: Clarity and Strain\nscc: mcdm.heroes.v1/feature.talent.level-1/clarity-and-strain\ntype: feature\n---\n\nThe focus and precision of your thoughts grant you a [Heroic Resource](scc.v1:mcdm.heroes.v1/rule.resource/heroic-resource) called clarity that empowers your psionic abilities.\n\n##### Clarity in Combat\n\nAt the start of a combat encounter or some other stressful situation tracked in [combat rounds](scc.v1:mcdm.heroes.v1/rule.combat/combat-round) (as determined by the Director), you gain clarity equal to your [Victories](scc.v1:mcdm.heroes.v1/rule.resource/victories). At the start of each of your [turns](scc.v1:mcdm.heroes.v1/rule.combat/turn) during combat, you gain 1d3 clarity.\n\nAdditionally, the first time each [combat round](scc.v1:mcdm.heroes.v1/rule.combat/combat-round) that a creature is [force moved](scc.v1:mcdm.heroes.v1/movement/forced-movement), you gain 1 clarity.\n\nYou can spend clarity you don't have, pushing that [Heroic Resource](scc.v1:mcdm.heroes.v1/rule.resource/heroic-resource) into negative numbers to a maximum negative value equal to 1 + your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score. At the end of each of your [turns](scc.v1:mcdm.heroes.v1/rule.combat/turn), you take 1 damage for each negative point of clarity.\n\nWhenever you have clarity below 0, you are strained. Some psionic abilities have additional effects if you are already strained or become strained when you use them. Strained effects can still impact you even after you are no longer strained.\n\nYou lose any remaining clarity or reset any negative clarity at the end of the encounter.\n\n##### Clarity Outside of Combat\n\nThough you can't gain clarity outside of combat, you can use your [heroic abilities](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability) and effects that cost clarity without spending it. Whenever you use an ability or effect outside of combat that costs clarity, you can't use that same ability or effect outside of combat again until you earn 1 or more [Victories](scc.v1:mcdm.heroes.v1/rule.resource/victories) or finish a [respite](scc.v1:mcdm.heroes.v1/rule.resource/respite).\n\nAdditionally, whenever you use any ability or effect that costs clarity within 1 minute of using another such ability, you take 1d6 damage and incur any strain effect from using the new ability. Whenever you use an ability with a strain effect outside of combat, you can take 1d6 damage and incur the effect if you don't incur it for other reasons.\n\nWhen you use an ability outside of combat that lets you spend unlimited clarity on its effect, such as [Minor Telekinesis](scc.v1:mcdm.heroes.v1/feature.ability.talent.level-1/minor-telekinesis), you can use it as if you had spent an amount of clarity equal to your [Victories](scc.v1:mcdm.heroes.v1/rule.resource/victories).\n",
+    "structured": {
+      "class": "talent",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.talent.level-1/density-augmentation",
+    "kind": "feature",
+    "name": "Density Augmentation",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/talent/level-1/density-augmentation.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/talent/level-1/density-augmentation.json",
+    "selection": "talent-level-one",
+    "text": "---\nclass: talent\nlevel: \"1\"\nname: Density Augmentation\nscc: mcdm.heroes.v1/feature.talent.level-1/density-augmentation\ntype: feature\n---\n\nYou gain a +6 [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) to [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina), and this [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) increases by 6 at 4th, 7th, and 10th levels. Additionally, you gain a +1 [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) to [stability](scc.v1:mcdm.heroes.v1/rule.character/stability).\n",
+    "structured": {
+      "class": "talent",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.talent.level-1/distance-augmentation",
+    "kind": "feature",
+    "name": "Distance Augmentation",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/talent/level-1/distance-augmentation.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/talent/level-1/distance-augmentation.json",
+    "selection": "talent-level-one",
+    "text": "---\nclass: talent\nlevel: \"1\"\nname: Distance Augmentation\nscc: mcdm.heroes.v1/feature.talent.level-1/distance-augmentation\ntype: feature\n---\n\nYour [ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) psionic abilities gain a +2 [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) to [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance).\n",
+    "structured": {
+      "class": "talent",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.talent.level-1/entropy-ward",
+    "kind": "feature",
+    "name": "Entropy Ward",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/talent/level-1/entropy-ward.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/talent/level-1/entropy-ward.json",
+    "selection": "talent-level-one",
+    "text": "---\nclass: talent\nlevel: \"1\"\nname: Entropy Ward\nscc: mcdm.heroes.v1/feature.talent.level-1/entropy-ward\ntype: feature\n---\n\nYour ward slows time for your enemies. Whenever a creature deals damage to you, their [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) is reduced by an amount equal to your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score and they can't use [triggered actions](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) until the end of their next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).\n",
+    "structured": {
+      "class": "talent",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.talent.level-1/feedback-loop",
+    "kind": "feature",
+    "name": "Feedback Loop",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/talent/level-1/feedback-loop.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/talent/level-1/feedback-loop.json",
+    "selection": "talent-level-one",
+    "text": "---\nclass: talent\nlevel: \"1\"\nname: Feedback Loop\nscc: mcdm.heroes.v1/feature.talent.level-1/feedback-loop\nsubclass: telepathy\ntype: feature\n---\n\nYou have the following ability.\n",
+    "structured": {
+      "class": "talent",
+      "level": "1",
+      "subclass": "telepathy"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.talent.level-1/force-augmentation",
+    "kind": "feature",
+    "name": "Force Augmentation",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/talent/level-1/force-augmentation.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/talent/level-1/force-augmentation.json",
+    "selection": "talent-level-one",
+    "text": "---\nclass: talent\nlevel: \"1\"\nname: Force Augmentation\nscc: mcdm.heroes.v1/feature.talent.level-1/force-augmentation\ntype: feature\n---\n\nYour damage-dealing psionic abilities gain a +1 [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) to [rolled damage](scc.v1:mcdm.heroes.v1/rule.damage/rolled-damage).\n",
+    "structured": {
+      "class": "talent",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.talent.level-1/mind-spike",
+    "kind": "feature",
+    "name": "Mind Spike",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/talent/level-1/mind-spike.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/talent/level-1/mind-spike.json",
+    "selection": "talent-level-one",
+    "text": "---\nclass: talent\nlevel: \"1\"\nname: Mind Spike\nscc: mcdm.heroes.v1/feature.talent.level-1/mind-spike\ntype: feature\n---\n\nYou have the following ability, which can be used as a [ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike).\n",
+    "structured": {
+      "class": "talent",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.talent.level-1/minor-telekinesis",
+    "kind": "feature",
+    "name": "Minor Telekinesis",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/talent/level-1/minor-telekinesis.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/talent/level-1/minor-telekinesis.json",
+    "selection": "talent-level-one",
+    "text": "---\nclass: talent\nlevel: \"1\"\nname: Minor Telekinesis\nscc: mcdm.heroes.v1/feature.talent.level-1/minor-telekinesis\nsubclass: telekinesis\ntype: feature\n---\n\nYou have the following ability.\n",
+    "structured": {
+      "class": "talent",
+      "level": "1",
+      "subclass": "telekinesis"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.talent.level-1/psionic-augmentation",
+    "kind": "feature",
+    "name": "Psionic Augmentation",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/talent/level-1/psionic-augmentation.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/talent/level-1/psionic-augmentation.json",
+    "selection": "talent-level-one",
+    "text": "---\nclass: talent\nlevel: \"1\"\nname: Psionic Augmentation\nscc: mcdm.heroes.v1/feature.talent.level-1/psionic-augmentation\ntype: feature\n---\n\nThrough meditation, you create pathways in your mind that enhance your statistics. Choose one of the following augmentations. You can change your augmentation and ward (see [Talent Ward](scc.v1:mcdm.heroes.v1/feature.talent.level-1/talent-ward) below) by undergoing a psionic meditation as a [respite](scc.v1:mcdm.heroes.v1/rule.resource/respite) activity. (*Quick Build:*  [Force Augmentation](scc.v1:mcdm.heroes.v1/feature.null.level-1/force-augmentation).)\n",
+    "structured": {
+      "class": "talent",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.talent.level-1/remote-assistance",
+    "kind": "feature",
+    "name": "Remote Assistance",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/talent/level-1/remote-assistance.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/talent/level-1/remote-assistance.json",
+    "selection": "talent-level-one",
+    "text": "---\nclass: talent\nlevel: \"1\"\nname: Remote Assistance\nscc: mcdm.heroes.v1/feature.talent.level-1/remote-assistance\nsubclass: telepathy\ntype: feature\n---\n\nYou have the following ability.\n",
+    "structured": {
+      "class": "talent",
+      "level": "1",
+      "subclass": "telepathy"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.talent.level-1/repel",
+    "kind": "feature",
+    "name": "Repel",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/talent/level-1/repel.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/talent/level-1/repel.json",
+    "selection": "talent-level-one",
+    "text": "---\nclass: talent\nlevel: \"1\"\nname: Repel\nscc: mcdm.heroes.v1/feature.talent.level-1/repel\nsubclass: telekinesis\ntype: feature\n---\n\nYou have the following ability.\n",
+    "structured": {
+      "class": "talent",
+      "level": "1",
+      "subclass": "telekinesis"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.talent.level-1/repulsive-ward",
+    "kind": "feature",
+    "name": "Repulsive Ward",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/talent/level-1/repulsive-ward.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/talent/level-1/repulsive-ward.json",
+    "selection": "talent-level-one",
+    "text": "---\nclass: talent\nlevel: \"1\"\nname: Repulsive Ward\nscc: mcdm.heroes.v1/feature.talent.level-1/repulsive-ward\ntype: feature\n---\n\nYou surround yourself with an invisible ward of telekinetic energy. Whenever an [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) creature deals damage to you, you can use a free [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) to [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) them up to a number of squares equal to your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score.\n",
+    "structured": {
+      "class": "talent",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.talent.level-1/speed-augmentation",
+    "kind": "feature",
+    "name": "Speed Augmentation",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/talent/level-1/speed-augmentation.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/talent/level-1/speed-augmentation.json",
+    "selection": "talent-level-one",
+    "text": "---\nclass: talent\nlevel: \"1\"\nname: Speed Augmentation\nscc: mcdm.heroes.v1/feature.talent.level-1/speed-augmentation\ntype: feature\n---\n\nYou gain a +1 [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) to [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) and to the [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) you can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) when you take the [Disengage](scc.v1:mcdm.heroes.v1/feature.common.move-actions/disengage) move action.\n",
+    "structured": {
+      "class": "talent",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.talent.level-1/steel-ward",
+    "kind": "feature",
+    "name": "Steel Ward",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/talent/level-1/steel-ward.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/talent/level-1/steel-ward.json",
+    "selection": "talent-level-one",
+    "text": "---\nclass: talent\nlevel: \"1\"\nname: Steel Ward\nscc: mcdm.heroes.v1/feature.talent.level-1/steel-ward\ntype: feature\n---\n\nYour ward reacts to danger, protecting you from future harm. Whenever you take damage, after the damage resolves, you gain [damage immunity](scc.v1:mcdm.heroes.v1/rule.damage/damage-immunity) equal to your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score until the end of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).\n",
+    "structured": {
+      "class": "talent",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.talent.level-1/talent-abilities",
+    "kind": "feature",
+    "name": "Talent Abilities",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/talent/level-1/talent-abilities.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/talent/level-1/talent-abilities.json",
+    "selection": "talent-level-one",
+    "text": "---\nclass: talent\nlevel: \"1\"\nname: Talent Abilities\nscc: mcdm.heroes.v1/feature.talent.level-1/talent-abilities\ntype: feature\n---\n\nYou manifest a variety of psionic powers that let you impact the environment, bolster your allies, and empower yourself. You can choose abilities across different [talent tradition](scc.v1:mcdm.heroes.v1/feature.talent.level-1/talent-tradition)s or focus on abilities tied to your chosen tradition to dedicate yourself to its power.\n\n##### Signature Abilities\n\nChoose two [signature abilities](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability) from the following options. [Signature abilities](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability) can be used at will. (*Quick Build:* [Incinerate](scc.v1:mcdm.heroes.v1/feature.ability.talent.level-1/incinerate), [Kinetic Grip](scc.v1:mcdm.heroes.v1/feature.ability.talent.level-1/kinetic-grip).)\n\n##### Heroic Abilities\n\nYou know a range of [heroic abilities](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability), all of which cost clarity to fuel them.\n\n###### 3-Clarity Ability\n\nChoose one [heroic ability](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability) from the following options, each of which costs 3 clarity to use. (*Quick Build:* [Choke](scc.v1:mcdm.heroes.v1/feature.ability.talent.level-1/choke).)\n\n###### 5-Clarity Ability\n\nChoose one [heroic ability](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability) from the following options, each of which costs 5 clarity to use. (*Quick Build:* [Inertia Soak](scc.v1:mcdm.heroes.v1/feature.ability.talent.level-1/inertia-soak).)\n",
+    "structured": {
+      "class": "talent",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.talent.level-1/talent-tradition",
+    "kind": "feature",
+    "name": "Talent Tradition",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/talent/level-1/talent-tradition.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/talent/level-1/talent-tradition.json",
+    "selection": "talent-level-one",
+    "text": "---\nclass: talent\nlevel: \"1\"\nname: Talent Tradition\nscc: mcdm.heroes.v1/feature.talent.level-1/talent-tradition\ntype: feature\n---\n\nPsionic abilities are grouped into categories according to their effects, with each category comprising one of many [talent tradition](scc.v1:mcdm.heroes.v1/feature.talent.level-1/talent-tradition)s:\n\n- **Animapathy** abilities allow you to manipulate, meld, and exchange the souls of living things.\n- **Chronopathy** abilities allow you to view future and past events, and to manipulate time to aid allies and hinder foes.\n- **Cryokinesis** abilities allow you to manifest and manipulate absolute cold to enemies and the environment alike.\n- **Metamorphosis** abilities allow you to strengthen and manipulate your body and the bodies of others to perform preternatural exploits.\n- **Pyrokinesis** abilities allow you to create and manipulate fire by interacting with the potential energy found in all things.\n- **Resopathy** abilities allow you to manipulate matter and space to create, alter, or displace your environment and the creatures and objects in it.\n- **Telekinesis** abilities allow you to physically manipulate creatures and objects.\n- **Telepathy** abilities allow you to communicate with, read, and influence the minds of other creatures.\n\nYou choose a [talent tradition](scc.v1:mcdm.heroes.v1/feature.talent.level-1/talent-tradition) from the following options: chronopathy, telekinesis, or telepathy. Your [talent tradition](scc.v1:mcdm.heroes.v1/feature.talent.level-1/talent-tradition) is your [subclass](scc.v1:mcdm.heroes.v1/rule.general/subclass), and your choice of tradition determines many of the features you'll gain as you gain new levels. (Other [talent tradition](scc.v1:mcdm.heroes.v1/feature.talent.level-1/talent-tradition)s will be featured in future products.) (*Quick Build:* Telekinesis.)\n",
+    "structured": {
+      "class": "talent",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.talent.level-1/talent-ward",
+    "kind": "feature",
+    "name": "Talent Ward",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/talent/level-1/talent-ward.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/talent/level-1/talent-ward.json",
+    "selection": "talent-level-one",
+    "text": "---\nclass: talent\nlevel: \"1\"\nname: Talent Ward\nscc: mcdm.heroes.v1/feature.talent.level-1/talent-ward\ntype: feature\n---\n\nThrough meditation, you create a ward that protects you. Choose one of the following wards. You can change your ward and [psionic augmentation](scc.v1:mcdm.heroes.v1/feature.null.level-1/psionic-augmentation) (see above) by undergoing a psionic meditation as a [respite](scc.v1:mcdm.heroes.v1/rule.resource/respite) activity. (*Quick Build:* [Repulsive Ward](scc.v1:mcdm.heroes.v1/feature.talent.level-1/repulsive-ward).)\n",
+    "structured": {
+      "class": "talent",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.talent.level-1/telepathic-speech",
+    "kind": "feature",
+    "name": "Telepathic Speech",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/talent/level-1/telepathic-speech.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/talent/level-1/telepathic-speech.json",
+    "selection": "talent-level-one",
+    "text": "---\nclass: talent\nlevel: \"1\"\nname: Telepathic Speech\nscc: mcdm.heroes.v1/feature.talent.level-1/telepathic-speech\ntype: feature\n---\n\nYou know the Mindspeech language (see Languages in [Orden](scc.v1:mcdm.heroes.v1/rule.world/orden) in Chapter 4: [Background](scc.v1:mcdm.heroes.v1/chapter/background)). Additionally, you can telepathically communicate with any creatures within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) of your [Mind Spike](scc.v1:mcdm.heroes.v1/feature.ability.talent.level-1/mind-spike) ability if they share a language with you and you know of each other. When you communicate with someone this way, they can respond telepathically.\n",
+    "structured": {
+      "class": "talent",
+      "level": "1"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.talent.level-1/vanishing-ward",
+    "kind": "feature",
+    "name": "Vanishing Ward",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/talent/level-1/vanishing-ward.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/talent/level-1/vanishing-ward.json",
+    "selection": "talent-level-one",
+    "text": "---\nclass: talent\nlevel: \"1\"\nname: Vanishing Ward\nscc: mcdm.heroes.v1/feature.talent.level-1/vanishing-ward\ntype: feature\n---\n\nYour ward allows you to slip away from threats. Whenever you take damage, you become invisible until the end of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).\n",
+    "structured": {
+      "class": "talent",
+      "level": "1"
+    }
+  },
+  {
     "id": "mcdm.heroes.v1/feature.troubadour.level-1/1st-level-class-act-features",
     "kind": "feature",
     "name": "1st-Level Class Act Features",

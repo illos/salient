@@ -25,3 +25,6 @@ full check and isolated cohort; DEPLOY2 publication reuses acceptance.
 
 - Started from main `33d18be` while V104 tests run; integrate after V104 lands.
 - Independent ENGINE source audit retained under audits. No full tests or live stack run by author.
+- Authoring at `8e7ee49`: ENGINE found no blocking implementation findings; final proof review pending. Both TypeScript projects and touched lint passed.
+- TESTER generated 1483 content entries at `8e7ee49`; all three generators exit 0. Artifacts `/srv/presidium/projects/salient/test-artifacts/V105-8e7ee49-generation`.
+- Independent source ledger `tests/fixtures/v105-talent-expected.json` supplies five builds covering all options, 23 source abilities and 35 embedded actions. Focused evaluator/resource-floor file 2/2 passes. Public journey checks source costs, manual state, all 58 uses, admission/edit separation, negative adjustment rejection, crossing zero, payment at the -3 floor, and free signature plus manual strain while already negative. Source expected values do not come from the evaluator.

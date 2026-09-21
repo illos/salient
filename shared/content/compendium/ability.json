@@ -5423,6 +5423,855 @@
     }
   },
   {
+    "id": "mcdm.heroes.v1/feature.ability.talent.level-1/accelerate",
+    "kind": "ability",
+    "name": "Accelerate",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-1/accelerate.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/talent/level-1/accelerate.json",
+    "selection": "talent-level-one",
+    "text": "---\naction_type: '[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: talent\ndistance: '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10'\neffects:\n    - effect: The target shifts up to a number of squares equal to your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score.\n      name: Effect\n    - cost: Spend 2 Clarity\n      effect: The target can use a maneuver.\nflavor: To your ally, it seems as though the world has slowed down.\nkeywords:\n    - Psionic\n    - '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)'\nlevel: \"1\"\nname: Accelerate\nscc: mcdm.heroes.v1/feature.ability.talent.level-1/accelerate\nsubclass: chronopathy\ntarget: Self or one creature\ntype: ability\n---\n\n\n*To your ally, it seems as though the world has slowed down.*\n\n| **Psionic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)** |                **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|---------------------|----------------------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**    | **🎯 Self or one creature** |\n\n**Effect:** The target shifts up to a number of squares equal to your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score.\n\n**Spend 2 Clarity:** The target can use a maneuver.\n",
+    "structured": {
+      "action_type": "[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "talent",
+      "distance": "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10",
+      "effects": [
+        {
+          "effect": "The target shifts up to a number of squares equal to your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score.",
+          "name": "Effect"
+        },
+        {
+          "cost": "Spend 2 Clarity",
+          "effect": "The target can use a maneuver."
+        }
+      ],
+      "flavor": "To your ally, it seems as though the world has slowed down.",
+      "keywords": [
+        "Psionic",
+        "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)"
+      ],
+      "level": "1",
+      "subclass": "chronopathy",
+      "target": "Self or one creature"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.talent.level-1/again",
+    "kind": "ability",
+    "name": "Again",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-1/again.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/talent/level-1/again.json",
+    "selection": "talent-level-one",
+    "text": "---\naction_type: '[Triggered](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action)'\nclass: talent\ndistance: '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10'\neffects:\n    - effect: You can use this ability after seeing the result of the triggering roll. The target must reroll the [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) and use the new roll.\n      name: Effect\nflavor: You step back a split second to see if things play out a little differently.\nkeywords:\n    - Psionic\n    - '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)'\nlevel: \"1\"\nname: Again\nscc: mcdm.heroes.v1/feature.ability.talent.level-1/again\nsubclass: chronopathy\nsubtype: triggered\ntarget: Self or one creature\ntrigger: The target makes an [ability roll](scc.v1:mcdm.heroes.v1/rule.dice/ability-roll).\ntype: ability\n---\n\n\n*You step back a split second to see if things play out a little differently.*\n\n| **Psionic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)** |               **[Triggered](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action)** |\n|---------------------|----------------------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**    | **🎯 Self or one creature** |\n\n**Trigger:** The target makes an [ability roll](scc.v1:mcdm.heroes.v1/rule.dice/ability-roll).\n\n**Effect:** You can use this ability after seeing the result of the triggering roll. The target must reroll the [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) and use the new roll.\n",
+    "structured": {
+      "action_type": "[Triggered](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action)",
+      "class": "talent",
+      "distance": "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10",
+      "effects": [
+        {
+          "effect": "You can use this ability after seeing the result of the triggering roll. The target must reroll the [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) and use the new roll.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "You step back a split second to see if things play out a little differently.",
+      "keywords": [
+        "Psionic",
+        "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)"
+      ],
+      "level": "1",
+      "subclass": "chronopathy",
+      "subtype": "triggered",
+      "target": "Self or one creature",
+      "trigger": "The target makes an [ability roll](scc.v1:mcdm.heroes.v1/rule.dice/ability-roll)."
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.talent.level-1/awe",
+    "kind": "ability",
+    "name": "Awe",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-1/awe.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/talent/level-1/awe.json",
+    "selection": "talent-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: talent\ncost: 3 Clarity\ndistance: '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10'\neffects:\n    - effect: If you target an ally, they gain [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina) equal to three times your [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) score, and they can end one effect on them that is ended by a [saving throw](scc.v1:mcdm.heroes.v1/rule.general/saving-throw) or that ends at the end of their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). If you target an enemy, you make a [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll).\n      name: Effect\n    - roll: Power Roll + [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence)\n      tier1: 3 + P psychic damage; I < WEAK, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)\n      tier2: 6 + P psychic damage; I < AVERAGE, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)\n      tier3: 9 + P psychic damage; I < STRONG, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)\nflavor: You project psionic energy out to a creature and take on a new visage in their mind.\nkeywords:\n    - Psionic\n    - '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)'\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\n    - Telepathy\nlevel: \"1\"\nname: Awe\npower_roll_characteristic: '[Presence](scc.v1:mcdm.heroes.v1/rule.character/presence)'\nscc: mcdm.heroes.v1/feature.ability.talent.level-1/awe\ntarget: One creature\ntier1: 3 + P psychic damage; I < WEAK, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)\ntier2: 6 + P psychic damage; I < AVERAGE, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)\ntier3: 9 + P psychic damage; I < STRONG, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)\ntype: ability\n---\n\n\n*You project psionic energy out to a creature and take on a new visage in their mind.*\n\n| **Psionic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged), [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), Telepathy** |     **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|----------------------------------------|--------------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**                       | **🎯 One creature** |\n\n**Effect:** If you target an ally, they gain [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina) equal to three times your [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) score, and they can end one effect on them that is ended by a [saving throw](scc.v1:mcdm.heroes.v1/rule.general/saving-throw) or that ends at the end of their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). If you target an enemy, you make a [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll).\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence):**\n\n- **≤11:** 3 + P psychic damage; I < WEAK, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)\n- **12-16:** 6 + P psychic damage; I < AVERAGE, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)\n- **17+:** 9 + P psychic damage; I < STRONG, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "talent",
+      "cost": "3 Clarity",
+      "distance": "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10",
+      "effects": [
+        {
+          "effect": "If you target an ally, they gain [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina) equal to three times your [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) score, and they can end one effect on them that is ended by a [saving throw](scc.v1:mcdm.heroes.v1/rule.general/saving-throw) or that ends at the end of their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). If you target an enemy, you make a [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll).",
+          "name": "Effect"
+        },
+        {
+          "roll": "Power Roll + [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence)",
+          "tier1": "3 + P psychic damage; I < WEAK, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
+          "tier2": "6 + P psychic damage; I < AVERAGE, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
+          "tier3": "9 + P psychic damage; I < STRONG, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)"
+        }
+      ],
+      "flavor": "You project psionic energy out to a creature and take on a new visage in their mind.",
+      "keywords": [
+        "Psionic",
+        "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)",
+        "Telepathy"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Presence](scc.v1:mcdm.heroes.v1/rule.character/presence)",
+      "target": "One creature",
+      "tier1": "3 + P psychic damage; I < WEAK, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
+      "tier2": "6 + P psychic damage; I < AVERAGE, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)",
+      "tier3": "9 + P psychic damage; I < STRONG, [frightened](scc.v1:mcdm.heroes.v1/condition/frightened) (save ends)"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.talent.level-1/choke",
+    "kind": "ability",
+    "name": "Choke",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-1/choke.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/talent/level-1/choke.json",
+    "selection": "talent-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: talent\ncost: 3 Clarity\ndistance: '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10'\neffects:\n    - roll: Power Roll + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason)\n      tier1: 3 + R damage; M < WEAK, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\n      tier2: 5 + R damage; M < AVERAGE, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\n      tier3: 8 + R damage; M < STRONG, [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)\n    - effect: You can vertical [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) the target up to 2 squares. If the target is made [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) by this ability, this [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) ignores their [stability](scc.v1:mcdm.heroes.v1/rule.character/stability).\n      name: Effect\nflavor: You crush a foe in a telekinetic grip.\nkeywords:\n    - Psionic\n    - '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)'\n    - Strike\n    - Telekinesis\nlevel: \"1\"\nname: Choke\npower_roll_characteristic: '[Reason](scc.v1:mcdm.heroes.v1/rule.character/reason)'\nscc: mcdm.heroes.v1/feature.ability.talent.level-1/choke\ntarget: One creature\ntier1: 3 + R damage; M < WEAK, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\ntier2: 5 + R damage; M < AVERAGE, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\ntier3: 8 + R damage; M < STRONG, [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)\ntype: ability\n---\n\n\n*You crush a foe in a telekinetic grip.*\n\n| **Psionic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)**, **Strike, Telekinesis** |     **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|----------------------------------------------|--------------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**                             | **🎯 One creature** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason):**\n\n- **≤11:** 3 + R damage; M < WEAK, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\n- **12-16:** 5 + R damage; M < AVERAGE, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\n- **17+:** 8 + R damage; M < STRONG, [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)\n\n**Effect:** You can vertical [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) the target up to 2 squares. If the target is made [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) by this ability, this [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) ignores their [stability](scc.v1:mcdm.heroes.v1/rule.character/stability).\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "talent",
+      "cost": "3 Clarity",
+      "distance": "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10",
+      "effects": [
+        {
+          "roll": "Power Roll + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason)",
+          "tier1": "3 + R damage; M < WEAK, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
+          "tier2": "5 + R damage; M < AVERAGE, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
+          "tier3": "8 + R damage; M < STRONG, [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)"
+        },
+        {
+          "effect": "You can vertical [pull](scc.v1:mcdm.heroes.v1/movement/forced-movement) the target up to 2 squares. If the target is made [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) by this ability, this [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) ignores their [stability](scc.v1:mcdm.heroes.v1/rule.character/stability).",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "You crush a foe in a telekinetic grip.",
+      "keywords": [
+        "Psionic",
+        "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)",
+        "Strike",
+        "Telekinesis"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Reason](scc.v1:mcdm.heroes.v1/rule.character/reason)",
+      "target": "One creature",
+      "tier1": "3 + R damage; M < WEAK, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
+      "tier2": "5 + R damage; M < AVERAGE, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
+      "tier3": "8 + R damage; M < STRONG, [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) (save ends)"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.talent.level-1/entropic-bolt",
+    "kind": "ability",
+    "name": "Entropic Bolt",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-1/entropic-bolt.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/talent/level-1/entropic-bolt.json",
+    "selection": "talent-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: talent\ndistance: '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10'\neffects:\n    - roll: Power Roll + [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence)\n      tier1: 2 + P corruption damage; P < WEAK, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\n      tier2: 3 + P corruption damage; P < AVERAGE, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\n      tier3: 5 + P corruption damage; P < STRONG, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\n    - effect: The target takes an extra 1 corruption damage for each additional time they are targeted by this ability during the encounter.\n      name: Effect\n    - effect: You gain 1 clarity when you obtain a tier 2 or tier 3 outcome on the [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll).\n      name: Strained\nflavor: You advance an enemy's age for a moment.\nkeywords:\n    - Chronopathy\n    - Psionic\n    - '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)'\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\nlevel: \"1\"\nname: Entropic Bolt\npower_roll_characteristic: '[Presence](scc.v1:mcdm.heroes.v1/rule.character/presence)'\nscc: mcdm.heroes.v1/feature.ability.talent.level-1/entropic-bolt\nsubtype: signature\ntarget: One creature or object\ntier1: 2 + P corruption damage; P < WEAK, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\ntier2: 3 + P corruption damage; P < AVERAGE, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\ntier3: 5 + P corruption damage; P < STRONG, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\ntype: ability\n---\n\n\n*You advance an enemy's age for a moment.*\n\n| **Chronopathy, Psionic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged), [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)** |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|------------------------------------------|------------------------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**                         | **🎯 One creature or object** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence):**\n\n- **≤11:** 2 + P corruption damage; P < WEAK, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\n- **12-16:** 3 + P corruption damage; P < AVERAGE, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\n- **17+:** 5 + P corruption damage; P < STRONG, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)\n\n**Effect:** The target takes an extra 1 corruption damage for each additional time they are targeted by this ability during the encounter.\n\n**Strained:** You gain 1 clarity when you obtain a tier 2 or tier 3 outcome on the [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll).\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "talent",
+      "distance": "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10",
+      "effects": [
+        {
+          "roll": "Power Roll + [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence)",
+          "tier1": "2 + P corruption damage; P < WEAK, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
+          "tier2": "3 + P corruption damage; P < AVERAGE, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
+          "tier3": "5 + P corruption damage; P < STRONG, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)"
+        },
+        {
+          "effect": "The target takes an extra 1 corruption damage for each additional time they are targeted by this ability during the encounter.",
+          "name": "Effect"
+        },
+        {
+          "effect": "You gain 1 clarity when you obtain a tier 2 or tier 3 outcome on the [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll).",
+          "name": "Strained"
+        }
+      ],
+      "flavor": "You advance an enemy's age for a moment.",
+      "keywords": [
+        "Chronopathy",
+        "Psionic",
+        "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Presence](scc.v1:mcdm.heroes.v1/rule.character/presence)",
+      "subtype": "signature",
+      "target": "One creature or object",
+      "tier1": "2 + P corruption damage; P < WEAK, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
+      "tier2": "3 + P corruption damage; P < AVERAGE, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)",
+      "tier3": "5 + P corruption damage; P < STRONG, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends)"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.talent.level-1/feedback-loop",
+    "kind": "ability",
+    "name": "Feedback Loop",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-1/feedback-loop.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/talent/level-1/feedback-loop.json",
+    "selection": "talent-level-one",
+    "text": "---\naction_type: '[Triggered](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action)'\nclass: talent\ndistance: '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10'\neffects:\n    - effect: The target takes psychic damage equal to half the triggering damage.\n      name: Effect\nflavor: Creating a brief psychic link between an enemy and their target gives that foe a taste of their own medicine.\nkeywords:\n    - Psionic\n    - '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)'\nlevel: \"1\"\nname: Feedback Loop\nscc: mcdm.heroes.v1/feature.ability.talent.level-1/feedback-loop\nsubclass: telepathy\nsubtype: triggered\ntarget: One creature\ntrigger: The target deals damage to an ally.\ntype: ability\n---\n\n\n*Creating a brief psychic link between an enemy and their target gives that foe a taste of their own medicine.*\n\n| **Psionic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)** |       **[Triggered](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action)** |\n|---------------------|--------------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**    | **🎯 One creature** |\n\n**Trigger:** The target deals damage to an ally.\n\n**Effect:** The target takes psychic damage equal to half the triggering damage.\n",
+    "structured": {
+      "action_type": "[Triggered](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action)",
+      "class": "talent",
+      "distance": "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10",
+      "effects": [
+        {
+          "effect": "The target takes psychic damage equal to half the triggering damage.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "Creating a brief psychic link between an enemy and their target gives that foe a taste of their own medicine.",
+      "keywords": [
+        "Psionic",
+        "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)"
+      ],
+      "level": "1",
+      "subclass": "telepathy",
+      "subtype": "triggered",
+      "target": "One creature",
+      "trigger": "The target deals damage to an ally."
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.talent.level-1/flashback",
+    "kind": "ability",
+    "name": "Flashback",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-1/flashback.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/talent/level-1/flashback.json",
+    "selection": "talent-level-one",
+    "text": "---\naction_type: '[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: talent\ncost: 5 Clarity\ndistance: '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10'\neffects:\n    - effect: The target uses an ability with a base [Heroic Resource](scc.v1:mcdm.heroes.v1/rule.resource/heroic-resource) cost of 7 or lower that they've previously used this round, without needing to spend the base cost. Augmentations to the ability can be paid for as usual.\n      name: Effect\n    - effect: You take 1d6 damage and are [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends).\n      name: Strained\nflavor: The target is thrown several seconds back through time and gets to do it all again.\nkeywords:\n    - Chronopathy\n    - Psionic\n    - '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)'\nlevel: \"1\"\nname: Flashback\nscc: mcdm.heroes.v1/feature.ability.talent.level-1/flashback\ntarget: Self or one ally\ntype: ability\n---\n\n\n*The target is thrown several seconds back through time and gets to do it all again.*\n\n| **Chronopathy, Psionic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)** |            **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|----------------------------------|------------------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**                 | **🎯 Self or one ally** |\n\n**Effect:** The target uses an ability with a base [Heroic Resource](scc.v1:mcdm.heroes.v1/rule.resource/heroic-resource) cost of 7 or lower that they've previously used this round, without needing to spend the base cost. Augmentations to the ability can be paid for as usual.\n\n**Strained:** You take 1d6 damage and are [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends).\n",
+    "structured": {
+      "action_type": "[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "talent",
+      "cost": "5 Clarity",
+      "distance": "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10",
+      "effects": [
+        {
+          "effect": "The target uses an ability with a base [Heroic Resource](scc.v1:mcdm.heroes.v1/rule.resource/heroic-resource) cost of 7 or lower that they've previously used this round, without needing to spend the base cost. Augmentations to the ability can be paid for as usual.",
+          "name": "Effect"
+        },
+        {
+          "effect": "You take 1d6 damage and are [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) (save ends).",
+          "name": "Strained"
+        }
+      ],
+      "flavor": "The target is thrown several seconds back through time and gets to do it all again.",
+      "keywords": [
+        "Chronopathy",
+        "Psionic",
+        "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)"
+      ],
+      "level": "1",
+      "target": "Self or one ally"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.talent.level-1/hoarfrost",
+    "kind": "ability",
+    "name": "Hoarfrost",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-1/hoarfrost.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/talent/level-1/hoarfrost.json",
+    "selection": "talent-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: talent\ndistance: '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10'\neffects:\n    - roll: Power Roll + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason)\n      tier1: 2 + R cold damage; M < WEAK, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn))\n      tier2: 4 + R cold damage; M < AVERAGE, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn))\n      tier3: 6 + R cold damage; M < STRONG, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn))\n    - effect: You are [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) until the end of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). Additionally, a target [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) by this ability is [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) instead.\n      name: Strained\nflavor: You blast a foe with a pulse of cold energy.\nkeywords:\n    - Cryokinesis\n    - Psionic\n    - '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)'\n    - Strike\nlevel: \"1\"\nname: Hoarfrost\npower_roll_characteristic: '[Reason](scc.v1:mcdm.heroes.v1/rule.character/reason)'\nscc: mcdm.heroes.v1/feature.ability.talent.level-1/hoarfrost\nsubtype: signature\ntarget: One creature\ntier1: 2 + R cold damage; M < WEAK, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn))\ntier2: 4 + R cold damage; M < AVERAGE, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn))\ntier3: 6 + R cold damage; M < STRONG, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn))\ntype: ability\n---\n\n\n*You blast a foe with a pulse of cold energy.*\n\n| **Cryokinesis, Psionic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)**, **Strike** |     **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|----------------------------------------------|--------------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**                             | **🎯 One creature** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason):**\n\n- **≤11:** 2 + R cold damage; M < WEAK, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn))\n- **12-16:** 4 + R cold damage; M < AVERAGE, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn))\n- **17+:** 6 + R cold damage; M < STRONG, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn))\n\n**Strained:** You are [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) until the end of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). Additionally, a target [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) by this ability is [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) instead.\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "talent",
+      "distance": "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10",
+      "effects": [
+        {
+          "roll": "Power Roll + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason)",
+          "tier1": "2 + R cold damage; M < WEAK, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn))",
+          "tier2": "4 + R cold damage; M < AVERAGE, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn))",
+          "tier3": "6 + R cold damage; M < STRONG, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn))"
+        },
+        {
+          "effect": "You are [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) until the end of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). Additionally, a target [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) by this ability is [restrained](scc.v1:mcdm.heroes.v1/condition/restrained) instead.",
+          "name": "Strained"
+        }
+      ],
+      "flavor": "You blast a foe with a pulse of cold energy.",
+      "keywords": [
+        "Cryokinesis",
+        "Psionic",
+        "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)",
+        "Strike"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Reason](scc.v1:mcdm.heroes.v1/rule.character/reason)",
+      "subtype": "signature",
+      "target": "One creature",
+      "tier1": "2 + R cold damage; M < WEAK, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn))",
+      "tier2": "4 + R cold damage; M < AVERAGE, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn))",
+      "tier3": "6 + R cold damage; M < STRONG, [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn))"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.talent.level-1/incinerate",
+    "kind": "ability",
+    "name": "Incinerate",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-1/incinerate.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/talent/level-1/incinerate.json",
+    "selection": "talent-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: talent\ndistance: 3 [cube](scc.v1:mcdm.heroes.v1/rule.combat/cube) within 10\neffects:\n    - roll: Power Roll + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason)\n      tier1: 2 fire damage\n      tier2: 4 fire damage\n      tier3: 6 fire damage\n    - effect: A column of fire remains in the area until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). Each enemy who enters the area for the first time in a [combat round](scc.v1:mcdm.heroes.v1/rule.combat/combat-round) or starts their turn there takes 2 fire damage.\n      name: Effect\n    - effect: The size of the [cube](scc.v1:mcdm.heroes.v1/rule.combat/cube) increases by 2, but the fire disappears at the end of your [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).\n      name: Strained\nflavor: The air erupts into a column of smokeless flame.\nkeywords:\n    - Area\n    - Fire\n    - Psionic\n    - Pyrokinesis\n    - '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)'\nlevel: \"1\"\nname: Incinerate\npower_roll_characteristic: '[Reason](scc.v1:mcdm.heroes.v1/rule.character/reason)'\nscc: mcdm.heroes.v1/feature.ability.talent.level-1/incinerate\nsubtype: signature\ntarget: Each enemy in the area\ntier1: 2 fire damage\ntier2: 4 fire damage\ntier3: 6 fire damage\ntype: ability\n---\n\n\n*The air erupts into a column of smokeless flame.*\n\n| **Area, Fire, Psionic, Pyrokinesis, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)** |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|----------------------------------------------|------------------------------:|\n| **📏 3 [cube](scc.v1:mcdm.heroes.v1/rule.combat/cube) within 10**                      | **🎯 Each enemy in the area** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason):**\n\n- **≤11:** 2 fire damage\n- **12-16:** 4 fire damage\n- **17+:** 6 fire damage\n\n**Effect:** A column of fire remains in the area until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). Each enemy who enters the area for the first time in a [combat round](scc.v1:mcdm.heroes.v1/rule.combat/combat-round) or starts their turn there takes 2 fire damage.\n\n**Strained:** The size of the [cube](scc.v1:mcdm.heroes.v1/rule.combat/cube) increases by 2, but the fire disappears at the end of your [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "talent",
+      "distance": "3 [cube](scc.v1:mcdm.heroes.v1/rule.combat/cube) within 10",
+      "effects": [
+        {
+          "roll": "Power Roll + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason)",
+          "tier1": "2 fire damage",
+          "tier2": "4 fire damage",
+          "tier3": "6 fire damage"
+        },
+        {
+          "effect": "A column of fire remains in the area until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). Each enemy who enters the area for the first time in a [combat round](scc.v1:mcdm.heroes.v1/rule.combat/combat-round) or starts their turn there takes 2 fire damage.",
+          "name": "Effect"
+        },
+        {
+          "effect": "The size of the [cube](scc.v1:mcdm.heroes.v1/rule.combat/cube) increases by 2, but the fire disappears at the end of your [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
+          "name": "Strained"
+        }
+      ],
+      "flavor": "The air erupts into a column of smokeless flame.",
+      "keywords": [
+        "Area",
+        "Fire",
+        "Psionic",
+        "Pyrokinesis",
+        "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Reason](scc.v1:mcdm.heroes.v1/rule.character/reason)",
+      "subtype": "signature",
+      "target": "Each enemy in the area",
+      "tier1": "2 fire damage",
+      "tier2": "4 fire damage",
+      "tier3": "6 fire damage"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.talent.level-1/inertia-soak",
+    "kind": "ability",
+    "name": "Inertia Soak",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-1/inertia-soak.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/talent/level-1/inertia-soak.json",
+    "selection": "talent-level-one",
+    "text": "---\naction_type: '[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: talent\ncost: 5 Clarity\ndistance: '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10'\neffects:\n    - effect: The target ignores [difficult terrain](scc.v1:mcdm.heroes.v1/movement/difficult-terrain) and takes no damage from [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). Whenever the target enters a square while under this effect, they can [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) one [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) creature up to a number of squares equal to your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score. When [pushing](scc.v1:mcdm.heroes.v1/movement/forced-movement) an ally, the target can ignore that ally's [stability](scc.v1:mcdm.heroes.v1/rule.character/stability). A creature can only be force moved this way once a [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).\n      name: Effect\n    - effect: You are [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends). While you are [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) this way, whenever you are force moved, the [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) gains a +5 [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties).\n      name: Strained\nflavor: Your psionic energy surrounds the target and pushes everything else away from them.\nkeywords:\n    - Psionic\n    - '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)'\n    - Telekinesis\nlevel: \"1\"\nname: Inertia Soak\nscc: mcdm.heroes.v1/feature.ability.talent.level-1/inertia-soak\ntarget: Self or one ally\ntype: ability\n---\n\n\n*Your psionic energy surrounds the target and pushes everything else away from them.*\n\n| **Psionic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged), Telekinesis** |            **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|----------------------------------|------------------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**                 | **🎯 Self or one ally** |\n\n**Effect:** The target ignores [difficult terrain](scc.v1:mcdm.heroes.v1/movement/difficult-terrain) and takes no damage from [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). Whenever the target enters a square while under this effect, they can [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) one [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) creature up to a number of squares equal to your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score. When [pushing](scc.v1:mcdm.heroes.v1/movement/forced-movement) an ally, the target can ignore that ally's [stability](scc.v1:mcdm.heroes.v1/rule.character/stability). A creature can only be force moved this way once a [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).\n\n**Strained:** You are [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends). While you are [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) this way, whenever you are force moved, the [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) gains a +5 [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties).\n",
+    "structured": {
+      "action_type": "[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "talent",
+      "cost": "5 Clarity",
+      "distance": "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10",
+      "effects": [
+        {
+          "effect": "The target ignores [difficult terrain](scc.v1:mcdm.heroes.v1/movement/difficult-terrain) and takes no damage from [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). Whenever the target enters a square while under this effect, they can [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) one [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) creature up to a number of squares equal to your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score. When [pushing](scc.v1:mcdm.heroes.v1/movement/forced-movement) an ally, the target can ignore that ally's [stability](scc.v1:mcdm.heroes.v1/rule.character/stability). A creature can only be force moved this way once a [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
+          "name": "Effect"
+        },
+        {
+          "effect": "You are [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends). While you are [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) this way, whenever you are force moved, the [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) gains a +5 [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties).",
+          "name": "Strained"
+        }
+      ],
+      "flavor": "Your psionic energy surrounds the target and pushes everything else away from them.",
+      "keywords": [
+        "Psionic",
+        "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)",
+        "Telekinesis"
+      ],
+      "level": "1",
+      "target": "Self or one ally"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.talent.level-1/iron",
+    "kind": "ability",
+    "name": "Iron",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-1/iron.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/talent/level-1/iron.json",
+    "selection": "talent-level-one",
+    "text": "---\naction_type: '[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: talent\ncost: 5 Clarity\ndistance: '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10'\neffects:\n    - effect: The target's [stability](scc.v1:mcdm.heroes.v1/rule.character/stability) increases by an amount equal to your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score, and they gain 10 [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina) and 2 [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge). This [stability](scc.v1:mcdm.heroes.v1/rule.character/stability) increase lasts until the target no longer has [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina) from this ability.\n      name: Effect\n    - effect: You can't use maneuvers (save ends).\n      name: Strained\nflavor: The target's skin turns to hard, dark metal, impenetrable and dense.\nkeywords:\n    - Metamorphosis\n    - Psionic\n    - '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)'\nlevel: \"1\"\nname: Iron\nscc: mcdm.heroes.v1/feature.ability.talent.level-1/iron\ntarget: Self or one ally\ntype: ability\n---\n\n\n*The target's skin turns to hard, dark metal, impenetrable and dense.*\n\n| **Metamorphosis, Psionic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)** |            **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|------------------------------------|------------------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**                   | **🎯 Self or one ally** |\n\n**Effect:** The target's [stability](scc.v1:mcdm.heroes.v1/rule.character/stability) increases by an amount equal to your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score, and they gain 10 [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina) and 2 [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge). This [stability](scc.v1:mcdm.heroes.v1/rule.character/stability) increase lasts until the target no longer has [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina) from this ability.\n\n**Strained:** You can't use maneuvers (save ends).\n",
+    "structured": {
+      "action_type": "[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "talent",
+      "cost": "5 Clarity",
+      "distance": "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10",
+      "effects": [
+        {
+          "effect": "The target's [stability](scc.v1:mcdm.heroes.v1/rule.character/stability) increases by an amount equal to your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score, and they gain 10 [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina) and 2 [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge). This [stability](scc.v1:mcdm.heroes.v1/rule.character/stability) increase lasts until the target no longer has [temporary Stamina](scc.v1:mcdm.heroes.v1/rule.health/temporary-stamina) from this ability.",
+          "name": "Effect"
+        },
+        {
+          "effect": "You can't use maneuvers (save ends).",
+          "name": "Strained"
+        }
+      ],
+      "flavor": "The target's skin turns to hard, dark metal, impenetrable and dense.",
+      "keywords": [
+        "Metamorphosis",
+        "Psionic",
+        "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)"
+      ],
+      "level": "1",
+      "target": "Self or one ally"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.talent.level-1/kinetic-grip",
+    "kind": "ability",
+    "name": "Kinetic Grip",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-1/kinetic-grip.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/talent/level-1/kinetic-grip.json",
+    "selection": "talent-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: talent\ndistance: '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10'\neffects:\n    - roll: Power Roll + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason)\n      tier1: '[Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2 + R'\n      tier2: '[Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 4 + R'\n      tier3: '[Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 6 + R; [prone](scc.v1:mcdm.heroes.v1/condition/prone)'\n    - effect: You must vertical [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) the target instead of [sliding](scc.v1:mcdm.heroes.v1/movement/forced-movement) them.\n      name: Strained\nflavor: You lift and hurl your foe away from you.\nkeywords:\n    - Psionic\n    - '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)'\n    - Telekinesis\nlevel: \"1\"\nname: Kinetic Grip\npower_roll_characteristic: '[Reason](scc.v1:mcdm.heroes.v1/rule.character/reason)'\nscc: mcdm.heroes.v1/feature.ability.talent.level-1/kinetic-grip\nsubtype: signature\ntarget: One creature or object\ntier1: '[Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2 + R'\ntier2: '[Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 4 + R'\ntier3: '[Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 6 + R; [prone](scc.v1:mcdm.heroes.v1/condition/prone)'\ntype: ability\n---\n\n\n*You lift and hurl your foe away from you.*\n\n| **Psionic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged), Telekinesis** |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|----------------------------------|------------------------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**                 | **🎯 One creature or object** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason):**\n\n- **≤11:** [Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2 + R\n- **12-16:** [Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 4 + R\n- **17+:** [Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 6 + R; [prone](scc.v1:mcdm.heroes.v1/condition/prone)\n\n**Strained:** You must vertical [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) the target instead of [sliding](scc.v1:mcdm.heroes.v1/movement/forced-movement) them.\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "talent",
+      "distance": "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10",
+      "effects": [
+        {
+          "roll": "Power Roll + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason)",
+          "tier1": "[Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2 + R",
+          "tier2": "[Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 4 + R",
+          "tier3": "[Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 6 + R; [prone](scc.v1:mcdm.heroes.v1/condition/prone)"
+        },
+        {
+          "effect": "You must vertical [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) the target instead of [sliding](scc.v1:mcdm.heroes.v1/movement/forced-movement) them.",
+          "name": "Strained"
+        }
+      ],
+      "flavor": "You lift and hurl your foe away from you.",
+      "keywords": [
+        "Psionic",
+        "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)",
+        "Telekinesis"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Reason](scc.v1:mcdm.heroes.v1/rule.character/reason)",
+      "subtype": "signature",
+      "target": "One creature or object",
+      "tier1": "[Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2 + R",
+      "tier2": "[Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 4 + R",
+      "tier3": "[Slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) 6 + R; [prone](scc.v1:mcdm.heroes.v1/condition/prone)"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.talent.level-1/kinetic-pulse",
+    "kind": "ability",
+    "name": "Kinetic Pulse",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-1/kinetic-pulse.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/talent/level-1/kinetic-pulse.json",
+    "selection": "talent-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: talent\ndistance: 1 [burst](scc.v1:mcdm.heroes.v1/rule.combat/burst)\neffects:\n    - roll: Power Roll + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason)\n      tier1: 2 psychic damage\n      tier2: 5 psychic damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1\n      tier3: 7 psychic damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2\n    - effect: The size of the [burst](scc.v1:mcdm.heroes.v1/rule.combat/burst) increases by 2, and you are [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).\n      name: Strained\nflavor: The force of your mind hurls enemies backward.\nkeywords:\n    - Area\n    - Psionic\n    - Telepathy\nlevel: \"1\"\nname: Kinetic Pulse\npower_roll_characteristic: '[Reason](scc.v1:mcdm.heroes.v1/rule.character/reason)'\nscc: mcdm.heroes.v1/feature.ability.talent.level-1/kinetic-pulse\nsubtype: signature\ntarget: Each enemy in the area\ntier1: 2 psychic damage\ntier2: 5 psychic damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1\ntier3: 7 psychic damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2\ntype: ability\n---\n\n\n*The force of your mind hurls enemies backward.*\n\n| **Area, Psionic, Telepathy** |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|------------------------------|------------------------------:|\n| **📏 1 [burst](scc.v1:mcdm.heroes.v1/rule.combat/burst)**               | **🎯 Each enemy in the area** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason):**\n\n- **≤11:** 2 psychic damage\n- **12-16:** 5 psychic damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1\n- **17+:** 7 psychic damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2\n\n**Strained:** The size of the [burst](scc.v1:mcdm.heroes.v1/rule.combat/burst) increases by 2, and you are [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "talent",
+      "distance": "1 [burst](scc.v1:mcdm.heroes.v1/rule.combat/burst)",
+      "effects": [
+        {
+          "roll": "Power Roll + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason)",
+          "tier1": "2 psychic damage",
+          "tier2": "5 psychic damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
+          "tier3": "7 psychic damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2"
+        },
+        {
+          "effect": "The size of the [burst](scc.v1:mcdm.heroes.v1/rule.combat/burst) increases by 2, and you are [bleeding](scc.v1:mcdm.heroes.v1/condition/bleeding) until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).",
+          "name": "Strained"
+        }
+      ],
+      "flavor": "The force of your mind hurls enemies backward.",
+      "keywords": [
+        "Area",
+        "Psionic",
+        "Telepathy"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Reason](scc.v1:mcdm.heroes.v1/rule.character/reason)",
+      "subtype": "signature",
+      "target": "Each enemy in the area",
+      "tier1": "2 psychic damage",
+      "tier2": "5 psychic damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 1",
+      "tier3": "7 psychic damage; [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) 2"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.talent.level-1/materialize",
+    "kind": "ability",
+    "name": "Materialize",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-1/materialize.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/talent/level-1/materialize.json",
+    "selection": "talent-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: talent\ndistance: '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10'\neffects:\n    - roll: Power Roll + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason)\n      tier1: 3 + R damage\n      tier2: 5 + R damage\n      tier3: 8 + R damage\n    - effect: A worthless [size](scc.v1:mcdm.heroes.v1/rule.character/size) 1M object drops onto the target to deal the damage, then rolls into an [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) unoccupied space of your choice. The object is made of wood, stone, or metal (your choice).\n      name: Effect\n    - effect: The object explodes after the damage is dealt, and each creature [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the target takes damage equal to your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score. You also take damage equal to your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score that can't be reduced in any way.\n      name: Strained\nflavor: You picture an object in your mind and give it form—directly above your opponent's head.\nkeywords:\n    - Psionic\n    - '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)'\n    - Resopathy\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\nlevel: \"1\"\nname: Materialize\npower_roll_characteristic: '[Reason](scc.v1:mcdm.heroes.v1/rule.character/reason)'\nscc: mcdm.heroes.v1/feature.ability.talent.level-1/materialize\nsubtype: signature\ntarget: One creature or object\ntier1: 3 + R damage\ntier2: 5 + R damage\ntier3: 8 + R damage\ntype: ability\n---\n\n\n*You picture an object in your mind and give it form—directly above your opponent's head.*\n\n| **Psionic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged), Resopathy, [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)** |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|----------------------------------------|------------------------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**                       | **🎯 One creature or object** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason):**\n\n- **≤11:** 3 + R damage\n- **12-16:** 5 + R damage\n- **17+:** 8 + R damage\n\n**Effect:** A worthless [size](scc.v1:mcdm.heroes.v1/rule.character/size) 1M object drops onto the target to deal the damage, then rolls into an [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) unoccupied space of your choice. The object is made of wood, stone, or metal (your choice).\n\n**Strained:** The object explodes after the damage is dealt, and each creature [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the target takes damage equal to your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score. You also take damage equal to your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score that can't be reduced in any way.\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "talent",
+      "distance": "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10",
+      "effects": [
+        {
+          "roll": "Power Roll + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason)",
+          "tier1": "3 + R damage",
+          "tier2": "5 + R damage",
+          "tier3": "8 + R damage"
+        },
+        {
+          "effect": "A worthless [size](scc.v1:mcdm.heroes.v1/rule.character/size) 1M object drops onto the target to deal the damage, then rolls into an [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) unoccupied space of your choice. The object is made of wood, stone, or metal (your choice).",
+          "name": "Effect"
+        },
+        {
+          "effect": "The object explodes after the damage is dealt, and each creature [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the target takes damage equal to your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score. You also take damage equal to your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score that can't be reduced in any way.",
+          "name": "Strained"
+        }
+      ],
+      "flavor": "You picture an object in your mind and give it form—directly above your opponent's head.",
+      "keywords": [
+        "Psionic",
+        "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)",
+        "Resopathy",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Reason](scc.v1:mcdm.heroes.v1/rule.character/reason)",
+      "subtype": "signature",
+      "target": "One creature or object",
+      "tier1": "3 + R damage",
+      "tier2": "5 + R damage",
+      "tier3": "8 + R damage"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.talent.level-1/mind-spike",
+    "kind": "ability",
+    "name": "Mind Spike",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-1/mind-spike.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/talent/level-1/mind-spike.json",
+    "selection": "talent-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: talent\ndistance: '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10'\neffects:\n    - roll: Power Roll + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason)\n      tier1: 2 + R psychic damage\n      tier2: 4 + R psychic damage\n      tier3: 6 + R psychic damage\n    - effect: The target takes an extra 2 psychic damage. You also take 2 psychic damage that can't be reduced in any way.\n      name: Strained\nflavor: A telepathic bolt instantly zaps a creature's brain.\nkeywords:\n    - Psionic\n    - '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)'\n    - Strike\n    - Telepathy\nlevel: \"1\"\nname: Mind Spike\npower_roll_characteristic: '[Reason](scc.v1:mcdm.heroes.v1/rule.character/reason)'\nscc: mcdm.heroes.v1/feature.ability.talent.level-1/mind-spike\ntarget: One creature\ntier1: 2 + R psychic damage\ntier2: 4 + R psychic damage\ntier3: 6 + R psychic damage\ntype: ability\n---\n\n\n*A telepathic bolt instantly zaps a creature's brain.*\n\n| **Psionic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)**, **Strike, Telepathy** |     **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|--------------------------------------------|--------------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**                           | **🎯 One creature** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason):**\n\n- **≤11:** 2 + R psychic damage\n- **12-16:** 4 + R psychic damage\n- **17+:** 6 + R psychic damage\n\n**Strained:** The target takes an extra 2 psychic damage. You also take 2 psychic damage that can't be reduced in any way.\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "talent",
+      "distance": "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10",
+      "effects": [
+        {
+          "roll": "Power Roll + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason)",
+          "tier1": "2 + R psychic damage",
+          "tier2": "4 + R psychic damage",
+          "tier3": "6 + R psychic damage"
+        },
+        {
+          "effect": "The target takes an extra 2 psychic damage. You also take 2 psychic damage that can't be reduced in any way.",
+          "name": "Strained"
+        }
+      ],
+      "flavor": "A telepathic bolt instantly zaps a creature's brain.",
+      "keywords": [
+        "Psionic",
+        "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)",
+        "Strike",
+        "Telepathy"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Reason](scc.v1:mcdm.heroes.v1/rule.character/reason)",
+      "target": "One creature",
+      "tier1": "2 + R psychic damage",
+      "tier2": "4 + R psychic damage",
+      "tier3": "6 + R psychic damage"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.talent.level-1/minor-telekinesis",
+    "kind": "ability",
+    "name": "Minor Telekinesis",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-1/minor-telekinesis.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/talent/level-1/minor-telekinesis.json",
+    "selection": "talent-level-one",
+    "text": "---\naction_type: '[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: talent\ndistance: '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10'\neffects:\n    - effect: You [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) the target up to a number of squares equal to your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score.\n      name: Effect\n    - cost: Spend 2+ Clarity\n      effect: The size of the creature or object you can target increases by 1 for every 2 clarity spent.\n    - cost: Spend 3 Clarity\n      effect: You can vertical [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) the target.\nflavor: Wisps of psychic energy ripple visibly from your brain as you force the target to move using only your mind.\nkeywords:\n    - Psionic\n    - '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)'\nlevel: \"1\"\nname: Minor Telekinesis\nscc: mcdm.heroes.v1/feature.ability.talent.level-1/minor-telekinesis\nsubclass: telekinesis\ntarget: Self or one [size](scc.v1:mcdm.heroes.v1/rule.character/size) 1 creature or object\ntype: ability\n---\n\n\n*Wisps of psychic energy ripple visibly from your brain as you force the target to move using only your mind.*\n\n| **Psionic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)** |                                 **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|---------------------|---------------------------------------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**    | **🎯 Self or one [size](scc.v1:mcdm.heroes.v1/rule.character/size) 1 creature or object** |\n\n**Effect:** You [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) the target up to a number of squares equal to your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score.\n\n**Spend 2+ Clarity:** The size of the creature or object you can target increases by 1 for every 2 clarity spent.\n\n**Spend 3 Clarity:** You can vertical [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) the target.\n",
+    "structured": {
+      "action_type": "[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "talent",
+      "distance": "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10",
+      "effects": [
+        {
+          "effect": "You [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) the target up to a number of squares equal to your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score.",
+          "name": "Effect"
+        },
+        {
+          "cost": "Spend 2+ Clarity",
+          "effect": "The size of the creature or object you can target increases by 1 for every 2 clarity spent."
+        },
+        {
+          "cost": "Spend 3 Clarity",
+          "effect": "You can vertical [slide](scc.v1:mcdm.heroes.v1/movement/forced-movement) the target."
+        }
+      ],
+      "flavor": "Wisps of psychic energy ripple visibly from your brain as you force the target to move using only your mind.",
+      "keywords": [
+        "Psionic",
+        "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)"
+      ],
+      "level": "1",
+      "subclass": "telekinesis",
+      "target": "Self or one [size](scc.v1:mcdm.heroes.v1/rule.character/size) 1 creature or object"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.talent.level-1/optic-blast",
+    "kind": "ability",
+    "name": "Optic Blast",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-1/optic-blast.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/talent/level-1/optic-blast.json",
+    "selection": "talent-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: talent\ndistance: '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10'\neffects:\n    - roll: Power Roll + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason)\n      tier1: 2 + R damage; M < WEAK[, prone](scc.v1:mcdm.heroes.v1/condition/prone)\n      tier2: 4 + R damage; M < AVERAGE[, prone](scc.v1:mcdm.heroes.v1/condition/prone)\n      tier3: 6 + R damage; M < STRONG[, prone](scc.v1:mcdm.heroes.v1/condition/prone)\n    - effect: When targeting an object with a solid reflective surface or a creature carrying or wearing such an object (such as a mirror, an unpainted metal shield, or shiny metal plate armor), you can target one additional creature or object within 3 squares of the first target.\n      name: Effect\n    - effect: You gain 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge) that you can use immediately, and you take damage equal to your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score that can't be reduced in any way.\n      name: Strained\nflavor: Your eyes emit rays of powerful enervating force.\nkeywords:\n    - Metamorphosis\n    - Psionic\n    - '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)'\n    - Strike\nlevel: \"1\"\nname: Optic Blast\npower_roll_characteristic: '[Reason](scc.v1:mcdm.heroes.v1/rule.character/reason)'\nscc: mcdm.heroes.v1/feature.ability.talent.level-1/optic-blast\nsubtype: signature\ntarget: One creature or object\ntier1: 2 + R damage; M < WEAK[, prone](scc.v1:mcdm.heroes.v1/condition/prone)\ntier2: 4 + R damage; M < AVERAGE[, prone](scc.v1:mcdm.heroes.v1/condition/prone)\ntier3: 6 + R damage; M < STRONG[, prone](scc.v1:mcdm.heroes.v1/condition/prone)\ntype: ability\n---\n\n\n*Your eyes emit rays of powerful enervating force.*\n\n| **Metamorphosis, Psionic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)**, **Strike** |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|------------------------------------------------|------------------------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**                               | **🎯 One creature or object** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason):**\n\n- **≤11:** 2 + R damage; M < WEAK[, prone](scc.v1:mcdm.heroes.v1/condition/prone)\n- **12-16:** 4 + R damage; M < AVERAGE[, prone](scc.v1:mcdm.heroes.v1/condition/prone)\n- **17+:** 6 + R damage; M < STRONG[, prone](scc.v1:mcdm.heroes.v1/condition/prone)\n\n**Effect:** When targeting an object with a solid reflective surface or a creature carrying or wearing such an object (such as a mirror, an unpainted metal shield, or shiny metal plate armor), you can target one additional creature or object within 3 squares of the first target.\n\n**Strained:** You gain 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge) that you can use immediately, and you take damage equal to your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score that can't be reduced in any way.\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "talent",
+      "distance": "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10",
+      "effects": [
+        {
+          "roll": "Power Roll + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason)",
+          "tier1": "2 + R damage; M < WEAK[, prone](scc.v1:mcdm.heroes.v1/condition/prone)",
+          "tier2": "4 + R damage; M < AVERAGE[, prone](scc.v1:mcdm.heroes.v1/condition/prone)",
+          "tier3": "6 + R damage; M < STRONG[, prone](scc.v1:mcdm.heroes.v1/condition/prone)"
+        },
+        {
+          "effect": "When targeting an object with a solid reflective surface or a creature carrying or wearing such an object (such as a mirror, an unpainted metal shield, or shiny metal plate armor), you can target one additional creature or object within 3 squares of the first target.",
+          "name": "Effect"
+        },
+        {
+          "effect": "You gain 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge) that you can use immediately, and you take damage equal to your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score that can't be reduced in any way.",
+          "name": "Strained"
+        }
+      ],
+      "flavor": "Your eyes emit rays of powerful enervating force.",
+      "keywords": [
+        "Metamorphosis",
+        "Psionic",
+        "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)",
+        "Strike"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Reason](scc.v1:mcdm.heroes.v1/rule.character/reason)",
+      "subtype": "signature",
+      "target": "One creature or object",
+      "tier1": "2 + R damage; M < WEAK[, prone](scc.v1:mcdm.heroes.v1/condition/prone)",
+      "tier2": "4 + R damage; M < AVERAGE[, prone](scc.v1:mcdm.heroes.v1/condition/prone)",
+      "tier3": "6 + R damage; M < STRONG[, prone](scc.v1:mcdm.heroes.v1/condition/prone)"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.talent.level-1/perfect-clarity",
+    "kind": "ability",
+    "name": "Perfect Clarity",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-1/perfect-clarity.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/talent/level-1/perfect-clarity.json",
+    "selection": "talent-level-one",
+    "text": "---\naction_type: '[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: talent\ncost: 5 Clarity\ndistance: '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10'\neffects:\n    - effect: Until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), the target gains a +3 [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) to [speed](scc.v1:mcdm.heroes.v1/rule.character/speed), and they have a double [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on the next [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) they make. If the target obtains a tier 3 outcome on that roll, you gain 1 clarity.\n      name: Effect\n    - effect: You take 1d6 damage, and you can't use [triggered actions](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) (save ends).\n      name: Strained\nflavor: You clear the mind of nothing but the goal.\nkeywords:\n    - Psionic\n    - '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)'\n    - Telepathy\nlevel: \"1\"\nname: Perfect Clarity\nscc: mcdm.heroes.v1/feature.ability.talent.level-1/perfect-clarity\ntarget: Self or one ally\ntype: ability\n---\n\n\n*You clear the mind of nothing but the goal.*\n\n| **Psionic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged), Telepathy** |            **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|--------------------------------|------------------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**               | **🎯 Self or one ally** |\n\n**Effect:** Until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), the target gains a +3 [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) to [speed](scc.v1:mcdm.heroes.v1/rule.character/speed), and they have a double [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on the next [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) they make. If the target obtains a tier 3 outcome on that roll, you gain 1 clarity.\n\n**Strained:** You take 1d6 damage, and you can't use [triggered actions](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) (save ends).\n",
+    "structured": {
+      "action_type": "[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "talent",
+      "cost": "5 Clarity",
+      "distance": "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10",
+      "effects": [
+        {
+          "effect": "Until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), the target gains a +3 [bonus](scc.v1:mcdm.heroes.v1/rule.dice/bonuses-and-penalties) to [speed](scc.v1:mcdm.heroes.v1/rule.character/speed), and they have a double [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on the next [power roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) they make. If the target obtains a tier 3 outcome on that roll, you gain 1 clarity.",
+          "name": "Effect"
+        },
+        {
+          "effect": "You take 1d6 damage, and you can't use [triggered actions](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) (save ends).",
+          "name": "Strained"
+        }
+      ],
+      "flavor": "You clear the mind of nothing but the goal.",
+      "keywords": [
+        "Psionic",
+        "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)",
+        "Telepathy"
+      ],
+      "level": "1",
+      "target": "Self or one ally"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.talent.level-1/precognition",
+    "kind": "ability",
+    "name": "Precognition",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-1/precognition.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/talent/level-1/precognition.json",
+    "selection": "talent-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: talent\ncost: 3 Clarity\ndistance: '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 2'\neffects:\n    - effect: '[Ability rolls](scc.v1:mcdm.heroes.v1/rule.dice/ability-roll) made against the target take a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). Whenever the target takes damage while under this effect, they can use a [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) to make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against the source of the damage.'\n      name: Effect\nflavor: You give a target a glimpse into the future so that they're ready for what comes next.\nkeywords:\n    - Chronopathy\n    - '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)'\n    - Psionic\nlevel: \"1\"\nname: Precognition\nscc: mcdm.heroes.v1/feature.ability.talent.level-1/precognition\ntarget: Self or one ally\ntype: ability\n---\n\n\n*You give a target a glimpse into the future so that they're ready for what comes next.*\n\n| **Chronopathy, [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee), Psionic** |         **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|---------------------------------|------------------------:|\n| **📏 [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 2**                  | **🎯 Self or one ally** |\n\n**Effect:** [Ability rolls](scc.v1:mcdm.heroes.v1/rule.dice/ability-roll) made against the target take a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). Whenever the target takes damage while under this effect, they can use a [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) to make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against the source of the damage.\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "talent",
+      "cost": "3 Clarity",
+      "distance": "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 2",
+      "effects": [
+        {
+          "effect": "[Ability rolls](scc.v1:mcdm.heroes.v1/rule.dice/ability-roll) made against the target take a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) until the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn). Whenever the target takes damage while under this effect, they can use a [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) to make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against the source of the damage.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "You give a target a glimpse into the future so that they're ready for what comes next.",
+      "keywords": [
+        "Chronopathy",
+        "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)",
+        "Psionic"
+      ],
+      "level": "1",
+      "target": "Self or one ally"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.talent.level-1/remote-assistance",
+    "kind": "ability",
+    "name": "Remote Assistance",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-1/remote-assistance.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/talent/level-1/remote-assistance.json",
+    "selection": "talent-level-one",
+    "text": "---\naction_type: '[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: talent\ndistance: '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10'\neffects:\n    - effect: The next [ability roll](scc.v1:mcdm.heroes.v1/rule.dice/ability-roll) an ally makes against the target before the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) gains an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge).\n      name: Effect\n    - cost: Spend 1 Clarity\n      effect: You target one additional creature or object.\nflavor: An ally gains the benefit of your intellect.\nkeywords:\n    - Psionic\n    - '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)'\nlevel: \"1\"\nname: Remote Assistance\nscc: mcdm.heroes.v1/feature.ability.talent.level-1/remote-assistance\nsubclass: telepathy\ntarget: One creature or object\ntype: ability\n---\n\n\n*An ally gains the benefit of your intellect.*\n\n| **Psionic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)** |                  **[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|---------------------|------------------------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**    | **🎯 One creature or object** |\n\n\n**Effect:** The next [ability roll](scc.v1:mcdm.heroes.v1/rule.dice/ability-roll) an ally makes against the target before the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) gains an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge).\n\n**Spend 1 Clarity:** You target one additional creature or object.\n",
+    "structured": {
+      "action_type": "[Maneuver](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "talent",
+      "distance": "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10",
+      "effects": [
+        {
+          "effect": "The next [ability roll](scc.v1:mcdm.heroes.v1/rule.dice/ability-roll) an ally makes against the target before the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) gains an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge).",
+          "name": "Effect"
+        },
+        {
+          "cost": "Spend 1 Clarity",
+          "effect": "You target one additional creature or object."
+        }
+      ],
+      "flavor": "An ally gains the benefit of your intellect.",
+      "keywords": [
+        "Psionic",
+        "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)"
+      ],
+      "level": "1",
+      "subclass": "telepathy",
+      "target": "One creature or object"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.talent.level-1/repel",
+    "kind": "ability",
+    "name": "Repel",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-1/repel.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/talent/level-1/repel.json",
+    "selection": "talent-level-one",
+    "text": "---\naction_type: '[Triggered](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action)'\nclass: talent\ndistance: '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10'\neffects:\n    - effect: The target takes half the triggering damage, or the [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) of the triggering [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) is reduced by a number of squares equal to your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score. If the target took damage and was force moved, you choose the effect. If the [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) is reduced to 0 squares, the target can [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) the source of the [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) a number of squares equal to your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score.\n      name: Effect\nflavor: They aren't going anywhere, but you might!\nkeywords:\n    - Psionic\n    - '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)'\nlevel: \"1\"\nname: Repel\nscc: mcdm.heroes.v1/feature.ability.talent.level-1/repel\nsubclass: telekinesis\nsubtype: triggered\ntarget: Self or one ally\ntrigger: The target takes damage or is [force moved](scc.v1:mcdm.heroes.v1/movement/forced-movement).\ntype: ability\n---\n\n\n*They aren't going anywhere, but you might!*\n\n| **Psionic, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)** |           **[Triggered](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action)** |\n|---------------------|------------------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**    | **🎯 Self or one ally** |\n\n**Trigger:** The target takes damage or is [force moved](scc.v1:mcdm.heroes.v1/movement/forced-movement).\n\n**Effect:** The target takes half the triggering damage, or the [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) of the triggering [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) is reduced by a number of squares equal to your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score. If the target took damage and was force moved, you choose the effect. If the [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) is reduced to 0 squares, the target can [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) the source of the [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) a number of squares equal to your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score.\n",
+    "structured": {
+      "action_type": "[Triggered](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action)",
+      "class": "talent",
+      "distance": "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10",
+      "effects": [
+        {
+          "effect": "The target takes half the triggering damage, or the [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) of the triggering [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) is reduced by a number of squares equal to your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score. If the target took damage and was force moved, you choose the effect. If the [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) is reduced to 0 squares, the target can [push](scc.v1:mcdm.heroes.v1/movement/forced-movement) the source of the [forced movement](scc.v1:mcdm.heroes.v1/movement/forced-movement) a number of squares equal to your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score.",
+          "name": "Effect"
+        }
+      ],
+      "flavor": "They aren't going anywhere, but you might!",
+      "keywords": [
+        "Psionic",
+        "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)"
+      ],
+      "level": "1",
+      "subclass": "telekinesis",
+      "subtype": "triggered",
+      "target": "Self or one ally",
+      "trigger": "The target takes damage or is [force moved](scc.v1:mcdm.heroes.v1/movement/forced-movement)."
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.talent.level-1/smolder",
+    "kind": "ability",
+    "name": "Smolder",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-1/smolder.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/talent/level-1/smolder.json",
+    "selection": "talent-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: talent\ncost: 3 Clarity\ndistance: '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10'\neffects:\n    - effect: 'Choose the [damage type](scc.v1:mcdm.heroes.v1/rule.damage/damage-type) and the weakness for this ability from one of the following: acid, corruption, or fire. The target takes damage before this ability imposes any weakness.'\n      name: Effect\n    - roll: Power Roll + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason)\n      tier1: 3 + R damage; R < WEAK, the target has weakness 5 (save ends)\n      tier2: 6 + R damage; R < AVERAGE, the target has weakness 5 (save ends)\n      tier3: 9 + R damage; R < STRONG, the target has weakness equal to 5 + your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score (save ends)\nflavor: Smoke flows from your enemy like tears as their skin begins to blacken and flake.\nkeywords:\n    - Psionic\n    - Pyrokinesis\n    - '[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)'\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\nlevel: \"1\"\nname: Smolder\npower_roll_characteristic: '[Reason](scc.v1:mcdm.heroes.v1/rule.character/reason)'\nscc: mcdm.heroes.v1/feature.ability.talent.level-1/smolder\ntarget: One creature\ntier1: 3 + R damage; R < WEAK, the target has weakness 5 (save ends)\ntier2: 6 + R damage; R < AVERAGE, the target has weakness 5 (save ends)\ntier3: 9 + R damage; R < STRONG, the target has weakness equal to 5 + your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score (save ends)\ntype: ability\n---\n\n\n*Smoke flows from your enemy like tears as their skin begins to blacken and flake.*\n\n| **Psionic, Pyrokinesis, [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged), [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)** |     **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|------------------------------------------|--------------------:|\n| **📏 [Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10**                         | **🎯 One creature** |\n\n**Effect:** Choose the [damage type](scc.v1:mcdm.heroes.v1/rule.damage/damage-type) and the weakness for this ability from one of the following: acid, corruption, or fire. The target takes damage before this ability imposes any weakness.\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason):**\n\n- **≤11:** 3 + R damage; R < WEAK, the target has weakness 5 (save ends)\n- **12-16:** 6 + R damage; R < AVERAGE, the target has weakness 5 (save ends)\n- **17+:** 9 + R damage; R < STRONG, the target has weakness equal to 5 + your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score (save ends)\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "talent",
+      "cost": "3 Clarity",
+      "distance": "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged) 10",
+      "effects": [
+        {
+          "effect": "Choose the [damage type](scc.v1:mcdm.heroes.v1/rule.damage/damage-type) and the weakness for this ability from one of the following: acid, corruption, or fire. The target takes damage before this ability imposes any weakness.",
+          "name": "Effect"
+        },
+        {
+          "roll": "Power Roll + [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason)",
+          "tier1": "3 + R damage; R < WEAK, the target has weakness 5 (save ends)",
+          "tier2": "6 + R damage; R < AVERAGE, the target has weakness 5 (save ends)",
+          "tier3": "9 + R damage; R < STRONG, the target has weakness equal to 5 + your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score (save ends)"
+        }
+      ],
+      "flavor": "Smoke flows from your enemy like tears as their skin begins to blacken and flake.",
+      "keywords": [
+        "Psionic",
+        "Pyrokinesis",
+        "[Ranged](scc.v1:mcdm.heroes.v1/rule.combat/ranged)",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Reason](scc.v1:mcdm.heroes.v1/rule.character/reason)",
+      "target": "One creature",
+      "tier1": "3 + R damage; R < WEAK, the target has weakness 5 (save ends)",
+      "tier2": "6 + R damage; R < AVERAGE, the target has weakness 5 (save ends)",
+      "tier3": "9 + R damage; R < STRONG, the target has weakness equal to 5 + your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score (save ends)"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.ability.talent.level-1/spirit-sword",
+    "kind": "ability",
+    "name": "Spirit Sword",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/talent/level-1/spirit-sword.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/ability/talent/level-1/spirit-sword.json",
+    "selection": "talent-level-one",
+    "text": "---\naction_type: '[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)'\nclass: talent\ndistance: '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 2'\neffects:\n    - roll: Power Roll + [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence)\n      tier1: 3 + P damage\n      tier2: 6 + P damage\n      tier3: 9 + P damage\n    - effect: You gain 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge).\n      name: Effect\n    - effect: The target takes an extra 3 damage. You also take 3 damage that can't be reduced in any way.\n      name: Strained\nflavor: You form a blade of mind energy and stab your target, invigorating yourself.\nkeywords:\n    - Animapathy\n    - '[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)'\n    - Psionic\n    - '[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)'\nlevel: \"1\"\nname: Spirit Sword\npower_roll_characteristic: '[Presence](scc.v1:mcdm.heroes.v1/rule.character/presence)'\nscc: mcdm.heroes.v1/feature.ability.talent.level-1/spirit-sword\nsubtype: signature\ntarget: One creature or object\ntier1: 3 + P damage\ntier2: 6 + P damage\ntier3: 9 + P damage\ntype: ability\n---\n\n\n*You form a blade of mind energy and stab your target, invigorating yourself.*\n\n| **Animapathy, [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee), Psionic, [Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)** |               **[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)** |\n|----------------------------------------|------------------------------:|\n| **📏 [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 2**                         | **🎯 One creature or object** |\n\n**[Power Roll](scc.v1:mcdm.heroes.v1/rule.dice/power-roll) + [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence):**\n\n- **≤11:** 3 + P damage\n- **12-16:** 6 + P damage\n- **17+:** 9 + P damage\n\n**Effect:** You gain 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge).\n\n**Strained:** The target takes an extra 3 damage. You also take 3 damage that can't be reduced in any way.\n",
+    "structured": {
+      "action_type": "[Main action](scc.v1:mcdm.heroes.v1/rule.combat/turn)",
+      "class": "talent",
+      "distance": "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 2",
+      "effects": [
+        {
+          "roll": "Power Roll + [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence)",
+          "tier1": "3 + P damage",
+          "tier2": "6 + P damage",
+          "tier3": "9 + P damage"
+        },
+        {
+          "effect": "You gain 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge).",
+          "name": "Effect"
+        },
+        {
+          "effect": "The target takes an extra 3 damage. You also take 3 damage that can't be reduced in any way.",
+          "name": "Strained"
+        }
+      ],
+      "flavor": "You form a blade of mind energy and stab your target, invigorating yourself.",
+      "keywords": [
+        "Animapathy",
+        "[Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee)",
+        "Psionic",
+        "[Strike](scc.v1:mcdm.heroes.v1/rule.combat/strike)"
+      ],
+      "level": "1",
+      "power_roll_characteristic": "[Presence](scc.v1:mcdm.heroes.v1/rule.character/presence)",
+      "subtype": "signature",
+      "target": "One creature or object",
+      "tier1": "3 + P damage",
+      "tier2": "6 + P damage",
+      "tier3": "9 + P damage"
+    }
+  },
+  {
     "id": "mcdm.heroes.v1/feature.ability.time-raider/concussive-slam",
     "kind": "ability",
     "name": "Concussive Slam",
