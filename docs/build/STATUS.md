@@ -111,4 +111,4 @@ add narrative here. V46–V56 were the abandoned Opus pilot and are retired ids.
 | V98 | [Shadow level three](V98-shadow-level-three.md) | Merged (`66a0f3d`); cloud dev published; accepted TESTER results reused |
 | V99 | [Censor level one](V99-censor-level-one.md) | Merged (`517ea19`); cloud dev published; accepted TESTER results reused |
 | V100 | [Conduit level one](V100-conduit-level-one.md) | Merged (`5079192`); cloud dev published; accepted TESTER results reused |
-| V101 | [Complete Fury level one](V101-fury-level-one.md) | Ready for DEPLOY2; accepted 987 tests + six-build/40-action journey |
+| V101 | [Fury level one](V101-fury-level-one.md) | Merged (`e31335d`); cloud dev published; accepted TESTER results reused |

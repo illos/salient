@@ -113,7 +113,14 @@ See [the release evidence](build/evidence/V43/hosted/README.md) for browser resu
 fixture limitations and deployment logs. Earlier Worker versions in slice records are historical.
 
 
-## Current release — V100 Conduit level one
+## Current release — V101 Fury level one
+
+Backend/frontend source `e31335d0fa35ebcb2cc9e50af60d2d56f6c96c7f` published on 2026-09-21 as
+Worker `179f7087-1c06-4e07-a626-2ebc6473d69a`. Backend/schema validation, content reseed (1362
+entries), hosted build and upload succeeded. Accepted TESTER results reused; no smoke test or
+rerun. See [V101](build/V101-fury-level-one.md) and the [ledger](../deploy.md).
+
+## Previous release — V100 Conduit level one
 
 Backend/frontend source `507919299a83b079167c43f7da40c0a0c8bfa92e` published on 2026-09-21 as
 Worker `28baa4c0-dbb9-4b75-ad0a-7a596b8d54a2`. Backend/schema validation, content reseed (1361

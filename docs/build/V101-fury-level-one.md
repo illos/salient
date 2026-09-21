@@ -97,3 +97,11 @@ entries. The clean Heroes text supplies ability group membership. No Forge outpu
   at `c5334df` and `aca62e3`, packaging regression at `fa601c2`, and compiled-push proof at `0adef76`.
   Review persisted in [the rules audit](audits/V101-fury-rules-review.md). Ready for DEPLOY2;
   reuse accepted results during publication. No new runtime changes after the accepted journey.
+
+## Publication — 2026-09-21
+
+DEPLOY2 fast-forwarded reviewed `e31335d` into main and published the backend, 1362-entry content
+snapshot and frontend. Backend/schema validation, hosted build and upload succeeded. Worker:
+`179f7087-1c06-4e07-a626-2ebc6473d69a`. Accepted resumed 987-test gate and isolated six-build/
+40-action results were reused; no smoke test or test rerun. Release logs:
+`/srv/presidium/projects/salient/test-artifacts/V101-release-e31335d`.
