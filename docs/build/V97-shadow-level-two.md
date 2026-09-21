@@ -65,3 +65,17 @@ accept targetLevel. This is full editing, not an XP-gated advancement operation.
   the audit's shared-ancestor traversal classified redundant college/class conditions as unknown;
   use the college dependency itself, which already requires Shadow, to describe reachability once.
   Added the six source-identified abilities to the existing audit allowance; prior hashes retained.
+
+- TESTER `test-V97-71e665e-2` PASS (2026-09-21): `CI=true pnpm check` exit 0 in 180 seconds,
+  971 tests. Isolated `SALIENT_HEADLESS_COHORT=shadow-level-two pnpm test:headless:character`
+  exit 0 in 14.1 seconds: six complete builds, every new ability invoked with persisted costs,
+  source-derived damage/manual remainders, target-level save/reload, owner refusal, college
+  replacement, and effective-build separation. Backend stopped and ports released. Artifacts:
+  `/srv/presidium/projects/salient/test-artifacts/V97-71e665e`. Codegen produced no source diff.
+- Generated V26/V72 report correction from that job records all six level-two abilities as reachable
+  compatibility entries: 15 compiled, 1295 compatibility, 2 structurally supported but unavailable.
+  Existing compiled identities and prior audit hashes are unchanged. No automatic Shadow passive,
+  teleport, illusion, delayed detonation, gas-zone or surge handling is claimed.
+- ENGINE independently reviewed the rules and full implementation. Initial finding: invoke the
+  three rolled ability alternatives as well as listing them; fixed in `71e665e`. Chords 1333
+  confirms that finding resolved and no further code findings; final report review follows below.

@@ -17666,8 +17666,8 @@
           "message": "The effect on damage, payment, targeting or order is not established."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [
         {
           "name": "In a Puff of Ash",
@@ -17675,8 +17675,8 @@
           "decisionId": "class.shadow.level-2.burning-ash-ability",
           "level": 2,
           "grantKind": "heroic",
-          "selectable": "unknown",
-          "detail": "option In a Puff of Ash supportedInV001=true; chain unknown"
+          "selectable": "selectable",
+          "detail": "option In a Puff of Ash supportedInV001=true; chain selectable"
         }
       ],
       "movementFacts": "No compiled push."
@@ -17778,8 +17778,8 @@
           "message": "Only the designed single-target envelope is eligible."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [
         {
           "name": "Machinations of Sound",
@@ -17787,8 +17787,8 @@
           "decisionId": "class.shadow.level-2.friend-ability",
           "level": 2,
           "grantKind": "heroic",
-          "selectable": "unknown",
-          "detail": "option Machinations of Sound supportedInV001=true; chain unknown"
+          "selectable": "selectable",
+          "detail": "option Machinations of Sound supportedInV001=true; chain selectable"
         }
       ],
       "movementFacts": "No compiled push."
@@ -17863,8 +17863,8 @@
           "message": "Unrecognized action type."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [
         {
           "name": "So Gullible",
@@ -17872,8 +17872,8 @@
           "decisionId": "class.shadow.level-2.friend-ability",
           "level": 2,
           "grantKind": "heroic",
-          "selectable": "unknown",
-          "detail": "option So Gullible supportedInV001=true; chain unknown"
+          "selectable": "selectable",
+          "detail": "option So Gullible supportedInV001=true; chain selectable"
         }
       ],
       "movementFacts": "No compiled push."
@@ -17957,8 +17957,8 @@
           "message": "Section preserved as manual work; its effect on automation is not assumed independent."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [
         {
           "name": "Sticky Bomb",
@@ -17966,8 +17966,8 @@
           "decisionId": "class.shadow.level-2.trained-assassin-ability",
           "level": 2,
           "grantKind": "heroic",
-          "selectable": "unknown",
-          "detail": "option Sticky Bomb supportedInV001=true; chain unknown"
+          "selectable": "selectable",
+          "detail": "option Sticky Bomb supportedInV001=true; chain selectable"
         }
       ],
       "movementFacts": "No compiled push."
@@ -18054,8 +18054,8 @@
           "message": "Only the designed single-target envelope is eligible."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [
         {
           "name": "Stink Bomb",
@@ -18063,8 +18063,8 @@
           "decisionId": "class.shadow.level-2.trained-assassin-ability",
           "level": 2,
           "grantKind": "heroic",
-          "selectable": "unknown",
-          "detail": "option Stink Bomb supportedInV001=true; chain unknown"
+          "selectable": "selectable",
+          "detail": "option Stink Bomb supportedInV001=true; chain selectable"
         }
       ],
       "movementFacts": "No compiled push."
@@ -18139,8 +18139,8 @@
           "message": "Unrecognized action type."
         }
       ],
-      "live": "not-reachable",
-      "boundary": "No current standalone grant or public ordinary-foe loading path.",
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
       "grants": [
         {
           "name": "Too Slow",
@@ -18148,8 +18148,8 @@
           "decisionId": "class.shadow.level-2.burning-ash-ability",
           "level": 2,
           "grantKind": "heroic",
-          "selectable": "unknown",
-          "detail": "option Too Slow supportedInV001=true; chain unknown"
+          "selectable": "selectable",
+          "detail": "option Too Slow supportedInV001=true; chain selectable"
         }
       ],
       "movementFacts": "No compiled push."
@@ -169806,7 +169806,7 @@
   ],
   "liveCounts": {
     "compiled": 15,
-    "compatibility": 1289,
+    "compatibility": 1295,
     "compiledButUnavailable": 2
   }
 }

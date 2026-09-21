@@ -4757,11 +4757,11 @@
           "decisionId": "class.shadow.level-2.burning-ash-ability",
           "level": 2,
           "grantKind": "heroic",
-          "selectable": "unknown",
-          "detail": "option In a Puff of Ash supportedInV001=true; chain unknown"
+          "selectable": "selectable",
+          "detail": "option In a Puff of Ash supportedInV001=true; chain selectable"
         }
       ],
-      "availability": "unknown"
+      "availability": "selectable"
     },
     {
       "corpus": "hero-standalone",
@@ -4815,11 +4815,11 @@
           "decisionId": "class.shadow.level-2.friend-ability",
           "level": 2,
           "grantKind": "heroic",
-          "selectable": "unknown",
-          "detail": "option Machinations of Sound supportedInV001=true; chain unknown"
+          "selectable": "selectable",
+          "detail": "option Machinations of Sound supportedInV001=true; chain selectable"
         }
       ],
-      "availability": "unknown"
+      "availability": "selectable"
     },
     {
       "corpus": "hero-standalone",
@@ -4862,11 +4862,11 @@
           "decisionId": "class.shadow.level-2.friend-ability",
           "level": 2,
           "grantKind": "heroic",
-          "selectable": "unknown",
-          "detail": "option So Gullible supportedInV001=true; chain unknown"
+          "selectable": "selectable",
+          "detail": "option So Gullible supportedInV001=true; chain selectable"
         }
       ],
-      "availability": "unknown"
+      "availability": "selectable"
     },
     {
       "corpus": "hero-standalone",
@@ -4927,11 +4927,11 @@
           "decisionId": "class.shadow.level-2.trained-assassin-ability",
           "level": 2,
           "grantKind": "heroic",
-          "selectable": "unknown",
-          "detail": "option Sticky Bomb supportedInV001=true; chain unknown"
+          "selectable": "selectable",
+          "detail": "option Sticky Bomb supportedInV001=true; chain selectable"
         }
       ],
-      "availability": "unknown"
+      "availability": "selectable"
     },
     {
       "corpus": "hero-standalone",
@@ -4989,11 +4989,11 @@
           "decisionId": "class.shadow.level-2.trained-assassin-ability",
           "level": 2,
           "grantKind": "heroic",
-          "selectable": "unknown",
-          "detail": "option Stink Bomb supportedInV001=true; chain unknown"
+          "selectable": "selectable",
+          "detail": "option Stink Bomb supportedInV001=true; chain selectable"
         }
       ],
-      "availability": "unknown"
+      "availability": "selectable"
     },
     {
       "corpus": "hero-standalone",
@@ -5036,11 +5036,11 @@
           "decisionId": "class.shadow.level-2.burning-ash-ability",
           "level": 2,
           "grantKind": "heroic",
-          "selectable": "unknown",
-          "detail": "option Too Slow supportedInV001=true; chain unknown"
+          "selectable": "selectable",
+          "detail": "option Too Slow supportedInV001=true; chain selectable"
         }
       ],
-      "availability": "unknown"
+      "availability": "selectable"
     },
     {
       "corpus": "hero-standalone",

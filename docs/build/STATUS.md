@@ -106,5 +106,5 @@ add narrative here. V46–V56 were the abandoned Opus pilot and are retired ids.
 | V93 | [CI reuse and failure events](V93-ci-failure-events.md) | Merged (`a5a23ec`); targeted gate and real event delivery pass |
 | V94 | [Tactician level one](V94-tactician-level-one.md) | Merged (`fcf13f1`); cloud dev published; accepted TESTER gates reused |
 | V95 | [Account screen](V95-account-screen.md) | Merged (`1115380`); cloud dev published; accepted TESTER results reused |
-| V97 | [Shadow level two](V97-shadow-level-two.md) | Building on `slice/V97`; target-level wizard and Shadow choices |
+| V97 | [Shadow level two](V97-shadow-level-two.md) | TESTER PASS `71e665e` (971 + isolated six-build journey); review closeout |
 | V96 | [Character builder](V96-wizard-rail.md) | Merged (`1e20eec`); cloud dev published; accepted TESTER results reused |

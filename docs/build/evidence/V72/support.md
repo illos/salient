@@ -4,7 +4,7 @@ Structural support, current grant/loading availability and live execution are se
 
 Source: `fb83a789da8f0327a389c277a0c790b1648d5810`; content: `sha256:9778bbbd413dfe01afd0c76e26fc41542f6ce46957aa261af9bf541d5ba342ca`.
 
-Currently reachable compiled: 15; unchanged reachable compatibility: 1289; structurally supported but unavailable: 2.
+Currently reachable compiled: 15; unchanged reachable compatibility: 1295; structurally supported but unavailable: 2.
 
 | Ability | Population | Pure execution | Live boundary | Diagnostics |
 | --- | --- | --- | --- | --- |
@@ -152,12 +152,12 @@ Currently reachable compiled: 15; unchanged reachable compatibility: 1289; struc
 | Teamwork Has Its Place | hero-standalone | manual | legacy-compatibility | manual-section |
 | Two Throats at Once | hero-standalone | manual | legacy-compatibility | target-boundary |
 | You Were Watching the Wrong One | hero-standalone | manual | legacy-compatibility | manual-section |
-| In a Puff of Ash | hero-standalone | manual | not-reachable | unsafe-tier-remainder |
-| Machinations of Sound | hero-standalone | manual | not-reachable | grammar, unsafe-tier-remainder, manual-section, target-boundary |
-| So Gullible | hero-standalone | manual | not-reachable | grammar, manual-section, target-boundary, action-type |
-| Sticky Bomb | hero-standalone | manual | not-reachable | manual-section |
-| Stink Bomb | hero-standalone | manual | not-reachable | manual-section, target-boundary |
-| Too Slow | hero-standalone | manual | not-reachable | grammar, manual-section, target-boundary, action-type |
+| In a Puff of Ash | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder |
+| Machinations of Sound | hero-standalone | manual | legacy-compatibility | grammar, unsafe-tier-remainder, manual-section, target-boundary |
+| So Gullible | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary, action-type |
+| Sticky Bomb | hero-standalone | manual | legacy-compatibility | manual-section |
+| Stink Bomb | hero-standalone | manual | legacy-compatibility | manual-section, target-boundary |
+| Too Slow | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary, action-type |
 | Advanced Tactics | hero-standalone | manual | legacy-compatibility | grammar, manual-section, action-type |
 | Battle Cry | hero-standalone | manual | legacy-compatibility | grammar, unsafe-tier-remainder, target-boundary |
 | Concussive Strike | hero-standalone | supported | compiled |  |

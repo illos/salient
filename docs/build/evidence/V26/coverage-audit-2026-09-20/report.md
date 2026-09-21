@@ -109,9 +109,9 @@ Availability is derived from the composed wizard definitions (`getDefinitions(1)
 | hero-standalone | Teamwork Has Its Place | COMPILES_WITH_REMAINDER | — | single | selectable | class.shadow.signature-ability@1:selectable, class.shadow.signature-ability@2:selectable | effect-paragraph:effect |
 | hero-standalone | Two Throats at Once | COMPILES | — | multi | selectable | class.shadow.ability-3@1:selectable, class.shadow.ability-3@2:selectable | — |
 | hero-standalone | You Were Watching the Wrong One | COMPILES_WITH_REMAINDER | — | single | selectable | class.shadow.signature-ability@1:selectable, class.shadow.signature-ability@2:selectable | effect-paragraph:effect |
-| hero-standalone | In a Puff of Ash | COMPILES_WITH_REMAINDER | — | single | unknown | class.shadow.level-2.burning-ash-ability@2:unknown | you can teleport the target N square; you can teleport the target up to N squares |
-| hero-standalone | Sticky Bomb | COMPILES_WITH_REMAINDER | — | single | unknown | class.shadow.level-2.trained-assassin-ability@2:unknown | effect-paragraph:effect |
-| hero-standalone | Stink Bomb | COMPILES_WITH_REMAINDER | — | area | unknown | class.shadow.level-2.trained-assassin-ability@2:unknown | effect-paragraph:effect |
+| hero-standalone | In a Puff of Ash | COMPILES_WITH_REMAINDER | — | single | selectable | class.shadow.level-2.burning-ash-ability@2:selectable | you can teleport the target N square; you can teleport the target up to N squares |
+| hero-standalone | Sticky Bomb | COMPILES_WITH_REMAINDER | — | single | selectable | class.shadow.level-2.trained-assassin-ability@2:selectable | effect-paragraph:effect |
+| hero-standalone | Stink Bomb | COMPILES_WITH_REMAINDER | — | area | selectable | class.shadow.level-2.trained-assassin-ability@2:selectable | effect-paragraph:effect |
 | hero-standalone | Concussive Strike | COMPILES_WITH_REMAINDER | yes | single | selectable | class.tactician.ability-3@1:selectable, class.tactician.ability-3@2:selectable | potency:M < SYM dazed (save ends) |
 | hero-standalone | Hammer and Anvil | COMPILES_WITH_REMAINDER | — | single | selectable | class.tactician.ability-5@1:selectable, class.tactician.ability-5@2:selectable | effect-paragraph:effect; one ally within N squares of you can use a strike signature ability against the target as a free triggered action; one ally within N squares of you can use a strike signature ability that gains an edge against the target as a free triggered action; two allies within N squares of you can each use a strike signature ability that gains an edge against the target as a free triggered action |
 | hero-standalone | Inspiring Strike | COMPILES_WITH_REMAINDER | — | single | selectable | class.tactician.ability-3@1:selectable, class.tactician.ability-3@2:selectable | you or one ally within N squares of you can spend a recovery; you and one ally within N squares of you can spend a recovery, and each of you gains an edge on the next ability roll you make during the encounter |
@@ -178,9 +178,9 @@ Availability is derived from the composed wizard definitions (`getDefinitions(1)
 | hero-standalone | I'm No Threat | no-power-roll | selectable | no-power-roll; effect-paragraph:effect; resource-spend:spend N insight |
 | hero-standalone | In All This Confusion | no-power-roll | selectable | no-power-roll; trigger; effect-paragraph:effect; resource-spend:spend N+ insight |
 | hero-standalone | Shadowstrike | no-power-roll | selectable | no-power-roll; effect-paragraph:effect |
-| hero-standalone | Machinations of Sound | tier1-damage-outside-grammar | unknown | effect-paragraph:effect; tier:slide N |
-| hero-standalone | So Gullible | no-power-roll | unknown | no-power-roll; trigger; effect-paragraph:effect |
-| hero-standalone | Too Slow | no-power-roll | unknown | no-power-roll; trigger; effect-paragraph:effect |
+| hero-standalone | Machinations of Sound | tier1-damage-outside-grammar | selectable | effect-paragraph:effect; tier:slide N |
+| hero-standalone | So Gullible | no-power-roll | selectable | no-power-roll; trigger; effect-paragraph:effect |
+| hero-standalone | Too Slow | no-power-roll | selectable | no-power-roll; trigger; effect-paragraph:effect |
 | hero-standalone | Advanced Tactics | no-power-roll | selectable | no-power-roll; trigger; effect-paragraph:effect; resource-spend:spend N focus |
 | hero-standalone | Battle Cry | tier1-damage-outside-grammar | selectable | tier:each target gains N surge; tier:each target gains N surges |
 | hero-standalone | Mark | no-power-roll | selectable | no-power-roll; effect-paragraph:effect |
