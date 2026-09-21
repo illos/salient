@@ -21,7 +21,7 @@ import { SECOND_KIT_DECISION } from '../../shared/evaluate/classes/tactician';
  * controls). Availability, pools and permanent mechanics are owned by the shared evaluator.
  */
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { useNavigate } from '@tanstack/react-router';
+import { useBlocker, useNavigate } from '@tanstack/react-router';
 import { useConvex, useMutation, useQuery } from 'convex/react';
 import type { FunctionReturnType } from 'convex/server';
 import { api } from '../../convex/_generated/api';
@@ -56,7 +56,7 @@ import {
 import { Input } from '../components/ui/input';
 import { Textarea } from '../components/ui/textarea';
 import { StatBox } from '../components/stat-box';
-import { ErrorNotice, Field, Loading, Notice, useCommand } from '../ui';
+import { errorMessage, ErrorNotice, Field, Loading, Notice, useCommand } from '../ui';
 import { RuleLink, RuleReadMore } from '../rules/link';
 import { readableRuleText, ruleExcerpt } from '../rules/reference';
 import { Button } from '../components/ui/button';
@@ -1088,7 +1088,11 @@ const unsavedCharacter: WizardCharacter = {
   review: null,
 };
 
-function Wizard({ character }: { character: WizardCharacter }) {
+function Wizard({ initialCharacter }: { initialCharacter: WizardCharacter }) {
+  const [liveId, setLiveId] = useState(initialCharacter.id);
+  const liveCharacter = useQuery(api.characters.get, liveId ? { characterId: liveId } : 'skip');
+  // Never replace the editor with a loading screen while its first create is acknowledged.
+  const character = liveCharacter ?? initialCharacter;
   const definitions = useMemo(
     () => getDefinitions(character.level, character.choiceOrigins),
     [character.level, character.choiceOrigins],
@@ -1118,6 +1122,8 @@ function Wizard({ character }: { character: WizardCharacter }) {
   const [nameRequired, setNameRequired] = useState(false);
   const [saved, setSaved] = useState(false);
   const [dirty, setDirty] = useState(false);
+  const [saveError, setSaveError] = useState<string | null>(null);
+  const explicitSave = useRef(false);
   const [cleared, setCleared] = useState<string[]>([]);
   const [confirmedEmptyChoices, setConfirmedEmptyChoices] = useState<Set<string>>(() => new Set());
   // The step whose main chooser is deliberately reopened, and where to put focus after the
@@ -1156,10 +1162,11 @@ function Wizard({ character }: { character: WizardCharacter }) {
     setDirty(true);
   }
   function select(id: string, value: SelectionValue | undefined) {
-    if (command.pending) return;
+    if (explicitSave.current) return;
     setSaved(false);
     recordEdit();
     const pruned = changeChoice(selections, definitions, id, value);
+    snapshot.current.draft = draftSelectionsFrom(pruned.selections, definitions);
     setSelections(pruned.selections);
     setCleared(pruned.removed.filter(removed => removed !== id));
   }
@@ -1168,7 +1175,7 @@ function Wizard({ character }: { character: WizardCharacter }) {
    * the result of the last, so both kits settle against one base instead of racing on stale state.
    */
   function selectMany(entries: [string, SelectionValue | undefined][]) {
-    if (command.pending) return;
+    if (explicitSave.current) return;
     setSaved(false);
     recordEdit();
     let working = selections;
@@ -1179,13 +1186,15 @@ function Wizard({ character }: { character: WizardCharacter }) {
       removed.push(...pruned.removed.filter(item => item !== id));
     }
     setSelections(working);
+    snapshot.current.draft = draftSelectionsFrom(working, definitions);
     setCleared([...new Set(removed)]);
   }
   function author(value: CharacterAuthored) {
-    if (command.pending) return;
+    if (explicitSave.current) return;
     setSaved(false);
     recordEdit();
     setAuthored(value);
+    snapshot.current.authored = value;
   }
   /**
    * Working-draft saving (V96, reworked after UI3's audit of 6b2c2bc).
@@ -1204,13 +1213,9 @@ function Wizard({ character }: { character: WizardCharacter }) {
     campaignId: character.campaignId,
   });
   useEffect(() => {
-    snapshot.current = {
-      authored,
-      draft,
-      level: character.level,
-      campaignId: character.campaignId,
-    };
-  });
+    snapshot.current.level = character.level;
+    snapshot.current.campaignId = character.campaignId;
+  }, [character.level, character.campaignId]);
   const idRef = useRef(character.id);
   const revisionRef = useRef(character.revision);
   const effectiveRef = useRef(character.effectiveRevisionId);
@@ -1243,6 +1248,7 @@ function Wizard({ character }: { character: WizardCharacter }) {
         wizardDraft: true,
       });
       idRef.current = id;
+      setLiveId(id);
       revisionRef.current = 1;
       setExpectedRevision(1);
       return;
@@ -1263,14 +1269,18 @@ function Wizard({ character }: { character: WizardCharacter }) {
   /** Run the queue and report what it still owes; a failure leaves the work outstanding. */
   async function drain() {
     try {
+      if (character.combatLocked || (character.fullEditIsStale && !reconciled))
+        throw new Error('Review the editing notice before saving these changes.');
       await queue.run(persistDraft);
-    } catch {
-      // The explicit save reports the reason; the next edit or the flush retries.
+      setSaveError(null);
+    } catch (error) {
+      setSaveError(errorMessage(error));
     }
     setDirty(queue.outstanding());
     return !queue.outstanding();
   }
   async function persist(close: boolean) {
+    if (explicitSave.current) return;
     setSaved(false);
     if (!snapshot.current.authored.name.trim()) {
       goTo(PRESENTED.findIndex(step => step.id === 'step.details'));
@@ -1280,12 +1290,15 @@ function Wizard({ character }: { character: WizardCharacter }) {
     setNameRequired(false);
     // The explicit save shares the queue: drain the working draft first so the listing save
     // writes on top of every edit, then list the hero under one command id.
-    await drain();
+    explicitSave.current = true;
     const ok = await command.run(
       async commandId => {
+        if (!(await drain()))
+          throw new Error('The working draft could not be saved. Retry before leaving.');
         const { authored: fields, draft: selections, level } = snapshot.current;
         if (!idRef.current) {
           idRef.current = await create({ commandId, authored: fields, selections });
+          setLiveId(idRef.current);
           revisionRef.current = 1;
           setExpectedRevision(1);
           return;
@@ -1306,6 +1319,7 @@ function Wizard({ character }: { character: WizardCharacter }) {
       },
       JSON.stringify(['characters.save', idRef.current, revisionRef.current, authored, draft]),
     );
+    explicitSave.current = false;
     if (ok) {
       setSaved(true);
       setDirty(queue.outstanding());
@@ -1464,8 +1478,8 @@ function Wizard({ character }: { character: WizardCharacter }) {
           (Boolean(character.id) || confirmedEmptyChoices.has(primary.id))
         )));
   // One quiet write a short while after the last change, not one per keystroke or click.
-  // Leaving the page must not drop the pending write: the draft's whole promise is that it
-  // survives leaving and reloading. Unmount cancels the timer, so flush there too.
+  // Site navigation waits for acknowledgement. Reload/close uses the browser's unsaved warning;
+  // no asynchronous unmount callback can promise persistence after the document is destroyed.
   const flush = useRef(drain);
   useEffect(() => {
     flush.current = drain;
@@ -1475,7 +1489,14 @@ function Wizard({ character }: { character: WizardCharacter }) {
     const timer = setTimeout(() => void flush.current(), 800);
     return () => clearTimeout(timer);
   }, [dirty, selections, authored, command.pending, stale, character.combatLocked]);
-  useEffect(() => () => void flush.current(), []);
+  useBlocker({
+    shouldBlockFn: async () => {
+      if (explicitSave.current) return true;
+      if (!queue.outstanding()) return false;
+      return !(await flush.current());
+    },
+    enableBeforeUnload: () => queue.outstanding() || explicitSave.current,
+  });
   useEffect(() => {
     if (!focusAfterChange) return;
     const target = primaryExpanded ? chooserRef.current : editRef.current;
@@ -1645,6 +1666,19 @@ function Wizard({ character }: { character: WizardCharacter }) {
         <div className="flex min-w-0 flex-col gap-(--page-gap)">
           <section className="rounded-lg bg-card" aria-label="Current step">
             <div className="p-6" data-wizard-pane="centre">
+              {saveError && (
+                <div className="mb-4">
+                  <ErrorNotice error={saveError} />
+                  <Button type="button" variant="outline" onClick={() => void drain()}>
+                    Retry saving
+                  </Button>
+                </div>
+              )}
+              {dirty && !saveError && (
+                <p role="status" className="mb-4 text-sm text-muted-foreground">
+                  Saving changes…
+                </p>
+              )}
               {nameRequired && (
                 <p role="alert" className="mb-4 text-base text-destructive">
                   Enter a name in Details before saving your character.
@@ -1853,7 +1887,7 @@ function Wizard({ character }: { character: WizardCharacter }) {
                       size="sm"
                       disabled={cultureSkills.every(d => selections[d.id] === undefined)}
                       onClick={() => {
-                        for (const decision of cultureSkills) select(decision.id, undefined);
+                        selectMany(cultureSkills.map(decision => [decision.id, undefined]));
                       }}
                     >
                       Clear
@@ -1866,7 +1900,7 @@ function Wizard({ character }: { character: WizardCharacter }) {
                     const count = poolOf(decision, selections, definitions).values.length;
                     return renderDecision(
                       decision,
-                      select,
+                      undefined,
                       [typeof parent === 'string' ? parent : null, `${count} options`]
                         .filter(Boolean)
                         .join(' · '),
@@ -1931,25 +1965,32 @@ function Wizard({ character }: { character: WizardCharacter }) {
 }
 
 export function WizardPage({ characterId }: { characterId?: Id<'characters'> }) {
+  return <WizardRoute key={characterId ?? 'new'} characterId={characterId} />;
+}
+
+function WizardRoute({ characterId }: { characterId?: Id<'characters'> }) {
   // A new hero resumes this owner's working draft when they have one, so leaving and returning
   // continues the same build instead of starting another unlisted row (V96).
   const existingDraft = useQuery(api.characters.wizardDraft, characterId ? 'skip' : {});
-  const resolved = characterId ?? existingDraft ?? undefined;
-  const character = useQuery(api.characters.get, resolved ? { characterId: resolved } : 'skip');
   if (!characterId && existingDraft === undefined)
     return (
       <div className="p-10">
         <Loading>Opening the character builder…</Loading>
       </div>
     );
-  if (resolved && character === undefined)
+  return <WizardEntry initialId={characterId ?? existingDraft ?? undefined} />;
+}
+
+function WizardEntry({ initialId }: { initialId?: Id<'characters'> }) {
+  // Freeze the entry decision. A reactive owner-draft query changing after create (or in another
+  // tab) must neither unmount this editor nor switch it to a different character.
+  const [id] = useState(initialId);
+  const character = useQuery(api.characters.get, id ? { characterId: id } : 'skip');
+  if (id && character === undefined)
     return (
       <div className="p-10">
         <Loading>Loading character…</Loading>
       </div>
     );
-  // The key is the route, not the character: creating the working draft makes this character
-  // appear under an unchanged route, and remounting there would discard whatever the hero was
-  // edited to while the create was in flight (V96, after UI3's audit).
-  return <Wizard key={characterId ?? 'new'} character={character ?? unsavedCharacter} />;
+  return <Wizard initialCharacter={character ?? unsavedCharacter} />;
 }

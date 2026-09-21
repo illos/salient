@@ -59,6 +59,9 @@ function CultureCard({
         aria-label={name}
         checked={checked}
         onChange={onChange}
+        onClick={() => {
+          if (checked) onChange();
+        }}
         className="sr-only"
       />
       <span className="text-base font-medium">{name}</span>

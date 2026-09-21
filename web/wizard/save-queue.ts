@@ -45,7 +45,8 @@ export function createSaveQueue(): SaveQueue {
     run(persist) {
       // Join the save already in flight: its loop picks up whatever has been recorded since.
       if (running) return running;
-      running = (async () => {
+      // Defer the loop until after assignment, including an empty run or synchronous failure.
+      running = Promise.resolve().then(async () => {
         try {
           while (persisted < recorded) {
             // Read the counter before the write, not after: edits that land during the await
@@ -57,7 +58,7 @@ export function createSaveQueue(): SaveQueue {
         } finally {
           running = null;
         }
-      })();
+      });
       return running;
     },
   };

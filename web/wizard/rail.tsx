@@ -211,9 +211,8 @@ export function StepRail({
   /** Step navigation, at the foot of the rail (V96). */
   footer?: React.ReactNode;
 }) {
-  // Count the whole tree: a nested step is still a step of the build, and `currentIndex` is a
-  // position in the presented sequence rather than in this list.
-  const all = steps.flatMap(step => [step, ...step.children]);
+  // Progress includes applicable nested sections; page position counts only navigable pages.
+  const all = steps.flatMap(step => [step, ...step.children.filter(child => child.choices > 0)]);
   const completed = all.filter(step => step.done).length;
   const percent = all.length ? Math.round((completed / all.length) * 100) : 0;
   return (
@@ -228,7 +227,7 @@ export function StepRail({
       </div>
       <div className="mt-1 mb-2 flex items-baseline justify-between gap-2 text-sm text-muted-foreground">
         <span>
-          Step {currentIndex + 1} of {all.length}
+          Step {currentIndex + 1} of {steps.length}
         </span>
         <span className="tabular-nums">{percent}%</span>
       </div>

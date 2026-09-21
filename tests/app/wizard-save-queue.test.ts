@@ -7,6 +7,19 @@
 import { expect, test } from 'vitest';
 import { createSaveQueue } from '../../web/wizard/save-queue';
 
+test('an empty drain does not prevent the next edit from being saved', async () => {
+  const queue = createSaveQueue();
+  let calls = 0;
+  const persist = async () => {
+    calls += 1;
+  };
+  await queue.run(persist);
+  queue.edit();
+  await queue.run(persist);
+  expect(calls).toBe(1);
+  expect(queue.outstanding()).toBe(false);
+});
+
 /** A persist that resolves when the test says so, recording the state it was handed. */
 function controllable(state: { value: string }) {
   const calls: string[] = [];

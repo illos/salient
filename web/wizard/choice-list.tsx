@@ -132,6 +132,10 @@ export function ChoiceRow({
           checked={checked}
           disabled={!supported}
           onChange={onChange}
+          onClick={() => {
+            // Re-selecting the current primary option closes its reopened chooser too.
+            if (type === 'radio' && checked) onChange();
+          }}
           className="sr-only"
         />
         <span className="flex items-baseline gap-2">

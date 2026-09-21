@@ -458,7 +458,11 @@ browser. The first choice creates the character, every later change is saved to 
 and it may have no name yet. That draft is shown only inside the wizard: it is absent from the
 owner's character list until they save the hero, which is the action that requires the name and
 lists it. Opening the wizard for a new hero resumes the owner's existing working draft, so there
-is never more than one. Leaving or reloading keeps the draft rather than discarding it. Every
+is never more than one. A competing first-create from another tab is refused explicitly, without
+overwriting the existing draft or acknowledging edits it did not store. In-app navigation waits
+for pending edits to save and stays in the editor with a retry notice if saving fails. Reloading
+or closing while edits remain unsaved uses the browser's leave warning; forcing that exit can
+discard those unsaved edits. Acknowledged drafts resume after leaving or reloading. Every
 other creation route still requires a name at creation and is listed immediately. The paragraph
 below records the behavior this replaces.
 

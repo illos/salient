@@ -176,11 +176,12 @@ The wizard no longer holds an unsaved character in the browser. `characters.crea
 `wizardDraft`, which allows a nameless character and marks it as the wizard's own; `characters.save`
 takes `list`, which is the save that requires the name and puts it in the owner's list;
 `characters.listMine` omits working drafts; `characters.wizardDraft` returns the owner's one draft
-so the wizard resumes it. The wizard autosaves 800 ms after the last change, shows the save state
-in its header, and Exit keeps the draft. Proof: `tests/app/wizard-draft.test.ts`, two cases.
+so the wizard resumes it. The wizard autosaves 800 ms after the last change and shows pending
+changes or a retryable failure in the editor. Navigation waits for acknowledgement; reload/close
+warns while unsaved (forcing that exit can discard unsaved edits).
 
 Known consequence: an abandoned draft stays as an unlisted row. It is capped at one per owner by
-the resume, and it counts against the hundred-character creation limit.
+the create transaction, and it counts against the hundred-character creation limit.
 
 ## Hero column
 
@@ -195,27 +196,36 @@ answering before the hero is finished. A missing value still reads "Pending".
 
 ## UI3 audit of 6b2c2bc, and the fixes
 
-UI3 found four defects in the working-draft save path. All are fixed on this branch.
+UI3 found four defects in the working-draft save path. The follow-up audit also caught an empty
+queue run wedging later saves, a loading branch still unmounting the new editor, and unmount
+flushing being unable to protect failed navigation. UI3 took ownership at `f5c09a3`.
 
 - **P1, the save race.** Autosave cleared the dirty flag after awaiting, so an edit made during a
   save was marked as already saved and lost; a second edit arriving mid-save was dropped outright;
   and creating the character navigated, remounting the editor over any edit made meanwhile. Saves
   now go through one serialized queue (`web/wizard/save-queue.ts`) that counts edits and records
   which count a completed save covered, looping until they agree. Creating no longer navigates,
-  and the page keys the editor on the route rather than the character, so the draft appearing does
-  not remount it. Proof: `tests/app/wizard-save-queue.test.ts`, three cases including the delayed
-  edit and a failed save leaving the work outstanding.
+  and route entry pins its initial character while the editor subscribes to its created id without
+  a loading replacement. Synchronous edit handlers update the save snapshot. The queue defers its
+  loop until its promise is assigned, so even an empty drain leaves it reusable. Proof:
+  `tests/app/wizard-save-queue.test.ts`, including delayed edits, retries and the empty-drain bug.
 - **P1, leaving the page.** The debounce was cancelled on unmount, so navigating within 800 ms of
-  an edit lost it, against the draft's whole promise. The editor now flushes the queue on unmount,
-  and the explicit save drains the same queue before listing the hero, so the two cannot interleave.
+  an edit lost it. A router blocker now awaits the queue before allowing navigation, retaining
+  the editor with an error/retry control on failure. Browser reload/close warns while unsaved;
+  forcibly leaving can discard pending edits. Explicit save locks editing before draining and
+  listing, so it cannot interleave with new edits or a navigation flush.
 - **P1, the effective revision.** Autosave advanced `expectedRevision` but not
   `expectedEffectiveRevisionId`, so a complete standalone build went stale against its own save.
   Both paths now use one `reconcileEffective`, which adopts only the revision that save produced.
 - **P2, one draft per owner.** `create` did not enforce it, so two tabs could leave hidden rows
-  against the hundred-character limit. A wizard-draft create now returns the owner's open draft
-  instead of inserting another; the mutation is a transaction, so the read and the insert cannot
-  interleave. Proof: `tests/app/wizard-draft.test.ts`, two tabs with distinct command ids, and a
-  new draft allowed once the first is saved into the list.
+  against the hundred-character limit. A competing wizard-draft create now rejects with an
+  explicit conflict instead of pretending it saved the new tab's different edits. Same-command
+  retries still return the receipt. The transaction protects uniqueness. Proof:
+  `tests/app/wizard-draft.test.ts`, distinct-command conflict with unchanged persisted content,
+  idempotent retry, and a new draft allowed once the first is listed.
+
+The follow-up also fixed reselecting an already-checked primary radio to close its chooser and
+clearing all culture skills in one composed transition instead of racing three stale-state edits.
 
 ## Flagged for audit: the Tactician's two kits
 

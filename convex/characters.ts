@@ -380,7 +380,10 @@ export const create = mutation({
     // A mutation is a transaction, so this read-then-insert cannot interleave with another.
     if (args.wizardDraft === true) {
       const open = existing.find(character => character.wizardDraft === true);
-      if (open) return open._id;
+      if (open)
+        throw new ConvexError(
+          'A working draft already exists. Reload to resume it; this tab has not overwritten it.',
+        );
     }
     if (existing.length >= 100) throw new ConvexError('Prototype limit of 100 characters reached.');
     const selections = validatedSelections(args.selections ?? [], 1);

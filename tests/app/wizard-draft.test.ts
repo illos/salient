@@ -84,18 +84,29 @@ test('an owner keeps one working draft however many tabs ask for one', async () 
   const t = backend();
   const owner = await account(t, 'TwoTabs');
 
-  // Two tabs, two command ids: the second must join the first draft rather than hide another.
+  // A second tab must not silently acknowledge edits that were never written to the first.
   const first = await owner.client.mutation(api.characters.create, {
     commandId: 'wizard-draft-tab-one',
     authored: blank,
     wizardDraft: true,
   });
-  const second = await owner.client.mutation(api.characters.create, {
-    commandId: 'wizard-draft-tab-two',
-    authored: blank,
-    wizardDraft: true,
-  });
-  expect(second).toEqual(first);
+  await expect(
+    owner.client.mutation(api.characters.create, {
+      commandId: 'wizard-draft-tab-two',
+      authored: { ...blank, notes: 'Unsaved second-tab edits' },
+      wizardDraft: true,
+    }),
+  ).rejects.toThrow(/working draft already exists/i);
+  expect((await owner.client.query(api.characters.get, { characterId: first })).authored).toEqual(
+    blank,
+  );
+  expect(
+    await owner.client.mutation(api.characters.create, {
+      commandId: 'wizard-draft-tab-one',
+      authored: blank,
+      wizardDraft: true,
+    }),
+  ).toEqual(first);
   expect(await owner.client.query(api.characters.wizardDraft, {})).toEqual(first);
   expect(await owner.client.query(api.characters.listMine, {})).toEqual([]);
 
