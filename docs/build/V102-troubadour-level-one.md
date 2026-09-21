@@ -49,3 +49,15 @@ Rules authority: pinned Compendium `fb83a789da8f0327a389c277a0c790b1648d5810`, u
   Focused evaluator test passes 2/2. Authored cohort covers 44 distinct actions (24 source envelopes,
   four kit signatures, 16 embedded uses), persisted damage/manual remainder, source costs, owner
   refusal, class-act edit isolation, and Cutting Sarcasm's bleeding applied/resisted paths.
+
+- Final independent ENGINE static PASS `189cec8`; [written review](audits/V102-troubadour-rules-review.md).
+  No blocking findings. Both authoring typechecks, focused evaluator 2/2 and grammar/report 31/31
+  passed before the frozen submission.
+- TESTER `189cec8`: `CI=true pnpm check` exit 0 in 195s, 990 tests (389 engine + 601 app/scripts),
+  including all content/report/link/vendor/build gates. Isolated
+  `SALIENT_HEADLESS_COHORT=troubadour node scripts/verify-character-headless.ts` exit 0 in 69.7s:
+  four builds and 44 distinct actions, including Cutting Sarcasm applied/resisted bleeding with
+  source-use instance/save registration readback. Backend stopped, ports free, checkout released.
+  Artifacts: `/srv/presidium/projects/salient/test-artifacts/V102-189cec8`.
+- Ready for DEPLOY2. Source/runtime frozen at `189cec8`; this closeout adds evidence only.
+  Reuse accepted TESTER results for publication, with no smoke or repeated live gate.
