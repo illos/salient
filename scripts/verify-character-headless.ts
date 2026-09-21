@@ -18,6 +18,7 @@ import {
 import { runFury } from './headless/fury.ts';
 import { runConduit } from './headless/conduit.ts';
 import { runCensor } from './headless/censor.ts';
+import { runShadowLevelSix } from './headless/shadow-level-six.ts';
 import { runShadowLevelThree } from './headless/shadow-level-three.ts';
 import { runShadowLevelTwo } from './headless/shadow-level-two.ts';
 import { runTactician } from './headless/tactician.ts';
@@ -43,6 +44,7 @@ const cohorts = {
   tactician: runTactician,
   'shadow-level-two': runShadowLevelTwo,
   'shadow-level-three': runShadowLevelThree,
+  'shadow-level-six': runShadowLevelSix,
   culture: runCulturePresets,
   'complication-choices': runComplicationChoices,
   'complication-table': runComplicationTable,

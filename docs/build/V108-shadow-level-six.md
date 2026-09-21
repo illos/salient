@@ -21,3 +21,8 @@ Extend all Shadow colleges through target level six in the full build wizard and
 
 - Started from main `90ebdd5`, branch `slice/V108`, worktree `.worktrees/shadow-six`.
 - ENGINE source audit identifies 14 feature files, 11 ability envelopes, characteristic and echelon transitions, and explicit delayed/before-damage timing boundaries.
+
+- Author checks: both TypeScript projects pass; focused source-ledger/transition/ancestry test 3/3 passes. Eight core builds cover every characteristic choice, all four arrays, all colleges and eleven ability envelopes; two additional persisted Spark builds cover native and borrowed level-six values.
+- TESTER generation at `46b27e3` passed content/audit/support (1.06/0.74/1.03s), 1654 entries. Artifacts `/srv/presidium/projects/salient/test-artifacts/V108-46b27e3-generation`.
+- New source abilities remain compatibility routes: Shadowfall and Black Ash Eruption roll damage with movement manual; You Talk Too Much rolls damage with both dazed and communication manual (the compiler rejects its extra section). No condition automation is claimed. Faster vial rolls while drinking and tier benefits stay manual. Into the Shadows/Puppet Strings initially record and pay without premature damage.
+- `shadow-level-six` cohort covers 32 new distinct uses (11 envelopes/21 embedded), blocked costs, outside-combat waiver, inherited signature damage with A3, and persisted target-state readback.

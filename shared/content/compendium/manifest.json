@@ -11,8 +11,8 @@
     "version": "1.0.4"
   },
   "generatedAt": "2026-09-08",
-  "contentHash": "sha256:9bcde574efb5facb4741f329a92879f31d5e49feedd0f31baa61e507522f3ec2",
-  "entryCount": 1629,
+  "contentHash": "sha256:8cdc0bdbb893a3191b64b5557284a9a5ec30224b6263148c3cad74999909eacf",
+  "entryCount": 1654,
   "selections": [
     {
       "id": "summoner-level-one",
@@ -264,6 +264,19 @@
         "religion/saint"
       ],
       "basis": "docs/build/V99-censor-level-one.md#scope: complete Censor level-one choices."
+    },
+    {
+      "id": "shadow-level-four-to-six",
+      "description": "Shadow levels four through six: characteristic increase, perks, skills, college features and abilities.",
+      "paths": [
+        "feature/shadow/level-4",
+        "feature/ability/shadow/level-4",
+        "feature/shadow/level-5",
+        "feature/ability/shadow/level-5",
+        "feature/shadow/level-6",
+        "feature/ability/shadow/level-6"
+      ],
+      "basis": "docs/build/V108-shadow-level-six.md#scope: cumulative Shadow through level six."
     },
     {
       "id": "shadow-level-three",
@@ -1782,6 +1795,94 @@
       "name": "Staggering Blow",
       "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-3/staggering-blow.md",
       "selection": "shadow-level-three",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.shadow.level-4/night-watch",
+      "kind": "ability",
+      "name": "Night Watch",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-4/night-watch.md",
+      "selection": "shadow-level-four-to-six",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.shadow.level-5/blackout",
+      "kind": "ability",
+      "name": "Blackout",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-5/blackout.md",
+      "selection": "shadow-level-four-to-six",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.shadow.level-5/into-the-shadows",
+      "kind": "ability",
+      "name": "Into the Shadows",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-5/into-the-shadows.md",
+      "selection": "shadow-level-four-to-six",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.shadow.level-5/shadowfall",
+      "kind": "ability",
+      "name": "Shadowfall",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-5/shadowfall.md",
+      "selection": "shadow-level-four-to-six",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.shadow.level-5/you-talk-too-much",
+      "kind": "ability",
+      "name": "You Talk Too Much",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-5/you-talk-too-much.md",
+      "selection": "shadow-level-four-to-six",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.shadow.level-6/black-ash-eruption",
+      "kind": "ability",
+      "name": "Black Ash Eruption",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-6/black-ash-eruption.md",
+      "selection": "shadow-level-four-to-six",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.shadow.level-6/cinderstorm",
+      "kind": "ability",
+      "name": "Cinderstorm",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-6/cinderstorm.md",
+      "selection": "shadow-level-four-to-six",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.shadow.level-6/look",
+      "kind": "ability",
+      "name": "Look!",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-6/look.md",
+      "selection": "shadow-level-four-to-six",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.shadow.level-6/one-vial-makes-you-better",
+      "kind": "ability",
+      "name": "One Vial Makes You Better",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-6/one-vial-makes-you-better.md",
+      "selection": "shadow-level-four-to-six",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.shadow.level-6/one-vial-makes-you-faster",
+      "kind": "ability",
+      "name": "One Vial Makes You Faster",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-6/one-vial-makes-you-faster.md",
+      "selection": "shadow-level-four-to-six",
+      "file": "ability.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.shadow.level-6/puppet-strings",
+      "kind": "ability",
+      "name": "Puppet Strings",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/ability/shadow/level-6/puppet-strings.md",
+      "selection": "shadow-level-four-to-six",
       "file": "ability.json"
     },
     {
@@ -5350,6 +5451,118 @@
       "name": "Careful Observation",
       "sourcePath": "vendor/steel-compendium/en/unified/md/feature/shadow/level-3/careful-observation.md",
       "selection": "shadow-level-three",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.shadow.level-4/characteristic-increase",
+      "kind": "feature",
+      "name": "Characteristic Increase",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/shadow/level-4/characteristic-increase.md",
+      "selection": "shadow-level-four-to-six",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.shadow.level-4/keep-it-down",
+      "kind": "feature",
+      "name": "Keep It Down",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/shadow/level-4/keep-it-down.md",
+      "selection": "shadow-level-four-to-six",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.shadow.level-4/night-watch",
+      "kind": "feature",
+      "name": "Night Watch",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/shadow/level-4/night-watch.md",
+      "selection": "shadow-level-four-to-six",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.shadow.level-4/perk",
+      "kind": "feature",
+      "name": "Perk",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/shadow/level-4/perk.md",
+      "selection": "shadow-level-four-to-six",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.shadow.level-4/skill",
+      "kind": "feature",
+      "name": "Skill",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/shadow/level-4/skill.md",
+      "selection": "shadow-level-four-to-six",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.shadow.level-4/surge-of-insight",
+      "kind": "feature",
+      "name": "Surge of Insight",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/shadow/level-4/surge-of-insight.md",
+      "selection": "shadow-level-four-to-six",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.shadow.level-5/5th-level-college-feature",
+      "kind": "feature",
+      "name": "5th-Level College Feature",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/shadow/level-5/5th-level-college-feature.md",
+      "selection": "shadow-level-four-to-six",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.shadow.level-5/9-insight-ability",
+      "kind": "feature",
+      "name": "9-Insight Ability",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/shadow/level-5/9-insight-ability.md",
+      "selection": "shadow-level-four-to-six",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.shadow.level-5/harlequin-gambit",
+      "kind": "feature",
+      "name": "Harlequin Gambit",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/shadow/level-5/harlequin-gambit.md",
+      "selection": "shadow-level-four-to-six",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.shadow.level-5/trail-of-cinders",
+      "kind": "feature",
+      "name": "Trail of Cinders",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/shadow/level-5/trail-of-cinders.md",
+      "selection": "shadow-level-four-to-six",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.shadow.level-5/volatile-reagents",
+      "kind": "feature",
+      "name": "Volatile Reagents",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/shadow/level-5/volatile-reagents.md",
+      "selection": "shadow-level-four-to-six",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.shadow.level-6/6th-level-college-ability",
+      "kind": "feature",
+      "name": "6th-Level College Ability",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/shadow/level-6/6th-level-college-ability.md",
+      "selection": "shadow-level-four-to-six",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.shadow.level-6/perk",
+      "kind": "feature",
+      "name": "Perk",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/shadow/level-6/perk.md",
+      "selection": "shadow-level-four-to-six",
+      "file": "feature.json"
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.shadow.level-6/umbral-form",
+      "kind": "feature",
+      "name": "Umbral Form",
+      "sourcePath": "vendor/steel-compendium/en/unified/md/feature/shadow/level-6/umbral-form.md",
+      "selection": "shadow-level-four-to-six",
       "file": "feature.json"
     },
     {

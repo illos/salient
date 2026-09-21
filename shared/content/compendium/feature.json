@@ -2653,6 +2653,191 @@
     }
   },
   {
+    "id": "mcdm.heroes.v1/feature.shadow.level-4/characteristic-increase",
+    "kind": "feature",
+    "name": "Characteristic Increase",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/shadow/level-4/characteristic-increase.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/shadow/level-4/characteristic-increase.json",
+    "selection": "shadow-level-four-to-six",
+    "text": "---\nclass: shadow\nlevel: \"4\"\nname: Characteristic Increase\nscc: mcdm.heroes.v1/feature.shadow.level-4/characteristic-increase\ntype: feature\n---\n\nYour [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility) score increases to 3. Additionally, you can increase one of your [characteristic](scc.v1:mcdm.heroes.v1/rule.character/characteristic) scores by 1, to a maximum of 3.\n",
+    "structured": {
+      "class": "shadow",
+      "level": "4"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.shadow.level-4/keep-it-down",
+    "kind": "feature",
+    "name": "Keep It Down",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/shadow/level-4/keep-it-down.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/shadow/level-4/keep-it-down.json",
+    "selection": "shadow-level-four-to-six",
+    "text": "---\nclass: shadow\nlevel: \"4\"\nname: Keep It Down\nscc: mcdm.heroes.v1/feature.shadow.level-4/keep-it-down\ntype: feature\n---\n\nWhile conversing with any creature you share a language with, you can decide whether anyone else can perceive what you're conveying, even while yelling.\n",
+    "structured": {
+      "class": "shadow",
+      "level": "4"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.shadow.level-4/night-watch",
+    "kind": "feature",
+    "name": "Night Watch",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/shadow/level-4/night-watch.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/shadow/level-4/night-watch.json",
+    "selection": "shadow-level-four-to-six",
+    "text": "---\nclass: shadow\nlevel: \"4\"\nname: Night Watch\nscc: mcdm.heroes.v1/feature.shadow.level-4/night-watch\ntype: feature\n---\n\nYour sense for stealth shows those around you how to evade notice. While you are hidden, enemies take a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on [tests](scc.v1:mcdm.heroes.v1/rule.test/test) made to search for you or other hidden creatures within 10 squares of you.\n\nAdditionally, you have the following ability.\n",
+    "structured": {
+      "class": "shadow",
+      "level": "4"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.shadow.level-4/perk",
+    "kind": "feature",
+    "name": "Perk",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/shadow/level-4/perk.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/shadow/level-4/perk.json",
+    "selection": "shadow-level-four-to-six",
+    "text": "---\nclass: shadow\nlevel: \"4\"\nname: Perk\nscc: mcdm.heroes.v1/feature.shadow.level-4/perk\ntype: feature\n---\n\nYou gain one perk of your choice.\n",
+    "structured": {
+      "class": "shadow",
+      "level": "4"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.shadow.level-4/skill",
+    "kind": "feature",
+    "name": "Skill",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/shadow/level-4/skill.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/shadow/level-4/skill.json",
+    "selection": "shadow-level-four-to-six",
+    "text": "---\nclass: shadow\nlevel: \"4\"\nname: Skill\nscc: mcdm.heroes.v1/feature.shadow.level-4/skill\ntype: feature\n---\n\nYou gain one skill of your choice. See Skills in Chapter 9: [Tests](scc.v1:mcdm.heroes.v1/chapter/tests).\n",
+    "structured": {
+      "class": "shadow",
+      "level": "4"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.shadow.level-4/surge-of-insight",
+    "kind": "feature",
+    "name": "Surge of Insight",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/shadow/level-4/surge-of-insight.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/shadow/level-4/surge-of-insight.json",
+    "selection": "shadow-level-four-to-six",
+    "text": "---\nclass: shadow\nlevel: \"4\"\nname: Surge of Insight\nscc: mcdm.heroes.v1/feature.shadow.level-4/surge-of-insight\ntype: feature\n---\n\nThe first time each [combat round](scc.v1:mcdm.heroes.v1/rule.combat/combat-round) that you deal damage incorporating 1 or more [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge), you gain 2 insight instead of 1.\n",
+    "structured": {
+      "class": "shadow",
+      "level": "4"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.shadow.level-5/5th-level-college-feature",
+    "kind": "feature",
+    "name": "5th-Level College Feature",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/shadow/level-5/5th-level-college-feature.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/shadow/level-5/5th-level-college-feature.json",
+    "selection": "shadow-level-four-to-six",
+    "text": "---\nclass: shadow\nlevel: \"5\"\nname: 5th-Level College Feature\nscc: mcdm.heroes.v1/feature.shadow.level-5/5th-level-college-feature\ntype: feature\n---\n\nYour [shadow college](scc.v1:mcdm.heroes.v1/feature.shadow.level-1/shadow-college) grants you a feature, as shown on the 5th-Level College Features table.\n\n###### 5th-Level College Features Table\n\n| College         | Feature           |\n|-----------------|-------------------|\n| Black Ash       | [Trail of Cinders](scc.v1:mcdm.heroes.v1/feature.shadow.level-5/trail-of-cinders)  |\n| Caustic Alchemy | [Volatile Reagents](scc.v1:mcdm.heroes.v1/feature.shadow.level-5/volatile-reagents) |\n| Harlequin Mask  | [Harlequin Gambit](scc.v1:mcdm.heroes.v1/feature.shadow.level-5/harlequin-gambit)  |\n",
+    "structured": {
+      "class": "shadow",
+      "level": "5"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.shadow.level-5/9-insight-ability",
+    "kind": "feature",
+    "name": "9-Insight Ability",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/shadow/level-5/9-insight-ability.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/shadow/level-5/9-insight-ability.json",
+    "selection": "shadow-level-four-to-six",
+    "text": "---\nclass: shadow\nlevel: \"5\"\nname: 9-Insight Ability\nscc: mcdm.heroes.v1/feature.shadow.level-5/9-insight-ability\ntype: feature\n---\n\nChoose one [heroic ability](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability) from the following options, each of which costs 9 insight to use.\n",
+    "structured": {
+      "class": "shadow",
+      "level": "5"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.shadow.level-5/harlequin-gambit",
+    "kind": "feature",
+    "name": "Harlequin Gambit",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/shadow/level-5/harlequin-gambit.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/shadow/level-5/harlequin-gambit.json",
+    "selection": "shadow-level-four-to-six",
+    "text": "---\nclass: shadow\nlevel: \"5\"\nname: Harlequin Gambit\nscc: mcdm.heroes.v1/feature.shadow.level-5/harlequin-gambit\nsubclass: harlequin-mask\ntype: feature\n---\n\nWhenever you reduce an [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) non-minion creature to 0 [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina), you can immediately use a [free maneuver](scc.v1:mcdm.heroes.v1/rule.combat/free-maneuver) to use your [I'm No Threat](scc.v1:mcdm.heroes.v1/feature.ability.shadow.level-1/im-no-threat) ability and then move up to your [speed](scc.v1:mcdm.heroes.v1/rule.character/speed).\n\nIf the creature is the same [size](scc.v1:mcdm.heroes.v1/rule.character/size) as you, you can disguise yourself as them using [I'm No Threat](scc.v1:mcdm.heroes.v1/feature.ability.shadow.level-1/im-no-threat) without spending insight. If you do, while [I'm No Threat](scc.v1:mcdm.heroes.v1/feature.ability.shadow.level-1/im-no-threat) is active, the creature's body is disguised to look like your body. The illusion ends on their body if another creature physically interacts with it. When the illusion would end for either you or the creature's body, it ends for both.\n",
+    "structured": {
+      "class": "shadow",
+      "level": "5",
+      "subclass": "harlequin-mask"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.shadow.level-5/trail-of-cinders",
+    "kind": "feature",
+    "name": "Trail of Cinders",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/shadow/level-5/trail-of-cinders.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/shadow/level-5/trail-of-cinders.json",
+    "selection": "shadow-level-four-to-six",
+    "text": "---\nclass: shadow\nlevel: \"5\"\nname: Trail of Cinders\nscc: mcdm.heroes.v1/feature.shadow.level-5/trail-of-cinders\nsubclass: black-ash\ntype: feature\n---\n\nWhenever you reduce a non-minion creature to 0 [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina), you can immediately use a [free maneuver](scc.v1:mcdm.heroes.v1/rule.combat/free-maneuver) to use your [Black Ash Teleport](scc.v1:mcdm.heroes.v1/feature.ability.shadow.level-1/black-ash-teleport) ability.\n\nAdditionally, you can now bring an [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) willing creature along with you whenever you use a shadow ability to [teleport](scc.v1:mcdm.heroes.v1/movement/teleport). The creature appears in an unoccupied space [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the space into which you [teleport](scc.v1:mcdm.heroes.v1/movement/teleport)ed. If no such space exists, they can't [teleport](scc.v1:mcdm.heroes.v1/movement/teleport) with you.\n",
+    "structured": {
+      "class": "shadow",
+      "level": "5",
+      "subclass": "black-ash"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.shadow.level-5/volatile-reagents",
+    "kind": "feature",
+    "name": "Volatile Reagents",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/shadow/level-5/volatile-reagents.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/shadow/level-5/volatile-reagents.json",
+    "selection": "shadow-level-four-to-six",
+    "text": "---\nclass: shadow\nlevel: \"5\"\nname: Volatile Reagents\nscc: mcdm.heroes.v1/feature.shadow.level-5/volatile-reagents\nsubclass: caustic-alchemy\ntype: feature\n---\n\nWhenever you take damage, each enemy [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to you takes fire, acid, or poison damage (your choice) equal to your [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility) score.\n\nAdditionally, your [Defensive Roll](scc.v1:mcdm.heroes.v1/feature.ability.shadow.level-1/defensive-roll) ability now allows you to [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to 5 squares, including [shifting](scc.v1:mcdm.heroes.v1/movement/shifting) vertically. If you don't end this [shift](scc.v1:mcdm.heroes.v1/movement/shifting) on solid ground and are not [flying](scc.v1:mcdm.heroes.v1/movement/fly), you fall.\n",
+    "structured": {
+      "class": "shadow",
+      "level": "5",
+      "subclass": "caustic-alchemy"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.shadow.level-6/6th-level-college-ability",
+    "kind": "feature",
+    "name": "6th-Level College Ability",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/shadow/level-6/6th-level-college-ability.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/shadow/level-6/6th-level-college-ability.json",
+    "selection": "shadow-level-four-to-six",
+    "text": "---\nclass: shadow\nlevel: \"6\"\nname: 6th-Level College Ability\nscc: mcdm.heroes.v1/feature.shadow.level-6/6th-level-college-ability\ntype: feature\n---\n\nYour [shadow college](scc.v1:mcdm.heroes.v1/feature.shadow.level-1/shadow-college) grants your choice of one of two [heroic abilities](scc.v1:mcdm.heroes.v1/rule.general/heroic-ability).\n\n##### 6th-Level Black Ash Abilities\n\nChoose one of the following abilities.\n\n##### 6th-Level Caustic Alchemy Abilities\n\nChoose one of the following abilities.\n\n##### 6th-Level Harlequin Mask Abilities\n\nChoose one of the following abilities.\n",
+    "structured": {
+      "class": "shadow",
+      "level": "6"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.shadow.level-6/perk",
+    "kind": "feature",
+    "name": "Perk",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/shadow/level-6/perk.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/shadow/level-6/perk.json",
+    "selection": "shadow-level-four-to-six",
+    "text": "---\nclass: shadow\nlevel: \"6\"\nname: Perk\nscc: mcdm.heroes.v1/feature.shadow.level-6/perk\ntype: feature\n---\n\nYou gain one perk of your choice.\n",
+    "structured": {
+      "class": "shadow",
+      "level": "6"
+    }
+  },
+  {
+    "id": "mcdm.heroes.v1/feature.shadow.level-6/umbral-form",
+    "kind": "feature",
+    "name": "Umbral Form",
+    "sourcePath": "vendor/steel-compendium/en/unified/md/feature/shadow/level-6/umbral-form.md",
+    "jsonPath": "vendor/steel-compendium/en/unified/json/feature/shadow/level-6/umbral-form.json",
+    "selection": "shadow-level-four-to-six",
+    "text": "---\nclass: shadow\nlevel: \"6\"\nname: Umbral Form\nscc: mcdm.heroes.v1/feature.shadow.level-6/umbral-form\ntype: feature\n---\n\nAs a maneuver, you lose control of yourself, becoming a shadow creature dripping with ash. This transformation lasts until the end of the encounter, until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), or after 1 uninterrupted hour of quiet focus outside of combat. You gain the following effects while in this form:\n\n- You can automatically climb at full [speed](scc.v1:mcdm.heroes.v1/rule.character/speed) while moving.\n- Enemies' spaces don't count as [difficult terrain](scc.v1:mcdm.heroes.v1/movement/difficult-terrain) for you. An enemy takes corruption damage equal to your [Agility](scc.v1:mcdm.heroes.v1/rule.character/agility) score the first time you pass through their space on a [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn).\n- If you end your [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) with [cover](scc.v1:mcdm.heroes.v1/rule.combat/cover) or [concealment](scc.v1:mcdm.heroes.v1/rule.combat/concealment) from another creature, you are automatically hidden from that creature.\n- You gain 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge) at the start of each of your [turns](scc.v1:mcdm.heroes.v1/rule.combat/turn).\n- You have corruption immunity equal to 5 + your level.\n- Creatures gain an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on [strikes](scc.v1:mcdm.heroes.v1/rule.combat/strike) against you.\n- You take a [bane](scc.v1:mcdm.heroes.v1/rule.dice/bane) on [Presence](scc.v1:mcdm.heroes.v1/rule.character/presence) [tests](scc.v1:mcdm.heroes.v1/rule.test/test) made to interact with other creatures.\n",
+    "structured": {
+      "class": "shadow",
+      "level": "6"
+    }
+  },
+  {
     "id": "mcdm.summoner.v1/feature.summoner.level-1/1st-level-circle-features",
     "kind": "feature",
     "name": "1st-Level Circle Features",

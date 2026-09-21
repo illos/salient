@@ -126,3 +126,9 @@ Four circle cards; two signature and two three-Essence portfolio selections; for
 including Elite/Horde; quick command/heroic choices; source-labelled manual minion actions and Essence
 costs; no ordinary hero free strikes or Summoner minions in foe picker. Verify visually when the
 browser moratorium is lifted. Logic and persisted results use the Summoner CLI/API cohort.
+
+## V108 — Shadow through level six
+
+Target levels 4–6 show cumulative choices, separate characteristic/perk/skill controls and college
+ability pairs. Verify second-echelon sheet totals, manual timing/Umbral liabilities and lower-level
+pruning visually when the moratorium ends. Shared API cohort owns behavioral proof.

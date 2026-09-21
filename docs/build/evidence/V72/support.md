@@ -2,9 +2,9 @@
 
 Structural support, current grant/loading availability and live execution are separate. Source drift never silently falls back; historical results are never recompiled on read.
 
-Source: `fb83a789da8f0327a389c277a0c790b1648d5810`; content: `sha256:9bcde574efb5facb4741f329a92879f31d5e49feedd0f31baa61e507522f3ec2`.
+Source: `fb83a789da8f0327a389c277a0c790b1648d5810`; content: `sha256:8cdc0bdbb893a3191b64b5557284a9a5ec30224b6263148c3cad74999909eacf`.
 
-Currently reachable compiled: 23; unchanged reachable compatibility: 1483; structurally supported but unavailable: 0.
+Currently reachable compiled: 23; unchanged reachable compatibility: 1494; structurally supported but unavailable: 0.
 
 | Ability | Population | Pure execution | Live boundary | Diagnostics |
 | --- | --- | --- | --- | --- |
@@ -258,6 +258,17 @@ Currently reachable compiled: 23; unchanged reachable compatibility: 1483; struc
 | Misdirecting Strike | hero-standalone | manual | legacy-compatibility | manual-section |
 | Pinning Shot | hero-standalone | supported | compiled |  |
 | Staggering Blow | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder |
+| Night Watch | hero-standalone | manual | legacy-compatibility | grammar, manual-section, action-type |
+| Blackout | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Into the Shadows | hero-standalone | manual | legacy-compatibility | manual-section |
+| Shadowfall | hero-standalone | manual | legacy-compatibility | manual-section, target-boundary |
+| You Talk Too Much | hero-standalone | manual | legacy-compatibility | manual-section |
+| Black Ash Eruption | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder, manual-section |
+| Cinderstorm | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| Look! | hero-standalone | manual | legacy-compatibility | grammar, manual-section, target-boundary |
+| One Vial Makes You Better | hero-standalone | manual | legacy-compatibility | grammar, source-block-mismatch, unaccounted-paragraph, manual-section, target-boundary |
+| One Vial Makes You Faster | hero-standalone | manual | legacy-compatibility | grammar, unsafe-tier-remainder, source-block-mismatch, unaccounted-paragraph, manual-section, target-boundary |
+| Puppet Strings | hero-standalone | manual | legacy-compatibility | unsafe-tier-remainder, manual-section, target-boundary |
 | Advanced Tactics | hero-standalone | manual | legacy-compatibility | grammar, manual-section, action-type |
 | Battle Cry | hero-standalone | manual | legacy-compatibility | grammar, unsafe-tier-remainder, target-boundary |
 | Concussive Strike | hero-standalone | supported | compiled |  |
