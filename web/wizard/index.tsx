@@ -1,4 +1,5 @@
 import { CulturePresetSelect } from './culture-preset';
+import { KitChoice } from './kit-choice';
 // SPDX-License-Identifier: GPL-3.0-only
 /**
  * The shared level-one wizard: a decision flow over the supported class definitions
@@ -314,6 +315,20 @@ export function DecisionEditor({
   const shownGrants = (decision.grants ?? []).filter(
     grant => !(showsStatTiles && grant.kind === 'statistic'),
   );
+  if (decision.id === 'kit.choice') {
+    const pool = poolOf(decision, selections, definitions);
+    return (
+      <ChoiceSection label={label} reference={reference}>
+        <KitChoice
+          decision={decision}
+          value={typeof value === 'string' ? value : undefined}
+          values={pool.values}
+          onChange={next => onSelect(decision.id, next)}
+        />
+        <Diagnostics list={diagnostics} />
+      </ChoiceSection>
+    );
+  }
   if (decision.id === 'culture.preset')
     return (
       <CulturePresetSelect

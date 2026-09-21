@@ -232,3 +232,10 @@ chosen; it needs its own slice and headless proof.
   Shadow and Tactician offer the kit from the class choice, and Fury offers it once the aspect
   that grants the Kit feature is chosen. A step that asks this hero nothing now counts as done
   once passed, so a kitless class can still reach 100%.
+- 2026-09-21: the kit is chosen from a card grid rather than a dropdown, after the user's Forge
+  Steel reference. One card per kit (`web/wizard/kit-choice.tsx`) folds that reference's Overview
+  and Stats tabs together: the kit's own description from the rules catalog, the line saying what
+  it equips you with, every bonus its Kits-table row grants, and a pill naming its signature
+  ability beside a reference that opens the kit's full entry. Bonuses a kit does not grant are
+  omitted rather than printed as zero. Checked against the source rows and the built catalog: all
+  25 kits, ordinary and Stormwight, resolve to a row, a description and a signature ability.
