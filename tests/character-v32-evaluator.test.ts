@@ -228,7 +228,7 @@ test('V32 requires exactly the new transition choices and refuses other aspects,
 });
 
 test('V32 level and class support are explicit and never silently evaluated as level one', () => {
-  for (const level of [-1, 0, 3, 10, 1.5, Number.NaN, Infinity]) {
+  for (const level of [-1, 0, 4, 10, 1.5, Number.NaN, Infinity]) {
     const result = evaluate(oldFixture.selections, level);
     assert.equal(result.status, 'unsupported', String(level));
     assert.equal(result.baseline, null);

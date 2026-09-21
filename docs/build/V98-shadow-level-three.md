@@ -54,3 +54,8 @@ Guided progression remains deferred.
   fixture under `en/unified/md/class/elementalist.md` Basics. This guarantees applied restraint at
   every tier; readback covers the condition, source instance and save registration. The A2 target
   separately proves resistance; pure source-derived cases cover all three strict thresholds.
+- ENGINE static review passed `3482943` (Chords 1359/1360), both findings closed; see
+  [the audit](audits/V98-shadow-level-three-review.md). No tests were run by the reviewer.
+- TESTER initial full run at `3482943` was cancelled at 24.3s after reproducing the stale V32
+  globally-unsupported-level-3 expectation. Changed its sentinel to level 4; Shadow3 and unsupported
+  Fury3 are separately covered in V98. No backend/headless had started.
