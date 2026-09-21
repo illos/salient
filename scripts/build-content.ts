@@ -96,6 +96,7 @@ export const SELECTIONS: ManifestSelection[] = [
       'class/fury.md',
       'feature/fury/level-1',
       'feature/ability/fury/level-1',
+      'feature/ability/fury/stormwight-kits',
       'feature/fury/stormwight-kits',
       'feature/fury/boren',
       'feature/fury/corven',

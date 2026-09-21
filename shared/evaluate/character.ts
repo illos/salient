@@ -1,3 +1,4 @@
+import { furyAbilities } from './furyAbilities.ts';
 import { conduitAbilities } from './conduitAbilities.ts';
 import { applyConduitModifiers } from './classes/conduit.ts';
 import { startingRewardItems } from '../content/starting-reward-items.ts';
@@ -933,6 +934,8 @@ class Evaluation {
         shadowAbilities(out.features, tacticianAbilities(out.features, out.abilities)),
       ),
     );
+    if (this.available.has('class.fury.action-options'))
+      out.abilities = furyAbilities(out.features, out.abilities);
     this.deriveSupportingChoices(out);
     const items = startingRewardItems(out.features ?? [], out.initialItems);
     if (items.length) out.initialItems = items;

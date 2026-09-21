@@ -284,8 +284,9 @@ values and controls retain their behavior.
 - Confirmed 2026-09-14 (Q-R-103), with [independent source research](research/fury-kit-eligibility.md):
   Berserker/Reaver use the 21 ordinary Chapter 6 kits; Stormwight uses Boren, Corven, Raden or Vuken.
   This follows the aspect-specific Kit/Beast Shape grants and separate source sections. Do not infer
-  eligibility from the flattened catalog or a Martial-only filter. For v0.01, only Berserker with
-  Mountain is supported; Reaver and Stormwight remain outside prototype creation scope.
+  eligibility from the flattened catalog or a Martial-only filter. The original v0.01 supported only Berserker with Mountain. Confirmed 2026-09-21 (V101):
+  expand level-one Fury to all three aspects, the full ordinary/Stormwight kit pools and all printed
+  level-one ability choices. Higher-level support remains separately bounded.
 - Confirmed 2026-09-14 (Q-R-102): the v0.01 culture/career language choices use spoken languages
   only: the printed Languages by Ancestry and Vaslorian Human Languages tables. Dead languages
   are not selectable at creation. Deduplicate names shared by those tables. Caelian remains visible

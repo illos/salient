@@ -5,7 +5,7 @@ import { PERK_ABILITIES } from './perk-abilities.ts';
  * This module stores build choices, not gameplay resolution or renewable initial rewards.
  */
 import type { DecisionDefinitions, DecisionOption } from '../evaluate/definitions.ts';
-import { SUPPORTING_KITS, ORDINARY_KIT_NAMES } from './supporting-kits.ts';
+import { SUPPORTING_KITS, ORDINARY_KIT_NAMES, STORMWIGHT_KIT_NAMES } from './supporting-kits.ts';
 
 interface CareerDefinition {
   name: string;
@@ -1771,12 +1771,13 @@ export function extendBackgroundDefinitions(defs: DecisionDefinitions): void {
   }
   const kitChoice = byId('kit.choice');
   if (kitChoice) {
-    kitChoice.supportedInV001 = [...ORDINARY_KIT_NAMES];
+    const supportedKits = [...ORDINARY_KIT_NAMES, ...STORMWIGHT_KIT_NAMES];
+    kitChoice.supportedInV001 = supportedKits;
     if (kitChoice.options)
       for (const entry of kitChoice.options)
-        entry.supportedInV001 = ORDINARY_KIT_NAMES.includes(entry.value);
+        entry.supportedInV001 = supportedKits.includes(entry.value);
     const kitStep = defs.steps.find(step => step.id === 'step.kit')!;
-    for (const name of ORDINARY_KIT_NAMES) {
+    for (const name of supportedKits) {
       const kit = SUPPORTING_KITS[name]!;
       const id = `kit.${name.toLowerCase()}.contributions`;
       if (byId(id)) continue;

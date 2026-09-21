@@ -1,7 +1,8 @@
 // SPDX-License-Identifier: GPL-3.0-only
-/** Existing level-one Fury content; stable R01 decision IDs and source wording. */
+/** V101 full level-one Fury choices; stable R01 decision IDs and source wording. */
 import type { Decision, ClassProfile } from '../../../evaluate/definitions.ts';
 import { SENTENCES } from '../../../evaluate/sources.ts';
+import { stormwightDecisions } from './stormwight.ts';
 import { path } from '../../decision-builders.ts';
 
 export const levelOneDecisions = [
@@ -216,7 +217,7 @@ export const levelOneDecisions = [
       {
         id: 'class.fury.aspect.reaver',
         value: 'Reaver',
-        supportedInV001: false,
+        supportedInV001: true,
         grants: [
           {
             kind: 'skill',
@@ -244,7 +245,7 @@ export const levelOneDecisions = [
       {
         id: 'class.fury.aspect.stormwight',
         value: 'Stormwight',
-        supportedInV001: false,
+        supportedInV001: true,
         grants: [
           {
             kind: 'skill',
@@ -310,19 +311,19 @@ export const levelOneDecisions = [
         id: 'ability.fury.hit-and-run',
         value: 'Hit and Run',
         source: 'en/unified/md/feature/ability/fury/level-1/hit-and-run.md',
-        supportedInV001: false,
+        supportedInV001: true,
       },
       {
         id: 'ability.fury.impaled',
         value: 'Impaled!',
         source: 'en/unified/md/feature/ability/fury/level-1/impaled.md',
-        supportedInV001: false,
+        supportedInV001: true,
       },
       {
         id: 'ability.fury.to-the-death',
         value: 'To the Death!',
         source: 'en/unified/md/feature/ability/fury/level-1/to-the-death.md',
-        supportedInV001: false,
+        supportedInV001: true,
       },
     ],
   },
@@ -346,7 +347,7 @@ export const levelOneDecisions = [
         value: 'Back!',
         source: 'en/unified/md/feature/ability/fury/level-1/back.md',
         costQuote: 'cost: 3 Ferocity',
-        supportedInV001: false,
+        supportedInV001: true,
       },
       {
         id: 'ability.fury.out-of-the-way',
@@ -360,14 +361,14 @@ export const levelOneDecisions = [
         value: 'Tide of Death',
         source: 'en/unified/md/feature/ability/fury/level-1/tide-of-death.md',
         costQuote: 'cost: 3 Ferocity',
-        supportedInV001: false,
+        supportedInV001: true,
       },
       {
         id: 'ability.fury.your-entrails-are-your-extrails',
         value: 'Your Entrails Are Your Extrails!',
         source: 'en/unified/md/feature/ability/fury/level-1/your-entrails-are-your-extrails.md',
         costQuote: 'cost: 3 Ferocity',
-        supportedInV001: false,
+        supportedInV001: true,
       },
     ],
   },
@@ -391,14 +392,14 @@ export const levelOneDecisions = [
         value: 'Blood for Blood!',
         source: 'en/unified/md/feature/ability/fury/level-1/blood-for-blood.md',
         costQuote: 'cost: 5 Ferocity',
-        supportedInV001: false,
+        supportedInV001: true,
       },
       {
         id: 'ability.fury.make-peace-with-your-god',
         value: 'Make Peace With Your God!',
         source: 'en/unified/md/feature/ability/fury/level-1/make-peace-with-your-god.md',
         costQuote: 'cost: 5 Ferocity',
-        supportedInV001: false,
+        supportedInV001: true,
       },
       {
         id: 'ability.fury.thunder-roar',
@@ -412,10 +413,11 @@ export const levelOneDecisions = [
         value: 'To the Uttermost End',
         source: 'en/unified/md/feature/ability/fury/level-1/to-the-uttermost-end.md',
         costQuote: 'cost: 5 Ferocity',
-        supportedInV001: false,
+        supportedInV001: true,
       },
     ],
   },
+  ...stormwightDecisions,
 ] as Decision[];
 
 export const classProfile: ClassProfile = {

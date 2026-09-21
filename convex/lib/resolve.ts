@@ -1,3 +1,4 @@
+import { furyAbilitySource } from '../../shared/evaluate/furyAbilities';
 import { conduitAbilitySource } from '../../shared/evaluate/conduitAbilities';
 import { censorAbilitySource } from '../../shared/evaluate/censorAbilities';
 import { shadowAbilitySource } from '../../shared/evaluate/shadowAbilities';
@@ -282,7 +283,12 @@ export function abilityFromEntry(
   const parsed = effectsOf(s.effects);
   // Sticky Bomb rolls only at detonation (end of the next turn, unless disarmed).
   // Recording attachment must never apply its printed damage immediately.
-  const delayed = entry.sourcePath.endsWith('/feature/ability/shadow/level-2/sticky-bomb.md');
+  // Tide of Death’s Self header describes movement; its roll targets traversed enemies.
+  // Until spatial targeting is supported, record the entire special effect without self-damage.
+  const manualRoll = [
+    '/feature/ability/shadow/level-2/sticky-bomb.md',
+    '/feature/ability/fury/level-1/tide-of-death.md',
+  ].some(path => entry.sourcePath.endsWith(path));
   return build({
     compilation: compileLiveEntry(entry, entry.kind),
     abilityId: entry.contentId,
@@ -295,7 +301,7 @@ export function abilityFromEntry(
     target: stringOf(s.target),
     keywords: stringsOf(s.keywords),
     ...(typeof s.cost === 'string' ? { cost: s.cost } : {}),
-    ...(parsed.roll && !delayed ? { roll: parsed.roll, tiers: parsed.tiers } : {}),
+    ...(parsed.roll && !manualRoll ? { roll: parsed.roll, tiers: parsed.tiers } : {}),
     ...(parsed.effects.length ? { effects: parsed.effects } : {}),
     kitBonusesIncluded: options.kitBonusesIncluded ?? false,
   });
@@ -556,11 +562,13 @@ export async function abilitiesFor(
         ),
       ),
     ]) {
+      const furySource = furyAbilitySource(grant);
       const conduitSource = conduitAbilitySource(grant);
       const censorSource = censorAbilitySource(grant);
-      const tacticianSource = conduitSource ?? censorSource ?? tacticianAbilitySource(grant);
+      const tacticianSource =
+        furySource ?? conduitSource ?? censorSource ?? tacticianAbilitySource(grant);
       if (tacticianSource) {
-        const id = `${conduitSource ? 'conduit' : censorSource ? 'censor' : 'tactician'}:${slug(grant.name)}`;
+        const id = `${furySource ? 'fury' : conduitSource ? 'conduit' : censorSource ? 'censor' : 'tactician'}:${slug(grant.name)}`;
         granted.push(
           build({
             abilityId: id,
