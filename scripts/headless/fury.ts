@@ -9,6 +9,7 @@ import type {
   EvaluationResult,
 } from '../../shared/contracts/characterEvaluation.ts';
 import type { AbilityRollResult } from '../../shared/contracts/rollResolution.ts';
+import type { PublicCompiledResult } from '../../shared/contracts/compiledResult.ts';
 import type { HeroSheet } from '../../shared/contracts/characterSheet.ts';
 import type { DraftSelection } from '../../shared/characterDraft.ts';
 import { draftSelectionsFrom } from '../../shared/evaluate/draft.ts';
@@ -241,8 +242,26 @@ export async function runFury({ actors: { director, peer }, run, runId }: Scenar
             const damage = rolled.damageByTier[outcome.tier - 1]!;
             assert.equal(outcome.damage?.rolledDamage, damage, name);
             assert.equal(after.liveState?.stamina, before.liveState!.stamina - damage, name);
-            // Back has no push at tier1; all other source remainders apply on every tier.
-            if (name !== 'Back!' || outcome.tier > 1)
+            if (name === 'Brutal Slam') {
+              // This existing compiled push is an occurrence, not an unresolved text clause.
+              const readback = await director.query<{ compiled?: PublicCompiledResult }[]>(
+                'abilities:results',
+                { campaignId, eventIds: [used.eventId] },
+              );
+              const pushes = readback[0]?.compiled?.effects.filter(e => e.effect.kind === 'push');
+              assert.equal(pushes?.length, 1, name);
+              const push = pushes![0]!;
+              assert.equal(push.useEventId, used.eventId, name);
+              assert.equal(push.effect.targetId, outcome.targetId, name);
+              assert.equal(push.effect.kind, 'push');
+              if (push.effect.kind === 'push')
+                assert.equal(
+                  push.effect.printed,
+                  ledger.brutalSlamPushByTier[outcome.tier - 1],
+                  `${name} printed push`,
+                );
+            } else if (name !== 'Back!' || outcome.tier > 1)
+              // Back has no push at tier1; the other manual remainders apply on every tier.
               assert.match(
                 JSON.stringify([outcome.unresolvedClauses, result.manualResolutions]),
                 new RegExp(rolled.manualRemainder, 'i'),

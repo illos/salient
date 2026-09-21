@@ -3,6 +3,7 @@
   "compendiumRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
   "sourceRoot": "vendor/steel-compendium/en/unified/md",
   "method": "Handwritten printed-source inventory and arithmetic, never evaluator output. Human Soldier background reused from approved V100. Permanent kit bonuses only; true form, no threshold benefit or optional bonus. M=A2; kit signatures include bonuses once. Ordinary Fury Melee+Weapon damage including area receives the selected kit bonus. Tide of Death remains entirely manual to avoid damaging Self. Each selected ability citation is its name slug under feature/ability/fury/level-1/. ENGINE independent inventory in docs/build/audits/V101-fury-source-audit.md.",
+  "brutalSlamPushByTier": [1, 2, 4],
   "embeddedFerocityCosts": {
     "Lines of Force: Enhance": 1,
     "Unearthly Reflexes: Reduce Potency": 1,

@@ -80,3 +80,10 @@ entries. The clean Heroes text supplies ability group membership. No Forge outpu
   mismatch previously diagnosed for other content categories. Added `kit` to the generator's
   attributed categories and a regression check; only packaging changes, no game/content changes.
   Artifacts: `/srv/presidium/projects/salient/test-artifacts/V101-aca62e3`.
+
+- TESTER `39f12c1`: bounded packaging gates passed, including 23 generator tests; backend
+  ready in 9.1s. The live journey reached Brutal Slam but incorrectly expected its already-compiled
+  push in unresolved text (10.8s, exit 1). Repair only the proof: read the persisted push occurrence
+  through `abilities:results`, tie it to the use and target, and compare printed distance with
+  source tiers 1/2/4. Other manual-remainder assertions remain. No runtime change.
+  Artifacts: `/srv/presidium/projects/salient/test-artifacts/V101-39f12c1`.
