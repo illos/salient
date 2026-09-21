@@ -86,3 +86,11 @@ accept targetLevel. This is full editing, not an XP-gated advancement operation.
 - Experiment outcome: the level-two class content reused the existing class/college/perk model.
   New shared work was target-level selection, creation persistence and pruning choices on a level
   decrease. The main rules edge was Sticky Bomb's delayed roll. Guided progression remains deferred.
+
+## Publication — 2026-09-21
+
+DEPLOY2 fast-forwarded reviewed `c3423f4` into main and published the backend, 1221-entry content
+snapshot and frontend. Backend/schema validation, hosted build and upload succeeded. Worker:
+`b25c3463-9fe2-4580-b0c6-dd3c55e9b76d`. Accepted 971-test and isolated six-build/all-six-ability
+results were reused; no smoke test or test rerun. Release logs:
+`/srv/presidium/projects/salient/test-artifacts/V97-release-c3423f4`.

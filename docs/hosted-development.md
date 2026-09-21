@@ -113,7 +113,14 @@ See [the release evidence](build/evidence/V43/hosted/README.md) for browser resu
 fixture limitations and deployment logs. Earlier Worker versions in slice records are historical.
 
 
-## Current release — V96 Character builder
+## Current release — V97 Shadow level two
+
+Backend/frontend source `c3423f4ba6d4dd95aacc7f230a243e6a264748a9` published on 2026-09-21 as
+Worker `b25c3463-9fe2-4580-b0c6-dd3c55e9b76d`. Backend/schema validation, content reseed (1221
+entries), hosted build and upload succeeded. Accepted TESTER results reused; no smoke test or
+rerun. See [V97](build/V97-shadow-level-two.md) and the [ledger](../deploy.md).
+
+## Previous release — V96 Character builder
 
 Backend/frontend source `1e20eece741fc763eea4c359d3853d018e4513de` published on 2026-09-21 as
 Worker `b1effe2a-181b-4fa5-8355-df49f69cc3f0`. Backend publication/schema validation and hosted

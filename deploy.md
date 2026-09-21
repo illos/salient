@@ -42,6 +42,7 @@ runtime update. Domains, accounts and paid plans remain separate from standing r
 
 | Job | Candidate | State | Next gate |
 | --- | --- | --- | --- |
+| V97 | `c3423f4` | Merged; backend/content/frontend published; accepted gates reused | complete |
 | V96 | `1e20eec` | Merged; backend/frontend published; accepted gates reused | complete |
 | V95 | `1115380` | Merged; backend/frontend published; accepted gates reused | complete |
 | V94 | `fcf13f1` | Merged and published; 1209 entries; accepted gates reused | complete; no deployment test gate |
@@ -179,3 +180,13 @@ Backend publication/schema validation, hosted build and frontend publication suc
 Worker: `b1effe2a-181b-4fa5-8355-df49f69cc3f0`. Content remains V94's 1209-entry snapshot;
 no reseed needed. Temporary credentials removed; private hosted helpers stopped.
 Logs: `/srv/presidium/projects/salient/test-artifacts/V96-release-1e20eec`.
+
+### V97 Shadow level two publication — 2026-09-21
+
+Reviewed owner `c3423f4ba6d4dd95aacc7f230a243e6a264748a9` fast-forwarded into main.
+Accepted runtime `71e665e` evidence reused: full 971 checks and isolated six-build/all-six-ability
+journey. Backend publication/schema validation, content reseed (1221 entries), hosted build and
+frontend upload succeeded. Worker `b25c3463-9fe2-4580-b0c6-dd3c55e9b76d`.
+No smoke tests or test reruns. Temporary credentials removed; private hosted helpers stopped.
+Logs: `/srv/presidium/projects/salient/test-artifacts/V97-release-c3423f4`.
+Committed content snapshot hash: `sha256:9778bbbd413dfe01afd0c76e26fc41542f6ce46957aa261af9bf541d5ba342ca`.
