@@ -1181,7 +1181,21 @@ function Wizard({ character }: { character: WizardCharacter }) {
     ? lockedAspectOrder.flatMap(id => {
         if (!lockedByPreset(id)) return [];
         const value = selections[id];
-        return typeof value === 'string' ? [{ id, label: decisionLabel(id), value }] : [];
+        if (typeof value !== 'string') return [];
+        // A culture has no entry of its own: it is a row combining aspects. Each aspect does have
+        // one, so the tile carries that aspect's text and opens it.
+        const source = stepDecisionIndex
+          .get(id)
+          ?.options?.find(option => option.value === value)?.source;
+        return [
+          {
+            id,
+            label: decisionLabel(id),
+            value,
+            source,
+            text: source ? ruleExcerpt(catalog, { sourcePath: source, label: value }) : undefined,
+          },
+        ];
       })
     : [];
   const lockedIds = new Set(lockedAspects.map(aspect => aspect.id));
@@ -1206,10 +1220,16 @@ function Wizard({ character }: { character: WizardCharacter }) {
       </div>
       <div className="grid grid-cols-[repeat(auto-fill,minmax(13rem,1fr))] gap-2">
         {lockedAspects.map(aspect => (
-          <span key={aspect.id} className="flex flex-col gap-0.5 rounded-md bg-muted px-4 py-3">
-            <span className="text-lg font-medium">{aspect.value}</span>
+          <div key={aspect.id} className="flex flex-col gap-1 rounded-md bg-muted px-4 py-3">
+            <span className="flex items-center gap-2">
+              <span className="text-lg font-medium">{aspect.value}</span>
+              {aspect.source && <RuleLink sourcePath={aspect.source} label={aspect.value} />}
+            </span>
             <span className="text-sm text-muted-foreground">{aspect.label}</span>
-          </span>
+            {aspect.text && (
+              <span className="mt-1 text-sm text-balance text-muted-foreground">{aspect.text}</span>
+            )}
+          </div>
         ))}
       </div>
     </section>

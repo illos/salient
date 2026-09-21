@@ -149,7 +149,10 @@ From the user's culture mockup (attachment, 2026-09-21):
 
 - The aspects a preset fixes read back as one block of tiles, headed "Set by the <name> culture"
   with "Choose Build your own to set these yourself" opposite, instead of one read-only section
-  per decision each repeating that sentence.
+  per decision each repeating that sentence. A culture has no entry of its own, being a table row
+  that combines aspects, but each of the thirteen aspects does, so a tile carries that aspect's
+  own text and opens it. Checked against the built catalog: all 81 aspect tiles across the 27
+  presets resolve to text, none missing.
 - The step header offers Read more, a worded trigger for the same modal reader the rulebook icon
   opens (`RuleReadMore`, `web/rules/link.tsx`), on whichever entry supplied its description.
 - The three culture skills are one panel, "Culture skills", with a dot per aspect and Clear,
