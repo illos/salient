@@ -1113,8 +1113,24 @@ function Wizard({ character }: { character: WizardCharacter }) {
     const value = selections[id];
     return typeof value === 'string' ? value : undefined;
   };
+  // What a step asks of the hero right now: the choices it actually presents, and how many of
+  // them are recorded. Only the active branch counts, since every ancestry's and class's
+  // decisions live in their step, and a value a preset fixed is not a choice to make.
+  const railIndex = indexDecisions(definitions);
+  const stepChoices = (s: Step) =>
+    s.decisions.filter(
+      d =>
+        (d.kind === 'choice' || d.kind === 'authored') &&
+        !lockedByPreset(d.id) &&
+        isAvailable(d, selections, railIndex) &&
+        !belongsToOtherBranch(d, selections, railIndex),
+    );
   const railSteps: RailStep[] = PRESENTED.map((s, index) => {
     const problems = problemsByStep(s);
+    const choices = stepChoices(s);
+    const decided = choices.filter(d =>
+      AUTHORED_FIELDS[d.id] ? Boolean(authored[AUTHORED_FIELDS[d.id]!]) : d.id in selections,
+    ).length;
     const recorded = s.decisions.some(d =>
       AUTHORED_FIELDS[d.id] ? Boolean(authored[AUTHORED_FIELDS[d.id]!]) : d.id in selections,
     );
@@ -1128,6 +1144,8 @@ function Wizard({ character }: { character: WizardCharacter }) {
       number: index + 1,
       chosen: recordedValue(primaryDecisionId(s)),
       problems,
+      decided,
+      choices: choices.length,
       done,
       passed: index < reached,
     };

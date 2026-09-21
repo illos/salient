@@ -204,3 +204,10 @@ chosen; it needs its own slice and headless proof.
   rule reference moved beside the step title. What remains above the cards is the chooser's own
   sentence, that a starting culture can be built on or replaced and that ancestral cultures are
   open to any ancestry. The skills line went: the Culture skills panel already says the same.
+- 2026-09-21: the rail's step count reads decided over presented, "0/4", rather than a bare number
+  of outstanding diagnostics. Both numbers are derived, not curated: a step's choices are its
+  `choice` and `authored` decisions that `isAvailable` accepts for the current selections, minus
+  any a culture preset fixed. Verified through the supported `characterWizard.discover` query,
+  which reports the same availability the rail uses: with a Devil culture preset the culture step
+  offers nine decisions, five of them fixed by the preset, so the rail reads 0/4; before a preset
+  it reads 0/6; Devil ancestry reads 1/3.

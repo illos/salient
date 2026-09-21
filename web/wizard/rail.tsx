@@ -25,6 +25,9 @@ export interface RailStep {
   chosen?: string;
   /** Outstanding (non-warning) diagnostics for the step's decisions. */
   problems: number;
+  /** Choices this step presents right now, and how many are recorded. */
+  choices: number;
+  decided: number;
   /** No outstanding problems and at least one recorded decision (or nothing to decide, once visited). */
   done: boolean;
   /** The hero moved past this step: an outstanding choice here is something they left behind. */
@@ -149,12 +152,12 @@ export function StepRail({
                     reads back the hero rather than repeating the book's step list. The outstanding
                     count still shows, since a step can be decided and still owe sub-choices. */}
                 <span className="min-w-0 flex-1 truncate">{step.chosen ?? step.name}</span>
-                {step.problems > 0 && (
+                {step.choices > 0 && (
                   <span
                     className="shrink-0 text-sm tabular-nums text-muted-foreground"
-                    aria-label={`${step.problems} to resolve`}
+                    aria-label={`${step.decided} of ${step.choices} chosen`}
                   >
-                    {step.problems}
+                    {step.decided}/{step.choices}
                   </span>
                 )}
               </button>
