@@ -1002,6 +1002,17 @@ function Wizard({ character }: { character: WizardCharacter }) {
             steps={railSteps}
             currentIndex={stepIndex}
             onSelect={goTo}
+            footer={
+              <StepNav
+                previous={previous ? stepName(previous) : undefined}
+                next={next ? stepName(next) : undefined}
+                onPrevious={() => goTo(stepIndex - 1)}
+                onNext={() => goTo(stepIndex + 1)}
+                finishLabel={command.pending ? 'Saving…' : 'Save and close'}
+                finishDisabled={!canSave}
+                onFinish={() => void persist(true)}
+              />
+            }
           />
         </div>
         <section className="flex min-h-0 flex-col rounded-lg bg-card" aria-label="Current step">
@@ -1117,15 +1128,6 @@ function Wizard({ character }: { character: WizardCharacter }) {
               )}
             </fieldset>
           </div>
-          <StepNav
-            previous={previous ? stepName(previous) : undefined}
-            next={next ? stepName(next) : undefined}
-            onPrevious={() => goTo(stepIndex - 1)}
-            onNext={() => goTo(stepIndex + 1)}
-            finishLabel={command.pending ? 'Saving…' : 'Save and close'}
-            finishDisabled={!canSave}
-            onFinish={() => void persist(true)}
-          />
         </section>
         <div className="min-h-0">
           <HeroSoFar

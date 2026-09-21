@@ -5,7 +5,8 @@
  * of m" line, one compact row per presented step — the tonal round badge carries the number and
  * takes the accent on the current step (a check mark once the step is done), then the step's
  * chosen value, falling back to the step name until it has one — and a rounded progress bar at
- * the bottom. The rows are the same step buttons the wizard always had, and the accessible name
+ * the bottom, with the step navigation under it. The rows are the same step buttons the wizard
+ * always had, and the accessible name
  * keeps the step it belongs to (`n. Step name: Chosen`) so the keyboard flow keeps working. The
  * steps come from the caller in presented order; nothing here knows how many there are.
  */
@@ -60,6 +61,7 @@ export function StepRail({
   steps,
   currentIndex,
   onSelect,
+  footer,
 }: {
   /** The heading above the steps. */
   title: string;
@@ -68,6 +70,8 @@ export function StepRail({
   steps: RailStep[];
   currentIndex: number;
   onSelect: (index: number) => void;
+  /** Step navigation, under the progress bar (V96). */
+  footer?: React.ReactNode;
 }) {
   const completed = steps.filter(step => step.done).length;
   const percent = steps.length ? Math.round((completed / steps.length) * 100) : 0;
@@ -125,7 +129,7 @@ export function StepRail({
           );
         })}
       </ol>
-      <div className="pt-3">
+      <div className="flex flex-col gap-3 pt-3">
         <div
           role="progressbar"
           aria-label="Steps completed"
@@ -140,6 +144,7 @@ export function StepRail({
             style={{ width: `${percent}%` }}
           />
         </div>
+        {footer}
       </div>
     </nav>
   );

@@ -15,7 +15,7 @@ unchanged.
 
 - `web/wizard/rail.tsx`: heading with the chapter reference, muted "Step n of m", compact rows,
   accent badge on the current step, no pip; a decided step reads its chosen value in place of the
-  step name.
+  step name, and carries the step navigation at its foot.
 - `web/wizard/index.tsx`: hide `step.think`, `step.free-strikes` and `step.connections`, number
   the presented steps from one, narrow the rail column.
 - `web/wizard/presentation.ts`: remove the unused source-number helper.
@@ -82,3 +82,7 @@ unchanged.
   accessible name keeps the step (`2. Ancestry: Devil`) so the row still says which step it is and
   still contains its visible text; the title attribute is unchanged and the outstanding-count
   badge still appears, since a step can be decided and still owe sub-choices.
+- 2026-09-21: step navigation moved out of the centre column to the foot of the rail, under the
+  progress bar. Back is an arrow-only icon button (its accessible name and tooltip still say where
+  it goes, since the rail names the steps); forward names the step it leads to and truncates in the
+  narrow column; the last step keeps Save and close. The centre column is now only the step.

@@ -133,7 +133,10 @@ export function ChoiceList({ children }: { children: React.ReactNode }) {
   return <ul className="m-0 flex list-none flex-col gap-2 p-0">{children}</ul>;
 }
 
-/** The pinned bottom navigation: previous and next step names; the last step finishes. */
+/**
+ * The step navigation, at the foot of the rail (V96): back is an arrow alone, since the rail
+ * already says where it goes, and forward names the step it leads to. The last step finishes.
+ */
 export function StepNav({
   previous,
   next,
@@ -152,17 +155,36 @@ export function StepNav({
   finishDisabled?: boolean;
 }) {
   return (
-    <div className="flex items-center justify-between gap-4 px-6 pt-4 pb-6">
-      <Button type="button" variant="outline" disabled={!previous} onClick={onPrevious}>
-        ← {previous ?? 'Previous step'}
+    <div className="flex items-center gap-2">
+      <Button
+        type="button"
+        variant="outline"
+        size="icon"
+        aria-label={previous ? `Back to ${previous}` : 'Previous step'}
+        title={previous ? `Back to ${previous}` : undefined}
+        disabled={!previous}
+        onClick={onPrevious}
+      >
+        <span aria-hidden>←</span>
       </Button>
       {next ? (
-        <Button type="button" onClick={onNext}>
-          Continue to {next} →
+        <Button
+          type="button"
+          className="min-w-0 flex-1 justify-between gap-2"
+          title={`Continue to ${next}`}
+          onClick={onNext}
+        >
+          <span className="truncate">{next}</span>
+          <span aria-hidden>→</span>
         </Button>
       ) : (
-        <Button type="button" disabled={finishDisabled} onClick={onFinish}>
-          {finishLabel}
+        <Button
+          type="button"
+          className="min-w-0 flex-1"
+          disabled={finishDisabled}
+          onClick={onFinish}
+        >
+          <span className="truncate">{finishLabel}</span>
         </Button>
       )}
     </div>
