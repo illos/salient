@@ -228,12 +228,26 @@ test('V25 class/ancestry/career changes remove dependent grants but retain indep
   assert.equal(evaluate(ancestry.selections).partial?.damageImmunities, undefined);
 });
 
-test('V25 composition preserves legacy Fury complete output and supports the other ancestry without borrowing class grants', () => {
+test('V25 composition preserves legacy Fury values while V101 exposes embedded uses', () => {
   const file = JSON.parse(
     readFileSync('shared/content/character-evaluation-examples.json', 'utf8'),
   );
   const oldInput = file.examples.complete.input as EvaluationInput;
-  assert.deepEqual(evaluateCharacter(oldInput, definitions), file.examples.complete.expected);
+  const expanded = evaluateCharacter(oldInput, definitions);
+  // V101 exposes two uses already printed inside these legacy source abilities.
+  // Assert the exact delta, then retain the complete old output/provenance comparison.
+  const additions = ['Lines of Force: Enhance', 'Out of the Way!: Follow'];
+  assert.deepEqual(
+    expanded
+      .baseline!.abilities.filter(a => additions.includes(a.name))
+      .map(a => a.name)
+      .sort(),
+    [...additions].sort(),
+  );
+  expanded.baseline!.abilities = expanded.baseline!.abilities.filter(
+    a => !additions.includes(a.name),
+  );
+  assert.deepEqual(expanded, file.examples.complete.expected);
   const oldChoices = oldInput.selections;
   const polderFury = {
     ...oldChoices,

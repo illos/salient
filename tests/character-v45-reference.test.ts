@@ -188,7 +188,13 @@ for (const example of examples)
       sortedNames(
         expected.abilities.filter(
           (name: string) =>
-            !['Melee Weapon Free Strike', 'Ranged Weapon Free Strike'].includes(name),
+            ![
+              'Melee Weapon Free Strike',
+              'Ranged Weapon Free Strike',
+              // V101 provides separate UI/API uses; Forge retains them inside the parent ability.
+              'Lines of Force: Enhance',
+              'Out of the Way!: Follow',
+            ].includes(name),
         ),
       ),
     );

@@ -60,3 +60,8 @@ entries. The clean Heroes text supplies ability group membership. No Forge outpu
 - `scripts/headless/fury.ts` is cohort `fury`: six builds, forty distinct action uses, ordinary↔Stormwight
   draft pruning, admitted-build separation, source-derived damage/cost/readback and Tide self-safety.
   The ledger is written directly from the pinned source and independently audited; no Forge run requested.
+
+- TESTER `ddc7edf`: generators passed, full check stopped at three historical comparison failures
+  (384 engine passes; no backend started). The two V101 embedded uses are now asserted as the exact
+  delta before the legacy full-output comparison; the Forge comparison documents their representation
+  inside parent abilities. No runtime change. Artifacts: `/srv/presidium/projects/salient/test-artifacts/V101-ddc7edf`.
