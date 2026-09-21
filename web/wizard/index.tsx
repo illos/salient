@@ -977,14 +977,10 @@ function AssignmentEditor({
       </div>
       <div className="flex flex-wrap items-end gap-3">
         {Object.entries(fixed).map(([target, score]) => (
-          <span
-            key={target}
-            role="group"
-            aria-label={`${target} (fixed)`}
-            className="flex flex-col items-center gap-1"
-          >
+          // The accent ring already marks a fixed characteristic, and the line above names the
+          // class that fixed it, so the tile needs no caption.
+          <span key={target} role="group" aria-label={`${target} (fixed)`}>
             <StatBox compact inset emphasis value={score} label={target.slice(0, 3)} />
-            <span className="text-sm text-muted-foreground">Fixed</span>
           </span>
         ))}
         {targets.map(target => {
