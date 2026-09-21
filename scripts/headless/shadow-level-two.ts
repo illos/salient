@@ -8,6 +8,7 @@ import type {
   EvaluationInput,
   EvaluationResult,
 } from '../../shared/contracts/characterEvaluation.ts';
+import type { AbilityRollResult } from '../../shared/contracts/rollResolution.ts';
 import type { HeroSheet } from '../../shared/contracts/characterSheet.ts';
 import type { DraftSelection } from '../../shared/characterDraft.ts';
 import { draftSelectionsFrom } from '../../shared/evaluate/draft.ts';
@@ -213,7 +214,13 @@ export async function runShadowLevelTwo({
             events: {
               id: string;
               kind: string;
-              payload?: { data?: { manual?: boolean; ability?: { name?: string } } };
+              payload?: {
+                data?: {
+                  manual?: boolean;
+                  ability?: { name?: string };
+                  result?: AbilityRollResult;
+                };
+              };
             }[];
           }>('events:list', { campaignId })
         ).events.find(e => e.id === eventId);
@@ -251,6 +258,42 @@ export async function runShadowLevelTwo({
           targets: [target],
         });
         assert.equal((await event(blocked.eventId))?.kind, 'ability.blocked');
+        // Source rows: In a Puff of Ash 6/10/14 + A2 + Cloak and Dagger 1;
+        // Stink Bomb 2/5/7 poison (no characteristic or kit bonus); Machinations only moves.
+        for (const [index, name, damageByTier, manual] of [
+          [0, 'In a Puff of Ash', [9, 13, 17], /teleport/i],
+          [3, 'Stink Bomb', [2, 5, 7], /gas remains/i],
+          [4, 'Machinations of Sound', [0, 0, 0], /slide/i],
+        ] as const) {
+          const id = ids[index]!;
+          await invoke(id, 'adjust.heroic-resource', { value: 5 });
+          const beforeTarget = await director.query<Saved>('characters:get', {
+            characterId: target.id,
+          });
+          const result = await invoke(id, 'ability.use', { ability: name, targets: [target] });
+          const persisted = await event(result.eventId);
+          assert.equal(persisted?.kind, 'ability.use');
+          const roll = persisted?.payload?.data?.result;
+          assert.ok(roll);
+          const outcome = roll.targets[0]!;
+          const expectedDamage = damageByTier[outcome.tier - 1]!;
+          assert.equal(outcome.damage?.rolledDamage ?? 0, expectedDamage);
+          assert.match(JSON.stringify([outcome.unresolvedClauses, roll.manualResolutions]), manual);
+          if (name === 'Machinations of Sound')
+            assert.match(JSON.stringify(roll.manualResolutions), /Intuition/);
+          assert.equal(
+            (await director.query<Saved>('characters:get', { characterId: id })).liveState
+              ?.heroicResource.current,
+            0,
+          );
+          const afterTarget = await director.query<Saved>('characters:get', {
+            characterId: target.id,
+          });
+          assert.equal(
+            afterTarget.liveState?.stamina,
+            beforeTarget.liveState!.stamina - expectedDamage,
+          );
+        }
         for (const id of [ids[1]!, ids[5]!]) {
           const name = id === ids[1] ? 'Too Slow' : 'So Gullible';
           await invoke(id, 'adjust.heroic-resource', { value: 5 });
