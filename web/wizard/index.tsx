@@ -490,7 +490,7 @@ export function DecisionEditor({
     const pool = poolOf(decision, selections, definitions);
     control = (
       <div className="flex flex-col gap-1.5">
-        {pool.parent && (
+        {!row && pool.parent && (
           <span className="text-sm text-muted-foreground">
             {pool.parentValue}
             <RuleLink sourcePath={pool.parent.source} label={pool.parentValue ?? 'Culture skill'} />
@@ -508,7 +508,9 @@ export function DecisionEditor({
             <RuleLink sourcePath={decision.optionSources[value]} label={value} />
           )}
         </div>
-        <span className="text-sm text-muted-foreground">{pool.values.length} options</span>
+        {!row && (
+          <span className="text-sm text-muted-foreground">{pool.values.length} options</span>
+        )}
       </div>
     );
   } else if (shape.type === 'multi') {
@@ -687,13 +689,15 @@ export function DecisionEditor({
       <div className="flex flex-col gap-2">
         <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 rounded-md bg-muted px-4 py-3.5">
           <span className="min-w-0">
-            <span className="flex items-center gap-2">
-              <span className="text-base font-medium">{label}</span>
+            <span className="block text-base font-medium">{label}</span>
+            <span className="flex items-center gap-2 text-sm text-muted-foreground">
+              {row}
               {reference}
             </span>
-            <span className="block text-sm text-muted-foreground">{row}</span>
           </span>
-          <span className="shrink-0">{control}</span>
+          {/* The control steps down to the panel's tone rather than up, so it reads as a well in
+              the inset rather than another tile on it. */}
+          <span className="shrink-0 [&_.native-select]:bg-card">{control}</span>
         </div>
         <Diagnostics list={diagnostics} />
         {selectedSkills.map(name => (
