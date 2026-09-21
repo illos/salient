@@ -178,6 +178,28 @@ in its header, and Exit keeps the draft. Proof: `tests/app/wizard-draft.test.ts`
 Known consequence: an abandoned draft stays as an unlisted row. It is capped at one per owner by
 the resume, and it counts against the hundred-character creation limit.
 
+## Flagged for audit: the Tactician's two kits
+
+**This slice changed how a character option is chosen, not only how it looks.** A Tactician takes
+both kits from one card grid instead of answering `kit.choice` and then `class.tactician.second-kit`
+as separate selects. The wizard still writes both decisions, through `selectMany`, which applies
+each transition to the result of the last so the pair settles against one base. Nothing in the
+content, the evaluator or the headless route changed, and the second kit keeps its own decision id,
+its `selectedPool` exclusion of the first kit and its Field Arsenal source.
+
+What an audit should confirm, against V94 and the Field Arsenal source
+(`feature/tactician/level-1/field-arsenal.md`):
+
+- Taking, swapping and clearing kits in the grid records exactly the same two selections the two
+  selects recorded, read back from the persisted build rather than from the mutation response.
+- Changing the first kit still prunes what depends on it, including the Field Arsenal overlap
+  questions, which remain separate decisions below the grid.
+- The second kit still cannot repeat the first, and Stormwight kits stay out of both pools.
+- A Fury or Shadow, with one kit, is unaffected: the grid takes a single pick.
+
+Owner: whoever next audits the character track (V94's Tactician work). Raised 2026-09-21 by the
+user while reviewing this slice.
+
 ## Follow-up: stability before the kit
 
 Not a wizard defect, so not fixed here. The ancestry modules set `size` and `speed` as soon as the
@@ -239,3 +261,7 @@ chosen; it needs its own slice and headless proof.
   ability beside a reference that opens the kit's full entry. Bonuses a kit does not grant are
   omitted rather than printed as zero. Checked against the source rows and the built catalog: all
   25 kits, ordinary and Stormwight, resolve to a row, a description and a signature ability.
+- 2026-09-21: a Tactician chooses both kits from the one grid rather than from two selects, on the
+  user's instruction. The cards become checkboxes bounded at two, with a line counting the picks;
+  each pick still writes its own decision. Flagged for audit above, since this changes how a
+  character option is chosen.

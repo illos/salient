@@ -10,7 +10,10 @@
  * inset accent ring, and the bonus values step up to `ph` rather than taking the accent, which is
  * spent on the selection itself.
  *
- * Presentation only: the cards are native radios in one group, and choosing one sends the same
+ * A Tactician takes two kits from this one list rather than answering two selects, so the cards
+ * become checkboxes bounded by the limit; each pick still writes its own decision.
+ *
+ * Presentation only: the cards are native controls in one group, and choosing one sends the same
  * value through the same shared choice transition the select sent before. Every number shown is
  * read from the kit's recorded source row; nothing here derives a value.
  */
@@ -56,6 +59,7 @@ function KitCard({
   description,
   checked,
   supported,
+  multiple,
   onChange,
 }: {
   name: string;
@@ -63,6 +67,8 @@ function KitCard({
   description?: string;
   checked: boolean;
   supported: boolean;
+  /** Two kits are taken from this one list, so a card is a checkbox rather than a radio. */
+  multiple?: boolean;
   onChange: () => void;
 }) {
   const rows = kit ? bonuses(kit) : [];
@@ -76,8 +82,8 @@ function KitCard({
       )}
     >
       <input
-        type="radio"
-        name="kit-choice"
+        type={multiple ? 'checkbox' : 'radio'}
+        name={multiple ? undefined : 'kit-choice'}
         aria-label={name}
         checked={checked}
         disabled={!supported}
@@ -85,6 +91,17 @@ function KitCard({
         className="sr-only"
       />
       <span className="flex flex-wrap items-center gap-2">
+        {multiple && (
+          <span
+            aria-hidden
+            className={cn(
+              'flex size-[18px] shrink-0 items-center justify-center rounded-full text-xs',
+              checked ? 'bg-primary text-primary-foreground' : 'bg-placeholder',
+            )}
+          >
+            {checked ? '✓' : ''}
+          </span>
+        )}
         <span className="text-lg font-medium">{name}</span>
         {!supported && <span className="text-sm text-muted-foreground">Not offered yet</span>}
       </span>
@@ -119,38 +136,62 @@ function KitCard({
 
 export function KitChoice({
   decision,
-  value,
   values,
+  selected,
+  limit = 1,
   onChange,
 }: {
   decision: Decision;
-  value?: string;
   values: string[];
-  onChange: (value: string | undefined) => void;
+  /** The kits taken, in the order their decisions record them. */
+  selected: string[];
+  /** How many kits this hero may take: the Tactician's Field Arsenal grants a second. */
+  limit?: number;
+  onChange: (next: string[]) => void;
 }) {
   const { catalog } = useRulesCatalog();
+  const multiple = limit > 1;
+  const full = selected.length >= limit;
   return (
-    <div
-      className="grid grid-cols-[repeat(auto-fill,minmax(17rem,1fr))] gap-2"
-      role="radiogroup"
-      aria-label="Kit"
-    >
-      {values.map(name => {
-        const kit = SUPPORTING_KITS[name];
-        return (
-          <KitCard
-            key={name}
-            name={name}
-            kit={kit}
-            description={
-              kit ? ruleExcerpt(catalog, { sourcePath: kit.entryPath, label: name }) : undefined
-            }
-            checked={value === name}
-            supported={isSupported(decision, name)}
-            onChange={() => onChange(name)}
-          />
-        );
-      })}
+    <div className="flex flex-col gap-3">
+      {multiple && (
+        <p className="m-0 text-sm text-muted-foreground">
+          {selected.length} of {limit} kits chosen
+          {full ? '. Clear one to take a different kit.' : '.'}
+        </p>
+      )}
+      <div
+        className="grid grid-cols-[repeat(auto-fill,minmax(17rem,1fr))] gap-2"
+        role={multiple ? 'group' : 'radiogroup'}
+        aria-label="Kit"
+      >
+        {values.map(name => {
+          const kit = SUPPORTING_KITS[name];
+          const checked = selected.includes(name);
+          return (
+            <KitCard
+              key={name}
+              name={name}
+              kit={kit}
+              description={
+                kit ? ruleExcerpt(catalog, { sourcePath: kit.entryPath, label: name }) : undefined
+              }
+              checked={checked}
+              multiple={multiple}
+              supported={isSupported(decision, name) && (!full || checked || !multiple)}
+              onChange={() =>
+                onChange(
+                  multiple
+                    ? checked
+                      ? selected.filter(taken => taken !== name)
+                      : [...selected, name].slice(0, limit)
+                    : [name],
+                )
+              }
+            />
+          );
+        })}
+      </div>
     </div>
   );
 }

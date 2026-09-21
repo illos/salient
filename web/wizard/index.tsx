@@ -1,5 +1,6 @@
 import { CulturePresetSelect } from './culture-preset';
 import { KitChoice } from './kit-choice';
+import { SECOND_KIT_DECISION } from '../../shared/evaluate/classes/tactician';
 // SPDX-License-Identifier: GPL-3.0-only
 /**
  * The shared level-one wizard: a decision flow over the supported class definitions
@@ -247,6 +248,8 @@ export function DecisionEditor({
   lockedBy,
   baseline,
   row,
+  onSelectMany,
+  secondDiagnostics,
 }: {
   definitions?: DecisionDefinitions;
   decision: Decision;
@@ -265,6 +268,10 @@ export function DecisionEditor({
    * on the right, instead of the label-above-control section.
    */
   row?: string;
+  /** Record several decisions from one control, against one base (V96, the two-kit grid). */
+  onSelectMany?: (entries: [string, SelectionValue | undefined][]) => void;
+  /** Diagnostics of the second kit, which the combined grid answers for. */
+  secondDiagnostics?: Diagnostic[];
 }) {
   const decisions = useMemo(() => indexDecisions(definitions), [definitions]);
   // Shared cached catalog: the reference links on these same rows already hold it.
@@ -315,17 +322,41 @@ export function DecisionEditor({
   const shownGrants = (decision.grants ?? []).filter(
     grant => !(showsStatTiles && grant.kind === 'statistic'),
   );
+  // A Tactician's Field Arsenal grants a second kit from the same pool, so both are taken from one
+  // list rather than from two selects. The second decision still records the second kit.
+  const second = decisions.get(SECOND_KIT_DECISION);
+  const twoKits = !!second && isAvailable(second, selections, decisions);
+  if (decision.id === SECOND_KIT_DECISION && twoKits) return null;
   if (decision.id === 'kit.choice') {
     const pool = poolOf(decision, selections, definitions);
+    const taken = [value, twoKits ? selections[SECOND_KIT_DECISION] : undefined].filter(
+      (item): item is string => typeof item === 'string',
+    );
     return (
-      <ChoiceSection label={label} reference={reference}>
+      <ChoiceSection
+        label={twoKits ? `${label} — Field Arsenal grants two` : label}
+        reference={reference}
+      >
         <KitChoice
           decision={decision}
-          value={typeof value === 'string' ? value : undefined}
           values={pool.values}
-          onChange={next => onSelect(decision.id, next)}
+          selected={taken}
+          limit={twoKits ? 2 : 1}
+          onChange={next =>
+            onSelectMany
+              ? onSelectMany(
+                  twoKits
+                    ? [
+                        ['kit.choice', next[0]],
+                        [SECOND_KIT_DECISION, next[1]],
+                      ]
+                    : [['kit.choice', next[0]]],
+                )
+              : onSelect(decision.id, next[0])
+          }
         />
         <Diagnostics list={diagnostics} />
+        {second && twoKits && <Diagnostics list={secondDiagnostics} />}
       </ChoiceSection>
     );
   }
@@ -1022,6 +1053,24 @@ function Wizard({ character }: { character: WizardCharacter }) {
     setSelections(pruned.selections);
     setCleared(pruned.removed.filter(removed => removed !== id));
   }
+  /**
+   * Record several decisions from one control (V96, the two-kit grid). Each transition applies to
+   * the result of the last, so both kits settle against one base instead of racing on stale state.
+   */
+  function selectMany(entries: [string, SelectionValue | undefined][]) {
+    if (command.pending) return;
+    setSaved(false);
+    setDirty(true);
+    let working = selections;
+    const removed: string[] = [];
+    for (const [id, next] of entries) {
+      const pruned = changeChoice(working, definitions, id, next);
+      working = pruned.selections;
+      removed.push(...pruned.removed.filter(item => item !== id));
+    }
+    setSelections(working);
+    setCleared([...new Set(removed)]);
+  }
   function author(value: CharacterAuthored) {
     if (command.pending) return;
     setSaved(false);
@@ -1306,6 +1355,8 @@ function Wizard({ character }: { character: WizardCharacter }) {
         lockedBy={lockedByPreset(decision.id)}
         baseline={evaluation?.baseline ?? evaluation?.partial}
         row={row}
+        onSelectMany={selectMany}
+        secondDiagnostics={evaluation?.diagnostics[SECOND_KIT_DECISION]}
       />
     </div>
   );
