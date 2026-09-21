@@ -6,8 +6,8 @@
  * inset of hairline-split rows. What the build grants follows in its own insets, counted; then the
  * skills, then what the hero still owes, then the Source text inset for the current step.
  *
- * The status reads as a dot and a word rather than a pill, so the accent marks completeness
- * rather than decorating a label. Every value is read from the shared `characters.evaluate`
+ * Saving the hero sits beside the column's heading: the outstanding list below already says
+ * whether the build is finished, so a status word there would repeat it. Every value is read from the shared `characters.evaluate`
  * result; nothing here derives one. A value the evaluator has not produced yet reads "Pending"
  * (the model does not say which later step supplies it).
  */
@@ -15,7 +15,6 @@ import { cn } from 'cn';
 import { Chip } from '../components/chip';
 import { Disc } from '../components/disc';
 import { StatBox } from '../components/stat-box';
-import { Loading } from '../ui';
 import { RuleLink } from '../rules/link';
 import type { RuleReference } from '../rules/reference';
 import type { EvaluationResult, PartialBaseline } from '../../shared/contracts/characterEvaluation';
@@ -78,11 +77,14 @@ export function HeroSoFar({
   heroName,
   sourceReference,
   sourceExcerpt,
+  action,
 }: {
   evaluation: EvaluationResult | undefined;
   heroName: string;
   sourceReference: RuleReference;
   sourceExcerpt?: string;
+  /** Saving the hero, beside the column's heading (V96). */
+  action?: React.ReactNode;
 }) {
   const b: PartialBaseline = evaluation?.baseline ?? evaluation?.partial ?? {};
   const show = (v: { value: number | string } | undefined) =>
@@ -105,20 +107,7 @@ export function HeroSoFar({
     >
       <div className="flex items-center justify-between gap-3">
         <p className="m-0 text-lg font-medium">Your hero so far</p>
-        {evaluation ? (
-          <span className="flex items-center gap-2 text-sm text-muted-foreground">
-            <span
-              aria-hidden
-              className={cn(
-                'size-2 rounded-full',
-                evaluation.status === 'complete' ? 'bg-primary' : 'bg-placeholder',
-              )}
-            />
-            {evaluation.status}
-          </span>
-        ) : (
-          <Loading>Evaluating…</Loading>
-        )}
+        {action}
       </div>
       <div className="flex items-center gap-4">
         <Disc name={heroName || 'Unnamed hero'} variant="grey" size="md" />

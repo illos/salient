@@ -6,7 +6,7 @@
  * takes the accent on the current step (a check mark once the step is done, an exclamation on a
  * step the hero passed while it still owed a choice), then the step's chosen value, falling back
  * to the step name until it has one — with the completed percentage and its accent progress bar
- * under the heading, and the step navigation and the save action at the foot. The rows are the same
+ * under the heading, and the step navigation at the foot. The rows are the same
  * step buttons the wizard always had, and the accessible name keeps the step it belongs to
  * (`n. Step name: Chosen`) so the keyboard flow keeps working. The steps come from the caller in
  * presented order; nothing here knows how many there are.
@@ -198,7 +198,6 @@ export function StepRail({
   onSelect,
   onSelectItem,
   footer,
-  save,
 }: {
   /** The heading above the steps. */
   title: string;
@@ -211,8 +210,6 @@ export function StepRail({
   onSelectItem?: (decisionId: string) => void;
   /** Step navigation, at the foot of the rail (V96). */
   footer?: React.ReactNode;
-  /** Saving the hero, under the rail (V96). */
-  save?: React.ReactNode;
 }) {
   // Count the whole tree: a nested step is still a step of the build, and `currentIndex` is a
   // position in the presented sequence rather than in this list.
@@ -260,10 +257,7 @@ export function StepRail({
           />
         ))}
       </ol>
-      <div className="flex flex-col gap-2 pt-3">
-        {footer}
-        {save}
-      </div>
+      <div className="pt-3">{footer}</div>
     </nav>
   );
 }

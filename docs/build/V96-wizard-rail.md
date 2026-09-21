@@ -289,4 +289,6 @@ chosen; it needs its own slice and headless proof.
   longer a full-viewport frame in `web/router.tsx`, so it renders inside the ordinary page column
   with the top nav above it; `web/wizard/header.tsx` is deleted. Saving moved under the rail as a
   single button, which saves and closes. Exit and the "Draft saved" line went with the header: the
-  nav leaves the page, and the draft is saved as you work either way.
+  nav leaves the page, and the draft is saved as you work either way. Saving then moved again, to
+  the head of the hero column, replacing the status word: the outstanding list under it already
+  says whether the build is finished.

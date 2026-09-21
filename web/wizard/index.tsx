@@ -1578,20 +1578,6 @@ function Wizard({ character }: { character: WizardCharacter }) {
                   ?.scrollIntoView({ block: 'center', behavior: 'smooth' }),
               )
             }
-            save={
-              <Button
-                type="button"
-                className="mt-1 rounded-full"
-                disabled={!canSave}
-                onClick={() => void persist(true)}
-              >
-                {command.pending
-                  ? 'Saving…'
-                  : character.wizardDraft || !character.id
-                    ? 'Save hero'
-                    : 'Save draft'}
-              </Button>
-            }
             footer={
               <StepNav
                 previous={previous ? stepName(previous) : undefined}
@@ -1873,6 +1859,21 @@ function Wizard({ character }: { character: WizardCharacter }) {
         </div>
         <div className={STICKY_PANE}>
           <HeroSoFar
+            action={
+              <Button
+                type="button"
+                size="sm"
+                className="rounded-full"
+                disabled={!canSave}
+                onClick={() => void persist(true)}
+              >
+                {command.pending
+                  ? 'Saving…'
+                  : character.wizardDraft || !character.id
+                    ? 'Save hero'
+                    : 'Save draft'}
+              </Button>
+            }
             evaluation={evaluation}
             heroName={authored.name}
             sourceReference={stepReference(step)}
