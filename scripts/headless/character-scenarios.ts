@@ -1,3 +1,4 @@
+import { runTactician } from './tactician.ts';
 import { runComplicationActions } from './complication-actions.ts';
 import { runStartingItems } from './starting-items.ts';
 import { runStartingRewards } from './starting-rewards.ts';
@@ -325,6 +326,7 @@ export async function runScenarios(context: ScenarioContext) {
       'Smoke Bomb granted',
     );
   });
+  await runTactician(context);
   const extraTraits: [string, string[][]][] = [
     [
       'Hakaan',

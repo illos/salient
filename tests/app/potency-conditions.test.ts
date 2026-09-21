@@ -13,6 +13,7 @@ import { backend, table, admitHero, type Backend } from './fixtures/table';
 
 import examples from '../../shared/content/character-evaluation-examples.json' with { type: 'json' };
 import shadowLedger from '../fixtures/v92-shadow-expected.json' with { type: 'json' };
+import tacticianLedger from '../fixtures/v94-tactician-expected.json' with { type: 'json' };
 import { definitions } from '../../shared/content/level-one-decisions';
 import { draftSelectionsFrom } from '../../shared/evaluate/draft';
 
@@ -752,4 +753,122 @@ test('Eviscerate from a Shadow: kit-inclusive damage, potency tiers, Insight deb
   });
   expect(await active(goblin)).toEqual([]);
   expect(await insight()).toBe(0);
+});
+
+// V94: the Tactician's 3-Focus Concussive Strike (feature/ability/tactician/level-1/concussive-strike.md)
+// is newly reachable: `<n> + M damage; M < <tier>, dazed (save ends)` with a Melee 1 or ranged 5
+// weapon strike. Ledger witness 1 (Might 2, Reason potency 0/1/2, Field Arsenal Shining Armor +
+// Sniper: melee damage +2/+2/+2 from Shining Armor alone) with the 3-Focus choice swapped to
+// Concussive Strike. Targets: Dwarf Warden Might 2, Goblin Warrior Might −2 (their stat blocks).
+test('Concussive Strike from a Tactician: arsenal melee bonus, Might potency tiers and Focus debit', async () => {
+  const t = backend();
+  const f = await table(t);
+  await t.action(internal.content.reseed, {});
+  const witness = tacticianLedger.witnesses[0]!;
+  const choices: EvaluationInput['selections'] = {
+    ...(witness.selections as EvaluationInput['selections']),
+    'class.tactician.ability-3': 'Concussive Strike',
+    'details.name': 'SirJohn',
+  };
+  const tactician = await admitHero(
+    t,
+    f.player,
+    f.director,
+    f.campaignId,
+    'SirJohn',
+    draftSelectionsFrom(choices, definitions),
+  );
+  const add = (definitionId: string) =>
+    f.director.client.mutation(api.foes.add, {
+      campaignId: f.campaignId,
+      definitionId,
+      commandId: `concussive-${++sequence}`,
+    });
+  const warden = await add('mcdm.monsters.v1/monster.dwarf.statblock/dwarf-warden');
+  const goblin = await add('mcdm.monsters.v1/monster.goblin.statblock/goblin-warrior');
+  const command = (text: string, player = false) =>
+    (player ? f.player : f.director).client.mutation(api.commands.submit, {
+      campaignId: f.campaignId,
+      commandId: `concussive-${++sequence}`,
+      text,
+    });
+  const heroRef = `@{character:${tactician}}`;
+  const sheet = await f.player.client.query(api.abilities.sheet, {
+    campaignId: f.campaignId,
+    actor: { kind: 'character', id: tactician, name: 'SirJohn' },
+  });
+  expect(sheet.abilities.find(ability => ability.name === 'Concussive Strike')).toMatchObject({
+    fixedCost: { resource: 'focus', amount: 3 },
+    targetShape: { kind: 'single' },
+  });
+  await command('/combat start');
+  await command('/combat commit');
+  await command('/combat roll', true);
+  await command('/combat first side=heroes');
+  await command(`${heroRef} /turn take`, true);
+  await command(`${heroRef} /adjust heroic-resource value=6`);
+  const focus = async () =>
+    (await t.run(ctx => ctx.db.get(tactician)))!.liveState!.heroicResource.current;
+  const live = async (foe: Id<'foes'>) => (await t.run(ctx => ctx.db.get(foe)))!.live;
+  const read = async (event: Id<'events'>) =>
+    (
+      await f.director.client.query(api.abilities.results, {
+        campaignId: f.campaignId,
+        eventIds: [event],
+      })
+    )[0]!;
+  const condition = (result: Awaited<ReturnType<typeof read>>) =>
+    (result.compiled as PublicCompiledResult).effects.find(o => o.effect.kind === 'condition')!;
+  const use = async (faces: number[], foe: Id<'foes'>) => {
+    await position(t, f.campaignId, faces);
+    return command(
+      `${heroRef} /ability use ability="Concussive Strike" targets=[@{foe:${foe}}]`,
+      true,
+    );
+  };
+
+  // Tier 1: 4+4 + M 2 = 10 (≤11). 3 + 2 + 2 = 7 damage; warden M 2 < WEAK 0 is false → resisted.
+  const wardenStart = (await live(warden)).stamina;
+  const tierOne = await use([4, 4], warden);
+  expect((await read(tierOne.eventId)).targets[0]!.outcome).toMatchObject({
+    tier: 1,
+    damage: { tierConstant: 3, damageCharacteristicValue: 2, kitBonus: 2, rolledDamage: 7 },
+  });
+  expect((await live(warden)).stamina).toBe(wardenStart - 7);
+  expect(condition(await read(tierOne.eventId)).effect).toMatchObject({
+    status: 'resisted',
+    characteristic: 'M',
+    threshold: 0,
+    targetScore: 2,
+    condition: 'dazed',
+  });
+  expect(await focus()).toBe(3);
+
+  // Tier 2: 6+6 + 2 = 14 (12–16). 5 + 2 + 2 = 9 damage; goblin M −2 < AVERAGE 1 → dazed applied.
+  const goblinStart = (await live(goblin)).stamina;
+  const tierTwo = await use([6, 6], goblin);
+  const applied = await live(goblin);
+  expect(applied.stamina).toBe(goblinStart - 9);
+  const appliedResult = await read(tierTwo.eventId);
+  expect(appliedResult.targets[0]!.outcome).toMatchObject({
+    tier: 2,
+    damage: { rolledDamage: 9 },
+  });
+  expect(condition(appliedResult).effect).toMatchObject({
+    status: 'applied',
+    threshold: 1,
+    targetScore: -2,
+    condition: 'dazed',
+    duration: 'save-ends',
+  });
+  expect(applied.conditions!.dazed).toBe(true);
+  const event = (await t.run(ctx => ctx.db.get(tierTwo.eventId)))!;
+  expect((event.payload as { data: { result: { cost: unknown } } }).data.result.cost).toEqual({
+    resource: 'focus',
+    amount: 3,
+    waived: false,
+    before: 3,
+    after: 0,
+  });
+  expect(await focus()).toBe(0);
 });

@@ -1,0 +1,1180 @@
+{
+  "schemaVersion": "v94-independent-1",
+  "compendiumRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
+  "sourceRoot": "vendor/steel-compendium",
+  "method": "Expected values authored from pinned Compendium only. V92 ledger supplies identical Human/background selections and their source citations. No evaluator code or output consulted.",
+  "baselineContext": "Level1; no complication, active effects, combat or Victories. Renown excludes contextual Commanding Presence. M2 chosen for signature damage.",
+  "witnesses": [
+    {
+      "id": "v94-tactician-1",
+      "selections": {
+        "culture.name": "wilderness mercenary commune",
+        "culture.language": "Anjali",
+        "culture.environment": "Wilderness",
+        "culture.environment.skill": "Swim",
+        "culture.organization": "Communal",
+        "culture.organization.skill": "Blacksmithing",
+        "culture.upbringing": "Martial",
+        "culture.upbringing.skill": "Intimidate",
+        "career.choice": "Soldier",
+        "career.soldier.skill.exploration": "Endurance",
+        "career.soldier.skill.intrigue": "Alertness",
+        "career.soldier.languages": ["Kalliak", "Vaslorian"],
+        "career.soldier.perk": "Teamwork",
+        "career.soldier.inciting-incident": "Sole Survivor",
+        "ancestry.choice": "Human",
+        "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
+        "class.choice": "Tactician",
+        "class.tactician.characteristic-array": "2, −1, −1",
+        "class.tactician.array-assignment": {
+          "Agility": 2,
+          "Intuition": -1,
+          "Presence": -1
+        },
+        "class.tactician.skills": ["Monsters", "Strategy"],
+        "class.tactician.doctrine": "Insurgent",
+        "class.tactician.doctrine-skill": "Hide",
+        "class.tactician.ability-3": "Battle Cry",
+        "class.tactician.ability-5": "Hammer and Anvil",
+        "kit.choice": "Shining Armor",
+        "class.tactician.second-kit": "Sniper",
+        "details.name": "V94 Tactician 1"
+      },
+      "expected": {
+        "level": 1,
+        "ancestry": "Human",
+        "class": "Tactician",
+        "subclass": "Insurgent",
+        "career": "Soldier",
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": 2,
+          "I": -1,
+          "P": -1
+        },
+        "staminaMaximum": 33,
+        "recoveriesMaximum": 10,
+        "recoveryValue": 11,
+        "windedValue": 16,
+        "speed": 6,
+        "stability": 1,
+        "size": "1M",
+        "disengage": 2,
+        "potencyCharacteristic": "R",
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "heroicResource": "focus",
+        "heroicResourceCurrent": 0,
+        "victories": 0,
+        "renown": 1,
+        "wealth": 1,
+        "kit": "Shining Armor",
+        "kits": ["Shining Armor", "Sniper"],
+        "skills": [
+          "Alertness",
+          "Blacksmithing",
+          "Endurance",
+          "Hide",
+          "Intimidate",
+          "Lead",
+          "Monsters",
+          "Strategy",
+          "Swim"
+        ],
+        "languages": ["Anjali", "Caelian", "Kalliak", "Vaslorian"],
+        "traits": ["Detect the Supernatural", "Determination", "Can't Take Hold"],
+        "features": [
+          "Culture edge",
+          "Tactical Doctrine",
+          "Focus",
+          "Doctrine Feature",
+          "Doctrine Triggered Action",
+          "Field Arsenal",
+          "Kit Signature Ability",
+          "Mark",
+          "Strike Now",
+          "Tactician Abilities",
+          "Covert Operations"
+        ],
+        "perks": ["Teamwork"],
+        "abilities": [
+          "Detect the Supernatural",
+          "Determination",
+          "Mark",
+          "\"Strike Now!\"",
+          "Battle Cry",
+          "Hammer and Anvil",
+          "Advanced Tactics",
+          "Protective Attack",
+          "Patient Shot",
+          "Melee Weapon Free Strike",
+          "Ranged Weapon Free Strike"
+        ],
+        "mergedKitBonuses": {
+          "stamina": 12,
+          "speed": 1,
+          "stability": 1,
+          "disengage": 1,
+          "meleeDamage": [2, 2, 2],
+          "rangedDamage": [0, 0, 4],
+          "meleeDistance": 0,
+          "rangedDistance": 10
+        },
+        "printedKitBonuses": {
+          "Shining Armor": {
+            "stamina": 12,
+            "stability": 1,
+            "meleeDamage": [2, 2, 2]
+          },
+          "Sniper": {
+            "speed": 1,
+            "disengage": 1,
+            "rangedDamage": [0, 0, 4],
+            "rangedDistance": 10
+          }
+        },
+        "kitSignatureDamage": {
+          "Protective Attack": {
+            "printedConstantTiers": [5, 8, 11],
+            "resolvedConstantTiers": [5, 8, 11],
+            "resolvedWithCharacteristicTiers": [7, 10, 13],
+            "characteristic": "Might 2 (or Agility if equal); contextual effect damage excluded"
+          },
+          "Patient Shot": {
+            "printedConstantTiers": [3, 6, 13],
+            "resolvedConstantTiers": [3, 6, 13],
+            "resolvedWithCharacteristicTiers": [5, 8, 15],
+            "characteristic": "Might 2 (or Agility if equal); contextual effect damage excluded"
+          }
+        },
+        "requiredArsenalBenefits": [],
+        "equalOverlapBenefits": [],
+        "kitBonusReplacements": [],
+        "embeddedActions": [
+          {
+            "sourceAbility": "Mark",
+            "trigger": "Creature marked by you reduced to 0 Stamina",
+            "actionType": "free triggered action",
+            "cost": 0,
+            "effect": "Mark a new target within distance (10 squares).",
+            "sourcePath": "en/unified/md/feature/ability/tactician/level-1/mark.md"
+          },
+          {
+            "sourceAbility": "Mark",
+            "trigger": "You or ally uses an ability to deal rolled damage to a creature marked by you",
+            "actionType": "free triggered action",
+            "cost": {
+              "resource": "focus",
+              "amount": 1
+            },
+            "effectChoices": [
+              "Ability deals extra damage twice Reason = 4",
+              "Creature dealing damage can spend a Recovery",
+              "Creature dealing damage can shift up to Reason = 2 squares",
+              "If you damage marked creature with melee ability, target is taunted by you until end of its next turn"
+            ],
+            "limit": "One benefit per trigger",
+            "sourcePath": "en/unified/md/feature/ability/tactician/level-1/mark.md"
+          }
+        ]
+      },
+      "derivation": {
+        "characteristics": "Tactician Basics: M2 R2; array assigned to A,I,P in order.",
+        "staminaMaximum": "21 + 12 × echelon1 = 33; overlapping kit Stamina is chosen, not summed.",
+        "recoveryValue": "floor(33/3) = 11",
+        "windedValue": "floor(33/2) = 16",
+        "recoveriesMaximum": "Class10, neither selected Human trait modifies Recoveries.",
+        "skills": "5 background + Lead + 2 class choices + 1 doctrine = 9 distinct.",
+        "arsenal": "Each benefit supplied once. Only overlapping unequal nonzero printed bonuses need choices. Absent bonuses do not compete. Damage is one whole tuple.",
+        "signatureDamage": "Field Arsenal replacement is mandatory rules arithmetic; ledger states required values independently of whether this slice automates rolls. Printed signature values already include original kit bonuses."
+      }
+    },
+    {
+      "id": "v94-tactician-2",
+      "selections": {
+        "culture.name": "wilderness mercenary commune",
+        "culture.language": "Anjali",
+        "culture.environment": "Wilderness",
+        "culture.environment.skill": "Swim",
+        "culture.organization": "Communal",
+        "culture.organization.skill": "Blacksmithing",
+        "culture.upbringing": "Martial",
+        "culture.upbringing.skill": "Intimidate",
+        "career.choice": "Soldier",
+        "career.soldier.skill.exploration": "Endurance",
+        "career.soldier.skill.intrigue": "Alertness",
+        "career.soldier.languages": ["Kalliak", "Vaslorian"],
+        "career.soldier.perk": "Teamwork",
+        "career.soldier.inciting-incident": "Sole Survivor",
+        "ancestry.choice": "Human",
+        "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
+        "class.choice": "Tactician",
+        "class.tactician.characteristic-array": "1, 1, −1",
+        "class.tactician.array-assignment": {
+          "Agility": 1,
+          "Intuition": 1,
+          "Presence": -1
+        },
+        "class.tactician.skills": ["Monsters", "Strategy"],
+        "class.tactician.doctrine": "Mastermind",
+        "class.tactician.doctrine-skill": "Magic",
+        "class.tactician.ability-3": "Concussive Strike",
+        "class.tactician.ability-5": "Mind Game",
+        "kit.choice": "Martial Artist",
+        "class.tactician.second-kit": "Mountain",
+        "details.name": "V94 Tactician 2",
+        "class.tactician.arsenal.stamina": "Martial Artist",
+        "class.tactician.arsenal.meleeDamage": "Martial Artist"
+      },
+      "expected": {
+        "level": 1,
+        "ancestry": "Human",
+        "class": "Tactician",
+        "subclass": "Mastermind",
+        "career": "Soldier",
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 2,
+          "I": 1,
+          "P": -1
+        },
+        "staminaMaximum": 24,
+        "recoveriesMaximum": 10,
+        "recoveryValue": 8,
+        "windedValue": 12,
+        "speed": 8,
+        "stability": 2,
+        "size": "1M",
+        "disengage": 2,
+        "potencyCharacteristic": "R",
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "heroicResource": "focus",
+        "heroicResourceCurrent": 0,
+        "victories": 0,
+        "renown": 1,
+        "wealth": 1,
+        "kit": "Martial Artist",
+        "kits": ["Martial Artist", "Mountain"],
+        "skills": [
+          "Alertness",
+          "Blacksmithing",
+          "Endurance",
+          "Intimidate",
+          "Lead",
+          "Magic",
+          "Monsters",
+          "Strategy",
+          "Swim"
+        ],
+        "languages": ["Anjali", "Caelian", "Kalliak", "Vaslorian"],
+        "traits": ["Detect the Supernatural", "Determination", "Can't Take Hold"],
+        "features": [
+          "Culture edge",
+          "Tactical Doctrine",
+          "Focus",
+          "Doctrine Feature",
+          "Doctrine Triggered Action",
+          "Field Arsenal",
+          "Kit Signature Ability",
+          "Mark",
+          "Strike Now",
+          "Tactician Abilities",
+          "Studied Commander"
+        ],
+        "perks": ["Teamwork"],
+        "abilities": [
+          "Detect the Supernatural",
+          "Determination",
+          "Mark",
+          "\"Strike Now!\"",
+          "Concussive Strike",
+          "Mind Game",
+          "Overwatch",
+          "Battle Grace",
+          "Pain for Pain",
+          "Melee Weapon Free Strike",
+          "Ranged Weapon Free Strike"
+        ],
+        "mergedKitBonuses": {
+          "stamina": 3,
+          "speed": 3,
+          "stability": 2,
+          "disengage": 1,
+          "meleeDamage": [2, 2, 2],
+          "rangedDamage": [0, 0, 0],
+          "meleeDistance": 0,
+          "rangedDistance": 0
+        },
+        "printedKitBonuses": {
+          "Martial Artist": {
+            "stamina": 3,
+            "speed": 3,
+            "disengage": 1,
+            "meleeDamage": [2, 2, 2]
+          },
+          "Mountain": {
+            "stamina": 9,
+            "stability": 2,
+            "meleeDamage": [0, 0, 4]
+          }
+        },
+        "kitSignatureDamage": {
+          "Battle Grace": {
+            "printedConstantTiers": [5, 8, 11],
+            "resolvedConstantTiers": [5, 8, 11],
+            "resolvedWithCharacteristicTiers": [7, 10, 13],
+            "characteristic": "Might 2 (or Agility if equal); contextual effect damage excluded"
+          },
+          "Pain for Pain": {
+            "printedConstantTiers": [3, 5, 13],
+            "resolvedConstantTiers": [5, 7, 11],
+            "resolvedWithCharacteristicTiers": [7, 9, 13],
+            "characteristic": "Might 2 (or Agility if equal); contextual effect damage excluded"
+          }
+        },
+        "requiredArsenalBenefits": ["stamina", "meleeDamage"],
+        "equalOverlapBenefits": [],
+        "kitBonusReplacements": [
+          {
+            "ability": "Pain for Pain",
+            "benefit": "meleeDamage",
+            "fromKit": "Mountain",
+            "toKit": "Martial Artist",
+            "subtract": [0, 0, 4],
+            "add": [2, 2, 2],
+            "formula": "[3,5,13] - [0,0,4] + [2,2,2] = [5,7,11]; add Might2 -> [7,9,13]."
+          }
+        ],
+        "embeddedActions": [
+          {
+            "sourceAbility": "Mark",
+            "trigger": "Creature marked by you reduced to 0 Stamina",
+            "actionType": "free triggered action",
+            "cost": 0,
+            "effect": "Mark a new target within distance (10 squares).",
+            "sourcePath": "en/unified/md/feature/ability/tactician/level-1/mark.md"
+          },
+          {
+            "sourceAbility": "Mark",
+            "trigger": "You or ally uses an ability to deal rolled damage to a creature marked by you",
+            "actionType": "free triggered action",
+            "cost": {
+              "resource": "focus",
+              "amount": 1
+            },
+            "effectChoices": [
+              "Ability deals extra damage twice Reason = 4",
+              "Creature dealing damage can spend a Recovery",
+              "Creature dealing damage can shift up to Reason = 2 squares",
+              "If you damage marked creature with melee ability, target is taunted by you until end of its next turn"
+            ],
+            "limit": "One benefit per trigger",
+            "sourcePath": "en/unified/md/feature/ability/tactician/level-1/mark.md"
+          },
+          {
+            "sourceFeature": "Studied Commander",
+            "actionType": "respite activity",
+            "prerequisites": "At least 24 hours before combat encounter or negotiation; at least one clue or rumor. Once per encounter/negotiation.",
+            "roll": "Reason 2",
+            "effect": "Combat tiers reveal number / number and level / tier2 plus all enemies surprised. Negotiation tiers reveal three motivations one true / one true motivation / tier2 plus allied influence-test edge.",
+            "sourcePath": "en/unified/md/feature/tactician/level-1/studied-commander.md"
+          }
+        ]
+      },
+      "derivation": {
+        "characteristics": "Tactician Basics: M2 R2; array assigned to A,I,P in order.",
+        "staminaMaximum": "21 + 3 × echelon1 = 24; overlapping kit Stamina is chosen, not summed.",
+        "recoveryValue": "floor(24/3) = 8",
+        "windedValue": "floor(24/2) = 12",
+        "recoveriesMaximum": "Class10, neither selected Human trait modifies Recoveries.",
+        "skills": "5 background + Lead + 2 class choices + 1 doctrine = 9 distinct.",
+        "arsenal": "Each benefit supplied once. Only overlapping unequal nonzero printed bonuses need choices. Absent bonuses do not compete. Damage is one whole tuple.",
+        "signatureDamage": "Field Arsenal replacement is mandatory rules arithmetic; ledger states required values independently of whether this slice automates rolls. Printed signature values already include original kit bonuses."
+      }
+    },
+    {
+      "id": "v94-tactician-3",
+      "selections": {
+        "culture.name": "wilderness mercenary commune",
+        "culture.language": "Anjali",
+        "culture.environment": "Wilderness",
+        "culture.environment.skill": "Swim",
+        "culture.organization": "Communal",
+        "culture.organization.skill": "Blacksmithing",
+        "culture.upbringing": "Martial",
+        "culture.upbringing.skill": "Intimidate",
+        "career.choice": "Soldier",
+        "career.soldier.skill.exploration": "Endurance",
+        "career.soldier.skill.intrigue": "Alertness",
+        "career.soldier.languages": ["Kalliak", "Vaslorian"],
+        "career.soldier.perk": "Teamwork",
+        "career.soldier.inciting-incident": "Sole Survivor",
+        "ancestry.choice": "Human",
+        "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
+        "class.choice": "Tactician",
+        "class.tactician.characteristic-array": "1, 0, 0",
+        "class.tactician.array-assignment": {
+          "Agility": 1,
+          "Intuition": 0,
+          "Presence": 0
+        },
+        "class.tactician.skills": ["Monsters", "Strategy"],
+        "class.tactician.doctrine": "Vanguard",
+        "class.tactician.doctrine-skill": "Persuade",
+        "class.tactician.ability-3": "Inspiring Strike",
+        "class.tactician.ability-5": "Now!",
+        "kit.choice": "Martial Artist",
+        "class.tactician.second-kit": "Mountain",
+        "details.name": "V94 Tactician 3",
+        "class.tactician.arsenal.stamina": "Mountain",
+        "class.tactician.arsenal.meleeDamage": "Mountain"
+      },
+      "expected": {
+        "level": 1,
+        "ancestry": "Human",
+        "class": "Tactician",
+        "subclass": "Vanguard",
+        "career": "Soldier",
+        "characteristics": {
+          "M": 2,
+          "A": 1,
+          "R": 2,
+          "I": 0,
+          "P": 0
+        },
+        "staminaMaximum": 30,
+        "recoveriesMaximum": 10,
+        "recoveryValue": 10,
+        "windedValue": 15,
+        "speed": 8,
+        "stability": 2,
+        "size": "1M",
+        "disengage": 2,
+        "potencyCharacteristic": "R",
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "heroicResource": "focus",
+        "heroicResourceCurrent": 0,
+        "victories": 0,
+        "renown": 1,
+        "wealth": 1,
+        "kit": "Martial Artist",
+        "kits": ["Martial Artist", "Mountain"],
+        "skills": [
+          "Alertness",
+          "Blacksmithing",
+          "Endurance",
+          "Intimidate",
+          "Lead",
+          "Monsters",
+          "Persuade",
+          "Strategy",
+          "Swim"
+        ],
+        "languages": ["Anjali", "Caelian", "Kalliak", "Vaslorian"],
+        "traits": ["Detect the Supernatural", "Determination", "Can't Take Hold"],
+        "features": [
+          "Culture edge",
+          "Tactical Doctrine",
+          "Focus",
+          "Doctrine Feature",
+          "Doctrine Triggered Action",
+          "Field Arsenal",
+          "Kit Signature Ability",
+          "Mark",
+          "Strike Now",
+          "Tactician Abilities",
+          "Commanding Presence"
+        ],
+        "perks": ["Teamwork"],
+        "abilities": [
+          "Detect the Supernatural",
+          "Determination",
+          "Mark",
+          "\"Strike Now!\"",
+          "Inspiring Strike",
+          "Now!",
+          "Parry",
+          "Battle Grace",
+          "Pain for Pain",
+          "Melee Weapon Free Strike",
+          "Ranged Weapon Free Strike"
+        ],
+        "mergedKitBonuses": {
+          "stamina": 9,
+          "speed": 3,
+          "stability": 2,
+          "disengage": 1,
+          "meleeDamage": [0, 0, 4],
+          "rangedDamage": [0, 0, 0],
+          "meleeDistance": 0,
+          "rangedDistance": 0
+        },
+        "printedKitBonuses": {
+          "Martial Artist": {
+            "stamina": 3,
+            "speed": 3,
+            "disengage": 1,
+            "meleeDamage": [2, 2, 2]
+          },
+          "Mountain": {
+            "stamina": 9,
+            "stability": 2,
+            "meleeDamage": [0, 0, 4]
+          }
+        },
+        "kitSignatureDamage": {
+          "Battle Grace": {
+            "printedConstantTiers": [5, 8, 11],
+            "resolvedConstantTiers": [3, 6, 13],
+            "resolvedWithCharacteristicTiers": [5, 8, 15],
+            "characteristic": "Might 2 (or Agility if equal); contextual effect damage excluded"
+          },
+          "Pain for Pain": {
+            "printedConstantTiers": [3, 5, 13],
+            "resolvedConstantTiers": [3, 5, 13],
+            "resolvedWithCharacteristicTiers": [5, 7, 15],
+            "characteristic": "Might 2 (or Agility if equal); contextual effect damage excluded"
+          }
+        },
+        "requiredArsenalBenefits": ["stamina", "meleeDamage"],
+        "equalOverlapBenefits": [],
+        "kitBonusReplacements": [
+          {
+            "ability": "Battle Grace",
+            "benefit": "meleeDamage",
+            "fromKit": "Martial Artist",
+            "toKit": "Mountain",
+            "subtract": [2, 2, 2],
+            "add": [0, 0, 4],
+            "formula": "[5,8,11] - [2,2,2] + [0,0,4] = [3,6,13]; add Might2 -> [5,8,15]."
+          }
+        ],
+        "embeddedActions": [
+          {
+            "sourceAbility": "Mark",
+            "trigger": "Creature marked by you reduced to 0 Stamina",
+            "actionType": "free triggered action",
+            "cost": 0,
+            "effect": "Mark a new target within distance (10 squares).",
+            "sourcePath": "en/unified/md/feature/ability/tactician/level-1/mark.md"
+          },
+          {
+            "sourceAbility": "Mark",
+            "trigger": "You or ally uses an ability to deal rolled damage to a creature marked by you",
+            "actionType": "free triggered action",
+            "cost": {
+              "resource": "focus",
+              "amount": 1
+            },
+            "effectChoices": [
+              "Ability deals extra damage twice Reason = 4",
+              "Creature dealing damage can spend a Recovery",
+              "Creature dealing damage can shift up to Reason = 2 squares",
+              "If you damage marked creature with melee ability, target is taunted by you until end of its next turn"
+            ],
+            "limit": "One benefit per trigger",
+            "sourcePath": "en/unified/md/feature/ability/tactician/level-1/mark.md"
+          }
+        ]
+      },
+      "derivation": {
+        "characteristics": "Tactician Basics: M2 R2; array assigned to A,I,P in order.",
+        "staminaMaximum": "21 + 9 × echelon1 = 30; overlapping kit Stamina is chosen, not summed.",
+        "recoveryValue": "floor(30/3) = 10",
+        "windedValue": "floor(30/2) = 15",
+        "recoveriesMaximum": "Class10, neither selected Human trait modifies Recoveries.",
+        "skills": "5 background + Lead + 2 class choices + 1 doctrine = 9 distinct.",
+        "arsenal": "Each benefit supplied once. Only overlapping unequal nonzero printed bonuses need choices. Absent bonuses do not compete. Damage is one whole tuple.",
+        "signatureDamage": "Field Arsenal replacement is mandatory rules arithmetic; ledger states required values independently of whether this slice automates rolls. Printed signature values already include original kit bonuses."
+      }
+    },
+    {
+      "id": "v94-tactician-4",
+      "selections": {
+        "culture.name": "wilderness mercenary commune",
+        "culture.language": "Anjali",
+        "culture.environment": "Wilderness",
+        "culture.environment.skill": "Swim",
+        "culture.organization": "Communal",
+        "culture.organization.skill": "Blacksmithing",
+        "culture.upbringing": "Martial",
+        "culture.upbringing.skill": "Intimidate",
+        "career.choice": "Soldier",
+        "career.soldier.skill.exploration": "Endurance",
+        "career.soldier.skill.intrigue": "Alertness",
+        "career.soldier.languages": ["Kalliak", "Vaslorian"],
+        "career.soldier.perk": "Teamwork",
+        "career.soldier.inciting-incident": "Sole Survivor",
+        "ancestry.choice": "Human",
+        "ancestry.human.purchased-traits": ["Determination", "Can't Take Hold"],
+        "class.choice": "Tactician",
+        "class.tactician.characteristic-array": "2, −1, −1",
+        "class.tactician.array-assignment": {
+          "Agility": 2,
+          "Intuition": -1,
+          "Presence": -1
+        },
+        "class.tactician.skills": ["Monsters", "Strategy"],
+        "class.tactician.doctrine": "Insurgent",
+        "class.tactician.doctrine-skill": "Hide",
+        "class.tactician.ability-3": "Squad! Forward!",
+        "class.tactician.ability-5": "This Is What We Planned For",
+        "kit.choice": "Martial Artist",
+        "class.tactician.second-kit": "Swashbuckler",
+        "details.name": "V94 Tactician 4"
+      },
+      "expected": {
+        "level": 1,
+        "ancestry": "Human",
+        "class": "Tactician",
+        "subclass": "Insurgent",
+        "career": "Soldier",
+        "characteristics": {
+          "M": 2,
+          "A": 2,
+          "R": 2,
+          "I": -1,
+          "P": -1
+        },
+        "staminaMaximum": 24,
+        "recoveriesMaximum": 10,
+        "recoveryValue": 8,
+        "windedValue": 12,
+        "speed": 8,
+        "stability": 0,
+        "size": "1M",
+        "disengage": 2,
+        "potencyCharacteristic": "R",
+        "potency": {
+          "weak": 0,
+          "average": 1,
+          "strong": 2
+        },
+        "heroicResource": "focus",
+        "heroicResourceCurrent": 0,
+        "victories": 0,
+        "renown": 1,
+        "wealth": 1,
+        "kit": "Martial Artist",
+        "kits": ["Martial Artist", "Swashbuckler"],
+        "skills": [
+          "Alertness",
+          "Blacksmithing",
+          "Endurance",
+          "Hide",
+          "Intimidate",
+          "Lead",
+          "Monsters",
+          "Strategy",
+          "Swim"
+        ],
+        "languages": ["Anjali", "Caelian", "Kalliak", "Vaslorian"],
+        "traits": ["Detect the Supernatural", "Determination", "Can't Take Hold"],
+        "features": [
+          "Culture edge",
+          "Tactical Doctrine",
+          "Focus",
+          "Doctrine Feature",
+          "Doctrine Triggered Action",
+          "Field Arsenal",
+          "Kit Signature Ability",
+          "Mark",
+          "Strike Now",
+          "Tactician Abilities",
+          "Covert Operations"
+        ],
+        "perks": ["Teamwork"],
+        "abilities": [
+          "Detect the Supernatural",
+          "Determination",
+          "Mark",
+          "\"Strike Now!\"",
+          "Squad! Forward!",
+          "This Is What We Planned For",
+          "Advanced Tactics",
+          "Battle Grace",
+          "Fancy Footwork",
+          "Melee Weapon Free Strike",
+          "Ranged Weapon Free Strike"
+        ],
+        "mergedKitBonuses": {
+          "stamina": 3,
+          "speed": 3,
+          "stability": 0,
+          "disengage": 1,
+          "meleeDamage": [2, 2, 2],
+          "rangedDamage": [0, 0, 0],
+          "meleeDistance": 0,
+          "rangedDistance": 0
+        },
+        "printedKitBonuses": {
+          "Martial Artist": {
+            "stamina": 3,
+            "speed": 3,
+            "disengage": 1,
+            "meleeDamage": [2, 2, 2]
+          },
+          "Swashbuckler": {
+            "stamina": 3,
+            "speed": 3,
+            "disengage": 1,
+            "meleeDamage": [2, 2, 2]
+          }
+        },
+        "kitSignatureDamage": {
+          "Battle Grace": {
+            "printedConstantTiers": [5, 8, 11],
+            "resolvedConstantTiers": [5, 8, 11],
+            "resolvedWithCharacteristicTiers": [7, 10, 13],
+            "characteristic": "Might 2 (or Agility if equal); contextual effect damage excluded"
+          },
+          "Fancy Footwork": {
+            "printedConstantTiers": [5, 7, 10],
+            "resolvedConstantTiers": [5, 7, 10],
+            "resolvedWithCharacteristicTiers": [7, 9, 12],
+            "characteristic": "Might 2 (or Agility if equal); contextual effect damage excluded"
+          }
+        },
+        "requiredArsenalBenefits": [],
+        "equalOverlapBenefits": ["stamina", "speed", "disengage", "meleeDamage"],
+        "kitBonusReplacements": [],
+        "embeddedActions": [
+          {
+            "sourceAbility": "Mark",
+            "trigger": "Creature marked by you reduced to 0 Stamina",
+            "actionType": "free triggered action",
+            "cost": 0,
+            "effect": "Mark a new target within distance (10 squares).",
+            "sourcePath": "en/unified/md/feature/ability/tactician/level-1/mark.md"
+          },
+          {
+            "sourceAbility": "Mark",
+            "trigger": "You or ally uses an ability to deal rolled damage to a creature marked by you",
+            "actionType": "free triggered action",
+            "cost": {
+              "resource": "focus",
+              "amount": 1
+            },
+            "effectChoices": [
+              "Ability deals extra damage twice Reason = 4",
+              "Creature dealing damage can spend a Recovery",
+              "Creature dealing damage can shift up to Reason = 2 squares",
+              "If you damage marked creature with melee ability, target is taunted by you until end of its next turn"
+            ],
+            "limit": "One benefit per trigger",
+            "sourcePath": "en/unified/md/feature/ability/tactician/level-1/mark.md"
+          }
+        ]
+      },
+      "derivation": {
+        "characteristics": "Tactician Basics: M2 R2; array assigned to A,I,P in order.",
+        "staminaMaximum": "21 + 3 × echelon1 = 24; overlapping kit Stamina is chosen, not summed.",
+        "recoveryValue": "floor(24/3) = 8",
+        "windedValue": "floor(24/2) = 12",
+        "recoveriesMaximum": "Class10, neither selected Human trait modifies Recoveries.",
+        "skills": "5 background + Lead + 2 class choices + 1 doctrine = 9 distinct.",
+        "arsenal": "Each benefit supplied once. Only overlapping unequal nonzero printed bonuses need choices. Absent bonuses do not compete. Damage is one whole tuple.",
+        "signatureDamage": "Field Arsenal replacement is mandatory rules arithmetic; ledger states required values independently of whether this slice automates rolls. Printed signature values already include original kit bonuses."
+      }
+    }
+  ],
+  "ledger": [
+    {
+      "sourcePath": "en/unified/md/ancestry/human.md",
+      "section": "Signature trait",
+      "sourceSha256": "2c2192ca1fd0d5df6a1d9f4a832842c1f65cd4bf8b163c4f01ab04364e8c61aa",
+      "claim": "Detect the Supernatural is the signature trait and provides its maneuver."
+    },
+    {
+      "sourcePath": "en/unified/md/feature/trait/human/human-traits.md",
+      "section": "Purchased Human Traits",
+      "sourceSha256": "433213af978ff6b04fb4ccd7fe46d92841d8c4d8e37dd5cfa4523894c5afcc4a",
+      "claim": "Three ancestry points."
+    },
+    {
+      "sourcePath": "en/unified/md/feature/trait/human/determination.md",
+      "section": "Trait",
+      "sourceSha256": "9c9b3caa6ddd8f0cf952e249dfd84377a178bbd0e6c84e3b48ed9785624eada8",
+      "claim": "Costs 2 points; maneuver ends one frightened, slowed or weakened condition. No passive numeric bonus."
+    },
+    {
+      "sourcePath": "en/unified/md/feature/trait/human/cant-take-hold.md",
+      "section": "Trait",
+      "sourceSha256": "38329e075c92df1feb5838aeb0410fe339edbb569ef2ec9a42713d12fddc4e90",
+      "claim": "Costs 1 point; conditional magical/psionic terrain and forced-movement benefit, not baseline stability."
+    },
+    {
+      "sourcePath": "en/unified/md/feature/trait/human/detect-the-supernatural.md",
+      "section": "Signature Trait",
+      "sourceSha256": "507b4b87c46632454dff842088f8973ea65fcf854613758a1c57bf2c7aad0ca1",
+      "claim": "Maneuver detects specified supernatural objects/creatures within 5; granted in every witness."
+    },
+    {
+      "sourcePath": "en/unified/md/rule/character/speed.md",
+      "section": "Starting Size and Speed",
+      "sourceSha256": "ac435b9ab73fd3f594d3c304205e2d2937ed8b4726ca91e4f667e7486d7dfa6b",
+      "claim": "Default size 1M, speed 5, stability 0."
+    },
+    {
+      "sourcePath": "en/unified/md/rule/health/recoveries.md",
+      "section": "Recoveries and Recovery Value",
+      "sourceSha256": "2fe8aec0bbb138d3442ed3d8d3628911c20dd7ee9366f0dbdadc645b294e0fb9",
+      "claim": "Recovery value is floor(Stamina maximum / 3)."
+    },
+    {
+      "sourcePath": "en/unified/md/rule/health/winded.md",
+      "section": "Winded",
+      "sourceSha256": "36cda2160d1b684e17feaa3ca8e04d453a01106554c1cbd3b0a51a53dc8885ee",
+      "claim": "Winded value is half Stamina maximum."
+    },
+    {
+      "sourcePath": "en/unified/md/rule/general/always-round-down.md",
+      "section": "Always Round Down",
+      "sourceSha256": "1e4cd0537a4759ae6d2cc5cb0b2e4280b59bb1d3d8d20386b71da8d582e14783",
+      "claim": "Halving odd numbers rounds down; Stamina 21 gives winded 10."
+    },
+    {
+      "sourcePath": "en/unified/md/rule/general/echelon.md",
+      "section": "1st Echelon (1st to 3rd Level)",
+      "sourceSha256": "fac3cc3050d9a364e7132fad67db7640b4d5a6e5152c5bfa277f1a50798580f3",
+      "claim": "Level one multiplies per-echelon kit Stamina by one."
+    },
+    {
+      "sourcePath": "en/unified/md/feature/common/move-actions/disengage.md",
+      "section": "Disengage",
+      "sourceSha256": "54e4e50bbdece67a328baef4b64c2908391e323d223be9146c441e52379bfaba",
+      "claim": "Baseline disengage shifts 1 square."
+    },
+    {
+      "sourcePath": "en/unified/md/culture/wilderness.md",
+      "section": "Skill Options",
+      "sourceSha256": "abf043490386079307336784b12e2a27566f0f75aec673a47f166a06ea1537a6",
+      "claim": "Swim is chosen from exploration."
+    },
+    {
+      "sourcePath": "en/unified/md/culture/communal.md",
+      "section": "Skill Options",
+      "sourceSha256": "16e32193ef1ef573ffec18ee521c928cefddd715595a399a3319f67f8683a2f8",
+      "claim": "Blacksmithing is chosen from crafting."
+    },
+    {
+      "sourcePath": "en/unified/md/culture/martial.md",
+      "section": "Skill Options",
+      "sourceSha256": "c10f166df482e7393cb7afc6d8527d7ac019dedde2af2518754e703e8a446102",
+      "claim": "Intimidate is explicitly allowed."
+    },
+    {
+      "sourcePath": "en/unified/md/career/soldier.md",
+      "section": "Career benefits; Inciting Incident",
+      "sourceSha256": "d340f1ec1e748550447d19e46677f4a7e9a8a2e051cddd0ee50e961911f12959",
+      "claim": "Endurance exploration, Alertness intrigue, two languages Kalliak and Vaslorian, Teamwork exploration perk, +1 Renown; Sole Survivor selected."
+    },
+    {
+      "sourcePath": "en/unified/md/perk/teamwork.md",
+      "section": "Perk",
+      "sourceSha256": "5d91951185e0e1b4a6a92910850206b51064f1a910209b3bbe9a649cfcb34859",
+      "claim": "First turn of montage permits both test and assist; no baseline statistic adjustment."
+    },
+    {
+      "sourcePath": "en/unified/md/chapter/making-a-hero.md",
+      "section": "7. Add Free Strikes",
+      "sourceSha256": "9ee2dbccc874a9fae9c3aa814e802112d2330f98730681b3b32c1d305e252c87",
+      "claim": "Every hero gains Melee Weapon Free Strike and Ranged Weapon Free Strike."
+    },
+    {
+      "sourcePath": "en/unified/md/rule/resource/wealth.md",
+      "section": "Wealth",
+      "sourceSha256": "9d662cec851de19a09c65cc2d3db0e797647ec6934d9229fe6051d85c58169b9",
+      "claim": "Starting Wealth 1; Soldier adds none."
+    },
+    {
+      "sourcePath": "en/unified/md/rule/resource/renown.md",
+      "section": "Renown",
+      "sourceSha256": "ad1b4918655fcc7e51d5c0daa1aa04619e5f11df59f4a9d870583162b3f7fb3c",
+      "claim": "Starting Renown 0 plus Soldier 1 gives 1."
+    },
+    {
+      "sourcePath": "en/books/heroes/clean/Draw Steel Heroes.md",
+      "section": "Background: Culture benefits and Languages; Languages by Ancestry; Vaslorian Human Languages Table",
+      "sourceSha256": "784677631b216450a738c1ce1aa33686816105cf20e683768d6a518e0cbd0d01",
+      "claim": "Caelian plus chosen culture language Anjali; culture lore/interaction edge. Soldier grants two chosen languages Kalliak and Vaslorian. Language is not restricted to the associated ancestry."
+    },
+    {
+      "sourcePath": "en/unified/md/class/tactician.md",
+      "section": "Basics; Tactician Advancement Table",
+      "sourceSha256": "6e6147d6fd65972a6b3ac7c8b635ed94799df4b61eaf50a838665cabf6b999aa",
+      "claim": "Might2 Reason2 fixed; remaining arrays 2,-1,-1 / 1,1,-1 / 1,0,0; Stamina21 Recoveries10; potency Reason-2/Reason-1/Reason = 0/1/2; Lead plus two choices. Monsters and Strategy explicitly named."
+    },
+    {
+      "sourcePath": "en/unified/md/feature/tactician/level-1/tactical-doctrine.md",
+      "section": "Feature",
+      "sourceSha256": "0e398543677e0e1f9330a1993fa9665aa706d20846dd8271d505ed8cfcc6ca56",
+      "claim": "Insurgent chooses intrigue skill Hide; Mastermind lore Magic; Vanguard interpersonal Persuade."
+    },
+    {
+      "sourcePath": "en/unified/md/feature/tactician/level-1/1st-level-doctrine-feature.md",
+      "section": "Feature",
+      "sourceSha256": "c096f8ff3d34ad3c9a104807d96d30a6a4d215b151f9d8fc6a92c1c9cad3ec1c",
+      "claim": "Insurgent Covert Operations, Mastermind Studied Commander, Vanguard Commanding Presence."
+    },
+    {
+      "sourcePath": "en/unified/md/feature/tactician/level-1/doctrine-triggered-action.md",
+      "section": "Feature",
+      "sourceSha256": "10d5b30193b53f893e00736763ce12d6239815859fad141f74a51a760b0fd344",
+      "claim": "Insurgent Advanced Tactics, Mastermind Overwatch, Vanguard Parry."
+    },
+    {
+      "sourcePath": "en/unified/md/feature/tactician/level-1/field-arsenal.md",
+      "section": "Feature",
+      "sourceSha256": "474b482646bf1a0806968bbd864072f57a407d9f8180fe67f5a38476b521e6e4",
+      "claim": "Use both kits and signatures. For each overlapping benefit choose one, never add. Example Shining Armor/Sniper and explicit Battle Grace replacement calculation."
+    },
+    {
+      "sourcePath": "en/unified/md/feature/tactician/level-1/kit-signature-ability.md",
+      "section": "Feature",
+      "sourceSha256": "4d19c62b9be23720deb8f50b6500cb18abcb11b05495cabfcc5580f9d236c790",
+      "claim": "Both kit signatures usable at will."
+    },
+    {
+      "sourcePath": "en/unified/md/feature/tactician/level-1/focus.md",
+      "section": "Feature",
+      "sourceSha256": "9af976bb3c39c18f5dac3bb8701738c77c70358720b77976bb8e5046be4ac4d4",
+      "claim": "Focus resource; no gains outside combat, lose remaining at encounter end; fresh zero-Victory witness starts zero."
+    },
+    {
+      "sourcePath": "en/unified/md/feature/tactician/level-1/mark.md",
+      "section": "Feature",
+      "sourceSha256": "38d945ca416c12f644170dd2f114f05ec994fed09921d14fde61b6b202eccbea",
+      "claim": "Grants Mark ability."
+    },
+    {
+      "sourcePath": "en/unified/md/feature/tactician/level-1/strike-now.md",
+      "section": "Feature",
+      "sourceSha256": "2a3d534c303624b3cf3ab68e5d12d8132fe182ea5ac66321744702de13101db4",
+      "claim": "Grants Strike Now ability."
+    },
+    {
+      "sourcePath": "en/unified/md/feature/tactician/level-1/tactician-abilities.md",
+      "section": "Feature",
+      "sourceSha256": "d7b46f4269361f9aea3b3928cc2228876311d8bb8238e881ca78c82bde7c7071",
+      "claim": "Choose one 3-Focus heroic ability."
+    },
+    {
+      "sourcePath": "en/unified/md/feature/tactician/level-1/5-focus-ability.md",
+      "section": "Feature",
+      "sourceSha256": "d41c4eedd754189b7cd5501ac223cabbe3c0fb0a18291343c66932061548ce6d",
+      "claim": "Choose one 5-Focus heroic ability."
+    },
+    {
+      "sourcePath": "en/unified/md/feature/tactician/level-1/covert-operations.md",
+      "section": "Feature",
+      "sourceSha256": "781089b62932f95baa245d9644e8d479960afc1045a17a61dd3a35f89382fb12",
+      "claim": "Conditional intrigue benefits, no passive baseline bonus."
+    },
+    {
+      "sourcePath": "en/unified/md/feature/tactician/level-1/studied-commander.md",
+      "section": "Feature",
+      "sourceSha256": "56aff3dc172d95078fcb9e42ddeaa0e1eaef58449786b61da3a7d331d3d9c15e",
+      "claim": "Conditional research and preparation effects, no passive baseline bonus."
+    },
+    {
+      "sourcePath": "en/unified/md/feature/tactician/level-1/commanding-presence.md",
+      "section": "Feature",
+      "sourceSha256": "fb62d8d47b7558c27f3450b681369ad9ce283972d516e63faebe95051cd18c26",
+      "claim": "Negotiation Renown benefit is contextual, not permanent Renown increase."
+    },
+    {
+      "sourcePath": "en/unified/md/kit/shining-armor.md",
+      "section": "Kit Bonuses; Signature Ability",
+      "sourceSha256": "ece91429b909676d0abb987431475053e7dce1da82092bcb8cc9ed7fcc8f252a",
+      "claim": "Printed kit bonuses and signature damage form the independent per-kit and replacement values below."
+    },
+    {
+      "sourcePath": "en/unified/md/kit/sniper.md",
+      "section": "Kit Bonuses; Signature Ability",
+      "sourceSha256": "d52d966ce3487270b83d062b3596f2a04974be66f57808ffc837807812fe4857",
+      "claim": "Printed kit bonuses and signature damage form the independent per-kit and replacement values below."
+    },
+    {
+      "sourcePath": "en/unified/md/kit/martial-artist.md",
+      "section": "Kit Bonuses; Signature Ability",
+      "sourceSha256": "8dd1528069768aa2fb391d3f3906dcd6e4d49e1dea8b57d0967d83c5f4e1acc7",
+      "claim": "Printed kit bonuses and signature damage form the independent per-kit and replacement values below."
+    },
+    {
+      "sourcePath": "en/unified/md/kit/mountain.md",
+      "section": "Kit Bonuses; Signature Ability",
+      "sourceSha256": "86bbe933d9511a3ce9b2754464b8056435dd1565431a5ba38166ab4d0f7d4ee6",
+      "claim": "Printed kit bonuses and signature damage form the independent per-kit and replacement values below."
+    },
+    {
+      "sourcePath": "en/unified/md/kit/swashbuckler.md",
+      "section": "Kit Bonuses; Signature Ability",
+      "sourceSha256": "351feb5e85b6237deb955c6d5d70f4a34d10da690acf627a6a52e55a8fb2a8fd",
+      "claim": "Printed kit bonuses and signature damage form the independent per-kit and replacement values below."
+    },
+    {
+      "sourcePath": "en/unified/md/skill/interpersonal/lead.md",
+      "section": "Skill identity and group",
+      "sourceSha256": "1cc6fd4064da203a1dcd5472d6a3a8485508a50a6c86ac068b7443251301d725",
+      "claim": "Confirms selected skill identity and eligibility; no duplicate selection."
+    },
+    {
+      "sourcePath": "en/unified/md/skill/interpersonal/persuade.md",
+      "section": "Skill identity and group",
+      "sourceSha256": "21b4e6065561bdde76d3a3055e55fc58920926554902f01e3028873879ef9caf",
+      "claim": "Confirms selected skill identity and eligibility; no duplicate selection."
+    },
+    {
+      "sourcePath": "en/unified/md/skill/lore/monsters.md",
+      "section": "Skill identity and group",
+      "sourceSha256": "f2bae465a3c1e301eaedf0d750d385ecc981a70ca88080218281ce774f7bf1a1",
+      "claim": "Confirms selected skill identity and eligibility; no duplicate selection."
+    },
+    {
+      "sourcePath": "en/unified/md/skill/lore/strategy.md",
+      "section": "Skill identity and group",
+      "sourceSha256": "338caefbeb3da1d48bc8b97d96121c5b1ebc7af7774ffe7cc6cd6d6fdbf3285f",
+      "claim": "Confirms selected skill identity and eligibility; no duplicate selection."
+    },
+    {
+      "sourcePath": "en/unified/md/skill/lore/magic.md",
+      "section": "Skill identity and group",
+      "sourceSha256": "22f8d345e0eacf1f9c053f28dde3429f01ae4162bde518a8d2032b358dfdcc4e",
+      "claim": "Confirms selected skill identity and eligibility; no duplicate selection."
+    },
+    {
+      "sourcePath": "en/unified/md/skill/intrigue/hide.md",
+      "section": "Skill identity and group",
+      "sourceSha256": "7bc242c1ffd3c5343f5c58c5c8b232ceb38b9e406e6c0f815a795a1070754d50",
+      "claim": "Confirms selected skill identity and eligibility; no duplicate selection."
+    },
+    {
+      "sourcePath": "en/unified/md/skill/exploration/swim.md",
+      "section": "Skill identity and group",
+      "sourceSha256": "d5d4da74811a500502a805014ac9725063bc51c0f45733c7917725eaa23624f7",
+      "claim": "Confirms selected skill identity and eligibility; no duplicate selection."
+    },
+    {
+      "sourcePath": "en/unified/md/skill/crafting/blacksmithing.md",
+      "section": "Skill identity and group",
+      "sourceSha256": "1ff007d9fe2eec6a622bd351ed90258720a1777c89f6409da95818d7c6453318",
+      "claim": "Confirms selected skill identity and eligibility; no duplicate selection."
+    },
+    {
+      "sourcePath": "en/unified/md/skill/interpersonal/intimidate.md",
+      "section": "Skill identity and group",
+      "sourceSha256": "4c26564b73fa5e613d35252cff388d7c623cd49788e63c9b3f4baca4c469a177",
+      "claim": "Confirms selected skill identity and eligibility; no duplicate selection."
+    },
+    {
+      "sourcePath": "en/unified/md/skill/exploration/endurance.md",
+      "section": "Skill identity and group",
+      "sourceSha256": "f4c47293f868b76b25f1af84a68f263fee2d73bb2fa3470795a1e69bf8c438d3",
+      "claim": "Confirms selected skill identity and eligibility; no duplicate selection."
+    },
+    {
+      "sourcePath": "en/unified/md/skill/intrigue/alertness.md",
+      "section": "Skill identity and group",
+      "sourceSha256": "714c6458e1aaa81a8bd74f593c87f08c9b4633f5d747190db3e821ff977edb6f",
+      "claim": "Confirms selected skill identity and eligibility; no duplicate selection."
+    },
+    {
+      "sourcePath": "en/unified/md/feature/ability/tactician/level-1/concussive-strike.md",
+      "section": "Ability header and effect",
+      "sourceSha256": "e91f5c90ac798f0882fae5f248f57691354db6c94d9be80f57e1a617dfa0af18",
+      "claim": "Independent action grant/cost source; combat effects remain contextual, not passive baseline bonuses."
+    },
+    {
+      "sourcePath": "en/unified/md/feature/ability/tactician/level-1/mind-game.md",
+      "section": "Ability header and effect",
+      "sourceSha256": "d3dfe5bc111f5fab26ce408176fc1a9ba23c388499df464a6b33a5316445aa91",
+      "claim": "Independent action grant/cost source; combat effects remain contextual, not passive baseline bonuses."
+    },
+    {
+      "sourcePath": "en/unified/md/feature/ability/tactician/level-1/advanced-tactics.md",
+      "section": "Ability header and effect",
+      "sourceSha256": "46ccae63133287a9647cd67460ac3b098ba6d67ef4f22c4dc188919f0f33025e",
+      "claim": "Independent action grant/cost source; combat effects remain contextual, not passive baseline bonuses."
+    },
+    {
+      "sourcePath": "en/unified/md/feature/ability/tactician/level-1/this-is-what-we-planned-for.md",
+      "section": "Ability header and effect",
+      "sourceSha256": "fc4d3cb19fe372e0f17104fa47630612df874f5cc4910d3362c06aeae68d7011",
+      "claim": "Independent action grant/cost source; combat effects remain contextual, not passive baseline bonuses."
+    },
+    {
+      "sourcePath": "en/unified/md/feature/ability/tactician/level-1/strike-now.md",
+      "section": "Ability header and effect",
+      "sourceSha256": "92818d9bfecb9ce6b7a6c791676bea4641079b6e55699b527655901b0254d003",
+      "claim": "Independent action grant/cost source; combat effects remain contextual, not passive baseline bonuses."
+    },
+    {
+      "sourcePath": "en/unified/md/feature/ability/tactician/level-1/mark.md",
+      "section": "Ability header and effect",
+      "sourceSha256": "ba58da0cf63c5ea8ecb63aae9e707a6ef0c80ca7bbbe9b56d8d9e612db627737",
+      "claim": "Independent action grant/cost source; combat effects remain contextual, not passive baseline bonuses."
+    },
+    {
+      "sourcePath": "en/unified/md/feature/ability/tactician/level-1/hammer-and-anvil.md",
+      "section": "Ability header and effect",
+      "sourceSha256": "9caa74d0011f981b548e705e97402f9d0e274c14052db046a10d081c59252543",
+      "claim": "Independent action grant/cost source; combat effects remain contextual, not passive baseline bonuses."
+    },
+    {
+      "sourcePath": "en/unified/md/feature/ability/tactician/level-1/parry.md",
+      "section": "Ability header and effect",
+      "sourceSha256": "3760bfc3133691c4018150185b620975bd91cef2d61850a2d50ce1f61f135416",
+      "claim": "Independent action grant/cost source; combat effects remain contextual, not passive baseline bonuses."
+    },
+    {
+      "sourcePath": "en/unified/md/feature/ability/tactician/level-1/inspiring-strike.md",
+      "section": "Ability header and effect",
+      "sourceSha256": "5bdacdc074507c38a0926be35ec355d77e09f5f4cd74c14ca40b5b68907abbda",
+      "claim": "Independent action grant/cost source; combat effects remain contextual, not passive baseline bonuses."
+    },
+    {
+      "sourcePath": "en/unified/md/feature/ability/tactician/level-1/squad-forward.md",
+      "section": "Ability header and effect",
+      "sourceSha256": "8811dc623cbe63d1214d9bb8adfc77683ea3bb72f8d3d102a2be1becbea087a3",
+      "claim": "Independent action grant/cost source; combat effects remain contextual, not passive baseline bonuses."
+    },
+    {
+      "sourcePath": "en/unified/md/feature/ability/tactician/level-1/overwatch.md",
+      "section": "Ability header and effect",
+      "sourceSha256": "d24a1a439fdae0aa738c38ea855a82584d34e74cde0c7a3dfa84226f51de650c",
+      "claim": "Independent action grant/cost source; combat effects remain contextual, not passive baseline bonuses."
+    },
+    {
+      "sourcePath": "en/unified/md/feature/ability/tactician/level-1/battle-cry.md",
+      "section": "Ability header and effect",
+      "sourceSha256": "a2225df2e9c9e73185e8b282011c7b12116879c243dbb85b008320515f3ef208",
+      "claim": "Independent action grant/cost source; combat effects remain contextual, not passive baseline bonuses."
+    },
+    {
+      "sourcePath": "en/unified/md/feature/ability/tactician/level-1/now.md",
+      "section": "Ability header and effect",
+      "sourceSha256": "552756ad25bba5cde253b273b5cc9f0152d49e63228ae91ecbfa7dc425a4dbdc",
+      "claim": "Independent action grant/cost source; combat effects remain contextual, not passive baseline bonuses."
+    },
+    {
+      "sourcePath": "en/unified/md/chapter/kits.md",
+      "section": "Kit Bonuses; Kit Signature Ability",
+      "sourceSha256": "bc723dd87b9c660c589fb96f984b285b447eda457c468b89029fd11fec0d16ad",
+      "claim": "Kit signatures already incorporate kit bonuses; replace old bonus when Field Arsenal selects another, never add twice."
+    }
+  ]
+}

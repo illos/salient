@@ -77,7 +77,7 @@ function projectChecked(hero: Hero) {
       'Time Raider',
       'Elf (wode)',
     ].includes(hero.ancestry.name) ||
-    !['Fury', 'Elementalist', 'Shadow'].includes(hero.class.name) ||
+    !['Fury', 'Elementalist', 'Shadow', 'Tactician'].includes(hero.class.name) ||
     hero.class.level !== 1
   )
     throw new Error('Forge projection supports only declared level-one witness families');

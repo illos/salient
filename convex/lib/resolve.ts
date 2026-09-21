@@ -1,4 +1,8 @@
 import {
+  tacticianAbilities,
+  tacticianAbilitySource,
+} from '../../shared/evaluate/tacticianAbilities';
+import {
   startingItemAbilities,
   startingItemAbilitySource,
 } from '../../shared/evaluate/startingItemAbilities';
@@ -540,12 +544,33 @@ export async function abilitiesFor(
           baseline?.perks ?? [],
           ancestryAbilities(
             baseline?.traits ?? [],
-            baseline?.abilities ?? [],
+            tacticianAbilities(baseline?.features ?? [], baseline?.abilities ?? []),
             records.character?.activeRune?.kind ?? null,
           ),
         ),
       ),
     ]) {
+      const tacticianSource = tacticianAbilitySource(grant);
+      if (tacticianSource) {
+        const id = `tactician:${slug(grant.name)}`;
+        granted.push(
+          build({
+            abilityId: id,
+            contentId: id,
+            name: grant.name,
+            source: { path: grant.sourcePath, revision: grant.provenance.source.revision, id },
+            text: tacticianSource.text,
+            usage: tacticianSource.actionType,
+            keywords: [],
+            distance: '',
+            target: '',
+            ...(tacticianSource.cost ? { cost: tacticianSource.cost } : {}),
+            effects: [{ label: 'Effect', text: tacticianSource.text }],
+            kitBonusesIncluded: false,
+          }),
+        );
+        continue;
+      }
       const complicationSource = complicationAbilitySource(grant);
       if (
         complicationSource?.complication === 'Dragon Dreams' &&

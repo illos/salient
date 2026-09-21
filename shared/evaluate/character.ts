@@ -1,4 +1,5 @@
 import { startingRewardItems } from '../content/starting-reward-items.ts';
+import { tacticianAbilities } from './tacticianAbilities.ts';
 import { complicationAbilities } from './complicationAbilities.ts';
 import { perkAbilities } from './perkAbilities.ts';
 import { applyRevenantBaseline, applyRevenantDisengage } from './ancestries/revenant.ts';
@@ -77,7 +78,15 @@ import {
   applyFuryResource,
 } from './classes/fury.ts';
 import { applyClassProfile } from './classes/profile.ts';
+import type { SelectedKit } from './derivation.ts';
 import { applyElementalistModifiers } from './classes/elementalist.ts';
+import {
+  FIELD_ARSENAL,
+  SECOND_KIT_DECISION,
+  kitSentencesFor,
+  resolveArsenal,
+  type Arsenal,
+} from './classes/tactician.ts';
 import {
   applyDevilMovement,
   applyDevilSavingThrow,
@@ -119,7 +128,13 @@ function parseCost(costQuote: string | undefined): GrantedAbility['cost'] | unde
   const match = costQuote ? /^cost: (\d+) (\w+)$/.exec(costQuote) : null;
   if (!match) return undefined;
   const resource = match[2]!.toLowerCase();
-  if (resource !== 'ferocity' && resource !== 'essence' && resource !== 'insight') return undefined;
+  if (
+    resource !== 'ferocity' &&
+    resource !== 'essence' &&
+    resource !== 'insight' &&
+    resource !== 'focus'
+  )
+    return undefined;
   return { resource, amount: Number(match[1]) };
 }
 
@@ -220,6 +235,12 @@ class Evaluation {
     parentValue?: string;
   } {
     if (decision.options) return { values: decision.options.map(option => option.value) };
+    if (decision.overlapBenefit)
+      return {
+        values: [this.single('kit.choice'), this.single(SECOND_KIT_DECISION)].filter(
+          (name): name is string => typeof name === 'string',
+        ),
+      };
     if (decision.optionsByParent) {
       const parentValue = effectiveParent(
         decision,
@@ -639,6 +660,105 @@ class Evaluation {
       : undefined;
   }
 
+  /** The Tactician's Field Arsenal second kit (V94); ordinary kits only, distinct from `kit.choice`. */
+  private secondKit(): SelectedKit | undefined {
+    const name = this.available.has(SECOND_KIT_DECISION)
+      ? this.single(SECOND_KIT_DECISION)
+      : undefined;
+    const s = kitSentencesFor(name);
+    return s && name !== this.single('kit.choice')
+      ? { name: name!, s, decisionId: SECOND_KIT_DECISION }
+      : undefined;
+  }
+
+  /** Field Arsenal resolution for the current derivation; read by the ability list. */
+  private arsenal: Arsenal | undefined;
+
+  /** 1.14 One kit's printed contributions with their own provenance. */
+  private kitContributions(kit: SelectedKit, echelon: number): KitContributions {
+    const p = (entry: Provenance) => this.provenance(entry);
+    const dv = <T>(value: T, provenance: Provenance[]): DerivedValue<T> => ({ value, provenance });
+    const { s, decisionId } = kit;
+    const entry = (quote: string, extra: Partial<Provenance> = {}) =>
+      p({
+        decisionId,
+        source: this.sentence({ path: s.entryPath, quote, heading: KIT_BONUSES_HEADING }),
+        ...extra,
+      });
+    const table = (extra: Partial<Provenance> = {}) =>
+      p({
+        decisionId,
+        source: this.sentence({
+          path: KITS_PATH,
+          quote: s.tableRow,
+          heading: KITS_TABLE_HEADING,
+        }),
+        ...extra,
+      });
+    const contributions: KitContributions = {
+      name: dv(s.name, [
+        p({
+          decisionId: decisionId === SECOND_KIT_DECISION ? decisionId : 'kit.choice',
+          selection: s.name,
+          source: this.sentence({ path: s.entryPath, quote: `name: ${s.name}` }),
+        }),
+      ]),
+      equipmentText: dv(s.equipmentText, [
+        p({
+          decisionId,
+          source: this.sentence({
+            path: s.entryPath,
+            quote: s.equipmentText,
+            heading: 'Equipment',
+          }),
+        }),
+      ]),
+      staminaBonusPerEchelon: dv(s.staminaBonusPerEchelon.amount, [
+        entry(s.staminaBonusPerEchelon.quote, {
+          operation: 'set',
+          amount: s.staminaBonusPerEchelon.amount,
+        }),
+      ]),
+      echelon: dv(echelon, [
+        p({
+          decisionId: 'class.level',
+          source: this.sentence(SENTENCES.echelon),
+          operation: 'set',
+          amount: echelon,
+        }),
+      ]),
+      staminaBonusApplied: dv(s.staminaBonusPerEchelon.amount * echelon, [
+        p({
+          decisionId,
+          source: this.sentence(SENTENCES.kitStaminaRule),
+          operation: 'set',
+          amount: s.staminaBonusPerEchelon.amount * echelon,
+          note: `${s.staminaBonusPerEchelon.amount * echelon} at the 1st echelon`,
+        }),
+      ]),
+      speedBonus: dv(s.speedBonus, [table({ operation: 'set', amount: s.speedBonus })]),
+      stabilityBonus: dv(s.stabilityBonus?.amount ?? 0, [
+        s.stabilityBonus
+          ? entry(s.stabilityBonus.quote, { operation: 'set', amount: s.stabilityBonus.amount })
+          : table({ operation: 'set', amount: 0 }),
+      ]),
+      meleeDamageBonus: dv(s.meleeDamageBonus?.value ?? [0, 0, 0], [
+        s.meleeDamageBonus
+          ? entry(s.meleeDamageBonus.quote, { note: 'applied per R04 section 4.2' })
+          : table({ note: 'applied per R04 section 4.2' }),
+      ]),
+      rangedDamageBonus: dv(s.rangedDamageBonus, [table({ note: s.notes.rangedDamage })]),
+      meleeDistanceBonus: dv(s.meleeDistanceBonus, [
+        table({ operation: 'set', amount: s.meleeDistanceBonus }),
+      ]),
+      rangedDistanceBonus: dv(s.rangedDistanceBonus, [
+        table({ operation: 'set', amount: s.rangedDistanceBonus }),
+      ]),
+      disengageBonus: dv(s.disengageBonus, [table({ operation: 'set', amount: s.disengageBonus })]),
+    };
+    return contributions;
+  }
+
   derive(): PartialBaseline {
     const out: PartialBaseline = {};
     const p = (entry: Provenance) => this.provenance(entry);
@@ -691,97 +811,29 @@ class Evaluation {
 
     // 1.14 Kit contributions (read first: 1.3, 1.6, 1.7 and 1.9 add its terms).
     const kit = this.kit();
+    const second = this.secondKit();
+    this.arsenal = undefined;
     if (kit) {
-      const { s, decisionId } = kit;
-      const entry = (quote: string, extra: Partial<Provenance> = {}) =>
-        p({
-          decisionId,
-          source: this.sentence({ path: s.entryPath, quote, heading: KIT_BONUSES_HEADING }),
-          ...extra,
-        });
-      const table = (extra: Partial<Provenance> = {}) =>
-        p({
-          decisionId,
-          source: this.sentence({
-            path: KITS_PATH,
-            quote: s.tableRow,
-            heading: KITS_TABLE_HEADING,
-          }),
-          ...extra,
-        });
-      const contributions: KitContributions = {
-        name: dv(s.name, [
-          p({
-            decisionId: 'kit.choice',
-            selection: s.name,
-            source: this.sentence({ path: s.entryPath, quote: `name: ${s.name}` }),
-          }),
-        ]),
-        equipmentText: dv(s.equipmentText, [
-          p({
-            decisionId,
-            source: this.sentence({
-              path: s.entryPath,
-              quote: s.equipmentText,
-              heading: 'Equipment',
-            }),
-          }),
-        ]),
-        staminaBonusPerEchelon: dv(s.staminaBonusPerEchelon.amount, [
-          entry(s.staminaBonusPerEchelon.quote, {
-            operation: 'set',
-            amount: s.staminaBonusPerEchelon.amount,
-          }),
-        ]),
-        echelon: dv(echelon, [
-          p({
-            decisionId: 'class.level',
-            source: this.sentence(SENTENCES.echelon),
-            operation: 'set',
-            amount: echelon,
-          }),
-        ]),
-        staminaBonusApplied: dv(s.staminaBonusPerEchelon.amount * echelon, [
-          p({
-            decisionId,
-            source: this.sentence(SENTENCES.kitStaminaRule),
-            operation: 'set',
-            amount: s.staminaBonusPerEchelon.amount * echelon,
-            note: `${s.staminaBonusPerEchelon.amount * echelon} at the 1st echelon`,
-          }),
-        ]),
-        speedBonus: dv(s.speedBonus, [table({ operation: 'set', amount: s.speedBonus })]),
-        stabilityBonus: dv(s.stabilityBonus?.amount ?? 0, [
-          s.stabilityBonus
-            ? entry(s.stabilityBonus.quote, { operation: 'set', amount: s.stabilityBonus.amount })
-            : table({ operation: 'set', amount: 0 }),
-        ]),
-        meleeDamageBonus: dv(s.meleeDamageBonus?.value ?? [0, 0, 0], [
-          s.meleeDamageBonus
-            ? entry(s.meleeDamageBonus.quote, { note: 'applied per R04 section 4.2' })
-            : table({ note: 'applied per R04 section 4.2' }),
-        ]),
-        rangedDamageBonus: dv(s.rangedDamageBonus, [table({ note: s.notes.rangedDamage })]),
-        meleeDistanceBonus: dv(s.meleeDistanceBonus, [
-          table({ operation: 'set', amount: s.meleeDistanceBonus }),
-        ]),
-        rangedDistanceBonus: dv(s.rangedDistanceBonus, [
-          table({ operation: 'set', amount: s.rangedDistanceBonus }),
-        ]),
-        disengageBonus: dv(s.disengageBonus, [
-          table({ operation: 'set', amount: s.disengageBonus }),
-        ]),
-      };
-      out.kit = contributions;
+      const first = this.kitContributions(kit, echelon);
+      if (second) {
+        const other = this.kitContributions(second, echelon);
+        out.kits = [first, other];
+        this.arsenal = resolveArsenal(
+          this,
+          { kit, contributions: first },
+          { kit: second, contributions: other },
+        );
+        if (this.arsenal.kit) out.kit = this.arsenal.kit;
+      } else out.kit = first;
     }
 
     applyFuryVitals(this, out, kit, echelon);
 
     applyDevilMovement(this, out, kit);
 
-    // 1.9 Disengage = 1 + kit disengage bonus.
-    if (kit)
-      out.disengage = dv(1 + kit.s.disengageBonus, [
+    // 1.9 Disengage = 1 + kit disengage bonus (the resolved arsenal bonus for a two-kit hero).
+    if (kit && out.kit)
+      out.disengage = dv(1 + out.kit.disengageBonus.value, [
         p({
           decisionId: 'free-strikes.grant',
           source: this.sentence(SENTENCES.disengage),
@@ -789,17 +841,21 @@ class Evaluation {
           amount: 1,
           note: 'common move action, not a creation decision; attached to the automatic step',
         }),
-        p({
-          decisionId: kit.decisionId,
-          source: this.sentence({
-            path: KITS_PATH,
-            quote: kit.s.tableRow,
-            heading: KITS_TABLE_HEADING,
-          }),
-          operation: 'add',
-          amount: kit.s.disengageBonus,
-          note: kit.s.notes.disengage,
-        }),
+        ...(second
+          ? out.kit.disengageBonus.provenance.map(item => ({ ...item, operation: 'add' as const }))
+          : [
+              p({
+                decisionId: kit.decisionId,
+                source: this.sentence({
+                  path: KITS_PATH,
+                  quote: kit.s.tableRow,
+                  heading: KITS_TABLE_HEADING,
+                }),
+                operation: 'add',
+                amount: kit.s.disengageBonus,
+                note: kit.s.notes.disengage,
+              }),
+            ]),
       ]);
 
     applyFuryResource(this, out);
@@ -864,6 +920,7 @@ class Evaluation {
       out.features,
       perkAbilities(out.perks, ancestryAbilities(out.traits, this.abilities())),
     );
+    out.abilities = tacticianAbilities(out.features, out.abilities);
     this.deriveSupportingChoices(out);
     const items = startingRewardItems(out.features ?? [], out.initialItems);
     if (items.length) out.initialItems = items;
@@ -1642,18 +1699,23 @@ class Evaluation {
               source: this.sentence(ASPECT_TRIGGERED_SENTENCE),
             }),
           });
-    const kit = this.kit();
-    if (kit)
+    for (const kit of [this.kit(), this.secondKit()]) {
+      if (!kit) continue;
+      const replacements = this.arsenal?.replacements[kit.name];
       out.push({
         name: kit.s.signatureAbility,
         kind: 'kit-signature',
         sourcePath: kit.s.entryPath,
         kitBonusesIncluded: true,
+        ...(replacements?.length ? { kitBonusReplacements: replacements } : {}),
         provenance: this.provenance({
           decisionId: kit.decisionId,
-          source: this.sentence(SENTENCES.kitSignature),
+          source: this.sentence(
+            kit.decisionId === SECOND_KIT_DECISION ? FIELD_ARSENAL.twoKits : SENTENCES.kitSignature,
+          ),
         }),
       });
+    }
     const free = this.decisions.get('free-strikes.grant');
     if (free && this.available.has(free.id))
       for (const grant of free.grants ?? [])

@@ -9,6 +9,7 @@
 import type { SelectionValue } from '../contracts/characterEvaluation.ts';
 import type { Decision, DecisionDefinitions, OptionsByParentEntry } from './definitions.ts';
 import { COMPLICATION_FUTURE_ABILITY_ELIGIBILITY } from '../content/supporting-complications.ts';
+import { SECOND_KIT_DECISION, arsenalOverlaps } from './classes/tactician.ts';
 
 export type Selections = Record<string, SelectionValue>;
 
@@ -114,6 +115,15 @@ export function isAvailable(
     }
     if (count < occurrence) return false;
   }
+  // Field Arsenal: a benefit choice exists only while both kits print different values for it.
+  if (
+    decision.overlapBenefit &&
+    arsenalOverlaps(
+      singleValue(selections, 'kit.choice'),
+      singleValue(selections, SECOND_KIT_DECISION),
+    )[decision.overlapBenefit] !== 'differs'
+  )
+    return false;
   for (const parentId of decision.dependsOn ?? [])
     if (!parentSatisfied(parentId, selections, decisions, scanningFixedGrants)) return false;
   if (
@@ -236,6 +246,13 @@ function basePoolOf(
   definitions: DecisionDefinitions,
 ): { values: string[]; parent?: OptionsByParentEntry; parentValue?: string } {
   if (decision.options) return { values: decision.options.map(option => option.value) };
+  if (decision.overlapBenefit)
+    return {
+      values: [
+        singleValue(selections, 'kit.choice'),
+        singleValue(selections, SECOND_KIT_DECISION),
+      ].filter((name): name is string => typeof name === 'string'),
+    };
   if (decision.optionsByParent) {
     const parentValue = effectiveParent(decision, selections, indexDecisions(definitions))?.value;
     const parent = parentValue ? decision.optionsByParent[parentValue] : undefined;

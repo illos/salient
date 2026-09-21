@@ -179,6 +179,13 @@ export const SELECTIONS: ManifestSelection[] = [
     basis: 'docs/build/V92-shadow-level-one.md#scope: complete level-one Shadow.',
   },
   {
+    id: 'tactician-level-one',
+    description:
+      'Tactician class, level-one features and abilities (all three doctrines). Readable alternatives do not imply wizard or execution support.',
+    paths: ['class/tactician.md', 'feature/tactician/level-1', 'feature/ability/tactician/level-1'],
+    basis: 'docs/build/V94-tactician-level-one.md#scope: complete level-one Tactician.',
+  },
+  {
     id: 'kits',
     description:
       'Every kit entry, with its printed kit_type. The source names furies among the classes that use kits and states no kit_type restriction for them in chapter/kits.md or class/fury.md; Q-R-103 confirms Berserker and Reaver use ordinary Chapter 6 kits while Stormwight uses its four aspect kits; the pipeline preserves source fields rather than inferring eligibility.',
@@ -491,11 +498,11 @@ function renderIndex(kinds: string[]): string {
     '// the index-signature contract rejects; the generator has already validated every entry.',
     'const typed = (list: unknown): ContentEntry[] => list as ContentEntry[];',
     "import manifestJson from './manifest.json';",
-    // Shared NodeNext evaluation imports complications with JSON attributes. Keep this import
+    // Shared NodeNext evaluation imports these categories with JSON attributes. Keep each import
     // identical: esbuild/Convex 1.45 cannot stat mixed-attribute metafile input names.
     ...kinds.map(
       kind =>
-        `import ${identifier(kind)}Json from './${kind}.json'${kind === 'complication' ? " with { type: 'json' }" : ''};`,
+        `import ${identifier(kind)}Json from './${kind}.json'${['ability', 'feature', 'complication'].includes(kind) ? " with { type: 'json' }" : ''};`,
     ),
     '',
     'export const manifest: ContentManifest = manifestJson;',

@@ -1,3 +1,4 @@
+import { tacticianAbilities, tacticianAbilitySource } from '../shared/evaluate/tacticianAbilities';
 import {
   startingItemAbilities,
   startingItemAbilitySource,
@@ -657,27 +658,36 @@ async function abilityView(
   const perkSource = perkAbilitySource(ability);
   const itemSource = startingItemAbilitySource(ability);
   const complicationSource = complicationAbilitySource(ability);
+  const tacticianSource = tacticianAbilitySource(ability);
   const traitAbility =
     ancestryAbilitySource(ability) ?? itemSource ?? (perkSource?.embedded ? undefined : perkSource);
   const embedded =
     row && (ability.kind === 'kit-signature' || perkSource?.embedded)
       ? extractEmbeddedAbility(row.text, ability.name)
       : null;
-  const metadata = complicationSource
-    ? complicationAbilityMetadata(complicationSource, ability)
-    : traitAbility
-      ? {
-          keywords: [],
-          actionType: traitAbility.actionType,
-          ...(traitAbility.trigger ? { trigger: traitAbility.trigger } : {}),
-          effects: [{ label: 'Effect', text: traitAbility.quote }],
-          ...(perkSource?.cost ? { cost: perkSource.cost } : {}),
-        }
-      : embedded?.ok
-        ? embedded.metadata
-        : row && row.kind === 'ability'
-          ? metadataOf(row)
-          : { keywords: [] };
+  const metadata = tacticianSource
+    ? {
+        keywords: [],
+        actionType: tacticianSource.actionType,
+        ...(tacticianSource.trigger ? { trigger: tacticianSource.trigger } : {}),
+        ...(tacticianSource.cost ? { cost: tacticianSource.cost } : {}),
+        effects: [{ label: 'Effect', text: tacticianSource.text }],
+      }
+    : complicationSource
+      ? complicationAbilityMetadata(complicationSource, ability)
+      : traitAbility
+        ? {
+            keywords: [],
+            actionType: traitAbility.actionType,
+            ...(traitAbility.trigger ? { trigger: traitAbility.trigger } : {}),
+            effects: [{ label: 'Effect', text: traitAbility.quote }],
+            ...(perkSource?.cost ? { cost: perkSource.cost } : {}),
+          }
+        : embedded?.ok
+          ? embedded.metadata
+          : row && row.kind === 'ability'
+            ? metadataOf(row)
+            : { keywords: [] };
   const { provenance, ...rest } = ability;
   const facts = { name: ability.name, keywords: metadata.keywords };
   const buildModifiers = metadata.roll
@@ -894,7 +904,7 @@ export const sheet = query({
               granted?.perks ?? [],
               ancestryAbilities(
                 granted?.traits ?? [],
-                granted?.abilities ?? [],
+                tacticianAbilities(granted?.features ?? [], granted?.abilities ?? []),
                 character.activeRune?.kind ?? null,
               ),
             ),

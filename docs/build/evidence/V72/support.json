@@ -1,6 +1,6 @@
 {
   "generator": "V72/1",
-  "contentHash": "sha256:ea1f6a2cf1d3c8a30f5fa40aef52fdadc25aa97900648485c9fe5957a50cf43b",
+  "contentHash": "sha256:b4e0d992e181c9bac991ca9487600fabeb1ce20a130781dc38128cdba0fa5035",
   "sourceRevision": "fb83a789da8f0327a389c277a0c790b1648d5810",
   "foesEdition": "bf262edf546e91e1540cc17489915f18c4873ddd8bd8e225b20f3441e3f74f30",
   "scope": "Structural support, current grant/loading availability and live execution are separate. Source drift never silently falls back; historical results are never recompiled on read.",
@@ -16,9 +16,9 @@
       "manual": 1150
     },
     "hero-standalone": {
-      "total": 76,
-      "supported": 8,
-      "manual": 68
+      "total": 89,
+      "supported": 9,
+      "manual": 80
     },
     "kit-signature": {
       "total": 25,
@@ -17557,6 +17557,1518 @@
           "grantKind": "signature",
           "selectable": "selectable",
           "detail": "option You Were Watching the Wrong One supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/advanced-tactics",
+      "name": "Advanced Tactics",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/advanced-tactics",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-1/advanced-tactics.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/advanced-tactics#block:0:0:0bcdd8669eed66b2",
+          "locator": "block:0:0",
+          "clause": "The target deals damage to another creature.",
+          "kind": "unsupported",
+          "shape": "trigger",
+          "reason": "trigger",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/advanced-tactics#block:1:0:7dfd7f686db7dff4",
+          "locator": "block:1:0",
+          "clause": "The target gains 2 [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge), which they can use on the triggering damage.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/advanced-tactics#block:2:0:e585b53b25356741",
+          "locator": "block:2:0",
+          "clause": "If the damage has any [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) effect associated with it, the [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) is increased by 1.",
+          "kind": "unsupported",
+          "shape": "resource-spend:spend N focus",
+          "reason": "resource-spend",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "The target deals damage to another creature.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "The target gains 2 [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge), which they can use on the triggering damage.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:2:0",
+          "clause": "If the damage has any [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) effect associated with it, the [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) is increased by 1.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "action-type",
+          "locator": "header:usage",
+          "clause": "Triggered",
+          "message": "Unrecognized action type."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Advanced Tactics",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-1/advanced-tactics.md",
+          "decisionId": "class.tactician.doctrine",
+          "level": 1,
+          "grantKind": "aspect-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Insurgent supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Advanced Tactics",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-1/advanced-tactics.md",
+          "decisionId": "class.tactician.doctrine",
+          "level": 2,
+          "grantKind": "aspect-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Insurgent supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/battle-cry",
+      "name": "Battle Cry",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/battle-cry",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-1/battle-cry.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/battle-cry#block:0:tier1:0:fc7a11e053b9913d",
+            "locator": "block:0:tier1:0",
+            "clause": "Each target gains 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge).",
+            "kind": "unsupported",
+            "shape": "each target gains N surge",
+            "reason": "unknown",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/battle-cry#block:0:tier2:0:3d0d7e0c4c83d167",
+            "locator": "block:0:tier2:0",
+            "clause": "Each target gains 2 [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge).",
+            "kind": "unsupported",
+            "shape": "each target gains N surges",
+            "reason": "unknown",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/battle-cry#block:0:tier3:0:f8f3c746d3ccf726",
+            "locator": "block:0:tier3:0",
+            "clause": "Each target gains 3 [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge).",
+            "kind": "unsupported",
+            "shape": "each target gains N surges",
+            "reason": "unknown",
+            "dependency": "unknown"
+          }
+        ]
+      ],
+      "sections": [],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "tier1-damage-outside-grammar"
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier1:0",
+          "clause": "Each target gains 1 [surge](scc.v1:mcdm.heroes.v1/rule.resource/surge).",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier2:0",
+          "clause": "Each target gains 2 [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge).",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier3:0",
+          "clause": "Each target gains 3 [surges](scc.v1:mcdm.heroes.v1/rule.resource/surge).",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Three allies",
+          "message": "Only the designed single-target envelope is eligible."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Battle Cry",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-1/battle-cry.md",
+          "decisionId": "class.tactician.ability-3",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Battle Cry supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Battle Cry",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-1/battle-cry.md",
+          "decisionId": "class.tactician.ability-3",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Battle Cry supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/concussive-strike",
+      "name": "Concussive Strike",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/concussive-strike",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-1/concussive-strike.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "supported",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/concussive-strike#block:0:tier1:0:4eba022a22560d99",
+            "locator": "block:0:tier1:0",
+            "clause": "3 + M damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 3,
+              "characteristic": "M"
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/concussive-strike#block:0:tier1:1:ee50acf29940d1f4",
+            "locator": "block:0:tier1:1",
+            "clause": "M < WEAK, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "potency",
+              "tier": "weak"
+            },
+            "condition": "dazed",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.tactician.level-1/concussive-strike#block:0:tier1:0:4eba022a22560d99"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/concussive-strike#block:0:tier2:0:58c74c83147f2d7b",
+            "locator": "block:0:tier2:0",
+            "clause": "5 + M damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 5,
+              "characteristic": "M"
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/concussive-strike#block:0:tier2:1:e7724b3c46ddf30f",
+            "locator": "block:0:tier2:1",
+            "clause": "M < AVERAGE, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "potency",
+              "tier": "average"
+            },
+            "condition": "dazed",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.tactician.level-1/concussive-strike#block:0:tier2:0:58c74c83147f2d7b"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/concussive-strike#block:0:tier3:0:9fe2d4c3c3673aea",
+            "locator": "block:0:tier3:0",
+            "clause": "8 + M damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 8,
+              "characteristic": "M"
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/concussive-strike#block:0:tier3:1:4250d4b9bc52e067",
+            "locator": "block:0:tier3:1",
+            "clause": "M < STRONG, [dazed](scc.v1:mcdm.heroes.v1/condition/dazed) (save ends)",
+            "kind": "condition",
+            "characteristic": "M",
+            "threshold": {
+              "kind": "potency",
+              "tier": "strong"
+            },
+            "condition": "dazed",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.tactician.level-1/concussive-strike#block:0:tier3:0:9fe2d4c3c3673aea"
+          }
+        ]
+      ],
+      "sections": [],
+      "diagnostics": [],
+      "live": "compiled",
+      "boundary": "Compiled damage and ordered manual instructions through registered ability operations.",
+      "grants": [
+        {
+          "name": "Concussive Strike",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-1/concussive-strike.md",
+          "decisionId": "class.tactician.ability-3",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Concussive Strike supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Concussive Strike",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-1/concussive-strike.md",
+          "decisionId": "class.tactician.ability-3",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Concussive Strike supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/hammer-and-anvil",
+      "name": "Hammer and Anvil",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/hammer-and-anvil",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-1/hammer-and-anvil.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/hammer-and-anvil#block:0:tier1:0:58c74c83147f2d7b",
+            "locator": "block:0:tier1:0",
+            "clause": "5 + M damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 5,
+              "characteristic": "M"
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/hammer-and-anvil#block:0:tier1:1:fae4c70a17658c40",
+            "locator": "block:0:tier1:1",
+            "clause": "one ally within 10 squares of you can use a [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) [signature ability](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability) against the target as a free [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action)",
+            "kind": "unsupported",
+            "shape": "one ally within N squares of you can use a strike signature ability against the target as a free triggered action",
+            "reason": "unknown",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/hammer-and-anvil#block:0:tier2:0:c61408dee770503f",
+            "locator": "block:0:tier2:0",
+            "clause": "9 + M damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 9,
+              "characteristic": "M"
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/hammer-and-anvil#block:0:tier2:1:a78d75e0f2717baa",
+            "locator": "block:0:tier2:1",
+            "clause": "one ally within 10 squares of you can use a [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) [signature ability](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability) that gains an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) against the target as a free [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action)",
+            "kind": "unsupported",
+            "shape": "one ally within N squares of you can use a strike signature ability that gains an edge against the target as a free triggered action",
+            "reason": "unknown",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/hammer-and-anvil#block:0:tier3:0:f2bf4036184bd381",
+            "locator": "block:0:tier3:0",
+            "clause": "12 + M damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 12,
+              "characteristic": "M"
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/hammer-and-anvil#block:0:tier3:1:d2f0e9a3e1bcd1fd",
+            "locator": "block:0:tier3:1",
+            "clause": "two allies within 10 squares of you can each use a [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) [signature ability](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability) that gains an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) against the target as a free [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action)",
+            "kind": "unsupported",
+            "shape": "two allies within N squares of you can each use a strike signature ability that gains an edge against the target as a free triggered action",
+            "reason": "unknown",
+            "dependency": "unknown"
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/hammer-and-anvil#block:1:0:c16f1aee872cecbd",
+          "locator": "block:1:0",
+          "clause": "If the target is reduced to 0 [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) before one or both chosen allies has made their [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), the ally or allies can pick a different target.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier1:1",
+          "clause": "one ally within 10 squares of you can use a [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) [signature ability](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability) against the target as a free [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action)",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier2:1",
+          "clause": "one ally within 10 squares of you can use a [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) [signature ability](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability) that gains an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) against the target as a free [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action)",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier3:1",
+          "clause": "two allies within 10 squares of you can each use a [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike) [signature ability](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability) that gains an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) against the target as a free [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action)",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "If the target is reduced to 0 [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina) before one or both chosen allies has made their [strike](scc.v1:mcdm.heroes.v1/rule.combat/strike), the ally or allies can pick a different target.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Hammer and Anvil",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-1/hammer-and-anvil.md",
+          "decisionId": "class.tactician.ability-5",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Hammer and Anvil supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Hammer and Anvil",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-1/hammer-and-anvil.md",
+          "decisionId": "class.tactician.ability-5",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Hammer and Anvil supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/inspiring-strike",
+      "name": "Inspiring Strike",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/inspiring-strike",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-1/inspiring-strike.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/inspiring-strike#block:0:tier1:0:4eba022a22560d99",
+            "locator": "block:0:tier1:0",
+            "clause": "3 + M damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 3,
+              "characteristic": "M"
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/inspiring-strike#block:0:tier1:1:102163fd0c0f6397",
+            "locator": "block:0:tier1:1",
+            "clause": "you or one ally within 10 squares of you can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries)",
+            "kind": "unsupported",
+            "shape": "you or one ally within N squares of you can spend a recovery",
+            "reason": "unknown",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/inspiring-strike#block:0:tier2:0:58c74c83147f2d7b",
+            "locator": "block:0:tier2:0",
+            "clause": "5 + M damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 5,
+              "characteristic": "M"
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/inspiring-strike#block:0:tier2:1:102163fd0c0f6397",
+            "locator": "block:0:tier2:1",
+            "clause": "you or one ally within 10 squares of you can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries)",
+            "kind": "unsupported",
+            "shape": "you or one ally within N squares of you can spend a recovery",
+            "reason": "unknown",
+            "dependency": "unknown"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/inspiring-strike#block:0:tier3:0:9fe2d4c3c3673aea",
+            "locator": "block:0:tier3:0",
+            "clause": "8 + M damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 8,
+              "characteristic": "M"
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/inspiring-strike#block:0:tier3:1:b610253356ebd0be",
+            "locator": "block:0:tier3:1",
+            "clause": "you and one ally within 10 squares of you can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries), and each of you gains an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on the next [ability roll](scc.v1:mcdm.heroes.v1/rule.dice/ability-roll) you make during the encounter",
+            "kind": "unsupported",
+            "shape": "you and one ally within N squares of you can spend a recovery, and each of you gains an edge on the next ability roll you make during the encounter",
+            "reason": "unknown",
+            "dependency": "unknown"
+          }
+        ]
+      ],
+      "sections": [],
+      "diagnostics": [
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier1:1",
+          "clause": "you or one ally within 10 squares of you can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries)",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier2:1",
+          "clause": "you or one ally within 10 squares of you can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries)",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        },
+        {
+          "code": "unsafe-tier-remainder",
+          "locator": "block:0:tier3:1",
+          "clause": "you and one ally within 10 squares of you can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries), and each of you gains an [edge](scc.v1:mcdm.heroes.v1/rule.dice/edge) on the next [ability roll](scc.v1:mcdm.heroes.v1/rule.dice/ability-roll) you make during the encounter",
+          "message": "The effect on damage, payment, targeting or order is not established."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Inspiring Strike",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-1/inspiring-strike.md",
+          "decisionId": "class.tactician.ability-3",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Inspiring Strike supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Inspiring Strike",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-1/inspiring-strike.md",
+          "decisionId": "class.tactician.ability-3",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Inspiring Strike supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/mark",
+      "name": "Mark",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/mark",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-1/mark.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/mark#block:0:0:3e5396a2d086ec08",
+          "locator": "block:0:0",
+          "clause": "The target is marked by you until the end of the encounter, until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), or until you use this ability again. You can willingly end your mark on a creature (no action required), and if another [tactician](scc.v1:mcdm.heroes.v1/class/tactician) marks a creature, your mark on that creature ends. When a creature marked by you is reduced to 0 [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina), you can use a free [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) to mark a new target within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/mark#markdown:block:0:0:c7a40774d32861c7",
+          "locator": "markdown:block:0:0",
+          "clause": "Effect: The target is marked by you until the end of the encounter, until you are dying, or until you use this ability again. You can willingly end your mark on a creature (no action required), and if another tactician marks a creature, your mark on that creature ends. When a creature marked by you is reduced to 0 Stamina, you can use a free triggered action to mark a new target within distance.\nYou can initially mark only one creature using this ability, though other tactician abilities allow you to mark additional creatures at the same time. The mastermind tactical doctrine's Anticipation feature allows you to target additional creatures with this ability starting at 5th level.\nWhile a creature marked by you is within your line of effect, you and allies within your line of effect gain an edge on power rolls made against that creature. Additionally, whenever you or any ally uses an ability to deal rolled damage to a creature marked by you, you can spend 1 focus to gain one of the following benefits as a free triggered action:\n- The ability deals extra damage equal to twice your Reason score.\n- The creature dealing the damage can spend a Recovery.\n- The creature dealing the damage can shift up to a number of squares equal to your Reason score.\n- If you damage a creature marked by you with a melee ability, the creature is taunted by you until the end of their next turn.\nYou can't gain more than one benefit from the same trigger.",
+          "kind": "unsupported",
+          "shape": "source-block-mismatch",
+          "reason": "Printed mechanics differ from the structured projection.",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/mark#markdown:item:4:0:983aeeea026bd55f",
+          "locator": "markdown:item:4:0",
+          "clause": "You can initially mark only one creature using this ability, though other tactician abilities allow you to mark additional creatures at the same time. The mastermind tactical doctrine's Anticipation feature allows you to target additional creatures with this ability starting at 5th level.",
+          "kind": "unsupported",
+          "shape": "unaccounted-paragraph",
+          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/mark#markdown:item:5:0:08d4e0326b882760",
+          "locator": "markdown:item:5:0",
+          "clause": "While a creature marked by you is within your line of effect, you and allies within your line of effect gain an edge on power rolls made against that creature. Additionally, whenever you or any ally uses an ability to deal rolled damage to a creature marked by you, you can spend 1 focus to gain one of the following benefits as a free triggered action:",
+          "kind": "unsupported",
+          "shape": "unaccounted-paragraph",
+          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/mark#markdown:item:6:0:52146f0b4e7e52e9",
+          "locator": "markdown:item:6:0",
+          "clause": "- The ability deals extra damage equal to twice your Reason score.",
+          "kind": "unsupported",
+          "shape": "unaccounted-paragraph",
+          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/mark#markdown:item:7:0:a20e7fdc1edaa068",
+          "locator": "markdown:item:7:0",
+          "clause": "- The creature dealing the damage can spend a Recovery.",
+          "kind": "unsupported",
+          "shape": "unaccounted-paragraph",
+          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/mark#markdown:item:8:0:7489602b9c80957f",
+          "locator": "markdown:item:8:0",
+          "clause": "- The creature dealing the damage can shift up to a number of squares equal to your Reason score.",
+          "kind": "unsupported",
+          "shape": "unaccounted-paragraph",
+          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/mark#markdown:item:9:0:f291ab587f60f948",
+          "locator": "markdown:item:9:0",
+          "clause": "- If you damage a creature marked by you with a melee ability, the creature is taunted by you until the end of their next turn.",
+          "kind": "unsupported",
+          "shape": "unaccounted-paragraph",
+          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/mark#markdown:item:10:0:f1bcd37d45189cee",
+          "locator": "markdown:item:10:0",
+          "clause": "You can't gain more than one benefit from the same trigger.",
+          "kind": "unsupported",
+          "shape": "unaccounted-paragraph",
+          "reason": "Paragraph is not source-declared flavor or identified presentation scaffolding.",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "source-block-mismatch",
+          "locator": "markdown:block:0",
+          "clause": "Effect: The target is marked by you until the end of the encounter, until you are dying, or until you use this ability again. You can willingly end your mark on a creature (no action required), and if another tactician marks a creature, your mark on that creature ends. When a creature marked by you is reduced to 0 Stamina, you can use a free triggered action to mark a new target within distance.\nYou can initially mark only one creature using this ability, though other tactician abilities allow you to mark additional creatures at the same time. The mastermind tactical doctrine's Anticipation feature allows you to target additional creatures with this ability starting at 5th level.\nWhile a creature marked by you is within your line of effect, you and allies within your line of effect gain an edge on power rolls made against that creature. Additionally, whenever you or any ally uses an ability to deal rolled damage to a creature marked by you, you can spend 1 focus to gain one of the following benefits as a free triggered action:\n- The ability deals extra damage equal to twice your Reason score.\n- The creature dealing the damage can spend a Recovery.\n- The creature dealing the damage can shift up to a number of squares equal to your Reason score.\n- If you damage a creature marked by you with a melee ability, the creature is taunted by you until the end of their next turn.\nYou can't gain more than one benefit from the same trigger.",
+          "message": "Roll, tier, section content or order differs between the envelope and full source."
+        },
+        {
+          "code": "unaccounted-paragraph",
+          "locator": "markdown:item:4",
+          "clause": "You can initially mark only one creature using this ability, though other tactician abilities allow you to mark additional creatures at the same time. The mastermind tactical doctrine's Anticipation feature allows you to target additional creatures with this ability starting at 5th level.",
+          "message": "Printed mechanics cannot be ignored."
+        },
+        {
+          "code": "unaccounted-paragraph",
+          "locator": "markdown:item:5",
+          "clause": "While a creature marked by you is within your line of effect, you and allies within your line of effect gain an edge on power rolls made against that creature. Additionally, whenever you or any ally uses an ability to deal rolled damage to a creature marked by you, you can spend 1 focus to gain one of the following benefits as a free triggered action:",
+          "message": "Printed mechanics cannot be ignored."
+        },
+        {
+          "code": "unaccounted-paragraph",
+          "locator": "markdown:item:6",
+          "clause": "- The ability deals extra damage equal to twice your Reason score.",
+          "message": "Printed mechanics cannot be ignored."
+        },
+        {
+          "code": "unaccounted-paragraph",
+          "locator": "markdown:item:7",
+          "clause": "- The creature dealing the damage can spend a Recovery.",
+          "message": "Printed mechanics cannot be ignored."
+        },
+        {
+          "code": "unaccounted-paragraph",
+          "locator": "markdown:item:8",
+          "clause": "- The creature dealing the damage can shift up to a number of squares equal to your Reason score.",
+          "message": "Printed mechanics cannot be ignored."
+        },
+        {
+          "code": "unaccounted-paragraph",
+          "locator": "markdown:item:9",
+          "clause": "- If you damage a creature marked by you with a melee ability, the creature is taunted by you until the end of their next turn.",
+          "message": "Printed mechanics cannot be ignored."
+        },
+        {
+          "code": "unaccounted-paragraph",
+          "locator": "markdown:item:10",
+          "clause": "You can't gain more than one benefit from the same trigger.",
+          "message": "Printed mechanics cannot be ignored."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "The target is marked by you until the end of the encounter, until you are [dying](scc.v1:mcdm.heroes.v1/rule.health/dying), or until you use this ability again. You can willingly end your mark on a creature (no action required), and if another [tactician](scc.v1:mcdm.heroes.v1/class/tactician) marks a creature, your mark on that creature ends. When a creature marked by you is reduced to 0 [Stamina](scc.v1:mcdm.heroes.v1/rule.health/stamina), you can use a free [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action) to mark a new target within [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "markdown:block:0:0",
+          "clause": "Effect: The target is marked by you until the end of the encounter, until you are dying, or until you use this ability again. You can willingly end your mark on a creature (no action required), and if another tactician marks a creature, your mark on that creature ends. When a creature marked by you is reduced to 0 Stamina, you can use a free triggered action to mark a new target within distance.\nYou can initially mark only one creature using this ability, though other tactician abilities allow you to mark additional creatures at the same time. The mastermind tactical doctrine's Anticipation feature allows you to target additional creatures with this ability starting at 5th level.\nWhile a creature marked by you is within your line of effect, you and allies within your line of effect gain an edge on power rolls made against that creature. Additionally, whenever you or any ally uses an ability to deal rolled damage to a creature marked by you, you can spend 1 focus to gain one of the following benefits as a free triggered action:\n- The ability deals extra damage equal to twice your Reason score.\n- The creature dealing the damage can spend a Recovery.\n- The creature dealing the damage can shift up to a number of squares equal to your Reason score.\n- If you damage a creature marked by you with a melee ability, the creature is taunted by you until the end of their next turn.\nYou can't gain more than one benefit from the same trigger.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "markdown:item:4:0",
+          "clause": "You can initially mark only one creature using this ability, though other tactician abilities allow you to mark additional creatures at the same time. The mastermind tactical doctrine's Anticipation feature allows you to target additional creatures with this ability starting at 5th level.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "markdown:item:5:0",
+          "clause": "While a creature marked by you is within your line of effect, you and allies within your line of effect gain an edge on power rolls made against that creature. Additionally, whenever you or any ally uses an ability to deal rolled damage to a creature marked by you, you can spend 1 focus to gain one of the following benefits as a free triggered action:",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "markdown:item:6:0",
+          "clause": "- The ability deals extra damage equal to twice your Reason score.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "markdown:item:7:0",
+          "clause": "- The creature dealing the damage can spend a Recovery.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "markdown:item:8:0",
+          "clause": "- The creature dealing the damage can shift up to a number of squares equal to your Reason score.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "markdown:item:9:0",
+          "clause": "- If you damage a creature marked by you with a melee ability, the creature is taunted by you until the end of their next turn.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "markdown:item:10:0",
+          "clause": "You can't gain more than one benefit from the same trigger.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Mark",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-1/mark.md",
+          "decisionId": "class.tactician.features",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "Mark",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-1/mark.md",
+          "decisionId": "class.tactician.features",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/mind-game",
+      "name": "Mind Game",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/mind-game",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-1/mind-game.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/mind-game#block:1:tier1:0:efe755158639bfc6",
+            "locator": "block:1:tier1:0",
+            "clause": "4 + M damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 4,
+              "characteristic": "M"
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/mind-game#block:1:tier1:1:d116d33ff6f88c6f",
+            "locator": "block:1:tier1:1",
+            "clause": "R < WEAK, [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)",
+            "kind": "condition",
+            "characteristic": "R",
+            "threshold": {
+              "kind": "potency",
+              "tier": "weak"
+            },
+            "condition": "weakened",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.tactician.level-1/mind-game#block:1:tier1:0:efe755158639bfc6"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/mind-game#block:1:tier2:0:19deb37cda1175f0",
+            "locator": "block:1:tier2:0",
+            "clause": "6 + M damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 6,
+              "characteristic": "M"
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/mind-game#block:1:tier2:1:22738632358679e2",
+            "locator": "block:1:tier2:1",
+            "clause": "R < AVERAGE, [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)",
+            "kind": "condition",
+            "characteristic": "R",
+            "threshold": {
+              "kind": "potency",
+              "tier": "average"
+            },
+            "condition": "weakened",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.tactician.level-1/mind-game#block:1:tier2:0:19deb37cda1175f0"
+          }
+        ],
+        [
+          {
+            "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/mind-game#block:1:tier3:0:bb58574b595d13ef",
+            "locator": "block:1:tier3:0",
+            "clause": "10 + M damage",
+            "kind": "damage",
+            "expression": {
+              "kind": "plusCharacteristic",
+              "constant": 10,
+              "characteristic": "M"
+            },
+            "kitBonusesIncluded": false
+          },
+          {
+            "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/mind-game#block:1:tier3:1:b7cdbae0d4e2f3c4",
+            "locator": "block:1:tier3:1",
+            "clause": "R < STRONG, [weakened](scc.v1:mcdm.heroes.v1/condition/weakened) (save ends)",
+            "kind": "condition",
+            "characteristic": "R",
+            "threshold": {
+              "kind": "potency",
+              "tier": "strong"
+            },
+            "condition": "weakened",
+            "duration": "save-ends",
+            "after": "mcdm.heroes.v1/feature.ability.tactician.level-1/mind-game#block:1:tier3:0:bb58574b595d13ef"
+          }
+        ]
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/mind-game#block:0:0:849f4847cfaebeeb",
+          "locator": "block:0:0",
+          "clause": "You mark the target.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/mind-game#block:2:0:eb5572611d24b7d2",
+          "locator": "block:2:0",
+          "clause": "Before the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), the first time any ally deals damage to any target marked by you, that ally can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "You mark the target.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:2:0",
+          "clause": "Before the start of your next [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn), the first time any ally deals damage to any target marked by you, that ally can spend a [Recovery](scc.v1:mcdm.heroes.v1/rule.health/recoveries).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Mind Game",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-1/mind-game.md",
+          "decisionId": "class.tactician.ability-5",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Mind Game supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Mind Game",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-1/mind-game.md",
+          "decisionId": "class.tactician.ability-5",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Mind Game supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/now",
+      "name": "Now!",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/now",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-1/now.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/now#block:0:0:456641cb9dd8f7de",
+          "locator": "block:0:0",
+          "clause": "Each target can make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "Each target can make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Three allies",
+          "message": "Only the designed single-target envelope is eligible."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Now!",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-1/now.md",
+          "decisionId": "class.tactician.ability-5",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Now! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Now!",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-1/now.md",
+          "decisionId": "class.tactician.ability-5",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Now! supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/overwatch",
+      "name": "Overwatch",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/overwatch",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-1/overwatch.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/overwatch#block:0:0:df391931d7c6241b",
+          "locator": "block:0:0",
+          "clause": "The target moves.",
+          "kind": "unsupported",
+          "shape": "trigger",
+          "reason": "trigger",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/overwatch#block:1:0:30cbfa583a5ff907",
+          "locator": "block:1:0",
+          "clause": "At any time during the target's movement, one ally can make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against them.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/overwatch#block:2:0:512155d0c1482f68",
+          "locator": "block:2:0",
+          "clause": "If the target has R < AVERAGE, they are [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn)).",
+          "kind": "unsupported",
+          "shape": "resource-spend:spend N focus",
+          "reason": "resource-spend",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "The target moves.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "At any time during the target's movement, one ally can make a [free strike](scc.v1:mcdm.heroes.v1/feature.common.main-actions/free-strike) against them.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:2:0",
+          "clause": "If the target has R < AVERAGE, they are [slowed](scc.v1:mcdm.heroes.v1/condition/slowed) ([EoT](scc.v1:mcdm.heroes.v1/rule.combat/end-of-turn)).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "action-type",
+          "locator": "header:usage",
+          "clause": "Triggered",
+          "message": "Unrecognized action type."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Overwatch",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-1/overwatch.md",
+          "decisionId": "class.tactician.doctrine",
+          "level": 1,
+          "grantKind": "aspect-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Mastermind supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Overwatch",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-1/overwatch.md",
+          "decisionId": "class.tactician.doctrine",
+          "level": 2,
+          "grantKind": "aspect-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Mastermind supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/parry",
+      "name": "Parry",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/parry",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-1/parry.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/parry#block:0:0:3bf58aa4ba06b196",
+          "locator": "block:0:0",
+          "clause": "A creature deals damage to the target.",
+          "kind": "unsupported",
+          "shape": "trigger",
+          "reason": "trigger",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/parry#block:1:0:77ca0de7968bb983",
+          "locator": "block:1:0",
+          "clause": "You can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) 1 square. If the target is you, or if you end this [shift](scc.v1:mcdm.heroes.v1/movement/shifting) [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the target, the target takes half the damage. If the damage has any [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) effect associated with it, the [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) is decreased by 1.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/parry#block:2:0:9e65227889872bae",
+          "locator": "block:2:0",
+          "clause": "This ability's [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) becomes [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1 + your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score, and you can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to a number of squares equal to your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score instead of 1 square.",
+          "kind": "unsupported",
+          "shape": "resource-spend:spend N focus",
+          "reason": "resource-spend",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "A creature deals damage to the target.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "You can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) 1 square. If the target is you, or if you end this [shift](scc.v1:mcdm.heroes.v1/movement/shifting) [adjacent](scc.v1:mcdm.heroes.v1/rule.combat/adjacent) to the target, the target takes half the damage. If the damage has any [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) effect associated with it, the [potency](scc.v1:mcdm.heroes.v1/rule.character/potency) is decreased by 1.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:2:0",
+          "clause": "This ability's [distance](scc.v1:mcdm.heroes.v1/rule.combat/distance) becomes [Melee](scc.v1:mcdm.heroes.v1/rule.combat/melee) 1 + your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score, and you can [shift](scc.v1:mcdm.heroes.v1/movement/shifting) up to a number of squares equal to your [Reason](scc.v1:mcdm.heroes.v1/rule.character/reason) score instead of 1 square.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Self or one ally",
+          "message": "Only the designed single-target envelope is eligible."
+        },
+        {
+          "code": "action-type",
+          "locator": "header:usage",
+          "clause": "Triggered",
+          "message": "Unrecognized action type."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Parry",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-1/parry.md",
+          "decisionId": "class.tactician.doctrine",
+          "level": 1,
+          "grantKind": "aspect-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Vanguard supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Parry",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-1/parry.md",
+          "decisionId": "class.tactician.doctrine",
+          "level": 2,
+          "grantKind": "aspect-ability",
+          "selectable": "selectable",
+          "detail": "grant of option Vanguard supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/squad-forward",
+      "name": "Squad! Forward!",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/squad-forward",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-1/squad-forward.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/squad-forward#block:0:0:520abc8d716da140",
+          "locator": "block:0:0",
+          "clause": "Each target can move up to their [speed](scc.v1:mcdm.heroes.v1/rule.character/speed).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "Each target can move up to their [speed](scc.v1:mcdm.heroes.v1/rule.character/speed).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Self and two allies",
+          "message": "Only the designed single-target envelope is eligible."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "Squad! Forward!",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-1/squad-forward.md",
+          "decisionId": "class.tactician.ability-3",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Squad! Forward! supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "Squad! Forward!",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-1/squad-forward.md",
+          "decisionId": "class.tactician.ability-3",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option Squad! Forward! supportedInV001=true; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/strike-now",
+      "name": "\"Strike Now!\"",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/strike-now",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-1/strike-now.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/strike-now#block:0:0:cb678c03a3f31658",
+          "locator": "block:0:0",
+          "clause": "The target can use a [signature ability](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability) as a free [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action).",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        },
+        {
+          "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/strike-now#block:1:0:0cd05320688a3b4c",
+          "locator": "block:1:0",
+          "clause": "You target two allies instead of one.",
+          "kind": "unsupported",
+          "shape": "resource-spend:spend N focus",
+          "reason": "resource-spend",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "The target can use a [signature ability](scc.v1:mcdm.heroes.v1/rule.combat/signature-ability) as a free [triggered action](scc.v1:mcdm.heroes.v1/rule.combat/triggered-action).",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:1:0",
+          "clause": "You target two allies instead of one.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "\"Strike Now!\"",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-1/strike-now.md",
+          "decisionId": "class.tactician.features",
+          "level": 1,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        },
+        {
+          "name": "\"Strike Now!\"",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-1/strike-now.md",
+          "decisionId": "class.tactician.features",
+          "level": 2,
+          "grantKind": "class-ability",
+          "selectable": "selectable",
+          "detail": "automatic grant; chain selectable"
+        }
+      ],
+      "movementFacts": "No compiled push."
+    },
+    {
+      "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/this-is-what-we-planned-for",
+      "name": "This Is What We Planned For",
+      "context": {
+        "corpus": "hero-standalone",
+        "scope": "pure-only"
+      },
+      "source": {
+        "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/this-is-what-we-planned-for",
+        "path": "vendor/steel-compendium/en/unified/md/feature/ability/tactician/level-1/this-is-what-we-planned-for.md",
+        "revision": "fb83a789da8f0327a389c277a0c790b1648d5810"
+      },
+      "execution": "manual",
+      "tiers": [
+        [],
+        [],
+        []
+      ],
+      "sections": [
+        {
+          "id": "mcdm.heroes.v1/feature.ability.tactician.level-1/this-is-what-we-planned-for#block:0:0:2c83a141d8d47250",
+          "locator": "block:0:0",
+          "clause": "Each target who hasn't acted yet this [combat round](scc.v1:mcdm.heroes.v1/rule.combat/combat-round) can take their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) in any order immediately after yours.",
+          "kind": "unsupported",
+          "shape": "effect-paragraph:effect",
+          "reason": "effect-paragraph",
+          "dependency": "unknown"
+        }
+      ],
+      "diagnostics": [
+        {
+          "code": "grammar",
+          "locator": "envelope",
+          "clause": "",
+          "message": "no-power-roll"
+        },
+        {
+          "code": "manual-section",
+          "locator": "block:0:0",
+          "clause": "Each target who hasn't acted yet this [combat round](scc.v1:mcdm.heroes.v1/rule.combat/combat-round) can take their [turn](scc.v1:mcdm.heroes.v1/rule.combat/turn) in any order immediately after yours.",
+          "message": "Section preserved as manual work; its effect on automation is not assumed independent."
+        },
+        {
+          "code": "target-boundary",
+          "locator": "header:target",
+          "clause": "Two allies",
+          "message": "Only the designed single-target envelope is eligible."
+        }
+      ],
+      "live": "legacy-compatibility",
+      "boundary": "Unchanged bundled source retains explicitly manual A05 compatibility; changed source is refused automation.",
+      "grants": [
+        {
+          "name": "This Is What We Planned For",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-1/this-is-what-we-planned-for.md",
+          "decisionId": "class.tactician.ability-5",
+          "level": 1,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option This Is What We Planned For supportedInV001=true; chain selectable"
+        },
+        {
+          "name": "This Is What We Planned For",
+          "sourcePath": "en/unified/md/feature/ability/tactician/level-1/this-is-what-we-planned-for.md",
+          "decisionId": "class.tactician.ability-5",
+          "level": 2,
+          "grantKind": "heroic",
+          "selectable": "selectable",
+          "detail": "option This Is What We Planned For supportedInV001=true; chain selectable"
         }
       ],
       "movementFacts": "No compiled push."
@@ -167700,8 +169212,8 @@
     }
   ],
   "liveCounts": {
-    "compiled": 14,
-    "compatibility": 1277,
+    "compiled": 15,
+    "compatibility": 1289,
     "compiledButUnavailable": 2
   }
 }
