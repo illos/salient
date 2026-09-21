@@ -756,7 +756,7 @@ class Evaluation {
           source: this.sentence(SENTENCES.kitStaminaRule),
           operation: 'set',
           amount: s.staminaBonusPerEchelon.amount * echelon,
-          note: `${s.staminaBonusPerEchelon.amount * echelon} at echelon ${echelon}`,
+          note: `${s.staminaBonusPerEchelon.amount * echelon} at the ${echelon === 1 ? '1st' : '2nd'} echelon`,
         }),
       ]),
       speedBonus: dv(s.speedBonus, [table({ operation: 'set', amount: s.speedBonus })]),
