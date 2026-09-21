@@ -8,7 +8,9 @@
  *
  * Quiet (docs/design-mockups/quiet/README.md): cards are `sub` insets inside the step panel with
  * the selected card taking the inset accent ring, group labels are sentence case rather than
- * tracked uppercase, and no per-card category badge repeats its own group heading.
+ * tracked uppercase, and no per-card category badge repeats its own group heading. The aspect
+ * chips stay muted and take no accent: the ring already carries the selection, and the chips are
+ * metadata. They are short pills at the 13px floor the theme sets, not smaller type.
  *
  * Presentation only: the cards are native radios in one group, and choosing one sends the same
  * value through the same shared choice transition the select sent before.
@@ -61,9 +63,9 @@ function CultureCard({
       />
       <span className="text-base font-medium">{name}</span>
       {choices.length > 0 && (
-        <span className="flex flex-wrap gap-1.5">
+        <span className="flex flex-wrap gap-1">
           {choices.map(choice => (
-            <Chip key={choice} kind={checked ? 'accent' : 'result'} className="bg-placeholder">
+            <Chip key={choice} className="h-5 bg-placeholder px-2">
               {choice}
             </Chip>
           ))}
